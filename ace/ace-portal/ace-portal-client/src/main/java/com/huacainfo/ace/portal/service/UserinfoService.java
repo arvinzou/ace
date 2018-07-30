@@ -70,6 +70,8 @@ public interface UserinfoService {
      */
     public abstract SingleResult<UserinfoVo> selectUserinfoByPrimaryKey(String id) throws Exception;
 
+    public UserinfoVo selectUserinfoByKey(String id) throws Exception;
+
     /**
      * @throws
      * @Title:deleteUserinfoByUserinfoId

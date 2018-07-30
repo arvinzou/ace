@@ -373,7 +373,6 @@
                         </div>
                         <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
                             <img src="image/weixin.png" class="qrcode"/>
-
                         </div>
                         <div id="J_Quick2Static_box" style="display:block">
                             <div class="alert alert-danger display-hide">
@@ -439,7 +438,7 @@
                     </form>
                     <!-- /.main-content -->
                     <div align="center">
-                        <h6>
+                        <h6 style="padding-left: 20px;padding-right: 20px;line-height: 20px;">
                             <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
                                 href="https://rj.baidu.com/soft/detail/14744.html?ald"
                                 target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
@@ -589,7 +588,7 @@
         document.getElementById("j_username").focus();
         if (window.top != window.self)
             window.top.window.location.href = contextPath
-                + "/dynamic/portal/security/login_fop.jsp";
+                + "/dynamic/portal/security/login.jsp";
 
     }
     jQuery(function ($) {
@@ -677,9 +676,9 @@
     var obj = new WxLogin({
         self_redirect:false,
         id:"J_Static2Quick_box",
-        appid: "wx8571545c5cc9d78c",
+        appid: "wx69aee47b3622886e",
         scope: "snsapi_login",
-        redirect_uri: encodeURI('https://zx.huacainfo.com/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
+        redirect_uri: encodeURI('https://mp.cdsgsl.org.cn/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
         state: "huacai",
         style: "",
         href: ""

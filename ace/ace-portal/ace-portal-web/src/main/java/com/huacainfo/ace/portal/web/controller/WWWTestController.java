@@ -1,11 +1,13 @@
 package com.huacainfo.ace.portal.web.controller;
 
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.portal.service.EvaluatCaseService;
 import com.huacainfo.ace.portal.service.EvaluatGaugeService;
 import com.huacainfo.ace.portal.service.EvaluatTplService;
+import com.huacainfo.ace.portal.service.EvaluatDataService;
 import com.huacainfo.ace.portal.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ public class WWWTestController extends PortalBaseController {
     private EvaluatCaseService evaluatCaseService;
     @Autowired
     private EvaluatGaugeService evaluatGaugeService;
+    @Autowired
+    private EvaluatDataService evaluatDataService;
 
     /**
      * 获取测试模板列表
@@ -74,6 +78,24 @@ public class WWWTestController extends PortalBaseController {
 
 
     /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(题目分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult<EvaluatCaseVo>
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @RequestMapping(value = "/getEvaluatCaseListVo.do")
+    @ResponseBody
+    public ResultResponse findEvaluatCaseListVo(EvaluatCaseQVo condition) throws Exception {
+        return this.evaluatCaseService.findEvaluatCaseListVo(condition, 0, 200, null);
+    }
+
+    /**
      * 成绩评判
      *
      * @param condition
@@ -83,7 +105,21 @@ public class WWWTestController extends PortalBaseController {
     @RequestMapping(value = "/getEvaluation.do")
     @ResponseBody
     public ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception {
-        return this.evaluatGaugeService.getEvaluation(condition, this.getCurUserProp());
+        Userinfo userinfo = getCurUserinfo();
+        return this.evaluatGaugeService.getEvaluation(condition, userinfo);
     }
 
+
+    /**
+     * 成绩评判
+     *
+     * @param condition
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findEvaluatDataList.do")
+    @ResponseBody
+    public ResultResponse findEvaluatDataList(EvaluatDataQVo condition, PageParamNoChangeSord page) throws Exception {
+        return this.evaluatDataService.findEvaluatDataLists(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    }
 }

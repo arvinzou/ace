@@ -8,6 +8,11 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>入驻成员列表</title>
+    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/schedule.css"/>--%>
+    <link rel="stylesheet"
+          href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+          type="text/css" media="screen"/>
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
 </head>
 <jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
@@ -24,15 +29,15 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
-                              data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
+                    企业类型：<input name="type" class="easyui-combobox" style="width: 200px"
+                                data-options="
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=147&selected=false',
                     method:'get',
                     valueField:'code',
                     textField:'name',
                     panelHeight:'auto'">
 
-                    名称： <input name="name" type="text" style="width: 200px;"/>
+                    名称： <input name="departmentName" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/vipDepartment/findVipDepartmentList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
@@ -74,20 +79,32 @@
 
 
     <div id="dialog-message-audit" class="hide">
-        <%--个人流程节点展示--%>
-        <%--流程选项--%>
-        <%--审核选项--%>
-        <form action="/vipDepartment/audit" id="fm-audit">
-            <fieldset>
-                审核结果：
-                <input id="audit_pass" name="audit_result" type="radio" value="0"/> 通过
-                <input id="audit_unpass" name="audit_result" type="radio" value="1"/> 不通过
-            </fieldset>
-            <div class="space-6"></div>
-            <fieldset>
-                审核备注： <textarea id="audit_opinion" cols="30" rows="10"></textarea>
-            </fieldset>
-        </form>
+        <div>
+            <div>
+                <form action="/vipDepartment/audit" id="fm-audit">
+                    <fieldset name="node-field">
+                        入驻节点： <input name="node-list" class="easyui-combobox" style="width: 200px"
+                                     data-options="
+                            url:'${portalPath}/dict/findListByCategoryId.do?categoryId=148&selected=false',
+                            method:'get',
+                            valueField:'code',
+                            textField:'name',
+                            panelHeight:'auto'">
+                    </fieldset>
+                    <div class="space-8"></div>
+                    <fieldset name="audit-rs-field">
+                        审核结果：
+                        <input id="audit-pass" name="auditResult" type="radio" value="1"/> 通过
+                        &nbsp&nbsp&nbsp&nbsp
+                        <input id="audit-unpass" name="auditResult" type="radio" value="2"/> 拒绝
+                    </fieldset>
+                    <div class="space-8"></div>
+                    <fieldset name="audit-opinion-field">
+                        审核备注： <input type="text" id="auditOpinion" style="width: 200px"/>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 <div id="dialog-message" class="hide">
@@ -158,6 +175,16 @@
     <div id="regAddr" class="row" style="padding:10px">
     </div>
 
+    <h5 class="header-title">附件资源</h5>
+    <div id="attachment-list" class="row" style="padding:10px">
+        <div id='filelist-history'></div>
+        <div id='filelist'></div>
+        <div id='container'>
+            附件：<a id='pickfiles' href='javascript:;'>[添加附件]</a>
+            <a id='uploadfiles' href='javascript:;'>[上传]</a>
+        </div>
+    </div>
+
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem hide">
@@ -198,6 +225,13 @@
 <script src="${pageContext.request.contextPath}/content/service/vipDepartment/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/vipDepartment/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/vipDepartment/view.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script src="${pageContext.request.contextPath}/content/service/vipDepartment/upload.js?version=${cfg.version}"></script>
+
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

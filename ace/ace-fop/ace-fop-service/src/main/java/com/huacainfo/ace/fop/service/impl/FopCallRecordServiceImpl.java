@@ -4,9 +4,11 @@ package com.huacainfo.ace.fop.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.view.CheckTree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CheckTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -253,6 +255,7 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
         data.put("sysId", userProp.getActiveSyId());
 
         kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, data);
+//        service(data);
 
         return new MessageResponse(ResultCode.SUCCESS, "发送成功");
     }
@@ -308,7 +311,70 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
 
     @Override
     public MessageResponse test2(Map<String, Object> data) throws Exception {
-        return service(data);
+        //kafka完成实际催缴业务
+//        Map<String, Object> data = new HashMap<>();
+        data.put("service", "fopCallRecordService");
+//        data.put("recordId", recordId);
+//        data.put("sysId", userProp.getActiveSyId());
+
+        kafkaProducerService.sendMsg(KafkaConstant.TOPIC_NAME, data);
+        return new MessageResponse(ResultCode.SUCCESS, "发送成功");
+
+        //way2
+//        return service(data);
+    }
+
+    @Override
+    public List<CheckTree> selectMemberCheckTreeList() {
+        List<Map<String, Object>> resources = fopCallRecordDao.selectMemberCheckTreeList();
+        String topId = "topId";
+        Map<String, Object> company = new HashMap<>();
+        company.put("ID", '0');
+        company.put("PID", topId);
+        company.put("TEXT", "企业会员");
+        company.put("STATE", "closed");
+        company.put("SRC", "SRC");
+        company.put("ICON", "ICON");
+        company.put("HREF", "");//mobile
+        company.put("ICONCLS", "");//mobile
+        company.put("CHILD_COUNT", 0);
+        resources.add(company);
+
+        Map<String, Object> person = new HashMap<>();
+        person.put("ID", '4');
+        person.put("PID", topId);
+        person.put("TEXT", "个人会员");
+        person.put("STATE", "closed");
+        person.put("SRC", "SRC");
+        person.put("ICON", "ICON");
+        person.put("HREF", "");//mobile
+        person.put("ICONCLS", "");//mobile
+        person.put("CHILD_COUNT", 0);
+        resources.add(person);
+
+        Map<String, Object> association = new HashMap<>();
+        association.put("ID", '1');
+        association.put("PID", topId);
+        association.put("TEXT", "团体会员");
+        association.put("STATE", "closed");
+        association.put("SRC", "SRC");
+        association.put("ICON", "ICON");
+        association.put("HREF", "");//mobile
+        association.put("ICONCLS", "");//mobile
+        association.put("CHILD_COUNT", 0);
+        resources.add(association);
+
+        CheckTreeUtils commonTreeUtils = new CheckTreeUtils(resources);
+        return commonTreeUtils.getCheckTreeList(topId);
+    }
+
+    @Override
+    public Map<String, Object> selectSendList(String q) {
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, Object>> list = fopCallRecordDao.selectSendList(q);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
     }
 
     /**
@@ -363,7 +429,8 @@ public class FopCallRecordServiceImpl implements FopCallRecordService, BackendSe
      * @param sysId    系统识别id
      * @param params   参数列表
      */
-    private void sendNotice(String openid, String mobile, String tmplCode, String sysId, Map<String, Object> params) throws Exception {
+    private void sendNotice(String openid, String mobile, String tmplCode, String sysId,
+                            Map<String, Object> params) throws Exception {
         if (CommonUtils.isValidMobile(mobile)) {
             params.put("mobile", mobile);
         }

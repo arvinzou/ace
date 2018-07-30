@@ -38,27 +38,27 @@ public class AutoCode {
 
 	public static void main(String[] args) {
 		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("kernel");
-		Class<?> c=com.huacainfo.ace.kernel.model.Article.class;
-		autoCodeUtils.init(c);
-		try {
-			/*autoCodeUtils.createVO(c);
-			autoCodeUtils.createQVO(c);
-			autoCodeUtils.createDAO(c);
-			autoCodeUtils.createService(c);
-			autoCodeUtils.createServiceImpl(c);
-			autoCodeUtils.createAction(c);
-
-			autoCodeUtils.createJsp(c);
-			autoCodeUtils.createJsConfig(c);
-			autoCodeUtils.createJsView(c);
-			autoCodeUtils.createModel(c);
-			autoCodeUtils.createJsController(c);*/
-			autoCodeUtils.createModel(c);
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//		Class<?> c=com.huacainfo.ace.kernel.model.Article.class;
+//		autoCodeUtils.init(c);
+//		try {
+//			/*autoCodeUtils.createVO(c);
+//			autoCodeUtils.createQVO(c);
+//			autoCodeUtils.createDAO(c);
+//			autoCodeUtils.createService(c);
+//			autoCodeUtils.createServiceImpl(c);
+//			autoCodeUtils.createAction(c);
+//
+//			autoCodeUtils.createJsp(c);
+//			autoCodeUtils.createJsConfig(c);
+//			autoCodeUtils.createJsView(c);
+//			autoCodeUtils.createModel(c);
+//			autoCodeUtils.createJsController(c);*/
+//			autoCodeUtils.createModel(c);
+//
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+    }
 
 }

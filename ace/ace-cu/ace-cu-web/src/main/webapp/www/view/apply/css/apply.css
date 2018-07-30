@@ -25,7 +25,7 @@ input, textarea{
 	margin-right: 5%;
 	background-color: #FFFFFF;
 	margin-top: 0.5rem;
-	height: 15.5rem;
+	height: 16rem;
 }
 .title01{
 	width: 100%;
@@ -241,4 +241,27 @@ input, textarea{
 .layui-m-layer1 .layui-m-layerchild{
 	width: 9rem!important;
 	height: 10rem!important;
+}
+#warning{
+	width: 100%;
+	height: auto;
+	border-radius: 0.2rem;
+}
+
+.warn_content{
+	width: 90%;
+	margin:auto;
+	font-size: 0.35rem;
+	color: #666666;
+}
+.warn_title{
+	text-align: center;
+	color: #333333;
+	font-size: 0.45rem;
+	font-weight: bold;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}
+.layui-m-layerbtn span[yes]{
+	height: 1rem;
 }

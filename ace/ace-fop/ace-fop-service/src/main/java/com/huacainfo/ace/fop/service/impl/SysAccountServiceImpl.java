@@ -279,6 +279,12 @@ public class SysAccountServiceImpl implements SysAccountService {
         return rtn;
     }
 
+    @Override
+    public ResultResponse destroyAll() {
+//        List<Users> list= sysAccountDao.findAll();
+        return null;
+    }
+
 
     private ResultResponse dispatchRoleRight(String userId, UserProp userProp, String[] roleTypes) throws Exception {
         List<Map<String, Object>> roleList = sysAccountDao.selectRoleList(userProp.getActiveSyId(), roleTypes);

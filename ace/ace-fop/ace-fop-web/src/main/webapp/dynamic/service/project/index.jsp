@@ -46,14 +46,14 @@
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-                    <%--<button class="btn btn-info" id="btn-view-add"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopProject/insertFopProject">--%>
-                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
-                    <%--<button class="btn btn-info" id="btn-view-edit"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopProject/updateFopProject">--%>
-                    <%--<i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
+                    <button class="btn btn-info" id="btn-view-add"
+                            authority="${pageContext.request.contextPath}/fopProject/insertFopProject">
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-info" id="btn-view-edit"
+                            authority="${pageContext.request.contextPath}/fopProject/updateFopProject">
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                    </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/fopProject/deleteFopProjectByFopProjectId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
@@ -98,13 +98,12 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
+    <h5 class="header-title">项目名称</h5>
+    <div id="projectName" class="row" style="padding:10px">
+    </div>
+
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
-            <span class="labelItemHeader">项目名称</span>
-            <br>
-            <span id="projectName"></span>
-        </div>
         <div class="labelItem">
             <span class="labelItemHeader">项目代码</span>
             <br>
@@ -140,12 +139,12 @@
             <br>
             <span id="releaseDate"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">点击数</span>
             <br>
             <span id="clicks"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">点赞数</span>
             <br>
             <span id="likes"></span>

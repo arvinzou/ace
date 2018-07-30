@@ -89,10 +89,10 @@ app.controller(ngControllerName,function($scope){
                 }
                 var orgObj = result.data.olist;
                 for(var i=0; i<orgObj.length; i++){
-                    if(orgObj[i].orgType == "1"){ //党组织
+                    if(orgObj[i].companyOrgType == "1"){ //党组织
                         $scope.dang = orgObj[i];
                     }
-                    if(orgObj[i].orgType == "2"){//工会组织
+                    if(orgObj[i].companyOrgType == "2"){//工会组织
                         $scope.gonghui = orgObj[i];
                     }
                 }
@@ -155,6 +155,7 @@ app.controller(ngControllerName,function($scope){
         var address = $("input[name='address']").val();
         var latitude = $("#latitude").val();
         var longitude = $("#longitude").val();
+        var belongTo = $("#belongTo option:checked").val();
 
         /*法人代表*/
         var sex = $("#sex option:checked").val();
@@ -179,7 +180,7 @@ app.controller(ngControllerName,function($scope){
         var majorVariety = $("textarea[name='majorVariety']").val();
 
         /*党组织信息*/
-        var companyOrgType = $("input[name='companyOrgType']").val();
+        var orgType = $("input[name='companyOrgType']").val();
         var peopleNum = $("input[name='peopleNum']").val();
         var dzz_establishDate = $("input[name='dzz_establishDate']").val();
         var dutyPersonName = $("input[name='dutyPersonName']").val();    //党组织负责人
@@ -231,7 +232,8 @@ app.controller(ngControllerName,function($scope){
                 "yearTaxAmount":yearTaxAmount,
                 "latitude": latitude,
                 "longitude": longitude,
-                "realName": realName
+                "realName": realName,
+                "belongTo": belongTo
             },
             "legalPerson":{
                 "identityCard":identityCard,
@@ -254,15 +256,15 @@ app.controller(ngControllerName,function($scope){
             },
             "org":[
                 {
-                    "orgType":"1",    //1表示党组织
-                    "companyOrgType":companyOrgType,
+                    "companyOrgType":"1",    //1表示党组织
+                    "orgType":orgType,   //党组织类型
                     "peopleNum":peopleNum,
                     "establishDate":dzz_establishDate,
                     "dutyPersonName":dutyPersonName,
                     "dutyPersonPhone":dutyPersonPhone
                 },
                 {
-                    "orgType":"2",    //2代表工会组织
+                    "companyOrgType":"2",    //2代表工会组织
                     "establishDate":gh_establishDate,
                     "dutyPersonName":gh_dutyPersonName,
                     "dutyPersonPhone":gh_dutyPersonPhone
@@ -296,6 +298,7 @@ app.controller(ngControllerName,function($scope){
             type:"post",
             async:false,
             dataType:"json",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
             data:{json:JSON.stringify(json)},
             success:function(result){
                 if(result.status == 0) {

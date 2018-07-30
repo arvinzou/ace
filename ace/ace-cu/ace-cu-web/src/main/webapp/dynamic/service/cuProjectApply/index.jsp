@@ -33,7 +33,7 @@
                     <%--textField:'name',--%>
                     <%--panelHeight:'auto'">--%>
 
-                    微信名称： <input name="name" type="text" style="width: 200px;"/>
+                    微信名称： <input name="nickname" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/cuProjectApply/findCuProjectApplyList">
                         <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>

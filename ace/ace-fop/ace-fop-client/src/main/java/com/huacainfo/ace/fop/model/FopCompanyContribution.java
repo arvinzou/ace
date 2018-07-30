@@ -9,34 +9,40 @@ import java.util.Date;
 public class FopCompanyContribution implements Serializable {
     private static final long serialVersionUID = 6831589071472909271L;
     private String id;
-
     private String companyId;
-
+    /**
+     * 0 - 对社会公益事业做过何种贡献
+     */
     private String contributionType;
-
+    /**
+     * when :contributionType=0
+     * then :  1-安排下岗职工再就业  2-助学兴教  3-帮困扶贫  4-其他
+     */
     private String itemCode;
-
     private String itemName;
-
     private Integer sort;
-
     private String remark;
-
     private String status;
-
     private String createUserId;
-
     private String createUserName;
-
     private Date createDate;
-
     private String lastModifyUserId;
-
     private String lastModifyUserName;
-
     private Date lastModifyDate;
-
     private String itemValue;
+
+    public FopCompanyContribution() {
+    }
+
+    public FopCompanyContribution(String companyId, String contributionType,
+                                  String itemCode, String itemName, String itemValue, Integer sort) {
+        this.companyId = companyId;
+        this.contributionType = contributionType;
+        this.itemCode = itemCode;
+        this.itemName = itemName;
+        this.sort = sort;
+        this.itemValue = itemValue;
+    }
 
     public String getId() {
         return id;

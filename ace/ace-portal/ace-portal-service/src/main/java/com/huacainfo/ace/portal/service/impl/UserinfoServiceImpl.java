@@ -117,6 +117,11 @@ public class UserinfoServiceImpl implements UserinfoService {
         return rst;
     }
 
+    @Override
+    public UserinfoVo selectUserinfoByKey(String id) throws Exception {
+        return this.userinfoDao.selectByPrimaryKey(id);
+    }
+
     /**
      * @throws
      * @Title:deleteUserinfoByUserinfoId

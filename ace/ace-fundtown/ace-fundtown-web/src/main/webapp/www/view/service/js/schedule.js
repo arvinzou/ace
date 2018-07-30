@@ -35,11 +35,19 @@ function initweb() {
 
 function viewSchedule(data) {
     $('.lists').empty();
+
     for (var i = 0; i < data.length; i++) {
+        var zt = data[i].auditResult;
+        var color;
+        var text;
+        if (i == 0) {
+            color = 'blue';
+            text = zt == 0 ? '待审核' : zt == 1 ? '审核通过' : "审核拒绝";
+        } else {
+            color = zt == 0 ? 'hui' : zt == 1 ? 'blue' : "blue";
+            text = "";
+        }
         var $div = template;
-        var zt = data[i].auditResult
-        var color = zt == 0 ? 'blue' : zt == 1 ? 'green' : "red";
-        var text = zt == 0 ? '待审核' : zt == 1 ? '审核通过' : "审核拒绝";
         $div = $div.replace('[color]', color).replace('[color]', color).replace('[text]', text).replace('[nodeName]', data[i].nodeName);
         $('.lists').append($($div));
     }

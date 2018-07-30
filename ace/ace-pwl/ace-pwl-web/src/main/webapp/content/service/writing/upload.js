@@ -5,7 +5,6 @@ jQuery(function ($) {
 function init_uploader() {
     $("#uploader").pluploadQueue({
         runtimes: 'html5,flash,silverlight,html4',
-        chunk_size: '1mb',
         unique_names: true,
         multipart_params: {},
         filters: {

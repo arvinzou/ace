@@ -24,6 +24,8 @@ import java.util.Map;
  * @since JDK 1.8
  */
 public class QrcodeApi {
+    public static final int EXPIRE_SECONDS_30_DAY = 2592000;
+    public static final int EXPIRE_SECONDS_7_DAY = 604800;
     private static Logger logger = LoggerFactory.getLogger(QrcodeApi.class);
     private static String apiUrl = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=";
     private static String showQrcodeUrl = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=";
@@ -37,7 +39,28 @@ public class QrcodeApi {
     /**
      * 创建临时二维码
      *
-     * @param expireSeconds 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）。
+     * @param expireSeconds 该二维码有效时间，以秒为单位。  最大不超过2592000（即30天）。
+     * @param sceneId       场景值ID，临时二维码时为32位非0整型
+     * @return ApiResult 二维码信息
+     */
+    public static ApiResult createTemporary(int expireSeconds, String sceneId, String accessToken) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("expire_seconds", expireSeconds);
+        params.put("action_name", "QR_STR_SCENE");
+
+        Map<String, Object> actionInfo = new HashMap<>();
+        Map<String, Object> scene = new HashMap<>();
+        scene.put("scene_str", sceneId);
+
+        actionInfo.put("scene", scene);
+        params.put("action_info", actionInfo);
+        return create(JsonUtil.toJson(params), accessToken);
+    }
+
+    /**
+     * 创建临时二维码
+     *
+     * @param expireSeconds 该二维码有效时间，以秒为单位。  最大不超过2592000（即30天）
      * @param sceneId       场景值ID，临时二维码时为32位非0整型
      * @return ApiResult 二维码信息
      */

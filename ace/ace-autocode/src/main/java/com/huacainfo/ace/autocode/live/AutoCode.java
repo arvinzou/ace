@@ -5,7 +5,8 @@ import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
     public static void main(String[] args) throws Exception {
         AutoCodeUtils autoCodeUtils = new AutoCodeUtils("live", "图片", "王恩");
-        Class<?> c = com.huacainfo.ace.live.model.Img.class;
+//        Class<?> c = com.huacainfo.ace.live.model.Img.class;
+        Class<?> c = null;
         autoCodeUtils.init(c);
         autoCodeUtils.createVO(c);
         autoCodeUtils.createQVO(c);

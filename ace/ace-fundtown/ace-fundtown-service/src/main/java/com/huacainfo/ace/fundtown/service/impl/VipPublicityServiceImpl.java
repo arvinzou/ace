@@ -75,31 +75,17 @@ public class VipPublicityServiceImpl implements VipPublicityService {
      */
     @Override
     public MessageResponse insertVipPublicity(VipPublicity o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getDeptId())) {
             return new MessageResponse(1, "入驻企业id不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
-
-        int temp = this.vipPublicityDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "入驻成员公示列表名称重复！");
-        }
 
         o.setId(GUIDUtil.getGUID());
-        o.setCreateDate(new Date());
         o.setStatus("1");
+        o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
+        o.setLastModifyDate(new Date());
+
         this.vipPublicityDao.insertSelective(o);
         this.dataBaseLogService.log("添加入驻成员公示列表", "入驻成员公示列表", "",
                 o.getId(), o.getId(), userProp);

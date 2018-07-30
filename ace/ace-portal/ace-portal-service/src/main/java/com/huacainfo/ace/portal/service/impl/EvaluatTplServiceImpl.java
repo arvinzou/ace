@@ -86,26 +86,46 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
             List<EvaluatGauge> listGa = this.evaluatGaugeDao.findLists(item.getId());
             EvaluatGauge evaluatGauge = null;
             switch (listGa.size()) {
-                case 5:
-                    evaluatGauge = listGa.get(0);
+                case 10:
+                    evaluatGauge = listGa.get(9);
+                    item.setContent9(evaluatGauge.getContent());
+                    item.setInterval9(evaluatGauge.getScoreEnd());
+                case 9:
+                    evaluatGauge = listGa.get(8);
+                    item.setContent8(evaluatGauge.getContent());
+                    item.setInterval8(evaluatGauge.getScoreEnd());
+                case 8:
+                    evaluatGauge = listGa.get(7);
+                    item.setContent7(evaluatGauge.getContent());
+                    item.setInterval7(evaluatGauge.getScoreEnd());
+                case 7:
+                    evaluatGauge = listGa.get(6);
+                    item.setContent6(evaluatGauge.getContent());
+                    item.setInterval6(evaluatGauge.getScoreEnd());
+                case 6:
+                    evaluatGauge = listGa.get(5);
                     item.setContent5(evaluatGauge.getContent());
                     item.setInterval5(evaluatGauge.getScoreEnd());
-                case 4:
-                    evaluatGauge = listGa.get(1);
+                case 5:
+                    evaluatGauge = listGa.get(4);
                     item.setContent4(evaluatGauge.getContent());
                     item.setInterval4(evaluatGauge.getScoreEnd());
-                case 3:
-                    evaluatGauge = listGa.get(2);
+                case 4:
+                    evaluatGauge = listGa.get(3);
                     item.setContent3(evaluatGauge.getContent());
                     item.setInterval3(evaluatGauge.getScoreEnd());
-                case 2:
-                    evaluatGauge = listGa.get(3);
+                case 3:
+                    evaluatGauge = listGa.get(2);
                     item.setContent2(evaluatGauge.getContent());
                     item.setInterval2(evaluatGauge.getScoreEnd());
-                case 1:
-                    evaluatGauge = listGa.get(4);
+                case 2:
+                    evaluatGauge = listGa.get(1);
                     item.setContent1(evaluatGauge.getContent());
                     item.setInterval1(evaluatGauge.getScoreEnd());
+                case 1:
+                    evaluatGauge = listGa.get(0);
+                    item.setContent0(evaluatGauge.getContent());
+                    item.setInterval0(evaluatGauge.getScoreEnd());
             }
         }
         rst.setRows(list);
@@ -344,7 +364,7 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         EvaluatGauge evaluatGauge = new EvaluatGauge();
         evaluatGauge.setEvaluatTplId(evaluatTplId);
         evaluatGauge.setScoreStart(score);
-        for (int i = 1; i < 6; i++) {
+        for (int i = 0; i < 10; i++) {
             if (CommonUtils.isBlank(jsonObject.getString("interval" + i))) {
                 continue;
             }

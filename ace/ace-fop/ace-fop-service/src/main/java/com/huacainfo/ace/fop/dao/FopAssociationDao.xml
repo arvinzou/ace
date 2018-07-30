@@ -28,7 +28,7 @@
     <sql id="Base_Column_List">
     id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId, 
     directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId, areaCode
+        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId, areaCode, belongTo
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -53,7 +53,7 @@
       viceNum, remark, status, 
       createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
-        latitude ,longitude, departmentId, areaCode
+        latitude ,longitude, departmentId, areaCode, belongTo
       )
     values (#{id,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
       #{abcCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
@@ -63,7 +63,7 @@
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
         #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{departmentId,jdbcType=VARCHAR},
-        #{areaCode,jdbcType=VARCHAR}
+        #{areaCode,jdbcType=VARCHAR}, #{belongTo,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
@@ -135,6 +135,9 @@
             <if test="departmentId != null">
                 departmentId,
             </if>
+            <if test="belongTo != null">
+                belongTo,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -202,6 +205,9 @@
             </if>
             <if test="departmentId != null">
                 #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="belongTo != null">
+                #{belongTo,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -271,6 +277,10 @@
             <if test="departmentId != null">
                 departmentId = #{departmentId,jdbcType=VARCHAR},
             </if>
+            <if test="belongTo != null">
+                belongTo = #{belongTo,jdbcType=VARCHAR},
+            </if>
+
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -296,13 +306,14 @@
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
         latitude = #{latitude,jdbcType=DECIMAL},
         longitude = #{longitude,jdbcType=DECIMAL},
-        departmentId = #{departmentId,jdbcType=VARCHAR}
-
+        departmentId = #{departmentId,jdbcType=VARCHAR},
+        belongTo = #{belongTo,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
 
     <sql id="Vo_Column_List">
+        c.belongTo,
         c.id, c.fullName, c.shortName, c.abcCode, c.address, c.phoneNumber, c.establishDate, c.pseronId,
         c.directorNum, c.viceNum, c.remark, c.status, c.createUserId, c.createUserName, c.createDate,
         c.lastModifyUserId,
@@ -335,6 +346,9 @@
         </if>
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and c.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
+            and c.belongTo = #{condition.belongTo,jdbcType=CHAR}
         </if>
     </sql>
 

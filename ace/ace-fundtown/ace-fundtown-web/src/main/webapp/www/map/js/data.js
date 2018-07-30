@@ -44,10 +44,6 @@ var jingdian = [{
         value: [111.702688, 29.120631]
     },
 ];
-var self = [{
-    name: "清科小镇",
-    value: [111.737953, 29.057274, 9]
-}]
 var shisu = [{
     name: "共和酒店",
     value: [111.739109, 29.059183]
@@ -75,6 +71,11 @@ var jiaoyu = [{
     },
 ]
 
+var self = [{
+    name: "柳叶湖清科基金小镇",
+    value: [111.737953, 29.057274, 9]
+}]
+
 var massage = {
     欢乐水世界: {
         address: '常德市武陵区环湖路',
@@ -87,6 +88,16 @@ var massage = {
         images: [
             'img/stgy/1.jpg',
             'img/stgy/2.jpg'
+        ]
+    },
+    柳叶湖清科基金小镇: {
+        address: '常德武陵区柳叶湖度假区维一柳岸小区',
+        images: [
+            'img/qkxz/1.jpg',
+            'img/qkxz/2.jpg',
+            'img/qkxz/3.jpg',
+            'img/qkxz/4.jpg',
+            'img/qkxz/5.jpg'
         ]
     },
     游船码头: {

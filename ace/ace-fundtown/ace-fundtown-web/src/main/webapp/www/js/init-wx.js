@@ -10,9 +10,9 @@ $(function () {
             debug: false,
             appId: result.data.appId,
             timestamp: result.data.timestamp,
-            nonceStr: result.data.noncestr,
+            nonceStr: result.data.nonceStr,
             signature: result.data.signature,
-            jsApiList: ["openLocation", '']
+            jsApiList: ["openLocation"]
         })
     });
 })

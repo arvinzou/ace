@@ -296,6 +296,10 @@
         <if test="condition.applyOpenId!=null and condition.applyOpenId!=&quot;&quot;">
             and t.applyOpenId = #{condition.applyOpenId,jdbcType=VARCHAR}
         </if>
+        <if test="condition.nickname!=null and condition.nickname!=&quot;&quot;">
+            and u.nickname
+            like concat('%',#{condition.nickname,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">

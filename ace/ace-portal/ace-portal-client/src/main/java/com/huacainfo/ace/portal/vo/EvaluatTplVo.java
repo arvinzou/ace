@@ -27,6 +27,115 @@ public class EvaluatTplVo extends EvaluatTpl {
 
     private String content5;
 
+    private Integer interval6;
+
+    private String content6;
+
+    private Integer interval7;
+
+    private String content7;
+
+    private Integer interval8;
+
+    private String content8;
+
+    private Integer interval9;
+
+    private String content9;
+
+    private Integer interval0;
+
+    private String content0;
+    private String categoryName;
+
+    public Integer getInterval6() {
+        return interval6;
+    }
+
+    public void setInterval6(Integer interval6) {
+        this.interval6 = interval6;
+    }
+
+    public String getContent6() {
+        return content6;
+    }
+
+    public void setContent6(String content6) {
+        this.content6 = content6;
+    }
+
+    public Integer getInterval7() {
+        return interval7;
+    }
+
+    public void setInterval7(Integer interval7) {
+        this.interval7 = interval7;
+    }
+
+    public String getContent7() {
+        return content7;
+    }
+
+    public void setContent7(String content7) {
+        this.content7 = content7;
+    }
+
+    public Integer getInterval8() {
+        return interval8;
+    }
+
+    public void setInterval8(Integer interval8) {
+        this.interval8 = interval8;
+    }
+
+    public String getContent8() {
+        return content8;
+    }
+
+    public void setContent8(String content8) {
+        this.content8 = content8;
+    }
+
+    public Integer getInterval9() {
+        return interval9;
+    }
+
+    public void setInterval9(Integer interval9) {
+        this.interval9 = interval9;
+    }
+
+    public String getContent9() {
+        return content9;
+    }
+
+    public void setContent9(String content9) {
+        this.content9 = content9;
+    }
+
+    public Integer getInterval0() {
+        return interval0;
+    }
+
+    public void setInterval0(Integer interval0) {
+        this.interval0 = interval0;
+    }
+
+    public String getContent0() {
+        return content0;
+    }
+
+    public void setContent0(String content0) {
+        this.content0 = content0;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public Integer getInterval1() {
         return interval1;
     }

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.ConsultOrderDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.ConsultOrder">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="tel" jdbcType="VARCHAR" property="tel"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="info" jdbcType="VARCHAR" property="info"/>
+        <result column="secName" jdbcType="VARCHAR" property="secName"/>
+        <result column="relationship" jdbcType="VARCHAR" property="relationship"/>
+        <result column="secTel" jdbcType="VARCHAR" property="secTel"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, tel, name, age, sex, info, secName, relationship, secTel, status, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from consult_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from consult_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.ConsultOrder">
+    insert into consult_order (id, tel, name, 
+      age, sex, info, secName, 
+      relationship, secTel, status, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{secName,jdbcType=VARCHAR}, 
+      #{relationship,jdbcType=VARCHAR}, #{secTel,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.ConsultOrder">
+        insert into consult_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tel != null">
+                tel,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="info != null">
+                info,
+            </if>
+            <if test="secName != null">
+                secName,
+            </if>
+            <if test="relationship != null">
+                relationship,
+            </if>
+            <if test="secTel != null">
+                secTel,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="tel != null">
+                #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="info != null">
+                #{info,jdbcType=VARCHAR},
+            </if>
+            <if test="secName != null">
+                #{secName,jdbcType=VARCHAR},
+            </if>
+            <if test="relationship != null">
+                #{relationship,jdbcType=VARCHAR},
+            </if>
+            <if test="secTel != null">
+                #{secTel,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.ConsultOrder">
+        update consult_order
+        <set>
+            <if test="tel != null">
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="info != null">
+                info = #{info,jdbcType=VARCHAR},
+            </if>
+            <if test="secName != null">
+                secName = #{secName,jdbcType=VARCHAR},
+            </if>
+            <if test="relationship != null">
+                relationship = #{relationship,jdbcType=VARCHAR},
+            </if>
+            <if test="secTel != null">
+                secTel = #{secTel,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.ConsultOrder">
+    update consult_order
+    set tel = #{tel,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      secName = #{secName,jdbcType=VARCHAR},
+      relationship = #{relationship,jdbcType=VARCHAR},
+      secTel = #{secTel,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

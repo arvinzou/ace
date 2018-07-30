@@ -32,5 +32,6 @@ public interface VipMemberResDao {
 
     int isExit(VipMemberRes record);
 
-    List<VipMemberRes> findByDeptId(String deptId);
+    List<VipMemberRes> findByDeptId(@Param("deptId") String deptId,
+                                    @Param("category") String[] category);
 }

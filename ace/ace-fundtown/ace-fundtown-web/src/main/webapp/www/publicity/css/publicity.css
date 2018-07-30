@@ -56,3 +56,10 @@ body {
     background-color: #3283F9 !important;
     color: #fff !important;
 }
+
+.list_title {
+    padding-left: 1rem;
+    border-left: 3px solid #3283F9;
+    line-height: 2.4vh;
+    margin-bottom: 0.5rem;
+}

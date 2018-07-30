@@ -148,17 +148,75 @@ function loadView(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
+            //动态渲染
+            var tpl = document.getElementById('tpl-company').innerHTML;//'tpl-company'
+            var renderHtml = juicer(tpl, rst.value);
+            $('#dialog-message-view').html(renderHtml);
+            //
             $.each(rst.value, function (key, value) {
-                if (key == 'category') {
-                    value = rsd(value, '83');
+                //企业类型 "0": "企业会员", "4": "个人会员"},//, "1": "团体企业", "2": "律师事务所", "3": "银行机构"
+                if (key == "companyType") {
+                    var rst = "";
+                    switch (value) {
+                        case '0' :
+                            rst = "企业会员";
+                            break;
+                        case '1' :
+                            rst = "团体企业";
+                            break;
+                        case '2' :
+                            rst = "律师事务所";
+                            break;
+                        case '3' :
+                            rst = "银行机构";
+                            break;
+                        case '4' :
+                            rst = "个人会员";
+                            break;
+                        default :
+                            rst = "N/A";
+                    }
+                    value = rst;
                 }
-                if (key == 'status') {
-                    value == "1" ? "正常" : "关闭";
+                //企业性质
+                if (key == "companyProperty") {
+                    value = rsd(value, "134");
                 }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
+                //status
+                if (key == "status") {
+                    if ("1" == value) {
+                        value = "非会员";
+                    }
+                    if ("2" == value) {
+                        value = "会员";
+                    }
+                }
+                //文化程度
+                if (key == "lpEducation") {
+                    value = rsd(value, "10");
+                }
+                //民族
+                if (key == "lpNationality") {
+                    value = rsd(value, "09");
+                }
+                //性别
+                if (key == "lpSex") {
+                    value = rsd(value, "01");
+                }
+                //企业性质
+                if (key == "companyProperty") {
+                    value = rsd(value, "134");
+                }
+                //日期格式化
+                if (key.indexOf('Dt') != -1 ||
+                    key.indexOf('Date') != -1 ||
+                    key.indexOf('time') != -1 ||
+                    key.indexOf('Time') != -1 ||
+                    key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
-                $("#dialog-message-view").find('#' + key).html(value);
+                $("#dialog-message-view").find('span[name=' + key + ']').html(value);
+                $("#dialog-message-view").find('div[name=' + key + ']').html(value);
             });
         },
         error: function () {

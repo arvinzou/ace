@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -176,8 +177,8 @@ public class EvaluatTypeController extends PortalBaseController {
 	public Map<String, Object> selectAuthor(String q, String id) throws Exception {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("q", id);
-		params.put("syid", this.getCurUserProp().getSyid());
-		if (!CommonUtils.isBlank(q)) {
+        params.put("syid", this.getCurUserProp().getActiveSyId());
+        if (!CommonUtils.isBlank(q)) {
 			params.put("q", q);
 		}
 		this.logger.info("", params);

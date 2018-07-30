@@ -17,9 +17,11 @@ import com.huacainfo.ace.fundtown.dao.VipProcessRecordDao;
 import com.huacainfo.ace.fundtown.model.VipDepartment;
 import com.huacainfo.ace.fundtown.model.VipMemberRes;
 import com.huacainfo.ace.fundtown.model.VipProcessRecord;
+import com.huacainfo.ace.fundtown.model.VipPublicity;
 import com.huacainfo.ace.fundtown.service.VipDepartmentService;
 import com.huacainfo.ace.fundtown.service.VipMemberResService;
 import com.huacainfo.ace.fundtown.service.VipProcessRecordService;
+import com.huacainfo.ace.fundtown.service.VipPublicityService;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentQVo;
 import com.huacainfo.ace.fundtown.vo.VipDepartmentVo;
 import com.huacainfo.ace.fundtown.vo.VipProcessRecordVo;
@@ -52,7 +54,8 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     private VipMemberResDao vipMemberResDao;
     @Autowired
     private VipProcessRecordDao vipProcessRecordDao;
-
+    @Autowired
+    private VipPublicityService vipPublicityService;
 
     @Override
     public PageResult<VipDepartmentVo> findDepartmentList(VipDepartmentQVo condition,
@@ -229,7 +232,7 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
      */
     @Override
     public ResultResponse getMyVideo(String deptId) {
-        List<VipMemberRes> list = vipMemberResService.findByDeptId(deptId);
+        List<VipMemberRes> list = vipMemberResService.findByDeptId(deptId, new String[]{"0"});
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
     }
 
@@ -253,14 +256,16 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
      * @param fileName 文件名称
      * @param fileSize 文件大小
      * @param fileUrl  文件资源地址
+     * @param category 附件类型 0-视频，1-其他类型文件
      */
     @Override
-    public VipMemberRes insertVipMemberRes(String deptId, String fileName, long fileSize, String fileUrl) {
+    public VipMemberRes insertVipMemberRes(String deptId, String category,
+                                           String fileName, long fileSize, String fileUrl) {
 
         VipMemberRes res = new VipMemberRes();
         res.setId(GUIDUtil.getGUID());
         res.setDeptId(deptId);
-        res.setCategory("0");
+        res.setCategory(category);
         res.setResName(fileName);
         res.setResSize(fileSize + "");
         res.setResUrl(fileUrl);
@@ -282,8 +287,15 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
      * @return
      */
     @Override
-    public MessageResponse publicity(String deptId, UserProp curUserProp) {
-        return null;
+    public MessageResponse publicity(String deptId, UserProp curUserProp) throws Exception {
+        VipPublicity vipPublicity = vipPublicityService.getVipInfo(deptId);
+        if (null == vipPublicity) {
+            vipPublicity = new VipPublicity();
+            vipPublicity.setDeptId(deptId);
+            return vipPublicityService.insertVipPublicity(vipPublicity, curUserProp);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "公示成功");
     }
 
     /**
@@ -312,7 +324,19 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
             record.setLastModifyDate(DateUtil.getNowDate());
             vipProcessRecordDao.updateByPrimaryKeySelective(record);
         } else {
-            //todo insert record
+            record = new VipProcessRecord();
+            record.setId(GUIDUtil.getGUID());
+            record.setDeptId(deptId);
+            record.setNodeId(nodeId);
+            record.setAuditResult(auditResult);
+            record.setAuditDate(DateUtil.getNowDate());
+            record.setAuditOpinion(auditOpinion);
+            record.setLastModifyDate(DateUtil.getNowDate());
+            record.setStatus("1");
+            record.setCreateDate(DateUtil.getNowDate());
+            record.setCreateUserId("0000001");
+            record.setCreateUserName("system");
+            vipProcessRecordDao.insert(record);
         }
         //update vip info
         vip.setStatus("2");

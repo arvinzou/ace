@@ -6,10 +6,21 @@ $(function () {
     $('body').on('click', '.file_p', downloadFile);
 })
 
+// function downloadFile() {
+//     if (status != 2) {
+//         alert("审核通过才能下载。")
+//     }
+// }
+
 function downloadFile() {
-    if (status != 2) {
-        alert("申请入驻成功才能下载。")
+    var $that = $(this);
+    var resId = $that.parent().data('resId');
+    console.log(resId);
+    if (!resId) {
+        alert("审核通过才能下载。");
     }
+    var url = "../../download.html?id=" + resId;
+    window.location.href = url;
 }
 
 function userInfo() {
@@ -35,6 +46,23 @@ function initweb() {
 }
 
 
+// function viewFileList(data, className) {
+//     if (!data) {
+//         return;
+//     }
+//     $(className).empty();
+//     for (var i = 0; i < data.length; i++) {
+//         var p = fileTemplate;
+//         p = p.replace('[resName]', data[i].resName)
+//             .replace('[id]', status == 2 ? '/fundtown/www/download/file?id=' + data[i].id : '#');
+//         $(className).append($(p));
+//     }
+// }
+//
+// var fileTemplate = '<p><a class="file_p" href="[id]">[resName]</a></p>';
+
+
+
 function viewFileList(data, className) {
     if (!data) {
         return;
@@ -42,10 +70,13 @@ function viewFileList(data, className) {
     $(className).empty();
     for (var i = 0; i < data.length; i++) {
         var p = fileTemplate;
-        p = p.replace('[resName]', data[i].resName)
-            .replace('[id]', status == 2 ? data[i].id : '');
-        $(className).append($(p));
+        p = p.replace('[resName]', data[i].resName);
+        var $p = $(p);
+        if (status == 2) {
+            $p.data('resId', data[i].id);
+        }
+        $(className).append($p);
     }
 }
 
-var fileTemplate = '<p><a class="file_p" href="/fundtown/www/download/file?id=[id]">[resName]</a></p>';
+var fileTemplate = '<p><a class="file_p" href="javascript:void(0)">[resName]</a></p>';

@@ -71,18 +71,21 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
+    <h5 class="header-title">标题</h5>
+    <div id="title" class="row" style="padding:10px">
+    </div>
+
+    <%--<div class="labelItem">--%>
+    <%--<span class="labelItemHeader">标题</span>--%>
+    <%--<br>--%>
+    <%--<span ></span>--%>
+    <%--</div>--%>
     <h5 class="header-title">基本信息</h5>
     <div class="row" style="padding:10px">
         <div class="labelItem"><span class="labelItemHeader">
 发布单位</span>
             <br>
             <span id="companyName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-标题</span>
-            <br>
-            <span id="title">
 </span>
         </div>
         <div class="labelItem"><span class="labelItemHeader">

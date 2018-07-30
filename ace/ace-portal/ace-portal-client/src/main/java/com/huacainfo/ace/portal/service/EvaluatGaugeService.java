@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.service;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -31,7 +32,7 @@ public interface EvaluatGaugeService {
 	public abstract PageResult<EvaluatGaugeVo> findEvaluatGaugeList(EvaluatGaugeQVo condition, int start, int limit, String orderBy) throws Exception;
 
 
-	public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition, UserProp userProp) throws Exception;
+    public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition, Userinfo userinfo) throws Exception;
 
     /**
 	 *

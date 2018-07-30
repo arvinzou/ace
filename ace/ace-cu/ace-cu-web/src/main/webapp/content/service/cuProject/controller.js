@@ -235,8 +235,11 @@ jQuery(function ($) {
                 return;
             }
             var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            if (rowData.type == '3') {
+                alert("支出项目不得再添加使用记录")
+                return;
+            }
             var pProjectId = rowData.id;
-
             //new form
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
@@ -464,13 +467,16 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                // if (key == 'category') {
-                //     value = rsd(value, '83');
-                // }
+                if (key == 'type') {
+                    value = rsd(value, '142');
+                }
                 if (key == 'status') {
                     value == "1" ? "正常" : "关闭";
                 }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
+                if (key.indexOf('Date') != -1 ||
+                    key.indexOf('time') != -1 ||
+                    key.indexOf('Time') != -1 ||
+                    key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
                 $("#dialog-message-view").find('#' + key).html(value);

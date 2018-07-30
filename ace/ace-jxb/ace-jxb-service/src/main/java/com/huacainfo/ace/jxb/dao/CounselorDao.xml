@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.CounselorDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Counselor">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="studioId" jdbcType="VARCHAR" property="studioId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="certification" jdbcType="VARCHAR" property="certification"/>
+        <result column="tags" jdbcType="VARCHAR" property="tags"/>
+        <result column="years" jdbcType="VARCHAR" property="years"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="imagePhotoUrl" jdbcType="VARCHAR" property="imagePhotoUrl"/>
+        <result column="visitCardUrl" jdbcType="VARCHAR" property="visitCardUrl"/>
+        <result column="idCard" jdbcType="CHAR" property="idCard"/>
+        <result column="idCardImgUrl" jdbcType="VARCHAR" property="idCardImgUrl"/>
+        <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo"/>
+        <result column="certificateImgUrl" jdbcType="VARCHAR" property="certificateImgUrl"/>
+        <result column="evidenceImgUrl" jdbcType="VARCHAR" property="evidenceImgUrl"/>
+        <result column="lm" jdbcType="INTEGER" property="lm"/>
+        <result column="income" jdbcType="DECIMAL" property="income"/>
+        <result column="account" jdbcType="DECIMAL" property="account"/>
+        <result column="level" jdbcType="VARCHAR" property="level"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="profile" jdbcType="LONGVARCHAR" property="profile"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
+    idCard, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, income,
+    account, level, createDate, profile
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from counselor
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from counselor
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Counselor">
+    insert into counselor (id, studioId, name,
+      certification, tags, years,
+      mobile, imagePhotoUrl, visitCardUrl,
+      idCard, idCardImgUrl, certificateNo,
+      certificateImgUrl, evidenceImgUrl, lm,
+      income, account, level,
+      createDate, profile)
+    values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{certification,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR},
+      #{mobile,jdbcType=VARCHAR}, #{imagePhotoUrl,jdbcType=VARCHAR}, #{visitCardUrl,jdbcType=VARCHAR},
+      #{idCard,jdbcType=CHAR}, #{idCardImgUrl,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR},
+      #{certificateImgUrl,jdbcType=VARCHAR}, #{evidenceImgUrl,jdbcType=VARCHAR}, #{lm,jdbcType=INTEGER},
+      #{income,jdbcType=DECIMAL}, #{account,jdbcType=DECIMAL}, #{level,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{profile,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Counselor">
+        insert into counselor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="studioId != null">
+                studioId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="certification != null">
+                certification,
+            </if>
+            <if test="tags != null">
+                tags,
+            </if>
+            <if test="years != null">
+                years,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="imagePhotoUrl != null">
+                imagePhotoUrl,
+            </if>
+            <if test="visitCardUrl != null">
+                visitCardUrl,
+            </if>
+            <if test="idCard != null">
+                idCard,
+            </if>
+            <if test="idCardImgUrl != null">
+                idCardImgUrl,
+            </if>
+            <if test="certificateNo != null">
+                certificateNo,
+            </if>
+            <if test="certificateImgUrl != null">
+                certificateImgUrl,
+            </if>
+            <if test="evidenceImgUrl != null">
+                evidenceImgUrl,
+            </if>
+            <if test="lm != null">
+                lm,
+            </if>
+            <if test="income != null">
+                income,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="level != null">
+                level,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="profile != null">
+                profile,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="studioId != null">
+                #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="certification != null">
+                #{certification,jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="years != null">
+                #{years,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="imagePhotoUrl != null">
+                #{imagePhotoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="visitCardUrl != null">
+                #{visitCardUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                #{idCard,jdbcType=CHAR},
+            </if>
+            <if test="idCardImgUrl != null">
+                #{idCardImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateNo != null">
+                #{certificateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateImgUrl != null">
+                #{certificateImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="evidenceImgUrl != null">
+                #{evidenceImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="lm != null">
+                #{lm,jdbcType=INTEGER},
+            </if>
+            <if test="income != null">
+                #{income,jdbcType=DECIMAL},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=DECIMAL},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="profile != null">
+                #{profile,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Counselor">
+        update counselor
+        <set>
+            <if test="studioId != null">
+                studioId = #{studioId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="certification != null">
+                certification = #{certification,jdbcType=VARCHAR},
+            </if>
+            <if test="tags != null">
+                tags = #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="years != null">
+                years = #{years,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="imagePhotoUrl != null">
+                imagePhotoUrl = #{imagePhotoUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="visitCardUrl != null">
+                visitCardUrl = #{visitCardUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                idCard = #{idCard,jdbcType=CHAR},
+            </if>
+            <if test="idCardImgUrl != null">
+                idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateNo != null">
+                certificateNo = #{certificateNo,jdbcType=VARCHAR},
+            </if>
+            <if test="certificateImgUrl != null">
+                certificateImgUrl = #{certificateImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="evidenceImgUrl != null">
+                evidenceImgUrl = #{evidenceImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="lm != null">
+                lm = #{lm,jdbcType=INTEGER},
+            </if>
+            <if test="income != null">
+                income = #{income,jdbcType=DECIMAL},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=DECIMAL},
+            </if>
+            <if test="level != null">
+                level = #{level,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="profile != null">
+                profile = #{profile,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Counselor">
+    update counselor
+    set studioId = #{studioId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      certification = #{certification,jdbcType=VARCHAR},
+      tags = #{tags,jdbcType=VARCHAR},
+      years = #{years,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      imagePhotoUrl = #{imagePhotoUrl,jdbcType=VARCHAR},
+      visitCardUrl = #{visitCardUrl,jdbcType=VARCHAR},
+      idCard = #{idCard,jdbcType=CHAR},
+      idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
+      certificateNo = #{certificateNo,jdbcType=VARCHAR},
+      certificateImgUrl = #{certificateImgUrl,jdbcType=VARCHAR},
+      evidenceImgUrl = #{evidenceImgUrl,jdbcType=VARCHAR},
+      lm = #{lm,jdbcType=INTEGER},
+      income = #{income,jdbcType=DECIMAL},
+      account = #{account,jdbcType=DECIMAL},
+      level = #{level,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CounselorVo">
+        <result column="studioName" jdbcType="VARCHAR" property="studioName"/>
+        <result column="regAuditRst" jdbcType="VARCHAR" property="regAuditRst"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        s.`name` as studioName,
+        IFNULL(ta.rst,'0') as regAuditRst,
+        t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
+        t.idCard, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm, t.income,
+        t.account, t.level, t.createDate, t.profile
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from counselor t
+        left join studio s on s.id = t.studioId
+        left join teacher_audit ta on ta.counselorId=t.id
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from counselor t
+        left join studio s on s.id = t.studioId
+        left join teacher_audit ta on ta.counselorId=t.id
+        where 1=1
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.regAuditRst !=null and condition.regAuditRst !=&quot;&quot;">
+            and IFNULL(ta.rst,'0') = #{condition.regAuditRst,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.tags !=null and condition.tags !=&quot;&quot;">
+            and t.tags like concat('%',#{condition.tags,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.consultTypeArray !=null ">
+            and EXISTS (
+            select 1 from consult_product cp
+            where cp.counselorId = t.id
+            and cp.type in
+            <foreach collection="condition.consultTypeArray" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+            )
+        </if>
+
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Counselor">
+        select count(1)
+        from counselor
+        where 1=1
+    </select>
+</mapper>

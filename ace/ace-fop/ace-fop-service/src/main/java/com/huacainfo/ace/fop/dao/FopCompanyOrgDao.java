@@ -35,4 +35,6 @@ public interface FopCompanyOrgDao {
 
     int isExit(FopCompanyOrg record);
 
+    FopCompanyOrgVo findCompayOrgType(@Param("companyId") String companyId,
+                                      @Param("companyOrgType") String companyOrgType);
 }

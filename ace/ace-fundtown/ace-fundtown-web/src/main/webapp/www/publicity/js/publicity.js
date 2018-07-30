@@ -3,7 +3,7 @@ var ngAppName = "angularjsApp";
 
 var app =angular.module(ngAppName, []);
 app.controller(ngControllerName,function($scope){
-
+var category = "0";
     $.ajax({
         url: "/fundtown/www/info/vipList",
         type:"post",
@@ -33,6 +33,7 @@ app.controller(ngControllerName,function($scope){
     });
 
     $scope.changeTab = function(type, clazz){
+        category = type;
         $(clazz).addClass("active");
         $(clazz).siblings().removeClass("active");
         if(type == '0'){
@@ -70,6 +71,6 @@ app.controller(ngControllerName,function($scope){
     }
 
     $scope.showVipInfo = function(deptId){
-        window.location.href = '/fundtown/www/publicity/pinfo.html?deptId='+deptId;
+        window.location.href = '/fundtown/www/publicity/pinfo.html?deptId='+deptId+'&type='+category;
     }
 });

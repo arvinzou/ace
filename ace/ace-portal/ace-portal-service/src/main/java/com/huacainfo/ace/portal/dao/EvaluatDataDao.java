@@ -21,10 +21,17 @@ public interface EvaluatDataDao {
     int updateByPrimaryKeySelective(EvaluatData record);
     
     List<EvaluatDataVo> findList(@Param("condition") EvaluatDataQVo condition,
-			@Param("start") int start, @Param("limit") int limit,
-			@Param("orderBy") String orderBy);
+                                 @Param("start") int start, @Param("limit") int limit,
+                                 @Param("orderBy") String orderBy);
+
+    List<EvaluatDataVo> findDataList(@Param("condition") EvaluatDataQVo condition,
+                                     @Param("start") int start, @Param("limit") int limit,
+                                     @Param("orderBy") String orderBy);
 
 	int findCount(@Param("condition") EvaluatDataQVo condition);
+
+
+    int getRanking(@Param("condition") EvaluatData condition);
 
 	int isExit(EvaluatData record);
 

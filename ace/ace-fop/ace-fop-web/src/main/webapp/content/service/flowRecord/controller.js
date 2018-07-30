@@ -111,14 +111,17 @@ jQuery(function ($) {
 function preview(id, title, flowType, fromId) {
     var dialogId = "#fc-dialog-message-view";
     var postUrl = cfg.view_load_data_url;
+    var tplId = "";
     if (flowType == '0') {
         id = fromId;
         dialogId = "#c-dialog-message-view";
         postUrl = contextPath + '/fopCompany/selectFopCompanyByPrimaryKey';
+        tplId = 'tpl-company';
     } else if (flowType == '1') {
         id = fromId;
         dialogId = "#a-dialog-message-view";
         postUrl = contextPath + '/fopAssociation/selectFopAssociationByPrimaryKey';
+        tplId = 'tpl-association';
     }
 
     //show dialog
@@ -147,9 +150,9 @@ function preview(id, title, flowType, fromId) {
     $(dialog).parent().css("top", "1px");
     $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
     //render data
-    loadView(id, postUrl, dialogId);
+    loadView(id, postUrl, dialogId, tplId);
 }
-function loadView(id, postUrl, dialogId) {
+function loadView(id, postUrl, dialogId, tplId) {
     $.ajax({
         type: "post",
         url: postUrl,
@@ -159,8 +162,37 @@ function loadView(id, postUrl, dialogId) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
+            // console.log("============================rst.value:" + rst.value)
+            var tpl = document.getElementById(tplId).innerHTML;//'tpl-company'
+            var renderHtml = juicer(tpl, rst.value);
+            // console.log("========================renderHtml:" + renderHtml);
+            $(dialogId).html(renderHtml);
+            //格式化值
             $.each(rst.value, function (key, value) {
-
+                //企业类型 "0": "企业会员", "4": "个人会员"},//, "1": "团体企业", "2": "律师事务所", "3": "银行机构"
+                if (key == "companyType") {
+                    var rst = "";
+                    switch (value) {
+                        case '0' :
+                            rst = "企业会员";
+                            break;
+                        case '1' :
+                            rst = "团体企业";
+                            break;
+                        case '2' :
+                            rst = "律师事务所";
+                            break;
+                        case '3' :
+                            rst = "银行机构";
+                            break;
+                        case '4' :
+                            rst = "个人会员";
+                            break;
+                        default :
+                            rst = "N/A";
+                    }
+                    value = rst;
+                }
                 //status
                 if (key == "status") {
                     if ("1" == value) {

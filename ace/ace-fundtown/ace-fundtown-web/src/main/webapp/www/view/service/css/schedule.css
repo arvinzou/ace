@@ -78,6 +78,13 @@ body {
 
 }
 
+.content .hui:before {
+    background-color: #E4E6E9 !important;
+    border-color: #F6F7F8 !important;
+
+}
+
+
 .blue {
     color: #3283F9 !important;
 }

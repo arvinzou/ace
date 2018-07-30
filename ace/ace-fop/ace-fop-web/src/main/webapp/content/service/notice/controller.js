@@ -156,7 +156,7 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                if (key == 'releaseDate') {
+                if (key == 'noticeType') {
                     value = rsd(value, '127');
                 }
                 if (key == 'status') {

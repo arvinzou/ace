@@ -1,14 +1,13 @@
 package com.huacainfo.ace.fop.web.controller;
+
 import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonKeys;
-import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.portal.service.OAuth2Service;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.apache.commons.collections.map.HashedMap;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-
-import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/www/oauth2")
 /**
@@ -52,7 +51,8 @@ public class OAuth2Controller extends FopBaseController {
     private TaskCmccService taskCmccService;
 
     @RequestMapping(value = "/redirect.do")
-    public void redirect(String code, String state, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void redirect(String code, String state,
+                         HttpServletRequest request, HttpServletResponse response) throws Exception {
         this.logger.info("code->{} state -> {}", code, state);
         logger.info("=========================  start get Userinfo from weixin pltfrom======================");
         SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);

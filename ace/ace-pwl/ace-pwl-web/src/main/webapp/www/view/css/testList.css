@@ -1,0 +1,49 @@
+body {
+    width: 100%;
+    background: url(../img/bg.png) no-repeat;
+    background-size: 100% auto;
+    background-color: #007AFF;
+}
+
+.test_list {
+    margin: 6.52rem auto 1rem;
+    width: 9.6rem;
+    background: url(../img/illustration.png) no-repeat;
+    padding: 2.293333rem 0 0;
+    background-size: 100% auto;
+}
+
+.test_list ul {
+    padding: 0.426666rem 0.2rem 0.533333rem;
+    background-color: #52A5FF;
+}
+
+.test_list ul li {
+    margin-bottom: 0.32rem;
+    width: 100%;
+    display: block;
+    height: 1.6rem;
+    background: url(../img/buttom_bg.png);
+    background-size: 100% 100%;
+    padding: 0.346666rem 0.4rem;
+    overflow: hidden;
+    color: rgba(255, 255, 255, 1);
+
+}
+
+.test_list ul li .buttom {
+    float: right;
+    width: 82px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.test_list ul li span {
+    float: left;
+    overflow: hidden;
+    font-size: 0.373333rem;
+    width: 5.733333rem;
+    display: block;
+    height: 100%;
+    word-wrap: break-word;
+}

@@ -207,11 +207,8 @@
         select t.id,t.name
         from evaluat_type t
         where t.syid=#{params.syid}
-        <if test='params.q !=null and params.q!=""'>
-            and
-            t.id=#{params.q} or t.name like concat('%',#{params.q},'%')
-        </if>
-        order by t.createDate
+        and t.name like concat('%',#{params.q},'%')
+        order by t.sort
         limit 0,20
     </select>
 

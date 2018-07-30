@@ -1,25 +1,22 @@
 $(function () {
     userInfo();
-    $('.list').on('click', 'li', enter);
 })
-
 
 var deptID;
 
 
 function userInfo() {
     var url = "/fundtown/www/process/getMyVipInfo";
-    $.ajaxSettings.async = false;
     $.getJSON(url, function (result) {
         if (result.status == 0) {
             deptID = result.data.deptId;
             viewInfo(result.data);
+            $('li').on('click', enter);
         }
         else {
-            alert("网络异常");
+            alert("没有获取到用户信息。");
         }
     });
-    $.ajaxSettings.async = true;
 }
 
 

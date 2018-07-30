@@ -86,6 +86,8 @@ jQuery(function ($) {
                         var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
                         var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
                         loadText(gd.id);
+                        //
+
                     }
                 })
         });
@@ -294,6 +296,7 @@ function loadText(id) {
         },
         success: function (rst, textStatus) {
             initSimditor($("textarea[name=financeContent]"), rst.value.financeContent);
+            $("input[name=companyId]").attr("value", rst.value.companyName);
         },
         error: function () {
             alert("加载错误！");

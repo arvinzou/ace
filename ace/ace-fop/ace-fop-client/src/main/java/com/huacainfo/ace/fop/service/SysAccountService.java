@@ -70,4 +70,6 @@ public interface SysAccountService {
     ResultResponse destoryAccount(String account);
 
     Map<String, Object> getAccountInfo(String relationId, String relationType);
+
+    ResultResponse destroyAll();
 }

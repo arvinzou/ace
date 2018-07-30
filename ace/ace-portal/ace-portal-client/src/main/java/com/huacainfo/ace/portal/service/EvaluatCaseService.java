@@ -3,6 +3,7 @@ package com.huacainfo.ace.portal.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.EvaluatCase;
 import com.huacainfo.ace.portal.vo.EvaluatCaseVo;
@@ -30,6 +31,9 @@ public interface EvaluatCaseService {
      * @version: 2018-06-09
      */
     public abstract PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition, int start, int limit, String orderBy) throws Exception;
+
+
+    public abstract ResultResponse findEvaluatCaseListVo(EvaluatCaseQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws

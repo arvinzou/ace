@@ -5,7 +5,6 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.api.MessageSendApi;
 import com.huacainfo.ace.common.plugins.wechat.entity.TemplateData;
-import com.huacainfo.ace.common.plugins.wechat.util.XmlKit;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -259,6 +258,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService, Backe
             map.put("wechat", template.getTmplBody());
             map.put("sms", template.getTmplBody());
 //            map.put("innermsg", template.getTmplBody());
+            return map;
         }
         return null;
     }

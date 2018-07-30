@@ -1,0 +1,68 @@
+body {
+    background-color: #F7F9FC;
+    color: #8B8AA6;
+    padding: 0.426666rem 0 1.813333rem;
+    position: relative;
+    min-height: 100vh;
+}
+
+.filing_card {
+    height: 11.493333rem;
+    background: url(../image/card5.png) center no-repeat;
+    width: 10rem;
+    font-size: 0.37rem;
+    line-height: 0.693333rem;
+    background-size: 100% 100%;
+    padding: 3.6rem 0.93rem 0;
+    margin: auto;
+}
+
+.bottom_div {
+    text-align: center;
+    line-height: 1.813333rem;
+    height: 1.813333rem;
+    color: #8B8AA6;
+    font-size: 0.32rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.file_list {
+    padding-left: 0.5rem;
+    position: relative
+}
+
+.file_list1:before {
+    content: "1、";
+}
+
+.file_list2:before {
+    content: "2、";
+}
+
+.file_list3:before {
+    content: "3、";
+}
+
+.file_list4:before {
+    content: "4、";
+}
+
+.file_list5:before {
+    content: "5、";
+}
+
+.file_list6:before {
+    content: "6、";
+}
+
+.file_list:before {
+    position: absolute;
+    left: 0;
+}
+
+.bottom_text .margin {
+    margin-bottom: 0.3rem;
+}
+

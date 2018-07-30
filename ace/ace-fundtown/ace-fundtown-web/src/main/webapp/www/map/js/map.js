@@ -6,17 +6,9 @@ $(function () {
         console.log(parmas);
         viewinfo(parmas.data);
     });
-    $('body').on('click', '#main', hideinfo);
-    myChart.on('dbclick', function (parmas) {
-        console.log(parmas);
-        //viewinfo(parmas.data);
-    });
-
-    var canvas = document.getElementsByTagName('canvas');
-    canvas.addEventListener('click', function (e) {
-        console.log(e);
-    }, false);
+    $('body').on('click', hideinfo);
 })
+
 
 function hideinfo() {
     $('#main').removeClass('mapinfo');
@@ -40,33 +32,11 @@ function viewinfo(data) {
 
 var option = {
     bmap: {
-        center: [111.740883, 29.104013],
+        center: [111.737953, 29.057274],
         zoom: 13,
         roam: true,
     },
-    series: [{
-        name: '本公司',
-        type: 'scatter',
-        coordinateSystem: 'bmap',
-        data: self,
-        symbol: 'image://img/logo.png',
-        symbolSize: 40,
-        label: {
-            normal: {
-                formatter: '{b}',
-                position: 'right',
-                show: false
-            },
-            emphasis: {
-                show: true
-            }
-        },
-        itemStyle: {
-            normal: {
-                color: '#03f'
-            }
-        }
-    },
+    series: [
         {
             name: '游乐',
             type: 'scatter',
@@ -114,17 +84,61 @@ var option = {
             data: yiyuan,
             symbol: 'image://img/yiyuan.png',
             symbolSize: 40,
+        },
+        {
+            name: '本公司',
+            type: 'scatter',
+            coordinateSystem: 'bmap',
+            data: self,
+            symbol: 'image://img/logo.png',
+            symbolSize: 40,
+            label: {
+                normal: {
+                    formatter: '{b}',
+                    position: 'right',
+                    show: false
+                },
+                emphasis: {
+                    show: true
+                }
+            },
+            itemStyle: {
+                normal: {
+                    color: '#03f'
+                }
+            }
         }
     ]
 }
 
 $('.btn_navigation').click(function () {
     var data = $(this).data();
-    wx.openLocation({
-        latitude: data.value[1], // 纬度，浮点数，范围为90 ~ -90
-        longitude: data.value[0], // 经度，浮点数，范围为180 ~ -180。
-        name: data.name, // 位置名
-        address: data.address, // 地址详情说明
-        scale: 13, // 地图缩放级别,整形值,范围从1~28。默认为最大
+    // var url="https://api.map.baidu.com/geoconv/v1/";
+    var datas = {
+        coords: '' + data.value[0] + ',' + data.value[1],
+        ak: 'YZjRB8FYnf7SdG7BfOGQQIGseKlMmTgF',
+        from: 5,
+        to: 3
+    }
+    $.ajax({
+        url: "https://api.map.baidu.com/geoconv/v1/",
+        data: datas,
+        success: function (result) {
+            if (result.status == 0) {
+                var jinweidu = result.result[0];
+                console.log(jinweidu.y);
+                console.log(jinweidu.x);
+                wx.openLocation({
+                    latitude: jinweidu.y, // 纬度，浮点数，范围为90 ~ -90
+                    longitude: jinweidu.x, // 经度，浮点数，范围为180 ~ -180。
+                    name: data.name, // 位置名
+                    address: data.address, // 地址详情说明
+                    scale: 13, // 地图缩放级别,整形值,范围从1~28。默认为最大
+                });
+            }
+        },
+        dataType: "jsonp",
+        jsonp: "callback",//传递给请求处理程序或页面的，用以获得jsonp回调函数名的参数名(一般默认为:callback)
+        jsonpCallback: "flightHandler",
     });
 })

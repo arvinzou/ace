@@ -15,6 +15,11 @@ public class FopCompany implements Serializable {
 
     private String creditCode;
 
+    /**
+     * 所属工商联
+     */
+    private String belongTo;
+
     /***
      * 0-普通企业 1-团体企业 2-律师事务所 3-银行机构 "4": "个人会员"
      */
@@ -98,6 +103,14 @@ public class FopCompany implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getBelongTo() {
+        return belongTo;
+    }
+
+    public void setBelongTo(String belongTo) {
+        this.belongTo = belongTo;
+    }
 
     public String getId() {
         return id;

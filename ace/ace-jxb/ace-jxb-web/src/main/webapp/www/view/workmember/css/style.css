@@ -1,0 +1,47 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.row{
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+body{
+	background: #F7F9FC;
+}
+.title{
+	width: 90%;
+	margin: 0 auto;
+}
+.title p {
+	color: #5C6681;
+	font-size: 0.32rem;
+	padding-top: 0.24rem;
+	padding-bottom: 0.24rem;
+}
+.box{
+	width: 100%;
+	background: #FFFFFF;
+}
+.memberList{
+	width: 90%;
+	margin: 0 auto;
+	padding-top: 0.373333rem;
+	padding-bottom: 0.373333rem;
+	border-bottom: 1px solid #F7F9FC;
+}
+.head{
+	width: 1.613333rem;
+	height: 1.613333rem;
+	border-radius: 0.133333rem;
+}
+.name{
+	color: #1C2843;
+	font-size: 0.426666rem;
+	font-weight: bold;
+}
+.position{
+	color: #5C6681;
+	font-size: 0.32rem;
+	padding-top: 0.52rem;
+}
