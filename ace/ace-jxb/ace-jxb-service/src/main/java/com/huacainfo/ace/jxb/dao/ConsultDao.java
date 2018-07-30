@@ -23,11 +23,10 @@ public interface ConsultDao {
 
     ConsultVo selectVoByPrimaryKey(String id);
 
-    List
-            <ConsultVo> findList(@Param("condition") ConsultQVo condition,
-                                 @Param("start") int start,
-                                 @Param("limit") int limit,
-                                 @Param("orderBy") String orderBy);
+    List<ConsultVo> findList(@Param("condition") ConsultQVo condition,
+                             @Param("start") int start,
+                             @Param("limit") int limit,
+                             @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") ConsultQVo condition);
 

@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.StudioDao;
+import com.huacainfo.ace.jxb.dao.StudioImgDao;
 import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.service.StudioService;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
@@ -34,6 +35,8 @@ public class StudioServiceImpl implements StudioService {
     private StudioDao studioDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private StudioImgDao studioImgDao;
 
     /**
      * @throws
@@ -53,11 +56,10 @@ public class StudioServiceImpl implements StudioService {
     public PageResult<StudioVo> findStudioList(StudioQVo condition, int start,
                                                int limit, String orderBy) throws Exception {
         PageResult<StudioVo> rst = new PageResult<>();
-        List<StudioVo> list = this.studioDao.findList(condition,
-                start, start + limit, orderBy);
+        List<StudioVo> list = studioDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.studioDao.findCount(condition);
+            int allRows = studioDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -200,6 +202,38 @@ public class StudioServiceImpl implements StudioService {
 
         studioVo.setStatus(auditRs);
         return updateStudio(studioVo, curUserProp);
+    }
+
+    /**
+     * 获取我的工作室列表
+     *
+     * @param counselorId 咨询师主键id
+     * @return List<StudioVo>
+     */
+    @Override
+    public List<StudioVo> getStudioList(String counselorId) {
+
+        StudioQVo condition = new StudioQVo();
+        condition.setCounselorId(counselorId);
+
+        return studioDao.findList(condition, 0, 0 + 10, "");
+    }
+
+    /**
+     * 获取工作室详情
+     *
+     * @param studioId 工作室ID
+     * @return StudioVo
+     */
+    @Override
+    public StudioVo getStudioDetail(String studioId) throws Exception {
+        StudioVo studioVo = selectStudioByPrimaryKey(studioId).getValue();
+        if (null == studioVo) {
+            return null;
+        }
+        studioVo.setImgList(studioImgDao.finImgList(studioVo.getId()));
+
+        return studioVo;
     }
 
 }
