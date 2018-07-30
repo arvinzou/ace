@@ -87,8 +87,8 @@ public interface StudioService {
     /**
      * 工作室审核
      *
-     * @param studioId
-     * @param auditRs
+     * @param studioId    工作室ID
+     * @param auditRs     0- 待审核 1-审核通过 2-审核拒绝
      * @param curUserProp @return
      */
     MessageResponse audit(String studioId, String auditRs, UserProp curUserProp) throws Exception;
@@ -100,4 +100,12 @@ public interface StudioService {
      * @return List<StudioVo>
      */
     List<StudioVo> getStudioList(String counselorId);
+
+    /**
+     * 获取工作室详情
+     *
+     * @param studioId 工作室ID
+     * @return StudioVo
+     */
+    StudioVo getStudioDetail(String studioId) throws Exception;
 }

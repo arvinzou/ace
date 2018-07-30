@@ -33,4 +33,5 @@ public interface StudioImgDao {
 
     int isExit(StudioImg record);
 
+    List<StudioImg> finImgList(String id);
 }

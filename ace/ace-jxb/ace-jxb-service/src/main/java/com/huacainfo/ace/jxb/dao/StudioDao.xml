@@ -13,7 +13,7 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, name, level, counselorId, logoImgUrl, status, createDate, introduce
+        id, `name`, `level`, counselorId, logoImgUrl, status, createDate, introduce
   </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -131,16 +131,20 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.ConsultVo">
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.StudioVo">
+        <result column="dutyName" jdbcType="VARCHAR" property="dutyName"/>
+        <result column="dutyHeadImg" jdbcType="VARCHAR" property="dutyHeadImg"/>
     </resultMap>
     <sql id="Vo_Column_List">
-      id, name, level, counselorId, logoImgUrl, status, createDate, introduce
+        c.`name` as dutyName, c.imagePhotoUrl as dutyHeadImg,
+        t.id, t.`name`, t.`level`, t.counselorId, t.logoImgUrl, t.status, t.createDate, t.introduce
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
         from studio t
+        left join counselor c on t.counselorId =c.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -161,6 +165,7 @@
 
     <sql id="whereCondition">
         from studio t
+        left join counselor c on t.counselorId =c.id
         where 1=1
         <if test="condition.counselorId !=null and condition.counselorId !=&quot;&quot;">
             and t.counselorId = #{condition.counselorId,jdbcType=VARCHAR}

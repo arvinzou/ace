@@ -54,15 +54,27 @@ public class WStudioController extends JxbBaseController {
      * 获取我的工作室列表
      */
     @RequestMapping("/getStudioList")
-    public ResultResponse getQRCode(String counselorId) throws Exception {
+    public ResultResponse getStudioList(String counselorId) throws Exception {
         if (StringUtil.isEmpty(counselorId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
         List<StudioVo> voList = studioService.getStudioList(counselorId);
-
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", voList);
     }
 
+
+    /**
+     * 获取我的工作室列表
+     */
+    @RequestMapping("/getStudioDetail")
+    public ResultResponse getStudioDetail(String studioId) throws Exception {
+        if (StringUtil.isEmpty(studioId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        StudioVo studioVo = studioService.getStudioDetail(studioId);
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", studioVo);
+    }
 
 }

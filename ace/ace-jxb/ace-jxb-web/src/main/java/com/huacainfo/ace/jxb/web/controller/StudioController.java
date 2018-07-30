@@ -129,7 +129,7 @@ public class StudioController extends JxbBaseController {
     /***
      *
      * @param studioId 工作室ID
-     * @param auditRs 审核结果 1-审核通过 2-审核拒绝
+     * @param auditRs 审核结果  0- 待审核 1-审核通过 2-审核拒绝
      * @return
      * @throws Exception
      */

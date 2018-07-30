@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.StudioDao;
+import com.huacainfo.ace.jxb.dao.StudioImgDao;
 import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.service.StudioService;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
@@ -34,6 +35,8 @@ public class StudioServiceImpl implements StudioService {
     private StudioDao studioDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private StudioImgDao studioImgDao;
 
     /**
      * @throws
@@ -214,6 +217,23 @@ public class StudioServiceImpl implements StudioService {
         condition.setCounselorId(counselorId);
 
         return studioDao.findList(condition, 0, 0 + 10, "");
+    }
+
+    /**
+     * 获取工作室详情
+     *
+     * @param studioId 工作室ID
+     * @return StudioVo
+     */
+    @Override
+    public StudioVo getStudioDetail(String studioId) throws Exception {
+        StudioVo studioVo = selectStudioByPrimaryKey(studioId).getValue();
+        if (null == studioVo) {
+            return null;
+        }
+        studioVo.setImgList(studioImgDao.finImgList(studioVo.getId()));
+
+        return studioVo;
     }
 
 }
