@@ -84,7 +84,7 @@
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="page_user_profile_1_account.html">
+                                                            <a href="../studio/studio.jsp">
                                                                 <i class="icon-settings"></i>工作室</a>
                                                         </li>
                                                         <li>
@@ -146,7 +146,7 @@
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <input type="text" id="chineseName" class="form-control"
-                                                                       placeholder="" name="name">
+                                                                       placeholder="" name="form_name">
                                                                 <span class="error_message"></span>
                                                                 <div class="form-control-focus"></div>
                                                             </div>
@@ -161,7 +161,7 @@
                                                                 <div class="md-radio-inline">
                                                                     <div class="md-radio">
                                                                         <input type="radio" checked id="checkbox1_8"
-                                                                               name="sex" value="1"
+                                                                               name="form_sex" value="1"
                                                                                class="md-radiobtn">
                                                                         <label for="checkbox1_8">
                                                                             <span class="inc"></span>
@@ -170,13 +170,15 @@
                                                                     </div>
 
                                                                     <div class="md-radio">
-                                                                        <input type="radio" id="checkbox1_9" name="sex"
+                                                                        <input type="radio" id="checkbox1_9"
+                                                                               name="form_sex"
                                                                                value="2"
                                                                                class="md-radiobtn">
                                                                         <label for="checkbox1_9">
                                                                             <span></span>
                                                                             <span class="check"></span>
-                                                                            <span class="box"></span>女</label>
+                                                                            <span class="box"></span>女
+                                                                        </label>
                                                                     </div>
 
                                                                 </div>
@@ -191,7 +193,7 @@
                                                             <div class="col-md-9">
                                                                 <input class="input_style form-control" id="city_edit"
                                                                        type="text"
-                                                                       placeholder="请选择所属区域" name="area"
+                                                                       placeholder="请选择所属区域" name="form_area"
                                                                        autocomplete="off" readonly="true"/>
                                                                 <div class="form-control-focus"></div>
                                                             </div>
@@ -202,7 +204,8 @@
                                                                 <span class="required" aria-required="true">*</span>
                                                             </label>
                                                             <div class="col-md-9">
-                                                                <textarea class="form-control" id="notNull" name="memo"
+                                                                <textarea class="form-control" id="notNull"
+                                                                          name="form_profile"
                                                                           rows="5"></textarea>
                                                                 <span class="error_message"></span>
                                                                 <div class="form-control-focus"></div>
@@ -217,7 +220,7 @@
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control" id="mobilePhone"
                                                                        placeholder=""
-                                                                       name="number">
+                                                                       name="form_mobile">
                                                                 <span class="error_message"></span>
                                                                 <div class="form-control-focus"></div>
                                                             </div>
@@ -231,7 +234,8 @@
                                                             <div class="col-md-9">
                                                                 <div>
                                                                     <div class="headimgbox" id="headimg">
-                                                                        <img class="select_img" id="headimg1"
+                                                                        <img class="select_img form_imagePhotoUrl"
+                                                                             id="headimg1"
                                                                              data-toggle="modal"
                                                                              data-xsize="300" data-ysize="300"
                                                                              data-cover="headimg1"
@@ -250,7 +254,7 @@
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control" id="IDcard"
                                                                        placeholder=""
-                                                                       name="number">
+                                                                       name="form_idCard">
                                                                 <span class="error_message"></span>
                                                                 <div class="form-control-focus"></div>
                                                             </div>
@@ -264,7 +268,8 @@
                                                             <div class="col-md-9 idCardBoxs">
                                                                 <div>
                                                                     <div class="idCardBox">
-                                                                        <img class="select_img" id="IDcardz"
+                                                                        <img class="select_img form_idCardImgUrl"
+                                                                             id="IDcardz"
                                                                              data-cover="IDcardz" data-toggle="modal"
                                                                              data-xsize="240" data-ysize="150"
                                                                              data-target="#img-uploader"
@@ -276,7 +281,7 @@
                                                                 </div>
 
                                                                 <div>
-                                                                    <div class="idCardBox fileUp">
+                                                                    <div class="idCardBox">
                                                                         <img class="select_img" id="IDcardf"
                                                                              data-cover="IDcardf" data-toggle="modal"
                                                                              data-xsize="240" data-ysize="150"
@@ -288,8 +293,9 @@
 
 
                                                                 <div>
-                                                                    <div class="idCardBox fileUp">
-                                                                        <img class="select_img" id="IDcardsc"
+                                                                    <div class="idCardBox">
+                                                                        <img class="select_img form_evidenceImgUrl"
+                                                                             id="IDcardsc"
                                                                              data-cover="IDcardsc" data-toggle="modal"
                                                                              data-xsize="240" data-ysize="150"
                                                                              data-target="#img-uploader"
@@ -306,12 +312,13 @@
                                                                 <span class="required" aria-required="true">*</span>
                                                             </label>
                                                             <div class="col-md-9">
-                                                                <div class="md-radio-list">
-                                                                    <div class="md-radio"><input type="radio"
-                                                                                                 id="radios_1"
-                                                                                                 name="certification"
-                                                                                                 value="2"
-                                                                                                 class="md-radiobtn">
+                                                                <div class="md-radio-list" id="certification">
+                                                                    <div class="md-radio">
+                                                                        <input type="radio"
+                                                                               id="radios_1"
+                                                                               name="form_certification"
+                                                                               value="2"
+                                                                               class="md-radiobtn">
                                                                         <label
                                                                                 for="radios_1"><span class="inc"></span>
                                                                             <span class="check"></span>
@@ -319,7 +326,7 @@
                                                                     </div>
                                                                     <div class="md-radio"><input type="radio"
                                                                                                  id="radios_2"
-                                                                                                 name="certification"
+                                                                                                 name="form_certification"
                                                                                                  value="3"
                                                                                                  class="md-radiobtn">
                                                                         <label
@@ -339,7 +346,7 @@
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control" id="notNull1"
                                                                        placeholder=""
-                                                                       name="number">
+                                                                       name="form_certificateNo">
                                                                 <span class="error_message"></span>
                                                                 <div class="form-control-focus"></div>
                                                             </div>
@@ -353,7 +360,8 @@
                                                             <div class="col-md-9 certificateBoxs">
                                                                 <div>
                                                                     <div class="certificateBox">
-                                                                        <img class="select_img" id="certificateimg"
+                                                                        <img class="select_img form_certificateImgUrl"
+                                                                             id="certificateimg"
                                                                              data-cover="certificateimg"
                                                                              data-toggle="modal"
                                                                              data-xsize="240" data-ysize="150"
@@ -395,8 +403,7 @@
                                                                             name="tags" value="3"
                                                                             class="md-check"> <label
                                                                             for="checkbox_2"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
+                                                                        <span class="check"></span> <span
                                                                                 class="box"></span>父母成长</label></div>
                                                                     <div class="md-checkbox hc-checkbox"><input
                                                                             type="checkbox" id="checkbox_3"
@@ -710,7 +717,7 @@
 
 <style>
     .hc-checkbox {
-        width: 3rem;
+        width: 10rem;
     }
 
     .error_message {

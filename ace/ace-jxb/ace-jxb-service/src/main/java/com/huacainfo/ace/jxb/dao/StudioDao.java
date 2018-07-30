@@ -21,7 +21,11 @@ public interface StudioDao {
 
     int updateByPrimaryKeySelective(Studio record);
 
+    int updateByCounselorIdSelective(Studio record);
+
     StudioVo selectVoByPrimaryKey(String id);
+
+    StudioVo selectVoByCounselorId(String counselorId);
 
     List<StudioVo> findList(@Param("condition") StudioQVo condition,
                             @Param("start") int start,

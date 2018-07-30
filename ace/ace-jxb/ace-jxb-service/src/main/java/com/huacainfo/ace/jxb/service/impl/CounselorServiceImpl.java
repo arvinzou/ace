@@ -168,10 +168,6 @@ public class CounselorServiceImpl implements CounselorService {
         if (CommonUtils.isBlank(o.getEvidenceImgUrl())) {
             return new MessageResponse(1, "身份证持胸前自拍照不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLevel())) {
-            return new MessageResponse(1, "级别不能为空！");
-        }
-
 
         counselorDao.updateByPrimaryKeySelective(o);
         dataBaseLogService.log("变更咨询师", "咨询师", "",

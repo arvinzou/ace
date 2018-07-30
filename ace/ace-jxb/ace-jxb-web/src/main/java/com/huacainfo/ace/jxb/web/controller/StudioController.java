@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.service.StudioService;
@@ -69,10 +70,10 @@ public class StudioController extends JxbBaseController {
      */
     @RequestMapping(value = "/insertStudio")
     @ResponseBody
-    public MessageResponse insertStudio(String jsons) throws Exception {
-        Studio obj = JSON.parseObject(jsons, Studio.class);
+    public MessageResponse insertStudio(Studio obj) throws Exception {
         return this.studioService.insertStudio(obj, this.getCurUserProp());
     }
+
 
     /**
      * @throws
@@ -105,6 +106,23 @@ public class StudioController extends JxbBaseController {
     @ResponseBody
     public SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception {
         return this.studioService.selectStudioByPrimaryKey(id);
+    }
+
+
+    /**
+     * @throws
+     * @Title:selectStudioByPrimaryKey
+     * @Description: TODO(获取工作室)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Studio>
+     * @author: Arvin
+     * @version: 2018-07-28
+     */
+    @RequestMapping(value = "/getMyStudioInfo")
+    @ResponseBody
+    public ResultResponse getMyStudioInfo() throws Exception {
+        return this.studioService.getMyStudioInfo(this.getCurUserProp().getUserId());
     }
 
     /**
