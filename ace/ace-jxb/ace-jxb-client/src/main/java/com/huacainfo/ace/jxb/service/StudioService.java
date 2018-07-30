@@ -8,6 +8,8 @@ import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-07-25
@@ -90,4 +92,12 @@ public interface StudioService {
      * @param curUserProp @return
      */
     MessageResponse audit(String studioId, String auditRs, UserProp curUserProp) throws Exception;
+
+    /**
+     * 获取我的工作室列表
+     *
+     * @param counselorId 咨询师主键id
+     * @return List<StudioVo>
+     */
+    List<StudioVo> getStudioList(String counselorId);
 }

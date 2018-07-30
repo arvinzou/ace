@@ -53,11 +53,10 @@ public class StudioServiceImpl implements StudioService {
     public PageResult<StudioVo> findStudioList(StudioQVo condition, int start,
                                                int limit, String orderBy) throws Exception {
         PageResult<StudioVo> rst = new PageResult<>();
-        List<StudioVo> list = this.studioDao.findList(condition,
-                start, start + limit, orderBy);
+        List<StudioVo> list = studioDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.studioDao.findCount(condition);
+            int allRows = studioDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -200,6 +199,21 @@ public class StudioServiceImpl implements StudioService {
 
         studioVo.setStatus(auditRs);
         return updateStudio(studioVo, curUserProp);
+    }
+
+    /**
+     * 获取我的工作室列表
+     *
+     * @param counselorId 咨询师主键id
+     * @return List<StudioVo>
+     */
+    @Override
+    public List<StudioVo> getStudioList(String counselorId) {
+
+        StudioQVo condition = new StudioQVo();
+        condition.setCounselorId(counselorId);
+
+        return studioDao.findList(condition, 0, 0 + 10, "");
     }
 
 }
