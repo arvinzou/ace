@@ -31,6 +31,6 @@ public interface StudioDao {
 
     int findCount(@Param("condition") StudioQVo condition);
 
-    int isExit(Studio record);
+    List<Studio> isExit(Studio record);
 
 }

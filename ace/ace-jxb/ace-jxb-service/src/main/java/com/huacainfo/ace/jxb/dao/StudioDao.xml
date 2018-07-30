@@ -156,4 +156,15 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="isExit" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from studio
+        where name =#{name,jdbcType=VARCHAR}
+        or studioId = #{studioId,jdbcType=VARCHAR},
+    </select>
+
 </mapper>
