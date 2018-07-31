@@ -244,40 +244,42 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     /**
      * 创建订单
      *
-     * @param data 数据示例：
-     *             {
-     *             --订单基本情况  参考 BaseOrder.java
-     *             "base": {
-     *             "businessId": "businessId",
-     *             "category": "1",
-     *             "commodityId": "commodityId",
-     *             "consumerId": "consumerId"
-     *             },
-     *             --预约详情 参考 ConsultOrder.java
-     *             "consult": {
-     *             "age": 1,
-     *             "info": "Info",
-     *             "name": "Name",
-     *             "relationship": "Relationship",
-     *             "secName": "SecName",
-     *             "secTel": "SecTel",
-     *             "sex": "Sex",
-     *             "tel": "Tel18000"
-     *             }
-     *             }
+     * @param unionid
+     * @param data    数据示例：
+     *                {
+     *                --订单基本情况  参考 BaseOrder.java
+     *                "base": {
+     *                "businessId": "businessId",
+     *                "category": "1",
+     *                "commodityId": "commodityId",
+     *                "consumerId": "consumerId"
+     *                },
+     *                --预约详情 参考 ConsultOrder.java
+     *                "consult": {
+     *                "age": 1,
+     *                "info": "Info",
+     *                "name": "Name",
+     *                "relationship": "Relationship",
+     *                "secName": "SecName",
+     *                "secTel": "SecTel",
+     *                "sex": "Sex",
+     *                "tel": "Tel18000"
+     *                }
+     *                }
      * @return ResultResponse
      */
     @Override
-    public ResultResponse create(String data) throws Exception {
+    public ResultResponse create(String unionid, String data) throws Exception {
         Map<String, Object> params = JsonUtil.toMap(data);
         BaseOrder base = JsonUtil.toObject(params.get("base").toString(), BaseOrder.class);
+        base.setConsumerId(unionid);
         String orderCategory = base.getCategory();
         ResultResponse baseCheck = baseOrderCheck(base);
         if (baseCheck.getStatus() == ResultCode.FAIL) {
             return baseCheck;
         }
         //客户资料
-        Users user = usersService.selectUsersByPrimaryKey(base.getCommodityId()).getValue();
+        Users user = usersService.selectUsersByPrimaryKey(base.getConsumerId()).getValue();
         if (null == user) {
             return new ResultResponse(ResultCode.FAIL, "非法客户资料");
         }

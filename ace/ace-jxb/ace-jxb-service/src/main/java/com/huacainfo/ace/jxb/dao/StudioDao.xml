@@ -170,6 +170,7 @@
         select
         <include refid="Vo_Column_List"/>
         from studio t
+        left join counselor c on t.counselorId =c.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
