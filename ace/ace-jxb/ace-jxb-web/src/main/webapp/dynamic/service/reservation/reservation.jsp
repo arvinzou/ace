@@ -159,47 +159,18 @@
                                                                      data-toggle="buttons">
                                                                     <button type="button" data-target="#modalUpdate"
                                                                             data-toggle="modal"
-                                                                            class="btn btn-circle green btn-sm">修改预约
+                                                                            class="btn btn-circle green btn-sm modify_btn">
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">
                                                             <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
+                                                                <div class="row" id="reservtionInfo">
 
                                                                     <%--content--%>
 
-                                                                    <div><img
-                                                                            src="../../../content/service/information/img/head.png"
-                                                                            alt=""></div>
-                                                                    <div class="col-md-4 col-sm-4 col-xs-12">语音咨询</div>
-                                                                    <div class="col-md-8 col-sm-8 col-xs-12">
-                                                                        100元/次(每次半小时)
-                                                                    </div>
-                                                                    <div class="col-md-4 col-sm-4 col-xs-12">视频咨询</div>
-                                                                    <div class="col-md-8 col-sm-8 col-xs-12">
-                                                                        100元/次(每次半小时)
-                                                                    </div>
-                                                                    <div class="col-md-4 col-sm-4 col-xs-12">面对面咨询</div>
-                                                                    <div class="col-md-8 col-sm-8 col-xs-12">
-                                                                        100元/次(每次半小时)
-                                                                    </div>
-                                                                    <div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-4 col-sm-offset-4">
-                                                                        地点就在哪个地方呢
-                                                                    </div>
-                                                                    <div class="col-md-4 col-sm-4 col-xs-12">咨询对象</div>
-                                                                    <div class="col-md-8 col-sm-8 col-xs-12">小学生</div>
-                                                                    <div class="col-md-4 col-sm-4 col-xs-12">擅长领域</div>
-                                                                    <div class="col-md-8 col-sm-8 col-xs-12">
-                                                                        心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理心理
-                                                                    </div>
 
-
-                                                                    <div class="col-md-4 col-sm-4 col-xs-12">预约须知</div>
-                                                                    <div class="col-md-8 col-sm-8 col-xs-12">
-                                                                        这是预约须知，，，，，，这是预约须知，，，，，，这是预约须知，，，，，，这是预约须知，，，，，，这是预约须知，，，，，，这是预约须知，，，，，，
-                                                                    </div>
                                                                     <%--content--%>
 
                                                                 </div>
@@ -588,12 +559,13 @@
 
                         <div class="form-group form-md-line-input">
                             <label class="col-md-3 control-label">电话咨询
-                                <span class="required" aria-required="true">*</span>
+
                             </label>
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-group-control">
-                                        <input type="text" class="form-control" name="number2" id="money">
+                                        <input type="text" class="form-control" name="type1" id="money_null">
+                                        <span class="error_message"></span>
                                     </div>
                                     <span class="input-group-btn btn-right">
                                         <span type="button"
@@ -611,12 +583,13 @@
 
                         <div class="form-group form-md-line-input">
                             <label class="col-md-3 control-label">微信咨询
-                                <span class="required" aria-required="true">*</span>
+
                             </label>
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-group-control">
-                                        <input type="text" class="form-control" name="number1" id="money1">
+                                        <input type="text" class="form-control" name="type2" id="money1_null">
+                                        <span class="error_message"></span>
                                     </div>
                                     <span class="input-group-btn btn-right">
                                         <span type="button"
@@ -634,34 +607,48 @@
 
                         <div class="form-group form-md-line-input">
                             <label class="col-md-3 control-label">面对面咨询
-                                <span class="required" aria-required="true">*</span>
+
                             </label>
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-group-control">
-                                        <input type="text" class="form-control" name="number2" id="money2">
+                                        <input type="text" class="form-control" name="type3" id="money2_null">
+                                        <span class="error_message"></span>
                                     </div>
                                     <span class="input-group-btn btn-right">
-                                                                                <span type="button"
-                                                                                      class="btn green-haze dropdown-toggle"
-                                                                                      data-toggle="dropdown"
-                                                                                      aria-expanded="false"><font
-                                                                                        style="vertical-align: inherit;"><font
-                                                                                        style="vertical-align: inherit;">元/次(每次30分钟)
-                                                                                    </font></font>
-                                                                                </span>
-                                                                            </span>
+                                        <span type="button"
+                                              class="btn green-haze dropdown-toggle"
+                                              data-toggle="dropdown"
+                                              aria-expanded="false"><font
+                                                style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">元/次(每次30分钟)
+                                            </font></font>
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group form-md-line-input">
-                            <label class="col-md-3 control-label">个人简介
+                            <label class="col-md-3 control-label">面对面咨询地址
+                                <span class="required" aria-required="true">*</span>
+                            </label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" id="city"
+                                          name="form_city"
+                                          rows="3"></textarea>
+                                <span class="error_message"></span>
+                                <div class="form-control-focus"></div>
+
+                            </div>
+                        </div>
+                        <div class="form-group form-md-line-input">
+                            <label class="col-md-3 control-label">预约须知
                                 <span class="required" aria-required="true">*</span>
                             </label>
                             <div class="col-md-9">
                                                                 <textarea class="form-control" id="notNull1"
-                                                                          name="form_introduce"
+                                                                          name="form_info"
                                                                           rows="5"></textarea>
                                 <span class="error_message"></span>
                                 <div class="form-control-focus"></div>
@@ -673,11 +660,40 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" class="btn btn-primary submit_btn">保存</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script id="temp_reservtionInfo" type="text/template">
+
+    <%--<div><img src="" alt="">--%>
+    </div>
+    {@each data.productList as item}
+    {@if item.type==1}
+    <div class="col-md-4 col-sm-4 col-xs-12">语音咨询</div>
+    <div class="col-md-8 col-sm-8 col-xs-12">\${item.price}元/次(每次半小时)</div>
+    {@else if item.type==2}
+    <div class="col-md-4 col-sm-4 col-xs-12">视频咨询</div>
+    <div class="col-md-8 col-sm-8 col-xs-12">\${item.price}元/次(每次半小时)</div>
+    {@else if item.type==3 }
+    <div class="col-md-4 col-sm-4 col-xs-12">面对面咨询</div>
+    <div class="col-md-8 col-sm-8 col-xs-12">\${item.price}元/次(每次半小时)</div>
+    <div class="col-md-4 col-sm-4 col-xs-12">面对面咨询地址</div>
+    <div class="col-md-8 col-sm-8 col-xs-12">
+        \${data.city}
+    </div>
+    {@/if}
+    {@/each}
+    <div class="col-md-4 col-sm-4 col-xs-12">咨询对象</div>
+    <div class="col-md-8 col-sm-8 col-xs-12">\${data.objects}</div>
+    <div class="col-md-4 col-sm-4 col-xs-12">擅长领域</div>
+    <div class="col-md-8 col-sm-8 col-xs-12">\${data.field}</div>
+    <div class="col-md-4 col-sm-4 col-xs-12">预约须知</div>
+    <div class="col-md-8 col-sm-8 col-xs-12">\${data.info}</div>
+
+</script>
 
 
 </body>
@@ -716,6 +732,10 @@
     .portlet-body {
         background-color: #fff !important;
         padding: 41px 98px 45px 20px;
+    }
+
+    .modal-open {
+        overflow-y: hidden !important;
     }
 </style>
 

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.Consult;
 import com.huacainfo.ace.jxb.service.ConsultService;
@@ -58,6 +59,28 @@ public class ConsultController extends JxbBaseController {
         return rst;
     }
 
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(咨询师-预约情况设置分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <ConsultVo>
+     * @author: Arvin
+     * @version: 2018-07-30
+     */
+    @RequestMapping(value = "/modifyConsult")
+    @ResponseBody
+    public MessageResponse modifyConsult(ConsultQVo consult) throws Exception {
+        return this.consultService.modifyConsult(consult, this.getCurUserProp());
+    }
+
+
+
     /**
      * @throws
      * @Title:insertConsult
@@ -106,6 +129,12 @@ public class ConsultController extends JxbBaseController {
     @ResponseBody
     public SingleResult<ConsultVo> selectConsultByPrimaryKey(String id) throws Exception {
         return this.consultService.selectConsultByPrimaryKey(id);
+    }
+
+    @RequestMapping(value = "/getMyConsultInfo")
+    @ResponseBody
+    public ResultResponse getMyConsultInfo() throws Exception {
+        return this.consultService.getMyConsultInfo(this.getCurUserProp().getUserId());
     }
 
     /**

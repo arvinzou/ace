@@ -48,11 +48,13 @@ function App() {
 
 function initvalidateform() {
     $('.form-body').on('blur', 'input', validateInput);
-    $('.form-body').on('focus', 'input', 'textarea', hideHint);
+    $('.form-body').on('focus', 'textarea', hideHint);
+    $('.form-body').on('focus', 'input', hideHint);
 }
 
 
 function hideHint() {
+    console.log(23333333333333333);
     var $that = $(this);
     $that.next().text("");
 }

@@ -114,105 +114,106 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-
-        <script id="temp_counselorList" type="text/template">
-            {@each data as item}
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="mt-card-item">
-                    <div class="mt-card-avatar mt-overlay-1 mt-scroll-left">
-                        <img src="\${item.imagePhotoUrl}">
-                    </div>
-                    <div class="mt-card-content">
-                        <h3 class="mt-card-name"><font
-                                style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">\${item.name}</font></font>
-                        </h3>
-                        <p class="mt-card-desc font-grey-mint"><font
-                                style="vertical-align: inherit;"><font
-                                style="vertical-align: inherit;">\${item.certification}</font></font>
-                        </p>
-                        <div class="mt-card-social" data-id="\${item.id}">
-                            <ul>
-                                <li>
-                                    <a class="info" href="javascript:;">
-                                        详情
-                                    </a>
-                                </li>
-                                {@if item.regAuditRst==0}
-                                <li>
-                                    <a class="pass" href="javascript:;">
-                                        通过
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="refusal" href="javascript:;">
-                                        拒绝
-                                    </a>
-                                </li>
-                                {@else if item.regAuditRst==1}
-                                <li>
-                                    已通过
-                                </li>
-                                {@else}
-                                <li>
-                                    已拒绝
-                                </li>
-                                {@/if}
-                            </ul>
-                        </div>
-                    </div>
+<script id="temp_counselorList" type="text/template">
+    {@each data as item}
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="mt-card-item">
+            <div class="mt-card-avatar mt-overlay-1 mt-scroll-left">
+                <img src="\${item.imagePhotoUrl}">
+            </div>
+            <div class="mt-card-content">
+                <h3 class="mt-card-name"><font
+                        style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">\${item.name}</font></font>
+                </h3>
+                <p class="mt-card-desc font-grey-mint"><font
+                        style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">\${item.certification}</font></font>
+                </p>
+                <div class="mt-card-social" data-id="\${item.id}">
+                    <ul>
+                        <li>
+                            <a class="info" href="javascript:;">
+                                详情
+                            </a>
+                        </li>
+                        {@if item.regAuditRst==0}
+                        <li>
+                            <a class="pass" href="javascript:;">
+                                通过
+                            </a>
+                        </li>
+                        <li>
+                            <a class="refusal" href="javascript:;">
+                                拒绝
+                            </a>
+                        </li>
+                        {@else if item.regAuditRst==1}
+                        <li>
+                            已通过
+                        </li>
+                        {@else}
+                        <li>
+                            已拒绝
+                        </li>
+                        {@/if}
+                    </ul>
                 </div>
             </div>
-            {@/each}
+        </div>
+    </div>
+    {@/each}
 
-        </script>
+</script>
 
 
-        <script id="temp_info" type="text/template">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="headbox">
-                        <img class="headimg" src="\${data.imagePhotoUrl}" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-12">名字</div>
-                    <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12">性别</div>
-                    <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12">手机号码</div>
-                    <div class="col-lg-8 col-md-8 col-sm-12">\${data.mobile}</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12">城市</div>
-                    <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12">职业名称</div>
-                    <div class="col-lg-8 col-md-8 col-sm-12">\${data.certification}</div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">擅长领域</div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">\${data.tags}</div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">职业证书</div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <img src="\${data.certificateImgUrl}"
-                             alt="">
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">手持身份证</div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <img src="\${data.evidenceImgUrl}"
-                             alt="">
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">身份证正面</div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <img src="\${data.idCardImgUrl}"
-                             alt="">
-                    </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">身份证反面</div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <img src="\${data.name}"
-                             alt="">
-                    </div>
-                </div>
+<script id="temp_info" type="text/template">
+    <div class="modal-body">
+        <div class="row">
+            <div class="headbox">
+                <img class="headimg" src="\${data.imagePhotoUrl}" alt="">
             </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">名字</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">性别</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">手机号码</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.mobile}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">城市</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">职业名称</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.certification}</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">擅长领域</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">\${data.tags}</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">职业证书</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.certificateImgUrl}"
+                     alt="">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">手持身份证</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.evidenceImgUrl}"
+                     alt="">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">身份证正面</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.idCardImgUrl}"
+                     alt="">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">身份证反面</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.name}"
+                     alt="">
+            </div>
+        </div>
+    </div>
 
-        </script>
+</script>
 
 
 </body>

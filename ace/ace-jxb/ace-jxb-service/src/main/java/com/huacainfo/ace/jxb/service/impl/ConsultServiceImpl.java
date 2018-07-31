@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -12,6 +13,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.ConsultDao;
 import com.huacainfo.ace.jxb.dao.ConsultProductDao;
 import com.huacainfo.ace.jxb.model.Consult;
+import com.huacainfo.ace.jxb.model.ConsultProduct;
 import com.huacainfo.ace.jxb.service.ConsultService;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.vo.ConsultQVo;
@@ -129,6 +131,82 @@ public class ConsultServiceImpl implements ConsultService {
 
     /**
      * @throws
+     * @Title:insertConsult
+     * @Description: TODO(添加咨询师-咨询预约介绍)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public MessageResponse modifyConsult(ConsultQVo consultQVo, UserProp userProp) throws Exception {
+
+        consultQVo.setId(userProp.getUserId());
+        if (CommonUtils.isBlank(consultQVo.getObjects())) {
+            return new MessageResponse(1, "咨询对象不能为空！");
+        }
+        if (CommonUtils.isBlank(consultQVo.getField())) {
+            return new MessageResponse(1, "擅长领域不能为空！");
+        }
+        if (CommonUtils.isBlank(consultQVo.getInfo())) {
+            return new MessageResponse(1, "预约须知不能为空！");
+        }
+        Consult consult = consultDao.selectByPrimaryKey(consultQVo.getId());
+        if (CommonUtils.isBlank(consult)) {
+            consultQVo.setCreateDate(new Date());
+            consultQVo.setStatus("1");
+            this.consultDao.insertSelective(consultQVo);
+            if (!(CommonUtils.isBlank(consultQVo.getTelephoneCon()) || CommonUtils.isBlank(consultQVo.getWecharCon()) || CommonUtils.isBlank(consultQVo.getFacetofaceCon()))) {
+                return new MessageResponse(1, "咨询方式必须填写一项！");
+            }
+
+            insertconsultProductList(consultQVo);
+        } else {
+            this.consultDao.updateByPrimaryKeySelective(consultQVo);
+            this.consultProductDao.deleteByCounselorId(consultQVo.getId());
+            insertconsultProductList(consultQVo);
+
+        }
+        this.dataBaseLogService.log("添加咨询师-咨询预约介绍", "咨询师-咨询预约介绍", "",
+                consultQVo.getId(), consultQVo.getId(), userProp);
+
+        return new MessageResponse(0, "添加咨询师-咨询预约介绍完成！");
+    }
+
+
+    private void insertconsultProductList(ConsultQVo consultQVo) throws Exception {
+        ConsultProduct consultProduct = new ConsultProduct();
+        consultProduct.setCounselorId(consultQVo.getId());
+        consultProduct.setCreateDate(new Date());
+        consultProduct.setStatus("1");
+        if (!CommonUtils.isBlank(consultQVo.getTelephoneCon())) {
+            consultProduct.setType("1");
+            consultProduct.setPrice(consultQVo.getTelephoneCon());
+            consultProduct.setId(GUIDUtil.getGUID());
+            this.consultProductDao.insertSelective(consultProduct);
+        }
+
+        if (!CommonUtils.isBlank(consultQVo.getWecharCon())) {
+            consultProduct.setType("2");
+            consultProduct.setPrice(consultQVo.getWecharCon());
+            consultProduct.setId(GUIDUtil.getGUID());
+            this.consultProductDao.insertSelective(consultProduct);
+        }
+
+        if (!CommonUtils.isBlank(consultQVo.getFacetofaceCon())) {
+            consultProduct.setType("3");
+            consultProduct.setPrice(consultQVo.getFacetofaceCon());
+            consultProduct.setId(GUIDUtil.getGUID());
+            this.consultProductDao.insertSelective(consultProduct);
+        }
+    }
+
+
+
+    /**
+     * @throws
      * @Title:updateConsult
      * @Description: TODO(更新咨询师-咨询预约介绍)
      * @param: @param o
@@ -185,6 +263,18 @@ public class ConsultServiceImpl implements ConsultService {
         SingleResult<ConsultVo> rst = new SingleResult<>();
         rst.setValue(this.consultDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+
+    @Override
+    public ResultResponse getMyConsultInfo(String id) throws Exception {
+        ConsultVo consultVo = this.consultDao.selectVoByPrimaryKey(id);
+        if (CommonUtils.isBlank(consultVo)) {
+            return new ResultResponse(ResultCode.SUCCESS, "预约信息", null);
+        }
+        List<ConsultProduct> list = this.consultProductDao.findListByCounselorId(id);
+        consultVo.setProductList(list);
+        return new ResultResponse(ResultCode.SUCCESS, "预约信息", consultVo);
     }
 
     /**
