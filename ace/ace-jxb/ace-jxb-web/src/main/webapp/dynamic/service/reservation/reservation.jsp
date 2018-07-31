@@ -587,60 +587,60 @@
                         </div>
 
                         <div class="form-group form-md-line-input">
-                            <label class="col-md-3 control-label"><font
-                                    style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">电话咨询</font></font></label>
+                            <label class="col-md-3 control-label">电话咨询
+                                <span class="required" aria-required="true">*</span>
+                            </label>
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-group-control">
-                                        <input type="text" class="form-control" name="number2"
-                                               placeholder="Placeholder"></div>
+                                        <input type="text" class="form-control" name="number2" id="money">
+                                    </div>
                                     <span class="input-group-btn btn-right">
-                                                                                <span type="button"
-                                                                                      class="btn green-haze dropdown-toggle"
-                                                                                      data-toggle="dropdown"
-                                                                                      aria-expanded="false"><font
-                                                                                        style="vertical-align: inherit;"><font
-                                                                                        style="vertical-align: inherit;">元/次(每次30分钟)
-                                                                                    </font></font>
-                                                                                </span>
-                                                                            </span>
+                                        <span type="button"
+                                              class="btn green-haze dropdown-toggle"
+                                              data-toggle="dropdown"
+                                              aria-expanded="false"><font
+                                                style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">元/次(每次30分钟)
+                                            </font></font>
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group form-md-line-input">
-                            <label class="col-md-3 control-label"><font
-                                    style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">微信咨询</font></font></label>
+                            <label class="col-md-3 control-label">微信咨询
+                                <span class="required" aria-required="true">*</span>
+                            </label>
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-group-control">
-                                        <input type="text" class="form-control" name="number2"
-                                               placeholder="Placeholder"></div>
+                                        <input type="text" class="form-control" name="number1" id="money1">
+                                    </div>
                                     <span class="input-group-btn btn-right">
-                                                                                <span type="button"
-                                                                                      class="btn green-haze dropdown-toggle"
-                                                                                      data-toggle="dropdown"
-                                                                                      aria-expanded="false"><font
-                                                                                        style="vertical-align: inherit;"><font
-                                                                                        style="vertical-align: inherit;">元/次(每次30分钟)
-                                                                                    </font></font>
-                                                                                </span>
-                                                                            </span>
+                                        <span type="button"
+                                              class="btn green-haze dropdown-toggle"
+                                              data-toggle="dropdown"
+                                              aria-expanded="false"><font
+                                                style="vertical-align: inherit;"><font
+                                                style="vertical-align: inherit;">元/次(每次30分钟)
+                                            </font></font>
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group form-md-line-input">
-                            <label class="col-md-3 control-label"><font
-                                    style="vertical-align: inherit;"><font
-                                    style="vertical-align: inherit;">面对面咨询</font></font></label>
+                            <label class="col-md-3 control-label">面对面咨询
+                                <span class="required" aria-required="true">*</span>
+                            </label>
                             <div class="col-md-9">
                                 <div class="input-group">
                                     <div class="input-group-control">
-                                        <input type="text" class="form-control" name="number2"
-                                               placeholder="Placeholder"></div>
+                                        <input type="text" class="form-control" name="number2" id="money2">
+                                    </div>
                                     <span class="input-group-btn btn-right">
                                                                                 <span type="button"
                                                                                       class="btn green-haze dropdown-toggle"
@@ -672,8 +672,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">保存</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

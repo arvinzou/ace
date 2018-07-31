@@ -33,6 +33,7 @@ var verificatRet = {
     companyName: /^[\u4e00-\u9fa5|（|）|(|)]{2,50}$/,
     chineseCharacter: /^[\u4e00-\u9fa5]{2,50}$/,
     chineseName: /^[\u4e00-\u9fa5]{2,5}$/
+    money: /^(([1-9][0-9]{0,9}[.][0-9]{1,2})|([1-9][0-9]{0,9})|([0][.][0-9]{1}[1-9]{1}))$/
 };
 
 
@@ -57,6 +58,37 @@ function validateform(idName) {
         return validateIDcard(idName);
     } else if (idName.indexOf('chineseName') == 0) {
         return validateChineseName(idName);
+    } else if (idName.indexOf('money') == 0) {
+        return validateMoney(idName);
+    }
+}
+
+
+/*金额验证*/
+function validateMoney(idName) {
+    var result = {};//答案容器。
+    var value = isNotNullTrim(idName);
+    if (value) {
+        if (verificatRet.money.test(value)) {
+            result.status = 0;
+            result.message = value;
+            return result;
+        }
+        else {
+            result.status = 1;
+            result.message = "金额格式不对";
+            return result;
+        }
+    } else {
+        if (idName.indexOf('null') != -1) {
+            result.status = 0;
+            result.message = value;
+            return result;
+        } else {
+            result.status = 1;
+            result.message = "必须要填写项！";
+            return result;
+        }
     }
 }
 

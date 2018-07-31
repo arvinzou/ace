@@ -297,7 +297,7 @@ function initIdCardInfo(applyId, divId) {
     $.ajax({
         type: "get",
         url: contextPath + "/cuProjectApply/findResList",
-        data: {applyId: applyId, resTypes: "0,1"},
+        data: {applyId: applyId, resTypes: "0,1,2"},
         success: function (rst, textStatus) {
             console.log(rst.data);
 
@@ -309,7 +309,7 @@ function initOthers(applyId, divId) {
     $.ajax({
         type: "get",
         url: contextPath + "/cuProjectApply/findResList",
-        data: {applyId: applyId, resTypes: "2"},
+        data: {applyId: applyId, resTypes: "3"},
         success: function (rst, textStatus) {
             renderImage(rst.data, divId);
         }
