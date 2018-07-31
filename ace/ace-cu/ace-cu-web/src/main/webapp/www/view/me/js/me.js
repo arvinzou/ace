@@ -98,7 +98,12 @@ app.controller(ngControllerName,function($scope){
         window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
     }
 });
-
+app.filter('to_trusted', function ($sce) {
+        return function (text) {
+            return $sce.trustAsHtml(text);
+        }
+    }
+);
 function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
 	$("#"+divId).siblings().removeClass('dis').addClass('undis');

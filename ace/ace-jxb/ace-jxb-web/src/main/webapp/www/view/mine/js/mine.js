@@ -57,3 +57,7 @@ function sign(){
         }
     });
 }
+
+function myStudio(){
+    window.location.href = contextPath+'/www/view/workroom/index.jsp?id='+consulorId;
+}

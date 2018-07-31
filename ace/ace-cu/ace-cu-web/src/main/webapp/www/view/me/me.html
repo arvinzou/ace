@@ -90,13 +90,14 @@
 							</div>
 							<div class="help_list_right">
 								<p class="help_title" ng-bind="project.title"></p>
-								<p class="help_remark" ng-bind="project.description"></p>
+								<p class="help_remark"  ng-bind-html="project.description | to_trusted"></p>
 								<p class="help_info">
 									<span>已筹集<span ng-if="project.status=='2'" class="money" ng-bind="project.collectAmount"></span>
 												<span ng-if="project.status!='2'" class="money">0</span>
 										元</span>
 									<span style="padding-left: 1rem;" ng-if="project.status=='2'">剩余<span class="money" ng-bind="project.balanceDays"></span>天</span>
-									<span style="padding-left: 1rem;" ng-if="project.status!='2'">未审核</span>
+									<span style="padding-left: 1rem;" ng-if="project.status=='1'">待审核</span>
+									<span style="padding-left: 1rem;" ng-if="project.status=='3'">驳回</span>
 								</p>
 							</div>
 						</div>

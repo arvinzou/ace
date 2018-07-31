@@ -11,6 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
         <jsp:include page="../../../dynamic/common/base.jsp" />
         <script type="text/javascript" src="../../common/js/loader.js"></script>
+		<script type="text/javascript" src="js/act.js"></script>
 	</head>
 
 	<body>
