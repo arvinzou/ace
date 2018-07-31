@@ -136,568 +136,597 @@
                                         <!-- END BEGIN PROFILE SIDEBAR -->
                                         <!-- BEGIN PROFILE CONTENT -->
                                         <div class="profile-content">
-                                            <div class="portlet-body">
-                                                <div class="form-horizontal" novalidate="novalidate">
-                                                    <div class="form-body">
 
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">名字
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" id="chineseName" class="form-control"
-                                                                       placeholder="" name="form_name">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="portlet light portlet-fit">
+
+
+                                                        <div class="portlet-title">
+                                                            <div class="caption">
+                                                                <i class=" icon-layers font-green"></i>
+                                                                <span class="caption-subject font-green bold uppercase"><font
+                                                                        style="vertical-align: inherit;"><font
+                                                                        style="vertical-align: inherit;">信息完善</font></font></span>
                                                             </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-radios">
-                                                            <label class="col-md-3 control-label">性别
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="md-radio-inline">
-                                                                    <div class="md-radio">
-                                                                        <input type="radio" checked id="checkbox1_8"
-                                                                               name="form_sex" value="1"
-                                                                               class="md-radiobtn">
-                                                                        <label for="checkbox1_8">
-                                                                            <span class="inc"></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>男</label>
-                                                                    </div>
-
-                                                                    <div class="md-radio">
-                                                                        <input type="radio" id="checkbox1_9"
-                                                                               name="form_sex"
-                                                                               value="2"
-                                                                               class="md-radiobtn">
-                                                                        <label for="checkbox1_9">
-                                                                            <span></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>女
-                                                                        </label>
-                                                                    </div>
-
+                                                            <div class="actions">
+                                                                <div class="btn-group btn-group-devided"
+                                                                     data-toggle="buttons">
                                                                 </div>
                                                             </div>
                                                         </div>
 
+                                                        <div class="portlet-body">
+                                                            <div class="form-horizontal" novalidate="novalidate">
+                                                                <div class="form-body">
 
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">所在城市
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input class="input_style form-control" id="city_edit"
-                                                                       type="text"
-                                                                       placeholder="请选择所属区域" name="form_area"
-                                                                       autocomplete="off" readonly="true"/>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">名字
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <input type="text" id="chineseName" class="form-control"
+                                                                                   placeholder="" name="form_name">
+                                                                            <span class="error_message"></span>
+                                                                            <div class="form-control-focus"></div>
+                                                                        </div>
+                                                                    </div>
 
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">个人简介
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
+
+                                                                    <div class="form-group form-md-radios">
+                                                                        <label class="col-md-3 control-label">性别
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <div class="md-radio-inline">
+                                                                                <div class="md-radio">
+                                                                                    <input type="radio" checked id="checkbox1_8"
+                                                                                           name="form_sex" value="1"
+                                                                                           class="md-radiobtn">
+                                                                                    <label for="checkbox1_8">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>男</label>
+                                                                                </div>
+
+                                                                                <div class="md-radio">
+                                                                                    <input type="radio" id="checkbox1_9"
+                                                                                           name="form_sex"
+                                                                                           value="2"
+                                                                                           class="md-radiobtn">
+                                                                                    <label for="checkbox1_9">
+                                                                                        <span></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>女
+                                                                                    </label>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">所在城市
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <input class="input_style form-control" id="city_edit"
+                                                                                   type="text"
+                                                                                   placeholder="请选择所属区域" name="form_area"
+                                                                                   autocomplete="off" readonly="true"/>
+                                                                            <div class="form-control-focus"></div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">个人简介
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
                                                                 <textarea class="form-control" id="notNull"
                                                                           name="form_profile"
                                                                           rows="5"></textarea>
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">手机号码
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" id="mobilePhone"
-                                                                       placeholder=""
-                                                                       name="form_mobile">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">形象照
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div>
-                                                                    <div class="headimgbox" id="headimg">
-                                                                        <img class="select_img form_imagePhotoUrl"
-                                                                             id="headimg1"
-                                                                             data-toggle="modal"
-                                                                             data-xsize="300" data-ysize="300"
-                                                                             data-cover="headimg1"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/head.png?v=${cfg.version}">
+                                                                            <span class="error_message"></span>
+                                                                            <div class="form-control-focus"></div>
+                                                                        </div>
                                                                     </div>
-                                                                    <p>形象照</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">身份证号码
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" id="IDcard"
-                                                                       placeholder=""
-                                                                       name="form_idCard">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">身份证
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9 idCardBoxs">
-                                                                <div>
-                                                                    <div class="idCardBox">
-                                                                        <img class="select_img form_idCardImgUrl"
-                                                                             id="IDcardz"
-                                                                             data-cover="IDcardz" data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
-
-
-                                                                    </div>
-                                                                    <p>身份证正面</p>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div class="idCardBox">
-                                                                        <img class="select_img" id="IDcardf"
-                                                                             data-cover="IDcardf" data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>身份证反面</p>
-                                                                </div>
-
-
-                                                                <div>
-                                                                    <div class="idCardBox">
-                                                                        <img class="select_img form_evidenceImgUrl"
-                                                                             id="IDcardsc"
-                                                                             data-cover="IDcardsc" data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>手持身份证</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-radios">
-                                                            <label class="col-md-3 control-label">职业名称
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="md-radio-list" id="certification">
-                                                                    <div class="md-radio">
-                                                                        <input type="radio"
-                                                                               id="radios_1"
-                                                                               name="form_certification"
-                                                                               value="2"
-                                                                               class="md-radiobtn">
-                                                                        <label
-                                                                                for="radios_1"><span class="inc"></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>国家二级咨询师</label>
-                                                                    </div>
-                                                                    <div class="md-radio"><input type="radio"
-                                                                                                 id="radios_2"
-                                                                                                 name="form_certification"
-                                                                                                 value="3"
-                                                                                                 class="md-radiobtn">
-                                                                        <label
-                                                                                for="radios_2"><span class="inc"></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>国家三级咨询师</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">从业资格证证号
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" id="notNull1"
-                                                                       placeholder=""
-                                                                       name="form_certificateNo">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">从业资格证书
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9 certificateBoxs">
-                                                                <div>
-                                                                    <div class="certificateBox">
-                                                                        <img class="select_img form_certificateImgUrl"
-                                                                             id="certificateimg"
-                                                                             data-cover="certificateimg"
-                                                                             data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>从业资格证书</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-checkboxes">
-                                                            <label class="col-md-3 control-label">擅长领域
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="md-checkbox-inline" id="tags">
-                                                                    <div class="md-checkbox hc-checkbox">
-                                                                        <input type="checkbox" id="checkbox_0"
-                                                                               name="tags" value="1" class="md-check">
-                                                                        <label for="checkbox_0">
-                                                                            <span class="inc"></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>
-                                                                            二孩
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">手机号码
+                                                                            <span class="required" aria-required="true">*</span>
                                                                         </label>
+                                                                        <div class="col-md-9">
+                                                                            <input type="text" class="form-control" id="mobilePhone"
+                                                                                   placeholder=""
+                                                                                   name="form_mobile">
+                                                                            <span class="error_message"></span>
+                                                                            <div class="form-control-focus"></div>
+                                                                        </div>
                                                                     </div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_1"
-                                                                            name="tags" value="2"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_1"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>儿童发展</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_2"
-                                                                            name="tags" value="3"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_2"><span class="inc"></span>
-                                                                        <span class="check"></span> <span
-                                                                                class="box"></span>父母成长</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_3"
-                                                                            name="tags" value="4"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_3"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>行为纠正</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_4"
-                                                                            name="tags" value="5"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_4"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>习惯培养</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_5"
-                                                                            name="tags" value="6"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_5"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>育儿困惑</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_6"
-                                                                            name="tags" value="7"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_6"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>亲子冲突</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_7"
-                                                                            name="tags" value="8"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_7"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>厌学</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_8"
-                                                                            name="tags" value="9"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_8"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>自闭症</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_9"
-                                                                            name="tags" value="10"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_9"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>多动症</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_10"
-                                                                            name="tags" value="11"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_10"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>不合群</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_11"
-                                                                            name="tags" value="12"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_11"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>敏感自卑</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_12"
-                                                                            name="tags" value="13"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_12"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>怕生</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_13"
-                                                                            name="tags" value="14"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_13"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>注意力不集中</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_14"
-                                                                            name="tags" value="15"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_14"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>阅读障碍</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_15"
-                                                                            name="tags" value="16"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_15"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>顽皮淘气</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_16"
-                                                                            name="tags" value="17"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_16"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>顽皮淘气</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_17"
-                                                                            name="tags" value="18"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_17"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>孩子叛逆 </label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_18"
-                                                                            name="tags" value="19"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_18"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>小动作</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_19"
-                                                                            name="tags" value="20"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_19"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>网瘾</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_20"
-                                                                            name="tags" value="21"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_20"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>不爱学习</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_21"
-                                                                            name="tags" value="22"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_21"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>攀比心强</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_22"
-                                                                            name="tags" value="23"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_22"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>自控力差</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_23"
-                                                                            name="tags" value="24"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_23"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>早恋</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_24"
-                                                                            name="tags" value="25"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_24"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>沟通问题</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_25"
-                                                                            name="tags" value="26"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_25"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>依赖性强</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_26"
-                                                                            name="tags" value="27"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_26"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>考试焦虑</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_27"
-                                                                            name="tags" value="28"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_27"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>胆小懦弱</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_28"
-                                                                            name="tags" value="29"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_28"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>青春期</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_29"
-                                                                            name="tags" value="30"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_29"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>内向</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_30"
-                                                                            name="tags" value="31"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_30"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>不听话</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_31"
-                                                                            name="tags" value="32"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_31"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>做事拖拉</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_32"
-                                                                            name="tags" value="33"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_32"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>坏习惯</label></div>
-                                                                    <div class="md-checkbox hc-checkbox"><input
-                                                                            type="checkbox" id="checkbox_33"
-                                                                            name="tags" value="34"
-                                                                            class="md-check"> <label
-                                                                            for="checkbox_33"><span class="inc"></span>
-                                                                        <span
-                                                                                class="check"></span> <span
-                                                                                class="box"></span>考前紧张</label></div>
+
+
+                                                                    <div class="form-group form-md-checkboxes">
+                                                                        <label class="control-label col-md-3">形象照
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <div>
+                                                                                <div class="headimgbox" id="headimg">
+                                                                                    <img class="select_img form_imagePhotoUrl"
+                                                                                         id="headimg1"
+                                                                                         data-toggle="modal"
+                                                                                         data-xsize="300" data-ysize="300"
+                                                                                         data-cover="headimg1"
+                                                                                         data-target="#img-uploader"
+                                                                                         src="${pageContext.request.contextPath}/content/service/information/img/head.png?v=${cfg.version}">
+                                                                                </div>
+                                                                                <p>形象照</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">身份证号码
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <input type="text" class="form-control" id="IDcard"
+                                                                                   placeholder=""
+                                                                                   name="form_idCard">
+                                                                            <span class="error_message"></span>
+                                                                            <div class="form-control-focus"></div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group form-md-checkboxes">
+                                                                        <label class="control-label col-md-3">身份证
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9 idCardBoxs">
+                                                                            <div>
+                                                                                <div class="idCardBox">
+                                                                                    <img class="select_img form_idCardImgUrl"
+                                                                                         id="IDcardz"
+                                                                                         data-cover="IDcardz" data-toggle="modal"
+                                                                                         data-xsize="240" data-ysize="150"
+                                                                                         data-target="#img-uploader"
+                                                                                         src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
+
+
+                                                                                </div>
+                                                                                <p>身份证正面</p>
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <div class="idCardBox">
+                                                                                    <img class="select_img" id="IDcardf"
+                                                                                         data-cover="IDcardf" data-toggle="modal"
+                                                                                         data-xsize="240" data-ysize="150"
+                                                                                         data-target="#img-uploader"
+                                                                                         src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
+                                                                                </div>
+                                                                                <p>身份证反面</p>
+                                                                            </div>
+
+
+                                                                            <div>
+                                                                                <div class="idCardBox">
+                                                                                    <img class="select_img form_evidenceImgUrl"
+                                                                                         id="IDcardsc"
+                                                                                         data-cover="IDcardsc" data-toggle="modal"
+                                                                                         data-xsize="240" data-ysize="150"
+                                                                                         data-target="#img-uploader"
+                                                                                         src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
+                                                                                </div>
+                                                                                <p>手持身份证</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group form-md-radios">
+                                                                        <label class="col-md-3 control-label">职业名称
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <div class="md-radio-list" id="certification">
+                                                                                <div class="md-radio">
+                                                                                    <input type="radio"
+                                                                                           id="radios_1"
+                                                                                           name="form_certification"
+                                                                                           value="2"
+                                                                                           class="md-radiobtn">
+                                                                                    <label
+                                                                                            for="radios_1"><span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>国家二级咨询师</label>
+                                                                                </div>
+                                                                                <div class="md-radio"><input type="radio"
+                                                                                                             id="radios_2"
+                                                                                                             name="form_certification"
+                                                                                                             value="3"
+                                                                                                             class="md-radiobtn">
+                                                                                    <label
+                                                                                            for="radios_2"><span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>国家三级咨询师</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">从业资格证证号
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <input type="text" class="form-control" id="notNull1"
+                                                                                   placeholder=""
+                                                                                   name="form_certificateNo">
+                                                                            <span class="error_message"></span>
+                                                                            <div class="form-control-focus"></div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group form-md-checkboxes">
+                                                                        <label class="control-label col-md-3">从业资格证书
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9 certificateBoxs">
+                                                                            <div>
+                                                                                <div class="certificateBox">
+                                                                                    <img class="select_img form_certificateImgUrl"
+                                                                                         id="certificateimg"
+                                                                                         data-cover="certificateimg"
+                                                                                         data-toggle="modal"
+                                                                                         data-xsize="240" data-ysize="150"
+                                                                                         data-target="#img-uploader"
+                                                                                         src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
+                                                                                </div>
+                                                                                <p>从业资格证书</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group form-md-checkboxes">
+                                                                        <label class="col-md-3 control-label">擅长领域
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <div class="md-checkbox-inline" id="tags">
+                                                                                <div class="md-checkbox hc-checkbox">
+                                                                                    <input type="checkbox" id="checkbox_0"
+                                                                                           name="tags" value="1" class="md-check">
+                                                                                    <label for="checkbox_0">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                        二孩
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_1"
+                                                                                        name="tags" value="2"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_1"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>儿童发展</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_2"
+                                                                                        name="tags" value="3"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_2"><span class="inc"></span>
+                                                                                    <span class="check"></span> <span
+                                                                                            class="box"></span>父母成长</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_3"
+                                                                                        name="tags" value="4"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_3"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>行为纠正</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_4"
+                                                                                        name="tags" value="5"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_4"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>习惯培养</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_5"
+                                                                                        name="tags" value="6"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_5"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>育儿困惑</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_6"
+                                                                                        name="tags" value="7"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_6"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>亲子冲突</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_7"
+                                                                                        name="tags" value="8"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_7"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>厌学</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_8"
+                                                                                        name="tags" value="9"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_8"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>自闭症</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_9"
+                                                                                        name="tags" value="10"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_9"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>多动症</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_10"
+                                                                                        name="tags" value="11"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_10"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>不合群</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_11"
+                                                                                        name="tags" value="12"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_11"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>敏感自卑</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_12"
+                                                                                        name="tags" value="13"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_12"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>怕生</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_13"
+                                                                                        name="tags" value="14"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_13"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>注意力不集中</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_14"
+                                                                                        name="tags" value="15"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_14"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>阅读障碍</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_15"
+                                                                                        name="tags" value="16"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_15"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>顽皮淘气</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_16"
+                                                                                        name="tags" value="17"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_16"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>顽皮淘气</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_17"
+                                                                                        name="tags" value="18"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_17"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>孩子叛逆 </label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_18"
+                                                                                        name="tags" value="19"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_18"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>小动作</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_19"
+                                                                                        name="tags" value="20"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_19"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>网瘾</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_20"
+                                                                                        name="tags" value="21"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_20"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>不爱学习</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_21"
+                                                                                        name="tags" value="22"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_21"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>攀比心强</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_22"
+                                                                                        name="tags" value="23"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_22"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>自控力差</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_23"
+                                                                                        name="tags" value="24"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_23"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>早恋</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_24"
+                                                                                        name="tags" value="25"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_24"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>沟通问题</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_25"
+                                                                                        name="tags" value="26"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_25"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>依赖性强</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_26"
+                                                                                        name="tags" value="27"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_26"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>考试焦虑</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_27"
+                                                                                        name="tags" value="28"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_27"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>胆小懦弱</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_28"
+                                                                                        name="tags" value="29"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_28"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>青春期</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_29"
+                                                                                        name="tags" value="30"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_29"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>内向</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_30"
+                                                                                        name="tags" value="31"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_30"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>不听话</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_31"
+                                                                                        name="tags" value="32"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_31"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>做事拖拉</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_32"
+                                                                                        name="tags" value="33"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_32"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>坏习惯</label></div>
+                                                                                <div class="md-checkbox hc-checkbox"><input
+                                                                                        type="checkbox" id="checkbox_33"
+                                                                                        name="tags" value="34"
+                                                                                        class="md-check"> <label
+                                                                                        for="checkbox_33"><span class="inc"></span>
+                                                                                    <span
+                                                                                            class="check"></span> <span
+                                                                                            class="box"></span>考前紧张</label></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">个案时长
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <div class="input-icon right">
+                                                                                <input type="text" class="form-control"
+                                                                                       id="naturalNumber" name="creditcard"
+                                                                                       placeholder="一共从事了多少小时">
+                                                                                <span class="error_message"></span>
+                                                                                <div class="form-control-focus"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group form-md-line-input">
+                                                                        <label class="col-md-3 control-label">个案人数
+                                                                            <span class="required" aria-required="true">*</span>
+                                                                        </label>
+                                                                        <div class="col-md-9">
+                                                                            <div class="input-icon right">
+                                                                                <input type="text" class="form-control"
+                                                                                       id="naturalNumber1" name="creditcard"
+                                                                                       placeholder="一共辅导了多少人">
+                                                                                <span class="error_message"></span>
+                                                                                <div class="form-control-focus"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="row">
+                                                                        <div class="col-md-offset-3 col-md-9">
+                                                                            <button type="reset" class="btn default">重置</button>
+                                                                            <button class="btn green submit_btn">提交</button>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">个案时长
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="input-icon right">
-                                                                    <input type="text" class="form-control"
-                                                                           id="naturalNumber" name="creditcard"
-                                                                           placeholder="一共从事了多少小时">
-                                                                    <span class="error_message"></span>
-                                                                    <div class="form-control-focus"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">个案人数
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="input-icon right">
-                                                                    <input type="text" class="form-control"
-                                                                           id="naturalNumber1" name="creditcard"
-                                                                           placeholder="一共辅导了多少人">
-                                                                    <span class="error_message"></span>
-                                                                    <div class="form-control-focus"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-actions">
-                                                        <div class="row">
-                                                            <div class="col-md-offset-3 col-md-9">
-                                                                <button type="reset" class="btn default">重置</button>
-                                                                <button class="btn green submit_btn">提交</button>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                         </div>
+
+
                                         <!-- END PROFILE CONTENT -->
                                     </div>
                                 </div>
@@ -851,7 +880,7 @@
 
     .portlet-body {
         background-color: #fff !important;
-        padding: 41px 98px 45px 20px;
+        padding: 14px 98px 45px 20px !important;
     }
 </style>
 </body>

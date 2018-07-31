@@ -1,9 +1,14 @@
 window.onload = function () {
     initpage();
     //getCounselorList();
-    $('#counselorList').on('click', '.mt-card-social .info', detailInformation)
-    $('#counselorList').on('click', '.mt-card-social .pass', approved)
-    $('#counselorList').on('click', '.mt-card-social .refusal', auditFailed)
+    $('#counselorList').on('click', '.mt-card-social .info', detailInformation);
+    $('#counselorList').on('click', '.mt-card-social .pass', approved);
+    $('#counselorList').on('click', '.mt-card-social .refusal', auditFailed);
+    $('.search_btn').click(searchList);
+}
+
+function searchList() {
+    
 }
 
 function approved() {
@@ -113,7 +118,7 @@ function detailInformation() {
 
 function initpage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 100,
+        totalCounts: 20,
         pageSize: 20,
         visiblePages: 10,
         currentPage: 1,

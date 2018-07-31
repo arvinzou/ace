@@ -10,11 +10,7 @@ function getMyConsultInfo() {
     $.getJSON(url, function (result) {
         if (result.status == 0) {
             if (result.data) {
-                $('.modify_btn').text("修改预约");
-                viewReservationInfo(result.data);
                 fillForm(result.data);
-            } else {
-                $('.modify_btn').text("创建预约");
             }
         }
     })
@@ -51,13 +47,6 @@ function filloption(tag, tags) {
 }
 
 
-function viewReservationInfo(data) {
-    var navitem = document.getElementById('temp_reservtionInfo').innerHTML;
-    var html = juicer(navitem, {
-        data: data,
-    });
-    $("#reservtionInfo").html(html);
-}
 
 
 function getUserinfo() {

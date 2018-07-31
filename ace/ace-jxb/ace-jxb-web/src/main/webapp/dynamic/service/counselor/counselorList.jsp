@@ -60,19 +60,27 @@
                                                             style="vertical-align: inherit;">咨询师管理</font></font></span>
                                                 </div>
                                                 <div class="actions">
-                                                    <div class="portlet-input input-inline input-small">
-                                                        <div class="input-icon right">
-                                                            <i class="icon-magnifier"></i>
-                                                            <input type="text" class="form-control input-circle"
-                                                                   placeholder="search..."></div>
+                                                    <div class="portlet-input input-inline">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control input-circle-left"
+                                                                   placeholder="search...">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <div class="portlet-body">
-                                                        <div class="mt-element-card mt-card-round mt-element-overlay">
-                                                            <div class="row">
-                                                                <div id="counselorList">
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="mt-element-card mt-card-round mt-element-overlay">
+                                                    <div class="row">
+                                                        <div id="counselorList">
 
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
