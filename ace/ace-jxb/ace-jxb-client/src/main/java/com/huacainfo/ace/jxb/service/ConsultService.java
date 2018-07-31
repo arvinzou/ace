@@ -45,6 +45,8 @@ public interface ConsultService {
      */
     MessageResponse insertConsult(Consult obj, UserProp userProp) throws Exception;
 
+    MessageResponse modifyConsult(ConsultQVo consult, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateConsult
@@ -69,6 +71,8 @@ public interface ConsultService {
      * @version: 2018-07-25
      */
     SingleResult<ConsultVo> selectConsultByPrimaryKey(String id) throws Exception;
+
+    ResultResponse getMyConsultInfo(String id) throws Exception;
 
     /**
      * @throws

@@ -21,7 +21,12 @@
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from consult_product
     where id = #{id,jdbcType=VARCHAR}
-  </delete>
+    </delete>
+
+    <delete id="deleteByCounselorId" parameterType="java.lang.String">
+        delete from consult_product
+        where counselorId = #{id,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.ConsultProduct">
     insert into consult_product (id, counselorId, type, 
       price, status, createDate
@@ -110,4 +115,14 @@
         from consult_product
         where counselorId = #{counselorId,jdbcType=VARCHAR}
     </select>
+
+
+    <select id="findListByCounselorId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from consult_product
+        where counselorId = #{id,jdbcType=VARCHAR}
+    </select>
+
+
 </mapper>

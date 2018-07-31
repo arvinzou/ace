@@ -32,7 +32,7 @@ var verificatRet = {
 
     companyName: /^[\u4e00-\u9fa5|（|）|(|)]{2,50}$/,
     chineseCharacter: /^[\u4e00-\u9fa5]{2,50}$/,
-    chineseName: /^[\u4e00-\u9fa5]{2,5}$/
+    chineseName: /^[\u4e00-\u9fa5]{2,5}$/,
     money: /^(([1-9][0-9]{0,9}[.][0-9]{1,2})|([1-9][0-9]{0,9})|([0][.][0-9]{1}[1-9]{1}))$/
 };
 
