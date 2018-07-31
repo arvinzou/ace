@@ -326,7 +326,7 @@ app.controller(ngControllerName,function($scope){
             var temp = {
                 "resName":"证明文件",
                 "resUrl":coverUrl06,
-                "type":"2"
+                "type":"3"
             }
             list.push(temp);
         }
