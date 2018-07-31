@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>私信</title>
-		<jsp:include page="../../dynamic/common/base.jsp" />
+		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<script type="text/javascript" src="js/act.js"></script>
-		<script type="text/javascript" src="../common/js/loader.js"></script>
+		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
 
 	<body>

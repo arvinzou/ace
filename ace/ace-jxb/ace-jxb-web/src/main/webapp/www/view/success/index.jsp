@@ -9,9 +9,9 @@
 		<meta name="format-detection" content="telephone=no" />
 		<title>预约成功</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
-		<jsp:include page="../../dynamic/common/base.jsp" />
+		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<script type="text/javascript" src="js/act.js"></script>
-		<script type="text/javascript" src="../common/js/loader.js"></script>
+		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
 
 	<body>

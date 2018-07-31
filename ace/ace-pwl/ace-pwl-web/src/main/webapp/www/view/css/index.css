@@ -265,14 +265,6 @@ border-right: 1p solid;*/
     display: none;
 }
 
-.model_testlist .show_score > p {
-    font-size: 0.48rem;
-    font-weight: bold;
-    color: rgba(28, 40, 67, 1);
-    text-align: center;
-    margin-top: 1.066666rem;
-}
-
 
 .model_testlist .show_score .top {
     font-size: 0.32rem;
@@ -295,8 +287,11 @@ border-right: 1p solid;*/
 }
 
 .model_testlist .show_score .pingyu p {
-    font-size: 0.32rem;
-    color: rgba(160, 167, 182, 1);
+    font-size: 0.48rem;
+    font-weight: bold;
+    color: rgba(28, 40, 67, 1);
+    text-align: center;
+    margin-top: 1.066666rem;
 }
 
 .model_testlist .show_score .time_end {
@@ -559,6 +554,7 @@ button {
     bottom: 1rem;
     width: 4rem;
     left: 3rem;
+    z-index: 9;
 }
 
 

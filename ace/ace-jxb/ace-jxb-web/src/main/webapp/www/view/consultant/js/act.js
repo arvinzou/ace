@@ -73,3 +73,7 @@ function consultantList(){
 function showInfo(id){
     window.location.href = contextPath + '/www/counselor/index.jsp?id='+id;
 }
+
+function createOrder(id){
+    window.location.href = contextPath + '/www/view/order/index.jsp?id='+id;
+}

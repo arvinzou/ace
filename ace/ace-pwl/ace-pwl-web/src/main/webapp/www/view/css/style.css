@@ -63,7 +63,7 @@
     left: 0.986666rem;
     display: block;
     content: '';
-    background-position: -3.066666rem -1.173333rem;
+    background-position: -115px -44px;
     width: 0.533333rem;
     height: 0.533333rem;
     background-image: url("../img/icon-body.png");
@@ -79,7 +79,7 @@
     background-position: -115px -88px;
     width: 0.533333rem;
     height: 0.533333rem;
-    background-image: url(".../img/icon-body.png");
+    background-image: url("../img/icon-body.png");
 }
 
 .ques-card-list li:after {
@@ -129,9 +129,10 @@
 .ques-list-image img {
     border-radius: 100%;
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
     border: none;
+    object-fit: cover;
 }
 
 .ques-list-name {
@@ -169,33 +170,33 @@
 
 .item-icon001 {
     background-position: -62px -27px;
-    width: 0.666666rem;
-    height: 0.666666rem;
+    width: 0.6rem;
+    height: 0.6rem;
     display: block;
 }
 
 .item-icon002 {
     background-position: -62px 0;
-    width: 0.666666rem;
-    height: 0.666666rem;
+    width: 0.6rem;
+    height: 0.6rem;
 }
 
 .item-icon003 {
     background-position: -28px -32px;
-    width: 0.666666rem;
-    height: 0.666666rem;
+    width: 0.6rem;
+    height: 0.6rem;
 }
 
 .item-icon004 {
     background-position: 0 -60px;
-    width: 0.666666rem
-    height: 0.666666rem
+    width: 0.6rem;
+    height: 0.6rem;
 }
 
 .item-icon005 {
     background-position: 0 -60px;
-    width: 0.666666rem
-    height: 0.666666rem
+    width: 0.6rem;
+    height: 0.6rem;
 }
 
 .ques-list-box:hover {
