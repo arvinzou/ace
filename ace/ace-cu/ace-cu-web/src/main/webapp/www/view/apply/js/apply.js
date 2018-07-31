@@ -310,7 +310,7 @@ app.controller(ngControllerName,function($scope){
 			var temp = {
 				"resName":"证明文件",
 				"resUrl":coverUrl03,
-				"type":"2"
+				"type":"3"
 			}
 			list.push(temp);
 		}
@@ -318,7 +318,7 @@ app.controller(ngControllerName,function($scope){
 			var temp = {
 				"resName":"证明文件",
 				"resUrl":coverUrl04,
-				"type":"2"
+				"type":"3"
 			}
 			list.push(temp);
 		}

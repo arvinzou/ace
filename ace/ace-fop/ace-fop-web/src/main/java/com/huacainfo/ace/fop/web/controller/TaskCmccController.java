@@ -41,7 +41,6 @@ public class TaskCmccController extends PortalBaseController {
     @ResponseBody
     public MessageResponse insertTaskCmcc(String jsons) throws Exception {
         TaskCmcc o = JSON.parseObject(jsons, TaskCmcc.class);
-//		o.setMsg(o.getMsg()+"【常德市工商联】");
         return this.taskCmccService.insertTaskCmcc(o, this.getCurUserProp());
     }
 
