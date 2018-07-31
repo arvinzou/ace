@@ -2,6 +2,8 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +49,17 @@ public class WOrderController extends JxbBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/create")
-    public ResultResponse create(String data) throws Exception {
+    public ResultResponse create(String unionid, String data) throws Exception {
         if (null == data) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
+        if (StringUtil.isEmpty(unionid)) {
+            Userinfo userinfo = getCurUserinfo();
+            unionid = userinfo.getUnionid();
+        }
 
         try {
-            return baseOrderService.create(data);
+            return baseOrderService.create(unionid, data);
         } catch (CustomException e) {
             return new ResultResponse(ResultCode.FAIL, e.getMsg());
         }

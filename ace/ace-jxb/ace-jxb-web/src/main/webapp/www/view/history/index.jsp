@@ -9,9 +9,9 @@
 		<title>我的咨询</title>
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
-		<jsp:include page="../../dynamic/common/base.jsp" />
+		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<script type="text/javascript" src="js/act.js"></script>
-		<script type="text/javascript" src="../common/js/loader.js"></script>
+		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
 	<body>
 		<div class="nav_box">

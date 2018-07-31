@@ -86,6 +86,8 @@ public interface BaseOrderService {
     /**
      * 创建订单
      *
+     *
+     * @param unionid
      * @param data 数据示例：
      *             {
      *             --订单基本情况  参考 BaseOrder.java
@@ -109,5 +111,5 @@ public interface BaseOrderService {
      *             }
      * @return ResultResponse
      */
-    ResultResponse create(String data) throws Exception;
+    ResultResponse create(String unionid, String data) throws Exception;
 }

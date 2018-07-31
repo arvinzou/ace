@@ -10,9 +10,9 @@
 		<title>咨询师列表</title>
 		<link rel="stylesheet" type="text/css" href="css/base.css"/>
 		<link rel="stylesheet" type="text/css" href="css/style.css"/>
-		<jsp:include page="../../dynamic/common/base.jsp" />
+		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<script type="text/javascript" src="js/act.js"></script>
-		<script type="text/javascript" src="../common/js/loader.js"></script>
+		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
 
 	<body>
@@ -118,7 +118,7 @@
 					<div class="col-xs-9 col-sm-9">
 					<div class="row content_01">
 					<div class="col-xs-6 col-sm-6 left">\${item.name}</div>
-					<div class="col-xs-6 col-sm-6 right online" onclick="window.location.href='/jxb/www/order/index.jsp'">
+					<div class="col-xs-6 col-sm-6 right online" onclick="createOrder('\${item.id}');">
 					<img src="img/online.png" />预约咨询
 					</div>
 					</div>
