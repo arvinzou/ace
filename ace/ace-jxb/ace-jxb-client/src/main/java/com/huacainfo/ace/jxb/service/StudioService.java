@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
@@ -70,6 +71,8 @@ public interface StudioService {
      * @version: 2018-07-25
      */
     SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception;
+
+    ResultResponse getMyStudioInfo(String counselorId) throws Exception;
 
     /**
      * @throws

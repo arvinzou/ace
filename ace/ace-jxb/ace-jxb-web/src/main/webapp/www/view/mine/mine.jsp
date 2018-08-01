@@ -67,7 +67,7 @@
 				</div>
 			</div>
 		</script>
-		<script id="signInfo">
+		<script id="signInfo" type="text/template">
             本月已签到
             \${signCount}
 			天
@@ -83,7 +83,7 @@
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
 			<div class="row menu-li">
-				<div class="col-xs-10 col-sm-10"><p class="menu_title" onclick="window.location.href='../workroom/index.jsp'">我的工作室</p></div>
+				<div class="col-xs-10 col-sm-10"><p class="menu_title" onclick="myStudio();">我的工作室</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
 			<div class="row menu-li">

@@ -40,7 +40,7 @@ function App() {
         callback: function () {
             loader({
                 path: contextPath,
-                url: '/content/service/information/js/upload.js',
+                url: '/content/common/js/upload.js',
                 type: 'js',
                 callback: function () {
                     initUpload();

@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -78,36 +79,35 @@ public class StudioServiceImpl implements StudioService {
      */
     @Override
     public MessageResponse insertStudio(Studio o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
+        o.setCounselorId(userProp.getUserId());
         if (CommonUtils.isBlank(o.getCounselorId())) {
             return new MessageResponse(1, "负责人不能为空！");
         }
         if (CommonUtils.isBlank(o.getIntroduce())) {
             return new MessageResponse(1, "介绍不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
+        List<Studio> temp = this.studioDao.isExit(o);
+        if (temp.size() == 0) {
+            o.setId(GUIDUtil.getGUID());
+            o.setCreateDate(new Date());
+            o.setStatus("0");
+            this.studioDao.insertSelective(o);
+        } else if (temp.size() == 1) {
+            if (!o.getCounselorId().equals(temp.get(0).getCounselorId())) {
+                return new MessageResponse(1, "工作室名字重复！");
+            }
+            this.studioDao.updateByCounselorIdSelective(o);
+
+        } else if (temp.size() > 1) {
+            return new MessageResponse(1, "工作室名字重复！");
         }
 
 
-        int temp = this.studioDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "工作室名称重复！");
-        }
-
-        o.setId(GUIDUtil.getGUID());
-        o.setCreateDate(new Date());
-        o.setStatus("0");
-        this.studioDao.insertSelective(o);
         this.dataBaseLogService.log("添加工作室", "工作室", "",
                 o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "添加工作室完成！");
     }
 
@@ -163,6 +163,24 @@ public class StudioServiceImpl implements StudioService {
         SingleResult<StudioVo> rst = new SingleResult<>();
         rst.setValue(this.studioDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:selectStudioByPrimaryKey
+     * @Description: TODO(获取工作室)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Studio>
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public ResultResponse getMyStudioInfo(String counselorId) throws Exception {
+
+        Studio studio = this.studioDao.selectVoByCounselorId(counselorId);
+        return new ResultResponse(ResultCode.SUCCESS, "工作室信息", studio);
     }
 
     /**

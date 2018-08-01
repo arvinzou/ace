@@ -208,7 +208,7 @@ jQuery(function ($) {
         }
         var taskCmcc = {};
         taskCmcc['msg'] = $('#msg').val();
-        taskCmcc['taskName'] = $('#taskName').val();
+        taskCmcc['taskName'] = "催缴任务[" + new Date().getTime() + "]";// $('#taskName').val();
         taskCmcc['tel'] = tel.join(';');
         //alert(tel.join(';'));
         var json = JSON.stringify(taskCmcc);

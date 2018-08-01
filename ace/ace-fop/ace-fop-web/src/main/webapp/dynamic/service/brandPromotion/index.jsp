@@ -115,19 +115,17 @@
             <span id="click">
 </span>
         </div>
-        <div class="labelItem"><span class="labelItemHeader">
-备注</span>
+        <div class="labelItem">
+            <span class="labelItemHeader">状态</span>
             <br>
-            <span id="remark">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
+            <span id="status"></span>
         </div>
     </div>
+
+    <h5 class="header-title">备注</h5>
+    <div class="row" style="padding:10px" id="remark">
+    </div>
+
     <h5 class="header-title">上传图片</h5>
     <div class="row" style="padding:10px" id="fileUrl">
     </div>

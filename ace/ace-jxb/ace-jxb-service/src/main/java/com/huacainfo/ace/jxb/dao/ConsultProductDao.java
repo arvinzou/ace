@@ -13,6 +13,8 @@ public interface ConsultProductDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByCounselorId(String id);
+
     int insert(ConsultProduct record);
 
     int insertSelective(ConsultProduct record);
@@ -27,6 +29,10 @@ public interface ConsultProductDao {
                                     @Param("start") int start,
                                     @Param("limit") int limit,
                                     @Param("orderBy") String orderBy);
+
+
+    List<ConsultProduct> findListByCounselorId(@Param("id") String id);
+
 
     int findCount(@Param("condition") ConsultProductQVo condition);
 

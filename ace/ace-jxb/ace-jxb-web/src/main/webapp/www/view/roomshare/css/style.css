@@ -1,0 +1,41 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.box{
+	width: 100%;
+}
+.main_box{
+	width: 100%;
+	height: 16.066666rem;
+	background: url(../img/bg.png) no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+}
+.invate_code{
+	width: 2.093333rem;
+	height: 2.093333rem;
+	position: absolute;
+	top: 12.333333rem;
+	left: 3.946666rem;
+	border: 1px solid #000000;
+}
+.invate_code img{
+	width: 100%;
+	height: 100%;
+}
+.footer{
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	bottom: 0.24rem;
+}
+.roomname{
+	color: #FED45E;
+	font-size: 0.373333rem;
+	font-weight: bold;
+}
+.tips{
+	color: #A0A7B6;
+	font-size: 0.32rem;
+}

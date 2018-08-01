@@ -57,58 +57,73 @@
                                                     <i class=" icon-layers font-green"></i>
                                                     <span class="caption-subject font-green bold uppercase"><font
                                                             style="vertical-align: inherit;"><font
-                                                            style="vertical-align: inherit;">圆角</font></font></span>
+                                                            style="vertical-align: inherit;">咨询师管理</font></font></span>
+                                                </div>
+                                                <div class="actions">
+                                                    <div class="portlet-input input-inline">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control input-circle-left"
+                                                                   placeholder="search...">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
                                                 <div class="mt-element-card mt-card-round mt-element-overlay">
                                                     <div class="row">
-
                                                         <div id="counselorList">
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <ul class="pagination" id="pagination1"></ul>
                                         </div>
-                                    </div>
-                                    <ul class="pagination" id="pagination1"></ul>
-                                </div>
-                                <!--=======================================-->
+                                        <!--=======================================-->
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="bottom"></div>
+
+        </div>
+
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
+             aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">咨询师详情</h4>
+                    </div>
+                    <div id="info">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="bottom"></div>
-
 </div>
-
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
-     aria-labelledby="gridSystemModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="gridSystemModalLabel">咨询师详情</h4>
-            </div>
-            <div id="info">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <script id="temp_counselorList" type="text/template">
     {@each data as item}
@@ -133,7 +148,7 @@
                                 详情
                             </a>
                         </li>
-                        <%--{@if item.regAuditRst==0}--%>
+                        {@if item.regAuditRst==0}
                         <li>
                             <a class="pass" href="javascript:;">
                                 通过
@@ -144,15 +159,15 @@
                                 拒绝
                             </a>
                         </li>
-                        <%--{@else if item.regAuditRst==1}--%>
+                        {@else if item.regAuditRst==1}
                         <li>
                             已通过
                         </li>
-                        <%--{@else }--%>
+                        {@else}
                         <li>
                             已拒绝
                         </li>
-                        <%--{@/if}--%>
+                        {@/if}
                     </ul>
                 </div>
             </div>

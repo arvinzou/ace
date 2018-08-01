@@ -75,91 +75,89 @@
 </div>
 
 <div id="dialog-message-view" class="hide">
+    <h5 class="header-title">标题</h5>
+    <div id="title" class="row" style="padding:10px">
+    </div>
+
     <h5 class="header-title">基本信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-标题</span>
-            <br>
-            <span id="title">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
+
+    <div class="labelItem"><span class="labelItemHeader">
 副标题</span>
-            <br>
-            <span id="subTitle">
+        <br>
+        <span id="subTitle">
 </span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
+    </div>
+    <div class="labelItem"><span class="labelItemHeader">
 公告类型</span>
-            <br>
-            <span id="noticeType">
+        <br>
+        <span id="noticeType">
 </span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
+    </div>
+    <div class="labelItem"><span class="labelItemHeader">
 发布时间</span>
-            <br>
-            <span id="releaseDate">
+        <br>
+        <span id="releaseDate">
 </span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">备注</span>
-            <br>
-            <span id="remark"></span>
-        </div>
-        <div class="labelItem hide">
-            <span class="labelItemHeader">状态</span>
-            <br>
-            <span id="status"></span>
-        </div>
     </div>
-
-    <h5 class="header-title">封面地址</h5>
-    <div class="row" style="padding:10px" id="coverUrl">
+    <div class="labelItem">
+        <span class="labelItemHeader">备注</span>
+        <br>
+        <span id="remark"></span>
     </div>
-
-    <h5 class="header-title">内容描述</h5>
-    <div class="row" style="padding:10px" id="description">
+    <div class="labelItem hide">
+        <span class="labelItemHeader">状态</span>
+        <br>
+        <span id="status"></span>
     </div>
+</div>
 
-    <h5 class="header-title">操作信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
+<h5 class="header-title">封面地址</h5>
+<div class="row" style="padding:10px" id="coverUrl">
+</div>
+
+<h5 class="header-title">内容描述</h5>
+<div class="row" style="padding:10px" id="description">
+</div>
+
+<h5 class="header-title">操作信息</h5>
+<div class="row" style="padding:10px">
+    <div class="labelItem"><span class="labelItemHeader">
 创建人编号</span>
-            <br>
-            <span id="createUserId">
+        <br>
+        <span id="createUserId">
 </span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建人姓名</span>
-            <br>
-            <span id="createUserName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
-            <br>
-            <span id="createDate">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编号</span>
-            <br>
-            <span id="lastModifyUserId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
-            <br>
-            <span id="lastModifyUserName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
-            <br>
-            <span id="lastModifyDate">
-</span>
-        </div>
     </div>
+    <div class="labelItem"><span class="labelItemHeader">
+创建人姓名</span>
+        <br>
+        <span id="createUserName">
+</span>
+    </div>
+    <div class="labelItem"><span class="labelItemHeader">
+入库日期</span>
+        <br>
+        <span id="createDate">
+</span>
+    </div>
+    <div class="labelItem"><span class="labelItemHeader">
+最后更新人编号</span>
+        <br>
+        <span id="lastModifyUserId">
+</span>
+    </div>
+    <div class="labelItem"><span class="labelItemHeader">
+最后更新人姓名</span>
+        <br>
+        <span id="lastModifyUserName">
+</span>
+    </div>
+    <div class="labelItem"><span class="labelItemHeader">
+最后更新时间</span>
+        <br>
+        <span id="lastModifyDate">
+</span>
+    </div>
+</div>
 
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
