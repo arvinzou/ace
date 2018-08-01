@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: Arvin
@@ -59,7 +59,13 @@ public class WStudioController extends JxbBaseController {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
-        List<StudioVo> voList = studioService.getStudioList(counselorId);
+        Map<String, Object> voList = null;
+        try {
+            voList = studioService.getStudioList(counselorId);
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
+
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", voList);
     }
 

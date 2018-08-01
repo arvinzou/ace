@@ -1,3 +1,4 @@
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
@@ -20,8 +21,8 @@ public class CommonTest {
 //        String uri = temporary("arvin", accessToken);
 //        System.out.println("======>" + uri);
 
-//        System.out.println(GUIDUtil.getGUID());
-        orderParams();
+        System.out.println(GUIDUtil.getGUID());
+//        orderParams();
     }
 
 
