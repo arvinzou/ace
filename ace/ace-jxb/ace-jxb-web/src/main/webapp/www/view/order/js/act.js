@@ -115,6 +115,7 @@ function initData(id){
     });
 }
 function createOrder(){
+    var content = $("#read").attr("src");
     //基本信息
     var username = $("input[name='username']").val();
     var age = $("input[name='age']").val();
@@ -162,7 +163,10 @@ function createOrder(){
         alert("紧急联系人联系方式不能为空！");
         return;
     }
-
+    if(content.indexOf("no") > 0){
+        alert("请仔细阅读《顾问在线服务协议》");
+        return;
+    }
     var data = {
         //          --订单基本情况
                 "base": {
@@ -263,14 +267,17 @@ function onBridgeReady(obj){
                 window.pay_tag = true;
                 if (res.errMsg == "chooseWXPay:ok") {
                     alert("支付成功！");
-                    WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+                    window.location.href = contextPath + '/www/view/success/index.jsp?id='+primaryId;
+                    /*WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                         if (res.err_msg =="get_brand_wcpay_request:ok")
                         {
                             //  alert("支付成功err_code=" + res.err_code + ",err_desc=" + res.err_desc + ",err_msg=" + res.err_msg);
-                            WeixinJSBridge.invoke('closeWindow', {}, function (res) {
-                            });
+                           /!* WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+
+                            });*!/
+
                         }
-                    });
+                    });*/
 
                 } else {
                     alert("操作失败！");

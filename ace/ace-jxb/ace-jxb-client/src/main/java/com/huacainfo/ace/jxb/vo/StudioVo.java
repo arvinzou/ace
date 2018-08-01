@@ -24,6 +24,19 @@ public class StudioVo extends Studio {
      */
     private List<StudioImg> imgList;
 
+    /**
+     * 工作室成员列表
+     */
+    private List<CounselorVo> memberList;
+
+    public List<CounselorVo> getMemberList() {
+        return memberList;
+    }
+
+    public void setMemberList(List<CounselorVo> memberList) {
+        this.memberList = memberList;
+    }
+
     public List<StudioImg> getImgList() {
         return imgList;
     }

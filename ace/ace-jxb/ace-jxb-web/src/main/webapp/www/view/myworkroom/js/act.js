@@ -16,11 +16,23 @@ function initData(id){
         },
         success:function(result){
             if(result.status == 0) {
-               /* var roomTemp = document.getElementById('roomTemp').innerHTML;
-                var html = juicer(roomTemp, {
-                    data: result.data
+                var roombaseTemp = document.getElementById('roomInfoTemp').innerHTML;
+                var html = juicer(roombaseTemp, {
+                    roombase: result.data
                 });
-                $("#itemList").append(html);*/
+                $(".room_info").append(html);
+
+                var contentTemp = document.getElementById('roomContentTemp').innerHTML;
+                var content = juicer(contentTemp, {
+                    roomContent: result.data
+                });
+                $("#roomContent").append(content);
+
+                var memberTemp = document.getElementById('memberListTemp').innerHTML;
+                var memberHtml = juicer(memberTemp, {
+                    member: result.data
+                });
+                $("#memberList").append(memberHtml);
             }else {
                 alert(result.info);
                 return;
@@ -30,4 +42,8 @@ function initData(id){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function showMember(id){
+    window.location.href = contextPath + '/www/view/workmember/index.jsp?id='+id;
 }

@@ -67,7 +67,7 @@
 				</div>
 			</div>
 		</script>
-		<script id="signInfo">
+		<script id="signInfo" type="text/template">
             本月已签到
             \${signCount}
 			天

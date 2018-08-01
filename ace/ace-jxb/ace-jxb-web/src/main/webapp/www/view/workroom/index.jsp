@@ -20,8 +20,8 @@
 			</div>
 		</div>
 
-		<script id="roomTemp" type="text/template">
-			{@each data as item,index}
+		<script id="myroomTemp" type="text/template">
+			{@each data.my as item,index}
             <div class="row roomlist" onclick="showDetail('\${item.id}');">
                 <div class="room">
                 <div class="col-xs-3 col-sm-3 topsize">
@@ -38,6 +38,19 @@
                 </div>
                 </div>
 			{@/each}
+		</script>
+		<script id="joinroomTemp" type="text/template">
+			<div class="row roomlist" onclick="showDetail('\${joinData.id}');">
+				<div class="room">
+					<div class="col-xs-3 col-sm-3 topsize">
+						<div class="img_box"><img src="\${joinData.logoImgUrl}"/></div>
+					</div>
+					<div class="col-xs-7 col-sm-7 topsize">
+						<p class="workroom_title">\${joinData.name}</p>
+						<p class="workroom_detail"><span class="edge">我加入的 </span></p>
+					</div>
+				</div>
+			</div>
 		</script>
 	</body>
 </html>

@@ -9,7 +9,7 @@ import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -102,7 +102,7 @@ public interface StudioService {
      * @param counselorId 咨询师主键id
      * @return List<StudioVo>
      */
-    List<StudioVo> getStudioList(String counselorId);
+    Map<String, Object> getStudioList(String counselorId) throws Exception;
 
     /**
      * 获取工作室详情
