@@ -27,6 +27,15 @@ function screen01(obj){
 	$("#area").text($(obj).children().text());
 	$('.downlist').hide();
 	$(".lode").hide();
+	var tag = $(obj).text();
+	if(tag.trim() == "不限"){
+	    tag = null;
+    }
+	var data = {
+	    "tags": tag
+    }
+    consultantListByparam(data)
+
 }
 
 function screen02(obj){
@@ -58,6 +67,35 @@ function consultantList(){
                 var html = juicer(sonsultant, {
                     data: result.data.rows
                 });
+                $("#list").append(html);
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function consultantListByparam(data){
+    $.ajax({
+        url: contextPath+ "/www/consult/getCounselorList",
+        type:"post",
+        async:false,
+        data:{
+            tags: data.tags,
+            start: 0,
+            limit: 999
+        },
+        success:function(result){
+            if(result.status == 0) {
+                var sonsultant = document.getElementById('consultant').innerHTML;
+                var html = juicer(sonsultant, {
+                    data: result.data.rows
+                });
+                $("#list").empty();
                 $("#list").append(html);
             }else {
                 alert(result.info);
