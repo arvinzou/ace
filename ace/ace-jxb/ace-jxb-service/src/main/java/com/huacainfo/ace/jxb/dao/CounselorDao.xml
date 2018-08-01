@@ -308,8 +308,8 @@
         left join studio s on s.id = t.studioId
         left join teacher_audit ta on ta.counselorId=t.id
         where 1=1
-        <if test="condition.id !=null and condition.id !=&quot;&quot;">
-            and t.id = #{condition.id,jdbcType=VARCHAR}
+        <if test="condition.studioId !=null and condition.studioId !=&quot;&quot;">
+            and t.studioId = #{condition.studioId,jdbcType=VARCHAR}
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')

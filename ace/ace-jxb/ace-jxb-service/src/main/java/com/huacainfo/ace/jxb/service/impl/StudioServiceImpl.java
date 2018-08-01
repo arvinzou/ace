@@ -2,7 +2,9 @@ package com.huacainfo.ace.jxb.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -11,8 +13,12 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.StudioDao;
 import com.huacainfo.ace.jxb.dao.StudioImgDao;
+import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.Studio;
+import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.StudioService;
+import com.huacainfo.ace.jxb.vo.CounselorQVo;
+import com.huacainfo.ace.jxb.vo.CounselorVo;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -22,7 +28,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("studioService")
 /**
@@ -38,6 +46,8 @@ public class StudioServiceImpl implements StudioService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private StudioImgDao studioImgDao;
+    @Autowired
+    private CounselorService counselorService;
 
     /**
      * @throws
@@ -229,12 +239,29 @@ public class StudioServiceImpl implements StudioService {
      * @return List<StudioVo>
      */
     @Override
-    public List<StudioVo> getStudioList(String counselorId) {
+    public Map<String, Object> getStudioList(String counselorId) throws Exception {
 
+        Counselor counselor = counselorService.selectCounselorByPrimaryKey(counselorId).getValue();
+        if (null == counselor) {
+            throw new CustomException("咨询师资料丢失");
+        }
+        //StudioVo
+        StudioVo join = null;
+        if (StringUtil.isNotEmpty(counselor.getStudioId())) {
+            join = studioDao.selectVoByPrimaryKey(counselor.getStudioId());
+        }
+
+        //我的工作室
         StudioQVo condition = new StudioQVo();
         condition.setCounselorId(counselorId);
+        List<StudioVo> my = studioDao.findList(condition, 0, 0 + 10, "");
 
-        return studioDao.findList(condition, 0, 0 + 10, "");
+
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("my", my);
+        rtnMap.put("join", join);
+
+        return rtnMap;
     }
 
     /**
@@ -250,6 +277,12 @@ public class StudioServiceImpl implements StudioService {
             return null;
         }
         studioVo.setImgList(studioImgDao.finImgList(studioVo.getId()));
+        //查询成员列表
+        CounselorQVo condition = new CounselorQVo();//, int start, int limit, String orderBy
+        condition.setStudioId(studioId);
+        List<CounselorVo> memberList = counselorService.findCounselorList(condition, 0, 0 + 1000, "").getRows();
+
+        studioVo.setMemberList(memberList);
 
         return studioVo;
     }
