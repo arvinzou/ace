@@ -49,20 +49,8 @@
 				</div>
 			</div>
 			<div class="row" style="margin-top: 0.8rem;">
-				<div class="content">
-					<div class="col-xs-5 col-sm-5" style="padding-left: 0;">
-						<p class="member">824个咨询师成员</p>
-						<p class="mystate">你已加入</p>
-					</div>
-					<div class="col-xs-5 col-sm-5">
-						<img class="member_head" src="img/headImg.png" />
-						<img class="member_head overlay" src="img/headImg.png" />
-						<img class="member_head overlay" src="img/headImg.png" />
-						<img class="member_head overlay" src="img/headImg.png" />
-					</div>
-					<div class="col-xs-2 col-sm-2 more" onclick="window.location.href='../workmember/index.jsp'">
-						...
-					</div>
+				<div class="content" id="memberList">
+
 				</div>
 			</div>
 			<div class="row item01">
@@ -104,6 +92,25 @@
 			<p>
 				<span class="introduce">简介：</span> \${roomContent.introduce}
 			</p>
+		</script>
+
+		<script id="memberListTemp" type="text/template">
+			<div class="col-xs-5 col-sm-5" style="padding-left: 0;">
+				<p class="member">\${member.memberList.length}个咨询师成员</p>
+				<p class="mystate">你已加入</p>
+			</div>
+			<div class="col-xs-5 col-sm-5">
+				{@each member.memberList.slice(0,4) as item,index}
+				{@if index == 0}
+				<img class="member_head" src="img/headImg.png" />
+				{@else}
+				<img class="member_head overlay" src="img/headImg.png" />
+				{@/if}
+				{@/each}
+			</div>
+			<div class="col-xs-2 col-sm-2 more" onclick="showMember('\${member.id}')">
+				...
+			</div>
 		</script>
 	</body>
 </html>

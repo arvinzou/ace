@@ -122,7 +122,7 @@
 			
 			<div class="row">
 				<div class="col-xs-1 col-sm-1"><img id="read" class="read" src="img/no.png"/></div>
-				<div class="col-xs-11 col-sm-11"><span class="read_01">我已阅读并同意</span><span class="read_02">《顾问在线服务协议》</span></div>
+				<div class="col-xs-11 col-sm-11"><span class="read_01">我已阅读并同意</span><span class="read_02"><a href="file/readme.docx"> 《顾问在线服务协议》</a></span></div>
 			</div>
 		</div>
 		
