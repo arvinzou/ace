@@ -174,15 +174,8 @@ input[type="checkbox"] {
 }
 
 .bodybg {
-    /*padding-top: 20px;*/
-    /*padding-bottom: 30px;*/
-    /*background-color: #F4F4F4;*/
-
-    /**********************************************************************/
     min-height: 100%;
-    position: absolute;
-    top: 0px;
-    padding-top: 225px;
+    padding-top: 30px;
     box-sizing: border-box;
     padding-bottom: 150px;
     width: 100%;
@@ -409,21 +402,6 @@ input[type="checkbox"] {
     font-size: 14px;
 }
 
-.leftmenu_sondiv {
-    margin: -38px 0 0 199px;
-    display: none;
-    z-index: -10;
-    box-shadow: 1px 1px 2px rgba(50, 50, 50, 0.2);
-}
-
-.leftmenu_sondiv {
-    float: left;
-    position: absolute;
-    border: 1px solid #ddd;
-    background-color: #FFF;
-    padding: 5px;
-    z-index: 0;
-}
 
 .leftmenu_sondiv ul {
     float: left;
@@ -493,15 +471,6 @@ input[type="checkbox"] {
     color: #00a3cd;
 }
 
-.left_menu ul li ul li .sonover {
-    background-color: #fff;
-    color: #00a3cd;
-    border: 1px solid #ddd;
-    border-right: none;
-    z-index: 10;
-    position: relative
-}
-
 .left_menu ul li ul li .sonover span {
     background-color: #fff;
     position: absolute;
@@ -513,7 +482,6 @@ input[type="checkbox"] {
 .unactive {
     background-color: #fff;
     color: #00a3cd;
-    z-index: 10;
     position: relative;
 }
 
@@ -586,14 +554,6 @@ input[type="checkbox"] {
     position: absolute;
     width: 100%;
     top: 18px;
-}
-
-.sh_title01 div {
-    font-weight: bold;
-    font-size: 16px;
-    color: #333;
-    z-index: 1;
-    padding-right: 10px;
 }
 
 .sh_title01 a {
@@ -809,16 +769,6 @@ input[type="checkbox"] {
     right: 12px;
 }
 
-.btn_more ul {
-    background-color: #fff;
-    box-shadow: 2px 1px 5px rgba(0, 0, 0, 0.1), -2px 0px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px 0;
-    display: none;
-    position: absolute;
-    z-index: 10000;
-    border-left: 1px solid #ddd;
-}
-
 .btn_more ul a {
     line-height: 24px;
     padding: 0px 30px 0px 15px;
@@ -844,54 +794,6 @@ input[type="checkbox"] {
 
 .btn_red:hover {
     opacity: 0.8
-}
-
-/**弹出窗口**/
-
-.reveal-modal-bg {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    background: #999;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    display: none;
-    top: 0;
-    left: 0;
-}
-
-.reveal-modal {
-    visibility: hidden;
-    top: 50%;
-    left: 50%;
-    border-radius: 3px;
-    background: #fff;
-    position: absolute;
-    z-index: 101;
-    -webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .5);
-    -moz-box-shadow: 0 0 40px rgba(0, 0, 0, .5);
-    box-shadow: 0 0 40px rgba(0, 0, 0, .5);
-
-}
-
-.reveal-modal.small {
-    width: 200px;
-    margin-left: -140px;
-}
-
-.reveal-modal.medium {
-    width: 400px;
-    margin-left: -240px;
-}
-
-.reveal-modal.large {
-    width: 600px;
-    margin-left: -340px;
-}
-
-.reveal-modal.xlarge {
-    width: 800px;
-    margin-left: -440px;
 }
 
 .close-reveal-modal {
@@ -1674,7 +1576,6 @@ input[type="checkbox"] {
 
 .tabs_02 ul {
     position: relative;
-    z-index: 1;
 }
 
 .tabs_02 li {
@@ -1686,7 +1587,6 @@ input[type="checkbox"] {
     display: block;
     position: absolute;
     clear: both;
-    z-index: -1;
     bottom: 0px;
     width: 100%;
 }
@@ -1833,7 +1733,6 @@ input[type="checkbox"] {
     position: fixed;
     right: 0px;
     top: 35%;
-    z-index: 10000;
 }
 
 .backtop li {
@@ -1856,7 +1755,6 @@ input[type="checkbox"] {
     right: -130px;
     opacity: 0;
     margin-top: -36px;
-    z-index: -1;
     transition: right 0.5s, opacity 0.6S;
     -webkit-transition: right 0.5s, opacity 0.6S;
 }
