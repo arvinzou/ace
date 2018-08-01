@@ -24,7 +24,7 @@
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">
+    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">--%>
     <script src="${pageContext.request.contextPath}/content/service/studio/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
@@ -77,13 +77,23 @@
                                                 <div class="profile-usermenu">
                                                     <ul class="nav">
                                                         <li>
-                                                            <a href="../information/information.jsp">
+                                                            <a href="../userInformation/information.jsp">
                                                                 <i class="icon-home"></i>完善信息
                                                             </a>
                                                         </li>
                                                         <li class="active">
-                                                            <a href="#">
+                                                            <a href="../userStudio/studio.jsp">
                                                                 <i class="icon-settings"></i>工作室</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="../userReservation/reservation.jsp">
+                                                                <i class="icon-settings"></i>预约设置</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="../userOrder/userOrder.jsp">
+                                                                <i class="icon-settings"></i>订单管理</a>
                                                         </li>
                                                         <li>
                                                             <a href="#">
@@ -205,50 +215,47 @@
                 </div>
             </div>
         </div>
-
-        <div class="bottom"></div>
-
     </div>
-
-
-    <style>
-        .hc-checkbox {
-            width: 10rem;
-        }
-
-        .error_message {
-            color: red;
-        }
-
-        .studiologo {
-            width: 100px;
-            height: 100px;
-            overflow: hidden;
-            background-color: #BDE1FF;
-        }
-
-        .studiologo img {
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .studiologo + p {
-            line-height: 1.05rem;
-        }
-
-        .input_style {
-            border-bottom: 1px solid #c2cad8 !important;
-        }
-
-        .portlet-body {
-            background-color: #fff !important;
-            padding: 41px 98px 45px 20px;
-        }
-    </style>
+    <div class="bottom"></div>
 </div>
 </body>
+
+<style>
+    .hc-checkbox {
+        width: 10rem;
+    }
+
+    .error_message {
+        color: red;
+    }
+
+    .studiologo {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        background-color: #BDE1FF;
+    }
+
+    .studiologo img {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .studiologo + p {
+        line-height: 1.05rem;
+    }
+
+    .input_style {
+        border-bottom: 1px solid #c2cad8 !important;
+    }
+
+    .portlet-body {
+        background-color: #fff !important;
+        padding: 41px 98px 45px 20px;
+    }
+</style>
 
 
 </html>

@@ -17,6 +17,7 @@ import com.huacainfo.ace.jxb.constant.PayStatus;
 import com.huacainfo.ace.jxb.dao.BaseOrderDao;
 import com.huacainfo.ace.jxb.dao.ConsultOrderDao;
 import com.huacainfo.ace.jxb.dao.ConsultProductDao;
+import com.huacainfo.ace.jxb.dao.CounselorDao;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
 import com.huacainfo.ace.jxb.model.ConsultProduct;
@@ -56,6 +57,12 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     @Autowired
     private ConsultOrderDao consultOrderDao;
 
+    @Autowired
+    private CounselorDao counselorDao;
+
+
+
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -72,17 +79,31 @@ public class BaseOrderServiceImpl implements BaseOrderService {
      */
     @Override
 
-    public PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition, int start,
-                                                     int limit, String orderBy) throws Exception {
+    public PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<BaseOrderVo> rst = new PageResult<>();
-        List<BaseOrderVo> list = this.baseOrderDao.findList(condition,
-                start, start + limit, orderBy);
+        List<BaseOrderVo> list = this.baseOrderDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.baseOrderDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
+    }
+
+    @Override
+    public ResultResponse findBaseOrderListSencond(BaseOrderQVo condition, int page, int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        List<BaseOrderVo> list = this.baseOrderDao.findList(condition, (page - 1) * limit, limit, orderBy);
+        for (BaseOrderVo item : list) {
+            item.setConsultProduct(this.consultProductDao.selectByPrimaryKey(item.getCommodityId()));
+            item.setCounselor(this.counselorDao.selectByPrimaryKey(item.getBusinessId()));
+        }
+        if (page < 1) {
+            int allRows = this.baseOrderDao.findCount(condition);
+            map.put("total", allRows);
+        }
+        map.put("list", list);
+        return new ResultResponse(ResultCode.SUCCESS, "订单列表", map);
     }
 
     /**
@@ -218,6 +239,26 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         SingleResult<BaseOrderVo> rst = new SingleResult<>();
         rst.setValue(this.baseOrderDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:selectBaseOrderByPrimaryKey
+     * @Description: TODO(获取统一订单)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<BaseOrder>
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public ResultResponse orderInfoByPrimaryKey(String id) throws Exception {
+        BaseOrderVo order = this.baseOrderDao.selectVoByPrimaryKey(id);
+        order.setConsultProduct(this.consultProductDao.selectByPrimaryKey(order.getCommodityId()));
+        order.setCounselor(this.counselorDao.selectByPrimaryKey(order.getBusinessId()));
+        Users user = usersService.selectUsersByPrimaryKey(order.getConsumerId()).getValue();
+        order.setConsumerName(user.getName());
+        return new ResultResponse(ResultCode.SUCCESS, "订单详情", order);
     }
 
     /**

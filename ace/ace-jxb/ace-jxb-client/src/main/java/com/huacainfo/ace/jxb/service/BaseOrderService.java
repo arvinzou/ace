@@ -29,8 +29,10 @@ public interface BaseOrderService {
      * @author: Arvin
      * @version: 2018-07-25
      */
-    PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition,
-                                              int start, int limit, String orderBy) throws Exception;
+    ResultResponse findBaseOrderListSencond(BaseOrderQVo condition, int start, int limit, String orderBy) throws Exception;
+
+
+    PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -69,6 +71,8 @@ public interface BaseOrderService {
      * @version: 2018-07-25
      */
     SingleResult<BaseOrderVo> selectBaseOrderByPrimaryKey(String id) throws Exception;
+
+    ResultResponse orderInfoByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
