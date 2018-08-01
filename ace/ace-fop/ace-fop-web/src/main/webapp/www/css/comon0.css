@@ -1,6 +1,7 @@
 ﻿html, body {
     height: 100%;
-    overflow-y: auto
+    overflow-y: auto;
+    background-color: #F4F4F4;
 }
 * {
     margin: 0px;
@@ -97,7 +98,6 @@ input[type="checkbox"] {
 
 .head ul > li .head_menu_erji {
     position: absolute;
-    z-index: 10000;
     line-height: normal;
     left: 0px;
     border: 1px solid #fff;
@@ -179,11 +179,9 @@ input[type="checkbox"] {
     /*background-color: #F4F4F4;*/
 
     /**********************************************************************/
-    background-color: #F4F4F4;
     min-height: 100%;
     position: absolute;
     top: 0px;
-    z-index: -1;
     padding-top: 225px;
     box-sizing: border-box;
     padding-bottom: 150px;
