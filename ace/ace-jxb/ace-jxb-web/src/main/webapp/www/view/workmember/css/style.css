@@ -9,6 +9,9 @@
 body{
 	background: #F7F9FC;
 }
+.main{
+	width: 100%;
+}
 .title{
 	width: 90%;
 	margin: 0 auto;

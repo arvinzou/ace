@@ -13,25 +13,27 @@
 		<script type="text/javascript" src="js/act.js"></script>
 	</head>
 	<body>
-		<div class="title"><p>成员（20）</p></div>
-		<div class="box">
+        <div class="main">
 
-		</div>
+        </div>
 
 		<script id="memberTemp" type="text/template">
-			{@each data as item,index}
-			<div class="memberList">
-				<div class="row">
-					<div class="col-xs-4 col-sm-4" style="padding-left: 0;">
-						<img class="head" src="\${item.imagePhotoUrl}" />
-					</div>
-					<div class="col-xs-8 col-sm-8" style="padding-left: 0;">
-						<p class="name">\${item.name}</p>
-						<p class="position">\${item.certification}</p>
-					</div>
-				</div>
-			</div>
-			{@/each}
+            <div class="title"><p>成员（\${data.length}）</p></div>
+            <div class="box">
+                {@each data as item,index}
+                <div class="memberList">
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4" style="padding-left: 0;">
+                            <img class="head" src="\${item.imagePhotoUrl}" />
+                        </div>
+                        <div class="col-xs-8 col-sm-8" style="padding-left: 0;">
+                            <p class="name">\${item.name}</p>
+                            <p class="position">\${item.certification}</p>
+                        </div>
+                    </div>
+                </div>
+                {@/each}
+            </div>
 		</script>
 	</body>
 </html>

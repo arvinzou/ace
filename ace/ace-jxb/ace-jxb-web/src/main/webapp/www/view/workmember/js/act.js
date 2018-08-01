@@ -20,7 +20,7 @@ function initData(id){
                 var html = juicer(member, {
                     data: result.data.memberList
                 });
-                $(".box").append(html);
+                $(".main").append(html);
             }else {
                 alert(result.info);
                 return;

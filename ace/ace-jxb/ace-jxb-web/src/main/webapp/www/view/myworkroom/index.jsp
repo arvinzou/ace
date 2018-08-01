@@ -102,9 +102,9 @@
 			<div class="col-xs-5 col-sm-5">
 				{@each member.memberList.slice(0,4) as item,index}
 				{@if index == 0}
-				<img class="member_head" src="img/headImg.png" />
+				<img class="member_head" src="\${item.imagePhotoUrl}" />
 				{@else}
-				<img class="member_head overlay" src="img/headImg.png" />
+				<img class="member_head overlay" src="\${item.imagePhotoUrl}" />
 				{@/if}
 				{@/each}
 			</div>
