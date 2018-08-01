@@ -16,11 +16,17 @@ function initData(id){
         },
         success:function(result){
             if(result.status == 0) {
-               /* var roomTemp = document.getElementById('roomTemp').innerHTML;
-                var html = juicer(roomTemp, {
-                    data: result.data
+                var roombaseTemp = document.getElementById('roomInfoTemp').innerHTML;
+                var html = juicer(roombaseTemp, {
+                    roombase: result.data
                 });
-                $("#itemList").append(html);*/
+                $(".room_info").append(html);
+
+                var contentTemp = document.getElementById('roomContentTemp').innerHTML;
+                var content = juicer(contentTemp, {
+                    roomContent: result.data
+                });
+                $("#roomContent").append(content);
             }else {
                 alert(result.info);
                 return;
