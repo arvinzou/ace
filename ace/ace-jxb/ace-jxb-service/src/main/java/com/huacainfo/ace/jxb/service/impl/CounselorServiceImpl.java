@@ -13,10 +13,12 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.CounselorDao;
+import com.huacainfo.ace.jxb.dao.StudioDao;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
+import com.huacainfo.ace.jxb.vo.StudioVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +40,10 @@ public class CounselorServiceImpl implements CounselorService {
     Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private CounselorDao counselorDao;
+
+    @Autowired
+    private StudioDao studioDao;
+
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -66,6 +72,19 @@ public class CounselorServiceImpl implements CounselorService {
             rst.setTotal(allRows);
         }
         return rst;
+    }
+
+    @Override
+    public ResultResponse findMyCounselors(CounselorQVo condition, int start, int limit, String orderBy) throws Exception {
+        StudioVo obj = studioDao.selectVoByCounselorId(condition.getId());
+        condition.setId("");
+        condition.setStudioId(obj.getId());
+        List<CounselorVo> list = counselorDao.findList(condition, start, start + limit, orderBy);
+        int allRows = counselorDao.findCount(condition);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", list);
+        map.put("total", allRows);
+        return new ResultResponse(ResultCode.SUCCESS, "单个工作室中的成员", map);
     }
 
     /**

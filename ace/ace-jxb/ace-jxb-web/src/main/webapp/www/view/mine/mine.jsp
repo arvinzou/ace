@@ -78,6 +78,15 @@
 				<div class="col-xs-5 col-sm-5"><p class="sign_info"></p></div>
 				<div class="col-xs-4 col-sm-4"><span class="sign_btn" onclick="sign();">立即签到</span></div>
 			</div>
+			<div class="row menu-li">
+				<div class="col-xs-7 col-sm-7"><p class="menu_title">是否在线</p></div>
+				<div class="col-xs-3 col-sm-3">
+					<img id="offline" src="img/switch_off.png" style="width: 1.346666rem;height: 0.64rem;" onclick="switchOffline();"/>
+				</div>
+				<div class="col-xs-2 col-sm-2">
+					<img class="next" src="img/next.png"/>
+				</div>
+			</div>
 			<div class="row menu-li" onclick="window.location.href='mycount.jsp'">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的账户</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>

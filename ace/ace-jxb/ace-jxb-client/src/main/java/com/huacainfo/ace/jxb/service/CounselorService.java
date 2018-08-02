@@ -32,8 +32,9 @@ public interface CounselorService {
      * @author: Arvin
      * @version: 2018-07-20
      */
-    PageResult<CounselorVo> findCounselorList(CounselorQVo condition,
-                                              int start, int limit, String orderBy) throws Exception;
+    PageResult<CounselorVo> findCounselorList(CounselorQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    ResultResponse findMyCounselors(CounselorQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws

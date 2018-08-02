@@ -4,6 +4,12 @@
     background: transparent url(../img/top_tel.png) no-repeat 0 0;
 }
 
+/*.box {*/
+/*margin-top: 10px;*/
+/*width: 316px;*/
+/*float: left;*/
+/*}*/
+
 .list_frame {
     width: 314px;
     height: 446px;
@@ -102,7 +108,7 @@
 
 .list_item .cover .img {
     display: block;
-    width: 1.4rem;
+    width: 2.8rem;
     height: 1.4rem;
     object-fit: cover;
 }
@@ -133,6 +139,11 @@ a {
 a:hover {
     color: #535353;
     text-decoration: none;
+}
+
+.green {
+    color: green;
+    font-size: 30px;
 }
 
 .add_item {
@@ -200,19 +211,18 @@ a:hover {
 }
 
 .target {
-    max-width: 504px;
-    max-height: 504px;
+    max-width: 300px;
+    max-height: 300px;
 }
 
 .modal-lg1100 {
-    width: 1100px !important;
+    width: 1100px;
 }
 
 .preview-pane {
     width: 300px;
-    height: 300px;
+    height: 150px;
     overflow: hidden;
-    background-color: #cccccc;
 }
 
 .preview {

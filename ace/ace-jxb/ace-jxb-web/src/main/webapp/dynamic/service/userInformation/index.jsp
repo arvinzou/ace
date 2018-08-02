@@ -25,8 +25,7 @@
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
 
-    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">--%>
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">
     <script src="${pageContext.request.contextPath}/content/service/information/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 
@@ -71,32 +70,31 @@
                                                 <!-- END SIDEBAR USER TITLE -->
                                                 <!-- SIDEBAR BUTTONS -->
                                                 <div class="profile-userbuttons">
-                                                    <button type="button" class="btn btn-circle green btn-sm">Follow
+                                                    <button type="button" class="btn btn-circle green btn-sm"
+                                                            onclick="javascript:window.location.href='../userInformation/index.jsp'">
+                                                        个人信息
                                                     </button>
-                                                    <button type="button" class="btn btn-circle red btn-sm">Message
+                                                    <button type="button" class="btn btn-circle red btn-sm"
+                                                            onclick="javascript:window.location.href='../userStudio/index.jsp'">
+                                                        工作室信息
                                                     </button>
                                                 </div>
                                                 <!-- END SIDEBAR BUTTONS -->
                                                 <!-- SIDEBAR MENU -->
                                                 <div class="profile-usermenu">
                                                     <ul class="nav">
-                                                        <li class="active">
-                                                            <a href="../userInformation/information.jsp">
-                                                                <i class="icon-home"></i>完善信息
-                                                            </a>
-                                                        </li>
                                                         <li>
-                                                            <a href="../userStudio/studio.jsp">
-                                                                <i class="icon-settings"></i>工作室</a>
+                                                            <a href="../userStudioStaff/index.jsp">
+                                                                <i class="icon-settings"></i>工作室管理</a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="../userReservation/reservation.jsp">
+                                                            <a href="../userReservation/index.jsp">
                                                                 <i class="icon-settings"></i>预约设置</a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="../userOrder/userOrder.jsp">
+                                                            <a href="../userOrder/index.jsp">
                                                                 <i class="icon-settings"></i>订单管理</a>
                                                         </li>
                                                         <li>

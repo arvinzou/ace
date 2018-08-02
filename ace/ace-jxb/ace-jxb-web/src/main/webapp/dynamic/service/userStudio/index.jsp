@@ -24,8 +24,8 @@
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/reservation/css/style.css">
-    <script src="${pageContext.request.contextPath}/content/service/reservation/js/act.js?v=${cfg.version}"></script>
+    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">--%>
+    <script src="${pageContext.request.contextPath}/content/service/studio/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
@@ -67,33 +67,32 @@
                                                 <!-- END SIDEBAR USER TITLE -->
                                                 <!-- SIDEBAR BUTTONS -->
                                                 <div class="profile-userbuttons">
-                                                    <button type="button" class="btn btn-circle green btn-sm">Follow
+                                                    <button type="button" class="btn btn-circle green btn-sm"
+                                                            onclick="javascript:window.location.href='../userInformation/index.jsp'">
+                                                        个人信息
                                                     </button>
-                                                    <button type="button" class="btn btn-circle red btn-sm">Message
+                                                    <button type="button" class="btn btn-circle red btn-sm"
+                                                            onclick="javascript:window.location.href='../userStudio/index.jsp'">
+                                                        工作室信息
                                                     </button>
                                                 </div>
                                                 <!-- END SIDEBAR BUTTONS -->
                                                 <!-- SIDEBAR MENU -->
                                                 <div class="profile-usermenu">
                                                     <ul class="nav">
-                                                        <li>
-                                                            <a href="../information/information.jsp">
-                                                                <i class="icon-home"></i>完善信息
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="../studio/studio.jsp">
-                                                                <i class="icon-settings"></i>工作室</a>
+                                                        <li class="active">
+                                                            <a href="../userStudioStaff/index.jsp">
+                                                                <i class="icon-settings"></i>工作室管理</a>
                                                         </li>
 
-                                                        <li class="active">
-                                                            <a href="#">
+                                                        <li>
+                                                            <a href="../userReservation/index.jsp">
                                                                 <i class="icon-settings"></i>预约设置</a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#">
-                                                                <i class="icon-info"></i> Help </a>
+                                                            <a href="../userOrder/index.jsp">
+                                                                <i class="icon-settings"></i>订单管理</a>
                                                         </li>
                                                         <li>
                                                             <a href="#">
@@ -144,38 +143,71 @@
                                         <!-- END BEGIN PROFILE SIDEBAR -->
                                         <!-- BEGIN PROFILE CONTENT -->
                                         <div class="profile-content">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase"><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">预约设置</font></font></span>
+                                            <div class="portlet-body">
+                                                <div class="form-horizontal" novalidate="novalidate">
+                                                    <div class="form-body">
+
+                                                        <div class="form-group form-md-line-input">
+                                                            <label class="col-md-3 control-label">名字
+                                                                <span class="required" aria-required="true">*</span>
+                                                            </label>
+                                                            <div class="col-md-9">
+                                                                <input type="text" id="notNull" class="form-control"
+                                                                       placeholder="" name="form_name">
+                                                                <span class="error_message"></span>
+                                                                <div class="form-control-focus"></div>
                                                             </div>
                                                         </div>
-                                                        <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
 
-                                                                    <%--content--%>
+                                                        <div class="form-group form-md-checkboxes">
+                                                            <label class="control-label col-md-3">工作室logo
+                                                                <span class="required" aria-required="true">*</span>
+                                                            </label>
+                                                            <div class="col-md-9">
+                                                                <div>
+                                                                    <div class="studiologo" id="studiologo">
+                                                                        <img class="select_img form_logoImgUrl"
+                                                                             id="logo" data-cover="logo"
+                                                                             data-toggle="modal"
+                                                                             data-xsize="300" data-ysize="300"
+                                                                             data-target="#img-uploader"
+                                                                             src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
+                                                                    </div>
+                                                                    <p>工作室logo</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
 
-                                                                    <%--content--%>
+                                                        <div class="form-group form-md-line-input">
+                                                            <label class="col-md-3 control-label">个人简介
+                                                                <span class="required" aria-required="true">*</span>
+                                                            </label>
+                                                            <div class="col-md-9">
+                                                                <textarea class="form-control" id="notNull1"
+                                                                          name="form_introduce"
+                                                                          rows="5"></textarea>
+                                                                <span class="error_message"></span>
+                                                                <div class="form-control-focus"></div>
+                                                            </div>
+                                                        </div>
 
+                                                        <div class="form-actions">
+                                                            <div class="row">
+                                                                <div class="col-md-offset-3 col-md-9">
+                                                                    <button type="reset" class="btn default">重置</button>
+                                                                    <button class="btn green submit_btn">提交</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- END PROFILE CONTENT -->
                                         </div>
-
-                                        <!-- END PROFILE CONTENT -->
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -183,20 +215,46 @@
             </div>
         </div>
     </div>
-
     <div class="bottom"></div>
-
 </div>
-
+</body>
 
 <style>
+    .hc-checkbox {
+        width: 10rem;
+    }
+
+    .error_message {
+        color: red;
+    }
+
+    .studiologo {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        background-color: #BDE1FF;
+    }
+
+    .studiologo img {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .studiologo + p {
+        line-height: 1.05rem;
+    }
+
+    .input_style {
+        border-bottom: 1px solid #c2cad8 !important;
+    }
+
     .portlet-body {
         background-color: #fff !important;
         padding: 41px 98px 45px 20px;
     }
 </style>
-</div>
-</body>
 
 
 </html>
