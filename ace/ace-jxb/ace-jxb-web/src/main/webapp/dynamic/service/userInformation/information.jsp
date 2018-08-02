@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/city-select.css">
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
@@ -222,12 +223,15 @@
                                                                         <label class="col-md-3 control-label">所在城市
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
-                                                                        <div class="col-md-9">
-                                                                            <input class="input_style form-control" id="city_edit"
-                                                                                   type="text"
-                                                                                   placeholder="请选择所属区域" name="form_area"
-                                                                                   autocomplete="off" readonly="true"/>
-                                                                            <div class="form-control-focus"></div>
+                                                                        <div class="col-md-9 city-select"
+                                                                             id="single-select-1">
+                                                                            <%--<input class="input_style form-control" id="city_edit"--%>
+                                                                            <%--type="text"--%>
+                                                                            <%--placeholder="请选择所属区域" name="form_area"--%>
+                                                                            <%--autocomplete="off" readonly="true"/>--%>
+                                                                            <input type="text" class="input-search"
+                                                                                   value="" placeholder="请选择城市"/>
+                                                                            <span class="error_message"></span>
                                                                         </div>
                                                                     </div>
 
@@ -811,79 +815,6 @@
         border-bottom: 1px solid #c2cad8 !important;
     }
 
-    ._citys {
-        width: 450px;
-        display: inline-block;
-        border: 2px solid #eee;
-        padding: 5px;
-        position: relative;
-    }
-
-    ._citys span {
-        color: #1A56A8;
-        height: 15px;
-        width: 15px;
-        line-height: 15px;
-        text-align: center;
-        border-radius: 3px;
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        border: 1px solid #1A56A8;
-        cursor: pointer;
-    }
-
-    ._citys0 {
-        width: 95%;
-        height: 34px;
-        line-height: 34px;
-        display: inline-block;
-        border-bottom: 2px solid #1A56A8;
-        padding: 0px 5px;
-        font-size: 14px;
-        font-weight: bold;
-        margin-left: 6px;
-        background-color: #ffffff;
-    }
-
-    ._citys0 li {
-        display: inline-block;
-        line-height: 34px;
-        font-size: 15px;
-        color: #888;
-        width: 80px;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    ._citys1 {
-        width: 100%;
-        display: inline-block;
-        padding: 10px 0;
-        background-color: #ffffff
-    }
-
-    ._citys1 a {
-        width: 83px;
-        height: 35px;
-        display: inline-block;
-        background-color: #f5f5f5;
-        color: #666;
-        margin-left: 6px;
-        margin-top: 3px;
-        line-height: 35px;
-        text-align: center;
-        cursor: pointer;
-        font-size: 12px;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    ._citys1 a:hover {
-        color: #fff;
-        background-color: #1A56A8;
-    }
-
     .AreaS {
         background-color: #05920a !important;
         color: #fff !important;
@@ -893,6 +824,19 @@
         background-color: #fff !important;
         padding: 14px 98px 45px 20px !important;
     }
+
+    /*.city-select .city-info {*/
+    /*border: 1px solid #ccc;*/
+    /*background-color: #fcfcfc;*/
+    /*cursor: pointer;*/
+    /*width: 280px;*/
+    /*overflow: hidden;*/
+    /*padding: 8px;*/
+    /*padding-top: 0;*/
+    /*position: relative;*/
+    /*z-index: 2;*/
+    /*}*/
+
 </style>
 </body>
 
