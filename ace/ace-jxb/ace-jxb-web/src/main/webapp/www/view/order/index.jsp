@@ -128,7 +128,7 @@
 		
 		<div class="row footer">
 			<div class="col-xs-6 col-sm-6 amount">
-				<span class="amount_01">共计</span><span class="amount_02">¥</span><span class="amount_03">100</span>
+				<span class="amount_01">共计</span><span class="amount_02">¥</span><span class="amount_03" id="totalMoney">100</span>
 			</div>
 			<div class="col-xs-6 col-sm-6">
 				<button class="appointment" onclick="createOrder();">立即预约</button>
