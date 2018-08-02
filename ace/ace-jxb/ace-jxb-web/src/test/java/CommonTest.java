@@ -1,4 +1,4 @@
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
@@ -20,8 +20,16 @@ public class CommonTest {
 //        String accessToken = "12_w2b662E5tXvLLGRewt84yVZWraYqjlsgNXVa-514hFjiQX7AQUuOumHDJFX8r8UdQZp8D3Kp2BZHrPflp8qYBNTT6eWk136IqLgddioQqTftHx1ldHOepP9rqHQxQ4aiNvZPeP1zAdOLaFKsKIKbAAAAYA";
 //        String uri = temporary("arvin", accessToken);
 //        System.out.println("======>" + uri);
+        String nowDate = DateUtil.getNow();
+        String nowYear = nowDate.substring(0, 4);
+        String nowMonth = nowDate.substring(5, 7);
+        String nowDay = nowDate.substring(8, 10);
+        String todayDate = nowDate.substring(0, 10);//只含年月日 demo：2018-08-02
 
-        System.out.println(GUIDUtil.getGUID());
+        System.out.println(nowYear + "|xxx");
+        System.out.println(nowMonth + "|xxx");
+        System.out.println(nowDay + "|xxx");
+        System.out.println(todayDate + "|xxx");
 //        orderParams();
     }
 

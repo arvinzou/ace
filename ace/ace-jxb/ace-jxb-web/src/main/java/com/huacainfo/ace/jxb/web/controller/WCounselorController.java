@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.CounselorService;
+import com.huacainfo.ace.jxb.service.MemberSignLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WCounselorController extends JxbBaseController {
     @Autowired
     private CounselorService counselorService;
+    @Autowired
+    private MemberSignLogService memberSignLogService;
 
     /**
      * 每日签到
@@ -26,12 +29,12 @@ public class WCounselorController extends JxbBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/signIn")
-    public ResultResponse signIn(String counselorId) {
+    public ResultResponse signIn(String counselorId) throws Exception {
         if (StringUtil.isEmpty(counselorId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
-        return new ResultResponse(ResultCode.SUCCESS, "签到成功");
+        return memberSignLogService.signIn(counselorId);
     }
 
 
