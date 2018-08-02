@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
@@ -63,9 +64,19 @@ public class CounselorController extends JxbBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
+
+
+    @RequestMapping(value = "/findMyCounselors")
+    @ResponseBody
+    public ResultResponse findMyCounselors(CounselorQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setId(this.getCurUserProp().getUserId());
+        return counselorService.findMyCounselors(condition, (page.getPage() - 1) * page.getLimit(), page.getLimit(), page.getOrderBy());
+    }
+
+
+
 
     /**
      * @throws
@@ -149,6 +160,14 @@ public class CounselorController extends JxbBaseController {
     public SingleResult<CounselorVo> getMyinfo() throws Exception {
         return counselorService.selectCounselorByPrimaryKey(this.getCurUserProp().getUserId());
     }
+
+
+    @RequestMapping(value = "/getCounselorInfo")
+    @ResponseBody
+    public SingleResult<CounselorVo> getCounselorInfo(String id) throws Exception {
+        return counselorService.selectCounselorByPrimaryKey(id);
+    }
+
 
     /**
      * @throws

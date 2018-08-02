@@ -67,9 +67,13 @@
                                                 <!-- END SIDEBAR USER TITLE -->
                                                 <!-- SIDEBAR BUTTONS -->
                                                 <div class="profile-userbuttons">
-                                                    <button type="button" class="btn btn-circle green btn-sm">Follow
+                                                    <button type="button" class="btn btn-circle green btn-sm"
+                                                            onclick="javascript:window.location.href='../userInformation/index.jsp'">
+                                                        个人信息
                                                     </button>
-                                                    <button type="button" class="btn btn-circle red btn-sm">Message
+                                                    <button type="button" class="btn btn-circle red btn-sm"
+                                                            onclick="javascript:window.location.href='../userStudio/studio.jsp'">
+                                                        工作室信息
                                                     </button>
                                                 </div>
                                                 <!-- END SIDEBAR BUTTONS -->
@@ -77,22 +81,17 @@
                                                 <div class="profile-usermenu">
                                                     <ul class="nav">
                                                         <li>
-                                                            <a href="../userInformation/information.jsp">
-                                                                <i class="icon-home"></i>完善信息
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="../userStudio/studio.jsp">
-                                                                <i class="icon-settings"></i>工作室</a>
+                                                            <a href="../userStudioStaff/index.jsp">
+                                                                <i class="icon-settings"></i>工作室管理</a>
                                                         </li>
 
                                                         <li>
-                                                            <a href="../userReservation/reservation.jsp">
+                                                            <a href="../userReservation/index.jsp">
                                                                 <i class="icon-settings"></i>预约设置</a>
                                                         </li>
 
                                                         <li class="active">
-                                                            <a href="../userOrder/userOrder.jsp">
+                                                            <a href="../userOrder/index.jsp">
                                                                 <i class="icon-settings"></i>订单管理</a>
                                                         </li>
                                                         <li>

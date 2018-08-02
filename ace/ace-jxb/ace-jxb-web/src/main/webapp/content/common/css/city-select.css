@@ -80,7 +80,7 @@ a {
 .city-select {
     font-size: 0;
     position: relative;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 
 .city-select .city-cont dl, .city-select .city-txt {
