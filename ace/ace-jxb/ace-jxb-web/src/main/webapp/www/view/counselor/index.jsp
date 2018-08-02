@@ -31,8 +31,8 @@
 				<span class="chat_icon"><img src="img/chat_icon.png"/></span>
 				<span>聊一聊</span>
 			</div>
-			<div class="col-xs-7 col-sm-7">
-				<button class="appointment">立即预约</button>
+			<div class="col-xs-7 col-sm-7" id="createOrder">
+
 			</div>
 		</div>
 
@@ -121,6 +121,10 @@
         </div>
         </div>
 	</script>
+
+		<script id="createOrderTemp" type="text/template">
+			<button class="appointment" onclick="createOrder('\${counselor.id}');">立即预约</button>
+		</script>
 	</body>
 
 </html>
