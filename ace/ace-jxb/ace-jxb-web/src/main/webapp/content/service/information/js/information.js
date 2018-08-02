@@ -3,6 +3,7 @@ var upimgObject;
 
 function storeObject() {
     upimgObject = $(this);
+
 }
 
 var areaCode;
@@ -22,6 +23,29 @@ window.onload = function () {
         SelCity(document.getElementById("city"), e);
     });
     $('.submit_btn').click(submitForm);
+
+
+    var singleSelect1 = $('#single-select-1').citySelect({
+        dataJson: cityData,
+        multiSelect: false,
+        whole: false,
+        shorthand: true,
+        search: true,
+        addInputClass: 'form-control',
+        onInit: function () {
+            console.log(this)
+        },
+        onTabsAfter: function (target) {
+            console.log(target)
+        },
+        onCallerAfter: function (target, values) {
+            console.log(JSON.stringify(values))
+        }
+    });
+
+    // 单选设置城市
+    singleSelect1.setCityVal('110100');
+
 };
 
 
