@@ -41,3 +41,7 @@ function initData(primaryId){
 function showDetail(id){
     window.location.href = contextPath + '/www/view/myworkroom/index.jsp?id='+id;
 }
+
+function invate(id){
+    window.location.href = contextPath + '/www/view/workroom/invate.jsp?id='+id;
+}
