@@ -50,6 +50,8 @@ function closeTips() {
 }
 
 function add(){
+    //初始化增加减少的分量
+    $("#num").text("1");
     if(unitPrice == null || unitPrice == undefined){
         alert("请先选择咨询方式！");
         return;
@@ -57,8 +59,10 @@ function add(){
 	var num = parseInt($("#num").text());
 	num ++;
 	$("#num").text(num);
+    $("#totalMoney").text(num * unitPrice);
 }
 function reduce(){
+    $("#num").text("1");
     if(unitPrice == null || unitPrice == undefined){
         alert("请先选择咨询方式！");
         return;
@@ -70,6 +74,7 @@ function reduce(){
 		alert("次数至少是1");
 	}
 	$("#num").text(num);
+    $("#totalMoney").text(num * unitPrice);
 }
 function changeSex(obj,value){
 	$(obj).removeClass("unchecked").addClass("checked");
@@ -82,6 +87,7 @@ function changeType(obj, priceStr, id){
 	$(obj).parent().siblings().children().removeClass("active").addClass("unactive");
     unitPrice = parseInt(priceStr);
     commodityId = id;
+    $("#totalMoney").text(unitPrice);
 }
 function initData(id){
     $.ajax({

@@ -28,6 +28,12 @@ function findDetail(id){
                     data: result.data,
                 });
                 $("#consulor").html(html);
+
+                var orderTemp = document.getElementById('createOrderTemp').innerHTML;
+                var orderhtml = juicer(orderTemp, {
+                    counselor: result.data.counselorVo,
+                });
+                $("#createOrder").html(orderhtml);
             }else {
                 alert(result.info);
                 return;
@@ -37,4 +43,8 @@ function findDetail(id){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function createOrder(id){
+    window.location.href = contextPath + '/www/view/order/index.jsp?id='+id;
 }

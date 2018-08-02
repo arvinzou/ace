@@ -368,7 +368,7 @@
                         <div class="form-title">
                             <span style="color: red;font-size:16px">${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}${sessionScope['j_captcha_error']}</span>
                         </div>
-                        <div class="form-title">
+                        <div class="form-title" style="padding-bottom: 15px;">
                             <span class="form-subtitle">密码登录.</span>
                         </div>
                         <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
