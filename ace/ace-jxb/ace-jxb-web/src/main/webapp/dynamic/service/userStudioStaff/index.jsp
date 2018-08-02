@@ -99,6 +99,7 @@
                                                                 <a href="#">
                                                                     <i class="icon-info"></i> Help </a>
                                                             </li>
+
                                                         </ul>
                                                     </ul>
                                                 </div>
