@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -24,7 +23,9 @@
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">
+
+    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">--%>
+
     <script src="${pageContext.request.contextPath}/content/service/information/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 
@@ -79,16 +80,26 @@
                                                 <div class="profile-usermenu">
                                                     <ul class="nav">
                                                         <li class="active">
-                                                            <a href="#">
+                                                            <a href="../userInformation/information.jsp">
                                                                 <i class="icon-home"></i>完善信息
                                                             </a>
                                                         </li>
                                                         <li>
-                                                            <a href="../studio/studio.jsp">
+                                                            <a href="../userStudio/studio.jsp">
                                                                 <i class="icon-settings"></i>工作室</a>
                                                         </li>
+
                                                         <li>
-                                                            <a href="page_user_profile_1_help.html">
+                                                            <a href="../userReservation/reservation.jsp">
+                                                                <i class="icon-settings"></i>预约设置</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="../userOrder/userOrder.jsp">
+                                                                <i class="icon-settings"></i>订单管理</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
                                                                 <i class="icon-info"></i> Help </a>
                                                         </li>
                                                     </ul>

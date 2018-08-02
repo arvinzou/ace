@@ -23,11 +23,10 @@ public interface BaseOrderDao {
 
     BaseOrderVo selectVoByPrimaryKey(String id);
 
-    List
-            <BaseOrderVo> findList(@Param("condition") BaseOrderQVo condition,
-                                   @Param("start") int start,
-                                   @Param("limit") int limit,
-                                   @Param("orderBy") String orderBy);
+    List<BaseOrderVo> findList(@Param("condition") BaseOrderQVo condition,
+                               @Param("start") int start,
+                               @Param("limit") int limit,
+                               @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") BaseOrderQVo condition);
 

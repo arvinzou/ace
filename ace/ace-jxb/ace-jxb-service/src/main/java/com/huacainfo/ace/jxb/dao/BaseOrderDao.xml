@@ -26,6 +26,13 @@
         from base_order
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from base_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from base_order
     where id = #{id,jdbcType=VARCHAR}
@@ -185,4 +192,37 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo"></resultMap>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from base_order t
+        where 1=1
+        <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
+            and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
+            and t.businessId = #{condition.businessId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
+            and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+
 </mapper>

@@ -20,8 +20,6 @@ body, html {
 }
 
 html, body {
-    width: 100%;
-    height: auto;
     min-width: 1240px;
 }
 
@@ -11156,22 +11154,7 @@ ul.rating li.five a {
     font-size: 30px;
 }
 
-.jl-bj-bd a.btn {
-    width: 306px;
-    height: 68px;
-    line-height: 68px;
-    text-align: center;
-    overflow: hidden;
-    display: inline-block;
-    background: #ff4500 url(../images/jl-sp.png) no-repeat 75px -1207px;
-    font-size: 32px;
-    color: #fff;
-    padding-left: 40px;
-}
 
-.jl-bj-bd a.btn:hover {
-    background: #FB6C34 url(../images/jl-sp.png) no-repeat 75px -1207px;
-}
 
 /*index第一屏end*/
 
@@ -12956,40 +12939,8 @@ ul.rating li.five a {
     padding: 8px 12px;
 }
 
-.yjs-join-model .rck-item-disc p {
-    font-size: 14px;
-    padding-bottom: 28px;
-    height: 45px;
-    text-overflow: -o-ellipsis-lastline;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-
-.yjs-join-model .yjs-jion-close {
-    width: 45px;
-    height: 45px;
-    position: absolute;
-    top: 14px;
-    right: 0px;
-    background: url(../images/jl-rck-close_03.png) no-repeat;
-    cursor: pointer;
-}
-
 .yjs-join-model .yjs-jion-close:hover {
     opacity: .8;
-}
-
-.yjs-join-model .yjs-jion-open {
-    width: 45px;
-    height: 45px;
-    position: absolute;
-    top: 270px;
-    right: 0px;
-    background: url(../images/jl-rck-open_03.png) no-repeat;
-    cursor: pointer;
 }
 
 .yjs-join-model .yjs-jion-open:hover {
@@ -12997,12 +12948,6 @@ ul.rating li.five a {
 }
 
 /*在线制作下载页*/
-
-.jl-export-box {
-    position: relative;
-    background: url(../images/jl-export-bg.png) no-repeat center 463px;
-    min-height: 700px;
-}
 
 .jl-export-bg {
     position: absolute;
@@ -13031,15 +12976,6 @@ ul.rating li.five a {
     height: 368px;
 }
 
-.export-hd .img {
-    width: 317px;
-    height: 328px;
-    background: url(../images/zx_down_img.png);
-    position: relative;
-    border: 6px solid #d6dbf4;
-    float: left;
-}
-
 .export-hd .img img {
     position: absolute;
     top: 37px;
@@ -13051,16 +12987,6 @@ ul.rating li.five a {
 .export-hd .text {
     width: 612px;
     float: right;
-}
-
-.export-hd .text .title {
-    font-size: 24px;
-    color: #000;
-    padding-left: 35px;
-    background: url(../images/jl-muban-sp.png) no-repeat 0px -955px;
-    padding-bottom: 20px;
-    border-bottom: 1px dashed #e3e3e3;
-    margin-bottom: 35px;
 }
 
 .export-hd .text .download-btn {
@@ -13175,309 +13101,11 @@ ul.rating li.five a {
     margin-bottom: 60px !important;
 }
 
-/*微信支付结果页面*/
 
-.jl-wxPay-result {
-    width: 1055px;
-    height: 534px;
-    background: url(../images/wx_pay_bg.png) no-repeat top center;
-    margin: 115px auto;
-}
 
-.wxPayR-hd {
-    width: 532px;
-    margin-left: 95px;
-    padding-top: 85px;
-    border-bottom: 1px solid #ececec;
-    padding-bottom: 15px;
-    margin-bottom: 45px;
-}
 
-.wxPayR-hd dl dt, .wxPayR-hd dl dd {
-    float: left;
-}
 
-.wxPayR-hd dl dt {
-    width: 51px;
-    height: 51px;
-    background: url(../images/persCentersp.png) no-repeat 0px -2303px;
-    margin-right: 22px;
-}
 
-.wxPayR-hd h1 {
-    font-size: 30px;
-    color: #262626;
-    line-height: 50px;
-}
-
-.wxPayR-hd p {
-    color: #9b9b9b;
-    background: url(../images/persCentersp.png) no-repeat -100px -2324px;
-    padding-left: 15px;
-}
-
-.wxPayR-hd p em {
-    color: #252525;
-}
-
-.wxPayR-hd p a, .wxPayR-bd ul li span {
-    color: #3ebf62;
-}
-
-.wxPayR-bd {
-    width: 532px;
-    margin-left: 95px;
-}
-
-.wxPayR-bd ul li {
-    font-size: 14px;
-    color: #747474;
-    width: 50%;
-    float: left;
-    line-height: 30px;
-    border-bottom: 1px solid #ececec;
-    margin-bottom: 5px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: inline-block;
-}
-
-.wxPayR-bd ul li i {
-    font-weight: bold;
-    color: #ff4500;
-}
-
-.wxPayR-btn {
-    margin-top: 40px;
-}
-
-.wxPayR-btn a {
-    height: 30px;
-    line-height: 30px;
-    border: 1px solid #c0c0c0;
-    border-radius: 3px;
-    display: inline-block;
-    margin-right: 25px;
-    padding: 0 10px;
-    font-size: 14px;
-    color: #a7a7a7;
-}
-
-.wxPayR-btn a:hover {
-    opacity: .8;
-}
-
-.wxPayR-btn a.downL {
-    color: #fff;
-    background: #3ebf62;
-    border-color: #2da04d;
-}
-
-/*微信支付结果页面end*/
-
-/*搜索结果页面*/
-
-.jl-search-header {
-    margin: 35px 0;
-    height: 62px;
-}
-
-.jl-s-logo {
-    margin-right: 85px;
-}
-
-.jl-s-sou {
-}
-
-.jl-s-sou form {
-    width: 981px;
-    height: 39px;
-    line-height: 39px;
-    position: relative;
-}
-
-.jl-s-sou form input {
-    width: 891px;
-    height: 35px;
-    line-height: 35px;
-    border: 2px solid #fe4600;
-    font-family: "microsoft yahei";
-    padding: 0 80px 0 10px;
-    transition: all .5s;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-}
-
-.jl-s-sou form input:focus {
-    border: 2px solid #DC4106;
-}
-
-.jl-s-sou form button {
-    width: 70px;
-    height: 35px;
-    line-height: 35px;
-    background: #fe4600;
-    color: #fff;
-    font-size: 16px;
-    border: none;
-    font-family: "microsoft yahei";
-    position: absolute;
-    right: -2px;
-    top: 2px;
-}
-
-.jl-s-sou p a {
-    color: #7f7f7f;
-    font-size: 12px;
-    padding-right: 10px;
-    line-height: 26px
-}
-
-.jl-s-sou p a:hover {
-    color: #fe4600;
-}
-
-.jl-search-con {
-    padding-top: 20px;
-    margin-bottom: 50px !important;
-}
-
-.jl-search-cl {
-    width: 915px;
-}
-
-.jl-search-cr {
-    width: 260px;
-    margin-top: 20px;
-}
-
-.jl-search-box {
-    border: 1px solid #ebebeb;
-    margin: 20px 0;
-}
-
-.jl-search-box .jl-title {
-    height: 37px;
-    line-height: 37px;
-    background: #f6f6f6;
-    width: 891px;
-    border: 1px solid #e5e5e5;
-    margin-top: -1px;
-    margin-left: -1px;
-    padding: 0 11px;
-}
-
-.jl-search-box .jl-title span {
-    font-size: 18px;
-    color: #292929;
-    display: inline-block;
-    width: 65px;
-}
-
-.jl-search-box .jl-title i {
-    margin-left: 70px;
-    font-size: 14px;
-    color: #292929;
-}
-
-.jl-search-box .jl-title i s {
-    color: #FE4600;
-}
-
-.jl-search-box .more a {
-    color: #5d5d5d;
-}
-
-.jl-search-box .more a:hover {
-    text-decoration: underline;
-}
-
-.jl-search-box .jl-more a {
-    color: #fe4600;
-    padding: 0 10px;
-}
-
-.jl-search-box .no {
-    text-align: center;
-    padding: 90px 0;
-    font-size: 16px;
-    color: #292929;
-}
-
-.jl-search-box .no p s {
-    color: #FE4600;
-}
-
-.jl-search-box .no img {
-    display: inline-block;
-}
-
-.jl-search-box ul {
-    padding: 5px 19px;
-}
-
-.jl-search-box li {
-    padding: 15px 0;
-    width: 100%;
-    height: 100%;
-    float: left;
-    border-bottom: 1px dashed #dfdfdf;
-}
-
-.jl-search-box li:last-child {
-    border: none;
-}
-
-.jl-search-box li .img {
-    margin-right: 15px;
-    border: 1px solid #e7e7e7;
-    position: relative;
-}
-
-.jl-search-box li .img img {
-    display: block;
-}
-
-.jl-search-box li:hover .img img {
-    opacity: .95;
-    box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
-}
-
-.jl-search-box li .text h2, .jl-search-box li .text h2 a {
-    font-size: 18px;
-    color: #000;
-}
-
-.jl-search-box li .text p {
-    height: 110px;
-}
-
-.jl-search-box li .text h2 {
-    margin-bottom: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.jl-search-box li .text h2:hover a {
-    color: #FE4600;
-}
-
-.jl-search-box li .search-btn {
-    text-align: right;
-    width: 100%;
-}
-
-.jl-search-box li .search-btn i {
-    color: #7a7a7a;
-    font-size: 14px;
-}
-
-.jl-search-box li .search-btn i em {
-    color: #5b5b5b;
-    font-size: 16px;
-}
 
 .jl-search-box li .search-btn a {
     height: 34px;
@@ -13631,59 +13259,8 @@ ul.rating li.five a {
     font-weight: normal;
 }
 
-.jl-rank-box .title {
-    color: #292929;
-    font-size: 14px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    display: block;
-}
 
-.jl-rank-box .title:hover {
-    color: #FE4600;
-}
 
-.jl-rank-box p {
-    font-size: 14px;
-    color: #b9b9b9;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.jl-rank-box .img {
-    display: none;
-}
-
-.jl-rank-box .img {
-    width: 185px;
-    height: 260px;
-    margin-top: 10px;
-}
-
-.jl-rank-box .img img {
-    display: block;
-}
-
-.jl-rank-box .zx li {
-    border-bottom: 1px dashed #cecece;
-    padding-bottom: 14px;
-    margin-bottom: 10px;
-    width: 190px;
-}
-
-.jl-rank-box .zx li:last-child {
-    border: none;
-}
-
-.jl-rank-box .zx li.current .img {
-    display: block;
-}
-
-.jl-rank-box .zx li.current .title {
-    color: #FE4600;
-}
 
 /*搜索结果页面end*/
 
