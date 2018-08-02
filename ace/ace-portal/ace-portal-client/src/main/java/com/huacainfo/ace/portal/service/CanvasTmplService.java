@@ -4,10 +4,12 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.canvas.DrawItem;
 import com.huacainfo.ace.portal.model.CanvasTmpl;
 import com.huacainfo.ace.portal.vo.CanvasTmplQVo;
 import com.huacainfo.ace.portal.vo.CanvasTmplVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -106,5 +108,19 @@ public interface CanvasTmplService {
      */
     public abstract Map<String, Object> getById(String id) throws Exception;
 
+    /**
+     * 获取系统下所有绘制模板
+     *
+     * @param sysId 系统ID
+     * @return List<CanvasTmpl>
+     */
+    List<CanvasTmpl> findBySysId(String sysId);
 
+    /**
+     * 获取绘画子项配置
+     *
+     * @param tmplId 绘制模板ID
+     * @return Map<String, DrawItem>
+     */
+    Map<String, DrawItem> getDrawItem(String tmplId);
 }

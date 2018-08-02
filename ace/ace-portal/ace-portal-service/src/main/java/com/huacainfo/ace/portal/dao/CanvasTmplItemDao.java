@@ -16,7 +16,6 @@ public interface CanvasTmplItemDao {
 
     CanvasTmplItemVo selectByPrimaryKey(String CanvasTmplItemId);
 
-
     int updateByPrimaryKey(CanvasTmplItem record);
 
     List<CanvasTmplItemVo> findList(@Param("condition") CanvasTmplItemQVo condition,
@@ -31,4 +30,5 @@ public interface CanvasTmplItemDao {
 
     Map<String, Object> getById(String id);
 
+    List<CanvasTmplItem> findItemList(String tmplId);
 }

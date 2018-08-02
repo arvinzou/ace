@@ -8,6 +8,7 @@ import com.huacainfo.ace.portal.model.CanvasTmplItem;
 import com.huacainfo.ace.portal.vo.CanvasTmplItemQVo;
 import com.huacainfo.ace.portal.vo.CanvasTmplItemVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -106,5 +107,11 @@ public interface CanvasTmplItemService {
      */
     public abstract Map<String, Object> getById(String id) throws Exception;
 
-
+    /**
+     * 绘画模板内容
+     *
+     * @param tmplId
+     * @return
+     */
+    List<CanvasTmplItem> findItemList(String tmplId);
 }

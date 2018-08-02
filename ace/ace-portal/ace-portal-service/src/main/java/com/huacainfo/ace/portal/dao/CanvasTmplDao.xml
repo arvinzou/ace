@@ -43,142 +43,6 @@
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.CanvasTmpl">
-        insert into canvas_tmpl
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="title != null">
-                title,
-            </if>
-            <if test="description != null">
-                description,
-            </if>
-            <if test="baseImageUrl != null">
-                baseImageUrl,
-            </if>
-            <if test="sequence != null">
-                sequence,
-            </if>
-            <if test="sysId != null">
-                sysId,
-            </if>
-            <if test="remark != null">
-                remark,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="createUserId != null">
-                createUserId,
-            </if>
-            <if test="createUserName != null">
-                createUserName,
-            </if>
-            <if test="createDate != null">
-                createDate,
-            </if>
-            <if test="lastModifyUserId != null">
-                lastModifyUserId,
-            </if>
-            <if test="lastModifyUserName != null">
-                lastModifyUserName,
-            </if>
-            <if test="lastModifyDate != null">
-                lastModifyDate,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=VARCHAR},
-            </if>
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="baseImageUrl != null">
-                #{baseImageUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="sequence != null">
-                #{sequence,jdbcType=INTEGER},
-            </if>
-            <if test="sysId != null">
-                #{sysId,jdbcType=VARCHAR},
-            </if>
-            <if test="remark != null">
-                #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=CHAR},
-            </if>
-            <if test="createUserId != null">
-                #{createUserId,jdbcType=VARCHAR},
-            </if>
-            <if test="createUserName != null">
-                #{createUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="createDate != null">
-                #{createDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="lastModifyUserId != null">
-                #{lastModifyUserId,jdbcType=VARCHAR},
-            </if>
-            <if test="lastModifyUserName != null">
-                #{lastModifyUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="lastModifyDate != null">
-                #{lastModifyDate,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.CanvasTmpl">
-        update canvas_tmpl
-        <set>
-            <if test="title != null">
-                title = #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="description != null">
-                description = #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="baseImageUrl != null">
-                baseImageUrl = #{baseImageUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="sequence != null">
-                sequence = #{sequence,jdbcType=INTEGER},
-            </if>
-            <if test="sysId != null">
-                sysId = #{sysId,jdbcType=VARCHAR},
-            </if>
-            <if test="remark != null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=CHAR},
-            </if>
-            <if test="createUserId != null">
-                createUserId = #{createUserId,jdbcType=VARCHAR},
-            </if>
-            <if test="createUserName != null">
-                createUserName = #{createUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="createDate != null">
-                createDate = #{createDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="lastModifyUserId != null">
-                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-            </if>
-            <if test="lastModifyUserName != null">
-                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="lastModifyDate != null">
-                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=VARCHAR}
-    </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.CanvasTmpl">
     update canvas_tmpl
     set title = #{title,jdbcType=VARCHAR},
@@ -196,4 +60,11 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findBySysId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from canvas_tmpl
+        where sysId = #{sysId,jdbcType=VARCHAR}
+    </select>
 </mapper>
