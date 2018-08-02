@@ -411,6 +411,10 @@ function guid() {
      style: "",
      href: ""
  });
+
+    if (sessionStorage) {
+        sessionStorage.clear();
+    }
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
