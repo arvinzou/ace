@@ -104,32 +104,35 @@ jQuery(function ($) {
 });
 
 function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
-        modal: false,
-        width: 800,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
 
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
-    $(dialog).parent().css("top", "1px");
-    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
-    loadView(id);
+    window.open(contextPath + '/dynamic/service/association/view.jsp?aid=' + id);
+
+    // var dialog = $("#dialog-message-view").removeClass('hide').dialog({
+    //     modal: false,
+    //     width: 800,
+    //     title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
+    //     title_html: true,
+    //     buttons: [
+    //
+    //         {
+    //             html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+    //             "class": "btn btn-info btn-xs",
+    //             click: function () {
+    //                 $(this).dialog("close");
+    //             }
+    //         },
+    //         {
+    //             html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+    //             "class": "btn btn-xs",
+    //             click: function () {
+    //                 $(this).dialog("close");
+    //             }
+    //         }
+    //     ]
+    // });
+    // $(dialog).parent().css("top", "1px");
+    // $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
+    // loadView(id);
 }
 function loadView(id) {
     $.ajax({
@@ -141,6 +144,10 @@ function loadView(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
+            //动态渲染
+            var tpl = document.getElementById('tpl-view-page').innerHTML;
+            var renderHtml = juicer(tpl, rst.value);
+            $('.main_box').html(renderHtml);
 
             $.each(rst.value, function (key, value) {
                 //status

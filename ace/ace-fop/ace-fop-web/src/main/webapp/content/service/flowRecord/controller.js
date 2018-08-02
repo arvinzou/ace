@@ -109,48 +109,56 @@ jQuery(function ($) {
 });
 
 function preview(id, title, flowType, fromId) {
-    var dialogId = "#fc-dialog-message-view";
-    var postUrl = cfg.view_load_data_url;
-    var tplId = "";
+    //new page type
     if (flowType == '0') {
-        id = fromId;
-        dialogId = "#c-dialog-message-view";
-        postUrl = contextPath + '/fopCompany/selectFopCompanyByPrimaryKey';
-        tplId = 'tpl-company';
+        window.open(contextPath + '/dynamic/service/company/view.jsp?companyId=' + fromId);
     } else if (flowType == '1') {
-        id = fromId;
-        dialogId = "#a-dialog-message-view";
-        postUrl = contextPath + '/fopAssociation/selectFopAssociationByPrimaryKey';
-        tplId = 'tpl-association';
+        window.open(contextPath + '/dynamic/service/association/view.jsp?aid=' + fromId);
     }
 
-    //show dialog
-    var dialog = $(dialogId).removeClass('hide').dialog({
-        modal: false,
-        width: 800,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
-    $(dialog).parent().css("top", "1px");
-    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
-    //render data
-    loadView(id, postUrl, dialogId, tplId);
+
+    // var dialogId = "#fc-dialog-message-view";
+    // var postUrl = cfg.view_load_data_url;
+    // var tplId = "";
+    // if (flowType == '0') {
+    //     id = fromId;
+    //     dialogId = "#c-dialog-message-view";
+    //     postUrl = contextPath + '/fopCompany/selectFopCompanyByPrimaryKey';
+    //     tplId = 'tpl-company';
+    // } else if (flowType == '1') {
+    //     id = fromId;
+    //     dialogId = "#a-dialog-message-view";
+    //     postUrl = contextPath + '/fopAssociation/selectFopAssociationByPrimaryKey';
+    //     tplId = 'tpl-association';
+    // }
+    //
+    // //show dialog
+    // var dialog = $(dialogId).removeClass('hide').dialog({
+    //     modal: false,
+    //     width: 800,
+    //     title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
+    //     title_html: true,
+    //     buttons: [
+    //         {
+    //             html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+    //             "class": "btn btn-info btn-xs",
+    //             click: function () {
+    //                 $(this).dialog("close");
+    //             }
+    //         },
+    //         {
+    //             html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+    //             "class": "btn btn-xs",
+    //             click: function () {
+    //                 $(this).dialog("close");
+    //             }
+    //         }
+    //     ]
+    // });
+    // $(dialog).parent().css("top", "1px");
+    // $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
+    // //render data
+    // loadView(id, postUrl, dialogId, tplId);
 }
 function loadView(id, postUrl, dialogId, tplId) {
     $.ajax({
