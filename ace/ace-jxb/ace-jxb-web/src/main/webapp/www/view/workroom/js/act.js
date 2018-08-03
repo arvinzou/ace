@@ -43,5 +43,5 @@ function showDetail(id){
 }
 
 function invate(id){
-    window.location.href = contextPath + '/www/view/workroom/invate.jsp?id='+id;
+    window.location.href = contextPath + '/www/view/invate/index.jsp?id='+id;
 }

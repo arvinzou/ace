@@ -22,13 +22,11 @@ function initData(){
                 var html = juicer(myInfo, {
                     data: result.data
                 });
-                $("#mine").remove();
                 $("#mine").append(html);
                 var signInfo = document.getElementById('signInfo').innerHTML;
                 var signText = juicer(signInfo, {
                     signCount: result.data.signInfo.signCount
                 });
-                $(".sign_info").remove();
                 $(".sign_info").html(signText);
             }else if(result.status == 0 && result.data.memberType == '2'){
                 alert("普通会员的个人中心待建设中！");

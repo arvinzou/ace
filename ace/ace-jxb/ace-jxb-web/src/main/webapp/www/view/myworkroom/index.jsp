@@ -72,7 +72,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer">邀请老师加入</div>
+		<div class="footer"></div>
 		
 		<!--工作室详情-->
 		<div id="workroomDetail" style="display: none;">
@@ -111,6 +111,10 @@
 			<div class="col-xs-2 col-sm-2 more" onclick="showMember('\${member.id}')">
 				...
 			</div>
+		</script>
+
+		<script id="footerTemp" type="text/template">
+			<p onclick="invate('\${footer.id}');">邀请老师加入</p>
 		</script>
 	</body>
 </html>
