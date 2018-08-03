@@ -137,7 +137,7 @@
 
 	<script id="labelTemp" type="text/template">
         <ul class="tagboard">
-            {@each data.counselorVo.tags.split('，') as item,index}
+            {@each data.counselorVo.tags.split(',') as item,index}
         <li>\${item}</li>
         {@/each}
         </ul>
@@ -170,7 +170,7 @@
 				<div class="col-xs-4 col-sm-4">
 					<span class="unactive" onclick="changeType(this,'\${consultType.price}','\${consultType.id}');">
 						<p class="words_01"><span class="money">\${consultType.price}</span>元/次</p>
-						<p class="words_02">语音咨询</p>
+						<p class="words_02">电话咨询</p>
 					</span>
 				</div>
 				{@else if consultType.type == '2'}
