@@ -29,17 +29,18 @@ function initData(){
         type:"post",
         async:false,
         data:{
-            findType: '1',
+            findType: '2',
             start: 0,
             limit: 999
         },
         success:function(result){
             if(result.status == 0) {
-               /* var roombaseTemp = document.getElementById('roomInfoTemp').innerHTML;
-                var html = juicer(roombaseTemp, {
-                    roombase: result.data
+                var orderListTemp = document.getElementById('orderListTemp').innerHTML;
+                var html = juicer(orderListTemp, {
+                    data: result.data
                 });
-                $(".room_info").append(html);*/
+
+                $("#orderList").html(html);
             }else {
                 alert(result.info);
                 return;
@@ -57,18 +58,18 @@ function orderList(data){
         type:"post",
         async:false,
         data:{
-            findType: '1',
+            findType: '2',
             payStatusArray: data,
             start: 0,
             limit: 999
         },
         success:function(result){
             if(result.status == 0) {
-              /*  var roombaseTemp = document.getElementById('roomInfoTemp').innerHTML;
-                var html = juicer(roombaseTemp, {
-                    roombase: result.data
+               var orderTemp = document.getElementById('orderListTemp').innerHTML;
+                var html = juicer(orderTemp, {
+                    data: result.data
                 });
-                $(".room_info").append(html);*/
+                $("#orderList").html(html);
             }else {
                 alert(result.info);
                 return;

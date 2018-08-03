@@ -99,8 +99,8 @@
 				<div class="col-xs-10 col-sm-10"><p class="menu_title" onclick="myStudio();">我的工作室</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
-			<div class="row menu-li">
-				<div class="col-xs-10 col-sm-10"><p class="menu_title">邀请老师/好友</p></div>
+			<div class="row menu-li" onclick="window.location.href='/jxb/www/view/history/index.jsp'">
+				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的订单</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
 			<div class="row menu-li">
