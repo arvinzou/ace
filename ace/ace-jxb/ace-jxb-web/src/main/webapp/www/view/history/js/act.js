@@ -29,6 +29,7 @@ function initData(){
         type:"post",
         async:false,
         data:{
+            findType: '1',
             start: 0,
             limit: 999
         },
@@ -56,6 +57,7 @@ function orderList(data){
         type:"post",
         async:false,
         data:{
+            findType: '1',
             payStatusArray: data,
             start: 0,
             limit: 999

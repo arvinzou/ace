@@ -58,6 +58,7 @@ function sign(){
             success:function(result){
                 if(result.status == 0) {
                     alert("签到成功！");
+                    window.location.reload();
                 }else {
                     alert(result.errorMessage);
                     return;
