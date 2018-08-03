@@ -3,6 +3,7 @@ function App() {
     initData();
 };
 var consulorId = "";
+var signStatus = "1";     //已经签到状态为2
 function initData(){
     $.ajax({
         url: contextPath+"/www/reg/findInfo",
@@ -10,17 +11,24 @@ function initData(){
         async:false,
         data:{},
         success:function(result){
+            signStatus = result.data.signInfo.status;
+            if(signStatus == '2'){
+                $("#signIn").text("已签到");
+                $("#signIn").removeClass('sign_btn').addClass('signed');
+            }
             if(result.status == 0 && result.data.memberType == '1') {
                 consulorId = result.data.counselor.id;
                 var myInfo = document.getElementById('myInfo').innerHTML;
                 var html = juicer(myInfo, {
                     data: result.data
                 });
+                $("#mine").remove();
                 $("#mine").append(html);
                 var signInfo = document.getElementById('signInfo').innerHTML;
                 var signText = juicer(signInfo, {
                     signCount: result.data.signInfo.signCount
                 });
+                $(".sign_info").remove();
                 $(".sign_info").html(signText);
             }else if(result.status == 0 && result.data.memberType == '2'){
                 alert("普通会员的个人中心待建设中！");
@@ -43,23 +51,25 @@ function initData(){
  * 签到
  */
 function sign(){
-    $.ajax({
-        url: contextPath+"/www/counselor/signIn",
-        type:"post",
-        async:false,
-        data:{counselorId: consulorId},
-        success:function(result){
-            if(result.status == 0) {
-                alert("签到成功！");
-            }else {
-               alert(result.errorMessage);
-                return;
+    if(signStatus != '2'){
+        $.ajax({
+            url: contextPath+"/www/counselor/signIn",
+            type:"post",
+            async:false,
+            data:{counselorId: consulorId},
+            success:function(result){
+                if(result.status == 0) {
+                    alert("签到成功！");
+                }else {
+                    alert(result.errorMessage);
+                    return;
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }
 }
 
 function myStudio(){
