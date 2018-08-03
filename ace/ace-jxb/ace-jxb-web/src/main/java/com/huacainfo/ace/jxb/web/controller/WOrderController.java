@@ -5,9 +5,11 @@ import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
+import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,7 +82,7 @@ public class WOrderController extends JxbBaseController {
     @RequestMapping("/findList")
     public ResultResponse findList(String findType, BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
         if (StringUtil.isEmpty(findType)) {
-            return new ResultResponse(ResultCode.FAIL, "缺少必要条件");
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         String consumerId = condition.getConsumerId();
         String bisId = condition.getBusinessId();
@@ -101,8 +103,25 @@ public class WOrderController extends JxbBaseController {
             condition.setBusinessId(userinfo.getUnionid());
         }
 
-        return baseOrderService.findBaseOrderListSencond(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<BaseOrderVo> pageResult = baseOrderService.
+                findBaseOrderList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", pageResult);
     }
 
+    /**
+     * 查询订单 详情
+     *
+     * @return
+     */
+    @RequestMapping("/findDetail")
+    public ResultResponse findDetail(String orderId) throws Exception {
+        if (StringUtil.isEmpty(orderId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
 
+        BaseOrderVo orderVo = baseOrderService.selectBaseOrderByPrimaryKey(orderId).getValue();
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", orderVo);
+    }
 }

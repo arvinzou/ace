@@ -193,11 +193,43 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo"></resultMap>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
+            <id property="id" column="businessId"/>
+            <result property="name" column="tName"/>
+            <result property="certification" column="certification"/>
+            <result property="imagePhotoUrl" column="imagePhotoUrl"/>
+            <result property="level" column="tLevel"/>
+        </association>
+        <association property="consultProduct" column="commodityId"
+                     javaType="com.huacainfo.ace.jxb.model.ConsultProduct">
+            <id property="id" column="commodityId"/>
+            <result property="type" column="cpType"/>
+        </association>
+        <association property="consultOrder" column="id" javaType="com.huacainfo.ace.jxb.model.ConsultOrder">
+            <id property="id" column="id"/>
+            <result column="tel" property="tel"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+            <result column="sex" property="sex"/>
+            <result column="info" property="info"/>
+            <result column="secName" property="secName"/>
+            <result column="relationship" property="relationship"/>
+            <result column="secTel" property="secTel"/>
+        </association>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        co.tel, co.name, co.age, co.sex, co.info, co.secName, co.relationship, co.secTel,
+        cp.type as cpType,
+        c.name as tName,c.certification ,c.imagePhotoUrl,c.level as tLevel,
+        t.id, t.consumerId, t.commodityId, t.category, t.businessId, t.commodityName, t.businessName, t.amount,
+        t.price, t.payMoney, t.payStatus, t.payTime, t.createDate
+    </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Vo_Column_List"/>
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -212,6 +244,9 @@
 
     <sql id="whereCondition">
         from base_order t
+        left join jxb.counselor c on t.businessId = c.id
+        left join jxb.consult_product cp on cp.id = t.commodityId
+        left join jxb.consult_order co on co.id = t.id
         where 1=1
         <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
             and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}
@@ -222,7 +257,23 @@
         <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
             and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.statusArray !=null">
+            and t.payStatus in
+            <foreach collection="statusArray" item="item" separator="," open="(" close=")">
+                ${item}
+            </foreach>
+        </if>
     </sql>
 
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Consult">
+        select count(1)
+        from base_order
+        where 1=1
+    </select>
 
 </mapper>

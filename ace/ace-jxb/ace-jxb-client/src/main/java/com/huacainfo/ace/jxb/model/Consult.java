@@ -1,8 +1,10 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Consult {
+public class Consult implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 咨询师ID  counselor.id
      */
