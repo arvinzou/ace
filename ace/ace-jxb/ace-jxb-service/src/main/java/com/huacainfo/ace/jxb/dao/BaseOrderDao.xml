@@ -29,9 +29,12 @@
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from base_order
-        where id = #{id,jdbcType=VARCHAR}
+        <include refid="Vo_Column_List"/>
+        from base_order t
+        left join jxb.counselor c on t.businessId = c.id
+        left join jxb.consult_product cp on cp.id = t.commodityId
+        left join jxb.consult_order co on co.id = t.id
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from base_order

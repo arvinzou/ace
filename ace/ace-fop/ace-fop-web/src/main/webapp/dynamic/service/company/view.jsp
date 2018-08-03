@@ -38,12 +38,18 @@
 </style>
 <style>
     .main_box {
-        width: 70%;
+        width: 95%;
         margin: 0 auto;
         background-color: #FFFFFF;
         padding-left: 30px;
         padding-right: 30px;
         padding-bottom: 30px;
+    }
+
+    .title_box_title_01 {
+        font-size: 30px;
+        color: #1A56A8;
+        font-weight: bolder;
     }
 
     .info_title_01 {
@@ -126,18 +132,20 @@
 <jsp:include page="../../common/common.jsp"/>
 <body>
 <div class="page-content">
-    <div class="widget-box" id="widget-box">
-        <div class="widget-header">
-            <h5 class="widget-title smaller">查看详情</h5>
-            <div class="widget-toolbar"></div>
-        </div>
+    <%--<div class="widget-box" id="widget-box">--%>
+    <%--<div class="widget-header">--%>
+    <%--<h5 class="widget-title smaller">查看详情</h5>--%>
+    <%--<div class="widget-toolbar"></div>--%>
+    <%--</div>--%>
 
-        <div class="widget-body">
-            <%--render 渲染div--%>
-            <div class="main_box">
+    <%--<div class="widget-body">--%>
+    <%----%>
+    <%--</div>--%>
+    <%--</div>--%>
 
-            </div>
-        </div>
+    <%--render 渲染div--%>
+    <div class="main_box">
+
     </div>
 </div>
 
@@ -153,7 +161,7 @@
 <script id="tpl-view-page" type="text/template">
     <div class="title_box">
         <div style="width:100%;height:35px;text-align: center;">
-            <span class="title_box_title">企业信息</span>
+            <span class="title_box_title_01">企业信息</span>
         </div>
     </div>
     <div class="form_box">
