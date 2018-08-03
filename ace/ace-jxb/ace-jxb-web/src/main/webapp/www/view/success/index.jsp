@@ -58,9 +58,10 @@
 				<div class="col-xs-2 col-sm-2"></div>
 			</div>
 			<div class="row" style="border: none;" id="orderNo">
-				<span class="order_num">订单号：\${data.id}</span>
+				<div class="col-xs-12 col-sm-12"><span class="order_num">订单号：\${data.id}</span></div>
 			</div>
 			<div class="row">
+				<div class="col-xs-12 col-sm-12">
 					{@if data.payStatus == '1'}
 					<p class="order_state">待支付</p>
 					{@else if data.payStatus == '2'}
@@ -76,6 +77,7 @@
 					{@else}
 					<p class="order_state">自动关闭</p>
 					{@/if}
+				</div>
 				</div>
 			</div>
 		</div>
