@@ -245,6 +245,8 @@ public class MemberSignLogServiceImpl implements MemberSignLogService {
             signLog.setStatus("2");
             signLog.setUpdateDate(DateUtil.getNowDate());
             memberSignLogDao.updateByPrimaryKeySelective(signLog);
+        } else {
+            return new ResultResponse(ResultCode.FAIL, "今日已签到，请明天再来");
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "签到成功");

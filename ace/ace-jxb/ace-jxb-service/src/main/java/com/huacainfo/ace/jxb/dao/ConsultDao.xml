@@ -7,13 +7,14 @@
         <result column="field" jdbcType="VARCHAR" property="field"/>
         <result column="procTime" jdbcType="VARCHAR" property="procTime"/>
         <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="onlineStatus" jdbcType="VARCHAR" property="onlineStatus"/>
         <result column="status" jdbcType="VARCHAR" property="status"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="info" jdbcType="LONGVARCHAR" property="info"/>
 
     </resultMap>
     <sql id="Base_Column_List">
-        id, objects, field, procTime, city, status, createDate, info
+        id, objects, field, procTime, city, onlineStatus, status, createDate, info
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -27,11 +28,11 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Consult">
     insert into consult (id, objects, field, 
-      procTime, city, status, 
-      createDate, info)
+      procTime, city, status,
+        createDate, info, onlineStatus)
     values (#{id,jdbcType=VARCHAR}, #{objects,jdbcType=VARCHAR}, #{field,jdbcType=VARCHAR}, 
-      #{procTime,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{info,jdbcType=LONGVARCHAR})
+      #{procTime,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{info,jdbcType=LONGVARCHAR}, #{onlineStatus,jdbcType=VARCHAR})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Consult">
         insert into consult
@@ -60,6 +61,9 @@
             <if test="info != null">
                 info,
             </if>
+            <if test="onlineStatus != null">
+                onlineStatus,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -85,6 +89,9 @@
             </if>
             <if test="info != null">
                 #{info,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="onlineStatus != null">
+                #{onlineStatus,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -112,6 +119,9 @@
             <if test="info != null">
                 info = #{info,jdbcType=LONGVARCHAR},
             </if>
+            <if test="onlineStatus != null">
+                onlineStatus = #{status,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -121,6 +131,7 @@
       field = #{field,jdbcType=VARCHAR},
       procTime = #{procTime,jdbcType=VARCHAR},
       city = #{city,jdbcType=VARCHAR},
+        onlineStatus = #{onlineStatus,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
@@ -129,7 +140,7 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.ConsultVo">
     </resultMap>
     <sql id="Vo_Column_List">
-           id, objects, field, procTime, city, status, createDate, info
+        id, objects, field, procTime, city, onlineStatus, status, createDate, info
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -157,6 +168,10 @@
     <sql id="whereCondition">
         from consult t
         where 1=1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and IFNULL(t.status,'1') = #{condition.status,jdbcType=VARCHAR}
+        </if>
+
     </sql>
 
     <select id="findCount" resultType="int">

@@ -89,10 +89,10 @@ public interface MemberSignLogService {
     /**
      * 每日签到
      *
-     * @param counselorId 咨询师id
+     * @param userId portal.users.user_id
      * @return ResultResponse
      */
-    ResultResponse signIn(String counselorId) throws Exception;
+    ResultResponse signIn(String userId) throws Exception;
 
     /**
      * 获取用户签到信息

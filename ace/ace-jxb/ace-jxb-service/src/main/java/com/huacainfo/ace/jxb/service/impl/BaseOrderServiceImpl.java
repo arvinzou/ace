@@ -61,8 +61,6 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     private CounselorDao counselorDao;
 
 
-
-
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -95,8 +93,11 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         Map<String, Object> map = new HashMap<String, Object>();
         List<BaseOrderVo> list = this.baseOrderDao.findList(condition, (page - 1) * limit, limit, orderBy);
         for (BaseOrderVo item : list) {
-            item.setConsultProduct(this.consultProductDao.selectByPrimaryKey(item.getCommodityId()));
-            item.setCounselor(this.counselorDao.selectByPrimaryKey(item.getBusinessId()));
+            //订单类型 1-咨询订单 2-课程订单
+            if (OrderCategory.CATEGORY_CONSULT.equals(item.getCategory())) {
+                item.setConsultProduct(this.consultProductDao.selectByPrimaryKey(item.getCommodityId()));
+                item.setCounselor(this.counselorDao.selectByPrimaryKey(item.getBusinessId()));
+            }
         }
         if (page < 1) {
             int allRows = this.baseOrderDao.findCount(condition);
