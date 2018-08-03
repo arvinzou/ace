@@ -27,8 +27,7 @@
 			            <div class="news-slider"></div>
 			        </div>
 			    </div>
-			</div>
-		</div>
+ 		</div>
 		<div class="container" id="orderList">
 
 		</div>
@@ -58,8 +57,9 @@
                 </div>
                 <div class="row dorder" style="border: none;">
                 <div class="col-xs-7 col-sm-7"><p class="order_num">订单号：20180601955959</p></div>
-            <div class="col-xs-5 col-sm-5" style="text-align: right;"><p class="unfinished">待接单</p></div>
+            	<div class="col-xs-5 col-sm-5" style="text-align: right;"><p class="unfinished">待接单</p></div>
             </div>
 		</script>
+		</div>
 	</body>
 </html>

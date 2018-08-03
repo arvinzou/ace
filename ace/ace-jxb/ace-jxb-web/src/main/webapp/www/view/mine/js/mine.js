@@ -11,7 +11,9 @@ function initData(){
         async:false,
         data:{},
         success:function(result){
-            signStatus = result.data.signInfo.status;
+            try{
+                signStatus = result.data.signInfo.status;
+            }catch(e){}
             if(signStatus == '2'){
                 $("#signIn").text("已签到");
                 $("#signIn").removeClass('sign_btn').addClass('signed');
