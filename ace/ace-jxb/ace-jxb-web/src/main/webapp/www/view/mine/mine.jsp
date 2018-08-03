@@ -20,7 +20,11 @@
 		<script id="myInfo" type="text/template">
 			<div class="row"  style="padding-top: 0.533333rem;">
 				<div class="col-xs-2 col-sm-2">
+					{@if data.counselor.imagePhotoUrl!=null && data.counselor.imagePhotoUrl!=undefined}
+					<span class="img_box"><img src="\${data.counselor.imagePhotoUrl}"/></span>
+					{@else}
 					<span class="img_box"><img src="\${data.headimgurl}"/></span>
+					{@/if}
 				</div>
 				<div class="col-xs-7 col-sm-7">
 					<div class="row">
