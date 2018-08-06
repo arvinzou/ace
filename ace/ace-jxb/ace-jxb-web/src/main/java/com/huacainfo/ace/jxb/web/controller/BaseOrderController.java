@@ -64,7 +64,6 @@ public class BaseOrderController extends JxbBaseController {
     @RequestMapping(value = "/findBaseOrderListSecond")
     @ResponseBody
     public ResultResponse findBaseOrderListSecond(BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
-
         return this.baseOrderService.findBaseOrderListSencond(condition, page.getPage(), page.getLimit(), page.getOrderBy());
     }
 
