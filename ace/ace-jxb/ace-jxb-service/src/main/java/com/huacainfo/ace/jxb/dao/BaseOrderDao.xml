@@ -215,6 +215,7 @@
             <result column="name" property="name"/>
             <result column="age" property="age"/>
             <result column="sex" property="sex"/>
+            <result column="tags" property="tags"/>
             <result column="info" property="info"/>
             <result column="secName" property="secName"/>
             <result column="relationship" property="relationship"/>
@@ -223,7 +224,7 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
-        co.tel, co.name, co.age, co.sex, co.info, co.secName, co.relationship, co.secTel,
+        co.tel, co.name, co.age, co.sex, co.tags, co.info, co.secName, co.relationship, co.secTel,
         cp.type as cpType,
         c.name as tName,c.certification ,c.imagePhotoUrl,c.level as tLevel,
         t.id, t.consumerId, t.commodityId, t.category, t.businessId, t.commodityName, t.businessName, t.amount,

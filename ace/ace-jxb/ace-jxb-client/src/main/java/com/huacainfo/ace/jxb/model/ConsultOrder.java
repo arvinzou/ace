@@ -26,6 +26,10 @@ public class ConsultOrder implements Serializable {
      */
     private String sex;
     /**
+     * 问题描述标签
+     */
+    private String tags;
+    /**
      * 问题类型及描述
      */
     private String info;
@@ -49,6 +53,14 @@ public class ConsultOrder implements Serializable {
      * 入库日期
      */
     private Date createDate;
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     public String getId() {
         return id;
