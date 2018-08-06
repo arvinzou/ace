@@ -347,7 +347,7 @@
     <div class="login_body">
         <div class="login_body_temp">
             <div class="login_panel">
-                <div class="content">
+                <div class="content" style="padding-top: 15px;padding-bottom: 15px;">
                     <!-- BEGIN LOGIN FORM -->
                     <div class="login-box-warp">
                         <div class="login-box no-longlogin module-static" id="J_LoginBox">
@@ -407,7 +407,7 @@
 
                                 </label>
                             </div>
-                            <div class="form-group-captcha">
+                            <div class="form-group-captcha" style="padding-bottom: 15px;">
                                 <label class="control-label visible-ie8 visible-ie9">验证码</label>
 
 
