@@ -58,7 +58,7 @@
 				<div class="col-xs-2 col-sm-2"></div>
 			</div>
 			<div class="row" style="border: none;" id="orderNo">
-				<div class="col-xs-12 col-sm-12"><span class="order_num">订单号：\${data.id}</span></div>
+				<div class="col-xs-12 col-sm-12"><a class="order_num" onclick="showOrderDetail('\${data.id}')">订单号：\${data.id}</a></div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12">
