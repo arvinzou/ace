@@ -398,7 +398,7 @@
                                 </div>
 
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="padding-bottom: 15px;">
                                 <label class="control-label visible-ie8 visible-ie9">验证码</label>
                                 <input class="form-control  placeholder-no-fix" type="text" name="j_captcha"
                                        autocomplete="off" id="j_captcha"
