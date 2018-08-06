@@ -32,3 +32,7 @@ function initData(id){
         }
     });
 }
+
+function showOrderDetail(id){
+    window.location.href = contextPath + '/www/view/consultantDetail/index.jsp?id='+id;
+}
