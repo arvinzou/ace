@@ -3,7 +3,7 @@ window.onload = function () {
     //getCounselorList();
     $('#counselorList').on('click', '.mt-card-social .info', detailInformation);
     $('#counselorList').on('click', '.mt-card-social .pass', approved);
-    $('#counselorList').on('click', '.mt-card-social .refusal', auditFailed);
+    // $('#counselorList').on('click', '.mt-card-social .refusal', auditFailed);
     $('.search_btn').click(searchList);
 }
 
@@ -14,86 +14,171 @@ function searchList() {
 function approved() {
     var $that = $(this);
     var id = $that.parents('.mt-card-social').data('id');
-    swal({
-        title: '确定通过审核？',
-        text: '你将无法恢复它！',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '确定！',
-        cancelButtonText: '取消！',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false
-    }).then(function (data) {
-        if (data.value) {
-            if (startProcessing(id, 1) == 0) {
-                swal({
-                    text: "审核通过！",
-                    type: "success",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
-                return
-            }
-            swal({
-                text: "审核过程失败,稍后重试！",
-                type: "error",
-                timer: 1000,
-                showConfirmButton: false
-            });
-            return
 
-        }
+
+    swal("正在对咨询师进行审核", {
+        buttons: {
+            cancel: "取消审核",
+            catch: {
+                text: "同意入驻",
+                value: "true",
+                color: 'green'
+            },
+            defeat: {
+                text: "拒绝入驻",
+                value: "false",
+                color: 'red'
+            },
+        },
     })
-}
-
-function auditFailed() {
-    var $that = $(this);
-    var id = $that.parents('.mt-card-social').data('id');
-    swal({
-        title: '确定拒绝Ta的申请？',
-        text: '你将无法恢复它！',
-        type: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '确定！',
-        cancelButtonText: '取消！',
-        confirmButtonClass: 'btn btn-success',
-        cancelButtonClass: 'btn btn-danger',
-        buttonsStyling: false
-    }).then(function (data) {
-        if (data.value) {
-            if (startProcessing(id, 2) == 0) {
+        .then((value) = > {
+        switch(value) {
+        case
+            "true"
+        :
+            var status = startProcessing(id, 1, 'ok');
+            if (status == 0) {
                 swal({
                     text: "操作成功！",
                     type: "success",
                     timer: 1000,
                     showConfirmButton: false
                 });
-                return
+            } else {
+                swal({
+                    text: "操作失败！",
+                    type: "error",
+                    timer: 1000,
+                    showConfirmButton: false
+                });
             }
-            swal({
-                text: "操作失败,稍后重试！",
-                type: "error",
-                timer: 1000,
-                showConfirmButton: false
-            });
-            return
+            break;
 
+        case
+            "false"
+        :
+            swal("您拒绝Ta入驻的理由：", {
+                content: "input",
+                buttons: {
+                    cancel: {
+                        text: "取消",
+                        value: false,
+                        color: 'green'
+                    },
+                    catch: {
+                        text: "确认",
+                        value: true,
+                        color: 'green'
+                    },
+                },
+
+            }).then((value) = > {
+                console.log(value);
+            if (value) {
+                var text = $('.swal-content__input').val();
+                if (text) {
+                    var status = startProcessing(id, 1, text);
+                    if (status == 0) {
+                        swal({
+                            text: "操作成功！",
+                            type: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+
+                    } else {
+                        swal({
+                            text: "操作失败！",
+                            type: "error",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                    }
+                }
+                swal({
+                    text: "必须填写拒绝理由！",
+                    type: "error",
+                    timer: 1000,
+                    showConfirmButton: false
+                });
+                return;
+            }
+
+        })
+            ;
+
+            /*var status=startProcessing(id, 2,'ok');
+            if(status==0){
+                swal("操作成功!", "", "success");
+            }else{
+                swal("操作失败!", "", "error");
+            }*/
+            break;
+
+        default:
+            // swal("Got away safely!");
         }
-    })
+    }
+)
+    ;
+
 }
 
 
-function startProcessing(id, rst) {
+// function auditFailed() {
+//     var $that = $(this);
+//     var id = $that.parents('.mt-card-social').data('id');
+//     swal({
+//         title: '确定拒绝Ta的申请？',
+//         text: '你将无法恢复它！',
+//         type: 'question',
+//         showCancelButton: true,
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: '确定！',
+//         cancelButtonText: '取消！',
+//         confirmButtonClass: 'btn btn-success',
+//         cancelButtonClass: 'btn btn-danger',
+//         buttonsStyling: false
+//     }).then(function (data) {
+//         console.log(data);
+//         if (data.value) {
+//             if (startProcessing(id, 2) == 0) {
+//                 swal({
+//                     text: "操作成功！",
+//                     type: "success",
+//                     timer: 1000,
+//                     showConfirmButton: false
+//                 });
+//                 return
+//             }
+//             swal({
+//                 text: "操作失败,稍后重试！",
+//                 type: "error",
+//                 timer: 1000,
+//                 showConfirmButton: false
+//             });
+//             return
+//
+//         }
+//     })
+// }
+
+
+function startProcessing(id, rst, value) {
     var url = "/jxb/counselor/audit"
     var data = {
-        counselorId: id,
-        rst: rst,
+        data: JSON.stringify(
+            {
+                counselorId: id,
+                rst: rst,
+                Statement: value
+            }
+        )
+
     }
+
+
     $.getJSON(url, data, function (result) {
         return result.status
     })

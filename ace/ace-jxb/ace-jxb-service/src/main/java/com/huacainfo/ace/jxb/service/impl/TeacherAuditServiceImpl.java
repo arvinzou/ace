@@ -81,6 +81,7 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
         if (CommonUtils.isBlank(o.getCounselorId())) {
             return new MessageResponse(1, "咨询师主键不能为空！");
         }
+        o.setAuditor(userProp.getName());
         if (CommonUtils.isBlank(o.getAuditor())) {
             return new MessageResponse(1, "审核人不能为空！");
         }
