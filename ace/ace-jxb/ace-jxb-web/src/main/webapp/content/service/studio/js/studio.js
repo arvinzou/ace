@@ -1,8 +1,19 @@
 window.onload = function () {
     getUserinfo();
+    getMyStudioList();
     getStudioInfo();
     $('.submit_btn').click(submitForm);
 };
+
+
+function getMyStudioList() {
+    var url = "/jxb/studio/getMyStudioList";
+    $.getJSON(url, function (result) {
+        if (result.status == 0) {
+            console.log(result);
+        }
+    })
+}
 
 
 function getUserinfo() {
@@ -16,12 +27,12 @@ function getUserinfo() {
 }
 
 function getStudioInfo() {
-    var url = "/jxb/studio/getMyStudioInfo"
+    var url = "/jxb/studio/getMyStudioInfo";
     $.getJSON(url, function (result) {
         if (result.status == 0) {
             fillForm(result.data);
         }
-    })
+    });
 }
 
 function fillForm(data) {

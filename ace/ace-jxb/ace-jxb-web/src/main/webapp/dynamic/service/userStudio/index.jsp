@@ -73,7 +73,7 @@
                                                     </button>
                                                     <button type="button" class="btn btn-circle red btn-sm"
                                                             onclick="javascript:window.location.href='../userStudio/index.jsp'">
-                                                        工作室信息
+                                                        工 作 室
                                                     </button>
                                                 </div>
                                                 <!-- END SIDEBAR BUTTONS -->
@@ -142,71 +142,79 @@
                                         </div>
                                         <!-- END BEGIN PROFILE SIDEBAR -->
                                         <!-- BEGIN PROFILE CONTENT -->
+
+
                                         <div class="profile-content">
-                                            <div class="portlet-body">
-                                                <div class="form-horizontal" novalidate="novalidate">
-                                                    <div class="form-body">
-
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">名字
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" id="notNull" class="form-control"
-                                                                       placeholder="" name="form_name">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="portlet light portlet-fit ">
+                                                        <div class="portlet-title">
+                                                            <div class="caption">
+                                                                <i class=" icon-layers font-green"></i>
+                                                                <span class="caption-subject font-green bold uppercase"><font
+                                                                        style="vertical-align: inherit;"><font
+                                                                        style="vertical-align: inherit;">工作室</font></font></span>
+                                                            </div>
+                                                            <div class="actions">
+                                                                <a href="javascript:;"
+                                                                   class="btn btn-circle red-sunglo btn-sm">
+                                                                    <i class="fa fa-plus"></i><font
+                                                                        style="vertical-align: inherit;"><font
+                                                                        style="vertical-align: inherit;">
+                                                                    创建工作室</font></font></a>
                                                             </div>
                                                         </div>
+                                                        <div class="portlet-body">
+                                                            <div class="mt-element-card mt-element-overlay">
+                                                                <div class="row">
 
-                                                        <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">工作室logo
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div>
-                                                                    <div class="studiologo" id="studiologo">
-                                                                        <img class="select_img form_logoImgUrl"
-                                                                             id="logo" data-cover="logo"
-                                                                             data-toggle="modal"
-                                                                             data-xsize="300" data-ysize="300"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
+                                                                    <%--content--%>
+
+                                                                    <div class="table-scrollable table-scrollable-borderless">
+                                                                        <table class="table table-hover table-light">
+                                                                            <thead>
+                                                                            <tr class="uppercase">
+                                                                                <th colspan="2"> 名称</th>
+                                                                                <th> 负责人</th>
+                                                                                <th> 状态</th>
+                                                                                <th colspan="2"> 操作</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr>
+                                                                                <td class="fit">
+                                                                                    <img class="user-pic"
+                                                                                         src="../assets/pages/media/users/avatar4.jpg">
+                                                                                </td>
+                                                                                <td>
+                                                                                    名字
+                                                                                </td>
+                                                                                <td> 三</td>
+                                                                                <td> 正常</td>
+                                                                                <td>
+                                                                                    修改
+                                                                                </td>
+                                                                                <td>
+                                                                                    查看
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
-                                                                    <p>工作室logo</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
+                                                                    <%--content--%>
 
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">个人简介
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <textarea class="form-control" id="notNull1"
-                                                                          name="form_introduce"
-                                                                          rows="5"></textarea>
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-actions">
-                                                            <div class="row">
-                                                                <div class="col-md-offset-3 col-md-9">
-                                                                    <button type="reset" class="btn default">重置</button>
-                                                                    <button class="btn green submit_btn">提交</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- END PROFILE CONTENT -->
                                         </div>
-                                    </div>
 
+
+                                        <!-- END PROFILE CONTENT -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -255,6 +263,70 @@
         padding: 41px 98px 45px 20px;
     }
 </style>
+
+
+<%--<div class="profile-content">
+    <div class="portlet-body">
+        <div class="form-horizontal" novalidate="novalidate">
+            <div class="form-body">
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label">名字
+                        <span class="required" aria-required="true">*</span>
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" id="notNull" class="form-control"
+                               placeholder="" name="form_name">
+                        <span class="error_message"></span>
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-checkboxes">
+                    <label class="control-label col-md-3">工作室logo
+                        <span class="required" aria-required="true">*</span>
+                    </label>
+                    <div class="col-md-9">
+                        <div>
+                            <div class="studiologo" id="studiologo">
+                                <img class="select_img form_logoImgUrl"
+                                     id="logo" data-cover="logo"
+                                     data-toggle="modal"
+                                     data-xsize="300" data-ysize="300"
+                                     data-target="#img-uploader"
+                                     src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
+                            </div>
+                            <p>工作室logo</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label">个人简介
+                        <span class="required" aria-required="true">*</span>
+                    </label>
+                    <div class="col-md-9">
+                                                                <textarea class="form-control" id="notNull1"
+                                                                          name="form_introduce"
+                                                                          rows="5"></textarea>
+                        <span class="error_message"></span>
+                        <div class="form-control-focus"></div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="reset" class="btn default">重置</button>
+                            <button class="btn green submit_btn">提交</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>--%>
 
 
 </html>

@@ -19,9 +19,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-    <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-sweetalert/sweetalert.css">
-    <%--<link rel="stylesheet" href="https://cdn.bootcss.com/limonte-sweetalert2/7.21.1/sweetalert2.min.css">--%>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/limonte-sweetalert2/7.21.1/sweetalert2.min.css">
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <script src="${pageContext.request.contextPath}/content/service/counselor/js/act.js?v=${cfg.version}"></script>
@@ -153,7 +151,12 @@
                         {@if item.regAuditRst==0}
                         <li>
                             <a class="pass" href="javascript:;">
-                                审核
+                                通过
+                            </a>
+                        </li>
+                        <li>
+                            <a class="refusal" href="javascript:;">
+                                拒绝
                             </a>
                         </li>
                         {@else if item.regAuditRst==1}

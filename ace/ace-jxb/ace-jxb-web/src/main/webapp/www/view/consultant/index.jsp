@@ -133,7 +133,7 @@
 					</div>
 					<div class="row content_04">
 					<ul class="clabel">
-						{@each item.tags.split('，') as tag,num}
+						{@each item.tags.split(',') as tag,num}
 						<li>\${tag}</li>
 						{@/each}
 					</ul>

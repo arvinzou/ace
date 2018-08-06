@@ -2,7 +2,10 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -17,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/studio")
@@ -106,6 +111,24 @@ public class StudioController extends JxbBaseController {
     @ResponseBody
     public SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception {
         return this.studioService.selectStudioByPrimaryKey(id);
+    }
+
+
+    /**
+     * 获取我的工作室列表
+     */
+    @RequestMapping(value = "/getMyStudioList")
+    @ResponseBody
+    public ResultResponse getStudioList() throws Exception {
+        String counselorId = this.getCurUserProp().getUserId();
+        Map<String, Object> voList = null;
+        try {
+            voList = studioService.getStudioList(counselorId);
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", voList);
     }
 
 
