@@ -27,6 +27,10 @@ import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UsersService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +63,16 @@ public class BaseOrderServiceImpl implements BaseOrderService {
 
     @Autowired
     private CounselorDao counselorDao;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
 
 
     /**
@@ -78,12 +92,27 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     @Override
 
     public PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition, int start, int limit, String orderBy) throws Exception {
+        //sql
+        SqlSession session = getSqlSession();
+        BaseOrderDao dao = session.getMapper(BaseOrderDao.class);
+        //query
         PageResult<BaseOrderVo> rst = new PageResult<>();
-        List<BaseOrderVo> list = this.baseOrderDao.findList(condition, start, start + limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.baseOrderDao.findCount(condition);
-            rst.setTotal(allRows);
+        try {
+            List<BaseOrderVo> list = dao.findList(condition, start, start + limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = baseOrderDao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+            return rst;
+        } catch (Exception e) {
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return rst;
     }
@@ -91,12 +120,13 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     @Override
     public ResultResponse findBaseOrderListSencond(BaseOrderQVo condition, int page, int limit, String orderBy) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
+
         List<BaseOrderVo> list = this.baseOrderDao.findList(condition, (page - 1) * limit, limit, orderBy);
         for (BaseOrderVo item : list) {
             //订单类型 1-咨询订单 2-课程订单
             if (OrderCategory.CATEGORY_CONSULT.equals(item.getCategory())) {
-                item.setConsultProduct(this.consultProductDao.selectByPrimaryKey(item.getCommodityId()));
-                item.setCounselor(this.counselorDao.selectByPrimaryKey(item.getBusinessId()));
+                item.setConsultProduct(consultProductDao.selectByPrimaryKey(item.getCommodityId()));
+                item.setCounselor(counselorDao.selectByPrimaryKey(item.getBusinessId()));
             }
         }
         if (page < 1) {
@@ -237,8 +267,26 @@ public class BaseOrderServiceImpl implements BaseOrderService {
      */
     @Override
     public SingleResult<BaseOrderVo> selectBaseOrderByPrimaryKey(String id) throws Exception {
+        //sql
+        SqlSession session = getSqlSession();
+        BaseOrderDao dao = session.getMapper(BaseOrderDao.class);
+
         SingleResult<BaseOrderVo> rst = new SingleResult<>();
-        rst.setValue(this.baseOrderDao.selectVoByPrimaryKey(id));
+        try {
+            BaseOrderVo vo = dao.selectVoByPrimaryKey(id);
+            rst.setValue(vo);
+
+            return rst;
+        } catch (Exception e) {
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
         return rst;
     }
 

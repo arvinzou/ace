@@ -51,7 +51,6 @@ function closeTips() {
 
 function add(){
     //初始化增加减少的分量
-    $("#num").text("1");
     if(unitPrice == null || unitPrice == undefined){
         alert("请先选择咨询方式！");
         return;
@@ -62,7 +61,6 @@ function add(){
     $("#totalMoney").text(num * unitPrice);
 }
 function reduce(){
-    $("#num").text("1");
     if(unitPrice == null || unitPrice == undefined){
         alert("请先选择咨询方式！");
         return;
@@ -87,7 +85,8 @@ function changeType(obj, priceStr, id){
 	$(obj).parent().siblings().children().removeClass("active").addClass("unactive");
     unitPrice = parseInt(priceStr);
     commodityId = id;
-    $("#totalMoney").text(unitPrice);
+    var num = parseInt($("#num").text());
+    $("#totalMoney").text(num * unitPrice);
 }
 function initData(id){
     $.ajax({
@@ -221,7 +220,7 @@ function createOrder(){
                     success:function(result){
                         if(result.status == 0) {
                             var payData = result.data;
-                            onBridgeReady(payData);
+                            onBridgeReady(payData, orderResultData.orderId);
                             console.log(result);
                             if (!$scope.$$phase) {
                                 $scope.$apply();
@@ -252,7 +251,7 @@ function createOrder(){
     });
 }
 
-function onBridgeReady(obj){
+function onBridgeReady(obj, orderId){
     wx.config({
         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: obj.appId, // 必填，
@@ -273,7 +272,7 @@ function onBridgeReady(obj){
                 window.pay_tag = true;
                 if (res.errMsg == "chooseWXPay:ok") {
                     alert("支付成功！");
-                    window.location.href = contextPath + '/www/view/success/index.jsp?id='+primaryId;
+                    window.location.href = contextPath + '/www/view/success/index.jsp?id='+orderId;
                     /*WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                         if (res.err_msg =="get_brand_wcpay_request:ok")
                         {

@@ -1,6 +1,7 @@
 package com.huacainfo.ace.jxb.vo;
 
 import com.huacainfo.ace.jxb.model.BaseOrder;
+import com.huacainfo.ace.jxb.model.ConsultOrder;
 import com.huacainfo.ace.jxb.model.ConsultProduct;
 import com.huacainfo.ace.jxb.model.Counselor;
 //import com.huacainfo.ace.portal.model.Users;
@@ -13,6 +14,16 @@ public class BaseOrderVo extends BaseOrder {
     private ConsultProduct consultProduct;
     private String consumerName;
     private String consumerImgUrl;
+
+    private ConsultOrder consultOrder;
+
+    public ConsultOrder getConsultOrder() {
+        return consultOrder;
+    }
+
+    public void setConsultOrder(ConsultOrder consultOrder) {
+        this.consultOrder = consultOrder;
+    }
 
     public Counselor getCounselor() {
         return counselor;

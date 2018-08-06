@@ -66,7 +66,7 @@
             <div class="row">
             <h3 class="sec_title">擅长领域</h3>
             <ul class="tagboard">
-				{@each data.counselorVo.tags.split('，') as item,index}
+				{@each data.counselorVo.tags.split(',') as item,index}
             	<li>\${item}</li>
 				{@/each}
             </ul>

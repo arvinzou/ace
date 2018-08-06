@@ -1,8 +1,10 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ConsultOrder {
+public class ConsultOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 订单主键
      */

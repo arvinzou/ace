@@ -1,9 +1,12 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class BaseOrder {
+public class BaseOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     /**

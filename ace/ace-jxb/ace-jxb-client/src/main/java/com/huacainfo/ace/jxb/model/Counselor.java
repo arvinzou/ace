@@ -1,9 +1,12 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Counselor {
+public class Counselor implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
     /**
      * 所属工作室

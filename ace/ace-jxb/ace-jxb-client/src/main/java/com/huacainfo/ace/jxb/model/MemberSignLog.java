@@ -1,8 +1,11 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MemberSignLog {
+public class MemberSignLog implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String userId;
