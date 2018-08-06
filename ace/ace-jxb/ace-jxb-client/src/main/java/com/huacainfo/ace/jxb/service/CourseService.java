@@ -4,7 +4,6 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.jxb.model.Course;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
 
@@ -42,7 +41,7 @@ public interface CourseService {
      * @author: Arvin
      * @version: 2018-08-06
      */
-    MessageResponse insertCourse(Course obj, UserProp userProp) throws Exception;
+    MessageResponse insertCourse(CourseVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -55,7 +54,7 @@ public interface CourseService {
      * @author: Arvin
      * @version: 2018-08-06
      */
-    MessageResponse updateCourse(Course obj, UserProp userProp) throws Exception;
+    MessageResponse updateCourse(CourseVo obj, UserProp userProp) throws Exception;
 
     /**
      * @throws

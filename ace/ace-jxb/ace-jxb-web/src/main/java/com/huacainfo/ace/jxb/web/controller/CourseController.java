@@ -6,7 +6,6 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.jxb.model.Course;
 import com.huacainfo.ace.jxb.service.CourseService;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
@@ -70,7 +69,7 @@ public class CourseController extends JxbBaseController {
     @RequestMapping(value = "/insertCourse")
     @ResponseBody
     public MessageResponse insertCourse(String jsons) throws Exception {
-        Course obj = JSON.parseObject(jsons, Course.class);
+        CourseVo obj = JSON.parseObject(jsons, CourseVo.class);
         return this.courseService.insertCourse(obj, this.getCurUserProp());
     }
 
@@ -87,7 +86,7 @@ public class CourseController extends JxbBaseController {
     @RequestMapping(value = "/updateCourse")
     @ResponseBody
     public MessageResponse updateCourse(String jsons) throws Exception {
-        Course obj = JSON.parseObject(jsons, Course.class);
+        CourseVo obj = JSON.parseObject(jsons, CourseVo.class);
         return this.courseService.updateCourse(obj, this.getCurUserProp());
     }
 

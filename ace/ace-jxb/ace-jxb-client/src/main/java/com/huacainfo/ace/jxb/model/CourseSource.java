@@ -1,12 +1,17 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CourseSource {
+public class CourseSource implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String courseId;
-
+    /**
+     * 0 - 表示无所属章节 其他表示 - course_part.id
+     */
     private String partId;
 
     private String name;
@@ -14,7 +19,9 @@ public class CourseSource {
     private String mediUrl;
 
     private Integer duration;
-
+    /**
+     * 是否免费 0-否，1-是
+     */
     private String free;
 
     private Integer displaySeq;

@@ -1,15 +1,23 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Course {
+public class Course implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
-
+    /**
+     * 1-单课程 2-系列课程
+     */
     private String type;
-
+    /**
+     * 内容类别
+     */
     private String category;
-
+    /**
+     * 媒体类别
+     */
     private String mediType;
 
     private String name;
@@ -17,9 +25,13 @@ public class Course {
     private String cover;
 
     private Integer duration;
-
+    /**
+     * 费用类型 0-免费 1-收费
+     */
     private String costType;
-
+    /**
+     * 费用
+     */
     private BigDecimal cost;
 
     private Integer demandNum;

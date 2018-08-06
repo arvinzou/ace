@@ -1,14 +1,19 @@
 package com.huacainfo.ace.jxb.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.jxb.constant.CourseConstant;
 import com.huacainfo.ace.jxb.dao.CourseDao;
-import com.huacainfo.ace.jxb.model.Course;
+import com.huacainfo.ace.jxb.dao.CourseSourceDao;
+import com.huacainfo.ace.jxb.model.CourseSource;
 import com.huacainfo.ace.jxb.service.CourseService;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
@@ -17,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -33,6 +39,8 @@ public class CourseServiceImpl implements CourseService {
     private CourseDao courseDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private CourseSourceDao courseSourceDao;
 
     /**
      * @throws
@@ -52,11 +60,10 @@ public class CourseServiceImpl implements CourseService {
     public PageResult<CourseVo> findCourseList(CourseQVo condition, int start,
                                                int limit, String orderBy) throws Exception {
         PageResult<CourseVo> rst = new PageResult<>();
-        List<CourseVo> list = this.courseDao.findList(condition,
-                start, start + limit, orderBy);
+        List<CourseVo> list = courseDao.findList(condition, start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.courseDao.findCount(condition);
+            int allRows = courseDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -74,8 +81,7 @@ public class CourseServiceImpl implements CourseService {
      * @version: 2018-08-06
      */
     @Override
-    public MessageResponse insertCourse(Course o, UserProp userProp) throws Exception {
-
+    public MessageResponse insertCourse(CourseVo o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -100,27 +106,38 @@ public class CourseServiceImpl implements CourseService {
         if (CommonUtils.isBlank(o.getCostType())) {
             return new MessageResponse(1, "费用类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getDemandNum())) {
-            return new MessageResponse(1, "点播次数不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getLikeNum())) {
-            return new MessageResponse(1, "点赞次数不能为空！");
-        }
-
 
         int temp = this.courseDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "课程名称重复！");
         }
 
-        o.setId(GUIDUtil.getGUID());
+        String courseId = GUIDUtil.getGUID();
+        //单课程，直接增加课程资源
+        if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
+            CourseSource source = o.getCourseSource();
+            if (null == source || StringUtil.isEmpty(source.getFree())) {
+                return new MessageResponse(ResultCode.FAIL, "课程资源资料不全");
+            }
+            source.setId(GUIDUtil.getGUID());
+            source.setCourseId(courseId);
+            source.setPartId("0");//无所属章节
+            source.setName(o.getName());
+            source.setCreateDate(DateUtil.getNowDate());
+            int iCount = courseSourceDao.insert(source);
+            if (iCount <= 0) {
+                return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
+            }
+        }
+
+        o.setDemandNum(1);
+        o.setLikeNum(1);
+        o.setId(courseId);
         o.setCreateDate(new Date());
         o.setStatus("1");
-//        o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.courseDao.insertSelective(o);
-        this.dataBaseLogService.log("添加课程", "课程", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("添加课程", "课程", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加课程完成！");
     }
@@ -137,7 +154,7 @@ public class CourseServiceImpl implements CourseService {
      * @version: 2018-08-06
      */
     @Override
-    public MessageResponse updateCourse(Course o, UserProp userProp) throws Exception {
+    public MessageResponse updateCourse(CourseVo o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -162,21 +179,39 @@ public class CourseServiceImpl implements CourseService {
         if (CommonUtils.isBlank(o.getCostType())) {
             return new MessageResponse(1, "费用类型不能为空！");
         }
-        if (CommonUtils.isBlank(o.getDemandNum())) {
-            return new MessageResponse(1, "点播次数不能为空！");
+
+        //单课程，直接增加课程资源
+        if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
+            CourseSource params = o.getCourseSource();
+            if (null == params || StringUtil.isEmpty(params.getFree())) {
+                return new MessageResponse(ResultCode.FAIL, "课程资源资料不全");
+            }
+            //
+            List<CourseSource> sourceList = courseSourceDao.findByCourseId(o.getId());
+            CourseSource source;
+            if (CollectionUtils.isEmpty(sourceList)) {
+                source = new CourseSource();
+                source.setId(GUIDUtil.getGUID());
+                source.setCourseId(o.getId());
+                source.setPartId("0");//无所属章节
+                source.setName(o.getName());
+                source.setCreateDate(DateUtil.getNowDate());
+                int iCount = courseSourceDao.insert(source);
+                if (iCount <= 0) {
+                    return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
+                }
+            } else {
+                source = sourceList.get(0);
+                source.setName(o.getName());
+                source.setMediUrl(params.getMediUrl());
+                source.setDuration(params.getDuration());
+                source.setFree(params.getFree());
+                courseSourceDao.updateByPrimaryKeySelective(source);
+            }
         }
-        if (CommonUtils.isBlank(o.getLikeNum())) {
-            return new MessageResponse(1, "点赞次数不能为空！");
-        }
 
-
-//        o.setLastModifyDate(new Date());
-//        o.setLastModifyUserName(userProp.getName());
-//        o.setLastModifyUserId(userProp.getUserId());
-        this.courseDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更课程", "课程", "",
-                o.getId(), o.getId(), userProp);
-
+        courseDao.updateByPrimaryKeySelective(o);
+        dataBaseLogService.log("变更课程", "课程", "", o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "变更课程完成！");
     }
 

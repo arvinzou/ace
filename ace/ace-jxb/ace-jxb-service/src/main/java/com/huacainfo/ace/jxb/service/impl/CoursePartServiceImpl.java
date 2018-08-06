@@ -86,17 +86,8 @@ public class CoursePartServiceImpl implements CoursePartService {
             return new MessageResponse(1, "章节名称不能为空！");
         }
 
-
-        int temp = this.coursePartDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "课程章节名称重复！");
-        }
-
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-//        o.setStatus("1");
-//        o.setCreateUserName(userProp.getName());
-//        o.setCreateUserId(userProp.getUserId());
         this.coursePartDao.insertSelective(o);
         this.dataBaseLogService.log("添加课程章节", "课程章节", "",
                 o.getId(), o.getId(), userProp);
@@ -127,13 +118,8 @@ public class CoursePartServiceImpl implements CoursePartService {
             return new MessageResponse(1, "章节名称不能为空！");
         }
 
-
-//        o.setLastModifyDate(new Date());
-//        o.setLastModifyUserName(userProp.getName());
-//        o.setLastModifyUserId(userProp.getUserId());
         this.coursePartDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更课程章节", "课程章节", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更课程章节", "课程章节", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更课程章节完成！");
     }

@@ -17,22 +17,15 @@
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
-    </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.Course">
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum, 
-    remark, status, createUserId, createDate
+    id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum,
+        remark, status, createUserId, createDate, introduce
   </sql>
-    <sql id="Blob_Column_List">
-    introduce
-  </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
         from course
         where id = #{id,jdbcType=VARCHAR}
     </select>
@@ -208,25 +201,6 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.jxb.model.Course">
-    update course
-    set type = #{type,jdbcType=VARCHAR},
-      category = #{category,jdbcType=VARCHAR},
-      mediType = #{mediType,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      cover = #{cover,jdbcType=VARCHAR},
-      duration = #{duration,jdbcType=INTEGER},
-      costType = #{costType,jdbcType=VARCHAR},
-      cost = #{cost,jdbcType=DECIMAL},
-      demandNum = #{demandNum,jdbcType=INTEGER},
-      likeNum = #{likeNum,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      introduce = #{introduce,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Course">
     update course
     set type = #{type,jdbcType=VARCHAR},
@@ -245,4 +219,54 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+        id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum,
+        remark, status, createUserId, createDate, introduce
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from course t
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from course t
+        where 1=1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and IFNULL(t.status,'1') = #{condition.status,jdbcType=VARCHAR}
+        </if>
+
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Course">
+        select count(1)
+        from course
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
 </mapper>
