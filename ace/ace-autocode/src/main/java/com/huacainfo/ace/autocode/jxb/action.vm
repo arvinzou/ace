@@ -25,7 +25,7 @@ import com.huacainfo.ace.jxb.vo.$!{bean.name}QVo;
 * @version: $!{annotation.version}
 * @Description:  TODO($!{bean.tableChineseName})
 */
-public class $!{bean.name}Controller extends jxbBaseController {
+public class $!{bean.name}Controller extends JxbBaseController {
 
 
 private static final long serialVersionUID = 1L;
