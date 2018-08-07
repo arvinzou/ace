@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.CourseDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.Course">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="mediType" jdbcType="VARCHAR" property="mediType"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="duration" jdbcType="INTEGER" property="duration"/>
+        <result column="costType" jdbcType="VARCHAR" property="costType"/>
+        <result column="cost" jdbcType="DECIMAL" property="cost"/>
+        <result column="demandNum" jdbcType="INTEGER" property="demandNum"/>
+        <result column="likeNum" jdbcType="INTEGER" property="likeNum"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum,
+        remark, status, createUserId, createDate, introduce
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from course
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Course">
+    insert into course (id, type, category, 
+      mediType, name, cover, 
+      duration, costType, cost, 
+      demandNum, likeNum, remark, 
+      status, createUserId, createDate, 
+      introduce)
+    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
+      #{mediType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
+      #{duration,jdbcType=INTEGER}, #{costType,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
+      #{demandNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{introduce,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Course">
+        insert into course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="mediType != null">
+                mediType,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="cover != null">
+                cover,
+            </if>
+            <if test="duration != null">
+                duration,
+            </if>
+            <if test="costType != null">
+                costType,
+            </if>
+            <if test="cost != null">
+                cost,
+            </if>
+            <if test="demandNum != null">
+                demandNum,
+            </if>
+            <if test="likeNum != null">
+                likeNum,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="introduce != null">
+                introduce,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="mediType != null">
+                #{mediType,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null">
+                #{duration,jdbcType=INTEGER},
+            </if>
+            <if test="costType != null">
+                #{costType,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null">
+                #{cost,jdbcType=DECIMAL},
+            </if>
+            <if test="demandNum != null">
+                #{demandNum,jdbcType=INTEGER},
+            </if>
+            <if test="likeNum != null">
+                #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduce != null">
+                #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.Course">
+        update course
+        <set>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="mediType != null">
+                mediType = #{mediType,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null">
+                duration = #{duration,jdbcType=INTEGER},
+            </if>
+            <if test="costType != null">
+                costType = #{costType,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null">
+                cost = #{cost,jdbcType=DECIMAL},
+            </if>
+            <if test="demandNum != null">
+                demandNum = #{demandNum,jdbcType=INTEGER},
+            </if>
+            <if test="likeNum != null">
+                likeNum = #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Course">
+    update course
+    set type = #{type,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      mediType = #{mediType,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      duration = #{duration,jdbcType=INTEGER},
+      costType = #{costType,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      demandNum = #{demandNum,jdbcType=INTEGER},
+      likeNum = #{likeNum,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+        id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum,
+        remark, status, createUserId, createDate, introduce
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from course t
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from course t
+        where 1=1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and IFNULL(t.status,'1') = #{condition.status,jdbcType=VARCHAR}
+        </if>
+
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Course">
+        select count(1)
+        from course
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+</mapper>

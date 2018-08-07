@@ -9,15 +9,19 @@ function App() {
 
 function findDetail(id){
     $.ajax({
-        url: contextPath+ "/www/consult/getCounselorDetail",
+        url: contextPath+ "/www/order/findDetail",
         type:"post",
         async:false,
         data:{
-            counselorId: id
+            orderId:id
         },
         success:function(result){
             if(result.status == 0) {
-               console.log(result);
+                var dataTemp = document.getElementById('dataTemp').innerHTML;
+                var html = juicer(dataTemp, {
+                    data: result.data
+                });
+                $("#index").append(html);
             }else {
                 alert(result.info);
                 return;
