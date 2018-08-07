@@ -68,7 +68,7 @@ public class CounselorController extends JxbBaseController {
     }
 
 
-    @RequestMapping(value = "/findMyCounselors")
+    @RequestMapping(value = "/findStudioCounselors")
     @ResponseBody
     public ResultResponse findMyCounselors(CounselorQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setId(this.getCurUserProp().getUserId());

@@ -311,6 +311,58 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+<div class="modal fade bs-example-modal-lg" id="studioInfo" tabindex="-1" role="dialog"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="">工作室编辑</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        名字
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        我是名字
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        logo
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        我是logo
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        轮播图
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-12 col-md-12">
+                        介绍
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 </body>
 
 <style>

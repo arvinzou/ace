@@ -152,10 +152,21 @@
                                                         <div class="portlet-title">
                                                             <div class="caption">
                                                                 <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase"><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">工作室成员</font></font></span>
+                                                                <span class="caption-subject font-green bold uppercase">工作室成员
+                                                                </span>
                                                             </div>
+
+                                                            <div class="actions">
+                                                                <div class="portlet-input input-inline input-medium">
+
+
+                                                                    <select id="studioIdList">
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+
                                                         </div>
                                                         <div class="portlet-body">
                                                             <div class="mt-element-card mt-element-overlay">
@@ -275,6 +286,12 @@
             <td class="success"> \${data.profile}</td>
         </tr>
     </table>
+</script>
+
+<script id="temp_studioIdList" type="text/template">
+    {@each data as item}
+    <option value="\${item.id}">\${item.name}</option>
+    {@/each}
 </script>
 
 

@@ -13,6 +13,10 @@ function deleteBanner() {
 }
 
 
+function detail() {
+    $('#studioInfo').modal('show');
+}
+
 function getMyStudioList() {
     var url = "/jxb/studio/getMyStudioList";
     $.getJSON(url, function (result) {
@@ -86,6 +90,22 @@ function fillForm(data) {
             continue;
         }
         $('[name=form_' + key + ']').val(data[key]);
+        if (key === 'imgList') {
+            var imgs = data[key];
+            for (var i = 0; i < imgs.length; i++) {
+                var index = $('#indexImg').siblings().length;
+                var html = '<div class="imgSrc">' +
+                    '           <div class="idCardBox">' +
+                    '                <img class="select_img form_idCardImgUrl" src="' + imgs[i].imgUrl + '">' +
+                    '               <div class="deleteBtn">X</div>' +
+                    '           </div>' +
+                    '     </div>';
+                $('#indexImg').before($(html));
+                if (index == 4) {
+                    $('#indexImg').hide();
+                }
+            }
+        }
     }
 }
 
@@ -145,3 +165,5 @@ function submitForm() {
 
     })
 }
+
+

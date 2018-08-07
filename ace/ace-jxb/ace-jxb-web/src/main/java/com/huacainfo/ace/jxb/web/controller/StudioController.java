@@ -134,7 +134,7 @@ public class StudioController extends JxbBaseController {
     @RequestMapping(value = "/selectStudioByPrimaryKey")
     @ResponseBody
     public SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception {
-        return this.studioService.selectStudioByPrimaryKey(id);
+        return this.studioService.selectStudioInfo(id);
     }
 
 

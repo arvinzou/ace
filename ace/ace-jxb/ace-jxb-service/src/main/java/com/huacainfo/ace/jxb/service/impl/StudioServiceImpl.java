@@ -160,7 +160,7 @@ public class StudioServiceImpl implements StudioService {
             }
         } else {
             this.studioDao.updateByPrimaryKeySelective(o);
-            this.studioImgDao.deleteByPrimaryKey(o.getId());
+            this.studioImgDao.deleteByStudioId(o.getId());
             StudioImg si = new StudioImg();
             for (String item : list) {
                 si.setId(GUIDUtil.getGUID());
@@ -226,6 +226,27 @@ public class StudioServiceImpl implements StudioService {
     public SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception {
         SingleResult<StudioVo> rst = new SingleResult<>();
         rst.setValue(this.studioDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:selectStudioByPrimaryKey
+     * @Description: TODO(获取工作室)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Studio>
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public SingleResult<StudioVo> selectStudioInfo(String id) throws Exception {
+        SingleResult<StudioVo> rst = new SingleResult<>();
+
+        StudioVo studioVo = this.studioDao.selectVoByPrimaryKey(id);
+        studioVo.setImgList(studioImgDao.findImgList(studioVo.getId()));
+        rst.setValue(studioVo);
         return rst;
     }
 
@@ -330,7 +351,7 @@ public class StudioServiceImpl implements StudioService {
         if (null == studioVo) {
             return null;
         }
-        studioVo.setImgList(studioImgDao.finImgList(studioVo.getId()));
+        studioVo.setImgList(studioImgDao.findImgList(studioVo.getId()));
         //查询成员列表
         CounselorQVo condition = new CounselorQVo();//, int start, int limit, String orderBy
         condition.setStudioId(studioId);

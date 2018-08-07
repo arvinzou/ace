@@ -75,6 +75,8 @@ public interface StudioService {
      */
     SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception;
 
+    SingleResult<StudioVo> selectStudioInfo(String id) throws Exception;
+
     ResultResponse getMyStudioInfo(String counselorId) throws Exception;
 
     /**

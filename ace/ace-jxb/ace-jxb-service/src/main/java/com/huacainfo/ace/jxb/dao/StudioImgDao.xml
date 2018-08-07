@@ -96,7 +96,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <select id="finImgList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findImgList" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from studio_img
