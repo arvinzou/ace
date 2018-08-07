@@ -35,12 +35,20 @@ function App() {
         callback: function () {
             loader({
                 path: contextPath,
-                url: '/content/common/js/upload.js',
+                url: '/content/service/studio/js/upload.js',
                 type: 'js',
                 callback: function () {
                     initUpload();
                 }
             });
+            // loader({
+            //     path: contextPath,
+            //     url: '/content/common/js/upload.js',
+            //     type: 'js',
+            //     callback: function () {
+            //         initUpload();
+            //     }
+            // });
         }
     });
 }

@@ -76,9 +76,6 @@ public class CounselorServiceImpl implements CounselorService {
 
     @Override
     public ResultResponse findMyCounselors(CounselorQVo condition, int start, int limit, String orderBy) throws Exception {
-        StudioVo obj = studioDao.selectVoByCounselorId(condition.getId());
-        condition.setId("");
-        condition.setStudioId(obj.getId());
         List<CounselorVo> list = counselorDao.findList(condition, start, start + limit, orderBy);
         int allRows = counselorDao.findCount(condition);
         Map<String, Object> map = new HashMap<String, Object>();

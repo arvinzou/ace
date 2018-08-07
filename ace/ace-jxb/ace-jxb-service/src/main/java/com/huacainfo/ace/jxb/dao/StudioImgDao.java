@@ -13,6 +13,8 @@ public interface StudioImgDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByStudioId(String studioId);
+
     int insert(StudioImg record);
 
     int insertSelective(StudioImg record);
@@ -33,5 +35,5 @@ public interface StudioImgDao {
 
     int isExit(StudioImg record);
 
-    List<StudioImg> finImgList(String id);
+    List<StudioImg> findImgList(String studioId);
 }

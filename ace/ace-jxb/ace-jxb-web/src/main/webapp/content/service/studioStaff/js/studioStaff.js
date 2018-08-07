@@ -1,7 +1,32 @@
 window.onload = function () {
     getUserinfo();
-    initpage();
+    //initpage();
+    getMyStudioList();
+    $('#studioIdList').change(changeStudio)
 }
+
+
+function changeStudio() {
+    var id = $("#studioIdList option:selected").val();
+    $('#pagination1').jqPaginator('destroy');
+    initpage(id);
+}
+
+
+function getMyStudioList() {
+    var url = "/jxb/studio/getMyStudioList";
+    $.getJSON(url, function (result) {
+        if (result.status == 0) {
+            var navitem = document.getElementById('temp_studioIdList').innerHTML;
+            var html = juicer(navitem, {
+                data: result.data.my
+            });
+            $("#studioIdList").html(html);
+            initpage(result.data.my[0].id);
+        }
+    })
+}
+
 
 
 function getUserinfo() {
@@ -40,7 +65,7 @@ function detail(id) {
 }
 
 
-function initpage() {
+function initpage(studioId) {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
         pageSize: 20,
@@ -50,15 +75,16 @@ function initpage() {
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            findMyCounselors(num, type);
+            findMyCounselors(num, type, studioId);
         }
     });
 }
 
 
-function findMyCounselors(num, type) {
-    var url = "/jxb/counselor/findMyCounselors";
+function findMyCounselors(num, type, studioId) {
+    var url = "/jxb/counselor/findStudioCounselors";
     var data = {
+        studioId: studioId,
         page: num,
         limit: 20,
         name: '',
