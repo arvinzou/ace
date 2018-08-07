@@ -267,4 +267,11 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findItemList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from canvas_tmpl_item
+        where tmplId = #{tmplId,jdbcType=VARCHAR}
+    </select>
 </mapper>

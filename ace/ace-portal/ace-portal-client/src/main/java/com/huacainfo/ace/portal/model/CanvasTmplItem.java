@@ -2,11 +2,17 @@ package com.huacainfo.ace.portal.model;
 
 import java.util.Date;
 
-public class CanvasTmplItem {
+public class CanvasTmplItem implements java.io.Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     private String id;
 
     private String tmplId;
 
+    /**
+     * 绘制类型 0-图片；1-字体
+     */
     private String itemType;
 
     private String itemName;

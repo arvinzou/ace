@@ -1,8 +1,10 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ConsultOrder {
+public class ConsultOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 订单主键
      */
@@ -23,6 +25,10 @@ public class ConsultOrder {
      * 性别
      */
     private String sex;
+    /**
+     * 问题描述标签
+     */
+    private String tags;
     /**
      * 问题类型及描述
      */
@@ -47,6 +53,14 @@ public class ConsultOrder {
      * 入库日期
      */
     private Date createDate;
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     public String getId() {
         return id;

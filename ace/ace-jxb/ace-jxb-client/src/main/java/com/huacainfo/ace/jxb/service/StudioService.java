@@ -10,6 +10,7 @@ import com.huacainfo.ace.jxb.vo.StudioQVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -47,6 +48,8 @@ public interface StudioService {
      */
     MessageResponse insertStudio(Studio obj, UserProp userProp) throws Exception;
 
+    MessageResponse modifyStudio(Studio obj, List<String> list, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateStudio
@@ -71,6 +74,8 @@ public interface StudioService {
      * @version: 2018-07-25
      */
     SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception;
+
+    SingleResult<StudioVo> selectStudioInfo(String id) throws Exception;
 
     ResultResponse getMyStudioInfo(String counselorId) throws Exception;
 
@@ -102,7 +107,7 @@ public interface StudioService {
      * @param counselorId 咨询师主键id
      * @return List<StudioVo>
      */
-    List<StudioVo> getStudioList(String counselorId);
+    Map<String, Object> getStudioList(String counselorId) throws Exception;
 
     /**
      * 获取工作室详情

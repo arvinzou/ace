@@ -4,17 +4,17 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.jxb.constant.RegType;
 import com.huacainfo.ace.jxb.dao.MemberRelationDao;
 import com.huacainfo.ace.jxb.dao.RegDao;
 import com.huacainfo.ace.jxb.model.MemberRelation;
 import com.huacainfo.ace.jxb.model.Reg;
 import com.huacainfo.ace.jxb.service.CounselorService;
+import com.huacainfo.ace.jxb.service.MemberSignLogService;
 import com.huacainfo.ace.jxb.service.RegService;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
-import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.portal.service.UsersService;
@@ -44,6 +44,8 @@ public class RegServiceImpl implements RegService {
     private MemberRelationDao memberRelationDao;
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private MemberSignLogService memberSignLogService;
 
     /**
      * 判断该号码是否已经注册过
@@ -138,12 +140,8 @@ public class RegServiceImpl implements RegService {
      * @return Map
      */
     private Map<String, Object> getSignInfo(String counselorId) {
-
-
-        Map<String, Object> rtnMap = new HashMap<>();
-        rtnMap.put("signCount", 10);//本月已签到天数
-        rtnMap.put("status", 0);//签到状态 0-未签到 1-已签到
-        return rtnMap;
+        String nowDate = DateUtil.getNow();
+        return memberSignLogService.getSignInfo(counselorId, nowDate);
     }
 
     /**
@@ -166,7 +164,7 @@ public class RegServiceImpl implements RegService {
         if (isExitByTel(reg.getMobile())) {
             return new MessageResponse(1, "手机号已注册过，请重新填写另一新的手机号!");
         }
-        String pwd = CommonUtils.getIdentifyCode(6, 0);
+        String pwd = "123123";// CommonUtils.getIdentifyCode(6, 0);
         Users o = new Users();
         o.setUserId(reg.getUnionId());
         o.setAccount(reg.getMobile());
@@ -182,13 +180,13 @@ public class RegServiceImpl implements RegService {
         o.setSex(reg.getSex());
         this.regDao.insertReg(o);
         //密码短信通知
-        TaskCmcc obj = new TaskCmcc();
-        Map<String, Object> msg = new HashMap<String, Object>();
-        msg.put("taskName", "账号" + reg.getMobile());
-        msg.put("msg", reg.getNickname() + "你好，注册成功，账号" + reg.getMobile() + "，密码" + pwd + "。【近心帮】");
-        msg.put("tel", reg.getMobile() + "," + reg.getMobile());
-        CommonBeanUtils.copyMap2Bean(o, msg);
-        this.taskCmccService.insertTaskCmcc(obj);
+//        TaskCmcc obj = new TaskCmcc();
+//        Map<String, Object> msg = new HashMap<String, Object>();
+//        msg.put("taskName", "账号" + reg.getMobile());
+//        msg.put("msg", reg.getNickname() + "你好，注册成功，账号" + reg.getMobile() + "，密码" + pwd + "。【近心帮】");
+//        msg.put("tel", reg.getMobile() + "," + reg.getMobile() + ";");
+//        CommonBeanUtils.copyMap2Bean(o, msg);
+//        this.taskCmccService.insertTaskCmcc(obj);
         //******************
         return new MessageResponse(0, "注册成功.");
     }

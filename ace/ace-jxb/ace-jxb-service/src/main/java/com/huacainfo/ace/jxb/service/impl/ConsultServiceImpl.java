@@ -3,7 +3,6 @@ package com.huacainfo.ace.jxb.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -204,7 +203,6 @@ public class ConsultServiceImpl implements ConsultService {
     }
 
 
-
     /**
      * @throws
      * @Title:updateConsult
@@ -320,6 +318,26 @@ public class ConsultServiceImpl implements ConsultService {
         rtnMap.put("counselorVo", counselorVo);
         rtnMap.put("consultVo", consultVo);
         return new ResultResponse(ResultCode.SUCCESS, "咨询成功", rtnMap);
+    }
+
+    /**
+     * 咨询师 在线/离线
+     *
+     * @param counselorId  咨询师id
+     * @param onlineStatus 在线状态 0-离线 1-在线
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse onOff(String counselorId, String onlineStatus) {
+        Consult vo = consultDao.selectByPrimaryKey(counselorId);
+        if (null == vo) {
+            return new ResultResponse(ResultCode.FAIL, "咨询师资料丢失");
+        }
+
+        vo.setOnlineStatus(onlineStatus);
+        consultDao.updateByPrimaryKeySelective(vo);
+
+        return new ResultResponse(ResultCode.SUCCESS, "操作成功");
     }
 
 }

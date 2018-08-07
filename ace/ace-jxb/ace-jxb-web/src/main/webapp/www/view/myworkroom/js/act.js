@@ -27,6 +27,18 @@ function initData(id){
                     roomContent: result.data
                 });
                 $("#roomContent").append(content);
+
+                var memberTemp = document.getElementById('memberListTemp').innerHTML;
+                var memberHtml = juicer(memberTemp, {
+                    member: result.data
+                });
+                $("#memberList").append(memberHtml);
+
+                var footerTemp = document.getElementById('footerTemp').innerHTML;
+                var footerHtml = juicer(footerTemp, {
+                    footer: result.data
+                });
+                $(".footer").append(footerHtml);
             }else {
                 alert(result.info);
                 return;
@@ -36,4 +48,12 @@ function initData(id){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function showMember(id){
+    window.location.href = contextPath + '/www/view/workmember/index.jsp?id='+id;
+}
+
+function invate(id){
+    window.location.href = contextPath + '/www/view/invate/index.jsp?id='+id;
 }

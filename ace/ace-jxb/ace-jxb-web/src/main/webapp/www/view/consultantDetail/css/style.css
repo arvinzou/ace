@@ -8,6 +8,9 @@ body{
 .row{
 	margin: 0!important;
 }
+.index{
+	width: 100%;
+}
 .row_01{
 	height: 2rem;
 	padding-top: 0.19333rem;

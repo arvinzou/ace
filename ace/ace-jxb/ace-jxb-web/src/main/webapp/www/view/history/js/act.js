@@ -11,6 +11,8 @@ function App() {
         $(".news-slider").css("left",slider_left);
         $(this).addClass("active").siblings().removeClass("active");
     });
+
+    initData();
 }
 
 function  initSilder() {
@@ -19,4 +21,62 @@ function  initSilder() {
     var slider_width = $(".news-slider").width();
     var slider_left = (th_left + (th_width/2) - slider_width/2)-8;
     $(".news-slider").css("left",slider_left);
+}
+
+function initData(){
+    $.ajax({
+        url: contextPath+ "/www/order/findList",
+        type:"post",
+        async:false,
+        data:{
+            findType: '2',
+            start: 0,
+            limit: 999
+        },
+        success:function(result){
+            if(result.status == 0) {
+                var orderListTemp = document.getElementById('orderListTemp').innerHTML;
+                var html = juicer(orderListTemp, {
+                    data: result.data
+                });
+
+                $("#orderList").html(html);
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function orderList(data){
+    $.ajax({
+        url: contextPath+ "/www/order/findList",
+        type:"post",
+        async:false,
+        data:{
+            findType: '2',
+            payStatusArray: data,
+            start: 0,
+            limit: 999
+        },
+        success:function(result){
+            if(result.status == 0) {
+               var orderTemp = document.getElementById('orderListTemp').innerHTML;
+                var html = juicer(orderTemp, {
+                    data: result.data
+                });
+                $("#orderList").html(html);
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
 }

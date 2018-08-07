@@ -44,8 +44,7 @@
 
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/taskCmcc/findTaskCmccList.do">
-                        <i
-                                class="ace-icon fa fa-search  align-top bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-search  align-top bigger-125 icon-on-right"></i>
                     </button>
 
                 </form>
@@ -53,23 +52,19 @@
 
                     <button class="btn btn-info" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/taskCmcc/insertTaskCmcc.do">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-top bigger-125 icon-on-right"></i>
+                        <i class="ace-icon fa fa-plus-square  align-top bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-info" id="btn-view-detail"
                             authority="false">
-                        详细 <i
-                            class="ace-icon fa fa-edit  align-top bigger-125 icon-on-right"></i>
+                        详细 <i class="ace-icon fa fa-edit  align-top bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-purple" id="btn-view-da"
                             authority="${pageContext.request.contextPath}/taskCmcc/insertTaskCmccResources.do">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-cog  align-top bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-cog  align-top bigger-125 icon-on-right"></i>
                     </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/taskCmcc/deleteTaskCmccByTaskCmccId.do">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-top bigger-125 icon-on-right"></i>
+                        <i class="ace-icon glyphicon  glyphicon-remove  align-top bigger-125 icon-on-right"></i>
                     </button>
                     <!--
 					<button class="btn btn-info" id="btn-view-repeat"

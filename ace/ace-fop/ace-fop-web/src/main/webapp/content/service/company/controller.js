@@ -106,32 +106,37 @@ jQuery(function ($) {
 });
 
 function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
-        modal: false,
-        width: 800,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
+    // parent.addPanel(title, contextPath + '/dynamic/service/company/view.jsp?companyId=' + id, true);
 
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
-    $(dialog).parent().css("top", "1px");
-    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
-    loadView(id);
+    window.open(contextPath + '/dynamic/service/company/view.jsp?companyId=' + id);
+
+
+    // var dialog = $("#dialog-message-view").removeClass('hide').dialog({
+    //     modal: false,
+    //     width: 1000,
+    //     title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
+    //     title_html: true,
+    //     buttons: [
+    //
+    //         {
+    //             html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+    //             "class": "btn btn-info btn-xs",
+    //             click: function () {
+    //                 $(this).dialog("close");
+    //             }
+    //         },
+    //         {
+    //             html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+    //             "class": "btn btn-xs",
+    //             click: function () {
+    //                 $(this).dialog("close");
+    //             }
+    //         }
+    //     ]
+    // });
+    // $(dialog).parent().css("top", "1px");
+    // $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
+    // loadView(id);
 }
 function loadView(id) {
     $.ajax({
@@ -144,9 +149,10 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             //动态渲染
-            var tpl = document.getElementById('tpl-company').innerHTML;//'tpl-company'
+            var tpl = document.getElementById('tpl-view-page').innerHTML;//'tpl-company'
             var renderHtml = juicer(tpl, rst.value);
-            $('#dialog-message-view').html(renderHtml);
+            $('.main_box').html(renderHtml);
+            // $('#dialog-message-view').html(renderHtml);
 
 
             $.each(rst.value, function (key, value) {
@@ -173,10 +179,6 @@ function loadView(id) {
                             rst = "N/A";
                     }
                     value = rst;
-                }
-                //企业性质
-                if (key == "companyProperty") {
-                    value = rsd(value, "134");
                 }
                 //status
                 if (key == "status") {
@@ -211,8 +213,9 @@ function loadView(id) {
                     key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
-                $("#dialog-message-view").find('span[name=' + key + ']').html(value);
-                $("#dialog-message-view").find('div[name=' + key + ']').html(value);
+
+                // console.log("key=" + key + ",value=" + value);
+                $(".form_info").find('span[name=' + key + ']').html(value);
             });
         },
         error: function () {
@@ -254,4 +257,38 @@ function longitude(longitude) {
 }
 function addr(addr) {
     $("#address").val(addr);
+}
+
+
+function rsd(value, kernelKey) {
+    try {
+        var name = value;
+        if ((value + "") && ("" + value).indexOf(',') < 0) {
+            if (staticDictObject && kernelKey && staticDictObject[kernelKey]) {
+                for (var i = 0; i < staticDictObject[kernelKey].length; i++) {
+                    if (staticDictObject[kernelKey][i].CODE == value) {
+                        name = staticDictObject[kernelKey][i].NAME;
+                        break;
+                    }
+                }
+            }
+        } else {
+            if (value) {
+                var nameArray = [];
+                var v = (value + "").split(',');
+                for (var j = 0; j < v.length; j++) {
+                    for (var i = 0; i < staticDictObject[kernelKey].length; i++) {
+                        if (staticDictObject[kernelKey][i].CODE == v[j]) {
+                            nameArray.push(staticDictObject[kernelKey][i].NAME);
+                            break;
+                        }
+                    }
+                }
+                name = nameArray.join(',');
+            }
+        }
+    } catch (err) {
+        console.info("渲染错误", value + ":" + kernelKey + ":" + err);
+    }
+    return name;
 }

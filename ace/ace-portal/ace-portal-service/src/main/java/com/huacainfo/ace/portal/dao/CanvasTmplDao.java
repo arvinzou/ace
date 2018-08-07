@@ -13,9 +13,7 @@ public interface CanvasTmplDao {
 
     int insert(CanvasTmpl record);
 
-
     CanvasTmplVo selectByPrimaryKey(String CanvasTmplId);
-
 
     int updateByPrimaryKey(CanvasTmpl record);
 
@@ -31,4 +29,11 @@ public interface CanvasTmplDao {
 
     Map<String, Object> getById(String id);
 
+    /**
+     * 获取系统下所有绘制模板
+     *
+     * @param sysId 系统ID
+     * @return List<CanvasTmpl>
+     */
+    List<CanvasTmpl> findBySysId(String sysId);
 }

@@ -2,7 +2,9 @@ package com.huacainfo.ace.jxb.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -11,8 +13,13 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.StudioDao;
 import com.huacainfo.ace.jxb.dao.StudioImgDao;
+import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.Studio;
+import com.huacainfo.ace.jxb.model.StudioImg;
+import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.StudioService;
+import com.huacainfo.ace.jxb.vo.CounselorQVo;
+import com.huacainfo.ace.jxb.vo.CounselorVo;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -21,8 +28,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("studioService")
 /**
@@ -38,6 +48,8 @@ public class StudioServiceImpl implements StudioService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private StudioImgDao studioImgDao;
+    @Autowired
+    private CounselorService counselorService;
 
     /**
      * @throws
@@ -111,6 +123,58 @@ public class StudioServiceImpl implements StudioService {
         return new MessageResponse(0, "添加工作室完成！");
     }
 
+
+    /**
+     * @throws
+     * @Title:insertStudio
+     * @Description: TODO(添加工作室)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public MessageResponse modifyStudio(Studio o, List<String> list, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(o.getName())) {
+            return new MessageResponse(1, "名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "介绍不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getId())) {
+            String studioId = GUIDUtil.getGUID();
+            o.setId(studioId);
+            o.setCounselorId(userProp.getUserId());
+            o.setCreateDate(new Date());
+            o.setStatus("0");
+            this.studioDao.insertSelective(o);
+            StudioImg si = new StudioImg();
+            for (String item : list) {
+                si.setId(GUIDUtil.getGUID());
+                si.setCreateDate(new Date());
+                si.setStudioId(studioId);
+                si.setImgUrl(item);
+                this.studioImgDao.insert(si);
+            }
+        } else {
+            this.studioDao.updateByPrimaryKeySelective(o);
+            this.studioImgDao.deleteByStudioId(o.getId());
+            StudioImg si = new StudioImg();
+            for (String item : list) {
+                si.setId(GUIDUtil.getGUID());
+                si.setCreateDate(new Date());
+                si.setStudioId(o.getId());
+                si.setImgUrl(item);
+                this.studioImgDao.insert(si);
+            }
+        }
+        this.dataBaseLogService.log("添加工作室", "工作室", "",
+                o.getId(), o.getId(), userProp);
+        return new MessageResponse(0, "添加工作室完成！");
+    }
+
     /**
      * @throws
      * @Title:updateStudio
@@ -162,6 +226,27 @@ public class StudioServiceImpl implements StudioService {
     public SingleResult<StudioVo> selectStudioByPrimaryKey(String id) throws Exception {
         SingleResult<StudioVo> rst = new SingleResult<>();
         rst.setValue(this.studioDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:selectStudioByPrimaryKey
+     * @Description: TODO(获取工作室)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Studio>
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public SingleResult<StudioVo> selectStudioInfo(String id) throws Exception {
+        SingleResult<StudioVo> rst = new SingleResult<>();
+
+        StudioVo studioVo = this.studioDao.selectVoByPrimaryKey(id);
+        studioVo.setImgList(studioImgDao.findImgList(studioVo.getId()));
+        rst.setValue(studioVo);
         return rst;
     }
 
@@ -229,12 +314,29 @@ public class StudioServiceImpl implements StudioService {
      * @return List<StudioVo>
      */
     @Override
-    public List<StudioVo> getStudioList(String counselorId) {
+    public Map<String, Object> getStudioList(String counselorId) throws Exception {
 
+        Counselor counselor = counselorService.selectCounselorByPrimaryKey(counselorId).getValue();
+        if (null == counselor) {
+            throw new CustomException("咨询师资料丢失");
+        }
+        //StudioVo
+        StudioVo join = null;
+        if (StringUtil.isNotEmpty(counselor.getStudioId())) {
+            join = studioDao.selectVoByPrimaryKey(counselor.getStudioId());
+        }
+
+        //我的工作室
         StudioQVo condition = new StudioQVo();
         condition.setCounselorId(counselorId);
+        List<StudioVo> my = studioDao.findList(condition, 0, 0 + 10, "");
 
-        return studioDao.findList(condition, 0, 0 + 10, "");
+
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("my", my);
+        rtnMap.put("join", join);
+
+        return rtnMap;
     }
 
     /**
@@ -249,7 +351,13 @@ public class StudioServiceImpl implements StudioService {
         if (null == studioVo) {
             return null;
         }
-        studioVo.setImgList(studioImgDao.finImgList(studioVo.getId()));
+        studioVo.setImgList(studioImgDao.findImgList(studioVo.getId()));
+        //查询成员列表
+        CounselorQVo condition = new CounselorQVo();//, int start, int limit, String orderBy
+        condition.setStudioId(studioId);
+        List<CounselorVo> memberList = counselorService.findCounselorList(condition, 0, 0 + 1000, "").getRows();
+
+        studioVo.setMemberList(memberList);
 
         return studioVo;
     }

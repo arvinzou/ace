@@ -122,13 +122,13 @@
 			
 			<div class="row">
 				<div class="col-xs-1 col-sm-1"><img id="read" class="read" src="img/no.png"/></div>
-				<div class="col-xs-11 col-sm-11"><span class="read_01">我已阅读并同意</span><span class="read_02">《顾问在线服务协议》</span></div>
+				<div class="col-xs-11 col-sm-11"><span class="read_01">我已阅读并同意</span><span class="read_02"><a href="readme.html"> 《顾问在线服务协议》</a></span></div>
 			</div>
 		</div>
 		
 		<div class="row footer">
 			<div class="col-xs-6 col-sm-6 amount">
-				<span class="amount_01">共计</span><span class="amount_02">¥</span><span class="amount_03">100</span>
+				<span class="amount_01">共计</span><span class="amount_02">¥</span><span class="amount_03" id="totalMoney">100</span>
 			</div>
 			<div class="col-xs-6 col-sm-6">
 				<button class="appointment" onclick="createOrder();">立即预约</button>
@@ -137,7 +137,7 @@
 
 	<script id="labelTemp" type="text/template">
         <ul class="tagboard">
-            {@each data.counselorVo.tags.split('，') as item,index}
+            {@each data.counselorVo.tags.split(',') as item,index}
         <li>\${item}</li>
         {@/each}
         </ul>
@@ -170,7 +170,7 @@
 				<div class="col-xs-4 col-sm-4">
 					<span class="unactive" onclick="changeType(this,'\${consultType.price}','\${consultType.id}');">
 						<p class="words_01"><span class="money">\${consultType.price}</span>元/次</p>
-						<p class="words_02">语音咨询</p>
+						<p class="words_02">电话咨询</p>
 					</span>
 				</div>
 				{@else if consultType.type == '2'}

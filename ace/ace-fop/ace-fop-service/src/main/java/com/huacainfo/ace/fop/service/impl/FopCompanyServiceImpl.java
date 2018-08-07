@@ -530,6 +530,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             person.setDeptPost(o.getLpDeptPost());
             person.setIdentityCard(o.getLpIdentityCard());
             person.setSocietyPost(o.getLpSocietyPost());
+            person.setResume(o.getLpResume());
+            person.setAchievement(o.getLpAchievement());
 
             return fopPersonService.updateFopPerson(person, userProp);
         }

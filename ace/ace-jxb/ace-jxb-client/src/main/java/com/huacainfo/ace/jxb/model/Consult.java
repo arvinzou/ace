@@ -1,8 +1,10 @@
 package com.huacainfo.ace.jxb.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Consult {
+public class Consult implements Serializable {
+    private static final long serialVersionUID = 1L;
     /**
      * 咨询师ID  counselor.id
      */
@@ -28,14 +30,28 @@ public class Consult {
      * 面对面咨询仅限城市
      */
     private String city;
+
     /**
-     * 是否接收咨询
+     * 在线状态 0-离线 1-在线
+     */
+    private String onlineStatus;
+
+    /**
+     * 是否接收咨询 0-否 1-是
      */
     private String status;
     /**
      * 入库日期
      */
     private Date createDate;
+
+    public String getOnlineStatus() {
+        return onlineStatus;
+    }
+
+    public void setOnlineStatus(String onlineStatus) {
+        this.onlineStatus = onlineStatus;
+    }
 
     public String getId() {
         return id;

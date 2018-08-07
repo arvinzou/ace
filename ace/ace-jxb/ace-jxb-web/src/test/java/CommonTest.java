@@ -1,6 +1,10 @@
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -14,16 +18,19 @@ import java.util.Map;
 public class CommonTest {
 
 
-    @Test
-    public void test() {
-//        String accessToken = "12_w2b662E5tXvLLGRewt84yVZWraYqjlsgNXVa-514hFjiQX7AQUuOumHDJFX8r8UdQZp8D3Kp2BZHrPflp8qYBNTT6eWk136IqLgddioQqTftHx1ldHOepP9rqHQxQ4aiNvZPeP1zAdOLaFKsKIKbAAAAYA";
-//        String uri = temporary("arvin", accessToken);
-//        System.out.println("======>" + uri);
-
-//        System.out.println(GUIDUtil.getGUID());
-        orderParams();
+    public static SqlSession getSqlSession() {
+        SqlSessionFactory sqlSessionFactory = null;
+        SqlSession session = sqlSessionFactory.openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration(); //反射得到configuration ,然后
+        configuration.setSafeResultHandlerEnabled(false); // 设置为false
+        return session;
     }
 
+    @Test
+    public void test() {
+
+
+    }
 
     public void orderParams() {
         BaseOrder baseOrder = new BaseOrder();

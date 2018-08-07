@@ -2,6 +2,7 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -64,4 +65,27 @@ public class WConsultController extends JxbBaseController {
 
         return consultService.getCounselorDetail(counselorId);
     }
+
+
+    /**
+     * 咨询师 在线/离线
+     *
+     * @param counselorId  咨询师id
+     * @param onlineStatus 在线状态 0-离线 1-在线
+     * @return ResultResponse
+     */
+    @RequestMapping("/onOff")
+    public ResultResponse onOff(String counselorId, String onlineStatus) throws Exception {
+        if (StringUtil.isEmpty(counselorId)) {
+            Userinfo userinfo = getCurUserinfo();
+            if (null == userinfo || StringUtil.isEmpty(userinfo.getUnionid())) {
+                return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+            }
+
+            counselorId = userinfo.getUnionid();
+        }
+
+        return consultService.onOff(counselorId, onlineStatus);
+    }
+
 }

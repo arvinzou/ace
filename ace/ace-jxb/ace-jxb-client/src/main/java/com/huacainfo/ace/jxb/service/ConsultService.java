@@ -94,4 +94,13 @@ public interface ConsultService {
      * @return ResultResponse
      */
     ResultResponse getCounselorDetail(String counselorId) throws Exception;
+
+    /**
+     * 咨询师 在线/离线
+     *
+     * @param counselorId  咨询师id
+     * @param onlineStatus 在线状态 0-离线 1-在线
+     * @return ResultResponse
+     */
+    ResultResponse onOff(String counselorId, String onlineStatus);
 }

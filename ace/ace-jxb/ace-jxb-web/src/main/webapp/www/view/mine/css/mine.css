@@ -106,3 +106,17 @@ body{
 	font-weight: bold;
 	margin-top: 0.32rem;
 }
+.signed{
+	width: 2.133333rem;
+	height: 0.8rem;
+	display: block;
+	border-radius: 0.4rem;
+	text-align: center;
+	line-height: 0.8rem;
+	background: #ffffff;
+	color: #A0A7B6;
+	border: 1px solid #A0A7B6;
+	font-size: 0.373333rem;
+	font-weight: bold;
+	margin-top: 0.32rem;
+}

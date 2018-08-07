@@ -219,4 +219,16 @@ public class CanvasTmplItemServiceImpl implements CanvasTmplItemService {
         rst.put("data", this.canvasTmplItemDao.getById(id));
         return rst;
     }
+
+    /**
+     * 绘画模板内容
+     *
+     * @param tmplId 绘画模板ID
+     * @return
+     */
+    @Override
+    public List<CanvasTmplItem> findItemList(String tmplId) {
+
+        return canvasTmplItemDao.findItemList(tmplId);
+    }
 }

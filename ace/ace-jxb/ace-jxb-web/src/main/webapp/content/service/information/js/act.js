@@ -8,14 +8,18 @@ function loadlocal() {
 
     urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
 
-    urls.push({path: contextPath, url: '/content/service/information/js/city.json.js', type: 'js'});
-    urls.push({path: contextPath, url: '/content/service/information/js/citySet.js', type: 'js'});
-    urls.push({path: contextPath, url: '/content/service/information/js/Popt.js', type: 'js'});
+    // urls.push({path: contextPath, url: '/content/service/information/js/city.json.js', type: 'js'});
+    // urls.push({path: contextPath, url: '/content/service/information/js/citySet.js', type: 'js'});
+    // urls.push({path: contextPath, url: '/content/service/information/js/Popt.js', type: 'js'});
     // urls.push({path:portalPath,url:'/content/common/assets/global/plugins/bootstrap/js/bootstrap.js',type:'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/scripts/app.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/layouts/layout3/scripts/layout.min.js', type: 'js'});
+
+    urls.push({path: portalPath, url: '/content/common/citySelect/js/citydata.min.js', type: 'js'});
+    urls.push({path: portalPath, url: '/content/common/citySelect/js/citySelect-1.0.3.js', type: 'js'});
+
     urls.push({path: contextPath, url: '/content/service/information/js/information.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);

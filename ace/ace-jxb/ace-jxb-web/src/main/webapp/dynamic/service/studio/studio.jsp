@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -14,23 +13,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-
     <jsp:include page="../../common/base.jsp"/>
     <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/limonte-sweetalert2/7.21.1/sweetalert2.min.css">
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">
-    <script src="${pageContext.request.contextPath}/content/service/studio/js/act.js?v=${cfg.version}"></script>
+    <script src="${pageContext.request.contextPath}/content/service/counselor/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
 <body>
+
+
 <div class="page-wrapper">
+
     <div class="page-wrapper-row full-height">
         <div class="page-wrapper-middle">
             <div class="page-container">
@@ -47,209 +47,203 @@
                                 </li>
                             </ul>
                             <div class="page-content-inner">
+
+                                <!---==============================================-->
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <!-- BEGIN PROFILE SIDEBAR -->
-                                        <div class="profile-sidebar">
-                                            <!-- PORTLET MAIN -->
-                                            <div class="portlet light profile-sidebar-portlet ">
-                                                <!-- SIDEBAR USERPIC -->
-                                                <div class="profile-userpic">
-                                                    <img src="${pageContext.request.contextPath}/content/service/information/img/left_pic_two.jpg"
-                                                         class="user-imagePhotoUrl img-responsive" alt="">
+                                        <div class="portlet light portlet-fit ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class=" icon-layers font-green"></i>
+                                                    <span class="caption-subject font-green bold uppercase"><font
+                                                            style="vertical-align: inherit;"><font
+                                                            style="vertical-align: inherit;">咨询师管理</font></font></span>
                                                 </div>
-                                                <!-- END SIDEBAR USERPIC -->
-                                                <!-- SIDEBAR USER TITLE -->
-                                                <div class="profile-usertitle">
-                                                    <div class="profile-usertitle-name user-name"></div>
-                                                    <div class="profile-usertitle-job user-certification"></div>
-                                                </div>
-                                                <!-- END SIDEBAR USER TITLE -->
-                                                <!-- SIDEBAR BUTTONS -->
-                                                <div class="profile-userbuttons">
-                                                    <button type="button" class="btn btn-circle green btn-sm">Follow
-                                                    </button>
-                                                    <button type="button" class="btn btn-circle red btn-sm">Message
-                                                    </button>
-                                                </div>
-                                                <!-- END SIDEBAR BUTTONS -->
-                                                <!-- SIDEBAR MENU -->
-                                                <div class="profile-usermenu">
-                                                    <ul class="nav">
-                                                        <li>
-                                                            <a href="../information/information.jsp">
-                                                                <i class="icon-home"></i>完善信息
-                                                            </a>
-                                                        </li>
-                                                        <li class="active">
-                                                            <a href="#">
-                                                                <i class="icon-settings"></i>工作室</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="icon-info"></i> Help </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!-- END MENU -->
-                                            </div>
-                                            <!-- END PORTLET MAIN -->
-                                            <!-- PORTLET MAIN -->
-                                            <div class="portlet light ">
-                                                <!-- STAT -->
-                                                <div class="row list-separated profile-stat">
-                                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="uppercase profile-stat-title"> 37</div>
-                                                        <div class="uppercase profile-stat-text"> Projects</div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="uppercase profile-stat-title"> 51</div>
-                                                        <div class="uppercase profile-stat-text"> Tasks</div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="uppercase profile-stat-title"> 61</div>
-                                                        <div class="uppercase profile-stat-text"> Uploads</div>
-                                                    </div>
-                                                </div>
-                                                <!-- END STAT -->
-                                                <div>
-                                                    <h4 class="profile-desc-title">About Marcus Doe</h4>
-                                                    <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
-                                                    <div class="margin-top-20 profile-desc-link">
-                                                        <i class="fa fa-globe"></i>
-                                                        <a href="http://www.keenthemes.com">www.keenthemes.com</a>
-                                                    </div>
-                                                    <div class="margin-top-20 profile-desc-link">
-                                                        <i class="fa fa-twitter"></i>
-                                                        <a href="http://www.twitter.com/keenthemes/">@keenthemes</a>
-                                                    </div>
-                                                    <div class="margin-top-20 profile-desc-link">
-                                                        <i class="fa fa-facebook"></i>
-                                                        <a href="http://www.facebook.com/keenthemes/">keenthemes</a>
+                                                <div class="actions">
+                                                    <div class="portlet-input input-inline">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control input-circle-left"
+                                                                   placeholder="search...">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- END PORTLET MAIN -->
-                                        </div>
-                                        <!-- END BEGIN PROFILE SIDEBAR -->
-                                        <!-- BEGIN PROFILE CONTENT -->
-                                        <div class="profile-content">
                                             <div class="portlet-body">
-                                                <div class="form-horizontal" novalidate="novalidate">
-                                                    <div class="form-body">
+                                                <div class="mt-element-card mt-card-round mt-element-overlay">
+                                                    <div class="row">
+                                                        <div id="counselorList">
 
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">名字
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" id="notNull" class="form-control"
-                                                                       placeholder="" name="form_name">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">工作室logo
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div>
-                                                                    <div class="studiologo" id="studiologo">
-                                                                        <img class="select_img form_logoImgUrl"
-                                                                             id="logo" data-cover="logo"
-                                                                             data-toggle="modal"
-                                                                             data-xsize="300" data-ysize="300"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>工作室logo</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-line-input">
-                                                            <label class="col-md-3 control-label">个人简介
-                                                                <span class="required" aria-required="true">*</span>
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <textarea class="form-control" id="notNull1"
-                                                                          name="form_introduce"
-                                                                          rows="5"></textarea>
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-actions">
-                                                            <div class="row">
-                                                                <div class="col-md-offset-3 col-md-9">
-                                                                    <button type="reset" class="btn default">重置</button>
-                                                                    <button class="btn green submit_btn">提交</button>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- END PROFILE CONTENT -->
+                                            <ul class="pagination" id="pagination1"></ul>
                                         </div>
-                                    </div>
+                                        <!--=======================================-->
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="bottom"></div>
+
         </div>
 
-        <div class="bottom"></div>
 
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
+             aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">咨询师详情</h4>
+                    </div>
+                    <div id="info">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="temp_counselorList" type="text/template">
+    {@each data as item}
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="mt-card-item">
+            <div class="mt-card-avatar mt-overlay-1 mt-scroll-left">
+                <img src="\${item.imagePhotoUrl}">
+            </div>
+            <div class="mt-card-content">
+                <h3 class="mt-card-name"><font
+                        style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">\${item.name}</font></font>
+                </h3>
+                <p class="mt-card-desc font-grey-mint"><font
+                        style="vertical-align: inherit;"><font
+                        style="vertical-align: inherit;">\${item.certification}</font></font>
+                </p>
+                <div class="mt-card-social" data-id="\${item.id}">
+                    <ul>
+                        <li>
+                            <a class="info" href="javascript:;">
+                                详情
+                            </a>
+                        </li>
+                        {@if item.regAuditRst==0}
+                        <li>
+                            <a class="pass" href="javascript:;">
+                                通过
+                            </a>
+                        </li>
+                        <li>
+                            <a class="refusal" href="javascript:;">
+                                拒绝
+                            </a>
+                        </li>
+                        {@else if item.regAuditRst==1}
+                        <li>
+                            已通过
+                        </li>
+                        {@else}
+                        <li>
+                            已拒绝
+                        </li>
+                        {@/if}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {@/each}
+
+</script>
+
+
+<script id="temp_info" type="text/template">
+    <div class="modal-body">
+        <div class="row">
+            <div class="headbox">
+                <img class="headimg" src="\${data.imagePhotoUrl}" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">名字</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">性别</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">手机号码</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.mobile}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">城市</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
+            <div class="col-lg-4 col-md-4 col-sm-12">职业名称</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.certification}</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">擅长领域</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">\${data.tags}</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">职业证书</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.certificateImgUrl}"
+                     alt="">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">手持身份证</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.evidenceImgUrl}"
+                     alt="">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">身份证正面</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.idCardImgUrl}"
+                     alt="">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">身份证反面</div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <img src="\${data.name}"
+                     alt="">
+            </div>
+        </div>
     </div>
 
+</script>
 
-    <style>
-        .hc-checkbox {
-            width: 10rem;
-        }
 
-        .error_message {
-            color: red;
-        }
-
-        .studiologo {
-            width: 100px;
-            height: 100px;
-            overflow: hidden;
-            background-color: #BDE1FF;
-        }
-
-        .studiologo img {
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .studiologo + p {
-            line-height: 1.05rem;
-        }
-
-        .input_style {
-            border-bottom: 1px solid #c2cad8 !important;
-        }
-
-        .portlet-body {
-            background-color: #fff !important;
-            padding: 41px 98px 45px 20px;
-        }
-    </style>
-</div>
 </body>
 
+<style>
+    .modal .headbox {
+        width: 150px !important;
+        height: 150px !important;
+        border-radius: 50% !important;
+        overflow: hidden;
+        margin: 0 auto;
+    }
 
+    .modal-body {
+        font-size: 16px;
+        line-height: 24px;
+        text-align: justify
+    }
+
+    .modal img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
 </html>
-

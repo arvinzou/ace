@@ -7,8 +7,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.canvas.DrawItem;
 import com.huacainfo.ace.portal.dao.CanvasTmplDao;
+import com.huacainfo.ace.portal.dao.CanvasTmplItemDao;
 import com.huacainfo.ace.portal.model.CanvasTmpl;
+import com.huacainfo.ace.portal.model.CanvasTmplItem;
 import com.huacainfo.ace.portal.service.CanvasTmplService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.vo.CanvasTmplQVo;
@@ -17,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -30,11 +34,15 @@ import java.util.Map;
  * @Description: TODO(绘图模板)
  */
 public class CanvasTmplServiceImpl implements CanvasTmplService {
+    private static final String DRAW_IMAGE = "0";
+    private static final String DRAW_TEXT = "1";
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private CanvasTmplDao canvasTmplDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private CanvasTmplItemDao canvasTmplItemDao;
 
     /**
      * @throws
@@ -224,5 +232,56 @@ public class CanvasTmplServiceImpl implements CanvasTmplService {
         rst.put("status", 0);
         rst.put("data", this.canvasTmplDao.getById(id));
         return rst;
+    }
+
+    /**
+     * 获取系统下所有绘制模板
+     *
+     * @param sysId 系统ID
+     * @return List<CanvasTmpl>
+     */
+    @Override
+    public List<CanvasTmpl> findBySysId(String sysId) {
+        return canvasTmplDao.findBySysId(sysId);
+    }
+
+    /**
+     * 获取绘画子项配置
+     *
+     * @param tmplId 绘制模板ID
+     * @return Map<String, DrawItem>
+     */
+    @Override
+    /**
+     * 获取绘画子项配置
+     *
+     * @param tmplId 绘制模板ID
+     * @return Map<String, DrawItem>
+     */
+    public Map<String, DrawItem> getDrawItem(String tmplId) {
+        //绘制子项
+        List<CanvasTmplItem> tmplItemList = canvasTmplItemDao.findItemList(tmplId);
+        if (CollectionUtils.isEmpty(tmplItemList)) {
+            return null;
+        }
+        Map<String, DrawItem> itemMap = new HashMap<>();
+        DrawItem drawItem;
+        String[] fontConfig;
+        for (CanvasTmplItem item : tmplItemList) {
+            if (DRAW_IMAGE.equals(item.getItemType())) {
+                drawItem = new DrawItem(item.getPositionX(), item.getPositionY(), item.getWidth(), item.getHeight());
+                itemMap.put(item.getItemCode(), drawItem);
+                continue;
+            }
+            if (DRAW_TEXT.equals(item.getItemType())) {
+                fontConfig = item.getFont().split(",");//demo: PingFang-SC-Medium,1,30
+                drawItem = new DrawItem(item.getPositionX(), item.getPositionY(),
+                        item.getColor(), fontConfig[0], Integer.valueOf(fontConfig[1]), Integer.valueOf(fontConfig[2]));
+                itemMap.put(item.getItemCode(), drawItem);
+                continue;
+            }
+        }
+
+        return itemMap;
     }
 }

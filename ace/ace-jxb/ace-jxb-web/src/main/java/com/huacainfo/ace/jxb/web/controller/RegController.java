@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.jxb.service.MemberSignLogService;
 import com.huacainfo.ace.jxb.service.RegService;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.service.TaskCmccService;
@@ -29,6 +30,24 @@ public class RegController extends JxbBaseController {
 
     @Autowired
     private TaskCmccService taskCmccService;
+
+    @Autowired
+    private MemberSignLogService memberSignLogService;
+
+    /**
+     * 每日签到
+     *
+     * @param userId portal.users.user_id
+     * @return ResultResponse
+     */
+    @RequestMapping("/signIn")
+    public ResultResponse signIn(String userId) throws Exception {
+        if (StringUtil.isEmpty(userId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return memberSignLogService.signIn(userId);
+    }
 
     /**
      * 发送注册验证码

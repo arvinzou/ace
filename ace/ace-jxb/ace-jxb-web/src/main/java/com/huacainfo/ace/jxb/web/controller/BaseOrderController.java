@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
@@ -16,6 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/baseOrder")
@@ -48,14 +53,28 @@ public class BaseOrderController extends JxbBaseController {
     @RequestMapping(value = "/findBaseOrderList")
     @ResponseBody
     public PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<BaseOrderVo> rst = this.baseOrderService
-                .findBaseOrderList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<BaseOrderVo> rst = this.baseOrderService.findBaseOrderList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
 
         return rst;
     }
+
+    @RequestMapping(value = "/findBaseOrderListSecond")
+    @ResponseBody
+    public ResultResponse findBaseOrderListSecond(BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
+        return this.baseOrderService.findBaseOrderListSencond(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+    }
+
+
+    @RequestMapping(value = "/findMyOrderList")
+    @ResponseBody
+    public ResultResponse findMyOrderList(BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setBusinessId(this.getCurUserProp().getUserId());
+        return this.baseOrderService.findBaseOrderListSencond(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+    }
+
 
     /**
      * @throws
@@ -105,6 +124,23 @@ public class BaseOrderController extends JxbBaseController {
     @ResponseBody
     public SingleResult<BaseOrderVo> selectBaseOrderByPrimaryKey(String id) throws Exception {
         return this.baseOrderService.selectBaseOrderByPrimaryKey(id);
+    }
+
+
+    /**
+     * @throws
+     * @Title:selectBaseOrderByPrimaryKey
+     * @Description: TODO(获取基础订单接口)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<BaseOrder>
+     * @author: Arvin
+     * @version: 2018-07-30
+     */
+    @RequestMapping(value = "/orderInfo")
+    @ResponseBody
+    public ResultResponse orderInfoByPrimaryKey(String id) throws Exception {
+        return this.baseOrderService.orderInfoByPrimaryKey(id);
     }
 
     /**

@@ -17,6 +17,9 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.common.tools.canvas.CanvasKit;
+import com.huacainfo.ace.common.tools.canvas.DrawItem;
+import com.huacainfo.ace.common.tools.canvas.ImageKit;
 import com.huacainfo.ace.jxb.dao.MemberQrcodeDao;
 import com.huacainfo.ace.jxb.model.MemberQrcode;
 import com.huacainfo.ace.jxb.service.MemberQrcodeService;
@@ -24,18 +27,23 @@ import com.huacainfo.ace.jxb.service.StudioService;
 import com.huacainfo.ace.jxb.vo.MemberQrcodeQVo;
 import com.huacainfo.ace.jxb.vo.MemberQrcodeVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
+import com.huacainfo.ace.portal.model.CanvasTmpl;
 import com.huacainfo.ace.portal.model.WxCfg;
+import com.huacainfo.ace.portal.service.CanvasTmplService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.WxCfgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("memberQrcodeService")
 /**
@@ -48,6 +56,8 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
     private static final String FORCE_REFRESH = "1";
     private static final String TYPE_TEMPORARY = "0";
     private static final String TYPE_PERMANENT = "1";
+    private static final String TEMP_PATH = "/temp/qrcode/jxb/";
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MemberQrcodeDao memberQrcodeDao;
@@ -59,6 +69,8 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
     private WxCfgService wxCfgService;
     @Autowired
     private IFile fileSaver;
+    @Autowired
+    private CanvasTmplService canvasTmplService;
 
     /**
      * @throws
@@ -271,12 +283,13 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
      */
     private MemberQrcode getQRCodeURL(StudioVo studioVo, MemberQrcode orgCfg) throws Exception {
         String qrCodeType = orgCfg.getQrcodeType();
-        WxCfg wxCfg = wxCfgService.findBySysId("jxb");
+        WxCfg wxCfg = wxCfgService.findBySysId("jxb");//testWxCfg();//
         if (null == wxCfg || StringUtil.isEmpty(wxCfg.getAccessToken())) {
             throw new CustomException("微信配置获取失败");
         }
         //二维码网络地址
-        String codeUri = getWxQRCodeUri(orgCfg.getSceneStr(), qrCodeType, wxCfg.getAccessToken());
+        String codeUri = synthesisCodeUri(studioVo.getName(), orgCfg.getSceneStr(), qrCodeType, wxCfg.getAccessToken());
+        //getWxQRCodeUri(orgCfg.getSceneStr(), qrCodeType, wxCfg.getAccessToken());//纯二维码图
         if (codeUri.startsWith("http") || codeUri.startsWith("https")) {
             MemberQrcode newCode = new MemberQrcode();
             newCode.setQrcodeUrl(codeUri);
@@ -291,6 +304,71 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
             throw new CustomException(codeUri);
         }
     }
+
+    private WxCfg testWxCfg() {
+        WxCfg c = new WxCfg();
+        c.setAccessToken("12_R78ZISweJHkmHXdpx46GT45wGGE6fqes5BxLbEvMokGF9borPYUn7rtFjib8gwApOfmOtOm4iMrJbVvy22QE5G7YPqyyL3ToGqtrOoz95IFDCxw8rHDCV8yjMK7aqjLv8p0ec5_3rQQFfKywXSLbAFAMHA");
+
+        return c;
+    }
+
+    /**
+     * 按照绘制模板，合成二维码宣传海报
+     *
+     * @param studioName  工作室名称
+     * @param sceneStr    场景值支付穿
+     * @param qrCodeType  获取微信二位类型
+     * @param accessToken accessToken
+     * @return uri
+     */
+    private String synthesisCodeUri(String studioName, String sceneStr, String qrCodeType, String accessToken) throws Exception {
+        //获取绘制模板
+        List<CanvasTmpl> tmplList = canvasTmplService.findBySysId("jxb");
+        if (CollectionUtils.isEmpty(tmplList)) {
+            return "未配置宣传海报模板";
+        }
+        //获取绘制项目
+        CanvasTmpl tmpl = tmplList.get(0);
+        Map<String, DrawItem> itemMap = canvasTmplService.getDrawItem(tmpl.getId());
+        if (null == itemMap) {
+            return "未配置宣传海报模板子项";
+        }
+        if (!itemMap.containsKey("QRCode") || !itemMap.containsKey("StudioName")) {
+            return "绘制内容缺失";
+        }
+        //获取绘制填充内容 StudioName        QRCode
+        //提取微信二维码
+        String wxQRCodeUri = getWxQRCodeUri(sceneStr, qrCodeType, accessToken);
+        if (null == wxQRCodeUri) {
+            return "微信二维码获取失败";
+        }
+        if (!wxQRCodeUri.startsWith("http") && !wxQRCodeUri.startsWith("https")) {
+            return wxQRCodeUri;
+        }
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("StudioName", studioName);
+        dataMap.put("QRCode", ImageKit.getImageURL(wxQRCodeUri));
+
+        File tmp = new File(TEMP_PATH);
+        if (!tmp.exists()) {
+            tmp.mkdirs();
+        }
+        //tempPath+sceneStr+".jpeg"
+        boolean canvasRs = CanvasKit.drawImage(tmpl.getBaseImageUrl(), TEMP_PATH, sceneStr, itemMap, dataMap);
+        if (canvasRs) {
+            String fileName = sceneStr + ".png";
+            File codeFile = new File(TEMP_PATH + fileName);
+            String codeUri = PropertyUtil.getProperty("fastdfs_server") + fileSaver.saveFile(codeFile, fileName);
+            if (codeFile.exists()) {
+                codeFile.delete();
+            }
+
+            return codeUri;
+        }
+
+        return "绘制二维码海报失败";
+    }
+
 
     /**
      * 流地址，转存到目标文件路径
@@ -372,7 +450,7 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
     }
 
     /**
-     * 提起微信二维码
+     * 提取微信二维码
      *
      * @param sceneStr    场景值支付穿
      * @param qrCodeType  获取微信二位类型
@@ -380,7 +458,7 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
      * @return String uri
      */
     private String getWxQRCodeUri(String sceneStr, String qrCodeType, String accessToken) throws Exception {
-        String tempPath = "/temp/qrcode/jxb/";
+        String tempPath = TEMP_PATH;
         File tmp = new File(tempPath);
         if (!tmp.exists()) {
             tmp.mkdirs();
@@ -408,5 +486,29 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
         codeUri = PropertyUtil.getProperty("fastdfs_server") + fileSaver.saveFile(codeFile, fileName);
         codeFile.delete();
         return codeUri;
+    }
+
+    /**
+     * 提取微信二维码 文件流
+     *
+     * @param sceneStr    场景值支付穿
+     * @param qrCodeType  获取微信二位类型
+     * @param accessToken accessToken
+     * @return String uri
+     */
+    private InputStream getWxQRCodeIS(String sceneStr, String qrCodeType, String accessToken) throws Exception {
+        String getUri;//微信二维码提取地址
+        //临时二维码
+        if (TYPE_TEMPORARY.equals(qrCodeType)) {
+            getUri = temporary(sceneStr, accessToken);
+        }
+        //永久二维码
+        else if (TYPE_PERMANENT.equals(qrCodeType)) {
+            getUri = permanent(sceneStr, accessToken);
+        } else {
+            return null;
+        }
+
+        return HttpKit.getUrlInputStream(getUri);
     }
 }

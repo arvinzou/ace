@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.MemberSignLogDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.MemberSignLog">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="signYear" jdbcType="VARCHAR" property="signYear"/>
+        <result column="signMonth" jdbcType="VARCHAR" property="signMonth"/>
+        <result column="signDay" jdbcType="VARCHAR" property="signDay"/>
+        <result column="signInDate" jdbcType="VARCHAR" property="signInDate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, userId, signYear, signMonth, signDay, signInDate, remark, status, createDate, 
+    updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from member_sign_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from member_sign_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.MemberSignLog">
+    insert into member_sign_log (id, userId, signYear, 
+      signMonth, signDay, signInDate, 
+      remark, status, createDate, 
+      updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{signYear,jdbcType=VARCHAR}, 
+      #{signMonth,jdbcType=VARCHAR}, #{signDay,jdbcType=VARCHAR}, #{signInDate,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.MemberSignLog">
+        insert into member_sign_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="signYear != null">
+                signYear,
+            </if>
+            <if test="signMonth != null">
+                signMonth,
+            </if>
+            <if test="signDay != null">
+                signDay,
+            </if>
+            <if test="signInDate != null">
+                signInDate,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="updateDate != null">
+                updateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="signYear != null">
+                #{signYear,jdbcType=VARCHAR},
+            </if>
+            <if test="signMonth != null">
+                #{signMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="signDay != null">
+                #{signDay,jdbcType=VARCHAR},
+            </if>
+            <if test="signInDate != null">
+                #{signInDate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.MemberSignLog">
+        update member_sign_log
+        <set>
+            <if test="userId != null">
+                userId = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="signYear != null">
+                signYear = #{signYear,jdbcType=VARCHAR},
+            </if>
+            <if test="signMonth != null">
+                signMonth = #{signMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="signDay != null">
+                signDay = #{signDay,jdbcType=VARCHAR},
+            </if>
+            <if test="signInDate != null">
+                signInDate = #{signInDate,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                updateDate = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.MemberSignLog">
+    update member_sign_log
+    set userId = #{userId,jdbcType=VARCHAR},
+      signYear = #{signYear,jdbcType=VARCHAR},
+      signMonth = #{signMonth,jdbcType=VARCHAR},
+      signDay = #{signDay,jdbcType=VARCHAR},
+      signInDate = #{signInDate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <sql id="whereCondition">
+        from member_sign_log t
+        where 1=1
+        <if test="condition.monthDate !=null and condition.monthDate !=&quot;&quot;">
+            and t.signInDate like concat(#{condition.monthDate,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="findToday" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from member_sign_log
+        where signInDate like concat(#{todayDate,jdbcType=VARCHAR},'%')
+    </select>
+</mapper>

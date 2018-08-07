@@ -17,11 +17,16 @@ function initData(primaryId){
         },
         success:function(result){
             if(result.status == 0) {
-                var roomTemp = document.getElementById('roomTemp').innerHTML;
-                var html = juicer(roomTemp, {
+                var myroomTemp = document.getElementById('myroomTemp').innerHTML;
+                var html = juicer(myroomTemp, {
                     data: result.data
                 });
                 $("#itemList").append(html);
+                var joinroomTemp = document.getElementById('joinroomTemp').innerHTML;
+                var joinhtml = juicer(joinroomTemp, {
+                    joinData: result.data.join
+                });
+                $("#itemList").append(joinhtml);
             }else {
                 alert(result.info);
                 return;
@@ -35,4 +40,8 @@ function initData(primaryId){
 
 function showDetail(id){
     window.location.href = contextPath + '/www/view/myworkroom/index.jsp?id='+id;
+}
+
+function invate(id){
+    window.location.href = contextPath + '/www/view/invate/index.jsp?id='+id;
 }

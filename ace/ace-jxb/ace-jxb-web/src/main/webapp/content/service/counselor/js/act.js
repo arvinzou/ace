@@ -12,7 +12,11 @@ function loadlocal() {
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/layouts/layout3/scripts/layout.min.js', type: 'js'});
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-    urls.push({path: "", url: 'https://cdn.bootcss.com/limonte-sweetalert2/7.21.0/sweetalert2.min.js', type: 'js'});
+    urls.push({
+        path: portalPath,
+        url: '/content/common/assets/global/plugins/bootstrap-sweetalert/sweetalert.min.js',
+        type: 'js'
+    });
     urls.push({path: contextPath, url: '/content/service/counselor/js/counselor.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
