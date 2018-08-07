@@ -111,7 +111,7 @@
                                         <td width="15%">
                                             <a class="operation" href="">编辑</a>
                                             <a class="operation" href="">下架</a>
-                                            <a class="operation" href="">删除</a>
+                                            <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
                                             <a class="operation" href="">查看评论</a>
                                             <a class="operation" href="">购买明细</a>
                                         </td>

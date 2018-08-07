@@ -152,6 +152,7 @@ function save(){
             if(result.status == 0) {
                 console.log(result);
                 alert("创建成功！");
+                window.location.href = contextPath + '/dynamic/service/course/index.jsp';
             }else {
                 alert(result.errorMessage);
             }

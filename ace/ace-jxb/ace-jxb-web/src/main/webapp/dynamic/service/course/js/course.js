@@ -52,3 +52,27 @@ function makecourse(){
     }
     window.location.href = contextPath + '/dynamic/service/course/make.jsp?id='+id;
 }
+
+function deleteCourse(id){
+    $.ajax({
+        url: contextPath + "/course/deleteCourseByCourseId",
+        type:"post",
+        async:false,
+        data:{
+            jsons:JSON.stringify({
+               id: id
+            })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert("删除成功！");
+                window.location.reload();
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
