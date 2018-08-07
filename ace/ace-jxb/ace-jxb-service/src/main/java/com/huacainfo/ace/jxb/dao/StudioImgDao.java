@@ -13,6 +13,8 @@ public interface StudioImgDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByStudioId(String studioId);
+
     int insert(StudioImg record);
 
     int insertSelective(StudioImg record);

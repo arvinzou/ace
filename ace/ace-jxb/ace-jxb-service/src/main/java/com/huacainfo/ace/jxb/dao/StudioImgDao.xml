@@ -21,6 +21,11 @@
     delete from studio_img
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+    <delete id="deleteByStudioId" parameterType="java.lang.String">
+        delete from studio_img
+        where studioId = #{studioId,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.StudioImg">
     insert into studio_img (id, studioId, name, 
       imgUrl, createDate)

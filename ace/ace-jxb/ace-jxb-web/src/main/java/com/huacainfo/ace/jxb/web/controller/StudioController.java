@@ -21,6 +21,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -78,6 +80,28 @@ public class StudioController extends JxbBaseController {
     public MessageResponse insertStudio(Studio obj) throws Exception {
         return this.studioService.insertStudio(obj, this.getCurUserProp());
     }
+
+
+    /**
+     * @throws
+     * @Title:insertStudio
+     * @Description: TODO(添加工作室)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-07-28
+     */
+    @RequestMapping(value = "/modifyStudio")
+    @ResponseBody
+    public MessageResponse modifyStudio(String json) throws Exception {
+        JSONObject jsonObj = JSON.parseObject(json);
+        Studio obj = JSON.parseObject(jsonObj.getString("object"), Studio.class);
+        List<String> list = JSON.parseArray(jsonObj.getString("imgUrl"), String.class);
+        return this.studioService.modifyStudio(obj, list, this.getCurUserProp());
+    }
+
+
 
 
     /**

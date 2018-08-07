@@ -15,6 +15,7 @@ import com.huacainfo.ace.jxb.dao.StudioDao;
 import com.huacainfo.ace.jxb.dao.StudioImgDao;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.Studio;
+import com.huacainfo.ace.jxb.model.StudioImg;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.StudioService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
@@ -27,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -116,6 +118,58 @@ public class StudioServiceImpl implements StudioService {
         }
 
 
+        this.dataBaseLogService.log("添加工作室", "工作室", "",
+                o.getId(), o.getId(), userProp);
+        return new MessageResponse(0, "添加工作室完成！");
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertStudio
+     * @Description: TODO(添加工作室)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public MessageResponse modifyStudio(Studio o, List<String> list, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(o.getName())) {
+            return new MessageResponse(1, "名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "介绍不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getId())) {
+            String studioId = GUIDUtil.getGUID();
+            o.setId(studioId);
+            o.setCounselorId(userProp.getUserId());
+            o.setCreateDate(new Date());
+            o.setStatus("0");
+            this.studioDao.insertSelective(o);
+            StudioImg si = new StudioImg();
+            for (String item : list) {
+                si.setId(GUIDUtil.getGUID());
+                si.setCreateDate(new Date());
+                si.setStudioId(studioId);
+                si.setImgUrl(item);
+                this.studioImgDao.insert(si);
+            }
+        } else {
+            this.studioDao.updateByPrimaryKeySelective(o);
+            this.studioImgDao.deleteByPrimaryKey(o.getId());
+            StudioImg si = new StudioImg();
+            for (String item : list) {
+                si.setId(GUIDUtil.getGUID());
+                si.setCreateDate(new Date());
+                si.setStudioId(o.getId());
+                si.setImgUrl(item);
+                this.studioImgDao.insert(si);
+            }
+        }
         this.dataBaseLogService.log("添加工作室", "工作室", "",
                 o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "添加工作室完成！");

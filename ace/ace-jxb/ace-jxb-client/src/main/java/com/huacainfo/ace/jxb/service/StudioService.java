@@ -9,6 +9,7 @@ import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.vo.StudioQVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +47,8 @@ public interface StudioService {
      * @version: 2018-07-25
      */
     MessageResponse insertStudio(Studio obj, UserProp userProp) throws Exception;
+
+    MessageResponse modifyStudio(Studio obj, List<String> list, UserProp userProp) throws Exception;
 
     /**
      * @throws
