@@ -2,9 +2,26 @@ window.onload = function () {
     getUserinfo();
     getMyStudioList();
     getStudioInfo();
+    initDoc();
     $('.submit_btn').click(submitForm);
     $('#studioInfoModal .idCardBoxs').on('click', '.deleteBtn', deleteBanner);
 };
+
+var editor;
+
+function initDoc() {
+    editor = new Simditor({
+        textarea: $('#notNull1'),
+        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
+        upload: {
+            url: portalPath + '/files/uploadImage.do', //文件上传的接口地址
+            params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+            fileKey: 'file', //服务器端获取文件数据的参数名
+            connectionCount: 3,
+            leaveConfirm: '正在上传文件'
+        }
+    });
+}
 
 
 function deleteBanner() {
@@ -90,21 +107,20 @@ function fillForm(data) {
             continue;
         }
         $('[name=form_' + key + ']').val(data[key]);
-        if (key === 'imgList') {
-            var imgs = data[key];
-            for (var i = 0; i < imgs.length; i++) {
-                var index = $('#indexImg').siblings().length;
-                var html = '<div class="imgSrc">' +
-                    '           <div class="idCardBox">' +
-                    '                <img class="select_img form_idCardImgUrl" src="' + imgs[i].imgUrl + '">' +
-                    '               <div class="deleteBtn">X</div>' +
-                    '           </div>' +
-                    '     </div>';
-                $('#indexImg').before($(html));
-                if (index == 4) {
-                    $('#indexImg').hide();
-                }
-            }
+    }
+    editor.setValue(data['introduce']);
+    var imgs = data['imgList'];
+    for (var i = 0; i < imgs.length; i++) {
+        var index = $('#indexImg').siblings().length;
+        var html = '<div class="imgSrc">' +
+            '           <div class="idCardBox">' +
+            '                <img class="select_img form_idCardImgUrl" src="' + imgs[i].imgUrl + '">' +
+            '               <div class="deleteBtn">X</div>' +
+            '           </div>' +
+            '     </div>';
+        $('#indexImg').before($(html));
+        if (index == 4) {
+            $('#indexImg').hide();
         }
     }
 }

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/simditor/styles/simditor.css">
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
@@ -288,9 +289,10 @@
                                     <span class="required" aria-required="true">*</span>
                                 </label>
                                 <div class="col-md-9">
-                                                                <textarea class="form-control" id="notNull1"
-                                                                          name="form_introduce"
-                                                                          rows="5"></textarea>
+                                    <textarea class="form-control" id="notNull1"
+                                              name="form_introduce"
+                                              rows="5">
+                                    </textarea>
                                     <span class="error_message"></span>
                                     <div class="form-control-focus"></div>
                                 </div>
