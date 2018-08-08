@@ -2,6 +2,7 @@ var loading = {};
 var videoUrl = '';
 var tryvideoUrl = '';
 var primaryId = null;
+var partId = null;
 function loadlocal() {
     var urls = [];
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
@@ -23,9 +24,23 @@ function App() {
 window.onload = function(){
 
     console.log(window.location.href);
-    var url =   window.location.href.substring(1);
-    primaryId = url.substring(url.indexOf('=')+1);
-
+    var url =   window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length+1);
+    var paramArr = url.split("&");
+    for(var i=0;i < paramArr.length;i++){
+        num=paramArr[i].indexOf("=");
+        if(num>0){
+            name=paramArr[i].substring(0,num);
+            value=paramArr[i].substr(num+1);
+            if(name == "courseId"){
+                primaryId = value;
+            }
+            if(name == "partId"){
+                partId = value;
+            }
+        }
+    }
+    console.log("courseId:"+primaryId+"\n"+"partId:"+partId);
+    findCourseById();
     var editor = new Simditor({
         textarea: $('#coursedoc'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
@@ -103,14 +118,15 @@ function save(){
     var coursedoc = $("textarea[name = 'coursedoc']").val();
     var duation = $("input[name = 'duation']").val();
     var free = $('input[name="tried"]:checked').val();
+    var courseName = findCourseById();
     $.ajax({
         url: contextPath + "/courseSource/insertCourseSource",
         type:"post",
         async:false,
         data:{jsons:JSON.stringify({
                courseId: primaryId,
-                name: '教孩子怎么自律',
-                partId: '0',
+                name: courseName,
+                partId: partId,
                 free: free,
                 mediUrl: videoUrl
             })
@@ -128,4 +144,27 @@ function save(){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function findCourseById(){
+    var courseName = '';
+    $.ajax({
+        url: contextPath + "/course/selectCourseByPrimaryKey",
+        type:"post",
+        async:false,
+        data:{
+            id: primaryId
+        },
+        success:function(result){
+            if(result.status == 0) {
+                courseName = result.value.name;
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+    return courseName;
 }
