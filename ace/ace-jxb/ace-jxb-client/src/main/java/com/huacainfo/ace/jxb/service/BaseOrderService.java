@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.BaseOrder;
+import com.huacainfo.ace.jxb.model.JxbCallBackLog;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 
@@ -90,30 +91,46 @@ public interface BaseOrderService {
     /**
      * 创建订单
      *
-     *
      * @param unionid
-     * @param data 数据示例：
-     *             {
-     *             --订单基本情况  参考 BaseOrder.java
-     *             "base": {
-     *             "businessId": "businessId",
-     *             "category": "1",
-     *             "commodityId": "commodityId",
-     *             "consumerId": "consumerId"
-     *             },
-     *             --预约详情 参考 ConsultOrder.java
-     *             "consult": {
-     *             "age": 1,
-     *             "info": "Info",
-     *             "name": "Name",
-     *             "relationship": "Relationship",
-     *             "secName": "SecName",
-     *             "secTel": "SecTel",
-     *             "sex": "Sex",
-     *             "tel": "Tel18000"
-     *             }
-     *             }
+     * @param data    数据示例：
+     *                {
+     *                --订单基本情况  参考 BaseOrder.java
+     *                "base": {
+     *                "businessId": "businessId",
+     *                "category": "1",
+     *                "commodityId": "commodityId",
+     *                "consumerId": "consumerId"
+     *                },
+     *                --预约详情 参考 ConsultOrder.java
+     *                "consult": {
+     *                "age": 1,
+     *                "info": "Info",
+     *                "name": "Name",
+     *                "relationship": "Relationship",
+     *                "secName": "SecName",
+     *                "secTel": "SecTel",
+     *                "sex": "Sex",
+     *                "tel": "Tel18000"
+     *                }
+     *                }
      * @return ResultResponse
      */
     ResultResponse create(String unionid, String data) throws Exception;
+
+    /**
+     * 记录回调日志
+     *
+     * @param callBackLog
+     * @return
+     */
+    int insertCallBackLog(JxbCallBackLog callBackLog);
+
+    /**
+     * 付款完成逻辑
+     *
+     * @param callBackLog 支付日志
+     * @param payType     支付方式
+     * @return 处理结果
+     */
+    ResultResponse pay(JxbCallBackLog callBackLog, int payType);
 }

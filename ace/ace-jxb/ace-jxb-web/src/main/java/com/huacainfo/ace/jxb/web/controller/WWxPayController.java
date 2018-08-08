@@ -5,19 +5,23 @@ import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.constant.ApiURL;
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.plugins.wechat.util.RandomValidateCode;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.plugins.wechat.util.WeChatPayUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.jxb.constant.OrderPayType;
+import com.huacainfo.ace.jxb.model.JxbCallBackLog;
+import com.huacainfo.ace.jxb.service.BaseOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -29,6 +33,8 @@ import java.util.TreeMap;
 public class WWxPayController extends JxbBaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
+    private BaseOrderService baseOrderService;
 
     /**
      * 统一下单
@@ -102,32 +108,35 @@ public class WWxPayController extends JxbBaseController {
      */
     @RequestMapping(value = "/callback", produces = "text/xml;charset=UTF-8")
     public void weChatPayCallBack(HttpServletRequest req, HttpServletResponse resp) {
-        logger.debug("WWWWxPayController.weChatPayCallBack.start");
+        logger.debug("jxb.WWWWxPayController.weChatPayCallBack.start");
         resp.setContentType("text/xml");
         resp.addHeader("Accept", "text/xml");
         String xml = HttpKit.readIncommingRequestData(req);
-        logger.debug("WWWWxPayController.weChatPayCallBack.reqXml={}", xml);
+        logger.debug("jxb.WWWWxPayController.weChatPayCallBack.reqXml={}", xml);
         String rs = "<xml><return_code>SUCCESS</return_code><return_msg>OK</return_msg></xml>";
-//        if (StringUtil.isNotEmpty(xml)) {
-//            String json = XmlUtil.xmltoJson(xml);
-//            logger.debug("WWWWxPayController.weChatPayCallBack.json={}", json);
-//            WxPayLog wxPayLog = JsonUtil.toObject(json, WxPayLog.class);
-//            try {
-//                cuDonateOrderService.insertWxPayLog(wxPayLog);
-//            } catch (Exception e) {
-//                logger.error("WWWWxPayController.wx_pay_log.error:{}", e);
-//            }
-//            try {
-//                //订单支付逻辑
-//                ResultResponse resultResponse = cuDonateOrderService.pay(wxPayLog, OrderConstant.PAY_TYPE_WX);
-//                logger.info("Xml: {},\n  DealResult:{}", xml, resultResponse);
-//                resp.getWriter().write(rs);
-//            } catch (IOException e) {
-//                logger.error("WWWWxPayController.weChatPayCallBack.run error:{}", e);
-//            } catch (Exception e) {
-//                logger.error("WWWWxPayController.weChatPayCallBack/wechat/pay/callback.pay.error => {}", e);
-//            }
-//        }
+        if (StringUtil.isNotEmpty(xml)) {
+            String json = XmlUtil.xmltoJson(xml);
+            logger.debug("jxb.WWWWxPayController.weChatPayCallBack.json={}", json);
+            JxbCallBackLog callBackLog = JsonUtil.toObject(json, JxbCallBackLog.class);
+            try {
+                int iCount = baseOrderService.insertCallBackLog(callBackLog);
+                if (iCount <= 0) {
+                    return;
+                }
+            } catch (Exception e) {
+                logger.error("jxb.WWWWxPayController.wx_pay_log.error:{}", e);
+            }
+            try {
+                //订单支付逻辑
+                ResultResponse resultResponse = baseOrderService.pay(callBackLog, OrderPayType.WX_PAY);
+                logger.info("jxb.Xml: {},\n  DealResult:{}", xml, resultResponse);
+                resp.getWriter().write(rs);
+            } catch (IOException e) {
+                logger.error("jxb.WWWWxPayController.weChatPayCallBack.run error:{}", e);
+            } catch (Exception e) {
+                logger.error("jxb.WWWWxPayController.weChatPayCallBack/www/wxpay/callback.error => {}", e);
+            }
+        }
     }
 
 
