@@ -1,5 +1,5 @@
-var server = "https://zx.huacainfo.com";
-var serverfile = "https://zx.huacainfo.com/";
+var server = "https://mp.cdsgsl.org.cn";
+var serverfile = "https://mp.cdsgsl.org.cn/";
 var config = {
     server,
     serverfile,

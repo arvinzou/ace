@@ -24,17 +24,17 @@ body {
   height: 36px;
   padding-top: 2px !important;
   padding-bottom: 2px !important;
-  border-bottom: 1px solid #E1E1E1 !important;
-  border-top: 1px solid #E1E1E1 !important;
-  border-left: 1px solid #E1E1E1 !important;
-  border-right: 1px solid #E1E1E1 !important;
+  border-bottom: 1px solid #e7ecf1 !important;
+  border-top: 1px solid #e7ecf1 !important;
+  border-left: 1px solid #e7ecf1 !important;
+  border-right: 1px solid #e7ecf1 !important;
 }
 .ui-jqgrid .ui-jqgrid-htable th span.ui-jqgrid-resize {
   height: 29px !important;
 }
 .ui-jqgrid .ui-jqgrid-htable th div {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .widget-header {
   min-height: 30px;
@@ -99,7 +99,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .ui-jqgrid .ui-jqgrid-htable th div {
     overflow: hidden;
     position: relative;
-    height: 28px;
+    height: 35px;
 }
 
 .ui-jqgrid .tree-plus {
@@ -184,7 +184,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     text-decoration: underline;
     color: blue;
     background-color: #ffffff;
-    border: 0px solid #ddd;
+    border: 0px solid #e7ecf1;
     margin-left: -1px;
 }
 .dataTables_info {
@@ -217,7 +217,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     padding: 3px;
     line-height: 1.42857143;
     vertical-align: top;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #e7ecf1;
 }
 .center{
     text-align:center;
@@ -233,7 +233,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-bottom: 5px;
     margin-top: 5px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e7ecf1;
     font-weight:800;
     font-size:14px;
 }
@@ -242,7 +242,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-bottom: 5px;
     margin-top: 5px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e7ecf1;
     font-weight:800;
     font-size:14px;
     color:#000000;
@@ -295,21 +295,17 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     filter: progid:DXImageTransform.Microsoft.gradient();
 }
 .ui-jqgrid tr.ui-row-ltr td, .ui-jqgrid tr.ui-row-rtl td {
-    border-color: #ddd;
+    border-color: #e7ecf1;
 }
 .ui-jqgrid .ui-jqgrid-labels th {
-    border-right: 1px solid #ddd !important;
+    border-right: 1px solid #e7ecf1 !important;
     text-align: left !important;
 }
 .ui-jqgrid-btable .ui-widget-content.ui-priority-secondary{
-    background-color: #fff;
+    background-color: #fbfcfd;
 
 }
-.ui-jqgrid .ui-jqgrid-bdiv {
-    border-top: 1px solid #E1E1E1;
-    border-left: 1px solid #E1E1E1;
-    border-right: 1px solid #E1E1E1;
-}
+
 .ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
     background-color: #C8D046;
 }
@@ -325,12 +321,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     filter: progid:DXImageTransform.Microsoft.gradient();
 }
 .profile-user-info-striped {
-     border: 0px solid #ddd;
+     border: 0px solid #e7ecf1;
 }
 .profile-user-info-striped .profile-info-name {
      color: #000000;
      background-color: #fff;
-     border-top: 0px solid #ddd;
+     border-top: 0px solid #e7ecf1;
 }
 
 .profile-info-name {
@@ -339,14 +335,14 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     font-weight: normal;
     color: #000000;
     background-color: transparent;
-     border-top: 0px dotted #ddd;
+     border-top: 0px dotted #e7ecf1;
     display: table-cell;
     width: auto;
     vertical-align: middle;
 }
 
 .profile-user-info-striped .profile-info-value {
-     border-top: 0px dotted #ddd;
+     border-top: 0px dotted #e7ecf1;
     padding-left: 1px;
 }
 .profile-info-value {
@@ -355,7 +351,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .profile-info-value {
     display: table-cell;
     padding: 6px 4px 6px 6px;
-    border-top: 0px dotted #ddd;
+    border-top: 0px dotted #e7ecf1;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
@@ -452,10 +448,16 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
 .ui-jqgrid .ui-jqgrid-hdiv {
     overflow-x: '';
 }
-.ui-jqgrid tr.jqgrow td {
+/*.ui-jqgrid tr.jqgrow td {
   white-space: normal !important;
   height:auto;
   vertical-align:text-top;
   padding-top:1px;
   word-break:break-all;
+ }*/
+
+ .ui-jqgrid tr.ui-row-ltr td, .ui-jqgrid tr.ui-row-rtl td {
+     border-bottom: 1px solid #e7ecf1;
+     padding: 7px 4px;
+     border-color: #e7ecf1;
  }

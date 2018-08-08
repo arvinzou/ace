@@ -19,15 +19,16 @@
 	<link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
 	<link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+	<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css"/>
+	<link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/create.css">
-	<script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
 	<script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+	<script src="${pageContext.request.contextPath}/dynamic/service/course/js/create.js?v=${cfg.version}"></script>
 </head>
 
 <body>
 
-<!--隐藏存放ID-->
-<input type="text" hidden value="" id="auditId"/>
 <div class="page-wrapper">
 
 	<div class="page-wrapper-row full-height">
@@ -61,36 +62,36 @@
 											</div>
 											<div class="row form_row">
 												<div class="col-xs-12 col-md-2">课程名称</div>
-												<div class="col-xs-12 col-md-10"><input class="form_input" type="text" placeholder="请输入课程名称" /></div>
+												<div class="col-xs-12 col-md-10"><input name="courseName" class="form_input" type="text" placeholder="请输入课程名称" /></div>
 											</div>
 											<div class="row">
 												<div class="col-xs-12 col-md-2">课程封面</div>
 												<div class="col-xs-12 col-md-10">
 													<div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
-													<div class="pictureContainer" id="upbtn" style="z-index: 1;">
-														<div class="viewPicture">
-															<img src="">
-														</div>
-														<div class="uploadText">
-															<p class="imgiocn"><img src="img/upload_img_1.png" /></p>
-															<p class="uploadPloadprogress">点击上传封面</p>
-														</div>
+													<div class="imgbox" >
+														<img class="select_img form_imagePhotoUrl"
+															 id="courseCover"
+															 data-toggle="modal"
+															 data-xsize="375" data-ysize="210"
+															 data-cover="courseCover"
+															 data-target="#img-uploader"
+															 src="${pageContext.request.contextPath}/dynamic/service/course/img/course_default.jpg?v=${cfg.version}">
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-xs-12 col-md-2">课程简介</div>
 												<div class="col-xs-12 col-md-10">
-													<textarea class="introduction"></textarea>
+													<textarea name="introduction" id="courseIntro" class="introduction"></textarea>
 												</div>
 											</div>
 											<div class="row form_row">
 												<div class="col-xs-12 col-md-2">价格</div>
 												<div class="col-xs-12 col-md-10">
-													<div class="col-xs-1 col-md-1"><span class="feeLabel cactive">免费</span></div>
-													<div class="col-xs-1 col-md-1"><span class="feeLabel uncactive">付费</span></div>
+													<div class="col-xs-1 col-md-1"><span id="noPay" class="feeLabel cactive" onclick="payTypeCheck('noPay');">免费</span></div>
+													<div class="col-xs-1 col-md-1"><span id="pay" class="feeLabel uncactive" onclick="payTypeCheck('pay');">付费</span></div>
 													<div class="col-xs-10 col-md-10">
-														<input type="text" class="form_input" />
+														<input name="price" type="text" class="form_input" />
 													</div>
 												</div>
 											</div>
@@ -136,6 +137,9 @@
 													<input type="radio" value="" name="status"/>上架
 													<input type="radio" value="" name="status"/>下架
 												</div>
+											</div>
+											<div class="row" style="text-align: center;">
+												<button class="save" onclick="save();">保存</button>
 											</div>
 										</div>
 									</div>

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/simditor/styles/simditor.css">
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
@@ -156,7 +157,7 @@
                                                                         style="vertical-align: inherit;">工作室</font></font></span>
                                                             </div>
                                                             <div class="actions">
-                                                                <a href="javascript:;"
+                                                                <a onclick="javascript:modify()"
                                                                    class="btn btn-circle red-sunglo btn-sm">
                                                                     <i class="fa fa-plus"></i><font
                                                                         style="vertical-align: inherit;"><font
@@ -180,24 +181,8 @@
                                                                                 <th colspan="2"> 操作</th>
                                                                             </tr>
                                                                             </thead>
-                                                                            <tbody>
-                                                                            <tr>
-                                                                                <td class="fit">
-                                                                                    <img class="user-pic"
-                                                                                         src="../assets/pages/media/users/avatar4.jpg">
-                                                                                </td>
-                                                                                <td>
-                                                                                    名字
-                                                                                </td>
-                                                                                <td> 三</td>
-                                                                                <td> 正常</td>
-                                                                                <td>
-                                                                                    修改
-                                                                                </td>
-                                                                                <td>
-                                                                                    查看
-                                                                                </td>
-                                                                            </tr>
+                                                                            <tbody id="studioList">
+
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -225,12 +210,164 @@
     </div>
     <div class="bottom"></div>
 </div>
+
+<div class="modal fade bs-example-modal-lg" id="studioInfoModal" tabindex="-1" role="dialog"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="gridSystemModalLabel">工作室编辑</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="profile-content">
+
+                    <div class="form-horizontal" novalidate="novalidate">
+                        <div class="form-body">
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label">名字
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <input type="text" id="notNull" class="form-control"
+                                           placeholder="" name="form_name">
+                                    <span class="error_message"></span>
+                                    <div class="form-control-focus"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-md-checkboxes">
+                                <label class="control-label col-md-3">工作室logo
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <div>
+                                        <div class="studiologo" id="studiologo">
+                                            <img class="select_img form_logoImgUrl"
+                                                 id="logo" data-cover="logo"
+                                                 data-toggle="modal"
+                                                 data-againadd="false"
+                                                 data-xsize="300" data-ysize="300"
+                                                 data-target="#img-uploader"
+                                                 src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
+                                        </div>
+                                        <p>工作室logo</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-md-checkboxes">
+                                <label class="control-label col-md-3">封面轮播图
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <div class="col-md-9 idCardBoxs">
+
+
+                                    <div id="indexImg">
+                                        <div class="idCardBox">
+                                            <img class="select_img form_idCardImgUrl"
+                                                 id="uploadImgBtn"
+                                                 data-cover="banner"
+                                                 data-xsize="240" data-ysize="150"
+                                                 data-againadd="true"
+                                                 data-target="#img-uploader"
+                                                 data-toggle="modal"
+                                                 src="${pageContext.request.contextPath}/content/service/studio/img/addImg1.png?v=${cfg.version}">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group form-md-line-input">
+                                <label class="col-md-3 control-label">个人简介
+                                    <span class="required" aria-required="true">*</span>
+                                </label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="notNull1"
+                                              name="form_introduce"
+                                              rows="5">
+                                    </textarea>
+                                    <span class="error_message"></span>
+                                    <div class="form-control-focus"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+                <button type="button" class="btn btn-info submit_btn">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade bs-example-modal-lg" id="studioInfo" tabindex="-1" role="dialog"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="">工作室编辑</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        名字
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        我是名字
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        logo
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        我是logo
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        轮播图
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
+                    <div class="col-lg-12 col-md-12">
+                        介绍
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
 </body>
 
 <style>
-    .hc-checkbox {
-        width: 10rem;
-    }
 
     .error_message {
         color: red;
@@ -251,7 +388,7 @@
     }
 
     .studiologo + p {
-        line-height: 1.05rem;
+        line-height: 0.05rem;
     }
 
     .input_style {
@@ -262,71 +399,95 @@
         background-color: #fff !important;
         padding: 41px 98px 45px 20px;
     }
+
+    .idCardBoxs > div, .certificateBoxs > div {
+        width: 192px;
+        float: left;
+        margin-right: 30px;
+        margin-bottom: 15px;
+    }
+
+    .idCardBoxs > div > p, .certificateBoxs > div > p {
+        text-align: center;
+        line-height: 0.05rem;
+    }
+
+    .idCardBox {
+        position: relative;
+        height: 128px;
+        overflow: hidden;
+        background-color: #BDE1FF;
+    }
+
+    .idCardBox .deleteBtn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        background-color: #ff000088;
+        border-radius: 50% !important;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .idCardBox img {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .modal-lg {
+        width: 950px !important;
+    }
 </style>
 
 
-<%--<div class="profile-content">
-    <div class="portlet-body">
-        <div class="form-horizontal" novalidate="novalidate">
-            <div class="form-body">
+<script id="temp_studioList1" type="text/template">
+    <tr>
+        <td class="fit">
+            <img class="user-pic"
+                 src="\${data.logoImgUrl?data.logoImgUrl:'headImg.png'}">
+        </td>
+        <td>
+            \${data.name}
+        </td>
+        <td> \${data.dutyName}</td>
+        <td> \${data.status}</td>
+        <td>
 
-                <div class="form-group form-md-line-input">
-                    <label class="col-md-3 control-label">名字
-                        <span class="required" aria-required="true">*</span>
-                    </label>
-                    <div class="col-md-9">
-                        <input type="text" id="notNull" class="form-control"
-                               placeholder="" name="form_name">
-                        <span class="error_message"></span>
-                        <div class="form-control-focus"></div>
-                    </div>
-                </div>
+        </td>
+        <td>
+            <a onclick="javascript:detail(\${data.id})" class="primary-link">查看</a>
+        </td>
+    </tr>
+</script>
 
-                <div class="form-group form-md-checkboxes">
-                    <label class="control-label col-md-3">工作室logo
-                        <span class="required" aria-required="true">*</span>
-                    </label>
-                    <div class="col-md-9">
-                        <div>
-                            <div class="studiologo" id="studiologo">
-                                <img class="select_img form_logoImgUrl"
-                                     id="logo" data-cover="logo"
-                                     data-toggle="modal"
-                                     data-xsize="300" data-ysize="300"
-                                     data-target="#img-uploader"
-                                     src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
-                            </div>
-                            <p>工作室logo</p>
-                        </div>
-                    </div>
-                </div>
+<script id="temp_studioList" type="text/template">
+    {@each data as item}
+    <tr>
+        <td class="fit">
+            <img class="user-pic"
+                 src="\${item.logoImgUrl?item.logoImgUrl:'headImg.png'}">
+        </td>
+        <td>
+            \${item.name}
+        </td>
+        <td> 我创建的</td>
+        <td> \${item.status}</td>
+        <td>
+            <a onclick="javascript:modify('\${item.id}')" class="primary-link">修改</a>
+        </td>
+        <td>
+            <a onclick="javascript:detail('\${item.id}')" class="primary-link">查看</a>
 
-
-                <div class="form-group form-md-line-input">
-                    <label class="col-md-3 control-label">个人简介
-                        <span class="required" aria-required="true">*</span>
-                    </label>
-                    <div class="col-md-9">
-                                                                <textarea class="form-control" id="notNull1"
-                                                                          name="form_introduce"
-                                                                          rows="5"></textarea>
-                        <span class="error_message"></span>
-                        <div class="form-control-focus"></div>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <div class="row">
-                        <div class="col-md-offset-3 col-md-9">
-                            <button type="reset" class="btn default">重置</button>
-                            <button class="btn green submit_btn">提交</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>--%>
+        </td>
+    </tr>
+    {@/each}
+</script>
 
 
 </html>
