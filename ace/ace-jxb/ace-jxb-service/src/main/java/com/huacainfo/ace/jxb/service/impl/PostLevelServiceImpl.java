@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * @author: Arvin
  * @version: 2018-08-08
- * @Description: TODO(咨询师岗位级别配置)
+ * @Description: (咨询师岗位级别配置)
  */
 public class PostLevelServiceImpl implements PostLevelService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -86,8 +86,8 @@ public class PostLevelServiceImpl implements PostLevelService {
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
-        this.postLevelDao.insertSelective(o);
-        this.dataBaseLogService.log("添加咨询师岗位级别配置", "咨询师岗位级别配置", "",
+        postLevelDao.insertSelective(o);
+        dataBaseLogService.log("添加咨询师岗位级别配置", "咨询师岗位级别配置", "",
                 o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加咨询师岗位级别配置完成！");

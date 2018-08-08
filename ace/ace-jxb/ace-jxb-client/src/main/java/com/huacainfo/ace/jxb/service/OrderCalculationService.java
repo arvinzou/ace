@@ -17,4 +17,9 @@ public interface OrderCalculationService {
     int insertOrderCalculation(String orderId, String businessId);
 
 
+    void grant(OrderCalculation data) throws Exception;
+
+    void compute(OrderCalculation data);
+
+    int updateByPrimaryKeySelective(OrderCalculation data);
 }

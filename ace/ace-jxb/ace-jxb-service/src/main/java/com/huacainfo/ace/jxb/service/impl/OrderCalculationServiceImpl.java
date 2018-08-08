@@ -83,6 +83,7 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
      *
      * @param record 分配记录
      */
+    @Override
     public void compute(OrderCalculation record) {
         if (null == record) {
             return;
@@ -119,11 +120,17 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
         }
     }
 
+    @Override
+    public int updateByPrimaryKeySelective(OrderCalculation data) {
+        return orderCalculationDao.updateByPrimaryKeySelective(data);
+    }
+
     /**
      * 发放分成金额
      *
      * @param record 分配记录
      */
+    @Override
     public void grant(OrderCalculation record) throws Exception {
         if (null == record) {
             return;
@@ -151,43 +158,4 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
         }
     }
 
-    /**
-     * 每5分钟 计算一批订单
-     */
-//    @Scheduled(cron = " 0 0/5 * * * ?")
-    public void computeScheduled() {
-        OrderCalculationQVo condition = new OrderCalculationQVo();
-        condition.setCpuTag("0");
-
-        List<OrderCalculation> dataList = findList(condition, 0, 500, "");
-        for (OrderCalculation data : dataList) {
-            try {
-                compute(data);
-            } catch (Exception e) {
-                logger.error("订单计算异常：{}", e);
-                data.setRemark(e.getMessage());
-                orderCalculationDao.updateByPrimaryKeySelective(data);
-            }
-        }
-    }
-
-    /**
-     * 每10分钟 发放一批奖励
-     */
-//    @Scheduled(cron = " 0 0/10 * * * ?")
-    public void grantScheduled() {
-        OrderCalculationQVo condition = new OrderCalculationQVo();
-        condition.setGrantTag("0");
-
-        List<OrderCalculation> dataList = findList(condition, 0, 500, "");
-        for (OrderCalculation data : dataList) {
-            try {
-                grant(data);
-            } catch (Exception e) {
-                logger.error("订单发放异常：{}", e);
-                data.setRemark(e.getMessage());
-                orderCalculationDao.updateByPrimaryKeySelective(data);
-            }
-        }
-    }
 }
