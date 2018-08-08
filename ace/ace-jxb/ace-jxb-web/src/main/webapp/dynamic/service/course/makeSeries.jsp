@@ -180,7 +180,7 @@
 		</td>
 		<td width="20%">
 			<a class="operation" href="">编辑</a>
-			<a class="operation" href="javascript:void(0);">删除</a>
+			<a class="operation" href="javascript:void(0);" onclick="deletePartCourse('\${item.id}');">删除</a>
 		</td>
 	</tr>
 	{@/each}

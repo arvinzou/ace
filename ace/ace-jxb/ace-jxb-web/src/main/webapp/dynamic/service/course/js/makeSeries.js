@@ -46,6 +46,7 @@ function addSeries(){
     var partName = $("input[name='partName']").val();
     if(partName == '' || partName == undefined){
         alert("章节名称不能为空！");
+        return;
     }
     $.ajax({
         url: contextPath + "/coursePart/insertCoursePart",
@@ -131,4 +132,29 @@ function createCourseSource(){
     var partId = $("#chapters  .active").attr("datattr");
     alert(partId);
     window.location.href = contextPath+ '/dynamic/service/course/make.jsp?courseId='+primaryId+'&partId='+partId;
+}
+
+function deletePartCourse(id){
+
+    $.ajax({
+        url: contextPath + "/courseSource/deleteCourseSourceByCourseSourceId",
+        type:"post",
+        async:false,
+        data:{jsons:JSON.stringify({
+                id: id
+            })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                alert("删除成功！");
+                window.location.reload();
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
 }
