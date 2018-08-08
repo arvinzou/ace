@@ -76,9 +76,6 @@ public class CoursePartServiceImpl implements CoursePartService {
     @Override
     public MessageResponse insertCoursePart(CoursePart o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getCourseId())) {
             return new MessageResponse(1, "课程主键不能为空！");
         }
