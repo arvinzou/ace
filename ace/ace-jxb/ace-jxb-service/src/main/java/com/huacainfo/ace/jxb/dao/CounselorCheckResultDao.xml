@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.CounselorCheckResultDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.CounselorCheckResult">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="counselorId" jdbcType="VARCHAR" property="counselorId"/>
+        <result column="checkYear" jdbcType="VARCHAR" property="checkYear"/>
+        <result column="checkMonth" jdbcType="VARCHAR" property="checkMonth"/>
+        <result column="checkDay" jdbcType="VARCHAR" property="checkDay"/>
+        <result column="checkQuarter" jdbcType="VARCHAR" property="checkQuarter"/>
+        <result column="counselorNum" jdbcType="INTEGER" property="counselorNum"/>
+        <result column="turnover" jdbcType="DECIMAL" property="turnover"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, counselorId, checkYear, checkMonth, checkDay, checkQuarter, counselorNum, turnover, 
+    remark, status, createDate, updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from counselor_check_result
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from counselor_check_result
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.CounselorCheckResult">
+    insert into counselor_check_result (id, counselorId, checkYear, 
+      checkMonth, checkDay, checkQuarter, 
+      counselorNum, turnover, remark, 
+      status, createDate, updateDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{counselorId,jdbcType=VARCHAR}, #{checkYear,jdbcType=VARCHAR}, 
+      #{checkMonth,jdbcType=VARCHAR}, #{checkDay,jdbcType=VARCHAR}, #{checkQuarter,jdbcType=VARCHAR}, 
+      #{counselorNum,jdbcType=INTEGER}, #{turnover,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.CounselorCheckResult">
+        insert into counselor_check_result
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="counselorId != null">
+                counselorId,
+            </if>
+            <if test="checkYear != null">
+                checkYear,
+            </if>
+            <if test="checkMonth != null">
+                checkMonth,
+            </if>
+            <if test="checkDay != null">
+                checkDay,
+            </if>
+            <if test="checkQuarter != null">
+                checkQuarter,
+            </if>
+            <if test="counselorNum != null">
+                counselorNum,
+            </if>
+            <if test="turnover != null">
+                turnover,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="updateDate != null">
+                updateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorId != null">
+                #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkYear != null">
+                #{checkYear,jdbcType=VARCHAR},
+            </if>
+            <if test="checkMonth != null">
+                #{checkMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="checkDay != null">
+                #{checkDay,jdbcType=VARCHAR},
+            </if>
+            <if test="checkQuarter != null">
+                #{checkQuarter,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorNum != null">
+                #{counselorNum,jdbcType=INTEGER},
+            </if>
+            <if test="turnover != null">
+                #{turnover,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.CounselorCheckResult">
+        update counselor_check_result
+        <set>
+            <if test="counselorId != null">
+                counselorId = #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="checkYear != null">
+                checkYear = #{checkYear,jdbcType=VARCHAR},
+            </if>
+            <if test="checkMonth != null">
+                checkMonth = #{checkMonth,jdbcType=VARCHAR},
+            </if>
+            <if test="checkDay != null">
+                checkDay = #{checkDay,jdbcType=VARCHAR},
+            </if>
+            <if test="checkQuarter != null">
+                checkQuarter = #{checkQuarter,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorNum != null">
+                counselorNum = #{counselorNum,jdbcType=INTEGER},
+            </if>
+            <if test="turnover != null">
+                turnover = #{turnover,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                updateDate = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.CounselorCheckResult">
+    update counselor_check_result
+    set counselorId = #{counselorId,jdbcType=VARCHAR},
+      checkYear = #{checkYear,jdbcType=VARCHAR},
+      checkMonth = #{checkMonth,jdbcType=VARCHAR},
+      checkDay = #{checkDay,jdbcType=VARCHAR},
+      checkQuarter = #{checkQuarter,jdbcType=VARCHAR},
+      counselorNum = #{counselorNum,jdbcType=INTEGER},
+      turnover = #{turnover,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

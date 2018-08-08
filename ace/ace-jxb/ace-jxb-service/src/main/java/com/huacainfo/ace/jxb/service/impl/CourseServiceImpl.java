@@ -82,9 +82,7 @@ public class CourseServiceImpl implements CourseService {
      */
     @Override
     public MessageResponse insertCourse(CourseVo o, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getType())) {
             return new MessageResponse(1, "课程类别不能为空！");
         }

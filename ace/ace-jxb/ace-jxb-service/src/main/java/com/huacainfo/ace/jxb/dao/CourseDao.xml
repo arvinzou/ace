@@ -256,6 +256,9 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and IFNULL(t.status,'1') = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.type !=null and condition.type !=&quot;&quot;">
+            and t.type = #{condition.type,jdbcType=VARCHAR}
+        </if>
 
     </sql>
 

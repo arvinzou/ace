@@ -13,15 +13,16 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.constant.OrderCategory;
+import com.huacainfo.ace.jxb.constant.OrderPayStatus;
+import com.huacainfo.ace.jxb.constant.OrderPayType;
 import com.huacainfo.ace.jxb.constant.PayStatus;
-import com.huacainfo.ace.jxb.dao.BaseOrderDao;
-import com.huacainfo.ace.jxb.dao.ConsultOrderDao;
-import com.huacainfo.ace.jxb.dao.ConsultProductDao;
-import com.huacainfo.ace.jxb.dao.CounselorDao;
+import com.huacainfo.ace.jxb.dao.*;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
 import com.huacainfo.ace.jxb.model.ConsultProduct;
+import com.huacainfo.ace.jxb.model.JxbCallBackLog;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
+import com.huacainfo.ace.jxb.service.OrderCalculationService;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 import com.huacainfo.ace.portal.model.Users;
@@ -65,6 +66,10 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     private CounselorDao counselorDao;
     @Autowired
     private SqlSessionTemplate sqlSession;
+    @Autowired
+    private JxbCallBackLogDao jxbCallBackLogDao;
+    @Autowired
+    private OrderCalculationService orderCalculationService;
 
     private SqlSession getSqlSession() {
         SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
@@ -384,6 +389,54 @@ public class BaseOrderServiceImpl implements BaseOrderService {
             return new ResultResponse(ResultCode.FAIL, "未知订单类型");
         }
     }
+
+    /**
+     * 记录回调日志
+     *
+     * @param callBackLog
+     * @return
+     */
+    @Override
+    public int insertCallBackLog(JxbCallBackLog callBackLog) {
+        callBackLog.setId(GUIDUtil.getGUID());
+        callBackLog.setCreateDate(DateUtil.getNowDate());
+        return jxbCallBackLogDao.insertSelective(callBackLog);
+    }
+
+    /**
+     * 付款完成逻辑
+     *
+     * @param callBackLog 支付日志
+     * @param payType     支付方式
+     * @return 处理结果
+     */
+    @Override
+    public ResultResponse pay(JxbCallBackLog callBackLog, int payType) {
+        if (null == callBackLog || StringUtil.isEmpty(callBackLog.getAttach())) {
+            return new ResultResponse(ResultCode.FAIL, "回调日志信息异常");
+        }
+        String orderId = callBackLog.getAttach();
+        BaseOrder order = baseOrderDao.selectByPrimaryKey(orderId);
+        if (null == order) {
+            return new ResultResponse(ResultCode.FAIL, "订单信息丢失");
+        } else if (OrderPayStatus.NEW_ORDER.equals(order.getPayStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "订单状态异常");
+        }
+        if (OrderPayType.WX_PAY == payType) {
+
+        } else if (OrderPayType.OFF_LINE == payType) {
+
+        }
+        //完成支付
+        order.setPayStatus(OrderPayStatus.PAID);
+        order.setPayTime(DateUtil.getNowDate());
+        baseOrderDao.updateByPrimaryKeySelective(order);
+        //插入运算记录
+        orderCalculationService.insertOrderCalculation(orderId, order.getBusinessId());
+
+        return new ResultResponse(ResultCode.SUCCESS, "订单付款完成");
+    }
+
 
     /**
      * 主订单数据校验

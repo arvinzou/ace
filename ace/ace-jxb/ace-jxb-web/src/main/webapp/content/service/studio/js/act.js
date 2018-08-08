@@ -7,6 +7,12 @@ function loadlocal() {
     urls.push({path: portalPath, url: '', type: 'css'});
 
     urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
+
+    urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
+    urls.push({path: portalPath, url: '/content/common/simditor/scripts/hotkeys.js', type: 'js'});
+    urls.push({path: portalPath, url: '/content/common/simditor/scripts/uploader.js', type: 'js'});
+    urls.push({path: portalPath, url: '/content/common/simditor/scripts/simditor.js', type: 'js'});
+
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/scripts/app.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
