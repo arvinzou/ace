@@ -11,8 +11,8 @@ body {
   font-size: 100% !important;
 }
 .btn {
-  padding: 1px 4px;
-  font-size: 12px;
+  padding: 3px 10px;
+  font-size: 14px;
   line-height: 1.22857143;
 }
 .space10{
@@ -36,34 +36,25 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.widget-header {
-  min-height: 30px;
-  height: 30px;
-  font-size: 14px;
-  color:#000000;
-  font-weight:800
+.ui-jqdialog .ui-widget-header .widget-header {
+    border-bottom: none;
+    min-height: 30px;
+    height: 30px;
+    padding:15px;
 }
 .widget-header>.widget-title {
-    line-height: 30px;
-    font-size: 14px;
-      color:#000000;
-      font-weight:800
+    color:#666
 }
 /*表格编辑窗口标题栏高度*/
 .ui-jqdialog .ui-widget-header {
-    min-height: 30px;
-    font-size: 14px;
-      color:#000000;
-      font-weight:800
+    color:#666
 }
 .ui-jqdialog .ui-widget-header .ui-jqdialog-title {
-    line-height: 30px;
-   font-size: 14px;
-     color:#000000;
-     font-weight:800
+    color:#666
 }
 .ui-jqdialog-content td.EditButton {
     padding: 5px;
+    color:#666
 }
 .ui-jqdialog-content td.navButton {
     padding-bottom: 3px;
@@ -275,12 +266,13 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     background-color: #ffffff !important;
 }
 .EditTable {
-   background-color: #ffffff;
+   background-color: #fff;
+   height:60px;
 }
 .widget-header {
-    background: #ffffff;
-     background-image: -webkit-linear-gradient();
-     background-image: linear-gradient();
+    background: #fff;
+    background-image: -webkit-linear-gradient();
+    background-image: linear-gradient();
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient();
 }
@@ -404,11 +396,11 @@ input[readonly] {
     min-height: 25px;
 }
 .ui-dialog, .ui-jqdialog {
-       border: 1px solid #999;
        border: 1px solid rgba(0,0,0,.2);
        border-radius: 0px;
        -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
-       box-shadow: 0 3px 9px rgba(0,0,0,.5);
+       box-shadow: 0 5px 15px rgba(0,0,0,.5);
+       outline: 0;
 }
 th[aria-selected=true] {
     background-image: -webkit-linear-gradient(top, #fff 0, #fff 100%);
@@ -460,4 +452,11 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
      border-bottom: 1px solid #e7ecf1;
      padding: 7px 4px;
      border-color: #e7ecf1;
+ }
+
+ .ui-jqdialog-titlebar-close {
+
+ }
+ .ui-jqdialog-titlebar-close:before {
+
  }
