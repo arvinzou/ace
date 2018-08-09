@@ -77,7 +77,7 @@
 																		<span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">课程管理</font></font></span>
 																	</div>
 																	<div class="create_course" id="create_course">
-																		<a href="javascript:;" class="btn btn-lg red" onclick="createCourseSource();" style="font-size: 14px;">创建课程<i class="fa fa-edit"></i></a></div>
+																		<a href="javascript:;" class="btn red" onclick="createCourseSource();" style="font-size: 14px;">创建课程<i class="fa fa-edit"></i></a></div>
 																	</div>
 																<div class="portlet-body">
 																	<div class="table-scrollable">
@@ -85,9 +85,10 @@
 																			<thead>
 																			<tr>
 																				<th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-																				<th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
+																				<th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程文件 </font></font></th>
+																				<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
 																				<th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 创建时间 </font></font></th>
-																				<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 时长 </font></font></th>
+																				<th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 时长 </font></font></th>
 																				<th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 是否可试听 </font></font></th>
 																				<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
 																			</tr>
@@ -162,24 +163,26 @@
 <script id="courseTemp" type="text/template">
 	{@each data as item, index}
 	<tr>
-		<td width="5%"><font style="vertical-align: inherit;">
+		<td width="5%" class="tdcontent"><font style="vertical-align: inherit;">
 			<input type="radio" name="course" value="\${item.id}"/>
 			<font style="vertical-align: inherit;">\${parseInt(index)+1} </font></font>
 		</td>
-		<td width="30%">
-			<video src="\${item.mediUrl}" style="width: 80px;height: 60px;"></video>
+		<td width="15%">
+			<video src="\${item.mediUrl}" style="width: 80px;height: 60px;background: #C4C8D6;"></video>
+		</td>
+		<td width="20%" class="tdcontent">
 			<span>\${item.name}</span>
 		</td>
-		<td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate}</font></font></td>
-		<td width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
-		<td width="10%"><font style="vertical-align: inherit;">
+		<td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate}</font></font></td>
+		<td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
+		<td width="10%" class="tdcontent"><font style="vertical-align: inherit;">
 			{@if item.free == '0'}
 			<font style="vertical-align: inherit;">是</font></font>
 			{@else if item.free == '1'}
 			<font style="vertical-align: inherit;">否</font></font>
 			{@/if}
 		</td>
-		<td width="20%">
+		<td width="20%" class="tdcontent">
 			<a class="operation" href="#" data-toggle="modal" data-target="#editCourseSource" onclick="editCourseSource('\${item.id}');">编辑</a>
 			<a class="operation" href="javascript:void(0);" onclick="deletePartCourse('\${item.id}');">删除</a>
 		</td>
