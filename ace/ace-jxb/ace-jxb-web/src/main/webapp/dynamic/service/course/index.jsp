@@ -19,7 +19,11 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css"/>
+    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/create.css">
     <script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
@@ -149,7 +153,7 @@
             {@/if}
         </td>
         <td width="15%">
-            <a class="operation" href="">编辑</a>
+            <a class="operation" href="#" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
             <a class="operation" href="">下架</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
             <a class="operation" href="">查看评论</a>
@@ -161,17 +165,171 @@
 
 <script id="makeTemp" type="text/template">
     {@if data.type == '1'}
-    <a href="javascript:;" class="btn red" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
+    <a href="javascript:;" class="btn red" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
     {@else if data.type == '2'}
-    <a href="javascript:;" class="btn red" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
+    <a href="javascript:;" class="btn red" style="font-size: 14px !important;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
     {@/if}
 </script>
 
 <script id="createTemp" type="text/template">
-    <a href="/jxb/dynamic/service/course/create.jsp" class="btn green">创建课程<i class="fa fa-plus"></i></a>
+    <a href="/jxb/dynamic/service/course/create.jsp" style="font-size: 14px !important;" class="btn green">创建课程<i class="fa fa-plus"></i></a>
 </script>
 </body>
 
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="editCourse"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="courseBasic"></div>
+            <div id="sourceBasic"></div>
+        </div>
+    </div>
+</div>
+
+<script id="editCourseTemp" type="text/template">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="gridSystemModalLabel1">课程编辑</h4>
+    </div>
+    <div id="courseInfo">
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">课程名称</div>
+            <div class="col-xs-12 col-md-10"><input name="courseName" class="form_input" type="text" placeholder="请输入课程名称" value="\${data.name}"/></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">课程封面</div>
+            <div class="col-xs-12 col-md-10">
+                <div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
+                {@if data.cover != '' && data.cover != undefined}
+                <div class="imgbox" >
+                    <img class="select_img form_imagePhotoUrl"
+                         id="courseCover"
+                         data-toggle="modal"
+                         data-xsize="375" data-ysize="210"
+                         data-cover="courseCover"
+                         data-target="#img-uploader"
+                         src="\${data.cover}">
+                </div>
+                {@else}
+                <div class="imgbox" >
+                    <img class="select_img form_imagePhotoUrl"
+                         id="courseCover"
+                         data-toggle="modal"
+                         data-xsize="375" data-ysize="210"
+                         data-cover="courseCover"
+                         data-target="#img-uploader"
+                         src="${pageContext.request.contextPath}/dynamic/service/course/img/course_default.jpg?v=${cfg.version}">
+                </div>
+                {@/if}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">课程简介</div>
+            <div class="col-xs-12 col-md-10">
+                <textarea name="introduction" id="courseIntro" class="introduction">\${data.introduce}</textarea>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">价格</div>
+            <div class="col-xs-12 col-md-10">
+                {@if data.costType == '0'}
+                <div class="col-xs-1 col-md-1 payType"><span id="noPay" class="feeLabel cactive" onclick="payTypeCheck('noPay');">免费</span></div>
+                <div class="col-xs-1 col-md-1 payType"><span id="pay" class="feeLabel uncactive" onclick="payTypeCheck('pay');">付费</span></div>
+                {@else if data.costType == '1'}
+                <div class="col-xs-1 col-md-1 payType"><span id="noPay" class="feeLabel uncactive" onclick="payTypeCheck('noPay');">免费</span></div>
+                <div class="col-xs-1 col-md-1 payType"><span id="pay" class="feeLabel cactive" onclick="payTypeCheck('pay');">付费</span></div>
+                {@/if}
+                <div class="col-xs-10 col-md-10">
+                    <input name="price" type="text" class="form_input" value="\${data.cost}" />
+                </div>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">课程对象</div>
+            <div class="col-xs-12 col-md-10">
+                <span class="pointer cactive">幼儿</span>
+                <span class="pointer uncactive">小学</span>
+                <span class="pointer uncactive">中学</span>
+                <span class="pointer uncactive">高中</span>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">适合谁听</div>
+            <div class="col-xs-12 col-md-10"><input class="form_input" type="text" placeholder="请输入适合人群" /></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">针对能力</div>
+            <div class="col-xs-12 col-md-10">
+                <div style="height:30px;margin-bottom: 30px;">
+                    <span class="ability cactive">心理能力</span>
+                    <span class="ability uncactive">学习方法</span>
+                    <span class="ability uncactive">团队合作</span>
+                    <span class="ability uncactive">沟通表达</span>
+                    <span class="ability uncactive">独立思考</span>
+                    <span class="ability uncactive">自我认知</span>
+                    <span class="ability uncactive">其他</span>
+                </div>
+                <div style="width:100%;">
+                    <textarea class="ability_intro"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">起始人气(选填)</div>
+            <div class="col-xs-12 col-md-10">
+                <input type="text" class="form_input" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">状态设置</div>
+            <div class="col-xs-12 col-md-10">
+                <input type="radio" value="" name="status"/>上架
+                <input type="radio" value="" name="status"/>下架
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="confirmEdit('\${data.id}', '\${data.type}');">确定</button>
+    </div>
+</script>
+
+<script id="editSourceTemp" type="text/template">
+    <div class="row">
+        <div class="col-xs-12 col-md-2">音频上传</div>
+        <div class="col-xs-12 col-md-10">
+            <div class="pictureContainer" id="video" style="z-index: 1;">
+                <div class="viewPicture">
+                    <video id="vedioSource" src="" controls="controls" style="width: 100%;height: 100%;"></video>
+                </div>
+                <div class="uploadText">
+                    <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
+                    <p class="uploadPloadprogress">点击上传封面</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-2">课程文稿</div>
+        <div class="col-xs-12 col-md-10">
+            <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-2">是否允许试听</div>
+        <div class="col-xs-12 col-md-10">
+            <input type="radio" name="tried" value="1"/>是
+            <input type="radio" name="tried" value="0"/>否
+        </div>
+    </div>
+    <div class="row form_row">
+        <div class="col-xs-12 col-md-2">课程时长</div>
+        <div class="col-xs-12 col-md-10">
+            <input name="duation" type="text" class="form_input" />
+        </div>
+    </div>
+</script>
 <style>
     .modal .headbox {
         width: 150px !important;
@@ -180,7 +338,9 @@
         overflow: hidden;
         margin: 0 auto;
     }
-
+    .modal-dialog{
+        width: 900px !important;
+    }
     .modal-body {
         font-size: 16px;
         line-height: 24px;
