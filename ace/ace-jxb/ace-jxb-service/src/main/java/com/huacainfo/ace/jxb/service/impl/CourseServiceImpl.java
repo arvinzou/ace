@@ -226,7 +226,9 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public SingleResult<CourseVo> selectCourseByPrimaryKey(String id) throws Exception {
         SingleResult<CourseVo> rst = new SingleResult<>();
-        rst.setValue(this.courseDao.selectVoByPrimaryKey(id));
+        CourseVo vo = courseDao.selectVoByPrimaryKey(id);
+        vo.setCourseSource(courseSourceDao.findByCourseId(id).get(0));
+        rst.setValue(vo);
         return rst;
     }
 
