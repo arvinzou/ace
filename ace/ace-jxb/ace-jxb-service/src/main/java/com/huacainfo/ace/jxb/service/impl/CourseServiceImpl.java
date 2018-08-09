@@ -227,7 +227,9 @@ public class CourseServiceImpl implements CourseService {
     public SingleResult<CourseVo> selectCourseByPrimaryKey(String id) throws Exception {
         SingleResult<CourseVo> rst = new SingleResult<>();
         CourseVo vo = courseDao.selectVoByPrimaryKey(id);
-        vo.setCourseSource(courseSourceDao.findByCourseId(id).get(0));
+        if (CourseConstant.COURSE_TYPE_SINGLE.equals(vo.getType())) {
+            vo.setCourseSource(courseSourceDao.findByCourseId(id).get(0));
+        }
         rst.setValue(vo);
         return rst;
     }
