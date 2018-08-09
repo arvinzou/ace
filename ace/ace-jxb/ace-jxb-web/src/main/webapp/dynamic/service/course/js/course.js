@@ -2,7 +2,7 @@ window.onload = function (){
     initpage('1');    //初始化显示单品课程
 }
 var payType = "";
-
+var videoUrl = "";
 function initpage(courseType) {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
@@ -133,6 +133,44 @@ function initEditor(){
             leaveConfirm: '正在上传文件'
         }
     });
+    var video = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'video',
+        url: portalPath+ '/files/uploadFile.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+                {title: "files", extensions: "mp4,mp3"}
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                showUploadText('.viewPicture video', '.uploadText');
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadPloadprogress").html("开始上传（" + r + "%）")
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                viewCover('http://zx.huacainfo.com/'+rst.value[0], '.pictureContainer','.viewPicture video','.uploadText');
+                videoUrl = 'http://zx.huacainfo.com/'+rst.value[0];
+                console.log(rst.value[0]);
+            }
+        }
+    });
+    video.init();
 }
 
 function confirmEdit(id, type){
@@ -141,6 +179,8 @@ function confirmEdit(id, type){
     var introduction = $("textarea[name = 'introduction']").val();
     var price = $("input[name ='price']").val();
     payType = $(".payType .cactive").text()=="免费"?"0":"1";
+    var free = $('input[name="tried"]:checked').val();
+    var duation = $("input[name = 'duation']").val();
     $.ajax({
         url: contextPath + "/course/updateCourse",
         type:"post",
@@ -156,12 +196,18 @@ function confirmEdit(id, type){
                 duration: 0,
                 costType: payType,
                 cost: price,
-                introduce: introduction
+                introduce: introduction,
+                "courseSource":{
+                    mediUrl: videoUrl,
+                    free: free,
+                    duation: duation
+                }
             })
         },
         success:function(result){
             if(result.status == 0) {
                 alert("修改成功！");
+                window.location.reload();
             }else {
                 alert(result.errorMessage);
             }
@@ -181,4 +227,24 @@ function payTypeCheck(dom) {
         $('#' + dom).removeClass('uncactive').addClass('cactive');
         $('#noPay').removeClass('cactive').addClass('uncactive');
     }
+}
+
+/*文件上传成功后*/
+function viewCover(img, clazz, imgClazz, textClazz) {
+    $(clazz).data('imgSrc',img);
+    var imagePath=img;
+    showUploadImg(imagePath, imgClazz, textClazz);
+}
+
+/*显示上传文字*/
+function showUploadText(imgClazz, textClazz) {
+    $(imgClazz).prop('src','');
+    $(textClazz).show();
+}
+
+/*显示上传图片*/
+function showUploadImg(imgpath, imgClazz, textClazz) {
+    $(imgClazz).removeClass('hidder').addClass('displayer');
+    $(imgClazz).prop('src',imgpath);
+    $(textClazz).hide();
 }
