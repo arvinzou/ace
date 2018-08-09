@@ -77,7 +77,7 @@
 																		<span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">课程管理</font></font></span>
 																	</div>
 																	<div class="create_course" id="create_course">
-																		<a href="javascript:;" class="btn btn-lg red" onclick="createCourseSource();">创建课程<i class="fa fa-edit"></i></a></div>
+																		<a href="javascript:;" class="btn btn-lg red" onclick="createCourseSource();" style="font-size: 14px;">创建课程<i class="fa fa-edit"></i></a></div>
 																	</div>
 																<div class="portlet-body">
 																	<div class="table-scrollable">

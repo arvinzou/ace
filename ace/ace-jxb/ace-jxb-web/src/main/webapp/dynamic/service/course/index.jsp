@@ -154,7 +154,6 @@
         </td>
         <td width="15%">
             <a class="operation" href="#" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
-            <a class="operation" href="">下架</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
             <a class="operation" href="">查看评论</a>
             <a class="operation" href="">购买明细</a>
@@ -280,19 +279,13 @@
                 <input type="text" class="form_input" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-2">状态设置</div>
-            <div class="col-xs-12 col-md-10">
-                <input type="radio" value="" name="status"/>上架
-                <input type="radio" value="" name="status"/>下架
-            </div>
-        </div>
+        {@if data.type == '1'}
         <div class="row">
             <div class="col-xs-12 col-md-2">音频上传</div>
             <div class="col-xs-12 col-md-10">
                 <div class="pictureContainer" id="video" style="z-index: 1;">
                     <div class="viewPicture">
-                        <video id="vedioSource" src="\${data.mediUrl}" controls="controls" style="width: 100%;height: 100%;"></video>
+                        <video id="vedioSource" src="\${data.courseSource.mediUrl}" controls="controls" width="340px" heigt="235px"></video>
                     </div>
                     <div class="uploadText">
                         <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
@@ -304,27 +297,31 @@
         <div class="row">
             <div class="col-xs-12 col-md-2">课程文稿</div>
             <div class="col-xs-12 col-md-10">
-                <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
+                <textarea name="coursedoc" id="coursedoc" class="introduction"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-2">是否允许试听</div>
             <div class="col-xs-12 col-md-10">
-                {@if data.free == '0'}
+                {@if data.courseSource.free == '0'}
                 <input type="radio" name="tried" value="1" checked/>是
                 <input type="radio" name="tried" value="0"/>否
-                {@else if data.free == '1'}
+                {@else if data.courseSource.free == '1'}
                 <input type="radio" name="tried" value="1"/>是
                 <input type="radio" name="tried" value="0" checked/>否
+                {@else}
+                <input type="radio" name="tried" value="1"/>是
+                <input type="radio" name="tried" value="0"/>否
                 {@/if}
             </div>
         </div>
         <div class="row form_row">
             <div class="col-xs-12 col-md-2">课程时长</div>
             <div class="col-xs-12 col-md-10">
-                <input name="duation" type="text" class="form_input" value="\${data.duration}"/>
+                <input name="duation" type="text" class="form_input" value="\${data.courseSource.duration}"/>
             </div>
         </div>
+        {@/if}
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -341,7 +338,7 @@
         margin: 0 auto;
     }
     .modal-dialog{
-        width: 900px !important;
+        width: 1000px !important;
     }
     .modal-body {
         font-size: 16px;
