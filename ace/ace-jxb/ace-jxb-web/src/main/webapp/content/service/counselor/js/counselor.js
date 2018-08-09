@@ -31,47 +31,46 @@ function approved() {
             },
         },
     })
-        .then((value) = > {
-        switch(value) {
-        case
-            "true"
-        :
-            startProcessing(id, 1, 'ok');
-            break;
-        case
-            "false"
-        :
-            swal("您拒绝Ta入驻的理由：", {
-                content: "input",
-                buttons: {
-                    cancel: {
-                        text: "取消",
-                        value: false,
-                        color: 'green'
-                    },
-                    catch: {
-                        text: "确认",
-                        value: true,
-                        color: 'green'
-                    },
-                },
+        .then(function (value) {
+                switch (value) {
+                    case
+                    "true"
+                    :
+                        startProcessing(id, 1, 'ok');
+                        break;
+                    case
+                    "false"
+                    :
+                        swal("您拒绝Ta入驻的理由：", {
+                            content: "input",
+                            buttons: {
+                                cancel: {
+                                    text: "取消",
+                                    value: false,
+                                    color: 'green'
+                                },
+                                catch: {
+                                    text: "确认",
+                                    value: true,
+                                    color: 'green'
+                                },
+                            },
 
-            }).then((value) = > {
-                console.log(value);
-            if (value) {
-                var text = $('.swal-content__input').val();
-                if (text) {
-                    startProcessing(id, 2, text);
-                }
-                swal({
-                    text: "必须填写拒绝理由！",
-                    type: "error",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
-                return;
-            }
-
+                        }).then(function (value) {
+                            console.log(value);
+                            if (value) {
+                                var text = $('.swal-content__input').val();
+                                if (text) {
+                                    startProcessing(id, 2, text);
+                                }
+                                swal({
+                                    text: "必须填写拒绝理由！",
+                                    type: "error",
+                                    timer: 1000,
+                                    showConfirmButton: false
+                                });
+                                return;
+                            }
         })
             ;
 
@@ -87,10 +86,17 @@ function approved() {
             // swal("Got away safely!");
         }
     }
-)
-    ;
+        );
 
 }
+
+//
+// (value) = > {
+//
+//
+//     }
+
+
 
 
 // function auditFailed() {
