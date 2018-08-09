@@ -6,6 +6,7 @@ import com.huacainfo.ace.jxb.vo.PostLevelVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostLevelDao {
 
@@ -32,4 +33,13 @@ public interface PostLevelDao {
 
     int isExit(PostLevel record);
 
+    /**
+     * 考核业绩报表
+     *
+     * @param params
+     * @return list
+     */
+    List<Map<String, Object>> examine(Map<String, Object> params);
+
+    List<PostLevel> findConfig();
 }

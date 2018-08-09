@@ -1,13 +1,21 @@
 package com.huacainfo.ace.jxb.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.jxb.dao.CounselorCheckResultDao;
+import com.huacainfo.ace.jxb.dao.CounselorPostLevelDao;
 import com.huacainfo.ace.jxb.dao.PostLevelDao;
+import com.huacainfo.ace.jxb.model.CounselorCheckResult;
+import com.huacainfo.ace.jxb.model.CounselorPostLevel;
 import com.huacainfo.ace.jxb.model.PostLevel;
 import com.huacainfo.ace.jxb.service.PostLevelService;
 import com.huacainfo.ace.jxb.vo.PostLevelQVo;
@@ -17,9 +25,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("postLevelService")
 /**
@@ -33,6 +45,10 @@ public class PostLevelServiceImpl implements PostLevelService {
     private PostLevelDao postLevelDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private CounselorCheckResultDao counselorCheckResultDao;
+    @Autowired
+    private CounselorPostLevelDao counselorPostLevelDao;
 
     /**
      * @throws
@@ -163,4 +179,118 @@ public class PostLevelServiceImpl implements PostLevelService {
         return new MessageResponse(0, "咨询师岗位级别配置删除完成！");
     }
 
+    /**
+     * 获取绩效考核数据
+     *
+     * @param quarter     1-第一季度，2-第二季度，3-第三季度，4-第四季度 必传
+     * @param counselorId 咨询师id 可选
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse examine(String quarter, String counselorId) {
+        Map<String, Object> params = new HashMap<>();
+        if (StringUtil.isNotEmpty(counselorId)) {
+            params.put("counselorId", counselorId);
+        }
+        String nowTime = DateUtil.getNow();
+        String nowYear = nowTime.substring(0, 4);
+        String nowMonth = nowTime.substring(5, 7);
+        String nowDay = nowTime.substring(8, 10);
+        String quarterStr;
+        switch (quarter) {
+            case "1":
+                quarterStr = "第一季度";
+                params.put("startDt", nowYear + " 01-01 00:00:00");
+                params.put("endDt", nowYear + " 03-31 23:59:59");
+                break;
+            case "2":
+                quarterStr = "第二季度";
+                params.put("startDt", nowYear + " 04-01 00:00:00");
+                params.put("endDt", nowYear + " 06-30 23:59:59");
+                break;
+            case "3":
+                quarterStr = "第三季度";
+                params.put("startDt", nowYear + " 07-01 00:00:00");
+                params.put("endDt", nowYear + " 09-30 23:59:59");
+                break;
+            case "4":
+                quarterStr = "第四季度";
+                params.put("startDt", nowYear + " 10-01 00:00:00");
+                params.put("endDt", nowYear + " 12-31 23:59:59");
+                break;
+            default:
+                quarterStr = "第一季度";
+                params.put("startDt", nowYear + " 01-01 00:00:00");
+                params.put("endDt", nowYear + " 03-31 23:59:59");
+                break;
+        }
+        //
+        List<Map<String, Object>> reportData = postLevelDao.examine(params);
+        if (!CollectionUtils.isEmpty(reportData)) {
+            counselorCheckResultDao.cleanData(nowYear, quarterStr);
+        }
+        CounselorCheckResult checkResult;
+        for (Map<String, Object> data : reportData) {
+            checkResult = new CounselorCheckResult();
+            checkResult.setCounselorId((String) data.get("id"));
+            checkResult.setCounselorNum((Integer) data.get("cNum"));
+            checkResult.setTurnover(new BigDecimal((String) data.get("cTurnover")));
+            checkResult.setCheckQuarter(quarterStr);
+            //固定数值
+            checkResult.setId(GUIDUtil.getGUID());
+            checkResult.setCheckYear(nowYear);
+            checkResult.setCheckMonth(nowMonth);
+            checkResult.setCheckDay(nowDay);
+            checkResult.setStatus("1");
+            checkResult.setCreateDate(DateUtil.getNowDate());
+            counselorCheckResultDao.insertSelective(checkResult);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "考核完成");
+    }
+
+    /**
+     * 咨询师定岗
+     */
+    public void determinePosts(String year, String quarter) {
+        List<PostLevel> config = postLevelDao.findConfig();
+        if (CollectionUtils.isEmpty(config)) {
+            logger.error("无咨询师岗位配置数据");
+            return;
+        }
+
+        List<CounselorCheckResult> dataList = counselorCheckResultDao.findByQuarter(year, quarter);
+        CounselorPostLevel cPost;
+        PostLevel nowPost;
+        for (CounselorCheckResult data : dataList) {
+            nowPost = getPostLevel(data, config);
+
+            //更新岗位内容
+            cPost = counselorPostLevelDao.findByCounselorId(data.getCounselorId());
+            if (null == cPost) {
+
+            } else {
+
+            }
+        }
+    }
+
+    /***
+     * 优先返回满足岗位标准的；没有，则分配最低岗位给他
+     * @param data
+     * @param config
+     * @return String
+     */
+    private PostLevel getPostLevel(CounselorCheckResult data, List<PostLevel> config) {
+        int num = data.getCounselorNum();
+        BigDecimal turnover = data.getTurnover();
+
+        for (PostLevel postLevel : config) {
+            if (postLevel.getCounselorNum() <= num && postLevel.getTurnover().compareTo(turnover) <= 0) {
+                return postLevel;
+            }
+        }
+
+        return config.get(config.size() - 1);
+    }
 }

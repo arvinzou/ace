@@ -221,17 +221,22 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseVo">
-
+        <result column="srcName" jdbcType="VARCHAR" property="srcName"/>
+        <result column="mediUrl" jdbcType="VARCHAR" property="mediUrl"/>
+        <result column="srcDuration" jdbcType="INTEGER" property="srcDuration"/>
+        <result column="free" jdbcType="VARCHAR" property="free"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum,
-        remark, status, createUserId, createDate, introduce
+        s.name as srcName, s.mediUrl, s.duration as srcDuration, s.free,
+        t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
+        t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
         from course t
+        left join course_source s on t.id = s.courseId and t.category='1'
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -252,6 +257,7 @@
 
     <sql id="whereCondition">
         from course t
+        left join course_source s on t.id = s.courseId and t.category='1'
         where 1=1
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and IFNULL(t.status,'1') = #{condition.status,jdbcType=VARCHAR}
