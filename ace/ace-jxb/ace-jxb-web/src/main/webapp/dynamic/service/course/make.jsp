@@ -56,46 +56,46 @@
 												课程制作
 											</h3>
 										</div>
-										<div class="panel-body">
-											<div class="row">
-												<span class="title01">课程资源信息</span>
-											</div>
-											<div class="row">
-												<div class="col-xs-12 col-md-2">音频上传</div>
-												<div class="col-xs-12 col-md-10">
-													<div class="pictureContainer" id="video" style="z-index: 1;">
-														<div class="viewPicture">
-															<video id="vedioSource" src="" controls="controls" style="width: 100%;height: 100%;"></video>
-														</div>
-														<div class="uploadText">
-															<p class="imgiocn"><img src="img/video.png" /></p>
-															<p class="uploadPloadprogress">点击上传封面</p>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12 col-md-2">课程文稿</div>
-												<div class="col-xs-12 col-md-10">
-													<textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12 col-md-2">是否允许试听</div>
-												<div class="col-xs-12 col-md-10">
-													<input type="radio" name="tried" value="1"/>是
-													<input type="radio" name="tried" value="0"/>否
-												</div>
-											</div>
-											<div class="row form_row">
-												<div class="col-xs-12 col-md-2">课程时长</div>
-												<div class="col-xs-12 col-md-10">
-													<input name="duation" type="text" class="form_input" />
-												</div>
-											</div>
-											<div class="row" style="text-align: center;">
-												<button class="save" onclick="save();">保存</button>
-											</div>
+										<div class="panel-body" id="courseSource">
+                                            <div class="row">
+                                                <span class="title01">课程资源信息</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-2">音频上传</div>
+                                                <div class="col-xs-12 col-md-10">
+                                                    <div class="pictureContainer" id="video" style="z-index: 1;">
+                                                        <div class="viewPicture">
+                                                            <video id="vedioSource" src="" controls="controls" style="width: 100%;height: 100%;"></video>
+                                                        </div>
+                                                        <div class="uploadText">
+                                                            <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
+                                                            <p class="uploadPloadprogress">点击上传封面</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-2">课程文稿</div>
+                                                <div class="col-xs-12 col-md-10">
+                                                    <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-2">是否允许试听</div>
+                                                <div class="col-xs-12 col-md-10">
+                                                    <input type="radio" name="tried" value="1"/>是
+                                                    <input type="radio" name="tried" value="0"/>否
+                                                </div>
+                                            </div>
+                                            <div class="row form_row">
+                                                <div class="col-xs-12 col-md-2">课程时长</div>
+                                                <div class="col-xs-12 col-md-10">
+                                                    <input name="duation" type="text" class="form_input" />
+                                                </div>
+                                            </div>
+                                            <div class="row" style="text-align: center;">
+                                                <button class="save" onclick="save();">保存</button>
+                                            </div>
 										</div>
 									</div>
 								</div>
@@ -110,12 +110,13 @@
 	</div>
 
 	<div class="bottom"></div>
-
 </div>
-
 </body>
 
 <style>
+	.modal-dialog{
+		width: 900px !important;
+	}
 	.modal .headbox {
 		width: 150px !important;
 		height: 150px !important;

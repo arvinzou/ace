@@ -20,6 +20,7 @@
 	<link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
 	<link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/style.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/create.css">
 	<script src="${pageContext.request.contextPath}/dynamic/service/course/js/makeSeries.js?v=${cfg.version}"></script>
 	<script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
@@ -179,13 +180,73 @@
 			{@/if}
 		</td>
 		<td width="20%">
-			<a class="operation" href="">编辑</a>
+			<a class="operation" href="#" data-toggle="modal" data-target="#editCourseSource" onclick="editCourseSource('\${item.id}');">编辑</a>
 			<a class="operation" href="javascript:void(0);" onclick="deletePartCourse('\${item.id}');">删除</a>
 		</td>
 	</tr>
 	{@/each}
 </script>
 
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="editCourseSource"
+	 aria-labelledby="gridSystemModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="sourceBasic">
+
+		</div>
+	</div>
+</div>
+
+<script id="courseSourceTemp" type="text/template">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="gridSystemModalLabel1">课程编辑</h4>
+        </div>
+        <div>
+        <div class="row">
+        <div class="col-xs-12 col-md-2">音频上传</div>
+        <div class="col-xs-12 col-md-10">
+        <div class="pictureContainer" id="video" style="z-index: 1;">
+        <div class="viewPicture">
+        <video id="vedioSource" src="\${data.mediUrl}" controls="controls" style="width: 100%;height: 100%;"></video>
+        </div>
+        <div class="uploadText">
+        <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
+        <p class="uploadPloadprogress">点击上传视频</p>
+        </div>
+        </div>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-xs-12 col-md-2">课程文稿</div>
+        <div class="col-xs-12 col-md-10">
+        <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-xs-12 col-md-2">是否允许试听</div>
+        <div class="col-xs-12 col-md-10">
+			{@if data.free == '0'}
+			<input type="radio" name="tried" value="1" checked/>是
+			<input type="radio" name="tried" value="0"/>否
+			{@else if data.free == '1'}
+			<input type="radio" name="tried" value="1"/>是
+			<input type="radio" name="tried" value="0" checked/>否
+			{@/if}
+        </div>
+        </div>
+        <div class="row form_row">
+        <div class="col-xs-12 col-md-2">课程时长</div>
+        <div class="col-xs-12 col-md-10">
+        <input name="duation" type="text" class="form_input" value="\${data.duration}"/>
+        </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="updateCourseSource('\${data.id}','\${data.partId}');">确定</button>
+        </div>
+</script>
 <style>
 	.modal .headbox {
 		width: 150px !important;
@@ -194,7 +255,9 @@
 		overflow: hidden;
 		margin: 0 auto;
 	}
-
+	.modal-dialog{
+		width: 900px !important;
+	}
 	.modal-body {
 		font-size: 16px;
 		line-height: 24px;
