@@ -454,9 +454,9 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
      border-color: #e7ecf1;
  }
 
- .ui-jqdialog-titlebar-close {
+.ui-dialog .widget-header, .ui-jqdialog .widget-header {
+    margin: 0;
+    padding: 15px;
+    border-width: 0 0 1px 0;
+}
 
- }
- .ui-jqdialog-titlebar-close:before {
-
- }
