@@ -1,10 +1,7 @@
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
-import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -18,18 +15,12 @@ import java.util.Map;
 public class CommonTest {
 
 
-    public static SqlSession getSqlSession() {
-        SqlSessionFactory sqlSessionFactory = null;
-        SqlSession session = sqlSessionFactory.openSession(ExecutorType.REUSE);
-        Configuration configuration = session.getConfiguration(); //反射得到configuration ,然后
-        configuration.setSafeResultHandlerEnabled(false); // 设置为false
-        return session;
-    }
-
     @Test
     public void test() {
 
+        String nowYear = DateUtil.getNow().substring(0, 4);
 
+        System.out.println("111:" + nowYear + ":1");
     }
 
     public void orderParams() {
