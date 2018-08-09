@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.CounselorPostLevelDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.CounselorPostLevel">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="counselorId" jdbcType="VARCHAR" property="counselorId"/>
+        <result column="postId" jdbcType="VARCHAR" property="postId"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, counselorId, postId, remark, status, createDate, updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from counselor_post_level
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from counselor_post_level
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.CounselorPostLevel">
+    insert into counselor_post_level (id, counselorId, postId, 
+      remark, status, createDate, 
+      updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{counselorId,jdbcType=VARCHAR}, #{postId,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.CounselorPostLevel">
+        insert into counselor_post_level
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="counselorId != null">
+                counselorId,
+            </if>
+            <if test="postId != null">
+                postId,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="updateDate != null">
+                updateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorId != null">
+                #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="postId != null">
+                #{postId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.CounselorPostLevel">
+        update counselor_post_level
+        <set>
+            <if test="counselorId != null">
+                counselorId = #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="postId != null">
+                postId = #{postId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                updateDate = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.CounselorPostLevel">
+    update counselor_post_level
+    set counselorId = #{counselorId,jdbcType=VARCHAR},
+      postId = #{postId,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CounselorPostLevelVo">
+        <result column="postName" jdbcType="VARCHAR" property="postName"/>
+        <result column="ratio" jdbcType="DECIMAL" property="ratio"/>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        p.postName,p.ratio,
+        t.id, t.counselorId, t.postId, t.remark, t.status, t.createDate, t.updateDate
+    </sql>
+
+    <select id="findByCounselorId" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.counselorId = #{counselorId,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="From_Statement">
+      from counselor_post_level t
+      left join post_level p on t.postId = p.id
+    </sql>
+
+    <sql id="Where_Condition">
+      where 1=1
+    </sql>
+</mapper>

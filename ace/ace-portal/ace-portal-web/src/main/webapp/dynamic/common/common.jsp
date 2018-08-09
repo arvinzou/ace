@@ -9,7 +9,7 @@ request.setAttribute("now", CommonUtils.formatDate(new Date()));
 <script type="text/javascript">
 	var contextPath = '${pageContext.request.contextPath}';
 	var portalPath = '${portalPath}';
-	var layoutTopHeight=190;
+	var layoutTopHeight=220;
 	var fastdfs_server='${cfg.fastdfs_server}';
 	var default_page_list=[${cfg.default_page_list}];
 	var now='${now}';

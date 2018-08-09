@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.OrderCalculationDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.OrderCalculation">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="orderId" jdbcType="VARCHAR" property="orderId"/>
+        <result column="counselorId" jdbcType="VARCHAR" property="counselorId"/>
+        <result column="ratio" jdbcType="DECIMAL" property="ratio"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="cpuTag" jdbcType="CHAR" property="cpuTag"/>
+        <result column="grantTag" jdbcType="CHAR" property="grantTag"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, orderId, counselorId, ratio, amount, cpuTag, grantTag, remark, status, createDate, 
+    updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_calculation
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order_calculation
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.OrderCalculation">
+    insert into order_calculation (id, orderId, counselorId, 
+      ratio, amount, cpuTag, 
+      grantTag, remark, status, 
+      createDate, updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{counselorId,jdbcType=VARCHAR}, 
+      #{ratio,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, #{cpuTag,jdbcType=CHAR},
+      #{grantTag,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.OrderCalculation">
+        insert into order_calculation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderId != null">
+                orderId,
+            </if>
+            <if test="counselorId != null">
+                counselorId,
+            </if>
+            <if test="ratio != null">
+                ratio,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="cpuTag != null">
+                cpuTag,
+            </if>
+            <if test="grantTag != null">
+                grantTag,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="updateDate != null">
+                updateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorId != null">
+                #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="ratio != null">
+                #{ratio,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="cpuTag != null">
+                #{cpuTag,jdbcType=CHAR},
+            </if>
+            <if test="grantTag != null">
+                #{grantTag,jdbcType=CHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.OrderCalculation">
+        update order_calculation
+        <set>
+            <if test="orderId != null">
+                orderId = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="counselorId != null">
+                counselorId = #{counselorId,jdbcType=VARCHAR},
+            </if>
+            <if test="ratio != null">
+                ratio = #{ratio,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="cpuTag != null">
+                cpuTag = #{cpuTag,jdbcType=CHAR},
+            </if>
+            <if test="grantTag != null">
+                grantTag = #{grantTag,jdbcType=CHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                updateDate = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.OrderCalculation">
+    update order_calculation
+    set orderId = #{orderId,jdbcType=VARCHAR},
+      counselorId = #{counselorId,jdbcType=VARCHAR},
+      ratio = #{ratio,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      cpuTag = #{cpuTag,jdbcType=CHAR},
+      grantTag = #{grantTag,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from order_calculation t
+        where 1=1
+        <if test="condition.counselorId !=null and condition.counselorId !=&quot;&quot;">
+            and t.counselorId = #{condition.counselorId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.cpuTag !=null and condition.cpuTag !=&quot;&quot;">
+            and t.cpuTag = #{condition.cpuTag,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.grantTag !=null and condition.grantTag !=&quot;&quot;">
+            and t.grantTag = #{condition.grantTag,jdbcType=VARCHAR}
+        </if>
+    </sql>
+</mapper>
