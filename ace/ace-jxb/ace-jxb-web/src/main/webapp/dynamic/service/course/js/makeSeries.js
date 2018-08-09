@@ -25,7 +25,7 @@ window.onload = function(){
     var url =   window.location.href.substring(1);
     primaryId = url.substring(url.indexOf('=')+1);
 
-    findPartList();
+    initPartList();
 }
 
 function initpage(partId) {
@@ -62,7 +62,8 @@ function addSeries(){
             if(result.status == 0) {
                 console.log(result);
                 alert("创建成功！");
-                findPartList();
+                window.location.reload();
+                initPartList();
             }else {
                 alert(result.errorMessage);
             }
@@ -73,7 +74,15 @@ function addSeries(){
     });
 }
 
+function initPartList(){
+    var data = findPartList();
+    try{
+        viewHtml('chapters', data.rows, 'chapterTemp');
+        initpage(data.rows[0].id);
+    }catch(e){}
+}
 function findPartList(){
+    var resultData = null;
     $.ajax({
         url: contextPath + "/coursePart/findCoursePartList",
         type:"post",
@@ -81,13 +90,14 @@ function findPartList(){
         data:{
             page: 1,
             limit: 999,
-            courseId: primaryId
+            courseId: primaryId,
+            orderBy: "displaySeq",
+            sord: "asc"
         },
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
-                viewHtml('chapters', result.rows, 'chapterTemp');
-                initpage(result.rows[0].id);
+                resultData = result;
             }else {
                 alert(result.errorMessage);
             }
@@ -96,6 +106,7 @@ function findPartList(){
             alert("系统服务内部异常！");
         }
     });
+    return resultData;
 }
 
 function findPartCourseList(num, type, partId){
@@ -272,4 +283,72 @@ function showUploadImg(imgpath, imgClazz, textClazz) {
     $(imgClazz).removeClass('hidder').addClass('displayer');
     $(imgClazz).prop('src',imgpath);
     $(textClazz).hide();
+}
+
+function initPartListOnModal(){
+    var data = findPartList();
+    try{
+        viewHtml('chapter', data.rows, 'editChapterTemp');
+    }catch(e){}
+}
+
+function updateChapter(partId){
+    var name = $("input[name='chapterName']").val();
+    var displaySeq = $("input[name='displaySeq']").val();
+    if(name == '' || name == undefined){
+        alert("章节名称不能为空！");
+        return;
+    }
+    if(displaySeq == '' || displaySeq == undefined){
+        alert("章节的显示顺序不能为空！");
+        return;
+    }
+    $.ajax({
+        url: contextPath + "/coursePart/updateCoursePart",
+        type:"post",
+        async:false,
+        data:{
+            jsons:JSON.stringify({
+                id: partId,
+                courseId: primaryId,
+                name: name,
+                displaySeq: displaySeq
+            })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert("修改成功！");
+                window.location.reload();
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function deleteChapter(partId){
+    $.ajax({
+        url: contextPath + "/coursePart/deleteCoursePartByCoursePartId",
+        type:"post",
+        async:false,
+        data:{
+            jsons:JSON.stringify({
+                id: partId
+            })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert("删除成功！");
+                window.location.reload();
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
 }
