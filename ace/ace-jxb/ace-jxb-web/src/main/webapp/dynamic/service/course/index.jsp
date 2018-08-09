@@ -181,7 +181,6 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div id="courseBasic"></div>
-            <div id="sourceBasic"></div>
         </div>
     </div>
 </div>
@@ -288,6 +287,44 @@
                 <input type="radio" value="" name="status"/>下架
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">音频上传</div>
+            <div class="col-xs-12 col-md-10">
+                <div class="pictureContainer" id="video" style="z-index: 1;">
+                    <div class="viewPicture">
+                        <video id="vedioSource" src="\${data.mediUrl}" controls="controls" style="width: 100%;height: 100%;"></video>
+                    </div>
+                    <div class="uploadText">
+                        <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
+                        <p class="uploadPloadprogress">点击上传视频</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">课程文稿</div>
+            <div class="col-xs-12 col-md-10">
+                <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">是否允许试听</div>
+            <div class="col-xs-12 col-md-10">
+                {@if data.free == '0'}
+                <input type="radio" name="tried" value="1" checked/>是
+                <input type="radio" name="tried" value="0"/>否
+                {@else if data.free == '1'}
+                <input type="radio" name="tried" value="1"/>是
+                <input type="radio" name="tried" value="0" checked/>否
+                {@/if}
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">课程时长</div>
+            <div class="col-xs-12 col-md-10">
+                <input name="duation" type="text" class="form_input" value="\${data.duration}"/>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -295,41 +332,6 @@
     </div>
 </script>
 
-<script id="editSourceTemp" type="text/template">
-    <div class="row">
-        <div class="col-xs-12 col-md-2">音频上传</div>
-        <div class="col-xs-12 col-md-10">
-            <div class="pictureContainer" id="video" style="z-index: 1;">
-                <div class="viewPicture">
-                    <video id="vedioSource" src="" controls="controls" style="width: 100%;height: 100%;"></video>
-                </div>
-                <div class="uploadText">
-                    <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
-                    <p class="uploadPloadprogress">点击上传封面</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-2">课程文稿</div>
-        <div class="col-xs-12 col-md-10">
-            <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-2">是否允许试听</div>
-        <div class="col-xs-12 col-md-10">
-            <input type="radio" name="tried" value="1"/>是
-            <input type="radio" name="tried" value="0"/>否
-        </div>
-    </div>
-    <div class="row form_row">
-        <div class="col-xs-12 col-md-2">课程时长</div>
-        <div class="col-xs-12 col-md-10">
-            <input name="duation" type="text" class="form_input" />
-        </div>
-    </div>
-</script>
 <style>
     .modal .headbox {
         width: 150px !important;
