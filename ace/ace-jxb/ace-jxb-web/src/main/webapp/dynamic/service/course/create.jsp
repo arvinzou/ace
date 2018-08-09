@@ -144,9 +144,6 @@
 										</div>
 									</div>
 								</div>
-								<script id="list" type="text/template">
-
-                                </script>
 								<!--=======================================-->
 
 							</div>

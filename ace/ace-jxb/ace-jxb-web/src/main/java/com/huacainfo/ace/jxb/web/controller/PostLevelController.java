@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 public class PostLevelController extends JxbBaseController {
 
-
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -47,10 +46,8 @@ public class PostLevelController extends JxbBaseController {
      */
     @RequestMapping(value = "/findPostLevelList")
     @ResponseBody
-    public PageResult
-            <PostLevelVo> findPostLevelList(PostLevelQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult
-                <PostLevelVo> rst = this.postLevelService
+    public PageResult<PostLevelVo> findPostLevelList(PostLevelQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<PostLevelVo> rst = this.postLevelService
                 .findPostLevelList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -105,8 +102,7 @@ public class PostLevelController extends JxbBaseController {
      */
     @RequestMapping(value = "/selectPostLevelByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <PostLevelVo> selectPostLevelByPrimaryKey(String id) throws Exception {
+    public SingleResult<PostLevelVo> selectPostLevelByPrimaryKey(String id) throws Exception {
         return this.postLevelService.selectPostLevelByPrimaryKey(id);
     }
 
@@ -127,4 +123,5 @@ public class PostLevelController extends JxbBaseController {
         String id = json.getString("id");
         return this.postLevelService.deletePostLevelByPostLevelId(id, this.getCurUserProp());
     }
+
 }

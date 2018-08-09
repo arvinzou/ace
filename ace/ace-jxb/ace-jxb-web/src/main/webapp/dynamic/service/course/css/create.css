@@ -46,6 +46,7 @@
 
 .tips {
     color: #999999;
+    text-align: left;
 }
 
 .introduction {
@@ -116,4 +117,8 @@
     border: none;
     outline: none;
     border-radius: 5px;
+}
+.imgbox{
+    width: 300px;
+    height: 150px;
 }

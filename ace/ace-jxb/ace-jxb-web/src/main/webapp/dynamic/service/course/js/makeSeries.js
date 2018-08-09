@@ -1,5 +1,6 @@
 var loading = {};
 var primaryId = null;
+var videoUrl = null;
 function loadlocal() {
     var urls = [];
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
@@ -130,7 +131,6 @@ function changeChapter(id){
 
 function createCourseSource(){
     var partId = $("#chapters  .active").attr("datattr");
-    alert(partId);
     window.location.href = contextPath+ '/dynamic/service/course/make.jsp?courseId='+primaryId+'&partId='+partId;
 }
 
@@ -157,4 +157,119 @@ function deletePartCourse(id){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function editCourseSource(id){
+    $.ajax({
+        url: contextPath + "/courseSource/selectCourseSourceByPrimaryKey",
+        type:"post",
+        async:false,
+        data:{
+            id: id
+        },
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                viewHtml('sourceBasic', result.value, 'courseSourceTemp');
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+
+
+    var video = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'video',
+        url: portalPath+ '/files/uploadFile.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+                {title: "files", extensions: "mp4,mp3"}
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                showUploadText('.viewPicture video', '.uploadText');
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                $(".uploadPloadprogress").html("开始上传（" + r + "%）")
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                viewCover('http://zx.huacainfo.com/'+rst.value[0], '.pictureContainer','.viewPicture video','.uploadText');
+                videoUrl = 'http://zx.huacainfo.com/'+rst.value[0];
+                console.log(rst.value[0]);
+            }
+        }
+    });
+    video.init();
+
+}
+
+function updateCourseSource(sourceId, partId){
+    var coursedoc = $("textarea[name = 'coursedoc']").val();
+    var free = $('input[name="tried"]:checked').val();
+    var duation = $("input[name = 'duation']").val();
+    $.ajax({
+        url: contextPath + "/courseSource/updateCourseSource",
+        type:"post",
+        async:false,
+        data:{
+            jsons:JSON.stringify({
+                id: sourceId,
+                courseId: primaryId,
+                partId: partId,
+                mediUrl: videoUrl,
+                duration: duation,
+                free: free
+            })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert("修改成功！");
+                window.location.reload();
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+/*文件上传成功后*/
+function viewCover(img, clazz, imgClazz, textClazz) {
+    $(clazz).data('imgSrc',img);
+    var imagePath=img;
+    showUploadImg(imagePath, imgClazz, textClazz);
+}
+
+/*显示上传文字*/
+function showUploadText(imgClazz, textClazz) {
+    $(imgClazz).prop('src','');
+    $(textClazz).show();
+}
+
+/*显示上传图片*/
+function showUploadImg(imgpath, imgClazz, textClazz) {
+    $(imgClazz).removeClass('hidder').addClass('displayer');
+    $(imgClazz).prop('src',imgpath);
+    $(textClazz).hide();
 }

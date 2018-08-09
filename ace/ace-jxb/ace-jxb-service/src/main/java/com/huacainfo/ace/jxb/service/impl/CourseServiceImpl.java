@@ -112,7 +112,7 @@ public class CourseServiceImpl implements CourseService {
 
         String courseId = GUIDUtil.getGUID();
         //单课程，直接增加课程资源
-        if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
+        /*if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
             CourseSource source = o.getCourseSource();
             if (null == source || StringUtil.isEmpty(source.getFree())) {
                 return new MessageResponse(ResultCode.FAIL, "课程资源资料不全");
@@ -126,7 +126,7 @@ public class CourseServiceImpl implements CourseService {
             if (iCount <= 0) {
                 return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
             }
-        }
+        }*/
 
         o.setDemandNum(1);
         o.setLikeNum(1);

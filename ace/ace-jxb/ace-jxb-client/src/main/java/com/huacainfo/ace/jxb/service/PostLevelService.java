@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.PostLevel;
 import com.huacainfo.ace.jxb.vo.PostLevelQVo;
@@ -82,4 +83,12 @@ public interface PostLevelService {
      */
     MessageResponse deletePostLevelByPostLevelId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 获取绩效考核数据
+     *
+     * @param quarter     1-第一季度，2-第二季度，3-第三季度，4-第四季度 必传
+     * @param counselorId 咨询师id 可选
+     * @return ResultResponse
+     */
+    ResultResponse examine(String quarter, String counselorId);
 }

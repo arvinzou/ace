@@ -32,5 +32,5 @@ public interface CourseSourceDao {
 
     int isExit(CourseSource record);
 
-    List<CourseSource> findByCourseId(String id);
+    List<CourseSource> findByCourseId(String courseId);
 }
