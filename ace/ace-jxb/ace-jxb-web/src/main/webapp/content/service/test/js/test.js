@@ -6,8 +6,36 @@ window.onload = function () {
         this.style.height = 'auto';
         this.style.height = this.scrollHeight + "px";
     });
-
+    $('.subtPage').click(subtPage);
+    $('.addPage').click(addPage);
 };
+
+
+function subtPage() {
+    var index = $('.modal-body .step-row[flag="true"]').index();
+    $('.modal-body .step-row').eq(index).css('display', 'none');
+    $('.modal-body .step-row').eq(index).attr('flag', false);
+    $('.modal-body .step-row').eq(index - 1).css('display', 'block');
+    $('.modal-body .step-row').eq(index - 1).attr('flag', true);
+    $('.addPage').show();
+    $('.submit_btn').hide();
+    if (index == 1) {
+        $('.subtPage').hide();
+    }
+}
+
+function addPage() {
+    var index = $('.modal-body .step-row[flag="true"]').index();
+    $('.modal-body .step-row').eq(index).css('display', 'none');
+    $('.modal-body .step-row').eq(index).attr('flag', false);
+    $('.modal-body .step-row').eq(index + 1).css('display', 'block');
+    $('.modal-body .step-row').eq(index + 1).attr('flag', true);
+    $('.subtPage').show();
+    if (index == 2) {
+        $('.addPage').hide();
+        $('.submit_btn').show();
+    }
+}
 
 function delectTr() {
     $(this).parent().remove();

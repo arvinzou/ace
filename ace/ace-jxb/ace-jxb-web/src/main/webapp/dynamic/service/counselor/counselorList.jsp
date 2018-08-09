@@ -24,7 +24,7 @@
     <%--<link rel="stylesheet" href="https://cdn.bootcss.com/limonte-sweetalert2/7.21.1/sweetalert2.min.css">--%>
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-    <script src="${pageContext.request.contextPath}/content/service/counselor/js/ ?v=${cfg.version}"></script>
+    <script src="${pageContext.request.contextPath}/content/service/counselor/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 

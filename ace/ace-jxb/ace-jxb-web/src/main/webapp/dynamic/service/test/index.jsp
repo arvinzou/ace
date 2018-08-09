@@ -119,7 +119,7 @@
             </div>
             <div class="modal-body">
 
-                <div class="row step_one" style="display: none">
+                <div class="row step-row step_one" style="display: none" flag="true">
 
                     <div class="col-lg-12">
                         <div class="mt-element-step">
@@ -232,7 +232,7 @@
                 </div>
 
 
-                <div class="row step_two" style="display: none">
+                <div class="row step-row step_two" flag="false" style="display: none">
 
                     <div class="col-lg-12">
                         <div class="mt-element-step">
@@ -298,7 +298,7 @@
                 </div>
 
 
-                <div class="row step_three">
+                <div class="row step-row step_three" flag="false" style="display: none">
 
                     <div class="col-lg-12">
                         <div class="mt-element-step">
@@ -353,12 +353,44 @@
                     </div>
                 </div>
 
+
+                <div class="row step-row step_four" flag="false" style="display: none">
+
+                    <div class="col-lg-12">
+                        <div class="mt-element-step">
+                            <div class="row step-line">
+                                <div class="col-md-3 mt-step-col first done">
+                                    <div class="mt-step-number bg-dark font-grey">1</div>
+                                    <div class="mt-step-title uppercase font-grey-cascade">基本信息</div>
+                                </div>
+                                <div class="col-md-3 mt-step-col done">
+                                    <div class="mt-step-number bg-dark font-grey">2</div>
+                                    <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
+                                </div>
+                                <div class="col-md-3 mt-step-col done">
+                                    <div class="mt-step-number bg-dark font-grey">3</div>
+                                    <div class="mt-step-title uppercase font-grey-cascade">设计量表</div>
+                                </div>
+                                <div class="col-md-3 mt-step-col active last">
+                                    <div class="mt-step-number bg-dark font-grey">4</div>
+                                    <div class="mt-step-title uppercase font-grey-cascade">确认信息</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default subtPage" style="display: none">上一步</button>
 
-                <button type="button" class="btn btn-info submit_btn">确定</button>
+                <button type="button" class="btn btn-default addPage">下一步</button>
+
+                <button type="button" class="btn btn-info submit_btn" style="display: none">确定</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -376,8 +408,6 @@
     .select_img {
         width: 187px;
         height: 97px;
-        height: 100%;
-        width: 100%;
         object-fit: cover;
         background-color: #32C5D2;
     }

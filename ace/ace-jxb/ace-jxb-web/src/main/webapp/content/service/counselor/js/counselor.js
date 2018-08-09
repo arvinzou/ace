@@ -36,24 +36,8 @@ function approved() {
         case
             "true"
         :
-            var status = startProcessing(id, 1, 'ok');
-            if (status == 0) {
-                swal({
-                    text: "操作成功！",
-                    type: "success",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
-            } else {
-                swal({
-                    text: "操作失败！",
-                    type: "error",
-                    timer: 1000,
-                    showConfirmButton: false
-                });
-            }
+            startProcessing(id, 1, 'ok');
             break;
-
         case
             "false"
         :
@@ -77,23 +61,7 @@ function approved() {
             if (value) {
                 var text = $('.swal-content__input').val();
                 if (text) {
-                    var status = startProcessing(id, 1, text);
-                    if (status == 0) {
-                        swal({
-                            text: "操作成功！",
-                            type: "success",
-                            timer: 1000,
-                            showConfirmButton: false
-                        });
-
-                    } else {
-                        swal({
-                            text: "操作失败！",
-                            type: "error",
-                            timer: 1000,
-                            showConfirmButton: false
-                        });
-                    }
+                    startProcessing(id, 2, text);
                 }
                 swal({
                     text: "必须填写拒绝理由！",
@@ -178,9 +146,24 @@ function startProcessing(id, rst, value) {
 
     }
 
-
     $.getJSON(url, data, function (result) {
-        return result.status
+        var status = result.status;
+        if (status == 0) {
+            swal({
+                text: "操作成功！",
+                type: "success",
+                timer: 1000,
+                showConfirmButton: false
+            });
+            getCounselorList($('#pagination1 .active').text());
+        } else {
+            swal({
+                text: "操作失败！",
+                type: "error",
+                timer: 1000,
+                showConfirmButton: false
+            });
+        }
     })
 }
 
