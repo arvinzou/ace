@@ -194,6 +194,9 @@ public class CourseServiceImpl implements CourseService {
                 source.setPartId("0");//无所属章节
                 source.setName(o.getName());
                 source.setCreateDate(DateUtil.getNowDate());
+                source.setFree(params.getFree());
+                source.setMediUrl(params.getMediUrl());
+                source.setDuration(params.getDuration());
                 int iCount = courseSourceDao.insert(source);
                 if (iCount <= 0) {
                     return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
