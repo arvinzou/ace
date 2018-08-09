@@ -221,13 +221,8 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseVo">
-        <result column="srcName" jdbcType="VARCHAR" property="srcName"/>
-        <result column="mediUrl" jdbcType="VARCHAR" property="mediUrl"/>
-        <result column="srcDuration" jdbcType="INTEGER" property="srcDuration"/>
-        <result column="free" jdbcType="VARCHAR" property="free"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        s.name as srcName, s.mediUrl, s.duration as srcDuration, s.free,
         t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
         t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce
     </sql>
@@ -236,7 +231,6 @@
         select
         <include refid="Vo_Column_List"/>
         from course t
-        left join course_source s on t.id = s.courseId and t.category='1'
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
