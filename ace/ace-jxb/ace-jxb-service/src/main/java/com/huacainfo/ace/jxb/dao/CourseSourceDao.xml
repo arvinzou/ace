@@ -190,4 +190,12 @@
         from course_source
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+
+    <select id="findByCourseId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course_source
+        where courseId = #{courseId,jdbcType=VARCHAR}
+    </select>
 </mapper>

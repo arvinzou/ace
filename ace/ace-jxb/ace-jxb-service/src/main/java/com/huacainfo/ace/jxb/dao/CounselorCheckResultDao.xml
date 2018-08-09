@@ -180,6 +180,9 @@
         delete from counselor_check_result
         where checkQuarter = #{quarter,jdbcType=VARCHAR}
          and checkYear = #{year,jdbcType=VARCHAR}
+        <if test="counselorId !=null and counselorId !=&quot;&quot;">
+            and counselorId = #{counselorId,jdbcType=VARCHAR}
+        </if>
     </delete>
 
 

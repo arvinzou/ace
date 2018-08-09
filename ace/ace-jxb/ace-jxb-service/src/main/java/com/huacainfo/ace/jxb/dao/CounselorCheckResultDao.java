@@ -19,7 +19,8 @@ public interface CounselorCheckResultDao {
     int updateByPrimaryKey(CounselorCheckResult record);
 
     int cleanData(@Param("year") String year,
-                  @Param("quarter") String quarter);
+                  @Param("quarter") String quarter,
+                  @Param("counselorId") String counselorId);
 
     List<CounselorCheckResult> findByQuarter(@Param("year") String year,
                                              @Param("quarter") String quarter);

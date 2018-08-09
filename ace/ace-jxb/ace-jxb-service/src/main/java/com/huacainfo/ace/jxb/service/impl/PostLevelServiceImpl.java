@@ -224,10 +224,10 @@ public class PostLevelServiceImpl implements PostLevelService {
                 params.put("endDt", nowYear + " 03-31 23:59:59");
                 break;
         }
-        //
+        //获取考核数据
         List<Map<String, Object>> reportData = postLevelDao.examine(params);
         if (!CollectionUtils.isEmpty(reportData)) {
-            counselorCheckResultDao.cleanData(nowYear, quarterStr);
+            counselorCheckResultDao.cleanData(nowYear, quarterStr, counselorId);
         }
         CounselorCheckResult checkResult;
         for (Map<String, Object> data : reportData) {
@@ -245,6 +245,8 @@ public class PostLevelServiceImpl implements PostLevelService {
             checkResult.setCreateDate(DateUtil.getNowDate());
             counselorCheckResultDao.insertSelective(checkResult);
         }
+        //定岗
+        determinePosts(nowYear, quarterStr);
 
         return new ResultResponse(ResultCode.SUCCESS, "考核完成");
     }
@@ -264,13 +266,21 @@ public class PostLevelServiceImpl implements PostLevelService {
         PostLevel nowPost;
         for (CounselorCheckResult data : dataList) {
             nowPost = getPostLevel(data, config);
-
             //更新岗位内容
             cPost = counselorPostLevelDao.findByCounselorId(data.getCounselorId());
             if (null == cPost) {
+                cPost = new CounselorPostLevel();
+                cPost.setCounselorId(data.getCounselorId());
+                cPost.setPostId(nowPost.getId());
 
+                cPost.setId(GUIDUtil.getGUID());
+                cPost.setStatus("1");
+                cPost.setCreateDate(DateUtil.getNowDate());
+                counselorPostLevelDao.insertSelective(cPost);
             } else {
-
+                cPost.setPostId(nowPost.getId());
+                cPost.setUpdateDate(DateUtil.getNowDate());
+                counselorPostLevelDao.updateByPrimaryKeySelective(cPost);
             }
         }
     }
