@@ -75,10 +75,6 @@ public class CourseSourceServiceImpl implements CourseSourceService {
      */
     @Override
     public MessageResponse insertCourseSource(CourseSource o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getCourseId())) {
             return new MessageResponse(1, "课程主键不能为空！");
         }
@@ -131,9 +127,6 @@ public class CourseSourceServiceImpl implements CourseSourceService {
         }
         if (CommonUtils.isBlank(o.getPartId())) {
             return new MessageResponse(1, "所属章节不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getName())) {
-            return new MessageResponse(1, "课程名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getFree())) {
             return new MessageResponse(1, "可试听不能为空！");
