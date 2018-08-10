@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.portal.model.EvaluatGauge;
 import com.huacainfo.ace.portal.model.EvaluatTpl;
 import com.huacainfo.ace.portal.vo.EvaluatTplVo;
 import com.huacainfo.ace.portal.vo.EvaluatTplQVo;
@@ -35,6 +36,9 @@ public interface EvaluatTplService {
     public abstract PageResult<EvaluatTplVo> findEvaluatTplList(EvaluatTplQVo condition, int start, int limit, String orderBy) throws Exception;
 
 
+    public abstract PageResult<EvaluatTplVo> findEvaluatTplListVo(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception;
+
+
     public abstract ResultResponse getEvaluatTplList(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception;
 
     /**
@@ -50,6 +54,8 @@ public interface EvaluatTplService {
      */
     public abstract MessageResponse insertEvaluatTpl(String jsons, UserProp userProp) throws Exception;
 
+    public abstract MessageResponse insertEvaluatTplVo(EvaluatTpl o, List<EvaluatGauge> lists, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateEvaluatTpl
@@ -62,6 +68,8 @@ public interface EvaluatTplService {
      * @version: 2018-06-09
      */
     public abstract MessageResponse updateEvaluatTpl(String jsons, UserProp userProp) throws Exception;
+
+    public abstract MessageResponse updateEvaluatTplVo(EvaluatTpl o, List<EvaluatGauge> lists, UserProp userProp) throws Exception;
 
     /**
      * @throws
