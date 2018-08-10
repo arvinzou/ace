@@ -56,7 +56,7 @@ function makecourse(){
         alert("请选择要制作的课程！");
         return;
     }
-    window.location.href = contextPath + '/dynamic/service/course/make.jsp?id='+id;
+    window.location.href = contextPath + '/dynamic/service/course/make.jsp?courseId='+id;
 }
 
 function makeSeriesCourse(){
