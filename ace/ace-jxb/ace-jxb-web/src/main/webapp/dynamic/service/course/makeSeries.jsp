@@ -60,7 +60,8 @@
 										</div>
 									</div>
 									<div class="portlet-body">
-										<a href="#" class="btn green" data-target="#myModal" data-toggle="modal">创建章节<i class="fa fa-plus"></i></a>
+										<a href="javascript:;" class="btn green" data-target="#myModal" data-toggle="modal">创建章节<i class="fa fa-plus"></i></a>
+										<a href="javascript:;" class="btn red"  style="font-size: 14px;" data-target="#chapterBox" data-toggle="modal" onclick="initPartListOnModal();">章节修改<i class="fa fa-edit"></i></a>
 										<div class="tabbable-line">
 											<ul class="nav nav-tabs" id="chapters">
 
@@ -77,7 +78,7 @@
 																		<span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">课程管理</font></font></span>
 																	</div>
 																	<div class="create_course" id="create_course">
-																		<a href="javascript:;" class="btn btn-lg red" onclick="createCourseSource();">创建课程<i class="fa fa-edit"></i></a></div>
+																		<a href="javascript:;" class="btn red" onclick="createCourseSource();" style="font-size: 14px;">创建课程<i class="fa fa-edit"></i></a></div>
 																	</div>
 																<div class="portlet-body">
 																	<div class="table-scrollable">
@@ -85,9 +86,10 @@
 																			<thead>
 																			<tr>
 																				<th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-																				<th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
+																				<th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程文件 </font></font></th>
+																				<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
 																				<th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 创建时间 </font></font></th>
-																				<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 时长 </font></font></th>
+																				<th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 时长 </font></font></th>
 																				<th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 是否可试听 </font></font></th>
 																				<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
 																			</tr>
@@ -162,31 +164,34 @@
 <script id="courseTemp" type="text/template">
 	{@each data as item, index}
 	<tr>
-		<td width="5%"><font style="vertical-align: inherit;">
+		<td width="5%" class="tdcontent"><font style="vertical-align: inherit;">
 			<input type="radio" name="course" value="\${item.id}"/>
 			<font style="vertical-align: inherit;">\${parseInt(index)+1} </font></font>
 		</td>
-		<td width="30%">
-			<video src="\${item.mediUrl}" style="width: 80px;height: 60px;"></video>
+		<td width="15%">
+			<video src="\${item.mediUrl}" style="width: 80px;height: 60px;background: #C4C8D6;"></video>
+		</td>
+		<td width="20%" class="tdcontent">
 			<span>\${item.name}</span>
 		</td>
-		<td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate}</font></font></td>
-		<td width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
-		<td width="10%"><font style="vertical-align: inherit;">
+		<td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate}</font></font></td>
+		<td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
+		<td width="10%" class="tdcontent"><font style="vertical-align: inherit;">
 			{@if item.free == '0'}
 			<font style="vertical-align: inherit;">是</font></font>
 			{@else if item.free == '1'}
 			<font style="vertical-align: inherit;">否</font></font>
 			{@/if}
 		</td>
-		<td width="20%">
-			<a class="operation" href="#" data-toggle="modal" data-target="#editCourseSource" onclick="editCourseSource('\${item.id}');">编辑</a>
+		<td width="20%" class="tdcontent">
+			<a class="operation" href="javascript:void(0);" data-toggle="modal" data-target="#editCourseSource" onclick="editCourseSource('\${item.id}');">编辑</a>
 			<a class="operation" href="javascript:void(0);" onclick="deletePartCourse('\${item.id}');">删除</a>
 		</td>
 	</tr>
 	{@/each}
 </script>
 
+<!--课程编辑-->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="editCourseSource"
 	 aria-labelledby="gridSystemModalLabel">
 	<div class="modal-dialog" role="document">
@@ -246,6 +251,50 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         <button type="button" class="btn btn-primary" onclick="updateCourseSource('\${data.id}','\${data.partId}');">确定</button>
         </div>
+</script>
+
+<!--章节修改列表-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="chapterBox"
+	 aria-labelledby="gridSystemModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" id="chapterList">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title" id="gridSystemModalLabe2">章节管理</h4>
+			</div>
+			<div>
+				<table class="table table-hover">
+					<thead>
+					<tr>
+						<th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
+						<th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 章节名称 </font></font></th>
+						<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 显示顺序 </font></font></th>
+						<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 创建时间 </font></font></th>
+						<th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+					</tr>
+					</thead>
+					<tbody id="chapter">
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script id="editChapterTemp" type="text/template">
+	{@each data as item, index}
+    <tr>
+		<td width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">\${parseInt(index)+1}</font></font></td>
+		<td width="30%"><input name="chapterName" type="text" value="\${item.name}"></td>
+		<td width="20%"><input name="displaySeq" type="text" value="\${item.displaySeq}"/></td>
+		<td width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
+		<td width="20%">
+			<a href="javascript:void(0);" onclick="updateChapter('\${item.id}');">修改</a>|
+			<a href="javascript:void(0);" onclick="deleteChapter('\${item.id}');">删除</a>
+		</td>
+    </tr>
+	{@/each}
 </script>
 <style>
 	.modal .headbox {

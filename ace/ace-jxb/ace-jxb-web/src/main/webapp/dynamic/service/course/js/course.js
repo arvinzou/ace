@@ -180,7 +180,8 @@ function confirmEdit(id, type){
     var price = $("input[name ='price']").val();
     payType = $(".payType .cactive").text()=="免费"?"0":"1";
     var free = $('input[name="tried"]:checked').val();
-    var duation = $("input[name = 'duation']").val();
+    var duration = $("input[name = 'duation']").val();
+    videoUrl = $("#vedioSource").attr('src');
     $.ajax({
         url: contextPath + "/course/updateCourse",
         type:"post",
@@ -193,14 +194,14 @@ function confirmEdit(id, type){
                 mediType: '1',
                 name: courseName,
                 cover: courseCover,
-                duration: 0,
+                duration: duration,
                 costType: payType,
                 cost: price,
                 introduce: introduction,
                 "courseSource":{
                     mediUrl: videoUrl,
                     free: free,
-                    duation: duation
+                    duration: duration
                 }
             })
         },
@@ -227,6 +228,10 @@ function payTypeCheck(dom) {
         $('#' + dom).removeClass('uncactive').addClass('cactive');
         $('#noPay').removeClass('cactive').addClass('uncactive');
     }
+}
+
+function createCourse(type){
+    window.location.href = contextPath+ '/dynamic/service/course/create.jsp?type='+type;
 }
 
 /*文件上传成功后*/

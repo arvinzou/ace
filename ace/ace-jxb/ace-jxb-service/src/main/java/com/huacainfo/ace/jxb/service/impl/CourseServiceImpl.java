@@ -194,6 +194,9 @@ public class CourseServiceImpl implements CourseService {
                 source.setPartId("0");//无所属章节
                 source.setName(o.getName());
                 source.setCreateDate(DateUtil.getNowDate());
+                source.setFree(params.getFree());
+                source.setMediUrl(params.getMediUrl());
+                source.setDuration(params.getDuration());
                 int iCount = courseSourceDao.insert(source);
                 if (iCount <= 0) {
                     return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
@@ -226,7 +229,11 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public SingleResult<CourseVo> selectCourseByPrimaryKey(String id) throws Exception {
         SingleResult<CourseVo> rst = new SingleResult<>();
-        rst.setValue(this.courseDao.selectVoByPrimaryKey(id));
+        CourseVo vo = courseDao.selectVoByPrimaryKey(id);
+        if (CourseConstant.COURSE_TYPE_SINGLE.equals(vo.getType())) {
+            vo.setCourseSource(courseSourceDao.findByCourseId(id).get(0));
+        }
+        rst.setValue(vo);
         return rst;
     }
 

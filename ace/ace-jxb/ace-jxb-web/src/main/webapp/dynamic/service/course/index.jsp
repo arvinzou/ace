@@ -92,10 +92,9 @@
                                                                             <thead>
                                                                             <tr>
                                                                                 <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-                                                                                <th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
-                                                                                <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 状态 </font></font></th>
+                                                                                <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
                                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
-                                                                                <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
+                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
                                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
                                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
                                                                             </tr>
@@ -132,18 +131,17 @@
 <script id="list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="5%"><font style="vertical-align: inherit;">
+        <td width="5%" class="tdcontent"><font style="vertical-align: inherit;">
             <input type="radio" name="course" value="\${item.id}"/>
             <font style="vertical-align: inherit;">\${parseInt(index)+1} </font></font>
         </td>
-        <td width="30%">
+        <td width="35%">
             <img src="\${item.cover}" style="width: 80px;height: 60px;"/>
             <span>\${item.name}</span>
         </td>
-        <td width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">  </font></font></td>
-        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
-        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
-        <td width="10%">
+        <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
+        <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
+        <td width="15%" class="tdcontent">
             {@if item.status==1}
             <span class="label label-sm label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
             {@else if item.status==2}
@@ -154,7 +152,6 @@
         </td>
         <td width="15%">
             <a class="operation" href="#" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
-            <a class="operation" href="">下架</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
             <a class="operation" href="">查看评论</a>
             <a class="operation" href="">购买明细</a>
@@ -172,7 +169,7 @@
 </script>
 
 <script id="createTemp" type="text/template">
-    <a href="/jxb/dynamic/service/course/create.jsp" style="font-size: 14px !important;" class="btn green">创建课程<i class="fa fa-plus"></i></a>
+    <a href="javascript:void(0);" onclick="createCourse('\${data.type}');" style="font-size: 14px !important;" class="btn green">创建课程<i class="fa fa-plus"></i></a>
 </script>
 </body>
 
@@ -280,19 +277,13 @@
                 <input type="text" class="form_input" />
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-2">状态设置</div>
-            <div class="col-xs-12 col-md-10">
-                <input type="radio" value="" name="status"/>上架
-                <input type="radio" value="" name="status"/>下架
-            </div>
-        </div>
+        {@if data.type == '1'}
         <div class="row">
             <div class="col-xs-12 col-md-2">音频上传</div>
             <div class="col-xs-12 col-md-10">
                 <div class="pictureContainer" id="video" style="z-index: 1;">
                     <div class="viewPicture">
-                        <video id="vedioSource" src="\${data.mediUrl}" controls="controls" style="width: 100%;height: 100%;"></video>
+                        <video id="vedioSource" src="\${data.courseSource.mediUrl}" controls="controls" width="340px" heigt="235px"></video>
                     </div>
                     <div class="uploadText">
                         <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
@@ -304,27 +295,31 @@
         <div class="row">
             <div class="col-xs-12 col-md-2">课程文稿</div>
             <div class="col-xs-12 col-md-10">
-                <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
+                <textarea name="coursedoc" id="coursedoc" class="introduction"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12 col-md-2">是否允许试听</div>
             <div class="col-xs-12 col-md-10">
-                {@if data.free == '0'}
+                {@if data.courseSource.free == '0'}
                 <input type="radio" name="tried" value="1" checked/>是
                 <input type="radio" name="tried" value="0"/>否
-                {@else if data.free == '1'}
+                {@else if data.courseSource.free == '1'}
                 <input type="radio" name="tried" value="1"/>是
                 <input type="radio" name="tried" value="0" checked/>否
+                {@else}
+                <input type="radio" name="tried" value="1"/>是
+                <input type="radio" name="tried" value="0"/>否
                 {@/if}
             </div>
         </div>
         <div class="row form_row">
             <div class="col-xs-12 col-md-2">课程时长</div>
             <div class="col-xs-12 col-md-10">
-                <input name="duation" type="text" class="form_input" value="\${data.duration}"/>
+                <input name="duation" type="text" class="form_input" value="\${data.courseSource.duration}"/>
             </div>
         </div>
+        {@/if}
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -341,7 +336,7 @@
         margin: 0 auto;
     }
     .modal-dialog{
-        width: 900px !important;
+        width: 1000px !important;
     }
     .modal-body {
         font-size: 16px;

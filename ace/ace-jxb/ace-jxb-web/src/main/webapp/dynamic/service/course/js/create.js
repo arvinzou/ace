@@ -1,6 +1,6 @@
 var loading = {};
 var payType = "0";   //付费类型，初始化为免费
-
+var courseType = null;
 function loadlocal() {
     var urls = [];
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
@@ -36,6 +36,10 @@ function App() {
 
 
 window.onload = function (){
+
+    console.log(window.location.href);
+    var url =   window.location.href.substring(1);
+    courseType = url.substring(url.indexOf('=')+1);
 
     var editor = new Simditor({
         textarea: $('#courseIntro'),
@@ -127,7 +131,7 @@ function save(){
     var introduction = $("textarea[name='introduction']").val();
     var duration = 0;
     var cost = $("input[name='price']").val();
-    var type = "1";
+    var type = courseType;
     var category = "1";
     var mediType = "1";
     $.ajax({
