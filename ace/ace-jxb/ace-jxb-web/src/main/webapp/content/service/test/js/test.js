@@ -19,6 +19,32 @@ function evaluatCaseList(id) {
 }
 
 
+function deleteTestTpl() {
+    var input = $('#evaluatTplList tr input:checked');
+    var size = input.length;
+    if (size == 0) {
+        return;
+    } else if (size > 1) {
+        alert("一次只能删除一个");
+        return;
+    }
+    var id = input.eq(0).data('id');
+    activeDelect(id);
+}
+
+function activeDelect(id) {
+    var url = portalPath + '/evaluatCase/deleteEvaluatCase.do';
+    var data = {
+        jsons: JSON.stringify({
+            id: id
+        })
+    }
+    $.getJSON(url, data, function (result) {
+        getEvaluatCaseList($('#pagination1 .active').text());
+    })
+}
+
+
 function clearForm() {
     $('.modal-body .step-row').eq(2).css('display', 'none');
     $('.modal-body .step-row').eq(2).attr('flag', false);
@@ -57,6 +83,9 @@ function insertEvaluatTpl() {
     $.post(url, data, function (result) {
         console.log(result);
         if (result.status == 0) {
+            alert('添加成功');
+            $('#createTest').modal('hide');
+            getEvaluatTplList($('#pagination1 .active').text());
             return;
         }
         alert('添加失败', '确认是否重复添加？');
@@ -73,9 +102,12 @@ function updataEvaluatTpl() {
     $.post(url, data, function (result) {
         console.log(result);
         if (result.status == 0) {
+            alert('修改成功');
+            $('#createTest').modal('hide');
+            getEvaluatTplList($('#pagination1 .active').text());
             return;
         }
-        alert('添加失败', '确认是否重复添加？');
+        alert('修改失败', '确认是否重复添加？');
     })
 }
 

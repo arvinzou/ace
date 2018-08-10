@@ -65,10 +65,14 @@
 
                                                             <div class="actions">
                                                                 <a onclick="javascript:createTestCase()"
-                                                                   class="btn btn-circle red-sunglo btn-sm">
+                                                                   class="btn btn-circle btn-success btn-sm">
                                                                     <i class="fa fa-plus"></i>
                                                                     创建试题
                                                                 </a>
+                                                                <a onclick="javascript:deleteTestCase()"
+                                                                   data-repeater-delete=""
+                                                                   class="btn btn-circle btn-danger">
+                                                                    <i class="fa fa-close"></i> 删除试题</a>
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">
@@ -83,9 +87,9 @@
                                                                                 <table class="table table-striped table-hover">
                                                                                     <thead>
                                                                                     <tr>
-                                                                                        <th> 序号</th>
-                                                                                        <th> 题目</th>
-                                                                                        <th>操作</th>
+                                                                                        <th width="10%">#</th>
+                                                                                        <th width="70%">题目</th>
+                                                                                        <th width="20%">操作</th>
 
                                                                                     </tr>
                                                                                     </thead>
@@ -206,9 +210,11 @@
 <script id="temp_evaluatCaseList" type="text/template">
     {@each data as item,index}
     <tr>
-        <td> \${index+1}</td>
-        <td> \${item.title}</td>
-        <td><a onclick="javascript:active('\${item.id}')" class="primary-link">修改信息</a></td>
+        <td width="10%">
+            <input data-id="\${item.id}" type="checkbox" id="checkbox1" class="md-check">
+        </td>
+        <td width="70%"> \${item.title}</td>
+        <td width="20%"><a onclick="javascript:active('\${item.id}')" class="primary-link">修改信息</a></td>
     </tr>
     {@/each}
 </script>
@@ -240,6 +246,13 @@
 
     .error_message {
         color: red;
+    }
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        margin: 0;
     }
 </style>
 
