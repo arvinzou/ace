@@ -1,0 +1,184 @@
+body {
+    overflow: hidden;
+}
+
+.menu {
+    width: 100%;
+    height: 1.066666rem;
+    border-bottom: 1px solid rgba(247, 248, 252, 1);
+    font-size: 0.346666rem;
+    color: rgba(92, 102, 129, 1);
+    line-height: 1.066666rem;
+    background-color: #fff;
+}
+
+.menu .action {
+    font-size: 0.373333rem;
+    color: #49D0C5;
+}
+
+.menu .container {
+    width: 9.6rem;
+    /*margin: 0 auto;*/
+    position: relative;
+}
+
+.menu .container:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1.066666rem;
+    width: 0.266666rem;
+    bottom: 0;
+    right: -0.266666rem;
+    background-color: #fff;
+    box-shadow: -4px 0px 6px rgba(196, 200, 214, 0.38);
+}
+
+.menu .container .swiper-wrapper .swiper-slide {
+    width: auto;
+    margin: 0 0.266666rem;
+}
+
+.sort {
+    width: 100%;
+    font-size: 0.346666rem;
+    color: rgba(28, 40, 67, 1);
+    line-height: 1.066666rem;
+    background-color: #fff;
+}
+
+.sort .container {
+    position: relative;
+}
+
+.sort .container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.sort .container .main_menu .center {
+    width: 9.146666rem;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.sort .container .main_menu {
+    position: absolute;
+    z-index: 200;
+}
+
+.sort .container,
+.sort .container .option, .sort .container .main_menu {
+    width: 100%;
+    height: 1.077rem;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(247, 248, 252, 1);
+}
+
+.sort .container .main_menu .sortoption {
+    float: right;
+}
+
+.sort .container .sortoption .iconfont {
+    font-size: 0.346666rem;
+}
+
+.sort .option {
+    text-align: center;
+    font-size: 0.4rem;
+    position: absolute;
+    top: 0px;
+    background-color: #fff;
+}
+
+.sort .option_action {
+    color: #0EC8C4;
+}
+
+.sort .option1 {
+    -webkit-transition: .5s linear;
+    transition: .5s linear;
+    z-index: 95;
+}
+
+.sort .option2 {
+    -webkit-transition: .4s linear;
+    transition: .4s linear;
+    z-index: 90;
+}
+
+.sort .option3 {
+    -webkit-transition: .3s linear;
+    transition: .3s linear;
+    z-index: 85;
+}
+
+.sort .option4 {
+    -webkit-transition: .2s linear;
+    transition: .2s linear;
+    z-index: 80;
+}
+
+.sort .option5 {
+    -webkit-transition: .1s linear;
+    transition: .1s linear;
+    z-index: 75;
+}
+
+/**********************动作********************/
+
+.main_menu_action ~ .option1 {
+    webkit-transform: translateY(1.066666rem);
+    transform: translateY(1.066666rem);
+}
+
+.main_menu_action ~ .option2 {
+    webkit-transform: translateY(2.133333rem);
+    transform: translateY(2.133333rem);
+}
+
+.main_menu_action ~ .option3 {
+    webkit-transform: translateY(3.2rem);
+    transform: translateY(3.2rem);
+}
+
+.main_menu_action ~ .option4 {
+    webkit-transform: translateY(4.266666rem);
+    transform: translateY(4.266666rem);
+}
+
+.main_menu_action ~ .option5 {
+    webkit-transform: translateY(5.333333rem);
+    transform: translateY(5.333333rem);
+}
+
+.cover {
+    z-index: 30;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    top: 0;
+    display: none;
+}
+
+.menu, .sort {
+    position: fixed;
+    z-index: 100;
+}
+
+.menu {
+    top: 0;
+}
+
+.sort {
+    top: 1.066666rem
+}
+
+.recommen {
+    padding: 2.133333rem 0 1.066666rem;
+    height: 100%;
+    overflow: auto;
+}
