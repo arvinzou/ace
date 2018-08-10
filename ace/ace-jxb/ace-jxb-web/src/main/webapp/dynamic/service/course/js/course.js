@@ -20,10 +20,15 @@ function initpage(courseType) {
 
 function getCourseList(num, type, courseType) {
     var url = contextPath+ "/course/findCourseList";
+    var createUserId = null;
+    if(userProp.account != 'jxb'){
+        createUserId = userProp.userId;
+    }
     var data = {
         page: num,
         limit: 10,
-        type: courseType                  //1是单节课程，2是系列课程
+        type: courseType,                  //1是单节课程，2是系列课程
+        createUserId: createUserId
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -33,8 +38,6 @@ function getCourseList(num, type, courseType) {
                 });
             }
             viewHtml("courseList", result.rows, "list");
-            viewHtml("makeCourse", result.rows[0], "makeTemp");
-            viewHtml("createCourse", result.rows[0], "createTemp");
         }
     })
 }
@@ -89,6 +92,13 @@ function deleteCourse(id){
 }
 
 function changeCourseType(type){
+    if(type == '1'){
+        $(".commonCourse").show();
+        $(".specialCourse").hide();
+    }else if(type == '2'){
+        $(".commonCourse").hide();
+        $(".specialCourse").show();
+    }
     initpage(type);
 }
 
@@ -230,10 +240,62 @@ function payTypeCheck(dom) {
     }
 }
 
+/**
+ * 课程审核
+ * @param id
+ */
+var courseId = null;
+function openAudit(id){
+    if(userProp.account != 'jxb'){
+       alert("您不是近心帮的管理员，没有权限审核该课程");
+       return;
+    }
+    courseId = id;
+    $("#auditOpt").attr("data-toggle","modal");
+    $("#auditOpt").attr("data-target","#audit");
+}
+
 function createCourse(type){
     window.location.href = contextPath+ '/dynamic/service/course/create.jsp?type='+type;
 }
-
+function audit(){
+    alert("功能待完善！");
+    /*$.ajax({
+        url: contextPath + "/course/updateCourse",
+        type:"post",
+        async:false,
+        data:{
+            jsons:JSON.stringify({
+                id: id,
+                type: type,
+                category: '1',
+                mediType: '1',
+                name: courseName,
+                cover: courseCover,
+                duration: duration,
+                costType: payType,
+                cost: price,
+                introduce: introduction,
+                "courseSource":{
+                    mediUrl: videoUrl,
+                    free: free,
+                    duration: duration
+                }
+            })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert("修改成功！");
+                window.location.reload();
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });*/
+}
 /*文件上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {
     $(clazz).data('imgSrc',img);

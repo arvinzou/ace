@@ -83,8 +83,14 @@
                                                                         <i class="icon-social-dribbble font-green"></i>
                                                                         <span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">课程管理</font></font></span>
                                                                     </div>
-                                                                    <div class="make_course" id="makeCourse"></div>
-                                                                    <div class="create_course" id="createCourse"></div>
+                                                                    <div class="make_course" id="makeCourse">
+                                                                        <a href="javascript:;" class="btn red commonCourse" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
+                                                                        <a href="javascript:;" class="btn red specialCourse" style="font-size: 14px !important; display: none;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
+                                                                    </div>
+                                                                    <div class="create_course" id="createCourse">
+                                                                        <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程<i class="fa fa-plus"></i></a>
+                                                                        <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程<i class="fa fa-plus"></i></a>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="portlet-body">
                                                                     <div class="table-scrollable">
@@ -151,25 +157,12 @@
             {@/if}
         </td>
         <td width="15%">
-            <a class="operation" href="#" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
+            <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
-            <a class="operation" href="">查看评论</a>
-            <a class="operation" href="">购买明细</a>
+            <a class="operation" id="auditOpt" href="javascript:void(0);" onclick="openAudit('\${item.id}');">审核</a>
         </td>
     </tr>
     {@/each}
-</script>
-
-<script id="makeTemp" type="text/template">
-    {@if data.type == '1'}
-    <a href="javascript:;" class="btn red" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
-    {@else if data.type == '2'}
-    <a href="javascript:;" class="btn red" style="font-size: 14px !important;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
-    {@/if}
-</script>
-
-<script id="createTemp" type="text/template">
-    <a href="javascript:void(0);" onclick="createCourse('\${data.type}');" style="font-size: 14px !important;" class="btn green">创建课程<i class="fa fa-plus"></i></a>
 </script>
 </body>
 
@@ -327,6 +320,28 @@
     </div>
 </script>
 
+
+<!--审核弹框-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="audit"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="gridSystemModalLabel3">课程审核</h4>
+            </div>
+            <div id="operation">
+                <input type="radio" name="radio" value="1"/>审核通过&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="radio" value="2"/>审核不通过
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="audit();">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 <style>
     .modal .headbox {
         width: 150px !important;
