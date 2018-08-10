@@ -169,7 +169,7 @@
 </script>
 
 <script id="createTemp" type="text/template">
-    <a href="/jxb/dynamic/service/course/create.jsp" style="font-size: 14px !important;" class="btn green">创建课程<i class="fa fa-plus"></i></a>
+    <a href="javascript:void(0);" onclick="createCourse('\${data.type}');" style="font-size: 14px !important;" class="btn green">创建课程<i class="fa fa-plus"></i></a>
 </script>
 </body>
 

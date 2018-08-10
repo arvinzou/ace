@@ -230,6 +230,10 @@ function payTypeCheck(dom) {
     }
 }
 
+function createCourse(type){
+    window.location.href = contextPath+ '/dynamic/service/course/create.jsp?type='+type;
+}
+
 /*文件上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {
     $(clazz).data('imgSrc',img);
