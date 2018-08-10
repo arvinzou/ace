@@ -64,7 +64,7 @@
                                                             </div>
 
                                                             <div class="actions">
-                                                                <a onclick="javascript:createTest()"
+                                                                <a onclick="javascript:createTestCase()"
                                                                    class="btn btn-circle red-sunglo btn-sm">
                                                                     <i class="fa fa-plus"></i>
                                                                     创建测试
@@ -85,12 +85,11 @@
                                                                                     <tr>
                                                                                         <th> 序号</th>
                                                                                         <th> 题目</th>
-                                                                                        <th> 类型</th>
-                                                                                        <th colspan="2">操作</th>
+                                                                                        <th>操作</th>
 
                                                                                     </tr>
                                                                                     </thead>
-                                                                                    <tbody id="evaluatTplList">
+                                                                                    <tbody id="evaluatCaseList">
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
@@ -135,12 +134,24 @@
                 <h4 class="modal-title">创建测试</h4>
             </div>
             <div class="modal-body">
-
-
-                <div class="row" flag="false">
+                <div class="row">
                     <div class="col-lg-12">
+                        <div class="from-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">题目
+                                        <span class="required" aria-required="true">*</span>
+                                    </label>
+                                    <div class="col-md-9">
+                                            <textarea class="form-control form_title" id="form_title"
+                                                      name="form_title" rows="5"></textarea>
+                                        <span class="error_message"></span>
+                                        <div class="form-control-focus"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="portlet-body">
-
                             <div class="table-scrollable">
                                 <table class="table table-striped table-hover">
                                     <thead>
@@ -150,17 +161,17 @@
                                         <th width="20%"> 操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody class="gauge-list">
+                                    <tbody class="case-list">
                                     <tr>
                                         <th width="50%"><textarea rows="1"
-                                                                  class="textareaHeight  form_content"></textarea></th>
-                                        <th width="30%"> 大于 <input class="form_score" type="text">分</th>
+                                                                  class="textareaHeight  form_name"></textarea></th>
+                                        <th width="30%"><input class="form_optionScore" type="text">分</th>
                                         <th class=" primary-link" width="20%"></th>
                                     </tr>
                                     <tr>
                                         <th width="50%"><textarea rows="1"
-                                                                  class="textareaHeight  form_content"></textarea></th>
-                                        <th width="30%"> 大于 <input class="form_score" type="text">分</th>
+                                                                  class="textareaHeight  form_name"></textarea></th>
+                                        <th width="30%"><input class="form_optionScore" type="text">分</th>
                                         <th class=" primary-link" width="20%"></th>
                                     </tr>
                                     </tbody>
@@ -169,7 +180,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-2 col-md-offset-5">
-                                <button type="button" id="add-gauge" class=" col-md-12 btn btn-circle btn-success">添 加
+                                <button type="button" id="add-caseSub" class=" col-md-12 btn btn-circle btn-success">添 加
                                 </button>
                             </div>
                         </div>
@@ -180,11 +191,9 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-default subtPage" style="display: none">上一步</button>
+                <button type="button" class="btn btn-default">取消</button>
 
-                <button type="button" class="btn btn-default addPage">下一步</button>
-
-                <button onclick="submitForm()" type="button" class="btn btn-info submit_btn" style="display: none">确定
+                <button type="button" class="btn btn-info submit_btn" flag="true">提交
                 </button>
             </div>
         </div><!-- /.modal-content -->
@@ -194,16 +203,12 @@
 </body>
 
 
-<script id="temp_evaluatTplList" type="text/template">
+<script id="temp_evaluatCaseList" type="text/template">
     {@each data as item,index}
     <tr>
         <td> \${index+1}</td>
-        <td> \${item.name}</td>
-        <td> \${item.categoryName}</td>
-        <td><a onclick="javascript:modify('\${item.id}')" class="primary-link">修改信息</a></td>
-        <td>
-            <a onclick="javascript:addEvaluatCase('\\${item.id}')" class="primary-link">添加题目</a>
-        </td>
+        <td> \${item.title}</td>
+        <td><a onclick="javascript:active('\${item.id}')" class="primary-link">修改信息</a></td>
     </tr>
     {@/each}
 </script>

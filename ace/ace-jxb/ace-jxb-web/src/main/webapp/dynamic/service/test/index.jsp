@@ -397,7 +397,7 @@
         <td> \${item.categoryName}</td>
         <td><a onclick="javascript:modify('\${item.id}')" class="primary-link">修改信息</a></td>
         <td>
-            <a onclick="javascript:addEvaluatCase('\\${item.id}')" class="primary-link">添加题目</a>
+            <a onclick="javascript:evaluatCaseList('\${item.id}')" class="primary-link">题目列表</a>
         </td>
     </tr>
     {@/each}

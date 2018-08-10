@@ -12,6 +12,13 @@ window.onload = function () {
 };
 
 
+function evaluatCaseList(id) {
+    if (id) {
+        window.location.href = '../testCase/index.jsp?id=' + id;
+    }
+}
+
+
 function clearForm() {
     $('.modal-body .step-row').eq(2).css('display', 'none');
     $('.modal-body .step-row').eq(2).attr('flag', false);
@@ -181,7 +188,6 @@ function submitForm() {
         return null;
     }
     evaluatTpl.cover = imgUrl;
-    console.log(evaluatTpl);
     var temp = new Array();
     var tr = $('.gauge-list tr');
     var topScore = 10000;
