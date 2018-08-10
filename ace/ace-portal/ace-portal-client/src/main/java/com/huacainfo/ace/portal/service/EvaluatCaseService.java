@@ -68,6 +68,9 @@ public interface EvaluatCaseService {
      */
     public abstract MessageResponse updateEvaluatCase(String jsons, UserProp userProp) throws Exception;
 
+
+    public abstract MessageResponse updateEvaluatCaseVo(EvaluatCase o, List<EvaluatCaseSub> list, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:selectEvaluatCaseByPrimaryKey
@@ -79,6 +82,7 @@ public interface EvaluatCaseService {
      * @version: 2018-06-09
      */
     public abstract SingleResult<EvaluatCaseVo> selectEvaluatCaseByPrimaryKey(String id) throws Exception;
+
 
     /**
      * @throws

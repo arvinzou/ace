@@ -295,6 +295,42 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
         return new MessageResponse(0, "变更题目完成！");
     }
 
+    @Override
+    public MessageResponse updateEvaluatCaseVo(EvaluatCase o, List<EvaluatCaseSub> list, UserProp userProp)
+            throws Exception {
+        String evaluatCaseId = o.getId();
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getEvaluatTplId())) {
+            return new MessageResponse(1, "所属评测模板不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getType())) {
+            return new MessageResponse(1, "选题类型(1单选2多选)不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getScore())) {
+            return new MessageResponse(1, "分值不能为空！");
+        }
+        int temp = this.evaluatCaseDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "题目名称重复！");
+        }
+        this.evaluatCaseSubDao.deleteByEvaluatCaseId(evaluatCaseId);
+        for (EvaluatCaseSub item : list) {
+            item.setEvaluatCaseId(evaluatCaseId);
+            item.setSort(1);
+            item.setIsAnswer("0");
+            this.evaluatCaseSubService.insertEvaluatCaseSub(item, userProp);
+        }
+        this.evaluatCaseDao.updateByPrimaryKey(o);
+        this.dataBaseLogService.log("变更题目", "题目", "", o.getTitle(),
+                o.getTitle(), userProp);
+        return new MessageResponse(0, "变更题目完成！");
+    }
+
     /**
      * @throws
      * @Title:selectEvaluatCaseByPrimaryKey
@@ -308,7 +344,9 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
     @Override
     public SingleResult<EvaluatCaseVo> selectEvaluatCaseByPrimaryKey(String id) throws Exception {
         SingleResult<EvaluatCaseVo> rst = new SingleResult<EvaluatCaseVo>();
-        rst.setValue(this.evaluatCaseDao.selectByPrimaryKey(id));
+        EvaluatCaseVo evaluatCaseVo = this.evaluatCaseDao.selectByPrimaryKey(id);
+        evaluatCaseVo.setCaseSubData(this.evaluatCaseSubDao.findLists(evaluatCaseVo.getId()));
+        rst.setValue(evaluatCaseVo);
         return rst;
     }
 

@@ -134,9 +134,19 @@ public class EvaluatCaseController extends PortalBaseController {
 	 */
 	@RequestMapping(value = "/updateEvaluatCase.do")
 	@ResponseBody
-	public MessageResponse updateEvaluatCase(String jsons) throws Exception {
-		return this.evaluatCaseService.updateEvaluatCase(jsons, this.getCurUserProp());
-	}
+    public MessageResponse updateEvaluatCase(String jsons) throws Exception {
+        return this.evaluatCaseService.updateEvaluatCase(jsons, this.getCurUserProp());
+    }
+
+
+    @RequestMapping(value = "/updateEvaluatCaseVo.do")
+    @ResponseBody
+    public MessageResponse updateEvaluatCaseVo(String jsons) throws Exception {
+        JSONObject jsonObj = JSON.parseObject(jsons);
+        EvaluatCase obj = JSON.parseObject(jsonObj.getString("evaluatCase"), EvaluatCase.class);
+        List<EvaluatCaseSub> lists = JSON.parseArray(jsonObj.getString("evaluatCaseSub"), EvaluatCaseSub.class);
+        return this.evaluatCaseService.updateEvaluatCaseVo(obj, lists, this.getCurUserProp());
+    }
     /**
 	 *
 	    * @Title:selectEvaluatCaseByPrimaryKey
