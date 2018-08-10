@@ -11,68 +11,6 @@ window.onload = function () {
     $('.addPage').click(addPage);
 };
 
-
-function clearForm() {
-    $('.modal-body .step-row').eq(2).css('display', 'none');
-    $('.modal-body .step-row').eq(2).attr('flag', false);
-    $('.modal-body .step-row').eq(1).css('display', 'none');
-    $('.modal-body .step-row').eq(1).attr('flag', false);
-    $('.modal-body .step-row').eq(0).css('display', 'block');
-    $('.modal-body .step-row').eq(0).attr('flag', true);
-    $('.subtPage').hide();
-    $('.addPage').show();
-    $('.submit_btn').hide();
-    var input = $('.step-row input')
-    for (var i = 0; i < input.length; i++) {
-        input.eq(i).val('');
-    }
-    editor.setValue('');
-    editor_two.setValue('');
-    $('.form_cover').prop('src', 'addImg1.png');
-    var tr = $('.gauge-list tr');
-    for (var i = 0; i < tr.length; i++) {
-        if (i < 2) {
-            tr.eq(i).find('.form_score').val('');
-            tr.eq(i).find('.form_content').val('');
-            continue;
-        }
-        tr.eq(i).remove();
-    }
-}
-
-
-function insertEvaluatTpl() {
-    var url = portalPath + '/evaluatTpl/insertEvaluatTplVo.do';
-    var data = submitForm();
-    if (!data) {
-        return;
-    }
-    $.post(url, data, function (result) {
-        console.log(result);
-        if (result.status == 0) {
-            return;
-        }
-        alert('添加失败', '确认是否重复添加？');
-    })
-}
-
-
-function updataEvaluatTpl() {
-    var url = portalPath + '/evaluatTpl/updateEvaluatTplVo.do';
-    var data = submitForm();
-    if (!data) {
-        return;
-    }
-    $.post(url, data, function (result) {
-        console.log(result);
-        if (result.status == 0) {
-            return;
-        }
-        alert('添加失败', '确认是否重复添加？');
-    })
-}
-
-
 /*初始化分页器*/
 function initpage() {
     testSelectOptions();
@@ -114,22 +52,14 @@ function getEvaluatTplList(num, type) {
     })
 }
 
-var ids = '';
-
-
 function modify(id) {
-    clearForm();
     var url = portalPath + '/evaluatTpl/selectEvaluatTplByPrimaryKey.do';
     var data = {
         id: id
-    };
-    ids = id;
+    }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            $('.submit_btn').attr('flag', false);
-            $('.submit_btn[flag="false"]').click(updataEvaluatTpl);
             fillForm(result.value);
-            $('#createTest').modal('show');
         }
     })
 }
@@ -153,7 +83,7 @@ function fillForm(data) {
         tr.eq(i).find('.form_score').val(list['' + i].scoreEnd);
         tr.eq(i).find('.form_content').val(list['' + i].content);
     }
-
+    $('#createTest').modal('show');
 }
 
 
@@ -171,14 +101,14 @@ function submitForm() {
         var val = $('.form_' + key).val();
         if (!val) {
             alert('还有信息没有填写。');
-            return null;
+            return;
         }
         evaluatTpl[key] = val;
     }
     var imgUrl = $('.form_cover').prop('src');
     if (imgUrl.indexOf('addImg1') != -1) {
         alert('请上传封面。');
-        return null;
+        return;
     }
     evaluatTpl.cover = imgUrl;
     console.log(evaluatTpl);
@@ -191,24 +121,33 @@ function submitForm() {
         var content = tr.eq(i).find('.form_content').val();
         if (!(scoreEnd && content)) {
             alert('量表每项必填。');
-            return null;
+            return;
         }
         if (topScore <= scoreEnd) {
             alert('分数从高到底。');
-            return null;
+            return;
         }
         topScore = scoreEnd;
         evaluatGauge.scoreEnd = scoreEnd;
         evaluatGauge.content = content;
         temp[i] = evaluatGauge;
     }
-    evaluatTpl.id = ids;
-    return {
+
+    var url = portalPath + '/evaluatTpl/insertEvaluatTplVo.do';
+    var data = {
         jsons: JSON.stringify({
             evaluatTpl: evaluatTpl,
             evaluatGauge: temp
         })
+
     }
+    $.post(url, data, function (result) {
+        console.log(result);
+        if (result.status == 0) {
+
+        }
+        alert('添加失败', '确认是否重复添加？');
+    })
 }
 
 /*添加新的测试模板*/
@@ -281,9 +220,6 @@ function addGange() {
 
 /*创建测试*/
 function createTest() {
-    clearForm();
-    $('.submit_btn').attr('flag', true);
-    $('.submit_btn[flag="true"]').click(insertEvaluatTpl);
     $('#createTest').modal('show');
 }
 
@@ -297,7 +233,6 @@ function testSelectOptions() {
         $("#TestTypeList").html(html);
     });
 }
-
 
 
 var editor, editor_two;

@@ -75,13 +75,31 @@
                                                             <div class="mt-element-card mt-element-overlay">
                                                                 <div class="row">
 
-                                                                    <%--content--%>
-                                                                    1111111111111
-                                                                    1111111111111
-                                                                    1111111111111
+                                                                    <div class="col-md-12">
 
 
-                                                                    <%--content--%>
+                                                                        <div class="portlet-body">
+                                                                            <div class="table-scrollable">
+                                                                                <table class="table table-striped table-hover">
+                                                                                    <thead>
+                                                                                    <tr>
+                                                                                        <th> 序号</th>
+                                                                                        <th> 名字</th>
+                                                                                        <th> 类型</th>
+                                                                                        <th colspan="2">操作</th>
+
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="evaluatTplList">
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            <ul class="pagination"
+                                                                                id="pagination1"></ul>
+                                                                        </div>
+
+
+                                                                    </div>
 
                                                                 </div>
                                                             </div>
@@ -119,26 +137,22 @@
             </div>
             <div class="modal-body">
 
-                <div class="row step-row step_one" style="display: none" flag="true">
+                <div class="row step-row step_one" flag="true">
 
                     <div class="col-lg-12">
                         <div class="mt-element-step">
                             <div class="row step-line">
-                                <div class="col-md-3 mt-step-col first active">
+                                <div class="col-md-4 mt-step-col first active">
                                     <div class="mt-step-number bg-dark font-grey">1</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">基本信息</div>
                                 </div>
-                                <div class="col-md-3 mt-step-col">
+                                <div class="col-md-4 mt-step-col">
                                     <div class="mt-step-number bg-dark font-grey">2</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
                                 </div>
-                                <div class="col-md-3 mt-step-col">
+                                <div class="col-md-4 mt-step-col last">
                                     <div class="mt-step-number bg-dark font-grey">3</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">设计量表</div>
-                                </div>
-                                <div class="col-md-3 mt-step-col last">
-                                    <div class="mt-step-number bg-dark font-grey">4</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">确认信息</div>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +167,7 @@
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                         <div class="col-md-9">
-                                            <input type="text" id="notNul_name" class="form-control"
+                                            <input type="text" id="notNull_name" class="form-control form_name"
                                                    placeholder="" name="form_name">
                                             <span class="error_message"></span>
                                             <div class="form-control-focus"></div>
@@ -167,13 +181,13 @@
                                         <div class="col-md-9">
                                             <div>
                                                 <div>
-                                                    <img class="select_img form_logoImgUrl"
+                                                    <img class="select_img form_cover"
                                                          id="cover" data-cover="cover"
                                                          data-toggle="modal"
                                                          data-againadd="false"
                                                          data-xsize="375" data-ysize="195"
                                                          data-target="#img-uploader"
-                                                         src="${pageContext.request.contextPath}/content/common/img/addImg1.png?v=${cfg.version}">
+                                                         src="addImg1.png">
                                                 </div>
                                             </div>
                                         </div>
@@ -184,7 +198,7 @@
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" id="notNull_introduction"
+                                            <textarea class="form-control form_introduce" id="notNull_introduction"
                                                       name="form_introduce" rows="5"></textarea>
                                             <span class="error_message"></span>
                                             <div class="form-control-focus"></div>
@@ -195,7 +209,8 @@
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" id="notNull_Notice" name="form_introduce"
+                                            <textarea class="form-control form_notice" id="notNull_Notice"
+                                                      name="form_notice"
                                                       rows="3"></textarea>
                                             <span class="error_message"></span>
                                             <div class="form-control-focus"></div>
@@ -207,8 +222,9 @@
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                         <div class="col-md-3">
-                                            <input type="text" id="notNull_originalCost" class="form-control"
-                                                   placeholder="" name="form_name">
+                                            <input type="text" id="money_originalCost"
+                                                   class="form-control form_originalCost"
+                                                   placeholder="" name="form_originalCost">
                                             <span class="error_message"></span>
                                             <div class="form-control-focus"></div>
                                         </div>
@@ -217,8 +233,9 @@
                                             <span class="required" aria-required="true">*</span>
                                         </label>
                                         <div class="col-md-3">
-                                            <input type="text" id="notNull_discountCost" class="form-control"
-                                                   placeholder="" name="form_name">
+                                            <input type="text" id="money_discountCost"
+                                                   class="form-control form_discountCost"
+                                                   placeholder="" name="form_discountCost">
                                             <span class="error_message"></span>
                                             <div class="form-control-focus"></div>
                                         </div>
@@ -237,21 +254,17 @@
                     <div class="col-lg-12">
                         <div class="mt-element-step">
                             <div class="row step-line">
-                                <div class="col-md-3 mt-step-col first done">
+                                <div class="col-md-4 mt-step-col first done">
                                     <div class="mt-step-number bg-dark font-grey">1</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">基本信息</div>
                                 </div>
-                                <div class="col-md-3 mt-step-col active">
+                                <div class="col-md-4 mt-step-col active">
                                     <div class="mt-step-number bg-dark font-grey">2</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
                                 </div>
-                                <div class="col-md-3 mt-step-col">
+                                <div class="col-md-4 mt-step-col last">
                                     <div class="mt-step-number bg-dark font-grey">3</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">设计量表</div>
-                                </div>
-                                <div class="col-md-3 mt-step-col last">
-                                    <div class="mt-step-number bg-dark font-grey">4</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">确认信息</div>
                                 </div>
                             </div>
                         </div>
@@ -263,22 +276,17 @@
 
 
                                     <div class="row">
-                                        <select class="col-md-4 col-md-offset-4 " name="">
-                                            <option value="">1</option>
-                                            <option value="">1</option>
-                                            <option value="">1</option>
-                                            <option value="">1</option>
-                                            <option value="">1</option>
-                                            <option value="">1</option>
-                                            <option value="">1</option>
+                                        <select class="col-md-4 col-md-offset-4 form_category" id="TestTypeList"
+                                                name="">
+
                                         </select>
                                     </div>
                                     <h4 class="">没有?在下方添加新的模板，创建成功后再选择。</h4>
                                     <div class="row">
                                         <div class="form-group form-md-line-input">
                                             <div class="col-md-6 col-md-offset-3 ">
-                                                <input type="text" class="form-control"
-                                                       placeholder="" name="form_name">
+                                                <input id="notNull_type" type="text" class="form-control form_typename"
+                                                       placeholder="" name="form_typename">
                                                 <span class="error_message"></span>
                                                 <div class="form-control-focus"></div>
                                             </div>
@@ -286,7 +294,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-2 col-md-offset-5">
-                                            <button type="button" class="col-md-12 btn btn-circle btn-success">创建模板
+                                            <button onclick="createTestType()" type="button"
+                                                    class="col-md-12 btn btn-circle btn-success">创建模板
                                             </button>
                                         </div>
                                     </div>
@@ -294,7 +303,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
 
@@ -303,27 +311,24 @@
                     <div class="col-lg-12">
                         <div class="mt-element-step">
                             <div class="row step-line">
-                                <div class="col-md-3 mt-step-col first done">
+                                <div class="col-md-4 mt-step-col first done">
                                     <div class="mt-step-number bg-dark font-grey">1</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">基本信息</div>
                                 </div>
-                                <div class="col-md-3 mt-step-col done">
+                                <div class="col-md-4 mt-step-col done">
                                     <div class="mt-step-number bg-dark font-grey">2</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
                                 </div>
-                                <div class="col-md-3 mt-step-col active">
+                                <div class="col-md-4 mt-step-col active last">
                                     <div class="mt-step-number bg-dark font-grey">3</div>
                                     <div class="mt-step-title uppercase font-grey-cascade">设计量表</div>
-                                </div>
-                                <div class="col-md-3 mt-step-col last">
-                                    <div class="mt-step-number bg-dark font-grey">4</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">确认信息</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
                         <div class="portlet-body">
+                            <h3>量表分数从高到底排列</h3>
                             <div class="table-scrollable">
                                 <table class="table table-striped table-hover">
                                     <thead>
@@ -336,9 +341,16 @@
                                     </thead>
                                     <tbody class="gauge-list">
                                     <tr>
-                                        <th width="30%"> 大于 <input type="text">分</th>
-                                        <th width="50%"><textarea rows="1" class="textareaHeight"></textarea></th>
-                                        <th class="delectBtn primary-link" width="20%"> 删除</th>
+                                        <th width="30%"> 大于 <input class="form_score" type="text">分</th>
+                                        <th width="50%"><textarea rows="1"
+                                                                  class="textareaHeight  form_content"></textarea></th>
+                                        <th class=" primary-link" width="20%"></th>
+                                    </tr>
+                                    <tr>
+                                        <th width="30%"> 大于 <input class="form_score" type="text">分</th>
+                                        <th width="50%"><textarea rows="1"
+                                                                  class="textareaHeight  form_content"></textarea></th>
+                                        <th class=" primary-link" width="20%"></th>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -354,34 +366,6 @@
                 </div>
 
 
-                <div class="row step-row step_four" flag="false" style="display: none">
-
-                    <div class="col-lg-12">
-                        <div class="mt-element-step">
-                            <div class="row step-line">
-                                <div class="col-md-3 mt-step-col first done">
-                                    <div class="mt-step-number bg-dark font-grey">1</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">基本信息</div>
-                                </div>
-                                <div class="col-md-3 mt-step-col done">
-                                    <div class="mt-step-number bg-dark font-grey">2</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
-                                </div>
-                                <div class="col-md-3 mt-step-col done">
-                                    <div class="mt-step-number bg-dark font-grey">3</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">设计量表</div>
-                                </div>
-                                <div class="col-md-3 mt-step-col active last">
-                                    <div class="mt-step-number bg-dark font-grey">4</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">确认信息</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-
-                    </div>
-                </div>
 
             </div>
             <div class="modal-footer">
@@ -390,7 +374,7 @@
 
                 <button type="button" class="btn btn-default addPage">下一步</button>
 
-                <button type="button" class="btn btn-info submit_btn" style="display: none">确定</button>
+                <button type="button" class="btn btn-info submit_btn" flag="true" style="display: none">确定</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -398,6 +382,26 @@
 
 </body>
 
+<script id="temp_TestTypeList" type="text/template">
+    {@each data as item}
+    <option value="\${item.id}">\${item.name}</option>
+    {@/each}
+</script>
+
+
+<script id="temp_evaluatTplList" type="text/template">
+    {@each data as item,index}
+    <tr>
+        <td> \${index+1}</td>
+        <td> \${item.name}</td>
+        <td> \${item.categoryName}</td>
+        <td><a onclick="javascript:modify('\${item.id}')" class="primary-link">修改信息</a></td>
+        <td>
+            <a onclick="javascript:addEvaluatCase('\\${item.id}')" class="primary-link">添加题目</a>
+        </td>
+    </tr>
+    {@/each}
+</script>
 
 <style>
 
@@ -444,6 +448,10 @@
         text-align: center;
         line-height: 40px !important;
         cursor: pointer;
+    }
+
+    .error_message {
+        color: red;
     }
 </style>
 

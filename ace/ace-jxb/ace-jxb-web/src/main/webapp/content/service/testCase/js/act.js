@@ -5,18 +5,17 @@ function loadlocal() {
     urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
 
 
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/hotkeys.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/uploader.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/simditor.js', type: 'js'});
+    // urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
+    // urls.push({path: portalPath, url: '/content/common/simditor/scripts/hotkeys.js', type: 'js'});
+    // urls.push({path: portalPath, url: '/content/common/simditor/scripts/uploader.js', type: 'js'});
+    // urls.push({path: portalPath, url: '/content/common/simditor/scripts/simditor.js', type: 'js'});
 
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/scripts/app.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/layouts/layout3/scripts/layout.min.js', type: 'js'});
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-
-    urls.push({path: contextPath, url: '/content/service/test/js/test.js', type: 'js'});
+    urls.push({path: contextPath, url: '/content/service/testCase/js/test.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
@@ -33,21 +32,21 @@ function App() {
             initvalidateform()
         }
     });
-    loader({
-        path: portalPath,
-        url: '/content/common/plupload/plupload.full.min.js',
-        type: 'js',
-        callback: function () {
-            loader({
-                path: contextPath,
-                url: '/content/common/js/upload.js',
-                type: 'js',
-                callback: function () {
-                    initUpload();
-                }
-            });
-        }
-    });
+    // loader({
+    //     path: portalPath,
+    //     url: '/content/common/plupload/plupload.full.min.js',
+    //     type: 'js',
+    //     callback: function () {
+    //         loader({
+    //             path: contextPath,
+    //             url: '/content/common/js/upload.js',
+    //             type: 'js',
+    //             callback: function () {
+    //                 initUpload();
+    //             }
+    //         });
+    //     }
+    // });
 }
 
 
