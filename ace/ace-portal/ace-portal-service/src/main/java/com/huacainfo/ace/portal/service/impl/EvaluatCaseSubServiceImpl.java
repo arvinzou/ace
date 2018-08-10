@@ -86,7 +86,7 @@ public class EvaluatCaseSubServiceImpl implements EvaluatCaseSubService {
         if (CommonUtils.isBlank(o.getEvaluatCaseId())) {
             return new MessageResponse(1, "所属评测不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCntImg()) && CommonUtils.isBlank(o.getName())) {
+        if (CommonUtils.isBlank(o.getCntImg()) && CommonUtils.isBlank(o.getName()) && CommonUtils.isBlank(o.getOptionScore())) {
             return new MessageResponse(1, "选项不能为空！");
         }
 //        int temp = this.evaluatCaseSubDao.isExit(o);

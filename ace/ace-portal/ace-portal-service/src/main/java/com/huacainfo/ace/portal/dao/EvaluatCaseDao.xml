@@ -176,6 +176,8 @@
         from
         evaluat_case where
         title=#{condition.title,jdbcType=VARCHAR}
+        and
+        evaluatTplId=#{condition.evaluatTplId,jdbcType=VARCHAR}
     </select>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.portal.vo.EvaluatCaseVo">
 

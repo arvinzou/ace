@@ -1,6 +1,10 @@
 package com.huacainfo.ace.portal.web.controller;
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.portal.model.EvaluatCaseSub;
+import com.huacainfo.ace.portal.model.EvaluatGauge;
+import com.huacainfo.ace.portal.model.EvaluatTpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +52,38 @@ public class EvaluatCaseController extends PortalBaseController {
 	 */
 	@RequestMapping(value = "/findEvaluatCaseList.do")
 	@ResponseBody
-	public PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition,
-			PageParamNoChangeSord page) throws Exception {
+	public PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition, PageParamNoChangeSord page) throws Exception {
 		PageResult<EvaluatCaseVo> rst = this.evaluatCaseService.findEvaluatCaseList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
 		if (rst.getTotal() == 0) {
 			rst.setTotal(page.getTotalRecord());
 		}
 		return rst;
 	}
+
+
+	/**
+	 * @throws
+	 * @Title:find!{bean.name}List
+	 * @Description: TODO(题目分页查询)
+	 * @param: @param condition
+	 * @param: @param page
+	 * @param: @return
+	 * @param: @throws Exception
+	 * @return: PageResult<EvaluatCaseVo>
+	 * @author: 陈晓克
+	 * @version: 2018-06-09
+	 */
+	@RequestMapping(value = "/findEvaluatCaseListSecond.do")
+	@ResponseBody
+	public PageResult<EvaluatCaseVo> findEvaluatCaseListSecond(EvaluatCaseQVo condition, PageParamNoChangeSord page) throws Exception {
+		PageResult<EvaluatCaseVo> rst = this.evaluatCaseService.findEvaluatCaseListSecond(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
+		return rst;
+	}
+
+
     /**
 	 *
 	    * @Title:insertEvaluatCase
@@ -72,7 +100,28 @@ public class EvaluatCaseController extends PortalBaseController {
 	public MessageResponse insertEvaluatCase(String jsons) throws Exception {
 		return this.evaluatCaseService.insertEvaluatCase(jsons, this.getCurUserProp());
 	}
-    /**
+
+
+	/**
+	 * @throws
+	 * @Title:insertEvaluatCase
+	 * @Description: TODO(添加题目)
+	 * @param: @param jsons
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-06-09
+	 */
+	@RequestMapping(value = "/insertEvaluatCaseVo.do")
+	@ResponseBody
+	public MessageResponse insertEvaluatCaseVo(String jsons) throws Exception {
+		JSONObject jsonObj = JSON.parseObject(jsons);
+		EvaluatCase obj = JSON.parseObject(jsonObj.getString("evaluatCase"), EvaluatCase.class);
+		List<EvaluatCaseSub> lists = JSON.parseArray(jsonObj.getString("evaluatCaseSub"), EvaluatCaseSub.class);
+		return this.evaluatCaseService.insertEvaluatCaseVo(obj, lists, this.getCurUserProp());
+	}
+
+	/**
 	 *
 	    * @Title:updateEvaluatCase
 	    * @Description:  TODO(更新题目)
