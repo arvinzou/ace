@@ -25,9 +25,22 @@ public class CourseVo extends Course {
     private String free;
 
     /**
+     * 课程审核结果  0-待审核 1-审核通过 2-审核不通过
+     */
+    private String auditRst;
+
+    /**
      * 单课程 直接加载单个课程资源
      */
     private CourseSource courseSource;
+
+    public String getAuditRst() {
+        return auditRst;
+    }
+
+    public void setAuditRst(String auditRst) {
+        this.auditRst = auditRst;
+    }
 
     public String getSrcName() {
         return srcName;

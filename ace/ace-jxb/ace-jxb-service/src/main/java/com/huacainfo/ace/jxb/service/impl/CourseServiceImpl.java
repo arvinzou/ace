@@ -11,8 +11,10 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.constant.CourseConstant;
+import com.huacainfo.ace.jxb.dao.CourseAuditDao;
 import com.huacainfo.ace.jxb.dao.CourseDao;
 import com.huacainfo.ace.jxb.dao.CourseSourceDao;
+import com.huacainfo.ace.jxb.model.CourseAudit;
 import com.huacainfo.ace.jxb.model.CourseSource;
 import com.huacainfo.ace.jxb.service.CourseService;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
@@ -41,6 +43,8 @@ public class CourseServiceImpl implements CourseService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private CourseSourceDao courseSourceDao;
+    @Autowired
+    private CourseAuditDao courseAuditDao;
 
     /**
      * @throws
@@ -256,6 +260,38 @@ public class CourseServiceImpl implements CourseService {
                 String.valueOf(id),
                 String.valueOf(id), "课程", userProp);
         return new MessageResponse(0, "课程删除完成！");
+    }
+
+    /**
+     * 课程审核
+     *
+     * @param record
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse audit(CourseAudit record, UserProp curUserProp) {
+        if (!"jxb".equals(curUserProp.getAccount())) {
+            return new MessageResponse(ResultCode.FAIL, "当前登录账户无审核权限");
+        }
+        //重复审核校验
+        CourseVo courseVo = courseDao.selectVoByPrimaryKey(record.getCourseId());
+
+        //审核动作
+        CourseAudit audit = courseAuditDao.findByCourseId(courseVo.getId());
+        if (null == audit) {
+            record.setId(GUIDUtil.getGUID());
+            record.setCreateDate(DateUtil.getNowDate());
+            courseAuditDao.insertSelective(record);
+        } else {
+            audit.setRst(record.getRst());
+            audit.setAuditor(record.getAuditor());
+            audit.setStatement(record.getStatement());
+            courseAuditDao.updateByPrimaryKeySelective(audit);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核完成");
+
     }
 
 }
