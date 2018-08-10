@@ -122,6 +122,9 @@ function save(){
     var duation = $("input[name = 'duation']").val();
     var free = $('input[name="tried"]:checked').val();
     var courseName = findCourseById();
+    if(partId == null || partId == undefined){
+        partId = '0';
+    }
     $.ajax({
         url: contextPath + "/courseSource/insertCourseSource",
         type:"post",
