@@ -258,7 +258,9 @@
         <if test="condition.type !=null and condition.type !=&quot;&quot;">
             and t.type = #{condition.type,jdbcType=VARCHAR}
         </if>
-
+        <if test="condition.createUserId !=null and condition.createUserId !=&quot;&quot;">
+            and t.createUserId = #{condition.createUserId,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">
