@@ -32,4 +32,5 @@ public interface CourseAuditDao {
 
     int isExit(CourseAudit record);
 
+    CourseAudit findByCourseId(String courseId);
 }

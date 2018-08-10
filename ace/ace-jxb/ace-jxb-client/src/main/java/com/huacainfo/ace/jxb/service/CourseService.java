@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.jxb.model.CourseAudit;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
 
@@ -81,4 +82,12 @@ public interface CourseService {
      */
     MessageResponse deleteCourseByCourseId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 课程审核
+     *
+     * @param record
+     * @return
+     * @throws Exception
+     */
+    MessageResponse audit(CourseAudit record, UserProp curUserProp);
 }

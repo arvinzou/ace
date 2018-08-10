@@ -2,10 +2,14 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.jxb.model.CourseAudit;
 import com.huacainfo.ace.jxb.service.CourseService;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
@@ -122,5 +126,28 @@ public class CourseController extends JxbBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.courseService.deleteCourseByCourseId(id, this.getCurUserProp());
+    }
+
+
+    /**
+     * 课程审核
+     *
+     * @param data
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/audit")
+    @ResponseBody
+    public MessageResponse audit(String data) throws Exception {
+        if (StringUtil.isEmpty(data)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        CourseAudit record = JsonUtil.toObject(data, CourseAudit.class);
+        if (StringUtil.isEmpty(record.getCourseId())) {
+            return new MessageResponse(ResultCode.FAIL, "缺少课程编号");
+        }
+
+
+        return courseService.audit(record, getCurUserProp());
     }
 }
