@@ -245,14 +245,14 @@ function payTypeCheck(dom) {
  * @param id
  */
 var courseId = null;
-function openAudit(id){
+function openAudit(id, index){
     if(userProp.account != 'jxb'){
        alert("您不是近心帮的管理员，没有权限审核该课程");
        return;
     }
     courseId = id;
-    $("#auditOpt").attr("data-toggle","modal");
-    $("#auditOpt").attr("data-target","#audit");
+    $("#auditOpt"+index).attr("data-toggle","modal");
+    $("#auditOpt"+index).attr("data-target","#audit");
 }
 
 function createCourse(type){

@@ -159,7 +159,7 @@
         <td width="15%">
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
-            <a class="operation" id="auditOpt" href="javascript:void(0);" onclick="openAudit('\${item.id}');">审核</a>
+            <a class="operation" id="auditOpt\${index}" href="javascript:void(0);" onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>
     </tr>
     {@/each}
