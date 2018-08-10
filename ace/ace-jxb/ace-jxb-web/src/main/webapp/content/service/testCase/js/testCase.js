@@ -9,6 +9,59 @@ window.onload = function () {
 };
 
 
+function active(id) {
+    if (!id) {
+        return;
+    }
+    ecId = id;
+    var url = portalPath + '/evaluatCase/selectEvaluatCaseByPrimaryKey.do';
+    var data = {
+        id: id
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            $('.submit_btn').attr('flag', false);
+            $('.submit_btn[flag="false"]').click(updataEvaluatCase);
+            clearForm();
+            fillForm(result.value);
+            $('#createTest').modal('show');
+        }
+    })
+}
+
+function updataEvaluatCase() {
+    var url = portalPath + '/evaluatCase/updateEvaluatCaseVo.do';
+    var data = getFormData();
+    if (!data) {
+        return;
+    }
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            alert('修改成功');
+            getEvaluatCaseList($('#pagination1 .active').text());
+            return;
+        }
+        alert('修改失败', '确认是否重复添加？');
+    })
+}
+
+
+function fillForm(data) {
+    $('.form_title').val(data.title);
+    var list = data.caseSubData;
+    var size = list.length;
+    for (var i = 0; i < size - 2; i++) {
+        addCaseSub();
+    }
+
+    var tr = $('.case-list tr');
+    for (var i = 0; i < size; i++) {
+        tr.eq(i).find('.form_optionScore').val(list['' + i].optionScore);
+        tr.eq(i).find('.form_name').val(list['' + i].name);
+    }
+}
+
+
 /*添加一行量表*/
 function addCaseSub() {
     $('.case-list').append($('<tr>\n' +
@@ -44,10 +97,7 @@ function initpage() {
 }
 
 function clearForm() {
-    var input = $('.step-row input')
-    for (var i = 0; i < input.length; i++) {
-        input.eq(i).val('');
-    }
+    $('.form_title').val('');
     var tr = $('.case-list tr');
     for (var i = 0; i < tr.length; i++) {
         if (i < 2) {
@@ -97,24 +147,10 @@ function getEvaluatCaseList(num, type) {
 }
 
 
-function active(id) {
-
-}
-
 
 /*删除一行量表*/
 function delectTr() {
     $(this).parent().remove();
-}
-
-
-/*添加一行量表*/
-function addGange() {
-    $('.gauge-list').append($('<tr>\n' +
-        '                                        <th width="30%"> 大于 <input class="form_score" type="text">分 </th>\n' +
-        '                                        <th width="50%"><textarea rows="1" class="textareaHeight form_content"></textarea>  </th>\n' +
-        '                                        <th class="delectBtn primary-link" width="20%"> 删除 </th>\n' +
-        '                                    </tr>'))
 }
 
 function insertEvaluatCase() {

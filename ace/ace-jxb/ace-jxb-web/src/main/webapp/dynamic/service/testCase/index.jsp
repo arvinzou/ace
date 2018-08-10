@@ -67,7 +67,7 @@
                                                                 <a onclick="javascript:createTestCase()"
                                                                    class="btn btn-circle red-sunglo btn-sm">
                                                                     <i class="fa fa-plus"></i>
-                                                                    创建测试
+                                                                    创建试题
                                                                 </a>
                                                             </div>
                                                         </div>
