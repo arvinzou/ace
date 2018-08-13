@@ -359,10 +359,10 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
             throw new CustomException(rs1.getInfo());
         }
         //调整项目属性
-        ResultResponse rs2 = cuProjectService.pay(order);
-        if (ResultCode.FAIL == rs2.getStatus()) {
-            throw new CustomException(rs2.getInfo());
-        }
+//        ResultResponse rs2 = cuProjectService.pay(order);
+//        if (ResultCode.FAIL == rs2.getStatus()) {
+//            throw new CustomException(rs2.getInfo());
+//        }
         //增加个人积分
         ResultResponse rs3 = updateUserPoints(order);
         if (ResultCode.FAIL == rs3.getStatus()) {

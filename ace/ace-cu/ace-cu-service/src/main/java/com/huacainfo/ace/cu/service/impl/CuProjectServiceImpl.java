@@ -13,6 +13,7 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.cu.common.constant.ProjectConstant;
 import com.huacainfo.ace.cu.dao.CuProjectDao;
+import com.huacainfo.ace.cu.dao.CuProjectResDao;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.CuProject;
 import com.huacainfo.ace.cu.model.CuProjectUseRecord;
@@ -51,6 +52,8 @@ public class CuProjectServiceImpl implements CuProjectService {
     private CuDonateListService cuDonateListService;
     @Autowired
     private CuProcessRecordService cuProcessRecordService;
+    @Autowired
+    private CuProjectResDao cuProjectResDao;
 
     /**
      * @throws
@@ -212,6 +215,14 @@ public class CuProjectServiceImpl implements CuProjectService {
      */
     @Override
     public MessageResponse deleteCuProjectByCuProjectId(String id, UserProp userProp) throws Exception {
+        CuProject project = cuProjectDao.selectByPrimaryKey(id);
+        if (null == project) {
+            return new MessageResponse(ResultCode.FAIL, "项目资料丢失");
+        }
+//        if (ProjectConstant.P_TYPE_PAY_OUT.equals(project.getType())) {
+//            return new MessageResponse(ResultCode.FAIL, "支出项目不得删除");
+//        }
+
         this.cuProjectDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除慈善项目", "慈善项目",
                 String.valueOf(id),
@@ -280,6 +291,10 @@ public class CuProjectServiceImpl implements CuProjectService {
     @Override
     public ResultResponse findDetail(String projectId) {
         CuProjectVo vo = cuProjectDao.selectVoByPrimaryKey(projectId);
+        if (null != vo) {
+            vo.setCarousel(cuProjectResDao.findByProjectId(projectId, "0"));
+        }
+
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", vo);
     }
 
@@ -424,6 +439,10 @@ public class CuProjectServiceImpl implements CuProjectService {
             return new MessageResponse(ResultCode.FAIL, "项目资料丢失");
         }
 
+        if (!project.getStatus().equals("2")) {
+            return new MessageResponse(ResultCode.FAIL, "项目未审核通过");
+        }
+
         project.setStarted("1");//0-下线 1-上线
         project.setLastModifyDate(DateUtil.getNowDate());
         project.setLastModifyUserId(userProp.getUserId());
@@ -529,7 +548,6 @@ public class CuProjectServiceImpl implements CuProjectService {
         o.setLastModifyDate(DateUtil.getNowDate());
         cuProjectDao.insertSelective(o);
         dataBaseLogService.log("添加慈善项目", "慈善项目", "", o.getId(), o.getId(), userProp);
-
         //生成使用记录;
         CuProjectUseRecord record = new CuProjectUseRecord();
         record.setProjectId(o.getParentId());
@@ -540,15 +558,15 @@ public class CuProjectServiceImpl implements CuProjectService {
             throw new CustomException(ResultCode.FAIL, recordRs.getErrorMessage());
         }
         //调整源项目支出金额
-        BigDecimal useAmount = o.getTargetAmount();
-        BigDecimal payOutAmount = null == srcProject.getPayoutAmount() ?
-                useAmount : srcProject.getPayoutAmount().add(useAmount);
-        BigDecimal balanceAmount = srcProject.getCollectAmount().subtract(payOutAmount);
-        if (balanceAmount.compareTo(BigDecimal.ZERO) < 0) {
-            throw new CustomException(ResultCode.FAIL, "项目资金不足");
-        }
-        srcProject.setPayoutAmount(payOutAmount);
-        srcProject.setBalanceAmount(balanceAmount);
+//        BigDecimal useAmount = o.getTargetAmount();
+//        BigDecimal payOutAmount = null == srcProject.getPayoutAmount() ?
+//                useAmount : srcProject.getPayoutAmount().add(useAmount);
+//        BigDecimal balanceAmount = srcProject.getCollectAmount().subtract(payOutAmount);
+//        if (balanceAmount.compareTo(BigDecimal.ZERO) < 0) {
+//            throw new CustomException(ResultCode.FAIL, "项目资金不足");
+//        }
+//        srcProject.setPayoutAmount(payOutAmount);
+//        srcProject.setBalanceAmount(balanceAmount);
         srcProject.setLastModifyUserName(userProp.getName());
         srcProject.setLastModifyUserId(userProp.getUserId());
         srcProject.setLastModifyDate(DateUtil.getNowDate());
