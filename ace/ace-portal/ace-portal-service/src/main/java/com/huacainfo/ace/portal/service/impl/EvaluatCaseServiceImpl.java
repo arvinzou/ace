@@ -362,9 +362,9 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
      * @version: 2018-06-09
      */
     @Override
-    public MessageResponse deleteEvaluatCaseByEvaluatCaseId(String id,
-                                                            UserProp userProp) throws Exception {
+    public MessageResponse deleteEvaluatCaseByEvaluatCaseId(String id, UserProp userProp) throws Exception {
         this.evaluatCaseDao.deleteByPrimaryKey(id);
+        this.evaluatCaseSubDao.deleteByEvaluatCaseId(id);
         this.dataBaseLogService.log("删除题目", "题目", String.valueOf(id),
                 String.valueOf(id), "题目", userProp);
         return new MessageResponse(0, "题目删除完成！");

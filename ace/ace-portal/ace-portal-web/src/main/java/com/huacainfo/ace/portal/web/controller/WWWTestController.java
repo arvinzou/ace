@@ -4,15 +4,16 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.portal.service.EvaluatCaseService;
-import com.huacainfo.ace.portal.service.EvaluatGaugeService;
-import com.huacainfo.ace.portal.service.EvaluatTplService;
-import com.huacainfo.ace.portal.service.EvaluatDataService;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.service.*;
 import com.huacainfo.ace.portal.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/www/test")
@@ -28,6 +29,9 @@ public class WWWTestController extends PortalBaseController {
     private EvaluatGaugeService evaluatGaugeService;
     @Autowired
     private EvaluatDataService evaluatDataService;
+
+    @Autowired
+    private EvaluatTypeService evaluatTypeService;
 
     /**
      * 获取测试模板列表
@@ -53,6 +57,7 @@ public class WWWTestController extends PortalBaseController {
     @RequestMapping(value = "/getEvaluatTplList.do")
     @ResponseBody
     public ResultResponse getEvaluatTplList(EvaluatTplQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setSyid(this.getCurUserProp().getActiveSyId());
         return this.evaluatTplService.getEvaluatTplList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
     }
 
@@ -121,5 +126,13 @@ public class WWWTestController extends PortalBaseController {
     @ResponseBody
     public ResultResponse findEvaluatDataList(EvaluatDataQVo condition, PageParamNoChangeSord page) throws Exception {
         return this.evaluatDataService.findEvaluatDataLists(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    }
+
+    @RequestMapping(value = "/selectTestTypeList.do")
+    @ResponseBody
+    public Map<String, Object> selectAuthor() throws Exception {
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("syid", this.getCurUserProp().getActiveSyId());
+        return this.evaluatTypeService.selectType(params);
     }
 }

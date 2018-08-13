@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Calendar;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -75,7 +77,9 @@ public class WebAccessDecisionSecurityFilter implements Filter {
                         String appid = PropertyUtil.getProperty("appid");
                         String redirect_uri = PropertyUtil.getProperty("redirect_uri");
                         String scope = PropertyUtil.getProperty("scope");
-                        String state = httpReq.getRequestURI() + "?attach=test";//PropertyUtil.getProperty("state");
+                        String params = getParamsStr(httpReq);
+                        String state = httpReq.getRequestURI() + params + "attach=test";
+                        //PropertyUtil.getProperty("state");
                         redirectPage = this.authorize(appid, redirect_uri, scope, state);
                         accessable = false;
                     } else {
@@ -160,6 +164,32 @@ public class WebAccessDecisionSecurityFilter implements Filter {
             LOGGER.error("{}", e);
             return null;
         }
+    }
+
+    protected Map<String, Object> getParamsMap(HttpServletRequest httpReq) {
+        Map<String, Object> rst = new HashMap<>();
+
+        Enumeration<String> enu = httpReq.getParameterNames();
+        while (enu.hasMoreElements()) {
+            String key = enu.nextElement();
+            rst.put(key, httpReq.getParameter(key));
+        }
+        this.logger.debug("params:" + rst);
+        return rst;
+    }
+
+    protected String getParamsStr(HttpServletRequest httpReq) {
+        StringBuilder rtnStr = new StringBuilder();
+        rtnStr.append("?");
+
+        Enumeration<String> enu = httpReq.getParameterNames();
+        while (enu.hasMoreElements()) {
+            String key = enu.nextElement();
+            rtnStr.append(key + "=" + httpReq.getParameter(key)).append("&");
+        }
+        this.logger.debug("params:" + rtnStr.toString());
+
+        return rtnStr.toString();
     }
 
 }

@@ -99,6 +99,8 @@ public interface EvaluatTplService {
      */
     public abstract MessageResponse deleteEvaluatTplByEvaluatTplId(String id, UserProp userProp) throws Exception;
 
+    public abstract MessageResponse deleteEvaluatTpl(String id, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:getList
