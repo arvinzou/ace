@@ -180,6 +180,15 @@ public class EvaluatTplController extends PortalBaseController {
 				this.getCurUserProp());
 	}
 
+	@RequestMapping(value = "/deleteEvaluatTpl.do")
+	@ResponseBody
+	public MessageResponse deleteEvaluatTpl(String jsons)
+			throws Exception {
+		JSONObject json = JSON.parseObject(jsons);
+		String id = json.getString("id");
+		return this.evaluatTplService.deleteEvaluatTpl(id, this.getCurUserProp());
+	}
+
 	/**
      *
      * @Title:getList
