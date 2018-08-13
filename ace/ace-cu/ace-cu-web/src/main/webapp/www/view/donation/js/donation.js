@@ -32,7 +32,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findDetail",
         type:"post",
         async:false,
-        data:{projectId: primaryId},
+        data:{projectId: '72dabe1c537d4b5d9ff57a211532fb3d'},
         success:function(result){
             if(result.status == 0) {
                 $scope.projectInfo = result.data;
@@ -58,7 +58,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findUsedRecordList",
         type:"post",
         async:false,
-        data:{projectId: primaryId, start: 0, limit: 9999},
+        data:{projectId: '72dabe1c537d4b5d9ff57a211532fb3d', start: 0, limit: 9999},
         success:function(result){
             if(result.status == 0) {
                 $scope.useRecords = result.data.rows;
@@ -85,7 +85,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findDonateList",
         type:"post",
         async:false,
-        data:{projectId: primaryId, start: 0, limit: 9999},
+        data:{projectId: '72dabe1c537d4b5d9ff57a211532fb3d', start: 0, limit: 9999},
         success:function(result){
             if(result.status == 0) {
                 $scope.donationList = result.data.rows;
