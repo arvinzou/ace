@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -21,6 +22,7 @@ import com.huacainfo.ace.portal.dao.EvaluatDataDao;
 import com.huacainfo.ace.portal.dao.EvaluatGaugeDao;
 import com.huacainfo.ace.portal.model.EvaluatGauge;
 import com.huacainfo.ace.portal.service.EvaluatGaugeService;
+import com.huacainfo.ace.portal.vo.EvaluatCaseQVo;
 import org.apache.ibatis.jdbc.SqlRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -442,6 +444,22 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
     public MessageResponse deleteEvaluatTplByEvaluatTplId(String id, UserProp userProp) throws Exception {
         this.evaluatGaugeDao.deleteByEvaluatTplId(id);
         this.evaluatCaseDao.deleteByPrimaryKey(id);
+        this.evaluatDataDao.deleteByEvaluatTplId(id);
+        this.evaluatTplDao.deleteByPrimaryKey(id);
+        this.dataBaseLogService.log("删除评测", "评测", String.valueOf(id),
+                String.valueOf(id), "评测", userProp);
+        return new MessageResponse(0, "评测删除完成！");
+    }
+
+    @Override
+    public MessageResponse deleteEvaluatTpl(String id, UserProp userProp) throws Exception {
+        EvaluatCaseQVo evaluatCaseQVo = new EvaluatCaseQVo();
+        evaluatCaseQVo.setEvaluatTplId(id);
+        int size = this.evaluatCaseDao.findCount(evaluatCaseQVo);
+        if (size > 0) {
+            return new MessageResponse(ResultCode.FAIL, "测试内部还有题目");
+        }
+        this.evaluatGaugeDao.deleteByEvaluatTplId(id);
         this.evaluatDataDao.deleteByEvaluatTplId(id);
         this.evaluatTplDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除评测", "评测", String.valueOf(id),
