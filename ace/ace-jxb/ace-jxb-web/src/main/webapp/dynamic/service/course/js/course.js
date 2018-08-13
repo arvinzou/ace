@@ -56,7 +56,7 @@ function makecourse(){
         alert("请选择要制作的课程！");
         return;
     }
-    window.location.href = contextPath + '/dynamic/service/course/make.jsp?id='+id;
+    window.location.href = contextPath + '/dynamic/service/course/make.jsp?courseId='+id;
 }
 
 function makeSeriesCourse(){
@@ -245,47 +245,38 @@ function payTypeCheck(dom) {
  * @param id
  */
 var courseId = null;
-function openAudit(id){
+function openAudit(id, index){
     if(userProp.account != 'jxb'){
        alert("您不是近心帮的管理员，没有权限审核该课程");
        return;
     }
     courseId = id;
-    $("#auditOpt").attr("data-toggle","modal");
-    $("#auditOpt").attr("data-target","#audit");
+    $("#auditOpt"+index).attr("data-toggle","modal");
+    $("#auditOpt"+index).attr("data-target","#audit");
 }
 
 function createCourse(type){
     window.location.href = contextPath+ '/dynamic/service/course/create.jsp?type='+type;
 }
 function audit(){
-    alert("功能待完善！");
-    /*$.ajax({
-        url: contextPath + "/course/updateCourse",
+    var statement = $("textarea[name = 'message']").val();
+    var rst = $("input[name='auditState']:checked").val();
+    var auditor = $("input[name='auditor']").val();
+    $.ajax({
+        url: contextPath + "/course/audit",
         type:"post",
         async:false,
         data:{
-            jsons:JSON.stringify({
-                id: id,
-                type: type,
-                category: '1',
-                mediType: '1',
-                name: courseName,
-                cover: courseCover,
-                duration: duration,
-                costType: payType,
-                cost: price,
-                introduce: introduction,
-                "courseSource":{
-                    mediUrl: videoUrl,
-                    free: free,
-                    duration: duration
-                }
+            data:JSON.stringify({
+                courseId: courseId,
+                statement: statement,
+                rst: rst,
+                auditor:auditor
             })
         },
         success:function(result){
             if(result.status == 0) {
-                alert("修改成功！");
+                alert("操作成功！");
                 window.location.reload();
             }else {
                 alert(result.errorMessage);
@@ -294,7 +285,7 @@ function audit(){
         error:function(){
             alert("系统服务内部异常！");
         }
-    });*/
+    });
 }
 /*文件上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {

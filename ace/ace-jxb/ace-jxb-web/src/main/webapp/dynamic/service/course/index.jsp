@@ -148,9 +148,9 @@
         <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
         <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
         <td width="15%" class="tdcontent">
-            {@if item.status==1}
+            {@if item.auditRst==0}
             <span class="label label-sm label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
-            {@else if item.status==2}
+            {@else if item.auditRst==1}
             <span class="label label-sm label-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
             {@else}
             <span class="label label-sm label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
@@ -159,7 +159,7 @@
         <td width="15%">
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
-            <a class="operation" id="auditOpt" href="javascript:void(0);" onclick="openAudit('\${item.id}');">审核</a>
+            <a class="operation" id="auditOpt\${index}" href="javascript:void(0);" onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>
     </tr>
     {@/each}
@@ -332,8 +332,16 @@
                 <h4 class="modal-title" id="gridSystemModalLabel3">课程审核</h4>
             </div>
             <div id="operation">
-                <input type="radio" name="radio" value="1"/>审核通过&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="radio" value="2"/>审核不通过
+                <input type="radio" name="auditState" value="1"/>审核通过&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="auditState" value="2"/>审核不通过
+            </div>
+            <div class="row">
+                <p>审核说明</p>
+                <textarea name="message" style="width: 90%;height: 100px;"></textarea>
+            </div>
+            <div class="row">
+                <p>审核人</p>
+                <input type="text" name="auditor" placeholder="输入审核人姓名"/>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
