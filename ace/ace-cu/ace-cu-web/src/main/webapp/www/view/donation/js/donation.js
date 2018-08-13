@@ -18,11 +18,13 @@ app.controller(ngControllerName,function($scope){
                 type = value;
                 $scope.type = type;
             }
-            if(name == "projectId"){
+           /* if(name == "projectId"){
                 primaryId = value;
-            }
+            }*/
         }
     }
+
+    primaryId = "72dabe1c537d4b5d9ff57a211532fb3d";
     /**
      * 项目详情
      */
