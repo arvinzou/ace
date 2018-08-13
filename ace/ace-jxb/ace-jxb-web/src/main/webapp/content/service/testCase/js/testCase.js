@@ -9,6 +9,36 @@ window.onload = function () {
 };
 
 
+function deleteTestCase() {
+    var input = $('#evaluatCaseList tr input:checked');
+    var size = input.length;
+    if (size == 0) {
+        return;
+    } else if (size > 1) {
+        var se = confirm("是否删除" + size + '个题目');
+        if (se != true) {
+            return;
+        }
+    }
+    for (var i = 0; i < size; i++) {
+        var id = input.eq(i).data('id');
+        activeDelect(id);
+    }
+}
+
+function activeDelect(id) {
+    var url = portalPath + '/evaluatCase/deleteEvaluatCaseByEvaluatCaseId.do';
+    var data = {
+        jsons: JSON.stringify({
+            id: id
+        })
+    }
+    $.getJSON(url, data, function (result) {
+        getEvaluatCaseList($('#pagination1 .active').text());
+    })
+}
+
+
 function active(id) {
     if (!id) {
         return;

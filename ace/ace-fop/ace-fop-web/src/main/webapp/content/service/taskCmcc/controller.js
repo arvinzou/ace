@@ -207,7 +207,7 @@ jQuery(function ($) {
             }
         }
         var taskCmcc = {};
-        taskCmcc['msg'] = $('#msg').val();
+        taskCmcc['msg'] = $('#msg').val() + "【常德市工商联】";
         taskCmcc['taskName'] = "催缴任务[" + new Date().getTime() + "]";// $('#taskName').val();
         taskCmcc['tel'] = tel.join(';');
         //alert(tel.join(';'));

@@ -65,10 +65,14 @@
 
                                                             <div class="actions">
                                                                 <a onclick="javascript:createTest()"
-                                                                   class="btn btn-circle red-sunglo btn-sm">
+                                                                   class="btn btn-circle btn-success btn-sm">
                                                                     <i class="fa fa-plus"></i>
                                                                     创建测试
                                                                 </a>
+                                                                <a onclick="javascript:deleteTestTpl()"
+                                                                   data-repeater-delete=""
+                                                                   class="btn btn-circle btn-danger">
+                                                                    <i class="fa fa-close"></i> 删除测试</a>
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">
@@ -83,11 +87,11 @@
                                                                                 <table class="table table-striped table-hover">
                                                                                     <thead>
                                                                                     <tr>
-                                                                                        <th> 序号</th>
-                                                                                        <th> 名字</th>
-                                                                                        <th> 类型</th>
-                                                                                        <th colspan="2">操作</th>
-
+                                                                                        <th width="10%"> 序号</th>
+                                                                                        <th width="50%"> 名字</th>
+                                                                                        <th width="20%"> 类型</th>
+                                                                                        <th width="20%" colspan="2">操作
+                                                                                        </th>
                                                                                     </tr>
                                                                                     </thead>
                                                                                     <tbody id="evaluatTplList">
@@ -392,11 +396,13 @@
 <script id="temp_evaluatTplList" type="text/template">
     {@each data as item,index}
     <tr>
-        <td> \${index+1}</td>
-        <td> \${item.name}</td>
-        <td> \${item.categoryName}</td>
-        <td><a onclick="javascript:modify('\${item.id}')" class="primary-link">修改信息</a></td>
-        <td>
+        <td width="10%">
+            <input data-id="\${item.id}" type="checkbox" id="checkbox1" class="md-check">
+        </td>
+        <td width="50%"> \${item.name}</td>
+        <td width="20%"> \${item.categoryName}</td>
+        <td width="10%"><a onclick="javascript:modify('\${item.id}')" class="primary-link">修改信息</a></td>
+        <td width="10%">
             <a onclick="javascript:evaluatCaseList('\${item.id}')" class="primary-link">题目列表</a>
         </td>
     </tr>
@@ -453,6 +459,14 @@
     .error_message {
         color: red;
     }
+
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        margin: 0;
+    }
+
 </style>
 
 </html>
