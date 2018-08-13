@@ -246,7 +246,10 @@ function loadView(id) {
                 // if (key == 'status') {
                 //     value == "1" ? "正常" : "关闭";
                 // }
-                if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
+                if (key.indexOf('Date') != -1 ||
+                    key.indexOf('time') != -1 ||
+                    key.indexOf('Time') != -1 ||
+                    key.indexOf('birthday') != -1) {
                     value = Common.DateFormatter(value);
                 }
                 $("#dialog-message-view").find('#' + key).html(value);
@@ -299,8 +302,7 @@ function initIdCardInfo(applyId, divId) {
         url: contextPath + "/cuProjectApply/findResList",
         data: {applyId: applyId, resTypes: "0,1,2"},
         success: function (rst, textStatus) {
-            console.log(rst.data);
-
+            // console.log(rst.data);
             renderImage(rst.data, divId);
         }
     });
@@ -321,39 +323,15 @@ function renderImage(rst, divId) {
     html.push('<ul class="ace-thumbnails clearfix">');
     $.each($(rst), function (i, o) {
         html.push('<li>');
-        html.push('<a href="' + o.resUrl + '" title="' + o.resName + '" data-rel="colorbox" class="cboxElement">');
+        html.push('<a href="' + o.resUrl + '" title="' + o.resName + '" target="view_window" data-rel="colorbox" class="cboxElement">');
         html.push('<img height="200" width="200" class="photo" src="' + o.resUrl + '">');
         html.push('</a>');
         html.push('<div style="text-align:center">');
-        html.push(o.nickname);
+        // html.push(o.nickname);
         html.push('</div>');
         html.push('</li>');
     });
     html.push('</ul>');
     $("#" + divId).html(html.join(""));
-
-    // var $overflow = '';
-    // var colorbox_params = {
-    //     rel: 'colorbox',
-    //     reposition: true,
-    //     scalePhotos: true,
-    //     scrolling: false,
-    //     previous: '<i class="ace-icon fa fa-arrow-left"></i>',
-    //     next: '<i class="ace-icon fa fa-arrow-right"></i>',
-    //     close: '&times;',
-    //     current: '{current} of {total}',
-    //     maxWidth: '100%',
-    //     maxHeight: '100%',
-    //     onOpen: function () {
-    //         $overflow = document.body.style.overflow;
-    //         document.body.style.overflow = 'hidden';
-    //     },
-    //     onClosed: function () {
-    //         document.body.style.overflow = $overflow;
-    //     },
-    //     onComplete: function () {
-    //         $.colorbox.resize();
-    //     }
-    // };
-    // $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
 }
+

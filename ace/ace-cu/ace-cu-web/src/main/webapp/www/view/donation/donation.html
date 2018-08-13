@@ -7,9 +7,11 @@
 		<title ng-bind="projectInfo.projectName"></title>
 		<link rel="stylesheet" type="text/css" href="../css/nav.css"/>
 		<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="css/donation.css" />
 		<link rel="stylesheet" type="text/css" href="../js/dropload/dropload.css"/>
 		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../js/nav.js"></script>
 		<script type="text/javascript" src="../js/init-rem.js"></script>
 		<script type="text/javascript" src="../js/dropload/dropload.js"></script>
@@ -22,14 +24,33 @@
 		<div class="projectbox">
 			<div class="project_item">
 				<div class="project_item_image">
-					<img ng-if="projectInfo.coverUrl!=''&&projectInfo.coverUrl!=undefined&&projectInfo.coverUrl!=null" ng-src="{{projectInfo.coverUrl}}" width="100%" height="100%" />
-					<img ng-if="projectInfo.coverUrl==''||projectInfo.coverUrl==undefined||projectInfo.coverUrl==null" ng-src="img/project_default.png" width="100%" height="100%" />
-				</div>
+                    <div style="width: 100%;height: 100%;" id="myCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- 轮播（Carousel）指标 -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- 轮播（Carousel）项目 -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="slideImg" ng-src="{{projectInfo.carousel[1].resUrl}}" style="width: 100%;height: 100%;" alt="Second slide">
+                            </div>
+                            <div class="item">
+                                <img class="slideImg" ng-src="{{projectInfo.carousel[2].resUrl}}" style="width: 100%;height: 100%;" alt="Third slide">
+                            </div>
+                            <div class="item">
+                                <img class="slideImg" ng-src="{{projectInfo.carousel[3].resUrl}}" style="width: 100%;height: 100%;" alt="Fourth slide">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 				<div class="project_item_name">
 					<p class="name_01" ng-bind="projectInfo.projectName"></p>
 					<p ng-if="type != 2" class="name_02" ng-bind="projectInfo.title"></p>
 				</div>
-				<div class="project_item_raise">
+				<div class="project_item_raise" style="display: none;
+">
 					<div class="raise_01">
 						<p ng-if="type != 2" class="raise_money" ng-bind="projectInfo.collectAmount"></p>
 						<p ng-if="type != 2" class="raise_price">已募集(元)</p>

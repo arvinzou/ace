@@ -50,10 +50,10 @@
                     <%--authority="${pageContext.request.contextPath}/fopProject/insertFopProject">--%>
                     <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
                     <%--</button>--%>
-                    <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/fopProject/updateFopProject">
-                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                    <%--<button class="btn btn-info" id="btn-view-edit"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopProject/updateFopProject">--%>
+                    <%--<i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/fopProject/deleteFopProjectByFopProjectId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>

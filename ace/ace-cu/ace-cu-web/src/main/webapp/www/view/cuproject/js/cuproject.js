@@ -18,7 +18,7 @@ app.controller(ngControllerName,function($scope){
                     $scope.$apply();
                 }
             }else {
-                alert(errorMessage);
+                alert(result.errorMessage);
             }
         },
         error:function(){
