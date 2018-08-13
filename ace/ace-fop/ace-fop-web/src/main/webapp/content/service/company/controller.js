@@ -166,7 +166,7 @@ function loadView(id) {
                             rst = "是";
                             break;
                         default :
-                            rst = "否";
+                            rst = "";
                     }
                     value = rst;
                 }
