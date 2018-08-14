@@ -162,6 +162,6 @@
         from course_part t
         left join course_source s on t.id = s.partId
         where t.courseId = #{courseId,jdbcType=VARCHAR}
-        order by t.displaySeq asc
+        order by t.displaySeq asc, s.displaySeq asc
     </select>
 </mapper>
