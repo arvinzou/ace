@@ -30,10 +30,16 @@
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#myCarousel" data-slide-to="1"></li>
                             <li data-target="#myCarousel" data-slide-to="2"></li>
+							<li data-target="#myCarousel" data-slide-to="3"></li>
                         </ol>
                         <!-- 轮播（Carousel）项目 -->
                         <div class="carousel-inner">
-                            <div class="item active">
+							<div class="item active">
+								<video ng-src="{{videoUrlFun(projectInfo.carousel[0].resUrl)}}"  autoplay="autoplay" style="width: 100%;height: 100%;">
+									您的设备不支持video。
+								</video>
+							</div>
+                            <div class="item">
                                 <img class="slideImg" ng-src="{{projectInfo.carousel[1].resUrl}}" style="width: 100%;height: 100%;" alt="Second slide">
                             </div>
                             <div class="item">
