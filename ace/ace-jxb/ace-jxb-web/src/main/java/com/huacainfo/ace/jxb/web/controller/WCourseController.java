@@ -6,11 +6,14 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.CourseService;
+import com.huacainfo.ace.jxb.vo.CoursePartVo;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Auther: Arvin
@@ -39,7 +42,7 @@ public class WCourseController extends JxbBaseController {
     }
 
     /**
-     * 查询获取课程详情
+     * 查询获取 -- 课程介绍
      */
     @RequestMapping("/findCourseDetail")
     public ResultResponse findCourseDetail(String courseId) throws Exception {
@@ -51,4 +54,17 @@ public class WCourseController extends JxbBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", courseVo);
     }
 
+    /**
+     * 查询获取 -- 课程详情
+     */
+    @RequestMapping("/findCoursePartInfo")
+    public ResultResponse findCoursePartInfo(String courseId) throws Exception {
+        if (StringUtil.isEmpty(courseId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        List<CoursePartVo> coursePartInfo = courseService.findCoursePartInfo(courseId);
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", coursePartInfo);
+    }
 }

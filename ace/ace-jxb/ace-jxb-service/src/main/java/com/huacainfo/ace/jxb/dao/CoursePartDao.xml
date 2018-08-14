@@ -138,4 +138,30 @@
         from course_part
         where name = #{name,jdbcType=VARCHAR}
     </select>
+
+    <!---->
+    <resultMap id="VoCollectionResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CoursePartVo">
+        <collection property="sourceList" ofType="com.huacainfo.ace.jxb.model.CourseSource">
+            <id property="id" column="srcId"/>
+            <result property="courseId" column="courseId"/>
+            <result property="partId" column="id"/>
+            <result property="name" column="srcName"/>
+            <result property="mediUrl" column="srcMediUrl"/>
+            <result property="duration" column="srcDuration"/>
+            <result property="free" column="srcFree"/>
+            <result property="displaySeq" column="srcSeq"/>
+        </collection>
+    </resultMap>
+
+    <select id="findByCourseId" parameterType="java.lang.String" resultMap="VoCollectionResultMap">
+        SELECT
+            s.id as srcId, s.`name` as srcName,s.mediUrl as  srcMediUrl,
+            IFNULL(s.duration,0) as srcDuration, IFNULL(s.free ,'0')as srcFree,
+            IFNULL(s.displaySeq ,0)as srcSeq,
+            t.id, t.courseId, t.`name`, t.displaySeq
+        from course_part t
+        left join course_source s on t.id = s.partId
+        where t.courseId = #{courseId,jdbcType=VARCHAR}
+        order by t.displaySeq asc
+    </select>
 </mapper>

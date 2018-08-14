@@ -13,13 +13,21 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.constant.CourseConstant;
 import com.huacainfo.ace.jxb.dao.CourseAuditDao;
 import com.huacainfo.ace.jxb.dao.CourseDao;
+import com.huacainfo.ace.jxb.dao.CoursePartDao;
 import com.huacainfo.ace.jxb.dao.CourseSourceDao;
 import com.huacainfo.ace.jxb.model.CourseAudit;
 import com.huacainfo.ace.jxb.model.CourseSource;
+import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.CourseService;
+import com.huacainfo.ace.jxb.vo.CounselorVo;
+import com.huacainfo.ace.jxb.vo.CoursePartVo;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +53,12 @@ public class CourseServiceImpl implements CourseService {
     private CourseSourceDao courseSourceDao;
     @Autowired
     private CourseAuditDao courseAuditDao;
+    @Autowired
+    private CounselorService counselorService;
+    @Autowired
+    private CoursePartDao coursePartDao;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
     /**
      * @throws
@@ -234,8 +248,15 @@ public class CourseServiceImpl implements CourseService {
     public SingleResult<CourseVo> selectCourseByPrimaryKey(String id) throws Exception {
         SingleResult<CourseVo> rst = new SingleResult<>();
         CourseVo vo = courseDao.selectVoByPrimaryKey(id);
+        //咨询师信息
+        CounselorVo counselor = counselorService.selectCounselorByPrimaryKey(vo.getCreateUserId()).getValue();
+        vo.setCounselor(counselor);
+
         if (CourseConstant.COURSE_TYPE_SINGLE.equals(vo.getType())) {
-            vo.setCourseSource(courseSourceDao.findByCourseId(id).get(0));
+            List<CourseSource> list = courseSourceDao.findByCourseId(id);
+            if (!CollectionUtils.isEmpty(list)) {
+                vo.setCourseSource(list.get(0));
+            }
         }
         rst.setValue(vo);
         return rst;
@@ -293,5 +314,40 @@ public class CourseServiceImpl implements CourseService {
         return new MessageResponse(ResultCode.SUCCESS, "审核完成");
 
     }
+
+    /***
+     * 获取课程章节信息
+     * @param courseId 课程ID
+     * @return List<CoursePartVo>
+     */
+    @Override
+    public List<CoursePartVo> findCoursePartInfo(String courseId) {
+        //sql
+        SqlSession session = getSqlSession();
+        CoursePartDao dao = session.getMapper(CoursePartDao.class);
+        //query
+        try {
+            List<CoursePartVo> list = dao.findByCourseId(courseId);
+            return list;
+        } catch (Exception e) {
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return null;
+    }
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
+
 
 }

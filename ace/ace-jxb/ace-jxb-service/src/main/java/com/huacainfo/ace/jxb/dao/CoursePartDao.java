@@ -32,4 +32,5 @@ public interface CoursePartDao {
 
     int isExit(CoursePart record);
 
+    List<CoursePartVo> findByCourseId(String courseId);
 }

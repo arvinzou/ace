@@ -1,21 +1,38 @@
 package com.huacainfo.ace.jxb.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OrderCalculation implements Serializable {
-    private static final long serialVersionUID = 1L;
-
+public class OrderCalculation {
     private String id;
-
+    /**
+     * 订单编号
+     */
     private String orderId;
-
+    /**
+     * 咨询师编号（卖家）
+     */
     private String counselorId;
-
+    /**
+     * 分配给卖家比例
+     */
     private BigDecimal ratio;
-
+    /**
+     * 卖家获得金额
+     */
     private BigDecimal amount;
+    /**
+     * 平台获得金额
+     */
+    private BigDecimal platformAmount;
+    /**
+     * 工作室抽成比例
+     */
+    private BigDecimal studioRatio;
+    /**
+     * 工作室获得金额
+     */
+    private BigDecimal studioAmount;
     /**
      * 计算标记 0-未计算 1-已计算
      */
@@ -71,6 +88,30 @@ public class OrderCalculation implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public BigDecimal getPlatformAmount() {
+        return platformAmount;
+    }
+
+    public void setPlatformAmount(BigDecimal platformAmount) {
+        this.platformAmount = platformAmount;
+    }
+
+    public BigDecimal getStudioRatio() {
+        return studioRatio;
+    }
+
+    public void setStudioRatio(BigDecimal studioRatio) {
+        this.studioRatio = studioRatio;
+    }
+
+    public BigDecimal getStudioAmount() {
+        return studioAmount;
+    }
+
+    public void setStudioAmount(BigDecimal studioAmount) {
+        this.studioAmount = studioAmount;
     }
 
     public String getCpuTag() {

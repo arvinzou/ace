@@ -34,6 +34,19 @@ public class CourseVo extends Course {
      */
     private CourseSource courseSource;
 
+    /**
+     * 咨询师信息
+     */
+    private CounselorVo counselor;
+
+    public CounselorVo getCounselor() {
+        return counselor;
+    }
+
+    public void setCounselor(CounselorVo counselor) {
+        this.counselor = counselor;
+    }
+
     public String getAuditRst() {
         return auditRst;
     }
