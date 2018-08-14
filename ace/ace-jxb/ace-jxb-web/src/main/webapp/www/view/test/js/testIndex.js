@@ -15,7 +15,22 @@ $(function () {
     initMenu();
     initList();
     $('.menu .swiper-container_menu').on('click', 'li', sameTestTypeList);
+    $('.panel .swiper-container_panel').on('click', '.swiper-slide', activeTest);
+    $('#testLists').on('click', 'li', activeTest);
 });
+
+
+function activeTest() {
+    var $that = $(this);
+    var id = $that.data("id");
+    if (id) {
+        window.location.href = 'testing1.html?id=' + id;
+    }
+}
+
+
+
+
 
 
 function sameTestTypeList() {

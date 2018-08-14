@@ -8,17 +8,32 @@ $(function () {
     $('.sort').on('click', '.sortoption', showSort);
     $('.cover').on('click', hiddenSort);
     $('.sort').on('click', '.option', changeSort);
+    $('#testLists').on('click', 'li', activeTest);
 });
 
+
+/*进入测试环节*/
+function activeTest() {
+    var $that = $(this);
+    var id = $that.data("id");
+    if (id) {
+        window.location.href = 'testing1.html?id=' + id;
+    }
+}
+
+
+/*确定类型*/
 function initCategory() {
     category = localStorage.getItem('category') ? localStorage.getItem('category') : parseQueryString("id");
 }
 
 
 /*初始化测试列表*/
-function initList() {
+function initList(sord, orderBy) {
     var url = '/portal/www/test/getEvaluatTplList.do';
     var data = {
+        orderBy: orderBy,
+        sord: sord,
         category: category,
         page: 1,
         limit: 20
@@ -85,22 +100,26 @@ function initSwriper() {
         spaceBetween: 20,
         slidesPerView: 'auto',
         centeredSlides: true
-        // scrollbar: {
-        //     el: '.swiper-scrollbar',
-        //     hide: false,
-        // },
-        // pagination: {
-        //     el: '.swiper-pagination',
-        // },
     })
 }
 
+var types, sort = false;
+
+
 function changeSort() {
     var $that = $(this);
+    var type = $that.data("type");
+    if (type == types) {
+        sort = !sort;
+    } else {
+        types = type;
+        sort = false;
+    }
     $that.siblings().removeClass('option_action');
     $that.addClass('option_action');
     hiddenSort();
     $('.sortoption .name').text($that.text());
+    initList(sort ? 'desc' : 'asc', type);
 }
 
 
@@ -118,7 +137,7 @@ function showSort() {
 function changeTestType() {
     var $that = $(this);
     category = $that.data("id");
-    localStorage.setItem('category', category)
+    localStorage.setItem('category', category);
     $that.siblings().removeClass('action');
     $that.addClass('action');
     silperCenter();
