@@ -15,11 +15,11 @@
   <sql id="Base_Column_List">
     id, evaluatTplId, title, type, cntImg, score, solution, sort, createDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
     select 
     <include refid="Base_Column_List" />
     from evaluat_case
-    where id = #{id,jdbcType=VARCHAR}
+        where id = #{EvaluatCaseId,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from evaluat_case
@@ -176,6 +176,10 @@
         from
         evaluat_case where
         title=#{condition.title,jdbcType=VARCHAR}
+        and
+        evaluatTplId=#{condition.evaluatTplId,jdbcType=VARCHAR}
+        and
+        id !=#{condition.id,jdbcType=VARCHAR}
     </select>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.portal.vo.EvaluatCaseVo">
 

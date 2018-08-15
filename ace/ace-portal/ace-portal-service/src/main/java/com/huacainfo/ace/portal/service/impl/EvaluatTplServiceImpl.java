@@ -11,16 +11,17 @@ import java.util.UUID;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.portal.dao.EvaluatCaseDao;
-import com.huacainfo.ace.portal.dao.EvaluatDataDao;
-import com.huacainfo.ace.portal.dao.EvaluatGaugeDao;
+import com.huacainfo.ace.portal.dao.*;
+import com.huacainfo.ace.portal.model.EvaluatData;
 import com.huacainfo.ace.portal.model.EvaluatGauge;
 import com.huacainfo.ace.portal.service.EvaluatGaugeService;
+import com.huacainfo.ace.portal.vo.*;
 import org.apache.ibatis.jdbc.SqlRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,12 +33,9 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.dao.EvaluatTplDao;
 import com.huacainfo.ace.portal.model.EvaluatTpl;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.EvaluatTplService;
-import com.huacainfo.ace.portal.vo.EvaluatTplVo;
-import com.huacainfo.ace.portal.vo.EvaluatTplQVo;
 
 @Service("evaluatTplService")
 /**
@@ -64,6 +62,8 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
 
     @Autowired
     private EvaluatCaseDao evaluatCaseDao;
+    @Autowired
+    private EvaluatCaseSubDao evaluatCaseSubDao;
 
     /**
      * @throws
@@ -151,6 +151,36 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
      * @version: 2018-06-09
      */
     @Override
+    public PageResult<EvaluatTplVo> findEvaluatTplListVo(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception {
+        PageResult<EvaluatTplVo> rst = new PageResult<EvaluatTplVo>();
+        List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, (page - 1) * limit, limit, orderBy);
+        for (EvaluatTplVo item : list) {
+            List<EvaluatGauge> listGa = this.evaluatGaugeDao.findLists(item.getId());
+            item.setGaugelist(listGa);
+        }
+        rst.setRows(list);
+        if (page <= 1) {
+            int allRows = this.evaluatTplDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(评测分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult<EvaluatTplVo>
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @Override
     public ResultResponse getEvaluatTplList(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception {
         int start = (page - 1) * limit;
         List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, start, limit, orderBy);
@@ -215,6 +245,108 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         this.dataBaseLogService.log("添加评测", "评测", "", o.getName(),
                 o.getName(), userProp);
         return new MessageResponse(0, "添加评测完成！");
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertEvaluatTpl
+     * @Description: TODO(添加评测)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @Override
+    public MessageResponse insertEvaluatTplVo(EvaluatTpl o, List<EvaluatGauge> lists, UserProp userProp)
+            throws Exception {
+
+        String evaluatTplId = GUIDUtil.getGUID();
+        o.setId(evaluatTplId);
+        o.setSyid(userProp.getActiveSyId());
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getName())) {
+            return new MessageResponse(1, "名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getCategory())) {
+            return new MessageResponse(1, "类型不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getCover())) {
+            return new MessageResponse(1, "封面不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "测评介绍不能为空！");
+        }
+        int temp = this.evaluatTplDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "评测名称重复！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        this.evaluatTplDao.insert(o);
+        int topScore = 10000;
+        for (EvaluatGauge item : lists) {
+            item.setEvaluatTplId(evaluatTplId);
+            item.setScoreStart(topScore);
+            topScore = item.getScoreEnd();
+            this.evaluatGaugeService.insertEvaluatGauge(item, userProp);
+        }
+        this.dataBaseLogService.log("添加评测", "评测", "", o.getName(),
+                o.getName(), userProp);
+        return new MessageResponse(0, "添加评测完成！");
+    }
+
+
+    /**
+     * @throws
+     * @Title:updateEvaluatTpl
+     * @Description: TODO(更新评测)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @Override
+    public MessageResponse updateEvaluatTplVo(EvaluatTpl o, List<EvaluatGauge> lists, UserProp userProp) throws Exception {
+        String evaluatTplId = o.getId();
+        if (CommonUtils.isBlank(evaluatTplId)) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getName())) {
+            return new MessageResponse(1, "名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getCategory())) {
+            return new MessageResponse(1, "类型不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getCover())) {
+            return new MessageResponse(1, "封面不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "测评介绍不能为空！");
+        }
+        o.setLastModifyDate(new Date());
+        o.setLastModifyUserName(userProp.getName());
+        o.setLastModifyUserId(userProp.getUserId());
+        this.evaluatTplDao.updateByPrimaryKey(o);
+        int topScore = 10000;
+        this.evaluatGaugeDao.deleteByEvaluatTplId(evaluatTplId);
+        for (EvaluatGauge item : lists) {
+            item.setEvaluatTplId(evaluatTplId);
+            item.setScoreStart(topScore);
+            topScore = item.getScoreEnd();
+            this.evaluatGaugeService.insertEvaluatGauge(item, userProp);
+        }
+        this.dataBaseLogService.log("变更评测", "评测", "", o.getName(),
+                o.getName(), userProp);
+        return new MessageResponse(0, "变更评测完成！");
     }
 
     /**
@@ -283,14 +415,28 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
     @Override
     public SingleResult<EvaluatTplVo> selectEvaluatTplByPrimaryKey(String id) throws Exception {
         SingleResult<EvaluatTplVo> rst = new SingleResult<EvaluatTplVo>();
-        rst.setValue(this.evaluatTplDao.selectByPrimaryKey(id));
+        EvaluatTplVo evaluatTplVo = this.evaluatTplDao.selectByPrimaryKey(id);
+        evaluatTplVo.setGaugelist(this.evaluatGaugeDao.findLists(evaluatTplVo.getId()));
+        rst.setValue(evaluatTplVo);
         return rst;
     }
 
 
     @Override
     public ResultResponse getEvaluatTplByPrimaryKey(String id) throws Exception {
-        return new ResultResponse(0, "模板详情", this.evaluatTplDao.selectByPrimaryKey(id));
+        EvaluatTplVo evaluatTplVo = this.evaluatTplDao.selectByPrimaryKey(id);
+        EvaluatCaseQVo condition = new EvaluatCaseQVo();
+        condition.setEvaluatTplId(id);
+        List<EvaluatCaseVo> list = this.evaluatCaseDao.findList(condition, 0, 200, "");
+        for (EvaluatCaseVo item : list) {
+            List<EvaluatCaseSubVo> listsub = this.evaluatCaseSubDao.findLists(item.getId());
+            item.setCaseSubData(listsub);
+        }
+        evaluatTplVo.setEvaluatCaseList(list);
+        EvaluatData evaluatData = new EvaluatData();
+        evaluatData.setEvaluatTplId(id);
+        evaluatTplVo.setTestedTotal(this.evaluatDataDao.getTotal(evaluatData));
+        return new ResultResponse(0, "模板详情", evaluatTplVo);
     }
 
     /**
@@ -305,10 +451,25 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
      * @version: 2018-06-09
      */
     @Override
-    public MessageResponse deleteEvaluatTplByEvaluatTplId(String id,
-                                                          UserProp userProp) throws Exception {
+    public MessageResponse deleteEvaluatTplByEvaluatTplId(String id, UserProp userProp) throws Exception {
         this.evaluatGaugeDao.deleteByEvaluatTplId(id);
         this.evaluatCaseDao.deleteByPrimaryKey(id);
+        this.evaluatDataDao.deleteByEvaluatTplId(id);
+        this.evaluatTplDao.deleteByPrimaryKey(id);
+        this.dataBaseLogService.log("删除评测", "评测", String.valueOf(id),
+                String.valueOf(id), "评测", userProp);
+        return new MessageResponse(0, "评测删除完成！");
+    }
+
+    @Override
+    public MessageResponse deleteEvaluatTpl(String id, UserProp userProp) throws Exception {
+        EvaluatCaseQVo evaluatCaseQVo = new EvaluatCaseQVo();
+        evaluatCaseQVo.setEvaluatTplId(id);
+        int size = this.evaluatCaseDao.findCount(evaluatCaseQVo);
+        if (size > 0) {
+            return new MessageResponse(ResultCode.FAIL, "测试内部还有题目");
+        }
+        this.evaluatGaugeDao.deleteByEvaluatTplId(id);
         this.evaluatDataDao.deleteByEvaluatTplId(id);
         this.evaluatTplDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除评测", "评测", String.valueOf(id),

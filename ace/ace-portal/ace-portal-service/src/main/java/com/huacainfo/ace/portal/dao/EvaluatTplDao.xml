@@ -25,13 +25,13 @@
   <sql id="Base_Column_List">
       c.id, c.name, c.category, c.cover, c.qrcoteUrl, c.originalCost, c.discountCost, c.score, c.status,
       c.syid,c.introduce,c.notice,c.createUserId, c.createUserName, c.createDate, c.lastModifyUserId,
-      c.lastModifyUserName,
-      c.lastModifyDate,t.name as categoryName
+      c.lastModifyUserName,c.lastModifyDate,t.name as categoryName
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
     select 
     <include refid="Base_Column_List" />
         from evaluat_tpl c
+        left join evaluat_type t on t.id=c.category
         where c.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -273,6 +273,9 @@
             and c.name like
             concat(#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        <if test='condition.category!=null and condition.category!=""'>
+            and c.category =#{condition.category,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">
@@ -301,11 +304,9 @@
 
     <select id="isExit" resultType="int">
         select count(*)
-        from
-        evaluat_tpl where
-        name=#{condition.name,jdbcType=VARCHAR}
-        and
-        syid=#{condition.syid,jdbcType=VARCHAR}
+        from evaluat_tpl
+        where name=#{condition.name,jdbcType=VARCHAR}
+        and syid=#{condition.syid,jdbcType=VARCHAR}
     </select>
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.portal.vo.EvaluatTplVo">
 
@@ -334,6 +335,5 @@
             a.PID = #{pid}
         </if>
     </select>
-
 
 </mapper>

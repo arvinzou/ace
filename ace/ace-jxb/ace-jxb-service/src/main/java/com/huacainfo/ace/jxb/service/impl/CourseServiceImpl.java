@@ -11,13 +11,23 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.constant.CourseConstant;
+import com.huacainfo.ace.jxb.dao.CourseAuditDao;
 import com.huacainfo.ace.jxb.dao.CourseDao;
+import com.huacainfo.ace.jxb.dao.CoursePartDao;
 import com.huacainfo.ace.jxb.dao.CourseSourceDao;
+import com.huacainfo.ace.jxb.model.CourseAudit;
 import com.huacainfo.ace.jxb.model.CourseSource;
+import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.CourseService;
+import com.huacainfo.ace.jxb.vo.CounselorVo;
+import com.huacainfo.ace.jxb.vo.CoursePartVo;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +51,14 @@ public class CourseServiceImpl implements CourseService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private CourseSourceDao courseSourceDao;
+    @Autowired
+    private CourseAuditDao courseAuditDao;
+    @Autowired
+    private CounselorService counselorService;
+    @Autowired
+    private CoursePartDao coursePartDao;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
     /**
      * @throws
@@ -112,7 +130,7 @@ public class CourseServiceImpl implements CourseService {
 
         String courseId = GUIDUtil.getGUID();
         //单课程，直接增加课程资源
-        if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
+        /*if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
             CourseSource source = o.getCourseSource();
             if (null == source || StringUtil.isEmpty(source.getFree())) {
                 return new MessageResponse(ResultCode.FAIL, "课程资源资料不全");
@@ -126,7 +144,7 @@ public class CourseServiceImpl implements CourseService {
             if (iCount <= 0) {
                 return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
             }
-        }
+        }*/
 
         o.setDemandNum(1);
         o.setLikeNum(1);
@@ -194,6 +212,9 @@ public class CourseServiceImpl implements CourseService {
                 source.setPartId("0");//无所属章节
                 source.setName(o.getName());
                 source.setCreateDate(DateUtil.getNowDate());
+                source.setFree(params.getFree());
+                source.setMediUrl(params.getMediUrl());
+                source.setDuration(params.getDuration());
                 int iCount = courseSourceDao.insert(source);
                 if (iCount <= 0) {
                     return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
@@ -226,7 +247,18 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public SingleResult<CourseVo> selectCourseByPrimaryKey(String id) throws Exception {
         SingleResult<CourseVo> rst = new SingleResult<>();
-        rst.setValue(this.courseDao.selectVoByPrimaryKey(id));
+        CourseVo vo = courseDao.selectVoByPrimaryKey(id);
+        //咨询师信息
+        CounselorVo counselor = counselorService.selectCounselorByPrimaryKey(vo.getCreateUserId()).getValue();
+        vo.setCounselor(counselor);
+
+        if (CourseConstant.COURSE_TYPE_SINGLE.equals(vo.getType())) {
+            List<CourseSource> list = courseSourceDao.findByCourseId(id);
+            if (!CollectionUtils.isEmpty(list)) {
+                vo.setCourseSource(list.get(0));
+            }
+        }
+        rst.setValue(vo);
         return rst;
     }
 
@@ -250,5 +282,72 @@ public class CourseServiceImpl implements CourseService {
                 String.valueOf(id), "课程", userProp);
         return new MessageResponse(0, "课程删除完成！");
     }
+
+    /**
+     * 课程审核
+     *
+     * @param record
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse audit(CourseAudit record, UserProp curUserProp) {
+        if (!"jxb".equals(curUserProp.getAccount())) {
+            return new MessageResponse(ResultCode.FAIL, "当前登录账户无审核权限");
+        }
+        //重复审核校验
+        CourseVo courseVo = courseDao.selectVoByPrimaryKey(record.getCourseId());
+
+        //审核动作
+        CourseAudit audit = courseAuditDao.findByCourseId(courseVo.getId());
+        if (null == audit) {
+            record.setId(GUIDUtil.getGUID());
+            record.setCreateDate(DateUtil.getNowDate());
+            courseAuditDao.insertSelective(record);
+        } else {
+            audit.setRst(record.getRst());
+            audit.setAuditor(record.getAuditor());
+            audit.setStatement(record.getStatement());
+            courseAuditDao.updateByPrimaryKeySelective(audit);
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核完成");
+
+    }
+
+    /***
+     * 获取课程章节信息
+     * @param courseId 课程ID
+     * @return List<CoursePartVo>
+     */
+    @Override
+    public List<CoursePartVo> findCoursePartInfo(String courseId) {
+        //sql
+        SqlSession session = getSqlSession();
+        CoursePartDao dao = session.getMapper(CoursePartDao.class);
+        //query
+        try {
+            List<CoursePartVo> list = dao.findByCourseId(courseId);
+            return list;
+        } catch (Exception e) {
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return null;
+    }
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
+
 
 }

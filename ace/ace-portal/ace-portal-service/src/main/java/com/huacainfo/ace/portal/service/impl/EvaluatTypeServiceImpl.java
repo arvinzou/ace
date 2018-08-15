@@ -86,12 +86,11 @@ public class EvaluatTypeServiceImpl implements EvaluatTypeService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
+        o.setSyid(userProp.getActiveSyId());
         int temp = this.evaluatTypeDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "评测类型名称重复！");
         }
-
-        o.setSyid(userProp.getActiveSyId());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());

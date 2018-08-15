@@ -20,6 +20,16 @@ public class EvaluatCaseSub implements java.io.Serializable {
 
     private String isAnswer;
 
+    private Integer optionScore;
+
+    public Integer getOptionScore() {
+        return optionScore;
+    }
+
+    public void setOptionScore(Integer optionScore) {
+        this.optionScore = optionScore;
+    }
+
     public String getIsAnswer() {
         return isAnswer;
     }

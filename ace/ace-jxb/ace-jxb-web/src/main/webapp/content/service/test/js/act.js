@@ -14,7 +14,7 @@ function loadlocal() {
     urls.push({path: portalPath, url: '/content/common/assets/global/scripts/app.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/layouts/layout3/scripts/layout.min.js', type: 'js'});
-
+    urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
 
     urls.push({path: contextPath, url: '/content/service/test/js/test.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {

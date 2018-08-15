@@ -3,6 +3,7 @@ var videoUrl = '';
 var tryvideoUrl = '';
 var primaryId = null;
 var partId = null;
+var sourceId = null;
 function loadlocal() {
     var urls = [];
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
@@ -37,10 +38,13 @@ window.onload = function(){
             if(name == "partId"){
                 partId = value;
             }
+            if(name == "sourceId"){
+                sourceId = value;
+            }
         }
     }
-    console.log("courseId:"+primaryId+"\n"+"partId:"+partId);
-    findCourseById();
+    console.log("courseId:"+primaryId+"\n"+"partId:"+partId+"\n");
+
     var editor = new Simditor({
         textarea: $('#coursedoc'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
@@ -52,7 +56,6 @@ window.onload = function(){
             leaveConfirm: '正在上传文件'
         }
     });
-
     var video = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'video',
@@ -119,6 +122,9 @@ function save(){
     var duation = $("input[name = 'duation']").val();
     var free = $('input[name="tried"]:checked').val();
     var courseName = findCourseById();
+    if(partId == null || partId == undefined){
+        partId = '0';
+    }
     $.ajax({
         url: contextPath + "/courseSource/insertCourseSource",
         type:"post",

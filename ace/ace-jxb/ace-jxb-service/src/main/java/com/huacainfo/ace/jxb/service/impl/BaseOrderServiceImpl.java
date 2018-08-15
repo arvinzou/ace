@@ -17,10 +17,7 @@ import com.huacainfo.ace.jxb.constant.OrderPayStatus;
 import com.huacainfo.ace.jxb.constant.OrderPayType;
 import com.huacainfo.ace.jxb.constant.PayStatus;
 import com.huacainfo.ace.jxb.dao.*;
-import com.huacainfo.ace.jxb.model.BaseOrder;
-import com.huacainfo.ace.jxb.model.ConsultOrder;
-import com.huacainfo.ace.jxb.model.ConsultProduct;
-import com.huacainfo.ace.jxb.model.JxbCallBackLog;
+import com.huacainfo.ace.jxb.model.*;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.service.OrderCalculationService;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
@@ -70,6 +67,8 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     private JxbCallBackLogDao jxbCallBackLogDao;
     @Autowired
     private OrderCalculationService orderCalculationService;
+    @Autowired
+    private CourseDao courseDao;
 
     private SqlSession getSqlSession() {
         SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
@@ -380,14 +379,51 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         }
         //咨询订单
         if (orderCategory.equals(OrderCategory.CATEGORY_CONSULT)) {
-            return createConsult(user, base, params);
+            return createConsultOrder(user, base, params);
         }
         //课程订单
         else if (orderCategory.equals(OrderCategory.CATEGORY_COURSE)) {
-            return new ResultResponse(ResultCode.FAIL, "该订单创建类型正在研发中,敬请期待");
+            return createCourseOrder(user, base, params);
         } else {
             return new ResultResponse(ResultCode.FAIL, "未知订单类型");
         }
+    }
+
+    /**
+     * 创建课程订单
+     *
+     * @param user
+     * @param base
+     * @param params
+     * @return
+     */
+    private ResultResponse createCourseOrder(Users user, BaseOrder base, Map<String, Object> params) {
+        //
+        Course course = courseDao.selectByPrimaryKey(base.getCommodityId());
+        if (null == course) {
+            return new ResultResponse(ResultCode.FAIL, "非法商品资料");
+        }
+        //订单ID
+        String orderId = GUIDUtil.getGUID();
+        //支付金额保留2位小数，超出两位小数，则使用四舍五入
+        BigDecimal price = course.getCost();
+        BigDecimal payMoney = price.multiply(new BigDecimal(base.getAmount())).setScale(2, BigDecimal.ROUND_HALF_UP);
+        //入库主订单
+        base.setId(orderId);
+        base.setBusinessId(user.getUserId());//卖家ID
+        base.setCommodityName(course.getName());
+        base.setBusinessName(user.getName());
+        base.setPrice(price);
+        base.setPayMoney(payMoney);
+        base.setPayStatus(PayStatus.NEW_ORDER);
+        base.setCreateDate(DateUtil.getNowDate());
+        baseOrderDao.insertSelective(base);
+
+        //订单创建完成
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("orderId", orderId);
+        rtnMap.put("payMoney", payMoney);
+        return new ResultResponse(ResultCode.SUCCESS, "订单创建成功", rtnMap);
     }
 
     /**
@@ -470,7 +506,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
      * @param params 预约详情信息
      * @return ResultResponse {"orderId":"oid","payMoney":"99"}
      */
-    private ResultResponse createConsult(Users user, BaseOrder base, Map<String, Object> params) throws Exception {
+    private ResultResponse createConsultOrder(Users user, BaseOrder base, Map<String, Object> params) throws Exception {
         //预约详情
         ConsultOrder consult = JsonUtil.toObject(params.get("consult").toString(), ConsultOrder.class);
         if (null == consult) {

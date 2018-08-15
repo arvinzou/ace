@@ -1,7 +1,11 @@
 #operation{
     height: 60px;
-    text-align: center;
+    text-align: left;
     line-height: 60px;
+}
+.row{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 #info table{
     width: 100%;
@@ -50,4 +54,7 @@
 }
 .active a{
     color: #1a9fff;
+}
+.tdcontent{
+    padding-top: 30px!important;
 }

@@ -24,7 +24,7 @@
     <%--<link rel="stylesheet" href="https://cdn.bootcss.com/limonte-sweetalert2/7.21.1/sweetalert2.min.css">--%>
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-    <script src="${pageContext.request.contextPath}/content/service/counselor/js/ ?v=${cfg.version}"></script>
+    <script src="${pageContext.request.contextPath}/content/service/counselor/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
@@ -99,29 +99,29 @@
                 </div>
             </div>
 
-            <div class="bottom"></div>
+
 
         </div>
+    </div>
+    <div class="bottom"></div>
+</div>
 
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="gridSystemModalLabel">咨询师详情</h4>
+            </div>
+            <div id="info">
 
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
-             aria-labelledby="gridSystemModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span>
-                        </button>
-                        <h4 class="modal-title" id="gridSystemModalLabel">咨询师详情</h4>
-                    </div>
-                    <div id="info">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

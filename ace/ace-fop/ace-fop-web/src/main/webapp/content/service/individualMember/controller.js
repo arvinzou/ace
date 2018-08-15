@@ -152,6 +152,20 @@ function loadView(id) {
             $('#dialog-message-view').html(renderHtml);
             //
             $.each(rst.value, function (key, value) {
+                if (key == "thirdLaborRelation") {
+                    var rst = "";
+                    switch (value) {
+                        case '0' :
+                            rst = "否";
+                            break;
+                        case '1' :
+                            rst = "是";
+                            break;
+                        default :
+                            rst = "";
+                    }
+                    value = rst;
+                }
                 //企业类型 "0": "企业会员", "4": "个人会员"},//, "1": "团体企业", "2": "律师事务所", "3": "银行机构"
                 if (key == "companyType") {
                     var rst = "";

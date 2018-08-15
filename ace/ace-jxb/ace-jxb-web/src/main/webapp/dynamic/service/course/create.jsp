@@ -131,22 +131,12 @@
 													<input type="text" class="form_input" />
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-xs-12 col-md-2">状态设置</div>
-												<div class="col-xs-12 col-md-10">
-													<input type="radio" value="" name="status"/>上架
-													<input type="radio" value="" name="status"/>下架
-												</div>
-											</div>
 											<div class="row" style="text-align: center;">
 												<button class="save" onclick="save();">保存</button>
 											</div>
 										</div>
 									</div>
 								</div>
-								<script id="list" type="text/template">
-
-                                </script>
 								<!--=======================================-->
 
 							</div>

@@ -150,4 +150,44 @@
       updateDate = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+
+    <select id="examine" resultType="map">
+        select
+        (
+        SELECT count(1)
+        from counselor c, teacher_audit a1
+        WHERE a1.counselorId = c.id
+        AND a1.rst = '1'
+        AND c.studioId IN (SELECT s.id FROM jxb.studio s WHERE s.counselorId = t.id)
+        ) as cNum,
+        (
+        select IFNULL(sum(b.payMoney),0)
+        from base_order b
+        where b.payTime BETWEEN #{startDt,jdbcType=VARCHAR} and #{endDt,jdbcType=VARCHAR}
+        and b.businessId in
+        (
+        SELECT c.id
+        from counselor c, teacher_audit a1
+        WHERE a1.counselorId = c.id
+        AND a1.rst = '1'
+        AND c.studioId IN (SELECT s.id FROM jxb.studio s WHERE s.counselorId = t.id)
+        )
+        )as cTurnover,
+        t.id,t.name,t.imagePhotoUrl
+        from counselor t, teacher_audit a
+        where 1=1
+        and a.counselorId = t.id
+        and a.rst = '1'
+        <if test="counselorId !=null and counselorId !=&quot;&quot;">
+            and t.counselorId = #{counselorId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="findConfig" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from post_level
+        ORDER BY postIndex
+    </select>
 </mapper>

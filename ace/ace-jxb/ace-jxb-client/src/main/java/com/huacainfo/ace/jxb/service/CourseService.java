@@ -4,8 +4,12 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.jxb.model.CourseAudit;
+import com.huacainfo.ace.jxb.vo.CoursePartVo;
 import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.jxb.vo.CourseVo;
+
+import java.util.List;
 
 /**
  * @author: Arvin
@@ -81,4 +85,19 @@ public interface CourseService {
      */
     MessageResponse deleteCourseByCourseId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 课程审核
+     *
+     * @param record
+     * @return
+     * @throws Exception
+     */
+    MessageResponse audit(CourseAudit record, UserProp curUserProp);
+
+    /***
+     * 获取课程章节信息
+     * @param courseId 课程ID
+     * @return List<CoursePartVo>
+     */
+    List<CoursePartVo> findCoursePartInfo(String courseId);
 }

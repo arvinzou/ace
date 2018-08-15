@@ -21,7 +21,7 @@ ul,li{
 }
 .project_item_image{
 	width: 100%;
-	height: 5rem;
+	height: 6rem;
 }
 .project_item_raise{
 	width: 90%;
@@ -209,6 +209,7 @@ ul,li{
 	font-size: 0.35rem;
 	color: #999999;
 	padding-left: 0.5rem;
+	padding-bottom: 0.5rem;
 }
 .troggle{
 	height: 1.8rem;

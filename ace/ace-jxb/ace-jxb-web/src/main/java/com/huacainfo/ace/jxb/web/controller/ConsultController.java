@@ -49,8 +49,7 @@ public class ConsultController extends JxbBaseController {
     @RequestMapping(value = "/findConsultList")
     @ResponseBody
     public PageResult<ConsultVo> findConsultList(ConsultQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult
-                <ConsultVo> rst = this.consultService
+        PageResult<ConsultVo> rst = this.consultService
                 .findConsultList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -78,7 +77,6 @@ public class ConsultController extends JxbBaseController {
     public MessageResponse modifyConsult(ConsultQVo consult) throws Exception {
         return this.consultService.modifyConsult(consult, this.getCurUserProp());
     }
-
 
 
     /**

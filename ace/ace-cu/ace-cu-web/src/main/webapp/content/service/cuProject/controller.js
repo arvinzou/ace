@@ -1,15 +1,16 @@
 jQuery(function ($) {
     $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
         _title: function (title) {
-            var $title =
-                this.options.title || '&nbsp;'
-            if (("title_html" in this.options)
-                && this.options.title_html == true)
+            var $title = this.options.title || '&nbsp;'
+            if (("title_html" in this.options) && this.options.title_html == true) {
                 title.html($title);
-            else
+            }
+            else {
                 title.text($title);
+            }
         }
     }));
+
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -62,6 +63,7 @@ jQuery(function ($) {
                     }
                 })
         });
+
     $('#btn-view-edit').on(
         'click',
         function () {
@@ -71,10 +73,6 @@ jQuery(function ($) {
             }
             var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
             var targetAmount = gd.targetAmount;
-            if (!isNull(targetAmount) && !isAmount(targetAmount)) {
-                alert("请输入正确的目标金额!");
-                return;
-            }
 
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
@@ -84,6 +82,10 @@ jQuery(function ($) {
                     recreateForm: true,
                     viewPagerButtons: true,
                     beforeSubmit: function (postdata) {
+                        if (!isNull(targetAmount) && !isAmount(targetAmount)) {
+                            alert("请输入正确的目标金额!");
+                            return [false, "", ""];
+                        }
                         postdata.description = editor.getValue();
                         var coverUrl = postdata.coverUrl;
                         if (!coverUrl.startWith("http")) {
@@ -110,6 +112,9 @@ jQuery(function ($) {
                             retSetWidgetAttr(gd);
                             $('#targetAmount').attr("disabled", "disabled");
                         }
+                        //轮播图/视频上传
+                        // $("#tr_title1 h5").after("<div id='custom-upload'></div>");
+                        // initUploads(gd.id, 'custom-upload');
                     }
                 })
         });
@@ -301,6 +306,10 @@ jQuery(function ($) {
                 return;
             }
             var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+            if (rowData.status != "2") {
+                alert("项目未通过审核，不允许上线!")
+                return;
+            }
             if (rowData.started == "1") {
                 alert("项目已上线，请勿重复操作")
                 return;
@@ -541,7 +550,6 @@ function retSetWidgetAttr(rowData) {
 
 }
 
-
 function isNull(str) {
     if (str == "") return true;
     var regu = "^[ ]+$";
@@ -552,4 +560,38 @@ function isNull(str) {
 function isAmount(amount) {
     var reg = /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;
     return reg.test(amount);
+}
+
+function initUploads(projectId, divId) {
+    // $.ajax({
+    //     type: "get",
+    //     url: contextPath + "/cuProjectApply/findResList",
+    //     data: {applyId: applyId, resTypes: "3"},
+    //     success: function (rst, textStatus) {
+    renderUploads(null, divId);
+    //     }
+    // });
+}
+
+
+function renderUploads(rst, divId) {
+    var html = new Array();
+    html.push('<ul class="ace-thumbnails clearfix">');
+    // $.each($(rst), function (i, o) {
+    //     html.push('<li>');
+    //     html.push('<a href="' + 'o.resUrl' + '" title="' + ' o.resName' + '" target="view_window" data-rel="colorbox" class="cboxElement">');
+    //     html.push('<img height="200" width="200" class="photo" src="' + 'o.resUrl' + '">');
+    //     html.push('</a>');
+    //     html.push('<div style="text-align:center">');
+    //     html.push(o.resName);
+    //     html.push('</div>');
+    //     html.push('</li>');
+    // });
+    //uploadButton
+
+    html.push('<li><a href="javascript:false">');
+    html.push('<img style="padding:20px" alt="60x60" id="btn-image-upload" class="photo" src="/portal/content/common/image/add.png">');
+    html.push('</a></li>');
+    html.push('</ul>');
+    $("#" + divId).html(html.join(""));
 }

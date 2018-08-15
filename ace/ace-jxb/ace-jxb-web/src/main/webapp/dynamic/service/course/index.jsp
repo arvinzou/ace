@@ -19,7 +19,11 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css"/>
+    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/create.css">
     <script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
@@ -79,8 +83,14 @@
                                                                         <i class="icon-social-dribbble font-green"></i>
                                                                         <span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">课程管理</font></font></span>
                                                                     </div>
-                                                                    <div class="make_course" id="makeCourse"></div>
-                                                                    <div class="create_course" id="createCourse"></div>
+                                                                    <div class="make_course" id="makeCourse">
+                                                                        <a href="javascript:;" class="btn red commonCourse" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
+                                                                        <a href="javascript:;" class="btn red specialCourse" style="font-size: 14px !important; display: none;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
+                                                                    </div>
+                                                                    <div class="create_course" id="createCourse">
+                                                                        <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程<i class="fa fa-plus"></i></a>
+                                                                        <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程<i class="fa fa-plus"></i></a>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="portlet-body">
                                                                     <div class="table-scrollable">
@@ -88,10 +98,9 @@
                                                                             <thead>
                                                                             <tr>
                                                                                 <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-                                                                                <th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
-                                                                                <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 状态 </font></font></th>
+                                                                                <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
                                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
-                                                                                <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
+                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
                                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
                                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
                                                                             </tr>
@@ -128,50 +137,219 @@
 <script id="list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="5%"><font style="vertical-align: inherit;">
+        <td width="5%" class="tdcontent"><font style="vertical-align: inherit;">
             <input type="radio" name="course" value="\${item.id}"/>
             <font style="vertical-align: inherit;">\${parseInt(index)+1} </font></font>
         </td>
-        <td width="30%">
+        <td width="35%">
             <img src="\${item.cover}" style="width: 80px;height: 60px;"/>
             <span>\${item.name}</span>
         </td>
-        <td width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">  </font></font></td>
-        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
-        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
-        <td width="10%">
-            {@if item.status==1}
+        <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
+        <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
+        <td width="15%" class="tdcontent">
+            {@if item.auditRst==0}
             <span class="label label-sm label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
-            {@else if item.status==2}
+            {@else if item.auditRst==1}
             <span class="label label-sm label-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
             {@else}
             <span class="label label-sm label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
             {@/if}
         </td>
         <td width="15%">
-            <a class="operation" href="">编辑</a>
-            <a class="operation" href="">下架</a>
+            <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
-            <a class="operation" href="">查看评论</a>
-            <a class="operation" href="">购买明细</a>
+            <a class="operation" id="auditOpt\${index}" href="javascript:void(0);" onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>
     </tr>
     {@/each}
 </script>
-
-<script id="makeTemp" type="text/template">
-    {@if data.type == '1'}
-    <a href="javascript:;" class="btn red" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
-    {@else if data.type == '2'}
-    <a href="javascript:;" class="btn red" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
-    {@/if}
-</script>
-
-<script id="createTemp" type="text/template">
-    <a href="/jxb/dynamic/service/course/create.jsp" class="btn green">创建课程<i class="fa fa-plus"></i></a>
-</script>
 </body>
 
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="editCourse"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div id="courseBasic"></div>
+        </div>
+    </div>
+</div>
+
+<script id="editCourseTemp" type="text/template">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="gridSystemModalLabel1">课程编辑</h4>
+    </div>
+    <div id="courseInfo">
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">课程名称</div>
+            <div class="col-xs-12 col-md-10"><input name="courseName" class="form_input" type="text" placeholder="请输入课程名称" value="\${data.name}"/></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">课程封面</div>
+            <div class="col-xs-12 col-md-10">
+                <div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
+                {@if data.cover != '' && data.cover != undefined}
+                <div class="imgbox" >
+                    <img class="select_img form_imagePhotoUrl"
+                         id="courseCover"
+                         data-toggle="modal"
+                         data-xsize="375" data-ysize="210"
+                         data-cover="courseCover"
+                         data-target="#img-uploader"
+                         src="\${data.cover}">
+                </div>
+                {@else}
+                <div class="imgbox" >
+                    <img class="select_img form_imagePhotoUrl"
+                         id="courseCover"
+                         data-toggle="modal"
+                         data-xsize="375" data-ysize="210"
+                         data-cover="courseCover"
+                         data-target="#img-uploader"
+                         src="${pageContext.request.contextPath}/dynamic/service/course/img/course_default.jpg?v=${cfg.version}">
+                </div>
+                {@/if}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">课程简介</div>
+            <div class="col-xs-12 col-md-10">
+                <textarea name="introduction" id="courseIntro" class="introduction">\${data.introduce}</textarea>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">价格</div>
+            <div class="col-xs-12 col-md-10">
+                {@if data.costType == '0'}
+                <div class="col-xs-1 col-md-1 payType"><span id="noPay" class="feeLabel cactive" onclick="payTypeCheck('noPay');">免费</span></div>
+                <div class="col-xs-1 col-md-1 payType"><span id="pay" class="feeLabel uncactive" onclick="payTypeCheck('pay');">付费</span></div>
+                {@else if data.costType == '1'}
+                <div class="col-xs-1 col-md-1 payType"><span id="noPay" class="feeLabel uncactive" onclick="payTypeCheck('noPay');">免费</span></div>
+                <div class="col-xs-1 col-md-1 payType"><span id="pay" class="feeLabel cactive" onclick="payTypeCheck('pay');">付费</span></div>
+                {@/if}
+                <div class="col-xs-10 col-md-10">
+                    <input name="price" type="text" class="form_input" value="\${data.cost}" />
+                </div>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">课程对象</div>
+            <div class="col-xs-12 col-md-10">
+                <span class="pointer cactive">幼儿</span>
+                <span class="pointer uncactive">小学</span>
+                <span class="pointer uncactive">中学</span>
+                <span class="pointer uncactive">高中</span>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">适合谁听</div>
+            <div class="col-xs-12 col-md-10"><input class="form_input" type="text" placeholder="请输入适合人群" /></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">针对能力</div>
+            <div class="col-xs-12 col-md-10">
+                <div style="height:30px;margin-bottom: 30px;">
+                    <span class="ability cactive">心理能力</span>
+                    <span class="ability uncactive">学习方法</span>
+                    <span class="ability uncactive">团队合作</span>
+                    <span class="ability uncactive">沟通表达</span>
+                    <span class="ability uncactive">独立思考</span>
+                    <span class="ability uncactive">自我认知</span>
+                    <span class="ability uncactive">其他</span>
+                </div>
+                <div style="width:100%;">
+                    <textarea class="ability_intro"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">起始人气(选填)</div>
+            <div class="col-xs-12 col-md-10">
+                <input type="text" class="form_input" />
+            </div>
+        </div>
+        {@if data.type == '1'}
+        <div class="row">
+            <div class="col-xs-12 col-md-2">音频上传</div>
+            <div class="col-xs-12 col-md-10">
+                <div class="pictureContainer" id="video" style="z-index: 1;">
+                    <div class="viewPicture">
+                        <video id="vedioSource" src="\${data.courseSource.mediUrl}" controls="controls" width="340px" heigt="235px"></video>
+                    </div>
+                    <div class="uploadText">
+                        <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
+                        <p class="uploadPloadprogress">点击上传视频</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">课程文稿</div>
+            <div class="col-xs-12 col-md-10">
+                <textarea name="coursedoc" id="coursedoc" class="introduction"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-2">是否允许试听</div>
+            <div class="col-xs-12 col-md-10">
+                {@if data.courseSource.free == '0'}
+                <input type="radio" name="tried" value="1" checked/>是
+                <input type="radio" name="tried" value="0"/>否
+                {@else if data.courseSource.free == '1'}
+                <input type="radio" name="tried" value="1"/>是
+                <input type="radio" name="tried" value="0" checked/>否
+                {@else}
+                <input type="radio" name="tried" value="1"/>是
+                <input type="radio" name="tried" value="0"/>否
+                {@/if}
+            </div>
+        </div>
+        <div class="row form_row">
+            <div class="col-xs-12 col-md-2">课程时长</div>
+            <div class="col-xs-12 col-md-10">
+                <input name="duation" type="text" class="form_input" value="\${data.courseSource.duration}"/>
+            </div>
+        </div>
+        {@/if}
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary" onclick="confirmEdit('\${data.id}', '\${data.type}');">确定</button>
+    </div>
+</script>
+
+
+<!--审核弹框-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="audit"
+     aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="gridSystemModalLabel3">课程审核</h4>
+            </div>
+            <div id="operation">
+                <input type="radio" name="auditState" value="1"/>审核通过&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="auditState" value="2"/>审核不通过
+            </div>
+            <div class="row">
+                <p>审核说明</p>
+                <textarea name="message" style="width: 90%;height: 100px;"></textarea>
+            </div>
+            <div class="row">
+                <p>审核人</p>
+                <input type="text" name="auditor" placeholder="输入审核人姓名"/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="audit();">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
 <style>
     .modal .headbox {
         width: 150px !important;
@@ -180,7 +358,9 @@
         overflow: hidden;
         margin: 0 auto;
     }
-
+    .modal-dialog{
+        width: 1000px !important;
+    }
     .modal-body {
         font-size: 16px;
         line-height: 24px;

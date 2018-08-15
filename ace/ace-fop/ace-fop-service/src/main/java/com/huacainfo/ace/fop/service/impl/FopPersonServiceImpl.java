@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -191,7 +192,9 @@ public class FopPersonServiceImpl implements FopPersonService {
     @Override
     public ResultResponse insertPerson(FopCompanyVo companyVo, UserProp userProp) throws Exception {
         FopPerson person = new FopPerson();
-        person.setRealName(companyVo.getFullName());
+        String realName = StringUtil.isNotEmpty(companyVo.getRealName())
+                ? companyVo.getRealName() : companyVo.getFullName();
+        person.setRealName(realName);
         person.setMobileNumer(companyVo.getLpMobile());
         person.setSex(companyVo.getLpSex());
         person.setBirthDate(companyVo.getLpBirthDt());

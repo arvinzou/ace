@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.CounselorService;
+import com.huacainfo.ace.jxb.service.PostLevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WCounselorController extends JxbBaseController {
     @Autowired
     private CounselorService counselorService;
+    @Autowired
+    private PostLevelService postLevelService;
 
 
     /**
@@ -35,4 +38,16 @@ public class WCounselorController extends JxbBaseController {
         return counselorService.accountInfo(counselorId);
     }
 
+    /**
+     * 获取绩效考核数据
+     *
+     * @param quarter     1-第一季度，2-第二季度，3-第三季度，4-第四季度 必传
+     * @param counselorId 咨询师id 可选
+     * @return ResultResponse
+     */
+    @RequestMapping("/examine")
+    public ResultResponse examine(String quarter, String counselorId) {
+
+        return postLevelService.examine(quarter, counselorId);
+    }
 }

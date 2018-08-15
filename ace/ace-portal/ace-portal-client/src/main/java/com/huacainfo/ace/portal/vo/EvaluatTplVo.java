@@ -1,7 +1,10 @@
 
 package com.huacainfo.ace.portal.vo;
 
+import com.huacainfo.ace.portal.model.EvaluatGauge;
 import com.huacainfo.ace.portal.model.EvaluatTpl;
+
+import java.util.List;
 
 
 public class EvaluatTplVo extends EvaluatTpl {
@@ -47,6 +50,35 @@ public class EvaluatTplVo extends EvaluatTpl {
 
     private String content0;
     private String categoryName;
+
+    private List<EvaluatCaseVo> EvaluatCaseList;
+    private Integer testedTotal;
+
+    public List<EvaluatCaseVo> getEvaluatCaseList() {
+        return EvaluatCaseList;
+    }
+
+    public void setEvaluatCaseList(List<EvaluatCaseVo> evaluatCaseList) {
+        EvaluatCaseList = evaluatCaseList;
+    }
+
+    public Integer getTestedTotal() {
+        return testedTotal;
+    }
+
+    public void setTestedTotal(Integer testedTotal) {
+        this.testedTotal = testedTotal;
+    }
+
+    private List<EvaluatGauge> Gaugelist;
+
+    public List<EvaluatGauge> getGaugelist() {
+        return Gaugelist;
+    }
+
+    public void setGaugelist(List<EvaluatGauge> gaugelist) {
+        Gaugelist = gaugelist;
+    }
 
     public Integer getInterval6() {
         return interval6;

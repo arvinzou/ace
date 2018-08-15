@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.model.EvaluatGauge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,13 +53,24 @@ public class EvaluatTplController extends PortalBaseController {
 	@RequestMapping(value = "/findEvaluatTplList.do")
 	@ResponseBody
 	public PageResult<EvaluatTplVo> findEvaluatTplList(EvaluatTplQVo condition,
-			PageParamNoChangeSord page) throws Exception {
-        condition.setSyid(this.getCurUserProp().getActiveSyId());
-        PageResult<EvaluatTplVo> rst = this.evaluatTplService.findEvaluatTplList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
+													   PageParamNoChangeSord page) throws Exception {
+		condition.setSyid(this.getCurUserProp().getActiveSyId());
+		PageResult<EvaluatTplVo> rst = this.evaluatTplService.findEvaluatTplList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+		if (rst.getTotal() == 0) {
 			rst.setTotal(page.getTotalRecord());
 		}
-	
+
+		return rst;
+	}
+
+	@RequestMapping(value = "/findEvaluatTplListVo.do")
+	@ResponseBody
+	public PageResult<EvaluatTplVo> findEvaluatTplListVo(EvaluatTplQVo condition, PageParamNoChangeSord page) throws Exception {
+		condition.setSyid(this.getCurUserProp().getActiveSyId());
+		PageResult<EvaluatTplVo> rst = this.evaluatTplService.findEvaluatTplListVo(condition, page.getPage(), page.getLimit(), page.getOrderBy());
+		if (rst.getTotal() == 0) {
+			rst.setTotal(page.getTotalRecord());
+		}
 		return rst;
 	}
     /**
@@ -77,6 +89,18 @@ public class EvaluatTplController extends PortalBaseController {
 	public MessageResponse insertEvaluatTpl(String jsons) throws Exception {
         return this.evaluatTplService.insertEvaluatTpl(jsons, this.getCurUserProp());
     }
+
+
+	@RequestMapping(value = "/insertEvaluatTplVo.do")
+	@ResponseBody
+	public MessageResponse insertEvaluatTplVo(String jsons) throws Exception {
+
+		JSONObject jsonObj = JSON.parseObject(jsons);
+		EvaluatTpl obj = JSON.parseObject(jsonObj.getString("evaluatTpl"), EvaluatTpl.class);
+		List<EvaluatGauge> lists = JSON.parseArray(jsonObj.getString("evaluatGauge"), EvaluatGauge.class);
+		return this.evaluatTplService.insertEvaluatTplVo(obj, lists, this.getCurUserProp());
+	}
+
     /**
 	 *
 	    * @Title:updateEvaluatTpl
@@ -93,6 +117,31 @@ public class EvaluatTplController extends PortalBaseController {
 	public MessageResponse updateEvaluatTpl(String jsons) throws Exception {
         return this.evaluatTplService.updateEvaluatTpl(jsons, this.getCurUserProp());
     }
+
+
+	/**
+	 * @throws
+	 * @Title:updateEvaluatTpl
+	 * @Description: TODO(更新评测)
+	 * @param: @param jsons
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-06-09
+	 */
+	@RequestMapping(value = "/updateEvaluatTplVo.do")
+	@ResponseBody
+	public MessageResponse updateEvaluatTplVo(String jsons) throws Exception {
+		JSONObject jsonObj = JSON.parseObject(jsons);
+		EvaluatTpl obj = JSON.parseObject(jsonObj.getString("evaluatTpl"), EvaluatTpl.class);
+		List<EvaluatGauge> lists = JSON.parseArray(jsonObj.getString("evaluatGauge"), EvaluatGauge.class);
+		return this.evaluatTplService.updateEvaluatTplVo(obj, lists, this.getCurUserProp());
+	}
+
+
+
+
+
     /**
 	 *
 	    * @Title:selectEvaluatTplByPrimaryKey
@@ -129,6 +178,15 @@ public class EvaluatTplController extends PortalBaseController {
 		String id = json.getString("id");
 		return this.evaluatTplService.deleteEvaluatTplByEvaluatTplId(id,
 				this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/deleteEvaluatTpl.do")
+	@ResponseBody
+	public MessageResponse deleteEvaluatTpl(String jsons)
+			throws Exception {
+		JSONObject json = JSON.parseObject(jsons);
+		String id = json.getString("id");
+		return this.evaluatTplService.deleteEvaluatTpl(id, this.getCurUserProp());
 	}
 
 	/**

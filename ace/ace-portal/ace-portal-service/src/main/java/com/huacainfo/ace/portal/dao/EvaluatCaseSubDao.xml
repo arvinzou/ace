@@ -6,13 +6,14 @@
     <result column="evaluatCaseId" jdbcType="VARCHAR" property="evaluatCaseId" />
     <result column="key" jdbcType="VARCHAR" property="key" />
       <result column="sort" jdbcType="INTEGER" property="sort"/>
+      <result column="optionScore" jdbcType="INTEGER" property="optionScore"/>
       <result column="isAnswer" jdbcType="CHAR" property="isAnswer"/>
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="cntImg" jdbcType="VARCHAR" property="cntImg" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
   <sql id="Base_Column_List">
-      id, evaluatCaseId, sort,isAnswer, name, cntImg, createDate
+      id, evaluatCaseId, sort,optionScore,isAnswer, name, cntImg, createDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -29,11 +30,11 @@
     where evaluatCaseId = #{evaluatCaseId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatCaseSub">
-      insert into evaluat_case_sub (id, evaluatCaseId, key, sort, isAnswer,
+      insert into evaluat_case_sub (id, evaluatCaseId, key, sort, optionScore, isAnswer,
       name, cntImg, createDate
       )
       values (#{id,jdbcType=VARCHAR}, #{evaluatCaseId,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR},
-      #{sort,jdbcType=INTEGER}, #{isAnswer,jdbcType=CHAR},
+      #{sort,jdbcType=INTEGER},#{optionScore,jdbcType=INTEGER}, #{isAnswer,jdbcType=CHAR},
       #{name,jdbcType=VARCHAR}, #{cntImg,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -51,6 +52,9 @@
             </if>
             <if test="sort != null">
                 sort,
+            </if>
+            <if test="optionScore != null">
+                optionScore,
             </if>
             <if test="isAnswer != null">
                 isAnswer,
@@ -78,6 +82,9 @@
             <if test="sort != null">
                 #{sort,jdbcType=INTEGER},
             </if>
+            <if test="optionScore != null">
+                #{optionScore,jdbcType=INTEGER},
+            </if>
             <if test="isAnswer != null">
                 #{isAnswer,jdbcType=CHAR},
             </if>
@@ -104,6 +111,9 @@
             <if test="sort != null">
                 sort = #{sort,jdbcType=INTEGER},
             </if>
+            <if test="optionScore != null">
+                optionScore = #{optionScore,jdbcType=INTEGER},
+            </if>
             <if test="isAnswer != null">
                 isAnswer = #{isAnswer,jdbcType=CHAR},
             </if>
@@ -124,6 +134,7 @@
     set evaluatCaseId = #{evaluatCaseId,jdbcType=VARCHAR},
       key = #{key,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
+      optionScore = #{optionScore,jdbcType=INTEGER},
       isAnswer = #{isAnswer,jdbcType=CHAR},
       name = #{name,jdbcType=VARCHAR},
       cntImg = #{cntImg,jdbcType=VARCHAR},

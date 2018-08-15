@@ -33,6 +33,9 @@ public interface EvaluatDataDao {
 
     int getRanking(@Param("condition") EvaluatData condition);
 
+
+    int getTotal(@Param("condition") EvaluatData condition);
+
 	int isExit(EvaluatData record);
 
 	List<Map<String,Object>> getList(Map<String,Object> params);

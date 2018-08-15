@@ -26,7 +26,7 @@ public interface EvaluatCaseDao {
 
 	int findCount(@Param("condition") EvaluatCaseQVo condition);
 
-    int isExit(EvaluatCase condition);
+    int isExit(@Param("condition") EvaluatCase condition);
 
 	List<Map<String,Object>> getList(Map<String,Object> params);
 

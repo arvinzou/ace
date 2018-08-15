@@ -1,8 +1,10 @@
 package com.huacainfo.ace.cu.vo;
 
 import com.huacainfo.ace.cu.model.CuProject;
+import com.huacainfo.ace.cu.model.CuProjectRes;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 
 public class CuProjectVo extends CuProject {
@@ -26,6 +28,19 @@ public class CuProjectVo extends CuProject {
      * 今日募集捐款次数
      */
     private int todayDonateCount;
+
+    /**
+     * 录播资源列表
+     */
+    private List<CuProjectRes> carousel;
+
+    public List<CuProjectRes> getCarousel() {
+        return carousel;
+    }
+
+    public void setCarousel(List<CuProjectRes> carousel) {
+        this.carousel = carousel;
+    }
 
     public String getParentProjectName() {
         return parentProjectName;

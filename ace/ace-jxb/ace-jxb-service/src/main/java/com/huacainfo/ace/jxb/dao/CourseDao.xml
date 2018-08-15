@@ -221,17 +221,19 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseVo">
-
+        <result column="auditRst" jdbcType="VARCHAR" property="auditRst"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum,
-        remark, status, createUserId, createDate, introduce
+        IFNULL(ca.rst,'0') as auditRst,
+        t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
+        t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
         from course t
+        left join course_audit ca on t.id = ca.courseId
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -252,6 +254,7 @@
 
     <sql id="whereCondition">
         from course t
+        left join course_audit ca on t.id =ca.courseId
         where 1=1
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and IFNULL(t.status,'1') = #{condition.status,jdbcType=VARCHAR}
@@ -259,7 +262,12 @@
         <if test="condition.type !=null and condition.type !=&quot;&quot;">
             and t.type = #{condition.type,jdbcType=VARCHAR}
         </if>
-
+        <if test="condition.createUserId !=null and condition.createUserId !=&quot;&quot;">
+            and t.createUserId = #{condition.createUserId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.auditRst !=null and condition.auditRst !=&quot;&quot;">
+            and t.auditRst = #{condition.auditRst,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">

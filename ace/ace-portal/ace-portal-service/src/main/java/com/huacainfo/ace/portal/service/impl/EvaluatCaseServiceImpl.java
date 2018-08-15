@@ -133,6 +133,19 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
     }
 
 
+    @Override
+    public PageResult<EvaluatCaseVo> findEvaluatCaseListSecond(EvaluatCaseQVo condition, int page, int limit, String orderBy) throws Exception {
+        PageResult<EvaluatCaseVo> rst = new PageResult<EvaluatCaseVo>();
+        List<EvaluatCaseVo> list = this.evaluatCaseDao.findList(condition, (page - 1) * limit, limit, orderBy);
+        rst.setRows(list);
+        if (page <= 1) {
+            int allRows = this.evaluatCaseDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+
     /**
      * @throws
      * @Title:insertEvaluatCase
@@ -178,6 +191,53 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
 //        if (temp > 0) {
 //            return new MessageResponse(1, "题目名称重复！");
 //        }
+        o.setCreateDate(new Date());
+        this.evaluatCaseDao.insert(o);
+        this.dataBaseLogService.log("添加题目", "题目", "", o.getTitle(),
+                o.getTitle(), userProp);
+        return new MessageResponse(0, "添加题目完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:insertEvaluatCase
+     * @Description: TODO(添加题目)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-06-09
+     */
+    @Override
+    public MessageResponse insertEvaluatCaseVo(EvaluatCase o, List<EvaluatCaseSub> list, UserProp userProp) throws Exception {
+        String evaluatCaseId = GUIDUtil.getGUID();
+        o.setId(evaluatCaseId);
+        if (CommonUtils.isBlank(evaluatCaseId)) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getEvaluatTplId())) {
+            return new MessageResponse(1, "所属评测模板不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getType())) {
+            return new MessageResponse(1, "选题类型(1单选2多选)不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getScore())) {
+            return new MessageResponse(1, "分值不能为空！");
+        }
+        int temp = this.evaluatCaseDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "题目名称重复！");
+        }
+        for (EvaluatCaseSub item : list) {
+            item.setEvaluatCaseId(evaluatCaseId);
+            item.setSort(1);
+            item.setIsAnswer("0");
+            this.evaluatCaseSubService.insertEvaluatCaseSub(item, userProp);
+        }
         o.setCreateDate(new Date());
         this.evaluatCaseDao.insert(o);
         this.dataBaseLogService.log("添加题目", "题目", "", o.getTitle(),
@@ -235,6 +295,42 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
         return new MessageResponse(0, "变更题目完成！");
     }
 
+    @Override
+    public MessageResponse updateEvaluatCaseVo(EvaluatCase o, List<EvaluatCaseSub> list, UserProp userProp)
+            throws Exception {
+        String evaluatCaseId = o.getId();
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getEvaluatTplId())) {
+            return new MessageResponse(1, "所属评测模板不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "标题不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getType())) {
+            return new MessageResponse(1, "选题类型(1单选2多选)不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getScore())) {
+            return new MessageResponse(1, "分值不能为空！");
+        }
+        int temp = this.evaluatCaseDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "题目名称重复！");
+        }
+        this.evaluatCaseSubDao.deleteByEvaluatCaseId(evaluatCaseId);
+        for (EvaluatCaseSub item : list) {
+            item.setEvaluatCaseId(evaluatCaseId);
+            item.setSort(1);
+            item.setIsAnswer("0");
+            this.evaluatCaseSubService.insertEvaluatCaseSub(item, userProp);
+        }
+        this.evaluatCaseDao.updateByPrimaryKey(o);
+        this.dataBaseLogService.log("变更题目", "题目", "", o.getTitle(),
+                o.getTitle(), userProp);
+        return new MessageResponse(0, "变更题目完成！");
+    }
+
     /**
      * @throws
      * @Title:selectEvaluatCaseByPrimaryKey
@@ -248,7 +344,9 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
     @Override
     public SingleResult<EvaluatCaseVo> selectEvaluatCaseByPrimaryKey(String id) throws Exception {
         SingleResult<EvaluatCaseVo> rst = new SingleResult<EvaluatCaseVo>();
-        rst.setValue(this.evaluatCaseDao.selectByPrimaryKey(id));
+        EvaluatCaseVo evaluatCaseVo = this.evaluatCaseDao.selectByPrimaryKey(id);
+        evaluatCaseVo.setCaseSubData(this.evaluatCaseSubDao.findLists(evaluatCaseVo.getId()));
+        rst.setValue(evaluatCaseVo);
         return rst;
     }
 
@@ -264,9 +362,9 @@ public class EvaluatCaseServiceImpl implements EvaluatCaseService {
      * @version: 2018-06-09
      */
     @Override
-    public MessageResponse deleteEvaluatCaseByEvaluatCaseId(String id,
-                                                            UserProp userProp) throws Exception {
+    public MessageResponse deleteEvaluatCaseByEvaluatCaseId(String id, UserProp userProp) throws Exception {
         this.evaluatCaseDao.deleteByPrimaryKey(id);
+        this.evaluatCaseSubDao.deleteByEvaluatCaseId(id);
         this.dataBaseLogService.log("删除题目", "题目", String.valueOf(id),
                 String.valueOf(id), "题目", userProp);
         return new MessageResponse(0, "题目删除完成！");

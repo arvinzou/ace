@@ -170,8 +170,7 @@
 
     <select id="isExit" resultType="int">
         select count(*)
-        from
-        evaluat_type where
+        from evaluat_type where
         name=#{condition.name,jdbcType=VARCHAR}
         and
         syid=#{condition.syid,jdbcType=VARCHAR}
@@ -207,9 +206,11 @@
         select t.id,t.name
         from evaluat_type t
         where t.syid=#{params.syid}
+        <if test="params.q !=null and params.q !=&quot;&quot;">
         and t.name like concat('%',#{params.q},'%')
-        order by t.sort
-        limit 0,20
+        </if>
+        order by t.sort,createDate DESC
+        limit 0,50
     </select>
 
 </mapper>

@@ -4,7 +4,7 @@ var app =angular.module(ngAppName, []);
 var recordList = [];
 var type = "";
 var status = null;
-app.controller(ngControllerName,function($scope){
+app.controller(ngControllerName,function($scope,$sce){
 	var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
     var primaryId = null;
@@ -18,11 +18,13 @@ app.controller(ngControllerName,function($scope){
                 type = value;
                 $scope.type = type;
             }
-            if(name == "projectId"){
+           /* if(name == "projectId"){
                 primaryId = value;
-            }
+            }*/
         }
     }
+
+    primaryId = "72dabe1c537d4b5d9ff57a211532fb3d";
     /**
      * 项目详情
      */
@@ -30,7 +32,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findDetail",
         type:"post",
         async:false,
-        data:{projectId: primaryId},
+        data:{projectId: '72dabe1c537d4b5d9ff57a211532fb3d'},
         success:function(result){
             if(result.status == 0) {
                 $scope.projectInfo = result.data;
@@ -56,7 +58,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findUsedRecordList",
         type:"post",
         async:false,
-        data:{projectId: primaryId, start: 0, limit: 9999},
+        data:{projectId: '72dabe1c537d4b5d9ff57a211532fb3d', start: 0, limit: 9999},
         success:function(result){
             if(result.status == 0) {
                 $scope.useRecords = result.data.rows;
@@ -83,7 +85,7 @@ app.controller(ngControllerName,function($scope){
         url: "/cu/www/project/findDonateList",
         type:"post",
         async:false,
-        data:{projectId: primaryId, start: 0, limit: 9999},
+        data:{projectId: '72dabe1c537d4b5d9ff57a211532fb3d', start: 0, limit: 9999},
         success:function(result){
             if(result.status == 0) {
                 $scope.donationList = result.data.rows;
@@ -113,6 +115,12 @@ app.controller(ngControllerName,function($scope){
             window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
         }
     }
+
+    $scope.videoUrlFun = function(url){
+        //$sce.trustAsResourceUrl方法把普通路径处理加工成一个angular环境可识别，并认为是安全的路径来使用
+        var urlFun = $sce.trustAsResourceUrl(url);
+        return urlFun;
+    };
 });
 app.filter('to_trusted', function ($sce) {
         return function (text) {

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/testing1.css"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <script src="js/reminit.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/juicer-min.js" type="text/javascript" charset="utf-8"></script>
+    <title></title>
+</head>
+
+<body>
+<div class="test_main">
+    <div id="testInfo">
+
+    </div>
+    <div class="button">
+        <div class="box">
+            <input class="start" type="button" name="" id="" value="开始测试"/>
+            <!--<input class="pay" type="button" name="" id="" value="立即购买"/>-->
+            <!--<input class="right result" type="button" name="" id="" value="查看结果"/>-->
+        </div>
+    </div>
+</div>
+<div class="test_content">
+    <div class="swiper-container swiper-container1">
+        <div class="swiper-wrapper">
+
+        </div>
+
+    </div>
+    <div class="bottom_bar">
+    </div>
+</div>
+<div class="test_result">
+    <div class="center">
+        <div class="content">
+            <div class="text">
+                <p>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script id="temp_testInfo" type="text/template">
+
+    <div class="cover">
+        <img src="${data.cover}" alt=""/>
+    </div>
+    <div class="test_info">
+        <p class="title">${data.name}</p>
+        <p class="price">￥${data.originalCost}</p>
+        <div class="test_info_bottom">
+            <div class="table">
+                <span>·${data.evaluatCaseList.length}道精选问题</span>
+                <span>·预计${data.evaluatCaseList.length/3}分钟</span>
+                <span>·${data.testedTotal}人已测</span>
+            </div>
+        </div>
+    </div>
+    <div class="explanation">
+        <p class="title">
+            测什么
+        </p>
+        <p class="content">
+            ${data.introduce}
+        </p>
+        <p class="title">
+            测试须知
+        </p>
+        <p class="content">
+            ${data.notice}
+        </p>
+    </div>
+
+</script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="js/testing1.js"></script>
+
+</html>

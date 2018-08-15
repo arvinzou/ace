@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    letter-spacing: 0.03rem;
+    box-sizing: border-box;
+    /*去除系统默认appearance的样式,常用于IOS下移除原生样式*/
+    -webkit-appearance: none;
+    /*当用户轻按一个链接或者JavaScript可点击元素时给元素覆盖一个高亮色
+如果想取消这个高亮，将值设置为全透明即可，比如transparent*/
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    list-style: none;
+    word-break: break-all;
+}
+
+@font-face {
+    font-family: 'iconfont';  /* project id 754790 */
+    src: url('//at.alicdn.com/t/font_754790_21qsl3dqtk6.eot');
+    src: url('//at.alicdn.com/t/font_754790_21qsl3dqtk6.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_754790_21qsl3dqtk6.woff') format('woff'),
+    url('//at.alicdn.com/t/font_754790_21qsl3dqtk6.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_754790_21qsl3dqtk6.svg#iconfont') format('svg');
+}
+
+@charset "UTF-8";
+
+@font-face {
+    font-family: "BAHNSCHRIFT";
+    src: url("../font/BAHNSCHRIFT.woff2") format("woff2"),
+    url("../font/BAHNSCHRIFT.woff") format("woff"),
+    url("../font/BAHNSCHRIFT.ttf") format("truetype"),
+    url("../font/BAHNSCHRIFT.eot") format("embedded-opentype"),
+    url("../font/BAHNSCHRIFT.svg") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+html {
+    height: 100%
+}
+
+body {
+    width: 10rem !important;
+    margin: 0 auto !important;
+    /*文本大小不会根据设备尺寸进行调整。*/
+    -webkit-text-size-adjust: none;
+    /*抗锯齿*/
+    -webkit-font-smoothing: antialiased;
+    /*字体*/
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+input {
+    background: none;
+    outline: none;
+    border: 0px;
+}
+
+/*测试列表样式*****************************start************************************************/
+
+.test_list ul > li {
+    width: 9.2rem;
+    margin: 0 auto;
+    padding: 0.533333rem 0;
+    border-bottom: 1px solid rgba(247, 248, 252, 1);
+}
+
+.test_list ul > li:after, .test_list .left_div .test_info:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.test_list .left_div {
+    float: left;
+    width: 5.893333rem;
+}
+
+.test_list .right_div {
+    width: 2.666666rem;
+    height: 2.666666rem;
+    float: right;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.test_list .right_div img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.test_list .left_div .test_title {
+    font-size: 0.48rem;
+    color: rgba(28, 40, 67, 1);
+    line-height: 0.666666rem;
+    margin-bottom: 0.213333rem;
+}
+
+.test_list .left_div .test_remark {
+    width: 100%;
+    font-size: 0.32rem;
+    color: rgba(196, 200, 214, 1);
+    line-height: 0.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0.133333rem;
+}
+
+.test_list .left_div .price {
+    font-size: 0.346666rem;
+}
+
+.test_list .left_div .price .free {
+    color: rgba(14, 200, 196, 1);
+}
+
+.test_list .left_div .price .now_price {
+    color: rgba(255, 124, 18, 1);
+}
+
+.test_list .left_div .price .old_price {
+    color: rgba(196, 200, 214, 1);
+    text-decoration: line-through;
+}
+
+.test_list .left_div .price {
+    font-size: 0.32rem;
+    line-height: 0.4rem;
+    float: left;
+}
+
+.test_list .left_div .test_total {
+    float: right;
+    font-size: 0.32rem;
+    color: rgba(196, 200, 214, 1);
+    line-height: 0.4rem;
+}
+
+/*测试列表样式*****************************end************************************************/

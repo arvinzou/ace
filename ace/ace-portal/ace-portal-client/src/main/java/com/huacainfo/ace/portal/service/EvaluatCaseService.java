@@ -6,9 +6,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.EvaluatCase;
+import com.huacainfo.ace.portal.model.EvaluatCaseSub;
 import com.huacainfo.ace.portal.vo.EvaluatCaseVo;
 import com.huacainfo.ace.portal.vo.EvaluatCaseQVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +34,8 @@ public interface EvaluatCaseService {
      */
     public abstract PageResult<EvaluatCaseVo> findEvaluatCaseList(EvaluatCaseQVo condition, int start, int limit, String orderBy) throws Exception;
 
+    public abstract PageResult<EvaluatCaseVo> findEvaluatCaseListSecond(EvaluatCaseQVo condition, int page, int limit, String orderBy) throws Exception;
+
 
     public abstract ResultResponse findEvaluatCaseListVo(EvaluatCaseQVo condition, int start, int limit, String orderBy) throws Exception;
 
@@ -48,6 +52,9 @@ public interface EvaluatCaseService {
      */
     public abstract MessageResponse insertEvaluatCase(String json, UserProp userProp) throws Exception;
 
+
+    public abstract MessageResponse insertEvaluatCaseVo(EvaluatCase o, List<EvaluatCaseSub> list, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateEvaluatCase
@@ -61,6 +68,9 @@ public interface EvaluatCaseService {
      */
     public abstract MessageResponse updateEvaluatCase(String jsons, UserProp userProp) throws Exception;
 
+
+    public abstract MessageResponse updateEvaluatCaseVo(EvaluatCase o, List<EvaluatCaseSub> list, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:selectEvaluatCaseByPrimaryKey
@@ -72,6 +82,7 @@ public interface EvaluatCaseService {
      * @version: 2018-06-09
      */
     public abstract SingleResult<EvaluatCaseVo> selectEvaluatCaseByPrimaryKey(String id) throws Exception;
+
 
     /**
      * @throws
