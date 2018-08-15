@@ -4,7 +4,7 @@ var app =angular.module(ngAppName, []);
 var recordList = [];
 var type = "";
 var status = null;
-app.controller(ngControllerName,function($scope){
+app.controller(ngControllerName,function($scope,$sce){
 	var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
     var primaryId = null;
@@ -115,6 +115,12 @@ app.controller(ngControllerName,function($scope){
             window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
         }
     }
+
+    $scope.videoUrlFun = function(url){
+        //$sce.trustAsResourceUrl方法把普通路径处理加工成一个angular环境可识别，并认为是安全的路径来使用
+        var urlFun = $sce.trustAsResourceUrl(url);
+        return urlFun;
+    };
 });
 app.filter('to_trusted', function ($sce) {
         return function (text) {

@@ -24,16 +24,22 @@
 		<div class="projectbox">
 			<div class="project_item">
 				<div class="project_item_image">
-                    <div style="width: 100%;height: 100%;" id="myCarousel" class="carousel slide" data-ride="carousel">
+                    <div style="width: 100%;height: 100%;" id="myCarousel" class="carousel slide">
                         <!-- 轮播（Carousel）指标 -->
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                             <li data-target="#myCarousel" data-slide-to="1"></li>
                             <li data-target="#myCarousel" data-slide-to="2"></li>
+							<li data-target="#myCarousel" data-slide-to="3"></li>
                         </ol>
                         <!-- 轮播（Carousel）项目 -->
                         <div class="carousel-inner">
-                            <div class="item active">
+							<div class="item active">
+								<video src="//cloud.video.taobao.com/play/u/128334655/p/1/e/6/t/1/50022360024.mp4" style="width: 100%;height: 100%;"  autoplay="true" x-webkit-airplay="true" webkit-playsinline="true" airplay="allow" playsinline="allow"  x5-video-player-type="h5" preload="auto" controls>
+									您的设备不支持video。
+								</video>
+							</div>
+							 <div class="item">
                                 <img class="slideImg" ng-src="{{projectInfo.carousel[1].resUrl}}" style="width: 100%;height: 100%;" alt="Second slide">
                             </div>
                             <div class="item">

@@ -266,11 +266,11 @@ app.controller(ngControllerName,function($scope){
 			return;
 		}
 		if((coverUrl01==null || coverUrl02 == null) ||(coverUrl01==undefined || coverUrl02 == undefined)){
-			alert("身份证照未上传！");
+			alert("相关证明材料未上传！");
 			return;
 		}
 		if(coverUrl05 == null || coverUrl05 == undefined){
-            alert("手持身份证照未上传！");
+            alert("相关证明材料未上传！");
             return;
         }
 		if(flagAmount == '' || flagAmount == undefined){
@@ -296,12 +296,12 @@ app.controller(ngControllerName,function($scope){
 				"type":"0"
 			},
 			{
-				"resName":"身份证反面照",
+				"resName":"低保证或扶贫手册",
 				"resUrl":coverUrl02,
 				"type":"1"
 			},
             {
-                "resName":"手持身份证照",
+                "resName":"疾病诊断证明或意外事故",
                 "resUrl":coverUrl05,
                 "type":"2"
             }
