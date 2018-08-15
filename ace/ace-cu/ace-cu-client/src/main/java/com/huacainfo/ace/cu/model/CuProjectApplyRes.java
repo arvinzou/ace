@@ -11,7 +11,10 @@ public class CuProjectApplyRes implements Serializable {
     private String applyId;
 
     /**
-     * 0-身份证正面 1-身份证反面 2-其他证明图片
+     * 身份证正面照：type 0
+     * 低保证或扶贫手册 type 1
+     * 疾病诊断证明或意外事故 type 2
+     * 其他证明： type 3
      */
     private String type;
 

@@ -11,15 +11,16 @@ function init_uploader(config) {
     $("#uploader").pluploadQueue(
         {
             runtimes: 'html5,flash,silverlight,html4',
-            chunk_size: '1mb',
+            chunk_size: '10mb',
             unique_names: true,
             multipart_params: config.multipart_params,
             filters: {
                 max_file_size: '10mb',
-                mime_types: [{
-                    title: "Image files",
-                    extensions: config.extensions
-                }]
+                mime_types: [
+                    {
+                        title: "Image files",
+                        extensions: config.extensions
+                    }]
             },
 
             // Resize images on clientside if we can
@@ -116,83 +117,77 @@ function appendUploadBtn(id) {
     html.push("<a id='btn-upload-add" + id + "' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
     html.push("<a id='btn-upload-view" + id + "' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
     $("#" + id).after(html.join(''));
-    $("#btn-upload-add" + id)
-        .on(
-            'click',
-            function (e) {
-                e.preventDefault();
-                var config = {
-                    extensions: "jpg,gif,png,bmp,jpeg",
-                    url: portalPath + '/files/uploadFile.do',
-                    target: id,
-                    multipart_params: {}
-                };
-                reset_uploader(config);
-                $("#tt").addClass('hide');
-                var dialog = $("#dialog-message")
-                    .removeClass('hide')
-                    .dialog(
-                        {
-                            modal: true,
-                            width: 750,
-                            title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件上传</div></div>",
-                            title_html: true,
-                            buttons: [
-                                {
-                                    html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                                    "class": "btn btn-info btn-xs",
-                                    click: function () {
-                                        $(this).dialog(
-                                            "close");
-                                    }
-                                }
-                            ]
-                        });
-
-            });
-
-    $("#btn-upload-view" + id).on('click',
-        function (e) {
-            e.preventDefault();
-            var dialog = $("#dialog-message-file").removeClass('hide')
-                .dialog(
+    $("#btn-upload-add" + id).on('click', function (e) {
+        e.preventDefault();
+        var config = {
+            extensions: "jpg,gif,png,bmp,jpeg,mp4",
+            url: portalPath + '/files/uploadFile.do',
+            target: id,
+            multipart_params: {}
+        };
+        reset_uploader(config);
+        $("#tt").addClass('hide');
+        var dialog = $("#dialog-message").removeClass('hide').dialog(
+            {
+                modal: true,
+                width: 750,
+                title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件上传</div></div>",
+                title_html: true,
+                buttons: [
                     {
-                        modal: true,
-                        width: 500,
-                        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
-                        title_html: true,
-                        buttons: [{
-                            html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                            "class": "btn btn-info btn-xs",
-                            click: function () {
-                                $(this).dialog("close");
-                            }
+                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+                        "class": "btn btn-info btn-xs",
+                        click: function () {
+                            $(this).dialog(
+                                "close");
                         }
-
-                        ]
-                    });
-            var fileName = $('input[name=' + id + ']').val();
-            if (!fileName || fileName == '') {
-                return;
+                    }
+                ]
             }
-            var src = fileName;
-            var img = new Image();
-            $(img).attr("src", "");
-            //图片加载加载后执行
-            $(img).load(function () {
-                //图片默认隐藏
-                $(this).hide();
-                //移除小动画
-                $(".loading").removeClass("loading").append(this);
-                //使用fadeIn特效
-                $(this).fadeIn("slow");
-            }).error(function () {
-                //加载失败时的处理
-            })
-            //最后设置src
-                .attr("src", src);
+        );
 
-        });
+    });
+
+    $("#btn-upload-view" + id).on('click', function (e) {
+        e.preventDefault();
+        var dialog = $("#dialog-message-file").removeClass('hide')
+            .dialog(
+                {
+                    modal: true,
+                    width: 500,
+                    title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
+                    title_html: true,
+                    buttons: [{
+                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+                        "class": "btn btn-info btn-xs",
+                        click: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+
+                    ]
+                });
+        var fileName = $('input[name=' + id + ']').val();
+        if (!fileName || fileName == '') {
+            return;
+        }
+        var src = fileName;
+        var img = new Image();
+        $(img).attr("src", "");
+        //图片加载加载后执行
+        $(img).load(function () {
+            //图片默认隐藏
+            $(this).hide();
+            //移除小动画
+            $(".loading").removeClass("loading").append(this);
+            //使用fadeIn特效
+            $(this).fadeIn("slow");
+        }).error(function () {
+            //加载失败时的处理
+        }).attr("src", src);//最后设置src
+
+
+    });
 }
 
 // function initPhoto(id) {

@@ -1,15 +1,16 @@
 jQuery(function ($) {
     $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
         _title: function (title) {
-            var $title =
-                this.options.title || '&nbsp;'
-            if (("title_html" in this.options)
-                && this.options.title_html == true)
+            var $title = this.options.title || '&nbsp;'
+            if (("title_html" in this.options) && this.options.title_html == true) {
                 title.html($title);
-            else
+            }
+            else {
                 title.text($title);
+            }
         }
     }));
+
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -62,6 +63,7 @@ jQuery(function ($) {
                     }
                 })
         });
+
     $('#btn-view-edit').on(
         'click',
         function () {
@@ -71,10 +73,6 @@ jQuery(function ($) {
             }
             var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
             var targetAmount = gd.targetAmount;
-            if (!isNull(targetAmount) && !isAmount(targetAmount)) {
-                alert("请输入正确的目标金额!");
-                return;
-            }
 
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
@@ -84,6 +82,10 @@ jQuery(function ($) {
                     recreateForm: true,
                     viewPagerButtons: true,
                     beforeSubmit: function (postdata) {
+                        if (!isNull(targetAmount) && !isAmount(targetAmount)) {
+                            alert("请输入正确的目标金额!");
+                            return [false, "", ""];
+                        }
                         postdata.description = editor.getValue();
                         var coverUrl = postdata.coverUrl;
                         if (!coverUrl.startWith("http")) {
