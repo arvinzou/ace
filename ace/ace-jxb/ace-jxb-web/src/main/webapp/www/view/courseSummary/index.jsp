@@ -227,7 +227,7 @@
         	</div>
 			{@each chapter.sourceList as item, num}
 			{@if item.name != '' && item.name != undefined}
-        	<div class="row">
+        	<div class="row" onclick="playSource('\${item.id}')">
 				<div class="row">
 					<div class="col-xs-2 col-md-2"><img src="img/icon-play.png" class="play" /></div>
 					<div class="col-xs-10 col-md-10">
@@ -254,7 +254,7 @@
 	</script>
 
 		<script id="djchapterTemp"  type="text/template">
-			<div class="row chapter">
+			<div class="row chapter" onclick="playSource('\${data.id}');">
 				<div class="row">
 					<h3 class="title">1.\${data.name}</h3>
 				</div>
