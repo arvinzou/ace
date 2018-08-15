@@ -5,12 +5,13 @@ function loadlocal() {
         loader(urls[i]);
     }
 }
+var primaryId = null;
 function App() {
     loadlocal();
 
     console.log(window.location.href);
     var url =   window.location.search.substring(1);
-    var primaryId = url.substring(url.indexOf('=')+1);
+    primaryId = url.substring(url.indexOf('=')+1);
     console.log(primaryId);
     initData(primaryId);
 }
@@ -89,4 +90,8 @@ function viewHtml(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 
+}
+
+function playSource(sourceId){
+   window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId+'&sourceId='+sourceId;
 }
