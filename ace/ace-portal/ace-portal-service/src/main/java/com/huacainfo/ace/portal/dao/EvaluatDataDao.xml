@@ -131,6 +131,18 @@
     </select>
 
 
+    <select id="getTotal" resultType="int">
+        select count(*) as total
+        from (
+        select count(*)
+        from evaluat_data
+        where evaluatTplId=#{condition.evaluatTplId}
+        group by createUserId
+        ) t
+
+    </select>
+
+
     <select id="getRanking" resultType="int">
 select count(1) as ranking
 FROM (

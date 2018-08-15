@@ -17,12 +17,11 @@ import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.portal.dao.EvaluatCaseDao;
-import com.huacainfo.ace.portal.dao.EvaluatDataDao;
-import com.huacainfo.ace.portal.dao.EvaluatGaugeDao;
+import com.huacainfo.ace.portal.dao.*;
+import com.huacainfo.ace.portal.model.EvaluatData;
 import com.huacainfo.ace.portal.model.EvaluatGauge;
 import com.huacainfo.ace.portal.service.EvaluatGaugeService;
-import com.huacainfo.ace.portal.vo.EvaluatCaseQVo;
+import com.huacainfo.ace.portal.vo.*;
 import org.apache.ibatis.jdbc.SqlRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,12 +33,9 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.dao.EvaluatTplDao;
 import com.huacainfo.ace.portal.model.EvaluatTpl;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.EvaluatTplService;
-import com.huacainfo.ace.portal.vo.EvaluatTplVo;
-import com.huacainfo.ace.portal.vo.EvaluatTplQVo;
 
 @Service("evaluatTplService")
 /**
@@ -66,6 +62,8 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
 
     @Autowired
     private EvaluatCaseDao evaluatCaseDao;
+    @Autowired
+    private EvaluatCaseSubDao evaluatCaseSubDao;
 
     /**
      * @throws
@@ -426,7 +424,19 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
 
     @Override
     public ResultResponse getEvaluatTplByPrimaryKey(String id) throws Exception {
-        return new ResultResponse(0, "模板详情", this.evaluatTplDao.selectByPrimaryKey(id));
+        EvaluatTplVo evaluatTplVo = this.evaluatTplDao.selectByPrimaryKey(id);
+        EvaluatCaseQVo condition = new EvaluatCaseQVo();
+        condition.setEvaluatTplId(id);
+        List<EvaluatCaseVo> list = this.evaluatCaseDao.findList(condition, 0, 200, "");
+        for (EvaluatCaseVo item : list) {
+            List<EvaluatCaseSubVo> listsub = this.evaluatCaseSubDao.findLists(item.getId());
+            item.setCaseSubData(listsub);
+        }
+        evaluatTplVo.setEvaluatCaseList(list);
+        EvaluatData evaluatData = new EvaluatData();
+        evaluatData.setEvaluatTplId(id);
+        evaluatTplVo.setTestedTotal(this.evaluatDataDao.getTotal(evaluatData));
+        return new ResultResponse(0, "模板详情", evaluatTplVo);
     }
 
     /**

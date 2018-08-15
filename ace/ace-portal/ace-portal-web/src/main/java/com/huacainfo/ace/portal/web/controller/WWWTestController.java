@@ -57,7 +57,6 @@ public class WWWTestController extends PortalBaseController {
     @RequestMapping(value = "/getEvaluatTplList.do")
     @ResponseBody
     public ResultResponse getEvaluatTplList(EvaluatTplQVo condition, PageParamNoChangeSord page) throws Exception {
-        condition.setSyid(this.getCurUserProp().getActiveSyId());
         return this.evaluatTplService.getEvaluatTplList(condition, page.getPage(), page.getLimit(), page.getOrderBy());
     }
 
@@ -110,7 +109,7 @@ public class WWWTestController extends PortalBaseController {
     @RequestMapping(value = "/getEvaluation.do")
     @ResponseBody
     public ResultResponse getEvaluation(EvaluatGaugeQVo condition) throws Exception {
-        Userinfo userinfo = getCurUserinfo();
+        Userinfo userinfo = this.getCurUserinfo();
         return this.evaluatGaugeService.getEvaluation(condition, userinfo);
     }
 
@@ -130,9 +129,9 @@ public class WWWTestController extends PortalBaseController {
 
     @RequestMapping(value = "/selectTestTypeList.do")
     @ResponseBody
-    public Map<String, Object> selectAuthor() throws Exception {
+    public Map<String, Object> selectAuthor(String syid) throws Exception {
         Map<String, Object> params = new HashMap<String, Object>();
-        params.put("syid", this.getCurUserProp().getActiveSyId());
+        params.put("syid", syid);
         return this.evaluatTypeService.selectType(params);
     }
 }

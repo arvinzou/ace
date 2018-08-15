@@ -51,6 +51,24 @@ public class EvaluatTplVo extends EvaluatTpl {
     private String content0;
     private String categoryName;
 
+    private List<EvaluatCaseVo> EvaluatCaseList;
+    private Integer testedTotal;
+
+    public List<EvaluatCaseVo> getEvaluatCaseList() {
+        return EvaluatCaseList;
+    }
+
+    public void setEvaluatCaseList(List<EvaluatCaseVo> evaluatCaseList) {
+        EvaluatCaseList = evaluatCaseList;
+    }
+
+    public Integer getTestedTotal() {
+        return testedTotal;
+    }
+
+    public void setTestedTotal(Integer testedTotal) {
+        this.testedTotal = testedTotal;
+    }
 
     private List<EvaluatGauge> Gaugelist;
 
