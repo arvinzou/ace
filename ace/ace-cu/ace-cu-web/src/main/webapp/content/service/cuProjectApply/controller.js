@@ -59,10 +59,7 @@ jQuery(function ($) {
                     $.jgrid.nav.alerttext)
             }
             var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            // if (gd.status != "1") {
-            //     alert("资料已审核，请去调整项目资料")
-            //     return;
-            // }
+            //
             jQuery(cfg.grid_selector).jqGrid(
                 'editGridRow',
                 gr,
@@ -85,9 +82,13 @@ jQuery(function ($) {
                     }
                 });
             //图片加载
-            $("#tr_title1 h5").after("<div id='custom-idCardInfo'></div>");
-            $("#tr_title2 h5").after("<div id='custom-others'></div>");
+            $("#tr_title_ID h5").after("<div id='custom-idCardInfo'></div>");
+            $("#tr_title_FP h5").after("<div id='custom-fp'></div>");
+            $("#tr_title_ZD h5").after("<div id='custom-zd'></div>");
+            $("#tr_title_OT h5").after("<div id='custom-others'></div>");
             initIdCardInfo(gd.id, "custom-idCardInfo");
+            initFP(gd.id, "custom-fp");
+            initZD(gd.id, "custom-zd");
             initOthers(gd.id, "custom-others");
         });
     $('#btn-view-del').on(
@@ -300,9 +301,28 @@ function initIdCardInfo(applyId, divId) {
     $.ajax({
         type: "get",
         url: contextPath + "/cuProjectApply/findResList",
-        data: {applyId: applyId, resTypes: "0,1,2"},
+        data: {applyId: applyId, resTypes: "0"},
         success: function (rst, textStatus) {
-            // console.log(rst.data);
+            renderImage(rst.data, divId);
+        }
+    });
+}
+function initFP(applyId, divId) {
+    $.ajax({
+        type: "get",
+        url: contextPath + "/cuProjectApply/findResList",
+        data: {applyId: applyId, resTypes: "1"},
+        success: function (rst, textStatus) {
+            renderImage(rst.data, divId);
+        }
+    });
+}
+function initZD(applyId, divId) {
+    $.ajax({
+        type: "get",
+        url: contextPath + "/cuProjectApply/findResList",
+        data: {applyId: applyId, resTypes: "2"},
+        success: function (rst, textStatus) {
             renderImage(rst.data, divId);
         }
     });
@@ -326,9 +346,9 @@ function renderImage(rst, divId) {
         html.push('<a href="' + o.resUrl + '" title="' + o.resName + '" target="view_window" data-rel="colorbox" class="cboxElement">');
         html.push('<img height="200" width="200" class="photo" src="' + o.resUrl + '">');
         html.push('</a>');
-        html.push('<div style="text-align:center">');
+        // html.push('<div style="text-align:center">');
         // html.push(o.nickname);
-        html.push('</div>');
+        // html.push('</div>');
         html.push('</li>');
     });
     html.push('</ul>');
