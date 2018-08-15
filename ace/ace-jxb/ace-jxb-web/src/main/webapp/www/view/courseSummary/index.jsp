@@ -53,7 +53,7 @@
 			<span class="span_01">试听</span>
 			<span class="span_02">共计</span>
 			<span class="span_03" id="totalCost"></span>
-			<button class="buy">立即购买</button>
+			<button class="buy" onclick="buy();">立即购买</button>
 		</div>
 
 		<script id="bannerTemp" type="text/template">
