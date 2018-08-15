@@ -19,6 +19,12 @@ public class CourseSource implements Serializable {
     private String mediUrl;
 
     private Integer duration;
+
+    /**
+     * 视频介绍
+     */
+    private String introduction;
+
     /**
      * 是否免费 0-否，1-是
      */
@@ -27,6 +33,14 @@ public class CourseSource implements Serializable {
     private Integer displaySeq;
 
     private Date createDate;
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
 
     public String getId() {
         return id;

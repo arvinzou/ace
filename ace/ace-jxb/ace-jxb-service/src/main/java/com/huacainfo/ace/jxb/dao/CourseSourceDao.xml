@@ -7,13 +7,14 @@
         <result column="partId" jdbcType="VARCHAR" property="partId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="mediUrl" jdbcType="VARCHAR" property="mediUrl"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
         <result column="duration" jdbcType="INTEGER" property="duration"/>
         <result column="free" jdbcType="VARCHAR" property="free"/>
         <result column="displaySeq" jdbcType="INTEGER" property="displaySeq"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, courseId, partId, name, mediUrl, duration, free, displaySeq, createDate
+        id, courseId, partId, name, mediUrl, duration, free, displaySeq, createDate, introduction
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -27,12 +28,13 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.CourseSource">
     insert into course_source (id, courseId, partId, 
-      name, mediUrl, duration, 
-      free, displaySeq, createDate
+      name, mediUrl, duration,
+        free, displaySeq, createDate, introduction
       )
     values (#{id,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, #{partId,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{mediUrl,jdbcType=VARCHAR}, #{duration,jdbcType=INTEGER}, 
-      #{free,jdbcType=VARCHAR}, #{displaySeq,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}
+      #{name,jdbcType=VARCHAR}, #{mediUrl,jdbcType=VARCHAR}, #{duration,jdbcType=INTEGER},
+        #{free,jdbcType=VARCHAR}, #{displaySeq,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP},
+        #{introduction,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.CourseSource">
@@ -65,6 +67,10 @@
             <if test="createDate != null">
                 createDate,
             </if>
+            <if test="introduction != null">
+                introduction,
+            </if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -93,6 +99,9 @@
             </if>
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -123,6 +132,9 @@
             <if test="createDate != null">
                 createDate = #{createDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -135,7 +147,8 @@
       duration = #{duration,jdbcType=INTEGER},
       free = #{free,jdbcType=VARCHAR},
       displaySeq = #{displaySeq,jdbcType=INTEGER},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        introduction = #{introduction,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -144,7 +157,7 @@
 
     </resultMap>
     <sql id="Vo_Column_List">
-        id, courseId, partId, name, mediUrl, duration, free, displaySeq, createDate
+        id, courseId, partId, name, mediUrl, duration, free, displaySeq, createDate, introduction
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
