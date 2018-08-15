@@ -1,0 +1,20 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+.title{
+	height: 2rem;
+	border-bottom: 1px solid #F7F8FC;
+}
+.title h3{
+	color: #1C2843;
+	font-size: 0.586666rem;
+	font-weight: bold;
+}
+.content p{
+	color: #5C6681;
+	font-size: 0.4rem;
+	line-height: 0.666666rem;
+	padding-top: 0.786666rem;
+}
