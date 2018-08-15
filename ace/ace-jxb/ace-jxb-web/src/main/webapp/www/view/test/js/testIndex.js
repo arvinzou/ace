@@ -1,4 +1,4 @@
-var bannerSwiper, menuSwiper;
+var bannerSwiper, menuSwiper, syid = 'jxb';
 
 var imgMap = {
     人格测试: 'img/rgcs.png',
@@ -48,7 +48,8 @@ function initList() {
     var url = '/portal/www/test/getEvaluatTplList.do';
     var data = {
         page: 1,
-        limit: 20
+        limit: 20,
+        syid: syid
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -96,7 +97,10 @@ function initSwriper() {
 /*获取菜单数据*/
 function initMenu() {
     var url = '/portal/www/test/selectTestTypeList.do';
-    $.getJSON(url, function (result) {
+    var data = {
+        syid: syid
+    }
+    $.getJSON(url, data, function (result) {
         viewMenu(result.rows);
     })
 }

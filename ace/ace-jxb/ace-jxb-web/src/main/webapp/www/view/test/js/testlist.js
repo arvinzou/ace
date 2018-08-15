@@ -1,4 +1,4 @@
-var mySwiper, category;
+var mySwiper, category, syid = 'jxb';
 $(function () {
     initCategory();
     initSwriper();
@@ -36,7 +36,8 @@ function initList(sord, orderBy) {
         sord: sord,
         category: category,
         page: 1,
-        limit: 20
+        limit: 20,
+        syid: syid
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -74,7 +75,10 @@ function parseQueryString(prop) {
 /*获取菜单数据*/
 function initMenu() {
     var url = '/portal/www/test/selectTestTypeList.do';
-    $.getJSON(url, function (result) {
+    var data = {
+        syid: syid
+    }
+    $.getJSON(url, data, function (result) {
         viewMenu(result.rows);
     })
     initList();
