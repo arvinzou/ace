@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.CourseCmtDao;
 import com.huacainfo.ace.jxb.model.CourseCmt;
@@ -173,6 +174,25 @@ public class CourseCmtServiceImpl implements CourseCmtService {
                 String.valueOf(id),
                 String.valueOf(id), "课程评论", userProp);
         return new MessageResponse(0, "课程评论删除完成！");
+    }
+
+    /**
+     * 功能描述: 新增课程评论
+     *
+     * @param courseId 课程id
+     * @param userId   评论人id
+     * @param content  评论内容
+     */
+    @Override
+    public int addCourseCmt(String courseId, String userId, String content) {
+        CourseCmt cmt = new CourseCmt();
+        cmt.setId(GUIDUtil.getGUID());
+        cmt.setCourseId(courseId);
+        cmt.setUserId(userId);
+        cmt.setContent(content);
+        cmt.setCreateDate(DateUtil.getNowDate());
+
+        return courseCmtDao.insertSelective(cmt);
     }
 
 }

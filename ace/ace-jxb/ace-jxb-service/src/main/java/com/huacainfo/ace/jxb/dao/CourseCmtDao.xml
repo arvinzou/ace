@@ -6,21 +6,17 @@
         <result column="courseId" jdbcType="VARCHAR" property="courseId"/>
         <result column="userId" jdbcType="VARCHAR" property="userId"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
-    </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.jxb.model.CourseCmt">
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, courseId, userId, createDate
+        id, courseId, userId, createDate, content
   </sql>
     <sql id="Blob_Column_List">
     content
   </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
         from course_cmt
         where id = #{id,jdbcType=VARCHAR}
     </select>
@@ -29,8 +25,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
-    insert into course_cmt (id, courseId, userId, 
-      createDate, content)
+        insert into course_cmt (id, courseId, userId, createDate, content)
     values (#{id,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
   </insert>
@@ -89,19 +84,62 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
-    update course_cmt
-    set courseId = #{courseId,jdbcType=VARCHAR},
-      userId = #{userId,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
     update course_cmt
     set courseId = #{courseId,jdbcType=VARCHAR},
       userId = #{userId,jdbcType=VARCHAR},
+        content = #{content,jdbcType=LONGVARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseCmtVo">
+    </resultMap>
+    <sql id="Vo_Column_List">
+      u.nickname, u.headimgurl,
+      t.id, t.courseId, t.userId, t.createDate, t.content
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from course_cmt t
+        left join portal.userinfo u on t.userId = u.unionid
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from course_cmt t
+        left join portal.userinfo u on t.userId = u.unionid
+        where 1=1
+        <if test="condition.courseId !=null and condition.courseId !=&quot;&quot;">
+            and t.courseId = #{condition.courseId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
+        select count(1)
+        from counselor
+        where 1=1
+    </select>
 </mapper>
