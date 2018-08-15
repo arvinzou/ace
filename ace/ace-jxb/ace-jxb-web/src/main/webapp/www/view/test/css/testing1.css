@@ -3,7 +3,7 @@
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    display: none;
+    display: block;
 }
 
 .test_main .cover {
@@ -123,6 +123,7 @@ input.result {
     background-color: #F0FEFE;
     padding-bottom: 1.066666rem;
     position: relative;
+    visibility: hidden;
 }
 
 .test_content .bottom_bar {
@@ -162,6 +163,7 @@ input.result {
     background-color: #fff;
     border-radius: 20px;
     position: relative;
+    box-shadow: 0 0 20px 2px #cdf7f7;
 }
 
 section .jindu {
@@ -263,3 +265,64 @@ section .jindu {
     /*right: */
     margin-top: 0.5rem;
 }
+
+/**************结果页 start***************************************/
+.test_result {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 1.066666rem;
+    position: fixed;
+    top: 0px;
+    background: #F0FEFE url('../img/bottom_bar.png') no-repeat;
+    background-size: 100%;
+    background-position-y: bottom;
+    display: none;
+}
+
+.center {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.test_result .center .content {
+    width: 9.44rem;
+    height: 94%;
+    padding: 0.8rem 0.533333rem;
+    background-color: #fff;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 0 20px 2px #cdf7f7;
+}
+
+.test_result .center .content .text {
+    width: 100%;
+    height: 100%;
+    padding-top: 1.066666rem;
+    background: url("../img/csjg.png") no-repeat;
+    background-size: 3.386666rem 0.373333rem;
+    background-position: center top;
+}
+
+.test_result .center .content .text p {
+    height: 100%;
+    overflow-y: auto;
+    font-size: 0.373333rem;
+    color: rgba(92, 102, 129, 1);
+    line-height: 0.64rem;
+    text-indent: 2em;
+}
+
+/**************结果页 end88***************************************/

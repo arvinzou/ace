@@ -77,7 +77,7 @@ function initMenu() {
     $.getJSON(url, function (result) {
         viewMenu(result.rows);
     })
-    initList(parseQueryString('id'));
+    initList();
 }
 
 /*渲染菜单*/
