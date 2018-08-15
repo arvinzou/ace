@@ -47,6 +47,7 @@ function initData(primaryId){
                     //系列课程
                     findPartInfo(primaryId);
                 }
+                initCommentsList();
             }else {
                 alert(result.info);
                 return;
@@ -94,4 +95,28 @@ function viewHtml(IDom, data, tempId) {
 
 function playSource(sourceId){
    window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId+'&sourceId='+sourceId;
+}
+
+function initCommentsList(){
+    $.ajax({
+        url: contextPath+ "/www/course/cmt/findCmtList",
+        type:"post",
+        async:false,
+        data:{
+            courseId: primaryId,
+            start: 0,
+            limit: 9999
+        },
+        success:function(result){
+            if(result.status == 0) {
+                viewHtml('comments', result.data.rows, 'commentsListTemp');
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
 }

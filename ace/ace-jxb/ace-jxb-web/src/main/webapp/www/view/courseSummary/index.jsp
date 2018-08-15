@@ -44,96 +44,7 @@
 
 			<!--课程评价-->
 				<div class="comments menuHide" id="comments">
-					<div class="row commen_item">
-						<div class="row">
-							<div class="col-xs-3 col-md-3">
-								<img src="img/headImg.png" class="user_head" />
-							</div>
-							<div class="col-xs-5 col-md-5">
-								<p class="username">半分</p>
-								<p class="comments_time">2018-04-03</p>
-							</div>
-							<div class="col-xs-4 col-md-4">
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-9 col-md-9">
-								<p class="commonts_content">刚刚看完的这个视频，多少了解了自闭症的信息，比如自闭症和疫苗没有关系，自闭症和遗传基因有关系，而且还有别的原因，但是现在没有太好的方法等等。</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-9 col-md-9">
-								<span class="course_name">01 如何更好地了解孩子？</span>
-							</div>
-						</div>
-					</div>
-					<div class="row commen_item">
-						<div class="row">
-							<div class="col-xs-3 col-md-3">
-								<img src="img/headImg.png" class="user_head" />
-							</div>
-							<div class="col-xs-5 col-md-5">
-								<p class="username">半分</p>
-								<p class="comments_time">2018-04-03</p>
-							</div>
-							<div class="col-xs-4 col-md-4">
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-9 col-md-9">
-								<p class="commonts_content">刚刚看完的这个视频，多少了解了自闭症的信息，比如自闭症和疫苗没有关系，自闭症和遗传基因有关系，而且还有别的原因，但是现在没有太好的方法等等。</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-9 col-md-9">
-								<span class="course_name">01 如何更好地了解孩子？</span>
-							</div>
-						</div>
-					</div>
-					<div class="row commen_item">
-						<div class="row">
-							<div class="col-xs-3 col-md-3">
-								<img src="img/headImg.png" class="user_head" />
-							</div>
-							<div class="col-xs-5 col-md-5">
-								<p class="username">半分</p>
-								<p class="comments_time">2018-04-03</p>
-							</div>
-							<div class="col-xs-4 col-md-4">
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-9 col-md-9">
-								<p class="commonts_content">刚刚看完的这个视频，多少了解了自闭症的信息，比如自闭症和疫苗没有关系，自闭症和遗传基因有关系，而且还有别的原因，但是现在没有太好的方法等等。</p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-9 col-md-9">
-								<span class="course_name">01 如何更好地了解孩子？</span>
-							</div>
-						</div>
-					</div>
+
 				</div>
 			</div>
 		</div>
@@ -271,6 +182,43 @@
 				</div>
 			</div>
 		</script>
+
+	<script id="commentsListTemp" type="text/template">
+		{@each data as item, index}
+        <div class="row commen_item">
+            <div class="row">
+            <div class="col-xs-3 col-md-3">
+            <img src="img/headImg.png" class="user_head" />
+            </div>
+            <div class="col-xs-5 col-md-5">
+            <p class="username">半分</p>
+            <p class="comments_time">\${item.createDate}</p>
+            </div>
+            <div class="col-xs-4 col-md-4">
+            <img src="img/comment_level.png" class="comment_level" />
+            <img src="img/comment_level.png" class="comment_level" />
+            <img src="img/comment_level.png" class="comment_level" />
+            <img src="img/comment_level.png" class="comment_level" />
+            <img src="img/comment_level.png" class="comment_level" />
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-xs-3 col-md-3"></div>
+            <div class="col-xs-9 col-md-9">
+            <p class="commonts_content">
+				\${item.content}
+			</p>
+        </div>
+        </div>
+        <%--<div class="row">
+            <div class="col-xs-3 col-md-3"></div>
+            <div class="col-xs-9 col-md-9">
+            <span class="course_name">01 如何更好地了解孩子？</span>
+        </div>
+        </div>--%>
+        </div>
+		{@/each}
+	</script>
 	</body>
 
 </html>

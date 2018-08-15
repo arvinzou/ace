@@ -60,6 +60,7 @@ function initCourseInfo(courseId){
                     //系列课程
                     findSourceInfo(sourceId);
                 }
+                initCommentsList();
             }else {
                 alert(result.info);
                 return;
@@ -115,3 +116,56 @@ function findSourceInfo(sourceId){
     });
 }
 
+function commitComments(){
+    var level = $("#rating-input").val();
+    var content = $("textarea[name = 'content']").val();
+    if(content == '' || content == undefined){
+        alert("留下点评价呗~");
+        return;
+    }
+    $.ajax({
+        url: contextPath+ "/www/course/cmt/add",
+        type:"post",
+        async:false,
+        data:{
+            courseId: courseId,
+            content: content
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert("感谢您的评价，下次我们会做得更好！");
+                window.location.reload();
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function initCommentsList(){
+    $.ajax({
+        url: contextPath+ "/www/course/cmt/findCmtList",
+        type:"post",
+        async:false,
+        data:{
+            courseId: courseId,
+            start: 0,
+            limit: 9999
+        },
+        success:function(result){
+            if(result.status == 0) {
+                viewHtml('commentList', result.data.rows, 'commentListTemp');
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}

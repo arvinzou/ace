@@ -36,44 +36,8 @@
 
 				</div>
 			</div>
-			<div class="comment_list">
-				<div class="row statics">
-					<div class="col-xs-6 col-md-6">
-						<span class="evaluate">评价（682个评价）</span>
-					</div>
-					<div class="col-xs-6 col-md-6" style="text-align: right;">
-						<a href="#" data-toggle="modal" data-target="#myModal">
-							<img src="img/icon_comment.png" class="comments_icon"/>
-							<span class="comment">发表评论</span>
-						</a>
-					</div>
-				</div>
-				<div class="row list">
-					<div class="row list_item">
-						<div class="row">
-							<div class="col-xs-3 col-md-3">
-								<img src="img/headImg.png" class="headImg" />
-							</div>
-							<div class="col-xs-5 col-md-5">
-								<p class="commonts_name">半分</p>
-								<p class="commonts_time">2018-04-03</p>
-							</div>
-							<div class="col-xs-4 col-md-4" style="text-align: right;">
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-								<img src="img/comment_level.png" class="comment_level" />
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-3 col-md-3"></div>
-							<div class="col-xs-9 col-md-9">
-								<p class="comment_content">
-									刚刚看完的这个视频，多少了解了自闭症的信息，比如自闭症和疫苗没有关系，自闭症和遗传基因有关系，而且还有别的原因，但是现在没有太好的方法等等。
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="comment_list" id="commentList">
+
 			</div>
 		</div>
 
@@ -86,8 +50,8 @@
 							<form>
 								<input value="5" id="rating-input" type="text" title="" />
 								<span class="demo">推荐</span><br />
-								<textarea class="point" placeholder="鼓励下老师吧~" onfocus="this.placeholder=''" onblur="this.placeholder='鼓励下老师吧~'"></textarea><br />
-								<a href="#" class="commit">提&nbsp;交</a>
+								<textarea class="point" name="content" placeholder="鼓励下老师吧~" onfocus="this.placeholder=''" onblur="this.placeholder='鼓励下老师吧~'"></textarea><br />
+								<a href="javascript:void(0);" class="commit" onclick="commitComments();">提&nbsp;交</a>
 							</form>
 						</div>
 					</div>
@@ -131,4 +95,46 @@
 			</div>
 		</div>
 	</script>
+
+<script id="commentListTemp" type="text/template">
+    <div class="row statics">
+        <div class="col-xs-6 col-md-6">
+        	<span class="evaluate">评价（\${data.length}个评价）</span>
+   		 </div>
+    	<div class="col-xs-6 col-md-6" style="text-align: right;">
+        	<a href="#" data-toggle="modal" data-target="#myModal">
+        		<img src="img/icon_comment.png" class="comments_icon"/>
+        		<span class="comment">发表评论</span>
+        	</a>
+        </div>
+	</div>
+	<div class="row list">
+		{@each data as item, index}
+        <div class="row list_item">
+			<div class="row">
+         		<div class="col-xs-3 col-md-3">
+        			<img src="img/headImg.png" class="headImg" />
+        		</div>
+        		<div class="col-xs-5 col-md-5">
+        			<p class="commonts_name">半分</p>
+        			<p class="commonts_time">\${item.createDate}</p>
+        		</div>
+        		<div class="col-xs-4 col-md-4" style="text-align: right;">
+        			<img src="img/comment_level.png" class="comment_level" />
+        			<img src="img/comment_level.png" class="comment_level" />
+        			<img src="img/comment_level.png" class="comment_level" />
+        		</div>
+        	</div>
+			<div class="row">
+        		<div class="col-xs-3 col-md-3"></div>
+				<div class="col-xs-9 col-md-9">
+        			<p class="comment_content">
+						\${item.content}
+					</p>
+    			</div>
+    		</div>
+    	</div>
+		{@/each}
+    </div>
+</script>
 </html>
