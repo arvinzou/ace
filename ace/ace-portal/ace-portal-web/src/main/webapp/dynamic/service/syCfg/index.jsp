@@ -14,7 +14,7 @@
 
 
 </script>
-<body style="background:red" >
+<body>
 	<div class="page-content">
 		<div class="widget-box" id="widget-box">
 			<div class="widget-header">
@@ -83,7 +83,7 @@ window.onresize = function () {
 	console.log('autoWidthJqgrid');
 	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
 	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-	parent.autoWidth();
+	//////parent.autoWidth();
 }
 </script>
 </body>

@@ -21,6 +21,9 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	<import resource="classpath:spring/spring-ace-portal-aop.xml"/>
 	<import resource="classpath:spring/spring-ace-portal-sysinfo.xml"/>
+	<!--
+	<import resource="classpath:spring/spring-ace-portal-aop.xml"/>
+
+	-->
 </beans>

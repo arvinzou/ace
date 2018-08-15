@@ -93,7 +93,7 @@
 					$(".page-content").width());
 			$(cfg.grid_selector).jqGrid('setGridHeight',
 					window.innerHeight-layoutTopHeight);
-			parent.autoWidth();
+			//parent.autoWidth();
 		}
 	</script>
 </body>

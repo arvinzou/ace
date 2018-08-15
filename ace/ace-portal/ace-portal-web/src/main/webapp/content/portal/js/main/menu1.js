@@ -1,3 +1,4 @@
+
 var buildMenu = function(menus) {
 	var buildMenuHtml = function(menus) {
 		var html = [];
@@ -88,7 +89,43 @@ var buildMenu = function(menus) {
 
 
                    $("#menu0").addClass("active");
-                              $("#menu0").find("#selected").addClass("selected");
+                    $("#menu0").find("#selected").addClass("selected");
 
 }
 
+
+
+function initMenu(){
+    if(sessionStorage&&sessionStorage.getItem("menu")){
+        var srt=sessionStorage.getItem("menu");
+        var data=JSON.parse(srt);
+        console.log(data);
+        buildMenu(data);
+     }else{
+        $.ajax({
+                    url : portalPath + '/system/getTreeList.do?loadButton=false',
+                    type : 'POST',
+                    timeout : 30000,
+                    dataType : 'json',
+                    beforeSend:function(){
+                        loading=startLoading();
+                        if(loading) {
+                           loading.settext("正在加载，请稍后......");
+                        }
+
+                    },
+                    success : function(data) {
+                        buildMenu(data);
+                        if(loading){
+                            loading.remove();
+                        }
+                        if(sessionStorage){
+                            console.log("sessionStorage");
+                            sessionStorage.setItem("menu",JSON.stringify(data));
+                        }
+
+                    }
+                });
+     }
+
+}

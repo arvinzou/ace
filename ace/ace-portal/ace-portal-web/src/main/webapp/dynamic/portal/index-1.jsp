@@ -17,11 +17,12 @@ pageEncoding="utf-8"%>
           name="description"/>
     <meta content="" name="author"/>
     <script type="text/javascript">
+
 	var contextPath = '${pageContext.request.contextPath}';
+	var portalPath = '${pageContext.request.contextPath}';
 	var portalType='${SESSION_USERPROP_KEY.cfg.portalType}';
 	var layoutTopHeight=0;
 	var activeSyId ='${SESSION_USERPROP_KEY.activeSyId}';
-
     </script>
     <link rel="shortcut icon" href="favicon.ico">
     <script type="text/javascript"
@@ -119,12 +120,10 @@ pageEncoding="utf-8"%>
 
     <div class="page-container">
         <div class="page-sidebar-wrapper">
-
             <div class="page-sidebar navbar-collapse collapse">
                 <ul id="menu" class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false"
                     data-auto-scroll="true"
                     data-slide-speed="200" style="padding-top: 0px">
-
                 </ul>
             </div>
         </div>
@@ -139,8 +138,6 @@ pageEncoding="utf-8"%>
                 </script>
                 <!-- 陈晓克-->
             </div>
-
-
         </div>
     </div>
 </div>

@@ -239,7 +239,7 @@ pageEncoding="utf-8"%>
 
 <script type="text/javascript">
 window.onresize = function () {
-	parent.autoWidth();
+	//parent.autoWidth();
 }
 </script>
 <script
