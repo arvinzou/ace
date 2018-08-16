@@ -32,7 +32,7 @@ String portalType=(String)user.getCfg().get("portalType");
 <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/ui.jqgrid.css?version=${cfg.version}" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/ace-fonts.css?version=${cfg.version}" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/ace-ie8.min.css?version=${cfg.version}" />
-<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/ui.multiselect.css?version=${cfg.version}" />
 <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <%if(portalType.equals("1")){%>
@@ -71,4 +71,5 @@ String portalType=(String)user.getCfg().get("portalType");
 }
 </style>
 <%}%>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
 <link rel="shortcut icon" href="favicon.ico"/>
