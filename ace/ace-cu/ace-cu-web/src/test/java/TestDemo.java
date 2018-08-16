@@ -1,4 +1,4 @@
-import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
 import java.util.Date;
@@ -11,7 +11,12 @@ public class TestDemo {
 
     @Test
     public void test() {
-        System.out.println(DateUtil.getNow().substring(0, 10) + "|");
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println(GUIDUtil.getGUID());
+        }
+
+//        System.out.println(DateUtil.getNow().substring(0, 10) + "|");
     }
 
     private long getDiffDays(Date begin, Date end) {

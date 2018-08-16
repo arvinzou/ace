@@ -198,7 +198,7 @@ parent.onresize = function () {
 	autoSize();
 }
 function autoSize(){
-	parent.autoWidth();
+	//parent.autoWidth();
 	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
 	$(cfg.grid_selector).jqGrid('setGridHeight',window.innerHeight-layoutTopHeight);
 

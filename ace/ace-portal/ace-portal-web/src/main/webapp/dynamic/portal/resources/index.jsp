@@ -159,7 +159,7 @@ function autoResize(){
 		$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-183);
 	}
 	console.log('autoResize:'+h);
-	parent.autoWidth();
+	//parent.autoWidth();
 }
 jQuery(function($) {
 	jQuery('.layout-button-left').on( 'click', function(e) {
