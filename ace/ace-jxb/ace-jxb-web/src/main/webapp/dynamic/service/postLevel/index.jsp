@@ -60,13 +60,13 @@
                                                                 <i class=" icon-layers font-green"></i>
                                                                 <span class="caption-subject font-green bold uppercase"><font
                                                                         style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">预约设置</font></font></span>
+                                                                        style="vertical-align: inherit;">老师等级配置</font></font></span>
                                                             </div>
                                                             <div class="actions">
                                                                 <a onclick="javascript:createLevel()"
                                                                    class="btn btn-circle btn-success btn-sm">
                                                                     <i class="fa fa-plus"></i>
-                                                                    岗位配置
+                                                                    添加配置
                                                                 </a>
                                                             </div>
 

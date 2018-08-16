@@ -37,7 +37,6 @@ function blurCheck() {
     }
     var blurValue = $that.val();
     if (blurValue != focusValue) {
-        console.log($that.parent().parent().html());
         var data = getObject($that.parent().parent());
         if (!data) {
             return false;
