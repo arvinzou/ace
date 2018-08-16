@@ -182,14 +182,16 @@ public class CourseCmtServiceImpl implements CourseCmtService {
      * @param courseId 课程id
      * @param userId   评论人id
      * @param content  评论内容
+     * @param grade    评分
      */
     @Override
-    public int addCourseCmt(String courseId, String userId, String content) {
+    public int addCourseCmt(String courseId, String userId, String content, String grade) {
         CourseCmt cmt = new CourseCmt();
         cmt.setId(GUIDUtil.getGUID());
         cmt.setCourseId(courseId);
         cmt.setUserId(userId);
         cmt.setContent(content);
+        cmt.setGrade(grade);
         cmt.setCreateDate(DateUtil.getNowDate());
 
         return courseCmtDao.insertSelective(cmt);
