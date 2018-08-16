@@ -17,14 +17,14 @@ function orderList(state){
         type:"post",
         async:false,
         data:{
-            findType: '1',
+            findType: '2',
             payStatus: state,
             start: 0,
             limit: 999
         },
         success:function(result){
             if(result.status == 0) {
-                viewHtml('orderList', result.data, 'orderListTemp');
+                viewHtml('orderList', result.data.rows, 'orderListTemp');
             }else {
                 alert(result.info);
                 return;

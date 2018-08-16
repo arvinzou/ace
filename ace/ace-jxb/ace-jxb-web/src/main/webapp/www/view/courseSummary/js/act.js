@@ -125,6 +125,7 @@ function initCommentsList(){
 function buy(){
     if(cost == '免费'){
         cost = '0';
+        window.location.href = contextPath + '/www/view/play/index.jsp'
     }
     var data = {
         //          --订单基本情况
@@ -211,7 +212,7 @@ function onBridgeReady(obj, orderId){
                 window.pay_tag = true;
                 if (res.errMsg == "chooseWXPay:ok") {
                     alert("支付成功！");
-                    window.location.href = contextPath + '/www/view/purchaseRecord/'
+                    window.location.href = contextPath + '/www/view/purchaseRecord/index.jsp'
                     /*WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                         if (res.err_msg =="get_brand_wcpay_request:ok")
                         {

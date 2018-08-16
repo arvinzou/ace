@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<title>如何更好的了解孩子</title>
+		<title>课程详情</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -113,16 +113,34 @@
         <div class="row list_item">
 			<div class="row">
          		<div class="col-xs-3 col-md-3">
-        			<img src="img/headImg.png" class="headImg" />
+        			<img src="\${item.headimgurl}" class="headImg" />
         		</div>
         		<div class="col-xs-5 col-md-5">
-        			<p class="commonts_name">半分</p>
+        			<p class="commonts_name">\${item.nickname}</p>
         			<p class="commonts_time">\${item.createDate}</p>
         		</div>
         		<div class="col-xs-4 col-md-4" style="text-align: right;">
-        			<img src="img/comment_level.png" class="comment_level" />
-        			<img src="img/comment_level.png" class="comment_level" />
-        			<img src="img/comment_level.png" class="comment_level" />
+					{@if item.grade == '1'}
+					<img src="img/comment_level.png" class="comment_level" />
+					{@else if item.grade == '2'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					{@else if item.grade == '3'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					{@else if item.grade == '4'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					{@else if item.grade == '5'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					{@/if}
         		</div>
         	</div>
 			<div class="row">

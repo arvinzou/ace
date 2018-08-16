@@ -150,6 +150,7 @@ body{
 .history_money{
 	color: #C4C8D6;
 	font-size: 0.32rem;
+	text-decoration:line-through
 }
 .payfor{
 	width: 100%;

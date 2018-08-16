@@ -195,8 +195,8 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+    <!--咨询订单返回map-->
+    <resultMap id="consult-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
         <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
             <id property="id" column="businessId"/>
             <result property="name" column="tName"/>
@@ -223,10 +223,61 @@
         </association>
     </resultMap>
 
+    <!--课程订单返回map-->
+    <resultMap id="course-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
+            <id property="id" column="businessId"/>
+            <result property="name" column="tName"/>
+            <result property="certification" column="certification"/>
+            <result property="imagePhotoUrl" column="imagePhotoUrl"/>
+            <result property="level" column="tLevel"/>
+        </association>
+        <association property="course" column="courseId" javaType="com.huacainfo.ace.jxb.model.Course">
+            <id property="id" column="courseId"/>
+            <result column="courseType" jdbcType="VARCHAR" property="type"/>
+            <result column="courseCategory" jdbcType="VARCHAR" property="category"/>
+            <result column="courseMediType" jdbcType="VARCHAR" property="mediType"/>
+            <result column="courseName" jdbcType="VARCHAR" property="name"/>
+            <result column="courseCover" jdbcType="VARCHAR" property="cover"/>
+            <result column="courseDuration" jdbcType="INTEGER" property="duration"/>
+            <result column="courseCostType" jdbcType="VARCHAR" property="costType"/>
+            <result column="courseCost" jdbcType="DECIMAL" property="cost"/>
+            <result column="coursePCost" jdbcType="DECIMAL" property="primeCost"/>
+            <result column="courseDemanNum" jdbcType="INTEGER" property="demandNum"/>
+            <result column="courseLikeNum" jdbcType="INTEGER" property="likeNum"/>
+            <result column="courseObj" jdbcType="VARCHAR" property="objects"/>
+            <result column="courseAObj" jdbcType="VARCHAR" property="applicationObject"/>
+            <result column="coursePurport" jdbcType="VARCHAR" property="purport"/>
+            <result column="courseRemark" jdbcType="VARCHAR" property="remark"/>
+            <result column="courseStatus" jdbcType="CHAR" property="status"/>
+            <result column="courseCrtUid" jdbcType="VARCHAR" property="createUserId"/>
+            <result column="courseCrtDt" jdbcType="TIMESTAMP" property="createDate"/>
+            <result column="courseDesc" jdbcType="LONGVARCHAR" property="introduce"/>
+        </association>
+    </resultMap>
+
+    <!--订单vo对象-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <discriminator javaType="String" column="category">
+            <case value="1" resultMap="consult-VoResultMap"/>
+            <case value="2" resultMap="course-VoResultMap"/>
+        </discriminator>
+    </resultMap>
+
     <sql id="Vo_Column_List">
+        cr.id as courseId, cr.type as courseType, cr.category as courseCategory,
+        cr.mediType as courseMediType, cr.name as courseName, cr.cover as courseCover,
+        cr.duration as courseDuration, cr.costType as courseCostType, cr.cost as courseCost,
+        cr.demandNum as courseDemanNum, cr.likeNum as courseLikeNum, cr.remark as courseRemark,
+        cr.status as courseStatus, cr.createUserId as courseCrtUid, cr.introduce as courseDesc,
+        cr.primeCost as coursePCost, cr.objects as courseObj, cr.applicationObject as courseAObj,
+        cr.purport as coursePurport, cr.createDate as courseCrtDt,
+
         co.tel, co.name, co.age, co.sex, co.tags, co.info, co.secName, co.relationship, co.secTel,
         cp.type as cpType,
+
         c.name as tName,c.certification ,c.imagePhotoUrl,c.level as tLevel,
+
         t.id, t.consumerId, t.commodityId, t.category, t.businessId, t.commodityName, t.businessName, t.amount,
         t.price, t.payMoney, t.payStatus, t.payTime, t.createDate
     </sql>
@@ -251,6 +302,7 @@
         left join jxb.counselor c on t.businessId = c.id
         left join jxb.consult_product cp on cp.id = t.commodityId
         left join jxb.consult_order co on co.id = t.id
+        left join jxb.course cr on cr.id = t.commodityId
         where 1=1
         <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
             and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}

@@ -314,7 +314,7 @@
             and t.createUserId = #{condition.createUserId,jdbcType=VARCHAR}
         </if>
         <if test="condition.auditRst !=null and condition.auditRst !=&quot;&quot;">
-            and t.auditRst = #{condition.auditRst,jdbcType=VARCHAR}
+            and IFNULL(ca.rst,'0') = #{condition.auditRst,jdbcType=VARCHAR}
         </if>
         <if test="condition.objects !=null and condition.objects !=&quot;&quot;">
             and t.objects = #{condition.objects,jdbcType=VARCHAR}

@@ -84,10 +84,10 @@ public interface CourseCmtService {
 
     /**
      * 功能描述: 新增课程评论
-     *
-     * @param courseId 课程id
+     *  @param courseId 课程id
      * @param userId   评论人id
      * @param content  评论内容
+     * @param grade    评分
      */
-    int addCourseCmt(String courseId, String userId, String content);
+    int addCourseCmt(String courseId, String userId, String content, String grade);
 }
