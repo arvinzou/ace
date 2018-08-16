@@ -115,12 +115,13 @@ public class WCourseController extends JxbBaseController {
      * @param courseId 课程id
      * @param userId   评论人id
      * @param content  评论内容
+     * @param grade    评分
      * @return:
      * @auther: Arvin Zou
      * @date: 2018/8/15 11:08
      */
     @RequestMapping("/cmt/add")
-    public ResultResponse addCourseCmt(String courseId, String userId, String content) throws Exception {
+    public ResultResponse addCourseCmt(String courseId, String userId, String content, String grade) throws Exception {
         if (StringUtil.isEmpty(courseId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
@@ -132,7 +133,7 @@ public class WCourseController extends JxbBaseController {
             return new ResultResponse(ResultCode.FAIL, "用户授权失败");
         }
 
-        courseCmtService.addCourseCmt(courseId, userId, content);
+        courseCmtService.addCourseCmt(courseId, userId, content, grade);
         return new ResultResponse(ResultCode.SUCCESS, "添加评论成功");
     }
 }
