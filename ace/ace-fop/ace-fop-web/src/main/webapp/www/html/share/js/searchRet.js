@@ -63,6 +63,7 @@ app.controller(ngControllerName,function($scope){
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
+                layer.close(layerIndex);
             }else {
                 layer.alert(result.errorMessage, {
                     icon: 5,
