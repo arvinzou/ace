@@ -134,13 +134,7 @@ var buildMenu = function(menus) {
        $("#menu0").find("#selected").addClass("selected");
 
   }
-
-
-
-
 }
-
-
 
 function initMenu(){
     createNav();

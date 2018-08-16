@@ -40,10 +40,13 @@ String portalType=(String)user.getCfg().get("portalType");
 <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color"/>
 <%}else{%>
 <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css"/>
+
 <style>
 .page-content-wrapper .page-content {
     margin-left: 0px;
     margin-top: 0;
+    margin-bottom: 30px;
     min-height: 300px;
     padding: 0px 0px 0px;
 }
@@ -60,6 +63,11 @@ String portalType=(String)user.getCfg().get("portalType");
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:active, .dropdown-menu>li.active>a, .dropdown-menu>li.active>a:hover, .dropdown-menu .dropdown-submenu:hover>a {
     background: #f6f6f6;
     color: #000;
+}
+.page-head .page-title {
+    display: inline-block;
+    float: left;
+    padding: 6px 0;
 }
 </style>
 <%}%>
