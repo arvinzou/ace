@@ -3,8 +3,7 @@
 
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/testindex.css"/>
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
@@ -13,7 +12,7 @@
     <script type="text/javascript" src="js/swiper.min.js"></script>
     <script type="text/javascript" src="js/juicer-min.js"></script>
 
-    <title></title>
+    <title>近心帮心理测试</title>
 </head>
 
 <body>
@@ -21,10 +20,13 @@
     <div class="search">
         <div class="container">
             <div class="search_box">
-                <input type="" name="" id="" value=""/>
+                <input type="" name="" id="" value="大家都在测亲子关系"
+                       onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+                       onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+                       style="color:rgba(196,200,214,1);"/>
             </div>
             <div class="notice">
-                中
+                <i class="iconfont">&#xe702;</i>
             </div>
         </div>
     </div>

@@ -46,11 +46,12 @@
 }
 
 .test_main .test_info .test_info_bottom .table > span {
-    display: inline-block;
-    width: 2.9rem;
-    font-size: 0.4rem;
+    display: block;
+    float: left;
+    width: 33%;
+    font-size: 0.35rem;
     color: rgba(150, 156, 178, 1);
-    line-height: 1.333333rem;
+    line-height: 1.33333333rem;
 }
 
 .test_main .explanation p {
