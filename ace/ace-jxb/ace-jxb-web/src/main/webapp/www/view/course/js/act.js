@@ -10,13 +10,17 @@ function App() {
     courseList();
 }
 
-function courseList(){
+function courseList(level){
     $.ajax({
         url: contextPath+ "/www/course/findList",
         type:"post",
         async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
-            start: 0, limit: 999
+            start: 0,
+            limit: 999,
+            objects:level,
+            auditRst:'1'
         },
         success:function(result){
             if(result.status == 0) {

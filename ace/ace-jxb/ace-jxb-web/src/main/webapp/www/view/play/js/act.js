@@ -129,7 +129,8 @@ function commitComments(){
         async:false,
         data:{
             courseId: courseId,
-            content: content
+            content: content,
+            grade: level
         },
         success:function(result){
             if(result.status == 0) {

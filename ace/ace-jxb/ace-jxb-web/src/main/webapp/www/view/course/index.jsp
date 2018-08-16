@@ -22,11 +22,11 @@
 					<div class="navigation">
 						<div class="news-title">
 							<ul class="news-module course_nav_ul clear">
-								<li class="active">全部</li>
-								<li>幼儿园</li>
-								<li>小学</li>
-								<li>初中</li>
-								<li>高中</li>
+								<li class="active" onclick="courseList();">全部</li>
+								<li onclick="courseList('幼儿');">幼儿</li>
+								<li onclick="courseList('小学');">小学</li>
+								<li onclick="courseList('初中');">初中</li>
+								<li onclick="courseList('高中');">高中</li>
 							</ul>
 							<div class="news-slider"></div>
 						</div>
@@ -50,7 +50,7 @@
 				<p class="title">\${item.name}</p>
 			</div>
 			<div class="row">
-				<p class="content">小学 · 社会交往 · 共1节</p>
+				<p class="content">\${item.objects} · \${item.purport}</p>
 			</div>
 			<div class="row">
 				<div class="col-xs-7 col-md-7" style="padding: 0 !important;">
