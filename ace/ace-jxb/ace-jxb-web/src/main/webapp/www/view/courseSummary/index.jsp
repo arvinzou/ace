@@ -66,13 +66,17 @@
                 <p class="basic_title">\${data.name}</p>
             </div>
             <div class="row">
-                <div class="col-xs-9 col-md-9"><span class="tags">小学·社会交往</span></div>
+                <div class="col-xs-9 col-md-9"><span class="tags">\${data.objects}·\${data.purport}</span></div>
             <div class="col-xs-3 col-md-3"><span class="popular">\${data.demandNum}人听课</span></div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-md-12 payfor">
-                <span class="money">¥ \${data.cost}</span>
-                <span class="history_money">¥299</span>
+					{@if data.costType == '0'}
+                	<span class="money">免费</span>
+					{@else if data.costType == '1'}
+					<span class="money">¥ \${data.cost}</span>
+					{@/if}
+                <span class="history_money">\${data.primeCost}</span>
                 </div>
                 </div>
                 </div>
@@ -123,7 +127,7 @@
                 </div>
                 <div class="row">
                 <div class="col-xs-12 col-md-12">
-                <p class="teacher_content">父母、心理学爱好者</p>
+                <p class="teacher_content">\${data.applicationObject}</p>
             </div>
             </div>
             </div>
@@ -149,11 +153,12 @@
 				<div class="row">
 					<div class="col-xs-2 col-md-2"></div>
 					<div class="col-xs-10 col-md-10">
+						{@if item.free == '0'}
 						<span class="try">
-							{@if item.free == '0'}
 							 试听
-							{@/if}
 						</span>
+						{@else}
+						{@/if}
 						<span class="duration">\${item.duration}分钟</span>
 					</div>
 				</div>
@@ -188,18 +193,34 @@
         <div class="row commen_item">
             <div class="row">
             <div class="col-xs-3 col-md-3">
-            <img src="img/headImg.png" class="user_head" />
+            <img src="\${item.headimgurl}" class="user_head" />
             </div>
             <div class="col-xs-5 col-md-5">
-            <p class="username">半分</p>
+            <p class="username">\${item.nickname}</p>
             <p class="comments_time">\${item.createDate}</p>
             </div>
             <div class="col-xs-4 col-md-4">
-            <img src="img/comment_level.png" class="comment_level" />
-            <img src="img/comment_level.png" class="comment_level" />
-            <img src="img/comment_level.png" class="comment_level" />
-            <img src="img/comment_level.png" class="comment_level" />
-            <img src="img/comment_level.png" class="comment_level" />
+				{@if item.grade == '1'}
+              		<img src="img/comment_level.png" class="comment_level" />
+				{@else if item.grade == '2'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+				{@else if item.grade == '3'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+				{@else if item.grade == '4'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+				{@else if item.grade == '5'}
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/comment_level.png" class="comment_level" />
+            		<img src="img/comment_level.png" class="comment_level" />
+				{@/if}
             </div>
             </div>
             <div class="row">

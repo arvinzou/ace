@@ -37,11 +37,9 @@
 				<div class="row">
 					<div class="col-xs-2 col-md-2"></div>
 					<div class="col-xs-10 col-md-10">
-						<span class="try">
-							{@if item.free == '0'}
-								试听
-							{@/if}
-						</span>
+						{@if item.free == '0'}
+						<span class="try">试听</span>
+						{@/if}
 						<span class="duration">\${item.duration}分钟</span>
 					</div>
 				</div>
