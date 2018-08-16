@@ -47,8 +47,7 @@ public class PostLevelController extends JxbBaseController {
     @RequestMapping(value = "/findPostLevelList")
     @ResponseBody
     public PageResult<PostLevelVo> findPostLevelList(PostLevelQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<PostLevelVo> rst = this.postLevelService
-                .findPostLevelList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<PostLevelVo> rst = this.postLevelService.findPostLevelList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }

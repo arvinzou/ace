@@ -65,8 +65,7 @@ public class PostLevelServiceImpl implements PostLevelService {
      * @version: 2018-08-08
      */
     @Override
-    public PageResult<PostLevelVo> findPostLevelList(PostLevelQVo condition, int start,
-                                                     int limit, String orderBy) throws Exception {
+    public PageResult<PostLevelVo> findPostLevelList(PostLevelQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<PostLevelVo> rst = new PageResult<>();
         List<PostLevelVo> list = this.postLevelDao.findList(condition,
                 start, start + limit, orderBy);
@@ -128,9 +127,9 @@ public class PostLevelServiceImpl implements PostLevelService {
         if (CommonUtils.isBlank(o.getPostName())) {
             return new MessageResponse(1, "岗位名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getPostIndex())) {
-            return new MessageResponse(1, "岗位序号不能为空！");
-        }
+//        if (CommonUtils.isBlank(o.getPostIndex())) {
+//            return new MessageResponse(1, "岗位序号不能为空！");
+//        }
         if (CommonUtils.isBlank(o.getRatio())) {
             return new MessageResponse(1, "分配比例 (分给老师的比例demo:0.5)不能为空！");
         }

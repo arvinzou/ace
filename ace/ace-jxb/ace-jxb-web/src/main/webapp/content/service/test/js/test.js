@@ -33,14 +33,19 @@ function deleteTestTpl() {
 }
 
 function activeDelect(id) {
-    var url = portalPath + '/evaluatCase/deleteEvaluatCase.do';
+    var url = portalPath + '/evaluatTpl/deleteEvaluatTpl.do';
     var data = {
         jsons: JSON.stringify({
             id: id
         })
     }
     $.getJSON(url, data, function (result) {
-        getEvaluatCaseList($('#pagination1 .active').text());
+        if (result.status == 0) {
+            getEvaluatTplList($('#pagination1 .active').text());
+            return
+        }
+        alert(result.errorMessage)
+
     })
 }
 
