@@ -75,7 +75,6 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
 
     @Override
     public ResultResponse getEvaluation(EvaluatGaugeQVo condition, Userinfo userinfo) throws Exception {
-        PageResult<EvaluatGaugeVo> rst = new PageResult<EvaluatGaugeVo>();
         EvaluatData evaluatData = new EvaluatData();
         evaluatData.setEvaluatTplId(condition.getEvaluatTplId());
         evaluatData.setScore(condition.getScore());

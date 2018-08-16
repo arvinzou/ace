@@ -29,8 +29,7 @@ public interface PostLevelService {
      * @author: Arvin
      * @version: 2018-08-08
      */
-    PageResult<PostLevelVo> findPostLevelList(PostLevelQVo condition,
-                                              int start, int limit, String orderBy) throws Exception;
+    PageResult<PostLevelVo> findPostLevelList(PostLevelQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
