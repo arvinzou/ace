@@ -38,7 +38,7 @@ app.controller(ngControllerName,function($scope){
     */
    $scope.showProjectInfo = function(id){
 
-   		window.location.href = '../donation/donation.html?projectId='+id+'&type=2';
+   		window.location.href = '../jjndonation/donation.html?projectId='+id+'&type=2';
    }
    
    /**
