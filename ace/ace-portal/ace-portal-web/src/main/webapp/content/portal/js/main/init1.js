@@ -55,7 +55,7 @@ var buildMenu = function(menus) {
 		$.each(menus,function(i, menu) {
             html.push('<li class="nav-item" id="menu'+i+'">');
             html.push('<a class="nav-link nav-toggle" href="#"><i class="'+ menu.icon + '"></i><span class="title">'+ menu.text + ' </span>');
-            html.push('<span id="selected"></span>');
+            html.push('<span class="selected"></span>');
             if (menu.leaf != true && menu.leaf != 'true') {
                 html.push('<span class="arrow"></span>');
             }
