@@ -3,14 +3,13 @@
 
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="css/common.css"/>
     <link rel="stylesheet" type="text/css" href="css/testing1.css"/>
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
     <script src="js/reminit.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/juicer-min.js" type="text/javascript" charset="utf-8"></script>
-    <title></title>
+    <title>心理测试</title>
 </head>
 
 <body>
@@ -60,7 +59,7 @@
         <div class="test_info_bottom">
             <div class="table">
                 <span>·${data.evaluatCaseList.length}道精选问题</span>
-                <span>·预计${data.evaluatCaseList.length/3}分钟</span>
+                <span>·预计${parseInt(data.evaluatCaseList.length/3)}分钟</span>
                 <span>·${data.testedTotal}人已测</span>
             </div>
         </div>
@@ -70,13 +69,13 @@
             测什么
         </p>
         <p class="content">
-            ${data.introduce}
+            $${data.introduce}
         </p>
         <p class="title">
             测试须知
         </p>
         <p class="content">
-            ${data.notice}
+            $${data.notice}
         </p>
     </div>
 

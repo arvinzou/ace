@@ -27,8 +27,12 @@ function pingjia() {
     };
     $.post(url, data, function (result) {
         if (result.status == 0) {
+            var data = result.data;
+            $('.test_result .content p').text(data.evaluatGauge["content"]);
             $('.test_content').css("visibility", "hidden");
             $('.test_result').show();
+        } else {
+            alert("对不起！测试提交失败，可能要重新测试。")
         }
     });
 }

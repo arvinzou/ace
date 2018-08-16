@@ -34,6 +34,11 @@
     margin-right: 0.133333rem;
 }
 
+.search .container .notice .iconfont {
+    font-size: 0.6rem;
+    color: #C4C8D6;
+}
+
 .search .container .search_box {
     width: 7.84rem;
     height: 0.933333rem;

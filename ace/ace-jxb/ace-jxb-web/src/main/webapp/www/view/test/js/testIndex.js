@@ -116,9 +116,8 @@ function viewMenu(data) {
         li = li.replace('[menuName]', data[i].name)
             .replace('[menuId]', data[i].id)
             .replace('[end]', j == 3 ? 'end' : '')
-            .replace('[urlImg]', imgMap[data[i].name]);
+            .replace('[urlImg]', imgMap[data[i].name] ? imgMap[data[i].name] : 'img/null.png');
         slide = slide + li;
-        li = menuTemplateli;
         j++;
         if (j == 4) {
             slide = slide + menuTemplateEnd;

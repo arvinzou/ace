@@ -28,6 +28,7 @@ app.controller(ngControllerName,function($scope){
     }
     console.log("type,keyword",type,keyword);
 
+    var isData = false;
     $.ajax({
         url: "/fop/www/dataSwapper/search",
         type:"post",
@@ -43,6 +44,7 @@ app.controller(ngControllerName,function($scope){
                 var data=result.data;
                 for(var key in data){
                     console.log(data[key]);
+                    isData = true;
                     name = key;
                     for(var item in data[key]){
                         console.log(item, data[key][item]);
@@ -56,6 +58,14 @@ app.controller(ngControllerName,function($scope){
                     list.push(menu);
                     menu = {"name":"", "value":""};
                 }
+                if(!isData){
+                    layer.alert("没有查询到数据！", {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                    layer.close(layerIndex);
+                    return;
+                }
                 $scope.listMenu = object;
                 $scope.listContent = contentObj;
                 $scope.listData = result.data;
@@ -63,6 +73,7 @@ app.controller(ngControllerName,function($scope){
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
+                layer.close(layerIndex);
             }else {
                 layer.alert(result.errorMessage, {
                     icon: 5,
