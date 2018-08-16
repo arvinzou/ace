@@ -7,12 +7,10 @@
         <result column="userId" jdbcType="VARCHAR" property="userId"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="grade" jdbcType="VARCHAR" property="grade"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, courseId, userId, createDate, content
-  </sql>
-    <sql id="Blob_Column_List">
-    content
+        id, courseId, userId, createDate, content, grade
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -25,9 +23,13 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
-        insert into course_cmt (id, courseId, userId, createDate, content)
-    values (#{id,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+        insert into course_cmt (
+        id, courseId, userId, createDate, content, grade
+        )
+        values (
+        #{id,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR},
+        #{grade,jdbcType=VARCHAR} )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
         insert into course_cmt
@@ -47,6 +49,9 @@
             <if test="content != null">
                 content,
             </if>
+            <if test="grade != null">
+                grade,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -63,6 +68,9 @@
             </if>
             <if test="content != null">
                 #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -81,23 +89,29 @@
             <if test="content != null">
                 content = #{content,jdbcType=LONGVARCHAR},
             </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
     update course_cmt
     set courseId = #{courseId,jdbcType=VARCHAR},
-      userId = #{userId,jdbcType=VARCHAR},
+        userId = #{userId,jdbcType=VARCHAR},
         content = #{content,jdbcType=LONGVARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
+        grade = #{grade,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseCmtVo">
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
     </resultMap>
     <sql id="Vo_Column_List">
       u.nickname, u.headimgurl,
-      t.id, t.courseId, t.userId, t.createDate, t.content
+        t.id, t.courseId, t.userId, t.createDate, t.content, t.grade
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

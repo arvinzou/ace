@@ -215,8 +215,7 @@ function onBridgeReady(obj){
                     });
 
                 } else {
-
-                    alert("操作失败！");
+                    //alert("操作失败！");
                 }
             }
         });

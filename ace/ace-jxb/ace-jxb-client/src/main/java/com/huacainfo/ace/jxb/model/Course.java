@@ -26,17 +26,36 @@ public class Course implements Serializable {
 
     private Integer duration;
     /**
-     * 费用类型 0-免费 1-收费
+     * 费用类型 0-免费 1-全部收费 2-会员免费
      */
     private String costType;
     /**
-     * 费用
+     * 费用 -- 销售价
      */
     private BigDecimal cost;
+    /**
+     * 课程原价
+     */
+    private BigDecimal primeCost;
+
 
     private Integer demandNum;
-
+    /**
+     * 点赞次数（起始人气）
+     */
     private Integer likeNum;
+    /**
+     * 课程对象
+     */
+    private String objects;
+    /**
+     * 适合谁听
+     */
+    private String applicationObject;
+    /**
+     * 针对能力（课程主旨）
+     */
+    private String purport;
 
     private String remark;
 
@@ -120,6 +139,14 @@ public class Course implements Serializable {
         this.cost = cost;
     }
 
+    public BigDecimal getPrimeCost() {
+        return primeCost;
+    }
+
+    public void setPrimeCost(BigDecimal primeCost) {
+        this.primeCost = primeCost;
+    }
+
     public Integer getDemandNum() {
         return demandNum;
     }
@@ -134,6 +161,30 @@ public class Course implements Serializable {
 
     public void setLikeNum(Integer likeNum) {
         this.likeNum = likeNum;
+    }
+
+    public String getObjects() {
+        return objects;
+    }
+
+    public void setObjects(String objects) {
+        this.objects = objects == null ? null : objects.trim();
+    }
+
+    public String getApplicationObject() {
+        return applicationObject;
+    }
+
+    public void setApplicationObject(String applicationObject) {
+        this.applicationObject = applicationObject == null ? null : applicationObject.trim();
+    }
+
+    public String getPurport() {
+        return purport;
+    }
+
+    public void setPurport(String purport) {
+        this.purport = purport == null ? null : purport.trim();
     }
 
     public String getRemark() {

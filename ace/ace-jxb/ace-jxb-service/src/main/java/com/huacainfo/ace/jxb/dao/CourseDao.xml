@@ -11,8 +11,12 @@
         <result column="duration" jdbcType="INTEGER" property="duration"/>
         <result column="costType" jdbcType="VARCHAR" property="costType"/>
         <result column="cost" jdbcType="DECIMAL" property="cost"/>
+        <result column="primeCost" jdbcType="DECIMAL" property="primeCost"/>
         <result column="demandNum" jdbcType="INTEGER" property="demandNum"/>
         <result column="likeNum" jdbcType="INTEGER" property="likeNum"/>
+        <result column="objects" jdbcType="VARCHAR" property="objects"/>
+        <result column="applicationObject" jdbcType="VARCHAR" property="applicationObject"/>
+        <result column="purport" jdbcType="VARCHAR" property="purport"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -20,9 +24,9 @@
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, type, category, mediType, name, cover, duration, costType, cost, demandNum, likeNum,
-        remark, status, createUserId, createDate, introduce
-  </sql>
+        id, type, category, mediType, name, cover, duration, costType, cost, primeCost, demandNum,
+        likeNum, objects, applicationObject, purport, remark, status, createUserId, createDate, introduce
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -30,23 +34,25 @@
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from course
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+        delete from course
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Course">
-    insert into course (id, type, category, 
-      mediType, name, cover, 
-      duration, costType, cost, 
-      demandNum, likeNum, remark, 
-      status, createUserId, createDate, 
-      introduce)
-    values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{mediType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, 
-      #{duration,jdbcType=INTEGER}, #{costType,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
-      #{demandNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{introduce,jdbcType=LONGVARCHAR})
-  </insert>
+        insert into course (id, type, category,
+        mediType, name, cover,
+        duration, costType, cost,
+        primeCost, demandNum, likeNum,
+        objects, applicationObject, purport,
+        remark, status, createUserId,
+        createDate, introduce)
+        values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+        #{mediType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR},
+        #{duration,jdbcType=INTEGER}, #{costType,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL},
+        #{primeCost,jdbcType=DECIMAL}, #{demandNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER},
+        #{objects,jdbcType=VARCHAR}, #{applicationObject,jdbcType=VARCHAR}, #{purport,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Course">
         insert into course
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -77,11 +83,23 @@
             <if test="cost != null">
                 cost,
             </if>
+            <if test="primeCost != null">
+                primeCost,
+            </if>
             <if test="demandNum != null">
                 demandNum,
             </if>
             <if test="likeNum != null">
                 likeNum,
+            </if>
+            <if test="objects != null">
+                objects,
+            </if>
+            <if test="applicationObject != null">
+                applicationObject,
+            </if>
+            <if test="purport != null">
+                purport,
             </if>
             <if test="remark != null">
                 remark,
@@ -127,11 +145,23 @@
             <if test="cost != null">
                 #{cost,jdbcType=DECIMAL},
             </if>
+            <if test="primeCost != null">
+                #{primeCost,jdbcType=DECIMAL},
+            </if>
             <if test="demandNum != null">
                 #{demandNum,jdbcType=INTEGER},
             </if>
             <if test="likeNum != null">
                 #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="objects != null">
+                #{objects,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationObject != null">
+                #{applicationObject,jdbcType=VARCHAR},
+            </if>
+            <if test="purport != null">
+                #{purport,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -177,11 +207,23 @@
             <if test="cost != null">
                 cost = #{cost,jdbcType=DECIMAL},
             </if>
+            <if test="primeCost != null">
+                primeCost = #{primeCost,jdbcType=DECIMAL},
+            </if>
             <if test="demandNum != null">
                 demandNum = #{demandNum,jdbcType=INTEGER},
             </if>
             <if test="likeNum != null">
                 likeNum = #{likeNum,jdbcType=INTEGER},
+            </if>
+            <if test="objects != null">
+                objects = #{objects,jdbcType=VARCHAR},
+            </if>
+            <if test="applicationObject != null">
+                applicationObject = #{applicationObject,jdbcType=VARCHAR},
+            </if>
+            <if test="purport != null">
+                purport = #{purport,jdbcType=VARCHAR},
             </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
@@ -207,12 +249,17 @@
       category = #{category,jdbcType=VARCHAR},
       mediType = #{mediType,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
+        introduce = #{introduce,jdbcType=LONGVARCHAR},
       cover = #{cover,jdbcType=VARCHAR},
       duration = #{duration,jdbcType=INTEGER},
       costType = #{costType,jdbcType=VARCHAR},
       cost = #{cost,jdbcType=DECIMAL},
+        primeCost = #{primeCost,jdbcType=DECIMAL},
       demandNum = #{demandNum,jdbcType=INTEGER},
       likeNum = #{likeNum,jdbcType=INTEGER},
+        objects = #{objects,jdbcType=VARCHAR},
+        applicationObject = #{applicationObject,jdbcType=VARCHAR},
+        purport = #{purport,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -226,7 +273,8 @@
     <sql id="Vo_Column_List">
         IFNULL(ca.rst,'0') as auditRst,
         t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
-        t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce
+        t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce,
+        t.primeCost, t.objects, t.applicationObject, t.purport
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -266,7 +314,16 @@
             and t.createUserId = #{condition.createUserId,jdbcType=VARCHAR}
         </if>
         <if test="condition.auditRst !=null and condition.auditRst !=&quot;&quot;">
-            and t.auditRst = #{condition.auditRst,jdbcType=VARCHAR}
+            and IFNULL(ca.rst,'0') = #{condition.auditRst,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.objects !=null and condition.objects !=&quot;&quot;">
+            and t.objects = #{condition.objects,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.costType !=null and condition.costType !=&quot;&quot;">
+            and t.costType = #{condition.costType,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.purport !=null and condition.purport !=&quot;&quot;">
+            and t.purport = #{condition.purport,jdbcType=VARCHAR}
         </if>
     </sql>
 

@@ -4,8 +4,7 @@ jQuery(function($) {
 	$(window).on(
 			'resize.jqGrid',
 			function() {
-				$(cfg.grid_selector).jqGrid('setGridWidth',
-						$(".page-content").width());
+				$(cfg.grid_selector).jqGrid('setGridWidth',$(".page-content").width());
 			})
 	// resize on sidebar collapse/expand
 	var parent_column = $(cfg.grid_selector).closest('[class*="col-"]');

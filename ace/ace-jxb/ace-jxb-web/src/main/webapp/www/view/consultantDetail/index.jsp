@@ -29,7 +29,7 @@
 						<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${data.counselor.level}</div>
 					</div>
 					<div class="row introduce">
-						<p>\${data.counselor.certification}</p>
+						<p>\${\${data.counselor.certification}}</p>
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-2 row_01">
