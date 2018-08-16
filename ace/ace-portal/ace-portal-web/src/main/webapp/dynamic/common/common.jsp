@@ -51,6 +51,9 @@ String portalType=(String)user.getCfg().get("portalType");
     color: #a7b2c0;
     font-size:14px;
 }
+.page-header {
+    padding-top: 0px;
+}
 </style>
 <%}%>
 <link rel="shortcut icon" href="favicon.ico"/>
