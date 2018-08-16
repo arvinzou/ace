@@ -37,16 +37,28 @@
         <div class="row itemlist">
             <div class="row item">
             <div class="col-xs-4 col-md-4">
-            <img src="img/cover.png" class="cover" />
+				{@if item.category == '2'}
+            	<img src="\${item.course.cover}" class="cover" />
+				{@else if item.category == '1'}
+				<img src="\${item.counselor.imagePhotoUrl}" class="cover" />
+				{@/if}
             </div>
             <div class="col-xs-8 col-md-8" style="padding-left: 0 !important;">
             <div class="row">
             <p class="title">\${item.commodityName}</p>
             </div>
             <div class="row">
-            <p class="detail">小学 · 社会交往 · 共20节</p>
+				{@if item.category == '2'}
+            	<p class="detail">\${item.course.objects}</p>
+				{@else if item.category == '1'}
+				<p class="detail"></p>
+				{@/if}
         </div>
-        <div class="row" style="padding-top: 0.2rem;"><span class="money">¥\${item.payMoney}</span><span class="history_money">¥299</span></div>
+        <div class="row" style="padding-top: 0.2rem;">
+			<span class="money">¥\${item.payMoney}</span>
+				{@if item.category == '2'}
+					<span class="history_money">¥\${item.course.primeCost}</span></div>
+				{@/if}
         </div>
         </div>
         <div class="row order">
