@@ -1,9 +1,6 @@
 package com.huacainfo.ace.jxb.vo;
 
-import com.huacainfo.ace.jxb.model.BaseOrder;
-import com.huacainfo.ace.jxb.model.ConsultOrder;
-import com.huacainfo.ace.jxb.model.ConsultProduct;
-import com.huacainfo.ace.jxb.model.Counselor;
+import com.huacainfo.ace.jxb.model.*;
 //import com.huacainfo.ace.portal.model.Users;
 
 
@@ -11,11 +8,28 @@ public class BaseOrderVo extends BaseOrder {
     private static final long serialVersionUID = 1L;
 
     private Counselor counselor;
-    private ConsultProduct consultProduct;
     private String consumerName;
     private String consumerImgUrl;
 
+    /**
+     * 咨询订单相关内容
+     */
     private ConsultOrder consultOrder;
+    private ConsultProduct consultProduct;
+
+
+    /**
+     * 课程订单相关内容
+     */
+    private Course course;
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
     public ConsultOrder getConsultOrder() {
         return consultOrder;
