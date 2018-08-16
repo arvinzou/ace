@@ -1,7 +1,9 @@
+
+
 <%@page import="java.util.Date"%>
 <%@page import="com.huacainfo.ace.common.tools.CommonUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+pageEncoding="utf-8"%>
 <%
 session.setAttribute("portalPath", "/portal");
 request.setAttribute("now", CommonUtils.formatDate(new Date()));
@@ -53,6 +55,11 @@ String portalType=(String)user.getCfg().get("portalType");
 }
 .page-header {
     padding-top: 0px;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:active, .dropdown-menu>li.active>a, .dropdown-menu>li.active>a:hover, .dropdown-menu .dropdown-submenu:hover>a {
+    background: #f6f6f6;
+    color: #000;
 }
 </style>
 <%}%>
