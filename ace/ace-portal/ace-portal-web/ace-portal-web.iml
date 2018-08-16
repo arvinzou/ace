@@ -123,10 +123,6 @@
     <orderEntry type="library" name="Maven: commons-fileupload:commons-fileupload:1.3.2" level="project" />
     <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:2.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.2.RELEASE" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.4" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:jsp-api:2.0" level="project" />
-    <orderEntry type="module" module-name="ace-portal-client" />
-    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.3.2.RELEASE" level="project" />
     <orderEntry type="module" module-name="ace-portal-service" />
     <orderEntry type="module" module-name="ace-common-dao" />
     <orderEntry type="library" name="Maven: org.springframework:spring-orm:4.3.2.RELEASE" level="project" />
@@ -140,6 +136,10 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpasyncclient:4.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore-nio:4.3.2" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.3" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:jsp-api:2.0" level="project" />
+    <orderEntry type="module" module-name="ace-portal-client" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: net.coobird:thumbnailator:0.4.7" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp.jstl:jstl-api:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.web:jstl-impl:1.2" level="project" />

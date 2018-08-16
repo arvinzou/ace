@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<title ng-bind="projectInfo.projectName"></title>
+		<link rel="stylesheet" type="text/css" href="../css/nav.css"/>
+		<link rel="stylesheet" type="text/css" href="../js/layui/css/layui.css" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/donation.css" />
+		<link rel="stylesheet" type="text/css" href="../js/dropload/dropload.css"/>
+		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/nav.js"></script>
+		<script type="text/javascript" src="../js/init-rem.js"></script>
+		<script type="text/javascript" src="../js/dropload/dropload.js"></script>
+		<script type="text/javascript" src="../js/angular/angular.min.js"></script>
+		<script type="text/javascript" src="js/donation.js"></script>
+		
+	</head>
+
+	<body>
+		<div class="projectbox">
+			<div class="project_item">
+				<div class="project_item_image" style="height: 6rem;">
+					<img ng-if="projectInfo.coverUrl!=''&&projectInfo.coverUrl!=undefined&&projectInfo.coverUrl!=null" ng-src="{{projectInfo.coverUrl}}" width="100%" height="100%" />
+					<img ng-if="projectInfo.coverUrl==''||projectInfo.coverUrl==undefined||projectInfo.coverUrl==null" ng-src="img/project_default.png" width="100%" height="100%" />
+                </div>
+				<div class="project_item_name">
+					<p class="name_01" ng-bind="projectInfo.projectName"></p>
+					<p style="padding-bottom: 0.5rem;" ng-if="type != 2" class="name_02" ng-bind="projectInfo.title"></p>
+				</div>
+				<div class="project_item_raise" style="display: none;
+">
+					<div class="raise_01">
+						<p ng-if="type != 2" class="raise_money" ng-bind="projectInfo.collectAmount"></p>
+						<p ng-if="type != 2" class="raise_price">已募集(元)</p>
+						<p ng-if="type == 2" class="raise_money" ng-bind="projectInfo.targetAmount"></p>
+						<p ng-if="type == 2" class="raise_price">目标金额(元)</p>
+					</div>
+					<div class="raise_01">
+						<p ng-if="type != 2" class="raise_money" ng-bind="projectInfo.payoutAmount"></p>
+						<p ng-if="type != 2" class="raise_price">已支出(元)</p>
+						<p ng-if="type == 2" class="raise_money" ng-bind="projectInfo.collectAmount"></p>
+						<p ng-if="type == 2" class="raise_price">已筹集(元)</p>
+					</div>
+					<div class="raise_01">
+						<p ng-if="type != 2" class="raise_money" ng-bind="projectInfo.balanceAmount"></p>
+						<p ng-if="type != 2" class="raise_price">结余(元)</p>
+						<p ng-if="type == 2" class="raise_money" ng-bind="projectInfo.endDate | formatDate"></p>
+						<p ng-if="type == 2" class="raise_price">截止时间</p>
+					</div>
+					<div style="clear: both;"></div>
+				</div>
+			</div>
+			<div class="project_nav">
+				<!--<ul class="project_nav_ul">
+					<li onclick="hoverli('nav_info01');">项目详情</li>
+					<li onclick="hoverli('nav_info02');">使用记录</li>
+					<li onclick="hoverli('nav_info03');">捐赠列表</li>
+				</ul>-->
+				<!--导航栏-->
+			    <div class="navigation">
+			        <div class="news-title">
+			            <ul class="news-module project_nav_ul clear">
+			                <li class="active" onclick="hoverli('nav_info01');">项目详情</li>
+			                <li onclick="hoverli('nav_info02');">使用记录</li>
+			                <li onclick="hoverli('nav_info03');">捐赠列表</li>
+			            </ul>
+			            <div class="news-slider"></div>
+			        </div>
+			    </div>
+			</div>
+			<div class="nav_info">
+				<div id="nav_info01" class="nav_info_content dis">
+					<p id="projectDetail"></p>
+				</div>
+
+				<div id="nav_info02" class="nav_info_content undis">
+					<div class="project_record">
+						<ul class="layui-timeline">
+							<li class="layui-timeline-item">
+								<i class="layui-icon layui-timeline-axis"><img src="img/love_icon.png" style="width:20px; height: 15px;"/></i>
+								<div class="layui-timeline-content layui-text">
+									<div class="love_title">
+										<div class="love_cmt_01" ng-cloak>已捐赠于{{totalProject}}个项目</div>
+									</div>
+								</div>
+							</li>
+							<li class="layui-timeline-item" ng-repeat="record in useRecords">
+								<i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+								<div class="layui-timeline-content layui-text">
+									<div class="layui-timeline-title">
+										<div class="project_record_title">
+											<div class="project_record_title01" ng-bind="record.useToProjectName"></div>
+											<div class="project_record_title02">使用资金：<span class="donation_money" ng-bind="record.useAmount"></span></div>
+										</div>
+										<div class="project_record_info troggle" ng-bind-html="record.useToProjectDesc | to_trusted">
+										</div>
+										<div class="upordown"><p name="down" onclick="troggle(this);"><span class="opt">展开</span><img src="img/down.png" style="width: 0.3rem;height: 0.2rem;"></p></div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div id="nav_info03" class="nav_info_content undis">
+					<div class="donation_list">
+						<div class="donation_item" ng-repeat="dua in donationList">
+							<div class="donation_user_image">
+								<img ng-src="{{dua.headimgurl}}" />
+							</div>
+							<div class="donation_user_info">
+								<div class="donation_users"><span class="username" ng-bind="dua.nickname"></span>捐赠了<span class="donation_money" ng-bind="dua.donateAmount"></span>元</div>
+								<div class="donation_msg" ng-bind="dua.remark"></div>
+								<div class="donation_time" ng-bind="dua.donateDate"></div>
+							</div>
+							<div style="clear: both;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--我要捐赠按钮-->
+		<div class="donation_btn" ng-click="donate();">
+			<img src="img/donation_btn.png" width="100%" height="100%"/>
+		</div>
+	</body>
+
+</html>
