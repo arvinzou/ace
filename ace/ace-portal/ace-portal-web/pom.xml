@@ -24,6 +24,11 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.huacainfo</groupId>
+			<artifactId>ace-portal-service</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>servletapi</groupId>
 			<artifactId>servletapi</artifactId>
 			<version>2.4</version>

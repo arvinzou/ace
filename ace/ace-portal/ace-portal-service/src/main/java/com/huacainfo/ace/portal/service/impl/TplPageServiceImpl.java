@@ -260,6 +260,7 @@ public class TplPageServiceImpl implements TplPageService {
 				at.setHrefUrl("");
 				at.setCreateDate(new Date());
 				at.setStatus("1");
+				at.setType("1");
 				at.setCreateUserName(userProp.getName());
 				at.setCreateUserId(userProp.getUserId());
 				this.articleDao.insert(at);
