@@ -142,80 +142,80 @@ pageEncoding="utf-8"%>
 	</div>
 
 
+	<div class="page-content-2 background">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<!-- #section:custom/widget-box -->
+				<div class="widget-box transparent background-white padding1" id="recent-box">
+					<div class="widget-header">
+						<h4 class="widget-title lighter smaller">
+							<i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
+						</h4>
 
+						<div class="widget-toolbar no-border">
 
-
-
-
-</div>
-<div class="page-content-2 background">
-	<div class="row">
-		<div class="col-xs-12 col-sm-6">
-			<!-- #section:custom/widget-box -->
-			<div class="widget-box transparent background-white padding1" id="recent-box">
-				<div class="widget-header">
-					<h4 class="widget-title lighter smaller">
-						<i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
-					</h4>
-
-					<div class="widget-toolbar no-border">
-
+						</div>
 					</div>
-				</div>
 
-				<div class="widget-body" style="min-height:250px">
-					<div class="widget-main padding-4">
-						<table width="100%">
+					<div class="widget-body" style="min-height:250px">
+						<div class="widget-main padding-4">
+							<table width="100%">
 
 
-							<tbody id="notice-list-grid">
+								<tbody id="notice-list-grid">
 
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.widget-main -->
 					</div>
-					<!-- /.widget-main -->
+					<!-- /.widget-body -->
 				</div>
-				<!-- /.widget-body -->
+				<!-- /.widget-box -->
+
+				<!-- /section:custom/widget-box -->
 			</div>
-			<!-- /.widget-box -->
 
-			<!-- /section:custom/widget-box -->
-		</div>
+			<div class="col-xs-12 col-sm-6">
+				<!-- #section:custom/widget-box -->
+				<div class="widget-box transparent background-white padding1" id="recent-box">
+					<div class="widget-header">
+						<h4 class="widget-title lighter smaller">
+							<i class="ace-icon glyphicon glyphicon-th-large green"></i>辖区公告
+						</h4>
 
-		<div class="col-xs-12 col-sm-6">
-			<!-- #section:custom/widget-box -->
-			<div class="widget-box transparent background-white padding1" id="recent-box">
-				<div class="widget-header">
-					<h4 class="widget-title lighter smaller">
-						<i class="ace-icon glyphicon glyphicon-th-large green"></i>辖区公告
-					</h4>
+						<div class="widget-toolbar no-border">
 
-					<div class="widget-toolbar no-border">
-
+						</div>
 					</div>
-				</div>
 
-				<div class="widget-body" style="min-height:250px">
-					<div class="widget-main padding-4">
-						<table width="100%;">
+					<div class="widget-body" style="min-height:250px">
+						<div class="widget-main padding-4">
+							<table width="100%;">
 
 
-							<tbody id="notice-list-grid-area">
+								<tbody id="notice-list-grid-area">
 
-							</tbody>
-						</table>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.widget-main -->
 					</div>
-					<!-- /.widget-main -->
+					<!-- /.widget-body -->
 				</div>
-				<!-- /.widget-body -->
+				<!-- /.widget-box -->
+
+				<!-- /section:custom/widget-box -->
 			</div>
-			<!-- /.widget-box -->
-
-			<!-- /section:custom/widget-box -->
+			<!-- /.span -->
 		</div>
-		<!-- /.span -->
 	</div>
+
+
+
+
 </div>
+
 <!-- /.page-content -->
 
 
