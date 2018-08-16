@@ -24,13 +24,15 @@
 										 src="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/img/avatar9.jpg">
 									<span class="username username-hide-mobile">${SESSION_USERPROP_KEY.name}</span>
 								</div>
+
+
 								<ul class="dropdown-menu dropdown-menu-default">
-									<li><a href="javascript:userCfg();">
+									<li><a href="${pageContext.request.contextPath}/dynamic/service/userCfg/index.jsp">
 										<i class="ace-icon fa fa-cog"></i>
 										个性化配置
 									</a></li>
 									<li>
-										<a data-target="#stack1" data-toggle="modal">
+										<a href="${pageContext.request.contextPath}/dynamic/portal/modifyPwd.jsp">
 											<i class="ace-icon fa fa-key"></i> 密码修改
 										</a>
 									</li>

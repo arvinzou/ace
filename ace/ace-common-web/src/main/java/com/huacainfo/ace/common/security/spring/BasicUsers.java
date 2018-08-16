@@ -24,6 +24,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 
 	public BasicUsers() {
 
+
 	}
 
 
