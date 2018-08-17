@@ -164,7 +164,7 @@ function initEditor(){
         },
         init: {
             FileFiltered: function (up, files) {
-                showUploadText('.viewPicture video', '.uploadText');
+                showUploadText('.viewPicture p', '.uploadText');
                 up.start();
                 return false;
             },
@@ -174,7 +174,7 @@ function initEditor(){
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
-                viewCover('http://zx.huacainfo.com/'+rst.value[0], '.pictureContainer','.viewPicture video','.uploadText');
+                viewCover('http://zx.huacainfo.com/'+rst.value[0], '.pictureContainer','.viewPicture p','.uploadText');
                 videoUrl = 'http://zx.huacainfo.com/'+rst.value[0];
                 console.log(rst.value[0]);
             }
@@ -289,7 +289,7 @@ function audit(){
 }
 /*文件上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {
-    $(clazz).data('imgSrc',img);
+    $(clazz).text(img);
     var imagePath=img;
     showUploadImg(imagePath, imgClazz, textClazz);
 }
