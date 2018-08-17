@@ -244,7 +244,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         }
 
         //注册成功消息推送
-        sendRegisterMessage(o.getLpMobile(), o.getFullName(), password);
+//        sendRegisterMessage(o.getLpMobile(), o.getFullName(), password);
 
         return new MessageResponse(0, "添加企业管理完成！");
     }

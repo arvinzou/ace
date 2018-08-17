@@ -72,4 +72,9 @@ public interface SysAccountService {
     Map<String, Object> getAccountInfo(String relationId, String relationType);
 
     ResultResponse destroyAll();
+
+    /**
+     * 数据导入 com_data_import
+     */
+    ResultResponse dataImport() throws Exception;
 }

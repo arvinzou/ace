@@ -47,6 +47,7 @@ public interface FopCompanyDao {
                                              @Param("types") String[] types);
 
 
-    List<Map<String, String>> selectPerson(
-            @Param("params") Map<String, Object> params);
+    List<Map<String, String>> selectPerson(@Param("params") Map<String, Object> params);
+
+    FopCompanyVo findByCreditCode(String creditCode);
 }

@@ -170,8 +170,8 @@ function modify(id) {
     ids = id;
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            $('.submit_btn').attr('flag', false);
-            $('.submit_btn[flag="false"]').click(updataEvaluatTpl);
+            $('.submit_btn').off("click");
+            $('.submit_btn').click(updataEvaluatTpl);
             fillForm(result.value);
             $('#createTest').modal('show');
         }
@@ -325,8 +325,8 @@ function addGange() {
 /*创建测试*/
 function createTest() {
     clearForm();
-    $('.submit_btn').attr('flag', true);
-    $('.submit_btn[flag="true"]').click(insertEvaluatTpl);
+    $('.submit_btn').off("click");
+    $('.submit_btn').click(insertEvaluatTpl);
     $('#createTest').modal('show');
 }
 
