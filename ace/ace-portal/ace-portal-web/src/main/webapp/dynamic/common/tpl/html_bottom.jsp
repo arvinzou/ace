@@ -4,17 +4,15 @@
 		<div class="page-prefooter" style="border-radius: 0px!important;">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+					<div class="col-md-4 col-sm-6 col-xs-12 footer-block">
 						<h2>备案</h2>
 						<p> 湖南·常德   湘ICP备16015679号 </p>
 					</div>
-					<div class="col-md-3 col-sm-6 col-xs12 footer-block">
+					<div class="col-md-4 col-sm-6 col-xs12 footer-block">
 
 					</div>
-					<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
 
-					</div>
-					<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
+					<div class="col-md-4 col-sm-6 col-xs-12 footer-block">
 						<h2>联系我们</h2>
 						<address class="margin-bottom-40"> 电话: 13922861673
 							<br> Email:

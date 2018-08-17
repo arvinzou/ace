@@ -7,7 +7,7 @@
 				<div class="container">
 					<div class="page-logo">
 						<a href="index.html">
-							<img src="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
+							<img src="${cfg.logo}" alt="logo" class="logo-default">
 						</a>
 					</div>
 					<a href="#" class="navbar-brand">
