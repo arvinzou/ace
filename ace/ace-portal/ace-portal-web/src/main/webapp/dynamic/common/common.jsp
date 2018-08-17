@@ -32,7 +32,6 @@ String portalType=(String)user.getCfg().get("portalType");
 <link rel="stylesheet" href="${portalPath}/content/common/assets/css/ui.jqgrid.css?version=${cfg.version}" />
 <link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-fonts.css?version=${cfg.version}" />
 <link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-ie8.min.css?version=${cfg.version}" />
-
 <link rel="stylesheet" href="${portalPath}/content/common/css/ui.multiselect.css?version=${cfg.version}" />
 <link href="${portalPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <%if(portalType.equals("1")){%>
@@ -45,43 +44,5 @@ String portalType=(String)user.getCfg().get("portalType");
 <link rel="stylesheet" href="${portalPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
 <link rel="shortcut icon" href="favicon.ico"/>
 <%if(portalType.equals("4")){%>
-<style>
-.page-content-wrapper .page-content {
-    margin-left: 0px;
-    margin-top: 0;
-    margin-bottom: 30px;
-    min-height: 300px;
-    padding: 0px 0px 0px;
-}
-.breadcrumb1 {
-    background: none;
-    padding-top:15px;
-    color: #a7b2c0;
-    font-size:14px;
-}
-.page-header {
-    padding-top: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:active, .dropdown-menu>li.active>a, .dropdown-menu>li.active>a:hover, .dropdown-menu .dropdown-submenu:hover>a {
-    background: #f6f6f6;
-    color: #000;
-}
-.page-head .page-title {
-    display: inline-block;
-    float: left;
-    padding: 0px 0;
-}
-
-.navbar-brand {
-    float: left;
-    padding: 15px 12px;
-    font-size: 22px;
-    line-height: 45px;
-    height: 75px;
-    color:#000;
-}
-</style>
+<link href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css"/>
 <%}%>
