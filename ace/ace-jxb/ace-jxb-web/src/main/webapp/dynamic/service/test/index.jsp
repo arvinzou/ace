@@ -40,11 +40,11 @@
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
-                                    <a href="index4.jsp">首页</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>心理测试</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -56,11 +56,10 @@
                                         <div class="profile-content">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
+                                                    <div class="portlet light">
                                                         <div class="portlet-title">
                                                             <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase">心理测试</span>
+                                                                心理测试
                                                             </div>
 
                                                             <div class="actions">
@@ -84,7 +83,7 @@
 
                                                                         <div class="portlet-body">
                                                                             <div class="table-scrollable">
-                                                                                <table class="table table-striped table-hover">
+                                                                                <table class="table table-hover">
                                                                                     <thead>
                                                                                     <tr>
                                                                                         <th width="10%"> 序号</th>
