@@ -41,7 +41,10 @@ String portalType=(String)user.getCfg().get("portalType");
 <%}else{%>
 <link href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
 <link href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css"/>
-
+<%}%>
+<link rel="stylesheet" href="${portalPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
+<link rel="shortcut icon" href="favicon.ico"/>
+<%if(portalType.equals("4")){%>
 <style>
 .page-content-wrapper .page-content {
     margin-left: 0px;
@@ -71,5 +74,3 @@ String portalType=(String)user.getCfg().get("portalType");
 }
 </style>
 <%}%>
-<link rel="stylesheet" href="${portalPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
-<link rel="shortcut icon" href="favicon.ico"/>

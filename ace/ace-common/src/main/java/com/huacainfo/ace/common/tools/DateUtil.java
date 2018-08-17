@@ -78,6 +78,17 @@ public final class DateUtil {
         DEFAULT_DATE_TIME_REGEX = timeFormat;
     }
 
+    public static Date toDate(String dateStr, String regex) {
+        Date date = null;
+        SimpleDateFormat sdf = new SimpleDateFormat(regex);
+        try {
+            date = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            logger.error("run error", e);
+        }
+        return date;
+    }
+
     public static Date toDate(String dateStr) {
         Date date = null;
         SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATE_TIME_REGEX);
