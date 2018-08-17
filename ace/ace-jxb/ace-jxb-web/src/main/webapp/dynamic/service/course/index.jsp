@@ -276,7 +276,7 @@
             <div class="col-xs-12 col-md-10">
                 <div class="pictureContainer" id="video" style="z-index: 1;">
                     <div class="viewPicture">
-                        <video id="vedioSource" src="\${data.courseSource.mediUrl}" controls="controls" width="340px" heigt="235px"></video>
+                        <p id="vedioSource" src="\${data.courseSource.mediUrl}" controls="controls" width="340px" heigt="235px"></p>
                     </div>
                     <div class="uploadText">
                         <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>

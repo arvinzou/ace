@@ -44,7 +44,7 @@ window.onload = function(){
         }
     }
     console.log("courseId:"+primaryId+"\n"+"partId:"+partId+"\n");
-
+    findSourceByCourseId();
     var editor = new Simditor({
         textarea: $('#coursedoc'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
@@ -72,12 +72,12 @@ window.onload = function(){
         filters: {
             max_file_size: '2048mb',
             mime_types: [
-                {title: "files", extensions: "mp4,mp3"}
+                {title: "files", extensions: "mp3"}
             ]
         },
         init: {
             FileFiltered: function (up, files) {
-                showUploadText('.viewPicture video', '.uploadText');
+                showUploadText('.viewPicture p', '.uploadText');
                 up.start();
                 return false;
             },
@@ -87,7 +87,7 @@ window.onload = function(){
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
-                viewCover('http://zx.huacainfo.com/'+rst.value[0], '.pictureContainer','.viewPicture video','.uploadText');
+                viewCover('http://zx.huacainfo.com/'+rst.value[0], '.pictureContainer','.viewPicture p','.uploadText');
                 videoUrl = 'http://zx.huacainfo.com/'+rst.value[0];
                 console.log(rst.value[0]);
             }
@@ -99,7 +99,7 @@ window.onload = function(){
 
 /*文件上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {
-    $(clazz).data('imgSrc',img);
+    $(clazz).text(img);
     var imagePath=img;
     showUploadImg(imagePath, imgClazz, textClazz);
 }
@@ -117,7 +117,8 @@ function showUploadImg(imgpath, imgClazz, textClazz) {
     $(textClazz).hide();
 }
 
-function save(){
+function save(sourceId){
+    //如果sourceId不为空的话，操作就是更新
     var coursedoc = $("textarea[name = 'coursedoc']").val();
     var duation = $("input[name = 'duation']").val();
     var free = $('input[name="tried"]:checked').val();
@@ -125,31 +126,64 @@ function save(){
     if(partId == null || partId == undefined){
         partId = '0';
     }
-    $.ajax({
-        url: contextPath + "/courseSource/insertCourseSource",
-        type:"post",
-        async:false,
-        data:{jsons:JSON.stringify({
-               courseId: primaryId,
-                name: courseName,
-                partId: partId,
-                free: free,
-                mediUrl: videoUrl
-            })
-        },
-        success:function(result){
-            if(result.status == 0) {
-                console.log(result);
-                alert("创建成功！");
-                window.location.href = contextPath + '/dynamic/service/course/index.jsp';
-            }else {
-                alert(result.errorMessage);
+
+    if(sourceId == null || sourceId == undefined || sourceId == ''){  //插入操作
+        $.ajax({
+            url: contextPath + "/courseSource/insertCourseSource",
+            type:"post",
+            async:false,
+            data:{jsons:JSON.stringify({
+                    courseId: primaryId,
+                    name: courseName,
+                    partId: partId,
+                    free: free,
+                    mediUrl: videoUrl,
+                    introduction: coursedoc
+                })
+            },
+            success:function(result){
+                if(result.status == 0) {
+                    console.log(result);
+                    alert("创建成功！");
+                    window.location.href = contextPath + '/dynamic/service/course/index.jsp';
+                }else {
+                    alert(result.errorMessage);
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }else{   //更新操作
+        $.ajax({
+            url: contextPath + "/courseSource/updateCourseSource",
+            type:"post",
+            async:false,
+            data:{jsons:JSON.stringify({
+                    id: sourceId,
+                    courseId: primaryId,
+                    name: courseName,
+                    partId: partId,
+                    free: free,
+                    mediUrl: videoUrl,
+                    introduction: coursedoc
+                })
+            },
+            success:function(result){
+                if(result.status == 0) {
+                    console.log(result);
+                    alert("更新成功！");
+                    window.location.href = contextPath + '/dynamic/service/course/index.jsp';
+                }else {
+                    alert(result.errorMessage);
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
+            }
+        });
+    }
+
 }
 
 function findCourseById(){
@@ -173,4 +207,48 @@ function findCourseById(){
         }
     });
     return courseName;
+}
+
+function findSourceByCourseId(){
+    $.ajax({
+        url: contextPath + "/course/selectCourseByPrimaryKey",
+        type:"post",
+        async:false,
+        data:{
+            id: primaryId
+        },
+        success:function(result){
+            if(result.status == 0) {
+                var dataSource = {
+                    "courseId":"",
+                    "createDate":"",
+                    "duration":"",
+                    "free":"",
+                    "id":"",
+                    "introduction":"",
+                    "mediUrl":"",
+                    "name":"",
+                    "partId":""
+                }
+                if(result.value.courseSource == undefined || result.value.courseSource == null){
+                    viewHtml('courseSource', dataSource, 'courseSourceTemp');
+                }else{
+                    viewHtml('courseSource', result.value.courseSource, 'courseSourceTemp');
+                }
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function viewHtml(IDom, data, tempId) {
+    var navitem = document.getElementById(tempId).innerHTML;
+    var html = juicer(navitem, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
 }
