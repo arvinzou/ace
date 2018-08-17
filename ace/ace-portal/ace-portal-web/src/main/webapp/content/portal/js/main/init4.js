@@ -242,7 +242,7 @@ function createNav(){
     $(".page-wrapper-row").wrap('<div class="page-wrapper"></div>');
     $(".page-content").css("padding","10px");
 
-    $(".page-content-wrapper div:first").before('<div class="page-head"><div class="container"><div class="page-title"><h3><small></small></h3></div></div>');
+    //$(".page-content-wrapper div:first").before('<div class="page-head"><div class="container"><div class="page-title"><h3><small></small></h3></div></div>');
 
 
 
