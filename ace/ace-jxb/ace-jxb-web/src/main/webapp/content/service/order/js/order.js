@@ -4,6 +4,8 @@ window.onload = function () {
     initpage();
 }
 
+var category = 1;
+
 function formaCategory(type) {
     switch (type) {
         case "1":
@@ -58,6 +60,12 @@ function detail(id) {
     })
 }
 
+function changeType(cType) {
+    console.log(cType);
+    category = cType;
+    initpage();
+}
+
 
 function initpage() {
     $.jqPaginator('#pagination1', {
@@ -78,6 +86,7 @@ function initpage() {
 function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findBaseOrderListSecond";
     var data = {
+        category: category,
         page: num,
         limit: 20
     }

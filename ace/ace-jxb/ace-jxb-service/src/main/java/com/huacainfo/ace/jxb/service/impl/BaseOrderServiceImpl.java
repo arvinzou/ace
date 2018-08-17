@@ -125,12 +125,20 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     public ResultResponse findBaseOrderListSencond(BaseOrderQVo condition, int page, int limit, String orderBy) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
 
-        List<BaseOrderVo> list = this.baseOrderDao.findList(condition, (page - 1) * limit, limit, orderBy);
-        for (BaseOrderVo item : list) {
-            //订单类型 1-咨询订单 2-课程订单
-            if (OrderCategory.CATEGORY_CONSULT.equals(item.getCategory())) {
-                item.setConsultProduct(consultProductDao.selectByPrimaryKey(item.getCommodityId()));
-                item.setCounselor(counselorDao.selectByPrimaryKey(item.getBusinessId()));
+        //sql
+        SqlSession session = getSqlSession();
+        BaseOrderDao dao = session.getMapper(BaseOrderDao.class);
+        List<BaseOrderVo> list = null;
+        try {
+            list = dao.findList(condition, (page - 1) * limit, limit, orderBy);
+
+        } catch (Exception e) {
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
             }
         }
         if (page < 1) {
@@ -307,10 +315,8 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     @Override
     public ResultResponse orderInfoByPrimaryKey(String id) throws Exception {
         BaseOrderVo order = this.baseOrderDao.selectVoByPrimaryKey(id);
-        order.setConsultProduct(this.consultProductDao.selectByPrimaryKey(order.getCommodityId()));
-        order.setCounselor(this.counselorDao.selectByPrimaryKey(order.getBusinessId()));
-        Users user = usersService.selectUsersByPrimaryKey(order.getConsumerId()).getValue();
-        order.setConsumerName(user.getName());
+//        Users user = usersService.selectUsersByPrimaryKey(order.getConsumerId()).getValue();
+//        order.setConsumerName(user.getName());
         return new ResultResponse(ResultCode.SUCCESS, "订单详情", order);
     }
 
