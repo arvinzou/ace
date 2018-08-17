@@ -46,80 +46,71 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>课程管理</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
 
-                                <div class="portlet box yellow">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="fa fa-gift"></i>课程管理 </div>
-                                        <div class="tools">
-                                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div class="tabbable-line">
-                                            <ul class="nav nav-tabs ">
-                                                <li class="active" onclick="changeCourseType('1');">
-                                                    <a href="#tab_15_1" data-toggle="tab" aria-expanded="true"> 单节课程 </a>
-                                                </li>
-                                                <li class="" onclick="changeCourseType('2');">
-                                                    <a href="#tab_15_1" data-toggle="tab" aria-expanded="false"> 系列课程 </a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="tab_15_1">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <!-- BEGIN SAMPLE TABLE PORTLET-->
-                                                            <div class="portlet light ">
-                                                                <div class="portlet-title">
-                                                                    <div class="caption">
-                                                                        <i class="icon-social-dribbble font-green"></i>
-                                                                        <span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">课程管理</font></font></span>
-                                                                    </div>
-                                                                    <div class="make_course" id="makeCourse">
-                                                                        <a href="javascript:;" class="btn red commonCourse" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
-                                                                        <a href="javascript:;" class="btn red specialCourse" style="font-size: 14px !important; display: none;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
-                                                                    </div>
-                                                                    <div class="create_course" id="createCourse">
-                                                                        <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程<i class="fa fa-plus"></i></a>
-                                                                        <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程<i class="fa fa-plus"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="portlet-body">
-                                                                    <div class="table-scrollable">
-                                                                        <table class="table table-hover">
-                                                                            <thead>
-                                                                            <tr>
-                                                                                <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-                                                                                <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody id="courseList">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                        <div class="portlet light ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    课程管理
+                                                </div>
+                                                <div class="make_course" id="makeCourse">
+                                                    <a href="javascript:;" class="btn red commonCourse" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
+                                                    <a href="javascript:;" class="btn red specialCourse" style="font-size: 14px !important; display: none;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
+                                                </div>
+                                                <div class="create_course" id="createCourse">
+                                                    <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程<i class="fa fa-plus"></i></a>
+                                                    <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程<i class="fa fa-plus"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="tabbable-line">
+                                                    <ul class="nav nav-tabs ">
+                                                        <li class="active" onclick="changeCourseType('1');">
+                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="true"> 单节课程 </a>
+                                                        </li>
+                                                        <li class="" onclick="changeCourseType('2');">
+                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="false"> 系列课程 </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" id="tab_15_1">
 
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="table-scrollable">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
+                                                                        <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
+                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
+                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
+                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
+                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody id="courseList">
+
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
-                                                            <!-- END SAMPLE TABLE PORTLET-->
+
+                                                            <ul class="pagination" id="pagination1"></ul>
+
                                                         </div>
-                                                        <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- END SAMPLE TABLE PORTLET-->
                                     </div>
+
                                 </div>
                                 <!--=======================================-->
 

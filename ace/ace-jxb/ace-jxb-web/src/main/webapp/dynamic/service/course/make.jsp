@@ -43,23 +43,30 @@
 									<i class="fa fa-circle"></i>
 								</li>
 								<li>
-									<span>仪表盘</span>
+									<span>课程制作</span>
 								</li>
 							</ul>
 							<div class="page-content-inner">
 
 								<!---==============================================-->
-								<div class="container">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h3 class="panel-title">
-												课程制作
-											</h3>
-										</div>
-										<div class="panel-body" id="courseSource">
 
+
+								<div class="row">
+									<div class="col-md-12">
+										<!-- BEGIN SAMPLE TABLE PORTLET-->
+										<div class="portlet light ">
+											<div class="portlet-title">
+												<div class="caption">
+													课程制作
+												</div>
+											</div>
+											<div class="portlet-body" id="courseSource">
+
+											</div>
 										</div>
+										<!-- END SAMPLE TABLE PORTLET-->
 									</div>
+
 								</div>
 								<!--=======================================-->
 
