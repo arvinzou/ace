@@ -42,6 +42,11 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.huacainfo</groupId>
+            <artifactId>ace-fop-service</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

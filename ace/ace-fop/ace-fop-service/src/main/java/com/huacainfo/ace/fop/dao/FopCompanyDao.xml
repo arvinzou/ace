@@ -725,4 +725,11 @@
         order by t.createDate
         limit 0,20
     </select>
+
+    <select id="findByCreditCode" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="column_List_Vo"/>
+        <include refid="fromCondition_Vo"/>
+        where c.creditCode = #{creditCode,jdbcType=VARCHAR}
+    </select>
 </mapper>

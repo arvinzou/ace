@@ -72,7 +72,16 @@ String portalType=(String)user.getCfg().get("portalType");
 .page-head .page-title {
     display: inline-block;
     float: left;
-    padding: 6px 0;
+    padding: 0px 0;
+}
+
+.navbar-brand {
+    float: left;
+    padding: 15px 12px;
+    font-size: 22px;
+    line-height: 45px;
+    height: 75px;
+    color:#000;
 }
 </style>
 <%}%>

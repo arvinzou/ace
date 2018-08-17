@@ -3,18 +3,23 @@ package com.huacainfo.ace.fop.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.redis.AspireRedisTemplate;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.common.web.tools.WebUtils;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
+import com.huacainfo.ace.fop.dao.ComDataImportDao;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.SysAccountDao;
+import com.huacainfo.ace.fop.model.ComDataImport;
 import com.huacainfo.ace.fop.model.FopAssociation;
+import com.huacainfo.ace.fop.service.FopCompanyService;
 import com.huacainfo.ace.fop.service.SysAccountService;
 import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.portal.model.Department;
@@ -30,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service("sysAccountService")
@@ -54,6 +60,10 @@ public class SysAccountServiceImpl implements SysAccountService {
     private FopAssociationDao fopAssociationDao;
     @Autowired
     private UsersService usersService;
+    @Autowired
+    private FopCompanyService fopCompanyService;
+    @Autowired
+    private ComDataImportDao comDataImportDao;
 
     /**
      * 新增部门
@@ -285,7 +295,6 @@ public class SysAccountServiceImpl implements SysAccountService {
         return null;
     }
 
-
     private ResultResponse dispatchRoleRight(String userId, UserProp userProp, String[] roleTypes) throws Exception {
         List<Map<String, Object>> roleList = sysAccountDao.selectRoleList(userProp.getActiveSyId(), roleTypes);
         if (CollectionUtils.isEmpty(roleList)) {
@@ -296,5 +305,118 @@ public class SysAccountServiceImpl implements SysAccountService {
         MessageResponse rs3 = insertUsersRole(userId, roleId, userProp);
 
         return new ResultResponse(rs3);
+    }
+
+    private Date getDate(String dateStr) {
+
+        String[] array = dateStr.split("/");
+        String year = array[0];
+        String month = array[1].length() < 2 ? "0" + array[1] : array[1];
+        String day = array[2].length() < 2 ? "0" + array[2] : array[2];
+
+        String date = year + "-" + month + "-" + day + " 00:00:00";
+
+        return DateUtil.toDate(date);
+    }
+
+    private Integer getInteger(String str) {
+
+        return StringUtil.isEmpty(str) ? 0 : Integer.parseInt(str);
+    }
+
+    private BigDecimal getBigDecimal(String str) {
+
+        return StringUtil.isEmpty(str) ? BigDecimal.ZERO : new BigDecimal(str).setScale(2);
+    }
+
+    @Override
+    public ResultResponse dataImport() throws Exception {
+        List<ComDataImport> list = comDataImportDao.findList();
+        for (ComDataImport data : list) {
+            generateCompanyInfo(data);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "导入成功");
+
+    }
+
+    private void generateCompanyInfo(ComDataImport data) throws Exception {
+        String creditCode = data.getCreditCode();
+        FopCompanyVo company = fopCompanyDao.findByCreditCode(creditCode);
+        FopCompanyVo params = parseFopCompany(data, company);
+
+        UserProp userProp = new UserProp();
+        userProp.setName("system");
+        userProp.setUserId("system");
+        userProp.setActiveSyId("fop");
+        MessageResponse rs;
+        if (null == company) {
+            rs = fopCompanyService.insertFopCompany(params, userProp);
+        } else {
+            rs = fopCompanyService.updateFopCompany(params, userProp);
+        }
+        if (rs.getStatus() == ResultCode.FAIL) {
+            throw new CustomException(rs.getErrorMessage());
+        }
+    }
+
+
+    private FopCompanyVo parseFopCompany(ComDataImport data, FopCompanyVo company) {
+        if (null == company) {
+            company = new FopCompanyVo();
+        }
+        company.setCompanyType("0");
+        company.setFullName(data.getFullName());
+        company.setCompanyProperty(data.getCompanyProperty());
+        company.setBelongTo(data.getBelongTo());
+        company.setCrewSize(getInteger(data.getCrewSize()));
+        company.setAreaCode(data.getAreaCode());
+        company.setEstablishDate(DateUtil.toDate(data.getEstablishDate() + " 00:00:00"));
+        company.setRegisteredCapital(getBigDecimal(data.getRegisteredCapital()));
+        company.setFixedAssets(getBigDecimal(data.getFixedAssets()));
+        company.setWorkingCapital(getBigDecimal(data.getWorkingCapital()));
+        company.setOwnSpace(getBigDecimal(data.getOwnSpace()));
+        company.setTenancySpace(getBigDecimal(data.getTenancySpace()));
+        company.setAddress(data.getAddress());
+        company.setPostcode(data.getPostcode());
+        company.setFax(data.getFax());
+        company.setMajorVariety(data.getMajorVariety());
+        company.setLaborContractNum(getInteger(data.getLaborContractNum()));
+        company.setThirdLaborRelation(data.getThirdLaborRelation());
+        company.setSocialInsuranceAddr(data.getSocialInsuranceAddr());
+        company.setSocialInsuranceNum(data.getSocialInsuranceNum());
+        //法人信息
+        company.setRealName(data.getRealName());
+        company.setLpMobile(data.getLpMobile());
+        company.setLpSex(data.getLpSex());
+        company.setLpBirthDt(getDate(data.getLpBirthDt()));
+        company.setLpNativePlace(data.getLpNativePlace());
+        company.setLpNationality(data.getLpNationality());
+        company.setLpPolitical(data.getLpPolitical());
+//        company.setLpRecruitmentDate(DateUtil.toDate(data.getLpRecruitmentDate()));
+        company.setLpEducation(data.getLpEducation());
+        company.setLpSkillJobTitle(data.getLpSkillJobTitle());
+        company.setLpDeptPost(data.getLpDeptPost());
+        company.setLpIdentityCard(data.getLpIdentityCard());
+        company.setLpSocietyPost(data.getLpSocietyPost());
+        company.setLpResume(data.getLpResume());
+        company.setLpAchievement(data.getLpAchievement());
+        //党组织
+        company.setPartyCategory(data.getPartyCategory());
+        company.setPartyCrtDt(DateUtil.toDate(data.getPartyCrtDt()));
+        company.setPartyPeoples(getInteger(data.getPartyPeoples()));
+        company.setPartyDutyMan(data.getPartyDutyMan());
+        company.setPartyPhone(data.getPartyPhone());
+        //工会组织建立情况
+        company.setUnionCrtDt(DateUtil.toDate(data.getUnionCrtDt()));
+        company.setUnionDutyMan(data.getUnionDutyMan());
+        company.setUnionPhone(data.getUnionPhone());
+        //对社会公益事业做过何种贡献
+        company.setReemployContribution(data.getReemployContribution());
+        company.setEducationContribution(data.getEducationContribution());
+        company.setHelpPoorContribution(data.getHelpPoorContribution());
+        company.setOtherContribution(data.getOtherContribution());
+
+        return company;
     }
 }
