@@ -61,6 +61,8 @@ String portalType=(String)user.getCfg().get("portalType");
 }
 .page-header {
     padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:active, .dropdown-menu>li.active>a, .dropdown-menu>li.active>a:hover, .dropdown-menu .dropdown-submenu:hover>a {
