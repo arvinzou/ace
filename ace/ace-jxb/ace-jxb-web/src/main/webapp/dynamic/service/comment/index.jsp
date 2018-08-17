@@ -63,7 +63,7 @@
                                                             <tr>
                                                                 <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 昵称 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 商品名称 </font></font></th>
+                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 名称 </font></font></th>
                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 好评度 </font></font></th>
                                                                 <th width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 评论内容 </font></font></th>
                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 评论时间 </font></font></th>
