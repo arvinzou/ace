@@ -52,10 +52,12 @@
                                     <div class="tabbable-line tabbable-full-width">
                                         <ul class="nav nav-tabs">
                                             <li class="active">
-                                                <a href="#tab_1_1" data-toggle="tab"> 咨询订单 </a>
+                                                <a onclick="javascript:changeType('1')" href="#tab_1_1"
+                                                   data-toggle="tab"> 咨询订单 </a>
                                             </li>
                                             <li>
-                                                <a href="#tab_1_3" data-toggle="tab"> 课程订单 </a>
+                                                <a onclick="javascript:changeType('2')" href="#tab_1_3"
+                                                   data-toggle="tab"> 课程订单 </a>
                                             </li>
                                         </ul>
                                         <div class="portlet-body">
