@@ -92,8 +92,8 @@
                                         <!--end tab-pane-->
                                         </div>
                                     </div>
-                                </div>
                             </div>
+                        </div>
 
 
                     </div>

@@ -3,8 +3,8 @@ var loading = {};
 function loadlocal() {
     var urls = [];
 
-    urls.push({path: portalPath, url: '', type: 'css'});
-    urls.push({path: portalPath, url: '', type: 'css'});
+    // urls.push({path: portalPath, url: '', type: 'css'});
+    // urls.push({path: portalPath, url: '', type: 'css'});
 
     urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/assets/global/plugins/jquery.blockui.min.js', type: 'js'});
@@ -26,6 +26,14 @@ function App() {
         type: 'js',
         callback: function () {
             initvalidateform()
+        }
+    });
+    loader({
+        path: portalPath,
+        url: '/content/common/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
+        type: 'js',
+        callback: function () {
+            $("[name='onlineStatus']").bootstrapSwitch();
         }
     });
     loader({
@@ -54,7 +62,6 @@ function initvalidateform() {
 
 
 function hideHint() {
-    console.log(23333333333333333);
     var $that = $(this);
     $that.next().text("");
 }
