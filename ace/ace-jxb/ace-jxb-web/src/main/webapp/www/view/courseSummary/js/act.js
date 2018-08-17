@@ -125,70 +125,71 @@ function initCommentsList(){
 function buy(){
     if(cost == '免费'){
         cost = '0';
-        window.location.href = contextPath + '/www/view/play/index.jsp'
-    }
-    var data = {
-        //          --订单基本情况
-        "base": {
-            "commodityId": primaryId,
-            "category": "2",          //1代表咨询订单，2代表课程订单
-            "price":cost,
-            "payMoney": cost,
-            amount: 1
+        window.location.href = contextPath + '/www/view/catalogues/index.jsp?courseId='+primaryId;
+    }else{
+        var data = {
+            //          --订单基本情况
+            "base": {
+                "commodityId": primaryId,
+                "category": "2",          //1代表咨询订单，2代表课程订单
+                "price":cost,
+                "payMoney": cost,
+                "amount": 1
+            }
         }
-    }
 
-    $.ajax({
-        url: contextPath+ "/www/order/create",
-        type:"post",
-        async:false,
-        /*dataType:"json",*/
-        data:{data:JSON.stringify(data)},
-        success:function(result){
-            if(result.status == 0) {
-                console.log(result);
-                var orderResultData = result.data;
-                $.ajax({
-                    url: contextPath+ "/www/wxpay/unifiedorder",
-                    type:"post",
-                    async:false,
-                    data:{
-                        fee: orderResultData.payMoney,
-                        body: '咨询预约产品',
-                        attach: orderResultData.orderId
-                    },
-                    success:function(result){
-                        if(result.status == 0) {
-                            var payData = result.data;
-                            onBridgeReady(payData, orderResultData.orderId);
-                            console.log(result);
-                            if (!$scope.$$phase) {
-                                $scope.$apply();
+        $.ajax({
+            url: contextPath+ "/www/order/create",
+            type:"post",
+            async:false,
+            /*dataType:"json",*/
+            data:{data:JSON.stringify(data)},
+            success:function(result){
+                if(result.status == 0) {
+                    console.log(result);
+                    var orderResultData = result.data;
+                    $.ajax({
+                        url: contextPath+ "/www/wxpay/unifiedorder",
+                        type:"post",
+                        async:false,
+                        data:{
+                            fee: orderResultData.payMoney,
+                            body: '课程产品',
+                            attach: orderResultData.orderId
+                        },
+                        success:function(result){
+                            if(result.status == 0) {
+                                var payData = result.data;
+                                onBridgeReady(payData, orderResultData.orderId);
+                                console.log(result);
+                                if (!$scope.$$phase) {
+                                    $scope.$apply();
+                                }
+                            }else {
+                                if(result.info){
+                                    alert(result.info);
+                                }else if(result.errorMessage){
+                                    alert(result.errorMessage);
+                                }
+                                return;
                             }
-                        }else {
-                            if(result.info){
-                                alert(result.info);
-                            }else if(result.errorMessage){
-                                alert(result.errorMessage);
-                            }
+                        },
+                        error:function(){
+                            alert("系统服务内部异常！");
                             return;
                         }
-                    },
-                    error:function(){
-                        alert("系统服务内部异常！");
-                        return;
-                    }
-                });
-            }else {
-                alert(result.info);
+                    });
+                }else {
+                    alert(result.info);
+                    return;
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
                 return;
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-            return;
-        }
-    });
+        });
+    }
 }
 
 function onBridgeReady(obj, orderId){
