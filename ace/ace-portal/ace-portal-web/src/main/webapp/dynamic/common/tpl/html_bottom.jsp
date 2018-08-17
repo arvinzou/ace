@@ -11,7 +11,7 @@
 
 
 					<div class="col-md-6 col-sm-6 col-xs-12 footer-block">
-						<h2>联系我们</h2>
+						<div style="font-size:14px">联系我们</div>
 						<address class="margin-bottom-40">
 							电话: ${cfg.tel}
 							<br>
