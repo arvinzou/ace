@@ -20,7 +20,7 @@
 <table id="pg">
 </table>
 
-	<div id="toolbar" class="toolbar">
+
 
 
 
@@ -30,7 +30,7 @@
     						</button>
 
 
-    					</div>
+
 		
 	</div>
 
