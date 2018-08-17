@@ -38,7 +38,8 @@ jQuery(function($) {
 	$('#btn-view-add').on(
 			'click',
 			function() {
-				parent.addPanel('短信任务添加',contextPath+'/dynamic/service/taskCmcc/add.jsp?id='+urlid,true);
+				//parent.addPanel('短信任务添加',contextPath+'/dynamic/service/taskCmcc/add.jsp?id='+urlid,true);
+				location.href=contextPath+'/dynamic/service/taskCmcc/add.jsp?id='+urlid;
 			});
 	$('#btn-view-edit').on(
 			'click',

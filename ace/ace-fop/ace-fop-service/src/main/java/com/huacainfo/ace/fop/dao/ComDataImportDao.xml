@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.ComDataImportDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.ComDataImport">
+        <id column="creditCode" jdbcType="VARCHAR" property="creditCode"/>
+        <result column="fullName" jdbcType="VARCHAR" property="fullName"/>
+        <result column="companyProperty" jdbcType="VARCHAR" property="companyProperty"/>
+        <result column="belongTo" jdbcType="VARCHAR" property="belongTo"/>
+        <result column="establishDate" jdbcType="VARCHAR" property="establishDate"/>
+        <result column="crewSize" jdbcType="VARCHAR" property="crewSize"/>
+        <result column="areaCodeName" jdbcType="VARCHAR" property="areaCodeName"/>
+        <result column="registeredCapital" jdbcType="VARCHAR" property="registeredCapital"/>
+        <result column="fixedAssets" jdbcType="VARCHAR" property="fixedAssets"/>
+        <result column="workingCapital" jdbcType="VARCHAR" property="workingCapital"/>
+        <result column="ownSpace" jdbcType="VARCHAR" property="ownSpace"/>
+        <result column="tenancySpace" jdbcType="VARCHAR" property="tenancySpace"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="majorVariety" jdbcType="VARCHAR" property="majorVariety"/>
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
+        <result column="lpSex" jdbcType="VARCHAR" property="lpSex"/>
+        <result column="lpBirthDt" jdbcType="VARCHAR" property="lpBirthDt"/>
+        <result column="lpNativePlace" jdbcType="VARCHAR" property="lpNativePlace"/>
+        <result column="lpNationality" jdbcType="VARCHAR" property="lpNationality"/>
+        <result column="lpPolitical" jdbcType="VARCHAR" property="lpPolitical"/>
+        <result column="lpRecruitmentDate" jdbcType="VARCHAR" property="lpRecruitmentDate"/>
+        <result column="lpEducation" jdbcType="VARCHAR" property="lpEducation"/>
+        <result column="lpSkillJobTitle" jdbcType="VARCHAR" property="lpSkillJobTitle"/>
+        <result column="lpDeptPost" jdbcType="VARCHAR" property="lpDeptPost"/>
+        <result column="lpIdentityCard" jdbcType="VARCHAR" property="lpIdentityCard"/>
+        <result column="lpSocietyPost" jdbcType="VARCHAR" property="lpSocietyPost"/>
+        <result column="lpPhone" jdbcType="VARCHAR" property="lpPhone"/>
+        <result column="lpMobile" jdbcType="VARCHAR" property="lpMobile"/>
+        <result column="postcode" jdbcType="VARCHAR" property="postcode"/>
+        <result column="fax" jdbcType="VARCHAR" property="fax"/>
+        <result column="lpAchievement" jdbcType="VARCHAR" property="lpAchievement"/>
+        <result column="partyCategory" jdbcType="VARCHAR" property="partyCategory"/>
+        <result column="partyPeoples" jdbcType="VARCHAR" property="partyPeoples"/>
+        <result column="partyCrtDt" jdbcType="VARCHAR" property="partyCrtDt"/>
+        <result column="partyDutyMan" jdbcType="VARCHAR" property="partyDutyMan"/>
+        <result column="partyPhone" jdbcType="VARCHAR" property="partyPhone"/>
+        <result column="unionCrtDt" jdbcType="VARCHAR" property="unionCrtDt"/>
+        <result column="unionDutyMan" jdbcType="VARCHAR" property="unionDutyMan"/>
+        <result column="unionPhone" jdbcType="VARCHAR" property="unionPhone"/>
+        <result column="laborContractNum" jdbcType="VARCHAR" property="laborContractNum"/>
+        <result column="thirdLaborRelation" jdbcType="VARCHAR" property="thirdLaborRelation"/>
+        <result column="socialInsuranceAddr" jdbcType="VARCHAR" property="socialInsuranceAddr"/>
+        <result column="socialInsuranceNum" jdbcType="VARCHAR" property="socialInsuranceNum"/>
+        <result column="reemployContribution" jdbcType="VARCHAR" property="reemployContribution"/>
+        <result column="educationContribution" jdbcType="VARCHAR" property="educationContribution"/>
+        <result column="helpPoorContribution" jdbcType="VARCHAR" property="helpPoorContribution"/>
+        <result column="otherContribution" jdbcType="VARCHAR" property="otherContribution"/>
+        <result column="lpResume" jdbcType="LONGVARCHAR" property="lpResume"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    creditCode, fullName, companyProperty, belongTo, establishDate, crewSize, areaCodeName, 
+    registeredCapital, fixedAssets, workingCapital, ownSpace, tenancySpace, address, 
+    majorVariety, realName, lpSex, lpBirthDt, lpNativePlace, lpNationality, lpPolitical, 
+    lpRecruitmentDate, lpEducation, lpSkillJobTitle, lpDeptPost, lpIdentityCard, lpSocietyPost, 
+    lpPhone, lpMobile, postcode, fax, lpAchievement, partyCategory, partyPeoples, partyCrtDt, 
+    partyDutyMan, partyPhone, unionCrtDt, unionDutyMan, unionPhone, laborContractNum, 
+    thirdLaborRelation, socialInsuranceAddr, socialInsuranceNum, reemployContribution, 
+    educationContribution, helpPoorContribution, otherContribution, lpResume
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from com_data_import
+        where creditCode = #{creditCode,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from com_data_import
+    where creditCode = #{creditCode,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.ComDataImport">
+    insert into com_data_import (creditCode, fullName, companyProperty, 
+      belongTo, establishDate, crewSize, 
+      areaCodeName, registeredCapital, fixedAssets, 
+      workingCapital, ownSpace, tenancySpace, 
+      address, majorVariety, realName, 
+      lpSex, lpBirthDt, lpNativePlace, 
+      lpNationality, lpPolitical, lpRecruitmentDate, 
+      lpEducation, lpSkillJobTitle, lpDeptPost, 
+      lpIdentityCard, lpSocietyPost, lpPhone, 
+      lpMobile, postcode, fax, 
+      lpAchievement, partyCategory, partyPeoples, 
+      partyCrtDt, partyDutyMan, partyPhone, 
+      unionCrtDt, unionDutyMan, unionPhone, 
+      laborContractNum, thirdLaborRelation, socialInsuranceAddr, 
+      socialInsuranceNum, reemployContribution, 
+      educationContribution, helpPoorContribution, 
+      otherContribution, lpResume)
+    values (#{creditCode,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{companyProperty,jdbcType=VARCHAR}, 
+      #{belongTo,jdbcType=VARCHAR}, #{establishDate,jdbcType=VARCHAR}, #{crewSize,jdbcType=VARCHAR}, 
+      #{areaCodeName,jdbcType=VARCHAR}, #{registeredCapital,jdbcType=VARCHAR}, #{fixedAssets,jdbcType=VARCHAR}, 
+      #{workingCapital,jdbcType=VARCHAR}, #{ownSpace,jdbcType=VARCHAR}, #{tenancySpace,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{majorVariety,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{lpSex,jdbcType=VARCHAR}, #{lpBirthDt,jdbcType=VARCHAR}, #{lpNativePlace,jdbcType=VARCHAR}, 
+      #{lpNationality,jdbcType=VARCHAR}, #{lpPolitical,jdbcType=VARCHAR}, #{lpRecruitmentDate,jdbcType=VARCHAR}, 
+      #{lpEducation,jdbcType=VARCHAR}, #{lpSkillJobTitle,jdbcType=VARCHAR}, #{lpDeptPost,jdbcType=VARCHAR}, 
+      #{lpIdentityCard,jdbcType=VARCHAR}, #{lpSocietyPost,jdbcType=VARCHAR}, #{lpPhone,jdbcType=VARCHAR}, 
+      #{lpMobile,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, 
+      #{lpAchievement,jdbcType=VARCHAR}, #{partyCategory,jdbcType=VARCHAR}, #{partyPeoples,jdbcType=VARCHAR}, 
+      #{partyCrtDt,jdbcType=VARCHAR}, #{partyDutyMan,jdbcType=VARCHAR}, #{partyPhone,jdbcType=VARCHAR}, 
+      #{unionCrtDt,jdbcType=VARCHAR}, #{unionDutyMan,jdbcType=VARCHAR}, #{unionPhone,jdbcType=VARCHAR}, 
+      #{laborContractNum,jdbcType=VARCHAR}, #{thirdLaborRelation,jdbcType=VARCHAR}, #{socialInsuranceAddr,jdbcType=VARCHAR}, 
+      #{socialInsuranceNum,jdbcType=VARCHAR}, #{reemployContribution,jdbcType=VARCHAR}, 
+      #{educationContribution,jdbcType=VARCHAR}, #{helpPoorContribution,jdbcType=VARCHAR}, 
+      #{otherContribution,jdbcType=VARCHAR}, #{lpResume,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.ComDataImport">
+        insert into com_data_import
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="creditCode != null">
+                creditCode,
+            </if>
+            <if test="fullName != null">
+                fullName,
+            </if>
+            <if test="companyProperty != null">
+                companyProperty,
+            </if>
+            <if test="belongTo != null">
+                belongTo,
+            </if>
+            <if test="establishDate != null">
+                establishDate,
+            </if>
+            <if test="crewSize != null">
+                crewSize,
+            </if>
+            <if test="areaCodeName != null">
+                areaCodeName,
+            </if>
+            <if test="registeredCapital != null">
+                registeredCapital,
+            </if>
+            <if test="fixedAssets != null">
+                fixedAssets,
+            </if>
+            <if test="workingCapital != null">
+                workingCapital,
+            </if>
+            <if test="ownSpace != null">
+                ownSpace,
+            </if>
+            <if test="tenancySpace != null">
+                tenancySpace,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="majorVariety != null">
+                majorVariety,
+            </if>
+            <if test="realName != null">
+                realName,
+            </if>
+            <if test="lpSex != null">
+                lpSex,
+            </if>
+            <if test="lpBirthDt != null">
+                lpBirthDt,
+            </if>
+            <if test="lpNativePlace != null">
+                lpNativePlace,
+            </if>
+            <if test="lpNationality != null">
+                lpNationality,
+            </if>
+            <if test="lpPolitical != null">
+                lpPolitical,
+            </if>
+            <if test="lpRecruitmentDate != null">
+                lpRecruitmentDate,
+            </if>
+            <if test="lpEducation != null">
+                lpEducation,
+            </if>
+            <if test="lpSkillJobTitle != null">
+                lpSkillJobTitle,
+            </if>
+            <if test="lpDeptPost != null">
+                lpDeptPost,
+            </if>
+            <if test="lpIdentityCard != null">
+                lpIdentityCard,
+            </if>
+            <if test="lpSocietyPost != null">
+                lpSocietyPost,
+            </if>
+            <if test="lpPhone != null">
+                lpPhone,
+            </if>
+            <if test="lpMobile != null">
+                lpMobile,
+            </if>
+            <if test="postcode != null">
+                postcode,
+            </if>
+            <if test="fax != null">
+                fax,
+            </if>
+            <if test="lpAchievement != null">
+                lpAchievement,
+            </if>
+            <if test="partyCategory != null">
+                partyCategory,
+            </if>
+            <if test="partyPeoples != null">
+                partyPeoples,
+            </if>
+            <if test="partyCrtDt != null">
+                partyCrtDt,
+            </if>
+            <if test="partyDutyMan != null">
+                partyDutyMan,
+            </if>
+            <if test="partyPhone != null">
+                partyPhone,
+            </if>
+            <if test="unionCrtDt != null">
+                unionCrtDt,
+            </if>
+            <if test="unionDutyMan != null">
+                unionDutyMan,
+            </if>
+            <if test="unionPhone != null">
+                unionPhone,
+            </if>
+            <if test="laborContractNum != null">
+                laborContractNum,
+            </if>
+            <if test="thirdLaborRelation != null">
+                thirdLaborRelation,
+            </if>
+            <if test="socialInsuranceAddr != null">
+                socialInsuranceAddr,
+            </if>
+            <if test="socialInsuranceNum != null">
+                socialInsuranceNum,
+            </if>
+            <if test="reemployContribution != null">
+                reemployContribution,
+            </if>
+            <if test="educationContribution != null">
+                educationContribution,
+            </if>
+            <if test="helpPoorContribution != null">
+                helpPoorContribution,
+            </if>
+            <if test="otherContribution != null">
+                otherContribution,
+            </if>
+            <if test="lpResume != null">
+                lpResume,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="creditCode != null">
+                #{creditCode,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyProperty != null">
+                #{companyProperty,jdbcType=VARCHAR},
+            </if>
+            <if test="belongTo != null">
+                #{belongTo,jdbcType=VARCHAR},
+            </if>
+            <if test="establishDate != null">
+                #{establishDate,jdbcType=VARCHAR},
+            </if>
+            <if test="crewSize != null">
+                #{crewSize,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCodeName != null">
+                #{areaCodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCapital != null">
+                #{registeredCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="fixedAssets != null">
+                #{fixedAssets,jdbcType=VARCHAR},
+            </if>
+            <if test="workingCapital != null">
+                #{workingCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="ownSpace != null">
+                #{ownSpace,jdbcType=VARCHAR},
+            </if>
+            <if test="tenancySpace != null">
+                #{tenancySpace,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="majorVariety != null">
+                #{majorVariety,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="lpSex != null">
+                #{lpSex,jdbcType=VARCHAR},
+            </if>
+            <if test="lpBirthDt != null">
+                #{lpBirthDt,jdbcType=VARCHAR},
+            </if>
+            <if test="lpNativePlace != null">
+                #{lpNativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="lpNationality != null">
+                #{lpNationality,jdbcType=VARCHAR},
+            </if>
+            <if test="lpPolitical != null">
+                #{lpPolitical,jdbcType=VARCHAR},
+            </if>
+            <if test="lpRecruitmentDate != null">
+                #{lpRecruitmentDate,jdbcType=VARCHAR},
+            </if>
+            <if test="lpEducation != null">
+                #{lpEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="lpSkillJobTitle != null">
+                #{lpSkillJobTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="lpDeptPost != null">
+                #{lpDeptPost,jdbcType=VARCHAR},
+            </if>
+            <if test="lpIdentityCard != null">
+                #{lpIdentityCard,jdbcType=VARCHAR},
+            </if>
+            <if test="lpSocietyPost != null">
+                #{lpSocietyPost,jdbcType=VARCHAR},
+            </if>
+            <if test="lpPhone != null">
+                #{lpPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="lpMobile != null">
+                #{lpMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null">
+                #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="lpAchievement != null">
+                #{lpAchievement,jdbcType=VARCHAR},
+            </if>
+            <if test="partyCategory != null">
+                #{partyCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="partyPeoples != null">
+                #{partyPeoples,jdbcType=VARCHAR},
+            </if>
+            <if test="partyCrtDt != null">
+                #{partyCrtDt,jdbcType=VARCHAR},
+            </if>
+            <if test="partyDutyMan != null">
+                #{partyDutyMan,jdbcType=VARCHAR},
+            </if>
+            <if test="partyPhone != null">
+                #{partyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="unionCrtDt != null">
+                #{unionCrtDt,jdbcType=VARCHAR},
+            </if>
+            <if test="unionDutyMan != null">
+                #{unionDutyMan,jdbcType=VARCHAR},
+            </if>
+            <if test="unionPhone != null">
+                #{unionPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="laborContractNum != null">
+                #{laborContractNum,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdLaborRelation != null">
+                #{thirdLaborRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="socialInsuranceAddr != null">
+                #{socialInsuranceAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="socialInsuranceNum != null">
+                #{socialInsuranceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="reemployContribution != null">
+                #{reemployContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="educationContribution != null">
+                #{educationContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="helpPoorContribution != null">
+                #{helpPoorContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="otherContribution != null">
+                #{otherContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="lpResume != null">
+                #{lpResume,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.ComDataImport">
+        update com_data_import
+        <set>
+            <if test="fullName != null">
+                fullName = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="companyProperty != null">
+                companyProperty = #{companyProperty,jdbcType=VARCHAR},
+            </if>
+            <if test="belongTo != null">
+                belongTo = #{belongTo,jdbcType=VARCHAR},
+            </if>
+            <if test="establishDate != null">
+                establishDate = #{establishDate,jdbcType=VARCHAR},
+            </if>
+            <if test="crewSize != null">
+                crewSize = #{crewSize,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCodeName != null">
+                areaCodeName = #{areaCodeName,jdbcType=VARCHAR},
+            </if>
+            <if test="registeredCapital != null">
+                registeredCapital = #{registeredCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="fixedAssets != null">
+                fixedAssets = #{fixedAssets,jdbcType=VARCHAR},
+            </if>
+            <if test="workingCapital != null">
+                workingCapital = #{workingCapital,jdbcType=VARCHAR},
+            </if>
+            <if test="ownSpace != null">
+                ownSpace = #{ownSpace,jdbcType=VARCHAR},
+            </if>
+            <if test="tenancySpace != null">
+                tenancySpace = #{tenancySpace,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="majorVariety != null">
+                majorVariety = #{majorVariety,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                realName = #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="lpSex != null">
+                lpSex = #{lpSex,jdbcType=VARCHAR},
+            </if>
+            <if test="lpBirthDt != null">
+                lpBirthDt = #{lpBirthDt,jdbcType=VARCHAR},
+            </if>
+            <if test="lpNativePlace != null">
+                lpNativePlace = #{lpNativePlace,jdbcType=VARCHAR},
+            </if>
+            <if test="lpNationality != null">
+                lpNationality = #{lpNationality,jdbcType=VARCHAR},
+            </if>
+            <if test="lpPolitical != null">
+                lpPolitical = #{lpPolitical,jdbcType=VARCHAR},
+            </if>
+            <if test="lpRecruitmentDate != null">
+                lpRecruitmentDate = #{lpRecruitmentDate,jdbcType=VARCHAR},
+            </if>
+            <if test="lpEducation != null">
+                lpEducation = #{lpEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="lpSkillJobTitle != null">
+                lpSkillJobTitle = #{lpSkillJobTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="lpDeptPost != null">
+                lpDeptPost = #{lpDeptPost,jdbcType=VARCHAR},
+            </if>
+            <if test="lpIdentityCard != null">
+                lpIdentityCard = #{lpIdentityCard,jdbcType=VARCHAR},
+            </if>
+            <if test="lpSocietyPost != null">
+                lpSocietyPost = #{lpSocietyPost,jdbcType=VARCHAR},
+            </if>
+            <if test="lpPhone != null">
+                lpPhone = #{lpPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="lpMobile != null">
+                lpMobile = #{lpMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="postcode != null">
+                postcode = #{postcode,jdbcType=VARCHAR},
+            </if>
+            <if test="fax != null">
+                fax = #{fax,jdbcType=VARCHAR},
+            </if>
+            <if test="lpAchievement != null">
+                lpAchievement = #{lpAchievement,jdbcType=VARCHAR},
+            </if>
+            <if test="partyCategory != null">
+                partyCategory = #{partyCategory,jdbcType=VARCHAR},
+            </if>
+            <if test="partyPeoples != null">
+                partyPeoples = #{partyPeoples,jdbcType=VARCHAR},
+            </if>
+            <if test="partyCrtDt != null">
+                partyCrtDt = #{partyCrtDt,jdbcType=VARCHAR},
+            </if>
+            <if test="partyDutyMan != null">
+                partyDutyMan = #{partyDutyMan,jdbcType=VARCHAR},
+            </if>
+            <if test="partyPhone != null">
+                partyPhone = #{partyPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="unionCrtDt != null">
+                unionCrtDt = #{unionCrtDt,jdbcType=VARCHAR},
+            </if>
+            <if test="unionDutyMan != null">
+                unionDutyMan = #{unionDutyMan,jdbcType=VARCHAR},
+            </if>
+            <if test="unionPhone != null">
+                unionPhone = #{unionPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="laborContractNum != null">
+                laborContractNum = #{laborContractNum,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdLaborRelation != null">
+                thirdLaborRelation = #{thirdLaborRelation,jdbcType=VARCHAR},
+            </if>
+            <if test="socialInsuranceAddr != null">
+                socialInsuranceAddr = #{socialInsuranceAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="socialInsuranceNum != null">
+                socialInsuranceNum = #{socialInsuranceNum,jdbcType=VARCHAR},
+            </if>
+            <if test="reemployContribution != null">
+                reemployContribution = #{reemployContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="educationContribution != null">
+                educationContribution = #{educationContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="helpPoorContribution != null">
+                helpPoorContribution = #{helpPoorContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="otherContribution != null">
+                otherContribution = #{otherContribution,jdbcType=VARCHAR},
+            </if>
+            <if test="lpResume != null">
+                lpResume = #{lpResume,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where creditCode = #{creditCode,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.ComDataImport">
+    update com_data_import
+    set fullName = #{fullName,jdbcType=VARCHAR},
+      companyProperty = #{companyProperty,jdbcType=VARCHAR},
+      belongTo = #{belongTo,jdbcType=VARCHAR},
+      establishDate = #{establishDate,jdbcType=VARCHAR},
+      crewSize = #{crewSize,jdbcType=VARCHAR},
+      areaCodeName = #{areaCodeName,jdbcType=VARCHAR},
+      registeredCapital = #{registeredCapital,jdbcType=VARCHAR},
+      fixedAssets = #{fixedAssets,jdbcType=VARCHAR},
+      workingCapital = #{workingCapital,jdbcType=VARCHAR},
+      ownSpace = #{ownSpace,jdbcType=VARCHAR},
+      tenancySpace = #{tenancySpace,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      majorVariety = #{majorVariety,jdbcType=VARCHAR},
+      realName = #{realName,jdbcType=VARCHAR},
+      lpSex = #{lpSex,jdbcType=VARCHAR},
+      lpBirthDt = #{lpBirthDt,jdbcType=VARCHAR},
+      lpNativePlace = #{lpNativePlace,jdbcType=VARCHAR},
+      lpNationality = #{lpNationality,jdbcType=VARCHAR},
+      lpPolitical = #{lpPolitical,jdbcType=VARCHAR},
+      lpRecruitmentDate = #{lpRecruitmentDate,jdbcType=VARCHAR},
+      lpEducation = #{lpEducation,jdbcType=VARCHAR},
+      lpSkillJobTitle = #{lpSkillJobTitle,jdbcType=VARCHAR},
+      lpDeptPost = #{lpDeptPost,jdbcType=VARCHAR},
+      lpIdentityCard = #{lpIdentityCard,jdbcType=VARCHAR},
+      lpSocietyPost = #{lpSocietyPost,jdbcType=VARCHAR},
+      lpPhone = #{lpPhone,jdbcType=VARCHAR},
+      lpMobile = #{lpMobile,jdbcType=VARCHAR},
+      postcode = #{postcode,jdbcType=VARCHAR},
+      fax = #{fax,jdbcType=VARCHAR},
+      lpAchievement = #{lpAchievement,jdbcType=VARCHAR},
+      partyCategory = #{partyCategory,jdbcType=VARCHAR},
+      partyPeoples = #{partyPeoples,jdbcType=VARCHAR},
+      partyCrtDt = #{partyCrtDt,jdbcType=VARCHAR},
+      partyDutyMan = #{partyDutyMan,jdbcType=VARCHAR},
+      partyPhone = #{partyPhone,jdbcType=VARCHAR},
+      unionCrtDt = #{unionCrtDt,jdbcType=VARCHAR},
+      unionDutyMan = #{unionDutyMan,jdbcType=VARCHAR},
+      unionPhone = #{unionPhone,jdbcType=VARCHAR},
+      laborContractNum = #{laborContractNum,jdbcType=VARCHAR},
+      thirdLaborRelation = #{thirdLaborRelation,jdbcType=VARCHAR},
+      socialInsuranceAddr = #{socialInsuranceAddr,jdbcType=VARCHAR},
+      socialInsuranceNum = #{socialInsuranceNum,jdbcType=VARCHAR},
+      reemployContribution = #{reemployContribution,jdbcType=VARCHAR},
+      educationContribution = #{educationContribution,jdbcType=VARCHAR},
+      helpPoorContribution = #{helpPoorContribution,jdbcType=VARCHAR},
+      lpResume = #{lpResume,jdbcType=LONGVARCHAR},
+      otherContribution = #{otherContribution,jdbcType=VARCHAR}
+    where creditCode = #{creditCode,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoRsMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.model.ComDataImport">
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+    </resultMap>
+    <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+            p.`code` as areaCode,
+            t.creditCode, t.fullName, t.companyProperty, t.belongTo, t.establishDate, t.crewSize, t.areaCodeName,
+            t.registeredCapital, t.fixedAssets, t.workingCapital, t.ownSpace, t.tenancySpace, t.address,
+            t.majorVariety, t.realName, t.lpSex, t.lpBirthDt, t.lpNativePlace, t.lpNationality, t.lpPolitical,
+            t.lpRecruitmentDate, t.lpEducation, t.lpSkillJobTitle, t.lpDeptPost, t.lpIdentityCard, t.lpSocietyPost,
+            t.lpPhone, t.lpMobile, t.postcode, t.fax, t.lpAchievement, t.partyCategory, t.partyPeoples, t.partyCrtDt,
+            t.partyDutyMan, t.partyPhone, t.unionCrtDt, t.unionDutyMan, t.unionPhone, t.laborContractNum,
+            t.thirdLaborRelation, t.socialInsuranceAddr, t.socialInsuranceNum, t.reemployContribution,
+            t.educationContribution, t.helpPoorContribution, t.otherContribution, t.lpResume
+        from com_data_import t
+        left join portal.province p on p.fullname = t.areaCodeName
+        limit 1
+    </select>
+</mapper>

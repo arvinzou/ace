@@ -160,7 +160,7 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                     <tr>
-                                        <th width=50%"> 评价</th>
+                                        <th width=50%"> 题目</th>
                                         <th width="30%"> 分值</th>
                                         <th width="20%"> 操作</th>
                                     </tr>

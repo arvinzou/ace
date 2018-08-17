@@ -42,10 +42,10 @@ function formaPayStatus(type) {
 }
 
 function detail(id) {
-    var url = "/jxb/baseOrder/orderInfo"
+    var url = "/jxb/baseOrder/orderInfo";
     var data = {
         id: id
-    }
+    };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('temp_orderInfo').innerHTML;
