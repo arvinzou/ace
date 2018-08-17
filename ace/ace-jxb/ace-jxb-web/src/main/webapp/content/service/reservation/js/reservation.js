@@ -26,7 +26,12 @@ function fillForm(data) {
         }
         $('[name=form_' + key + ']').val(data[key]);
     }
-
+    console.log(data.onlineStatus);
+    if (data.onlineStatus == 1) {
+        $("[name='onlineStatus']").bootstrapSwitch('state', true);
+    } else {
+        $("[name='onlineStatus']").bootstrapSwitch('state', false);
+    }
     var tag = $('#field .md-checkbox');
     var tags = data["field"];
     filloption(tag, tags)
@@ -122,6 +127,11 @@ function submitForm() {
     if (objects.length = 0) {
         alert("还没有选择您的咨询对象");
         return
+    }
+    if ($("[name='onlineStatus']").is(':checked')) {
+        formObject.onlineStatus = 1;
+    } else {
+        formObject.onlineStatus = 0;
     }
     formObject.objects = objects;
 

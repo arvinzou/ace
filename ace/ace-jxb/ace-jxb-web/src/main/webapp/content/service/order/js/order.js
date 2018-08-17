@@ -61,7 +61,6 @@ function detail(id) {
 }
 
 function changeType(cType) {
-    console.log(cType);
     category = cType;
     initpage();
 }
