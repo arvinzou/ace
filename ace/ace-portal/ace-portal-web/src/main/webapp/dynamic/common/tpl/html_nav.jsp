@@ -4,7 +4,7 @@
 	<div class="page-wrapper-top">
 		<div class="page-header">
 			<div class="page-header-top">
-				<div class="">
+				<div class="container">
 					<div class="page-logo">
 						<a href="index.html">
 							<img src="${pageContext.request.contextPath}/content/common/assets/layouts/layout3/img/logo-default.jpg" alt="logo" class="logo-default">
