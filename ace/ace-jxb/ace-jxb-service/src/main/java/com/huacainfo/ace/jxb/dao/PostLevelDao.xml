@@ -190,4 +190,35 @@
         from post_level
         ORDER BY postIndex
     </select>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.PostLevelVo">
+    </resultMap>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY postIndex ASC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from post_level
+        where 1=1
+        <!--<if test="condition.counselorId !=null and condition.counselorId !=&quot;&quot;">-->
+        <!--and counselorId = #{condition.counselorId,jdbcType=VARCHAR}-->
+        <!--</if>-->
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
 </mapper>
