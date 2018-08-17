@@ -16,7 +16,7 @@
     <meta content="${cfg.sys_name}" name="description"/>
 
     <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile-2.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
@@ -28,7 +28,7 @@
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
-<body>
+<body class="page-container-bg-solid">
 <div class="page-wrapper">
     <div class="page-wrapper-row full-height">
         <div class="page-wrapper-middle">
@@ -45,49 +45,56 @@
                                     <span>仪表盘</span>
                                 </li>
                             </ul>
-                            <div class="page-content-inner">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <!-- BEGIN PROFILE SIDEBAR -->
-                                        <!-- END BEGIN PROFILE SIDEBAR -->
-                                        <!-- BEGIN PROFILE CONTENT -->
-                                        <div class="profile-content">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase"><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">预约列表</font></font></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
 
-                                                                    <%--content--%>
-                                                                    <div class="table-scrollable table-scrollable-borderless"
-                                                                         id="orderList">
-                                                                        <ul class="pagination" id="pagination1"></ul>
-                                                                    </div>
-                                                                    <%--content--%>
+
+                            <div class="page-content-inner">
+                                <div class="profile">
+                                    <div class="tabbable-line tabbable-full-width">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a href="#tab_1_1" data-toggle="tab"> 咨询订单 </a>
+                                            </li>
+                                            <li>
+                                                <a href="#tab_1_3" data-toggle="tab"> 课程订单 </a>
+                                            </li>
+                                        </ul>
+                                        <div class="portlet-body">
+                                            <div class="mt-element-card mt-element-overlay">
+                                                <div class="row">
+
+                                                    <%--content--%>
+
+                                                    <div class="portlet-body">
+                                                        <div class="mt-element-card mt-element-overlay">
+                                                            <div class="col-xs-12">
+
+                                                                <%--content--%>
+                                                                <div class="table-scrollable table-scrollable-borderless"
+                                                                     id="orderList">
 
                                                                 </div>
+                                                                <%--content--%>
+                                                                <ul class="pagination"
+                                                                    id="pagination1"></ul>
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <%--content--%>
+
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--tab_1_2-->
 
-                                        <!-- END PROFILE CONTENT -->
+                                        <!--end tab-pane-->
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
-                        </div>
+
+
+                    </div>
                     </div>
                 </div>
             </div>
@@ -209,7 +216,6 @@
 
     .portlet-body {
         background-color: #fff !important;
-        padding: 41px 98px 45px 20px;
     }
 
     .active {

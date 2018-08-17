@@ -50,8 +50,8 @@ function active(id) {
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            $('.submit_btn').attr('flag', false);
-            $('.submit_btn[flag="false"]').click(updataEvaluatCase);
+            $('.submit_btn').off("click");
+            $('.submit_btn').click(updataEvaluatCase);
             clearForm();
             fillForm(result.value);
             $('#createTest').modal('show');
@@ -240,7 +240,7 @@ function getFormData() {
 /*创建试题*/
 function createTestCase() {
     clearForm();
-    $('.submit_btn').attr('flag', true);
-    $('.submit_btn[flag="true"]').click(insertEvaluatCase);
+    $('.submit_btn').off("click");
+    $('.submit_btn').click(insertEvaluatCase);
     $('#createTest').modal('show');
 }
