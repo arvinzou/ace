@@ -79,4 +79,11 @@ public class WWWTestController {
 
         return sysAccountService.destroyAll();
     }
+
+    @RequestMapping(value = "/dataImport")
+    @ResponseBody
+    public ResultResponse dataImport() throws Exception {
+
+        return sysAccountService.dataImport();
+    }
 }
