@@ -41,11 +41,11 @@
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
-                                    <a href="index4.jsp">首页</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>咨询师管理</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -53,13 +53,10 @@
                                 <!---==============================================-->
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="portlet light portlet-fit ">
+                                        <div class="portlet light">
                                             <div class="portlet-title">
                                                 <div class="caption">
-                                                    <i class=" icon-layers font-green"></i>
-                                                    <span class="caption-subject font-green bold uppercase"><font
-                                                            style="vertical-align: inherit;"><font
-                                                            style="vertical-align: inherit;">咨询师管理</font></font></span>
+                                                    咨询师管理
                                                 </div>
                                                 <div class="actions">
                                                     <div class="portlet-input input-inline">
@@ -86,8 +83,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <ul class="pagination" id="pagination1"></ul>
                                             </div>
-                                            <ul class="pagination" id="pagination1"></ul>
+
                                         </div>
                                         <!--=======================================-->
 

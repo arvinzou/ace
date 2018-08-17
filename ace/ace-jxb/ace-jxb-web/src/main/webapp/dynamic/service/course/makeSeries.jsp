@@ -39,11 +39,11 @@
 						<div class="container">
 							<ul class="page-breadcrumb breadcrumb">
 								<li>
-									<a href="index4.jsp">首页</a>
+									<a href="${pageContext.request.contextPath}/index.jsp">首页</a>
 									<i class="fa fa-circle"></i>
 								</li>
 								<li>
-									<span>仪表盘</span>
+									<span>课程管理</span>
 								</li>
 							</ul>
 							<div class="page-content-inner">
