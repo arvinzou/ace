@@ -6,11 +6,17 @@
     min-height: 300px;
     padding: 0px 0px 0px;
 }
-.breadcrumb1 {
+.breadcrumb1{
     background: none;
     padding-top:15px;
     color: #a7b2c0;
     font-size:14px;
+}
+.breadcrumb {
+    background: 0 0;
+    padding: 15px 0 15px;
+    margin: 0;
+    color: #a7b2c0;
 }
 .page-header {
     padding-top: 0px;
@@ -59,4 +65,7 @@ header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .ho
 .page-header .page-header-menu .hor-menu .navbar-nav>li.open>a, .page-header .page-header-menu .hor-menu .navbar-nav>li:hover>a, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:active, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:hover {
     color: #fff;
     background: #2fa6b1!important;
+}
+.margin-bottom-40 {
+     margin-bottom: 0px!important;
 }
