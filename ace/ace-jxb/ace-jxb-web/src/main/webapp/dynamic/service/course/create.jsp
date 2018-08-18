@@ -64,7 +64,7 @@
 											<div class="portlet-body" id="courseSource">
 												<div class="form-panel">
 												<!--具体界面元素开始-->
-													<form class="form-horizontal" role="form">
+													<form class="form-horizontal" role="form" onsubmit="return false">
 														<div class="form-body">
 															<div class="form-group">
 																<label class="col-md-2 control-label"><span class="label-red">*</span>课程名称</label>
@@ -91,16 +91,14 @@
 															<div class="form-group">
 																<label class="col-md-2 control-label"><span class="label-red">*</span>课程简介</label>
 																<div class="col-md-10">
-																	<div style="text-align:left"><textarea name="introduction" id="courseIntro" class="introduction">请输入课程介绍（生动的描述更有利于吸引用户哦~）</textarea></div>
+																	<div style="text-align:left"><textarea name="introduction" id="courseIntro" class="introduction"></textarea></div>
 																	<span class="help-block"></span>
 																</div>
 															</div>
 															<div class="form-group">
 																<label class="col-md-2 control-label"><span class="label-red">*</span>课程价格</label>
 																<div class="col-md-10">
-
-
-																	<div style="text-align:left">
+																	<div class="radio-group-container">
 																		<label class="mt-radio mt-radio-outline">
 																			<input type="radio" name="toasts" value="noPay" checked="" onclick="payTypeCheck('noPay');">免费
 																			<span></span>
@@ -112,13 +110,13 @@
 																		<div class="price-panel">
 																			<div class="row">
 																				<label class="col-md-3 control-label">课程原价</label>
-																				<div class="col-md-9"><input name="price" type="text" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）"/></div>
+																				<div class="col-md-9"><input name="primeCost" type="text" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）"/></div>
 																			</div>
 																			<div class="row">
 																				<label class="col-md-3 control-label">划线价格</label>
 																				<div class="col-md-9">
-																					<input name="price2" type="text" style="width:70%" class="form-control" placeholder="请输入划线价格（单位：元）"/>
-																					<span class="help-block" style="text-align:left;font-size:12px">划线价是一种常见的促销方式，您可以通过设置划线价让您的课程价格看起来更加优惠低廉，吸引更多用户进行购买。</span>
+																					<input name="cost" type="text" style="width:70%" class="form-control" placeholder="请输入划线价格（单位：元）"/>
+																					<span class="help-block" style="text-align:left;font-size:12px;padding-top:10px">划线价是一种常见的促销方式，您可以通过设置划线价让您的课程价格看起来更加优惠低廉，吸引更多用户进行购买。</span>
 																				</div>
 
 																			</div>
@@ -129,46 +127,75 @@
 																	</div>
 																</div>
 															</div>
+
 															<div class="form-group">
 																<label class="col-md-2 control-label"><span class="label-red">*</span>课程对象</label>
 																<div class="col-md-10">
-																	<span class="pointer cactive">幼儿</span>
-																	<span class="pointer uncactive">小学</span>
-																	<span class="pointer uncactive">中学</span>
-																	<span class="pointer uncactive">高中</span>
+																	<div class="radio-group-container">
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="幼儿" >幼儿
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="小学">小学
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="中学">中学
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="高中">高中
+																			<span></span>
+																		</label>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="col-md-2 control-label"><span class="label-red">*</span>针对能力</label>
+																<div class="col-md-10">
+
+																	<div class="radio-group-container">
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="心理能力" >心理能力
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="学习方法">学习方法
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="团队合作">团队合作
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="沟通表达">沟通表达
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="独立思考">独立思考
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="自我认知">自我认知
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="其他">其他
+																			<span></span>
+																		</label>
+																	</div>
 																</div>
 															</div>
 															<div class="form-group">
 																<label class="col-md-2 control-label">适合谁听</label>
 																<div class="col-md-10">
-																	<input type="text" class="form-control"  placeholder="请输入适合谁听（您可以输入心理老师、心理学爱好者、父母等）">
+																	<input type="text" class="form-control" maxlength="20"  placeholder="请输入适合谁听（您可以输入心理老师、心理学爱好者、父母等）">
 																	<span class="help-block"> </span>
 																</div>
 															</div>
-															<div class="form-group">
-																<label class="col-md-2 control-label"><span class="label-red">*</span>针对能力</label>
-																<div class="col-md-10">
-																	<div style="height:30px;margin-bottom: 30px;">
-																		<span class="ability cactive">心理能力</span>
-																		<span class="ability uncactive">学习方法</span>
-																		<span class="ability uncactive">团队合作</span>
-																		<span class="ability uncactive">沟通表达</span>
-																		<span class="ability uncactive">独立思考</span>
-																		<span class="ability uncactive">自我认知</span>
-																		<span class="ability uncactive">其他</span>
-																	</div>
-																	<div style="width:100%;">
-																		<textarea class="ability_intro"></textarea>
-																	</div>
-																</div>
-															</div>
-															<div class="form-group">
-																<label class="col-md-2 control-label">起始人气</label>
-																<div class="col-md-10">
-																	<input type="text" class="form-control">
-																	<span class="help-block"> </span>
-																</div>
-															</div>
+
 
 														</div>
 														<div class="form-actions">
@@ -231,5 +258,8 @@
 	.price-panel .row{
 		padding-bottom:10px;
 	}
+	.radio-group-container{
+        text-align:left;padding-top:7px;
+    }
 </style>
 </html>

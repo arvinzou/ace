@@ -149,3 +149,23 @@ body{
         padding: 20px;
         margin: 0;
     }
+    .radio-group-container{
+        text-align:left;padding-top:7px;
+    }
+
+    .table-scrollable {
+        border: 0px solid #e7ecf1;
+    }
+    .table-scrollable>.table>thead>tr{
+        background-color: #edf2f74f
+    }
+    .table > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 0px solid #e7ecf1;
+        padding-top:12px;
+        padding-bottom:12px;
+    }
+    .table>tbody>tr>td {
+        padding-top:10px;
+        padding-bottom:10px;
+    }

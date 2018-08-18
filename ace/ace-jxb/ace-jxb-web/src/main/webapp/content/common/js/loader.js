@@ -45,6 +45,7 @@
          urls.push({path:portalPath,url:'/content/common/assets/global/css/components.min.css',type:'css'});
          urls.push({path:portalPath,url:'/content/common/assets/layouts/layout3/css/layout.min.css',type:'css'});
          urls.push({path:portalPath,url:'/content/common/assets/layouts/layout3/css/themes/default.min.css',type:'css'});
+         urls.push({path:portalPath,url:'/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css',type:'css'});
          urls.push({path:portalPath,url:'/content/common/assets/layouts/layout3/css/custom.min.css',type:'css'});
          urls.push({path:portalPath,url:'/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js',type:'js'});
          urls.push({path:portalPath,url:'/content/portal/js/main/menu4.js',type:'js'});
@@ -58,6 +59,7 @@
           for(var i=0;i<urls.length;i++){
              loader(urls[i]);
           }
+
      }
      function getQueryString() {
           var qs = location.search.substr(1),
