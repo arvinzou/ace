@@ -70,3 +70,120 @@
 	font-size: 0.346666rem;
 	line-height: 1.3rem;
 }
+/* 下拉筛选样式*/
+
+.selectbox {
+	height: 1rem;
+	width: 100%;
+	clear: both;
+	margin: auto;
+}
+
+.selemediv {
+	width: 100%;
+	height: 1rem;
+	float: left;
+	position: relative
+}
+
+.selemenu {
+	width: 100%;
+	height: 1rem;
+	background: #fff;
+	color: #999;
+	text-indent: 10px;
+	border: none;
+	/*background: url(../img/xiala.png) 80% no-repeat;*/
+}
+
+.selemenu {
+	font-size: 14px;
+	line-height: 35px;
+}
+
+.citylist span {
+	display: block;
+	clear: both;
+	cursor: pointer;
+}
+
+.citylist span:hover {
+	background: #eee;
+}
+
+.citylist {
+	display: none;
+	line-height: 35px;
+	background: #fff;
+	text-indent: 10px;
+	font-size: 12px;
+	position: absolute;
+	left: 0;
+	top: 35px;
+	width: 180px;
+	box-shadow: 0px 5px 5px #ccc;
+}
+
+.citylist2 {
+	box-shadow: 0px 5px 5px #ccc;
+	font-size: 14px;
+	color: #666;
+	padding: 20px 40px;
+	position: absolute;
+	top: 35px;
+	left: 0;
+	background: #fff;
+	border-bottom: 1px solid #f6f6f6;
+	display: none;
+	z-index: 500;
+}
+
+.citylist2 ul {
+	float: left;
+	width: 80%;
+	line-height: 54px;
+}
+
+.citylist2 ul li {
+	float: left;
+	cursor: pointer
+}
+
+.citylist2 ul li:hover {
+	color: #ff4400
+}
+
+.citylist2 .shangquan li {
+	width: 2.133333rem;
+	text-align: center;
+}
+
+.citylist2 .chengshi li {
+	width: 2.133333rem;
+	text-align: center;
+}
+.citylist2 .qu li {
+	width: 2.133333rem;
+	text-align: center;
+}
+.citylist2 .leibie {
+	width: 20%;
+	float: left;
+	line-height: 54px;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+.xzk {
+	width: 100%;
+	overflow: hidden;
+	clear: both;
+	z-index: 500;
+}
+
+.citylist2 .active {
+	color: #ff4400
+}

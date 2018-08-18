@@ -11,11 +11,12 @@ pageEncoding="utf-8" %>
     <title>直播管理平台</title>
 
 </head>
-
-<jsp:include page="/dynamic/common/common.jsp"/>
-<link rel="stylesheet" href="${portalPath}/content/common/css/new.css?version=${cfg.version}"/>
 <link href="${portalPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
       id="style_components" type="text/css"/>
+<link rel="stylesheet" href="${portalPath}/content/common/css/new.css?version=${cfg.version}"/>
+<jsp:include page="/dynamic/common/common.jsp"/>
+
+
 <style>
     .charts-portal-ct1 {
         width: 500px;
@@ -30,7 +31,7 @@ pageEncoding="utf-8" %>
 
 <body>
 <div style="height:10px;" class="background-white"></div>
-<div class="page-content background">
+<div class="page-content">
 
     <!-- PAGE CONTENT BEGINS -->
     <!-- Row starts -->
@@ -153,74 +154,7 @@ pageEncoding="utf-8" %>
 
 
 </div>
-<div class="page-content-2 background">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6">
-            <!-- #section:custom/widget-box -->
-            <div class="widget-box transparent background-white padding1" id="recent-box">
-                <div class="widget-header">
-                    <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
-                    </h4>
 
-                    <div class="widget-toolbar no-border">
-
-                    </div>
-                </div>
-
-                <div class="widget-body" style="min-height:250px">
-                    <div class="widget-main padding-4">
-                        <table width="100%">
-
-
-                            <tbody id="notice-list-grid">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.widget-main -->
-                </div>
-                <!-- /.widget-body -->
-            </div>
-            <!-- /.widget-box -->
-
-            <!-- /section:custom/widget-box -->
-        </div>
-
-        <div class="col-xs-12 col-sm-6">
-            <!-- #section:custom/widget-box -->
-            <div class="widget-box transparent background-white padding1" id="recent-box">
-                <div class="widget-header">
-                    <h4 class="widget-title lighter smaller">
-                        <i class="ace-icon glyphicon glyphicon-th-large green"></i>业务公告
-                    </h4>
-
-                    <div class="widget-toolbar no-border">
-
-                    </div>
-                </div>
-
-                <div class="widget-body" style="min-height:250px">
-                    <div class="widget-main padding-4">
-                        <table width="100%;">
-
-
-                            <tbody id="notice-list-grid-area">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.widget-main -->
-                </div>
-                <!-- /.widget-body -->
-            </div>
-            <!-- /.widget-box -->
-
-            <!-- /section:custom/widget-box -->
-        </div>
-        <!-- /.span -->
-    </div>
-</div>
 <!-- /.page-content -->
 
 
@@ -242,11 +176,6 @@ pageEncoding="utf-8" %>
 
 <jsp:include page="/dynamic/common/footer-2.jsp"/>
 
-<script type="text/javascript">
-    window.onresize = function () {
-        parent.autoWidth();
-    }
-</script>
 <script
         src="${pageContext.request.contextPath}/content/index/index.js?version=${cfg.version}"></script>
 <style>
@@ -287,6 +216,9 @@ pageEncoding="utf-8" %>
         height: 100%;
         width: 200px;
     }
+    .margin-bottom-40 {
+     margin-bottom: 0px!important;
+}
 
 </style>
 </body>

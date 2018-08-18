@@ -68,7 +68,46 @@ header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .ho
 }*/
 .margin-bottom-40 {
      margin-bottom: 0px!important;
+      font-family:"微软雅黑","宋体";
+      font-size:14px;
+      color: #a2abb7;
+      font-weight: 300;
 }
 .container {
     width: 65%;
+}
+
+.page-header .page-header-top .page-logo .logo-default {
+    margin:10px;
+    max-height:50px;
+}
+.page-header .page-header-top .page-logo {
+    float: left;
+    display: block;
+    width: 80px;
+    height: 75px;
+}
+.qrcode-default{
+     margin:2px;
+     max-height:100px;
+}
+.page-prefooter {
+    padding: 20px 0;
+    clear: both;
+}
+body{
+    font-family:"微软雅黑","宋体";
+    font-weight: 300;
+}
+
+.primary-link {
+    font-weight: 300;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav>li>a {
+    font-weight: 300;
+}
+
+.paginationbar{
+         width: 100%;
+         text-align: right;
 }
