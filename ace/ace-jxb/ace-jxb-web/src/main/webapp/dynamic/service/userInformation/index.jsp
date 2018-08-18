@@ -171,7 +171,7 @@
                                                             <div class="form-horizontal" novalidate="novalidate">
                                                                 <div class="form-body">
 
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">名字
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -217,7 +217,7 @@
                                                                     </div>
 
 
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">所在城市
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -233,7 +233,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">个人简介
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -247,7 +247,7 @@
                                                                     </div>
 
 
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">手机号码
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -281,7 +281,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">身份证号码
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -346,7 +346,8 @@
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                            <div class="md-radio-list" id="certification">
+                                                                            <div class="md-radio-inline"
+                                                                                 id="certification">
                                                                                 <div class="md-radio">
                                                                                     <input type="radio"
                                                                                            id="radios_1"
@@ -373,7 +374,7 @@
                                                                     </div>
 
 
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">从业资格证证号
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -691,7 +692,7 @@
                                                                         </div>
                                                                     </div>
 
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">个案时长
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -705,7 +706,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group form-md-line-input">
+                                                                    <div class="form-group ">
                                                                         <label class="col-md-3 control-label">个案人数
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
@@ -759,7 +760,7 @@
 
 <style>
     .hc-checkbox {
-        width: 10rem;
+        width: 10em;
     }
 
     .error_message {

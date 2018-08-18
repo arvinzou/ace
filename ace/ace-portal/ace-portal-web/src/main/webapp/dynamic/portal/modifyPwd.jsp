@@ -26,12 +26,12 @@
 						<div class="row">
 							<div class="col-md-12">
 								<form id="fm-password">
-									<fieldset>
-										新设密码： <input id="password" type="password" style="width: 200px;"/>
-									</fieldset>
-									<fieldset>
-										重复输入： <input id="repassword" type="password" style="width: 200px;"/>
-									</fieldset>
+                                    <div class="form-group">
+                                        <label class="control-label">新设密码：</label>
+                                        <input id="password" type="password" class="form-control"></div>
+                                    <div class="form-group">
+                                        <label class="control-label">重复输入：</label>
+                                        <input id="repassword" type="password" class="form-control"></div>
 								</form>
 							</div>
 						</div>
@@ -44,8 +44,7 @@
 			</div>
 		</div>
 
-
-	</div>
+    </div>
 	<jsp:include page="../common/footer-1.jsp" />
 
 <script>

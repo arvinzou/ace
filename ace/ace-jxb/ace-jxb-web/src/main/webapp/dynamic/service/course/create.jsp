@@ -115,10 +115,48 @@
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">课程名称</label>
+																<label class="col-md-2 control-label">适合谁听</label>
 																<div class="col-md-10">
-																	<input type="text" class="form-control" name="courseName" placeholder="请输入课程名称">
+																	<input type="text" class="form-control"  placeholder="请输入适合人群">
 																	<span class="help-block"> </span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-2 control-label">针对能力</label>
+																<div class="col-md-10">
+																	<div style="height:30px;margin-bottom: 30px;">
+																		<span class="ability cactive">心理能力</span>
+																		<span class="ability uncactive">学习方法</span>
+																		<span class="ability uncactive">团队合作</span>
+																		<span class="ability uncactive">沟通表达</span>
+																		<span class="ability uncactive">独立思考</span>
+																		<span class="ability uncactive">自我认知</span>
+																		<span class="ability uncactive">其他</span>
+																	</div>
+																	<div style="width:100%;">
+																		<textarea class="ability_intro"></textarea>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-2 control-label">起始人气(选填)</label>
+																<div class="col-md-10">
+																	<input type="text" class="form-control">
+																	<span class="help-block"> </span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-2 control-label">起始人气(选填)</label>
+																<div class="col-md-10">
+																	<input type="text" class="form-control">
+																	<span class="help-block"> </span>
+																</div>
+															</div>
+														</div>
+														<div class="form-actions">
+															<div class="row">
+																<div class="col-md-offset-3 col-md-7">
+																	<button class="btn green" onclick="save();">保存</button>
 																</div>
 															</div>
 														</div>
@@ -185,6 +223,10 @@
 	}
 	.form-group {
     	margin-bottom: 20px;
+	}
+	textarea {
+    	border: 1px solid #ebedf2;
+		border-radius: .25rem;
 	}
 </style>
 </html>
