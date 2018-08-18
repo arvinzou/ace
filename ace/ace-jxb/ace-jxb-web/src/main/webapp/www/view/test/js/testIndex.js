@@ -17,11 +17,53 @@ $(function () {
     $('.menu .swiper-container_menu').on('click', 'li', sameTestTypeList);
     $('.panel .swiper-container_panel').on('click', '.swiper-slide', activeTest);
     $('#testLists').on('click', 'li', activeTest);
+    $('#testListss').on('click', 'li', activeTestT);
+    $('.search').on('click', '.notice', cancelSearch);
+    $('#search_input').focus(activeSearch);
+    $("input").keypress(searching);
 });
 
 
-function activeTest() {
+function activeTestT() {
     var $that = $(this);
+    cancelSearch();
+    activeTest($that);
+}
+
+
+function searching() {
+    var val = $('#search_input').val();
+    var url = '/portal/www/test/getEvaluatTplList.do';
+    var data = {
+        page: 1,
+        limit: 20,
+        syid: syid,
+        name: val
+    };
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            var info = document.getElementById('temp_testLists').innerHTML;
+            var infohtml = juicer(info, {
+                data: result.data,
+            });
+            $("#testListss").html(infohtml);
+        }
+    });
+}
+
+function cancelSearch() {
+    $('#search_input').val('大家都在测亲子关系');
+    $('.search .notice .iconfont').html('&#xe702;');
+    $('.search_list').hide();
+}
+
+function activeSearch() {
+    $('.search .notice .iconfont').html('&#xe67c;');
+    $('.search_list').show();
+}
+
+
+function activeTest($that) {
     var id = $that.data("id");
     if (id) {
         window.location.href = 'testing1.html?id=' + id;
