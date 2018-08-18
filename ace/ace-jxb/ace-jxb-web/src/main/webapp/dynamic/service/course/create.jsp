@@ -67,14 +67,14 @@
 													<form class="form-horizontal" role="form">
 														<div class="form-body">
 															<div class="form-group">
-																<label class="col-md-2 control-label">课程名称</label>
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程名称</label>
 																<div class="col-md-10">
-																	<input type="text" class="form-control" name="courseName" placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字">
+																	<input type="text" class="form-control" name="courseName" maxlength="28" placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字)">
 																	<span class="help-block"></span>
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">课程封面</label>
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程封面</label>
 																<div class="col-md-10">
 																	<div class="imgbox" >
 																		<img class="select_img form_imagePhotoUrl"
@@ -89,24 +89,48 @@
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">课程简介</label>
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程简介</label>
 																<div class="col-md-10">
-																	<textarea name="introduction" id="courseIntro" class="introduction"></textarea>
-																	<span class="help-block"> </span>
+																	<div style="text-align:left"><textarea name="introduction" id="courseIntro" class="introduction">请输入课程介绍（生动的描述更有利于吸引用户哦~）</textarea></div>
+																	<span class="help-block"></span>
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">课程价格</label>
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程价格</label>
 																<div class="col-md-10">
-																	<div class="col-xs-1 col-md-1"><span id="noPay" class="feeLabel cactive" onclick="payTypeCheck('noPay');">免费</span></div>
-																	<div class="col-xs-1 col-md-1"><span id="pay" class="feeLabel uncactive" onclick="payTypeCheck('pay');">付费</span></div>
-																	<div class="col-xs-10 col-md-10">
-																		<input name="price" type="text" class="form_input" />
+
+
+																	<div style="text-align:left">
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="noPay" checked="" onclick="payTypeCheck('noPay');">免费
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="pay" checked="" onclick="payTypeCheck('pay');">付费
+																			<span></span>
+																		</label>
+																		<div class="price-panel">
+																			<div class="row">
+																				<label class="col-md-3 control-label">课程原价</label>
+																				<div class="col-md-9"><input name="price" type="text" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）"/></div>
+																			</div>
+																			<div class="row">
+																				<label class="col-md-3 control-label">划线价格</label>
+																				<div class="col-md-9">
+																					<input name="price2" type="text" style="width:70%" class="form-control" placeholder="请输入划线价格（单位：元）"/>
+																					<span class="help-block" style="text-align:left;font-size:12px">划线价是一种常见的促销方式，您可以通过设置划线价让您的课程价格看起来更加优惠低廉，吸引更多用户进行购买。</span>
+																				</div>
+
+																			</div>
+																		</div>
+
+
+
 																	</div>
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">课程对象</label>
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程对象</label>
 																<div class="col-md-10">
 																	<span class="pointer cactive">幼儿</span>
 																	<span class="pointer uncactive">小学</span>
@@ -117,12 +141,12 @@
 															<div class="form-group">
 																<label class="col-md-2 control-label">适合谁听</label>
 																<div class="col-md-10">
-																	<input type="text" class="form-control"  placeholder="请输入适合人群">
+																	<input type="text" class="form-control"  placeholder="请输入适合谁听（您可以输入心理老师、心理学爱好者、父母等）">
 																	<span class="help-block"> </span>
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">针对能力</label>
+																<label class="col-md-2 control-label"><span class="label-red">*</span>针对能力</label>
 																<div class="col-md-10">
 																	<div style="height:30px;margin-bottom: 30px;">
 																		<span class="ability cactive">心理能力</span>
@@ -139,14 +163,14 @@
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">起始人气(选填)</label>
+																<label class="col-md-2 control-label">起始人气</label>
 																<div class="col-md-10">
 																	<input type="text" class="form-control">
 																	<span class="help-block"> </span>
 																</div>
 															</div>
 															<div class="form-group">
-																<label class="col-md-2 control-label">起始人气(选填)</label>
+																<label class="col-md-2 control-label">起始人气</label>
 																<div class="col-md-10">
 																	<input type="text" class="form-control">
 																	<span class="help-block"> </span>
@@ -203,30 +227,15 @@
 		width: 100%;
 		height: 100%;
 	}
-	.form-panel{
-		width: 70%;
-		text-align: center;
-		margin: auto;
+
+	.price-panel{
+		width:100%;
+		background-color: #edf2f74f;
+		padding:20px;
+
 	}
-	.form-control {
-		display: block;
-		width: 100%;
-		height: 40px;
-		padding: 6px 12px;
-		font-size: 14px;
-		line-height: 1.42857;
-		color: #555555;
-		background-color: #fff;
-		background-image: none;
-		border: 1px solid #ebedf2;
-		border-radius: .25rem;
-	}
-	.form-group {
-    	margin-bottom: 20px;
-	}
-	textarea {
-    	border: 1px solid #ebedf2;
-		border-radius: .25rem;
+	.price-panel .row{
+		padding-bottom:10px;
 	}
 </style>
 </html>
