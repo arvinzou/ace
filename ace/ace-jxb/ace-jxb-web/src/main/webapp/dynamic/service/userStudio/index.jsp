@@ -227,7 +227,7 @@
                     <div class="form-horizontal" novalidate="novalidate">
                         <div class="form-body">
 
-                            <div class="form-group form-md-line-input">
+                            <div class="form-group ">
                                 <label class="col-md-3 control-label">名字
                                     <span class="required" aria-required="true">*</span>
                                 </label>
@@ -284,7 +284,7 @@
                             </div>
 
 
-                            <div class="form-group form-md-line-input">
+                            <div class="form-group ">
                                 <label class="col-md-3 control-label">个人简介
                                     <span class="required" aria-required="true">*</span>
                                 </label>
