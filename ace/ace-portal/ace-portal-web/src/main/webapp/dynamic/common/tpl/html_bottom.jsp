@@ -30,6 +30,9 @@
 				湖南华彩伟业网络科技有限公司 &nbsp;|&nbsp;湖南·常德 湘ICP备16015679号
 			</div>
 		</div>
+		<div class="scroll-to-top" style="display: block;">
+			<i class="icon-arrow-up"></i>
+		</div>
 	</div>
 </div>
 
