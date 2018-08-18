@@ -58,6 +58,26 @@
                                                     </div>
                                                 </div>
                                                 <div class="portlet-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="input-group">
+                                                                <input type="text" style="height:34px" class="form-control input-circle-left"
+                                                                       placeholder="请输入工作室名称">
+                                                                <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
                                                     <div class="table-scrollable">
                                                         <table class="table table-hover">
                                                             <thead>
@@ -75,11 +95,12 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                    <div class="paginationbar">
+                                                        <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="paginationbar">
-                                                <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
-                                            </div>
+
                                             <!-- END SAMPLE TABLE PORTLET-->
                                         </div>
 
