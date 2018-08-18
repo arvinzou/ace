@@ -20,7 +20,7 @@
     <div class="search">
         <div class="container">
             <div class="search_box">
-                <input type="" name="" id="" value="大家都在测亲子关系"
+                <input type="" name="" id="search_input" value="大家都在测亲子关系"
                        onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
                        onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
                        style="color:rgba(196,200,214,1);"/>
@@ -62,6 +62,12 @@
         </div>
     </div>
 </div>
+<div class="search_list">
+    <div class="test_list">
+        <ul id="testListss">
+        </ul>
+    </div>
+</div>
 </body>
 
 <script id="temp_testLists" type="text/template">
@@ -93,5 +99,17 @@
 
 
 <script src="js/testIndex.js" type="text/javascript"></script>
+
+<style>
+    .search_list {
+        width: 100%;
+        height: calc(100% - 1.466666rem);
+        position: fixed;
+        top: 1.466666rem;
+        background: rgba(255, 255, 255, 1);
+        z-index: 9;
+        display: none;
+    }
+</style>
 
 </html>
