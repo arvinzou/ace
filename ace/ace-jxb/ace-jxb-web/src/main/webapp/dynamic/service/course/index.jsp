@@ -61,13 +61,10 @@
                                                 <div class="caption">
                                                     课程管理
                                                 </div>
-                                                <div class="make_course" id="makeCourse">
-                                                    <a href="javascript:;" class="btn red commonCourse" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
-                                                    <a href="javascript:;" class="btn red specialCourse" style="font-size: 14px !important; display: none;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
-                                                </div>
+
                                                 <div class="create_course" id="createCourse">
-                                                    <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程<i class="fa fa-plus"></i></a>
-                                                    <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程<i class="fa fa-plus"></i></a>
+                                                    <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
+                                                    <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
@@ -87,12 +84,12 @@
                                                                 <table class="table table-hover">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-                                                                        <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
+
+                                                                        <th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
                                                                         <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
-                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
+                                                                        <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
                                                                         <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
-                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                        <th width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody id="courseList">
@@ -132,27 +129,31 @@
 <script id="list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="5%" class="tdcontent"><font style="vertical-align: inherit;">
-            <input type="radio" name="course" value="\${item.id}"/>
-            <font style="vertical-align: inherit;">\${parseInt(index)+1} </font></font>
-        </td>
+
         <td width="35%">
-            <img src="\${item.cover}" style="width: 80px;height: 60px;"/>
-            <span>\${item.name}</span>
+            <div class="row">
+                <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
+                <div class="col-md-9">
+                    <div class="describtion">\${item.name}</div>
+                    <div class="cost">￥\${item.cost}</div>
+                </div>
+            </div>
         </td>
         <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
         <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
         <td width="15%" class="tdcontent">
             {@if item.auditRst==0}
-            <span class="label label-sm label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
+            <span class="label label-lg label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
             {@else if item.auditRst==1}
-            <span class="label label-sm label-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
+            <span class="label label-lg label-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
             {@else}
-            <span class="label label-sm label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
+            <span class="label label-lg label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
             {@/if}
         </td>
         <td width="15%">
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
+            <a class="operation" href="javascript:void(0);"  onclick="makecourse('\${item.id}');">制作</a>
+            <a class="operation" href="javascript:void(0);"  onclick="clickEdit('\${item.id}');">下架</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
             <a class="operation" id="auditOpt\${index}" href="javascript:void(0);" onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>
@@ -345,5 +346,20 @@
         </div>
     </div>
 </div>
-
+<style>
+    .cover{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+    .describtion{
+        padding-left:8px;
+        height:50px;
+    }
+    .cost{
+          padding-top: 5px;
+          padding-left:8px;
+          color:#FE6500;
+    }
+</style>
 </html>
