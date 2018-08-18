@@ -44,7 +44,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>心理测试</span>
+                                    <span>心理评测</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -59,19 +59,16 @@
                                                     <div class="portlet light">
                                                         <div class="portlet-title">
                                                             <div class="caption">
-                                                                心理测试
+                                                                心理评测
                                                             </div>
 
                                                             <div class="actions">
                                                                 <a onclick="javascript:createTest()"
                                                                    class="btn  btn-success btn-sm">
 
-                                                                    创建测试
+                                                                    创建评测
                                                                 </a>
-                                                                <a onclick="javascript:deleteTestTpl()"
-                                                                   data-repeater-delete=""
-                                                                   class="btn  btn-danger">
-                                                                     删除测试</a>
+
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">
@@ -407,6 +404,7 @@
         <td width="40%"> \${item.categoryName}</td>
         <td width="10%">
             <a href="javascript:void(0);" onclick="javascript:modify('\${item.id}')" class="operation">修改</a>
+            <a href="javascript:void(0);" onclick="javascript:del('\${item.id}')" class="operation">删除</a>
             <a href="javascript:void(0);" onclick="javascript:evaluatCaseList('\${item.id}')" class="operation">查看</a>
         </td>
     </tr>

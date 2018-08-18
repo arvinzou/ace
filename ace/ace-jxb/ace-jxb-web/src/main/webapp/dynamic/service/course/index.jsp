@@ -62,9 +62,15 @@
                                                     课程管理
                                                 </div>
 
-                                                <div class="create_course" id="createCourse">
-                                                    <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
-                                                    <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
+
+                                                <div class="actions">
+
+
+                                                    <div class="create_course" id="createCourse">
+                                                        <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
+                                                        <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
@@ -76,9 +82,32 @@
                                                         <li class="" onclick="changeCourseType('2');">
                                                             <a href="#tab_15_1" data-toggle="tab" aria-expanded="false"> 系列课程 </a>
                                                         </li>
+
                                                     </ul>
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab_15_1">
+                                                            <div class="row">
+                                                                <div class="col-sm-8">
+
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <div class="input-group">
+                                                                        <input type="text" style="height:34px" class="form-control input-circle-left"
+                                                                               placeholder="请输入课程名称">
+                                                                        <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+
+
 
                                                             <div class="table-scrollable">
                                                                 <table class="table table-hover">
