@@ -3,6 +3,7 @@ window.onload = function (){
 }
 var payType = "";
 var videoUrl = "";
+var courseType="1";
 function initpage(courseType) {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
@@ -50,23 +51,17 @@ function viewHtml(IDom, data, tempId) {
     $("#" + IDom).html(html);
 }
 
-function makecourse(){
-    var id = $('input[name="course"]:checked').val();
-    if(id == '' || id == undefined){
-        alert("请选择要制作的课程！");
-        return;
+function makecourse(id){
+    if(courseType=='1'){
+        window.location.href = contextPath + '/dynamic/service/course/make.jsp?courseId='+id;
+    }else{
+        window.location.href = contextPath + '/dynamic/service/course/makeSeries.jsp?id='+id;
     }
-    window.location.href = contextPath + '/dynamic/service/course/make.jsp?courseId='+id;
+
+
 }
 
-function makeSeriesCourse(){
-    var id = $('input[name="course"]:checked').val();
-    if(id == '' || id == undefined){
-        alert("请选择要制作的课程！");
-        return;
-    }
-    window.location.href = contextPath + '/dynamic/service/course/makeSeries.jsp?id='+id;
-}
+
 function deleteCourse(id){
     $.ajax({
         url: contextPath + "/course/deleteCourseByCourseId",
@@ -99,6 +94,7 @@ function changeCourseType(type){
         $(".commonCourse").hide();
         $(".specialCourse").show();
     }
+    courseType=type;
     initpage(type);
 }
 
