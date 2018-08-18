@@ -54,8 +54,7 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title">
                                                     <div class="caption">
-                                                        <i class="icon-social-dribbble font-green"></i>
-                                                        <span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">工作室审核</font></font></span>
+                                                        工作室
                                                     </div>
                                                 </div>
                                                 <div class="portlet-body">
@@ -63,12 +62,12 @@
                                                         <table class="table table-hover">
                                                             <thead>
                                                             <tr>
-                                                                <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-                                                                <th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 名称 </font></font></th>
-                                                                <th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 负责人 </font></font></th>
+
+                                                                <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 名称 </font></font></th>
+                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 负责人 </font></font></th>
                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 级别 </font></font></th>
                                                                 <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 状态 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                <th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
                                                             </tr>
                                                             </thead>
                                                             <tbody id="audioList">
@@ -78,31 +77,39 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="paginationbar">
+                                                <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
+                                            </div>
                                             <!-- END SAMPLE TABLE PORTLET-->
                                         </div>
-                                    <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
+
                                 </div>
                                 <script id="list" type="text/template">
                                     {@each data as item,index}
                                     <tr>
-                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${parseInt(index)+1}</font></font></td>
-                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.name} </font></font></td>
+
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-3"><img src="\${item.logoImgUrl}" class="cover"/></div>
+                                                <div class="col-md-9">
+                                                    <div class="describtion">\${item.name}</div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.dutyName} </font></font></td>
                                         <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.level} </font></font></td>
                                         <td>
                                             {@if item.status==0}
-                                                <span class="label label-sm label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
+                                                <span class="label label-lg label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
                                             {@else if item.status==1}
-                                                <span class="label label-sm label-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
+                                                <span class="label label-lg label-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
                                             {@else}
-                                                <span class="label label-sm label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
+                                                <span class="label label-lg label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
                                             {@/if}
                                         </td>
                                         <td>
-                                            <a href="#" class="btn btn-outline btn-circle btn-sm purple" data-target="#myModal" data-toggle="modal" onclick="edit('\${item.id}');">
-                                                <i class="fa fa-search"></i><font ><font> 查看 </font></font></a>
-                                            <a href="javascript:;" class="btn btn-outline btn-circle red btn-sm blue" data-target="#opt" data-toggle="modal" onclick="setval('\${item.id}');">
-                                                <i class="fa fa-edit"></i><font ><font> 审核 </font></font></a>
+                                            <a href="#" class="operation" data-target="#opt" data-toggle="modal" onclick="setval('\${item.id}');">审核</a>
+                                            <a href="#" class="operation" data-target="#myModal" data-toggle="modal" onclick="edit('\${item.id}');">查看 </a>
                                         </td>
                                     </tr>
                                     {@/each}
@@ -217,6 +224,21 @@
     .modal img {
         width: 100%;
         height: 100%;
+    }
+
+    .cover{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+    .describtion{
+        padding-left:8px;
+        height:50px;
+    }
+    .cost{
+          padding-top: 5px;
+          padding-left:8px;
+          color:#FE6500;
     }
 </style>
 </html>

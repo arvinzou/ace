@@ -155,7 +155,7 @@
             <a class="operation" href="javascript:void(0);"  onclick="makecourse('\${item.id}');">制作</a>
             <a class="operation" href="javascript:void(0);"  onclick="clickEdit('\${item.id}');">下架</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
-            <a class="operation" id="auditOpt\${index}" href="javascript:void(0);" onclick="openAudit('\${item.id}','\${index}');">审核</a>
+            <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>
     </tr>
     {@/each}

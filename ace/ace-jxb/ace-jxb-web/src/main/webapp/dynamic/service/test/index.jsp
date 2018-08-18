@@ -64,14 +64,14 @@
 
                                                             <div class="actions">
                                                                 <a onclick="javascript:createTest()"
-                                                                   class="btn btn-circle btn-success btn-sm">
-                                                                    <i class="fa fa-plus"></i>
+                                                                   class="btn  btn-success btn-sm">
+
                                                                     创建测试
                                                                 </a>
                                                                 <a onclick="javascript:deleteTestTpl()"
                                                                    data-repeater-delete=""
-                                                                   class="btn btn-circle btn-danger">
-                                                                    <i class="fa fa-close"></i> 删除测试</a>
+                                                                   class="btn  btn-danger">
+                                                                     删除测试</a>
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">
@@ -86,10 +86,9 @@
                                                                                 <table class="table table-hover">
                                                                                     <thead>
                                                                                     <tr>
-                                                                                        <th width="10%"> 序号</th>
                                                                                         <th width="50%"> 名字</th>
-                                                                                        <th width="20%"> 类型</th>
-                                                                                        <th width="20%" colspan="2">操作
+                                                                                        <th width="40%"> 类型</th>
+                                                                                        <th width="10%">操作
                                                                                         </th>
                                                                                     </tr>
                                                                                     </thead>
@@ -97,8 +96,9 @@
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
-                                                                            <ul class="pagination"
-                                                                                id="pagination1"></ul>
+                                                                            <div class="paginationbar">
+                                                                                <ul class="pagination" id="pagination1"></ul>
+                                                                            </div>
                                                                         </div>
 
 
@@ -395,14 +395,19 @@
 <script id="temp_evaluatTplList" type="text/template">
     {@each data as item,index}
     <tr>
-        <td width="10%">
-            <input data-id="\${item.id}" type="checkbox" id="checkbox1" class="md-check">
+
+        <td width="50%">
+            <div class="row">
+                <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
+                <div class="col-md-9">
+                    <div class="describtion">\${item.name}</div>
+                </div>
+            </div>
         </td>
-        <td width="50%"> \${item.name}</td>
-        <td width="20%"> \${item.categoryName}</td>
-        <td width="10%"><a onclick="javascript:modify('\${item.id}')" class="primary-link">修改信息</a></td>
+        <td width="40%"> \${item.categoryName}</td>
         <td width="10%">
-            <a onclick="javascript:evaluatCaseList('\${item.id}')" class="primary-link">题目列表</a>
+            <a href="javascript:void(0);" onclick="javascript:modify('\${item.id}')" class="operation">修改</a>
+            <a href="javascript:void(0);" onclick="javascript:evaluatCaseList('\${item.id}')" class="operation">查看</a>
         </td>
     </tr>
     {@/each}
@@ -464,6 +469,20 @@
         height: 18px;
         cursor: pointer;
         margin: 0;
+    }
+     .cover{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+    .describtion{
+        padding-left:8px;
+        height:50px;
+    }
+    .cost{
+          padding-top: 5px;
+          padding-left:8px;
+          color:#FE6500;
     }
 
 </style>
