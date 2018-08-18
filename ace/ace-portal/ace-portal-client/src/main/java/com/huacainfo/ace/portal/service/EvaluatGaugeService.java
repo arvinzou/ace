@@ -34,6 +34,8 @@ public interface EvaluatGaugeService {
 
     public abstract ResultResponse getEvaluation(EvaluatGaugeQVo condition, Userinfo userinfo) throws Exception;
 
+    public abstract ResultResponse getMyhistoryRes(EvaluatGaugeQVo condition, Userinfo userinfo) throws Exception;
+
     /**
 	 *
 	    * @Title:insertEvaluatGauge

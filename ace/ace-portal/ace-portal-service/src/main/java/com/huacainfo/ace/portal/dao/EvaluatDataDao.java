@@ -24,6 +24,9 @@ public interface EvaluatDataDao {
                                  @Param("start") int start, @Param("limit") int limit,
                                  @Param("orderBy") String orderBy);
 
+
+    EvaluatData latestResults(@Param("condition") EvaluatData condition);
+
     List<EvaluatDataVo> findDataList(@Param("condition") EvaluatDataQVo condition,
                                      @Param("start") int start, @Param("limit") int limit,
                                      @Param("orderBy") String orderBy);

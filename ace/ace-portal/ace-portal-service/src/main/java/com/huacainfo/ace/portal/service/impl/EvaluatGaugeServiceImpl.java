@@ -41,6 +41,9 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
     private EvaluatGaugeDao evaluatGaugeDao;
 
     @Autowired
+    private EvaluatDataDao evaluatDataDao;
+
+    @Autowired
     private EvaluatDataService evaluatDataService;
 
     @Autowired
@@ -75,6 +78,7 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
 
     @Override
     public ResultResponse getEvaluation(EvaluatGaugeQVo condition, Userinfo userinfo) throws Exception {
+        PageResult<EvaluatGaugeVo> rst = new PageResult<EvaluatGaugeVo>();
         EvaluatData evaluatData = new EvaluatData();
         evaluatData.setEvaluatTplId(condition.getEvaluatTplId());
         evaluatData.setScore(condition.getScore());
@@ -85,6 +89,20 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
         Map map = new HashMap();
         map.put("evaluatGauge", list);
         map.put("ranking", ranking + 1);
+        return new ResultResponse(0, "评价获取成功", map);
+    }
+
+
+    @Override
+    public ResultResponse getMyhistoryRes(EvaluatGaugeQVo condition, Userinfo userinfo) throws Exception {
+        EvaluatData evaluatData = new EvaluatData();
+        evaluatData.setEvaluatTplId(condition.getEvaluatTplId());
+        evaluatData.setCreateUserId(userinfo.getUnionid());
+        EvaluatData eval = evaluatDataDao.latestResults(evaluatData);
+        condition.setScore(eval.getScore());
+        EvaluatGauge list = this.evaluatGaugeDao.getEvaluation(condition);
+        Map map = new HashMap();
+        map.put("evaluatGauge", list);
         return new ResultResponse(0, "评价获取成功", map);
     }
 
