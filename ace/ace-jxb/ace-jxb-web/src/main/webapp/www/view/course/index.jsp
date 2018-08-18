@@ -33,6 +33,48 @@
 					</div>
 				</div>
 			</div>
+			<div class="row screen">
+				<div class="col-xs-12 col-md-12">
+					<div class="selectbox">
+						<div class="selemediv">
+							<div class="selemenu ">
+								<span class="sqinput">筛选</span><span class="csinput"></span><span class="quinput"></span>
+							</div>
+							<div class="citylist2">
+								<div class="xzk">
+									<div class="leibie">针对能力</div>
+									<ul class="shangquan">
+										<li class="active">不限</li>
+										<li>心理能力</li>
+										<li>学习方法</li>
+										<li>团队合作</li>
+										<li>沟通表达</li>
+										<li>独立思考</li>
+										<li>自我认知</li>
+										<li>其他</li>
+									</ul>
+								</div>
+								<div class="xzk">
+									<div class="leibie">课程类型</div>
+									<ul class="chengshi">
+										<li class="active">单节课程</li>
+										<li>系列课程</li>
+									</ul>
+								</div>
+								<div class="xzk">
+									<div class="leibie">价格</div>
+									<ul class="qu">
+										<li class="active">不限</li>
+										<li>免费</li>
+										<li>付费</li>
+										<li>会员免费</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div id="courseList">
 
 			</div>
