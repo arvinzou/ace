@@ -116,6 +116,8 @@ body{
 		width: 70%;
 		text-align: center;
 		margin: auto;
+		padding-top:40px;
+		padding-bottom:40px;
 	}
 	.form-control {
 		display: block;
@@ -143,3 +145,7 @@ body{
 	.mt-checkbox, .mt-radio {
     	padding-right: 30px;
 	}
+	.form-actions {
+        padding: 20px;
+        margin: 0;
+    }

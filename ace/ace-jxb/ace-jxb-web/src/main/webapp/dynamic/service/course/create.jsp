@@ -169,18 +169,12 @@
 																	<span class="help-block"> </span>
 																</div>
 															</div>
-															<div class="form-group">
-																<label class="col-md-2 control-label">起始人气</label>
-																<div class="col-md-10">
-																	<input type="text" class="form-control">
-																	<span class="help-block"> </span>
-																</div>
-															</div>
+
 														</div>
 														<div class="form-actions">
 															<div class="row">
 																<div class="col-md-offset-3 col-md-7">
-																	<button class="btn green" onclick="save();">保存</button>
+																	<button class="btn btn-lg green" onclick="save();" style="width:30%">保存</button>
 																</div>
 															</div>
 														</div>
