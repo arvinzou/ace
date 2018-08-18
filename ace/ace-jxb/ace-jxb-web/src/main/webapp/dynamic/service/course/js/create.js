@@ -116,12 +116,10 @@ function showUploadImg(imgpath, imgClazz, textClazz) {
 function payTypeCheck(dom){
     if(dom == 'noPay'){
         payType = '0';
-        $('#'+dom).removeClass('uncactive').addClass('cactive');
-        $('#pay').removeClass('cactive').addClass('uncactive');
+        $('.price-panel').hide();
     }else{
         payType = '1';
-        $('#'+dom).removeClass('uncactive').addClass('cactive');
-        $('#noPay').removeClass('cactive').addClass('uncactive');
+        $('.price-panel').show();
     }
 }
 
