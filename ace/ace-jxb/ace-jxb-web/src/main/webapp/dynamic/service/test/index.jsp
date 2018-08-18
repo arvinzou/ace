@@ -165,7 +165,7 @@
                             <div class="form-horizontal" novalidate="novalidate">
                                 <div class="form-body">
 
-                                    <div class="form-group form-md-line-input">
+                                    <div class="form-group ">
                                         <label class="col-md-3 control-label">测试名称
                                             <span class="required" aria-required="true">*</span>
                                         </label>
@@ -196,7 +196,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group form-md-line-input">
+                                    <div class="form-group ">
                                         <label class="col-md-3 control-label">测评介绍
                                             <span class="required" aria-required="true">*</span>
                                         </label>
@@ -207,7 +207,7 @@
                                             <div class="form-control-focus"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group form-md-line-input">
+                                    <div class="form-group ">
                                         <label class="col-md-3 control-label">测评须知
                                             <span class="required" aria-required="true">*</span>
                                         </label>
@@ -220,7 +220,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group form-md-line-input">
+                                    <div class="form-group ">
                                         <label class="col-md-3 control-label">原价
                                             <span class="required" aria-required="true">*</span>
                                         </label>
@@ -286,7 +286,7 @@
                                     </div>
                                     <h4 class="">没有?在下方添加新的模板，创建成功后再选择。</h4>
                                     <div class="row">
-                                        <div class="form-group form-md-line-input">
+                                        <div class="form-group ">
                                             <div class="col-md-6 col-md-offset-3 ">
                                                 <input id="notNull_type" type="text" class="form-control form_typename"
                                                        placeholder="" name="form_typename">

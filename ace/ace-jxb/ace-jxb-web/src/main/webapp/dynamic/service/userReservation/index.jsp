@@ -762,7 +762,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">电话咨询
 
                                                                                 </label>
@@ -789,7 +789,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">微信咨询
 
                                                                                 </label>
@@ -816,7 +816,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">面对面咨询
 
                                                                                 </label>
@@ -843,7 +843,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">面对面咨询地址
                                                                                     <span class="required"
                                                                                           aria-required="true">*</span>
@@ -857,7 +857,7 @@
 
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">预约须知
                                                                                     <span class="required"
                                                                                           aria-required="true">*</span>
@@ -871,7 +871,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">是否上线
                                                                                     <span class="required"
                                                                                           aria-required="true">*</span>
