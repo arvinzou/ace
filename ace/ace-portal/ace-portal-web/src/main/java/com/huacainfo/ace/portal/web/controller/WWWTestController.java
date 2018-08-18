@@ -113,6 +113,20 @@ public class WWWTestController extends PortalBaseController {
         return this.evaluatGaugeService.getEvaluation(condition, userinfo);
     }
 
+    /**
+     * 成绩评判
+     *
+     * @param condition
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getMyhistoryRes.do")
+    @ResponseBody
+    public ResultResponse getMyhistoryRes(EvaluatGaugeQVo condition) throws Exception {
+        Userinfo userinfo = this.getCurUserinfo();
+        return this.evaluatGaugeService.getMyhistoryRes(condition, userinfo);
+    }
+
 
     /**
      * 成绩评判
