@@ -83,7 +83,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <ul class="pagination" id="pagination1"></ul>
+                                                <div class="paginationbar">
+                                                    <ul class="pagination" id="pagination1"></ul>
+                                                </div>
+
                                             </div>
 
                                         </div>
@@ -240,5 +243,6 @@
         width: 100%;
         height: 100%;
     }
+
 </style>
 </html>
