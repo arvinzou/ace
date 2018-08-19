@@ -18,7 +18,10 @@ function initpage(courseType) {
         }
     });
 }
-
+function t_query(){
+    getCourseList(1, null, courseType);
+    return false;
+}
 function getCourseList(num, type, courseType) {
     var url = contextPath+ "/course/findCourseList";
     var createUserId = null;
@@ -27,11 +30,15 @@ function getCourseList(num, type, courseType) {
     }
     var data = {
         page: num,
+        name:$("input[name=keyword]").val(),
         limit: 10,
         type: courseType,                  //1是单节课程，2是系列课程
         createUserId: createUserId
     };
+    try {loading = startLoading();} catch (e) {};
+    if (loading) {loading.settext("请求中，请稍后......");}
     $.getJSON(url, data, function (result) {
+        if (loading) { loading.remove();}
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {
@@ -40,6 +47,7 @@ function getCourseList(num, type, courseType) {
             }
             viewHtml("courseList", result.rows, "list");
         }
+
     })
 }
 

@@ -59,9 +59,11 @@
                                                     咨询师管理
                                                 </div>
                                                 <div class="actions">
+                                                    <form onsubmit="return t_query()">
+
 
                                                         <div class="input-group">
-                                                            <input type="text" style="height:34px" class="form-control input-circle-left"
+                                                            <input type="text" style="height:34px" name="keyword" class="form-control input-circle-left"
                                                                    placeholder="请输入咨询师姓名">
                                                             <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
@@ -72,6 +74,7 @@
                                                                 </button>
                                                             </span>
                                                         </div>
+                                                    </form>
 
                                                 </div>
                                             </div>

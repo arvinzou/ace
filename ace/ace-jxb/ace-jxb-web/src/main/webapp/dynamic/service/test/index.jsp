@@ -414,7 +414,7 @@
                 </div>
             </div>
         </td>
-        <td width="40%"> \${item.categoryName}</td>
+        <td width="40%">  <span class="label label-lg label-info">\${item.categoryName}</span></td>
         <td width="10%">
             <a href="javascript:void(0);" onclick="javascript:modify('\${item.id}')" class="operation">修改</a>
             <a href="javascript:void(0);" onclick="javascript:del('\${item.id}')" class="operation">删除</a>
