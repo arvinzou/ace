@@ -42,7 +42,7 @@ public class WWWTestController extends PortalBaseController {
      */
     @RequestMapping(value = "/getEvaluatTpl.do")
     @ResponseBody
-    public ResultResponse getEvaluatTplList(String id) throws Exception {
+    public ResultResponse getEvaluatTpl(String id) throws Exception {
         return this.evaluatTplService.getEvaluatTplByPrimaryKey(id);
     }
 

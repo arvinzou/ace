@@ -308,6 +308,9 @@
         <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
             and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}
         </if>
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
         <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
             and t.businessId = #{condition.businessId,jdbcType=VARCHAR}
         </if>
