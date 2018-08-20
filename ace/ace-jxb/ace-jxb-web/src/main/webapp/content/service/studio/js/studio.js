@@ -30,6 +30,13 @@ function deleteBanner() {
 }
 
 
+function userStudioStaff(id) {
+    if (id) {
+        window.location.href = '../userStudioStaff/index.jsp?id=' + id;
+    }
+}
+
+
 function detail() {
     $('#studioInfo').modal('show');
 }
@@ -38,16 +45,20 @@ function getMyStudioList() {
     var url = "/jxb/studio/getMyStudioList";
     $.getJSON(url, function (result) {
         if (result.status == 0) {
-            var navitem = document.getElementById('temp_studioList1').innerHTML;
-            var html = juicer(navitem, {
-                data: result.data.join
-            });
-            $("#studioList").html(html);
-            navitem = document.getElementById('temp_studioList').innerHTML;
-            html = juicer(navitem, {
-                data: result.data.my
-            });
-            $("#studioList").append(html);
+            if (result.data.join) {
+                var navitem = document.getElementById('temp_studioList1').innerHTML;
+                var html = juicer(navitem, {
+                    data: result.data.join
+                });
+                $("#studioList").html(html);
+            }
+            if (result.data.my) {
+                navitem = document.getElementById('temp_studioList').innerHTML;
+                html = juicer(navitem, {
+                    data: result.data.my
+                });
+                $("#studioList").append(html);
+            }
         }
     })
 }

@@ -1,6 +1,6 @@
 window.onload = function () {
     getUserinfo();
-    //initpage();
+    initpage();
     getMyStudioList();
     $('#studioIdList').change(changeStudio)
 }
@@ -10,6 +10,19 @@ function changeStudio() {
     var id = $("#studioIdList option:selected").val();
     $('#pagination1').jqPaginator('destroy');
     initpage(id);
+}
+
+function parseQueryString(prop) {
+    var obj = {};
+    var url = window.location.href;
+    var start = url.indexOf("?") + 1;
+    var str = url.substr(start);
+    var arr = str.split("&");
+    for (var i = 0; i < arr.length; i++) {
+        var arr2 = arr[i].split("=");
+        obj[arr2[0]] = arr2[1];
+    }
+    return obj[prop];
 }
 
 
@@ -22,7 +35,7 @@ function getMyStudioList() {
                 data: result.data.my
             });
             $("#studioIdList").html(html);
-            initpage(result.data.my[0].id);
+            // initpage(result.data.my[0].id);
         }
     })
 }
@@ -82,6 +95,7 @@ function initpage(studioId) {
 
 
 function findMyCounselors(num, type, studioId) {
+    studioId = studioId ? studioId : parseQueryString("id");
     var url = "/jxb/counselor/findStudioCounselors";
     var data = {
         studioId: studioId,
