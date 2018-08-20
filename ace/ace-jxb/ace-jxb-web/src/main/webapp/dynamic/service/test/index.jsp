@@ -80,14 +80,15 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="input-group">
-                                                                        <input type="text" style="height:34px" class="form-control input-circle-left"
+                                                                        <input name="testName" type="text"
+                                                                               style="height:33px"
+                                                                               class="form-control input-circle-left"
                                                                                placeholder="请输入评测名称">
                                                                         <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                <button onclick="javascript:searchByName()"
+                                                                        class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
-                                                                    <font style="vertical-align: inherit;"><font
-                                                                            style="vertical-align: inherit;">
-                                                                        搜索</font></font>
+                                                                        搜索
                                                                 </button>
                                                             </span>
                                                                     </div>
@@ -411,6 +412,7 @@
                 <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
                 <div class="col-md-9">
                     <div class="describtion">\${item.name}</div>
+                    <div class="cost">￥\${item.discountCost}</div>
                 </div>
             </div>
         </td>

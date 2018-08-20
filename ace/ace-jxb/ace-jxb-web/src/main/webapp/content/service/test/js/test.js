@@ -1,3 +1,5 @@
+var testName = '';
+
 window.onload = function () {
     initDoc();
     initpage();
@@ -140,6 +142,7 @@ function getEvaluatTplList(num, type) {
     var data = {
         page: num,
         limit: 20,
+        name: testName
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -159,6 +162,13 @@ function getEvaluatTplList(num, type) {
 }
 
 var ids = '';
+
+
+function searchByName() {
+    testName = $('input[name="testName"]').val();
+    initpage();
+
+}
 
 
 function modify(id) {
@@ -340,7 +350,6 @@ function testSelectOptions() {
         $("#TestTypeList").html(html);
     });
 }
-
 
 
 var editor, editor_two;

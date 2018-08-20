@@ -93,7 +93,7 @@
                                                                 <div class="col-sm-4">
                                                                     <form onsubmit="return t_query()">
                                                                     <div class="input-group">
-                                                                        <input type="text" style="height:34px" name="keyword" class="form-control input-circle-left"
+                                                                        <input type="text" style="height:33px" name="keyword" class="form-control input-circle-left"
                                                                                placeholder="请输入课程名称">
                                                                         <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
@@ -116,11 +116,12 @@
                                                                     <thead>
                                                                     <tr>
 
-                                                                        <th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
-                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
-                                                                        <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
-                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
-                                                                        <th width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                        <th width="30%"> 课程名称 </th>
+                                                                        <th width="10%">讲师</th>
+                                                                        <th width="15%">上架时间&状态</th>
+                                                                        <th width="10%">购买数 </th>
+                                                                        <th width="15%">审核状态</th>
+                                                                        <th width="20%">操作</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody id="courseList">
@@ -161,7 +162,7 @@
     {@each data as item, index}
     <tr>
 
-        <td width="35%">
+        <td >
             <div class="row">
                 <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
                 <div class="col-md-9">
@@ -170,21 +171,37 @@
                 </div>
             </div>
         </td>
-        <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
-        <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
-        <td width="15%" class="tdcontent">
+        <td class="tdcontent"> \${item.counselorName} </td>
+        <td  class="tdcontent">
+            <div> \${item.createDate} </div>
+            <div style="padding:10px">
+            {@if item.lineState==0}
+                <span style="font-color:red">已下架</span>
+            {@else item.lineState==1}
+                <a href="#">已上架</a>
+            {@/if}
+            </div>
+
+        </td>
+        <td  class="tdcontent">\${item.duration}</td>
+        <td class="tdcontent">
             {@if item.auditRst==0}
-            <span class="label label-lg label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
+            <span class="label label-lg label-info">待审核</span>
             {@else if item.auditRst==1}
-            <span class="label label-lg label-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
+            <span class="label label-lg label-success">审核通过</span>
             {@else}
-            <span class="label label-lg label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
+            <span class="label label-lg label-danger">审核不通过</span>
             {@/if}
         </td>
-        <td width="15%">
+        <td >
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
             <a class="operation" href="javascript:void(0);"  onclick="makecourse('\${item.id}');">制作</a>
-            <a class="operation" href="javascript:void(0);"  onclick="clickEdit('\${item.id}');">下架</a>
+            {@if item.lineState==0}
+            <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
+            {@else item.lineState==1}
+            <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
+            {@/if}
+
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
             <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>

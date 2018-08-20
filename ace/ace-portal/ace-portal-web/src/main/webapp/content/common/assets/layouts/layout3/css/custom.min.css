@@ -193,3 +193,6 @@ body{
     .active a {
         color: #1a9fff;
     }
+    .btn-default {
+        border-color: #ebedf2
+    }

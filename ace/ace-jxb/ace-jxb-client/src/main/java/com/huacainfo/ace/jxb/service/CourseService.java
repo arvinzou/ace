@@ -100,4 +100,13 @@ public interface CourseService {
      * @return List<CoursePartVo>
      */
     List<CoursePartVo> findCoursePartInfo(String courseId);
+
+    /**
+     * 标记更新课程 上/下线状态
+     *
+     * @param courseId 课程ID
+     * @param state    在架状态 0 - 下架 1 - 上架
+     * @return MessageResponse
+     */
+    MessageResponse updateLineState(String courseId, String state, UserProp userProp) throws Exception;
 }
