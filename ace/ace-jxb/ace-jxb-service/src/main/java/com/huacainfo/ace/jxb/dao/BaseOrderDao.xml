@@ -35,6 +35,7 @@
         left join jxb.consult_product cp on cp.id = t.commodityId
         left join jxb.consult_order co on co.id = t.id
         left join jxb.course cr on cr.id = t.commodityId
+        left join portal.userinfo ui on t.consumerId = ui.unionid
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
@@ -198,6 +199,7 @@
   </update>
     <!--咨询订单返回map-->
     <resultMap id="consult-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
         <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
             <id property="id" column="businessId"/>
             <result property="name" column="tName"/>
@@ -226,6 +228,7 @@
 
     <!--课程订单返回map-->
     <resultMap id="course-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
         <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
             <id property="id" column="businessId"/>
             <result property="name" column="tName"/>
@@ -266,6 +269,7 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
+        ui.nickname as consumerName,
         cr.id as courseId, cr.type as courseType, cr.category as courseCategory,
         cr.mediType as courseMediType, cr.name as courseName, cr.cover as courseCover,
         cr.duration as courseDuration, cr.costType as courseCostType, cr.cost as courseCost,
@@ -304,6 +308,7 @@
         left join jxb.consult_product cp on cp.id = t.commodityId
         left join jxb.consult_order co on co.id = t.id
         left join jxb.course cr on cr.id = t.commodityId
+        left join portal.userinfo ui on t.consumerId = ui.unionid
         where 1=1
         <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
             and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}

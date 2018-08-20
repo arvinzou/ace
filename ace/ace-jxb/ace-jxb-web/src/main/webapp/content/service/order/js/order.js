@@ -1,23 +1,40 @@
 window.onload = function () {
-    juicer.register('formaCategory', formaCategory);
-    juicer.register('formaPayStatus', formaPayStatus);
+    juicer.register('formatCategory', formatCategory);
+    juicer.register('formatPayStatus', formatPayStatus);
+    juicer.register('formatCProductType', formatCProductType);
     initpage();
+}
+
+function formatCProductType(type) {
+    //   咨询类型(1-语音咨询 2-视频咨询 3-面对面咨询)
+    switch (type) {
+        case "1":
+            return "语音咨询";
+            break;
+        case "2":
+            return "视频咨询";
+        case "3":
+            return "面对面咨询";
+            break;
+    }
 }
 
 var category = 1;
 
-function formaCategory(type) {
+function formatCategory(type) {
     switch (type) {
         case "1":
             return "咨询订单";
             break;
         case "2":
             return "课程订单";
+        case "3":
+            return "评测订单";
             break;
     }
 }
 
-function formaPayStatus(type) {
+function formatPayStatus(type) {
     switch (type) {
         case "1":
             return "待支付";
@@ -90,6 +107,7 @@ function getOrderList(num, type) {
         limit: 20
     }
     $.getJSON(url, data, function (result) {
+        // console.log("result========:" + JSON.stringify(result));
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {
@@ -98,6 +116,7 @@ function getOrderList(num, type) {
             }
             var navitem = document.getElementById('temp_orderList').innerHTML;
             var html = juicer(navitem, {
+                orderCategory: category,
                 data: result.data.list,
             });
             $("#orderList").html(html);
