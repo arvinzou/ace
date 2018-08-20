@@ -1,19 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
     <!DOCTYPE html>
-    <!--[if IE 8]>
-<html lang="en" class="ie8 no-js"> <![endif]-->
-    <!--[if IE 9]>
-<html lang="en" class="ie9 no-js"> <![endif]-->
-    <!--[if !IE]><!-->
     <html lang="en">
-    <!--<![endif]-->
+
 
     <head>
         <meta charset="utf-8" />
         <title>${cfg.sys_name}</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="${cfg.sys_name}" name="description" />
+        <meta content="${cfg.sys_name}" name="${cfg.sys_name}" />
         <!--公共部分开始-->
         <jsp:include page="../../../common/base.jsp" />
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/css/font-awesome.min.css" />
@@ -110,7 +105,7 @@
                                                                                     <span></span>
                                                                                 </label>
                                                                                 <label class="mt-radio mt-radio-outline">
-                                                                                    <input type="radio" name="costType" value="2" checked="true" onclick="payTypeCheck('pay');">付费
+                                                                                    <input type="radio" name="costType" value="2" checked onclick="payTypeCheck('pay');">付费
                                                                                     <span></span>
                                                                                 </label>
                                                                                 <div class="price-panel">
@@ -159,7 +154,7 @@
                                                                     <div class="form-group">
                                                                         <label class="col-md-2 control-label">适合谁听</label>
                                                                         <div class="col-md-10">
-                                                                            <input type="text" class="form-control" maxlength="20" placeholder="请输入适合谁听（您可以输入心理老师、心理学爱好者、父母等）">
+                                                                            <input type="text" class="form-control" name="applicationObject" maxlength="20" placeholder="请输入适合谁听（您可以输入心理老师、心理学爱好者、父母等）">
                                                                             <span class="help-block"> </span>
                                                                         </div>
                                                                     </div>
@@ -169,7 +164,7 @@
                                                                 <div class="form-actions">
                                                                     <div class="row">
                                                                         <div class="col-md-offset-3 col-md-7">
-                                                                            <button class="btn  green" type="submit" style="width:30%">保存</button>
+                                                                            <button class="btn lg  green" type="submit" style="width:30%">保存</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -215,55 +210,23 @@
 
     <!--私有部分结束-->
 
-    <style>
-        .modal .headbox {
-            width: 150px !important;
-            height: 150px !important;
-            border-radius: 50% !important;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-
-        .modal-body {
-            font-size: 16px;
-            line-height: 24px;
-            text-align: justify
-        }
-
-        .modal img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .price-panel {
-            width: 100%;
-            background-color: #edf2f74f;
-            padding: 20px;
-        }
-
-        .price-panel .row {
-            padding-bottom: 10px;
-        }
-
-        .radio-group-container {
-            text-align: left;
-            padding-top: 7px;
-        }
-    </style>
+   
 
     <script id="tpl-dict-149" type="text/template">
-        {@each data as item, index} {@if item.CODE!=''}
-        <label class="mt-radio mt-radio-outline">
-            <input type="radio" name="objects" value="${item.CODE}">\${item.NAME}
-            <span></span>
-        </label>
-        {@/if} {@/each}
+        {@each data as item, index}
+            {@if item.CODE!=''}
+            <label class="mt-radio mt-radio-outline">
+                <input type="radio" name="objects" value="\${item.CODE}">\${item.NAME}
+                <span></span>
+            </label>
+            {@/if}
+        {@/each}
     </script>
 
     <script id="tpl-dict-150" type="text/template">
         {@each data as item, index} {@if item.CODE!=''}
         <label class="mt-radio mt-radio-outline">
-            <input type="radio" name="purport" value="${item.CODE}">\${item.NAME}
+            <input type="radio" name="purport" value="\${item.CODE}">\${item.NAME}
             <span></span>
         </label>
         {@/if} {@/each}

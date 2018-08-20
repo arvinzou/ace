@@ -111,28 +111,7 @@ function changeCourseType(type){
 
 
 function edit(id){
-    /**
-     * 查询课程基本信息
-     */
-    $.ajax({
-        url: contextPath + "/course/selectCourseByPrimaryKey",
-        type:"post",
-        async:false,
-        data:{
-            id: id
-        },
-        success:function(result){
-            if(result.status == 0) {
-                renderPage('courseBasic', result.value, 'editCourseTemp');
-                initEditor();
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+     window.location.href = contextPath + '/dynamic/service/course/edit/index.jsp?id='+id+'&type='+params.type;
 }
 
 function initEditor(){

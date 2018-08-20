@@ -122,6 +122,10 @@ function initPage() {
     $('input[name=name]').maxlength({
         alwaysShow: true
     });
+    $('input[name=applicationObject]').maxlength({
+                        alwaysShow: true
+                   });
+
     initEditor();
     initUpload();
 
