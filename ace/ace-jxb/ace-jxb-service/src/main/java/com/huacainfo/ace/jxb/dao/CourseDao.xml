@@ -301,6 +301,7 @@
     </select>
 
     <sql id="whereCondition">
+
         from course t
         left join course_audit ca on t.id =ca.courseId
         where 1=1
