@@ -171,3 +171,25 @@ body{
         padding-bottom:18px;
         padding-left:10px;
     }
+    .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+        z-index: 3;
+        color: #fff;
+        background-color: #27a4b0;
+        border-color: #27a4b0;
+        cursor: default;
+    }
+    a:hover, a:focus {
+        color: #1a9fff;
+        text-decoration: none;
+    }
+    a:hover {
+        cursor: pointer;
+        color: #1a9fff;
+    }
+    a {
+        text-shadow: none;
+        color:  #1a9fff;
+    }
+    .active a {
+        color: #1a9fff;
+    }

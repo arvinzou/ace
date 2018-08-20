@@ -69,7 +69,7 @@
 															<div class="form-group">
 																<label class="col-md-2 control-label"><span class="label-red">*</span>课程名称</label>
 																<div class="col-md-10">
-																	<input type="text" class="form-control" name="courseName" maxlength="28" placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字)">
+																	<input type="text" class="form-control" name="courseName" maxlength="28"  placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字)">
 																	<span class="help-block"></span>
 																</div>
 															</div>

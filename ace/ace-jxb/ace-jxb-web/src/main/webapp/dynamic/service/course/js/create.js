@@ -9,6 +9,10 @@ function loadlocal() {
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/simditor.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/plupload/plupload.full.min.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
+    urls.push({path: portalPath, url: '/content/common/assets/global/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js', type: 'js',callback:function(){
+        $('input[name=courseName]').maxlength({alwaysShow: true});
+    }});
+    urls.push({path: portalPath, url: '/content/common/assets/pages/scripts/components-bootstrap-maxlength.min.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }

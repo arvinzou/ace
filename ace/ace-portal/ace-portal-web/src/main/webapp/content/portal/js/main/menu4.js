@@ -143,7 +143,7 @@ function initMenu(){
         buildMenu(data);
      }else{
         $.ajax({
-                    url : portalPath + '/system/getTreeList.do?loadButton=false',
+                    url : portalPath + '/system/getTreeList.do?loadButton=false&client=c',
                     type : 'POST',
                     timeout : 30000,
                     dataType : 'json',

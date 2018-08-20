@@ -59,10 +59,12 @@
                                                     咨询师管理
                                                 </div>
                                                 <div class="actions">
-                                                    <div class="portlet-input input-inline">
+                                                    <form onsubmit="return t_query()">
+
+
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control input-circle-left"
-                                                                   placeholder="search...">
+                                                            <input type="text" style="height:34px" name="keyword" class="form-control input-circle-left"
+                                                                   placeholder="请输入咨询师姓名">
                                                             <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
@@ -72,7 +74,8 @@
                                                                 </button>
                                                             </span>
                                                         </div>
-                                                    </div>
+                                                    </form>
+
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
