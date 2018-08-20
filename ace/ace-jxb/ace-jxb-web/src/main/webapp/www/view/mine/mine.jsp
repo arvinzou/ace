@@ -91,7 +91,7 @@
 					<img class="next" src="img/next.png"/>
 				</div>
 			</div>
-			<div class="row menu-li" onclick="window.location.href='mycount.jsp'">
+			<div class="row menu-li" onclick="showMycount();">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的账户</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
