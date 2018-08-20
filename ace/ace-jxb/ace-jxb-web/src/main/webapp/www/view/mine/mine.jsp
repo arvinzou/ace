@@ -108,8 +108,10 @@
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>--%>
 			<div class="row menu-li">
-				<div class="col-xs-10 col-sm-10"><p class="menu_title">联系我们</p></div>
-				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
+				<a href="tel:0736-7083862">
+					<div class="col-xs-10 col-sm-10"><p class="menu_title">联系我们</p></div>
+					<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
+				</a>
 			</div>
 		</div>
 	</body>
