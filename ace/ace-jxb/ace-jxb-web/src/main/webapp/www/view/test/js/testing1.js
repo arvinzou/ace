@@ -1,4 +1,4 @@
-var mySwiper, flag, eid, totalScore = 0;
+var mySwiper, flag, eid, totalScore = 0, cost;
 $(function () {
     initWeb();
     $('.test_main .button').on('click', '.start', startTesting);
@@ -6,6 +6,51 @@ $(function () {
     $('.swiper-wrapper').on('click', 'li', chooseThis);
     $('.swiper-wrapper').on('click', '.test_done', testDone);
 });
+
+/*初始化按钮*/
+function initBtn() {
+    /*查询有没有历史纪录*/
+    var url = '/portal/www/test/getMyhistoryRes';
+    var data = {
+        evaluatTplId: eid
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            if (result.data == null) {
+                $('.test_main .button .box .start').show();
+                $('.test_main .button .box .result').show();
+            } else {
+                if (cost == 0) {
+                    $('.test_main .button .box .start').show();
+                } else {
+                    var url = "";
+                    var data = "";
+                    $.getJSON(url, data, function (result) {
+                        if (result.status == 0) {
+                            /*有支付*/
+                            if ("有支付") {
+                                $('.test_main .button .box .start').show();
+                            }
+                            else {
+                                $('.test_main .button .box .pay').show();
+                            }
+                        } else {
+                            alert("获取测试失败，将回退到上一页。");
+                            window.history.back();
+                        }
+                    })
+                }
+            }
+
+        } else {
+            alert("获取测试失败，将回退到上一页。");
+            window.history.back();
+        }
+    })
+
+}
+
+
 
 
 /*题目做完了统计分数*/
@@ -28,11 +73,13 @@ function pingjia() {
     $.post(url, data, function (result) {
         if (result.status == 0) {
             var data = result.data;
+            cost = data.discountCost;
+            initBtn();
             $('.test_result .content p').text(data.evaluatGauge["content"]);
             $('.test_content').css("visibility", "hidden");
             $('.test_result').show();
         } else {
-            alert("对不起！测试提交失败，可能要重新测试。")
+            alert("对不起！测试提交失败，可能要重新测试。");
         }
     });
 }
@@ -96,7 +143,6 @@ function initWeb() {
             initSwriper();
         }
     });
-
 }
 
 function viewTest(data) {

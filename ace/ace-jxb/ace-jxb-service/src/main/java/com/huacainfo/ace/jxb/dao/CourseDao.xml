@@ -304,6 +304,9 @@
         from course t
         left join course_audit ca on t.id =ca.courseId
         where 1=1
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name = #{condition.name,jdbcType=VARCHAR}
+        </if>
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and IFNULL(t.status,'1') = #{condition.status,jdbcType=VARCHAR}
         </if>
