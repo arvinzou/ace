@@ -93,3 +93,7 @@ function loadMyInfo(id){
 function showMycount(){
     window.location.href = contextPath + '/www/view/mine/mycount.jsp?id='+consulorId;
 }
+
+function onoffline(){
+
+}
