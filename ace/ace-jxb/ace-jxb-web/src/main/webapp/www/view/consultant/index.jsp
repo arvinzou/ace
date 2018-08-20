@@ -34,25 +34,55 @@
 									<a href="#">不限</a>
 								</li>
 								<li class="ll mt_01" onclick="screen01(this);">
-									<a href="#">厌学</a>
+									<a href="#">二孩</a>
 								</li>
 								<li class="ll mt_01" onclick="screen01(this);">
-									<a href="#">自闭</a>
+									<a href="#">儿童发展</a>
 								</li>
 								<li class="mt_01" onclick="screen01(this);">
-									<a href="#">多动症</a>
+									<a href="#">父母成长</a>
 								</li>
 								<li class="ll mt_02 mb" style="margin-left: 0.4rem;" onclick="screen01(this);">
-									<a href="#">不合群</a>
+									<a href="#">行为纠正</a>
 								</li>
 								<li class="ll mt_02 mb" onclick="screen01(this);">
-									<a href="#">敏感自卑</a>
+									<a href="#">习惯培养</a>
 								</li>
 								<li class="ll mt_02 mb" onclick="screen01(this);">
-									<a href="#">不爱学习</a>
+									<a href="#">育儿困惑</a>
 								</li>
 								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">自控力差</a>
+									<a href="#">亲子冲突</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">厌学</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">自闭症</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">多动症</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">不合群</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">敏感自卑</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">怕生</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">注意力不集中</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">阅读障碍</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">顽皮淘气</a>
+								</li>
+								<li class="mt_02 mb" onclick="screen01(this);">
+									<a href="#">顽皮淘气</a>
 								</li>
 								<!--<div class="row screen">
 									<div class="col-xs-6 col-sm-6 reset" id="reset01">重置</div>
