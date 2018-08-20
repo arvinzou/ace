@@ -42,84 +42,107 @@
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
-                                    <a href="index4.jsp">首页</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>课程管理</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
 
-                                <div class="portlet box yellow">
-                                    <div class="portlet-title">
-                                        <div class="caption">
-                                            <i class="fa fa-gift"></i>课程管理 </div>
-                                        <div class="tools">
-                                            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
-                                            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
-                                        </div>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div class="tabbable-line">
-                                            <ul class="nav nav-tabs ">
-                                                <li class="active" onclick="changeCourseType('1');">
-                                                    <a href="#tab_15_1" data-toggle="tab" aria-expanded="true"> 单节课程 </a>
-                                                </li>
-                                                <li class="" onclick="changeCourseType('2');">
-                                                    <a href="#tab_15_1" data-toggle="tab" aria-expanded="false"> 系列课程 </a>
-                                                </li>
-                                            </ul>
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="tab_15_1">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <!-- BEGIN SAMPLE TABLE PORTLET-->
-                                                            <div class="portlet light ">
-                                                                <div class="portlet-title">
-                                                                    <div class="caption">
-                                                                        <i class="icon-social-dribbble font-green"></i>
-                                                                        <span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">课程管理</font></font></span>
-                                                                    </div>
-                                                                    <div class="make_course" id="makeCourse">
-                                                                        <a href="javascript:;" class="btn red commonCourse" style="font-size: 14px !important;" onclick="makecourse();">制作课程<i class="fa fa-edit"></i></a>
-                                                                        <a href="javascript:;" class="btn red specialCourse" style="font-size: 14px !important; display: none;" onclick="makeSeriesCourse();">制作课程<i class="fa fa-edit"></i></a>
-                                                                    </div>
-                                                                    <div class="create_course" id="createCourse">
-                                                                        <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程<i class="fa fa-plus"></i></a>
-                                                                        <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程<i class="fa fa-plus"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="portlet-body">
-                                                                    <div class="table-scrollable">
-                                                                        <table class="table table-hover">
-                                                                            <thead>
-                                                                            <tr>
-                                                                                <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-                                                                                <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
-                                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody id="courseList">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                        <div class="portlet light ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    课程管理
+                                                </div>
 
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
+
+                                                <div class="actions">
+
+
+                                                    <div class="create_course" id="createCourse">
+                                                        <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
+                                                        <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="tabbable-line">
+                                                    <ul class="nav nav-tabs ">
+                                                        <li class="active" onclick="changeCourseType('1');">
+                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="true"> 单节课程 </a>
+                                                        </li>
+                                                        <li class="" onclick="changeCourseType('2');">
+                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="false"> 系列课程 </a>
+                                                        </li>
+
+                                                    </ul>
+                                                    <div class="tab-content">
+                                                        <div class="tab-pane active" id="tab_15_1">
+                                                            <div class="row">
+                                                                <div class="col-sm-8">
+
                                                                 </div>
+                                                                <div class="col-sm-4">
+                                                                    <form onsubmit="return t_query()">
+                                                                    <div class="input-group">
+                                                                        <input type="text" style="height:34px" name="keyword" class="form-control input-circle-left"
+                                                                               placeholder="请输入课程名称">
+                                                                        <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+
                                                             </div>
-                                                            <!-- END SAMPLE TABLE PORTLET-->
+
+
+
+                                                            <div class="table-scrollable">
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                    <tr>
+
+                                                                        <th width="30%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 课程名称 </font></font></th>
+                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 上架时间 </font></font></th>
+                                                                        <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 购买数 </font></font></th>
+                                                                        <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核状态 </font></font></th>
+                                                                        <th width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody id="courseList">
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+
+                                                            <div class="paginationbar">
+                                                                <ul class="pagination" id="pagination1"></ul>
+                                                            </div>
+
                                                         </div>
-                                                        <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- END SAMPLE TABLE PORTLET-->
                                     </div>
+
                                 </div>
                                 <!--=======================================-->
 
@@ -137,29 +160,33 @@
 <script id="list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td width="5%" class="tdcontent"><font style="vertical-align: inherit;">
-            <input type="radio" name="course" value="\${item.id}"/>
-            <font style="vertical-align: inherit;">\${parseInt(index)+1} </font></font>
-        </td>
+
         <td width="35%">
-            <img src="\${item.cover}" style="width: 80px;height: 60px;"/>
-            <span>\${item.name}</span>
+            <div class="row">
+                <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
+                <div class="col-md-9">
+                    <div class="describtion">\${item.name}</div>
+                    <div class="cost">￥\${item.cost}</div>
+                </div>
+            </div>
         </td>
         <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
         <td width="15%" class="tdcontent"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.duration} </font></font></td>
         <td width="15%" class="tdcontent">
             {@if item.auditRst==0}
-            <span class="label label-sm label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
+            <span class="label label-lg label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
             {@else if item.auditRst==1}
-            <span class="label label-sm label-warning"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
+            <span class="label label-lg label-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
             {@else}
-            <span class="label label-sm label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
+            <span class="label label-lg label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
             {@/if}
         </td>
         <td width="15%">
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
+            <a class="operation" href="javascript:void(0);"  onclick="makecourse('\${item.id}');">制作</a>
+            <a class="operation" href="javascript:void(0);"  onclick="clickEdit('\${item.id}');">下架</a>
             <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
-            <a class="operation" id="auditOpt\${index}" href="javascript:void(0);" onclick="openAudit('\${item.id}','\${index}');">审核</a>
+            <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>
     </tr>
     {@/each}
@@ -351,25 +378,19 @@
     </div>
 </div>
 <style>
-    .modal .headbox {
-        width: 150px !important;
-        height: 150px !important;
-        border-radius: 50% !important;
-        overflow: hidden;
-        margin: 0 auto;
+    .cover{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
     }
-    .modal-dialog{
-        width: 1000px !important;
+    .describtion{
+        padding-left:8px;
+        height:50px;
     }
-    .modal-body {
-        font-size: 16px;
-        line-height: 24px;
-        text-align: justify
-    }
-
-    .modal img {
-        width: 100%;
-        height: 100%;
+    .cost{
+          padding-top: 5px;
+          padding-left:8px;
+          color:#FE6500;
     }
 </style>
 </html>

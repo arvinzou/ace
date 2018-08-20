@@ -146,7 +146,7 @@ function initMenu(){
         loadCommon();
      }else{
         $.ajax({
-            url : portalPath + '/system/getTreeList.do?loadButton=false',
+            url : portalPath + '/system/getTreeList.do?loadButton=false&client=c',
             type : 'POST',
             timeout : 30000,
             dataType : 'json',
@@ -242,7 +242,7 @@ function createNav(){
     $(".page-wrapper-row").wrap('<div class="page-wrapper"></div>');
     $(".page-content").css("padding","10px");
 
-    $(".page-content-wrapper div:first").before('<div class="page-head"><div class="container"><div class="page-title"><h3><small></small></h3></div></div>');
+    //$(".page-content-wrapper div:first").before('<div class="page-head"><div class="container"><div class="page-title"><h3><small></small></h3></div></div>');
 
 
 
@@ -296,5 +296,9 @@ function initBottom(){
                  }
              });
      }
-
+        $('.scroll-to-top').click(function(e) {
+              e.preventDefault();
+              $('html, body').animate({scrollTop: 0}, 500);
+              return false;
+          });
 }

@@ -483,3 +483,7 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
 .page-header.navbar.navbar-fixed-top, .page-header.navbar.navbar-static-top {
     z-index: 90;
 }
+.page-header.navbar .page-logo .logo-default {
+    margin:5px;
+    max-height:40px;
+}

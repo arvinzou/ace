@@ -5,6 +5,8 @@ window.onload = function () {
     initpage();
 }
 
+var category = 1;
+
 
 function getUserinfo() {
     var url = "/jxb/counselor/getMyinfo"
@@ -14,6 +16,13 @@ function getUserinfo() {
         }
     })
 }
+
+
+function changeType(cType) {
+    category = cType;
+    initpage();
+}
+
 
 
 function viewUserinfo(data) {
@@ -100,7 +109,8 @@ function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findMyOrderList";
     var data = {
         page: num,
-        limit: 20
+        limit: 20,
+        category: category,
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {

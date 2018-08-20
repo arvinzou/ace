@@ -155,8 +155,9 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
         PageResult<EvaluatTplVo> rst = new PageResult<EvaluatTplVo>();
         List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, (page - 1) * limit, limit, orderBy);
         for (EvaluatTplVo item : list) {
-            List<EvaluatGauge> listGa = this.evaluatGaugeDao.findLists(item.getId());
-            item.setGaugelist(listGa);
+            EvaluatData evaluatData = new EvaluatData();
+            evaluatData.setEvaluatTplId(item.getId());
+            item.setTestedTotal(this.evaluatDataDao.getTotal(evaluatData));
         }
         rst.setRows(list);
         if (page <= 1) {
@@ -184,6 +185,10 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
     public ResultResponse getEvaluatTplList(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception {
         int start = (page - 1) * limit;
         List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, start, limit, orderBy);
+        for (EvaluatTplVo item : list) {
+            List<EvaluatGauge> listGa = this.evaluatGaugeDao.findLists(item.getId());
+            item.setGaugelist(listGa);
+        }
         return new ResultResponse(0, "获取测试模板", list);
     }
 

@@ -4,6 +4,8 @@ window.onload = function () {
     initpage();
 }
 
+var category = 1;
+
 function formaCategory(type) {
     switch (type) {
         case "1":
@@ -42,10 +44,10 @@ function formaPayStatus(type) {
 }
 
 function detail(id) {
-    var url = "/jxb/baseOrder/orderInfo"
+    var url = "/jxb/baseOrder/orderInfo";
     var data = {
         id: id
-    }
+    };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('temp_orderInfo').innerHTML;
@@ -56,6 +58,11 @@ function detail(id) {
             $("#orderInfoModal").modal("show");
         }
     })
+}
+
+function changeType(cType) {
+    category = cType;
+    initpage();
 }
 
 
@@ -78,6 +85,7 @@ function initpage() {
 function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findBaseOrderListSecond";
     var data = {
+        category: category,
         page: num,
         limit: 20
     }

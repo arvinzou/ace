@@ -10,7 +10,10 @@ window.onload = function () {
 function searchList() {
 
 }
-
+function t_query(){
+    getCounselorList(1, 'init')
+    return false;
+}
 function approved() {
     var $that = $(this);
     var id = $that.parents('.mt-card-social').data('id');
@@ -208,11 +211,14 @@ function initpage() {
 function getCounselorList(num, type) {
     var url = "/jxb/counselor/findCounselorList";
     var data = {
-        name: '',
+        name: $("input[name=keyword]").val(),
         page: num,
         limit: 20,
     };
+    try {loading = startLoading();} catch (e) {};
+    if (loading) {loading.settext("请求中，请稍后......");}
     $.getJSON(url, data, function (result) {
+        if (loading) { loading.remove();}
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {

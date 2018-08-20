@@ -12,4 +12,4 @@ session.setAttribute("portalPath", "/portal");
  </script>
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}" />
-<link href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet" type="text/css"/>
+

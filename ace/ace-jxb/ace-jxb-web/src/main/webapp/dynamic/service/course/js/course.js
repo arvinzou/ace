@@ -3,6 +3,7 @@ window.onload = function (){
 }
 var payType = "";
 var videoUrl = "";
+var courseType="1";
 function initpage(courseType) {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
@@ -17,7 +18,10 @@ function initpage(courseType) {
         }
     });
 }
-
+function t_query(){
+    getCourseList(1, null, courseType);
+    return false;
+}
 function getCourseList(num, type, courseType) {
     var url = contextPath+ "/course/findCourseList";
     var createUserId = null;
@@ -26,11 +30,15 @@ function getCourseList(num, type, courseType) {
     }
     var data = {
         page: num,
+        name:$("input[name=keyword]").val(),
         limit: 10,
         type: courseType,                  //1是单节课程，2是系列课程
         createUserId: createUserId
     };
+    try {loading = startLoading();} catch (e) {};
+    if (loading) {loading.settext("请求中，请稍后......");}
     $.getJSON(url, data, function (result) {
+        if (loading) { loading.remove();}
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {
@@ -39,6 +47,7 @@ function getCourseList(num, type, courseType) {
             }
             viewHtml("courseList", result.rows, "list");
         }
+
     })
 }
 
@@ -50,23 +59,17 @@ function viewHtml(IDom, data, tempId) {
     $("#" + IDom).html(html);
 }
 
-function makecourse(){
-    var id = $('input[name="course"]:checked').val();
-    if(id == '' || id == undefined){
-        alert("请选择要制作的课程！");
-        return;
+function makecourse(id){
+    if(courseType=='1'){
+        window.location.href = contextPath + '/dynamic/service/course/make.jsp?courseId='+id;
+    }else{
+        window.location.href = contextPath + '/dynamic/service/course/makeSeries.jsp?id='+id;
     }
-    window.location.href = contextPath + '/dynamic/service/course/make.jsp?courseId='+id;
+
+
 }
 
-function makeSeriesCourse(){
-    var id = $('input[name="course"]:checked').val();
-    if(id == '' || id == undefined){
-        alert("请选择要制作的课程！");
-        return;
-    }
-    window.location.href = contextPath + '/dynamic/service/course/makeSeries.jsp?id='+id;
-}
+
 function deleteCourse(id){
     $.ajax({
         url: contextPath + "/course/deleteCourseByCourseId",
@@ -99,6 +102,7 @@ function changeCourseType(type){
         $(".commonCourse").hide();
         $(".specialCourse").show();
     }
+    courseType=type;
     initpage(type);
 }
 

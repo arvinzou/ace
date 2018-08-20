@@ -16,7 +16,7 @@
     <meta content="${cfg.sys_name}" name="description"/>
 
     <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile-2.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
@@ -28,7 +28,7 @@
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
-<body>
+<body class="page-container-bg-solid">
 <div class="page-wrapper">
     <div class="page-wrapper-row full-height">
         <div class="page-wrapper-middle">
@@ -45,49 +45,80 @@
                                     <span>仪表盘</span>
                                 </li>
                             </ul>
+
+
                             <div class="page-content-inner">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <!-- BEGIN PROFILE SIDEBAR -->
-                                        <!-- END BEGIN PROFILE SIDEBAR -->
-                                        <!-- BEGIN PROFILE CONTENT -->
-                                        <div class="profile-content">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase"><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">预约列表</font></font></span>
-                                                            </div>
+                                <div class="profile">
+                                    <div class="tabbable-line tabbable-full-width">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active">
+                                                <a onclick="javascript:changeType('1')" href="#tab_1_1"
+                                                   data-toggle="tab"> 咨询订单 </a>
+                                            </li>
+                                            <li>
+                                                <a onclick="javascript:changeType('2')" href="#tab_1_3"
+                                                   data-toggle="tab"> 课程订单 </a>
+                                            </li>
+                                        </ul>
+                                        <div class="portlet-body">
+                                            <div class="mt-element-card mt-element-overlay">
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <div class="input-group">
+                                                            <input type="text" style="height:34px" class="form-control input-circle-left"
+                                                                   placeholder="请输入订单编号">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
                                                         </div>
-                                                        <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
+                                                    </div>
 
-                                                                    <%--content--%>
-                                                                    <div class="table-scrollable table-scrollable-borderless"
-                                                                         id="orderList">
-                                                                        <ul class="pagination" id="pagination1"></ul>
-                                                                    </div>
-                                                                    <%--content--%>
+                                                </div>
+                                                <div class="row">
 
+                                                    <%--content--%>
+
+                                                    <div class="portlet-body">
+                                                        <div class="mt-element-card mt-element-overlay">
+                                                            <div class="col-xs-12">
+
+                                                                <%--content--%>
+                                                                <div class="table-scrollable table-scrollable-borderless"
+                                                                     id="orderList">
+
+                                                                </div>
+                                                                <%--content--%>
+                                                                <div class="paginationbar">
+                                                                <ul class="pagination"
+                                                                    id="pagination1"></ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <%--content--%>
+
                                                 </div>
                                             </div>
                                         </div>
+                                        <!--tab_1_2-->
 
-                                        <!-- END PROFILE CONTENT -->
+                                        <!--end tab-pane-->
+                                        </div>
                                     </div>
-                                </div>
-
                             </div>
                         </div>
+
+
+                    </div>
                     </div>
                 </div>
             </div>
@@ -127,7 +158,7 @@
     {@each data as item}
     <table class="table table-hover table-light">
         <thead>
-        <tr class="uppercase">
+        <tr>
             <th> 订单号：</th>
             <th>\${item.id}</th>
             <th> 订单时间：</th>
@@ -209,7 +240,6 @@
 
     .portlet-body {
         background-color: #fff !important;
-        padding: 41px 98px 45px 20px;
     }
 
     .active {

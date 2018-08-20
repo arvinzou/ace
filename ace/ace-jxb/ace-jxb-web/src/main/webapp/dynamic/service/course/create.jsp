@@ -39,102 +39,178 @@
 						<div class="container">
 							<ul class="page-breadcrumb breadcrumb">
 								<li>
-									<a href="index4.jsp">首页</a>
+									<a href="${pageContext.request.contextPath}/index.jsp">首页</a>
 									<i class="fa fa-circle"></i>
 								</li>
 								<li>
-									<span>仪表盘</span>
+									<span>课程管理</span>
 								</li>
 							</ul>
 							<div class="page-content-inner">
 
 								<!---==============================================-->
-								<div class="container">
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h3 class="panel-title">
-												课程创建/编辑
-											</h3>
+								<div class="row">
+									<div class="col-md-12">
+										<!-- BEGIN SAMPLE TABLE PORTLET-->
+										<div class="portlet light">
+											<div class="portlet-title">
+												<div class="caption">
+													创建课程
+												</div>
+												<div class="actions">
+
+												</div>
+											</div>
+											<div class="portlet-body" id="courseSource">
+												<div class="form-panel">
+												<!--具体界面元素开始-->
+													<form class="form-horizontal" role="form" onsubmit="return false">
+														<div class="form-body">
+															<div class="form-group">
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程名称</label>
+																<div class="col-md-10">
+																	<input type="text" class="form-control" name="courseName" maxlength="28"  placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字)">
+																	<span class="help-block"></span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程封面</label>
+																<div class="col-md-10">
+																	<div class="imgbox" >
+																		<img class="select_img form_imagePhotoUrl"
+																			 id="courseCover"
+																			 data-toggle="modal"
+																			 data-xsize="375" data-ysize="210"
+																			 data-cover="courseCover"
+																			 data-target="#img-uploader"
+																			 src="${pageContext.request.contextPath}/dynamic/service/course/img/course_default.jpg?v=${cfg.version}">
+																	</div>
+																	<div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程简介</label>
+																<div class="col-md-10">
+																	<div style="text-align:left"><textarea name="introduction" id="courseIntro" class="introduction"></textarea></div>
+																	<span class="help-block"></span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程价格</label>
+																<div class="col-md-10">
+																	<div class="radio-group-container">
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="noPay" checked="" onclick="payTypeCheck('noPay');">免费
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="pay" checked="" onclick="payTypeCheck('pay');">付费
+																			<span></span>
+																		</label>
+																		<div class="price-panel">
+																			<div class="row">
+																				<label class="col-md-3 control-label">课程原价</label>
+																				<div class="col-md-9"><input name="primeCost" type="text" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）"/></div>
+																			</div>
+																			<div class="row">
+																				<label class="col-md-3 control-label">划线价格</label>
+																				<div class="col-md-9">
+																					<input name="cost" type="text" style="width:70%" class="form-control" placeholder="请输入划线价格（单位：元）"/>
+																					<span class="help-block" style="text-align:left;font-size:12px;padding-top:10px">划线价是一种常见的促销方式，您可以通过设置划线价让您的课程价格看起来更加优惠低廉，吸引更多用户进行购买。</span>
+																				</div>
+
+																			</div>
+																		</div>
+
+
+
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="col-md-2 control-label"><span class="label-red">*</span>课程对象</label>
+																<div class="col-md-10">
+																	<div class="radio-group-container">
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="幼儿" >幼儿
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="小学">小学
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="中学">中学
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="toasts" value="高中">高中
+																			<span></span>
+																		</label>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group">
+																<label class="col-md-2 control-label"><span class="label-red">*</span>针对能力</label>
+																<div class="col-md-10">
+
+																	<div class="radio-group-container">
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="心理能力" >心理能力
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="学习方法">学习方法
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="团队合作">团队合作
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="沟通表达">沟通表达
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="独立思考">独立思考
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="自我认知">自我认知
+																			<span></span>
+																		</label>
+																		<label class="mt-radio mt-radio-outline">
+																			<input type="radio" name="purport" value="其他">其他
+																			<span></span>
+																		</label>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-md-2 control-label">适合谁听</label>
+																<div class="col-md-10">
+																	<input type="text" class="form-control" maxlength="20"  placeholder="请输入适合谁听（您可以输入心理老师、心理学爱好者、父母等）">
+																	<span class="help-block"> </span>
+																</div>
+															</div>
+
+
+														</div>
+														<div class="form-actions">
+															<div class="row">
+																<div class="col-md-offset-3 col-md-7">
+																	<button class="btn btn-lg green" onclick="save();" style="width:30%">保存</button>
+																</div>
+															</div>
+														</div>
+													</form>
+												</div>
+												<!--具体界面元素结束-->
+											</div>
 										</div>
-										<div class="panel-body">
-											<div class="row">
-												<span class="title01">课程基本信息</span>
-											</div>
-											<div class="row form_row">
-												<div class="col-xs-12 col-md-2">课程名称</div>
-												<div class="col-xs-12 col-md-10"><input name="courseName" class="form_input" type="text" placeholder="请输入课程名称" /></div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12 col-md-2">课程封面</div>
-												<div class="col-xs-12 col-md-10">
-													<div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
-													<div class="imgbox" >
-														<img class="select_img form_imagePhotoUrl"
-															 id="courseCover"
-															 data-toggle="modal"
-															 data-xsize="375" data-ysize="210"
-															 data-cover="courseCover"
-															 data-target="#img-uploader"
-															 src="${pageContext.request.contextPath}/dynamic/service/course/img/course_default.jpg?v=${cfg.version}">
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12 col-md-2">课程简介</div>
-												<div class="col-xs-12 col-md-10">
-													<textarea name="introduction" id="courseIntro" class="introduction"></textarea>
-												</div>
-											</div>
-											<div class="row form_row">
-												<div class="col-xs-12 col-md-2">价格</div>
-												<div class="col-xs-12 col-md-10">
-													<div class="col-xs-1 col-md-1"><span id="noPay" class="feeLabel cactive" onclick="payTypeCheck('noPay');">免费</span></div>
-													<div class="col-xs-1 col-md-1"><span id="pay" class="feeLabel uncactive" onclick="payTypeCheck('pay');">付费</span></div>
-													<div class="col-xs-10 col-md-10">
-														<input name="price" type="text" class="form_input" />
-													</div>
-												</div>
-											</div>
-											<div class="row form_row">
-												<div class="col-xs-12 col-md-2">课程对象</div>
-												<div class="col-xs-12 col-md-10">
-													<span class="pointer cactive">幼儿</span>
-													<span class="pointer uncactive">小学</span>
-													<span class="pointer uncactive">中学</span>
-													<span class="pointer uncactive">高中</span>
-												</div>
-											</div>
-											<div class="row form_row">
-												<div class="col-xs-12 col-md-2">适合谁听</div>
-												<div class="col-xs-12 col-md-10"><input class="form_input" type="text" placeholder="请输入适合人群" /></div>
-											</div>
-											<div class="row">
-												<div class="col-xs-12 col-md-2">针对能力</div>
-												<div class="col-xs-12 col-md-10">
-													<div style="height:30px;margin-bottom: 30px;">
-														<span class="ability cactive">心理能力</span>
-														<span class="ability uncactive">学习方法</span>
-														<span class="ability uncactive">团队合作</span>
-														<span class="ability uncactive">沟通表达</span>
-														<span class="ability uncactive">独立思考</span>
-														<span class="ability uncactive">自我认知</span>
-														<span class="ability uncactive">其他</span>
-													</div>
-													<div style="width:100%;">
-														<textarea class="ability_intro"></textarea>
-													</div>
-												</div>
-											</div>
-											<div class="row form_row">
-												<div class="col-xs-12 col-md-2">起始人气(选填)</div>
-												<div class="col-xs-12 col-md-10">
-													<input type="text" class="form_input" />
-												</div>
-											</div>
-											<div class="row" style="text-align: center;">
-												<button class="save" onclick="save();">保存</button>
-											</div>
-										</div>
+										<!-- END SAMPLE TABLE PORTLET-->
 									</div>
 								</div>
 								<!--=======================================-->
@@ -172,5 +248,18 @@
 		width: 100%;
 		height: 100%;
 	}
+
+	.price-panel{
+		width:100%;
+		background-color: #edf2f74f;
+		padding:20px;
+
+	}
+	.price-panel .row{
+		padding-bottom:10px;
+	}
+	.radio-group-container{
+        text-align:left;padding-top:7px;
+    }
 </style>
 </html>

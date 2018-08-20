@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
     <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+          href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
     <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/reservation/css/style.css">--%>
     <script src="${pageContext.request.contextPath}/content/service/reservation/js/act.js?v=${cfg.version}"></script>
@@ -762,7 +762,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">电话咨询
 
                                                                                 </label>
@@ -789,7 +789,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">微信咨询
 
                                                                                 </label>
@@ -816,7 +816,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">面对面咨询
 
                                                                                 </label>
@@ -843,7 +843,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">面对面咨询地址
                                                                                     <span class="required"
                                                                                           aria-required="true">*</span>
@@ -857,7 +857,7 @@
 
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group form-md-line-input">
+                                                                            <div class="form-group ">
                                                                                 <label class="col-md-3 control-label">预约须知
                                                                                     <span class="required"
                                                                                           aria-required="true">*</span>
@@ -870,6 +870,23 @@
                                                                                     <div class="form-control-focus"></div>
                                                                                 </div>
                                                                             </div>
+
+                                                                            <div class="form-group ">
+                                                                                <label class="col-md-3 control-label">是否上线
+                                                                                    <span class="required"
+                                                                                          aria-required="true">*</span>
+                                                                                </label>
+
+                                                                                <div class="switch"
+                                                                                     data-on-label="<i class='icon-ok icon-white'></i>"
+                                                                                     data-off-label="<i class='icon-remove'></i>">
+                                                                                    <input id="onlineStatus"
+                                                                                           type="checkbox"
+                                                                                           name="onlineStatus"/>
+                                                                                </div>
+
+                                                                            </div>
+
 
                                                                         </div>
                                                                         <div class="form-actions">
@@ -915,7 +932,7 @@
 
 <style>
     .hc-checkbox {
-        width: 9rem;
+        width: 10rem;
     }
 
     .error_message {

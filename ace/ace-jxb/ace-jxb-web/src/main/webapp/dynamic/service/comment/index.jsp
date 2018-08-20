@@ -20,14 +20,12 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/studioAudit/css/style.css">
-    <script src="${pageContext.request.contextPath}/dynamic/service/studioAudit/js/act.js?v=${cfg.version}"></script>
+    <script src="${pageContext.request.contextPath}/dynamic/service/comment/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
 <body>
 
-<!--隐藏存放ID-->
-<input type="text" hidden value="" id="auditId"/>
 <div class="page-wrapper">
 
     <div class="page-wrapper-row full-height">
@@ -54,83 +52,68 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title">
                                                     <div class="caption">
-                                                        工作室
+                                                        <i class="icon-social-dribbble font-green"></i>
+                                                        <span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评论列表</font></font></span>
                                                     </div>
                                                 </div>
                                                 <div class="portlet-body">
-                                                    <div class="row">
-                                                        <div class="col-sm-8">
-
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <input type="text" style="height:34px" class="form-control input-circle-left"
-                                                                       placeholder="请输入工作室名称">
-                                                                <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
-                                                                        type="submit">
-                                                                    <font style="vertical-align: inherit;"><font
-                                                                            style="vertical-align: inherit;">
-                                                                        搜索</font></font>
-                                                                </button>
-                                                            </span>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
                                                     <div class="table-scrollable">
                                                         <table class="table table-hover">
                                                             <thead>
                                                             <tr>
-
-                                                                <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 名称 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 负责人 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 级别 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 状态 </font></font></th>
-                                                                <th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
+                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 昵称 </font></font></th>
+                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 名称 </font></font></th>
+                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 好评度 </font></font></th>
+                                                                <th width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 评论内容 </font></font></th>
+                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 评论时间 </font></font></th>
+                                                                <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
                                                             </tr>
                                                             </thead>
-                                                            <tbody id="audioList">
+                                                            <tbody id="cmtList">
 
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="paginationbar">
-                                                        <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
-                                                    </div>
                                                 </div>
                                             </div>
-
                                             <!-- END SAMPLE TABLE PORTLET-->
                                         </div>
-
+                                    <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
                                 </div>
                                 <script id="list" type="text/template">
                                     {@each data as item,index}
                                     <tr>
-
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-md-3"><img src="\${item.logoImgUrl}" class="cover"/></div>
-                                                <div class="col-md-9">
-                                                    <div class="describtion">\${item.name}</div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.dutyName} </font></font></td>
-                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.level} </font></font></td>
-                                        <td>
-                                            {@if item.status==0}
-                                                <span class="label label-lg label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
-                                            {@else if item.status==1}
-                                                <span class="label label-lg label-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
-                                            {@else}
-                                                <span class="label label-lg label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
+                                        <td width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${parseInt(index)+1} </font></font></td>
+                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.nickname} </font></font></td>
+                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.courseId} </font></font></td>
+                                        <td width="15%">
+                                            {@if item.grade == '1'}
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            {@else if item.grade == '2'}
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            {@else if item.grade == '3'}
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            {@else if item.grade == '4'}
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            {@else if item.grade == '5'}
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
                                             {@/if}
                                         </td>
-                                        <td>
-                                            <a href="#" class="operation" data-target="#opt" data-toggle="modal" onclick="setval('\${item.id}');">审核</a>
-                                            <a href="#" class="operation" data-target="#myModal" data-toggle="modal" onclick="edit('\${item.id}');">查看 </a>
+                                        <td width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.content} </font></font></td>
+                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
+                                        <td width="10%">
+                                            <a href="javascript:void(0);" onclick="deleteCmt(this,'\${item.id}');">删除</a>
                                         </td>
                                     </tr>
                                     {@/each}
@@ -245,21 +228,6 @@
     .modal img {
         width: 100%;
         height: 100%;
-    }
-
-    .cover{
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-    .describtion{
-        padding-left:8px;
-        height:50px;
-    }
-    .cost{
-          padding-top: 5px;
-          padding-left:8px;
-          color:#FE6500;
     }
 </style>
 </html>

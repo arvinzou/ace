@@ -1,11 +1,58 @@
 var mySwiper, flag, eid, totalScore = 0;
 $(function () {
     initWeb();
+    initBtn();
     $('.test_main .button').on('click', '.start', startTesting);
     $('.swiper-wrapper').on('click', '.prevBtn', preTest);
     $('.swiper-wrapper').on('click', 'li', chooseThis);
     $('.swiper-wrapper').on('click', '.test_done', testDone);
 });
+
+/*初始化按钮*/
+function initBtn() {
+    /*查询有没有历史纪录*/
+    var url = '/portal/www/test/getMyhistoryRes';
+    var data = {
+        evaluatTplId: eid
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+
+            if ("有历史记录") {
+                $('.test_main .button .box .start').show();
+                $('.test_main .button .box .result').show();
+            } else {
+                if ("价格是否是0") {
+                    $('.test_main .button .box .start').show();
+                } else {
+                    var url = "";
+                    var data = "";
+                    $.getJSON(url, data, function (result) {
+                        if (result.status == 0) {
+                            /*有支付*/
+                            if ("有支付") {
+                                $('.test_main .button .box .start').show();
+                            }
+                            else {
+                                $('.test_main .button .box .pay').show();
+                            }
+                        } else {
+                            alert("获取测试失败，将回退到上一页。");
+                            window.history.back();
+                        }
+                    })
+                }
+            }
+
+        } else {
+            alert("获取测试失败，将回退到上一页。");
+            window.history.back();
+        }
+    })
+
+}
+
+
 
 
 /*题目做完了统计分数*/
@@ -96,7 +143,6 @@ function initWeb() {
             initSwriper();
         }
     });
-
 }
 
 function viewTest(data) {

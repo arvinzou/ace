@@ -75,7 +75,7 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
 
-
+        <img src="${pageContext.request.contextPath}/content/common/assets/pages/img/logo-big.png" alt="">
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -165,7 +165,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="button" id="btn-login-submit" class="btn red btn-block uppercase">登录</button>
+                <button type="button" id="btn-login-submit" class="btn green btn-block uppercase">登录</button>
             </div>
         </div>
 
@@ -421,13 +421,7 @@ function guid() {
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
 <style>
-    .login .logo {
-        margin: 0px auto 0;
-        padding: 15px;
-        text-align: left;
-        height: 150px;
 
-    }
 
     .login .content {
         margin: 10px auto;
@@ -459,10 +453,10 @@ function guid() {
     .form-group-captcha {
         margin-bottom: 5px;
     }
-    body {
+   /* body {
         background-image: url(${cfg.sys_login_bg_img});
         background-size: cover;
-    }
+    }*/
     .content {
         border: 1px solid #eee;
     }
@@ -488,11 +482,11 @@ function guid() {
 .login-switch .iconfont {
     font-size: 52px;
     cursor: pointer;
-    color: #f40;
+    color: #333;
 }
 .iconfont {
     font-family: iconfont!important;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke-width: .2px;
@@ -510,6 +504,11 @@ i, cite, em, var, address, dfn {
 .qrcode{
     max-width:250px;
     padding-bottom:40px;
+}
+.login .logo {
+    margin: 30px auto 20px;
+    padding: 15px;
+    text-align: center;
 }
 </style>
 </html>

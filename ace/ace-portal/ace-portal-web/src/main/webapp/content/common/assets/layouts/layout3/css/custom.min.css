@@ -1,0 +1,195 @@
+/* here you can put your own css to customize and override the theme */
+.page-content-wrapper .page-content {
+    margin-left: 0px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    min-height: 300px;
+    padding: 0px 0px 0px;
+}
+.breadcrumb1{
+    background: none;
+    padding-top:15px;
+    color: #a7b2c0;
+    font-size:14px;
+}
+.breadcrumb {
+    background: 0 0;
+    padding: 15px 0 15px;
+    margin: 0;
+    color: #a7b2c0;
+}
+.page-header {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:active, .dropdown-menu>li.active>a, .dropdown-menu>li.active>a:hover, .dropdown-menu .dropdown-submenu:hover>a {
+    background: #f6f6f6;
+    color: #000;
+}
+.page-head .page-title {
+    display: inline-block;
+    float: left;
+    padding: 0px 0;
+}
+
+.navbar-brand {
+    float: left;
+    padding: 15px 12px;
+    font-size: 22px;
+    line-height: 45px;
+    height: 75px;
+    color:#000;
+}
+/*.page-header .page-header-menu {
+    background: #32c5d2;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav>li>a, .page-header .page-header-menu .hor-menu .navbar-nav>li>a>i {
+    color: #fff;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav>li .dropdown-menu {
+    background: #32c5d2;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav>li .dropdown-menu li>a {
+    color: #fff;
+}
+header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:hover {
+    color: #fff;
+    background: #2fa6b1!important;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav>li .dropdown-menu li:hover>a {
+    color: #fff;
+    background: #2fa6b1;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav>li.open>a, .page-header .page-header-menu .hor-menu .navbar-nav>li:hover>a, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:active, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:hover {
+    color: #fff;
+    background: #2fa6b1!important;
+}*/
+.margin-bottom-40 {
+     margin-bottom: 0px!important;
+      font-family:"微软雅黑","宋体";
+      font-size:14px;
+      color: #a2abb7;
+      font-weight: 300;
+}
+.container {
+    width: 65%;
+}
+
+.page-header .page-header-top .page-logo .logo-default {
+    margin:10px;
+    max-height:50px;
+}
+.page-header .page-header-top .page-logo {
+    float: left;
+    display: block;
+    width: 80px;
+    height: 75px;
+}
+.qrcode-default{
+     margin:2px;
+     max-height:100px;
+}
+.page-prefooter {
+    padding: 20px 0;
+    clear: both;
+}
+body{
+    font-family:"微软雅黑","宋体";
+    font-weight: 300;
+}
+
+.primary-link {
+    font-weight: 300;
+}
+.page-header .page-header-menu .hor-menu .navbar-nav>li>a {
+    font-weight: 300;
+}
+
+.paginationbar{
+         width: 100%;
+         text-align: right;
+}
+
+.form-panel{
+		width: 70%;
+		text-align: center;
+		margin: auto;
+		padding-top:40px;
+		padding-bottom:40px;
+	}
+	.form-control {
+		display: block;
+		width: 100%;
+		height: 40px;
+		padding: 6px 12px;
+		font-size: 14px;
+		line-height: 1.42857;
+		color: #555555;
+		background-color: #fff;
+		background-image: none;
+		border: 1px solid #ebedf2;
+		border-radius: .25rem;
+	}
+	.form-group {
+    	margin-bottom: 20px;
+	}
+	textarea {
+    	border: 1px solid #ebedf2;
+		border-radius: .25rem;
+	}
+	.label-red{
+		color:red;padding:2px
+	}
+	.mt-checkbox, .mt-radio {
+    	padding-right: 30px;
+	}
+	.form-actions {
+        padding: 20px;
+        margin: 0;
+    }
+    .radio-group-container{
+        text-align:left;padding-top:7px;
+    }
+
+    .table-scrollable {
+        border: 0px solid #e7ecf1;
+    }
+    .table-scrollable>.table>thead>tr{
+        background-color: #edf2f74f
+    }
+    .table > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 0px solid #e7ecf1;
+        padding-top:12px;
+        padding-bottom:12px;
+        padding-left:12px;
+    }
+    .table>tbody>tr>td {
+        padding-top:18px;
+        padding-bottom:18px;
+        padding-left:10px;
+    }
+    .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+        z-index: 3;
+        color: #fff;
+        background-color: #27a4b0;
+        border-color: #27a4b0;
+        cursor: default;
+    }
+    a:hover, a:focus {
+        color: #1a9fff;
+        text-decoration: none;
+    }
+    a:hover {
+        cursor: pointer;
+        color: #1a9fff;
+    }
+    a {
+        text-shadow: none;
+        color:  #1a9fff;
+    }
+    .active a {
+        color: #1a9fff;
+    }

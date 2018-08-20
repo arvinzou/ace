@@ -29,7 +29,7 @@
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
-<body>
+<body class="page-container-bg-solid">
 <div class="page-wrapper">
     <div class="page-wrapper-row full-height">
         <div class="page-wrapper-middle">
@@ -145,45 +145,55 @@
                                         <div class="profile-content">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase"><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">订单管理</font></font></span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
+                                                    <div class="profile">
+                                                        <div class="tabbable-line tabbable-full-width">
+                                                            <ul class="nav nav-tabs">
+                                                                <li class="active">
+                                                                    <a onclick="javascript:changeType('1')"
+                                                                       href="#tab_1_1"
+                                                                       data-toggle="tab"> 咨询订单 </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a onclick="javascript:changeType('2')"
+                                                                       href="#tab_1_3"
+                                                                       data-toggle="tab"> 课程订单 </a>
+                                                                </li>
+                                                            </ul>
+                                                            <div class="portlet-body">
+                                                                <div class="mt-element-card mt-element-overlay">
+                                                                    <div class="row">
 
-                                                                    <%--content--%>
+                                                                        <%--content--%>
 
-                                                                    <div class="portlet-body">
-                                                                        <div class="mt-element-card mt-element-overlay">
-                                                                            <div class="row">
+                                                                        <div class="portlet-body">
+                                                                            <div class="mt-element-card mt-element-overlay">
+                                                                                <div class="col-xs-12">
 
-                                                                                <%--content--%>
-                                                                                <div class="table-scrollable table-scrollable-borderless"
-                                                                                     id="orderList">
+                                                                                    <%--content--%>
+                                                                                    <div class="table-scrollable table-scrollable-borderless"
+                                                                                         id="orderList">
+
+                                                                                    </div>
+                                                                                    <%--content--%>
                                                                                     <ul class="pagination"
                                                                                         id="pagination1"></ul>
                                                                                 </div>
-                                                                                <%--content--%>
-
                                                                             </div>
                                                                         </div>
+
+                                                                        <%--content--%>
+
                                                                     </div>
-
-                                                                    <%--content--%>
-
                                                                 </div>
                                                             </div>
+                                                            <!--tab_1_2-->
+
+                                                            <!--end tab-pane-->
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
 
                                         <!-- END PROFILE CONTENT -->
@@ -315,11 +325,19 @@
 
     .portlet-body {
         background-color: #fff !important;
-        padding: 41px 98px 45px 20px;
     }
 
     .active {
         color: #333;
+    }
+
+    /*.nav-tabs{*/
+    /*background-color: #fff;*/
+    /*}*/
+
+    .profile {
+        background-color: #fff;
+        padding: 20px;
     }
 </style>
 </html>
