@@ -53,7 +53,7 @@ public class CourseSourceServiceImpl implements CourseSourceService {
                                                            int limit, String orderBy) throws Exception {
         PageResult<CourseSourceVo> rst = new PageResult<>();
         List<CourseSourceVo> list = this.courseSourceDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.courseSourceDao.findCount(condition);

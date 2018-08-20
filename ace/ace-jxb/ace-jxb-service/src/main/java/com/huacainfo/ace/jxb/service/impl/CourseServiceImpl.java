@@ -15,6 +15,7 @@ import com.huacainfo.ace.jxb.dao.CourseAuditDao;
 import com.huacainfo.ace.jxb.dao.CourseDao;
 import com.huacainfo.ace.jxb.dao.CoursePartDao;
 import com.huacainfo.ace.jxb.dao.CourseSourceDao;
+import com.huacainfo.ace.jxb.model.Course;
 import com.huacainfo.ace.jxb.model.CourseAudit;
 import com.huacainfo.ace.jxb.model.CourseSource;
 import com.huacainfo.ace.jxb.service.CounselorService;
@@ -78,7 +79,7 @@ public class CourseServiceImpl implements CourseService {
     public PageResult<CourseVo> findCourseList(CourseQVo condition, int start,
                                                int limit, String orderBy) throws Exception {
         PageResult<CourseVo> rst = new PageResult<>();
-        List<CourseVo> list = courseDao.findList(condition, start, start + limit, orderBy);
+        List<CourseVo> list = courseDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = courseDao.findCount(condition);
@@ -339,6 +340,32 @@ public class CourseServiceImpl implements CourseService {
             }
         }
         return null;
+    }
+
+    /**
+     * 标记更新课程 上/下线状态
+     * <p>
+     *
+     * @param courseId 课程ID
+     * @param state    在架状态 0 - 下架 1 - 上架
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse updateLineState(String courseId, String state,
+                                           UserProp userProp) throws Exception {
+        Course course = courseDao.selectVoByPrimaryKey(courseId);
+        if (null == course) {
+            return new MessageResponse(ResultCode.FAIL, "课程资料丢失");
+        }
+
+        return updateLineState(course, state, userProp);
+    }
+
+    private MessageResponse updateLineState(Course course, String state, UserProp userProp) throws Exception {
+        course.setLineState(state);
+        courseDao.updateByPrimaryKeySelective(course);
+
+        return new MessageResponse(ResultCode.SUCCESS, "0".equals(state) ? "下架成功" : "上架成功");
     }
 
     private SqlSession getSqlSession() {

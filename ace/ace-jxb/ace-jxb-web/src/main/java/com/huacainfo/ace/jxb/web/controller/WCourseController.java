@@ -135,4 +135,6 @@ public class WCourseController extends JxbBaseController {
         courseCmtService.addCourseCmt(courseId, userId, content, grade);
         return new ResultResponse(ResultCode.SUCCESS, "添加评论成功");
     }
+
+
 }

@@ -68,7 +68,7 @@ public class PostLevelServiceImpl implements PostLevelService {
     public PageResult<PostLevelVo> findPostLevelList(PostLevelQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<PostLevelVo> rst = new PageResult<>();
         List<PostLevelVo> list = this.postLevelDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.postLevelDao.findCount(condition);

@@ -54,7 +54,7 @@ public class CourseCmtServiceImpl implements CourseCmtService {
                                                      int limit, String orderBy) throws Exception {
         PageResult<CourseCmtVo> rst = new PageResult<>();
         List<CourseCmtVo> list = this.courseCmtDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.courseCmtDao.findCount(condition);

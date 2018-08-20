@@ -39,6 +39,19 @@ public class CourseVo extends Course {
      */
     private CounselorVo counselor;
 
+    /**
+     * 咨询师名称
+     */
+    private String counselorName;
+
+    public String getCounselorName() {
+        return counselorName;
+    }
+
+    public void setCounselorName(String counselorName) {
+        this.counselorName = counselorName;
+    }
+
     public CounselorVo getCounselor() {
         return counselor;
     }

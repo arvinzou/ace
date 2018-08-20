@@ -55,7 +55,7 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
      */
     @Override
     public List<OrderCalculation> findList(OrderCalculationQVo condition, int start, int limit, String orderBy) {
-        return orderCalculationDao.findList(condition, start, start + limit, orderBy);
+        return orderCalculationDao.findList(condition, start, limit, orderBy);
     }
 
     /**

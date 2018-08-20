@@ -44,7 +44,7 @@ public class AccountFlowRecordServiceImpl implements AccountFlowRecordService {
                                                     int limit, String orderBy) throws Exception {
         PageResult<AccountFlowRecordVo> rst = new PageResult<>();
         List<AccountFlowRecordVo> list = accountFlowRecordDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.accountFlowRecordDao.findCount(condition);

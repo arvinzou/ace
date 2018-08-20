@@ -165,6 +165,11 @@
                             已拒绝
                         </li>
                         {@/if}
+                        <li>
+                            <a class="delect" href="javascript:;">
+                                删除
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -241,6 +246,10 @@
     .modal img {
         width: 100%;
         height: 100%;
+    }
+
+    .mt-card-social .delect:hover {
+        color: red !important;
     }
 
 </style>

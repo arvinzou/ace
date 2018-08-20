@@ -53,7 +53,7 @@ public class CoursePartServiceImpl implements CoursePartService {
                                                        int limit, String orderBy) throws Exception {
         PageResult<CoursePartVo> rst = new PageResult<>();
         List<CoursePartVo> list = this.coursePartDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.coursePartDao.findCount(condition);

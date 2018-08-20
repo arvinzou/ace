@@ -54,7 +54,7 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
                                                   int limit, String orderBy) throws Exception {
         PageResult<TeacherAuditVo> rst = new PageResult<>();
         List<TeacherAuditVo> list = teacherAuditDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = teacherAuditDao.findCount(condition);

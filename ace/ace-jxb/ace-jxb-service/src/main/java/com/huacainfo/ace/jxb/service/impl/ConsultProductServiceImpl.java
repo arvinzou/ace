@@ -53,7 +53,7 @@ public class ConsultProductServiceImpl implements ConsultProductService {
                                                                int limit, String orderBy) throws Exception {
         PageResult<ConsultProductVo> rst = new PageResult<>();
         List<ConsultProductVo> list = this.consultProductDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.consultProductDao.findCount(condition);

@@ -18,7 +18,6 @@ import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
-import com.huacainfo.ace.jxb.vo.StudioVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,7 +64,7 @@ public class CounselorServiceImpl implements CounselorService {
     public PageResult<CounselorVo> findCounselorList(CounselorQVo condition, int start,
                                                      int limit, String orderBy) throws Exception {
         PageResult<CounselorVo> rst = new PageResult<>();
-        List<CounselorVo> list = counselorDao.findList(condition, start, start + limit, orderBy);
+        List<CounselorVo> list = counselorDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = counselorDao.findCount(condition);
@@ -76,7 +75,7 @@ public class CounselorServiceImpl implements CounselorService {
 
     @Override
     public ResultResponse findMyCounselors(CounselorQVo condition, int start, int limit, String orderBy) throws Exception {
-        List<CounselorVo> list = counselorDao.findList(condition, start, start + limit, orderBy);
+        List<CounselorVo> list = counselorDao.findList(condition, start, limit, orderBy);
         int allRows = counselorDao.findCount(condition);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("list", list);
