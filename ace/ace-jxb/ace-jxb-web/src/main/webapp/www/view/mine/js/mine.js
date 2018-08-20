@@ -52,10 +52,10 @@ function initData(){
 function sign(){
     if(signStatus != '2'){
         $.ajax({
-            url: contextPath+"/www/counselor/signIn",
+            url: contextPath+"/www/reg/signIn",
             type:"post",
             async:false,
-            data:{counselorId: consulorId},
+            data:{userId: consulorId},
             success:function(result){
                 if(result.status == 0) {
                     alert("签到成功！");
@@ -84,4 +84,16 @@ function switchOffline(){
     }else{
         $("#offline").attr('src',contextPath+ '/www/view/mine/img/switch_on.png');
     }
+}
+
+function loadMyInfo(id){
+    window.location.href = contextPath + '/www/view/counselor/index.jsp?id='+id;
+}
+
+function showMycount(){
+    window.location.href = contextPath + '/www/view/mine/mycount.jsp?id='+consulorId;
+}
+
+function onoffline(){
+
 }

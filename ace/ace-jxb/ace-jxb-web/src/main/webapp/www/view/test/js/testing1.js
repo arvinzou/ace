@@ -10,7 +10,7 @@ $(function () {
 /*初始化按钮*/
 function initBtn() {
     /*查询有没有历史纪录*/
-    var url = '/portal/www/test/getMyhistoryRes';
+    var url = '/portal/www/test/getMyhistoryRes.do';
     var data = {
         evaluatTplId: eid
     }
@@ -36,7 +36,7 @@ function initBtn() {
                             }
                         } else {
                             alert("获取测试失败，将回退到上一页。");
-                            window.history.back();
+                            // window.history.back();
                         }
                     })
                 }
@@ -44,7 +44,7 @@ function initBtn() {
 
         } else {
             alert("获取测试失败，将回退到上一页。");
-            window.history.back();
+            // window.history.back();
         }
     })
 
@@ -74,7 +74,7 @@ function pingjia() {
         if (result.status == 0) {
             var data = result.data;
             cost = data.discountCost;
-            initBtn();
+
             $('.test_result .content p').text(data.evaluatGauge["content"]);
             $('.test_content').css("visibility", "hidden");
             $('.test_result').show();
@@ -138,6 +138,7 @@ function initWeb() {
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
+            initBtn();
             viewTestInfo(result.data);
             viewTest(result.data.evaluatCaseList);
             initSwriper();

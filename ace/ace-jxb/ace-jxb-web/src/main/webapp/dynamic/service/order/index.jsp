@@ -59,6 +59,10 @@
                                                 <a onclick="javascript:changeType('2')" href="#tab_1_3"
                                                    data-toggle="tab"> 课程订单 </a>
                                             </li>
+                                            <li>
+                                                <a onclick="javascript:changeType('3')" href="#tab_1_3"
+                                                   data-toggle="tab"> 测试订单 </a>
+                                            </li>
                                         </ul>
                                         <div class="portlet-body">
                                             <div class="mt-element-card mt-element-overlay">
@@ -68,8 +72,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="input-group">
-                                                            <input type="text" style="height:33px"
-                                                                   class="form-control input-circle-left"
+                                                            <input type="text" style="height:33px" class="form-control input-circle-left"
                                                                    placeholder="请输入订单编号">
                                                             <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
@@ -98,8 +101,8 @@
                                                                 </div>
                                                                 <%--content--%>
                                                                 <div class="paginationbar">
-                                                                    <ul class="pagination"
-                                                                        id="pagination1"></ul>
+                                                                <ul class="pagination"
+                                                                    id="pagination1"></ul>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -113,20 +116,20 @@
                                         <!--tab_1_2-->
 
                                         <!--end tab-pane-->
+                                        </div>
                                     </div>
-                                </div>
                             </div>
                         </div>
 
 
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="bottom"></div>
+    <div class="bottom"></div>
 
 </div>
 </div>
@@ -155,43 +158,36 @@
 </body>
 
 <script id="temp_orderList" type="text/template">
-    <table class="table table-hover table-light" border="1" cellpadding="0" cellspacing="0">
+
+    {@each data as item}
+    <table class="table table-hover table-light">
         <thead>
         <tr>
-            <th align="center" width="5%">订单号</th>
-            <th align="center" width="10%">用户昵称</th>
-            {@if orderCategory == 1}
-            <th align="center" width="25%">咨询方式</th>
-            {@else if orderCategory == 2}
-            <th align="center" width="25%">课程名称</th>
-            {@/if}
-            <th align="center" width="10%">咨询师名称</th>
-            <th align="center" width="10%">付款金额</th>
-            <th align="center" width="10%">下单时间</th>
-            <th align="center" width="10%">订单状态</th>
-            <th align="center" width="20%">操作</th>
-
+            <th> 订单号：</th>
+            <th>\${item.id}</th>
+            <th> 订单时间：</th>
+            <th>\${item.createDate}</th>
+            <th colspan="4"></th>
         </tr>
         </thead>
         <tbody>
-        {@each data as item}
         <tr>
-            <td>\${item.id}</td>
-            <td>\${item.consumerName}</td>
-            {@if item.category == 1}
-            <td>\${formatCProductType(item.consultProduct.type)} x \${item.amount}次</td>
-            {@else if item.category == 2}
-            <td>\${item.course.name}</td>
-            {@/if}
-            <td>\${item.counselor.name}</td>
+            <td class="fit" colspan="2">
+                <img class="user-pic" src="\${item.counselor.imagePhotoUrl}"></td>
+            <td colspan="2">
+                \${item.counselor.name}(\${formaCategory(item.category)})
+            </td>
             <td>￥\${item.payMoney}</td>
-            <td>\${item.createDate}</td>
-            <td>\${formatPayStatus(item.payStatus)}</td>
-            <td><a onclick="javascript:detail('\${item.id}')" class="primary-link">查看详情</a></td>
+            <td> \${formaPayStatus(item.payStatus)}</td>
+            <td colspan="2">
+                <a onclick="javascript:detail(\${item.id})" class="primary-link">查看详情</a>
+            </td>
         </tr>
-        {@/each}
+
         </tbody>
     </table>
+    {@/each}
+
 </script>
 
 <script id="temp_orderInfo" type="text/template">
@@ -211,7 +207,7 @@
         </tr>
         <tr>
             <td class="active"> 订单类型</td>
-            <td class="success"> \${formatCategory(data.category)}</td>
+            <td class="success"> \${formaCategory(data.category)}</td>
         </tr>
         <tr>
             <td class="active"> 数量</td>
@@ -224,7 +220,7 @@
         </tr>
         <tr>
             <td class="active"> 订单状态</td>
-            <td class="success"> \${formatPayStatus(data.payStatus)}</td>
+            <td class="success"> \${formaPayStatus(data.payStatus)}</td>
         </tr>
         <tr>
             <td class="active"> 下单时间</td>

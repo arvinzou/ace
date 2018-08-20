@@ -183,13 +183,18 @@ public class EvaluatTplServiceImpl implements EvaluatTplService {
      */
     @Override
     public ResultResponse getEvaluatTplList(EvaluatTplQVo condition, int page, int limit, String orderBy) throws Exception {
-        int start = (page - 1) * limit;
-        List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, start, limit, orderBy);
+        List<EvaluatTplVo> list = this.evaluatTplDao.findList(condition, (page - 1) * limit, limit, orderBy);
         for (EvaluatTplVo item : list) {
-            List<EvaluatGauge> listGa = this.evaluatGaugeDao.findLists(item.getId());
-            item.setGaugelist(listGa);
+            EvaluatData evaluatData = new EvaluatData();
+            evaluatData.setEvaluatTplId(item.getId());
+            item.setTestedTotal(this.evaluatDataDao.getTotal(evaluatData));
         }
-        return new ResultResponse(0, "获取测试模板", list);
+        Map<String, Object> map = new HashMap<>();
+        if (page <= 1) {
+            map.put("allRows", this.evaluatTplDao.findCount(condition));
+        }
+        map.put("EvaluaTplList", list);
+        return new ResultResponse(0, "获取测试模板", map);
     }
 
     /**

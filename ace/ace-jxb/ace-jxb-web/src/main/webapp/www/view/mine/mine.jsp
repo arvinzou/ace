@@ -38,7 +38,7 @@
 					<div class="row"><p class="content">\${data.counselor.certification}</p></div>
 				</div>
 				<div class="col-xs-3 col-sm-3">
-					<span class="myindex">个人主页</span>
+					<span class="myindex" onclick="loadMyInfo('\${data.counselor.id}');">个人主页</span>
 				</div>
 			</div>
 			<div class="row">
@@ -91,7 +91,7 @@
 					<img class="next" src="img/next.png"/>
 				</div>
 			</div>
-			<div class="row menu-li" onclick="window.location.href='mycount.jsp'">
+			<div class="row menu-li" onclick="showMycount();">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的账户</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
@@ -103,13 +103,15 @@
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的订单</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
-			<div class="row menu-li">
+		<%--	<div class="row menu-li">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">入驻与认证</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
-			</div>
+			</div>--%>
 			<div class="row menu-li">
-				<div class="col-xs-10 col-sm-10"><p class="menu_title">联系我们</p></div>
-				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
+				<a href="tel:0736-7083862">
+					<div class="col-xs-10 col-sm-10"><p class="menu_title">联系我们</p></div>
+					<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
+				</a>
 			</div>
 		</div>
 	</body>

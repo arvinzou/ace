@@ -474,7 +474,7 @@
                  src="\${item.logoImgUrl?item.logoImgUrl:'headImg.png'}">
         </td>
         <td>
-            \${item.name}
+            <a onclick="javascript:userStudioStaff('\${item.id}')" class="primary-link">\${item.name}</a>
         </td>
         <td> 我创建的</td>
         <td> \${item.status}</td>

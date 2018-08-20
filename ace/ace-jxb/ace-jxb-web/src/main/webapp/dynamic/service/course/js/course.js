@@ -36,12 +36,12 @@ function getPageList() {
                     totalCounts: result.total
                 });
             }
-            renderPageList("courseList", result.rows, "list");
+            renderPage("courseList", result.rows, "list");
         }
     })
 }
 
-function renderPageList(IDom, data, tempId) {
+function renderPage(IDom, data, tempId) {
     var tpl = document.getElementById(tempId).innerHTML;
     var html = juicer(tpl, {
         data: data,
@@ -50,7 +50,7 @@ function renderPageList(IDom, data, tempId) {
 }
 
 function makecourse(id){
-    if(courseType=='1'){
+    if(params.type=='1'){
         window.location.href = contextPath + '/dynamic/service/course/make.jsp?courseId='+id;
     }else{
         window.location.href = contextPath + '/dynamic/service/course/makeSeries.jsp?id='+id;
@@ -94,11 +94,8 @@ function changeCourseType(type){
     initPage();
 }
 
-function clickEdit(id){
-    findCourseInfoById(id);
-}
 
-function findCourseInfoById(id){
+function edit(id){
     /**
      * 查询课程基本信息
      */
@@ -111,7 +108,7 @@ function findCourseInfoById(id){
         },
         success:function(result){
             if(result.status == 0) {
-                viewHtml('courseBasic', result.value, 'editCourseTemp');
+                renderPage('courseBasic', result.value, 'editCourseTemp');
                 initEditor();
             }else {
                 alert(result.errorMessage);
@@ -247,8 +244,8 @@ function openAudit(id, index){
     $("#auditOpt"+index).attr("data-target","#audit");
 }
 
-function createCourse(type){
-    window.location.href = contextPath+ '/dynamic/service/course/create.jsp?type='+type;
+function add(type){
+    window.location.href = contextPath+ '/dynamic/service/course/add/index.jsp?type='+type;
 }
 function audit(){
     var statement = $("textarea[name = 'message']").val();

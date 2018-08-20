@@ -99,6 +99,9 @@ public class EvaluatGaugeServiceImpl implements EvaluatGaugeService {
         evaluatData.setEvaluatTplId(condition.getEvaluatTplId());
         evaluatData.setCreateUserId(userinfo.getUnionid());
         EvaluatData eval = evaluatDataDao.latestResults(evaluatData);
+        if (CommonUtils.isBlank(eval)) {
+            return new ResultResponse(0, "评价获取成功", null);
+        }
         condition.setScore(eval.getScore());
         EvaluatGauge list = this.evaluatGaugeDao.getEvaluation(condition);
         Map map = new HashMap();

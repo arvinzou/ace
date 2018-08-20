@@ -1,27 +1,12 @@
 window.onload = function () {
-    juicer.register('formatCategory', formatCategory);
-    juicer.register('formatPayStatus', formatPayStatus);
-    juicer.register('formatCProductType', formatCProductType);
+    juicer.register('formaCategory', formaCategory);
+    juicer.register('formaPayStatus', formaPayStatus);
     initpage();
 }
 
-function formatCProductType(type) {
-    //   咨询类型(1-语音咨询 2-视频咨询 3-面对面咨询)
-    switch (type) {
-        case "1":
-            return "语音咨询";
-            break;
-        case "2":
-            return "视频咨询";
-        case "3":
-            return "面对面咨询";
-            break;
-    }
-}
+var category = 1, orderId = '';
 
-var category = 1;
-
-function formatCategory(type) {
+function formaCategory(type) {
     switch (type) {
         case "1":
             return "咨询订单";
@@ -34,7 +19,7 @@ function formatCategory(type) {
     }
 }
 
-function formatPayStatus(type) {
+function formaPayStatus(type) {
     switch (type) {
         case "1":
             return "待支付";
@@ -83,6 +68,12 @@ function changeType(cType) {
 }
 
 
+function searchByName() {
+    orderId = $('input[name="orderId"]').val();
+    initpage();
+}
+
+
 function initpage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
@@ -107,7 +98,6 @@ function getOrderList(num, type) {
         limit: 20
     }
     $.getJSON(url, data, function (result) {
-        // console.log("result========:" + JSON.stringify(result));
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {
@@ -116,7 +106,6 @@ function getOrderList(num, type) {
             }
             var navitem = document.getElementById('temp_orderList').innerHTML;
             var html = juicer(navitem, {
-                orderCategory: category,
                 data: result.data.list,
             });
             $("#orderList").html(html);
