@@ -176,8 +176,8 @@
             <div> \${item.createDate} </div>
             <div style="padding:10px">
             {@if item.lineState==0}
-                <span style="font-color:red">已下架</span>
-            {@else item.lineState==1}
+                <span style="color:red">已下架</span>
+            {@else}
                 <a href="#">已上架</a>
             {@/if}
             </div>
@@ -198,7 +198,7 @@
             <a class="operation" href="javascript:void(0);"  onclick="makecourse('\${item.id}');">制作</a>
             {@if item.lineState==0}
             <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
-            {@else item.lineState==1}
+            {@else}
             <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
             {@/if}
 
