@@ -5,8 +5,26 @@ window.onload = function () {
     //getCounselorList();
     $('#counselorList').on('click', '.mt-card-social .info', detailInformation);
     $('#counselorList').on('click', '.mt-card-social .pass', approved);
+    $('#counselorList').on('click', '.mt-card-social .delect', delectCounselor);
     // $('#counselorList').on('click', '.mt-card-social .refusal', auditFailed);
     $('.search_btn').click(searchList);
+}
+
+function delectCounselor() {
+    if (!confirm("您确定删除吗？")) {
+        return;
+    }
+    var $that = $(this);
+    var id = $that.parents('.mt-card-social').data('id');
+    var url = "/jxb/counselor/deleteCounselorByCounselorId"
+    var data = {
+        jsons: JSON.stringify({
+            id: id
+        })
+    }
+    $.getJSON(url, data, function (result) {
+
+    })
 }
 
 function searchList() {
