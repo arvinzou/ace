@@ -63,14 +63,14 @@
 
 
                                                         <div class="input-group">
-                                                            <input type="text" style="height:34px" name="keyword" class="form-control input-circle-left"
+                                                            <input type="text" style="height:34px" name="name"
+                                                                   class="form-control input-circle-left"
                                                                    placeholder="请输入咨询师姓名">
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                <button onclick="javascript:searchByName()"
+                                                                        class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
-                                                                    <font style="vertical-align: inherit;"><font
-                                                                            style="vertical-align: inherit;">
-                                                                        搜索</font></font>
+                                                                        搜索
                                                                 </button>
                                                             </span>
                                                         </div>
@@ -139,13 +139,9 @@
                 <img src="\${item.imagePhotoUrl}">
             </div>
             <div class="mt-card-content">
-                <h3 class="mt-card-name"><font
-                        style="vertical-align: inherit;"><font
-                        style="vertical-align: inherit;">\${item.name}</font></font>
+                <h3 class="mt-card-name">\${item.name}
                 </h3>
-                <p class="mt-card-desc font-grey-mint"><font
-                        style="vertical-align: inherit;"><font
-                        style="vertical-align: inherit;">\${item.certification}</font></font>
+                <p class="mt-card-desc font-grey-mint">\${item.certification}
                 </p>
                 <div class="mt-card-social" data-id="\${item.id}">
                     <ul>
