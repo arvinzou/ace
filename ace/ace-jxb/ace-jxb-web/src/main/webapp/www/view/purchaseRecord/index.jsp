@@ -34,10 +34,10 @@
 
 	<script id="orderListTemp" type="text/template">
 		{@each data as item, index}
-        <div class="row itemlist">
+        <div class="row itemlist" onclick="showOrderDetail('\${item.id}');">
             <div class="row item">
             <div class="col-xs-4 col-md-4">
-				{@if item.category == '2'}
+				{@if item.category == '2' && item.course != undefined}
             	<img src="\${item.course.cover}" class="cover" />
 				{@else if item.category == '1'}
 				<img src="\${item.counselor.imagePhotoUrl}" class="cover" />
@@ -48,7 +48,7 @@
             <p class="title">\${item.commodityName}</p>
             </div>
             <div class="row">
-				{@if item.category == '2'}
+				{@if item.category == '2' && item.course != undefined}
             	<p class="detail">\${item.course.objects}</p>
 				{@else if item.category == '1'}
 				<p class="detail"></p>
@@ -56,7 +56,7 @@
         </div>
         <div class="row" style="padding-top: 0.2rem;">
 			<span class="money">¥\${item.payMoney}</span>
-				{@if item.category == '2'}
+				{@if item.category == '2' && item.course != undefined}
 					<span class="history_money">¥\${item.course.primeCost}</span></div>
 				{@/if}
         </div>

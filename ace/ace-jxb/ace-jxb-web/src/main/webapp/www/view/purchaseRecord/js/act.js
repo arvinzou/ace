@@ -43,3 +43,7 @@ function viewHtml(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
+
+function showOrderDetail(orderId){
+    window.location.href = contextPath + '/www/view/courseOrderDetail/index.jsp?orderId='+orderId;
+}
