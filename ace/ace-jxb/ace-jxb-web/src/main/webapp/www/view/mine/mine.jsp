@@ -103,10 +103,10 @@
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的订单</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
-			<div class="row menu-li">
+		<%--	<div class="row menu-li">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">入驻与认证</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
-			</div>
+			</div>--%>
 			<div class="row menu-li">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">联系我们</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>

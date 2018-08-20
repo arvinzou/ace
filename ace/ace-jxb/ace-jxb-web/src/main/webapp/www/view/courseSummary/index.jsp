@@ -10,6 +10,7 @@
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />
+		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
 		<script type="text/javascript" src="js/act.js"></script>
 	</head>
@@ -189,6 +190,16 @@
 		</script>
 
 	<script id="commentsListTemp" type="text/template">
+		<div class="row dialog" data-toggle="modal" data-target="#myModal">
+				<div class="row star_title"><p>我的评价</p></div>
+				<div class="row star_defalut">
+					<img src="img/star_gray.png"/>
+					<img src="img/star_gray.png"/>
+					<img src="img/star_gray.png"/>
+					<img src="img/star_gray.png"/>
+					<img src="img/star_gray.png"/>
+				</div>
+		</div>
 		{@each data as item, index}
         <div class="row commen_item">
             <div class="row">
@@ -240,6 +251,24 @@
         </div>
 		{@/each}
 	</script>
+
+		<!--评价框模态窗-->
+		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="container star">
+							<form>
+								<input value="5" id="rating-input" type="text" title="" />
+								<span class="demo">推荐</span><br />
+								<textarea class="point" name="content" placeholder="鼓励下老师吧~" onfocus="this.placeholder=''" onblur="this.placeholder='鼓励下老师吧~'"></textarea><br />
+								<a href="javascript:void(0);" class="commit" onclick="commitComments();">提&nbsp;交</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 
 </html>

@@ -52,10 +52,10 @@ function initData(){
 function sign(){
     if(signStatus != '2'){
         $.ajax({
-            url: contextPath+"/www/counselor/signIn",
+            url: contextPath+"/www/reg/signIn",
             type:"post",
             async:false,
-            data:{counselorId: consulorId},
+            data:{userId: consulorId},
             success:function(result){
                 if(result.status == 0) {
                     alert("签到成功！");

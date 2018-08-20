@@ -2,7 +2,9 @@
 	padding: 0;
 	margin: 0;
 }
-
+body{
+	background: #F7F9FC !important;
+}
 .row{
 	margin-left: 0 !important;
 	margin-right: 0 !important;
@@ -206,9 +208,7 @@ body{
 .object{
 	background: #FFFFFF;
 }
-.comments{
-	background: #FFFFFF;
-}
+
 .user_head{
 	width: 1.066666rem;
 	height: 1.066666rem;
@@ -247,4 +247,51 @@ body{
 }
 .menuShow{
 	display: block;
+}
+.star_title{
+	text-align: center;
+}
+.star_title p{
+	font-size:0.346666rem;
+	color: #798092;
+	padding-top: 0.44rem;
+}
+.star_defalut{
+	text-align: center;
+}
+.star_defalut img{
+	width: 0.693333rem;
+	height: 0.653333rem;
+	margin-bottom: 0.44rem;
+}
+.dialog{
+	background: #ffffff;
+	margin-bottom: 0.266666rem;
+}
+.commen_item{
+	background: #ffffff;
+}
+.star {
+	text-align: center;
+}
+
+.demo {
+	color: #798092;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.4rem;
+}
+.point {
+	width: 100%;
+	height: 3rem;
+	padding-left: 0.2rem;
+	padding-right: 0.2rem;
+	background-color: #F7F9FC;
+	border: none;
+}
+
+.commit {
+	color: #15BC83;
+	font-family: "PingFang-SC-Medium";
+	font-size: 0.4rem;
+	font-weight: bolder;
 }
