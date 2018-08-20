@@ -11,33 +11,32 @@ function initData(){
         async:false,
         data:{},
         success:function(result){
-            try{
-                signStatus = result.data.signInfo.status;
-            }catch(e){}
-            if(signStatus == '2'){
-                $("#signIn").text("已签到");
-                $("#signIn").removeClass('sign_btn').addClass('signed');
-            }
-            if(result.status == 0 && result.data.memberType == '1') {
-                consulorId = result.data.counselor.id;
-                var myInfo = document.getElementById('myInfo').innerHTML;
-                var html = juicer(myInfo, {
-                    data: result.data
-                });
-                $("#mine").append(html);
-                var signInfo = document.getElementById('signInfo').innerHTML;
-                var signText = juicer(signInfo, {
-                    signCount: result.data.signInfo.signCount
-                });
-                $(".sign_info").html(signText);
-            }else if(result.status == 0 && result.data.memberType == '2'){
-                alert("普通会员的个人中心待建设中！");
-
-            } else {
-                if(result.data == 'unregister'){   //跳转到注册页面
-                    window.location.href = '/jxb/www/view/regist/regist.html';
+            if(result.data == 'unregister'){   //跳转到注册页面
+                window.location.href = contextPath + '/www/view/regist/regist.html';
+            }else{
+                try{
+                    signStatus = result.data.signInfo.status;
+                }catch(e){}
+                if(signStatus == '2'){
+                    $("#signIn").text("已签到");
+                    $("#signIn").removeClass('sign_btn').addClass('signed');
                 }
-                return;
+                if(result.status == 0 && result.data.memberType == '1') {
+                    consulorId = result.data.counselor.id;
+                    var myInfo = document.getElementById('myInfo').innerHTML;
+                    var html = juicer(myInfo, {
+                        data: result.data
+                    });
+                    $("#mine").append(html);
+                    var signInfo = document.getElementById('signInfo').innerHTML;
+                    var signText = juicer(signInfo, {
+                        signCount: result.data.signInfo.signCount
+                    });
+                    $(".sign_info").html(signText);
+                }else if(result.status == 0 && result.data.memberType == '2'){
+                    window.location.href = contextPath + '/www/view/member/index.jsp'
+
+                }
             }
         },
         error:function(){

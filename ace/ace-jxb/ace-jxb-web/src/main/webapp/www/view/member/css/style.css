@@ -1,0 +1,38 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background-color: #F7F9FC;
+}
+.box{
+	background: #FFFFFF;
+	margin-bottom: 0.266666rem;
+}
+.menu_title{
+	font-size: 0.4rem;
+	color: #5C6681;
+	padding-top: 0.5rem;
+}
+.menu-li{
+	height: 1.44rem;
+	padding-left: 0.4rem;
+}
+.next{
+	width: 0.186666rem;
+	height: 0.293333rem;
+	margin-top: 0.5rem;
+}
+.head_img{
+	width: 1.466666rem;
+	height: 1.466666rem;
+	border-radius: 50%;
+	margin-top: 0.533333rem;
+	margin-left: 0.413333rem;
+}
+.nickName{
+	font-size: 0.426666rem;
+	color: #1C2843;
+	font-weight: bold;
+	line-height: 2.533333rem;
+}
