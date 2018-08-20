@@ -1,3 +1,5 @@
+var name = '';
+
 window.onload = function () {
     initpage();
     //getCounselorList();
@@ -11,13 +13,20 @@ function searchList() {
 
 }
 function t_query(){
-    getCounselorList(1, 'init')
+    getCounselorList(1, 'init');
     return false;
 }
+
+
+function searchByName() {
+    name = $('input[name="name"]').val();
+    initpage();
+}
+
+
 function approved() {
     var $that = $(this);
     var id = $that.parents('.mt-card-social').data('id');
-
 
     swal("正在对咨询师进行审核", {
         buttons: {
@@ -74,21 +83,21 @@ function approved() {
                                 });
                                 return;
                             }
-        })
-            ;
+                        })
+                        ;
 
-            /*var status=startProcessing(id, 2,'ok');
-            if(status==0){
-                swal("操作成功!", "", "success");
-            }else{
-                swal("操作失败!", "", "error");
-            }*/
-            break;
+                        /*var status=startProcessing(id, 2,'ok');
+                        if(status==0){
+                            swal("操作成功!", "", "success");
+                        }else{
+                            swal("操作失败!", "", "error");
+                        }*/
+                        break;
 
-        default:
-            // swal("Got away safely!");
-        }
-    }
+                    default:
+                    // swal("Got away safely!");
+                }
+            }
         );
 
 }
@@ -98,8 +107,6 @@ function approved() {
 //
 //
 //     }
-
-
 
 
 // function auditFailed() {
@@ -211,7 +218,7 @@ function initpage() {
 function getCounselorList(num, type) {
     var url = "/jxb/counselor/findCounselorList";
     var data = {
-        name: $("input[name=keyword]").val(),
+        name: name,
         page: num,
         limit: 20,
     };
