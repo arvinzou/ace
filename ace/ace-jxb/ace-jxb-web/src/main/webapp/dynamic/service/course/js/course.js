@@ -310,3 +310,40 @@ function showUploadImg(imgpath, imgClazz, textClazz) {
     $(imgClazz).prop('src',imgpath);
     $(textClazz).hide();
 }
+function online(id){
+    if(confirm("确定要上线吗？")){
+        startLoad();
+        $.ajax({
+            url: contextPath + "/course/audit",
+            type:"post",
+            async:false,
+            data:{
+               id:id,
+               lineState:'1'
+            },
+            success:function(rst){
+                stopLoad();
+                if(rst.status == 0) {
+
+                }else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error:function(){
+                stopLoad();
+                alert("系统服务内部异常！");
+            }
+        });
+    }
+}
+function outline(id){
+
+}
+
+function startLoad(){
+ try {loading = startLoading();} catch (e) {};
+ if (loading) {loading.settext("请求中，请稍后......");}
+}
+function stopLoad(){
+  if (loading) { loading.remove();}
+}
