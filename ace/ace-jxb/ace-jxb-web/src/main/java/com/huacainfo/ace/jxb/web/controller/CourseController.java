@@ -150,4 +150,21 @@ public class CourseController extends JxbBaseController {
 
         return courseService.audit(record, getCurUserProp());
     }
+
+    /**
+     * 标记更新课程 上/下线状态
+     *
+     * @param courseId 课程ID
+     * @param state    在架状态 0 - 下架 1 - 上架
+     * @return MessageResponse
+     */
+    @RequestMapping(value = "/updateLineState")
+    @ResponseBody
+    public MessageResponse updateLineState(String courseId, String state) throws Exception {
+        if (!StringUtil.areNotEmpty(courseId, state)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return courseService.updateLineState(courseId, state, getCurUserProp());
+    }
 }
