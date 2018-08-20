@@ -11,6 +11,23 @@ var cost = "";
 function App() {
     loadlocal();
 
+    loader({
+        path: contextPath,
+        url: '/www/view/common/js/star-rating.js',
+        type: 'js',
+        callback: function () {
+            jQuery(document).ready(function() {
+                var $inp = $('#rating-input');
+                $inp.rating({
+                    min: 0,
+                    max: 5,
+                    step: 1,
+                    size: 'xs',
+                    showClear: false
+                });
+            });
+        }
+    });
     console.log(window.location.href);
     var url =   window.location.search.substring(1);
     primaryId = url.substring(url.indexOf('=')+1);
@@ -229,5 +246,36 @@ function onBridgeReady(obj, orderId){
                 }
             }
         });
+    });
+}
+
+function commitComments(){
+    var level = $("#rating-input").val();
+    var content = $("textarea[name = 'content']").val();
+    if(content == '' || content == undefined){
+        alert("留下点评价呗~");
+        return;
+    }
+    $.ajax({
+        url: contextPath+ "/www/course/cmt/add",
+        type:"post",
+        async:false,
+        data:{
+            courseId: primaryId,
+            content: content,
+            grade: level
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert("感谢您的评价，下次我们会做得更好！");
+                initCommentsList();
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
     });
 }
