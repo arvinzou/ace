@@ -67,8 +67,8 @@
 
 
                                                     <div class="create_course" id="createCourse">
-                                                        <a href="javascript:void(0);" onclick="createCourse('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
-                                                        <a href="javascript:void(0);" onclick="createCourse('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
+                                                        <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
+                                                        <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
                                                     </div>
 
                                                 </div>
@@ -194,15 +194,13 @@
             {@/if}
         </td>
         <td >
-            <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="clickEdit('\${item.id}');">编辑</a>
+            <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
             <a class="operation" href="javascript:void(0);"  onclick="makecourse('\${item.id}');">制作</a>
             {@if item.lineState==0}
             <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
             {@else}
             <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
             {@/if}
-
-            <a class="operation" href="javascript:void(0);" onclick="deleteCourse('\${item.id}');">删除</a>
             <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
         </td>
     </tr>

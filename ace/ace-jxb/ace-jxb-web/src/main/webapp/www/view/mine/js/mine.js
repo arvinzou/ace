@@ -89,3 +89,11 @@ function switchOffline(){
 function loadMyInfo(id){
     window.location.href = contextPath + '/www/view/counselor/index.jsp?id='+id;
 }
+
+function showMycount(){
+    window.location.href = contextPath + '/www/view/mine/mycount.jsp?id='+consulorId;
+}
+
+function onoffline(){
+
+}

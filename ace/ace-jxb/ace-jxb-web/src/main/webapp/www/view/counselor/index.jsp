@@ -41,7 +41,7 @@
 		</script>
 		<script id="consulorTemp" type="text/template">
         <div class="content">
-            <div class="row data">
+            <div class="row data" style="margin-top: 1rem!important;">
             <p class="data_01">\${data.counselorVo.name}</p>
             <p class="data_02">\${data.counselorVo.certification}</p>
             </div>
