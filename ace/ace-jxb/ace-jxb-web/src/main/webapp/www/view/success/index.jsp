@@ -86,7 +86,11 @@
 				<h3 class="title">您的问题类型及描述</h3></div>
 			<div class="row problem" style="margin-top: 0.3rem;margin-bottom: 0.3rem;">
 				<ul>
-					<li class="problem_label">儿童问题</li>
+					{@if data.consultOrder.tags != undefined &&  data.consultOrder.tags!= null}
+					{@each data.consultOrder.tags.split(',') as tag,num}
+					<li class="problem_label">\${tag}</li>
+					{@/each}
+					{@/if}
 				</ul>
 			</div>
 			<div class="row">

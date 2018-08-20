@@ -135,6 +135,16 @@ function createOrder(){
     var contact_name = $("input[name='contact_name']").val();
     var contact_relation = $("input[name='contact_relation']").val();
     var contact_phone = $("input[name='contact_phone']").val();
+    var tagboardli = $(".tagboard .tagCheck");
+    var tags = "";
+    for(var i=0; i<tagboardli.length; i++){
+        if(i != tagboardli.length-1){
+            tags = tags + tagboardli[i].innerHTML + ",";
+        }else{
+            tags = tags + tagboardli[i].innerHTML
+        }
+    }
+
     if(unitPrice == null || unitPrice == undefined){
         alert("请选择咨询方式！");
         return;
@@ -190,14 +200,15 @@ function createOrder(){
                 },
     //            --预约详情
                 "consult": {
-                     "tel": phoneNum,
+                    "tel": phoneNum,
                     "name":username,
                     "age":age,
                     "sex":sex,
                     "info":problem,
                     "secName":contact_name,
                     "relationship":contact_relation,
-                    "secTel": contact_phone
+                    "secTel": contact_phone,
+                    "tags": tags
                     }
             }
 
