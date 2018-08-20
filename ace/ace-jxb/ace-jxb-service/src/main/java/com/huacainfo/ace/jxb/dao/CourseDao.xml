@@ -282,6 +282,7 @@
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseVo">
         <result column="auditRst" jdbcType="VARCHAR" property="auditRst"/>
+        <result column="counselorName" jdbcType="VARCHAR" property="counselorName"/>
     </resultMap>
     <sql id="Vo_Column_List">
         IFNULL(ca.rst,'0') as auditRst, IFNULL(c.`name`,'近心帮管理员') as counselorName,
@@ -332,7 +333,7 @@
             and t.createUserId = #{condition.createUserId,jdbcType=VARCHAR}
         </if>
         <if test="condition.auditRst !=null and condition.auditRst !=&quot;&quot;">
-            and IFNULL(ca.rst,'0') = #{condition.auditRst,jdbcType=VARCHAR}
+            and ca.rst = #{condition.auditRst,jdbcType=VARCHAR}
         </if>
         <if test="condition.objects !=null and condition.objects !=&quot;&quot;">
             and t.objects = #{condition.objects,jdbcType=VARCHAR}
@@ -342,6 +343,9 @@
         </if>
         <if test="condition.purport !=null and condition.purport !=&quot;&quot;">
             and t.purport = #{condition.purport,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.lineState !=null and condition.lineState !=&quot;&quot;">
+            and t.lineState = #{condition.lineState,jdbcType=VARCHAR}
         </if>
     </sql>
 
