@@ -93,4 +93,6 @@ body{
 .formcmt{
 	color: #1C2843;
 	font-size: 0.373333rem;
+	word-break: break-all;
+	word-wrap:break-word;
 }

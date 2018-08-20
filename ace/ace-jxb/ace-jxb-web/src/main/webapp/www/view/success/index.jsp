@@ -20,7 +20,7 @@
 		</div>
 	<script id="orderDetailTemp" type="text/template">
 		<div class="container">
-			<div class="row tips">
+			<div class="row tips" style="margin-left: 0!important;margin-right: 0 !important;">
 				<p>您已经成功预约 \${data.counselor.name}老师，系统会通知ta确认订单并尽快联系你，请保持电话畅通~你也可以私信告诉TA哦~</p>
 			</div>
 		</div>

@@ -4,6 +4,8 @@ var totalPrice = null;
 var sex = "1";    //默认选中男生
 var primaryId = null;
 var commodityId = null;
+var counselorName = null;
+
 function App() {
     console.log("=============================App Start==============================");
     console.log(window.location.href);
@@ -99,6 +101,7 @@ function initData(id){
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
+                counselorName = result.data.counselorVo.name;
                 var info = document.getElementById('consulorTemp').innerHTML;
                 var infohtml = juicer(info, {
                     infoData: result.data,
@@ -178,8 +181,8 @@ function createOrder(){
                     "businessId": primaryId,
                     "commodityId": commodityId,
                     "category": "1",          //1代表咨询订单，2代表课程订单
-                    "commodityName": "肖海平预约咨询消费",
-                    "businessName": "肖海平",
+                    "commodityName": "咨询预约",
+                    "businessName": counselorName,
                     "amount": num,
                     "price":unitPrice,
                    // "payMoney": totalPrice,
@@ -285,9 +288,26 @@ function onBridgeReady(obj, orderId){
                     });*/
 
                 } else {
-                    alert("操作失败！");
+                    WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+                        if (res.err_msg =="get_brand_wcpay_request:ok")
+                        {
+                            //  alert("支付成功err_code=" + res.err_code + ",err_desc=" + res.err_desc + ",err_msg=" + res.err_msg);
+                             WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+                            });
+
+                         }
+                    });
                 }
             }
         });
     });
+}
+
+function checkTags(obj){
+    //点击时，未选中的选中，选中的设为不选中
+    if($(obj).attr("class").indexOf("tagUncheck")>=0){
+        $(obj).removeClass('tagUncheck').addClass('tagCheck');
+    }else{
+        $(obj).removeClass('tagCheck').addClass('tagUncheck');
+    }
 }
