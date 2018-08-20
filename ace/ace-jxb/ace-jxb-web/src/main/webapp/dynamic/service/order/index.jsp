@@ -59,6 +59,10 @@
                                                 <a onclick="javascript:changeType('2')" href="#tab_1_3"
                                                    data-toggle="tab"> 课程订单 </a>
                                             </li>
+                                            <li>
+                                                <a onclick="javascript:changeType('3')" href="#tab_1_3"
+                                                   data-toggle="tab"> 测试订单 </a>
+                                            </li>
                                         </ul>
                                         <div class="portlet-body">
                                             <div class="mt-element-card mt-element-overlay">
@@ -68,14 +72,14 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="input-group">
-                                                            <input type="text" style="height:33px" class="form-control input-circle-left"
+                                                            <input name="orderId" type="text" style="height:33px"
+                                                                   class="form-control input-circle-left"
                                                                    placeholder="请输入订单编号">
                                                             <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                <button onclick="javascript:searchByName()"
+                                                                        class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
-                                                                    <font style="vertical-align: inherit;"><font
-                                                                            style="vertical-align: inherit;">
-                                                                        搜索</font></font>
+                                                                        搜索
                                                                 </button>
                                                             </span>
                                                         </div>
