@@ -38,7 +38,7 @@
 					<div class="row"><p class="content">\${data.counselor.certification}</p></div>
 				</div>
 				<div class="col-xs-3 col-sm-3">
-					<span class="myindex">个人主页</span>
+					<span class="myindex" onclick="loadMyInfo('\${data.counselor.id}');">个人主页</span>
 				</div>
 			</div>
 			<div class="row">

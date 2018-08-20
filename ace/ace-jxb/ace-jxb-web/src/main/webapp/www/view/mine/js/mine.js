@@ -85,3 +85,7 @@ function switchOffline(){
         $("#offline").attr('src',contextPath+ '/www/view/mine/img/switch_on.png');
     }
 }
+
+function loadMyInfo(id){
+    window.location.href = contextPath + '/www/view/counselor/index.jsp?id='+id;
+}
