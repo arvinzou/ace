@@ -108,7 +108,6 @@ public class WCourseController extends JxbBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }
 
-
     /**
      * 功能描述: 新增课程评论
      *
