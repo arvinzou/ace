@@ -84,6 +84,14 @@
     text-align: center;
 }
 
+.test_main .button .box > input {
+    display: none;
+}
+
+.test_main .button .box > input:nth-child(2) {
+    margin-left: 0.5rem;
+}
+
 input {
     margin: auto;
     width: 3.466666rem;
