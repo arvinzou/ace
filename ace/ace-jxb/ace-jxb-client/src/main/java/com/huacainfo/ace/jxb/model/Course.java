@@ -56,6 +56,10 @@ public class Course implements Serializable {
      * 针对能力（课程主旨）
      */
     private String purport;
+    /**
+     * 在架状态 0 - 下架 1 - 上架
+     */
+    private String lineState;
 
     private String remark;
 
@@ -66,6 +70,14 @@ public class Course implements Serializable {
     private Date createDate;
 
     private String introduce;
+
+    public String getLineState() {
+        return lineState;
+    }
+
+    public void setLineState(String lineState) {
+        this.lineState = lineState;
+    }
 
     public String getId() {
         return id;
