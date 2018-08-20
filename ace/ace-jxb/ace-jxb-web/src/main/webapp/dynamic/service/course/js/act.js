@@ -290,7 +290,7 @@ function showUploadImg(imgpath, imgClazz, textClazz) {
     $(textClazz).hide();
 }
 function online(id){
-    if(confirm("确定要上线吗？")){
+    if(confirm("确定要上架吗？")){
         startLoad();
         $.ajax({
             url: contextPath + "/course/updateLineState",
@@ -316,7 +316,7 @@ function online(id){
     }
 }
 function outline(id){
-    if(confirm("确定要下线吗？")){
+    if(confirm("确定要下架吗？")){
         startLoad();
         $.ajax({
             url: contextPath + "/course/updateLineState",
