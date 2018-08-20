@@ -1,12 +1,12 @@
 window.onload = function () {
-    juicer.register('formaCategory', formaCategory);
-    juicer.register('formaPayStatus', formaPayStatus);
+    juicer.register('formatCategory', formatCategory);
+    juicer.register('formatPayStatus', formatPayStatus);
+    juicer.register('formatCProductType', formatCProductType);
     initpage();
 }
-
 var category = 1, orderId = '';
 
-function formaCategory(type) {
+function formatCategory(type) {
     switch (type) {
         case "1":
             return "咨询订单";
@@ -19,7 +19,7 @@ function formaCategory(type) {
     }
 }
 
-function formaPayStatus(type) {
+function formatPayStatus(type) {
     switch (type) {
         case "1":
             return "待支付";
@@ -106,6 +106,7 @@ function getOrderList(num, type) {
             }
             var navitem = document.getElementById('temp_orderList').innerHTML;
             var html = juicer(navitem, {
+                orderCategory: category,
                 data: result.data.list,
             });
             $("#orderList").html(html);
