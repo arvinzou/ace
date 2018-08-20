@@ -76,7 +76,7 @@
 					{@else if data.costType == '1'}
 					<span class="money">¥ \${data.cost}</span>
 					{@/if}
-                <span class="history_money">\${data.primeCost}</span>
+                <span class="history_money">¥\${data.primeCost}</span>
                 </div>
                 </div>
                 </div>
@@ -95,7 +95,7 @@
                 <p class="teacher_card">\${data.counselor.certification}</p>
                 </div>
                 <div class="col-xs-3 col-md-3">
-                <span class="follow">+关注</span>
+                <%--<span class="follow">+关注</span>--%>
                 </div>
                 </div>
                 <div class="row">
