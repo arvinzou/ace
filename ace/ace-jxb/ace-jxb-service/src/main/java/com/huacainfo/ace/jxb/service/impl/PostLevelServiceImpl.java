@@ -232,8 +232,8 @@ public class PostLevelServiceImpl implements PostLevelService {
         for (Map<String, Object> data : reportData) {
             checkResult = new CounselorCheckResult();
             checkResult.setCounselorId((String) data.get("id"));
-            checkResult.setCounselorNum((Integer) data.get("cNum"));
-            checkResult.setTurnover(new BigDecimal((String) data.get("cTurnover")));
+            checkResult.setCounselorNum(Integer.parseInt(String.valueOf(data.get("cNum"))));
+            checkResult.setTurnover(new BigDecimal(String.valueOf(data.get("cTurnover"))));
             checkResult.setCheckQuarter(quarterStr);
             //固定数值
             checkResult.setId(GUIDUtil.getGUID());
@@ -256,7 +256,7 @@ public class PostLevelServiceImpl implements PostLevelService {
     public void determinePosts(String year, String quarter) {
         List<PostLevel> config = postLevelDao.findConfig();
         if (CollectionUtils.isEmpty(config)) {
-            logger.error("无咨询师岗位配置数据");
+            logger.error("============无咨询师岗位配置数据 [年]:[{}]，[季度]：[{}]===================", year, quarter);
             return;
         }
 
