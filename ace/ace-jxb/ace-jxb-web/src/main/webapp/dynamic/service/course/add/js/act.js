@@ -77,13 +77,10 @@ function save(params) {
         },
         success: function (result) {
             stopLoad();
+						alert(result.errorMessage);
             if (result.status == 0) {
-                console.log(result);
-                alert("创建成功！");
                 window.location.href = contextPath + '/dynamic/service/course/index.jsp';
-            } else {
-                alert(result.errorMessage);
-            }
+            } 
         },
         error: function () {
             alert("系统服务内部异常！");
@@ -105,6 +102,28 @@ function renderPage(dom, data, tplId) {
 function initPage() {
     renderPage($("#dict-149"), staticDictObject['149'], "tpl-dict-149");
     renderPage($("#dict-150"), staticDictObject['150'], "tpl-dict-150");
+    $("#fm-add").validate({
+            onfocusout: function(element) { $(element).valid(); },
+			rules: {
+				name: {
+					required: true,
+					minlength: 4,
+					maxlength:28
+				},
+				introduce: {required: true}
+			},
+			messages: {
+				introduce:{
+				    required: "请输入课程简介"
+				},
+				name: {
+					required: "请输入课程名称",
+					minlength:"课程名称至少四个字符",
+					maxlength:"课程名称长度不能超过28"
+				}
+			}
+		});
+
     $('#fm-add').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};

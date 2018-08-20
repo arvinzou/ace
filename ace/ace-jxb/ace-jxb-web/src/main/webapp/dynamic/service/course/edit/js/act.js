@@ -79,12 +79,9 @@ function save(params) {
         },
         success: function (result) {
             stopLoad();
+            alert(result.errorMessage);
             if (result.status == 0) {
-                console.log(result);
-                alert("创建成功！");
                 window.location.href = contextPath + '/dynamic/service/course/index.jsp';
-            } else {
-                alert(result.errorMessage);
             }
         },
         error: function () {
@@ -120,6 +117,7 @@ function initPage() {
         }
     });
 
+
     initForm();
     initUpload();
 
@@ -147,6 +145,28 @@ function initForm(){
                $('input[name=applicationObject]').maxlength({
                     alwaysShow: true
                });
+
+                $("#fm-add").validate({
+                        onfocusout: function(element) { $(element).valid(); },
+               			rules: {
+               				name: {
+               					required: true,
+               					minlength: 4,
+               					maxlength:28
+               				},
+               				introduce: {required: true}
+               			},
+               			messages: {
+               				introduce:{
+               				    required: "请输入课程简介"
+               				},
+               				name: {
+               					required: "请输入课程名称",
+               					minlength:"课程名称至少四个字符",
+               					maxlength:"课程名称长度不能超过28"
+               				}
+               			}
+               		});
 
             }else {
                 alert(result.errorMessage);

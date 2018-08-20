@@ -206,6 +206,8 @@
     <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/plupload/plupload.full.min.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/upload.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/dynamic/service/course/add/js/act.js?v=${cfg.version}"></script>
 
     <!--私有部分结束-->

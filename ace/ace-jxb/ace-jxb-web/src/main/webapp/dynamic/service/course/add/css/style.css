@@ -153,3 +153,10 @@
             text-align: left;
             padding-top: 7px;
         }
+        .error{
+            color:red;
+            padding-top: 7px;
+         }
+         .form-group .col-md-10{
+           text-align: left;
+         }
