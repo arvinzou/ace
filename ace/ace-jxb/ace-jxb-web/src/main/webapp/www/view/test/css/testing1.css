@@ -54,7 +54,7 @@
     line-height: 1.33333333rem;
 }
 
-.test_main .explanation p {
+.test_main .explanation > div {
     width: 9.2rem;
     margin: auto;
     font-size: 0.346666rem;

@@ -1,7 +1,6 @@
-var mySwiper, flag, eid, totalScore = 0;
+var mySwiper, flag, eid, totalScore = 0, cost;
 $(function () {
     initWeb();
-    initBtn();
     $('.test_main .button').on('click', '.start', startTesting);
     $('.swiper-wrapper').on('click', '.prevBtn', preTest);
     $('.swiper-wrapper').on('click', 'li', chooseThis);
@@ -17,12 +16,11 @@ function initBtn() {
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-
-            if ("有历史记录") {
+            if (result.data == null) {
                 $('.test_main .button .box .start').show();
                 $('.test_main .button .box .result').show();
             } else {
-                if ("价格是否是0") {
+                if (cost == 0) {
                     $('.test_main .button .box .start').show();
                 } else {
                     var url = "";
@@ -75,11 +73,13 @@ function pingjia() {
     $.post(url, data, function (result) {
         if (result.status == 0) {
             var data = result.data;
+            cost = data.discountCost;
+            initBtn();
             $('.test_result .content p').text(data.evaluatGauge["content"]);
             $('.test_content').css("visibility", "hidden");
             $('.test_result').show();
         } else {
-            alert("对不起！测试提交失败，可能要重新测试。")
+            alert("对不起！测试提交失败，可能要重新测试。");
         }
     });
 }
