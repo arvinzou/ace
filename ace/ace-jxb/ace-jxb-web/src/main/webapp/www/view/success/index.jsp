@@ -20,7 +20,7 @@
 		</div>
 	<script id="orderDetailTemp" type="text/template">
 		<div class="container">
-			<div class="row tips">
+			<div class="row tips" style="margin-left: 0!important;margin-right: 0 !important;">
 				<p>您已经成功预约 \${data.counselor.name}老师，系统会通知ta确认订单并尽快联系你，请保持电话畅通~你也可以私信告诉TA哦~</p>
 			</div>
 		</div>
@@ -86,7 +86,11 @@
 				<h3 class="title">您的问题类型及描述</h3></div>
 			<div class="row problem" style="margin-top: 0.3rem;margin-bottom: 0.3rem;">
 				<ul>
-					<li class="problem_label">儿童问题</li>
+					{@if data.consultOrder.tags != undefined &&  data.consultOrder.tags!= null}
+					{@each data.consultOrder.tags.split(',') as tag,num}
+					<li class="problem_label">\${tag}</li>
+					{@/each}
+					{@/if}
 				</ul>
 			</div>
 			<div class="row">

@@ -8,6 +8,15 @@ public class CourseCmtVo extends CourseCmt {
 
     private String nickname;
     private String headimgurl;
+    private String courseName;
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 
     public String getNickname() {
         return nickname;

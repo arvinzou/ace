@@ -108,9 +108,11 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseCmtVo">
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
         <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="courseName" jdbcType="VARCHAR" property="courseName"/>
     </resultMap>
     <sql id="Vo_Column_List">
-      u.nickname, u.headimgurl,
+        c.`name` as courseName,
+        u.nickname, u.headimgurl,
         t.id, t.courseId, t.userId, t.createDate, t.content, t.grade
     </sql>
 
@@ -139,10 +141,17 @@
 
     <sql id="whereCondition">
         from course_cmt t
+        left join jxb.course c on t.courseId=c.id
         left join portal.userinfo u on t.userId = u.unionid
         where 1=1
         <if test="condition.courseId !=null and condition.courseId !=&quot;&quot;">
             and t.courseId = #{condition.courseId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.courseName !=null and condition.courseName !=&quot;&quot;">
+            and c.`name` like concat('%',#{condition.courseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.nickname !=null and condition.nickname !=&quot;&quot;">
+            and u.nickname like concat('%',#{condition.nickname,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

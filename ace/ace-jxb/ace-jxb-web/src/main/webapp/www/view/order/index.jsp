@@ -138,7 +138,7 @@
 	<script id="labelTemp" type="text/template">
         <ul class="tagboard">
             {@each data.counselorVo.tags.split(',') as item,index}
-        <li>\${item}</li>
+        <li class="tagUncheck" onclick="checkTags(this);">\${item}</li>
         {@/each}
         </ul>
 	</script>

@@ -27,7 +27,7 @@ $(function () {
 function activeTestT() {
     var $that = $(this);
     cancelSearch();
-    activeTest($that);
+    enterTest($that);
 }
 
 
@@ -64,13 +64,17 @@ function activeSearch() {
 }
 
 
-function activeTest($that) {
+function activeTest() {
+    var $that = $(this);
+    enterTest($that);
+}
+
+function enterTest($that) {
     var id = $that.data("id");
     if (id) {
         window.location.href = 'testing1.html?id=' + id;
     }
 }
-
 
 
 

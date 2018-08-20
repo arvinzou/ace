@@ -29,7 +29,7 @@
 						<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${data.counselor.level}</div>
 					</div>
 					<div class="row introduce">
-						<p>\${\${data.counselor.certification}}</p>
+						<p>\${data.counselor.certification}</p>
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-2 row_01">
@@ -44,9 +44,9 @@
 				<div class="col-xs-8 col-sm-8 formcmt">
 					{@if data.consultProduct.type == '1'}
 					<p>电话咨询</p>
-					{@else if consultProduct.type == '2'}
+					{@else if data.consultProduct.type == '2'}
 					<p>视频咨询</p>
-					{@else}
+					{@else if data.consultProduct.type == '3'}
 					<p>面对面咨询</p>
 					{@/if}
 				</div>
@@ -55,10 +55,10 @@
 				<div class="col-xs-4 col-sm-4 formtitle">咨询次数：</div>
 				<div class="col-xs-8 col-sm-8 formcmt">\${parseInt(data.payMoney) / parseInt(data.price)}</div>
 			</div>
-			<div class="row">
+			<%--<div class="row">
 				<div class="col-xs-4 col-sm-4 formtitle">服务时间：</div>
 				<div class="col-xs-8 col-sm-8 formcmt">2018-07-19</div>
-			</div>
+			</div>--%>
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 formtitle">支付金额：</div>
 				<div class="col-xs-8 col-sm-8 formcmt">\${data.payMoney}</div>
@@ -93,9 +93,11 @@
 			<div class="row"><h3 class="title">您的问题类型及描述</h3></div>
 			<div class="row problem" style="margin-top: 0.3rem;margin-bottom: 0.3rem;">
 				<ul>
+					{@if data.consultOrder.tags != undefined &&  data.consultOrder.tags!= null}
 					{@each data.consultOrder.tags.split(',') as tag,num}
 					<li class="problem_label">\${tag}</li>
 					{@/each}
+					{@/if}
 				</ul>
 			</div>
 		</div>
@@ -132,7 +134,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 formtitle">订单编号：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.id}</div>
+				<div class="col-xs-8 col-sm-8 formcmt"><p>\${data.id}</p></div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 formtitle">支付状态：</div>
