@@ -1,23 +1,25 @@
 window.onload = function () {
-    juicer.register('formaCategory', formaCategory);
-    juicer.register('formaPayStatus', formaPayStatus);
+    juicer.register('formatCategory', formatCategory);
+    juicer.register('formatPayStatus', formatPayStatus);
+    juicer.register('formatCProductType', formatCProductType);
     initpage();
 }
-
 var category = 1, orderId = '';
 
-function formaCategory(type) {
+function formatCategory(type) {
     switch (type) {
         case "1":
             return "咨询订单";
             break;
         case "2":
             return "课程订单";
+        case "3":
+            return "评测订单";
             break;
     }
 }
 
-function formaPayStatus(type) {
+function formatPayStatus(type) {
     switch (type) {
         case "1":
             return "待支付";
@@ -91,7 +93,6 @@ function initpage() {
 function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findBaseOrderListSecond";
     var data = {
-        id: orderId,
         category: category,
         page: num,
         limit: 20
@@ -105,6 +106,7 @@ function getOrderList(num, type) {
             }
             var navitem = document.getElementById('temp_orderList').innerHTML;
             var html = juicer(navitem, {
+                orderCategory: category,
                 data: result.data.list,
             });
             $("#orderList").html(html);
