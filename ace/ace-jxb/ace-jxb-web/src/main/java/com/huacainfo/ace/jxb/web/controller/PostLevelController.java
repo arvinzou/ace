@@ -122,5 +122,4 @@ public class PostLevelController extends JxbBaseController {
         String id = json.getString("id");
         return this.postLevelService.deletePostLevelByPostLevelId(id, this.getCurUserProp());
     }
-
 }

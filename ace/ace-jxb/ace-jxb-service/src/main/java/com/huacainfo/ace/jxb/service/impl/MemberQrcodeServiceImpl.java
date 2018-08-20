@@ -91,7 +91,7 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
                                                            int limit, String orderBy) throws Exception {
         PageResult<MemberQrcodeVo> rst = new PageResult<>();
         List<MemberQrcodeVo> list = this.memberQrcodeDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.memberQrcodeDao.findCount(condition);

@@ -79,7 +79,7 @@ public class CourseServiceImpl implements CourseService {
     public PageResult<CourseVo> findCourseList(CourseQVo condition, int start,
                                                int limit, String orderBy) throws Exception {
         PageResult<CourseVo> rst = new PageResult<>();
-        List<CourseVo> list = courseDao.findList(condition, start, start + limit, orderBy);
+        List<CourseVo> list = courseDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = courseDao.findCount(condition);

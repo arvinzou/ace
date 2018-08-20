@@ -67,7 +67,7 @@ public class ConsultServiceImpl implements ConsultService {
                                                  int limit, String orderBy) throws Exception {
         PageResult<ConsultVo> rst = new PageResult<>();
         List<ConsultVo> list = this.consultDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.consultDao.findCount(condition);

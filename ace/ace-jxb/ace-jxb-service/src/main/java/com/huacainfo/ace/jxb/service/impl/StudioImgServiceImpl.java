@@ -53,7 +53,7 @@ public class StudioImgServiceImpl implements StudioImgService {
                                                      int limit, String orderBy) throws Exception {
         PageResult<StudioImgVo> rst = new PageResult<>();
         List<StudioImgVo> list = this.studioImgDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.studioImgDao.findCount(condition);

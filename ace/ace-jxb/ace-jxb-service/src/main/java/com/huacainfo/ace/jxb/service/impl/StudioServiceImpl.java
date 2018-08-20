@@ -28,7 +28,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -69,7 +68,7 @@ public class StudioServiceImpl implements StudioService {
     public PageResult<StudioVo> findStudioList(StudioQVo condition, int start,
                                                int limit, String orderBy) throws Exception {
         PageResult<StudioVo> rst = new PageResult<>();
-        List<StudioVo> list = studioDao.findList(condition, start, start + limit, orderBy);
+        List<StudioVo> list = studioDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = studioDao.findCount(condition);

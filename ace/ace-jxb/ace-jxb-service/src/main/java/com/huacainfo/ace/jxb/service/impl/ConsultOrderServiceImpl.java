@@ -53,7 +53,7 @@ public class ConsultOrderServiceImpl implements ConsultOrderService {
                                                            int limit, String orderBy) throws Exception {
         PageResult<ConsultOrderVo> rst = new PageResult<>();
         List<ConsultOrderVo> list = this.consultOrderDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.consultOrderDao.findCount(condition);
