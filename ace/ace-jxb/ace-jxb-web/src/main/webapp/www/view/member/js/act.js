@@ -24,3 +24,11 @@ function viewHtml(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
+
+function showConsultOrder(){
+    window.location.href = contextPath + '/www/view/history/index.jsp';
+}
+
+function showCourseOrder(){
+    window.location.href = contextPath + '/www/view/purchaseRecord/index.jsp'
+}

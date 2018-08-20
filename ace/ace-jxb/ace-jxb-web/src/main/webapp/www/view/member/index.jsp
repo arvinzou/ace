@@ -19,11 +19,11 @@
 			</div>
 		</div>
 		<div class="box">
-			<div class="row menu-li">
+			<div class="row menu-li" onclick="showConsultOrder();">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">咨询订单</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
-			<div class="row menu-li">
+			<div class="row menu-li" onclick="showCourseOrder();">
 				<div class="col-xs-10 col-sm-10"><p class="menu_title">课程订单</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>

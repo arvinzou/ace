@@ -1,59 +1,49 @@
 window.onload = function (){
-    initpage('1');    //初始化显示单品课程
+    initPage();    //初始化显示单品课程
 }
 var payType = "";
 var videoUrl = "";
-var courseType="1";
-function initpage(courseType) {
+var params={limit:2,type:'1'};
+function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
-        pageSize: 10,
-        visiblePages: 20,
+        pageSize: params.limit,
+        visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            getCourseList(num, type, courseType);
+            params['start']=(num-1)*params.limit;
+            params['initType']=type;
+            getPageList();
         }
     });
 }
 function t_query(){
-    getCourseList(1, null, courseType);
+    getPageList();
     return false;
 }
-function getCourseList(num, type, courseType) {
+function getPageList() {
     var url = contextPath+ "/course/findCourseList";
-    var createUserId = null;
-    if(userProp.account != 'jxb'){
-        createUserId = userProp.userId;
-    }
-    var data = {
-        page: num,
-        name:$("input[name=keyword]").val(),
-        limit: 10,
-        type: courseType,                  //1是单节课程，2是系列课程
-        createUserId: createUserId
-    };
-    try {loading = startLoading();} catch (e) {};
-    if (loading) {loading.settext("请求中，请稍后......");}
-    $.getJSON(url, data, function (result) {
-        if (loading) { loading.remove();}
+     params['name']=$("input[name=keyword]").val();
+     startLoad();
+    $.getJSON(url, params, function (result) {
+        stopLoad();
         if (result.status == 0) {
-            if (type == "init") {
+            if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: result.total,
+                    totalCounts: result.total
                 });
             }
-            viewHtml("courseList", result.rows, "list");
+            renderPageList("courseList", result.rows, "list");
         }
-
     })
 }
 
-function viewHtml(IDom, data, tempId) {
-    var navitem = document.getElementById(tempId).innerHTML;
-    var html = juicer(navitem, {
+function renderPageList(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
         data: data,
     });
     $("#" + IDom).html(html);
@@ -65,8 +55,6 @@ function makecourse(id){
     }else{
         window.location.href = contextPath + '/dynamic/service/course/makeSeries.jsp?id='+id;
     }
-
-
 }
 
 
@@ -82,8 +70,8 @@ function deleteCourse(id){
         },
         success:function(result){
             if(result.status == 0) {
-                alert("删除成功！");
-                window.location.reload();
+               getPageList();
+               alert("删除成功！");
             }else {
                 alert(result.errorMessage);
             }
@@ -102,8 +90,8 @@ function changeCourseType(type){
         $(".commonCourse").hide();
         $(".specialCourse").show();
     }
-    courseType=type;
-    initpage(type);
+    params['type']=type;
+    initPage();
 }
 
 function clickEdit(id){
@@ -314,36 +302,51 @@ function online(id){
     if(confirm("确定要上线吗？")){
         startLoad();
         $.ajax({
-            url: contextPath + "/course/audit",
+            url: contextPath + "/course/updateLineState",
             type:"post",
             async:false,
             data:{
-               id:id,
-               lineState:'1'
+               courseId :id,
+               state:'1'
             },
             success:function(rst){
                 stopLoad();
                 if(rst.status == 0) {
-
+                  getPageList();
                 }else {
                     alert(rst.errorMessage);
                 }
             },
             error:function(){
                 stopLoad();
-                alert("系统服务内部异常！");
+                alert("对不起，出错了！");
             }
         });
     }
 }
 function outline(id){
-
-}
-
-function startLoad(){
- try {loading = startLoading();} catch (e) {};
- if (loading) {loading.settext("请求中，请稍后......");}
-}
-function stopLoad(){
-  if (loading) { loading.remove();}
+    if(confirm("确定要下线吗？")){
+        startLoad();
+        $.ajax({
+            url: contextPath + "/course/updateLineState",
+            type:"post",
+            async:false,
+            data:{
+               courseId :id,
+               state:'0'
+            },
+            success:function(rst){
+                stopLoad();
+                if(rst.status == 0) {
+                  getPageList();
+                }else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error:function(){
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
 }
