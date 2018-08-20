@@ -102,7 +102,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         //query
         PageResult<BaseOrderVo> rst = new PageResult<>();
         try {
-            List<BaseOrderVo> list = dao.findList(condition, start, start + limit, orderBy);
+            List<BaseOrderVo> list = dao.findList(condition, start, limit, orderBy);
             rst.setRows(list);
             if (start <= 1) {
                 int allRows = baseOrderDao.findCount(condition);

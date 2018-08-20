@@ -53,7 +53,7 @@ public class MemberRelationServiceImpl implements MemberRelationService {
                                                                int limit, String orderBy) throws Exception {
         PageResult<MemberRelationVo> rst = new PageResult<>();
         List<MemberRelationVo> list = this.memberRelationDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.memberRelationDao.findCount(condition);

@@ -53,7 +53,7 @@ public class CourseAuditServiceImpl implements CourseAuditService {
                                                          int limit, String orderBy) throws Exception {
         PageResult<CourseAuditVo> rst = new PageResult<>();
         List<CourseAuditVo> list = this.courseAuditDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.courseAuditDao.findCount(condition);
