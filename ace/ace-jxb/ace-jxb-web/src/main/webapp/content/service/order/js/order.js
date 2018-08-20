@@ -4,7 +4,7 @@ window.onload = function () {
     initpage();
 }
 
-var category = 1;
+var category = 1, orderId = '';
 
 function formaCategory(type) {
     switch (type) {
@@ -66,6 +66,12 @@ function changeType(cType) {
 }
 
 
+function searchByName() {
+    orderId = $('input[name="orderId"]').val();
+    initpage();
+}
+
+
 function initpage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
@@ -85,6 +91,7 @@ function initpage() {
 function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findBaseOrderListSecond";
     var data = {
+        id: orderId,
         category: category,
         page: num,
         limit: 20
