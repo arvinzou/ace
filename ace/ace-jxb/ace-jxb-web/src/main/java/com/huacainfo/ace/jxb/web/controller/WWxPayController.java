@@ -59,10 +59,10 @@ public class WWxPayController extends JxbBaseController {
             openid = userinfo.getOpenid();
         }
         fee = fee.trim();
-//        ResultResponse checkRs = null;//todo orderCheck(attach, fee);
-//        if (ResultCode.FAIL == checkRs.getStatus()) {
-//            return checkRs;
-//        }
+        ResultResponse checkRs = baseOrderService.checkAmount(attach, fee);//todo orderCheck(attach, fee);
+        if (ResultCode.FAIL == checkRs.getStatus()) {
+            return checkRs;
+        }
         //取值
         String callBackUri = PropertyUtil.getProperty("pay_call_back_uri");
         String appid = PropertyUtil.getProperty("appid");

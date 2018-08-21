@@ -167,7 +167,7 @@
                 <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
                 <div class="col-md-9">
                     <div class="describtion">\${item.name}</div>
-                    <div class="cost">￥\${item.cost}</div>
+                    <div class="cost">\${item.srcCount}节￥\${item.cost}</div>
                 </div>
             </div>
         </td>
@@ -180,6 +180,7 @@
             {@else}
                 <a href="#">已上架</a>
             {@/if}
+
             </div>
 
         </td>
@@ -189,19 +190,23 @@
             <span class="label label-lg label-info">待审核</span>
             {@else if item.auditRst==1}
             <span class="label label-lg label-success">审核通过</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else}
             <span class="label label-lg label-danger">审核不通过</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
             {@/if}
         </td>
         <td >
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:void(0);"  onclick="makecourse('\${item.id}');">制作</a>
+            <a class="operation" href="list/index.jsp?id=\${item.id}">制作</a>
             {@if item.lineState==0}
             <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
             {@else}
             <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
             {@/if}
+            {@if item.auditRst==0}
             <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
+            {@/if}
         </td>
     </tr>
     {@/each}
@@ -217,151 +222,6 @@
     </div>
 </div>
 
-<script id="editCourseTemp" type="text/template">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title" id="gridSystemModalLabel1">课程编辑</h4>
-    </div>
-    <div id="courseInfo">
-        <div class="row form_row">
-            <div class="col-xs-12 col-md-2">课程名称</div>
-            <div class="col-xs-12 col-md-10"><input name="courseName" class="form_input" type="text" placeholder="请输入课程名称" value="\${data.name}"/></div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-2">课程封面</div>
-            <div class="col-xs-12 col-md-10">
-                <div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
-                {@if data.cover != '' && data.cover != undefined}
-                <div class="imgbox" >
-                    <img class="select_img form_imagePhotoUrl"
-                         id="courseCover"
-                         data-toggle="modal"
-                         data-xsize="375" data-ysize="210"
-                         data-cover="courseCover"
-                         data-target="#img-uploader"
-                         src="\${data.cover}">
-                </div>
-                {@else}
-                <div class="imgbox" >
-                    <img class="select_img form_imagePhotoUrl"
-                         id="courseCover"
-                         data-toggle="modal"
-                         data-xsize="375" data-ysize="210"
-                         data-cover="courseCover"
-                         data-target="#img-uploader"
-                         src="${pageContext.request.contextPath}/dynamic/service/course/img/course_default.jpg?v=${cfg.version}">
-                </div>
-                {@/if}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-2">课程简介</div>
-            <div class="col-xs-12 col-md-10">
-                <textarea name="introduction" id="courseIntro" class="introduction">\${data.introduce}</textarea>
-            </div>
-        </div>
-        <div class="row form_row">
-            <div class="col-xs-12 col-md-2">价格</div>
-            <div class="col-xs-12 col-md-10">
-                {@if data.costType == '0'}
-                <div class="col-xs-1 col-md-1 payType"><span id="noPay" class="feeLabel cactive" onclick="payTypeCheck('noPay');">免费</span></div>
-                <div class="col-xs-1 col-md-1 payType"><span id="pay" class="feeLabel uncactive" onclick="payTypeCheck('pay');">付费</span></div>
-                {@else if data.costType == '1'}
-                <div class="col-xs-1 col-md-1 payType"><span id="noPay" class="feeLabel uncactive" onclick="payTypeCheck('noPay');">免费</span></div>
-                <div class="col-xs-1 col-md-1 payType"><span id="pay" class="feeLabel cactive" onclick="payTypeCheck('pay');">付费</span></div>
-                {@/if}
-                <div class="col-xs-10 col-md-10">
-                    <input name="price" type="text" class="form_input" value="\${data.cost}" />
-                </div>
-            </div>
-        </div>
-        <div class="row form_row">
-            <div class="col-xs-12 col-md-2">课程对象</div>
-            <div class="col-xs-12 col-md-10">
-                <span class="pointer cactive">幼儿</span>
-                <span class="pointer uncactive">小学</span>
-                <span class="pointer uncactive">中学</span>
-                <span class="pointer uncactive">高中</span>
-            </div>
-        </div>
-        <div class="row form_row">
-            <div class="col-xs-12 col-md-2">适合谁听</div>
-            <div class="col-xs-12 col-md-10"><input class="form_input" type="text" placeholder="请输入适合人群" /></div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-2">针对能力</div>
-            <div class="col-xs-12 col-md-10">
-                <div style="height:30px;margin-bottom: 30px;">
-                    <span class="ability cactive">心理能力</span>
-                    <span class="ability uncactive">学习方法</span>
-                    <span class="ability uncactive">团队合作</span>
-                    <span class="ability uncactive">沟通表达</span>
-                    <span class="ability uncactive">独立思考</span>
-                    <span class="ability uncactive">自我认知</span>
-                    <span class="ability uncactive">其他</span>
-                </div>
-                <div style="width:100%;">
-                    <textarea class="ability_intro"></textarea>
-                </div>
-            </div>
-        </div>
-        <div class="row form_row">
-            <div class="col-xs-12 col-md-2">起始人气(选填)</div>
-            <div class="col-xs-12 col-md-10">
-                <input type="text" class="form_input" />
-            </div>
-        </div>
-        {@if data.type == '1'}
-        <div class="row">
-            <div class="col-xs-12 col-md-2">音频上传</div>
-            <div class="col-xs-12 col-md-10">
-                <div class="pictureContainer" id="video" style="z-index: 1;">
-                    <div class="viewPicture">
-                        <p id="vedioSource" src="\${data.courseSource.mediUrl}" controls="controls" width="340px" heigt="235px"></p>
-                    </div>
-                    <div class="uploadText">
-                        <p class="imgiocn"><img src="img/video.png" style="display: none;"/></p>
-                        <p class="uploadPloadprogress">点击上传视频</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-2">课程文稿</div>
-            <div class="col-xs-12 col-md-10">
-                <textarea name="coursedoc" id="coursedoc" class="introduction"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-2">是否允许试听</div>
-            <div class="col-xs-12 col-md-10">
-                {@if data.courseSource.free == '0'}
-                <input type="radio" name="tried" value="1" checked/>是
-                <input type="radio" name="tried" value="0"/>否
-                {@else if data.courseSource.free == '1'}
-                <input type="radio" name="tried" value="1"/>是
-                <input type="radio" name="tried" value="0" checked/>否
-                {@else}
-                <input type="radio" name="tried" value="1"/>是
-                <input type="radio" name="tried" value="0"/>否
-                {@/if}
-            </div>
-        </div>
-        <div class="row form_row">
-            <div class="col-xs-12 col-md-2">课程时长</div>
-            <div class="col-xs-12 col-md-10">
-                <input name="duation" type="text" class="form_input" value="\${data.courseSource.duration}"/>
-            </div>
-        </div>
-        {@/if}
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" onclick="confirmEdit('\${data.id}', '\${data.type}');">确定</button>
-    </div>
-</script>
-
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="audit"
@@ -373,17 +233,30 @@
                 </button>
                 <h4 class="modal-title" id="gridSystemModalLabel3">课程审核</h4>
             </div>
-            <div id="operation">
-                <input type="radio" name="auditState" value="1"/>审核通过&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="auditState" value="2"/>审核不通过
-            </div>
-            <div class="row">
-                <p>审核说明</p>
-                <textarea name="message" style="width: 90%;height: 100px;"></textarea>
-            </div>
-            <div class="row">
-                <p>审核人</p>
-                <input type="text" name="auditor" placeholder="输入审核人姓名"/>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-audit" role="form">
+                      <div class="form-body">
+                        <div class="form-group " id="operation">
+                            <label class="col-md-2 control-label">审核结果</label>
+                            <div class="col-md-10">
+                                <div class="radio-group-container">
+                                    <label>
+                                        <input type="radio" name="auditState" value="1"><span style="padding:10px">通过</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="auditState" value="2"><span style="padding:10px">退回</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">审核说明</label>
+                            <div class="col-md-10">
+                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

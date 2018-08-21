@@ -21,7 +21,8 @@
 
         <!--私有部分开始-->
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css" />
+        <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css" />--%>
+        <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/content/common/css/uploadImg.css" />--%>
         <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/add/css/style.css">
         <!--私有部分结束-->
@@ -78,9 +79,9 @@
                                                                         <label class="col-md-2 control-label">
                                                                             <span class="label-red">*</span>课程封面</label>
                                                                         <div class="col-md-10">
-                                                                            <div class="imgbox">
-                                                                                <img class=" form_imagePhotoUrl" id="courseCover" data-toggle="modal" data-xsize="375" data-ysize="210" data-cover="courseCover"
-                                                                                    data-target="#img-uploader" src="${pageContext.request.contextPath}/dynamic/service/course/add/img/no-img.jpg?v=${cfg.version}">
+                                                                            <div class="row">
+                                                                                <img class=" form_imagePhotoUrl" id="courseCover" style="max-width:100%;cursor: pointer;" data-toggle="modal" data-xsize="375" data-ysize="210" data-cover="courseCover"
+                                                                                     data-target="#img-uploader" src="${pageContext.request.contextPath}/dynamic/service/course/add/img/no-img.jpg?v=${cfg.version}">
                                                                             </div>
                                                                             <div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
                                                                         </div>
