@@ -31,7 +31,6 @@
     <body>
 
         <div class="page-wrapper">
-
             <div class="page-wrapper-row full-height">
                 <div class="page-wrapper-middle">
                     <div class="page-container">
