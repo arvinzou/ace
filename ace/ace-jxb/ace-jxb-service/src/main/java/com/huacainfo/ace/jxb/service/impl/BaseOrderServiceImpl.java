@@ -461,7 +461,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         BaseOrder order = baseOrderDao.selectByPrimaryKey(orderId);
         if (null == order) {
             return new ResultResponse(ResultCode.FAIL, "订单信息丢失");
-        } else if (OrderPayStatus.NEW_ORDER.equals(order.getPayStatus())) {
+        } else if (!OrderPayStatus.NEW_ORDER.equals(order.getPayStatus())) {
             return new ResultResponse(ResultCode.FAIL, "订单状态异常");
         }
         if (OrderPayType.WX_PAY == payType) {

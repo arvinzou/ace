@@ -72,14 +72,14 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="input-group">
-                                                            <input name="orderId" type="text" style="height:33px"
-                                                                   class="form-control input-circle-left"
+                                                            <input type="text" style="height:33px" class="form-control input-circle-left"
                                                                    placeholder="请输入订单编号">
                                                             <span class="input-group-btn">
-                                                                <button onclick="javascript:searchByName()"
-                                                                        class="btn btn-circle-right btn-default search_btn"
+                                                                <button class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
-                                                                        搜索
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
+                                                                        搜索</font></font>
                                                                 </button>
                                                             </span>
                                                         </div>
@@ -158,36 +158,43 @@
 </body>
 
 <script id="temp_orderList" type="text/template">
-
-    {@each data as item}
-    <table class="table table-hover table-light">
+    <table class="table table-hover table-light" border="1" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
-            <th> 订单号：</th>
-            <th>\${item.id}</th>
-            <th> 订单时间：</th>
-            <th>\${item.createDate}</th>
-            <th colspan="4"></th>
+            <th align="center" width="5%">订单号</th>
+            <th align="center" width="10%">用户昵称</th>
+            {@if orderCategory == 1}
+            <th align="center" width="10%">咨询方式</th>
+            {@else if orderCategory == 2}
+            <th align="center" width="10%">课程名称</th>
+            {@/if}
+            <th align="center" width="10%">咨询师名称</th>
+            <th align="center" width="10%">付款金额</th>
+            <th align="center" width="25%">下单时间</th>
+            <th align="center" width="10%">订单状态</th>
+            <th align="center" width="20%">操作</th>
+
         </tr>
         </thead>
         <tbody>
+        {@each data as item}
         <tr>
-            <td class="fit" colspan="2">
-                <img class="user-pic" src="\${item.counselor.imagePhotoUrl}"></td>
-            <td colspan="2">
-                \${item.counselor.name}(\${formaCategory(item.category)})
-            </td>
+            <td>\${item.id}</td>
+            <td>\${item.consumerName}</td>
+            <td>\${item.createDate}</td>
+            <td>\${item.counselor.name}</td>
+            {@if item.category == 1}
+            <td>\${formatCProductType(item.consultProduct.type)} x \${item.amount}次</td>
+            {@else if item.category == 2}
+            <td>课程名称</td>
+            {@/if}
             <td>￥\${item.payMoney}</td>
-            <td> \${formaPayStatus(item.payStatus)}</td>
-            <td colspan="2">
-                <a onclick="javascript:detail(\${item.id})" class="primary-link">查看详情</a>
-            </td>
+            <td>\${formatPayStatus(item.payStatus)}</td>
+            <td><a onclick="javascript:detail('\${item.id}')" class="primary-link">查看详情</a></td>
         </tr>
-
+        {@/each}
         </tbody>
     </table>
-    {@/each}
-
 </script>
 
 <script id="temp_orderInfo" type="text/template">
