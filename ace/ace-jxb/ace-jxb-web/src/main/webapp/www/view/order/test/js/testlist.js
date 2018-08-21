@@ -17,7 +17,7 @@ function activeTest() {
     var $that = $(this);
     var id = $that.data("id");
     if (id) {
-        window.location.href = 'testing1.html?id=' + id;
+        window.location.href = '../testing1.html?id=' + id;
     }
 }
 
