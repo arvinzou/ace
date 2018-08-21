@@ -159,10 +159,10 @@
 </body>
 
 <script id="temp_orderList" type="text/template">
-    <table class="table table-hover table-light" border="1" cellpadding="0" cellspacing="0">
+    <table class="table table-hover table-light" border="0" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
-            <th width="5%">订单号</th>
+            <%--<th width="5%">订单号</th>--%>
             <th width="10%">用户昵称</th>
             {@if orderCategory == 1}
             <th width="30%">咨询方式</th>
@@ -174,13 +174,12 @@
             <th width="20%">下单时间</th>
             <th width="5%">订单状态</th>
             <th width="15%">操作</th>
-
         </tr>
         </thead>
         <tbody>
         {@each data as item}
         <tr>
-            <td>\${item.id}</td>
+            <%--<td>\${item.id}</td>--%>
             <td>\${item.consumerName}</td>
             {@if item.category == 1}
             <td>\${formatCPntType(item.consultProduct.type)} x \${item.amount}次</td>
