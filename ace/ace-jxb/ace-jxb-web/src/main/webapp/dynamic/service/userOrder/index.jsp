@@ -243,7 +243,7 @@
     {@each data as item}
     <table class="table table-hover table-light">
         <thead>
-        <tr class="uppercase">
+        <tr>
             <th> 订单号：</th>
             <th>\${item.id}</th>
             <th> 订单时间：</th>
