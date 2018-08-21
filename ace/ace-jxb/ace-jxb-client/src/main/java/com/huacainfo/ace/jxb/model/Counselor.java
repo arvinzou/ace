@@ -64,6 +64,8 @@ public class Counselor implements Serializable {
      * 爱心币
      */
     private Integer lm;
+    private Integer peopleNum;
+    private Integer duration;
     /**
      * 累计收益
      */
@@ -84,6 +86,23 @@ public class Counselor implements Serializable {
      * 个人简介
      */
     private String profile;
+
+
+    public Integer getPeopleNum() {
+        return peopleNum;
+    }
+
+    public void setPeopleNum(Integer peopleNum) {
+        this.peopleNum = peopleNum;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
 
     public String getId() {
         return id;

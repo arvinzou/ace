@@ -227,7 +227,8 @@
                                                                             <%--type="text"--%>
                                                                             <%--placeholder="请选择所属区域" name="form_area"--%>
                                                                             <%--autocomplete="off" readonly="true"/>--%>
-                                                                            <input type="text" class="input-search"
+                                                                            <input type="text"
+                                                                                   class="input-search form-control"
                                                                                    value="" placeholder="请选择城市"/>
                                                                             <span class="error_message"></span>
                                                                         </div>
@@ -238,7 +239,7 @@
                                                                             <span class="required" aria-required="true">*</span>
                                                                         </label>
                                                                         <div class="col-md-9">
-                                                                <textarea class="form-control" id="notNull"
+                                                                <textarea class="form-control" id="notNull_profile"
                                                                           name="form_profile"
                                                                           rows="5"></textarea>
                                                                             <span class="error_message"></span>
@@ -699,7 +700,8 @@
                                                                         <div class="col-md-9">
                                                                             <div class="input-icon right">
                                                                                 <input type="text" class="form-control"
-                                                                                       id="naturalNumber" name="creditcard"
+                                                                                       id="naturalNumber"
+                                                                                       name="form_duration"
                                                                                        placeholder="一共从事了多少小时">
                                                                                 <span class="error_message"></span>
                                                                                 <div class="form-control-focus"></div>
@@ -713,7 +715,8 @@
                                                                         <div class="col-md-9">
                                                                             <div class="input-icon right">
                                                                                 <input type="text" class="form-control"
-                                                                                       id="naturalNumber1" name="creditcard"
+                                                                                       id="naturalNumber1"
+                                                                                       name="form_peopleNum"
                                                                                        placeholder="一共辅导了多少人">
                                                                                 <span class="error_message"></span>
                                                                                 <div class="form-control-focus"></div>

@@ -17,6 +17,8 @@
         <result column="certificateImgUrl" jdbcType="VARCHAR" property="certificateImgUrl"/>
         <result column="evidenceImgUrl" jdbcType="VARCHAR" property="evidenceImgUrl"/>
         <result column="lm" jdbcType="INTEGER" property="lm"/>
+        <result column="peopleNum" jdbcType="INTEGER" property="peopleNum"/>
+        <result column="duration" jdbcType="INTEGER" property="duration"/>
         <result column="income" jdbcType="DECIMAL" property="income"/>
         <result column="account" jdbcType="DECIMAL" property="account"/>
         <result column="level" jdbcType="VARCHAR" property="level"/>
@@ -25,7 +27,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
-    idCard, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, income,
+        idCard, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, peopleNum,duration, income,
     account, level, createDate, profile
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -43,14 +45,15 @@
       certification, tags, years,
       mobile, imagePhotoUrl, visitCardUrl,
       idCard, idCardImgUrl, certificateNo,
-      certificateImgUrl, evidenceImgUrl, lm,
+        certificateImgUrl, evidenceImgUrl, lm,peopleNum,duration,
       income, account, level,
       createDate, profile)
     values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{certification,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR}, #{imagePhotoUrl,jdbcType=VARCHAR}, #{visitCardUrl,jdbcType=VARCHAR},
       #{idCard,jdbcType=CHAR}, #{idCardImgUrl,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR},
-      #{certificateImgUrl,jdbcType=VARCHAR}, #{evidenceImgUrl,jdbcType=VARCHAR}, #{lm,jdbcType=INTEGER},
+        #{certificateImgUrl,jdbcType=VARCHAR}, #{evidenceImgUrl,jdbcType=VARCHAR}, #{lm,jdbcType=INTEGER},
+        #{peopleNum,jdbcType=INTEGER},#{duration,jdbcType=INTEGER},
       #{income,jdbcType=DECIMAL}, #{account,jdbcType=DECIMAL}, #{level,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{profile,jdbcType=LONGVARCHAR})
   </insert>
@@ -101,6 +104,12 @@
             </if>
             <if test="lm != null">
                 lm,
+            </if>
+            <if test="peopleNum != null">
+                peopleNum,
+            </if>
+            <if test="duration != null">
+                duration,
             </if>
             <if test="income != null">
                 income,
@@ -164,6 +173,12 @@
             <if test="lm != null">
                 #{lm,jdbcType=INTEGER},
             </if>
+            <if test="peopleNum != null">
+                #{peopleNum,jdbcType=INTEGER},
+            </if>
+            <if test="duration != null">
+                #{duration,jdbcType=INTEGER},
+            </if>
             <if test="income != null">
                 #{income,jdbcType=DECIMAL},
             </if>
@@ -226,6 +241,12 @@
             <if test="lm != null">
                 lm = #{lm,jdbcType=INTEGER},
             </if>
+            <if test="peopleNum != null">
+                peopleNum = #{peopleNum,jdbcType=INTEGER},
+            </if>
+            <if test="duration != null">
+                duration = #{duration,jdbcType=INTEGER},
+            </if>
             <if test="income != null">
                 income = #{income,jdbcType=DECIMAL},
             </if>
@@ -260,6 +281,8 @@
       certificateImgUrl = #{certificateImgUrl,jdbcType=VARCHAR},
       evidenceImgUrl = #{evidenceImgUrl,jdbcType=VARCHAR},
       lm = #{lm,jdbcType=INTEGER},
+        peopleNum = #{peopleNum,jdbcType=INTEGER},
+        duration = #{duration,jdbcType=INTEGER},
       income = #{income,jdbcType=DECIMAL},
       account = #{account,jdbcType=DECIMAL},
       level = #{level,jdbcType=VARCHAR},
@@ -275,7 +298,8 @@
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
-        t.idCard, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm, t.income,
+        t.idCard, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm,t.peopleNum, t.duration,
+        t.income,
         t.account, t.level, t.createDate, t.profile
     </sql>
 
