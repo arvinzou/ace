@@ -51,7 +51,7 @@
 					<div class="selemediv">
 						<div class="selemenu">咨询方式</div>
 						<div class="citylist menuList2">
-							<li>电话咨询</li>
+							<li style="margin-left: 1rem;">电话咨询</li>
 							<li>视频咨询</li>
 							<li>面对面咨询</li>
 						</div>
@@ -59,7 +59,7 @@
 					<div class="selemediv">
 						<div class="selemenu">综合排序</div>
 						<div class="citylist menuList3">
-							<li>咨询最多</li>
+							<li style="margin-left: 1rem;">咨询最多</li>
 							<li>价格最低</li>
 							<li>价格最高</li>
 						</div>
