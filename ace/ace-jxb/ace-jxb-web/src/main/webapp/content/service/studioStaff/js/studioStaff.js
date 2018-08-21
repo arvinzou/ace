@@ -1,3 +1,4 @@
+
 window.onload = function () {
     getUserinfo();
     initpage();
@@ -35,7 +36,7 @@ function getMyStudioList() {
                 data: result.data.my
             });
             $("#studioIdList").html(html);
-            // initpage(result.data.my[0].id);
+            $("#studioIdList").val(parseQueryString("id"));
         }
     })
 }
@@ -115,7 +116,6 @@ function findMyCounselors(num, type, studioId) {
                 data: result.data.list,
             });
             $("#studioCounselorList").html(html);
-
         }
     })
 }
