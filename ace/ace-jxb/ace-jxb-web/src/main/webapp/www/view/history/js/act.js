@@ -37,6 +37,7 @@ function initData(findType){
         async:false,
         data:{
             findType: findType,
+            category: '1',
             start: 0,
             limit: 999
         },
@@ -67,6 +68,7 @@ function orderList(data){
         data:{
             findType: findType,
             payStatusArray: data,
+            category: '1',
             start: 0,
             limit: 999
         },
