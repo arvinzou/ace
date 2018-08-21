@@ -80,9 +80,14 @@ function myStudio(){
 function switchOffline(){
     var attrContent = $("#offline").attr('src');
     if(attrContent.indexOf('on') > 0){
-        $("#offline").attr('src',contextPath+ '/www/view/mine/img/switch_off.png');
+        //在线状态 0-离线 1-在线
+        if(onoffline('0')){
+            $("#offline").attr('src',contextPath+ '/www/view/mine/img/switch_off.png');
+        }
     }else{
-        $("#offline").attr('src',contextPath+ '/www/view/mine/img/switch_on.png');
+        if(onoffline('1')) {
+            $("#offline").attr('src', contextPath + '/www/view/mine/img/switch_on.png');
+        }
     }
 }
 
@@ -94,6 +99,24 @@ function showMycount(){
     window.location.href = contextPath + '/www/view/mine/mycount.jsp?id='+consulorId;
 }
 
-function onoffline(){
-
+function onoffline(state){
+    var flag = false;
+    $.ajax({
+        url: contextPath+"/www/consult/onOff",
+        type:"post",
+        async:false,
+        data:{counselorId: consulorId, onlineStatus: state},
+        success:function(result){
+            if(result.status == 0) {
+                flag = true;
+            }else {
+                alert(result.errorMessage);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+    return flag;
 }
