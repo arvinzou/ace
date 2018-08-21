@@ -20,7 +20,6 @@ function App() {
         event.stopPropagation();
         courseList(level);
     });
-
     $(".selemenu").click(function(){
         $(this).next().slideToggle();
         $(this).parents().siblings().find(".citylist,.citylist2").slideUp();

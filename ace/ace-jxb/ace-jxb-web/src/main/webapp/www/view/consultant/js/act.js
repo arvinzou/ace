@@ -1,6 +1,40 @@
 function App() {
     console.log("=============================App Start==============================");
 
+    $(document).not($(".selectbox")).click(function(){
+        $(".citylist,.citylist2").slideUp();
+    })
+    $(".selectbox").click(function(event){
+        event.stopPropagation();
+        //courseList(level);
+    });
+    $(".selemenu").click(function(){
+        $(this).next().slideToggle();
+        $(this).parents().siblings().find(".citylist,.citylist2").slideUp();
+        //courseList(level);
+    })
+    $(".menuList1 li").click(function(){
+        if($(this).attr('class') != undefined && $(this).attr('class') != ''){
+            $(this).removeClass("active");
+        }else{
+            $(this).addClass("active");
+        }
+        screen();
+        $(".citylist1").slideUp();
+    });
+    $(".menuList2 li").click(function(){
+        $(".menuList2 li").removeClass("active")
+        $(this).addClass("active");
+        screen();
+        $(".citylist2").slideUp();
+    });
+    $(".menuList3 li").click(function(){
+        $(".menuList3 li").removeClass("active")
+        $(this).addClass("active");
+        screen();
+        $(".citylist3").slideUp();
+    });
+
     $('.retrie dt a').click(function(){
         var $t=$(this);
         if($t.hasClass('up')){
@@ -15,42 +49,37 @@ function App() {
             $(".lode").show();
         }
     });
-    $(".area ul li a:contains('"+$('#area').text()+"')").addClass('selected');
-    $(".wage ul li a:contains('"+$('#wage').text()+"')").addClass('selected');
-
     consultantList();
 };
-
-function screen01(obj){
-	$(obj).addClass("checked");
-	$(obj).siblings().removeClass("checked");
-	$("#area").text($(obj).children().text());
-	$('.downlist').hide();
-	$(".lode").hide();
-	var tag = $(obj).text();
-	if(tag.trim() == "不限"){
-	    tag = null;
+function screen(){
+	var tagobjs = $('.menuList1 .active');
+	var tags = "";
+	if(tagobjs.length>0){
+        for(var i=0; i<tagobjs.length; i++){
+            if(i != tagobjs.length-1){
+                tags = tags + tagobjs[i].innerText +',';
+            }else{
+                tags += tagobjs[i].innerText;
+            }
+        }
     }
+    var consultType = null;
+    var consultTypeObj = $('.menuList2 .active');
+	if(consultTypeObj[0].innerText == '电话咨询'){
+        consultType = '1';
+    }else if(consultTypeObj[0].innerText == '视频咨询'){
+        consultType = '2';
+    }else if(consultTypeObj[0].innerText == '面对面咨询'){
+        consultType = '3';
+    }
+
 	var data = {
-	    "tags": tag
+	    "tags": tags == ''?null: tags,
+        "consultType":consultType
     }
-    consultantListByparam(data)
 
-}
+    consultantListByparam(data);
 
-function screen02(obj){
-	$(obj).addClass("checked");
-	$(obj).siblings().removeClass("checked");
-	$("#wage").text($(obj).children().text());
-	$('.downlist').hide();
-	$(".lode").hide();
-}
-function screen03(obj){
-	$(obj).addClass("checked");
-	$(obj).siblings().removeClass("checked");
-	$("#sort").text($(obj).children().text());
-	$('.downlist').hide();
-	$(".lode").hide();
 }
 
 function consultantList(){
@@ -84,8 +113,10 @@ function consultantListByparam(data){
         url: contextPath+ "/www/consult/getCounselorList",
         type:"post",
         async:false,
+        traditional:true,
         data:{
             tags: data.tags,
+            consultType: data.consultType,
             start: 0,
             limit: 999
         },
