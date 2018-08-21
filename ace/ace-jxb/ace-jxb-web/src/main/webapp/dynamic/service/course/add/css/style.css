@@ -116,6 +116,44 @@
     outline: none;
     border-radius: 5px;
 }
-.imgbox{
-    width: 300px;
-}
+
+﻿.modal .headbox {
+            width: 150px !important;
+            height: 150px !important;
+            border-radius: 50% !important;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .modal-body {
+            font-size: 16px;
+            line-height: 24px;
+            text-align: justify
+        }
+
+        .modal img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .price-panel {
+            width: 100%;
+            background-color: #edf2f74f;
+            padding: 20px;
+        }
+
+        .price-panel .row {
+            padding-bottom: 10px;
+        }
+
+        .radio-group-container {
+            text-align: left;
+            padding-top: 7px;
+        }
+        .error{
+            color:red;
+            padding-top: 7px;
+         }
+         .form-group .col-md-10{
+           text-align: left;
+         }

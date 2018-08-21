@@ -54,6 +54,7 @@ function payTypeCheck(dom) {
         $('.price-panel').hide();
     } else {
         payType = '1';
+        $('.price-panel').removeClass('hide');
         $('.price-panel').show();
     }
 }
@@ -61,6 +62,7 @@ function payTypeCheck(dom) {
 function save(params) {
     $.extend(params, {
         type: urlParams.type,
+        id:urlParams.id,
         category: '1',
         mediType: '1',
         cover: $("#courseCover").attr('src'),
@@ -69,7 +71,7 @@ function save(params) {
     });
     startLoad();
     $.ajax({
-        url: contextPath + "/course/insertCourse",
+        url: contextPath + "/course/updateCourse",
         type: "post",
         async: false,
         data: {
@@ -77,10 +79,10 @@ function save(params) {
         },
         success: function (result) {
             stopLoad();
-						alert(result.errorMessage);
+            alert(result.errorMessage);
             if (result.status == 0) {
                 window.location.href = contextPath + '/dynamic/service/course/index.jsp';
-            } 
+            }
         },
         error: function () {
             alert("系统服务内部异常！");
@@ -100,30 +102,6 @@ function renderPage(dom, data, tplId) {
 }
 
 function initPage() {
-    renderPage($("#dict-149"), staticDictObject['149'], "tpl-dict-149");
-    renderPage($("#dict-150"), staticDictObject['150'], "tpl-dict-150");
-    $("#fm-add").validate({
-            onfocusout: function(element) { $(element).valid(); },
-			rules: {
-				name: {
-					required: true,
-					minlength: 4,
-					maxlength:28
-				},
-				introduce: {required: true}
-			},
-			messages: {
-				introduce:{
-				    required: "请输入课程简介"
-				},
-				name: {
-					required: "请输入课程名称",
-					minlength:"课程名称至少四个字符",
-					maxlength:"课程名称长度不能超过28"
-				}
-			}
-		});
-
     $('#fm-add').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
@@ -138,19 +116,67 @@ function initPage() {
             return false;
         }
     });
-    $('input[name=name]').maxlength({
-        alwaysShow: true
-    });
-    $('input[name=applicationObject]').maxlength({
-                        alwaysShow: true
-                   });
 
-    initEditor();
+
+    initForm();
     initUpload();
 
 
 }
+function initForm(){
+ $.ajax({
+        url: contextPath + "/course/selectCourseByPrimaryKey",
+        type:"post",
+        async:false,
+        data:{
+            id: urlParams.id
+        },
+        success:function(result){
+            if(result.status == 0) {
+               var data={};
+               data['o']=result.value;
+               data['dict149']=staticDictObject['149'];
+               data['dict150']=staticDictObject['150'];
+               renderPage($("#fm-add"),data, 'tpl-fm');
+               initEditor();
+               $('input[name=name]').maxlength({
+                       alwaysShow: true
+                });
+               $('input[name=applicationObject]').maxlength({
+                    alwaysShow: true
+               });
 
+                $("#fm-add").validate({
+                        onfocusout: function(element) { $(element).valid(); },
+               			rules: {
+               				name: {
+               					required: true,
+               					minlength: 4,
+               					maxlength:28
+               				},
+               				introduce: {required: true}
+               			},
+               			messages: {
+               				introduce:{
+               				    required: "请输入课程简介"
+               				},
+               				name: {
+               					required: "请输入课程名称",
+               					minlength:"课程名称至少四个字符",
+               					maxlength:"课程名称长度不能超过28"
+               				}
+               			}
+               		});
+
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
 
 jQuery(function ($) {
     initPage();
