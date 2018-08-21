@@ -2,6 +2,8 @@ package com.huacainfo.ace.jxb.vo;
 
 import com.huacainfo.ace.jxb.model.Counselor;
 
+import java.math.BigDecimal;
+
 
 public class CounselorVo extends Counselor {
     private static final long serialVersionUID = 1L;
@@ -15,6 +17,43 @@ public class CounselorVo extends Counselor {
      */
     private String regAuditRst;
 
+    /**
+     * 咨询师产品信息
+     */
+    //咨询最低价格
+    private BigDecimal minCPAmount;
+    //咨询最高价格
+    private BigDecimal maxCPAmount;
+    //咨询价格区间
+    private String consultPriceScope;
+
+    public String getConsultPriceScope() {
+        String start = null == getMinCPAmount() ? "0" : getMinCPAmount().setScale(0).toString();
+        String end = null == getMaxCPAmount() ? "0" : getMaxCPAmount().setScale(0).toString();
+        return start + "-" + end;
+
+//        return consultPriceScope;
+    }
+
+    public void setConsultPriceScope(String consultPriceScope) {
+        this.consultPriceScope = consultPriceScope;
+    }
+
+    public BigDecimal getMinCPAmount() {
+        return minCPAmount;
+    }
+
+    public void setMinCPAmount(BigDecimal minCPAmount) {
+        this.minCPAmount = minCPAmount;
+    }
+
+    public BigDecimal getMaxCPAmount() {
+        return maxCPAmount;
+    }
+
+    public void setMaxCPAmount(BigDecimal maxCPAmount) {
+        this.maxCPAmount = maxCPAmount;
+    }
 
     public String getStudioName() {
         return studioName;

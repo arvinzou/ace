@@ -293,8 +293,12 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CounselorVo">
         <result column="studioName" jdbcType="VARCHAR" property="studioName"/>
         <result column="regAuditRst" jdbcType="VARCHAR" property="regAuditRst"/>
+        <result column="maxCPAmount" jdbcType="DECIMAL" property="maxCPAmount"/>
+        <result column="minCPAmount" jdbcType="DECIMAL" property="minCPAmount"/>
     </resultMap>
     <sql id="Vo_Column_List">
+        (SELECT MAX(cp.price) from consult_product cp where t.id = cp.counselorId) as maxCPAmount,
+        (SELECT min(cp.price) from consult_product cp where t.id = cp.counselorId) as minCPAmount,
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
