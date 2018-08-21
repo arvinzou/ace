@@ -190,8 +190,8 @@ a {
     width: 0;
     height: 0;
     position: absolute;
-    top: 17px;
-    right: 5px;
+    top: 50%;
+    right: 30px;
     -moz-transition: border .2s;
     -o-transition: border .2s;
     -webkit-transition: border .2s;
@@ -330,7 +330,8 @@ a {
 
 .city-select .city-pavilion {
     box-shadow: 0 2px 5px #ddd;
-    width: 467px
+    width: 467px;
+    z-index: 100;
 }
 
 .city-select .city-tabs {
