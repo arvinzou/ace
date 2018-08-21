@@ -65,14 +65,15 @@ function screen(){
     }
     var consultType = null;
     var consultTypeObj = $('.menuList2 .active');
-	if(consultTypeObj[0].innerText == '电话咨询'){
-        consultType = '1';
-    }else if(consultTypeObj[0].innerText == '视频咨询'){
-        consultType = '2';
-    }else if(consultTypeObj[0].innerText == '面对面咨询'){
-        consultType = '3';
+    if(consultTypeObj.length > 0){
+        if(consultTypeObj[0].innerText == '电话咨询'){
+            consultType = '1';
+        }else if(consultTypeObj[0].innerText == '视频咨询'){
+            consultType = '2';
+        }else if(consultTypeObj[0].innerText == '面对面咨询'){
+            consultType = '3';
+        }
     }
-
 	var data = {
 	    "tags": tags == ''?null: tags,
         "consultType":consultType
