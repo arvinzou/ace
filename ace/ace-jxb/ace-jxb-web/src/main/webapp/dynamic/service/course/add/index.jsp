@@ -21,7 +21,8 @@
 
         <!--私有部分开始-->
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css" />
+        <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css" />--%>
+        <%--<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/content/common/css/uploadImg.css" />--%>
         <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/add/css/style.css">
         <!--私有部分结束-->
