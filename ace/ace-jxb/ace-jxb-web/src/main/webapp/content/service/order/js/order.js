@@ -38,19 +38,19 @@ function formatPayStatus(type) {
         case "1":
             return "待支付";
             break;
-        case "3":
+        case "2":
             return "已付款";
             break;
-        case "4":
+        case "3":
             return "申请退款";
             break;
-        case "5":
+        case "4":
             return "已退款";
             break;
-        case "6":
+        case "5":
             return "结束/待评价";
             break;
-        case "7":
+        case "6":
             return "已完结";
             break;
         case "7":

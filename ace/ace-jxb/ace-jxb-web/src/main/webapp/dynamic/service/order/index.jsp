@@ -166,10 +166,13 @@
             <th width="10%">用户昵称</th>
             {@if orderCategory == 1}
             <th width="30%">咨询方式</th>
+            <th width="10%">咨询师名称</th>
             {@else if orderCategory == 2}
             <th width="30%">课程名称</th>
-            {@/if}
             <th width="10%">咨询师名称</th>
+            {@else if orderCategory == 3}
+            <th width="30%">测试名称</th>
+            {@/if}
             <th width="5%">付款金额</th>
             <th width="20%">下单时间</th>
             <th width="5%">订单状态</th>
@@ -183,13 +186,18 @@
             <td>\${item.consumerName}</td>
             {@if item.category == 1}
             <td>\${formatCPntType(item.consultProduct.type)} x \${item.amount}次</td>
-            {@else if item.category == 2}
-            <td>\${item.course.name}}</td>
-            {@/if}
             <td>\${item.counselor.name}</td>
+            {@else if item.category == 2}
+            <td>\${item.course.name}</td>
+            <td>\${item.counselor.name}</td>
+            {@else if orderCategory == 3}
+            <td>\${item.commodityName}</td>
+            {@/if}
             <td>￥\${item.payMoney}</td>
             <td>\${item.createDate}</td>
-            <td>\${formatPayStatus(item.payStatus)}</td>
+            <td><span
+                    class="label label-lg  \${item.payStatus==1?'label-danger':item.payStatus==2?'label-success':'label-info'}">\${formatPayStatus(item.payStatus)}</span>
+            </td>
             <td><a onclick="javascript:detail('\${item.id}')" class="primary-link">查看详情</a></td>
         </tr>
         {@/each}
