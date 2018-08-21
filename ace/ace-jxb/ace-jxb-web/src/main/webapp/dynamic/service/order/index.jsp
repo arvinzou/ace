@@ -72,7 +72,8 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="input-group">
-                                                            <input type="text" style="height:33px" class="form-control input-circle-left"
+                                                            <input type="text" style="height:33px"
+                                                                   class="form-control input-circle-left"
                                                                    placeholder="请输入订单编号">
                                                             <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
@@ -101,8 +102,8 @@
                                                                 </div>
                                                                 <%--content--%>
                                                                 <div class="paginationbar">
-                                                                <ul class="pagination"
-                                                                    id="pagination1"></ul>
+                                                                    <ul class="pagination"
+                                                                        id="pagination1"></ul>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -116,20 +117,20 @@
                                         <!--tab_1_2-->
 
                                         <!--end tab-pane-->
-                                        </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
 
 
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="bottom"></div>
+<div class="bottom"></div>
 
 </div>
 </div>
@@ -161,18 +162,18 @@
     <table class="table table-hover table-light" border="1" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
-            <th align="center" width="5%">订单号</th>
-            <th align="center" width="10%">用户昵称</th>
+            <th width="5%">订单号</th>
+            <th width="10%">用户昵称</th>
             {@if orderCategory == 1}
-            <th align="center" width="10%">咨询方式</th>
+            <th width="30%">咨询方式</th>
             {@else if orderCategory == 2}
-            <th align="center" width="10%">课程名称</th>
+            <th width="30%">课程名称</th>
             {@/if}
-            <th align="center" width="10%">咨询师名称</th>
-            <th align="center" width="10%">付款金额</th>
-            <th align="center" width="25%">下单时间</th>
-            <th align="center" width="10%">订单状态</th>
-            <th align="center" width="20%">操作</th>
+            <th width="10%">咨询师名称</th>
+            <th width="5%">付款金额</th>
+            <th width="20%">下单时间</th>
+            <th width="5%">订单状态</th>
+            <th width="15%">操作</th>
 
         </tr>
         </thead>
@@ -181,14 +182,14 @@
         <tr>
             <td>\${item.id}</td>
             <td>\${item.consumerName}</td>
-            <td>\${item.createDate}</td>
-            <td>\${item.counselor.name}</td>
             {@if item.category == 1}
-            <td>\${formatCProductType(item.consultProduct.type)} x \${item.amount}次</td>
+            <td>\${formatCPntType(item.consultProduct.type)} x \${item.amount}次</td>
             {@else if item.category == 2}
-            <td>课程名称</td>
+            <td>\${item.course.name}}</td>
             {@/if}
+            <td>\${item.counselor.name}</td>
             <td>￥\${item.payMoney}</td>
+            <td>\${item.createDate}</td>
             <td>\${formatPayStatus(item.payStatus)}</td>
             <td><a onclick="javascript:detail('\${item.id}')" class="primary-link">查看详情</a></td>
         </tr>
@@ -201,11 +202,11 @@
 
     <table class="table table-bordered table-hover">
         <tr>
-            <td class="active"> 买家</td>
+            <td class="active"> 用户昵称</td>
             <td class="success"> \${data.consumerName}</td>
         </tr>
         <tr>
-            <td class="active"> 卖家</td>
+            <td class="active"> 咨询师名称</td>
             <td class="success"> \${data.counselor.name}</td>
         </tr>
         <tr>
@@ -214,7 +215,7 @@
         </tr>
         <tr>
             <td class="active"> 订单类型</td>
-            <td class="success"> \${formaCategory(data.category)}</td>
+            <td class="success"> \${formatCategory(data.category)}</td>
         </tr>
         <tr>
             <td class="active"> 数量</td>
@@ -227,7 +228,7 @@
         </tr>
         <tr>
             <td class="active"> 订单状态</td>
-            <td class="success"> \${formaPayStatus(data.payStatus)}</td>
+            <td class="success"> \${formatPayStatus(data.payStatus)}</td>
         </tr>
         <tr>
             <td class="active"> 下单时间</td>

@@ -24,7 +24,9 @@ import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.EvaluatTplService;
 import com.huacainfo.ace.portal.service.UsersService;
+import com.huacainfo.ace.portal.vo.EvaluatTplVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -69,6 +71,8 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     private OrderCalculationService orderCalculationService;
     @Autowired
     private CourseDao courseDao;
+    @Autowired
+    private EvaluatTplService evaluatTplService;
 
     private SqlSession getSqlSession() {
         SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
@@ -390,9 +394,51 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         //课程订单
         else if (orderCategory.equals(OrderCategory.CATEGORY_COURSE)) {
             return createCourseOrder(user, base, params);
+        }
+        //心理评测订单
+        else if (orderCategory.equals(OrderCategory.CATEGORY_EVALUATING)) {
+            return createEvaluatingOrder(user, base, params);
         } else {
             return new ResultResponse(ResultCode.FAIL, "未知订单类型");
         }
+    }
+
+    /**
+     * 创建 - 心理评测订单
+     *
+     * @param user
+     * @param base
+     * @param params
+     * @return
+     */
+    private ResultResponse createEvaluatingOrder(Users user, BaseOrder base, Map<String, Object> params) throws Exception {
+        EvaluatTplVo evaluat =
+                (EvaluatTplVo) evaluatTplService.getEvaluatTplByPrimaryKey(base.getCommodityId()).getData();
+        if (null == evaluat) {
+            return new ResultResponse(ResultCode.FAIL, "非法商品资料");
+        }
+        //订单ID
+        String orderId = GUIDUtil.getGUID();
+        //支付金额保留2位小数，超出两位小数，则使用四舍五入
+        BigDecimal price = evaluat.getDiscountCost();
+        BigDecimal payMoney = price.multiply(new BigDecimal(base.getAmount())).setScale(2, BigDecimal.ROUND_HALF_UP);
+        //入库主订单
+        base.setId(orderId);
+        base.setBusinessId(user.getUserId());//卖家ID
+        base.setCommodityName(evaluat.getName());
+        base.setBusinessName(user.getName());
+        base.setPrice(price);
+        base.setPayMoney(payMoney);
+        base.setPayStatus(PayStatus.NEW_ORDER);
+        base.setCreateDate(DateUtil.getNowDate());
+        baseOrderDao.insertSelective(base);
+
+        //订单创建完成
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("orderId", orderId);
+        rtnMap.put("payMoney", payMoney);
+        return new ResultResponse(ResultCode.SUCCESS, "订单创建成功", rtnMap);
+
     }
 
     /**
@@ -479,6 +525,29 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         return new ResultResponse(ResultCode.SUCCESS, "订单付款完成");
     }
 
+    /**
+     * 订单金额校验
+     *
+     * @param orderId   订单ID
+     * @param payAmount 订单金额
+     * @return
+     */
+    @Override
+    public ResultResponse checkAmount(String orderId, String payAmount) {
+        BaseOrder order = baseOrderDao.selectByPrimaryKey(orderId);
+        if (null == order) {
+            return new ResultResponse(ResultCode.FAIL, "订单数据丢失");
+        }
+        BigDecimal payMoney = order.getPayMoney();
+        BigDecimal checkAmount = new BigDecimal(payAmount).setScale(2, BigDecimal.ROUND_HALF_UP);
+
+        if (payMoney.compareTo(checkAmount) == 0) {
+            return new ResultResponse(ResultCode.SUCCESS, "校验通过");
+        }
+
+        return new ResultResponse(ResultCode.FAIL, "付款金额不符");
+    }
+
 
     /**
      * 主订单数据校验
@@ -496,7 +565,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         if (StringUtil.isEmpty(base.getCommodityId())) {
             return new ResultResponse(ResultCode.FAIL, "缺少" + "商品主键");
         }
-        if (base.getAmount() <= 0) {
+        if ((null == base.getAmount() ? 0 : base.getAmount()) <= 0) {
             return new ResultResponse(ResultCode.FAIL, "购买数量不合法");
         }
 
@@ -514,7 +583,8 @@ public class BaseOrderServiceImpl implements BaseOrderService {
      */
     private ResultResponse createConsultOrder(Users user, BaseOrder base, Map<String, Object> params) throws Exception {
         //预约详情
-        ConsultOrder consult = JsonUtil.toObject(params.get("consult").toString(), ConsultOrder.class);
+        ConsultOrder consult = null ==
+                params.get("consult") ? null : JsonUtil.toObject(params.get("consult").toString(), ConsultOrder.class);
         if (null == consult) {
             return new ResultResponse(ResultCode.FAIL, "缺少预约详情资料");
         }

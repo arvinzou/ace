@@ -3,7 +3,6 @@ package com.huacainfo.ace.jxb.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -198,37 +197,37 @@ public class CourseServiceImpl implements CourseService {
         }
 
         //单课程，直接增加课程资源
-        if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
-            CourseSource params = o.getCourseSource();
-            if (null == params || StringUtil.isEmpty(params.getFree())) {
-                return new MessageResponse(ResultCode.FAIL, "课程资源资料不全");
-            }
-            //
-            List<CourseSource> sourceList = courseSourceDao.findByCourseId(o.getId());
-            CourseSource source;
-            if (CollectionUtils.isEmpty(sourceList)) {
-                source = new CourseSource();
-                source.setId(GUIDUtil.getGUID());
-                source.setCourseId(o.getId());
-                source.setPartId("0");//无所属章节
-                source.setName(o.getName());
-                source.setCreateDate(DateUtil.getNowDate());
-                source.setFree(params.getFree());
-                source.setMediUrl(params.getMediUrl());
-                source.setDuration(params.getDuration());
-                int iCount = courseSourceDao.insert(source);
-                if (iCount <= 0) {
-                    return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
-                }
-            } else {
-                source = sourceList.get(0);
-                source.setName(o.getName());
-                source.setMediUrl(params.getMediUrl());
-                source.setDuration(params.getDuration());
-                source.setFree(params.getFree());
-                courseSourceDao.updateByPrimaryKeySelective(source);
-            }
-        }
+//        if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {
+//            CourseSource params = o.getCourseSource();
+//            if (null == params || StringUtil.isEmpty(params.getFree())) {
+//                return new MessageResponse(ResultCode.FAIL, "课程资源资料不全");
+//            }
+//            //
+//            List<CourseSource> sourceList = courseSourceDao.findByCourseId(o.getId());
+//            CourseSource source;
+//            if (CollectionUtils.isEmpty(sourceList)) {
+//                source = new CourseSource();
+//                source.setId(GUIDUtil.getGUID());
+//                source.setCourseId(o.getId());
+//                source.setPartId("0");//无所属章节
+//                source.setName(o.getName());
+//                source.setCreateDate(DateUtil.getNowDate());
+//                source.setFree(params.getFree());
+//                source.setMediUrl(params.getMediUrl());
+//                source.setDuration(params.getDuration());
+//                int iCount = courseSourceDao.insert(source);
+//                if (iCount <= 0) {
+//                    return new MessageResponse(ResultCode.FAIL, "课程资源添加失败");
+//                }
+//            } else {
+//                source = sourceList.get(0);
+//                source.setName(o.getName());
+//                source.setMediUrl(params.getMediUrl());
+//                source.setDuration(params.getDuration());
+//                source.setFree(params.getFree());
+//                courseSourceDao.updateByPrimaryKeySelective(source);
+//            }
+//        }
 
         courseDao.updateByPrimaryKeySelective(o);
         dataBaseLogService.log("变更课程", "课程", "", o.getId(), o.getId(), userProp);
@@ -296,6 +295,7 @@ public class CourseServiceImpl implements CourseService {
         if (!"jxb".equals(curUserProp.getAccount())) {
             return new MessageResponse(ResultCode.FAIL, "当前登录账户无审核权限");
         }
+        record.setAuditor(curUserProp.getName());
         //重复审核校验
         CourseVo courseVo = courseDao.selectVoByPrimaryKey(record.getCourseId());
 

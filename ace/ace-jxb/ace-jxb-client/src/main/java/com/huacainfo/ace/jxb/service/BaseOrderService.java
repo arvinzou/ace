@@ -133,4 +133,13 @@ public interface BaseOrderService {
      * @return 处理结果
      */
     ResultResponse pay(JxbCallBackLog callBackLog, int payType);
+
+    /**
+     * 订单金额校验
+     *
+     * @param orderId 订单ID
+     * @param Amount  订单金额
+     * @return
+     */
+    ResultResponse checkAmount(String orderId, String Amount);
 }
