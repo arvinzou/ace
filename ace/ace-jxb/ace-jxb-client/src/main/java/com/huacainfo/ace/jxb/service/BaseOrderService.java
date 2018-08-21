@@ -142,4 +142,14 @@ public interface BaseOrderService {
      * @return
      */
     ResultResponse checkAmount(String orderId, String Amount);
+
+    /**
+     * 商品购买查询
+     *
+     * @param commodityId 商品ID
+     * @param consumerId  用户ID，可选
+     * @return ResultResponse
+     * @throws Exception
+     */
+    ResultResponse paidQuery(String commodityId, String consumerId);
 }

@@ -124,4 +124,32 @@ public class WOrderController extends JxbBaseController {
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", orderVo);
     }
+
+    /**
+     * 商品购买记录查询
+     *
+     * @param commodityId 商品ID
+     * @param consumerId  用户ID，可选
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/paidQuery")
+    public ResultResponse paidQuery(String commodityId, String consumerId) throws Exception {
+        if (!StringUtil.areNotEmpty(commodityId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数", false);
+        }
+        if (StringUtil.isEmpty(consumerId)) {
+            consumerId = getUnionid();
+            if (StringUtil.isEmpty(consumerId)) {
+                return new ResultResponse(ResultCode.FAIL, "微信授权失败", false);
+            }
+        }
+
+        return baseOrderService.paidQuery(commodityId, consumerId);
+    }
+
+    private String getUnionid() {
+        Userinfo userinfo = getCurUserinfo();
+        return null == userinfo ? "" : userinfo.getUnionid();
+    }
 }

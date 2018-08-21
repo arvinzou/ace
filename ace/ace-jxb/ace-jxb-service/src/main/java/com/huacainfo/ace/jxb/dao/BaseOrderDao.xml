@@ -338,10 +338,12 @@
         <include refid="whereCondition"/>
     </select>
 
-    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Consult">
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
         select count(1)
         from base_order
         where 1=1
+        and commodityId = #{commodityId,jdbcType=VARCHAR}
+        and consumerId = #{consumerId,jdbcType=VARCHAR}
+        and payStatus in ('2','6','7')
     </select>
-
 </mapper>

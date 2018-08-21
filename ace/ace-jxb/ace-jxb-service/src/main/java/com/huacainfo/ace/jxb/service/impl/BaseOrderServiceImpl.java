@@ -19,6 +19,7 @@ import com.huacainfo.ace.jxb.constant.PayStatus;
 import com.huacainfo.ace.jxb.dao.*;
 import com.huacainfo.ace.jxb.model.*;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
+import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.service.OrderCalculationService;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
@@ -73,6 +74,8 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     private CourseDao courseDao;
     @Autowired
     private EvaluatTplService evaluatTplService;
+    @Autowired
+    private BisMsgNoticeService bisMsgNoticeService;
 
     private SqlSession getSqlSession() {
         SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
@@ -521,6 +524,13 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         baseOrderDao.updateByPrimaryKeySelective(order);
         //插入运算记录
         orderCalculationService.insertOrderCalculation(orderId, order.getBusinessId());
+        //付款成功消息通知
+        try {
+            bisMsgNoticeService.paySuccess(order);
+        } catch (Exception e) {
+            logger.error("付款成功消息发送失败[{}],Exception => \n{}", order.getId(), e);
+        }
+
 
         return new ResultResponse(ResultCode.SUCCESS, "订单付款完成");
     }
@@ -546,6 +556,28 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         }
 
         return new ResultResponse(ResultCode.FAIL, "付款金额不符");
+    }
+
+    /**
+     * 商品购买查询
+     *
+     * @param commodityId 商品ID
+     * @param consumerId  用户ID，可选
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse paidQuery(String commodityId, String consumerId) {
+        BaseOrder params = new BaseOrder();
+        params.setConsumerId(consumerId);
+        params.setCommodityId(commodityId);
+
+        int isExit = baseOrderDao.isExit(params);
+        if (isExit <= 0) {
+            return new ResultResponse(ResultCode.FAIL, "无购买记录", false);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "校验通过", true);
     }
 
 
