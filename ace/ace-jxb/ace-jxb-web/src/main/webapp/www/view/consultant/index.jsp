@@ -19,120 +19,52 @@
 		<div class="container">
 			<div class="row banner">
 				<img src="img/banner.png" style="width: 100%;height: 100%;"/>
-			</div> 
+			</div>
+			<!--筛选-->
 			<div class="row navbox">
-				<section class="job-module">
-					<dl class="retrie">
-						<dt>
-							<div class="col-xs-4 col-sm-4 navtitle"><a id="area" href="javascript:;">擅长领域 </a></div>
-							<div class="col-xs-4 col-sm-4 navtitle"><a id="wage" href="javascript:;">咨询方式</a></div>
-							<div class="col-xs-4 col-sm-4 navtitle"><a id="sort" href="javascript:;">综合排序</a></div>
-						</dt>
-						<dd class="area">
-							<ul class="slide downlist" id="field01">
-								<li class="ll mt_01" style="margin-left: 0.4rem;" onclick="screen01(this);">
-									<a href="#">不限</a>
-								</li>
-								<li class="ll mt_01" onclick="screen01(this);">
-									<a href="#">二孩</a>
-								</li>
-								<li class="ll mt_01" onclick="screen01(this);">
-									<a href="#">儿童发展</a>
-								</li>
-								<li class="mt_01" onclick="screen01(this);">
-									<a href="#">父母成长</a>
-								</li>
-								<li class="ll mt_02 mb" style="margin-left: 0.4rem;" onclick="screen01(this);">
-									<a href="#">行为纠正</a>
-								</li>
-								<li class="ll mt_02 mb" onclick="screen01(this);">
-									<a href="#">习惯培养</a>
-								</li>
-								<li class="ll mt_02 mb" onclick="screen01(this);">
-									<a href="#">育儿困惑</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">亲子冲突</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">厌学</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">自闭症</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">多动症</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">不合群</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">敏感自卑</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">怕生</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">注意力不集中</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">阅读障碍</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">顽皮淘气</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen01(this);">
-									<a href="#">顽皮淘气</a>
-								</li>
-								<!--<div class="row screen">
-									<div class="col-xs-6 col-sm-6 reset" id="reset01">重置</div>
-									<div class="col-xs-6 col-sm-6 confirm" id="confirm01">确定</div>
-								</div>-->
-							</ul>
-
-						</dd>
-						<dd class="wage">
-							<ul class="slide downlist"  id="field02">
-								<li class="mt_01 mb" style="margin-right: 0.746666rem;margin-left: 0.746666rem;" onclick="screen02(this);">
-									<a href="#">电话咨询</a>
-								</li>
-								<li class="mt_01 mb" style="margin-right: 0.746666rem;" onclick="screen02(this);">
-									<a href="#">微信咨询</a>
-								</li>
-								<li class="mt_01 mb" onclick="screen02(this);">
-									<a href="#">面对面咨询</a>
-								</li>
-								<!--<div class="row screen01">
-									<div class="col-xs-6 col-sm-6 reset" id="reset02">重置</div>
-									<div class="col-xs-6 col-sm-6 confirm" id="confirm02">确定</div>
-								</div>-->
-							</ul>
-						</dd>
-						<dd class="sort">
-							<ul class="slide downlist"  id="field02">
-								<li class="ll mt_01" style="margin-right: 0.746666rem;margin-left: 0.746666rem;" onclick="screen03(this);">
-									<a href="#">综合排序</a>
-								</li>
-								<li class="ll mt_01" style="margin-right: 0.746666rem;" onclick="screen03(this);">
-									<a href="#">咨询最多</a>
-								</li>
-								<li class="mt_01" onclick="screen03(this);">
-									<a href="#">只查看在线</a>
-								</li>
-								<li class="ll mt_02 mb" style="margin-right: 0.746666rem;margin-left: 0.746666rem;" onclick="screen03(this);">
-									<a href="#">价格降序</a>
-								</li>
-								<li class="mt_02 mb" onclick="screen03(this);">
-									<a href="#">价格升序</a>
-								</li>
-								<!--<div class="row screen">
-									<div class="col-xs-6 col-sm-6 reset" id="reset03">重置</div>
-									<div class="col-xs-6 col-sm-6 confirm" id="confirm03">确定</div>
-								</div>-->
-							</ul>
-						</dd>
-					</dl>
-				</section>
+				<div class="selectbox">
+					<div class="selemediv">
+						<div class="selemenu">擅长领域</div>
+						<div class="citylist menuList1" id="menuList">
+							<li>行为纠正</li>
+							<li>亲子冲突</li>
+							<li>厌学</li>
+							<li>自闭症</li>
+							<li>不合群</li>
+							<li>敏感自卑</li>
+							<li>阅读障碍</li>
+							<li>孩子叛逆</li>
+							<li>不爱学习</li>
+							<li>早恋</li>
+							<li>考试焦虑</li>
+							<li>内向</li>
+							<li>坏习惯</li>
+							<li>沟通问题</li>
+							<li>胆小懦弱</li>
+							<li>不听话</li>
+							<li>考前紧张</li>
+							<li>做事拖拉</li>
+							<li>网瘾</li>
+							<li>自控力差</li>
+						</div>
+					</div>
+					<div class="selemediv">
+						<div class="selemenu">咨询方式</div>
+						<div class="citylist menuList2">
+							<li style="margin-left: 1rem;">电话咨询</li>
+							<li>视频咨询</li>
+							<li>面对面咨询</li>
+						</div>
+					</div>
+					<div class="selemediv">
+						<div class="selemenu">综合排序</div>
+						<div class="citylist menuList3">
+							<li style="margin-left: 1rem;">咨询最多</li>
+							<li>价格最低</li>
+							<li>价格最高</li>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="container" id="list">
 
