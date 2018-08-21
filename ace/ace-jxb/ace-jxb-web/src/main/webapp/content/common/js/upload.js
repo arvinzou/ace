@@ -32,12 +32,12 @@ var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" rol
     '                    <!-- 预览盒子 -->' +
     '                    <div class="col-md-6">' +
     '                        <div class="row">' +
-    '                            <div class="preview-pane">' +
+    '                            <div class="preview-pane" style="overflow: hidden;">' +
     '                                <img src="${pageContext.request.contextPath}/content/service/information/img/left_pic_two.jpg"' +
     '                                     class="preview" alt="Preview" id="Preview"/>' +
     '                            </div>' +
     '                        </div>' +
-    '                        <div class="row" id="proc">' +
+    '                        <div class="row" id="proc" style="margin-top: 30px">' +
     '                        </div>' +
     '                        <div class="row" style="padding-top: 50px;">' +
     '                            <button type="button" class="btn btn-success btn-lg" id="browse">本地上传</button>' +
@@ -112,6 +112,7 @@ function initJcrop() {
     });
 }
 
+
 //更新显示预览内容
 function updatePreview(c) {
     global_api = c;
@@ -174,20 +175,16 @@ function previewImage(file, callback) {
     }
 }
 
-var uploaderHeadimg;
 
 
 function initEvents() {
     $('#img-uploader').on('show.bs.modal', function (event) {
+        $('.progress-bar-success').css('width', '0%');
         var button = $(event.relatedTarget);
-        console.log(button);
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
-        console.log(xsize + "/" + ysize);
-        console.log(cover);
-        console.log(button["0"].src);
-        preImg(button["0"].src);
+        preImg('/jxb/content/service/information/img/left_pic_two.jpg');
     });
 }
 
@@ -268,7 +265,7 @@ function initUpload() {
         });
         uploaderHeadimg.start();
     });
-    initEvents();
+    // initEvents();
 }
 
 function resetSize(x, y) {
@@ -278,41 +275,41 @@ function resetSize(x, y) {
     preImg('/jxb/content/service/information/img/left_pic_two.jpg');
 }
 
-function initUpload1() {
-    var uploader = new plupload.Uploader({
-        runtimes: 'html5,flash,silverlight,html4',
-        browse_button: ["idCardz", "idCardf", "idCardsc", "certificateimg"],
-        url: portalPath + '/files/uploadFile.do',
-        file_data_name: 'file',
-        multi_selection: false,
-        filters: {
-            max_file_size: '100mb',
-            mime_types: [{
-                title: "Image files",
-                extensions: "jpg,gif,png,pdf,bmp"
-            }
-
-            ]
-        },
-        init: {
-            FileFiltered: function (up, files) {
-                up.start();
-                return false;
-            },
-            UploadProgress: function (e, t) {
-                var r = t.percent;
-                if (r == 100) {
-                    upimgObject.next().html("上传完成");
-                } else {
-                    upimgObject.next().html("开始上传（" + r + "%）");
-                }
-
-            },
-            FileUploaded: function (uploader, file, responseObject) {
-                var rst = JSON.parse(responseObject.response);
-                upimgObject.find('img').prop('src', "http://zx.huacainfo.com/" + rst.value[0]);
-            }
-        }
-    });
-    uploader.init();
-}
+// function initUpload1() {
+//     var uploader = new plupload.Uploader({
+//         runtimes: 'html5,flash,silverlight,html4',
+//         browse_button: ["idCardz", "idCardf", "idCardsc", "certificateimg"],
+//         url: portalPath + '/files/uploadFile.do',
+//         file_data_name: 'file',
+//         multi_selection: false,
+//         filters: {
+//             max_file_size: '100mb',
+//             mime_types: [{
+//                 title: "Image files",
+//                 extensions: "jpg,gif,png,pdf,bmp"
+//             }
+//
+//             ]
+//         },
+//         init: {
+//             FileFiltered: function (up, files) {
+//                 up.start();
+//                 return false;
+//             },
+//             UploadProgress: function (e, t) {
+//                 var r = t.percent;
+//                 if (r == 100) {
+//                     upimgObject.next().html("上传完成");
+//                 } else {
+//                     upimgObject.next().html("开始上传（" + r + "%）");
+//                 }
+//
+//             },
+//             FileUploaded: function (uploader, file, responseObject) {
+//                 var rst = JSON.parse(responseObject.response);
+//                 upimgObject.find('img').prop('src', "http://zx.huacainfo.com/" + rst.value[0]);
+//             }
+//         }
+//     });
+//     uploader.init();
+// }
