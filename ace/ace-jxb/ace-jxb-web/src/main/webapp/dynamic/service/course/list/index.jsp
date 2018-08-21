@@ -158,7 +158,7 @@
                 </div>
 				<div class="modal-body form">
 				
-                <form class="form-horizontal" id="fm-group" role="form">
+                <form class="form-horizontal form-panel" id="fm-group" role="form">
                       <div class="form-body">
                         <div class="form-group">
                             <label class="col-md-3 control-label">章节名称</label>
@@ -177,6 +177,8 @@
             </div>
         </div>
     </div>
+
+
 
     <script id="chapterTemp" type="text/template">
         {@each data as item,index} {@if index == 0}
