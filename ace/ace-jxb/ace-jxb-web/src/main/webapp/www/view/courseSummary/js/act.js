@@ -8,6 +8,7 @@ function loadlocal() {
 }
 var primaryId = null;
 var cost = "";
+var type = null;
 function App() {
     loadlocal();
 
@@ -49,7 +50,7 @@ function initData(primaryId){
                 viewHtml('courseDetail', result.data, 'courseDetailTemp');
                 var courseContent = result.data.introduce;
                 var costType = result.data.costType;
-                var type = result.data.type;
+                type = result.data.type;
                 if(costType == '0'){
                     cost = "免费";
                 }else if(costType == '1'){
@@ -142,70 +143,79 @@ function initCommentsList(){
 function buy(){
     if(cost == '免费'){
         cost = '0';
-        window.location.href = contextPath + '/www/view/catalogues/index.jsp?courseId='+primaryId;
-    }else{
-        var data = {
-            //          --订单基本情况
-            "base": {
-                "commodityId": primaryId,
-                "category": "2",          //1代表咨询订单，2代表课程订单
-                "price":cost,
-                "payMoney": cost,
-                "amount": 1
-            }
+        if(type == '1'){
+            window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId;
+        }else{
+            window.location.href = contextPath + '/www/view/catalogues/index.jsp?courseId='+primaryId;
         }
+    }else{
+        if(findOrderByCommodityid() == true){
+            if(type == '1'){
+                window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId;
+            }else{
+                window.location.href = contextPath + '/www/view/catalogues/index.jsp?courseId='+primaryId;
+            }
+        }else{
+            var data = {
+                //          --订单基本情况
+                "base": {
+                    "commodityId": primaryId,
+                    "category": "2",          //1代表咨询订单，2代表课程订单
+                    "price":cost,
+                    "payMoney": cost,
+                    "amount": 1
+                }
+            }
 
-        $.ajax({
-            url: contextPath+ "/www/order/create",
-            type:"post",
-            async:false,
-            /*dataType:"json",*/
-            data:{data:JSON.stringify(data)},
-            success:function(result){
-                if(result.status == 0) {
-                    console.log(result);
-                    var orderResultData = result.data;
-                    $.ajax({
-                        url: contextPath+ "/www/wxpay/unifiedorder",
-                        type:"post",
-                        async:false,
-                        data:{
-                            fee: orderResultData.payMoney,
-                            body: '课程产品',
-                            attach: orderResultData.orderId
-                        },
-                        success:function(result){
-                            if(result.status == 0) {
-                                var payData = result.data;
-                                onBridgeReady(payData, orderResultData.orderId);
-                                console.log(result);
-                                if (!$scope.$$phase) {
-                                    $scope.$apply();
+            $.ajax({
+                url: contextPath+ "/www/order/create",
+                type:"post",
+                async:false,
+                /*dataType:"json",*/
+                data:{data:JSON.stringify(data)},
+                success:function(result){
+                    if(result.status == 0) {
+                        console.log(result);
+                        var orderResultData = result.data;
+                        $.ajax({
+                            url: contextPath+ "/www/wxpay/unifiedorder",
+                            type:"post",
+                            async:false,
+                            data:{
+                                fee: orderResultData.payMoney,
+                                body: '课程产品',
+                                attach: orderResultData.orderId
+                            },
+                            success:function(result){
+                                if(result.status == 0) {
+                                    var payData = result.data;
+                                    onBridgeReady(payData, orderResultData.orderId);
+                                    console.log(result);
+                                }else {
+                                    if(result.info){
+                                        alert(result.info);
+                                    }else if(result.errorMessage){
+                                        alert(result.errorMessage);
+                                    }
+                                    return;
                                 }
-                            }else {
-                                if(result.info){
-                                    alert(result.info);
-                                }else if(result.errorMessage){
-                                    alert(result.errorMessage);
-                                }
+                            },
+                            error:function(){
+                                alert("系统服务内部异常！");
                                 return;
                             }
-                        },
-                        error:function(){
-                            alert("系统服务内部异常！");
-                            return;
-                        }
-                    });
-                }else {
-                    alert(result.info);
+                        });
+                    }else {
+                        alert(result.info);
+                        return;
+                    }
+                },
+                error:function(){
+                    alert("系统服务内部异常！");
                     return;
                 }
-            },
-            error:function(){
-                alert("系统服务内部异常！");
-                return;
-            }
-        });
+            });
+        }
     }
 }
 
@@ -278,4 +288,28 @@ function commitComments(){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function findOrderByCommodityid(){
+    var isBuy = null;
+    $.ajax({
+        url: contextPath+ "/www/order/paidQuery",
+        type:"post",
+        async:false,
+        data:{
+            commodityId: primaryId
+        },
+        success:function(result){
+            if(result.status == 0) {
+                isBuy = result.data;
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+    return isBuy;
 }

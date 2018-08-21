@@ -574,7 +574,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
 
         int isExit = baseOrderDao.isExit(params);
         if (isExit <= 0) {
-            return new ResultResponse(ResultCode.FAIL, "无购买记录", false);
+            return new ResultResponse(ResultCode.SUCCESS, "无购买记录", false);
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "校验通过", true);
