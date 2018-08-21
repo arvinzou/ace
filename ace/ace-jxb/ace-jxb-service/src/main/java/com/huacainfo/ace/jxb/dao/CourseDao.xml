@@ -283,9 +283,13 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseVo">
         <result column="auditRst" jdbcType="VARCHAR" property="auditRst"/>
         <result column="counselorName" jdbcType="VARCHAR" property="counselorName"/>
+        <result column="srcCount" jdbcType="INTEGER" property="srcCount"/>
+        <result column="auditRemark" jdbcType="VARCHAR" property="auditRemark"/>
     </resultMap>
     <sql id="Vo_Column_List">
-        IFNULL(ca.rst,'0') as auditRst, IFNULL(c.`name`,'近心帮管理员') as counselorName,
+        (select count(1) from course_source s where s.courseId = t.id) as srcCount,
+        IFNULL(ca.rst,'0') as auditRst, ca.statement as auditRemark,
+        IFNULL(c.`name`,'近心帮管理员') as counselorName,
         t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
         t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce,
         t.primeCost, t.objects, t.applicationObject, t.purport, t.lineState

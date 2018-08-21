@@ -1,10 +1,24 @@
 window.onload = function () {
     juicer.register('formatCategory', formatCategory);
     juicer.register('formatPayStatus', formatPayStatus);
-    juicer.register('formatCProductType', formatCProductType);
+    juicer.register('formatCPntType', formatCPntType);
     initpage();
 }
 var category = 1, orderId = '';
+
+function formatCPntType(type) {
+    //   咨询类型(1-语音咨询 2-视频咨询 3-面对面咨询)
+    switch (type) {
+        case "1":
+            return "语音咨询";
+            break;
+        case "2":
+            return "视频咨询";
+        case "3":
+            return "面对面咨询";
+            break;
+    }
+}
 
 function formatCategory(type) {
     switch (type) {

@@ -44,6 +44,31 @@ public class CourseVo extends Course {
      */
     private String counselorName;
 
+    /**
+     * 课程下，所有资源数量
+     */
+    private Integer srcCount;
+    /**
+     * 审核备注
+     */
+    private String auditRemark;
+
+    public Integer getSrcCount() {
+        return srcCount;
+    }
+
+    public void setSrcCount(Integer srcCount) {
+        this.srcCount = srcCount;
+    }
+
+    public String getAuditRemark() {
+        return auditRemark;
+    }
+
+    public void setAuditRemark(String auditRemark) {
+        this.auditRemark = auditRemark;
+    }
+
     public String getCounselorName() {
         return counselorName;
     }
