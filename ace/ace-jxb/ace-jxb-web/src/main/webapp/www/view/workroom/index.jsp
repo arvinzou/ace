@@ -24,13 +24,13 @@
 			{@each data.my as item,index}
             <div class="row roomlist">
                 <div class="room">
-                <div class="col-xs-3 col-sm-3 topsize">
-                <div class="img_box"><img src="\${item.logoImgUrl}"/></div>
-                </div>
-                <div class="col-xs-7 col-sm-7 topsize" onclick="showDetail('\${item.id}');">
-                <p class="workroom_title">\${item.name}</p>
-                <p class="workroom_detail"><span class="edge">咨询师 20</span><span class="edge">课程 200</span><span class="edge">直播 10 </span></p>
-            </div>
+					<div class="col-xs-3 col-sm-3 topsize">
+						<div class="img_box"><img src="\${item.logoImgUrl}"/></div>
+					</div>
+					<div class="col-xs-7 col-sm-7 topsize" onclick="showDetail('\${item.id}');">
+						<p class="workroom_title">\${item.name}</p>
+						<p class="workroom_detail"><span class="edge">咨询师 20</span><span class="edge">课程 200</span><span class="edge">直播 10 </span></p>
+					</div>
             <div class="col-xs-2 col-sm-2 invatation topsize" onclick="invate('\${item.id}');">
                 <p><img class="invate" src="img/invate.png"/></p>
                 <p>邀请</p>
