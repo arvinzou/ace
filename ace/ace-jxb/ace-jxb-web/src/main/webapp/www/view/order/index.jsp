@@ -16,16 +16,16 @@
 
 	<body>
 		<div class="main_box">
-			<div class="container" id="consultorInfo">
-
-				<%--<div class="row content_03">
+			<div class="container">
+				<div class="row" id="consultorInfo"></div>
+				<div class="row content_03">
 					<div class="col-xs-4 col-sm-4" style="padding-left: 0;">
 						<span class="method_01">服务时间</span>
 					</div>
 					<div class="col-xs-8 col-sm-8">
-
+						<input type="datetime-local"/>
 					</div>
-				</div>--%>
+				</div>
 			</div>
 			<!--基本信息-->
 			<div class="container">
