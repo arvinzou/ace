@@ -54,12 +54,15 @@
             <p class="test_remark">${item.categoryName}</p>
 
             <span class="price">
-										<!--<span class="free">免费</span>-->
+                            {@if item.discountCost==0}
+                            <span class="free">免费</span>
+                            {@else}
                             <span class="no_free">
                                 <span class="now_price">￥${item.discountCost}</span>
                                 <span class="old_price">￥${item.originalCost}</span>
                             </span>
-									</span>
+                            {@/if}
+            </span>
             <span class="test_total">
 										<span class="number">${item.testedTotal}</span>人测过
 									</span>

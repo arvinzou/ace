@@ -48,7 +48,7 @@
                 </div>
                 </div>
                 <div class="col-xs-3 col-sm-2 row_01">
-                <button class="chat">查看详情</button>
+                <button class="chat" onclick="showDetail('\${item.id}');">查看详情</button>
                 </div>
                 </div>
                 <div class="row dorder">
@@ -65,7 +65,7 @@
             <div class="col-xs-2 col-sm-2"></div>
                 </div>
                 <div class="row dorder" style="border: none;">
-                <div class="col-xs-9 col-sm-9" style="overflow: hidden;"><p class="order_num">订单号：</p></div>
+                <div class="col-xs-9 col-sm-9" style="overflow: hidden;"><p class="order_num">订单号：\${item.id}</p></div>
             	<div class="col-xs-3 col-sm-3" style="text-align: right;">
 					{@if item.payStatus == '1'}
 					<p class="unfinished">待支付</p>
