@@ -127,7 +127,7 @@
                 <span class="label-red">*</span>课程封面</label>
             <div class="col-md-10">
                 <div class="imgbox">
-                    <img class=" form_imagePhotoUrl" id="courseCover" data-toggle="modal" data-xsize="375" data-ysize="210" data-cover="courseCover"
+                    <img class=" form_imagePhotoUrl" id="courseCover" style="max-width:100%;cursor: pointer;" data-toggle="modal" data-xsize="375" data-ysize="210" data-cover="courseCover"
                          data-target="#img-uploader" src="\${data.o.cover}">
                 </div>
                 <div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
