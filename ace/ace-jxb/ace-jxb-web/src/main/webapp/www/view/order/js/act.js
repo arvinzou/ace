@@ -195,8 +195,8 @@ function createOrder(){
                     "businessName": counselorName,
                     "amount": num,
                     "price":unitPrice,
-                   // "payMoney": totalPrice,
-                    "payMoney": 0.01
+                    "payMoney": totalPrice,
+                    //"payMoney": 0.01
                 },
     //            --预约详情
                 "consult": {
@@ -227,7 +227,7 @@ function createOrder(){
                     type:"post",
                     async:false,
                     data:{
-                        fee: '0.01',
+                        fee: orderResultData.payMoney,
                         body: '咨询预约产品',
                         attach: orderResultData.orderId
                     },
