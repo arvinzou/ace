@@ -46,6 +46,10 @@ public class ConsultOrder implements Serializable {
      */
     private String secTel;
     /**
+     * 预约时间
+     */
+    private Date reserveDate;
+    /**
      * 状态
      */
     private String status;
@@ -53,6 +57,14 @@ public class ConsultOrder implements Serializable {
      * 入库日期
      */
     private Date createDate;
+
+    public Date getReserveDate() {
+        return reserveDate;
+    }
+
+    public void setReserveDate(Date reserveDate) {
+        this.reserveDate = reserveDate;
+    }
 
     public String getTags() {
         return tags;

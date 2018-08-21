@@ -14,9 +14,11 @@
         <result column="secTel" jdbcType="VARCHAR" property="secTel"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="reserveDate" jdbcType="TIMESTAMP" property="reserveDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, tel, name, age, sex, tags, info, secName, relationship, secTel, status, createDate
+        id, tel, name, age, sex, tags, info, secName, relationship, secTel, status, createDate,
+        reserveDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -32,11 +34,12 @@
     insert into consult_order (id, tel, name, 
       age, sex, info, secName, 
       relationship, secTel, status,
-        createDate, tags)
+        createDate, tags, reserveDate)
     values (#{id,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{age,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{secName,jdbcType=VARCHAR}, 
       #{relationship,jdbcType=VARCHAR}, #{secTel,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
-        #{createDate,jdbcType=TIMESTAMP}, #{tags,jdbcType=VARCHAR})
+        #{createDate,jdbcType=TIMESTAMP}, #{tags,jdbcType=VARCHAR},
+        #{reserveDate,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.ConsultOrder">
         insert into consult_order
@@ -77,6 +80,9 @@
             <if test="tags != null">
                 tags,
             </if>
+            <if test="reserveDate != null">
+                reserveDate,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -114,6 +120,9 @@
             </if>
             <if test="tags != null">
                 #{tags,jdbcType=VARCHAR},
+            </if>
+            <if test="reserveDate != null">
+                #{reserveDate,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -153,6 +162,9 @@
             <if test="tags != null">
                 tags = #{tags,jdbcType=VARCHAR},
             </if>
+            <if test="reserveDate != null">
+                reserveDate = #{reserveDate,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -168,6 +180,7 @@
       secTel = #{secTel,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
         createDate = #{createDate,jdbcType=TIMESTAMP},
+        reserveDate = #{reserveDate,jdbcType=TIMESTAMP},
         tags = #{tags,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

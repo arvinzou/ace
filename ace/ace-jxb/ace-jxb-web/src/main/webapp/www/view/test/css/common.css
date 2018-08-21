@@ -98,6 +98,7 @@ input {
     color: rgba(28, 40, 67, 1);
     line-height: 0.666666rem;
     margin-bottom: 0.213333rem;
+    height: 1.333333rem;
 }
 
 .test_list .left_div .test_remark {

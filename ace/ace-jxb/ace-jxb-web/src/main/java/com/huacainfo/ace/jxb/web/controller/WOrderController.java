@@ -136,12 +136,12 @@ public class WOrderController extends JxbBaseController {
     @RequestMapping("/paidQuery")
     public ResultResponse paidQuery(String commodityId, String consumerId) throws Exception {
         if (!StringUtil.areNotEmpty(commodityId)) {
-            return new ResultResponse(ResultCode.FAIL, "缺少必要参数", false);
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         if (StringUtil.isEmpty(consumerId)) {
             consumerId = getUnionid();
             if (StringUtil.isEmpty(consumerId)) {
-                return new ResultResponse(ResultCode.FAIL, "微信授权失败", false);
+                return new ResultResponse(ResultCode.FAIL, "微信授权失败");
             }
         }
 

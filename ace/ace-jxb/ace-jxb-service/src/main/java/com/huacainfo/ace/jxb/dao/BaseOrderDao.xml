@@ -223,6 +223,7 @@
             <result column="secName" property="secName"/>
             <result column="relationship" property="relationship"/>
             <result column="secTel" property="secTel"/>
+            <result column="reserveDate" property="reserveDate"/>
         </association>
     </resultMap>
 
@@ -278,7 +279,7 @@
         cr.primeCost as coursePCost, cr.objects as courseObj, cr.applicationObject as courseAObj,
         cr.purport as coursePurport, cr.createDate as courseCrtDt,
 
-        co.tel, co.name, co.age, co.sex, co.tags, co.info, co.secName, co.relationship, co.secTel,
+        co.tel, co.name, co.age, co.sex, co.tags, co.info, co.secName, co.relationship, co.secTel, co.reserveDate,
         cp.type as cpType,
 
         c.name as tName,c.certification ,c.imagePhotoUrl,c.level as tLevel,
