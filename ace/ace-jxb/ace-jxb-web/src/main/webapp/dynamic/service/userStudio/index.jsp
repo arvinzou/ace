@@ -81,23 +81,13 @@
                                                 <!-- SIDEBAR MENU -->
                                                 <div class="profile-usermenu">
                                                     <ul class="nav">
-                                                        <li class="active">
-                                                            <a href="../userStudioStaff/index.jsp">
-                                                                <i class="icon-settings"></i>工作室管理</a>
-                                                        </li>
-
                                                         <li>
                                                             <a href="../userReservation/index.jsp">
                                                                 <i class="icon-settings"></i>预约设置</a>
                                                         </li>
-
                                                         <li>
                                                             <a href="../userOrder/index.jsp">
                                                                 <i class="icon-settings"></i>订单管理</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="icon-info"></i> Help </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -105,7 +95,7 @@
                                             </div>
                                             <!-- END PORTLET MAIN -->
                                             <!-- PORTLET MAIN -->
-                                            <div class="portlet light ">
+                                            <%--<div class="portlet light ">
                                                 <!-- STAT -->
                                                 <div class="row list-separated profile-stat">
                                                     <div class="col-md-4 col-sm-4 col-xs-6">
@@ -138,7 +128,7 @@
                                                         <a href="http://www.facebook.com/keenthemes/">keenthemes</a>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>--%>
                                             <!-- END PORTLET MAIN -->
                                         </div>
                                         <!-- END BEGIN PROFILE SIDEBAR -->
