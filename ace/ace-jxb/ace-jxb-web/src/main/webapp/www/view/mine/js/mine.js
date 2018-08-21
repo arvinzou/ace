@@ -120,3 +120,7 @@ function onoffline(state){
     });
     return flag;
 }
+
+function showMyOrder(){
+    window.location.href = contextPath + '/www/view/history/index.jsp?type=1';
+}

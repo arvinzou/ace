@@ -127,7 +127,7 @@ function initCommentsList(){
         },
         success:function(result){
             if(result.status == 0) {
-                viewHtml('comments', result.data.rows, 'commentsListTemp');
+                viewHtml('commentList', result.data.rows, 'commentsListTemp');
             }else {
                 alert(result.info);
                 return;

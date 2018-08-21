@@ -33,7 +33,7 @@
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-2 row_01">
-					<button class="chat" onclick="window.location.href='chat.jsp'">聊一聊</button>
+					<%--<button class="chat" onclick="window.location.href='chat.jsp'">聊一聊</button>--%>
 				</div>
 			</div>
 		</div>

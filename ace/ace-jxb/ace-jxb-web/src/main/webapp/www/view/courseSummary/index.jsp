@@ -45,7 +45,19 @@
 
 			<!--课程评价-->
 				<div class="comments menuHide" id="comments">
-
+					<a href="#" data-toggle="modal" data-target="#myModal" class="myComment">
+						<div class="row dialog">
+						<div class="row star_title"><p>我的评价</p></div>
+						<div class="row star_defalut">
+							<img src="img/star_gray.png"/>
+							<img src="img/star_gray.png"/>
+							<img src="img/star_gray.png"/>
+							<img src="img/star_gray.png"/>
+							<img src="img/star_gray.png"/>
+						</div>
+					</div>
+					</a>
+					<div class="row" id="commentList"></div>
 				</div>
 			</div>
 		</div>
@@ -190,16 +202,6 @@
 		</script>
 
 	<script id="commentsListTemp" type="text/template">
-		<div class="row dialog" data-toggle="modal" data-target="#myModal">
-				<div class="row star_title"><p>我的评价</p></div>
-				<div class="row star_defalut">
-					<img src="img/star_gray.png"/>
-					<img src="img/star_gray.png"/>
-					<img src="img/star_gray.png"/>
-					<img src="img/star_gray.png"/>
-					<img src="img/star_gray.png"/>
-				</div>
-		</div>
 		{@each data as item, index}
         <div class="row commen_item">
             <div class="row">

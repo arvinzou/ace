@@ -1,6 +1,6 @@
+var findType = "2";
 function App() {
     console.log("=============================App Start==============================");
-
     initSilder();
     $(".news-module li").on("click",function(){
         var n = $(this).index();
@@ -12,7 +12,14 @@ function App() {
         $(this).addClass("active").siblings().removeClass("active");
     });
 
-    initData();
+    console.log(window.location.href);
+    var url =   window.location.href.substring(1);
+    var type = url.substring(url.indexOf('=')+1);
+
+    if(type == '1'){
+        findType = "1";
+    }
+    initData(findType);
 }
 
 function  initSilder() {
@@ -23,13 +30,13 @@ function  initSilder() {
     $(".news-slider").css("left",slider_left);
 }
 
-function initData(){
+function initData(findType){
     $.ajax({
         url: contextPath+ "/www/order/findList",
         type:"post",
         async:false,
         data:{
-            findType: '2',
+            findType: findType,
             start: 0,
             limit: 999
         },
@@ -58,7 +65,7 @@ function orderList(data){
         type:"post",
         async:false,
         data:{
-            findType: '2',
+            findType: findType,
             payStatusArray: data,
             start: 0,
             limit: 999
@@ -79,4 +86,8 @@ function orderList(data){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function showDetail(orderId){
+    window.location.href = contextPath + '/www/view/consultantDetail/index.jsp?id='+orderId;
 }
