@@ -8,24 +8,26 @@
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
 		<title>预约咨询</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css"/>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../../common/js/datetime/css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="../../common/js/datetime/LCalendar/css/LCalendar.css"/>
 		<script type="text/javascript" src="js/act.js"></script>
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
 
 	<body>
 		<div class="main_box">
-			<div class="container" id="consultorInfo">
-
-				<%--<div class="row content_03">
+			<div class="container">
+				<div class="row" id="consultorInfo"></div>
+				<div class="row content_03">
 					<div class="col-xs-4 col-sm-4" style="padding-left: 0;">
-						<span class="method_01">服务时间</span>
+						<span class="method_01">预约时间</span>
 					</div>
 					<div class="col-xs-8 col-sm-8">
-
+						<input style="width: 100%;height: 1rem;border:none;" name="start_date" id="start_date" placeholder="选择预约时间" readonly="readonly" />
 					</div>
-				</div>--%>
+				</div>
 			</div>
 			<!--基本信息-->
 			<div class="container">
@@ -157,7 +159,7 @@
             </div>
             </div>
             <div class="col-xs-3 col-sm-2 row_01">
-            <button class="chat" onclick="window.location.href='../chat/index.jsp'">聊一聊</button>
+            <%--<button class="chat" onclick="window.location.href='../chat/index.jsp'">聊一聊</button>--%>
             </div>
             </div>
             <div class="row method">

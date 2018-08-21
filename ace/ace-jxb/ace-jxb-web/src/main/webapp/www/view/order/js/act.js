@@ -28,6 +28,11 @@ function App() {
         url: '/www/common/js/jweixin-1.2.0.js',
         type: 'js'
     });
+    loader({
+        path: contextPath,
+        url: '/www/common/js/datetime/LCalendar/js/LCalendar.js',
+        type: 'js'
+    });
 }
 window.onload = function(){
     index = layer.open({
@@ -43,6 +48,17 @@ window.onload = function(){
         }else {
             $("#read").attr('src','img/yes.png');
         }
+    });
+
+    /**
+     * 初始化预约时间
+     */
+    var calendar = new LCalendar();
+    calendar.init({
+        'trigger': '#start_date', //标签id
+        'type': 'datetime', //date 调出日期选择 datetime 调出日期时间选择 time 调出时间选择 ym 调出年月选择,
+        'minDate': (new Date().getFullYear()-3) + '-' + 1 + '-' + 1, //最小日期
+        'maxDate': (new Date().getFullYear()+3) + '-' + 12 + '-' + 31 //最大日期
     });
 }
 
@@ -129,6 +145,7 @@ function createOrder(){
     var age = $("input[name='age']").val();
     var phoneNum = $("input[name='phoneNum']").val();
     var problem = $("textarea[name='problem']").val();
+    var start_date = $("input[name = 'start_date']").val();
     var num = parseInt($("#num").text());
     totalPrice = num * unitPrice;
     //紧急联系人信息
@@ -147,6 +164,10 @@ function createOrder(){
 
     if(unitPrice == null || unitPrice == undefined){
         alert("请选择咨询方式！");
+        return;
+    }
+    if(start_date == null || start_date == undefined){
+        alert("请选择预约时间！");
         return;
     }
     if(username == '' || username == undefined){
@@ -208,7 +229,8 @@ function createOrder(){
                     "secName":contact_name,
                     "relationship":contact_relation,
                     "secTel": contact_phone,
-                    "tags": tags
+                    "tags": tags,
+                    "reserveDate":start_date+":00"
                     }
             }
 
@@ -236,9 +258,6 @@ function createOrder(){
                             var payData = result.data;
                             onBridgeReady(payData, orderResultData.orderId);
                             console.log(result);
-                            if (!$scope.$$phase) {
-                                $scope.$apply();
-                            }
                         }else {
                             if(result.info){
                                 alert(result.info);

@@ -122,5 +122,5 @@ function onoffline(state){
 }
 
 function showMyOrder(){
-    window.location.href = contextPath + '/www/view/history/index.jsp?type=1';
+    window.location.href = contextPath + '/www/view/belongCounselorOrder/index.jsp';
 }

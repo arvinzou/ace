@@ -65,7 +65,7 @@
             <div class="col-xs-2 col-sm-2"></div>
                 </div>
                 <div class="row dorder" style="border: none;">
-                <div class="col-xs-9 col-sm-9" style="overflow: hidden;"><p class="order_num">订单号：\${item.id}</p></div>
+                <div class="col-xs-9 col-sm-9" style="overflow: hidden;"><p class="order_num">预约时间：\${item.consultOrder.reserveDate}</p></div>
             	<div class="col-xs-3 col-sm-3" style="text-align: right;">
 					{@if item.payStatus == '1'}
 					<p class="unfinished">待支付</p>
