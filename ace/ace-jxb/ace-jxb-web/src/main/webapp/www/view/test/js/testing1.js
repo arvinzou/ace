@@ -23,8 +23,10 @@ function initBtn() {
                 if (cost == 0) {
                     $('.test_main .button .box .start').show();
                 } else {
-                    var url = "";
-                    var data = "";
+                    var url = "/jxb/www/order/paidQuery";
+                    var data = {
+                        commodityId: eid
+                    };
                     $.getJSON(url, data, function (result) {
                         if (result.status == 0) {
                             /*有支付*/
@@ -41,7 +43,6 @@ function initBtn() {
                     })
                 }
             }
-
         } else {
             alert("获取测试失败，将回退到上一页。");
             // window.history.back();
