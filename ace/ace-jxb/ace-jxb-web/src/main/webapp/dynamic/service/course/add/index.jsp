@@ -79,9 +79,9 @@
                                                                         <label class="col-md-2 control-label">
                                                                             <span class="label-red">*</span>课程封面</label>
                                                                         <div class="col-md-10">
-                                                                            <div class="imgbox">
-                                                                                <img class=" form_imagePhotoUrl" id="courseCover" data-toggle="modal" data-xsize="375" data-ysize="210" data-cover="courseCover"
-                                                                                    data-target="#img-uploader" src="${pageContext.request.contextPath}/dynamic/service/course/add/img/no-img.jpg?v=${cfg.version}">
+                                                                            <div class="row">
+                                                                                <img class=" form_imagePhotoUrl" id="courseCover" style="width:140px;height:70px" data-toggle="modal" data-xsize="375" data-ysize="210" data-cover="courseCover"
+                                                                                     data-target="#img-uploader" src="${pageContext.request.contextPath}/dynamic/service/course/add/img/no-img.jpg?v=${cfg.version}">
                                                                             </div>
                                                                             <div class="tips">建议图片尺寸750*420px或16:9，JPG、PNG、GIF格式，大小不超过2M</div>
                                                                         </div>
