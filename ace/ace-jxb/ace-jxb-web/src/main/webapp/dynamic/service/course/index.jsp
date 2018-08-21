@@ -167,7 +167,7 @@
                 <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
                 <div class="col-md-9">
                     <div class="describtion">\${item.name}</div>
-                    <div class="cost">￥\${item.cost}</div>
+                    <div class="cost">\${item.srcCount}节￥\${item.cost}</div>
                 </div>
             </div>
         </td>
@@ -180,6 +180,7 @@
             {@else}
                 <a href="#">已上架</a>
             {@/if}
+
             </div>
 
         </td>
@@ -189,8 +190,10 @@
             <span class="label label-lg label-info">待审核</span>
             {@else if item.auditRst==1}
             <span class="label label-lg label-success">审核通过</span>
+            \${item.auditRemark}
             {@else}
             <span class="label label-lg label-danger">审核不通过</span>
+            \${item.auditRemark}
             {@/if}
         </td>
         <td >
