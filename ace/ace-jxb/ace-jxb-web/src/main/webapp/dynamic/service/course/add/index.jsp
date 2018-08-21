@@ -10,7 +10,7 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="${cfg.sys_name}" />
         <!--公共部分开始-->
-        <jsp:include page="../../../common/base.jsp" />
+        <jsp:include page="/dynamic/common/base.jsp" />
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/css/components.min.css" />
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css" />

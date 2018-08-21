@@ -22,8 +22,7 @@ function App() {
 
 window.onload = function(){
     console.log(window.location.href);
-    var url =   window.location.href.substring(1);
-    primaryId = url.substring(url.indexOf('=')+1);
+    primaryId =urlParams.id;
 
     initPartList();
 }
@@ -141,7 +140,7 @@ function changeChapter(id){
 }
 
 function add(){
-    var partId = $("#chapters  .active").attr("datattr");
+    var partId = $("#chapters .active").attr("datattr");
     window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId;
 }
 
