@@ -19,6 +19,9 @@
         <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
         <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css"/>
+				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
+				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/list/css/style.css">
         <script src="${pageContext.request.contextPath}/dynamic/service/course/list/js/act.js?v=${cfg.version}"></script>
         <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
@@ -144,7 +147,7 @@
         </div>
     </body>
 
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -153,17 +156,23 @@
                     </button>
                     <h4 class="modal-title" id="gridSystemModalLabel">章节创建</h4>
                 </div>
-                <div class="chater">
-                    <div class="row" style="margin-left: 0;margin-right: 0;padding-left: 15px;">
-                        <div class="col-xs-3 col-md-3">章节名称</div>
-                        <div class="col-xs-9 col-md-9">
-                            <input name="partName" type="text" maxlength="50" placeholder="请输入课程章节名称" />
+				<div class="modal-body form">
+				
+                <form class="form-horizontal" id="fm-group" role="form">
+                      <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">章节名称</label>
+                            <div class="col-md-9">
+                                <input name="partName" class="form-control" type="text" maxlength="50" placeholder="请输入课程章节名称" />
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
+				
+            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" onclick="addSeries();">确定</button>
+                    <button type="button" class="btn green" onclick="addSeries();">确定</button>
                 </div>
             </div>
         </div>
@@ -361,29 +370,6 @@
         </tr>
         {@/each}
     </script>
-    <style>
-        .modal .headbox {
-            width: 150px !important;
-            height: 150px !important;
-            border-radius: 50% !important;
-            overflow: hidden;
-            margin: 0 auto;
-        }
 
-        .modal-dialog {
-            width: 900px !important;
-        }
-
-        .modal-body {
-            font-size: 16px;
-            line-height: 24px;
-            text-align: justify
-        }
-
-        .modal img {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
 
     </html>
