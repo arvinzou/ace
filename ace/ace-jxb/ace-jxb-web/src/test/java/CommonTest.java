@@ -1,9 +1,9 @@
-import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,9 +18,9 @@ public class CommonTest {
     @Test
     public void test() {
 
-        String nowYear = DateUtil.getNow().substring(0, 4);
+//        String nowYear = DateUtil.getNow().substring(0, 4);
 
-        System.out.println("111:" + nowYear + ":1");
+        System.out.println(new BigDecimal("100").toString());
     }
 
     public void orderParams() {

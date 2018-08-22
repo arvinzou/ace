@@ -526,7 +526,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         orderCalculationService.insertOrderCalculation(orderId, order.getBusinessId());
         //付款成功消息通知
         try {
-            bisMsgNoticeService.paySuccess(order);
+            bisMsgNoticeService.paySuccess(order.getId());
         } catch (Exception e) {
             logger.error("付款成功消息发送失败[{}],Exception => \n{}", order.getId(), e);
         }

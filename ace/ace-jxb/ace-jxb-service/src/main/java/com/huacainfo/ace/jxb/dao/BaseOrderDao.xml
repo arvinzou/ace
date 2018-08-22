@@ -200,6 +200,7 @@
     <!--咨询订单返回map-->
     <resultMap id="consult-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
         <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+        <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
         <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
             <id property="id" column="businessId"/>
             <result property="name" column="tName"/>
@@ -230,6 +231,7 @@
     <!--课程订单返回map-->
     <resultMap id="course-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
         <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+        <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
         <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
             <id property="id" column="businessId"/>
             <result property="name" column="tName"/>
@@ -270,7 +272,7 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
-        ui.nickname as consumerName,
+        ui.nickname as consumerName, ui.headimgurl as consumerImgUrl,
         cr.id as courseId, cr.type as courseType, cr.category as courseCategory,
         cr.mediType as courseMediType, cr.name as courseName, cr.cover as courseCover,
         cr.duration as courseDuration, cr.costType as courseCostType, cr.cost as courseCost,
