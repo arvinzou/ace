@@ -89,7 +89,7 @@
 }
 
 .test_main .button .box > input:nth-child(2) {
-    margin-left: 0.5rem;
+    margin-left: 0.4rem;
 }
 
 input {
@@ -101,10 +101,6 @@ input {
     font-weight: bold;
     line-height: 1.333333rem;
 
-}
-
-.test_main .button .box .right {
-    margin-left: 0.59rem;
 }
 
 input.start {
