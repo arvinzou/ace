@@ -200,7 +200,7 @@
 	<script id="commentsListTemp" type="text/template">
 		{@each data as item, index}
         <div class="row commen_item">
-            <div class="row">
+            <div class="row" style="padding-top: 0.2rem;">
             <div class="col-xs-3 col-md-3">
             <img src="\${item.headimgurl}" class="user_head" />
             </div>
