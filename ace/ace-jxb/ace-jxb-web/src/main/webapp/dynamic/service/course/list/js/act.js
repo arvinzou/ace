@@ -42,36 +42,6 @@ function initpage(partId) {
     });
 }
 
-function addSeries(){
-    var partName = $("input[name='partName']").val();
-    if(partName == '' || partName == undefined){
-        alert("章节名称不能为空！");
-        return;
-    }
-    $.ajax({
-        url: contextPath + "/coursePart/insertCoursePart",
-        type:"post",
-        async:false,
-        data:{jsons:JSON.stringify({
-                courseId: primaryId,
-                name:partName
-            })
-        },
-        success:function(result){
-            if(result.status == 0) {
-                console.log(result);
-                alert("创建成功！");
-                window.location.reload();
-                initPartList();
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
-}
 
 function initPartList(){
     var data = findPartList();
@@ -90,7 +60,7 @@ function findPartList(){
             page: 1,
             limit: 999,
             courseId: primaryId,
-            orderBy: "displaySeq",
+            orderBy: "createDate",
             sord: "asc"
         },
         success:function(result){
@@ -290,18 +260,45 @@ function initPartListOnModal(){
         viewHtml('chapter', data.rows, 'editChapterTemp');
     }catch(e){}
 }
+//============================章节管理开始=====================================//
 
+function addSeries(){
+    var partName = $("input[name='partName']").val();
+    if(partName == '' || partName == undefined){
+        alert("章节名称不能为空！");
+        return;
+    }
+    startLoad();
+    $.ajax({
+        url: contextPath + "/coursePart/insertCoursePart",
+        type:"post",
+        async:false,
+        data:{jsons:JSON.stringify({
+                courseId: primaryId,
+                name:partName
+            })
+        },
+        success:function(result){
+            stopLoad();
+            alert(result.errorMessage);
+            if(result.status == 0) {
+                $("#myModal").modal('hide');
+                initPartList();
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("系统服务内部异常！");
+        }
+    });
+}
 function updateChapter(partId){
-    var name = $("input[name='chapterName']").val();
-    var displaySeq = $("input[name='displaySeq']").val();
+    var name = $("#chapter-"+partId+" input[name='chapterName']").val();
     if(name == '' || name == undefined){
         alert("章节名称不能为空！");
         return;
     }
-    if(displaySeq == '' || displaySeq == undefined){
-        alert("章节的显示顺序不能为空！");
-        return;
-    }
+     startLoad();
     $.ajax({
         url: contextPath + "/coursePart/updateCoursePart",
         type:"post",
@@ -310,25 +307,26 @@ function updateChapter(partId){
             jsons:JSON.stringify({
                 id: partId,
                 courseId: primaryId,
-                name: name,
-                displaySeq: displaySeq
+                name: name
             })
         },
         success:function(result){
+            alert(result.errorMessage);
+            stopLoad();
             if(result.status == 0) {
-                alert("修改成功！");
-                window.location.reload();
-            }else {
-                alert(result.errorMessage);
+                $("#chapterBox").modal('hide');
+                initPartList();
             }
         },
         error:function(){
+            stopLoad();
             alert("系统服务内部异常！");
         }
     });
 }
 
 function deleteChapter(partId){
+    startLoad();
     $.ajax({
         url: contextPath + "/coursePart/deleteCoursePartByCoursePartId",
         type:"post",
@@ -339,15 +337,17 @@ function deleteChapter(partId){
             })
         },
         success:function(result){
+            alert(result.errorMessage);
+            stopLoad();
             if(result.status == 0) {
-                alert("删除成功！");
-                window.location.reload();
-            }else {
-                alert(result.errorMessage);
+                findPartList();
             }
         },
         error:function(){
+            stopLoad();
             alert("系统服务内部异常！");
         }
     });
 }
+
+//============================章节管理结束=====================================//

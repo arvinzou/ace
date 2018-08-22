@@ -108,7 +108,9 @@ function audit(){
             })
         },
         success:function(result){
+
             stopLoad();
+            $("#audit").modal('hide');
             alert(result.errorMessage);
             if(result.status == 0) {
                 getPageList();

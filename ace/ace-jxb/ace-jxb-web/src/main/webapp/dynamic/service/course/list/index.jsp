@@ -183,11 +183,11 @@
     <script id="chapterTemp" type="text/template">
         {@each data as item,index} {@if index == 0}
         <li class="active" datattr="\${item.id}" onclick="changeChapter('\${item.id}');">
-            <a href="#tab_15_1" data-toggle="tab" aria-expanded="true">\${item.name} </a>
+            <a href="#tab_15_1" data-toggle="tab" aria-expanded="true">第\${parseInt(index)+1}章 \${item.name} </a>
         </li>
         {@else}
         <li datattr="\${item.id}" onclick="changeChapter('\${item.id}');">
-            <a href="#tab_15_1" data-toggle="tab" aria-expanded="false">\${item.name} </a>
+            <a href="#tab_15_1" data-toggle="tab" aria-expanded="false">第\${parseInt(index)+1}章 \${item.name} </a>
         </li>
         {@/if} {@/each}
     </script>
@@ -307,7 +307,7 @@
                     </button>
                     <h4 class="modal-title" id="gridSystemModalLabe2">章节管理</h4>
                 </div>
-                <div>
+                <div class="modal-body">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -321,16 +321,7 @@
                                         <font style="vertical-align: inherit;"> 章节名称 </font>
                                     </font>
                                 </th>
-                                <th width="20%">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;"> 显示顺序 </font>
-                                    </font>
-                                </th>
-                                <th width="20%">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;"> 创建时间 </font>
-                                    </font>
-                                </th>
+
                                 <th width="20%">
                                     <font style="vertical-align: inherit;">
                                         <font style="vertical-align: inherit;"> 操作 </font>
@@ -349,29 +340,21 @@
     <script id="editChapterTemp" type="text/template">
         {@each data as item, index}
         <tr>
-            <td width="10%">
+            <td>
                 <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">\${parseInt(index)+1}</font>
+                    <font style="vertical-align: inherit;">第\${parseInt(index)+1}章</font>
                 </font>
             </td>
-            <td width="30%">
+            <td  id="chapter-\${item.id}">
                 <input name="chapterName" type="text" value="\${item.name}">
             </td>
-            <td width="20%">
-                <input name="displaySeq" type="text" value="\${item.displaySeq}" />
-            </td>
-            <td width="20%">
-                <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;"> \${item.createDate} </font>
-                </font>
-            </td>
-            <td width="20%">
+
+            <td>
                 <a href="javascript:void(0);" onclick="updateChapter('\${item.id}');">修改</a>|
                 <a href="javascript:void(0);" onclick="deleteChapter('\${item.id}');">删除</a>
             </td>
         </tr>
         {@/each}
     </script>
-
 
     </html>
