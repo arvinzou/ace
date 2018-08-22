@@ -101,7 +101,7 @@
                 </div>
                 <div class="row">
                 <div class="col-xs-3 col-md-3">
-                <img src="img/headImg.png" class="head_img" />
+                <img src="\${data.counselor.imagePhotoUrl}" class="head_img" />
                 </div>
                 <div class="col-xs-6 col-md-6">
                 <p class="teacher_name">\${data.counselor.name}</p>
