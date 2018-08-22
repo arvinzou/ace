@@ -14,13 +14,6 @@ function initData(){
             if(result.data == 'unregister'){   //跳转到注册页面
                 window.location.href = contextPath + '/www/view/regist/regist.html';
             }else{
-                try{
-                    signStatus = result.data.signInfo.status;
-                }catch(e){}
-                if(signStatus == '2'){
-                    $("#signIn").text("已签到");
-                    $("#signIn").removeClass('sign_btn').addClass('signed');
-                }
                 if(result.status == 0 && result.data.memberType == '1') {
                     consulorId = result.data.counselor.id;
                     var myInfo = document.getElementById('myInfo').innerHTML;
@@ -36,6 +29,13 @@ function initData(){
                 }else if(result.status == 0 && result.data.memberType == '2'){
                     window.location.href = contextPath + '/www/view/member/index.jsp'
 
+                }
+                try{
+                    signStatus = result.data.signInfo.status;
+                }catch(e){}
+                if(signStatus == '2'){
+                    $("#signIn").text("已签到");
+                    $("#signIn").removeClass('sign_btn').addClass('signed');
                 }
             }
         },
