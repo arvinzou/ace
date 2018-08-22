@@ -180,15 +180,13 @@ var uploader;
 
 function initEvents() {
     $('#img-uploader').on('show.bs.modal', function (event) {
+        $('.progress-bar-success').css('width', '0%');
         var button = $(event.relatedTarget);
         console.log(button);
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
         againadd = button.data('againadd');
-        console.log(xsize + "/" + ysize);
-        console.log(cover);
-        console.log(button["0"].src);
         preImg(button["0"].src);
     });
 }
@@ -239,7 +237,7 @@ function initUpload() {
                 '     </div>';
             $('#indexImg').before($(html));
             var index = $('#indexImg').siblings().length;
-            if (index == 4) {
+            if (index == 5) {
                 $('#indexImg').hide();
             }
         } else {
