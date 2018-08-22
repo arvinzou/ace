@@ -12,6 +12,7 @@
         <result column="imagePhotoUrl" jdbcType="VARCHAR" property="imagePhotoUrl"/>
         <result column="visitCardUrl" jdbcType="VARCHAR" property="visitCardUrl"/>
         <result column="idCard" jdbcType="CHAR" property="idCard"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
         <result column="idCardImgUrl" jdbcType="VARCHAR" property="idCardImgUrl"/>
         <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo"/>
         <result column="certificateImgUrl" jdbcType="VARCHAR" property="certificateImgUrl"/>
@@ -27,7 +28,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
-        idCard, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, peopleNum,duration, income,
+        idCard,status, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, peopleNum,duration, income,
     account, level, createDate, profile
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -44,14 +45,15 @@
     insert into counselor (id, studioId, name,
       certification, tags, years,
       mobile, imagePhotoUrl, visitCardUrl,
-      idCard, idCardImgUrl, certificateNo,
+        idCard, status, idCardImgUrl, certificateNo,
         certificateImgUrl, evidenceImgUrl, lm,peopleNum,duration,
       income, account, level,
       createDate, profile)
     values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{certification,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR}, #{imagePhotoUrl,jdbcType=VARCHAR}, #{visitCardUrl,jdbcType=VARCHAR},
-      #{idCard,jdbcType=CHAR}, #{idCardImgUrl,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR},
+        #{idCard,jdbcType=CHAR},#{status,jdbcType=CHAR}, #{idCardImgUrl,jdbcType=VARCHAR},
+        #{certificateNo,jdbcType=VARCHAR},
         #{certificateImgUrl,jdbcType=VARCHAR}, #{evidenceImgUrl,jdbcType=VARCHAR}, #{lm,jdbcType=INTEGER},
         #{peopleNum,jdbcType=INTEGER},#{duration,jdbcType=INTEGER},
       #{income,jdbcType=DECIMAL}, #{account,jdbcType=DECIMAL}, #{level,jdbcType=VARCHAR},
@@ -89,6 +91,9 @@
             </if>
             <if test="idCard != null">
                 idCard,
+            </if>
+            <if test="status != null">
+                status,
             </if>
             <if test="idCardImgUrl != null">
                 idCardImgUrl,
@@ -158,6 +163,9 @@
             <if test="idCard != null">
                 #{idCard,jdbcType=CHAR},
             </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
             <if test="idCardImgUrl != null">
                 #{idCardImgUrl,jdbcType=VARCHAR},
             </if>
@@ -226,6 +234,9 @@
             <if test="idCard != null">
                 idCard = #{idCard,jdbcType=CHAR},
             </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
             <if test="idCardImgUrl != null">
                 idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
             </if>
@@ -276,6 +287,7 @@
       imagePhotoUrl = #{imagePhotoUrl,jdbcType=VARCHAR},
       visitCardUrl = #{visitCardUrl,jdbcType=VARCHAR},
       idCard = #{idCard,jdbcType=CHAR},
+        status = #{status,jdbcType=CHAR},
       idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
       certificateNo = #{certificateNo,jdbcType=VARCHAR},
       certificateImgUrl = #{certificateImgUrl,jdbcType=VARCHAR},
@@ -298,7 +310,8 @@
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
-        t.idCard, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm,t.peopleNum, t.duration,
+        t.idCard t.status, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm,t.peopleNum,
+        t.duration,
         t.income,
         t.account, t.level, t.createDate, t.profile
     </sql>
@@ -331,7 +344,7 @@
         from counselor t
         left join studio s on s.id = t.studioId
         left join teacher_audit ta on ta.counselorId=t.id
-        where 1=1
+        where t.status <![CDATA[ <> ]]> 0
         <if test="condition.studioId !=null and condition.studioId !=&quot;&quot;">
             and t.studioId = #{condition.studioId,jdbcType=VARCHAR}
         </if>
@@ -365,7 +378,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Counselor">
         select count(1)
         from counselor
-        where 1=1
+        where status <![CDATA[ <> ]]> 0
     </select>
 
 </mapper>

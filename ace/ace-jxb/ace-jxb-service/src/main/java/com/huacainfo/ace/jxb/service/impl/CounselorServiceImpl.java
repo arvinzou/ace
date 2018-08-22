@@ -136,6 +136,7 @@ public class CounselorServiceImpl implements CounselorService {
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
+        o.setStatus("1");
         counselorDao.insertSelective(o);
         dataBaseLogService.log("添加咨询师", "咨询师", "",
                 o.getId(), o.getId(), userProp);
@@ -222,8 +223,10 @@ public class CounselorServiceImpl implements CounselorService {
     @Override
     public MessageResponse deleteCounselorByCounselorId(String id, UserProp userProp)
             throws Exception {
-
-        counselorDao.deleteByPrimaryKey(id);
+        Counselor counselor = new Counselor();
+        counselor.setId(id);
+        counselor.setStatus("0");
+        counselorDao.updateByPrimaryKeySelective(counselor);
         dataBaseLogService.log("删除咨询师", "咨询师",
                 String.valueOf(id), String.valueOf(id), "咨询师", userProp);
         return new MessageResponse(0, "咨询师删除完成！");
