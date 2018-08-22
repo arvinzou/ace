@@ -22,7 +22,7 @@ body{
 }
 .room{
 	width: 100%;
-	height: 2.666666rem;
+	height: 3.2rem;
 	border-radius: 0.133333rem;
 	background: #FFFFFF;
 }
@@ -63,4 +63,13 @@ body{
 .invatation p{
 	font-size: 0.293333rem;
 	color: #0EC8C4;
+}
+.consultTime{
+	font-size: 0.32rem;
+	color: #A0A7B6;
+}
+.light{
+	font-size: 0.4rem;
+	color: #FF7C12;
+	font-weight: bold;
 }

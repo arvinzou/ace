@@ -21,27 +21,27 @@
 
 		<script id="myorderTemp" type="text/template">
 			{@each data as item,index}
-            <div class="row roomlist">
+            <div class="row roomlist" onclick="showDetail('\${item.id}');">
                 <div class="row room">
 					<div class="row">
 						<div class="col-xs-4 col-sm-4 topsize">
-							<div class="img_box"><img src=""/></div>
+							<div class="img_box"><img src="\${item.consumerImgUrl}"/></div>
 						</div>
 						<div class="col-xs-8 col-sm-8 topsize">
 							<p class="workroom_title">\${item.consumerName}</p>
 							<p class="workroom_detail">
 								{@if item.consultProduct.type == '1'}
-								<span class="edge">电话咨询 \${item.amount}</span>
+								<span class="edge">电话咨询 <span class="light">\${item.amount}次</span> </span>
 								{@else if item.consultProduct.type == '2'}
-								<span class="edge">视频咨询 \${item.amount}</span>
+								<span class="edge">视频咨询 <span class="light">\${item.amount}次</span></span>
 								{@else if item.consultProduct.type == '3'}
-								<span class="edge">面对面咨询 \${item.amount}</span>
+								<span class="edge">面对面咨询<span class="light">\${item.amount}次</span></span>
 								{@/if}
-								<span class="edge">支付金额 \${item.payMoney}</span></p>
+								<span class="edge">支付金额 <span class="light">¥\${item.payMoney}</span></span></p>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-xs-12 col-sm-12">预约时间：\${item.consultOrder.reserveDate}</div>
+					<div class="row" style="padding-top: 0.2rem;padding-bottom: 0.2rem;border-top: 1px solid #F7F8FC;">
+						<div class="col-xs-12 col-sm-12 consultTime">预约时间：\${item.consultOrder.reserveDate}</div>
 					</div>
                 </div>
 
