@@ -100,6 +100,7 @@ function initJcrop() {
     $target.Jcrop({
         onChange: updatePreview,
         onSelect: updatePreview,
+        boxWidth: 500,
         aspectRatio: xsize / ysize,
         setSelect: [20, 20, 400, 400],
     }, function () {
