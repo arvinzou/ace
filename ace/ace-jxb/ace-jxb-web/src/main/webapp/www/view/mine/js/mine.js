@@ -28,7 +28,6 @@ function initData(){
                     $(".sign_info").html(signText);
                 }else if(result.status == 0 && result.data.memberType == '2'){
                     window.location.href = contextPath + '/www/view/member/index.jsp'
-
                 }
                 try{
                     signStatus = result.data.signInfo.status;
