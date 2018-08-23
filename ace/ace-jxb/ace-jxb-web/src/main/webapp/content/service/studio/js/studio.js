@@ -7,6 +7,8 @@ window.onload = function () {
 
 var editor;
 
+
+/*初始化富文本框*/
 function initDoc() {
     editor = new Simditor({
         textarea: $('#notNull1'),
@@ -21,13 +23,13 @@ function initDoc() {
     });
 }
 
-
+/*删除图片*/
 function deleteBanner() {
     $(this).parent().parent().remove();
     $('#indexImg').show();
 }
 
-
+/*转到工作室成员列表*/
 function userStudioStaff(id) {
     if (id) {
         window.location.href = '../userStudioStaff/index.jsp?id=' + id;
@@ -50,6 +52,7 @@ function createMyStudio() {
         if (result.status == 0) {
             alert("工作室创建成功");
             $('#studioInfoModal').modal('hide');
+            getMyStudioList();
             return;
         }
         alert("信息更新失败,请稍后再试！");
@@ -141,12 +144,15 @@ function modifyStudio() {
         if (result.status == 0) {
             alert("工作室修改成功");
             $('#studioInfoModal').modal('hide');
+            getMyStudioList();
             return;
         }
         alert("信息更新失败,请稍后再试！");
     })
 }
 
+
+/*获取单个工作室信息*/
 function getStudioInfo(id) {
     var url = "/jxb/studio/selectStudioByPrimaryKey";
     var data = {
@@ -159,6 +165,8 @@ function getStudioInfo(id) {
     });
 }
 
+
+/*修改数据钱填充数据*/
 function fillForm(data) {
     for (key in data) {
         if (key.indexOf("Url") != -1) {
@@ -185,7 +193,7 @@ function fillForm(data) {
 }
 
 
-
+/*提交表单获取数据*/
 function submitForm() {
     var formObject = {
         name: "notNull",
