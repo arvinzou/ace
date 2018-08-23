@@ -77,11 +77,11 @@
                                                         <table class="table table-hover">
                                                             <thead>
                                                             <tr>
-                                                                <th width="5%"> ＃ </th>
+                                                               
                                                                 <th width="10%"> 昵称 </th>
                                                                 <th width="20%"> 名称 </th>
                                                                 <th width="15%"> 好评度 </th>
-                                                                <th width="25%"> 评论内容 </th>
+                                                                <th width="30%"> 评论内容 </th>
                                                                 <th width="15%"> 评论时间 </th>
                                                                 <th width="10%"> 操作 </th>
                                                             </tr>
@@ -104,7 +104,7 @@
                                 <script id="list" type="text/template">
                                     {@each data as item,index}
                                     <tr>
-                                        <td> \${parseInt(index)+1} </td>
+          
                                         <td style="text-align: center;"> 
 																				<div class="header-box">
 																				 <div class="header-img"><img src="\${item.headimgurl}" class="headimg"></div>
