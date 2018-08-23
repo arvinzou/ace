@@ -79,7 +79,7 @@ function initPage() {
 					minlength: 15,
 					maxlength:200
 				},
-				duation: {
+				duration: {
 					required: true,
 					minlength: 2,
 					maxlength:10
@@ -96,7 +96,7 @@ function initPage() {
 					minlength:"音频地址至少15个字符",
 					maxlength:"音频地址长度不能超过200"
 				},
-				duation: {
+				duration: {
 					required: "请输入课件时长",
 					minlength:"课件时长至少2个字符",
 					maxlength:"课件时长长度不能超过10"
