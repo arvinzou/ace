@@ -43,6 +43,10 @@ function save(params) {
         success: function (result) {
             stopLoad();
 			alert(result.errorMessage);
+			if(result.status==0){
+				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?id="+urlParams.courseId
+			}
+			
         },
         error: function () {
             alert("系统服务内部异常！");
@@ -83,9 +87,9 @@ function initPage() {
 			},
 			messages: {
 				name: {
-					required: "请输入课程名称",
-					minlength:"课程名称至少四个字符",
-					maxlength:"课程名称长度不能超过28"
+					required: "请输入课件名称",
+					minlength:"课件名称至少四个字符",
+					maxlength:"课件名称长度不能超过28"
 				},
 				mediUrl: {
 					required: "音频地址不能为空",
@@ -93,9 +97,9 @@ function initPage() {
 					maxlength:"音频地址长度不能超过200"
 				},
 				duation: {
-					required: "请输入课程时长",
-					minlength:"课程时长至少2个字符",
-					maxlength:"课程时长长度不能超过10"
+					required: "请输入课件时长",
+					minlength:"课件时长至少2个字符",
+					maxlength:"课件时长长度不能超过10"
 				}
 			}
 		});

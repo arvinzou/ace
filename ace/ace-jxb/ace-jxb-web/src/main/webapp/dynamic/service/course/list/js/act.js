@@ -229,4 +229,9 @@ function deletePartCourse(id,name){
 	}
 	
 }
+
+function editCourseSource(id){
+	var partId = $("#chapters .active").attr("datattr");
+	window.location.href = contextPath+ '/dynamic/service/course/list/edit/index.jsp?courseId='+urlParams.id+'&partId='+partId+'&id='+id;
+}
 //============================课程管理结束=====================================//
