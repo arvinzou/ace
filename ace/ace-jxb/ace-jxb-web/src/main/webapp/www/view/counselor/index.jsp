@@ -74,7 +74,7 @@
             <div class="row">
             <h3 class="sec_title">个人简介</h3>
             <p class="detail">
-				\${data.counselorVo.profile}
+				\$\${data.counselorVo.profile}
         	</p>
         </div>
         <div class="row">
