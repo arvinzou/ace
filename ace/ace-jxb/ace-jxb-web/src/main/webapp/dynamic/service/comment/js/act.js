@@ -14,70 +14,78 @@ function App() {
 }
 
 window.onload = function (){
-    initpage();
+    initPage();
 }
-
-function initpage() {
+var params={limit:2};
+function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
-        pageSize: 10,
-        visiblePages: 20,
+        pageSize: params.limit,
+        visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            getCourseCmtList(num, type);
+            params['start']=(num-1)*params.limit;
+            params['initType']=type;
+            getPageList();
         }
     });
 }
-
-function getCourseCmtList(num, type) {
+function t_query(){
+    getPageList();
+    return false;
+}
+function getPageList() {
     var url = contextPath+ "/courseCmt/findCourseCmtList";
-    var data = {
-        page: num,
-        limit: 10,
-    };
-    $.getJSON(url, data, function (result) {
+    params['nickname']=$("input[name=keyword]").val();
+    startLoad();
+    $.getJSON(url, params, function (result) {
+        stopLoad();
         if (result.status == 0) {
-            if (type == "init") {
+            if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: result.total,
+                    totalCounts: result.total
                 });
             }
-            viewHtml("cmtList", result.rows, "list");
+            renderPage("cmtList", result.rows, "list");
         }
     })
 }
 
-function viewHtml(IDom, data, tempId) {
-    var navitem = document.getElementById(tempId).innerHTML;
-    var html = juicer(navitem, {
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
         data: data,
     });
     $("#" + IDom).html(html);
 }
 
 function deleteCmt(obj,cmtId){
-    $.ajax({
-        url: contextPath+ "/courseCmt/deleteCourseCmtByCourseCmtId",
-        type:"post",
-        async:false,
-        data:{
-            jsons:JSON.stringify({
-                id : cmtId
-            })
-        },
-        success:function(result){
-            if(result.status == 0) {
-                alert("删除成功！");
-                $(obj).parent().parent().remove();
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+	if(confirm("确定要删除？")){
+		startLoad();
+		$.ajax({
+			url: contextPath+ "/courseCmt/deleteCourseCmtByCourseCmtId",
+			type:"post",
+			async:false,
+			data:{
+				jsons:JSON.stringify({
+					id : cmtId
+				})
+			},
+			success:function(result){
+				stopLoad();
+				alert(result.errorMessage);
+				if(result.status == 0) {
+					getPageList();
+				}
+			},
+			error:function(){
+				stopLoad();
+				alert("系统服务内部异常！");
+			}
+		});
+	}
+	
 }

@@ -66,16 +66,20 @@
             <div class="row">
             <h3 class="sec_title">擅长领域</h3>
             <ul class="tagboard">
+                {@if data.counselorVo.tags != undefined}
 				{@each data.counselorVo.tags.split(',') as item,index}
             	<li>\${item}</li>
 				{@/each}
+                {@/if}
             </ul>
             </div>
             <div class="row">
-            <h3 class="sec_title">个人简介</h3>
-            <p class="detail">
-				\$\${data.counselorVo.profile}
-        	</p>
+            	<div class="row"><div class="col-xs-12 col-sm-12" style="padding-left: 0 !important;"><h3 class="sec_title">个人简介</h3></div></div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<p class="detail">\$\${data.counselorVo.profile}</p>
+					</div>
+				</div>
         </div>
         <div class="row">
             <h3 class="sec_title">咨询方式</h3>
