@@ -47,15 +47,15 @@
             </div>
             <div class="row">
             <div class="col-xs-4 col-sm-4 statics">
-            <p class="case_num">28</p>
+            <p class="case_num">\${data.counselorVo.peopleNum}</p>
             <p class="case_title">个案人数(人)</p>
             </div>
             <div class="col-xs-4 col-sm-4 statics">
-            <p class="course_num">300</p>
+            <p class="course_num">\${data.counselorVo.duration}</p>
             <p class="course_title">授课时长(时)</p>
             </div>
             <div class="col-xs-4 col-sm-4 statics">
-            <p class="score_num">5.0</p>
+            <p class="score_num">\${data.counselorVo.level}</p>
             <p class="score_title">评分</p>
             </div>
             </div>
@@ -72,10 +72,12 @@
             </ul>
             </div>
             <div class="row">
-            <h3 class="sec_title">个人简介</h3>
-            <p class="detail">
-				\${data.counselorVo.profile}
-        	</p>
+            	<div class="row"><div class="col-xs-12 col-sm-12" style="padding-left: 0 !important;"><h3 class="sec_title">个人简介</h3></div></div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12">
+						<p class="detail">\$\${data.counselorVo.profile}</p>
+					</div>
+				</div>
         </div>
         <div class="row">
             <h3 class="sec_title">咨询方式</h3>
@@ -86,7 +88,7 @@
 				<div class="col-xs-4 col-sm-4 statics">
 					<p class="case_num">\${consultType.price}</p>
 					<p><span class="unit">（元/次）</span></p>
-					<p class="case_title">语音咨询</p>
+					<p class="case_title">电话咨询</p>
 				</div>
 				{@else if consultType.type == '2'}
 				<div class="col-xs-4 col-sm-4 statics">

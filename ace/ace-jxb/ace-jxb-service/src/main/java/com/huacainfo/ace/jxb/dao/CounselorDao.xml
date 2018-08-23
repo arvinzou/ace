@@ -13,7 +13,9 @@
         <result column="visitCardUrl" jdbcType="VARCHAR" property="visitCardUrl"/>
         <result column="idCard" jdbcType="CHAR" property="idCard"/>
         <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="cityCode" jdbcType="CHAR" property="cityCode"/>
         <result column="idCardImgUrl" jdbcType="VARCHAR" property="idCardImgUrl"/>
+        <result column="idCardSideImgUrl" jdbcType="VARCHAR" property="idCardSideImgUrl"/>
         <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo"/>
         <result column="certificateImgUrl" jdbcType="VARCHAR" property="certificateImgUrl"/>
         <result column="evidenceImgUrl" jdbcType="VARCHAR" property="evidenceImgUrl"/>
@@ -28,7 +30,8 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
-        idCard,status, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, peopleNum,duration, income,
+        idCard,status,cityCode, idCardImgUrl, idCardSideImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm,
+        peopleNum,duration, income,
     account, level, createDate, profile
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -45,14 +48,15 @@
     insert into counselor (id, studioId, name,
       certification, tags, years,
       mobile, imagePhotoUrl, visitCardUrl,
-        idCard, status, idCardImgUrl, certificateNo,
+        idCard, status, cityCode, idCardImgUrl, idCardSideImgUrl, certificateNo,
         certificateImgUrl, evidenceImgUrl, lm,peopleNum,duration,
       income, account, level,
       createDate, profile)
     values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{certification,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR}, #{imagePhotoUrl,jdbcType=VARCHAR}, #{visitCardUrl,jdbcType=VARCHAR},
-        #{idCard,jdbcType=CHAR},#{status,jdbcType=CHAR}, #{idCardImgUrl,jdbcType=VARCHAR},
+        #{idCard,jdbcType=CHAR},#{status,jdbcType=CHAR}, #{cityCode,jdbcType=CHAR},
+        #{idCardImgUrl,jdbcType=VARCHAR},#{idCardSideImgUrl,jdbcType=VARCHAR},
         #{certificateNo,jdbcType=VARCHAR},
         #{certificateImgUrl,jdbcType=VARCHAR}, #{evidenceImgUrl,jdbcType=VARCHAR}, #{lm,jdbcType=INTEGER},
         #{peopleNum,jdbcType=INTEGER},#{duration,jdbcType=INTEGER},
@@ -95,8 +99,14 @@
             <if test="status != null">
                 status,
             </if>
+            <if test="cityCode != null">
+                cityCode,
+            </if>
             <if test="idCardImgUrl != null">
                 idCardImgUrl,
+            </if>
+            <if test="idCardSideImgUrl != null">
+                idCardSideImgUrl,
             </if>
             <if test="certificateNo != null">
                 certificateNo,
@@ -166,8 +176,14 @@
             <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
+            <if test="cityCode != null">
+                #{cityCode,jdbcType=CHAR},
+            </if>
             <if test="idCardImgUrl != null">
                 #{idCardImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardSideImgUrl != null">
+                #{idCardSideImgUrl,jdbcType=VARCHAR},
             </if>
             <if test="certificateNo != null">
                 #{certificateNo,jdbcType=VARCHAR},
@@ -237,8 +253,14 @@
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
+            <if test="cityCode != null">
+                cityCode = #{cityCode,jdbcType=CHAR},
+            </if>
             <if test="idCardImgUrl != null">
                 idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="idCardSideImgUrl != null">
+                idCardSideImgUrl = #{idCardSideImgUrl,jdbcType=VARCHAR},
             </if>
             <if test="certificateNo != null">
                 certificateNo = #{certificateNo,jdbcType=VARCHAR},
@@ -288,7 +310,9 @@
       visitCardUrl = #{visitCardUrl,jdbcType=VARCHAR},
       idCard = #{idCard,jdbcType=CHAR},
         status = #{status,jdbcType=CHAR},
+        cityCode = #{cityCode,jdbcType=CHAR},
       idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
+        idCardSideImgUrl = #{idCardSideImgUrl,jdbcType=VARCHAR},
       certificateNo = #{certificateNo,jdbcType=VARCHAR},
       certificateImgUrl = #{certificateImgUrl,jdbcType=VARCHAR},
       evidenceImgUrl = #{evidenceImgUrl,jdbcType=VARCHAR},
@@ -314,8 +338,11 @@
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
-        t.idCard, t.status, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm,t.peopleNum,
-        t.duration, t.income, t.account, t.level, t.createDate, t.profile
+        t.idCard, t.status,t.cityCode, t.idCardImgUrl,t.idCardSideImgUrl, t.certificateNo, t.certificateImgUrl,
+        t.evidenceImgUrl, t.lm,t.peopleNum,
+        t.duration,
+        t.income,
+        t.account, t.level, t.createDate, t.profile
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -383,4 +410,17 @@
         where status <![CDATA[ <> ]]> 0
     </select>
 
+
+    <delete id="deleteUsersRole" parameterType="java.lang.String">
+        DELETE from portal.users_role
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteUserCfg" parameterType="java.lang.String">
+        DELETE from portal.user_cfg
+        where userId = #{userId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteUsers" parameterType="java.lang.String">
+        DELETE from portal.users
+        where user_id =  #{userId,jdbcType=VARCHAR}
+    </delete>
 </mapper>

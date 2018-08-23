@@ -82,4 +82,12 @@ public interface TeacherAuditService {
      */
     MessageResponse deleteTeacherAuditByTeacherAuditId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 咨询师资格审核
+     *
+     * @param record 参数
+     * @return
+     * @throws Exception
+     */
+    MessageResponse audit(TeacherAudit record, UserProp curUserProp) throws Exception;
 }

@@ -1,14 +1,17 @@
 package com.huacainfo.ace.jxb.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.jxb.dao.TeacherAuditDao;
 import com.huacainfo.ace.jxb.model.TeacherAudit;
+import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.service.TeacherAuditService;
 import com.huacainfo.ace.jxb.vo.TeacherAuditQVo;
 import com.huacainfo.ace.jxb.vo.TeacherAuditVo;
@@ -33,6 +36,8 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
     private TeacherAuditDao teacherAuditDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private BisMsgNoticeService bisMsgNoticeService;
 
     /**
      * @throws
@@ -49,9 +54,8 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
      * @version: 2018-07-21
      */
     @Override
-    public PageResult
-            <TeacherAuditVo> findTeacherAuditList(TeacherAuditQVo condition, int start,
-                                                  int limit, String orderBy) throws Exception {
+    public PageResult<TeacherAuditVo> findTeacherAuditList(TeacherAuditQVo condition, int start,
+                                                           int limit, String orderBy) throws Exception {
         PageResult<TeacherAuditVo> rst = new PageResult<>();
         List<TeacherAuditVo> list = teacherAuditDao.findList(condition,
                 start, limit, orderBy);
@@ -92,11 +96,10 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
             return new MessageResponse(1, "审核结果不能为空！");
         }
 
-
-//        int temp = teacherAuditDao.isExit(o);
-//        if (temp > 0) {
-//            return new MessageResponse(1, "咨询师审核记录名称重复！");
-//        }
+        int temp = teacherAuditDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "咨询师审核记录名称重复！");
+        }
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
@@ -180,6 +183,42 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
                 String.valueOf(id),
                 String.valueOf(id), "咨询师审核记录", userProp);
         return new MessageResponse(0, "咨询师审核记录删除完成！");
+    }
+
+    /**
+     * 咨询师资格审核
+     *
+     * @param record 参数
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse audit(TeacherAudit record, UserProp curUserProp) throws Exception {
+        TeacherAudit obj = teacherAuditDao.findByCounselorId(record.getCounselorId());
+        record.setAuditor(curUserProp.getName());
+
+        MessageResponse rtn;
+        if (null == obj) {
+            rtn = insertTeacherAudit(record, curUserProp);
+        } else {
+            record.setId(obj.getId());
+            record.setCreateDate(obj.getCreateDate());
+            rtn = updateTeacherAudit(record, curUserProp);
+        }
+
+        if (rtn.getStatus() == ResultCode.SUCCESS) {
+            //推送审核结果通知
+            try {
+                ResultResponse rs = bisMsgNoticeService.counselorAuditMsg(record);
+                logger.debug("咨询师审核消息推送结果：{}", rs.toString());
+            } catch (Exception e) {
+                logger.error("咨询师审核消息推送失败[{}]：\n{}", record.getCounselorId(), e);
+            }
+
+            return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+        }
+
+        return rtn;
     }
 
 }

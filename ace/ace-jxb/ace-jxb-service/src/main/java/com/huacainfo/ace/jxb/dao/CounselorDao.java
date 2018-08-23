@@ -32,4 +32,12 @@ public interface CounselorDao {
 
     int isExit(Counselor record);
 
+    /**
+     * 清理数据工具
+     */
+    int deleteUsersRole(String userId);
+
+    int deleteUserCfg(String userId);
+
+    int deleteUsers(String userId);
 }

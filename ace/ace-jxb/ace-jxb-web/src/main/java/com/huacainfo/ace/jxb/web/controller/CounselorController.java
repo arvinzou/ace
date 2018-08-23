@@ -5,12 +5,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.TeacherAudit;
@@ -74,8 +72,6 @@ public class CounselorController extends JxbBaseController {
         condition.setId(this.getCurUserProp().getUserId());
         return counselorService.findMyCounselors(condition, (page.getPage() - 1) * page.getLimit(), page.getLimit(), page.getOrderBy());
     }
-
-
 
 
     /**
@@ -201,8 +197,11 @@ public class CounselorController extends JxbBaseController {
             return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
         }
         TeacherAudit record = JsonUtil.toObject(data, TeacherAudit.class);
+        if (StringUtil.isEmpty(record.getCounselorId())) {
+            return new MessageResponse(ResultCode.FAIL, "缺少咨询师信息");
+        }
 
-        return teacherAuditService.insertTeacherAudit(record, getCurUserProp());
+        return teacherAuditService.audit(record, getCurUserProp());
     }
 }
 

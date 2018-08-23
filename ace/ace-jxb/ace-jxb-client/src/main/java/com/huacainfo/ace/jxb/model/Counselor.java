@@ -88,6 +88,25 @@ public class Counselor implements Serializable {
     private String profile;
 
     private String status;
+    private String cityCode;
+
+    private String idCardSideImgUrl;
+
+    public String getIdCardSideImgUrl() {
+        return idCardSideImgUrl;
+    }
+
+    public void setIdCardSideImgUrl(String idCardSideImgUrl) {
+        this.idCardSideImgUrl = idCardSideImgUrl;
+    }
+
+    public String getCityCode() {
+        return cityCode;
+    }
+
+    public void setCityCode(String cityCode) {
+        this.cityCode = cityCode;
+    }
 
     public String getStatus() {
         return status;
