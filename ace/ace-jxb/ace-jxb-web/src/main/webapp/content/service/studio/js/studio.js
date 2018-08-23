@@ -1,9 +1,7 @@
 window.onload = function () {
     getUserinfo();
     getMyStudioList();
-    getStudioInfo();
     initDoc();
-    $('.submit_btn').click(submitForm);
     $('#studioInfoModal .idCardBoxs').on('click', '.deleteBtn', deleteBanner);
 };
 
@@ -36,11 +34,44 @@ function userStudioStaff(id) {
     }
 }
 
-
-function detail() {
-    $('#studioInfo').modal('show');
+/*点击创建工作室*/
+function createStudio() {
+    $('.submit_btn').off("click");
+    $('.submit_btn').click(createMyStudio);
 }
 
+/*创建我的工作室*/
+function createMyStudio() {
+    var data = submitForm();
+    var url = '/jxb/studio/insertStudioVo';
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            alert("工作室创建成功");
+            cleanForm();
+            return;
+        }
+        alert("信息更新失败,请稍后再试！");
+
+    })
+}
+
+/*清空form表单*/
+function cleanForm() {
+    $('.modal input').val('');
+    $('.modal textarea').val('');
+    $('.modal #logo').prop('src', 'addImg.png');
+    $('.modal .imgSrc').remove();
+    $('#indexImg').show();
+    $('#studioInfoModal').modal('show');
+}
+
+/*查看工作室详情*/
+function detail(id) {
+    $('#studioInfo').modal('show');
+    getStudioInfo(id);
+}
+
+/*获取工作室列表*/
 function getMyStudioList() {
     var url = "/jxb/studio/getMyStudioList";
     $.getJSON(url, function (result) {
@@ -64,6 +95,7 @@ function getMyStudioList() {
 }
 
 
+/*获取我的信息*/
 function getUserinfo() {
     var url = "/jxb/counselor/getMyinfo"
     $.getJSON(url, function (result) {
@@ -74,7 +106,7 @@ function getUserinfo() {
     })
 }
 
-
+/*渲染我的信息*/
 function viewUserinfo(data) {
     for (key in data) {
         $('.user-' + key).text(data[key]);
@@ -85,18 +117,30 @@ function viewUserinfo(data) {
 
 var studioId;
 
+
+/*触发修改工作室*/
 function modify(id) {
     studioId = id;
     if (id) {
         getStudioInfo(id);
     }
-    $('.modal input').val('');
-    $('.modal textarea').val('');
-    $('.modal #logo').prop('src', 'addImg.png');
-    $('.modal .imgSrc').remove();
-    $('#indexImg').show();
-    $('#studioInfoModal').modal('show');
+    $('.submit_btn').off("click");
+    $('.submit_btn').click(modifyStudio);
 
+}
+
+/*提交工作室修改*/
+function modifyStudio() {
+    var url = '/jxb/studio/modifyStudio';
+    var data = submitForm();
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            alert("工作室创建成功");
+            cleanForm();
+        }
+        alert("信息更新失败,请稍后再试！");
+
+    })
 }
 
 function getStudioInfo(id) {
@@ -173,24 +217,10 @@ function submitForm() {
         imgURL[i] = url;
     }
     formObject.id = studioId;
-    var url = '/jxb/studio/modifyStudio';
-    var data = {
-        json: JSON.stringify({
-            object: JSON.stringify(formObject),
-            imgUrl: JSON.stringify(imgURL),
-        }),
-    }
-    $.post(url, data, function (result) {
-        if (result.status == 0) {
-            alert("信息更新成功");
-            $('body').on('hidden.bs.modal', '.modal', function () {
-                $('#studioInfoModal').removeData('bs.modal');
-            });
-            return;
-        }
-        alert("信息更新失败,请稍后再试！");
-
-    })
+    return JSON.stringify({
+        object: JSON.stringify(formObject),
+        imgUrl: JSON.stringify(imgURL),
+    });
 }
 
 
