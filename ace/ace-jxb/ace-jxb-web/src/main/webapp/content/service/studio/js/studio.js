@@ -5,7 +5,29 @@ window.onload = function () {
     $('#studioInfoModal .idCardBoxs').on('click', '.deleteBtn', deleteBanner);
 };
 
-var editor;
+var editor, mySwiper;
+
+/*初始化轮播图*/
+function initSwriper() {
+    mySwiper = new Swiper('.swiper-container', {
+        loop: true,
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    })
+}
 
 
 /*初始化富文本框*/
@@ -72,8 +94,27 @@ function cleanForm() {
 
 /*查看工作室详情*/
 function detail(id) {
+    // if(mySwiper){
+    //     mySwiper.destroy();
+    // }
     $('#studioInfo').modal('show');
-    getStudioInfo(id);
+    if (id) {
+        var url = "/jxb/studio/selectStudioByPrimaryKey";
+        var data = {
+            id: id
+        }
+        $.getJSON(url, data, function (result) {
+            if (result.status == 0) {
+                var navitem = document.getElementById('temp_modalstudioInfo').innerHTML;
+                var html = juicer(navitem, {
+                    data: result.value
+                });
+                $("#modalstudioInfo").html(html);
+                initSwriper();
+
+            }
+        });
+    }
 }
 
 /*获取工作室列表*/

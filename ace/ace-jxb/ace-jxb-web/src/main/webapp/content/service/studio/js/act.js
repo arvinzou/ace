@@ -2,10 +2,6 @@ var loading = {};
 
 function loadlocal() {
     var urls = [];
-
-    urls.push({path: portalPath, url: '', type: 'css'});
-    urls.push({path: portalPath, url: '', type: 'css'});
-
     urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
 
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
