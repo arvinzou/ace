@@ -1,6 +1,7 @@
 var loading = {};
 var primaryId = null;
 var videoUrl = null;
+var params={limit:5};
 function loadlocal() {
     var urls = [];
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
@@ -21,13 +22,11 @@ function App() {
 }
 
 window.onload = function(){
-    console.log(window.location.href);
     primaryId =urlParams.id;
-
     initPartList();
 }
 
-function initpage(partId) {
+function initPage(partId) {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
         pageSize: 10,
@@ -37,17 +36,18 @@ function initpage(partId) {
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            findPartCourseList(num, type, partId);
+			params['start']=(num-1)*params.limit;
+            params['initType']=type;
+			params['partId']=partId;
+            getPageList();
         }
     });
 }
-
-
 function initPartList(){
     var data = findPartList();
     try{
-        viewHtml('chapters', data.rows, 'chapterTemp');
-        initpage(data.rows[0].id);
+        renderPage('chapters', data.rows, 'chapterTemp');
+        initPage(data.rows[0].id);
     }catch(e){}
 }
 function findPartList(){
@@ -77,27 +77,23 @@ function findPartList(){
     });
     return resultData;
 }
-
-function findPartCourseList(num, type, partId){
+function getPageList(){
     var url = contextPath + "/courseSource/findCourseSourceList";
-    var data = {
-        page: num,
-        limit: 10,
-        partId: partId
-    };
-    $.getJSON(url, data, function (result) {
+	startLoad();
+    $.getJSON(url, params, function (result) {
+        stopLoad();
         if (result.status == 0) {
-            if (type == "init") {
+            if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: result.total,
+                    totalCounts: result.total
                 });
             }
-            viewHtml("courseList", result.rows, "courseTemp");
+            renderPage("courseList", result.rows, "courseTemp");
         }
     })
 }
 
-function viewHtml(IDom, data, tempId) {
+function renderPage(IDom, data, tempId) {
     var navitem = document.getElementById(tempId).innerHTML;
     var html = juicer(navitem, {
         data: data,
@@ -106,7 +102,7 @@ function viewHtml(IDom, data, tempId) {
 }
 
 function changeChapter(id){
-    initpage(id);
+    initPage(id);
 }
 
 function add(){
@@ -114,155 +110,9 @@ function add(){
     window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId;
 }
 
-function deletePartCourse(id){
-
-    $.ajax({
-        url: contextPath + "/courseSource/deleteCourseSourceByCourseSourceId",
-        type:"post",
-        async:false,
-        data:{jsons:JSON.stringify({
-                id: id
-            })
-        },
-        success:function(result){
-            if(result.status == 0) {
-                console.log(result);
-                alert("删除成功！");
-                window.location.reload();
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
-}
-
-function editCourseSource(id){
-    $.ajax({
-        url: contextPath + "/courseSource/selectCourseSourceByPrimaryKey",
-        type:"post",
-        async:false,
-        data:{
-            id: id
-        },
-        success:function(result){
-            if(result.status == 0) {
-                console.log(result);
-                viewHtml('sourceBasic', result.value, 'courseSourceTemp');
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
-
-
-    var video = new plupload.Uploader({
-        runtimes: 'html5,flash,silverlight,html4',
-        browse_button: 'video',
-        url: portalPath+ '/files/uploadFile.do',
-        file_data_name: 'file',
-        multi_selection: false,
-        resize: {
-            width: 1024,
-            height: 1024,
-            crop: true,
-            quality: 60,
-            preserve_headers: false
-        },
-        filters: {
-            max_file_size: '2048mb',
-            mime_types: [
-                {title: "files", extensions: "mp4,mp3"}
-            ]
-        },
-        init: {
-            FileFiltered: function (up, files) {
-                showUploadText('.viewPicture video', '.uploadText');
-                up.start();
-                return false;
-            },
-            UploadProgress: function(e, t) {
-                var r = t.percent;
-                $(".uploadPloadprogress").html("开始上传（" + r + "%）")
-            },
-            FileUploaded: function (uploader, file, responseObject) {
-                var rst = JSON.parse(responseObject.response);
-                viewCover('http://zx.huacainfo.com/'+rst.value[0], '.pictureContainer','.viewPicture video','.uploadText');
-                videoUrl = 'http://zx.huacainfo.com/'+rst.value[0];
-                console.log(rst.value[0]);
-            }
-        }
-    });
-    video.init();
-
-}
-
-function updateCourseSource(sourceId, partId){
-    var coursedoc = $("textarea[name = 'coursedoc']").val();
-    var free = $('input[name="tried"]:checked').val();
-    var duation = $("input[name = 'duation']").val();
-    $.ajax({
-        url: contextPath + "/courseSource/updateCourseSource",
-        type:"post",
-        async:false,
-        data:{
-            jsons:JSON.stringify({
-                id: sourceId,
-                courseId: primaryId,
-                partId: partId,
-                mediUrl: videoUrl,
-                duration: duation,
-                free: free
-            })
-        },
-        success:function(result){
-            if(result.status == 0) {
-                alert("修改成功！");
-                window.location.reload();
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
-}
-
-/*文件上传成功后*/
-function viewCover(img, clazz, imgClazz, textClazz) {
-    $(clazz).data('imgSrc',img);
-    var imagePath=img;
-    showUploadImg(imagePath, imgClazz, textClazz);
-}
-
-/*显示上传文字*/
-function showUploadText(imgClazz, textClazz) {
-    $(imgClazz).prop('src','');
-    $(textClazz).show();
-}
-
-/*显示上传图片*/
-function showUploadImg(imgpath, imgClazz, textClazz) {
-    $(imgClazz).removeClass('hidder').addClass('displayer');
-    $(imgClazz).prop('src',imgpath);
-    $(textClazz).hide();
-}
-
-function initPartListOnModal(){
-    var data = findPartList();
-    try{
-        viewHtml('chapter', data.rows, 'editChapterTemp');
-    }catch(e){}
-}
 //============================章节管理开始=====================================//
 
-function addSeries(){
+function addChapter(){
     var partName = $("input[name='partName']").val();
     if(partName == '' || partName == undefined){
         alert("章节名称不能为空！");
@@ -351,3 +201,32 @@ function deleteChapter(partId){
 }
 
 //============================章节管理结束=====================================//
+
+//============================课程管理开始=====================================//
+function deletePartCourse(id,name){
+	if(confirm("确定要删除"+name+"吗？")){
+		startLoad();
+		$.ajax({
+			url: contextPath + "/courseSource/deleteCourseSourceByCourseSourceId",
+			type:"post",
+			async:false,
+			data:{jsons:JSON.stringify({
+					id: id
+				})
+			},
+			success:function(result){
+				stopLoad();
+				alert(result.errorMessage);
+				if(result.status == 0) {
+					getPageList();
+				}
+			},
+			error:function(){
+				stopLoad();
+				alert("系统服务内部异常！");
+			}
+		});
+	}
+	
+}
+//============================课程管理结束=====================================//

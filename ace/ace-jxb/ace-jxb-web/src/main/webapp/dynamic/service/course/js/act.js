@@ -42,7 +42,7 @@ function t_query(){
 function getPageList() {
     var url = contextPath+ "/course/findCourseList";
      params['name']=$("input[name=keyword]").val();
-     startLoad();
+    startLoad();
     $.getJSON(url, params, function (result) {
         stopLoad();
         if (result.status == 0) {

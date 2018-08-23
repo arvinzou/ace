@@ -81,40 +81,28 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
+																																			
                                                                         <th width="5%">
-                                                                            <font style="vertical-align: inherit;">
-                                                                                <font style="vertical-align: inherit;"> ＃ </font>
-                                                                            </font>
+                                                                            ＃
+                                                                        </th>
+																																				<th width="20%">
+																																					课程名称
+																																				</th>
+                                                                        <th width="15%">
+                                                                           课程
+                                                                        </th>
+                                                                        
+                                                                        <th width="15%">
+                                                                           创建时间
                                                                         </th>
                                                                         <th width="15%">
-                                                                            <font style="vertical-align: inherit;">
-                                                                                <font style="vertical-align: inherit;"> 课程文件 </font>
-                                                                            </font>
-                                                                        </th>
-                                                                        <th width="20%">
-                                                                            <font style="vertical-align: inherit;">
-                                                                                <font style="vertical-align: inherit;"> 课程名称 </font>
-                                                                            </font>
-                                                                        </th>
-                                                                        <th width="15%">
-                                                                            <font style="vertical-align: inherit;">
-                                                                                <font style="vertical-align: inherit;"> 创建时间 </font>
-                                                                            </font>
-                                                                        </th>
-                                                                        <th width="15%">
-                                                                            <font style="vertical-align: inherit;">
-                                                                                <font style="vertical-align: inherit;"> 时长 </font>
-                                                                            </font>
+                                                                            时长
                                                                         </th>
                                                                         <th width="10%">
-                                                                            <font style="vertical-align: inherit;">
-                                                                                <font style="vertical-align: inherit;"> 是否可试听 </font>
-                                                                            </font>
+                                                                            是否可试听
                                                                         </th>
                                                                         <th width="20%">
-                                                                            <font style="vertical-align: inherit;">
-                                                                                <font style="vertical-align: inherit;"> 操作 </font>
-                                                                            </font>
+                                                                            操作
                                                                         </th>
                                                                     </tr>
                                                                 </thead>
@@ -172,7 +160,7 @@
             </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn green" onclick="addSeries();">确定</button>
+                    <button type="button" class="btn green" onclick="addChapter();">确定</button>
                 </div>
             </div>
         </div>
@@ -196,106 +184,36 @@
         {@each data as item, index}
         <tr>
             <td width="5%" class="tdcontent">
-                <font style="vertical-align: inherit;">
-                    <input type="radio" name="course" value="\${item.id}" />
-                    <font style="vertical-align: inherit;">\${parseInt(index)+1} </font>
-                </font>
+               \${parseInt(index)+1}
             </td>
-            <td width="15%">
-                <video src="\${item.mediUrl}" style="width: 80px;height: 60px;background: #C4C8D6;"></video>
-            </td>
+           
             <td width="20%" class="tdcontent">
                 <span>\${item.name}</span>
             </td>
+						<td width="15%">
+								<audio src="\${item.mediUrl}" controls ></audio>
+						</td>
             <td width="15%" class="tdcontent">
-                <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;"> \${item.createDate}</font>
-                </font>
+                \${item.createDate}
             </td>
             <td width="15%" class="tdcontent">
-                <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;"> \${item.duration} </font>
-                </font>
+                \${item.duration}
             </td>
             <td width="10%" class="tdcontent">
-                <font style="vertical-align: inherit;">
-                    {@if item.free == '0'}
-                    <font style="vertical-align: inherit;">是</font>
-                </font>
+                {@if item.free == '0'}
+								<span class="label label-lg label-info">是</span>
                 {@else if item.free == '1'}
-                <font style="vertical-align: inherit;">否</font>
-                </font>
+                 <span class="label label-lg label-danger">否</span>
                 {@/if}
             </td>
             <td width="20%" class="tdcontent">
                 <a class="operation" href="javascript:void(0);" data-toggle="modal" data-target="#editCourseSource" onclick="editCourseSource('\${item.id}');">编辑</a>
-                <a class="operation" href="javascript:void(0);" onclick="deletePartCourse('\${item.id}');">删除</a>
+                <a class="operation" href="javascript:void(0);" onclick="deletePartCourse('\${item.id}','\${item.name}');">删除</a>
             </td>
         </tr>
         {@/each}
     </script>
 
-    <!--课程编辑-->
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="editCourseSource" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content" id="sourceBasic">
-
-            </div>
-        </div>
-    </div>
-
-    <script id="courseSourceTemp" type="text/template">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="gridSystemModalLabel1">课程编辑</h4>
-        </div>
-        <div>
-            <div class="row">
-                <div class="col-xs-12 col-md-2">音频上传</div>
-                <div class="col-xs-12 col-md-10">
-                    <div class="pictureContainer" id="video" style="z-index: 1;">
-                        <div class="viewPicture">
-                            <video id="vedioSource" src="\${data.mediUrl}" controls="controls" style="width: 100%;height: 100%;"></video>
-                        </div>
-                        <div class="uploadText">
-                            <p class="imgiocn">
-                                <img src="img/video.png" style="display: none;" />
-                            </p>
-                            <p class="uploadPloadprogress">点击上传视频</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-2">课程文稿</div>
-                <div class="col-xs-12 col-md-10">
-                    <textarea name="coursedoc" id="coursedoc" class="coursedoc"></textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-2">是否允许试听</div>
-                <div class="col-xs-12 col-md-10">
-                    {@if data.free == '0'}
-                    <input type="radio" name="tried" value="1" checked/>是
-                    <input type="radio" name="tried" value="0" />否 {@else if data.free == '1'}
-                    <input type="radio" name="tried" value="1" />是
-                    <input type="radio" name="tried" value="0" checked/>否 {@/if}
-                </div>
-            </div>
-            <div class="row form_row">
-                <div class="col-xs-12 col-md-2">课程时长</div>
-                <div class="col-xs-12 col-md-10">
-                    <input name="duation" type="text" class="form_input" value="\${data.duration}" />
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" onclick="updateCourseSource('\${data.id}','\${data.partId}');">确定</button>
-        </div>
-    </script>
 
     <!--章节修改列表-->
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="chapterBox" aria-labelledby="gridSystemModalLabel">
