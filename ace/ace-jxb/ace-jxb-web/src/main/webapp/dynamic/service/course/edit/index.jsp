@@ -139,7 +139,7 @@
             <div class="col-md-10">
                 <div style="text-align:left">
                     <textarea name="introduce" id="introduce" class="introduction">
-                        \${data.o.introduce}
+                       \${data.o.introduce}
                     </textarea>
                 </div>
                 <span class="help-block"></span>

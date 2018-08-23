@@ -154,7 +154,7 @@
                         <span class="label-red">*</span>课件文稿</label>
                     <div class="col-md-10">
                         <div style="text-align:left">
-                            <textarea name="introduction" id="introduction">\${data.introduction}"</textarea>
+                            <textarea name="introduction" id="introduction">\${data.introduction}</textarea>
                         </div>
                         <span class="help-block"></span>
                     </div>
