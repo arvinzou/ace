@@ -119,6 +119,7 @@ function viewUserinfo(data) {
 function submitForm() {
     if (!$(".protocol[type='checkbox']").prop('checked')) {
         alert("需要同意近心帮协议");
+        return;
     }
     var formObject = {
         name: "chineseName",
