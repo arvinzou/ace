@@ -13,8 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
+    <jsp:include page="/dynamic/common/base.jsp"/>
     <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
@@ -35,13 +34,13 @@
                     <div class="page-content">
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="index4.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>仪表盘</span>
-                                </li>
+                            		<li>
+                            				<a href="${pageContext.request.contextPath}/index.jsp">首页</a>
+                            				<i class="fa fa-circle"></i>
+                            		</li>
+                            		<li>
+                            				<span>评论管理</span>
+                            		</li>
                             </ul>
                             <div class="page-content-inner">
 
@@ -52,42 +51,68 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title">
                                                     <div class="caption">
-                                                        <i class="icon-social-dribbble font-green"></i>
-                                                        <span class="caption-subject font-green bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">评论列表</font></font></span>
+                                                       评论管理
                                                     </div>
+																										<div class="actions">
+																											<form onsubmit="return t_query()">
+
+
+                                                        <div class="input-group">
+                                                            <input type="text" style="height:33px" name="keyword"
+                                                                   class="form-control input-circle-left"
+                                                                   placeholder="请输入昵称">
+																																	 
+                                                            <span class="input-group-btn">
+                                                               <button class="btn btn-circle-right btn-default search_btn" type="submit">
+                                                                    <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                                                        搜索</font></font>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </form>
+																										</div>
                                                 </div>
                                                 <div class="portlet-body">
                                                     <div class="table-scrollable">
                                                         <table class="table table-hover">
                                                             <thead>
                                                             <tr>
-                                                                <th width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ＃ </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 昵称 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 名称 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 好评度 </font></font></th>
-                                                                <th width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 评论内容 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 评论时间 </font></font></th>
-                                                                <th width="10%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                <th width="5%"> ＃ </th>
+                                                                <th width="10%"> 昵称 </th>
+                                                                <th width="20%"> 名称 </th>
+                                                                <th width="15%"> 好评度 </th>
+                                                                <th width="25%"> 评论内容 </th>
+                                                                <th width="15%"> 评论时间 </th>
+                                                                <th width="10%"> 操作 </th>
                                                             </tr>
                                                             </thead>
                                                             <tbody id="cmtList">
 
                                                             </tbody>
                                                         </table>
+																												
+																												 <div class="paginationbar">
+                                                                <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
+                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- END SAMPLE TABLE PORTLET-->
                                         </div>
-                                    <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
+                                    
                                 </div>
                                 <script id="list" type="text/template">
                                     {@each data as item,index}
                                     <tr>
-                                        <td width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${parseInt(index)+1} </font></font></td>
-                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.nickname} </font></font></td>
-                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.courseName} </font></font></td>
-                                        <td width="15%">
+                                        <td> \${parseInt(index)+1} </td>
+                                        <td style="text-align: center;"> 
+																				<div class="header-box">
+																				 <div class="header-img"><img src="\${item.headimgurl}" class="headimg"></div>
+																				 <div class="header--nickname">\${item.nickname} </div>
+																				 </div>
+																				</td>
+                                        <td> \${item.courseName} </td>
+                                        <td>
                                             {@if item.grade == '1'}
                                             <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
                                             {@else if item.grade == '2'}
@@ -110,9 +135,9 @@
                                             <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
                                             {@/if}
                                         </td>
-                                        <td width="25%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.content} </font></font></td>
-                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.createDate} </font></font></td>
-                                        <td width="10%">
+                                        <td> \${item.content} </td>
+                                        <td> \${item.createDate} </td>
+                                        <td>
                                             <a href="javascript:void(0);" onclick="deleteCmt(this,'\${item.id}');">删除</a>
                                         </td>
                                     </tr>
@@ -132,102 +157,25 @@
 
 </div>
 
-
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
-     aria-labelledby="gridSystemModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="gridSystemModalLabel">工作室详情</h4>
-            </div>
-            <div id="info">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script id="stdioInfo" type="text/template">
-    <table>
-        <tr class="str">
-            <td width="15%">工作室名称</td>
-            <td width="35%">\${info.name}</td>
-            <td width="15%">logo</td>
-            <td width="35%">
-                <img src="\${info.logoImgUrl}" style="width: 80px; height: 80px;"/>
-            </td>
-        </tr>
-        <tr class="commontr">
-            <td  width="15%">等级</td>
-            <td  width="35%">\${info.level}</td>
-            <td  width="15%">负责人</td>
-            <td  width="35%">\${info.dutyName}</td>
-        </tr>
-        <tr class="commontr">
-            <td width="15%">状态</td>
-            <td colspan="3">
-                {@if info.status == 0}
-                待审核
-                {@else if info.status == 1}
-                审核通过
-                {@else}
-                审核不通过
-                {@/if}
-            </td>
-        </tr>
-        <tr class="str">
-            <td width="15%">内容</td>
-            <td colspan="3">\${info.introduce}</td>
-        </tr>
-    </table>
-</script>
-
-<!--审核弹框-->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="opt"
-     aria-labelledby="gridSystemModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="gridSystemModalLabel1">工作室审核</h4>
-            </div>
-            <div id="operation">
-                <input type="radio" name="radio" value="1"/>审核通过&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="radio" name="radio" value="2"/>审核拒绝
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="audit();">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 </body>
 
 <style>
-    .modal .headbox {
-        width: 150px !important;
-        height: 150px !important;
-        border-radius: 50% !important;
-        overflow: hidden;
-        margin: 0 auto;
-    }
-
-    .modal-body {
-        font-size: 16px;
-        line-height: 24px;
-        text-align: justify
-    }
-
-    .modal img {
-        width: 100%;
-        height: 100%;
-    }
+		.headimg{
+			  width: 40px;
+        height: 40px;
+        object-fit: cover;
+				border-radius: 50%;
+		}
+		.header-box{
+			padding:2px;
+			width: 100%;
+			text-align: center
+		}
+		.header-img{
+			padding:2px;
+		}
+		.header-nickname{
+			padding:2px;
+		}
 </style>
 </html>
