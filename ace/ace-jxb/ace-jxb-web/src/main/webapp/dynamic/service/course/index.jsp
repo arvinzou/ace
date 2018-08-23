@@ -27,7 +27,6 @@
     <script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
-
 <body>
 
 <!--隐藏存放ID-->
