@@ -86,7 +86,7 @@
 					</div>
 					<div class="row content_02" onclick="showInfo('\${item.id}');">
 					<p>
-					\${item.profile}
+					\$\${item.profile}
 					</p>
 				</div>
 				<div class="row content_03">

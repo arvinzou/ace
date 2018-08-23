@@ -10,6 +10,7 @@ function initData(primaryId){
         data:{
             findType: '1',
             category: '1',
+            payStatusArray: '2,6,7',
             start: 0,
             limit: 999
         },
