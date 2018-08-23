@@ -167,4 +167,33 @@ public class CourseController extends JxbBaseController {
 
         return courseService.updateLineState(courseId, state, getCurUserProp());
     }
+
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(课程分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <CourseVo>
+     * @author: Arvin
+     * @version: 2018-08-06
+     */
+    @RequestMapping(value = "/findMyCourseList")
+    @ResponseBody
+    public PageResult<CourseVo> findMyCourseList(CourseQVo condition, PageParamNoChangeSord page) throws Exception {
+        //
+        condition.setCreateUserId(getCurUserProp().getUserId());
+
+        PageResult<CourseVo> rst = this.courseService
+                .findCourseList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
+    }
 }
