@@ -83,8 +83,7 @@
 	overflow: hidden;  /*溢出隐藏*/
 }
 .content_03{
-	height: 1rem;
-	line-height: 1rem;
+	height: 0.8rem;
 }
 .money{
 	color: #FF7C12;

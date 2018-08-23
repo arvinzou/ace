@@ -45,7 +45,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>课程管理</span>
+                                    <span>课程审核</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -58,17 +58,14 @@
                                         <div class="portlet light ">
                                             <div class="portlet-title">
                                                 <div class="caption">
-                                                    课程管理
+                                                    课程审核
                                                 </div>
 
 
                                                 <div class="actions">
 
 
-                                                    <div class="create_course" id="createCourse">
-                                                        <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
-                                                        <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
-                                                    </div>
+
 
                                                 </div>
                                             </div>
@@ -174,7 +171,7 @@
         <td  class="tdcontent">
             <div> \${item.createDate} </div>
             <div style="padding:10px">
-            {@if item.lineState != 1}
+            {@if item.lineState==0}
                 <span style="color:red">已下架</span>
             {@else}
                 <a href="#">已上架</a>
@@ -197,9 +194,9 @@
         </td>
         <td >
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
-            <a class="operation" href="list/index.jsp?id=\${item.id}">制作</a>
+            <a class="operation" href="list/index.jsp?id=\${item.id}">详细</a>
             {@if item.auditRst==1}
-                {@if item.lineState !=1}
+                {@if item.lineState==0}
                 <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
                 {@else}
                 <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>

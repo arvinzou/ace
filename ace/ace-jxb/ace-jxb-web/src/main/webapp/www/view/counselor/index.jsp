@@ -66,9 +66,11 @@
             <div class="row">
             <h3 class="sec_title">擅长领域</h3>
             <ul class="tagboard">
+                {@if data.counselorVo.tags != undefined}
 				{@each data.counselorVo.tags.split(',') as item,index}
             	<li>\${item}</li>
 				{@/each}
+                {@/if}
             </ul>
             </div>
             <div class="row">

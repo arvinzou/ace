@@ -1,14 +1,14 @@
 window.onload = function () {
     getUserinfo();
     getMyStudioList();
-    getStudioInfo();
     initDoc();
-    $('.submit_btn').click(submitForm);
     $('#studioInfoModal .idCardBoxs').on('click', '.deleteBtn', deleteBanner);
 };
 
 var editor;
 
+
+/*初始化富文本框*/
 function initDoc() {
     editor = new Simditor({
         textarea: $('#notNull1'),
@@ -23,24 +23,60 @@ function initDoc() {
     });
 }
 
-
+/*删除图片*/
 function deleteBanner() {
     $(this).parent().parent().remove();
     $('#indexImg').show();
 }
 
-
+/*转到工作室成员列表*/
 function userStudioStaff(id) {
     if (id) {
         window.location.href = '../userStudioStaff/index.jsp?id=' + id;
     }
 }
 
-
-function detail() {
-    $('#studioInfo').modal('show');
+/*点击创建工作室*/
+function createStudio() {
+    cleanForm();
+    $('#studioInfoModal').modal('show');
+    $('.submit_btn').off("click");
+    $('.submit_btn').click(createMyStudio);
 }
 
+/*创建我的工作室*/
+function createMyStudio() {
+    var data = {json: submitForm()};
+    var url = '/jxb/studio/insertStudioVo';
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            alert("工作室创建成功");
+            $('#studioInfoModal').modal('hide');
+            getMyStudioList();
+            return;
+        }
+        alert("信息更新失败,请稍后再试！");
+
+    })
+}
+
+/*清空form表单*/
+function cleanForm() {
+    $('.modal input').val('');
+    $('.modal textarea').val('');
+    $('.modal #logo').prop('src', 'addImg.png');
+    $('.modal .imgSrc').remove();
+    $('#indexImg').show();
+    editor.setValue('');
+}
+
+/*查看工作室详情*/
+function detail(id) {
+    $('#studioInfo').modal('show');
+    getStudioInfo(id);
+}
+
+/*获取工作室列表*/
 function getMyStudioList() {
     var url = "/jxb/studio/getMyStudioList";
     $.getJSON(url, function (result) {
@@ -64,6 +100,7 @@ function getMyStudioList() {
 }
 
 
+/*获取我的信息*/
 function getUserinfo() {
     var url = "/jxb/counselor/getMyinfo"
     $.getJSON(url, function (result) {
@@ -74,7 +111,7 @@ function getUserinfo() {
     })
 }
 
-
+/*渲染我的信息*/
 function viewUserinfo(data) {
     for (key in data) {
         $('.user-' + key).text(data[key]);
@@ -85,20 +122,37 @@ function viewUserinfo(data) {
 
 var studioId;
 
+
+/*触发修改工作室*/
 function modify(id) {
     studioId = id;
     if (id) {
+        cleanForm();
         getStudioInfo(id);
     }
-    $('.modal input').val('');
-    $('.modal textarea').val('');
-    $('.modal #logo').prop('src', 'addImg.png');
-    $('.modal .imgSrc').remove();
-    $('#indexImg').show();
     $('#studioInfoModal').modal('show');
+    $('.submit_btn').off("click");
+    $('.submit_btn').click(modifyStudio);
 
 }
 
+/*提交工作室修改*/
+function modifyStudio() {
+    var url = '/jxb/studio/modifyStudio';
+    var data = {json: submitForm()};
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            alert("工作室修改成功");
+            $('#studioInfoModal').modal('hide');
+            getMyStudioList();
+            return;
+        }
+        alert("信息更新失败,请稍后再试！");
+    })
+}
+
+
+/*获取单个工作室信息*/
 function getStudioInfo(id) {
     var url = "/jxb/studio/selectStudioByPrimaryKey";
     var data = {
@@ -111,6 +165,8 @@ function getStudioInfo(id) {
     });
 }
 
+
+/*修改数据钱填充数据*/
 function fillForm(data) {
     for (key in data) {
         if (key.indexOf("Url") != -1) {
@@ -137,7 +193,7 @@ function fillForm(data) {
 }
 
 
-
+/*提交表单获取数据*/
 function submitForm() {
     var formObject = {
         name: "notNull",
@@ -173,24 +229,10 @@ function submitForm() {
         imgURL[i] = url;
     }
     formObject.id = studioId;
-    var url = '/jxb/studio/modifyStudio';
-    var data = {
-        json: JSON.stringify({
-            object: JSON.stringify(formObject),
-            imgUrl: JSON.stringify(imgURL),
-        }),
-    }
-    $.post(url, data, function (result) {
-        if (result.status == 0) {
-            alert("信息更新成功");
-            $('body').on('hidden.bs.modal', '.modal', function () {
-                $('#studioInfoModal').removeData('bs.modal');
-            });
-            return;
-        }
-        alert("信息更新失败,请稍后再试！");
-
-    })
+    return JSON.stringify({
+        object: JSON.stringify(formObject),
+        imgUrl: JSON.stringify(imgURL),
+    });
 }
 
 

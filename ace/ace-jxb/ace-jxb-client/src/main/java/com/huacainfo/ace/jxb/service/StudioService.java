@@ -50,6 +50,8 @@ public interface StudioService {
 
     MessageResponse modifyStudio(Studio obj, List<String> list, UserProp userProp) throws Exception;
 
+    MessageResponse insertStudioVo(Studio obj, List<String> list, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateStudio

@@ -39,7 +39,7 @@
                             				<i class="fa fa-circle"></i>
                             		</li>
                             		<li>
-                            				<span>评论管理</span>
+                            				<span>评价管理</span>
                             		</li>
                             </ul>
                             <div class="page-content-inner">
@@ -51,7 +51,7 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title">
                                                     <div class="caption">
-                                                       评论管理
+                                                       评价管理
                                                     </div>
 																										<div class="actions">
 																											<form onsubmit="return t_query()">
@@ -81,8 +81,8 @@
                                                                 <th width="10%"> 昵称 </th>
                                                                 <th width="20%"> 名称 </th>
                                                                 <th width="15%"> 好评度 </th>
-                                                                <th width="30%"> 评论内容 </th>
-                                                                <th width="15%"> 评论时间 </th>
+                                                                <th width="30%"> 评价内容 </th>
+                                                                <th width="15%"> 评价时间 </th>
                                                                 <th width="10%"> 操作 </th>
                                                             </tr>
                                                             </thead>
