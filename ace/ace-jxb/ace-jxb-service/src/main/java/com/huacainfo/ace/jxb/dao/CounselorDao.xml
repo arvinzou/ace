@@ -314,10 +314,8 @@
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
-        t.idCard t.status, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm,t.peopleNum,
-        t.duration,
-        t.income,
-        t.account, t.level, t.createDate, t.profile
+        t.idCard, t.status, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm,t.peopleNum,
+        t.duration, t.income, t.account, t.level, t.createDate, t.profile
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

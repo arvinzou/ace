@@ -38,7 +38,8 @@ public interface MemberSignLogDao {
      * @param todayDate 只含年月日 demo：2018-08-02
      * @return MemberSignLog
      */
-    MemberSignLog findToday(String todayDate);
+    MemberSignLog findToday(@Param("todayDate") String todayDate,
+                            @Param("userId") String userId);
 
 
 }
