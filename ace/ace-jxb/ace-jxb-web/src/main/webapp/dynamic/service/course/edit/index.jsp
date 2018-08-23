@@ -162,13 +162,13 @@
                         <div class="row">
                             <label class="col-md-3 control-label">课程原价</label>
                             <div class="col-md-9">
-                                <input name="primeCost" type="text" value="\${data.o.primeCost}" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）" />
+                                <input name="primeCost" type="text" value="\${data.o.primeCost}" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）" onchange="if(!/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(this.value)){alert('金额格式不正确！');this.value='';}"/>
                             </div>
                         </div>
                         <div class="row">
                             <label class="col-md-3 control-label">划线价格</label>
                             <div class="col-md-9">
-                                <input name="cost" type="text" value="\${data.o.cost}" style="width:70%" class="form-control" placeholder="请输入划线价格（单位：元）" />
+                                <input name="cost" type="text" value="\${data.o.cost}" style="width:70%" class="form-control" placeholder="请输入划线价格（单位：元）" onchange="if(!/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(this.value)){alert('金额格式不正确！');this.value='';}"/>
                                 <span class="help-block" style="text-align:left;font-size:12px;padding-top:10px">划线价是一种常见的促销方式，您可以通过设置划线价让您的课程价格看起来更加优惠低廉，吸引更多用户进行购买。</span>
                             </div>
 
