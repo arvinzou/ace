@@ -28,8 +28,8 @@ public class CounselorVo extends Counselor {
     private String consultPriceScope;
 
     public String getConsultPriceScope() {
-        String start = null == getMinCPAmount() ? "0" : getMinCPAmount().setScale(0).toString();
-        String end = null == getMaxCPAmount() ? "0" : getMaxCPAmount().setScale(0).toString();
+        String start = null == getMinCPAmount() ? "0" : getMinCPAmount().intValue() + "";
+        String end = null == getMaxCPAmount() ? "0" : getMaxCPAmount().intValue() + "";
         return start + "-" + end;
 
 //        return consultPriceScope;

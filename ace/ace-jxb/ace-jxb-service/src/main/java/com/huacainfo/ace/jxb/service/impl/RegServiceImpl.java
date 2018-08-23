@@ -2,15 +2,18 @@ package com.huacainfo.ace.jxb.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.jxb.constant.RegType;
+import com.huacainfo.ace.jxb.dao.CounselorDao;
 import com.huacainfo.ace.jxb.dao.MemberRelationDao;
 import com.huacainfo.ace.jxb.dao.RegDao;
 import com.huacainfo.ace.jxb.model.MemberRelation;
 import com.huacainfo.ace.jxb.model.Reg;
+import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.MemberSignLogService;
 import com.huacainfo.ace.jxb.service.RegService;
@@ -46,6 +49,10 @@ public class RegServiceImpl implements RegService {
     private UsersService usersService;
     @Autowired
     private MemberSignLogService memberSignLogService;
+    @Autowired
+    private CounselorDao counselorDao;
+    @Autowired
+    private BisMsgNoticeService bisMsgNoticeService;
 
     /**
      * 判断该号码是否已经注册过
@@ -93,7 +100,21 @@ public class RegServiceImpl implements RegService {
         reg.setMobile(mobile);
         reg.setUnionId(userinfo.getUnionid());
         reg.setSex(userinfo.getSex());
-        return new ResultResponse(insertReg(reg, regType));
+        ResultResponse regRs = new ResultResponse(insertReg(reg, regType));
+        if (regRs.getStatus() == ResultCode.SUCCESS) {
+            // 2018/8/23 注册成功消息通知
+            if (RegType.TEACHER.equals(regType) && StringUtil.isNotEmpty(studioId)) {
+                try {
+                    ResultResponse rs = bisMsgNoticeService.memberJoinMsg(userinfo, studioId);
+                    logger.debug("工作室新成员加入提醒消息结果：{}", rs.toString());
+                } catch (Exception e) {
+                    logger.error("工作室新成员加入提醒消息推送异常：\n{}", e);
+                }
+            }
+
+            return regRs;
+        }
+        return regRs;
     }
 
     /**
@@ -126,11 +147,24 @@ public class RegServiceImpl implements RegService {
         } else if (RegType.PARENT.equals(users.getUserLevel())) {
             // TODO: 2018/7/24 家长身份逻辑待续
             rtnMap.put("memberType", "2");
+        } else if (RegType.ADMINISTRATOR.equals(users.getUserLevel())) {
+            rtnMap.put("memberType", "3");
         }
 
         rtnMap.put("nickName", userinfo.getNickname());
         rtnMap.put("headimgurl", userinfo.getHeadimgurl());
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtnMap);
+    }
+
+    @Override
+    public ResultResponse cleanAccount(String userId) {
+        //咨询师数据
+        int d1 = counselorDao.deleteByPrimaryKey(userId);
+        int d2 = counselorDao.deleteUserCfg(userId);
+        int d3 = counselorDao.deleteUsersRole(userId);
+        int d4 = counselorDao.deleteUsers(userId);
+
+        return new ResultResponse(ResultCode.SUCCESS, "删除成功", d1 + "|" + d2 + "|" + d3 + "|" + d4);
     }
 
     /**

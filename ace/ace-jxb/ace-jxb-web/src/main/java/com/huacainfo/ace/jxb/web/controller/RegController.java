@@ -146,4 +146,18 @@ public class RegController extends JxbBaseController {
 
     }
 
+    /**
+     * 账户清理工具
+     */
+    @RequestMapping("/cleanAccount")
+    public ResultResponse cleanAccount(String userId, String secretKey) {
+        if (!"huacainfo".equals(secretKey)) {
+            return new ResultResponse(ResultCode.FAIL, "秘钥不匹配");
+        }
+        if (StringUtil.isEmpty(userId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必备参数");
+        }
+        return regService.cleanAccount(userId);
+    }
+
 }

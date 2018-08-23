@@ -1,6 +1,7 @@
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
+import com.huacainfo.ace.jxb.vo.CounselorVo;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -18,9 +19,10 @@ public class CommonTest {
     @Test
     public void test() {
 
-//        String nowYear = DateUtil.getNow().substring(0, 4);
+        BigDecimal b = BigDecimal.ZERO;
+        CounselorVo vo = new CounselorVo();
 
-        System.out.println(new BigDecimal("100").toString());
+        System.out.println(JsonUtil.toJson(vo));
     }
 
     public void orderParams() {

@@ -23,14 +23,16 @@ public interface TeacherAuditDao {
 
     TeacherAuditVo selectVoByPrimaryKey(String id);
 
-    List
-            <TeacherAuditVo> findList(@Param("condition") TeacherAuditQVo condition,
-                                      @Param("start") int start,
-                                      @Param("limit") int limit,
-                                      @Param("orderBy") String orderBy);
+    List<TeacherAuditVo> findList(@Param("condition") TeacherAuditQVo condition,
+                                  @Param("start") int start,
+                                  @Param("limit") int limit,
+                                  @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") TeacherAuditQVo condition);
 
     int isExit(TeacherAudit record);
+
+    TeacherAudit findByCounselorId(String counselorId);
+
 
 }
