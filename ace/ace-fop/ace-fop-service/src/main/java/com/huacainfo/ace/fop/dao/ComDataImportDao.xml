@@ -617,6 +617,7 @@
             t.educationContribution, t.helpPoorContribution, t.otherContribution, t.lpResume
         from com_data_import t
         left join portal.province p on p.fullname = t.areaCodeName
-        limit 1
+        where  CHARACTER_LENGTH(t.lpMobile ) != 0
+        limit 300
     </select>
 </mapper>

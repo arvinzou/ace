@@ -308,6 +308,9 @@ public class SysAccountServiceImpl implements SysAccountService {
     }
 
     private Date getDate(String dateStr) {
+        if (StringUtil.isEmpty(dateStr)) {
+            return null;
+        }
 
         String[] array = dateStr.split("/");
         String year = array[0];
