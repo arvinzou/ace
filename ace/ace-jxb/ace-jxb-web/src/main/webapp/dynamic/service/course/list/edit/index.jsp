@@ -62,7 +62,7 @@
                                                 <div class="portlet light ">
                                                     <div class="portlet-title">
                                                         <div class="caption">
-                                                            课件制作
+                                                            课件编辑
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body">
@@ -144,7 +144,7 @@
                     <label class="col-md-2 control-label">
                         <span class="label-red">*</span>课件时长</label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" name="duation" value="\${data.duation}" maxlength="28" placeholder="请输入课件时长（如：3分20秒)">
+                        <input type="text" class="form-control" name="duation" value="\${data.duation}" maxlength="10" placeholder="请输入课件时长（如：3分20秒)">
                         <span class="help-block"></span>
                     </div>
                 </div>
