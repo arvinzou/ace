@@ -15,6 +15,7 @@
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="cityCode" jdbcType="CHAR" property="cityCode"/>
         <result column="idCardImgUrl" jdbcType="VARCHAR" property="idCardImgUrl"/>
+        <result column="idCardSideImgUrl" jdbcType="VARCHAR" property="idCardSideImgUrl"/>
         <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo"/>
         <result column="certificateImgUrl" jdbcType="VARCHAR" property="certificateImgUrl"/>
         <result column="evidenceImgUrl" jdbcType="VARCHAR" property="evidenceImgUrl"/>
@@ -29,7 +30,8 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
-        idCard,status,cityCode, idCardImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm, peopleNum,duration, income,
+        idCard,status,cityCode, idCardImgUrl, idCardSideImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm,
+        peopleNum,duration, income,
     account, level, createDate, profile
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -46,14 +48,15 @@
     insert into counselor (id, studioId, name,
       certification, tags, years,
       mobile, imagePhotoUrl, visitCardUrl,
-        idCard, status, cityCode, idCardImgUrl, certificateNo,
+        idCard, status, cityCode, idCardImgUrl, idCardSideImgUrl, certificateNo,
         certificateImgUrl, evidenceImgUrl, lm,peopleNum,duration,
       income, account, level,
       createDate, profile)
     values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{certification,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR}, #{imagePhotoUrl,jdbcType=VARCHAR}, #{visitCardUrl,jdbcType=VARCHAR},
-        #{idCard,jdbcType=CHAR},#{status,jdbcType=CHAR}, #{cityCode,jdbcType=CHAR}, #{idCardImgUrl,jdbcType=VARCHAR},
+        #{idCard,jdbcType=CHAR},#{status,jdbcType=CHAR}, #{cityCode,jdbcType=CHAR},
+        #{idCardImgUrl,jdbcType=VARCHAR},#{idCardSideImgUrl,jdbcType=VARCHAR},
         #{certificateNo,jdbcType=VARCHAR},
         #{certificateImgUrl,jdbcType=VARCHAR}, #{evidenceImgUrl,jdbcType=VARCHAR}, #{lm,jdbcType=INTEGER},
         #{peopleNum,jdbcType=INTEGER},#{duration,jdbcType=INTEGER},
@@ -101,6 +104,9 @@
             </if>
             <if test="idCardImgUrl != null">
                 idCardImgUrl,
+            </if>
+            <if test="idCardSideImgUrl != null">
+                idCardSideImgUrl,
             </if>
             <if test="certificateNo != null">
                 certificateNo,
@@ -176,6 +182,9 @@
             <if test="idCardImgUrl != null">
                 #{idCardImgUrl,jdbcType=VARCHAR},
             </if>
+            <if test="idCardSideImgUrl != null">
+                #{idCardSideImgUrl,jdbcType=VARCHAR},
+            </if>
             <if test="certificateNo != null">
                 #{certificateNo,jdbcType=VARCHAR},
             </if>
@@ -250,6 +259,9 @@
             <if test="idCardImgUrl != null">
                 idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
             </if>
+            <if test="idCardSideImgUrl != null">
+                idCardSideImgUrl = #{idCardSideImgUrl,jdbcType=VARCHAR},
+            </if>
             <if test="certificateNo != null">
                 certificateNo = #{certificateNo,jdbcType=VARCHAR},
             </if>
@@ -300,6 +312,7 @@
         status = #{status,jdbcType=CHAR},
         cityCode = #{cityCode,jdbcType=CHAR},
       idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
+        idCardSideImgUrl = #{idCardSideImgUrl,jdbcType=VARCHAR},
       certificateNo = #{certificateNo,jdbcType=VARCHAR},
       certificateImgUrl = #{certificateImgUrl,jdbcType=VARCHAR},
       evidenceImgUrl = #{evidenceImgUrl,jdbcType=VARCHAR},
@@ -325,7 +338,8 @@
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
-        t.idCard, t.status,t.cityCode, t.idCardImgUrl, t.certificateNo, t.certificateImgUrl, t.evidenceImgUrl, t.lm,t.peopleNum,
+        t.idCard, t.status,t.cityCode, t.idCardImgUrl,t.idCardSideImgUrl, t.certificateNo, t.certificateImgUrl,
+        t.evidenceImgUrl, t.lm,t.peopleNum,
         t.duration,
         t.income,
         t.account, t.level, t.createDate, t.profile
