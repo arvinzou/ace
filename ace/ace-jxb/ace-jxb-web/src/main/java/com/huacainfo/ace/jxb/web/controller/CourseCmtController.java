@@ -49,7 +49,7 @@ public class CourseCmtController extends JxbBaseController {
     @ResponseBody
     public PageResult<CourseCmtVo> findCourseCmtList(CourseCmtQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<CourseCmtVo> rst = this.courseCmtService
-                .findCourseCmtList(condition, (page.getPage()-1)*page.getLimit(), page.getLimit(), page.getOrderBy());
+                .findCourseCmtList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
