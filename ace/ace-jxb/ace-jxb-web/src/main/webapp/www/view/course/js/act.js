@@ -84,7 +84,8 @@ function courseList(level){
             auditRst:'1',
             purport: purport,
             type: type,
-            costType: costType
+            costType: costType,
+            lineState: '1'
         },
         success:function(result){
             if(result.status == 0) {
