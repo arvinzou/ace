@@ -228,7 +228,7 @@ public class MemberSignLogServiceImpl implements MemberSignLogService {
         String nowDay = nowDate.substring(8, 10);
         String todayDate = nowDate.substring(0, 10);//只含年月日 demo：2018-08-02
 
-        MemberSignLog signLog = memberSignLogDao.findToday(todayDate);
+        MemberSignLog signLog = memberSignLogDao.findToday(todayDate, counselorId);
         if (null == signLog) {
             signLog = new MemberSignLog();
             signLog.setId(GUIDUtil.getGUID());
@@ -265,10 +265,11 @@ public class MemberSignLogServiceImpl implements MemberSignLogService {
 
         MemberSignLogQVo condition = new MemberSignLogQVo();
         condition.setMonthDate(monthDate);
+        condition.setUserId(userId);
         int signCount = memberSignLogDao.findCount(condition);
 
         String todayDate = dateTime.substring(0, 10);
-        MemberSignLog signLog = memberSignLogDao.findToday(todayDate);
+        MemberSignLog signLog = memberSignLogDao.findToday(todayDate, userId);
 
         Map<String, Object> rtnMap = new HashMap<>();
         rtnMap.put("signCount", signCount);//本月已签到天数
