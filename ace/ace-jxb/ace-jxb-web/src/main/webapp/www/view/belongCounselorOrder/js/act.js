@@ -31,3 +31,7 @@ function initData(primaryId){
         }
     });
 }
+
+function showDetail(orderId){
+    window.location.href = contextPath + '/www/view/consultantDetail/index.jsp?id='+orderId;
+}

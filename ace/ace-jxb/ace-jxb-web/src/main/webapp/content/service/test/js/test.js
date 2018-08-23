@@ -21,20 +21,7 @@ function evaluatCaseList(id) {
 }
 
 
-function deleteTestTpl() {
-    var input = $('#evaluatTplList tr input:checked');
-    var size = input.length;
-    if (size == 0) {
-        return;
-    } else if (size > 1) {
-        alert("一次只能删除一个");
-        return;
-    }
-    var id = input.eq(0).data('id');
-    activeDelect(id);
-}
-
-function activeDelect(id) {
+function del(id) {
     var url = portalPath + '/evaluatTpl/deleteEvaluatTpl.do';
     var data = {
         jsons: JSON.stringify({
@@ -213,19 +200,31 @@ function fillForm(data) {
 
 function submitForm() {
     var evaluatTpl = {
-        name: '',
-        category: '',
+        name: 'notNull_name',
+        category: '',//模板
         // cover:'',
         introduce: '',
         notice: '',
-        originalCost: '',
-        discountCost: ''
+        originalCost: 'money_originalCost',
+        discountCost: 'money_discountCost'
     };
     for (key in evaluatTpl) {
-        var val = $('.form_' + key).val();
-        if (!val) {
-            alert('还有信息没有填写。');
-            return null;
+        var val;
+        if (evaluatTpl[key]) {
+            var idName = evaluatTpl[key];
+            var result = validateform(idName);
+            if (result.status == 0) {
+                val = result.message;
+            } else {
+                alert(result.message);
+                return
+            }
+        } else {
+            val = $('.form_' + key).val();
+            if (!val) {
+                alert('还有信息没有填写。');
+                return null;
+            }
         }
         evaluatTpl[key] = val;
     }
@@ -247,7 +246,7 @@ function submitForm() {
             return null;
         }
         if (topScore <= scoreEnd) {
-            alert('分数从高到底。');
+            alert('量表分数从高到低。');
             return null;
         }
         topScore = scoreEnd;

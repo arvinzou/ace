@@ -41,7 +41,7 @@ function initList(sord, orderBy) {
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            viewList(result.data);
+            viewList(result.data.EvaluaTplList);
         }
     });
 }

@@ -33,12 +33,12 @@ var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" rol
     '                    <!-- 预览盒子 -->' +
     '                    <div class="col-md-6">' +
     '                        <div class="row">' +
-    '                            <div class="preview-pane">' +
+    '                            <div class="preview-pane" style="overflow: hidden;">' +
     '                                <img src="${pageContext.request.contextPath}/content/service/information/img/left_pic_two.jpg"' +
     '                                     class="preview" alt="Preview" id="Preview"/>' +
     '                            </div>' +
     '                        </div>' +
-    '                        <div class="row" id="proc">' +
+    '                        <div class="row" id="proc" style="margin-top: 30px">' +
     '                        </div>' +
     '                        <div class="row" style="padding-top: 50px;">' +
     '                            <button type="button" class="btn btn-success btn-lg" id="browse">本地上传</button>' +
@@ -100,6 +100,7 @@ function initJcrop() {
     $target.Jcrop({
         onChange: updatePreview,
         onSelect: updatePreview,
+        boxWidth: 500,
         aspectRatio: xsize / ysize,
         setSelect: [20, 20, 400, 400],
     }, function () {
@@ -180,15 +181,13 @@ var uploader;
 
 function initEvents() {
     $('#img-uploader').on('show.bs.modal', function (event) {
+        $('.progress-bar-success').css('width', '0%');
         var button = $(event.relatedTarget);
         console.log(button);
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
         againadd = button.data('againadd');
-        console.log(xsize + "/" + ysize);
-        console.log(cover);
-        console.log(button["0"].src);
         preImg(button["0"].src);
     });
 }
@@ -231,7 +230,6 @@ function initUpload() {
     uploader.bind('FileUploaded', function (uploader, files, res) {
         var data = JSON.parse(res.response);
         if (againadd) {
-            var index = $('#indexImg').siblings().length;
             var html = '<div class="imgSrc">' +
                 '           <div class="idCardBox">' +
                 '                <img class="select_img form_idCardImgUrl" src="' + data.file_path + '">' +
@@ -239,19 +237,17 @@ function initUpload() {
                 '           </div>' +
                 '     </div>';
             $('#indexImg').before($(html));
-            if (index == 4) {
+            var index = $('#indexImg').siblings().length;
+            if (index == 5) {
                 $('#indexImg').hide();
             }
         } else {
-
             var img = "#" + cover;
             $(img).attr("src", data.file_path);
             $(img).css("display", "block");
             $(img).css("max-width", xsize);
             $(img).css("max-height", ysize);
-
         }
-
         $('#img-uploader').modal('hide');
     });
     //会在文件上传过程中不断触发，可以用此事件来显示上传进度监听（比如说上传进度）
@@ -286,50 +282,4 @@ function initUpload() {
         uploader.start();
     });
     initEvents();
-}
-
-function resetSize(x, y) {
-    xsize = x;
-    ysize = y;
-    console.log(xsize + "/" + ysize);
-    preImg('/jxb/content/service/information/img/left_pic_two.jpg');
-}
-
-function initUpload1() {
-    var uploader = new plupload.Uploader({
-        runtimes: 'html5,flash,silverlight,html4',
-        browse_button: ["idCardz", "idCardf", "idCardsc", "certificateimg"],
-        url: portalPath + '/files/uploadFile.do',
-        file_data_name: 'file',
-        multi_selection: false,
-        filters: {
-            max_file_size: '100mb',
-            mime_types: [{
-                title: "Image files",
-                extensions: "jpg,gif,png,pdf,bmp"
-            }
-
-            ]
-        },
-        init: {
-            FileFiltered: function (up, files) {
-                up.start();
-                return false;
-            },
-            UploadProgress: function (e, t) {
-                var r = t.percent;
-                if (r == 100) {
-                    upimgObject.next().html("上传完成");
-                } else {
-                    upimgObject.next().html("开始上传（" + r + "%）");
-                }
-
-            },
-            FileUploaded: function (uploader, file, responseObject) {
-                var rst = JSON.parse(responseObject.response);
-                upimgObject.find('img').prop('src', "http://zx.huacainfo.com/" + rst.value[0]);
-            }
-        }
-    });
-    uploader.init();
 }

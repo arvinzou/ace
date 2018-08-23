@@ -76,14 +76,14 @@
 		<div class="row">
 			<div class="col-xs-6 col-md-6">
 				<a href="javascript:void(0);" onclick="showCatalog('\${data.courseId}','\${data.partId}');">
-					<p><img src="img/icon_catalog.png" class="icon"/></p>
-					<p>目录</p>
+					<p><img src="img/icon_catalog.png" class="icon" style="margin-left: 0.08rem"/></p>
+					<p class="audioTitle">目录</p>
 				</a>
 			</div>
 			<div class="col-xs-6 col-md-6" style="text-align: right">
 				<a href="javascript:void(0);" onclick="showScripts('\${data.id}');">
 					<p><img src="img/icon_script.png" class="icon"/></p>
-					<p>文稿</p>
+					<p class="audioTitle">文稿</p>
 				</a>
 			</div>
 		</div>

@@ -35,3 +35,7 @@ function viewHtml(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
+
+function playCourse(courseId, sourceId){
+    window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+courseId+'&sourceId='+sourceId;
+}
