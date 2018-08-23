@@ -246,7 +246,8 @@
                                                                         <div class="col-md-9">
                                                                             <input type="text" class="form-control" id="mobilePhone"
                                                                                    placeholder=""
-                                                                                   name="form_mobile">
+                                                                                   name="form_mobile"
+                                                                                   readonly="readonly">
                                                                             <span class="error_message"></span>
                                                                             <div class="form-control-focus"></div>
                                                                         </div>

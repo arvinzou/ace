@@ -44,7 +44,7 @@ function searching() {
         if (result.status == 0) {
             var info = document.getElementById('temp_testLists').innerHTML;
             var infohtml = juicer(info, {
-                data: result.data,
+                data: result.data.EvaluaTplList,
             });
             $("#testListss").html(infohtml);
         }

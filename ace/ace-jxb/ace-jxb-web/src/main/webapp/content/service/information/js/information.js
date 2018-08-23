@@ -1,4 +1,4 @@
-var editor;
+var editor, cityCode;
 
 
 window.onload = function () {
@@ -31,12 +31,13 @@ window.onload = function () {
             console.log(target)
         },
         onCallerAfter: function (target, values) {
-            console.log(JSON.stringify(values))
+            console.log(JSON.stringify(values));
+            cityCode = values.name;
         }
     });
 
     // 单选设置城市
-    singleSelect1.setCityVal('110100');
+    singleSelect1.setCityVal(cityCode);
 
 };
 
@@ -85,6 +86,7 @@ function fillForm(data) {
         }
         $('[name=form_' + key + ']').val(data[key]);
     }
+    cityCode = data.cityCode;
     editor.setValue(data['profile']);
     var tag = $('#tags .md-checkbox');
     var tags = data["tags"];
@@ -192,6 +194,7 @@ function submitForm() {
         return
     }
     formObject.tags = tags;
+    formObject.cityCode = cityCode;
     var url = '/jxb/counselor/updateUserinfo';
     $.post(url, formObject, function (result) {
         if (result.status == 0) {
