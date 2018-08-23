@@ -93,7 +93,7 @@
 			<div class="row"><h3 class="title">您的问题类型及描述</h3></div>
 			<div class="row problem" style="margin-top: 0.3rem;margin-bottom: 0.3rem;">
 				<ul>
-					{@if data.consultOrder.tags != undefined &&  data.consultOrder.tags!= null}
+					{@if data.consultOrder.tags != undefined &&  data.consultOrder.tags!= null && data.consultOrder.tags!=''}
 					{@each data.consultOrder.tags.split(',') as tag,num}
 					<li class="problem_label">\${tag}</li>
 					{@/each}

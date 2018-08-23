@@ -55,9 +55,7 @@
                                             <div class="portlet-title">
                                                 <div class="caption">
                                                     <i class=" icon-layers font-green"></i>
-                                                    <span class="caption-subject font-green bold uppercase"><font
-                                                            style="vertical-align: inherit;"><font
-                                                            style="vertical-align: inherit;">咨询师管理</font></font></span>
+                                                    <span class="caption-subject font-green bold uppercase">咨询师管理</span>
                                                 </div>
                                                 <div class="actions">
                                                     <div class="portlet-input input-inline">
@@ -67,9 +65,7 @@
                                                             <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
-                                                                    <font style="vertical-align: inherit;"><font
-                                                                            style="vertical-align: inherit;">
-                                                                        搜索</font></font>
+                                                                        搜索
                                                                 </button>
                                                             </span>
                                                         </div>
@@ -133,13 +129,9 @@
                 <img src="\${item.imagePhotoUrl}">
             </div>
             <div class="mt-card-content">
-                <h3 class="mt-card-name"><font
-                        style="vertical-align: inherit;"><font
-                        style="vertical-align: inherit;">\${item.name}</font></font>
+                <h3 class="mt-card-name">\${item.name}
                 </h3>
-                <p class="mt-card-desc font-grey-mint"><font
-                        style="vertical-align: inherit;"><font
-                        style="vertical-align: inherit;">\${item.certification}</font></font>
+                <p class="mt-card-desc font-grey-mint">\${item.certification}
                 </p>
                 <div class="mt-card-social" data-id="\${item.id}">
                     <ul>

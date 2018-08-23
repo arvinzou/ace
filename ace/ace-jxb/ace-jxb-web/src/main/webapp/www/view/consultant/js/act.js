@@ -74,9 +74,26 @@ function screen(){
             consultType = '3';
         }
     }
+    var orderByObj= $('.menuList3 .active');
+    var orderByParam = null;
+    var sord = null;
+    if(orderByObj.length > 0){
+        if(orderByObj[0].innerText == '咨询最多'){
+            orderByParam = 'peopleNum';
+            sord = 'desc'
+        }else if(orderByObj[0].innerText == '价格最低'){
+            orderByParam = 'minCPAmount';
+            sord = 'asc'
+        }else if(orderByObj[0].innerText == '价格最高'){
+            orderByParam = 'maxCPAmount';
+            sord = 'desc';
+        }
+    }
 	var data = {
 	    "tags": tags == ''?null: tags,
-        "consultType":consultType
+        "consultType":consultType,
+        "orderBy":orderByParam,
+        "sord": sord
     }
 
     consultantListByparam(data);
@@ -118,6 +135,8 @@ function consultantListByparam(data){
         data:{
             tags: data.tags,
             consultType: data.consultType,
+            orderBy: data.orderBy,
+            sord: data.sord,
             start: 0,
             limit: 999
         },

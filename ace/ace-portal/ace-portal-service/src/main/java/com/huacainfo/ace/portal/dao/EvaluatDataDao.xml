@@ -129,7 +129,7 @@
         <if test="condition.createUserId!=null and condition.createUserId!=&quot;&quot;">
             and createUserId =#{condition.createUserId,jdbcType=VARCHAR}
         </if>
-        ORDER BY createDate
+        ORDER BY createDate desc
         limit 0, 1
     </select>
 

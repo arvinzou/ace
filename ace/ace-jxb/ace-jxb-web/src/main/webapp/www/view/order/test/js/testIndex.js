@@ -44,7 +44,7 @@ function searching() {
         if (result.status == 0) {
             var info = document.getElementById('temp_testLists').innerHTML;
             var infohtml = juicer(info, {
-                data: result.data,
+                data: result.data.EvaluaTplList,
             });
             $("#testListss").html(infohtml);
         }
@@ -100,8 +100,8 @@ function initList() {
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            viewBanner(result.data.slice(0, 5));
-            viewList(result.data.slice(5));
+            viewBanner(result.data.EvaluaTplList.slice(0, 5));
+            viewList(result.data.EvaluaTplList.slice(5));
         }
     });
 }

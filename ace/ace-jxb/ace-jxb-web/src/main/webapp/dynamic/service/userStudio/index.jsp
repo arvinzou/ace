@@ -142,17 +142,13 @@
                                                         <div class="portlet-title">
                                                             <div class="caption">
                                                                 <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase"><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">工作室</font></font></span>
+                                                                <span class="caption-subject font-green bold uppercase">工作室</span>
                                                             </div>
                                                             <div class="actions">
                                                                 <a onclick="javascript:modify()"
                                                                    class="btn btn-circle red-sunglo btn-sm">
-                                                                    <i class="fa fa-plus"></i><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">
-                                                                    创建工作室</font></font></a>
+                                                                    <i class="fa fa-plus"></i>
+                                                                    创建工作室</a>
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">

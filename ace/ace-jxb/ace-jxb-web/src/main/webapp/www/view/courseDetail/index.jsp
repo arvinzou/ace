@@ -26,7 +26,7 @@
             <div class="row content">
                 <div class="col-xs-12 col-md-12">
                     <p>
-                        \${data.introduction}
+                        \$\${data.introduction}
                     </p>
                 </div>
             </div>

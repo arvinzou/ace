@@ -199,10 +199,12 @@
         <td >
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
             <a class="operation" href="list/index.jsp?id=\${item.id}">制作</a>
-            {@if item.lineState==0}
-            <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
-            {@else}
-            <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
+            {@if item.auditRst==1}
+                {@if item.lineState==0}
+                <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
+                {@else}
+                <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
+                {@/if}
             {@/if}
             {@if item.auditRst==0}
             <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>

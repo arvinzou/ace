@@ -10,6 +10,7 @@ function initData(primaryId){
         data:{
             findType: '1',
             category: '1',
+            payStatusArray: '2,6,7',
             start: 0,
             limit: 999
         },
@@ -30,4 +31,8 @@ function initData(primaryId){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function showDetail(orderId){
+    window.location.href = contextPath + '/www/view/consultantDetail/index.jsp?id='+orderId;
 }

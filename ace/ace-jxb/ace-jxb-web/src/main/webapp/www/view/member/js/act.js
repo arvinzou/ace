@@ -30,5 +30,9 @@ function showConsultOrder(){
 }
 
 function showCourseOrder(){
-    window.location.href = contextPath + '/www/view/purchaseRecord/index.jsp'
+    window.location.href = contextPath + '/www/view/purchaseRecord/index.jsp';
+}
+
+function showTestOrder(){
+    window.location.href = contextPath + '/www/view/testOrder/index.jsp';
 }

@@ -120,9 +120,9 @@ function initBtn() {
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            if (result.data == null) {
+            if (result.data) {
                 /*如果有历史记录*/
-                $('.test_result .content p').text(data.evaluatGauge["content"]);
+                $('.test_result .content p').text(result.data.evaluatGauge["content"]);
                 $('.test_main .button .box .start').show();
                 $('.test_main .button .box .result').show();
             } else {

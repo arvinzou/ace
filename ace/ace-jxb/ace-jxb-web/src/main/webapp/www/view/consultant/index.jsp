@@ -86,12 +86,12 @@
 					</div>
 					<div class="row content_02" onclick="showInfo('\${item.id}');">
 					<p>
-					\${item.profile}
+					\$\${item.profile}
 					</p>
 				</div>
 				<div class="row content_03">
-					<span class="money">¥100-500</span>
-					<span class="help_times">帮助过23次</span>
+					<span class="money">¥\${item.consultPriceScope}</span>
+					<span class="help_times">帮助过\${item.peopleNum}次</span>
 					</div>
 					<div class="row content_04">
 					<ul class="clabel">

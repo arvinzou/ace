@@ -19,7 +19,7 @@ function orderList(state){
         data:{
             findType: '2',
             payStatus: state,
-            category: '2',
+            category: '3',
             start: 0,
             limit: 999
         },
