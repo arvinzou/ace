@@ -86,7 +86,7 @@
                                     <tr>
                                         <td width="5%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${parseInt(index)+1} </font></font></td>
                                         <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.nickname} </font></font></td>
-                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.courseId} </font></font></td>
+                                        <td width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.courseName} </font></font></td>
                                         <td width="15%">
                                             {@if item.grade == '1'}
                                             <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
