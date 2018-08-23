@@ -39,6 +39,8 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
     public static final String STUDIO_AUDIT = "STUDIO-AUDIT";
     //工作室新增成员通知
     public static final String STUDIO_NEW_MEMBER = "STUDIO-NEW-MEMBER";
+    //审核结果通知
+    public static final String AUDIT_RESULT = "AUDIT-RESULT";
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -82,14 +84,23 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
             return new ResultResponse(ResultCode.FAIL, "咨询师微信资料丢失");
         }
         boolean isPass = "1".equals(record.getRst());
+        String tmplCode;
         Map<String, Object> params = new HashMap<>();
+        if (isPass) {
+            tmplCode = COUNSELOR_REGISTER_AUDIT;
+            params.put("auditResult", "已通过");
+            params.put("auditDate", DateUtil.getNow());
+            params.put("description", StringUtil.isEmpty(record.getStatement()) ? "无" : record.getStatement());
+        } else {
+            tmplCode = AUDIT_RESULT;
+            params.put("auditContent", "咨询师入驻");
+            params.put("auditResult", "已拒绝");
+        }
         params.put("openid", userinfo.getOpenid());
-        params.put("auditResult", isPass ? "您的加入申请已通过！" : "您的加入申请未通过！");
-        params.put("auditDate", DateUtil.getNow());
-        params.put("description", StringUtil.isEmpty(record.getStatement()) ? "无" : record.getStatement());
         params.put("remark", isPass ? "您已经可以开始使用平台！" : "可向邮箱jinxinbang123@163.com 发送邮件提出异议！");
+        params.put("first", isPass ? "您的加入申请已通过！" : "您的加入申请未通过！");
 
-        return messageTemplateService.send("jxb", COUNSELOR_REGISTER_AUDIT, params);
+        return messageTemplateService.send("jxb", tmplCode, params);
     }
 
     /**
@@ -102,14 +113,24 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
             return new ResultResponse(ResultCode.FAIL, "咨询师微信资料丢失");
         }
         boolean isPass = "1".equals(auditRs);
+        String tmplCode;
         Map<String, Object> params = new HashMap<>();
+        if (isPass) {
+            tmplCode = STUDIO_AUDIT;
+            params.put("auditResult", "已通过");
+            params.put("auditDate", DateUtil.getNow());
+            params.put("description", "无");
+        } else {
+            tmplCode = AUDIT_RESULT;
+            params.put("auditContent", "工作室申请");
+            params.put("auditResult", "已通过");
+        }
         params.put("openid", userinfo.getOpenid());
-        params.put("auditResult", isPass ? "您的加入申请已通过！" : "您的加入申请未通过！");
-        params.put("auditDate", DateUtil.getNow());
-        params.put("description", "无");
         params.put("remark", isPass ? "您已经可以开始发展工作室！" : "可向邮箱jinxinbang123@163.com 发送邮件提出异议！");
+        params.put("first", isPass ? "您的加入申请已通过！" : "您的加入申请未通过！");
 
-        return messageTemplateService.send("jxb", STUDIO_NEW_MEMBER, params);
+
+        return messageTemplateService.send("jxb", tmplCode, params);
     }
 
     /**
@@ -132,7 +153,7 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
         params.put("nickName", StringUtil.isEmpty(newOne.getNickname()) ? "未知姓名" : newOne.getNickname());
         params.put("joinDate", DateUtil.getNow());
 
-        return messageTemplateService.send("jxb", STUDIO_AUDIT, params);
+        return messageTemplateService.send("jxb", STUDIO_NEW_MEMBER, params);
     }
 
     /**

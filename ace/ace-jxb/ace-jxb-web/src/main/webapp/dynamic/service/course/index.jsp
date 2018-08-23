@@ -115,12 +115,12 @@
                                                                     <thead>
                                                                     <tr>
 
-                                                                        <th width="30%"> 课程名称 </th>
-                                                                        <th width="10%">讲师</th>
+                                                                        <th width="35%"> 课程名称 </th>
+
                                                                         <th width="15%">上架时间&状态</th>
                                                                         <th width="10%">购买数 </th>
                                                                         <th width="15%">审核状态</th>
-                                                                        <th width="20%">操作</th>
+                                                                        <th width="25%">操作</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody id="courseList">
@@ -170,7 +170,7 @@
                 </div>
             </div>
         </td>
-        <td class="tdcontent"> \${item.counselorName} </td>
+
         <td  class="tdcontent">
             <div> \${item.createDate} </div>
             <div style="padding:10px">
@@ -205,9 +205,7 @@
                 <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
                 {@/if}
             {@/if}
-            {@if item.auditRst==0}
-            <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
-            {@/if}
+
         </td>
     </tr>
     {@/each}

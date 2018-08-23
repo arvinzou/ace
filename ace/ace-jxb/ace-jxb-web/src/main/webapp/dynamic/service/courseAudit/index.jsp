@@ -20,11 +20,11 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
     <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/courseAudit/css/upload.css"/>
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/create.css">
-    <script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/courseAudit/css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/courseAudit/css/create.css">
+    <script src="${pageContext.request.contextPath}/dynamic/service/courseAudit/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 <body>
@@ -193,7 +193,7 @@
             {@/if}
         </td>
         <td >
-            <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
+            <a class="operation" href="javascript:void(0);"  onclick="edit('\${item.id}');">编辑</a>
             <a class="operation" href="list/index.jsp?id=\${item.id}">详细</a>
             {@if item.auditRst==1}
                 {@if item.lineState==0}

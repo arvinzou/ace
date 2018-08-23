@@ -39,6 +39,12 @@ function initData(id){
                     footer: result.data
                 });
                 $(".footer").append(footerHtml);
+
+                var slideTemp = document.getElementById('bannerSlideTemp').innerHTML;
+                var slideHtml = juicer(slideTemp, {
+                    slide: result.data.imgList
+                });
+                $("#bannerslide").append(slideHtml);
             }else {
                 alert(result.info);
                 return;
