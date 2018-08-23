@@ -79,14 +79,14 @@
 					</div>
 					<div class="col-xs-9 col-sm-9">
 					<div class="row content_01">
-					<div class="col-xs-6 col-sm-6 left">\${item.name}</div>
+					<div class="col-xs-6 col-sm-6 left" onclick="showInfo('\${item.id}');">\${item.name}</div>
 					<div class="col-xs-6 col-sm-6 right online" onclick="createOrder('\${item.id}');">
-					<img src="img/online.png" />预约咨询
+						<img src="img/online.png" />预约咨询
 					</div>
 					</div>
 					<div class="row content_02" onclick="showInfo('\${item.id}');">
 					<p>
-					\$\${item.profile}
+					\${item.certification}
 					</p>
 				</div>
 				<div class="row content_03">
