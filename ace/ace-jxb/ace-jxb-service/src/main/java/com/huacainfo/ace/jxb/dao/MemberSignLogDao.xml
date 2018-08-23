@@ -163,6 +163,9 @@
         <if test="condition.monthDate !=null and condition.monthDate !=&quot;&quot;">
             and t.signInDate like concat(#{condition.monthDate,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and t.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findToday" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -170,5 +173,6 @@
         <include refid="Base_Column_List"/>
         from member_sign_log
         where signInDate like concat(#{todayDate,jdbcType=VARCHAR},'%')
+        and userId = #{userId,jdbcType=VARCHAR}
     </select>
 </mapper>

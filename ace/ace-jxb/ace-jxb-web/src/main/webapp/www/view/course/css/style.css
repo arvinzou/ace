@@ -25,6 +25,7 @@
 .coverImg{
 	width: 2.106666rem;
 	height: 2.106666rem;
+	object-fit: cover;
 	border-radius: 0.133333rem;
 }
 .title{

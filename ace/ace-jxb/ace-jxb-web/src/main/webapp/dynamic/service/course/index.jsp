@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="../../common/base.jsp"/>
+    <jsp:include page="/dynamic/common/base.jsp"/>
     <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
@@ -27,7 +27,6 @@
     <script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
-
 <body>
 
 <!--隐藏存放ID-->
@@ -199,10 +198,12 @@
         <td >
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
             <a class="operation" href="list/index.jsp?id=\${item.id}">制作</a>
-            {@if item.lineState==0}
-            <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
-            {@else}
-            <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
+            {@if item.auditRst==1}
+                {@if item.lineState==0}
+                <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
+                {@else}
+                <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
+                {@/if}
             {@/if}
             {@if item.auditRst==0}
             <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>

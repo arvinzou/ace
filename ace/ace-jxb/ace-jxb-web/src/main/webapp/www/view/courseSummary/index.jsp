@@ -101,7 +101,7 @@
                 </div>
                 <div class="row">
                 <div class="col-xs-3 col-md-3">
-                <img src="img/headImg.png" class="head_img" />
+                <img src="\${data.counselor.imagePhotoUrl}" class="head_img" />
                 </div>
                 <div class="col-xs-6 col-md-6">
                 <p class="teacher_name">\${data.counselor.name}</p>
@@ -164,12 +164,10 @@
         			</div>
         		</div>
 				<div class="row">
-					<div class="col-xs-2 col-md-2"></div>
+					<%--<div class="col-xs-2 col-md-2"></div>--%>
 					<div class="col-xs-10 col-md-10">
 						{@if item.free == '0'}
-						<span class="try">
-							 试听
-						</span>
+						<span class="try">试听</span>
 						{@else}
 						{@/if}
 						<span class="duration">\${item.duration}分钟</span>
@@ -188,13 +186,11 @@
 					<h3 class="title">1.\${data.name}</h3>
 				</div>
 				<div class="row">
-					<div class="col-xs-2 col-md-2"></div>
+					<%--<div class="col-xs-2 col-md-2"></div>--%>
 					<div class="col-xs-10 col-md-10">
-						<span class="try">
-							{@if data.free == '0'}
-							 试听
-							{@/if}
-						</span>
+						{@if data.free == '0'}
+						<span class="try">试听</span>
+						{@/if}
 						<span class="duration">\${data.duration}分钟</span>
 					</div>
 				</div>
@@ -204,7 +200,7 @@
 	<script id="commentsListTemp" type="text/template">
 		{@each data as item, index}
         <div class="row commen_item">
-            <div class="row">
+            <div class="row" style="padding-top: 0.2rem;">
             <div class="col-xs-3 col-md-3">
             <img src="\${item.headimgurl}" class="user_head" />
             </div>

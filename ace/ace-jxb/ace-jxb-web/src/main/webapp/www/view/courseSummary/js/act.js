@@ -113,7 +113,11 @@ function viewHtml(IDom, data, tempId) {
 }
 
 function playSource(sourceId){
-   window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId+'&sourceId='+sourceId;
+    if(findOrderByCommodityid() == false){
+        alert("课程必须先购买！");
+    }else{
+        window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId+'&sourceId='+sourceId;
+    }
 }
 
 function initCommentsList(){
