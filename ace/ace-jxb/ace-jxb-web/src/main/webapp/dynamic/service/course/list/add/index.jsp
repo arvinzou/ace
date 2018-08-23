@@ -45,7 +45,7 @@
 									<i class="fa fa-circle"></i>
 								</li>
 								<li>
-									<span>课程管理</span>
+									<span>课件管理</span>
 								</li>
 							</ul>
 							<div class="page-content-inner">
@@ -59,7 +59,7 @@
 										<div class="portlet light ">
 											<div class="portlet-title">
 												<div class="caption">
-													课程制作
+													课件制作
 												</div>
 											</div>
 											<div class="portlet-body">
@@ -69,9 +69,9 @@
                                                                 <div class="form-body">
                                                                     <div class="form-group">
                                                                         <label class="col-md-2 control-label">
-                                                                            <span class="label-red">*</span>课程名称</label>
+                                                                            <span class="label-red">*</span>课件名称</label>
                                                                         <div class="col-md-10">
-                                                                            <input type="text" class="form-control" name="name" maxlength="28" placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字)">
+                                                                            <input type="text" class="form-control" name="name" maxlength="28" placeholder="请输入课件名称（建议字数在14个字以内，不超过28个字)">
                                                                             <span class="help-block"></span>
                                                                         </div>
                                                                     </div>
@@ -87,16 +87,16 @@
 
 																	<div class="form-group">
 																		<label class="col-md-2 control-label">
-																			<span class="label-red">*</span>课程时长</label>
+																			<span class="label-red">*</span>课件时长</label>
 																		<div class="col-md-10">
-																			<input type="text" class="form-control" name="duation" maxlength="28" placeholder="请输入课程时长（如：3分20秒)">
+																			<input type="text" class="form-control" name="duration" maxlength="28" placeholder="请输入课件时长（如：300)，单位秒">
 																			<span class="help-block"></span>
 																		</div>
 																	</div>
                                                                    
                                                                     <div class="form-group">
                                                                         <label class="col-md-2 control-label">
-                                                                            <span class="label-red">*</span>课程简介</label>
+                                                                            <span class="label-red">*</span>课件文稿</label>
                                                                         <div class="col-md-10">
                                                                             <div style="text-align:left">
                                                                                 <textarea name="introduction" id="introduction"></textarea>
@@ -110,11 +110,11 @@
                                                                     	<div class="col-md-10">
                                                                     		<div class="radio-group-container">
                                                                     					<label class="mt-radio mt-radio-outline">
-                                                                    						<input type="radio" name="tried" value="1">是
+                                                                    						<input type="radio" name="free" value="1">是
                                                                     						<span></span>
                                                                     					</label>
                                                                     					<label class="mt-radio mt-radio-outline">
-                                                                    						<input type="radio" name="tried" value="0" checked>否
+                                                                    						<input type="radio" name="free" value="0" checked>否
                                                                     						<span></span>
                                                                     					</label>
                                                                     					</div>

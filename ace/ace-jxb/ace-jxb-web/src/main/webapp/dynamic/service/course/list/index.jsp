@@ -63,7 +63,7 @@
                                                         <div class="actions">
                                                             <a href="javascript:void(0);" class="btn green" data-target="#myModal" data-toggle="modal">创建章节</a>
                                                             <a href="javascript:void(0);" class="btn green" data-target="#chapterBox" data-toggle="modal" onclick="initPartListOnModal();">章节修改</a>
-                                                            <a href="javascript:void(0);" class="btn green" onclick="add();">创建课程</a>
+                                                            <a href="javascript:void(0);" class="btn green" onclick="add();">创建课件</a>
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body">
@@ -197,7 +197,7 @@
                 \${item.createDate}
             </td>
             <td width="15%" class="tdcontent">
-                \${item.duration}
+                \${item.duration}秒
             </td>
             <td width="10%" class="tdcontent">
                 {@if item.free == '0'}

@@ -30,11 +30,12 @@ function initEditor() {
 function save(params) {
     $.extend(params, {
         courseId: urlParams.courseId,
-		partId: urlParams.partId
+		partId: urlParams.partId,
+		id:urlParams.id
     });
     startLoad();
     $.ajax({
-        url: contextPath + "/courseSource/insertCourseSource",
+        url: contextPath + "/courseSource/updateCourseSource",
         type: "post",
         async: false,
         data: {
@@ -46,7 +47,6 @@ function save(params) {
 			if(result.status==0){
 				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?id="+urlParams.courseId
 			}
-			
         },
         error: function () {
             alert("系统服务内部异常！");
@@ -59,9 +59,11 @@ function save(params) {
 
 function renderPage(dom, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
+	console.log(tpl);
     var html = juicer(tpl, {
         data: data,
     });
+	console.log(html);
     $(dom).html(html);
 }
 
@@ -123,12 +125,34 @@ function initPage() {
     });
     $('input[name=duation]').maxlength({alwaysShow: true});
     initEditor();
-    initUpload();
-}
-function initUpload(){
-	
 }
 
+
+function initForm(){
+	startLoad();
+    $.ajax({
+        url: contextPath + "/courseSource/selectCourseSourceByPrimaryKey",
+        type:"post",
+        async:false,
+        data:{
+            id: urlParams.id
+        },
+        success:function(result){
+			stopLoad();
+            if(result.status == 0) {
+				renderPage($(".form-panel"),result.value, 'tpl-fm');
+				initPage();
+            }else {
+                alert(result.errorMessage);
+            }
+        },
+        error:function(){
+			stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
 jQuery(function ($) {
-    initPage();
+	initForm()
 });
+

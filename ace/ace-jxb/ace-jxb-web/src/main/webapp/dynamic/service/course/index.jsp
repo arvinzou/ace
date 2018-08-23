@@ -13,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="../../common/base.jsp"/>
+    <jsp:include page="/dynamic/common/base.jsp"/>
     <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
@@ -27,7 +27,6 @@
     <script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
-
 <body>
 
 <!--隐藏存放ID-->
