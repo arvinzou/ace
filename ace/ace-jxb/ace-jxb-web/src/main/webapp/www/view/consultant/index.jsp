@@ -95,9 +95,11 @@
 					</div>
 					<div class="row content_04">
 					<ul class="clabel">
+						{@if item.tags != undefined && item.tags != null}
 						{@each item.tags.split(',') as tag,num}
 						<li>\${tag}</li>
 						{@/each}
+						{@/if}
 					</ul>
 					</div>
 					</div>
