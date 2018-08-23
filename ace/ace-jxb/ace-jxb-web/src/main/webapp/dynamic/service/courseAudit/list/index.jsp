@@ -22,8 +22,8 @@
 				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css"/>
 				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
 				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/list/css/style.css">
-        <script src="${pageContext.request.contextPath}/dynamic/service/course/list/js/act.js?v=${cfg.version}"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/courseAudit/list/css/style.css">
+        <script src="${pageContext.request.contextPath}/dynamic/service/courseAudit/list/js/act.js?v=${cfg.version}"></script>
         <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
     </head>
 
