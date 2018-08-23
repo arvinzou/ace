@@ -145,7 +145,7 @@
                                                                 <span class="caption-subject font-green bold uppercase">工作室</span>
                                                             </div>
                                                             <div class="actions">
-                                                                <a onclick="javascript:modify()"
+                                                                <a onclick="javascript:createStudio()"
                                                                    class="btn btn-circle red-sunglo btn-sm">
                                                                     <i class="fa fa-plus"></i>
                                                                     创建工作室</a>

@@ -145,32 +145,53 @@ public class StudioServiceImpl implements StudioService {
         if (CommonUtils.isBlank(o.getIntroduce())) {
             return new MessageResponse(1, "介绍不能为空！");
         }
-        if (CommonUtils.isBlank(o.getId())) {
-            String studioId = GUIDUtil.getGUID();
-            o.setId(studioId);
-            o.setCounselorId(userProp.getUserId());
-            o.setCreateDate(new Date());
-            o.setStatus("0");
-            this.studioDao.insertSelective(o);
-            StudioImg si = new StudioImg();
-            for (String item : list) {
-                si.setId(GUIDUtil.getGUID());
-                si.setCreateDate(new Date());
-                si.setStudioId(studioId);
-                si.setImgUrl(item);
-                this.studioImgDao.insert(si);
-            }
-        } else {
-            this.studioDao.updateByPrimaryKeySelective(o);
-            this.studioImgDao.deleteByStudioId(o.getId());
-            StudioImg si = new StudioImg();
-            for (String item : list) {
-                si.setId(GUIDUtil.getGUID());
-                si.setCreateDate(new Date());
-                si.setStudioId(o.getId());
-                si.setImgUrl(item);
-                this.studioImgDao.insert(si);
-            }
+        this.studioDao.updateByPrimaryKeySelective(o);
+        this.studioImgDao.deleteByStudioId(o.getId());
+        StudioImg si = new StudioImg();
+        for (String item : list) {
+            si.setId(GUIDUtil.getGUID());
+            si.setCreateDate(new Date());
+            si.setStudioId(o.getId());
+            si.setImgUrl(item);
+            this.studioImgDao.insert(si);
+        }
+        this.dataBaseLogService.log("修改工作室", "工作室", "",
+                o.getId(), o.getId(), userProp);
+        return new MessageResponse(0, "修改工作室完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:insertStudio
+     * @Description: TODO(添加工作室)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+    public MessageResponse insertStudioVo(Studio o, List<String> list, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(o.getName())) {
+            return new MessageResponse(1, "名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "介绍不能为空！");
+        }
+        String studioId = GUIDUtil.getGUID();
+        o.setId(studioId);
+        o.setCounselorId(userProp.getUserId());
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        this.studioDao.insertSelective(o);
+        StudioImg si = new StudioImg();
+        for (String item : list) {
+            si.setId(GUIDUtil.getGUID());
+            si.setCreateDate(new Date());
+            si.setStudioId(studioId);
+            si.setImgUrl(item);
+            this.studioImgDao.insert(si);
         }
         this.dataBaseLogService.log("添加工作室", "工作室", "",
                 o.getId(), o.getId(), userProp);
