@@ -36,18 +36,20 @@ function userStudioStaff(id) {
 
 /*点击创建工作室*/
 function createStudio() {
+    cleanForm();
+    $('#studioInfoModal').modal('show');
     $('.submit_btn').off("click");
     $('.submit_btn').click(createMyStudio);
 }
 
 /*创建我的工作室*/
 function createMyStudio() {
-    var data = submitForm();
+    var data = {json: submitForm()};
     var url = '/jxb/studio/insertStudioVo';
     $.post(url, data, function (result) {
         if (result.status == 0) {
             alert("工作室创建成功");
-            cleanForm();
+            $('#studioInfoModal').modal('hide');
             return;
         }
         alert("信息更新失败,请稍后再试！");
@@ -62,7 +64,7 @@ function cleanForm() {
     $('.modal #logo').prop('src', 'addImg.png');
     $('.modal .imgSrc').remove();
     $('#indexImg').show();
-    $('#studioInfoModal').modal('show');
+    editor.setValue('');
 }
 
 /*查看工作室详情*/
@@ -122,8 +124,10 @@ var studioId;
 function modify(id) {
     studioId = id;
     if (id) {
+        cleanForm();
         getStudioInfo(id);
     }
+    $('#studioInfoModal').modal('show');
     $('.submit_btn').off("click");
     $('.submit_btn').click(modifyStudio);
 
@@ -132,14 +136,14 @@ function modify(id) {
 /*提交工作室修改*/
 function modifyStudio() {
     var url = '/jxb/studio/modifyStudio';
-    var data = submitForm();
+    var data = {json: submitForm()};
     $.post(url, data, function (result) {
         if (result.status == 0) {
-            alert("工作室创建成功");
-            cleanForm();
+            alert("工作室修改成功");
+            $('#studioInfoModal').modal('hide');
+            return;
         }
         alert("信息更新失败,请稍后再试！");
-
     })
 }
 

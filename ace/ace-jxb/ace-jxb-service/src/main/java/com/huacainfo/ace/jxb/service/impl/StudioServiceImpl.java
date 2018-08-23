@@ -155,8 +155,8 @@ public class StudioServiceImpl implements StudioService {
             si.setImgUrl(item);
             this.studioImgDao.insert(si);
         }
-        this.dataBaseLogService.log("修改工作室", "工作室", "",
-                o.getId(), o.getId(), userProp);
+//        this.dataBaseLogService.log("修改工作室", "工作室", "",
+//                o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "修改工作室完成！");
     }
 
@@ -193,8 +193,8 @@ public class StudioServiceImpl implements StudioService {
             si.setImgUrl(item);
             this.studioImgDao.insert(si);
         }
-        this.dataBaseLogService.log("添加工作室", "工作室", "",
-                o.getId(), o.getId(), userProp);
+//        this.dataBaseLogService.log("添加工作室", "工作室", "",
+//                o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "添加工作室完成！");
     }
 
@@ -363,7 +363,7 @@ public class StudioServiceImpl implements StudioService {
         //我的工作室
         StudioQVo condition = new StudioQVo();
         condition.setCounselorId(counselorId);
-        List<StudioVo> my = studioDao.findList(condition, 0, 0 + 10, "");
+        List<StudioVo> my = studioDao.findList(condition, 0, 0 + 100, "");
 
 
         Map<String, Object> rtnMap = new HashMap<>();
