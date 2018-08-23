@@ -216,9 +216,16 @@
         select
         t.id, t.name, t.level, t.counselorId, t.logoImgUrl, t.status, t.createDate, t.introduce
         from studio t
-        where t.name =#{name,jdbcType=VARCHAR}
-        or
-        t.counselorId = #{counselorId,jdbcType=VARCHAR}
+        where t.name = #{name,jdbcType=VARCHAR}
     </select>
 
+    <select id="findUserInfoByStudioId" parameterType="java.lang.String" resultType="map">
+        select
+        u.unionid, u.openid, u.appid, u.nickname, u.sex, u.city, u.province, u.country,
+        u.headimgurl, u.access_token, u.refresh_token, u.scope,
+        u.expires_in,role, u.mobile, u.privilege
+        from jxb.studio t
+        left join portal.userinfo u on t.counselorId=u.unionid
+        where t.id = #{studioId,jdbcType=VARCHAR}
+    </select>
 </mapper>

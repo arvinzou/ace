@@ -103,4 +103,17 @@
       createDate = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.TeacherAudit">
+        select count(1)
+        from teacher_audit
+        where counselorId = #{counselorId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByCounselorId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from teacher_audit
+        where counselorId = #{counselorId,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -19,6 +19,8 @@ import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UserinfoService;
+import com.huacainfo.ace.portal.vo.UserinfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,8 @@ public class CounselorServiceImpl implements CounselorService {
 
     @Autowired
     private StudioDao studioDao;
+    @Autowired
+    private UserinfoService userinfoService;
 
     @Autowired
     private DataBaseLogService dataBaseLogService;
@@ -65,6 +69,12 @@ public class CounselorServiceImpl implements CounselorService {
                                                      int limit, String orderBy) throws Exception {
         PageResult<CounselorVo> rst = new PageResult<>();
         List<CounselorVo> list = counselorDao.findList(condition, start, limit, orderBy);
+        for (CounselorVo item : list) {
+            if (CommonUtils.isBlank(item.getImagePhotoUrl())) {
+                UserinfoVo userinfoVo = userinfoService.selectUserinfoByKey(item.getId());
+                item.setImagePhotoUrl(userinfoVo.getHeadimgurl());
+            }
+        }
         rst.setRows(list);
         if (start <= 1) {
             int allRows = counselorDao.findCount(condition);

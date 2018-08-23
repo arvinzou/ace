@@ -16,6 +16,7 @@ import com.huacainfo.ace.jxb.dao.StudioImgDao;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.Studio;
 import com.huacainfo.ace.jxb.model.StudioImg;
+import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.StudioService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
@@ -49,6 +50,8 @@ public class StudioServiceImpl implements StudioService {
     private StudioImgDao studioImgDao;
     @Autowired
     private CounselorService counselorService;
+    @Autowired
+    private BisMsgNoticeService bisMsgNoticeService;
 
     /**
      * @throws
@@ -203,10 +206,8 @@ public class StudioServiceImpl implements StudioService {
             return new MessageResponse(1, "状态不能为空！");
         }
 
-
-        this.studioDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更工作室", "工作室", "",
-                o.getId(), o.getId(), userProp);
+        studioDao.updateByPrimaryKeySelective(o);
+        dataBaseLogService.log("变更工作室", "工作室", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更工作室完成！");
     }
@@ -303,7 +304,20 @@ public class StudioServiceImpl implements StudioService {
         }
 
         studioVo.setStatus(auditRs);
-        return updateStudio(studioVo, curUserProp);
+        MessageResponse rs = updateStudio(studioVo, curUserProp);
+        if (rs.getStatus() == ResultCode.SUCCESS) {
+            // 2018/8/23 工作室审核消息发放
+            try {
+                ResultResponse msgRs = bisMsgNoticeService.studioAuditMsg(studioVo, auditRs);
+                logger.debug("工作室审核消息结果：{}", msgRs);
+            } catch (Exception e) {
+                logger.error("工作室审核消息发送异常：{}", e);
+            }
+
+            return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+        }
+
+        return rs;
     }
 
     /**
@@ -359,6 +373,11 @@ public class StudioServiceImpl implements StudioService {
         studioVo.setMemberList(memberList);
 
         return studioVo;
+    }
+
+    @Override
+    public Map<String, Object> findUserInfoByStudioId(String studioId) {
+        return studioDao.findUserInfoByStudioId(studioId);
     }
 
 }
