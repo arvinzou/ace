@@ -6,6 +6,7 @@ import com.huacainfo.ace.jxb.vo.StudioVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StudioDao {
 
@@ -36,4 +37,5 @@ public interface StudioDao {
 
     List<Studio> isExit(Studio record);
 
+    Map<String, Object> findUserInfoByStudioId(String studioId);
 }

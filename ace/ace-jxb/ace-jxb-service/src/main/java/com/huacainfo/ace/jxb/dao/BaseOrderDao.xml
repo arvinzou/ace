@@ -263,11 +263,18 @@
         </association>
     </resultMap>
 
+    <!--评测订单返回map-->
+    <resultMap id="evaluate-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+        <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
+    </resultMap>
+
     <!--订单vo对象-->
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
         <discriminator javaType="String" column="category">
             <case value="1" resultMap="consult-VoResultMap"/>
             <case value="2" resultMap="course-VoResultMap"/>
+            <case value="3" resultMap="evaluate-VoResultMap"/>
         </discriminator>
     </resultMap>
 
@@ -330,7 +337,7 @@
         </if>
         <if test="condition.statusArray !=null">
             and t.payStatus in
-            <foreach collection="statusArray" item="item" separator="," open="(" close=")">
+            <foreach collection="condition.statusArray" item="item" separator="," open="(" close=")">
                 ${item}
             </foreach>
         </if>

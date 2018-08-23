@@ -7,9 +7,11 @@ package com.huacainfo.ace.jxb.constant;
  */
 public interface RegType {
     /**
-     * 注册身份标识
+     * 注册身份标识 1-讲师/咨询师 2-普通家长 3-近心帮管理员
      */
     String TEACHER = "1";
 
     String PARENT = "2";
+
+    String ADMINISTRATOR = "3";
 }

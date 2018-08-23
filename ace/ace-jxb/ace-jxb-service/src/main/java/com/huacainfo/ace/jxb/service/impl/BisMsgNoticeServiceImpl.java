@@ -2,11 +2,16 @@ package com.huacainfo.ace.jxb.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.jxb.constant.OrderCategory;
+import com.huacainfo.ace.jxb.model.TeacherAudit;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
+import com.huacainfo.ace.jxb.service.StudioService;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
+import com.huacainfo.ace.jxb.vo.StudioVo;
 import com.huacainfo.ace.portal.service.MessageTemplateService;
 import com.huacainfo.ace.portal.service.UserinfoService;
 import org.slf4j.Logger;
@@ -28,6 +33,13 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
     public static final String CONSULT_ORDER_PAY_SUCCESS_COUNSELOR = "CONSULT-ORDER-PAY-SUCCESS-COUNSELOR";
     //咨询订单付款成功通知 - 微信用户
     public static final String CONSULT_ORDER_PAY_SUCCESS_USER = "CONSULT-ORDER-PAY-SUCCESS-USER";
+    //咨询师入驻审核通知
+    public static final String COUNSELOR_REGISTER_AUDIT = "COUNSELOR-REGISTER-AUDIT";
+    //工作室审核通知
+    public static final String STUDIO_AUDIT = "STUDIO-AUDIT";
+    //工作室新增成员通知
+    public static final String STUDIO_NEW_MEMBER = "STUDIO-NEW-MEMBER";
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MessageTemplateService messageTemplateService;
@@ -35,6 +47,8 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
     private UserinfoService userinfoService;
     @Autowired
     private BaseOrderService baseOrderService;
+    @Autowired
+    private StudioService studioService;
 
     /**
      * 付款成功消息
@@ -53,6 +67,72 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
         }
 
         return new ResultResponse(ResultCode.FAIL, "付款成功消息-推送失败-订单类型不支持 [{}]", orderId);
+    }
+
+    /**
+     * 咨询师审核消息
+     *
+     * @param record 审核结果
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse counselorAuditMsg(TeacherAudit record) throws Exception {
+        Userinfo userinfo = userinfoService.selectUserinfoByPrimaryKey(record.getCounselorId()).getValue();
+        if (null == userinfo) {
+            return new ResultResponse(ResultCode.FAIL, "咨询师微信资料丢失");
+        }
+        boolean isPass = "1".equals(record.getRst());
+        Map<String, Object> params = new HashMap<>();
+        params.put("openid", userinfo.getOpenid());
+        params.put("auditResult", isPass ? "您的加入申请已通过！" : "您的加入申请未通过！");
+        params.put("auditDate", DateUtil.getNow());
+        params.put("description", StringUtil.isEmpty(record.getStatement()) ? "无" : record.getStatement());
+        params.put("remark", isPass ? "您已经可以开始使用平台！" : "可向邮箱jinxinbang123@163.com 发送邮件提出异议！");
+
+        return messageTemplateService.send("jxb", COUNSELOR_REGISTER_AUDIT, params);
+    }
+
+    /**
+     * 工作室审核消息发放
+     */
+    @Override
+    public ResultResponse studioAuditMsg(StudioVo studioVo, String auditRs) throws Exception {
+        Userinfo userinfo = userinfoService.selectUserinfoByPrimaryKey(studioVo.getCounselorId()).getValue();
+        if (null == userinfo) {
+            return new ResultResponse(ResultCode.FAIL, "咨询师微信资料丢失");
+        }
+        boolean isPass = "1".equals(auditRs);
+        Map<String, Object> params = new HashMap<>();
+        params.put("openid", userinfo.getOpenid());
+        params.put("auditResult", isPass ? "您的加入申请已通过！" : "您的加入申请未通过！");
+        params.put("auditDate", DateUtil.getNow());
+        params.put("description", "无");
+        params.put("remark", isPass ? "您已经可以开始发展工作室！" : "可向邮箱jinxinbang123@163.com 发送邮件提出异议！");
+
+        return messageTemplateService.send("jxb", STUDIO_NEW_MEMBER, params);
+    }
+
+    /**
+     * 工作室新成员加入提醒
+     *
+     * @param newOne   新成员信息
+     * @param studioId 工作室
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse memberJoinMsg(Userinfo newOne, String studioId) throws Exception {
+        Map<String, Object> referee = studioService.findUserInfoByStudioId(studioId);
+        if (null == referee || null == referee.get("openid")) {
+            return new ResultResponse(ResultCode.FAIL, "工作室责任人微信信息缺失");
+        }
+        String openId = String.valueOf(referee.get("openid"));
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("openid", openId);
+        params.put("nickName", StringUtil.isEmpty(newOne.getNickname()) ? "未知姓名" : newOne.getNickname());
+        params.put("joinDate", DateUtil.getNow());
+
+        return messageTemplateService.send("jxb", STUDIO_AUDIT, params);
     }
 
     /**

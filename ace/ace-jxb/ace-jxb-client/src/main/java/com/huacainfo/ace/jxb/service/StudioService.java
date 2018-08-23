@@ -116,4 +116,6 @@ public interface StudioService {
      * @return StudioVo
      */
     StudioVo getStudioDetail(String studioId) throws Exception;
+
+    Map<String, Object> findUserInfoByStudioId(String studioId);
 }

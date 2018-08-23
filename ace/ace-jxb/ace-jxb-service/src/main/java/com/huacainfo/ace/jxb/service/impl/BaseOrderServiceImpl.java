@@ -17,12 +17,16 @@ import com.huacainfo.ace.jxb.constant.OrderPayStatus;
 import com.huacainfo.ace.jxb.constant.OrderPayType;
 import com.huacainfo.ace.jxb.constant.PayStatus;
 import com.huacainfo.ace.jxb.dao.*;
-import com.huacainfo.ace.jxb.model.*;
+import com.huacainfo.ace.jxb.model.BaseOrder;
+import com.huacainfo.ace.jxb.model.ConsultOrder;
+import com.huacainfo.ace.jxb.model.JxbCallBackLog;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.service.OrderCalculationService;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
+import com.huacainfo.ace.jxb.vo.ConsultProductVo;
+import com.huacainfo.ace.jxb.vo.CourseVo;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.EvaluatTplService;
@@ -117,6 +121,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
             }
             return rst;
         } catch (Exception e) {
+            logger.error("{}", e);
             if (session != null) {
                 session.close();
             }
@@ -427,9 +432,9 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         BigDecimal payMoney = price.multiply(new BigDecimal(base.getAmount())).setScale(2, BigDecimal.ROUND_HALF_UP);
         //入库主订单
         base.setId(orderId);
-        base.setBusinessId(user.getUserId());//卖家ID
         base.setCommodityName(evaluat.getName());
-        base.setBusinessName(user.getName());
+        base.setBusinessName("近心帮");//卖家名称
+        base.setBusinessId("1522029730650");//卖家ID
         base.setPrice(price);
         base.setPayMoney(payMoney);
         base.setPayStatus(PayStatus.NEW_ORDER);
@@ -454,7 +459,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
      */
     private ResultResponse createCourseOrder(Users user, BaseOrder base, Map<String, Object> params) {
         //
-        Course course = courseDao.selectByPrimaryKey(base.getCommodityId());
+        CourseVo course = courseDao.selectVoByPrimaryKey(base.getCommodityId());
         if (null == course) {
             return new ResultResponse(ResultCode.FAIL, "非法商品资料");
         }
@@ -465,9 +470,9 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         BigDecimal payMoney = price.multiply(new BigDecimal(base.getAmount())).setScale(2, BigDecimal.ROUND_HALF_UP);
         //入库主订单
         base.setId(orderId);
-        base.setBusinessId(user.getUserId());//卖家ID
+        base.setBusinessId(course.getCreateUserId());//卖家ID
         base.setCommodityName(course.getName());
-        base.setBusinessName(user.getName());
+        base.setBusinessName(course.getCounselorName());
         base.setPrice(price);
         base.setPayMoney(payMoney);
         base.setPayStatus(PayStatus.NEW_ORDER);
@@ -621,7 +626,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
             return new ResultResponse(ResultCode.FAIL, "缺少预约详情资料");
         }
         //咨询产品资料
-        ConsultProduct product = consultProductDao.selectByPrimaryKey(base.getCommodityId());
+        ConsultProductVo product = consultProductDao.selectVoByPrimaryKey(base.getCommodityId());
         if (null == product) {
             return new ResultResponse(ResultCode.FAIL, "非法商品资料");
         }
@@ -643,7 +648,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         base.setId(orderId);
         base.setBusinessId(product.getCounselorId());//卖家ID
         base.setCommodityName("顾问在线产品");
-        base.setBusinessName(user.getName());
+        base.setBusinessName(product.getCounselorName());
         base.setPrice(price);
         base.setPayMoney(payMoney);
         base.setPayStatus(PayStatus.NEW_ORDER);

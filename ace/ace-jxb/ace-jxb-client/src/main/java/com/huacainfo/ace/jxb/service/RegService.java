@@ -37,4 +37,6 @@ public interface RegService {
      * @return
      */
     ResultResponse findInfo(Userinfo userinfo) throws Exception;
+
+    ResultResponse cleanAccount(String userId);
 }

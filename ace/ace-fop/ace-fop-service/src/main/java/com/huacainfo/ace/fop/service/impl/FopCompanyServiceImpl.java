@@ -488,10 +488,10 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return new MessageResponse(ResultCode.FAIL, "企业/机构法人联系方式不能为空!");
         }
 
-        MessageResponse mm = validate(o);
-        if (ResultCode.FAIL == mm.getStatus()) {
-            return mm;
-        }
+//        MessageResponse mm = validate(o);
+//        if (ResultCode.FAIL == mm.getStatus()) {
+//            return mm;
+//        }
         int temp = this.fopCompanyDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(ResultCode.FAIL, "企业/机构名称重复！");

@@ -124,5 +124,17 @@
         where counselorId = #{id,jdbcType=VARCHAR}
     </select>
 
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.ConsultProductVo">
+        <result column="counselorName" jdbcType="VARCHAR" property="counselorName"/>
+    </resultMap>
 
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+            case when t.counselorId='1522029730650' then '近心帮'
+             else c.name END as counselorName ,
+          t.id, t.counselorId, t.type, t.price, t.status, t.createDate
+        from consult_product t
+        left join jxb.counselor c on t.counselorId =  c.id
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
 </mapper>

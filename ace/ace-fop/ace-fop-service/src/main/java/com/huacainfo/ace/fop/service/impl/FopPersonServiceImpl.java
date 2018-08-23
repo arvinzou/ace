@@ -87,9 +87,9 @@ public class FopPersonServiceImpl implements FopPersonService {
         if (CommonUtils.isBlank(o.getSex())) {
             return new MessageResponse(1, "性别不能为空");
         }
-        if (CommonUtils.isBlank(o.getIdentityCard())) {
-            return new MessageResponse(1, "身份证号码不能为空");
-        }
+//        if (CommonUtils.isBlank(o.getIdentityCard())) {
+//            return new MessageResponse(1, "身份证号码不能为空");
+//        }
         if (CommonUtils.isBlank(o.getLastModifyDate())) {
             return new MessageResponse(1, "最后更新时间不能为空");
         }
@@ -133,12 +133,12 @@ public class FopPersonServiceImpl implements FopPersonService {
         if (CommonUtils.isBlank(o.getRealName())) {
             return new MessageResponse(1, "法人姓名不能为空！");
         }
-        if (CommonUtils.isBlank(o.getSex())) {
-            return new MessageResponse(1, "性别不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getIdentityCard())) {
-            return new MessageResponse(1, "身份证号码不能为空！");
-        }
+//        if (CommonUtils.isBlank(o.getSex())) {
+//            return new MessageResponse(1, "性别不能为空！");
+//        }
+//        if (CommonUtils.isBlank(o.getIdentityCard())) {
+//            return new MessageResponse(1, "身份证号码不能为空！");
+//        }
         MessageResponse mm = validate(o);
         if (ResultCode.FAIL == mm.getStatus()) {
             return mm;

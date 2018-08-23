@@ -38,44 +38,52 @@
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
-                                    <a href="index4.jsp">首页</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>订单管理</span>
                                 </li>
                             </ul>
 
-
                             <div class="page-content-inner">
-                                <div class="profile">
-                                    <div class="tabbable-line tabbable-full-width">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active">
-                                                <a onclick="javascript:changeType('1')" href="#tab_1_1"
-                                                   data-toggle="tab"> 咨询订单 </a>
-                                            </li>
-                                            <li>
-                                                <a onclick="javascript:changeType('2')" href="#tab_1_3"
-                                                   data-toggle="tab"> 课程订单 </a>
-                                            </li>
-                                            <li>
-                                                <a onclick="javascript:changeType('3')" href="#tab_1_3"
-                                                   data-toggle="tab"> 测试订单 </a>
-                                            </li>
-                                        </ul>
-                                        <div class="portlet-body">
-                                            <div class="mt-element-card mt-element-overlay">
-                                                <div class="row">
-                                                    <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="portlet light ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    订单管理
+                                                </div>
+                                            </div>
 
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <div class="input-group">
-                                                            <input type="text" style="height:33px"
-                                                                   class="form-control input-circle-left"
-                                                                   placeholder="请输入订单编号">
-                                                            <span class="input-group-btn">
+                                            <div class="portlet-body">
+                                                <div class="tabbable-line tabbable-full-width">
+                                                    <ul class="nav nav-tabs">
+                                                        <li class="active">
+                                                            <a onclick="javascript:changeType('1')" href="#tab_1_1"
+                                                               data-toggle="tab"> 咨询订单 </a>
+                                                        </li>
+                                                        <li>
+                                                            <a onclick="javascript:changeType('2')" href="#tab_1_3"
+                                                               data-toggle="tab"> 课程订单 </a>
+                                                        </li>
+                                                        <li>
+                                                            <a onclick="javascript:changeType('3')" href="#tab_1_3"
+                                                               data-toggle="tab"> 测试订单 </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="portlet-body">
+                                                        <div class="mt-element-card mt-element-overlay">
+                                                            <div class="row">
+                                                                <div class="col-sm-8">
+
+                                                                </div>
+                                                                <div class="col-sm-4">
+                                                                    <div class="input-group">
+                                                                        <input type="text" style="height:33px"
+                                                                               class="form-control input-circle-left"
+                                                                               placeholder="请输入订单编号">
+                                                                        <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
                                                                     <font style="vertical-align: inherit;"><font
@@ -83,46 +91,47 @@
                                                                         搜索</font></font>
                                                                 </button>
                                                             </span>
-                                                        </div>
-                                                    </div>
+                                                                    </div>
+                                                                </div>
 
-                                                </div>
-                                                <div class="row">
-
-                                                    <%--content--%>
-
-                                                    <div class="portlet-body">
-                                                        <div class="mt-element-card mt-element-overlay">
-                                                            <div class="col-xs-12">
+                                                            </div>
+                                                            <div class="row">
 
                                                                 <%--content--%>
-                                                                <div class="table-scrollable table-scrollable-borderless"
-                                                                     id="orderList">
 
+                                                                <div class="portlet-body">
+                                                                    <div class="mt-element-card mt-element-overlay">
+                                                                        <div class="col-xs-12">
+
+                                                                            <%--content--%>
+                                                                            <div class="table-scrollable table-scrollable-borderless"
+                                                                                 id="orderList">
+
+                                                                            </div>
+                                                                            <%--content--%>
+                                                                            <div class="paginationbar">
+                                                                                <ul class="pagination"
+                                                                                    id="pagination1"></ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+
                                                                 <%--content--%>
-                                                                <div class="paginationbar">
-                                                                    <ul class="pagination"
-                                                                        id="pagination1"></ul>
-                                                                </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--tab_1_2-->
 
-                                                    <%--content--%>
-
+                                                    <!--end tab-pane-->
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--tab_1_2-->
-
-                                        <!--end tab-pane-->
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -130,11 +139,9 @@
     </div>
 </div>
 
-<div class="bottom"></div>
+<div class="bottom">
 
 </div>
-</div>
-
 
 <div class="modal fade" id="orderInfoModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
@@ -159,11 +166,11 @@
 </body>
 
 <script id="temp_orderList" type="text/template">
-    <table class="table table-hover table-light" border="0" cellpadding="0" cellspacing="0">
+    <table class="table table-hover table-light" align="center" border="0" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
             <%--<th width="5%">订单号</th>--%>
-            <th width="10%">用户昵称</th>
+            <th width="15%">用户昵称</th>
             {@if orderCategory == 1}
             <th width="30%">咨询方式</th>
             <th width="10%">咨询师名称</th>
@@ -171,7 +178,7 @@
             <th width="30%">课程名称</th>
             <th width="10%">咨询师名称</th>
             {@else if orderCategory == 3}
-            <th width="30%">测试名称</th>
+            <th width="40%">测试名称</th>
             {@/if}
             <th width="5%">付款金额</th>
             <th width="20%">下单时间</th>
@@ -182,8 +189,19 @@
         <tbody>
         {@each data as item}
         <tr>
-            <%--<td>\${item.id}</td>--%>
-            <td>\${item.consumerName}</td>
+            <td>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row" style="margin: 0px">
+                            <img class="cover user-pic" src="\${item.consumerImgUrl}">
+                        </div>
+                        <div class="row" style="margin: 6px 0px 0px 6px;">
+                            \${item.consumerName}
+                        </div>
+                    </div>
+
+                </div>
+            </td>
             {@if item.category == 1}
             <td>\${formatCPntType(item.consultProduct.type)} x \${item.amount}次</td>
             <td>\${item.counselor.name}</td>
@@ -208,6 +226,10 @@
 <script id="temp_orderInfo" type="text/template">
 
     <table class="table table-bordered table-hover">
+        <tr>
+            <td class="active"> 订单编号</td>
+            <td class="success"> \${data.id}</td>
+        </tr>
         <tr>
             <td class="active"> 用户昵称</td>
             <td class="success"> \${data.consumerName}</td>
@@ -254,7 +276,7 @@
     }
 
     .table .user-pic {
-        height: 80px !important;
+        height: 60px !important;
     }
 
     .portlet-body {
@@ -265,7 +287,6 @@
         color: #333;
     }
 </style>
-
 
 </html>
 
