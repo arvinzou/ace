@@ -197,7 +197,7 @@
                 \${item.createDate}
             </td>
             <td width="15%" class="tdcontent">
-                \${item.duration}
+                \${item.duration}秒
             </td>
             <td width="10%" class="tdcontent">
                 {@if item.free == '0'}
