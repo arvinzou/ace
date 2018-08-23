@@ -71,6 +71,31 @@ public class Course implements Serializable {
 
     private String introduce;
 
+    /**
+     * 单课程资源描述
+     */
+    private String mediaDesc;
+    /**
+     * 单课程资源文件地址
+     */
+    private String mediaUrl;
+
+    public String getMediaDesc() {
+        return mediaDesc;
+    }
+
+    public void setMediaDesc(String mediaDesc) {
+        this.mediaDesc = mediaDesc;
+    }
+
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
+    public void setMediaUrl(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
+    }
+
     public String getLineState() {
         return lineState;
     }

@@ -23,11 +23,13 @@
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
+        <result column="mediaUrl" jdbcType="VARCHAR" property="mediaUrl"/>
+        <result column="mediaDesc" jdbcType="VARCHAR" property="mediaDesc"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, type, category, mediType, name, cover, duration, costType, cost, primeCost, demandNum,
         likeNum, objects, applicationObject, purport, remark, status, createUserId, createDate, introduce,
-        lineState
+        lineState, mediaUrl, mediaDesc
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -46,7 +48,7 @@
         primeCost, demandNum, likeNum,
         objects, applicationObject, purport,
         remark, status, createUserId,
-        createDate, introduce, lineState)
+        createDate, introduce, lineState, mediaUrl, mediaDesc)
         values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
         #{mediType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR},
         #{duration,jdbcType=INTEGER}, #{costType,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL},
@@ -54,7 +56,7 @@
         #{objects,jdbcType=VARCHAR}, #{applicationObject,jdbcType=VARCHAR}, #{purport,jdbcType=VARCHAR},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR},
-        #{lineState,jdbcType=VARCHAR})
+        #{lineState,jdbcType=VARCHAR}, #{mediaUrl,jdbcType=VARCHAR}, #{mediaDesc,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Course">
         insert into course
@@ -122,6 +124,12 @@
             <if test="introduce != null">
                 introduce,
             </if>
+            <if test="mediaUrl != null">
+                mediaUrl,
+            </if>
+            <if test="mediaDesc != null">
+                mediaDesc,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -186,6 +194,12 @@
             </if>
             <if test="introduce != null">
                 #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="mediaUrl != null">
+                #{mediaUrl,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="mediaDesc != null">
+                #{mediaDesc,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -252,6 +266,12 @@
             <if test="introduce != null">
                 introduce = #{introduce,jdbcType=LONGVARCHAR},
             </if>
+            <if test="mediaUrl != null">
+                mediaUrl = #{mediaUrl,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="mediaDesc != null">
+                mediaDesc = #{mediaDesc,jdbcType=LONGVARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -276,7 +296,9 @@
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP}
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        mediaUrl = #{mediaUrl,jdbcType=VARCHAR},
+        mediaDesc = #{mediaDesc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -292,7 +314,7 @@
         IFNULL(c.`name`,'近心帮管理员') as counselorName,
         t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
         t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce,
-        t.primeCost, t.objects, t.applicationObject, t.purport, t.lineState
+        t.primeCost, t.objects, t.applicationObject, t.purport, t.lineState, t.mediaUrl, t.mediaDesc
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

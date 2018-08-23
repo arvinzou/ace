@@ -17,27 +17,8 @@
 	<body>
 		<div class="box">
 			<div class="row">
-				<div class="slide_banner">
-					<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 100%;height: 100%;">
-						<!-- 轮播（Carousel）指标 -->
-						<ol class="carousel-indicators" style="bottom:30px !important;">
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#myCarousel" data-slide-to="1"></li>
-							<li data-target="#myCarousel" data-slide-to="2"></li>
-						</ol>
-						<!-- 轮播（Carousel）项目 -->
-						<div class="carousel-inner" style="width: 100%;height: 100%;">
-							<div class="item active" style="width: 100%;height: 100%;">
-								<img src="img/banner1.png" alt="First slide" style="width: 100%;height: 100%;">
-							</div>
-							<div class="item" style="width: 100%;height: 100%;">
-								<img src="img/banner2.png" alt="Second slide" style="width: 100%;height: 100%;">
-							</div>
-							<div class="item" style="width: 100%;height: 100%;">
-								<img src="img/banner1.png" alt="Third slide" style="width: 100%;height: 100%;">
-							</div>
-						</div>
-					</div>
+				<div class="slide_banner" id="bannerslide">
+
 				</div>
 				<div class="room_info">
 
@@ -115,6 +96,41 @@
 
 		<script id="footerTemp" type="text/template">
 			<p onclick="invate('\${footer.id}');">邀请老师加入</p>
+		</script>
+
+		<script id="bannerSlideTemp"  type="text/template">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 100%;height: 100%;">
+					<!-- 轮播（Carousel）指标 -->
+					<ol class="carousel-indicators" style="bottom:30px !important;">
+						{@each slide as item,index}
+						{@if index == 0}
+						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						{@else if index == 1}
+						<li data-target="#myCarousel" data-slide-to="1"></li>
+						{@else if index == 2}
+						<li data-target="#myCarousel" data-slide-to="2"></li>
+						{@/if}
+						{@/each}
+					</ol>
+					<!-- 轮播（Carousel）项目 -->
+					<div class="carousel-inner" style="width: 100%;height: 100%;" >
+						{@each slide as banner, index}
+						{@if index == 0}
+						<div class="item active" style="width: 100%;height: 100%;">
+							<img src="\${banner.imgUrl}" alt="First slide" style="width: 100%;height: 100%;">
+						</div>
+						{@else if index == 1}
+						<div class="item" style="width: 100%;height: 100%;">
+							<img src="\${banner.imgUrl}" alt="Second slide" style="width: 100%;height: 100%;">
+						</div>
+						{@else if index == 2}
+						<div class="item" style="width: 100%;height: 100%;">
+							<img src="\${banner.imgUrl}" alt="Third slide" style="width: 100%;height: 100%;">
+						</div>
+						{@/if}
+						{@/each}
+					</div>
+				</div>
 		</script>
 	</body>
 </html>
