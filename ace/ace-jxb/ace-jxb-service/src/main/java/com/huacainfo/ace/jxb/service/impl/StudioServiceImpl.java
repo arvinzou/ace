@@ -183,7 +183,7 @@ public class StudioServiceImpl implements StudioService {
         o.setId(studioId);
         o.setCounselorId(userProp.getUserId());
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus("0");
         this.studioDao.insertSelective(o);
         StudioImg si = new StudioImg();
         for (String item : list) {

@@ -67,10 +67,10 @@
                                                             <a onclick="javascript:changeType('2')" href="#tab_1_3"
                                                                data-toggle="tab"> 课程订单 </a>
                                                         </li>
-                                                        <li>
-                                                            <a onclick="javascript:changeType('3')" href="#tab_1_3"
-                                                               data-toggle="tab"> 测试订单 </a>
-                                                        </li>
+                                                        <%--<li>--%>
+                                                        <%--<a onclick="javascript:changeType('3')" href="#tab_1_3"--%>
+                                                        <%--data-toggle="tab"> 测试订单 </a>--%>
+                                                        <%--</li>--%>
                                                     </ul>
                                                     <div class="portlet-body">
                                                         <div class="mt-element-card mt-element-overlay">

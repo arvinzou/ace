@@ -364,6 +364,14 @@ public class CourseServiceImpl implements CourseService {
 
     private MessageResponse updateLineState(Course course, String state, UserProp userProp) throws Exception {
         course.setLineState(state);
+//        0 - 下架 1 - 上架
+        if ("0".equals(state)) {
+            course.setOfflineDate(DateUtil.getNowDate());
+//            course.setOnlineDate(null);
+        } else if ("1".equals(state)) {
+            course.setOnlineDate(DateUtil.getNowDate());
+//            course.setOfflineDate(null);
+        }
         courseDao.updateByPrimaryKeySelective(course);
 
         return new MessageResponse(ResultCode.SUCCESS, "0".equals(state) ? "下架成功" : "上架成功");

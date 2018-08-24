@@ -347,8 +347,16 @@
         <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
         <result column="onlineStatus" jdbcType="VARCHAR" property="onlineStatus"/>
         <result column="consultState" jdbcType="VARCHAR" property="consultState"/>
+        <result column="consultCount" jdbcType="INTEGER" property="consultCount"/>
+        <result column="courseCount" jdbcType="INTEGER" property="courseCount"/>
     </resultMap>
     <sql id="Vo_Column_List">
+        (select count(1) from base_order bo
+        where bo.category = 1
+        and bo.payStatus in ('2','6','7')
+        and bo.businessId = t.id
+        ) as consultCount,
+        (select count(1) from course cr where cr.createUserId = t.id) as courseCount,
         u.nickname, u.headimgurl,
         IFNULL(c.onlineStatus,'0') as onlineStatus, IFNULL(c.status,'0') as consultState,
         (SELECT MAX(cp.price) from consult_product cp where t.id = cp.counselorId) as maxCPAmount,

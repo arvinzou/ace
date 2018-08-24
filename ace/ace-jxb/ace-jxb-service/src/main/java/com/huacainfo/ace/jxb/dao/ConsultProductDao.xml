@@ -136,6 +136,6 @@
           t.id, t.counselorId, t.type, t.price, t.status, t.createDate
         from consult_product t
         left join jxb.counselor c on t.counselorId =  c.id
-        where id = #{id,jdbcType=VARCHAR}
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 </mapper>

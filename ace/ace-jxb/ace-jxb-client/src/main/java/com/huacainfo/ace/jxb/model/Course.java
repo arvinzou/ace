@@ -80,6 +80,32 @@ public class Course implements Serializable {
      */
     private String mediaUrl;
 
+
+    /**
+     * 上架时间
+     */
+    private Date onlineDate;
+    /**
+     * 下架时间
+     */
+    private Date offlineDate;
+
+    public Date getOnlineDate() {
+        return onlineDate;
+    }
+
+    public void setOnlineDate(Date onlineDate) {
+        this.onlineDate = onlineDate;
+    }
+
+    public Date getOfflineDate() {
+        return offlineDate;
+    }
+
+    public void setOfflineDate(Date offlineDate) {
+        this.offlineDate = offlineDate;
+    }
+
     public String getMediaDesc() {
         return mediaDesc;
     }

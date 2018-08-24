@@ -18,7 +18,7 @@ public class BaseOrder implements Serializable {
      */
     private String commodityId;
     /**
-     * 订单类型 1-咨询订单 2-课程订单
+     * 订单类型 1-咨询订单 2-课程订单 3-评测订单
      */
     private String category;
     /**

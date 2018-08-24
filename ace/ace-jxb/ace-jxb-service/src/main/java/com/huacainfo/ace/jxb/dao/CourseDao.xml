@@ -25,11 +25,14 @@
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
         <result column="mediaUrl" jdbcType="VARCHAR" property="mediaUrl"/>
         <result column="mediaDesc" jdbcType="VARCHAR" property="mediaDesc"/>
+
+        <result column="onlineDate" jdbcType="TIMESTAMP" property="onlineDate"/>
+        <result column="offlineDate" jdbcType="TIMESTAMP" property="offlineDate"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, type, category, mediType, name, cover, duration, costType, cost, primeCost, demandNum,
         likeNum, objects, applicationObject, purport, remark, status, createUserId, createDate, introduce,
-        lineState, mediaUrl, mediaDesc
+        lineState, mediaUrl, mediaDesc, onlineDate, offlineDate
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -48,7 +51,8 @@
         primeCost, demandNum, likeNum,
         objects, applicationObject, purport,
         remark, status, createUserId,
-        createDate, introduce, lineState, mediaUrl, mediaDesc)
+        createDate, introduce, lineState, mediaUrl, mediaDesc,
+        onlineDate, offlineDate)
         values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
         #{mediType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR},
         #{duration,jdbcType=INTEGER}, #{costType,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL},
@@ -56,7 +60,8 @@
         #{objects,jdbcType=VARCHAR}, #{applicationObject,jdbcType=VARCHAR}, #{purport,jdbcType=VARCHAR},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR},
-        #{lineState,jdbcType=VARCHAR}, #{mediaUrl,jdbcType=VARCHAR}, #{mediaDesc,jdbcType=VARCHAR})
+        #{lineState,jdbcType=VARCHAR}, #{mediaUrl,jdbcType=VARCHAR}, #{mediaDesc,jdbcType=VARCHAR},
+        #{onlineDate,jdbcType=TIMESTAMP}, #{offlineDate,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Course">
         insert into course
@@ -130,6 +135,12 @@
             <if test="mediaDesc != null">
                 mediaDesc,
             </if>
+            <if test="onlineDate != null">
+                onlineDate,
+            </if>
+            <if test="offlineDate != null">
+                offlineDate,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -200,6 +211,13 @@
             </if>
             <if test="mediaDesc != null">
                 #{mediaDesc,jdbcType=LONGVARCHAR},
+            </if>
+
+            <if test="onlineDate != null">
+                #{onlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="offlineDate != null">
+                #{offlineDate,jdbcType=TIMESTAMP},
             </if>
         </trim>
     </insert>
@@ -272,6 +290,13 @@
             <if test="mediaDesc != null">
                 mediaDesc = #{mediaDesc,jdbcType=LONGVARCHAR},
             </if>
+
+            <if test="onlineDate != null">
+                onlineDate = #{onlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="offlineDate != null">
+                offlineDate = #{offlineDate,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -298,7 +323,9 @@
       createUserId = #{createUserId,jdbcType=VARCHAR},
         createDate = #{createDate,jdbcType=TIMESTAMP},
         mediaUrl = #{mediaUrl,jdbcType=VARCHAR},
-        mediaDesc = #{mediaDesc,jdbcType=VARCHAR}
+        mediaDesc = #{mediaDesc,jdbcType=VARCHAR},
+        onlineDate = #{onlineDate,jdbcType=TIMESTAMP},
+        offlineDate = #{offlineDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -314,7 +341,8 @@
         IFNULL(c.`name`,'近心帮管理员') as counselorName,
         t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
         t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce,
-        t.primeCost, t.objects, t.applicationObject, t.purport, t.lineState, t.mediaUrl, t.mediaDesc
+        t.primeCost, t.objects, t.applicationObject, t.purport, t.lineState, t.mediaUrl, t.mediaDesc,
+        t.onlineDate, t.offlineDate
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
