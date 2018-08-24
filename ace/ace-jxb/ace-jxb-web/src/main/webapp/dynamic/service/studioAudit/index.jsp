@@ -70,9 +70,7 @@
                                                                 <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
-                                                                    <font style="vertical-align: inherit;"><font
-                                                                            style="vertical-align: inherit;">
-                                                                        搜索</font></font>
+                                                                        搜索
                                                                 </button>
                                                             </span>
                                                             </div>
@@ -84,11 +82,11 @@
                                                             <thead>
                                                             <tr>
 
-                                                                <th width="35%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 名称 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 负责人 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 级别 </font></font></th>
-                                                                <th width="15%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 状态 </font></font></th>
-                                                                <th width="20%"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 操作 </font></font></th>
+                                                                <th width="35%"> 名称</th>
+                                                                <th width="15%"> 负责人</th>
+                                                                <th width="15%"> 级别</th>
+                                                                <th width="15%"> 状态</th>
+                                                                <th width="20%"> 操作</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody id="audioList">
@@ -118,15 +116,15 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.dutyName} </font></font></td>
-                                        <td><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> \${item.level} </font></font></td>
+                                        <td> \${item.dutyName}</td>
+                                        <td> \${item.level}</td>
                                         <td>
                                             {@if item.status==0}
-                                                <span class="label label-lg label-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 待审核 </font></font></span>
+                                            <span class="label label-lg label-info"> 待审核 </span>
                                             {@else if item.status==1}
-                                                <span class="label label-lg label-success"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核通过 </font></font></span>
+                                            <span class="label label-lg label-success"> 审核通过 </span>
                                             {@else}
-                                                <span class="label label-lg label-danger"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> 审核不通过 </font></font></span>
+                                            <span class="label label-lg label-danger"> 审核不通过 </span>
                                             {@/if}
                                         </td>
                                         <td>

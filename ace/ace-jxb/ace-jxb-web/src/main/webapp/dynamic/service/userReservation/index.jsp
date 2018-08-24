@@ -107,8 +107,8 @@
                                                                                         </div>
                                                                                         <span class="input-group-btn btn-right">
                                                                                             <span type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                                                <font style="vertical-align: inherit;">
-                                                                                                    <font style="vertical-align: inherit;">元/次(每次30分钟)
+
+                                                                                                    元/次(每次30分钟)
                                                                                                     </font>
                                                                                                 </font>
                                                                                             </span>
@@ -129,8 +129,8 @@
                                                                                         </div>
                                                                                         <span class="input-group-btn btn-right">
                                                                                             <span type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                                                <font style="vertical-align: inherit;">
-                                                                                                    <font style="vertical-align: inherit;">元/次(每次30分钟)
+
+                                                                                                    元/次(每次30分钟)
                                                                                                     </font>
                                                                                                 </font>
                                                                                             </span>
@@ -151,7 +151,7 @@
                                                                                         </div>
                                                                                         <span class="input-group-btn btn-right">
                                                                                             <span type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                                                                <font style="vertical-align: inherit;">
+
                                                                                                     元/次(每次30分钟)
                                                                                                 </font>
                                                                                             </span>
