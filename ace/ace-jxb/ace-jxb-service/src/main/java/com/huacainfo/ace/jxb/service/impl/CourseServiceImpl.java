@@ -309,6 +309,7 @@ public class CourseServiceImpl implements CourseService {
             audit.setRst(record.getRst());
             audit.setAuditor(record.getAuditor());
             audit.setStatement(record.getStatement());
+            audit.setCreateDate(DateUtil.getNowDate());
             courseAuditDao.updateByPrimaryKeySelective(audit);
         }
 

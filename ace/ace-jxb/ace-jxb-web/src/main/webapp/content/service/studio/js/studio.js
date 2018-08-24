@@ -1,4 +1,5 @@
 window.onload = function () {
+    juicer.register('parseStatus', parseStatus);
     // getUserinfo();
     getMyStudioList();
     initDoc();
@@ -111,7 +112,6 @@ function detail(id) {
                 });
                 $("#modalstudioInfo").html(html);
                 initSwriper();
-
             }
         });
     }
@@ -274,6 +274,24 @@ function submitForm() {
         object: JSON.stringify(formObject),
         imgUrl: JSON.stringify(imgURL),
     });
+}
+
+/**
+ * 状态格转换
+ * @param status
+ * @returns {*}
+ */
+function parseStatus(status) {
+    switch (status) {
+        case "0":
+            return "待审核";
+        case "1":
+            return "已通过";
+        case "2":
+            return "已拒绝";
+        default:
+            return "待审核";
+    }
 }
 
 

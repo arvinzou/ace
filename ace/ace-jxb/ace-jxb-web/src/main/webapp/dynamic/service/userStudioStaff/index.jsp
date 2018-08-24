@@ -39,160 +39,55 @@
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
-                                    <a href="index4.jsp">首页</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>工作室成员</span>
                                 </li>
                             </ul>
+
                             <div class="page-content-inner">
+
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <!-- BEGIN PROFILE SIDEBAR -->
-                                        <div class="profile-sidebar">
-                                            <!-- PORTLET MAIN -->
-                                            <div class="portlet light profile-sidebar-portlet ">
-                                                <!-- SIDEBAR USERPIC -->
-                                                <div class="profile-userpic">
-                                                    <img src="${pageContext.request.contextPath}/content/service/information/img/left_pic_two.jpg"
-                                                         class="user-imagePhotoUrl img-responsive" alt="">
+                                        <div class="portlet light ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    工作室成员
                                                 </div>
-                                                <!-- END SIDEBAR USERPIC -->
-                                                <!-- SIDEBAR USER TITLE -->
-                                                <div class="profile-usertitle">
-                                                    <div class="profile-usertitle-name user-name"></div>
-                                                    <div class="profile-usertitle-job user-certification"></div>
-                                                </div>
-                                                <!-- END SIDEBAR USER TITLE -->
-                                                <!-- SIDEBAR BUTTONS -->
-                                                <div class="profile-userbuttons">
-                                                    <button type="button" class="btn btn-circle green btn-sm"
-                                                            onclick="javascript:window.location.href='../userInformation/index.jsp'">
-                                                        个人信息
-                                                    </button>
-                                                    <button type="button" class="btn btn-circle red btn-sm"
-                                                            onclick="javascript:window.location.href='../userStudio/index.jsp'">
-                                                        工作室信息
-                                                    </button>
-                                                </div>
-                                                <!-- END SIDEBAR BUTTONS -->
-                                                <!-- SIDEBAR MENU -->
-                                                <div class="profile-usermenu">
-                                                    <ul class="nav">
-                                                        <ul class="nav">
-                                                            <li>
-                                                                <a href="../userReservation/index.jsp">
-                                                                    <i class="icon-settings"></i>预约设置</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="../userOrder/index1.jsp">
-                                                                    <i class="icon-settings"></i>订单管理</a>
-                                                            </li>
-
-                                                        </ul>
-                                                    </ul>
-                                                </div>
-                                                <!-- END MENU -->
                                             </div>
-                                            <!-- END PORTLET MAIN -->
-                                            <!-- PORTLET MAIN -->
-                                            <%--<div class="portlet light ">
-                                                <!-- STAT -->
-                                                <div class="row list-separated profile-stat">
-                                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="uppercase profile-stat-title"> 37</div>
-                                                        <div class="uppercase profile-stat-text"> Projects</div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="uppercase profile-stat-title"> 51</div>
-                                                        <div class="uppercase profile-stat-text"> Tasks</div>
-                                                    </div>
-                                                    <div class="col-md-4 col-sm-4 col-xs-6">
-                                                        <div class="uppercase profile-stat-title"> 61</div>
-                                                        <div class="uppercase profile-stat-text"> Uploads</div>
-                                                    </div>
-                                                </div>
-                                                <!-- END STAT -->
-                                                <div>
-                                                    <h4 class="profile-desc-title">About Marcus Doe</h4>
-                                                    <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
-                                                    <div class="margin-top-20 profile-desc-link">
-                                                        <i class="fa fa-globe"></i>
-                                                        <a href="http://www.keenthemes.com">www.keenthemes.com</a>
-                                                    </div>
-                                                    <div class="margin-top-20 profile-desc-link">
-                                                        <i class="fa fa-twitter"></i>
-                                                        <a href="http://www.twitter.com/keenthemes/">@keenthemes</a>
-                                                    </div>
-                                                    <div class="margin-top-20 profile-desc-link">
-                                                        <i class="fa fa-facebook"></i>
-                                                        <a href="http://www.facebook.com/keenthemes/">keenthemes</a>
-                                                    </div>
-                                                </div>
-                                            </div>--%>
-                                            <!-- END PORTLET MAIN -->
-                                        </div>
-                                        <!-- END BEGIN PROFILE SIDEBAR -->
-                                        <!-- BEGIN PROFILE CONTENT -->
-                                        <div class="profile-content">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase">工作室成员
-                                                                </span>
+
+                                            <div class="portlet-body">
+                                                <div class="portlet-body">
+                                                    <div class="mt-element-card mt-element-overlay">
+                                                        <div class="row">
+                                                            <%--content--%>
+                                                            <div class="table-scrollable table-scrollable-borderless">
+                                                                <table class="table table-hover table-light">
+                                                                    <thead>
+                                                                    <tr class="uppercase">
+                                                                        <th> 头像</th>
+                                                                        <th> 名字</th>
+                                                                        <th> 职业名称</th>
+                                                                        <th> 加入时间</th>
+                                                                        <th> 操作</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody id="studioCounselorList">
+
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
-
-                                                            <div class="actions">
-                                                                <div class="portlet-input input-inline input-medium">
-
-
-                                                                    <select id="studioIdList">
-
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-                                                        <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
-
-                                                                    <%--content--%>
-
-                                                                    <div class="table-scrollable table-scrollable-borderless">
-                                                                        <table class="table table-hover table-light">
-                                                                            <thead>
-                                                                            <tr class="uppercase">
-                                                                                <th> 头像</th>
-                                                                                <th> 名字</th>
-                                                                                <th> 职业名称</th>
-                                                                                <th> 加入时间</th>
-                                                                                <th> 操作</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody id="studioCounselorList">
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <ul class="pagination" id="pagination1"></ul>
-                                                                    </div>
-
-                                                                    <%--content--%>
-
-                                                                </div>
+                                                            <%--content--%>
+                                                            <div class="paginationbar">
+                                                                <ul class="pagination" id="pagination1"></ul>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!-- END PROFILE CONTENT -->
                                     </div>
                                 </div>
 
