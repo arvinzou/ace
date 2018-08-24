@@ -83,7 +83,9 @@ function findPartInfo(primaryId){
         type:"post",
         async:false,
         data:{
-            courseId: primaryId
+            courseId: primaryId,
+            orderBy: "createDate",
+            sord: "asc"
         },
         success:function(result){
             if(result.status == 0) {
