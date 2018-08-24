@@ -1,8 +1,29 @@
 window.onload = function () {
-    // getUserinfo();
-    getMyConsultInfo();
+    initWeb();
     $('.submit_btn').click(submitForm);
+    getMyConsultInfo();
 };
+
+
+function initWeb() {
+    var url = portalPath + '/dict/findListByCategoryId.do?categoryId=152';
+    $.getJSON(url, function (result) {
+        var navitem = document.getElementById('temp_field').innerHTML;
+        var html = juicer(navitem, {
+            data: result,
+        });
+        $("#field").html(html);
+    })
+    var url = portalPath + '/dict/findListByCategoryId.do?categoryId=149';
+    $.getJSON(url, function (result) {
+        var navitem = document.getElementById('temp_objects').innerHTML;
+        var html = juicer(navitem, {
+            data: result,
+        });
+        $("#objects").html(html);
+    })
+}
+
 
 
 function getMyConsultInfo() {

@@ -1,10 +1,9 @@
-var editor, cityCode;
+var editor, cityCode, singleSelect1;
 
 
 window.onload = function () {
     initWeb();
     initDoc();
-    getUserinfo();
     $("#city").click(function (e) {
         SelCity(this, e);
     });
@@ -17,7 +16,7 @@ window.onload = function () {
     $('.submit_btn').click(submitForm);
 
 
-    var singleSelect1 = $('#single-select-1').citySelect({
+    singleSelect1 = $('#single-select-1').citySelect({
         dataJson: cityData,
         multiSelect: false,
         whole: false,
@@ -35,9 +34,9 @@ window.onload = function () {
             cityCode = values.name;
         }
     });
+    getUserinfo();
 
-    // 单选设置城市
-    singleSelect1.setCityVal(cityCode);
+    //单选设置城市
 
 };
 
@@ -86,7 +85,8 @@ function fillForm(data) {
         }
         $('[name=form_' + key + ']').val(data[key]);
     }
-    cityCode = data.cityCode;
+
+    singleSelect1.setCityVal(data.cityCode + "市");
     editor.setValue(data['profile']);
     var tag = $('#tags .md-checkbox');
     var tags = data["tags"];

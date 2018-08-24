@@ -429,7 +429,7 @@
         <td>
             <a onclick="javascript:userStudioStaff('\${item.id}')" class="primary-link">\${item.name}</a>
         </td>
-        <td> 我创建的</td>
+        <td> \${data.dutyName}</td>
         <td> \${item.status}</td>
         <td>
             <a onclick="javascript:modify('\${item.id}')" class="primary-link">修改</a>
