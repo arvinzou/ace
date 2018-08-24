@@ -131,7 +131,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group form-md-checkboxes">
+                            <div class="form-group">
                                 <label class="col-md-2 control-label">
                                     <span class="required" aria-required="true">*</span>工作室标志
                                 </label>
@@ -149,7 +149,7 @@
                             </div>
 
 
-                            <div class="form-group form-md-checkboxes">
+                            <div class="form-group">
                                 <label class="col-md-2 control-label">
                                     <span class="required" aria-required="true">*</span>封面轮播图
                                 </label>
