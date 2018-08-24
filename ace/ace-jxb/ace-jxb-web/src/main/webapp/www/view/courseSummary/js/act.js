@@ -48,7 +48,6 @@ function initData(primaryId){
             if(result.status == 0) {
                 viewHtml('banner', result.data, 'bannerTemp');
                 viewHtml('courseDetail', result.data, 'courseDetailTemp');
-                var courseContent = result.data.introduce;
                 var costType = result.data.costType;
                 type = result.data.type;
                 if(costType == '0'){
@@ -56,7 +55,6 @@ function initData(primaryId){
                 }else if(costType == '1'){
                     cost =  result.data.cost;
                 }
-                $("#courseContent").html(courseContent);
                 $("#totalCost").text("¥"+cost);
 
                 if(type == '1'){

@@ -169,7 +169,7 @@
                 <div class="row">
                 <div class="col-xs-12 col-md-12">
                 <p class="teacher_content" id="courseContent">
-
+					\$\${data.introduce}
             	</p>
             </div>
             </div>
