@@ -191,7 +191,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12">名字</div>
             <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
             <div class="col-lg-4 col-md-4 col-sm-12">性别</div>
-            <div class="col-lg-8 col-md-8 col-sm-12">\${data.name}</div>
+            <div class="col-lg-8 col-md-8 col-sm-12">\${data.sex}</div>
             <div class="col-lg-4 col-md-4 col-sm-12">手机号码</div>
             <div class="col-lg-8 col-md-8 col-sm-12">\${data.mobile}</div>
             <div class="col-lg-4 col-md-4 col-sm-12">城市</div>
@@ -217,7 +217,7 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">身份证反面</div>
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <img src="\${data.name}"
+                <img src="\${data.idCardSideImgUrl}"
                      alt="">
             </div>
         </div>
