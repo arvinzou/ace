@@ -27,6 +27,49 @@ public class CounselorVo extends Counselor {
     //咨询价格区间
     private String consultPriceScope;
 
+    private String nickname;
+    private String headimgurl;
+    /**
+     * 同 Consult.java.onlineStatus
+     */
+    private String onlineStatus;
+    /**
+     * 同 Consult.java.status
+     */
+    private String consultState;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getHeadimgurl() {
+        return headimgurl;
+    }
+
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
+    }
+
+    public String getOnlineStatus() {
+        return onlineStatus;
+    }
+
+    public void setOnlineStatus(String onlineStatus) {
+        this.onlineStatus = onlineStatus;
+    }
+
+    public String getConsultState() {
+        return consultState;
+    }
+
+    public void setConsultState(String consultState) {
+        this.consultState = consultState;
+    }
+
     public String getConsultPriceScope() {
         String start = null == getMinCPAmount() ? "0" : getMinCPAmount().intValue() + "";
         String end = null == getMaxCPAmount() ? "0" : getMaxCPAmount().intValue() + "";
