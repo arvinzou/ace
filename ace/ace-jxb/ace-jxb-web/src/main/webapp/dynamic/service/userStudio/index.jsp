@@ -146,7 +146,6 @@
                                                  data-target="#img-uploader"
                                                  src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
                                         </div>
-                                        <p>工作室logo</p>
                                     </div>
                                 </div>
                             </div>
