@@ -121,6 +121,9 @@ function audit(){
 //     });
 // }
 function edit(id){
+    if (mySwiper) {
+        mySwiper.destroy;
+    }
     $('#studioInfo').modal('show');
     if (id) {
         var url = "/jxb/studio/selectStudioByPrimaryKey";

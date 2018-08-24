@@ -59,20 +59,18 @@
                                                     <div class="portlet light portlet-fit ">
                                                         <div class="portlet-title">
                                                             <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase">心理测试</span>
+                                                                心理测试
                                                             </div>
 
                                                             <div class="actions">
                                                                 <a onclick="javascript:createTestCase()"
-                                                                   class="btn btn-circle btn-success btn-sm">
-                                                                    <i class="fa fa-plus"></i>
+                                                                   class="btn  btn-success btn-sm">
                                                                     创建试题
                                                                 </a>
                                                                 <a onclick="javascript:deleteTestCase()"
                                                                    data-repeater-delete=""
-                                                                   class="btn btn-circle btn-danger">
-                                                                    <i class="fa fa-close"></i> 删除试题</a>
+                                                                   class="btn  btn-danger">
+                                                                    删除试题</a>
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">

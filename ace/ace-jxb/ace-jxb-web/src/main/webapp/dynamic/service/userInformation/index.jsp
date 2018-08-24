@@ -319,20 +319,6 @@
                                                             </div>
                                                         </div>
 
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>擅长领域
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="md-checkbox-inline" id="tags">
-
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
                                                         <div class="form-group ">
                                                             <label class="col-md-3 control-label"> <span
                                                                     class="required" aria-required="true">*</span>个案时长
@@ -662,22 +648,6 @@
     /*}*/
 
 </style>
-
-
-<script id="temp_tags" type="text/template">
-    {@each data as item,index}
-    <div class="md-checkbox hc-checkbox">
-        <input type="checkbox" id="checkbox_\${index}"
-               name="tags" value="34"
-               class="md-check">
-        <label for="checkbox_\${index}">
-            <span class="inc"></span>
-            <span class="check"></span>
-            <span class="box"></span>\${item.name}
-        </label>
-    </div>
-    {@/each}
-</script>
 
 
 </html>

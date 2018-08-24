@@ -68,7 +68,7 @@
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <div class="input-group">
-                                                                <input type="text" style="height:32px"
+                                                                <input type="text"
                                                                        class="form-control input-circle-left"
                                                                        placeholder="请输入工作室名称">
                                                                 <span class="input-group-btn">
