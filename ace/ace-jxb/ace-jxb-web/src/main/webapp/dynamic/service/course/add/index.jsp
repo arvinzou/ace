@@ -99,11 +99,11 @@
                                                                         <div class="col-md-10">
                                                                             <div class="radio-group-container">
                                                                                 <label class="mt-radio mt-radio-outline">
-                                                                                    <input type="radio" name="costType" value="1"  onclick="payTypeCheck('noPay');">免费
+                                                                                    <input type="radio" name="costType" value="0"  onclick="payTypeCheck('noPay');">免费
                                                                                     <span></span>
                                                                                 </label>
                                                                                 <label class="mt-radio mt-radio-outline">
-                                                                                    <input type="radio" name="costType" value="2" checked onclick="payTypeCheck('pay');">付费
+                                                                                    <input type="radio" name="costType" value="1" checked onclick="payTypeCheck('pay');">付费
                                                                                     <span></span>
                                                                                 </label>
                                                                                 <div class="price-panel">
