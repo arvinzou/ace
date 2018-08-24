@@ -36,7 +36,9 @@ function App() {
         $(".shangquan li").removeClass("active")
         $(this).addClass("active")
         var text1=$(this).text();
+        var value1 = $(this).attr('data-value');
         $(".sqinput").html(text1);
+        $("#ability").val(value1);
     })
     $(".chengshi li").click(function(){
         $(".chengshi li").removeClass("active")
@@ -56,10 +58,10 @@ function App() {
 function courseList(level){
     var type = null;
     var costType = null;
-    var purport = $(".sqinput").text().trim();    //针对能力
+    var purport = $("#ability").val();    //针对能力
     var typeName = $(".csinput").text().trim();   //课程类别
     var payType = $(".quinput").text().trim();     //付费方式
-    if(purport == '筛选' || purport == '不限'){
+    if(purport == '' || purport == undefined || purport == null){
         purport = null;
     }
     if(typeName == '单节课程'){
