@@ -122,7 +122,7 @@ function insertLevel() {
     }
     $.post(url, datas, function (result) {
         if (result.status == 0) {
-            window.location.reload();
+            initWeb();
         }
     });
 }
