@@ -20,7 +20,6 @@ import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UserinfoService;
-import com.huacainfo.ace.portal.vo.UserinfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,8 +70,8 @@ public class CounselorServiceImpl implements CounselorService {
         List<CounselorVo> list = counselorDao.findList(condition, start, limit, orderBy);
         for (CounselorVo item : list) {
             if (CommonUtils.isBlank(item.getImagePhotoUrl())) {
-                UserinfoVo userinfoVo = userinfoService.selectUserinfoByKey(item.getId());
-                item.setImagePhotoUrl(userinfoVo.getHeadimgurl());
+//                UserinfoVo userinfoVo = userinfoService.selectUserinfoByKey(item.getId());
+                item.setImagePhotoUrl(item.getHeadimgurl());
             }
         }
         rst.setRows(list);
