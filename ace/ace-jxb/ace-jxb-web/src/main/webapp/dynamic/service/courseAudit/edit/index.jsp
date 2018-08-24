@@ -151,11 +151,11 @@
             <div class="col-md-10">
                 <div class="radio-group-container">
                     <label class="mt-radio mt-radio-outline">
-                        <input type="radio" name="costType" {@if data.o.costType=='1'}checked{@/if} value="1"  onclick="payTypeCheck('noPay');">免费
+                        <input type="radio" name="costType" {@if data.o.costType=='1'}checked{@/if} value="0"  onclick="payTypeCheck('noPay');">免费
                         <span></span>
                     </label>
                     <label class="mt-radio mt-radio-outline">
-                        <input type="radio" name="costType" {@if data.o.costType=='2'}checked{@/if} value="2"  onclick="payTypeCheck('pay');">付费
+                        <input type="radio" name="costType" {@if data.o.costType=='2'}checked{@/if} value="1"  onclick="payTypeCheck('pay');">付费
                         <span></span>
                     </label>
                     <div class="price-panel {@if data.o.costType=='1'}hide{@/if}" >
