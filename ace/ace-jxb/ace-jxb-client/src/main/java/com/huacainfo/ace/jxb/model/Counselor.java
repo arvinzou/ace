@@ -89,6 +89,15 @@ public class Counselor implements Serializable {
 
     private String status;
     private String cityCode;
+    private String sex;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     private String idCardSideImgUrl;
 

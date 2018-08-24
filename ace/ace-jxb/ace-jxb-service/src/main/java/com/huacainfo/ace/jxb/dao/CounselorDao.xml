@@ -14,6 +14,7 @@
         <result column="idCard" jdbcType="CHAR" property="idCard"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="cityCode" jdbcType="CHAR" property="cityCode"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
         <result column="idCardImgUrl" jdbcType="VARCHAR" property="idCardImgUrl"/>
         <result column="idCardSideImgUrl" jdbcType="VARCHAR" property="idCardSideImgUrl"/>
         <result column="certificateNo" jdbcType="VARCHAR" property="certificateNo"/>
@@ -30,7 +31,8 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, studioId, name, certification, tags, years, mobile, imagePhotoUrl, visitCardUrl,
-        idCard,status,cityCode, idCardImgUrl, idCardSideImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl, lm,
+        idCard,status,cityCode, sex, idCardImgUrl, idCardSideImgUrl, certificateNo, certificateImgUrl, evidenceImgUrl,
+        lm,
         peopleNum,duration, income,
     account, level, createDate, profile
   </sql>
@@ -48,14 +50,14 @@
     insert into counselor (id, studioId, name,
       certification, tags, years,
       mobile, imagePhotoUrl, visitCardUrl,
-        idCard, status, cityCode, idCardImgUrl, idCardSideImgUrl, certificateNo,
+        idCard, status, cityCode, sex, idCardImgUrl, idCardSideImgUrl, certificateNo,
         certificateImgUrl, evidenceImgUrl, lm,peopleNum,duration,
       income, account, level,
       createDate, profile)
     values (#{id,jdbcType=VARCHAR}, #{studioId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{certification,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, #{years,jdbcType=VARCHAR},
       #{mobile,jdbcType=VARCHAR}, #{imagePhotoUrl,jdbcType=VARCHAR}, #{visitCardUrl,jdbcType=VARCHAR},
-        #{idCard,jdbcType=CHAR},#{status,jdbcType=CHAR}, #{cityCode,jdbcType=CHAR},
+        #{idCard,jdbcType=CHAR},#{status,jdbcType=CHAR}, #{cityCode,jdbcType=CHAR}, #{sex,jdbcType=CHAR},
         #{idCardImgUrl,jdbcType=VARCHAR},#{idCardSideImgUrl,jdbcType=VARCHAR},
         #{certificateNo,jdbcType=VARCHAR},
         #{certificateImgUrl,jdbcType=VARCHAR}, #{evidenceImgUrl,jdbcType=VARCHAR}, #{lm,jdbcType=INTEGER},
@@ -101,6 +103,9 @@
             </if>
             <if test="cityCode != null">
                 cityCode,
+            </if>
+            <if test="sex != null">
+                sex,
             </if>
             <if test="idCardImgUrl != null">
                 idCardImgUrl,
@@ -179,6 +184,9 @@
             <if test="cityCode != null">
                 #{cityCode,jdbcType=CHAR},
             </if>
+            <if test="sex != null">
+                #{sex,jdbcType=CHAR},
+            </if>
             <if test="idCardImgUrl != null">
                 #{idCardImgUrl,jdbcType=VARCHAR},
             </if>
@@ -256,6 +264,9 @@
             <if test="cityCode != null">
                 cityCode = #{cityCode,jdbcType=CHAR},
             </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=CHAR},
+            </if>
             <if test="idCardImgUrl != null">
                 idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
             </if>
@@ -311,6 +322,7 @@
       idCard = #{idCard,jdbcType=CHAR},
         status = #{status,jdbcType=CHAR},
         cityCode = #{cityCode,jdbcType=CHAR},
+        sex = #{sex,jdbcType=CHAR},
       idCardImgUrl = #{idCardImgUrl,jdbcType=VARCHAR},
         idCardSideImgUrl = #{idCardSideImgUrl,jdbcType=VARCHAR},
       certificateNo = #{certificateNo,jdbcType=VARCHAR},
@@ -344,7 +356,7 @@
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
-        t.idCard, t.status, t.cityCode, t.idCardImgUrl,t.idCardSideImgUrl, t.certificateNo, t.certificateImgUrl,
+        t.idCard, t.status, t.cityCode,t.sex, t.idCardImgUrl,t.idCardSideImgUrl, t.certificateNo, t.certificateImgUrl,
         t.evidenceImgUrl, t.lm,t.peopleNum, t.duration, t.income,
         t.account, t.level, t.createDate, t.profile
     </sql>

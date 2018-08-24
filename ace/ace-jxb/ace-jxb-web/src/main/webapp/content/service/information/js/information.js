@@ -128,7 +128,7 @@ function submitForm() {
         certificateNo: "notNull1",
         idCard: "IDcard",
         duration: 'naturalNumber',
-        peopleNum: 'naturalNumber'
+        peopleNum: 'naturalNumber1'
     }
     for (key in formObject) {
         var idName = formObject[key];
