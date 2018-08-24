@@ -41,6 +41,16 @@ public class EvaluatTpl implements java.io.Serializable {
 
     private Date lastModifyDate;
 
+    private String summary;
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     public String getSyid() {
         return syid;
     }
