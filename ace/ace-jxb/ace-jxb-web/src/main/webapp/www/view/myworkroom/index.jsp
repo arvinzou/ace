@@ -71,7 +71,7 @@
 		</script>
 		<script id="roomContentTemp" type="text/template">
 			<p>
-				<span class="introduce">简介：</span> \${roomContent.introduce}
+				<span class="introduce">简介：</span> \$\${roomContent.introduce}
 			</p>
 		</script>
 
