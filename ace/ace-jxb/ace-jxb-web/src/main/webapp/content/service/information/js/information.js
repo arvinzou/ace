@@ -71,7 +71,7 @@ function getUserinfo() {
         var url = "/jxb/counselor/getMyinfo"
         $.getJSON(url, function (result) {
             if (result.status == 0) {
-                viewUserinfo(result.value);
+                // viewUserinfo(result.value);
                 fillForm(result.value)
             }
         })
@@ -108,13 +108,13 @@ function filloption(tag, tags) {
 }
 
 
-function viewUserinfo(data) {
-    for (key in data) {
-        $('.user-' + key).text(data[key]);
-    }
-    ;
-    $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
-}
+// function viewUserinfo(data) {
+//     for (key in data) {
+//         $('.user-' + key).text(data[key]);
+//     }
+//     ;
+//     $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
+// }
 
 function submitForm() {
     if (!$(".protocol[type='checkbox']").prop('checked')) {
