@@ -19,9 +19,13 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/swiper-4.3.5/dist/css/swiper.css">
+
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/studioAudit/css/style.css">
     <script src="${pageContext.request.contextPath}/dynamic/service/studioAudit/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/content/common/swiper-4.3.5/dist/js/swiper.js?v=${cfg.version}"></script>
 </head>
 
 <body>
@@ -149,57 +153,59 @@
 </div>
 
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="myModal"
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="studioInfo"
      aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="gridSystemModalLabel">工作室详情</h4>
+                <h4 class="modal-title" id="">工作室详情</h4>
             </div>
-            <div id="info">
+            <div class="modal-body" id="modalstudioInfo">
+
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
             </div>
         </div>
     </div>
 </div>
-<script id="stdioInfo" type="text/template">
-    <table>
-        <tr class="str">
-            <td width="15%">工作室名称</td>
-            <td width="35%">\${info.name}</td>
-            <td width="15%">logo</td>
-            <td width="35%">
-                <img src="\${info.logoImgUrl}" style="width: 80px; height: 80px;"/>
-            </td>
-        </tr>
-        <tr class="commontr">
-            <td  width="15%">等级</td>
-            <td  width="35%">\${info.level}</td>
-            <td  width="15%">负责人</td>
-            <td  width="35%">\${info.dutyName}</td>
-        </tr>
-        <tr class="commontr">
-            <td width="15%">状态</td>
-            <td colspan="3">
-                {@if info.status == 0}
-                待审核
-                {@else if info.status == 1}
-                审核通过
-                {@else}
-                审核不通过
-                {@/if}
-            </td>
-        </tr>
-        <tr class="str">
-            <td width="15%">内容</td>
-            <td colspan="3">\${info.introduce}</td>
-        </tr>
-    </table>
+
+
+<script id="temp_modalstudioInfo" type="text/template">
+    <div class="info_cotent">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {@each data.imgList as item}
+                <div class="swiper-slide"><img src="\${item.imgUrl}" alt=""></div>
+                {@/each}
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <div class="info_text">
+            <div class="top">
+                <div class="box">
+                    <div class="left_div">
+                        <img src="\${data.logoImgUrl}" alt="">
+                    </div>
+                    <div class="right_div">
+                        <span>\${data.name}</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="bottom1">
+                <h4>工作室简介</h4>
+                <div class="doc">
+                    \$\${data.introduce}
+                </div>
+            </div>
+        </div>
+    </div>
 </script>
 
 <!--审核弹框-->
