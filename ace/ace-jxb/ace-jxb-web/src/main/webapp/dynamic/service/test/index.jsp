@@ -162,7 +162,7 @@
                                 </div>
                                 <div class="col-md-4 mt-step-col">
                                     <div class="mt-step-number bg-dark font-grey">2</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
+                                    <div class="mt-step-title uppercase font-grey-cascade">编辑信息</div>
                                 </div>
                                 <div class="col-md-4 mt-step-col last">
                                     <div class="mt-step-number bg-dark font-grey">3</div>
@@ -174,13 +174,14 @@
                     <div class="col-lg-12">
                         <div class="profile-content">
                             <div class="form-horizontal" novalidate="novalidate">
-                                <div class="form-body">
+                                <div class="form-body" style="padding-right: 50px;">
 
                                     <div class="form-group ">
-                                        <label class="col-md-3 control-label">测试名称
-                                            <span class="required" aria-required="true">*</span>
+                                        <label class="col-md-2 control-label"> <span class="required"
+                                                                                     aria-required="true">*</span>测试名称
+
                                         </label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-10">
                                             <input type="text" id="notNull_name" class="form-control form_name"
                                                    placeholder="" name="form_name">
                                             <span class="error_message"></span>
@@ -188,11 +189,12 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group form-md-checkboxes">
-                                        <label class="control-label col-md-3">测评封面
-                                            <span class="required" aria-required="true">*</span>
+                                    <div class="form-group ">
+                                        <label class="control-label col-md-2"><span class="required"
+                                                                                    aria-required="true">*</span>测评封面
+
                                         </label>
-                                        <div class="col-md-9">
+                                        <div class="col-md-10">
                                             <div>
                                                 <div>
                                                     <img class="select_img form_cover"
@@ -207,35 +209,38 @@
                                         </div>
                                     </div>
 
+
                                     <div class="form-group ">
-                                        <label class="col-md-3 control-label">测评介绍
-                                            <span class="required" aria-required="true">*</span>
+                                        <label class="control-label col-md-2"><span class="required"
+                                                                                    aria-required="true">*</span>测评类型
+
                                         </label>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control form_introduce" id="notNull_introduction"
-                                                      name="form_introduce" rows="5"></textarea>
-                                            <span class="error_message"></span>
-                                            <div class="form-control-focus"></div>
+                                        <div class="col-md-10">
+                                            <select class="col-md-12" id="TestTypeList"
+                                                    name="">
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group ">
-                                        <label class="col-md-3 control-label">测评须知
-                                            <span class="required" aria-required="true">*</span>
+                                        <label class="col-md-2 control-label"> <span class="required"
+                                                                                     aria-required="true">*</span>测试摘要
+
                                         </label>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control form_notice" id="notNull_Notice"
-                                                      name="form_notice"
-                                                      rows="3"></textarea>
+                                        <div class="col-md-10">
+                                            <input type="text" id="notNull_summary" class="form-control form_summary"
+                                                   placeholder="" name="form_summary" maxlength="16">
                                             <span class="error_message"></span>
                                             <div class="form-control-focus"></div>
                                         </div>
                                     </div>
 
+
                                     <div class="form-group ">
-                                        <label class="col-md-3 control-label">原价
-                                            <span class="required" aria-required="true">*</span>
+                                        <label class="col-md-2 control-label"><span class="required"
+                                                                                    aria-required="true">*</span>原价
+
                                         </label>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <input type="text" id="money_originalCost"
                                                    class="form-control form_originalCost"
                                                    placeholder="" name="form_originalCost">
@@ -243,10 +248,11 @@
                                             <div class="form-control-focus"></div>
                                         </div>
 
-                                        <label class="col-md-3 control-label">折扣价
-                                            <span class="required" aria-required="true">*</span>
+                                        <label class="col-md-2 control-label"><span class="required"
+                                                                                    aria-required="true">*</span>折扣价
+
                                         </label>
-                                        <div class="col-md-3">
+                                        <div class="col-md-4">
                                             <input type="text" id="money_discountCost"
                                                    class="form-control form_discountCost"
                                                    placeholder="" name="form_discountCost">
@@ -274,7 +280,7 @@
                                 </div>
                                 <div class="col-md-4 mt-step-col active">
                                     <div class="mt-step-number bg-dark font-grey">2</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
+                                    <div class="mt-step-title uppercase font-grey-cascade">编辑信息</div>
                                 </div>
                                 <div class="col-md-4 mt-step-col last">
                                     <div class="mt-step-number bg-dark font-grey">3</div>
@@ -286,33 +292,35 @@
                     <div class="col-lg-12">
                         <div class="profile-content">
                             <div class="form-horizontal" novalidate="novalidate">
-                                <div class="form-body">
+                                <div class="form-body" style="padding-right: 50px;">
 
+                                    <div class="form-group ">
+                                        <label class="col-md-2 control-label"><span class="required"
+                                                                                    aria-required="true">*</span>测评介绍
 
-                                    <div class="row">
-                                        <select class="col-md-4 col-md-offset-4 form_category" id="TestTypeList"
-                                                name="">
-
-                                        </select>
-                                    </div>
-                                    <%-- <h4 class="">没有?在下方添加新的模板，创建成功后再选择。</h4>--%>
-                                    <%-- <div class="row">
-                                         <div class="form-group ">
-                                             <div class="col-md-6 col-md-offset-3 ">
-                                                 <input id="notNull_type" type="text" class="form-control form_typename"
-                                                        placeholder="" name="form_typename">
-                                                 <span class="error_message"></span>
-                                                 <div class="form-control-focus"></div>
-                                             </div>
-                                         </div>
-                                     </div>--%>
-                                    <%--<div class="row">
-                                        <div class="col-md-2 col-md-offset-5">
-                                            <button onclick="createTestType()" type="button"
-                                                    class="col-md-12 btn btn-circle btn-success">创建模板
-                                            </button>
+                                        </label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control form_introduce" id="notNull_introduction"
+                                                      name="form_introduce" rows="5"></textarea>
+                                            <span class="error_message"></span>
+                                            <div class="form-control-focus"></div>
                                         </div>
-                                    </div>--%>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label class="col-md-2 control-label"><span class="required"
+                                                                                    aria-required="true">*</span>测评须知
+
+                                        </label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control form_notice" id="notNull_Notice"
+                                                      name="form_notice"
+                                                      rows="3"></textarea>
+                                            <span class="error_message"></span>
+                                            <div class="form-control-focus"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -331,7 +339,7 @@
                                 </div>
                                 <div class="col-md-4 mt-step-col done">
                                     <div class="mt-step-number bg-dark font-grey">2</div>
-                                    <div class="mt-step-title uppercase font-grey-cascade">选择模板</div>
+                                    <div class="mt-step-title uppercase font-grey-cascade">编辑信息</div>
                                 </div>
                                 <div class="col-md-4 mt-step-col active last">
                                     <div class="mt-step-number bg-dark font-grey">3</div>
@@ -501,4 +509,34 @@
 </style>
 
 </html>
+
+
+<%--
+
+ <div class="row">
+                                        <select class="col-md-4 col-md-offset-4 form_category" id="TestTypeList"
+                                                name="">
+
+                                        </select>
+                                    </div>
+                                    <%-- <h4 class="">没有?在下方添加新的模板，创建成功后再选择。</h4>--%>
+<%-- <div class="row">
+     <div class="form-group ">
+         <div class="col-md-6 col-md-offset-3 ">
+             <input id="notNull_type" type="text" class="form-control form_typename"
+                    placeholder="" name="form_typename">
+             <span class="error_message"></span>
+             <div class="form-control-focus"></div>
+         </div>
+     </div>
+ </div>--%>
+<%--<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <button onclick="createTestType()" type="button"
+                class="col-md-12 btn btn-circle btn-success">创建模板
+        </button>
+    </div>
+</div>--%>
+
+--%>
 
