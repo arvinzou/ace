@@ -42,6 +42,10 @@ function showDetail(id){
     window.location.href = contextPath + '/www/view/myworkroom/index.jsp?id='+id;
 }
 
+function showjoinDetail(id){
+    window.location.href = contextPath + '/www/view/joinedRoom/index.jsp?id='+id;
+}
+
 function invate(id){
     window.location.href = contextPath + '/www/view/invate/index.jsp?id='+id;
 }
