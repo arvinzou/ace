@@ -20,7 +20,7 @@ $(function () {
     $('#testListss').on('click', 'li', activeTestT);
     $('.search').on('click', '.notice', cancelSearch);
     $('#search_input').focus(activeSearch);
-    $("input").keypress(searching);
+    $("input").keyup(searching);
 });
 
 
