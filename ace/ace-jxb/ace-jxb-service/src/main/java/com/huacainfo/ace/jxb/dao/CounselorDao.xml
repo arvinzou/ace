@@ -331,17 +331,21 @@
         <result column="regAuditRst" jdbcType="VARCHAR" property="regAuditRst"/>
         <result column="maxCPAmount" jdbcType="DECIMAL" property="maxCPAmount"/>
         <result column="minCPAmount" jdbcType="DECIMAL" property="minCPAmount"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="onlineStatus" jdbcType="VARCHAR" property="onlineStatus"/>
+        <result column="consultState" jdbcType="VARCHAR" property="consultState"/>
     </resultMap>
     <sql id="Vo_Column_List">
+        u.nickname, u.headimgurl,
+        IFNULL(c.onlineStatus,'0') as onlineStatus, IFNULL(c.status,'0') as consultState,
         (SELECT MAX(cp.price) from consult_product cp where t.id = cp.counselorId) as maxCPAmount,
         (SELECT min(cp.price) from consult_product cp where t.id = cp.counselorId) as minCPAmount,
         s.`name` as studioName,
         IFNULL(ta.rst,'0') as regAuditRst,
         t.id, t.studioId, t.name, t.certification, t.tags, t.years, t.mobile, t.imagePhotoUrl, t.visitCardUrl,
-        t.idCard, t.status,t.cityCode, t.idCardImgUrl,t.idCardSideImgUrl, t.certificateNo, t.certificateImgUrl,
-        t.evidenceImgUrl, t.lm,t.peopleNum,
-        t.duration,
-        t.income,
+        t.idCard, t.status, t.cityCode, t.idCardImgUrl,t.idCardSideImgUrl, t.certificateNo, t.certificateImgUrl,
+        t.evidenceImgUrl, t.lm,t.peopleNum, t.duration, t.income,
         t.account, t.level, t.createDate, t.profile
     </sql>
 
@@ -351,6 +355,8 @@
         from counselor t
         left join studio s on s.id = t.studioId
         left join teacher_audit ta on ta.counselorId=t.id
+        left join portal.userinfo u on t.id = u.unionid
+        left join consult c on t.id = c.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -373,7 +379,9 @@
         from counselor t
         left join studio s on s.id = t.studioId
         left join teacher_audit ta on ta.counselorId=t.id
-        where t.status <![CDATA[ <> ]]> 0
+        left join portal.userinfo u on t.id = u.unionid
+        left join consult c on t.id = c.id
+        where 1=1
         <if test="condition.studioId !=null and condition.studioId !=&quot;&quot;">
             and t.studioId = #{condition.studioId,jdbcType=VARCHAR}
         </if>
@@ -385,6 +393,9 @@
         </if>
         <if test="condition.tags !=null and condition.tags !=&quot;&quot;">
             and t.tags like concat('%',#{condition.tags,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
         <if test="condition.consultTypeArray !=null ">
             and EXISTS (

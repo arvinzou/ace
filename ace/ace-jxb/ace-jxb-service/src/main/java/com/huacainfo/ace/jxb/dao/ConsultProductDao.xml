@@ -114,6 +114,7 @@
         <include refid="Base_Column_List"/>
         from consult_product
         where counselorId = #{counselorId,jdbcType=VARCHAR}
+        order by type asc
     </select>
 
 

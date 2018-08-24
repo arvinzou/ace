@@ -170,7 +170,7 @@
 						<span class="try">试听</span>
 						{@else}
 						{@/if}
-						<span class="duration">\${item.duration}分钟</span>
+						<span class="duration">\${item.duration}秒</span>
 					</div>
 				</div>
         	</div>
