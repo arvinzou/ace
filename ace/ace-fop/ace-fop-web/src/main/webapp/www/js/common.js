@@ -1,10 +1,11 @@
-var urlContent = "http://zx.huacainfo.com/";
+
 var html=[];
 html.push("<div class=\"login_box\">");
 html.push("<div class=\"login\">");
 try{
     if(userProp){
-        html.push("<span class=\"companyName\"  ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" title='"+userProp.name+"' target=\"_blank\">"+userProp.name+"</a><i title='修改密码' style='padding-left: 10px;' id='editUserInfo' class='glyphicon glyphicon-edit'></i></span>");
+        html.push("<span class=\"companyName\"  ng-if=\"userProp\"><a href=\"/fop/www/html/member/member.html\" title='"+userProp.name+"' target=\"_blank\">"+userProp.name+"</a></span>");
+        html.push("<span style='width: 60px !important;' class=\"userNav\" ng-if=\"userProp\" id='editUserInfo'><a href='javascript:void(0);'>修改密码</a></span>");
         html.push("<span class=\"userNav\" ng-if=\"userProp\"><a href=\"/portal/dynamic/portal/security/loginOut.jsp\">退出</a></span>");
     }else{
         html.push("<span class=\"userNav\" ng-if=\"!userProp\"><a href=\"/portal/dynamic/portal/security/login.jsp\">登录</a></span>");

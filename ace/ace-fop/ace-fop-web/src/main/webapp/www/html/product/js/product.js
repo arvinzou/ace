@@ -2,7 +2,6 @@ var pageSize=5;
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var currentPage = 1;
-var imgHost = "http://zx.huacainfo.com/";
 var coverImg = null;
 //angularjs Controller初始化
 var app =angular.module(ngAppName, []);
@@ -303,7 +302,7 @@ app.controller(ngControllerName,function($scope){
 /*图片上传成功后*/
 function viewCover(img) {
     $('.pictureContainer').data('imgSrc',img);
-    var imagePath=imgHost+img;
+    var imagePath=img;
     showUploadImg(imagePath);
 }
 

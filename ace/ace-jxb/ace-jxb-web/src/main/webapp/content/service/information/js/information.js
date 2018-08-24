@@ -40,17 +40,6 @@ window.onload = function () {
 
 };
 
-function initWeb() {
-    var url = portalPath + '/dict/findListByCategoryId.do?categoryId=152';
-    $.getJSON(url, function (result) {
-        var navitem = document.getElementById('temp_tags').innerHTML;
-        var html = juicer(navitem, {
-            data: result,
-        });
-        $("#tags").html(html);
-    })
-}
-
 
 function initDoc() {
     editor = new Simditor({
@@ -88,11 +77,8 @@ function fillForm(data) {
 
     singleSelect1.setCityVal(data.cityCode + "市");
     editor.setValue(data['profile']);
-    var tag = $('#tags .md-checkbox');
-    var tags = data["tags"];
-    filloption(tag, tags)
-    tag = $('#certification .md-radio');
-    tags = data["certification"];
+    var tag = $('#certification .md-radio');
+    var tags = data["certification"];
     filloption(tag, tags)
 
 }
@@ -119,7 +105,7 @@ function filloption(tag, tags) {
 function submitForm() {
     if (!$(".protocol[type='checkbox']").prop('checked')) {
         alert("需要同意近心帮协议");
-        return;
+        return null;
     }
     var formObject = {
         name: "chineseName",
@@ -137,7 +123,7 @@ function submitForm() {
             formObject[key] = result.message;
         } else {
             $('#' + idName).next().text(result.message);
-            return
+            return null;
         }
     }
     ;
@@ -146,14 +132,14 @@ function submitForm() {
     var imagePhotoUrl = $('#headimg1').prop('src');
     if (imagePhotoUrl.indexOf("zx.huacainfo.com") == -1) {
         alert("需要上传形象照");
-        return
+        return null;
     }
     formObject.imagePhotoUrl = imagePhotoUrl;
     var idCardImgUrl = $('#IDcardz').prop('src');
 
     if (idCardImgUrl.indexOf("zx.huacainfo.com") == -1) {
         alert("需要上传身份证正面照");
-        return
+        return null;
     }
     formObject.idCardImgUrl = idCardImgUrl;
 
@@ -162,7 +148,7 @@ function submitForm() {
 
     if (idCardImgUrl1.indexOf("zx.huacainfo.com") == -1) {
         alert("需要上传身份证反面照");
-        return
+        return null;
     }
     formObject.idCardImgUrl1 = idCardImgUrl1;
 
@@ -171,7 +157,7 @@ function submitForm() {
 
     if (evidenceImgUrl.indexOf("zx.huacainfo.com") == -1) {
         alert("需要上传手持身份证照片");
-        return
+        return null;
     }
     formObject.evidenceImgUrl = evidenceImgUrl;
 
@@ -184,26 +170,16 @@ function submitForm() {
 
     if (certificateImgUrl.indexOf("zx.huacainfo.com") == -1) {
         alert("需要上传资格证书照片");
-        return
+        return null;
     }
     formObject.certificateImgUrl = certificateImgUrl;
 
-    var arr = new Array();
-    $('#tags :checkbox:checked').each(function (i) {
-        arr[i] = $(this).next().text().trim();
-    });
-    var tags = arr.join(",");
-    if (tags.length = 0) {
-        alert("还没有选择您的个人擅长");
-        return
-    }
-    formObject.tags = tags;
     formObject.cityCode = cityCode;
     var url = '/jxb/counselor/updateUserinfo';
     $.post(url, formObject, function (result) {
         if (result.status == 0) {
             alert("信息更新成功");
-            return;
+            return null;
         }
         alert("信息更新失败,请稍后再试！");
 

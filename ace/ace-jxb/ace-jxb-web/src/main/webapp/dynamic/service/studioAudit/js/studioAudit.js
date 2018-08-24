@@ -1,7 +1,33 @@
+var mySwiper;
+
 window.onload = function (){
 
     initpage();
 }
+
+
+/*初始化轮播图*/
+function initSwriper() {
+    mySwiper = new Swiper('.swiper-container', {
+        loop: true,
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    })
+}
+
 
 function initpage() {
     $.jqPaginator('#pagination1', {
@@ -58,33 +84,7 @@ function audit(){
         data:{studioId: auditId, auditRs: auditRs},
         success:function(result){
             if(result.status == 0) {
-               alert("审核成功！");
-            }else {
-               alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
-}
-
-function detail(){
-    var auditId = $("#auditId").val();
-    $.ajax({
-        url: contextPath +"/studio/selectStudioByPrimaryKey",
-        type:"post",
-        async:false,
-        data:{id: auditId},
-        success:function(result){
-            if(result.status == 0) {
-                console.log(result);
-                var data = result.value;
-                var temp = document.getElementById('stdioInfo').innerHTML;
-                var html = juicer(temp, {
-                    info: data
-                });
-                $("#info").html(html);
+                alert("审核成功！");
             }else {
                 alert(result.errorMessage);
             }
@@ -94,9 +94,53 @@ function detail(){
         }
     });
 }
+
+// function detail(){
+//     var auditId = $("#auditId").val();
+//     $.ajax({
+//         url: contextPath +"/studio/selectStudioByPrimaryKey",
+//         type:"post",
+//         async:false,
+//         data:{id: auditId},
+//         success:function(result){
+//             if(result.status == 0) {
+//                 console.log(result);
+//                 var data = result.value;
+//                 var temp = document.getElementById('stdioInfo').innerHTML;
+//                 var html = juicer(temp, {
+//                     info: data
+//                 });
+//                 $("#info").html(html);
+//             }else {
+//                 alert(result.errorMessage);
+//             }
+//         },
+//         error:function(){
+//             alert("系统服务内部异常！");
+//         }
+//     });
+// }
 function edit(id){
-    $("#auditId").val(id);
-    detail();
+    if (mySwiper) {
+        mySwiper.destroy;
+    }
+    $('#studioInfo').modal('show');
+    if (id) {
+        var url = "/jxb/studio/selectStudioByPrimaryKey";
+        var data = {
+            id: id
+        }
+        $.getJSON(url, data, function (result) {
+            if (result.status == 0) {
+                var navitem = document.getElementById('temp_modalstudioInfo').innerHTML;
+                var html = juicer(navitem, {
+                    data: result.value
+                });
+                $("#modalstudioInfo").html(html);
+                initSwriper();
+            }
+        });
+    }
 }
 function setval(id){
     $("#auditId").val(id);

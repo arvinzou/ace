@@ -95,9 +95,9 @@ function cleanForm() {
 
 /*查看工作室详情*/
 function detail(id) {
-    // if(mySwiper){
-    //     mySwiper.destroy();
-    // }
+    if (mySwiper) {
+        mySwiper.destroy;
+    }
     $('#studioInfo').modal('show');
     if (id) {
         var url = "/jxb/studio/selectStudioByPrimaryKey";

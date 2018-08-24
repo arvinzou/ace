@@ -33,6 +33,9 @@ function activeTestT() {
 
 function searching() {
     var val = $('#search_input').val();
+    if (!val) {
+        return;
+    }
     var url = '/portal/www/test/getEvaluatTplList.do';
     var data = {
         page: 1,
@@ -52,7 +55,7 @@ function searching() {
 }
 
 function cancelSearch() {
-    $('#search_input').val('大家都在测亲子关系');
+    $('#search_input').val('输入标题进行搜索');
     $('.search .notice .iconfont').html('&#xe702;');
     $('.search_list').hide();
     $('#testListss').empty();

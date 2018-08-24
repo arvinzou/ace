@@ -101,7 +101,7 @@ function changeSex(obj,value){
 function changeType(obj, priceStr, id){
 	$(obj).removeClass("unactive").addClass("active");
 	$(obj).parent().siblings().children().removeClass("active").addClass("unactive");
-    unitPrice = parseInt(priceStr);
+    unitPrice = parseFloat(priceStr);
     commodityId = id;
     var num = parseInt($("#num").text());
     $("#totalMoney").text(num * unitPrice);

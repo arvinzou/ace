@@ -201,6 +201,7 @@ function fillForm(data) {
 function submitForm() {
     var evaluatTpl = {
         name: 'notNull_name',
+        summary: 'notNull_summary',
         category: '',//模板
         // cover:'',
         introduce: '',
@@ -217,7 +218,7 @@ function submitForm() {
                 val = result.message;
             } else {
                 alert(result.message);
-                return
+                return null
             }
         } else {
             val = $('.form_' + key).val();

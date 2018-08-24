@@ -13,7 +13,8 @@ function initData(primaryId){
         type:"post",
         async:false,
         data:{
-            counselorId: primaryId
+            counselorId: primaryId,
+            status : '1'
         },
         success:function(result){
             if(result.status == 0) {

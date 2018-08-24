@@ -121,7 +121,7 @@
 
                             <div class="form-group ">
                                 <label class="col-md-2 control-label">
-                                    工作室名字 <span class="required" aria-required="true">*</span>
+                                    <span class="required" aria-required="true">*</span>工作室名字
                                 </label>
                                 <div class="col-md-10">
                                     <input type="text" id="notNull" class="form-control" placeholder=""
@@ -131,9 +131,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group form-md-checkboxes">
+                            <div class="form-group">
                                 <label class="col-md-2 control-label">
-                                    工作室logo <span class="required" aria-required="true">*</span>
+                                    <span class="required" aria-required="true">*</span>工作室标志
                                 </label>
                                 <div class="col-md-10">
                                     <div>
@@ -149,9 +149,9 @@
                             </div>
 
 
-                            <div class="form-group form-md-checkboxes">
+                            <div class="form-group">
                                 <label class="col-md-2 control-label">
-                                    封面轮播图 <span class="required" aria-required="true">*</span>
+                                    <span class="required" aria-required="true">*</span>封面轮播图
                                 </label>
                                 <div class="col-md-10 idCardBoxs">
 
@@ -172,7 +172,7 @@
 
                             <div class="form-group ">
                                 <label class="col-md-2 control-label">
-                                    工作室简介 <span class="required" aria-required="true">*</span>
+                                    <span class="required" aria-required="true">*</span>工作室简介
                                 </label>
                                 <div class="col-md-10">
                                             <textarea class="form-control" id="notNull1" name="form_introduce" rows="5">

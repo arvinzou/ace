@@ -62,7 +62,7 @@
                                                         </div>
                                                         <div class="actions">
                                                             <a href="javascript:void(0);" class="btn green" data-target="#myModal" data-toggle="modal">创建章节</a>
-                                                            <a href="javascript:void(0);" class="btn green" data-target="#chapterBox" data-toggle="modal" onclick="initPartListOnModal();">章节修改</a>
+                                                            <a href="#" class="btn green" data-target="#chapterBox" data-toggle="modal" onclick="initPartEditList();">章节修改</a>
                                                             <a href="javascript:void(0);" class="btn green" onclick="add();">创建课件</a>
                                                         </div>
                                                     </div>

@@ -83,7 +83,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-radios">
+                                                        <div class="form-group">
                                                             <label class="col-md-3 control-label">
                                                                 <span class="required" aria-required="true">*</span>
                                                                 性别
@@ -166,7 +166,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
+                                                        <div class="form-group ">
                                                             <label class="control-label col-md-3"><span class="required"
                                                                                                         aria-required="true">*</span>形象照
 
@@ -202,7 +202,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
+                                                        <div class="form-group ">
                                                             <label class="control-label col-md-3"><span class="required"
                                                                                                         aria-required="true">*</span>身份证
 
@@ -249,7 +249,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-radios">
+                                                        <div class="form-group ">
                                                             <label class="col-md-3 control-label"><span class="required"
                                                                                                         aria-required="true">*</span>职业名称
 
@@ -298,7 +298,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
+                                                        <div class="form-group ">
                                                             <label class="control-label col-md-3"><span class="required"
                                                                                                         aria-required="true">*</span>从业资格证书
 
@@ -315,20 +315,6 @@
                                                                              src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
                                                                     </div>
                                                                     <p>从业资格证书</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group form-md-checkboxes">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>擅长领域
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="md-checkbox-inline" id="tags">
-
-
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -662,22 +648,6 @@
     /*}*/
 
 </style>
-
-
-<script id="temp_tags" type="text/template">
-    {@each data as item,index}
-    <div class="md-checkbox hc-checkbox">
-        <input type="checkbox" id="checkbox_\${index}"
-               name="tags" value="34"
-               class="md-check">
-        <label for="checkbox_\${index}">
-            <span class="inc"></span>
-            <span class="check"></span>
-            <span class="box"></span>\${item.name}
-        </label>
-    </div>
-    {@/each}
-</script>
 
 
 </html>
