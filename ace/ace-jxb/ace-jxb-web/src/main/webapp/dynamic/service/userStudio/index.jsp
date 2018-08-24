@@ -22,12 +22,14 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/simditor/styles/simditor.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/swiper-4.3.5/dist/css/swiper.css">
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
     <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">--%>
     <script src="${pageContext.request.contextPath}/content/service/studio/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/content/common/swiper-4.3.5/dist/js/swiper.js?v=${cfg.version}"></script>
 </head>
 
 <body>
@@ -258,7 +260,7 @@
                                             <img class="select_img form_idCardImgUrl"
                                                  id="uploadImgBtn"
                                                  data-cover="banner"
-                                                 data-xsize="240" data-ysize="150"
+                                                 data-xsize="75" data-ysize="48"
                                                  data-againadd="true"
                                                  data-target="#img-uploader"
                                                  data-toggle="modal"
@@ -300,46 +302,17 @@
 </div><!-- /.modal -->
 
 
-<div class="modal fade bs-example-modal-lg" id="studioInfo" tabindex="-1" role="dialog"
+<div class="modal fade " id="studioInfo" tabindex="-1" role="dialog"
      aria-labelledby="gridSystemModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="">工作室编辑</h4>
+                <h4 class="modal-title" id="">工作室详情</h4>
             </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                        名字
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        我是名字
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        logo
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        我是logo
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        轮播图
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">1</div>
-                    <div class="col-lg-12 col-md-12">
-                        介绍
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍介绍
-                    </div>
+            <div class="modal-body" id="modalstudioInfo">
 
-
-                </div>
 
             </div>
             <div class="modal-footer">
@@ -354,6 +327,96 @@
 </body>
 
 <style>
+
+
+    .swiper-container img {
+        width: 100%;
+    }
+
+    .swiper-container {
+        width: 500px;
+        height: 320px;
+    }
+
+    .info_cotent {
+        width: 500px;
+        height: 700px;
+        overflow-y: auto;
+        margin: auto;
+    }
+
+    .info_cotent .info_text {
+        position: relative;
+    }
+
+    .info_cotent .info_text .top {
+        position: absolute;
+        width: 500px;
+        height: 106px;
+        top: -53px;
+    }
+
+    .info_cotent .info_text .bottom1 .doc {
+        width: 100%;
+        overflow: hidden;
+        word-wrap: break-word;
+    }
+
+    .info_cotent .info_text .bottom1 h4 {
+        text-align: center;
+        color: rgba(28, 40, 67, 1);
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+    .info_cotent .info_text .bottom1 {
+        padding-top: 78px;
+    }
+
+    .info_cotent .info_text .top .box .left_div img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .info_cotent .info_text .top .box .right_div {
+        float: right;
+        width: 320px;
+        display: table;
+        height: 100%;
+        margin-right: 20px;
+    }
+
+    .info_cotent .info_text .top .box .right_div span {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 16px;
+        word-wrap: break-word;
+        color: rgba(28, 40, 67, 1);
+        font-weight: bold;
+        line-height: 24px;
+    }
+
+    .info_cotent .info_text .top .box .left_div {
+        width: 68px;
+        height: 68px;
+        border-radius: 50% !important;
+        overflow: hidden;
+        float: left;
+        margin: 20px 0 0 20px;
+    }
+
+    .info_cotent .info_text .top .box {
+        position: relative;
+        width: 460px;
+        margin: auto;
+        height: 100%;
+        background-color: #fff;
+        z-index: 99;
+        border-radius: 10px !important;
+        box-shadow: 0px 6px 20px 0px #0000002e;
+    }
+
 
     .error_message {
         color: red;
@@ -476,5 +539,38 @@
 </script>
 
 
+<script id="temp_modalstudioInfo" type="text/template">
+    <div class="info_cotent">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {@each data.imgList as item}
+                <div class="swiper-slide"><img src="\${item.imgUrl}" alt=""></div>
+                {@/each}
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <div class="info_text">
+            <div class="top">
+                <div class="box">
+                    <div class="left_div">
+                        <img src="\${data.logoImgUrl}" alt="">
+                    </div>
+                    <div class="right_div">
+                        <span>\${data.name}</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="bottom1">
+                <h4>工作室简介</h4>
+                <div class="doc">
+                    \$\${data.introduce}
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 </html>
 
