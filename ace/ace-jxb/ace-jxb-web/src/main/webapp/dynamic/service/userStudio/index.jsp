@@ -8,6 +8,7 @@
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
+
 <head>
     <meta charset="utf-8"/>
     <title>${cfg.sys_name}</title>
@@ -42,55 +43,54 @@
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
-                                    <a href="index4.jsp">首页</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>预约设置</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
                                 <div class="row">
                                     <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                工作室
-                                                            </div>
-                                                            <div class="actions">
-                                                                <a onclick="javascript:createStudio()"
-                                                                   class="btn green">创建工作室</a>
-                                                            </div>
+                                        <div class="portlet light portlet-fit ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+
+                                                    工作室
+                                                </div>
+                                                <div class="actions">
+                                                    <a onclick="javascript:createStudio()" class="btn green">
+
+                                                        创建工作室</a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="mt-element-card mt-element-overlay">
+                                                    <div class="row">
+
+
+                                                        <div class="table-scrollable table-scrollable-borderless">
+                                                            <table class="table table-hover table-light">
+                                                                <thead>
+                                                                <tr class="uppercase">
+                                                                    <th colspan="2"> 名称</th>
+                                                                    <th> 负责人</th>
+                                                                    <th> 状态</th>
+                                                                    <th colspan="2"> 操作</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody id="studioList">
+
+                                                                </tbody>
+                                                            </table>
                                                         </div>
-                                                        <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
 
-                                                                    <%--content--%>
 
-                                                                    <div class="table-scrollable table-scrollable-borderless">
-                                                                        <table class="table table-hover table-light">
-                                                                            <thead>
-                                                                            <tr class="uppercase">
-                                                                                <th colspan="2"> 名称</th>
-                                                                                <th> 负责人</th>
-                                                                                <th> 状态</th>
-                                                                                <th colspan="2"> 操作</th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody id="studioList">
-
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-
-                                                                    <%--content--%>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                        <!-- END PROFILE CONTENT -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -108,65 +108,60 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="gridSystemModalLabel">工作室编辑</h4>
             </div>
             <div class="modal-body">
-
-                <div class="profile-content">
+                <div class="form-panel">
 
                     <div class="form-horizontal" novalidate="novalidate">
                         <div class="form-body">
 
                             <div class="form-group ">
-                                <label class="col-md-3 control-label">名字
-                                    <span class="required" aria-required="true">*</span>
+                                <label class="col-md-2 control-label">
+                                    <span class="required" aria-required="true">*</span>工作室名字
                                 </label>
-                                <div class="col-md-9">
-                                    <input type="text" id="notNull" class="form-control"
-                                           placeholder="" name="form_name">
+                                <div class="col-md-10">
+                                    <input type="text" id="notNull" class="form-control" placeholder=""
+                                           name="form_name">
                                     <span class="error_message"></span>
                                     <div class="form-control-focus"></div>
                                 </div>
                             </div>
 
-                            <div class="form-group form-md-checkboxes">
-                                <label class="control-label col-md-3">工作室logo
-                                    <span class="required" aria-required="true">*</span>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    <span class="required" aria-required="true">*</span>工作室标志
                                 </label>
-                                <div class="col-md-9">
+                                <div class="col-md-10">
                                     <div>
                                         <div class="studiologo" id="studiologo">
-                                            <img class="select_img form_logoImgUrl"
-                                                 id="logo" data-cover="logo"
-                                                 data-toggle="modal"
-                                                 data-againadd="false"
-                                                 data-xsize="300" data-ysize="300"
-                                                 data-target="#img-uploader"
+                                            <img class="select_img form_logoImgUrl" id="logo" data-cover="logo"
+                                                 data-toggle="modal" data-againadd="false" data-xsize="300"
+                                                 data-ysize="300" data-target="#img-uploader"
                                                  src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
                                         </div>
+                                        <p class="hide">工作室logo</p>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="form-group form-md-checkboxes">
-                                <label class="control-label col-md-3">封面轮播图
-                                    <span class="required" aria-required="true">*</span>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">
+                                    <span class="required" aria-required="true">*</span>封面轮播图
                                 </label>
-                                <div class="col-md-9 idCardBoxs">
+                                <div class="col-md-10 idCardBoxs">
 
 
                                     <div id="indexImg">
                                         <div class="idCardBox">
-                                            <img class="select_img form_idCardImgUrl"
-                                                 id="uploadImgBtn"
-                                                 data-cover="banner"
-                                                 data-xsize="75" data-ysize="48"
+                                            <img class="select_img form_idCardImgUrl" id="uploadImgBtn"
+                                                 data-cover="banner" data-xsize="240" data-ysize="150"
                                                  data-againadd="true"
-                                                 data-target="#img-uploader"
-                                                 data-toggle="modal"
+                                                 data-target="#img-uploader" data-toggle="modal"
                                                  src="${pageContext.request.contextPath}/content/service/studio/img/addImg1.png?v=${cfg.version}">
                                         </div>
                                     </div>
@@ -176,14 +171,12 @@
 
 
                             <div class="form-group ">
-                                <label class="col-md-3 control-label">个人简介
-                                    <span class="required" aria-required="true">*</span>
+                                <label class="col-md-2 control-label">
+                                    <span class="required" aria-required="true">*</span>工作室简介
                                 </label>
-                                <div class="col-md-9">
-                                    <textarea class="form-control" id="notNull1"
-                                              name="form_introduce"
-                                              rows="5">
-                                    </textarea>
+                                <div class="col-md-10">
+                                            <textarea class="form-control" id="notNull1" name="form_introduce" rows="5">
+                                            </textarea>
                                     <span class="error_message"></span>
                                     <div class="form-control-focus"></div>
                                 </div>
@@ -200,9 +193,12 @@
 
                 <button type="button" class="btn btn-info submit_btn">确定</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 
 <div class="modal" id="studioInfo" tabindex="-1" role="dialog"
@@ -226,11 +222,12 @@
 </div><!-- /.modal -->
 
 
-
 </body>
 
 <style>
-
+    .form-panel .form-body {
+        text-align: left;
+    }
 
     .swiper-container img {
         width: 100%;
@@ -401,19 +398,18 @@
 <script id="temp_studioList1" type="text/template">
     <tr>
         <td class="fit">
-            <img class="user-pic"
-                 src="\${data.logoImgUrl?data.logoImgUrl:'headImg.png'}">
+            <img class="user-pic" src="\${data.logoImgUrl?data.logoImgUrl:'headImg.png'}">
         </td>
         <td>
             \${data.name}
         </td>
         <td> \${data.dutyName}</td>
-        <td> \${data.status}</td>
+        <td> \${parseStatus(data.status)}</td>
         <td>
 
         </td>
         <td>
-            <a onclick="javascript:detail(\${data.id})" class="primary-link">查看</a>
+            <a onclick="javascript:detail('\${data.id}')" class="primary-link">查看</a>
         </td>
     </tr>
 </script>
@@ -422,14 +418,13 @@
     {@each data as item}
     <tr>
         <td class="fit">
-            <img class="user-pic"
-                 src="\${item.logoImgUrl?item.logoImgUrl:'headImg.png'}">
+            <img class="user-pic" src="\${item.logoImgUrl?item.logoImgUrl:'headImg.png'}">
         </td>
         <td>
             <a onclick="javascript:userStudioStaff('\${item.id}')" class="primary-link">\${item.name}</a>
         </td>
-        <td> \${data.dutyName}</td>
-        <td> \${item.status}</td>
+        <td> 我创建的</td>
+        <td>\${parseStatus(item.status)}</td>
         <td>
             <a onclick="javascript:modify('\${item.id}')" class="primary-link">修改</a>
         </td>
@@ -440,7 +435,6 @@
     </tr>
     {@/each}
 </script>
-
 
 <script id="temp_modalstudioInfo" type="text/template">
     <div class="info_cotent">
@@ -475,5 +469,5 @@
         </div>
     </div>
 </script>
-</html>
 
+</html>

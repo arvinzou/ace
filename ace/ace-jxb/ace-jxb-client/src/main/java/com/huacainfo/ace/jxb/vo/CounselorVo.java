@@ -26,8 +26,13 @@ public class CounselorVo extends Counselor {
     private BigDecimal maxCPAmount;
     //咨询价格区间
     private String consultPriceScope;
-
+    /**
+     * 微信昵称
+     */
     private String nickname;
+    /**
+     * 微信头像
+     */
     private String headimgurl;
     /**
      * 同 Consult.java.onlineStatus
