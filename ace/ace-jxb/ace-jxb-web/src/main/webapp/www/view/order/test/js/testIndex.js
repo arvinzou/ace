@@ -33,6 +33,9 @@ function activeTestT() {
 
 function searching() {
     var val = $('#search_input').val();
+    if (!val) {
+        return;
+    }
     var url = '/portal/www/test/getEvaluatTplList.do';
     var data = {
         page: 1,
