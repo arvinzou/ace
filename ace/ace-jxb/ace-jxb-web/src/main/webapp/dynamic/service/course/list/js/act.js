@@ -43,6 +43,7 @@ function initPage(partId) {
         }
     });
 }
+
 function initPartList(){
     var data = findPartList();
     try{
@@ -111,7 +112,10 @@ function add(){
 }
 
 //============================章节管理开始=====================================//
-
+function initPartEditList(){
+    var data = findPartList();
+    renderPage('chapter', data.rows, 'editChapterTemp');
+}
 function addChapter(){
     var partName = $("input[name='partName']").val();
     if(partName == '' || partName == undefined){
