@@ -560,7 +560,7 @@
         height: 100%;
     }
     .hc-checkbox {
-        width: 10em;
+        width: 11em;
     }
 
     .error_message {
