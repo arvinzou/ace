@@ -196,3 +196,6 @@ body{
     .btn-default {
         border-color: #ebedf2
     }
+    .btn:not(.btn-sm):not(.btn-lg) {
+        line-height: 2.2;
+    }
