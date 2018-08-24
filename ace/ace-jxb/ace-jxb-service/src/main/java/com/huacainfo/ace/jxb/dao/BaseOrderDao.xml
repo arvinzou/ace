@@ -333,7 +333,7 @@
             and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.category !=null and condition.category !=&quot;&quot;">
-            and t.category like concat('%',#{condition.category,jdbcType=VARCHAR},'%')
+            and t.category = #{condition.category,jdbcType=VARCHAR}
         </if>
         <if test="condition.statusArray !=null">
             and t.payStatus in

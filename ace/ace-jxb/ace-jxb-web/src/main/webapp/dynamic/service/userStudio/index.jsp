@@ -343,7 +343,7 @@
 
             </td>
             <td>
-                <a onclick="javascript:detail(\${data.id})" class="primary-link">查看</a>
+                <a onclick="javascript:detail('\${data.id}')" class="primary-link">查看</a>
             </td>
         </tr>
     </script>

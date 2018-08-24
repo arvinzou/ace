@@ -124,4 +124,18 @@ public class CourseCmtController extends JxbBaseController {
         String id = json.getString("id");
         return this.courseCmtService.deleteCourseCmtByCourseCmtId(id, this.getCurUserProp());
     }
+
+    @RequestMapping(value = "/findMyCourseCmtList")
+    @ResponseBody
+    public PageResult<CourseCmtVo> findMyCourseCmtList(CourseCmtQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setCounselorId(getCurUserProp().getUserId());
+
+        PageResult<CourseCmtVo> rst = this.courseCmtService
+                .findCourseCmtList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
+    }
 }
