@@ -51,7 +51,7 @@
             <div class="product_container" ng-repeat="item in items" ng-click="showInfo($index);">
                 <div class="content_container">
                     <div class="img_container">
-                        <img ng-src="http://zx.huacainfo.com/{{item.fileUrl}}"/>
+                        <img ng-src="{{item.fileUrl}}"/>
                     </div>
                     <div class="words_container">
                         <span class="cp_title" ng-bind="item.title"></span>

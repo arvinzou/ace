@@ -1,4 +1,4 @@
-var urlContent = "http://zx.huacainfo.com/";
+
 var html=[];
 html.push("<div class=\"login_box\">");
 html.push("<div class=\"login\">");
