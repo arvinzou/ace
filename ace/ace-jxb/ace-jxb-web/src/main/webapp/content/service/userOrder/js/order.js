@@ -1,5 +1,5 @@
 window.onload = function () {
-    getUserinfo();
+    //getUserinfo();
     juicer.register('formaCategory', formaCategory);
     juicer.register('formaPayStatus', formaPayStatus);
     initpage();
@@ -8,14 +8,14 @@ window.onload = function () {
 var category = 1;
 
 
-function getUserinfo() {
-    var url = "/jxb/counselor/getMyinfo"
-    $.getJSON(url, function (result) {
-        if (result.status == 0) {
-            viewUserinfo(result.value);
-        }
-    })
-}
+// function getUserinfo() {
+//     var url = "/jxb/counselor/getMyinfo"
+//     $.getJSON(url, function (result) {
+//         if (result.status == 0) {
+//             viewUserinfo(result.value);
+//         }
+//     })
+// }
 
 
 function changeType(cType) {
@@ -24,14 +24,13 @@ function changeType(cType) {
 }
 
 
-
-function viewUserinfo(data) {
-    for (key in data) {
-        $('.user-' + key).text(data[key]);
-    }
-    ;
-    $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
-}
+// function viewUserinfo(data) {
+//     for (key in data) {
+//         $('.user-' + key).text(data[key]);
+//     }
+//     ;
+//     $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
+// }
 
 
 function formaCategory(type) {
