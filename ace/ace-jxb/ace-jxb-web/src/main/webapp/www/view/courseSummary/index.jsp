@@ -156,7 +156,7 @@
                 <div class="row">
                 <div class="col-xs-12 col-md-12">
                 <p class="teacher_content">
-					\${data.counselor.profile}
+					\$\${data.counselor.profile}
             	</p>
             </div>
             </div>
