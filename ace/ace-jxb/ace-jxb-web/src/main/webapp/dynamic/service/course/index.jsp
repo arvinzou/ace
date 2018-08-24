@@ -92,14 +92,14 @@
                                                                 <div class="col-sm-4">
                                                                     <form onsubmit="return t_query()">
                                                                     <div class="input-group">
-                                                                        <input type="text" style="height:33px" name="keyword" class="form-control input-circle-left"
+                                                                        <input type="text" style="height:32px"
+                                                                               name="keyword"
+                                                                               class="form-control input-circle-left"
                                                                                placeholder="请输入课程名称">
                                                                         <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
-                                                                    <font style="vertical-align: inherit;"><font
-                                                                            style="vertical-align: inherit;">
-                                                                        搜索</font></font>
+                                                                        搜索
                                                                 </button>
                                                             </span>
                                                                     </div>

@@ -231,19 +231,19 @@
                         <thead>
                             <tr>
                                 <th width="10%">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;"> ＃ </font>
+
+                                    ＃ </font>
                                     </font>
                                 </th>
                                 <th width="30%">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;"> 章节名称 </font>
+
+                                    章节名称 </font>
                                     </font>
                                 </th>
 
                                 <th width="20%">
-                                    <font style="vertical-align: inherit;">
-                                        <font style="vertical-align: inherit;"> 操作 </font>
+
+                                    操作 </font>
                                     </font>
                                 </th>
                             </tr>
@@ -260,8 +260,8 @@
         {@each data as item, index}
         <tr>
             <td>
-                <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">第\${parseInt(index)+1}章</font>
+
+                第\${parseInt(index)+1}章</font>
                 </font>
             </td>
             <td  id="chapter-\${item.id}">

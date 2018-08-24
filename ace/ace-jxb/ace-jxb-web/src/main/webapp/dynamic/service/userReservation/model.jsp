@@ -150,9 +150,7 @@
                                                         <div class="portlet-title">
                                                             <div class="caption">
                                                                 <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase"><font
-                                                                        style="vertical-align: inherit;"><font
-                                                                        style="vertical-align: inherit;">预约设置</font></font></span>
+                                                                <span class="caption-subject font-green bold uppercase">预约设置</span>
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body">
