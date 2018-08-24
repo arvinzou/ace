@@ -1,5 +1,5 @@
 window.onload = function () {
-    getUserinfo();
+    // getUserinfo();
     getMyConsultInfo();
     $('.submit_btn').click(submitForm);
 };
@@ -52,26 +52,25 @@ function filloption(tag, tags) {
 }
 
 
+//
+// function getUserinfo() {
+//     var url = "/jxb/counselor/getMyinfo"
+//     $.getJSON(url, function (result) {
+//         if (result.status == 0) {
+//             viewUserinfo(result.value);
+//
+//         }
+//     })
+// }
 
 
-function getUserinfo() {
-    var url = "/jxb/counselor/getMyinfo"
-    $.getJSON(url, function (result) {
-        if (result.status == 0) {
-            viewUserinfo(result.value);
-
-        }
-    })
-}
-
-
-function viewUserinfo(data) {
-    for (key in data) {
-        $('.user-' + key).text(data[key]);
-    }
-    ;
-    $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
-}
+// function viewUserinfo(data) {
+//     for (key in data) {
+//         $('.user-' + key).text(data[key]);
+//     }
+//     ;
+//     $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
+// }
 
 function submitForm() {
     var formObject = {
