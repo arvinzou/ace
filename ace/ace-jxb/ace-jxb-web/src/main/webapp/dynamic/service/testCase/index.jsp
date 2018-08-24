@@ -95,7 +95,7 @@
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
-                                                                            <ul class="pagination"
+                                                                            <ul style="float: right;" class="pagination"
                                                                                 id="pagination1"></ul>
                                                                         </div>
 
