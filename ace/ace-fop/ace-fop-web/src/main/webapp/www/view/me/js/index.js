@@ -1,4 +1,4 @@
-var server = 'http://zx.huacainfo.com';
+
 var nickName = '';
 var headImg = '';
 var mobile = '';
