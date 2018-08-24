@@ -157,7 +157,7 @@ public class ConsultServiceImpl implements ConsultService {
             consultQVo.setCreateDate(new Date());
             consultQVo.setStatus("1");
             this.consultDao.insertSelective(consultQVo);
-            if (!(CommonUtils.isBlank(consultQVo.getTelephoneCon()) || CommonUtils.isBlank(consultQVo.getWecharCon()) || CommonUtils.isBlank(consultQVo.getFacetofaceCon()))) {
+            if (CommonUtils.isBlank(consultQVo.getTelephoneCon()) || CommonUtils.isBlank(consultQVo.getWecharCon()) || CommonUtils.isBlank(consultQVo.getFacetofaceCon())) {
                 return new MessageResponse(1, "咨询方式必须填写一项！");
             }
 
