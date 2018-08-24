@@ -18,10 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Controller
 @RequestMapping("/baseOrder")
 /**
@@ -160,4 +156,6 @@ public class BaseOrderController extends JxbBaseController {
         String id = json.getString("id");
         return this.baseOrderService.deleteBaseOrderByBaseOrderId(id, this.getCurUserProp());
     }
+
+
 }

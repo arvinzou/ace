@@ -86,7 +86,7 @@
                                                                     <i class="icon-settings"></i>预约设置</a>
                                                             </li>
                                                             <li>
-                                                                <a href="../userOrder/index.jsp">
+                                                                <a href="../userOrder/index1.jsp">
                                                                     <i class="icon-settings"></i>订单管理</a>
                                                             </li>
 

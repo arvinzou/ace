@@ -1,67 +1,56 @@
 window.onload = function () {
-    //getUserinfo();
-    juicer.register('formaCategory', formaCategory);
-    juicer.register('formaPayStatus', formaPayStatus);
+    juicer.register('formatCategory', formatCategory);
+    juicer.register('formatPayStatus', formatPayStatus);
+    juicer.register('formatCPntType', formatCPntType);
     initpage();
 }
+var category = 1, orderId = '';
 
-var category = 1;
-
-
-// function getUserinfo() {
-//     var url = "/jxb/counselor/getMyinfo"
-//     $.getJSON(url, function (result) {
-//         if (result.status == 0) {
-//             viewUserinfo(result.value);
-//         }
-//     })
-// }
-
-
-function changeType(cType) {
-    category = cType;
-    initpage();
+function formatCPntType(type) {
+    //   咨询类型(1-语音咨询 2-视频咨询 3-面对面咨询)
+    switch (type) {
+        case "1":
+            return "语音咨询";
+            break;
+        case "2":
+            return "视频咨询";
+        case "3":
+            return "面对面咨询";
+            break;
+    }
 }
 
-
-// function viewUserinfo(data) {
-//     for (key in data) {
-//         $('.user-' + key).text(data[key]);
-//     }
-//     ;
-//     $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
-// }
-
-
-function formaCategory(type) {
+function formatCategory(type) {
     switch (type) {
         case "1":
             return "咨询订单";
             break;
         case "2":
             return "课程订单";
+        case "3":
+            return "评测订单";
             break;
     }
 }
 
-function formaPayStatus(type) {
+function formatPayStatus(type) {
     switch (type) {
         case "1":
             return "待支付";
             break;
-        case "3":
+        case "2":
             return "已付款";
             break;
-        case "4":
+        case "3":
             return "申请退款";
             break;
-        case "5":
+        case "4":
             return "已退款";
             break;
-        case "6":
+        case "5":
             return "结束/待评价";
             break;
-        case "7":
+        case "6":
             return "已完结";
             break;
         case "7":
@@ -71,10 +60,10 @@ function formaPayStatus(type) {
 }
 
 function detail(id) {
-    var url = "/jxb/baseOrder/orderInfo"
+    var url = "/jxb/baseOrder/orderInfo";
     var data = {
         id: id
-    }
+    };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('temp_orderInfo').innerHTML;
@@ -85,6 +74,17 @@ function detail(id) {
             $("#orderInfoModal").modal("show");
         }
     })
+}
+
+function changeType(cType) {
+    category = cType;
+    initpage();
+}
+
+
+function searchByName() {
+    orderId = $('input[name="orderId"]').val();
+    initpage();
 }
 
 
@@ -107,9 +107,9 @@ function initpage() {
 function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findMyOrderList";
     var data = {
-        page: num,
-        limit: 20,
         category: category,
+        page: num,
+        limit: 20
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
@@ -120,6 +120,7 @@ function getOrderList(num, type) {
             }
             var navitem = document.getElementById('temp_orderList').innerHTML;
             var html = juicer(navitem, {
+                orderCategory: category,
                 data: result.data.list,
             });
             $("#orderList").html(html);

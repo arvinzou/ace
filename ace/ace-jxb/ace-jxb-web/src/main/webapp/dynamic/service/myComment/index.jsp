@@ -34,84 +34,86 @@
                     <div class="page-content">
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
-                            		<li>
-                            				<a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                            				<i class="fa fa-circle"></i>
-                            		</li>
-                            		<li>
-                            				<span>评价管理</span>
-                            		</li>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
+                                    <i class="fa fa-circle"></i>
+                                </li>
+                                <li>
+                                    <span>我的评价</span>
+                                </li>
                             </ul>
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
                                 <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- BEGIN SAMPLE TABLE PORTLET-->
-                                            <div class="portlet light ">
-                                                <div class="portlet-title">
-                                                    <div class="caption">
-                                                       评价管理
-                                                    </div>
-																										<div class="actions">
-																											<form onsubmit="return t_query()">
+                                    <div class="col-md-12">
+                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+                                        <div class="portlet light ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    我的评价
+                                                </div>
+                                                <div class="actions">
+                                                    <form onsubmit="return t_query()">
 
 
                                                         <div class="input-group">
                                                             <input type="text" style="height:33px" name="keyword"
                                                                    class="form-control input-circle-left"
                                                                    placeholder="请输入昵称">
-																																	 
+
                                                             <span class="input-group-btn">
-                                                               <button class="btn btn-circle-right btn-default search_btn" type="submit">
-                                                                    <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                                               <button class="btn btn-circle-right btn-default search_btn"
+                                                                       type="submit">
+                                                                    <font style="vertical-align: inherit;"><font
+                                                                            style="vertical-align: inherit;">
                                                                         搜索</font></font>
                                                                 </button>
                                                             </span>
                                                         </div>
                                                     </form>
-																										</div>
                                                 </div>
-                                                <div class="portlet-body">
-                                                    <div class="table-scrollable">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                            <tr>
-                                                               
-                                                                <th width="10%"> 昵称 </th>
-                                                                <th width="20%"> 名称 </th>
-                                                                <th width="15%"> 好评度 </th>
-                                                                <th width="30%"> 评价内容 </th>
-                                                                <th width="15%"> 评价时间 </th>
-                                                                <th width="10%"> 操作 </th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody id="cmtList">
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="table-scrollable">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="10%"> 昵称</th>
+                                                            <th width="20%"> 名称</th>
+                                                            <th width="15%"> 好评度</th>
+                                                            <th width="30%"> 评价内容</th>
+                                                            <th width="15%"> 评价时间</th>
+                                                            <th width="10%"> 操作</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="cmtList">
 
-                                                            </tbody>
-                                                        </table>
-																												
-																												 <div class="paginationbar">
-                                                                <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
-                                                         </div>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <div class="paginationbar">
+                                                        <ul class="pagination" id="pagination1"
+                                                            style="padding-left: 15px;"></ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- END SAMPLE TABLE PORTLET-->
                                         </div>
-                                    
+                                        <!-- END SAMPLE TABLE PORTLET-->
+                                    </div>
+
                                 </div>
                                 <script id="list" type="text/template">
                                     {@each data as item,index}
                                     <tr>
-          
-                                        <td style="text-align: center;"> 
-																				<div class="header-box">
-																				 <div class="header-img"><img src="\${item.headimgurl}" class="headimg"></div>
-																				 <div class="header--nickname">\${item.nickname} </div>
-																				 </div>
-																				</td>
-                                        <td> \${item.courseName} </td>
+                                        <td style="text-align: center;">
+                                            <div class="header-box">
+                                                <div class="header-img"><img src="\${item.headimgurl}" class="headimg">
+                                                </div>
+                                                <div class="header--nickname">\${item.nickname}</div>
+                                            </div>
+                                        </td>
+                                        <td> \${item.courseName}</td>
                                         <td>
                                             {@if item.grade == '1'}
                                             <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
@@ -135,10 +137,11 @@
                                             <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
                                             {@/if}
                                         </td>
-                                        <td> \${item.content} </td>
-                                        <td> \${item.createDate} </td>
+                                        <td> \${item.content}</td>
+                                        <td> \${item.createDate}</td>
                                         <td>
-                                            <a href="javascript:void(0);" onclick="deleteCmt(this,'\${item.id}');">删除</a>
+                                            <a href="javascript:void(0);"
+                                               onclick="deleteCmt(this,'\${item.id}');">删除</a>
                                         </td>
                                     </tr>
                                     {@/each}
@@ -160,22 +163,25 @@
 </body>
 
 <style>
-		.headimg{
-			  width: 40px;
+    .headimg {
+        width: 40px;
         height: 40px;
         object-fit: cover;
-				border-radius: 50%;
-		}
-		.header-box{
-			padding:2px;
-			width: 100%;
-			text-align: center
-		}
-		.header-img{
-			padding:2px;
-		}
-		.header-nickname{
-			padding:2px;
-		}
+        border-radius: 50%;
+    }
+
+    .header-box {
+        padding: 2px;
+        width: 100%;
+        text-align: center
+    }
+
+    .header-img {
+        padding: 2px;
+    }
+
+    .header-nickname {
+        padding: 2px;
+    }
 </style>
 </html>
