@@ -58,7 +58,7 @@
 
 
                                                         <div class="input-group">
-                                                            <input type="text" style="height:30px" name="keyword"
+                                                            <input type="text" name="keyword"
                                                                    class="form-control input-circle-left"
                                                                    placeholder="请输入昵称">
 

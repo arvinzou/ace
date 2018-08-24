@@ -89,7 +89,7 @@
                                                                 <div class="col-sm-4">
                                                                     <form onsubmit="return t_query()">
                                                                     <div class="input-group">
-                                                                        <input type="text" style="height:30px"
+                                                                        <input type="text"
                                                                                name="keyword"
                                                                                class="form-control input-circle-left"
                                                                                placeholder="请输入课程名称">

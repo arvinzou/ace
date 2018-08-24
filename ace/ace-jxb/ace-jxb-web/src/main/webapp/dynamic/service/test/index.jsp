@@ -81,7 +81,7 @@
                                                                 <div class="col-sm-4">
                                                                     <div class="input-group">
                                                                         <input name="testName" type="text"
-                                                                               style="height:30px"
+
                                                                                class="form-control input-circle-left"
                                                                                placeholder="请输入评测名称">
                                                                         <span class="input-group-btn">
