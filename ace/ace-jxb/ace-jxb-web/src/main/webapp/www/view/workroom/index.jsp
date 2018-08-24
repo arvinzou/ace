@@ -40,7 +40,7 @@
 			{@/each}
 		</script>
 		<script id="joinroomTemp" type="text/template">
-			<div class="row roomlist" onclick="showDetail('\${joinData.id}');">
+			<div class="row roomlist" onclick="showjoinDetail('\${joinData.id}');">
 				<div class="room">
 					<div class="col-xs-3 col-sm-3 topsize">
 						<div class="img_box"><img src="\${joinData.logoImgUrl}"/></div>
