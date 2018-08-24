@@ -70,8 +70,9 @@
                                                     <div class="form-body">
 
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">名字
+                                                            <label class="col-md-3 control-label">
                                                                 <span class="required" aria-required="true">*</span>
+                                                                名字
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <input type="text" id="chineseName" class="form-control"
@@ -83,8 +84,9 @@
 
 
                                                         <div class="form-group form-md-radios">
-                                                            <label class="col-md-3 control-label">性别
+                                                            <label class="col-md-3 control-label">
                                                                 <span class="required" aria-required="true">*</span>
+                                                                性别
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <div class="md-radio-inline">
@@ -116,8 +118,9 @@
 
 
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">所在城市
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>所在城市
+
                                                             </label>
                                                             <div class="col-md-9 city-select"
                                                                  id="single-select-1">
@@ -133,8 +136,9 @@
                                                         </div>
 
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">个人简介
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>个人简介
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <textarea class="form-control" id="notNull_profile"
@@ -147,8 +151,9 @@
 
 
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">手机号码
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>手机号码
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control" id="mobilePhone"
@@ -162,8 +167,9 @@
 
 
                                                         <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">形象照
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="control-label col-md-3"><span class="required"
+                                                                                                        aria-required="true">*</span>形象照
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <div>
@@ -182,8 +188,9 @@
                                                         </div>
 
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">身份证号码
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>身份证号码
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control" id="IDcard"
@@ -196,8 +203,9 @@
 
 
                                                         <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">身份证
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="control-label col-md-3"><span class="required"
+                                                                                                        aria-required="true">*</span>身份证
+
                                                             </label>
                                                             <div class="col-md-9 idCardBoxs">
                                                                 <div>
@@ -242,8 +250,9 @@
 
 
                                                         <div class="form-group form-md-radios">
-                                                            <label class="col-md-3 control-label">职业名称
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>职业名称
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <div class="md-radio-inline"
@@ -275,8 +284,9 @@
 
 
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">从业资格证证号
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>从业资格证证号
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <input type="text" class="form-control" id="notNull1"
@@ -289,8 +299,9 @@
 
 
                                                         <div class="form-group form-md-checkboxes">
-                                                            <label class="control-label col-md-3">从业资格证书
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="control-label col-md-3"><span class="required"
+                                                                                                        aria-required="true">*</span>从业资格证书
+
                                                             </label>
                                                             <div class="col-md-9 certificateBoxs">
                                                                 <div>
@@ -310,8 +321,9 @@
 
 
                                                         <div class="form-group form-md-checkboxes">
-                                                            <label class="col-md-3 control-label">擅长领域
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>擅长领域
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <div class="md-checkbox-inline" id="tags">
@@ -322,8 +334,9 @@
                                                         </div>
 
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">个案时长
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"> <span
+                                                                    class="required" aria-required="true">*</span>个案时长
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <div class="input-icon right">
@@ -337,8 +350,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group ">
-                                                            <label class="col-md-3 control-label">个案人数
-                                                                <span class="required" aria-required="true">*</span>
+                                                            <label class="col-md-3 control-label"><span class="required"
+                                                                                                        aria-required="true">*</span>个案人数
+
                                                             </label>
                                                             <div class="col-md-9">
                                                                 <div class="input-icon right">
