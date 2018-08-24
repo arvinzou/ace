@@ -165,11 +165,11 @@
                     <div class="col-md-10">
                         <div class="radio-group-container">
                             <label class="mt-radio mt-radio-outline">
-                                <input type="radio" name="free" value="0" {@if data.free=='1'}checked{@/if}>是
+                                <input type="radio" name="free" value="0" {@if data.free=='0'}checked{@/if}>是
                                 <span></span>
                             </label>
                             <label class="mt-radio mt-radio-outline">
-                                <input type="radio" name="free" value="1" {@if data.free=='0'}checked{@/if}>否
+                                <input type="radio" name="free" value="1" {@if data.free=='1'}checked{@/if}>否
                                 <span></span>
                             </label>
                         </div>
