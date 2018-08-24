@@ -40,17 +40,6 @@ window.onload = function () {
 
 };
 
-function initWeb() {
-    var url = portalPath + '/dict/findListByCategoryId.do?categoryId=152';
-    $.getJSON(url, function (result) {
-        var navitem = document.getElementById('temp_tags').innerHTML;
-        var html = juicer(navitem, {
-            data: result,
-        });
-        $("#tags").html(html);
-    })
-}
-
 
 function initDoc() {
     editor = new Simditor({
@@ -88,11 +77,8 @@ function fillForm(data) {
 
     singleSelect1.setCityVal(data.cityCode + "市");
     editor.setValue(data['profile']);
-    var tag = $('#tags .md-checkbox');
-    var tags = data["tags"];
-    filloption(tag, tags)
-    tag = $('#certification .md-radio');
-    tags = data["certification"];
+    var tag = $('#certification .md-radio');
+    var tags = data["certification"];
     filloption(tag, tags)
 
 }
@@ -188,16 +174,6 @@ function submitForm() {
     }
     formObject.certificateImgUrl = certificateImgUrl;
 
-    var arr = new Array();
-    $('#tags :checkbox:checked').each(function (i) {
-        arr[i] = $(this).next().text().trim();
-    });
-    var tags = arr.join(",");
-    if (tags.length = 0) {
-        alert("还没有选择您的个人擅长");
-        return
-    }
-    formObject.tags = tags;
     formObject.cityCode = cityCode;
     var url = '/jxb/counselor/updateUserinfo';
     $.post(url, formObject, function (result) {
