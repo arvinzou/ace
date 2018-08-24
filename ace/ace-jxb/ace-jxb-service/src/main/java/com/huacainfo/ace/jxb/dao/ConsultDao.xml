@@ -120,7 +120,7 @@
                 info = #{info,jdbcType=LONGVARCHAR},
             </if>
             <if test="onlineStatus != null">
-                onlineStatus = #{status,jdbcType=VARCHAR},
+                onlineStatus = #{onlineStatus,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
