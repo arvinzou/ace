@@ -206,7 +206,7 @@
 </div><!-- /.modal -->
 
 
-<div class="modal fade " id="studioInfo" tabindex="-1" role="dialog"
+<div class="modal" id="studioInfo" tabindex="-1" role="dialog"
      aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
