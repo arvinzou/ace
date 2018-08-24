@@ -83,7 +83,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-radios">
+                                                        <div class="form-group">
                                                             <label class="col-md-3 control-label">
                                                                 <span class="required" aria-required="true">*</span>
                                                                 性别
@@ -166,7 +166,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
+                                                        <div class="form-group ">
                                                             <label class="control-label col-md-3"><span class="required"
                                                                                                         aria-required="true">*</span>形象照
 
@@ -202,7 +202,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
+                                                        <div class="form-group ">
                                                             <label class="control-label col-md-3"><span class="required"
                                                                                                         aria-required="true">*</span>身份证
 
@@ -249,7 +249,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-radios">
+                                                        <div class="form-group ">
                                                             <label class="col-md-3 control-label"><span class="required"
                                                                                                         aria-required="true">*</span>职业名称
 
@@ -298,7 +298,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
+                                                        <div class="form-group ">
                                                             <label class="control-label col-md-3"><span class="required"
                                                                                                         aria-required="true">*</span>从业资格证书
 
@@ -320,7 +320,7 @@
                                                         </div>
 
 
-                                                        <div class="form-group form-md-checkboxes">
+                                                        <div class="form-group ">
                                                             <label class="col-md-3 control-label"><span class="required"
                                                                                                         aria-required="true">*</span>擅长领域
 
