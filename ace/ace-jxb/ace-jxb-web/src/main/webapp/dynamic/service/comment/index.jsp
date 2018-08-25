@@ -79,7 +79,7 @@
                                                             <tr>
                                                                
                                                                 <th width="10%"> 昵称 </th>
-                                                                <th width="20%"> 名称 </th>
+                                                                <th width="20%"> 课程名称 </th>
                                                                 <th width="15%"> 好评度 </th>
                                                                 <th width="30%"> 评价内容 </th>
                                                                 <th width="15%"> 评价时间 </th>
@@ -161,9 +161,9 @@
 
 <style>
 		.headimg{
-			  width: 40px;
-        height: 40px;
-        object-fit: cover;
+			  width: 50px;
+                height: 50px;
+                object-fit: cover;
 				border-radius: 50%;
 		}
 		.header-box{

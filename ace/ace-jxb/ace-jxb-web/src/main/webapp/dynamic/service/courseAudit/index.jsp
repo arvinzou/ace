@@ -270,12 +270,12 @@
         object-fit: cover;
     }
     .describtion{
-        padding-left:8px;
+        padding-left:15px;
         height:50px;
     }
     .cost{
           padding-top: 5px;
-          padding-left:8px;
+          padding-left:15px;
           color:#FE6500;
     }
 </style>

@@ -178,9 +178,9 @@
     <script id="tpl-info" type="text/template">
         <div class="modal-body">
             <div class="form-horizontal" novalidate="novalidate">
-                <div class="form-body">
+                <div class="form-body" style="padding: 30px;">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>
                             姓名
                         </label>
@@ -191,7 +191,7 @@
 
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>
                             性别
                         </label>
@@ -202,7 +202,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>所在城市
                         </label>
                         <div class="col-md-9">
@@ -211,7 +211,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>个人简介
                         </label>
                         <div class="col-md-9">
@@ -221,7 +221,7 @@
 
 
                     <div class="form-group ">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>手机号码
 
                         </label>
@@ -232,7 +232,7 @@
 
 
                     <div class="form-group ">
-                        <label class="control-label col-md-3">
+                        <label class="control-label col-md-2">
                             <span class="required" aria-required="true">*</span>形象照
 
                         </label>
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>身份证号码
 
                         </label>
@@ -250,7 +250,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3">
+                        <label class="control-label col-md-2">
                             <span class="required" aria-required="true">*</span>身份证
                         </label>
                         <div class="col-md-9 ">
@@ -264,7 +264,7 @@
 
 
                     <div class="form-group ">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>职业名称
                         </label>
                         <div class="col-md-9">
@@ -274,7 +274,7 @@
 
 
                     <div class="form-group ">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>从业资格证证号
                         </label>
                         <div class="col-md-9">
@@ -284,7 +284,7 @@
 
 
                     <div class="form-group ">
-                        <label class="control-label col-md-3">
+                        <label class="control-label col-md-2">
                             <span class="required" aria-required="true">*</span>从业资格证书
 
                         </label>
@@ -294,7 +294,7 @@
                     </div>
 
                     <div class="form-group ">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>个案时长
                         </label>
                         <div class="col-md-9">
@@ -302,7 +302,7 @@
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label class="col-md-3 control-label">
+                        <label class="col-md-2 control-label">
                             <span class="required" aria-required="true">*</span>个案人数
 
                         </label>
@@ -328,12 +328,13 @@
                     <h4 class="modal-title" id="gridSystemModalLabel3">课程审核</h4>
                 </div>
                 <div class="modal-body">
+					
                     <form class="form-horizontal" id="fm-audit" role="form">
                         <div class="form-body">
                             <input type="hidden" name="id" />
                             <div class="form-group " id="operation">
                                 <label class="col-md-2 control-label">审核结果</label>
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                     <div class="radio-group-container">
                                         <label>
                                             <input type="radio" name="auditState" value="1">
@@ -348,12 +349,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2 control-label">审核说明</label>
-                                <div class="col-md-10">
+                                <div class="col-md-9">
                                     <textarea name="message" style="width: 100%;height: 100px;"></textarea>
                                 </div>
                             </div>
                         </div>
                     </form>
+					
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -424,7 +426,7 @@
         }
 
         .describtion {
-            padding-left: 8px;
+            padding-left: 15px;
             height: 50px;
         }
 
@@ -444,6 +446,7 @@
 		}
 		.my-gallery img{
 			padding: 10px;
+			float: left;
 		}
     </style>
 

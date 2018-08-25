@@ -70,11 +70,7 @@
                                                         </div>
 
                                                         <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
-
-                                                                    <%--content--%>
-
+                                                           
 
                                                                     <div class="table-scrollable">
                                                                         <table class="table table-hover">
@@ -93,11 +89,8 @@
 
                                                                             </tbody>
                                                                         </table>
-                                                                    </div>
+                                                                   
 
-                                                                    <%--content--%>
-
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

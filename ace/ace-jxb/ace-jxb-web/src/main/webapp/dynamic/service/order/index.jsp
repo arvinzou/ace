@@ -167,7 +167,7 @@
     <table class="table table-hover table-light" align="center" border="0" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
-            <%--<th width="5%">订单号</th>--%>
+           
             <th width="15%">用户昵称</th>
             {@if orderCategory == 1}
             <th width="30%">咨询方式</th>
@@ -179,8 +179,8 @@
             <th width="40%">测试名称</th>
             {@/if}
             <th width="5%">付款金额</th>
-            <th width="20%">下单时间</th>
-            <th width="5%">订单状态</th>
+            <th width="15%">下单时间</th>
+            <th width="10%">订单状态</th>
             <th width="15%">操作</th>
         </tr>
         </thead>
@@ -191,9 +191,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row" style="margin: 0px">
-                            <img class="cover user-pic" src="\${item.consumerImgUrl}">
+                            <img class="cover" src="\${item.consumerImgUrl}">
                         </div>
-                        <div class="row" style="margin: 6px 0px 0px 6px;">
+                        <div class="row" style="margin: 6px 0px 0px;">
                             \${item.consumerName}
                         </div>
                     </div>
@@ -273,8 +273,10 @@
         margin-bottom: 29px !important;
     }
 
-    .table .user-pic {
-        height: 60px !important;
+    .cover {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
     }
 
     .portlet-body {
