@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="js/act.js"></script>
 	</head>
 
+
 	<body>
 		<div class="container">
 			<div class="course_basic">
@@ -73,27 +74,75 @@
 	</script>
 
 	<script id="audioTemp" type="text/template">
-		<div class="row">
-			<div class="col-xs-6 col-md-6">
+		<%--<div class="row">--%>
+		<%--<div class="col-xs-6 col-md-6">--%>
+		<%--<a href="javascript:void(0);" onclick="showCatalog('\${data.courseId}','\${data.partId}');">--%>
+		<%--<p><img src="img/icon_catalog.png" class="icon" style="margin-left: 0.08rem"/></p>--%>
+		<%--<p class="audioTitle">目录</p>--%>
+		<%--</a>--%>
+		<%--</div>--%>
+		<%--<div class="col-xs-6 col-md-6" style="text-align: right">--%>
+		<%--<a href="javascript:void(0);" onclick="showScripts('\${data.id}');">--%>
+		<%--<p><img src="img/icon_script.png" class="icon"/></p>--%>
+		<%--<p class="audioTitle">文稿</p>--%>
+		<%--</a>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+		<%--<div class="row">--%>
+		<%--<div class="col-xs-12 col-md-12">--%>
+		<%--<audio src="\${data.mediUrl}" controls="controls" style="width: 100%;" currentTime duration>--%>
+		<%--您的设备不支持音频播放--%>
+		<%--</audio>--%>
+		<%--</div>--%>
+		<%--</div>--%>
+
+
+		<div class="" id="player">
+			<div class="p_left">
 				<a href="javascript:void(0);" onclick="showCatalog('\${data.courseId}','\${data.partId}');">
 					<p><img src="img/icon_catalog.png" class="icon" style="margin-left: 0.08rem"/></p>
 					<p class="audioTitle">目录</p>
 				</a>
 			</div>
-			<div class="col-xs-6 col-md-6" style="text-align: right">
+			<div class="p_center">
+
+
+				<div class="audio green-audio-player">
+					<div class="loading" style="display: none;">
+						<div class="spinner"></div>
+					</div>
+					<div class="play-pause-btn" style="display: block;">
+						<img src="img/play.png" class="play-pause-icon" id="playPause">
+					</div>
+
+					<div class="controls">
+						<span class="current-time">0:00</span>
+						<div class="slider" data-direction="horizontal">
+							<div class="progress" style="width: 0%;">
+								<div class="pin" id="progress-pin" data-method="rewind"></div>
+							</div>
+						</div>
+						<span class="total-time">1:33</span>
+					</div>
+
+
+					<audio crossorigin="">
+						<source src="\${data.mediUrl}" type="audio/mpeg">
+					</audio>
+				</div>
+
+
+			</div>
+			<div class="p_right">
 				<a href="javascript:void(0);" onclick="showScripts('\${data.id}');">
 					<p><img src="img/icon_script.png" class="icon"/></p>
 					<p class="audioTitle">文稿</p>
 				</a>
 			</div>
+
 		</div>
-		<div class="row">
-			<div class="col-xs-12 col-md-12">
-				<audio src="\${data.mediUrl}" controls="controls" style="width: 100%;" currentTime duration>
-					您的设备不支持音频播放
-				</audio>
-			</div>
-		</div>
+
+
 	</script>
 
 <script id="commentListTemp" type="text/template">
@@ -155,4 +204,5 @@
 		{@/each}
     </div>
 </script>
+
 </html>
