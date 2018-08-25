@@ -81,7 +81,7 @@ function detail(id) {
 function initpage(studioId) {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
-        pageSize: 20,
+        pageSize: 5,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -100,7 +100,7 @@ function findMyCounselors(num, type, studioId) {
     var data = {
         studioId: studioId,
         page: num,
-        limit: 20,
+        limit: 5,
         name: '',
     }
     $.getJSON(url, data, function (result) {

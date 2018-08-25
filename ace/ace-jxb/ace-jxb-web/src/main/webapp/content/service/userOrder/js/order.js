@@ -91,7 +91,7 @@ function searchByName() {
 function initpage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
-        pageSize: 20,
+        pageSize: 5,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -109,7 +109,7 @@ function getOrderList(num, type) {
     var data = {
         category: category,
         page: num,
-        limit: 20
+        limit: 5
     }
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
