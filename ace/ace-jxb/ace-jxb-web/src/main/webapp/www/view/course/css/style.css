@@ -149,7 +149,6 @@
 	float: left;
     cursor: pointer;
     font-size: 0.373333rem;
-    font-weight: bold;
     color: rgba(160, 167, 182, 1);
     margin-right: 0.213333rem;
 	text-align: center;
@@ -174,7 +173,6 @@
 
 .citylist2 .leibie {
 	line-height: 54px;
-    font-weight: bold;
     color: rgba(92, 102, 129, 1);
     font-size: 0.4rem;
 }
