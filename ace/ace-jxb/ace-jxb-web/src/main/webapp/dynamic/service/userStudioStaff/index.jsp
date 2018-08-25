@@ -65,11 +65,11 @@
                                                                 <table class="table table-hover table-light">
                                                                     <thead>
                                                                         <tr class="uppercase">
-                                                                            <th> 头像</th>
-                                                                            <th> 名字</th>
+                                                                            <th>形象照</th>
+                                                                            <th>姓名</th>
                                                                             <th> 职业名称</th>
                                                                             <th> 加入时间</th>
-                                                                            <th> 操作</th>
+                                                                            
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="studioCounselorList">
@@ -138,9 +138,7 @@
             </td>
             <td>\${item.certification}</td>
             <td>\${item.createDate}</td>
-            <td>
-                <a onclick="javascript:detail(\${item.id})" class="primary-link">查看详情</a>
-            </td>
+            
         </tr>
         {@/each}
     </script>

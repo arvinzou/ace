@@ -66,8 +66,7 @@
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
-                                                <div class="mt-element-card mt-element-overlay">
-                                                    <div class="row">
+                                               
 
 
                                                         <div class="table-scrollable table-scrollable-borderless">
@@ -87,8 +86,6 @@
                                                         </div>
 
 
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
