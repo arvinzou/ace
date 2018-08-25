@@ -22,6 +22,10 @@
         <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
         <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-sweetalert/sweetalert.css">
         <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+        <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+        <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
+        <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+        <script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
         <script src="js/act.js?v=${cfg.version}"></script>
         <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
     </head>
@@ -163,9 +167,9 @@
                 <a class="operation" href="javascript:void(0);" onclick="outline('\${item.id}');">下架</a>
                 {@/if} {@/if} {@if item.regAuditRst==1}
                 <a class="operation" href="#" data-toggle="modal" data-id="\${item.id}" data-target="#audit">审核</a>
-            {@/if}
-			
-			<a class="operation" href="#"  data-toggle="modal" data-id="\${item.id}" data-target="#preview">详细</a>
+                {@/if}
+
+                <a class="operation" href="#" data-toggle="modal" data-id="\${item.id}" data-target="#preview">详细</a>
             </td>
         </tr>
         {@/each}
@@ -174,139 +178,141 @@
     <script id="tpl-info" type="text/template">
         <div class="modal-body">
             <div class="form-horizontal" novalidate="novalidate">
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>
-                                        姓名 
-                                    </label>
-                                    <div class="col-md-9">
-                                        <label class="control-label">\${data.name}</label>
-                                    </div>
-                                </div>
-            
-            
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>
-                                        性别
-                                    </label>
-                                    <div class="col-md-9">
-                                        <label class="control-label">
-											{@if data.sex==1}男{@else}女{@/if}
-										</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>所在城市
-                                    </label>
-                                    <div class="col-md-9" >
-                                        <label class="control-label">\${data.cityCode}</label>            
-                                    </div>
-                                </div>
-            
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>个人简介
-                                    </label>
-                                    <div class="col-md-9">
-                                        \$\${data.profile}
-                                    </div>
-                                </div>
-            
-            
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>手机号码
-            
-                                    </label>
-                                    <div class="col-md-9">
-                                       <label class="control-label">\${data.mobile}</label> 
-                                    </div>
-                                </div>
-            
-            
-                                <div class="form-group ">
-                                    <label class="control-label col-md-3">
-                                        <span class="required" aria-required="true">*</span>形象照
-            
-                                    </label>
-                                    <div class="col-md-9">
-                                        <img class="headimg" src="\${data.imagePhotoUrl}" alt="">
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>身份证号码
-           
-                                    </label>
-                                    <div class="col-md-9">
-                                        <label class="control-label">\${data.idCard}</label> 
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">
-                                        <span class="required" aria-required="true">*</span>身份证
-                                    </label>
-                                    <div class="col-md-9 ">
-										<img src="\${data.evidenceImgUrl}">
-										<img src="\${data.idCardImgUrl}">
-										<img src="\${data.idCardSideImgUrl}">
-                                    </div>
-                                </div>
-            
-            
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>职业名称
-                                    </label>
-                                    <div class="col-md-9">
-                                        <label class="control-label">\${data.certification}</label> 
-                                    </div>
-                                </div>
-            
-            
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>从业资格证证号
-                                    </label>
-                                    <div class="col-md-9">
-                                       <label class="control-label">\${data.certificateNo}</label> 
-                                    </div>
-                                </div>
-            
-            
-                                <div class="form-group ">
-                                    <label class="control-label col-md-3">
-                                        <span class="required" aria-required="true">*</span>从业资格证书
-           
-                                    </label>
-                                    <div class="col-md-9">
-                                        <img src="\${data.certificateImgUrl}">
-                                    </div>
-                                </div>
-            
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>个案时长
-                                    </label>
-                                    <div class="col-md-9">
-                                      <label class="control-label">\${data.duration}</label> 
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">
-                                        <span class="required" aria-required="true">*</span>个案人数
-            
-                                    </label>
-                                    <div class="col-md-9">
-                                        <label class="control-label">\${data.peopleNum}</label> 
-                                    </div>
-                                </div>
-                            </div>
-            
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>
+                            姓名
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.name}</label>
                         </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>
+                            性别
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">
+                                {@if data.sex==1}男{@else}女{@/if}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>所在城市
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.cityCode}</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>个人简介
+                        </label>
+                        <div class="col-md-9">
+                            \$\${data.profile}
+                        </div>
+                    </div>
+
+
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>手机号码
+
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.mobile}</label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group ">
+                        <label class="control-label col-md-3">
+                            <span class="required" aria-required="true">*</span>形象照
+
+                        </label>
+                        <div class="col-md-9">
+                            <img class="headimg" src="\${data.imagePhotoUrl}" alt="">
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>身份证号码
+
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.idCard}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            <span class="required" aria-required="true">*</span>身份证
+                        </label>
+                        <div class="col-md-9 ">
+                            {@if data.evidenceImgUrl}<img src="\${data.evidenceImgUrl}" alt=""/>{@/if}
+                            {@if data.idCardImgUrl}<img src="\${data.idCardImgUrl}" alt=""/>{@/if}
+							{@if data.idCardSideImgUrl}<img src="\${data.idCardSideImgUrl}" alt=""/> {@/if}
+							
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>职业名称
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.certification}</label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>从业资格证证号
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.certificateNo}</label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group ">
+                        <label class="control-label col-md-3">
+                            <span class="required" aria-required="true">*</span>从业资格证书
+
+                        </label>
+                        <div class="col-md-9">
+                            <img src="\${data.certificateImgUrl}">
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>个案时长
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.duration}</label>
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <label class="col-md-3 control-label">
+                            <span class="required" aria-required="true">*</span>个案人数
+
+                        </label>
+                        <div class="col-md-9">
+                            <label class="control-label">\${data.peopleNum}</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
     </script>
@@ -366,7 +372,7 @@
                     </button>
                     <h4 class="modal-title">咨询师详情</h4>
                 </div>
-                <div id="info">
+                <div id="info" class="my-gallery">
 
                 </div>
                 <div class="modal-footer">
@@ -375,6 +381,41 @@
             </div>
         </div>
     </div>
+	
+	<div id="j-pswp" class="pswp"role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
     <style>
         .cover {
             width: 70px;
@@ -391,11 +432,18 @@
             padding-top: 5px;
             padding-left: 8px;
         }
-		#info img{
-			
-			max-height: 200px;
-			max-width: 200px;
-			border-radius: 5px;
+
+        #info img {
+
+            max-height: 200px;
+            max-width: 200px;
+            border-radius: 5px;
+        }
+		.pswp {
+			z-index: 99999;
+		}
+		.my-gallery img{
+			padding: 10px;
 		}
     </style>
 
