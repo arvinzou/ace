@@ -111,7 +111,7 @@ function initpage() {
     testSelectOptions();
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
-        pageSize: 20,
+        pageSize: 5,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -128,7 +128,7 @@ function getEvaluatTplList(num, type) {
     var url = portalPath + '/evaluatTpl/findEvaluatTplListVo.do';
     var data = {
         page: num,
-        limit: 20,
+        limit: 5,
         name: testName
     };
     $.getJSON(url, data, function (result) {

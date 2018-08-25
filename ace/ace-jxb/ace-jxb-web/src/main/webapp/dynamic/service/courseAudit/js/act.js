@@ -18,7 +18,7 @@ window.onload = function (){
 }
 var payType = "";
 var videoUrl = "";
-var params={limit:2,type:'1'};
+var params={limit:5,type:'1'};
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
