@@ -75,12 +75,16 @@ input {
 
 .test_list .left_div {
     float: left;
-    width: 5.893333rem;
+    width: 6.64rem;
+}
+
+.test_list .left_div > p {
+    margin: 0px;
 }
 
 .test_list .right_div {
-    width: 2.666666rem;
-    height: 2.666666rem;
+    width: 2.106666rem;
+    height: 2.106666rem;
     float: right;
     border-radius: 5px;
     overflow: hidden;
@@ -94,11 +98,10 @@ input {
 }
 
 .test_list .left_div .test_title {
-    font-size: 0.48rem;
+    font-size: 0.426666rem;
     color: rgba(28, 40, 67, 1);
-    line-height: 0.666666rem;
-    margin-bottom: 0.213333rem;
-    height: 1.333333rem;
+    line-height: 0.57rem;
+    height: 1.14rem;
 }
 
 .test_list .left_div .test_remark {
@@ -109,7 +112,6 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-bottom: 0.133333rem;
 }
 
 .test_list .left_div .price {
