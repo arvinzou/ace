@@ -165,7 +165,8 @@
                 <a class="operation" href="javascript:void(0);" onclick="online('\${item.id}');">上架</a>
                 {@else}
                 <a class="operation" href="javascript:void(0);" onclick="outline('\${item.id}');">下架</a>
-                {@/if} {@/if} {@if item.regAuditRst==1}
+                {@/if} {@/if} 
+				{@if item.regAuditRst==0}
                 <a class="operation" href="#" data-toggle="modal" data-id="\${item.id}" data-target="#audit">审核</a>
                 {@/if}
 
