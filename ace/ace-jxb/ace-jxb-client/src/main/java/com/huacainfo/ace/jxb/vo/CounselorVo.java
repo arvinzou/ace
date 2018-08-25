@@ -43,6 +43,31 @@ public class CounselorVo extends Counselor {
      */
     private String consultState;
 
+    /**
+     * 咨询订单数量
+     */
+    private int consultCount;
+    /**
+     * 课程数量
+     */
+    private int courseCount;
+
+    public int getConsultCount() {
+        return consultCount;
+    }
+
+    public void setConsultCount(int consultCount) {
+        this.consultCount = consultCount;
+    }
+
+    public int getCourseCount() {
+        return courseCount;
+    }
+
+    public void setCourseCount(int courseCount) {
+        this.courseCount = courseCount;
+    }
+
     public String getNickname() {
         return nickname;
     }

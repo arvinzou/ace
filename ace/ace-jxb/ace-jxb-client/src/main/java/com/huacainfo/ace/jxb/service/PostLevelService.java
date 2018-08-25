@@ -6,6 +6,8 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.PostLevel;
+import com.huacainfo.ace.jxb.vo.CounselorPostLevelQVo;
+import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
 import com.huacainfo.ace.jxb.vo.PostLevelQVo;
 import com.huacainfo.ace.jxb.vo.PostLevelVo;
 
@@ -90,4 +92,9 @@ public interface PostLevelService {
      * @return ResultResponse
      */
     ResultResponse examine(String quarter, String counselorId);
+
+    /**
+     * 查询咨询师岗位列表
+     */
+    PageResult<CounselorPostLevelVo> findCounselorLevelList(CounselorPostLevelQVo condition, int start, int limit, String orderBy);
 }

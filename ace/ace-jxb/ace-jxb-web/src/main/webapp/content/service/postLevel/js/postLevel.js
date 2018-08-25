@@ -64,7 +64,7 @@ function focusCheck() {
 
 function getObject($tr) {
     var object = {
-        // postIndex:'',
+        postIndex: '',
         postName: '',
         turnover: '',
         counselorNum: '',
@@ -137,7 +137,7 @@ function createLevel() {
     $('.level_list input').attr("disabled", "disabled");
     // var size=$('.level_list tr').length;
     $('.level_list').append("<tr class='modifyTr'>\n" +
-        // "                                                                                <td><input type=\"text\" class=\"postIndex\" value=\""+size+"\"></td>\n" +
+        "                                                                                <td><input type=\"text\" class=\"postIndex\"></td>\n" +
         "                                                                                <td><input type=\"text\" class=\"postName\"></td>\n" +
         "                                                                                <td><input type=\"text\" class=\"turnover\"></td>\n" +
         "                                                                                <td><input type=\"text\" class=\"counselorNum\"></td>\n" +

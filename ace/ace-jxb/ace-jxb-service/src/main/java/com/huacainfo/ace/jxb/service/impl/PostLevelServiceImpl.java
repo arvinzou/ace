@@ -18,6 +18,8 @@ import com.huacainfo.ace.jxb.model.CounselorCheckResult;
 import com.huacainfo.ace.jxb.model.CounselorPostLevel;
 import com.huacainfo.ace.jxb.model.PostLevel;
 import com.huacainfo.ace.jxb.service.PostLevelService;
+import com.huacainfo.ace.jxb.vo.CounselorPostLevelQVo;
+import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
 import com.huacainfo.ace.jxb.vo.PostLevelQVo;
 import com.huacainfo.ace.jxb.vo.PostLevelVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -97,7 +99,7 @@ public class PostLevelServiceImpl implements PostLevelService {
             return new MessageResponse(1, "分配比例(分给老师的比例demo:0.5)不能为空！");
         }
 
-        o.setPostIndex("1");
+        o.setPostIndex(StringUtil.isEmpty(o.getPostIndex()) ? "1" : o.getPostIndex());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -248,6 +250,27 @@ public class PostLevelServiceImpl implements PostLevelService {
         determinePosts(nowYear, quarterStr);
 
         return new ResultResponse(ResultCode.SUCCESS, "考核完成");
+    }
+
+    /**
+     * 查询咨询师岗位列表
+     *
+     * @param condition
+     * @param start
+     * @param limit
+     * @param orderBy
+     */
+    @Override
+    public PageResult<CounselorPostLevelVo> findCounselorLevelList(CounselorPostLevelQVo condition,
+                                                                   int start, int limit, String orderBy) {
+        PageResult<CounselorPostLevelVo> rst = new PageResult<>();
+        List<CounselorPostLevelVo> list = counselorPostLevelDao.findList(condition, start, limit, orderBy);
+        rst.setRows(list);
+        if (start <= 1) {
+            int allRows = counselorPostLevelDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
     }
 
     /**

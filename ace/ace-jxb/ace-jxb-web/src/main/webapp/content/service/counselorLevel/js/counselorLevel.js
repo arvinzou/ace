@@ -1,9 +1,10 @@
 window.onload = function () {
-    initpage()
 
+    initPage();
 };
 
-function initpage() {
+//分页组件
+function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,
         pageSize: 20,
@@ -13,16 +14,14 @@ function initpage() {
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            getChecklist(num, type);
+            getDataList(num, type);
         }
     });
 }
 
-
-function getChecklist(num, type) {
-    var url = "/jxb/baseOrder/findBaseOrderListSecond";
+function getDataList(num, type) {
+    var url = "/jxb/postLevel/findCounselorLevelList";
     var data = {
-        category: category,
         page: num,
         limit: 20
     }
@@ -33,12 +32,15 @@ function getChecklist(num, type) {
                     totalCounts: result.data.total,
                 });
             }
-            var navitem = document.getElementById('temp_orderList').innerHTML;
-            var html = juicer(navitem, {
-                orderCategory: category,
-                data: result.data.list,
-            });
-            $("#orderList").html(html);
+            var navitem = document.getElementById('tmpl-data-list').innerHTML;
+            var html = juicer(
+                navitem,
+                {
+                    data: result.data.list,
+                }
+            );
+
+            $("#data-list").html(html);
 
         }
     })

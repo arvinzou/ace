@@ -38,13 +38,14 @@
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
-                                    <a href="index4.jsp">首页</a>
+                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>岗位配置</span>
                                 </li>
                             </ul>
+
                             <div class="page-content-inner">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -57,18 +58,17 @@
                                                     <div class="portlet light portlet-fit ">
                                                         <div class="portlet-title">
                                                             <div class="caption">
-                                                                <i class=" icon-layers font-green"></i>
-                                                                <span class="caption-subject font-green bold uppercase">老师等级配置</span>
+                                                                岗位配置
                                                             </div>
                                                             <div class="actions">
                                                                 <a onclick="javascript:createLevel()"
-                                                                   class="btn btn-circle btn-success btn-sm">
+                                                                   class="btn  btn-success btn-sm">
                                                                     <i class="fa fa-plus"></i>
                                                                     添加配置
                                                                 </a>
                                                             </div>
-
                                                         </div>
+
                                                         <div class="portlet-body">
                                                             <div class="mt-element-card mt-element-overlay">
                                                                 <div class="row">
@@ -81,11 +81,11 @@
                                                                             <thead>
                                                                             <tr class="uppercase">
 
-                                                                                <%--<th> 序号</th>--%>
-                                                                                <th> 名称</th>
+                                                                                <th> 岗位序号</th>
+                                                                                <th> 岗位名称</th>
                                                                                 <th> 营业额要求</th>
                                                                                 <th> 发展人数要求</th>
-                                                                                <th>分成</th>
+                                                                                <th> 讲师分成比例</th>
                                                                                 <th colspan="2">操作</th>
                                                                             </tr>
                                                                             </thead>
@@ -125,7 +125,7 @@
 <script id="temp_level_list" type="text/template">
     {@each data as item}
     <tr data-id="\${item.id}">
-        <%--<td><input type="text" class="postName" value="\${item.postIndex}"></td>--%>
+        <td><input type="text" class="postIndex" value="\${item.postIndex}"></td>
         <td><input type="text" class="postName" value="\${item.postName}"></td>
         <td><input type="text" class="turnover" value="\${item.turnover}"></td>
         <td><input type="text" class="counselorNum" value="\${item.counselorNum}"></td>

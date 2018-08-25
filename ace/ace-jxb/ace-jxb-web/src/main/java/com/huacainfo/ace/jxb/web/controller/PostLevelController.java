@@ -8,6 +8,8 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.PostLevel;
 import com.huacainfo.ace.jxb.service.PostLevelService;
+import com.huacainfo.ace.jxb.vo.CounselorPostLevelQVo;
+import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
 import com.huacainfo.ace.jxb.vo.PostLevelQVo;
 import com.huacainfo.ace.jxb.vo.PostLevelVo;
 import org.slf4j.Logger;
@@ -121,5 +123,26 @@ public class PostLevelController extends JxbBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.postLevelService.deletePostLevelByPostLevelId(id, this.getCurUserProp());
+    }
+
+
+    /**
+     * 查询咨询师岗位列表
+     *
+     * @param condition
+     * @param page
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findCounselorLevelList")
+    @ResponseBody
+    public PageResult<CounselorPostLevelVo> findCounselorLevelList(CounselorPostLevelQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<CounselorPostLevelVo> rst =
+                postLevelService.findCounselorLevelList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
     }
 }
