@@ -358,7 +358,7 @@
     </div>
 
     <div class="modal fade" role="dialog" id="preview">
-        <div class="modal-dialog" role="document" style="width:80%">
+        <div class="modal-dialog" role="document" style="width:60%">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -391,6 +391,12 @@
             padding-top: 5px;
             padding-left: 8px;
         }
+		#info img{
+			
+			max-height: 200px;
+			max-width: 200px;
+			border-radius: 5px;
+		}
     </style>
 
     </html>
