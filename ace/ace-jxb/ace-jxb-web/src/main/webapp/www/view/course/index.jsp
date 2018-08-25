@@ -18,28 +18,12 @@
 	<body>
 		<div class="mainContainer">
 			<div class="row menu">
-				<div class="col-xs-12 col-md-12" style="padding-left: 0!important;padding-right: 0!important;">
-					<div class="navigation">
-						<div class="news-title">
-							<ul class="news-module course_nav_ul clear">
-								<li class="active" onclick="courseList();">全部</li>
-								<li onclick="courseList('幼儿');">幼儿</li>
-								<li onclick="courseList('小学');">小学</li>
-								<li onclick="courseList('初中');">初中</li>
-								<li onclick="courseList('高中');">高中</li>
-							</ul>
-							<div class="news-slider"></div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row screen">
-				<div class="col-xs-12 col-md-12">
+				<div class="col-xs-2 col-md-2" style="padding-right: 0;">
 					<div class="selectbox">
 						<div class="selemediv">
 							<div class="selemenu ">
 								<input style="display: none;" value="" id="ability"/>
-								<span class="sqinput">筛选</span><span class="csinput"></span><span class="quinput"></span>
+								<span class="">筛选</span>
 							</div>
 							<div class="citylist2">
 								<div class="xzk">
@@ -66,7 +50,8 @@
 								<div class="xzk">
 									<div class="leibie">课程类型</div>
 									<ul class="chengshi">
-										<li class="active">单节课程</li>
+										<li class="active">不限</li>
+										<li>单节课程</li>
 										<li>系列课程</li>
 									</ul>
 								</div>
@@ -83,25 +68,41 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-xs-10 col-md-10" style="padding-left: 0!important;padding-right: 0!important;">
+					<div class="navigation">
+						<div class="news-title">
+							<ul class="news-module course_nav_ul clear">
+								<li class="active" onclick="courseList();">全部</li>
+								<li onclick="courseList('幼儿');">幼儿</li>
+								<li onclick="courseList('小学');">小学</li>
+								<li onclick="courseList('初中');">初中</li>
+								<li onclick="courseList('高中');">高中</li>
+							</ul>
+							<div class="news-slider"></div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div id="courseList">
+			<div class="course_List">
+				<ul id="courseList">
 
+				</ul>
 			</div>
 		</div>
 	</body>
 
-<script id="courseTemp" type="text/template">
-	{@each data as item, index}
-	<div class="row bj" onclick="courseDetail('\${item.id}');">
-		<div class="col-xs-4 col-md-4">
-			<img src="\${item.cover}" class="coverImg" />
-		</div>
-		<div class="col-xs-8 col-md-8">
-			<div class="row">
-				<p class="title">\${item.name}</p>
+
+	<script id="courseTemp" type="text/template">
+		{@each data as item}
+		<li data-id="\${item.id}" onclick="courseDetail('\${item.id}');">
+			<div class="left_div">
+				<img src="\${item.cover}" alt="">
 			</div>
-			<div class="row">
-				<p class="content">
+			<div class="right_div">
+				<p class="test_title">
+					\${item.name}
+				</p>
+				<p class="test_remark">
 					{@if item.objects == '00'}
 					<span>幼儿</span>
 					{@else if item.objects == '01'}
@@ -144,19 +145,19 @@
 					<span>其他</span>
 					{@/if}
 				</p>
+
+				<span class="price">
+                    {@if item.cost==0||item.costType == '0'}
+                    <span class="free">免费</span>
+                    {@else}
+                    <span class="no_free">
+                        <span class="now_price">￥\${item.cost}</span>
+                        <span class="old_price">￥\${item.primeCost}</span>
+                    </span>
+                    {@/if}
+            	</span>
 			</div>
-			<div class="row">
-				<div class="col-xs-7 col-md-7" style="padding: 0 !important;">
-					{@if item.costType == '0'}
-					<span class="free">免费</span>
-					{@else if item.costType == '1'}
-					<span class="charge">¥ \${item.cost}</span>
-					{@/if}
-				</div>
-				<div class="col-xs-5 col-md-5" style="padding: 0 !important;"></div>
-			</div>
-		</div>
-	</div>
-	{@/each}
-</script>
+		</li>
+		{@/each}
+	</script>
 </html>
