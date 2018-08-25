@@ -78,7 +78,7 @@
                                                             <thead>
                                                             <tr>
                                                                
-                                                                <th width="10%"> 昵称 </th>
+                                                                <th width="10%"> 用户昵称 </th>
                                                                 <th width="20%"> 课程名称 </th>
                                                                 <th width="15%"> 好评度 </th>
                                                                 <th width="30%"> 评价内容 </th>
@@ -105,7 +105,7 @@
                                     {@each data as item,index}
                                     <tr>
           
-                                        <td style="text-align: center;"> 
+                                        <td> 
 																				<div class="header-box">
 																				 <div class="header-img"><img src="\${item.headimgurl}" class="headimg"></div>
 																				 <div class="header--nickname">\${item.nickname} </div>
@@ -167,9 +167,7 @@
 				border-radius: 50%;
 		}
 		.header-box{
-			padding:2px;
 			width: 100%;
-			text-align: center
 		}
 		.header-img{
 			padding:2px;
