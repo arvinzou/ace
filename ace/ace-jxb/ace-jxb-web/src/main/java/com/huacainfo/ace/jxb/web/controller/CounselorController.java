@@ -58,7 +58,7 @@ public class CounselorController extends JxbBaseController {
     public PageResult<CounselorVo> findCounselorList(CounselorQVo condition,
                                                      PageParamNoChangeSord page) throws Exception {
         PageResult<CounselorVo> rst = counselorService
-                .findCounselorList(condition, (page.getPage() - 1) * page.getLimit(), page.getLimit(), page.getOrderBy());
+                .findCounselorList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -183,26 +183,26 @@ public class CounselorController extends JxbBaseController {
         return counselorService.deleteCounselorByCounselorId(id, getCurUserProp());
     }
 
-    /**
-     * 咨询师资格审核
-     *
-     * @param data
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "/audit")
-    @ResponseBody
-    public MessageResponse audit(String data) throws Exception {
-        if (StringUtil.isEmpty(data)) {
-            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
-        }
-        TeacherAudit record = JsonUtil.toObject(data, TeacherAudit.class);
-        if (StringUtil.isEmpty(record.getCounselorId())) {
-            return new MessageResponse(ResultCode.FAIL, "缺少咨询师信息");
-        }
-
-        return teacherAuditService.audit(record, getCurUserProp());
-    }
+//    /**
+//     * 咨询师资格审核
+//     *
+//     * @param data
+//     * @return
+//     * @throws Exception
+//     */
+//    @RequestMapping(value = "/audit")
+//    @ResponseBody
+//    public MessageResponse audit(String data) throws Exception {
+//        if (StringUtil.isEmpty(data)) {
+//            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+//        }
+//        TeacherAudit record = JsonUtil.toObject(data, TeacherAudit.class);
+//        if (StringUtil.isEmpty(record.getCounselorId())) {
+//            return new MessageResponse(ResultCode.FAIL, "缺少咨询师信息");
+//        }
+//
+//        return teacherAuditService.audit(record, getCurUserProp());
+//    }
 
 
     /**

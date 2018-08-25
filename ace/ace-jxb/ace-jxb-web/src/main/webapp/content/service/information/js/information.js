@@ -2,7 +2,6 @@ var editor, cityCode, singleSelect1;
 
 
 window.onload = function () {
-    initWeb();
     initDoc();
     $("#city").click(function (e) {
         SelCity(this, e);
@@ -59,7 +58,6 @@ function getUserinfo() {
         var url = "/jxb/counselor/getMyinfo"
         $.getJSON(url, function (result) {
             if (result.status == 0) {
-                // viewUserinfo(result.value);
                 fillForm(result.value)
             }
         })
@@ -74,7 +72,6 @@ function fillForm(data) {
         }
         $('[name=form_' + key + ']').val(data[key]);
     }
-
     singleSelect1.setCityVal(data.cityCode + "市");
     editor.setValue(data['profile']);
     var tag = $('#certification .md-radio');
