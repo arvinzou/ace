@@ -117,9 +117,6 @@ function DrawImage(ImgD,_width){
 }
 
  var initPhotoSwipeFromDOM = function(gallerySelector) {
-
-    // 解析来自DOM元素幻灯片数据（URL，标题，大小...）
-    // (children of gallerySelector)
     var parseThumbnailElements = function(el) {
         var thumbElements = el.childNodes,
             numNodes = thumbElements.length,

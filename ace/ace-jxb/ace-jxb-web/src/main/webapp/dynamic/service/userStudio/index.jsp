@@ -66,18 +66,18 @@
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
-                                                <div class="mt-element-card mt-element-overlay">
-                                                    <div class="row">
+                                               
 
 
                                                         <div class="table-scrollable table-scrollable-borderless">
                                                             <table class="table table-hover table-light">
                                                                 <thead>
                                                                 <tr class="uppercase">
-                                                                    <th colspan="2"> 名称</th>
+                                                                    <th>LOGO</th>
+																																		<th> 名称</th>
                                                                     <th> 负责人</th>
                                                                     <th> 状态</th>
-                                                                    <th colspan="2"> 操作</th>
+                                                                    <th> 操作</th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody id="studioList">
@@ -87,8 +87,6 @@
                                                         </div>
 
 
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -103,8 +101,7 @@
     <div class="bottom"></div>
 </div>
 
-<div class="modal fade bs-example-modal-lg" id="studioInfoModal" tabindex="-1" role="dialog"
-     aria-labelledby="gridSystemModalLabel">
+<div class="modal fade bs-example-modal-lg" id="studioInfoModal" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -392,24 +389,27 @@
     .modal-lg {
         width: 950px !important;
     }
+		.cover {
+			width: 70px;
+			height: 70px;
+			object-fit: cover;
+		}
 </style>
 
 
 <script id="temp_studioList1" type="text/template">
     <tr>
-        <td class="fit">
-            <img class="user-pic" src="\${data.logoImgUrl?data.logoImgUrl:'headImg.png'}">
+        <td>
+            <img class="cover" src="\${data.logoImgUrl?data.logoImgUrl:'headImg.png'}">
         </td>
         <td>
             \${data.name}
         </td>
         <td> \${data.dutyName}</td>
         <td> \${parseStatus(data.status)}</td>
-        <td>
 
-        </td>
         <td>
-            <a onclick="javascript:detail('\${data.id}')" class="primary-link">查看</a>
+            <a onclick="javascript:detail('\${data.id}')">查看</a>
         </td>
     </tr>
 </script>
@@ -417,8 +417,8 @@
 <script id="temp_studioList" type="text/template">
     {@each data as item}
     <tr>
-        <td class="fit">
-            <img class="user-pic" src="\${item.logoImgUrl?item.logoImgUrl:'headImg.png'}">
+        <td>
+            <img class="cover" src="\${item.logoImgUrl?item.logoImgUrl:'headImg.png'}">
         </td>
         <td>
             <a onclick="javascript:userStudioStaff('\${item.id}')" class="primary-link">\${item.name}</a>
@@ -426,10 +426,9 @@
         <td> 我创建的</td>
         <td>\${parseStatus(item.status)}</td>
         <td>
-            <a onclick="javascript:modify('\${item.id}')" class="primary-link">修改</a>
-        </td>
-        <td>
-            <a onclick="javascript:detail('\${item.id}')" class="primary-link">查看</a>
+            <a href="#" onclick="javascript:modify('\${item.id}')">修改</a>
+       
+            <a href="#" onclick="javascript:detail('\${item.id}')">查看</a>
 
         </td>
     </tr>

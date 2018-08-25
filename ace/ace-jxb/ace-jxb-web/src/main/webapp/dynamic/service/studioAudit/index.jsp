@@ -41,14 +41,15 @@
                     <div class="page-content">
                         <div class="container">
                             <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="index4.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>仪表盘</span>
-                                </li>
-                            </ul>
+                                                            <li>
+                                                                <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
+                                                                <i class="fa fa-circle"></i>
+                                                            </li>
+                                                            <li>
+                                                                <span>岗位配置</span>
+                                                            </li>
+                                                        </ul>
+                            
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
@@ -86,11 +87,11 @@
                                                             <thead>
                                                             <tr>
 
-                                                                <th width="35%"> 名称</th>
-                                                                <th width="15%"> 负责人</th>
-                                                                <th width="15%"> 级别</th>
-                                                                <th width="15%"> 状态</th>
-                                                                <th width="20%"> 操作</th>
+                                                                <th width="35%">工作室</th>
+                                                                <th width="15%">创建人</th>
+                                                                <th width="15%">成员数量</th>
+                                                                <th width="15%">状态</th>
+                                                                <th width="20%">操作</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody id="audioList">
