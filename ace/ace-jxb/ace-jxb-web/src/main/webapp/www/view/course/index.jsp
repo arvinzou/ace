@@ -61,7 +61,7 @@
 										<li class="active">不限</li>
 										<li>免费</li>
 										<li>付费</li>
-										<li>会员免费</li>
+                                        <%--<li>会员免费</li>--%>
 									</ul>
 								</div>
 							</div>
