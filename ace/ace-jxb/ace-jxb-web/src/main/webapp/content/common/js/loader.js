@@ -4,6 +4,12 @@
      * @param     jsonData.url        需要加载的js路径或css路径
      * @param     jsonData.type        需要加载的类型 js或css
      */
+     if(!window.console){
+        window.console={};
+        window.console.log=function(log){
+
+        }
+     }
      var  urlParams = {};
      function loader(jsonData)
      {

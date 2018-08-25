@@ -146,7 +146,7 @@ function initMenu(){
         loadCommon();
      }else{
         $.ajax({
-            url : portalPath + '/system/getTreeList.do?loadButton=false&client=c',
+            url : portalPath + '/system/getTreeList.do?loadButton=false',
             type : 'POST',
             timeout : 30000,
             dataType : 'json',
