@@ -122,7 +122,7 @@
 								<div class="pin" id="progress-pin" data-method="rewind"></div>
 							</div>
 						</div>
-						<span class="total-time">1:33</span>
+                        <span class="total-time">0:00</span>
 					</div>
 
 
