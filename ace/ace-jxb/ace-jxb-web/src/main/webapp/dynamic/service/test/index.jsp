@@ -405,7 +405,7 @@
                 </div>
             </div>
         </td>
-        <td> \$\${item.notice}</td>
+        <td> \${item.summary}</td>
 				<td><span class="label label-lg label-info ">\${item.categoryName}</span></td>
 				<td>\${item.testedTotal}</td>
         <td>
