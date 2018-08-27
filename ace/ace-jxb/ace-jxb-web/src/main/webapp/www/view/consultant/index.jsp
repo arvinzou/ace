@@ -26,42 +26,48 @@
 					<div class="selemediv">
 						<div class="selemenu">擅长领域</div>
 						<div class="citylist menuList1" id="menuList">
-							<li>行为纠正</li>
-							<li>亲子冲突</li>
-							<li>厌学</li>
-							<li>自闭症</li>
-							<li>不合群</li>
-							<li>敏感自卑</li>
-							<li>阅读障碍</li>
-							<li>孩子叛逆</li>
-							<li>不爱学习</li>
-							<li>早恋</li>
-							<li>考试焦虑</li>
-							<li>内向</li>
-							<li>坏习惯</li>
-							<li>沟通问题</li>
-							<li>胆小懦弱</li>
-							<li>不听话</li>
-							<li>考前紧张</li>
-							<li>做事拖拉</li>
-							<li>网瘾</li>
-							<li>自控力差</li>
+							<div class="xzk">
+								<li>行为纠正</li>
+								<li>亲子冲突</li>
+								<li>厌学</li>
+								<li style="margin-right: 0;">自闭症</li>
+								<li>不合群</li>
+								<li>敏感自卑</li>
+								<li>阅读障碍</li>
+								<li style="margin-right: 0;">孩子叛逆</li>
+								<li>不爱学习</li>
+								<li>早恋</li>
+								<li>考试焦虑</li>
+								<li style="margin-right: 0;">内向</li>
+								<li>坏习惯</li>
+								<li>沟通问题</li>
+								<li>胆小懦弱</li>
+								<li style="margin-right: 0;">不听话</li>
+								<li>考前紧张</li>
+								<li>做事拖拉</li>
+								<li>网瘾</li>
+								<li style="margin-right: 0;">自控力差</li>
+							</div>
 						</div>
 					</div>
 					<div class="selemediv">
 						<div class="selemenu">咨询方式</div>
 						<div class="citylist menuList2">
-							<li style="margin-left: 1rem;">电话咨询</li>
-							<li>视频咨询</li>
-							<li>面对面咨询</li>
+							<div class="xzk">
+								<li style="margin-left: 1rem;">电话咨询</li>
+								<li>视频咨询</li>
+								<li>面对面咨询</li>
+							</div>
 						</div>
 					</div>
 					<div class="selemediv">
 						<div class="selemenu">综合排序</div>
 						<div class="citylist menuList3">
-							<li style="margin-left: 1rem;">咨询最多</li>
-							<li>价格最低</li>
-							<li>价格最高</li>
+							<div class="xzk">
+								<li style="margin-left: 1rem;">咨询最多</li>
+								<li>价格最低</li>
+								<li>价格最高</li>
+							</div>
 						</div>
 					</div>
 				</div>
