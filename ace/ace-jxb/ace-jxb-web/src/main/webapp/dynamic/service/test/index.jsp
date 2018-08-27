@@ -409,9 +409,9 @@
 				<td><span class="label label-lg label-info ">\${item.categoryName}</span></td>
 				<td>\${item.testedTotal}</td>
         <td>
-            <a href="javascript:void(0);" onclick="javascript:modify( '\${item.id}') " class="operation ">修改</a>
-            <a href="javascript:void(0);" onclick="javascript:del( '\${item.id}') " class="operation ">删除</a>
-            <a href="javascript:void(0);" onclick="javascript:evaluatCaseList( '\${item.id}') " class="operation ">查看</a>
+            <a href="javascript:void(0);" onclick="javascript:modify('\${item.id}')" class="operation">修改</a>
+            <a href="javascript:void(0);" onclick="javascript:del('\${item.id}')" class="operation">删除</a>
+            <a href="javascript:void(0);" onclick="javascript:evaluatCaseList('\${item.id}')" class="operation">查看</a>
         </td>
     </tr>
     {@/each}
