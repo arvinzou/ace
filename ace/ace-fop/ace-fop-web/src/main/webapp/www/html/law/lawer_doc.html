@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		<title>法律文书</title>
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
@@ -30,8 +31,8 @@
 						<tr class="tr_bottom"  ng-repeat="item in items">
 							<td align="left" width="15px"><div class="dot"></div></td>
 							<td ng-cloak><a class="show_info" href="javascript:void(0);"  ng-click="showInfo($index);">{{item.title}}</a> </td>
-							<td width="10%" ng-if="item.fileUrl!='' && item.fileUrl!=undefined"><a  href="javascript:void(0);" ng-click="download($event,item.fileUrl, item.title);"   style="color: #1A56A8;">下载</a></td>
-							<td width="10%" ng-if="item.fileUrl=='' || item.fileUrl==undefined"><a  href="javascript:void(0);" ng-click="download($event,item.fileUrl, item.title);"   style="color: #999999;">下载</a></td>
+							<td width="10%" ng-if="item.fileUrl!='' && item.fileUrl!=undefined"><a  href="#" ng-click="download($event,item.fileUrl, item.title);"   style="color: #1A56A8;">下载</a></td>
+							<td width="10%" ng-if="item.fileUrl=='' || item.fileUrl==undefined"><a  href="#" ng-click="download($event,item.fileUrl, item.title);"   style="color: #999999;">下载</a></td>
 							<td class="time" align="left" width="15%" ng-bind="item.releaseDate | formatDate"></td>
 						</tr>
 					</tbody>
