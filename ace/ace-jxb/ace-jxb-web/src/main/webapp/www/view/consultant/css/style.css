@@ -36,6 +36,7 @@
 	width: 1.613333rem;
 	height: 1.613333rem;
 	margin-top: 0.3rem;
+	border-radius: 0.133333rem;
 }
 
 .consulelist {
@@ -95,14 +96,12 @@
 	font-size: 0.32rem;
 }
 .clabel li{
-	width: auto;
-	padding-left: 0.186666rem;
-	padding-right: 0.186666rem;
-	height: 0.586666rem;
-	line-height: 0.586666rem;
+	width: 2.1rem;
+	height: 0.68rem;
+	line-height: 0.68rem;
 	display: block;
 	float: left;
-	border-radius: 0.28rem;
+	border-radius: 0.34rem;
 	color: #A0A7B6;
 	border: 1px solid #A0A7B6; 
 	background:rgba(160,167,182,0.1);

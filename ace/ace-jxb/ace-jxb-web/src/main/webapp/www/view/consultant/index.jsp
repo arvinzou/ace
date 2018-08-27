@@ -83,15 +83,15 @@
 					<div class="col-xs-3 col-sm-3 imgbox">
 					<img src="\${item.imagePhotoUrl}" />
 					</div>
-					<div class="col-xs-9 col-sm-9">
+					<div class="col-xs-9 col-sm-9" style="padding-left: 0!important;">
 					<div class="row content_01">
-					<div class="col-xs-6 col-sm-6 left" onclick="showInfo('\${item.id}');">\${item.name}</div>
+					<div class="col-xs-6 col-sm-6 left" style="padding-left: 0 !important;" onclick="showInfo('\${item.id}');">\${item.name}</div>
 						{@if item.onlineStatus == '1'}
-						<div class="col-xs-6 col-sm-6 right online" onclick="createOrder('\${item.id}');">
+						<div class="col-xs-6 col-sm-6 right online" style="padding-right: 0 !important;" onclick="createOrder('\${item.id}');">
 							<img src="img/online.png" />预约咨询
 						</div>
 						{@else if item.onlineStatus == '0'}
-						<div class="col-xs-6 col-sm-6 right offline" onclick="createOrder('\${item.id}');">
+						<div class="col-xs-6 col-sm-6 right offline" style="padding-right: 0 !important;" onclick="createOrder('\${item.id}');">
 							<img src="img/offline.png" />预约咨询
 						</div>
 						{@/if}
