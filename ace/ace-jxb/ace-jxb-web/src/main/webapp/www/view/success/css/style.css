@@ -118,8 +118,10 @@ body{
 .sec_title{
 	color: #1C2843;
 	font-size: 0.373333rem;
+	padding-left: 0.2rem;
 }
 .sec_content{
 	color: #5C6681;
 	font-size: 0.373333rem;
+	padding-left: 0.2rem;
 }

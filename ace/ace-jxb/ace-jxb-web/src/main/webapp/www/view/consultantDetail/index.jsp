@@ -53,7 +53,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 formtitle">咨询次数：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${parseInt(data.payMoney) / parseInt(data.price)}</div>
+				<div class="col-xs-8 col-sm-8 formcmt">\${data.amount}</div>
 			</div>
 			<div class="row">
 				<div class="col-xs-4 col-sm-4 formtitle">预约时间：</div>

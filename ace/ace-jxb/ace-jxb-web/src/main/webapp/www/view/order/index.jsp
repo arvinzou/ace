@@ -193,11 +193,11 @@
 				{@/each}
             </div>
             <div class="row content_03">
-            <div class="col-xs-7 col-sm-7" style="padding-left: 0;">
+            <div class="col-xs-7 col-sm-7" style="padding-left: 0;margin-top: 0.4rem;">
             <span class="method_01">咨询次数</span>
             <span class="method_02">每次30分钟</span>
             </div>
-            <div class="col-xs-5 col-sm-5" style="padding-top: 0.2rem;">
+            <div class="col-xs-5 col-sm-5" style="padding-top: 0.2rem;margin-top: 0.4rem;">
             <span class="reduce"><img src="img/reduce.png" onclick="reduce();"/></span>
             <span class="num" id="num">1</span>
             <span class="add"><img src="img/add.png" onclick="add();"/></span>

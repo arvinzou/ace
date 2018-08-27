@@ -21,7 +21,7 @@
 	<script id="orderDetailTemp" type="text/template">
 		<div class="container">
 			<div class="row tips" style="margin-left: 0!important;margin-right: 0 !important;">
-				<p>您已经成功预约 \${data.counselor.name}老师，系统会通知ta确认订单并尽快联系你，请保持电话畅通~你也可以私信告诉TA哦~</p>
+				<p>您已经成功预约 \${data.counselor.name}老师，系统会通知ta并尽快联系你，请保持电话畅通哦~</p>
 			</div>
 		</div>
 		<div class="box">
@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-2 row_01">
-					<button class="chat">告诉TA</button>
+					<%--<button class="chat">告诉TA</button>--%>
 				</div>
 			</div>
 			<div class="row dorder" id="orderDetail">
@@ -61,7 +61,7 @@
 				<div class="col-xs-12 col-sm-12"><a class="order_num" onclick="showOrderDetail('\${data.id}')">订单号：\${data.id}</a></div>
 			</div>
 			<div class="row">
-				<div class="col-xs-12 col-sm-12">
+				<div class="col-xs-12 col-sm-12" style="padding-top: 0.2rem;text-indent: 4em;">
 					{@if data.payStatus == '1'}
 					<p class="order_state">待支付</p>
 					{@else if data.payStatus == '2'}
