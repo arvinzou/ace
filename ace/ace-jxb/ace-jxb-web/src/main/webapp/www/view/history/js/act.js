@@ -1,4 +1,4 @@
-var findType = "2";
+
 function App() {
     console.log("=============================App Start==============================");
     initSilder();
@@ -12,14 +12,8 @@ function App() {
         $(this).addClass("active").siblings().removeClass("active");
     });
 
-    console.log(window.location.href);
-    var url =   window.location.href.substring(1);
-    var type = url.substring(url.indexOf('=')+1);
 
-    if(type == '1'){
-        findType = "1";
-    }
-    initData(findType);
+    initData();
 }
 
 function  initSilder() {
@@ -30,13 +24,13 @@ function  initSilder() {
     $(".news-slider").css("left",slider_left);
 }
 
-function initData(findType){
+function initData(){
     $.ajax({
         url: contextPath+ "/www/order/findList",
         type:"post",
         async:false,
         data:{
-            findType: findType,
+            findType: '1',
             category: '1',
             start: 0,
             limit: 999
@@ -66,7 +60,7 @@ function orderList(data){
         type:"post",
         async:false,
         data:{
-            findType: findType,
+            findType: '1',
             payStatusArray: data,
             category: '1',
             start: 0,
