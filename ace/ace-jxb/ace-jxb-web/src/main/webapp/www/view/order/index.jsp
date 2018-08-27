@@ -76,8 +76,8 @@
 				<div class="row" style="margin-bottom: 0.293333rem;">
 					<span class="title02">常见问题标签</span>
 				</div>
-				<div class="row" id="lebel" style="margin-top: 0.2rem;margin-bottom: 0.2rem;">
-
+				<div class="row" style="margin-top: 0.2rem;margin-bottom: 0.2rem;">
+                    <div class="col-xs-12 col-sm-12" id="lebel"></div>
 				</div>
 				<div class="row" style="margin-bottom: 0.293333rem;margin-top: 0.293333rem;">
 					<span class="title02">
@@ -86,7 +86,7 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12 col-sm-12">
-						<textarea class="form_input" name="problem" placeholder="请详细描述您遇到的问题，更有助于咨询师帮助您哦~"></textarea>
+						<textarea style="border:1px solid #EBF0F7" class="form_input" name="problem" placeholder="请详细描述您遇到的问题，更有助于咨询师帮助您哦~"></textarea>
 					</div>
 				</div>
 			</div>
