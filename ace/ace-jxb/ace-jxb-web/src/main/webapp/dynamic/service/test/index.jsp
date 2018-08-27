@@ -206,7 +206,7 @@
 
                                                 </label>
                                                 <div class="col-md-10">
-                                                    <select class="col-md-12" id="TestTypeList" name="">
+                                                    <select class="col-md-12 form_category" id="TestTypeList" name="">
                                                     </select>
                                                 </div>
                                             </div>
@@ -338,7 +338,7 @@
                                                 <tr>
 
                                                     <th width="30%"> 分数</th>
-                                                    <th width=50% "> 评价</th>
+                                                    <th width=50%"> 评价</th>
                                         <th width="20% "> 操作</th>
                                     </tr>
                                     </thead>
@@ -385,7 +385,7 @@
 
 </body>
 
-<script id="temp_TestTypeList " type="text/template ">
+    <script id="temp_TestTypeList" type="text/template">
     {@each data as item}
     <option value="\${item.id} ">\${item.name}</option>
     {@/each}
