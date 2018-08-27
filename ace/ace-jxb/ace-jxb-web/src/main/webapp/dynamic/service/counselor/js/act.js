@@ -25,7 +25,7 @@ function App() {
         var relatedTarget = $(event.relatedTarget)
         var id = relatedTarget.data('id')
         getById(id);
-    })
+    });
 }
 
 

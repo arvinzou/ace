@@ -36,6 +36,7 @@
 	width: 1.613333rem;
 	height: 1.613333rem;
 	margin-top: 0.3rem;
+	border-radius: 0.133333rem;
 }
 
 .consulelist {
@@ -95,16 +96,14 @@
 	font-size: 0.32rem;
 }
 .clabel li{
-	width: auto;
-	padding-left: 0.186666rem;
-	padding-right: 0.186666rem;
-	height: 0.586666rem;
-	line-height: 0.586666rem;
+	width: 2.1rem;
+	height: 0.68rem;
+	line-height: 0.68rem;
 	display: block;
 	float: left;
-	border-radius: 0.28rem;
-	color: #A0A7B6;
-	border: 1px solid #A0A7B6; 
+	border-radius: 0.34rem;
+	color: #c6cad3;
+	border: 1px solid #c6cad3;
 	background:rgba(160,167,182,0.1);
 	font-size: 0.32rem;
 	text-align: center;
@@ -189,9 +188,7 @@
 }
 .menuList1{
 	display: none;
-	line-height: 35px;
 	background: #fff;
-	text-indent: 10px;
 	font-size: 12px;
 	position: absolute;
 	left: 0;
@@ -202,9 +199,7 @@
 }
 .menuList2{
 	display: none;
-	line-height: 35px;
 	background: #fff;
-	text-indent: 10px;
 	font-size: 12px;
 	position: absolute;
 	left: -3.333rem;
@@ -215,9 +210,7 @@
 }
 .menuList3{
 	display: none;
-	line-height: 35px;
 	background: #fff;
-	text-indent: 10px;
 	font-size: 12px;
 	position: absolute;
 	left: -6.666rem;
@@ -251,19 +244,22 @@
 	cursor: pointer
 }
 
-.citylist ul li:hover {
+/*.citylist ul li:hover {
 	color: #ff4400
-}
-
+}*/
 .citylist  li {
-	width: 2.133333rem;
-	height: 0.8rem;
-	border-radius: 0.4rem;
-	text-align: center;
-	font-size: 0.35rem;
 	float: left;
-	margin-bottom: 0.4rem;
-	margin-right: 0.3rem;
+	cursor: pointer;
+	font-size: 0.373333rem;
+	color: rgba(160, 167, 182, 1);
+	margin-right: 0.213333rem;
+	text-align: center;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	border: 1px solid #D9DCE2;
+	border-radius: 0.4rem;
+	width: 2.1rem;
+	margin-bottom: 0.466666rem;
 }
 
 ul,
@@ -272,12 +268,16 @@ li {
 }
 
 .xzk {
-	width: 100%;
+	width: 9.2rem;
+	margin-left: 0.4rem;
+	margin-right: 0.4rem;
 	overflow: hidden;
 	clear: both;
 	z-index: 500;
 }
 
 .citylist .active {
-	color: #ff4400;
+	color: #fff;
+	background-color: #5BD5CB;
+	border: 1px solid #5BD5CB;
 }

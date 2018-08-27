@@ -131,7 +131,9 @@ function getEvaluatTplList(num, type) {
         limit: 5,
         name: testName
     };
+     startLoad();
     $.getJSON(url, data, function (result) {
+        stopLoad();
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {

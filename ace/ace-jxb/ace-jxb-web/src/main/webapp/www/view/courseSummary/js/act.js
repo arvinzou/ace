@@ -52,6 +52,8 @@ function initData(primaryId){
                 type = result.data.type;
                 if(costType == '0'){
                     cost = "免费";
+                }else if(costType == '1' && result.data.cost == '0'){
+                    cost = "免费";
                 }else if(costType == '1'){
                     cost =  result.data.cost;
                 }
