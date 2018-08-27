@@ -122,7 +122,7 @@ function online(id) {
     if (confirm("确定要上架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/counselor/updateLineState",
+            url: contextPath + "/counselor/updConsultState",
             type: "post",
             async: false,
             data: {
@@ -149,7 +149,7 @@ function outline(id) {
     if (confirm("确定要下架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/counselor/updateLineState",
+            url: contextPath + "/counselor/updConsultState",
             type: "post",
             async: false,
             data: {

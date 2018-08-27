@@ -103,4 +103,14 @@ public interface ConsultService {
      * @return ResultResponse
      */
     ResultResponse onOff(String counselorId, String onlineStatus);
+
+    /**
+     * 调整咨询师 - 是否接受咨询
+     *
+     * @param counselorId 咨询师ID
+     * @param state       是否接收咨询 0-否 1-是
+     * @return
+     * @throws Exception
+     */
+    MessageResponse updateState(String counselorId, String state, UserProp curUserProp);
 }
