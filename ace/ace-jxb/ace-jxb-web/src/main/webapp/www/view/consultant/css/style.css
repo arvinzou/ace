@@ -188,7 +188,6 @@
 }
 .menuList1{
 	display: none;
-	line-height: 35px;
 	background: #fff;
 	font-size: 12px;
 	position: absolute;
@@ -200,7 +199,6 @@
 }
 .menuList2{
 	display: none;
-	line-height: 35px;
 	background: #fff;
 	font-size: 12px;
 	position: absolute;
@@ -212,7 +210,6 @@
 }
 .menuList3{
 	display: none;
-	line-height: 35px;
 	background: #fff;
 	font-size: 12px;
 	position: absolute;
@@ -258,6 +255,7 @@
 	margin-right: 0.213333rem;
 	text-align: center;
 	height: 0.8rem;
+	line-height: 0.8rem;
 	border: 1px solid #D9DCE2;
 	border-radius: 0.4rem;
 	width: 2.1rem;
