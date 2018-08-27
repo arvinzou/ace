@@ -3,7 +3,7 @@
 	margin: 0;
 }
 body{
-	background: #F8FFFF;
+	background: #F8FFFF !important;
 }
 ul,li{
 	list-style: none;
@@ -97,7 +97,7 @@ ul,li{
 	color: #1C2843;
 	font-size: 0.4rem;
 	font-weight: bold;
-	padding-left: 0.8rem;
+	padding-left: 0.4rem;
 }
 .unit{
 	color: #C4C8D6;
