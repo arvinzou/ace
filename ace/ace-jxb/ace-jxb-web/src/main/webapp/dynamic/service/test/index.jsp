@@ -492,33 +492,3 @@
 </style>
 
 </html>
-
-
-<%--
-
- <div class="row ">
-                                        <select class="col-md-4 col-md-offset-4 form_category " id="TestTypeList "
-                                                name=" ">
-
-                                        </select>
-                                    </div>
-                                    <%-- <h4 class=" ">没有?在下方添加新的模板，创建成功后再选择。</h4>--%>
-<%-- <div class="row ">
-     <div class="form-group ">
-         <div class="col-md-6 col-md-offset-3 ">
-             <input id="notNull_type " type="text " class="form-control form_typename "
-                    placeholder=" " name="form_typename ">
-             <span class="error_message "></span>
-             <div class="form-control-focus "></div>
-         </div>
-     </div>
- </div>--%>
-<%--<div class="row ">
-    <div class="col-md-2 col-md-offset-5 ">
-        <button onclick="createTestType() " type="button "
-                class="col-md-12 btn btn-circle btn-success ">创建模板
-        </button>
-    </div>
-</div>--%>
-
---%>
