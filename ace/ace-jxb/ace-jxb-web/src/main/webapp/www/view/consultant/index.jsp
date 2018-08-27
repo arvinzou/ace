@@ -92,7 +92,7 @@
 						</div>
 						{@else if item.onlineStatus == '0'}
 						<div class="col-xs-6 col-sm-6 right offline" style="padding-right: 0 !important;" onclick="createOrder('\${item.id}');">
-							<img src="img/offline.png" />预约咨询
+							<img src="img/offline.png" />暂时离线
 						</div>
 						{@/if}
 					</div>
