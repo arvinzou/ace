@@ -138,7 +138,7 @@
             <td>
                 <div> \${item.createDate} </div>
                 <div style="padding:10px">
-                    {@if item.lineState != 1}
+                    {@if item.consultState != 1}
                     <span style="color:red">已下架</span>
                     {@else}
                     <a href="#">已上架</a>
@@ -161,7 +161,7 @@
                 {@/if}
             </td>
             <td>
-                {@if item.regAuditRst==1} {@if item.lineState !=1}
+                {@if item.regAuditRst==1} {@if item.consultState !=1}
                 <a class="operation" href="javascript:void(0);" onclick="online('\${item.id}');">上架</a>
                 {@else}
                 <a class="operation" href="javascript:void(0);" onclick="outline('\${item.id}');">下架</a>

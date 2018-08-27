@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.TeacherAudit;
+import com.huacainfo.ace.jxb.service.ConsultService;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.TeacherAuditService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
@@ -39,6 +40,8 @@ public class CounselorController extends JxbBaseController {
     private CounselorService counselorService;
     @Autowired
     private TeacherAuditService teacherAuditService;
+    @Autowired
+    private ConsultService consultService;
 
     /**
      * @throws
@@ -183,28 +186,6 @@ public class CounselorController extends JxbBaseController {
         return counselorService.deleteCounselorByCounselorId(id, getCurUserProp());
     }
 
-//    /**
-//     * 咨询师资格审核
-//     *
-//     * @param data
-//     * @return
-//     * @throws Exception
-//     */
-//    @RequestMapping(value = "/audit")
-//    @ResponseBody
-//    public MessageResponse audit(String data) throws Exception {
-//        if (StringUtil.isEmpty(data)) {
-//            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
-//        }
-//        TeacherAudit record = JsonUtil.toObject(data, TeacherAudit.class);
-//        if (StringUtil.isEmpty(record.getCounselorId())) {
-//            return new MessageResponse(ResultCode.FAIL, "缺少咨询师信息");
-//        }
-//
-//        return teacherAuditService.audit(record, getCurUserProp());
-//    }
-
-
     /**
      * 咨询师资格审核
      *
@@ -214,7 +195,7 @@ public class CounselorController extends JxbBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse lineState(String data) throws Exception {
+    public MessageResponse audit(String data) throws Exception {
         if (StringUtil.isEmpty(data)) {
             return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
         }
@@ -224,6 +205,25 @@ public class CounselorController extends JxbBaseController {
         }
 
         return teacherAuditService.audit(record, getCurUserProp());
+    }
+
+
+    /**
+     * 调整咨询师 - 是否接受咨询
+     *
+     * @param counselorId 咨询师ID
+     * @param state       是否接收咨询 0-否 1-是
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updConsultState")
+    @ResponseBody
+    public MessageResponse updConsultState(String counselorId, String state) throws Exception {
+        if (StringUtil.isEmpty(counselorId)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return consultService.updateState(counselorId, state, getCurUserProp());
     }
 
 

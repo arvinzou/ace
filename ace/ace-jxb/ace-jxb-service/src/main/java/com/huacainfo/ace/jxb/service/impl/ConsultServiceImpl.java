@@ -340,4 +340,25 @@ public class ConsultServiceImpl implements ConsultService {
         return new ResultResponse(ResultCode.SUCCESS, "操作成功");
     }
 
+    /**
+     * 调整咨询师 - 是否接受咨询
+     *
+     * @param counselorId 咨询师ID
+     * @param state       是否接收咨询 0-否 1-是
+     * @param curUserProp
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse updateState(String counselorId, String state, UserProp curUserProp) {
+        Consult vo = consultDao.selectByPrimaryKey(counselorId);
+        if (null == vo) {
+            return new MessageResponse(ResultCode.FAIL, "咨询师资料丢失");
+        }
+        vo.setStatus(state);
+        consultDao.updateByPrimaryKeySelective(vo);
+
+        return new MessageResponse(ResultCode.SUCCESS, "操作成功");
+    }
+
 }
