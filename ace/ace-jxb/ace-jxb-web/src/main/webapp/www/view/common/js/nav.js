@@ -7,7 +7,7 @@ $(function(){
 	var th_left = $(".news-module li").eq(0).position().left;
 	var slider_width = $(".news-slider").width();
 	var slider_left = th_left + (th_width/2) - slider_width/2;
-	$(".news-slider").css("left",slider_left);
+	$(".news-slider").css("left",slider_left-8);
 	$(".news-module li").on("click",function(){
 	    var n = $(this).index();
 	    var th_width = $(this).width();
