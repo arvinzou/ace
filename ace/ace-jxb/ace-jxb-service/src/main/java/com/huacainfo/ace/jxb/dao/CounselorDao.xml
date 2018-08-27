@@ -417,6 +417,9 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.consultState !=null and condition.consultState !=&quot;&quot;">
+            and c.status = #{condition.consultState,jdbcType=VARCHAR}
+        </if>
         <if test="condition.consultTypeArray !=null ">
             and EXISTS (
             select 1 from consult_product cp
