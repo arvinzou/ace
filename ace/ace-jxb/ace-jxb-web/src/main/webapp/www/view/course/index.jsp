@@ -68,7 +68,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-10 col-md-10" style="padding-left: 0!important;padding-right: 0!important;">
+				<div class="col-xs-10 col-md-10"
+					 style="background-color: #fff; padding-left: 0!important;padding-right: 0!important;">
 					<div class="navigation">
 						<div class="news-title">
 							<ul class="news-module course_nav_ul clear">
