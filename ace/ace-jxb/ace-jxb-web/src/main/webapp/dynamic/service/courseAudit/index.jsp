@@ -169,9 +169,15 @@
         </td>
         <td class="tdcontent"> \${item.counselorName} </td>
         <td  class="tdcontent">
-            <div> \${item.createDate} </div>
+            <div>
+                {@if item.lineState == 1}
+                \${item.onlineDate}
+                {@else}
+                \${item.offlineDate}
+                {@/if}
+            </div>
             <div style="padding:10px">
-            {@if item.lineState==0}
+                {@if item.lineState!=1}
                 <span style="color:red">已下架</span>
             {@else}
                 <a href="#">已上架</a>
