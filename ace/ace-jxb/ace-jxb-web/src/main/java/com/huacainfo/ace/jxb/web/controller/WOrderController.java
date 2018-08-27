@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
+import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class WOrderController extends JxbBaseController {
 
     @Autowired
     private BaseOrderService baseOrderService;
+    @Autowired
+    private BisMsgNoticeService bisMsgNoticeService;
 
     /**
      * 创建订单
@@ -151,5 +154,20 @@ public class WOrderController extends JxbBaseController {
     private String getUnionid() {
         Userinfo userinfo = getCurUserinfo();
         return null == userinfo ? "" : userinfo.getUnionid();
+    }
+
+    /**
+     * 付款成功消息
+     *
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/paidBisMsg")
+    public ResultResponse paidBisMsg(String orderId) throws Exception {
+        if (!StringUtil.areNotEmpty(orderId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return bisMsgNoticeService.paySuccess(orderId);
     }
 }

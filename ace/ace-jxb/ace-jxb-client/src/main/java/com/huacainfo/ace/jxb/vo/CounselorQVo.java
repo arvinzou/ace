@@ -18,6 +18,18 @@ public class CounselorQVo extends Counselor {
      * 咨询方式数组
      */
     private String[] consultTypeArray;
+    /**
+     * 是否接收咨询 0-否 1-是
+     */
+    private String consultState;
+
+    public String getConsultState() {
+        return consultState;
+    }
+
+    public void setConsultState(String consultState) {
+        this.consultState = consultState;
+    }
 
     public String getConsultType() {
         return consultType;

@@ -38,6 +38,7 @@ public class WConsultController extends JxbBaseController {
     public ResultResponse getCounselorList(CounselorQVo condition, PageParamNoChangeSord page) throws Exception {
         //只显示注册通过的咨询师
         condition.setRegAuditRst("1");
+        condition.setConsultState("1");
         if (StringUtil.isNotEmpty(condition.getConsultType())) {
             condition.setConsultTypeArray(condition.getConsultType().split(","));
         }

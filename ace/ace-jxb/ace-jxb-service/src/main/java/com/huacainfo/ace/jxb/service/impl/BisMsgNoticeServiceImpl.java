@@ -162,6 +162,7 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
     private ResultResponse paySuccessConsultOrder(BaseOrderVo orderVo) throws Exception {
         String tmplCode = "";
         Map<String, Object> params = new HashMap<>();
+        String detailURL = "http://zx.huacainfo.com/jxb/www/view/consultantDetail/index.jsp?id=" + orderVo.getId();
         //发送给购买客户
         Userinfo consumer = userinfoService.selectUserinfoByKey(orderVo.getConsumerId());
         if (null != consumer) {
@@ -171,21 +172,21 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
             params.put("consultType", formatConsultType(orderVo.getConsultProduct().getType()));
             params.put("payMoney", orderVo.getPayMoney());
             params.put("consultContent", orderVo.getConsultOrder().getInfo());
-            params.put("url", "www.baidu.com");//点击查看详情
+            params.put("url", detailURL);//点击查看详情
             ResultResponse rs1 = messageTemplateService.send("jxb", tmplCode, params);
-            logger.debug("付款成功消息-消息推送结果：{}", rs1.toString());
+            logger.debug("付款成功消息-[客户]消息推送结果：{}", rs1.toString());
         }
         //发送给受理咨询师
         Userinfo counselor = userinfoService.selectUserinfoByKey(orderVo.getBusinessId());
         if (null != counselor) {
             tmplCode = CONSULT_ORDER_PAY_SUCCESS_COUNSELOR;
             params.put("openid", counselor.getOpenid());
-            params.put("reserveDate", orderVo.getConsultOrder().getReserveDate());
-            params.put("userName", orderVo.getConsumerName());
+            params.put("reserveDate", DateUtil.toStr(orderVo.getConsultOrder().getReserveDate(), DateUtil.DEFAULT_DATE_TIME_REGEX));
+            params.put("userName", orderVo.getConsultOrder().getName());
             params.put("payMoney", orderVo.getPayMoney());
-            params.put("url", "www.baidu.com");//点击查看详情
+            params.put("url", detailURL);//点击查看详情
             ResultResponse rs2 = messageTemplateService.send("jxb", tmplCode, params);
-            logger.debug("付款成功消息-消息推送结果：{}", rs2.toString());
+            logger.debug("付款成功消息-[咨询师]消息推送结果：{}", rs2.toString());
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "消息发送完成");
