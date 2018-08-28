@@ -21,9 +21,9 @@ function initData(id){
                 console.log(result);
                 var tempt = document.getElementById('codeTemp').innerHTML;
                 var html = juicer(tempt, {
-                    data: result.data.qrcodeUrl
+                    data: result.data
                 });
-                $(".box").append(html);
+                $(".main_box").append(html);
             }else {
                 alert(result.info);
                 return;
