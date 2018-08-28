@@ -18,7 +18,7 @@ function orderList(state){
         type:"post",
         async:false,
         data:{
-            findType: '2',
+            findType: '1',
             payStatus: state,
             category: '2',
             start: 0,

@@ -154,11 +154,9 @@
                 </div>
                 </div>
                 <div class="row">
-                <div class="col-xs-12 col-md-12">
-                <p class="teacher_content">
+                <div class="col-xs-12 col-md-12 teacher_content">
 					\$\${data.counselor.profile}
-            	</p>
-            </div>
+            	</div>
             </div>
             </div>
             <div class="row course_introduce">
@@ -167,11 +165,9 @@
                 <p>课程简介</p>
                 </div>
                 <div class="row">
-                <div class="col-xs-12 col-md-12">
-                <p class="teacher_content" id="courseContent">
+                <div class="col-xs-12 col-md-12 teacher_content" id="courseContent">
 					\$\${data.introduce}
-            	</p>
-            </div>
+            	</div>
             </div>
             </div>
             </div>
@@ -181,9 +177,9 @@
                 <p>适合谁听</p>
                 </div>
                 <div class="row">
-                <div class="col-xs-12 col-md-12">
-                <p class="teacher_content">\${data.applicationObject}</p>
-            </div>
+                <div class="col-xs-12 col-md-12 teacher_content">
+					\${data.applicationObject}
+				</div>
             </div>
             </div>
             </div>
