@@ -92,4 +92,14 @@ public interface MemberQrcodeService {
      * @return ResultResponse
      */
     ResultResponse getQRCode(String studioId, String type, String refresh) throws Exception;
+
+    /**
+     * 获取工作室推广二维码 -- 绘制方式
+     *
+     * @param studioId 工作室ID
+     * @param type     二维码时效类型 0-临时 1-永久
+     * @param refresh  强制刷新条件 0-正常获取 1 - 强制刷新
+     * @return ResultResponse
+     */
+    ResultResponse drawQRCode(String studioId, String type, String refresh) throws Exception;
 }

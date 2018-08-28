@@ -247,7 +247,6 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
         if (null != qrcode) {
             if (FORCE_REFRESH.equals(refresh)
                     || StringUtil.isEmpty(qrcode.getQrcodeUrl())) {
-//                    || 1 != 1  //二维码即将超时s
                 //生成新微信二维码
                 MemberQrcode newQRCode = getQRCodeURL(studio, qrcode);
                 qrcode.setQrcodeType(newQRCode.getQrcodeType());
@@ -275,13 +274,85 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", qrcode);
     }
 
+    private MemberQrcode getQRCodeURL(StudioVo studioVo, MemberQrcode orgCfg) throws Exception {
+        String qrCodeType = orgCfg.getQrcodeType();
+        WxCfg wxCfg = wxCfgService.findBySysId("jxb");//testWxCfg()
+        if (null == wxCfg || StringUtil.isEmpty(wxCfg.getAccessToken())) {
+            throw new CustomException("微信配置获取失败");
+        }
+        //二维码网络地址
+        String codeUri = getWxQRCodeUri(orgCfg.getSceneStr(), qrCodeType, wxCfg.getAccessToken());
+        if (codeUri.startsWith("http") || codeUri.startsWith("https")) {
+            MemberQrcode newCode = new MemberQrcode();
+            newCode.setQrcodeUrl(codeUri);
+            newCode.setQrcodeType(qrCodeType);
+            newCode.setRemark("纯微信二维码图");
+            if (TYPE_TEMPORARY.equals(qrCodeType)) {
+                newCode.setExpireDate(DateUtil.getNowAfterSecTime(QrcodeApi.EXPIRE_SECONDS_30_DAY));
+            } else {
+                newCode.setExpireDate("2099-12-31 23:59:59");
+            }
+            return newCode;
+        } else {
+            throw new CustomException(codeUri);
+        }
+    }
+
+    /**
+     * 获取工作室推广二维码 -- 绘制方式
+     *
+     * @param studioId 工作室ID
+     * @param type     二维码时效类型 0-临时 1-永久
+     * @param refresh  强制刷新条件 0-正常获取 1 - 强制刷新
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse drawQRCode(String studioId, String type, String refresh) throws Exception {
+        //核验工作室资料
+        StudioVo studio = studioService.selectStudioByPrimaryKey(studioId).getValue();
+        if (null == studio || !"1".equals(studio.getStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "非法工作室");
+        }
+        //获取历史二维码资料
+        MemberQrcode qrcode = memberQrcodeDao.findByStudioId(studioId);
+        if (null != qrcode) {
+            if (FORCE_REFRESH.equals(refresh)
+                    || StringUtil.isEmpty(qrcode.getQrcodeUrl())) {
+//                    || 1 != 1  //二维码即将超时s
+                //生成新微信二维码
+                MemberQrcode newQRCode = drawQRCodeURL(studio, qrcode);
+                qrcode.setQrcodeType(newQRCode.getQrcodeType());
+                qrcode.setQrcodeUrl(newQRCode.getQrcodeUrl());
+                qrcode.setExpireDate(newQRCode.getExpireDate());
+                qrcode.setUpdateDate(DateUtil.getNowDate());
+                memberQrcodeDao.updateByPrimaryKeySelective(qrcode);
+            }
+        } else {
+            qrcode = new MemberQrcode();
+            qrcode.setId(GUIDUtil.getGUID());
+            qrcode.setStudioId(studioId);
+            qrcode.setSceneStr(studioId);
+            qrcode.setQrcodeType(type);
+            qrcode.setStatus("1");
+            qrcode.setCreateDate(DateUtil.getNowDate());
+            qrcode.setQrcodeType(type);
+            //生成新微信二维码
+            MemberQrcode newQRCode = drawQRCodeURL(studio, qrcode);
+            qrcode.setQrcodeUrl(newQRCode.getQrcodeUrl());
+            qrcode.setExpireDate(newQRCode.getExpireDate());
+            memberQrcodeDao.insertSelective(qrcode);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", qrcode);
+    }
+
     /***
      * 获取推广二维码 -- 微信接口产生二维码
      * @param studioVo  工作室资料
      * @param orgCfg 源二维码配置
      * @return MemberQrcode
      */
-    private MemberQrcode getQRCodeURL(StudioVo studioVo, MemberQrcode orgCfg) throws Exception {
+    private MemberQrcode drawQRCodeURL(StudioVo studioVo, MemberQrcode orgCfg) throws Exception {
         String qrCodeType = orgCfg.getQrcodeType();
         WxCfg wxCfg = wxCfgService.findBySysId("jxb");//testWxCfg();//
         if (null == wxCfg || StringUtil.isEmpty(wxCfg.getAccessToken())) {
@@ -307,7 +378,7 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
 
     private WxCfg testWxCfg() {
         WxCfg c = new WxCfg();
-        c.setAccessToken("12_R78ZISweJHkmHXdpx46GT45wGGE6fqes5BxLbEvMokGF9borPYUn7rtFjib8gwApOfmOtOm4iMrJbVvy22QE5G7YPqyyL3ToGqtrOoz95IFDCxw8rHDCV8yjMK7aqjLv8p0ec5_3rQQFfKywXSLbAFAMHA");
+        c.setAccessToken("13_MkRRvNI8ZQwKNqxh1AeSZfDfIj8-EU2qXhHciTE67oWRlNP20ZGHa-g-LBVahShoCCLrWyOFp-O0I_tFnpoc69YNni782OVzirkQcn79FEesYJ1iUkna1k2k27QGPo4pKYyQWP63C-iaBt3SKHMcAHAOLQ");
 
         return c;
     }

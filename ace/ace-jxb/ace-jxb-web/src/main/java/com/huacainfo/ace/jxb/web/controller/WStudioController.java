@@ -26,8 +26,9 @@ public class WStudioController extends JxbBaseController {
     @Autowired
     private StudioService studioService;
 
+
     /**
-     * 获取工作室推广二维码
+     * 获取工作室推广二维码 -- 直接获取二维码图方式
      *
      * @param studioId 工作室ID
      * @param type     二维码时效类型 0-临时 1-永久
@@ -44,6 +45,29 @@ public class WStudioController extends JxbBaseController {
 
         try {
             return memberQrcodeService.getQRCode(studioId, type, refresh);
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
+    }
+
+    /**
+     * 获取工作室推广二维码 -- 绘制方式
+     *
+     * @param studioId 工作室ID
+     * @param type     二维码时效类型 0-临时 1-永久
+     * @param refresh  强制刷新条件 0-正常获取 1 - 强制刷新
+     * @return ResultResponse
+     */
+    @RequestMapping("/drawQRCode")
+    public ResultResponse drawQRCode(String studioId, String type, String refresh) throws Exception {
+        if (StringUtil.isEmpty(studioId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        type = StringUtil.isEmpty(type) ? "1" : type;
+        refresh = StringUtil.isEmpty(refresh) ? "0" : refresh;
+
+        try {
+            return memberQrcodeService.drawQRCode(studioId, type, refresh);
         } catch (CustomException e) {
             return new ResultResponse(ResultCode.FAIL, e.getMsg());
         }
