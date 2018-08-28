@@ -4,6 +4,7 @@ function App() {
 };
 var consulorId = "";
 var signStatus = "1";     //已经签到状态为2
+var signDays = 0;
 function initData(){
     $.ajax({
         url: contextPath+"/www/reg/findInfo",
@@ -25,6 +26,7 @@ function initData(){
                     var signText = juicer(signInfo, {
                         signCount: result.data.signInfo.signCount
                     });
+                    signDays = result.data.signInfo.signCount;
                     $(".sign_info").html(signText);
                 }else if(result.status == 0 && result.data.memberType == '2'){
                     window.location.href = contextPath + '/www/view/member/index.jsp'
@@ -58,7 +60,10 @@ function sign(){
             success:function(result){
                 if(result.status == 0) {
                     alert("签到成功！");
-                    window.location.reload();
+                    $("#signIn").text("已签到");
+                    $("#signIn").removeClass('sign_btn').addClass('signed');
+                    var days = parseInt(signDays)+1;
+                    $(".sign_info").html("本月已签到"+days+"天");
                 }else {
                     alert(result.errorMessage);
                     return;

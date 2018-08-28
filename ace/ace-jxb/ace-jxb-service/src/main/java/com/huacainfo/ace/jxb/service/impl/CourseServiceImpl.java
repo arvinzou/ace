@@ -148,9 +148,10 @@ public class CourseServiceImpl implements CourseService {
 
         o.setDemandNum(1);
         o.setLikeNum(1);
+        o.setStatus("1");
+        o.setLineState("0");
         o.setId(courseId);
         o.setCreateDate(new Date());
-        o.setStatus("1");
         o.setCreateUserId(userProp.getUserId());
         this.courseDao.insertSelective(o);
         this.dataBaseLogService.log("添加课程", "课程", "", o.getId(), o.getId(), userProp);
