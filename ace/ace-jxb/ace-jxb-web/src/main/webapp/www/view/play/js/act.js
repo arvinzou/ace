@@ -211,15 +211,16 @@ function palyer() {
     });
     player.addEventListener('canplay', makePlay);
     player.addEventListener('ended', function () {
-        playPause.attributes.d.value = "M18 12L0 24V0";
+        $('#playPause').prop('src', 'img/play.png');
         player.currentTime = 0;
     });
 
-
-    sliders.forEach(function (slider) {
-        var pin = slider.querySelector('.pin');
-        slider.addEventListener('click', window[pin.dataset.method]);
-    });
+    $('.slider').click(rewind);
+    // sliders.forEach(function (slider) {
+    //     console.log(slider);
+    //     var pin = slider.querySelector('.pin');
+    //     slider.addEventListener('click', window[pin.dataset.method]);
+    // });
 
 
     function isDraggable(el) {
@@ -297,6 +298,7 @@ function palyer() {
     }
 
     function rewind(event) {
+        console.log(111111111);
         if (inRange(event)) {
             player.currentTime = player.duration * getCoefficient(event);
         }
