@@ -1,5 +1,5 @@
 /*!
- * bootstrap-star-rating v4.0.2
+ * bootstrap-star-rating v4.0.3
  * http://plugins.krajee.com/star-rating
  *
  * Author: Kartik Visweswaran
@@ -246,7 +246,7 @@
                 self.rtl = true;
                 $el.attr('dir', 'rtl');
             }
-            self.starClicked = true;
+            self.starClicked = false;
             self.clearClicked = false;
             self._initSlider(options);
             self._checkDisabled();
@@ -297,7 +297,7 @@
                     if (e.type === "touchend") {
                         self._setStars(pos);
                         params = [self.$element.val(), self._getCaption()];
-                        self.$element.trigger('change').trigger('rating.change', params);
+                        self.$element.trigger('change').trigger('rating:change', params);
                         self.starClicked = true;
                     } else {
                         out = self.calculate(pos);
@@ -317,7 +317,7 @@
                         pos = self.events._getTouchPosition(ev);
                         self._setStars(pos);
                         params = [self.$element.val(), self._getCaption()];
-                        self.$element.trigger('change').trigger('rating.change', params);
+                        self.$element.trigger('change').trigger('rating:change', params);
                         self.starClicked = true;
                     });
                 },
@@ -338,7 +338,7 @@
                     pos = self.events._getTouchPosition(e);
                     out = self.calculate(pos);
                     self._toggleHover(out);
-                    self.$element.trigger('rating.hover', [out.val, out.caption, 'stars']);
+                    self.$element.trigger('rating:hover', [out.val, out.caption, 'stars']);
                 },
                 starMouseLeave: function (e) {
                     var out;
@@ -347,7 +347,7 @@
                     }
                     out = self.cache;
                     self._toggleHover(out);
-                    self.$element.trigger('rating.hoverleave', ['stars']);
+                    self.$element.trigger('rating:hoverleave', ['stars']);
                 },
                 clearMouseMove: function (e) {
                     var caption, val, width, out;
@@ -360,7 +360,7 @@
                     width = self.getWidthFromValue(val) || 0;
                     out = {caption: caption, width: width, val: val};
                     self._toggleHover(out);
-                    self.$element.trigger('rating.hover', [val, caption, 'clear']);
+                    self.$element.trigger('rating:hover', [val, caption, 'clear']);
                 },
                 clearMouseLeave: function (e) {
                     var out;
@@ -369,7 +369,7 @@
                     }
                     out = self.cache;
                     self._toggleHover(out);
-                    self.$element.trigger('rating.hoverleave', ['clear']);
+                    self.$element.trigger('rating:hoverleave', ['clear']);
                 },
                 resetForm: function (e) {
                     if (e && e.isDefaultPrevented()) {
@@ -476,11 +476,11 @@
             if (!self.inactive) {
                 self._setCaption(title);
             }
-            return self.showStars(self.clearValue).trigger('change').trigger('rating.clear');
+            return self.showStars(self.clearValue).trigger('change').trigger('rating:clear');
         },
         reset: function () {
             var self = this;
-            return self.showStars(self.initialValue).trigger('rating.reset');
+            return self.showStars(self.initialValue).trigger('rating:reset');
         },
         update: function (val) {
             var self = this;
@@ -491,7 +491,7 @@
             if (!options) {
                 return $el;
             }
-            return self.destroy().rating($.extend(true, self.options, options)).trigger('rating.refresh');
+            return self.destroy().rating($.extend(true, self.options, options)).trigger('rating:refresh');
         }
     };
 
@@ -540,18 +540,18 @@
         displayOnly: false,
         rtl: false,
         showClear: true,
-        showCaption: false,
+        showCaption: true,
         starCaptionClasses: {
-            0.5: 'label label-danger',
-            1: 'label label-danger',
-            1.5: 'label label-warning',
-            2: 'label label-warning',
-            2.5: 'label label-info',
-            3: 'label label-info',
-            3.5: 'label label-primary',
-            4: 'label label-primary',
-            4.5: 'label label-success',
-            5: 'label label-success'
+            0.5: 'label label-danger badge-danger',
+            1: 'label label-danger badge-danger',
+            1.5: 'label label-warning badge-warning',
+            2: 'label label-warning badge-warning',
+            2.5: 'label label-info badge-info',
+            3: 'label label-info badge-info',
+            3.5: 'label label-primary badge-primary',
+            4: 'label label-primary badge-primary',
+            4.5: 'label label-success badge-success',
+            5: 'label label-success badge-success'
         },
         clearButton: '<i class="glyphicon glyphicon-minus-sign"></i>',
         clearButtonBaseClass: 'clear-rating',
@@ -582,10 +582,10 @@
             5: 'Five Stars'
         },
         clearButtonTitle: 'Clear',
-       // clearCaption: 'Not Rated'
+        clearCaption: 'Not Rated'
     };
 
-   // $.fn.rating.Constructor = Rating;
+    $.fn.rating.Constructor = Rating;
 
     /**
      * Convert automatically inputs with class 'rating' into Krajee's star rating control.
