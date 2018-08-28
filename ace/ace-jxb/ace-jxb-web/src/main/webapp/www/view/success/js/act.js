@@ -1,4 +1,4 @@
-function App() {
+window.onload = function() {
     console.log("=============================App Start==============================");
     console.log(window.location.href);
     var url =   window.location.search.substring(1);

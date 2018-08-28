@@ -1,5 +1,5 @@
-function App() {
-    console.log("=============================App Start==============================");
+window.onload = function(){
+
     initData();
 };
 var consulorId = "";

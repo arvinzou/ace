@@ -1,11 +1,10 @@
-function App() {
+window.onload = function(){
     console.log(window.location.href);
     var url =   window.location.search.substring(1);
     primaryId = url.substring(url.indexOf('=')+1);
     console.log(primaryId);
     initData(primaryId);
 }
-
 function initData(primaryId){
     $.ajax({
         url: contextPath+ "/www/course/findCoursePartInfo",

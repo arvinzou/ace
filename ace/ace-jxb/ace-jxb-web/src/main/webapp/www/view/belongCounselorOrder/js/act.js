@@ -1,8 +1,7 @@
-function App() {
-   initData();
-};
-
-function initData(primaryId){
+window.onload = function(){
+    initData();
+}
+function initData(){
     $.ajax({
         url: contextPath+ "/www/order/findList",
         type:"post",

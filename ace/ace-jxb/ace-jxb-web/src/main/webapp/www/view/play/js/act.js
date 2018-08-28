@@ -19,6 +19,9 @@ function App() {
         }
     });
 
+
+}
+window.onload = function(){
     console.log(window.location.href);
     var url =   window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length+1);
     var paramArr = url.split("&");
@@ -38,7 +41,6 @@ function App() {
     console.log("courseId:"+courseId+"\n"+"sourceId:"+sourceId+"\n");
     initCourseInfo(courseId);
 }
-
 function initCourseInfo(courseId){
     $.ajax({
         url: contextPath+ "/www/course/findCourseDetail",

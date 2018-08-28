@@ -1,5 +1,4 @@
-function App() {
-    console.log("=============================App Start==============================");
+window.onload = function() {
 
     $(document).not($(".selectbox")).click(function(){
         $(".citylist,.citylist2").slideUp();
