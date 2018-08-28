@@ -353,7 +353,7 @@ public class ConsultServiceImpl implements ConsultService {
     public MessageResponse updateState(String counselorId, String state, UserProp curUserProp) {
         Consult vo = consultDao.selectByPrimaryKey(counselorId);
         if (null == vo) {
-            return new MessageResponse(ResultCode.FAIL, "咨询师资料丢失");
+            return new MessageResponse(ResultCode.FAIL, "没有设置预约资料");
         }
         vo.setStatus(state);
         consultDao.updateByPrimaryKeySelective(vo);
