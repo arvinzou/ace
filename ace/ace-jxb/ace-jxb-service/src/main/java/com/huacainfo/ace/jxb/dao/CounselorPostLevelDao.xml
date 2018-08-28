@@ -116,11 +116,20 @@
   </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CounselorPostLevelVo">
+        <result column="counselorName" jdbcType="VARCHAR" property="counselorName"/>
         <result column="postName" jdbcType="VARCHAR" property="postName"/>
         <result column="ratio" jdbcType="DECIMAL" property="ratio"/>
+        <result column="counselorNum" jdbcType="INTEGER" property="counselorNum"/>
+        <result column="turnover" jdbcType="DECIMAL" property="turnover"/>
+        <result column="checkYear" jdbcType="VARCHAR" property="checkYear"/>
+        <result column="checkMonth" jdbcType="VARCHAR" property="checkMonth"/>
+        <result column="checkDay" jdbcType="VARCHAR" property="checkDay"/>
+        <result column="checkQuarter" jdbcType="VARCHAR" property="checkQuarter"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+        c.`name` as counselorName,
+        r.checkYear,r.checkMonth, r.checkDay, r.checkQuarter, r.counselorNum, r.turnover,
         p.postName,p.ratio,
         t.id, t.counselorId, t.postId, t.remark, t.status, t.createDate, t.updateDate
     </sql>
@@ -135,6 +144,8 @@
     <sql id="fromStatement">
       from counselor_post_level t
       left join post_level p on t.postId = p.id
+        left join counselor_check_result r on t.counselorId = r.counselorId
+        left join counselor c on c.id = t.counselorId
     </sql>
 
     <sql id="whereCondition">
