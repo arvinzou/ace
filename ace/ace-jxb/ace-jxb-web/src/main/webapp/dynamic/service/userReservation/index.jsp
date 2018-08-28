@@ -118,7 +118,7 @@
                                                                             </div>
 
                                                                             <div class="form-group ">
-                                                                                <label class="col-md-3 control-label">微信咨询
+                                                                                <label class="col-md-3 control-label">视频咨询
 
                                                                                 </label>
                                                                                 <div class="col-md-9">

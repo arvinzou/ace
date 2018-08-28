@@ -393,7 +393,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         //客户资料
         Users user = usersService.selectUsersByPrimaryKey(base.getConsumerId()).getValue();
         if (null == user) {
-            return new ResultResponse(ResultCode.FAIL, "非法客户资料");
+            return new ResultResponse(ResultCode.FAIL, "没有注册账号。");
         }
         //咨询订单
         if (orderCategory.equals(OrderCategory.CATEGORY_CONSULT)) {

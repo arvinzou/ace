@@ -116,11 +116,7 @@
             <div class="row">
             <div class="ensure">
             <div class="col-xs-6 col-sm-6" style="padding-right: 0;padding-left: 0;"><span><img class="ensure_img" src="img/ensure.png"/></span><span>来访者隐私安全</span></div>
-        <div class="col-xs-6 col-sm-6" style="padding-right: 0;padding-left: 0;"><span><img class="ensure_img" src="img/ensure.png"/></span><span>支持取消预约并退款</span></div>
-        </div>
-        <div class="ensure">
-            <div class="col-xs-6 col-sm-6" style="padding-right: 0;padding-left: 0;"><span><img class="ensure_img" src="img/ensure.png"/></span><span>咨询师真实认证</span></div>
-        <div class="col-xs-6 col-sm-6" style="padding-right: 0;padding-left: 0;"><span><img class="ensure_img" src="img/ensure.png"/></span><span>咨询师入驻定期考核</span></div>
+        <div class="col-xs-6 col-sm-6" style="padding-right: 0;padding-left: 0;"><span><img class="ensure_img" src="img/ensure.png"/></span><span>咨询师真实认证</span></div>
         </div>
         </div>
         </div>
