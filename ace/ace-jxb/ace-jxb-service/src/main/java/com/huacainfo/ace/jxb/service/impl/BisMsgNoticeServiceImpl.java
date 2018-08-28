@@ -123,7 +123,7 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
         } else {
             tmplCode = AUDIT_RESULT;
             params.put("auditContent", "工作室申请");
-            params.put("auditResult", "已通过");
+            params.put("auditResult", "未通过");
         }
         params.put("openid", userinfo.getOpenid());
         params.put("remark", isPass ? "您已经可以开始发展工作室！" : "可向邮箱jinxinbang123@163.com 发送邮件提出异议！");
