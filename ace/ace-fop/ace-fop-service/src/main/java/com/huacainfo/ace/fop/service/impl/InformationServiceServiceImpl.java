@@ -162,7 +162,6 @@ public class InformationServiceServiceImpl implements InformationServiceService 
      */
     @Override
     public MessageResponse insertInformationService(InformationService o, UserProp userProp) throws Exception {
-
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
@@ -172,7 +171,6 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (CommonUtils.isBlank(o.getModules())) {
             return new MessageResponse(1, "模块不能为空！");
         }
-
         SingleResult<UsersVo> singleResult = usersService.selectUsersByPrimaryKey(userProp.getUserId());
         UsersVo user = singleResult.getValue();
         if (null == user) {
@@ -181,20 +179,25 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (CommonUtils.isBlank(user.getDepartmentId())) {
             return new MessageResponse(1, "账户没有绑定企业！");
         }
-        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
-        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
-        if (null == fc) {
-            if (null == fa) {
-                return new MessageResponse(1, "账户没有绑定企业！");
+        if (!"5".equals(o.getModules())) {//政策信息由工商联身份发布管理
+            FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+            FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+            if (null == fc) {
+                if (null == fa) {
+                    return new MessageResponse(1, "账户没有绑定企业！");
+                }
+                o.setRelationId(fa.getId());
+                o.setRelationType(FopConstant.ASSOCIATION);
+            } else {
+                if ("3".equals(fc.getCompanyType())) {
+                    return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
+                }
+                o.setRelationId(fc.getId());
+                o.setRelationType(FopConstant.COMPANY);
             }
-            o.setRelationId(fa.getId());
-            o.setRelationType(FopConstant.ASSOCIATION);
         } else {
-            if ("3".equals(fc.getCompanyType())) {
-                return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
-            }
-            o.setRelationId(fc.getId());
-            o.setRelationType(FopConstant.COMPANY);
+            o.setRelationId("0");
+            o.setRelationType("2");
         }
 
         o.setReleaseDate(new Date());
