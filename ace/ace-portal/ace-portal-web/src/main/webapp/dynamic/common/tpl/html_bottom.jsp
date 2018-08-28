@@ -13,9 +13,9 @@
 					<div class="col-md-6 col-sm-6 col-xs-12 footer-block">
 						<div style="font-size:14px">联系我们</div>
 						<address class="margin-bottom-40">
-							电话: ${cfg.tel}
+                            电话：${cfg.tel}
 							<br>
-							邮箱:
+                            邮箱：
 							<a href="mailto:${cfg.email}"> ${cfg.email}</a>
 							<br>
 							地址：${cfg.addr}
