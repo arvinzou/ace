@@ -1,4 +1,4 @@
-function App() {
+window.onload = function(){
     initData();
 };
 

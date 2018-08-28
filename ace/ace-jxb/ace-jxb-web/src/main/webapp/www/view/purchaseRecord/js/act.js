@@ -8,9 +8,10 @@ function loadlocal() {
 var primaryId = null;
 function App() {
     loadlocal();
+}
+window.onload = function(){
     orderList();
 }
-
 function orderList(state){
     $.ajax({
         url: contextPath+ "/www/order/findList",

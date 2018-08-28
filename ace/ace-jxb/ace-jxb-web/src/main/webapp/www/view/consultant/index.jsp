@@ -107,8 +107,8 @@
 					</div>
 					<div class="row content_04">
 					<ul class="clabel">
-						{@if item.tags != undefined && item.tags != null}
-						{@each item.tags.split(',') as tag,num}
+						{@if item.consultField != undefined && item.consultField != null}
+						{@each item.consultField.split(',') as tag,num}
 						<li>\${tag}</li>
 						{@/each}
 						{@/if}

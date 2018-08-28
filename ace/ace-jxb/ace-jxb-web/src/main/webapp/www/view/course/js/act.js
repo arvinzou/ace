@@ -7,6 +7,9 @@ function loadlocal() {
 }
 function App() {
     loadlocal();
+}
+
+window.onload = function(){
     courseList();
 
     var level = $(".course_nav_ul .active").text();
@@ -52,7 +55,7 @@ function App() {
         var text3=$(this).text();
         $(".quinput").html(" "+text3);
         $(".citylist2").slideUp();
-    })
+    });
 }
 
 function courseList(level){

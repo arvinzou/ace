@@ -1,5 +1,4 @@
-function App() {
-    console.log("=============================App Start==============================");
+window.onload = function() {
 
     console.log(window.location.href);
     var url =   window.location.href.substring(1);
