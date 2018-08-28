@@ -30,9 +30,7 @@
 					<div class="row">
 						<div class="col-xs-5 col-sm-5" style="padding: 0;"><p class="title01">\${data.counselor.name}</p></div>
 						<div class="col-xs-7 col-sm-7">
-							<img class="level" src="img/level.png"/>
-							<img class="level" src="img/level.png"/>
-							<img class="level" src="img/level.png"/>
+
 						</div>
 					</div>
 					<div class="row"><p class="content">\${data.counselor.certification}</p></div>

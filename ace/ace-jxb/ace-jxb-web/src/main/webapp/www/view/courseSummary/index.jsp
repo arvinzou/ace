@@ -62,7 +62,7 @@
 			</div>
 		</div>
 		<div class="footer">
-			<img src="img/icon-play.png" class="play" style="padding-left: 0.253333rem;padding-top: 0.493333rem;" />
+			<img src="img/icon-play.png" class="play" style="display:none;padding-left: 0.253333rem;padding-top: 0.493333rem;" />
 			<span class="span_01"><%--试听--%></span>
 			<span class="span_02">共计</span>
 			<span class="span_03" id="totalCost"></span>
@@ -207,7 +207,7 @@
         		</div>
 				<div class="row">
 					<%--<div class="col-xs-2 col-md-2"></div>--%>
-					<div class="col-xs-10 col-md-10">
+					<div class="col-xs-10 col-md-10" style="padding-bottom: 0.3rem;">
 						{@if item.free == '0'}
 						<span class="try">试听</span>
 						{@else}
