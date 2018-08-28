@@ -172,7 +172,7 @@
         </td>
 
         <td  class="tdcontent">
-            {@f item.auditRst==1}
+            {@if item.auditRst==1}
             <div>
                 {@if item.lineState == 1}
                 \${item.onlineDate}
