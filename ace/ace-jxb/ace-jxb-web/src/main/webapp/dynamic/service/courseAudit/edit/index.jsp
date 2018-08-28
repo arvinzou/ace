@@ -160,7 +160,7 @@
                     </label>
                     <div class="price-panel {@if data.o.costType=='1'}hide{@/if}" >
                         <div class="row">
-                            <label class="col-md-3 control-label">课程原价</label>
+                            <label class="col-md-3 control-label">课程售价</label>
                             <div class="col-md-9">
                                 <input name="primeCost" type="text" value="\${data.o.primeCost}" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）" onchange="if(!/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(this.value)){alert('金额格式不正确！');this.value='';}"/>
                             </div>
