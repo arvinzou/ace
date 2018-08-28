@@ -85,9 +85,10 @@ body{
 	color: #5C6681;
 }
 .menu-li{
-	height: 1.44rem;
+	/*height: 1.44rem;*/
 	line-height: 1.44rem;
 	padding-left: 0.4rem;
+	border-bottom: 1px solid #F7F8FC;
 }
 .sign_info{
 	color: #A0A7B6;
