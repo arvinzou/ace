@@ -50,7 +50,7 @@
 						<div class="container star">
 							<form>
 								<input value="5" id="rating-input" type="text" title="" />
-								<span class="demo">推荐</span><br />
+								<span class="demo" id="kv-caption">推荐</span><br/>
 								<textarea class="point" name="content" placeholder="鼓励下老师吧~" onfocus="this.placeholder=''" onblur="this.placeholder='鼓励下老师吧~'"></textarea><br />
 								<a href="javascript:void(0);" class="commit" onclick="commitComments();">提&nbsp;交</a>
 							</form>
