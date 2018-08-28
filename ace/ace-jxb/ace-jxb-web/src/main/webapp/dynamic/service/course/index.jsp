@@ -117,7 +117,7 @@
 
                                                                         <th width="35%"> 课程名称 </th>
 
-                                                                        <th width="15%">上架时间&状态</th>
+                                                                        <th width="15%">上/下架时间&状态</th>
                                                                         <th width="10%">购买数 </th>
                                                                         <th width="15%">审核状态</th>
                                                                         <th width="25%">操作</th>
@@ -172,6 +172,7 @@
         </td>
 
         <td  class="tdcontent">
+            {@f item.auditRst==1}
             <div>
                 {@if item.lineState == 1}
                 \${item.onlineDate}
@@ -180,13 +181,13 @@
                 {@/if}
             </div>
             <div style="padding:10px">
-            {@if item.lineState != 1}
+                {@if item.lineState!=1}
                 <span style="color:red">已下架</span>
-            {@else}
+                {@else}
                 <a href="#">已上架</a>
-            {@/if}
+                {@/if}
             </div>
-
+            {@/if}
         </td>
         <td  class="tdcontent">\${item.duration}</td>
         <td class="tdcontent">

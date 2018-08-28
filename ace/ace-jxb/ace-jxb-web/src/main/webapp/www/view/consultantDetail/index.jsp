@@ -40,53 +40,69 @@
 		<div class="box">
 			<div class="row"><h3 class="title">咨询详情</h3></div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">咨询方式：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">
-					{@if data.consultProduct.type == '1'}
-					<p>电话咨询</p>
-					{@else if data.consultProduct.type == '2'}
-					<p>视频咨询</p>
-					{@else if data.consultProduct.type == '3'}
-					<p>面对面咨询</p>
-					{@/if}
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">咨询方式：</span>
+					<span class="formcmt">
+						{@if data.consultProduct.type == '1'}
+							电话咨询
+						{@else if data.consultProduct.type == '2'}
+							视频咨询
+						{@else if data.consultProduct.type == '3'}
+							面对面咨询
+						{@/if}
+					</span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">咨询次数：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.amount}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">咨询次数：</span>
+					<span class="formcmt">\${data.amount}</span>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">预约时间：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.consultOrder.reserveDate}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">预约时间：</span>
+					<span class="formcmt">\${data.consultOrder.reserveDate}</span>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">支付金额：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.payMoney}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">支付金额：</span>
+					<span class="formcmt">\${data.payMoney}</span>
+				</div>
 			</div>
 		</div>
 		<div class="box">
 			<div class="row"><h3 class="title">基本信息</h3></div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">姓名：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.consultOrder.name}</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">年龄：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.consultOrder.age}</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">性别：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">
-					{@if data.consultOrder.sex == '1'}
-					<p>男</p>
-					{@else if data.consultOrder.sex == '2'}
-					<p>女</p>
-					{@/if}
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">姓名：</span>
+					<span class="formcmt">\${data.consultOrder.name}</span>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">联系方式：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.consultOrder.tel}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">年龄：</span>
+					<span class="formcmt">\${data.consultOrder.age}</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">性别：</span>
+					<span class="formcmt">
+						{@if data.consultOrder.sex == '1'}
+							男
+						{@else if data.consultOrder.sex == '2'}
+							女
+						{@/if}
+					</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">联系方式：</span>
+					<span class="formcmt">\${data.consultOrder.tel}</span>
+				</div>
 			</div>
 		</div>
 		<div class="box">
@@ -114,46 +130,58 @@
 		<div class="box">
 			<div class="row"><h3 class="title">紧急联系人</h3></div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">姓名：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.consultOrder.secName}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">姓名：</span>
+					<span class="formcmt">\${data.consultOrder.secName}</span>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">关系：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.consultOrder.relationship}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">关系：</span>
+					<span class="formcmt">\${data.consultOrder.relationship}</span>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">联系方式：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.consultOrder.secTel}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">联系方式：</span>
+					<span class="formcmt">\${data.consultOrder.secTel}</span>
+				</div>
 			</div>
 		</div>
 		<div class="box">
 			<div class="row"><h3 class="title">订单信息</h3></div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">下单时间：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">\${data.createDate}</div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">下单时间：</span>
+					<span class="formcmt">\${data.createDate}</span>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">订单编号：</div>
-				<div class="col-xs-8 col-sm-8 formcmt"><p>\${data.id}</p></div>
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">订单编号：</span>
+					<span class="formcmt">\${data.id}</span>
+				</div>
 			</div>
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 formtitle">支付状态：</div>
-				<div class="col-xs-8 col-sm-8 formcmt">
-					{@if data.payStatus == '1'}
-					<p class="order_state">待支付</p>
-					{@else if data.payStatus == '2'}
-					<p class="order_state">已付款(待接单)</p>
-					{@else if data.payStatus == '3'}
-					<p class="order_state">申请退款</p>
-					{@else if data.payStatus == '4'}
-					<p class="order_state">已退款</p>
-					{@else if data.payStatus == '6'}
-					<p class="order_state">结束/待评价</p>
-					{@else if data.payStatus == '7'}
-					<p class="order_state">已完结</p>
-					{@else}
-					<p class="order_state">自动关闭</p>
-					{@/if}
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">支付状态：</span>
+					<span class="formcmt">
+						{@if data.payStatus == '1'}
+						<span class="order_state">待支付</span>
+						{@else if data.payStatus == '2'}
+						<span class="order_state">已付款(待接单)</span>
+						{@else if data.payStatus == '3'}
+						<span class="order_state">申请退款</span>
+						{@else if data.payStatus == '4'}
+						<span class="order_state">已退款</span>
+						{@else if data.payStatus == '6'}
+						<span class="order_state">结束/待评价</span>
+						{@else if data.payStatus == '7'}
+						<span class="order_state">已完结</span>
+						{@else}
+						<span class="order_state">自动关闭</span>
+						{@/if}
+						</span>
 				</div>
 			</div>
 		</div>

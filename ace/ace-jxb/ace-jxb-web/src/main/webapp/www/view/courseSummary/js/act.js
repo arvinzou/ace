@@ -115,7 +115,7 @@ function viewHtml(IDom, data, tempId) {
 }
 
 function playSource(sourceId){
-    if(findOrderByCommodityid() == false){
+    if(findOrderByCommodityid() == false && cost != '免费'){
         alert("课程必须先购买！");
     }else{
         window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId+'&sourceId='+sourceId;
