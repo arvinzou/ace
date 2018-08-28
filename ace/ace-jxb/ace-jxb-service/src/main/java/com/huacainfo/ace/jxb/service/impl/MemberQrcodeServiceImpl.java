@@ -271,7 +271,11 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
             memberQrcodeDao.insertSelective(qrcode);
         }
 
-        return new ResultResponse(ResultCode.SUCCESS, "获取成功", qrcode);
+        //接口返回数据
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("qrcode", qrcode);
+        rtnMap.put("studio", studio);
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", rtnMap);
     }
 
     private MemberQrcode getQRCodeURL(StudioVo studioVo, MemberQrcode orgCfg) throws Exception {

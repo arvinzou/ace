@@ -52,6 +52,19 @@ public class CounselorVo extends Counselor {
      */
     private int courseCount;
 
+    /**
+     * 咨询-擅长领域
+     */
+    private String consultField;
+
+    public String getConsultField() {
+        return consultField;
+    }
+
+    public void setConsultField(String consultField) {
+        this.consultField = consultField;
+    }
+
     public int getConsultCount() {
         return consultCount;
     }

@@ -42,6 +42,15 @@ public class WConsultController extends JxbBaseController {
         if (StringUtil.isNotEmpty(condition.getConsultType())) {
             condition.setConsultTypeArray(condition.getConsultType().split(","));
         }
+        //咨询领域条件过滤
+        if (condition.getConsultFieldArray() != null && condition.getConsultFieldArray().length > 0) {
+            String temp = "";
+            for (String field : condition.getConsultFieldArray()) {
+                temp += field + "%";
+            }
+            condition.setConsultField(temp);
+        }
+
         PageResult<CounselorVo> rst = counselorService.findCounselorList(
                 condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
