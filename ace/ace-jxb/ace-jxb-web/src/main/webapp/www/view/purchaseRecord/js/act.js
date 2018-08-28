@@ -8,16 +8,17 @@ function loadlocal() {
 var primaryId = null;
 function App() {
     loadlocal();
+}
+window.onload = function(){
     orderList();
 }
-
 function orderList(state){
     $.ajax({
         url: contextPath+ "/www/order/findList",
         type:"post",
         async:false,
         data:{
-            findType: '2',
+            findType: '1',
             payStatus: state,
             category: '2',
             start: 0,

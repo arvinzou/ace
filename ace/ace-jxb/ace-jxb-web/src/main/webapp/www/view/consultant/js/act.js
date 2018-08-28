@@ -1,5 +1,4 @@
-function App() {
-    console.log("=============================App Start==============================");
+window.onload = function() {
 
     $(document).not($(".selectbox")).click(function(){
         $(".citylist,.citylist2").slideUp();
@@ -53,14 +52,10 @@ function App() {
 };
 function screen(){
 	var tagobjs = $('.menuList1 .active');
-	var tags = "";
+	var tags = [];
 	if(tagobjs.length>0){
         for(var i=0; i<tagobjs.length; i++){
-            if(i != tagobjs.length-1){
-                tags = tags + tagobjs[i].innerText +',';
-            }else{
-                tags += tagobjs[i].innerText;
-            }
+            tags.push(tagobjs[i].innerText);
         }
     }
     var consultType = null;
@@ -90,7 +85,7 @@ function screen(){
         }
     }
 	var data = {
-	    "tags": tags == ''?null: tags,
+	    "tags": tags,
         "consultType":consultType,
         "orderBy":orderByParam,
         "sord": sord
@@ -133,7 +128,7 @@ function consultantListByparam(data){
         async:false,
         traditional:true,
         data:{
-            tags: data.tags,
+            consultFieldArray: data.tags.length >0? data.tags.toString() : null,
             consultType: data.consultType,
             orderBy: data.orderBy,
             sord: data.sord,

@@ -11,7 +11,6 @@ var cost = "";
 var type = null;
 function App() {
     loadlocal();
-
     loader({
         path: contextPath,
         url: '/www/view/common/js/star-rating.js',
@@ -24,16 +23,39 @@ function App() {
                     max: 5,
                     step: 1,
                     size: 'xs',
-                    showClear: false
-                });
+                    showClear: false,
+                    starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
+                    captionElement: "#kv-caption"
+                })
             });
         }
     });
-    console.log(window.location.href);
+
+}
+
+window.onload = function(){
     var url =   window.location.search.substring(1);
     primaryId = url.substring(url.indexOf('=')+1);
-    console.log(primaryId);
     initData(primaryId);
+    $('.myComment').click(commentModal);
+}
+
+
+function commentModal() {
+    var url = "/jxb/www/order/paidQuery";
+    var data = {
+        commodityId: primaryId,
+    };
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            /*有支付*/
+            if (result.data) {
+                $('#myModal').modal('show');
+                return
+            }
+            alert("需要购买后才能评价。")
+        }
+    })
 }
 
 function initData(primaryId){

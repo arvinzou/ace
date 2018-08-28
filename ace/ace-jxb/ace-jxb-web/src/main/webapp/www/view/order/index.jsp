@@ -25,7 +25,7 @@
 						<span class="method_01">预约时间</span>
 					</div>
 					<div class="col-xs-8 col-sm-8">
-						<input style="width: 100%;height: 1rem;border:none;" name="start_date" id="start_date" placeholder="选择预约时间" readonly="readonly" />
+						<input style="width: 80%;height: 1rem;border:none;text-align: right;" name="start_date" id="start_date" placeholder="选择预约时间" readonly="readonly" />
 					</div>
 				</div>
 			</div>
@@ -139,9 +139,11 @@
 
 	<script id="labelTemp" type="text/template">
         <ul class="tagboard">
-            {@each data.counselorVo.tags.split(',') as item,index}
-        <li class="tagUncheck" onclick="checkTags(this);">\${item}</li>
-        {@/each}
+			{@if data.consultVo.field!=undefined && data.consultVo.field!=null}
+            {@each data.consultVo.field.split(',') as item,index}
+        		<li class="tagUncheck" onclick="checkTags(this);">\${item}</li>
+        	{@/each}
+			{@/if}
         </ul>
 	</script>
 	<script id="consulorTemp" type="text/template">

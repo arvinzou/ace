@@ -7,6 +7,9 @@ function loadlocal() {
 }
 function App() {
     loadlocal();
+}
+
+window.onload = function(){
     courseList();
 
     var level = $(".course_nav_ul .active").text();
@@ -37,30 +40,29 @@ function App() {
         $(this).addClass("active")
         var text1=$(this).text();
         var value1 = $(this).attr('data-value');
-        $(".sqinput").html(text1);
         $("#ability").val(value1);
     })
     $(".chengshi li").click(function(){
         $(".chengshi li").removeClass("active")
         $(this).addClass("active")
         var text2=$(this).text();
-        $(".csinput").html(" "+text2);
+        $("#csinput").val(text2);
     })
     $(".qu li").click(function(){
         $(".qu li").removeClass("active")
         $(this).addClass("active")
         var text3=$(this).text();
-        $(".quinput").html(" "+text3);
+        $("#quinput").val(text3);
         $(".citylist2").slideUp();
-    })
+    });
 }
 
 function courseList(level){
     var type = null;
     var costType = null;
     var purport = $("#ability").val();    //针对能力
-    var typeName = $(".csinput").text().trim();   //课程类别
-    var payType = $(".quinput").text().trim();     //付费方式
+    var typeName = $("#csinput").val();   //课程类别
+    var payType = $("#quinput").val();     //付费方式
     if(purport == '' || purport == undefined || purport == null){
         purport = null;
     }

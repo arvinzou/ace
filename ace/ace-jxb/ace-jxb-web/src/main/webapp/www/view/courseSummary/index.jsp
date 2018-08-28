@@ -45,7 +45,7 @@
 
 			<!--课程评价-->
 				<div class="comments menuHide" id="comments">
-					<a href="#" data-toggle="modal" data-target="#myModal" class="myComment">
+					<a href="#" class="myComment">
 						<div class="row dialog">
 						<div class="row star_title"><p>我的评价</p></div>
 						<div class="row star_defalut">
@@ -154,11 +154,9 @@
                 </div>
                 </div>
                 <div class="row">
-                <div class="col-xs-12 col-md-12">
-                <p class="teacher_content">
+                <div class="col-xs-12 col-md-12 teacher_content">
 					\$\${data.counselor.profile}
-            	</p>
-            </div>
+            	</div>
             </div>
             </div>
             <div class="row course_introduce">
@@ -167,11 +165,9 @@
                 <p>课程简介</p>
                 </div>
                 <div class="row">
-                <div class="col-xs-12 col-md-12">
-                <p class="teacher_content" id="courseContent">
+                <div class="col-xs-12 col-md-12 teacher_content" id="courseContent">
 					\$\${data.introduce}
-            	</p>
-            </div>
+            	</div>
             </div>
             </div>
             </div>
@@ -181,9 +177,9 @@
                 <p>适合谁听</p>
                 </div>
                 <div class="row">
-                <div class="col-xs-12 col-md-12">
-                <p class="teacher_content">\${data.applicationObject}</p>
-            </div>
+                <div class="col-xs-12 col-md-12 teacher_content">
+					\${data.applicationObject}
+				</div>
             </div>
             </div>
             </div>
@@ -299,8 +295,8 @@
 					<div class="modal-body">
 						<div class="container star">
 							<form>
-								<input value="5" id="rating-input" type="text" title="" />
-								<span class="demo">推荐</span><br />
+								<input value="5" id="rating-input" type="text" title=""/>
+								<span class="demo" id="kv-caption">推荐</span><br/>
 								<textarea class="point" name="content" placeholder="鼓励下老师吧~" onfocus="this.placeholder=''" onblur="this.placeholder='鼓励下老师吧~'"></textarea><br />
 								<a href="javascript:void(0);" class="commit" onclick="commitComments();">提&nbsp;交</a>
 							</form>

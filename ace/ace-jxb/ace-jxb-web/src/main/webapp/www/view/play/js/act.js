@@ -13,12 +13,17 @@ function App() {
                     max: 5,
                     step: 1,
                     size: 'xs',
-                    showClear: false
+                    showClear: false,
+                    starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
+                    captionElement: "#kv-caption"
                 });
             });
         }
     });
 
+
+}
+window.onload = function(){
     console.log(window.location.href);
     var url =   window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length+1);
     var paramArr = url.split("&");
@@ -38,7 +43,6 @@ function App() {
     console.log("courseId:"+courseId+"\n"+"sourceId:"+sourceId+"\n");
     initCourseInfo(courseId);
 }
-
 function initCourseInfo(courseId){
     $.ajax({
         url: contextPath+ "/www/course/findCourseDetail",

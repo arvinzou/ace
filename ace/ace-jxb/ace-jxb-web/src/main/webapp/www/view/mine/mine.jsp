@@ -42,8 +42,20 @@
 			<div class="row">
 				<div class="banner">
 					<div class="row" style="padding-top: 0.826666rem;"><p class="title02">累计总收益（元）</p></div>
-					<div class="row"><p class="statics">\${data.counselor.income}</p></div>
-					<div class="row"><p class="title02">本月累计收益：2000元</p></div>
+					<div class="row">
+						{@if data.counselor.amount == undefined || data.counselor.amount == null}
+						<p class="statics">0.00</p>
+						{@else}
+						<p class="statics">\${data.counselor.amount}</p>
+						{@/if}
+					</div>
+					<div class="row"><p class="title02">账户余额：
+						{@if data.counselor.income == undefined || data.counselor.income== null}
+							0.00
+						{@else}
+							\${data.counselor.income}
+						{@/if}
+						元</p></div>
 				</div>
 			</div>
 			<div class="row statics_detail">
@@ -103,10 +115,8 @@
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>--%>
 			<div class="row menu-li">
-				<a href="tel:0736-7083862">
-					<div class="col-xs-10 col-sm-10"><p class="menu_title">联系我们</p></div>
-					<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
-				</a>
+				<div class="col-xs-10 col-sm-10"><p class="menu_title">联系我们</p></div>
+				<div class="col-xs-2 col-sm-2"><a href="tel:0736-7083862"><img class="next" src="img/next.png"/></a></div>
 			</div>
 		</div>
 	</body>

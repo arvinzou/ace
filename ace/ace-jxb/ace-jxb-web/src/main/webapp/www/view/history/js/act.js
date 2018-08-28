@@ -1,6 +1,4 @@
-
-function App() {
-    console.log("=============================App Start==============================");
+window.onload = function() {
     initSilder();
     $(".news-module li").on("click",function(){
         var n = $(this).index();
@@ -11,7 +9,6 @@ function App() {
         $(".news-slider").css("left",slider_left);
         $(this).addClass("active").siblings().removeClass("active");
     });
-
 
     initData();
 }
