@@ -23,6 +23,8 @@
 						<div class="selemediv">
 							<div class="selemenu ">
 								<input style="display: none;" value="" id="ability"/>
+								<input style="display: none;" value="" id="csinput"/>
+								<input style="display: none;" value="" id="quinput"/>
 								<span class="">筛选</span>
 							</div>
 							<div class="citylist2">
@@ -74,10 +76,10 @@
 						<div class="news-title">
 							<ul class="news-module course_nav_ul clear">
 								<li class="active" onclick="courseList();">全部</li>
-								<li onclick="courseList('幼儿');">幼儿</li>
-								<li onclick="courseList('小学');">小学</li>
-								<li onclick="courseList('初中');">初中</li>
-								<li onclick="courseList('高中');">高中</li>
+								<li onclick="courseList('00');">幼儿</li>
+								<li onclick="courseList('01');">小学</li>
+								<li onclick="courseList('02');">初中</li>
+								<li onclick="courseList('03');">高中</li>
 							</ul>
 							<div class="news-slider"></div>
 						</div>
