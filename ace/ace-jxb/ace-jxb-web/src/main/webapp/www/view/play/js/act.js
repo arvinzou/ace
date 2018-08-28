@@ -60,6 +60,7 @@ function initCourseInfo(courseId){
                     //系列课程
                     findSourceInfo(sourceId);
                 }
+                palyer();
                 initCommentsList();
             }else {
                 alert(result.info);
@@ -104,7 +105,6 @@ function findSourceInfo(sourceId){
             if(result.status == 0) {
                 viewHtml('sourceTitle', result.data, 'sourceNameTemp');
                 viewHtml('courseAudio', result.data, 'audioTemp');
-                palyer();
 
             }else {
                 alert(result.info);
