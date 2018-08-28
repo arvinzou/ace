@@ -24,7 +24,10 @@
 			<div class="row navbox">
 				<div class="selectbox">
 					<div class="selemediv">
-						<div class="selemenu">擅长领域</div>
+						<div class="selemenu">
+							<span>擅长领域</span>
+							<img src="img/dropDown.png" class="drop_down"/>
+						</div>
 						<div class="citylist menuList1" id="menuList">
 							<div class="xzk">
 								<li>行为纠正</li>
@@ -51,7 +54,10 @@
 						</div>
 					</div>
 					<div class="selemediv">
-						<div class="selemenu">咨询方式</div>
+						<div class="selemenu">
+							<span>咨询方式</span>
+							<img src="img/dropDown.png" class="drop_down"/>
+						</div>
 						<div class="citylist menuList2">
 							<div class="xzk">
 								<li style="margin-left: 1rem;">电话咨询</li>
@@ -61,7 +67,10 @@
 						</div>
 					</div>
 					<div class="selemediv">
-						<div class="selemenu">综合排序</div>
+						<div class="selemenu">
+							<span>综合排序</span>
+							<img src="img/dropDown.png" class="drop_down"/>
+						</div>
 						<div class="citylist menuList3">
 							<div class="xzk">
 								<li style="margin-left: 1rem;">咨询最多</li>
