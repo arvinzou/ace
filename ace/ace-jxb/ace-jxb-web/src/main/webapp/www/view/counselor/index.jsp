@@ -41,7 +41,7 @@
 		</script>
 		<script id="consulorTemp" type="text/template">
         <div class="content">
-            <div class="row data" style="margin-top: 1rem!important;">
+			<div class="row data" style="margin-top: 0.6rem!important;">
             <p class="data_01">\${data.counselorVo.name}</p>
             <p class="data_02">\${data.counselorVo.certification}</p>
             </div>
@@ -74,11 +74,9 @@
             </ul>
             </div>
             <div class="row">
-            	<div class="row"><div class="col-xs-12 col-sm-12" style="padding-left: 0 !important;"><h3 class="sec_title">个人简介</h3></div></div>
+				<h3 class="sec_title">个人简介</h3>
 				<div class="row">
-					<div class="col-xs-12 col-sm-12">
-						<p class="detail">\$\${data.counselorVo.profile}</p>
-					</div>
+					<div class="detail">\$\${data.counselorVo.profile}</div>
 				</div>
         </div>
         <div class="row">
