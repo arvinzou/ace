@@ -34,12 +34,30 @@ function App() {
 }
 
 window.onload = function(){
-    console.log(window.location.href);
     var url =   window.location.search.substring(1);
     primaryId = url.substring(url.indexOf('=')+1);
-    console.log(primaryId);
     initData(primaryId);
+    $('.myComment').click(commentModal);
 }
+
+
+function commentModal() {
+    var url = "/jxb/www/order/paidQuery";
+    var data = {
+        commodityId: primaryId,
+    };
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            /*有支付*/
+            if (result.data) {
+                $('#myModal').modal('show');
+                return
+            }
+            alert("需要购买后才能评价。")
+        }
+    })
+}
+
 function initData(primaryId){
     $.ajax({
         url: contextPath+ "/www/course/findCourseDetail",
