@@ -349,6 +349,7 @@
         <result column="consultState" jdbcType="VARCHAR" property="consultState"/>
         <result column="consultCount" jdbcType="INTEGER" property="consultCount"/>
         <result column="courseCount" jdbcType="INTEGER" property="courseCount"/>
+        <result column="consultField" jdbcType="VARCHAR" property="consultField"/>
     </resultMap>
     <sql id="Vo_Column_List">
         (select count(1) from base_order bo
@@ -358,7 +359,7 @@
         ) as consultCount,
         (select count(1) from course cr where cr.createUserId = t.id) as courseCount,
         u.nickname, u.headimgurl,
-        IFNULL(c.onlineStatus,'0') as onlineStatus, IFNULL(c.status,'0') as consultState,
+        IFNULL(c.onlineStatus,'0') as onlineStatus, IFNULL(c.status,'0') as consultState, c.field as consultField,
         (SELECT MAX(cp.price) from consult_product cp where t.id = cp.counselorId) as maxCPAmount,
         (SELECT min(cp.price) from consult_product cp where t.id = cp.counselorId) as minCPAmount,
         s.`name` as studioName,
@@ -419,6 +420,9 @@
         </if>
         <if test="condition.consultState !=null and condition.consultState !=&quot;&quot;">
             and c.status = #{condition.consultState,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.consultField !=null and condition.consultField !=&quot;&quot;">
+            and c.field like concat('%',#{condition.consultField,jdbcType=VARCHAR})
         </if>
         <if test="condition.consultTypeArray !=null ">
             and EXISTS (

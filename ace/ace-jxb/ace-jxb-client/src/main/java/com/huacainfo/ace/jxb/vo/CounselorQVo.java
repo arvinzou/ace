@@ -23,6 +23,33 @@ public class CounselorQVo extends Counselor {
      */
     private String consultState;
 
+    /**
+     * 咨询师 -- 擅长领域，标签数组
+     */
+    private String[] consultFieldArray;
+
+    /**
+     * 咨询师 -- 擅长领域，字符串
+     */
+    private String consultField;
+
+    public String[] getConsultFieldArray() {
+        return consultFieldArray;
+    }
+
+    public void setConsultFieldArray(String[] consultFieldArray) {
+        this.consultFieldArray = consultFieldArray;
+    }
+
+    public String getConsultField() {
+
+        return consultField;
+    }
+
+    public void setConsultField(String consultField) {
+        this.consultField = consultField;
+    }
+
     public String getConsultState() {
         return consultState;
     }
