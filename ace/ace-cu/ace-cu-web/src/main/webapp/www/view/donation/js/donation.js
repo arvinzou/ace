@@ -51,7 +51,13 @@ app.controller(ngControllerName,function($scope,$sce){
                                     '<img class="slideImg" src="'+result.data.carousel[3].resUrl+'" style="width: 100%;height: 100%;">\n' +
                                 '</div>';
                 $("#swiperBox").html(htmlTemp);
-                var swiper = new Swiper('.swiper-container');
+
+                 var swiper = new Swiper('.swiper-container', {
+                     navigation: {
+                         nextEl: '.swiper-button-next',
+                         prevEl: '.swiper-button-prev',
+                     },
+                 });
 
                 status = result.data.status;
                 if (!$scope.$$phase) {
