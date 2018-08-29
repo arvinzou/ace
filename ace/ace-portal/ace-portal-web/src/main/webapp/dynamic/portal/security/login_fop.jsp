@@ -425,7 +425,7 @@
                                     <span></span>
                                 </label>
                                 <div class="pull-right forget-password-block">
-                                    <a style="display: none;" data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
+                                    <a data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
                                 </div>
                             </div>
 

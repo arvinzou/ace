@@ -304,7 +304,7 @@
             return false;
         }
         if (!reg.test(password.value)) {
-            alert("尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
+           // alert("尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
         }
         var form = document.getElementById("login_form");
         form.submit();
