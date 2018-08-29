@@ -363,6 +363,7 @@ public class StudioServiceImpl implements StudioService {
         //我的工作室
         StudioQVo condition = new StudioQVo();
         condition.setCounselorId(counselorId);
+        condition.setStatus("1");
         List<StudioVo> my = studioDao.findList(condition, 0, 0 + 100, "");
 
 

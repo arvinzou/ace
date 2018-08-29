@@ -38,7 +38,8 @@ jQuery(function ($) {
     $('#btn-view-add').on(
         'click',
         function () {
-            parent.addPanel('短信任务添加', contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid, true);
+            // parent.addPanel('短信任务添加', contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid, true);
+            window.location.href = contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid;
         });
     $('#btn-view-edit').on(
         'click',
@@ -232,8 +233,7 @@ jQuery(function ($) {
                                 "className": "btn-sm btn-success",
                                 "callback": function () {
                                     //关闭窗口
-                                    parent.reloadGrid();
-                                    parent.removePanel();
+                                    window.location.href = contextPath + '/dynamic/service/taskCmcc/index.jsp?id=4302';
                                 }
                             }
                         }
@@ -396,7 +396,8 @@ jQuery(function ($) {
 });
 
 function reloadGrid() {
-    console.log('reloadGrid');
+    // console.log('reloadGrid');
+
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
 }
 

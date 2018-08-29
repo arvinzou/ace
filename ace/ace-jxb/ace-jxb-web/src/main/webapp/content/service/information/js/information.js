@@ -2,19 +2,14 @@ var editor, cityCode, singleSelect1;
 
 
 window.onload = function () {
-    initDoc();
-    $("#city").click(function (e) {
-        SelCity(this, e);
-    });
-    $("#city_edit").click(function (e) {
-        SelCity(this, e);
-    });
-    $("s").click(function (e) {
-        SelCity(document.getElementById("city"), e);
-    });
-    $('.submit_btn').click(submitForm);
+
+    getUserinfo();
+    //单选设置城市
+
+};
 
 
+function initcitySelect() {
     singleSelect1 = $('#single-select-1').citySelect({
         dataJson: cityData,
         multiSelect: false,
@@ -33,11 +28,7 @@ window.onload = function () {
             cityCode = values.name;
         }
     });
-    getUserinfo();
-
-    //单选设置城市
-
-};
+}
 
 
 function initDoc() {
@@ -58,6 +49,13 @@ function getUserinfo() {
         var url = "/jxb/counselor/getMyinfo"
         $.getJSON(url, function (result) {
             if (result.status == 0) {
+                var navitem = document.getElementById('temp-form_content').innerHTML;
+                var html = juicer(navitem, {
+                    data: result.value
+                });
+                $("#form_content").html(html);
+                initDoc();
+                initcitySelect();
                 fillForm(result.value)
             }
         })
@@ -73,7 +71,7 @@ function fillForm(data) {
         $('[name=form_' + key + ']').val(data[key]);
     }
     singleSelect1.setCityVal(data.cityCode + "市");
-    editor.setValue(data['profile']);
+    editor.setValue(data['profile'] ? data['profile'] : '');
     var tag = $('#certification .md-radio');
     var tags = data["certification"];
     filloption(tag, tags)
@@ -81,13 +79,14 @@ function fillForm(data) {
 }
 
 function filloption(tag, tags) {
-    for (var i = 0; i < tag.length; i++) {
-        var text = tag.eq(i).find('label').text().trim();
-        if (tags.indexOf(text) != -1) {
-            tag.eq(i).find('input').attr('checked', true)
+    if (tags) {
+        for (var i = 0; i < tag.length; i++) {
+            var text = tag.eq(i).find('label').text().trim();
+            if (tags.indexOf(text) != -1) {
+                tag.eq(i).find('input').attr('checked', true)
+            }
         }
     }
-    ;
 }
 
 

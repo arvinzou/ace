@@ -211,14 +211,14 @@
 	<!--预约须知-->
 	<div class="notes" id="notes" style="display: none;">
 		<div class="row">
-			<p class="ftitle">预约须知</p>
+			<p class="ftitle">预约老师须知</p>
 		</div>
 		<div class="row">
 			<p class="stitle"><span class="dot"></span><span>回应时长</span></p>
 		</div>
 		<div class="row">
 			<p class="note_content">
-				您好，我将在接收到预约通知的24小时内回复您~接下来会以私信协商时间进行电话咨询或邀请您加入QQ或微信进行视频咨询， 面对面咨询地点在常德
+				您好，我将在接收到预约通知的24小时内，以私信方式与您协商好咨询时间。在约定时间里，我们将与您进行电话/视频咨询（即您预约时选择的方式）。面对面咨询地点在常德。
 			</p>
 		</div>
 		<div class="row">
@@ -226,14 +226,14 @@
 		</div>
 		<div class="row">
 			<p class="note_content">
-                               若因为不可抗力需要变更/取消已协商好的咨询预约，请务必提前24小时联络我。否则咨询将如期开始			
+				若因不可抗力需要变更/取消已协商好的咨询预约，请务必提前24小时联络我，否则咨询则按完成计算，不予以退款。
 			</p>
 		</div>
 		<div class="row">
 			<p class="stitle"><span class="dot"></span><span>爽约/迟到</span></p>
 		</div>
 		<div class="row">
-			<p class="note_content">咨询结束的时间不变，请留意时间哦~</p>
+			<p class="note_content"> 若预约方迟到，未能按时且推迟了预约时间，则预约依然按时结束。若咨询师方迟到，则延长预约时间至满足时长为止。</p>
 		</div>
 		<%--<div class="row noteopt" style="text-align: center;">
 			<button class="readnote" onclick="closeTips();">我知道了</button>

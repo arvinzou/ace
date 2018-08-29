@@ -77,8 +77,9 @@ public class AnslysisServiceImpl implements AnalysisService {
      */
     @Override
     public Map<String, Object> portalCount() throws Exception {
-        Map<String, Object> rtnMap = portal.portalCount();
 
+        Map<String, Object> rtnMap = portal.portalCount();
+        //公众号关注人数
         SingleResult<WxCfgVo> s = wxCfgService.selectWxCfgByPrimaryKey(PropertyUtil.getProperty("appid"));
         WxCfgVo cfg = s == null ? null : s.getValue();
         UserList u = null == cfg ? null : WeChatApi.getUserList(cfg.getAccessToken(), "");

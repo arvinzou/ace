@@ -62,6 +62,9 @@ function userStudioStaff(id) {
 /*点击创建工作室*/
 function createStudio() {
     cleanForm();
+    $('input[name="form_name"]').removeAttr("readonly");
+    $('.form_logoImgUrl').attr("data-target", "#img-uploader");
+    $('.form_logoImgUrl').attr("data-toggle", "modal");
     $('#studioInfoModal').modal('show');
     $('.submit_btn').off("click");
     $('.submit_btn').click(createMyStudio);
@@ -142,25 +145,6 @@ function getMyStudioList() {
 }
 
 
-// /*获取我的信息*/
-// function getUserinfo() {
-//     var url = "/jxb/counselor/getMyinfo"
-//     $.getJSON(url, function (result) {
-//         if (result.status == 0) {
-//             viewUserinfo(result.value);
-//             // fillForm(result.value)
-//         }
-//     })
-// }
-//
-// /*渲染我的信息*/
-// function viewUserinfo(data) {
-//     for (key in data) {
-//         $('.user-' + key).text(data[key]);
-//     }
-//     ;
-//     $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
-// }
 
 var studioId;
 
@@ -210,6 +194,15 @@ function getStudioInfo(id) {
 
 /*修改数据钱填充数据*/
 function fillForm(data) {
+    if (data.status == 1) {
+        $('input[name="form_name"]').attr("readonly", "readonly");
+        $('.form_logoImgUrl').attr("data-target", "");
+        $('.form_logoImgUrl').attr("data-toggle", "");
+    } else {
+        $('input[name="form_name"]').removeAttr("readonly");
+        $('.form_logoImgUrl').attr("data-target", "#img-uploader");
+        $('.form_logoImgUrl').attr("data-toggle", "modal");
+    }
     for (key in data) {
         if (key.indexOf("Url") != -1) {
             $('.form_' + key).prop("src", data[key]);
@@ -217,7 +210,7 @@ function fillForm(data) {
         }
         $('[name=form_' + key + ']').val(data[key]);
     }
-    editor.setValue(data['introduce']);
+    editor.setValue(data['introduce'] ? data['introduce'] : '');
     var imgs = data['imgList'];
     for (var i = 0; i < imgs.length; i++) {
         var index = $('#indexImg').siblings().length;
@@ -237,6 +230,10 @@ function fillForm(data) {
 
 /*提交表单获取数据*/
 function submitForm() {
+    if (!$(".protocol[type='checkbox']").prop('checked')) {
+        alert("需要同意工作室服务协议");
+        return null;
+    }
     var formObject = {
         name: "notNull",
         introduce: "notNull1",
