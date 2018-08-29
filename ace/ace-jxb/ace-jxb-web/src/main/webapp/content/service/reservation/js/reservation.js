@@ -97,8 +97,8 @@ function submitForm() {
     var formObject = {
         telephoneCon: 'money_null',
         wecharCon: 'money1_null',
-        facetofaceCon: 'money2_null',
-        info: 'notNull1',
+        facetofaceCon: 'money2_null'
+        // info: 'notNull1',
     }
 
 
