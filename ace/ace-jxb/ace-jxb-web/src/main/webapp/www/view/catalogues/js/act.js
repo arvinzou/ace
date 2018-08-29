@@ -35,6 +35,32 @@ function viewHtml(IDom, data, tempId) {
     $("#" + IDom).html(html);
 }
 
-function playCourse(courseId, sourceId){
-    window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+courseId+'&sourceId='+sourceId;
+function findOrderByCommodityid(courseId){
+    var isBuy = null;
+    $.ajax({
+        url: contextPath+ "/www/order/paidQuery",
+        type:"post",
+        async:false,
+        data:{
+            commodityId: courseId
+        },
+        success:function(result){
+            if(result.status == 0) {
+                isBuy = result.data;
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+    return isBuy;
+}
+
+function playCourse(courseId, sourceId, free){
+    if(findOrderByCommodityid(courseId) != false || free == '0'){
+        window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+courseId+'&sourceId='+sourceId;
+    }
 }
