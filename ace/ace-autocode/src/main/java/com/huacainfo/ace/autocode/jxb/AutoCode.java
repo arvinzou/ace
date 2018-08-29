@@ -6,9 +6,9 @@ public class AutoCode {
 
     public static void main(String[] args) throws Exception {
         AutoCodeUtils autoCodeUtils = new AutoCodeUtils("jxb", "课程资源", "Arvin");
-        Class<?> c = com.huacainfo.ace.jxb.model.CourseSource.class;
+        //Class<?> c = com.huacainfo.ace.jxb.model.CourseSource.class;
 //        Class<?> c = null;
-        autoCodeUtils.init(c);
+        //autoCodeUtils.init(c);
 
 //
 //===================================
@@ -26,12 +26,12 @@ public class AutoCode {
 
 
 //===================================
-        autoCodeUtils.createVO(c);
-        autoCodeUtils.createQVO(c);
-        autoCodeUtils.createDAO(c);
-        autoCodeUtils.createService(c);
-        autoCodeUtils.createServiceImpl(c);
-        autoCodeUtils.createAction(c);
+        //autoCodeUtils.createVO(c);
+       // autoCodeUtils.createQVO(c);
+       // autoCodeUtils.createDAO(c);
+       // autoCodeUtils.createService(c);
+       // autoCodeUtils.createServiceImpl(c);
+       // autoCodeUtils.createAction(c);
 
     }
 

@@ -48,4 +48,6 @@
 	<!--
 	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
 	-->
+
+	<bean id="loginFailureListener" class="com.huacainfo.ace.portal.web.listener.LoginFailureListener"/>
 </beans>

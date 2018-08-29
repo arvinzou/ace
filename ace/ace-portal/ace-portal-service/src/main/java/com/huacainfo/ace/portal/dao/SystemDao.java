@@ -121,4 +121,6 @@ public interface SystemDao {
 	public abstract void updateEmail(@Param("email") String email,
 			@Param("userId") String userId);
 
+	int updateUserLocked(@Param("locked")String locked,@Param("account")String account);
+
 }

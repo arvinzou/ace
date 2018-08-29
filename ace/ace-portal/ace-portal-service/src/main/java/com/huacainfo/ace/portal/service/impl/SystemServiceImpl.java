@@ -1,19 +1,23 @@
 package com.huacainfo.ace.portal.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.mail.MessagingException;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.model.view.Tree;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.common.service.WebContextParamService;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonTreeUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.dao.SystemDao;
+import com.huacainfo.ace.portal.dao.UserCfgDao;
+import com.huacainfo.ace.portal.dao.UserinfoDao;
+import com.huacainfo.ace.portal.dao.UsersDao;
+import com.huacainfo.ace.portal.model.Config;
+import com.huacainfo.ace.portal.model.Resources;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.*;
+import com.huacainfo.ace.portal.tools.TreeUtils;
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,21 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.model.view.Tree;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.service.WebContextParamService;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.CommonTreeUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.dao.SystemDao;
-import com.huacainfo.ace.portal.dao.UsersDao;
-import com.huacainfo.ace.portal.dao.UserCfgDao;
-import com.huacainfo.ace.portal.dao.UserinfoDao;
-import com.huacainfo.ace.portal.model.Config;
-import com.huacainfo.ace.portal.model.Resources;
-import com.huacainfo.ace.portal.model.Users;
-import com.huacainfo.ace.portal.tools.TreeUtils;
+import javax.mail.MessagingException;
+import java.util.*;
 
 @Service("systemService")
 public class SystemServiceImpl implements SystemService, WebContextParamService {
@@ -399,4 +390,10 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 		this.logger.info("===============>selectUsersByOpenId-> {}",u);
 		return u;
 	}
+	@Override
+	public MessageResponse lockUser(String account){
+		this.systemDao.updateUserLocked("1",account);
+		return new MessageResponse(0, "OK");
+	}
+
 }

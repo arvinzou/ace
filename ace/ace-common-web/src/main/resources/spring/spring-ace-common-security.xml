@@ -127,4 +127,6 @@
                 class="org.springframework.security.access.vote.RoleVoter">
         <beans:property name="rolePrefix" value="AUTH_"/>
     </beans:bean>
+
+
 </beans:beans>

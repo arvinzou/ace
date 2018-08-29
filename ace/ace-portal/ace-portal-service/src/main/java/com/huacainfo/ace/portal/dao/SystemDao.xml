@@ -22,6 +22,7 @@
 		<result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR" />
 		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
 		<result column="cur_syid" property="curSyid" jdbcType="VARCHAR" />
+		<result column="locked" property="locked" jdbcType="VARCHAR" />
 	</resultMap>
 	<resultMap id="department" type="com.huacainfo.ace.portal.model.Department">
 		<id column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR" />
@@ -101,7 +102,8 @@
 	t.create_time,
 	a.parent_department_id
 	parentCorpId,a.department_name corpName,
-	t.cur_syid
+	t.cur_syid,
+	t.locked
 	from users t left join
 	department a on t.department_id=a.department_id where
 	t.account=#{account}
@@ -351,9 +353,13 @@
 		t.create_time,
 		a.parent_department_id
 		parentCorpId,a.department_name corpName,
-		t.cur_syid
+		t.cur_syid,
+		t.locked
 		from users t left join
 		department a on t.department_id=a.department_id where
 		t.openId=#{openId}
 	</select>
+	<update id="updateUserLocked">
+		update users set locked=#{locked} where account=#{account}
+	</update>
 </mapper>

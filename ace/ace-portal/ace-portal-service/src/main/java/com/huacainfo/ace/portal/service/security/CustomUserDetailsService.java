@@ -1,11 +1,10 @@
 package com.huacainfo.ace.portal.service.security;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
+import com.huacainfo.ace.common.security.spring.AspireGrantedAuthority;
+import com.huacainfo.ace.common.security.spring.BasicUsers;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.portal.service.SystemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.security.spring.AspireGrantedAuthority;
-import com.huacainfo.ace.common.security.spring.BasicUsers;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.model.Users;
-import com.huacainfo.ace.portal.service.SystemService;
+import java.util.*;
 /**
  * 该类的主要作用是为Spring Security提供一个经过用户认证后的UserDetails。
  * 该UserDetails包括用户名、密码、是否可用、是否过期等信息。 sparta 11/3/29
@@ -95,14 +90,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 					syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
 					true, true, auths, roleType, syUser.getParentCorpId(),
 					syUser.getEmail(), syUser.getAccount(), role, syid, syUser.getCurSyid(),cfg,syUser.getOpenId(),syUser.getAppOpenId());
+			if(syUser.getLocked()!=null){
+				if(syUser.getLocked().equals("1")){
+					o.setAccountNonLocked(false);
+				}
+			}
+
 			logger.info("============加载用户信息完成============:{}", o);
+
 			return o;
 		} else {
-
-			return new BasicUsers("0", "default", "default", "default",
-					"default", "default", "default", "default", false, true,
-					true, false, auths, null, "default", null, null, null,
-					null, null,null,null,null);
+			throw new UsernameNotFoundException("鉴权失败,不存在的账号");
 		}
 	}
 }
