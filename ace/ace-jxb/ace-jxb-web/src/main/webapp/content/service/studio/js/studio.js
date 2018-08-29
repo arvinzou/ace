@@ -62,6 +62,9 @@ function userStudioStaff(id) {
 /*点击创建工作室*/
 function createStudio() {
     cleanForm();
+    $('input[name="form_name"]').removeAttr("readonly");
+    $('.form_logoImgUrl').attr("data-target", "#img-uploader");
+    $('.form_logoImgUrl').attr("data-toggle", "modal");
     $('#studioInfoModal').modal('show');
     $('.submit_btn').off("click");
     $('.submit_btn').click(createMyStudio);
