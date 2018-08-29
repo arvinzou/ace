@@ -249,3 +249,10 @@ ul,li{
     -webkit-align-items: center;
     align-items: center;
 }
+
+ .swiper-button-prev {
+	 background-image: url(../img/left.png) !important;
+ }
+.swiper-button-next {
+	background-image: url(../img/right.png) !important;
+}
