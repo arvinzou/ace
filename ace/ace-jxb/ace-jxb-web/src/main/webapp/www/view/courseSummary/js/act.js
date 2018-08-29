@@ -42,6 +42,10 @@ window.onload = function(){
 
 
 function commentModal() {
+    if (cost == '免费') {
+        $('#myModal').modal('show');
+        return;
+    }
     var url = "/jxb/www/order/paidQuery";
     var data = {
         commodityId: primaryId,
