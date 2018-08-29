@@ -43,41 +43,23 @@
 <script>
  var reg = /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{8,16}/i;
 window.onload=function(){
-
-		$('#fm-password').ajaxForm({
-				beforeSubmit: function (formData, jqForm, options) {
-					var params = {};
-					$.each(formData, function (n, obj) {
-						params[obj.name] = obj.value;
-					});
-					$.extend(params, {
-						time: new Date()
-					});
-					console.log(params);
-					edit(params);
-					return false;
-				}
-			});
-			$.validator.setDefaults({
-			 	submitHandler: function(form) { alert("submitted!");form.submit(); }
-			});
 			jQuery.validator.addMethod("isPwdCode", function(value, element) {
-				var tel = /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{8,16}/i;
+				var tel = /(?=.*[a-z])(?=.*\d)(?=.*[$#@!~%^&*])[a-z\d$#@!~%^&*]{6,16}/i;
 				return this.optional(element) || (tel.test(value));
-			}, "尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
- 		$("#fm-password").validate({
+			}, "尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于6位 、包含字母、数字、特殊符号，谢谢！");
+			var rule={
             onkeyup: function(element) { $(element).valid(); },
 			rules: {
 				password: {
 					required: true,
 					minlength: 6,
-					maxlength:20,
+					maxlength:16,
 					isPwdCode:true
 				},
 				repassword: {
 					required: true,
 					minlength: 6,
-					maxlength:20,
+					maxlength:16,
 					equalTo: "#password",
 					isPwdCode:true
 				}
@@ -95,13 +77,26 @@ window.onload=function(){
 					maxlength: jQuery.format("密码不能大于{0}个字符")
 				}
 			}
-		});
+		};
+		$("#fm-password").validate(rule);
+		$('#fm-password').ajaxForm({
+				beforeSubmit: function (formData, jqForm, options) {
+					var params = {};
+					$.each(formData, function (n, obj) {
+						params[obj.name] = obj.value;
+					});
+					$.extend(params, {
+						time: new Date()
+					});
+					console.log(params);
+					edit(params);
+					return false;
+				}
+			});
+
+
 }
 function edit(params) {
-		if (!reg.test(params.password)) {
-            alert("尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
-            return;
-        }
 	if (confirm("确定要修改吗？")) {
 		$.ajax({
 			type : "post",
