@@ -499,9 +499,9 @@
                 <div class="idCardBox">
                     <img class="select_img form_idCardImgUrl"
                          id="IDcardz"
-                         data-cover="IDcardz" \${data.regAuditRst!=1?'data-toggle="modal" data-target="#img-uploader"':''}
-                    data-xsize="240" data-ysize="150"
-                    src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
+                         data-cover="IDcardz" \${data.regAuditRst!=1?'data-toggle=modal data-target=#img-uploader':''}
+                         data-xsize="240" data-ysize="150"
+                         src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
 
 
                 </div>
@@ -512,9 +512,9 @@
                 <div class="idCardBox form_idCardSideImgUrl">
                     <img class="select_img"
                          data-cover="IDcardf"
-                         data-xsize="240" data-ysize="150" \${data.regAuditRst!=1?'data-toggle="modal"
-                         data-target="#img-uploader"':''}
-                    src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
+                         data-xsize="240" data-ysize="150" \${data.regAuditRst!=1?'data-toggle=modal
+                         data-target=#img-uploader':''}
+                         src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
                 </div>
                 <p>身份证反面</p>
             </div>
@@ -526,8 +526,8 @@
                          id="IDcardsc"
                          data-cover="IDcardsc"
                          data-xsize="240" data-ysize="150"
-                         \${data.regAuditRst!=1?'data-toggle="modal" data-target="#img-uploader"':''}
-                    src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
+                         \${data.regAuditRst!=1?'data-toggle=modal data-target=#img-uploader':''}
+                         src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
                 </div>
                 <p>手持身份证</p>
             </div>
@@ -592,8 +592,8 @@
                          id="certificateimg"
                          data-cover="certificateimg"
                          data-xsize="240" data-ysize="150"
-                         \${data.regAuditRst!=1?'data-toggle="modal" data-target="#img-uploader"':''}
-                    src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
+                         \${data.regAuditRst!=1?'data-toggle=modal data-target=#img-uploader':''}
+                         src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
                 </div>
                 <p>从业资格证书</p>
             </div>

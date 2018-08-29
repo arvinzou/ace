@@ -79,13 +79,14 @@ function fillForm(data) {
 }
 
 function filloption(tag, tags) {
-    for (var i = 0; i < tag.length; i++) {
-        var text = tag.eq(i).find('label').text().trim();
-        if (tags.indexOf(text) != -1) {
-            tag.eq(i).find('input').attr('checked', true)
+    if (tags) {
+        for (var i = 0; i < tag.length; i++) {
+            var text = tag.eq(i).find('label').text().trim();
+            if (tags.indexOf(text) != -1) {
+                tag.eq(i).find('input').attr('checked', true)
+            }
         }
     }
-    ;
 }
 
 
