@@ -94,7 +94,7 @@
                                                                             <table class="table table-hover">
                                                                                 <thead>
                                                                                     <tr>
-                                                                                        <th width="30%">名字</th>
+                                                                                        <th width="30%">标题</th>
                                                                                         <th width="30%">摘要</th>
                                                                                         <th width="10%">类型</th>
 																																												<th width="10%">已测人数</th>
