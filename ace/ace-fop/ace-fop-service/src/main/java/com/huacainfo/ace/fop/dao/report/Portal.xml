@@ -22,11 +22,29 @@
   </select>
 
     <select id="portalCount" resultType="java.util.Map" parameterType="java.lang.String">
+        select
+        r.cCount + r.aCount as companyCount,
+        r.mcCount + r.maCount as memberCount,
+        iCount as infoCount
+        from (
         SELECT
-            (select count(1) from  fop.fop_company ) as companyCount,
-            (SELECT count(1) from fop.fop_member ) as memberCount,
-        (select count(1) from fop.information_service ) as infoCount
-        FROM fop.fop_company t
+        (
+        SELECT count(1) FROM fop.fop_company c
+        WHERE c.companyType in ('0','2','3','4')
+        and c.`status` IN ('1','2')
+        ) AS cCount,
+        ( SELECT count(1) FROM fop.fop_association a WHERE a.`status` IN ('1','2') ) AS aCount,
+        (
+        SELECT count(1)
+        FROM fop.fop_company c
+        WHERE c.companyType in ('0','2','3','4')
+        and c.`status` IN ('2')
+        ) AS mcCount,
+        (SELECT count(1) FROM fop.fop_association a WHERE a.`status` IN ('1','2') ) AS maCount,
+        (SELECT count(1) FROM fop.information_service) AS iCount
+        FROM
+        fop.fop_company t
         LIMIT 1
+        ) r
     </select>
 </mapper>
