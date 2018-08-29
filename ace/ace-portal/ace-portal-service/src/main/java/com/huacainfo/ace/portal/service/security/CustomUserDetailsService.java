@@ -98,6 +98,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			logger.info("============加载用户信息完成============:{}", o);
 			return o;
 		} else {
+
 			return new BasicUsers("0", "default", "default", "default",
 					"default", "default", "default", "default", false, true,
 					true, false, auths, null, "default", null, null, null,
