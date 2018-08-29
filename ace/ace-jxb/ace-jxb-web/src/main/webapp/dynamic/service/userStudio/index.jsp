@@ -136,8 +136,8 @@
                                     <div>
                                         <div class="studiologo" id="studiologo">
                                             <img class="select_img form_logoImgUrl" id="logo" data-cover="logo"
-                                                 data-toggle="modal" data-againadd="false" data-xsize="300"
-                                                 data-ysize="300" data-target="#img-uploader"
+                                                 data-toggle="" data-againadd="false" data-xsize="300"
+                                                 data-ysize="300" data-target=""
                                                  src="${pageContext.request.contextPath}/content/service/studio/img/addImg.png?v=${cfg.version}">
                                         </div>
                                         <p class="hide">工作室logo</p>

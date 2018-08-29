@@ -142,25 +142,6 @@ function getMyStudioList() {
 }
 
 
-// /*获取我的信息*/
-// function getUserinfo() {
-//     var url = "/jxb/counselor/getMyinfo"
-//     $.getJSON(url, function (result) {
-//         if (result.status == 0) {
-//             viewUserinfo(result.value);
-//             // fillForm(result.value)
-//         }
-//     })
-// }
-//
-// /*渲染我的信息*/
-// function viewUserinfo(data) {
-//     for (key in data) {
-//         $('.user-' + key).text(data[key]);
-//     }
-//     ;
-//     $('.user-imagePhotoUrl').prop('src', data['imagePhotoUrl']);
-// }
 
 var studioId;
 
@@ -210,6 +191,15 @@ function getStudioInfo(id) {
 
 /*修改数据钱填充数据*/
 function fillForm(data) {
+    if (data.status == 1) {
+        $('input[name="form_name"]').attr("readonly", "readonly");
+        $('.form_logoImgUrl').attr("data-target", "");
+        $('.form_logoImgUrl').attr("data-toggle", "");
+    } else {
+        $('input[name="form_name"]').removeAttr("readonly");
+        $('.form_logoImgUrl').attr("data-target", "#img-uploader");
+        $('.form_logoImgUrl').attr("data-toggle", "modal");
+    }
     for (key in data) {
         if (key.indexOf("Url") != -1) {
             $('.form_' + key).prop("src", data[key]);
