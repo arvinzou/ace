@@ -163,7 +163,13 @@
                 <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
                 <div class="col-md-9">
                     <div class="describtion">\${item.name}</div>
-                    <div class="cost">\${item.srcCount}节  ￥\${item.cost}</div>
+                    <div class="cost">\${item.srcCount}节
+                        {@if item.costType != '0'}
+                        ￥\${item.cost}
+                        {@else}
+                        免费
+                        {@/if}
+                    </div>
                 </div>
             </div>
         </td>
