@@ -193,7 +193,7 @@
         	</div>
 			{@each chapter.sourceList as item, num}
 			{@if item.name != '' && item.name != undefined}
-        	<div class="row" onclick="playSource('\${item.id}')">
+        	<div class="row" onclick="playSource('\${item.id}','\${item.free}')">
 				<div class="row">
 					<div class="col-xs-2 col-md-2"><img src="img/icon-play.png" class="play" /></div>
 					<div class="col-xs-10 col-md-10">
