@@ -53,15 +53,16 @@ body{
 	border-radius: 0.32rem;
 	background: #5CE1D6;
 	color: #FFFFFF;
+	text-align: center;
 }
 .title02{
 	font-size: 0.32rem;
-	padding-left: 0.866666rem;
+/*	padding-left: 0.866666rem;*/
 }
 .statics{
 	font-size: 0.906666rem;
 	font-weight: bold;
-	padding-left: 0.866666rem;
+	/*padding-left: 0.866666rem;*/
 }
 .statics_detail{
 	text-align: center;

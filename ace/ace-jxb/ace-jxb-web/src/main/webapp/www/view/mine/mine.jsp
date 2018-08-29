@@ -26,7 +26,7 @@
 					<span class="img_box"><img src="\${data.headimgurl}"/></span>
 					{@/if}
 				</div>
-				<div class="col-xs-7 col-sm-7">
+				<div class="col-xs-7 col-sm-7" style="padding-left: 0!important;">
 					<div class="row">
 						<div class="col-xs-5 col-sm-5" style="padding: 0;"><p class="title01">\${data.counselor.name}</p></div>
 						<div class="col-xs-7 col-sm-7">
@@ -94,8 +94,8 @@
 			</div>
 			<div class="row menu-li">
 				<div class="col-xs-9 col-sm-9"><p class="menu_title">是否在线</p></div>
-				<div class="col-xs-3 col-sm-3">
-					<img id="offline" src="img/switch_off.png" style="width: 1.346666rem;height: 0.64rem;" onclick="switchOffline();"/>
+				<div class="col-xs-3 col-sm-3" id="onOrOff">
+
 				</div>
 			</div>
 			<div class="row menu-li" onclick="showMycount();">
@@ -107,7 +107,7 @@
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
 			<div class="row menu-li" onclick="showMyOrder();">
-				<div class="col-xs-10 col-sm-10"><p class="menu_title">我的订单</p></div>
+				<div class="col-xs-10 col-sm-10"><p class="menu_title">咨询我的</p></div>
 				<div class="col-xs-2 col-sm-2"><img class="next" src="img/next.png"/></div>
 			</div>
 		<%--	<div class="row menu-li">
@@ -119,5 +119,13 @@
 				<div class="col-xs-2 col-sm-2"><a href="tel:0736-7083862"><img class="next" src="img/next.png"/></a></div>
 			</div>
 		</div>
+
+		<script id="onOffTemp" type="text/template">
+			{@if counselor.onlineStatus == '1'}
+			<img id="offline" src="img/switch_on.png" style="width: 1.346666rem;height: 0.64rem;" onclick="switchOffline();"/>
+			{@else}
+			<img id="offline" src="img/switch_off.png" style="width: 1.346666rem;height: 0.64rem;" onclick="switchOffline();"/>
+			{@/if}
+		</script>
 	</body>
 </html>

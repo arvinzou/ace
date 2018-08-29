@@ -193,10 +193,10 @@
         	</div>
 			{@each chapter.sourceList as item, num}
 			{@if item.name != '' && item.name != undefined}
-        	<div class="row" onclick="playSource('\${item.id}','\${item.free}')">
+        	<div class="row course_source" onclick="playSource('\${item.id}','\${item.free}')">
 				<div class="row">
 					<div class="col-xs-2 col-md-2"><img src="img/icon-play.png" class="play" /></div>
-					<div class="col-xs-10 col-md-10">
+					<div class="col-xs-10 col-md-10" style="padding-left: 0!important;">
 						<span class="number">\${parseInt(num)+1}</span>
 						<span class="chapter_title">\${item.name}</span>
         			</div>
