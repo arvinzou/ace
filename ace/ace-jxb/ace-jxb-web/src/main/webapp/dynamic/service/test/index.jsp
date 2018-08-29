@@ -342,7 +342,7 @@
                                         <th width="20% "> 操作</th>
                                     </tr>
                                     </thead>
-                                    <tbody class="gauge-list ">
+                                            <tbody class="gauge-list">
                                     <tr>
                                         <th width="30% "> 大于 <input class="form_score " type="text ">分</th>
                                         <th width="50% "><textarea rows="1 "
@@ -361,7 +361,7 @@
                         </div>
                         <div class="row ">
                             <div class="col-md-2 col-md-offset-5 ">
-                                <button type="button " id="add-gauge " class=" col-md-12 btn btn-circle btn-success ">添 加
+                                <button type="button" id="add-gauge" class=" col-md-12 btn btn-circle btn-success ">添 加
                                 </button>
                             </div>
                         </div>
