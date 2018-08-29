@@ -167,61 +167,32 @@
     <table class="table table-hover table-light" align="center" border="0" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
-            <%--<th width="5%">订单号</th>--%>
-            <th width="15%">用户昵称</th>
-            {@if orderCategory == 1}
-            <th width="30%">咨询方式</th>
-            <th width="10%">咨询师名称</th>
-            {@else if orderCategory == 2}
-            <th width="30%">课程名称</th>
-            <th width="10%">咨询师名称</th>
-            {@else if orderCategory == 3}
-            <th width="40%">测试名称</th>
-            {@/if}
-            <th width="5%">付款金额</th>
-            <th width="20%">下单时间</th>
-            <th width="5%">订单状态</th>
-            <th width="15%">操作</th>
+            <th width="20%">咨询师名称</th>
+            <th width="10%">当前岗位名称</th>
+            <th width="10%">分成比例</th>
+            <th width="20%">年份</th>
+            <th width="20%">季度</th>
+            <th width="10%">累计推广老师人数</th>
+            <th width="10%">营业额(元)</th>
         </tr>
         </thead>
         <tbody>
         {@each data as item}
         <tr>
-            <td>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row" style="margin: 0px">
-                            <img class="cover user-pic" src="\${item.consumerImgUrl}">
-                        </div>
-                        <div class="row" style="margin: 6px 0px 0px 6px;">
-                            \${item.consumerName}
-                        </div>
-                    </div>
-
-                </div>
-            </td>
-            {@if item.category == 1}
-            <td>\${formatCPntType(item.consultProduct.type)} x \${item.amount}次</td>
-            <td>\${item.counselor.name}</td>
-            {@else if item.category == 2}
-            <td>\${item.course.name}</td>
-            <td>\${item.counselor.name}</td>
-            {@else if orderCategory == 3}
-            <td>\${item.commodityName}</td>
-            {@/if}
-            <td>￥\${item.payMoney}</td>
-            <td>\${item.createDate}</td>
-            <td><span
-                    class="label label-lg  \${item.payStatus==1?'label-danger':item.payStatus==2?'label-success':'label-info'}">\${formatPayStatus(item.payStatus)}</span>
-            </td>
-            <td><a onclick="javascript:detail('\${item.id}')" class="primary-link">查看详情</a></td>
+            <td>\${item.counselorName}</td>
+            <td>\${item.postName}</td>
+            <td>\${item.ratio}</td>
+            <td>\${item.checkYear}</td>
+            <td>\${item.checkQuarter}</td>
+            <td>\${item.counselorNum}</td>
+            <td>\${item.turnover}</td>
         </tr>
         {@/each}
         </tbody>
     </table>
 </script>
 
-<script id="temp_orderInfo" type="text/template">
+<script id="tmpl-detail-info" type="text/template">
 
     <table class="table table-bordered table-hover">
         <tr>
