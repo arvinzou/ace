@@ -1,5 +1,4 @@
 window.onload = function () {
-
     initPage();
 };
 
@@ -25,21 +24,22 @@ function getDataList(num, type) {
         page: num,
         limit: 20
     }
+    startLoad();
     $.getJSON(url, data, function (result) {
+        stopLoad();
+        console.log("tatol:" + result.total);
+        console.log(JSON.stringify(result));
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: result.data.total,
+                    totalCounts: result.total,
                 });
             }
             var navitem = document.getElementById('tmpl-data-list').innerHTML;
-            var html = juicer(
-                navitem,
-                {
-                    data: result.data.list,
-                }
-            );
-
+            var html = juicer(navitem, {
+                data: result.rows,
+            });
+            console.log(html);
             $("#data-list").html(html);
 
         }

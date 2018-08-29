@@ -6,8 +6,13 @@
 	margin-left: 0 !important;
 	margin-right: 0 !important;
 }
+.title{
+	font-size: 0.4rem !important;
+	color: #1C2843;
+	font-weight: bold;
+}
 .chapter_title{
-	font-size: 0.4rem;
+	font-size: 0.4rem !important;
 	color: #1C2843;
 }
 .try{
@@ -44,4 +49,9 @@
 .play{
 	width: 0.613333rem;
 	height: 0.613333rem;
+}
+.course_source{
+	padding-top: 0.4rem;
+	padding-bottom: 0.4rem;
+	border-top: 1px solid #F7F8FC;
 }

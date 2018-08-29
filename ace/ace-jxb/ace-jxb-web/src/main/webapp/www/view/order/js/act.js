@@ -38,6 +38,8 @@ window.onload = function(){
     index = layer.open({
         type: 1,
         content: $("#notes").html(),
+        btn: '我知道了',
+
         shadeClose: false,
     });
 

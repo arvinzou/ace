@@ -95,8 +95,13 @@
 	color: #C4C8D6;
 	font-size: 0.32rem;
 }
+
+.clabel li:nth-child(4n+0) {
+	margin-right: 0px;
+}
+
 .clabel li{
-	width: 2.1rem;
+	width: 1.6rem;
 	height: 0.68rem;
 	line-height: 0.68rem;
 	display: block;
@@ -104,20 +109,12 @@
 	border-radius: 0.34rem;
 	color: #c6cad3;
 	border: 1px solid #c6cad3;
-	/*background:rgba(160,167,182,0.1);*/
-	font-size: 0.32rem;
+	font-size: 0.3rem;
 	text-align: center;
-	margin-right: 0.24rem;
+	margin-right: 0.2rem;
 	margin-bottom: 0.2rem;
 }
-.clabel li:after{
-	content: "";
-	clear: both;
-}
-.downlist li:after{
-	content: "";
-	clear: both;
-}
+
 .checked{
 	background-color: #49D0C5;
 	color: #FFFFFF !important;

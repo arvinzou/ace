@@ -28,6 +28,12 @@ function initData(){
                     });
                     signDays = result.data.signInfo.signCount;
                     $(".sign_info").html(signText);
+
+                    var onOrOff = document.getElementById('onOffTemp').innerHTML;
+                    var onOrOffHtml = juicer(onOrOff, {
+                        counselor: result.data.counselor
+                    });
+                    $("#onOrOff").append(onOrOffHtml);
                 }else if(result.status == 0 && result.data.memberType == '2'){
                     window.location.href = contextPath + '/www/view/member/index.jsp'
                 }

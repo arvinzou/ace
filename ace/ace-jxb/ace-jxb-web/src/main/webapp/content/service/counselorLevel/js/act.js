@@ -59,7 +59,7 @@ function initvalidateform() {
 
 
 function hideHint() {
-    console.log(23333333333333333);
+    // console.log(23333333333333333);
     var $that = $(this);
     $that.next().text("");
 }

@@ -211,7 +211,7 @@
 	<!--预约须知-->
 	<div class="notes" id="notes" style="display: none;">
 		<div class="row">
-			<p class="ftitle">预约肖海平老师须知</p>
+			<p class="ftitle">预约须知</p>
 		</div>
 		<div class="row">
 			<p class="stitle"><span class="dot"></span><span>回应时长</span></p>
@@ -235,8 +235,8 @@
 		<div class="row">
 			<p class="note_content">咨询结束的时间不变，请留意时间哦~</p>
 		</div>
-		<div class="row noteopt" style="text-align: center;">
+		<%--<div class="row noteopt" style="text-align: center;">
 			<button class="readnote" onclick="closeTips();">我知道了</button>
-		</div>
+		</div>--%>
 	</div>
 </html>

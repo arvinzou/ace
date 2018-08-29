@@ -147,7 +147,7 @@ function submitForm() {
         alert("需要上传身份证反面照");
         return null;
     }
-    formObject.idCardImgUrl1 = idCardImgUrl1;
+    formObject.idCardSideImgUrl = idCardImgUrl1;
 
 
     var evidenceImgUrl = $('#IDcardsc').prop('src');

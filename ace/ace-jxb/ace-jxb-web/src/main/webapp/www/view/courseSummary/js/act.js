@@ -42,6 +42,10 @@ window.onload = function(){
 
 
 function commentModal() {
+    if (cost == '免费') {
+        $('#myModal').modal('show');
+        return;
+    }
     var url = "/jxb/www/order/paidQuery";
     var data = {
         commodityId: primaryId,
@@ -136,9 +140,13 @@ function viewHtml(IDom, data, tempId) {
 
 }
 
-function playSource(sourceId){
+function playSource(sourceId, free){
     if(findOrderByCommodityid() == false && cost != '免费'){
-        alert("课程必须先购买！");
+        if(free == '0'){   //可试听
+            window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId+'&sourceId='+sourceId;
+        }else{
+            alert("课程必须先购买！");
+        }
     }else{
         window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+primaryId+'&sourceId='+sourceId;
     }
