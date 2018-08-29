@@ -51,14 +51,7 @@ app.controller(ngControllerName,function($scope,$sce){
                                     '<img class="slideImg" src="'+result.data.carousel[3].resUrl+'" style="width: 100%;height: 100%;">\n' +
                                 '</div>';
                 $("#swiperBox").html(htmlTemp);
-                var mySwiper = new Swiper('.swiper-container',{
-                    pagination : '.swiper-pagination',
-                    paginationClickable: true,
-                    longSwipesRatio: 0.3,
-                    touchRatio:1,
-                    observer:true,//修改swiper自己或子元素时，自动初始化swiper
-                    observeParents:true,//修改swiper的父元素时，自动初始化swiper
-                });
+                var swiper = new Swiper('.swiper-container');
 
                 status = result.data.status;
                 if (!$scope.$$phase) {
