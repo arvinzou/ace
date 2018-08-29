@@ -217,7 +217,7 @@ function fillForm(data) {
         }
         $('[name=form_' + key + ']').val(data[key]);
     }
-    editor.setValue(data['introduce']);
+    editor.setValue(data['introduce'] ? data['introduce'] : '');
     var imgs = data['imgList'];
     for (var i = 0; i < imgs.length; i++) {
         var index = $('#indexImg').siblings().length;
@@ -237,6 +237,10 @@ function fillForm(data) {
 
 /*提交表单获取数据*/
 function submitForm() {
+    if (!$(".protocol[type='checkbox']").prop('checked')) {
+        alert("需要同意工作室服务协议");
+        return null;
+    }
     var formObject = {
         name: "notNull",
         introduce: "notNull1",
