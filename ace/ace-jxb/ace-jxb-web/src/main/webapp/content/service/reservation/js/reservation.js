@@ -132,9 +132,11 @@ function submitForm() {
     $('#field :checkbox:checked').each(function (i) {
         arr[i] = $(this).next().text().trim();
     });
-    var field = arr.join(",");
-    if (field.length == 0) {
+    if (arr.length == 0) {
         alert("还没有选择您的个人擅长");
+        return
+    } else if (arr.length > 4) {
+        alert("个人擅长最多只能选择四项");
         return
     }
     formObject.field = field;
