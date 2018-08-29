@@ -122,6 +122,7 @@ function getMyStudioList() {
     var url = "/jxb/studio/getMyStudioList";
     $.getJSON(url, function (result) {
         if (result.status == 0) {
+            $("#studioList").empty();
             if (result.data.join) {
                 var navitem = document.getElementById('temp_studioList1').innerHTML;
                 var html = juicer(navitem, {
