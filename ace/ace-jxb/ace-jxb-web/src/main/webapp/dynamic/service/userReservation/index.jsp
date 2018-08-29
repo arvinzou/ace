@@ -172,18 +172,18 @@
 
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group ">
-                                                                                <label class="col-md-3 control-label"><span
-                                                                                        class="required"
-                                                                                        aria-required="true">*</span>预约须知
+                                                                            <%-- <div class="form-group ">
+                                                                                 <label class="col-md-3 control-label"><span
+                                                                                         class="required"
+                                                                                         aria-required="true">*</span>预约须知
 
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <textarea class="form-control" id="notNull1" name="form_info" rows="5"></textarea>
-                                                                                    <span class="error_message"></span>
-                                                                                    <div class="form-control-focus"></div>
-                                                                                </div>
-                                                                            </div>
+                                                                                 </label>
+                                                                                 <div class="col-md-9">
+                                                                                     <textarea class="form-control" id="notNull1" name="form_info" rows="5"></textarea>
+                                                                                     <span class="error_message"></span>
+                                                                                     <div class="form-control-focus"></div>
+                                                                                 </div>
+                                                                             </div>--%>
 
                                                                             <div class="form-group ">
                                                                                 <label class="col-md-3 control-label"><span

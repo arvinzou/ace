@@ -25,8 +25,6 @@
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">
     <script src="${pageContext.request.contextPath}/content/service/information/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 
@@ -67,302 +65,8 @@
 
                                             <div class="portlet-body">
                                                 <div class="form-horizontal" novalidate="novalidate">
-                                                    <div class="form-body">
+                                                    <div class="form-body" id="form_content">
 
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label">
-                                                                <span class="required" aria-required="true">*</span>
-                                                                名字
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" id="chineseName" class="form-control"
-                                                                       placeholder="" name="form_name">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group">
-                                                            <label class="col-md-3 control-label">
-                                                                <span class="required" aria-required="true">*</span>
-                                                                性别
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="md-radio-inline">
-                                                                    <div class="md-radio">
-                                                                        <input type="radio" checked id="checkbox1_8"
-                                                                               name="form_sex" value="1"
-                                                                               class="md-radiobtn">
-                                                                        <label for="checkbox1_8">
-                                                                            <span class="inc"></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>男</label>
-                                                                    </div>
-
-                                                                    <div class="md-radio">
-                                                                        <input type="radio" id="checkbox1_9"
-                                                                               name="form_sex"
-                                                                               value="2"
-                                                                               class="md-radiobtn">
-                                                                        <label for="checkbox1_9">
-                                                                            <span></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>女
-                                                                        </label>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>所在城市
-
-                                                            </label>
-                                                            <div class="col-md-9 city-select"
-                                                                 id="single-select-1">
-                                                                <%--<input class="input_style form-control" id="city_edit"--%>
-                                                                <%--type="text"--%>
-                                                                <%--placeholder="请选择所属区域" name="form_area"--%>
-                                                                <%--autocomplete="off" readonly="true"/>--%>
-                                                                <input type="text"
-                                                                       class="input-search form-control"
-                                                                       value="" placeholder="请选择城市"/>
-                                                                <span class="error_message"></span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>个人简介
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <textarea class="form-control" id="notNull_profile"
-                                                                          name="form_profile"
-                                                                          rows="5"></textarea>
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>手机号码
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" id="mobilePhone"
-                                                                       placeholder=""
-                                                                       name="form_mobile"
-                                                                       readonly="readonly">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group ">
-                                                            <label class="control-label col-md-3"><span class="required"
-                                                                                                        aria-required="true">*</span>形象照
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div>
-                                                                    <div class="headimgbox" id="headimg">
-                                                                        <img class="select_img form_imagePhotoUrl"
-                                                                             id="headimg1"
-                                                                             data-toggle="modal"
-                                                                             data-xsize="300" data-ysize="300"
-                                                                             data-cover="headimg1"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/head.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>形象照</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>身份证号码
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" id="IDcard"
-                                                                       placeholder=""
-                                                                       name="form_idCard">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group ">
-                                                            <label class="control-label col-md-3"><span class="required"
-                                                                                                        aria-required="true">*</span>身份证
-
-                                                            </label>
-                                                            <div class="col-md-9 idCardBoxs">
-                                                                <div>
-                                                                    <div class="idCardBox">
-                                                                        <img class="select_img form_idCardImgUrl"
-                                                                             id="IDcardz"
-                                                                             data-cover="IDcardz" data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
-
-
-                                                                    </div>
-                                                                    <p>身份证正面</p>
-                                                                </div>
-
-                                                                <div>
-                                                                    <div class="idCardBox">
-                                                                        <img class="select_img" id="IDcardf"
-                                                                             data-cover="IDcardf" data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>身份证反面</p>
-                                                                </div>
-
-
-                                                                <div>
-                                                                    <div class="idCardBox">
-                                                                        <img class="select_img form_evidenceImgUrl"
-                                                                             id="IDcardsc"
-                                                                             data-cover="IDcardsc" data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>手持身份证</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>职业名称
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="md-radio-inline"
-                                                                     id="certification">
-                                                                    <div class="md-radio">
-                                                                        <input type="radio"
-                                                                               id="radios_1"
-                                                                               name="form_certification"
-                                                                               value="2"
-                                                                               class="md-radiobtn">
-                                                                        <label
-                                                                                for="radios_1"><span class="inc"></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>国家二级咨询师</label>
-                                                                    </div>
-                                                                    <div class="md-radio"><input type="radio"
-                                                                                                 id="radios_2"
-                                                                                                 name="form_certification"
-                                                                                                 value="3"
-                                                                                                 class="md-radiobtn">
-                                                                        <label
-                                                                                for="radios_2"><span class="inc"></span>
-                                                                            <span class="check"></span>
-                                                                            <span class="box"></span>国家三级咨询师</label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>从业资格证证号
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <input type="text" class="form-control" id="notNull1"
-                                                                       placeholder=""
-                                                                       name="form_certificateNo">
-                                                                <span class="error_message"></span>
-                                                                <div class="form-control-focus"></div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="form-group ">
-                                                            <label class="control-label col-md-3"><span class="required"
-                                                                                                        aria-required="true">*</span>从业资格证书
-
-                                                            </label>
-                                                            <div class="col-md-9 certificateBoxs">
-                                                                <div>
-                                                                    <div class="certificateBox">
-                                                                        <img class="select_img form_certificateImgUrl"
-                                                                             id="certificateimg"
-                                                                             data-cover="certificateimg"
-                                                                             data-toggle="modal"
-                                                                             data-xsize="240" data-ysize="150"
-                                                                             data-target="#img-uploader"
-                                                                             src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
-                                                                    </div>
-                                                                    <p>从业资格证书</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"> <span
-                                                                    class="required" aria-required="true">*</span>个案时长
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="input-icon right">
-                                                                    <input type="text" class="form-control"
-                                                                           id="naturalNumber"
-                                                                           name="form_duration"
-                                                                           placeholder="一共从事了多少小时">
-                                                                    <span class="error_message"></span>
-                                                                    <div class="form-control-focus"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <label class="col-md-3 control-label"><span class="required"
-                                                                                                        aria-required="true">*</span>个案人数
-
-                                                            </label>
-                                                            <div class="col-md-9">
-                                                                <div class="input-icon right">
-                                                                    <input type="text" class="form-control"
-                                                                           id="naturalNumber1"
-                                                                           name="form_peopleNum"
-                                                                           placeholder="一共辅导了多少人">
-                                                                    <span class="error_message"></span>
-                                                                    <div class="form-control-focus"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group ">
-                                                            <div class="col-md-9 col-md-offset-3">
-                                                                <input class="protocol" type="checkbox"/>
-                                                                <span></span>
-                                                                <span>
-                                                                                        同意
-                                                                                        <span class="primary-link"
-                                                                                              data-target="#modal-doc"
-                                                                                              data-toggle="modal">咨询师入驻协议</span>
-                                                                                    </span>
-                                                            </div>
-                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -381,15 +85,15 @@
                                 </div>
                             </div>
 
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="bottom"></div>
+<div class="bottom"></div>
 
 </div>
 
@@ -559,6 +263,7 @@
     html, body {
         height: 100%;
     }
+
     .hc-checkbox {
         width: 11em;
     }
@@ -634,7 +339,6 @@
         overflow: auto;
     }
 
-
     /*.city-select .city-info {*/
     /*border: 1px solid #ccc;*/
     /*background-color: #fcfcfc;*/
@@ -648,6 +352,300 @@
     /*}*/
 
 </style>
+
+
+<script id="temp-form_content" type="text/template">
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label">
+            <span class="required" aria-required="true">*</span>
+            名字
+        </label>
+        <div class="col-md-9">
+            <input type="text" id="chineseName" class="form-control" \${data.regAuditRst==1?'readonly':''}
+                   placeholder="" name="form_name">
+            <span class="error_message"></span>
+            <div class="form-control-focus"></div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-md-3 control-label">
+            <span class="required" aria-required="true">*</span>
+            性别
+        </label>
+        <div class="col-md-9">
+            <div class="md-radio-inline">
+                <div class="md-radio">
+                    <input type="radio" checked id="checkbox1_8" \${data.regAuditRst==1?'disabled':''}
+                           name="form_sex" value="1"
+                           class="md-radiobtn">
+                    <label for="checkbox1_8">
+                        <span class="inc"></span>
+                        <span class="check"></span>
+                        <span class="box"></span>男</label>
+                </div>
+
+                <div class="md-radio">
+                    <input type="radio" id="checkbox1_9" \${data.regAuditRst==1?'disabled':''}
+                           name="form_sex"
+                           value="2"
+                           class="md-radiobtn">
+                    <label for="checkbox1_9">
+                        <span></span>
+                        <span class="check"></span>
+                        <span class="box"></span>女
+                    </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label"><span class="required"
+                                                    aria-required="true">*</span>所在城市
+
+        </label>
+        <div class="col-md-9 city-select"
+             id="single-select-1">
+            <%--<input class="input_style form-control" id="city_edit"--%>
+            <%--type="text"--%>
+            <%--placeholder="请选择所属区域" name="form_area"--%>
+            <%--autocomplete="off" readonly="true"/>--%>
+            <input type="text"
+                   class="input-search form-control"
+                   value="" placeholder="请选择城市"/>
+            <span class="error_message"></span>
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label"><span class="required"
+                                                    aria-required="true">*</span>个人简介
+
+        </label>
+        <div class="col-md-9">
+        <textarea class="form-control" id="notNull_profile"
+                  name="form_profile"
+                  rows="5"></textarea>
+            <span class="error_message"></span>
+            <div class="form-control-focus"></div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label"><span class="required"
+                                                    aria-required="true">*</span>手机号码
+
+        </label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="mobilePhone"
+                   placeholder=""
+                   name="form_mobile"
+                   readonly="readonly">
+            <span class="error_message"></span>
+            <div class="form-control-focus"></div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label class="control-label col-md-3"><span class="required"
+                                                    aria-required="true">*</span>形象照
+
+        </label>
+        <div class="col-md-9">
+            <div>
+                <div class="headimgbox" id="headimg">
+                    <img class="select_img form_imagePhotoUrl"
+                         id="headimg1"
+                         data-toggle="modal"
+                         data-xsize="300" data-ysize="300"
+                         data-cover="headimg1"
+                         data-target="#img-uploader"
+                         src="${pageContext.request.contextPath}/content/service/information/img/head.png?v=${cfg.version}">
+                </div>
+                <p>形象照</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label"><span class="required"
+                                                    aria-required="true">*</span>身份证号码
+
+        </label>
+        <div class="col-md-9">
+            <input \${data.regAuditRst==1?'readonly':''} type="text" class="form-control" id="IDcard"
+                   placeholder=""
+                   name="form_idCard">
+            <span class="error_message"></span>
+            <div class="form-control-focus"></div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label class="control-label col-md-3"><span class="required"
+                                                    aria-required="true">*</span>身份证
+
+        </label>
+        <div class="col-md-9 idCardBoxs">
+            <div>
+                <div class="idCardBox">
+                    <img class="select_img form_idCardImgUrl"
+                         id="IDcardz"
+                         data-cover="IDcardz" \${data.regAuditRst!=1?'data-toggle="modal" data-target="#img-uploader"':''}
+                    data-xsize="240" data-ysize="150"
+                    src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
+
+
+                </div>
+                <p>身份证正面</p>
+            </div>
+
+            <div>
+                <div class="idCardBox form_idCardSideImgUrl">
+                    <img class="select_img"
+                         data-cover="IDcardf"
+                         data-xsize="240" data-ysize="150" \${data.regAuditRst!=1?'data-toggle="modal"
+                         data-target="#img-uploader"':''}
+                    src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
+                </div>
+                <p>身份证反面</p>
+            </div>
+
+
+            <div>
+                <div class="idCardBox">
+                    <img class="select_img form_evidenceImgUrl"
+                         id="IDcardsc"
+                         data-cover="IDcardsc"
+                         data-xsize="240" data-ysize="150"
+                         \${data.regAuditRst!=1?'data-toggle="modal" data-target="#img-uploader"':''}
+                    src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
+                </div>
+                <p>手持身份证</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label"><span class="required"
+                                                    aria-required="true">*</span>职业名称
+
+        </label>
+        <div class="col-md-9">
+            <div class="md-radio-inline"
+                 id="certification">
+                <div class="md-radio">
+                    <input type="radio" id="radios_1" \${data.regAuditRst==1?'disabled':''} name="form_certification"
+                           value="2" class="md-radiobtn">
+                    <label
+                            for="radios_1"><span class="inc"></span>
+                        <span class="check"></span>
+                        <span class="box"></span>国家二级咨询师</label>
+                </div>
+                <div class="md-radio"><input type="radio" id="radios_2" \${data.regAuditRst==1?'disabled':''}
+                                             name="form_certification"
+                                             value="3"
+                                             class="md-radiobtn">
+                    <label
+                            for="radios_2"><span class="inc"></span>
+                        <span class="check"></span>
+                        <span class="box"></span>国家三级咨询师</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label"><span class="required"
+                                                    aria-required="true">*</span>从业资格证证号
+
+        </label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="notNull1" \${data.regAuditRst==1?'readonly':''}
+                   placeholder=""
+                   name="form_certificateNo">
+            <span class="error_message"></span>
+            <div class="form-control-focus"></div>
+        </div>
+    </div>
+
+
+    <div class="form-group ">
+        <label class="control-label col-md-3"><span class="required"
+                                                    aria-required="true">*</span>从业资格证书
+
+        </label>
+        <div class="col-md-9 certificateBoxs">
+            <div>
+                <div class="certificateBox">
+                    <img class="select_img form_certificateImgUrl"
+                         id="certificateimg"
+                         data-cover="certificateimg"
+                         data-xsize="240" data-ysize="150"
+                         \${data.regAuditRst!=1?'data-toggle="modal" data-target="#img-uploader"':''}
+                    src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
+                </div>
+                <p>从业资格证书</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label class="col-md-3 control-label"> <span
+                class="required" aria-required="true">*</span>个案时长
+
+        </label>
+        <div class="col-md-9">
+            <div class="input-icon right">
+                <input type="text" class="form-control"
+                       id="naturalNumber"
+                       name="form_duration"
+                       placeholder="一共从事了多少小时">
+                <span class="error_message"></span>
+                <div class="form-control-focus"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <label class="col-md-3 control-label"><span class="required"
+                                                    aria-required="true">*</span>个案人数
+
+        </label>
+        <div class="col-md-9">
+            <div class="input-icon right">
+                <input type="text" class="form-control"
+                       id="naturalNumber1"
+                       name="form_peopleNum"
+                       placeholder="一共辅导了多少人">
+                <span class="error_message"></span>
+                <div class="form-control-focus"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group ">
+        <div class="col-md-9 col-md-offset-3">
+            <input class="protocol" type="checkbox"/>
+            <span></span>
+            <span>
+        同意
+        <span class="primary-link"
+              data-target="#modal-doc"
+              data-toggle="modal">咨询师入驻协议</span>
+        </span>
+        </div>
+    </div>
+
+</script>
 
 
 </html>
