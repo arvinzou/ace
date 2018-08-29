@@ -81,7 +81,7 @@
                                                                                 <th> 岗位名称</th>
                                                                                 <th> 营业额要求</th>
                                                                                 <th> 发展人数要求</th>
-                                                                                <th> 讲师分成比例</th>
+                                                                                <th> 咨询师分成比例</th>
                                                                                 <th colspan="2">操作</th>
                                                                             </tr>
                                                                             </thead>

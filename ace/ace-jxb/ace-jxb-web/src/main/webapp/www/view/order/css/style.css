@@ -303,8 +303,14 @@ textarea{
 .layui-m-layer1 .layui-m-layerchild{
 	width: 8.32rem!important;
 	height: 12.733333rem!important;
-	border-radius: 0.533333rem !important;
+	/*border-radius: 0.533333rem !important;*/
 	position: relative !important;
+}
+.layui-m-layerbtn span[yes]{
+	color: #49D0C5 !important;
+}
+.layui-m-layerbtn, .layui-m-layerbtn span{
+	border-radius: 0 !important;
 }
 .layui-m-layercont{
 	width: 100%;
@@ -369,4 +375,7 @@ textarea{
 .tagboard li :after{
 	content: '';
 	clear: both;
+}
+.msg{
+	color: #49D0C5;
 }
