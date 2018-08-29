@@ -85,6 +85,7 @@ function audit(){
         success:function(result){
             if(result.status == 0) {
                 alert("审核成功！");
+                window.location.reload();
             }else {
                 alert(result.errorMessage);
             }
