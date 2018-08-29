@@ -23,7 +23,7 @@ app.controller(ngControllerName,function($scope,$sce){
             }
         }
     }
-    var swiper = new Swiper('.swiper-container');
+
     /**
      * 项目详情
      */
@@ -36,6 +36,30 @@ app.controller(ngControllerName,function($scope,$sce){
             if(result.status == 0) {
                 $scope.projectInfo = result.data;
                 $("#projectDetail").html(result.data.description);
+                var htmlTemp = '<div class="swiper-slide">\n' +
+                                        '<video src="http://zx.huacainfo.com/group1/M00/00/3A/i-AA41tzpyaAN4zfABnwZ2Vdppo235.mp4?filename=5a447a704d316aaea58a4a313c16cc40.mp4" poster="img/cover.png" style="width: 100%;height: 100%;object-fit:fill"  autoplay="autoplay" x-webkit-airplay="true" webkit-playsinline="true" airplay="allow" playsinline="allow"  x5-video-player-type="h5" preload="auto" controls>\n' +
+                                             '您的设备不支持video。\n' +
+                                        '</video>\n' +
+                                '</div>\n' +
+                                '<div class="swiper-slide">\n' +
+                                    '<img class="slideImg" src="'+result.data.carousel[1].resUrl+'" style="width: 100%;height: 100%;">\n' +
+                                '</div>\n' +
+                                '<div class="swiper-slide">\n' +
+                                    '<img class="slideImg" src="'+result.data.carousel[2].resUrl+'" style="width: 100%;height: 100%;">\n' +
+                                '</div>\n' +
+                                '<div class="swiper-slide">\n' +
+                                    '<img class="slideImg" src="'+result.data.carousel[3].resUrl+'" style="width: 100%;height: 100%;">\n' +
+                                '</div>';
+                $("#swiperBox").html(htmlTemp);
+                var mySwiper = new Swiper('.swiper-container',{
+                    pagination : '.swiper-pagination',
+                    paginationClickable: true,
+                    longSwipesRatio: 0.3,
+                    touchRatio:1,
+                    observer:true,//修改swiper自己或子元素时，自动初始化swiper
+                    observeParents:true,//修改swiper的父元素时，自动初始化swiper
+                });
+
                 status = result.data.status;
                 if (!$scope.$$phase) {
                     $scope.$apply();
