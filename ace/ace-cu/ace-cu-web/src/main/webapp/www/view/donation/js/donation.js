@@ -23,7 +23,7 @@ app.controller(ngControllerName,function($scope,$sce){
             }
         }
     }
-
+    var swiper = new Swiper('.swiper-container');
     /**
      * 项目详情
      */
