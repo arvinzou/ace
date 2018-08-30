@@ -368,6 +368,7 @@ public class SysAccountServiceImpl implements SysAccountService {
         if (null == company) {
             company = new FopCompanyVo();
         }
+        company.setCreditCode(data.getCreditCode());
         company.setCompanyType("0");
         company.setFullName(data.getFullName());
         company.setCompanyProperty(data.getCompanyProperty());

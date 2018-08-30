@@ -28,7 +28,13 @@
                 <form action="#" id="fm-search">
                     名称： <input name="fullName" type="text" style="width: 200px;"/>
                     电话： <input name="phoneNumber" type="text" style="width: 200px;"/>
-                    test： <input name="belongTo" type="text" style="width: 200px;"/>
+                    会员状态：<input class="easyui-combobox" style="width: 200px" name="status"
+                                data-options="
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=149&selected=false',
+                    method:'get',
+                    valueField:'code',
+                    textField:'name',
+                    panelHeight:'auto'">
 
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/fopAssociation/findFopAssociationList">
@@ -48,6 +54,11 @@
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/fopAssociation/deleteFopAssociationByFopAssociationId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+
+                    <button class="btn btn-warning" id="btn-view-recover"
+                            authority="${pageContext.request.contextPath}/fopCompany/recoverData">
+                        <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
                     </button>
                 </div>
             </div>

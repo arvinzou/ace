@@ -220,12 +220,12 @@ public class DataSwapperServiceImpl implements DataSwapperService {
         Map<String, List<Map<String, Object>>> data = new HashMap<>();
 
         //市商务局_商务领域诚信经营示范企业
-        List<Map<String, Object>> swlycxjysfqy = DataSwapperApi.sswj_swlycxjysfqy(keyword);//;"57658102-0");
+        List<Map<String, Object>> swlycxjysfqy = DataSwapperApi.sswj_swlycxjysfqy(keyword);
         if (!CollectionUtils.isEmpty(swlycxjysfqy)) {
             data.put("商务领域诚信经营示范企业(" + swlycxjysfqy.size() + "条)", swlycxjysfqy);
         }
         //市商务局_招商引资投产项目基本情况信息
-        List<Map<String, Object>> zsyztcxmjbqkxx = DataSwapperApi.sswj_zsyztcxmjbqkxx(keyword);//"钟祖连");
+        List<Map<String, Object>> zsyztcxmjbqkxx = DataSwapperApi.sswj_zsyztcxmjbqkxx(keyword);
         if (!CollectionUtils.isEmpty(zsyztcxmjbqkxx)) {
             data.put("招商引资投产项目基本情况信息(" + zsyztcxmjbqkxx.size() + "条)", zsyztcxmjbqkxx);
         }

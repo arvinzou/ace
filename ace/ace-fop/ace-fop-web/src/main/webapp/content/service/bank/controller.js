@@ -108,6 +108,78 @@ jQuery(function ($) {
                     }
                 })
         });
+
+    //会员恢复
+    $('#btn-view-recover').on('click', function () {
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+        if (!gr) {
+            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
+            return;
+        }
+        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+        if (rowData.status != "0") {
+            alert("会员状态正常，无需恢复！")
+            return;
+        }
+        //ajax调用
+        $.ajax({
+            type: "post",
+            url: contextPath + "/fopCompany/recoverData",
+            data: {
+                id: rowData.id,
+                type: '0'
+            },
+            beforeSend: function (XMLHttpRequest) {
+                style_ajax_button('ajax_button_audit', true);
+            },
+            success: function (rst, textStatus) {
+                style_ajax_button('ajax_button_audit', false);
+                if (rst) {
+                    bootbox.dialog({
+                        title: '系统提示',
+                        message: rst.errorMessage,
+                        buttons: {
+                            "success": {
+                                "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                "className": "btn-sm btn-success",
+                                "callback": function () {
+                                    // dialog.dialog("close");
+                                    //重载数据
+                                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                        page: 1
+                                    }).trigger("reloadGrid");
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    bootbox.dialog({
+                        title: '系统提示',
+                        message: rst.errorMessage,
+                        buttons: {
+                            "success": {
+                                "label": "<i class='ace-icon fa fa-check'></i>确定",
+                                "className": "btn-sm btn-success",
+                                "callback": function () {
+                                    // dialog.dialog("close");
+                                    //重载数据
+                                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+                                        page: 1
+                                    }).trigger("reloadGrid");
+                                }
+                            }
+                        }
+                    });
+                }
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+                style_ajax_button('ajax_button_audit', false);
+            },
+            error: function () {
+                style_ajax_button('ajax_button_audit', true);
+            }
+        });
+    });
 });
 
 function preview(id, title) {
