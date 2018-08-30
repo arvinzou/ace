@@ -5,6 +5,7 @@ window.onload = function () {
 
     getUserinfo();
     //单选设置城市
+    $('.submit_btn').click(submitForm);
 
 };
 

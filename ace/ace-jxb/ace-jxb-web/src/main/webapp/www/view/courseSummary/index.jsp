@@ -9,6 +9,9 @@
 		<title>课程列表</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+			  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+			  crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
@@ -195,14 +198,14 @@
 			{@if item.name != '' && item.name != undefined}
         	<div class="row course_source" onclick="playSource('\${item.id}','\${item.free}')">
 				<div class="row">
-					<div class="col-xs-2 col-md-2"><img src="img/icon-play.png" class="play" /></div>
+					<div class="col-xs-2 col-md-2" style="padding-right: 0 !important;"><img src="img/icon-play.png" class="play" /></div>
 					<div class="col-xs-10 col-md-10" style="padding-left: 0!important;">
 						<span class="number">\${parseInt(num)+1}</span>
 						<span class="chapter_title">\${item.name}</span>
         			</div>
         		</div>
 				<div class="row">
-					<%--<div class="col-xs-2 col-md-2"></div>--%>
+					<div class="col-xs-2 col-md-2"></div>
 					<div class="col-xs-10 col-md-10" style="padding-bottom: 0.3rem;">
 						{@if item.free == '0'}
 						<span class="try">试听</span>

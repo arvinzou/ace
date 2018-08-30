@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -152,5 +153,23 @@ public class FopCompanyController extends FopBaseController {
         this.logger.info("", params);
 
         return this.fopCompanyService.selectCompany(params);
+    }
+
+    /**
+     * 账号恢复
+     *
+     * @param id   唯一主键
+     * @param type 会员类型 0-企业/个人/银行 1-团体
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/recoverData")
+    @ResponseBody
+    public MessageResponse recoverData(String id, String type) throws Exception {
+        if (!StringUtil.areNotEmpty(id, type)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return fopCompanyService.recoverData(id, type, this.getCurUserProp());
     }
 }

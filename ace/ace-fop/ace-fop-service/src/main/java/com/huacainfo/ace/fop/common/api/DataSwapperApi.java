@@ -17,7 +17,8 @@ import java.util.Map;
  * Created by HuaCai008 on 2018/6/12.
  */
 public class DataSwapperApi {
-    public static final String DOMAIN = "http://10.33.10.4:8080/gateway/api";//10.33.10.4|59.231.66.49
+    //    public static final String DOMAIN = "http://10.33.10.4:8080/gateway/api";//10.33.10.4|59.231.66.49
+    public static final String DOMAIN = "http://59.231.66.49:8080/gateway/api";//10.33.10.4|59.231.66.49
     public static final String API_VERSION = "/1.0?";
     private static Logger logger = LoggerFactory.getLogger(DataSwapperApi.class);
     private static Map<String, String> DATA_PROVIDER = new HashMap<>();
@@ -1005,7 +1006,7 @@ public class DataSwapperApi {
     /**
      * 市工商联_申请_市工商局_企业经营异常名录信息
      *
-     * @param UNISCID 统一社会信用代码     等于  UNISCID
+     * @param PRIPID 主体身份代码     等于  UNISCID
      * @return map
      * PRIPID       主体身份代码
      * ENTNAME      企业名称
@@ -1016,19 +1017,19 @@ public class DataSwapperApi {
      * SPECAUSENAME 列入经营异常名录原因类型名称
      * ABNTIME      列入日期
      */
-    public static List<Map<String, Object>> sgsj_qyjyycmlxx(String UNISCID) {
-        UNISCID = encode(UNISCID);
-        if (CommonUtils.isEmpty(UNISCID)) {
+    public static List<Map<String, Object>> sgsj_qyjyycmlxx(String PRIPID) {
+        PRIPID = encode(PRIPID);
+        if (CommonUtils.isEmpty(PRIPID)) {
             return null;
         }
         String uri = DOMAIN + "/sgsl_sq_" + "sgsj_qyjyycmlxx" + API_VERSION;
         StringBuilder sb = new StringBuilder();
         sb.append(uri).append("api_key=" + API_KEY.get("sgsj_qyjyycmlxx"));
-        if (!CommonUtils.isEmpty(UNISCID)) {
-            sb.append("&UNISCID=" + UNISCID);
+        if (!CommonUtils.isEmpty(PRIPID)) {
+            sb.append("&PRIPID=" + PRIPID);
         }
         String response = HttpKit.get(sb.toString());
-        logger.debug("sgsj_qyjyycmlxx  [{}]:{}", UNISCID, response);
+        logger.debug("sgsj_qyjyycmlxx  [{}]:{}", PRIPID, response);
 
         Map<String, String> keyMap = new HashMap<>();
         keyMap.put("PRIPID", "主体身份代码");
