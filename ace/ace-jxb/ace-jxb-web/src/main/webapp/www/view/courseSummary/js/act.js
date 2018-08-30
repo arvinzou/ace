@@ -67,6 +67,7 @@ function commentModal() {
 }
 
 function initData(primaryId){
+    startLoad();
     $.ajax({
         url: contextPath+ "/www/course/findCourseDetail",
         type:"post",
@@ -97,13 +98,20 @@ function initData(primaryId){
                     findPartInfo(primaryId);
                 }
                 initCommentsList();
+                stopLoad();
             }else {
-                alert(result.info);
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                stopLoad();
                 return;
             }
         },
         error:function(){
             alert("系统服务内部异常！");
+            stopLoad();
         }
     });
 }
