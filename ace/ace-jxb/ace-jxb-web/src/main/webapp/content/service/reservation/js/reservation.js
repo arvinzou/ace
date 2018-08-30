@@ -139,7 +139,7 @@ function submitForm() {
         alert("个人擅长最多只能选择四项");
         return
     }
-    formObject.field = field;
+    formObject.field = arr.join(',');
 
     var arr = new Array();
     $('#objects :checkbox:checked').each(function (i) {
@@ -156,8 +156,6 @@ function submitForm() {
         formObject.onlineStatus = 0;
     }
     formObject.objects = objects;
-
-
     var url = '/jxb/consult/modifyConsult';
     $.post(url, formObject, function (result) {
         if (result.status == 0) {

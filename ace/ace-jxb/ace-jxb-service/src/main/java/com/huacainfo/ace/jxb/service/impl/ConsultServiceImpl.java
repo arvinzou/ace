@@ -149,9 +149,6 @@ public class ConsultServiceImpl implements ConsultService {
         if (CommonUtils.isBlank(consultQVo.getField())) {
             return new MessageResponse(1, "擅长领域不能为空！");
         }
-        if (CommonUtils.isBlank(consultQVo.getInfo())) {
-            return new MessageResponse(1, "预约须知不能为空！");
-        }
         Consult consult = consultDao.selectByPrimaryKey(consultQVo.getId());
         if (CommonUtils.isBlank(consult)) {
             consultQVo.setCreateDate(new Date());
