@@ -17,9 +17,9 @@ $(function(){
         }
     });
 
-   /* /!**
+    /**
 	 * 获取用户信息
-     *!/
+     */
     $.ajax({
         url: "/jxb/www/reg/findInfo",
         type:"post",
@@ -41,7 +41,7 @@ $(function(){
         error:function(){
             alert("系统服务内部异常！");
         }
-    });*/
+    });
 });
 
 function selectType(id){
@@ -95,7 +95,11 @@ function sendCode(){
                     alert("短信发送成功，请注意查收！");
                     $("#sendCode").attr('href', '#page3');
                 }else {
-                   alert(result.info);
+                    if(result.info){
+                        alert(result.info);
+                    }else{
+                        alert(result.errorMessage);
+                    }
                     return;
                 }
             },

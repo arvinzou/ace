@@ -361,7 +361,7 @@
             名字
         </label>
         <div class="col-md-9">
-            <input type="text" id="chineseName" class="form-control" \${data.regAuditRst==1?'readonly':''}
+            <input type="text" id="chineseName" class="form-control" \${data==1?'readonly':''}
                    placeholder="" name="form_name">
             <span class="error_message"></span>
             <div class="form-control-focus"></div>
@@ -377,7 +377,7 @@
         <div class="col-md-9">
             <div class="md-radio-inline">
                 <div class="md-radio">
-                    <input type="radio" checked id="checkbox1_8" \${data.regAuditRst==1?'disabled':''}
+                    <input type="radio" checked id="checkbox1_8" \${data==1?'disabled':''}
                            name="form_sex" value="1"
                            class="md-radiobtn">
                     <label for="checkbox1_8">
@@ -387,7 +387,7 @@
                 </div>
 
                 <div class="md-radio">
-                    <input type="radio" id="checkbox1_9" \${data.regAuditRst==1?'disabled':''}
+                    <input type="radio" id="checkbox1_9" \${data==1?'disabled':''}
                            name="form_sex"
                            value="2"
                            class="md-radiobtn">
@@ -479,7 +479,7 @@
 
         </label>
         <div class="col-md-9">
-            <input \${data.regAuditRst==1?'readonly':''} type="text" class="form-control" id="IDcard"
+            <input \${data==1?'readonly':''} type="text" class="form-control" id="IDcard"
                    placeholder=""
                    name="form_idCard">
             <span class="error_message"></span>
@@ -498,7 +498,7 @@
                 <div class="idCardBox">
                     <img class="select_img form_idCardImgUrl"
                          id="IDcardz"
-                         data-cover="IDcardz" \${data.regAuditRst!=1?'data-toggle=modal data-target=#img-uploader':''}
+                         data-cover="IDcardz" \${data!=1?'data-toggle=modal data-target=#img-uploader':''}
                          data-xsize="240" data-ysize="150"
                          src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
 
@@ -512,7 +512,7 @@
                     <img class="select_img"
                          data-cover="IDcardf"
                          id="IDcardf"
-                         data-xsize="240" data-ysize="150" \${data.regAuditRst!=1?'data-toggle=modal
+                         data-xsize="240" data-ysize="150" \${data!=1?'data-toggle=modal
                          data-target=#img-uploader':''}
                          src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
                 </div>
@@ -526,7 +526,7 @@
                          id="IDcardsc"
                          data-cover="IDcardsc"
                          data-xsize="240" data-ysize="150"
-                         \${data.regAuditRst!=1?'data-toggle=modal data-target=#img-uploader':''}
+                         \${data!=1?'data-toggle=modal data-target=#img-uploader':''}
                          src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
                 </div>
                 <p>手持身份证</p>
@@ -536,22 +536,19 @@
 
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required"
-                                                    aria-required="true">*</span>职业名称
-
-        </label>
+        <label class="col-md-3 control-label"><span class="required" aria-required="true">*</span>职业名称</label>
         <div class="col-md-9">
             <div class="md-radio-inline"
                  id="certification">
                 <div class="md-radio">
-                    <input type="radio" id="radios_1" \${data.regAuditRst==1?'disabled':''} name="form_certification"
+                    <input type="radio" id="radios_1" \${data==1?'disabled':''} name="form_certification"
                            value="2" class="md-radiobtn">
                     <label
                             for="radios_1"><span class="inc"></span>
                         <span class="check"></span>
                         <span class="box"></span>国家二级咨询师</label>
                 </div>
-                <div class="md-radio"><input type="radio" id="radios_2" \${data.regAuditRst==1?'disabled':''}
+                <div class="md-radio"><input type="radio" id="radios_2" \${data==1?'disabled':''}
                                              name="form_certification"
                                              value="3"
                                              class="md-radiobtn">
@@ -571,7 +568,7 @@
 
         </label>
         <div class="col-md-9">
-            <input type="text" class="form-control" id="notNull1" \${data.regAuditRst==1?'readonly':''}
+            <input type="text" class="form-control" id="notNull1" \${data==1?'readonly':''}
                    placeholder=""
                    name="form_certificateNo">
             <span class="error_message"></span>
@@ -592,7 +589,7 @@
                          id="certificateimg"
                          data-cover="certificateimg"
                          data-xsize="240" data-ysize="150"
-                         \${data.regAuditRst!=1?'data-toggle=modal data-target=#img-uploader':''}
+                         \${data!=1?'data-toggle=modal data-target=#img-uploader':''}
                          src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
                 </div>
                 <p>从业资格证书</p>

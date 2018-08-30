@@ -1,4 +1,4 @@
-var editor, cityCode, singleSelect1;
+var editor, cityCode, singleSelect1, regAuditRst;
 
 
 window.onload = function () {
@@ -50,10 +50,12 @@ function getUserinfo() {
         var url = "/jxb/counselor/getMyinfo"
         $.getJSON(url, function (result) {
             if (result.status == 0) {
+                regAuditRst = result.value.regAuditRst;
                 var navitem = document.getElementById('temp-form_content').innerHTML;
                 var html = juicer(navitem, {
-                    data: result.value
+                    data: regAuditRst
                 });
+
                 $("#form_content").html(html);
                 initDoc();
                 initcitySelect();
@@ -105,13 +107,16 @@ function submitForm() {
         return null;
     }
     var formObject = {
-        name: "chineseName",
-        mobile: "mobilePhone",
         profile: "notNull_profile",
-        certificateNo: "notNull1",
-        idCard: "IDcard",
         duration: 'naturalNumber',
         peopleNum: 'naturalNumber1'
+    }
+    if (regAuditRst != 1) {
+        formObject.name = "chineseName";
+        formObject.mobile = "mobilePhone";
+        formObject.certificateNo = "notNull1";
+        formObject.idCard = "IDcard";
+        formObject.idCard = "IDcard";
     }
     for (key in formObject) {
         var idName = formObject[key];
@@ -124,61 +129,68 @@ function submitForm() {
         }
     }
     ;
-    var sex = $('input:radio[name="form_sex"]:checked').val();
-    formObject.sex = sex;
+
+    if (regAuditRst != 1) {
+        var sex = $('input:radio[name="form_sex"]:checked').val();
+        formObject.sex = sex;
+        var idCardImgUrl = $('#IDcardz').prop('src');
+        if (idCardImgUrl.indexOf("zx.huacainfo.com") == -1) {
+            alert("需要上传身份证正面照");
+            return null;
+        }
+        formObject.idCardImgUrl = idCardImgUrl;
+
+
+        var idCardImgUrl1 = $('#IDcardf').prop('src');
+
+        if (idCardImgUrl1.indexOf("zx.huacainfo.com") == -1) {
+            alert("需要上传身份证反面照");
+            return null;
+        }
+        formObject.idCardSideImgUrl = idCardImgUrl1;
+
+
+        var evidenceImgUrl = $('#IDcardsc').prop('src');
+
+        if (evidenceImgUrl.indexOf("zx.huacainfo.com") == -1) {
+            alert("需要上传手持身份证照片");
+            return null;
+        }
+        formObject.evidenceImgUrl = evidenceImgUrl;
+
+
+        var certification = $('input:radio[name="form_certification"]:checked').next().text();
+        formObject.certification = certification.trim();
+
+
+        var certificateImgUrl = $('#certificateimg').prop('src');
+
+        if (certificateImgUrl.indexOf("zx.huacainfo.com") == -1) {
+            alert("需要上传资格证书照片");
+            return null;
+        }
+
+    }
+
     var imagePhotoUrl = $('#headimg1').prop('src');
     if (imagePhotoUrl.indexOf("zx.huacainfo.com") == -1) {
         alert("需要上传形象照");
         return null;
     }
     formObject.imagePhotoUrl = imagePhotoUrl;
-    var idCardImgUrl = $('#IDcardz').prop('src');
-
-    if (idCardImgUrl.indexOf("zx.huacainfo.com") == -1) {
-        alert("需要上传身份证正面照");
-        return null;
-    }
-    formObject.idCardImgUrl = idCardImgUrl;
-
-
-    var idCardImgUrl1 = $('#IDcardf').prop('src');
-
-    if (idCardImgUrl1.indexOf("zx.huacainfo.com") == -1) {
-        alert("需要上传身份证反面照");
-        return null;
-    }
-    formObject.idCardSideImgUrl = idCardImgUrl1;
-
-
-    var evidenceImgUrl = $('#IDcardsc').prop('src');
-
-    if (evidenceImgUrl.indexOf("zx.huacainfo.com") == -1) {
-        alert("需要上传手持身份证照片");
-        return null;
-    }
-    formObject.evidenceImgUrl = evidenceImgUrl;
-
-
-    var certification = $('input:radio[name="form_certification"]:checked').next().text();
-    formObject.certification = certification.trim();
-
-
-    var certificateImgUrl = $('#certificateimg').prop('src');
-
-    if (certificateImgUrl.indexOf("zx.huacainfo.com") == -1) {
-        alert("需要上传资格证书照片");
-        return null;
-    }
-    formObject.certificateImgUrl = certificateImgUrl;
 
     formObject.cityCode = cityCode;
+
     var url = '/jxb/counselor/updateUserinfo';
     $.post(url, formObject, function (result) {
         if (result.status == 0) {
-            alert("信息更新成功");
+            if (regAuditRst != 1) {
+                alert("更新成功");
+                return null;
+            }
+            alert("提交成功，平台官方会在2个工作日内反馈申请结果。");
             return null;
         }
         alert("信息更新失败,请稍后再试！");
-
     })
 }
