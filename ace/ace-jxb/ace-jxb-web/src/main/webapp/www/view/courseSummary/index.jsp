@@ -9,6 +9,9 @@
 		<title>课程列表</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+			  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+			  crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
