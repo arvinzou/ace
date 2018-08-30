@@ -150,10 +150,6 @@
             </div>
         </div>
     </div>
-
-
-</div>
-<div class="page-content-2 background">
     <div class="row">
         <div class="col-xs-12 col-sm-6">
             <!-- #section:custom/widget-box -->
@@ -220,7 +216,9 @@
         </div>
         <!-- /.span -->
     </div>
+
 </div>
+
 <!-- /.page-content -->
 
 
