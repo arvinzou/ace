@@ -23,9 +23,13 @@ function App() {
                     max: 5,
                     step: 1,
                     size: 'xs',
+                    theme: 'krajee-fa',
                     showClear: false,
                     starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
-                    captionElement: "#kv-caption"
+                    captionElement: "#kv-caption",
+                    filledStar: '<i class="fas fa-star"></i>',
+                    emptyStar: '<i class="fas fa-star"></i>',
+
                 })
             });
         }
