@@ -169,31 +169,33 @@ public class CounselorServiceImpl implements CounselorService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getName())) {
-            return new MessageResponse(1, "姓名不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getMobile())) {
-            return new MessageResponse(1, "手机号不能为空！");
+
+        if (!CommonUtils.isBlank(o.getIdCard())) {
+            if (CommonUtils.isBlank(o.getName())) {
+                return new MessageResponse(1, "姓名不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getMobile())) {
+                return new MessageResponse(1, "手机号不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getIdCard())) {
+                return new MessageResponse(1, "身份证号不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getIdCardImgUrl())) {
+                return new MessageResponse(1, "身份证件电子档不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getCertificateNo())) {
+                return new MessageResponse(1, "资格从业证书号不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getCertificateImgUrl())) {
+                return new MessageResponse(1, "资格从业证书电子档不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getEvidenceImgUrl())) {
+                return new MessageResponse(1, "身份证持胸前自拍照不能为空！");
+            }
         }
         if (CommonUtils.isBlank(o.getImagePhotoUrl())) {
             return new MessageResponse(1, "形象照不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(1, "身份证号不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getIdCardImgUrl())) {
-            return new MessageResponse(1, "身份证件电子档不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCertificateNo())) {
-            return new MessageResponse(1, "资格从业证书号不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCertificateImgUrl())) {
-            return new MessageResponse(1, "资格从业证书电子档不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getEvidenceImgUrl())) {
-            return new MessageResponse(1, "身份证持胸前自拍照不能为空！");
-        }
-
         counselorDao.updateByPrimaryKeySelective(o);
         dataBaseLogService.log("变更咨询师", "咨询师", "",
                 o.getId(), o.getId(), userProp);
