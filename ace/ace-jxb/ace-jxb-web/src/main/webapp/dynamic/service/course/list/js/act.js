@@ -108,7 +108,11 @@ function changeChapter(id){
 
 function add(){
     var partId = $("#chapters .active").attr("datattr");
-    window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId;
+    if(partId == undefined || partId == null){
+        alert("请先创建课件所属章节！");
+    }else{
+        window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId;
+    }
 }
 
 //============================章节管理开始=====================================//

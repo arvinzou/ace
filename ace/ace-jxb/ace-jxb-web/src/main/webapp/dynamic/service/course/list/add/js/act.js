@@ -28,6 +28,7 @@ function initEditor() {
     });
 }
 function save(params) {
+
     $.extend(params, {
         courseId: urlParams.courseId,
 		partId: urlParams.partId
@@ -44,6 +45,9 @@ function save(params) {
             stopLoad();
 			alert(result.errorMessage);
 			if(result.status==0){
+                if(findCourseSrcCountByCourseId(urlParams.courseId) > 1){
+                    updateCourseType(urlParams.courseId);
+                }
 				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?id="+urlParams.courseId
 			}
 			
@@ -132,3 +136,49 @@ function initUpload(){
 jQuery(function ($) {
     initPage();
 });
+
+function findCourseSrcCountByCourseId(courseId){
+    var srcCount = 0;
+    $.ajax({
+        url: contextPath + "/course/selectCourseByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: courseId
+        },
+        success: function (result) {
+            console.log(result);
+            srcCount = parseInt(result.value.srcCount);
+        },
+        error: function () {
+            alert("系统服务内部异常！");
+        }
+    });
+    return srcCount;
+}
+
+/**
+ * 当创建课程资源数量超过1时，修改课程的类型单节课程为系列课程
+ * @param courseId
+ */
+function updateCourseType(courseId){
+    $.ajax({
+        url: contextPath + "/course/updateCourse",
+        type: "post",
+        async: false,
+        data: {
+            jsons: JSON.stringify(
+                {
+                    id: courseId,
+                    type: '2'
+                }
+            )
+        },
+        success: function (result) {
+            alert("当前课程资源创建大于2节，课程类型已经更改为系列课程！");
+        },
+        error: function () {
+            alert("系统服务内部异常！");
+        }
+    });
+}
