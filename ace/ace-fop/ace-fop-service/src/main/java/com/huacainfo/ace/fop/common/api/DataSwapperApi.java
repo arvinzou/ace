@@ -17,8 +17,8 @@ import java.util.Map;
  * Created by HuaCai008 on 2018/6/12.
  */
 public class DataSwapperApi {
-    //    public static final String DOMAIN = "http://10.33.10.4:8080/gateway/api";//10.33.10.4|59.231.66.49
-    public static final String DOMAIN = "http://59.231.66.49:8080/gateway/api";//10.33.10.4|59.231.66.49
+    public static final String DOMAIN = "http://10.33.10.4:8080/gateway/api";//10.33.10.4|59.231.66.49
+    //    public static final String DOMAIN = "http://59.231.66.49:8080/gateway/api";//10.33.10.4|59.231.66.49
     public static final String API_VERSION = "/1.0?";
     private static Logger logger = LoggerFactory.getLogger(DataSwapperApi.class);
     private static Map<String, String> DATA_PROVIDER = new HashMap<>();

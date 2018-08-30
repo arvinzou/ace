@@ -14,6 +14,10 @@ public class FopCompany implements Serializable {
     private String departmentId;
 
     private String creditCode;
+    /**
+     * 工商联职务
+     */
+    private String fopPost;
 
     /**
      * 所属工商联
@@ -103,6 +107,14 @@ public class FopCompany implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getFopPost() {
+        return fopPost;
+    }
+
+    public void setFopPost(String fopPost) {
+        this.fopPost = fopPost;
+    }
 
     public String getBelongTo() {
         return belongTo;

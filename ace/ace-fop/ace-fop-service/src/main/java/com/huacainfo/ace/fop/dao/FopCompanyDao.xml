@@ -5,6 +5,7 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="departmentId" jdbcType="VARCHAR" property="departmentId"/>
         <result column="belongTo" jdbcType="VARCHAR" property="belongTo"/>
+        <result column="fopPost" jdbcType="VARCHAR" property="fopPost"/>
         <result column="creditCode" jdbcType="VARCHAR" property="creditCode"/>
         <result column="companyType" jdbcType="CHAR" property="companyType"/>
         <result column="fullName" jdbcType="VARCHAR" property="fullName"/>
@@ -53,7 +54,7 @@
     longitude, firstPersonId, secPersonId, postcode, fax, email, majorVariety, laborContractNum, 
     thirdLaborRelation, socialInsuranceAddr, socialInsuranceNum, accTaxAmount, yearTaxAmount, 
     remark, status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
-        lastModifyDate, belongTo
+        lastModifyDate, belongTo, fopPost
   </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -81,7 +82,7 @@
         companyCode, companyLogo, companyLinkUrl,
         areaCode, companyProperty, establishDate,
         crewSize, registeredCapital, fixedAssets,
-      workingCapital, ownSpace, tenancySpace,
+        workingCapital, ownSpace, tenancySpace,
         personId, address, latitude,
         longitude, firstPersonId, secPersonId,
         postcode, fax, email,
@@ -90,13 +91,13 @@
         accTaxAmount, yearTaxAmount, remark,
         status, createUserId, createUserName,
         createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
-        belongTo)
+        belongTo, fopPost)
         values (#{id,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{creditCode,jdbcType=VARCHAR},
         #{companyType,jdbcType=CHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
         #{companyCode,jdbcType=VARCHAR}, #{companyLogo,jdbcType=VARCHAR}, #{companyLinkUrl,jdbcType=VARCHAR},
         #{areaCode,jdbcType=VARCHAR}, #{companyProperty,jdbcType=CHAR}, #{establishDate,jdbcType=TIMESTAMP},
         #{crewSize,jdbcType=INTEGER}, #{registeredCapital,jdbcType=DECIMAL}, #{fixedAssets,jdbcType=DECIMAL},
-      #{workingCapital,jdbcType=DECIMAL}, #{ownSpace,jdbcType=DECIMAL}, #{tenancySpace,jdbcType=DECIMAL},
+        #{workingCapital,jdbcType=DECIMAL}, #{ownSpace,jdbcType=DECIMAL}, #{tenancySpace,jdbcType=DECIMAL},
         #{personId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL},
         #{longitude,jdbcType=DECIMAL}, #{firstPersonId,jdbcType=VARCHAR}, #{secPersonId,jdbcType=VARCHAR},
         #{postcode,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
@@ -105,7 +106,7 @@
         #{accTaxAmount,jdbcType=DECIMAL}, #{yearTaxAmount,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
         #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
         #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
-        #{lastModifyDate,jdbcType=TIMESTAMP}, #{belongTo,jdbcType=VARCHAR})
+        #{lastModifyDate,jdbcType=TIMESTAMP}, #{belongTo,jdbcType=VARCHAR}, #{fopPost,jdbcType=VARCHAR})
   </insert>
 
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopCompany">
@@ -240,6 +241,9 @@
             <if test="belongTo != null">
                 belongTo,
             </if>
+            <if test="fopPost != null">
+                fopPost,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -370,6 +374,9 @@
             </if>
             <if test="belongTo != null">
                 #{belongTo,jdbcType=VARCHAR},
+            </if>
+            <if test="fopPost != null">
+                #{fopPost,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -503,6 +510,9 @@
             <if test="belongTo != null">
                 belongTo = #{belongTo,jdbcType=VARCHAR},
             </if>
+            <if test="fopPost != null">
+                fopPost = #{fopPost,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -550,7 +560,8 @@
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-        belongTo = #{belongTo,jdbcType=VARCHAR}
+        belongTo = #{belongTo,jdbcType=VARCHAR},
+        fopPost = #{fopPost,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -588,7 +599,7 @@
     </resultMap>
 
     <sql id="column_List_Vo">
-        c.belongTo,
+        c.belongTo, c.fopPost,
         porg.orgType as partyCategory, porg.establishDate as partyCrtDt, porg.peopleNum as partyPeoples,
         porg.dutyPersonName as partyDutyMan, porg.dutyPersonPhone as partyPhone,
         uorg.establishDate as unionCrtDt, uorg.dutyPersonName as unionDutyMan, uorg.dutyPersonPhone as unionPhone,
@@ -672,13 +683,16 @@
             and c.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.companyProperty!=null and condition.companyProperty!=""'>
-            and c.companyProperty=#{condition.companyProperty,jdbcType=CHAR}
+            and c.companyProperty = #{condition.companyProperty,jdbcType=CHAR}
         </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
             and c.status = #{condition.status,jdbcType=CHAR}
         </if>
         <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
             and c.belongTo = #{condition.belongTo,jdbcType=CHAR}
+        </if>
+        <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
+            and c.fopPost = #{condition.fopPost,jdbcType=CHAR}
         </if>
         <choose>
             <when test='condition.companyType=="w"'>
