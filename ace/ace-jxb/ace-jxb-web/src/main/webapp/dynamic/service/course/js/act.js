@@ -1,4 +1,5 @@
 var loading = {};
+var loading = {};
 function loadlocal() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
