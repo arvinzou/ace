@@ -9,7 +9,14 @@ function loadlocal() {
 function App() {
     console.log("=============================App Start==============================");
     loadlocal();
+    loader({
+        path: portalPath,
+        url: '/content/common/plupload/plupload.full.min.js',
+        type: 'js',
+        callback: function () {
 
+        }
+    });
 }
 
 function initEditor() {
@@ -142,6 +149,7 @@ function initForm(){
             if(result.status == 0) {
 				renderPage($(".form-panel"),result.value, 'tpl-fm');
 				initPage();
+                initUpload();
             }else {
                 alert(result.errorMessage);
             }
@@ -156,3 +164,43 @@ jQuery(function ($) {
 	initForm()
 });
 
+function initUpload(){
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: 'uploadSource',
+        url: '/portal/files/uploadFile.do',
+        file_data_name: 'file',
+        multi_selection: false,
+        resize: {
+            width: 1024,
+            height: 1024,
+            crop: true,
+            quality: 60,
+            preserve_headers: false
+        },
+        filters: {
+            max_file_size: '2048mb',
+            mime_types: [
+                {title: "audio files", extensions: "mp3"}
+            ]
+        },
+        init: {
+            FileFiltered: function (up, files) {
+                /*showUploadText('.viewPicture2 img', '.uploadText2');*/
+                up.start();
+                return false;
+            },
+            UploadProgress: function(e, t) {
+                var r = t.percent;
+                /*$(".uploadPloadprogress").html("开始上传（" + r + "%）");*/
+            },
+            FileUploaded: function (uploader, file, responseObject) {
+                var rst = JSON.parse(responseObject.response);
+                /* viewCover(rst.value[0], '.pictureContainer2','.viewPicture2 img','.uploadText2');*/
+                $("#mediUrl").val(fastdfs_server + rst.value[0]);
+                coverImg = rst.value[0];
+            }
+        }
+    });
+    uploader.init();
+}
