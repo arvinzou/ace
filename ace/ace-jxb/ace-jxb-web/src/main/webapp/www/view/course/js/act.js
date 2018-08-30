@@ -10,6 +10,7 @@ function App() {
 }
 
 window.onload = function(){
+    startLoad();
     courseList();
 
     var level = $(".course_nav_ul .active").text();
@@ -55,6 +56,8 @@ window.onload = function(){
         $("#quinput").val(text3);
         $(".citylist2").slideUp();
     });
+    completeLoading();
+    document.onreadystatechange = completeLoading;
 }
 
 function courseList(level){
@@ -111,4 +114,10 @@ function courseList(level){
 
 function courseDetail(id){
     window.location.href = contextPath + '/www/view/courseSummary/index.jsp?id='+id;
+}
+
+function completeLoading() {
+    if (document.readyState == "complete") {
+        stopLoad();
+    }
 }

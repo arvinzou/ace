@@ -111,10 +111,10 @@
 
 
 				<div class="audio green-audio-player">
-					<div class="loading" style="display: none;">
+					<div class="loading">
 						<div class="spinner"></div>
 					</div>
-					<div class="play-pause-btn" style="display: block;">
+					<div class="play-pause-btn">
 						<img src="img/play.png" class="play-pause-icon" id="playPause">
 					</div>
 
@@ -127,7 +127,6 @@
 						</div>
                         <span class="total-time">0:00</span>
 					</div>
-
 
 					<audio crossorigin="">
 						<source src="\${data.mediUrl}" type="audio/mpeg">
