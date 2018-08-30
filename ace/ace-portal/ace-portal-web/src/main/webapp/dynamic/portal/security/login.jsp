@@ -205,11 +205,11 @@
             <div class="modal-body">
                 <div class="row" style="padding:10px">
                     <div style="padding:10px">
-                        输入注册的个人邮箱，系统将重置的密码发送到此邮箱.
+                        输入注册的个人手机号，系统将重置的密码以短信的方式发生到此手机.
                     </div>
 
                     <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱"
-                           name="email" id="email"/>
+                           name="mobile" id="mobile"/>
                 </div>
 
             </div>
@@ -361,7 +361,7 @@
                             url: contextPath
                             + "/system/retrievePassword.do",
                             data: {
-                                email: $('#email').val()
+                                mobile: $('#mobile').val()
                             },
                             beforeSend: function (XMLHttpRequest) {
 

@@ -95,7 +95,11 @@ function sendCode(){
                     alert("短信发送成功，请注意查收！");
                     $("#sendCode").attr('href', '#page3');
                 }else {
-                   alert(result.info);
+                    if(result.info){
+                        alert(result.info);
+                    }else{
+                        alert(result.errorMessage);
+                    }
                     return;
                 }
             },
@@ -128,7 +132,11 @@ function registon(){
                     alert("注册成功！");
                     window.location.href = '/jxb/www/view/mine/mine.jsp';
                 }else {
-                    alert(result.info);
+                    if(result.info){
+                        alert(result.info);
+                    }else{
+                        alert(result.errorMessage);
+                    }
                     return;
                 }
             },
