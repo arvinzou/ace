@@ -365,4 +365,24 @@
 	<select id="getLockedList" resultType="map">
 		select user_id userId,name,account,lockedTime from users where locked='1' and TIMESTAMPDIFF(MINUTE,lockedTime,now())>60
 	</select>
+	<select id="selectUsersByMobile" resultMap="users">
+		select user_id,
+		account,
+		password,
+		sex,
+		id_card,
+		name,
+		department_id,
+		area_code,
+		birthday,
+		stauts,
+		last_login_time,
+		mobile,
+		email,
+		seat,
+		user_level,
+		create_time
+		from
+		users where mobile=#{mobile} limit 0,1
+	</select>
 </mapper>

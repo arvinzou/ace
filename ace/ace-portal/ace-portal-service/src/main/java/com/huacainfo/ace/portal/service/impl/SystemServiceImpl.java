@@ -15,6 +15,7 @@ import com.huacainfo.ace.portal.dao.UserinfoDao;
 import com.huacainfo.ace.portal.dao.UsersDao;
 import com.huacainfo.ace.portal.model.Config;
 import com.huacainfo.ace.portal.model.Resources;
+import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.*;
 import com.huacainfo.ace.portal.tools.TreeUtils;
@@ -64,6 +65,9 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 
 	@Autowired
 	private OAuth2Service oAuth2Service;
+
+	@Autowired
+	private TaskCmccService taskCmccService;
 
 	public List<Resources> getResourcesByUserId(String id) {
 		return this.systemDao.selectResourcesByUserId(id, "ace");
@@ -205,43 +209,26 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 		return rst;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.platform.Aspire.service.SystemService#retrievePassword(java.lang.
-	 * String)
-	 */
-	public MessageResponse updateForRetrievePassword(String email) throws Exception {
-		if (CommonUtils.isBlank(email)) {
-			return new MessageResponse(1, "Email不能为空！");
+	@Override
+	public MessageResponse updateForRetrievePassword(String mobile) throws Exception {
+		if (CommonUtils.isBlank(mobile)) {
+			return new MessageResponse(1, "手机号不能为空！");
 		}
 
-		Users user = this.systemDao.selectUsersByEmail(email);
+		Users user = this.systemDao.selectUsersByMobile(mobile);
 		if (user == null) {
-			return new MessageResponse(1, "不存在此用户的Email！");
+			return new MessageResponse(1, "手机号不正确，没有找到用户！");
 		}
 		String newPasswd = CommonUtils.genRandomNum(6);
-		this.systemDao.updatePassword(user.getUserId(),
-				CommonUtils.getMd5(newPasswd));
-
-		List<String> address = new ArrayList<String>();
-		address.add(email);
-
-		VelocityEngine velocityEngine = new VelocityEngine();
-		velocityEngine.setProperty("resource.loader", "class");
-		velocityEngine
-				.setProperty("class.resource.loader.class",
-						"org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-
-		Map<String, Object> model = new HashMap<String, Object>();
-		CommonBeanUtils.copyBean2Map(user, model);
-		model.put("newPasswd", newPasswd);
-		model.put("sysDate", CommonUtils.formatDate(new Date()));
-		String subject = CommonUtils.getStringByTemplate("email.subject.vm", model);
-		String content = CommonUtils.getStringByTemplate("email.vm", model);
-		this.sysInfoService.sendBatchEmail(subject, content, address);
-		return new MessageResponse(0, "密码已重新设置，请查收 " + email);
+		this.systemDao.updatePassword(user.getUserId(), CommonUtils.getMd5(newPasswd));
+		TaskCmcc o=new TaskCmcc();
+		Map<String, Object> msg = new HashMap<String, Object>();
+		msg.put("taskName", "密码找回" + mobile);
+		msg.put("msg", "重置后的密码为" + newPasswd + "，请保管好您的密码。【华彩鉴权平台】");
+		msg.put("tel", mobile + "," + mobile);
+		CommonBeanUtils.copyMap2Bean(o,msg);
+		this.taskCmccService.insertTaskCmcc(o);
+		return new MessageResponse(0, "密码已重新设置，请查收" + mobile);
 	}
 
 	public List<Tree> selectDepartmentTreeList(String id, String syid) {
@@ -408,7 +395,7 @@ public class SystemServiceImpl implements SystemService, WebContextParamService 
 		this.logger.info("=======================扫描锁定账号列表 {}======================",new Date());
 		List<Map<String, Object>> list= this.systemDao.getLockedList();
 		for(Map<String, Object> o:list){
-			this.systemDao.updateUserLocked((String) o.get("account"),"0");
+			this.systemDao.updateUserLocked("0",(String) o.get("account"));
 			this.logger.info("====================账号 {} 已经解锁======================",(String) o.get("account"),new Date());
 		}
 	}
