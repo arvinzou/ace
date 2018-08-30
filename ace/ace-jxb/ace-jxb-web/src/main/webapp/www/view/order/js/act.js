@@ -168,7 +168,7 @@ function createOrder(){
         alert("请选择咨询方式！");
         return;
     }
-    if(start_date == null || start_date == undefined){
+    if(start_date == null || start_date == undefined || start_date == ''){
         alert("请选择预约时间！");
         return;
     }

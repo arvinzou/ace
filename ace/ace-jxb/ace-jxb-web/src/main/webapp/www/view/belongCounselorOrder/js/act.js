@@ -7,7 +7,7 @@ function initData(){
         type:"post",
         async:false,
         data:{
-            findType: '1',
+            findType: '2',
             category: '1',
             payStatusArray: '2,6,7',
             start: 0,

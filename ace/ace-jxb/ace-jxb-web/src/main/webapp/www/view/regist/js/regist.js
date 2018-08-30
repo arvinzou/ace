@@ -17,9 +17,9 @@ $(function(){
         }
     });
 
-    /**
+   /* /!**
 	 * 获取用户信息
-     */
+     *!/
     $.ajax({
         url: "/jxb/www/reg/findInfo",
         type:"post",
@@ -41,7 +41,7 @@ $(function(){
         error:function(){
             alert("系统服务内部异常！");
         }
-    });
+    });*/
 });
 
 function selectType(id){

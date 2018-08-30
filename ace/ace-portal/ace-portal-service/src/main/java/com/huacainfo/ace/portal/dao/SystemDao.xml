@@ -360,6 +360,9 @@
 		t.openId=#{openId}
 	</select>
 	<update id="updateUserLocked">
-		update users set locked=#{locked} where account=#{account}
+		update users set locked=#{locked},lockedTime=now() where account=#{account}
 	</update>
+	<select id="getLockedList" resultType="map">
+		select user_id userId,name,account,lockedTime from users where locked='1' and TIMESTAMPDIFF(MINUTE,lockedTime,now())>60
+	</select>
 </mapper>

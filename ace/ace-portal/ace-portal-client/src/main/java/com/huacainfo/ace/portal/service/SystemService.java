@@ -251,4 +251,6 @@ public interface SystemService extends WebContextParamService {
 
 	public MessageResponse lockUser(String account);
 
+	public void taskAutoUnLockUserAccount();
+
 }

@@ -1,6 +1,7 @@
 package com.huacainfo.ace.fop.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.service.DataSwapperService;
@@ -36,6 +37,22 @@ public class WWWDataSwapperController extends FopBaseController {
         }
 
         return dataSwapperService.search(keyword, type);
+    }
+
+    /**
+     * 接口api调用
+     *
+     * @param methodName 方法名称
+     * @param keyWord    关键词
+     * @return ResultResponse
+     */
+    @RequestMapping(value = "/invoke")
+    public ResultResponse invoke(String methodName, String keyWord) {
+        if (!StringUtil.areNotEmpty(methodName, keyWord)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return dataSwapperService.invoke(methodName, keyWord);
     }
 }
 
