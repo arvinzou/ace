@@ -73,7 +73,6 @@
                                                 <div class="form-actions">
                                                     <div class="row">
                                                         <div class="col-md-offset-3 col-md-9">
-                                                            <button type="reset" class="btn default">重置</button>
                                                             <button class="btn green submit_btn">提交</button>
                                                         </div>
                                                     </div>
