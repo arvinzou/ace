@@ -123,4 +123,6 @@ public interface SystemDao {
 
 	int updateUserLocked(@Param("locked")String locked,@Param("account")String account);
 
+	public List<Map<String, Object>> getLockedList();
+
 }
