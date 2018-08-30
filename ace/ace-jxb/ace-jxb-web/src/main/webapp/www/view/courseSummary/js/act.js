@@ -280,7 +280,7 @@ function onBridgeReady(obj, orderId){
                 window.pay_tag = true;
                 if (res.errMsg == "chooseWXPay:ok") {
                     alert("支付成功！");
-                    window.location.href = contextPath + '/www/view/purchaseRecord/index.jsp'
+                    window.location.href = contextPath + '/www/view/courseSummary/index.jsp?courseId='+primaryId;
                     /*WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                         if (res.err_msg =="get_brand_wcpay_request:ok")
                         {
