@@ -108,5 +108,5 @@ public interface FopCompanyService {
      * @return
      * @throws Exception
      */
-    MessageResponse recoverData(String id, String type, UserProp curUserProp);
+    MessageResponse recoverData(String id, String type, UserProp curUserProp) throws Exception;
 }

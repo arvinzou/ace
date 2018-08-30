@@ -21,10 +21,7 @@ import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopCompanyOrgDao;
-import com.huacainfo.ace.fop.model.FopCompany;
-import com.huacainfo.ace.fop.model.FopCompanyContribution;
-import com.huacainfo.ace.fop.model.FopPayRecord;
-import com.huacainfo.ace.fop.model.FopPerson;
+import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
 import com.huacainfo.ace.fop.vo.*;
 import com.huacainfo.ace.portal.model.Department;
@@ -671,9 +668,50 @@ public class FopCompanyServiceImpl implements FopCompanyService {
      * @param type 会员类型 0-企业/个人/银行 1-团体
      */
     @Override
-    public MessageResponse recoverData(String id, String type, UserProp userProp) {
-        if (type.equals())
-            return null;
+    public MessageResponse recoverData(String id, String type, UserProp userProp) throws Exception {
+        if (type.equals(FopConstant.COMPANY)) {
+            FopCompanyVo company = fopCompanyDao.selectVoByPrimaryKey(id);
+            if (null == company) {
+                return new MessageResponse(ResultCode.FAIL, "无效编号");
+            }
+            //恢复系统账号
+            Users users = usersService.selectByAccount(company.getLpMobile());
+            MessageResponse rs = usersService.updateUsersStautsByPrimaryKey(users.getUserId(), "1", userProp);
+            if (rs.getStatus() == ResultCode.FAIL) {
+                return rs;
+            }
+            //恢复会员身份
+            company.setStatus("2");
+            company.setLastModifyDate(DateUtil.getNowDate());
+            company.setLastModifyUserId(userProp.getUserId());
+            company.setLastModifyUserName(userProp.getName());
+            fopCompanyDao.updateByPrimaryKeySelective(company);
+            dataBaseLogService.log("会员恢复", "会员恢复", String.valueOf(id), String.valueOf(id), "企业管理", userProp);
+
+            return new MessageResponse(ResultCode.SUCCESS, "数据恢复成功");
+        } else if (type.equals(FopConstant.ASSOCIATION)) {
+            FopAssociation association = fopAssociationDao.selectVoByPrimaryKey(id);
+            if (null == association) {
+                return new MessageResponse(ResultCode.FAIL, "无效编号");
+            }
+            //恢复系统账号
+            Users users = usersService.selectByAccount(association.getPhoneNumber());
+            MessageResponse rs = usersService.updateUsersStautsByPrimaryKey(users.getUserId(), "1", userProp);
+            if (rs.getStatus() == ResultCode.FAIL) {
+                return rs;
+            }
+            //恢复会员身份
+            association.setStatus("2");
+            association.setLastModifyDate(DateUtil.getNowDate());
+            association.setLastModifyUserId(userProp.getUserId());
+            association.setLastModifyUserName(userProp.getName());
+            fopAssociationDao.updateByPrimaryKeySelective(association);
+            dataBaseLogService.log("会员恢复", "会员恢复", String.valueOf(id), String.valueOf(id), "团体管理", userProp);
+
+            return new MessageResponse(ResultCode.SUCCESS, "数据恢复成功");
+        }
+
+        return new MessageResponse(ResultCode.FAIL, "未知会员类型");
     }
 
     @Override
