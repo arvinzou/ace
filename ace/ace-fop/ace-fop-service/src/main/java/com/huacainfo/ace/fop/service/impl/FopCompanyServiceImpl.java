@@ -664,6 +664,18 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         return fopCompanyDao.selectByDepartmentId(departmentId);
     }
 
+    /**
+     * 账号恢复
+     *
+     * @param id   唯一主键
+     * @param type 会员类型 0-企业/个人/银行 1-团体
+     */
+    @Override
+    public MessageResponse recoverData(String id, String type, UserProp userProp) {
+        if (type.equals())
+            return null;
+    }
+
     @Override
     public ResultResponse selectCompanyInfo(UserProp userProp) throws Exception {
         ResultResponse rr = getCompanyId(userProp);

@@ -31,13 +31,13 @@
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                    <%--类别：<input class="easyui-combobox" style="width: 200px" name="category"--%>
-                    <%--data-options="--%>
-                    <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',--%>
-                    <%--method:'get',--%>
-                    <%--valueField:'code',--%>
-                    <%--textField:'name',--%>
-                    <%--panelHeight:'auto'">--%>
+                    会员状态：<input class="easyui-combobox" style="width: 200px" name="status"
+                                data-options="
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=149&selected=false',
+                    method:'get',
+                    valueField:'code',
+                    textField:'name',
+                    panelHeight:'auto'">
 
                     名称： <input name="fullName" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
@@ -59,7 +59,10 @@
                             authority="${pageContext.request.contextPath}/fopCompany/deleteFopCompanyByFopCompanyId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-
+                    <button class="btn btn-warning" id="btn-view-recover"
+                            authority="${pageContext.request.contextPath}/fopCompany/recoverData">
+                        <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
+                    </button>
                 </div>
             </div>
         </div>

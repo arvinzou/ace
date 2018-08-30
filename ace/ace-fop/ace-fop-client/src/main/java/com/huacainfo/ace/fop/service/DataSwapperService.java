@@ -17,4 +17,13 @@ public interface DataSwapperService {
      * @return map
      */
     ResultResponse search(String keyword, int type);
+
+    /**
+     * 接口api调用
+     *
+     * @param methodName 方法名称
+     * @param keyWord    关键词
+     * @return ResultResponse
+     */
+    ResultResponse invoke(String methodName, String keyWord);
 }
