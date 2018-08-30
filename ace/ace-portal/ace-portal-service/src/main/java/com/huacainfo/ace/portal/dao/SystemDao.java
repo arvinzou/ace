@@ -125,4 +125,6 @@ public interface SystemDao {
 
 	public List<Map<String, Object>> getLockedList();
 
+	public abstract Users selectUsersByMobile(@Param("mobile") String mobile);
+
 }
