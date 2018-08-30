@@ -661,13 +661,12 @@
     </sql>
 
     <sql id="whereCondition">
-        where c.status != 0
+        where 1=1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and c.id = #{condition.id,jdbcType=VARCHAR}
         </if>
         <if test='condition.fullName!=null and condition.fullName!=""'>
-            and c.fullName like
-            concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
+            and c.fullName like concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and c.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')

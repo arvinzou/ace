@@ -100,5 +100,13 @@ public interface FopCompanyService {
 
     FopCompany selectByDepartmentId(String departmentId) throws Exception;
 
-
+    /**
+     * 账号恢复
+     *
+     * @param id   唯一主键
+     * @param type 会员类型 0-企业/个人/银行 1-团体
+     * @return
+     * @throws Exception
+     */
+    MessageResponse recoverData(String id, String type, UserProp curUserProp);
 }
