@@ -511,6 +511,7 @@
                 <div class="idCardBox form_idCardSideImgUrl">
                     <img class="select_img"
                          data-cover="IDcardf"
+                         id="IDcardf"
                          data-xsize="240" data-ysize="150" \${data.regAuditRst!=1?'data-toggle=modal
                          data-target=#img-uploader':''}
                          src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
