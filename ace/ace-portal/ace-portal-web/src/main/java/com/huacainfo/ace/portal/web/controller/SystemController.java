@@ -1,18 +1,5 @@
 package com.huacainfo.ace.portal.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -21,6 +8,18 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DictUtils;
 import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.service.SystemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @Controller
 @RequestMapping("/system")
 public class SystemController extends PortalBaseController{
@@ -316,8 +315,8 @@ public class SystemController extends PortalBaseController{
 	 */
 	@RequestMapping(value = "/retrievePassword.do")
 	@ResponseBody
-	public MessageResponse retrievePassword(String email)throws Exception {
-		return this.systemService.updateForRetrievePassword(email);
+	public MessageResponse retrievePassword(String mobile)throws Exception {
+		return this.systemService.updateForRetrievePassword(mobile);
 		
 	}
 	/**
