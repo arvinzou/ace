@@ -184,7 +184,7 @@ function submitForm() {
     var url = '/jxb/counselor/updateUserinfo';
     $.post(url, formObject, function (result) {
         if (result.status == 0) {
-            if (regAuditRst != 1) {
+            if (regAuditRst == 1) {
                 alert("更新成功");
                 return null;
             }
