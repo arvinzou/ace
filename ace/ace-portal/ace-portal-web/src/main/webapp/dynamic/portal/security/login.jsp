@@ -175,7 +175,7 @@
     <div align="center">
         <h6>
             <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
-                href="http://rj.baidu.com/soft/detail/14744.html?ald"
+                href="https://sm.myapp.com/original/Browser/68.0.3440.106_chrome_installer.exe"
                 target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
                 style="font-family: '微软雅黑'">分辨率1024*768以上为佳</span>
         </h6>
