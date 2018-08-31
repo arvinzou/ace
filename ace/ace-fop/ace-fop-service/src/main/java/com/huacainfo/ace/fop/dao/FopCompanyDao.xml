@@ -691,12 +691,18 @@
         <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
             and c.belongTo = #{condition.belongTo,jdbcType=CHAR}
         </if>
-        <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
+        <if test="condition.fopPost!=null and condition.fopPost!=&quot;&quot;">
             and c.fopPost = #{condition.fopPost,jdbcType=CHAR}
         </if>
         <choose>
             <when test='condition.companyType=="w"'>
                 and c.companyType not in('3','4')
+            </when>
+            <when test='condition.companyTypeArray !=null'>
+                and c.companyType in
+                <foreach collection="condition.companyTypeArray" open="(" separator="," close=")" item="item">
+                    #{item}
+                </foreach>
             </when>
             <otherwise>
                 and c.companyType = #{condition.companyType,jdbcType=CHAR}

@@ -77,6 +77,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private MessageService messageService;
     @Autowired
     private FopCompanyOrgDao fopCompanyOrgDao;
+    @Autowired
+    private FopMemberService fopMemberService;
 
     /**
      * @throws
@@ -295,9 +297,9 @@ public class FopCompanyServiceImpl implements FopCompanyService {
      */
     private void insertOrUpdateCompanyOrgInfo(FopCompanyVo o, UserProp userProp) {
         String companyId = o.getId();
-        FopCompanyOrgVo party = fopCompanyOrgDao.findCompayOrgType(companyId, "1");//党组织
         if (StringUtil.oneIsNotEmty(o.getPartyCategory(), o.getPartyDutyMan(), o.getPartyPhone(), o.getPartyPeoples() + "")
                 || o.getPartyCrtDt() != null) {
+            FopCompanyOrgVo party = fopCompanyOrgDao.findCompayOrgType(companyId, "1");//党组织
             if (null == party) {
                 party = new FopCompanyOrgVo();
                 party.setId(GUIDUtil.getGUID());
@@ -328,8 +330,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             }
         }
         //工会组织
-        FopCompanyOrgVo union = fopCompanyOrgDao.findCompayOrgType(o.getId(), "2");//工会组织
         if (StringUtil.oneIsNotEmty(o.getUnionDutyMan(), o.getUnionPhone()) || o.getUnionCrtDt() != null) {
+            FopCompanyOrgVo union = fopCompanyOrgDao.findCompayOrgType(o.getId(), "2");//工会组织
             if (null == union) {
                 union = new FopCompanyOrgVo();
                 union.setId(GUIDUtil.getGUID());
@@ -631,9 +633,11 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         //注销系统账户
         String account = sysAccountService.getAccount(FopConstant.COMPANY, id);
         Users users = usersService.selectByAccount(account);
-        MessageResponse rs = usersService.updateUsersStautsByPrimaryKey(users.getUserId(), "0", userProp);
-        if (rs.getStatus() == ResultCode.FAIL) {
-            return rs;
+        if (users != null) {
+            MessageResponse rs = usersService.updateUsersStautsByPrimaryKey(users.getUserId(), "0", userProp);
+            if (rs.getStatus() == ResultCode.FAIL) {
+                return rs;
+            }
         }
         //注销企业资料
         company.setStatus("0");
@@ -712,6 +716,41 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         }
 
         return new MessageResponse(ResultCode.FAIL, "未知会员类型");
+    }
+
+    /**
+     * 恢复会员身份
+     *
+     * @param id 唯一主键
+     */
+    @Override
+    public MessageResponse reJoin(String id, UserProp userProp) throws Exception {
+        FopCompanyVo company = fopCompanyDao.selectVoByPrimaryKey(id);
+        if (null == company) {
+            return new MessageResponse(ResultCode.FAIL, "无效编号");
+        }
+        if (!"1".equals(company.getStatus())) {
+            return new MessageResponse(ResultCode.FAIL, "企业状态不合法");
+        }
+        //会员记录
+        FopMember params = new FopMember();
+        params.setRelationId(company.getId());
+        params.setRelationType("0");// 0-企业会员 1-团体会员
+        params.setMermberName(company.getFullName());
+        MessageResponse ms = fopMemberService.memberJoinAudit(params, userProp);
+        if (ResultCode.FAIL == ms.getStatus()) {
+            return ms;
+        }
+
+        //恢复会员身份
+        company.setStatus("2");
+        company.setLastModifyDate(DateUtil.getNowDate());
+        company.setLastModifyUserId(userProp.getUserId());
+        company.setLastModifyUserName(userProp.getName());
+        fopCompanyDao.updateByPrimaryKeySelective(company);
+        dataBaseLogService.log("会员恢复", "退会再入会", String.valueOf(id), String.valueOf(id), "企业管理", userProp);
+
+        return new MessageResponse(ResultCode.SUCCESS, "恢复成功");
     }
 
     @Override

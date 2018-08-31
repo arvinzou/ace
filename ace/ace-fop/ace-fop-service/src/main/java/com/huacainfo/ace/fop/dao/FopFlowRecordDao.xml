@@ -215,7 +215,7 @@
     </resultMap>
     <sql id="Vo_Column_List">
         CASE
-        when t.flowType = '0'
+        when t.flowType in ('0','3')
         then (select fullName from fop.fop_company where id = t.fromId)
         when t.flowType = '1'
         then (select fullName from fop.fop_association where id = t.fromId)
@@ -249,7 +249,6 @@
     <sql id="whereCondition">
         from fop_flow_record t
         where t.status <![CDATA[ <> ]]> 0
-        and t.flowType in ('0','1')
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
@@ -257,8 +256,15 @@
             and t.status = #{condition.status,jdbcType=CHAR}
         </if>
         <if test="condition.flowType!=null and condition.flowType!=&quot;&quot;">
-            and t.flowType = #{condition.flowType,jdbcType=CHAR}
         </if>
+        <choose>
+            <when test="condition.flowType!=null and condition.flowType!=&quot;&quot;">
+                and t.flowType = #{condition.flowType,jdbcType=CHAR}
+            </when>
+            <otherwise>
+                and t.flowType in ('0','1')
+            </otherwise>
+        </choose>
     </sql>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">

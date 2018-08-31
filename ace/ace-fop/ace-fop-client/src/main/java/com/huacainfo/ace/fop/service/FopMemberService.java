@@ -106,4 +106,6 @@ public interface FopMemberService {
      * @Author Arvin
      */
     List<FopMember> selectByRelationType(String relationType, String relationId, String[] status);
+
+    int deleteByRelationId(String relationId);
 }

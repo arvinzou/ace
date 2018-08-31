@@ -6,13 +6,16 @@ import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.fop.common.constant.*;
 import com.huacainfo.ace.fop.dao.*;
 import com.huacainfo.ace.fop.model.*;
 import com.huacainfo.ace.fop.service.*;
+import com.huacainfo.ace.fop.vo.FopCompanyVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
 import com.huacainfo.ace.fop.vo.FopFlowRecordVo;
 import com.huacainfo.ace.portal.model.Users;
@@ -48,6 +51,8 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
     private FopMemberService fopMemberService;
     @Autowired
     private FopCompanyDao fopCompanyDao;
+    @Autowired
+    private FopCompanyService fopCompanyService;
     @Autowired
     private FopCompanyService companyService;
     @Autowired
@@ -161,8 +166,7 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         o.setCreateUserId(userProp.getUserId());
         o.setLastModifyDate(DateUtil.getNowDate());
         this.fopFlowRecordDao.insertSelective(o);
-        this.dataBaseLogService.log("添加流程记录", "流程记录", "", o.getId(),
-                o.getId(), userProp);
+        this.dataBaseLogService.log("添加流程记录", "流程记录", "", o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "添加流程记录完成！");
     }
 
@@ -318,7 +322,7 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
                 rs = memberPay(record, userProp);//  2018/5/7 会员缴费审核
                 break;
             case FlowType.MEMBER_QUIT_COMPANY:
-                rs = null;// TODO: 2018/5/7 企业会员退会审核
+                rs = memberQuitAudit(record, userProp);// 企业会员退会审核
                 break;
             case FlowType.MEMBER_QUIT_ASSOCIATION:
                 rs = null;// TODO: 2018/5/7 团体会员退会审核
@@ -367,6 +371,37 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         this.dataBaseLogService.log("变更流程记录", "流程记录", "",
                 record.getId(), record.getId(), userProp);
         return new MessageResponse(0, "流程审核成功");
+    }
+
+    /**
+     * 企业会员退会审核
+     */
+    private MessageResponse memberQuitAudit(FopFlowRecord record, UserProp userProp) throws Exception {
+        FopCompanyVo fopCompany = fopCompanyDao.selectVoByPrimaryKey(record.getFromId());
+        if (null == fopCompany) {
+            return new MessageResponse(ResultCode.FAIL, "企业资料丢失");
+        }
+        //审核通过 - 退出会员，变更会员身份
+        if (AuditResult.PASS.equals(record.getAuditResult())) {
+            int delCount = fopMemberService.deleteByRelationId(fopCompany.getId());
+            if (delCount > 0) {
+                fopCompany.setStatus("1");//0-已删除 1 - 非会员 2 - 会员
+//                fopCompany.setLastModifyDate(new Date());
+//                fopCompany.setLastModifyUserName(userProp.getName());
+//                fopCompany.setLastModifyUserId(userProp.getUserId());
+                MessageResponse ms = fopCompanyService.updateFopCompany(fopCompany, userProp);
+                if (ms.getStatus() == ResultCode.SUCCESS) {
+                    return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+                }
+            }
+
+            return new MessageResponse(ResultCode.FAIL, "审核失败");
+        }
+        //推送微信结果通知
+//        sendNoticeToUser(fopCompany.getFullName(), FopConstant.COMPANY, fopCompany.getId(), record);
+
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+
     }
 
     /**
@@ -599,6 +634,35 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
             return new MessageResponse(ResultCode.FAIL, "***************NPE******************");
         }
         return memberJoinAudit(record, userProp);
+    }
+
+    /**
+     * 提交退会申请
+     *
+     * @param companyId 企业ID
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse applyQuit(String companyId) throws Exception {
+        FopCompanyVo vo = fopCompanyDao.selectVoByPrimaryKey(companyId);
+        if (null == vo) {
+            return new ResultResponse(ResultCode.FAIL, "企业资料异常");
+        }
+        if ("2".equals(vo.getStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "会员状态异常");
+        }
+//        int auditRecord = fopFlowRecordDao.isExit();
+
+        UserProp userProp = new UserProp();
+        userProp.setUserId(vo.getId());
+        userProp.setName(vo.getFullName());
+        userProp.setActiveSyId("fop");
+
+        MessageResponse ms = submitFlowRecord(GUIDUtil.getGUID(), FlowType.MEMBER_QUIT_COMPANY, vo.getId(), userProp);
+        if (ms.getStatus() == ResultCode.SUCCESS) {
+            return new ResultResponse(ResultCode.SUCCESS, "申请成功");
+        }
+        return new ResultResponse(ms);
     }
 
     /**
