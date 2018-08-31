@@ -242,10 +242,10 @@
 		{@each data as item, index}
         <div class="row commen_item">
             <div class="row" style="padding-top: 0.2rem;">
-            <div class="col-xs-3 col-md-3">
+            <div class="col-xs-2 col-md-2">
             <img src="\${item.headimgurl}" class="user_head" />
             </div>
-            <div class="col-xs-5 col-md-5">
+            <div class="col-xs-6 col-md-6">
             <p class="username">\${item.nickname}</p>
             <p class="comments_time">\${item.createDate}</p>
             </div>
@@ -274,8 +274,8 @@
             </div>
             </div>
             <div class="row">
-            <div class="col-xs-3 col-md-3"></div>
-            <div class="col-xs-9 col-md-9">
+            <div class="col-xs-2 col-md-2"></div>
+            <div class="col-xs-10 col-md-10">
             <p class="commonts_content">
 				\${item.content}
 			</p>
