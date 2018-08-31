@@ -171,13 +171,6 @@ function initUpload(){
         url: '/portal/files/uploadFile.do',
         file_data_name: 'file',
         multi_selection: false,
-        resize: {
-            width: 1024,
-            height: 1024,
-            crop: true,
-            quality: 60,
-            preserve_headers: false
-        },
         filters: {
             max_file_size: '2048mb',
             mime_types: [
