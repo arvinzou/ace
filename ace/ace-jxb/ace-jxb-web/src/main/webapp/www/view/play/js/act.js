@@ -217,7 +217,7 @@ function palyer() {
             window.removeEventListener('mousemove', window[handleMethod], false);
         }, false);
     });
-    player.addEventListener('canplay', makePlay);
+    player.addEventListener('waiting', makePlay);
     playpauseBtn.addEventListener('click', togglePlay);
     player.addEventListener('timeupdate', updateProgress);
     player.addEventListener('volumechange', updateVolume);
@@ -341,7 +341,8 @@ function palyer() {
         }
     }
 
-    function makePlay() {
+    function makePlay(c) {
+        console.log(c);
         playpauseBtn.style.display = 'block';
         loading.style.display = 'none';
     }

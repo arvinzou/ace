@@ -22,7 +22,7 @@
 					<div class="col-xs-6 col-sm-8 row_01">
 						<div class="row consotor">
 							<div class="col-xs-6 col-xs-6 consotor_01">肖海平</div>
-							<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />5.0</div>
+                            <%--<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />5.0</div>--%>
 						</div>
 						<div class="row introduce">
 							<p>国家二级心理咨询师</p>

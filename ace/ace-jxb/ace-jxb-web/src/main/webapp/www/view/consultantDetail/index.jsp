@@ -26,7 +26,7 @@
 				<div class="col-xs-6 col-sm-8 row_01">
 					<div class="row consotor">
 						<div class="col-xs-6 col-xs-6 consotor_01">\${data.counselor.name}</div>
-						<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${data.counselor.level}</div>
+						<%--<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${data.counselor.level}</div>--%>
 					</div>
 					<div class="row introduce">
 						<p>\${data.counselor.certification}</p>
@@ -101,7 +101,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12">
 					<span class="formtitle">联系方式：</span>
-					<span class="formcmt">\${data.consultOrder.tel}</span>
+					<span class="formcmt"><a href="tel:\${data.consultOrder.tel}">\${data.consultOrder.tel}</a></span>
 				</div>
 			</div>
 		</div>
@@ -144,7 +144,8 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12">
 					<span class="formtitle">联系方式：</span>
-					<span class="formcmt">\${data.consultOrder.secTel}</span>
+					<span class="formcmt"><a
+							href="tel:\${data.consultOrder.secTel}">\${data.consultOrder.secTel}</a></span>
 				</div>
 			</div>
 		</div>
@@ -169,7 +170,7 @@
 						{@if data.payStatus == '1'}
 						<span class="order_state">待支付</span>
 						{@else if data.payStatus == '2'}
-						<span class="order_state">已付款(待接单)</span>
+						<span class="order_state">已付款</span>
 						{@else if data.payStatus == '3'}
 						<span class="order_state">申请退款</span>
 						{@else if data.payStatus == '4'}
@@ -181,7 +182,7 @@
 						{@else}
 						<span class="order_state">自动关闭</span>
 						{@/if}
-						</span>
+					</span>
 				</div>
 			</div>
 		</div>

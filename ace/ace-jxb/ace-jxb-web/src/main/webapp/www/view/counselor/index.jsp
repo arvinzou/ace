@@ -28,8 +28,8 @@
 		</div>
 		<div class="row footer">
 			<div class="col-xs-5 col-sm-5">
-				<span class="chat_icon"><img src="img/chat_icon.png"/></span>
-				<span>聊一聊</span>
+				<%--<span class="chat_icon"><img src="img/chat_icon.png"/></span>--%>
+				<%--<span>聊一聊</span>--%>
 			</div>
 			<div class="col-xs-7 col-sm-7" id="createOrder">
 
