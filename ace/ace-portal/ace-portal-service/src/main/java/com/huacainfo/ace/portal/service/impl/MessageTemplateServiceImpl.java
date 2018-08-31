@@ -4,7 +4,9 @@ package com.huacainfo.ace.portal.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.api.MessageSendApi;
+import com.huacainfo.ace.common.plugins.wechat.entity.Miniprogram;
 import com.huacainfo.ace.common.plugins.wechat.entity.TemplateData;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -358,8 +360,17 @@ public class MessageTemplateServiceImpl implements MessageTemplateService, Backe
                     Map<String, String> dataMap = getDataMap(params, wechatMap);
                     //<remark></remark>
                     String remark = dealParams(wechatMap, params, "remark");
-
+                    //xml信息
                     TemplateData templateData = getTemplateData(openid, templateId, url, first, remark, dataMap);
+                    //处理小程序
+                    Miniprogram miniprogram = (Miniprogram) params.get("miniprogram");
+                    if (null != miniprogram
+                            && StringUtil.isNotEmpty(miniprogram.getAppid())
+                            && StringUtil.isNotEmpty(miniprogram.getPagepath())) {
+                        templateData.setMiniAppid(miniprogram.getAppid());
+                        templateData.setMiniPagePath(miniprogram.getPagepath());
+                    }
+
                     logger.debug("templateData={}", templateData.toString());
                     return templateData;
                 }

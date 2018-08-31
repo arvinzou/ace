@@ -157,4 +157,6 @@ public interface AppealCaseService {
      * @throws Exception
      */
     MessageResponse updateAppealCase(AppealCase obj, UserProp userProp) throws Exception;
+
+    ResultResponse acMsgTest(String appealCaseId, String sendType) throws Exception;
 }
