@@ -54,14 +54,19 @@
 							<form>
 								<input value="5" id="rating-input" type="text" title="" />
 								<span class="demo" id="kv-caption">推荐</span><br/>
-								<textarea class="point" name="content" placeholder="鼓励下老师吧~" onfocus="this.placeholder=''" onblur="this.placeholder='鼓励下老师吧~'"></textarea><br />
-								<a href="javascript:void(0);" class="commit" onclick="commitComments();">提&nbsp;交</a>
 							</form>
 						</div>
+					</div>
+					<textarea class="point" name="content" placeholder="鼓励下老师吧~" maxlength="100"
+							  onfocus="this.placeholder=''" onblur="this.placeholder='鼓励下老师吧~(100字以内)'"></textarea><br/>
+					<div class="pjbtn">
+						<a href="javascript:void(0);" class="commit" onclick="commitComments();">提&nbsp;交</a>
 					</div>
 				</div>
 			</div>
 		</div>
+
+
 	</body>
 
 	<script id="bannerTemp" type="text/template">
@@ -128,7 +133,7 @@
                         <span class="total-time">0:00</span>
 					</div>
 
-                    <audio crossorigin="" preload="auto" oncanplay="makePlay();">
+					<audio crossorigin="" preload="auto">
 						<source src="\${data.mediUrl}" type="audio/mpeg">
 					</audio>
 				</div>
