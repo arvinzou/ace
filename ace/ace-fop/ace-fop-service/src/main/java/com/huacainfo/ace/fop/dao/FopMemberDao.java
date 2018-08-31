@@ -47,4 +47,5 @@ public interface FopMemberDao {
     List<Map<String, Object>> selectRoleList(@Param("activeSyId") String activeSyId,
                                              @Param("roleTypes") String[] roleTypes);
 
+    int deleteByRelationId(String relationId);
 }

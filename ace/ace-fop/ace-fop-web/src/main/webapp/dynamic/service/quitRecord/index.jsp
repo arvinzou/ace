@@ -26,14 +26,6 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
-
-                    流程类别：<input name="flowType" class="easyui-combobox" style="width: 200px ;height: 25px"
-                                data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=129&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
                     审核结果：<select name="status" style="width: 200px; height: 25px">
                     <option value="">-请选择-</option>
                     <option value="1">未审核</option>
@@ -47,10 +39,6 @@
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
-                    <%--<button class="btn btn-warning" id="btn-view-del"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopFlowRecord/deleteFopFlowRecordByFopFlowRecordId">--%>
-                    <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
                     <button class="btn btn-purple" id="btn-view-audit"
                             authority="${pageContext.request.contextPath}/fopFlowRecord/audit">
                         <i class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
@@ -163,10 +151,10 @@
 
 <jsp:include page="../../common/footer-1.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/juicer/juicer-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/flowRecord/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/quitRecord/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/quitRecord/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/quitRecord/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/quitRecord/view.js?version=${cfg.version}"></script>
 
 
 <jsp:include page="../../common/footer-2.jsp"/>

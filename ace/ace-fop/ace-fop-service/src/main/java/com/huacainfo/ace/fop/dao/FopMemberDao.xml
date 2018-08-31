@@ -270,4 +270,9 @@
             ${item}
         </foreach>
     </select>
+
+    <delete id="deleteByRelationId" parameterType="java.lang.String">
+        delete from fop_member
+        where relationId = #{relationId,jdbcType=VARCHAR}
+    </delete>
 </mapper>

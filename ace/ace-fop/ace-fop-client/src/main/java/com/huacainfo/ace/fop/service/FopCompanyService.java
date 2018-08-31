@@ -109,4 +109,11 @@ public interface FopCompanyService {
      * @throws Exception
      */
     MessageResponse recoverData(String id, String type, UserProp curUserProp) throws Exception;
+
+    /**
+     * 恢复会员身份
+     *
+     * @param id 唯一主键
+     */
+    MessageResponse reJoin(String id, UserProp curUserProp) throws Exception;
 }

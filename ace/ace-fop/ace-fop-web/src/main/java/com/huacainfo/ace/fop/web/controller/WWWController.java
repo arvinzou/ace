@@ -86,6 +86,8 @@ public class WWWController extends FopBaseController {
 
     @Autowired
     private FopCompanyOrgService fopCompanyOrgService;
+    @Autowired
+    private FopFlowRecordService fopFlowRecordService;
 
     /**
      * gis地图
@@ -1006,4 +1008,17 @@ public class WWWController extends FopBaseController {
         }
         return new ResultResponse(1, "账户没有绑定企业！");
     }
+
+    /**
+     * 退会申请
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/applyQuit")
+    @ResponseBody
+    public ResultResponse applyQuit(String companyId) throws Exception {
+        return fopFlowRecordService.applyQuit(companyId);
+    }
+
 }

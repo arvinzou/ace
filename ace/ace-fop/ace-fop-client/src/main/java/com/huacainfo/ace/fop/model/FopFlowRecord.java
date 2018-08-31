@@ -11,7 +11,9 @@ public class FopFlowRecord implements Serializable {
     private String id;
 
     private String fromId;
-
+    /**
+     * FlowType.java
+     */
     private String flowType;
 
     private String personId;
