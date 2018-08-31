@@ -128,7 +128,7 @@
                         <span class="total-time">0:00</span>
 					</div>
 
-					<audio crossorigin="">
+                    <audio crossorigin="" preload="auto" oncanplay="makePlay();">
 						<source src="\${data.mediUrl}" type="audio/mpeg">
 					</audio>
 				</div>
