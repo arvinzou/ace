@@ -51,13 +51,13 @@
                                 textField:'name',
                                 panelHeight:'auto'">
 
-                        会员状态：<input class="easyui-combobox" style="width: 200px" name="status"
-                                    data-options="
-                                url:'${portalPath}/dict/findListByCategoryId.do?categoryId=149&selected=false',
-                                method:'get',
-                                valueField:'code',
-                                textField:'name',
-                                panelHeight:'auto'">
+                        <%--会员状态：<input class="easyui-combobox" style="width: 200px" name="status"--%>
+                        <%--data-options="--%>
+                        <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=149&selected=false',--%>
+                        <%--method:'get',--%>
+                        <%--valueField:'code',--%>
+                        <%--textField:'name',--%>
+                        <%--panelHeight:'auto'">--%>
                     </div>
                     <div style="margin: 5px 5px 5px 0px;" class="row">
                         名称： <input name="fullName" type="text" style="width: 200px;"/>
