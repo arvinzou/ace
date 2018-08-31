@@ -133,7 +133,7 @@
                                             {@/if}
                                         </td>
                                         <td>
-                                            <a href="#" class="operation" data-target="#opt" data-toggle="modal" onclick="setval('\${item.id}');">审核</a>
+                                            <a href="#" class="operation" data-target="#opt" data-toggle="modal" onclick="setval('\${item.id}','\${item.status}');">审核</a>
                                             <a href="#" class="operation" data-target="#myModal" data-toggle="modal" onclick="edit('\${item.id}');">查看 </a>
                                         </td>
                                     </tr>
