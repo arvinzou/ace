@@ -192,7 +192,7 @@ function initUpload(){
             },
             UploadProgress: function(e, t) {
                 var r = t.percent;
-                /*$(".uploadPloadprogress").html("开始上传（" + r + "%）");*/
+                $(".uploadPloadprogress").html("开始上传（" + r + "%）");
             },
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);

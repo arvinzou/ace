@@ -80,12 +80,15 @@
 																		<label class="col-md-2 control-label">
 																			<span class="label-red">*</span>音频地址</label>
 																		<div class="col-md-2">
-																			<button id="uploadSource">上传资源</button>
+																			<a href="javascript:void(0);" id="uploadSource" style="font-size: 14px !important;" class="btn green commonCourse">上传资源</a>
 																		</div>
 																		<div class="col-md-8">
 																			<input id="mediUrl" type="text" class="form-control" name="mediUrl" maxlength="200" placeholder="音频资源的地址如:http://mp3.aile.com/mp3/a.mp3">
 																			<span class="help-block"></span>
 																		</div>
+																	</div>
+																	<div class="form-group">
+																		<div class="col-md-12"><span class="uploadPloadprogress"></span></div>
 																	</div>
 
 																	<div class="form-group">
