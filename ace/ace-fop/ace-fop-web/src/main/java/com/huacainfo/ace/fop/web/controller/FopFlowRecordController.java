@@ -48,8 +48,8 @@ public class FopFlowRecordController extends FopBaseController {
     @ResponseBody
     public PageResult<FopFlowRecordVo> findFopFlowRecordList(FopFlowRecordQVo condition,
                                                              PageParamNoChangeSord page) throws Exception {
-        PageResult<FopFlowRecordVo> rst = this.fopFlowRecordService
-                .findFopFlowRecordList(condition, page.getStart(), page.getLimit(),
+        PageResult<FopFlowRecordVo> rst =
+                fopFlowRecordService.findFopFlowRecordList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

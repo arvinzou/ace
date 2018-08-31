@@ -50,14 +50,6 @@
                                 valueField:'code',
                                 textField:'name',
                                 panelHeight:'auto'">
-
-                        <%--会员状态：<input class="easyui-combobox" style="width: 200px" name="status"--%>
-                        <%--data-options="--%>
-                        <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=149&selected=false',--%>
-                        <%--method:'get',--%>
-                        <%--valueField:'code',--%>
-                        <%--textField:'name',--%>
-                        <%--panelHeight:'auto'">--%>
                     </div>
                     <div style="margin: 5px 5px 5px 0px;" class="row">
                         名称： <input name="fullName" type="text" style="width: 200px;"/>
@@ -71,21 +63,21 @@
                 </form>
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/fopCompany/insertFopCompany">
-                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/fopCompany/updateFopCompany">
-                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/fopCompany/deleteFopCompanyByFopCompanyId">
-                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <%--<button class="btn btn-warning" id="btn-view-recover"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopCompany/recoverData">--%>
+                    <%--<button class="btn btn-info" id="btn-view-add"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopCompany/insertFopCompany">--%>
+                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
                     <%--</button>--%>
+                    <%--<button class="btn btn-info" id="btn-view-edit"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopCompany/updateFopCompany">--%>
+                    <%--<i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
+                    <%--<button class="btn btn-warning" id="btn-view-del"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopCompany/deleteFopCompanyByFopCompanyId">--%>
+                    <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
+                    <%--</button>--%>
+                    <button class="btn btn-warning" id="btn-view-recover"
+                            authority="${pageContext.request.contextPath}/fopCompany/recoverData">
+                    </button>
                 </div>
             </div>
         </div>
@@ -110,12 +102,12 @@
 </div>
 <jsp:include page="../../common/footer-1.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/juicer/juicer-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/deleteCompany/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/deleteCompany/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/deleteCompany/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/deleteCompany/view.js?version=${cfg.version}"></script>
 
-<script src="${pageContext.request.contextPath}/content/service/company/upload.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/deleteCompany/upload.js?version=${cfg.version}"></script>
 
 <script type="text/javascript"
         src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>

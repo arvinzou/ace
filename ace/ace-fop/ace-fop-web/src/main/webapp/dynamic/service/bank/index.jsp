@@ -61,7 +61,6 @@
                     </button>
                     <button class="btn btn-warning" id="btn-view-recover"
                             authority="${pageContext.request.contextPath}/fopCompany/recoverData">
-                        <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
                     </button>
                 </div>
             </div>

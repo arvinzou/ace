@@ -54,9 +54,11 @@ public class FopCompanyController extends FopBaseController {
     @ResponseBody
     public PageResult<FopCompanyVo> findFopCompanyList(FopCompanyQVo condition,
                                                        PageParamNoChangeSord page) throws Exception {
-        PageResult<FopCompanyVo> rst = this.fopCompanyService
-                .findFopCompanyList(condition, page.getStart(), page.getLimit(),
-                        page.getOrderBy());
+        if (StringUtil.isNotEmpty(condition.getCompanyTypeStr())) {
+            condition.setCompanyTypeArray(condition.getCompanyTypeStr().split(","));
+        }
+        PageResult<FopCompanyVo> rst =
+                fopCompanyService.findFopCompanyList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -171,5 +173,20 @@ public class FopCompanyController extends FopBaseController {
         }
 
         return fopCompanyService.recoverData(id, type, this.getCurUserProp());
+    }
+
+    /**
+     * 恢复会员身份
+     *
+     * @param id 唯一主键
+     */
+    @RequestMapping(value = "/reJoin")
+    @ResponseBody
+    public MessageResponse reJoin(String id) throws Exception {
+        if (!StringUtil.areNotEmpty(id)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return fopCompanyService.reJoin(id, this.getCurUserProp());
     }
 }

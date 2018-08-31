@@ -8,6 +8,25 @@ public class FopCompanyQVo extends FopCompany {
 
     private String isCompany;
 
+    private String companyTypeStr;
+    private String[] companyTypeArray;
+
+    public String getCompanyTypeStr() {
+        return companyTypeStr;
+    }
+
+    public void setCompanyTypeStr(String companyTypeStr) {
+        this.companyTypeStr = companyTypeStr;
+    }
+
+    public String[] getCompanyTypeArray() {
+        return companyTypeArray;
+    }
+
+    public void setCompanyTypeArray(String[] companyTypeArray) {
+        this.companyTypeArray = companyTypeArray;
+    }
+
     public String getIsCompany() {
         return isCompany;
     }

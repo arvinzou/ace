@@ -30,14 +30,35 @@
         <div class="widget-body">
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
+                    <div style="margin-left: 2px" class="row">
+                        企业性质：<input class="easyui-combobox" style="width: 200px" name="companyProperty"
+                                    data-options="
+                                url:'${portalPath}/dict/findListByCategoryId.do?categoryId=134&selected=false',
+                                method:'get',
+                                valueField:'code',
+                                textField:'name',
+                                panelHeight:'auto'">
+                        所在地区：<input id="cc2" name="areaCode"
+                                    class="easyui-combotree"
+                                    data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=00',
+                                    method:'get',animate: true, lines:false,"
+                                    style='width: 200px;'>
+                        工商联职务：<input class="easyui-combobox" style="width: 200px" name="fopPost"
+                                     data-options="
+                                url:'${portalPath}/dict/findListByCategoryId.do?categoryId=150&selected=false',
+                                method:'get',
+                                valueField:'code',
+                                textField:'name',
+                                panelHeight:'auto'">
 
-                    会员状态：<input class="easyui-combobox" style="width: 200px" name="status"
-                                data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=149&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
+                        <%--会员状态：<input class="easyui-combobox" style="width: 200px" name="status"--%>
+                        <%--data-options="--%>
+                        <%--url:'${portalPath}/dict/findListByCategoryId.do?categoryId=149&selected=false',--%>
+                        <%--method:'get',--%>
+                        <%--valueField:'code',--%>
+                        <%--textField:'name',--%>
+                        <%--panelHeight:'auto'">--%>
+                    </div>
 
                     名称： <input name="fullName" type="text"
                                style="width: 200px;"/>
@@ -60,10 +81,10 @@
                             authority="${pageContext.request.contextPath}/fopCompany/deleteFopCompanyByFopCompanyId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
                     </button>
-                    <button class="btn btn-warning" id="btn-view-recover"
-                            authority="${pageContext.request.contextPath}/fopCompany/recoverData">
-                        <%--<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>--%>
-                    </button>
+                    <%--<button class="btn btn-warning" id="btn-view-recover"--%>
+                    <%--authority="${pageContext.request.contextPath}/fopCompany/recoverData">--%>
+                    <%--&lt;%&ndash;<i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>&ndash;%&gt;--%>
+                    <%--</button>--%>
                 </div>
             </div>
         </div>
