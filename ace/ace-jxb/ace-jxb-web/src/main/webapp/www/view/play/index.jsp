@@ -163,10 +163,10 @@
 		{@each data as item, index}
         <div class="row list_item">
 			<div class="row">
-         		<div class="col-xs-3 col-md-3">
+         		<div class="col-xs-2 col-md-2">
         			<img src="\${item.headimgurl}" class="headImg" />
         		</div>
-        		<div class="col-xs-5 col-md-5">
+        		<div class="col-xs-6 col-md-6">
         			<p class="commonts_name">\${item.nickname}</p>
         			<p class="commonts_time">\${item.createDate}</p>
         		</div>
@@ -195,8 +195,8 @@
         		</div>
         	</div>
 			<div class="row">
-        		<div class="col-xs-3 col-md-3"></div>
-				<div class="col-xs-9 col-md-9">
+        		<div class="col-xs-2 col-md-2"></div>
+				<div class="col-xs-10 col-md-10">
         			<p class="comment_content">
 						\${item.content}
 					</p>
