@@ -37,7 +37,7 @@ public class Consult implements Serializable {
     private String onlineStatus;
 
     /**
-     * 是否接收咨询 0-否 1-是
+     * 是否接收咨询 0-否 1-是 -1-管理员强制下线。
      */
     private String status;
     /**

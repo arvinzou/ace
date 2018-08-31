@@ -82,7 +82,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th width="35%">咨询师</th>
-                                                                        <th width="15%">上架时间&状态</th>
+                                                                        <th width="15%"><%--上架时间&--%>状态</th>
                                                                         <th width="5%">咨询数</th>
                                                                         <th width="5%">创建课程</th>
                                                                         <th width="15%">审核状态</th>

@@ -188,17 +188,20 @@
                                                                             <div class="form-group ">
                                                                                 <label class="col-md-3 control-label"><span
                                                                                         class="required"
-                                                                                        aria-required="true">*</span>是否上线
+                                                                                        aria-required="true">*</span>是否上架
 
                                                                                 </label>
                                                                                 <div class="col-md-9">
                                                                                     <div class="switch"
                                                                                          data-on-label="<i class='icon-ok icon-white'></i>"
                                                                                          data-off-label="<i class='icon-remove'></i>">
-                                                                                        <input id="onlineStatus"
+                                                                                        <input id="status"
                                                                                                type="checkbox"
-                                                                                               name="onlineStatus"/>
+                                                                                               name="status"/>
                                                                                     </div>
+                                                                                    <p id="resultState"
+                                                                                       style="display: none">
+                                                                                        管理员强制下架，联系管理重新上架！</p>
                                                                                 </div>
                                                                             </div>
 

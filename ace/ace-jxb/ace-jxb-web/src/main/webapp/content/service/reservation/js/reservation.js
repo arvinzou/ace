@@ -47,11 +47,14 @@ function fillForm(data) {
         }
         $('[name=form_' + key + ']').val(data[key]);
     }
-    console.log(data.onlineStatus);
-    if (data.onlineStatus == 1) {
-        $("[name='onlineStatus']").bootstrapSwitch('state', true);
+    if (data.status == 1) {
+        $("[name='status']").bootstrapSwitch('state', true);
+    } else if (data.status == 0) {
+        $("[name='status']").bootstrapSwitch('state', false);
     } else {
-        $("[name='onlineStatus']").bootstrapSwitch('state', false);
+        $("input[name='status']").bootstrapSwitch('state', false);
+        $("input[name='status']").bootstrapSwitch('disabled', true);
+        $('#resultState').show();
     }
     var tag = $('#field .md-checkbox');
     var tags = data["field"];
@@ -150,10 +153,10 @@ function submitForm() {
         alert("还没有选择您的咨询对象");
         return
     }
-    if ($("[name='onlineStatus']").is(':checked')) {
-        formObject.onlineStatus = 1;
+    if ($("[name='status']").is(':checked')) {
+        formObject.status = 1;
     } else {
-        formObject.onlineStatus = 0;
+        formObject.status = 0;
     }
     formObject.objects = objects;
     var url = '/jxb/consult/modifyConsult';

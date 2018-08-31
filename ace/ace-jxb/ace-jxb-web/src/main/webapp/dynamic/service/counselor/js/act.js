@@ -154,7 +154,7 @@ function outline(id) {
             async: false,
             data: {
                 counselorId: id,
-                state: '0'
+                state: '-1'
             },
             success: function (rst) {
                 stopLoad();
