@@ -9,10 +9,12 @@
     <title>企业单位基本信息</title>
 </head>
 <jsp:include page="../../common/header.jsp"/>
+<jsp:include page="../../common/common.jsp"/>
 <script type="text/javascript">
 </script>
 <body>
-<div class="fn-pl40 fn-pr40 fn-pt30 fn-pb30 fn-clear">
+<div class="page-content">
+<div>
     <div class="pz-form">
         <form id="j-editform" onsubmit="return false">
             <div class="wrap fn-clear fn-pb40">
@@ -118,7 +120,9 @@
         </form>
     </div>
 </div>
+</div>
 <jsp:include page="../../common/footer.jsp"/>
+<jsp:include page="../../common/footer-1.jsp"/>
 <script src="${pageContext.request.contextPath}/content/service/company/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/company/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/company/controller.js?version=${cfg.version}"></script>
