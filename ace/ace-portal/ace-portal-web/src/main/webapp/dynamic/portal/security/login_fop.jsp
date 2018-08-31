@@ -685,6 +685,12 @@
     });
 
 </script>
+
+<script type="text/javascript">
+	if(sessionStorage){
+         sessionStorage.clear();
+    }
+</script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <!-- END THEME LAYOUT SCRIPTS -->
