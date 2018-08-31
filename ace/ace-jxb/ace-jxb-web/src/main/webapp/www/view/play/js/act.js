@@ -187,13 +187,12 @@ function initCommentsList(){
     });
 }
 
-var playpauseBtn, loading;
 
 function palyer() {
     var audioPlayer = document.querySelector('.green-audio-player');
     var playPause = audioPlayer.querySelector('#playPause');
-    playpauseBtn = audioPlayer.querySelector('.play-pause-btn');
-    loading = audioPlayer.querySelector('.loading');
+    var playpauseBtn = audioPlayer.querySelector('.play-pause-btn');
+    var loading = audioPlayer.querySelector('.loading');
     var progress = audioPlayer.querySelector('.progress');
     var sliders = audioPlayer.querySelectorAll('.slider');
     var player = audioPlayer.querySelector('audio');
@@ -218,14 +217,14 @@ function palyer() {
             window.removeEventListener('mousemove', window[handleMethod], false);
         }, false);
     });
-
+    player.addEventListener('canplay', makePlay);
     playpauseBtn.addEventListener('click', togglePlay);
     player.addEventListener('timeupdate', updateProgress);
     player.addEventListener('volumechange', updateVolume);
     player.addEventListener('loadedmetadata', function () {
         totalTime.textContent = formatTime(player.duration);
     });
-    // player.addEventListener('canplay', makePlay);
+
     player.addEventListener('ended', function () {
         $('#playPause').prop('src', 'img/play.png');
         player.currentTime = 0;
@@ -346,9 +345,4 @@ function palyer() {
         playpauseBtn.style.display = 'block';
         loading.style.display = 'none';
     }
-}
-
-function makePlay() {
-    playpauseBtn.style.display = 'block';
-    loading.style.display = 'none';
 }
