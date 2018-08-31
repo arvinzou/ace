@@ -479,7 +479,7 @@
                         输入注册的个人手机号，系统将重置的密码以短信的方式发生到此手机.
                     </div>
 
-                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱"
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="请输入注册使用的手机号"
                            name="mobile" id="mobile"/>
                 </div>
 
