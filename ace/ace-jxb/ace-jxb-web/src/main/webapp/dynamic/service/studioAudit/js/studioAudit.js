@@ -1,4 +1,5 @@
 var mySwiper;
+var studioStatus = null;
 
 window.onload = function (){
 
@@ -77,6 +78,10 @@ function audit(){
         alert("请选择审核状态！");
         return;
     }
+    if(auditRs == studioStatus){
+        alert("该工作室已经审核，不需要重复审核！");
+        return;
+    }
     $.ajax({
         url: contextPath +"/studio/audit",
         type:"post",
@@ -143,6 +148,7 @@ function edit(id){
         });
     }
 }
-function setval(id){
+function setval(id, status){
     $("#auditId").val(id);
+    studioStatus = status;
 }

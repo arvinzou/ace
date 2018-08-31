@@ -186,7 +186,7 @@
                                     <span>同意
                                         <span class="primary-link"
                                               data-target="#modal-doc"
-                                              data-toggle="modal">工作室服务协议</span>
+                                              data-toggle="modal" style="cursor: pointer;">工作室服务协议</span>
                                     </span>
                                 </div>
                             </div>

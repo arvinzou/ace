@@ -182,13 +182,14 @@ body{
 }
 
 #player .audio.green-audio-player .play-pause-btn {
-	display: none;
+	/*display: none;*/
 	cursor: pointer;
 	margin: auto;
 }
 
 #player .audio.green-audio-player .loading {
     margin: 0.35rem auto 0;
+	display: none;
 }
 
 #player .audio.green-audio-player .play-pause-btn img {

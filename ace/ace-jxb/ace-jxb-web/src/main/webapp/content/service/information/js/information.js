@@ -77,8 +77,7 @@ function fillForm(data) {
     editor.setValue(data['profile'] ? data['profile'] : '');
     var tag = $('#certification .md-radio');
     var tags = data["certification"];
-    filloption(tag, tags)
-
+    filloption(tag, tags);
 }
 
 function filloption(tag, tags) {
@@ -169,6 +168,7 @@ function submitForm() {
             alert("需要上传资格证书照片");
             return null;
         }
+        formObject.certificateImgUrl = certificateImgUrl;
 
     }
 
@@ -184,7 +184,7 @@ function submitForm() {
     var url = '/jxb/counselor/updateUserinfo';
     $.post(url, formObject, function (result) {
         if (result.status == 0) {
-            if (regAuditRst != 1) {
+            if (regAuditRst == 1) {
                 alert("更新成功");
                 return null;
             }
