@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.fop.model.FopFlowRecord;
 import com.huacainfo.ace.fop.vo.FopFlowRecordQVo;
@@ -114,4 +115,12 @@ public interface FopFlowRecordService {
     FopFlowRecord selectByPrimaryKey(String flowId);
 
     MessageResponse test(String id) throws Exception;
+
+    /**
+     * 提交退会申请
+     *
+     * @param companyId 企业ID
+     * @return ResultResponse
+     */
+    ResultResponse applyQuit(String companyId) throws Exception;
 }

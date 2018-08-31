@@ -223,4 +223,9 @@ public class FopMemberServiceImpl implements FopMemberService {
     public List<FopMember> selectByRelationType(String relationType, String relationId, String[] status) {
         return fopMemberDao.selectByRelationType(relationType, relationId, status);
     }
+
+    @Override
+    public int deleteByRelationId(String relationId) {
+        return fopMemberDao.deleteByRelationId(relationId);
+    }
 }

@@ -30,14 +30,14 @@
         SELECT
         (
         SELECT count(1) FROM fop.fop_company c
-        WHERE c.companyType in ('0','2','3','4')
+        WHERE c.companyType in ('0','4')
         and c.`status` IN ('1','2')
         ) AS cCount,
         ( SELECT count(1) FROM fop.fop_association a WHERE a.`status` IN ('1','2') ) AS aCount,
         (
         SELECT count(1)
         FROM fop.fop_company c
-        WHERE c.companyType in ('0','2','3','4')
+        WHERE c.companyType in ('0','4')
         and c.`status` IN ('2')
         ) AS mcCount,
         (SELECT count(1) FROM fop.fop_association a WHERE a.`status` IN ('1','2') ) AS maCount,

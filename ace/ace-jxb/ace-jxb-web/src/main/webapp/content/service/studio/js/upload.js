@@ -210,7 +210,7 @@ function initUpload() {
         },
         filters: [{
             title: "Image files",
-            extensions: "jpg,gif,png"
+            extensions: "jpg,jpeg,gif,png"
         }] //图片限制
     });
     //在实例对象上调用init()方法进行初始化
@@ -266,7 +266,35 @@ function initUpload() {
         $("#proc").html(html.join(''));
     });
     uploader.bind('Error', function (up, err) {
-        alert("文件上传失败,错误信息: " + err.message);
+        switch (err.code) {
+            case -200:
+                alert("文件上传失败,错误信息: 网络错误");
+                break;
+            case -300:
+                alert("文件上传失败,错误信息: 本地上文件不可读");
+                break;
+            case -400:
+                alert("文件上传失败,错误信息: 存在安全问题");
+                break;
+            case -500:
+                alert("文件上传失败,错误信息: 初始化时发生错误");
+                break;
+            case -600:
+                alert("文件上传失败,错误信息: 上传文件太大(2M以内)");
+                break;
+            case -601:
+                alert("文件上传失败,错误信息: 文件类型不符合要求");
+                break;
+            case -602:
+                alert("文件上传失败,错误信息: 选取了重复的文件");
+                break;
+            case -700:
+                alert("文件上传失败,错误信息: 图片格式错误");
+                break;
+            case -702:
+                alert("文件上传失败,错误信息: 文件太大小，无法处理");
+                break;
+        }
     });
     $('#img-uploader .btn-success').on('click', function () {
         uploader.setOption({
