@@ -511,4 +511,10 @@ i, cite, em, var, address, dfn {
     text-align: center;
 }
 </style>
+
+<script type="text/javascript">
+	if(sessionStorage){
+         sessionStorage.clear();
+    }
+</script>
 </html>
