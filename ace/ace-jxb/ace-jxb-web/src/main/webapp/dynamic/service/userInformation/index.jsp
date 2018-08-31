@@ -508,8 +508,8 @@
             </div>
 
             <div>
-                <div class="idCardBox form_idCardSideImgUrl">
-                    <img class="select_img"
+                <div class="idCardBox">
+                    <img class="select_img form_idCardSideImgUrl"
                          data-cover="IDcardf"
                          id="IDcardf"
                          data-xsize="240" data-ysize="150" \${data!=1?'data-toggle=modal

@@ -175,7 +175,7 @@
     <div align="center">
         <h6>
             <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
-                href="http://rj.baidu.com/soft/detail/14744.html?ald"
+                href="https://sm.myapp.com/original/Browser/68.0.3440.106_chrome_installer.exe"
                 target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
                 style="font-family: '微软雅黑'">分辨率1024*768以上为佳</span>
         </h6>
@@ -208,7 +208,7 @@
                         输入注册的个人手机号，系统将重置的密码以短信的方式发生到此手机.
                     </div>
 
-                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱"
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="请输入注册使用的手机号"
                            name="mobile" id="mobile"/>
                 </div>
 
