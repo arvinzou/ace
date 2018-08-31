@@ -70,7 +70,7 @@
 					{@if item.payStatus == '1'}
 					<p class="unfinished">待支付</p>
 					{@else if item.payStatus == '2'}
-					<p class="unfinished">已付款(待接单)</p>
+                    <p class="unfinished">已付款</p>
 					{@else if item.payStatus == '3'}
 					<p class="unfinished">申请退款</p>
 					{@else if item.payStatus == '4'}

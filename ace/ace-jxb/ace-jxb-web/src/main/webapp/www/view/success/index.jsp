@@ -34,7 +34,7 @@
 				<div class="col-xs-6 col-sm-8 row_01">
 					<div class="row consotor">
 						<div class="col-xs-6 col-xs-6 consotor_01">\${data.counselor.name}</div>
-						<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${data.counselor.level}</div>
+						<%--<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${data.counselor.level}</div>--%>
 					</div>
 					<div class="row introduce">
 						<p>\${data.counselor.certification}</p>
@@ -65,7 +65,7 @@
 					{@if data.payStatus == '1'}
 					<p class="order_state">待支付</p>
 					{@else if data.payStatus == '2'}
-					<p class="order_state">已付款(待接单)</p>
+					<p class="order_state">已付款</p>
 					{@else if data.payStatus == '3'}
 					<p class="order_state">申请退款</p>
 					{@else if data.payStatus == '4'}

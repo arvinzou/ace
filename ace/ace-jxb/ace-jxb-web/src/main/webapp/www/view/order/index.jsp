@@ -154,7 +154,7 @@
             <div class="col-xs-6 col-sm-8 row_01">
             <div class="row consotor">
             <div class="col-xs-6 col-xs-6 consotor_01">\${infoData.counselorVo.name}</div>
-            <div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${infoData.counselorVo.level}</div>
+				<%--<div class="col-xs-6 col-xs-6 consotor_02"><img class="level" src="img/level.png" />\${infoData.counselorVo.level}</div>--%>
             </div>
             <div class="row introduce">
             <p>\${infoData.counselorVo.certification}</p>
