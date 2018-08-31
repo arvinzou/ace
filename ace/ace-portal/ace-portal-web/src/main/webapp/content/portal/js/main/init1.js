@@ -104,6 +104,9 @@ var buildMenu = function(menus) {
 
 	var htmlFrame = buildMenuHtml(menus);
 	$('#menu').empty().append(htmlFrame);
+	//loader({path:portalPath,url:'/content/common/assets/global/scripts/app.min.js',type:'js'});
+	//loader({path:portalPath,url:'/content/common/assets/layouts/layout/scripts/layout.min.js',type:'js'});
+	 loadCommon();
 	$('#menu a[url]').bind('click', function() {
 		var url = $(this).attr("url");
 		if (url) {
@@ -143,7 +146,7 @@ function initMenu(){
         var data=JSON.parse(srt);
         console.log(data);
         buildMenu(data);
-        loadCommon();
+
      }else{
         $.ajax({
             url : portalPath + '/system/getTreeList.do?loadButton=false',
@@ -165,7 +168,7 @@ function initMenu(){
                     console.log("sessionStorage");
                     sessionStorage.setItem("menu",JSON.stringify(data));
                 }
-                loadCommon();
+
 
             }
         });
@@ -178,8 +181,9 @@ function initMenu(){
          urls.push({path:portalPath,url:'/content/common/assets/js/gz/bootstrap.min.js',type:'js'});
          urls.push({path:portalPath,url:'/content/common/assets/js/gz/bootbox.min.js',type:'js'});
          urls.push({path:portalPath,url:'/content/common/assets/pages/scripts/ui-modals.min.js',type:'js'});
-         urls.push({path:portalPath,url:'/content/common/assets/global/scripts/app.min.js',type:'js'});
-          urls.push({path:portalPath,url:'/content/common/assets/layouts/layout/scripts/layout.min.js',type:'js'});
+         urls.push({path:portalPath,url:'/content/common/assets/global/scripts/app.min.js',type:'js',callback:function(){
+            loader({path:portalPath,url:'/content/common/assets/layouts/layout/scripts/layout.min.js',type:'js'});
+         }});
           for(var i=0;i<urls.length;i++){
              loader(urls[i]);
           }
