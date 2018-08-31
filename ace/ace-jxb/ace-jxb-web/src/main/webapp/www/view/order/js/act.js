@@ -171,6 +171,9 @@ function createOrder(){
     if(start_date == null || start_date == undefined || start_date == ''){
         alert("请选择预约时间！");
         return;
+    }else if(new Date() > new Date(start_date+":00")){
+        alert("预约时间不能在当前时间之前！");
+        return;
     }
     if(username == '' || username == undefined){
         alert("姓名不能为空！");
@@ -187,6 +190,9 @@ function createOrder(){
     if(phoneNum == '' || phoneNum == undefined){
         alert("联系方式不能为空！");
         return;
+    }else if(phoneNum.length >11){
+        alert("联系方式输入过长！");
+        return;
     }
     if(problem == '' || problem == undefined){
         alert("问题描述不能为空！");
@@ -202,6 +208,9 @@ function createOrder(){
     }
     if(contact_phone == '' || contact_phone == undefined){
         alert("紧急联系人联系方式不能为空！");
+        return;
+    }else if(contact_phone.length > 11){
+        alert("紧急联系人联系方式输入过长！");
         return;
     }
     if(content.indexOf("no") > 0){
