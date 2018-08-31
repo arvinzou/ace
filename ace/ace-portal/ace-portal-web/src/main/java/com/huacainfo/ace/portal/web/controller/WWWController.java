@@ -9,14 +9,15 @@ import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ImageCut;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.model.Attach;
+import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.model.WxFormid;
 import com.huacainfo.ace.portal.service.*;
-import com.huacainfo.ace.portal.model.TaskCmcc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
 
 import java.io.File;
 import java.util.*;
@@ -71,6 +71,8 @@ public class WWWController extends PortalBaseController {
 
     @Autowired
     private TaskCmccService taskCmccService;
+    @Autowired
+    private AppealCaseService appealCaseService;
 
     /**
      * @throws @author: chenxiaoke
@@ -148,12 +150,6 @@ public class WWWController extends PortalBaseController {
         }
         return this.wxCfgService.insertFormIds(list);
     }
-
-    @RequestMapping(value = "/selectWxUser.do")
-    @ResponseBody
-    public List<Map<String, Object>> selectWxUser() throws Exception {
-        return this.wxUserService.selectWxUser(this.getParams());
-    }
 //	@RequestMapping(value = "/updateFaceToken.do")
 //	@ResponseBody
 //	public MessageResponse updateFaceToken(@RequestParam MultipartFile[] file, String id, String collectionName)throws Exception{
@@ -178,6 +174,12 @@ public class WWWController extends PortalBaseController {
 //		}
 //		return this.wxUserService.updateFaceToken(image_url,unionId);
 //	}
+
+    @RequestMapping(value = "/selectWxUser.do")
+    @ResponseBody
+    public List<Map<String, Object>> selectWxUser() throws Exception {
+        return this.wxUserService.selectWxUser(this.getParams());
+    }
 
     @RequestMapping(value = "/selectWxUserByPrimaryKey.do")
     @ResponseBody
@@ -318,11 +320,11 @@ public class WWWController extends PortalBaseController {
 
     @RequestMapping(value = "/upload.do")
     @ResponseBody
-    public Map<String,Object> upload(@RequestParam MultipartFile[] file, String collectionName,String x, String y, String desWidth, String desHeight, String srcWidth,
-                                          String srcHeight)throws Exception {
+    public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName, String x, String y, String desWidth, String desHeight, String srcWidth,
+                                      String srcHeight) throws Exception {
 
-        Map<String,Object> rst = new HashMap<String,Object>();
-        String fastdfs_server=((Map)this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
+        Map<String, Object> rst = new HashMap<String, Object>();
+        String fastdfs_server = ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
         String[] fileNames = new String[file.length];
         String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
         File tmp = new File(dir);
@@ -332,18 +334,18 @@ public class WWWController extends PortalBaseController {
         int i = 0;
         for (MultipartFile o : file) {
             File dest = new File(dir + File.separator + o.getName());
-            if(CommonUtils.isNotEmpty(x)){
-                ImageCut.imgCut(o.getInputStream(),Integer.valueOf(x),Integer.valueOf(y),Integer.valueOf(desWidth),Integer.valueOf(desHeight),Integer.valueOf(srcWidth),Integer.valueOf(srcHeight),dest);
-            }else{
+            if (CommonUtils.isNotEmpty(x)) {
+                ImageCut.imgCut(o.getInputStream(), Integer.valueOf(x), Integer.valueOf(y), Integer.valueOf(desWidth), Integer.valueOf(desHeight), Integer.valueOf(srcWidth), Integer.valueOf(srcHeight), dest);
+            } else {
                 o.transferTo(dest);
             }
             fileNames[i] = this.fileSaver.saveFile(dest,
                     o.getOriginalFilename());
             dest.delete();
             filesService.insertFiles(fileNames[i], this.getCurUserProp());
-            rst.put("success",true);
-            rst.put("msg","成功");
-            rst.put("file_path",fastdfs_server+fileNames[i]);
+            rst.put("success", true);
+            rst.put("msg", "成功");
+            rst.put("file_path", fastdfs_server + fileNames[i]);
             i++;
         }
         return rst;
@@ -352,21 +354,33 @@ public class WWWController extends PortalBaseController {
     @RequestMapping(value = "/sendCmccByMobile.do")
     @ResponseBody
     public MessageResponse sendCmccByMobile(String mobile) throws Exception {
-        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
-        String j_captcha_cmcc=this.getRandCode();
-        TaskCmcc o=new TaskCmcc();
-        if(CommonUtils.isBlank(mobile)){
-            return new MessageResponse(1,"手机号不能为空");
+        String _3rd_session = this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_cmcc = this.getRandCode();
+        TaskCmcc o = new TaskCmcc();
+        if (CommonUtils.isBlank(mobile)) {
+            return new MessageResponse(1, "手机号不能为空");
         }
-        if(!CommonUtils.isValidMobile(mobile)){
-            return new MessageResponse(1,"手机号格式错误");
+        if (!CommonUtils.isValidMobile(mobile)) {
+            return new MessageResponse(1, "手机号格式错误");
         }
         Map<String, Object> msg = new HashMap<String, Object>();
         msg.put("taskName", "验证码" + mobile);
         msg.put("msg", "本次提交验证码为" + j_captcha_cmcc + "，请及时输入。【华彩鉴权平台】");
         msg.put("tel", mobile + "," + mobile);
-        CommonBeanUtils.copyMap2Bean(o,msg);
-        redisTemplate.opsForValue().set(_3rd_session+"j_captcha_weui", j_captcha_cmcc);
+        CommonBeanUtils.copyMap2Bean(o, msg);
+        redisTemplate.opsForValue().set(_3rd_session + "j_captcha_weui", j_captcha_cmcc);
         return this.taskCmccService.insertTaskCmcc(o);
     }
+
+    /**
+     * @param appealCaseId
+     * @param sendType     发送方式 0-kafka 1-直接发
+     */
+    @RequestMapping(value = "/acMsgTest")
+    @ResponseBody
+    public ResultResponse acMsgTest(String appealCaseId, String sendType) throws Exception {
+
+        return appealCaseService.acMsgTest(appealCaseId, sendType);
+    }
+
 }

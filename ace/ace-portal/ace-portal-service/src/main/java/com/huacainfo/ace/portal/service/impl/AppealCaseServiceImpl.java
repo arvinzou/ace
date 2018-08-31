@@ -4,6 +4,7 @@ package com.huacainfo.ace.portal.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.entity.Miniprogram;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -19,6 +20,7 @@ import com.huacainfo.ace.portal.model.AppealCase;
 import com.huacainfo.ace.portal.model.AppealCaseFile;
 import com.huacainfo.ace.portal.service.AppealCaseService;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.MessageTemplateService;
 import com.huacainfo.ace.portal.vo.AppealCaseQVo;
 import com.huacainfo.ace.portal.vo.AppealCaseVo;
 import org.apache.ibatis.session.Configuration;
@@ -56,6 +58,8 @@ public class AppealCaseServiceImpl implements AppealCaseService {
     private KafkaProducerService kafkaProducerService;
     @Autowired
     private AppealDao appealDao;
+    @Autowired
+    private MessageTemplateService messageTemplateService;
 
     /**
      * @throws
@@ -178,7 +182,16 @@ public class AppealCaseServiceImpl implements AppealCaseService {
             params.put("dealResult", "待处理");
             params.put("dealDate", DateUtil.getNow(DateUtil.DEFAULT_DATE_REGEX));
             params.put("consultingTel", "400-12345678");
-            kafkaProducerService.sendMsg("topic.sys.msg", params);
+            //详情跳转小程序
+            Miniprogram miniprogram = new Miniprogram();
+            miniprogram.setAppid("wxaa3c6d0676f4d11a");
+            miniprogram.setPagepath("page/appealCasePreview/index?id=" + obj.getId());
+            params.put("miniprogram", miniprogram);
+
+            ResultResponse rs = messageTemplateService.send("fop", appeal.getTplCode(), params);
+            logger.debug("发送管理员结果：{}", rs);
+//            return new ResultResponse(ResultCode.SUCCESS, "推送成功", rs);
+//            kafkaProducerService.sendMsg("topic.sys.msg", params);
         } catch (Exception e) {
             logger.error("企业发布诉求[{}]，通知管理员异常：{}", obj.getId(), e);
         }
@@ -247,8 +260,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
             params.put("tmplCode", appeal.getAnswerTplCode());//答复通知模板
             //data
             params.put("openid", appeal.getOpenId());
-            params.put("url", "www.baidu.com");
-//        params.put("first", "哈哈哈哈哈");
+//            params.put("url", "www.baidu.com");
             //data
             params.put("appealContent", obj.getTitle());
             params.put("dealResult", "已完成");
@@ -347,7 +359,6 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         return new MessageResponse(0, "完成！");
     }
 
-
     /**
      * @throws
      * @Title:updateDetailsOfProgress
@@ -437,6 +448,67 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         //管理员答复诉求，通知诉求人
         sendNoticeToAppealPerson(obj);
         return new MessageResponse(0, "完成！");
+    }
+
+    @Override
+    public ResultResponse acMsgTest(String appealCaseId, String sendType) throws Exception {
+        AppealCaseVo obj = selectAppealCaseByPrimaryKey(appealCaseId).getValue();
+        if (null == obj) {
+            return new ResultResponse(ResultCode.FAIL, "数据丢失");
+        }
+        Appeal appeal = appealDao.selectByPrimaryKey(obj.getAppealId());
+        if (null == appeal) {
+            return new ResultResponse(ResultCode.FAIL, "企业发布诉求[" + obj.getId() + "]，通知管理员异常：诉求主题不存在");
+        }
+        Map<String, Object> params = new HashMap<>();
+        //kafka所需内容
+        params.put("service", "messageTemplateService");
+        params.put("sysId", "fop");
+        params.put("tmplCode", appeal.getTplCode());//处理通知模板
+        //data
+        params.put("openid", appeal.getOpenId());
+        params.put("url", "www.baidu.com");
+        //data
+        params.put("appealContent", obj.getTitle());
+        params.put("dealResult", "待处理");
+        params.put("dealDate", DateUtil.getNow(DateUtil.DEFAULT_DATE_REGEX));
+        params.put("consultingTel", "400-12345678");
+        //详情跳转小程序
+        Miniprogram miniprogram = new Miniprogram();
+        miniprogram.setAppid("wxaa3c6d0676f4d11a");
+        miniprogram.setPagepath("page/appealCasePreview/index?id=" + obj.getId());
+        params.put("miniprogram", miniprogram);
+
+        if ("0".equals(sendType)) {
+            kafkaProducerService.sendMsg("topic.sys.msg", params);
+            return new ResultResponse(ResultCode.SUCCESS, "推送成功");
+        } else {
+            ResultResponse rs = messageTemplateService.send("fop", appeal.getTplCode(), params);
+
+            return new ResultResponse(ResultCode.SUCCESS, "推送成功", rs);
+        }
+    }
+
+    private SqlSession getSqlSession() {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+//        AppealCaseDao dao = session.getMapper(AppealCaseDao.class);
+//        SingleResult<AppealCaseVo> rst = new SingleResult<AppealCaseVo>();
+//        try {
+//            rst.setValue(dao.selectByPrimaryKey(id));
+//        } catch (Exception e) {
+//            if (session != null) {
+//                session.close();
+//            }
+//        } finally {
+//            if (session != null) {
+//                session.close();
+//            }
+//        }
+//        return rst;
     }
 
 }
