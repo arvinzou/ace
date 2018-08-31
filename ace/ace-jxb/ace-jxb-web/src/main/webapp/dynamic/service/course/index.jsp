@@ -209,7 +209,7 @@
         </td>
         <td >
             <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
-            <a class="operation" href="list/index.jsp?id=\${item.id}">制作</a>
+            <a class="operation" href="javascript:void(0);" onclick="makeAudio('\${item.id}');">制作</a>
             {@if item.auditRst==1}
                 {@if item.lineState !=1}
                 <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>

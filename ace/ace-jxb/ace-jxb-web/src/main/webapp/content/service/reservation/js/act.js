@@ -33,7 +33,7 @@ function App() {
         url: '/content/common/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js',
         type: 'js',
         callback: function () {
-            $("[name='onlineStatus']").bootstrapSwitch();
+            $("input[name='status']").bootstrapSwitch();
         }
     });
     loader({

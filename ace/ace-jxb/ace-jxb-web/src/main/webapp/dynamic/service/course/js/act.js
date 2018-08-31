@@ -93,7 +93,11 @@ function openAudit(id, index){
 }
 
 function add(type){
-    window.location.href = contextPath+ '/dynamic/service/course/add/index.jsp?type='+type;
+    if(findConsultorAudit() != '1'){
+        alert("因为您的权限未通过审核，不能创建课程，请耐心等待审核通过！");
+    }else{
+        window.location.href = contextPath+ '/dynamic/service/course/add/index.jsp?type='+type;
+    }
 }
 function audit(){
     startLoad();
@@ -174,5 +178,34 @@ function outline(id){
                 alert("对不起，出错了！");
             }
         });
+    }
+}
+
+function findConsultorAudit(){
+    var status = null;
+    startLoad();
+    $.ajax({
+        url: contextPath + "/counselor/getMyinfo",
+        type:"post",
+        async:false,
+        data:{
+        },
+        success:function(rst){
+            stopLoad();
+            status = rst.value.regAuditRst;
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起，出错了！");
+        }
+    });
+    return status;
+}
+
+function makeAudio(id){
+    if(findConsultorAudit() != '1'){
+        alert("因为您的权限未通过审核，不能制作课程，请耐心等待审核通过！");
+    }else{
+        window.location.href = contextPath+ '/dynamic/service/course/list/index.jsp?id='+id;
     }
 }

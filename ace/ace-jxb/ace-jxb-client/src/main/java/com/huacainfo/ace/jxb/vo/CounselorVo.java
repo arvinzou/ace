@@ -40,6 +40,7 @@ public class CounselorVo extends Counselor {
     private String onlineStatus;
     /**
      * 同 Consult.java.status
+     * 0-否 1-是 -1-管理员强制下线。
      */
     private String consultState;
 
