@@ -26,6 +26,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ace-fop-service" />
     <orderEntry type="module" module-name="ace-portal-client" />
     <orderEntry type="module" module-name="ace-fop-client" />
     <orderEntry type="module" module-name="ace-common" />
