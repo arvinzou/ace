@@ -302,6 +302,26 @@ public class PostLevelServiceImpl implements PostLevelService {
     }
 
     /**
+     * 指定咨询师岗位级别
+     *
+     * @param counselorId 咨询师id
+     * @param postId      post_level.id
+     * @return
+     */
+    @Override
+    public MessageResponse cfgCounselorPostlervel(String counselorId, String postId) {
+        CounselorPostLevelVo vo = counselorPostLevelDao.findByCounselorId(counselorId);
+        if (vo == null) {
+            return new MessageResponse(ResultCode.FAIL, "咨询师岗位信息丢失");
+        }
+        vo.setPostId(postId);
+        vo.setUpdateDate(DateUtil.getNowDate());
+        counselorPostLevelDao.updateByPrimaryKeySelective(vo);
+
+        return new MessageResponse(ResultCode.SUCCESS, "指定成功");
+    }
+
+    /**
      * 咨询师定岗
      */
     public void determinePosts(String year, String quarter) {
