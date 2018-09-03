@@ -9,9 +9,11 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.jxb.dao.CounselorPostLevelDao;
 import com.huacainfo.ace.jxb.dao.TeacherAuditDao;
 import com.huacainfo.ace.jxb.model.TeacherAudit;
 import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
+import com.huacainfo.ace.jxb.service.PostLevelService;
 import com.huacainfo.ace.jxb.service.TeacherAuditService;
 import com.huacainfo.ace.jxb.vo.TeacherAuditQVo;
 import com.huacainfo.ace.jxb.vo.TeacherAuditVo;
@@ -38,6 +40,10 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private BisMsgNoticeService bisMsgNoticeService;
+    @Autowired
+    private CounselorPostLevelDao counselorPostLevelDao;
+    @Autowired
+    private PostLevelService postLevelService;
 
     /**
      * @throws
@@ -207,6 +213,12 @@ public class TeacherAuditServiceImpl implements TeacherAuditService {
         }
 
         if (rtn.getStatus() == ResultCode.SUCCESS) {
+            //配置最低分成岗位;
+            ResultResponse rs1 = postLevelService.cfgLowestPost(record.getCounselorId());
+            if (rs1.getStatus() == ResultCode.FAIL) {
+                return new MessageResponse(ResultCode.FAIL, rs1.getInfo());
+            }
+
             //推送审核结果通知
             try {
                 ResultResponse rs = bisMsgNoticeService.counselorAuditMsg(record);

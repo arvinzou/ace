@@ -274,6 +274,34 @@ public class PostLevelServiceImpl implements PostLevelService {
     }
 
     /**
+     * 给咨询师配置最低分成岗位
+     *
+     * @param counselorId 咨询师ID
+     * @return 处理结果
+     */
+    @Override
+    public ResultResponse cfgLowestPost(String counselorId) {
+        PostLevel lowestPost = postLevelDao.getLowestPost();
+        if (lowestPost == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先预设咨询师岗位配置");
+        }
+        //
+        CounselorPostLevel cur = counselorPostLevelDao.findByCounselorId(counselorId);
+        if (null == cur) {
+            cur = new CounselorPostLevel();
+            cur.setId(GUIDUtil.getGUID());
+            cur.setCounselorId(counselorId);
+            cur.setPostId(lowestPost.getId());
+            cur.setRemark("入驻自动分配");
+            cur.setStatus("1");
+            cur.setCreateDate(DateUtil.getNowDate());
+            counselorPostLevelDao.insertSelective(cur);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "配置成功");
+    }
+
+    /**
      * 咨询师定岗
      */
     public void determinePosts(String year, String quarter) {
