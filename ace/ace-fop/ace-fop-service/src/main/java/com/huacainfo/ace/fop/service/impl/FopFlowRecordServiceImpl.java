@@ -648,7 +648,7 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         if (null == vo) {
             return new ResultResponse(ResultCode.FAIL, "企业资料异常");
         }
-        if ("2".equals(vo.getStatus())) {
+        if (!"2".equals(vo.getStatus())) {
             return new ResultResponse(ResultCode.FAIL, "会员状态异常");
         }
 //        int auditRecord = fopFlowRecordDao.isExit();

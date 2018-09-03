@@ -7,6 +7,8 @@ import com.huacainfo.ace.fop.service.DataSwapperService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,8 @@ public class DataSwapperServiceImpl implements DataSwapperService {
      */
     @Override
     public ResultResponse search(String keyword, int type) {
+        keyword = URLDecoder(keyword);
+
         Map<String, Object> rtnMap = new HashMap<>();
         //市商务局
         Map<String, List<Map<String, Object>>> sswj = sswj(keyword, type);
@@ -72,7 +76,7 @@ public class DataSwapperServiceImpl implements DataSwapperService {
         //市地税局
         Map<String, List<Map<String, Object>>> sdsj = sdsj(keyword, type);
         if (!CollectionUtils.isEmpty(sdsj)) {
-            rtnMap.put("市地税局", sajj);
+            rtnMap.put("市地税局", sdsj);
         }
         //市工商局
         Map<String, List<Map<String, Object>>> sgsj_i = sgsj_i(keyword, type);
@@ -81,6 +85,15 @@ public class DataSwapperServiceImpl implements DataSwapperService {
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtnMap);
+    }
+
+    private String URLDecoder(String keyword) {
+        try {
+            return URLDecoder.decode(keyword, "utf-8");
+
+        } catch (UnsupportedEncodingException e) {
+            return keyword;
+        }
     }
 
     /**
