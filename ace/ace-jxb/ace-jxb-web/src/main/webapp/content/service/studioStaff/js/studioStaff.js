@@ -80,7 +80,7 @@ function detail(id) {
 
 function initpage(studioId) {
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: 5,
         visiblePages: 10,
         currentPage: 1,

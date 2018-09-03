@@ -90,7 +90,7 @@ function searchByName() {
 
 function initpage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: 5,
         visiblePages: 10,
         currentPage: 1,
@@ -111,7 +111,6 @@ function getOrderList(num, type) {
         page: num,
         limit: 5
     }
-    startLoad();
     $.getJSON(url, data, function (result) {
         stopLoad();
         if (result.status == 0) {

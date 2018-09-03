@@ -153,7 +153,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
                 session.close();
             }
         }
-        if (page < 1) {
+        if (page < 2) {
             int allRows = this.baseOrderDao.findCount(condition);
             map.put("total", allRows);
         }

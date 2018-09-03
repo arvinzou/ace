@@ -5,7 +5,7 @@ window.onload = function () {
 //分页组件
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: 20,
         visiblePages: 10,
         currentPage: 1,
