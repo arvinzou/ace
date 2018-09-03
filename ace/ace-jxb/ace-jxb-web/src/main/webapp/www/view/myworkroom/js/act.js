@@ -45,6 +45,12 @@ function initData(id){
                     slide: result.data.imgList
                 });
                 $("#bannerslide").append(slideHtml);
+
+                var detail = document.getElementById('workroomDetailTemp').innerHTML;
+                var detailHtml = juicer(detail, {
+                    detail: result.data.introduce
+                });
+                $("#workroomDetail").append(detailHtml);
             }else {
                 alert(result.info);
                 return;
