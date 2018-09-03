@@ -175,27 +175,27 @@ public class CourseServiceImpl implements CourseService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getType())) {
-            return new MessageResponse(1, "课程类别不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCategory())) {
-            return new MessageResponse(1, "内容类别不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getMediType())) {
-            return new MessageResponse(1, "媒体类别不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getName())) {
-            return new MessageResponse(1, "课程名称不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getIntroduce())) {
-            return new MessageResponse(1, "课程介绍不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCover())) {
-            return new MessageResponse(1, "课程封面不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCostType())) {
-            return new MessageResponse(1, "费用类型不能为空！");
-        }
+//        if (CommonUtils.isBlank(o.getType())) {
+//            return new MessageResponse(1, "课程类别不能为空！");
+//        }
+//        if (CommonUtils.isBlank(o.getCategory())) {
+//            return new MessageResponse(1, "内容类别不能为空！");
+//        }
+//        if (CommonUtils.isBlank(o.getMediType())) {
+//            return new MessageResponse(1, "媒体类别不能为空！");
+//        }
+//        if (CommonUtils.isBlank(o.getName())) {
+//            return new MessageResponse(1, "课程名称不能为空！");
+//        }
+//        if (CommonUtils.isBlank(o.getIntroduce())) {
+//            return new MessageResponse(1, "课程介绍不能为空！");
+//        }
+//        if (CommonUtils.isBlank(o.getCover())) {
+//            return new MessageResponse(1, "课程封面不能为空！");
+//        }
+//        if (CommonUtils.isBlank(o.getCostType())) {
+//            return new MessageResponse(1, "费用类型不能为空！");
+//        }
 
         //单课程，直接增加课程资源
 //        if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {

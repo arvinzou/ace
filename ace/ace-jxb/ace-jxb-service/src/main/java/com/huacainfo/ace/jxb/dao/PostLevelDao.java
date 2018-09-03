@@ -42,4 +42,6 @@ public interface PostLevelDao {
     List<Map<String, Object>> examine(Map<String, Object> params);
 
     List<PostLevel> findConfig();
+
+    PostLevel getLowestPost();
 }

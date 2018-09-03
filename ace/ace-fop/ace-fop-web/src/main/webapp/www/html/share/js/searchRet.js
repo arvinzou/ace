@@ -31,6 +31,7 @@ app.controller(ngControllerName,function($scope){
     var isData = false;
     $.ajax({
         url: "/fop/www/dataSwapper/search",
+        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
         type:"post",
         async:false,
         data:{keyword: keyword, type: type},

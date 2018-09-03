@@ -221,4 +221,12 @@
         SELECT COUNT(*)
         <include refid="whereCondition"/>
     </select>
+
+    <select id="getLowestPost" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from post_level
+        order by postIndex DESC
+        limit 1
+    </select>
 </mapper>

@@ -97,4 +97,12 @@ public interface PostLevelService {
      * 查询咨询师岗位列表
      */
     PageResult<CounselorPostLevelVo> findCounselorLevelList(CounselorPostLevelQVo condition, int start, int limit, String orderBy);
+
+    /**
+     * 给咨询师配置最低分成岗位
+     *
+     * @param counselorId 咨询师ID
+     * @return 处理结果
+     */
+    ResultResponse cfgLowestPost(String counselorId);
 }

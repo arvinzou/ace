@@ -463,6 +463,10 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         if (null == course) {
             return new ResultResponse(ResultCode.FAIL, "非法商品资料");
         }
+        if (base.getConsumerId().equals(course.getCreateUserId())) {
+            return new ResultResponse(ResultCode.FAIL, "不能购买自己的课程");
+        }
+
         //订单ID
         String orderId = GUIDUtil.getGUID();
         //支付金额保留2位小数，超出两位小数，则使用四舍五入
@@ -629,6 +633,9 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         ConsultProductVo product = consultProductDao.selectVoByPrimaryKey(base.getCommodityId());
         if (null == product) {
             return new ResultResponse(ResultCode.FAIL, "非法商品资料");
+        }
+        if (base.getConsumerId().equals(product.getCounselorId())) {
+            return new ResultResponse(ResultCode.FAIL, "不能购买自己的咨询产品");
         }
         String orderId = GUIDUtil.getGUID();
         //入库预约订单

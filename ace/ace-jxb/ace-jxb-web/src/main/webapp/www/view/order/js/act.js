@@ -171,7 +171,7 @@ function createOrder(){
     if(start_date == null || start_date == undefined || start_date == ''){
         alert("请选择预约时间！");
         return;
-    }else if(new Date() > new Date(start_date+":00")){
+    }else if(new Date() > new Date((start_date+":00").replace(/\-/g, "/"))){
         alert("预约时间不能在当前时间之前！");
         return;
     }
