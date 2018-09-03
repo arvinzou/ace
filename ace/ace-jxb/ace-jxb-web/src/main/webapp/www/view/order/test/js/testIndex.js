@@ -103,8 +103,8 @@ function initList() {
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
-            viewBanner(result.data.EvaluaTplList.slice(0, 5));
-            viewList(result.data.EvaluaTplList.slice(5));
+            viewBanner(result.data.EvaluaTplList.slice(0, 2));
+            viewList(result.data.EvaluaTplList);
         }
     });
 }
