@@ -113,7 +113,7 @@ function initpage() {
         window.location.href = '../test/index.jsp';
     }
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: 20,
         visiblePages: 10,
         currentPage: 1,
