@@ -129,6 +129,45 @@ app.controller(ngControllerName,function($scope){
             $event.target.href = url;
         }
     }
+
+    $scope.exitMember = function(companyId){
+        if(confirm("确定要退会吗？"))
+        {
+            $.ajax({
+                url: "/fop/www/applyQuit",
+                type:"post",
+                async:false,
+                data:{companyId: companyId},
+                success:function(result){
+                    if(result.status == 0) {
+                        layer.alert("退会成功！", {
+                            icon: 5,
+                            skin: 'myskin'
+                        });
+                    }else {
+                        if(result.info){
+                            layer.alert(result.info, {
+                                icon: 5,
+                                skin: 'myskin'
+                            });
+                        }else{
+                            layer.alert(result.errorMessage, {
+                                icon: 5,
+                                skin: 'myskin'
+                            });
+                        }
+
+                    }
+                },
+                error:function(){
+                    layer.alert("系统服务内部异常！", {
+                        icon: 5,
+                        skin: 'myskin'
+                    });
+                }
+            });
+        }
+    }
 });
 
 app.filter('formatDate', function() { //可以注入依赖

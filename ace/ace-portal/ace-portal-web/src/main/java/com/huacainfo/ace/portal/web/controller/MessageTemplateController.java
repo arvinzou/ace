@@ -48,6 +48,7 @@ public class MessageTemplateController extends PortalBaseController {
     @ResponseBody
     public PageResult<MessageTemplateVo> findMessageTemplateList(MessageTemplateQVo condition,
                                                                  PageParamNoChangeSord page) throws Exception {
+        condition.setSysId(getCurUserProp().getActiveSyId());
         PageResult<MessageTemplateVo> rst = this.messageTemplateService
                 .findMessageTemplateList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

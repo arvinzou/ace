@@ -15,41 +15,39 @@ public class MenuCreate {
 
     public static void main(String[] args) {
         Menu m = jxbMenu();
-        String accessToken = "12_O0clZZaexchOO0sMEwjpJKnpHKe0yDGhJ6qL_0YcAgmsGCPsMWLV_letb2mM79F5IuiuKw5UeN5lRiVihfGLcOZlGTtvnUot-m1AwPP6pa0LvY2Nw7_v6f64Q8MDJLfAEAQWY";
+        String accessToken = "13_Dvk6gTzk2fJGhjM8ByVdGvjicwIiiErdD4fBuiqsoNRDA3SnkzHaG7HgqAhCgxCsy7i7M4lAW_-F6W0yD6VdJ4CY1qOQfuobUW7AaEwbF5NGOywMoc1ABDpncJiKOkoLT0_hgi733LhM-q30YIOfAJALVB";
 //        String accessToken = getAccessToken("wxfdb1e4819dee7b62", "dc51907c900e5bcb9527daec79d05e61");
         System.out.println(createMenu(accessToken, m));
     }
 
     public static Menu jxbMenu() {
-        //==========关于我们==========
-        //协会简介
-        Button btn1Sub_a = new Button(MenuButtonType.VIEW, "协会简介",
-                "https://www.huacainfo.com/jxb/app/index.php?i=10&c=entry&id=37&do=detail&m=amouse_article");
-        Button[] btn1Sub = new Button[]{btn1Sub_a};
-        Button btn1 = new Button("关于我们", btn1Sub);
-
-        //==========心阳光联盟==========
-        //顾问在线
-        Button btn2Sub_a = new Button(MenuButtonType.VIEW, "顾问在线",
+        //==========顾问在线==========顾问在线、心理评测
+        Button btn1_Sub_a = new Button(MenuButtonType.VIEW, "顾问在线",
                 "http://zx.huacainfo.com/jxb/www/view/consultant/index.jsp");
-        //我的课程
-        Button btn2Sub_b = new Button(MenuButtonType.VIEW, "我的课程",
+        Button btn2_Sub_b = new Button(MenuButtonType.VIEW, "心理评测",
+                "http://zx.huacainfo.com/jxb/www/view/order/test/testindex.html");
+        Button[] btn1_sub = new Button[]{btn1_Sub_a, btn2_Sub_b};
+        Button btn1 = new Button("顾问在线", btn1_sub);
+
+        //==========心理课程==========
+        Button btn2 = new Button(MenuButtonType.VIEW, "心理课程",
                 "http://zx.huacainfo.com/jxb/www/view/course/index.jsp");
-        //心理评测
-        Button btn2Sub_c = new Button(MenuButtonType.VIEW, "心理评测",
-                "http://zx.huacainfo.com/jxb/www/view/test/testindex.html");
 
-        Button[] btn2Sub = new Button[]{btn2Sub_a, btn2Sub_b, btn2Sub_c};
-        Button btn2 = new Button("心阳光联盟", btn2Sub);
-
-        //==========个人中心==========
-        Button btn3 = new Button(MenuButtonType.VIEW, "个人中心",
+        //==========入驻指南==========我是家长、我是咨询师、个人中心
+        Button btn3_Sub_b = new Button(MenuButtonType.VIEW, "我是家长",
                 "http://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
+        Button btn3_Sub_c = new Button(MenuButtonType.VIEW, "我是咨询师",
+                "http://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
+        Button btn3_Sub_d = new Button(MenuButtonType.VIEW, "个人中心",
+                "http://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
+
+        Button[] btn3_sub = new Button[]{btn3_Sub_b, btn3_Sub_c, btn3_Sub_d};
+        Button btn3 = new Button("入驻指南", btn3_sub);
+
 
         //菜单json
         Menu menu = new Menu();
         menu.setButton(new Button[]{btn1, btn2, btn3});
-
         System.out.println(JsonUtil.toJson(menu));
         return menu;
     }
@@ -60,7 +58,7 @@ public class MenuCreate {
                 "https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzU1MTg1MTQzMA==#wechat_redirect");
         //华彩微站
         Button btn2 = new Button(MenuButtonType.MINI_PROGRAM, "掌上诉求",
-                "http://baidu.com", "wxaa3c6d0676f4d11a", "page/home/index");
+                "http://baidu.com", "wxaa3c6d0676f4d11a", "page/home/index?scene=2e968824893a4ec19a00b62bfede0b14");
         //华彩资讯
         Button btn3 = new Button(MenuButtonType.VIEW, "企业中心",
                 "https://mp.cdsgsl.org.cn/fop/www/view/me/index.jsp");
