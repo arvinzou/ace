@@ -25,7 +25,8 @@
 						<span class="method_01">预约时间</span>
 					</div>
 					<div class="col-xs-8 col-sm-8">
-						<input style="width: 80%;height: 1rem;border:none;text-align: right;" name="start_date" id="start_date" placeholder="选择预约时间" readonly="readonly" />
+						<input style="margin-top: 0.2rem; width: 80%;height: 1rem;border:none;text-align: right;"
+							   name="start_date" id="start_date" placeholder="选择预约时间" readonly="readonly"/>
 					</div>
 				</div>
 			</div>
@@ -199,7 +200,7 @@
             <span class="method_01">咨询次数</span>
             <span class="method_02">每次30分钟</span>
             </div>
-            <div class="col-xs-5 col-sm-5" style="padding-top: 0.2rem;margin-top: 0.4rem;">
+				<div class="col-xs-5 col-sm-5" style="margin-top: 0.64rem; padding-top: 0.4rem;margin-top: 0.4rem;">
             <span class="reduce"><img src="img/reduce.png" onclick="reduce();"/></span>
             <span class="num" id="num">1</span>
             <span class="add"><img src="img/add.png" onclick="add();"/></span>

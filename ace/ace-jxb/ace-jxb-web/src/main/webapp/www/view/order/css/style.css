@@ -82,7 +82,7 @@ input,textarea{
 	outline: none;
 }
 .method_01{
-	line-height: 1rem;
+    line-height: 1.5rem;
 	font-size: 0.48rem;
 	color: #1C2843;
 	font-weight: bold;
@@ -129,6 +129,11 @@ input,textarea{
 }
 .unactive .words_01{
 	color: #C4C8D6;
+    margin: 0rem;
+}
+
+.active .words_01 {
+    margin: 0rem;
 }
 .unactive .words_02{
 	color: #5C6681;
