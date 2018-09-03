@@ -242,7 +242,7 @@ function submitForm() {
     var topScore = 10000;
     for (var i = 0; i < tr.length; i++) {
         var evaluatGauge = {};
-        var scoreEnd = tr.eq(i).find('.form_score').val();
+        var scoreEnd = parseInt(tr.eq(i).find('.form_score').val().trim());
         var content = tr.eq(i).find('.form_content').val();
         if (!(scoreEnd && content)) {
             alert('量表每项必填。');
