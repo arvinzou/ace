@@ -64,12 +64,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer">
-			<img src="img/icon-play.png" class="play" style="display:none;padding-left: 0.253333rem;padding-top: 0.493333rem;" />
-			<span class="span_01"><%--试听--%></span>
-			<span class="span_02">共计</span>
-			<span class="span_03" id="totalCost"></span>
-			<button class="buy" onclick="buy();">立即购买</button>
+		<div id="footerBox">
+
 		</div>
 
 		<script id="bannerTemp" type="text/template">
@@ -292,6 +288,18 @@
         </div>
 		{@/each}
 	</script>
+
+		<script id="footerTemp" type="text/template">
+			{@if data.costType != '0'}
+			<div class="footer">
+				<img src="img/icon-play.png" class="play" style="display:none;padding-left: 0.253333rem;padding-top: 0.493333rem;" />
+				<span class="span_01"><%--试听--%></span>
+				<span class="span_02">共计</span>
+				<span class="span_03" id="totalCost"></span>
+				<button class="buy" onclick="buy();">立即购买</button>
+			</div>
+			{@/if}
+		</script>
 
 		<!--评价框模态窗-->
 		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

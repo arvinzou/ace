@@ -97,6 +97,7 @@ function initData(primaryId){
                     //系列课程
                     findPartInfo(primaryId);
                 }
+                viewHtml('footerBox', result.data, 'footerTemp');
                 initCommentsList();
                 stopLoad();
             }else {
