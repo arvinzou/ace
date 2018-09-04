@@ -190,6 +190,7 @@ section .jindu {
 
 .jindu .swiper-pagination > span {
     background-color: rgba(254, 101, 0, 1) !important;
+    border-radius: 0.093333rem;
 }
 
 .fenye {

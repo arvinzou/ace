@@ -218,7 +218,6 @@ function startTesting() {
 /*初始化swriper*/
 function initSwriper() {
     mySwiper = new Swiper('.swiper-container', {
-        effect: 'fade',
         simulateTouch: false,
         allowTouchMove: false,
         pagination: {
