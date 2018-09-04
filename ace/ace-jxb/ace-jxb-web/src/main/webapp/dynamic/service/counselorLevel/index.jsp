@@ -54,6 +54,12 @@
                                                 <div class="caption">
                                                     咨询师岗位列表
                                                 </div>
+                                                <div class="actions">
+                                                    <a onclick="javascript:calculationLevel()"
+                                                       class="btn  btn-success btn-sm">
+                                                        计算岗位
+                                                    </a>
+                                                </div>
                                             </div>
 
                                             <div class="portlet-body">
@@ -157,6 +163,41 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+<div class="modal fade" id="calculationLevel" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-group" id="" style="display: flex;justify-content: center">
+                    <div class="mt-radio-list">
+                        <label class="mt-radio mt-radio-outline"> 第一季度
+                            <input type="radio" value="1" name="quarter">
+                            <span></span>
+                        </label>
+                        <label class="mt-radio mt-radio-outline"> 第二季度
+                            <input type="radio" value="2" name="quarter">
+                            <span></span>
+                        </label>
+                        <label class="mt-radio mt-radio-outline"> 第三季度
+                            <input type="radio" value="3" name="quarter">
+                            <span></span>
+                        </label>
+                        <label class="mt-radio mt-radio-outline"> 第四季度
+                            <input type="radio" value="4" name="quarter">
+                            <span></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-info calculation_btn" flag="true">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 </body>
 
 <script id="tmpl-data-list" type="text/template">
@@ -183,7 +224,7 @@
             <td>\${item.checkQuarter}</td>
             <td>\${item.counselorNum}</td>
             <td>\${item.turnover}</td>
-            <td><a href="javascript:void(0);" onclick="javascript:modifyLevel('\${item.id}','\${item.postId}')"
+            <td><a href="javascript:void(0);" onclick="javascript:modifyLevel('\${item.counselorId}','\${item.postId}')"
                    class="operation">指定岗位</a></td>
         </tr>
         {@/each}
