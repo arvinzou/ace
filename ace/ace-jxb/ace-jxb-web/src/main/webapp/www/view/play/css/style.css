@@ -225,10 +225,9 @@ body{
 }
 
 #player .audio.green-audio-player .slider .progress .pin {
-	height: 0.213333rem;
-	width: 0.213333rem;
-	border-radius: 50%;
-	background-color: #44BFA3;
+    height: 0.4rem;
+    width: 0.1rem;
+    background-color: #49D0C5;
 	position: absolute;
 	pointer-events: all;
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.32);
@@ -253,7 +252,7 @@ body{
 	margin-left: 16px;
 	margin-right: 16px;
 	border-radius: 2px;
-	height: 0.053333rem;
+    height: 0.1rem;
 }
 
 #player .audio.green-audio-player .controls .slider .progress {
@@ -264,7 +263,7 @@ body{
 
 #player .audio.green-audio-player .controls .slider .progress .pin {
 	right: -0px;
-	top: -0.08rem;
+    top: -0.15rem;
 }
 
 #player .audio.green-audio-player .controls span {
@@ -280,7 +279,7 @@ body{
 }
 
 #player .audio.green-audio-player .volume .volume-btn.open path {
-	fill: #44BFA3;
+    fill: #49D0C5;
 }
 
 #player .audio.green-audio-player .volume .volume-controls {

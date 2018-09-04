@@ -179,25 +179,20 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (CommonUtils.isBlank(user.getDepartmentId())) {
             return new MessageResponse(1, "账户没有绑定企业！");
         }
-        if (!"5".equals(o.getModules())) {//政策信息由工商联身份发布管理
-            FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
-            FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
-            if (null == fc) {
-                if (null == fa) {
-                    return new MessageResponse(1, "账户没有绑定企业！");
-                }
-                o.setRelationId(fa.getId());
-                o.setRelationType(FopConstant.ASSOCIATION);
-            } else {
-                if ("3".equals(fc.getCompanyType())) {
-                    return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
-                }
-                o.setRelationId(fc.getId());
-                o.setRelationType(FopConstant.COMPANY);
-            }
-        } else {
+        FopAssociation fa = fopAssociationDao.selectByDepartmentId(user.getDepartmentId());
+        FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
+        if (null == fc && null == fa) {
             o.setRelationId("0");
             o.setRelationType("2");
+        } else if (null != fa) {
+            o.setRelationId(fa.getId());
+            o.setRelationType(FopConstant.ASSOCIATION);
+        } else {
+            if ("3".equals(fc.getCompanyType())) {
+                return new MessageResponse(ResultCode.FAIL, "注册银行不能发布");
+            }
+            o.setRelationId(fc.getId());
+            o.setRelationType(FopConstant.COMPANY);
         }
 
         o.setReleaseDate(new Date());

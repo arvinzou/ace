@@ -64,12 +64,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="footer">
-			<img src="img/icon-play.png" class="play" style="display:none;padding-left: 0.253333rem;padding-top: 0.493333rem;" />
-			<span class="span_01"><%--试听--%></span>
-			<span class="span_02">共计</span>
-			<span class="span_03" id="totalCost"></span>
-			<button class="buy" onclick="buy();">立即购买</button>
+		<div id="footerBox">
+
 		</div>
 
 		<script id="bannerTemp" type="text/template">
@@ -130,11 +126,13 @@
             <div class="row">
                 <div class="col-xs-12 col-md-12 payfor">
 					{@if data.costType == '0'}
-                	<span class="money">免费</span>
+                	<span class="free">免费</span>
 					{@else if data.costType == '1'}
 					<span class="money">¥ \${data.cost}</span>
 					{@/if}
-                <span class="history_money">¥\${data.primeCost}</span>
+					{@if data.primeCost != undefined}
+                	<span class="history_money">¥\${data.primeCost}</span>
+					{@/if}
                 </div>
                 </div>
                 </div>
@@ -145,10 +143,10 @@
                 </div>
                 </div>
                 <div class="row">
-                <div class="col-xs-3 col-md-3">
+                <div class="col-xs-3 col-md-3" style="padding-right: 0!important;">
                 <img src="\${data.counselor.imagePhotoUrl}" class="head_img" />
                 </div>
-                <div class="col-xs-6 col-md-6">
+                <div class="col-xs-6 col-md-6"  style="padding-left: 0!important;">
                 <p class="teacher_name">\${data.counselor.name}</p>
                 <p class="teacher_card">\${data.counselor.certification}</p>
                 </div>
@@ -290,6 +288,18 @@
         </div>
 		{@/each}
 	</script>
+
+		<script id="footerTemp" type="text/template">
+			{@if data.costType != '0'}
+			<div class="footer">
+				<img src="img/icon-play.png" class="play" style="display:none;padding-left: 0.253333rem;padding-top: 0.493333rem;" />
+				<span class="span_01"><%--试听--%></span>
+				<span class="span_02">共计</span>
+				<span class="span_03" id="totalCost"></span>
+				<button class="buy" onclick="buy();">立即购买</button>
+			</div>
+			{@/if}
+		</script>
 
 		<!--评价框模态窗-->
 		<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
