@@ -1,7 +1,25 @@
 window.onload = function () {
     initPage();
-    $('.modify_btn').onclick(activeModify)
+    $('.modify_btn').on('click', activeModify);
+    $('.calculation_btn').on('click', activeCalculation);
 };
+
+/*确定计算岗位*/
+function activeCalculation() {
+    var quarter = $('input[name="quarter"]:checked').val();
+    var url = '/jxb/www/counselor/examine';
+    var data = {
+        quarter: quarter
+    }
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+
+        } else {
+            alert(result.errorMessage);
+        }
+        $('#calculationLevel').modal('hide');
+    })
+}
 
 //分页组件
 function initPage() {
@@ -47,7 +65,7 @@ function getDataList(num, type) {
     })
 }
 
-function modifyLevel(id, postId) {
+function modifyLevel(counselorId, postId) {
     $('#counselorLevelModal').modal('show');
     var url = '/jxb/postLevel/findPostLevelList';
     var data = {
@@ -61,7 +79,7 @@ function modifyLevel(id, postId) {
                 data: result.rows,
             });
             $("#levelList").html(html);
-            $("#levelList").data('id', id);
+            $("#levelList").data('counselorId', counselorId);
             $("#levelList").data('postId', postId);
             $('#postId').val(postId)
             $('#counselorLevelModal').modal('show');
@@ -69,14 +87,29 @@ function modifyLevel(id, postId) {
     });
 }
 
+function calculationLevel() {
+    $('#calculationLevel').modal('show');
+    // var url='';
+}
+
+
 function activeModify() {
-    var id = $("#levelList").data('id');
+    var counselorId = $("#levelList").data('counselorId');
     var pId = $("#levelList").data('postId');
     var postId = $('#postId').val();
-    if (postId == pId) {
-        return;
+    if (postId != pId) {
+        var url = '/jxb/postLevel/modifyCounselorLevel';
+        var data = {
+            counselorId: counselorId,
+            postId: postId,
+        }
+        $.post(url, data, function (result) {
+            if (result.status == 0) {
+
+            } else {
+                alert(result.errorMessage);
+            }
+            $('#counselorLevelModal').modal('hide');
+        })
     }
-    var url = /jxb/
-    postLevel / findPostLevelList
-    '
 }
