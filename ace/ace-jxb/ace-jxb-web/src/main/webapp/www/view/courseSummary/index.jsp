@@ -130,11 +130,13 @@
             <div class="row">
                 <div class="col-xs-12 col-md-12 payfor">
 					{@if data.costType == '0'}
-                	<span class="money">免费</span>
+                	<span class="free">免费</span>
 					{@else if data.costType == '1'}
 					<span class="money">¥ \${data.cost}</span>
 					{@/if}
-                <span class="history_money">¥\${data.primeCost}</span>
+					{@if data.primeCost != undefined}
+                	<span class="history_money">¥\${data.primeCost}</span>
+					{@/if}
                 </div>
                 </div>
                 </div>
@@ -145,10 +147,10 @@
                 </div>
                 </div>
                 <div class="row">
-                <div class="col-xs-3 col-md-3">
+                <div class="col-xs-3 col-md-3" style="padding-right: 0!important;">
                 <img src="\${data.counselor.imagePhotoUrl}" class="head_img" />
                 </div>
-                <div class="col-xs-6 col-md-6">
+                <div class="col-xs-6 col-md-6"  style="padding-left: 0!important;">
                 <p class="teacher_name">\${data.counselor.name}</p>
                 <p class="teacher_card">\${data.counselor.certification}</p>
                 </div>

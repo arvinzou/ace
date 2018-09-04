@@ -51,6 +51,14 @@ jQuery(function ($) {
             $("#grid-pager_left").removeAttr("style");
             $("#grid-pager_center").removeAttr("style");
             $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+            $("table[role='grid'").each(function(){//jqgrid 创建的表格都有role属性为grid
+                $('.'+ $(this).attr("class")+' tr:first th:first').css("width", "60"); //使表头的序号列宽度为40
+                $('.'+ $(this).attr("class")+' tr:first td:first').css("width", "60"); // 使表体的序号列宽度为40
+             });
+             $("table[role='columnheader']").each(function(){//jqgrid 创建的表格都有role属性为grid
+                 $('.'+ $(this).attr("class")+' tr:first th:first').css("width", "60"); //使表头的序号列宽度为40
+                 $('.'+ $(this).attr("class")+' tr:first td:first').css("width", "60"); // 使表体的序号列宽度为40
+             });
             var table = this;
             setTimeout(function () {
                 styleCheckbox(table);

@@ -150,12 +150,14 @@ public class FopLoanProductServiceImpl implements FopLoanProductService {
         }
         FopCompany fc = fopCompanyDao.selectByDepartmentId(user.getDepartmentId());
         if (null == fc) {
-            return new MessageResponse(1, "账户没有绑定企业！");
-        }
-        if (!"3".equals(fc.getCompanyType())) {
+            o.setCompanyId("fop");
+//            return new MessageResponse(1, "账户没有绑定企业！");
+        } else if (!"3".equals(fc.getCompanyType())) {
             return new MessageResponse(1, "非银行不能发布金融产品");
+        } else {
+            o.setCompanyId(fc.getId());
         }
-        o.setCompanyId(fc.getId());
+
         if (CommonUtils.isBlank(o.getProductName())) {
             return new MessageResponse(1, "产品名称不能为空！");
         }

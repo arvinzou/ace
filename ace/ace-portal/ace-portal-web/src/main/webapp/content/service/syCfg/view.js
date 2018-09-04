@@ -52,8 +52,7 @@ jQuery(function($) {
 				shrinkToFit : true,
 				autoScroll : false,
 				loadComplete : function() {
-					$(cfg.grid_selector).jqGrid('setGridWidth',
-							$(".page-content").width());
+					$(cfg.grid_selector).jqGrid('setGridWidth',$(".page-content").width());
 					var table = this;
 					setTimeout(function() {
 						styleCheckbox(table);
@@ -62,6 +61,16 @@ jQuery(function($) {
 						updatePagerIcons(table);
 						enableTooltips(table);
 					}, 0);
+					$("table[role='grid'").each(function(){//jqgrid 创建的表格都有role属性为grid
+                        $('.'+ $(this).attr("class")+' tr:first th:first').css("width", "40"); //使表头的序号列宽度为40
+                        $('.'+ $(this).attr("class")+' tr:first td:first').css("width", "40"); // 使表体的序号列宽度为40
+                     });
+                     $("table[role='columnheader']").each(function(){//jqgrid 创建的表格都有role属性为grid
+                         $('.'+ $(this).attr("class")+' tr:first th:first').css("width", "40"); //使表头的序号列宽度为40
+                         $('.'+ $(this).attr("class")+' tr:first td:first').css("width", "40"); // 使表体的序号列宽度为40
+                      });
+
+
 				},
 
 				editurl : cfg.grid_edit_data_url,// nothing is saved
