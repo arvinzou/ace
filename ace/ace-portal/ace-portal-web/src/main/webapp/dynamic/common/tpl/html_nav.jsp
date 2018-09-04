@@ -10,6 +10,8 @@
 							<img src="${cfg.logo}" alt="logo" class="logo-default">
 						</a>
 					</div>
+
+
 					<a href="#" class="navbar-brand">
 						<small>
 							${cfg.sys_name}${cfg.version}
