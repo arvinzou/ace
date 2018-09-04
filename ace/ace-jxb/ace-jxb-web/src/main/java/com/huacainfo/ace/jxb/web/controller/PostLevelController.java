@@ -2,10 +2,12 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.jxb.model.PostLevel;
 import com.huacainfo.ace.jxb.service.PostLevelService;
 import com.huacainfo.ace.jxb.vo.CounselorPostLevelQVo;
@@ -144,5 +146,19 @@ public class PostLevelController extends JxbBaseController {
         }
 
         return rst;
+    }
+
+
+    /**
+     * 指定咨询师岗位级别
+     *
+     * @param counselorId 咨询师id
+     * @param postId      post_level.id
+     * @return
+     */
+    @RequestMapping(value = "/modifyCounselorLevel")
+    @ResponseBody
+    public MessageResponse cfgCounselorPostlervel(String counselorId, String postId) {
+        return postLevelService.cfgCounselorPostlervel(counselorId, postId);
     }
 }
