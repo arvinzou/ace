@@ -300,7 +300,7 @@ function palyer() {
         var K = 0;
         if (slider.dataset.direction == 'horizontal') {
 
-            var offsetX = event.clientX - slider.offsetLeft;
+            var offsetX = event.offsetX;
             var width = slider.clientWidth;
             K = offsetX / width;
         } else if (slider.dataset.direction == 'vertical') {
@@ -314,9 +314,7 @@ function palyer() {
 
     function rewind(event) {
         console.log(111111111);
-        if (inRange(event)) {
-            player.currentTime = player.duration * getCoefficient(event);
-        }
+        player.currentTime = player.duration * getCoefficient(event);
     }
 
     function changeVolume(event) {
