@@ -113,5 +113,5 @@ public interface PostLevelService {
      * @param postId      post_level.id
      * @return
      */
-    MessageResponse cfgCounselorPostlervel(String counselorId, String id);
+    MessageResponse cfgCounselorPostlervel(String counselorId, String postId);
 }
