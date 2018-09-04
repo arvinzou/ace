@@ -1,12 +1,13 @@
 window.onload = function () {
     initPage();
+    $('.modify_btn').onclick(activeModify)
 };
 
 //分页组件
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
-        pageSize: 20,
+        pageSize: 10,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -22,7 +23,7 @@ function getDataList(num, type) {
     var url = "/jxb/postLevel/findCounselorLevelList";
     var data = {
         page: num,
-        limit: 20
+        limit: 10
     }
     startLoad();
     $.getJSON(url, data, function (result) {
@@ -44,4 +45,38 @@ function getDataList(num, type) {
 
         }
     })
+}
+
+function modifyLevel(id, postId) {
+    $('#counselorLevelModal').modal('show');
+    var url = '/jxb/postLevel/findPostLevelList';
+    var data = {
+        star: 0,
+        page: 100
+    }
+    $.post(url, data, function (result) {
+        if (result.status == 0) {
+            var navitem = document.getElementById('levelListModel').innerHTML;
+            var html = juicer(navitem, {
+                data: result.rows,
+            });
+            $("#levelList").html(html);
+            $("#levelList").data('id', id);
+            $("#levelList").data('postId', postId);
+            $('#postId').val(postId)
+            $('#counselorLevelModal').modal('show');
+        }
+    });
+}
+
+function activeModify() {
+    var id = $("#levelList").data('id');
+    var pId = $("#levelList").data('postId');
+    var postId = $('#postId').val();
+    if (postId == pId) {
+        return;
+    }
+    var url = /jxb/
+    postLevel / findPostLevelList
+    '
 }

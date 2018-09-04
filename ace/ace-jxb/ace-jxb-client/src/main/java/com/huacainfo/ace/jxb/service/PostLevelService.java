@@ -105,4 +105,13 @@ public interface PostLevelService {
      * @return 处理结果
      */
     ResultResponse cfgLowestPost(String counselorId);
+
+    /**
+     * 指定咨询师岗位级别
+     *
+     * @param counselorId 咨询师id
+     * @param postId      post_level.id
+     * @return
+     */
+    MessageResponse cfgCounselorPostlervel(String counselorId, String postId);
 }

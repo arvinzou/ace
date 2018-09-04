@@ -80,7 +80,7 @@
                                                                 </div>
                                                                 <div class="col-sm-4">
                                                                     <div class="input-group">
-                                                                        <input type="text" style="height:32px"
+                                                                        <input type="text"
                                                                                class="form-control input-circle-left"
                                                                                placeholder="咨询师名称">
                                                                         <span class="input-group-btn">
@@ -141,21 +141,17 @@
 
 </div>
 
-<div class="modal fade" id="orderInfoModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+<div class="modal fade" id="counselorLevelModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title" id="gridSystemModalLabel">订单详情</h4>
-            </div>
             <div class="modal-body">
-                <div class="table-scrollable" id="orderInfo">
+                <div class="" id="levelList" style="display: flex;justify-content: center">
 
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-info modify_btn" flag="true">确定</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -170,10 +166,11 @@
             <th width="20%">咨询师名称</th>
             <th width="10%">当前岗位名称</th>
             <th width="10%">分成比例</th>
-            <th width="20%">年份</th>
+            <th width="10%">年份</th>
             <th width="20%">季度</th>
             <th width="10%">累计推广老师人数</th>
             <th width="10%">营业额(元)</th>
+            <th width="10%">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -186,10 +183,21 @@
             <td>\${item.checkQuarter}</td>
             <td>\${item.counselorNum}</td>
             <td>\${item.turnover}</td>
+            <td><a href="javascript:void(0);" onclick="javascript:modifyLevel('\${item.id}','\${item.postId}')"
+                   class="operation">指定岗位</a></td>
         </tr>
         {@/each}
         </tbody>
     </table>
+</script>
+
+
+<script id="levelListModel" type="text/template">
+    <select name="postId" style="width: 50%" size="4" id="postId">
+        {@each data as item}
+        <option STYLE="padding: 5px" value="\${item.id}">\${item.postName}</option>
+        {@/each}
+    </select>
 </script>
 
 <script id="tmpl-detail-info" type="text/template">

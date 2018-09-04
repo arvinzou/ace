@@ -111,6 +111,7 @@ function getOrderList(num, type) {
         page: num,
         limit: 5
     }
+    startLoad();
     $.getJSON(url, data, function (result) {
         stopLoad();
         if (result.status == 0) {

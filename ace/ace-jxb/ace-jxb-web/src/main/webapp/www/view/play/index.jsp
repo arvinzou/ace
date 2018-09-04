@@ -38,6 +38,7 @@
 				</div>
 				<div class="row course_audio" id="courseAudio">
 
+
 				</div>
 			</div>
 			<div class="comment_list" id="commentList">
