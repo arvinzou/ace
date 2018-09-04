@@ -24,10 +24,10 @@
             <div class="row roomlist" onclick="showDetail('\${item.id}');">
                 <div class="row room">
 					<div class="row">
-						<div class="col-xs-4 col-sm-4 topsize">
+						<div class="col-xs-3 col-sm-3 topsize">
 							<div class="img_box"><img src="\${item.consumerImgUrl}"/></div>
 						</div>
-						<div class="col-xs-8 col-sm-8 topsize">
+						<div class="col-xs-9 col-sm-9 topsize" style="padding-left: 0 !important;">
 							<p class="workroom_title">\${item.consumerName}</p>
 							<p class="workroom_detail">
 								{@if item.consultProduct.type == '1'}
