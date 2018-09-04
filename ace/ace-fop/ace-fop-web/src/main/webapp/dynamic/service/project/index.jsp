@@ -10,9 +10,12 @@
     <title>合作项目</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
+<%----%>
 <script type="text/javascript">
-
-
 </script>
 <body>
 <div class="page-content">
@@ -46,14 +49,14 @@
                 <div class="space10"></div>
                 <div id="toolbar" class="toolbar">
 
-                    <%--<button class="btn btn-info" id="btn-view-add"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopProject/insertFopProject">--%>
-                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
-                    <%--<button class="btn btn-info" id="btn-view-edit"--%>
-                    <%--authority="${pageContext.request.contextPath}/fopProject/updateFopProject">--%>
-                    <%--<i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
+                    <button class="btn btn-info" id="btn-view-add"
+                            authority="${pageContext.request.contextPath}/fopProject/insertFopProject">
+                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-info" id="btn-view-edit"
+                            authority="${pageContext.request.contextPath}/fopProject/updateFopProject">
+                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                    </button>
                     <button class="btn btn-warning" id="btn-view-del"
                             authority="${pageContext.request.contextPath}/fopProject/deleteFopProjectByFopProjectId">
                         <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
@@ -205,6 +208,18 @@
 <script src="${pageContext.request.contextPath}/content/service/project/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/project/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/project/view.js?version=${cfg.version}"></script>
+
+<script src="${pageContext.request.contextPath}/content/service/talentInfo/upload.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+
 <jsp:include page="../../common/footer-2.jsp"/>
 <script type="text/javascript">
     window.onresize = function () {

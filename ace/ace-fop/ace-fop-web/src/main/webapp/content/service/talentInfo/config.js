@@ -16,3 +16,7 @@ cfg.jgrdInfoDialogWidth = 500;
 if (cfg.gridHeight < 100) {
     cfg.gridHeight = 250;
 }
+
+function isNull(arg1) {
+    return !arg1 && arg1 !== 0 && typeof arg1 !== "boolean" ? true : false;
+}
