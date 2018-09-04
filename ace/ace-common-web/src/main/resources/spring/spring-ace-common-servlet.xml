@@ -21,6 +21,8 @@
 
     <mvc:resources location="/content/" mapping="/content/**"/>
     <mvc:resources location="/dynamic/" mapping="/dynamic/**"/>
+    <mvc:resources location="/ckeditor/" mapping="/ckeditor/**"/>
+    <mvc:resources location="/ckfinder/" mapping="/ckfinder/**"/>
     <mvc:resources location="/www/" mapping="/www/**"/>
 
     <bean id="jsonHttpMessageConverter"
