@@ -140,7 +140,7 @@ app.controller(ngControllerName,function($scope){
                 data:{companyId: companyId},
                 success:function(result){
                     if(result.status == 0) {
-                        layer.alert("退会成功！", {
+                        layer.alert("退会申请提交成功，待管理员审核！", {
                             icon: 5,
                             skin: 'myskin'
                         });
