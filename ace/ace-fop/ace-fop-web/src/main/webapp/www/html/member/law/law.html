@@ -86,7 +86,7 @@
                     <div class="box" style="background:#fff">
                         <div class="child_title">
                             <span class="child_title_1">我发布的法律诉求</span>
-                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
+                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release" onclick="clearForm();">发布</a> </span>
                         </div>
                         <div style="clear: both;"></div>
                         <div class="menu-nav">
@@ -144,11 +144,11 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <label>标题</label><br />
+                    <label>标题<span class="require">*</span></label><br />
                     <input class="input_style" ng-model="infoData.title" type="text"/>
                 </div>
                 <div>
-                    <label>类型</label><br />
+                    <label>类型<span class="require">*</span></label><br />
                     <select class="input_style" ng-model="infoData.subType">
                         <option value="" selected="selected">请选择类型</option>
                         <option value="1">刑事诉讼</option>
@@ -160,7 +160,7 @@
                     </select>
                 </div>
                 <div>
-                    <label>内容</label><br />
+                    <label>内容<span class="require">*</span></label><br />
                     <textarea ng-model="infoData.content"></textarea>
                 </div>
             </div>
@@ -182,11 +182,11 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <label>标题</label><br />
+                    <label>标题<span class="require">*</span></label><br />
                     <input class="input_style" name="law_title" type="text" placeholder="请用一句话概括您需要提供的帮助"/>
                 </div>
                 <div>
-                    <label>类型</label><br />
+                    <label>类型<span class="require">*</span></label><br />
                     <select class="input_style" id="law_type">
                         <option value="" selected="selected">请选择类型</option>
                         <option value="1">刑事诉讼</option>
@@ -198,7 +198,7 @@
                     </select>
                 </div>
                 <div>
-                    <label>内容</label><br />
+                    <label>内容<span class="require">*</span></label><br />
                     <textarea name="law_content" placeholder="请在这里描述您遇到的问题"></textarea>
                 </div>
             </div>

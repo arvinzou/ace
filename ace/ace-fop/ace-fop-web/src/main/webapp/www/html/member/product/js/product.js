@@ -335,6 +335,8 @@ app.controller(ngControllerName,function($scope){
             }
         });
         uploader.init();
+
+        clearForm();
     }
     $scope.init_update = function(id){
         var uploader = new plupload.Uploader({

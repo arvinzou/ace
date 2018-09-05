@@ -94,7 +94,7 @@
                     <div class="box" style="background:#fff">
                         <div class="child_title">
                             <span class="child_title_1">我发布的政企服务</span>
-                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
+                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release" onclick="clearForm();">发布</a> </span>
                         </div>
                         <div style="clear: both;"></div>
                         <div class="menu-nav">
@@ -152,11 +152,11 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <label>标题</label><br/>
+                    <label>标题<span class="require">*</span></label><br/>
                     <input class="input_style" type="text" ng-model="infoData.title" placeholder="请用一句话概括您的需要提供能的帮助"/>
                 </div>
                 <div>
-                    <label>反映内容</label><br />
+                    <label>反映内容<span class="require">*</span></label><br />
                     <textarea id="updateContent" ng-model="infoData.content" placeholder="请在这里描述您遇到的问题"></textarea>
                 </div>
             </div>
@@ -179,11 +179,11 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <label>标题</label><br />
+                    <label>标题<span class="require">*</span></label><br />
                     <input class="input_style" type="text" name="title" placeholder="请用一句话概括您的需要提供能的帮助"/>
                 </div>
                 <div>
-                    <label>反映内容</label><br />
+                    <label>反映内容<span class="require">*</span></label><br />
                     <textarea id="appealContent" name="pcontent" placeholder="请在这里描述您遇到的问题"></textarea>
                 </div>
             </div>

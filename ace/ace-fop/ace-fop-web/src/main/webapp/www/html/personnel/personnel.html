@@ -72,8 +72,6 @@
         </div>
     </div>
 </div>
-</body>
-
 
 <!--发布招聘模态框-->
 <div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -85,12 +83,12 @@
                 <h4 class="modal-title" id="myModalLabel">发布招聘</h4>
             </div>
             <div class="modal-body">
-                <div><label>职位名称</label><br>
+                <div><label>岗位名称<span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入职位名称" name="postname"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='请输入职位名称'"/>
                 </div>
-                <div><label>具体内容</label><br>
+                <div><label>具体内容<span class="require">*</span></label><br>
                     <textarea name="content" id="editor" placeholder="请描述职位的具体内容" onfocus="this.placeholder=''"
                               onblur="this.placeholder='请描述职位的具体内容'"></textarea>
                 </div>
@@ -104,4 +102,5 @@
         </div>
     </div>
 </div>
+</body>
 </html>

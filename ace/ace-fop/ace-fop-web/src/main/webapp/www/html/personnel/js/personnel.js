@@ -180,6 +180,7 @@ app.controller(ngControllerName,function($scope){
             return;
         }else{
             $event.target.dataset.target='#myModal';
+            clearForm();
         }
     }
     /**

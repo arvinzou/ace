@@ -187,6 +187,7 @@ app.controller(ngControllerName,function($scope){
             return;
         }else{
             $event.target.dataset.target='#myModal';
+            clearForm();
         }
     }
     /**
@@ -206,7 +207,7 @@ app.controller(ngControllerName,function($scope){
         }
         if(content == '' || content == undefined){
             flag = false;
-            layer.alert("融资项目内容不能为空！", {
+            layer.alert("产品内容不能为空！", {
                 icon: 5,
                 skin: 'myskin'
             });

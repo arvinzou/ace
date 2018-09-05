@@ -217,6 +217,7 @@ app.controller(ngControllerName, function ($scope) {
             return;
         }else{
             $event.target.dataset.target='#myModal';
+            clearForm();
         }
     }
     /**
@@ -228,7 +229,7 @@ app.controller(ngControllerName, function ($scope) {
         var content = $("textarea[name='content']").val();
         var categoryType = $("#categoryType option:checked").val();
         if (title == '' || title == undefined) {
-            layer.alert("标题不能为空！", {
+            layer.alert("风采标题不能为空！", {
                 icon: 5,
                 skin: 'myskin'
             });

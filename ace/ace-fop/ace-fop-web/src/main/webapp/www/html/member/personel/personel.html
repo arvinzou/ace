@@ -86,7 +86,7 @@
                     <div class="box">
                         <div class="child_title">
                             <span class="child_title_1">我发布的人才信息</span>
-                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
+                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release" onclick="clearForm();">发布</a> </span>
                         </div>
                         <div style="clear: both;"></div>
                         <div class="menu-nav">
@@ -149,9 +149,9 @@
                 <h4 class="modal-title" id="myModalLabel">编辑人才信息</h4>
             </div>
             <div class="modal-body">
-                <div><label>职位名称</label><br/>
+                <div><label>职位名称<span class="require">*</span></label><br/>
                     <input class="input_style" type="text" name="postname" ng-model="infoData.title"/></div>
-                <div><label>具体内容</label><br/>
+                <div><label>具体内容<span class="require">*</span></label><br/>
                     <textarea name="content" id="editor"></textarea></div>
             </div>
             <div class="modal-footer">
@@ -176,9 +176,9 @@
                 <h4 class="modal-title" id="myModalLabel_release">发布人才信息</h4>
             </div>
             <div class="modal-body">
-                <div><label>职位名称</label><br>
+                <div><label>职位名称<span class="require">*</span></label><br>
                     <input class="input_style" type="text" name="pname" ng-model="infoData.title"/></div>
-                <div><label>具体内容</label><br>
+                <div><label>具体内容<span class="require">*</span></label><br>
                     <textarea name="pcontent" id="editor_release"></textarea></div>
             </div>
             <div class="modal-footer">
