@@ -177,6 +177,7 @@ app.controller(ngControllerName,function($scope){
                 return;
         }else{
             $event.target.dataset.target='#myModal1';
+            clearForm();
         }
     }
 
@@ -213,14 +214,6 @@ app.controller(ngControllerName,function($scope){
                 });
                 return;
             }
-            if(content == '' || content == null){
-                flag = false;
-                layer.alert("内容不能为空！", {
-                    icon: 5,
-                    skin: 'myskin'
-                });
-                return;
-            }
             if(projectType == '' || projectType == null){
                 flag = false;
                 layer.alert("项目类型不能为空！", {
@@ -229,6 +222,15 @@ app.controller(ngControllerName,function($scope){
                 });
                 return;
             }
+            if(content == '' || content == null){
+                flag = false;
+                layer.alert("内容不能为空！", {
+                    icon: 5,
+                    skin: 'myskin'
+                });
+                return;
+            }
+
             if(flag){
                 $.ajax({
                     url: "/fop/www/insertProject",
@@ -242,6 +244,7 @@ app.controller(ngControllerName,function($scope){
                                 icon: 1,
                                 skin: 'myskin'
                             });
+                            editor.setValue("");
                         }else {
                             layer.alert(result.errorMessage, {
                                 icon: 5,
@@ -489,6 +492,7 @@ app.controller(ngControllerName,function($scope){
         $("#_citysheng").html('请选择区县');
         return g
     }
+
 });
 app.filter('formatDate', function() { //可以注入依赖
     return function(text) {

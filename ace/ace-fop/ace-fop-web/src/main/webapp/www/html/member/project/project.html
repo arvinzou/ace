@@ -92,7 +92,7 @@
 					<div class="box">
 						<div class="child_title">
 							<span class="child_title_1">我发布的项目</span>
-							<span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
+							<span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release" onclick="clearForm();">发布</a> </span>
 						</div>
 						<div style="clear: both;"></div>
 						<div class="menu-nav">
@@ -159,11 +159,11 @@
 				<h4 class="modal-title" id="myModalLabel">编辑项目信息</h4>
 			</div>
 			<div class="modal-body">
-				<div><label>项目名称</label><br/>
+				<div><label>项目名称<span class="require">*</span></label><br/>
 					<input class="input_style" type="text" ng-model="infoData.projectName"
 						   onfocus="this.placeholder=''"/></div>
 
-				<div><label>合作方式</label><br/>
+				<div><label>合作方式<span class="require">*</span></label><br/>
 					<select class="input_style" ng-model="infoData.coopType">
 						<option value="">请选择合作方式</option>
 						<option value="1">投资合作</option>
@@ -173,17 +173,17 @@
 					</select>
 				</div>
 
-				<div><label>所属区域</label><br/>
+				<div><label>所属区域<span class="require">*</span></label><br/>
 					<input class="input_style" id="city_edit" ng-model="infoData.codeFullName" type="text"
 						   placeholder="请选择所属区域" name="area" autocomplete="off" readonly="true"/>
 				</div>
 
 
-				<div><label>项目类型</label><br/>
+				<div><label>项目类型<span class="require">*</span></label><br/>
 					<input class="input_style" type="text" ng-model="infoData.projectType"/></div>
 
 
-				<div><label>项目内容</label><br/>
+				<div><label>项目内容<span class="require">*</span></label><br/>
 					<textarea id="editor"></textarea>
 				</div>
 			</div>
@@ -209,11 +209,11 @@
 				<h4 class="modal-title" id="myModalLabel_release">发布项目信息</h4>
 			</div>
 			<div class="modal-body">
-				<div><label>项目名称</label><br/>
+				<div><label>项目名称<span class="require">*</span></label><br/>
 					<input class="input_style" type="text" placeholder="请输入项目名称" name="projectName"
 						   onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目名称'"/></div>
 
-				<div><label>合作方式</label><br/>
+				<div><label>合作方式<span class="require">*</span></label><br/>
 					<select class="input_style" id="cooType">
 						<option value="">请选择合作方式</option>
 						<option value="1">投资合作</option>
@@ -223,17 +223,17 @@
 					</select>
 				</div>
 
-				<div><label>所属区域</label><br/>
+				<div><label>所属区域<span class="require">*</span></label><br/>
 					<input class="input_style" id="city" type="text" placeholder="请选择所属区域" name="area"
 						   autocomplete="off" readonly="true"/>
 				</div>
 
-				<div><label>项目类型</label><br/>
+				<div><label>项目类型<span class="require">*</span></label><br/>
 					<input class="input_style" type="text" placeholder="请输入项目类型" name="projectType"
 						   onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目类型'"/></div>
 
 
-				<div><label>项目内容</label><br/>
+				<div><label>项目内容<span class="require">*</span></label><br/>
 					<textarea name="pcontent" id="editor_release" placeholder="描述项目内容"
 							  onfocus="this.placeholder=''" onblur="this.placeholder='描述项目内容'"></textarea>
 				</div>

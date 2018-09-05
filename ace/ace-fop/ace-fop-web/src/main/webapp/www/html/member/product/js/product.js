@@ -335,6 +335,8 @@ app.controller(ngControllerName,function($scope){
             }
         });
         uploader.init();
+
+        clearForm();
     }
     $scope.init_update = function(id){
         var uploader = new plupload.Uploader({
@@ -429,6 +431,7 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
 
+                    editor.setValue("");
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,

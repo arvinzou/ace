@@ -52,7 +52,7 @@
                     <div class="box">
                         <div class="child_title">
                             <span class="child_title_1">我发布的金融产品</span>
-                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
+                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release" onclick="clearForm();">发布</a> </span>
                         </div>
                         <div style="clear: both;"></div>
                         <div class="menu-nav">
@@ -104,11 +104,11 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <label>产品名称</label><br>
+                    <label>产品名称<span class="require">*</span></label><br>
                     <input class="input_style" type="text" ng-model="infoData.productName"/>
                 </div>
                 <div>
-                    <label>内容</label><br>
+                    <label>内容<span class="require">*</span></label><br>
                     <textarea id="content_update"></textarea>
                 </div>
             </div>
@@ -133,13 +133,13 @@
             </div>
             <div class="modal-body">
                 <div>
-                    <label>产品名称</label><br>
+                    <label>产品名称<span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入产品名称" name="productName"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='请输入产品名称'"/>
                 </div>
                 <div>
-                    <label>内容</label><br>
+                    <label>内容<span class="require">*</span></label><br>
                     <textarea name="pcontent" id="content_release" placeholder="描述融资项目" onfocus="this.placeholder=''"
                               onblur="this.placeholder='描述融资项目'"></textarea>
                 </div>

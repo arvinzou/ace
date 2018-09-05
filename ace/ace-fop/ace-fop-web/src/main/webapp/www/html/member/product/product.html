@@ -137,12 +137,12 @@
                 <h4 class="modal-title" id="myModalLabel">编辑产品</h4>
             </div>
             <div class="modal-body">
-                <div><label>标题</label><br>
+                <div><label>标题<span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入产品标题" ng-model="infoData.title"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='请输入产品标题 '"/>
                 </div>
-                <div><label>封面</label><br>
+                <div><label>封面<span class="require">*</span></label><br>
                     <div class="pictureContainer1" id="up_edit">
                         <div class="viewPicture1">
                             <img ng-if="infoData.fileUrl!=''" ng-src="{{infoData.fileUrl}}"
@@ -154,12 +154,12 @@
                         </div>
                     </div>
                 </div>
-                <div><label>描述</label><br>
+                <div><label>描述<span class="require">*</span></label><br>
                     <textarea placeholder="简要描述下产品"
                               onfocus="this.placeholder=''"
                               onblur="this.placeholder='简要描述下产品'" ng-model="infoData.remark"></textarea>
                 </div>
-                <div><label>具体内容</label><br>
+                <div><label>具体内容<span class="require">*</span></label><br>
                     <textarea id="pcontent" ng-model="infoData.content" placeholder="请描述产品具体内容" onfocus="this.placeholder=''"
                               onblur="this.placeholder='请描述产品具体内容'"></textarea>
                 </div>
@@ -185,13 +185,13 @@
                 <h4 class="modal-title" id="myModalLabel_release">发布企业产品</h4>
             </div>
             <div class="modal-body">
-                <div><label>标题</label><br>
+                <div><label>标题<span class="require">*</span></label><br>
                     <div>
                         <input class="input_style" type="text" placeholder="请输入产品标题" name="name"
                                onfocus="this.placeholder=''"
                                onblur="this.placeholder='请输入产品标题 '"/>
                     </div>
-                    <div><label>封面</label><br>
+                    <div><label>封面<span class="require">*</span></label><br>
                         <div class="pictureContainer2" id="upbtn">
                             <div class="viewPicture2">
                                 <img class="hidder" src="" style="width: 100%;height: 100%;object-fit: cover;">
@@ -203,12 +203,12 @@
                             </div>
                         </div>
                     </div>
-                    <div><label>描述</label><br>
+                    <div><label>描述<span class="require">*</span></label><br>
                         <textarea name="remark" id="remark" placeholder="简要描述下产品"
                                   onfocus="this.placeholder=''"
                                   onblur="this.placeholder='简要描述下产品'"></textarea>
                     </div>
-                    <div><label>具体内容</label><br>
+                    <div><label>具体内容<span class="require">*</span></label><br>
                         <textarea name="pcontent" id="editor"></textarea>
                     </div>
                 </div>

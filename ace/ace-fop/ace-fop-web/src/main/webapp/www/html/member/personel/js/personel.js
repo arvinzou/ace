@@ -312,7 +312,7 @@ app.controller(ngControllerName,function($scope){
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
-
+                    editor2.setValue("");
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,

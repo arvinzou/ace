@@ -52,7 +52,7 @@
                     <div class="box">
                         <div class="child_title">
                             <span class="child_title_1">我发布的银企服务</span>
-                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release">发布</a> </span>
+                            <span class="child_title_2"><a href="#" data-toggle="modal" data-target="#myModal_release" onclick="clearForm();">发布</a> </span>
                         </div>
                         <div style="clear: both;"></div>
                         <div class="menu-nav">
@@ -103,13 +103,13 @@
                 <h4 class="modal-title" id="myModalLabel">编辑银企服务</h4>
             </div>
             <div class="modal-body">
-                <div><label>融资名称 </label><br>
+                <div><label>融资名称 <span class="require">*</span></label><br>
                     <input class="input_style" type="text" ng-model="infoData.financeTitle"/>
                 </div>
-                <div><label>融资金额 </label><br>
+                <div><label>融资金额 <span class="require">*</span></label><br>
                     <input class="input_style" type="text" ng-model="infoData.financeAmount"/>
                 </div>
-                <div><label>融资年限 </label><br>
+                <div><label>融资年限 <span class="require">*</span></label><br>
                     <!--<input class="input_style" type="text" ng-model="infoData.financeYear"/>-->
                     <select class="input_style" ng-model="infoData.financeYear">
                         <option value="" selected>请选择</option>
@@ -121,10 +121,10 @@
                         <option value="5">五年以上</option>
                     </select>
                 </div>
-                <div><label>预期年收益 </label><br>
+                <div><label>预期年收益 <span class="require">*</span></label><br>
                     <input class="input_style" type="text" ng-model="infoData.yearYield"/>
                 </div>
-                <div><label>内容 </label><br>
+                <div><label>内容<span class="require">*</span> </label><br>
                     <textarea name="content" id="editor_update"></textarea>
                 </div>
             </div>
@@ -148,15 +148,15 @@
                 <h4 class="modal-title" id="myModalLabel1">发布银企服务</h4>
             </div>
             <div class="modal-body">
-                <div><label>融资名称 </label><br>
+                <div><label>融资名称 <span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入名称" name="financeName"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入名称'"/>
                 </div>
-                <div><label>融资金额 </label><br>
+                <div><label>融资金额 <span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入金额" name="financeMoney"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入金额'"/>
                 </div>
-                <div><label>融资年限 </label><br>
+                <div><label>融资年限 <span class="require">*</span></label><br>
                     <select id="financeYear" class="input_style" ng-model="infoData.financeYear">
                         <option value="" selected>请选择</option>
                         <option value="0">半年</option>
@@ -167,12 +167,12 @@
                         <option value="5">五年以上</option>
                     </select>
                 </div>
-                <div><label>预期年收益 </label><br>
+                <div><label>预期年收益 <span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入年收益" name="rate"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='请输入年收益'"/>
                 </div>
-                <div><label>内容 </label><br>
+                <div><label>内容 <span class="require">*</span></label><br>
                     <textarea name="pcontent" id="editor_release" placeholder="描述融资项目" onfocus="this.placeholder=''"
                               onblur="this.placeholder='描述融资项目'"></textarea>
                 </div>

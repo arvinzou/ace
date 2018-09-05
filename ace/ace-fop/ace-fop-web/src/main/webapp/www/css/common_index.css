@@ -1076,3 +1076,7 @@ a:active {
     font-size: 28px;
     font-weight: bold;
 }
+.require{
+    color: red;
+    padding-left: 5px;
+}

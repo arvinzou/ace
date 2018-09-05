@@ -1481,5 +1481,6 @@ jQuery.extend(jQuery.easing,
     }
 
 })(jQuery);*/
-
-
+function  clearForm() {
+    $("input,textarea,select").val("");
+}

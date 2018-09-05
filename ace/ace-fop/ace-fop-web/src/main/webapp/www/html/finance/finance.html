@@ -110,15 +110,15 @@
                 <h4 class="modal-title" id="myModalLabel">发布融资</h4>
             </div>
             <div class="modal-body">
-                <div><label>融资名称 </label><br>
+                <div><label>融资名称 <span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入产品名称" name="projectName"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资名称'"/>
                 </div>
-                <div><label>融资金额(单位：万元，精确到两位小数) </label><br>
+                <div><label>融资金额(单位：万元，精确到两位小数) <span class="require">*</span></label><br>
                     <input ng-model="money" class="input_style" type="text" placeholder="请输入产品金额" name="projectMoney"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入融资金额'" ng-blur="isNumber(this);"/>
                 </div>
-                <div><label>融资年限 </label><br>
+                <div><label>融资年限 <span class="require">*</span></label><br>
                       <select id="financeYear" class="input_style">
                           <option value="" selected>请选择</option>
                           <option value="0">半年</option>
@@ -129,13 +129,13 @@
                           <option value="5">五年以上</option>
                       </select>
                 </div>
-                <div><label>预期年收益(%) </label><br>
+                <div><label>预期年收益(%) <span class="require">*</span></label><br>
                     <input class="input_style" type="text" placeholder="请输入预期年收益" name="rate"
                            onfocus="this.placeholder=''"
                            onblur="this.placeholder='请输入预期年收益'"
                            onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
                 </div>
-                <div><label>内容 </label><br>
+                <div><label>内容 <span class="require">*</span></label><br>
                     <textarea name="content" placeholder="描述融资项目" onfocus="this.placeholder=''"
                               onblur="this.placeholder='描述融资项目'"></textarea>
                 </div>

@@ -128,11 +128,11 @@
                 <h4 class="modal-title" id="myModalLabel_release">发布项目信息</h4>
             </div>
             <div class="modal-body">
-                <div><label>项目名称</label>
+                <div><label>项目名称<span class="require">*</span></label>
                     <input class="input_style" type="text" placeholder="请输入项目名称" name="projectName"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目名称'"/>
                 </div>
-                <div><label>合作方式</label><br/>
+                <div><label>合作方式<span class="require">*</span></label><br/>
                     <select class="input_style" id="cooType">
                         <option value="">请选择合作方式</option>
                         <option value="1">投资合作</option>
@@ -142,14 +142,14 @@
                     </select>
                 </div>
 
-                <div><label>所属区域</label><br/>
+                <div><label>所属区域<span class="require">*</span></label><br/>
                     <input class="input_style" id="city_modal"  type="text" placeholder="请输入所属区域" name="area" autocomplete="off" readonly="true"/></div>
-                <div><label>项目类型</label><br/>
+                <div><label>项目类型<span class="require">*</span></label><br/>
                     <input class="input_style" type="text" placeholder="请输入项目类型" name="projectType"
                            onfocus="this.placeholder=''" onblur="this.placeholder='请输入项目类型'"/></div>
 
 
-                <div><label>项目内容</label><br/>
+                <div><label>项目内容<span class="require">*</span></label><br/>
                     <textarea name="content" id="content" placeholder="描述项目内容" onfocus="this.placeholder=''"
                               onblur="this.placeholder='描述项目内容'"></textarea>
                 </div>
