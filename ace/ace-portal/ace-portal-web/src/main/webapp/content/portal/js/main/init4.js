@@ -275,7 +275,9 @@ jQuery(function($) {
     }
 });
 function autoWidth(){
-    $(cfg.grid_selector).jqGrid('setGridWidth',$(".page-content").width());
+    if(cfg){
+        $(cfg.grid_selector).jqGrid('setGridWidth',$(".page-content").width());
+    }
 }
 
 function initBottom(){
