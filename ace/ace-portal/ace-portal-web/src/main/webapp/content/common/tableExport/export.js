@@ -29,7 +29,18 @@ $menu.find("li").click(function () {
             ee.find('.jqgfirstrow').remove();//干掉多余的无效行
             ee.find('tbody').before(dd);//合并表头和表数据
             ee.find('tr.ui-search-toolbar').remove();//干掉搜索框
-            console.log({type:type,fileName: cfg.fileName+'v'+getNowFormatDate()});
+            $(ee.find('th')).each(function(i,obj){
+                if($(obj).css("display")=="none"){
+                    $(obj).remove();
+                }
+            });
+            $(ee.find('td')).each(function(i,obj){
+                if($(obj).css("display")=="none"){
+                    $(obj).remove();
+                }
+            });
+            //console.log($(ee).html());
+           console.log({type:type,fileName: cfg.fileName+'v'+getNowFormatDate()});
             //Regex reg = new Regex(@"(?i)<(/?(?:table|tr|td))\b[^>]*>");
             var domstr=$(ee).html();
             var html=domstr.replace(/<(?!(table|tbody|th|thead|tr|td)[ >])[^>/]*>/gi,"");

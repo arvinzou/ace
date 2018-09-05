@@ -23,7 +23,7 @@ CKEDITOR.editorConfig = function(config) {
 	config.filebrowserFlashUploadUrl = portalPath+'/ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash';
 	config.filebrowserWindowWidth = '800';
 	config.filebrowserWindowHeight = '500';
-	config.extraPlugins = 'iframe';
+	config.extraPlugins = 'iframe,video';
 
 
 };
