@@ -270,6 +270,7 @@ app.controller(ngControllerName, function ($scope) {
                         skin: 'myskin'
                     });
                     editor.setValue("");
+                    $("#myModal").modal('hide');
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }

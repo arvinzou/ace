@@ -244,6 +244,7 @@ app.controller(ngControllerName,function($scope){
                         skin: 'myskin',
                         offset:'400px'
                     });
+                    $("#myModal").modal('hide');
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
@@ -431,6 +432,7 @@ app.controller(ngControllerName,function($scope){
                         offset:'400px'
                     });
                     editor.setValue("");
+                    $("#myModal_release").modal('hide');
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }

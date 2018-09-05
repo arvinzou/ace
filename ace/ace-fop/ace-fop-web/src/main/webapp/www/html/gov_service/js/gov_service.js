@@ -216,6 +216,7 @@ app.controller(ngControllerName,function($scope){
                                 $scope.$apply();
                             }
                             editor.setValue("");
+                            $("#myModal").modal('hide');
                         }else {
                             layer.alert(result.errorMessage, {
                                 icon: 5,

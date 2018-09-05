@@ -230,6 +230,7 @@ app.controller(ngControllerName,function($scope){
                             skin: 'myskin'
                         });
                         editor.setValue("");
+                        $("#myModal").modal('hide');
                     }else {
                         layer.alert(result.errorMessage, {
                             icon: 5,

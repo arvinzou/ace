@@ -414,6 +414,7 @@ app.controller(ngControllerName,function($scope) {
                             });
                             $scope.search();
                             $scope.initChart();
+                            $("#myModal_1").modal('hide');
                             if (!$scope.$$phase) {
                                 $scope.$apply();
                             }
@@ -460,6 +461,7 @@ app.controller(ngControllerName,function($scope) {
                     });
                     $scope.search();
                     $scope.initChart();
+                    $("#myModal_2").modal('hide');
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }

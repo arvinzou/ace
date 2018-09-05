@@ -215,6 +215,7 @@ app.controller(ngControllerName,function($scope){
                         });
                         $("input[name='postname']").val("");
                         editor.setValue("");
+                        $("#myModal").modal('hide');
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }

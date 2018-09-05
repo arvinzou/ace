@@ -233,6 +233,7 @@ app.controller(ngControllerName,function($scope){
                                 skin: 'myskin'
                             });
                             $scope.search();
+                            $("#myModal").modal('hide');
                         }else {
                             layer.alert(result.errorMessage, {
                                 icon: 5,
