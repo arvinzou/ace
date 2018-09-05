@@ -202,6 +202,7 @@ app.controller(ngControllerName,function($scope){
                 });
                 return;
             }
+
             $.ajax({
                 url: "/fop/www/insertInformationServiceDo",
                 type:"post",
