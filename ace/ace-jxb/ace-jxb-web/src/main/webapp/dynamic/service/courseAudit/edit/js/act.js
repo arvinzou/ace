@@ -17,7 +17,7 @@ function initEditor() {
     var editor = new Simditor({
         textarea: $('textarea[name=introduce]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
+            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image','video', 'hr', '|', 'indent', 'outdent'
         ],
         upload: {
             url: portalPath + '/files/uploadImage.do', //文件上传的接口地址
