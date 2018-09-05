@@ -218,6 +218,8 @@ app.controller(ngControllerName,function($scope){
                         });
                         $("input[name='postname']").val("");
                         $("textarea[name='content']").val("");
+
+                        editor.setValue("");
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }
@@ -242,6 +244,10 @@ app.controller(ngControllerName,function($scope){
         console.log(primaryId);
         window.open('recruit.html?id='+primaryId);
     }
+
+    $("#myModal_release").on("hide.bs.modal", function() {
+        $(this).removeData("bs.modal");
+    });
 });
 
 app.filter('formatDate', function() { //可以注入依赖

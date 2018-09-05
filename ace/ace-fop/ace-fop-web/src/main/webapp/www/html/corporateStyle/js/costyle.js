@@ -269,6 +269,7 @@ app.controller(ngControllerName, function ($scope) {
                         icon: 1,
                         skin: 'myskin'
                     });
+                    editor.setValue("");
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }

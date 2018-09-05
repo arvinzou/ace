@@ -244,6 +244,7 @@ app.controller(ngControllerName,function($scope){
                                 icon: 1,
                                 skin: 'myskin'
                             });
+                            editor.setValue("");
                         }else {
                             layer.alert(result.errorMessage, {
                                 icon: 5,

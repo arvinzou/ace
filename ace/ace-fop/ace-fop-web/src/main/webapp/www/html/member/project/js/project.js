@@ -346,6 +346,7 @@ app.controller(ngControllerName,function($scope){
                         $scope.$apply();
                     }
 
+                    editor.setValue("");
                 }else {
                     layer.alert(result.errorMessage, {
                         icon: 5,

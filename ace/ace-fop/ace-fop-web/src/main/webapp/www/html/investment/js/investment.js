@@ -214,7 +214,7 @@ app.controller(ngControllerName,function($scope){
                             skin: 'myskin'
                         });
                         $("input[name='postname']").val("");
-                        $("textarea[name='content']").val("");
+                        editor.setValue("");
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }

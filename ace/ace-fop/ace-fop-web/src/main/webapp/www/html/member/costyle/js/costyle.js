@@ -430,7 +430,7 @@ app.controller(ngControllerName,function($scope){
                         skin: 'myskin',
                         offset:'400px'
                     });
-
+                    editor.setValue("");
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
