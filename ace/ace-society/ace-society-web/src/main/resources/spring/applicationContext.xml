@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                            http://www.springframework.org/schema/task
+                            http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+       default-autowire="byName">
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+                <value>classpath:special.properties</value>
+                <value>classpath:dubbo.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="config"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"></property>
+    </bean>
+
+    <!-- 计划任务配置，用 @Service @Lazy(false)标注类，用@Scheduled(cron = "0 0 2 * * ?")标注方法 -->
+    <task:executor id="executor" pool-size="5"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven executor="executor" scheduler="scheduler"/>
+    <import resource="classpath:spring/spring-ace-common-fastdfs.xml"/>
+    <import resource="classpath:spring/spring-ace-common-monitor.xml"/>
+    <import resource="classpath:spring/spring-ace-common-kafka.xml"/>
+    <import resource="classpath:spring/spring-ace-common-redis.xml"/>
+    <import resource="classpath:spring/spring-ace-common-session.xml"/>
+    <import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml"/>
+    <import resource="classpath:spring/spring-ace-society-backend.xml"/>
+    <!--分布式模式-->
+    <!--<import resource="classpath:dubbo/dubbo-ace-society-consumer.xml" />-->
+
+    <!--非分布式模式-->
+    <import resource="classpath:spring/spring-ace-common-dao.xml"/>
+    <import resource="classpath:spring/spring-ace-society-service.xml"/>
+
+
+</beans>

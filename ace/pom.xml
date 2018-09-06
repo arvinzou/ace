@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.3.2.RELEASE</spring.version>
         <junit.version>4.12</junit.version>
-        <jdk.version>1.7</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <slf4j.version>1.7.5</slf4j.version>
         <maven.test.skip>true</maven.test.skip>
         <spring.security.version>4.0.4.RELEASE</spring.security.version>
@@ -62,15 +62,17 @@
         <module>ace-common-dao</module>
         <module>ace-common-web</module>
         <module>ace-portal</module>
+        <module>ace-society</module>
         <module>ace-jxb</module>
+
         <!--<module>ace-gis</module>-->
         <!--<module>ace-kernel</module>-->
         <!--<module>ace-live</module>-->
         <!--<module>ace-iop</module>-->
-        <module>ace-operana</module>
+        <!-- <module>ace-operana</module>-->
         <!--<module>ace-woc</module>-->
-        <module>ace-fop</module>
-        <!--<module>ace-face</module>-->
+        <!--<module>ace-fop</module>-->
+       <!--<module>ace-face</module>-->
         <!--<module>ace-jave</module>-->
         <!--<module>ace-uf</module>-->
         <!--<module>ace-rvc</module>-->
@@ -81,7 +83,6 @@
         <!--<module>ace-weui</module>-->
         <!--<module>activiti-root</module>-->
        <!-- <module>ace-autocode</module>-->
-
     </modules>
     <dependencies>
         <dependency>
