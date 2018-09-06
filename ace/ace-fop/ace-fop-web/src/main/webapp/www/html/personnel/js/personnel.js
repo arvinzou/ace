@@ -221,6 +221,7 @@ app.controller(ngControllerName,function($scope){
                         $("textarea[name='content']").val("");
 
                         editor.setValue("");
+                        $("#myModal").modal('hide');
                         if (!$scope.$$phase) {
                             $scope.$apply();
                         }

@@ -651,7 +651,13 @@ public class FopFlowRecordServiceImpl implements FopFlowRecordService {
         if (!"2".equals(vo.getStatus())) {
             return new ResultResponse(ResultCode.FAIL, "会员状态异常");
         }
-//        int auditRecord = fopFlowRecordDao.isExit();
+        FopFlowRecord r = new FopFlowRecord();
+        r.setFlowType("3");
+        r.setFromId(companyId);
+        int count = fopFlowRecordDao.isExit(r);
+        if (count > 0) {
+            return new ResultResponse(ResultCode.FAIL, "您此前提交的申请正在审核中，请勿重复申请");
+        }
 
         UserProp userProp = new UserProp();
         userProp.setUserId(vo.getId());

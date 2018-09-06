@@ -203,7 +203,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             return mm;
         }
         //初始化系统用户
-        String password = RandomValidateCode.CreateRadom(8, 2);
+        String password = "123456";//RandomValidateCode.CreateRadom(8, 2)
         ResultResponse rs1 = sysAccountService.initSysUser(o.getFullName(), o.getLpMobile(),
                 password, "市工商联 -- 企业注册", userProp);
         if (ResultCode.FAIL == rs1.getStatus()) {
@@ -225,22 +225,22 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setDepartmentId(department.getDepartmentId());
         o.setCreateDate(new Date());
-        String companyType = o.getCompanyType();
-        String status = "3".equals(companyType) ? "2" : "1";
-        o.setStatus(status);
+//        String companyType = o.getCompanyType();
+//        String status = "3".equals(companyType) ? "2" : "1";
+        o.setStatus("2");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopCompanyDao.insertSelective(o);
         this.dataBaseLogService.log("添加企业管理", "企业管理", "", o.getId(),
                 o.getId(), userProp);
         //自动提交会员申请流程
-        if (!"3".equals(companyType)) {//银行添加无需提交审核
-            MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
-                    FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
-            if (ResultCode.FAIL == rs3.getStatus()) {
-                return rs3;
-            }
-        }
+//        if (!"3".equals(companyType)) {//银行添加无需提交审核
+//            MessageResponse rs3 = fopFlowRecordService.submitFlowRecord(GUIDUtil.getGUID(),
+//                    FlowType.MEMBER_JOIN_COMPANY, o.getId(), userProp);
+//            if (ResultCode.FAIL == rs3.getStatus()) {
+//                return rs3;
+//            }
+//        }
 
         //注册成功消息推送
 //        sendRegisterMessage(o.getLpMobile(), o.getFullName(), password);

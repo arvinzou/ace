@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <script src="${pageContext.request.contextPath}/content/common/js/echartloader.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/dynamic/service/statics/js/act.js"></script>
 </head>
@@ -66,11 +67,11 @@
                                     <div class="col-md-3">
                                         <!-- BEGIN WIDGET THUMB -->
                                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">咨询师</h4>
+                                            <h4 class="widget-thumb-heading">注册用户</h4>
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
                                                 <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">已入驻</span>
+                                                    <span class="widget-thumb-subtitle">今日新增</span>
                                                     <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">815</span>
                                                 </div>
                                             </div>
@@ -80,11 +81,11 @@
                                     <div class="col-md-3">
                                         <!-- BEGIN WIDGET THUMB -->
                                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">年度营收</h4>
+                                            <h4 class="widget-thumb-heading">咨询师</h4>
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
                                                 <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">累计</span>
+                                                    <span class="widget-thumb-subtitle">已入驻</span>
                                                     <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">5,071</span>
                                                 </div>
                                             </div>
@@ -96,11 +97,11 @@
                                     <div class="col-md-3">
                                         <!-- BEGIN WIDGET THUMB -->
                                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">咨询营收</h4>
+                                            <h4 class="widget-thumb-heading">咨询师</h4>
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-green icon-bulb"></i>
                                                 <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">累计</span>
+                                                    <span class="widget-thumb-subtitle">今日新增</span>
                                                     <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">7,644</span>
                                                 </div>
                                             </div>
@@ -110,7 +111,7 @@
                                     <div class="col-md-3">
                                         <!-- BEGIN WIDGET THUMB -->
                                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">课程营收</h4>
+                                            <h4 class="widget-thumb-heading">年度营收</h4>
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-red icon-layers"></i>
                                                 <div class="widget-thumb-body">
@@ -124,7 +125,7 @@
                                     <div class="col-md-3">
                                         <!-- BEGIN WIDGET THUMB -->
                                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">评测营收</h4>
+                                            <h4 class="widget-thumb-heading">今日营收</h4>
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
                                                 <div class="widget-thumb-body">
@@ -138,7 +139,7 @@
                                     <div class="col-md-3">
                                         <!-- BEGIN WIDGET THUMB -->
                                         <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">今日营收</h4>
+                                            <h4 class="widget-thumb-heading">本月营收</h4>
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
                                                 <div class="widget-thumb-body">
@@ -153,7 +154,39 @@
 
                                 <!--统计图表-->
                                 <div class="row">
-                                    <div id="container" style="height: 500px;"></div>
+                                    <div class="portlet light ">
+                                        <div class="portlet-title tabbable-line">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active" onclick="weekRevenue();">
+                                                    <a href="#tab_1_1" class="active" data-toggle="tab" aria-expanded="true"> 营收 </a>
+                                                </li>
+                                                <li class="" onclick="registStatics();">
+                                                    <a href="#tab_1_1" data-toggle="tab" aria-expanded="false"> 注册用户 </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <!--BEGIN TABS-->
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab_1_1">
+                                                    <div class="revenue_change">
+                                                        <div class="btn-group btn-group-devided" data-toggle="buttons">
+                                                            <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm active" onclick="weekRevenue();">
+                                                                <input type="radio" name="options" class="toggle" id="option1">周</label>
+                                                            <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm" onclick="monthRevenue();">
+                                                                <input type="radio" name="options" class="toggle" id="option2">月</label>
+                                                        </div>
+                                                    </div>
+                                                    <div style="width: 100%;height: 500px;">
+                                                        <div id="weekRevenue" style="width: 100%;height: 100%;"></div>
+                                                        <div id="monthRevenue" style="width: 100%;height: 100%;"></div>
+                                                        <div id="regist" style="width: 100%;height: 100%;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--END TABS-->
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <!--=======================================-->

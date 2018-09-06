@@ -270,7 +270,10 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopFlowRecord">
         select count(*)
         from fop_flow_record
-        where id = #{id,jdbcType=VARCHAR}
+        where 1=1
+        and flowType = #{flowType,jdbcType=VARCHAR}
+        and fromId = #{fromId,jdbcType=VARCHAR}
+        and (`status` = '1' or (`status` = '2' and auditResult = '0'))
     </select>
 
     <select id="findCount" resultType="int">
