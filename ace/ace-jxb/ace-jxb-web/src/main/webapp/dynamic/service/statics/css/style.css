@@ -1,0 +1,13 @@
+.nav-tabs{
+    float: left !important;
+}
+.btn-circle{
+    width: 80px !important;
+}
+.btn-group-devided{
+    float: right;
+}
+.revenue_change{
+    width: 100%;
+    height: 80px;
+}
