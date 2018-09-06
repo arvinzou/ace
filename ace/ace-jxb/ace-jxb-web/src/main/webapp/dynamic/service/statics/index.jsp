@@ -35,123 +35,9 @@
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
-                                <div class="row widget-row">
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">注册用户</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-green icon-bulb"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">用户/咨询师</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">7,644</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">付费用户</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-red icon-layers"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">累计</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">1,293</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">注册用户</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">今日新增</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">815</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">咨询师</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">已入驻</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">5,071</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                </div>
-                                <div class="row widget-row">
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">咨询师</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-green icon-bulb"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">今日新增</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="7,644">7,644</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">年度营收</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-red icon-layers"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">累计</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="1,293">1,293</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">今日营收</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">累计</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="815">815</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                    <div class="col-md-3">
-                                        <!-- BEGIN WIDGET THUMB -->
-                                        <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                                            <h4 class="widget-thumb-heading">本月营收</h4>
-                                            <div class="widget-thumb-wrap">
-                                                <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
-                                                <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">总收益</span>
-                                                    <span class="widget-thumb-body-stat" data-counter="counterup" data-value="5,071">5,071</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- END WIDGET THUMB -->
-                                    </div>
-                                </div>
+                                <div class="row" id="operationData">
 
+                                </div>
                                 <!--统计图表-->
                                 <div class="row">
                                     <div class="portlet light ">
@@ -199,5 +85,125 @@
         </div>
     </div>
 </div>
+
+<script type="text/template" id="operationDataTemp">
+    <div class="row widget-row">
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">注册用户</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-green icon-bulb"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">用户/咨询师</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.regUserCount}">\${data.regUserCount}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">付费用户</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-red icon-layers"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.paidUserCount}">\${data.paidUserCount}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">注册用户</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">今日新增</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.todayRegUserCount}">\${data.todayRegUserCount}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">咨询师</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">已入驻</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.regTeacherCount}">\${data.regTeacherCount}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+    </div>
+
+    <div class="row widget-row">
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">咨询师</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-green icon-bulb"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">今日新增</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.todayRegTeacherCount}">\${data.todayRegTeacherCount}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">年度营收</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-red icon-layers"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.yearTurnover}">\${data.yearTurnover}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">今日营收</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.todayTurnover}">\${data.todayTurnover}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">本月营收</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">总收益</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.monthTurnover}">\${data.monthTurnover}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+    </div>
+</script>
 </body>
 </html>
