@@ -97,7 +97,7 @@ function weekRevenue(){
             {
                 name:'付费订单',
                 type:'line',
-                stack: '总量',
+                stack: '订单总数',
                 yAxisIndex: 0,
                 areaStyle: {normal: {}},
                 data:[120, 132, 101, 134, 90, 230, 210]
@@ -105,7 +105,7 @@ function weekRevenue(){
             {
                 name:'付费金额',
                 type:'line',
-                stack: '总量',
+                stack: '金额总数',
                 yAxisIndex: 1,
                 areaStyle: {normal: {}},
                 data:[220, 182, 191, 234, 290, 330, 310]
@@ -113,7 +113,7 @@ function weekRevenue(){
         ]
     };
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myChart.setOption(option, false);
     }
 }
 
@@ -196,7 +196,7 @@ function monthRevenue(){
             {
                 name:'付费订单',
                 type:'line',
-                stack: '总量',
+                stack: '订单总数',
                 yAxisIndex: 0,
                 areaStyle: {normal: {}},
                 data:[120, 132, 101, 134, 90, 230, 210, 99, 90,120, 110, 102]
@@ -204,7 +204,7 @@ function monthRevenue(){
             {
                 name:'付费金额',
                 type:'line',
-                stack: '总量',
+                stack: '金额总数',
                 yAxisIndex: 1,
                 areaStyle: {normal: {}},
                 data:[220, 182, 191, 234, 290, 330, 310, 440, 120, 233, 340, 150]
@@ -212,7 +212,7 @@ function monthRevenue(){
         ]
     };
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myChart.setOption(option, false);
     }
 }
 
@@ -276,20 +276,20 @@ function registStatics(){
             {
                 name:'注册用户',
                 type:'line',
-                stack: '总量',
+                stack: '注册用户量',
                 areaStyle: {normal: {}},
                 data:[120, 132, 101, 134, 90, 230, 210, 99, 90,120, 110, 102]
             },
             {
                 name:'付费用户',
                 type:'line',
-                stack: '总量',
+                stack: '付费用户量',
                 areaStyle: {normal: {}},
                 data:[220, 182, 191, 234, 290, 330, 310, 440, 120, 233, 340, 150]
             }
         ]
     };
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myChart.setOption(option, false);
     }
 }
