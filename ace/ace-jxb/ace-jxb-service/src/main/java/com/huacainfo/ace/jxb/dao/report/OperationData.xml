@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.report.OperationData">
+    <select id="query" resultType="map">
+        select
+            -- 注册用户总数
+            (
+                select
+                    count(1)
+                from portal.users t
+                where t.cur_syid='jxb'
+                    and t.user_level in (2)
+            ) as regUserCount,
+            -- 付费用户
+            (
+                select
+                    count(DISTINCT b.consumerId)
+                from jxb.base_order b
+                where b.payStatus in ('2','6','7')
+                    and b.consumerId in (
+                        select t.user_id
+                        from portal.users t
+                        where t.cur_syid='jxb'
+                            and t.user_level in (2)
+                    )
+            ) as paidUserCount ,
+            -- 注册用户（今日新增）
+            (
+                select
+                    count(1)
+                from portal.users t
+                where t.cur_syid='jxb'
+                    and t.user_level in (2)
+                --   and t.create_time like '2018-09-03%'
+                    and to_days(t.create_time) = to_days(now())
+            ) as  todayRegUserCount ,
+            -- 咨询师(只含审核通过的)
+            (
+                select
+                    count(DISTINCT c.counselorId)
+                from jxb.teacher_audit c
+                where c.rst ='1'
+            )  as regTeacherCount,
+            -- 咨询师（今日新增）
+            (
+                select
+                    count(DISTINCT c.counselorId)
+                from jxb.teacher_audit c
+                where c.rst ='1'
+                --  and c.createDate like '2018-08-28%'
+                    and to_days(c.createDate) = to_days(now())
+            ) as todayRegTeacherCount ,
+            -- 年度营收
+            (
+                select
+                    IFNULL(SUM(b.payMoney),0)
+                from jxb.base_order b
+                where 1=1
+                    and b.payStatus in ('2','6','7')
+                -- 	and b.payTime like '2018%'
+                    and YEAR(b.payTime) = YEAR(NOW())
+            )  as yearTurnover,
+            -- 今日营收
+            (
+                select
+                    IFNULL(SUM(b.payMoney),0)
+                from jxb.base_order b
+                where 1=1
+                    and b.payStatus in ('2','6','7')
+                -- 	and b.payTime like '2018-09-06%'
+                    and to_days(b.payTime) = to_days(now())
+            ) as todayTurnover,
+            -- 本月营收
+            (
+                select
+                    IFNULL(SUM(b.payMoney),0)
+                from jxb.base_order b
+                where 1=1
+                    and b.payStatus in ('2','6','7')
+                -- 	and b.payTime like '2018-09%'
+                    and DATE_FORMAT( b.payTime, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+            ) as monthTurnover
+        from jxb.counselor c
+        limit 1
+    </select>
+</mapper>
