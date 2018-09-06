@@ -218,6 +218,8 @@ function palyer() {
         }, false);
     });
     player.addEventListener('waiting', makePlay);
+
+    player.addEventListener('canplay', canPlay);
     playpauseBtn.addEventListener('click', togglePlay);
     player.addEventListener('timeupdate', updateProgress);
     player.addEventListener('volumechange', updateVolume);
@@ -313,7 +315,6 @@ function palyer() {
     }
 
     function rewind(event) {
-        console.log(111111111);
         player.currentTime = player.duration * getCoefficient(event);
     }
 
@@ -340,7 +341,11 @@ function palyer() {
     }
 
     function makePlay(c) {
-        console.log(c);
+        playpauseBtn.style.display = 'none';
+        loading.style.display = 'block';
+    }
+
+    function canPlay(e) {
         playpauseBtn.style.display = 'block';
         loading.style.display = 'none';
     }
