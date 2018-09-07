@@ -63,15 +63,8 @@ function weekRevenue(){
         grid: {
             right: '20%'
         },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
         title: {
-            text: '周营收情况'
+            text: '本周营收情况'
         },
         legend: {
             data:['付费订单','付费金额']
@@ -201,15 +194,8 @@ function monthRevenue(){
         grid: {
             right: '20%'
         },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
         title: {
-            text: '月营收情况'
+            text: '年度营收情况'
         },
         legend: {
             data:['付费订单','付费金额']
@@ -330,13 +316,6 @@ function registStatics(){
         },
         grid: {
             right: '20%'
-        },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
         },
         title: {
             text: '年度注册用户情况'

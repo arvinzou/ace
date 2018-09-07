@@ -35,6 +35,7 @@
                             <div class="page-content-inner">
 
                                 <!---==============================================-->
+                                <div class="row static_title"><h3 class="title">心阳光联盟运营看板</h3></div>
                                 <div class="row" id="operationData">
 
                                 </div>
@@ -44,7 +45,10 @@
                                         <div class="portlet-title tabbable-line">
                                             <ul class="nav nav-tabs">
                                                 <li class="active" onclick="weekRevenue();">
-                                                    <a href="#tab_1_1" class="active" data-toggle="tab" aria-expanded="true"> 营收 </a>
+                                                    <a href="#tab_1_1" class="active" data-toggle="tab" aria-expanded="true">本周营收 </a>
+                                                </li>
+                                                <li onclick="monthRevenue();">
+                                                    <a href="#tab_1_1" class="active" data-toggle="tab" aria-expanded="true">年度营收 </a>
                                                 </li>
                                                 <li class="" onclick="registStatics();">
                                                     <a href="#tab_1_1" data-toggle="tab" aria-expanded="false"> 注册用户 </a>
@@ -55,14 +59,14 @@
                                             <!--BEGIN TABS-->
                                             <div class="tab-content">
                                                 <div class="tab-pane active" id="tab_1_1">
-                                                    <div class="revenue_change">
+                                                   <%-- <div class="revenue_change">
                                                         <div class="btn-group btn-group-devided" data-toggle="buttons">
                                                             <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm active" onclick="weekRevenue();">
                                                                 <input type="radio" name="options" class="toggle" id="option1">周</label>
                                                             <label class="btn btn-transparent blue-oleo btn-no-border btn-outline btn-circle btn-sm" onclick="monthRevenue();">
                                                                 <input type="radio" name="options" class="toggle" id="option2">月</label>
                                                         </div>
-                                                    </div>
+                                                    </div>--%>
                                                     <div style="width: 100%;height: 500px;">
                                                         <div id="weekRevenue" style="width: 100%;height: 100%;"></div>
                                                         <div id="monthRevenue" style="width: 100%;height: 100%;"></div>
@@ -93,9 +97,9 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">注册用户</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green icon-bulb"></i>
+                    <i class="widget-thumb-icon bg-green icon-user"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">用户/咨询师</span>
+                        <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.regUserCount}">\${data.regUserCount}</span>
                     </div>
                 </div>
@@ -107,7 +111,7 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">付费用户</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red icon-layers"></i>
+                    <i class="widget-thumb-icon bg-red icon-basket-loaded"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.paidUserCount}">\${data.paidUserCount}</span>
@@ -121,7 +125,7 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">注册用户</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple icon-screen-desktop"></i>
+                    <i class="widget-thumb-icon bg-purple icon-user-follow"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">今日新增</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.todayRegUserCount}">\${data.todayRegUserCount}</span>
@@ -135,7 +139,7 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">咨询师</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-blue icon-bar-chart"></i>
+                    <i class="widget-thumb-icon bg-blue  icon-graduation"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">已入驻</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.regTeacherCount}">\${data.regTeacherCount}</span>
@@ -152,7 +156,7 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">咨询师</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green icon-bulb"></i>
+                    <i class="widget-thumb-icon bg-green icon-note"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">今日新增</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.todayRegTeacherCount}">\${data.todayRegTeacherCount}</span>
