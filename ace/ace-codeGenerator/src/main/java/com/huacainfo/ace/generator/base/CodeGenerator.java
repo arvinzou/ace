@@ -645,13 +645,15 @@ public class CodeGenerator {
         createFilePath(filePathRoot);
 
 
+
         /**创建JSP**/
         String tableName = CommonUtils.propertyToField(c.getSimpleName());
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
+        List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
         List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
-        for(ColumsInfo o:DBHelpInfo.getTableInfo(tableName)){
+        for(ColumsInfo o:items){
             if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
 
             }else {
@@ -686,7 +688,16 @@ public class CodeGenerator {
         File filePathImg = new File(pathImg);
         createFilePath(filePathImg);
 
+        List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
+        for(ColumsInfo o:items){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
 
+            }else {
+                if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
+                    list1.add(o);
+                }
+            }
+        }
         /**创建JS目录**/
         String pathJs = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/add/js/";
         File filePathJs = new File(pathJs);
@@ -694,7 +705,7 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.add.vm"), bean, annotation,list));
+        fwJs.write(generatorCode(this.getProperty("js.add.vm"), bean, annotation,list1));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);
@@ -712,8 +723,9 @@ public class CodeGenerator {
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
+        List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
         List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
-        for(ColumsInfo o:DBHelpInfo.getTableInfo(tableName)){
+        for(ColumsInfo o:items){
             if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
 
             }else {
@@ -748,7 +760,16 @@ public class CodeGenerator {
         File filePathImg = new File(pathImg);
         createFilePath(filePathImg);
 
+        List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
+        for(ColumsInfo o:items){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
 
+            }else {
+                if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
+                    list1.add(o);
+                }
+            }
+        }
         /**创建JS目录**/
         String pathJs = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/edit/js/";
         File filePathJs = new File(pathJs);
@@ -756,7 +777,7 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.edit.vm"), bean, annotation,list));
+        fwJs.write(generatorCode(this.getProperty("js.edit.vm"), bean, annotation,list1));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);

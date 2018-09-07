@@ -51,21 +51,17 @@ function initEvents(){
         rules: {
             #if($!list)
              #foreach($item in $list)
-                #if($item.isNullAble=='NO'&&($item.typeName=='varchar'||$item.typeName=='longtext'))
-                    $!{item.columName}: {required: true,maxlength:$!{item.len}},
-                #end
+                $!{item.columName}: {required: true,maxlength:$!{item.len}}#if($foreach.hasNext ),#end
              #end
             #end
         },
         messages: {
             #if($!list)
              #foreach($item in $list)
-                #if($item.isNullAble=='NO'&&($item.typeName=='varchar'||$item.typeName=='longtext'))
-                    $!{item.columName}: {
-                        required: "请输入$!{item.remarks}",
-                        maxlength:"$!{item.remarks}字符长度不能超过$!{item.len}"
-                    },
-                #end
+                $!{item.columName}: {
+                    required: "请输入$!{item.remarks}",
+                    maxlength:"$!{item.remarks}字符长度不能超过$!{item.len}"
+                }#if( $foreach.hasNext ),#end
              #end
             #end
         }
