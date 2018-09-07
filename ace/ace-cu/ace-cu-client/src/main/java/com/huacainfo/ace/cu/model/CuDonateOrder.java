@@ -31,7 +31,7 @@ public class CuDonateOrder implements Serializable {
     private String orderNo;
 
     /**
-     * 0-微信支付,1-银行卡支付
+     * 0-微信支付,1-银行卡支付 2-建行龙支付
      */
     private String payType;
 

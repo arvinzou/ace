@@ -17,8 +17,12 @@ public interface OrderConstant {
 
     /**
      * 订单支付类型
-     * 0-微信支付,1-银行卡支付
+     * 0-微信支付,
+     * 1-银行卡支付
+     * 2-建行龙支付
      */
     String PAY_TYPE_WX = "0";
     String PAY_TYPE_UNIONPAY = "1";
+    String PAY_TYPE_CCB = "1";
+
 }

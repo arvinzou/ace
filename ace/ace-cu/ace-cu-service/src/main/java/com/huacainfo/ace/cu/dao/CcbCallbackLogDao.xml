@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.cu.dao.CcbCallbackLogDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.cu.model.CcbCallbackLog">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="POSID" jdbcType="VARCHAR" property="POSID"/>
+        <result column="BRANCHID" jdbcType="VARCHAR" property="BRANCHID"/>
+        <result column="ORDERID" jdbcType="VARCHAR" property="ORDERID"/>
+        <result column="PAYMENT" jdbcType="DECIMAL" property="PAYMENT"/>
+        <result column="CURCODE" jdbcType="CHAR" property="CURCODE"/>
+        <result column="REMARK1" jdbcType="VARCHAR" property="REMARK1"/>
+        <result column="REMARK2" jdbcType="VARCHAR" property="REMARK2"/>
+        <result column="ACC_TYPE" jdbcType="CHAR" property="ACC_TYPE"/>
+        <result column="SUCCESS" jdbcType="CHAR" property="SUCCESS"/>
+        <result column="TYPE" jdbcType="CHAR" property="TYPE"/>
+        <result column="REFERER" jdbcType="VARCHAR" property="REFERER"/>
+        <result column="CLIENTIP" jdbcType="VARCHAR" property="CLIENTIP"/>
+        <result column="ACCDATE" jdbcType="VARCHAR" property="ACCDATE"/>
+        <result column="USRMSG" jdbcType="VARCHAR" property="USRMSG"/>
+        <result column="USRINFO" jdbcType="VARCHAR" property="USRINFO"/>
+        <result column="PAYTYPE" jdbcType="CHAR" property="PAYTYPE"/>
+        <result column="SIGN" jdbcType="VARCHAR" property="SIGN"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, POSID, BRANCHID, ORDERID, PAYMENT, CURCODE, REMARK1, REMARK2, ACC_TYPE, SUCCESS, 
+    TYPE, REFERER, CLIENTIP, ACCDATE, USRMSG, USRINFO, PAYTYPE, SIGN, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ccb_callback_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ccb_callback_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.cu.model.CcbCallbackLog">
+    insert into ccb_callback_log (id, POSID, BRANCHID, 
+      ORDERID, PAYMENT, CURCODE, 
+      REMARK1, REMARK2, ACC_TYPE, 
+      SUCCESS, TYPE, REFERER, CLIENTIP, 
+      ACCDATE, USRMSG, USRINFO, 
+      PAYTYPE, SIGN, createDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{POSID,jdbcType=VARCHAR}, #{BRANCHID,jdbcType=VARCHAR}, 
+      #{ORDERID,jdbcType=VARCHAR}, #{PAYMENT,jdbcType=DECIMAL}, #{CURCODE,jdbcType=CHAR}, 
+      #{REMARK1,jdbcType=VARCHAR}, #{REMARK2,jdbcType=VARCHAR}, #{ACC_TYPE,jdbcType=CHAR}, 
+      #{SUCCESS,jdbcType=CHAR}, #{TYPE,jdbcType=CHAR}, #{REFERER,jdbcType=VARCHAR}, #{CLIENTIP,jdbcType=VARCHAR}, 
+      #{ACCDATE,jdbcType=VARCHAR}, #{USRMSG,jdbcType=VARCHAR}, #{USRINFO,jdbcType=VARCHAR}, 
+      #{PAYTYPE,jdbcType=CHAR}, #{SIGN,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.cu.model.CcbCallbackLog">
+        insert into ccb_callback_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="POSID != null">
+                POSID,
+            </if>
+            <if test="BRANCHID != null">
+                BRANCHID,
+            </if>
+            <if test="ORDERID != null">
+                ORDERID,
+            </if>
+            <if test="PAYMENT != null">
+                PAYMENT,
+            </if>
+            <if test="CURCODE != null">
+                CURCODE,
+            </if>
+            <if test="REMARK1 != null">
+                REMARK1,
+            </if>
+            <if test="REMARK2 != null">
+                REMARK2,
+            </if>
+            <if test="ACC_TYPE != null">
+                ACC_TYPE,
+            </if>
+            <if test="SUCCESS != null">
+                SUCCESS,
+            </if>
+            <if test="TYPE != null">
+                TYPE,
+            </if>
+            <if test="REFERER != null">
+                REFERER,
+            </if>
+            <if test="CLIENTIP != null">
+                CLIENTIP,
+            </if>
+            <if test="ACCDATE != null">
+                ACCDATE,
+            </if>
+            <if test="USRMSG != null">
+                USRMSG,
+            </if>
+            <if test="USRINFO != null">
+                USRINFO,
+            </if>
+            <if test="PAYTYPE != null">
+                PAYTYPE,
+            </if>
+            <if test="SIGN != null">
+                SIGN,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="POSID != null">
+                #{POSID,jdbcType=VARCHAR},
+            </if>
+            <if test="BRANCHID != null">
+                #{BRANCHID,jdbcType=VARCHAR},
+            </if>
+            <if test="ORDERID != null">
+                #{ORDERID,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYMENT != null">
+                #{PAYMENT,jdbcType=DECIMAL},
+            </if>
+            <if test="CURCODE != null">
+                #{CURCODE,jdbcType=CHAR},
+            </if>
+            <if test="REMARK1 != null">
+                #{REMARK1,jdbcType=VARCHAR},
+            </if>
+            <if test="REMARK2 != null">
+                #{REMARK2,jdbcType=VARCHAR},
+            </if>
+            <if test="ACC_TYPE != null">
+                #{ACC_TYPE,jdbcType=CHAR},
+            </if>
+            <if test="SUCCESS != null">
+                #{SUCCESS,jdbcType=CHAR},
+            </if>
+            <if test="TYPE != null">
+                #{TYPE,jdbcType=CHAR},
+            </if>
+            <if test="REFERER != null">
+                #{REFERER,jdbcType=VARCHAR},
+            </if>
+            <if test="CLIENTIP != null">
+                #{CLIENTIP,jdbcType=VARCHAR},
+            </if>
+            <if test="ACCDATE != null">
+                #{ACCDATE,jdbcType=VARCHAR},
+            </if>
+            <if test="USRMSG != null">
+                #{USRMSG,jdbcType=VARCHAR},
+            </if>
+            <if test="USRINFO != null">
+                #{USRINFO,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYTYPE != null">
+                #{PAYTYPE,jdbcType=CHAR},
+            </if>
+            <if test="SIGN != null">
+                #{SIGN,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.cu.model.CcbCallbackLog">
+        update ccb_callback_log
+        <set>
+            <if test="POSID != null">
+                POSID = #{POSID,jdbcType=VARCHAR},
+            </if>
+            <if test="BRANCHID != null">
+                BRANCHID = #{BRANCHID,jdbcType=VARCHAR},
+            </if>
+            <if test="ORDERID != null">
+                ORDERID = #{ORDERID,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYMENT != null">
+                PAYMENT = #{PAYMENT,jdbcType=DECIMAL},
+            </if>
+            <if test="CURCODE != null">
+                CURCODE = #{CURCODE,jdbcType=CHAR},
+            </if>
+            <if test="REMARK1 != null">
+                REMARK1 = #{REMARK1,jdbcType=VARCHAR},
+            </if>
+            <if test="REMARK2 != null">
+                REMARK2 = #{REMARK2,jdbcType=VARCHAR},
+            </if>
+            <if test="ACC_TYPE != null">
+                ACC_TYPE = #{ACC_TYPE,jdbcType=CHAR},
+            </if>
+            <if test="SUCCESS != null">
+                SUCCESS = #{SUCCESS,jdbcType=CHAR},
+            </if>
+            <if test="TYPE != null">
+                TYPE = #{TYPE,jdbcType=CHAR},
+            </if>
+            <if test="REFERER != null">
+                REFERER = #{REFERER,jdbcType=VARCHAR},
+            </if>
+            <if test="CLIENTIP != null">
+                CLIENTIP = #{CLIENTIP,jdbcType=VARCHAR},
+            </if>
+            <if test="ACCDATE != null">
+                ACCDATE = #{ACCDATE,jdbcType=VARCHAR},
+            </if>
+            <if test="USRMSG != null">
+                USRMSG = #{USRMSG,jdbcType=VARCHAR},
+            </if>
+            <if test="USRINFO != null">
+                USRINFO = #{USRINFO,jdbcType=VARCHAR},
+            </if>
+            <if test="PAYTYPE != null">
+                PAYTYPE = #{PAYTYPE,jdbcType=CHAR},
+            </if>
+            <if test="SIGN != null">
+                SIGN = #{SIGN,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.cu.model.CcbCallbackLog">
+    update ccb_callback_log
+    set POSID = #{POSID,jdbcType=VARCHAR},
+      BRANCHID = #{BRANCHID,jdbcType=VARCHAR},
+      ORDERID = #{ORDERID,jdbcType=VARCHAR},
+      PAYMENT = #{PAYMENT,jdbcType=DECIMAL},
+      CURCODE = #{CURCODE,jdbcType=CHAR},
+      REMARK1 = #{REMARK1,jdbcType=VARCHAR},
+      REMARK2 = #{REMARK2,jdbcType=VARCHAR},
+      ACC_TYPE = #{ACC_TYPE,jdbcType=CHAR},
+      SUCCESS = #{SUCCESS,jdbcType=CHAR},
+      TYPE = #{TYPE,jdbcType=CHAR},
+      REFERER = #{REFERER,jdbcType=VARCHAR},
+      CLIENTIP = #{CLIENTIP,jdbcType=VARCHAR},
+      ACCDATE = #{ACCDATE,jdbcType=VARCHAR},
+      USRMSG = #{USRMSG,jdbcType=VARCHAR},
+      USRINFO = #{USRINFO,jdbcType=VARCHAR},
+      PAYTYPE = #{PAYTYPE,jdbcType=CHAR},
+      SIGN = #{SIGN,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
