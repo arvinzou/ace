@@ -100,7 +100,7 @@ function findMyCounselors(num, type, studioId) {
     var data = {
         studioId: studioId,
         page: num,
-        limit: 5,
+        limit: 10,
         name: '',
     }
     $.getJSON(url, data, function (result) {

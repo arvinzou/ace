@@ -16,7 +16,7 @@ function App() {
 window.onload = function (){
     initPage();
 }
-var params={limit:5};
+var params = {limit: 10};
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 20,

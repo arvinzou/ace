@@ -49,7 +49,7 @@ function getStudioList(num, type) {
     var url = contextPath+ "/studio/findStudioList";
     var data = {
         page: num,
-        limit: 5,
+        limit: 10,
     };
     $.getJSON(url, data, function (result) {
         if (result.status == 0) {
