@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.report.OperationDao">
+    <select id="weekOperation" resultType="map">
+        -- 本周总体运营情况
+        SELECT
+            count(1) as weekCount,
+            sum(b.payMoney) as weekTurnover
+        FROM
+            jxb.base_order b
+        WHERE  b.payStatus IN ('2', '6', '7')
+        -- and b.payTime BETWEEN '2018-09-03 00:00:00' and '2018-09-08 23:59:59'
+        and YEARWEEK(date_format(b.payTime,'%Y-%m-%d')) = YEARWEEK(now())
+    </select>
+
+    <select id="dayOperation" parameterType="java.lang.String" resultType="map">
+       -- 指定某一天的运营情况
+        SELECT
+            count(1) as dayCount,
+            IFNULL(sum(b.payMoney),0) as dayTurnover
+        FROM
+            jxb.base_order b
+        WHERE  b.payStatus IN ('2', '6', '7')
+        and b.payTime like concat(#{dateTime,jdbcType=VARCHAR}, '%')
+    </select>
+
+    <select id="userData" parameterType="java.lang.String" resultType="map">
+        select
+            -- 注册用户总数
+            (select
+                    count(1)
+            from portal.users t
+            where t.cur_syid='jxb'
+                and t.user_level in (2)
+                and t.create_time like concat(#{dateTime,jdbcType=VARCHAR}, '%')
+            ) as regUserCount,
+            -- 付费用户
+            (select
+                    count(DISTINCT b.consumerId)
+            from jxb.base_order b
+            where b.payStatus in ('2','6','7')
+                and b.consumerId in (
+                        select t.user_id
+                        from portal.users t
+                        where t.cur_syid='jxb'
+                            and t.user_level in (2)
+                            and t.create_time like concat(#{dateTime,jdbcType=VARCHAR}, '%')
+                )
+            ) as paidUserCount
+        from jxb.counselor c limit 1
+    </select>
+
+    <select id="turnoverData" parameterType="java.lang.String" resultType="map">
+        SELECT
+            count(1) AS weekCount,
+            IFNULL(sum(b.payMoney),0) AS weekTurnover
+        FROM
+            jxb.base_order b
+        WHERE	b.payStatus IN ('2', '6', '7')
+        AND b.payTime like concat(#{dateTime,jdbcType=VARCHAR}, '%')
+    </select>
+</mapper>

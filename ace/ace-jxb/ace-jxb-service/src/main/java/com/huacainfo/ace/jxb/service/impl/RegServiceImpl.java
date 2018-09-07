@@ -210,7 +210,7 @@ public class RegServiceImpl implements RegService {
         o.setCurSyid("jxb");
         o.setOpenId(reg.getUnionId());
         o.setCreateTime(new java.util.Date());
-        o.setUserLevel(regType);//身份标识 1 -- 老师 ，2 - 家长
+        o.setUserLevel(regType);//身份标识 1 -- 老师 ，2 - 家长 3-管理员
         o.setSex(reg.getSex());
         this.regDao.insertReg(o);
         //密码短信通知

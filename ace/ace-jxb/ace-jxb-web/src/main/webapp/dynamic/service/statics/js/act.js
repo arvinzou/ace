@@ -15,6 +15,7 @@ function App() {
 
 
 window.onload = function (){
+    initOperationData();
     weekRevenue();
 }
 
@@ -22,9 +23,31 @@ window.onload = function (){
  * 本周营收
  */
 function weekRevenue(){
+    var weekData = null;
+    startLoad();
+    $.ajax({
+        url: contextPath + "/www/report/weekOperationChart",
+        type:"post",
+        async:false,
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0){
+                stopLoad();
+                weekData = result.data;
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+    if(weekData == null) return;
+
     $("#monthRevenue").hide();
     $("#regist").hide();
     $("#weekRevenue").show();
+    $(".revenue_change").show();
     var dom = document.getElementById("weekRevenue");
     var myChart = echarts.init(dom);
     var app = {};
@@ -40,15 +63,8 @@ function weekRevenue(){
         grid: {
             right: '20%'
         },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
         title: {
-            text: '周营收情况'
+            text: '本周营收情况'
         },
         legend: {
             data:['付费订单','付费金额']
@@ -90,30 +106,36 @@ function weekRevenue(){
             {
                 type : 'category',
                 boundaryGap : false,
-                data : ['星期一','星期二','星期三','星期四','星期五','星期六','星期日']
+                data : [weekData.weekTimeMap.Monday, weekData.weekTimeMap.Tuesday, weekData.weekTimeMap.Wednesday,
+                        weekData.weekTimeMap.Thursday, weekData.weekTimeMap.Friday, weekData.weekTimeMap.Saturday,
+                        weekData.weekTimeMap.Sunday]
             }
         ],
         series : [
             {
                 name:'付费订单',
                 type:'line',
-                stack: '总量',
+                stack: '订单总数',
                 yAxisIndex: 0,
                 areaStyle: {normal: {}},
-                data:[120, 132, 101, 134, 90, 230, 210]
+                data:[weekData.detailData.Monday.dayCount, weekData.detailData.Tuesday.dayCount, weekData.detailData.Wednesday.dayCount,
+                    weekData.detailData.Thursday.dayCount, weekData.detailData.Friday.dayCount, weekData.detailData.Saturday.dayCount,
+                    weekData.detailData.Sunday.dayCount]
             },
             {
                 name:'付费金额',
                 type:'line',
-                stack: '总量',
+                stack: '金额总数',
                 yAxisIndex: 1,
                 areaStyle: {normal: {}},
-                data:[220, 182, 191, 234, 290, 330, 310]
+                data:[weekData.detailData.Monday.dayTurnover, weekData.detailData.Tuesday.dayTurnover, weekData.detailData.Wednesday.dayTurnover,
+                    weekData.detailData.Thursday.dayTurnover, weekData.detailData.Friday.dayTurnover, weekData.detailData.Saturday.dayTurnover,
+                    weekData.detailData.Sunday.dayTurnover]
             }
         ]
     };
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myChart.setOption(option, false);
     }
 }
 
@@ -121,9 +143,42 @@ function weekRevenue(){
  * 本月营收
  */
 function monthRevenue(){
+    var yearData = null;
+    var xMonth = [];
+    var countArr = [];
+    var turnArr = [];
+    startLoad();
+    $.ajax({
+        url: contextPath + "/www/report/yearTurnOverChart",
+        type:"post",
+        async:false,
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0){
+                stopLoad();
+                yearData = result.data.monthData;
+                for (var key in yearData) {
+                    console.log(key);     //获取key值
+                    xMonth.push(key);
+                }
+                for(var i=0; i<xMonth.length; i++){
+                    countArr.push(yearData[xMonth[i]].weekCount);
+                    turnArr.push(yearData[xMonth[i]].weekTurnover);
+                }
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+    if(yearData == null) return;
+
     $("#monthRevenue").show();
     $("#weekRevenue").hide();
     $("#regist").hide();
+    $(".revenue_change").show();
     var dom = document.getElementById("monthRevenue");
     var myChart = echarts.init(dom);
     var app = {};
@@ -139,15 +194,8 @@ function monthRevenue(){
         grid: {
             right: '20%'
         },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
         title: {
-            text: '月营收情况'
+            text: '年度营收情况'
         },
         legend: {
             data:['付费订单','付费金额']
@@ -189,34 +237,67 @@ function monthRevenue(){
             {
                 type : 'category',
                 boundaryGap : false,
-                data : ['一月份','二月份','三月份','四月份','五月份','六月份','七月份','八月份','九月份','十月份','十一月份','十二月份']
+                data : xMonth
             }
         ],
         series : [
             {
                 name:'付费订单',
                 type:'line',
-                stack: '总量',
+                stack: '订单总数',
                 yAxisIndex: 0,
                 areaStyle: {normal: {}},
-                data:[120, 132, 101, 134, 90, 230, 210, 99, 90,120, 110, 102]
+                data:countArr
             },
             {
                 name:'付费金额',
                 type:'line',
-                stack: '总量',
+                stack: '金额总数',
                 yAxisIndex: 1,
                 areaStyle: {normal: {}},
-                data:[220, 182, 191, 234, 290, 330, 310, 440, 120, 233, 340, 150]
+                data:countArr
             }
         ]
     };
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myChart.setOption(option, false);
     }
 }
 
 function registStatics(){
+    var registData = null;
+    var xMonth = [];
+    var registArr = [];
+    var paidArr = [];
+    startLoad();
+    $.ajax({
+        url: contextPath + "/www/report/yearRegUserChart",
+        type:"post",
+        async:false,
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0){
+                stopLoad();
+                registData = result.data;
+                for (var key in registData.monthData) {
+                    console.log(key);     //获取key值
+                    xMonth.push(key);
+                }
+                var data = registData.monthData;
+                for(var i=0; i<xMonth.length; i++){
+                    registArr.push(data[xMonth[i]].regUserCount);
+                    paidArr.push(data[xMonth[i]].paidUserCount);
+                }
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+    if(registData == null) return;
+
     $("#monthRevenue").hide();
     $("#weekRevenue").hide();
     $("#regist").show();
@@ -235,13 +316,6 @@ function registStatics(){
         },
         grid: {
             right: '20%'
-        },
-        toolbox: {
-            feature: {
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
         },
         title: {
             text: '年度注册用户情况'
@@ -269,27 +343,55 @@ function registStatics(){
             {
                 type : 'category',
                 boundaryGap : false,
-                data : ['一月份','二月份','三月份','四月份','五月份','六月份','七月份','八月份','九月份','十月份','十一月份','十二月份']
+                data : xMonth
             }
         ],
         series : [
             {
                 name:'注册用户',
                 type:'line',
-                stack: '总量',
+                stack: '注册用户量',
                 areaStyle: {normal: {}},
-                data:[120, 132, 101, 134, 90, 230, 210, 99, 90,120, 110, 102]
+                data:registArr
             },
             {
                 name:'付费用户',
                 type:'line',
-                stack: '总量',
+                stack: '付费用户量',
                 areaStyle: {normal: {}},
-                data:[220, 182, 191, 234, 290, 330, 310, 440, 120, 233, 340, 150]
+                data:paidArr
             }
         ]
     };
     if (option && typeof option === "object") {
-        myChart.setOption(option, true);
+        myChart.setOption(option, false);
     }
+}
+
+function initOperationData(){
+    startLoad();
+    $.ajax({
+        url: contextPath + "/www/report/operationData",
+        type:"post",
+        async:false,
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0){
+                stopLoad();
+                renderPage('operationData', result.data, 'operationDataTemp');
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
 }
