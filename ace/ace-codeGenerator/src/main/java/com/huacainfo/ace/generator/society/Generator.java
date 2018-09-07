@@ -8,8 +8,8 @@ public class Generator {
         CodeGenerator codeGenerator = new CodeGenerator("society", "课程", "Arvin");
         Class<?> c = com.huacainfo.ace.portal.model.Article.class;
         codeGenerator.init(c);
-       // codeGenerator.generatorWebClient(c);
-        codeGenerator.generatorWebManager(c);
+        codeGenerator.generatorWebClient(c);
+        //codeGenerator.generatorWebManager(c);
 
     }
 
