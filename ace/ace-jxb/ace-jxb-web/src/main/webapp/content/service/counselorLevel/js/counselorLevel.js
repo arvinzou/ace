@@ -105,7 +105,7 @@ function activeModify() {
         }
         $.post(url, data, function (result) {
             if (result.status == 0) {
-
+                getDataList($('#pagination1 .active').text());
             } else {
                 alert(result.errorMessage);
             }

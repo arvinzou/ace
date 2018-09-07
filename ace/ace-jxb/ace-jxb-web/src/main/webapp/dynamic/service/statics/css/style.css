@@ -1,6 +1,9 @@
 .nav-tabs{
     float: left !important;
 }
+.container{
+    width: 80% !important;
+}
 .btn-circle{
     width: 80px !important;
 }
@@ -10,4 +13,14 @@
 .revenue_change{
     width: 100%;
     height: 80px;
+}
+.static_title{
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+}
+.title{
+    color: #697882;
+    font-size: 22px;
+    font-weight: bold;
 }

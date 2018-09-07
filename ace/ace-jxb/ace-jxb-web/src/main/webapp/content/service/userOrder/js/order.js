@@ -109,7 +109,7 @@ function getOrderList(num, type) {
     var data = {
         category: category,
         page: num,
-        limit: 5
+        limit: 10
     }
     startLoad();
     $.getJSON(url, data, function (result) {

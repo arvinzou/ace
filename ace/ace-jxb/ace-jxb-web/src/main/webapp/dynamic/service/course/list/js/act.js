@@ -1,7 +1,7 @@
 var loading = {};
 var primaryId = null;
 var videoUrl = null;
-var params={limit:5};
+var params = {limit: 10};
 function loadlocal() {
     var urls = [];
     urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
