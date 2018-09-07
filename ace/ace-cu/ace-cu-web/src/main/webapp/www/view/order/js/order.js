@@ -123,7 +123,7 @@ app.controller(ngControllerName,function($scope) {
 					"donateName": realName,
                     "consigneeName": billName,
 					"mobileNumber": phoneNum,
-					"payType" : 0,     //0微信支付，1银行卡支付
+					"payType" : "2",     //0微信支付，1银行卡支付
 					"needReceipt":needReceipt,
                     "country":"中国",
 					"province": sheng,
@@ -141,22 +141,25 @@ app.controller(ngControllerName,function($scope) {
                         $scope.$apply();
                     }
                     $.ajax({
-                        url: "/cu//www/wxpay/unifiedorder",
+                        url: "/cu//www/wxpay/ccbPay",
                         type:"post",
                         async:false,
                         data:{
-                            fee: orderResultData.donateAmount,
-                            body: orderResultData.orderNo,
-                            attach: orderResultData.id
+                            payAmount: orderResultData.donateAmount,
+                            orderId: orderResultData.id
                         },
                         success:function(result){
                             if(result.status == 0) {
-                                payData = result.data;
+                               /* payData = result.data;
                                 onBridgeReady(payData);
                                 console.log(result);
                                 if (!$scope.$$phase) {
                                     $scope.$apply();
-                                }
+                                }*/
+                               var url = decodeURIComponent(result.data);
+                               console.log(url);
+                               window.location.href = url;
+
                             }else {
                                 if(result.info){
                                     alert(result.info);

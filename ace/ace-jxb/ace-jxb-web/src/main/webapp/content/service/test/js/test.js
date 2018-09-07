@@ -128,7 +128,7 @@ function getEvaluatTplList(num, type) {
     var url = portalPath + '/evaluatTpl/findEvaluatTplListVo.do';
     var data = {
         page: num,
-        limit: 5,
+        limit: 10,
         name: testName
     };
      startLoad();
