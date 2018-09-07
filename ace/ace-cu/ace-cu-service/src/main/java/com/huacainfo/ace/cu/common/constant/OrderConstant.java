@@ -23,6 +23,6 @@ public interface OrderConstant {
      */
     String PAY_TYPE_WX = "0";
     String PAY_TYPE_UNIONPAY = "1";
-    String PAY_TYPE_CCB = "1";
+    String PAY_TYPE_CCB = "2";
 
 }
