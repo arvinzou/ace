@@ -34,13 +34,13 @@ public class CmccBackendServiceImpl implements BackendService{
         TaskCmcc o = new TaskCmcc();
         String mobile= (String) data.get("mobile");
         Map<String, Object> msg = new HashMap<String, Object>();
-        msg.put("taskName", data.get("title"));
-        msg.put("msg", data.get("title")+"【常德市工商联】");
+        msg.put("taskName", data.get("emailTitle"));
+        msg.put("msg", data.get("cmccContent"));
         msg.put("tel", mobile + "," + mobile);
         CommonBeanUtils.copyMap2Bean(o, msg);
         List addr=new ArrayList<String>();
         addr.add((String) data.get("email"));
-        sysInfoService.sendBatchEmail((String) data.get("title"),(String) data.get("content"),addr);
+        sysInfoService.sendBatchEmail((String) data.get("emailTitle"),(String) data.get("emailContent"),addr);
         return this.taskCmccService.insertTaskCmcc(o);
     }
 }

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import es.moki.ratelimitj.core.limiter.request.RequestLimitRule;
 import es.moki.ratelimitj.core.limiter.request.RequestRateLimiter;
@@ -11,7 +12,6 @@ import es.moki.ratelimitj.inmemory.request.InMemorySlidingWindowRequestRateLimit
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,11 +32,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 	@Autowired
 	private KafkaProducerService kafkaProducerService;
 
-	@Value("#{config[mobile]}")
-	private String mobile;
 
-	@Value("#{config[email]}")
-	private String email;
 
 	private Set<RequestLimitRule> rules = Collections.singleton(RequestLimitRule.of(5, TimeUnit.MINUTES,3));
 	private RequestRateLimiter limiter = new InMemorySlidingWindowRequestRateLimiter(rules);
@@ -59,12 +55,15 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 		}
 		boolean reachLimit = limiter.overLimitWhenIncremented("dealException");
 		if(!reachLimit){
+			Map<String, String> cfg=(Map<String, String>)request.getSession().getServletContext().getAttribute(CommonKeys.cfg);
+			logger.info("获取系统参数:{}",cfg);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("service", "cmccBackendService");
-			data.put("mobile", mobile);
-			data.put("email", email);
-			data.put("title","系统发生了异常，详细信息将通过邮件的方式发送到管理员的邮箱，请查收。");
-			data.put("content",messageResponse.getDetail());
+			data.put("mobile", cfg.get("admin_mobile"));
+			data.put("email", cfg.get("admin_email"));
+			data.put("emailTitle",cfg.get("sys_name")+"系统运行异常报告");
+			data.put("cmccContent",cfg.get("sys_name")+"发生了异常，详细信息将通过邮件的方式发送到管理员的邮箱，请查收。【"+cfg.get("sys_unit")+"】");
+			data.put("emailContent",messageResponse.getDetail());
 			logger.info("========================开始发送异常消息===============================");
 			this.kafkaProducerService.sendMsg("topic.sys.msg", data);
 			logger.info("========================完成发送异常消息===============================");
