@@ -1,4 +1,4 @@
-package com.huacainfo.ace.autocode.base;
+package com.huacainfo.ace.generator.base;
 
 public class ColumsInfo implements java.io.Serializable {
 	private static final long serialVersionUID = 6388496672390508697L;

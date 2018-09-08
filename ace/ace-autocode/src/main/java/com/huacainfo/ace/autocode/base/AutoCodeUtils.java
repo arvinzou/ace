@@ -9,7 +9,7 @@
  * @version V1.0
  */
 
-package com.huacainfo.ace.autocode.base;
+package com.huacainfo.ace.generator.base;
 
 /**
  * @ClassName: BeanUtils
@@ -22,20 +22,18 @@ package com.huacainfo.ace.autocode.base;
  *
  */
 
+import com.huacainfo.ace.common.tools.CommonUtils;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
-
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
-import com.huacainfo.ace.common.tools.CommonUtils;
 
 public class AutoCodeUtils {
 
@@ -60,6 +58,13 @@ public class AutoCodeUtils {
 
     private String BEAN_DAO_PATH;
     private String DAO_PATH;
+
+
+    private String ADD_JSP_PATH ;
+    private String EDIT_JSP_PATH;
+    private String ACT_JS_PATH;
+    private String ADD_JS_PATH;
+    private String EDIT_JS_PATH;
 
 
     private String clientws;
@@ -114,6 +119,14 @@ public class AutoCodeUtils {
         this.MODEL_JS_PATH = this.getProperty("MODEL_JS_PATH");
         this.VIEW_JS_PATH = this.getProperty("VIEW_JS_PATH");
         this.CRON_JS_PATH = this.getProperty("CRON_JS_PATH");
+
+
+
+        this.ADD_JSP_PATH = this.getProperty("ADD_JSP_PATH");
+        this.EDIT_JSP_PATH = this.getProperty("EDIT_JSP_PATH");
+        this.ACT_JS_PATH = this.getProperty("ACT_JS_PATH");
+        this.ADD_JS_PATH = this.getProperty("VIEW_JS_PATH");
+        this.EDIT_JS_PATH = this.getProperty("EDIT_JS_PATH");
 
         if (this.getProperty("local").equals("true")) {
             String userDir = System.getProperty("user.dir");
@@ -303,14 +316,32 @@ public class AutoCodeUtils {
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
+        List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
         String path = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/";
         File filePath = new File(path);
         createFilePath(filePath);
         String fileName = path + "index.jsp";
         File file = new File(fileName);
         FileWriter fw = new FileWriter(file);
-        bean.setView(DBHelpInfo.getPreviewJs(tableName));
         fw.write(createCode(INDEX_JSP_PATH, bean, annotation));
+        fw.flush();
+        fw.close();
+        showInfo(fileName);
+    }
+
+    public void createWebJsp(Class c) throws Exception {
+        String tableName = CommonUtils.propertyToField(c.getSimpleName());
+        if (tableName.startsWith("_")) {
+            tableName = tableName.substring(1, tableName.length());
+        }
+        List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
+        String path = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/";
+        File filePath = new File(path);
+        createFilePath(filePath);
+        String fileName = path + "index.jsp";
+        File file = new File(fileName);
+        FileWriter fw = new FileWriter(file);
+        fw.write(createCode(INDEX_JSP_PATH, bean, annotation,list));
         fw.flush();
         fw.close();
         showInfo(fileName);
@@ -323,7 +354,6 @@ public class AutoCodeUtils {
         String fileName = path + "config.js";
         File file = new File(fileName);
         FileWriter fw = new FileWriter(file);
-
         fw.write(createCode(CONFIG_JS_PATH, bean, annotation));
         fw.flush();
         fw.close();
@@ -547,7 +577,7 @@ public class AutoCodeUtils {
      */
     public String createCode(String fileVMPath, Bean bean, Annotation annotation)
             throws Exception {
-        //fileVMPath=this.serverws+"/ace-autocode/"+fileVMPath;
+        //fileVMPath=this.serverws+"/ace-generator/"+fileVMPath;
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
         velocityEngine.setProperty("output.encoding", "UTF-8");
@@ -558,6 +588,25 @@ public class AutoCodeUtils {
         VelocityContext velocityContext = new VelocityContext();
         velocityContext.put("bean", bean);
         velocityContext.put("annotation", annotation);
+        StringWriter stringWriter = new StringWriter();
+        template.merge(velocityContext, stringWriter);
+        return stringWriter.toString();
+    }
+
+    public String createCode(String fileVMPath, Bean bean, Annotation annotation,List<ColumsInfo> list)
+            throws Exception {
+        //fileVMPath=this.serverws+"/ace-generator/"+fileVMPath;
+        VelocityEngine velocityEngine = new VelocityEngine();
+        velocityEngine.setProperty("input.encoding", "UTF-8");
+        velocityEngine.setProperty("output.encoding", "UTF-8");
+        velocityEngine.setProperty("resource.loader", "class");
+        velocityEngine.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        velocityEngine.init();
+        Template template = velocityEngine.getTemplate(fileVMPath);
+        VelocityContext velocityContext = new VelocityContext();
+        velocityContext.put("bean", bean);
+        velocityContext.put("annotation", annotation);
+        velocityContext.put("list", list);
         StringWriter stringWriter = new StringWriter();
         template.merge(velocityContext, stringWriter);
         return stringWriter.toString();

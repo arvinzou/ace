@@ -1,4 +1,4 @@
-package com.huacainfo.ace.autocode.base;
+package com.huacainfo.ace.generator.base;
 
 import com.huacainfo.ace.common.tools.CommonUtils;
 import org.apache.log4j.Logger;

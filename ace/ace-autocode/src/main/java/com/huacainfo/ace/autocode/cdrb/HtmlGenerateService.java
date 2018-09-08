@@ -1,4 +1,4 @@
-package com.huacainfo.ace.autocode.cdrb;
+package com.huacainfo.ace.generator.cdrb;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;

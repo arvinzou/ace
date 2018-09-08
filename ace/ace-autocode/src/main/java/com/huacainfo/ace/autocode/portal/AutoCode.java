@@ -1,6 +1,6 @@
-package com.huacainfo.ace.autocode.portal;
+package com.huacainfo.ace.generator.portal;
 
-import com.huacainfo.ace.autocode.base.AutoCodeUtils;
+import com.huacainfo.ace.generator.base.AutoCodeUtils;
 
 public class AutoCode {
     public static void main(String[] args) throws Exception {

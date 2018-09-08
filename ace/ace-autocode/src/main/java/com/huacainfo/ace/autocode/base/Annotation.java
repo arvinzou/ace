@@ -10,7 +10,7 @@
  * @version V1.0
  */
 
-package com.huacainfo.ace.autocode.base;
+package com.huacainfo.ace.generator.base;
 
 /**
  * @ClassName: Annotation
