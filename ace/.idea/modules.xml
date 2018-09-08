@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ace.iml" filepath="$PROJECT_DIR$/ace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-codeGenerator/ace-CodeGenerator.iml" filepath="$PROJECT_DIR$/ace-codeGenerator/ace-CodeGenerator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-common/ace-common.iml" filepath="$PROJECT_DIR$/ace-common/ace-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-client/ace-fop-client.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-client/ace-fop-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-rest/ace-fop-rest.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-rest/ace-fop-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-service/ace-fop-service.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-service/ace-fop-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-fop/ace-fop-web/ace-fop-web.iml" filepath="$PROJECT_DIR$/ace-fop/ace-fop-web/ace-fop-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-service/ace-jxb-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-web/ace-jxb-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-client/ace-portal-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-service/ace-portal-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" filepath="$PROJECT_DIR$/ace-portal/ace-portal-web/ace-portal-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-society/ace-society.iml" filepath="$PROJECT_DIR$/ace-society/ace-society.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-society/ace-society-client/ace-society-client.iml" filepath="$PROJECT_DIR$/ace-society/ace-society-client/ace-society-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-society/ace-society-service/ace-society-service.iml" filepath="$PROJECT_DIR$/ace-society/ace-society-service/ace-society-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-society/ace-society-web/ace-society-web.iml" filepath="$PROJECT_DIR$/ace-society/ace-society-web/ace-society-web.iml" />
+    </modules>
+  </component>
+</project>
