@@ -64,7 +64,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 			data.put("mobile", mobile);
 			data.put("email", email);
 			data.put("title","系统发生了异常，详细信息将通过邮件的方式发送到管理员的邮箱，请查收。");
-			data.put("content",messageResponse.getErrorMessage());
+			data.put("content",messageResponse.getDetail());
 			logger.info("========================开始发送异常消息===============================");
 			this.kafkaProducerService.sendMsg("topic.sys.msg", data);
 			logger.info("========================完成发送异常消息===============================");
