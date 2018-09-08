@@ -62,7 +62,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 			data.put("mobile", cfg.get("admin_mobile"));
 			data.put("email", cfg.get("admin_email"));
 			data.put("emailTitle",cfg.get("sys_name")+"系统运行异常报告");
-			data.put("cmccContent",cfg.get("sys_name")+"发生了异常，详细信息将通过邮件的方式发送到管理员的邮箱，请查收。【"+cfg.get("sys_unit")+"】");
+			data.put("cmccContent",cfg.get("sys_name")+"发生了异常，详细信息已经发送邮箱"+cfg.get("admin_email")+"，请查收。【"+cfg.get("sys_unit")+"】");
 			data.put("emailContent",messageResponse.getDetail());
 			logger.info("========================开始发送异常消息===============================");
 			this.kafkaProducerService.sendMsg("topic.sys.msg", data);
