@@ -35,7 +35,7 @@ public class CmccBackendServiceImpl implements BackendService{
         String mobile= (String) data.get("mobile");
         Map<String, Object> msg = new HashMap<String, Object>();
         msg.put("taskName", data.get("title"));
-        msg.put("msg", data.get("title")+"【常德市工商联");
+        msg.put("msg", data.get("title")+"【常德市工商联】");
         msg.put("tel", mobile + "," + mobile);
         CommonBeanUtils.copyMap2Bean(o, msg);
         List addr=new ArrayList<String>();
