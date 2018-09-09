@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>课程</title>
+    <title>文章</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
@@ -33,7 +33,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>课程</span>
+                                    <span>文章</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -45,7 +45,7 @@
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
                                                         <div class="caption">
-                                                            课程
+                                                            文章
                                                         </div>
                                                         <div class="actions">
                                                              <a href="javascript:void(0);" onclick="add();"  class="btn green">创建</a>
@@ -186,7 +186,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">课程审核</h4>
+                <h4 class="modal-title">文章审核</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">

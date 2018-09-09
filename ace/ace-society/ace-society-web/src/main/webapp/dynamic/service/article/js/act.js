@@ -16,7 +16,7 @@ function loadCustom() {
         loader(urls[i]);
     }
 }
-/*课程初始化分页*/
+/*文章初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 0,
@@ -33,12 +33,12 @@ function initPage() {
         }
     });
 }
-/*课程条件查询*/
+/*文章条件查询*/
 function t_query(){
     getPageList();
     return false;
 }
-/*课程加载表格数据*/
+/*文章加载表格数据*/
 function getPageList() {
     var url = contextPath+ "/article/findArticleList";
     params['name']=$("input[name=keyword]").val();
@@ -63,11 +63,11 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
-/*课程添加*/
+/*文章添加*/
 function add(type){
     window.location.href = add/index.jsp;
 }
-/*课程编辑*/
+/*文章编辑*/
 function edit(id){
      window.location.href = edit/index.jsp?id='+id;
 }
@@ -99,7 +99,7 @@ function initEvents() {
 
 
 }
-/*课程审核*/
+/*文章审核*/
 function audit(params){
     startLoad();
     $.ajax({
@@ -121,7 +121,7 @@ function audit(params){
         }
     });
 }
-/*课程上架*/
+/*文章上架*/
 function online(id){
     if(confirm("确定要上架吗？")){
         startLoad();
@@ -148,7 +148,7 @@ function online(id){
         });
     }
 }
-/*课程下架*/
+/*文章下架*/
 function outline(id){
     if(confirm("确定要下架吗？")){
         startLoad();

@@ -654,7 +654,7 @@ public class CodeGenerator {
         List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
         List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
         for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
 
             }else {
                 list.add(o);
@@ -690,7 +690,7 @@ public class CodeGenerator {
 
         List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
         for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
 
             }else {
                 if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
@@ -726,7 +726,7 @@ public class CodeGenerator {
         List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
         List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
         for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
 
             }else {
                 list.add(o);
@@ -762,7 +762,7 @@ public class CodeGenerator {
 
         List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
         for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
 
             }else {
                 if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
