@@ -34,7 +34,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 
 
 
-	private Set<RequestLimitRule> rules = Collections.singleton(RequestLimitRule.of(5, TimeUnit.MINUTES,3));
+	private Set<RequestLimitRule> rules = Collections.singleton(RequestLimitRule.of(30, TimeUnit.MINUTES,3));
 	private RequestRateLimiter limiter = new InMemorySlidingWindowRequestRateLimiter(rules);
 
 	@Override
@@ -55,7 +55,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 		}
 		boolean reachLimit = limiter.overLimitWhenIncremented("dealException");
 		if(!reachLimit){
-			Map<String, String> cfg=(Map<String, String>)request.getSession().getServletContext().getAttribute(CommonKeys.cfg);
+			Map<String, String> cfg=(Map<String, String>)request.getSession().getAttribute(CommonKeys.cfg);
 			logger.info("获取系统参数:{}",cfg);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("service", "cmccBackendService");
