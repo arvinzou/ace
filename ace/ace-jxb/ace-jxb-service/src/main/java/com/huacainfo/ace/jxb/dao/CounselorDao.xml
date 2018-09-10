@@ -442,6 +442,17 @@
         <include refid="whereCondition"/>
     </select>
 
+    <select id="statisticalMember" resultType="int">
+        select count(1)
+        from counselor
+        where studioId
+        in(
+        select id
+        from studio
+        where counselorId=${counselorId}
+        )
+    </select>
+
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.Counselor">
         select count(1)
         from counselor
