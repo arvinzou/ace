@@ -88,8 +88,8 @@
 		</script>
 		<div class="box">
 			<div class="row menu-li">
-				<div class="col-xs-3 col-sm-3"><p class="menu_title">每日签到</p></div>
-				<div class="col-xs-5 col-sm-5"><p class="sign_info"></p></div>
+				<div class="col-xs-3 col-sm-3" style="padding-right: 0 !important;"><p class="menu_title">每日签到</p></div>
+				<div class="col-xs-5 col-sm-5" style="padding-left: 0 !important; padding-right: 0 !important;"><p class="sign_info"></p></div>
 				<div class="col-xs-4 col-sm-4"><span id="signIn" class="sign_btn" onclick="sign();">立即签到</span></div>
 			</div>
 			<div class="row menu-li">
