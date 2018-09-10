@@ -34,7 +34,7 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 
 
 
-	private Set<RequestLimitRule> rules = Collections.singleton(RequestLimitRule.of(30, TimeUnit.MINUTES,3));
+	private Set<RequestLimitRule> rules = Collections.singleton(RequestLimitRule.of(30, TimeUnit.MINUTES,2));
 	private RequestRateLimiter limiter = new InMemorySlidingWindowRequestRateLimiter(rules);
 
 	@Override
