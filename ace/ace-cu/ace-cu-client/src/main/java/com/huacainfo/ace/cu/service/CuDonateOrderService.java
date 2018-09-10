@@ -5,10 +5,13 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.cu.model.CcbCallbackLog;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.WxPayLog;
 import com.huacainfo.ace.cu.vo.CuDonateOrderQVo;
 import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
+
+import java.math.BigDecimal;
 
 /**
  * @author: Arvin
@@ -103,14 +106,26 @@ public interface CuDonateOrderService {
      */
     ResultResponse orderCheck(String attach, String fee);
 
+
     /**
      * 订单支付逻辑
      *
-     * @param wxPayLog 支付回调日志
-     * @param payType  支付方式类型
-     * @return
+     * @param orderId   订单ID
+     * @param payType   支付方式
+     * @param payAmount 支付金额
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2018/9/7 16:41
      */
-    ResultResponse pay(WxPayLog wxPayLog, String payType);
+    ResultResponse pay(String orderId, String payType, BigDecimal payAmount);
 
     int insertWxPayLog(WxPayLog wxPayLog);
+
+    /**
+     * 建行龙支付回调日志
+     *
+     * @param params 通知参数
+     * @return 处理结果
+     */
+    ResultResponse ccbCallBack(CcbCallbackLog params);
 }

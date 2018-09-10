@@ -1,6 +1,6 @@
-package com.huacainfo.ace.autocode.fop;
+package com.huacainfo.ace.generator.fop;
 
-import com.huacainfo.ace.autocode.base.AutoCodeUtils;
+import com.huacainfo.ace.generator.base.AutoCodeUtils;
 
 public class AutoCode {
 

@@ -1,6 +1,6 @@
-package com.huacainfo.ace.autocode.kernel;
+package com.huacainfo.ace.generator.kernel;
 
-import com.huacainfo.ace.autocode.base.AutoCodeUtils;
+import com.huacainfo.ace.generator.base.AutoCodeUtils;
 
 
 /**

@@ -2,6 +2,8 @@ package com.huacainfo.ace.cu.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.ccb.CCBApi;
+import com.huacainfo.ace.common.plugins.ccb.pojo.CCBConfig;
 import com.huacainfo.ace.common.plugins.wechat.constant.ApiURL;
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.plugins.wechat.util.RandomValidateCode;
@@ -10,14 +12,15 @@ import com.huacainfo.ace.common.plugins.wechat.util.WeChatPayUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.cu.common.constant.OrderConstant;
+import com.huacainfo.ace.cu.model.CcbCallbackLog;
 import com.huacainfo.ace.cu.model.WxPayLog;
 import com.huacainfo.ace.cu.service.CuDonateOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +31,7 @@ import java.util.TreeMap;
 /**
  * Created by HuaCai008 on 2018/6/15.
  */
-@Controller
+@RestController
 @RequestMapping("/www/wxpay")
 public class WWWWxPayController extends CuBaseController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -100,7 +103,7 @@ public class WWWWxPayController extends CuBaseController {
     }
 
     /**
-     * 微信支付回调方法
+     * 微信回调方法 -- 支付结果通知
      *
      * @param req
      * @param resp
@@ -126,9 +129,16 @@ public class WWWWxPayController extends CuBaseController {
                 logger.error("WWWWxPayController.wx_pay_log.error:{}", e);
             }
             try {
-                //订单支付逻辑
-                ResultResponse resultResponse = cuDonateOrderService.pay(wxPayLog, OrderConstant.PAY_TYPE_WX);
-                logger.info("Xml: {},\n  DealResult:{}", xml, resultResponse);
+                //通知支付成功
+                if ("SUCCESS".equals(wxPayLog.getResult_code())) {
+                    //订单支付逻辑
+                    ResultResponse resultResponse =
+                            cuDonateOrderService.pay(wxPayLog.getAttach(), OrderConstant.PAY_TYPE_WX, wxPayLog.getTotal_fee());
+                    logger.info("Xml: {},\n  DealResult:{}", xml, resultResponse);
+                } else {
+                    logger.info("Xml: {},\n  DealResult:{}", xml, "微信回调结果[微信通知支付失败]");
+                }
+
                 resp.getWriter().write(rs);
             } catch (IOException e) {
                 logger.error("WWWWxPayController.weChatPayCallBack.run error:{}", e);
@@ -138,19 +148,43 @@ public class WWWWxPayController extends CuBaseController {
         }
     }
 
+    /**
+     * 建行聚合支付 -- 返回支付地址
+     * 客户号:     105000083980372
+     * 手机号码：   18670619000（张姣）
+     * 证书号：MC1093460
+     * 登录密码：7251211
+     * 支付密码：20180905
+     *
+     * @return String
+     */
+    @RequestMapping(value = "/ccbPay")
+    public ResultResponse ccbPay(String payAmount, String orderId) {
+        if (!StringUtil.areNotEmpty(payAmount, orderId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        ResultResponse checkRs = cuDonateOrderService.orderCheck(orderId, payAmount);
+        if (ResultCode.FAIL == checkRs.getStatus()) {
+            return checkRs;
+        }
+        //返回支付链接
+        CCBConfig config = new CCBConfig("105000083980372", "023328365",
+                "430000000", "d477951e6c46c575320042ad020111");
+        String payURL = CCBApi.pay(payAmount, orderId, config);
 
-    @RequestMapping(value = "/payBackTest")
-    @ResponseBody
-    public ResultResponse payBackTest(String xml) {
-
-        String json = XmlUtil.xmltoJson(xml);
-        logger.debug("WWWWxPayController.weChatPayCallBack.json={}", json);
-        WxPayLog wxPayLog = JsonUtil.toObject(json, WxPayLog.class);
-        //订单支付逻辑
-        ResultResponse resultResponse = cuDonateOrderService.pay(wxPayLog, OrderConstant.PAY_TYPE_WX);
-        logger.info("Xml: {},\n  DealResult:{}", xml, resultResponse);
-
-
-        return resultResponse;
+        return new ResultResponse(ResultCode.SUCCESS, "获取支付链接成功", payURL);
     }
+
+    /**
+     * 建行支付结果通知
+     *
+     * @return String
+     */
+    @RequestMapping(value = "/ccbCallBack")
+    public ResultResponse ccbCallBack(CcbCallbackLog params) {
+        logger.debug("[慈善总会]ccbCallBack.info:{}", params.toString());
+
+        return cuDonateOrderService.ccbCallBack(params);
+    }
+
 }

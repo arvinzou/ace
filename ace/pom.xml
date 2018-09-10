@@ -82,7 +82,7 @@
         <!--<module>ace-gesp</module>-->
         <!--<module>ace-weui</module>-->
         <!--<module>activiti-root</module>-->
-       <!-- <module>ace-autocode</module>-->
+       <module>ace-CodeGenerator</module>
     </modules>
     <dependencies>
         <dependency>

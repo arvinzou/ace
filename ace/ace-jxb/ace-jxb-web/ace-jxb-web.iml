@@ -130,6 +130,13 @@
     <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:2.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.3.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: es.moki.ratelimitj:ratelimitj-inmemory:0.4.1" level="project" />
+    <orderEntry type="library" name="Maven: es.moki.ratelimitj:ratelimitj-core:0.4.1" level="project" />
+    <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.1.0.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.1" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: net.jodah:expiringmap:0.5.8" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: de.jkeylockmanager:jkeylockmanager:2.1.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
     <orderEntry type="module" module-name="ace-jxb-client" />
     <orderEntry type="module" module-name="ace-portal-client" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:servlet-api:2.4" level="project" />

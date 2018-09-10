@@ -1,4 +1,4 @@
-package com.huacainfo.ace.autocode.cdrb;
+package com.huacainfo.ace.generator.cdrb;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
 
 /**
  * Created by chenxiaoke on 2017/9/30.
@@ -69,7 +68,7 @@ public class GenerateA extends HtmlGenerateService{
             e.put("text", text);
             e.put("pages", i);
             e.put("total", list.size());
-            body = generateText("com/huacainfo/ace/autocode/cdrb/index.html.vm", e);
+            body = generateText("com/huacainfo/ace/generator/cdrb/index.html.vm", e);
             this.writeFile(generateHtmlPath, "index-" + i + ".html", body);
             // logger.info("{}",body);
             i++;

@@ -14,9 +14,11 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.cu.common.constant.OrderConstant;
 import com.huacainfo.ace.cu.common.constant.ProjectConstant;
+import com.huacainfo.ace.cu.dao.CcbCallbackLogDao;
 import com.huacainfo.ace.cu.dao.CuDonateOrderDao;
 import com.huacainfo.ace.cu.dao.CuUserDao;
 import com.huacainfo.ace.cu.dao.WxPayLogDao;
+import com.huacainfo.ace.cu.model.CcbCallbackLog;
 import com.huacainfo.ace.cu.model.CuDonateOrder;
 import com.huacainfo.ace.cu.model.CuUser;
 import com.huacainfo.ace.cu.model.WxPayLog;
@@ -61,6 +63,8 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     private CuUserDao cuUserDao;
     @Autowired
     private WxPayLogDao wxPayLogDao;
+    @Autowired
+    private CcbCallbackLogDao ccbCallbackLogDao;
 
 
     /**
@@ -326,27 +330,26 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
     /**
      * 订单支付逻辑
      *
-     * @param wxPayLog 支付回调日志
-     * @param payType  支付方式类型
-     * @return
+     * @param orderId   订单ID
+     * @param payType   支付方式
+     * @param payAmount 支付金额
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2018/9/7 16:41
      */
     @Override
-    public ResultResponse pay(WxPayLog wxPayLog, String payType) {
-        logger.debug("WxPayLog[payType={}]:{}", payType, wxPayLog);
-        if (null == wxPayLog) {
-            return new ResultResponse(ResultCode.FAIL, "回调日志信息异常");
-        }
-        if (!"SUCCESS".equals(wxPayLog.getResult_code())) {
-            return new ResultResponse(ResultCode.FAIL, "回调支付结果异常");
-        }
+    public ResultResponse pay(String orderId, String payType, BigDecimal payAmount) {
         //查询订单
-        String orderId = wxPayLog.getAttach();
+//        String orderId = wxPayLog.getAttach();
         CuDonateOrder order = cuDonateOrderDao.selectByPrimaryKey(orderId);
         if (null == order) {
             return new ResultResponse(ResultCode.FAIL, "订单信息异常");
-        }
-        if (!OrderConstant.ORDER_STATUS_NEW_ORDER.equals(order.getStatus())) {
-            return new ResultResponse(ResultCode.FAIL, "订单状态异常");
+        } else if (!payType.equals(order.getPayType())) {
+            return new ResultResponse(ResultCode.FAIL, "支付方式不匹配");
+        } else if (!OrderConstant.ORDER_STATUS_NEW_ORDER.equals(order.getStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "付款状态异常");
+        } else if (order.getDonateAmount().compareTo(payAmount) != 0) {
+            return new ResultResponse(ResultCode.FAIL, "付款金额不符");
         }
         //订单状态修改
         order.setStatus(OrderConstant.ORDER_STATUS_PAID);
@@ -383,6 +386,31 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         wxPayLog.setCreateDate(DateUtil.getNowDate());
         wxPayLog.setLastModifyDate(DateUtil.getNowDate());
         return wxPayLogDao.insert(wxPayLog);
+    }
+
+    /**
+     * 建行龙支付回调日志
+     *
+     * @param params 通知参数
+     * @return 处理结果
+     */
+    @Override
+    public ResultResponse ccbCallBack(CcbCallbackLog params) {
+        //回调信息入库
+        try {
+            params.setId(GUIDUtil.getGUID());
+            params.setCreateDate(DateUtil.getNowDate());
+            ccbCallbackLogDao.insertSelective(params);
+        } catch (Exception e) {
+            logger.error("[慈善总会]龙支付回调日志入库异常：{}", e);
+        }
+        String orderId = params.getORDERID();
+        BigDecimal payAmount = params.getPAYMENT();
+        if ("Y".equals(params.getSUCCESS())) {
+            return pay(orderId, OrderConstant.PAY_TYPE_CCB, payAmount);
+        }
+
+        return new ResultResponse(ResultCode.FAIL, "[慈善总会]支付未完成，原因: 龙支付通知结果[交易失败]");
     }
 
     private ResultResponse updateUserPoints(CuDonateOrder order) {
