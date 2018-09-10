@@ -376,11 +376,19 @@ public class WWWController extends PortalBaseController {
      * @param appealCaseId
      * @param sendType     发送方式 0-kafka 1-直接发
      */
-    @RequestMapping(value = "/acMsgTest")
+    @RequestMapping(value = "/acMsgTest.do")
     @ResponseBody
     public ResultResponse acMsgTest(String appealCaseId, String sendType) throws Exception {
 
         return appealCaseService.acMsgTest(appealCaseId, sendType);
+    }
+
+    @RequestMapping(value = "/testMsg.do")
+    @ResponseBody
+    public ResultResponse testMsg() throws Exception {
+        String o=null;
+        o.equals("1");
+        return null;
     }
 
 }

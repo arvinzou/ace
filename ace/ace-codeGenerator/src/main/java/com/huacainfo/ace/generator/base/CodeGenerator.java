@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -558,7 +559,7 @@ public class CodeGenerator {
     /**
      * 显示信息
      *
-     * @param info
+     * @param
      */
     private void logs(String log) {
        logger.info("generator " + log + " ok");
@@ -593,14 +594,14 @@ public class CodeGenerator {
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
-       // List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
+        List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
         String pathJsp = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/";
         File filePathJsp = new File(pathJsp);
         createFilePath(filePathJsp);
         String fileNameJsp = pathJsp + "index.jsp";
         File fileJsp = new File(fileNameJsp);
         FileWriter fwJsp = new FileWriter(fileJsp);
-        fwJsp.write(generatorCode(this.getProperty("jsp.index.vm"), bean, annotation));
+        fwJsp.write(generatorCode(this.getProperty("jsp.index.vm"), bean, annotation,list));
         fwJsp.flush();
         fwJsp.close();
         logs(fileNameJsp);
@@ -630,7 +631,7 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.index.vm"), bean, annotation));
+        fwJs.write(generatorCode(this.getProperty("js.index.vm"), bean, annotation,list));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);
@@ -644,19 +645,28 @@ public class CodeGenerator {
         createFilePath(filePathRoot);
 
 
+
         /**创建JSP**/
         String tableName = CommonUtils.propertyToField(c.getSimpleName());
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
-       // List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
+        List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
+        List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
+        for(ColumsInfo o:items){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
+
+            }else {
+                list.add(o);
+            }
+        }
         String pathJsp = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/add/";
         File filePathJsp = new File(pathJsp);
         createFilePath(filePathJsp);
         String fileNameJsp = pathJsp + "index.jsp";
         File fileJsp = new File(fileNameJsp);
         FileWriter fwJsp = new FileWriter(fileJsp);
-        fwJsp.write(generatorCode(this.getProperty("jsp.add.vm"), bean, annotation));
+        fwJsp.write(generatorCode(this.getProperty("jsp.add.vm"), bean, annotation,list));
         fwJsp.flush();
         fwJsp.close();
         logs(fileNameJsp);
@@ -678,7 +688,16 @@ public class CodeGenerator {
         File filePathImg = new File(pathImg);
         createFilePath(filePathImg);
 
+        List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
+        for(ColumsInfo o:items){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
 
+            }else {
+                if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
+                    list1.add(o);
+                }
+            }
+        }
         /**创建JS目录**/
         String pathJs = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/add/js/";
         File filePathJs = new File(pathJs);
@@ -686,7 +705,7 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.add.vm"), bean, annotation));
+        fwJs.write(generatorCode(this.getProperty("js.add.vm"), bean, annotation,list1));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);
@@ -704,14 +723,22 @@ public class CodeGenerator {
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
-        //List<ColumsInfo> list = DBHelpInfo.getTableInfo(tableName);
+        List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
+        List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
+        for(ColumsInfo o:items){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
+
+            }else {
+                list.add(o);
+            }
+        }
         String pathJsp = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/edit/";
         File filePathJsp = new File(pathJsp);
         createFilePath(filePathJsp);
         String fileNameJsp = pathJsp + "index.jsp";
         File fileJsp = new File(fileNameJsp);
         FileWriter fwJsp = new FileWriter(fileJsp);
-        fwJsp.write(generatorCode(this.getProperty("jsp.edit.vm"), bean, annotation));
+        fwJsp.write(generatorCode(this.getProperty("jsp.edit.vm"), bean, annotation,list));
         fwJsp.flush();
         fwJsp.close();
         logs(fileNameJsp);
@@ -733,7 +760,16 @@ public class CodeGenerator {
         File filePathImg = new File(pathImg);
         createFilePath(filePathImg);
 
+        List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
+        for(ColumsInfo o:items){
+            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
 
+            }else {
+                if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
+                    list1.add(o);
+                }
+            }
+        }
         /**创建JS目录**/
         String pathJs = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/edit/js/";
         File filePathJs = new File(pathJs);
@@ -741,7 +777,7 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.edit.vm"), bean, annotation));
+        fwJs.write(generatorCode(this.getProperty("js.edit.vm"), bean, annotation,list1));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);
