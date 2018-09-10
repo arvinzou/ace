@@ -55,7 +55,10 @@ public class ExceptionHandler implements HandlerExceptionResolver {
 		}
 		boolean reachLimit = limiter.overLimitWhenIncremented("dealException");
 		if(!reachLimit){
-			Map<String, String> cfg=(Map<String, String>)request.getSession().getAttribute(CommonKeys.cfg);
+			Map<String, String> cfg=(Map<String, String>)request.getSession().getServletContext().getAttribute(CommonKeys.cfg);
+			if(request.getSession().getAttribute(CommonKeys.cfg)!=null){
+				cfg=(Map<String, String>)request.getSession().getAttribute(CommonKeys.cfg);
+			}
 			logger.info("获取系统参数:{}",cfg);
 			Map<String, Object> data = new HashMap<String, Object>();
 			data.put("service", "cmccBackendService");
