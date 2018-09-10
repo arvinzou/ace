@@ -62,6 +62,34 @@ window.onload = function(){
         'minDate': (new Date().getFullYear()) + '-' + (new Date().getMonth()+1) + '-' + (new Date().getDate()+1), //最小日期
         'maxDate': (new Date().getFullYear()+3) + '-' + 12 + '-' + 31 //最大日期
     });
+
+    $('.form').on('blur', "input[name='age']", validateNum);
+    $('.form').on('blur', "input[name='contact_phone'],input[name='phoneNum']", validatePhone);
+    $('.form').on('focus', 'input', hideHint);
+
+}
+
+function hideHint() {
+    $(this).removeClass('formInput');
+}
+
+function validatePhone() {
+    var $that = $(this);
+    var phone = $that.val();
+    if (/^((1[3|4|5|7|8|9][0-9]{1})+\d{8})$/.test(phone)) {
+        return;
+    }
+    $that.addClass('formInput');
+}
+
+function validateNum() {
+    var $that = $(this);
+    var age = $that.val();
+    if (/^(?:[1-9]?\d|100)$/.test(age)) {
+        return;
+    }
+    $that.addClass('formInput');
+
 }
 
 
