@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.jxb.constant.RegType;
@@ -18,6 +19,7 @@ import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.MemberSignLogService;
 import com.huacainfo.ace.jxb.service.RegService;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
+import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import com.huacainfo.ace.portal.service.UsersService;
@@ -213,16 +215,21 @@ public class RegServiceImpl implements RegService {
         o.setUserLevel(regType);//身份标识 1 -- 老师 ，2 - 家长 3-管理员
         o.setSex(reg.getSex());
         this.regDao.insertReg(o);
-        //密码短信通知
-//        TaskCmcc obj = new TaskCmcc();
-//        Map<String, Object> msg = new HashMap<String, Object>();
-//        msg.put("taskName", "账号" + reg.getMobile());
-//        msg.put("msg", reg.getNickname() + "你好，注册成功，账号" + reg.getMobile() + "，密码" + pwd + "。【近心帮】");
-//        msg.put("tel", reg.getMobile() + "," + reg.getMobile() + ";");
-//        CommonBeanUtils.copyMap2Bean(o, msg);
-//        this.taskCmccService.insertTaskCmcc(obj);
+
+        //密码短信通知 -- 暂不启用
+        sendRegSmsNotice(o, reg.getNickname(), reg.getMobile(), pwd);
         //******************
         return new MessageResponse(0, "注册成功.");
+    }
+
+    private void sendRegSmsNotice(Users o, String nickname, String mobile, String pwd) throws Exception {
+        TaskCmcc obj = new TaskCmcc();
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("taskName", "账号" + mobile);
+        msg.put("msg", nickname + "你好，注册成功，账号" + mobile + "，密码" + pwd + "。【近心帮】");
+        msg.put("tel", mobile + "," + mobile + ";");
+        CommonBeanUtils.copyMap2Bean(o, msg);
+        this.taskCmccService.insertTaskCmcc(obj);
     }
 
 }
