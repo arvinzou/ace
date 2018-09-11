@@ -377,7 +377,7 @@
             and commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.category !=null and condition.category !=&quot;&quot;">
-            and t.category = #{condition.category,jdbcType=VARCHAR}
+            and category = #{condition.category,jdbcType=VARCHAR}
         </if>
     </select>
 </mapper>

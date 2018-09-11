@@ -449,7 +449,7 @@
         in(
         select id
         from studio
-        where counselorId=${counselorId}
+        where counselorId = #{counselorId,jdbcType=VARCHAR}
         )
     </select>
 
