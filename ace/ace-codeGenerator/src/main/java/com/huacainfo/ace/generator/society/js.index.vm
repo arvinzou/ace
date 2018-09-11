@@ -3,6 +3,7 @@ var params = {limit: 5};
 window.onload = function (){
     initPage();
     initEvents();
+initJuicerMethod();
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -12,6 +13,7 @@ function App() {
 function loadCustom() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
+urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
@@ -174,4 +176,34 @@ function outline(id){
             }
         });
     }
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+juicer.register('parseStatus', parseStatus);
+}
+
+/**
+* 状态
+* 0-删除
+* 1-暂存
+* 2-提交审核
+* 3-审核通过
+* 4-审核驳回
+*/
+function parseStatus(status) {
+switch (status) {
+case '0':
+return "已删除";
+case '1':
+return "暂存";
+case '2':
+return "提交审核";
+case '3':
+return "审核通过";
+case '4':
+return "审核驳回";
+default:
+return "";
+}
 }
