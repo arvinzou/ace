@@ -1,9 +1,8 @@
 var loading = {};
 var editor;
-window.onload = function (){
+window.onload = function () {
     jQuery(function ($) {
-        initPage();
-        initEvents();
+        initForm();
     });
 }
 function App() {
@@ -17,7 +16,7 @@ function loadCustom() {
     }
 }
 function initEditor() {
-        editor = new Simditor({
+    editor = new Simditor({
         textarea: $('textarea[name=introduce]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
             'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
@@ -44,29 +43,27 @@ function initPage() {
     initEditor();
     initUpload();
 }
-function initEvents(){
+function initEvents() {
     /*表单验证*/
-    $("#fm-add").validate({
-        onfocusout: function(element) { $(element).valid(); },
+    $("#fm-edit").validate({
+        onfocusout: function (element) {
+            $(element).valid();
+        },
         rules: {
-                                         tplPageId: {required: true,maxlength:50},                             articleCategory: {required: true,maxlength:50},                             title: {required: true,maxlength:200},                             mediType: {required: true,maxlength:20}                                 },
+            realName: {required: true, maxlength: 50}, mobilePhone: {required: true, maxlength: 20}
+        },
         messages: {
-                                         tplPageId: {
-                    required: "请输入所属页面",
-                    maxlength:"所属页面字符长度不能超过50"
-                },                             articleCategory: {
-                    required: "请输入所属栏目",
-                    maxlength:"所属栏目字符长度不能超过50"
-                },                             title: {
-                    required: "请输入标题",
-                    maxlength:"标题字符长度不能超过200"
-                },                             mediType: {
-                    required: "请输入媒体类型",
-                    maxlength:"媒体类型字符长度不能超过20"
-                }                                 }
+            realName: {
+                required: "请输入姓名",
+                maxlength: "姓名字符长度不能超过50"
+            }, mobilePhone: {
+                required: "请输入手机号",
+                maxlength: "手机号字符长度不能超过20"
+            }
+        }
     });
-     /*监听表单提交*/
-    $('#fm-add').ajaxForm({
+    /*监听表单提交*/
+    $('#fm-edit').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
             $.each(formData, function (n, obj) {
@@ -83,11 +80,10 @@ function initEvents(){
 }
 /*保存表单**/
 function save(params) {
-    $.extend(params, {
-    });
+    $.extend(params, {});
     startLoad();
     $.ajax({
-        url: contextPath + "/article/insertArticle",
+        url: contextPath + "/personInfo/updatePersonInfo",
         type: "post",
         async: false,
         data: {
@@ -95,9 +91,33 @@ function save(params) {
         },
         success: function (result) {
             stopLoad();
-			alert(result.errorMessage);
+            alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href ='../index.jsp';
+                window.location.href = '../index.jsp';
+            }
+        },
+        error: function () {
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function initForm() {
+    $.ajax({
+        url: contextPath + "/personInfo/selectPersonInfoByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: urlParams.id
+        },
+        success: function (result) {
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                renderPage($("#fm-edit"), data, 'tpl-fm');
+                initPage();
+            } else {
+                alert(result.errorMessage);
             }
         },
         error: function () {
