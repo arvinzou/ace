@@ -80,6 +80,9 @@ function validatePhone() {
         return;
     }
     $that.addClass('formInput');
+    alert("手机号码输入不正确!");
+    $that.val("");
+    return;
 }
 
 function validateNum() {
