@@ -30,6 +30,8 @@ public interface BaseOrderDao {
 
     int findCount(@Param("condition") BaseOrderQVo condition);
 
+    int orderStatistics(@Param("condition") BaseOrder condition);
+
     int isExit(BaseOrder record);
 
 }

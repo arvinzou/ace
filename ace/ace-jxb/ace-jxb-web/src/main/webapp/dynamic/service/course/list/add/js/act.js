@@ -214,7 +214,7 @@ function initUpload(){
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
                /* viewCover(rst.value[0], '.pictureContainer2','.viewPicture2 img','.uploadText2');*/
-                $("#mediUrl").val(fastdfs_server + rst.value[0]);
+                $("#mediUrl").val(rst.value[0]);
                 coverImg = rst.value[0];
             }
         }

@@ -359,4 +359,25 @@
         and consumerId = #{consumerId,jdbcType=VARCHAR}
         and payStatus in ('2','6','7')
     </select>
+
+    <select id="orderStatistics" resultType="int">
+        SELECT COUNT(*)
+        from base_order
+        where 1=1
+        <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
+            and payStatus = #{condition.payStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.consumerId !=null and condition.consumerId !=&quot;&quot;">
+            and consumerId = #{condition.consumerId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
+            and businessId = #{condition.businessId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
+            and commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+    </select>
 </mapper>

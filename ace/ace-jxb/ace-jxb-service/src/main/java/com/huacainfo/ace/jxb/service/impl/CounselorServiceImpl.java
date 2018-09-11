@@ -12,12 +12,16 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.jxb.dao.BaseOrderDao;
 import com.huacainfo.ace.jxb.dao.CounselorDao;
+import com.huacainfo.ace.jxb.dao.CourseDao;
 import com.huacainfo.ace.jxb.dao.StudioDao;
+import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
+import com.huacainfo.ace.jxb.vo.CourseQVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.UserinfoService;
 import org.slf4j.Logger;
@@ -48,6 +52,11 @@ public class CounselorServiceImpl implements CounselorService {
 
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private BaseOrderDao baseOrderDao;
+    @Autowired
+    private CourseDao courseDao;
 
     /**
      * @throws
@@ -280,13 +289,21 @@ public class CounselorServiceImpl implements CounselorService {
     @Override
     public Map<String, Object> statistic(String counselorId) {
 
-
         Map<String, Object> rtnMap = new HashMap<>();
-        rtnMap.put("consultCount", 128);
-        rtnMap.put("courseCount", 268);
-        rtnMap.put("liveCount", 212);
-        rtnMap.put("teacherCount", 2680);
-        rtnMap.put("parentCount", 188);
+        BaseOrder baseOrder = new BaseOrder();
+        baseOrder.setBusinessId(counselorId);
+        baseOrder.setPayStatus("2");
+        baseOrder.setCategory("1");
+        int consultCount = baseOrderDao.orderStatistics(baseOrder);
+        rtnMap.put("consultCount", consultCount);
+        CourseQVo courseQVo = new CourseQVo();
+        courseQVo.setCreateUserId(counselorId);
+        int courseCount = courseDao.findCount(courseQVo);
+        rtnMap.put("courseCount", courseCount);
+//        rtnMap.put("liveCount", 0);
+//        rtnMap.put("teacherCount", 0);
+        int parentCount = counselorDao.statisticalMember(counselorId);
+        rtnMap.put("parentCount", parentCount);
         return rtnMap;
     }
 

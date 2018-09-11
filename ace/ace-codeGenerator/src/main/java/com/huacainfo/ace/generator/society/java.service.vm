@@ -87,4 +87,18 @@ public interface $!{bean.name}Service {
             */
             MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws Exception;
 
+            /**
+            *
+            * @Title:audit
+            * @Description: TODO(审核$!{bean.tableChineseName})
+            * @param: @param id bean.id
+            * @param: @param rst 审核结果 3-通过 4-拒绝
+            * @param: @param remark 审核备注
+            * @param: @throws Exception
+            * @return: MessageResponse
+            * @throws
+            * @author: $!{annotation.authorName}
+            * @version: $!{annotation.version}
+            */
+            MessageResponse audit(String id,String rst, String remark, UserProp userProp) throws Exception;
             }

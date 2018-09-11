@@ -187,9 +187,14 @@ input,textarea{
 	font-size: 0.426666rem;
 	color: #5C6681;
 }
+
 .form_input{
 	font-size: 0.346666rem;
 	color: #1C2843;
+}
+
+.formInput {
+    color: red;
 }
 .problem{
 	height: 0.8rem;

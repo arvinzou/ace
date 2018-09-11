@@ -25,13 +25,14 @@ import com.huacainfo.ace.society.vo.$!{bean.name}QVo;
 * @version: $!{annotation.version}
 * @Description:  TODO($!{bean.tableChineseName})
 */
-public class $!{bean.name}Controller extends JxbBaseController {
+public class $!{bean.name}Controller extends SocietyBaseController {
 
 
 private static final long serialVersionUID = 1L;
 Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
 private $!{bean.name}Service $!{bean.lowerName}Service;
+
 /**
 *
 * @Title:find!{bean.name}List
@@ -49,7 +50,9 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
     @RequestMapping(value = "/find$!{bean.name}List")
     @ResponseBody
     public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, PageParamNoChangeSord page) throws Exception {
+    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,
+        PageParamNoChangeSord page) throws Exception {
+
         PageResult
         <$!{bean.name}Vo> rst = this.$!{bean.lowerName}Service
             .find$!{bean.name}List(condition, page.getStart(), page.getLimit(), page.getOrderBy());
@@ -113,6 +116,7 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)throws Exception {
                 return this.$!{bean.lowerName}Service.select$!{bean.name}ByPrimaryKey(id);
                 }
+
                 /**
                 *
                 * @Title:delete$!{bean.name}By$!{bean.name}Id
@@ -130,5 +134,25 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 JSONObject json = JSON.parseObject(jsons);
                 String id = json.getString("id");
                 return this.$!{bean.lowerName}Service.delete$!{bean.name}By$!{bean.name}Id(id, this.getCurUserProp());
+                }
+
+                /**
+                *
+                * @Title:audit
+                * @Description: TODO(审核$!{bean.tableChineseName})
+                * @param: @param id bean.id
+                * @param: @param rst 审核结果 3-通过 4-拒绝
+                * @param: @param remark 审核备注
+                * @param: @throws Exception
+                * @return: MessageResponse
+                * @throws
+                * @author: $!{annotation.authorName}
+                * @version: $!{annotation.version}
+                */
+                @RequestMapping(value = "/audit")
+                @ResponseBody
+                public MessageResponse audit(String id,String rst, String remark) throws Exception {
+
+                return this.$!{bean.lowerName}Service.audit(id, rst, remark, this.getCurUserProp());
                 }
                 }

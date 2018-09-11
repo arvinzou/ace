@@ -30,6 +30,8 @@ public interface CounselorDao {
 
     int findCount(@Param("condition") CounselorQVo condition);
 
+    int statisticalMember(@Param("counselorId") String counselorId);
+
     int isExit(Counselor record);
 
     /**
