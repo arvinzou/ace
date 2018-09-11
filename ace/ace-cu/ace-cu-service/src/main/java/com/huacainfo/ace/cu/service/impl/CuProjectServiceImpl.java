@@ -276,9 +276,14 @@ public class CuProjectServiceImpl implements CuProjectService {
         condition.put("endDate", today + " 23:59:59");
         //数值录入
         BigDecimal todayDonateAmount = cuDonateListService.findDonateAmount(condition);
-        int todayDonateCount = cuDonateListService.findDonateCount(condition);
+//        int todayDonateCount = cuDonateListService.findDonateCount(condition);
+        //累计捐款金额
+        condition.clear();
+        condition.put("projectId", projectVo.getId());
+        BigDecimal donateAmount = cuDonateListService.findDonateAmount(condition);
+        //return
         projectVo.setTodayDonateAmount(null == todayDonateAmount ? BigDecimal.ZERO : todayDonateAmount);
-        projectVo.setTodayDonateCount(todayDonateCount);
+        projectVo.setTodayDonateCount(donateAmount);
     }
 
     /**

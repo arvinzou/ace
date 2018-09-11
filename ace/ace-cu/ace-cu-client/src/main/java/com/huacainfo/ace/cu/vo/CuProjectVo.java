@@ -27,7 +27,7 @@ public class CuProjectVo extends CuProject {
     /**
      * 今日募集捐款次数
      */
-    private int todayDonateCount;
+    private BigDecimal todayDonateCount;
 
     /**
      * 录播资源列表
@@ -59,11 +59,11 @@ public class CuProjectVo extends CuProject {
         this.todayDonateAmount = todayDonateAmount;
     }
 
-    public int getTodayDonateCount() {
+    public BigDecimal getTodayDonateCount() {
         return todayDonateCount;
     }
 
-    public void setTodayDonateCount(int todayDonateCount) {
+    public void setTodayDonateCount(BigDecimal todayDonateCount) {
         this.todayDonateCount = todayDonateCount;
     }
 
