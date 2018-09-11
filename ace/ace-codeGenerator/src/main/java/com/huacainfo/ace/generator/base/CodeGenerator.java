@@ -39,17 +39,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CodeGenerator {
+    private static Bean bean = new Bean();
+    private static Annotation annotation = new Annotation();
+    Logger logger = LoggerFactory.getLogger(CodeGenerator.class);
     private String clientws;
     private String serverws;
     private String webws;
-
-    private static Bean bean = new Bean();
     private String cfg;
     private String name;
     private String author;
-    private static Annotation annotation = new Annotation();
-
-    Logger logger = LoggerFactory.getLogger(CodeGenerator.class);
 
 
     public CodeGenerator(String cfg, String name, String author) {
@@ -70,6 +68,23 @@ public class CodeGenerator {
     }
 
     /**
+     * 获取系统时间
+     *
+     * @return
+     */
+    private static String getDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return simpleDateFormat.format(new Date());
+    }
+
+    /**
+     * 创建bean的Dao<br>
+     *
+     * @param c
+     * @throws Exception
+     */
+
+    /**
      * 初始化bean和注解
      *
      * @param c
@@ -87,13 +102,6 @@ public class CodeGenerator {
             annotation.setVersion(simpleDateFormat.format(new Date()));
         }
     }
-
-    /**
-     * 创建bean的Dao<br>
-     *
-     * @param c
-     * @throws Exception
-     */
 
     /**
      * 创建bean的Dao的实现<br>
@@ -157,7 +165,7 @@ public class CodeGenerator {
         String fileName = path + getLastChar(cName) + "Dao.java";
         File file = new File(fileName);
         FileWriter fw = new FileWriter(file);
-        
+
 
         fw.write(generatorCode(this.getProperty("java.dao.vm"), bean, annotation));
         fw.flush();
@@ -197,7 +205,7 @@ public class CodeGenerator {
     public void generatorJavaServiceImpl(Class c) throws Exception {
         StringBuffer validate = new StringBuffer();
         String cName = c.getName();
-        String path = serverws + "/src/main/java/" + this.getProperty("package.serviceimp") + "/";
+        String path = serverws + "/src/main/java/" + this.getProperty("package.service.impl") + "/";
         File filePath = new File(path);
         createFilePath(filePath);
         String fileName = path + getLastChar(cName) + "ServiceImpl.java";
@@ -221,7 +229,7 @@ public class CodeGenerator {
 
         }
         bean.setValidate(validate.toString());
-        fw.write(generatorCode(this.getProperty("java.serviceimp.vm"), bean, annotation));
+        fw.write(generatorCode(this.getProperty("java.serviceimpl.vm"), bean, annotation));
         fw.flush();
         fw.close();
         logs(fileName);
@@ -244,8 +252,6 @@ public class CodeGenerator {
         fw.close();
         logs(fileName);
     }
-
-
 
     public void generatorJsConfig(Class c) throws Exception {
         String path = webws + "/src/main/webapp/content/service/" + lowerCase(c.getSimpleName()) + "/";
@@ -493,7 +499,7 @@ public class CodeGenerator {
         return stringWriter.toString();
     }
 
-    private String generatorCode(String fileVMPath, Bean bean, Annotation annotation,List<ColumsInfo> list)
+    private String generatorCode(String fileVMPath, Bean bean, Annotation annotation, List<ColumsInfo> list)
             throws Exception {
         VelocityEngine velocityEngine = new VelocityEngine();
         velocityEngine.setProperty("input.encoding", "UTF-8");
@@ -518,9 +524,9 @@ public class CodeGenerator {
      */
     private void createFilePath(File file) {
         if (!file.exists()) {
-           logger.info("create dir " + file.getAbsolutePath() + " " + file.mkdirs());
+            logger.info("create dir " + file.getAbsolutePath() + " " + file.mkdirs());
         } else {
-           logger.info("already exist dir " + file.getAbsolutePath());
+            logger.info("already exist dir " + file.getAbsolutePath());
         }
     }
 
@@ -562,24 +568,13 @@ public class CodeGenerator {
      * @param
      */
     private void logs(String log) {
-       logger.info("generator " + log + " ok");
-    }
-
-    /**
-     * 获取系统时间
-     *
-     * @return
-     */
-    private static String getDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return simpleDateFormat.format(new Date());
+        logger.info("generator " + log + " ok");
     }
 
     private String getProperty(String key) {
         ResourceBundle resource = ResourceBundle.getBundle(this.cfg);
         return resource.getString(key);
     }
-
 
 
     public void generatorIndexDir(Class c) throws Exception {
@@ -601,7 +596,7 @@ public class CodeGenerator {
         String fileNameJsp = pathJsp + "index.jsp";
         File fileJsp = new File(fileNameJsp);
         FileWriter fwJsp = new FileWriter(fileJsp);
-        fwJsp.write(generatorCode(this.getProperty("jsp.index.vm"), bean, annotation,list));
+        fwJsp.write(generatorCode(this.getProperty("jsp.index.vm"), bean, annotation, list));
         fwJsp.flush();
         fwJsp.close();
         logs(fileNameJsp);
@@ -631,7 +626,7 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.index.vm"), bean, annotation,list));
+        fwJs.write(generatorCode(this.getProperty("js.index.vm"), bean, annotation, list));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);
@@ -645,18 +640,17 @@ public class CodeGenerator {
         createFilePath(filePathRoot);
 
 
-
         /**创建JSP**/
         String tableName = CommonUtils.propertyToField(c.getSimpleName());
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
-        List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
-        List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
-        for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
+        List<ColumsInfo> items = DBHelpInfo.getTableInfo(tableName);
+        List<ColumsInfo> list = new ArrayList<ColumsInfo>();
+        for (ColumsInfo o : items) {
+            if (o.getColumName().equals("id") || o.getColumName().equals("status") || o.getColumName().equals("createUserId") || o.getColumName().equals("createUserName") || o.getColumName().equals("lastModifyUserId") || o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createDate")) {
 
-            }else {
+            } else {
                 list.add(o);
             }
         }
@@ -666,7 +660,7 @@ public class CodeGenerator {
         String fileNameJsp = pathJsp + "index.jsp";
         File fileJsp = new File(fileNameJsp);
         FileWriter fwJsp = new FileWriter(fileJsp);
-        fwJsp.write(generatorCode(this.getProperty("jsp.add.vm"), bean, annotation,list));
+        fwJsp.write(generatorCode(this.getProperty("jsp.add.vm"), bean, annotation, list));
         fwJsp.flush();
         fwJsp.close();
         logs(fileNameJsp);
@@ -688,12 +682,12 @@ public class CodeGenerator {
         File filePathImg = new File(pathImg);
         createFilePath(filePathImg);
 
-        List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
-        for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
+        List<ColumsInfo> list1 = new ArrayList<ColumsInfo>();
+        for (ColumsInfo o : items) {
+            if (o.getColumName().equals("id") || o.getColumName().equals("status") || o.getColumName().equals("createUserId") || o.getColumName().equals("createUserName") || o.getColumName().equals("lastModifyUserId") || o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createDate")) {
 
-            }else {
-                if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
+            } else {
+                if (o.getIsNullAble().equals("NO") && (o.getTypeName().equals("varchar") || o.getTypeName().equals("longtext"))) {
                     list1.add(o);
                 }
             }
@@ -705,12 +699,13 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.add.vm"), bean, annotation,list1));
+        fwJs.write(generatorCode(this.getProperty("js.add.vm"), bean, annotation, list1));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);
 
     }
+
     public void generatorEditDir(Class c) throws Exception {
         /**创建根目录**/
         String pathRoot = webws + "/src/main/webapp/dynamic/service/" + lowerCase(c.getSimpleName()) + "/edit/";
@@ -723,12 +718,12 @@ public class CodeGenerator {
         if (tableName.startsWith("_")) {
             tableName = tableName.substring(1, tableName.length());
         }
-        List<ColumsInfo> items=DBHelpInfo.getTableInfo(tableName);
-        List<ColumsInfo> list =new  ArrayList<ColumsInfo>();
-        for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
+        List<ColumsInfo> items = DBHelpInfo.getTableInfo(tableName);
+        List<ColumsInfo> list = new ArrayList<ColumsInfo>();
+        for (ColumsInfo o : items) {
+            if (o.getColumName().equals("id") || o.getColumName().equals("status") || o.getColumName().equals("createUserId") || o.getColumName().equals("createUserName") || o.getColumName().equals("lastModifyUserId") || o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createDate")) {
 
-            }else {
+            } else {
                 list.add(o);
             }
         }
@@ -738,7 +733,7 @@ public class CodeGenerator {
         String fileNameJsp = pathJsp + "index.jsp";
         File fileJsp = new File(fileNameJsp);
         FileWriter fwJsp = new FileWriter(fileJsp);
-        fwJsp.write(generatorCode(this.getProperty("jsp.edit.vm"), bean, annotation,list));
+        fwJsp.write(generatorCode(this.getProperty("jsp.edit.vm"), bean, annotation, list));
         fwJsp.flush();
         fwJsp.close();
         logs(fileNameJsp);
@@ -760,12 +755,12 @@ public class CodeGenerator {
         File filePathImg = new File(pathImg);
         createFilePath(filePathImg);
 
-        List<ColumsInfo> list1 =new  ArrayList<ColumsInfo>();
-        for(ColumsInfo o:items){
-            if(o.getColumName().equals("id")||o.getColumName().equals("status")||o.getColumName().equals("createUserId")||o.getColumName().equals("createUserName")||o.getColumName().equals("lastModifyUserId")||o.getColumName().equals("lastModifyUserName")||o.getColumName().equals("lastModifyDate")||o.getColumName().equals("createDate")){
+        List<ColumsInfo> list1 = new ArrayList<ColumsInfo>();
+        for (ColumsInfo o : items) {
+            if (o.getColumName().equals("id") || o.getColumName().equals("status") || o.getColumName().equals("createUserId") || o.getColumName().equals("createUserName") || o.getColumName().equals("lastModifyUserId") || o.getColumName().equals("lastModifyUserName") || o.getColumName().equals("lastModifyDate") || o.getColumName().equals("createDate")) {
 
-            }else {
-                if(o.getIsNullAble().equals("NO")&&(o.getTypeName().equals("varchar")||o.getTypeName().equals("longtext"))){
+            } else {
+                if (o.getIsNullAble().equals("NO") && (o.getTypeName().equals("varchar") || o.getTypeName().equals("longtext"))) {
                     list1.add(o);
                 }
             }
@@ -777,30 +772,50 @@ public class CodeGenerator {
         String fileNameJs = pathJs + "act.js";
         File fileJs = new File(fileNameJs);
         FileWriter fwJs = new FileWriter(fileJs);
-        fwJs.write(generatorCode(this.getProperty("js.edit.vm"), bean, annotation,list1));
+        fwJs.write(generatorCode(this.getProperty("js.edit.vm"), bean, annotation, list1));
         fwJs.flush();
         fwJs.close();
         logs(fileNameJs);
     }
 
-    public void generatorWebClient(Class c) throws Exception{
+    /**
+     * web形式-适用于新互联网架构
+     *
+     * @param c
+     * @throws Exception
+     */
+    public void generatorWebClient1(Class c) throws Exception {
         this.generatorIndexDir(c);
         this.generatorAddDir(c);
         this.generatorEditDir(c);
     }
-    public void generatorJavaManager(Class c) throws Exception{
+
+    /**
+     * web形式-适用于多表格，多数据的表单结构
+     *
+     * @param c
+     * @throws Exception
+     */
+    public void generatorWebClient2(Class c) throws Exception {
+        this.generatorJavaJqgrid(c);
+        this.generatorJsModel(c);
+        this.generatorJsView(c);
+        this.generatorJsConfig(c);
+        this.generatorJsController(c);
+    }
+
+    /**
+     * java后端代码生成器
+     *
+     * @param c
+     * @throws Exception
+     */
+    public void generatorJavaManager(Class c) throws Exception {
         this.generatorJavaController(c);
         this.generatorJavaDAO(c);
         this.generatorJavaQVO(c);
         this.generatorJavaVO(c);
         this.generatorJavaService(c);
         this.generatorJavaServiceImpl(c);
-    }
-    public void generatorWebManager(Class c) throws Exception{
-        this.generatorJavaJqgrid(c);
-        this.generatorJsModel(c);
-        this.generatorJsView(c);
-        this.generatorJsConfig(c);
-        this.generatorJsController(c);
     }
 }
