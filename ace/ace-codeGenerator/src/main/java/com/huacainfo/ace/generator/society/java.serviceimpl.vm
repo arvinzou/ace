@@ -56,7 +56,7 @@ private DataBaseLogService dataBaseLogService;
         <$!{bean.name}Vo> rst = new PageResult<>();
             List
             <$!{bean.name}Vo> list = this.$!{bean.lowerName}Dao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
                 rst.setRows(list);
                 if (start <= 1) {
                 int allRows = this.$!{bean.lowerName}Dao.findCount(condition);
