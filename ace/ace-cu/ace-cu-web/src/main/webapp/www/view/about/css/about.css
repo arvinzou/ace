@@ -42,3 +42,12 @@
 	color: #999999;
 	line-height: 0.6rem;
 }
+.logo_panel{
+	width: 3rem;
+	height: 3rem;
+	margin: 0.5rem auto;
+}
+.logo_panel img{
+	width: 100%;
+	height: 100%;
+}
