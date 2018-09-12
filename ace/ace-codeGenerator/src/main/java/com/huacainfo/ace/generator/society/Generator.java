@@ -5,8 +5,8 @@ import com.huacainfo.ace.generator.base.CodeGenerator;
 public class Generator {
 
     public static void main(String[] args) throws Exception {
-        CodeGenerator codeGenerator = new CodeGenerator("society", "个人信息", "Arvin");
-//        Class<?> c = com.huacainfo.ace.society.model.PersonInfo.class;
+        CodeGenerator codeGenerator = new CodeGenerator("society", "社会组织信息", "Arvin");
+//        Class<?> c = com.huacainfo.ace.society.model.SocietyOrgInfo.class;
         Class<?> c = null;//com.huacainfo.ace.society.model.PersonInfo.class;
 
         //*******************************************

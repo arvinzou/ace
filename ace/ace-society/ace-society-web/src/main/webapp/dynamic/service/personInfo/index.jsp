@@ -121,7 +121,7 @@
 </div>
 
 <script id="tpl-list" type="text/template">
-    {@each data as item, index}s
+    {@each data as item, index}
     <tr>
         <td>
             <div class="row">
@@ -145,7 +145,7 @@
             </span>
         </td>
         <td>
-            <%--<a class="operation" href="javascript:edit('\${item.id}');">查看</a>--%>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
             <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             {@if item.status==2}
@@ -157,6 +157,31 @@
     {@/each}
 </script>
 
+<%--查看详情--%>
+<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">个人信息详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-detail" role="form">
+                    <div class="form-body">
+                        <div class="table-scrollable" id="detail-info">
+                            <%--详情模板填充--%>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <%--<button type="button" class="btn btn-primary">确定</button>--%>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
@@ -201,6 +226,42 @@
     </div>
 </div>
 </body>
+<%--详情模板--%>
+<script id="tpl-detail" type="text/template">
+
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td class="active"> 微信昵称</td>
+            <td class="success"> \${data.nickname}</td>
+        </tr>
+        <tr>
+            <td class="active"> 真实性名</td>
+            <td class="success"> \${data.realName}</td>
+        </tr>
+        <tr>
+            <td class="active"> 手机号码</td>
+            <td class="success"> \${data.mobilePhone}</td>
+        </tr>
+        <tr>
+            <td class="active"> 政治面貌</td>
+            <td class="success"> \${data.politicalStatus}</td>
+        </tr>
+        <tr>
+            <td class="active"> 累计获取积分</td>
+            <td class="success"> \${data.accPoints}</td>
+        </tr>
+        <tr>
+            <td class="active"> 有效积分</td>
+            <td class="success"> \${data.validPoints}</td>
+        </tr>
+
+        <tr>
+            <td class="active"> 注册状态</td>
+            <td class="success"> \${parseStatus(data.status)}</td>
+        </tr>
+    </table>
+
+</script>
 <style>
     .cover {
         width: 55px;

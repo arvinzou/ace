@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.society.dao.PersonInfoDao">
-    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.PersonInfo">
+<mapper namespace="com.huacainfo.ace.society.dao.SocietyOrgInfoDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.SocietyOrgInfo">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="realName" jdbcType="VARCHAR" property="realName"/>
-        <result column="mobilePhone" jdbcType="VARCHAR" property="mobilePhone"/>
-        <result column="politicalStatus" jdbcType="CHAR" property="politicalStatus"/>
+        <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
+        <result column="orgType" jdbcType="CHAR" property="orgType"/>
+        <result column="orgAddr" jdbcType="VARCHAR" property="orgAddr"/>
+        <result column="orgCover" jdbcType="VARCHAR" property="orgCover"/>
+        <result column="orgSummary" jdbcType="VARCHAR" property="orgSummary"/>
+        <result column="contactPerson" jdbcType="VARCHAR" property="contactPerson"/>
+        <result column="contactPhone" jdbcType="VARCHAR" property="contactPhone"/>
         <result column="accPoints" jdbcType="INTEGER" property="accPoints"/>
         <result column="validPoints" jdbcType="INTEGER" property="validPoints"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -18,45 +22,62 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, realName, mobilePhone, politicalStatus, accPoints, validPoints, remark, status, 
-    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
-  </sql>
+        id, orgName, orgType, orgAddr, orgCover, orgSummary, contactPerson, contactPhone,
+        accPoints, validPoints, remark, status, createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from person_info
+        from society_org_info
         where id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from person_info
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
-    <insert id="insert" parameterType="com.huacainfo.ace.society.model.PersonInfo">
-    insert into person_info (id, realName, mobilePhone, 
-      politicalStatus, accPoints, validPoints, 
-      remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{mobilePhone,jdbcType=VARCHAR}, 
-      #{politicalStatus,jdbcType=CHAR}, #{accPoints,jdbcType=INTEGER}, #{validPoints,jdbcType=INTEGER}, 
-      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
-  </insert>
-    <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.PersonInfo">
-        insert into person_info
+        delete from society_org_info
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        insert into society_org_info (id, orgName, orgType,
+        orgAddr, orgCover, orgSummary,
+        contactPerson, contactPhone, accPoints,
+        validPoints, remark, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+        )
+        values (#{id,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgType,jdbcType=CHAR},
+        #{orgAddr,jdbcType=VARCHAR}, #{orgCover,jdbcType=VARCHAR}, #{orgSummary,jdbcType=VARCHAR},
+        #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{accPoints,jdbcType=INTEGER},
+        #{validPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        insert into society_org_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="realName != null">
-                realName,
+            <if test="orgName != null">
+                orgName,
             </if>
-            <if test="mobilePhone != null">
-                mobilePhone,
+            <if test="orgType != null">
+                orgType,
             </if>
-            <if test="politicalStatus != null">
-                politicalStatus,
+            <if test="orgAddr != null">
+                orgAddr,
+            </if>
+            <if test="orgCover != null">
+                orgCover,
+            </if>
+            <if test="orgSummary != null">
+                orgSummary,
+            </if>
+            <if test="contactPerson != null">
+                contactPerson,
+            </if>
+            <if test="contactPhone != null">
+                contactPhone,
             </if>
             <if test="accPoints != null">
                 accPoints,
@@ -93,14 +114,26 @@
             <if test="id != null">
                 #{id,jdbcType=VARCHAR},
             </if>
-            <if test="realName != null">
-                #{realName,jdbcType=VARCHAR},
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
             </if>
-            <if test="mobilePhone != null">
-                #{mobilePhone,jdbcType=VARCHAR},
+            <if test="orgType != null">
+                #{orgType,jdbcType=CHAR},
             </if>
-            <if test="politicalStatus != null">
-                #{politicalStatus,jdbcType=CHAR},
+            <if test="orgAddr != null">
+                #{orgAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCover != null">
+                #{orgCover,jdbcType=VARCHAR},
+            </if>
+            <if test="orgSummary != null">
+                #{orgSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null">
+                #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                #{contactPhone,jdbcType=VARCHAR},
             </if>
             <if test="accPoints != null">
                 #{accPoints,jdbcType=INTEGER},
@@ -134,17 +167,29 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.PersonInfo">
-        update person_info
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        update society_org_info
         <set>
-            <if test="realName != null">
-                realName = #{realName,jdbcType=VARCHAR},
+            <if test="orgName != null">
+                orgName = #{orgName,jdbcType=VARCHAR},
             </if>
-            <if test="mobilePhone != null">
-                mobilePhone = #{mobilePhone,jdbcType=VARCHAR},
+            <if test="orgType != null">
+                orgType = #{orgType,jdbcType=CHAR},
             </if>
-            <if test="politicalStatus != null">
-                politicalStatus = #{politicalStatus,jdbcType=CHAR},
+            <if test="orgAddr != null">
+                orgAddr = #{orgAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCover != null">
+                orgCover = #{orgCover,jdbcType=VARCHAR},
+            </if>
+            <if test="orgSummary != null">
+                orgSummary = #{orgSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null">
+                contactPerson = #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                contactPhone = #{contactPhone,jdbcType=VARCHAR},
             </if>
             <if test="accPoints != null">
                 accPoints = #{accPoints,jdbcType=INTEGER},
@@ -179,23 +224,27 @@
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.PersonInfo">
-    update person_info
-    set realName = #{realName,jdbcType=VARCHAR},
-      mobilePhone = #{mobilePhone,jdbcType=VARCHAR},
-      politicalStatus = #{politicalStatus,jdbcType=CHAR},
-      accPoints = #{accPoints,jdbcType=INTEGER},
-      validPoints = #{validPoints,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        update society_org_info
+        set orgName = #{orgName,jdbcType=VARCHAR},
+        orgType = #{orgType,jdbcType=CHAR},
+        orgAddr = #{orgAddr,jdbcType=VARCHAR},
+        orgCover = #{orgCover,jdbcType=VARCHAR},
+        orgSummary = #{orgSummary,jdbcType=VARCHAR},
+        contactPerson = #{contactPerson,jdbcType=VARCHAR},
+        contactPhone = #{contactPhone,jdbcType=VARCHAR},
+        accPoints = #{accPoints,jdbcType=INTEGER},
+        validPoints = #{validPoints,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
     <!--**********************************-->
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.PersonInfoVo">
@@ -205,8 +254,9 @@
     </resultMap>
     <sql id="Vo_Column_List">
         u.nickname, u.headimgurl,
-        t.id, t.realName, t.mobilePhone, t.politicalStatus, t.accPoints, t.validPoints, t.remark, t.status,
-        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        t.id, t.orgName, t.orgAddr, t.contactPerson, t.contactPhone, t.accPoints, t.validPoints, t.remark,
+        t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+        t.lastModifyDate
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -226,17 +276,14 @@
     </select>
 
     <sql id="From_Statement">
-        from person_info t
+        from society_org_info t
         left join portal.userinfo u on u.unionid = t.id
     </sql>
 
     <sql id="Where_Condition">
         where 1=1
-        <if test="condition.realName !=null and condition.realName !=&quot;&quot;">
-            and t.realName like concat('%',#{condition.realName,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.politicalStatus !=null and condition.politicalStatus !=&quot;&quot;">
-            and t.politicalStatus = #{condition.politicalStatus,jdbcType=VARCHAR}
+        <if test="condition.orgName !=null and condition.orgName !=&quot;&quot;">
+            and t.orgName like concat('%',#{condition.orgName,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
@@ -255,7 +302,7 @@
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.PersonInfo">
         select count(1)
-        from person_info
+        from society_org_info
         where 1=1
     </select>
 </mapper>
