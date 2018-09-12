@@ -21,12 +21,12 @@
 			<div class="container">
 				<div class="row" id="consultorInfo"></div>
 				<div class="row content_03">
-					<div class="col-xs-4 col-sm-4" style="padding-left: 0;">
-						<span class="method_01">预约时间</span>
+					<div class="col-xs-5 col-sm-5" style="padding-left: 0;">
+						<span class="method_01">期望咨询时间</span>
 					</div>
-					<div class="col-xs-8 col-sm-8">
+					<div class="col-xs-7 col-sm-7">
 						<input style="margin-top: 0.2rem; width: 80%;height: 1rem;border:none;text-align: right;"
-							   name="start_date" id="start_date" placeholder="选择预约时间" readonly="readonly"/>
+							   name="start_date" id="start_date" placeholder="请选择时间" readonly="readonly"/>
 					</div>
 				</div>
 			</div>

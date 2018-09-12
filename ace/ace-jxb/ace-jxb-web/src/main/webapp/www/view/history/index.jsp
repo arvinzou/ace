@@ -34,6 +34,7 @@
 
 		<script id="orderListTemp"  type="text/template">
 			{@each data.rows as item,index}
+			<div class="row box" onclick="showDetail('\${item.id}');">
             <div class="row">
                 <div class="col-xs-3 col-sm-2 row_01">
                 <img class="head_img" src="\${item.counselor.imagePhotoUrl}" />
@@ -48,7 +49,7 @@
                 </div>
                 </div>
                 <div class="col-xs-3 col-sm-2 row_01">
-                <button class="chat" onclick="showDetail('\${item.id}');">查看详情</button>
+                <button class="chat">投诉TA</button>
                 </div>
                 </div>
                 <div class="row dorder">
@@ -84,6 +85,7 @@
 					{@/if}
 				</div>
             </div>
+			</div>
 			{@/each}
 		</script>
 		</div>
