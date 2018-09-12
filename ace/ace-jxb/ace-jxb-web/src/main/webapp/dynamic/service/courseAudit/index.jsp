@@ -45,7 +45,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>课程审核</span>
+                                    <span>课程管理</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -58,13 +58,26 @@
                                         <div class="portlet light ">
                                             <div class="portlet-title">
                                                 <div class="caption">
-                                                    课程审核
+                                                    课程管理
                                                 </div>
 
 
                                                 <div class="actions">
 
-
+                                                    <form onsubmit="return t_query()">
+                                                        <div class="input-group">
+                                                            <input type="text"
+                                                                   name="keyword"
+                                                                   class="form-control input-circle-left"
+                                                                   placeholder="请输入课程名称">
+                                                            <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                        搜索
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                    </form>
 
 
                                                 </div>
@@ -82,28 +95,6 @@
                                                     </ul>
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab_15_1">
-                                                            <div class="row">
-                                                                <div class="col-sm-8">
-
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <form onsubmit="return t_query()">
-                                                                    <div class="input-group">
-                                                                        <input type="text"
-                                                                               name="keyword"
-                                                                               class="form-control input-circle-left"
-                                                                               placeholder="请输入课程名称">
-                                                                        <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
-                                                                        type="submit">
-                                                                        搜索
-                                                                </button>
-                                                            </span>
-                                                                    </div>
-                                                                    </form>
-                                                                </div>
-
-                                                            </div>
 
 
 
@@ -173,8 +164,8 @@
                 </div>
             </div>
         </td>
-        <td class="tdcontent"> \${item.counselorName} </td>
-        <td  class="tdcontent">
+        <td > \${item.counselorName} </td>
+        <td  >
             {@if item.auditRst==1}
             <div>
                 {@if item.lineState == 1}
@@ -192,8 +183,8 @@
             </div>
             {@/if}
         </td>
-        <td  class="tdcontent">\${item.duration}</td>
-        <td class="tdcontent">
+        <td  >\${item.duration}</td>
+        <td >
             {@if item.auditRst==0}
             <span class="label label-lg label-info">待审核</span>
             {@else if item.auditRst==1}

@@ -17,6 +17,7 @@ function loadCustom() {
         loader(urls[i]);
     }
 }
+
 /*线下活动初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
@@ -74,16 +75,16 @@ function edit(id){
 }
 
 function initEvents() {
-    $('#model-audit').on('show.bs.modal', function (event) {
+    $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
     })
-    $('#model-audit .btn-primary').on('click', function () {
-        $('#model-audit form').submit();
+    $('#modal-audit .btn-primary').on('click', function () {
+        $('#modal-audit form').submit();
     });
-    $('#model-audit form').ajaxForm({
+    $('#modal-audit form').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 var params = {};
                 $.each(formData, function (n, obj) {
@@ -103,22 +104,12 @@ function initEvents() {
 /*线下活动审核*/
 function audit(params){
     startLoad();
-    $.ajax({
-        url: contextPath + "/activity/audit",
-        type:"post",
-        async:false,
-        data:params,
-        success:function(rst){
-            stopLoad();
-            $("#audit").modal('hide');
-            alert(rst.errorMessage);
-            if(rst.status == 0) {
-                getPageList();
-            }
-        },
-        error:function(){
-            stopLoad();
-            alert("对不起出错了！");
+    var url=contextPath + "/activity/audit";
+    $.post(url,params,function(rst){
+        stopLoad();
+        $("#modal-audit").modal('hide');
+        if(rst.status == 0) {
+            getPageList();
         }
     });
 }
@@ -174,5 +165,23 @@ function outline(id){
                 alert("对不起，出错了！");
             }
         });
+    }
+}
+
+function deleteData(id){
+    if (confirm("确定删除该活动吗，删除后将不能恢复。")){
+        var url=contextPath + "/activity/softDelete";
+        var data={
+            jsons:JSON.stringify({
+                id:id,
+            })
+        }
+        $.post(url,data,function (rst) {
+            if(rst.status==0){
+                getPageList();
+                return;
+            }
+            alert(rst.errorMessage);
+        })
     }
 }

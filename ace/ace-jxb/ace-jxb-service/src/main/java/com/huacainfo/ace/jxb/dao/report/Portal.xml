@@ -3,38 +3,58 @@
 <mapper namespace="com.huacainfo.ace.jxb.dao.report.Portal">
   <select id="query" resultType="map">
     SELECT
-    'jxb' id,
+    'course' id,
     count(1) value
     FROM
-    live
-    WHERE
-    deptId =#{deptId}
+    course t inner join course_audit a on t.id=a.courseId where a.rst='1'
     union all
     SELECT
-    'rpt' id,
-    count(1) rpt
+    'courseOrder' id,
+    count(1) value
     FROM
-    live_rpt inner join live on live_rpt.rid=live.id
-    WHERE
-    live.deptId =#{deptId}
+    base_order
+    where category='2' and payStatus in('2','6','7')
     union all
     SELECT
-    'cmt' id,
-    count(1) cmt
+    'counselorOrder' id,
+    count(1) value
     FROM
-    live_cmt
-    inner join live_rpt on live_rpt.id=live_cmt.rptId
-    inner join live on live_rpt.rid=live.id
-    WHERE
-    live.deptId =#{deptId}
+    base_order
+    where category='1' and payStatus in('2','6','7')
     union all
     SELECT
-    'msg' id,
-    count(1) msg
+    'evaluatOrder' id,
+    count(1) value
     FROM
-    live_msg
-    inner join live on live_msg.rid=live.id
-    WHERE
-    live.deptId =#{deptId}
+    base_order
+    where category='3' and payStatus in('2','6','7')
+    union all
+    SELECT
+    'courseCmt' id,
+    count(1) value
+    FROM
+    course_cmt
+
+    union all
+    SELECT
+    'counselor' id,
+    count(DISTINCT counselorId) value
+    FROM
+    teacher_audit   where rst ='1'
+    union all
+    SELECT
+    'studio' id,
+    count(1) value
+    FROM
+    studio where status='1'
+    union all
+    SELECT
+    'evaluat_tpl' id,
+    count(1) value
+    FROM
+    portal.evaluat_tpl  where syid='jxb'
+
+
+
   </select>
 </mapper>

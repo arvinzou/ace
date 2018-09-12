@@ -63,32 +63,33 @@
                                                                     </div>
 
                                                                     <div class="actions">
-                                                                        <a onclick="javascript:createTest()" class="btn  btn-success btn-sm">
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <div class="input-group">
+                                                                                    <input name="testName" type="text" class="form-control input-circle-left" placeholder="请输入评测名称">
+                                                                                    <span class="input-group-btn">
+                                                                                    <button onclick="javascript:searchByName()" class="btn btn-circle-right btn-default search_btn" type="submit">
+                                                                                        搜索
+                                                                                    </button>
+                                                                                </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4" >
+                                                                                <a onclick="javascript:createTest()" style="font-size: 14px !important;" class="btn green">
 
-                                                                            创建评测
-                                                                        </a>
+                                                                                    创建评测
+                                                                                </a>
+                                                                            </div>
+
+                                                                        </div>
+
 
                                                                     </div>
                                                                 </div>
                                                                 <div class="portlet-body">
 
 
-                                                                    <div class="row">
-                                                                        <div class="col-sm-8">
 
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-                                                                            <div class="input-group">
-                                                                                <input name="testName" type="text" class="form-control input-circle-left" placeholder="请输入评测名称">
-                                                                                <span class="input-group-btn">
-                                                                                    <button onclick="javascript:searchByName()" class="btn btn-circle-right btn-default search_btn" type="submit">
-                                                                                        搜索
-                                                                                    </button>
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
                                                                     <div class="portlet-body">
                                                                         <div class="table-scrollable">
                                                                             <table class="table table-hover">

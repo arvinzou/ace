@@ -91,7 +91,7 @@ function searchByName() {
 function initpage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
-        pageSize: 5,
+        pageSize: 10,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',

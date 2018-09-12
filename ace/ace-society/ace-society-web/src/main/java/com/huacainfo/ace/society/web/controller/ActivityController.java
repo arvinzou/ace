@@ -92,6 +92,23 @@ public class ActivityController extends SocietyBaseController {
 
     /**
      * @throws
+     * @Title:updateActivity
+     * @Description: TODO(更新线下活动)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @RequestMapping(value = "/softDelete")
+    @ResponseBody
+    public MessageResponse softDelete(String jsons) throws Exception {
+        Activity obj = JSON.parseObject(jsons, Activity.class);
+        return this.activityService.softDelete(obj, this.getCurUserProp());
+    }
+
+    /**
+     * @throws
      * @Title:selectActivityByPrimaryKey
      * @Description: TODO(获取线下活动)
      * @param: @param id

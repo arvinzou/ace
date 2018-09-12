@@ -109,23 +109,7 @@ public class AuditRecordController extends SocietyBaseController {
         return this.auditRecordService.selectAuditRecordByPrimaryKey(id);
     }
 
-    /**
-     * @throws
-     * @Title:deleteAuditRecordByAuditRecordId
-     * @Description: TODO(删除审核记录)
-     * @param: @param jsons
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2018-09-11
-     */
-    @RequestMapping(value = "/deleteAuditRecordByAuditRecordId")
-    @ResponseBody
-    public MessageResponse deleteAuditRecordByAuditRecordId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
-        return this.auditRecordService.deleteAuditRecordByAuditRecordId(id, this.getCurUserProp());
-    }
+
 
     /**
      * @throws
@@ -143,6 +127,6 @@ public class AuditRecordController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse audit(String id, String rst, String remark) throws Exception {
 
-        return this.auditRecordService.audit(id, rst, remark, this.getCurUserProp());
+        return null;// this.auditRecordService.audit(id, rst, remark, this.getCurUserProp());
     }
 }

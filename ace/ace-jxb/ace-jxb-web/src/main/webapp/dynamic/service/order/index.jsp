@@ -58,10 +58,17 @@
 
 
                                                         <div class="actions">
-
-
-
-
+                                                            <div class="input-group">
+                                                                <input type="text"
+                                                                       class="form-control input-circle-left"
+                                                                       placeholder="请输入订单编号">
+                                                                <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                        搜索
+                                                                </button>
+                                                            </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body">
@@ -80,25 +87,7 @@
                                                             </ul>
                                                             <div class="tab-content">
                                                                 <div class="tab-pane active" id="tab_15_1">
-                                                                    <div class="row">
-                                                                        <div class="col-sm-8">
 
-                                                                        </div>
-                                                                        <div class="col-sm-4">
-
-                                                                        
-                                                                            <div class="input-group">
-                                                                                <input type="text" class="form-control input-circle-left" placeholder="请输入订单编号">
-                                                                                <span class="input-group-btn">
-                                                                                    <button class="btn btn-circle-right btn-default search_btn" type="submit">
-                                                                                        搜索
-                                                                                    </button>
-                                                                                </span>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
 
 
 
