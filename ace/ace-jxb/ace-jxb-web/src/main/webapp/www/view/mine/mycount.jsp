@@ -15,9 +15,9 @@
 	<body>
 		<div class="box">
 			<div class="row banner">
-				<p class="banner_title">总资产（元）</p>
+				<p class="banner_title">账户余额</p>
 				<p class="banner_content" id="totalIncome">0.00</p>
-				<span class="putcash">提现</span>
+				<%--<span class="putcash">提现</span>--%>
 			</div>
 		</div>
 		<div class="box" id="income">
