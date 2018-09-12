@@ -49,20 +49,11 @@ function initEvents(){
     $("#fm-add").validate({
         onfocusout: function(element) { $(element).valid(); },
         rules: {
-                                         tplPageId: {required: true,maxlength:50},                             articleCategory: {required: true,maxlength:50},                             title: {required: true,maxlength:200},                             mediType: {required: true,maxlength:20}                                 },
+                                         title: {required: true,maxlength:50}                                 },
         messages: {
-                                         tplPageId: {
-                    required: "请输入所属页面",
-                    maxlength:"所属页面字符长度不能超过50"
-                },                             articleCategory: {
-                    required: "请输入所属栏目",
-                    maxlength:"所属栏目字符长度不能超过50"
-                },                             title: {
-                    required: "请输入标题",
-                    maxlength:"标题字符长度不能超过200"
-                },                             mediType: {
-                    required: "请输入媒体类型",
-                    maxlength:"媒体类型字符长度不能超过20"
+                                         title: {
+                    required: "请输入活动名称",
+                    maxlength:"活动名称字符长度不能超过50"
                 }                                 }
     });
      /*监听表单提交*/
@@ -87,7 +78,7 @@ function save(params) {
     });
     startLoad();
     $.ajax({
-        url: contextPath + "/article/insertArticle",
+        url: contextPath + "/activity/insertActivity",
         type: "post",
         async: false,
         data: {

@@ -22,7 +22,7 @@
         <!--私有部分开始-->
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css" />
         <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/add/css/style.css">
+        <link rel="stylesheet" href="css/style.css">
         <!--私有部分结束-->
     </head>
 
@@ -41,7 +41,7 @@
                                             <i class="fa fa-circle"></i>
                                         </li>
                                         <li>
-                                            <span>文章管理</span>
+                                            <span>线下活动管理</span>
                                         </li>
                                     </ul>
                                     <div class="page-content-inner">
@@ -53,7 +53,7 @@
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
                                                         <div class="caption">
-                                                            创建文章
+                                                            创建线下活动
                                                         </div>
                                                         <div class="actions">
 
@@ -66,142 +66,129 @@
                                                                 <div class="form-body">
                                                                                                                                                                                                                  <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                                                                                                <span class="label-red">*</span>
-                                                                                                                                                                所属页面
+                                                                                                                                                                发起人ID
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="tplPageId" maxlength="50" placeholder="请输入所属页面（建议字数在14个字以内，不超过50个字)">
+                                                                                <input type="text" class="form-control" name="initiatorId" maxlength="50" placeholder="请输入发起人ID（建议字数在14个字以内，不超过50个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
                                                                                                                                                                 <span class="label-red">*</span>
-                                                                                                                                                                所属栏目
+                                                                                                                                                                活动名称
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="articleCategory" maxlength="50" placeholder="请输入所属栏目（建议字数在14个字以内，不超过50个字)">
+                                                                                <input type="text" class="form-control" name="title" maxlength="50" placeholder="请输入活动名称（建议字数在14个字以内，不超过50个字)">
+                                                                                <span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                                                                                             <div class="form-group">
+                                                                            <label class="col-md-2 control-label">
+                                                                                                                                                                活动类型
+                                                                            </label>
+                                                                            <div class="col-md-10">
+                                                                                <input type="text" class="form-control" name="category" maxlength="2" placeholder="请输入活动类型（建议字数在14个字以内，不超过2个字)">
+                                                                                <span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                                                                                             <div class="form-group">
+                                                                            <label class="col-md-2 control-label">
+                                                                                                                                                                活动摘要
+                                                                            </label>
+                                                                            <div class="col-md-10">
+                                                                                <input type="text" class="form-control" name="summary" maxlength="300" placeholder="请输入活动摘要（建议字数在14个字以内，不超过300个字)">
+                                                                                <span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                                                                                             <div class="form-group">
+                                                                            <label class="col-md-2 control-label">
+                                                                                                                                                                活动内容
+                                                                            </label>
+                                                                            <div class="col-md-10">
+                                                                                <input type="text" class="form-control" name="content" maxlength="2147483647" placeholder="请输入活动内容（建议字数在14个字以内，不超过2147483647个字)">
+                                                                                <span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                                                                                             <div class="form-group">
+                                                                            <label class="col-md-2 control-label">
+                                                                                                                                                                活动封面
+                                                                            </label>
+                                                                            <div class="col-md-10">
+                                                                                <input type="text" class="form-control" name="coverUrl" maxlength="300" placeholder="请输入活动封面（建议字数在14个字以内，不超过300个字)">
+                                                                                <span class="help-block"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                                                                                             <div class="form-group">
+                                                                            <label class="col-md-2 control-label">
+                                                                                                                                                                报名截止时间
+                                                                            </label>
+                                                                            <div class="col-md-10">
+                                                                                <input type="text" class="form-control" name="dendline" maxlength="" placeholder="请输入报名截止时间（建议字数在14个字以内，不超过个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
                                                                                                                                                                 <span class="label-red">*</span>
-                                                                                                                                                                标题
+                                                                                                                                                                开展时间
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="title" maxlength="200" placeholder="请输入标题（建议字数在14个字以内，不超过200个字)">
+                                                                                <input type="text" class="form-control" name="startDate" maxlength="" placeholder="请输入开展时间（建议字数在14个字以内，不超过个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                                                                                                封面
+                                                                                                                                                                结束时间
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="cover" maxlength="200" placeholder="请输入封面（建议字数在14个字以内，不超过200个字)">
+                                                                                <input type="text" class="form-control" name="endDate" maxlength="" placeholder="请输入结束时间（建议字数在14个字以内，不超过个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                                                                                                摘要
+                                                                                                                                                                志愿者数量
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="remark" maxlength="200" placeholder="请输入摘要（建议字数在14个字以内，不超过200个字)">
+                                                                                <input type="text" class="form-control" name="volunteerNum" maxlength="10" placeholder="请输入志愿者数量（建议字数在14个字以内，不超过10个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                                                                                                内容
+                                                                                                                                                                志愿者获得积分
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="content" maxlength="2147483647" placeholder="请输入内容（建议字数在14个字以内，不超过2147483647个字)">
+                                                                                <input type="text" class="form-control" name="volunteerPoints" maxlength="10" placeholder="请输入志愿者获得积分（建议字数在14个字以内，不超过10个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                                                                                                跳转地址
+                                                                                                                                                                参与者数量
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="hrefUrl" maxlength="400" placeholder="请输入跳转地址（建议字数在14个字以内，不超过400个字)">
+                                                                                <input type="text" class="form-control" name="parterNum" maxlength="10" placeholder="请输入参与者数量（建议字数在14个字以内，不超过10个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                                                                                                标签
+                                                                                                                                                                参与者扣除积分
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="tags" maxlength="200" placeholder="请输入标签（建议字数在14个字以内，不超过200个字)">
+                                                                                <input type="text" class="form-control" name="parterPoints" maxlength="10" placeholder="请输入参与者扣除积分（建议字数在14个字以内，不超过10个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>
                                                                                                                                              <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                                                                                                <span class="label-red">*</span>
-                                                                                                                                                                媒体类型
+                                                                                                                                                                备注
                                                                             </label>
                                                                             <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="mediType" maxlength="20" placeholder="请输入媒体类型（建议字数在14个字以内，不超过20个字)">
-                                                                                <span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                                                                                             <div class="form-group">
-                                                                            <label class="col-md-2 control-label">
-                                                                                                                                                                资源地址
-                                                                            </label>
-                                                                            <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="mediUrl" maxlength="200" placeholder="请输入资源地址（建议字数在14个字以内，不超过200个字)">
-                                                                                <span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                                                                                             <div class="form-group">
-                                                                            <label class="col-md-2 control-label">
-                                                                                                                                                                背景音乐
-                                                                            </label>
-                                                                            <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="bgMusicUrl" maxlength="200" placeholder="请输入背景音乐（建议字数在14个字以内，不超过200个字)">
-                                                                                <span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                                                                                             <div class="form-group">
-                                                                            <label class="col-md-2 control-label">
-                                                                                                                                                                <span class="label-red">*</span>
-                                                                                                                                                                点赞次数
-                                                                            </label>
-                                                                            <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="likeNum" maxlength="19" placeholder="请输入点赞次数（建议字数在14个字以内，不超过19个字)">
-                                                                                <span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                                                                                             <div class="form-group">
-                                                                            <label class="col-md-2 control-label">
-                                                                                                                                                                <span class="label-red">*</span>
-                                                                                                                                                                浏览次数
-                                                                            </label>
-                                                                            <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="hitNum" maxlength="19" placeholder="请输入浏览次数（建议字数在14个字以内，不超过19个字)">
-                                                                                <span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                                                                                             <div class="form-group">
-                                                                            <label class="col-md-2 control-label">
-                                                                                                                                                                排序
-                                                                            </label>
-                                                                            <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="sort" maxlength="10" placeholder="请输入排序（建议字数在14个字以内，不超过10个字)">
-                                                                                <span class="help-block"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                                                                                             <div class="form-group">
-                                                                            <label class="col-md-2 control-label">
-                                                                                                                                                                类型1文章2封面
-                                                                            </label>
-                                                                            <div class="col-md-10">
-                                                                                <input type="text" class="form-control" name="type" maxlength="20" placeholder="请输入类型1文章2封面（建议字数在14个字以内，不超过20个字)">
+                                                                                <input type="text" class="form-control" name="remark" maxlength="200" placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                                                                                 <span class="help-block"></span>
                                                                             </div>
                                                                         </div>

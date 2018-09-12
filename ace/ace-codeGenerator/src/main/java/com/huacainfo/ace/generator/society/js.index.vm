@@ -3,6 +3,7 @@ var params = {limit: 5};
 window.onload = function (){
     initPage();
     initEvents();
+initJuicerMethod();
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -12,6 +13,7 @@ function App() {
 function loadCustom() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
+urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
@@ -73,16 +75,16 @@ function edit(id){
 }
 
 function initEvents() {
-    $('#model-audit').on('show.bs.modal', function (event) {
+$('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
     })
-    $('#model-audit .btn-primary').on('click', function () {
-        $('#model-audit form').submit();
+$('#modal-audit .btn-primary').on('click', function () {
+$('#modal-audit form').submit();
     });
-    $('#model-audit form').ajaxForm({
+$('#modal-audit form').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 var params = {};
                 $.each(formData, function (n, obj) {
@@ -109,7 +111,7 @@ function audit(params){
         data:params,
         success:function(rst){
             stopLoad();
-            $("#audit").modal('hide');
+$("#modal-audit").modal('hide');
             alert(rst.errorMessage);
             if(rst.status == 0) {
                 getPageList();
@@ -174,4 +176,34 @@ function outline(id){
             }
         });
     }
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+juicer.register('parseStatus', parseStatus);
+}
+
+/**
+* 状态
+* 0-删除
+* 1-暂存
+* 2-提交审核
+* 3-审核通过
+* 4-审核驳回
+*/
+function parseStatus(status) {
+switch (status) {
+case '0':
+return "已删除";
+case '1':
+return "暂存";
+case '2':
+return "提交审核";
+case '3':
+return "审核通过";
+case '4':
+return "审核驳回";
+default:
+return "";
+}
 }

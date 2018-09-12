@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5};
+var params = {limit: 10};
 window.onload = function (){
     initPage();
     initEvents();
@@ -12,14 +12,15 @@ function App() {
 function loadCustom() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
+    urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
 }
-/*文章初始化分页*/
+/*线下活动初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 0,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -33,14 +34,14 @@ function initPage() {
         }
     });
 }
-/*文章条件查询*/
+/*线下活动条件查询*/
 function t_query(){
     getPageList();
     return false;
 }
-/*文章加载表格数据*/
+/*线下活动加载表格数据*/
 function getPageList() {
-    var url = contextPath+ "/article/findArticleList";
+    var url = contextPath+ "/activity/findActivityList";
     params['name']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
@@ -63,13 +64,13 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
-/*文章添加*/
+/*线下活动添加*/
 function add(type){
     window.location.href = add/index.jsp;
 }
-/*文章编辑*/
+/*线下活动编辑*/
 function edit(id){
-     window.location.href = edit/index.jsp?id='+id;
+     window.location.href = 'edit/index.jsp?id='+id;
 }
 
 function initEvents() {
@@ -99,11 +100,11 @@ function initEvents() {
 
 
 }
-/*文章审核*/
+/*线下活动审核*/
 function audit(params){
     startLoad();
     $.ajax({
-        url: contextPath + "/article/audit",
+        url: contextPath + "/activity/audit",
         type:"post",
         async:false,
         data:params,
@@ -121,12 +122,12 @@ function audit(params){
         }
     });
 }
-/*文章上架*/
+/*线下活动上架*/
 function online(id){
     if(confirm("确定要上架吗？")){
         startLoad();
         $.ajax({
-            url: contextPath + "/article/updateStatus",
+            url: contextPath + "/activity/updateStatus",
             type:"post",
             async:false,
             data:{
@@ -148,12 +149,12 @@ function online(id){
         });
     }
 }
-/*文章下架*/
+/*线下活动下架*/
 function outline(id){
     if(confirm("确定要下架吗？")){
         startLoad();
         $.ajax({
-            url: contextPath + "/article/updateStatus",
+            url: contextPath + "/activity/updateStatus",
             type:"post",
             async:false,
             data:{
