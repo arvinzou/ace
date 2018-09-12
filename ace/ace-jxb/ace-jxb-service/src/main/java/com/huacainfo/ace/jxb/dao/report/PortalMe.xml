@@ -26,7 +26,7 @@
     base_order
     WHERE
     consumerId =#{userId}
-    and category='2'
+    and category='1'
     union all
     SELECT
     'courseCmt' id,
