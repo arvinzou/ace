@@ -45,7 +45,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>课程审核</span>
+                                    <span>课程管理</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -58,7 +58,7 @@
                                         <div class="portlet light ">
                                             <div class="portlet-title">
                                                 <div class="caption">
-                                                    课程审核
+                                                    课程管理
                                                 </div>
 
 

@@ -114,7 +114,7 @@ pageEncoding="utf-8" %>
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">心里评测</h4>
+                <h4 class="widget-thumb-heading">心理评测</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-blue  icon-graduation"></i>
                     <div class="widget-thumb-body">
