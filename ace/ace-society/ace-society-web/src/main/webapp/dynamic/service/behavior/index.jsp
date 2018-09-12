@@ -235,15 +235,15 @@
             <td width="15%">附件大小</td>
             <td width="35%">\${item.fileSize}kb</td>
         </tr>
-        <tr class="largeTr">
+        <tr>
             <td width="15%">附件内容</td>
             <td colspan="3">
                 {@if item.fileType == '0'}
-                <a href="#">文本</a>
+                <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileUrl}</a>
                 {@else if item.fileType == '1'}
-                <img src="\${item.fileUrl}" style="width: 300px;height: 100px;"/>
+                <img src="\${item.fileUrl}" style="width: 300px;height: 150px;"/>
                 {@else if item.fileType == '2'}
-                <video src="\${item.fileUrl}" controls></video>
+                <video src="\${item.fileUrl}" width="300" height="150" controls></video>
                 {@/if}
             </td>
         </tr>

@@ -104,7 +104,7 @@ function audit(params){
         data:params,
         success:function(rst){
             stopLoad();
-            $("#audit").modal('hide');
+            $("#modal-audit").modal('hide');
             alert(rst.errorMessage);
             if(rst.status == 0) {
                 getPageList();

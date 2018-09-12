@@ -1,5 +1,6 @@
 .detailTable{
     width: 100%;
+    border-color: #C4C8D6;
 }
 .detailTable td, .fileTable td{
     padding-left: 10px;
@@ -8,8 +9,10 @@
     height: 30px;
 }
 .largeTr{
-    height: 100px;
+    height: 150px;
 }
 .fileTable{
     width: 100%;
+    margin-top: 10px;
+    border-color: #C4C8D6;
 }
