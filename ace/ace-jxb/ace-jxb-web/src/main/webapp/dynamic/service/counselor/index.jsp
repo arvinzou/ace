@@ -17,7 +17,6 @@
         <jsp:include page="../../common/base.jsp" />
 
         <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
         <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
         <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-sweetalert/sweetalert.css">
@@ -125,10 +124,10 @@
 
             <td>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <img src="\${item.imagePhotoUrl}" class="cover" />
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-10">
                         <div class="describtion">\${item.name}</div>
                         <div class="certification">\${item.certification}</div>
                     </div>
@@ -421,8 +420,8 @@
 </div>
     <style>
         .cover {
-            width: 70px;
-            height: 70px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
         }
 

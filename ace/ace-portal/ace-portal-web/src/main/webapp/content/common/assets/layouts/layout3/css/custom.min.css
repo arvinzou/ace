@@ -75,8 +75,17 @@ header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .ho
       color: #a2abb7;
       font-weight: 300;
 }
+
+@media(max-width:1600px){
 .container {
-    width: 65%;
+    width: 85%;
+}
+}
+
+@media(min-width:1600px){
+.container {
+    width: 70%;
+}
 }
 
 .page-header .page-header-top .page-logo .logo-default {
@@ -172,6 +181,7 @@ body{
         padding-top:10px;
         padding-bottom:3px;
         padding-left:6px;
+        valign:middle;
     }
     .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
         z-index: 3;

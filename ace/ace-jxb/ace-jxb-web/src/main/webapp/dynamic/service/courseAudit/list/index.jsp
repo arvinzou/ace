@@ -150,31 +150,31 @@
     <script id="courseTemp" type="text/template">
         {@each data as item, index}
         <tr>
-            <td width="5%" class="tdcontent">
+            <td width="5%" >
                \${parseInt(index)+1}
             </td>
            
-            <td width="20%" class="tdcontent">
+            <td width="20%" >
                 <span>\${item.name}</span>
 
             </td>
 						<td width="15%">
 								<audio src="\${item.mediUrl}" controls ></audio>
 						</td>
-            <td width="15%" class="tdcontent">
+            <td width="15%" >
                 \${item.createDate}
             </td>
-            <td width="15%" class="tdcontent">
+            <td width="15%" >
                 \${item.duration}秒
             </td>
-            <td width="10%" class="tdcontent">
+            <td width="10%" >
                 {@if item.free == '0'}
 								<span class="label label-lg label-info">是</span>
                 {@else if item.free == '1'}
                  <span class="label label-lg label-danger">否</span>
                 {@/if}
             </td>
-            <td width="20%" class="tdcontent">
+            <td width="20%" >
                 <a class="operation" href="javascript:void(0);" data-toggle="modal" data-target="#editCourseSource" onclick="preview('\${item.id}');">查看</a>
 
             </td>

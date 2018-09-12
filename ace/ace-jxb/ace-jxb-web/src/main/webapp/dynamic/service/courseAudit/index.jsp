@@ -164,8 +164,8 @@
                 </div>
             </div>
         </td>
-        <td class="tdcontent"> \${item.counselorName} </td>
-        <td  class="tdcontent">
+        <td > \${item.counselorName} </td>
+        <td  >
             {@if item.auditRst==1}
             <div>
                 {@if item.lineState == 1}
@@ -183,8 +183,8 @@
             </div>
             {@/if}
         </td>
-        <td  class="tdcontent">\${item.duration}</td>
-        <td class="tdcontent">
+        <td  >\${item.duration}</td>
+        <td >
             {@if item.auditRst==0}
             <span class="label label-lg label-info">待审核</span>
             {@else if item.auditRst==1}
