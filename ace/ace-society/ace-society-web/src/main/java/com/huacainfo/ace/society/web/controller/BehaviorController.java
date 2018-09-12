@@ -112,8 +112,8 @@ private BehaviorService behaviorService;
             */
             @RequestMapping(value = "/selectBehaviorByPrimaryKey")
             @ResponseBody
-            public SingleResult
-            <BehaviorVo> selectBehaviorByPrimaryKey(String id)throws Exception {
+            public SingleResult <BehaviorVo> selectBehaviorByPrimaryKey(String id)throws Exception {
+
                 return this.behaviorService.selectBehaviorByPrimaryKey(id);
                 }
 
