@@ -3,25 +3,30 @@
 	<div class="page-wrapper-bottom">
 		<div class="page-prefooter" style="border-radius: 0px!important;">
 			<div class="container">
+				<%
+				if(((java.util.Map)session.getAttribute("cfg")).get("qrcode")!=null){
+				%>
 				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12 footer-block">
+					<div class="col-md-9 col-sm-6 col-xs-12 footer-block">
 						<img src="${cfg.qrcode}" alt="二维码" class="qrcode-default">
-						<div style="padding-top:2px;padding-left:15px">微信公众号</div>
+						<div style="padding-top:2px;">微信公众号</div>
 					</div>
 
 
-					<div class="col-md-6 col-sm-6 col-xs-12 footer-block">
+					<div class="col-md-3 col-sm-6 col-xs-12 footer-block">
 						<div style="font-size:14px">联系我们</div>
 						<address class="margin-bottom-40">
                             电话：${cfg.tel}
 							<br>
                             邮箱：
-							<a href="mailto:${cfg.email}"> ${cfg.email}</a>
+							${cfg.email}
 							<br>
 							地址：${cfg.addr}
 						</address>
 					</div>
 				</div>
+				<%}%>
+
 			</div>
 		</div>
 		<div class="page-footer" style="border-radius: 0px!important;">
