@@ -2,7 +2,8 @@ var loading = {};
 var params = {limit: 5};
 window.onload = function (){
     initPage();
-    /*initEvents();*/
+    initEvents();
+    initDetailEvents();
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -66,16 +67,17 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
-    $('#model-audit').on('show.bs.modal', function (event) {
+    $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var modal = $(this);
+        console.log("relatedTarget"+relatedTarget);
         modal.find('.modal-body input[name=id]').val(id);
     })
-    $('#model-audit .btn-primary').on('click', function () {
-        $('#model-audit form').submit();
+    $('#modal-audit .btn-primary').on('click', function () {
+        $('#modal-audit form').submit();
     });
-    $('#model-audit form').ajaxForm({
+    $('#fm-audit').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 var params = {};
                 $.each(formData, function (n, obj) {
@@ -93,21 +95,55 @@ function initEvents() {
 
 }
 /*市民行为详情审核*/
-function audit(){
-    var param = {};
-    var
+function audit(params){
     startLoad();
     $.ajax({
         url: contextPath + "/behavior/audit",
         type:"post",
         async:false,
-        data:param,
+        data:params,
         success:function(rst){
             stopLoad();
             $("#audit").modal('hide');
             alert(rst.errorMessage);
             if(rst.status == 0) {
                 getPageList();
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+/**
+ * 详情打开事件
+ */
+function initDetailEvents() {
+    $('#modal-show').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        var modal = $(this);
+        console.log("relatedTarget"+relatedTarget);
+        modal.find('.table-body input[name=id]').val(id);
+        findDetail(id);
+    });
+}
+
+function findDetail(id){
+    startLoad();
+    $.ajax({
+        url: contextPath + "/behavior/selectBehaviorByPrimaryKey",
+        type:"post",
+        async:false,
+        data:{id: id},
+        success:function(rst){
+            if(rst.status == 0){
+                stopLoad();
+                render($('#content'), rst.value, 'tpl-detail');
+            }else{
+                alert(rst.errorMessage);
             }
         },
         error:function(){
