@@ -18,7 +18,7 @@ int insertSelective(Behavior record);
 
 int updateByPrimaryKey(Behavior record);
 
-int updateByPrimaryKeySelective(String id);
+int updateByPrimaryKeySelective(Behavior record);
 
 BehaviorVo selectVoByPrimaryKey(String id);
 
