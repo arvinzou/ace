@@ -4,7 +4,6 @@ window.onload = function () {
     initPage();
     initEvents();
     initJuicerMethod();
-
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -18,13 +17,11 @@ function loadCustom() {
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
-    console.log("===============");
-    console.log(urlParams);
 }
-/*个人信息初始化分页*/
+/*社会组织信息初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 1,
+        totalCounts: 0,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -38,14 +35,14 @@ function initPage() {
         }
     });
 }
-/*个人信息条件查询*/
+/*社会组织信息条件查询*/
 function t_query() {
     getPageList();
     return false;
 }
-/*个人信息加载表格数据*/
+/*社会组织信息加载表格数据*/
 function getPageList() {
-    var url = contextPath + "/personInfo/findPersonInfoList";
+    var url = contextPath + "/societyOrgInfo/findSocietyOrgInfoList";
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
@@ -58,10 +55,7 @@ function getPageList() {
             }
             render($("#page-list"), rst.rows, "tpl-list");
         }
-    }, function error(e) {
-
-        console.log(e);
-    });
+    })
 }
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -71,17 +65,17 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
-/*个人信息添加*/
+/*社会组织信息添加*/
 function add(type) {
     window.location.href = 'add/index.jsp';
 }
-/*个人信息编辑*/
+/*社会组织信息编辑*/
 function edit(id) {
     window.location.href = 'edit/index.jsp?id=' + id;
 }
 /*查看详情*/
 function detail(id) {
-    var url = contextPath + "/personInfo/selectPersonInfoByPrimaryKey";
+    var url = contextPath + "/societyOrgInfo/selectSocietyOrgInfoByPrimaryKey";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
@@ -89,7 +83,7 @@ function detail(id) {
             $("#detail-info").html(html);
             $("#modal-detail").modal("show");
         }
-    });
+    })
 }
 
 function initEvents() {
@@ -102,15 +96,8 @@ function initEvents() {
     $('#modal-audit .btn-primary').on('click', function () {
         $('#modal-audit form').submit();
     });
-
     $('#modal-audit form').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
-            var rstVal = $('input[name="rst"]:checked').val();
-            if (rstVal == undefined) {
-                alert("请选择审核结果!");
-                return;
-            }
-
             var params = {};
             $.each(formData, function (n, obj) {
                 params[obj.name] = obj.value;
@@ -126,11 +113,11 @@ function initEvents() {
 
 
 }
-/*个人信息审核*/
+/*社会组织信息审核*/
 function audit(params) {
     startLoad();
     $.ajax({
-        url: contextPath + "/personInfo/audit",
+        url: contextPath + "/societyOrgInfo/audit",
         type: "post",
         async: false,
         data: params,
@@ -148,12 +135,12 @@ function audit(params) {
         }
     });
 }
-/*个人信息上架*/
+/*社会组织信息上架*/
 function online(id) {
     if (confirm("确定要上架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/personInfo/updateStatus",
+            url: contextPath + "/societyOrgInfo/updateStatus",
             type: "post",
             async: false,
             data: {
@@ -175,12 +162,12 @@ function online(id) {
         });
     }
 }
-/*个人信息下架*/
+/*社会组织信息下架*/
 function outline(id) {
     if (confirm("确定要下架吗？")) {
         startLoad();
         $.ajax({
-            url: contextPath + "/personInfo/updateStatus",
+            url: contextPath + "/societyOrgInfo/updateStatus",
             type: "post",
             async: false,
             data: {
@@ -203,9 +190,11 @@ function outline(id) {
     }
 }
 
+//juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
 }
+
 /**
  * 状态
  * 0-删除

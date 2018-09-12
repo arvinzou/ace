@@ -10,8 +10,10 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.PersonInfoDao;
 import com.huacainfo.ace.society.model.PersonInfo;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.PersonInfoService;
 import com.huacainfo.ace.society.vo.PersonInfoQVo;
 import com.huacainfo.ace.society.vo.PersonInfoVo;
@@ -35,6 +37,8 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     private PersonInfoDao personInfoDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private AuditRecordService auditRecordService;
 
     /**
      * @throws
@@ -197,8 +201,12 @@ public class PersonInfoServiceImpl implements PersonInfoService {
             return new MessageResponse(ResultCode.FAIL, "个人信息丢失！");
         }
 
-        //todo 更改审核记录
-
+        //更改审核记录
+        MessageResponse auditRs = auditRecordService.audit(BisType.PERSON_INFO, personInfo.getId(),
+                personInfo.getId(), rst, remark, userProp);
+        if (ResultCode.FAIL == auditRs.getStatus()) {
+            return auditRs;
+        }
 
         personInfo.setStatus(rst);
         personInfo.setLastModifyDate(DateUtil.getNowDate());
@@ -206,9 +214,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         personInfo.setLastModifyUserName(userProp.getName());
         personInfoDao.updateByPrimaryKeySelective(personInfo);
 
-
-        dataBaseLogService.log("审核个人信息", "个人信息",
-                String.valueOf(id), String.valueOf(id), "个人信息", userProp);
+        dataBaseLogService.log("审核个人信息", "个人信息", id, id, "个人信息", userProp);
         return new MessageResponse(0, "个人信息审核完成！");
     }
 
