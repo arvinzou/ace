@@ -12,9 +12,9 @@ var imgMap = {
 }
 $(function () {
     initSwriper();
-    initMenu();
+    // initMenu();
     initList();
-    $('.menu .swiper-container_menu').on('click', 'li', sameTestTypeList);
+    $('.recommen').on('click', '.allList', sameTestTypeList);
     $('.panel .swiper-container_panel').on('click', '.swiper-slide', activeTest);
     $('#testLists').on('click', 'li', activeTest);
     $('#testListss').on('click', 'li', activeTestT);
@@ -84,12 +84,7 @@ function enterTest($that) {
 
 
 function sameTestTypeList() {
-    var $that = $(this);
-    var id = $that.data('id');
-    if (id) {
-        localStorage.removeItem('category');
-        window.location.href = 'testlist.html?id=' + id;
-    }
+        window.location.href = 'testlist.html';
 }
 
 
@@ -144,59 +139,59 @@ function initSwriper() {
     })
 }
 
-/*获取菜单数据*/
-function initMenu() {
-    var url = '/portal/www/test/selectTestTypeList.do';
-    var data = {
-        syid: syid
-    }
-    $.getJSON(url, data, function (result) {
-        viewMenu(result.rows);
-    })
-}
+// /*获取菜单数据*/
+// function initMenu() {
+//     var url = '/portal/www/test/selectTestTypeList.do';
+//     var data = {
+//         syid: syid
+//     }
+//     $.getJSON(url, data, function (result) {
+//         viewMenu(result.rows);
+//     })
+// }
 
-/*渲染菜单*/
-function viewMenu(data) {
-    var index = data.length;
-    var j = 0;
-    var z = 0;
-    var slide = menuTemplateStart;
-    for (var i = 0; i < index; i++) {
-        var li = menuTemplateli;
-        li = li.replace('[menuName]', data[i].name)
-            .replace('[menuId]', data[i].id)
-            .replace('[end]', j == 3 ? 'end' : '')
-            .replace('[urlImg]', imgMap[data[i].name] ? imgMap[data[i].name] : 'img/null.png');
-        slide = slide + li;
-        j++;
-        if (j == 4) {
-            slide = slide + menuTemplateEnd;
-            menuSwiper[0].addSlide(z, slide);
-            slide = menuTemplateStart;
-            j = 0;
-            z++;
-        }
-    }
-    if (j != 0) {
-        slide = slide + menuTemplateEnd;
-        menuSwiper[0].addSlide(z, slide);
-    }
-}
+// /*渲染菜单*/
+// function viewMenu(data) {
+//     var index = data.length;
+//     var j = 0;
+//     var z = 0;
+//     var slide = menuTemplateStart;
+//     for (var i = 0; i < index; i++) {
+//         var li = menuTemplateli;
+//         li = li.replace('[menuName]', data[i].name)
+//             .replace('[menuId]', data[i].id)
+//             .replace('[end]', j == 3 ? 'end' : '')
+//             .replace('[urlImg]', imgMap[data[i].name] ? imgMap[data[i].name] : 'img/null.png');
+//         slide = slide + li;
+//         j++;
+//         if (j == 4) {
+//             slide = slide + menuTemplateEnd;
+//             menuSwiper[0].addSlide(z, slide);
+//             slide = menuTemplateStart;
+//             j = 0;
+//             z++;
+//         }
+//     }
+//     if (j != 0) {
+//         slide = slide + menuTemplateEnd;
+//         menuSwiper[0].addSlide(z, slide);
+//     }
+// }
 
 var bannerTemplate = '<div class="swiper-slide" data-id="[id]"><img src="[imgUrl]"></div>';
 
-var menuTemplateStart = '<div class="swiper-slide">' +
-    '                        <ul class="page">';
-
-var menuTemplateEnd = '</ul>' +
-    '                    </div>';
-
-var menuTemplateli = '<li class="[end]" data-id="[menuId]">' +
-    '                                <div>' +
-    '                                    <img src="[urlImg]"/>' +
-    '                                </div>' +
-    '                                <p>[menuName]</p>' +
-    '                            </li>';
+// var menuTemplateStart = '<div class="swiper-slide">' +
+//     '                        <ul class="page">';
+//
+// var menuTemplateEnd = '</ul>' +
+//     '                    </div>';
+//
+// var menuTemplateli = '<li class="[end]" data-id="[menuId]">' +
+//     '                                <div>' +
+//     '                                    <img src="[urlImg]"/>' +
+//     '                                </div>' +
+//     '                                <p>[menuName]</p>' +
+//     '                            </li>';
 
 
 
