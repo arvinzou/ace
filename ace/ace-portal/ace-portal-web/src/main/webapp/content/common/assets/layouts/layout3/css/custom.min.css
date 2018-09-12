@@ -179,7 +179,7 @@ body{
     }
     .table>tbody>tr>td {
         padding-top:10px;
-        padding-bottom:3px;
+        padding-bottom:10px;
         padding-left:6px;
         valign:middle;
     }

@@ -427,7 +427,6 @@
 
         .describtion {
             padding-left: 15px;
-            height: 50px;
         }
 
         .certification {
