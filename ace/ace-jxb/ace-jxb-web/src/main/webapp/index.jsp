@@ -177,7 +177,7 @@ pageEncoding="utf-8" %>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-blue icon-basket-loaded"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">总收益</span>
+                        <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.evaluatOrder}">\${data.evaluatOrder}</span>
                     </div>
                 </div>
