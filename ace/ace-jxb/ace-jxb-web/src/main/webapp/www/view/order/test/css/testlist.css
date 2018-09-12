@@ -173,12 +173,10 @@ body {
     top: 0;
 }
 
-.sort {
-    top: 1.066666rem
-}
+
 
 .recommen {
-    padding: 2.133333rem 0 1.066666rem;
+    padding: 1.077rem 0 1.066666rem;
     height: 100%;
     overflow: auto;
     background-color: #fff;
