@@ -1,17 +1,6 @@
 function App(){
-	$.ajax({
-		type : "post",
-		url : contextPath + '/anslysis/query.do',
-		data:{reportId:"portal"},
-		success : function(rst) {
-		    var data={};
-			$.each(rst.value, function(i,o) {
-				data[o.id]=o.value;
-			});
-			console.log(data);
-			render($(".page-content-inner"), data, "tpl-portal")
-		}
-	});
+
+
 }
 
 /*页面渲染*/
@@ -22,3 +11,19 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
+
+ window.onload=function(){
+        $.ajax({
+    		type : "post",
+    		url : contextPath + '/anslysis/query.do',
+    		data:{reportId:"portal"},
+    		success : function(rst) {
+    		    var data={};
+    			$.each(rst.value, function(i,o) {
+    				data[o.id]=o.value;
+    			});
+    			console.log(data);
+    			render($(".page-content-inner"), data, "tpl-portal")
+    		}
+    	});
+    }
