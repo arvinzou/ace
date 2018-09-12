@@ -55,8 +55,8 @@
             <p class="course_title">授课时长(时)</p>
             </div>
             <div class="col-xs-4 col-sm-4 statics">
-            <p class="score_num">\${data.counselorVo.level}</p>
-            <p class="score_title">评分</p>
+            <p class="score_num">\${data.counselorVo.peopleNum}</p>
+            <p class="score_title">服务次数</p>
             </div>
             </div>
             <div class="row">
