@@ -93,7 +93,7 @@ function initList() {
     var url = '/portal/www/test/getEvaluatTplList.do';
     var data = {
         page: 1,
-        limit: 20,
+        limit: 8,
         syid: syid
     };
     $.getJSON(url, data, function (result) {
