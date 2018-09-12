@@ -60,6 +60,10 @@ var buildMenu = function(menus) {
 	var htmlFrame = buildMenuHtml(menus);
 	$('#menu').empty().append(htmlFrame);
 
+	 loader({path:portalPath,url:'/content/common/assets/global/scripts/app.min.js',type:'js',callback:function(){
+        loader({path:portalPath,url:'/content/common/assets/layouts/layout/scripts/layout.min.js',type:'js'});
+     }});
+
 	$('#menu a[url]').bind('click', function() {
 		var url = $(this).attr("url");
 
@@ -129,3 +133,10 @@ function initMenu(){
      }
 
 }
+
+jQuery(function($) {
+     $("body").addClass("page-header-fixed page-sidebar-closed-hide-logo page-content-white");
+     initMenu();
+
+});
+
