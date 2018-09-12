@@ -6,9 +6,9 @@
     'course' id,
     count(1) value
     FROM
-    course
+    course t inner join course_audit a on t.id=a.courseId
     WHERE
-    createUserId =#{userId}
+    t.createUserId =#{userId} and a.rst='1'
     union all
     SELECT
     'courseOrder' id,
@@ -17,7 +17,7 @@
     base_order
     WHERE
     consumerId =#{userId}
-    and category='2'
+    and category='2' and payStatus in('2','6','7')
     union all
     SELECT
     'counselorOrder' id,
@@ -26,7 +26,7 @@
     base_order
     WHERE
     consumerId =#{userId}
-    and category='1'
+    and category='1' and payStatus in('2','6','7')
     union all
     SELECT
     'courseCmt' id,

@@ -46,7 +46,7 @@
                                                                 <i class="fa fa-circle"></i>
                                                             </li>
                                                             <li>
-                                                                <span>工作室</span>
+                                                                <span>工作室管理</span>
                                                             </li>
                                                         </ul>
                             
@@ -59,29 +59,25 @@
                                             <div class="portlet light ">
                                                 <div class="portlet-title">
                                                     <div class="caption">
-                                                        工作室
+                                                        工作室管理
                                                     </div>
-                                                </div>
-                                                <div class="portlet-body">
-                                                    <div class="row">
-                                                        <div class="col-sm-8">
-
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       class="form-control input-circle-left"
-                                                                       placeholder="请输入工作室名称">
-                                                                <span class="input-group-btn">
+                                                    <div class="actions">
+                                                        <div class="input-group">
+                                                            <input type="text"
+                                                                   class="form-control input-circle-left"
+                                                                   placeholder="请输入工作室名称">
+                                                            <span class="input-group-btn">
                                                                 <button class="btn btn-circle-right btn-default search_btn"
                                                                         type="submit">
                                                                         搜索
                                                                 </button>
                                                             </span>
-                                                            </div>
                                                         </div>
 
                                                     </div>
+                                                </div>
+                                                <div class="portlet-body">
+
                                                     <div class="table-scrollable">
                                                         <table class="table table-hover">
                                                             <thead>

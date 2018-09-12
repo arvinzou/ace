@@ -78,7 +78,7 @@ pageEncoding="utf-8" %>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-purple icon-layers"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-subtitle">累计已审核</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.course}">\${data.course}</span>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ pageEncoding="utf-8" %>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-red  icon-basket-loaded"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-subtitle">累计有效</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.counselorOrder}">\${data.counselorOrder}</span>
                     </div>
                 </div>
@@ -120,7 +120,7 @@ pageEncoding="utf-8" %>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-purple icon-basket-loaded"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-subtitle">累计有效</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.courseOrder}">\${data.courseOrder}</span>
                     </div>
                 </div>

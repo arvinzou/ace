@@ -63,12 +63,34 @@
 
 
                                                 <div class="actions">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <form onsubmit="return t_query()">
+                                                                <div class="input-group">
+                                                                    <input type="text"
+                                                                           name="keyword"
+                                                                           class="form-control input-circle-left"
+                                                                           placeholder="请输入课程名称">
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn btn-circle-right btn-default search_btn"
+                                                                                type="submit">
+                                                                                搜索
+                                                                        </button>
+                                                                    </span>
 
+                                                                </div>
 
-                                                    <div class="create_course" id="createCourse">
-                                                        <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
-                                                        <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-md-4" id="createCourse">
+                                                            <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
+                                                            <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
+                                                        </div>
+
                                                     </div>
+
+
+
 
                                                 </div>
                                             </div>
@@ -85,28 +107,7 @@
                                                     </ul>
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="tab_15_1">
-                                                            <div class="row">
-                                                                <div class="col-sm-8">
 
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <form onsubmit="return t_query()">
-                                                                    <div class="input-group">
-                                                                        <input type="text"
-                                                                               name="keyword"
-                                                                               class="form-control input-circle-left"
-                                                                               placeholder="请输入课程名称">
-                                                                        <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
-                                                                        type="submit">
-                                                                        搜索
-                                                                </button>
-                                                            </span>
-                                                                    </div>
-                                                                    </form>
-                                                                </div>
-
-                                                            </div>
 
 
 
