@@ -24,10 +24,8 @@
                 <div class="col-xs-12 col-md-12"><h3>\${data.name}</h3></div>
             </div>
             <div class="row content">
-                <div class="col-xs-12 col-md-12">
-                    <p>
-                        \$\${data.introduction}
-                    </p>
+                <div class="col-xs-12 col-md-12" style="word-wrap:break-word;word-break:break-all;">
+                    \$\${data.introduction}
                 </div>
             </div>
         </script>
