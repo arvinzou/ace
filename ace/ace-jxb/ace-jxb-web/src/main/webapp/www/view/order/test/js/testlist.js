@@ -1,10 +1,11 @@
 var mySwiper, category, syid = 'jxb';
 $(function () {
-    initCategory();
-    initSwriper();
-    initMenu();
+    // initCategory();
+    // initSwriper();
+    // initMenu();
+    initList();
     /*顶部点击菜单*/
-    $('.menu').on('click', '.swiper-slide', changeTestType);
+    // $('.menu').on('click', '.swiper-slide', changeTestType);
     $('.sort').on('click', '.sortoption', showSort);
     $('.cover').on('click', hiddenSort);
     $('.sort').on('click', '.option', changeSort);
@@ -22,10 +23,10 @@ function activeTest() {
 }
 
 
-/*确定类型*/
-function initCategory() {
-    category = localStorage.getItem('category') ? localStorage.getItem('category') : parseQueryString("id");
-}
+// /*确定类型*/
+// function initCategory() {
+//     category = localStorage.getItem('category') ? localStorage.getItem('category') : parseQueryString("id");
+// }
 
 
 /*初始化测试列表*/
@@ -34,9 +35,9 @@ function initList(sord, orderBy) {
     var data = {
         orderBy: orderBy,
         sord: sord,
-        category: category,
+        // category: category,
         page: 1,
-        limit: 20,
+        limit: 100,
         syid: syid
     };
     $.getJSON(url, data, function (result) {
@@ -57,32 +58,32 @@ function viewList(data) {
 }
 
 
-/*解析地址参数*/
-function parseQueryString(prop) {
-    var obj = {};
-    var url = window.location.href;
-    var start = url.indexOf("?") + 1;
-    var str = url.substr(start);
-    var arr = str.split("&");
-    for (var i = 0; i < arr.length; i++) {
-        var arr2 = arr[i].split("=");
-        obj[arr2[0]] = arr2[1];
-    }
-    return obj[prop];
-}
+// /*解析地址参数*/
+// function parseQueryString(prop) {
+//     var obj = {};
+//     var url = window.location.href;
+//     var start = url.indexOf("?") + 1;
+//     var str = url.substr(start);
+//     var arr = str.split("&");
+//     for (var i = 0; i < arr.length; i++) {
+//         var arr2 = arr[i].split("=");
+//         obj[arr2[0]] = arr2[1];
+//     }
+//     return obj[prop];
+// }
 
 
-/*获取菜单数据*/
-function initMenu() {
-    var url = '/portal/www/test/selectTestTypeList.do';
-    var data = {
-        syid: syid
-    }
-    $.getJSON(url, data, function (result) {
-        viewMenu(result.rows);
-    })
-    initList();
-}
+// /*获取菜单数据*/
+// function initMenu() {
+//     var url = '/portal/www/test/selectTestTypeList.do';
+//     var data = {
+//         syid: syid
+//     }
+//     $.getJSON(url, data, function (result) {
+//         viewMenu(result.rows);
+//     })
+//     initList();
+// }
 
 /*渲染菜单*/
 function viewMenu(data) {
@@ -138,12 +139,12 @@ function showSort() {
 //	$('body').css('overflow','hidden');
 }
 
-function changeTestType() {
-    var $that = $(this);
-    category = $that.data("id");
-    localStorage.setItem('category', category);
-    $that.siblings().removeClass('action');
-    $that.addClass('action');
-    silperCenter();
-    initList();
-}
+// function changeTestType() {
+//     var $that = $(this);
+//     category = $that.data("id");
+//     localStorage.setItem('category', category);
+//     $that.siblings().removeClass('action');
+//     $that.addClass('action');
+//     silperCenter();
+//     initList();
+// }
