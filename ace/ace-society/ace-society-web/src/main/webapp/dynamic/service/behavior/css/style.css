@@ -1,0 +1,15 @@
+.detailTable{
+    width: 100%;
+}
+.detailTable td, .fileTable td{
+    padding-left: 10px;
+}
+.smallTr{
+    height: 30px;
+}
+.largeTr{
+    height: 100px;
+}
+.fileTable{
+    width: 100%;
+}
