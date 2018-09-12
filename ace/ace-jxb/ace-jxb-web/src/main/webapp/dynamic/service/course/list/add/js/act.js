@@ -54,7 +54,7 @@ function save(params) {
 			alert(result.errorMessage);
 			if(result.status==0){
                 if(findCourseSrcCountByCourseId(urlParams.courseId) > 1){
-                    updateCourseType(urlParams.courseId);
+                    //updateCourseType(urlParams.courseId);
                 }
 				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?id="+urlParams.courseId
 			}
@@ -167,7 +167,7 @@ function findCourseSrcCountByCourseId(courseId){
  * @param courseId
  */
 function updateCourseType(courseId){
-    $.ajax({
+    /*$.ajax({
         url: contextPath + "/course/updateCourse",
         type: "post",
         async: false,
@@ -185,7 +185,7 @@ function updateCourseType(courseId){
         error: function () {
             alert("系统服务内部异常！");
         }
-    });
+    });*/
 }
 
 function initUpload(){

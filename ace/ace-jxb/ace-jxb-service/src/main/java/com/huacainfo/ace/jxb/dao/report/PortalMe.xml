@@ -1,61 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.jxb.dao.report.Portal">
+<mapper namespace="com.huacainfo.ace.jxb.dao.report.PortalMe">
   <select id="query" resultType="map">
     SELECT
     'course' id,
     count(1) value
     FROM
     course
+    WHERE
+    createUserId =#{userId}
     union all
     SELECT
     'courseOrder' id,
     count(1) value
     FROM
     base_order
-    where category='2'
+    WHERE
+    consumerId =#{userId}
+    and category='2'
     union all
     SELECT
     'counselorOrder' id,
     count(1) value
     FROM
     base_order
-    where category='1'
-
-    union all
-    SELECT
-    'evaluatOrder' id,
-    count(1) value
-    FROM
-    base_order
-    where category='3'
+    WHERE
+    consumerId =#{userId}
+    and category='1'
     union all
     SELECT
     'courseCmt' id,
     count(1) value
     FROM
-    course_cmt
-
-    union all
-    SELECT
-    'counselor' id,
-    count(1) value
-    FROM
-    counselor
-
-    union all
-    SELECT
-    'studio' id,
-    count(1) value
-    FROM
-    studio
-
-    union all
-    SELECT
-    'evaluat_tpl' id,
-    count(1) value
-    FROM
-    portal.evaluat_tpl
-
+    course_cmt t INNER join course a on t.courseId=a.id
+    WHERE
+    a.createUserId =#{userId}
   </select>
 </mapper>

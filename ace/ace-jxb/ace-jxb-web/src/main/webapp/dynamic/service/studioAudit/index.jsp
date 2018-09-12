@@ -46,7 +46,7 @@
                                                                 <i class="fa fa-circle"></i>
                                                             </li>
                                                             <li>
-                                                                <span>岗位配置</span>
+                                                                <span>工作室</span>
                                                             </li>
                                                         </ul>
                             
