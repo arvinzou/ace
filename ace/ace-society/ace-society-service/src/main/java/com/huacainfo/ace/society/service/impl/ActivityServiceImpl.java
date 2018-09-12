@@ -52,7 +52,7 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public PageResult<ActivityVo> findActivityList(ActivityQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<ActivityVo> rst = new PageResult<>();
-        List<ActivityVo> list = this.activityDao.findList(condition, start,limit, orderBy);
+        List<ActivityVo> list = this.activityDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.activityDao.findCount(condition);
@@ -133,6 +133,33 @@ public class ActivityServiceImpl implements ActivityService {
                 o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更线下活动完成！");
+    }
+
+    /**
+     * @throws
+     * @Title:updateActivity
+     * @Description: TODO(更新线下活动)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @Override
+    public MessageResponse softDelete(Activity o, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键-GUID不能为空！");
+        }
+        o.setStatus("0");
+        o.setLastModifyDate(new Date());
+        o.setLastModifyUserName(userProp.getName());
+        o.setLastModifyUserId(userProp.getUserId());
+        this.activityDao.updateByPrimaryKeySelective(o);
+        this.dataBaseLogService.log("删除线下活动", "线下活动", "",
+                o.getId(), o.getId(), userProp);
+
+        return new MessageResponse(0, "删除线下活动完成！");
     }
 
     /**

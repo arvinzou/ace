@@ -3,7 +3,14 @@ package com.huacainfo.ace.society.service.impl;
 
 import java.util.Date;
 import java.util.List;
+
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.society.dao.BehaviorAnnexDao;
+import com.huacainfo.ace.society.model.BehaviorAnnex;
+import com.huacainfo.ace.society.vo.BehaviorAnnexQVo;
+import com.huacainfo.ace.society.vo.BehaviorAnnexVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +39,8 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 private BehaviorDao behaviorDao;
 @Autowired
 private DataBaseLogService dataBaseLogService;
+@Autowired
+private BehaviorAnnexDao behaviorAnnexDao;
 
 /**
 *
@@ -82,17 +91,17 @@ private DataBaseLogService dataBaseLogService;
                 public MessageResponse insertBehavior(Behavior o, UserProp userProp) throws Exception {
 
                 if (CommonUtils.isBlank(o.getId())) {
-return new MessageResponse(1, "主键-GUID不能为空！");
-}
-if (CommonUtils.isBlank(o.getTitle())) {
-return new MessageResponse(1, "标题不能为空！");
-}
-if (CommonUtils.isBlank(o.getUserId())) {
-return new MessageResponse(1, "提交人不能为空！");
-}
-if (CommonUtils.isBlank(o.getSubmitDate())) {
-return new MessageResponse(1, "反馈日期不能为空！");
-}
+                    return new MessageResponse(1, "主键-GUID不能为空！");
+                }
+                if (CommonUtils.isBlank(o.getTitle())) {
+                    return new MessageResponse(1, "标题不能为空！");
+                }
+                if (CommonUtils.isBlank(o.getUserId())) {
+                    return new MessageResponse(1, "提交人不能为空！");
+                }
+                if (CommonUtils.isBlank(o.getSubmitDate())) {
+                    return new MessageResponse(1, "反馈日期不能为空！");
+                }
 
 
                 int temp = this.behaviorDao.isExit(o);
@@ -143,7 +152,7 @@ return new MessageResponse(1, "反馈日期不能为空！");
                 o.setLastModifyDate(new Date());
                 o.setLastModifyUserName(userProp.getName());
                 o.setLastModifyUserId(userProp.getUserId());
-                this.behaviorDao.updateByPrimaryKeySelective(o.getId());
+                this.behaviorDao.updateByPrimaryKeySelective(o);
                 this.dataBaseLogService.log("变更市民行为详情", "市民行为详情", "",
                 o.getId(), o.getId(), userProp);
 
@@ -164,11 +173,17 @@ return new MessageResponse(1, "反馈日期不能为空！");
                 @Override
                 public SingleResult
                 <BehaviorVo> selectBehaviorByPrimaryKey(String id) throws Exception {
-                    SingleResult
-                    <BehaviorVo> rst = new SingleResult<>();
-                        rst.setValue(this.behaviorDao.selectVoByPrimaryKey(id));
-                        return rst;
-                        }
+                    SingleResult<BehaviorVo> rst = new SingleResult<>();
+                    BehaviorVo behaviorVo = behaviorDao.selectVoByPrimaryKey(id);
+
+                    //市民随手拍详情
+                    BehaviorAnnexQVo annexQVo = new BehaviorAnnexQVo();
+                    annexQVo.setBehaviorId(id);
+                    List<BehaviorAnnexVo> annexList = behaviorAnnexDao.findList(annexQVo,0, 99, null);
+                    behaviorVo.setBehaviorAnnexList(annexList);
+                    rst.setValue(behaviorVo);
+                    return rst;
+                }
 
                         /**
                         *
@@ -207,15 +222,22 @@ return new MessageResponse(1, "反馈日期不能为空！");
                         * @version: 2018-09-11
                         */
                         @Override
-                        public MessageResponse audit(String id,String rst, String remark,
-                        UserProp userProp) throws Exception {
+                        public MessageResponse audit(String id,String rst, String remark, UserProp userProp) throws Exception {
+                            Behavior behavior = behaviorDao.selectByPrimaryKey(id);
+                            if (null == behavior) {
+                                return new MessageResponse(ResultCode.FAIL, "市民文明拍信息丢失！");
+                            }
 
-                        behaviorDao.updateByPrimaryKeySelective(id);
+                            //todo 更改审核记录
+                            behavior.setStatus(rst);
+                            behavior.setLastModifyDate(DateUtil.getNowDate());
+                            behavior.setLastModifyUserId(userProp.getUserId());
+                            behavior.setLastModifyUserName(userProp.getName());
+                            behaviorDao.updateByPrimaryKeySelective(behavior);
 
-
-                        dataBaseLogService.log("审核市民行为详情", "市民行为详情",
-                        String.valueOf(id), String.valueOf(id), "市民行为详情", userProp);
-                        return new MessageResponse(0, "市民行为详情审核完成！");
+                            dataBaseLogService.log("审核市民行为详情", "市民行为详情",
+                            String.valueOf(id), String.valueOf(id), "市民行为详情", userProp);
+                            return new MessageResponse(0, "市民行为详情审核完成！");
                         }
 
                         }

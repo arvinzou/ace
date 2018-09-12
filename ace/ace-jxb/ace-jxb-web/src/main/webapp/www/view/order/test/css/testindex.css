@@ -185,7 +185,7 @@
 
 span.allList {
     color: #333;
-    background-color: #ccc;
+    background-color: rgba(206, 204, 204, 0.28);;
     line-height: 0.75rem;
     height: 0.7rem;
     width: 1.5rem;

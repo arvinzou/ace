@@ -82,10 +82,12 @@
                                                     <table class="table table-hover">
                                                         <thead>
                                                         <tr>
-                                                            <th width="45%">活动名称</th>
+                                                            <th width="40%">活动名称</th>
                                                             <th width="20%">活动类型</th>
-                                                            <th width="10%">开展时间</th>
-                                                            <th width="10%">活动组织者</th>
+                                                            <th width="20%">开展时间</th>
+                                                            <th width="5%">活动组织者</th>
+                                                            <th width="10%">活动状态</th>
+                                                            <th width="15%">操作</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody id="page-list">
@@ -118,60 +120,33 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-
         <td>
-            <div class="row">
-                <div class="col-md-3"><img src="\${item.cover}" class="cover"/></div>
-                <div class="col-md-9">
-                    <div class="describtion">\${item.name}</div>
-                    <div class="cost">\${item.srcCount}节
-                        {@if item.costType != '0'}
-                        ￥\${item.cost}
-                        {@else}
-                        免费
-                        {@/if}
-                    </div>
-                </div>
-            </div>
+            \${item.title}
         </td>
-
         <td>
-            {@if item.auditRst==1}
-            <div>
-                {@if item.lineState == 1}
-                \${item.onlineDate}
-                {@else}
-                \${item.offlineDate}
-                {@/if}
-            </div>
-            <div style="padding:10px">
-                {@if item.lineState!=1}
-                <span style="color:red">已下架</span>
-                {@else}
-                <a href="#">已上架</a>
-                {@/if}
-            </div>
-            {@/if}
+            \${item.category}
         </td>
-        <td>\${item.duration}</td>
         <td>
-            {@if item.status==0}
+            \${item.startDate}
+        </td>
+        <td>\${item.initiatorId}</td>
+        <td>
+            {@if item.status==2}
             <span class="label label-lg label-info">待审核</span>
-            {@else if item.status==1}
+            {@else if item.status==3}
             <span class="label label-lg label-success">审核通过</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">审核不通过</span>
+            {@else if item.status==4}
+            <span class="label label-lg label-success">审核不通过</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@/if}
         </td>
         <td>
-            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:del('\${item.id}');">删除</a>
-            {@if item.status==0}
-            <a class="operation" href="javascript:void(0);" data-toggle="modal" data-target="#modal-audit"
-               data-id="\${item.id}">审核</a>
+            <a class="operation" href="#" onclick="etails('\${item.id}');">查看</a>
+            {@if item.status == '2'}
+            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
+            <a class="operation" href="#" onclick="deleteData('\${item.id}');">删除</a>
         </td>
     </tr>
     {@/each}
@@ -195,7 +170,7 @@
                             <div class="col-md-10">
                                 <div class="radio-group-container">
                                     <label>
-                                        <input type="radio" name="rst" value="1"><span style="padding:10px">通过</span>
+                                        <input type="radio" checked name="rst" value="1"><span style="padding:10px">通过</span>
                                     </label>
                                     <label>
                                         <input type="radio" name="rst" value="2"><span style="padding:10px">退回</span>
