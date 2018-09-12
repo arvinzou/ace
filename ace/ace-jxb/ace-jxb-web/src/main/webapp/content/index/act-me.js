@@ -2,7 +2,7 @@ function App(){
 	$.ajax({
 		type : "post",
 		url : contextPath + '/anslysis/query.do',
-		data:{reportId:"portalMe"},
+		data:{reportId:"portalMe",userId:userProp.userId},
 		success : function(rst) {
 		    var data={};
 			$.each(rst.value, function(i,o) {
