@@ -121,6 +121,13 @@ function uploadObject() {
     	var percent = file.percent;
         $('.crop-progress .progress-bar').width(percent+'%');
     });
+	/*上传完成之后*/
+    uploaderCropimg.bind('UploadComplete', function (uploaderCropimg, file) {
+        $('.crop-progress .progress-bar').width('0%');
+    	$('#cropModal').modal('hide');
+    });
+
+
     
     /*错误提示*/
     uploaderCropimg.bind('Error', function (up, err) {
@@ -202,7 +209,8 @@ function cropObject() {
 		onChange: updatePreview, //改变
 		onSelect: updatePreview, //选择框选时
 		boxWidth: 500, //画布宽度
-		aspectRatio: xsize / ysize //选框高宽比
+		aspectRatio: xsize / ysize, //选框高宽比
+        setSelect: [0, 0, 200, 200]
 	}, function() {
 		var bounds = this.getBounds();
 		boundx = bounds[0];
