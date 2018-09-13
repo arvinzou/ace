@@ -53,9 +53,14 @@ function initPage() {
     });
 }
 function changeType(status){
-  params['status'] = status;
+  params['regAuditRst'] = status;
   getPageList();
 }
+function changeConsultState(status){
+  params['consultState'] = status;
+  getPageList();
+}
+
 function t_query() {
     getPageList();
     return false;

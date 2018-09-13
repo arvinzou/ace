@@ -2833,24 +2833,24 @@ fieldset[disabled] a.btn {
   border-color: #ccc; }
   .btn-default:focus, .btn-default.focus {
     color: #333;
-    background-color: #e6e6e6;
-    border-color: #8c8c8c; }
+    background-color: #f2f2f2;
+    border-color: #ccc; }
   .btn-default:hover {
     color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad; }
+    background-color: #f2f2f2;
+    border-color: #ccc; }
   .btn-default:active, .btn-default.active,
   .open > .btn-default.dropdown-toggle {
     color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad; }
+    background-color: #f2f2f2;
+    border-color: #ccc; }
     .btn-default:active:hover, .btn-default:active:focus, .btn-default:active.focus, .btn-default.active:hover, .btn-default.active:focus, .btn-default.active.focus,
     .open > .btn-default.dropdown-toggle:hover,
     .open > .btn-default.dropdown-toggle:focus,
     .open > .btn-default.dropdown-toggle.focus {
       color: #333;
       background-color: #d4d4d4;
-      border-color: #8c8c8c; }
+      border-color: #ccc; }
   .btn-default:active, .btn-default.active,
   .open > .btn-default.dropdown-toggle {
     background-image: none; }

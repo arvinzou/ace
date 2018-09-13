@@ -40,8 +40,12 @@
                                                             <div class="col-md-6">
                                                                 <form onsubmit="return t_query()">
                                                                     <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                        <button type="button" class="btn btn-default"  onclick="changeType('1');">待审核</button>
-                                                                        <button type="button" class="btn btn-default" onclick="changeType('2');">已审核</button>
+                                                                        <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">已上架</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeConsultState('-1');">已下架</button>
+                                                                    </div>
+                                                                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                        <button type="button" class="btn btn-default"  onclick="changeType('0');">待审核</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('1');">已审核</button>
                                                                     </div>
 
 
