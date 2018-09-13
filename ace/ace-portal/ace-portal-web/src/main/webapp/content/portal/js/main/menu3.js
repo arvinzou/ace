@@ -146,10 +146,10 @@ var buildMenu = function(menus) {
 	var activeNode=$("#menu .active");
 	 console.log(activeNode);
          if(urlParams.id){
-            $(activeNode).parent().css('display','none');
+            //$(activeNode).parent().css('display','block');
              $(activeNode).parent().parent().addClass("active");
 
-             $(activeNode).parent().parent().parent().css('display','block');
+             //$(activeNode).parent().parent().parent().css('display','block');
              $(activeNode).parent().parent().parent().parent().addClass("active");
 
              var title=$(activeNode).find("a small").html();
