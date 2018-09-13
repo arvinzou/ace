@@ -17,7 +17,7 @@ $("#pg").propertygrid({
                                             {
                                                 case '1':
                                                     return '菜单在左侧';
-                                                case '2':
+                                                case '3':
                                                     return '菜单在顶部';
                                                 default:
                                                     return value;

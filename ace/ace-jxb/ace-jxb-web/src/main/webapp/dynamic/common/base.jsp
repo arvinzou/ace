@@ -13,4 +13,11 @@
 </script>
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}" />
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/css/components.min.css" />
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/layout.min.css" />
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/themes/default.min.css"/>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/custom.min.css" />
 
