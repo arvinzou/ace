@@ -17,6 +17,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.society.dao.$!{bean.name}Dao;
 import com.huacainfo.ace.society.model.$!{bean.name};
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.$!{bean.name}Service;
 import com.huacainfo.ace.society.vo.$!{bean.name}Vo;
 import com.huacainfo.ace.society.vo.$!{bean.name}QVo;
@@ -32,6 +33,8 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 private $!{bean.name}Dao $!{bean.lowerName}Dao;
 @Autowired
 private DataBaseLogService dataBaseLogService;
+@Autowired
+private AuditRecordService auditRecordService;
 
 /**
 *
@@ -185,7 +188,24 @@ private DataBaseLogService dataBaseLogService;
                         public MessageResponse audit(String id,String rst, String remark,
                         UserProp userProp) throws Exception {
 
-                        $!{bean.lowerName}Dao.updateByPrimaryKeySelective(id);
+                        $!{bean.name} obj = $!{bean.lowerName}Dao.selectByPrimaryKey(id);
+                        if (obj == null) {
+                        return new MessageResponse(ResultCode.FAIL, "$!{bean.tableChineseName}数据丢失");
+                        }
+
+                        //更改审核记录
+                        MessageResponse auditRs =
+                        auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId(), rst, remark,
+                        userProp);
+                        if (ResultCode.FAIL == auditRs.getStatus()) {
+                        return auditRs;
+                        }
+
+                        obj.setStatus(rst);
+                        obj.setLastModifyDate(DateUtil.getNowDate());
+                        obj.setLastModifyUserId(userProp.getUserId());
+                        obj.setLastModifyUserName(userProp.getName());
+                        $!{bean.lowerName}Dao.updateByPrimaryKeySelective(obj);
 
 
                         dataBaseLogService.log("审核$!{bean.tableChineseName}", "$!{bean.tableChineseName}",
