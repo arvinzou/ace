@@ -229,6 +229,7 @@ private BehaviorAnnexDao behaviorAnnexDao;
                             }
 
                             //todo 更改审核记录
+                            behavior.setId(id);
                             behavior.setStatus(rst);
                             behavior.setLastModifyDate(DateUtil.getNowDate());
                             behavior.setLastModifyUserId(userProp.getUserId());
