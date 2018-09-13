@@ -52,7 +52,10 @@ function initPage() {
         }
     });
 }
-
+function changeType(status){
+  params['status'] = status;
+  getPageList();
+}
 function t_query() {
     getPageList();
     return false;
