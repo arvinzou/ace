@@ -59,7 +59,7 @@ jQuery(function ($) {
     $pimg = $('.preview-pane img');
     xsize = 300;
     ysize = 300;
-    preImg('/jxb/content/service/information/img/left_pic_two.jpg');
+    preImg('/society/content/common/img/addImg1.png');
 });
 
 //3、将本地图片 显示到浏览器上
@@ -185,7 +185,7 @@ function initEvents() {
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
-        preImg('/jxb/content/service/information/img/left_pic_two.jpg');
+        preImg('/society/content/common/img/addImg1.png');
     });
 }
 
@@ -301,7 +301,7 @@ function resetSize(x, y) {
     xsize = x;
     ysize = y;
     console.log(xsize + "/" + ysize);
-    preImg('/jxb/content/service/information/img/left_pic_two.jpg');
+    preImg('/society/content/common/img/addImg1.png');
 }
 
 // function initUpload1() {

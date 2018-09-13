@@ -132,7 +132,7 @@ public class PersonInfoController extends SocietyBaseController {
      * @Description: TODO(审核个人信息)
      * @param: @param id bean.id
      * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param remark 审核备注
+     * @param: @param message 审核备注
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: Arvin
@@ -140,8 +140,8 @@ public class PersonInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse audit(String id, String rst, String remark) throws Exception {
+    public MessageResponse audit(String id, String rst, String message) throws Exception {
 
-        return this.personInfoService.audit(id, rst, remark, this.getCurUserProp());
+        return this.personInfoService.audit(id, rst, message, this.getCurUserProp());
     }
 }
