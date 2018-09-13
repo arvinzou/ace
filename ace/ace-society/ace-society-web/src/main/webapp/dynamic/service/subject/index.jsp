@@ -144,6 +144,7 @@
         </td>
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
              {@/if}
@@ -154,58 +155,55 @@
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
     <table class="table table-bordered table-hover">
-                                    <tr>
-                    <td class="active"> 主键-GUID</td>
-                    <td class="success"> \&{data.id}</td>
-                </tr>
-                            <tr>
+                <tr>
                     <td class="active"> 议题标题</td>
-                    <td class="success"> \&{data.title}</td>
+                    <td class="success"> \${data.title}</td>
                 </tr>
                             <tr>
                     <td class="active"> 议题描述</td>
-                    <td class="success"> \&{data.content}</td>
+                    <td class="success"> \$\${data.content}</td>
                 </tr>
                             <tr>
                     <td class="active"> 奖励积分</td>
-                    <td class="success"> \&{data.rewardPoints}</td>
+                    <td class="success"> \${data.rewardPoints}</td>
                 </tr>
                             <tr>
                     <td class="active"> 备注</td>
-                    <td class="success"> \&{data.remark}</td>
+                    <td class="success"> \${data.remark}</td>
                 </tr>
                             <tr>
-                    <td class="active"> 状态
-0-删除 
-1-暂存
-2-关闭</td>
-                    <td class="success"> \&{data.status}</td>
+                    <td class="active"> 状态</td>
+                    <td class="success">
+                        {@if data.status == '0'}
+                            删除
+                        {@else if data.status == '1'}
+                            暂存
+                        {@else if data.status == '2'}
+                            提交审核
+                        {@else if data.status == '3'}
+                            审核通过
+                        {@else if data.status == '4'}
+                            审核驳回
+                        {@/if}
+                    </td>
                 </tr>
-                            <tr>
-                    <td class="active"> 创建人编号</td>
-                    <td class="success"> \&{data.createUserId}</td>
-                </tr>
-                            <tr>
+                <tr>
                     <td class="active"> 创建人姓名</td>
-                    <td class="success"> \&{data.createUserName}</td>
+                    <td class="success"> \${data.createUserName}</td>
                 </tr>
-                            <tr>
+                <tr>
                     <td class="active"> 创建日期</td>
-                    <td class="success"> \&{data.createDate}</td>
+                    <td class="success"> \${data.createDate}</td>
                 </tr>
-                            <tr>
-                    <td class="active"> 更新人编号</td>
-                    <td class="success"> \&{data.lastModifyUserId}</td>
-                </tr>
-                            <tr>
+                <tr>
                     <td class="active"> 更新人名称</td>
-                    <td class="success"> \&{data.lastModifyUserName}</td>
+                    <td class="success"> \${data.lastModifyUserName}</td>
                 </tr>
-                            <tr>
+                <tr>
                     <td class="active"> 更新日期</td>
-                    <td class="success"> \&{data.lastModifyDate}</td>
+                    <td class="success"> \${data.lastModifyDate}</td>
                 </tr>
-                        </table>
+            </table>
             </script>
 
 <%--查看详情--%>
@@ -215,7 +213,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">个人信息详情</h4>
+                <h4 class="modal-title">议题详情</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
