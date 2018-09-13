@@ -26,84 +26,70 @@
 <input type="text" hidden value="" id="auditId"/>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
+
                                         <div class="portlet light ">
-                                            <div class="portlet-title">
+
+                                            <div class="portlet-body">
 
 
 
-                                                <div class="actions">
+                                                <div class="row">
+                                                    <div class="col-md-6">
 
-                                                    <form onsubmit="return t_query()">
-                                                        <div class="input-group">
-                                                            <input type="text"
-                                                                   name="keyword"
-                                                                   class="form-control input-circle-left"
-                                                                   placeholder="请输入课程名称">
-                                                            <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                    </div>
+
+                                                    <div class="col-md-6">
+
+                                                        <form onsubmit="return t_query()">
+                                                            <div class="btn-group" role="group"  style="float:left">
+                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节课程</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列课程</button>
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <input type="text"
+                                                                       name="keyword"
+                                                                       class="form-control"
+                                                                       placeholder="请输入课程名称">
+                                                                <span class="input-group-btn">
+                                                                <button class="btn  btn-default search_btn"
                                                                         type="submit">
                                                                         搜索
                                                                 </button>
                                                             </span>
-                                                        </div>
-                                                    </form>
-
+                                                            </div>
+                                                        </form>
+                                                    </div>
 
                                                 </div>
-                                            </div>
-                                            <div class="portlet-body">
-                                                <div class="tabbable-line">
-                                                    <ul class="nav nav-tabs ">
-                                                        <li class="active" onclick="changeCourseType('1');">
-                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="true"> 单节课程 </a>
-                                                        </li>
-                                                        <li class="" onclick="changeCourseType('2');">
-                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="false"> 系列课程 </a>
-                                                        </li>
-
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane active" id="tab_15_1">
 
 
 
-                                                            <div class="table-scrollable">
-                                                                <table class="table table-hover">
-                                                                    <thead>
-                                                                    <tr>
+                                                <div class="table-scrollable">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
 
-                                                                        <th width="30%"> 课程名称 </th>
-                                                                        <th width="10%">讲师</th>
-                                                                        <th width="15%">上/下架时间&状态</th>
-                                                                        <th width="10%">购买数 </th>
-                                                                        <th width="15%">审核状态</th>
-                                                                        <th width="20%">操作</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody id="courseList">
+                                                            <th width="30%"> 课程名称 </th>
+                                                            <th width="10%">讲师</th>
+                                                            <th width="15%">上/下架时间&状态</th>
+                                                            <th width="10%">购买数 </th>
+                                                            <th width="15%">审核状态</th>
+                                                            <th width="20%">操作</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="courseList">
 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
 
 
-                                                            <div class="paginationbar">
-                                                                <ul class="pagination" id="pagination1"></ul>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
+                                                <div class="paginationbar">
+                                                    <ul class="pagination" id="pagination1"></ul>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <!-- END SAMPLE TABLE PORTLET-->
-                                    </div>
-
-                                </div>
 
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />

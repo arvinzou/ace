@@ -29,24 +29,31 @@
 
 
                                                 <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="actions">
-                                                            <form onsubmit="return t_query()">
+
+                                                    <div class="portlet-body">
+
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <form onsubmit="return t_query()">
 
 
-                                                                <div class="input-group">
-                                                                    <input type="text" name="keyword" class="form-control input-circle-left" placeholder="请输入咨询师姓名">
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn btn-circle-right btn-default search_btn" type="submit">
+                                                                    <div class="input-group">
+                                                                        <input type="text" name="keyword" class="form-control " placeholder="请输入咨询师姓名">
+                                                                        <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn" type="submit">
                                                                             搜索
                                                                         </button>
                                                                     </span>
-                                                                </div>
-                                                            </form>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
 
                                                         </div>
-                                                    </div>
-                                                    <div class="portlet-body">
                                                         <div class="table-scrollable">
                                                             <table class="table table-hover">
                                                                 <thead>
