@@ -41,7 +41,7 @@
                                                     <div class="col-md-6">
 
                                                         <form onsubmit="return t_query()">
-                                                            <div class="btn-group" role="group"  style="float:left">
+                                                            <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                                                                 <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节课程</button>
                                                                 <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列课程</button>
                                                             </div>
