@@ -103,14 +103,7 @@ var buildMenu = function(menus) {
                                                    															+ '</small><span class="arrow"></span></a>');
                                                 }
                                             }
-										    html.push('<li class="" aria-haspopup="true">');
-											html.push('<a  class="nav-link" href="#" title="'
-															+ childrens[i].text
-															+ '" url="'
-															+ childrens[i].href
-															+ '" ><i class=""></i><small>'
-															+ childrens[i].text
-															+ '</small><span class="arrow"></span></a>');
+
 										} else {
 										    html.push('<li class="dropdown-submenu" aria-haspopup="true">');
 											html.push('<a class="nav-toggle" href="#"><i class=""></i><small>'
