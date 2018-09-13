@@ -25,7 +25,11 @@
             </div>
             <div class="row content">
                 <div class="col-xs-12 col-md-12" style="word-wrap:break-word;word-break:break-all;">
+                    {@if data.introduction == undefined || data.introduction==null || data.introduction==''}
+                        老师暂未上传文稿哦~
+                    {@else}
                     \$\${data.introduction}
+                    {@/if}
                 </div>
             </div>
         </script>
