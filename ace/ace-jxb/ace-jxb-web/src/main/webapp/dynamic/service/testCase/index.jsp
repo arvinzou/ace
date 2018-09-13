@@ -44,7 +44,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>仪表盘</span>
+                                    <span>心理评测</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -59,7 +59,7 @@
                                                     <div class="portlet light portlet-fit ">
                                                         <div class="portlet-title">
                                                             <div class="caption">
-                                                                心理测试
+                                                                心理评测
                                                             </div>
 
                                                             <div class="actions">
@@ -133,7 +133,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">创建测试</h4>
+                <h4 class="modal-title">创建评测</h4>
             </div>
             <div class="modal-body">
                 <div class="row">

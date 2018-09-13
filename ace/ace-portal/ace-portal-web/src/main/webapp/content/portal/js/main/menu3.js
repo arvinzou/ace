@@ -1,5 +1,34 @@
 var loading;
+function loader(jsonData)
+     {
 
+       jsonData.path = jsonData.path != undefined ? jsonData.path : "";
+       if(jsonData.type == "js")
+       {
+         var _js = document.createElement("script");
+         _js.setAttribute("type", "text/javascript");
+         _js.setAttribute("src", jsonData.path + jsonData.url+"?v="+version);
+         _js.onload = _js.onreadystatechange=function(){
+           if(!this.readyState||this.readyState=='loaded'||this.readyState=='complete'){
+             if("function" == typeof(jsonData["callback"]) && jsonData["callback"]){
+                jsonData["callback"].call(this);
+             }
+           }
+           _js.onload=_js.onreadystatechange=null;
+         }
+         document.getElementsByTagName("head")[0].appendChild(_js);//追加到head标签内
+         console.log(_js);
+       }
+       else if(jsonData.type == "css")
+       {
+         var _css = document.createElement("link");
+         _css.setAttribute("type", "text/css");
+         _css.setAttribute("rel", "stylesheet");
+         _css.setAttribute("href", jsonData.path + jsonData.url+"?v="+version);
+         document.getElementsByTagName("head")[0].appendChild(_css);//追加到head标签内
+         console.log(_css);
+       }
+     }
 var buildMenu = function(menus) {
 	var buildMenuHtml = function(menus) {
 		var html = [];
@@ -178,34 +207,5 @@ if(!window.console){
         }
      }
      var  urlParams = {};
-     function loader(jsonData)
-     {
 
-       jsonData.path = jsonData.path != undefined ? jsonData.path : "";
-       if(jsonData.type == "js")
-       {
-         var _js = document.createElement("script");
-         _js.setAttribute("type", "text/javascript");
-         _js.setAttribute("src", jsonData.path + jsonData.url+"?v="+version);
-         _js.onload = _js.onreadystatechange=function(){
-           if(!this.readyState||this.readyState=='loaded'||this.readyState=='complete'){
-             if("function" == typeof(jsonData["callback"]) && jsonData["callback"]){
-                jsonData["callback"].call(this);
-             }
-           }
-           _js.onload=_js.onreadystatechange=null;
-         }
-         document.getElementsByTagName("head")[0].appendChild(_js);//追加到head标签内
-         console.log(_js);
-       }
-       else if(jsonData.type == "css")
-       {
-         var _css = document.createElement("link");
-         _css.setAttribute("type", "text/css");
-         _css.setAttribute("rel", "stylesheet");
-         _css.setAttribute("href", jsonData.path + jsonData.url+"?v="+version);
-         document.getElementsByTagName("head")[0].appendChild(_css);//追加到head标签内
-         console.log(_css);
-       }
-     }
       urlParams=getQueryString();

@@ -47,7 +47,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>预约设置</span>
+                                    <span>工作室</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
