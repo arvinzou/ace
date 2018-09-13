@@ -13,7 +13,7 @@ var jcrop_api, //截屏工具的对象
 	$pimg, //预览框对象。
 	global_api,
 	xsize, //div长宽
-	uploaderHeadimg,
+	uploaderCropimg,
 	ysize;
 
 var defaultPic = 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535620109816&di=221d2fb7c66f9b6fc2500b90baa9cdb6&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fimgad%2Fpic%2Fitem%2F902397dda144ad3436cc41afdba20cf431ad85a3.jpg';
@@ -30,7 +30,14 @@ var cropModal = '<style>.jc-demo-box input[type="radio"] {visibility: hidden;}</
 	'					<div class="modal-body">' +
 	'						<div class="jc-demo-box">' +
 	'							<img src="' + defaultPic + '" id="target" alt="[Jcrop Example]" />' +
-	'							<div id="preview-pane" style="display: block;position: absolute;z-index: 2000;top: 10px;right: -280px;padding: 6px;border: 1px rgba(0, 0, 0, .4) solid;background-color: white;-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;-webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);-moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);">' +
+	'							<div id="preview-pane" style="display: block;' +
+	'position: absolute;z-index: 2000;top: 10px;' +
+	'right: -280px;padding: 6px;border: 1px rgba(0, 0, 0, .4) solid;' +
+	'background-color: white;' +
+	'-webkit-border-radius: 6px;' +
+	'-moz-border-radius: 6px;' +
+	'border-radius: 6px;' +
+	'-webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);-moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);">' +
 	'								<div class="preview-container" style="width: 250px;height: 170px;overflow: hidden;">' +
 	'									<img src="' + defaultPic + '" />' +
 	'								</div>' +
@@ -56,7 +63,7 @@ function initCrop() {
 }
 
 function destroyUpload(){
-	uploaderHeadimg.destroy();
+	uploaderCropimg.destroy();
 }
 
 function readyUpload(event){
@@ -74,9 +81,9 @@ function readyUpload(event){
 }
 
 function uploadObject() {
-	uploaderHeadimg = new plupload.Uploader({
+	uploaderCropimg = new plupload.Uploader({
 		browse_button: 'selectCropImg', //触发文件选择对话框的按钮，为那个元素id
-		url: 'http://zx.huacainfo.com/portal/files/uploadImage.do', //服务器端的上传页面地址
+		url: portalPath + '/files/uploadImage.do',//服务器端的上传页面地址
 		max_file_size: '2mb', //限制为2MB
 		multi_selection: false,
 		resize: {
@@ -92,15 +99,15 @@ function uploadObject() {
 		}] //图片限制
 	});
 	//在实例对象上调用init()方法进行初始化
-	uploaderHeadimg.init();
-	uploaderHeadimg.bind('filesAdded', function(uploader, files) {
+	uploaderCropimg.init();
+	uploaderCropimg.bind('filesAdded', function(uploader, files) {
 		previewImage(files[0], function(imgsrc) {
 			setCropImg(imgsrc);
 		})
 	});
 	
 	 //图片上传成功触发，ps:data是返回值（第三个参数是返回值）
-    uploaderHeadimg.bind('FileUploaded', function (uploaderHeadimg, files, res) {
+    uploaderCropimg.bind('FileUploaded', function (uploaderCropimg, files, res) {
         var data = JSON.parse(res.response);
         var img = "#" + cover;
         $(img).attr("src", data.file_path);
@@ -110,13 +117,13 @@ function uploadObject() {
         $('#img-uploader').modal('hide');
     });
     //会在文件上传过程中不断触发，可以用此事件来显示上传进度监听（比如说上传进度）
-    uploaderHeadimg.bind('UploadProgress', function (uploaderHeadimg, file) {
+    uploaderCropimg.bind('UploadProgress', function (uploaderCropimg, file) {
     	var percent = file.percent;
         $('.crop-progress .progress-bar').width(percent+'%');
     });
     
     /*错误提示*/
-    uploaderHeadimg.bind('Error', function (up, err) {
+    uploaderCropimg.bind('Error', function (up, err) {
         switch (err.code) {
             case -200:
                 alert("文件上传失败,错误信息: 网络错误");
@@ -148,7 +155,7 @@ function uploadObject() {
         }
     });
     $('#cropModal .btn-Crop-primary').on('click', function () {
-        uploaderHeadimg.setOption({
+        uploaderCropimg.setOption({
             multipart_params: {
                 x: parseInt(global_api.x),
                 y: parseInt(global_api.y),
@@ -158,7 +165,7 @@ function uploadObject() {
                 srcHeight: parseInt(boundy)
             }
         });
-        uploaderHeadimg.start();
+        uploaderCropimg.start();
     });
 }
 
