@@ -1,25 +1,26 @@
 package com.huacainfo.ace.society.service.impl;
 
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
+import java.util.Date;
+import java.util.List;
+
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.society.dao.ActivityReportDao;
-import com.huacainfo.ace.society.model.ActivityReport;
-import com.huacainfo.ace.society.service.ActivityReportService;
-import com.huacainfo.ace.society.vo.ActivityReportQVo;
-import com.huacainfo.ace.society.vo.ActivityReportVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.society.dao.ActivityReportDao;
+import com.huacainfo.ace.society.model.ActivityReport;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.service.ActivityReportService;
+import com.huacainfo.ace.society.vo.ActivityReportVo;
+import com.huacainfo.ace.society.vo.ActivityReportQVo;
 
 @Service("activityReportService")
 /**
@@ -49,14 +50,9 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      * @version: 2018-09-13
      */
     @Override
-    public PageResult
-            <ActivityReportVo> findActivityReportList(ActivityReportQVo condition, int start,
-                                                      int limit, String orderBy) throws Exception {
-        PageResult
-                <ActivityReportVo> rst = new PageResult<>();
-        List
-                <ActivityReportVo> list = this.activityReportDao.findList(condition,
-                start, limit, orderBy);
+    public PageResult<ActivityReportVo> findActivityReportList(ActivityReportQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<ActivityReportVo> rst = new PageResult<>();
+        List<ActivityReportVo> list = this.activityReportDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.activityReportDao.findCount(condition);
@@ -129,14 +125,11 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "报道标题不能为空！");
         }
-
-
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.activityReportDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更活动报道", "活动报道", "",
-                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("变更活动报道", "活动报道", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更活动报道完成！");
     }
@@ -152,10 +145,8 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      * @version: 2018-09-13
      */
     @Override
-    public SingleResult
-            <ActivityReportVo> selectActivityReportByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <ActivityReportVo> rst = new SingleResult<>();
+    public SingleResult<ActivityReportVo> selectActivityReportByPrimaryKey(String id) throws Exception {
+        SingleResult<ActivityReportVo> rst = new SingleResult<>();
         rst.setValue(this.activityReportDao.selectVoByPrimaryKey(id));
         return rst;
     }
@@ -172,8 +163,7 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      * @version: 2018-09-13
      */
     @Override
-    public MessageResponse deleteActivityReportByActivityReportId(String id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deleteActivityReportByActivityReportId(String id, UserProp userProp) throws Exception {
         this.activityReportDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除活动报道", "活动报道",
                 String.valueOf(id),
@@ -195,14 +185,9 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      * @version: 2018-09-13
      */
     @Override
-    public MessageResponse audit(String id, String rst, String remark,
-                                 UserProp userProp) throws Exception {
-
-//                        activityReportDao.updateByPrimaryKeySelective(id);
-
-
-        dataBaseLogService.log("审核活动报道", "活动报道",
-                String.valueOf(id), String.valueOf(id), "活动报道", userProp);
+    public MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception {
+//        activityReportDao.updateByPrimaryKeySelective(id);
+        dataBaseLogService.log("审核活动报道", "活动报道", String.valueOf(id), String.valueOf(id), "活动报道", userProp);
         return new MessageResponse(0, "活动报道审核完成！");
     }
 
