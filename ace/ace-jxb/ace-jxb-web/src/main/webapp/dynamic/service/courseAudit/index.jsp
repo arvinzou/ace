@@ -160,7 +160,7 @@
         </td>
         <td >
             <a class="operation" href="javascript:void(0);"  onclick="edit('\${item.id}');">编辑</a>
-            <a class="operation" href="list/index.jsp?id=\${item.id}">详细</a>
+            <a class="operation" href="list/index.jsp?id=${param.id}&did=\${item.id}">详细</a>
             {@if item.auditRst==1}
                 {@if item.lineState==0}
                 <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
