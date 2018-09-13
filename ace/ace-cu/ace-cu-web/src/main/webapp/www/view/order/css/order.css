@@ -141,7 +141,7 @@ input,textarea{
 	float: left;
 }
 .lightborder{
-	border: 2px solid #EA4436;
+	border: 2px solid #EA4436 !important;
 }
 .undis{
 	display: none;

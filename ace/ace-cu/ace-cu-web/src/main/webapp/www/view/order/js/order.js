@@ -228,18 +228,19 @@ function onBridgeReady(obj){
 }
 
 function selectMoney(obj, amount) {
-	$(obj).addClass("lightborder");
-	$(obj).siblings().removeClass("lightborder");
-	$(obj).parent().siblings(".money_02").find("span").removeClass("lightborder");
+    $(".money_02 span").removeClass("lightborder");
+    $(".money_01 span").removeClass("lightborder");
     $("#amountMoney").removeClass("lightborder");
+	$(obj).addClass("lightborder");
     donateMoney = amount;
     console.log(donateMoney);
     isCustom = false;
 }
 
 function inputMoney(obj) {
+    $(".money_02 span").removeClass("lightborder");
+    $(".money_01 span").removeClass("lightborder");
 	$(obj).addClass("lightborder");
-	$(obj).parent().siblings(".money_01").find("span").removeClass("lightborder");
 	$("#amountMoney").show();
     isCustom = true;
 }
