@@ -72,6 +72,7 @@ app.controller(ngControllerName,function($scope) {
             smallAddress = $("#detailAddress").val();
             var billName = $("#billName").val();
             var billphoneNumber = $("#billphoneNumber").val();
+            var donatePostName = $("input[name = 'donatePostName']").val();
             if(billName == null || billName == undefined || billName == ''){
                 alert("请输入收货人姓名！");
                 return;
@@ -131,7 +132,8 @@ app.controller(ngControllerName,function($scope) {
 					"district": qu,
 					"address":smallAddress,
 					"remark": message,
-                    "consigneeMobileNumber":billphoneNumber
+                    "consigneeMobileNumber":billphoneNumber,
+                    "donatePostName": donatePostName
 				})
 			    },
             success:function(result){
