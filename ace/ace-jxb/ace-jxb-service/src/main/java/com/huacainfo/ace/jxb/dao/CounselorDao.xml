@@ -419,7 +419,7 @@
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
         <if test="condition.consultState !=null and condition.consultState !=&quot;&quot;">
-            and c.status = #{condition.consultState,jdbcType=VARCHAR}
+            and IFNULL(c.status,'-1')= #{condition.consultState,jdbcType=VARCHAR}
         </if>
         <if test="condition.consultField !=null and condition.consultField !=&quot;&quot;">
             and c.field like concat('%',#{condition.consultField,jdbcType=VARCHAR})

@@ -29,24 +29,42 @@
 
 
                                                 <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="actions">
-                                                            <form onsubmit="return t_query()">
+
+                                                    <div class="portlet-body">
+
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+
+                                                            </div>
+
+                                                            <div class="col-md-7">
+                                                                <form onsubmit="return t_query()">
+                                                                    <div class="btn-group" id="btn-group1" role="group"  style="float:left;padding-right:5px">
+                                                                        <button type="button" class="btn btn-default"  onclick="changeConsultState('');">全部</button>
+                                                                        <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">上架</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeConsultState('-1');">下架</button>
+                                                                    </div>
+                                                                    <div class="btn-group" id="btn-group2" role="group"  style="float:left;padding-right:5px">
+                                                                        <button type="button" class="btn btn-default"  onclick="changeType('');">全部</button>
+                                                                        <button type="button" class="btn btn-default"  onclick="changeType('0');">待审</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('1');">通过</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('2');">驳回</button>
+                                                                    </div>
 
 
-                                                                <div class="input-group">
-                                                                    <input type="text" name="keyword" class="form-control input-circle-left" placeholder="请输入咨询师姓名">
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn btn-circle-right btn-default search_btn" type="submit">
+                                                                    <div class="input-group">
+                                                                        <input type="text" name="keyword" class="form-control " placeholder="请输入咨询师姓名">
+                                                                        <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn" type="submit">
                                                                             搜索
                                                                         </button>
                                                                     </span>
-                                                                </div>
-                                                            </form>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
 
                                                         </div>
-                                                    </div>
-                                                    <div class="portlet-body">
                                                         <div class="table-scrollable">
                                                             <table class="table table-hover">
                                                                 <thead>

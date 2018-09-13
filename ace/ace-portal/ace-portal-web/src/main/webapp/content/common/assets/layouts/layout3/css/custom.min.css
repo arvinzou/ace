@@ -168,8 +168,8 @@ body{
     .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
         z-index: 3;
         color: #fff;
-        background-color: #27a4b0;
-        border-color: #27a4b0;
+        background-color: #1890ff;
+        border-color: #1890ff;
         cursor: default;
     }
     a:hover, a:focus {

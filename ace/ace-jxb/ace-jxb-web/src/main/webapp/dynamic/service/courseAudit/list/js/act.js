@@ -2,27 +2,13 @@ var loading = {};
 var primaryId = null;
 var videoUrl = null;
 var params = {limit: 10};
-function loadlocal() {
-    var urls = [];
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/hotkeys.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/uploader.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/simditor.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/plupload/plupload.full.min.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
-    urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
-
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
+
 }
 
 window.onload = function(){
-    primaryId =urlParams.id;
+    primaryId =urlParams.did;
     initPartList();
 }
 
@@ -67,6 +53,7 @@ function findPartList(){
             if(result.status == 0) {
                 console.log(result);
                 resultData = result;
+                initPage(result.rows[0].id);
             }else {
                 alert(result.errorMessage);
             }

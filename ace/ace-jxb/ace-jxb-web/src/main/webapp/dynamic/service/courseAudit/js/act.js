@@ -10,6 +10,11 @@ function loadlocal() {
 function App() {
     console.log("=============================App Start==============================");
     //loadlocal();
+     $(".btn-group .btn").bind('click',function(event){
+            $(event.target).siblings().removeClass("active");
+            console.log(event);
+            $(event.target).addClass("active");
+        });
 }
 
 
@@ -79,7 +84,14 @@ function edit(id){
      window.location.href = contextPath + '/dynamic/service/courseAudit/edit/index.jsp?id='+urlParams.id+'&type='+params.type+'&did='+id;
 }
 
-
+function changeType(status){
+  params['auditRst'] = status;
+  getPageList();
+}
+function changeConsultState(status){
+  params['lineState'] = status;
+  getPageList();
+}
 /**
  * 课程审核
  * @param id

@@ -14,56 +14,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="description" />
-        <jsp:include page="../../../common/base.jsp" />
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css"/>
-				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
-				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/courseAudit/list/css/style.css">
-        <script src="${pageContext.request.contextPath}/dynamic/service/courseAudit/list/js/act.js?v=${cfg.version}"></script>
-        <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+        <jsp:include page="../../../common/header.jsp" />
+        <link rel="stylesheet" href="css/style.css">
     </head>
 
     <body>
 
-        <!--隐藏存放ID-->
-        <input type="text" hidden value="" id="auditId" />
-        <div class="page-wrapper">
+    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-            <div class="page-wrapper-row full-height">
-                <div class="page-wrapper-middle">
-                    <div class="page-container">
-                        <div class="page-content-wrapper">
-                            <div class="page-content">
-                                <div class="container">
-                                    <ul class="page-breadcrumb breadcrumb">
-                                        <li>
-                                            <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                            <i class="fa fa-circle"></i>
-                                        </li>
-                                        <li>
-                                            <span>课程审核</span>
-                                        </li>
-                                    </ul>
-                                    <div class="page-content-inner">
-
-                                        <!---==============================================-->
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <!-- BEGIN SAMPLE TABLE PORTLET-->
                                                 <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            课程列表
-                                                        </div>
-                                                        <div class="actions">
 
-                                                        </div>
-                                                    </div>
                                                     <div class="portlet-body">
                                                         <!--具体界面元素开始-->
                                                         <div class="tabbable-line">
@@ -116,23 +76,13 @@
                                                         <!--具体界面元素结束-->
                                                     </div>
                                                 </div>
-                                                <!-- END SAMPLE TABLE PORTLET-->
-                                            </div>
-                                        </div>
-                                        <!--=======================================-->
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-            <div class="bottom"></div>
-        </div>
     </body>
-
+    <jsp:include page="/dynamic/common/footer.jsp" />
+    <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+    <script src="js/act.js?v=${cfg.version}"></script>
 
 
     <script id="chapterTemp" type="text/template">
