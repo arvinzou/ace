@@ -34,16 +34,27 @@
 
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
 
                                                     </div>
 
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
 
                                                         <form onsubmit="return t_query()">
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节课程</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列课程</button>
+                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">上架</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeConsultState('0');">下架</button>
+                                                            </div>
+                                                            <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                <button type="button" class="btn btn-default"  onclick="changeType('');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="changeType('0');">待审</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeType('1');">通过</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeType('2');">驳回</button>
+                                                            </div>
+                                                            <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列</button>
                                                             </div>
                                                             <div class="input-group">
                                                                 <input type="text"

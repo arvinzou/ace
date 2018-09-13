@@ -33,19 +33,22 @@
                                                     <div class="portlet-body">
 
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-5">
 
                                                             </div>
 
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-7">
                                                                 <form onsubmit="return t_query()">
-                                                                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                        <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">已上架</button>
-                                                                        <button type="button" class="btn btn-default" onclick="changeConsultState('-1');">已下架</button>
+                                                                    <div class="btn-group" id="btn-group1" role="group"  style="float:left;padding-right:5px">
+                                                                        <button type="button" class="btn btn-default"  onclick="changeConsultState('');">全部</button>
+                                                                        <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">上架</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeConsultState('-1');">下架</button>
                                                                     </div>
-                                                                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                        <button type="button" class="btn btn-default"  onclick="changeType('0');">待审核</button>
-                                                                        <button type="button" class="btn btn-default" onclick="changeType('1');">已审核</button>
+                                                                    <div class="btn-group" id="btn-group2" role="group"  style="float:left;padding-right:5px">
+                                                                        <button type="button" class="btn btn-default"  onclick="changeType('');">全部</button>
+                                                                        <button type="button" class="btn btn-default"  onclick="changeType('0');">待审</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('1');">通过</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('2');">驳回</button>
                                                                     </div>
 
 
