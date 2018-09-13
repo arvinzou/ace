@@ -112,13 +112,13 @@ function initForm(){
         type:"post",
         async:false,
         data:{
-            id: urlParams.id
+id: urlParams.did
         },
         success:function(result){
             if(result.status == 0) {
                var data={};
                data['o']=result.value;
-               renderPage($("#fm-edit"),data,'tpl-fm');
+render('fm-edit',data,'tpl-fm');
                initPage();
             }else {
                 alert(result.errorMessage);
@@ -128,4 +128,10 @@ function initForm(){
             alert("对不起出错了！");
         }
     });
+}
+
+function render(IDom, data, tempId) {
+var tpl = document.getElementById(tempId).innerHTML;
+var html = juicer(tpl, {data: data,});
+$("#" + IDom).html(html);
 }

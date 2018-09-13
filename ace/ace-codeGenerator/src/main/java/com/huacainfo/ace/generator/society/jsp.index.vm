@@ -13,159 +13,77 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="/dynamic/common/base.jsp"/>
+    <%--common css--%>
+    <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/dynamic/service/$!{bean.lowerName}/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <%--custom css--%>
 </head>
 <body>
-<div class="page-wrapper">
+<%--==============common jsp-prefix==============--%>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-prefix==============--%>
 
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>$!{bean.tableChineseName}</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
+<!---==============================================-->
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
 
-                                <!---==============================================-->
-
-                                <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            $!{bean.tableChineseName}
-                                                        </div>
-                                                        <div class="actions">
-                                                             <a href="javascript:void(0);" onclick="add();"  class="btn green">创建</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="portlet-body">
-
-                                                    <div class="row">
-                                                        <div class="col-sm-8">
-
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <form onsubmit="return t_query()">
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       name="keyword"
-                                                                       class="form-control input-circle-left"
-                                                                       placeholder="请输入名称">
-                                                                <span class="input-group-btn">
-                                                        <button class="btn btn-circle-right btn-default search_btn"
-                                                                type="submit">
-                                                                搜索
-                                                        </button>
-                                                    </span>
-                                                            </div>
-                                                            </form>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                        <div class="table-scrollable">
-                                                            <table class="table table-hover">
-                                                                <thead>
-                                                                    <tr>
-                                                                        #if($!list)
-                                                                            #foreach($item in $list)
-                                                                                <th width="10%"> $!{item.remarks}</th>
-                                                                            #end
-                                                                        #end
-                                                                        <th width="15%">操作</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="page-list">
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="paginationbar">
-                                                            <ul class="pagination" id="pagination1"></ul>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                <!--=======================================-->
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="actions">
+            <a href="javascript:void(0);" onclick="add();" class="btn green">创建</a>
         </div>
     </div>
+    <div class="portlet-body">
 
-    <div class="bottom"></div>
-</div>
-<%--列表juicer模板--%>
-<script id="tpl-list" type="text/template">
-    {@each data as item, index}
-    <tr>
-        #if($!list)
-            #foreach($item in $list)
-                <td> \&{item.$!{item.columName}}</td>
-            #end
-        #end
-        <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">已删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">提交审核</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">审核通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">被驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
-            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:del('\${item.id}');">删除</a>
-            {@if item.status==2}
-            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
-             {@/if}
-        </td>
-    </tr>
-    {@/each}
-</script>
-<%--详情juicer模板--%>
-<script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        #if($!list)
-            #foreach($item in $list)
+        <div class="row">
+            <div class="col-sm-8">
+
+            </div>
+            <div class="col-sm-4">
+                <form onsubmit="return t_query()">
+                    <div class="input-group">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control input-circle-left"
+                               placeholder="请输入名称">
+                        <span class="input-group-btn">
+        <button class="btn btn-circle-right btn-default search_btn"
+                type="submit">
+                搜索
+        </button>
+    </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
                 <tr>
-                    <td class="active"> $!{item.remarks}</td>
-                    <td class="success"> \&{data.$!{item.columName}}</td>
+                    #if($!list)
+                        #foreach($item in $list)
+                            <th width="10%"> $!{item.remarks}</th>
+                        #end
+                    #end
+                    <th width="15%">操作</th>
                 </tr>
-            #end
-        #end
-    </table>
-</script>
+                </thead>
+                <tbody id="page-list">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
+        </div>
+
+    </div>
+
+</div>
+<!--=======================================-->
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
@@ -237,7 +155,62 @@
         </div>
     </div>
 </div>
+
+<%--=============common jsp-suffix===============--%>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-suffix==============--%>
 </body>
+
+<%--列表juicer模板--%>
+<script id="tpl-list" type="text/template">
+    {@each data as item, index}
+    <tr>
+        #if($!list)
+            #foreach($item in $list)
+                <td> \&{item.$!{item.columName}}</td>
+            #end
+        #end
+        <td>
+            {@if item.status==0}
+            <span class="label label-lg label-danger">已删除</span>
+            {@else if item.status==1}
+            <span class="label label-lg label-info">暂存</span>
+            {@else if item.status==2}
+            <span class="label label-lg label-warning">提交审核</span>
+            {@else if item.status==3}
+            <span class="label label-lg label-info">审核通过</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
+            {@else if item.status==4}
+            <span class="label label-lg label-info">被驳回</span>
+            <div style="padding-top:10px">\${item.auditRemark}</div>
+            {@else}
+            <span class="label label-lg label-danger">暂存</span>
+            {@/if}
+        </td>
+        <td>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
+            <a class="operation" href="javascript:del('\${item.id}');">删除</a>
+            {@if item.status==2}
+            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
+            {@/if}
+        </td>
+    </tr>
+    {@/each}
+</script>
+<%--详情juicer模板--%>
+<script id="tpl-detail" type="text/template">
+    <table class="table table-bordered table-hover">
+        #if($!list)
+            #foreach($item in $list)
+                <tr>
+                    <td class="active"> $!{item.remarks}</td>
+                    <td class="success"> \&{data.$!{item.columName}}</td>
+                </tr>
+            #end
+        #end
+    </table>
+</script>
 <style>
     .cover{
         width: 70px;
@@ -254,4 +227,8 @@
           color:#FE6500;
     }
 </style>
+<%--==============common footer==============--%>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>
