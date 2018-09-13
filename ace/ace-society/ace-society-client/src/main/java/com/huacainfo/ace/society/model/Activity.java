@@ -2,9 +2,11 @@ package com.huacainfo.ace.society.model;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Activity extends BaseModel {
+public class Activity extends BaseModel{
+
     private String id;
 
     private String initiatorId;

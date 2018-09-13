@@ -1,15 +1,19 @@
 package com.huacainfo.ace.society.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.SocietyOrgInfoDao;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.SocietyOrgInfoService;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
@@ -33,6 +37,8 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     private SocietyOrgInfoDao societyOrgInfoDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private AuditRecordService auditRecordService;
 
     /**
      * @throws
@@ -189,12 +195,25 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     @Override
     public MessageResponse audit(String id, String rst, String remark,
                                  UserProp userProp) throws Exception {
+        SocietyOrgInfo obj = societyOrgInfoDao.selectByPrimaryKey(id);
+        if (obj == null) {
+            return new MessageResponse(ResultCode.FAIL, "组织信息丢失");
 
-//        societyOrgInfoDao.updateByPrimaryKeySelective(id);
+        }
+        //更改审核记录
+        MessageResponse auditRs = auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(),
+                obj.getId(), rst, remark, userProp);
+        if (ResultCode.FAIL == auditRs.getStatus()) {
+            return auditRs;
+        }
 
+        obj.setStatus(rst);
+        obj.setLastModifyDate(DateUtil.getNowDate());
+        obj.setLastModifyUserId(userProp.getUserId());
+        obj.setLastModifyUserName(userProp.getName());
+        societyOrgInfoDao.updateByPrimaryKeySelective(obj);
 
-        dataBaseLogService.log("审核社会组织信息", "社会组织信息",
-                String.valueOf(id), String.valueOf(id), "社会组织信息", userProp);
+        dataBaseLogService.log("审核社会组织信息", "社会组织信息", id, id, "社会组织信息", userProp);
         return new MessageResponse(0, "社会组织信息审核完成！");
     }
 

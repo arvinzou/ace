@@ -247,16 +247,16 @@
     </update>
 
     <!--**********************************-->
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.PersonInfoVo">
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SocietyOrgInfoVo">
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
         <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
 
     </resultMap>
     <sql id="Vo_Column_List">
         u.nickname, u.headimgurl,
-        t.id, t.orgName, t.orgAddr, t.contactPerson, t.contactPhone, t.accPoints, t.validPoints, t.remark,
-        t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
-        t.lastModifyDate
+        t.id, t.orgName, t.orgAddr, t.orgCover, t.orgSummary, t.contactPerson, t.contactPhone, t.accPoints,
+        t.validPoints, t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
+        t.lastModifyUserName, t.lastModifyDate
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

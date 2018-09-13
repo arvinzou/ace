@@ -22,6 +22,11 @@ public class CuDonateOrder implements Serializable {
 
     private String donateName;
 
+    /**
+     * 捐款单位名称
+     */
+    private String donatePostName;
+
     private String mobileNumber;
 
     private BigDecimal donateAmount;
@@ -79,6 +84,14 @@ public class CuDonateOrder implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getDonatePostName() {
+        return donatePostName;
+    }
+
+    public void setDonatePostName(String donatePostName) {
+        this.donatePostName = donatePostName;
+    }
 
     public String getAnonymity() {
         return anonymity;

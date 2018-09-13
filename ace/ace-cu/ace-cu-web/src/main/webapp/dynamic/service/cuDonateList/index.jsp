@@ -122,6 +122,21 @@
             <span id="donateDate"></span>
         </div>
         <div class="labelItem">
+            <span class="labelItemHeader">捐款人姓名</span>
+            <br>
+            <span id="donateName"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">捐款人手机号码</span>
+            <br>
+            <span id="mobileNumber"></span>
+        </div>
+        <div class="labelItem">
+            <span class="labelItemHeader">捐款人单位名称</span>
+            <br>
+            <span id="donatePostName"></span>
+        </div>
+        <div class="labelItem">
             <span class="labelItemHeader">索要票据</span>
             <br>
             <span id="needReceipt"></span>
@@ -137,6 +152,7 @@
             <span id="consigneeMobileNumber"></span>
         </div>
     </div>
+
     <h5 class="header-title">收货人地址</h5>
     <div id="consigneeAddr" class="row" style="padding:10px"></div>
 

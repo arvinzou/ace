@@ -64,6 +64,7 @@ app.controller(ngControllerName,function($scope) {
 		var message = $("#message").val();      //留言
 		var largeAddress = null;  //省市区
 		var smallAddress = null;   //详细地址
+        var donatePostName = $("input[name = 'donatePostName']").val();
 		var sheng = null;    //省份
 		var shi  = null;     //市
 		var qu = null;       //区
@@ -131,7 +132,8 @@ app.controller(ngControllerName,function($scope) {
 					"district": qu,
 					"address":smallAddress,
 					"remark": message,
-                    "consigneeMobileNumber":billphoneNumber
+                    "consigneeMobileNumber":billphoneNumber,
+                    "donatePostName": donatePostName
 				})
 			    },
             success:function(result){

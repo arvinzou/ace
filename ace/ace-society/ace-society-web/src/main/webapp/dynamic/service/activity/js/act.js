@@ -176,7 +176,9 @@ function deleteData(id){
                 id:id,
             })
         }
+        startLoad();
         $.post(url,data,function (rst) {
+            stopLoad();
             if(rst.status==0){
                 getPageList();
                 return;
@@ -184,4 +186,31 @@ function deleteData(id){
             alert(rst.errorMessage);
         })
     }
+}
+
+
+function details(id) {
+    var url=contextPath + "/activity/selectActivityByPrimaryKey";
+    var data={
+            id:id,
+    }
+    startLoad();
+    $.post(url,data,function (rst) {
+        stopLoad();
+        if(rst.status==0){
+            renderPage("info", rst.value, "tpl-info");
+            $('#preview').modal("show");
+            return;
+        }
+        alert(rst.errorMessage);
+    })
+}
+
+
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
 }
