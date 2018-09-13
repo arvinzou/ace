@@ -123,6 +123,7 @@ function uploadObject() {
     });
 	/*上传完成之后*/
     uploaderCropimg.bind('UploadComplete', function (uploaderCropimg, file) {
+        $('.crop-progress .progress-bar').width('0%');
     	$('#cropModal').modal('hide');
     });
 
