@@ -95,7 +95,7 @@ function uploadObject() {
 		},
 		filters: [{
 			title: "Image files",
-			extensions: "jpg,gif,png"
+			extensions: "jpeg,jpg,gif,png"
 		}] //图片限制
 	});
 	//在实例对象上调用init()方法进行初始化
