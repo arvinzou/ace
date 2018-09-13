@@ -21,7 +21,7 @@ function loadCustom() {
 /*社会组织信息初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 0,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
