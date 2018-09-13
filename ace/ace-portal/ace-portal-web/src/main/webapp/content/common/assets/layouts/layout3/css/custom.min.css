@@ -148,12 +148,17 @@ body{
         background-color: #edf2f74f
     }
     .table > thead > tr > th {
-        vertical-align: bottom;
-        border-bottom: 0px solid #e7ecf1;
-        padding-top:12px;
-        padding-bottom:12px;
-        padding-left:12px;
-    }
+            vertical-align: bottom;
+            border-bottom: 0px solid #f2f2f2;
+            padding-top:12px;
+            padding-bottom:12px;
+            padding-left:0px;
+        }
+        .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+            padding: 8px;
+            line-height: 1.42857;
+            border-bottom: 1px solid #f2f2f2;
+        }
     .table>tbody>tr>td {
         padding-top:10px;
         padding-bottom:10px;

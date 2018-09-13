@@ -144,7 +144,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">创建测试</h4>
+                        <h4 class="modal-title">创建评测</h4>
                     </div>
                     <div class="modal-body">
 
@@ -175,7 +175,7 @@
 
                                             <div class="form-group ">
                                                 <label class="col-md-2 control-label">
-                                                    <span class="required" aria-required="true">*</span>测试名称
+                                                    <span class="required" aria-required="true">*</span>评测名称
 
                                                 </label>
                                                 <div class="col-md-10">
@@ -187,7 +187,7 @@
 
                                             <div class="form-group ">
                                                 <label class="control-label col-md-2">
-                                                    <span class="required" aria-required="true">*</span>测评封面
+                                                    <span class="required" aria-required="true">*</span>评测封面
 
                                                 </label>
                                                 <div class="col-md-10">
@@ -203,7 +203,7 @@
 
                                             <div class="form-group ">
                                                 <label class="control-label col-md-2">
-                                                    <span class="required" aria-required="true">*</span>测评类型
+                                                    <span class="required" aria-required="true">*</span>评测类型
 
                                                 </label>
                                                 <div class="col-md-10">
@@ -213,7 +213,7 @@
                                             </div>
                                             <div class="form-group ">
                                                 <label class="col-md-2 control-label">
-                                                    <span class="required" aria-required="true">*</span>测试摘要
+                                                    <span class="required" aria-required="true">*</span>评测摘要
 
                                                 </label>
                                                 <div class="col-md-10">
@@ -281,7 +281,7 @@
 
                                             <div class="form-group ">
                                                 <label class="col-md-2 control-label">
-                                                    <span class="required" aria-required="true">*</span>测评介绍
+                                                    <span class="required" aria-required="true">*</span>评测介绍
 
                                                 </label>
                                                 <div class="col-md-10">
@@ -293,7 +293,7 @@
 
                                             <div class="form-group ">
                                                 <label class="col-md-2 control-label">
-                                                    <span class="required" aria-required="true">*</span>测评须知
+                                                    <span class="required" aria-required="true">*</span>评测须知
 
                                                 </label>
                                                 <div class="col-md-10">

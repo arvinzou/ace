@@ -82,7 +82,7 @@
                                                         </li>
                                                         <%--<li>--%>
                                                         <%--<a onclick="javascript:changeType('3')" href="#tab_1_3"--%>
-                                                        <%--data-toggle="tab"> 测试订单 </a>--%>
+                                                        <%--data-toggle="tab"> 评测订单 </a>--%>
                                                         <%--</li>--%>
                                                     </ul>
                                                     <div class="portlet-body">
@@ -171,7 +171,7 @@
             <th width="30%">课程名称</th>
             <th width="10%">咨询师名称</th>
             {@else if orderCategory == 3}
-            <th width="40%">测试名称</th>
+            <th width="40%">评测名称</th>
             {@/if}
             <th width="5%">付款金额</th>
             <th width="20%">下单时间</th>
