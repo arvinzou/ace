@@ -1,8 +1,9 @@
 var loading = {};
-var params = {limit: 10};
+var params = {limit: 5};
 window.onload = function (){
     initPage();
     initEvents();
+initJuicerMethod();
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -12,16 +13,15 @@ function App() {
 function loadCustom() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
+urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
 }
-
-/*线下活动初始化分页*/
+/*活动报道初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 1,
+        totalCounts: 0,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -35,14 +35,14 @@ function initPage() {
         }
     });
 }
-/*线下活动条件查询*/
+/*活动报道条件查询*/
 function t_query(){
     getPageList();
     return false;
 }
-/*线下活动加载表格数据*/
+/*活动报道加载表格数据*/
 function getPageList() {
-    var url = contextPath+ "/activity/findActivityList";
+    var url = contextPath+ "/activityReport/findActivityReportList";
     params['name']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
@@ -65,26 +65,38 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
-/*线下活动添加*/
+/*活动报道添加*/
 function add(type){
-    window.location.href = add/index.jsp;
+window.location.href = 'add/index.jsp';
 }
-/*线下活动编辑*/
+/*活动报道编辑*/
 function edit(id){
-     window.location.href = 'edit/index.jsp?id='+id;
+window.location.href = 'edit/index.jsp?id='+id;
+}
+/*查看详情*/
+function detail(id) {
+var url = contextPath + "/activityReport/selectActivityReportByPrimaryKey";
+$.getJSON(url, {id: id}, function (result) {
+if (result.status == 0) {
+var navitem = document.getElementById('tpl-detail').innerHTML;
+var html = juicer(navitem, {data: result.value});
+$("#detail-info").html(html);
+$("#modal-detail").modal("show");
+}
+})
 }
 
 function initEvents() {
-    $('#modal-audit').on('show.bs.modal', function (event) {
+$('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
     })
-    $('#modal-audit .btn-primary').on('click', function () {
-        $('#modal-audit form').submit();
+$('#modal-audit .btn-primary').on('click', function () {
+$('#modal-audit form').submit();
     });
-    $('#modal-audit form').ajaxForm({
+$('#modal-audit form').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 var params = {};
                 $.each(formData, function (n, obj) {
@@ -101,24 +113,34 @@ function initEvents() {
 
 
 }
-/*线下活动审核*/
+/*活动报道审核*/
 function audit(params){
     startLoad();
-    var url=contextPath + "/activity/audit";
-    $.post(url,params,function(rst){
-        stopLoad();
-        $("#modal-audit").modal('hide');
-        if(rst.status == 0) {
-            getPageList();
+    $.ajax({
+        url: contextPath + "/activityReport/audit",
+        type:"post",
+        async:false,
+        data:params,
+        success:function(rst){
+            stopLoad();
+$("#modal-audit").modal('hide');
+            alert(rst.errorMessage);
+            if(rst.status == 0) {
+                getPageList();
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
         }
     });
 }
-/*线下活动上架*/
+/*活动报道上架*/
 function online(id){
     if(confirm("确定要上架吗？")){
         startLoad();
         $.ajax({
-            url: contextPath + "/activity/updateStatus",
+            url: contextPath + "/activityReport/updateStatus",
             type:"post",
             async:false,
             data:{
@@ -140,12 +162,12 @@ function online(id){
         });
     }
 }
-/*线下活动下架*/
+/*活动报道下架*/
 function outline(id){
     if(confirm("确定要下架吗？")){
         startLoad();
         $.ajax({
-            url: contextPath + "/activity/updateStatus",
+            url: contextPath + "/activityReport/updateStatus",
             type:"post",
             async:false,
             data:{
@@ -168,49 +190,32 @@ function outline(id){
     }
 }
 
-function deleteData(id){
-    if (confirm("确定删除该活动吗，删除后将不能恢复。")){
-        var url=contextPath + "/activity/softDelete";
-        var data={
-            jsons:JSON.stringify({
-                id:id,
-            })
-        }
-        startLoad();
-        $.post(url,data,function (rst) {
-            stopLoad();
-            if(rst.status==0){
-                getPageList();
-                return;
-            }
-            alert(rst.errorMessage);
-        })
-    }
+//juicer自定义函数
+function initJuicerMethod() {
+juicer.register('parseStatus', parseStatus);
 }
 
-
-function details(id) {
-    var url=contextPath + "/activity/selectActivityByPrimaryKey";
-    var data={
-            id:id,
-    }
-    startLoad();
-    $.post(url,data,function (rst) {
-        stopLoad();
-        if(rst.status==0){
-            renderPage("info", rst.value, "tpl-info");
-            $('#preview').modal("show");
-            return;
-        }
-        alert(rst.errorMessage);
-    })
+/**
+* 状态
+* 0-删除
+* 1-暂存
+* 2-提交审核
+* 3-审核通过
+* 4-审核驳回
+*/
+function parseStatus(status) {
+switch (status) {
+case '0':
+return "已删除";
+case '1':
+return "暂存";
+case '2':
+return "提交审核";
+case '3':
+return "审核通过";
+case '4':
+return "审核驳回";
+default:
+return "";
 }
-
-
-function renderPage(IDom, data, tempId) {
-    var tpl = document.getElementById(tempId).innerHTML;
-    var html = juicer(tpl, {
-        data: data,
-    });
-    $("#" + IDom).html(html);
 }

@@ -1,11 +1,12 @@
 package com.huacainfo.ace.society.model;
 
+import com.huacainfo.ace.common.model.BaseModel;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class BehaviorAnnex implements Serializable {
+public class BehaviorAnnex extends BaseModel {
 
-    private static final long serialVersionUID = -5454882401691135125L;
     private String id;
 
     private String behaviorId;

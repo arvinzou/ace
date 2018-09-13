@@ -27,6 +27,7 @@
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.society.model.Activity">
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
+    <resultMap extends="ResultMapWithBLOBs" id="VoResultMap" type="com.huacainfo.ace.society.vo.ActivityVo"></resultMap>
     <sql id="Base_Column_List">
     id, initiatorId, title, category, summary, coverUrl, dendline, startDate, endDate, 
     volunteerNum, volunteerPoints, parterNum, parterPoints, remark, status, createUserId, 
@@ -36,6 +37,14 @@
     content
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from activity
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
         ,
