@@ -121,6 +121,12 @@ function uploadObject() {
     	var percent = file.percent;
         $('.crop-progress .progress-bar').width(percent+'%');
     });
+	/*上传完成之后*/
+    uploaderCropimg.bind('UploadComplete', function (uploaderCropimg, file) {
+    	$('#cropModal').modal('hide');
+    });
+
+
     
     /*错误提示*/
     uploaderCropimg.bind('Error', function (up, err) {
