@@ -23,11 +23,10 @@ public interface SocietyOrgInfoDao {
 
     SocietyOrgInfoVo selectVoByPrimaryKey(String id);
 
-    List
-            <SocietyOrgInfoVo> findList(@Param("condition") SocietyOrgInfoQVo condition,
-                                        @Param("start") int start,
-                                        @Param("limit") int limit,
-                                        @Param("orderBy") String orderBy);
+    List<SocietyOrgInfoVo> findList(@Param("condition") SocietyOrgInfoQVo condition,
+                                    @Param("start") int start,
+                                    @Param("limit") int limit,
+                                    @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") SocietyOrgInfoQVo condition);
 

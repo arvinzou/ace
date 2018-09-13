@@ -14,15 +14,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="description" />
-        <jsp:include page="/dynamic/common/base.jsp" />
+        <jsp:include page="/dynamic/common/header.jsp" />
         <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
         <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
         <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
         <script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
-        <script src="js/act.js?v=${cfg.version}"></script>
-
     </head>
-
     <body>
 
 
@@ -289,7 +286,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="gridSystemModalLabel3">课程审核</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel3">咨询师审核</h4>
                 </div>
                 <div class="modal-body">
 					
@@ -414,5 +411,6 @@
     </style>
     <jsp:include page="/dynamic/common/footer.jsp" />
     <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+    <script src="js/act.js?v=${cfg.version}"></script>
 
     </html>

@@ -161,6 +161,12 @@ function initData(id){
                     data: result.data,
                 });
                 $("#lebel").html(html);
+
+                var appoint = document.getElementById('appointTemp').innerHTML;
+                var appointhtml = juicer(appoint, {
+                    operation: result.data,
+                });
+                $("#appointment").html(appointhtml);
             }else {
                 alert(result.info);
                 return;

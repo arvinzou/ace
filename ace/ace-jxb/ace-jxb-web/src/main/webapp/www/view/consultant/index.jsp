@@ -97,11 +97,11 @@
 					<div class="col-xs-6 col-sm-6 left" style="padding-left: 0 !important;" onclick="showInfo('\${item.id}');">\${item.name}</div>
 						{@if item.onlineStatus == '1'}
 						<div class="col-xs-6 col-sm-6 right online" style="padding-right: 0 !important;" onclick="createOrder('\${item.id}');">
-							<img src="img/online.png" />预约咨询
+							<img src="img/online.png" />立即预约
 						</div>
 						{@else if item.onlineStatus == '0'}
 						<div class="col-xs-6 col-sm-6 right offline" style="padding-right: 0 !important;" onclick="createOrder('\${item.id}');">
-							<img src="img/offline.png" />暂时离线
+							<img src="img/offline.png" />预约咨询
 						</div>
 						{@/if}
 					</div>

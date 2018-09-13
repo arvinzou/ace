@@ -143,13 +143,13 @@
             <span class="label label-lg label-info">被驳回</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else}
-            <span class="label label-lg label-danger">暂存</span>
+            <span class="label label-lg label-info">暂存</span>
             {@/if}
         </td>
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
-            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:del('\${item.id}');">删除</a>
+            <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
+            <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
@@ -248,10 +248,10 @@
                             <div class="col-md-10">
                                 <div class="radio-group-container">
                                     <label>
-                                        <input type="radio" name="rst" value="1"><span style="padding:10px">通过</span>
+                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="rst" value="2"><span style="padding:10px">退回</span>
+                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
                                     </label>
                                 </div>
                             </div>

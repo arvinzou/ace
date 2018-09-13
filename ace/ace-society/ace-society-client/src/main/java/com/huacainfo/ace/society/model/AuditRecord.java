@@ -12,7 +12,9 @@ public class AuditRecord extends BaseModel {
     private String bisId;
 
     private String userId;
-
+    /**
+     * 2-提交审核 3-审核通过 4-被驳回
+     */
     private String auditState;
 
     private String audtiRemark;

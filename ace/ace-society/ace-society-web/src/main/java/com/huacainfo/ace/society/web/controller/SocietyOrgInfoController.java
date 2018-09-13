@@ -144,8 +144,8 @@ public class SocietyOrgInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse audit(String id, String rst, String remark) throws Exception {
+    public MessageResponse audit(String id, String rst, String message) throws Exception {
 
-        return this.societyOrgInfoService.audit(id, rst, remark, this.getCurUserProp());
+        return this.societyOrgInfoService.audit(id, rst, message, this.getCurUserProp());
     }
 }
