@@ -158,7 +158,6 @@
                         <input type="radio" name="costType" {@if data.o.costType=='1'}checked{@/if} value="1"  onclick="payTypeCheck('pay');">付费
                         <span></span>
                     </label>
-                    {@if data.o.costType=='1'}
                     <div class="price-panel {@if data.o.costType=='1'}hide{@/if}" >
                         <div class="row">
                             <label class="col-md-3 control-label">课程售价</label>
@@ -175,7 +174,6 @@
 
                         </div>
                     </div>
-                    {@/if}
 
 
                 </div>

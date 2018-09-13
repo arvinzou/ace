@@ -3,6 +3,7 @@ var editor;
 window.onload = function (){
     jQuery(function ($) {
        initForm();
+       initEvents();
     });
 }
 function App() {
@@ -17,7 +18,7 @@ function loadCustom() {
 }
 function initEditor() {
         editor = new Simditor({
-        textarea: $('textarea[name=introduce]'),
+        textarea: $('textarea[name=content]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
             'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
         ],
@@ -41,16 +42,15 @@ function render(obj, data, tplId) {
 
 function initPage() {
     initEditor();
-    initUpload();
 }
 function initEvents(){
     /*表单验证*/
     $("#fm-edit").validate({
         onfocusout: function(element) { $(element).valid(); },
         rules: {
-                                         title: {required: true,maxlength:50}                                 },
+            title: {required: true,maxlength:50}                                 },
         messages: {
-                                             title: {
+            title: {
                         required: "请输入议题标题",
                         maxlength:"议题标题字符长度不能超过50"
                     }                                 }
@@ -108,7 +108,7 @@ function initForm(){
             if(result.status == 0) {
                var data={};
                data['o']=result.value;
-               renderPage($("#fm-edit"),data,'tpl-fm');
+               render($("#fm-edit"),data,'tpl-fm');
                initPage();
             }else {
                 alert(result.errorMessage);

@@ -21,7 +21,6 @@
 
         <!--私有部分开始-->
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css" />
-        <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
         <link rel="stylesheet" href="css/style.css">
         <!--私有部分结束-->
     </head>
@@ -99,9 +98,6 @@
     <script src="${portalPath}/content/common/simditor/scripts/uploader.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/simditor/scripts/simditor.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/portal/js/main/menu4.js" type="text/javascript"></script>
-    <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-    <script src="${portalPath}/content/common/plupload/plupload.full.min.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/upload.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
     <script src="js/act.js?v=${cfg.version}"></script>
@@ -109,46 +105,40 @@
     <!--私有部分结束-->
 
     <script id="tpl-fm" type="text/template">
-    <div class="form-body">
-                             <div class="form-group">
-                <label class="col-md-2 control-label">
-                                        <span class="label-red">*</span>
-                                        议题标题
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="label-red">*</span>议题标题
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="title" value="\{data.o.title}" maxlength="50" placeholder="请输入议题标题（建议字数在14个字以内，不超过50个字)">
+                    <input hidden name="id" value="\${data.o.id}"/>
+                    <input type="text" class="form-control" name="title" value="\${data.o.title}" maxlength="50" placeholder="请输入议题标题（建议字数在14个字以内，不超过50个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-                                        议题描述
-                </label>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="label-red">*</span>议题描述</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="content" value="\{data.o.content}" maxlength="1" placeholder="请输入议题描述（建议字数在14个字以内，不超过1个字)">
+                   <%-- <input type="te" class="form-control" name="content" value="\{data.o.content}" maxlength="1" placeholder="请输入议题描述（建议字数在14个字以内，不超过1个字)">--%>
+                    <textarea name="content" id="content">\$\${data.o.content}</textarea>
                     <span class="help-block"></span>
                 </div>
             </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-                                        奖励积分
-                </label>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="label-red">*</span>奖励积分</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="rewardPoints" value="\{data.o.rewardPoints}" maxlength="10" placeholder="请输入奖励积分（建议字数在14个字以内，不超过10个字)">
+                    <input type="text" class="form-control" name="rewardPoints" value="\${data.o.rewardPoints}" maxlength="10" placeholder="请输入奖励积分（建议字数在14个字以内，不超过10个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
-                     <div class="form-group">
-                <label class="col-md-2 control-label">
-                                        备注
-                </label>
+            <div class="form-group">
+                <label class="col-md-2 control-label">备注</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="remark" value="\{data.o.remark}" maxlength="200" placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
+                    <input type="text" class="form-control" name="remark" value="\${data.o.remark}" maxlength="200" placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                     <span class="help-block"></span>
                 </div>
             </div>
-                     </div>
-    <div class="form-actions">
+        </div>
+        <div class="form-actions">
         <div class="row">
             <div class="col-md-offset-3 col-md-7">
                 <button class="btn  btn-lg  green" type="submit" style="width:30%">保存</button>

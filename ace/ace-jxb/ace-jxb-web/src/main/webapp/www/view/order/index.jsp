@@ -133,20 +133,27 @@
 			<div class="col-xs-6 col-sm-6 amount">
 				<span class="amount_01">共计</span><span class="amount_02">¥</span><span class="amount_03" id="totalMoney"></span>
 			</div>
-			<div class="col-xs-6 col-sm-6">
-				<button class="appointment" onclick="createOrder();">立即预约</button>
+			<div class="col-xs-6 col-sm-6" id="appointment">
+
 			</div>
 		</div>
 
-	<script id="labelTemp" type="text/template">
-        <ul class="tagboard">
-			{@if data.consultVo.field!=undefined && data.consultVo.field!=null}
-            {@each data.consultVo.field.split(',') as item,index}
-        		<li class="tagUncheck" onclick="checkTags(this);">\${item}</li>
-        	{@/each}
+		<script id="appointTemp" type="text/template">
+			{@if operation.counselorVo.onlineStatus == '1'}
+			<button class="appointment" onclick="createOrder();">立即预约</button>
+			{@else if operation.counselorVo.onlineStatus == '0'}
+			<button class="appointment" onclick="createOrder();">预约咨询</button>
 			{@/if}
-        </ul>
-	</script>
+		</script>
+		<script id="labelTemp" type="text/template">
+			<ul class="tagboard">
+				{@if data.consultVo.field!=undefined && data.consultVo.field!=null}
+				{@each data.consultVo.field.split(',') as item,index}
+					<li class="tagUncheck" onclick="checkTags(this);">\${item}</li>
+				{@/each}
+				{@/if}
+			</ul>
+		</script>
 	<script id="consulorTemp" type="text/template">
         <div class="row content_01">
             <div class="col-xs-3 col-sm-2 row_01">

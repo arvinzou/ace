@@ -75,15 +75,15 @@ window.location.href = 'edit/index.jsp?id='+id;
 }
 /*查看详情*/
 function detail(id) {
-var url = contextPath + "/subject/selectSubjectByPrimaryKey";
-$.getJSON(url, {id: id}, function (result) {
-if (result.status == 0) {
-var navitem = document.getElementById('tpl-detail').innerHTML;
-var html = juicer(navitem, {data: result.value});
-$("#detail-info").html(html);
-$("#modal-detail").modal("show");
-}
-})
+    var url = contextPath + "/subject/selectSubjectByPrimaryKey";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+        var navitem = document.getElementById('tpl-detail').innerHTML;
+        var html = juicer(navitem, {data: result.value});
+        $("#detail-info").html(html);
+        $("#modal-detail").modal("show");
+    }
+    });
 }
 
 function initEvents() {
