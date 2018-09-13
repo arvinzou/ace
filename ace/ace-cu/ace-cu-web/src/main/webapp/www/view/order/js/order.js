@@ -64,6 +64,7 @@ app.controller(ngControllerName,function($scope) {
 		var message = $("#message").val();      //留言
 		var largeAddress = null;  //省市区
 		var smallAddress = null;   //详细地址
+        var donatePostName = $("input[name = 'donatePostName']").val();
 		var sheng = null;    //省份
 		var shi  = null;     //市
 		var qu = null;       //区
@@ -72,7 +73,6 @@ app.controller(ngControllerName,function($scope) {
             smallAddress = $("#detailAddress").val();
             var billName = $("#billName").val();
             var billphoneNumber = $("#billphoneNumber").val();
-            var donatePostName = $("input[name = 'donatePostName']").val();
             if(billName == null || billName == undefined || billName == ''){
                 alert("请输入收货人姓名！");
                 return;
