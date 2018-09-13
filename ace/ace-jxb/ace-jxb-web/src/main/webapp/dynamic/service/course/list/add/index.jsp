@@ -101,8 +101,7 @@
 																	</div>
                                                                    
                                                                     <div class="form-group">
-                                                                        <label class="col-md-2 control-label">
-                                                                            <span class="label-red">*</span>课件文稿</label>
+                                                                        <label class="col-md-2 control-label">课件文稿</label>
                                                                         <div class="col-md-10">
                                                                             <div style="text-align:left">
                                                                                 <textarea name="introduction" id="introduction"></textarea>
