@@ -30,9 +30,6 @@
 
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
-                                                        <div class="caption">
-                                                            咨询师管理
-                                                        </div>
                                                         <div class="actions">
                                                             <form onsubmit="return t_query()">
 
