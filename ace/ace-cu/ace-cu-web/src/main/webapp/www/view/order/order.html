@@ -16,6 +16,52 @@
 		<link rel="stylesheet" type="text/css" href="css/order.css" />
 		<link rel="stylesheet" type="text/css" href="css/city.css"/>
 		<link rel="stylesheet" type="text/css" href="css/switch.css" />
+		<style>
+			.money_01 span{
+				width: 2.3rem;
+				height: 1rem;
+				line-height: 1rem;
+				background:rgba(251,218,215,.4);
+				display: block;
+				text-align: center;
+				float: left;
+				border-radius: 0.2rem;
+				font-size: 0.4rem;
+				color: #EA4436;
+			}
+			.money_02{
+				width: 100%;
+				height: 1.6rem;
+				line-height: 1.6rem;
+				border-bottom: 1px solid #E4E6E9;
+			}
+			.money_02 span{
+				width: 2.3rem;
+				height: 1rem;
+				line-height: 1rem;
+				background:rgba(251,218,215,.4);
+				display: block;
+				text-align: center;
+				float: left;
+				border-radius: 0.2rem;
+				font-size: 0.4rem;
+				color: #EA4436;
+			}
+			.other_amount{
+				width: 2.3rem;
+				height: 1rem;
+				display: block;
+				float: left;
+				text-align: center;
+				background:rgba(251,218,215,.4);
+				border-radius: 0.2rem;
+				font-size: 0.4rem;
+				color: #EA4436;
+				margin-right: 0.2rem;
+				border: none;
+				outline:none;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -29,11 +75,18 @@
 						<span onclick="selectMoney(this, 100.00);">¥ 100.00</span>
 					</div>
 					<div class="money_02">
+						<span onclick="selectMoney(this, 200.00);" style="margin-right: 0.4rem;">¥ 200.00</span>
+						<span onclick="selectMoney(this, 500.00);" style="margin-right: 0.4rem;">¥ 500.00</span>
 						<!--<span onclick="inputMoney(this);" class="other_amount">输入其他金额</span>-->
-						<input onclick="inputMoney(this);" type='number' id="amountMoney"   class="other_amount" type="text" placeholder="请输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='请输入金额'"  />
+						<input onclick="inputMoney(this);" type='number' id="amountMoney"   class="other_amount" type="text" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"  />
 					</div>
 					<div id="userInfo">
 						<div class="title_01">捐款信息</div>
+						<div>
+							<p>
+								<span class="statement" style="color: #EA4436;font-size: 0.35rem;font-weight: bold;">声明：您的个人信息仅后台可见，不会对外公开！</span>
+							</p>
+						</div>
 						<div class="form">
 							<p>
 								<span class="form_title">捐款人姓名</span>
@@ -103,11 +156,6 @@
 								<input id="detailAddress" class="form_text" type="text" placeholder="请输入详细地址" onfocus="this.placeholder=''" onblur="this.placeholder='请输入详细地址'" />
 							</p>
 						</div>
-					</div>
-					<div>
-						<p>
-							<span class="statement" style="color: #EA4436;font-size: 0.35rem;font-weight: bold;">声明：您的个人信息仅后台可见，不会对外公开！</span>
-						</p>
 					</div>
 				</div>
 			</div>

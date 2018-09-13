@@ -19,6 +19,10 @@ public class Activity extends BaseModel{
 
     private String coverUrl;
 
+    private String startSignImgUrl;
+
+    private String endSignImgUrl;
+
     private Date dendline;
 
     private Date startDate;
@@ -50,6 +54,22 @@ public class Activity extends BaseModel{
     private Date lastModifyDate;
 
     private String content;
+
+    public String getStartSignImgUrl() {
+        return startSignImgUrl;
+    }
+
+    public void setStartSignImgUrl(String startSignImgUrl) {
+        this.startSignImgUrl = startSignImgUrl;
+    }
+
+    public String getEndSignImgUrl() {
+        return endSignImgUrl;
+    }
+
+    public void setEndSignImgUrl(String endSignImgUrl) {
+        this.endSignImgUrl = endSignImgUrl;
+    }
 
     public String getId() {
         return id;

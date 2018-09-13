@@ -207,4 +207,39 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+ <!--<resultMap id="1" type="1"></resultMap>-->
+  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    <include refid="whereCondition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <sql id="whereCondition">
+    from activity t
+    where t.status <![CDATA[ <> ]]> 0
+    <if test="condition.title !=null and condition.title !=&quot;&quot;">
+      and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+    </if>
+  </sql>
+
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Activity">
+    select count(1)
+    from activity
+    where status <![CDATA[ <> ]]> 0
+  </select>
+
 </mapper>

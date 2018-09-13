@@ -8,6 +8,8 @@
         <result column="category" jdbcType="CHAR" property="category"/>
         <result column="summary" jdbcType="VARCHAR" property="summary"/>
         <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
+        <result column="startSignImgUrl" jdbcType="VARCHAR" property="startSignImgUrl"/>
+        <result column="endSignImgUrl" jdbcType="VARCHAR" property="endSignImgUrl"/>
         <result column="dendline" jdbcType="TIMESTAMP" property="dendline"/>
         <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
         <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
@@ -29,7 +31,7 @@
     </resultMap>
     <resultMap extends="ResultMapWithBLOBs" id="VoResultMap" type="com.huacainfo.ace.society.vo.ActivityVo"></resultMap>
     <sql id="Base_Column_List">
-    id, initiatorId, title, category, summary, coverUrl, dendline, startDate, endDate, 
+    id, initiatorId, title, category, summary, coverUrl, startSignImgUrl, endSignImgUrl, dendline, startDate, endDate,
     volunteerNum, volunteerPoints, parterNum, parterPoints, remark, status, createUserId, 
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
@@ -58,7 +60,7 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.society.model.Activity">
     insert into activity (id, initiatorId, title, 
-      category, summary, coverUrl, 
+      category, summary, coverUrl, startSignImgUrl,endSignImgUrl,
       dendline, startDate, endDate, 
       volunteerNum, volunteerPoints, parterNum, 
       parterPoints, remark, status, 
@@ -66,7 +68,7 @@
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
       content)
     values (#{id,jdbcType=VARCHAR}, #{initiatorId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{category,jdbcType=CHAR}, #{summary,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, 
+      #{category,jdbcType=CHAR}, #{summary,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{startSignImgUrl,jdbcType=VARCHAR},#{endSignImgUrl,jdbcType=VARCHAR},
       #{dendline,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
       #{volunteerNum,jdbcType=INTEGER}, #{volunteerPoints,jdbcType=INTEGER}, #{parterNum,jdbcType=INTEGER}, 
       #{parterPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
@@ -94,6 +96,12 @@
             </if>
             <if test="coverUrl != null">
                 coverUrl,
+            </if>
+            <if test="startSignImgUrl != null">
+                startSignImgUrl,
+            </if>
+            <if test="endSignImgUrl != null">
+                endSignImgUrl,
             </if>
             <if test="dendline != null">
                 dendline,
@@ -163,6 +171,12 @@
             <if test="coverUrl != null">
                 #{coverUrl,jdbcType=VARCHAR},
             </if>
+            <if test="startSignImgUrl != null">
+                #{startSignImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="endSignImgUrl != null">
+                #{endSignImgUrl,jdbcType=VARCHAR},
+            </if>
             <if test="dendline != null">
                 #{dendline,jdbcType=TIMESTAMP},
             </if>
@@ -231,6 +245,12 @@
             <if test="coverUrl != null">
                 coverUrl = #{coverUrl,jdbcType=VARCHAR},
             </if>
+            <if test="startSignImgUrl != null">
+                startSignImgUrl = #{startSignImgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="endSignImgUrl != null">
+                endSignImgUrl = #{endSignImgUrl,jdbcType=VARCHAR},
+            </if>
             <if test="dendline != null">
                 dendline = #{dendline,jdbcType=TIMESTAMP},
             </if>
@@ -289,6 +309,8 @@
       category = #{category,jdbcType=CHAR},
       summary = #{summary,jdbcType=VARCHAR},
       coverUrl = #{coverUrl,jdbcType=VARCHAR},
+      startSignImgUrl = #{startSignImgUrl,jdbcType=VARCHAR},
+      endSignImgUrl = #{endSignImgUrl,jdbcType=VARCHAR},
       dendline = #{dendline,jdbcType=TIMESTAMP},
       startDate = #{startDate,jdbcType=TIMESTAMP},
       endDate = #{endDate,jdbcType=TIMESTAMP},
@@ -314,6 +336,8 @@
       category = #{category,jdbcType=CHAR},
       summary = #{summary,jdbcType=VARCHAR},
       coverUrl = #{coverUrl,jdbcType=VARCHAR},
+      startSignImgUrl = #{startSignImgUrl,jdbcType=VARCHAR},
+      endSignImgUrl = #{endSignImgUrl,jdbcType=VARCHAR},
       dendline = #{dendline,jdbcType=TIMESTAMP},
       startDate = #{startDate,jdbcType=TIMESTAMP},
       endDate = #{endDate,jdbcType=TIMESTAMP},
