@@ -76,7 +76,7 @@ function changeCourseType(type){
     initPage();
 }
 function edit(id){
-     window.location.href = contextPath + '/dynamic/service/courseAudit/edit/index.jsp?id='+id+'&type='+params.type;
+     window.location.href = contextPath + '/dynamic/service/courseAudit/edit/index.jsp?id='+urlParams.id+'&type='+params.type+'&did='+id;
 }
 
 

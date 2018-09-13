@@ -24,7 +24,7 @@
 
     <body>
 
-    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
                                                         <div class="caption">
@@ -48,7 +48,7 @@
 
     </body>
     <!--公共部分开始-->
-    <jsp:include page="../../../common/footer.jsp" />
+    <jsp:include page="/dynamic/common/footer.jsp" />
     <!--公共部分结束-->
     <!--私有部分开始-->
     <script src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
@@ -58,7 +58,6 @@
     <script src="${portalPath}/content/common/simditor/scripts/hotkeys.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/simditor/scripts/uploader.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/simditor/scripts/simditor.js?v=${cfg.version}"></script>
-    <script src="${portalPath}/content/portal/js/main/menu4.js" type="text/javascript"></script>
     <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/plupload/plupload.full.min.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
