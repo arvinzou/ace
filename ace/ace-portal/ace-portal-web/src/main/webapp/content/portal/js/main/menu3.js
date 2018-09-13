@@ -1,4 +1,23 @@
 var loading;
+var  urlParams = {};
+function getQueryString() {
+      var qs = location.search.substr(1),
+        args = {},
+        items = qs.length ? qs.split("&") : [],
+        item = null,
+        len = items.length;
+
+      for(var i = 0; i < len; i++) {
+        item = items[i].split("=");
+        var name = decodeURIComponent(item[0]),
+          value = decodeURIComponent(item[1]);
+        if(name) {
+          args[name] = value;
+        }
+      }
+      return args;
+}
+urlParams=getQueryString();
 function loader(jsonData)
      {
 
@@ -51,9 +70,9 @@ var buildMenu = function(menus) {
 		                        }
 		                    }
 							if (menu.leaf != true && menu.leaf != 'true') {
-								html.push('<a class="nav-link nav-toggle" href="#" url="'+menu.href+'"><i class=""></i>'+ menu.text + '<span class="arrow"></span>');
+								html.push('<a class="nav-link nav-toggle" href="#" url="'+menu.href+'"><i class=""></i><small>'+ menu.text + '</small><span class="arrow"></span>');
 							}else{
-							    html.push('<a class="nav-link" href="#" url="'+menu.href+'"><i class=""></i>'+ menu.text + '<span class="arrow"></span>');
+							    html.push('<a class="nav-link" href="#" url="'+menu.href+'"><i class=""></i><small>'+ menu.text + '</small><span class="arrow"></span>');
 							}
 							html.push('</a>');
 							//html.push('<b class="arrow"></b>');
@@ -68,14 +87,14 @@ var buildMenu = function(menus) {
 															+ childrens[i].text
 															+ '" url="'
 															+ childrens[i].href
-															+ '" ><i class=""></i>'
+															+ '" ><i class=""></i><small>'
 															+ childrens[i].text
-															+ '<span class="arrow"></span></a>');
+															+ '</small><span class="arrow"></span></a>');
 										} else {
 										    html.push('<li class="dropdown-submenu" aria-haspopup="true">');
-											html.push('<a class="nav-toggle" href="#"><i class=""></i>'
+											html.push('<a class="nav-toggle" href="#"><i class=""></i><small>'
 															+ childrens[i].text
-															+ '<span class="arrow"></span></a>');
+															+ '</small><span class="arrow"></span></a>');
 										}
 										initSubMenu(childrens[i]);
 										html.push('</li>');
@@ -109,6 +128,30 @@ var buildMenu = function(menus) {
 			}
 		}
 	});
+
+	var activeNode=$("#menu .active");
+	 console.log(activeNode);
+         if(urlParams.id){
+            $(activeNode).parent().css('display','block');
+             $(activeNode).parent().parent().addClass("active");
+
+             $(activeNode).parent().parent().parent().css('display','block');
+             $(activeNode).parent().parent().parent().parent().addClass("active");
+
+             var title=$(activeNode).find("a small").html();
+
+             $("title").html(title);
+             $(".todo-header").html(title);
+              console.log(title);
+         }else{
+               $("#menu999999").addClass("active");
+                $("#menu999999").find("#selected").addClass("selected");
+                var title="仪表盘";
+                $("title").html(title);
+                 $(".todo-header").html(title);
+
+         }
+
 
 }
 
@@ -206,6 +249,3 @@ if(!window.console){
 
         }
      }
-     var  urlParams = {};
-
-      urlParams=getQueryString();
