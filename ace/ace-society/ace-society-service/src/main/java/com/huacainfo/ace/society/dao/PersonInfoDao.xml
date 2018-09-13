@@ -212,7 +212,8 @@
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
-        <include refid="whereCondition"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
@@ -224,17 +225,37 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <sql id="whereCondition">
+    <sql id="From_Statement">
         from person_info t
         left join portal.userinfo u on u.unionid = t.id
+    </sql>
+
+    <sql id="Where_Condition">
         where 1=1
         <if test="condition.realName !=null and condition.realName !=&quot;&quot;">
             and t.realName like concat('%',#{condition.realName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.politicalStatus !=null and condition.politicalStatus !=&quot;&quot;">
+            and t.politicalStatus = #{condition.politicalStatus,jdbcType=VARCHAR}
         </if>
     </sql>
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
-        <include refid="whereCondition"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.PersonInfo">
+        select count(1)
+        from person_info
+        where 1=1
     </select>
 </mapper>

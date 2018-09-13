@@ -6,29 +6,28 @@
     'course' id,
     count(1) value
     FROM
-    course
+    course t inner join course_audit a on t.id=a.courseId where a.rst='1'
     union all
     SELECT
     'courseOrder' id,
     count(1) value
     FROM
     base_order
-    where category='2'
+    where category='2' and payStatus in('2','6','7')
     union all
     SELECT
     'counselorOrder' id,
     count(1) value
     FROM
     base_order
-    where category='1'
-
+    where category='1' and payStatus in('2','6','7')
     union all
     SELECT
     'evaluatOrder' id,
     count(1) value
     FROM
     base_order
-    where category='3'
+    where category='3' and payStatus in('2','6','7')
     union all
     SELECT
     'courseCmt' id,
@@ -39,23 +38,23 @@
     union all
     SELECT
     'counselor' id,
-    count(1) value
+    count(DISTINCT counselorId) value
     FROM
-    counselor
-
+    teacher_audit   where rst ='1'
     union all
     SELECT
     'studio' id,
     count(1) value
     FROM
-    studio
-
+    studio where status='1'
     union all
     SELECT
     'evaluat_tpl' id,
     count(1) value
     FROM
-    portal.evaluat_tpl
+    portal.evaluat_tpl  where syid='jxb'
+
+
 
   </select>
 </mapper>

@@ -55,10 +55,30 @@
                                                     咨询师岗位列表
                                                 </div>
                                                 <div class="actions">
-                                                    <a onclick="javascript:calculationLevel()"
-                                                       class="btn  btn-success btn-sm">
-                                                        计算岗位
-                                                    </a>
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <input type="text"
+                                                                       class="form-control input-circle-left"
+                                                                       placeholder="咨询师名称">
+                                                                <span class="input-group-btn">
+                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                        type="submit">
+                                                                        搜索
+                                                                </button>
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4" >
+                                                            <a onclick="javascript:calculationLevel()"
+                                                               class="btn  btn-success">
+                                                                计算岗位
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -80,25 +100,7 @@
                                                     <%--</ul>--%>
                                                     <div class="portlet-body">
                                                         <div class="mt-element-card mt-element-overlay">
-                                                            <div class="row">
-                                                                <div class="col-sm-8">
 
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <div class="input-group">
-                                                                        <input type="text"
-                                                                               class="form-control input-circle-left"
-                                                                               placeholder="咨询师名称">
-                                                                        <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
-                                                                        type="submit">
-                                                                        搜索
-                                                                </button>
-                                                            </span>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
                                                             <div class="row">
 
                                                                 <%--content--%>
@@ -201,7 +203,7 @@
 </body>
 
 <script id="tmpl-data-list" type="text/template">
-    <table class="table table-hover table-light" align="center" border="0" cellpadding="0" cellspacing="0">
+    <table class="table table-hover" align="center" border="0" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
             <th width="20%">咨询师名称</th>

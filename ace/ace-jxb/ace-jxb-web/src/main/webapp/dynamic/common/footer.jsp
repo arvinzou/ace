@@ -4,5 +4,6 @@
 <script src="${portalPath}/content/common/js/init-rem.js" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/loading.js" type="text/javascript"></script>
 <script src="${portalPath}/content/common/juicer/juicer-min.js" type="text/javascript"></script>
+<script src="${portalPath}/content/portal/js/main/menu${SESSION_USERPROP_KEY.cfg.portalType}.js" type="text/javascript"></script>
 
 

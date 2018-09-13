@@ -14,7 +14,7 @@
 }
 .breadcrumb {
     background: 0 0;
-    padding: 15px 0 15px;
+    padding: 6px 0 6px;
     margin: 0;
     color: #a7b2c0;
 }
@@ -23,7 +23,9 @@
     padding-left: 0px;
     padding-right: 0px;
 }
-
+.portlet.light .portlet-body {
+     padding-top: 2px;
+}
 .dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus, .dropdown-menu>li>a:active, .dropdown-menu>li.active>a, .dropdown-menu>li.active>a:hover, .dropdown-menu .dropdown-submenu:hover>a {
     background: #f6f6f6;
     color: #000;
@@ -42,39 +44,25 @@
     height: 75px;
     color:#000;
 }
-/*.page-header .page-header-menu {
-    background: #32c5d2;
-}
-.page-header .page-header-menu .hor-menu .navbar-nav>li>a, .page-header .page-header-menu .hor-menu .navbar-nav>li>a>i {
-    color: #fff;
-}
-.page-header .page-header-menu .hor-menu .navbar-nav>li .dropdown-menu {
-    background: #32c5d2;
-}
-.page-header .page-header-menu .hor-menu .navbar-nav>li .dropdown-menu li>a {
-    color: #fff;
-}
-header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:hover {
-    color: #fff;
-    background: #2fa6b1!important;
-}
-.page-header .page-header-menu .hor-menu .navbar-nav>li .dropdown-menu li:hover>a {
-    color: #fff;
-    background: #2fa6b1;
-}
-.page-header .page-header-menu .hor-menu .navbar-nav>li.open>a, .page-header .page-header-menu .hor-menu .navbar-nav>li:hover>a, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:active, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .hor-menu .navbar-nav>li>a:hover {
-    color: #fff;
-    background: #2fa6b1!important;
-}*/
+
 .margin-bottom-40 {
-     margin-bottom: 0px!important;
+       margin-bottom: 0px!important;
       font-family:"微软雅黑","宋体";
-      font-size:14px;
+      font-size:12px;
       color: #a2abb7;
       font-weight: 300;
 }
+
+@media(max-width:1600px){
 .container {
-    width: 65%;
+    width: 85%;
+}
+}
+
+@media(min-width:1600px){
+.container {
+    width: 70%;
+}
 }
 
 .page-header .page-header-top .page-logo .logo-default {
@@ -89,10 +77,10 @@ header-menu .hor-menu .navbar-nav>li>a:focus, .page-header .page-header-menu .ho
 }
 .qrcode-default{
      margin:2px;
-     max-height:100px;
+     max-height:60px;
 }
 .page-prefooter {
-    padding: 20px 0;
+    padding: 10px 0;
     clear: both;
 }
 body{
@@ -167,9 +155,10 @@ body{
         padding-left:12px;
     }
     .table>tbody>tr>td {
-        padding-top:18px;
-        padding-bottom:18px;
-        padding-left:10px;
+        padding-top:10px;
+        padding-bottom:10px;
+        padding-left:6px;
+        valign:middle;
     }
     .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
         z-index: 3;
@@ -198,4 +187,10 @@ body{
     }
     .btn:not(.btn-sm):not(.btn-lg) {
         line-height: 2.2;
+    }
+    .tabbable-line>.tab-content {
+        margin-top: 0;
+        border: 0;
+        border-top: 1px solid #eef1f5;
+        padding: 5px 0;
     }

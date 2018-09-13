@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.SocietyOrgInfoDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
+        <result column="orgType" jdbcType="CHAR" property="orgType"/>
+        <result column="orgAddr" jdbcType="VARCHAR" property="orgAddr"/>
+        <result column="orgCover" jdbcType="VARCHAR" property="orgCover"/>
+        <result column="orgSummary" jdbcType="VARCHAR" property="orgSummary"/>
+        <result column="contactPerson" jdbcType="VARCHAR" property="contactPerson"/>
+        <result column="contactPhone" jdbcType="VARCHAR" property="contactPhone"/>
+        <result column="accPoints" jdbcType="INTEGER" property="accPoints"/>
+        <result column="validPoints" jdbcType="INTEGER" property="validPoints"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, orgName, orgType, orgAddr, orgCover, orgSummary, contactPerson, contactPhone,
+        accPoints, validPoints, remark, status, createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from society_org_info
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from society_org_info
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        insert into society_org_info (id, orgName, orgType,
+        orgAddr, orgCover, orgSummary,
+        contactPerson, contactPhone, accPoints,
+        validPoints, remark, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+        )
+        values (#{id,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgType,jdbcType=CHAR},
+        #{orgAddr,jdbcType=VARCHAR}, #{orgCover,jdbcType=VARCHAR}, #{orgSummary,jdbcType=VARCHAR},
+        #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{accPoints,jdbcType=INTEGER},
+        #{validPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        insert into society_org_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orgName != null">
+                orgName,
+            </if>
+            <if test="orgType != null">
+                orgType,
+            </if>
+            <if test="orgAddr != null">
+                orgAddr,
+            </if>
+            <if test="orgCover != null">
+                orgCover,
+            </if>
+            <if test="orgSummary != null">
+                orgSummary,
+            </if>
+            <if test="contactPerson != null">
+                contactPerson,
+            </if>
+            <if test="contactPhone != null">
+                contactPhone,
+            </if>
+            <if test="accPoints != null">
+                accPoints,
+            </if>
+            <if test="validPoints != null">
+                validPoints,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="orgName != null">
+                #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgType != null">
+                #{orgType,jdbcType=CHAR},
+            </if>
+            <if test="orgAddr != null">
+                #{orgAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCover != null">
+                #{orgCover,jdbcType=VARCHAR},
+            </if>
+            <if test="orgSummary != null">
+                #{orgSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null">
+                #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="accPoints != null">
+                #{accPoints,jdbcType=INTEGER},
+            </if>
+            <if test="validPoints != null">
+                #{validPoints,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        update society_org_info
+        <set>
+            <if test="orgName != null">
+                orgName = #{orgName,jdbcType=VARCHAR},
+            </if>
+            <if test="orgType != null">
+                orgType = #{orgType,jdbcType=CHAR},
+            </if>
+            <if test="orgAddr != null">
+                orgAddr = #{orgAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="orgCover != null">
+                orgCover = #{orgCover,jdbcType=VARCHAR},
+            </if>
+            <if test="orgSummary != null">
+                orgSummary = #{orgSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPerson != null">
+                contactPerson = #{contactPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="contactPhone != null">
+                contactPhone = #{contactPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="accPoints != null">
+                accPoints = #{accPoints,jdbcType=INTEGER},
+            </if>
+            <if test="validPoints != null">
+                validPoints = #{validPoints,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        update society_org_info
+        set orgName = #{orgName,jdbcType=VARCHAR},
+        orgType = #{orgType,jdbcType=CHAR},
+        orgAddr = #{orgAddr,jdbcType=VARCHAR},
+        orgCover = #{orgCover,jdbcType=VARCHAR},
+        orgSummary = #{orgSummary,jdbcType=VARCHAR},
+        contactPerson = #{contactPerson,jdbcType=VARCHAR},
+        contactPhone = #{contactPhone,jdbcType=VARCHAR},
+        accPoints = #{accPoints,jdbcType=INTEGER},
+        validPoints = #{validPoints,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--**********************************-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.PersonInfoVo">
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+        u.nickname, u.headimgurl,
+        t.id, t.orgName, t.orgAddr, t.contactPerson, t.contactPhone, t.accPoints, t.validPoints, t.remark,
+        t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName,
+        t.lastModifyDate
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="From_Statement">
+        from society_org_info t
+        left join portal.userinfo u on u.unionid = t.id
+    </sql>
+
+    <sql id="Where_Condition">
+        where 1=1
+        <if test="condition.orgName !=null and condition.orgName !=&quot;&quot;">
+            and t.orgName like concat('%',#{condition.orgName,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.PersonInfo">
+        select count(1)
+        from society_org_info
+        where 1=1
+    </select>
+</mapper>

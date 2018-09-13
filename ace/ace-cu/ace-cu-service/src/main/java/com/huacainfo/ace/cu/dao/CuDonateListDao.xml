@@ -224,9 +224,13 @@
         <result column="city" jdbcType="VARCHAR" property="city"/>
         <result column="district" jdbcType="VARCHAR" property="district"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="donateName" jdbcType="VARCHAR" property="donateName"/>
+        <result column="mobileNumber" jdbcType="VARCHAR" property="mobileNumber"/>
+        <result column="donatePostName" jdbcType="VARCHAR" property="donatePostName"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+        o.donateName,o.mobileNumber, o.donatePostName,
         o.needReceipt, o.consigneeName, o.consigneeMobileNumber,
         o.country, o.province, o.city, o.district, o.address,
         IFNULL(o.points,0) AS points,

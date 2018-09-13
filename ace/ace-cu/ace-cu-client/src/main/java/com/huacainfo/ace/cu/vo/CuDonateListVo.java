@@ -58,6 +58,43 @@ public class CuDonateListVo extends CuDonateList {
 
     private String consigneeAddr;
 
+    /**
+     * 捐款人姓名
+     */
+    private String donateName;
+    /**
+     * 捐款人手机号码
+     */
+    private String mobileNumber;
+    /**
+     * 捐款单位名称
+     */
+    private String donatePostName;
+
+    public String getDonateName() {
+        return donateName;
+    }
+
+    public void setDonateName(String donateName) {
+        this.donateName = donateName;
+    }
+
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
+
+    public String getDonatePostName() {
+        return donatePostName;
+    }
+
+    public void setDonatePostName(String donatePostName) {
+        this.donatePostName = donatePostName;
+    }
+
     public String getNeedReceipt() {
         return needReceipt;
     }

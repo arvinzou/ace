@@ -4,6 +4,7 @@ window.onload = function () {
     initPage();
     initEvents();
     initJuicerMethod();
+
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -17,6 +18,8 @@ function loadCustom() {
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
+    console.log("===============");
+    console.log(urlParams);
 }
 /*个人信息初始化分页*/
 function initPage() {
@@ -75,6 +78,18 @@ function add(type) {
 /*个人信息编辑*/
 function edit(id) {
     window.location.href = 'edit/index.jsp?id=' + id;
+}
+/*查看详情*/
+function detail(id) {
+    var url = contextPath + "/personInfo/selectPersonInfoByPrimaryKey";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+            var navitem = document.getElementById('tpl-detail').innerHTML;
+            var html = juicer(navitem, {data: result.value});
+            $("#detail-info").html(html);
+            $("#modal-detail").modal("show");
+        }
+    });
 }
 
 function initEvents() {

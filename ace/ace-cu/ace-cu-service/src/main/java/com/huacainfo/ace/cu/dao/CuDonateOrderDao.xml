@@ -8,6 +8,7 @@
         <result column="openId" jdbcType="VARCHAR" property="openId"/>
         <result column="anonymity" jdbcType="VARCHAR" property="anonymity"/>
         <result column="donateName" jdbcType="VARCHAR" property="donateName"/>
+        <result column="donatePostName" jdbcType="VARCHAR" property="donatePostName"/>
         <result column="mobileNumber" jdbcType="VARCHAR" property="mobileNumber"/>
         <result column="donateAmount" jdbcType="DECIMAL" property="donateAmount"/>
         <result column="donateDate" jdbcType="TIMESTAMP" property="donateDate"/>
@@ -36,7 +37,8 @@
     id, projectId, userId, openId, donateName, mobileNumber, donateAmount, donateDate, 
     orderNo, payType, payDate, points, needReceipt, consigneeName, country, province, 
     city, district, address, remark, status, createUserId, createUserName, createDate,
-        lastModifyUserId, lastModifyUserName, lastModifyDate, anonymity, consigneeMobileNumber
+        lastModifyUserId, lastModifyUserName, lastModifyDate, anonymity, consigneeMobileNumber,
+        donatePostName
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -58,7 +60,7 @@
       address, remark, status, 
       createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
-        anonymity, consigneeMobileNumber
+        anonymity, consigneeMobileNumber, donatePostName
       )
     values (#{id,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{openId,jdbcType=VARCHAR}, #{donateName,jdbcType=VARCHAR}, #{mobileNumber,jdbcType=VARCHAR}, 
@@ -71,6 +73,7 @@
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
         #{anonymity,jdbcType=VARCHAR}, #{consigneeMobileNumber,jdbcType=VARCHAR},
+        #{donatePostName,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.cu.model.CuDonateOrder">
@@ -163,6 +166,10 @@
             <if test="consigneeMobileNumber != null">
                 consigneeMobileNumber,
             </if>
+
+            <if test="donatePostName != null">
+                donatePostName,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -251,6 +258,9 @@
             </if>
             <if test="consigneeMobileNumber != null">
                 #{consigneeMobileNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="donatePostName != null">
+                #{donatePostName,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -341,6 +351,10 @@
             <if test="consigneeMobileNumber != null">
                 consigneeMobileNumber = #{consigneeMobileNumber,jdbcType=VARCHAR},
             </if>
+            <if test="donatePostName != null">
+                donatePostName = #{donatePostName,jdbcType=VARCHAR},
+            </if>
+
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -373,7 +387,8 @@
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
         anonymity = #{anonymity,jdbcType=VARCHAR},
-        consigneeMobileNumber = #{consigneeMobileNumber,jdbcType=VARCHAR}
+        consigneeMobileNumber = #{consigneeMobileNumber,jdbcType=VARCHAR},
+        donatePostName = #{donatePostName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

@@ -178,12 +178,15 @@ function initMenu(){
 
  function loadCommon(){
          var urls=[];
-         urls.push({path:portalPath,url:'/content/common/assets/js/gz/bootstrap.min.js',type:'js'});
+         loader({path:portalPath,url:'/content/common/assets/js/gz/bootstrap.min.js',type:'js',callback:function(){
+             loader({path:portalPath,url:'/content/common/assets/global/scripts/app.min.js',type:'js',callback:function(){
+                        loader({path:portalPath,url:'/content/common/assets/layouts/layout/scripts/layout.min.js',type:'js'});
+                     }});
+
+         }});
          urls.push({path:portalPath,url:'/content/common/assets/js/gz/bootbox.min.js',type:'js'});
          urls.push({path:portalPath,url:'/content/common/assets/pages/scripts/ui-modals.min.js',type:'js'});
-         urls.push({path:portalPath,url:'/content/common/assets/global/scripts/app.min.js',type:'js',callback:function(){
-            loader({path:portalPath,url:'/content/common/assets/layouts/layout/scripts/layout.min.js',type:'js'});
-         }});
+
           for(var i=0;i<urls.length;i++){
              loader(urls[i]);
           }
