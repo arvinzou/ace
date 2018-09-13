@@ -85,8 +85,9 @@
                                                             <th width="40%">活动名称</th>
                                                             <th width="20%">活动类型</th>
                                                             <th width="20%">开展时间</th>
-                                                            <th width="5%">活动组织者</th>
-                                                            <th width="10%">活动状态</th>
+                                                            <th width="5%">活动发布者</th>
+                                                            <th width="10%">活动进度</th>
+                                                            <th width="10%">发布状态</th>
                                                             <th width="15%">操作</th>
                                                         </tr>
                                                         </thead>
@@ -118,62 +119,60 @@
 </div>
 
 
-
-
 <!--审核弹框-->
-<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">线下活动审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-3 control-label">审核结果</label>
-                            <div class="col-md-9">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" checked name="rst" value="1"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="2"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">审核说明</label>
-                            <div class="col-md-9">
-                                <input type="hidden" name="id"/>
-                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-md-3 control-label">扣除爱心币</label>--%>
-                            <%--<div class="col-md-9">--%>
-                                <%--<input name="parterPoints" style="width: 100%;padding: 5px;border: #ebedf2 1px solid;">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                        <%--<div class="form-group">--%>
-                            <%--<label class="col-md-3 control-label">奖励爱心币</label>--%>
-                            <%--<div class="col-md-9">--%>
-                                <%--<input name="volunteerPoints" style="width: 100%;padding: 5px;border: #ebedf2 1px solid;">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
+<%--<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">--%>
+<%--<div class="modal-dialog" role="document">--%>
+<%--<div class="modal-content">--%>
+<%--<div class="modal-header">--%>
+<%--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>--%>
+<%--</button>--%>
+<%--<h4 class="modal-title">线下活动审核</h4>--%>
+<%--</div>--%>
+<%--<div class="modal-body">--%>
+<%--<form class="form-horizontal" id="fm-audit" role="form">--%>
+<%--<div class="form-body">--%>
+<%--<div class="form-group " id="operation">--%>
+<%--<label class="col-md-3 control-label">审核结果</label>--%>
+<%--<div class="col-md-9">--%>
+<%--<div class="radio-group-container">--%>
+<%--<label>--%>
+<%--<input type="radio" checked name="rst" value="1"><span style="padding:10px">通过</span>--%>
+<%--</label>--%>
+<%--<label>--%>
+<%--<input type="radio" name="rst" value="2"><span style="padding:10px">退回</span>--%>
+<%--</label>--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--<div class="form-group">--%>
+<%--<label class="col-md-3 control-label">审核说明</label>--%>
+<%--<div class="col-md-9">--%>
+<%--<input type="hidden" name="id"/>--%>
+<%--<textarea name="message" style="width: 100%;height: 100px;"></textarea>--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--&lt;%&ndash;<div class="form-group">&ndash;%&gt;--%>
+<%--&lt;%&ndash;<label class="col-md-3 control-label">扣除爱心币</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<div class="col-md-9">&ndash;%&gt;--%>
+<%--&lt;%&ndash;<input name="parterPoints" style="width: 100%;padding: 5px;border: #ebedf2 1px solid;">&ndash;%&gt;--%>
+<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<div class="form-group">&ndash;%&gt;--%>
+<%--&lt;%&ndash;<label class="col-md-3 control-label">奖励爱心币</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;<div class="col-md-9">&ndash;%&gt;--%>
+<%--&lt;%&ndash;<input name="volunteerPoints" style="width: 100%;padding: 5px;border: #ebedf2 1px solid;">&ndash;%&gt;--%>
+<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+<%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+<%--</div>--%>
+<%--</form>--%>
+<%--</div>--%>
+<%--<div class="modal-footer">--%>
+<%--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>--%>
+<%--<button type="button" class="btn btn-primary">确定</button>--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--</div>--%>
+<%--</div>--%>
 <%--查看详情弹框--%>
 <div class="modal fade" role="dialog" id="preview">
     <div class="modal-dialog" role="document" style="width:60%">
@@ -186,9 +185,6 @@
             </div>
             <div id="info" class="my-gallery">
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
@@ -210,21 +206,28 @@
         <td>\${item.initiatorId}</td>
         <td>
             {@if item.status==2}
+            <span class="label label-lg label-info">审核状态</span>
+            {@else if item.status==3}
+            <span class="label label-lg label-success">\${item.endDate?'活动结束':'活动开始'}</span>
+            {@else if item.status==4}
+            <span class="label label-lg label-warning">审核失败</span>
+            {@/if}
+        </td>
+        <td>
+            {@if item.status==2}
             <span class="label label-lg label-info">待审核</span>
             {@else if item.status==3}
             <span class="label label-lg label-success">审核通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else if item.status==4}
-            <span class="label label-lg label-success">审核不通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
+            <span class="label label-lg label-warning">审核不通过</span>
             {@/if}
         </td>
         <td>
             <a class="operation" href="#" onclick="details('\${item.id}');">查看</a>
-            {@if item.status == '2'}
-            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
-            {@/if}
-            <a class="operation" href="#" onclick="deleteData('\${item.id}');">删除</a>
+            <%--{@if item.status == '2'}--%>
+            <%--<a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>--%>
+            <%--{@/if}--%>
+            <%--<a class="operation" href="#" onclick="deleteData('\${item.id}');">删除</a>--%>
         </td>
     </tr>
     {@/each}
@@ -234,7 +237,7 @@
 <script id="tpl-info" type="text/template">
     <div class="modal-body">
         <div class="form-horizontal" novalidate="novalidate">
-            <div class="form-body" style="padding: 30px;">
+            <div class="form-body">
                 <div class="form-group">
                     <label class="col-md-2 control-label">
                         <span class="required" aria-required="true">*</span>
@@ -318,6 +321,19 @@
 
         </div>
 
+    </div>
+    <div STYLE="display: flex;padding: 15px;border-top: 1px solid #efefef; align-items: center;justify-content: space-between">
+        <div style="height: 40px;">
+            {@if data.status==2}
+            <select name="rst" id="" style=" height: 100%;width: 80px;">
+                <option value="1">通过</option>
+                <option value="2">驳回</option>
+            </select>
+            <input name="remark"  class="" style="height: 100%;width: 200px;padding: 0 10px;" type="text" placeholder="原因">
+            <button type="button" class="btn btn-primary btn-audit">确定</button>
+            {@/if}
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
     </div>
 </script>
 

@@ -42,24 +42,25 @@
                                 <!---==============================================-->
 
                                 <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            活动报道
-                                                        </div>
-                                                        <div class="actions">
-                                                             <a href="javascript:void(0);" onclick="add();"  class="btn green">创建</a>
-                                                        </div>
+                                    <div class="col-md-12">
+                                        <div class="portlet light">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    活动报道
+                                                </div>
+                                                <div class="actions">
+                                                    <a href="javascript:void(0);" onclick="add();"
+                                                       class="btn green">创建</a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+
+                                                <div class="row">
+                                                    <div class="col-sm-8">
+
                                                     </div>
-                                                    <div class="portlet-body">
-
-                                                    <div class="row">
-                                                        <div class="col-sm-8">
-
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <form onsubmit="return t_query()">
+                                                    <div class="col-sm-4">
+                                                        <form onsubmit="return t_query()">
                                                             <div class="input-group">
                                                                 <input type="text"
                                                                        name="keyword"
@@ -72,51 +73,35 @@
                                                         </button>
                                                     </span>
                                                             </div>
-                                                            </form>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                        <div class="table-scrollable">
-                                                            <table class="table table-hover">
-                                                                <thead>
-                                                                    <tr>
-                                                                                                                                                                                                                                    <th width="10%"> 主键-GUID</th>
-                                                                                                                                                            <th width="10%"> 活动编码</th>
-                                                                                                                                                            <th width="10%"> 报道标题</th>
-                                                                                                                                                            <th width="10%"> 报道副标题</th>
-                                                                                                                                                            <th width="10%"> 报道内容</th>
-                                                                                                                                                            <th width="10%"> 备注</th>
-                                                                                                                                                            <th width="10%"> 状态
-0-删除 
-1-暂存
-2-提交审核
-3-审核通过
-4-审核驳回</th>
-                                                                                                                                                            <th width="10%"> 创建人编号</th>
-                                                                                                                                                            <th width="10%"> 创建人姓名</th>
-                                                                                                                                                            <th width="10%"> 创建日期</th>
-                                                                                                                                                            <th width="10%"> 更新人编号</th>
-                                                                                                                                                            <th width="10%"> 更新人名称</th>
-                                                                                                                                                            <th width="10%"> 更新日期</th>
-                                                                                                                                                                                                                            <th width="15%">操作</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="page-list">
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="paginationbar">
-                                                            <ul class="pagination" id="pagination1"></ul>
-                                                        </div>
-
+                                                        </form>
                                                     </div>
 
                                                 </div>
+
+
+                                                <div class="table-scrollable">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="10%"> 报道标题</th>
+                                                            <th width="10%"> 状态</th>
+                                                            <th width="15%">操作</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="page-list">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="paginationbar">
+                                                    <ul class="pagination" id="pagination1"></ul>
+                                                </div>
+
                                             </div>
+
                                         </div>
+                                    </div>
+                                </div>
                                 <!--=======================================-->
 
                             </div>
@@ -133,20 +118,10 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-                                    <td> \&{item.id}</td>
-                            <td> \&{item.activityId}</td>
-                            <td> \&{item.title}</td>
-                            <td> \&{item.subTitle}</td>
-                            <td> \&{item.content}</td>
-                            <td> \&{item.remark}</td>
-                            <td> \&{item.status}</td>
-                            <td> \&{item.createUserId}</td>
-                            <td> \&{item.createUserName}</td>
-                            <td> \&{item.createDate}</td>
-                            <td> \&{item.lastModifyUserId}</td>
-                            <td> \&{item.lastModifyUserName}</td>
-                            <td> \&{item.lastModifyDate}</td>
-                            <td>
+
+        <td> \&{item.title}</td>
+
+        <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">已删除</span>
             {@else if item.status==1}
@@ -154,7 +129,7 @@
             {@else if item.status==2}
             <span class="label label-lg label-warning">提交审核</span>
             {@else if item.status==3}
-            <span class="label label-lg label-info">审核通过</span>
+            <span class="label label-lg label-success">审核通过</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else if item.status==4}
             <span class="label label-lg label-info">被驳回</span>
@@ -169,7 +144,7 @@
             <a class="operation" href="javascript:del('\${item.id}');">删除</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
-             {@/if}
+            {@/if}
         </td>
     </tr>
     {@/each}
@@ -177,64 +152,65 @@
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
     <table class="table table-bordered table-hover">
-                                    <tr>
-                    <td class="active"> 主键-GUID</td>
-                    <td class="success"> \&{data.id}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 活动编码</td>
-                    <td class="success"> \&{data.activityId}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 报道标题</td>
-                    <td class="success"> \&{data.title}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 报道副标题</td>
-                    <td class="success"> \&{data.subTitle}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 报道内容</td>
-                    <td class="success"> \&{data.content}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 备注</td>
-                    <td class="success"> \&{data.remark}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 状态
-0-删除 
-1-暂存
-2-提交审核
-3-审核通过
-4-审核驳回</td>
-                    <td class="success"> \&{data.status}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 创建人编号</td>
-                    <td class="success"> \&{data.createUserId}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 创建人姓名</td>
-                    <td class="success"> \&{data.createUserName}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 创建日期</td>
-                    <td class="success"> \&{data.createDate}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 更新人编号</td>
-                    <td class="success"> \&{data.lastModifyUserId}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 更新人名称</td>
-                    <td class="success"> \&{data.lastModifyUserName}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 更新日期</td>
-                    <td class="success"> \&{data.lastModifyDate}</td>
-                </tr>
-                        </table>
+        <tr>
+            <td class="active"> 主键-GUID</td>
+            <td class="success"> \&{data.id}</td>
+        </tr>
+        <tr>
+            <td class="active"> 活动编码</td>
+            <td class="success"> \&{data.activityId}</td>
+        </tr>
+        <tr>
+            <td class="active"> 报道标题</td>
+            <td class="success"> \&{data.title}</td>
+        </tr>
+        <tr>
+            <td class="active"> 报道副标题</td>
+            <td class="success"> \&{data.subTitle}</td>
+        </tr>
+        <tr>
+            <td class="active"> 报道内容</td>
+            <td class="success"> \&{data.content}</td>
+        </tr>
+        <tr>
+            <td class="active"> 备注</td>
+            <td class="success"> \&{data.remark}</td>
+        </tr>
+        <tr>
+            <td class="active"> 状态
+                0-删除
+                1-暂存
+                2-提交审核
+                3-审核通过
+                4-审核驳回
+            </td>
+            <td class="success"> \&{data.status}</td>
+        </tr>
+        <tr>
+            <td class="active"> 创建人编号</td>
+            <td class="success"> \&{data.createUserId}</td>
+        </tr>
+        <tr>
+            <td class="active"> 创建人姓名</td>
+            <td class="success"> \&{data.createUserName}</td>
+        </tr>
+        <tr>
+            <td class="active"> 创建日期</td>
+            <td class="success"> \&{data.createDate}</td>
+        </tr>
+        <tr>
+            <td class="active"> 更新人编号</td>
+            <td class="success"> \&{data.lastModifyUserId}</td>
+        </tr>
+        <tr>
+            <td class="active"> 更新人名称</td>
+            <td class="success"> \&{data.lastModifyUserName}</td>
+        </tr>
+        <tr>
+            <td class="active"> 更新日期</td>
+            <td class="success"> \&{data.lastModifyDate}</td>
+        </tr>
+    </table>
 </script>
 
 <%--查看详情--%>
@@ -276,7 +252,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                      <div class="form-body">
+                    <div class="form-body">
                         <div class="form-group " id="operation">
                             <label class="col-md-2 control-label">审核结果</label>
                             <div class="col-md-10">
@@ -309,19 +285,21 @@
 </div>
 </body>
 <style>
-    .cover{
+    .cover {
         width: 70px;
         height: 70px;
         object-fit: cover;
     }
-    .describtion{
-        padding-left:15px;
-        height:50px;
+
+    .describtion {
+        padding-left: 15px;
+        height: 50px;
     }
-    .cost{
-          padding-top: 5px;
-          padding-left:15px;
-          color:#FE6500;
+
+    .cost {
+        padding-top: 5px;
+        padding-left: 15px;
+        color: #FE6500;
     }
 </style>
 </html>

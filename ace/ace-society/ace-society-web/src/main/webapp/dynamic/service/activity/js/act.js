@@ -2,7 +2,8 @@ var loading = {};
 var params = {limit: 10};
 window.onload = function (){
     initPage();
-    initEvents();
+    // initEvents();
+    $('#preview').on('click','.btn-audit',audit)
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -74,40 +75,50 @@ function edit(id){
      window.location.href = 'edit/index.jsp?id='+id;
 }
 
-function initEvents() {
-    $('#modal-audit').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var modal = $(this);
-        modal.find('.modal-body input[name=id]').val(id);
-    })
-    $('#modal-audit .btn-primary').on('click', function () {
-        $('#modal-audit form').submit();
-    });
-    $('#modal-audit form').ajaxForm({
-            beforeSubmit: function (formData, jqForm, options) {
-                var params = {};
-                $.each(formData, function (n, obj) {
-                    params[obj.name] = obj.value;
-                });
-                $.extend(params, {
-                    time: new Date()
-                });
-                console.log(params);
-                audit(params);
-                return false;
-            }
-        });
-
-
-}
+// function initEvents() {
+//     $('#modal-audit').on('show.bs.modal', function (event) {
+//         var relatedTarget = $(event.relatedTarget);
+//         var id = relatedTarget.data('id');
+//         var modal = $(this);
+//         modal.find('.modal-body input[name=id]').val(id);
+//     })
+//     $('#modal-audit .btn-primary').on('click', function () {
+//         $('#modal-audit form').submit();
+//     });
+//     $('#modal-audit form').ajaxForm({
+//             beforeSubmit: function (formData, jqForm, options) {
+//                 var params = {};
+//                 $.each(formData, function (n, obj) {
+//                     params[obj.name] = obj.value;
+//                 });
+//                 $.extend(params, {
+//                     time: new Date()
+//                 });
+//                 console.log(params);
+//                 audit(params);
+//                 return false;
+//             }
+//         });
+//
+//
+// }
 /*线下活动审核*/
-function audit(params){
-    startLoad();
+function audit(){
     var url=contextPath + "/activity/audit";
-    $.post(url,params,function(rst){
+    var id=$('#preview').data('id');
+    var rst1=$('select[name=rst]').val();
+    var remark=$('input[name=remark]').val();
+    if(!remark.trim()){
+        $('input[name=remark]').focus();
+    }
+    var data={
+        id:id,
+        rst:rst1,
+        remark:remark,
+    }
+    startLoad();
+    $.post(url,data,function(rst){
         stopLoad();
-        $("#modal-audit").modal('hide');
         if(rst.status == 0) {
             getPageList();
         }
@@ -194,6 +205,7 @@ function details(id) {
     var data={
             id:id,
     }
+    $('#preview').data('id',id);
     startLoad();
     $.post(url,data,function (rst) {
         stopLoad();
