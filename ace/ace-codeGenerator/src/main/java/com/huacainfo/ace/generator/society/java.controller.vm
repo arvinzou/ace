@@ -142,7 +142,7 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 * @Description: TODO(审核$!{bean.tableChineseName})
                 * @param: @param id bean.id
                 * @param: @param rst 审核结果 3-通过 4-拒绝
-                * @param: @param remark 审核备注
+                * @param: @param message 审核说明
                 * @param: @throws Exception
                 * @return: MessageResponse
                 * @throws
@@ -151,8 +151,8 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 */
                 @RequestMapping(value = "/audit")
                 @ResponseBody
-                public MessageResponse audit(String id,String rst, String remark) throws Exception {
+                public MessageResponse audit(String id,String rst, String message) throws Exception {
 
-                return this.$!{bean.lowerName}Service.audit(id, rst, remark, this.getCurUserProp());
+                return this.$!{bean.lowerName}Service.audit(id, rst, message, this.getCurUserProp());
                 }
                 }
