@@ -154,11 +154,10 @@ private DataBaseLogService dataBaseLogService;
                 @Override
                 public SingleResult
                 <SubjectVo> selectSubjectByPrimaryKey(String id) throws Exception {
-                    SingleResult
-                    <SubjectVo> rst = new SingleResult<>();
-                        rst.setValue(this.subjectDao.selectVoByPrimaryKey(id));
-                        return rst;
-                        }
+                    SingleResult <SubjectVo> rst = new SingleResult<>();
+                    rst.setValue(this.subjectDao.selectVoByPrimaryKey(id));
+                    return rst;
+                }
 
                         /**
                         *
