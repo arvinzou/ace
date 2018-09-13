@@ -200,7 +200,8 @@ body{
         padding: 5px 0;
     }
     .page-header .page-header-menu .hor-menu .navbar-nav>li>a {
-        font-size: 14px;
-        font-weight: 300;
         padding: 15px 15px 15px;
+    }
+    small {
+        font-size: 100%;
     }

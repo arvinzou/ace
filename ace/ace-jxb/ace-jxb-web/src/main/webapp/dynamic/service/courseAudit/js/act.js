@@ -9,7 +9,7 @@ function loadlocal() {
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
+    //loadlocal();
 }
 
 
