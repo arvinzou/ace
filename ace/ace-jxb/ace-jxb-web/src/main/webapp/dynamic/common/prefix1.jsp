@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <script id="tpl-menu-base" type="text/template">
-<li class="nav-item start">
+<li class="nav-item start" id="menu999999">
     <a href="${pageContext.request.contextPath}/index.jsp" url="${pageContext.request.contextPath}/index.jsp" class="nav-link nav-toggle">
         <i class="icon-home"></i>
         <span class="title">仪表盘</span>
@@ -74,3 +74,12 @@
         </div>
         <div class="page-content-wrapper">
             <div class="page-content">
+                <ul class="page-breadcrumb breadcrumb">
+                    <li>
+                        <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
+                        <i class="fa fa-circle"></i>
+                    </li>
+                    <li>
+                        <span class="todo-header">咨询师管理</span>
+                    </li>
+                </ul>

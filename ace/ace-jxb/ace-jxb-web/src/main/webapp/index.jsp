@@ -8,62 +8,21 @@ pageEncoding="utf-8" %>
     <meta name="description" content="overview &amp; stats"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>心阳光联盟</title>
+    <title>${cfg.sys_name}</title>
 
 </head>
 
 
-<jsp:include page="/dynamic/common/base.jsp" />
-
-<link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-<link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-<script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
-<link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-<link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css">
-
-
-
-
-
-
+<jsp:include page="/dynamic/common/header.jsp" />
 <body>
-<div class="page-wrapper">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>仪表盘</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
-                                <!---==============================================-->
+<div class="page-content-inner">
 
-
-
-                            <!--=======================================-->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
-<div class="bottom"></div>
-</div>
-<script
-        src="${pageContext.request.contextPath}/content/index/act.js?version=${cfg.version}"></script>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
 <script id="tpl-portal-1" type="text/template">
 
         <!-- PAGE CONTENT BEGINS -->
@@ -263,5 +222,8 @@ pageEncoding="utf-8" %>
 
 
 </script>
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/index/act.js?version=${cfg.version}"></script>
 </body>
 </html>

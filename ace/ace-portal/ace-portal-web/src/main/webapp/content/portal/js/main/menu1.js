@@ -1,4 +1,23 @@
 var loading;
+var  urlParams = {};
+function getQueryString() {
+      var qs = location.search.substr(1),
+        args = {},
+        items = qs.length ? qs.split("&") : [],
+        item = null,
+        len = items.length;
+
+      for(var i = 0; i < len; i++) {
+        item = items[i].split("=");
+        var name = decodeURIComponent(item[0]),
+          value = decodeURIComponent(item[1]);
+        if(name) {
+          args[name] = value;
+        }
+      }
+      return args;
+}
+urlParams=getQueryString();
 function loader(jsonData)
      {
 
@@ -34,58 +53,54 @@ var buildMenu = function(menus) {
 		var html = [];
 		html.push(document.getElementById("tpl-menu-base").innerHTML);
 		var num = 0;
-		$
-				.each(
-						menus,
-						function(i, menu) {
-							html.push('<li class="nav-item" id="menu'+i+'">');
-							html
-									.push('<a class="nav-link nav-toggle" href="#" url="'+menu.href+'"><i class="'
-											+ menu.icon
-											+ '"></i><span class="title">'
-											+ menu.text + ' </span>');
-							html.push('<span id="selected"></span>');
-							if (menu.leaf != true && menu.leaf != 'true') {
+		$.each(menus,function(i, menu) {
+                    html.push('<li class="nav-item" id="menu'+i+'">');
+                    html.push('<a class="nav-link nav-toggle" href="#"><i class="'+ menu.icon + '"></i><span class="title">'+ menu.text + ' </span>');
+                    html.push('<span class="selected"></span>');
+                    if (menu.leaf != true && menu.leaf != 'true') {
+                        html.push('<span class="arrow"></span>');
+                    }
+                    html.push('</a>');
+                    var initSubMenu = function(menu) {
+                        if (menu.leaf != true && menu.leaf != 'true') {
+                            var childrens = menu.children, len = childrens.length;
+                            html.push('<ul class="sub-menu" style="display: none;">');
+                            for (var i = 0; i < len; i++) {
+                                if(urlParams.id){
+                                    if(urlParams.id==childrens[i].id){
+                                        html.push('<li class="nav-item active open">');
+                                        if (childrens[i].href) {
+                                            html.push('<a class="nav-link"  href="#" title="'+ childrens[i].text+ '" url="'+ childrens[i].href+ '" ><i class1="'+ childrens[i].icon+ '"></i><span class="title">'+ childrens[i].text + '</span></a><span class="arrow selected"></span>');
+                                        } else {
+                                            html.push('<a class="nav-link nav-toggle" href="#"><i class1="'+ childrens[i].icon + '"></i><span class="title">'+ childrens[i].text+ '</span><span class="arrow selected"></span></a>');
+                                        }
+                                    }else{
+                                        html.push('<li class="nav-item">');
+                                        if (childrens[i].href) {
+                                            html.push('<a class="nav-link"  href="#" title="'+ childrens[i].text+ '" url="'+ childrens[i].href+ '" ><i class1="'+ childrens[i].icon+ '"></i><span class="title">'+ childrens[i].text + '</span></a><span class="arrow"></span>');
+                                        } else {
+                                            html.push('<a class="nav-link nav-toggle" href="#"><i class1="'+ childrens[i].icon + '"></i><span class="title">'+ childrens[i].text+ '</span><span class="arrow"></span></a>');
+                                        }
+                                    }
+                                }else{
+                                    html.push('<li class="nav-item">');
+                                    if (childrens[i].href) {
+                                        html.push('<a class="nav-link"  href="#" title="'+ childrens[i].text+ '" url="'+ childrens[i].href+ '" ><i class1="'+ childrens[i].icon+ '"></i><span class="title">'+ childrens[i].text + '</span></a><span class="arrow"></span>');
+                                    } else {
+                                        html.push('<a class="nav-link nav-toggle" href="#"><i class1="'+ childrens[i].icon + '"></i><span class="title">'+ childrens[i].text+ '</span><span class="arrow"></span></a>');
+                                    }
+                                }
 
-								html.push('<span class="arrow"></span>');
-							}
-							html.push('</a>');
-							var initSubMenu = function(menu) {
-								if (menu.leaf != true && menu.leaf != 'true') {
-									var childrens = menu.children, len = childrens.length;
-									html.push('<ul class="sub-menu" style="display: none;">');
-									for (var i = 0; i < len; i++) {
-										html.push('<li class="nav-item">');
-										if (childrens[i].href) {
-											html.push('<a class="nav-link"  href="#" title="'
-															+ childrens[i].text
-															+ '" url="'
-
-															+ childrens[i].href
-															+ '" ><i class1="'
-															+ childrens[i].icon
-															+ '"></i><span class="title">'
-															+ childrens[i].text
-															+ '</span></a><span class="arrow"></span>');
-										} else {
-											html
-													.push('<a class="nav-link nav-toggle" href="#"><i class1="'
-															+ childrens[i].icon
-															+ '"></i><span class="title">'
-															+ childrens[i].text
-															+ '</span><span class="arrow"></span></a>');
-										}
-										initSubMenu(childrens[i]);
-										html.push('</li>');
-
-									}
-									html.push('</ul>');
-								}
-							}
-							initSubMenu(menu);
-							html.push('</li>');
-						});
-		return html.join('');
+                                initSubMenu(childrens[i]);
+                                html.push('</li>');
+                            }
+                            html.push('</ul>');
+                        }
+                    }
+                    initSubMenu(menu);
+                    html.push('</li>');
+        		});
+        		return html.join('');
 	};
 
 	var htmlFrame = buildMenuHtml(menus);
@@ -109,8 +124,28 @@ var buildMenu = function(menus) {
             $(this).addClass("active open");
             $(this).find("#selected").addClass("selected");
    });
-   $("#menu0").addClass("active");
-   $("#menu0").find("#selected").addClass("selected");
+
+   var activeNode=$(".page-sidebar-menu li .open");
+     if(urlParams.id){
+        $(activeNode).parent().css('display','block');
+         $(activeNode).parent().parent().addClass("active open");
+
+         $(activeNode).parent().parent().parent().css('display','block');
+         $(activeNode).parent().parent().parent().parent().addClass("active open");
+
+         var title=$(activeNode).find("a span").html();
+
+         $("title").html(title);
+         $(".todo-header").html(title);
+     }else{
+           $("#menu999999").addClass("active");
+            $("#menu999999").find("#selected").addClass("selected");
+            var title="仪表盘";
+            $("title").html(title);
+             $(".todo-header").html(title);
+
+     }
+
 
 }
 
@@ -164,6 +199,3 @@ if(!window.console){
 
         }
      }
-     var  urlParams = {};
-
-      urlParams=getQueryString();
