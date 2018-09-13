@@ -73,11 +73,11 @@ function render(obj, data, tplId) {
 }
 /*个人信息添加*/
 function add(type) {
-    window.location.href = 'add/index.jsp';
+    window.location.href = 'add/index.jsp?id=' + urlParams.id;
 }
 /*个人信息编辑*/
-function edit(id) {
-    window.location.href = 'edit/index.jsp?id=' + id;
+function edit(did) {
+    window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 /*查看详情*/
 function detail(id) {
