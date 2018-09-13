@@ -27,11 +27,11 @@
 			<div id="consulor"></div>
 		</div>
 		<div class="row footer">
-			<div class="col-xs-5 col-sm-5">
-				<%--<span class="chat_icon"><img src="img/chat_icon.png"/></span>--%>
-				<%--<span>聊一聊</span>--%>
-			</div>
-			<div class="col-xs-7 col-sm-7" id="createOrder">
+			<%--<div class="col-xs-5 col-sm-5">
+				&lt;%&ndash;<span class="chat_icon"><img src="img/chat_icon.png"/></span>&ndash;%&gt;
+				&lt;%&ndash;<span>聊一聊</span>&ndash;%&gt;
+			</div>--%>
+			<div class="col-xs-12 col-sm-12" id="createOrder">
 
 			</div>
 		</div>
@@ -121,7 +121,11 @@
 	</script>
 
 		<script id="createOrderTemp" type="text/template">
+			{@if counselor.onlineStatus == '1'}
 			<button class="appointment" onclick="createOrder('\${counselor.id}');">立即预约</button>
+			{@else if counselor.onlineStatus == '0'}
+			<button class="appointment" onclick="createOrder('\${counselor.id}');">预约咨询</button>
+			{@/if}
 		</script>
 	</body>
 
