@@ -105,7 +105,7 @@ function initForm() {
         type: "post",
         async: false,
         data: {
-            id: urlParams.id
+            id: urlParams.did
         },
         success: function (result) {
             if (result.status == 0) {
