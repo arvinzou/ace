@@ -117,6 +117,84 @@
     <div class="bottom"></div>
 </div>
 
+
+
+
+<!--审核弹框-->
+<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">线下活动审核</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-audit" role="form">
+                    <div class="form-body">
+                        <div class="form-group " id="operation">
+                            <label class="col-md-3 control-label">审核结果</label>
+                            <div class="col-md-9">
+                                <div class="radio-group-container">
+                                    <label>
+                                        <input type="radio" checked name="rst" value="1"><span style="padding:10px">通过</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="rst" value="2"><span style="padding:10px">退回</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">审核说明</label>
+                            <div class="col-md-9">
+                                <input type="hidden" name="id"/>
+                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+                            </div>
+                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-md-3 control-label">扣除爱心币</label>--%>
+                            <%--<div class="col-md-9">--%>
+                                <%--<input name="parterPoints" style="width: 100%;padding: 5px;border: #ebedf2 1px solid;">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="form-group">--%>
+                            <%--<label class="col-md-3 control-label">奖励爱心币</label>--%>
+                            <%--<div class="col-md-9">--%>
+                                <%--<input name="volunteerPoints" style="width: 100%;padding: 5px;border: #ebedf2 1px solid;">--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%--查看详情弹框--%>
+<div class="modal fade" role="dialog" id="preview">
+    <div class="modal-dialog" role="document" style="width:60%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">活动详情</h4>
+            </div>
+            <div id="info" class="my-gallery">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
@@ -142,7 +220,7 @@
             {@/if}
         </td>
         <td>
-            <a class="operation" href="#" onclick="etails('\${item.id}');">查看</a>
+            <a class="operation" href="#" onclick="details('\${item.id}');">查看</a>
             {@if item.status == '2'}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
@@ -153,47 +231,95 @@
 </script>
 
 
-<!--审核弹框-->
-<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">线下活动审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" checked name="rst" value="1"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="2"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id"/>
-                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
+<script id="tpl-info" type="text/template">
+    <div class="modal-body">
+        <div class="form-horizontal" novalidate="novalidate">
+            <div class="form-body" style="padding: 30px;">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        <span class="required" aria-required="true">*</span>
+                        活动名称
+                    </label>
+                    <div class="col-md-9">
+                        <label class="control-label">\${data.title}</label>
                     </div>
-                </form>
+                </div>
+
+                <div class="form-group ">
+                    <label class="control-label col-md-2">
+                        <span class="required" aria-required="true">*</span>活动发起者
+
+                    </label>
+                    <div class="col-md-9">
+                        <label class="control-label">\${data.initiatorId}</label>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="control-label col-md-2">
+                        <span class="required" aria-required="true">*</span>活动封面
+
+                    </label>
+                    <div class="col-md-9">
+                        <img class="headimg" src="\${data.coverUrl}" alt="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        <span class="required" aria-required="true">*</span>开展时间
+                    </label>
+                    <div class="col-md-9">
+                        <label class="control-label">\${data.startDate}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        <span class="required" aria-required="true">*</span>结束时间
+                    </label>
+                    <div class="col-md-9">
+                        <label class="control-label">\${data.endDate}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        <span class="required" aria-required="true">*</span>志愿者数量
+                    </label>
+                    <div class="col-md-9">
+                        <label class="control-label">\${data.volunteerNum}</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        <span class="required" aria-required="true">*</span>志愿者积分
+                    </label>
+                    <div class="col-md-9">
+                        <label class="control-label">\${data.volunteerPoints}</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        <span class="required" aria-required="true">*</span>活动摘要
+                    </label>
+                    <div class="col-md-9">
+                        \$\${data.summary}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        <span class="required" aria-required="true">*</span>活动内容
+                    </label>
+                    <div class="col-md-9">
+                        \$\${data.content}
+                    </div>
+                </div>
+
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确定</button>
-            </div>
+
         </div>
+
     </div>
-</div>
-</body>
+</script>
+
+
 </html>

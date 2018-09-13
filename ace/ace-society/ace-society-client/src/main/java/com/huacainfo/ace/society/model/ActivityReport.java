@@ -5,33 +5,15 @@ import com.huacainfo.ace.common.model.BaseModel;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Activity extends BaseModel{
+public class ActivityReport extends BaseModel {
 
     private String id;
 
-    private String initiatorId;
+    private String activityId;
 
     private String title;
 
-    private String category;
-
-    private String summary;
-
-    private String coverUrl;
-
-    private Date dendline;
-
-    private Date startDate;
-
-    private Date endDate;
-
-    private Integer volunteerNum;
-
-    private Integer volunteerPoints;
-
-    private Integer parterNum;
-
-    private Integer parterPoints;
+    private String subTitle;
 
     private String remark;
 
@@ -59,12 +41,12 @@ public class Activity extends BaseModel{
         this.id = id == null ? null : id.trim();
     }
 
-    public String getInitiatorId() {
-        return initiatorId;
+    public String getActivityId() {
+        return activityId;
     }
 
-    public void setInitiatorId(String initiatorId) {
-        this.initiatorId = initiatorId == null ? null : initiatorId.trim();
+    public void setActivityId(String activityId) {
+        this.activityId = activityId == null ? null : activityId.trim();
     }
 
     public String getTitle() {
@@ -75,84 +57,12 @@ public class Activity extends BaseModel{
         this.title = title == null ? null : title.trim();
     }
 
-    public String getCategory() {
-        return category;
+    public String getSubTitle() {
+        return subTitle;
     }
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
-    }
-
-    public String getCoverUrl() {
-        return coverUrl;
-    }
-
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl == null ? null : coverUrl.trim();
-    }
-
-    public Date getDendline() {
-        return dendline;
-    }
-
-    public void setDendline(Date dendline) {
-        this.dendline = dendline;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Integer getVolunteerNum() {
-        return volunteerNum;
-    }
-
-    public void setVolunteerNum(Integer volunteerNum) {
-        this.volunteerNum = volunteerNum;
-    }
-
-    public Integer getVolunteerPoints() {
-        return volunteerPoints;
-    }
-
-    public void setVolunteerPoints(Integer volunteerPoints) {
-        this.volunteerPoints = volunteerPoints;
-    }
-
-    public Integer getParterNum() {
-        return parterNum;
-    }
-
-    public void setParterNum(Integer parterNum) {
-        this.parterNum = parterNum;
-    }
-
-    public Integer getParterPoints() {
-        return parterPoints;
-    }
-
-    public void setParterPoints(Integer parterPoints) {
-        this.parterPoints = parterPoints;
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle == null ? null : subTitle.trim();
     }
 
     public String getRemark() {
