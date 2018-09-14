@@ -33,7 +33,7 @@
 
 
 
-                                                <div class="row">
+                                                <div class="row custom-toolbar">
                                                     <div class="col-md-4">
 
                                                     </div>

@@ -26,14 +26,6 @@
 
     <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
                                                 <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            编辑课程
-                                                        </div>
-                                                        <div class="actions">
-
-                                                        </div>
-                                                    </div>
                                                     <div class="portlet-body" id="courseSource">
                                                         <div class="form-panel">
                                                             <!--具体界面元素开始-->

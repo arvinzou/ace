@@ -101,7 +101,7 @@ body{
 }
 
 .form-panel{
-		width: 70%;
+		width: 100%;
 		text-align: center;
 		margin: auto;
 		padding-top:40px;
@@ -120,9 +120,12 @@ body{
 		border: 1px solid #ebedf2;
 		border-radius: .25rem;
 	}
-	.form-group {
-    	margin-bottom: 20px;
-	}
+	.control-label {
+            padding-right: 40px;
+        }
+    	.form-group {
+        	margin-bottom: 40px;
+    	}
 	textarea {
     	border: 1px solid #ebedf2;
 		border-radius: .25rem;
@@ -204,4 +207,12 @@ body{
     }
     small {
         font-size: 100%;
+    }
+    .custom-toolbar{
+             padding-bottom: 10px;
+        }
+.error{
+        color:red;
+         padding-top: 10px;
+
     }

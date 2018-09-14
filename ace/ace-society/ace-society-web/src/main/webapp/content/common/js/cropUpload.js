@@ -27,7 +27,7 @@ var cropModal = '<style>.jc-demo-box input[type="radio"] {visibility: hidden;}</
 	'						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
 	'						' +
 	'					</div>' +
-	'					<div class="modal-body">' +
+    '					<div class="modal-body" style="min-height: 300px">' +
 	'						<div class="jc-demo-box">' +
 	'							<img src="' + defaultPic + '" id="target" alt="[Jcrop Example]" />' +
 	'							<div id="preview-pane" style="display: block;' +
@@ -59,12 +59,12 @@ var cropModal = '<style>.jc-demo-box input[type="radio"] {visibility: hidden;}</
 
 function initCrop() {
 	$('body').append($(cropModal));
-    $pcnt.height(500);
-    $pcnt.width(250);
 	cropObject();
 }
 
 function destroyUpload(){
+    $pcnt.height('500px');
+    $pcnt.width('250px');
 	uploaderCropimg.destroy();
 }
 
