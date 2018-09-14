@@ -189,7 +189,12 @@ function initMenu(){
 jQuery(function($) {
      $("body").addClass("page-header-fixed page-sidebar-closed-hide-logo page-content-white");
      initMenu();
-     App();
+     try{
+     if(typeof(eval("App")) == "function"){
+              App();
+          }
+     }catch(e){
+     }
 
 });
 
