@@ -1,22 +1,3 @@
-function App(){
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-
-
 
 /*页面渲染*/
 function render(obj, data, tplId) {
