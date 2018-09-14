@@ -2,11 +2,20 @@ var loading = {};
 var editor;
 window.onload = function (){
     jQuery(function ($) {
-       initForm();
-initEvents();
+        initPage();
+        initEvents();
     });
 }
-
+function App() {
+    console.log("=============================App Start==============================");
+    loadCustom();
+}
+function loadCustom() {
+    var urls = [];
+    for (var i = 0; i < urls.length; i++) {
+        loader(urls[i]);
+    }
+}
 function initEditor() {
         editor = new Simditor({
         textarea: $('textarea[name=introduce]'),
@@ -33,40 +42,32 @@ function render(obj, data, tplId) {
 
 function initPage() {
     initEditor();
-//   initUpload();
+    initUpload();
 }
 function initEvents(){
     /*表单验证*/
-    $("#fm-edit").validate({
+    $("#fm-add").validate({
         onfocusout: function(element) { $(element).valid(); },
         rules: {
-            #if($!list)
-             #foreach($item in $list)
-                $!{item.columName}: {required: true,maxlength:$!{item.len}}#if( $foreach.hasNext ),#end
-             #end
-            #end
-        },
+                                         subjectId: {required: true,maxlength:50},                             userId: {required: true,maxlength:50}                                 },
         messages: {
-            #if($!list)
-             #foreach($item in $list)
-                    $!{item.columName}: {
-                        required: "请输入$!{item.remarks}",
-                        maxlength:"$!{item.remarks}字符长度不能超过$!{item.len}"
-                    }#if( $foreach.hasNext ),#end
-             #end
-            #end
-        }
+                                         subjectId: {
+                    required: "请输入议题编号",
+                    maxlength:"议题编号字符长度不能超过50"
+                },                             userId: {
+                    required: "请输入提交人ID",
+                    maxlength:"提交人ID字符长度不能超过50"
+                }                                 }
     });
      /*监听表单提交*/
-    $('#fm-edit').ajaxForm({
+    $('#fm-add').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
             $.each(formData, function (n, obj) {
                 params[obj.name] = obj.value;
             });
             $.extend(params, {
-time: new Date(),
-//coverUrl: $('#coverUrl').attr("src")
+                time: new Date()
             });
             console.log(params);
             save(params);
@@ -80,7 +81,7 @@ function save(params) {
     });
     startLoad();
     $.ajax({
-        url: contextPath + "/$!{bean.lowerName}/update$!{bean.name}",
+        url: contextPath + "/subjectIdea/insertSubjectIdea",
         type: "post",
         async: false,
         data: {
@@ -94,30 +95,6 @@ function save(params) {
             }
         },
         error: function () {
-            alert("对不起出错了！");
-        }
-    });
-}
-
-function initForm(){
-    $.ajax({
-        url: contextPath + "/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey",
-        type:"post",
-        async:false,
-data:{ id: urlParams.did },
-        success:function(result){
-            if(result.status == 0) {
-               var data={};
-               data['o']=result.value;
-render('#fm-edit',data,'tpl-fm');
-               initPage();
-//富文本填值
-//editor.setValue(data['o'].summary);
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
             alert("对不起出错了！");
         }
     });

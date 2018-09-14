@@ -3,7 +3,7 @@ var params = {limit: 5};
 window.onload = function (){
     initPage();
     initEvents();
-    initDetailEvents();
+initJuicerMethod();
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -13,12 +13,12 @@ function App() {
 function loadCustom() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-    urls.push({path: contextPath, url: '/content/common/js/jquery-form.js', type: 'js'});
+urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
 }
-/*市民行为详情初始化分页*/
+/*议题点子初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 10,
@@ -35,15 +35,15 @@ function initPage() {
         }
     });
 }
-/*市民行为详情条件查询*/
+/*议题点子条件查询*/
 function t_query(){
     getPageList();
     return false;
 }
-/*市民行为详情加载表格数据*/
+/*议题点子加载表格数据*/
 function getPageList() {
-    var url = contextPath+ "/behavior/findBehaviorList";
-    params['title']=$("input[name=keyword]").val();
+    var url = contextPath+ "/subjectIdea/findSubjectIdeaList";
+    params['name']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -65,19 +65,38 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
+/*议题点子添加*/
+function add(type){
+window.location.href = 'add/index.jsp';
+}
+/*议题点子编辑*/
+function edit(id){
+window.location.href = 'edit/index.jsp?id='+id;
+}
+/*查看详情*/
+function detail(id) {
+var url = contextPath + "/subjectIdea/selectSubjectIdeaByPrimaryKey";
+$.getJSON(url, {id: id}, function (result) {
+if (result.status == 0) {
+var navitem = document.getElementById('tpl-detail').innerHTML;
+var html = juicer(navitem, {data: result.value});
+$("#detail-info").html(html);
+$("#modal-detail").modal("show");
+}
+})
+}
 
 function initEvents() {
-    $('#modal-audit').on('show.bs.modal', function (event) {
+$('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var modal = $(this);
-        console.log("relatedTarget"+relatedTarget);
         modal.find('.modal-body input[name=id]').val(id);
     })
-    $('#modal-audit .btn-primary').on('click', function () {
-        $('#modal-audit form').submit();
+$('#modal-audit .btn-primary').on('click', function () {
+$('#modal-audit form').submit();
     });
-    $('#fm-audit').ajaxForm({
+$('#modal-audit form').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 var params = {};
                 $.each(formData, function (n, obj) {
@@ -94,11 +113,11 @@ function initEvents() {
 
 
 }
-/*市民行为详情审核*/
+/*议题点子审核*/
 function audit(params){
     startLoad();
     $.ajax({
-        url: contextPath + "/behavior/audit",
+        url: contextPath + "/subjectIdea/audit",
         type:"post",
         async:false,
         data:params,
@@ -116,63 +135,32 @@ function audit(params){
         }
     });
 }
+//juicer自定义函数
+function initJuicerMethod() {
+juicer.register('parseStatus', parseStatus);
+}
 
 /**
- * 详情打开事件
- */
-function initDetailEvents() {
-    $('#modal-show').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var modal = $(this);
-        console.log("relatedTarget"+relatedTarget);
-        modal.find('.table-body input[name=id]').val(id);
-        findDetail(id);
-    });
-}
-
-function findDetail(id){
-    startLoad();
-    $.ajax({
-        url: contextPath + "/behavior/selectBehaviorByPrimaryKey",
-        type:"post",
-        async:false,
-        data:{id: id},
-        success:function(rst){
-            if(rst.status == 0){
-                stopLoad();
-                render($('#content'), rst.value, 'tpl-detail');
-            }else{
-                alert(rst.errorMessage);
-            }
-        },
-        error:function(){
-            stopLoad();
-            alert("对不起出错了！");
-        }
-    });
-}
-
-function del(id){
-   /* if(confirm("确定要删除吗？")){
-        startLoad();
-        $.ajax({
-            url: contextPath + "/behavior/audit",
-            type:"post",
-            async:false,
-            data:{status: '0'},
-            success:function(rst){
-                stopLoad();
-                $("#modal-audit").modal('hide');
-                alert(rst.errorMessage);
-                if(rst.status == 0) {
-                    getPageList();
-                }
-            },
-            error:function(){
-                stopLoad();
-                alert("对不起出错了！");
-            }
-        });
-    }*/
+* 状态
+* 0-删除
+* 1-暂存
+* 2-提交审核
+* 3-审核通过
+* 4-审核驳回
+*/
+function parseStatus(status) {
+    switch (status) {
+        case '0':
+        return "已删除";
+        case '1':
+        return "暂存";
+        case '2':
+        return "提交审核";
+        case '3':
+        return "审核通过";
+        case '4':
+        return "审核驳回";
+        default:
+        return "";
+    }
 }
