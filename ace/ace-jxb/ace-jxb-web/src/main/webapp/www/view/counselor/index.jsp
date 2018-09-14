@@ -122,7 +122,7 @@
 
 		<script id="createOrderTemp" type="text/template">
 			{@if counselor.onlineStatus == '1'}
-			<button class="appointment" onclick="createOrder('\${counselor.id}');">立即预约</button>
+			<button class="appointment" onclick="createOrder('\${counselor.id}');">立即咨询</button>
 			{@else if counselor.onlineStatus == '0'}
 			<button class="appointment" onclick="createOrder('\${counselor.id}');">预约咨询</button>
 			{@/if}

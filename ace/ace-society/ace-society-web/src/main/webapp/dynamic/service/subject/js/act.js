@@ -150,18 +150,23 @@ juicer.register('parseStatus', parseStatus);
 * 4-审核驳回
 */
 function parseStatus(status) {
-switch (status) {
-case '0':
-return "已删除";
-case '1':
-return "暂存";
-case '2':
-return "提交审核";
-case '3':
-return "审核通过";
-case '4':
-return "审核驳回";
-default:
-return "";
+    switch (status) {
+        case '0':
+        return "已删除";
+        case '1':
+        return "暂存";
+        case '2':
+        return "提交审核";
+        case '3':
+        return "审核通过";
+        case '4':
+        return "审核驳回";
+        default:
+        return "";
+    }
 }
+
+function showIdea(id){
+    window.open(contextPath + '/dynamic/service/subjectIdea/index.jsp?id='+id);
 }
+

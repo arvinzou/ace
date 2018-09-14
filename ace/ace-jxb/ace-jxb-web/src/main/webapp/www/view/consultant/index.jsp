@@ -97,7 +97,7 @@
 					<div class="col-xs-6 col-sm-6 left" style="padding-left: 0 !important;" onclick="showInfo('\${item.id}');">\${item.name}</div>
 						{@if item.onlineStatus == '1'}
 						<div class="col-xs-6 col-sm-6 right online" style="padding-right: 0 !important;" onclick="createOrder('\${item.id}');">
-							<img src="img/online.png" />立即预约
+							<img src="img/online.png" />立即咨询
 						</div>
 						{@else if item.onlineStatus == '0'}
 						<div class="col-xs-6 col-sm-6 right offline" style="padding-right: 0 !important;" onclick="createOrder('\${item.id}');">

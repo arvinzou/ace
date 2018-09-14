@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.huacainfo.ace.society.dao.SubjectDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.Subject">
+<mapper namespace="com.huacainfo.ace.society.dao.SubjectIdeaAnnexDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
     <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="CHAR" property="content" />
-    <result column="rewardPoints" jdbcType="INTEGER" property="rewardPoints" />
+    <result column="ideaId" jdbcType="VARCHAR" property="ideaId" />
+    <result column="fileType" jdbcType="CHAR" property="fileType" />
+    <result column="fileName" jdbcType="VARCHAR" property="fileName" />
+    <result column="fileSize" jdbcType="VARCHAR" property="fileSize" />
+    <result column="fileUrl" jdbcType="VARCHAR" property="fileUrl" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
@@ -15,49 +17,55 @@
     <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
-  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SubjectVo">
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SubjectIdeaAnnexVo">
 
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, content, rewardPoints, remark, status, createUserId, createUserName, createDate, 
-    lastModifyUserId, lastModifyUserName, lastModifyDate
+    id, ideaId, fileType, fileName, fileSize, fileUrl, remark, status, createUserId, 
+    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from subject
+    from subject_idea_annex
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from subject
+    delete from subject_idea_annex
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.society.model.Subject">
-    insert into subject (id, title, content, 
-      rewardPoints, remark, status, 
-      createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate
-      )
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=CHAR}, 
-      #{rewardPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
+    insert into subject_idea_annex (id, ideaId, fileType, 
+      fileName, fileSize, fileUrl, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{ideaId,jdbcType=VARCHAR}, #{fileType,jdbcType=CHAR}, 
+      #{fileName,jdbcType=VARCHAR}, #{fileSize,jdbcType=VARCHAR}, #{fileUrl,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.Subject">
-    insert into subject
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
+    insert into subject_idea_annex
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="title != null">
-        title,
+      <if test="ideaId != null">
+        ideaId,
       </if>
-      <if test="content != null">
-        content,
+      <if test="fileType != null">
+        fileType,
       </if>
-      <if test="rewardPoints != null">
-        rewardPoints,
+      <if test="fileName != null">
+        fileName,
+      </if>
+      <if test="fileSize != null">
+        fileSize,
+      </if>
+      <if test="fileUrl != null">
+        fileUrl,
       </if>
       <if test="remark != null">
         remark,
@@ -88,14 +96,20 @@
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
+      <if test="ideaId != null">
+        #{ideaId,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        #{content,jdbcType=CHAR},
+      <if test="fileType != null">
+        #{fileType,jdbcType=CHAR},
       </if>
-      <if test="rewardPoints != null">
-        #{rewardPoints,jdbcType=INTEGER},
+      <if test="fileName != null">
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        #{fileUrl,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
@@ -123,17 +137,23 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.Subject">
-    update subject
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
+    update subject_idea_annex
     <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
+      <if test="ideaId != null">
+        ideaId = #{ideaId,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=CHAR},
+      <if test="fileType != null">
+        fileType = #{fileType,jdbcType=CHAR},
       </if>
-      <if test="rewardPoints != null">
-        rewardPoints = #{rewardPoints,jdbcType=INTEGER},
+      <if test="fileName != null">
+        fileName = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        fileSize = #{fileSize,jdbcType=VARCHAR},
+      </if>
+      <if test="fileUrl != null">
+        fileUrl = #{fileUrl,jdbcType=VARCHAR},
       </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
@@ -162,11 +182,13 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.Subject">
-    update subject
-    set title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=CHAR},
-      rewardPoints = #{rewardPoints,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
+    update subject_idea_annex
+    set ideaId = #{ideaId,jdbcType=VARCHAR},
+      fileType = #{fileType,jdbcType=CHAR},
+      fileName = #{fileName,jdbcType=VARCHAR},
+      fileSize = #{fileSize,jdbcType=VARCHAR},
+      fileUrl = #{fileUrl,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -177,11 +199,10 @@
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-
   <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
     select
     <include refid="Base_Column_List" />
-    from subject
+    from subject_idea_annex
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -200,12 +221,8 @@
   </select>
 
   <sql id="whereCondition">
-    from subject t
+    from subject_idea_annex t
     where 1=1
-    and t.status != '0'
-    <if test="condition.title !=null and condition.title !=&quot;&quot;">
-      and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
-    </if>
   </sql>
 
   <select id="findCount" resultType="int">
@@ -215,7 +232,7 @@
 
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Subject">
     select count(1)
-    from subject
+    from subject_idea_annex
     where 1=1
     and id =  #{id,jdbcType=VARCHAR}
   </select>

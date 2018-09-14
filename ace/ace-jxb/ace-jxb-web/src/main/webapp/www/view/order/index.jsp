@@ -140,7 +140,7 @@
 
 		<script id="appointTemp" type="text/template">
 			{@if operation.counselorVo.onlineStatus == '1'}
-			<button class="appointment" onclick="createOrder();">立即预约</button>
+			<button class="appointment" onclick="createOrder();">立即咨询</button>
 			{@else if operation.counselorVo.onlineStatus == '0'}
 			<button class="appointment" onclick="createOrder();">预约咨询</button>
 			{@/if}
