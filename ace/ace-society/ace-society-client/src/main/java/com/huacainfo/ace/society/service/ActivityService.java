@@ -69,8 +69,7 @@ public interface ActivityService {
      * @author: huacai003
      * @version: 2018-09-11
      */
-    SingleResult
-            <ActivityVo> selectActivityByPrimaryKey(String id) throws Exception;
+    SingleResult<ActivityVo> selectActivityByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

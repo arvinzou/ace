@@ -27,7 +27,7 @@ var cropModal = '<style>.jc-demo-box input[type="radio"] {visibility: hidden;}</
 	'						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
 	'						' +
 	'					</div>' +
-	'					<div class="modal-body">' +
+    '					<div class="modal-body" style="min-height: 300px">' +
 	'						<div class="jc-demo-box">' +
 	'							<img src="' + defaultPic + '" id="target" alt="[Jcrop Example]" />' +
 	'							<div id="preview-pane" style="display: block;' +
@@ -38,7 +38,7 @@ var cropModal = '<style>.jc-demo-box input[type="radio"] {visibility: hidden;}</
 	'-moz-border-radius: 6px;' +
 	'border-radius: 6px;' +
 	'-webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);-moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);">' +
-	'								<div class="preview-container" style="width: 250px;height: 170px;overflow: hidden;">' +
+	'								<div class="preview-container" style="width: 250px;height: 500px;overflow: hidden;">' +
 	'									<img src="' + defaultPic + '" />' +
 	'								</div>' +
 	'							</div>' +
@@ -63,6 +63,8 @@ function initCrop() {
 }
 
 function destroyUpload(){
+    $pcnt.height('500px');
+    $pcnt.width('250px');
 	uploaderCropimg.destroy();
 }
 
@@ -72,9 +74,17 @@ function readyUpload(event){
     xs = button.data('xsize');
     ys = button.data('ysize');
     cover = button.data('cover');
-    xsize=$pcnt.width();
-    ysize=(xsize/xs)*ys;
+    var pcntW=$pcnt.width();
+    var pcntH=$pcnt.height();
+    ysize=(pcntW/xs)*ys;
+    if(ysize>pcntH){
+		ysize=pcntH;
+		xsize=(pcntW/ys)*xs;
+	}else {
+    	xsize=pcntW
+	}
     $pcnt.height(ysize);
+    $pcnt.width(xsize);
     jcrop_api.setOptions({
     	aspectRatio: xsize / ysize
     });

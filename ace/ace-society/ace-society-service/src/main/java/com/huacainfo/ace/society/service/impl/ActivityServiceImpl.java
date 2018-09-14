@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.society.dao.ActivityDetailDao;
+import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.vo.ActivityDetailQVo;
+import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,9 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityDao activityDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private ActivityDetailDao activityDetailDao;
 
     /**
      * @throws
@@ -175,7 +182,13 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public SingleResult<ActivityVo> selectActivityByPrimaryKey(String id) throws Exception {
         SingleResult<ActivityVo> rst = new SingleResult<>();
-        rst.setValue(this.activityDao.selectVoByPrimaryKey(id));
+        ActivityVo activityVo=this.activityDao.selectVoByPrimaryKey(id);
+        if(!CommonUtils.isBlank(activityVo.getEndDate())){
+            ActivityDetail activityDetail=new ActivityDetail();
+            activityDetail.setActivityId(id);
+            activityVo.setActivityDetailVoList(activityDetailDao.findList(activityDetail,0,100,null));
+        }
+        rst.setValue(activityVo);
         return rst;
     }
 

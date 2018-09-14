@@ -42,7 +42,7 @@ function render(obj, data, tplId) {
 
 function initPage() {
     initEditor();
-    initUpload();
+//    initUpload();
 }
 function initEvents(){
     /*表单验证*/
