@@ -7,6 +7,8 @@ import java.util.List;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.dao.ActivityDetailDao;
 import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.vo.ActivityDetailQVo;
+import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,7 +184,9 @@ public class ActivityServiceImpl implements ActivityService {
         SingleResult<ActivityVo> rst = new SingleResult<>();
         ActivityVo activityVo=this.activityDao.selectVoByPrimaryKey(id);
         if(!CommonUtils.isBlank(activityVo.getEndDate())){
-            activityDetailDao.findList();
+            ActivityDetail activityDetail=new ActivityDetail();
+            activityDetail.setActivityId(id);
+            activityVo.setActivityDetailVoList(activityDetailDao.findList(activityDetail,0,100,null));
         }
         rst.setValue(activityVo);
         return rst;
