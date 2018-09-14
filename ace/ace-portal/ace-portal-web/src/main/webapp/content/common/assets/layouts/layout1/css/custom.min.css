@@ -56,9 +56,8 @@ body{
          text-align: right;
 }
 
-.form-panel{
-		width: 70%;
-		text-align: center;
+    .form-panel{
+		width: 100%;
 		margin: auto;
 		padding-top:40px;
 		padding-bottom:40px;
@@ -74,10 +73,13 @@ body{
 		background-color: #fff;
 		background-image: none;
 		border: 1px solid #ebedf2;
-		border-radius: .25rem;
+		border-radius: 3px;
 	}
+	.control-label {
+        padding-right: 40px;
+    }
 	.form-group {
-    	margin-bottom: 20px;
+    	margin-bottom: 40px;
 	}
 	textarea {
     	border: 1px solid #ebedf2;
@@ -202,4 +204,12 @@ body{
         height: 50px;
         padding-left: 5px;
         padding-right: 5px;
+    }
+    .custom-toolbar{
+         padding-bottom: 10px;
+    }
+    .error{
+        color:red;
+         padding-top: 10px;
+
     }

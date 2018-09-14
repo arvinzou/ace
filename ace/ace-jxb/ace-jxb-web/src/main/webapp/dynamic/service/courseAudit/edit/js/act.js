@@ -171,8 +171,8 @@ function initForm(){
     });
 }
 window.onload=function(){
-jQuery(function ($) {
-    initPage();
-});
-
+    jQuery(function ($) {
+        initPage();
+        $(".breadcrumb").append("<li>课程编辑</li>");
+    });
 }
