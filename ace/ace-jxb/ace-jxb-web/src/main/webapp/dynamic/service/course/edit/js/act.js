@@ -62,7 +62,7 @@ function payTypeCheck(dom) {
 function save(params) {
     $.extend(params, {
         type: urlParams.type,
-        id:urlParams.id,
+        id:urlParams.did,
         category: '1',
         mediType: '1',
         cover: $("#courseCover").attr('src'),

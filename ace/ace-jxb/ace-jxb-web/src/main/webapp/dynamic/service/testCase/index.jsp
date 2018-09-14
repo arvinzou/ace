@@ -15,116 +15,59 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
 
-    <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/simditor/styles/simditor.css">
-    <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/uploadImg.css">
+    <jsp:include page="../../common/header.jsp"/>
+
     <script src="${pageContext.request.contextPath}/content/service/testCase/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+
 </head>
 
 <body>
-<div class="page-wrapper">
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="index4.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>心理评测</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <!-- BEGIN PROFILE SIDEBAR -->
-                                        <!-- END BEGIN PROFILE SIDEBAR -->
-                                        <!-- BEGIN PROFILE CONTENT -->
-                                        <div class="profile-content">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="portlet light portlet-fit ">
-                                                        <div class="portlet-title">
-                                                            <div class="caption">
-                                                                心理评测
-                                                            </div>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+    <div class="portlet light">
+        <div class="portlet-body">
 
-                                                            <div class="actions">
-                                                                <a onclick="javascript:createTestCase()"
-                                                                   class="btn  btn-success btn-sm">
-                                                                    创建试题
-                                                                </a>
-                                                                <a onclick="javascript:deleteTestCase()"
-                                                                   data-repeater-delete=""
-                                                                   class="btn  btn-danger">
-                                                                    删除试题</a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="portlet-body">
-                                                            <div class="mt-element-card mt-element-overlay">
-                                                                <div class="row">
+            <div class="row custom-toolbar">
+                <div class="col-md-1">
+                    <a onclick="javascript:createTestCase()"
+                       class="btn  green">
+                        创建试题
+                    </a>
 
-                                                                    <div class="col-md-12">
-
-
-                                                                        <div class="portlet-body">
-                                                                            <div class="table-scrollable">
-                                                                                <table class="table table-striped table-hover">
-                                                                                    <thead>
-                                                                                    <tr>
-                                                                                        <th width="10%">#</th>
-                                                                                        <th width="70%">题目</th>
-                                                                                        <th width="20%">操作</th>
-
-                                                                                    </tr>
-                                                                                    </thead>
-                                                                                    <tbody id="evaluatCaseList">
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            <ul style="float: right;" class="pagination"
-                                                                                id="pagination1"></ul>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- END PROFILE CONTENT -->
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                 </div>
+                <div class="col-md-1">
+                    <a onclick="javascript:deleteTestCase()"
+                       data-repeater-delete=""
+                       class="btn  btn-danger">
+                        删除试题</a>
+                </div>
+                <div class="col-md-10">
+
+                </div>
+            </div>
+
+
+            <div class="table-scrollable">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th width="10%">#</th>
+                        <th width="70%">题目</th>
+                        <th width="20%">操作</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="evaluatCaseList">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="paginationbar">
+                <ul class="pagination" id="pagination1"></ul>
             </div>
         </div>
     </div>
 
-    <div class="bottom"></div>
-
-</div>
-
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
 <div class="modal bs-example-modal-lg" data-backdrop="static" id="createTest" tabindex="-1" role="dialog"
      aria-labelledby="gridSystemModalLabel">
@@ -212,7 +155,7 @@
             <input data-id="\${item.id}" type="checkbox" id="checkbox1" class="md-check">
         </td>
         <td width="70%"> \${item.title}</td>
-        <td width="20%"><a onclick="javascript:active('\${item.id}')" class="primary-link">修改信息</a></td>
+        <td width="20%"><a onclick="javascript:active('\${item.id}')">修改信息</a></td>
     </tr>
     {@/each}
 </script>
@@ -253,6 +196,7 @@
         margin: 0;
     }
 </style>
-
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 </html>
 

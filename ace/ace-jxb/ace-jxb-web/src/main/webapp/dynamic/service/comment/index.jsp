@@ -13,66 +13,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="/dynamic/common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/studioAudit/css/style.css">
     <script src="${pageContext.request.contextPath}/dynamic/service/comment/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 
 <body>
 
-<div class="page-wrapper">
-
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                            		<li>
-                            				<a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                            				<i class="fa fa-circle"></i>
-                            		</li>
-                            		<li>
-                            				<span>评价管理</span>
-                            		</li>
-                            </ul>
-                            <div class="page-content-inner">
-
-                                <!---==============================================-->
-                                <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- BEGIN SAMPLE TABLE PORTLET-->
-                                            <div class="portlet light ">
-                                                <div class="portlet-title">
-                                                    <div class="caption">
-                                                       评价管理
-                                                    </div>
-																										<div class="actions">
-																											<form onsubmit="return t_query()">
+    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+                                            <div class="portlet light">
+                                                <div class="portlet-body">
+                                                    <div class="row custom-toolbar">
+                                                        <div class="col-md-9">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <form onsubmit="return t_query()">
 
 
-                                                        <div class="input-group">
-                                                            <input type="text" name="keyword"
-                                                                   class="form-control input-circle-left"
-                                                                   placeholder="请输入昵称">
-																																	 
-                                                            <span class="input-group-btn">
-                                                               <button class="btn btn-circle-right btn-default search_btn" type="submit">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="keyword"
+                                                                           class="form-control "
+                                                                           placeholder="请输入昵称">
+
+                                                                    <span class="input-group-btn">
+                                                               <button class="btn  btn-default search_btn" type="submit">
 
                                                                         搜索
                                                                 </button>
                                                             </span>
+                                                                </div>
+                                                            </form>
+
                                                         </div>
-                                                    </form>
-																										</div>
-                                                </div>
-                                                <div class="portlet-body">
+
+                                                    </div>
                                                     <div class="table-scrollable">
                                                         <table class="table table-hover">
                                                             <thead>
@@ -97,68 +71,53 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- END SAMPLE TABLE PORTLET-->
-                                        </div>
-                                    
-                                </div>
-                                <script id="list" type="text/template">
-                                    {@each data as item,index}
-                                    <tr>
-          
-                                        <td> 
-																				<div class="header-box">
-																				 <div class="header-img"><img src="\${item.headimgurl}" class="headimg"></div>
-																				 <div class="header--nickname">\${item.nickname} </div>
-																				 </div>
-																				</td>
-                                        <td> \${item.courseName} </td>
-                                        <td>
-                                            {@if item.grade == '1'}
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            {@else if item.grade == '2'}
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            {@else if item.grade == '3'}
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            {@else if item.grade == '4'}
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            {@else if item.grade == '5'}
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
-                                            {@/if}
-                                        </td>
-                                        <td> \${item.content} </td>
-                                        <td> \${item.createDate} </td>
-                                        <td>
-                                            <a href="javascript:void(0);" onclick="deleteCmt(this,'\${item.id}');">删除</a>
-                                        </td>
-                                    </tr>
-                                    {@/each}
-                                </script>
-                                <!--=======================================-->
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom"></div>
-
-</div>
+    <!--=======================================-->
+    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
 </body>
+<script id="list" type="text/template">
+    {@each data as item,index}
+    <tr>
 
+        <td>
+            <div class="header-box">
+                <div class="header-img"><img src="\${item.headimgurl}" class="headimg"></div>
+                <div class="header--nickname">\${item.nickname} </div>
+            </div>
+        </td>
+        <td> \${item.courseName} </td>
+        <td>
+            {@if item.grade == '1'}
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            {@else if item.grade == '2'}
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            {@else if item.grade == '3'}
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            {@else if item.grade == '4'}
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            {@else if item.grade == '5'}
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            <img src="img/icon_comment.png" style="width:18px;height: 17px;"/>
+            {@/if}
+        </td>
+        <td> \${item.content} </td>
+        <td> \${item.createDate} </td>
+        <td>
+            <a href="javascript:void(0);" onclick="deleteCmt(this,'\${item.id}');">删除</a>
+        </td>
+    </tr>
+    {@/each}
+</script>
 <style>
 		.headimg{
 			  width: 50px;
@@ -176,4 +135,6 @@
 			padding:2px;
 		}
 </style>
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 </html>

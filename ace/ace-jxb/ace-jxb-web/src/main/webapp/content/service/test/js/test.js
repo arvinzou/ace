@@ -16,7 +16,7 @@ window.onload = function () {
 
 function evaluatCaseList(id) {
     if (id) {
-        window.location.href = '../testCase/index.jsp?id=' + id;
+        window.location.href = '../testCase/index.jsp?id=' + urlParams.id+"&did="+id;
     }
 }
 

@@ -106,9 +106,8 @@ var eid, ecId;
 
 /*初始化分页器*/
 function initpage() {
-    var url = window.location.href;
-    var obj = parseQueryString(url);
-    eid = obj.id;
+$(".breadcrumb").append("<li>评测列表</li>");
+    eid = urlParams.did;
     if (!eid) {
         window.location.href = '../test/index.jsp';
     }
