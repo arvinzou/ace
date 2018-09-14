@@ -3,7 +3,10 @@ package com.huacainfo.ace.portal.web.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.*;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.common.tools.ImageCut;
 import com.huacainfo.ace.portal.service.FilesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +59,7 @@ public class FilesController extends PortalBaseController {
         for (MultipartFile o : file) {
             File dest = new File(dir + File.separator + o.getName());
             o.transferTo(dest);
-            fileNames[i] = PropertyUtil.getProperty("fastdfs_server") + this.fileSaver.saveFile(dest, o.getOriginalFilename());
+            fileNames[i] = this.fileSaver.saveFile(dest, o.getOriginalFilename());
             dest.delete();
             filesService.insertFiles(fileNames[i], this.getCurUserProp());
             i++;
@@ -90,7 +93,7 @@ public class FilesController extends PortalBaseController {
         }
         File dest = new File(dir + File.separator + file[0].getName());
         file[0].transferTo(dest);
-        fileNames[0] = PropertyUtil.getProperty("fastdfs_server") + this.fileSaver.saveFile(dest, file[0].getOriginalFilename());
+        fileNames[0] = this.fileSaver.saveFile(dest, file[0].getOriginalFilename());
         dest.delete();
         filesService.insertFiles(fileNames[0], this.getCurUserProp());
         Map<String, Object> values = new HashMap<String, Object>();
@@ -123,7 +126,7 @@ public class FilesController extends PortalBaseController {
             } else {
                 o.transferTo(dest);
             }
-            fileNames[i] = PropertyUtil.getProperty("fastdfs_server") + this.fileSaver.saveFile(dest, o.getOriginalFilename());
+            fileNames[i] = this.fileSaver.saveFile(dest, o.getOriginalFilename());
             dest.delete();
             filesService.insertFiles(fileNames[i], this.getCurUserProp());
             rst.put("success", true);
