@@ -18,4 +18,24 @@ private List<ActivityDetailVo>  activityDetailVoList;
     public void setActivityDetailVoList(List<ActivityDetailVo> activityDetailVoList) {
         this.activityDetailVoList = activityDetailVoList;
     }
+
+    private int total;
+
+    private int signNum;
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public int getSignNum() {
+        return signNum;
+    }
+
+    public void setSignNum(int signNum) {
+        this.signNum = signNum;
+    }
 }

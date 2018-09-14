@@ -1,0 +1,51 @@
+.personnelList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 101%;
+}
+
+.personnelList >div{
+     height: 150px;
+     width: 150px;
+     margin: 0px 10px 20px;
+     overflow: hidden;
+     position: relative;
+
+ }
+
+.personnelList >div img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.personnelList .personnelInfo{
+    cursor: pointer;
+}
+.personnelList >div .msgBar {
+    position: absolute;
+    bottom: 0px;
+    height: 36px;
+    background-color: #33333385;
+    color: #fff;
+    width: 100%;
+    LINE-HEIGHT: 36PX;
+    TEXT-ALIGN: CENTER;
+}
+
+.active_flag::before{
+    content: '✔';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 30px;
+    width: 30px;
+    background-color: #33333375;
+    color: #02ff00;
+    font-size: 28px;
+    font-weight: bolder;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 10px;
+}

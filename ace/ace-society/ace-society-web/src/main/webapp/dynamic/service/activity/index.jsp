@@ -319,6 +319,40 @@
 
             </div>
 
+            {@if data.endDate}
+            <h4>活动现场签到</h4>
+            <div class="personnelList">
+                {@if data.startSignImgUrl}
+                <div>
+                    <img src="\${data.startSignImgUrl}" alt="">
+                    <div class="msgBar">
+                        活动开始
+                    </div>
+                </div>
+                {@/if}
+                {@if data.endSignImgUrl}
+                <div >
+                    <img src="\${data.endSignImgUrl}" alt="">
+                    <div class="msgBar">
+                        活动结束
+                    </div>
+                </div>
+                {@/if}
+            </div>
+            <h4>现场人员签到</h4>
+            <div class="personnelList">
+                {@each data.activityDetailVoList as item}
+                {@if item.signInState==1}
+                <div class="personnelInfo active_flag">
+                    <img src="\${item.signImgUrl}" alt="">
+                    <div class="msgBar">
+                        \${item.name}
+                    </div>
+                </div>
+                {@/if}
+                {@/each}
+            </div>
+            {@/if}
         </div>
 
     </div>
@@ -329,7 +363,8 @@
                 <option value="1">通过</option>
                 <option value="2">驳回</option>
             </select>
-            <input name="remark"  class="" style="height: 100%;width: 200px;padding: 0 10px;" type="text" placeholder="原因">
+            <input name="remark" class="" style="height: 100%;width: 200px;padding: 0 10px;" type="text"
+                   placeholder="原因">
             <button type="button" class="btn btn-primary btn-audit">确定</button>
             {@/if}
         </div>
