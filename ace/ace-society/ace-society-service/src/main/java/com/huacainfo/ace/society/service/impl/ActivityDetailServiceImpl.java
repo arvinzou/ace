@@ -216,9 +216,7 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
         }
 
         //更改审核记录
-        MessageResponse auditRs =
-                auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId(), rst, remark,
-                        userProp);
+        MessageResponse auditRs = auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
