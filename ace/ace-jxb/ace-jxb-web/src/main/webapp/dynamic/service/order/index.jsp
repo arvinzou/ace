@@ -16,110 +16,58 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="description" />
 
-        <jsp:include page="../../common/base.jsp" />
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile-2.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-        <script src="${pageContext.request.contextPath}/content/service/order/js/act.js?v=${cfg.version}"></script>
-        <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+        <jsp:include page="../../common/header.jsp" />
+        <script src="s/act.js?v=${cfg.version}"></script>
     </head>
 
-    <body class="page-container-bg-solid">
-        <div class="page-wrapper">
-            <div class="page-wrapper-row full-height">
-                <div class="page-wrapper-middle">
-                    <div class="page-container">
-                        <div class="page-content-wrapper">
-                            <div class="page-content">
-                                <div class="container">
-                                    <ul class="page-breadcrumb breadcrumb">
-                                        <li>
-                                            <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                            <i class="fa fa-circle"></i>
-                                        </li>
-                                        <li>
-                                            <span>订单管理</span>
-                                        </li>
-                                    </ul>
+    <body>
+    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-                                    <div class="page-content-inner">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <!-- BEGIN SAMPLE TABLE PORTLET-->
+    <!---==============================================-->
+
                                                 <div class="portlet light ">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            订单管理
-                                                        </div>
 
-
-                                                        <div class="actions">
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       class="form-control input-circle-left"
-                                                                       placeholder="请输入订单编号">
-                                                                <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
-                                                                        type="submit">
-                                                                        搜索
-                                                                </button>
-                                                            </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="portlet-body">
-                                                        <div class="tabbable-line">
-                                                            <ul class="nav nav-tabs ">
-                                                                <li class="active">
-                                                                    <a onclick="javascript:changeType('1')" href="#tab_1_1" data-toggle="tab"> 咨询订单 </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a onclick="javascript:changeType('2')" href="#tab_1_3" data-toggle="tab"> 课程订单 </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a onclick="javascript:changeType('3')" href="#tab_1_3" data-toggle="tab"> 评测订单 </a>
-                                                                </li>
 
-                                                            </ul>
-                                                            <div class="tab-content">
-                                                                <div class="tab-pane active" id="tab_15_1">
+                                                        <div class="row custom-toolbar">
+                                                            <div class="col-md-5">
 
-
-
-
-                                                                
-                                                                    <div class="table-scrollable" id="orderList">
-                                                                    </div>
-                                                                    <div class="paginationbar">
-                                                                        <ul class="pagination" id="pagination1"></ul>
-                                                                    </div>
-
-                                                                </div>
                                                             </div>
+
+                                                            <div class="col-md-7">
+                                                                <form onsubmit="return t_query()">
+                                                                    <div class="btn-group" id="btn-group1" role="group"  style="float:left;padding-right:5px">
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('1');">咨询</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('2');">课程</button>
+                                                                        <button type="button" class="btn btn-default" onclick="changeType('3');">评测</button>
+                                                                    </div>
+
+
+
+                                                                    <div class="input-group">
+                                                                        <input type="text" name="keyword" class="form-control" placeholder="请输入订单号">
+                                                                        <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn" type="submit">
+                                                                            搜索
+                                                                        </button>
+                                                                        </span>
+                                                                    </div>
+                                                                </form>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="table-scrollable" id="orderList">
+                                                        </div>
+                                                        <div class="paginationbar">
+                                                            <ul class="pagination" id="pagination1"></ul>
                                                         </div>
                                                     </div>
                                                 </div>
+    <!--=======================================-->
 
-                                                <!-- END SAMPLE TABLE PORTLET-->
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bottom">
-
-        </div>
+    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
         <div class="modal fade" id="orderInfoModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -271,5 +219,7 @@
             color: #333;
         }
     </style>
-
+    <jsp:include page="/dynamic/common/footer.jsp" />
+    <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+    <script src="js/act.js?v=${cfg.version}"></script>
     </html>
