@@ -59,23 +59,23 @@
 				</div>
 			</div>
 			<div class="row statics_detail">
-				<div class="col-xs-3 sol-sm-3">
+				<div class="col-xs-4 sol-sm-4">
 					<div class="row statics_num">\${data.statistic.consultCount}</div>
 					<div class="row statics_title">咨询</div>
 				</div>
-				<div class="col-xs-2 sol-sm-2">
+				<div class="col-xs-4 sol-sm-4">
 					<div class="row statics_num">\${data.statistic.courseCount}</div>
 					<div class="row statics_title">课程</div>
 				</div>
-				<div class="col-xs-2 sol-sm-2">
-					<div class="row statics_num">\${data.statistic.liveCount}</div>
-					<div class="row statics_title">直播</div>
-				</div>
-				<div class="col-xs-2 sol-sm-2">
-					<div class="row statics_num">\${data.statistic.teacherCount}</div>
-					<div class="row statics_title">老师</div>
-				</div>
-				<div class="col-xs-3 sol-sm-3">
+				<%--<div class="col-xs-2 sol-sm-2">--%>
+					<%--<div class="row statics_num">\${data.statistic.liveCount}</div>--%>
+					<%--<div class="row statics_title">直播</div>--%>
+				<%--</div>--%>
+				<%--<div class="col-xs-2 sol-sm-2">--%>
+					<%--<div class="row statics_num">\${data.statistic.teacherCount}</div>--%>
+					<%--<div class="row statics_title">老师</div>--%>
+				<%--</div>--%>
+				<div class="col-xs-4 sol-sm-4">
 					<div class="row statics_num">\${data.statistic.parentCount}</div>
 					<div class="row statics_title">会员</div>
 				</div>

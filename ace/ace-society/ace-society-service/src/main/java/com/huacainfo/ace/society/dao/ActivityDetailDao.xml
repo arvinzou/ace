@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.ActivityDetailDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.ActivityDetail">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="activityId" jdbcType="VARCHAR" property="activityId"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="identity" jdbcType="CHAR" property="identity"/>
+        <result column="points" jdbcType="INTEGER" property="points"/>
+        <result column="signInState" jdbcType="CHAR" property="signInState"/>
+        <result column="signInDate" jdbcType="TIMESTAMP" property="signInDate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, activityId, userId, identity, points, signInState, signInDate, remark, status, 
+    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from activity_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from activity_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.society.model.ActivityDetail">
+    insert into activity_detail (id, activityId, userId, 
+      identity, points, signInState, 
+      signInDate, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate
+      )
+    values (#{id,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{identity,jdbcType=CHAR}, #{points,jdbcType=INTEGER}, #{signInState,jdbcType=CHAR}, 
+      #{signInDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.ActivityDetail">
+        insert into activity_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="activityId != null">
+                activityId,
+            </if>
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="identity != null">
+                identity,
+            </if>
+            <if test="points != null">
+                points,
+            </if>
+            <if test="signInState != null">
+                signInState,
+            </if>
+            <if test="signInDate != null">
+                signInDate,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                #{identity,jdbcType=CHAR},
+            </if>
+            <if test="points != null">
+                #{points,jdbcType=INTEGER},
+            </if>
+            <if test="signInState != null">
+                #{signInState,jdbcType=CHAR},
+            </if>
+            <if test="signInDate != null">
+                #{signInDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.ActivityDetail">
+        update activity_detail
+        <set>
+            <if test="activityId != null">
+                activityId = #{activityId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                userId = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                identity = #{identity,jdbcType=CHAR},
+            </if>
+            <if test="points != null">
+                points = #{points,jdbcType=INTEGER},
+            </if>
+            <if test="signInState != null">
+                signInState = #{signInState,jdbcType=CHAR},
+            </if>
+            <if test="signInDate != null">
+                signInDate = #{signInDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.ActivityDetail">
+    update activity_detail
+    set activityId = #{activityId,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=CHAR},
+      points = #{points,jdbcType=INTEGER},
+      signInState = #{signInState,jdbcType=CHAR},
+      signInDate = #{signInDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.ActivityDetailVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+    t.id, t.activityId, t.userId, t.identity, t.points, t.signInState, t.signInDate, t.remark, t.status,
+    t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+    u.name
+  </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from activity_detail t
+        LEFT  JOIN  portal.users u ON  t.userId=u.user_id
+        where t.status <![CDATA[ <> ]]> 0
+        <!--<if test="condition.title !=null and condition.title !=&quot;&quot;">-->
+            <!--and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+        <if test="condition.activityId !=null and condition.activityId !=&quot;&quot;">
+            and t.activityId =#{condition.activityId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Activity">
+    select count(1)
+    from activity_detail
+    where status <![CDATA[ <> ]]> 0
+  </select>
+
+</mapper>

@@ -222,6 +222,7 @@ pageEncoding="utf-8" %>
 
 
 </script>
+
 <jsp:include page="/dynamic/common/footer.jsp" />
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/index/act.js?version=${cfg.version}"></script>
