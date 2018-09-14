@@ -152,3 +152,27 @@ function findDetail(id){
         }
     });
 }
+
+function del(id){
+   /* if(confirm("确定要删除吗？")){
+        startLoad();
+        $.ajax({
+            url: contextPath + "/behavior/audit",
+            type:"post",
+            async:false,
+            data:{status: '0'},
+            success:function(rst){
+                stopLoad();
+                $("#modal-audit").modal('hide');
+                alert(rst.errorMessage);
+                if(rst.status == 0) {
+                    getPageList();
+                }
+            },
+            error:function(){
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }*/
+}

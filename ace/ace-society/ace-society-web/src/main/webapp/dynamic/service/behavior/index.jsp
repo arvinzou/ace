@@ -136,7 +136,6 @@
             {@if item.status == '2'}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
-            <a class="operation" href="javascript:void(0);" onclick="delete('\${item.id}');">删除</a>
         </td>
     </tr>
     {@/each}
@@ -188,22 +187,23 @@
 
 <!--查看弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-show">
-<div class="modal-dialog" role="document" style="width: 100%;height: 100%;">
-    <div class="modal-content" style="width: 70%;height: 90%; margin: 0 auto;position: relative;">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title">文明随手拍详情</h4>
         </div>
         <div class="modal-body">
-            <div class="table-body">
-                <input type="hidden" name="id"/>
-                <div id="content">
-
+            <form class="form-horizontal" id="fm-detail" role="form">
+                <div class="form-body">
+                    <div class="table-scrollable" id="content">
+                        <%--详情模板填充--%>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-        <div class="modal-footer" style="position: absolute;bottom: 0;">
+        <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
         </div>
     </div>
@@ -211,33 +211,33 @@
 </div>
 
 <script id="tpl-detail" type="text/template">
-    <table cellpadding="0" cellspacing="0" border="1" class="detailTable">
+    <table cellpadding="0" cellspacing="0" border="1" class="detailTable table table-bordered table-hover">
         <tr class="smallTr">
-            <td width="15%">标题</td>
-            <td width="35%">\${data.title}</td>
-            <td width="15%">提交人</td>
-            <td width="35%">\${data.userId}</td>
+            <td width="15%" class="active">标题</td>
+            <td width="35%" class="success">\${data.title}</td>
+            <td width="15%" class="active">提交人</td>
+            <td width="35%" class="success">\${data.userId}</td>
         </tr>
         <tr class="smallTr">
-            <td width="15%">简述</td>
-            <td colspan="3">\${data.compendium}</td>
+            <td width="15%" class="active">简述</td>
+            <td colspan="3" class="success">\${data.compendium}</td>
         </tr>
         <tr class="largeTr">
-            <td width="15%">备注</td>
-            <td colspan="3">\${data.remark}</td>
+            <td width="15%" class="active">备注</td>
+            <td colspan="3" class="success">\${data.remark}</td>
         </tr>
     </table>
     {@each data.behaviorAnnexList as item, index}
-    <table cellpadding="0" cellspacing="0" border="1" class="fileTable">
+    <table cellpadding="0" cellspacing="0" border="1" class="fileTable table table-bordered table-hover">
         <tr class="smallTr">
-            <td width="15%">附件名称</td>
-            <td width="35%">\${item.fileName}</td>
-            <td width="15%">附件大小</td>
-            <td width="35%">\${item.fileSize}kb</td>
+            <td width="15%" class="active">附件名称</td>
+            <td width="35%" class="success">\${item.fileName}</td>
+            <td width="15%" class="active">附件大小</td>
+            <td width="35%" class="success">\${item.fileSize}kb</td>
         </tr>
         <tr>
-            <td width="15%">附件内容</td>
-            <td colspan="3">
+            <td width="15%" class="active">附件内容</td>
+            <td colspan="3" class="success">
                 {@if item.fileType == '0'}
                 <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileUrl}</a>
                 {@else if item.fileType == '1'}
