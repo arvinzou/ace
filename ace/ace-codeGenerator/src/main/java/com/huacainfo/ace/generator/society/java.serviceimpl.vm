@@ -95,7 +95,7 @@ private AuditRecordService auditRecordService;
                 o.setStatus("1");
                 o.setCreateUserName(userProp.getName());
                 o.setCreateUserId(userProp.getUserId());
-                this.$!{bean.lowerName}Dao.insertSelective(o);
+                this.$!{bean.lowerName}Dao.insert(o);
                 this.dataBaseLogService.log("添加$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
                 o.getId(),o.getId(), userProp);
 
@@ -121,7 +121,7 @@ private AuditRecordService auditRecordService;
                 o.setLastModifyDate(new Date());
                 o.setLastModifyUserName(userProp.getName());
                 o.setLastModifyUserId(userProp.getUserId());
-                this.$!{bean.lowerName}Dao.updateByPrimaryKeySelective(o);
+                this.$!{bean.lowerName}Dao.updateByPrimaryKey(o);
                 this.dataBaseLogService.log("变更$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
                 o.getId(), o.getId(), userProp);
 
@@ -204,7 +204,7 @@ private AuditRecordService auditRecordService;
                         obj.setLastModifyDate(DateUtil.getNowDate());
                         obj.setLastModifyUserId(userProp.getUserId());
                         obj.setLastModifyUserName(userProp.getName());
-                        $!{bean.lowerName}Dao.updateByPrimaryKeySelective(obj);
+                        $!{bean.lowerName}Dao.updateStatus(obj);
 
 
                         dataBaseLogService.log("审核$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,

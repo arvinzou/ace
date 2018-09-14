@@ -14,11 +14,9 @@ int deleteByPrimaryKey(String id);
 
 int insert($!{bean.name} record);
 
-int insertSelective($!{bean.name} record);
 
 int updateByPrimaryKey($!{bean.name} record);
 
-int updateByPrimaryKeySelective($!{bean.name} record);
 
 $!{bean.name}Vo selectVoByPrimaryKey(String id);
 
@@ -31,5 +29,7 @@ List
     int findCount(@Param("condition") $!{bean.name}QVo condition);
 
     int isExit($!{bean.name} record);
+
+    int updateStatus($!{bean.name} record);
 
     }

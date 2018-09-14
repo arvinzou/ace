@@ -88,8 +88,8 @@
                                                                         <th width="10%"> 奖励积分</th>
                                                                         <th width="15%"> 创建人姓名</th>
                                                                         <th width="15%"> 创建日期</th>
-                                                                        <th width="15%"> 状态</th>
-                                                                        <th width="15%">操作</th>
+                                                                        <th width="10%"> 状态</th>
+                                                                        <th width="20%">操作</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody id="page-list">
@@ -145,6 +145,7 @@
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
             <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
+            <a class="operation" href="javascript:showIdea('\${item.id}');">查看点子</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
              {@/if}

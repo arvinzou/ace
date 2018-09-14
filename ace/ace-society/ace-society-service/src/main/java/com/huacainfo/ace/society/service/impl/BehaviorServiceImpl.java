@@ -7,8 +7,10 @@ import java.util.List;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.BehaviorAnnexDao;
 import com.huacainfo.ace.society.model.BehaviorAnnex;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.vo.BehaviorAnnexQVo;
 import com.huacainfo.ace.society.vo.BehaviorAnnexVo;
 import org.slf4j.Logger;
@@ -41,6 +43,8 @@ private BehaviorDao behaviorDao;
 private DataBaseLogService dataBaseLogService;
 @Autowired
 private BehaviorAnnexDao behaviorAnnexDao;
+@Autowired
+private AuditRecordService auditRecordService;
 
 /**
 *
@@ -228,7 +232,13 @@ private BehaviorAnnexDao behaviorAnnexDao;
                                 return new MessageResponse(ResultCode.FAIL, "市民文明拍信息丢失！");
                             }
 
-                            //todo 更改审核记录
+                            //更改审核记录
+                            MessageResponse auditRs =
+                                    auditRecordService.audit(BisType.BEHAVIOR, behavior.getId(), behavior.getId(), rst, remark,
+                                            userProp);
+                            if (ResultCode.FAIL == auditRs.getStatus()) {
+                                return auditRs;
+                            }
                             behavior.setId(id);
                             behavior.setStatus(rst);
                             behavior.setLastModifyDate(DateUtil.getNowDate());
