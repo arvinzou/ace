@@ -9,15 +9,14 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>方案提议</title>
+    <title>议题点子</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/base.jsp"/>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/act.js?v=${cfg.version}"></script>
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css" />
-    <script src="${pageContext.request.contextPath}/dynamic/service/subject/js/act.js?v=${cfg.version}"></script>
+    <script src="${pageContext.request.contextPath}/dynamic/service/subjectIdea/js/act.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
 </head>
 <body>
@@ -35,7 +34,7 @@
                                     <i class="fa fa-circle"></i>
                                 </li>
                                 <li>
-                                    <span>方案提议</span>
+                                    <span>议题点子</span>
                                 </li>
                             </ul>
                             <div class="page-content-inner">
@@ -47,11 +46,11 @@
                                                 <div class="portlet light">
                                                     <div class="portlet-title">
                                                         <div class="caption">
-                                                            方案提议
+                                                            议题点子
                                                         </div>
-                                                        <div class="actions">
+                                                       <%-- <div class="actions">
                                                              <a href="javascript:void(0);" onclick="add();"  class="btn green">创建</a>
-                                                        </div>
+                                                        </div>--%>
                                                     </div>
                                                     <div class="portlet-body">
 
@@ -65,13 +64,10 @@
                                                                 <input type="text"
                                                                        name="keyword"
                                                                        class="form-control input-circle-left"
-                                                                       placeholder="请输入名称">
+                                                                       placeholder="请输入解决方案">
                                                                 <span class="input-group-btn">
-                                                        <button class="btn btn-circle-right btn-default search_btn"
-                                                                type="submit">
-                                                                搜索
-                                                        </button>
-                                                    </span>
+                                                                        <button class="btn btn-circle-right btn-default search_btn" type="submit">搜索</button>
+                                                                </span>
                                                             </div>
                                                             </form>
                                                         </div>
@@ -83,13 +79,13 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th width="10%">序号</th>
-                                                                        <th width="20%"> 议题标题</th>
-                                                                        <th width="10%"> 奖励积分</th>
-                                                                        <th width="15%"> 创建人姓名</th>
+                                                                        <th width="5%"> 序号</th>
+                                                                        <th width="20%"> 议题</th>
+                                                                        <th width="10%"> 提交人</th>
+                                                                        <th width="20%"> 解决方案</th>
                                                                         <th width="15%"> 创建日期</th>
-                                                                        <th width="10%"> 状态</th>
-                                                                        <th width="20%">操作</th>
+                                                                        <th width="15%"> 状态</th>
+                                                                        <th width="15%">操作</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody id="page-list">
@@ -124,8 +120,8 @@
     <tr>
         <td> \${parseInt(index)+1}</td>
         <td> \${item.title}</td>
-        <td> \${item.rewardPoints}</td>
         <td> \${item.createUserName}</td>
+        <td> \$\${item.solution}</td>
         <td> \${item.createDate}</td>
         <td>
             {@if item.status==0}
@@ -144,8 +140,6 @@
         </td>
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
-            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:showIdea('\${item.id}');">查看点子</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
              {@/if}
@@ -157,22 +151,14 @@
 <script id="tpl-detail" type="text/template">
     <table class="table table-bordered table-hover">
                 <tr>
-                    <td class="active"> 议题标题</td>
-                    <td class="success"> \${data.title}</td>
+                    <td class="active"> 解决方案</td>
+                    <td class="success"> \$\${data.solution}</td>
                 </tr>
-                            <tr>
-                    <td class="active"> 议题描述</td>
-                    <td class="success"> \$\${data.content}</td>
-                </tr>
-                            <tr>
-                    <td class="active"> 奖励积分</td>
-                    <td class="success"> \${data.rewardPoints}</td>
-                </tr>
-                            <tr>
+                <tr>
                     <td class="active"> 备注</td>
                     <td class="success"> \${data.remark}</td>
                 </tr>
-                            <tr>
+                <tr>
                     <td class="active"> 状态</td>
                     <td class="success">
                         {@if data.status == '0'}
@@ -184,7 +170,7 @@
                         {@else if data.status == '3'}
                             审核通过
                         {@else if data.status == '4'}
-                            审核驳回
+                            驳回
                         {@/if}
                     </td>
                 </tr>
@@ -196,16 +182,34 @@
                     <td class="active"> 创建日期</td>
                     <td class="success"> \${data.createDate}</td>
                 </tr>
-                <tr>
-                    <td class="active"> 更新人名称</td>
-                    <td class="success"> \${data.lastModifyUserName}</td>
-                </tr>
-                <tr>
-                    <td class="active"> 更新日期</td>
-                    <td class="success"> \${data.lastModifyDate}</td>
-                </tr>
-            </table>
-            </script>
+    </table>
+
+    <!--议题点子附件表格-->
+    {@each data.listSubjectIdeaAnnexVo as item, index}
+    <table class="table table-bordered table-hover" style="margin-top: 15px!important;">
+        <tr>
+            <td class="active"> 附件名称</td>
+            <td class="success"> \${item.fileName}</td>
+        </tr>
+        <tr>
+            <td class="active"> 附件大小</td>
+            <td class="success"> \${item.fileSize}</td>
+        </tr>
+        <tr>
+            <td class="active"> 附件</td>
+            <td class="success">
+                {@if item.fileType == '0'}
+                    <a href="\${item.fileUrl}" download="点子附件">\${item.fileUrl}</a>
+                {@else if item.fileType == '1'}
+                    <img src="\${item.fileUrl}" style="width: 160px; height: 90px;"/>
+                {@else if item.fileType == '2'}
+                    <video src="\${item.fileUrl}" controls width="160" height="90"></video>
+                {@/if}
+            </td>
+        </tr>
+    </table>
+    {@/each}
+</script>
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
@@ -214,7 +218,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">议题详情</h4>
+                <h4 class="modal-title">议题点子详情</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
@@ -235,14 +239,13 @@
     </div>
 </div>
 
-<!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">方案提议审核</h4>
+                <h4 class="modal-title">议题点子审核</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
@@ -252,6 +255,7 @@
                             <div class="col-md-10">
                                 <div class="radio-group-container">
                                     <label>
+                                        <input type="hidden" name="id"/>
                                         <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
                                     </label>
                                     <label>
@@ -263,7 +267,6 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">审核说明</label>
                             <div class="col-md-10">
-                                <input type="hidden" name="id"/>
                                 <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
                             </div>
                         </div>

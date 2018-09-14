@@ -3,7 +3,7 @@ var params = {limit: 5};
 window.onload = function (){
     initPage();
     initEvents();
-    initJuicerMethod();
+initJuicerMethod();
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -13,12 +13,12 @@ function App() {
 function loadCustom() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
+urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
 }
-/*方案提议初始化分页*/
+/*议题点子初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 10,
@@ -35,14 +35,14 @@ function initPage() {
         }
     });
 }
-/*方案提议条件查询*/
+/*议题点子条件查询*/
 function t_query(){
     getPageList();
     return false;
 }
-/*方案提议加载表格数据*/
+/*议题点子加载表格数据*/
 function getPageList() {
-    var url = contextPath+ "/subject/findSubjectList";
+    var url = contextPath+ "/subjectIdea/findSubjectIdeaList";
     params['name']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
@@ -65,25 +65,25 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
-/*方案提议添加*/
+/*议题点子添加*/
 function add(type){
 window.location.href = 'add/index.jsp';
 }
-/*方案提议编辑*/
+/*议题点子编辑*/
 function edit(id){
 window.location.href = 'edit/index.jsp?id='+id;
 }
 /*查看详情*/
 function detail(id) {
-    var url = contextPath + "/subject/selectSubjectByPrimaryKey";
-    $.getJSON(url, {id: id}, function (result) {
-        if (result.status == 0) {
-        var navitem = document.getElementById('tpl-detail').innerHTML;
-        var html = juicer(navitem, {data: result.value});
-        $("#detail-info").html(html);
-        $("#modal-detail").modal("show");
-    }
-    });
+var url = contextPath + "/subjectIdea/selectSubjectIdeaByPrimaryKey";
+$.getJSON(url, {id: id}, function (result) {
+if (result.status == 0) {
+var navitem = document.getElementById('tpl-detail').innerHTML;
+var html = juicer(navitem, {data: result.value});
+$("#detail-info").html(html);
+$("#modal-detail").modal("show");
+}
+})
 }
 
 function initEvents() {
@@ -113,11 +113,11 @@ $('#modal-audit form').ajaxForm({
 
 
 }
-/*方案提议审核*/
+/*议题点子审核*/
 function audit(params){
     startLoad();
     $.ajax({
-        url: contextPath + "/subject/audit",
+        url: contextPath + "/subjectIdea/audit",
         type:"post",
         async:false,
         data:params,
@@ -135,7 +135,6 @@ function audit(params){
         }
     });
 }
-
 //juicer自定义函数
 function initJuicerMethod() {
 juicer.register('parseStatus', parseStatus);
@@ -165,8 +164,3 @@ function parseStatus(status) {
         return "";
     }
 }
-
-function showIdea(id){
-    window.open(contextPath + '/dynamic/service/subjectIdea/index.jsp?id='+id);
-}
-
