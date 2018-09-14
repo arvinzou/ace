@@ -49,13 +49,13 @@
 						<p class="statics">\${data.counselor.amount}</p>
 						{@/if}
 					</div>
-					<div class="row"><p class="title02">账户余额：
+					<%--<div class="row"><p class="title02">账户余额：
 						{@if data.counselor.income == undefined || data.counselor.income== null}
 							0.00
 						{@else}
 							\${data.counselor.income}
 						{@/if}
-						元</p></div>
+						元</p></div>--%>
 				</div>
 			</div>
 			<div class="row statics_detail">
