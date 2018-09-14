@@ -13,40 +13,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="/dynamic/common/base.jsp"/>
+    <%--common css--%>
+    <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/dynamic/service/societyOrgInfo/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <%--custom css--%>
 </head>
 <body>
-<div class="page-wrapper">
+<%--==============common jsp-prefix==============--%>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-prefix==============--%>
 
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>社会组织信息</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
-
-                                <!---==============================================-->
-
-                                <div class="row">
-                                    <div class="col-md-12">
                                         <div class="portlet light">
-                                            <div class="portlet-title">
+                                            <div class="portlet-title hide">
                                                 <div class="caption">
-                                                    社会组织信息
                                                 </div>
                                                 <div class="actions">
                                                     <a href="javascript:void(0);" onclick="add();"
@@ -105,20 +84,7 @@
                                             </div>
 
                                         </div>
-                                    </div>
-                                </div>
-                                <!--=======================================-->
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom"></div>
-</div>
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
@@ -273,6 +239,10 @@
         </div>
     </div>
 </div>
+
+<%--=============common jsp-suffix===============--%>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-suffix==============--%>
 </body>
 <style>
     .cover {
@@ -292,4 +262,8 @@
         color: #FE6500;
     }
 </style>
+<%--==============common footer==============--%>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>

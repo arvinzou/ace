@@ -82,14 +82,28 @@ var buildMenu = function(menus) {
 									html.push('<ul class="dropdown-menu">');
 									for (var i = 0; i < len; i++) {
 										if (childrens[i].href) {
-										    html.push('<li class="" aria-haspopup="true">');
-											html.push('<a  class="nav-link" href="#" title="'
-															+ childrens[i].text
-															+ '" url="'
-															+ childrens[i].href
-															+ '" ><i class=""></i><small>'
-															+ childrens[i].text
-															+ '</small><span class="arrow"></span></a>');
+										    if(urlParams.id){
+                                                if(urlParams.id==childrens[i].id){
+                                                     html.push('<li class=" active" aria-haspopup="true">');
+                                                    											html.push('<a  class="nav-link" href="#" title="'
+                                                    															+ childrens[i].text
+                                                    															+ '" url="'
+                                                    															+ childrens[i].href
+                                                    															+ '" ><i class=""></i><small>'
+                                                    															+ childrens[i].text
+                                                    															+ '</small><span class="arrow"></span></a>');
+                                                }else{
+                                                    html.push('<li class="" aria-haspopup="true">');
+                                                   											html.push('<a  class="nav-link" href="#" title="'
+                                                   															+ childrens[i].text
+                                                   															+ '" url="'
+                                                   															+ childrens[i].href
+                                                   															+ '" ><i class=""></i><small>'
+                                                   															+ childrens[i].text
+                                                   															+ '</small><span class="arrow"></span></a>');
+                                                }
+                                            }
+
 										} else {
 										    html.push('<li class="dropdown-submenu" aria-haspopup="true">');
 											html.push('<a class="nav-toggle" href="#"><i class=""></i><small>'
@@ -132,10 +146,10 @@ var buildMenu = function(menus) {
 	var activeNode=$("#menu .active");
 	 console.log(activeNode);
          if(urlParams.id){
-            $(activeNode).parent().css('display','block');
+            //$(activeNode).parent().css('display','block');
              $(activeNode).parent().parent().addClass("active");
 
-             $(activeNode).parent().parent().parent().css('display','block');
+             //$(activeNode).parent().parent().parent().css('display','block');
              $(activeNode).parent().parent().parent().parent().addClass("active");
 
              var title=$(activeNode).find("a small").html();

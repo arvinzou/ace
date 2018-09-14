@@ -13,112 +13,83 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="/dynamic/common/base.jsp"/>
+    <%--common css--%>
+    <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/dynamic/service/\$!{bean.lowerName}/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <%--custom css--%>
 </head>
 <body>
-<div class="page-wrapper">
+<%--==============common jsp-prefix==============--%>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-prefix==============--%>
 
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>个人信息</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
+<div class="portlet light">
+    <div class="portlet-title hide">
+        <div class="caption">
 
-                                <!---==============================================-->
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="portlet light">
-                                            <div class="portlet-title">
-                                                <div class="caption">
-                                                    个人信息
-                                                </div>
-                                                <div class="actions">
-                                                    <a href="javascript:void(0);" onclick="add();"
-                                                       class="btn green">创建</a>
-                                                </div>
-                                            </div>
-                                            <div class="portlet-body">
-
-                                                <div class="row">
-                                                    <div class="col-sm-8">
-
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <form onsubmit="return t_query()">
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       name="keyword"
-                                                                       class="form-control input-circle-left"
-                                                                       placeholder="请输入名称">
-                                                                <span class="input-group-btn">
-                                                        <button class="btn btn-circle-right btn-default search_btn"
-                                                                type="submit">
-                                                                搜索
-                                                        </button>
-                                                    </span>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
-                                                </div>
-
-
-                                                <div class="table-scrollable">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                        <tr>
-                                                            <th width="10%">微信昵称</th>
-                                                            <th width="10%">真实姓名</th>
-                                                            <th width="15%">手机号码</th>
-                                                            <th width="10%">政治面貌</th>
-                                                            <th width="10%">累计获取积分</th>
-                                                            <th width="10%">有效积分</th>
-                                                            <th width="10%">注册状态</th>
-                                                            <th width="15%">操作</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody id="page-list">
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="paginationbar">
-                                                    <ul class="pagination" id="pagination1"></ul>
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--=======================================-->
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="actions">
+            <a href="javascript:void(0);" onclick="add();"
+               class="btn green">创建</a>
         </div>
     </div>
+    <div class="portlet-body">
 
-    <div class="bottom"></div>
+        <div class="row">
+            <div class="col-sm-8">
+
+            </div>
+            <div class="col-sm-4">
+                <form onsubmit="return t_query()">
+                    <div class="input-group">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control input-circle-left"
+                               placeholder="请输入名称">
+                        <span class="input-group-btn">
+                            <button class="btn btn-circle-right btn-default search_btn"
+                                    type="submit">
+                                    搜索
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="10%">微信昵称</th>
+                    <th width="10%">真实姓名</th>
+                    <th width="15%">手机号码</th>
+                    <th width="10%">政治面貌</th>
+                    <th width="10%">累计获取积分</th>
+                    <th width="10%">有效积分</th>
+                    <th width="10%">注册状态</th>
+                    <th width="15%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="page-list">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
+        </div>
+
+    </div>
+
 </div>
+
+<%--=============common jsp-suffix===============--%>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-suffix==============--%>
+
 
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
@@ -280,4 +251,8 @@
         color: #FE6500;
     }
 </style>
+<%--==============common footer==============--%>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>

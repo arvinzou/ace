@@ -1,20 +1,8 @@
 var loading = {};
 
-function loadlocal() {
-    var urls = [];
-    urls.push({
-        path: contextPath,
-        url: '/content/common/js/jqPaginator.js',
-        type: 'js'
-    });
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
     $('#audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget)
         var id = relatedTarget.data('id')
@@ -25,6 +13,11 @@ function App() {
         var relatedTarget = $(event.relatedTarget)
         var id = relatedTarget.data('id')
         getById(id);
+    });
+    $(".btn-group .btn").bind('click',function(event){
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
     });
 }
 
@@ -51,6 +44,14 @@ function initPage() {
             getPageList();
         }
     });
+}
+function changeType(status){
+  params['regAuditRst'] = status;
+  getPageList();
+}
+function changeConsultState(status){
+  params['consultState'] = status;
+  getPageList();
 }
 
 function t_query() {

@@ -67,11 +67,11 @@ function render(obj, data, tplId) {
 }
 /*$!{bean.tableChineseName}添加*/
 function add(type){
-window.location.href = 'add/index.jsp';
+window.location.href = 'add/index.jsp?id=' + urlParams.id;
 }
 /*$!{bean.tableChineseName}编辑*/
-function edit(id){
-window.location.href = 'edit/index.jsp?id='+id;
+function edit(did){
+window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 /*查看详情*/
 function detail(id) {

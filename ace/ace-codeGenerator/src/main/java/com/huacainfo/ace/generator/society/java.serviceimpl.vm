@@ -164,9 +164,8 @@ private AuditRecordService auditRecordService;
                         public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id, UserProp userProp) throws
                         Exception {
                         this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);
-                        this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}",
-                        String.valueOf(id),
-                        String.valueOf(id), "$!{bean.tableChineseName}", userProp);
+                        this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
+                        "$!{bean.tableChineseName}", userProp);
                         return new MessageResponse(0, "$!{bean.tableChineseName}删除完成！");
                         }
 
@@ -208,8 +207,8 @@ private AuditRecordService auditRecordService;
                         $!{bean.lowerName}Dao.updateByPrimaryKeySelective(obj);
 
 
-                        dataBaseLogService.log("审核$!{bean.tableChineseName}", "$!{bean.tableChineseName}",
-                        String.valueOf(id), String.valueOf(id), "$!{bean.tableChineseName}", userProp);
+                        dataBaseLogService.log("审核$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
+                        "$!{bean.tableChineseName}", userProp);
                         return new MessageResponse(0, "$!{bean.tableChineseName}审核完成！");
                         }
 

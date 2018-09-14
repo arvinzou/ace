@@ -1,15 +1,8 @@
 var loading = {};
 var payType = "0";
-function loadlocal() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
 
 }
 
@@ -62,7 +55,7 @@ function payTypeCheck(dom) {
 function save(params) {
     $.extend(params, {
         type: urlParams.type,
-        id:urlParams.id,
+        id:urlParams.did,
         category: '1',
         mediType: '1',
         cover: $("#courseCover").attr('src'),
@@ -129,7 +122,7 @@ function initForm(){
         type:"post",
         async:false,
         data:{
-            id: urlParams.id
+            id: urlParams.did
         },
         success:function(result){
             if(result.status == 0) {
@@ -177,7 +170,9 @@ function initForm(){
         }
     });
 }
-
+window.onload=function(){
 jQuery(function ($) {
     initPage();
 });
+
+}
