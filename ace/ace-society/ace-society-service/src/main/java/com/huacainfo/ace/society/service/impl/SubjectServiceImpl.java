@@ -7,6 +7,8 @@ import java.util.List;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ Logger logger = LoggerFactory.getLogger(this.getClass());
 private SubjectDao subjectDao;
 @Autowired
 private DataBaseLogService dataBaseLogService;
+@Autowired
+private AuditRecordService auditRecordService;
 
 /**
 *
@@ -201,6 +205,14 @@ private DataBaseLogService dataBaseLogService;
                             Subject subject = subjectDao.selectByPrimaryKey(id);
                             if(null == subject){
                                 return new MessageResponse(ResultCode.FAIL, "方案提议信息丢失！");
+                            }
+
+                            //更改审核记录
+                            MessageResponse auditRs =
+                                    auditRecordService.audit(BisType.SUBJECT_IDEA, subject.getId(), subject.getId(), rst, remark,
+                                            userProp);
+                            if (ResultCode.FAIL == auditRs.getStatus()) {
+                                return auditRs;
                             }
                             subject.setId(id);
                             subject.setStatus(rst);
