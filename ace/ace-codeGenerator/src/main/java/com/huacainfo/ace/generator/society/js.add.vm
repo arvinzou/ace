@@ -6,16 +6,7 @@ window.onload = function (){
         initEvents();
     });
 }
-function App() {
-    console.log("=============================App Start==============================");
-    loadCustom();
-}
-function loadCustom() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 function initEditor() {
         editor = new Simditor({
         textarea: $('textarea[name=introduce]'),
@@ -74,7 +65,8 @@ function initEvents(){
                 params[obj.name] = obj.value;
             });
             $.extend(params, {
-                time: new Date()
+time: new Date(),
+//coverUrl: $('#coverUrl').attr("src"),
             });
             console.log(params);
             save(params);
