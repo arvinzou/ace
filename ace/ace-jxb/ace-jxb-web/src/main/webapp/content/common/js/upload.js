@@ -23,7 +23,7 @@ var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" rol
     '                <div class="modal-body row jcrop center">' +
     '                    <!-- 原图 -->' +
     '                    <div class="col-md-6 original-pane">' +
-    '                        <img src="${pageContext.request.contextPath}/content/service/information/img/left_pic_two.jpg"' +
+    '                        <img src=""' +
     '                             id="target" alt="原图"/>' +
     // '                        <div class="btn-group" style="padding-top:10px">'+
     // '                            <button class="btn btn-default" type="button" onclick="resetSize(100,100)">16:16</button>'+
@@ -59,7 +59,7 @@ jQuery(function ($) {
     $pimg = $('.preview-pane img');
     xsize = 300;
     ysize = 300;
-    preImg('/jxb/content/service/information/img/left_pic_two.jpg');
+    preImg(portalPath+'/content/common/image/upload-default.jpg');
 });
 
 //3、将本地图片 显示到浏览器上
@@ -178,20 +178,20 @@ function previewImage(file, callback) {
 
 
 
-function initEvents() {
+function initUploadEvents() {
     $('#img-uploader').on('show.bs.modal', function (event) {
         $('.progress-bar-success').css('width', '0%');
         var button = $(event.relatedTarget);
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
-        preImg('/jxb/content/service/information/img/left_pic_two.jpg');
+        preImg(portalPath+'/content/common/image/upload-default.jpg');
     });
 }
 
 
 function initUpload() {
-    initEvents();
+    initUploadEvents();
     console.log("initUpload");
     //实例化一个plupload上传对象
     var uploaderHeadimg = new plupload.Uploader({
@@ -231,6 +231,7 @@ function initUpload() {
         $(img).css("display", "block");
         $(img).css("max-width", xsize);
         $(img).css("max-height", ysize);
+        $("input[name="+cover+"]").val(data.file_path);
         $('#img-uploader').modal('hide');
 
 
@@ -301,44 +302,5 @@ function resetSize(x, y) {
     xsize = x;
     ysize = y;
     console.log(xsize + "/" + ysize);
-    preImg('/jxb/content/service/information/img/left_pic_two.jpg');
+    preImg(portalPath+'/content/common/image/upload-default.jpg');
 }
-
-// function initUpload1() {
-//     var uploader = new plupload.Uploader({
-//         runtimes: 'html5,flash,silverlight,html4',
-//         browse_button: ["idCardz", "idCardf", "idCardsc", "certificateimg"],
-//         url: portalPath + '/files/uploadFile.do',
-//         file_data_name: 'file',
-//         multi_selection: false,
-//         filters: {
-//             max_file_size: '100mb',
-//             mime_types: [{
-//                 title: "Image files",
-//                 extensions: "jpg,gif,png,pdf,bmp"
-//             }
-//
-//             ]
-//         },
-//         init: {
-//             FileFiltered: function (up, files) {
-//                 up.start();
-//                 return false;
-//             },
-//             UploadProgress: function (e, t) {
-//                 var r = t.percent;
-//                 if (r == 100) {
-//                     upimgObject.next().html("上传完成");
-//                 } else {
-//                     upimgObject.next().html("开始上传（" + r + "%）");
-//                 }
-//
-//             },
-//             FileUploaded: function (uploader, file, responseObject) {
-//                 var rst = JSON.parse(responseObject.response);
-//                 upimgObject.find('img').prop('src', "http://zx.huacainfo.com/" + rst.value[0]);
-//             }
-//         }
-//     });
-//     uploader.init();
-// }

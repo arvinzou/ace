@@ -209,7 +209,7 @@ public class CounselorServiceImpl implements CounselorService {
         dataBaseLogService.log("变更咨询师", "咨询师", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "变更咨询师完成！");
+        return new MessageResponse(0, "提交成功，平台官方会在2个工作日内反馈申请结果。！");
     }
 
     /**

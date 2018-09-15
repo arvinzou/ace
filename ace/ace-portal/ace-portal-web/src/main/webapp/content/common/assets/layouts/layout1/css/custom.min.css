@@ -213,3 +213,7 @@ body{
          padding-top: 10px;
 
     }
+     .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+        background-color: #fff;
+        opacity: 1;
+        border: 1px solid #fff;
