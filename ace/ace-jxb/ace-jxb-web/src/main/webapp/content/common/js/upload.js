@@ -37,16 +37,16 @@ var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" rol
     '                                     class="preview" alt="Preview" id="Preview"/>' +
     '                            </div>' +
     '                        </div>' +
-    '                        <div class="row" id="proc" style="margin-top: 30px">' +
+    '                        <div class="row" id="proc" style="margin-top: 30px;padding-left:30px;padding-right:30px">' +
     '                        </div>' +
-    '                        <div class="row" style="padding-top: 50px;">' +
-    '                            <button type="button" class="btn btn-success btn-lg" id="browse">本地上传</button>' +
+    '                        <div class="row hide" style="padding-top: 50px;width:100%;text-align:center;">' +
+    '                            <button type="button" class="btn green btn-lg">本地上传</button>' +
     '                        </div>' +
     '                    </div>' +
     '                </div>' +
     '                <div class="modal-footer">' +
-    '                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>' +
-    '                    <button type="button" class="btn btn-success">确认</button>' +
+    '                    <button type="button" class="btn green" id="browse">本地上传</button>' +
+    '                    <button type="button" class="btn green start">确认</button>' +
     '                </div>' +
     '            </div>' +
     '        </div>' +
@@ -59,7 +59,9 @@ jQuery(function ($) {
     $pimg = $('.preview-pane img');
     xsize = 300;
     ysize = 300;
-    preImg(portalPath+'/content/common/image/upload-default.jpg');
+    $("#Preview").hide();
+    $("#target").hide();
+    //preImg(portalPath+'/content/common/image/upload-default.jpg');
 });
 
 //3、将本地图片 显示到浏览器上
@@ -90,6 +92,8 @@ function preImg(url) {
         img.src = url;
     };
     image.src = url;
+    $("#Preview").show();
+    $("#target").show();
 }
 
 //初始化Jcrop插件
@@ -186,7 +190,14 @@ function initUploadEvents() {
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
-        preImg(portalPath+'/content/common/image/upload-default.jpg');
+        var url=$(button).attr("src");
+         $("#Preview").hide();
+         $("#target").hide();
+        if(url.indexOf("http")==-1){
+
+        }else{
+            preImg(url);
+        }
     });
 }
 
@@ -244,7 +255,7 @@ function initUpload() {
         var html = [];
         html.push('<div class="progress">');
         html.push(
-            '<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"'
+            '<div class="progress-bar green" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"'
         );
         html.push('style="width: ' + percent + '%">');
         html.push('<span class="sr-only">' + percent + '% Complete (success)</span>');
@@ -283,7 +294,7 @@ function initUpload() {
                 break;
         }
     });
-    $('#img-uploader .btn-success').on('click', function () {
+    $('#img-uploader .start').on('click', function () {
         uploaderHeadimg.setOption({
             multipart_params: {
                 x: parseInt(global_api.x),
@@ -303,5 +314,5 @@ function resetSize(x, y) {
     xsize = x;
     ysize = y;
     console.log(xsize + "/" + ysize);
-    preImg(portalPath+'/content/common/image/upload-default.jpg');
+    //preImg(portalPath+'/content/common/image/upload-default.jpg');
 }

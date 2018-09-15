@@ -385,7 +385,7 @@
             <div>
                 <div  id="headimg">
 
-                    <img style="max-width:400px;cursor"
+                    <img style="max-width:400px;cursor:pointer"
                          id="imagePhotoUrl"
                          data-toggle="modal"
                          data-xsize="400" data-ysize="400"
@@ -426,7 +426,7 @@
                     <img
                          id="idCardImgUrl" style="max-height:500px;cursor:pointer"
                          data-cover="idCardImgUrl" data-toggle=modal data-target="#img-uploader"
-                         data-xsize="400" data-ysize="400"
+                         data-xsize="400" data-ysize="300"
                          src="{@if data.idCardImgUrl!=''} \${data.idCardImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}{@/if}">
 
                 </div>
@@ -439,7 +439,7 @@
                     <img
                          data-cover="idCardSideImgUrl" style="max-height:500px;cursor:pointer"
                          id="idCardSideImgUrl"
-                         data-xsize="400" data-ysize="400" data-toggle=modal data-target="#img-uploader"
+                         data-xsize="400" data-ysize="300" data-toggle=modal data-target="#img-uploader"
                          src="{@if data.idCardSideImgUrl!=''} \${data.idCardSideImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}{@/if}">
                 </div>
                 <p>身份证反面</p>
@@ -452,7 +452,7 @@
                     <img
                          id="evidenceImgUrl" style="max-height:500px;cursor:pointer"
                          data-cover="evidenceImgUrl"
-                         data-xsize="400" data-ysize="400"
+                         data-xsize="400" data-ysize="300"
                          data-toggle=modal data-target="#img-uploader"
                          src="{@if data.evidenceImgUrl!=''} \${data.evidenceImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}{@/if}">
                 </div>
@@ -519,7 +519,7 @@
                     <img style="max-height:400px;cursor:pointer"
                          id="certificateImgUrl"
                          data-cover="certificateImgUrl"
-                         data-xsize="240" data-ysize="150"
+                         data-xsize="400" data-ysize="300"
                          data-toggle=modal data-target="#img-uploader"
                          src="{@if data.certificateImgUrl!=''} \${data.certificateImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}{@/if}">
                 </div>
