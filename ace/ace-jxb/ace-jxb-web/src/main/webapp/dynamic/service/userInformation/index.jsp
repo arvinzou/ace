@@ -385,7 +385,7 @@
             <div>
                 <div  id="headimg">
 
-                    <img style="max-width:400px;cursor:pointer"
+                    <img style="max-width:400px;cursor"
                          id="imagePhotoUrl"
                          data-toggle="modal"
                          data-xsize="400" data-ysize="400"

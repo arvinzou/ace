@@ -182,6 +182,7 @@ function initUploadEvents() {
     $('#img-uploader').on('show.bs.modal', function (event) {
         $('.progress-bar-success').css('width', '0%');
         var button = $(event.relatedTarget);
+        $(button).css("cursor",'pointer');
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
