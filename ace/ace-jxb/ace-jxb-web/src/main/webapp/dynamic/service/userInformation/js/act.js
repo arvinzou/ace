@@ -151,7 +151,7 @@ function initForm(){
         },
         success:function(result){
             if(result.status == 0) {
-               result.value.regAuditRst='0';
+               //result.value.regAuditRst='0';
                render($("#fm-edit"),result.value,'tpl-fm');
                initPage();
                citySelect.setCityVal(result.value.cityCode + "市");
