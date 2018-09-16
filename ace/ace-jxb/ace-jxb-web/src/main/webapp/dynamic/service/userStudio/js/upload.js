@@ -9,6 +9,7 @@ var jcrop_api, //jcrop对象
     global_api,
     xsize,
     ysize,
+     againadd,
     cover;
 
 var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' +
@@ -190,6 +191,7 @@ function initUploadEvents() {
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
+         againadd= button.data('againadd');
         var url=$(button).attr("src");
          $("#Preview").hide();
          $("#target").hide();
@@ -237,14 +239,27 @@ function initUpload() {
     });
     //图片上传成功触发，ps:data是返回值（第三个参数是返回值）
     uploaderHeadimg.bind('FileUploaded', function (uploaderHeadimg, files, res) {
-        var data = JSON.parse(res.response);
-        var img = "#" + cover;
-        $(img).attr("src", data.file_path);
-        $(img).css("display", "block");
-        $(img).css("max-width", xsize);
-        $(img).css("max-height", ysize);
-        $("input[name="+cover+"]").val(data.file_path);
-        $('#img-uploader').modal('hide');
+         var data = JSON.parse(res.response);
+                if (againadd) {
+                    var html = '<div class="imgSrc">' +
+                        '           <div class="idCardBox">' +
+                        '                <img class="select_img form_idCardImgUrl" src="' + data.file_path + '">' +
+                        '               <div class="deleteBtn">X</div>' +
+                        '           </div>' +
+                        '     </div>';
+                    $('#indexImg').before($(html));
+                    var index = $('#indexImg').siblings().length;
+                    if (index == 5) {
+                        $('#indexImg').hide();
+                    }
+                } else {
+                    var img = "#" + cover;
+                    $(img).attr("src", data.file_path);
+                    $(img).css("display", "block");
+                    $(img).css("max-width", xsize);
+                    $(img).css("max-height", ysize);
+                }
+                $('#img-uploader').modal('hide');
 
 
     });

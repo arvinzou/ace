@@ -1,15 +1,9 @@
 var loading = {};
 var payType = "0";
-function loadlocal() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
 
 }
 
@@ -154,4 +148,5 @@ function initPage() {
 
 jQuery(function ($) {
     initPage();
+     $(".breadcrumb").append("<li>创建编辑</li>");
 });

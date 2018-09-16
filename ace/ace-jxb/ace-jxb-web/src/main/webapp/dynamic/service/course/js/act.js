@@ -1,21 +1,19 @@
 var loading = {};
-var loading = {};
-function loadlocal() {
-    var urls = [];
-    urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
 }
 
 
 window.onload = function (){
     initPage();    //初始化显示单品课程
+
+    $(".btn-group .btn").bind('click',function(event){
+                $(event.target).siblings().removeClass("active");
+                console.log(event);
+                $(event.target).addClass("active");
+            });
 }
 var payType = "";
 var videoUrl = "";
@@ -77,9 +75,16 @@ function changeCourseType(type){
     initPage();
 }
 function edit(id){
-     window.location.href = contextPath + '/dynamic/service/course/edit/index.jsp?id='+id+'&type='+params.type;
+     window.location.href = contextPath + '/dynamic/service/course/edit/index.jsp?id='+urlParams.id+'&type='+params.type+'&did='+id;
 }
-
+function changeType(status){
+  params['auditRst'] = status;
+  getPageList();
+}
+function changeConsultState(status){
+  params['lineState'] = status;
+  getPageList();
+}
 
 /**
  * 课程审核
@@ -96,7 +101,7 @@ function add(type){
     if(findConsultorAudit() != '1'){
         alert("因为您的权限未通过审核，不能创建课程，请耐心等待审核通过！");
     }else{
-        window.location.href = contextPath+ '/dynamic/service/course/add/index.jsp?type='+type;
+        window.location.href = contextPath+ '/dynamic/service/course/add/index.jsp?id='+urlParams.id+'&type='+params.type
     }
 }
 function audit(){
@@ -206,6 +211,6 @@ function makeAudio(id){
     if(findConsultorAudit() != '1'){
         alert("因为您的权限未通过审核，不能制作课程，请耐心等待审核通过！");
     }else{
-        window.location.href = contextPath+ '/dynamic/service/course/list/index.jsp?id='+id;
+        window.location.href = contextPath+ '/dynamic/service/course/list/index.jsp?id='+urlParams.id+'&did='+id
     }
 }

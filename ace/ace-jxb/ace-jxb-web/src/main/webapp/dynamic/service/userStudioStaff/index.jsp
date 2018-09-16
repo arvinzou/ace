@@ -16,48 +16,18 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="description" />
 
-        <jsp:include page="../../common/base.jsp" />
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
+        <jsp:include page="../../common/header.jsp" />
 
-        <script src="${pageContext.request.contextPath}/content/service/studioStaff/js/act.js?v=${cfg.version}"></script>
-        <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+
+
+
     </head>
 
     <body>
-        <div class="page-wrapper">
-            <div class="page-wrapper-row full-height">
-                <div class="page-wrapper-middle">
-                    <div class="page-container">
-                        <div class="page-content-wrapper">
-                            <div class="page-content">
-                                <div class="container">
-                                    <ul class="page-breadcrumb breadcrumb">
-                                        <li>
-                                            <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                            <i class="fa fa-circle"></i>
-                                        </li>
-                                        <li>
-                                            <span>工作室成员</span>
-                                        </li>
-                                    </ul>
 
-                                    <div class="page-content-inner">
+    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-                                        <div class="row">
-                                            <div class="col-md-12">
                                                 <div class="portlet light ">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            工作室成员
-                                                        </div>
-                                                    </div>
-
                                                     <div class="portlet-body">
                                                         <div class="portlet-body">
 
@@ -85,20 +55,7 @@
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bottom"></div>
-
-        </div>
+    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
         <div class="modal fade" id="orderInfoModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
             <div class="modal-dialog" role="document">
@@ -190,5 +147,7 @@
         }
     </style>
 
-
+    <jsp:include page="/dynamic/common/footer.jsp" />
+    <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+    <script src="js/act.js?v=${cfg.version}"></script>
     </html>

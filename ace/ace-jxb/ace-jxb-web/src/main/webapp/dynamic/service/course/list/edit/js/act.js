@@ -1,22 +1,9 @@
 var loading = {};
-function loadlocal() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 
 function App() {
-    console.log("=============================App Start==============================");
-    loadlocal();
-    loader({
-        path: portalPath,
-        url: '/content/common/plupload/plupload.full.min.js',
-        type: 'js',
-        callback: function () {
 
-        }
-    });
+
 }
 
 function initEditor() {
@@ -38,7 +25,7 @@ function save(params) {
     $.extend(params, {
         courseId: urlParams.courseId,
 		partId: urlParams.partId,
-		id:urlParams.id
+		id:urlParams.did
     });
     startLoad();
     $.ajax({
@@ -52,7 +39,7 @@ function save(params) {
             stopLoad();
 			alert(result.errorMessage);
 			if(result.status==0){
-				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?id="+urlParams.courseId
+				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?did="+urlParams.courseId+"&id="+urlParams.id
 			}
         },
         error: function () {
@@ -142,7 +129,7 @@ function initForm(){
         type:"post",
         async:false,
         data:{
-            id: urlParams.id
+            id: urlParams.did
         },
         success:function(result){
 			stopLoad();
@@ -161,7 +148,10 @@ function initForm(){
     });
 }
 jQuery(function ($) {
-	initForm()
+	initForm();
+	 $(".breadcrumb").append("<li>编辑课件</li>");
+        initUpload();
+
 });
 
 function initUpload(){

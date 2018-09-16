@@ -16,61 +16,28 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
 
-    <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <jsp:include page="../../common/header.jsp"/>
     <link rel="stylesheet" href="${portalPath}/content/common/simditor/styles/simditor.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/swiper-4.3.5/dist/css/swiper.css">
-    <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/information/css/style.css">--%>
-    <script src="${pageContext.request.contextPath}/content/service/studio/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
-    <script src="${portalPath}/content/common/swiper-4.3.5/dist/js/swiper.js?v=${cfg.version}"></script>
+
 </head>
 
 <body>
-<div class="page-wrapper">
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>工作室</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="portlet light portlet-fit ">
-                                            <div class="portlet-title">
-                                                <div class="caption">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-                                                    工作室
-                                                </div>
-                                                <div class="actions">
-                                                    <a onclick="javascript:createStudio()" class="btn green">
+                                        <div class="portlet light">
 
-                                                        创建工作室</a>
-                                                </div>
-                                            </div>
                                             <div class="portlet-body">
-                                               
-
-
-                                                        <div class="table-scrollable table-scrollable-borderless">
-                                                            <table class="table table-hover table-light">
+                                                <div class="row custom-toolbar">
+                                                    <div class="col-md-2">
+                                                        <a onclick="javascript:createStudio()" class="btn green">创建工作室</a>
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                    </div>
+                                                </div>
+                                                        <div class="table-scrollable">
+                                                            <table class="table table-hover">
                                                                 <thead>
                                                                 <tr class="uppercase">
                                                                     <th>LOGO</th>
@@ -85,25 +52,14 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
-
-
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bottom"></div>
-</div>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
 
 <div class="modal fade bs-example-modal-lg" id="studioInfoModal" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" role="document" >
+        <div class="modal-content" >
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -156,6 +112,7 @@
                                     <div id="indexImg">
                                         <div class="idCardBox">
                                             <img class="select_img form_idCardImgUrl" id="uploadImgBtn"
+                                                 style="max-height:400px;cursor:pointer"
                                                  data-cover="banner" data-xsize="240" data-ysize="150"
                                                  data-againadd="true"
                                                  data-target="#img-uploader" data-toggle="modal"
@@ -172,7 +129,7 @@
                                     <span class="required" aria-required="true">*</span>工作室简介
                                 </label>
                                 <div class="col-md-10">
-                                            <textarea class="form-control" id="notNull1" name="form_introduce" rows="5">
+                                            <textarea  id="notNull1" name="form_introduce" rows="5">
                                             </textarea>
                                     <span class="error_message"></span>
                                     <div class="form-control-focus"></div>
@@ -200,7 +157,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 
-                <button type="button" class="btn btn-info submit_btn">确定</button>
+                <button type="button" class="btn green submit_btn">确定</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -776,10 +733,7 @@
         border-bottom: 1px solid #c2cad8 !important;
     }
 
-    .portlet-body {
-        background-color: #fff !important;
-        padding: 41px 98px 45px 20px;
-    }
+
 
     .idCardBoxs > div, .certificateBoxs > div {
         width: 192px;
@@ -844,6 +798,9 @@
     .doc-content .content span {
         line-height: 28px;
     }
+    .modal-lg {
+    width: 1200px !important;
+}
 
 </style>
 
@@ -872,7 +829,7 @@
             <img class="cover" src="\${item.logoImgUrl?item.logoImgUrl:'headImg.png'}">
         </td>
         <td>
-            <a onclick="javascript:userStudioStaff('\${item.id}')" class="primary-link">\${item.name}</a>
+            <a onclick="javascript:userStudioStaff('\${item.id}')">\${item.name}</a>
         </td>
         <td> 我创建的</td>
         <td>\${parseStatus(item.status)}</td>
@@ -917,5 +874,21 @@
         </div>
     </div>
 </script>
+<script src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/module.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/hotkeys.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/uploader.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/simditor.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/plupload/plupload.full.min.js?v=${cfg.version}"></script>
+<script src="js/upload.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/swiper-4.3.5/dist/js/swiper.js?v=V1.0"></script>
+<script src="${pageContext.request.contextPath}/content/common/js/validateform.js?v=V1.0"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 
 </html>

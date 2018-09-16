@@ -1,23 +1,11 @@
 var loading = {};
-function loadlocal() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
 
-    loader({
-        path: portalPath,
-        url: '/content/common/plupload/plupload.full.min.js',
-        type: 'js',
-        callback: function () {
-            initUpload();
-        }
-    });
+$(".breadcrumb").append("<li>创建课件</li>");
+    initUpload();
 }
 
 function initEditor() {
@@ -56,7 +44,7 @@ function save(params) {
                 if(findCourseSrcCountByCourseId(urlParams.courseId) > 1){
                     //updateCourseType(urlParams.courseId);
                 }
-				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?id="+urlParams.courseId
+				window.location.href=contextPath+"/dynamic/service/course/list/index.jsp?did="+urlParams.courseId+"&id="+urlParams.id
 			}
 			
         },

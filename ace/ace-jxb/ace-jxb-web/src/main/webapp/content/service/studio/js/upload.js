@@ -9,7 +9,8 @@ var jcrop_api, //jcrop对象
     global_api,
     xsize,
     ysize,
-    cover, againadd;
+    againadd,
+    cover;
 
 
 var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' +
@@ -24,7 +25,7 @@ var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" rol
     '                <div class="modal-body row jcrop center">' +
     '                    <!-- 原图 -->' +
     '                    <div class="col-md-6 original-pane">' +
-    '                        <img src="${pageContext.request.contextPath}/content/service/information/img/left_pic_two.jpg"' +
+    '                        <img src=""' +
     '                             id="target" alt="原图"/>' +
     // '                        <div class="btn-group" style="padding-top:10px">'+
     // '                            <button class="btn btn-default" type="button" onclick="resetSize(100,100)">16:16</button>'+
@@ -34,20 +35,20 @@ var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" rol
     '                    <div class="col-md-6">' +
     '                        <div class="row">' +
     '                            <div class="preview-pane" style="overflow: hidden;">' +
-    '                                <img src="${pageContext.request.contextPath}/content/service/information/img/left_pic_two.jpg"' +
-    '                                     class="preview" alt="Preview" id="Preview"/>' +
+    '                                <img src=""' +
+    '                                     class="preview" alt="Preview" id="Preview" class="hide"/>' +
     '                            </div>' +
     '                        </div>' +
-    '                        <div class="row" id="proc" style="margin-top: 30px">' +
+    '                        <div class="row" id="proc" style="margin-top: 30px;padding-left:30px;padding-right:30px">' +
     '                        </div>' +
-    '                        <div class="row" style="padding-top: 50px;">' +
-    '                            <button type="button" class="btn btn-success btn-lg" id="browse">本地上传</button>' +
+    '                        <div class="row hide" style="padding-top: 50px;width:100%;text-align:center;">' +
+    '                            <button type="button" class="btn green btn-lg">本地上传</button>' +
     '                        </div>' +
     '                    </div>' +
     '                </div>' +
     '                <div class="modal-footer">' +
-    '                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>' +
-    '                    <button type="button" class="btn btn-success">确认</button>' +
+    '                    <button type="button" class="btn green" id="browse">本地上传</button>' +
+    '                    <button type="button" class="btn green start">确认</button>' +
     '                </div>' +
     '            </div>' +
     '        </div>' +
@@ -60,7 +61,9 @@ jQuery(function ($) {
     $pimg = $('.preview-pane img');
     xsize = 300;
     ysize = 300;
-    preImg('/jxb/content/service/information/img/left_pic_two.jpg');
+    $("#Preview").hide();
+    $("#target").hide();
+    //preImg(portalPath+'/content/common/image/upload-default.jpg');
 });
 
 //3、将本地图片 显示到浏览器上
@@ -91,6 +94,8 @@ function preImg(url) {
         img.src = url;
     };
     image.src = url;
+    $("#Preview").show();
+    $("#target").show();
 }
 
 //初始化Jcrop插件
@@ -113,6 +118,7 @@ function initJcrop() {
         jcrop_api = this;
     });
 }
+
 
 //更新显示预览内容
 function updatePreview(c) {
@@ -176,28 +182,34 @@ function previewImage(file, callback) {
     }
 }
 
-var uploader;
 
 
-function initEvents() {
+function initUploadEvents() {
     $('#img-uploader').on('show.bs.modal', function (event) {
         $('.progress-bar-success').css('width', '0%');
         var button = $(event.relatedTarget);
-        console.log(button);
+        $(button).css("cursor",'pointer');
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
-        againadd = button.data('againadd');
-        preImg(button["0"].src);
+        againadd= button.data('againadd');
+        var url=$(button).attr("src");
+         $("#Preview").hide();
+         $("#target").hide();
+        if(url.indexOf("http")==-1){
+
+        }else{
+            preImg(url);
+        }
     });
 }
 
 
 function initUpload() {
-    initEvents();
+    initUploadEvents();
     console.log("initUpload");
     //实例化一个plupload上传对象
-    var uploader = new plupload.Uploader({
+    var uploaderHeadimg = new plupload.Uploader({
         browse_button: 'browse', //触发文件选择对话框的按钮，为那个元素id
         url: portalPath + '/files/uploadImage.do', //服务器端的上传页面地址
         max_file_size: '2mb', //限制为2MB
@@ -214,9 +226,9 @@ function initUpload() {
         }] //图片限制
     });
     //在实例对象上调用init()方法进行初始化
-    uploader.init();
+    uploaderHeadimg.init();
     //图片选择完毕触发
-    uploader.bind('filesAdded', function (uploader, files) {
+    uploaderHeadimg.bind('filesAdded', function (uploaderHeadimg, files) {
         for (var i = 0, len = files.length; i < len; i++) {
             !function (i) {
                 previewImage(files[i], function (imgsrc) {
@@ -227,37 +239,39 @@ function initUpload() {
         }
     });
     //图片上传成功触发，ps:data是返回值（第三个参数是返回值）
-    uploader.bind('FileUploaded', function (uploader, files, res) {
-        var data = JSON.parse(res.response);
-        if (againadd) {
-            var html = '<div class="imgSrc">' +
-                '           <div class="idCardBox">' +
-                '                <img class="select_img form_idCardImgUrl" src="' + data.file_path + '">' +
-                '               <div class="deleteBtn">X</div>' +
-                '           </div>' +
-                '     </div>';
-            $('#indexImg').before($(html));
-            var index = $('#indexImg').siblings().length;
-            if (index == 5) {
-                $('#indexImg').hide();
-            }
-        } else {
-            var img = "#" + cover;
-            $(img).attr("src", data.file_path);
-            $(img).css("display", "block");
-            $(img).css("max-width", xsize);
-            $(img).css("max-height", ysize);
-        }
-        $('#img-uploader').modal('hide');
+    uploaderHeadimg.bind('FileUploaded', function (uploaderHeadimg, files, res) {
+         var data = JSON.parse(res.response);
+                if (againadd) {
+                    var html = '<div class="imgSrc">' +
+                        '           <div class="idCardBox">' +
+                        '                <img class="select_img form_idCardImgUrl" src="' + data.file_path + '">' +
+                        '               <div class="deleteBtn">X</div>' +
+                        '           </div>' +
+                        '     </div>';
+                    $('#indexImg').before($(html));
+                    var index = $('#indexImg').siblings().length;
+                    if (index == 5) {
+                        $('#indexImg').hide();
+                    }
+                } else {
+                    var img = "#" + cover;
+                    $(img).attr("src", data.file_path);
+                    $(img).css("display", "block");
+                    $(img).css("max-width", xsize);
+                    $(img).css("max-height", ysize);
+                }
+                $('#img-uploader').modal('hide');
+
+
     });
     //会在文件上传过程中不断触发，可以用此事件来显示上传进度监听（比如说上传进度）
-    uploader.bind('UploadProgress', function (uploader, file) {
+    uploaderHeadimg.bind('UploadProgress', function (uploaderHeadimg, file) {
         var percent = file.percent;
         console.log(percent);
         var html = [];
         html.push('<div class="progress">');
         html.push(
-            '<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"'
+            '<div class="progress-bar green" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"'
         );
         html.push('style="width: ' + percent + '%">');
         html.push('<span class="sr-only">' + percent + '% Complete (success)</span>');
@@ -265,7 +279,7 @@ function initUpload() {
         html.push('</div>');
         $("#proc").html(html.join(''));
     });
-    uploader.bind('Error', function (up, err) {
+    uploaderHeadimg.bind('Error', function (up, err) {
         switch (err.code) {
             case -200:
                 alert("文件上传失败,错误信息: 网络错误");
@@ -296,8 +310,8 @@ function initUpload() {
                 break;
         }
     });
-    $('#img-uploader .btn-success').on('click', function () {
-        uploader.setOption({
+    $('#img-uploader .start').on('click', function () {
+        uploaderHeadimg.setOption({
             multipart_params: {
                 x: parseInt(global_api.x),
                 y: parseInt(global_api.y),
@@ -307,7 +321,14 @@ function initUpload() {
                 srcHeight: parseInt(boundy)
             }
         });
-        uploader.start();
+        uploaderHeadimg.start();
     });
-    initEvents();
+    // initEvents();
+}
+
+function resetSize(x, y) {
+    xsize = x;
+    ysize = y;
+    console.log(xsize + "/" + ysize);
+    //preImg(portalPath+'/content/common/image/upload-default.jpg');
 }

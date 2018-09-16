@@ -109,7 +109,9 @@
     </div>
 
     <div class="form-group ">
-        <label class="col-md-2 control-label">电话咨询
+        <label class="col-md-2 control-label"><span
+                class="required"
+                aria-required="true">*</span>电话咨询
 
         </label>
         <div class="col-md-4">
@@ -122,7 +124,9 @@
     </div>
 
     <div class="form-group ">
-        <label class="col-md-2 control-label">视频咨询
+        <label class="col-md-2 control-label"><span
+                class="required"
+                aria-required="true">*</span>视频咨询
 
         </label>
         <div class="col-md-4">
@@ -136,7 +140,9 @@
 
     <div class="form-group ">
         <label class="col-md-2 control-label">
-            面对面咨询
+            <span
+                    class="required"
+                    aria-required="true">*</span>面对面咨询
         </label>
         <div class="col-md-4">
             <input type="text" class="form-control" name="facetofaceCon" value="\${data.o.productList[2].price}">
