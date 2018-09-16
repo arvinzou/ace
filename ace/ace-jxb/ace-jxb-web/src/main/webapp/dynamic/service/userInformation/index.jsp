@@ -301,10 +301,7 @@
             <input type="text" name="name" value="\${data.name}" class="form-control" placeholder="" \${data.regAuditRst==1?'disabled':''}>
         </div>
         <div class="col-md-6">
-            <div class="input-icon right">
 
-
-            </div>
         </div>
     </div>
 
@@ -314,26 +311,22 @@
             性别
         </label>
         <div class="col-md-10">
-            <div class="md-radio-inline">
-                <div class="md-radio">
+            <div class="row">
+                <div style="float:left;width:60px;padding:2px">
                     <input type="radio" \${data.sex==1?'checked':''}  id="sex1" \${data.regAuditRst==1?'disabled':''}
                            name="sex" value="1"
-                           class="md-radiobtn">
+                           >
                     <label for="sex1">
-                        <span class="inc"></span>
-                        <span class="check"></span>
-                        <span class="box"></span>男</label>
+                        男</label>
                 </div>
 
-                <div class="md-radio">
+                <div style="float:left;width:60px;padding:2px">
                     <input type="radio" \${data.sex==2?'checked':''} id="sex2" \${data.regAuditRst==1?'disabled':''}
                            name="sex"
                            value="2"
-                           class="md-radiobtn">
+                          >
                     <label for="sex2">
-                        <span></span>
-                        <span class="check"></span>
-                        <span class="box"></span>女
+                       女
                     </label>
                 </div>
 
@@ -465,24 +458,24 @@
     <div class="form-group ">
         <label class="col-md-2 control-label">职业名称</label>
         <div class="col-md-10">
-            <div class="md-radio-inline">
-                <div class="md-radio">
+            <div class="row">
+                <div  style="float:left;width:130px;padding:2px">
                     <input type="radio" id="radios_1" \${data.regAuditRst==1?'disabled':''} name="certification"
-                           value="国家二级咨询师" class="md-radiobtn" \${data.certification=='国家二级咨询师'?'checked':''}>
+                           value="国家二级咨询师"  \${data.certification=='国家二级咨询师'?'checked':''}>
                     <label
                             for="radios_1"><span class="inc"></span>
                         <span class="check"></span>
                         <span class="box"></span>国家二级咨询师</label>
                 </div>
 
-                <div class="md-radio"><input type="radio" id="radios_2" \${data.regAuditRst==1?'disabled':''}
+                <div  style="float:left;width:130px;padding:2px">
+
+                    <input type="radio" id="radios_2" \${data.regAuditRst==1?'disabled':''}
                                              name="certification"
                                              value="国家三级咨询师"
-                                             class="md-radiobtn" \${data.certification=='国家三级咨询师'?'checked':''}>
+                                              \${data.certification=='国家三级咨询师'?'checked':''}>
                     <label
-                            for="radios_2"><span class="inc"></span>
-                        <span class="check"></span>
-                        <span class="box"></span>国家三级咨询师</label>
+                            for="radios_2">国家三级咨询师</label>
                 </div>
             </div>
         </div>
@@ -570,7 +563,6 @@
     <div class="form-group ">
         <div class="col-md-10 col-md-offset-3">
             <input class="protocol" type="checkbox"/>
-            <span></span>
             <span>
         同意
         <span class="primary-link"
