@@ -148,5 +148,5 @@ function initPage() {
 
 jQuery(function ($) {
     initPage();
-     $(".breadcrumb").append("<li>创建编辑</li>");
+     $(".breadcrumb").append("<li>创建课程</li>");
 });
