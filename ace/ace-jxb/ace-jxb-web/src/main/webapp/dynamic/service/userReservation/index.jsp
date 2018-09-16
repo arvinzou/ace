@@ -1,314 +1,188 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-
-    <!DOCTYPE html>
-    <!--[if IE 8]>
+<!DOCTYPE html>
+<!--[if IE 8]>
 <html lang="en" class="ie8 no-js"> <![endif]-->
-    <!--[if IE 9]>
+<!--[if IE 9]>
 <html lang="en" class="ie9 no-js"> <![endif]-->
-    <!--[if !IE]><!-->
-    <html lang="en">
-    <!--<![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <title>${cfg.sys_name}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="${cfg.sys_name}" name="description"/>
 
-    <head>
-        <meta charset="utf-8" />
-        <title>${cfg.sys_name}</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <meta content="${cfg.sys_name}" name="description" />
-
-        <jsp:include page="../../common/base.jsp" />
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-        <%--<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/reservation/css/style.css">--%>
-            <script src="${pageContext.request.contextPath}/content/service/reservation/js/act.js?v=${cfg.version}"></script>
-            <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
-    </head>
-
-    <body>
-        <div class="page-wrapper">
-            <div class="page-wrapper-row full-height">
-                <div class="page-wrapper-middle">
-                    <div class="page-container">
-                        <div class="page-content-wrapper">
-                            <div class="page-content">
-                                <div class="container">
-                                    <ul class="page-breadcrumb breadcrumb">
-                                        <li>
-                                            <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                            <i class="fa fa-circle"></i>
-                                        </li>
-                                        <li>
-                                            <span>预约设置</span>
-                                        </li>
-                                    </ul>
-                                    <div class="page-content-inner">
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="portlet light portlet-fit ">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            预约设置
-                                                        </div>
-                                                        <div class="actions">
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    <div class="portlet-body">
-                                                        <div class="mt-element-card mt-element-overlay">
-                                                            <div class="row" id="reservtionInfo">
-
-                                                                <%--content--%>
-                                                                    <div class="form-horizontal" novalidate="novalidate">
-                                                                        <div class="form-body">
-                                                                            <div class="form-group form-md-checkboxes">
-                                                                                <label class="col-md-3 control-label"><span
-                                                                                        class="required"
-                                                                                        aria-required="true">*</span>咨询对象
-
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <div class="md-checkbox-inline" id="objects">
+    <jsp:include page="../../common/header.jsp"/>
 
 
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
 
 
-                                                                            <div class="form-group form-md-checkboxes">
-                                                                                <label class="col-md-3 control-label"><span
-                                                                                        class="required"
-                                                                                        aria-required="true">*</span>擅长领域
-
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <div class="md-checkbox-inline" id="field">
 
 
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+</head>
 
-                                                                            <div class="form-group ">
-                                                                                <label class="col-md-3 control-label">电话咨询
+<body>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <div class="input-group">
-                                                                                        <div class="input-group-control">
-                                                                                            <input type="text" class="form-control" name="type1" id="money_null">
-                                                                                            <span class="error_message"></span>
-                                                                                        </div>
-                                                                                        <span class="input-group-btn btn-right">
-                                                                                            <span type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+<div class="portlet light">
 
-                                                                                                    元/次(每次30分钟)
-                                                                                                    </font>
-                                                                                                </font>
-                                                                                            </span>
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+    <div class="portlet-body">
+        <div class="form-panel">
+            <!--具体界面元素开始-->
+            <form class="form-horizontal" id="fm-edit" role="form">
 
-                                                                            <div class="form-group ">
-                                                                                <label class="col-md-3 control-label">视频咨询
+            </form>
+        </div>
 
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <div class="input-group">
-                                                                                        <div class="input-group-control">
-                                                                                            <input type="text" class="form-control" name="type2" id="money1_null">
-                                                                                            <span class="error_message"></span>
-                                                                                        </div>
-                                                                                        <span class="input-group-btn btn-right">
-                                                                                            <span type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-
-                                                                                                    元/次(每次30分钟)
-                                                                                                    </font>
-                                                                                                </font>
-                                                                                            </span>
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="form-group ">
-                                                                                <label class="col-md-3 control-label">面对面咨询
-
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <div class="input-group">
-                                                                                        <div class="input-group-control">
-                                                                                            <input type="text" class="form-control" name="type3" id="money2_null">
-                                                                                            <span class="error_message"></span>
-                                                                                        </div>
-                                                                                        <span class="input-group-btn btn-right">
-                                                                                            <span type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-
-                                                                                                    元/次(每次30分钟)
-                                                                                                </font>
-                                                                                            </span>
-                                                                                        </span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="form-group ">
-                                                                                <label class="col-md-3 control-label">
-                                                                                    <span class="required" aria-required="true">*</span>
-                                                                                    面对面咨询地址
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <textarea class="form-control" id="city" name="form_city" rows="3"></textarea>
-                                                                                    <span class="error_message"></span>
-                                                                                    <div class="form-control-focus"></div>
-
-                                                                                </div>
-                                                                            </div>
-                                                                            <%-- <div class="form-group ">
-                                                                                 <label class="col-md-3 control-label"><span
-                                                                                         class="required"
-                                                                                         aria-required="true">*</span>预约须知
-
-                                                                                 </label>
-                                                                                 <div class="col-md-9">
-                                                                                     <textarea class="form-control" id="notNull1" name="form_info" rows="5"></textarea>
-                                                                                     <span class="error_message"></span>
-                                                                                     <div class="form-control-focus"></div>
-                                                                                 </div>
-                                                                             </div>--%>
-
-                                                                            <div class="form-group ">
-                                                                                <label class="col-md-3 control-label"><span
-                                                                                        class="required"
-                                                                                        aria-required="true">*</span>是否上架
-
-                                                                                </label>
-                                                                                <div class="col-md-9">
-                                                                                    <div class="switch"
-                                                                                         data-on-label="<i class='icon-ok icon-white'></i>"
-                                                                                         data-off-label="<i class='icon-remove'></i>">
-                                                                                        <input id="status"
-                                                                                               type="checkbox"
-                                                                                               name="status"/>
-                                                                                    </div>
-                                                                                    <p id="resultState"
-                                                                                       style="display: none">
-                                                                                        管理员强制下架，联系管理重新上架！</p>
-                                                                                </div>
-                                                                            </div>
+    </div>
+</div>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
 
-                                                                        </div>
-                                                                        <div class="form-actions">
-                                                                            <div class="row">
-                                                                                <div class="col-md-offset-3 col-md-9">
-                                                                                    <button class="btn green submit_btn">
-                                                                                        提交
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
 
-                                                                    </div>
+</body>
 
-                                                                    <%--content--%>
 
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+<style>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+</style>
+
+
+<script id="tpl-fm" type="text/template">
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">
+            <span
+                class="required"
+                aria-required="true">*</span>咨询对象
+
+        </label>
+        <div class="col-md-10">
+            <div class="row">
+
+                {@each data.dict149 as item,index}
+                    {@if item.CODE!=''}
+                    <div style="float:left;padding:2px;width:100px" >
+                        <input type="checkbox" name="objects" id="d149\${index}"
+                                value="\${item.NAME}"
+                                \${data.o.objects.split(',').contains(item.NAME)?'checked':''}>
+                        <label for="d149\${index}">
+                           \${item.NAME}
+                        </label>
                     </div>
-                </div>
+                    {@/if}
+                {@/each}
             </div>
-
-            <div class="bottom"></div>
-
-        </div>
+            <div class="error-objects"></div>
         </div>
 
-    </body>
-
-    <style>
-        .hc-checkbox {
-            width: 11em;
-        }
-
-        .error_message {
-            color: red;
-        }
-
-        .studiologo {
-            width: 100px;
-            height: 100px;
-            overflow: hidden;
-            background-color: #BDE1FF;
-        }
-
-        .studiologo img {
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .studiologo+p {
-            line-height: 1.05rem;
-        }
-
-        .input_style {
-            border-bottom: 1px solid #c2cad8 !important;
-        }
-
-        .portlet-body {
-            background-color: #fff !important;
-            padding: 14px 98px 45px 20px !important;
-        }
-    </style>
+    </div>
 
 
-    <script id="temp_field" type="text/template">
-        {@each data as item,index}
-        <div class="md-checkbox hc-checkbox">
-            <input type="checkbox" id="checkbox_\${index}"
-                   name="tags" value="34"
-                   class="md-check">
-            <label for="checkbox_\${index}">
-                <span class="inc"></span>
-                <span class="check"></span>
-                <span class="box"></span>\${item.name}
-            </label>
+    <div class="form-group">
+        <label class="col-md-2 control-label"><span
+                class="required"
+                aria-required="true">*</span>擅长领域
+
+        </label>
+        <div class="col-md-10">
+            <div class="row">
+                {@each data.dict152 as item,index}
+                {@if item.CODE!=''}
+                <div style="float:left;padding:2px;width:150px">
+                    <input type="checkbox" id="d152\${index}" name="field"
+                            value="\${item.NAME}"
+                          \${data.o.field.split(',').contains(item.NAME)?'checked':''}>
+                    <label for="d152\${index}">
+                       \${item.NAME}
+                    </label>
+                </div>
+                {@/if}
+                {@/each}
+
+            </div>
+            <div class="error-field"></div>
         </div>
-        {@/each}
-    </script>
+    </div>
 
-    <script id="temp_objects" type="text/template">
-        {@each data as item,index}
-        <div class="md-checkbox hc-checkbox">
-            <input type="checkbox" id="checkbox0_\${index}"
-                   name="tags" value="34"
-                   class="md-check">
-            <label for="checkbox0_\${index}">
-                <span class="inc"></span>
-                <span class="check"></span>
-                <span class="box"></span>\${item.name}
-            </label>
+    <div class="form-group ">
+        <label class="col-md-2 control-label">电话咨询
+
+        </label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="telephoneCon" value="\${data.o.productList[0].price}">
+            <div class="error-telephoneCon"></div>
         </div>
-        {@/each}
-    </script>
+        <div class="col-md-6">
+            元/次(每次30分钟)
+        </div>
+    </div>
 
-    </html>
+    <div class="form-group ">
+        <label class="col-md-2 control-label">视频咨询
+
+        </label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="wecharCon" value="\${data.o.productList[1].price}">
+            <div class="error-wecharCon"></div>
+        </div>
+        <div class="col-md-6">
+            元/次(每次30分钟)
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label class="col-md-2 control-label">
+            面对面咨询
+        </label>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="facetofaceCon" value="\${data.o.productList[2].price}">
+            <div class="error-facetofaceCon"></div>
+        </div>
+        <div class="col-md-6">
+            元/次(每次30分钟)
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label class="col-md-2 control-label">
+            <span class="required" aria-required="true">*</span>
+            面对面咨询地址
+        </label>
+        <div class="col-md-10">
+            <textarea class="form-control"  name="city" rows="3">\${data.o.city}</textarea>
+            <div class="error-city"></div>
+        </div>
+    </div>
+
+    <div class="form-group ">
+        <label class="col-md-2 control-label"><span
+                class="required"
+                aria-required="true">*</span>是否上架
+
+        </label>
+        <div class="col-md-10">
+
+            <input type="checkbox" value="1" name="status" \${data.o.status==1?'checked':''}>
+        </div>
+    </div>
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-7">
+                <button class="btn  green" type="submit" style="width:30%">提交</button>
+            </div>
+        </div>
+    </div>
+
+</script>
+<script src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
+</html>
+
