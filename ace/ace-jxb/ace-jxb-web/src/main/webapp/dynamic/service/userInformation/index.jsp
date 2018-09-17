@@ -380,7 +380,7 @@
 
                     <img style="max-width:400px;cursor:pointer"
                          id="imagePhotoUrl"
-                         data-toggle="modal"
+                         data-toggle="\${data.regAuditRst==1?'':'modal'}"
                          data-xsize="400" data-ysize="400"
                          data-cover="imagePhotoUrl"
                          data-target="#img-uploader"
@@ -418,7 +418,7 @@
                     <input name="idCardImgUrl" type="hidden" value="\${data.idCardImgUrl}">
                     <img
                          id="idCardImgUrl" style="max-height:500px;cursor:pointer"
-                         data-cover="idCardImgUrl" data-toggle=modal data-target="#img-uploader"
+                         data-cover="idCardImgUrl" data-toggle=\${data.regAuditRst==1?'':'modal'} data-target="#img-uploader"
                          data-xsize="400" data-ysize="300"
                          src="{@if data.idCardImgUrl!=''} \${data.idCardImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}{@/if}">
 
@@ -432,7 +432,7 @@
                     <img
                          data-cover="idCardSideImgUrl" style="max-height:500px;cursor:pointer"
                          id="idCardSideImgUrl"
-                         data-xsize="400" data-ysize="300" data-toggle=modal data-target="#img-uploader"
+                         data-xsize="400" data-ysize="300" data-toggle=\${data.regAuditRst==1?'':'modal'} data-target="#img-uploader"
                          src="{@if data.idCardSideImgUrl!=''} \${data.idCardSideImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}{@/if}">
                 </div>
                 <p>身份证反面</p>
@@ -446,7 +446,7 @@
                          id="evidenceImgUrl" style="max-height:500px;cursor:pointer"
                          data-cover="evidenceImgUrl"
                          data-xsize="400" data-ysize="300"
-                         data-toggle=modal data-target="#img-uploader"
+                         data-toggle=\${data.regAuditRst==1?'':'modal'} data-target="#img-uploader"
                          src="{@if data.evidenceImgUrl!=''} \${data.evidenceImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}{@/if}">
                 </div>
                 <p>手持身份证</p>
