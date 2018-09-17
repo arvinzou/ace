@@ -219,3 +219,10 @@ body{
         background-color: #fff;
         opacity: 1;
         border: 1px solid #fff;
+        }
+.breadcrumb > li+li :before {
+    content: "/ ";
+    padding: 0 5px;
+    color: #ccc;
+    display:inline-block
+}

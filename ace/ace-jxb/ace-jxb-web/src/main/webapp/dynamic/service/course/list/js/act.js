@@ -12,7 +12,7 @@ function App() {
 window.onload = function(){
     primaryId =urlParams.did;
     initPartList();
-     $(".breadcrumb").append("<li>制作课程</li>");
+     $(".breadcrumb").append("<li><span>制作课程</span></li>");
       $(".btn-group .btn").bind('click',function(event){
                  $(event.target).siblings().removeClass("active");
                  console.log(event);

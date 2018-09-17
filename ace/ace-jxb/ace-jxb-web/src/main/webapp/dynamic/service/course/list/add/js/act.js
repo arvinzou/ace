@@ -4,7 +4,7 @@ var loading = {};
 function App() {
     console.log("=============================App Start==============================");
 
-$(".breadcrumb").append("<li>创建课件</li>");
+$(".breadcrumb").append("<li><span>创建课件</span></li>");
     initUpload();
 }
 
