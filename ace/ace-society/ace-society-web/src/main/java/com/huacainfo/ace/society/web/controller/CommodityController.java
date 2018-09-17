@@ -2,6 +2,7 @@ package com.huacainfo.ace.society.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -147,5 +148,23 @@ public class CommodityController extends SocietyBaseController {
     public MessageResponse audit(String id, String rst, String message) throws Exception {
 
         return this.commodityService.audit(id, rst, message, this.getCurUserProp());
+    }
+
+    /**
+     * 商品上/下架处理
+     *
+     * @param id    主键ID
+     * @param state 商品状态0-下架1-在售
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @RequestMapping(value = "/updateState")
+    @ResponseBody
+    public MessageResponse updateState(String id, String state) throws Exception {
+        if (!StringUtil.areNotEmpty(id, state)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return commodityService.updateState(id, state, this.getCurUserProp());
     }
 }

@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>爱心商品</title>
+    <title>爱心场地</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
@@ -17,6 +17,7 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
     <%--custom css--%>
+
 </head>
 <body>
 <%--==============common jsp-prefix==============--%>
@@ -28,13 +29,13 @@
         <div class="row custom-toolbar">
             <div class="col-sm-5">
                 <a onclick="javascript:add()" class="btn  green">
-                    <i class="fa fa-plus"></i> 添加爱心商品
+                    <i class="fa fa-plus"></i> 添加爱心场地
                 </a>
             </div>
             <div class="col-sm-7">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
-                        <input type="text" name="keyword" class="form-control " placeholder="请输入商品名称">
+                        <input type="text" name="keyword" class="form-control " placeholder="请输入场地名称">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit">搜索</button>
                         </span>
@@ -48,11 +49,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 商品名称</th>
-                    <th width="10%"> 商品分类</th>
-                    <th width="10%"> 商品封面</th>
+                    <th width="10%"> 场地名称</th>
+                    <th width="10%"> 场地分类</th>
+                    <th width="10%"> 场地封面</th>
                     <th width="10%"> 购买所需积分</th>
-                    <th width="10%"> 商品状态</th>
+                    <th width="10%"> 场地状态</th>
                     <th width="10%"> 备注</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -72,7 +73,6 @@
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
-</body>
 
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
@@ -107,7 +107,7 @@
 <script id="tpl-detail" type="text/template">
     <table class="table table-bordered table-hover">
         <tr>
-            <td class="active"> 商品编号</td>
+            <td class="active"> 场地编号</td>
             <td class="success"> \${data.id}</td>
         </tr>
         <tr>
@@ -115,19 +115,19 @@
             <td class="success"> \${parseType(data.commodityType)}</td>
         </tr>
         <tr>
-            <td class="active"> 商品名称</td>
+            <td class="active"> 场地名称</td>
             <td class="success"> \${data.commodityName}</td>
         </tr>
         <tr>
-            <td class="active"> 商品分类</td>
+            <td class="active"> 场地分类</td>
             <td class="success"> \${data.category}</td>
         </tr>
         <tr>
-            <td class="active"> 商品封面</td>
+            <td class="active"> 场地封面</td>
             <td class="success"><img src="\${data.coverUrl}" class="cover"/></td>
         </tr>
         <tr>
-            <td class="active"> 商品简介</td>
+            <td class="active"> 场地简介</td>
             <td class="success"> \${data.summary}</td>
         </tr>
         <tr>
@@ -135,7 +135,7 @@
             <td class="success"> \${data.costPoints}</td>
         </tr>
         <tr>
-            <td class="active"> 商品状态</td>
+            <td class="active"> 场地状态</td>
             <td class="success"> \${parseState(data.state)}</td>
         </tr>
         <tr>
@@ -160,6 +160,7 @@
         </tr>
     </table>
 </script>
+
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
     <div class="modal-dialog" role="document">
@@ -167,7 +168,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">爱心商品详情</h4>
+                <h4 class="modal-title">爱心场地详情</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
@@ -187,6 +188,7 @@
         </div>
     </div>
 </div>
+
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
     <div class="modal-dialog" role="document">
@@ -229,7 +231,7 @@
         </div>
     </div>
 </div>
-
+</body>
 <style>
     .cover {
         width: 70px;
@@ -252,5 +254,5 @@
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
-
+<%--custom js--%>
 </html>

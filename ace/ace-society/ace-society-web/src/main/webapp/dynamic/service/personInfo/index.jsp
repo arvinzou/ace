@@ -24,40 +24,24 @@
 <%--==============common jsp-prefix==============--%>
 
 <div class="portlet light">
-    <div class="portlet-title hide">
-        <div class="caption">
-
-        </div>
-        <div class="actions">
-            <a href="javascript:void(0);" onclick="add();"
-               class="btn green">创建</a>
-        </div>
-    </div>
     <div class="portlet-body">
 
-        <div class="row">
-            <div class="col-sm-8">
+        <div class="row custom-toolbar">
+            <div class="col-sm-5">
 
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control input-circle-left"
-                               placeholder="请输入名称">
+                        <input type="text" name="keyword" class="form-control " placeholder="请输入姓名">
                         <span class="input-group-btn">
-                            <button class="btn btn-circle-right btn-default search_btn"
-                                    type="submit">
-                                    搜索
-                            </button>
+                            <button class="btn  btn-default search_btn" type="submit">搜索</button>
                         </span>
                     </div>
                 </form>
             </div>
 
         </div>
-
 
         <div class="table-scrollable">
             <table class="table table-hover">
@@ -89,8 +73,7 @@
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
-
-
+</body>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
@@ -196,7 +179,7 @@
         </div>
     </div>
 </div>
-</body>
+
 <%--详情模板--%>
 <script id="tpl-detail" type="text/template">
 

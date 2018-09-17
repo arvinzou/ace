@@ -11,8 +11,9 @@ public class CommonTest {
 
     @Test
     public void test() {
-
-        generatorGUID(1);
+        String a = "9:00~11:00";
+        System.out.println(a.length());
+//        generatorGUID(1);
     }
 
 

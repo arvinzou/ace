@@ -89,19 +89,19 @@ public class CommodityServiceImpl implements CommodityService {
             return new MessageResponse(1, "商品名称不能为空！");
         }
 
+        o.setId(StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId());
         int temp = this.commodityDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "名称重复！");
         }
 
         o.setCostPoints(null == o.getCostPoints() ? 0 : o.getCostPoints());
-        o.setId(StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId());
         o.setState("0");//商品状态0-下架1-在售 默认下架
         o.setStatus("1");
         o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        this.commodityDao.insertSelective(o);
+        this.commodityDao.insert(o);
         this.dataBaseLogService.log("添加爱心商品", "爱心商品", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加爱心商品完成！");
@@ -119,22 +119,29 @@ public class CommodityServiceImpl implements CommodityService {
      * @version: 2018-09-13
      */
     @Override
-    public MessageResponse updateCommodity(Commodity o, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
+    public MessageResponse updateCommodity(Commodity params, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(params.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-
-        int temp = this.commodityDao.isExit(o);
+        int temp = this.commodityDao.isExit(params);
         if (temp > 0) {
             return new MessageResponse(1, "名称重复！");
         }
+        //db object info
+        Commodity obj = commodityDao.selectByPrimaryKey(params.getId());
+        //
+        obj.setCommodityName(params.getCommodityName());
+        obj.setCategory(params.getCategory());
+        obj.setCoverUrl(params.getCoverUrl());
+        obj.setSummary(params.getSummary());
+        obj.setCostPoints(params.getCostPoints());
+        obj.setRemark(params.getRemark());
+        obj.setLastModifyDate(new Date());
+        obj.setLastModifyUserName(userProp.getName());
+        obj.setLastModifyUserId(userProp.getUserId());
 
-
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
-        commodityDao.updateByPrimaryKeySelective(o);
-        dataBaseLogService.log("变更爱心商品", "爱心商品", "", o.getId(), o.getId(), userProp);
+        commodityDao.updateByPrimaryKey(obj);
+        dataBaseLogService.log("变更爱心商品", "爱心商品", "", params.getId(), params.getId(), userProp);
 
         return new MessageResponse(0, "变更爱心商品完成！");
     }
@@ -171,17 +178,18 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public MessageResponse deleteCommodityByCommodityId(String id, UserProp userProp) throws Exception {
         //逻辑删除
-        Commodity o = new Commodity();
-        o.setId(id);
-        o.setStatus("0");
+        Commodity o = commodityDao.selectByPrimaryKey(id);
+        if (o == null) {
+            return new MessageResponse(0, "数据记录丢失");
+        }
 
+        o.setStatus("0");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        commodityDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("删除爱心商品", "爱心商品",
-                String.valueOf(id),
-                String.valueOf(id), "爱心商品", userProp);
+        commodityDao.updateByPrimaryKey(o);
+
+        dataBaseLogService.log("删除爱心商品", "爱心商品", id, id, "爱心商品", userProp);
         return new MessageResponse(0, "爱心商品删除完成！");
     }
 
@@ -209,8 +217,7 @@ public class CommodityServiceImpl implements CommodityService {
 
         //更改审核记录
         MessageResponse auditRs =
-                auditRecordService.audit(BisType.PERSON_INFO, obj.getId(), obj.getId(), rst, remark,
-                        userProp);
+                auditRecordService.audit(BisType.PERSON_INFO, obj.getId(), obj.getId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
@@ -219,12 +226,32 @@ public class CommodityServiceImpl implements CommodityService {
         obj.setLastModifyDate(DateUtil.getNowDate());
         obj.setLastModifyUserId(userProp.getUserId());
         obj.setLastModifyUserName(userProp.getName());
-        commodityDao.updateByPrimaryKeySelective(obj);
+        commodityDao.updateByPrimaryKey(obj);
 
 
         dataBaseLogService.log("审核爱心商品", "爱心商品",
                 String.valueOf(id), String.valueOf(id), "爱心商品", userProp);
         return new MessageResponse(0, "爱心商品审核完成！");
+    }
+
+    /**
+     * 商品上/下架处理
+     *
+     * @param id          主键ID
+     * @param state       商品状态0-下架1-在售
+     * @param curUserProp
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse updateState(String id, String state, UserProp curUserProp) throws Exception {
+        Commodity obj = commodityDao.selectByPrimaryKey(id);
+        if (obj == null) {
+            return new MessageResponse(ResultCode.FAIL, "数据丢失");
+        }
+        obj.setState(state);
+
+        return updateCommodity(obj, curUserProp);
     }
 
 }
