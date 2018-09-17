@@ -2,9 +2,10 @@ var loading = {};
 var editor;
 window.onload = function () {
     jQuery(function ($) {
-        initPage();
+        initForm();
         initEvents();
-        $(".breadcrumb").append("<li>添加爱心商品</li>");
+        //initMenu
+        $(".breadcrumb").append("<li>编辑爱心场地</li>");
     });
 }
 
@@ -26,17 +27,18 @@ function initEditor() {
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
-    var html = juicer(tpl, {data: data,});
+    var html = juicer(tpl, {
+        data: data,
+    });
     $(obj).html(html);
 }
 
 function initPage() {
     initEditor();
-    // initUpload();
 }
 function initEvents() {
     /*表单验证*/
-    $("#fm-add").validate({
+    $("#fm-edit").validate({
         onfocusout: function (element) {
             $(element).valid();
         },
@@ -51,7 +53,7 @@ function initEvents() {
         }
     });
     /*监听表单提交*/
-    $('#fm-add').ajaxForm({
+    $('#fm-edit').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
             $.each(formData, function (n, obj) {
@@ -59,7 +61,6 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-                commodityType: "0", //商品类型  0-爱心商品 1-爱心场地
                 coverUrl: $('#coverUrl').attr("src"),
             });
             console.log(params);
@@ -73,7 +74,7 @@ function save(params) {
     $.extend(params, {});
     startLoad();
     $.ajax({
-        url: contextPath + "/commodity/insertCommodity",
+        url: contextPath + "/commodity/updateCommodity",
         type: "post",
         async: false,
         data: {
@@ -84,6 +85,31 @@ function save(params) {
             alert(result.errorMessage);
             if (result.status == 0) {
                 window.location.href = '../index.jsp?id=' + urlParams.id;
+            }
+        },
+        error: function () {
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function initForm() {
+    $.ajax({
+        url: contextPath + "/commodity/selectCommodityByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {id: urlParams.did},
+        success: function (result) {
+            console.log(result);
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-edit', data, 'tpl-fm');
+                initPage();
+                //富文本填值
+                editor.setValue(data['o'].summary);
+            } else {
+                alert(result.errorMessage);
             }
         },
         error: function () {

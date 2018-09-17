@@ -4,7 +4,7 @@ window.onload = function () {
     jQuery(function ($) {
         initPage();
         initEvents();
-        $(".breadcrumb").append("<li>添加爱心商品</li>");
+        $(".breadcrumb").append("<li>添加爱心场地</li>");
     });
 }
 
@@ -32,7 +32,6 @@ function render(obj, data, tplId) {
 
 function initPage() {
     initEditor();
-    // initUpload();
 }
 function initEvents() {
     /*表单验证*/
@@ -59,8 +58,9 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-                commodityType: "0", //商品类型  0-爱心商品 1-爱心场地
+                commodityType: "1", //商品类型  0-爱心商品 1-爱心场地
                 coverUrl: $('#coverUrl').attr("src"),
+
             });
             console.log(params);
             save(params);
