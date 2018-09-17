@@ -26,18 +26,19 @@
                                             <div class="portlet-body">
 
                                                 <div class="row custom-toolbar">
-                                                    <div class="col-md-4" id="createCourse">
-                                                        <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
-                                                        <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
+                                                    <div class="col-md-3" id="createCourse">
+                                                        <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建直播</a>
+                                                        <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建直播</a>
                                                     </div>
 
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-9">
 
                                                         <form onsubmit="return t_query()">
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                                                                 <button type="button" class="btn btn-default"  onclick="changeConsultState('');">全部</button>
-                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">上架</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeConsultState('0');">下架</button>
+                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">预播放</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeConsultState('2');">直播中</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeConsultState('3');">历史</button>
                                                             </div>
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                                                                 <button type="button" class="btn btn-default"  onclick="changeType('');">全部</button>
@@ -46,14 +47,14 @@
                                                                 <button type="button" class="btn btn-default" onclick="changeType('2');">驳回</button>
                                                             </div>
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列</button>
+                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">图文</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeCourseType('2');">视频</button>
                                                             </div>
                                                             <div class="input-group">
                                                                 <input type="text"
                                                                        name="keyword"
                                                                        class="form-control"
-                                                                       placeholder="请输入课程名称">
+                                                                       placeholder="请输入直播名称">
                                                                 <span class="input-group-btn">
                                                                 <button class="btn  btn-default search_btn"
                                                                         type="submit">
@@ -73,8 +74,8 @@
 
                                                             <th width="35%">名称 </th>
 
-                                                            <th width="15%">状态</th>
-                                                            <th width="10%">购买数 </th>
+                                                            <th width="15%">开始&结束时间</th>
+                                                            <th width="10%">参与人数</th>
                                                             <th width="15%">审核状态</th>
                                                             <th width="25%">操作</th>
                                                         </tr>
@@ -100,39 +101,19 @@
 
         <td >
             <div class="row">
-                <div class="col-md-2"><img src="\${item.cover}" class="cover"/></div>
-                <div class="col-md-10">
+                <div class="col-md-4"><img src="\${item.imageSrc}" class="cover"/></div>
+                <div class="col-md-8">
                     <div class="describtion">\${item.name}</div>
-                    <div class="cost">\${item.srcCount}节
-                        {@if item.costType != '0'}
-                        ￥\${item.cost}
-                        {@else}
-                        免费
-                        {@/if}
-                    </div>
                 </div>
             </div>
         </td>
 
-        <td  >
-            {@if item.auditRst==1}
-            <div>
-                {@if item.lineState == 1}
-                \${item.onlineDate}
-                {@else}
-                \${item.offlineDate}
-                {@/if}
-            </div>
-            <div style="padding:10px">
-                {@if item.lineState!=1}
-                <span style="color:red">已下架</span>
-                {@else}
-                <a href="#">已上架</a>
-                {@/if}
-            </div>
-            {@/if}
+        <td>
+            \${item.startTime}<br>
+            \${item.endTime}
+
         </td>
-        <td  >\${item.duration}</td>
+        <td  >\${item.nop}</td>
         <td >
             {@if item.auditRst==0}
             <span class="label label-lg label-info">待审核</span>
@@ -179,7 +160,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="gridSystemModalLabel3">课程审核</h4>
+                <h4 class="modal-title" id="gridSystemModalLabel3">直播审核</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
@@ -215,13 +196,12 @@
 </div>
 <style>
     .cover{
-        width: 70px;
-        height: 70px;
+        width: 140px;
+        height: 90px;
         object-fit: cover;
     }
     .describtion{
         padding-left:15px;
-        height:50px;
     }
     .cost{
           padding-top: 5px;
