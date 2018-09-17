@@ -125,7 +125,7 @@ public class ConsultServiceImpl implements ConsultService {
         this.dataBaseLogService.log("添加咨询师-咨询预约介绍", "咨询师-咨询预约介绍", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "添加咨询师-咨询预约介绍完成！");
+        return new MessageResponse(0, "提交成功！");
     }
 
     /**

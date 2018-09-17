@@ -8,139 +8,72 @@
 <!--[if !IE]><!-->
 <html lang="en">
 <!--<![endif]-->
+
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>${cfg.sys_name}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="${cfg.sys_name}" name="description"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="${cfg.sys_name}" name="description" />
 
-    <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile-2.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-    <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <script src="${pageContext.request.contextPath}/content/service/userOrder/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <jsp:include page="../../common/header.jsp" />
+    <script src="s/act.js?v=${cfg.version}"></script>
 </head>
 
-<body class="page-container-bg-solid">
-<div class="page-wrapper">
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>我的订单</span>
-                                </li>
-                            </ul>
+<body>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-                            <div class="page-content-inner">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="portlet light ">
-                                            <div class="portlet-title">
-                                                <div class="caption">
-                                                    我的订单
-                                                </div>
-                                                <div class="actions">
-                                                    <div class="input-group">
-                                                        <input type="text"
-                                                               class="form-control input-circle-left"
-                                                               placeholder="请输入订单编号">
-                                                        <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
-                                                                        type="submit">
-                                                                        搜索
-                                                                </button>
-                                                            </span>
-                                                    </div>
-                                                </div>
-                                            </div>
+<!---==============================================-->
 
-                                            <div class="portlet-body">
-                                                <div class="tabbable-line tabbable-full-width">
-                                                    <ul class="nav nav-tabs">
-                                                        <li class="active">
-                                                            <a onclick="javascript:changeType('1')" href="#tab_1_1"
-                                                               data-toggle="tab"> 咨询订单 </a>
-                                                        </li>
-                                                        <li>
-                                                            <a onclick="javascript:changeType('2')" href="#tab_1_3"
-                                                               data-toggle="tab"> 课程订单 </a>
-                                                        </li>
-                                                        <%--<li>--%>
-                                                        <%--<a onclick="javascript:changeType('3')" href="#tab_1_3"--%>
-                                                        <%--data-toggle="tab"> 评测订单 </a>--%>
-                                                        <%--</li>--%>
-                                                    </ul>
-                                                    <div class="portlet-body">
-                                                        <div class="mt-element-card mt-element-overlay">
+<div class="portlet light ">
 
-                                                            <div class="row">
+    <div class="portlet-body">
 
-                                                                <%--content--%>
+        <div class="row custom-toolbar">
+            <div class="col-md-5">
 
-                                                                <div class="portlet-body">
-                                                                    <div class="mt-element-card mt-element-overlay">
-                                                                        <div class="col-xs-12">
-
-                                                                            <%--content--%>
-                                                                            <div class="table-scrollable table-scrollable-borderless"
-                                                                                 id="orderList">
-
-                                                                            </div>
-                                                                            <%--content--%>
-                                                                            <div class="paginationbar">
-                                                                                <ul class="pagination"
-                                                                                    id="pagination1"></ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <%--content--%>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--tab_1_2-->
-
-                                                    <!--end tab-pane-->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+
+            <div class="col-md-7">
+                <form onsubmit="return t_query()">
+                    <div class="btn-group" id="btn-group1" role="group"  style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="changeType('1');">咨询</button>
+                        <button type="button" class="btn btn-default" onclick="changeType('2');">课程</button>
+                    </div>
+
+
+
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" placeholder="请输入订单号">
+                        <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn" type="submit">
+                                                                            搜索
+                                                                        </button>
+                                                                        </span>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="table-scrollable" id="orderList">
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
         </div>
     </div>
 </div>
+<!--=======================================-->
 
-<div class="bottom">
-
-</div>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
 <div class="modal fade" id="orderInfoModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="gridSystemModalLabel">订单详情</h4>
             </div>
@@ -152,17 +85,20 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 </body>
 
 <script id="temp_orderList" type="text/template">
-    <table class="table table-hover table-light" align="center" border="0" cellpadding="0" cellspacing="0">
+    <table class="table table-hover">
         <thead>
         <tr>
-            <%--<th width="5%">订单号</th>--%>
+
             <th width="15%">用户昵称</th>
             {@if orderCategory == 1}
             <th width="30%">咨询方式</th>
@@ -174,8 +110,8 @@
             <th width="40%">评测名称</th>
             {@/if}
             <th width="5%">付款金额</th>
-            <th width="20%">下单时间</th>
-            <th width="5%">订单状态</th>
+            <th width="15%">下单时间</th>
+            <th width="10%">订单状态</th>
             <th width="15%">操作</th>
         </tr>
         </thead>
@@ -186,9 +122,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row" style="margin: 0px">
-                            <img class="cover user-pic" src="\${item.consumerImgUrl}">
+                            <img class="cover" src="\${item.consumerImgUrl}">
                         </div>
-                        <div class="row" style="margin: 6px 0px 0px 6px;">
+                        <div class="row" style="margin: 6px 0px 0px;">
                             \${item.consumerName}
                         </div>
                     </div>
@@ -206,10 +142,12 @@
             {@/if}
             <td>￥\${item.payMoney}</td>
             <td>\${item.createDate}</td>
-            <td><span
-                    class="label label-lg  \${item.payStatus==1?'label-danger':item.payStatus==2?'label-success':'label-info'}">\${formatPayStatus(item.payStatus)}</span>
+            <td>
+                <span class="label label-lg  \${item.payStatus==1?'label-danger':item.payStatus==2?'label-success':'label-info'}">\${formatPayStatus(item.payStatus)}</span>
             </td>
-            <td><a onclick="javascript:detail('\${item.id}')" class="primary-link">查看详情</a></td>
+            <td>
+                <a onclick="javascript:detail('\${item.id}')" class="primary-link">查看详情</a>
+            </td>
         </tr>
         {@/each}
         </tbody>
@@ -261,25 +199,26 @@
 </script>
 
 <style>
+        .table.table-light {
+            /*border-bottom: 1px solid red !important;*/
+            margin-bottom: 29px !important;
+        }
 
+        .cover {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+        }
 
-    .table.table-light {
-        /*border-bottom: 1px solid red !important;*/
-        margin-bottom: 29px !important;
-    }
+        .portlet-body {
+            background-color: #fff !important;
+        }
 
-    .table .user-pic {
-        height: 60px !important;
-    }
-
-    .portlet-body {
-        background-color: #fff !important;
-    }
-
-    .active {
-        color: #333;
-    }
-</style>
-
+        .active {
+            color: #333;
+        }
+    </style>
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>
-

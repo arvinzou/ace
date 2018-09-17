@@ -2,28 +2,22 @@ var loading = {};
 var primaryId = null;
 var videoUrl = null;
 var params = {limit: 10};
-function loadlocal() {
-    var urls = [];
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/module.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/hotkeys.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/uploader.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/simditor/scripts/simditor.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/plupload/plupload.full.min.js', type: 'js'});
-    urls.push({path: portalPath, url: '/content/common/jcrop/jquery.Jcrop.min.js', type: 'js'});
-    urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+var partId;
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
+
 }
 
 window.onload = function(){
-    primaryId =urlParams.id;
+    primaryId =urlParams.did;
     initPartList();
+     $(".breadcrumb").append("<li>制作课程</li>");
+      $(".btn-group .btn").bind('click',function(event){
+                 $(event.target).siblings().removeClass("active");
+                 console.log(event);
+                 $(event.target).addClass("active");
+             });
 }
 
 function initPage(partId) {
@@ -49,6 +43,7 @@ function initPartList(){
     try{
         renderPage('chapters', data.rows, 'chapterTemp');
         initPage(data.rows[0].id);
+        partId=data.rows[0].id;
     }catch(e){}
 }
 function findPartList(){
@@ -104,14 +99,14 @@ function renderPage(IDom, data, tempId) {
 
 function changeChapter(id){
     initPage(id);
+    partId=id;
 }
 
 function add(){
-    var partId = $("#chapters .active").attr("datattr");
     if(partId == undefined || partId == null){
         alert("请先创建课件所属章节！");
     }else{
-        window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId;
+        window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId+"&id="+urlParams.id;
     }
 }
 
@@ -239,7 +234,6 @@ function deletePartCourse(id,name){
 }
 
 function editCourseSource(id){
-	var partId = $("#chapters .active").attr("datattr");
-	window.location.href = contextPath+ '/dynamic/service/course/list/edit/index.jsp?courseId='+urlParams.id+'&partId='+partId+'&id='+id;
+	window.location.href = contextPath+ '/dynamic/service/course/list/edit/index.jsp?courseId='+urlParams.did+'&partId='+partId+'&id='+urlParams.id+'&did='+id;
 }
 //============================课程管理结束=====================================//

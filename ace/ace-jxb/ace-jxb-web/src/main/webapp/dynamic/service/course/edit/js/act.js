@@ -1,15 +1,8 @@
 var loading = {};
 var payType = "0";
-function loadlocal() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
 
 function App() {
     console.log("=============================App Start==============================");
-    loadlocal();
 
 }
 
@@ -17,7 +10,7 @@ function initEditor() {
     var editor = new Simditor({
         textarea: $('textarea[name=introduce]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
-            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
+            'ul', 'blockquote', 'code', 'table', '|', 'link', 'image','video', 'hr', '|', 'indent', 'outdent'
         ],
         upload: {
             url: portalPath + '/files/uploadImage.do', //文件上传的接口地址
@@ -62,7 +55,7 @@ function payTypeCheck(dom) {
 function save(params) {
     $.extend(params, {
         type: urlParams.type,
-        id:urlParams.id,
+        id:urlParams.did,
         category: '1',
         mediType: '1',
         cover: $("#courseCover").attr('src'),
@@ -81,7 +74,7 @@ function save(params) {
             stopLoad();
             alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = contextPath + '/dynamic/service/course/index.jsp';
+                window.location.href = contextPath + '/dynamic/service/course/index.jsp?id='+urlParams.id;
             }
         },
         error: function () {
@@ -129,7 +122,7 @@ function initForm(){
         type:"post",
         async:false,
         data:{
-            id: urlParams.id
+            id: urlParams.did
         },
         success:function(result){
             if(result.status == 0) {
@@ -177,7 +170,9 @@ function initForm(){
         }
     });
 }
-
-jQuery(function ($) {
-    initPage();
-});
+window.onload=function(){
+    jQuery(function ($) {
+        initPage();
+        $(".breadcrumb").append("<li>课程编辑</li>");
+    });
+}

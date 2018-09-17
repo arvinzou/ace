@@ -81,13 +81,10 @@ function changeType(cType) {
     initpage();
 }
 
-
-function searchByName() {
-    orderId = $('input[name="orderId"]').val();
+function t_query() {
     initpage();
+    return false;
 }
-
-
 function initpage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
@@ -101,16 +98,23 @@ function initpage() {
             getOrderList(num, type);
         }
     });
+     $(".btn-group .btn").bind('click',function(event){
+            $(event.target).siblings().removeClass("active");
+            console.log(event);
+            $(event.target).addClass("active");
+        });
 }
 
 
 function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findBaseOrderListSecond";
+    var keyword=$("input[name=keyword]").val();
     var data = {
         category: category,
         page: num,
         limit: 10
     }
+    data.id=keyword;
     startLoad();
     $.getJSON(url, data, function (result) {
         stopLoad();

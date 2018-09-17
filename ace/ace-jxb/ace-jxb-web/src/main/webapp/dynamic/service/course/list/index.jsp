@@ -14,70 +14,36 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="description" />
-        <jsp:include page="../../../common/base.jsp" />
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-        <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css"/>
-				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
-				<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/list/css/style.css">
-        <script src="${pageContext.request.contextPath}/dynamic/service/course/list/js/act.js?v=${cfg.version}"></script>
-        <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+        <jsp:include page="../../../common/header.jsp" />
+
+
+
     </head>
 
     <body>
+    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-        <!--隐藏存放ID-->
-        <input type="text" hidden value="" id="auditId" />
-        <div class="page-wrapper">
 
-            <div class="page-wrapper-row full-height">
-                <div class="page-wrapper-middle">
-                    <div class="page-container">
-                        <div class="page-content-wrapper">
-                            <div class="page-content">
-                                <div class="container">
-                                    <ul class="page-breadcrumb breadcrumb">
-                                        <li>
-                                            <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                            <i class="fa fa-circle"></i>
-                                        </li>
-                                        <li>
-                                            <span>课程管理</span>
-                                        </li>
-                                    </ul>
-                                    <div class="page-content-inner">
 
-                                        <!---==============================================-->
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <!-- BEGIN SAMPLE TABLE PORTLET-->
                                                 <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            创建课程
-                                                        </div>
-                                                        <div class="actions">
-                                                            <a href="javascript:void(0);" class="btn green" data-target="#myModal" data-toggle="modal">创建章节</a>
-                                                            <a href="#" class="btn green" data-target="#chapterBox" data-toggle="modal" onclick="initPartEditList();">章节修改</a>
-                                                            <a href="javascript:void(0);" class="btn green" onclick="add();">创建课件</a>
-                                                        </div>
-                                                    </div>
+
                                                     <div class="portlet-body">
                                                         <!--具体界面元素开始-->
-                                                        <div class="tabbable-line">
-                                                            <ul class="nav nav-tabs" id="chapters">
 
-                                                            </ul>
-                                                            <div class="tab-content">
-                                                                <div class="tab-pane active" id="tab_15_1">
-                                                                </div>
+                                                        <div class="row custom-toolbar">
+                                                            <div class="col-md-4">
+                                                                <a href="javascript:void(0);" style="float:left;margin-right:20px" class="btn green" data-target="#myModal" data-toggle="modal">创建章节</a>
+                                                                <a href="#" class="btn green" style="float:left;margin-right:20px" data-target="#chapterBox" data-toggle="modal" onclick="initPartEditList();">章节修改</a>
+                                                                <a href="javascript:void(0);" style="float:left;margin-right:20px" class="btn green" onclick="add();">创建课件</a>
+
                                                             </div>
+                                                            <div class="col-md-8" id="chapters">
+
+                                                            </div>
+
                                                         </div>
                                                         <div class="table-scrollable">
+
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
@@ -118,21 +84,7 @@
                                                         <!--具体界面元素结束-->
                                                     </div>
                                                 </div>
-                                                <!-- END SAMPLE TABLE PORTLET-->
-                                            </div>
-                                        </div>
-                                        <!--=======================================-->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bottom"></div>
-        </div>
+                                                <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
     </body>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="myModal" aria-labelledby="gridSystemModalLabel">
@@ -169,15 +121,15 @@
 
 
     <script id="chapterTemp" type="text/template">
-        {@each data as item,index} {@if index == 0}
-        <li class="active" datattr="\${item.id}" onclick="changeChapter('\${item.id}');">
-            <a href="#tab_15_1" data-toggle="tab" aria-expanded="true">第\${parseInt(index)+1}章 \${item.name} </a>
-        </li>
-        {@else}
-        <li datattr="\${item.id}" onclick="changeChapter('\${item.id}');">
-            <a href="#tab_15_1" data-toggle="tab" aria-expanded="false">第\${parseInt(index)+1}章 \${item.name} </a>
-        </li>
-        {@/if} {@/each}
+        <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+        {@each data as item,index}
+            {@if index == 0}
+            <button type="button" class="btn btn-default active" onclick="changeChapter('\${item.id}');">第\${parseInt(index)+1}章 \${item.name}</button>
+            {@else}
+            <button type="button" class="btn btn-default" onclick="changeChapter('\${item.id}');">第\${parseInt(index)+1}章 \${item.name}</button>
+        {@/if}
+            {@/each}
+        </div>
     </script>
 
     <script id="courseTemp" type="text/template">
@@ -201,9 +153,9 @@
                 \${item.duration}秒
             </td>
             <td width="10%" >
-                {@if item.free == '0'}
+                {@if item.free == '1'}
 								<span class="label label-lg label-info">是</span>
-                {@else if item.free == '1'}
+                {@else if item.free == '0'}
                  <span class="label label-lg label-danger">否</span>
                 {@/if}
             </td>
@@ -275,5 +227,7 @@
         </tr>
         {@/each}
     </script>
-
+    <jsp:include page="/dynamic/common/footer.jsp" />
+    <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+    <script src="js/act.js?v=${cfg.version}"></script>
     </html>

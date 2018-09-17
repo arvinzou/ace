@@ -10,55 +10,19 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="${cfg.sys_name}" />
         <!--公共部分开始-->
-        <jsp:include page="/dynamic/common/base.jsp" />
-        <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/css/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/css/components.min.css" />
-        <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css" />
-        <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css"/>
-        <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"/>
-        <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" />
-        <!--公共部分结束-->
-
+        <jsp:include page="/dynamic/common/header.jsp" />
         <!--私有部分开始-->
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css" />
         <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/add/css/style.css">
+        <link rel="stylesheet" href="css/style.css">
         <!--私有部分结束-->
     </head>
 
     <body>
+    <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-        <div class="page-wrapper">
-            <div class="page-wrapper-row full-height">
-                <div class="page-wrapper-middle">
-                    <div class="page-container">
-                        <div class="page-content-wrapper">
-                            <div class="page-content">
-                                <div class="container">
-                                    <ul class="page-breadcrumb breadcrumb">
-                                        <li>
-                                            <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                            <i class="fa fa-circle"></i>
-                                        </li>
-                                        <li>
-                                            <span>课程管理</span>
-                                        </li>
-                                    </ul>
-                                    <div class="page-content-inner">
-
-                                        <!---==============================================-->
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <!-- BEGIN SAMPLE TABLE PORTLET-->
                                                 <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            创建课程
-                                                        </div>
-                                                        <div class="actions">
 
-                                                        </div>
-                                                    </div>
                                                     <div class="portlet-body" id="courseSource">
                                                         <div class="form-panel">
                                                             <!--具体界面元素开始-->
@@ -162,7 +126,7 @@
                                                                 <div class="form-actions">
                                                                     <div class="row">
                                                                         <div class="col-md-offset-3 col-md-7">
-                                                                            <button class="btn  btn-lg  green" type="submit" style="width:30%">保存</button>
+                                                                            <button class="btn   green" type="submit" style="width:30%">保存</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -171,22 +135,7 @@
                                                         <!--具体界面元素结束-->
                                                     </div>
                                                 </div>
-                                                <!-- END SAMPLE TABLE PORTLET-->
-                                            </div>
-                                        </div>
-                                        <!--=======================================-->
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bottom"></div>
-
-        </div>
+    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
     </body>
     <!--公共部分开始-->
@@ -200,7 +149,6 @@
     <script src="${portalPath}/content/common/simditor/scripts/hotkeys.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/simditor/scripts/uploader.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/simditor/scripts/simditor.js?v=${cfg.version}"></script>
-    <script src="${portalPath}/content/portal/js/main/menu4.js" type="text/javascript"></script>
     <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
     <script src="${portalPath}/content/common/plupload/plupload.full.min.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/upload.js?v=${cfg.version}"></script>

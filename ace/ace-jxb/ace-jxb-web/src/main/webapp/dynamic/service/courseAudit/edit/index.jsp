@@ -65,9 +65,12 @@
         <div class="form-group">
             <label class="col-md-2 control-label">
                 <span class="label-red">*</span>课程名称</label>
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <input type="text" class="form-control" name="name" value="\${data.o.name}" maxlength="28" placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字)">
                 <span class="help-block"></span>
+            </div>
+            <div class="col-md-4">
+
             </div>
         </div>
         <div class="form-group">
@@ -165,9 +168,12 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">适合谁听</label>
-            <div class="col-md-10">
+            <div class="col-md-6">
                 <input type="text" class="form-control" maxlength="20" name="applicationObject" value="\${data.o.applicationObject}" placeholder="请输入适合谁听（您可以输入心理老师、心理学爱好者、父母等）">
                 <span class="help-block"> </span>
+            </div>
+            <div class="col-md-4">
+
             </div>
         </div>
 

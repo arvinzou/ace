@@ -48,6 +48,8 @@ public class Counselor implements Serializable {
      * 身份证件电子档
      */
     private String idCardImgUrl;
+
+
     /**
      * 资格从业证书号
      */

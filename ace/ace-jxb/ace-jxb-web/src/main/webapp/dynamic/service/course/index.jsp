@@ -13,151 +13,86 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="/dynamic/common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/dynamic/service/course/css/upload.css"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/dynamic/service/course/css/create.css">
-    <script src="${pageContext.request.contextPath}/dynamic/service/course/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <jsp:include page="/dynamic/common/header.jsp"/>
 </head>
 <body>
 
 <!--隐藏存放ID-->
 <input type="text" hidden value="" id="auditId"/>
-<div class="page-wrapper">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>课程管理</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
-
-                                <!---==============================================-->
-
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
                                         <div class="portlet light ">
-                                            <div class="portlet-title">
-                                                <div class="caption">
-                                                    课程管理
-                                                </div>
 
-
-                                                <div class="actions">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <form onsubmit="return t_query()">
-                                                                <div class="input-group">
-                                                                    <input type="text"
-                                                                           name="keyword"
-                                                                           class="form-control input-circle-left"
-                                                                           placeholder="请输入课程名称">
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn btn-circle-right btn-default search_btn"
-                                                                                type="submit">
-                                                                                搜索
-                                                                        </button>
-                                                                    </span>
-
-                                                                </div>
-
-                                                            </form>
-                                                        </div>
-                                                        <div class="col-md-4" id="createCourse">
-                                                            <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
-                                                            <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
-                                                        </div>
-
-                                                    </div>
-
-
-
-
-                                                </div>
-                                            </div>
                                             <div class="portlet-body">
-                                                <div class="tabbable-line">
-                                                    <ul class="nav nav-tabs ">
-                                                        <li class="active" onclick="changeCourseType('1');">
-                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="true"> 单节课程 </a>
-                                                        </li>
-                                                        <li class="" onclick="changeCourseType('2');">
-                                                            <a href="#tab_15_1" data-toggle="tab" aria-expanded="false"> 系列课程 </a>
-                                                        </li>
 
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div class="tab-pane active" id="tab_15_1">
-
-
-
-
-                                                            <div class="table-scrollable">
-                                                                <table class="table table-hover">
-                                                                    <thead>
-                                                                    <tr>
-
-                                                                        <th width="35%"> 课程名称 </th>
-
-                                                                        <th width="15%">上/下架时间&状态</th>
-                                                                        <th width="10%">购买数 </th>
-                                                                        <th width="15%">审核状态</th>
-                                                                        <th width="25%">操作</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody id="courseList">
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-
-
-                                                            <div class="paginationbar">
-                                                                <ul class="pagination" id="pagination1"></ul>
-                                                            </div>
-
-                                                        </div>
+                                                <div class="row custom-toolbar">
+                                                    <div class="col-md-4" id="createCourse">
+                                                        <a href="javascript:void(0);" onclick="add('1');" style="font-size: 14px !important;" class="btn green commonCourse">创建课程</a>
+                                                        <a href="javascript:void(0);" onclick="add('2');" style="font-size: 14px !important; display: none;" class="btn green specialCourse">创建课程</a>
                                                     </div>
+
+                                                    <div class="col-md-8">
+
+                                                        <form onsubmit="return t_query()">
+                                                            <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">上架</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeConsultState('0');">下架</button>
+                                                            </div>
+                                                            <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                <button type="button" class="btn btn-default"  onclick="changeType('');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="changeType('0');">待审</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeType('1');">通过</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeType('2');">驳回</button>
+                                                            </div>
+                                                            <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节</button>
+                                                                <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列</button>
+                                                            </div>
+                                                            <div class="input-group">
+                                                                <input type="text"
+                                                                       name="keyword"
+                                                                       class="form-control"
+                                                                       placeholder="请输入课程名称">
+                                                                <span class="input-group-btn">
+                                                                <button class="btn  btn-default search_btn"
+                                                                        type="submit">
+                                                                        搜索
+                                                                </button>
+                                                            </span>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="table-scrollable">
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
+
+                                                            <th width="35%"> 课程名称 </th>
+
+                                                            <th width="15%">上/下架时间&状态</th>
+                                                            <th width="10%">购买数 </th>
+                                                            <th width="15%">审核状态</th>
+                                                            <th width="25%">操作</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody id="courseList">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                                <div class="paginationbar">
+                                                    <ul class="pagination" id="pagination1"></ul>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <!-- END SAMPLE TABLE PORTLET-->
-                                    </div>
-
-                                </div>
-                                <!--=======================================-->
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bottom"></div>
-</div>
-
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 <script id="list" type="text/template">
     {@each data as item, index}
     <tr>
@@ -293,4 +228,7 @@
           color:#FE6500;
     }
 </style>
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>

@@ -15,139 +15,60 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
 
-    <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile-2.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
-    <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
+    <jsp:include page="../../common/header.jsp"/>
+
     <script src="${pageContext.request.contextPath}/content/service/counselorLevel/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+
 </head>
 
-<body class="page-container-bg-solid">
-<div class="page-wrapper">
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>咨询师岗位列表</span>
-                                </li>
-                            </ul>
+<body>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-                            <div class="page-content-inner">
-                                <div class="row">
-                                    <div class="col-md-12">
                                         <div class="portlet light ">
-                                            <div class="portlet-title">
-                                                <div class="caption">
-                                                    咨询师岗位列表
-                                                </div>
-                                                <div class="actions">
+                                                <div class="portlet-body">
+                                                    <div class="row custom-toolbar">
+                                                        <div class="col-md-1">
+                                                            <a onclick="javascript:calculationLevel()"
+                                                               class="btn  green">
+                                                                计算岗位
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-md-7">
 
+                                                        </div>
+                                                        <div class="col-md-4" >
 
-                                                    <div class="row">
-                                                        <div class="col-md-8">
                                                             <div class="input-group">
                                                                 <input type="text"
-                                                                       class="form-control input-circle-left"
+                                                                       class="form-control "
                                                                        placeholder="咨询师名称">
                                                                 <span class="input-group-btn">
-                                                                <button class="btn btn-circle-right btn-default search_btn"
+                                                                <button class="btn  btn-default search_btn"
                                                                         type="submit">
                                                                         搜索
                                                                 </button>
                                                             </span>
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-4" >
-                                                            <a onclick="javascript:calculationLevel()"
-                                                               class="btn  btn-success">
-                                                                计算岗位
-                                                            </a>
-                                                        </div>
 
                                                     </div>
-                                                </div>
-                                            </div>
+                                                    <div class="table-scrollable"
+                                                         id="data-list">
 
-                                            <div class="portlet-body">
-                                                <div class="tabbable-line tabbable-full-width">
-                                                    <%--<ul class="nav nav-tabs">--%>
-                                                    <%--<li class="active">--%>
-                                                    <%--<a onclick="javascript:changeType('1')" href="#tab_1_1"--%>
-                                                    <%--data-toggle="tab"> 咨询订单 </a>--%>
-                                                    <%--</li>--%>
-                                                    <%--<li>--%>
-                                                    <%--<a onclick="javascript:changeType('2')" href="#tab_1_3"--%>
-                                                    <%--data-toggle="tab"> 课程订单 </a>--%>
-                                                    <%--</li>--%>
-                                                    <%--<li>--%>
-                                                    <%--<a onclick="javascript:changeType('3')" href="#tab_1_3"--%>
-                                                    <%--data-toggle="tab"> 评测订单 </a>--%>
-                                                    <%--</li>--%>
-                                                    <%--</ul>--%>
-                                                    <div class="portlet-body">
-                                                        <div class="mt-element-card mt-element-overlay">
 
-                                                            <div class="row">
 
-                                                                <%--content--%>
-
-                                                                <div class="portlet-body">
-                                                                    <div class="mt-element-card mt-element-overlay">
-                                                                        <div class="col-xs-12">
-
-                                                                            <%--content--%>
-                                                                            <div class="table-scrollable table-scrollable-borderless"
-                                                                                 id="data-list">
-
-                                                                            </div>
-                                                                            <%--content--%>
-                                                                            <div class="paginationbar">
-                                                                                <ul class="pagination"
-                                                                                    id="pagination1"></ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <%--content--%>
-
-                                                            </div>
-                                                        </div>
                                                     </div>
-                                                    <!--tab_1_2-->
 
-                                                    <!--end tab-pane-->
+                                                    <div class="paginationbar">
+                                                        <ul class="pagination"
+                                                            id="pagination1"></ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="bottom">
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-</div>
 
 <div class="modal fade" id="counselorLevelModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
@@ -307,6 +228,6 @@
         color: #333;
     }
 </style>
-
+<jsp:include page="/dynamic/common/footer.jsp" />
 </html>
 

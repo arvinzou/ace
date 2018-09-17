@@ -14,87 +14,34 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
 
-    <jsp:include page="../../common/base.jsp"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/pages/css/profile.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/css/components.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css">
+    <jsp:include page="../../common/header.jsp"/>
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/city-select.css">
     <link rel="stylesheet" href="${portalPath}/content/common/simditor/styles/simditor.css">
-    <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
-    <script src="${pageContext.request.contextPath}/content/service/information/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+
+
 
 
 </head>
 
 <body>
-<div class="page-wrapper">
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>入驻申请</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="portlet light portlet-fit">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-
-                                            <div class="portlet-title">
-                                                <div class="caption">
-                                                   入驻申请
-                                                </div>
-                                                <div class="actions">
-
-                                                </div>
-                                            </div>
+                                        <div class="portlet light">
 
                                             <div class="portlet-body">
-                                                <div class="form-horizontal" novalidate="novalidate">
-                                                    <div class="form-body" id="form_content">
+                                                <div class="form-panel">
+                                                    <!--具体界面元素开始-->
+                                                    <form class="form-horizontal" id="fm-edit" role="form">
 
-                                                    </div>
+                                                    </form>
+                                                </div>
 
-                                                </div>
-                                                <div class="form-actions">
-                                                    <div class="row">
-                                                        <div class="col-md-offset-3 col-md-9">
-                                                            <button class="btn green submit_btn">提交</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="bottom"></div>
-
-</div>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
 <div class="modal fade bs-example-modal-lg" id="modal-doc" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
@@ -338,63 +285,48 @@
         overflow: auto;
     }
 
-    /*.city-select .city-info {*/
-    /*border: 1px solid #ccc;*/
-    /*background-color: #fcfcfc;*/
-    /*cursor: pointer;*/
-    /*width: 280px;*/
-    /*overflow: hidden;*/
-    /*padding: 8px;*/
-    /*padding-top: 0;*/
-    /*position: relative;*/
-    /*z-index: 2;*/
-    /*}*/
+   
+}
 
 </style>
 
 
-<script id="temp-form_content" type="text/template">
+<script id="tpl-fm" type="text/template">
 
     <div class="form-group ">
-        <label class="col-md-3 control-label">
-            <span class="required" aria-required="true">*</span>
-            名字
+        <label class="col-md-2 control-label">
+            姓名
         </label>
-        <div class="col-md-9">
-            <input type="text" id="chineseName" class="form-control" \${data==1?'readonly':''}
-                   placeholder="" name="form_name">
-            <span class="error_message"></span>
-            <div class="form-control-focus"></div>
+        <div class="col-md-4">
+            <input type="text" name="name" value="\${data.name}" class="form-control" placeholder="" \${data.regAuditRst==1?'disabled':''}>
+        </div>
+        <div class="col-md-6">
+
         </div>
     </div>
 
 
     <div class="form-group">
-        <label class="col-md-3 control-label">
-            <span class="required" aria-required="true">*</span>
+        <label class="col-md-2 control-label">
             性别
         </label>
-        <div class="col-md-9">
-            <div class="md-radio-inline">
-                <div class="md-radio">
-                    <input type="radio" checked id="checkbox1_8" \${data==1?'disabled':''}
-                           name="form_sex" value="1"
-                           class="md-radiobtn">
-                    <label for="checkbox1_8">
-                        <span class="inc"></span>
-                        <span class="check"></span>
-                        <span class="box"></span>男</label>
+        <div class="col-md-10">
+            <div class="row">
+                <div style="float:left;width:60px;padding:2px">
+                    <input type="radio" \${data.sex==1?'checked':''}  id="sex1" \${data.regAuditRst==1?'disabled':''}
+                           name="sex" value="1"
+                           >
+                    <label for="sex1">
+                        男</label>
                 </div>
 
-                <div class="md-radio">
-                    <input type="radio" id="checkbox1_9" \${data==1?'disabled':''}
-                           name="form_sex"
+                <div style="float:left;width:60px;padding:2px">
+                    <input type="radio" \${data.sex==2?'checked':''} id="sex2" \${data.regAuditRst==1?'disabled':''}
+                           name="sex"
                            value="2"
-                           class="md-radiobtn">
-                    <label for="checkbox1_9">
-                        <span></span>
-                        <span class="check"></span>
-                        <span class="box"></span>女
+                          >
+                    <label for="sex2">
+                       女
                     </label>
                 </div>
 
@@ -404,104 +336,91 @@
 
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required"
-                                                    aria-required="true">*</span>所在城市
-
+        <label class="col-md-2 control-label">所在城市
         </label>
-        <div class="col-md-9 city-select"
-             id="single-select-1">
-            <%--<input class="input_style form-control" id="city_edit"--%>
-            <%--type="text"--%>
-            <%--placeholder="请选择所属区域" name="form_area"--%>
-            <%--autocomplete="off" readonly="true"/>--%>
-            <input type="text"
-                   class="input-search form-control"
-                   value="" placeholder="请选择城市"/>
-            <span class="error_message"></span>
+        <div class="col-md-10 city-select">
+            \${data.cityCode}
+            <span id="cityCode"></span>
+
+
         </div>
     </div>
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required"
-                                                    aria-required="true">*</span>个人简介
-
+        <label class="col-md-2 control-label">个人简介
         </label>
-        <div class="col-md-9">
-        <textarea class="form-control" id="notNull_profile"
-                  name="form_profile"
-                  rows="5"></textarea>
-            <span class="error_message"></span>
-            <div class="form-control-focus"></div>
+        <div class="col-md-10">
+        <textarea class="form-control"  name="profile" rows="5">\${data.profile}</textarea>
         </div>
     </div>
 
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required"
-                                                    aria-required="true">*</span>手机号码
-
+        <label class="col-md-2 control-label">手机号码
         </label>
-        <div class="col-md-9">
-            <input type="text" class="form-control" id="mobilePhone"
-                   placeholder=""
-                   name="form_mobile"
-                   readonly="readonly">
-            <span class="error_message"></span>
-            <div class="form-control-focus"></div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" name="mobile" value="\${data.mobile}" readonly="readonly">
+        </div>
+        <div class="col-md-6">
+            <div class="input-icon right">
+
+
+            </div>
         </div>
     </div>
 
 
     <div class="form-group ">
-        <label class="control-label col-md-3"><span class="required"
-                                                    aria-required="true">*</span>形象照
+        <label class="control-label col-md-2">形象照
 
         </label>
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div>
-                <div class="headimgbox" id="headimg">
-                    <img class="select_img form_imagePhotoUrl"
-                         id="headimg1"
+                <div  id="headimg">
+
+                    <img style="max-width:400px;cursor:pointer"
+                         id="imagePhotoUrl"
                          data-toggle="modal"
-                         data-xsize="300" data-ysize="300"
-                         data-cover="headimg1"
+                         data-xsize="400" data-ysize="400"
+                         data-cover="imagePhotoUrl"
                          data-target="#img-uploader"
-                         src="${pageContext.request.contextPath}/content/service/information/img/head.png?v=${cfg.version}">
+                         src="{@if data.imagePhotoUrl} \${data.imagePhotoUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/head.png?v=${cfg.version}{@/if}">
+                    <input name="imagePhotoUrl" type="hidden" value="\${data.imagePhotoUrl}">
                 </div>
-                <p>形象照</p>
             </div>
         </div>
     </div>
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required"
-                                                    aria-required="true">*</span>身份证号码
+        <label class="col-md-2 control-label">身份证号码
 
         </label>
-        <div class="col-md-9">
-            <input \${data==1?'readonly':''} type="text" class="form-control" id="IDcard"
-                   placeholder=""
-                   name="form_idCard">
-            <span class="error_message"></span>
-            <div class="form-control-focus"></div>
+        <div class="col-md-4">
+            <input \${data.regAuditRst==1?'readonly':''} type="text" class="form-control" placeholder="" name="idCard" value="\${data.idCard}">
+
+        </div>
+        <div class="col-md-6">
+            <div class="input-icon right">
+
+
+            </div>
         </div>
     </div>
 
 
     <div class="form-group ">
-        <label class="control-label col-md-3"><span class="required"
-                                                    aria-required="true">*</span>身份证
+        <label class="control-label col-md-2">身份证
 
         </label>
-        <div class="col-md-9 idCardBoxs">
+        <div class="col-md-10 idCardBoxs">
             <div>
                 <div class="idCardBox">
-                    <img class="select_img form_idCardImgUrl"
-                         id="IDcardz"
-                         data-cover="IDcardz" \${data!=1?'data-toggle=modal data-target=#img-uploader':''}
-                         data-xsize="240" data-ysize="150"
-                         src="${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}">
-
+                    <input name="idCardImgUrl" type="hidden" value="\${data.idCardImgUrl}">
+                    <img
+                         id="idCardImgUrl" style="max-height:500px;cursor:pointer"
+                         data-cover="idCardImgUrl" data-toggle=modal data-target="#img-uploader"
+                         data-xsize="400" data-ysize="300"
+                         src="{@if data.idCardImgUrl!=''} \${data.idCardImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardz.png?v=${cfg.version}{@/if}">
 
                 </div>
                 <p>身份证正面</p>
@@ -509,12 +428,12 @@
 
             <div>
                 <div class="idCardBox">
-                    <img class="select_img form_idCardSideImgUrl"
-                         data-cover="IDcardf"
-                         id="IDcardf"
-                         data-xsize="240" data-ysize="150" \${data!=1?'data-toggle=modal
-                         data-target=#img-uploader':''}
-                         src="${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}">
+                    <input name="idCardSideImgUrl" type="hidden" value="\${data.idCardSideImgUrl}">
+                    <img
+                         data-cover="idCardSideImgUrl" style="max-height:500px;cursor:pointer"
+                         id="idCardSideImgUrl"
+                         data-xsize="400" data-ysize="300" data-toggle=modal data-target="#img-uploader"
+                         src="{@if data.idCardSideImgUrl!=''} \${data.idCardSideImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardf.png?v=${cfg.version}{@/if}">
                 </div>
                 <p>身份证反面</p>
             </div>
@@ -522,12 +441,13 @@
 
             <div>
                 <div class="idCardBox">
-                    <img class="select_img form_evidenceImgUrl"
-                         id="IDcardsc"
-                         data-cover="IDcardsc"
-                         data-xsize="240" data-ysize="150"
-                         \${data!=1?'data-toggle=modal data-target=#img-uploader':''}
-                         src="${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}">
+                    <input name="evidenceImgUrl" type="hidden" value="\${data.evidenceImgUrl}">
+                    <img
+                         id="evidenceImgUrl" style="max-height:500px;cursor:pointer"
+                         data-cover="evidenceImgUrl"
+                         data-xsize="400" data-ysize="300"
+                         data-toggle=modal data-target="#img-uploader"
+                         src="{@if data.evidenceImgUrl!=''} \${data.evidenceImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/idcardsc.png?v=${cfg.version}{@/if}">
                 </div>
                 <p>手持身份证</p>
             </div>
@@ -536,26 +456,26 @@
 
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required" aria-required="true">*</span>职业名称</label>
-        <div class="col-md-9">
-            <div class="md-radio-inline"
-                 id="certification">
-                <div class="md-radio">
-                    <input type="radio" id="radios_1" \${data==1?'disabled':''} name="form_certification"
-                           value="2" class="md-radiobtn">
+        <label class="col-md-2 control-label">职业名称</label>
+        <div class="col-md-10">
+            <div class="row">
+                <div  style="float:left;width:130px;padding:2px">
+                    <input type="radio" id="radios_1" \${data.regAuditRst==1?'disabled':''} name="certification"
+                           value="国家二级咨询师"  \${data.certification=='国家二级咨询师'?'checked':''}>
                     <label
                             for="radios_1"><span class="inc"></span>
                         <span class="check"></span>
                         <span class="box"></span>国家二级咨询师</label>
                 </div>
-                <div class="md-radio"><input type="radio" id="radios_2" \${data==1?'disabled':''}
-                                             name="form_certification"
-                                             value="3"
-                                             class="md-radiobtn">
+
+                <div  style="float:left;width:130px;padding:2px">
+
+                    <input type="radio" id="radios_2" \${data.regAuditRst==1?'disabled':''}
+                                             name="certification"
+                                             value="国家三级咨询师"
+                                              \${data.certification=='国家三级咨询师'?'checked':''}>
                     <label
-                            for="radios_2"><span class="inc"></span>
-                        <span class="check"></span>
-                        <span class="box"></span>国家三级咨询师</label>
+                            for="radios_2">国家三级咨询师</label>
                 </div>
             </div>
         </div>
@@ -563,34 +483,38 @@
 
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required"
-                                                    aria-required="true">*</span>从业资格证证号
+        <label class="col-md-2 control-label">从业资格证证号
 
         </label>
-        <div class="col-md-9">
-            <input type="text" class="form-control" id="notNull1" \${data==1?'readonly':''}
-                   placeholder=""
-                   name="form_certificateNo">
-            <span class="error_message"></span>
-            <div class="form-control-focus"></div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" \${data.regAuditRst==1?'readonly':''}
+                   placeholder="" value="\${data.certificateNo}"
+                   name="certificateNo">
+
+        </div>
+        <div class="col-md-6">
+            <div class="input-icon right">
+
+
+            </div>
         </div>
     </div>
 
 
     <div class="form-group ">
-        <label class="control-label col-md-3"><span class="required"
-                                                    aria-required="true">*</span>从业资格证书
+        <label class="control-label col-md-2">从业资格证书
 
         </label>
-        <div class="col-md-9 certificateBoxs">
+        <div class="col-md-10 certificateBoxs">
             <div>
                 <div class="certificateBox">
-                    <img class="select_img form_certificateImgUrl"
-                         id="certificateimg"
-                         data-cover="certificateimg"
-                         data-xsize="240" data-ysize="150"
-                         \${data!=1?'data-toggle=modal data-target=#img-uploader':''}
-                         src="${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}">
+                    <input name="certificateImgUrl" type="hidden" value="\${data.certificateImgUrl}">
+                    <img style="max-height:400px;cursor:pointer"
+                         id="certificateImgUrl"
+                         data-cover="certificateImgUrl"
+                         data-xsize="400" data-ysize="300"
+                         data-toggle=modal data-target="#img-uploader"
+                         src="{@if data.certificateImgUrl!=''} \${data.certificateImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}{@/if}">
                 </div>
                 <p>从业资格证书</p>
             </div>
@@ -598,41 +522,47 @@
     </div>
 
     <div class="form-group ">
-        <label class="col-md-3 control-label"> <span
-                class="required" aria-required="true">*</span>个案时长
+        <label class="col-md-2 control-label">个案时长
 
         </label>
-        <div class="col-md-9">
+        <div class="col-md-4">
             <div class="input-icon right">
-                <input type="text" class="form-control"
-                       id="naturalNumber"
-                       name="form_duration"
+                <input type="text" class="form-control" value="\${data.duration}"
+                       name="duration"
                        placeholder="一共从事了多少小时">
-                <span class="error_message"></span>
-                <div class="form-control-focus"></div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-icon right">
+                (单位：小时）
+
             </div>
         </div>
     </div>
     <div class="form-group ">
-        <label class="col-md-3 control-label"><span class="required"
-                                                    aria-required="true">*</span>个案人数
+        <label class="col-md-2 control-label">个案人数
 
         </label>
-        <div class="col-md-9">
+        <div class="col-md-4">
             <div class="input-icon right">
                 <input type="text" class="form-control"
-                       id="naturalNumber1"
-                       name="form_peopleNum"
+                       value="\${data.peopleNum}"
+                       name="peopleNum"
                        placeholder="一共辅导了多少人">
-                <span class="error_message"></span>
-                <div class="form-control-focus"></div>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="input-icon right">
+                (单位：人)
+
             </div>
         </div>
     </div>
     <div class="form-group ">
-        <div class="col-md-9 col-md-offset-3">
+        <div class="col-md-10 col-md-offset-3">
             <input class="protocol" type="checkbox"/>
-            <span></span>
             <span>
         同意
         <span class="primary-link"
@@ -641,9 +571,30 @@
         </span>
         </div>
     </div>
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-7">
+                <input type="hidden" name="regAuditRst" value="\${data.regAuditRst}">
+                <button class="btn  green" type="submit" style="width:30%">提交</button>
+            </div>
+        </div>
+    </div>
 
 </script>
 
-
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/module.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/hotkeys.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/uploader.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/simditor/scripts/simditor.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/plupload/plupload.full.min.js?v=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/common/js/upload.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/citySelect/js/citydata.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/citySelect/js/citySelect-1.0.3.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>
 
