@@ -18,6 +18,7 @@
           href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
           type="text/css" media="screen"/>
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
+
 </head>
 
 <body>
@@ -27,7 +28,6 @@
 
 <!-- BEGIN SAMPLE TABLE PORTLET-->
 <div class="portlet light">
-
     <div class="portlet-body" id="addBody">
         <div class="form-panel">
             <!--具体界面元素开始-->
@@ -36,29 +36,29 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             <span class="label-red">*</span>
-                            商品名称
+                            场地名称
                         </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control"
                                    name="commodityName" maxlength="50"
-                                   placeholder="请输入商品名称（建议字数在14个字以内，不超过50个字)">
+                                   placeholder="请输入场地名称（建议字数在14个字以内，不超过50个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-                            商品分类
+                            场地分类
                         </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control"
                                    name="category" maxlength="2"
-                                   placeholder="请输入商品分类（建议字数在14个字以内，不超过2个字)">
+                                   placeholder="请输入场地分类（建议字数在14个字以内，不超过2个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-                            商品封面
+                            场地封面
                         </label>
                         <div class="col-md-10" style="text-align: left">
                             <img class="cover"
@@ -73,13 +73,13 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-                            商品简介
+                            场地简介
                         </label>
                         <div class="col-md-10" style="text-align: left">
                             <textarea type="text" class="form-control"
                                       style="text-align: left;"
                                       name="summary" maxlength="2147483647"
-                                      placeholder="请输入商品简介（建议字数在14个字以内，不超过2147483647个字)">
+                                      placeholder="请输入场地简介（建议字数在14个字以内，不超过2147483647个字)">
                             </textarea>
                             <span class="help-block"></span>
                         </div>

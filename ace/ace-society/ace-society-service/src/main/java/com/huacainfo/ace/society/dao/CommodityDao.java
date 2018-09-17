@@ -15,11 +15,9 @@ public interface CommodityDao {
 
     int insert(Commodity record);
 
-    int insertSelective(Commodity record);
 
     int updateByPrimaryKey(Commodity record);
 
-    int updateByPrimaryKeySelective(Commodity record);
 
     CommodityVo selectVoByPrimaryKey(String id);
 

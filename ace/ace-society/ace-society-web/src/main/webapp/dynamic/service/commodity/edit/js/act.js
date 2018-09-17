@@ -3,6 +3,8 @@ var editor;
 window.onload = function () {
     jQuery(function ($) {
         initForm();
+        initEvents();
+        $(".breadcrumb").append("<li>添加爱心商品</li>");
     });
 }
 function App() {
@@ -33,15 +35,12 @@ function initEditor() {
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
-    var html = juicer(tpl, {
-        data: data,
-    });
+    var html = juicer(tpl, {data: data,});
     $(obj).html(html);
 }
 
 function initPage() {
     initEditor();
-    initUpload();
 }
 function initEvents() {
     /*表单验证*/
@@ -67,11 +66,12 @@ function initEvents() {
                 params[obj.name] = obj.value;
             });
             $.extend(params, {
-                time: new Date()
+                time: new Date(),
+                coverUrl: $('#coverUrl').attr("src")
             });
             console.log(params);
             save(params);
-            return false;
+            return true;
         }
     });
 }
@@ -90,7 +90,7 @@ function save(params) {
             stopLoad();
             alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = '../index.jsp';
+                window.location.href = '../index.jsp?id=' + urlParams.id;
             }
         },
         error: function () {
@@ -106,12 +106,13 @@ function initForm() {
         async: false,
         data: {id: urlParams.did},
         success: function (result) {
-            console.log(result);
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                renderPage('fm-edit', data, 'tpl-fm');
+                render('#fm-edit', data, 'tpl-fm');
                 initPage();
+                //富文本填值
+                editor.setValue(data['o'].summary);
             } else {
                 alert(result.errorMessage);
             }
@@ -122,8 +123,3 @@ function initForm() {
     });
 }
 
-function renderPage(IDom, data, tempId) {
-    var tpl = document.getElementById(tempId).innerHTML;
-    var html = juicer(tpl, {data: data,});
-    $("#" + IDom).html(html);
-}

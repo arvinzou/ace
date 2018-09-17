@@ -95,4 +95,14 @@ public interface CommodityService {
      * @version: 2018-09-13
      */
     MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
+
+    /**
+     * 商品上/下架处理
+     *
+     * @param id    主键ID
+     * @param state 商品状态0-下架1-在售
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse updateState(String id, String state, UserProp curUserProp) throws Exception;
 }

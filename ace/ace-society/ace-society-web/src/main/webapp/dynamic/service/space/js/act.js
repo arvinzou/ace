@@ -44,8 +44,7 @@ function t_query() {
 function getPageList() {
     var url = contextPath + "/commodity/findCommodityList";
     params['commodityName'] = $("input[name=keyword]").val();
-    params['commodityType'] = '0';//0-爱心商品 1-爱心场地
-
+    params['commodityType'] = '1';//0-爱心商品 1-爱心场地
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -162,6 +161,7 @@ function audit(params) {
 /*爱心商品上架*/
 function online(id) {
     if (confirm("确定要上架吗？")) {
+
         startLoad();
         $.ajax({
             url: contextPath + "/commodity/updateState",
@@ -237,8 +237,8 @@ function parseState(state) {
 /**
  *  商品类型      0-爱心商品    1-爱心场地
  */
-function parseType(type) {
-    switch (type) {
+function parseType(commodityType) {
+    switch (commodityType) {
         case '0':
             return "爱心商品";
         case '1':

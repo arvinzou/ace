@@ -173,6 +173,6 @@ function initForm(){
 window.onload=function(){
     jQuery(function ($) {
         initPage();
-        $(".breadcrumb").append("<li>课程编辑</li>");
+        $(".breadcrumb").append("<li><span>课程编辑</span></li>");
     });
 }
