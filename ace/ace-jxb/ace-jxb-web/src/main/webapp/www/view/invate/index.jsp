@@ -23,7 +23,7 @@
 		<div class="invate_code"><img src="\${data.qrcode.qrcodeUrl}"/></div>
 		<div class="footer">
 			<p class="roomname">\${data.studio.name}</p>
-			<p class="tips">扫描上方二维码注册咨询师加入TA的工作室</p>
+			<%--<p class="tips">扫描上方二维码注册咨询师加入TA的工作室</p>--%>
 		</div>
 	</script>
 	</body>

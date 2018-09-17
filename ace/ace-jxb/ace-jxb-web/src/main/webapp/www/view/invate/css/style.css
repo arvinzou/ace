@@ -9,14 +9,14 @@
 	width: 100%;
 	height: 16.066666rem;
 	background: url(../img/bg.png) no-repeat;
-	background-size: 100% 100%;
+	background-size: 100%;
 	position: relative;
 }
 .invate_code{
 	width: 2.093333rem;
 	height: 2.093333rem;
 	position: absolute;
-	top: 12.333333rem;
+	top: 9.8rem;
 	left: 40%;
 }
 .invate_code img{
@@ -27,7 +27,7 @@
 	width: 100%;
 	text-align: center;
 	position: absolute;
-	bottom: -0.5rem;
+	bottom: 3rem;
 }
 .roomname{
 	color: #FED45E;
