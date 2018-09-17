@@ -16,10 +16,10 @@ function App() {
 window.onload = function (){
     initPage();
 }
-var params = {limit: 5};
+var params = {limit: 10};
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 1,
+        totalCounts: 20,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -38,7 +38,7 @@ function t_query(){
     return false;
 }
 function getPageList() {
-    var url = contextPath + "/courseCmt/findMyCourseCmtList";
+   var url = contextPath + "/courseCmt/findMyCourseCmtList";
     params['nickname']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (result) {
@@ -87,5 +87,5 @@ function deleteCmt(obj,cmtId){
 			}
 		});
 	}
-	
+
 }
