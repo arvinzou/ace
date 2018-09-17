@@ -51,10 +51,6 @@
                                 <option value="2">普及活动</option>
                                 <option value="3">创意活动</option>
                                 <option value="4">党建活动</option>
-                                <option value="5">随手拍</option>
-                                <option value="6">我有点子</option>
-                                <option value="7">秀我直播</option>
-                                <option value="8">邻里圈子</option>
                             </select>
                             <span class="help-block"></span>
                         </div>

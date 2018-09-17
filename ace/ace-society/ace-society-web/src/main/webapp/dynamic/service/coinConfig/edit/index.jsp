@@ -63,10 +63,6 @@
                     <option \${data.o.category==2?'selected':''} value="2">普及活动</option>
                     <option \${data.o.category==3?'selected':''} value="3">创意活动</option>
                     <option \${data.o.category==4?'selected':''} value="4">党建活动</option>
-                    <option \${data.o.category==5?'selected':''} value="5">随手拍</option>
-                    <option \${data.o.category==6?'selected':''} value="6">我有点子</option>
-                    <option \${data.o.category==7?'selected':''} value="7">秀我直播</option>
-                    <option \${data.o.category==8?'selected':''} value="8">邻里圈子</option>
                 </select>
             </div>
         </div>

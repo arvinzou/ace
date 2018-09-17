@@ -25,7 +25,7 @@
 
 <!---==============================================-->
 <div class="portlet light">
-    <div class="portlet-title">
+    <div class="portlet-title hide">
         <div class="caption">
 
         </div>
