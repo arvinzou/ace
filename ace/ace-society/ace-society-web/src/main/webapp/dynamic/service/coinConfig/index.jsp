@@ -25,7 +25,7 @@
 
 <!---==============================================-->
 <div class="portlet light">
-    <div class="portlet-title hide">
+    <div class="portlet-title">
         <div class="caption">
 
         </div>
@@ -34,7 +34,7 @@
     </div>
     <div class="portlet-body">
 
-        <div class="row custom-toolbar">
+        <div class="row custom-tollbar">
             <div class="col-sm-5">
                 <a href="javascript:void(0);" onclick="add();" class="btn green">创建</a>
 
@@ -164,7 +164,23 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.category}</td>
+        {@if item.category==1}
+        <td> 公益活动</td>
+        {@else if item.category==2}
+        <td>普及活动</td>
+        {@else if item.category==3}
+        <td>创意活动</td>
+        {@else if item.category==4}
+        <td>党建活动</td>
+        {@else if item.category==5}
+        <td>随手拍</td>
+        {@else if item.category==6}
+        <td>我有点子</td>
+        {@else if item.category==7}
+        <td>秀我直播</td>
+        {@else if item.category==8}
+        <td>邻里圈子</td>
+        {@/if}
         <td> \${item.name}</td>
         <td> \${item.host}</td>
         <td> \${item.participant}</td>

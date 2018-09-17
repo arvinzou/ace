@@ -85,7 +85,7 @@
                         </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="participant" maxlength="10"
-                                   placeholder="请输入爱心币的数量。（正数是奖励，负数是扣除）">
+                                   placeholder="请输入爱心币的数量。（正数是奖励，负数是扣除,可以不填）">
                             <span class="help-block"></span>
                         </div>
                     </div>
