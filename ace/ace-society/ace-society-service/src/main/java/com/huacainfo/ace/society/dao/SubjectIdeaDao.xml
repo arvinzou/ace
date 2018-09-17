@@ -192,6 +192,9 @@
       t.id, t.subjectId, t.userId, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
       t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.solution,t.remark, d.title
     from subject_idea t INNER JOIN  subject d on t.subjectId = d.id
+    <if test="condition.subjectId !=null and condition.subjectId !=&quot;&quot;">
+      where  t.subjectId = #{condition.subjectId,jdbcType=VARCHAR}
+    </if>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}
@@ -208,6 +211,9 @@
     where 1=1
     <if test="condition.solution !=null and condition.solution !=&quot;&quot;">
       and t.solution like concat('%',#{condition.solution,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.subjectId !=null and condition.subjectId !=&quot;&quot;">
+      and t.subjectId = #{condition.subjectId,jdbcType=VARCHAR}
     </if>
   </sql>
 

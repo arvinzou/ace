@@ -1,9 +1,12 @@
 var loading = {};
 var params = {limit: 5};
 window.onload = function (){
-    initPage();
-    initEvents();
-initJuicerMethod();
+    jQuery(function ($) {
+        $(".breadcrumb").append("<li><span>解决方案</span></li>");
+        initPage();
+        initEvents();
+        initJuicerMethod();
+    });
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -43,7 +46,8 @@ function t_query(){
 /*议题点子加载表格数据*/
 function getPageList() {
     var url = contextPath+ "/subjectIdea/findSubjectIdeaList";
-    params['name']=$("input[name=keyword]").val();
+    params['solution']=$("input[name=keyword]").val();
+    params['subjectId']=urlParams.did;
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
