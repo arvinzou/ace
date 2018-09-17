@@ -2,19 +2,11 @@ var loading = {};
 var editor;
 window.onload = function (){
     jQuery(function ($) {
-        initPage();
         initEvents();
     });
 }
 function App() {
     console.log("=============================App Start==============================");
-    loadCustom();
-}
-function loadCustom() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
 }
 function initEditor() {
         editor = new Simditor({
@@ -106,3 +98,8 @@ function save(params) {
         }
     });
 }
+
+jQuery(function ($) {
+    initPage();
+    $(".breadcrumb").append("<li>创建议题</li>");
+});

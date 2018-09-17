@@ -13,106 +13,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="/dynamic/common/base.jsp"/>
+    <%--common css--%>
+    <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/dynamic/service/subjectIdea/js/act.js?v=${cfg.version}"></script>
-    <script src="${pageContext.request.contextPath}/content/common/js/loader.js?v=${cfg.version}"></script>
+    <%--custom css--%>
 </head>
 <body>
-<div class="page-wrapper">
-
-    <div class="page-wrapper-row full-height">
-        <div class="page-wrapper-middle">
-            <div class="page-container">
-                <div class="page-content-wrapper">
-                    <div class="page-content">
-                        <div class="container">
-                            <ul class="page-breadcrumb breadcrumb">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
-                                </li>
-                                <li>
-                                    <span>议题点子</span>
-                                </li>
-                            </ul>
-                            <div class="page-content-inner">
-
-                                <!---==============================================-->
-
-                                <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="portlet light">
-                                                    <div class="portlet-title">
-                                                        <div class="caption">
-                                                            议题点子
-                                                        </div>
-                                                       <%-- <div class="actions">
-                                                             <a href="javascript:void(0);" onclick="add();"  class="btn green">创建</a>
-                                                        </div>--%>
-                                                    </div>
-                                                    <div class="portlet-body">
-
-                                                    <div class="row">
-                                                        <div class="col-sm-8">
-
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <form onsubmit="return t_query()">
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       name="keyword"
-                                                                       class="form-control input-circle-left"
-                                                                       placeholder="请输入解决方案">
-                                                                <span class="input-group-btn">
-                                                                        <button class="btn btn-circle-right btn-default search_btn" type="submit">搜索</button>
-                                                                </span>
-                                                            </div>
-                                                            </form>
-                                                        </div>
-
-                                                    </div>
-
-
-                                                        <div class="table-scrollable">
-                                                            <table class="table table-hover">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th width="5%"> 序号</th>
-                                                                        <th width="20%"> 议题</th>
-                                                                        <th width="10%"> 提交人</th>
-                                                                        <th width="20%"> 解决方案</th>
-                                                                        <th width="15%"> 创建日期</th>
-                                                                        <th width="15%"> 状态</th>
-                                                                        <th width="15%">操作</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody id="page-list">
-
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <div class="paginationbar">
-                                                            <ul class="pagination" id="pagination1"></ul>
-                                                        </div>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                <!--=======================================-->
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--==============common jsp-prefix==============--%>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-prefix==============--%>
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            议题点子
         </div>
+        <%-- <div class="actions">
+              <a href="javascript:void(0);" onclick="add();"  class="btn green">创建</a>
+         </div>--%>
+    </div>
+    <div class="portlet-body">
+
+        <div class="row">
+            <div class="col-sm-8">
+
+            </div>
+            <div class="col-sm-4">
+                <form onsubmit="return t_query()">
+                    <div class="input-group">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control input-circle-left"
+                               placeholder="请输入解决方案">
+                        <span class="input-group-btn">
+                                                                        <button class="btn btn-circle-right btn-default search_btn"
+                                                                                type="submit">搜索</button>
+                                                                </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="5%"> 序号</th>
+                    <th width="20%"> 议题</th>
+                    <th width="10%"> 提交人</th>
+                    <th width="20%"> 解决方案</th>
+                    <th width="15%"> 创建日期</th>
+                    <th width="15%"> 状态</th>
+                    <th width="15%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="page-list">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
+        </div>
+
     </div>
 
-    <div class="bottom"></div>
 </div>
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
@@ -142,7 +108,7 @@
             <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
-             {@/if}
+            {@/if}
         </td>
     </tr>
     {@/each}
@@ -150,38 +116,38 @@
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
     <table class="table table-bordered table-hover">
-                <tr>
-                    <td class="active"> 解决方案</td>
-                    <td class="success"> \$\${data.solution}</td>
-                </tr>
-                <tr>
-                    <td class="active"> 备注</td>
-                    <td class="success"> \${data.remark}</td>
-                </tr>
-                <tr>
-                    <td class="active"> 状态</td>
-                    <td class="success">
-                        {@if data.status == '0'}
-                            删除
-                        {@else if data.status == '1'}
-                            暂存
-                        {@else if data.status == '2'}
-                            提交审核
-                        {@else if data.status == '3'}
-                            审核通过
-                        {@else if data.status == '4'}
-                            驳回
-                        {@/if}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="active"> 创建人姓名</td>
-                    <td class="success"> \${data.createUserName}</td>
-                </tr>
-                <tr>
-                    <td class="active"> 创建日期</td>
-                    <td class="success"> \${data.createDate}</td>
-                </tr>
+        <tr>
+            <td class="active"> 解决方案</td>
+            <td class="success"> \$\${data.solution}</td>
+        </tr>
+        <tr>
+            <td class="active"> 备注</td>
+            <td class="success"> \${data.remark}</td>
+        </tr>
+        <tr>
+            <td class="active"> 状态</td>
+            <td class="success">
+                {@if data.status == '0'}
+                删除
+                {@else if data.status == '1'}
+                暂存
+                {@else if data.status == '2'}
+                提交审核
+                {@else if data.status == '3'}
+                审核通过
+                {@else if data.status == '4'}
+                驳回
+                {@/if}
+            </td>
+        </tr>
+        <tr>
+            <td class="active"> 创建人姓名</td>
+            <td class="success"> \${data.createUserName}</td>
+        </tr>
+        <tr>
+            <td class="active"> 创建日期</td>
+            <td class="success"> \${data.createDate}</td>
+        </tr>
     </table>
 
     <!--议题点子附件表格-->
@@ -199,11 +165,11 @@
             <td class="active"> 附件</td>
             <td class="success">
                 {@if item.fileType == '0'}
-                    <a href="\${item.fileUrl}" download="点子附件">\${item.fileUrl}</a>
+                <a href="\${item.fileUrl}" download="点子附件">\${item.fileUrl}</a>
                 {@else if item.fileType == '1'}
-                    <img src="\${item.fileUrl}" style="width: 160px; height: 90px;"/>
+                <img src="\${item.fileUrl}" style="width: 160px; height: 90px;"/>
                 {@else if item.fileType == '2'}
-                    <video src="\${item.fileUrl}" controls width="160" height="90"></video>
+                <video src="\${item.fileUrl}" controls width="160" height="90"></video>
                 {@/if}
             </td>
         </tr>
@@ -249,7 +215,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                      <div class="form-body">
+                    <div class="form-body">
                         <div class="form-group " id="operation">
                             <label class="col-md-2 control-label">审核结果</label>
                             <div class="col-md-10">
@@ -280,21 +246,27 @@
         </div>
     </div>
 </div>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/common/js/jquery-form.js"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </body>
 <style>
-    .cover{
+    .cover {
         width: 70px;
         height: 70px;
         object-fit: cover;
     }
-    .describtion{
-        padding-left:15px;
-        height:50px;
+
+    .describtion {
+        padding-left: 15px;
+        height: 50px;
     }
-    .cost{
-          padding-top: 5px;
-          padding-left:15px;
-          color:#FE6500;
+
+    .cost {
+        padding-top: 5px;
+        padding-left: 15px;
+        color: #FE6500;
     }
 </style>
 </html>

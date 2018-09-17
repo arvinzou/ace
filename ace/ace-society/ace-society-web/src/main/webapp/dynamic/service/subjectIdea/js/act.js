@@ -44,6 +44,7 @@ function t_query(){
 function getPageList() {
     var url = contextPath+ "/subjectIdea/findSubjectIdeaList";
     params['name']=$("input[name=keyword]").val();
+    params['id']=urlParams.did;
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
