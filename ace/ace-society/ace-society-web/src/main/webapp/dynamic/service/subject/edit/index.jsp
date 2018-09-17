@@ -23,14 +23,6 @@
 <%--==============common jsp-prefix==============--%>
 <!-- BEGIN SAMPLE TABLE PORTLET-->
 <div class="portlet light">
-    <div class="portlet-title">
-        <div class="caption">
-            编辑方案提议
-        </div>
-        <div class="actions">
-
-        </div>
-    </div>
     <div class="portlet-body" id="courseSource">
         <div class="form-panel">
             <!--具体界面元素开始-->

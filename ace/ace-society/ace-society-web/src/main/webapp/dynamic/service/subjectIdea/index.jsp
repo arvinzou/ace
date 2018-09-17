@@ -23,14 +23,6 @@
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-prefix==============--%>
 <div class="portlet light">
-    <div class="portlet-title">
-        <div class="caption">
-            议题点子
-        </div>
-        <%-- <div class="actions">
-              <a href="javascript:void(0);" onclick="add();"  class="btn green">创建</a>
-         </div>--%>
-    </div>
     <div class="portlet-body">
 
         <div class="row">

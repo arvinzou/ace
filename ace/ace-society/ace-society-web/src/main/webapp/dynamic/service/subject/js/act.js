@@ -33,7 +33,7 @@ function t_query(){
 /*方案提议加载表格数据*/
 function getPageList() {
     var url = contextPath+ "/subject/findSubjectList";
-    params['name']=$("input[name=keyword]").val();
+    params['title']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
