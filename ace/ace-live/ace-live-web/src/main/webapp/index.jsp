@@ -31,12 +31,12 @@ pageEncoding="utf-8" %>
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">咨询师</h4>
+                <h4 class="widget-thumb-heading">直播</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-green icon-user"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计已审核</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.counselor}">\${data.counselor}</span>
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.live}">\${data.live}</span>
                     </div>
                 </div>
             </div>
@@ -45,12 +45,12 @@ pageEncoding="utf-8" %>
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">工作室</h4>
+                <h4 class="widget-thumb-heading">报道</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-red  icon-screen-desktop"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计已审核</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.studio}">\${data.studio}</span>
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.rpt}">\${data.rpt}</span>
                     </div>
                 </div>
             </div>
@@ -59,12 +59,12 @@ pageEncoding="utf-8" %>
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">课程</h4>
+                <h4 class="widget-thumb-heading">评论</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-purple icon-layers"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计已审核</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.course}">\${data.course}</span>
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.cmt}">\${data.cmt}</span>
                     </div>
                 </div>
             </div>
@@ -73,12 +73,12 @@ pageEncoding="utf-8" %>
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">心理评测</h4>
+                <h4 class="widget-thumb-heading">留言</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-blue  icon-graduation"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.evaluat_tpl}">\${data.evaluat_tpl}</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.msg}">\${data.msg}</span>
                     </div>
                 </div>
             </div>
@@ -86,64 +86,7 @@ pageEncoding="utf-8" %>
         </div>
     </div>
 
-    <div class="row widget-row">
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">评论</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green icon-note"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.courseCmt}">\${data.courseCmt}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">咨询订单</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red  icon-basket-loaded"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计有效</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.counselorOrder}">\${data.counselorOrder}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">课程订单</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple icon-basket-loaded"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计有效</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.courseOrder}">\${data.courseOrder}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">评测订单</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-blue icon-basket-loaded"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计有效</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.evaluatOrder}">\${data.evaluatOrder}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-    </div>
+
 
 
     </div>
@@ -153,6 +96,45 @@ pageEncoding="utf-8" %>
 
 <jsp:include page="/dynamic/common/footer.jsp" />
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/index/act.js?version=${cfg.version}"></script>
+<script>
+
+    function App(){
+
+
+}
+Array.prototype.contains = function ( needle ) {
+  for (i in this) {
+    if (this[i] == needle) return true;
+  }
+  return false;
+}
+/*页面渲染*/
+function render(obj, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(obj).html(html);
+}
+
+ window.onload=function(){
+        var data={reportId:"portal",userId:userProp.userId};
+        var tplId="tpl-portal-1";
+
+        $.ajax({
+    		type : "post",
+    		url : contextPath + '/anslysis/query',
+    		data:data,
+    		success : function(rst) {
+    		    var data={};
+    			$.each(rst.value, function(i,o) {
+    				data[o.id]=o.value;
+    			});
+    			console.log(data);
+    			render($(".page-content-inner"), data, tplId)
+    		}
+    	});
+    }
+</script>
 </body>
 </html>

@@ -3,6 +3,7 @@
      margin-left:3px;
      margin-right:3px;
      max-height:35px;
+
 }
 .breadcrumb1{
     background: none;
@@ -20,8 +21,8 @@
     float: left;
     padding: 15px 15px 15px 5px;
     font-size: 18px;
-    line-height: 20px;
-    height: 50px;
+    line-height: 8px;
+    height: 28px;
 }
 
 
@@ -204,6 +205,9 @@ body{
         height: 50px;
         padding-left: 5px;
         padding-right: 5px;
+         display: flex;
+             justify-content: center;
+             align-items: center;
     }
     .custom-toolbar{
          padding-bottom: 10px;

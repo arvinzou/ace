@@ -18,7 +18,7 @@
                 </a>
                 <a href="#" class="navbar-brand logo-default" style="color:#FFF;margin:0px">
                     <small>
-                        ${cfg.sys_name}${cfg.version}${SESSION_USERPROP_KEY.cfg.portalType}
+                        ${cfg.sys_name}
                     </small>
                 </a>
 

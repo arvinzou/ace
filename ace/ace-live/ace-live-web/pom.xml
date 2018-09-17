@@ -7,7 +7,7 @@
 		<version>1.0</version>
 	</parent>
 	<properties>
-		<maven.tomcat.port>6003</maven.tomcat.port>
+		<maven.tomcat.port>6010</maven.tomcat.port>
 		<maven.tomcat.path>/live</maven.tomcat.path>
 	</properties>
 	<artifactId>ace-live-web</artifactId>
@@ -64,6 +64,11 @@
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
 			<version>3.22.0-GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
