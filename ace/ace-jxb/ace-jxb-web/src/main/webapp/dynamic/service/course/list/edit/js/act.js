@@ -149,7 +149,7 @@ function initForm(){
 }
 jQuery(function ($) {
 	initForm();
-	 $(".breadcrumb").append("<li>编辑课件</li>");
+	 $(".breadcrumb").append("<li><span>编辑课件</span></li>");
         initUpload();
 
 });

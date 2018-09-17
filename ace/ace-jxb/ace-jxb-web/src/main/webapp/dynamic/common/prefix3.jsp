@@ -13,7 +13,7 @@
                             <ul class="page-breadcrumb breadcrumb">
                                 <li>
                                     <a href="${pageContext.request.contextPath}/index.jsp">首页</a>
-                                    <i class="fa fa-circle"></i>
+
                                 </li>
                                 <li>
                                     <span class="todo-header"></span>

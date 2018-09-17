@@ -133,10 +133,12 @@ function initPage() {
         }
     });
     $('input[name=name]').maxlength({
-        alwaysShow: true
+        alwaysShow: true,
+         placement: 'centered-right'
     });
     $('input[name=applicationObject]').maxlength({
-                        alwaysShow: true
+                        alwaysShow: true,
+                         placement: 'centered-right'
                    });
 
     initEditor();
@@ -148,5 +150,5 @@ function initPage() {
 
 jQuery(function ($) {
     initPage();
-     $(".breadcrumb").append("<li>创建课程</li>");
+     $(".breadcrumb").append("<li><span>创建课程</span></li>");
 });

@@ -13,6 +13,11 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
     <%--custom css--%>
+    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+    <link rel="stylesheet"
+          href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+          type="text/css" media="screen"/>
+    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
 </head>
 
 <body>
@@ -22,14 +27,7 @@
 
 <!-- BEGIN SAMPLE TABLE PORTLET-->
 <div class="portlet light">
-    <div class="portlet-title">
-        <div class="caption">
-            创建爱心商品
-        </div>
-        <div class="actions">
 
-        </div>
-    </div>
     <div class="portlet-body" id="addBody">
         <div class="form-panel">
             <!--具体界面元素开始-->
@@ -68,7 +66,7 @@
                                  data-toggle="modal"
                                  data-xsize="150" data-ysize="150"
                                  data-cover="coverUrl"
-                                 data-target="#img-uploader"
+                                 data-target="#cropModal"
                                  src="${pageContext.request.contextPath}/content/common/img/addImg1.png?v=${cfg.version}">
                             <span class="help-block"></span>
                         </div>
@@ -78,11 +76,11 @@
                             商品简介
                         </label>
                         <div class="col-md-10" style="text-align: left">
-                                                                    <textarea type="text" class="form-control"
-                                                                              style="text-align: left;"
-                                                                              name="summary" maxlength="2147483647"
-                                                                              placeholder="请输入商品简介（建议字数在14个字以内，不超过2147483647个字)">
-                                                                    </textarea>
+                            <textarea type="text" class="form-control"
+                                      style="text-align: left;"
+                                      name="summary" maxlength="2147483647"
+                                      placeholder="请输入商品简介（建议字数在14个字以内，不超过2147483647个字)">
+                            </textarea>
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -140,5 +138,23 @@
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<%--custom js--%>
+<script type="text/javascript"
+        src="/portal/content/common/js/jquery.form.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
+
+<script src="${pageContext.request.contextPath}/content/common/js/cropUpload.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
+
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

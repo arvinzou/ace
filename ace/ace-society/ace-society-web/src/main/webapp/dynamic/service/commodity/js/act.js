@@ -43,7 +43,9 @@ function t_query() {
 /*爱心商品加载表格数据*/
 function getPageList() {
     var url = contextPath + "/commodity/findCommodityList";
-    params['name'] = $("input[name=keyword]").val();
+    params['commodityName'] = $("input[name=keyword]").val();
+    params['commodityType'] = '0';//0-爱心商品 1-爱心场地
+
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -160,18 +162,15 @@ function audit(params) {
 /*爱心商品上架*/
 function online(id) {
     if (confirm("确定要上架吗？")) {
-
-        //请求参数
-        var param = {
-            id: id,
-            state: '1'
-        };
         startLoad();
         $.ajax({
-            url: contextPath + "/commodity/updateCommodity",
+            url: contextPath + "/commodity/updateState",
             type: "post",
             async: false,
-            data: {jsons: JSON.stringify(param)},
+            data: {
+                id: id,
+                state: '1'
+            },
             success: function (rst) {
                 stopLoad();
                 if (rst.status == 0) {
@@ -190,17 +189,15 @@ function online(id) {
 /*爱心商品下架*/
 function outline(id) {
     if (confirm("确定要下架吗？")) {
-        //请求参数
-        var param = {
-            id: id,
-            state: '0'
-        };
         startLoad();
         $.ajax({
-            url: contextPath + "/commodity/updateCommodity",
+            url: contextPath + "/commodity/updateState",
             type: "post",
             async: false,
-            data: {jsons: JSON.stringify(param)},
+            data: {
+                id: id,
+                state: '0'
+            },
             success: function (rst) {
                 stopLoad();
                 if (rst.status == 0) {
@@ -227,7 +224,7 @@ function initJuicerMethod() {
  * 商品状态0-下架1-在售
  */
 function parseState(state) {
-    switch (status) {
+    switch (state) {
         case '0':
             return "已下架";
         case '1':

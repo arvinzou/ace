@@ -133,10 +133,12 @@ function initForm(){
                renderPage($("#fm-add"),data, 'tpl-fm');
                initEditor();
                $('input[name=name]').maxlength({
-                       alwaysShow: true
+                       alwaysShow: true,
+                       placement: 'centered-right'
                 });
                $('input[name=applicationObject]').maxlength({
-                    alwaysShow: true
+                    alwaysShow: true,
+                     placement: 'centered-right'
                });
 
                 $("#fm-add").validate({
@@ -173,6 +175,6 @@ function initForm(){
 window.onload=function(){
     jQuery(function ($) {
         initPage();
-        $(".breadcrumb").append("<li>课程编辑</li>");
+        $(".breadcrumb").append("<li><span>课程编辑</span></li>");
     });
 }

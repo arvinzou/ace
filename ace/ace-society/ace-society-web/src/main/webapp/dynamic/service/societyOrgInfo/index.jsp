@@ -23,68 +23,66 @@
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-prefix==============--%>
 
-                                        <div class="portlet light">
-                                            <div class="portlet-title hide">
-                                                <div class="caption">
-                                                </div>
-                                                <div class="actions">
-                                                    <a href="javascript:void(0);" onclick="add();"
-                                                       class="btn green">创建</a>
-                                                </div>
-                                            </div>
-                                            <div class="portlet-body">
+<div class="portlet light">
+    <div class="portlet-title hide">
+        <div class="caption">
+        </div>
+        <div class="actions">
+            <a href="javascript:void(0);" onclick="add();"
+               class="btn green">创建</a>
+        </div>
+    </div>
+    <div class="portlet-body">
 
-                                                <div class="row">
-                                                    <div class="col-sm-8">
+        <div class="row custom-toolbar">
+            <div class="col-md-5">
 
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <form onsubmit="return t_query()">
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       name="keyword"
-                                                                       class="form-control input-circle-left"
-                                                                       placeholder="请输入名称">
-                                                                <span class="input-group-btn">
-                                                        <button class="btn btn-circle-right btn-default search_btn"
-                                                                type="submit">
-                                                                搜索
-                                                        </button>
-                                                    </span>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+            </div>
+            <div class="col-sm-7">
+                <form onsubmit="return t_query()">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control " placeholder="请输入组织姓名">
+                        <span class="input-group-btn">
+                            <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
 
-                                                </div>
+        </div>
 
 
-                                                <div class="table-scrollable">
-                                                    <table class="table table-hover">
-                                                        <thead>
-                                                        <tr>
-                                                            <th width="10%"> 组织名称</th>
-                                                            <th width="10%"> 组织类型</th>
-                                                            <th width="10%"> 联系人姓名</th>
-                                                            <th width="10%"> 联系人手机号</th>
-                                                            <th width="10%"> 累计获取积分</th>
-                                                            <th width="10%"> 可用积分</th>
-                                                            <th width="10%"> 注册状态</th>
-                                                            <th width="15%">操作</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody id="page-list">
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="10%"> 组织名称</th>
+                    <th width="10%"> 组织类型</th>
+                    <th width="10%"> 联系人姓名</th>
+                    <th width="10%"> 联系人手机号</th>
+                    <th width="10%"> 累计获取积分</th>
+                    <th width="10%"> 可用积分</th>
+                    <th width="10%"> 注册状态</th>
+                    <th width="15%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="page-list">
 
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="paginationbar">
-                                                    <ul class="pagination" id="pagination1"></ul>
-                                                </div>
+                </tbody>
+            </table>
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
+        </div>
 
-                                            </div>
+    </div>
 
-                                        </div>
+</div>
 
+<%--=============common jsp-suffix===============--%>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-suffix==============--%>
+</body>
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
@@ -240,10 +238,6 @@
     </div>
 </div>
 
-<%--=============common jsp-suffix===============--%>
-<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<%--==============common jsp-suffix==============--%>
-</body>
 <style>
     .cover {
         width: 70px;

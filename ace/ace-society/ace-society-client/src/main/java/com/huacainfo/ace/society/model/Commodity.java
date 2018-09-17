@@ -8,7 +8,7 @@ import java.util.Date;
 public class Commodity extends BaseModel {
     private String id;
     /**
-     * 商品类型     * 0-爱心商品     * 1-爱心场地
+     * 商品类型  0-爱心商品 1-爱心场地
      */
     private String commodityType;
 

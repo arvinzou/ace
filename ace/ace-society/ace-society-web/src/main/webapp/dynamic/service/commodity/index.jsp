@@ -24,29 +24,19 @@
 <%--==============common jsp-prefix==============--%>
 
 <div class="portlet light">
-    <div class="portlet-title">
-        <div class="actions">
-            <a href="javascript:void(0);" onclick="add();"
-               class="btn green">创建</a>
-        </div>
-    </div>
     <div class="portlet-body">
-        <div class="row">
-            <div class="col-sm-8">
-
+        <div class="row custom-toolbar">
+            <div class="col-sm-5">
+                <a onclick="javascript:add()" class="btn  green">
+                    <i class="fa fa-plus"></i> 添加爱心商品
+                </a>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control input-circle-left"
-                               placeholder="请输入名称">
+                        <input type="text" name="keyword" class="form-control " placeholder="请输入商品名称">
                         <span class="input-group-btn">
-                            <button class="btn btn-circle-right btn-default search_btn"
-                                    type="submit">
-                                    搜索
-                            </button>
+                            <button class="btn  btn-default search_btn" type="submit">搜索</button>
                         </span>
                     </div>
                 </form>
@@ -82,6 +72,7 @@
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
+</body>
 
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
@@ -169,7 +160,6 @@
         </tr>
     </table>
 </script>
-
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
     <div class="modal-dialog" role="document">
@@ -197,7 +187,6 @@
         </div>
     </div>
 </div>
-
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
     <div class="modal-dialog" role="document">
@@ -240,7 +229,7 @@
         </div>
     </div>
 </div>
-</body>
+
 <style>
     .cover {
         width: 70px;

@@ -1,29 +1,14 @@
 var loading = {};
 var editor;
 window.onload = function () {
-    // jQuery(function ($) {
-    initPage();
-    initEvents();
-    // });
+    jQuery(function ($) {
+        initPage();
+        initEvents();
+        $(".breadcrumb").append("<li>添加爱心商品</li>");
+    });
 }
-function App() {
-    console.log("=============================App Start==============================");
-    loadCustom();
-}
-function loadCustom() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 function initEditor() {
-
-    if ($('textarea[name=summary]')) {
-        console.log("11111111111111111111");
-    } else {
-        console.log("22222222222222222222");
-    }
-
     editor = new Simditor({
         textarea: $('textarea[name=summary]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
@@ -47,7 +32,7 @@ function render(obj, data, tplId) {
 
 function initPage() {
     initEditor();
-    initUpload();
+    // initUpload();
 }
 function initEvents() {
     /*表单验证*/
@@ -74,7 +59,8 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-                commodityType: "0" //商品类型  0-爱心商品 1-爱心场地
+                commodityType: "0", //商品类型  0-爱心商品 1-爱心场地
+                coverUrl: $('#coverUrl').attr("src"),
             });
             console.log(params);
             save(params);
@@ -97,7 +83,7 @@ function save(params) {
             stopLoad();
             alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = '../index.jsp';
+                window.location.href = '../index.jsp?id=' + urlParams.id;
             }
         },
         error: function () {
