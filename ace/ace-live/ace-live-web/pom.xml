@@ -29,6 +29,11 @@
 			<version>1.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.huacainfo</groupId>
+			<artifactId>ace-live-service</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>servletapi</groupId>
 			<artifactId>servletapi</artifactId>
 			<version>2.4</version>
@@ -54,6 +59,11 @@
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.22.0-GA</version>
 		</dependency>
 	</dependencies>
 	<build>

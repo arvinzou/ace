@@ -75,7 +75,7 @@ function chooseVideoRptDo() {
     uploaderV = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Vupbtn',
-        url: '/live/www/live/upload.do',
+        url: '/live/www/live/upload',
         file_data_name: 'file',
         multi_selection: false,
         filters: {
@@ -132,7 +132,7 @@ function chooseImageRptDo() {
     uploaderI = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'Iupbtn',
-        url: '/live/www/live/upload.do',
+        url: '/live/www/live/upload',
         file_data_name: 'file',
         multi_selection: false,
         resize: {

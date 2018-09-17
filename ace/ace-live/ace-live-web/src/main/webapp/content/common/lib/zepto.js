@@ -2,7 +2,7 @@
 
 var Zepto = (function() {
   var undefined, key, $, classList, emptyArray = [], slice = emptyArray.slice, filter = emptyArray.filter,
-    document = window.document,
+    document = windowcument,
     elementDisplay = {}, classCache = {},
     cssNumber = { 'column-count': 1, 'columns': 1, 'font-weight': 1, 'line-height': 1,'opacity': 1, 'z-index': 1, 'zoom': 1 },
     fragmentRE = /^\s*<(\w+|!)[^>]*>/,
@@ -266,7 +266,7 @@ var Zepto = (function() {
     return selector == null ? $(nodes) : $(nodes).filter(selector)
   }
 
-  $.contains = document.documentElement.contains ?
+  $.contains = documentcumentElement.contains ?
     function(parent, node) {
       return parent !== node && parent.contains(node)
     } :
@@ -806,7 +806,7 @@ var Zepto = (function() {
     $.fn[dimension] = function(value){
       var offset, el = this[0]
       if (value === undefined) return isWindow(el) ? el['inner' + dimensionProperty] :
-        isDocument(el) ? el.documentElement['scroll' + dimensionProperty] :
+        isDocument(el) ? elcumentElement['scroll' + dimensionProperty] :
         (offset = this.offset()) && offset[dimension]
       else return this.each(function(idx){
         el = $(this)
@@ -845,7 +845,7 @@ var Zepto = (function() {
                  operatorIndex == 2 ? target :
                  null
 
-        var parentInDocument = $.contains(document.documentElement, parent)
+        var parentInDocument = $.contains(documentcumentElement, parent)
 
         nodes.forEach(function(node){
           if (copyByClone) node = node.cloneNode(true)
@@ -1156,7 +1156,7 @@ window.$ === undefined && (window.$ = Zepto)
 
 ;(function($){
   var jsonpID = 0,
-      document = window.document,
+      document = windowcument,
       key,
       name,
       rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,

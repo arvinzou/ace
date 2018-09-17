@@ -756,7 +756,7 @@
 						return true;
 					}
 					// Chrome 32 and above with width=device-width or less don't need FastClick
-					if (chromeVersion > 31 && document.documentElement.scrollWidth <= window.outerWidth) {
+					if (chromeVersion > 31 && documentcumentElement.scrollWidth <= window.outerWidth) {
 						return true;
 					}
 				}
@@ -781,7 +781,7 @@
 						return true;
 					}
 					// width=device-width (or less than device-width) eliminates click delay.
-					if (document.documentElement.scrollWidth <= window.outerWidth) {
+					if (documentcumentElement.scrollWidth <= window.outerWidth) {
 						return true;
 					}
 				}
@@ -800,7 +800,7 @@
 			// Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
 
 			metaViewport = document.querySelector('meta[name=viewport]');
-			if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
+			if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || documentcumentElement.scrollWidth <= window.outerWidth)) {
 				return true;
 			}
 		}

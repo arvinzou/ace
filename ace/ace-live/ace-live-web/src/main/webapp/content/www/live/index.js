@@ -1,5 +1,5 @@
 function getList() {
-    loadList || (loadList = !0, lvsCmd.ajax(apiServer + "/www/live/getListByCompany.do", {
+    loadList || (loadList = !0, lvsCmd.ajax(apiServer + "/www/live/getListByCompany", {
             companyId: companyId,
             page: listPage || 1
         },
@@ -59,14 +59,14 @@ var listPage = 1,
         desc: "",
         link: document.URL
     };
-lvsCmd.ajax(apiServer + "/www/live/getShareContent.do", {
+lvsCmd.ajax(apiServer + "/www/live/getShareContent", {
         companyId: companyId
     },
     function (i, g) {
         if (i) {
             var e = g.data.logo;
             $("#j-logo").html('<img src="' + e + '">'),
-                wxShareDict.desc = g.data.downloadTitle
+                wxShareDict.desc = g.datawnloadTitle
         } else lvsCmd.alert(g.errMsg)
     });
 var livelistTpl = juicer($("#j-livelist script").html());

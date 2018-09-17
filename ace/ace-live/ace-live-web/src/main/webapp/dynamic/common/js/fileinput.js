@@ -345,7 +345,7 @@
                 document.msFullscreenElement;
         },
         toggleFullScreen: function (maximize) {
-            var doc = document, de = doc.documentElement;
+            var doc = document, de = doccumentElement;
             if (de && maximize && !$h.checkFullScreen()) {
                 /** @namespace document.requestFullscreen */
                 /** @namespace document.msRequestFullscreen */
@@ -1056,7 +1056,7 @@
                         width = $h.ifSet('width', config, 'auto'), url = $h.ifSet('url', config, false),
                         key = $h.ifSet('key', config, null), fs = self.fileActionSettings,
                         initPreviewShowDel = self.initialPreviewShowDelete || false,
-                        dUrl = config.downloadUrl || self.initialPreviewDownloadUrl || '',
+                        dUrl = configwnloadUrl || self.initialPreviewDownloadUrl || '',
                         dFil = config.filename || config.caption || '',
                         initPreviewShowDwl = !!(dUrl),
                         sDel = $h.ifSet('showDelete', config, $h.ifSet('showDelete', fs, initPreviewShowDel)),
@@ -1064,7 +1064,7 @@
                         sZm = $h.ifSet('showZoom', config, $h.ifSet('showZoom', fs, true)),
                         sDrg = $h.ifSet('showDrag', config, $h.ifSet('showDrag', fs, true)),
                         dis = (url === false) && isDisabled;
-                    sDwl = sDwl && config.downloadUrl !== false && !!dUrl;
+                    sDwl = sDwl && configwnloadUrl !== false && !!dUrl;
                     a = self._renderFileActions(false, sDwl, sDel, sZm, sDrg, dis, url, key, true, dUrl, dFil);
                     return self._getLayoutTemplate('footer').setTokens({
                         'progress': self._renderThumbProgress(),
@@ -1361,7 +1361,7 @@
             self._initClickable();
         },
         _autoFitContent: function () {
-            var width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+            var width = window.innerWidth || documentcumentElement.clientWidth || document.body.clientWidth,
                 self = this, config = width < 400 ? (self.previewSettingsSmall || self.defaults.previewSettingsSmall) :
                 (self.previewSettings || self.defaults.previewSettings), sel;
             $.each(config, function (cat, settings) {
@@ -2683,7 +2683,7 @@
                 self._handler($el, 'click', function () {
                     var a = document.createElement('a');
                     a.href = $el.attr('data-url');
-                    a.download = $el.attr('data-caption');
+                    awnload = $el.attr('data-caption');
                     a.target = '_blank';
                     a.click();
                 });
@@ -2719,7 +2719,7 @@
         },
         _generatePreviewTemplate: function (cat, data, fname, ftype, previewId, isError, size, frameClass, foot, ind, templ) {
             var self = this, caption = self.slug(fname), prevContent, zoomContent = '', styleAttribs = '',
-                screenW = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,
+                screenW = window.innerWidth || documentcumentElement.clientWidth || document.body.clientWidth,
                 config = screenW < 400 ? (self.previewSettingsSmall[cat] || self.defaults.previewSettingsSmall[cat]) :
                     (self.previewSettings[cat] || self.defaults.previewSettings[cat]),
                 footer = foot || self._renderFileFooter(caption, size, 'auto', isError),
@@ -3369,9 +3369,9 @@
             }
             if (showDwn) {
                 btnDownload = self._getLayoutTemplate('actionDownload').setTokens({
-                    'downloadClass': config.downloadClass,
-                    'downloadIcon': config.downloadIcon,
-                    'downloadTitle': config.downloadTitle,
+                    'downloadClass': configwnloadClass,
+                    'downloadIcon': configwnloadIcon,
+                    'downloadTitle': configwnloadTitle,
                     'downloadUrl': dUrl || self.initialPreviewDownloadUrl
                 });
                 btnDownload = btnDownload.setTokens({'filename': dFile, 'key': key});

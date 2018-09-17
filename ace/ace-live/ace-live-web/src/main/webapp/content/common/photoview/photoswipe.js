@@ -45,7 +45,7 @@ var framework = {
 	},
 	getScrollY: function() {
 		var yOffset = window.pageYOffset;
-		return yOffset !== undefined ? yOffset : document.documentElement.scrollTop;
+		return yOffset !== undefined ? yOffset : documentcumentElement.scrollTop;
 	},
 	unbind: function(target, type, listener) {
 		framework.bind(target,type,listener,true);

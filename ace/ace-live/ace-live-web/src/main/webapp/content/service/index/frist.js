@@ -4,7 +4,7 @@ $(function () {
 });
 
 function webInit() {
-    var url='/portal/system/getUserProp.do';
+    var url='/portal/system/getUserProp';
     $.get(url,function () {
 
     })

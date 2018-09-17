@@ -43,7 +43,7 @@ public class LiveImgController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    @RequestMapping(value = "/insertLiveImg.do")
+    @RequestMapping(value = "/insertLiveImg")
     @ResponseBody
     public MessageResponse insertLiveImg(String jsons) throws Exception {
         LiveImg obj = JSON.parseObject(jsons, LiveImg.class);
@@ -60,7 +60,7 @@ public class LiveImgController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    @RequestMapping(value = "/deleteLiveImgByLiveImgId.do")
+    @RequestMapping(value = "/deleteLiveImgByLiveImgId")
     @ResponseBody
     public MessageResponse deleteLiveImgByLiveImgId(String id)
             throws Exception {
@@ -75,14 +75,14 @@ public class LiveImgController extends LiveBaseController {
      * @throws Exception
      */
 
-    @RequestMapping(value = "/selectLiveImgByPrimaryKey.do")
+    @RequestMapping(value = "/selectLiveImgByPrimaryKey")
     @ResponseBody
     public MessageResponse selectLiveImgByPrimaryKey(String id)
             throws Exception {
         return this.liveImgService.selectLiveImgByPrimaryKey(id);
     }
 
-    @RequestMapping(value = "/findLiveImgList.do")
+    @RequestMapping(value = "/findLiveImgList")
     @ResponseBody
     public PageResult<LiveImgVo> findLiveImgList(LiveImgQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<LiveImgVo> rst = this.liveImgService.findLiveImgList(condition, page.getOrderBy());

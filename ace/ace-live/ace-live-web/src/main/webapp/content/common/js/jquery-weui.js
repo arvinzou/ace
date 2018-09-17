@@ -996,7 +996,7 @@ function Input(manager, callback) {
 
     // smaller wrapper around the handler, for the scope and the enabled state of the manager,
     // so when disabled the input events are completely bypassed.
-    this.domHandler = function(ev) {
+    thismHandler = function(ev) {
         if (boolOrFn(manager.options.enable, [manager])) {
             self.handler(ev);
         }
@@ -1017,18 +1017,18 @@ Input.prototype = {
      * bind the events
      */
     init: function() {
-        this.evEl && addEventListeners(this.element, this.evEl, this.domHandler);
-        this.evTarget && addEventListeners(this.target, this.evTarget, this.domHandler);
-        this.evWin && addEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
+        this.evEl && addEventListeners(this.element, this.evEl, thismHandler);
+        this.evTarget && addEventListeners(this.target, this.evTarget, thismHandler);
+        this.evWin && addEventListeners(getWindowForElement(this.element), this.evWin, thismHandler);
     },
 
     /**
      * unbind the events
      */
     destroy: function() {
-        this.evEl && removeEventListeners(this.element, this.evEl, this.domHandler);
-        this.evTarget && removeEventListeners(this.target, this.evTarget, this.domHandler);
-        this.evWin && removeEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
+        this.evEl && removeEventListeners(this.element, this.evEl, thismHandler);
+        this.evTarget && removeEventListeners(this.target, this.evTarget, thismHandler);
+        this.evWin && removeEventListeners(getWindowForElement(this.element), this.evWin, thismHandler);
     }
 };
 
@@ -3070,7 +3070,7 @@ Manager.prototype = {
      */
     emit: function(event, data) {
         // we also want to trigger dom events
-        if (this.options.domEvents) {
+        if (this.optionsmEvents) {
             triggerDomEvent(event, data);
         }
 

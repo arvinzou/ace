@@ -1,7 +1,7 @@
 jQuery(function($) {
 	init_uploader({
 		extensions : "jpg,gif,png,bmp",
-		url : portalPath + '/files/uploadFile.do',
+		url : portalPath + '/files/uploadFile',
 		target : "url",
 		multipart_params : {}
 	});
@@ -116,7 +116,7 @@ function appendUploadBtn(id) {
 						e.preventDefault();
 						var config={
                             		extensions : "jpg,gif,png,bmp",
-                            		url : portalPath + '/files/uploadFile.do',
+                            		url : portalPath + '/files/uploadFile',
                             		target : id,
                             		multipart_params : {}
                             	};

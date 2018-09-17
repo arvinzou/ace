@@ -1,9 +1,9 @@
 var cfg = {};
-cfg.view_load_data_url = contextPath + '/liveMsg/selectLiveMsgByPrimaryKey.do';
-cfg.grid_load_data_url = contextPath + '/liveMsg/findLiveMsgList.do';
-cfg.grid_add_data_url = contextPath + '/liveMsg/insertLiveMsg.do';
-cfg.grid_edit_data_url = contextPath + '/liveMsg/updateLiveMsg.do';
-cfg.grid_delete_data_url = contextPath + '/liveMsg/deleteLiveMsgByLiveMsgId.do';
+cfg.view_load_data_url = contextPath + '/liveMsg/selectLiveMsgByPrimaryKey';
+cfg.grid_load_data_url = contextPath + '/liveMsg/findLiveMsgList';
+cfg.grid_add_data_url = contextPath + '/liveMsg/insertLiveMsg';
+cfg.grid_edit_data_url = contextPath + '/liveMsg/updateLiveMsg';
+cfg.grid_delete_data_url = contextPath + '/liveMsg/deleteLiveMsgByLiveMsgId';
 cfg.grid_selector= "#grid-table";
 cfg.pager_selector= "#grid-pager";
 //cfg.caption= "参数";
