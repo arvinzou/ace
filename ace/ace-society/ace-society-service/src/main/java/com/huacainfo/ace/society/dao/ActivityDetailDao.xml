@@ -10,6 +10,7 @@
         <result column="signInState" jdbcType="CHAR" property="signInState"/>
         <result column="signInDate" jdbcType="TIMESTAMP" property="signInDate"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="signImgUrl" jdbcType="VARCHAR" property="signImgUrl"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
@@ -19,7 +20,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, activityId, userId, identity, points, signInState, signInDate, remark, status, 
+    id, activityId, userId, identity, points, signInState, signInDate, remark, signImgUrl, status,
     createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -35,13 +36,13 @@
     <insert id="insert" parameterType="com.huacainfo.ace.society.model.ActivityDetail">
     insert into activity_detail (id, activityId, userId, 
       identity, points, signInState, 
-      signInDate, remark, status, 
+      signInDate, remark, signImgUrl, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
     values (#{id,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{identity,jdbcType=CHAR}, #{points,jdbcType=INTEGER}, #{signInState,jdbcType=CHAR}, 
-      #{signInDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{signInDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR},#{signImgUrl,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
       )
@@ -72,6 +73,9 @@
             </if>
             <if test="remark != null">
                 remark,
+            </if>
+            <if test="signImgUrl != null">
+                signImgUrl,
             </if>
             <if test="status != null">
                 status,
@@ -120,6 +124,9 @@
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="signImgUrl != null">
+                #{signImgUrl,jdbcType=VARCHAR},
+            </if>
             <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
@@ -167,6 +174,9 @@
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="signImgUrl != null">
+                signImgUrl = #{signImgUrl,jdbcType=VARCHAR},
+            </if>
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
@@ -200,6 +210,7 @@
       signInState = #{signInState,jdbcType=CHAR},
       signInDate = #{signInDate,jdbcType=TIMESTAMP},
       remark = #{remark,jdbcType=VARCHAR},
+      signImgUrl = #{signImgUrl,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
@@ -213,7 +224,7 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.ActivityDetailVo"></resultMap>
 
     <sql id="Vo_Column_List">
-    t.id, t.activityId, t.userId, t.identity, t.points, t.signInState, t.signInDate, t.remark, t.status,
+    t.id, t.activityId, t.userId, t.identity, t.points, t.signInState, t.signInDate, t.remark,t.signImgUrl, t.status,
     t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
     u.name
   </sql>

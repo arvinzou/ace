@@ -4,22 +4,16 @@ import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
 
-public class ActivityDetail extends BaseModel {
+public class CoinConfig extends BaseModel{
     private String id;
 
-    private String activityId;
+    private String category;
 
-    private String userId;
+    private String name;
 
-    private String identity;
+    private Integer host;
 
-    private Integer points;
-
-    private String signInState;
-
-    private Date signInDate;
-
-    private String remark;
+    private Integer participant;
 
     private String status;
 
@@ -35,17 +29,6 @@ public class ActivityDetail extends BaseModel {
 
     private Date lastModifyDate;
 
-    private String signImgUrl;
-
-
-    public String getSignImgUrl() {
-        return signImgUrl;
-    }
-
-    public void setSignImgUrl(String signImgUrl) {
-        this.signImgUrl = signImgUrl;
-    }
-
     public String getId() {
         return id;
     }
@@ -54,60 +37,36 @@ public class ActivityDetail extends BaseModel {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getActivityId() {
-        return activityId;
+    public String getCategory() {
+        return category;
     }
 
-    public void setActivityId(String activityId) {
-        this.activityId = activityId == null ? null : activityId.trim();
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
     }
 
-    public String getUserId() {
-        return userId;
+    public String getName() {
+        return name;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getIdentity() {
-        return identity;
+    public Integer getHost() {
+        return host;
     }
 
-    public void setIdentity(String identity) {
-        this.identity = identity == null ? null : identity.trim();
+    public void setHost(Integer host) {
+        this.host = host;
     }
 
-    public Integer getPoints() {
-        return points;
+    public Integer getParticipant() {
+        return participant;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
-    }
-
-    public String getSignInState() {
-        return signInState;
-    }
-
-    public void setSignInState(String signInState) {
-        this.signInState = signInState == null ? null : signInState.trim();
-    }
-
-    public Date getSignInDate() {
-        return signInDate;
-    }
-
-    public void setSignInDate(Date signInDate) {
-        this.signInDate = signInDate;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setParticipant(Integer participant) {
+        this.participant = participant;
     }
 
     public String getStatus() {

@@ -4,6 +4,7 @@ window.onload = function (){
     initPage();
     // initEvents();
     $('#preview').on('click','.btn-audit',audit)
+    $('#info').on('click','.personnelInfo',optionPersonner)
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -36,6 +37,18 @@ function initPage() {
         }
     });
 }
+
+/*选择参加者*/
+function optionPersonner() {
+    var $that=$(this);
+    if($that.is('.active_flag')){
+        $that.removeClass('active_flag')
+        return;
+    }
+    $that.addClass('active_flag');
+}
+
+
 /*线下活动条件查询*/
 function t_query(){
     getPageList();

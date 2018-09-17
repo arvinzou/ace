@@ -186,7 +186,16 @@ public class ActivityServiceImpl implements ActivityService {
         if(!CommonUtils.isBlank(activityVo.getEndDate())){
             ActivityDetail activityDetail=new ActivityDetail();
             activityDetail.setActivityId(id);
-            activityVo.setActivityDetailVoList(activityDetailDao.findList(activityDetail,0,100,null));
+            List<ActivityDetailVo> list=activityDetailDao.findList(activityDetail,0,100,null);
+            activityVo.setTotal(list.size());
+            int i=0;
+            for(ActivityDetailVo item:list){
+                if("1".equals(item.getSignInState())){
+                    i++;
+                }
+            }
+            activityVo.setSignNum(i);
+            activityVo.setActivityDetailVoList(list);
         }
         rst.setValue(activityVo);
         return rst;

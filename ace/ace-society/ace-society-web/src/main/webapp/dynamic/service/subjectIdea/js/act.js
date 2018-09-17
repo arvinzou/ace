@@ -10,17 +10,8 @@ window.onload = function (){
 }
 function App() {
     console.log("=============================App Start==============================");
-    loadCustom();
 }
-/*加载资源*/
-function loadCustom() {
-    var urls = [];
-    urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
-urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 /*议题点子初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
