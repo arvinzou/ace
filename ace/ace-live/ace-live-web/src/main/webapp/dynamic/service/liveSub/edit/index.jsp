@@ -61,14 +61,16 @@
 																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
-                                            <label class="mt-radio mt-radio-outline">
-                                                <input type="radio" name="category" value="1" \${data.o.category==1?'checked':''}>图文
-                                                <span></span>
+																				<div class="radio-group-container">
+                                            <label>
+                                                <input type="radio" name="category" value="1" \${data.o.category==1?'checked':''}/>
+																								<span style="padding:10px">图文</span>
                                             </label>
-                                            <label class="mt-radio mt-radio-outline">
-                                                <input type="radio" name="category" value="2" \${data.o.category==2?'checked':''}>视频
-                                                <span></span>
+                                            <label>
+                                                <input type="radio" name="category" value="2" \${data.o.category==2?'checked':''}/>
+																								<span style="padding:10px">视频</span>
                                             </label>
+																						</div>
                                             <div class="error-category"></div>
                                         </div>
                                     </div>
@@ -119,9 +121,7 @@
 																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
-                                            <textarea type="text" name="content">
-											\${data.o.content}
-                                            </textarea>
+                                            <textarea name="content" rows="10" cols="100" class="form-control">\${data.o.content}</textarea>
                                             <div class="error-content"></div>
                                         </div>
                                     </div>

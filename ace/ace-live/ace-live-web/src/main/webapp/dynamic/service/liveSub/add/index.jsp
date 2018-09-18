@@ -46,14 +46,14 @@
                                             直播类型
 																						<span class="required" aria-required="true"> * </span>
                                         </label>
-                                        <div class="col-md-10">
-                                            <label class="mt-radio mt-radio-outline">
-                                                <input type="radio" name="category" value="1">图文
-                                                <span></span>
+                                        <div class="col-md-10 radio-group-container">
+                                            <label>
+                                                <input type="radio" name="category" value="1"><span style="padding:10px">图文</span>
+                                                
                                             </label>
-                                            <label class="mt-radio mt-radio-outline">
-                                                <input type="radio" name="category" value="2">视频
-                                                <span></span>
+                                            <label>
+                                                <input type="radio" name="category" value="2"><span style="padding:10px">视频</span>
+                                               
                                             </label>
                                             <div class="error-category"></div>
                                         </div>
@@ -100,13 +100,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">
-                                            
                                             活动介绍
 																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
-                                            <textarea type="text" name="content">
-                                            </textarea>
+                                            <textarea name="content" rows="10" cols="100" class="form-control"></textarea>
                                             <div class="error-content"></div>
                                         </div>
                                     </div>

@@ -164,7 +164,7 @@
                 <form class="form-horizontal" id="fm-status" role="form">
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">对象</label>
+                            <label class="col-md-2 view-label">对象</label>
                             <div class="col-md-10 status-title">
 
                             </div>

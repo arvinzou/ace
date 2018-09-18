@@ -33,7 +33,7 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    initEditor();
+    //initEditor();
     initUpload();
 }
 
@@ -59,8 +59,7 @@ function initEvents() {
     			maxlength: 500
     		},
     		content: {
-    			required: true,
-    			minlength: 15
+    			required: true
     		}
     	},
     	messages: {
@@ -76,8 +75,7 @@ function initEvents() {
     			maxlength: "摘要字符长度不能超过500"
     		},
     		content: {
-    			required: "请输入活动介绍",
-    			minlength: "请输入活动介绍"
+    			required: "请输入活动介绍"
     		}
     	}
     });
@@ -138,7 +136,7 @@ function initForm() {
                 data['o'] = result.value;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
-                editor.setValue(data['o'].content);
+                //editor.setValue(data['o'].content);
             } else {
                 alert(result.errorMessage);
             }
