@@ -1,9 +1,9 @@
 var cfg = {};
-cfg.view_load_data_url = contextPath + '/liveSub/selectLiveSubByPrimaryKey.do';
-cfg.grid_load_data_url = contextPath + '/liveSub/findLiveSubList.do';
-cfg.grid_add_data_url = contextPath + '/liveSub/insertLiveSub.do';
-cfg.grid_edit_data_url = contextPath + '/liveSub/updateLiveSub.do';
-cfg.grid_delete_data_url = contextPath + '/liveSub/deleteLiveSubByLiveSubId.do';
+cfg.view_load_data_url = contextPath + '/liveSub/selectLiveSubByPrimaryKey';
+cfg.grid_load_data_url = contextPath + '/liveSub/findLiveSubList';
+cfg.grid_add_data_url = contextPath + '/liveSub/insertLiveSub';
+cfg.grid_edit_data_url = contextPath + '/liveSub/updateLiveSub';
+cfg.grid_delete_data_url = contextPath + '/liveSub/deleteLiveSubByLiveSubId';
 cfg.grid_selector= "#grid-table";
 cfg.pager_selector= "#grid-pager";
 //cfg.caption= "参数";

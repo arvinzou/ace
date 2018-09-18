@@ -4,6 +4,7 @@ package com.huacainfo.ace.live.service.impl;
 import java.util.*;
 
 import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
@@ -58,18 +59,7 @@ public class LiveServiceImpl implements LiveService {
     @Override
     public PageResult<LiveVo> findLiveList(LiveQVo condition, int start, int limit, String orderBy) throws Exception {
 
-        List<LiveVo> list = this.liveDao.findList(condition,
-                start, start + limit, orderBy);
-        int reportCount;
-        LiveRptQVo rptQVo = new LiveRptQVo();
-        for (LiveVo vo : list) {
-            rptQVo.setRid(vo.getId());
-            rptQVo.setStatus("2");//只统计已发布的报道
-            reportCount = LiveRptDao.findCount(rptQVo);
-            vo.setReportCount(reportCount);
-        }
-
-
+        List<LiveVo> list = this.liveDao.findList(condition, start,  limit, orderBy);
         PageResult<LiveVo> rst = new PageResult<LiveVo>();
         rst.setRows(list);
         if (start <= 1) {
@@ -93,17 +83,13 @@ public class LiveServiceImpl implements LiveService {
     @Override
     public MessageResponse insertLive(Live o, UserProp userProp)
             throws Exception {
-        o.setId(UUID.randomUUID().toString());
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "直播类型不能为空！");
         }
-
         if (CommonUtils.isBlank(o.getStartTime())) {
             return new MessageResponse(1, "开始时间不能为空！");
         }
@@ -117,22 +103,10 @@ public class LiveServiceImpl implements LiveService {
             return new MessageResponse(1, "摘要不能为空！");
         }
         if (CommonUtils.isBlank(o.getContent())) {
-            return new MessageResponse(1, "活动介绍不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getNop())) {
-            return new MessageResponse(1, "参与人数不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPop())) {
-            return new MessageResponse(1, "点赞数不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getAddr())) {
-            return new MessageResponse(1, "地点不能为空！");
+            return new MessageResponse(1, "介绍不能为空！");
         }
         if (CommonUtils.isBlank(o.getRtmpUrl())) {
             return new MessageResponse(1, "直播流地址不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getMp4Url())) {
-            return new MessageResponse(1, "回放地址不能为空！");
         }
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
@@ -141,6 +115,8 @@ public class LiveServiceImpl implements LiveService {
         if (temp > 0) {
             return new MessageResponse(1, "直播名称重复！");
         }
+        o.setNop(Long.valueOf(0));
+        o.setPop(Long.valueOf(0));
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -149,7 +125,7 @@ public class LiveServiceImpl implements LiveService {
         this.liveDao.insert(o);
         this.dataBaseLogService.log("添加直播", "直播", "", o.getName(),
                 o.getName(), userProp);
-        return new MessageResponse(0, "添加直播完成！");
+        return new MessageResponse(0, "提交成功！");
     }
 
     /**
@@ -197,9 +173,6 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getRtmpUrl())) {
             return new MessageResponse(1, "直播流地址不能为空！");
         }
-        if (CommonUtils.isBlank(o.getMp4Url())) {
-            return new MessageResponse(1, "回放地址不能为空！");
-        }
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
         }
@@ -209,7 +182,7 @@ public class LiveServiceImpl implements LiveService {
         this.liveDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更直播", "直播", "", o.getName(),
                 o.getName(), userProp);
-        return new MessageResponse(0, "变更直播完成！");
+        return new MessageResponse(0, "提交成功！");
     }
 
     @Override
@@ -312,8 +285,6 @@ public class LiveServiceImpl implements LiveService {
         userProp.setCorpId(users.getDepartmentId());
         userProp.setAreaCode(users.getAreaCode());
         userProp.setOpenId(openid);
-        //
-        live.setAreaCode(users.getAreaCode());
         live.setDeptId(users.getDepartmentId());
 
         return insertLive(live, userProp);

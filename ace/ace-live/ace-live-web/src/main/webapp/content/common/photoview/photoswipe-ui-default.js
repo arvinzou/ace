@@ -242,7 +242,7 @@ var PhotoSwipeUI_Default =
 
 				shareButtonOut += '<a href="' + shareURL + '" target="_blank" '+
 									'class="pswp__share--' + shareButtonData.id + '"' +
-									(shareButtonData.download ? 'download' : '') + '>' + 
+									(shareButtonDatawnload ? 'download' : '') + '>' +
 									shareButtonData.label + '</a>';
 
 				if(_options.parseShareButtonOut) {
@@ -789,7 +789,7 @@ var PhotoSwipeUI_Default =
 	};
 
 	ui.getFullscreenAPI = function() {
-		var dE = document.documentElement,
+		var dE = documentcumentElement,
 			api,
 			tF = 'fullscreenchange';
 

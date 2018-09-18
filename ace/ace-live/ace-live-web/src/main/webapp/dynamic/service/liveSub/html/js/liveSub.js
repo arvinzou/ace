@@ -53,7 +53,7 @@ function initWeb() {
 
 /*下载直播数据*/
 function loadLiveList(name, liveStatus) {
-    var url = '/live/live/findLiveList.do';
+    var url = '/live/live/findLiveList';
     var data = {
         'name': name,
         'start': start,
@@ -91,7 +91,7 @@ function viewLiveList(data) {
 function changeLiveStatusDo() {
     console.log('切换直播');
     var id = $(this).parents('li').data('Liveid');
-    var url = '/live/live/selectLiveByPrimaryKey.do';
+    var url = '/live/live/selectLiveByPrimaryKey';
     var data = {
         'id': id
     }
@@ -118,7 +118,7 @@ function modifyStatus(dataLive) {
         }
         dataLive['endTime'] = new Date();
     }
-    var url = "/live/live/updateLive.do";
+    var url = "/live/live/updateLive";
     var data = {
         'jsons': JSON.stringify(dataLive)
     };
@@ -150,7 +150,7 @@ function modifyLiveDo(event) {
     if (!id) {
         return;
     }
-    var url = '/live/live/selectLiveByPrimaryKey.do';
+    var url = '/live/live/selectLiveByPrimaryKey';
     var data = {
         'id': id
     }

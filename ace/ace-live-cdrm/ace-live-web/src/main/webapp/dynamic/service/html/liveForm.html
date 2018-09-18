@@ -1,0 +1,105 @@
+<div class="mainContent">
+    <div class="container-fluid">
+        <div class="formContent formContenLeft">
+            <div class="formRow">
+                <div class="title">标题*<span class="font-right ">0/30</span></div>
+                <div class="formRow-content" data-field="topic">
+                    <input type="text" class="name form-control ">
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px">
+                    <div class="title">开始时间*</div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" id="startDate" class="startTime form-control ">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;">
+                    <div class="title">结束时间</div>
+                    <div class="formRow-content" data-field="topic">
+                        <input type="text" id="endDate" class="endTime form-control ">
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="title">摘要*<span class="font-right">0/300</span></div>
+                <div class="formRow-content" data-field="remark">
+                    <textarea rows="6" class="remark form-control "></textarea>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="title">活动介绍*</div>
+                <div class="formRow-content" data-field="remark">
+                    <textarea rows="6" class="content form-control "></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="formContent formContenRight">
+            <div class="formRow">
+                <div class="title">现场类型*</div>
+                <div class="formRow-content" data-field="type">
+                    <div>
+                        <label>
+                            <input name="category" type="radio" value="1" checked="">
+                            视频直播 </label>
+                        <label>
+                            <input name="category" type="radio" value="2">
+                            图文直播
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="title">地点*<span class="font-right addrNum">0/200</span></div>
+                <div class="formRow-content" data-field="topic">
+                    <input type="text" class="addr form-control ">
+                </div>
+            </div>
+            <div class="formRow" style="margin-bottom: 33px;">
+                <div class="title">直播流地址*<span class="font-right rtmpUrlNum">0/200</span></div>
+                <div class="formRow-content" data-field="topic">
+                    <input type="text" class="rtmpUrl form-control ">
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="title">回放地址*<span class="font-right mp4UrlNum">0/200</span></div>
+                <div class="formRow-content" data-field="topic">
+                    <input type="text" class="mp4Url form-control">
+                </div>
+            </div>
+            <div class="formRow">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px">
+                    <div class="formRow">
+                        <div class="title">参与人数*</div>
+                        <div class="formRow-content" data-field="topic">
+                            <input type="text" class="nop form-control ">
+                        </div>
+                    </div>
+                    <div class="formRow">
+                        <div class="title">点赞数*</div>
+                        <div class="formRow-content" data-field="topic">
+                            <input type="text" class="pop form-control ">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px">
+                    <div class="title">封面*<em>（750px * 422px）</em></div>
+                    <div class="formRow-content">
+                        <div class="pictureContainer" id="upbtn">
+                            <div class="viewPicture">
+                                <img src="">
+                            </div>
+                            <div class="uploadText">
+                                <p class="imgiocn"><i class="iconfont">&#xe648;</i></p>
+                                <p class="uploadPloadprogress">点击上传封面</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid btn-container">
+        <button type="button" class="release btn btn-success">发布现场</button><span class="prompt"></span>
+    </div>
+</div>

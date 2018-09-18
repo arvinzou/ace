@@ -48,7 +48,7 @@ public class OAuth2Controller extends LiveBaseController {
 
     @Autowired
     private OAuth2Service oAuth2Service;
-    @RequestMapping(value = "/redirect.do")
+    @RequestMapping(value = "/redirect")
     public ModelAndView redirect(String code, String state) throws Exception {
         String viewName = "index";
         this.logger.info("code->{} state -> {}", code, state);
@@ -66,7 +66,7 @@ public class OAuth2Controller extends LiveBaseController {
         return mav;
     }
 
-    @RequestMapping(value = "/cfg.do")
+    @RequestMapping(value = "/cfg")
     public ModelAndView userinfo() throws Exception {
         Object o = this.getSession(CommonKeys.SESSION_USERINFO_KEY);
         Map<String, Object> cfg = new HashMap<>();
@@ -96,7 +96,7 @@ public class OAuth2Controller extends LiveBaseController {
         return mav;
     }
 
-   /* @RequestMapping(value = "/bind.do")
+   /* @RequestMapping(value = "/bind")
     @ResponseBody
     public SingleResult<Map<String,Object>> bind(String mobile)throws Exception {
 

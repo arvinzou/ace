@@ -28,7 +28,7 @@ function actionCreateReportDo() {
     $('#htmlLoad').load('./../html/floatTable.html', function () {
         $('#floatTable').load('./../html/createRpt.html', function () {
             $('#JSLoad').load('./../html/createRptJS.html', function () {
-                var url = '/live/live/selectLiveByPrimaryKey.do';
+                var url = '/live/live/selectLiveByPrimaryKey';
                 var data = {
                     'id': id
                 };
@@ -52,7 +52,7 @@ function initweb() {
 
 /*下载直播数据*/
 function loadLiveList(name) {
-    var url = '/live/live/findLiveList.do';
+    var url = '/live/live/findLiveList';
     var data = {
         'name': name,
         'start': start,

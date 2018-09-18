@@ -3938,7 +3938,7 @@ else if (typeof define === 'function' && define.amd) {
         if(this.activeIndex === 0 && this.wrapperDiff > 0) this.wrapperDiff = Math.pow(this.wrapperDiff, .8);
         if(this.activeIndex === this.config.items.length - 1 && this.wrapperDiff < 0) this.wrapperDiff = - Math.pow(-this.wrapperDiff, .8);
         this.wrapperTransform = this.wrapperLastTransform + this.wrapperDiff;
-        this.doWrapperTransform();
+        thisWrapperTransform();
       } else {
         var img = this.gestureImage;
         this.imageDiff = {
@@ -3950,7 +3950,7 @@ else if (typeof define === 'function' && define.amd) {
           x: this.imageDiff.x + this.imageLastTransform.x,
           y: this.imageDiff.y + this.imageLastTransform.y
         };
-        this.doImageTransform();
+        thisImageTransform();
 
         this.breakpointPosition = p;
 
@@ -4003,7 +4003,7 @@ else if (typeof define === 'function' && define.amd) {
     onDoubleClick: function () {
       this.gestureImage = this.container.find('.swiper-slide').eq(this.activeIndex).find('img');
       this.currentScale = this.currentScale > 1 ? 1 : 2;
-      this.doImageTransform(200); 
+      thisImageTransform(200);
       this.adjust();
     },
 
@@ -4020,16 +4020,16 @@ else if (typeof define === 'function' && define.amd) {
         s = Math.pow(s, .5);
       }
       this.currentScale = s;
-      this.doImageTransform();
+      thisImageTransform();
     },
 
     onGestureEnd: function (e) {
       if (this.currentScale > this.config.maxScale) {
         this.currentScale = this.config.maxScale;
-        this.doImageTransform(200);
+        thisImageTransform(200);
       } else if (this.currentScale < 1) {
         this.currentScale = 1;
-        this.doImageTransform(200);
+        thisImageTransform(200);
       }
       this.lastScale = this.currentScale;
       this.scaling = false;
@@ -4062,7 +4062,7 @@ else if (typeof define === 'function' && define.amd) {
       if(!img) return false;
       if(this.currentScale === 1) {
         this.imageTransform = this.imageLastDiff =  {x:0,y:0};
-        this.doImageTransform(200);
+        thisImageTransform(200);
         return;
       }
 
@@ -4076,7 +4076,7 @@ else if (typeof define === 'function' && define.amd) {
         else if(rect.bottom < this.containerHeight) this.imageTransform.y = this.imageTransform.y + this.containerHeight - rect.bottom;
       }
 
-      this.doImageTransform(200);
+      thisImageTransform(200);
       this._needAdjust = false; // must at last line, because doImageTransform will set this._needAdjust true
     },
 
@@ -4087,7 +4087,7 @@ else if (typeof define === 'function' && define.amd) {
       this.activeIndex = index;
       this.wrapperTransform = - (index * this.containerWidth);
       this.wrapperLastTransform = this.wrapperTransform;
-      this.doWrapperTransform(duration, $.proxy(function() {
+      thisWrapperTransform(duration, $.proxy(function() {
         if(this.lastActiveIndex === this.activeIndex) return false; // active index not change
         this.container.find('.caption-item.active').removeClass('active');
         this.container.find('.swiper-slide-active').removeClass('swiper-slide-active');

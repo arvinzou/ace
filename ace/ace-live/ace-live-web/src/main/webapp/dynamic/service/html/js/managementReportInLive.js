@@ -6,8 +6,8 @@ $(function () {
     $('.rptManageBtnList').on('click', '.search', searchByNameDo);
     $('.rptManageBtnList').on('click', '.startSort', sortActionDo);
     $('.rptManageBtnList').on('click', '.select-all-Btn', selectAllDo);
-    $('.rptManageBtnList').on('click', '.download-files', downloadFilesDo);
-    $('.liveInRptList').on('click', '.download-file', downloadFileDo);
+    $('.rptManageBtnList').on('click', 'wnload-files', downloadFilesDo);
+    $('.liveInRptList').on('click', 'wnload-file', downloadFileDo);
 });
 
 function downloadFileDo() {
@@ -15,7 +15,7 @@ function downloadFileDo() {
     if (!id) {
         return;
     }
-    var url = '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+    var url = '/live/liveRpt/selectLiveRptByPrimaryKey';
     var data = {
         'id': id
     };
@@ -32,7 +32,7 @@ function downloadFilesDo() {
             if (!id) {
                 return;
             }
-            var url = '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+            var url = '/live/liveRpt/selectLiveRptByPrimaryKey';
             var data = {
                 'id': id
             };
@@ -48,7 +48,7 @@ function actiondownload(data) {
     if ('2' == data.mediaType) {
         console.log(3);
         if (data.mediaContent) {
-            var url = '/live/liveImg/findLiveImgList.do';
+            var url = '/live/liveImg/findLiveImgList';
             var datas = {
                 'rptId': data.id
             };
@@ -153,7 +153,7 @@ function searchByNameDo() {
 /*下载直播数据*/
 function loadReportList(content, mediaType) {
     console.log('loadReportList');
-    var url = '/live/liveRpt/findLiveRptList.do';
+    var url = '/live/liveRpt/findLiveRptList';
     var data = {
         'rid': $('#htmlLoad').data('rid'),
         'content': content,
@@ -216,7 +216,7 @@ function updateSequence(arr) {
 
     $.ajax({
         type: "post",
-        url: "/live/liveRpt/updateSequence.do",
+        url: "/live/liveRpt/updateSequence",
         data: {
             data: JSON.stringify(data),
             'rid': $('#htmlLoad').data('rid'),

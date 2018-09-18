@@ -239,21 +239,21 @@ function getInfo() {
                     if (e) {
                         var a = i.data.logo;
                         if (0 == a.indexOf("http:") && 0 == a.indexOf("https:") || (a = "//xinhua-zbcb.oss-cn-hangzhou.aliyuncs.com/" + a + "?x-oss-process=image/resize,m_pad,w_88,h_88,limit_0"), $("#j-orglogo, .app-download .icon").html('<img src="' + a + '">'), 0 == showlink) $(".app-download-place, .app-download").remove();
-                        else if (i.data.downloadTitle) {
-                            $(".app-download h4").append("<span>" + i.data.downloadTitle + "</span>"),
-                            i.data.downloadDesc && $(".app-download h4").append('<p class="span">' + i.data.downloadDesc + "</p>"),
+                        else if (i.datawnloadTitle) {
+                            $(".app-download h4").append("<span>" + i.datawnloadTitle + "</span>"),
+                            i.datawnloadDesc && $(".app-download h4").append('<p class="span">' + i.datawnloadDesc + "</p>"),
                             $(".app-download .close").on(tap,
                             function() {
                                 $(".app-download-place, .app-download").remove()
                             });
                             var n = i.data.iosDownload;
-                            n || (n = i.data.downAddress);
+                            n || (n = i.datawnAddress);
                             var o = i.data.androidDownload;
-                            n || (o = i.data.downAddress),
-                            userAgent.indexOf("iphone") > -1 || userAgent.indexOf("ipad") > -1 || userAgent.indexOf("mac") > -1 ? n && $(".app-download .download").on(tap,
+                            n || (o = i.datawnAddress),
+                            userAgent.indexOf("iphone") > -1 || userAgent.indexOf("ipad") > -1 || userAgent.indexOf("mac") > -1 ? n && $(".app-download wnload").on(tap,
                             function() {
                                 location.href = n
-                            }).show() : o && $(".app-download .download").on(tap,
+                            }).show() : o && $(".app-download wnload").on(tap,
                             function() {
                                 location.href = o
                             }).show()

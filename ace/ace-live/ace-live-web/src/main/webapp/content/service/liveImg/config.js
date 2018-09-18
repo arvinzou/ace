@@ -1,9 +1,9 @@
 var cfg = {};
-cfg.view_load_data_url = contextPath + '/liveImg/selectLiveImgByPrimaryKey.do';
-cfg.grid_load_data_url = contextPath + '/liveImg/findLiveImgList.do';
-cfg.grid_add_data_url = contextPath + '/liveImg/insertLiveImg.do';
-cfg.grid_edit_data_url = contextPath + '/liveImg/updateLiveImg.do';
-cfg.grid_delete_data_url = contextPath + '/liveImg/deleteLiveImgByLiveImgId.do';
+cfg.view_load_data_url = contextPath + '/liveImg/selectLiveImgByPrimaryKey';
+cfg.grid_load_data_url = contextPath + '/liveImg/findLiveImgList';
+cfg.grid_add_data_url = contextPath + '/liveImg/insertLiveImg';
+cfg.grid_edit_data_url = contextPath + '/liveImg/updateLiveImg';
+cfg.grid_delete_data_url = contextPath + '/liveImg/deleteLiveImgByLiveImgId';
 cfg.grid_selector= "#grid-table";
 cfg.pager_selector= "#grid-pager";
 //cfg.caption= "参数";

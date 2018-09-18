@@ -38,7 +38,7 @@ function createUpImg() {
         container: document.getElementById("j-row-img"),
         flash_swf_url: "/live/content/www/lib/plupload-2.1.2/Moxie.swf",
         silverlight_xap_url: "/live/content/www/lib/plupload-2.1.2/Moxie.xap",
-        url: "/live/www/live/upload.do?companyId=" + lvsCmd.urlParams.companyId,
+        url: "/live/www/live/upload?companyId=" + lvsCmd.urlParams.companyId,
         filters: t,
         multipart_params: {marktext: lvsCmd.urlParams.title, companyId: lvsCmd.urlParams.companyId},
         resize: {
@@ -133,7 +133,7 @@ function createUpVideo() {
         container: document.getElementById("j-row-video"),
         flash_swf_url: "/live/content/www/lib/plupload-2.1.2/Moxie.swf",
         silverlight_xap_url: "/live/content/www/lib/plupload-2.1.2/Moxie.xap",
-        url: "/live/www/live/upload.do",
+        url: "/live/www/live/upload",
         filters: t,
         init: {
             PostInit: function () {
@@ -313,7 +313,7 @@ newTplform.render($("#j-reportform .row-content"),
         data.imgs = imgs;
         data.openid = wxuser.openid;//用于校验绑定关系
 
-        var l = apiServer + "/www/live/insertLiveRpt.do";
+        var l = apiServer + "/www/live/insertLiveRpt";
         lvsCmd.ajax(l, {jsons: JSON.stringify(data)},
             function (e, t) {
                 $(".j-content").val("");
@@ -372,7 +372,7 @@ function videoPlayer(e, n, t) {
     new prismplayer(i)
 }
 
-lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do?", {companyId: lvsCmd.urlParams.companyId},
+lvsCmd.ajax(apiServer + "/www/live/getWxJsSign?", {companyId: lvsCmd.urlParams.companyId},
     function (e, i) {
         wx.config({
             debug: false,
@@ -465,7 +465,7 @@ function uploadVoice(localId) {
         localId: localId, // 需要上传的音频的本地ID，由stopRecord接口获得
         isShowProgressTips: 1, // 默认为1，显示进度提示
         success: function (res) {
-            var l = apiServer + "/www/live/uploadAmr.do";
+            var l = apiServer + "/www/live/uploadAmr";
             lvsCmd.ajax(l, {deptId: lvsCmd.urlParams.companyId, serverId: res.serverId},
                 function (e, t) {
                     $("#aideoplay").removeClass("fn-hide");

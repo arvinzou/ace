@@ -88,7 +88,7 @@ function delectVideoDo() {
 
 /*开始删除视频*/
 function actionDelectVideo(id) {
-    var url = '/live/liveRpt/deleteLiveRptByLiveRptId.do';
+    var url = '/live/liveRpt/deleteLiveRptByLiveRptId';
     var data = {
         'id': id
     }
@@ -101,7 +101,7 @@ function actionDelectVideo(id) {
 /*下载直播数据*/
 function loadReportVideoList(name) {
     console.log('loadReportList');
-    var url = '/live/liveRpt/findLiveRptList.do';
+    var url = '/live/liveRpt/findLiveRptList';
     console.log(url);
     var data = {
         'name': name,

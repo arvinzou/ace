@@ -54,7 +54,7 @@ function computedNumDo() {
 var uploader = new plupload.Uploader({
     runtimes: 'html5,flash,silverlight,html4',
     browse_button: 'upbtn',
-    url: '/portal/files/uploadFile.do',
+    url: '/portal/files/uploadFile',
     file_data_name: 'file',
     multi_selection: false,
     resize: {

@@ -3,7 +3,6 @@
 <mapper namespace="com.huacainfo.ace.live.dao.LiveDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.live.model.Live">
         <id column="id" jdbcType="VARCHAR" property="id"/>
-        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="category" jdbcType="VARCHAR" property="category"/>
         <result column="deptId" jdbcType="VARCHAR" property="deptId"/>
@@ -34,7 +33,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, areaCode, name, category, deptId,endTime,startTime, remark, nop, pop, addr, rtmpUrl,
+        id,  name, category, deptId,endTime,startTime, remark, nop, pop, addr, rtmpUrl,
         mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
@@ -54,7 +53,7 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.live.model.Live">
-        insert into live (id, areaCode, name,
+        insert into live (id,  name,
         category, deptId, endTime,startTime,
         remark, nop, pop, addr,
         rtmpUrl, mp4Url, imageSrc,
@@ -62,7 +61,7 @@
         createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
         content)
-        values (#{id,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR},  #{name,jdbcType=VARCHAR},
         #{category,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP},
         #{startTime,jdbcType=TIMESTAMP},
         #{remark,jdbcType=VARCHAR}, #{nop,jdbcType=BIGINT}, #{pop,jdbcType=BIGINT}, #{addr,jdbcType=VARCHAR},
@@ -76,7 +75,7 @@
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.live.model.Live">
         update live
-        set areaCode = #{areaCode,jdbcType=VARCHAR},
+        set
         name = #{name,jdbcType=VARCHAR},
         category = #{category,jdbcType=VARCHAR},
         endTime = #{endTime,jdbcType=TIMESTAMP},
@@ -101,9 +100,7 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.Live">
         update live
         <set>
-            <if test="areaCode != null">
-                areaCode = #{areaCode,jdbcType=VARCHAR},
-            </if>
+
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
@@ -205,7 +202,6 @@
     </select>
     <select id="getLiveList" resultType="map">
         <![CDATA[
-
         select
         2 commentApproveType,
         concat(#{fastdfs_server},imageSrc) cover,

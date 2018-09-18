@@ -21,7 +21,7 @@ public class AnalysisController extends LiveBaseController {
 	@Autowired
 	private AnalysisService analysisService;
 
-	@RequestMapping(value = "/query.do")
+	@RequestMapping(value = "/query")
 	@ResponseBody
 	public ListResult<Map<String,Object>> query(
 			 String reportId)

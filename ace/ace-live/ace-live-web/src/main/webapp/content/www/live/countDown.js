@@ -26,10 +26,10 @@
                         hour = Math.floor(t/1000/60/60%24);
                         min = Math.floor(t/1000/60%60);
                         sec = Math.floor(t/1000%60);
-                        $(opts.daySelector).html($this.doubleNum(day)+"天");
-                        $(opts.hourSelector).html($this.doubleNum(hour)+"小时");
-                        $(opts.minSelector).html($this.doubleNum(min)+"分");
-                        $(opts.secSelector).html($this.doubleNum(sec)+"秒");
+                        $(opts.daySelector).html($thisubleNum(day)+"天");
+                        $(opts.hourSelector).html($thisubleNum(hour)+"小时");
+                        $(opts.minSelector).html($thisubleNum(min)+"分");
+                        $(opts.secSelector).html($thisubleNum(sec)+"秒");
                       }else{
                         $this.afterAction(opts);
                         clearInterval(intervalDate);
