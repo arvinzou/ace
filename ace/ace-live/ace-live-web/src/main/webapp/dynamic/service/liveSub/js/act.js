@@ -95,9 +95,8 @@ function initEvents() {
         var id = relatedTarget.data('id');
         var title = relatedTarget.data('title');
         var modal = $(this);
-        $('.audit-title').html(title);
         console.log(relatedTarget);
-        modal.find('.modal-body input[name=id]').val(id);
+		initForm(id);
     })
     $('#modal-audit .audit').on('click', function () {
         $('#modal-audit form').submit();
@@ -126,6 +125,7 @@ function initEvents() {
         $('.status-title').html(title);
         console.log(relatedTarget);
         modal.find('.modal-body input[name=id]').val(id);
+		
     })
     $('#modal-status .status').on('click', function () {
         $('#modal-status form').submit();
@@ -192,6 +192,31 @@ function updateStatus(params) {
         },
         error: function () {
             stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+function initForm(id) {
+	startLoad();
+    $.ajax({
+        url: contextPath + "/live/selectLiveByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+			 stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-audit', data, 'tpl-fm');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+			stopLoad();
             alert("对不起出错了！");
         }
     });

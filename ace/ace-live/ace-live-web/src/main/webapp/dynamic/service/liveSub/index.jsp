@@ -199,7 +199,7 @@
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg"  role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -208,34 +208,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                      <div class="form-body">
-                          <div class="form-group">
-                              <label class="col-md-2 control-label">对象</label>
-                              <div class="col-md-10 audit-title">
-
-                              </div>
-                          </div>
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id">
-                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                      
                 </form>
             </div>
             <div class="modal-footer">
@@ -245,6 +218,68 @@
         </div>
     </div>
 </div>
+<script id="tpl-fm" type="text/template">
+	<div class="form-body">
+	                          <div class="form-group">
+	                              <label class="col-md-2 control-label">名称</label>
+	                              <div class="col-md-10">
+										\${data.o.name}
+	                              </div>
+	                          </div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">类型</label>
+								<div class="col-md-10">
+									\${data.o.category==1?'图文':'视频'}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">开始时间</label>
+								<div class="col-md-10">
+									\${data.o.startTime}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 control-label">摘要</label>
+								<div class="col-md-10">
+									\${data.o.remark}
+								</div>
+							</div>
+							  
+							  <div class="form-group">
+							  	<label class="col-md-2 control-label">介绍</label>
+							  	<div class="col-md-10">
+							  		\$\${data.o.content}
+							  	</div>
+							  </div>
+							  <div class="form-group">
+							  <label class="col-md-2 control-label">封面</label>
+							  <div class="col-md-10">
+							  	<img  src="\${data.o.imageSrc}" style="max-width:480px;" />
+							  </div>
+							  </div>
+	                        <div class="form-group " id="operation">
+	                            <label class="col-md-2 control-label">结果</label>
+	                            <div class="col-md-10">
+	                                <div class="radio-group-container">
+	                                    <label>
+	                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
+	                                    </label>
+	                                    <label>
+	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
+	                                    </label>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="form-group">
+	                            <label class="col-md-2 control-label">说明</label>
+	                            <div class="col-md-10">
+	                                <input type="hidden" name="id" value="\${data.o.id}">
+	                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
+	                            </div>
+	                        </div>
+	                    </div>
+	
+</script>
 <div id="j-pswp" class="pswp"role="dialog" aria-hidden="true">
     <div class="pswp__bg"></div>
     <div class="pswp__scroll-wrap">
@@ -278,6 +313,7 @@
             </div>
         </div>
     </div>
+	
 <style>
     .cover{
         width: 140px;
