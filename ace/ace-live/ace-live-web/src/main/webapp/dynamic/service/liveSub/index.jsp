@@ -35,20 +35,21 @@
 
                                                         <form onsubmit="return t_query()">
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('');">全部</button>
-                                                                <button type="button" class="btn btn-default"  onclick="changeConsultState('1');">预播放</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeConsultState('2');">直播中</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeConsultState('3');">历史</button>
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('status','');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('status','1');">预播放</button>
+                                                                <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播中</button>
+                                                                <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
                                                             </div>
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                <button type="button" class="btn btn-default"  onclick="changeType('');">全部</button>
-                                                                <button type="button" class="btn btn-default"  onclick="changeType('0');">待审</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeType('1');">通过</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeType('2');">驳回</button>
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('auditStatus','');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('auditStatus','1');">待审</button>
+                                                                <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过</button>
+                                                                <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回</button>
                                                             </div>
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">图文</button>
-                                                                <button type="button" class="btn btn-default" onclick="changeCourseType('2');">视频</button>
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('category','');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('category','1');">图文</button>
+                                                                <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
                                                             </div>
                                                             <div class="input-group">
                                                                 <input type="text"
@@ -75,7 +76,7 @@
                                                             <th width="35%">名称 </th>
 
                                                             <th width="15%">开始&结束时间</th>
-                                                            <th width="10%">参与人数</th>
+                                                            <th width="10%">参与人数/点击量</th>
                                                             <th width="15%">审核状态</th>
                                                             <th width="25%">操作</th>
                                                         </tr>
@@ -113,29 +114,23 @@
             \${item.endTime}
 
         </td>
-        <td  >\${item.nop}</td>
+        <td  >\${item.nop}/\${item.pop}</td>
         <td >
-            {@if item.auditRst==0}
+            {@if item.auditStatus==1}
             <span class="label label-lg label-info">待审核</span>
-            {@else if item.auditRst==1}
-            <span class="label label-lg label-success">审核通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
+            {@else if item.auditStatus==2}
+            <span class="label label-lg label-success">通过</span>
+            <div style="padding-top:10px">\${item.statement}</div>
             {@else}
-            <span class="label label-lg label-danger">审核不通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
+            <span class="label label-lg label-danger">驳回</span>
+            <div style="padding-top:10px">\${item.statement}</div>
             {@/if}
         </td>
         <td >
-            <a class="operation" href="javascript:void(0);" data-target="#editCourse" data-toggle="modal" onclick="edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:void(0);" onclick="makeAudio('\${item.id}');">制作</a>
-            {@if item.auditRst==1}
-                {@if item.lineState !=1}
-                <a class="operation" href="javascript:void(0);"  onclick="online('\${item.id}');">上架</a>
-                {@else}
-                <a class="operation" href="javascript:void(0);"  onclick="outline('\${item.id}');">下架</a>
-                {@/if}
+            <a  href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+            {@if item.auditStatus==1}
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
             {@/if}
-
         </td>
     </tr>
     {@/each}
@@ -153,35 +148,42 @@
 
 
 <!--审核弹框-->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="audit"
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="modal-audit"
      aria-labelledby="gridSystemModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="gridSystemModalLabel3">直播审核</h4>
+                <h4 class="modal-title" id="gridSystemModalLabel3">审核</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
                       <div class="form-body">
+                          <div class="form-group">
+                              <label class="col-md-2 control-label">对象</label>
+                              <div class="col-md-10 audit-title">
+
+                              </div>
+                          </div>
                         <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
+                            <label class="col-md-2 control-label">结果</label>
                             <div class="col-md-10">
                                 <div class="radio-group-container">
                                     <label>
-                                        <input type="radio" name="auditState" value="1"><span style="padding:10px">通过</span>
+                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="auditState" value="2"><span style="padding:10px">退回</span>
+                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
+                            <label class="col-md-2 control-label">说明</label>
                             <div class="col-md-10">
-                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+                                <input type="hidden" name="id">
+                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
                             </div>
                         </div>
                     </div>
@@ -189,7 +191,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" onclick="audit();">确定</button>
+                <button type="button" class="btn green audit">确定</button>
             </div>
         </div>
     </div>
@@ -210,6 +212,7 @@
     }
 </style>
 <jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>

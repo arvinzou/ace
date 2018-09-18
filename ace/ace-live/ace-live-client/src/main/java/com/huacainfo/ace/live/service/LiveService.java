@@ -58,7 +58,7 @@ public interface LiveService {
     public abstract MessageResponse updateLive(Live obj, UserProp userProp) throws Exception;
 
 
-    public abstract MessageResponse updateLiveSelective(Live obj, UserProp userProp) throws Exception;
+
 
     /**
      * @throws
@@ -89,4 +89,34 @@ public interface LiveService {
     MessageResponse insertLive(String openid, Live live) throws Exception;
 
     MessageResponse checkIsBandUsers(String openid);
+
+    /**
+     * @throws
+     * @Title:updateLiveAuditByLiveId
+     * @Description: TODO(审核)
+     * @param: @param id
+     * @param rst
+     * @param text
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    public abstract MessageResponse updateLiveAuditByLiveId(String id,String rst,String text, UserProp userProp) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(设置直播状态1预告2直播中3结束)
+     * @param: @param id
+     * @param status
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    public abstract MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception;
 }
