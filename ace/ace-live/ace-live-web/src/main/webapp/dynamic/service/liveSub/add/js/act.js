@@ -44,14 +44,16 @@ function initEvents() {
         onfocusout: function (element) {
             $(element).valid();
         },
+		errorPlacement: function(error, element) {
+             $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
+        },
         rules: {
             name: {
                 required: true,
                 maxlength: 100
             },
             category: {
-                required: true,
-                maxlength: 20
+                required: true
             },
             remark: {
                 required: true,
@@ -59,7 +61,7 @@ function initEvents() {
             },
             content: {
                 required: true,
-                maxlength: 2147483647
+                minlength: 15
             }
         },
         messages: {
@@ -68,8 +70,7 @@ function initEvents() {
                 maxlength: "名称字符长度不能超过100"
             },
             category: {
-                required: "请输入直播类型",
-                maxlength: "直播类型字符长度不能超过20"
+                required: "请选择直播类型"
             },
             remark: {
                 required: "请输入摘要",
@@ -77,7 +78,7 @@ function initEvents() {
             },
             content: {
                 required: "请输入活动介绍",
-                maxlength: "活动介绍字符长度不能超过2147483647"
+                minlength: "请输入活动介绍"
             }
         }
     });
