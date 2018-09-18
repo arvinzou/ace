@@ -54,7 +54,7 @@ function delectRptDo() {
 
 /*根据id查找图片*/
 function findCover(id) {
-    var url = '/live/liveImg/findLiveImgList.do';
+    var url = '/live/liveImg/findLiveImgList';
     var data = {
         'rptId': id
     };
@@ -75,7 +75,7 @@ function viewImage(data) {
 /*根据id查找直播*/
 function viewLiveName(rid) {
     $('#htmlLoad').data('rid',rid);
-    var url ='/live/live/selectLiveByPrimaryKey.do';
+    var url ='/live/live/selectLiveByPrimaryKey';
     var data = {
         'id': rid
     };
@@ -135,7 +135,7 @@ function actionModifyDo() {
     $('#htmlLoad').load('./../html/floatTable.html', function () {
         $('#floatTable').load('./../html/modifyRpt.html', function () {
             $('#JSLoad').load('./../html/modifyRptJS.html', function () {
-                var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+                var url =  '/live/liveRpt/selectLiveRptByPrimaryKey';
                 var data = {
                     id: id
                 };
@@ -166,7 +166,7 @@ function startPublicationDo() {
 
 /*修改状态*/
 function modifyStatus(id,rid,status){
-    var url = '/live/liveRpt/updateLiveRptStatus.do';
+    var url = '/live/liveRpt/updateLiveRptStatus';
     var data = {
         'id': id,
         'rid': rid,
@@ -233,7 +233,7 @@ function viewReportList(data) {
 /*下载直播数据*/
 function loadReportList(content, status,orderByStr) {
     console.log('loadReportList');
-    var url = '/live/liveRpt/findLiveRptList.do';
+    var url = '/live/liveRpt/findLiveRptList';
     var data = {
         'content': content,
         'start': start,
@@ -264,7 +264,7 @@ function startPreviewDo() {
     if (!id) {
         return;
     }
-    var url =  '/live/liveRpt/selectLiveRptByPrimaryKey.do';
+    var url =  '/live/liveRpt/selectLiveRptByPrimaryKey';
     var data = {
         'id': id
     };
@@ -283,7 +283,7 @@ function startPreviewDo() {
 function viewPreviewReport(data) {
     if('2'==data.mediaType){
         if(data.mediaContent){
-            var url = '/live/liveImg/findLiveImgList.do';
+            var url = '/live/liveImg/findLiveImgList';
             var datas = {
                 'rptId': data.id
             };

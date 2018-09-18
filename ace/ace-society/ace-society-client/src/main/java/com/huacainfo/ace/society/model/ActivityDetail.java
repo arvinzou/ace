@@ -35,6 +35,17 @@ public class ActivityDetail extends BaseModel {
 
     private Date lastModifyDate;
 
+    private String signImgUrl;
+
+
+    public String getSignImgUrl() {
+        return signImgUrl;
+    }
+
+    public void setSignImgUrl(String signImgUrl) {
+        this.signImgUrl = signImgUrl;
+    }
+
     public String getId() {
         return id;
     }

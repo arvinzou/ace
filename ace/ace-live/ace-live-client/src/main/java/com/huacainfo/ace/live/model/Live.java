@@ -7,7 +7,7 @@ public class Live implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
     private String id;
 
-    private String areaCode;
+
 
     private String name;
 
@@ -52,6 +52,8 @@ public class Live implements java.io.Serializable {
 
     private String content;
 
+    private String auditStatus;
+
     public String getId() {
         return id;
     }
@@ -60,13 +62,7 @@ public class Live implements java.io.Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getAreaCode() {
-        return areaCode;
-    }
 
-    public void setAreaCode(String areaCode) {
-        this.areaCode = areaCode == null ? null : areaCode.trim();
-    }
 
     public String getName() {
         return name;
@@ -242,5 +238,13 @@ public class Live implements java.io.Serializable {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus;
     }
 }

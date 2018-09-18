@@ -40,7 +40,7 @@ function releaseDo() {
         'pop':pop,
         'status':status
     }
-    var url="/live/live/updateLiveSelective.do";
+    var url="/live/live/updateLiveSelective";
     var data={
         'jsons':JSON.stringify(keyVal)
     };

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/util
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd
+	http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd"
+       default-autowire="byName">
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+                <value>classpath:special.properties</value>
+                <value>classpath:dubbo.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="config"
+          class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+        <property name="fileEncoding" value="UTF-8"></property>
+    </bean>
+    <task:executor id="executor" pool-size="5" />
+    <task:scheduler id="scheduler" pool-size="10" />
+    <task:annotation-driven executor="executor" scheduler="scheduler" />
+    <import resource="classpath:spring/spring-ace-common-fastdfs.xml"/>
+    <import resource="classpath:spring/spring-ace-common-kafka.xml"/>
+    <import resource="classpath:spring/spring-ace-common-redis.xml"/>
+    <import resource="classpath:spring/spring-ace-common-monitor.xml"/>
+    <import resource="classpath:spring/spring-ace-common-dao.xml"/>
+    <import resource="classpath:spring/spring-ace-live-service.xml"/>
+    <import resource="classpath:spring/spring-ace-live-backend.xml"/>
+    <import resource="classpath:dubbo/dubbo-ace-live-provider.xml"/>
+    <import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml"/>
+
+</beans>

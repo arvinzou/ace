@@ -22,10 +22,10 @@
 		// This accentuates the need for the creation of a real `window`.
 		// e.g. var jQuery = require("jquery")(window);
 		// See ticket #14549 for more info.
-		module.exports = global.document ?
+		module.exports = globalcument ?
 			factory( global, true ) :
 			function( w ) {
-				if ( !w.document ) {
+				if ( !wcument ) {
 					throw new Error( "jQuery requires a window with a document" );
 				}
 				return factory( w );
@@ -65,7 +65,7 @@ var support = {};
 
 var
 	// Use the correct document accordingly with window argument (sandbox)
-	document = window.document,
+	document = windowcument,
 
 	version = "2.1.4",
 
@@ -587,7 +587,7 @@ var i,
 
 	// Instance-specific data
 	expando = "sizzle" + 1 * new Date(),
-	preferredDoc = window.document,
+	preferredDoc = windowcument,
 	dirruns = 0,
 	done = 0,
 	classCache = createCache(),
@@ -1012,7 +1012,7 @@ support = Sizzle.support = {};
 isXML = Sizzle.isXML = function( elem ) {
 	// documentElement is verified for cases where it doesn't yet exist
 	// (such as loading iframes in IE - #4833)
-	var documentElement = elem && (elem.ownerDocument || elem).documentElement;
+	var documentElement = elem && (elem.ownerDocument || elem)cumentElement;
 	return documentElement ? documentElement.nodeName !== "HTML" : false;
 };
 
@@ -1026,13 +1026,13 @@ setDocument = Sizzle.setDocument = function( node ) {
 		doc = node ? node.ownerDocument || node : preferredDoc;
 
 	// If no document and documentElement is available, return
-	if ( doc === document || doc.nodeType !== 9 || !doc.documentElement ) {
+	if ( doc === document || doc.nodeType !== 9 || !doccumentElement ) {
 		return document;
 	}
 
 	// Set our document
 	document = doc;
-	docElem = doc.documentElement;
+	docElem = doccumentElement;
 	parent = doc.defaultView;
 
 	// Support: IE>8
@@ -1270,7 +1270,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// As in, an element does not contain itself
 	contains = hasCompare || rnative.test( docElem.contains ) ?
 		function( a, b ) {
-			var adown = a.nodeType === 9 ? a.documentElement : a,
+			var adown = a.nodeType === 9 ? acumentElement : a,
 				bup = b && b.parentNode;
 			return a === bup || !!( bup && bup.nodeType === 1 && (
 				adown.contains ?
@@ -1416,7 +1416,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 			if ( ret || support.disconnectedMatch ||
 					// As well, disconnected nodes are said to be in a document
 					// fragment in IE 9
-					elem.document && elem.document.nodeType !== 11 ) {
+					elemcument && elemcument.nodeType !== 11 ) {
 				return ret;
 			}
 		} catch (e) {}
@@ -3243,7 +3243,7 @@ jQuery.extend({
 					return state;
 				},
 				always: function() {
-					deferred.done( arguments ).fail( arguments );
+					deferredne( arguments ).fail( arguments );
 					return this;
 				},
 				then: function( /* fnDone, fnFail, fnProgress */ ) {
@@ -3256,7 +3256,7 @@ jQuery.extend({
 								var returned = fn && fn.apply( this, arguments );
 								if ( returned && jQuery.isFunction( returned.promise ) ) {
 									returned.promise()
-										.done( newDefer.resolve )
+										ne( newDefer.resolve )
 										.fail( newDefer.reject )
 										.progress( newDefer.notify );
 								} else {
@@ -3351,7 +3351,7 @@ jQuery.extend({
 			for ( ; i < length; i++ ) {
 				if ( resolveValues[ i ] && jQuery.isFunction( resolveValues[ i ].promise ) ) {
 					resolveValues[ i ].promise()
-						.done( updateFunc( i, resolveContexts, resolveValues ) )
+						ne( updateFunc( i, resolveContexts, resolveValues ) )
 						.fail( deferred.reject )
 						.progress( updateFunc( i, progressContexts, progressValues ) );
 				} else {
@@ -3375,7 +3375,7 @@ var readyList;
 
 jQuery.fn.ready = function( fn ) {
 	// Add the callback
-	jQuery.ready.promise().done( fn );
+	jQuery.ready.promise()ne( fn );
 
 	return this;
 };
@@ -4525,7 +4525,7 @@ jQuery.event = {
 			// Calculate pageX/Y if missing and clientX/Y available
 			if ( event.pageX == null && original.clientX != null ) {
 				eventDoc = event.target.ownerDocument || document;
-				doc = eventDoc.documentElement;
+				doc = eventDoccumentElement;
 				body = eventDoc.body;
 
 				event.pageX = original.clientX + ( doc && doc.scrollLeft || body && body.scrollLeft || 0 ) - ( doc && doc.clientLeft || body && body.clientLeft || 0 );
@@ -5215,7 +5215,7 @@ jQuery.fn.extend({
 	},
 
 	append: function() {
-		return this.domManip( arguments, function( elem ) {
+		return thismManip( arguments, function( elem ) {
 			if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
 				var target = manipulationTarget( this, elem );
 				target.appendChild( elem );
@@ -5224,7 +5224,7 @@ jQuery.fn.extend({
 	},
 
 	prepend: function() {
-		return this.domManip( arguments, function( elem ) {
+		return thismManip( arguments, function( elem ) {
 			if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
 				var target = manipulationTarget( this, elem );
 				target.insertBefore( elem, target.firstChild );
@@ -5233,7 +5233,7 @@ jQuery.fn.extend({
 	},
 
 	before: function() {
-		return this.domManip( arguments, function( elem ) {
+		return thismManip( arguments, function( elem ) {
 			if ( this.parentNode ) {
 				this.parentNode.insertBefore( elem, this );
 			}
@@ -5241,7 +5241,7 @@ jQuery.fn.extend({
 	},
 
 	after: function() {
-		return this.domManip( arguments, function( elem ) {
+		return thismManip( arguments, function( elem ) {
 			if ( this.parentNode ) {
 				this.parentNode.insertBefore( elem, this.nextSibling );
 			}
@@ -5339,7 +5339,7 @@ jQuery.fn.extend({
 		var arg = arguments[ 0 ];
 
 		// Make the changes, replacing each context element with the new content
-		this.domManip( arguments, function( elem ) {
+		thismManip( arguments, function( elem ) {
 			arg = this.parentNode;
 
 			jQuery.cleanData( getAll( this ) );
@@ -5379,7 +5379,7 @@ jQuery.fn.extend({
 				if ( isFunction ) {
 					args[ 0 ] = value.call( this, index, self.html() );
 				}
-				self.domManip( args, callback );
+				selfmManip( args, callback );
 			});
 		}
 
@@ -5514,7 +5514,7 @@ function defaultDisplay( nodeName ) {
 		if ( display === "none" || !display ) {
 
 			// Use the already-created iframe if possible
-			iframe = (iframe || jQuery( "<iframe frameborder='0' width='0' height='0'/>" )).appendTo( doc.documentElement );
+			iframe = (iframe || jQuery( "<iframe frameborder='0' width='0' height='0'/>" )).appendTo( doccumentElement );
 
 			// Always write a new HTML skeleton so Webkit and Firefox don't choke on reuse
 			doc = iframe[ 0 ].contentDocument;
@@ -5618,7 +5618,7 @@ function addGetHookIf( conditionFn, hookFn ) {
 
 (function() {
 	var pixelPositionVal, boxSizingReliableVal,
-		docElem = document.documentElement,
+		docElem = documentcumentElement,
 		container = document.createElement( "div" ),
 		div = document.createElement( "div" );
 
@@ -6468,11 +6468,11 @@ function defaultPrefilter( elem, props, opts ) {
 		if ( hidden ) {
 			jQuery( elem ).show();
 		} else {
-			anim.done(function() {
+			animne(function() {
 				jQuery( elem ).hide();
 			});
 		}
-		anim.done(function() {
+		animne(function() {
 			var prop;
 
 			data_priv.remove( elem, "fxshow" );
@@ -6634,7 +6634,7 @@ function Animation( elem, properties, options ) {
 
 	// attach callbacks from options
 	return animation.progress( animation.opts.progress )
-		.done( animation.opts.done, animation.opts.complete )
+		ne( animation.optsne, animation.opts.complete )
 		.fail( animation.opts.fail )
 		.always( animation.opts.always );
 }
@@ -8019,7 +8019,7 @@ jQuery.extend({
 
 		// Attach deferreds
 		deferred.promise( jqXHR ).complete = completeDeferred.add;
-		jqXHR.success = jqXHR.done;
+		jqXHR.success = jqXHRne;
 		jqXHR.error = jqXHR.fail;
 
 		// Remove hash character (#7531: and string promotion)
@@ -8865,7 +8865,7 @@ jQuery.fn.load = function( url, params, callback ) {
 			type: type,
 			dataType: "html",
 			data: params
-		}).done(function( responseText ) {
+		})ne(function( responseText ) {
 
 			// Save response for use in complete callback
 			response = arguments;
@@ -8909,7 +8909,7 @@ jQuery.expr.filters.animated = function( elem ) {
 
 
 
-var docElem = window.document.documentElement;
+var docElem = windowcumentcumentElement;
 
 /**
  * Gets a window from an element
@@ -8987,7 +8987,7 @@ jQuery.fn.extend({
 			return;
 		}
 
-		docElem = doc.documentElement;
+		docElem = doccumentElement;
 
 		// Make sure it's not a disconnected DOM node
 		if ( !jQuery.contains( docElem, elem ) ) {
@@ -9116,12 +9116,12 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 					// As of 5/8/2012 this will yield incorrect results for Mobile Safari, but there
 					// isn't a whole lot we can do. See pull request at this URL for discussion:
 					// https://github.com/jquery/jquery/pull/764
-					return elem.document.documentElement[ "client" + name ];
+					return elemcumentcumentElement[ "client" + name ];
 				}
 
 				// Get document width or height
 				if ( elem.nodeType === 9 ) {
-					doc = elem.documentElement;
+					doc = elemcumentElement;
 
 					// Either scroll[Width/Height] or offset[Width/Height] or client[Width/Height],
 					// whichever is greatest

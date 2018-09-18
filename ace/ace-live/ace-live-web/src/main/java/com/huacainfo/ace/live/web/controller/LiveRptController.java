@@ -52,7 +52,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/findLiveRptList.do")
+    @RequestMapping(value = "/findLiveRptList")
     @ResponseBody
     public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<LiveRptVo> rst = this.liveRptService.findLiveRptList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
@@ -73,7 +73,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/insertLiveRpt.do")
+    @RequestMapping(value = "/insertLiveRpt")
     @ResponseBody
     public MessageResponse insertLiveRpt(String jsons) throws Exception {
         JSONObject json = JSON.parseObject(jsons);
@@ -92,7 +92,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/updateLiveRpt.do")
+    @RequestMapping(value = "/updateLiveRpt")
     @ResponseBody
     public MessageResponse updateLiveRpt(String jsons) throws Exception {
         JSONObject json = JSON.parseObject(jsons);
@@ -111,7 +111,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/updateLiveRptStatus.do")
+    @RequestMapping(value = "/updateLiveRptStatus")
     @ResponseBody
     public MessageResponse updateLiveRptStatus(String id, String status, String message, String rid) throws Exception {
         MessageResponse rst= this.liveRptService.updateLiveRptStatus(id, status);
@@ -143,7 +143,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/selectLiveRptByPrimaryKey.do")
+    @RequestMapping(value = "/selectLiveRptByPrimaryKey")
     @ResponseBody
     public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id) throws Exception {
         return this.liveRptService.selectLiveRptByPrimaryKey(id);
@@ -159,7 +159,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/deleteLiveRptByLiveRptId.do")
+    @RequestMapping(value = "/deleteLiveRptByLiveRptId")
     @ResponseBody
     public MessageResponse deleteLiveRptByLiveRptId(String id) throws Exception {
         return this.liveRptService.deleteLiveRptByLiveRptId(id,
@@ -177,7 +177,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/deleteLiveRptAndImgLiveByRptId.do")
+    @RequestMapping(value = "/deleteLiveRptAndImgLiveByRptId")
     @ResponseBody
     public MessageResponse deleteLiveRptAndImgLiveByRptId(String id) throws Exception {
         return this.liveRptService.deleteLiveRptAndImgLiveByRptId(id,this.getCurUserProp());
@@ -193,7 +193,7 @@ public class LiveRptController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/sendLiveRptContentBySortAct.do")
+    @RequestMapping(value = "/sendLiveRptContentBySortAct")
     @ResponseBody
     public MessageResponse sendLiveRptContentBySortAct(String message, String rid) throws Exception {
         for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
@@ -213,7 +213,7 @@ public class LiveRptController extends LiveBaseController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/updateSequence.do")
+    @RequestMapping(value = "/updateSequence")
     @ResponseBody
     public MessageResponse updateSequence(String data,String rid,String message) throws Exception {
         if (MyWebSocket.rooms.get(rid) == null) {

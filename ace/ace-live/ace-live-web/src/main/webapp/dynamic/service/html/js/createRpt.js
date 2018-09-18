@@ -43,7 +43,7 @@ function releaseDo() {
     }
     datas.imgs = imgs;
     datas.rpt = rpt;
-    var url = '/live/liveRpt/insertLiveRpt.do';
+    var url = '/live/liveRpt/insertLiveRpt';
     $.post(url, {jsons: JSON.stringify(datas)}, function (result) {
         if (0 == result.status) {
             $('#htmlLoad').empty();

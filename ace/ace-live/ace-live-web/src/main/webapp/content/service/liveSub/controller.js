@@ -158,7 +158,7 @@ function loadView(id) {
 function audit(id,status,rid,message){
         $.ajax({
             type : "post",
-            url : contextPath+"liveSub/updateLiveSubStatus.do",
+            url : contextPath+"liveSub/updateLiveSubStatus",
             data : {
                 id : id,
                 status:status,

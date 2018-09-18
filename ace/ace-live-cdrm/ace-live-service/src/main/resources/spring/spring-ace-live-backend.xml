@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:amq="http://activemq.apache.org/schema/core" xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://activemq.apache.org/schema/core  http://activemq.apache.org/schema/core/activemq-core-5.2.0.xsd
+	http://www.springframework.org/schema/jms  http://www.springframework.org/schema/jms/spring-jms-3.0.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+    <bean id="liveRptCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveRptCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="rpt"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
+    <bean id="liveMsgCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveMsgCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="msg"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
+    <bean id="liveCmtCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveCmtCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="cmt"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
+    <bean id="liveLikerCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveLikerCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="liker"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
+    <bean id="liveVisitCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveVisitCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="visit"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
+
+    <bean id="liveCallbackDealer" class="com.huacainfo.ace.backend.mq.LiveCallbackDealer"
+          destroy-method="shutdown" init-method="run">
+        <constructor-arg index="0" value="${kafka.consumer.zookeeper}"/>
+        <constructor-arg index="1" value="${kafka.consumer.group}"/>
+        <constructor-arg index="2" value="live"/>
+        <constructor-arg index="3"
+                         value="${kafka.consumer.inp.callback.threads}"/>
+        <constructor-arg index="4"
+                         value="${kafka.consumer.inp.callback.newonly}"/>
+    </bean>
+</beans>

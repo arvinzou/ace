@@ -2,19 +2,13 @@ var loading = {};
 var editor;
 window.onload = function (){
     jQuery(function ($) {
+        $(".breadcrumb").append("<li><span>议题编辑</span></li>");
        initForm();
        initEvents();
     });
 }
 function App() {
     console.log("=============================App Start==============================");
-    loadCustom();
-}
-function loadCustom() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
 }
 function initEditor() {
         editor = new Simditor({
@@ -102,14 +96,13 @@ function initForm(){
         type:"post",
         async:false,
         data:{
-            id: urlParams.id
+            id: urlParams.did
         },
         success:function(result){
             if(result.status == 0) {
                var data={};
                data['o']=result.value;
                render($("#fm-edit"),data,'tpl-fm');
-               initPage();
             }else {
                 alert(result.errorMessage);
             }
@@ -118,4 +111,5 @@ function initForm(){
             alert("对不起出错了！");
         }
     });
+    initPage();
 }

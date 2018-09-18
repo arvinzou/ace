@@ -45,7 +45,7 @@ public class LiveController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2017-12-27
      */
-    @RequestMapping(value = "/findLiveList.do")
+    @RequestMapping(value = "/findLiveList")
     @ResponseBody
     public PageResult<LiveVo> findLiveList(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),
@@ -68,7 +68,7 @@ public class LiveController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2017-12-27
      */
-    @RequestMapping(value = "/insertLive.do")
+    @RequestMapping(value = "/insertLive")
     @ResponseBody
     public MessageResponse insertLive(String jsons) throws Exception {
         Live obj = JSON.parseObject(jsons, Live.class);
@@ -86,7 +86,7 @@ public class LiveController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2017-12-27
      */
-    @RequestMapping(value = "/updateLive.do")
+    @RequestMapping(value = "/updateLive")
     @ResponseBody
     public MessageResponse updateLive(String jsons) throws Exception {
         Live obj = JSON.parseObject(jsons, Live.class);
@@ -103,7 +103,7 @@ public class LiveController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2017-12-27
      */
-    @RequestMapping(value = "/selectLiveByPrimaryKey.do")
+    @RequestMapping(value = "/selectLiveByPrimaryKey")
     @ResponseBody
     public SingleResult<LiveVo> selectLiveByPrimaryKey(String id)
             throws Exception {
@@ -120,7 +120,7 @@ public class LiveController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2017-12-27
      */
-    @RequestMapping(value = "/deleteLiveByLiveId.do")
+    @RequestMapping(value = "/deleteLiveByLiveId")
     @ResponseBody
     public MessageResponse deleteLiveByLiveId(String jsons)
             throws Exception {
@@ -134,18 +134,38 @@ public class LiveController extends LiveBaseController {
 
     /**
      * @throws
-     * @Title:updateLive
-     * @Description: TODO(更新直播)
-     * @param: @param jsons
+     * @Title:updateLiveAuditByLiveId
+     * @Description: TODO(审核)
+     * @param: @param id
+     * @param rst
+     * @param text
+     * @param: @param  userProp
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 陈晓克
-     * @version: 2017-12-27
+     * @version: 2018-09-18
      */
-    @RequestMapping(value = "/updateLiveSelective.do")
+    @RequestMapping(value = "/updateLiveAuditByLiveId")
     @ResponseBody
-    public MessageResponse updateByPrimaryKeySelective(String jsons) throws Exception {
-        Live obj = JSON.parseObject(jsons, Live.class);
-        return this.liveService.updateLiveSelective(obj, this.getCurUserProp());
+    public MessageResponse updateLiveAuditByLiveId(String id,String rst,String text) throws Exception {
+
+        return this.liveService.updateLiveAuditByLiveId(id,rst,text,this.getCurUserProp());
+    }
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(设置直播状态1预告2直播中3结束)
+     * @param: @param id
+     * @param status
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    @RequestMapping(value = "/updateStatus")
+    @ResponseBody
+    public MessageResponse updateStatus(String id,String status) throws Exception {
+        return this.liveService.updateStatus(id,status,this.getCurUserProp());
     }
 }

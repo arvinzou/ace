@@ -121,7 +121,7 @@ function getInfo() {
         identityType: webviewType,
         userId: lvsCmd.urlParams.id
     };
-    lvsCmd.ajax(apiServer + "/www/live/getInfo.do", e,
+    lvsCmd.ajax(apiServer + "/www/live/getInfo", e,
         function (e, i) {
             function a() {
                 $(window).scrollTop() <= 10 && (d = !1),
@@ -152,7 +152,7 @@ function getInfo() {
                                         a.removeClass("xc-liker-ing")
                                     },
                                     600),
-                            i && lvsCmd.ajax(apiServer + "/www/live/addLike.do", e,
+                            i && lvsCmd.ajax(apiServer + "/www/live/addLike", e,
                                 function (e, n) {
                                     if ("0" == n.status) {
                                         var o = a.find(".zan-num"),
@@ -255,7 +255,7 @@ function getInfo() {
 
                 i && i.data && (i.data.topic && (wxShareDict.title = i.data.topic, document.title = wxShareDict.title), i.data.remark && (wxShareDict.desc = i.data.remark), i.data.cover && (wxShareDict.imgUrl = i.data.cover), onshare()),
                     increateNumTimeFn(),
-                    lvsCmd.ajax(apiServer + "/www/live/getTotalNumAndOrgInfo.do", {
+                    lvsCmd.ajax(apiServer + "/www/live/getTotalNumAndOrgInfo", {
                             companyId: companyId,
                             id: lvsCmd.urlParams.id
                         },
@@ -272,7 +272,7 @@ function getInfo() {
                                             location.href = "index.html?companyId=" + companyId + "&showlink=" + showlink
                                         })
                             }
-                            lvsCmd.ajax(apiServer + "/www/live/getShareContent.do", {
+                            lvsCmd.ajax(apiServer + "/www/live/getShareContent", {
                                     companyId: companyId
 
                                 },
@@ -280,21 +280,21 @@ function getInfo() {
                                     if (e) {
                                         var a = i.data.logo;
                                         if (0 == a.indexOf("http:") && 0 == a.indexOf("https:") || (a = "" + a + ""), $("#j-orglogo, .app-download .icon").html('<img src="' + i.data.logo + '">'), 0 == showlink) $(".app-download-place, .app-download").remove();
-                                        else if (i.data.downloadTitle) {
-                                            $(".app-download h4").append("<span>" + i.data.downloadTitle + "</span>"),
-                                            i.data.downloadDesc && $(".app-download h4").append('<p class="span">' + i.data.downloadDesc + "</p>"),
+                                        else if (i.datawnloadTitle) {
+                                            $(".app-download h4").append("<span>" + i.datawnloadTitle + "</span>"),
+                                            i.datawnloadDesc && $(".app-download h4").append('<p class="span">' + i.datawnloadDesc + "</p>"),
                                                 $(".app-download .close").on(tap,
                                                     function () {
                                                         $(".app-download-place, .app-download").remove()
                                                     });
                                             var n = i.data.iosDownload;
-                                            n || (n = i.data.downAddress);
+                                            n || (n = i.datawnAddress);
                                             var o = i.data.androidDownload;
-                                            n || (o = i.data.downAddress),
-                                                userAgent.indexOf("iphone") > -1 || userAgent.indexOf("ipad") > -1 || userAgent.indexOf("mac") > -1 ? n && $(".app-download .download").on(tap,
+                                            n || (o = i.datawnAddress),
+                                                userAgent.indexOf("iphone") > -1 || userAgent.indexOf("ipad") > -1 || userAgent.indexOf("mac") > -1 ? n && $(".app-download wnload").on(tap,
                                                         function () {
                                                             location.href = n
-                                                        }).show() : o && $(".app-download .download").on(tap,
+                                                        }).show() : o && $(".app-download wnload").on(tap,
                                                         function () {
                                                             location.href = o
                                                         }).show()
@@ -315,7 +315,7 @@ function getReport(e, i) {
     }
     reprtLoading = !0,
     i || $("#j-listmore").removeClass("fn-hide"),
-        lvsCmd.ajax(apiServer + "/www/live/getLiveRptList.do", {
+        lvsCmd.ajax(apiServer + "/www/live/getLiveRptList", {
                 rid: lvsCmd.urlParams.id,
                 sort: reportSort,
                 page: e
@@ -436,7 +436,7 @@ function dianZan(e) {
         id: e,
         type: "2"
     };
-    lvsCmd.ajax(apiServer + "/www/live/addLike.do", i,
+    lvsCmd.ajax(apiServer + "/www/live/addLike", i,
         function (i, a) {
             if ("0" == a.status) {
                 var n = $("#j-remark-" + e);
@@ -837,7 +837,7 @@ if (getReport(reportPage), setInterval(function () {
                 topic: "cmt",
                 uid: wxuser.openid
             };
-            lvsCmd.ajax(apiServer + "/www/live/cmt.do", n,
+            lvsCmd.ajax(apiServer + "/www/live/cmt", n,
                 function (e, n) {
                     if (e) if (0 == n.status) {
                         $("#j-remarkform input[name=content]").val("");
@@ -860,7 +860,7 @@ if (getReport(reportPage), setInterval(function () {
     //     url: wxShareDict.link,
     //     appid: ""
     // };
-    lvsCmd.ajax(apiServer + "/www/live/getWxJsSign.do", {companyId: companyId},
+    lvsCmd.ajax(apiServer + "/www/live/getWxJsSign", {companyId: companyId},
         function (e, i) {
             wx.config({
                 debug: false,
@@ -890,7 +890,7 @@ var cutWindowScrollTop = 0,
     windowHeight = $(window).height(),
     isPostView = !1;
 function getMsg() {
-    lvsCmd.ajax(apiServer + "/www/live/getLiveMsgList.do", {rid: lvsCmd.urlParams.id},
+    lvsCmd.ajax(apiServer + "/www/live/getLiveMsgList", {rid: lvsCmd.urlParams.id},
         function (e, rst) {
             var tpl = document.getElementById('tpl-msg').innerHTML;
             $(rst).each(function (k, data) {
@@ -908,7 +908,7 @@ function visit() {
     var i = {
         id: lvsCmd.urlParams.id
     };
-    lvsCmd.ajax(apiServer + "/www/live/visit.do", i,
+    lvsCmd.ajax(apiServer + "/www/live/visit", i,
         function (i, a) {
             if ("0" == a.status) {
                 var visit = parseInt($("#visit").html());

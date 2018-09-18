@@ -41,7 +41,7 @@ function releaseDo() {
         'nop':nop,
         'pop':pop
     }
-    var url="/live/live/insertLive.do";
+    var url="/live/live/insertLive";
     var data={
         'jsons':JSON.stringify(keyVal)
     };

@@ -13,7 +13,7 @@ function uploadCover() {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: 'upbtn',
-        url: "/live/www/live/upload.do?companyId=" + lvsCmd.urlParams.companyId,
+        url: "/live/www/live/upload?companyId=" + lvsCmd.urlParams.companyId,
         file_data_name: 'file',
         multi_selection: false,
         resize: {
@@ -222,7 +222,7 @@ newTplform.render($("#j-liveform .row-content"),
 
         console.log("*********ajax data: " + JSON.stringify(data));
 
-        var url = apiServer + "/www/live/insertLive.do";
+        var url = apiServer + "/www/live/insertLive";
         lvsCmd.ajax(url, {jsons: JSON.stringify(data)},
             function (e, t) {
                 // $(".j-content").val("");

@@ -45,7 +45,7 @@ public class LiveCmtController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    @RequestMapping(value = "/findLiveCmtList.do")
+    @RequestMapping(value = "/findLiveCmtList")
     @ResponseBody
     public PageResult<LiveCmtVo> findLiveCmtList(LiveCmtQVo condition,
                                                  PageParamNoChangeSord page) throws Exception {
@@ -69,7 +69,7 @@ public class LiveCmtController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    @RequestMapping(value = "/insertLiveCmt.do")
+    @RequestMapping(value = "/insertLiveCmt")
     @ResponseBody
     public MessageResponse insertLiveCmt(String jsons) throws Exception {
         LiveCmt obj = JSON.parseObject(jsons, LiveCmt.class);
@@ -87,7 +87,7 @@ public class LiveCmtController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    @RequestMapping(value = "/updateLiveCmt.do")
+    @RequestMapping(value = "/updateLiveCmt")
     @ResponseBody
     public MessageResponse updateLiveCmt(String id, String status, String message, String rptId) throws Exception {
         return this.liveCmtService.updateLiveCmt(id, status);
@@ -103,7 +103,7 @@ public class LiveCmtController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    @RequestMapping(value = "/selectLiveCmtByPrimaryKey.do")
+    @RequestMapping(value = "/selectLiveCmtByPrimaryKey")
     @ResponseBody
     public SingleResult<LiveCmtVo> selectLiveCmtByPrimaryKey(String id)
             throws Exception {
@@ -120,7 +120,7 @@ public class LiveCmtController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    @RequestMapping(value = "/deleteLiveCmtByLiveCmtId.do")
+    @RequestMapping(value = "/deleteLiveCmtByLiveCmtId")
     @ResponseBody
     public MessageResponse deleteLiveCmtByLiveCmtId(String jsons)
             throws Exception {
