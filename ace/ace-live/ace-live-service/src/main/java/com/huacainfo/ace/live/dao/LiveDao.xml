@@ -33,9 +33,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,  name, category, deptId,endTime,startTime, remark, nop, pop, addr, rtmpUrl,
-        mp4Url, imageSrc, latitude, longitude, status, createUserId, createUserName, createDate,
-        lastModifyUserId, lastModifyUserName, lastModifyDate
+        t.id,    t.name,   t.category,t.deptId,  t.endTime,  t.startTime,t.remark,   t.nop,   t.pop,
+       t.imageSrc, t.status,t.createUserName, t.createDate,t.auditStatus
     </sql>
     <sql id="Blob_Column_List">
         content
@@ -97,79 +96,24 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.live.model.Live">
-        update live
-        <set>
 
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="category != null">
-                category = #{category,jdbcType=VARCHAR},
-            </if>
-            <if test="endTime != null">
-                endTime = #{endTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="startTime != null">
-                startTime = #{startTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="remark != null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="nop != null">
-                nop = #{nop,jdbcType=BIGINT},
-            </if>
-            <if test="pop != null">
-                pop = #{pop,jdbcType=BIGINT},
-            </if>
-            <if test="addr != null">
-                addr = #{addr,jdbcType=VARCHAR},
-            </if>
-            <if test="rtmpUrl != null">
-                rtmpUrl = #{rtmpUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="mp4Url != null">
-                mp4Url = #{mp4Url,jdbcType=VARCHAR},
-            </if>
-            <if test="imageSrc != null">
-                imageSrc = #{imageSrc,jdbcType=VARCHAR},
-            </if>
-            <if test="latitude != null">
-                latitude = #{latitude,jdbcType=DECIMAL},
-            </if>
-            <if test="longitude != null">
-                longitude = #{longitude,jdbcType=DECIMAL},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=CHAR},
-            </if>
-            <if test="lastModifyUserId != null">
-                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-            </if>
-            <if test="lastModifyUserName != null">
-                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="lastModifyDate != null">
-                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="content != null">
-                content = #{content,jdbcType=LONGVARCHAR}
-            </if>
-        </set>
-        where id = #{id,jdbcType=VARCHAR}
-    </update>
 
     <sql id="whereCondition">
-        from live where deptId=#{condition.deptId}
+        from live t left join live_log a on t.lastAuditLogId=a.id
+
+        where t.deptId=#{condition.deptId}
         <if test='condition.name!=null and condition.name!=""'>
-            and name like
+            and t.name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.category!=null and condition.category!=&quot;&quot;">
-            and category =#{condition.category,jdbcType=VARCHAR}
+            and t.category =#{condition.category,jdbcType=VARCHAR}
         </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and status =#{condition.status,jdbcType=CHAR}
+            and t.status =#{condition.status,jdbcType=CHAR}
+        </if>
+        <if test="condition.auditStatus!=null and condition.auditStatus!=&quot;&quot;">
+            and t.auditStatus =#{condition.auditStatus,jdbcType=CHAR}
         </if>
     </sql>
     <select id="findCount" resultType="int">
@@ -179,14 +123,15 @@
     <select id="findList" resultMap="BaseResultMapVo">
 
         select
-        <include refid="Base_Column_List"/>
+        t.id,t.name,   t.category,t.deptId,  t.endTime,  t.startTime,t.remark,   t.nop,   t.pop,
+        t.imageSrc, t.status,t.createUserName, t.createDate,t.auditStatus,a.statement,a.createDate auditDate
         <include refid="whereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
-                ORDER BY ${orderBy}
+                ORDER BY t.${orderBy}
             </when>
             <otherwise>
-                ORDER BY startTime desc
+                ORDER BY t.startTime desc
             </otherwise>
         </choose>
 
@@ -461,4 +406,18 @@
         from portal.users
         where openid = #{openid,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateAudit">
+        update live
+        set
+        auditStatus = #{auditStatus},
+        lastAuditLogId = #{lastAuditLogId}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateStatus">
+        update live
+        set
+        status = #{status}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

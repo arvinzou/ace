@@ -2,6 +2,7 @@ var loading = {};
 var editor;
 window.onload = function (){
     jQuery(function ($) {
+        $(".breadcrumb").append("<li><span>创建$!{bean.tableChineseName}</span></li>");
         initPage();
         initEvents();
     });

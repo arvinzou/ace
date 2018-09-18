@@ -52,6 +52,8 @@ public class Live implements java.io.Serializable {
 
     private String content;
 
+    private String auditStatus;
+
     public String getId() {
         return id;
     }
@@ -236,5 +238,13 @@ public class Live implements java.io.Serializable {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus;
     }
 }

@@ -3,7 +3,6 @@ var params = {limit: 10, 'deptId': userProp.corpId};
 window.onload = function (){
     initPage();
     initEvents();
-    initJuicerMethod();
 }
 function App() {
     console.log("=============================App Start==============================");
@@ -29,6 +28,10 @@ function initPage() {
 function t_query(){
     getPageList();
     return false;
+}
+function setParams(key,value){
+    params[key]=value;
+     getPageList();
 }
 /*直播加载表格数据*/
 function getPageList() {
@@ -80,10 +83,13 @@ function initEvents() {
 $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
+        var title=relatedTarget.data('title');
         var modal = $(this);
+        $('.audit-title').html(title);
+        console.log(relatedTarget);
         modal.find('.modal-body input[name=id]').val(id);
     })
-$('#modal-audit .btn-primary').on('click', function () {
+$('#modal-audit .audit').on('click', function () {
 $('#modal-audit form').submit();
     });
 $('#modal-audit form').ajaxForm({
@@ -102,20 +108,52 @@ $('#modal-audit form').ajaxForm({
         });
 
 
+        $('#modal-status').on('show.bs.modal', function (event) {
+                var relatedTarget = $(event.relatedTarget);
+                var id = relatedTarget.data('id');
+                var title=relatedTarget.data('title');
+                var modal = $(this);
+                $('.status-title').html(title);
+                console.log(relatedTarget);
+                modal.find('.modal-body input[name=id]').val(id);
+            })
+        $('#modal-status .status').on('click', function () {
+        $('#modal-status form').submit();
+            });
+        $('#modal-status form').ajaxForm({
+                    beforeSubmit: function (formData, jqForm, options) {
+                        var params = {};
+                        $.each(formData, function (n, obj) {
+                            params[obj.name] = obj.value;
+                        });
+                        $.extend(params, {
+                            time: new Date()
+                        });
+                        console.log(params);
+                        updateStatus(params);
+                        return false;
+                    }
+                });
+
+ $(".btn-group .btn").bind('click',function(event){
+            $(event.target).siblings().removeClass("active");
+            console.log(event);
+            $(event.target).addClass("active");
+        });
 }
 /*直播审核*/
 function audit(params){
     startLoad();
     $.ajax({
-        url: contextPath + "/subject/audit",
+        url: contextPath + "/live/updateLiveAuditByLiveId",
         type:"post",
         async:false,
         data:params,
         success:function(rst){
             stopLoad();
-            $("#modal-audit").modal('hide');
             alert(rst.errorMessage);
             if(rst.status == 0) {
+                $("#modal-audit").modal('hide');
                 getPageList();
             }
         },
@@ -126,33 +164,25 @@ function audit(params){
     });
 }
 
-//juicer自定义函数
-function initJuicerMethod() {
-juicer.register('parseStatus', parseStatus);
-}
-
-/**
-* 状态
-* 0-删除
-* 1-暂存
-* 2-提交审核
-* 3-审核通过
-* 4-审核驳回
-*/
-function parseStatus(status) {
-    switch (status) {
-        case '0':
-        return "已删除";
-        case '1':
-        return "暂存";
-        case '2':
-        return "提交审核";
-        case '3':
-        return "审核通过";
-        case '4':
-        return "审核驳回";
-        default:
-        return "";
-    }
+function updateStatus(params){
+    startLoad();
+    $.ajax({
+        url: contextPath + "/live/updateStatus",
+        type:"post",
+        async:false,
+        data:params,
+        success:function(rst){
+            stopLoad();
+            alert(rst.errorMessage);
+            if(rst.status == 0) {
+                $("#modal-status").modal('hide');
+                getPageList();
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
 

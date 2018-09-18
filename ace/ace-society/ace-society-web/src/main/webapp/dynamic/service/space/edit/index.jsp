@@ -84,10 +84,10 @@
             </label>
             <div class="col-md-10" style="text-align: left">
                 <img class="cover"
-                     id="coverUrl"
+                     id="commodityCover"
                      data-toggle="modal"
                      data-xsize="150" data-ysize="150"
-                     data-cover="coverUrl"
+                     data-cover="commodityCover"
                      data-target="#cropModal"
                      src="${pageContext.request.contextPath}/content/common/img/addImg1.png?v=${cfg.version}">
                 <span class="help-block"></span>

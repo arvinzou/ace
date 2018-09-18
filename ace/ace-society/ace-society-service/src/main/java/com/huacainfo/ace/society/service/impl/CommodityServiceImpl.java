@@ -102,9 +102,9 @@ public class CommodityServiceImpl implements CommodityService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.commodityDao.insert(o);
-        this.dataBaseLogService.log("添加爱心商品", "爱心商品", "", o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("添加商品信息", "商品信息", "", o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "添加爱心商品完成！");
+        return new MessageResponse(0, "添加商品信息完成！");
     }
 
     /**
@@ -132,7 +132,7 @@ public class CommodityServiceImpl implements CommodityService {
         //
         obj.setCommodityName(params.getCommodityName());
         obj.setCategory(params.getCategory());
-        obj.setCoverUrl(params.getCoverUrl());
+        obj.setCommodityCover(params.getCommodityCover());
         obj.setSummary(params.getSummary());
         obj.setCostPoints(params.getCostPoints());
         obj.setRemark(params.getRemark());
@@ -141,9 +141,9 @@ public class CommodityServiceImpl implements CommodityService {
         obj.setLastModifyUserId(userProp.getUserId());
 
         commodityDao.updateByPrimaryKey(obj);
-        dataBaseLogService.log("变更爱心商品", "爱心商品", "", params.getId(), params.getId(), userProp);
+        dataBaseLogService.log("变更商品信息", "商品信息", "", params.getId(), params.getId(), userProp);
 
-        return new MessageResponse(0, "变更爱心商品完成！");
+        return new MessageResponse(0, "变更商品信息完成！");
     }
 
     /**
@@ -158,8 +158,7 @@ public class CommodityServiceImpl implements CommodityService {
      */
     @Override
     public SingleResult<CommodityVo> selectCommodityByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <CommodityVo> rst = new SingleResult<>();
+        SingleResult<CommodityVo> rst = new SingleResult<>();
         rst.setValue(this.commodityDao.selectVoByPrimaryKey(id));
         return rst;
     }
@@ -212,7 +211,7 @@ public class CommodityServiceImpl implements CommodityService {
 
         Commodity obj = commodityDao.selectByPrimaryKey(id);
         if (obj == null) {
-            return new MessageResponse(ResultCode.FAIL, "爱心商品数据丢失");
+            return new MessageResponse(ResultCode.FAIL, "商品数据丢失");
         }
 
         //更改审核记录
@@ -229,9 +228,9 @@ public class CommodityServiceImpl implements CommodityService {
         commodityDao.updateByPrimaryKey(obj);
 
 
-        dataBaseLogService.log("审核爱心商品", "爱心商品",
-                String.valueOf(id), String.valueOf(id), "爱心商品", userProp);
-        return new MessageResponse(0, "爱心商品审核完成！");
+        dataBaseLogService.log("审核商品信息", "商品信息",
+                String.valueOf(id), String.valueOf(id), "商品信息", userProp);
+        return new MessageResponse(0, "商品信息审核完成！");
     }
 
     /**
