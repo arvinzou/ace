@@ -42,10 +42,7 @@
             <div class="col-sm-7">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control input-circle-left"
-                               placeholder="请输入名称">
+                        <input type="text" name="keyword" class="form-control input-circle-left" placeholder="请输入名称">
                         <span class="input-group-btn">
         <button class="btn btn-circle-right btn-default search_btn"
                 type="submit">
@@ -185,7 +182,11 @@
         <td> \${item.host}</td>
         <td> \${item.participant}</td>
         <td>
+            {@if item.category==1||item.category==2||item.category==3||item.category==4}
             <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
+            {@else}
+            <a class="operation" href="javascript:edit1('\${item.id}');">编辑</a>
+            {@/if}
             <a class="operation" href="javascript:del('\${item.id}');">删除</a>
         </td>
     </tr>
