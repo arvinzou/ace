@@ -74,11 +74,12 @@
                                                         <tr>
 
                                                             <th width="35%">名称 </th>
+                                                            <th width="10%">状态</th>
 
-                                                            <th width="15%">开始&结束时间</th>
-                                                            <th width="10%">参与人数/点击量</th>
-                                                            <th width="15%">审核状态</th>
-                                                            <th width="25%">操作</th>
+                                                            <th width="20%">开始&结束时间</th>
+                                                            <th width="15%">参与人数/点击量</th>
+                                                            <th width="10%">审核状态</th>
+                                                            <th width="10%">操作</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody id="page-list">
@@ -108,6 +109,15 @@
                 </div>
             </div>
         </td>
+        <td >
+            {@if item.status==1}
+            <span class="label label-lg label-success">预播</span>
+            {@else if item.status==2}
+            <span class="label label-lg label-danger">直播中</span>
+            {@else}
+            <span class="label label-lg label-info">历史</span>
+            {@/if}
+        </td>
 
         <td>
             \${item.startTime}<br>
@@ -117,7 +127,7 @@
         <td  >\${item.nop}/\${item.pop}</td>
         <td >
             {@if item.auditStatus==1}
-            <span class="label label-lg label-info">待审核</span>
+            <span class="label label-lg label-info">待审</span>
             {@else if item.auditStatus==2}
             <span class="label label-lg label-success">通过</span>
             <div style="padding-top:10px">\${item.statement}</div>
