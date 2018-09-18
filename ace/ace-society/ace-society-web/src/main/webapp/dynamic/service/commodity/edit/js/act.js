@@ -67,7 +67,7 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-                coverUrl: $('#coverUrl').attr("src")
+                commodityCover: $('#commodityCover').attr("src"),
             });
             console.log(params);
             save(params);

@@ -16,7 +16,7 @@ public class Commodity extends BaseModel {
 
     private String category;
 
-    private String coverUrl;
+    private String commodityCover;
 
     private Integer costPoints;
 
@@ -80,12 +80,12 @@ public class Commodity extends BaseModel {
         this.category = category == null ? null : category.trim();
     }
 
-    public String getCoverUrl() {
-        return coverUrl;
+    public String getCommodityCover() {
+        return commodityCover;
     }
 
-    public void setCoverUrl(String coverUrl) {
-        this.coverUrl = coverUrl == null ? null : coverUrl.trim();
+    public void setCommodityCover(String commodityCover) {
+        this.commodityCover = commodityCover == null ? null : commodityCover.trim();
     }
 
     public Integer getCostPoints() {

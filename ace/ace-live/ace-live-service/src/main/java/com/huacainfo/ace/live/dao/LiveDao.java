@@ -21,7 +21,6 @@ public interface LiveDao {
 
     int updateByPrimaryKey(Live record);
 
-    int updateByPrimaryKeySelective(Live record);
 
     List<LiveVo> findList(@Param("condition") LiveQVo condition,
                           @Param("start") int start, @Param("limit") int limit,
@@ -59,4 +58,7 @@ public interface LiveDao {
     int updateLiveVisitNum(String id);
 
     Users selectSysUserByOpenid(String openid);
+
+    int updateAudit( @Param("id") String id,@Param("auditStatus") String auditStatus,@Param("lastAuditLogId") String lastAuditLogId);
+    int updateStatus( @Param("id") String id,@Param("status") String status);
 }

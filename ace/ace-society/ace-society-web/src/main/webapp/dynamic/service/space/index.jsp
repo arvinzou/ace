@@ -80,7 +80,7 @@
     <tr>
         <td> \${item.commodityName}</td>
         <td> \${item.category}</td>
-        <td><img src="\${item.coverUrl}" class="cover"/></td>
+        <td><img src="\${item.commodityCover}" class="cover"/></td>
         <td> \${item.costPoints}</td>
         <td>
             {@if item.state==1}
@@ -124,7 +124,7 @@
         </tr>
         <tr>
             <td class="active"> 场地封面</td>
-            <td class="success"><img src="\${data.coverUrl}" class="cover"/></td>
+            <td class="success"><img src="\${data.commodityCover}" class="cover"/></td>
         </tr>
         <tr>
             <td class="active"> 场地简介</td>

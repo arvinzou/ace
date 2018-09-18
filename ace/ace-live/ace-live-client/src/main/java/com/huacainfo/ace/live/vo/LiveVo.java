@@ -12,6 +12,12 @@ public class LiveVo extends Live {
      */
     private int reportCount;
 
+    private String auditStatus;
+
+    private String statement;
+
+    private java.util.Date auditDate;
+
     public int getReportCount() {
         return reportCount;
     }
@@ -19,4 +25,6 @@ public class LiveVo extends Live {
     public void setReportCount(int reportCount) {
         this.reportCount = reportCount;
     }
+
+
 }

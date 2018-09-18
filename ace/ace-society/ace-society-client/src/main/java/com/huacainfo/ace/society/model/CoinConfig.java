@@ -4,7 +4,7 @@ import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
 
-public class CoinConfig extends BaseModel{
+public class CoinConfig extends BaseModel {
     private String id;
 
     private String category;
@@ -14,6 +14,10 @@ public class CoinConfig extends BaseModel{
     private Integer host;
 
     private Integer participant;
+
+    private Integer subjoinNum;
+
+    private Integer baseNum;
 
     private String status;
 
@@ -28,6 +32,22 @@ public class CoinConfig extends BaseModel{
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public Integer getSubjoinNum() {
+        return subjoinNum;
+    }
+
+    public void setSubjoinNum(Integer subjoinNum) {
+        this.subjoinNum = subjoinNum;
+    }
+
+    public Integer getBaseNum() {
+        return baseNum;
+    }
+
+    public void setBaseNum(Integer baseNum) {
+        this.baseNum = baseNum;
+    }
 
     public String getId() {
         return id;

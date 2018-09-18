@@ -30,6 +30,10 @@ function t_query(){
     getPageList();
     return false;
 }
+function setParams(key,value){
+    params[key]=value;
+     getPageList();
+}
 /*直播加载表格数据*/
 function getPageList() {
     var url = contextPath+ "/live/findLiveList";
@@ -80,10 +84,13 @@ function initEvents() {
 $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
+        var title=relatedTarget.data('title');
         var modal = $(this);
+        $('.audit-title').html(title);
+        console.log(relatedTarget);
         modal.find('.modal-body input[name=id]').val(id);
     })
-$('#modal-audit .btn-primary').on('click', function () {
+$('#modal-audit .audit').on('click', function () {
 $('#modal-audit form').submit();
     });
 $('#modal-audit form').ajaxForm({
@@ -101,21 +108,25 @@ $('#modal-audit form').ajaxForm({
             }
         });
 
-
+ $(".btn-group .btn").bind('click',function(event){
+            $(event.target).siblings().removeClass("active");
+            console.log(event);
+            $(event.target).addClass("active");
+        });
 }
 /*直播审核*/
 function audit(params){
     startLoad();
     $.ajax({
-        url: contextPath + "/subject/audit",
+        url: contextPath + "/live/updateLiveAuditByLiveId",
         type:"post",
         async:false,
         data:params,
         success:function(rst){
             stopLoad();
-            $("#modal-audit").modal('hide');
             alert(rst.errorMessage);
             if(rst.status == 0) {
+                $("#modal-audit").modal('hide');
                 getPageList();
             }
         },

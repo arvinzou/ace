@@ -7,6 +7,8 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="host" jdbcType="INTEGER" property="host"/>
         <result column="participant" jdbcType="INTEGER" property="participant"/>
+        <result column="subjoinNum" jdbcType="INTEGER" property="subjoinNum"/>
+        <result column="baseNum" jdbcType="INTEGER" property="baseNum"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
@@ -16,7 +18,7 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, category, name, host, participant, status, createUserId, createUserName, createDate, 
+    id, category, name, host, participant, subjoinNum, baseNum, status, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -42,12 +44,12 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.society.model.CoinConfig">
     insert into coin_config (id, category, name, 
-      host, participant, status, 
+      host, participant, subjoinNum, baseNum, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate
       )
     values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{host,jdbcType=INTEGER}, #{participant,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
+      #{host,jdbcType=INTEGER}, #{participant,jdbcType=INTEGER},#{subjoinNum,jdbcType=INTEGER},#{baseNum,jdbcType=INTEGER}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
       )
@@ -69,6 +71,12 @@
             </if>
             <if test="participant != null">
                 participant,
+            </if>
+            <if test="subjoinNum != null">
+                subjoinNum,
+            </if>
+            <if test="baseNum != null">
+                baseNum,
             </if>
             <if test="status != null">
                 status,
@@ -108,6 +116,12 @@
             <if test="participant != null">
                 #{participant,jdbcType=INTEGER},
             </if>
+            <if test="subjoinNum != null">
+                #{subjoinNum,jdbcType=INTEGER},
+            </if>
+            <if test="baseNum != null">
+                #{baseNum,jdbcType=INTEGER},
+            </if>
             <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
@@ -146,6 +160,12 @@
             <if test="participant != null">
                 participant = #{participant,jdbcType=INTEGER},
             </if>
+            <if test="subjoinNum != null">
+                subjoinNum = #{subjoinNum,jdbcType=INTEGER},
+            </if>
+            <if test="baseNum != null">
+                baseNum = #{baseNum,jdbcType=INTEGER},
+            </if>
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
@@ -176,6 +196,8 @@
       name = #{name,jdbcType=VARCHAR},
       host = #{host,jdbcType=INTEGER},
       participant = #{participant,jdbcType=INTEGER},
+      subjoinNum = #{subjoinNum,jdbcType=INTEGER},
+      baseNum = #{baseNum,jdbcType=INTEGER},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
