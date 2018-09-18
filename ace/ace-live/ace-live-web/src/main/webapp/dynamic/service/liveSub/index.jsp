@@ -75,7 +75,7 @@
                                                             <th width="35%">名称 </th>
                                                             <th width="10%">状态</th>
 
-                                                            <th width="20%">开始&结束时间</th>
+                                                            <th width="20%">开始时间</th>
                                                             <th width="10%">参与人数/点击量</th>
                                                             <th width="15%">审核状态</th>
                                                             <th width="10%">操作</th>
@@ -119,8 +119,7 @@
         </td>
 
         <td>
-            \${item.startTime}<br>
-            \${item.endTime}
+            \${item.startTime}
 
         </td>
         <td  >\${item.nop}/\${item.pop}</td>

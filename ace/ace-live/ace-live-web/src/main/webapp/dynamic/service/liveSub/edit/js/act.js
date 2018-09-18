@@ -2,7 +2,7 @@ var loading = {};
 var editor;
 window.onload = function (){
     jQuery(function ($) {
-    $(".breadcrumb").append("<li><span>编辑$!{bean.tableChineseName}</span></li>");
+        $(".breadcrumb").append("<li><span>编辑直播</span></li>");
        initForm();
 initEvents();
     });
@@ -41,22 +41,30 @@ function initEvents(){
     $("#fm-edit").validate({
         onfocusout: function(element) { $(element).valid(); },
         rules: {
-            #if($!list)
-             #foreach($item in $list)
-                $!{item.columName}: {required: true,maxlength:$!{item.len}}#if( $foreach.hasNext ),#end
-             #end
-            #end
-        },
+                                         name: {required: true,maxlength:100},                             category: {required: true,maxlength:20},                             deptId: {required: true,maxlength:100},                             remark: {required: true,maxlength:500},                             content: {required: true,maxlength:2147483647},                             imageSrc: {required: true,maxlength:200},                             auditStatus: {required: true,maxlength:1}                                 },
         messages: {
-            #if($!list)
-             #foreach($item in $list)
-                    $!{item.columName}: {
-                        required: "请输入$!{item.remarks}",
-                        maxlength:"$!{item.remarks}字符长度不能超过$!{item.len}"
-                    }#if( $foreach.hasNext ),#end
-             #end
-            #end
-        }
+                                             name: {
+                        required: "请输入名称",
+                        maxlength:"名称字符长度不能超过100"
+                    },                                 category: {
+                        required: "请输入直播类型",
+                        maxlength:"直播类型字符长度不能超过20"
+                    },                                 deptId: {
+                        required: "请输入组织单位",
+                        maxlength:"组织单位字符长度不能超过100"
+                    },                                 remark: {
+                        required: "请输入摘要",
+                        maxlength:"摘要字符长度不能超过500"
+                    },                                 content: {
+                        required: "请输入活动介绍",
+                        maxlength:"活动介绍字符长度不能超过2147483647"
+                    },                                 imageSrc: {
+                        required: "请输入封面",
+                        maxlength:"封面字符长度不能超过200"
+                    },                                 auditStatus: {
+                        required: "请输入审核状态1待审2通过3驳回",
+                        maxlength:"审核状态1待审2通过3驳回字符长度不能超过1"
+                    }                                 }
     });
      /*监听表单提交*/
     $('#fm-edit').ajaxForm({
@@ -81,7 +89,7 @@ function save(params) {
     });
     startLoad();
     $.ajax({
-        url: contextPath + "/$!{bean.lowerName}/update$!{bean.name}",
+        url: contextPath + "/live/updateLive",
         type: "post",
         async: false,
         data: {
@@ -91,7 +99,7 @@ function save(params) {
             stopLoad();
 			alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href ='../index.jsp?id='+urlParams.id;
+                window.location.href ='../index.jsp';
             }
         },
         error: function () {
@@ -102,7 +110,7 @@ function save(params) {
 
 function initForm(){
     $.ajax({
-        url: contextPath + "/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey",
+        url: contextPath + "/live/selectLiveByPrimaryKey",
         type:"post",
         async:false,
 data:{ id: urlParams.did },

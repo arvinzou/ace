@@ -5,15 +5,14 @@ import com.huacainfo.ace.generator.base.CodeGenerator;
 public class Generator {
 
     public static void main(String[] args) throws Exception {
-        CodeGenerator codeGenerator = new CodeGenerator("society", "场地占用情况", "Arvin");
-        Class<?> c = com.huacainfo.ace.society.model.SpaceOccupyInfo.class;
+        CodeGenerator codeGenerator = new CodeGenerator("society", "场地占用情况", "Arvin");//Class<?> c = com.huacainfo.ace.society.model.SpaceOccupyInfo.class;
 //        Class<?> c = null;//com.huacainfo.ace.society.model.PersonInfo.class;
 
         //*******************************************
-        codeGenerator.init(c);
+        //codeGenerator.init(c);
 
         //java
-        codeGenerator.generatorJavaManager(c);
+       // codeGenerator.generatorJavaManager(c);
         //web形式-适用于新互联网架构
 //        codeGenerator.generatorWebClient1(c);
 
