@@ -83,8 +83,9 @@
                                                     <table class="table table-hover">
                                                         <thead>
                                                         <tr>
-                                                            <th width="10%"> 报道标题</th>
-                                                            <th width="10%"> 状态</th>
+                                                            <th width="35%">所属活动</th>
+                                                            <th width="35%">报道标题</th>
+                                                            <th width="10%">状态</th>
                                                             <th width="15%">操作</th>
                                                         </tr>
                                                         </thead>
@@ -119,15 +120,19 @@
     {@each data as item, index}
     <tr>
 
-        <td> \&{item.title}</td>
+        <td> \${item.activityTitel}</td>
+        <td> \${item.title}</td>
 
         <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">已删除</span>
+            <div style="padding-top:10px"></div>
             {@else if item.status==1}
             <span class="label label-lg label-info">暂存</span>
+            <div style="padding-top:10px"></div>
             {@else if item.status==2}
             <span class="label label-lg label-warning">提交审核</span>
+            <div style="padding-top:10px"></div>
             {@else if item.status==3}
             <span class="label label-lg label-success">审核通过</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
@@ -136,6 +141,7 @@
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else}
             <span class="label label-lg label-danger">暂存</span>
+            <div style="padding-top:10px"></div>
             {@/if}
         </td>
         <td>
@@ -154,27 +160,27 @@
     <table class="table table-bordered table-hover">
         <tr>
             <td class="active"> 主键-GUID</td>
-            <td class="success"> \&{data.id}</td>
+            <td class="success"> \${data.id}</td>
         </tr>
         <tr>
             <td class="active"> 活动编码</td>
-            <td class="success"> \&{data.activityId}</td>
+            <td class="success"> \${data.activityId}</td>
         </tr>
         <tr>
             <td class="active"> 报道标题</td>
-            <td class="success"> \&{data.title}</td>
+            <td class="success"> \${data.title}</td>
         </tr>
         <tr>
             <td class="active"> 报道副标题</td>
-            <td class="success"> \&{data.subTitle}</td>
+            <td class="success"> \${data.subTitle}</td>
         </tr>
         <tr>
             <td class="active"> 报道内容</td>
-            <td class="success"> \&{data.content}</td>
+            <td class="success"> \${data.content}</td>
         </tr>
         <tr>
             <td class="active"> 备注</td>
-            <td class="success"> \&{data.remark}</td>
+            <td class="success"> \${data.remark}</td>
         </tr>
         <tr>
             <td class="active"> 状态
@@ -184,31 +190,31 @@
                 3-审核通过
                 4-审核驳回
             </td>
-            <td class="success"> \&{data.status}</td>
+            <td class="success"> \${data.status}</td>
         </tr>
         <tr>
             <td class="active"> 创建人编号</td>
-            <td class="success"> \&{data.createUserId}</td>
+            <td class="success"> \${data.createUserId}</td>
         </tr>
         <tr>
             <td class="active"> 创建人姓名</td>
-            <td class="success"> \&{data.createUserName}</td>
+            <td class="success"> \${data.createUserName}</td>
         </tr>
         <tr>
             <td class="active"> 创建日期</td>
-            <td class="success"> \&{data.createDate}</td>
+            <td class="success"> \${data.createDate}</td>
         </tr>
         <tr>
             <td class="active"> 更新人编号</td>
-            <td class="success"> \&{data.lastModifyUserId}</td>
+            <td class="success"> \${data.lastModifyUserId}</td>
         </tr>
         <tr>
             <td class="active"> 更新人名称</td>
-            <td class="success"> \&{data.lastModifyUserName}</td>
+            <td class="success"> \${data.lastModifyUserName}</td>
         </tr>
         <tr>
             <td class="active"> 更新日期</td>
-            <td class="success"> \&{data.lastModifyDate}</td>
+            <td class="success"> \${data.lastModifyDate}</td>
         </tr>
     </table>
 </script>
