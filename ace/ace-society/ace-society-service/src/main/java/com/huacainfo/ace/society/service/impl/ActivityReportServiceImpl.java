@@ -52,10 +52,10 @@ public class ActivityReportServiceImpl implements ActivityReportService {
     @Override
     public PageResult<ActivityReportVo> findActivityReportList(ActivityReportQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<ActivityReportVo> rst = new PageResult<>();
-        List<ActivityReportVo> list = this.activityReportDao.findList(condition, start, limit, orderBy);
+        List<ActivityReportVo> list = this.activityReportDao.adminFindList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.activityReportDao.findCount(condition);
+            int allRows = this.activityReportDao.adminFindCount(condition);
             rst.setTotal(allRows);
         }
         return rst;

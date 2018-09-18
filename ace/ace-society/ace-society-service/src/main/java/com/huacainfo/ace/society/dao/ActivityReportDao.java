@@ -28,7 +28,14 @@ public interface ActivityReportDao {
                                         @Param("limit") int limit,
                                         @Param("orderBy") String orderBy);
 
+
+    List<ActivityReportVo> adminFindList(@Param("condition") ActivityReportQVo condition,
+                                        @Param("start") int start,
+                                        @Param("limit") int limit,
+                                        @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") ActivityReportQVo condition);
+    int adminFindCount(@Param("condition") ActivityReportQVo condition);
 
     int isExit(ActivityReport record);
 
