@@ -59,7 +59,7 @@ function initEvents() {
             $.extend(params, {
                 time: new Date(),
                 commodityType: "1", //商品类型  0-爱心商品 1-爱心场地
-                coverUrl: $('#coverUrl').attr("src"),
+                commodityCover: $('#commodityCover').attr("src"),
 
             });
             console.log(params);

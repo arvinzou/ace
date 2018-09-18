@@ -5,33 +5,27 @@ import com.huacainfo.ace.common.model.BaseModel;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Commodity extends BaseModel {
+public class OrderDetail extends BaseModel {
     private String id;
-    /**
-     * 商品类型  0-爱心商品 1-爱心场地
-     */
-    private String commodityType;
+
+    private String orderId;
+
+    private String commodityId;
 
     private String commodityName;
 
-    private String category;
-
     private String commodityCover;
 
-    private Integer costPoints;
-
-    private BigDecimal origPrice;
-
     private BigDecimal salePrice;
-    /**
-     * 商品状态0-下架1-在售
-     */
-    private String state;
+
+    private Integer purchaseQty;
+
+    private BigDecimal subtotal;
+
+    private String detailState;
 
     private String remark;
-    /**
-     * 状态   0-删除 1-有效数据
-     */
+
     private String status;
 
     private String createUserId;
@@ -46,7 +40,21 @@ public class Commodity extends BaseModel {
 
     private Date lastModifyDate;
 
-    private String summary;
+    public String getCommodityName() {
+        return commodityName;
+    }
+
+    public void setCommodityName(String commodityName) {
+        this.commodityName = commodityName;
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
 
     public String getId() {
         return id;
@@ -56,28 +64,20 @@ public class Commodity extends BaseModel {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getCommodityType() {
-        return commodityType;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setCommodityType(String commodityType) {
-        this.commodityType = commodityType == null ? null : commodityType.trim();
+    public void setOrderId(String orderId) {
+        this.orderId = orderId == null ? null : orderId.trim();
     }
 
-    public String getCommodityName() {
-        return commodityName;
+    public String getCommodityId() {
+        return commodityId;
     }
 
-    public void setCommodityName(String commodityName) {
-        this.commodityName = commodityName == null ? null : commodityName.trim();
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
+    public void setCommodityId(String commodityId) {
+        this.commodityId = commodityId == null ? null : commodityId.trim();
     }
 
     public String getCommodityCover() {
@@ -88,22 +88,6 @@ public class Commodity extends BaseModel {
         this.commodityCover = commodityCover == null ? null : commodityCover.trim();
     }
 
-    public Integer getCostPoints() {
-        return costPoints;
-    }
-
-    public void setCostPoints(Integer costPoints) {
-        this.costPoints = costPoints;
-    }
-
-    public BigDecimal getOrigPrice() {
-        return origPrice;
-    }
-
-    public void setOrigPrice(BigDecimal origPrice) {
-        this.origPrice = origPrice;
-    }
-
     public BigDecimal getSalePrice() {
         return salePrice;
     }
@@ -112,12 +96,20 @@ public class Commodity extends BaseModel {
         this.salePrice = salePrice;
     }
 
-    public String getState() {
-        return state;
+    public Integer getPurchaseQty() {
+        return purchaseQty;
     }
 
-    public void setState(String state) {
-        this.state = state == null ? null : state.trim();
+    public void setPurchaseQty(Integer purchaseQty) {
+        this.purchaseQty = purchaseQty;
+    }
+
+    public String getDetailState() {
+        return detailState;
+    }
+
+    public void setDetailState(String detailState) {
+        this.detailState = detailState == null ? null : detailState.trim();
     }
 
     public String getRemark() {
@@ -182,13 +174,5 @@ public class Commodity extends BaseModel {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
     }
 }
