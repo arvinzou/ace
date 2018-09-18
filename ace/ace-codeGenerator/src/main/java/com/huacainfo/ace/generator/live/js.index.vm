@@ -29,6 +29,10 @@ function t_query(){
     getPageList();
     return false;
 }
+function setParams(key,value){
+    params[key]=value;
+     getPageList();
+}
 /*$!{bean.tableChineseName}加载表格数据*/
 function getPageList() {
     var url = contextPath+ "/$!{bean.lowerName}/find$!{bean.name}List";
