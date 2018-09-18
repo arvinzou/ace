@@ -202,6 +202,7 @@
 				{@/if}
 				{@/each}
             </div>
+			<div class="row undis" id="address"><div class="col-xs-12"><span class="address">面对面咨询的地点为荷花社区三楼咨询室</span></div></div>
             <div class="row content_03">
             <div class="col-xs-7 col-sm-7" style="padding-left: 0;margin-top: 0.4rem;">
             <span class="method_01">咨询次数</span>

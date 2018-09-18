@@ -53,6 +53,14 @@
 					</span>
 				</div>
 			</div>
+			{@if data.consultProduct.type == '3'}
+			<div class="row">
+				<div class="col-xs-12 col-sm-12">
+					<span class="formtitle">咨询地点：</span>
+					<span class="formcmt">荷花社区三楼咨询室</span>
+				</div>
+			</div>
+			{@/if}
 			<div class="row">
 				<div class="col-xs-12 col-sm-12">
 					<span class="formtitle">咨询次数：</span>

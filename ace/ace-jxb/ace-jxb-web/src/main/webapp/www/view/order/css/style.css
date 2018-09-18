@@ -389,3 +389,14 @@ textarea{
 .msg{
 	color: #49D0C5;
 }
+.address{
+	font-size: 0.32rem;
+	color: #A0A7B6;
+	padding-top: 0.1rem;
+}
+.undis{
+	display: none;
+}
+.dis{
+	display: block;
+}

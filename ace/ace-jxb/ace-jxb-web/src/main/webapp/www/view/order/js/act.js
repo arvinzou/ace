@@ -134,6 +134,12 @@ function changeSex(obj,value){
 function changeType(obj, priceStr, id){
 	$(obj).removeClass("unactive").addClass("active");
 	$(obj).parent().siblings().children().removeClass("active").addClass("unactive");
+    var typeText = $(obj).find('.words_02').text();
+    if(typeText == '面对面咨询'){
+        $("#address").removeClass("undis").addClass("dis");
+    }else{
+        $("#address").removeClass("dis").addClass("undis");
+    }
     unitPrice = parseFloat(priceStr);
     commodityId = id;
     var num = parseInt($("#num").text());
