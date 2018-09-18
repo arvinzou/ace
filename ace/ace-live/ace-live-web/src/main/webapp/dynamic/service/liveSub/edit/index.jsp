@@ -49,7 +49,7 @@
                                             名称
                                         </label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" name="name" maxlength="100" placeholder="请输入名称（建议字数在28个字以内，不超过100个字)">
+                                            <input type="text" class="form-control" name="name" value="\${data.o.name}" placeholder="请输入名称（建议字数在28个字以内，不超过100个字)">
                                             <div class="error-name"></div>
                                         </div>
                                     </div>
@@ -60,11 +60,11 @@
                                         </label>
                                         <div class="col-md-10">
                                             <label class="mt-radio mt-radio-outline">
-                                                <input type="radio" name="category" value="1">图文
+                                                <input type="radio" name="category" value="1" \${data.o.category==1?'checked':''}>图文
                                                 <span></span>
                                             </label>
                                             <label class="mt-radio mt-radio-outline">
-                                                <input type="radio" name="category" value="2">视频
+                                                <input type="radio" name="category" value="2" \${data.o.category==2?'checked':''}>视频
                                                 <span></span>
                                             </label>
                                             <div class="error-category"></div>
@@ -76,10 +76,10 @@
                                             封面
                                         </label>
                                         <div class="col-md-10">
-                                            <input type="hidden" name="imageSrc">
+                                            <input type="hidden" name="imageSrc" value="\${data.o.imageSrc}">
 											<div style="padding: 10px;">建议图片大小为480*270</div>
-                                            <img style="max-width:480px;cursor:pointer" id="imageSrc" data-toggle="modal" data-xsize="480" data-ysize="270" data-cover="imageSrc"
-                                                data-target="#img-uploader" src="${portalPath}/content/common/image/upload-default.jpg">
+                                            <img style="max-width:480px;cursor:pointer;" id="imageSrc" data-toggle="modal" data-xsize="480" data-ysize="270" data-cover="imageSrc"
+                                                data-target="#img-uploader" src="{@if data.o.imageSrc}\${data.o.imageSrc}{@else}${portalPath}/content/common/image/upload-default.jpg{@/if}">
 
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                             直播时间
                                         </label>
                                         <div class="col-md-2">
-                                            <input type="text" class="form-control" name="startTime">
+                                            <input type="text" class="form-control" name="startTime" value="\${data.o.startTime}">
                                             <div class="error-startTime"></div>
                                         </div>
                                         <div class="col-md-8">
@@ -103,7 +103,7 @@
                                             摘要
                                         </label>
                                         <div class="col-md-10">
-                                            <textarea rows="5" cols="100" class="form-control" name="remark" maxlength="500" placeholder="请输入摘要（建议字数在100个字以内，不超过500个字)"></textarea>
+                                            <textarea rows="5" cols="100" class="form-control" name="remark" maxlength="500" placeholder="请输入摘要（建议字数在100个字以内，不超过500个字)">\${data.o.remark}</textarea>
                                             <div class="error-remark"></div>
                                         </div>
                                     </div>
@@ -114,6 +114,7 @@
                                         </label>
                                         <div class="col-md-10">
                                             <textarea type="text" name="content">
+											\${data.o.content}
                                             </textarea>
                                             <div class="error-content"></div>
                                         </div>
@@ -124,7 +125,7 @@
                                             直播流地址
                                         </label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" name="rtmpUrl" maxlength="200" placeholder="请输入直播流地址（如:rtmp://a.baidu.com/284099，不超过200个字)">
+                                            <input type="text" class="form-control" name="rtmpUrl" value="\${data.o.rtmpUrl}" maxlength="200" placeholder="请输入直播流地址（如:rtmp://a.baidu.com/284099，不超过200个字)">
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
@@ -133,7 +134,7 @@
                                             回放地址
                                         </label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" name="mp4Url" maxlength="200" placeholder="请输入回放地址（如:http://a.baidu.com/284099.mp4，不超过200个字)">
+                                            <input type="text" class="form-control" name="mp4Url" value="\${data.o.mp4Url}" maxlength="200" placeholder="请输入回放地址（如:http://a.baidu.com/284099.mp4，不超过200个字)">
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
@@ -162,5 +163,5 @@
    <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
    <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
    <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
-
+<script src="js/act.js?v=${cfg.version}"></script>
     </html>

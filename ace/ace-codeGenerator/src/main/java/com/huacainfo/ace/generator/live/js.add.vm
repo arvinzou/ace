@@ -96,6 +96,7 @@ function save(params) {
             }
         },
         error: function () {
+            stopLoad();
             alert("对不起出错了！");
         }
     });

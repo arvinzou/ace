@@ -95,18 +95,21 @@ function save(params) {
             }
         },
         error: function () {
+            stopLoad();
             alert("对不起出错了！");
         }
     });
 }
 
 function initForm(){
+ startLoad();
     $.ajax({
         url: contextPath + "/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey",
         type:"post",
         async:false,
 data:{ id: urlParams.did },
         success:function(result){
+        startLoad();
             if(result.status == 0) {
                var data={};
                data['o']=result.value;
@@ -119,6 +122,7 @@ render('#fm-edit',data,'tpl-fm');
             }
         },
         error:function(){
+        startLoad();
             alert("对不起出错了！");
         }
     });

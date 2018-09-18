@@ -133,6 +133,7 @@ function save(params) {
             }
         },
         error: function () {
+			 startLoad();
             alert("对不起出错了！");
         }
     });

@@ -64,7 +64,7 @@
                                         <div class="col-md-10">
                                             <input type="hidden" name="imageSrc">
 											<div style="padding: 10px;">建议图片大小为480*270</div>
-                                            <img style="max-width:480px;cursor:pointer" id="imageSrc" data-toggle="modal" data-xsize="480" data-ysize="270" data-cover="imageSrc"
+                                            <img style="max-width:480px;cursor:pointer;" id="imageSrc" data-toggle="modal" data-xsize="480" data-ysize="270" data-cover="imageSrc"
                                                 data-target="#img-uploader" src="${portalPath}/content/common/image/upload-default.jpg">
 
                                         </div>
@@ -140,12 +140,11 @@
                 </div>
                 <!-- END SAMPLE TABLE PORTLET-->
 
-                <%--=============common jsp-suffix===============--%>
+               
                     <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
-                    <%--==============common jsp-suffix==============--%>
+                    
     </body>
 
-    <%--==============common footer==============--%>
         <jsp:include page="/dynamic/common/footer.jsp" />
 
         <script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js?v=${cfg.version}"></script>
