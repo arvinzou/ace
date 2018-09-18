@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.OrderInfoDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.OrderInfo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="orderNo" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="payType" jdbcType="CHAR" property="payType"/>
+        <result column="payAmount" jdbcType="DECIMAL" property="payAmount"/>
+        <result column="payDate" jdbcType="TIMESTAMP" property="payDate"/>
+        <result column="receiveType" jdbcType="CHAR" property="receiveType"/>
+        <result column="receiveName" jdbcType="VARCHAR" property="receiveName"/>
+        <result column="receivePhone" jdbcType="VARCHAR" property="receivePhone"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="orderState" jdbcType="CHAR" property="orderState"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, orderNo, userId, payType, payAmount, payDate, receiveType, receiveName, receivePhone, 
+    country, province, city, district, address, orderState, remark, status, createUserId,
+    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_info
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.society.model.OrderInfo">
+    insert into order_info (id, orderNo, userId,
+      payType, payAmount, payDate,
+      receiveType, receiveName, receivePhone,
+      country, province, city,
+      district, address, orderState,
+      remark, status, createUserId,
+      createUserName, createDate, lastModifyUserId,
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      #{payType,jdbcType=CHAR}, #{payAmount,jdbcType=DECIMAL}, #{payDate,jdbcType=TIMESTAMP},
+      #{receiveType,jdbcType=CHAR}, #{receiveName,jdbcType=VARCHAR}, #{receivePhone,jdbcType=VARCHAR},
+      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+      #{district,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{orderState,jdbcType=CHAR},
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.OrderInfo">
+    update order_info
+    set orderNo = #{orderNo,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      payType = #{payType,jdbcType=CHAR},
+      payAmount = #{payAmount,jdbcType=DECIMAL},
+      payDate = #{payDate,jdbcType=TIMESTAMP},
+      receiveType = #{receiveType,jdbcType=CHAR},
+      receiveName = #{receiveName,jdbcType=VARCHAR},
+      receivePhone = #{receivePhone,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      orderState = #{orderState,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <!--**********************************-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.OrderInfoVo">
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <collection property="detailList" column="detailId" javaType="ArrayList"
+                    ofType="com.huacainfo.ace.society.model.OrderDetail">
+            <id property="id" jdbcType="VARCHAR" column="detailId"/>
+            <result column="commodityId" jdbcType="VARCHAR" property="commodityId"/>
+            <result column="commodityName" jdbcType="VARCHAR" property="commodityName"/>
+            <result column="commodityCover" jdbcType="VARCHAR" property="commodityCover"/>
+            <result column="salePrice" jdbcType="DECIMAL" property="salePrice"/>
+            <result column="purchaseQty" jdbcType="INTEGER" property="purchaseQty"/>
+            <result column="subtotal" jdbcType="DECIMAL" property="subtotal"/>
+        </collection>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        od.id as detailId, od.commodityId, od.commodityName, od.commodityCover,
+        od.salePrice, od.purchaseQty, od.subtotal,
+
+        u.nickname,u.headimgurl,
+        t.id, t.orderNo, t.userId, t.payType, t.payAmount, t.payDate, t.receiveType, t.receiveName, t.receivePhone,
+        t.country, t.province, t.city, t.district, t.address, t.orderState, t.remark, t.status, t.createUserId,
+        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="From_Statement">
+        from order_info t
+        left join order_detail od on t.id = od.orderId
+        left join portal.userinfo u on t.userId = u.unionid
+    </sql>
+
+    <sql id="Where_Condition">
+        where 1=1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.PersonInfo">
+        select count(1)
+        from order_info
+        where  status = 1
+    </select>
+
+    <update id="updateStatus" parameterType="com.huacainfo.ace.society.model.OrderInfo">
+        update order_info
+        set orderState = #{orderState,jdbcType=CHAR},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

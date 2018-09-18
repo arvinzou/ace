@@ -4,22 +4,13 @@ window.onload = function () {
     jQuery(function ($) {
         initForm();
         initEvents();
-        $(".breadcrumb").append("<li>添加爱心商品</li>");
+        $(".breadcrumb").append("<li>编辑订单管理</li>");
     });
 }
-function App() {
-    console.log("=============================App Start==============================");
-    loadCustom();
-}
-function loadCustom() {
-    var urls = [];
-    for (var i = 0; i < urls.length; i++) {
-        loader(urls[i]);
-    }
-}
+
 function initEditor() {
     editor = new Simditor({
-        textarea: $('textarea[name=summary]'),
+        textarea: $('textarea[name=introduce]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
             'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
         ],
@@ -35,12 +26,15 @@ function initEditor() {
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
-    var html = juicer(tpl, {data: data,});
+    var html = juicer(tpl, {
+        data: data,
+    });
     $(obj).html(html);
 }
 
 function initPage() {
     initEditor();
+//   initUpload();
 }
 function initEvents() {
     /*表单验证*/
@@ -49,12 +43,12 @@ function initEvents() {
             $(element).valid();
         },
         rules: {
-            commodityName: {required: true, maxlength: 50}
+            userId: {required: true, maxlength: 50}
         },
         messages: {
-            commodityName: {
-                required: "请输入商品名称",
-                maxlength: "商品名称字符长度不能超过50"
+            userId: {
+                required: "请输入客户主键",
+                maxlength: "客户主键字符长度不能超过50"
             }
         }
     });
@@ -67,11 +61,11 @@ function initEvents() {
             });
             $.extend(params, {
                 time: new Date(),
-                commodityCover: $('#commodityCover').attr("src"),
+//coverUrl: $('#coverUrl').attr("src")
             });
             console.log(params);
             save(params);
-            return true;
+            return false;
         }
     });
 }
@@ -80,7 +74,7 @@ function save(params) {
     $.extend(params, {});
     startLoad();
     $.ajax({
-        url: contextPath + "/commodity/updateCommodity",
+        url: contextPath + "/orderInfo/updateOrderInfo",
         type: "post",
         async: false,
         data: {
@@ -101,7 +95,7 @@ function save(params) {
 
 function initForm() {
     $.ajax({
-        url: contextPath + "/commodity/selectCommodityByPrimaryKey",
+        url: contextPath + "/orderInfo/selectOrderInfoByPrimaryKey",
         type: "post",
         async: false,
         data: {id: urlParams.did},
@@ -111,8 +105,8 @@ function initForm() {
                 data['o'] = result.value;
                 render('#fm-edit', data, 'tpl-fm');
                 initPage();
-                //富文本填值
-                editor.setValue(data['o'].summary);
+//富文本填值
+//editor.setValue(data['o'].summary);
             } else {
                 alert(result.errorMessage);
             }
@@ -122,4 +116,3 @@ function initForm() {
         }
     });
 }
-

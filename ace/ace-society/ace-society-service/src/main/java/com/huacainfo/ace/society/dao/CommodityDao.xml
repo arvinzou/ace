@@ -6,7 +6,7 @@
         <result column="commodityType" jdbcType="VARCHAR" property="commodityType"/>
         <result column="commodityName" jdbcType="VARCHAR" property="commodityName"/>
         <result column="category" jdbcType="CHAR" property="category"/>
-        <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
+        <result column="commodityCover" jdbcType="VARCHAR" property="commodityCover"/>
         <result column="costPoints" jdbcType="INTEGER" property="costPoints"/>
         <result column="origPrice" jdbcType="DECIMAL" property="origPrice"/>
         <result column="salePrice" jdbcType="DECIMAL" property="salePrice"/>
@@ -24,7 +24,7 @@
         <result column="summary" jdbcType="LONGVARCHAR" property="summary"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, commodityType, commodityName, category, coverUrl, costPoints, origPrice, salePrice, 
+        id, commodityType, commodityName, category, commodityCover, costPoints, origPrice, salePrice,
     state, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
     lastModifyUserName, lastModifyDate, summary
   </sql>
@@ -40,15 +40,15 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.society.model.Commodity">
-    insert into commodity (id, commodityType, commodityName, 
-      category, coverUrl, costPoints, 
+    insert into commodity (id, commodityType, commodityName,
+        category, commodityCover, costPoints,
       origPrice, salePrice, state, 
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate, summary
       )
-    values (#{id,jdbcType=VARCHAR}, #{commodityType,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
-      #{category,jdbcType=CHAR}, #{coverUrl,jdbcType=VARCHAR}, #{costPoints,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{commodityType,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR},
+        #{category,jdbcType=CHAR}, #{commodityCover,jdbcType=VARCHAR}, #{costPoints,jdbcType=INTEGER},
       #{origPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, #{state,jdbcType=CHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
@@ -60,7 +60,7 @@
     set commodityType = #{commodityType,jdbcType=VARCHAR},
       commodityName = #{commodityName,jdbcType=VARCHAR},
       category = #{category,jdbcType=CHAR},
-      coverUrl = #{coverUrl,jdbcType=VARCHAR},
+        commodityCover = #{commodityCover,jdbcType=VARCHAR},
       costPoints = #{costPoints,jdbcType=INTEGER},
       origPrice = #{origPrice,jdbcType=DECIMAL},
       salePrice = #{salePrice,jdbcType=DECIMAL},
@@ -82,7 +82,7 @@
 
     </resultMap>
     <sql id="Vo_Column_List">
-        id, commodityType, commodityName, category, coverUrl, costPoints, origPrice, salePrice,
+        id, commodityType, commodityName, category, commodityCover, costPoints, origPrice, salePrice,
         state, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate, summary
     </sql>

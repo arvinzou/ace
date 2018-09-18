@@ -1,3 +1,4 @@
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
@@ -11,8 +12,9 @@ public class CommonTest {
 
     @Test
     public void test() {
-        String a = "9:00~11:00";
-        System.out.println(a.length());
+        System.out.println(StringUtil.genOrderNo18Str(GUIDUtil.getGUID()));
+
+
 //        generatorGUID(1);
     }
 
