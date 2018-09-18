@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5};
+var params = {limit: 10};
 window.onload = function () {
     initPage();
     initEvents();
@@ -66,6 +66,10 @@ function add(type) {
 /*爱心币配置编辑*/
 function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
+}
+/*爱心币配置编辑*/
+function edit1(did) {
+    window.location.href = 'edit1/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 
 function del(id) {

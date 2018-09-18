@@ -82,7 +82,27 @@
             </label>
             <div class="col-md-10">
                 <input type="text" class="form-control" name="host" value="\${data.o.host}" maxlength="10"
-                       placeholder="请输入爱心币的数量。">
+                       placeholder="请输入爱心币的数量。（基础分值）">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                基础人数
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="baseNum" value="\${data.o.baseNum}" maxlength="10"
+                       placeholder="请输入人员数量。（基础人员数量）">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                奖励值
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="subjoinNum" value="\${data.o.subjoinNum}" maxlength="10"
+                       placeholder="超过部分每增加一位参加者奖励主办方爱心币数量。">
                 <span class="help-block"></span>
             </div>
         </div>

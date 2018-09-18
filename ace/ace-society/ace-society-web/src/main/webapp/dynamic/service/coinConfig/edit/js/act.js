@@ -50,6 +50,8 @@ function initEvents() {
         rules: {
             name: {required: true, maxlength: 20},
             host: {required: true, digits: true},
+            baseNum: {required: true, digits: true},
+            subjoinNum: {required: true, digits: true},
             participant: {required: false, integer: true}
         },
         messages: {
@@ -60,8 +62,15 @@ function initEvents() {
             host: {
                 required: "此项为必输项",
                 digits: "必须是整数"
-            }
-            ,
+            },
+            baseNum: {
+                required: "此项为必输项",
+                digits: "必须是整数"
+            },
+            subjoinNum: {
+                required: "此项为必输项",
+                digits: "必须是整数"
+            },
             participant: {
                 required: "",
                 integer: "必须是整数"
