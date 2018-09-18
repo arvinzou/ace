@@ -14,6 +14,10 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
+	<link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+	<link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
+	<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+	<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 </head>
 <body>
 
@@ -102,7 +106,7 @@
 
         <td >
             <div class="row">
-                <div class="col-md-4"><img src="\${item.imageSrc}" class="cover"/></div>
+                <div class="col-md-4 my-gallery"><img src="\${item.imageSrc}" class="cover"/></div>
                 <div class="col-md-8">
                     <div class="describtion">\${item.name}</div>
                 </div>
@@ -241,6 +245,39 @@
         </div>
     </div>
 </div>
+<div id="j-pswp" class="pswp"role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
 <style>
     .cover{
         width: 140px;
