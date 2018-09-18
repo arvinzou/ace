@@ -32,10 +32,12 @@
                                                                      #foreach($item in $list)
                                                                         <div class="form-group">
                                                                             <label class="col-md-2 control-label">
-                                                                                #if($item.isNullAble=='NO')
-                                                                                <span class="label-red">*</span>
-                                                                                #end
+
                                                                                 $!{item.remarks}
+                                                                                 #if($item.isNullAble=='NO')
+                                                                                       <span class="required" aria-required="true"> * </span>
+                                                                                 #end
+                                                                                ﻿
                                                                             </label>
                                                                             <div class="col-md-10">
                                                                                 <input type="text" class="form-control" name="$!{item.columName}" maxlength="$!{item.len}" placeholder="请输入$!{item.remarks}（建议字数在14个字以内，不超过$!{item.len}个字)">

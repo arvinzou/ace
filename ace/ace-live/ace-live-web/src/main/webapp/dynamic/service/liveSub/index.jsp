@@ -145,6 +145,7 @@
             {@if item.auditStatus==1}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
             {@/if}
+			<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
         </td>
     </tr>
     {@/each}
@@ -198,7 +199,7 @@
 
 
 <!--审核弹框-->
-<div class="modal fade bs-example-modal-lg"  role="dialog" id="modal-audit">
+<div class="modal fade"  role="dialog" id="modal-audit">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
@@ -218,45 +219,66 @@
         </div>
     </div>
 </div>
+<div class="modal fade"  role="dialog" id="modal-preview">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-preview" role="form">
+                      
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script id="tpl-fm" type="text/template">
 	<div class="form-body">
 	                          <div class="form-group">
-	                              <label class="col-md-2 control-label">名称</label>
+	                              <label class="col-md-2 view-label">名称</label>
 	                              <div class="col-md-10">
 										\${data.o.name}
 	                              </div>
 	                          </div>
 							<div class="form-group">
-								<label class="col-md-2 control-label">类型</label>
+								<label class="col-md-2 view-label">类型</label>
 								<div class="col-md-10">
 									\${data.o.category==1?'图文':'视频'}
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-2 control-label">开始时间</label>
+								<label class="col-md-2 view-label">开始时间</label>
 								<div class="col-md-10">
 									\${data.o.startTime}
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-md-2 control-label">摘要</label>
+								<label class="col-md-2 view-label">摘要</label>
 								<div class="col-md-10">
 									\${data.o.remark}
 								</div>
 							</div>
 							  
 							  <div class="form-group">
-							  	<label class="col-md-2 control-label">介绍</label>
+							  	<label class="col-md-2 view-label">介绍</label>
 							  	<div class="col-md-10">
 							  		\$\${data.o.content}
 							  	</div>
 							  </div>
 							  <div class="form-group">
-							  <label class="col-md-2 control-label">封面</label>
+							  <label class="col-md-2 view-label">封面</label>
 							  <div class="col-md-10">
 							  	<img  src="\${data.o.imageSrc}" style="max-width:480px;" />
 							  </div>
 							  </div>
+							  <h4>结果</h4>
+							  <hr>
 	                        <div class="form-group " id="operation">
 	                            <label class="col-md-2 control-label">结果</label>
 	                            <div class="col-md-10">
@@ -277,6 +299,50 @@
 	                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
 	                            </div>
 	                        </div>
+	                    </div>
+	
+</script>
+
+<script id="tpl-preview" type="text/template">
+	<div class="form-body">
+	                          <div class="form-group">
+	                              <label class="col-md-2 view-label">名称</label>
+	                              <div class="col-md-10">
+										\${data.o.name}
+	                              </div>
+	                          </div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">类型</label>
+								<div class="col-md-10">
+									\${data.o.category==1?'图文':'视频'}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">开始时间</label>
+								<div class="col-md-10">
+									\${data.o.startTime}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">摘要</label>
+								<div class="col-md-10">
+									\${data.o.remark}
+								</div>
+							</div>
+							  
+							  <div class="form-group">
+							  	<label class="col-md-2 view-label">介绍</label>
+							  	<div class="col-md-10">
+							  		\$\${data.o.content}
+							  	</div>
+							  </div>
+							  <div class="form-group">
+							  <label class="col-md-2 view-label">封面</label>
+							  <div class="col-md-10">
+							  	<img  src="\${data.o.imageSrc}" style="max-width:480px;" />
+							  </div>
+							  </div>
+							  
 	                    </div>
 	
 </script>

@@ -45,8 +45,9 @@
 <div class="form-body">
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">
-                                            <span class="label-red">*</span>
+                                           
                                             名称
+																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
                                             <input type="text" class="form-control" name="name" value="\${data.o.name}" placeholder="请输入名称（建议字数在28个字以内，不超过100个字)">
@@ -55,8 +56,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">
-                                            <span class="label-red">*</span>
+                                            
                                             直播类型
+																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
                                             <label class="mt-radio mt-radio-outline">
@@ -72,8 +74,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">
-                                            <span class="label-red">*</span>
+                                            
                                             封面
+																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
                                             <input type="hidden" name="imageSrc" value="\${data.o.imageSrc}">
@@ -85,22 +88,24 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">
-                                            <span class="label-red">*</span>
+                                            
                                             直播时间
+																						<span class="required" aria-required="true"> * </span>
                                         </label>
-                                        <div class="col-md-2">
+                                        <div class="col-md-4">
                                             <input type="text" class="form-control" name="startTime" value="\${data.o.startTime}">
                                             <div class="error-startTime"></div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-6">
 
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">
-                                            <span class="label-red">*</span>
+                                            
                                             摘要
+																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
                                             <textarea rows="5" cols="100" class="form-control" name="remark" maxlength="500" placeholder="请输入摘要（建议字数在100个字以内，不超过500个字)">\${data.o.remark}</textarea>
@@ -109,8 +114,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">
-                                            <span class="label-red">*</span>
+                                            
                                             活动介绍
+																						<span class="required" aria-required="true"> * </span>
                                         </label>
                                         <div class="col-md-10">
                                             <textarea type="text" name="content">

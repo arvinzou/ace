@@ -90,6 +90,14 @@ function detail(id) {
 }
 
 function initEvents() {
+	$('#modal-preview').on('show.bs.modal', function (event) {
+		var relatedTarget = $(event.relatedTarget);
+		var id = relatedTarget.data('id');
+		var title = relatedTarget.data('title');
+		var modal = $(this);
+		console.log(relatedTarget);
+		initPreview(id);
+	})
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -192,6 +200,31 @@ function updateStatus(params) {
         },
         error: function () {
             stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+function initPreview(id) {
+	startLoad();
+    $.ajax({
+        url: contextPath + "/live/selectLiveByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+			 stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-preview', data, 'tpl-preview');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+			stopLoad();
             alert("对不起出错了！");
         }
     });
