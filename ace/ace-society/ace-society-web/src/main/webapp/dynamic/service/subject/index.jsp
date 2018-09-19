@@ -27,11 +27,11 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <div class="row">
-                <div class="col-sm-4">
-                    <a href="javascript:void(0);" onclick="add();" style="font-size: 14px !important;"
-                       class="btn green specialCourse">创建议题</a>
-                </div>
                 <div class="col-sm-8">
+                    <a href="javascript:void(0);" onclick="add();" style="font-size: 14px !important;"
+                       class="btn green specialCourse">创建</a>
+                </div>
+                <div class="col-sm-4">
                     <form onsubmit="return t_query()">
                         <div class="input-group">
                             <input type="text"
@@ -103,9 +103,9 @@
             {@/if}
         </td>
         <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:showIdea('\${item.id}');">查看点子</a>
+            <a class="operation" href="javascript:showIdea('\${item.id}');">解决方案</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
@@ -115,26 +115,35 @@
 </script>
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td class="active"> 议题标题</td>
-            <td class="success"> \${data.title}</td>
-        </tr>
-        <tr>
-            <td class="active"> 议题描述</td>
-            <td class="success"> \$\${data.content}</td>
-        </tr>
-        <tr>
-            <td class="active"> 奖励积分</td>
-            <td class="success"> \${data.rewardPoints}</td>
-        </tr>
-        <tr>
-            <td class="active"> 备注</td>
-            <td class="success"> \${data.remark}</td>
-        </tr>
-        <tr>
-            <td class="active"> 状态</td>
-            <td class="success">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">议题标题</label>
+            <div class="col-md-10">
+                \${data.title}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">议题描述</label>
+            <div class="col-md-10">
+                \$\${data.content}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">奖励积分</label>
+            <div class="col-md-10">
+                \${data.rewardPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
                 {@if data.status == '0'}
                 删除
                 {@else if data.status == '1'}
@@ -146,30 +155,132 @@
                 {@else if data.status == '4'}
                 审核驳回
                 {@/if}
-            </td>
-        </tr>
-        <tr>
-            <td class="active"> 创建人姓名</td>
-            <td class="success"> \${data.createUserName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 创建日期</td>
-            <td class="success"> \${data.createDate}</td>
-        </tr>
-        <tr>
-            <td class="active"> 更新人名称</td>
-            <td class="success"> \${data.lastModifyUserName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 更新日期</td>
-            <td class="success"> \${data.lastModifyDate}</td>
-        </tr>
-    </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新人名称</label>
+            <div class="col-md-10">
+                \${data.lastModifyUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新日期</label>
+            <div class="col-md-10">
+                \${data.lastModifyDate}
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<!--审核模板-->
+<script id="tpl-fm" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">议题标题</label>
+            <div class="col-md-10">
+                \${data.title}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">议题描述</label>
+            <div class="col-md-10">
+                \$\${data.content}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">奖励积分</label>
+            <div class="col-md-10">
+                \${data.rewardPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
+                {@if data.status == '0'}
+                删除
+                {@else if data.status == '1'}
+                暂存
+                {@else if data.status == '2'}
+                提交审核
+                {@else if data.status == '3'}
+                审核通过
+                {@else if data.status == '4'}
+                审核驳回
+                {@/if}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新人名称</label>
+            <div class="col-md-10">
+                \${data.lastModifyUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新日期</label>
+            <div class="col-md-10">
+                \${data.lastModifyDate}
+            </div>
+        </div>
+        <h4>结果</h4>
+        <hr>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">结果</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.id}">
+                <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
+            </div>
+        </div>
+    </div>
 </script>
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -179,7 +290,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
                     <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
+                        <div id="detail-info">
                             <%--详情模板填充--%>
                         </div>
                     </div>
@@ -197,7 +308,7 @@
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -206,27 +317,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id"/>
-                                <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
+                    <div class="form-body" id="auditContent">
                     </div>
                 </form>
             </div>
@@ -238,24 +329,6 @@
     </div>
 </div>
 </body>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>

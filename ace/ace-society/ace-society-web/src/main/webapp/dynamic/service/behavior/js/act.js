@@ -61,9 +61,7 @@ function initEvents() {
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        var modal = $(this);
-        console.log("relatedTarget"+relatedTarget);
-        modal.find('.modal-body input[name=id]').val(id);
+        initForm(id);
     })
     $('#modal-audit .btn-primary').on('click', function () {
         $('#modal-audit form').submit();
@@ -133,6 +131,28 @@ function findDetail(id){
             if(rst.status == 0){
                 stopLoad();
                 render($('#content'), rst.value, 'tpl-detail');
+            }else{
+                alert(rst.errorMessage);
+            }
+        },
+        error:function(){
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+function initForm(id){
+    startLoad();
+    $.ajax({
+        url: contextPath + "/behavior/selectBehaviorByPrimaryKey",
+        type:"post",
+        async:false,
+        data:{id: id},
+        success:function(rst){
+            if(rst.status == 0){
+                stopLoad();
+                render($('#auditContent'), rst.value, 'tpl-fm');
             }else{
                 alert(rst.errorMessage);
             }

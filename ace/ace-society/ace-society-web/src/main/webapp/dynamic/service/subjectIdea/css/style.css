@@ -1,0 +1,14 @@
+.fileBox{
+    width: 300px;
+    height: 150px;
+    text-align: center;
+    line-height: 150px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background:rgba(242,245,249,1);
+}
+.fileBox:after{
+    content: '';
+    clear: both;
+}

@@ -33,9 +33,6 @@
         <!--具体界面元素结束-->
     </div>
 </div>
-<!-- END SAMPLE TABLE PORTLET-->
-
-<!-- END SAMPLE TABLE PORTLET-->
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>

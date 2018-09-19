@@ -107,18 +107,22 @@
 </script>
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td class="active"> 解决方案</td>
-            <td class="success"> \$\${data.solution}</td>
-        </tr>
-        <tr>
-            <td class="active"> 备注</td>
-            <td class="success"> \${data.remark}</td>
-        </tr>
-        <tr>
-            <td class="active"> 状态</td>
-            <td class="success">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">解决方案</label>
+            <div class="col-md-10">
+                \$\${data.solution}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
                 {@if data.status == '0'}
                 删除
                 {@else if data.status == '1'}
@@ -130,48 +134,45 @@
                 {@else if data.status == '4'}
                 驳回
                 {@/if}
-            </td>
-        </tr>
-        <tr>
-            <td class="active"> 创建人姓名</td>
-            <td class="success"> \${data.createUserName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 创建日期</td>
-            <td class="success"> \${data.createDate}</td>
-        </tr>
-    </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
 
-    <!--议题点子附件表格-->
-    {@each data.listSubjectIdeaAnnexVo as item, index}
-    <table class="table table-bordered table-hover" style="margin-top: 15px!important;">
-        <tr>
-            <td class="active"> 附件名称</td>
-            <td class="success"> \${item.fileName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 附件大小</td>
-            <td class="success"> \${item.fileSize}</td>
-        </tr>
-        <tr>
-            <td class="active"> 附件</td>
-            <td class="success">
-                {@if item.fileType == '0'}
-                <a href="\${item.fileUrl}" download="点子附件">\${item.fileUrl}</a>
-                {@else if item.fileType == '1'}
-                <img src="\${item.fileUrl}" style="width: 160px; height: 90px;"/>
-                {@else if item.fileType == '2'}
-                <video src="\${item.fileUrl}" controls width="160" height="90"></video>
-                {@/if}
-            </td>
-        </tr>
-    </table>
-    {@/each}
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">附件</label>
+            <div class="col-md-10">
+                {@each data.listSubjectIdeaAnnexVo as item, index}
+                <div class="fileBox">
+                    <div class="file">
+                        {@if item.fileType == '0'}
+                        <a href="\${item.fileUrl}" download="点子附件">\${item.fileName}</a>
+                        {@else if item.fileType == '1'}
+                        <img src="\${item.fileUrl}" style="width: 300px; height: 150px;"/>
+                        {@else if item.fileType == '2'}
+                        <video src="\${item.fileUrl}"  width="300" height="150" controls></video>
+                        {@/if}
+                    </div>
+                </div>
+                {@/each}
+            </div>
+        </div>
+    </div>
 </script>
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -181,7 +182,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
                     <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
+                        <div id="detail-info">
                             <%--详情模板填充--%>
                         </div>
                     </div>
@@ -197,37 +198,106 @@
     </div>
 </div>
 
+<!--审核模板-->
+<script id="tpl-fm" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">解决方案</label>
+            <div class="col-md-10">
+                \$\${data.solution}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
+                {@if data.status == '0'}
+                删除
+                {@else if data.status == '1'}
+                暂存
+                {@else if data.status == '2'}
+                提交审核
+                {@else if data.status == '3'}
+                审核通过
+                {@else if data.status == '4'}
+                驳回
+                {@/if}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">附件</label>
+            <div class="col-md-10">
+                {@each data.listSubjectIdeaAnnexVo as item, index}
+                <div class="fileBox">
+                    <div class="file">
+                        {@if item.fileType == '0'}
+                        <a href="\${item.fileUrl}" download="点子附件">\${item.fileName}</a>
+                        {@else if item.fileType == '1'}
+                        <img src="\${item.fileUrl}" style="width: 300px; height: 150px;"/>
+                        {@else if item.fileType == '2'}
+                        <video src="\${item.fileUrl}"  width="300" height="150" controls></video>
+                        {@/if}
+                    </div>
+                </div>
+                {@/each}
+            </div>
+        </div>
+        <h4>结果</h4>
+        <hr>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">结果</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.id}">
+                <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">议题点子审核</h4>
+                <h4 class="modal-title">方案审核</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="hidden" name="id"/>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
+                    <div class="form-body" id="auditContent">
+
                     </div>
                 </form>
             </div>
@@ -243,22 +313,5 @@
 <script src="${pageContext.request.contextPath}/content/common/js/jquery-form.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </body>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
 
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 </html>
