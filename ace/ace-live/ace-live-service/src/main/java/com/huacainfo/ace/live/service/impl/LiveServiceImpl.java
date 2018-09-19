@@ -98,17 +98,11 @@ public class LiveServiceImpl implements LiveService {
         if (o.getStartTime().before(DateUtil.getNowDate())) {
             return new MessageResponse(1, "开始时间不能在系统时间之前");
         }
-        if (o.getStartTime().after(o.getEndTime())) {
-            return new MessageResponse(1, "开始时间结束时间之后");
-        }
         if (CommonUtils.isBlank(o.getRemark())) {
             return new MessageResponse(1, "摘要不能为空！");
         }
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "介绍不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRtmpUrl())) {
-            return new MessageResponse(1, "直播流地址不能为空！");
         }
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
@@ -163,18 +157,7 @@ public class LiveServiceImpl implements LiveService {
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "活动介绍不能为空！");
         }
-        if (CommonUtils.isBlank(o.getNop())) {
-            return new MessageResponse(1, "参与人数不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPop())) {
-            return new MessageResponse(1, "点赞数不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getAddr())) {
-            return new MessageResponse(1, "地点不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getRtmpUrl())) {
-            return new MessageResponse(1, "直播流地址不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getImageSrc())) {
             return new MessageResponse(1, "封面不能为空！");
         }

@@ -298,7 +298,7 @@
             姓名
         </label>
         <div class="col-md-4">
-            <input type="text" name="name" value="\${data.name}" class="form-control" placeholder="" \${data.regAuditRst==1?'disabled':''}>
+            <input type="text" name="name" value="\${data.name}" class="form-control" placeholder="" \${data.regAuditRst==1?'readonly':''}>
         </div>
         <div class="col-md-6">
 
@@ -313,7 +313,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div style="float:left;width:60px;padding:2px">
-                    <input type="radio" \${data.sex==1?'checked':''}  id="sex1" \${data.regAuditRst==1?'disabled':''}
+                    <input type="radio" \${data.sex==1?'checked':''}  id="sex1" \${data.regAuditRst==1?'readonly':''}
                            name="sex" value="1"
                            >
                     <label for="sex1">
@@ -321,7 +321,7 @@
                 </div>
 
                 <div style="float:left;width:60px;padding:2px">
-                    <input type="radio" \${data.sex==2?'checked':''} id="sex2" \${data.regAuditRst==1?'disabled':''}
+                    <input type="radio" \${data.sex==2?'checked':''} id="sex2" \${data.regAuditRst==1?'readonly':''}
                            name="sex"
                            value="2"
                           >
@@ -339,10 +339,7 @@
         <label class="col-md-2 control-label">所在城市
         </label>
         <div class="col-md-10 city-select">
-            \${data.cityCode}
             <span id="cityCode"></span>
-
-
         </div>
     </div>
 
@@ -460,7 +457,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div  style="float:left;width:130px;padding:2px">
-                    <input type="radio" id="radios_1" \${data.regAuditRst==1?'disabled':''} name="certification"
+                    <input type="radio" id="radios_1" \${data.regAuditRst==1?'readonly':''} name="certification"
                            value="国家二级咨询师"  \${data.certification=='国家二级咨询师'?'checked':''}>
                     <label
                             for="radios_1"><span class="inc"></span>
@@ -470,7 +467,7 @@
 
                 <div  style="float:left;width:130px;padding:2px">
 
-                    <input type="radio" id="radios_2" \${data.regAuditRst==1?'disabled':''}
+                    <input type="radio" id="radios_2" \${data.regAuditRst==1?'readonly':''}
                                              name="certification"
                                              value="国家三级咨询师"
                                               \${data.certification=='国家三级咨询师'?'checked':''}>

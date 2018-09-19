@@ -15,7 +15,7 @@
         </dependency>
         <dependency>
             <groupId>com.huacainfo</groupId>
-            <artifactId>ace-portal-client</artifactId>
+            <artifactId>ace-live-client</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

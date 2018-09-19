@@ -4,9 +4,13 @@ package com.huacainfo.ace.society.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.ActivityDetailDao;
 import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.vo.ActivityDetailQVo;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import org.slf4j.Logger;
@@ -41,6 +45,8 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ActivityDetailDao activityDetailDao;
+    @Autowired
+    private AuditRecordService auditRecordService;
 
     /**
      * @throws
@@ -235,10 +241,19 @@ public class ActivityServiceImpl implements ActivityService {
      */
     @Override
     public MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception {
-
-//                            activityDao.updateByPrimaryKeySelective(id);
-
-
+        Activity activity=activityDao.selectByPrimaryKey(id);
+        if(null==activity){
+            return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
+        }
+        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id, id, rst, remark, userProp);
+        if (ResultCode.FAIL == auditRs.getStatus()) {
+            return auditRs;
+        }
+        activity.setStatus(rst);
+        activity.setLastModifyDate(DateUtil.getNowDate());
+        activity.setLastModifyUserId(userProp.getUserId());
+        activity.setLastModifyUserName(userProp.getName());
+        activityDao.updateByPrimaryKey(activity);
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id),
                 String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");

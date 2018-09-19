@@ -202,6 +202,7 @@
 				{@/if}
 				{@/each}
             </div>
+			<div class="row undis" id="address"><div class="col-xs-12"><span class="address">面对面咨询的地点为荷花社区三楼咨询室</span></div></div>
             <div class="row content_03">
             <div class="col-xs-7 col-sm-7" style="padding-left: 0;margin-top: 0.4rem;">
             <span class="method_01">咨询次数</span>
@@ -226,7 +227,7 @@
 		</div>
 		<div class="row">
 			<p class="note_content">
-				您好，我将在接收到预约通知的24小时内，以私信方式与您协商好咨询时间。在约定时间里，我们将与您进行电话/视频咨询（即您预约时选择的方式）。面对面咨询地点在常德。
+				您好，如果您的预约方式是立即咨询，我们会在1小时内，以私信方式与您协商好咨询时间；如果您的预约方式是预约咨询，我们会在24小时内在约定时间里以私信方式与您协商好咨询时间。我们将与您进行电话/视频咨询（即您预约时选择的方式）。面对面咨询地点在常德。
 			</p>
 		</div>
 		<div class="row">

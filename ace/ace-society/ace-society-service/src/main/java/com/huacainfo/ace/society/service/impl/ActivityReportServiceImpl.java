@@ -4,7 +4,12 @@ package com.huacainfo.ace.society.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.model.Activity;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +39,8 @@ public class ActivityReportServiceImpl implements ActivityReportService {
     private ActivityReportDao activityReportDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private AuditRecordService auditRecordService;
 
     /**
      * @throws
@@ -52,10 +59,10 @@ public class ActivityReportServiceImpl implements ActivityReportService {
     @Override
     public PageResult<ActivityReportVo> findActivityReportList(ActivityReportQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<ActivityReportVo> rst = new PageResult<>();
-        List<ActivityReportVo> list = this.activityReportDao.findList(condition, start, limit, orderBy);
+        List<ActivityReportVo> list = this.activityReportDao.adminFindList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.activityReportDao.findCount(condition);
+            int allRows = this.activityReportDao.adminFindCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -186,9 +193,22 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      */
     @Override
     public MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception {
-//        activityReportDao.updateByPrimaryKeySelective(id);
-        dataBaseLogService.log("审核活动报道", "活动报道", String.valueOf(id), String.valueOf(id), "活动报道", userProp);
-        return new MessageResponse(0, "活动报道审核完成！");
+        ActivityReport activityReport=activityReportDao.selectByPrimaryKey(id);
+        if(null==activityReport){
+            return new MessageResponse(ResultCode.FAIL, "活动报道信息丢失！");
+        }
+        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY_REPORT, id, id, rst, remark, userProp);
+        if (ResultCode.FAIL == auditRs.getStatus()) {
+            return auditRs;
+        }
+        activityReport.setStatus(rst);
+        activityReport.setLastModifyDate(DateUtil.getNowDate());
+        activityReport.setLastModifyUserId(userProp.getUserId());
+        activityReport.setLastModifyUserName(userProp.getName());
+        activityReportDao.updateByPrimaryKey(activityReport);
+        dataBaseLogService.log("审核线下活动报道", "线下活动报道", String.valueOf(id),
+                String.valueOf(id), "线下活动", userProp);
+        return new MessageResponse(0, "线下活动报道审核完成！");
     }
 
 }

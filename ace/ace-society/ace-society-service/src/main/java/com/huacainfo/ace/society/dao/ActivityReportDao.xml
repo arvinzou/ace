@@ -18,9 +18,17 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.society.model.ActivityReport">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
+
+  <resultMap type="com.huacainfo.ace.society.vo.ActivityReportVo" id="voResultMap" extends="BaseResultMap"></resultMap>
+
   <sql id="Base_Column_List">
     id, activityId, title, subTitle, remark, status, createUserId, createUserName, createDate, 
     lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+
+  <sql id="Vo_Column_List">
+    t.id, t.activityId, t.title, t.subTitle, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -217,15 +225,42 @@
         ORDER BY ${orderBy}
       </when>
       <otherwise>
+        ORDER BY createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+
+  <select id="adminFindList" parameterType="java.lang.String" resultMap="voResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    <include refid="whereCondition1"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY t.${orderBy}
+      </when>
+      <otherwise>
         ORDER BY t.createDate desc
       </otherwise>
     </choose>
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
 
+
+
   <sql id="whereCondition">
-    from activity t
-    where t.status <![CDATA[ <> ]]> 0
+    from activity_report
+    where status <![CDATA[ <> ]]> 0
+    <if test="condition.title !=null and condition.title !=&quot;&quot;">
+      and title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+    </if>
+  </sql>
+
+  <sql id="whereCondition1">
+    from activity_report t
+    LEFT JOIN activity a ON a.id=t.activityId
+    where t.status <![CDATA[ <> ]]> 0 and t.status <![CDATA[ <> ]]> 1
     <if test="condition.title !=null and condition.title !=&quot;&quot;">
       and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
     </if>
@@ -236,9 +271,14 @@
     <include refid="whereCondition"/>
   </select>
 
+  <select id="adminFindCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition1"/>
+  </select>
+
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Activity">
     select count(1)
-    from activity
+    from activity_report
     where status <![CDATA[ <> ]]> 0
   </select>
 

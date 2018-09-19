@@ -3,6 +3,8 @@ package com.huacainfo.ace.live.vo;
 
 import com.huacainfo.ace.live.model.Live;
 
+import java.util.Date;
+
 
 public class LiveVo extends Live {
     private static final long serialVersionUID = 1L;
@@ -26,5 +28,29 @@ public class LiveVo extends Live {
         this.reportCount = reportCount;
     }
 
+    @Override
+    public String getAuditStatus() {
+        return auditStatus;
+    }
 
+    @Override
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus;
+    }
+
+    public String getStatement() {
+        return statement;
+    }
+
+    public void setStatement(String statement) {
+        this.statement = statement;
+    }
+
+    public Date getAuditDate() {
+        return auditDate;
+    }
+
+    public void setAuditDate(Date auditDate) {
+        this.auditDate = auditDate;
+    }
 }

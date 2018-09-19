@@ -37,10 +37,10 @@
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
-                               class="form-control input-circle-left"
+                               class="form-control input-left"
                                placeholder="请输入名称">
                         <span class="input-group-btn">
-                                                        <button class="btn btn-circle-right btn-default search_btn"
+                                                        <button class="btn btn-right btn-default search_btn"
                                                                 type="submit">
                                                                 搜索
                                                         </button>
@@ -111,7 +111,7 @@
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -120,27 +120,8 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id"/>
-                                <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
+                    <div class="form-body" id="auditContent">
+
                     </div>
                 </form>
             </div>
@@ -154,7 +135,7 @@
 
 <!--查看弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-show">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -164,7 +145,7 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
                     <div class="form-body">
-                        <div class="table-scrollable" id="content">
+                        <div id="content">
                             <%--详情模板填充--%>
                         </div>
                     </div>
@@ -178,64 +159,122 @@
 </div>
 
 <script id="tpl-detail" type="text/template">
-    <table cellpadding="0" cellspacing="0" border="1" class="detailTable table table-bordered table-hover">
-        <tr class="smallTr">
-            <td width="15%" class="active">标题</td>
-            <td width="35%" class="success">\${data.title}</td>
-            <td width="15%" class="active">提交人</td>
-            <td width="35%" class="success">\${data.userId}</td>
-        </tr>
-        <tr class="smallTr">
-            <td width="15%" class="active">简述</td>
-            <td colspan="3" class="success">\${data.compendium}</td>
-        </tr>
-        <tr class="largeTr">
-            <td width="15%" class="active">备注</td>
-            <td colspan="3" class="success">\${data.remark}</td>
-        </tr>
-    </table>
-    {@each data.behaviorAnnexList as item, index}
-    <table cellpadding="0" cellspacing="0" border="1" class="fileTable table table-bordered table-hover">
-        <tr class="smallTr">
-            <td width="15%" class="active">附件名称</td>
-            <td width="35%" class="success">\${item.fileName}</td>
-            <td width="15%" class="active">附件大小</td>
-            <td width="35%" class="success">\${item.fileSize}kb</td>
-        </tr>
-        <tr>
-            <td width="15%" class="active">附件内容</td>
-            <td colspan="3" class="success">
-                {@if item.fileType == '0'}
-                <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileUrl}</a>
-                {@else if item.fileType == '1'}
-                <img src="\${item.fileUrl}" style="width: 300px;height: 150px;"/>
-                {@else if item.fileType == '2'}
-                <video src="\${item.fileUrl}" width="300" height="150" controls></video>
-                {@/if}
-            </td>
-        </tr>
-    </table>
-    {@/each}
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">标题</label>
+            <div class="col-md-10">
+                \${data.title}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">提交人</label>
+            <div class="col-md-10">
+                \${data.userId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">简述</label>
+            <div class="col-md-10">
+                \${data.compendium}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">附件</label>
+            <div class="col-md-10">
+                {@each data.behaviorAnnexList as item, index}
+                <div class="fileBox">
+                    <div class="file">
+                        {@if item.fileType == '0'}
+                        <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileName}</a>
+                        {@else if item.fileType == '1'}
+                        <img src="\${item.fileUrl}" style="width: 300px;height: 150px;"/>
+                        {@else if item.fileType == '2'}
+                        <video src="\${item.fileUrl}" width="300" height="150" controls></video>
+                        {@/if}
+                    </div>
+                </div>
+                {@/each}
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--审核模板-->
+<script id="tpl-fm" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">标题</label>
+            <div class="col-md-10">
+                \${data.title}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">提交人</label>
+            <div class="col-md-10">
+                \${data.userId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">简述</label>
+            <div class="col-md-10">
+                \${data.compendium}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">附件</label>
+            <div class="col-md-10">
+                {@each data.behaviorAnnexList as item, index}
+                <div class="fileBox">
+                    <div class="file">
+                        {@if item.fileType == '0'}
+                        <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileName}</a>
+                        {@else if item.fileType == '1'}
+                        <img src="\${item.fileUrl}" style="width: 300px;height: 150px;"/>
+                        {@else if item.fileType == '2'}
+                        <video src="\${item.fileUrl}" width="300" height="150" controls></video>
+                        {@/if}
+                    </div>
+                </div>
+                {@/each}
+            </div>
+        </div>
+        <h4>结果</h4>
+        <hr>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">结果</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.id}">
+                <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
+            </div>
+        </div>
+    </div>
 </script>
 </body>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>

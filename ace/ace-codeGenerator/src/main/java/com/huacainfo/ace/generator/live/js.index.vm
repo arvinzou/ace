@@ -3,14 +3,14 @@ var params = {limit: 5};
 window.onload = function (){
     initPage();
     initEvents();
-initJuicerMethod();
+    initJuicerMethod();
 }
 
 
 /*$!{bean.tableChineseName}初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-totalCounts: 1,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -28,6 +28,10 @@ totalCounts: 1,
 function t_query(){
     getPageList();
     return false;
+}
+function setParams(key,value){
+    params[key]=value;
+     getPageList();
 }
 /*$!{bean.tableChineseName}加载表格数据*/
 function getPageList() {
@@ -76,16 +80,26 @@ $("#modal-detail").modal("show");
 }
 
 function initEvents() {
-$('#modal-audit').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var modal = $(this);
-        modal.find('.modal-body input[name=id]').val(id);
-    })
-$('#modal-audit .btn-primary').on('click', function () {
-$('#modal-audit form').submit();
-    });
-$('#modal-audit form').ajaxForm({
+    ﻿   $('#modal-preview').on('show.bs.modal', function (event) {
+    		var relatedTarget = $(event.relatedTarget);
+    		var id = relatedTarget.data('id');
+    		var title = relatedTarget.data('title');
+    		var modal = $(this);
+    		console.log(relatedTarget);
+    		initPreview(id);
+    	})
+        $('#modal-audit').on('show.bs.modal', function (event) {
+            var relatedTarget = $(event.relatedTarget);
+            var id = relatedTarget.data('id');
+            var title = relatedTarget.data('title');
+            var modal = $(this);
+            console.log(relatedTarget);
+    		initForm(id);
+        })
+        $('#modal-audit .audit').on('click', function () {
+            $('#modal-audit form').submit();
+        });
+    $('#modal-audit form').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 var params = {};
                 $.each(formData, function (n, obj) {
@@ -99,6 +113,12 @@ $('#modal-audit form').ajaxForm({
                 return false;
             }
         });
+         $(".btn-group .btn").bind('click', function (event) {
+                $(event.target).siblings().removeClass("active");
+                console.log(event);
+                $(event.target).addClass("active");
+            });
+
 
 
 }
@@ -112,7 +132,7 @@ function audit(params){
         data:params,
         success:function(rst){
             stopLoad();
-$("#modal-audit").modal('hide');
+            $("#modal-audit").modal('hide');
             alert(rst.errorMessage);
             if(rst.status == 0) {
                 getPageList();
@@ -193,18 +213,70 @@ juicer.register('parseStatus', parseStatus);
 * 4-审核驳回
 */
 function parseStatus(status) {
-switch (status) {
-case '0':
-return "已删除";
-case '1':
-return "暂存";
-case '2':
-return "提交审核";
-case '3':
-return "审核通过";
-case '4':
-return "审核驳回";
-default:
-return "";
+    switch (status) {
+        case '0':
+        return "删除";
+        case '1':
+        return "暂存";
+        case '2':
+        return "待审";
+        case '3':
+        return "通过";
+        case '4':
+        return "驳回";
+        default:
+        return "";
+    }
 }
+
+
+﻿function initPreview(id) {
+	startLoad();
+    $.ajax({
+        url: contextPath +  "/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+			 stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-preview', data, 'tpl-preview');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+			stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+function initForm(id) {
+	startLoad();
+    $.ajax({
+        url: contextPath +  "/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+			 stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-audit', data, 'tpl-fm');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+			stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
