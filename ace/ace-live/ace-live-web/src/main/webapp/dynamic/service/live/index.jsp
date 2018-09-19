@@ -136,6 +136,7 @@
             <div style="padding-top:5px">\${item.statement}</div>
             {@else}
             <span class="label label-lg label-danger">驳回</span>
+            <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
             {@/if}
         </td>
