@@ -9,7 +9,7 @@ var jcrop_api, //jcrop对象
     global_api,
     xsize,
     ysize,
-    cover;
+    cover,multi=false;
 
 var modelTemplate = '<div class="modal fade" id="img-uploader" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">' +
     '        <div class="modal-dialog" style="width: 1100px;" role="document">' +
@@ -190,6 +190,10 @@ function initUploadEvents() {
         xsize = button.data('xsize');
         ysize = button.data('ysize');
         cover = button.data('cover');
+        if(button.data('multi')){
+                multi=true;
+        }
+        console.log("========"+multi);
         var url=$(button).attr("src");
          $("#Preview").hide();
          $("#target").hide();
@@ -238,13 +242,26 @@ function initUpload() {
     //图片上传成功触发，ps:data是返回值（第三个参数是返回值）
     uploaderHeadimg.bind('FileUploaded', function (uploaderHeadimg, files, res) {
         var data = JSON.parse(res.response);
-        var img = "#" + cover;
-        $(img).attr("src", data.file_path);
-        $(img).css("display", "block");
-        $(img).css("max-width", xsize);
-        $(img).css("max-height", ysize);
-        $("input[name="+cover+"]").val(data.file_path);
         $('#img-uploader').modal('hide');
+        if(multi){
+                var html=[];
+                html.push('<div class="image-box">');
+                html.push('<img src="'+data.file_path+'" class="cover"/>');
+                html.push('<img src="'+portalPath+'/content/common/image/remove.png" style="cursor:pointer;" class="delete"/>');
+                html.push('</div>');
+                $('.image-boxs').append(html.join(''));
+                $(".image-box .delete").click(function(){
+                	  $(this).parent().remove();
+                });
+        }else{
+            $("input[name="+cover+"]").val(data.file_path);
+             var img = "#" + cover;
+            $(img).attr("src", data.file_path);
+            $(img).css("display", "block");
+            $(img).css("max-width", xsize);
+            $(img).css("max-height", ysize);
+        }
+
 
 
     });
