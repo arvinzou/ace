@@ -3,14 +3,14 @@ var params = {limit: 5};
 window.onload = function (){
     initPage();
     initEvents();
-initJuicerMethod();
+    initJuicerMethod();
 }
 
 
 /*$!{bean.tableChineseName}初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-totalCounts: 1,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -80,16 +80,26 @@ $("#modal-detail").modal("show");
 }
 
 function initEvents() {
-$('#modal-audit').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var modal = $(this);
-        modal.find('.modal-body input[name=id]').val(id);
-    })
-$('#modal-audit .btn-primary').on('click', function () {
-$('#modal-audit form').submit();
-    });
-$('#modal-audit form').ajaxForm({
+    ﻿   $('#modal-preview').on('show.bs.modal', function (event) {
+    		var relatedTarget = $(event.relatedTarget);
+    		var id = relatedTarget.data('id');
+    		var title = relatedTarget.data('title');
+    		var modal = $(this);
+    		console.log(relatedTarget);
+    		initPreview(id);
+    	})
+        $('#modal-audit').on('show.bs.modal', function (event) {
+            var relatedTarget = $(event.relatedTarget);
+            var id = relatedTarget.data('id');
+            var title = relatedTarget.data('title');
+            var modal = $(this);
+            console.log(relatedTarget);
+    		initForm(id);
+        })
+        $('#modal-audit .audit').on('click', function () {
+            $('#modal-audit form').submit();
+        });
+    $('#modal-audit form').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
                 var params = {};
                 $.each(formData, function (n, obj) {
@@ -116,7 +126,7 @@ function audit(params){
         data:params,
         success:function(rst){
             stopLoad();
-$("#modal-audit").modal('hide');
+            $("#modal-audit").modal('hide');
             alert(rst.errorMessage);
             if(rst.status == 0) {
                 getPageList();
@@ -211,4 +221,56 @@ return "审核驳回";
 default:
 return "";
 }
+}
+
+
+﻿function initPreview(id) {
+	startLoad();
+    $.ajax({
+        url: contextPath +  "/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+			 stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-preview', data, 'tpl-preview');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+			stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+function initForm(id) {
+	startLoad();
+    $.ajax({
+        url: contextPath +  "/$!{bean.lowerName}/select$!{bean.name}ByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+			 stopLoad();
+            if (result.status == 0) {
+                var data = {};
+                data['o'] = result.value;
+                render('#fm-audit', data, 'tpl-fm');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+			stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
