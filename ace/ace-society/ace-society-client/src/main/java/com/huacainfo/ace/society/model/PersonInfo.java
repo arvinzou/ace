@@ -10,7 +10,9 @@ public class PersonInfo extends BaseModel {
     private String realName;
 
     private String mobilePhone;
-
+    /**
+     * 1-个人 2-党员
+     */
     private String politicalStatus;
 
     private Integer accPoints;

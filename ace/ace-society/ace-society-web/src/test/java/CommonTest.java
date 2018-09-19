@@ -1,4 +1,3 @@
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
@@ -12,14 +11,17 @@ public class CommonTest {
 
     @Test
     public void test() {
-        System.out.println(StringUtil.genOrderNo18Str(GUIDUtil.getGUID()));
 
 
-//        generatorGUID(1);
+        //        System.out.println(StringUtil.genOrderNo18Str(GUIDUtil.getGUID()));
+
+
+        generatorGUID(2);
     }
 
 
     private void generatorGUID(int num) {
+        //
         for (int i = 0; i < num; i++) {
             System.out.println(GUIDUtil.getGUID());
         }

@@ -3,8 +3,11 @@ package com.huacainfo.ace.society.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -80,10 +83,6 @@ public class PersonInfoServiceImpl implements PersonInfoService {
      */
     @Override
     public MessageResponse insertPersonInfo(PersonInfo o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键-unionId不能为空！");
-        }
         if (CommonUtils.isBlank(o.getRealName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
@@ -91,20 +90,19 @@ public class PersonInfoServiceImpl implements PersonInfoService {
             return new MessageResponse(1, "手机号不能为空！");
         }
 
+        o.setId(StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId());
 
         int temp = this.personInfoDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "个人信息名称重复！");
+            return new MessageResponse(1, "手机号码重复！");
         }
 
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        this.personInfoDao.insertSelective(o);
-        this.dataBaseLogService.log("添加个人信息", "个人信息", "",
-                o.getId(), o.getId(), userProp);
+        this.personInfoDao.insert(o);
+        this.dataBaseLogService.log("添加个人信息", "个人信息", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加个人信息完成！");
     }
@@ -136,7 +134,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
-        this.personInfoDao.updateByPrimaryKeySelective(o);
+        this.personInfoDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更个人信息", "个人信息", "",
                 o.getId(), o.getId(), userProp);
 
@@ -212,10 +210,24 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         personInfo.setLastModifyDate(DateUtil.getNowDate());
         personInfo.setLastModifyUserId(userProp.getUserId());
         personInfo.setLastModifyUserName(userProp.getName());
-        personInfoDao.updateByPrimaryKeySelective(personInfo);
+        personInfoDao.updateByPrimaryKey(personInfo);
+
+        //todo 发送微信公众号模板消息
 
         dataBaseLogService.log("审核个人信息", "个人信息", id, id, "个人信息", userProp);
         return new MessageResponse(0, "个人信息审核完成！");
+    }
+
+    /**
+     * 个人信息注册
+     *
+     * @param personInfo 个人信息
+     * @param userinfo   微信信息
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse register(PersonInfo personInfo, Userinfo userinfo) {
+        return null;
     }
 
 }
