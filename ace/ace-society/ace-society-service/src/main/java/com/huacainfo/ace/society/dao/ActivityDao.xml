@@ -18,6 +18,7 @@
         <result column="parterNum" jdbcType="INTEGER" property="parterNum"/>
         <result column="parterPoints" jdbcType="INTEGER" property="parterPoints"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="coinconfigId" jdbcType="VARCHAR" property="coinconfigId"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
         <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
@@ -32,7 +33,7 @@
     <resultMap extends="ResultMapWithBLOBs" id="VoResultMap" type="com.huacainfo.ace.society.vo.ActivityVo"></resultMap>
     <sql id="Base_Column_List">
     id, initiatorId, title, category, summary, coverUrl, startSignImgUrl, endSignImgUrl, dendline, startDate, endDate,
-    volunteerNum, volunteerPoints, parterNum, parterPoints, remark, status, createUserId, 
+    volunteerNum, volunteerPoints, parterNum, parterPoints, remark, coinconfigId, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">
@@ -63,7 +64,7 @@
       category, summary, coverUrl, startSignImgUrl,endSignImgUrl,
       dendline, startDate, endDate, 
       volunteerNum, volunteerPoints, parterNum, 
-      parterPoints, remark, status, 
+      parterPoints, remark, coinconfigId, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
       content)
@@ -71,7 +72,7 @@
       #{category,jdbcType=CHAR}, #{summary,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{startSignImgUrl,jdbcType=VARCHAR},#{endSignImgUrl,jdbcType=VARCHAR},
       #{dendline,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
       #{volunteerNum,jdbcType=INTEGER}, #{volunteerPoints,jdbcType=INTEGER}, #{parterNum,jdbcType=INTEGER}, 
-      #{parterPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{parterPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},#{coinconfigId,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
@@ -126,6 +127,9 @@
             </if>
             <if test="remark != null">
                 remark,
+            </if>
+            <if test="coinconfigId != null">
+                coinconfigId,
             </if>
             <if test="status != null">
                 status,
@@ -201,6 +205,9 @@
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="coinconfigId != null">
+                #{coinconfigId,jdbcType=VARCHAR},
+            </if>
             <if test="status != null">
                 #{status,jdbcType=CHAR},
             </if>
@@ -275,6 +282,9 @@
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
+            <if test="coinconfigId != null">
+                coinconfigId = #{coinconfigId,jdbcType=VARCHAR},
+            </if>
             <if test="status != null">
                 status = #{status,jdbcType=CHAR},
             </if>
@@ -319,6 +329,7 @@
       parterNum = #{parterNum,jdbcType=INTEGER},
       parterPoints = #{parterPoints,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
+      coinconfigId = #{coinconfigId,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
@@ -346,6 +357,7 @@
       parterNum = #{parterNum,jdbcType=INTEGER},
       parterPoints = #{parterPoints,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
+      coinconfigId = #{coinconfigId,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},

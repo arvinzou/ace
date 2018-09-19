@@ -218,15 +218,12 @@ public class AuditRecordServiceImpl implements AuditRecordService {
         if (record == null) {
             return new MessageResponse(ResultCode.FAIL, "审核记录丢失");
         }
-
         record.setAuditState(rst);
         record.setAudtiRemark(remark);
         record.setLastModifyDate(DateUtil.getNowDate());
         record.setLastModifyUserId(userProp.getUserId());
         record.setLastModifyUserName(userProp.getName());
         auditRecordDao.updateByPrimaryKeySelective(record);
-
-
         dataBaseLogService.log("审核审核记录", "审核记录",
                 String.valueOf(record.getId()), String.valueOf(record.getId()), "审核记录", userProp);
         return new MessageResponse(0, "审核记录审核完成！");
