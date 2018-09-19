@@ -80,8 +80,7 @@ function initEvents() {
 $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
-        var modal = $(this);
-        modal.find('.modal-body input[name=id]').val(id);
+        initForm(id);
     })
 $('#modal-audit .btn-primary').on('click', function () {
 $('#modal-audit form').submit();
@@ -158,5 +157,17 @@ function parseStatus(status) {
 
 function showIdea(id){
     window.location.href = contextPath + '/dynamic/service/subjectIdea/index.jsp?id='+urlParams.id+ '&did='+id;
+}
+
+/*查看详情*/
+function initForm(id) {
+    var url = contextPath + "/subject/selectSubjectByPrimaryKey";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+            var navitem = document.getElementById('tpl-fm').innerHTML;
+            var html = juicer(navitem, {data: result.value});
+            $("#auditContent").html(html);
+        }
+    });
 }
 

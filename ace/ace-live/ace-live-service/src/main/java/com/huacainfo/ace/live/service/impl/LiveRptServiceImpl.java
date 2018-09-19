@@ -8,7 +8,9 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.live.dao.LiveDao;
 import com.huacainfo.ace.live.dao.LiveImgDao;
 import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.model.LiveImg;
@@ -17,6 +19,10 @@ import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
 import com.huacainfo.ace.live.vo.LiveRptVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +47,9 @@ public class LiveRptServiceImpl implements LiveRptService {
     @Autowired
     private KafkaProducerService kafkaProducerService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -55,24 +64,24 @@ public class LiveRptServiceImpl implements LiveRptService {
      * @version: 2018-01-03
      */
     @Override
-    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, int start,
-                                                 int limit, String orderBy) throws Exception {
+    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, int start, int limit, String orderBy) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        LiveRptDao dao = session.getMapper(LiveRptDao.class);
         PageResult<LiveRptVo> rst = new PageResult<LiveRptVo>();
-        List<LiveRptVo> list = this.liveRptDao.findList(condition,
-                start, start + limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.liveRptDao.findCount(condition);
-            rst.setTotal(allRows);
+        try {
+            List<LiveRptVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
         }
-
-        //获取nickName
-        String nickName;
-        for (LiveRptVo vo : list) {
-            nickName = liveRptDao.findNickNameByRid(vo.getRid(), vo.getId());
-            vo.setNickName(nickName);
-        }
-
         return rst;
     }
 
@@ -90,11 +99,7 @@ public class LiveRptServiceImpl implements LiveRptService {
     @Override
     public MessageResponse insertLiveRpt(LiveRpt o, List<LiveImg> imgs)
             throws Exception {
-        o.setId(UUID.randomUUID().toString());
-        //o.setId(String.valueOf(new Date().getTime()));
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getRid())) {
             return new MessageResponse(1, "直播间编号不能为空！");
         }
