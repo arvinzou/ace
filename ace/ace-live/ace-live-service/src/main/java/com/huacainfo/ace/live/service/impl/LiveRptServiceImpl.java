@@ -171,8 +171,8 @@ public class LiveRptServiceImpl implements LiveRptService {
         data.put("rid", "rsub");
         data.put("message", JSON.toJSON(obj).toString());
         this.logger.info("{}", data);
-        this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
-        return new MessageResponse(0, "添加图文直播完成！");
+        //this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
+        return new MessageResponse(0, "保存成功！");
     }
 
 
