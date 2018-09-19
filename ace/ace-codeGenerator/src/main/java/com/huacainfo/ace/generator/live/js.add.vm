@@ -92,10 +92,11 @@ function save(params) {
             stopLoad();
 			alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href ='../index.jsp';
+                window.location.href ='../index.jsp?id='+urlParams.id;
             }
         },
         error: function () {
+            stopLoad();
             alert("对不起出错了！");
         }
     });

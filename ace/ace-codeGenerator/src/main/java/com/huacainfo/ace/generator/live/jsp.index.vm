@@ -13,17 +13,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
-    <%--common css--%>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <%--custom css--%>
 </head>
 <body>
-<%--==============common jsp-prefix==============--%>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<%--==============common jsp-prefix==============--%>
-
-<!---==============================================-->
 <div class="portlet light">
 
     <div class="portlet-body">
@@ -95,11 +89,10 @@
     </div>
 
 </div>
-<!--=======================================-->
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -108,11 +101,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-                    <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
-                            <%--详情模板填充--%>
-                        </div>
-                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -200,28 +189,160 @@
             {@/if}
         </td>
         <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
-            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:del('\${item.id}');">删除</a>
-            {@if item.status==2}
-            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
-            {@/if}
+           ﻿ <a  href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+               <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>
+               {@if item.auditStatus==1}
+               <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+               {@/if}
+             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
+
+             <a href="javascript:del('\${item.id}');">删除</a>
+
         </td>
     </tr>
     {@/each}
 </script>
-<%--详情juicer模板--%>
-<script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        #if($!list)
-            #foreach($item in $list)
-                <tr>
-                    <td class="active"> $!{item.remarks}</td>
-                    <td class="success"> \&{data.$!{item.columName}}</td>
-                </tr>
-            #end
-        #end
-    </table>
+﻿
+<div class="modal fade bs-example-modal-lg" id="modal-status">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">设置状态</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-status" role="form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-2 view-label">对象</label>
+                            <div class="col-md-10 status-title">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">状态</label>
+                            <div class="col-md-10">
+                                <div class="radio-group-container">
+                                    <input type="hidden" name="id">
+                                    <label>
+                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" value="2"><span style="padding:10px">直播中</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green status">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--审核弹框-->
+<div class="modal fade"  role="dialog" id="modal-audit">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">审核</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-audit" role="form">
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green audit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade"  role="dialog" id="modal-preview">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                        <div class="form-body"  id="fm-preview">
+
+                        </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tpl-fm" type="text/template">
+	<div class="form-body">
+
+	                         #if($!list)
+                              #foreach($item in $list)
+                                  <div class="form-group">
+                                    <label class="col-md-2 view-label">$!{item.remarks}</label>
+                                    <div class="col-md-10">
+                                          \${$!{item.columName}}
+                                    </div>
+                                   </div>
+                              #end
+                             #end
+
+
+							  <h4>结果</h4>
+							  <hr>
+	                        <div class="form-group " id="operation">
+	                            <label class="col-md-2 control-label">结果</label>
+	                            <div class="col-md-10">
+	                                <div class="radio-group-container">
+	                                    <label>
+	                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
+	                                    </label>
+	                                    <label>
+	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
+	                                    </label>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="form-group">
+	                            <label class="col-md-2 control-label">说明</label>
+	                            <div class="col-md-10">
+	                                <input type="hidden" name="id" value="\${data.o.id}">
+	                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
+	                            </div>
+	                        </div>
+	                    </div>
+
+</script>
+
+<script id="tpl-preview" type="text/template">
+              #if($!list)
+               #foreach($item in $list)
+                   <div class="form-group">
+                     <label class="col-md-2 view-label">$!{item.remarks}</label>
+                     <div class="col-md-10">
+                           \${$!{item.columName}}
+                     </div>
+                    </div>
+               #end
+              #end
 </script>
 <style>
     .cover{
@@ -239,7 +360,6 @@
           color:#FE6500;
     }
 </style>
-<%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>

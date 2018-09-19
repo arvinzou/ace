@@ -9,21 +9,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="${cfg.sys_name}" name="${cfg.sys_name}" />
-        <%--common css--%>
         <jsp:include page="/dynamic/common/header.jsp"/>
         <link rel="stylesheet" href="css/style.css">
-        <%--custom css--%>
         <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
-        <link rel="stylesheet"
-              href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
-              type="text/css" media="screen"/>
+
         <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
     </head>
 
     <body>
-    <%--==============common jsp-prefix==============--%>
+
     <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-    <%--==============common jsp-prefix==============--%>
+
 
                                                 <!-- BEGIN SAMPLE TABLE PORTLET-->
                                                 <div class="portlet light">
@@ -49,10 +45,11 @@
          #foreach($item in $list)
             <div class="form-group">
                 <label class="col-md-2 control-label">
-                    #if($item.isNullAble=='NO')
-                    <span class="label-red">*</span>
-                    #end
+
                     $!{item.remarks}
+                     #if($item.isNullAble=='NO')
+                           <span class="required" aria-required="true"> * </span>
+                     #end
                 </label>
                 <div class="col-md-10">
                     <input type="text" class="form-control" name="$!{item.columName}" value="\{data.o.$!{item.columName}}" maxlength="$!{item.len}" placeholder="请输入$!{item.remarks}（建议字数在14个字以内，不超过$!{item.len}个字)">
@@ -71,26 +68,18 @@
     </div>
     </script>
 
-    <%--==============common footer==============--%>
-    <jsp:include page="/dynamic/common/footer.jsp"/>
-    <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
-    <%--custom js--%>
-    <script type="text/javascript"
-            src="/portal/content/common/js/jquery.form.js?version=${cfg.version}"></script>
-    <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-    <script type="text/javascript"
-            src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-    <script type="text/javascript"
-            src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-    <script type="text/javascript"
-            src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-    <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
 
+    <jsp:include page="/dynamic/common/footer.jsp"/>
+
+    <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
+    <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+    <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+    <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/common/js/cropUpload.js?version=${cfg.version}"></script>
     <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
     <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
     <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
     <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
-
     <script src="js/act.js?v=${cfg.version}"></script>
     </html>

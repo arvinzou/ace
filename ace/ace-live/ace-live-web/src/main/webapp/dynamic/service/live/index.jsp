@@ -14,6 +14,10 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
+	<link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+	<link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
+	<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+	<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 </head>
 <body>
 
@@ -75,7 +79,7 @@
                                                             <th width="35%">名称 </th>
                                                             <th width="10%">状态</th>
 
-                                                            <th width="20%">开始&结束时间</th>
+                                                            <th width="20%">开始时间</th>
                                                             <th width="10%">参与人数/点击量</th>
                                                             <th width="15%">审核状态</th>
                                                             <th width="10%">操作</th>
@@ -102,7 +106,7 @@
 
         <td >
             <div class="row">
-                <div class="col-md-4"><img src="\${item.imageSrc}" class="cover"/></div>
+                <div class="col-md-4 my-gallery"><img src="\${item.imageSrc}" class="cover"/></div>
                 <div class="col-md-8">
                     <div class="describtion">\${item.name}</div>
                 </div>
@@ -119,8 +123,7 @@
         </td>
 
         <td>
-            \${item.startTime}<br>
-            \${item.endTime}
+            \${item.startTime}
 
         </td>
         <td  >\${item.nop}/\${item.pop}</td>
@@ -142,6 +145,7 @@
             {@if item.auditStatus==1}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
             {@/if}
+			<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
         </td>
     </tr>
     {@/each}
@@ -160,7 +164,7 @@
                 <form class="form-horizontal" id="fm-status" role="form">
                     <div class="form-body">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">对象</label>
+                            <label class="col-md-2 view-label">对象</label>
                             <div class="col-md-10 status-title">
 
                             </div>
@@ -195,8 +199,8 @@
 
 
 <!--审核弹框-->
-<div class="modal fade bs-example-modal-lg"  role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
+<div class="modal fade"  role="dialog" id="modal-audit">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -205,34 +209,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                      <div class="form-body">
-                          <div class="form-group">
-                              <label class="col-md-2 control-label">对象</label>
-                              <div class="col-md-10 audit-title">
-
-                              </div>
-                          </div>
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id">
-                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                      
                 </form>
             </div>
             <div class="modal-footer">
@@ -242,6 +219,167 @@
         </div>
     </div>
 </div>
+<div class="modal fade"  role="dialog" id="modal-preview">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-preview" role="form">
+                      
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tpl-fm" type="text/template">
+	<div class="form-body">
+	                          <div class="form-group">
+	                              <label class="col-md-2 view-label">名称</label>
+	                              <div class="col-md-10">
+										\${data.o.name}
+	                              </div>
+	                          </div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">类型</label>
+								<div class="col-md-10">
+									\${data.o.category==1?'图文':'视频'}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">开始时间</label>
+								<div class="col-md-10">
+									\${data.o.startTime}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">摘要</label>
+								<div class="col-md-10">
+									\${data.o.remark}
+								</div>
+							</div>
+							  
+							  <div class="form-group">
+							  	<label class="col-md-2 view-label">介绍</label>
+							  	<div class="col-md-10">
+							  		\$\${data.o.content}
+							  	</div>
+							  </div>
+							  <div class="form-group">
+							  <label class="col-md-2 view-label">封面</label>
+							  <div class="col-md-10">
+							  	<img  src="\${data.o.imageSrc}" style="max-width:480px;" />
+							  </div>
+							  </div>
+							  <h4>结果</h4>
+							  <hr>
+	                        <div class="form-group " id="operation">
+	                            <label class="col-md-2 control-label">结果</label>
+	                            <div class="col-md-10">
+	                                <div class="radio-group-container">
+	                                    <label>
+	                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
+	                                    </label>
+	                                    <label>
+	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
+	                                    </label>
+	                                </div>
+	                            </div>
+	                        </div>
+	                        <div class="form-group">
+	                            <label class="col-md-2 control-label">说明</label>
+	                            <div class="col-md-10">
+	                                <input type="hidden" name="id" value="\${data.o.id}">
+	                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
+	                            </div>
+	                        </div>
+	                    </div>
+	
+</script>
+
+<script id="tpl-preview" type="text/template">
+	<div class="form-body">
+	                          <div class="form-group">
+	                              <label class="col-md-2 view-label">名称</label>
+	                              <div class="col-md-10">
+										\${data.o.name}
+	                              </div>
+	                          </div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">类型</label>
+								<div class="col-md-10">
+									\${data.o.category==1?'图文':'视频'}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">开始时间</label>
+								<div class="col-md-10">
+									\${data.o.startTime}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-2 view-label">摘要</label>
+								<div class="col-md-10">
+									\${data.o.remark}
+								</div>
+							</div>
+							  
+							  <div class="form-group">
+							  	<label class="col-md-2 view-label">介绍</label>
+							  	<div class="col-md-10">
+							  		\$\${data.o.content}
+							  	</div>
+							  </div>
+							  <div class="form-group">
+							  <label class="col-md-2 view-label">封面</label>
+							  <div class="col-md-10">
+							  	<img  src="\${data.o.imageSrc}" style="max-width:480px;" />
+							  </div>
+							  </div>
+							  
+	                    </div>
+	
+</script>
+<div id="j-pswp" class="pswp"role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+	
 <style>
     .cover{
         width: 140px;
