@@ -146,6 +146,9 @@
             {@if item.auditStatus==1}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
             {@/if}
+            {@if item.auditStatus==2}
+            <a href="../liveRpt/add/index.jsp?id=${param.id}&did=\${item.id}">发布报道</a>
+            {@/if}
 			<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
         </td>
     </tr>

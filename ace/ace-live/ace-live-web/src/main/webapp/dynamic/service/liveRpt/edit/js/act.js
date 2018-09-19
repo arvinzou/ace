@@ -29,24 +29,8 @@ function initEvents() {
 			$(element).valid();
 		},
 		rules: {
-			rid: {
-				required: true,
-				maxlength: 50
-			},
-			uid: {
-				required: true,
-				maxlength: 50
-			}
 		},
 		messages: {
-			rid: {
-				required: "请输入直播间编号",
-				maxlength: "直播间编号字符长度不能超过50"
-			},
-			uid: {
-				required: "请输入用户编号",
-				maxlength: "用户编号字符长度不能超过50"
-			}
 		}
 	});
 	/*监听表单提交*/

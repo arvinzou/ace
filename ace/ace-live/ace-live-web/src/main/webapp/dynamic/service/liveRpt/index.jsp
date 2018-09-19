@@ -168,6 +168,7 @@
                {@if item.status==1}
                <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
                {@/if}
+            <a href="add/index.jsp?id=${param.id}&did=\${item.rid}">发布报道</a>
              <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
 
              <a href="javascript:del('\${item.id}');">删除</a>
