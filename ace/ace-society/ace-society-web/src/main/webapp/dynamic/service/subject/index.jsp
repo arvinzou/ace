@@ -36,10 +36,10 @@
                         <div class="input-group">
                             <input type="text"
                                    name="keyword"
-                                   class="form-control input-circle-left"
+                                   class="form-control input-left"
                                    placeholder="请输入名称">
                             <span class="input-group-btn">
-                                                        <button class="btn btn-circle-right btn-default search_btn"
+                                                        <button class="btn btn-right btn-default search_btn"
                                                                 type="submit">
                                                                 搜索
                                                         </button>
