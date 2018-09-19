@@ -299,7 +299,7 @@
                                   <div class="form-group">
                                     <label class="col-md-2 view-label">$!{item.remarks}</label>
                                     <div class="col-md-10">
-                                          \${data.o.$!{item.columName}}
+                                          \${$!{item.columName}}
                                     </div>
                                    </div>
                               #end
@@ -338,7 +338,7 @@
                    <div class="form-group">
                      <label class="col-md-2 view-label">$!{item.remarks}</label>
                      <div class="col-md-10">
-                           \${data.o.$!{item.columName}}
+                           \${$!{item.columName}}
                      </div>
                     </div>
                #end
