@@ -35,16 +35,16 @@
     <div class="portlet-body">
 
         <div class="row custom-tollbar">
-            <div class="col-sm-5">
+            <div class="col-sm-8">
                 <a href="javascript:void(0);" onclick="add();" class="btn green">创建</a>
 
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-4">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
-                        <input type="text" name="keyword" class="form-control input-circle-left" placeholder="请输入名称">
+                        <input type="text" name="keyword" class="form-control input-left" placeholder="请输入名称">
                         <span class="input-group-btn">
-        <button class="btn btn-circle-right btn-default search_btn"
+        <button class="btn btn-right btn-default search_btn"
                 type="submit">
                 搜索
         </button>
@@ -245,24 +245,7 @@
         </tr>
     </table>
 </script>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
 
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}" type="text/javascript"></script>

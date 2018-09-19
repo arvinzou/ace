@@ -240,7 +240,7 @@ public class ActivityServiceImpl implements ActivityService {
      * @version: 2018-09-11
      */
     @Override
-    public MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception {
+    public MessageResponse audit(String id, String rst, String remark,String coinconfigId, UserProp userProp) throws Exception {
         Activity activity=activityDao.selectByPrimaryKey(id);
         if(null==activity){
             return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
@@ -250,12 +250,14 @@ public class ActivityServiceImpl implements ActivityService {
             return auditRs;
         }
         activity.setStatus(rst);
+        if(!CommonUtils.isBlank(coinconfigId)){
+            activity.setCoinconfigId(coinconfigId);
+        }
         activity.setLastModifyDate(DateUtil.getNowDate());
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
         activityDao.updateByPrimaryKey(activity);
-        dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id),
-                String.valueOf(id), "线下活动", userProp);
+        dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
     }
 

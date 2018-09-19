@@ -48,9 +48,10 @@ function initEvents(){
     $("#fm-edit").validate({
         onfocusout: function(element) { $(element).valid(); },
         rules: {
-                                         title: {required: true,maxlength:50}                                 },
+            title: {required: true,maxlength:50}
+            },
         messages: {
-                                             title: {
+            title: {
                         required: "请输入活动名称",
                         maxlength:"活动名称字符长度不能超过50"
                     }                                 }
