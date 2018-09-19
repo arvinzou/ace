@@ -109,7 +109,7 @@ function initForm(){
         async:false,
 data:{ id: urlParams.did },
         success:function(result){
-        startLoad();
+        stopLoad();
             if(result.status == 0) {
                var data={};
                data['o']=result.value;
@@ -122,7 +122,7 @@ render('#fm-edit',data,'tpl-fm');
             }
         },
         error:function(){
-        startLoad();
+        stopLoad();
             alert("对不起出错了！");
         }
     });

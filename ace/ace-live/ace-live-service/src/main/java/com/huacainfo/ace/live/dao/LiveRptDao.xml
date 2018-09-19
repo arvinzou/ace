@@ -15,6 +15,8 @@
     </resultMap>
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.live.vo.LiveRptVo">
         <result column="liveName" jdbcType="VARCHAR" property="liveName"/>
+        <result column="statement" jdbcType="VARCHAR" property="statement"/>
+        <result column="auditDate" jdbcType="TIMESTAMP" property="auditDate"/>
         <association property="rpt" column="uid" javaType="com.huacainfo.ace.live.model.Reporter">
             <id property="openid" column="openid"/>
             <result property="headimgurl" column="headimgurl"/>
@@ -31,9 +33,23 @@
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List"/>
-        from live_rpt
-        where id = #{id,jdbcType=VARCHAR}
+        t.id, t.rid, t.uid, t.sort, t.mediaType, t.createTime, t.status, t.likeNum,t.content, t.mediaContent,c.name liveName,
+        a.nickname reporter,
+        '' thumbnail,
+        ifnull(f.logo,a.headimgurl) headimgurl,
+        ifnull(f.short_name,a.nickname) nickname,
+        a.openid,
+        b.id imgId,
+        b.url,
+        q.statement,q.createDate auditDate
+        from live_rpt t
+        left join live c on t.rid=c.id
+        left join portal.userinfo a on t.uid=a.openid
+        left join live_img b on t.id=b.rptId
+        left join portal.users e on t.uid=e.openId
+        left join portal.department f on e.department_id=f.department_id
+        left join live_log q on t.lastAuditLogId=q.id
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from live_rpt
@@ -74,7 +90,8 @@
         left join live_img b on t.id=b.rptId
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id
-        where 0=0
+        left join live_log q on t.lastAuditLogId=q.id
+        where c.deptId=#{condition.deptId}
         <if test='condition.content!=null and condition.content!=""'>
             and t.content like
             concat('%',#{condition.content,jdbcType=VARCHAR},'%')
@@ -105,7 +122,8 @@
         ifnull(f.short_name,a.nickname) nickname,
         a.openid,
         b.id imgId,
-        b.url
+        b.url,
+        q.statement,q.createDate auditDate
         <include refid="whereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -148,4 +166,12 @@
             rpt.rid = #{rid,jdbcType=VARCHAR}
         and rpt.id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateAudit">
+        update live_rpt
+        set
+        status = #{auditStatus},
+        lastAuditLogId = #{lastAuditLogId}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

@@ -5,11 +5,13 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.dao.OrderInfoDao;
+import com.huacainfo.ace.society.model.OrderDetail;
 import com.huacainfo.ace.society.model.OrderInfo;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.OrderInfoService;
@@ -23,7 +25,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -282,6 +286,26 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         dataBaseLogService.log("审核订单管理", "订单管理", id, id,
                 "订单管理", userProp);
         return new MessageResponse(0, "订单管理审核完成！");
+    }
+
+    /**
+     * 创建订单
+     *
+     * @param info 订单信息
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse create(OrderInfoVo info) {
+        if (CollectionUtils.isEmpty(info.getDetailList())) {
+            return new ResultResponse(ResultCode.FAIL, "缺少订单明细");
+        }
+        BigDecimal payAmount = BigDecimal.ZERO;
+        for (OrderDetail item : info.getDetailList()) {
+
+        }
+
+
+        return null;
     }
 
 }
