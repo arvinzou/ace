@@ -25,8 +25,8 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, commodityType, commodityName, category, commodityCover, costPoints, origPrice, salePrice,
-    state, remark, status, createUserId, createUserName, createDate, lastModifyUserId, 
-    lastModifyUserName, lastModifyDate, summary
+        state, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, summary
   </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
