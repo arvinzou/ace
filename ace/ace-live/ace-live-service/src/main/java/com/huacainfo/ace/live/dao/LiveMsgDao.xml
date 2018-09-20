@@ -68,7 +68,7 @@
     </select>
     <select id="findList" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List"/>
+        t.id, t.rid, t.uid, t.status,t.content, t.createTime
         <include refid="whereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>

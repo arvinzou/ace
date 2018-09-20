@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.CircleDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.Circle">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="corpId" jdbcType="VARCHAR" property="corpId" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="mediaType" jdbcType="VARCHAR" property="mediaType" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="likeNum" jdbcType="BIGINT" property="likeNum" />
+    <result column="lastAuditLogId" jdbcType="VARCHAR" property="lastAuditLogId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="mediaContent" jdbcType="LONGVARCHAR" property="mediaContent" />
+  </resultMap>
+
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.society.vo.CircleVo">
+    <result column="liveName" jdbcType="VARCHAR" property="liveName"/>
+    <result column="statement" jdbcType="VARCHAR" property="statement"/>
+    <result column="auditDate" jdbcType="TIMESTAMP" property="auditDate"/>
+    <association property="rpt" column="uid" javaType="com.huacainfo.ace.society.model.Reporter">
+      <id property="openid" column="openid"/>
+      <result property="headimgurl" column="headimgurl"/>
+      <result property="nickname" column="nickname"/>
+    </association>
+    <collection property="imageList" ofType="com.huacainfo.ace.society.model.Img">
+      <id property="id" column="imgId"/>
+      <result property="url" column="url"/>
+    </collection>
+  </resultMap>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    t.id,t.uid, t.sort, t.mediaType, t.createTime, t.status, t.likeNum,t.content, t.mediaContent,
+    a.nickname reporter,
+    a.headimgurl,
+    a.nickname nickname,
+    a.openid,
+    b.id imgId,
+    b.url,
+    q.statement,q.createDate auditDate
+    from circle t
+    left join portal.userinfo a on t.uid=a.openid
+    left join circle_img b on t.id=b.circleId
+    left join circle_log q on t.lastAuditLogId=q.id
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from circle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.society.model.Circle">
+    insert into circle (id, corpId, uid, 
+      sort, mediaType, createTime, 
+      status, likeNum, lastAuditLogId, 
+      content, mediaContent)
+    values (#{id,jdbcType=VARCHAR}, #{corpId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{mediaType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=CHAR}, #{likeNum,jdbcType=BIGINT}, #{lastAuditLogId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR}, #{mediaContent,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.Circle">
+    update circle
+    set
+      mediaType = #{mediaType,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      mediaContent = #{mediaContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="whereCondition">
+    from circle t
+    left join portal.userinfo a on t.uid=a.openid
+    left join circle_img b on t.id=b.circleId
+    left join circle_log q on t.lastAuditLogId=q.id
+    where t.corpId=#{condition.corpId}
+    <if test='condition.content!=null and condition.content!=""'>
+      and t.content like
+      concat('%',#{condition.content,jdbcType=VARCHAR},'%')
+    </if>
+
+    <if test='condition.mediaType!=null and condition.mediaType!=""'>
+      and t.mediaType =#{condition.mediaType,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and t.status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    from circle t where t.corpId=#{condition.corpId}
+    <if test='condition.content!=null and condition.content!=""'>
+      and t.content like
+      concat('%',#{condition.content,jdbcType=VARCHAR},'%')
+    </if>
+
+    <if test='condition.mediaType!=null and condition.mediaType!=""'>
+      and t.mediaType =#{condition.mediaType,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and t.status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select
+    t.id,t.uid, t.sort, t.mediaType, t.createTime, t.status, t.likeNum,t.content, t.mediaContent,
+    a.nickname reporter,
+    a.headimgurl,
+    a.nickname nickname,
+    a.openid,
+    b.id imgId,
+    b.url,
+    q.statement,q.createDate auditDate
+    <include refid="whereCondition"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY t.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createTime desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <update id="updateStatus">
+    update circle set status=#{status}, lastAuditLogId = #{lastAuditLogId} where id=#{id}
+  </update>
+</mapper>

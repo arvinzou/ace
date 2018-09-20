@@ -44,7 +44,10 @@
     <sql id="whereCondition">
         from live_cmt t left join portal.userinfo a on t.uid=a.unionid
 
-        left join live c on t.rid=c.id
+        left join live_rpt b on b.id=t.rptId
+
+        left join live c on b.rid=c.id
+
         where c.deptId=#{condition.deptId}
 
         <if test='condition.content!=null and condition.content!=""'>
