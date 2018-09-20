@@ -1,8 +1,6 @@
 .content {
     width: 10rem;
     background: rgba(247, 249, 252, 1);
-    height: 100%;
-    overflow-y: auto;
 }
 
 .search, .panel, .menu, .recommen {

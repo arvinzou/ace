@@ -119,7 +119,7 @@ public class WIndexController extends JxbBaseController {
     @RequestMapping("/banner")
     public ResultResponse banner() throws Exception {
         EvaluatTplQVo evaluatTplQVo=new EvaluatTplQVo();
-        ResultResponse rr=this.evaluatTplService.getEvaluatTplList(evaluatTplQVo, 0, 2, null);
+        ResultResponse rr=this.evaluatTplService.getEvaluatTplList(evaluatTplQVo, 1, 2, null);
         CourseQVo condition=new CourseQVo();
         PageResult<CourseVo> rst1 = this.courseService.findCourseList(condition, 0, 2, null);
         Map<String,Object> map=new HashMap<String, Object>();
