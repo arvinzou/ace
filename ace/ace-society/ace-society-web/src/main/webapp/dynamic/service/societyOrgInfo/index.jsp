@@ -24,22 +24,23 @@
 <%--==============common jsp-prefix==============--%>
 
 <div class="portlet light">
-    <div class="portlet-title hide">
-        <div class="caption">
-        </div>
-        <div class="actions">
-            <a href="javascript:void(0);" onclick="add();"
-               class="btn green">创建</a>
-        </div>
-    </div>
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-7">
+            <div class="col-md-5">
 
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <form onsubmit="return t_query()">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
+                        <%--<button type="button" class="btn btn-default"  onclick="setParams('status','0');">已删除</button>--%>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">暂存</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">待审核</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">已通过</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','4');">被驳回</button>
+                    </div>
+
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control " placeholder="请输入组织姓名">
                         <span class="input-group-btn">
@@ -60,8 +61,8 @@
                     <th width="10%"> 组织类型</th>
                     <th width="10%"> 联系人姓名</th>
                     <th width="10%"> 联系人手机号</th>
-                    <th width="10%"> 累计获取积分</th>
-                    <th width="10%"> 可用积分</th>
+                    <th width="10%"> 累计获得爱心币</th>
+                    <th width="10%"> 有效爱心币</th>
                     <th width="10%"> 注册状态</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -97,21 +98,22 @@
             {@if item.status==0}
             <span class="label label-lg label-danger">已删除</span>
             {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
+            <span class="label label-lg label-primary">暂存</span>
             {@else if item.status==2}
-            <span class="label label-lg label-warning">提交审核</span>
+            <span class="label label-lg label-info">待审审核</span>
             {@else if item.status==3}
-            <span class="label label-lg label-info">审核通过</span>
+            <span class="label label-lg label-success">审核通过</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else if item.status==4}
-            <span class="label label-lg label-info">被驳回</span>
+            <span class="label label-lg label-danger">被驳回</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else}
             <span class="label label-lg label-info">暂存</span>
             {@/if}
         </td>
         <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-detail">查看</a>--%>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             {@if item.status==2}
@@ -121,55 +123,78 @@
     </tr>
     {@/each}
 </script>
+
+
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td class="active"> 组织名称</td>
-            <td class="success"> \${data.orgName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 组织类型</td>
-            <td class="success"> \${data.orgAddr}</td>
-        </tr>
-        <tr>
-            <td class="active"> 组织封面</td>
-            <td class="success"> \${data.orgCover}</td>
-        </tr>
-        <tr>
-            <td class="active"> 组织介绍</td>
-            <td class="success"> \${data.orgSummary}</td>
-        </tr>
-        <tr>
-            <td class="active"> 组织地址</td>
-            <td class="success"> \${data.orgAddr}</td>
-        </tr>
-        <tr>
-            <td class="active"> 联系人姓名</td>
-            <td class="success"> \${data.contactPerson}</td>
-        </tr>
-        <tr>
-            <td class="active"> 联系人手机号</td>
-            <td class="success"> \${data.contactPhone}</td>
-        </tr>
-        <tr>
-            <td class="active"> 累计获取积分</td>
-            <td class="success"> \${data.accPoints}</td>
-        </tr>
-        <tr>
-            <td class="active"> 可用积分</td>
-            <td class="success"> \${data.validPoints}</td>
-        </tr>
-        <tr>
-            <td class="active"> 注册状态</td>
-            <td class="success"> \${data.status}</td>
-        </tr>
-    </table>
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织名称</label>
+            <div class="col-md-10">
+                \${data.orgName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织类型</label>
+            <div class="col-md-10">
+                \${data.orgType}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织封面</label>
+            <div class="col-md-10">
+                <img src="\${data.orgCover}" style="max-width:480px;"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织介绍</label>
+            <div class="col-md-10">
+                \${data.orgSummary}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织地址</label>
+            <div class="col-md-10">
+                \${data.orgAddr}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">联系人姓名</label>
+            <div class="col-md-10">
+                \${data.contactPerson}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">联系人手机号</label>
+            <div class="col-md-10">
+                \${data.contactPhone}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">累计获得爱心币</label>
+            <div class="col-md-10">
+                \${data.accPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">有效爱心币</label>
+            <div class="col-md-10">
+                \${data.validPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">注册状态</label>
+            <div class="col-md-10">
+                \${parseStatus(data.status)}
+            </div>
+        </div>
+    </div>
 </script>
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -178,11 +203,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-                    <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
-                            <%--详情模板填充--%>
-                        </div>
-                    </div>
+                    <%--详情模板填充--%>
                 </form>
             </div>
             <div class="modal-footer">
@@ -197,7 +218,7 @@
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -206,28 +227,28 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id"/>
-                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                    <%--<div class="form-body">--%>
+                    <%--<div class="form-group " id="operation">--%>
+                    <%--<label class="col-md-2 control-label">审核结果</label>--%>
+                    <%--<div class="col-md-10">--%>
+                    <%--<div class="radio-group-container">--%>
+                    <%--<label>--%>
+                    <%--<input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>--%>
+                    <%--</label>--%>
+                    <%--<label>--%>
+                    <%--<input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>--%>
+                    <%--</label>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="form-group">--%>
+                    <%--<label class="col-md-2 control-label">审核说明</label>--%>
+                    <%--<div class="col-md-10">--%>
+                    <%--<input type="hidden" name="id"/>--%>
+                    <%--<textarea name="message" style="width: 100%;height: 100px;"></textarea>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
                 </form>
             </div>
             <div class="modal-footer">
@@ -237,6 +258,95 @@
         </div>
     </div>
 </div>
+<%--审核渲染模板--%>
+<script id="tpl-fm-audit" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织名称</label>
+            <div class="col-md-10">
+                \${data.orgName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织类型</label>
+            <div class="col-md-10">
+                \${data.orgType}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织封面</label>
+            <div class="col-md-10">
+                <img src="\${data.orgCover}" style="max-width:480px;"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织介绍</label>
+            <div class="col-md-10">
+                \${data.orgSummary}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">组织地址</label>
+            <div class="col-md-10">
+                \${data.orgAddr}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">联系人姓名</label>
+            <div class="col-md-10">
+                \${data.contactPerson}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">联系人手机号</label>
+            <div class="col-md-10">
+                \${data.contactPhone}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">累计获得爱心币</label>
+            <div class="col-md-10">
+                \${data.accPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">有效爱心币</label>
+            <div class="col-md-10">
+                \${data.validPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">注册状态</label>
+            <div class="col-md-10">
+                \${parseStatus(data.status)}
+            </div>
+        </div>
+        <h4>结果</h4>
+        <hr>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">审核说明</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="4"><span style="padding:10px">驳回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">审核说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.id}">
+                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+</script>
 
 <style>
     .cover {

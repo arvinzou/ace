@@ -285,6 +285,9 @@
         <if test="condition.orgName !=null and condition.orgName !=&quot;&quot;">
             and t.orgName like concat('%',#{condition.orgName,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">
