@@ -238,6 +238,9 @@
         <if test="condition.politicalStatus !=null and condition.politicalStatus !=&quot;&quot;">
             and t.politicalStatus = #{condition.politicalStatus,jdbcType=VARCHAR}
         </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">
