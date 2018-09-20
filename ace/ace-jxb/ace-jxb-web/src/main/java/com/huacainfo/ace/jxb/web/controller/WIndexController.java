@@ -52,7 +52,7 @@ public class WIndexController extends JxbBaseController {
         baseOrder.setPayStatus("2");
         for (CourseVo item : list) {
             baseOrder.setCommodityId(item.getId());
-            ResultResponse rr = baseOrderService.findBaseOrderListSencond(baseOrder, 0, 5, null);
+            ResultResponse rr = baseOrderService.findBaseOrderListSencond(baseOrder, 1, 5, null);
             if (rr.getStatus() == 0) {
                 item.setConsumerList(rr.getData());
             }
