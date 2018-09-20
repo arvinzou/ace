@@ -27,11 +27,19 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-sm-7">
+            <div class="col-sm-5">
 
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <form onsubmit="return t_query()">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
+                        <%--<button type="button" class="btn btn-default"  onclick="setParams('status','0');">已删除</button>--%>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">暂存</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">待审核</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">已通过</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','4');">被驳回</button>
+                    </div>
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control " placeholder="请输入姓名">
                         <span class="input-group-btn">
@@ -51,8 +59,8 @@
                     <th width="10%">真实姓名</th>
                     <th width="15%">手机号码</th>
                     <th width="10%">政治面貌</th>
-                    <th width="10%">累计获取积分</th>
-                    <th width="10%">有效积分</th>
+                    <th width="10%">累计获得爱心币</th>
+                    <th width="10%">有效爱心币</th>
                     <th width="10%">注册状态</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -92,19 +100,19 @@
         <td>\${item.validPoints}</td>
         <td>
             <span class="label label-lg  \${item.status==0 ? 'label-danger'
-            : item.status==2 ? 'label-warning'
+            : item.status==1 ? 'label-primary'
+            : item.status==2 ? 'label-info'
             : item.status==3 ? 'label-success'
             : item.status==4 ? 'label-danger' : 'label-info'}">
                  \${parseStatus(item.status)}
             </span>
         </td>
         <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             {@if item.status==2}
-            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit"
-               data-id="\${item.id}">审核</a>
+            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
         </td>
     </tr>
@@ -113,7 +121,7 @@
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -122,11 +130,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-                    <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
-                            <%--详情模板填充--%>
-                        </div>
-                    </div>
+                    <%--详情模板填充--%>
                 </form>
             </div>
             <div class="modal-footer">
@@ -139,7 +143,7 @@
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -148,28 +152,28 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id"/>
-                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                    <%--<div class="form-body">--%>
+                    <%--<div class="form-group " id="operation">--%>
+                    <%--<label class="col-md-2 control-label">审核结果</label>--%>
+                    <%--<div class="col-md-10">--%>
+                    <%--<div class="radio-group-container">--%>
+                    <%--<label>--%>
+                    <%--<input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>--%>
+                    <%--</label>--%>
+                    <%--<label>--%>
+                    <%--<input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>--%>
+                    <%--</label>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="form-group">--%>
+                    <%--<label class="col-md-2 control-label">审核说明</label>--%>
+                    <%--<div class="col-md-10">--%>
+                    <%--<input type="hidden" name="id"/>--%>
+                    <%--<textarea name="message" style="width: 100%;height: 100px;"></textarea>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
                 </form>
             </div>
             <div class="modal-footer">
@@ -179,42 +183,125 @@
         </div>
     </div>
 </div>
+<%--审核渲染模板--%>
+<script id="tpl-fm-audit" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">微信昵称</label>
+            <div class="col-md-10">
+                \${data.nickname}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">真实姓名</label>
+            <div class="col-md-10">
+                \${data.realName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">手机号码</label>
+            <div class="col-md-10">
+                \${data.mobilePhone}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">政治面貌</label>
+            <div class="col-md-10">
+                \${data.politicalStatus}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">累计获得爱心币</label>
+            <div class="col-md-10">
+                \${data.accPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">有效爱心币</label>
+            <div class="col-md-10">
+                \${data.validPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">注册状态</label>
+            <div class="col-md-10">
+                \${parseStatus(data.status)}
+            </div>
+        </div>
+        <h4>结果</h4>
+        <hr>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">审核说明</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="4"><span style="padding:10px">驳回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">审核说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.id}">
+                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+            </div>
+        </div>
+    </div>
+
+</script>
 
 <%--详情模板--%>
 <script id="tpl-detail" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">微信昵称</label>
+            <div class="col-md-10">
+                \${data.nickname}
+            </div>
+        </div>
 
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td class="active"> 微信昵称</td>
-            <td class="success"> \${data.nickname}</td>
-        </tr>
-        <tr>
-            <td class="active"> 真实性名</td>
-            <td class="success"> \${data.realName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 手机号码</td>
-            <td class="success"> \${data.mobilePhone}</td>
-        </tr>
-        <tr>
-            <td class="active"> 政治面貌</td>
-            <td class="success"> \${data.politicalStatus}</td>
-        </tr>
-        <tr>
-            <td class="active"> 累计获取积分</td>
-            <td class="success"> \${data.accPoints}</td>
-        </tr>
-        <tr>
-            <td class="active"> 有效积分</td>
-            <td class="success"> \${data.validPoints}</td>
-        </tr>
-
-        <tr>
-            <td class="active"> 注册状态</td>
-            <td class="success"> \${parseStatus(data.status)}</td>
-        </tr>
-    </table>
-
+        <div class="form-group">
+            <label class="col-md-2 view-label">真实姓名</label>
+            <div class="col-md-10">
+                \${data.realName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">手机号码</label>
+            <div class="col-md-10">
+                \${data.mobilePhone}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">政治面貌</label>
+            <div class="col-md-10">
+                \${data.politicalStatus}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">累计获得爱心币</label>
+            <div class="col-md-10">
+                \${data.accPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">有效爱心币</label>
+            <div class="col-md-10">
+                \${data.validPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">注册状态</label>
+            <div class="col-md-10">
+                \${parseStatus(data.status)}
+            </div>
+        </div>
+    </div>
 </script>
 <style>
     .cover {

@@ -80,7 +80,8 @@ function detail(id) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
             var html = juicer(navitem, {data: result.value});
-            $("#detail-info").html(html);
+            // $("#detail-info").html(html);
+            $("#fm-detail").html(html);
             $("#modal-detail").modal("show");
         }
     })
@@ -92,6 +93,7 @@ function initEvents() {
         var id = relatedTarget.data('id');
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
+        initAuditForm(id);
     })
     $('#modal-audit .btn-primary').on('click', function () {
         $('#modal-audit form').submit();
@@ -210,12 +212,40 @@ function parseStatus(status) {
         case '1':
             return "暂存";
         case '2':
-            return "提交审核";
+            return "待审核";
         case '3':
-            return "审核通过";
+            return "已通过";
         case '4':
-            return "审核驳回";
+            return "被驳回";
         default:
             return "";
     }
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    getPageList();
+}
+
+function initAuditForm(id) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/societyOrgInfo/selectSocietyOrgInfoByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {id: id},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                render('#fm-audit', result.value, 'tpl-fm-audit');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+
 }

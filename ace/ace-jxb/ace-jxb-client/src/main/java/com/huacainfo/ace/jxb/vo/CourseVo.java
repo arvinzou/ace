@@ -52,6 +52,17 @@ public class CourseVo extends Course {
      * 审核备注
      */
     private String auditRemark;
+    /**
+     * 课程使用者列表*/
+    private Object consumerList;
+
+    public Object getConsumerList() {
+        return consumerList;
+    }
+
+    public void setConsumerList(Object consumerList) {
+        this.consumerList = consumerList;
+    }
 
     public Integer getSrcCount() {
         return srcCount;

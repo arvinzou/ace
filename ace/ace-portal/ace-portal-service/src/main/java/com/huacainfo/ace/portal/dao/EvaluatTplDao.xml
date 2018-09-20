@@ -280,8 +280,7 @@
     <sql id="whereCondition">
         where (c.syid =#{condition.syid})
         <if test='condition.name!=null and condition.name!=""'>
-            and c.name like
-            concat(#{condition.name,jdbcType=VARCHAR},'%')
+            and c.name like concat(%,#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.category!=null and condition.category!=""'>
             and c.category =#{condition.category,jdbcType=VARCHAR}

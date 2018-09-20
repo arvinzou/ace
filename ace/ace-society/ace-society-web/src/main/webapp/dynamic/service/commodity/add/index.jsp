@@ -45,17 +45,17 @@
                             <span class="help-block"></span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            商品分类
-                        </label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control"
-                                   name="category" maxlength="2"
-                                   placeholder="请输入商品分类（建议字数在14个字以内，不超过2个字)">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
+                    <%--<div class="form-group">--%>
+                    <%--<label class="col-md-2 control-label">--%>
+                    <%--商品分类--%>
+                    <%--</label>--%>
+                    <%--<div class="col-md-10">--%>
+                    <%--<input type="text" class="form-control"--%>
+                    <%--name="category" maxlength="2"--%>
+                    <%--placeholder="请输入商品分类（建议字数在14个字以内，不超过2个字)">--%>
+                    <%--<span class="help-block"></span>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             商品封面
@@ -86,12 +86,12 @@
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">
-                            购买所需积分
+                            爱心币
                         </label>
                         <div class="col-md-10">
                             <input type="text" class="form-control"
                                    name="costPoints" maxlength="10"
-                                   placeholder="请输入购买所需积分（建议字数在14个字以内，不超过10个字)">
+                                   placeholder="请输入爱心币（格式为数字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                     <div class="row">
                         <div class="col-md-offset-3 col-md-7">
                             <button class="btn  btn-lg  green" type="submit"
-                                    style="width:30%">保存
+                                    style="width:20%">保存
                             </button>
                         </div>
                     </div>
