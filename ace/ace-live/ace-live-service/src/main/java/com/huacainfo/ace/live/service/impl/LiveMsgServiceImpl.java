@@ -160,4 +160,17 @@ public class LiveMsgServiceImpl implements LiveMsgService {
                 String.valueOf(id), "互动内容", userProp);
         return new MessageResponse(0, "互动内容删除完成！");
     }
+
+    @Override
+    public MessageResponse updateStatus(String id, String status)
+            throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(status)) {
+            return new MessageResponse(1, "状态不能为空！");
+        }
+        this.liveMsgDao.updateStatus(id, status);
+        return new MessageResponse(0, "OK！");
+    }
 }

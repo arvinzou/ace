@@ -167,4 +167,17 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         List<String> list = this.liveCmtDao.findSensitiveWordsListBydeptId(deptId);
         return list;
     }
+
+    @Override
+    public MessageResponse updateStatus(String id, String status)
+            throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(status)) {
+            return new MessageResponse(1, "状态不能为空！");
+        }
+        this.liveCmtDao.updateStatus(id, status);
+        return new MessageResponse(0, "OK！");
+    }
 }

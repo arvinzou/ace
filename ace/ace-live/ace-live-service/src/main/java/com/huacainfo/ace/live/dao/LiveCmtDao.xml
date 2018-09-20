@@ -42,19 +42,14 @@
     </update>
 
     <sql id="whereCondition">
-        from live_cmt where 0=0
+        from live_cmt t left join portal.userinfo a on t.uid=a.unionid
+
+        where 0=0
         <if test='condition.content!=null and condition.content!=""'>
-            and content like
-            concat('%',#{condition.content,jdbcType=VARCHAR},'%')
-        </if>
-        <if test='condition.rptId!=null and condition.rptId!=""'>
-            and rptId =#{condition.rptId,jdbcType=VARCHAR}
-        </if>
-        <if test='condition.uid!=null and condition.uid!=""'>
-            and uid =#{condition.uid,jdbcType=VARCHAR}
+            and (t.content like concat('%',#{condition.content,jdbcType=VARCHAR},'%') or a.nackname=#{condition.content})
         </if>
         <if test='condition.status!=null and condition.status!=""'>
-            and status =#{condition.status,jdbcType=VARCHAR}
+            and t.status =#{condition.status,jdbcType=VARCHAR}
         </if>
     </sql>
     <select id="findCount" resultType="int">
@@ -63,7 +58,7 @@
     </select>
     <select id="findList" resultMap="BaseResultMapVo">
         select
-        <include refid="Base_Column_List"/>
+        t.id, t.status, t.createTime,t.content,a.nickname,a.headimgurl
         <include refid="whereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -88,4 +83,11 @@
         from portal.sensitive_words
         where deptId = #{deptId,jdbcType=VARCHAR}
     </select>
+
+    <update id="updateStatus">
+        update live_cmt
+        set
+        status = #{status}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

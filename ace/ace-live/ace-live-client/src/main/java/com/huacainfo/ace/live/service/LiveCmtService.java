@@ -85,4 +85,19 @@ public interface LiveCmtService {
 
     List<String> findSensitiveWordsList(String deptId) throws Exception;
 
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(更新状态)
+     * @param: @param id
+     * @param: @param status
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    public abstract MessageResponse updateStatus(String id, String status) throws Exception;
+
 }
