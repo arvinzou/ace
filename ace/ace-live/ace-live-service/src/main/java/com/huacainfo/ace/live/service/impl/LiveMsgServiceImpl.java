@@ -56,7 +56,7 @@ public class LiveMsgServiceImpl implements LiveMsgService {
                                                  int limit, String orderBy) throws Exception {
         PageResult<LiveMsgVo> rst = new PageResult<LiveMsgVo>();
         List<LiveMsgVo> list = this.liveMsgDao.findList(condition,
-                start, start + limit, orderBy);
+                start,  limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.liveMsgDao.findCount(condition);

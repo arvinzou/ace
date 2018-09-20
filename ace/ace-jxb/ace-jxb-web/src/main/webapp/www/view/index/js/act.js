@@ -1,7 +1,12 @@
 window.onload = function(){
     hotTeachers();
-    course();
+    freecourse();
+    qualityCourse();
+    initBanner();
     initSwriper();
+    $('#search_input').focus(activeSearch);
+    $('.search').on('click', '.notice', cancelSearch);
+    $("input").keyup(searching);
 }
 
 /*初始化Swriper*/
@@ -61,7 +66,33 @@ function hotTeachers(){
 /**
  * 课程
  */
-function course(){
+function freecourse(){
+    $.ajax({
+        url: contextPath+ "/www/index/findListFree",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0) {
+                //限时免费
+                renderPage('freeCourse', result.data.rows, 'free-tpl');
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+function qualityCourse(){
     $.ajax({
         url: contextPath+ "/www/index/findListRand",
         type:"post",
@@ -71,10 +102,8 @@ function course(){
         },
         success:function(result){
             if(result.status == 0) {
-                //限时免费
-                renderPage('freeCourse', result.data.free.rows, 'free-tpl');
                 //精品课程
-                renderPage('qualityCourse', result.data.rand.rows, 'quality-tpl');
+                renderPage('qualityCourse', result.data.rows, 'quality-tpl');
             }else {
                 if(result.info){
                     alert(result.info);
@@ -145,4 +174,61 @@ function index(){
  */
 function mine(){
     window.location.href = contextPath + '/www/view/mine/mine.jsp';
+}
+
+function initBanner(){
+    $.ajax({
+        url: contextPath+ "/www/index/banner",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0) {
+                renderPage('banner', result.data, 'banner-tpl');
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function activeSearch() {
+    $('.search_list').show();
+}
+function searching() {
+    var val = $('#search_input').val();
+    if (!val) {
+        return;
+    }
+    var url = contextPath+ '/www/course/findList';
+    var data = {
+        page: 1,
+        limit: 20,
+        name: val
+    };
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            var info = document.getElementById('temp_testLists').innerHTML;
+            var infohtml = juicer(info, {
+                data: result.data.rows,
+            });
+            $("#testListss").html(infohtml);
+        }
+    });
+}
+
+function cancelSearch() {
+    $('#search_input').val('输入课程名称');
+    $('.search_list').hide();
+    $('#testListss').empty();
 }

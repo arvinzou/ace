@@ -44,16 +44,16 @@ public class WIndexController extends JxbBaseController {
      */
     @RequestMapping("/findListRand")
     public ResultResponse findList() throws Exception {
-        CourseQVo condition=new CourseQVo();
+        CourseQVo condition = new CourseQVo();
         condition.setCostType("1");
         PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 4, "RAND()");
-        List<CourseVo> list=rst.getRows();
-        BaseOrderQVo baseOrder=new BaseOrderQVo();
+        List<CourseVo> list = rst.getRows();
+        BaseOrderQVo baseOrder = new BaseOrderQVo();
         baseOrder.setPayStatus("2");
-        for(CourseVo item:list){
+        for (CourseVo item : list) {
             baseOrder.setCommodityId(item.getId());
-            ResultResponse rr=baseOrderService.findBaseOrderListSencond(baseOrder,0,5,null);
-            if(rr.getStatus()==0){
+            ResultResponse rr = baseOrderService.findBaseOrderListSencond(baseOrder, 1, 5, null);
+            if (rr.getStatus() == 0) {
                 item.setConsumerList(rr.getData());
             }
         }
@@ -65,7 +65,7 @@ public class WIndexController extends JxbBaseController {
      */
     @RequestMapping("/findListFree")
     public ResultResponse findListFree() throws Exception {
-        CourseQVo condition=new CourseQVo();
+        CourseQVo condition = new CourseQVo();
         condition.setCostType("0");
         PageResult<CourseVo> rst1 = this.courseService.findCourseList(condition, 0, 10, "RAND()");
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst1);
@@ -79,11 +79,11 @@ public class WIndexController extends JxbBaseController {
      */
     @RequestMapping("/getCounselorRanking")
     public ResultResponse getCounselorList() throws Exception {
-        CounselorQVo condition=new CounselorQVo();
+        CounselorQVo condition = new CounselorQVo();
         //只显示注册通过的咨询师
         condition.setRegAuditRst("1");
         condition.setConsultState("1");
-        PageResult<CounselorVo> rst = counselorService.findCounselorList(condition, 0,10, "consultCount desc");
+        PageResult<CounselorVo> rst = counselorService.findCounselorList(condition, 0, 10, "consultCount desc");
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }
 
@@ -95,36 +95,35 @@ public class WIndexController extends JxbBaseController {
      */
     @RequestMapping("/search")
     public ResultResponse search(String name) throws Exception {
-        CourseQVo condition=new CourseQVo();
+        CourseQVo condition = new CourseQVo();
         condition.setCostType("1");
         condition.setName(name);
         PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 5, "RAND()");
-        CounselorQVo cc=new CounselorQVo();
+        CounselorQVo cc = new CounselorQVo();
         //只显示注册通过的咨询师
         cc.setRegAuditRst("1");
         cc.setConsultState("1");
         cc.setName(name);
-        PageResult<CounselorVo> rst1 = counselorService.findCounselorList(cc, 0,5, "RAND()");
-        Map<String,Object> map=new HashMap<String, Object>();
-        map.put("Course",rst);
-        map.put("Counselor",rst1);
+        PageResult<CounselorVo> rst1 = counselorService.findCounselorList(cc, 0, 5, "RAND()");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("Course", rst);
+        map.put("Counselor", rst1);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", map);
     }
 
     /**
-     *
-     *
      * @return ResultResponse data(list)
      */
     @RequestMapping("/banner")
     public ResultResponse banner() throws Exception {
-        EvaluatTplQVo evaluatTplQVo=new EvaluatTplQVo();
-        ResultResponse rr=this.evaluatTplService.getEvaluatTplList(evaluatTplQVo, 1, 2, null);
-        CourseQVo condition=new CourseQVo();
+        EvaluatTplQVo evaluatTplQVo = new EvaluatTplQVo();
+        evaluatTplQVo.setSyid("jxb");
+        ResultResponse rr = this.evaluatTplService.getEvaluatTplList(evaluatTplQVo, 1, 2, null);
+        CourseQVo condition = new CourseQVo();
         PageResult<CourseVo> rst1 = this.courseService.findCourseList(condition, 0, 2, null);
-        Map<String,Object> map=new HashMap<String, Object>();
-        map.put("test",rr.getData());
-        map.put("Course",rst1.getRows());
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("test", rr.getData());
+        map.put("Course", rst1.getRows());
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", map);
     }
 }

@@ -5,14 +5,13 @@ import com.huacainfo.ace.live.model.LiveCmt;
 
 public class LiveCmtQVo extends LiveCmt {
     private static final long serialVersionUID = 1L;
+    private  String deptId;
 
-    private String nickname;
-
-    public String getNickname() {
-        return nickname;
+    public String getDeptId() {
+        return deptId;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 }

@@ -35,7 +35,8 @@
 			<div class="search">
 				<div class="container">
 					<div class="search_box">
-						<input type="search" name="" id="search_input" value="输入咨询师姓名或关键字" style="color:rgba(196,200,214,1);" />
+						<input type="search" name="" id="search_input" value="输入课程名称" onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+							   onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:rgba(196,200,214,1);" />
 					</div>
 					<div class="notice">
 						<i class="iconfont">&#xe702;</i>
@@ -45,16 +46,8 @@
 			<div class="panel">
 				<div class="container">
 					<div class="swiper-container swiper-container_panel">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<div class="swiper-slide"><img src="img/1.jpg" /></div>
-							</div>
-							<div class="swiper-slide">
-								<div class="swiper-slide"><img src="img/2.jpg" /></div>
-							</div>
-							<div class="swiper-slide">
-								<div class="swiper-slide"><img src="img/3.jpg" /></div>
-							</div>
+						<div class="swiper-wrapper" id="banner">
+
 						</div>
 						<div class="swiper-pagination"></div>
 					</div>
@@ -107,7 +100,7 @@
 					<div class="quality-courselist" id="qualityCourse">
 
 					</div>
-					<div class="quality-course-footer">
+					<div class="quality-course-footer" onclick="qualityCourse();">
 						<span class="batch"><img src="img/batch.png"/></span>
 						<span class="change-batch">换一批</span>
 					</div>
@@ -140,6 +133,13 @@
 			</div>
 			<div class="menu_footer">
 				<div class="menu_footer_box" style="margin: 0 auto;" onclick="mine();"><img src="img/icon-mine-active.png" class="footer-icon"/><span class="footer-title">个人中心</span></div>
+			</div>
+		</div>
+
+		<div class="search_list">
+			<div class="test_list search_test_list">
+				<ul id="testListss">
+				</ul>
 			</div>
 		</div>
 		<!--底部结束-->
@@ -189,13 +189,16 @@
                 <div class="course-info"><span class="course-info-title">\${item.name}</span></div>
                 <div class="course-info">
 								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
+									{@each item.consumerList.list as item01, index01}
+									{@if index01 == 0}
+									<img src="\${item01.consumerImgUrl}" class="head-cover"/>
+									{@else}
+									<img src="\${item01.consumerImgUrl}" class="head-cover stack"/>
+									{@/if}
+									{@/each}
 								</span>
                     <span><img src="img/icon-more.png" class="more"/></span>
-                    <span class="user-nums">\${item.likeNum}人在听</span>
+                    <span class="user-nums">\${item.consumerList.total}人在听</span>
                 </div>
             </div>
             {@else}
@@ -204,18 +207,105 @@
                 <div class="course-info"><span class="course-info-title">\${item.name}</span></div>
                 <div class="course-info">
 								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
+									{@each item.consumerList.list as item01, index01}
+									{@if index01 == 0}
+									<img src="\${item01.consumerImgUrl}" class="head-cover"/>
+									{@else}
+									<img src="\${item01.consumerImgUrl}" class="head-cover stack"/>
+									{@/if}
+									{@/each}
 								</span>
                     <span><img src="img/icon-more.png" class="more"/></span>
-                    <span class="user-nums">\${item.likeNum}人在听</span>
+                    <span class="user-nums">\${item.consumerList.total}人在听</span>
                 </div>
             </div>
             {@/if}
             {@/each}
         </script>
+
+		<script id="banner-tpl" type="text/template">
+			{@each data.Course as item01, index01}
+			<div class="swiper-slide">
+				<div class="swiper-slide"><img src="\${item01.cover}" /></div>
+			</div>
+			{@/each}
+			{@each data.test.EvaluaTplList as item02, index02}
+			<div class="swiper-slide">
+				<div class="swiper-slide"><img src="\${item02.cover}" /></div>
+			</div>
+			{@/each}
+		</script>
+
+		<%--搜索列表--%>
+		<script id="temp_testLists" type="text/template">
+			{@each data as item}
+			<li data-id="\${item.id}" onclick="courseDetail('\${item.id}');">
+				<div class="left_div">
+					<p class="test_title">
+						\${item.name}
+					</p>
+					<p class="test_remark">
+						{@if item.objects == '00'}
+						<span>幼儿</span>
+						{@else if item.objects == '01'}
+						<span>小学</span>
+						{@else if item.objects == '02'}
+						<span>初中</span>
+						{@else if item.objects == '03'}
+						<span>高中</span>
+						{@/if}
+						<span>·</span>
+						{@if item.purport == '00'}
+						<span>学习方法</span>
+						{@else if item.purport == '01'}
+						<span>团队合作</span>
+						{@else if item.purport == '02'}
+						<span>沟通表达</span>
+						{@else if item.purport == '03'}
+						<span>自我认知</span>
+						{@else if item.purport == '04'}
+						<span>阅读习惯</span>
+						{@else if item.purport == '05'}
+						<span>情商培养</span>
+						{@else if item.purport == '06'}
+						<span>习惯养成</span>
+						{@else if item.purport == '07'}
+						<span>亲子沟通</span>
+						{@else if item.purport == '08'}
+						<span>心理教育</span>
+						{@else if item.purport == '09'}
+						<span>性格养成</span>
+						{@else if item.purport == '10'}
+						<span>品格教养</span>
+						{@else if item.purport == '11'}
+						<span>思维训练</span>
+						{@else if item.purport == '13'}
+						<span>入学焦虑</span>
+						{@else if item.purport == '14'}
+						<span>幼小衔接</span>
+						{@else if item.purport == '15'}
+						<span>其他</span>
+						{@/if}
+					</p>
+
+					<span class="price">
+                           {@if item.costType==0}
+                            <span class="free">免费</span>
+                            {@else}
+                            <span class="no_free">
+                                <span class="now_price">￥\${item.cost}</span>
+                                <span class="old_price">￥\${item.primeCost}</span>
+                            </span>
+                            {@/if}
+					</span>
+
+				</div>
+				<div class="right_div">
+					<img src="\${item.cover}" alt="">
+				</div>
+			</li>
+			{@/each}
+		</script>
 
 		<script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>

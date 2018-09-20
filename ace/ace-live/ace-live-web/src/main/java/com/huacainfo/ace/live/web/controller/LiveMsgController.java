@@ -53,6 +53,7 @@ public class LiveMsgController extends LiveBaseController {
     @ResponseBody
     public PageResult<LiveMsgVo> findLiveMsgList(LiveMsgQVo condition,
                                                  PageParamNoChangeSord page) throws Exception {
+        condition.setDeptId(this.getCurUserProp().getCorpId());
         PageResult<LiveMsgVo> rst = this.liveMsgService
                 .findLiveMsgList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());
