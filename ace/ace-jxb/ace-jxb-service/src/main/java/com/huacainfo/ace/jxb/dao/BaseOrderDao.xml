@@ -326,6 +326,9 @@
         <if test="condition.id !=null and condition.id !=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
+        <if test="condition.commodityId !=null and condition.commodityId !=&quot;&quot;">
+            and t.commodityId = #{condition.commodityId,jdbcType=VARCHAR}
+        </if>
         <if test="condition.consumerId !=null and condition.consumerId !=&quot;&quot;">
             and t.consumerId = #{condition.consumerId,jdbcType=VARCHAR}
         </if>
