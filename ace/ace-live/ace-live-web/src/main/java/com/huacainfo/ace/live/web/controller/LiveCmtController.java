@@ -128,4 +128,21 @@ public class LiveCmtController extends LiveBaseController {
         String id = json.getString("id");
         return this.liveCmtService.deleteLiveCmtByLiveCmtId(id, this.getCurUserProp());
     }
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(审核)
+     * @param: @param id
+     * @param status
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    @RequestMapping(value = "/updateStatus")
+    @ResponseBody
+    public MessageResponse updateStatus(String id,String status) throws Exception {
+        return this.liveCmtService.updateStatus(id,status);
+    }
 }
