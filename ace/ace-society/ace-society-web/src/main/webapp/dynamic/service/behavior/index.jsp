@@ -29,11 +29,17 @@
     <div class="portlet-body">
 
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-4">
 
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-8">
                 <form onsubmit="return t_query()">
+                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default"  onclick="setParams('status','');">全部</button>
+                        <button type="button" class="btn btn-default"  onclick="setParams('status','2');">待审</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">通过</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','4');">驳回</button>
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -85,16 +91,16 @@
         <td width="15%">\${item.submitDate}</td>
         <td width="15%">
             {@if item.status==0}
-            <span class="label label-lg label-danger">已删除</span>
+            <span class="label label-lg label-danger">删除</span>
             {@else if item.status==1}
             <span class="label label-lg label-info">暂存</span>
             {@else if item.status==2}
-            <span class="label label-lg label-warning">提交审核</span>
+            <span class="label label-lg label-warning">待审</span>
             {@else if item.status==3}
-            <span class="label label-lg label-info">审核通过</span>
+            <span class="label label-lg label-info">通过</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@else if item.status==4}
-            <span class="label label-lg label-info">被驳回</span>
+            <span class="label label-lg label-info">驳回</span>
             <div style="padding-top:10px">\${item.auditRemark}</div>
             {@/if}
         </td>

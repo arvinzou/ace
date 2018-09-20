@@ -26,13 +26,18 @@
 <div class="portlet light">
     <div class="portlet-body">
         <div class="row custom-toolbar">
-            <div class="row">
-                <div class="col-sm-8">
-                    <a href="javascript:void(0);" onclick="add();" style="font-size: 14px !important;"
-                       class="btn green specialCourse">创建</a>
-                </div>
                 <div class="col-sm-4">
+                    <a href="javascript:void(0);" onclick="add();" style="font-size: 14px !important;"
+                       class="btn green specialCourse"><i class="fa fa-plus"></i> 创建</a>
+                </div>
+                <div class="col-sm-8">
                     <form onsubmit="return t_query()">
+                        <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                            <button type="button" class="btn btn-default"  onclick="setParams('status','');">全部</button>
+                            <button type="button" class="btn btn-default"  onclick="setParams('status','2');">待审</button>
+                            <button type="button" class="btn btn-default" onclick="setParams('status','3');">通过</button>
+                            <button type="button" class="btn btn-default" onclick="setParams('status','4');">驳回</button>
+                        </div>
                         <div class="input-group">
                             <input type="text"
                                    name="keyword"
@@ -47,7 +52,6 @@
                         </div>
                     </form>
                 </div>
-            </div>
 
         </div>
 

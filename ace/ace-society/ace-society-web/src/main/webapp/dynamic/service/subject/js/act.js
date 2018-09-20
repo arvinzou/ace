@@ -44,6 +44,9 @@ function getPageList() {
                 });
             }
             render($("#page-list"), rst.rows, "tpl-list");
+        }else{
+            alert("系统服务内部异常！");
+            stopLoad();
         }
     })
 }
@@ -171,3 +174,7 @@ function initForm(id) {
     });
 }
 
+function setParams(key, value) {
+    params[key] = value;
+    getPageList();
+}
