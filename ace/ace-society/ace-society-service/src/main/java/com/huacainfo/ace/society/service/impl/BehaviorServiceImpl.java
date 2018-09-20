@@ -69,8 +69,6 @@ private AuditRecordService auditRecordService;
         <BehaviorVo> rst = new PageResult<>();
             List
             <BehaviorVo> list = this.behaviorDao.findList(condition, start, start + limit, orderBy);
-                logger.debug("*****************************************"+condition.getTitle());
-                logger.info("*****************************************"+condition.getTitle());
                 rst.setRows(list);
                 if (start <= 1) {
                 int allRows = this.behaviorDao.findCount(condition);

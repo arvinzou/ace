@@ -89,52 +89,8 @@
 					<div class="course-title">限时免费</div>
 					<div class="free-courselist">
 						<div class="swiper-container swiper-container_course">
-							<div class="swiper-wrapper">
-								<div class="swiper-slide">
-									<div class="course-cover"></div>
-									<div class="course-info">
-										<span class="course-info-title">建立亲子关系的规则感</span>
-									</div>
-									<div class="course-info">
-										<span class="free">免费</span><span class="prime">¥9.99</span>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<div class="course-cover"></div>
-									<div class="course-info">
-										<span class="course-info-title">如何和孩子相处</span>
-									</div>
-									<div class="course-info">
-										<span class="free">免费</span><span class="prime">¥9.99</span>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<div class="course-cover"></div>
-									<div class="course-info">
-										<span class="course-info-title">面对多动症</span>
-									</div>
-									<div class="course-info">
-										<span class="free">免费</span><span class="prime">¥9.99</span>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<div class="course-cover"></div>
-									<div class="course-info">
-										<span class="course-info-title">孩子自觉学习很重要</span>
-									</div>
-									<div class="course-info">
-										<span class="free">免费</span><span class="prime">¥9.99</span>
-									</div>
-								</div>
-								<div class="swiper-slide">
-									<div class="course-cover"></div>
-									<div class="course-info">
-										<span class="course-info-title">早睡早起是一种习惯</span>
-									</div>
-									<div class="course-info">
-										<span class="free">免费</span><span class="prime">¥9.99</span>
-									</div>
-								</div>
+							<div class="swiper-wrapper" id="freeCourse">
+
 							</div>
 						</div>
 					</div>
@@ -148,63 +104,8 @@
 			<div class="quality-course">
 				<div class="container">
 					<div class="course-title">精品课程</div>
-					<div class="quality-courselist">
-						<div class="quality-course-item box_margin">
-							<div class="quality-course-cover"></div>
-							<div class="course-info"><span class="course-info-title">如何提高孩子的创新能力</span></div>
-							<div class="course-info">
-								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-								</span>
-								<span><img src="img/icon-more.png" class="more"/></span>
-								<span class="user-nums">688人在听</span>
-							</div>
-						</div>
-						<div class="quality-course-item">
-							<div class="quality-course-cover"></div>
-							<div class="course-info"><span class="course-info-title">教孩子从日常写作中写作</span></div>
-							<div class="course-info">
-								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-								</span>
-								<span><img src="img/icon-more.png" class="more"/></span>
-								<span class="user-nums">688人在听</span>
-							</div>
-						</div>
-						<div class="quality-course-item box_margin">
-							<div class="quality-course-cover"></div>
-							<div class="course-info"><span class="course-info-title">童年缺失如何在成年后补救</span></div>
-							<div class="course-info">
-								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-								</span>
-								<span><img src="img/icon-more.png" class="more"/></span>
-								<span class="user-nums">688人在听</span>
-							</div>
-						</div>
-						<div class="quality-course-item">
-							<div class="quality-course-cover"></div>
-							<div class="course-info"><span class="course-info-title">孩子不看书怎么办？</span></div>
-							<div class="course-info">
-								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-								</span>
-								<span><img src="img/icon-more.png" class="more"/></span>
-								<span class="user-nums">688人在听</span>
-							</div>
-						</div>
+					<div class="quality-courselist" id="qualityCourse">
+
 					</div>
 					<div class="quality-course-footer">
 						<span class="batch"><img src="img/batch.png"/></span>
@@ -235,10 +136,10 @@
 		<!--底部开始-->
 		<div class="footer">
 			<div class="menu_footer">
-				<div class="menu_footer_box" style="margin: 0 auto;"><img src="img/icon-index-active.png" class="footer-icon"/><span class="footer-title">心阳光联盟</span></div>
+				<div class="menu_footer_box" style="margin: 0 auto;" onclick="index();"><img src="img/icon-index-active.png" class="footer-icon"/><span class="footer-title">心阳光联盟</span></div>
 			</div>
 			<div class="menu_footer">
-				<div class="menu_footer_box" style="margin: 0 auto;"><img src="img/icon-mine-active.png" class="footer-icon"/><span class="footer-title">个人中心</span></div>
+				<div class="menu_footer_box" style="margin: 0 auto;" onclick="mine();"><img src="img/icon-mine-active.png" class="footer-icon"/><span class="footer-title">个人中心</span></div>
 			</div>
 		</div>
 		<!--底部结束-->
@@ -258,6 +159,61 @@
                     </div>
                 </div>
             </div>
+            {@/each}
+        </script>
+
+        <%--限时免费模板--%>
+        <script id="free-tpl" type="text/template">
+            {@each data as item, index}
+            <div class="swiper-slide" onclick="courseDetail('\${item.id}');">
+                <div class="course-cover"><img src="\${item.cover}" style="width: 100%;height: 100%;object-fit: cover;border-radius: 0.133333rem;"/></div>
+                <div class="course-info">
+                    <span class="course-info-title">\${item.name}</span>
+                </div>
+                <div class="course-info">
+                    <span class="free">免费</span>
+                    {@if item.primeCost != undefined && item.primeCost !=null && item.primeCost!=''}
+                    <span class="prime">¥\${item.primeCost}</span>
+                    {@/if}
+                </div>
+            </div>
+            {@/each}
+        </script>
+
+        <%--精品课程模板--%>
+        <script id="quality-tpl" type="text/template">
+            {@each data as item, index}
+            {@if index % 2 == 0}
+            <div class="quality-course-item box_margin" onclick="courseDetail('\${item.id}');">
+                <div class="quality-course-cover"><img src="\${item.cover}" style="width: 100%;height: 100%;object-fit: cover;border-radius: 0.133333rem;"/></div>
+                <div class="course-info"><span class="course-info-title">\${item.name}</span></div>
+                <div class="course-info">
+								<span>
+									<img src="img/head1.png" class="head-cover"/>
+									<img src="img/head2.png" class="head-cover stack"/>
+									<img src="img/head1.png" class="head-cover stack"/>
+									<img src="img/head2.png" class="head-cover stack"/>
+								</span>
+                    <span><img src="img/icon-more.png" class="more"/></span>
+                    <span class="user-nums">\${item.likeNum}人在听</span>
+                </div>
+            </div>
+            {@else}
+            <div class="quality-course-item" onclick="courseDetail('\${item.id}');">
+                <div class="quality-course-cover"><img src="\${item.cover}" style="width: 100%;height: 100%;object-fit: cover;border-radius: 0.133333rem;"/></div>
+                <div class="course-info"><span class="course-info-title">\${item.name}</span></div>
+                <div class="course-info">
+								<span>
+									<img src="img/head1.png" class="head-cover"/>
+									<img src="img/head2.png" class="head-cover stack"/>
+									<img src="img/head1.png" class="head-cover stack"/>
+									<img src="img/head2.png" class="head-cover stack"/>
+								</span>
+                    <span><img src="img/icon-more.png" class="more"/></span>
+                    <span class="user-nums">\${item.likeNum}人在听</span>
+                </div>
+            </div>
+            {@/if}
             {@/each}
         </script>
 

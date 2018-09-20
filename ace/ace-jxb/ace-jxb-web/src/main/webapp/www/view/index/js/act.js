@@ -1,7 +1,7 @@
 window.onload = function(){
-	initSwriper();
     hotTeachers();
-    qualityCourse();
+    course();
+    initSwriper();
 }
 
 /*初始化Swriper*/
@@ -59,9 +59,9 @@ function hotTeachers(){
 }
 
 /**
- * 精品课程
+ * 课程
  */
-function qualityCourse(){
+function course(){
     $.ajax({
         url: contextPath+ "/www/index/findListRand",
         type:"post",
@@ -71,7 +71,10 @@ function qualityCourse(){
         },
         success:function(result){
             if(result.status == 0) {
-                //renderPage('hotTeachers', result.data.rows, 'teacher-tpl')
+                //限时免费
+                renderPage('freeCourse', result.data.free.rows, 'free-tpl');
+                //精品课程
+                renderPage('qualityCourse', result.data.rand.rows, 'quality-tpl');
             }else {
                 if(result.info){
                     alert(result.info);
@@ -120,4 +123,26 @@ function testClick(){
  */
 function loadCounselor(id){
     window.location.href = contextPath + '/www/view/counselor/index.jsp?id='+id;
+}
+
+/**
+ * 查看课程详情
+ * @param id
+ */
+function courseDetail(id){
+    window.location.href = contextPath + '/www/view/courseSummary/index.jsp?id='+id;
+}
+
+/**
+ * 心阳光联盟首页
+ */
+function index(){
+    window.location.href = contextPath + '/www/view/index/index.jsp';
+}
+
+/**
+ * 个人中心
+ */
+function mine(){
+    window.location.href = contextPath + '/www/view/mine/mine.jsp';
 }
