@@ -35,7 +35,8 @@
 			<div class="search">
 				<div class="container">
 					<div class="search_box">
-						<input type="search" name="" id="search_input" value="输入咨询师姓名或关键字" style="color:rgba(196,200,214,1);" />
+						<input type="search" name="" id="search_input" value="输入课程名称" onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+							   onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:rgba(196,200,214,1);" />
 					</div>
 					<div class="notice">
 						<i class="iconfont">&#xe702;</i>
@@ -45,16 +46,8 @@
 			<div class="panel">
 				<div class="container">
 					<div class="swiper-container swiper-container_panel">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<div class="swiper-slide"><img src="img/1.jpg" /></div>
-							</div>
-							<div class="swiper-slide">
-								<div class="swiper-slide"><img src="img/2.jpg" /></div>
-							</div>
-							<div class="swiper-slide">
-								<div class="swiper-slide"><img src="img/3.jpg" /></div>
-							</div>
+						<div class="swiper-wrapper" id="banner">
+
 						</div>
 						<div class="swiper-pagination"></div>
 					</div>
@@ -107,7 +100,7 @@
 					<div class="quality-courselist" id="qualityCourse">
 
 					</div>
-					<div class="quality-course-footer">
+					<div class="quality-course-footer" onclick="qualityCourse();">
 						<span class="batch"><img src="img/batch.png"/></span>
 						<span class="change-batch">换一批</span>
 					</div>
@@ -189,13 +182,16 @@
                 <div class="course-info"><span class="course-info-title">\${item.name}</span></div>
                 <div class="course-info">
 								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
+									{@each item.consumerList.list as item01, index01}
+									{@if index01 == 0}
+									<img src="\${item01.consumerImgUrl}" class="head-cover"/>
+									{@else}
+									<img src="\${item01.consumerImgUrl}" class="head-cover stack"/>
+									{@/if}
+									{@/each}
 								</span>
                     <span><img src="img/icon-more.png" class="more"/></span>
-                    <span class="user-nums">\${item.likeNum}人在听</span>
+                    <span class="user-nums">\${item.consumerList.total}人在听</span>
                 </div>
             </div>
             {@else}
@@ -204,18 +200,34 @@
                 <div class="course-info"><span class="course-info-title">\${item.name}</span></div>
                 <div class="course-info">
 								<span>
-									<img src="img/head1.png" class="head-cover"/>
-									<img src="img/head2.png" class="head-cover stack"/>
-									<img src="img/head1.png" class="head-cover stack"/>
-									<img src="img/head2.png" class="head-cover stack"/>
+									{@each item.consumerList.list as item01, index01}
+									{@if index01 == 0}
+									<img src="\${item01.consumerImgUrl}" class="head-cover"/>
+									{@else}
+									<img src="\${item01.consumerImgUrl}" class="head-cover stack"/>
+									{@/if}
+									{@/each}
 								</span>
                     <span><img src="img/icon-more.png" class="more"/></span>
-                    <span class="user-nums">\${item.likeNum}人在听</span>
+                    <span class="user-nums">\${item.consumerList.total}人在听</span>
                 </div>
             </div>
             {@/if}
             {@/each}
         </script>
+
+		<script id="banner-tpl" type="text/template">
+			{@each data.Course as item01, index01}
+			<div class="swiper-slide">
+				<div class="swiper-slide"><img src="\${item01.cover}" /></div>
+			</div>
+			{@/each}
+			{@each data.test.EvaluaTplList as item02, index02}
+			<div class="swiper-slide">
+				<div class="swiper-slide"><img src="\${item02.cover}" /></div>
+			</div>
+			{@/each}
+		</script>
 
 		<script type="text/javascript" src="js/jquery.min.js"></script>
         <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
