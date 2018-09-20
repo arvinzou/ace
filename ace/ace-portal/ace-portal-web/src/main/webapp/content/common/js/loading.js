@@ -280,7 +280,7 @@ function startLoading(){
 }
 function startLoad(){
  try {loading = startLoading();} catch (e) {};
- if (loading) {loading.settext("请求中，请稍后......");}
+ if (loading) {loading.settext("玩命请求中，请耐心等待......");}
 }
 function stopLoad(){
   if (loading) { loading.remove();}

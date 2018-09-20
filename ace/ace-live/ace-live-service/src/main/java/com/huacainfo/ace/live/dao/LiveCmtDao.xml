@@ -46,7 +46,7 @@
 
         where 0=0
         <if test='condition.content!=null and condition.content!=""'>
-            and (t.content like concat('%',#{condition.content,jdbcType=VARCHAR},'%') or a.nackname=#{condition.content})
+            and (t.content like concat('%',#{condition.content,jdbcType=VARCHAR},'%') or a.nickname=#{condition.content})
         </if>
         <if test='condition.status!=null and condition.status!=""'>
             and t.status =#{condition.status,jdbcType=VARCHAR}

@@ -106,21 +106,21 @@
             #end
         #end
         <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">已删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">提交审核</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">审核通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">被驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
+             {@if item.status==0}
+                        <span class="label label-lg label-danger">删除</span>
+                        {@else if item.status==1}
+                        <span class="label label-lg label-info">暂存</span>
+                        {@else if item.status==2}
+                        <span class="label label-lg label-warning">待审</span>
+                        {@else if item.status==3}
+                        <span class="label label-lg label-info">通过</span>
+                        <div style="padding-top:10px">\${item.auditRemark}</div>
+                        {@else if item.status==4}
+                        <span class="label label-lg label-info">驳回</span>
+                        <div style="padding-top:10px">\${item.auditRemark}</div>
+                        {@else}
+                        <span class="label label-lg label-danger">暂存</span>
+                        {@/if}
         </td>
         <td>
            ﻿ <a  href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
