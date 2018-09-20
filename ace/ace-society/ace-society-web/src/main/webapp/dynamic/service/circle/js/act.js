@@ -131,7 +131,7 @@ function initEvents() {
                         params[obj.name] = obj.value;
                     });
                     $.extend(params, {
-                        time: new Date()
+                        text:"系统强制调整"
                     });
                     console.log(params);
                     updateStatus(params);
@@ -282,7 +282,7 @@ function initForm(id) {
 function updateStatus(params) {
     startLoad();
     $.ajax({
-        url: contextPath + "/circle/updateAudit",
+        url: contextPath + "/circle/audit",
         type: "post",
         async: false,
         data: params,
