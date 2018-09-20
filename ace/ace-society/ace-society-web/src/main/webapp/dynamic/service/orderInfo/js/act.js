@@ -69,7 +69,7 @@ function detail(id) {
         if (result.status == 0) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
             var html = juicer(navitem, {data: result.value});
-            $("#detail-info").html(html);
+            $("#fm-detail").html(html);
             $("#modal-detail").modal("show");
         }
     })

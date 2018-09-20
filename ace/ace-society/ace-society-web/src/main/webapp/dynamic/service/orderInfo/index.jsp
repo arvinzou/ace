@@ -83,20 +83,17 @@
 <%--============================script piece============================--%>
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">订单管理详情</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-                    <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
                             <%--详情模板填充--%>
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -109,60 +106,13 @@
     </div>
 </div>
 
-<!--审核弹框-->
-<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">订单管理审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-                    <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id"/>
-                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
         <td>
-            <div class="row">
-                <div class="col-md-3">
-                    <img src="\${item.headimgurl}" class="cover"/>
-                    <a>\${item.nickname}</a>
-                </div>
-            </div>
+            <img src="\${item.headimgurl}" class="cover"/>
+            <a>\${item.nickname}</a>
         </td>
         <td> \${item.orderNo}</td>
         <td>
@@ -197,7 +147,7 @@
             </span>
         </td>
         <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             {@if item.status==2}
@@ -209,97 +159,88 @@
 </script>
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td class="active"> 订单编码</td>
-            <td class="success"> \${data.id}</td>
-        </tr>
-        <tr>
-            <td class="active"> 订单编号</td>
-            <td class="success"> \${data.orderNo}</td>
-        </tr>
-        <tr>
-            <td class="active"> 客户姓名</td>
-            <td class="success"> \${data.nickname}</td>
-        </tr>
-        <tr>
-            <td class="active"> 付款方式</td>
-            <td class="success"> \${parsePayType(data.payType)}</td>
-        </tr>
-        <tr>
-            <td class="active"> 付款金额</td>
-            <td class="success"> \${data.payAmount}</td>
-        </tr>
-        <tr>
-            <td class="active"> 付款时间</td>
-            <td class="success"> \${data.payDate}</td>
-        </tr>
-        <tr>
-            <td class="active"> 收货类型</td>
-            <td class="success"> \${parseReceiveType(data.receiveType)}</td>
-        </tr>
-        <%--<tr>--%>
-        <%--<td class="active"> 收货人姓名</td>--%>
-        <%--<td class="success"> \${data.receiveName}</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-        <%--<td class="active"> 收货人电话</td>--%>
-        <%--<td class="success"> \${data.receivePhone}</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-        <%--<td class="active"> 收货地址-国家</td>--%>
-        <%--<td class="success"> \${data.country}</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-        <%--<td class="active"> 收货地址-省</td>--%>
-        <%--<td class="success"> \${data.province}</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-        <%--<td class="active"> 收货地址-市</td>--%>
-        <%--<td class="success"> \${data.city}</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-        <%--<td class="active"> 收货地址-区/县</td>--%>
-        <%--<td class="success"> \${data.district}</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-        <%--<td class="active"> 收货地址-详细地址</td>--%>
-        <%--<td class="success"> \${data.address}</td>--%>
-        <%--</tr>--%>
-        <tr>
-            <td class="active"> 订单状态</td>
-            <td class="success"> \${parseState(data.orderState)}</td>
-        </tr>
-        <tr>
-            <td class="active"> 备注</td>
-            <td class="success"> \${data.remark}</td>
-        </tr>
-        <tr>
-            <td class="active"> 创建日期</td>
-            <td class="success"> \${data.createDate}</td>
-        </tr>
-        <tr>
-            <td class="active"> 商品明细</td>
-            <td class="success"></td>
-        </tr>
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">订单编码</label>
+            <div class="col-md-10">
+                \${data.id}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">订单编号</label>
+            <div class="col-md-10">
+                \${data.orderNo}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">客户姓名</label>
+            <div class="col-md-10">
+                \${data.nickname}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">付款方式</label>
+            <div class="col-md-10">
+                \${parsePayType(data.payType)}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">付款金额</label>
+            <div class="col-md-10">
+                \${data.payAmount}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">付款时间</label>
+            <div class="col-md-10">
+                \${data.payDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">收货类型</label>
+            <div class="col-md-10">
+                \${parseReceiveType(data.receiveType)}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">订单状态</label>
+            <div class="col-md-10">
+                \${parseState(data.orderState)}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">商品明细</label>
+            <div class="col-md-10"></div>
+        </div>
         <%--订单商品列表--%>
         {@each data.detailList as item, index}
-        <tr>
-            <td class="active">
-                <div>
-                    <img src="\${item.commodityCover}" class="cover"/>
-                    <a>\${item.commodityName} x \${item.purchaseQty}</a>
-                </div>
-            </td>
-            <td class="success">单价：\${item.salePrice} 元 小计：\${item.subtotal} 元</td>
-        </tr>
+        <div class="form-group">
+            <label class="col-md-2 view-label">商品 \${index}</label>
+            <div class="col-md-10">
+                <img src="\${item.commodityCover}" class="cover"/>
+                <a>\${item.commodityName} x \${item.purchaseQty}</a>
+                单价：\${item.salePrice} 元 小计：\${item.subtotal} 元
+            </div>
+        </div>
         {@/each}
-    </table>
+    </div>
 </script>
 <style>
     .cover {
-        width: 45px;
-        height: 45px;
+        width: 50px;
+        height: 50px;
         object-fit: cover;
     }
 

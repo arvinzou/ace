@@ -50,10 +50,11 @@
                 <thead>
                 <tr>
                     <th width="20%"> 场地名称</th>
-                    <th width="20%"> 场地分类</th>
-                    <th width="20%"> 购买所需积分</th>
-                    <th width="20%"> 场地状态</th>
-                    <th width="10%"> 备注</th>
+                    <%--<th width="20%"> 场地分类</th>--%>
+                    <th width="20%"> 爱心币</th>
+                    <th width="20%"> 状态</th>
+                    <th width="20%"> 已预约场次</th>
+                    <%--<th width="10%"> 备注</th>--%>
                     <th width="10%">操作</th>
                 </tr>
                 </thead>
@@ -81,7 +82,7 @@
             <img src="\${item.commodityCover}" class="cover"/>
             \${item.commodityName}
         </td>
-        <td> \${item.category}</td>
+        <%--<td> \${item.category}</td>--%>
         <td> \${item.costPoints}</td>
         <td>
             {@if item.state==1}
@@ -90,9 +91,10 @@
             <span class="label label-lg label-danger">已下架</span>
             {@/if}
         </td>
-        <td> \${item.remark}</td>
+        <%--<td> \${item.remark}</td>--%>
+        <td> 0</td>
         <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             {@if item.state==1}
             <a class="operation" href="javascript:outline('\${item.id}');">下架</a>
             {@else}
@@ -106,65 +108,79 @@
 </script>
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td class="active"> 场地编号</td>
-            <td class="success"> \${data.id}</td>
-        </tr>
-        <tr>
-            <td class="active"> 商品类型</td>
-            <td class="success"> \${parseType(data.commodityType)}</td>
-        </tr>
-        <tr>
-            <td class="active"> 场地名称</td>
-            <td class="success"> \${data.commodityName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 场地分类</td>
-            <td class="success"> \${data.category}</td>
-        </tr>
-        <tr>
-            <td class="active"> 场地封面</td>
-            <td class="success"><img src="\${data.commodityCover}" class="cover"/></td>
-        </tr>
-        <tr>
-            <td class="active"> 场地简介</td>
-            <td class="success"> \${data.summary}</td>
-        </tr>
-        <tr>
-            <td class="active"> 购买所需积分</td>
-            <td class="success"> \${data.costPoints}</td>
-        </tr>
-        <tr>
-            <td class="active"> 场地状态</td>
-            <td class="success"> \${parseState(data.state)}</td>
-        </tr>
-        <tr>
-            <td class="active"> 备注</td>
-            <td class="success"> \${data.remark}</td>
-        </tr>
-        <tr>
-            <td class="active"> 创建人姓名</td>
-            <td class="success"> \${data.createUserName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 创建日期</td>
-            <td class="success"> \${data.createDate}</td>
-        </tr>
-        <tr>
-            <td class="active"> 更新人名称</td>
-            <td class="success"> \${data.lastModifyUserName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 更新日期</td>
-            <td class="success"> \${data.lastModifyDate}</td>
-        </tr>
-    </table>
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">场地编号</label>
+            <div class="col-md-10">
+                \${data.id}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">场地名称</label>
+            <div class="col-md-10">
+                \${data.commodityName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">场地封面</label>
+            <div class="col-md-10">
+                <img src="\${data.commodityCover}" style="max-width:480px;"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">场地简介</label>
+            <div class="col-md-10">
+                \${data.summary}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">爱心币</label>
+            <div class="col-md-10">
+                \${data.costPoints}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
+                \${parseState(data.state)}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新人名称</label>
+            <div class="col-md-10">
+                \${data.lastModifyUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">更新日期</label>
+            <div class="col-md-10">
+                \${data.lastModifyDate}
+            </div>
+        </div>
+    </div>
 </script>
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -173,11 +189,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-                    <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
                             <%--详情模板填充--%>
-                        </div>
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">

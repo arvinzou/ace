@@ -97,7 +97,7 @@
             {@/if}
         </td>
         <td>
-            <a class="operation" href="javascript:detail('\${item.id}');">查看详情</a>
+            <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
