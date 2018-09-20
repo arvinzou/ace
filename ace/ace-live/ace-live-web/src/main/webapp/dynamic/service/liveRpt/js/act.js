@@ -312,6 +312,7 @@ function initPhotoPreview(imgSelector) {
 
 	 initPhotoSwipeFromDOM('.my-gallery');
 }
+
 var initPhotoSwipeFromDOM = function (gallerySelector) {
     var parseThumbnailElements = function (el) {
         var thumbElements = el.childNodes,

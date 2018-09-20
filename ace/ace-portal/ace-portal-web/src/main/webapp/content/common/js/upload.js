@@ -333,3 +333,15 @@ function resetSize(x, y) {
     console.log(xsize + "/" + ysize);
     //preImg(portalPath+'/content/common/image/upload-default.jpg');
 }
+
+function getImgs(){
+    var imgs = [];
+    $(".image-boxs .cover").each(function(i,o){
+        imgs.push({
+                url: $(o).attr("src"),
+                w: 0,
+                h: 0
+        })
+    });
+    return imgs;
+}

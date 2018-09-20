@@ -216,3 +216,21 @@ body{
         background-color: #fff;
         opacity: 1;
         border: 1px solid #fff;
+        }
+        .image-box .cover{
+                width: 320px;
+                height: 180px;
+                object-fit: cover;
+        }
+        .image-box {
+        	display: inline-block;
+        	position: relative;
+            float:left;padding:5px;
+        }
+        .image-box .delete {
+        	position: absolute;
+        	top: 5px;
+        	right: 5px;
+        	width: 30px;
+        	height: 30px;
+        }
