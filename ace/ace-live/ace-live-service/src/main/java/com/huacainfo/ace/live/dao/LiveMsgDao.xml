@@ -45,19 +45,21 @@
     </update>
 
     <sql id="whereCondition">
-        from live_msg where 0=0
+        from live_msg t
+        left join live c on t.rid=c.id
+        where c.deptId=#{condition.deptId}
         <if test='condition.content!=null and condition.content!=""'>
-            and content like
+            and t.content like
             concat('%',#{condition.content,jdbcType=VARCHAR},'%')
         </if>
         <if test='condition.rid!=null and condition.rid!=""'>
-            and rid =#{condition.rid,jdbcType=VARCHAR}
+            and t.rid =#{condition.rid,jdbcType=VARCHAR}
         </if>
         <if test='condition.uid!=null and condition.uid!=""'>
-            and uid =#{condition.uid,jdbcType=VARCHAR}
+            and t.uid =#{condition.uid,jdbcType=VARCHAR}
         </if>
         <if test='condition.status!=null and condition.status!=""'>
-            and status =#{condition.status,jdbcType=VARCHAR}
+            and t.status =#{condition.status,jdbcType=VARCHAR}
         </if>
     </sql>
     <select id="findCount" resultType="int">
@@ -70,10 +72,10 @@
         <include refid="whereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
-                ORDER BY ${orderBy}
+                ORDER BY t.${orderBy}
             </when>
             <otherwise>
-                ORDER BY createTime desc
+                ORDER BY t.createTime desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

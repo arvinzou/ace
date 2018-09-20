@@ -61,7 +61,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
                                                  int limit, String orderBy) throws Exception {
         PageResult<LiveCmtVo> rst = new PageResult<LiveCmtVo>();
         List<LiveCmtVo> list = this.liveCmtDao.findList(condition,
-                start, start + limit, orderBy);
+                start,  limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.liveCmtDao.findCount(condition);
