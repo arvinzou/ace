@@ -136,6 +136,7 @@
             <div style="padding-top:5px">\${item.statement}</div>
             {@else}
             <span class="label label-lg label-danger">驳回</span>
+            <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
             {@/if}
         </td>
@@ -144,6 +145,9 @@
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>
             {@if item.auditStatus==1}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+            {@/if}
+            {@if item.auditStatus==2}
+            <a href="../liveRpt/add/index.jsp?id=${param.id}&did=\${item.id}">发布报道</a>
             {@/if}
 			<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
         </td>

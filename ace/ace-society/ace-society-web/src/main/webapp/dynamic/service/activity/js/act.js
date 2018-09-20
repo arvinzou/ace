@@ -1,15 +1,30 @@
 var loading = {};
 var params = {limit: 10};
-window.onload = function (){
+window.onload = function () {
     initPage();
     // initEvents();
-    $('#preview').on('click','.btn-audit',audit)
-    $('#info').on('click','.personnelInfo',optionPersonner)
+    $('#preview').on('click', '.btn-audit', audit);
+    $('#preview').on('change', '.verify-btn', beforeActive);
+    $('#info').on('click', '.personnelInfo', optionPersonner)
 }
+
+/*不同的选项显示不同的按钮*/
+function beforeActive() {
+    var val = $(this).val();
+    if (val == 3) {
+        $(this).next().hide();
+        $('#coinConfig').show();
+    } else if (val == 4) {
+        $(this).next().show();
+        $('#coinConfig').hide();
+    }
+}
+
 function App() {
     console.log("=============================App Start==============================");
     loadCustom();
 }
+
 /*加载资源*/
 function loadCustom() {
     var urls = [];
@@ -31,8 +46,8 @@ function initPage() {
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            params['start']=(num-1)*params.limit;
-            params['initType']=type;
+            params['start'] = (num - 1) * params.limit;
+            params['initType'] = type;
             getPageList();
         }
     });
@@ -40,8 +55,8 @@ function initPage() {
 
 /*选择参加者*/
 function optionPersonner() {
-    var $that=$(this);
-    if($that.is('.active_flag')){
+    var $that = $(this);
+    if ($that.is('.active_flag')) {
         $that.removeClass('active_flag')
         return;
     }
@@ -50,14 +65,15 @@ function optionPersonner() {
 
 
 /*线下活动条件查询*/
-function t_query(){
+function t_query() {
     getPageList();
     return false;
 }
+
 /*线下活动加载表格数据*/
 function getPageList() {
-    var url = contextPath+ "/activity/findActivityList";
-    params['name']=$("input[name=keyword]").val();
+    var url = contextPath + "/activity/findActivityList";
+    params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -71,6 +87,7 @@ function getPageList() {
         }
     })
 }
+
 /*页面渲染*/
 function render(obj, data, tplId) {
     var tpl = document.getElementById(tplId).innerHTML;
@@ -79,13 +96,15 @@ function render(obj, data, tplId) {
     });
     $(obj).html(html);
 }
+
 /*线下活动添加*/
-function add(type){
-    window.location.href = add/index.jsp;
+function add(type) {
+    window.location.href = add / index.jsp;
 }
+
 /*线下活动编辑*/
-function edit(id){
-     window.location.href = 'edit/index.jsp?id='+id;
+function edit(id) {
+    window.location.href = 'edit/index.jsp?id=' + id;
 }
 
 // function initEvents() {
@@ -116,75 +135,54 @@ function edit(id){
 //
 // }
 /*线下活动审核*/
-function audit(){
-    var url=contextPath + "/activity/audit";
-    var id=$('#preview').data('id');
-    var rst1=$('select[name=rst]').val();
-    var remark=$('input[name=remark]').val();
-    if(!remark.trim()){
+function audit() {
+    var url = contextPath + "/activity/audit";
+    var id = $('#preview').data('id');
+    var rst1 = $('select[name=rst]').val();
+    var remark='ok';
+    if(rst1!=3){
+        remark = $('input[name=remark]').val();
+    };
+    var coinconfigId=$('#coinConfig').val();
+    if (!remark.trim()) {
         $('input[name=remark]').focus();
     }
-    var data={
-        id:id,
-        rst:rst1,
-        remark:remark,
+    var data = {
+        id: id,
+        rst: rst1,
+        remark: remark,
+        coinconfigId:coinconfigId
     }
     startLoad();
-    $.post(url,data,function(rst){
+    $.post(url, data, function (rst) {
         stopLoad();
-        if(rst.status == 0) {
+        if (rst.status == 0) {
             getPageList();
         }
     });
 }
+
 /*线下活动上架*/
-function online(id){
-    if(confirm("确定要上架吗？")){
+function online(id) {
+    if (confirm("确定要上架吗？")) {
         startLoad();
         $.ajax({
             url: contextPath + "/activity/updateStatus",
-            type:"post",
-            async:false,
-            data:{
-               id :id,
-               status:'1'
+            type: "post",
+            async: false,
+            data: {
+                id: id,
+                status: '1'
             },
-            success:function(rst){
+            success: function (rst) {
                 stopLoad();
-                if(rst.status == 0) {
-                  getPageList();
-                }else {
+                if (rst.status == 0) {
+                    getPageList();
+                } else {
                     alert(rst.errorMessage);
                 }
             },
-            error:function(){
-                stopLoad();
-                alert("对不起，出错了！");
-            }
-        });
-    }
-}
-/*线下活动下架*/
-function outline(id){
-    if(confirm("确定要下架吗？")){
-        startLoad();
-        $.ajax({
-            url: contextPath + "/activity/updateStatus",
-            type:"post",
-            async:false,
-            data:{
-               id :id,
-               status:'0'
-            },
-            success:function(rst){
-                stopLoad();
-                if(rst.status == 0) {
-                  getPageList();
-                }else {
-                    alert(rst.errorMessage);
-                }
-            },
-            error:function(){
+            error: function () {
                 stopLoad();
                 alert("对不起，出错了！");
             }
@@ -192,18 +190,46 @@ function outline(id){
     }
 }
 
-function deleteData(id){
-    if (confirm("确定删除该活动吗，删除后将不能恢复。")){
-        var url=contextPath + "/activity/softDelete";
-        var data={
-            jsons:JSON.stringify({
-                id:id,
+/*线下活动下架*/
+function outline(id) {
+    if (confirm("确定要下架吗？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/activity/updateStatus",
+            type: "post",
+            async: false,
+            data: {
+                id: id,
+                status: '0'
+            },
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    getPageList();
+                } else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
+}
+
+function deleteData(id) {
+    if (confirm("确定删除该活动吗，删除后将不能恢复。")) {
+        var url = contextPath + "/activity/softDelete";
+        var data = {
+            jsons: JSON.stringify({
+                id: id,
             })
         }
         startLoad();
-        $.post(url,data,function (rst) {
+        $.post(url, data, function (rst) {
             stopLoad();
-            if(rst.status==0){
+            if (rst.status == 0) {
                 getPageList();
                 return;
             }
@@ -214,20 +240,38 @@ function deleteData(id){
 
 
 function details(id) {
-    var url=contextPath + "/activity/selectActivityByPrimaryKey";
-    var data={
-            id:id,
+    var url = contextPath + "/activity/selectActivityByPrimaryKey";
+    var data = {
+        id: id,
     }
-    $('#preview').data('id',id);
+    $('#preview').data('id', id);
     startLoad();
-    $.post(url,data,function (rst) {
+    $.post(url, data, function (rst) {
         stopLoad();
-        if(rst.status==0){
+        if (rst.status == 0) {
             renderPage("info", rst.value, "tpl-info");
+            if (rst.value.status == 2) {
+                getCoinConfig(rst.value.category);
+            }
             $('#preview').modal("show");
             return;
         }
         alert(rst.errorMessage);
+    })
+}
+
+
+function getCoinConfig(category) {
+    var url = contextPath + "/coinConfig/findCoinConfigList";
+    var data = {
+        category: category,
+        start: 0,
+        limit: 10
+    }
+    $.getJSON(url, data, function (result) {
+        if (result.status == 0) {
+            renderPage('coinConfig', result.rows, 'tpl-coinConfig');
+        }
     })
 }
 

@@ -155,8 +155,8 @@ public class ActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse audit(String id, String rst, String remark) throws Exception {
+    public MessageResponse audit(String id, String rst, String remark,String coinconfigId) throws Exception {
 
-        return this.activityService.audit(id, rst, remark, this.getCurUserProp());
+        return this.activityService.audit(id, rst, remark,coinconfigId ,this.getCurUserProp());
     }
 }

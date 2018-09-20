@@ -55,6 +55,16 @@ public class Activity extends BaseModel{
 
     private String content;
 
+    private String coinconfigId;
+
+    public String getCoinconfigId() {
+        return coinconfigId;
+    }
+
+    public void setCoinconfigId(String coinconfigId) {
+        this.coinconfigId = coinconfigId;
+    }
+
     public String getStartSignImgUrl() {
         return startSignImgUrl;
     }
