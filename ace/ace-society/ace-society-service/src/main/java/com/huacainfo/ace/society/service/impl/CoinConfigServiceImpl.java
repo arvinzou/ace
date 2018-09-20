@@ -56,14 +56,9 @@ public class CoinConfigServiceImpl implements CoinConfigService {
      * @version: 2018-09-17
      */
     @Override
-    public PageResult
-            <CoinConfigVo> findCoinConfigList(CoinConfigQVo condition, int start,
-                                              int limit, String orderBy) throws Exception {
-        PageResult
-                <CoinConfigVo> rst = new PageResult<>();
-        List
-                <CoinConfigVo> list = this.coinConfigDao.findList(condition,
-                start, limit, orderBy);
+    public PageResult<CoinConfigVo> findCoinConfigList(CoinConfigQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<CoinConfigVo> rst = new PageResult<>();
+        List<CoinConfigVo> list = this.coinConfigDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.coinConfigDao.findCount(condition);

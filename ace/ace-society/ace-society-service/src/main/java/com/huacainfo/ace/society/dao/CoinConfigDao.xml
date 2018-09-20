@@ -232,6 +232,9 @@
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and category= #{condition.category,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">

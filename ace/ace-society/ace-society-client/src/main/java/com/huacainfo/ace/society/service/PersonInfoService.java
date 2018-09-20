@@ -1,8 +1,10 @@
 package com.huacainfo.ace.society.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.vo.PersonInfoQVo;
@@ -94,4 +96,13 @@ public interface PersonInfoService {
      * @version: 2018-09-11
      */
     MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
+
+    /**
+     * 个人信息注册
+     *
+     * @param personInfo 个人信息
+     * @param userinfo   微信信息
+     * @return ResultResponse
+     */
+    ResultResponse register(PersonInfo personInfo, Userinfo userinfo);
 }

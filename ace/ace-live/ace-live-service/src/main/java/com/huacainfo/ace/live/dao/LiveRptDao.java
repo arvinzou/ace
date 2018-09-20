@@ -31,4 +31,6 @@ public interface LiveRptDao {
     int updateSortByPrimaryKey(@Param("id") String id, @Param("sort") int sort);
 
     String findNickNameByRid(@Param("rid")String rid, @Param("id")String id);
+
+    int updateAudit( @Param("id") String id,@Param("auditStatus") String auditStatus,@Param("lastAuditLogId") String lastAuditLogId);
 }

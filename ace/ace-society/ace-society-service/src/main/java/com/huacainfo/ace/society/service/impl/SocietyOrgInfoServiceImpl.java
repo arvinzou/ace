@@ -3,6 +3,7 @@ package com.huacainfo.ace.society.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -84,27 +85,23 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     @Override
     public MessageResponse insertSocietyOrgInfo(SocietyOrgInfo o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键-unionId不能为空！");
-        }
         if (CommonUtils.isBlank(o.getOrgName())) {
             return new MessageResponse(1, "组织名称不能为空！");
         }
 
+        o.setId(StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId());
 
         int temp = this.societyOrgInfoDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "社会组织信息名称重复！");
         }
 
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        this.societyOrgInfoDao.insertSelective(o);
-        this.dataBaseLogService.log("添加社会组织信息", "社会组织信息", "",
-                o.getId(), o.getId(), userProp);
+        societyOrgInfoDao.insert(o);
+        dataBaseLogService.log("添加社会组织信息", "社会组织信息", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加社会组织信息完成！");
     }
@@ -123,7 +120,7 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     @Override
     public MessageResponse updateSocietyOrgInfo(SocietyOrgInfo o, UserProp userProp) throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键-unionId不能为空！");
+            return new MessageResponse(1, "主键不能为空！");
         }
         if (CommonUtils.isBlank(o.getOrgName())) {
             return new MessageResponse(1, "组织名称不能为空！");
@@ -212,6 +209,8 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         obj.setLastModifyUserId(userProp.getUserId());
         obj.setLastModifyUserName(userProp.getName());
         societyOrgInfoDao.updateByPrimaryKeySelective(obj);
+
+        //todo 发送微信公众号模板消息
 
         dataBaseLogService.log("审核社会组织信息", "社会组织信息", id, id, "社会组织信息", userProp);
         return new MessageResponse(0, "社会组织信息审核完成！");

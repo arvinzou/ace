@@ -3,6 +3,7 @@ package com.huacainfo.ace.society.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.OrderInfo;
 import com.huacainfo.ace.society.vo.OrderInfoQVo;
@@ -28,9 +29,8 @@ public interface OrderInfoService {
      * @author: Arvin
      * @version: 2018-09-17
      */
-    PageResult
-            <OrderInfoVo> findOrderInfoList(OrderInfoQVo condition,
-                                            int start, int limit, String orderBy) throws Exception;
+    PageResult<OrderInfoVo> findOrderInfoList(OrderInfoQVo condition,
+                                              int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +68,7 @@ public interface OrderInfoService {
      * @author: Arvin
      * @version: 2018-09-17
      */
-    SingleResult
-            <OrderInfoVo> selectOrderInfoByPrimaryKey(String id) throws Exception;
+    SingleResult<OrderInfoVo> selectOrderInfoByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -97,4 +96,12 @@ public interface OrderInfoService {
      * @version: 2018-09-17
      */
     MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
+
+    /**
+     * 创建订单
+     *
+     * @param info 订单信息
+     * @return ResultResponse
+     */
+    ResultResponse create(OrderInfoVo info);
 }

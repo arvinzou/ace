@@ -127,7 +127,7 @@ function save(params) {
             stopLoad();
             alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = '../index.jsp?id='+urlParams.id;
+                window.location.href = 'index.jsp?id='+urlParams.id+"&did="+params.rid;
             }
         },
         error: function () {

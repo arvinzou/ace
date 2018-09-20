@@ -8,15 +8,24 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.common.tools.StringUtils;
+import com.huacainfo.ace.live.dao.LiveDao;
 import com.huacainfo.ace.live.dao.LiveImgDao;
+import com.huacainfo.ace.live.dao.LiveLogDao;
 import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.model.LiveImg;
+import com.huacainfo.ace.live.model.LiveLog;
 import com.huacainfo.ace.live.model.LiveRpt;
 import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.vo.LiveRptQVo;
 import com.huacainfo.ace.live.vo.LiveRptVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +50,11 @@ public class LiveRptServiceImpl implements LiveRptService {
     @Autowired
     private KafkaProducerService kafkaProducerService;
 
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+    @Autowired
+    private LiveLogDao liveLogDao;
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -55,24 +69,24 @@ public class LiveRptServiceImpl implements LiveRptService {
      * @version: 2018-01-03
      */
     @Override
-    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, int start,
-                                                 int limit, String orderBy) throws Exception {
+    public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, int start, int limit, String orderBy) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        LiveRptDao dao = session.getMapper(LiveRptDao.class);
         PageResult<LiveRptVo> rst = new PageResult<LiveRptVo>();
-        List<LiveRptVo> list = this.liveRptDao.findList(condition,
-                start, start + limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.liveRptDao.findCount(condition);
-            rst.setTotal(allRows);
+        try {
+            List<LiveRptVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
         }
-
-        //获取nickName
-        String nickName;
-        for (LiveRptVo vo : list) {
-            nickName = liveRptDao.findNickNameByRid(vo.getRid(), vo.getId());
-            vo.setNickName(nickName);
-        }
-
         return rst;
     }
 
@@ -90,11 +104,7 @@ public class LiveRptServiceImpl implements LiveRptService {
     @Override
     public MessageResponse insertLiveRpt(LiveRpt o, List<LiveImg> imgs)
             throws Exception {
-        o.setId(UUID.randomUUID().toString());
-        //o.setId(String.valueOf(new Date().getTime()));
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getRid())) {
             return new MessageResponse(1, "直播间编号不能为空！");
         }
@@ -121,8 +131,8 @@ public class LiveRptServiceImpl implements LiveRptService {
         data.put("rid", "rsub");
         data.put("message", JSON.toJSON(o).toString());
         this.logger.info("{}", data);
-        this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
-        return new MessageResponse(0, "添加图文直播完成！");
+       // this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
+        return new MessageResponse(0, "发布成功！");
     }
 
     /**
@@ -161,8 +171,8 @@ public class LiveRptServiceImpl implements LiveRptService {
         data.put("rid", "rsub");
         data.put("message", JSON.toJSON(obj).toString());
         this.logger.info("{}", data);
-        this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
-        return new MessageResponse(0, "添加图文直播完成！");
+        //this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
+        return new MessageResponse(0, "发布成功！");
     }
 
 
@@ -232,11 +242,7 @@ public class LiveRptServiceImpl implements LiveRptService {
     @Override
     public SingleResult<LiveRptVo> selectLiveRptByPrimaryKey(String id) throws Exception {
         SingleResult<LiveRptVo> rst = new SingleResult<LiveRptVo>();
-        //获取nickName
-        String nickName;
         LiveRptVo vo = this.liveRptDao.selectByPrimaryKey(id);
-        nickName = liveRptDao.findNickNameByRid(vo.getRid(), vo.getId());
-        vo.setNickName(nickName);
         rst.setValue(vo);
         return rst;
     }
@@ -254,6 +260,7 @@ public class LiveRptServiceImpl implements LiveRptService {
      */
     @Override
     public MessageResponse deleteLiveRptByLiveRptId(String id, UserProp userProp) throws Exception {
+        this.liveImgDao.deleteByRid(id);
         this.liveRptDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除图文直播", "图文直播", String.valueOf(id),
                 String.valueOf(id), "图文直播", userProp);
@@ -275,5 +282,29 @@ public class LiveRptServiceImpl implements LiveRptService {
     public MessageResponse updateSortByPrimaryKey(String id, int sort) throws Exception {
         this.liveRptDao.updateSortByPrimaryKey(id, sort);
         return new MessageResponse(0, "OK！");
+    }
+    @Override
+    public  MessageResponse updateAudit(String id,String rst,String text, UserProp userProp) throws Exception{
+        if (StringUtils.isEmpty(id)) {
+            return new MessageResponse(1, "报道ID不能为空!");
+        }
+        if (StringUtils.isEmpty(rst)) {
+            return new MessageResponse(1, "审核结果不能为空!");
+        }
+        if (StringUtils.isEmpty(text)) {
+            return new MessageResponse(1, "审核说明不能为空!");
+        }
+        String logId=GUIDUtil.getGUID();
+        LiveLog log=new LiveLog();
+        log.setId(logId);
+        log.setPid(id);
+        log.setAuditor(userProp.getName());
+        log.setRst(rst);
+        log.setStatement(text);
+        log.setCreateDate(new Date());
+        this.liveLogDao.insert(log);
+        this.liveRptDao.updateAudit(id,rst,logId);
+        this.dataBaseLogService.log("报道审核", "报道", "",id, id, userProp);
+        return new MessageResponse(0, "审核成功！");
     }
 }

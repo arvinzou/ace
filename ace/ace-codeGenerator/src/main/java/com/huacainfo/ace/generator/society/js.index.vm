@@ -113,6 +113,12 @@ function initEvents() {
                 return false;
             }
         });
+         $(".btn-group .btn").bind('click', function (event) {
+                $(event.target).siblings().removeClass("active");
+                console.log(event);
+                $(event.target).addClass("active");
+            });
+
 
 
 }

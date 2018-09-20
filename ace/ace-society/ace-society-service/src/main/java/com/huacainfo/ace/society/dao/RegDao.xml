@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.RegDao">
+
+    <insert id="insertReg" parameterType="com.huacainfo.ace.portal.model.Users">
+        insert into portal.users (user_id, account, password,
+        sex, id_card, name,
+        department_id, area_code, birthday,
+        stauts, last_login_time, mobile, email, seat, user_level,
+        create_time, fax, telphone, qq, openId, cur_syid, appOpenId)
+        values (#{userId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{departmentId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
+        #{stauts,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{mobile,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR}, #{seat,jdbcType=VARCHAR}, #{userLevel,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{fax,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR},
+        #{qq,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{curSyid,jdbcType=VARCHAR},
+        #{appOpenId,jdbcType=VARCHAR})
+        ;
+        insert into portal.users_role (user_id, role_id, create_time)
+        values(#{userId,jdbcType=VARCHAR}, '51bfc19d-1295-41d8-bd28-fd9a98f289ee', now())
+        ;
+        insert into portal.user_cfg (id, userId, cfgKey,cfgValue)
+        values (#{userId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 'portalType','1');
+    </insert>
+
+    <select id="isExitByTel" resultType="int">
+        select count(*) from portal.users where mobile = #{tel} or account = #{tel}
+    </select>
+
+</mapper>

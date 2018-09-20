@@ -1,100 +1,151 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<html lang="cn">
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>图文直播</title>
+    <title>评论</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="${cfg.sys_name}" name="description"/>
+    <jsp:include page="/dynamic/common/header.jsp"/>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<jsp:include page="../../common/common.jsp"/>
-<script type="text/javascript">
-
-
-</script>
 <body>
-<div class="page-content">
-    <div class="widget-box" id="widget-box">
-        <div class="widget-header">
-            <h5 class="widget-title smaller">设置查询条件</h5>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<div class="portlet light">
 
-            <div class="widget-toolbar"></div>
+    <div class="portlet-body">
+
+        <div class="row custom-toolbar">
+                                                            <div class="col-md-7">
+
+                                                            </div>
+
+                                                            <div class="col-md-5">
+
+                                                                <form onsubmit="return t_query()">
+
+                                                                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                        <button type="button" class="btn btn-default"  onclick="setParams('status','');">全部</button>
+                                                                        <button type="button" class="btn btn-default"  onclick="setParams('status','1');">待审</button>
+                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">通过</button>
+                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">屏蔽</button>
+                                                                    </div>
+
+                                                                    <div class="input-group">
+                                                                        <input type="text"
+                                                                               name="keyword"
+                                                                               class="form-control"
+                                                                               placeholder="请输入昵称或内容">
+                                                                        <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn"
+                                                                                type="submit">
+                                                                                搜索
+                                                                        </button>
+                                                                    </span>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+
+
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+
+
+                                                    <th width="20%">用户</th>
+                                                    <th width="50%">内容</th>
+                                                     <th width="10%">时间</th>
+                                                    <th width="10%"> 状态</th>
+
+                    <th width="10%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="page-list">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
         </div>
 
-        <div class="widget-body">
-            <div class="widget-main padding-6">
-                <form action="#" id="fm-search">
-
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="status"
-                        data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=113&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
-                    RID：<input name="rptId" type="text" style="width: 200px;"/>
-
-                    UID： <input name="uid" type="text" style="width: 200px;"/>
-                    <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/liveCmt/findLiveCmtList.do">
-                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                </form>
-                <div class="space10"></div>
-                <div id="toolbar" class="toolbar">
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <table id="grid-table"></table>
-
-    <div id="grid-pager"></div>
-
-
-</div>
-<div id="dialog-message" class="hide">
-    <div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-    </div>
-</div>
-<div id="dialog-message-file" class="hide">
-    <div id="load" class="loading"></div>
-</div>
-
-<div id="dialog-message-view" class="hide">
-    <div class="row" style="padding:10px" id="content">
-
-
     </div>
 
 </div>
 
-</div>
-<jsp:include page="../../common/footer-1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/common/js/reconnecting-websocket.js"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/liveCmt/config.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/liveCmt/model.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/liveCmt/controller.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/liveCmt/view.js?version=${cfg.version}"></script>
-<jsp:include page="../../common/footer-2.jsp"/>
-<script type="text/javascript">
-    window.onresize = function () {
-        console.log('autoWidthJqgrid');
-        $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-        $(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-        parent.autoWidth();
-    }
 
-</script>
+<%--=============common jsp-suffix===============--%>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-suffix==============--%>
 </body>
+
+<%--列表juicer模板--%>
+<script id="tpl-list" type="text/template">
+    {@each data as item, index}
+    <tr>
+
+                            <td>
+                                <div class="col-md-4 my-gallery"><img src="\${item.headimgurl}" class="cover"/></div>
+                                <div class="col-md-8">
+                                    <div class="describtion">\${item.nickname}</div>
+                                </div>
+
+
+                            </td>
+                            <td> \${item.content}</td>
+
+                            <td> \${item.createTime}</td>
+                            <td>
+
+
+            {@if item.status==1}
+                <span class="label label-lg label-info">待审</span>
+            {@else if item.status==2}
+                <span class="label label-lg label-success">通过</span>
+            {@else}
+                                <span class="label label-lg label-danger">屏蔽</span>
+            {@/if}
+        </td>
+        <td>
+
+             <a href="javascript:audit('\${item.id}','3');">屏蔽</a>
+             <a href="javascript:audit('\${item.id}','2');">通过</a>
+
+        </td>
+    </tr>
+    {@/each}
+</script>
+﻿
+
+
+<style>
+    .cover{
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+    }
+    .describtion{
+        padding-left:15px;
+        height:50px;
+    }
+    .cost{
+          padding-top: 5px;
+          padding-left:15px;
+          color:#FE6500;
+    }
+</style>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>

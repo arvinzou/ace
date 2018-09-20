@@ -90,72 +90,6 @@
 
 </div>
 
-<%--查看详情--%>
-<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">$!{bean.tableChineseName}详情</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-detail" role="form">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <%--
-                <button type="button" class="btn btn-primary">确定</button>
-                --%>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!--审核弹框-->
-<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">$!{bean.tableChineseName}审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-                      <div class="form-body">
-                        <div class="form-group " id="operation">
-                            <label class="col-md-2 control-label">审核结果</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">审核说明</label>
-                            <div class="col-md-10">
-                                <input type="hidden" name="id"/>
-                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -172,21 +106,21 @@
             #end
         #end
         <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">已删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">提交审核</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">审核通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">被驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
+             {@if item.status==0}
+                        <span class="label label-lg label-danger">删除</span>
+                        {@else if item.status==1}
+                        <span class="label label-lg label-info">暂存</span>
+                        {@else if item.status==2}
+                        <span class="label label-lg label-warning">待审</span>
+                        {@else if item.status==3}
+                        <span class="label label-lg label-info">通过</span>
+                        <div style="padding-top:10px">\${item.auditRemark}</div>
+                        {@else if item.status==4}
+                        <span class="label label-lg label-info">驳回</span>
+                        <div style="padding-top:10px">\${item.auditRemark}</div>
+                        {@else}
+                        <span class="label label-lg label-danger">暂存</span>
+                        {@/if}
         </td>
         <td>
            ﻿ <a  href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
@@ -203,7 +137,7 @@
     {@/each}
 </script>
 ﻿
-<div class="modal fade bs-example-modal-lg" id="modal-status">
+<div class="modal fade " id="modal-status">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

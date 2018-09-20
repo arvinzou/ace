@@ -96,5 +96,5 @@ public interface ActivityService {
      * @author: huacai003
      * @version: 2018-09-11
      */
-    MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
+    MessageResponse audit(String id, String rst, String remark,String coinconfigId, UserProp userProp) throws Exception;
 }

@@ -55,6 +55,7 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/findLiveRptList")
     @ResponseBody
     public PageResult<LiveRptVo> findLiveRptList(LiveRptQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setDeptId(this.getCurUserProp().getCorpId());
         PageResult<LiveRptVo> rst = this.liveRptService.findLiveRptList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -230,6 +231,26 @@ public class LiveRptController extends LiveBaseController {
             }
         }
         return liveRptService.updateSequence(data);
+    }
+
+
+    /**
+     * @throws
+     * @Title:updateAudit
+     * @Description: TODO(审核)
+     * @param: @param id
+     * @param rst
+     * @param text
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    @RequestMapping(value = "/updateAudit")
+    @ResponseBody
+    public MessageResponse updateAudit(String id,String rst,String text) throws Exception {
+        return this.liveRptService.updateAudit(id,rst,text,this.getCurUserProp());
     }
 
 }
