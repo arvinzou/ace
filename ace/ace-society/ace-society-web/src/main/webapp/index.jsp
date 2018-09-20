@@ -8,7 +8,7 @@ pageEncoding="utf-8" %>
     <meta name="description" content="overview &amp; stats"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>心阳光联盟</title>
+    <title>芙蓉街道智慧平台</title>
 
 </head>
 

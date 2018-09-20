@@ -27,10 +27,10 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
 
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control " placeholder="请输入姓名">

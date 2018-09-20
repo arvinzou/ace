@@ -54,7 +54,7 @@ public class WCommodityController extends SocietyBaseController {
      * @param id society.commodity.id
      * @return ResultResponse
      */
-    @RequestMapping("/getList")
+    @RequestMapping("/getDetail")
     public ResultResponse getDetail(String id) throws Exception {
         CommodityVo vo = commodityService.selectCommodityByPrimaryKey(id).getValue();
 
