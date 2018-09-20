@@ -64,10 +64,11 @@
         <module>ace-portal</module>
         <module>ace-society</module>
         <module>ace-jxb</module>
+        <module>ace-live</module>
 
         <!--<module>ace-gis</module>-->
         <!--<module>ace-kernel</module>-->
-        <!--<module>ace-live</module>-->
+        <!---->
         <!--<module>ace-iop</module>-->
         <!-- <module>ace-operana</module>-->
         <!--<module>ace-woc</module>-->
