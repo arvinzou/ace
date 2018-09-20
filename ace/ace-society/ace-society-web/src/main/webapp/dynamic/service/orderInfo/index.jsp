@@ -25,23 +25,15 @@
 
 <!---================custom-body-start======================-->
 <div class="portlet light">
-    <div class="portlet-title hide">
-        <div class="caption">
-
-        </div>
-        <div class="actions">
-            <a href="javascript:void(0);" onclick="add();" class="btn green">创建</a>
-        </div>
-    </div>
     <div class="portlet-body">
         <!---===================custom-toolbar===========================-->
         <div class="row custom-toolbar">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <a onclick="javascript:add()" class="btn green hide">
-                    <i class="fa fa-plus"></i> 添加订单管理
+                    <i class="fa fa-plus"></i> 添加
                 </a>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control " placeholder="请输入名称">
@@ -58,14 +50,14 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 订单编号</th>
-                    <th width="10%"> 客户名称</th>
-                    <th width="10%"> 付款方式</th>
+                    <th width="15%"> 客户名称</th>
+                    <th width="15%"> 订单编号</th>
+                    <th width="15%"> 付款方式</th>
                     <th width="10%"> 订单状态</th>
                     <th width="10%"> 付款金额</th>
                     <th width="15%"> 付款时间</th>
                     <th width="10%"> 收货类型</th>
-                    <th width="15%">操作</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -164,7 +156,6 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.orderNo}</td>
         <td>
             <div class="row">
                 <div class="col-md-3">
@@ -173,6 +164,7 @@
                 </div>
             </div>
         </td>
+        <td> \${item.orderNo}</td>
         <td>
             {@if item.payType==1}
             <span class="label label-lg label-info">\${parsePayType(item.payType)}</span>

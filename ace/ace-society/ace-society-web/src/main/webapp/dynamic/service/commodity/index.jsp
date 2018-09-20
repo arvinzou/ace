@@ -26,12 +26,12 @@
 <div class="portlet light">
     <div class="portlet-body">
         <div class="row custom-toolbar">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <a onclick="javascript:add()" class="btn  green">
-                    <i class="fa fa-plus"></i> 添加爱心商品
+                    <i class="fa fa-plus"></i> 添加
                 </a>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control " placeholder="请输入商品名称">
@@ -48,13 +48,12 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 商品名称</th>
-                    <th width="10%"> 商品分类</th>
-                    <th width="10%"> 商品封面</th>
-                    <th width="10%"> 购买所需积分</th>
-                    <th width="10%"> 商品状态</th>
+                    <th width="20%"> 商品名称</th>
+                    <th width="20%"> 商品分类</th>
+                    <th width="20%"> 购买所需积分</th>
+                    <th width="20%"> 商品状态</th>
                     <th width="10%"> 备注</th>
-                    <th width="15%">操作</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -78,9 +77,11 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${item.commodityName}</td>
+        <td>
+            <img src="\${item.commodityCover}" class="cover"/>
+            \${item.commodityName}
+        </td>
         <td> \${item.category}</td>
-        <td><img src="\${item.commodityCover}" class="cover"/></td>
         <td> \${item.costPoints}</td>
         <td>
             {@if item.state==1}
