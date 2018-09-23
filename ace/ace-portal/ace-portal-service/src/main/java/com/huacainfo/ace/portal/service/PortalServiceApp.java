@@ -20,10 +20,11 @@ public class PortalServiceApp {
 			}
 		} catch (Exception ex) {
 			LOGGER.error("portal服务启动失败", ex);
-			if (ctx != null) {
+			/*if (ctx != null) {
 				ctx.destroy();
 			}
 			System.exit(1);
+			*/
 		}
 
 	}

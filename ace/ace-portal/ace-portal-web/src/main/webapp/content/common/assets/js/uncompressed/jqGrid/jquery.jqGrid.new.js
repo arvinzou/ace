@@ -2151,6 +2151,7 @@ $.fn.jqGrid = function( pin ) {
 				$('#cb_'+$.jgrid.jqID(ts.p.id),ts.grid.fhDiv)[ts.p.useProp ? 'prop': 'attr']("checked", checked);
 			}
 		},
+		/*分页设置*/
 		setPager = function (pgid, tp){
 			// TBD - consider escaping pgid with pgid = $.jgrid.jqID(pgid);
 			var sep = "<td class='ui-pg-button ui-state-disabled' style='width:4px;'><span class='ui-separator'></span></td>",
@@ -2561,7 +2562,7 @@ $.fn.jqGrid = function( pin ) {
 		}
 		for(i=0;i<this.p.colNames.length;i++){
 			var tooltip = ts.p.headertitles ? (" title=\""+$.jgrid.stripHtml(ts.p.colNames[i])+"\"") :"";
-			thead += "<th id='"+ts.p.id+"_"+ts.p.colModel[i].name+"' role='columnheader' class=' ui-th-"+dir+"'"+ tooltip+">";
+			thead += "<th id='"+ts.p.id+"_"+ts.p.colModel[i].name+"' role='columnheader' class='ui-state-default ui-th-column ui-th-"+dir+"'"+ tooltip+">";
 			idn = ts.p.colModel[i].index || ts.p.colModel[i].name;
 			thead += "<div id='jqgh_"+ts.p.id+"_"+ts.p.colModel[i].name+"' "+tdc+">"+ts.p.colNames[i];
 			if(!ts.p.colModel[i].width)  { ts.p.colModel[i].width = 150; }
@@ -2728,13 +2729,8 @@ $.fn.jqGrid = function( pin ) {
 		if(ts.p.footerrow) { tfoot += "</tr></tbody></table>"; }
 		firstr += "</tr>";
 		tbody = document.createElement("tbody");
-		$(this).addClass('table table-striped table-bordered table-hover dataTable no-footer dtr-inline').append(firstr);
-
 		this.appendChild(tbody);
-
-		console.log(thead);
-
-		$("#"+$.jgrid.jqID(ts.p.id)+" tbody").before(thead);
+		$(this).addClass('ui-jqgrid-btable').append(firstr);
 		firstr = null;
 		var hTable = $("<table class='ui-jqgrid-htable' style='width:"+ts.p.tblwidth+"px' role='grid' aria-labelledby='gbox_"+this.id+"' cellspacing='0' cellpadding='0' border='0'></table>").append(thead),
 		hg = (ts.p.caption && ts.p.hiddengrid===true) ? true : false,
@@ -2745,7 +2741,7 @@ $.fn.jqGrid = function( pin ) {
 			.css({ width: grid.width+"px"})
 			.addClass("ui-state-default ui-jqgrid-hdiv")
 			.append(hb);
-		//$(hb).append(hTable);
+		$(hb).append(hTable);
 		hTable = null;
 		if(hg) { $(grid.hDiv).hide(); }
 		if(ts.p.pager){
@@ -8259,6 +8255,7 @@ $.jgrid.extend({
 							if(ret[0] === false) {
 								$("#FormError>td",frmtb).html(ret[1]);
 								$("#FormError",frmtb).show();
+								alert(ret[1]);
 							} else {
 								if($t.p.autoencode) {
 									$.each(postdata,function(n,v){
@@ -8364,6 +8361,7 @@ $.jgrid.extend({
 				if(ret[0] === false) {
 					$("#FormError>td",frmtb).html(ret[1]);
 					$("#FormError",frmtb).show();
+					alert(ret[1]);
 					// return;
 				}
 			}
@@ -8433,7 +8431,7 @@ $.jgrid.extend({
 			//cxk
 
 			dw = isNaN(rp_ge[$(this)[0].p.id].datawidth) ? rp_ge[$(this)[0].p.id].datawidth : rp_ge[$(this)[0].p.id].datawidth+"px",
-			frm = $("<form name='FormPost' id='"+frmgr+"' class='FormGrid' onSubmit='return false;' style='width:"+dw+";overflow:auto;position:relative;max-height:"+($(document).height()-120)+"px;'></form>").data("disabled",false),
+			frm = $("<form name='FormPost' id='"+frmgr+"' class='FormGrid' onSubmit='return false;' style='width:"+dw+";overflow:auto;position:relative;max-height:"+($(document).height()-220)+"px;'></form>").data("disabled",false),
 			tbl = $("<table id='"+frmtborg+"' class='EditTable' cellspacing='0' cellpadding='0' border='0'><tbody></tbody></table>");
 			showFrm = $($t).triggerHandler("jqGridAddEditBeforeInitData", [$("#"+frmgr), frmoper]);
 			if(showFrm === undefined) {
