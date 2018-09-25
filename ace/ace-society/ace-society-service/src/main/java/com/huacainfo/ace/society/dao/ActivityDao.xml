@@ -7,6 +7,8 @@
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="category" jdbcType="CHAR" property="category"/>
         <result column="summary" jdbcType="VARCHAR" property="summary"/>
+        <result column="purpose" jdbcType="VARCHAR" property="purpose"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
         <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
         <result column="startSignImgUrl" jdbcType="VARCHAR" property="startSignImgUrl"/>
         <result column="endSignImgUrl" jdbcType="VARCHAR" property="endSignImgUrl"/>
@@ -32,7 +34,7 @@
     </resultMap>
     <resultMap extends="ResultMapWithBLOBs" id="VoResultMap" type="com.huacainfo.ace.society.vo.ActivityVo"></resultMap>
     <sql id="Base_Column_List">
-    id, initiatorId, title, category, summary, coverUrl, startSignImgUrl, endSignImgUrl, dendline, startDate, endDate,
+    id, initiatorId, title, category, summary,purpose, location, coverUrl, startSignImgUrl, endSignImgUrl, dendline, startDate, endDate,
     volunteerNum, volunteerPoints, parterNum, parterPoints, remark, coinconfigId, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
@@ -61,7 +63,7 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.society.model.Activity">
     insert into activity (id, initiatorId, title, 
-      category, summary, coverUrl, startSignImgUrl,endSignImgUrl,
+      category, summary, purpose, location, coverUrl, startSignImgUrl,endSignImgUrl,
       dendline, startDate, endDate, 
       volunteerNum, volunteerPoints, parterNum, 
       parterPoints, remark, coinconfigId, status,
@@ -69,7 +71,7 @@
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
       content)
     values (#{id,jdbcType=VARCHAR}, #{initiatorId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{category,jdbcType=CHAR}, #{summary,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{startSignImgUrl,jdbcType=VARCHAR},#{endSignImgUrl,jdbcType=VARCHAR},
+      #{category,jdbcType=CHAR}, #{summary,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{startSignImgUrl,jdbcType=VARCHAR},#{endSignImgUrl,jdbcType=VARCHAR},
       #{dendline,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
       #{volunteerNum,jdbcType=INTEGER}, #{volunteerPoints,jdbcType=INTEGER}, #{parterNum,jdbcType=INTEGER}, 
       #{parterPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},#{coinconfigId,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
@@ -94,6 +96,12 @@
             </if>
             <if test="summary != null">
                 summary,
+            </if>
+            <if test="purpose != null">
+                purpose,
+            </if>
+            <if test="location != null">
+                location,
             </if>
             <if test="coverUrl != null">
                 coverUrl,
@@ -172,6 +180,12 @@
             <if test="summary != null">
                 #{summary,jdbcType=VARCHAR},
             </if>
+            <if test="purpose != null">
+                #{purpose,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
             <if test="coverUrl != null">
                 #{coverUrl,jdbcType=VARCHAR},
             </if>
@@ -249,6 +263,12 @@
             <if test="summary != null">
                 summary = #{summary,jdbcType=VARCHAR},
             </if>
+            <if test="purpose != null">
+                purpose = #{purpose,jdbcType=VARCHAR},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
             <if test="coverUrl != null">
                 coverUrl = #{coverUrl,jdbcType=VARCHAR},
             </if>
@@ -318,6 +338,8 @@
       title = #{title,jdbcType=VARCHAR},
       category = #{category,jdbcType=CHAR},
       summary = #{summary,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
       coverUrl = #{coverUrl,jdbcType=VARCHAR},
       startSignImgUrl = #{startSignImgUrl,jdbcType=VARCHAR},
       endSignImgUrl = #{endSignImgUrl,jdbcType=VARCHAR},
@@ -346,6 +368,8 @@
       title = #{title,jdbcType=VARCHAR},
       category = #{category,jdbcType=CHAR},
       summary = #{summary,jdbcType=VARCHAR},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      location = #{location,jdbcType=VARCHAR},
       coverUrl = #{coverUrl,jdbcType=VARCHAR},
       startSignImgUrl = #{startSignImgUrl,jdbcType=VARCHAR},
       endSignImgUrl = #{endSignImgUrl,jdbcType=VARCHAR},
