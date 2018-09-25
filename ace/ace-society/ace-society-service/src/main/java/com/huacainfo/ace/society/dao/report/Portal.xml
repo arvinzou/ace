@@ -3,38 +3,67 @@
 <mapper namespace="com.huacainfo.ace.society.dao.report.Portal">
   <select id="query" resultType="map">
     SELECT
-    'jxb' id,
+    'person' id,
     count(1) value
     FROM
-    live
+    portal.users t
     WHERE
-    deptId =#{deptId}
+    t.user_level='2' and t.stauts='1'
     union all
     SELECT
-    'rpt' id,
-    count(1) rpt
+    'org' id,
+    count(1) value
     FROM
-    live_rpt inner join live on live_rpt.rid=live.id
+    society_org_info t
     WHERE
-    live.deptId =#{deptId}
+    t.status='3'
     union all
     SELECT
-    'cmt' id,
-    count(1) cmt
+    'activityAll' id,
+    count(1) value
     FROM
-    live_cmt
-    inner join live_rpt on live_rpt.id=live_cmt.rptId
-    inner join live on live_rpt.rid=live.id
+    activity t
     WHERE
-    live.deptId =#{deptId}
+    t.status='3'
     union all
     SELECT
-    'msg' id,
-    count(1) msg
+    'activityAudit' id,
+    count(1) value
     FROM
-    live_msg
-    inner join live on live_msg.rid=live.id
+    activity t
     WHERE
-    live.deptId =#{deptId}
+    t.status='2'
+    union all
+    SELECT
+    'behavior' id,
+    count(1) value
+    FROM
+    behavior t
+    WHERE
+    t.status='3'
+    union all
+    SELECT
+    'subjectIdea' id,
+    count(1) value
+    FROM
+    subject_idea t
+    WHERE
+    t.status='3'
+    union all
+    SELECT
+    'live' id,
+    count(1) value
+    FROM
+    live.live t
+    WHERE
+    t.status='2'
+    union all
+    SELECT
+    'circle' id,
+    count(1) value
+    FROM
+    circle t
+    WHERE
+    t.status='2'
   </select>
 </mapper>

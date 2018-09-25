@@ -13,8 +13,7 @@
 </script>
 <link rel="stylesheet"
       href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}"/>
-<link rel="stylesheet" type="text/css"
-      href="${portalPath}/content/common/assets/css/font-awesome.min.css?v=${cfg.version}"/>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css?v=${cfg.version}"/>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/assets/global/css/components.min.css?v=${cfg.version}"/>
 <link rel="stylesheet" type="text/css"
