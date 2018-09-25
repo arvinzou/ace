@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.CircleCmtDao">
+  <resultMap  id="BaseResultMapVo" type="com.huacainfo.ace.society.vo.CircleCmtVo">
+
+  </resultMap>
+  <insert id="insert" parameterType="com.huacainfo.ace.society.model.CircleCmt">
+    insert into circle_cmt (id, circleId, uid, 
+      status, createTime, content
+      )
+    values (#{id,jdbcType=VARCHAR}, #{circleId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from circle_cmt
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+
+
+  <sql id="whereCondition">
+    from circle_cmt t left join portal.userinfo a on t.uid=a.unionid
+    left join circle b on b.id=t.circleId
+    where b.corpId=#{condition.corpId}
+    <if test='condition.content!=null and condition.content!=""'>
+      and (t.content like concat('%',#{condition.content,jdbcType=VARCHAR},'%') or a.nickname=#{condition.content})
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and t.status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select
+    t.id, t.status, t.createTime,t.content,a.nickname,a.headimgurl
+    <include refid="whereCondition"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY t.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createTime desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+  </select>
+
+  <update id="updateStatus">
+    update circle_cmt
+    set
+    status = #{status}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

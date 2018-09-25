@@ -133,6 +133,14 @@ var buildMenu = function(menus) {
          $(activeNode).parent().parent().parent().css('display','block');
          $(activeNode).parent().parent().parent().parent().addClass("active open");
 
+
+          $(activeNode).parent().parent().parent().parent().css('display','block');
+          $(activeNode).parent().parent().parent().parent().parent().addClass("active open");
+
+
+          $(activeNode).parent().parent().parent().parent().parent().css('display','block');
+          $(activeNode).parent().parent().parent().parent().parent().parent().addClass("active open");
+
          var title=$(activeNode).find("a span").html();
 
          $("title").html(title);

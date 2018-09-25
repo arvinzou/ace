@@ -49,6 +49,7 @@ public class LiveCmtController extends LiveBaseController {
     @ResponseBody
     public PageResult<LiveCmtVo> findLiveCmtList(LiveCmtQVo condition,
                                                  PageParamNoChangeSord page) throws Exception {
+        condition.setDeptId(this.getCurUserProp().getCorpId());
         PageResult<LiveCmtVo> rst = this.liveCmtService
                 .findLiveCmtList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());

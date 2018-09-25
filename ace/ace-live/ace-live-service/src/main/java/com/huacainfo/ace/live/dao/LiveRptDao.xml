@@ -111,7 +111,26 @@
     </sql>
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
-        <include refid="whereCondition"/>
+        from live_rpt t
+        left join live c on t.rid=c.id
+
+        where c.deptId=#{condition.deptId}
+        <if test='condition.content!=null and condition.content!=""'>
+            and t.content like
+            concat('%',#{condition.content,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.rid!=null and condition.rid!=""'>
+            and t.rid =#{condition.rid,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.uid!=null and condition.uid!=""'>
+            and t.uid =#{condition.uid,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.mediaType!=null and condition.mediaType!=""'>
+            and t.mediaType =#{condition.mediaType,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.status!=null and condition.status!=""'>
+            and t.status =#{condition.status,jdbcType=VARCHAR}
+        </if>
     </select>
     <select id="findList" resultMap="BaseResultMapVo">
         select

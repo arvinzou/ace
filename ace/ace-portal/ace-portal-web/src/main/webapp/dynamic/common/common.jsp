@@ -46,3 +46,4 @@ String portalType=(String)user.getCfg().get("portalType");
 <%if(portalType.equals("4")){%>
 <link href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css"/>
 <%}%>
+

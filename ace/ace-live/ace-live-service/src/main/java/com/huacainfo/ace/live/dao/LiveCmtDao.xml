@@ -44,7 +44,12 @@
     <sql id="whereCondition">
         from live_cmt t left join portal.userinfo a on t.uid=a.unionid
 
-        where 0=0
+        left join live_rpt b on b.id=t.rptId
+
+        left join live c on b.rid=c.id
+
+        where c.deptId=#{condition.deptId}
+
         <if test='condition.content!=null and condition.content!=""'>
             and (t.content like concat('%',#{condition.content,jdbcType=VARCHAR},'%') or a.nickname=#{condition.content})
         </if>
@@ -62,10 +67,10 @@
         <include refid="whereCondition"/>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
-                ORDER BY ${orderBy}
+                ORDER BY t.${orderBy}
             </when>
             <otherwise>
-                ORDER BY createTime desc
+                ORDER BY t.createTime desc
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

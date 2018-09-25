@@ -13,6 +13,278 @@
 /*jshint evil:true, eqeqeq:false, eqnull:true, devel:true */
 /*global jQuery */
 
+
+(function ($) {
+    'use strict';
+
+    $.jqPaginator = function (el, options) {
+        if (!(this instanceof $.jqPaginator)) {
+            return new $.jqPaginator(el, options);
+        }
+
+        var self = this;
+
+        self.$container = $(el);
+
+        self.$container.data('jqPaginator', self);
+
+        self.init = function () {
+
+            if (options.first || options.prev || options.next || options.last || options.page) {
+                options = $.extend({}, {
+                    first: '',
+                    prev: '',
+                    next: '',
+                    last: '',
+                    page: ''
+                }, options);
+            }
+
+            self.options = $.extend({}, $.jqPaginator.defaultOptions, options);
+
+            self.verify();
+
+            self.extendJquery();
+
+            self.render();
+
+            self.fireEvent(this.options.currentPage, 'init');
+        };
+
+        self.verify = function () {
+            var opts = self.options;
+
+            if (!self.isNumber(opts.totalPages)) {
+                throw new Error('[jqPaginator] type error: totalPages');
+            }
+
+            if (!self.isNumber(opts.totalCounts)) {
+                throw new Error('[jqPaginator] type error: totalCounts');
+            }
+
+            if (!self.isNumber(opts.pageSize)) {
+                throw new Error('[jqPaginator] type error: pageSize');
+            }
+
+            if (!self.isNumber(opts.currentPage)) {
+                throw new Error('[jqPaginator] type error: currentPage');
+            }
+
+            if (!self.isNumber(opts.visiblePages)) {
+                throw new Error('[jqPaginator] type error: visiblePages');
+            }
+
+            if (!opts.totalPages && !opts.totalCounts) {
+                throw new Error('[jqPaginator] totalCounts or totalPages is required');
+            }
+
+            if (!opts.totalPages && opts.totalCounts && !opts.pageSize) {
+                throw new Error('[jqPaginator] pageSize is required');
+            }
+
+            if (opts.totalCounts && opts.pageSize) {
+                opts.totalPages = Math.ceil(opts.totalCounts / opts.pageSize);
+            }
+
+            if (opts.currentPage < 1 || opts.currentPage > opts.totalPages) {
+                throw new Error('[jqPaginator] currentPage is incorrect');
+            }
+
+            if (opts.totalPages < 1) {
+                throw new Error('[jqPaginator] totalPages cannot be less currentPage');
+            }
+        };
+
+        self.extendJquery = function () {
+            $.fn.jqPaginatorHTML = function (s) {
+                return s ? this.before(s).remove() : $('<p>').append(this.eq(0).clone()).html();
+            };
+        };
+
+        self.render = function () {
+            self.renderHtml();
+            self.setStatus();
+            self.bindEvents();
+        };
+
+        self.renderHtml = function () {
+            var html = [];
+
+            var pages = self.getPages();
+            for (var i = 0, j = pages.length; i < j; i++) {
+                html.push(self.buildItem('page', pages[i]));
+            }
+
+            self.isEnable('prev') && html.unshift(self.buildItem('prev', self.options.currentPage - 1));
+            self.isEnable('first') && html.unshift(self.buildItem('first', 1));
+            self.isEnable('statistics') && html.unshift(self.buildItem('statistics'));
+            self.isEnable('next') && html.push(self.buildItem('next', self.options.currentPage + 1));
+            self.isEnable('last') && html.push(self.buildItem('last', self.options.totalPages));
+
+            if (self.options.wrapper) {
+                self.$container.html($(self.options.wrapper).html(html.join('')).jqPaginatorHTML());
+            } else {
+                self.$container.html(html.join(''));
+            }
+        };
+
+        self.buildItem = function (type, pageData) {
+            var html = self.options[type]
+                .replace(/{{page}}/g, pageData)
+                .replace(/{{totalPages}}/g, self.options.totalPages)
+                .replace(/{{totalCounts}}/g, self.options.totalCounts);
+
+            return $(html).attr({
+                'jp-role': type,
+                'jp-data': pageData
+            }).jqPaginatorHTML();
+        };
+
+        self.setStatus = function () {
+            var options = self.options;
+
+            if (!self.isEnable('first') || options.currentPage === 1) {
+                $('[jp-role=first]', self.$container).addClass(options.disableClass);
+            }
+            if (!self.isEnable('prev') || options.currentPage === 1) {
+                $('[jp-role=prev]', self.$container).addClass(options.disableClass);
+            }
+            if (!self.isEnable('next') || options.currentPage >= options.totalPages) {
+                $('[jp-role=next]', self.$container).addClass(options.disableClass);
+            }
+            if (!self.isEnable('last') || options.currentPage >= options.totalPages) {
+                $('[jp-role=last]', self.$container).addClass(options.disableClass);
+            }
+
+            $('[jp-role=page]', self.$container).removeClass(options.activeClass);
+            $('[jp-role=page][jp-data=' + options.currentPage + ']', self.$container).addClass(options.activeClass);
+        };
+
+        self.getPages = function () {
+            var pages = [],
+                visiblePages = self.options.visiblePages,
+                currentPage = self.options.currentPage,
+                totalPages = self.options.totalPages;
+
+            if (visiblePages > totalPages) {
+                visiblePages = totalPages;
+            }
+
+            var half = Math.floor(visiblePages / 2);
+            var start = currentPage - half + 1 - visiblePages % 2;
+            var end = currentPage + half;
+
+            if (start < 1) {
+                start = 1;
+                end = visiblePages;
+            }
+            if (end > totalPages) {
+                end = totalPages;
+                start = 1 + totalPages - visiblePages;
+            }
+
+            var itPage = start;
+            while (itPage <= end) {
+                pages.push(itPage);
+                itPage++;
+            }
+
+            return pages;
+        };
+
+        self.isNumber = function (value) {
+            var type = typeof value;
+            return type === 'number' || type === 'undefined';
+        };
+
+        self.isEnable = function (type) {
+            return self.options[type] && typeof self.options[type] === 'string';
+        };
+
+        self.switchPage = function (pageIndex) {
+            self.options.currentPage = pageIndex;
+            self.render();
+        };
+
+        self.fireEvent = function (pageIndex, type) {
+            return (typeof self.options.onPageChange !== 'function') || (self.options.onPageChange(pageIndex, type) !== false);
+        };
+
+        self.callMethod = function (method, options) {
+            switch (method) {
+                case 'option':
+                    self.options = $.extend({}, self.options, options);
+                    self.verify();
+                    self.render();
+                    break;
+                case 'destroy':
+                    self.$container.empty();
+                    self.$container.removeData('jqPaginator');
+                    break;
+                default :
+                    throw new Error('[jqPaginator] method "' + method + '" does not exist');
+            }
+
+            return self.$container;
+        };
+
+        self.bindEvents = function () {
+            var opts = self.options;
+
+            self.$container.off();
+            self.$container.on('click', '[jp-role]', function () {
+                var $el = $(this);
+                if ($el.hasClass(opts.disableClass) || $el.hasClass(opts.activeClass)) {
+                    return;
+                }
+
+                var pageIndex = +$el.attr('jp-data');
+                if (self.fireEvent(pageIndex, 'change')) {
+                    self.switchPage(pageIndex);
+                }
+            });
+        };
+
+        self.init();
+
+        return self.$container;
+    };
+
+    $.jqPaginator.defaultOptions = {
+        wrapper: '',
+        first: '<li class="first"><a href="javascript:;">First</a></li>',
+        prev: '<li class="prev"><a href="javascript:;">Previous</a></li>',
+        next: '<li class="next"><a href="javascript:;">Next</a></li>',
+        last: '<li class="last"><a href="javascript:;">Last</a></li>',
+        page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+        totalPages: 0,
+        totalCounts: 0,
+        pageSize: 0,
+        currentPage: 1,
+        visiblePages: 7,
+        disableClass: 'disabled',
+        activeClass: 'active',
+        onPageChange: null
+    };
+
+    $.fn.jqPaginator = function () {
+        var self = this,
+            args = Array.prototype.slice.call(arguments);
+
+        if (typeof args[0] === 'string') {
+            var $instance = $(self).data('jqPaginator');
+            if (!$instance) {
+                throw new Error('[jqPaginator] the element is not instantiated');
+            } else {
+                return $instance.callMethod(args[0], args[1]);
+            }
+        } else {
+            return new $.jqPaginator(this, args[0]);
+        }
+    };
+
+})(jQuery);
+
 (function ($) {
 	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
 		_title: function(title) {
@@ -1496,10 +1768,17 @@ $.fn.jqGrid = function( pin ) {
 			}else{
 				ts.p.lastpage=1;
 			}
-			//console.log("records "+ts.p.records);
-			//console.log("rowNum "+ts.p.rowNum);
-			//console.log("lastpage "+ts.p.lastpage);
-			//console.log(ts.p);
+			console.log("records "+ts.p.records);
+			console.log("rowNum "+ts.p.rowNum);
+			console.log("lastpage "+ts.p.lastpage);
+			console.log(ts.p);
+            if(ts.p.records>0){
+                  $(ts.p.pager).jqPaginator('option', {
+                        totalCounts: ts.p.records
+                  });
+                  $(".ui-jqgrid-bdiv").css("height",'');
+            }
+			/**系统返回数据***/
 			if(si) {
 				addSubGridCell = $.jgrid.getMethod("addSubGridCell");
 			}
@@ -1959,7 +2238,7 @@ $.fn.jqGrid = function( pin ) {
 			$(ts).triggerHandler("jqGridAfterGridComplete");
 		},
 		beginReq = function() {
-			ts.grid.hDiv.loading = true;
+			//ts.grid.hDiv.loading = true;
 			if(ts.p.hiddengrid) { return;}
 			switch(ts.p.loadui) {
 				case "disable":
@@ -1988,7 +2267,7 @@ $.fn.jqGrid = function( pin ) {
 			}
 		},
 		populate = function (npage) {
-			if(!ts.grid.hDiv.loading) {
+			if(true) {
 				//console.log("loading");
 				var pvis = ts.p.scroll && npage === false,
 				prm = {}, dt, dstr, pN=ts.p.prmNames;
@@ -2151,9 +2430,41 @@ $.fn.jqGrid = function( pin ) {
 				$('#cb_'+$.jgrid.jqID(ts.p.id),ts.grid.fhDiv)[ts.p.useProp ? 'prop': 'attr']("checked", checked);
 			}
 		},
+		/*分页设置*/
+
+
 		setPager = function (pgid, tp){
+		console.log("==============分页设置开始===================");
+        		console.log(ts.p.rowList[0]);
+
+                $.jqPaginator(pgid, {
+                     totalCounts:1,
+                     pageSize: ts.p.rowList[0],
+                     visiblePages: 10,
+                     currentPage: 1,
+                     prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
+                     next: '<li class="next"><a href="javascript:;">下一页</a></li>',
+                     page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+                     onPageChange: function (num, type) {
+                          ts.p.page=num;
+                          ts.p.rowNum=ts.p.rowList[0];
+                          populate();
+                          if(type=='init'){
+                             $(pgid).jqPaginator('option', {
+                                   totalCounts: ts.p.records
+                             });
+                          }
+
+                     }
+                 });
+             console.log("==========分页设置结束=======================");
+
+
+
+
+
 			// TBD - consider escaping pgid with pgid = $.jgrid.jqID(pgid);
-			var sep = "<td class='ui-pg-button ui-state-disabled' style='width:4px;'><span class='ui-separator'></span></td>",
+			/*var sep = "<td class='ui-pg-button ui-state-disabled' style='width:4px;'><span class='ui-separator'></span></td>",
 			pginp = "",
 			pgl="<table cellspacing='0' cellpadding='0' border='0' style='table-layout:auto;' class='ui-pg-table'><tbody><tr>",
 			str="", pgcnt, lft, cent, rgt, twd, tdw, i,
@@ -2266,7 +2577,7 @@ $.fn.jqGrid = function( pin ) {
 				}
 				return this;
 			});
-			}
+			}*/
 		},
 		multiSort = function(iCol, obj ) {
 			var splas, sort="", cm = ts.p.colModel, fs=false, ls,
@@ -2561,7 +2872,7 @@ $.fn.jqGrid = function( pin ) {
 		}
 		for(i=0;i<this.p.colNames.length;i++){
 			var tooltip = ts.p.headertitles ? (" title=\""+$.jgrid.stripHtml(ts.p.colNames[i])+"\"") :"";
-			thead += "<th id='"+ts.p.id+"_"+ts.p.colModel[i].name+"' role='columnheader' class=' ui-th-"+dir+"'"+ tooltip+">";
+			thead += "<th id='"+ts.p.id+"_"+ts.p.colModel[i].name+"' role='columnheader' class='ui-state-default ui-th-column ui-th-"+dir+"'"+ tooltip+">";
 			idn = ts.p.colModel[i].index || ts.p.colModel[i].name;
 			thead += "<div id='jqgh_"+ts.p.id+"_"+ts.p.colModel[i].name+"' "+tdc+">"+ts.p.colNames[i];
 			if(!ts.p.colModel[i].width)  { ts.p.colModel[i].width = 150; }
@@ -2728,13 +3039,8 @@ $.fn.jqGrid = function( pin ) {
 		if(ts.p.footerrow) { tfoot += "</tr></tbody></table>"; }
 		firstr += "</tr>";
 		tbody = document.createElement("tbody");
-		$(this).addClass('table table-striped table-bordered table-hover dataTable no-footer dtr-inline').append(firstr);
-
 		this.appendChild(tbody);
-
-		console.log(thead);
-
-		$("#"+$.jgrid.jqID(ts.p.id)+" tbody").before(thead);
+		$(this).addClass('ui-jqgrid-btable').append(firstr);
 		firstr = null;
 		var hTable = $("<table class='ui-jqgrid-htable' style='width:"+ts.p.tblwidth+"px' role='grid' aria-labelledby='gbox_"+this.id+"' cellspacing='0' cellpadding='0' border='0'></table>").append(thead),
 		hg = (ts.p.caption && ts.p.hiddengrid===true) ? true : false,
@@ -2745,14 +3051,14 @@ $.fn.jqGrid = function( pin ) {
 			.css({ width: grid.width+"px"})
 			.addClass("ui-state-default ui-jqgrid-hdiv")
 			.append(hb);
-		//$(hb).append(hTable);
+		$(hb).append(hTable);
 		hTable = null;
 		if(hg) { $(grid.hDiv).hide(); }
 		if(ts.p.pager){
 			// TBD -- escape ts.p.pager here?
 			if(typeof ts.p.pager === "string") {if(ts.p.pager.substr(0,1) !== "#") { ts.p.pager = "#"+ts.p.pager;} }
 			else { ts.p.pager = "#"+ $(ts.p.pager).attr("id");}
-			$(ts.p.pager).css({width: grid.width+"px"}).addClass('ui-state-default ui-jqgrid-pager ui-corner-bottom').appendTo(eg);
+			//$(ts.p.pager).css({width: grid.width+"px"}).addClass('ui-state-default ui-jqgrid-pager ui-corner-bottom').appendTo(eg);
 			if(hg) {$(ts.p.pager).hide();}
 			setPager(ts.p.pager,'');
 		}
@@ -2879,7 +3185,7 @@ $.fn.jqGrid = function( pin ) {
 		$(grid.bDiv)
 			.append($('<div style="position:relative;'+(isMSIE && $.jgrid.msiever() < 8 ? "height:0.01%;" : "")+'"></div>').append('<div></div>').append(this))
 			.addClass("ui-jqgrid-bdiv")
-			.css({ height: ts.p.height+(isNaN(ts.p.height)?"":"px"), width: (grid.width)+"px"})
+			.css({ /*height: ts.p.height+(isNaN(ts.p.height)?"":"px"), */width: (grid.width)+"px"})
 			.scroll(grid.scrollGrid);
 		$("table:first",grid.bDiv).css({width:ts.p.tblwidth+"px"});
 		if( !$.support.tbody ) { //IE
@@ -8259,6 +8565,7 @@ $.jgrid.extend({
 							if(ret[0] === false) {
 								$("#FormError>td",frmtb).html(ret[1]);
 								$("#FormError",frmtb).show();
+								alert(ret[1]);
 							} else {
 								if($t.p.autoencode) {
 									$.each(postdata,function(n,v){
@@ -8364,6 +8671,7 @@ $.jgrid.extend({
 				if(ret[0] === false) {
 					$("#FormError>td",frmtb).html(ret[1]);
 					$("#FormError",frmtb).show();
+					alert(ret[1]);
 					// return;
 				}
 			}
@@ -8433,7 +8741,7 @@ $.jgrid.extend({
 			//cxk
 
 			dw = isNaN(rp_ge[$(this)[0].p.id].datawidth) ? rp_ge[$(this)[0].p.id].datawidth : rp_ge[$(this)[0].p.id].datawidth+"px",
-			frm = $("<form name='FormPost' id='"+frmgr+"' class='FormGrid' onSubmit='return false;' style='width:"+dw+";overflow:auto;position:relative;max-height:"+($(document).height()-120)+"px;'></form>").data("disabled",false),
+			frm = $("<form name='FormPost' id='"+frmgr+"' class='FormGrid' onSubmit='return false;' style='width:"+dw+";overflow:auto;position:relative;max-height:"+($(document).height()-220)+"px;'></form>").data("disabled",false),
 			tbl = $("<table id='"+frmtborg+"' class='EditTable' cellspacing='0' cellpadding='0' border='0'><tbody></tbody></table>");
 			showFrm = $($t).triggerHandler("jqGridAddEditBeforeInitData", [$("#"+frmgr), frmoper]);
 			if(showFrm === undefined) {
@@ -13259,7 +13567,7 @@ $.jgrid.extend({
 				opts._stop_ = false;
 			}
 			opts.stop = function (ev, ui) {
-				$($t).jqGrid('setGridParam',{height:$("#gview_"+gID+" .ui-jqgrid-bdiv").height()});
+				//$($t).jqGrid('setGridParam',{height:$("#gview_"+gID+" .ui-jqgrid-bdiv").height()});
 				$($t).jqGrid('setGridWidth',ui.size.width,opts.shrinkToFit);
 				if(opts._stop_) { opts._stop_.call($t,ev,ui); }
 			};

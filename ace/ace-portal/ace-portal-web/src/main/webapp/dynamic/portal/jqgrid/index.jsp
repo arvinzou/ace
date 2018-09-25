@@ -10,6 +10,8 @@ pageEncoding="utf-8"%>
 	<title>role</title>
 </head>
 <jsp:include page="../../common/common.jsp" />
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/css/components.min.css?v=${cfg.version}" />
+
 <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 
 <div class="page-content">
@@ -64,7 +66,7 @@ pageEncoding="utf-8"%>
 
 	<table id="grid-table"></table>
 
-	<div id="grid-pager"></div>
+	<ul id="grid-pager" class="pagination"></ul>
 
 	<div id="dialog-message" class="hide">
 		<div class="easyui-panel" style="padding:5px;width:350px;height:400px">
