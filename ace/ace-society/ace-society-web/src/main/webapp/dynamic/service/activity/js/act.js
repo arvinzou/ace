@@ -5,7 +5,8 @@ window.onload = function () {
     // initEvents();
     $('#preview').on('click', '.btn-audit', audit);
     $('#preview').on('change', '.verify-btn', beforeActive);
-    $('#info').on('click', '.personnelInfo', optionPersonner)
+    $('#info').on('click', '.personnelInfo', optionPersonner);
+    $('#preview').modal('show');
 }
 
 /*不同的选项显示不同的按钮*/
