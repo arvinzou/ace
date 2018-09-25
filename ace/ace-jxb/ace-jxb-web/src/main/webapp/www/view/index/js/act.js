@@ -4,7 +4,7 @@ window.onload = function(){
     qualityCourse();
     initBanner();
     initSwriper();
-    $('#search_input').focus(activeSearch);
+    $('#activeSearch').click(activeSearch);
     $('.search').on('click', '.notice', cancelSearch);
     $("input").keyup(searching);
 }
@@ -204,6 +204,9 @@ function initBanner(){
 
 function activeSearch() {
     $('.search_list').show();
+    $('#search_input').focus();
+    $("html").css("overflow","hidden");
+    $("body").css("overflow","hidden");
 }
 function searching() {
     var val = $('#search_input').val();
@@ -228,7 +231,9 @@ function searching() {
 }
 
 function cancelSearch() {
-    $('#search_input').val('输入课程名称');
+    $('#search_input').val('');
     $('.search_list').hide();
     $('#testListss').empty();
+    $("html").css("overflow","auto");
+    $("body").css("overflow","auto");
 }

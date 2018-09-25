@@ -19,7 +19,7 @@ $(function () {
     $('#testLists').on('click', 'li', activeTest);
     $('#testListss').on('click', 'li', activeTestT);
     $('.search').on('click', '.notice', cancelSearch);
-    $('#search_input').focus(activeSearch);
+    $('#activeSearch').click(activeSearch);
     $("input").keyup(searching);
 });
 
@@ -55,15 +55,19 @@ function searching() {
 }
 
 function cancelSearch() {
-    $('#search_input').val('输入标题进行搜索');
-    $('.search .notice .iconfont').html('&#xe702;');
     $('.search_list').hide();
     $('#testListss').empty();
+    $("html").css("overflow","auto");
+    $("body").css("overflow","auto");
 }
 
 function activeSearch() {
-    $('.search .notice .iconfont').html('&#xe67c;');
+    $('#search_input').val('');
     $('.search_list').show();
+    $('#search_input').focus();
+    $("html").css("overflow","hidden");
+    $("body").css("overflow","hidden");
+
 }
 
 
