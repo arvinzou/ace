@@ -12,3 +12,12 @@
     content: '';
     clear: both;
 }
+.fileListBox{
+    width: 70px;
+    height: 70px;
+    float: left;
+    background:rgba(242,245,249,1);
+    margin-right: 10px;
+    text-align: center;
+    line-height: 70px;
+}
