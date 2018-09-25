@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -195,5 +196,18 @@ public class CourseController extends JxbBaseController {
         }
 
         return rst;
+    }
+
+    /**
+     * 设置是否精品课程
+     *
+     * @param id 课程ID
+     * @param fine    普通 0  精品 1
+     * @return MessageResponse
+     */
+    @RequestMapping(value = "/updateFine")
+    @ResponseBody
+    public MessageResponse updateFine(String id,String fine){
+       return this.courseService.updateFine(id,fine,this.getCurUserProp());
     }
 }

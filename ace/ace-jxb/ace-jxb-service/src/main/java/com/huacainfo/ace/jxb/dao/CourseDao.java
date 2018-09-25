@@ -32,4 +32,6 @@ public interface CourseDao {
 
     int isExit(Course record);
 
+    int updateFine(@Param("id") String id,@Param("fine") String fine);
+
 }

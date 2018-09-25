@@ -32,7 +32,7 @@
     <sql id="Base_Column_List">
         id, type, category, mediType, name, cover, duration, costType, cost, primeCost, demandNum,
         likeNum, objects, applicationObject, purport, remark, status, createUserId, createDate, introduce,
-        lineState, mediaUrl, mediaDesc, onlineDate, offlineDate
+        lineState, mediaUrl, mediaDesc, onlineDate, offlineDate,fine
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -45,7 +45,7 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.Course">
-        insert into course (id, type, category,
+        insert into course (id, type,
         mediType, name, cover,
         duration, costType, cost,
         primeCost, demandNum, likeNum,
@@ -53,7 +53,7 @@
         remark, status, createUserId,
         createDate, introduce, lineState, mediaUrl, mediaDesc,
         onlineDate, offlineDate)
-        values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+        values (#{id,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR},
         #{mediType,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR},
         #{duration,jdbcType=INTEGER}, #{costType,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL},
         #{primeCost,jdbcType=DECIMAL}, #{demandNum,jdbcType=INTEGER}, #{likeNum,jdbcType=INTEGER},
@@ -72,9 +72,7 @@
             <if test="type != null">
                 type,
             </if>
-            <if test="category != null">
-                category,
-            </if>
+
             <if test="mediType != null">
                 mediType,
             </if>
@@ -149,9 +147,7 @@
             <if test="type != null">
                 #{type,jdbcType=VARCHAR},
             </if>
-            <if test="category != null">
-                #{category,jdbcType=VARCHAR},
-            </if>
+
             <if test="mediType != null">
                 #{mediType,jdbcType=VARCHAR},
             </if>
@@ -227,9 +223,7 @@
             <if test="type != null">
                 type = #{type,jdbcType=VARCHAR},
             </if>
-            <if test="category != null">
-                category = #{category,jdbcType=VARCHAR},
-            </if>
+
             <if test="mediType != null">
                 mediType = #{mediType,jdbcType=VARCHAR},
             </if>
@@ -303,7 +297,6 @@
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.Course">
     update course
     set type = #{type,jdbcType=VARCHAR},
-      category = #{category,jdbcType=VARCHAR},
       mediType = #{mediType,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
         introduce = #{introduce,jdbcType=LONGVARCHAR},
@@ -342,7 +335,7 @@
         t.id, t.type, t.category, t.mediType, t.name, t.cover, t.duration, t.costType, t.cost,
         t.demandNum, t.likeNum, t.remark, t.status, t.createUserId, t.createDate, t.introduce,
         t.primeCost, t.objects, t.applicationObject, t.purport, t.lineState, t.mediaUrl, t.mediaDesc,
-        t.onlineDate, t.offlineDate
+        t.onlineDate, t.offlineDate,t.fine
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -401,6 +394,9 @@
         <if test="condition.lineState !=null and condition.lineState !=&quot;&quot;">
             and t.lineState = #{condition.lineState,jdbcType=VARCHAR}
         </if>
+        <if test="condition.fine !=null and condition.fine !=&quot;&quot;">
+            and t.fine = #{condition.fine,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">
@@ -413,4 +409,7 @@
         from course
         where name = #{name,jdbcType=VARCHAR}
     </select>
+    <update id="updateFine">
+        update course set fine = #{fine,jdbcType=VARCHAR} where id=#{id}
+    </update>
 </mapper>
