@@ -14,6 +14,8 @@ pageEncoding="utf-8" %>
 
 
 <jsp:include page="/dynamic/common/header.jsp" />
+
+
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
@@ -25,71 +27,114 @@ pageEncoding="utf-8" %>
 
 <script id="tpl-portal-1" type="text/template">
 
-    <!-- PAGE CONTENT BEGINS -->
-    <!-- Row starts -->
+
     <div class="row widget-row">
         <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">直播</h4>
+                <h4 class="widget-thumb-heading">会员个人</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-green icon-user"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.person}">\${data.person}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">会员组织</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-red   fa fa-users"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.org}">\${data.org}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">线下活动</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-purple fa fa-heart"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">已审</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.activityAll}">\${data.activityAll}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">线下活动</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-green  fa fa-heart"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">待审</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.activityAudit}">\${data.activityAudit}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row widget-row">
+        <div class="col-md-3">
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">文明随手拍</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-green fa fa-camera"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">已审</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.behavior}">\${data.behavior}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">我有点子</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-red fa fa-envelope"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">已审</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.subjectIdea}">\${data.subjectIdea}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">秀我直播</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-purple fa fa-microphone"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">已审</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.live}">\${data.live}</span>
                     </div>
                 </div>
             </div>
-            <!-- END WIDGET THUMB -->
         </div>
         <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">报道</h4>
+                <h4 class="widget-thumb-heading">朋友圈</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red  icon-screen-desktop"></i>
+                    <i class="widget-thumb-icon bg-blue  fa fa-photo"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.rpt}">\${data.rpt}</span>
+                        <span class="widget-thumb-subtitle">已审</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.circle}">\${data.circle}</span>
                     </div>
                 </div>
             </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">评论</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple icon-layers"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.cmt}">\${data.cmt}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">留言</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-blue  icon-graduation"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.msg}">\${data.msg}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
         </div>
     </div>
 
 
 
 
-    </div>
+
 </script>
 
 
@@ -98,7 +143,7 @@ pageEncoding="utf-8" %>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script>
 
-    function App(){
+function App(){
 
 
 }
