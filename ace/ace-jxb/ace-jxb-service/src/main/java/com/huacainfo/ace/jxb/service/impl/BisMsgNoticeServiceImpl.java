@@ -6,6 +6,9 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.jxb.constant.OrderCategory;
+import com.huacainfo.ace.jxb.model.ConsultOrder;
+import com.huacainfo.ace.jxb.model.Counselor;
+import com.huacainfo.ace.jxb.model.OrderComplaint;
 import com.huacainfo.ace.jxb.model.TeacherAudit;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
@@ -14,6 +17,7 @@ import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 import com.huacainfo.ace.portal.service.MessageTemplateService;
 import com.huacainfo.ace.portal.service.UserinfoService;
+import com.huacainfo.ace.portal.vo.UserinfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +45,16 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
     public static final String STUDIO_NEW_MEMBER = "STUDIO-NEW-MEMBER";
     //审核结果通知
     public static final String AUDIT_RESULT = "AUDIT-RESULT";
+
+    //订单投诉-通知自身
+    public static final String ORDER_COMPLAINT_ONESELF = "ORDER-COMPLAINT-ONESELF";
+    //订单投诉-通知咨询师
+    public static final String ORDER_COMPLAINT_COUNSELOR = "ORDER-COMPLAINT-COUNSELOR";
+    //订单投诉-通知管理员
+    public static final String ORDER_COMPLAINT_ADMIN = "ORDER-COMPLAINT-ADMIN";
+    //咨询订单再次提醒
+    public static final String CONSULT_ORDER_REMIND = "CONSULT-ORDER-REMIND";
+
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -157,6 +171,86 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
     }
 
     /**
+     * * 提交投诉-消息通知
+     */
+    @Override
+    public ResultResponse sendOrderComplaintMsg(OrderComplaint complaint) throws Exception {
+        BaseOrderVo orderVo = baseOrderService.selectBaseOrderByPrimaryKey(complaint.getOrderId()).getValue();
+        if (null == orderVo) {
+            return new ResultResponse(ResultCode.FAIL, "订单信息丢失");
+        }
+        String submitDate = DateUtil.toStr(complaint.getCreateDate(), DateUtil.DEFAULT_DATE_TIME_REGEX);
+        Map<String, Object> params = new HashMap<>();
+        ResultResponse msg;
+        //1、推送至本人 =========================================
+        UserinfoVo oneself = userinfoService.selectUserinfoByPrimaryKey(complaint.getUserId()).getValue();
+        if (oneself == null) {
+            return new ResultResponse(ResultCode.FAIL, "本人微信资料丢失");
+        }
+        params.put("openid", oneself.getOpenid());
+        params.put("submitDate", submitDate);
+        params.put("content", complaint.getContent());
+        msg = messageTemplateService.send("jxb", ORDER_COMPLAINT_ONESELF, params);
+        logger.debug("[" + orderVo.getId() + "]提交投诉-消息通知结果[本人]: {} ", msg.toString());
+        //2、推送给咨询师 =========================================
+        params.clear();
+        Counselor c = orderVo.getCounselor();
+        ConsultOrder co = orderVo.getConsultOrder();
+        UserinfoVo counselor = userinfoService.selectUserinfoByPrimaryKey(c.getId()).getValue();
+        if (counselor == null) {
+            return new ResultResponse(ResultCode.FAIL, "咨询师微信资料丢失");
+        }
+        params.put("openid", counselor.getOpenid());
+        params.put("submitDate", submitDate);
+        params.put("parentName", co.getName());
+        params.put("orderId", orderVo.getId());
+        params.put("parentMobile", co.getTel());
+        params.put("content", complaint.getContent());
+        msg = messageTemplateService.send("jxb", ORDER_COMPLAINT_COUNSELOR, params);
+        logger.debug("[" + orderVo.getId() + "]提交投诉-消息通知结果[咨询师]: {}", msg.toString());
+        //3、推送给平台管理者 =========================================
+        params.clear();
+        params.put("openid", "ogxN71uKkUJu-JOIhWcMyKKE3Mo4");//默认管理员 - 哩大人
+        params.put("parentName", co.getName());
+        params.put("parentMobile", co.getTel());
+        params.put("counselor", c.getName());
+        params.put("orderId", orderVo.getId());
+        params.put("content", complaint.getContent());
+        msg = messageTemplateService.send("jxb", ORDER_COMPLAINT_ADMIN, params);
+        logger.debug("[" + orderVo.getId() + "]提交投诉-消息通知结果[平台管理者]: {}", msg.toString());
+
+        //=========================================
+        return new ResultResponse(ResultCode.SUCCESS, "消息推送完成");
+    }
+
+    /**
+     * 咨询订单再次提醒消息
+     *
+     * @param orderVo 订单vo
+     * @return 发送结果
+     */
+    @Override
+    public ResultResponse consultOrderRemind(BaseOrderVo orderVo) throws Exception {
+        String detailURL = "http://zx.huacainfo.com/jxb/www/view/consultantDetail/index.jsp?id=" + orderVo.getId();
+        Map<String, Object> params = new HashMap<>();
+        //发送给受理咨询师
+        Userinfo counselor = userinfoService.selectUserinfoByKey(orderVo.getBusinessId());
+        if (null != counselor) {
+            params.put("openid", counselor.getOpenid());
+            params.put("reserveDate",
+                    DateUtil.toStr(orderVo.getConsultOrder().getReserveDate(), DateUtil.DEFAULT_DATE_TIME_REGEX));
+            params.put("userName", orderVo.getConsultOrder().getName());
+            params.put("payMoney", orderVo.getPayMoney());
+            params.put("url", detailURL);//点击查看详情
+            ResultResponse rs2 = messageTemplateService.send("jxb", CONSULT_ORDER_REMIND, params);
+            logger.debug("再次提醒消息-[咨询师]消息推送结果：{}", rs2.toString());
+            return rs2;
+        }
+
+        return new ResultResponse(ResultCode.FAIL, "咨询师微信资料不全");
+    }
+
+    /**
      * 咨询订单-付款成功消息
      */
     private ResultResponse paySuccessConsultOrder(BaseOrderVo orderVo) throws Exception {
@@ -205,3 +299,4 @@ public class BisMsgNoticeServiceImpl implements BisMsgNoticeService {
         }
     }
 }
+

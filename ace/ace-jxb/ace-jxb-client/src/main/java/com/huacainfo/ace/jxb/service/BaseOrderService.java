@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.JxbCallBackLog;
+import com.huacainfo.ace.jxb.model.OrderComplaint;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 
@@ -152,4 +153,10 @@ public interface BaseOrderService {
      * @throws Exception
      */
     ResultResponse paidQuery(String commodityId, String consumerId);
+
+
+    /**
+     * 提交投诉
+     */
+    ResultResponse submitComplaint(OrderComplaint complaint);
 }
