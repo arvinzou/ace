@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.jxb.model.OrderComplaint;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
@@ -169,5 +170,20 @@ public class WOrderController extends JxbBaseController {
         }
 
         return bisMsgNoticeService.paySuccess(orderId);
+    }
+
+
+    /**
+     * 提交投诉
+     */
+    @RequestMapping("/submitComplaint")
+    public ResultResponse submitComplaint(OrderComplaint complaint, String unionId) throws Exception {
+        if (!StringUtil.areNotEmpty(complaint.getOrderId(), complaint.getContent())) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        unionId = StringUtil.isEmpty(unionId) ? getUnionid() : unionId;
+        complaint.setUserId(unionId);
+
+        return baseOrderService.submitComplaint(complaint);
     }
 }

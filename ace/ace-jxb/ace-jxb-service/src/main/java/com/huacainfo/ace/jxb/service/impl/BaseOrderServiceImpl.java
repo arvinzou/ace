@@ -20,6 +20,7 @@ import com.huacainfo.ace.jxb.dao.*;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
 import com.huacainfo.ace.jxb.model.JxbCallBackLog;
+import com.huacainfo.ace.jxb.model.OrderComplaint;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.service.OrderCalculationService;
@@ -80,6 +81,8 @@ public class BaseOrderServiceImpl implements BaseOrderService {
     private EvaluatTplService evaluatTplService;
     @Autowired
     private BisMsgNoticeService bisMsgNoticeService;
+    @Autowired
+    private OrderComplaintDao orderComplaintDao;
 
     private SqlSession getSqlSession() {
         SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
@@ -587,6 +590,34 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "校验通过", true);
+    }
+
+    /**
+     * 提交投诉
+     *
+     * @param complaint 投诉内容
+     */
+    @Override
+    public ResultResponse submitComplaint(OrderComplaint complaint) {
+
+        int isExit = orderComplaintDao.isExit(complaint);
+        if (isExit > 0) {
+            return new ResultResponse(ResultCode.FAIL, "请勿重复提交投诉");
+        }
+        //
+        complaint.setId(GUIDUtil.getGUID());
+        complaint.setCreateDate(DateUtil.getNowDate());
+        orderComplaintDao.insert(complaint);
+
+        //公众号消息推送
+        try {
+            ResultResponse rs = bisMsgNoticeService.sendOrderComplaintMsg(complaint);
+            logger.debug("提交投诉消息推送结果[" + complaint.getOrderId() + "]:" + rs.toString());
+        } catch (Exception e) {
+            logger.error("提交投诉消息推送异常: {}", e);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "受理成功");
     }
 
 
