@@ -61,7 +61,7 @@ pageEncoding="utf-8" %>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">课程</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple icon-layers"></i>
+                    <i class="widget-thumb-icon bg-purple fa fa-calendar"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计已审核</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.course}">\${data.course}</span>
@@ -75,7 +75,7 @@ pageEncoding="utf-8" %>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">心理评测</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-blue  icon-graduation"></i>
+                    <i class="widget-thumb-icon bg-blue  fa fa-hourglass-start"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.evaluat_tpl}">\${data.evaluat_tpl}</span>
@@ -161,7 +161,7 @@ pageEncoding="utf-8" %>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">课程</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple icon-layers"></i>
+                    <i class="widget-thumb-icon bg-purple fa fa-calendar"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计已审核</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.course}">\${data.course}</span>
