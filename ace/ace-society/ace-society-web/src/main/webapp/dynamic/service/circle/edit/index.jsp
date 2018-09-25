@@ -73,7 +73,7 @@
                     内容
                                                          </label>
                 <div class="col-md-10">
-                    <textarea rows="10" class="form-control" name="content"  maxlength="500" placeholder="请输入直播内容（建议字数在100个字以内，不超过500个字)">\${data.o.content}</textarea>
+                    <textarea rows="10" class="form-control" name="content"  maxlength="500" placeholder="请输入内容（建议字数在100个字以内，不超过500个字)">\${data.o.content}</textarea>
                     <span class="help-block"></span>
                 </div>
             </div>

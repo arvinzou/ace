@@ -53,7 +53,7 @@ public class TokenThread implements Runnable {
 					// 获取失败时，60秒之后尝试重新获取
 					Thread.sleep(60 * 1000);
 				}
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
                 logger.error("{}",e);
 			}
 		}

@@ -30,16 +30,6 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
 
-                            直播编号
-                        </label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="rid"  maxlength="200" value="${param.did}">
-                            <span class="help-block"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-
                             多媒体类型
                         </label>
                         <div class="col-md-10">
@@ -72,7 +62,7 @@
                         内容
                     </label>
                     <div class="col-md-10">
-                        <textarea rows="10" class="form-control" name="content"  maxlength="500" placeholder="请输入直播内容（建议字数在100个字以内，不超过500个字)"></textarea>
+                        <textarea rows="10" class="form-control" name="content"  maxlength="500" placeholder="请输入内容（建议字数在100个字以内，不超过500个字)"></textarea>
                         <span class="help-block"></span>
                     </div>
                 </div>

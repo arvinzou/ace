@@ -16,7 +16,6 @@
   </resultMap>
 
   <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.society.vo.CircleVo">
-    <result column="liveName" jdbcType="VARCHAR" property="liveName"/>
     <result column="statement" jdbcType="VARCHAR" property="statement"/>
     <result column="auditDate" jdbcType="TIMESTAMP" property="auditDate"/>
     <association property="rpt" column="uid" javaType="com.huacainfo.ace.society.model.Reporter">
@@ -30,7 +29,7 @@
     </collection>
   </resultMap>
 
-  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
     t.id,t.uid, t.sort, t.mediaType, t.createTime, t.status, t.likeNum,t.content, t.mediaContent,
     a.nickname reporter,
@@ -44,7 +43,7 @@
     left join portal.userinfo a on t.uid=a.openid
     left join circle_img b on t.id=b.circleId
     left join circle_log q on t.lastAuditLogId=q.id
-    where id = #{id,jdbcType=VARCHAR}
+    where t.id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from circle

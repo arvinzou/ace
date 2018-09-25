@@ -51,7 +51,7 @@
                                                                         <input type="text"
                                                                                name="keyword"
                                                                                class="form-control"
-                                                                               placeholder="请输入报道内容">
+                                                                               placeholder="请输入内容">
                                                                         <span class="input-group-btn">
                                                                         <button class="btn  btn-default search_btn"
                                                                                 type="submit">
@@ -168,7 +168,7 @@
                {@if item.status==1}
                <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
                {@/if}
-            <a href="add/index.jsp?id=${param.id}&did=\${item.rid}">发布报道</a>
+
              <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
 
              <a href="javascript:del('\${item.id}');">删除</a>
@@ -264,12 +264,7 @@
 </div>
 <script id="tpl-fm" type="text/template">
 	<div class="form-body">
-        <div class="form-group">
-            <label class="col-md-2 view-label">直播名称</label>
-            <div class="col-md-10">
-                \${data.o.liveName}
-            </div>
-        </div>
+
         <div class="form-group">
             <label class="col-md-2 view-label">内容</label>
             <div class="col-md-10">
@@ -293,14 +288,14 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 view-label">报道日期</label>
+            <label class="col-md-2 view-label">日期</label>
             <div class="col-md-10">
                 \${data.o.createTime}
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-md-2 view-label">报道源</label>
+            <label class="col-md-2 view-label">源</label>
             <div class="col-md-10">
                 <div class="row describtion"><img src="\${data.o.rpt.headimgurl}" style="max-width:30px;"></div>
                 <div class="row describtion">\${data.o.rpt.nickname}</div>
@@ -335,12 +330,7 @@
 
 <script id="tpl-preview" type="text/template">
 
-                                  <div class="form-group">
-                     <label class="col-md-2 view-label">直播名称</label>
-                     <div class="col-md-10">
-                           \${data.o.liveName}
-                     </div>
-                    </div>
+
 <div class="form-group">
                      <label class="col-md-2 view-label">内容</label>
                      <div class="col-md-10">
@@ -364,14 +354,14 @@
                      </div>
                     </div>
                                   <div class="form-group">
-                     <label class="col-md-2 view-label">报道日期</label>
+                     <label class="col-md-2 view-label">日期</label>
                      <div class="col-md-10">
                            \${data.o.createTime}
                      </div>
                     </div>
 
                                   <div class="form-group">
-                     <label class="col-md-2 view-label">报道源</label>
+                     <label class="col-md-2 view-label">源</label>
                      <div class="col-md-10">
                          <div class="row describtion"><img src="\${data.o.rpt.headimgurl}" style="max-width:30px;"></div>
                          <div class="row describtion">\${data.o.rpt.nickname}</div>

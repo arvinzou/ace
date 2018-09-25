@@ -75,10 +75,10 @@ function initEvents() {
 function audit(id,status){
     startLoad();
     $.ajax({
-        url: contextPath + "/circleCmt/updateStatus",
+        url: contextPath + "/circleCmt/audit",
         type:"post",
         async:false,
-        data:{id:id,status:status},
+        data:{id:id,rst:status,message:'NULL'},
         success:function(rst){
             stopLoad();
             if(rst.status == 0) {

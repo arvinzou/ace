@@ -2,7 +2,7 @@ var loading = {};
 var editor;
 window.onload = function() {
 	jQuery(function($) {
-		$(".breadcrumb").append("<li><span>发布报道</span></li>");
+		$(".breadcrumb").append("<li><span>发布圈子</span></li>");
 		initEvents();
 		initPage();
 	});
@@ -29,14 +29,10 @@ function initEvents() {
 			$(element).valid();
 		},
 		rules: {
-		    rid: {
-                required: true
-            }
+
 		},
 		messages: {
-		    rid: {
-                required: "请输入直播编号"
-            }
+		
 		}
 	});
 	/*监听表单提交*/
@@ -47,7 +43,8 @@ function initEvents() {
 				params[obj.name] = obj.value;
 			});
 			$.extend(params, {
-				uid:userProp.openId
+				uid:userProp.openId,
+				corpId:userProp.corpId,
 			});
 			console.log(params);
 			var imgs = [];
@@ -59,7 +56,7 @@ function initEvents() {
 						h: 0
 				})
 			});
-			data.rpt=params;
+			data.circle=params;
 			data.imgs=imgs;
 			save(data);
 			return false;
@@ -75,7 +72,7 @@ function save(params) {
 	console.log(JSON.stringify(params));
 	startLoad();
 	$.ajax({
-		url: contextPath + "/liveRpt/insertLiveRpt",
+		url: contextPath + "/circle/insertCircle",
 		type: "post",
 		async: false,
 		data: {
@@ -85,7 +82,7 @@ function save(params) {
 			stopLoad();
 			alert(result.errorMessage);
 			if (result.status == 0) {
-				window.location.href = '../../live/index.jsp?id=' + urlParams.id;
+				window.location.href = '../index.jsp?id=' + urlParams.id;
 			}
 		},
 		error: function() {

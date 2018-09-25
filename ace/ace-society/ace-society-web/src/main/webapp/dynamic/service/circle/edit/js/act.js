@@ -2,7 +2,7 @@ var loading = {};
 var editor;
 window.onload = function() {
 	jQuery(function($) {
-		$(".breadcrumb").append("<li><span>编辑报道</span></li>");
+		$(".breadcrumb").append("<li><span>编辑圈子</span></li>");
 		initForm();
 		initEvents();
 	});
@@ -53,7 +53,7 @@ function initEvents() {
 						h: 0
 				})
 			});
-			data.rpt=params;
+			data.circle=params;
 			data.imgs=imgs;
 			save(data);
 			return false;
@@ -69,7 +69,7 @@ function save(params) {
 	console.log(JSON.stringify(params));
 	startLoad();
 	$.ajax({
-		url: contextPath + "/liveRpt/updateLiveRpt",
+		url: contextPath + "/circle/updateCircle",
 		type: "post",
 		async: false,
 		data: {
@@ -92,7 +92,7 @@ function save(params) {
 function initForm() {
 	startLoad();
 	$.ajax({
-		url: contextPath + "/liveRpt/selectLiveRptByPrimaryKey",
+		url: contextPath + "/circle/selectCircleByPrimaryKey",
 		type: "post",
 		async: false,
 		data: {
