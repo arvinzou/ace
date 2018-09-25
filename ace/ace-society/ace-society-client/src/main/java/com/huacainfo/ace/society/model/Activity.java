@@ -5,7 +5,7 @@ import com.huacainfo.ace.common.model.BaseModel;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Activity extends BaseModel{
+public class Activity extends BaseModel {
 
     private String id;
 
@@ -16,6 +16,10 @@ public class Activity extends BaseModel{
     private String category;
 
     private String summary;
+
+    private String purpose;
+
+    private String location;
 
     private String coverUrl;
 
@@ -59,6 +63,22 @@ public class Activity extends BaseModel{
 
     public String getCoinconfigId() {
         return coinconfigId;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public void setCoinconfigId(String coinconfigId) {
