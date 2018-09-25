@@ -34,9 +34,8 @@
 		<div class="content">
 			<div class="search">
 				<div class="container">
-					<div class="search_box">
-						<input type="search" name="" id="search_input" value="输入课程名称" onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
-							   onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:rgba(196,200,214,1);" />
+					<div class="search_box" id="activeSearch">
+						输入课程名称
 					</div>
 					<div class="notice">
 						<i class="iconfont">&#xe702;</i>
@@ -137,6 +136,17 @@
 		</div>
 
 		<div class="search_list">
+			<div class="search">
+				<div class="container">
+					<div class="search_box">
+						<input type="search" name="" id="search_input" value="输入课程名称" onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+							   onBlur="if(!value){value=defaultValue;this.style.color='#999'}" style="color:rgba(196,200,214,1);" />
+					</div>
+					<div class="notice">
+						<i class="iconfont">&#xe67c;</i>
+					</div>
+				</div>
+			</div>
 			<div class="test_list search_test_list">
 				<ul id="testListss">
 				</ul>
