@@ -1,5 +1,9 @@
 package com.huacainfo.ace.common.plugins.wechat.util;
 
+import com.huacainfo.ace.common.tools.DateUtil;
+
+import java.util.Random;
+
 /**
  * Created by ovrn on 2016/1/31.
  */
@@ -136,5 +140,42 @@ public class StringUtil {
 
 
         return str;
+    }
+
+    /**
+     * 订单编号生成器 共18位字符
+     *
+     * @param guid GUIDUtil.getGUID()
+     * @return 18位字符编码
+     */
+    public static String genOrderNo18Str(String guid) {
+        String hashCodeStr = String.format("%010d", Math.abs(guid.hashCode()));
+        String timestamp = DateUtil.getTimestamp(DateUtil.getNow());
+
+        //时间戳（8位）+ GUID的哈希值（10位）
+        return timestamp.substring(0, 8) + hashCodeStr;
+    }
+
+    /**
+     * 订单编号生成器 共30位字符
+     *
+     * @param prefix 前缀字符 --固定2位字符
+     * @param guid   GUIDUtil.getGUID()
+     * @return 30位字符编码
+     */
+    public static String genOrderNo30Str(String prefix, String guid) {
+        String hashCodeStr = String.format("%010d", Math.abs(guid.hashCode()));//固定10位字符
+        String timestamp = DateUtil.getTimestamp(DateUtil.getNow());
+        //可无前缀，订单编号为纯数字
+        Random r = new Random();
+        String suffix;
+        if (StringUtil.isEmpty(prefix)) {
+            suffix = String.format("%05d", r.nextInt(5)) + "8";//6位
+        } else {
+            suffix = String.format("%03d", r.nextInt(3)) + "8";//4位
+        }
+
+        //前缀（2位）+ 时间戳（14位）+ GUID的哈希值（10位）+ 4 数字串
+        return prefix + timestamp + hashCodeStr + suffix;
     }
 }
