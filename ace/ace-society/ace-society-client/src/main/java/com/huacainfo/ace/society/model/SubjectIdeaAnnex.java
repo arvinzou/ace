@@ -1,8 +1,10 @@
 package com.huacainfo.ace.society.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SubjectIdeaAnnex {
+public class SubjectIdeaAnnex  implements Serializable{
+
     private String id;
 
     private String ideaId;
