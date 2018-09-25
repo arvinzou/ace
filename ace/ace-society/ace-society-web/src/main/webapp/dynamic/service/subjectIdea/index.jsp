@@ -52,11 +52,11 @@
                 <thead>
                 <tr>
                     <th width="5%"> 序号</th>
-                    <th width="20%"> 议题</th>
-                    <th width="10%"> 提交人</th>
                     <th width="20%"> 解决方案</th>
-                    <th width="15%"> 创建日期</th>
-                    <th width="15%"> 状态</th>
+                    <th width="30%"> 附件</th>
+                    <th width="10%"> 提交人</th>
+                    <th width="10%"> 创建日期</th>
+                    <th width="10%"> 状态</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -77,9 +77,19 @@
     {@each data as item, index}
     <tr>
         <td> \${parseInt(index)+1}</td>
-        <td> \${item.title}</td>
-        <td> \${item.createUserName}</td>
         <td> \$\${item.solution}</td>
+        <td>
+            {@each item.listSubjectIdeaAnnexVo as fileItem}
+                {@if fileItem.fileType == '0'}
+                <div class="fileListBox"><a href="\${fileItem.fileUrl}" download="\${fileItem.fileUrl}">\${fileItem.fileName}</a></div>
+                {@else if fileItem.fileType == '1'}
+                <div class="fileListBox"><img src="\${fileItem.fileUrl}" style="width: 70px;height: 70px;"/></div>
+                {@else if fileItem.fileType == '2'}
+                <div class="fileListBox"><video src="\${fileItem.fileUrl}" width="70" height="70"></video></div>
+                {@/if}
+            {@/each}
+        </td>
+        <td> \${item.createUserName}</td>
         <td> \${item.createDate}</td>
         <td>
             {@if item.status==0}

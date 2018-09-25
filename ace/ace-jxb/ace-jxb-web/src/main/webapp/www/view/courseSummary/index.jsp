@@ -294,8 +294,8 @@
 			<div class="footer">
 				<img src="img/icon-play.png" class="play" style="display:none;padding-left: 0.253333rem;padding-top: 0.493333rem;" />
 				<span class="span_01"><%--试听--%></span>
-				<span class="span_02">共计</span>
-				<span class="span_03" id="totalCost"></span>
+				<span class="span_02" style="display: none;">共计</span>
+				<span class="span_03" id="totalCost" style="display: none;"></span>
 				<button class="buy" onclick="buy();">立即购买</button>
 			</div>
 			{@/if}

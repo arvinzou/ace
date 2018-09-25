@@ -5,6 +5,7 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="subjectId" jdbcType="VARCHAR" property="subjectId" />
     <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="solution" jdbcType="VARCHAR" property="solution"/>
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
@@ -15,7 +16,17 @@
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SubjectIdeaVo">
-
+  </resultMap>
+  <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SubjectIdeaVo">
+    <collection property="listSubjectIdeaAnnexVo" ofType="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
+      <id property="id" column="annexId"/>
+      <result property="ideaId" column="ideaId"/>
+      <result property="fileType" column="fileType"/>
+      <result property="fileName" column="fileName"/>
+      <result property="fileSize" column="fileSize"/>
+      <result property="fileUrl" column="fileUrl"/>
+      <result property="remark" column="eremark"/>
+    </collection>
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.society.model.SubjectIdea">
     <result column="solution" jdbcType="LONGVARCHAR" property="solution" />
@@ -187,14 +198,12 @@
     from subject_idea
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
-      t.id, t.subjectId, t.userId, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
-      t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.solution,t.remark, d.title
-    from subject_idea t INNER JOIN  subject d on t.subjectId = d.id
-    <if test="condition.subjectId !=null and condition.subjectId !=&quot;&quot;">
-      where  t.subjectId = #{condition.subjectId,jdbcType=VARCHAR}
-    </if>
+      t.id, t.subjectId,t.solution, t.userId, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+      t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark, e.ideaId,
+      e.fileType, e.fileName, e.fileSize, e.fileUrl, e.remark as eremark
+    from subject_idea t LEFT JOIN  subject_idea_annex e on t.id = e.ideaId
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}

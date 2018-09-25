@@ -11,6 +11,7 @@ public class BaseOrderVo extends BaseOrder {
     private String consumerName;
     private String consumerImgUrl;
 
+
     /**
      * 咨询订单相关内容
      */
@@ -22,6 +23,18 @@ public class BaseOrderVo extends BaseOrder {
      * 课程订单相关内容
      */
     private Course course;
+    /**
+     * 咨询订单提醒标记：发送成功标记 0-发送失败 1-发送成功
+     */
+    private String remindTag;
+
+    public String getRemindTag() {
+        return remindTag;
+    }
+
+    public void setRemindTag(String remindTag) {
+        this.remindTag = remindTag;
+    }
 
     public Course getCourse() {
         return course;
