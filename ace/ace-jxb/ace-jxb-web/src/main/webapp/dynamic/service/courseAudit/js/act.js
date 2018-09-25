@@ -17,9 +17,40 @@ function App() {
         });
 }
 
-
+function setParams(key, value) {
+    params[key] = value;
+    getPageList();
+}
 window.onload = function (){
     initPage();    //初始化显示单品课程
+
+    $('#modal-status').on('show.bs.modal', function (event) {
+            var relatedTarget = $(event.relatedTarget);
+            var id = relatedTarget.data('id');
+            var title = relatedTarget.data('title');
+            var modal = $(this);
+            $('.status-title').html(title);
+            console.log(relatedTarget);
+            modal.find('.modal-body input[name=id]').val(id);
+
+        })
+        $('#modal-status .status').on('click', function () {
+            $('#modal-status form').submit();
+        });
+        $('#modal-status form').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                var params = {};
+                $.each(formData, function (n, obj) {
+                    params[obj.name] = obj.value;
+                });
+                $.extend(params, {
+                    time: new Date()
+                });
+                console.log(params);
+                updateStatus(params);
+                return false;
+            }
+        });
 }
 var payType = "";
 var videoUrl = "";
@@ -183,4 +214,27 @@ function outline(id){
             }
         });
     }
+}
+
+
+function updateStatus(params) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/course/updateFine",
+        type: "post",
+        async: false,
+        data: params,
+        success: function (rst) {
+            stopLoad();
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                $("#modal-status").modal('hide');
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }

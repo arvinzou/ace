@@ -386,5 +386,19 @@ public class CourseServiceImpl implements CourseService {
         return session;
     }
 
+    /**
+     * 设置是否精品课程
+     *
+     * @param id 课程ID
+     * @param fine    普通 0  精品 1
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse updateFine(String id,String fine, UserProp userProp){
+        this.courseDao.updateFine(id,fine);
+        dataBaseLogService.log("设置精品课程", "课程", "", id, id, userProp);
+        return new MessageResponse(ResultCode.SUCCESS, "成功！");
+    }
+
 
 }

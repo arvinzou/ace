@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Course implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private String id;
     /**
@@ -89,6 +90,9 @@ public class Course implements Serializable {
      * 下架时间
      */
     private Date offlineDate;
+
+    /**是否精品课程*/
+    private String fine;
 
     public Date getOnlineDate() {
         return onlineDate;
@@ -288,5 +292,14 @@ public class Course implements Serializable {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce == null ? null : introduce.trim();
+    }
+
+
+    public String getFine() {
+        return fine;
+    }
+
+    public void setFine(String fine) {
+        this.fine = fine;
     }
 }
