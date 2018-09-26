@@ -45,7 +45,6 @@ public class WIndexController extends JxbBaseController {
     @RequestMapping("/findListRand")
     public ResultResponse findList() throws Exception {
         CourseQVo condition = new CourseQVo();
-        condition.setCostType("1");
         condition.setFine("1");
         PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 4, "RAND()");
         List<CourseVo> list = rst.getRows();
