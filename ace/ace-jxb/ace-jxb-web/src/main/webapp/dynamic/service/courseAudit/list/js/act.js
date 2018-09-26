@@ -2,6 +2,7 @@ var loading = {};
 var primaryId = null;
 var videoUrl = null;
 var params = {limit: 10};
+var partId;
 function App() {
     console.log("=============================App Start==============================");
 
@@ -34,6 +35,7 @@ function initPartList(){
     try{
         renderPage('chapters', data.rows, 'chapterTemp');
         initPage(data.rows[0].id);
+         partId=data.rows[0].id;
     }catch(e){}
 }
 function findPartList(){
