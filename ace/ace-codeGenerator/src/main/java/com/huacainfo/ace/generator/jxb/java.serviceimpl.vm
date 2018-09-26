@@ -1,0 +1,215 @@
+package com.huacainfo.ace.jxb.service.impl;
+
+
+import java.util.Date;
+import java.util.List;
+import com.huacainfo.ace.common.tools.GUIDUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.jxb.dao.$!{bean.name}Dao;
+import com.huacainfo.ace.jxb.model.$!{bean.name};
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.jxb.service.AuditRecordService;
+import com.huacainfo.ace.jxb.service.$!{bean.name}Service;
+import com.huacainfo.ace.jxb.vo.$!{bean.name}Vo;
+import com.huacainfo.ace.jxb.vo.$!{bean.name}QVo;
+@Service("$!{bean.lowerName}Service")
+/**
+* @author: $!{annotation.authorName}
+* @version: $!{annotation.version}
+* @Description:  TODO($!{bean.tableChineseName})
+*/
+public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
+Logger logger = LoggerFactory.getLogger(this.getClass());
+@Autowired
+private $!{bean.name}Dao $!{bean.lowerName}Dao;
+@Autowired
+private DataBaseLogService dataBaseLogService;
+@Autowired
+private AuditRecordService auditRecordService;
+
+/**
+*
+* @Title:find!{bean.name}List
+* @Description:  TODO($!{bean.tableChineseName}分页查询)
+* @param:        @param condition
+* @param:        @param start
+* @param:        @param limit
+* @param:        @param orderBy
+* @param:        @throws Exception
+* @return:       PageResult
+<$!{bean.name}Vo>
+    * @throws
+    * @author: $!{annotation.authorName}
+    * @version: $!{annotation.version}
+    */
+    @Override
+    public PageResult
+    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,
+        int limit, String orderBy) throws Exception {
+        PageResult
+        <$!{bean.name}Vo> rst = new PageResult<>();
+            List
+            <$!{bean.name}Vo> list = this.$!{bean.lowerName}Dao.findList(condition,
+                start, limit, orderBy);
+                rst.setRows(list);
+                if (start <= 1) {
+                int allRows = this.$!{bean.lowerName}Dao.findCount(condition);
+                rst.setTotal(allRows);
+                }
+                return rst;
+                }
+
+                /**
+                *
+                * @Title:insert$!{bean.name}
+                * @Description: TODO(添加$!{bean.tableChineseName})
+                * @param: @param o
+                * @param: @param userProp
+                * @param: @throws Exception
+                * @return: MessageResponse
+                * @throws
+                * @author: $!{annotation.authorName}
+                * @version: $!{annotation.version}
+                */
+                @Override
+                public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp) throws Exception {
+
+                $!{bean.validate}
+
+                int temp = this.$!{bean.lowerName}Dao.isExit(o);
+                if (temp > 0) {
+                return new MessageResponse(1, "$!{bean.tableChineseName}名称重复！");
+                }
+
+                o.setId(GUIDUtil.getGUID());
+                o.setCreateDate(new Date());
+                o.setStatus("1");
+                o.setCreateUserName(userProp.getName());
+                o.setCreateUserId(userProp.getUserId());
+                this.$!{bean.lowerName}Dao.insert(o);
+                this.dataBaseLogService.log("添加$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
+                o.getId(),o.getId(), userProp);
+
+                return new MessageResponse(0, "添加$!{bean.tableChineseName}完成！");
+                }
+
+                /**
+                *
+                * @Title:update$!{bean.name}
+                * @Description: TODO(更新$!{bean.tableChineseName})
+                * @param: @param o
+                * @param: @param userProp
+                * @param: @throws Exception
+                * @return: MessageResponse
+                * @throws
+                * @author: $!{annotation.authorName}
+                * @version: $!{annotation.version}
+                */
+                @Override
+                public MessageResponse update$!{bean.name}($!{bean.name} o, UserProp userProp) throws Exception {
+                $!{bean.validate}
+
+                o.setLastModifyDate(new Date());
+                o.setLastModifyUserName(userProp.getName());
+                o.setLastModifyUserId(userProp.getUserId());
+                this.$!{bean.lowerName}Dao.updateByPrimaryKey(o);
+                this.dataBaseLogService.log("变更$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
+                o.getId(), o.getId(), userProp);
+
+                return new MessageResponse(0, "变更$!{bean.tableChineseName}完成！");
+                }
+
+                /**
+                *
+                * @Title:select$!{bean.name}ByPrimaryKey
+                * @Description: TODO(获取$!{bean.tableChineseName})
+                * @param: @param id
+                * @param: @throws Exception
+                * @return: SingleResult<$!{bean.name}>
+                * @throws
+                * @author: $!{annotation.authorName}
+                * @version: $!{annotation.version}
+                */
+                @Override
+                public SingleResult
+                <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception {
+                    SingleResult
+                    <$!{bean.name}Vo> rst = new SingleResult<>();
+                        rst.setValue(this.$!{bean.lowerName}Dao.selectVoByPrimaryKey(id));
+                        return rst;
+                        }
+
+                        /**
+                        *
+                        * @Title:delete$!{bean.name}By$!{bean.name}Id
+                        * @Description: TODO(删除$!{bean.tableChineseName})
+                        * @param: @param id
+                        * @param: @param userProp
+                        * @param: @throws Exception
+                        * @return: MessageResponse
+                        * @throws
+                        * @author: $!{annotation.authorName}
+                        * @version: $!{annotation.version}
+                        */
+                        @Override
+                        public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id, UserProp userProp) throws
+                        Exception {
+                        this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);
+                        this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
+                        "$!{bean.tableChineseName}", userProp);
+                        return new MessageResponse(0, "$!{bean.tableChineseName}删除完成！");
+                        }
+
+
+                        /**
+                        *
+                        * @Title:audit
+                        * @Description: TODO(审核$!{bean.tableChineseName})
+                        * @param: @param id bean.id
+                        * @param: @param rst 审核结果 3-通过 4-拒绝
+                        * @param: @param remark 审核备注
+                        * @param: @throws Exception
+                        * @return: MessageResponse
+                        * @throws
+                        * @author: $!{annotation.authorName}
+                        * @version: $!{annotation.version}
+                        */
+                        @Override
+                        public MessageResponse audit(String id,String rst, String remark,
+                        UserProp userProp) throws Exception {
+
+                        $!{bean.name} obj = $!{bean.lowerName}Dao.selectByPrimaryKey(id);
+                        if (obj == null) {
+                        return new MessageResponse(ResultCode.FAIL, "$!{bean.tableChineseName}数据丢失");
+                        }
+
+                        //更改审核记录
+                        MessageResponse auditRs =
+                        auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId(), rst, remark,
+                        userProp);
+                        if (ResultCode.FAIL == auditRs.getStatus()) {
+                        return auditRs;
+                        }
+
+                        obj.setStatus(rst);
+                        obj.setLastModifyDate(DateUtil.getNowDate());
+                        obj.setLastModifyUserId(userProp.getUserId());
+                        obj.setLastModifyUserName(userProp.getName());
+                        $!{bean.lowerName}Dao.updateStatus(obj);
+
+
+                        dataBaseLogService.log("审核$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
+                        "$!{bean.tableChineseName}", userProp);
+                        return new MessageResponse(0, "$!{bean.tableChineseName}审核完成！");
+                        }
+
+                        }
