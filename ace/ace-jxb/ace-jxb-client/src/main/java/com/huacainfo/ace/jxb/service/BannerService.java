@@ -28,9 +28,7 @@ public interface BannerService {
      * @author: 陈晓克
      * @version: 2018-09-26
      */
-    PageResult
-            <BannerVo> findBannerList(BannerQVo condition,
-                                      int start, int limit, String orderBy) throws Exception;
+    PageResult<BannerVo> findBannerList(BannerQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws

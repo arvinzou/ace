@@ -22,9 +22,9 @@ public interface BannerDao {
     BannerVo selectVoByPrimaryKey(String id);
 
     List<BannerVo> findList(@Param("condition") BannerQVo condition,
-                                @Param("start") int start,
-                                @Param("limit") int limit,
-                                @Param("orderBy") String orderBy);
+                            @Param("start") int start,
+                            @Param("limit") int limit,
+                            @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") BannerQVo condition);
 

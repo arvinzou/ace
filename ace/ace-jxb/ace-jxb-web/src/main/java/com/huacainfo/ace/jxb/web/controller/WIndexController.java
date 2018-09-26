@@ -34,9 +34,9 @@ public class WIndexController extends JxbBaseController {
 
     @Autowired
     private BaseOrderService baseOrderService;
-
     @Autowired
-    private EvaluatTplService evaluatTplService;
+    private BannerService bannerService;
+
 
 
     /**
@@ -99,16 +99,10 @@ public class WIndexController extends JxbBaseController {
         CourseQVo condition = new CourseQVo();
         condition.setCostType("1");
         condition.setName(name);
-        PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 5, "RAND()");
-//        CounselorQVo cc = new CounselorQVo();
-//        //只显示注册通过的咨询师
-//        cc.setRegAuditRst("1");
-//        cc.setConsultState("1");
-//        cc.setName(name);
-//        PageResult<CounselorVo> rst1 = counselorService.findCounselorList(cc, 0, 5, "RAND()");
+        PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 8, "RAND()");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("Course", rst);
-//        map.put("Counselor", rst1);
+
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", map);
     }
 
@@ -117,7 +111,7 @@ public class WIndexController extends JxbBaseController {
      */
     @RequestMapping("/banner")
     public ResultResponse banner() throws Exception {
-
-        return new ResultResponse(ResultCode.SUCCESS, "查询成功",null);
+        BannerQVo bannerQVo = new BannerQVo();
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", bannerService.findBannerList(bannerQVo,0,4,null));
     }
 }
