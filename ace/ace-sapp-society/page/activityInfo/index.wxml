@@ -82,13 +82,13 @@
         </view>
     </view>
     <view class='btn_content'>
-     <view id='button' class='noClick'>
+     <view  class='btn btn-clicking'>
         立即报名
      </view>
-      <view id='button' class='clicking'>
+      <view  class='btn btn-noClick'>
         已经报名
      </view>
-      <view id='button' class='unClick'>
+      <view  class='btn btn-unClick'>
         活动结束
      </view>
     </view>

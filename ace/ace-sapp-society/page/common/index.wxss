@@ -3,7 +3,7 @@
 }
 
 /*按钮*/
-#button {
+.btn {
     width: 690rpx;
     height: 90rpx;
     border-radius: 6rpx;
@@ -14,16 +14,16 @@
     color: rgba(255, 255, 255, 1);
 }
 /*点击态*/
-#button.clicking {
+.btn-clicking {
     background: rgba(255, 153, 6,1);
 }
 
 /*点击未激活态*/
-#button.noClick {
+.btn-noClick {
     background:rgba(255,153,6,0.6)
 }
 /*不可点击态*/
-#button.unClick {
+.btn-unClick {
     background:rgba(217,217,217,1)
     
 }
