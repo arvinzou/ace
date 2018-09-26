@@ -234,14 +234,9 @@
         </script>
 
 		<script id="banner-tpl" type="text/template">
-			{@each data.Course as item01, index01}
+			{@each data.rows as item, index}
 			<div class="swiper-slide">
-				<div class="swiper-slide"><img src="\${item01.cover}" /></div>
-			</div>
-			{@/each}
-			{@each data.test.EvaluaTplList as item02, index02}
-			<div class="swiper-slide">
-				<div class="swiper-slide"><img src="\${item02.cover}" /></div>
+				<div class="swiper-slide"><img src="\${item.imgUrl}" /></div>
 			</div>
 			{@/each}
 		</script>
