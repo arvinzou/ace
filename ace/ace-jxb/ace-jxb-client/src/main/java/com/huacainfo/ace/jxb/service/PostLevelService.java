@@ -6,10 +6,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.PostLevel;
-import com.huacainfo.ace.jxb.vo.CounselorPostLevelQVo;
-import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
-import com.huacainfo.ace.jxb.vo.PostLevelQVo;
-import com.huacainfo.ace.jxb.vo.PostLevelVo;
+import com.huacainfo.ace.jxb.vo.*;
 
 /**
  * @author: Arvin
@@ -113,5 +110,10 @@ public interface PostLevelService {
      * @param postId      post_level.id
      * @return
      */
-    MessageResponse cfgCounselorPostlervel(String counselorId, String postId);
+    MessageResponse cfgCounselorPostLevel(String counselorId, String postId);
+
+    /**
+     * 收入管理报表
+     */
+    PageResult<IncomeReportVo> incomeReport(IncomeReportQVo condition, int start, int limit, String orderBy);
 }

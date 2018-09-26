@@ -466,3 +466,6 @@ input {
 	color: rgba(196, 200, 214, 1);
 	text-decoration: line-through;
 }
+.swiper-container-horizontal>.swiper-pagination-bullets{
+	bottom: 2px !important;
+}
