@@ -118,9 +118,9 @@
                 \${item.duration}秒
             </td>
             <td width="10%" >
-                {@if item.free == '0'}
+                {@if item.free == '1'}
 								<span class="label label-lg label-info">是</span>
-                {@else if item.free == '1'}
+                {@else if item.free == '0'}
                  <span class="label label-lg label-danger">否</span>
                 {@/if}
             </td>

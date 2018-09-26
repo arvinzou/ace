@@ -1,6 +1,8 @@
 package com.huacainfo.ace.jxb.dao;
 
 import com.huacainfo.ace.jxb.model.PostLevel;
+import com.huacainfo.ace.jxb.vo.IncomeReportQVo;
+import com.huacainfo.ace.jxb.vo.IncomeReportVo;
 import com.huacainfo.ace.jxb.vo.PostLevelQVo;
 import com.huacainfo.ace.jxb.vo.PostLevelVo;
 import org.apache.ibatis.annotations.Param;
@@ -44,4 +46,11 @@ public interface PostLevelDao {
     List<PostLevel> findConfig();
 
     PostLevel getLowestPost();
+
+    List<IncomeReportVo> incomeReport(@Param("condition") IncomeReportQVo condition,
+                                      @Param("start") int start,
+                                      @Param("limit") int limit,
+                                      @Param("orderBy") String orderBy);
+
+    int findIncomeReportCount(@Param("condition") IncomeReportQVo condition);
 }

@@ -14,7 +14,7 @@ function App() {
         var id = relatedTarget.data('id')
         getById(id);
     });
-    $(".btn-group .btn").bind('click',function(event){
+    $(".btn-group .btn").bind('click', function (event) {
         $(event.target).siblings().removeClass("active");
         console.log(event);
         $(event.target).addClass("active");
@@ -31,7 +31,7 @@ var params = {
 
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 1,
+        totalCounts: 20,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -45,13 +45,13 @@ function initPage() {
         }
     });
 }
-function changeType(status){
-  params['regAuditRst'] = status;
-  getPageList();
+function changeType(status) {
+    params['regAuditRst'] = status;
+    getPageList();
 }
-function changeConsultState(status){
-  params['consultState'] = status;
-  getPageList();
+function changeConsultState(status) {
+    params['consultState'] = status;
+    getPageList();
 }
 
 function t_query() {
@@ -60,11 +60,13 @@ function t_query() {
 }
 
 function getPageList() {
-    var url = contextPath + "/counselor/findCounselorList";
-    params['name'] = $("input[name=keyword]").val();
+    var url = contextPath + "/postLevel/incomeReport";
+    params['teacherName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (result) {
         stopLoad();
+        console.log("====================================");
+        console.log(JSON.stringify(result));
         if (result.status == 0) {
             if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
@@ -83,7 +85,6 @@ function renderPage(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
-
 
 
 /**
@@ -185,7 +186,7 @@ function getById(id) {
             stopLoad();
             if (rst.status == 0) {
                 renderPage("info", rst.value, "tpl-info");
-				initPhotoPreview(".my-gallery img")
+                initPhotoPreview(".my-gallery img")
             } else {
                 alert(rst.errorMessage);
             }
@@ -199,16 +200,16 @@ function getById(id) {
 
 
 function initPhotoPreview(imgSelector) {
-    $(imgSelector).each(function(i,o){
-		var orgin = o;
-		var image = new Image();
-		image.src = orgin.src;
-		image.onload = function () {
-			$(orgin).wrap('<figure><a href="'+orgin.src+'"  data-size="'+image.width+'x'+image.height+'"></a></figure>');
-		}
-	});
-	
-	 initPhotoSwipeFromDOM('.my-gallery');
+    $(imgSelector).each(function (i, o) {
+        var orgin = o;
+        var image = new Image();
+        image.src = orgin.src;
+        image.onload = function () {
+            $(orgin).wrap('<figure><a href="' + orgin.src + '"  data-size="' + image.width + 'x' + image.height + '"></a></figure>');
+        }
+    });
+
+    initPhotoSwipeFromDOM('.my-gallery');
 }
 var initPhotoSwipeFromDOM = function (gallerySelector) {
     var parseThumbnailElements = function (el) {
@@ -238,7 +239,6 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
                 w: parseInt(size[0], 10),
                 h: parseInt(size[1], 10)
             };
-
 
 
             if (figureEl.children.length > 1) {
@@ -298,7 +298,6 @@ var initPhotoSwipeFromDOM = function (gallerySelector) {
             }
             nodeIndex++;
         }
-
 
 
         if (index >= 0) {

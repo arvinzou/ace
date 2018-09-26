@@ -2,18 +2,15 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.jxb.model.PostLevel;
 import com.huacainfo.ace.jxb.service.PostLevelService;
-import com.huacainfo.ace.jxb.vo.CounselorPostLevelQVo;
-import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
-import com.huacainfo.ace.jxb.vo.PostLevelQVo;
-import com.huacainfo.ace.jxb.vo.PostLevelVo;
+import com.huacainfo.ace.jxb.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,7 +155,27 @@ public class PostLevelController extends JxbBaseController {
      */
     @RequestMapping(value = "/modifyCounselorLevel")
     @ResponseBody
-    public MessageResponse cfgCounselorPostlervel(String counselorId, String postId) {
-        return postLevelService.cfgCounselorPostlervel(counselorId, postId);
+    public MessageResponse cfgCounselorPostLevel(String counselorId, String postId) {
+        return postLevelService.cfgCounselorPostLevel(counselorId, postId);
+    }
+
+
+    /**
+     * 收入管理报表
+     */
+    @RequestMapping(value = "/incomeReport")
+    @ResponseBody
+    public PageResult<IncomeReportVo> incomeReport(IncomeReportQVo condition, PageParamNoChangeSord page) {
+        if (StringUtil.isEmpty(condition.getDateTime())) {
+            condition.setDateTime(DateUtil.getNow());
+        }
+
+        PageResult<IncomeReportVo> rst =
+                postLevelService.incomeReport(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
     }
 }

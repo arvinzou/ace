@@ -57,7 +57,7 @@ var videoUrl = "";
 var params={limit:5,type:'1'};
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,

@@ -15,7 +15,7 @@ window.onload = function(){
 
 function initPage(partId) {
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: 10,
         visiblePages: 20,
         currentPage: 1,
