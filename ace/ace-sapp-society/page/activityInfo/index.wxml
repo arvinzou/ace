@@ -1,0 +1,96 @@
+<view class='index'>
+    <view class="head_card">
+        <view class='imgage'>
+            <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537865248514&di=d79a63657cc8921f765b52f179398e8e&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201407%2F05%2F20140705225720_KQkMH.jpeg'></image>
+        </view>
+        <view class='base_info'>
+            <text>周末太阳山爬山活动志愿者招募周末太阳山爬山活动志愿者招募</text>
+            <view class='organizer'>
+                <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537866116370&di=3aa3a688eeb708496e217d15f8812561&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201410%2F03%2F20141003010927_uSEZj.jpeg'></image>
+                <text>芙蓉嘻嘻芙蓉嘻嘻芙蓉嘻嘻芙芙蓉嘻</text>
+                <text class='remark'>活动组织方</text>
+            </view>
+        </view>
+    </view>
+    <view class='detailed_card'>
+        <view class='time bottom-line'>
+            <view>
+                <view class='title'>开始时间</view>
+                <view class='value'>2018-09-06 19:30</view>
+            </view>
+            <view>
+                <view class='title'>结束时间</view>
+                <view class='value'>2018-09-06 19:30</view>
+            </view>
+        </view>
+        <view class='add_type bottom-line'>
+            <view class='title'>活动地点：</view>
+            <view class='value'>常德市太阳山国家森林公园</view>
+        </view>
+        <view class='add_type'>
+            <view class='title'>活动类型：</view>
+            <view class='value'>公益活动</view>
+        </view>
+    </view>
+    <view class='help'>
+        活动积分
+        <view>?</view>
+    </view>
+
+    <view class='coin_assign'>
+        <view>志愿者：
+        </view>
+        <view class='coin_mark'>+5爱心币
+        </view>
+    </view>
+
+    <view class='partner_list'>
+        <view class='total'>
+            志愿人员：
+            <text class='number'>12/30人</text>
+        </view>
+        <view class='list'>
+            <view class='headImage_list'>
+                <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+                <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+                <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+                <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+                 <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+                <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+                 <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+                <image class='headimage' src='https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1537863142&di=ee0a264f9ce08b047e93ce8b5544627e&src=http://img.zcool.cn/community/0137ed568cd58632f8754c80745658.jpg'></image>
+            </view>
+            <view class='ellipsis'></view>
+            <view class='more'></view>
+        </view>
+    </view>
+    <view class='content'>
+        <view class='content_title bottom-line'>
+            活动目的
+        </view>
+        <view class='content_text'>
+            本活动旨在提高社区居民强身体素质，同时促进居民的相互认识，增加社区居民凝聚力。本活动旨在提高社区居民强身体素质，同时促进居民的相互认识，增加社区居民凝聚力。为了培养学生们团队意识，也为了增强同学们爱护大自然的意识，禀承“强身健体，团结合作”的宗旨，进一步加强班级凝聚力，也给学生们创造一个亲近大自然的机会。我们五年级一班计划在本周组织一次爬山活动，走进大自然，在锻炼身体的同时也捡拾山上的垃圾，特安排此次爬山活动。
+        </view>
+    </view>
+        <view class='content'>
+        <view class='content_title bottom-line'>
+            活动方式
+        </view>
+        <view class='content_text'>
+            根据本次活动的实际情况，活动本身突出“放松身心、感受自然、合作并进”的特点，设置了“趣味探宝活动”和“野外烹饪竞技”。
+9月1日，芙蓉街道集合，具体事宜一同传达。
+        </view>
+    </view>
+    <view class='btn_content'>
+     <view  class='btn btn-clicking'>
+        立即报名
+     </view>
+      <view  class='btn btn-noClick'>
+        已经报名
+     </view>
+      <view  class='btn btn-unClick'>
+        活动结束
+     </view>
+    </view>
+
+</view>

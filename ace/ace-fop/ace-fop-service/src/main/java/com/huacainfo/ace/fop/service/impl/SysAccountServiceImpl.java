@@ -278,12 +278,15 @@ public class SysAccountServiceImpl implements SysAccountService {
         if (FopConstant.COMPANY.equals(relationType)) {
             FopCompanyVo company = fopCompanyDao.selectVoByPrimaryKey(relationId);
             rtn.put("account", null == company ? "" : company.getLpMobile());
-            rtn.put("name", company.getFullName());
-        } else {
+            rtn.put("name", null == company ? "" : company.getFullName());
+        } else if (FopConstant.ASSOCIATION.equals(relationType)) {
             FopAssociation association = fopAssociationDao.selectByPrimaryKey(relationId);
 
             rtn.put("account", null == association ? "" : association.getPhoneNumber());
-            rtn.put("name", association.getFullName());
+            rtn.put("name", null == association ? "" : association.getFullName());
+        } else {
+            rtn.put("account", "常德市工商联");
+            rtn.put("name", "常德市工商联");
         }
 
         return rtn;
