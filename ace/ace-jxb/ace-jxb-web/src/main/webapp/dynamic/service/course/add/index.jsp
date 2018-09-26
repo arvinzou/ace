@@ -28,12 +28,7 @@
                                                             <!--具体界面元素开始-->
                                                             <form class="form-horizontal" id="fm-add" role="form">
                                                                 <div class="form-group">
-                                                                    <label class="col-md-2 control-label">
-                                                                        <span class="label-red">*</span>
-                                                                        课程类别
-
-                                                                        ﻿
-                                                                    </label>
+                                                                    <label class="col-md-2 control-label"><span class="label-red">*</span>课程类别</label>
                                                                     <div class="col-md-10 radio-group-container">
                                                                         <label>
                                                                             <input type="radio" name="type" value="1"><span style="padding:10px">单课程</span>
