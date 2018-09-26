@@ -64,6 +64,24 @@
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-2 control-label">
+
+                课程类别
+                <span class="required" aria-required="true"> * </span>
+                ﻿
+            </label>
+            <div class="col-md-10 radio-group-container">
+                <label>
+                    <input type="radio" name="type" value="1"  \${data.o.type==1?'checked':''}><span style="padding:10px">单课程</span>
+
+                </label>
+                <label>
+                    <input type="radio" name="type" value="2"  \${data.o.type==2?'checked':''}><span style="padding:10px">系列课程</span>
+
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
                 <span class="label-red">*</span>课程名称</label>
             <div class="col-md-6">
                 <input type="text" class="form-control" name="name" value="\${data.o.name}" maxlength="28" placeholder="请输入课程名称（建议字数在14个字以内，不超过28个字)">

@@ -27,6 +27,24 @@
                                                         <div class="form-panel">
                                                             <!--具体界面元素开始-->
                                                             <form class="form-horizontal" id="fm-add" role="form">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label">
+
+                                                                        课程类别
+                                                                        <span class="required" aria-required="true"> * </span>
+                                                                        ﻿
+                                                                    </label>
+                                                                    <div class="col-md-10 radio-group-container">
+                                                                        <label>
+                                                                            <input type="radio" name="type" value="1"><span style="padding:10px">单课程</span>
+
+                                                                        </label>
+                                                                        <label>
+                                                                            <input type="radio" name="type" value="2" checked><span style="padding:10px">系列课程</span>
+
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="form-body">
                                                                     <div class="form-group">
                                                                         <label class="col-md-2 control-label">
