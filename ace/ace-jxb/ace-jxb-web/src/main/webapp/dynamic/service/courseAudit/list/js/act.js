@@ -2,6 +2,7 @@ var loading = {};
 var primaryId = null;
 var videoUrl = null;
 var params = {limit: 10};
+var partId;
 function App() {
     console.log("=============================App Start==============================");
 
@@ -34,6 +35,7 @@ function initPartList(){
     try{
         renderPage('chapters', data.rows, 'chapterTemp');
         initPage(data.rows[0].id);
+         partId=data.rows[0].id;
     }catch(e){}
 }
 function findPartList(){
@@ -95,4 +97,8 @@ function changeChapter(id){
 function add(){
     var partId = $("#chapters .active").attr("datattr");
     window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId;
+}
+
+function editCourseSource(id){
+	window.location.href = contextPath+ '/dynamic/service/courseAudit/list/edit/index.jsp?courseId='+urlParams.did+'&partId='+partId+'&id='+urlParams.id+'&did='+id;
 }
