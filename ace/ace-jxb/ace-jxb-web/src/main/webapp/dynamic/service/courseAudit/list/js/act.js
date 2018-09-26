@@ -96,3 +96,7 @@ function add(){
     var partId = $("#chapters .active").attr("datattr");
     window.location.href = contextPath+ '/dynamic/service/course/list/add/index.jsp?courseId='+primaryId+'&partId='+partId;
 }
+
+function editCourseSource(id){
+	window.location.href = contextPath+ '/dynamic/service/courseAudit/list/edit/index.jsp?courseId='+urlParams.did+'&partId='+partId+'&id='+urlParams.id+'&did='+id;
+}

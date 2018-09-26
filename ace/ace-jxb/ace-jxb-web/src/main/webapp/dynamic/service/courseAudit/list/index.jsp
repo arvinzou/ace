@@ -125,7 +125,7 @@
                 {@/if}
             </td>
             <td width="20%" >
-                <a class="operation" href="javascript:void(0);" data-toggle="modal" data-target="#editCourseSource" onclick="preview('\${item.id}');">查看</a>
+                <a class="operation" href="javascript:void(0);"  onclick="editCourseSource('\${item.id}');">编辑</a>
 
             </td>
         </tr>
