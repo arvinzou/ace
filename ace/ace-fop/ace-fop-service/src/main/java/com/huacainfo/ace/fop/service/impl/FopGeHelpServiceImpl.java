@@ -456,7 +456,10 @@ public class FopGeHelpServiceImpl implements FopGeHelpService {
             throw new CustomException(rs1.getErrorMessage());
         }
         //消息提醒
-        sendMessageNotice(fopGeHelp, auditResult, auditOpinion);
+        if (fopGeHelp.getRequestType().equals(FopConstant.ASSOCIATION)
+                || fopGeHelp.getRequestType().equals(FopConstant.COMPANY)) {
+            sendMessageNotice(fopGeHelp, auditResult, auditOpinion);
+        }
 
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
     }
