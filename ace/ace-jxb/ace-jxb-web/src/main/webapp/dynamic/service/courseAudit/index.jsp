@@ -122,7 +122,7 @@
                 <div class="col-md-10">
                     <div class="describtion">
                         \${item.name}
-                        {@if item.fine==1}<span class="label label-lg label-danger">精品</span>{@/if}
+
                     </div>
                     <div class="cost">\${item.srcCount}节
                         {@if item.costType != '0'}
@@ -130,6 +130,7 @@
                         {@else}
                         免费
                         {@/if}
+                        {@if item.fine==1}<span class="label label-lg label-danger">精品</span>{@/if}
                     </div>
                 </div>
             </div>

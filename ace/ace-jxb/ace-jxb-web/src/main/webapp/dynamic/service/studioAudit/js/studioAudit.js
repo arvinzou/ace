@@ -32,7 +32,7 @@ function initSwriper() {
 
 function initpage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: 10,
         visiblePages: 20,
         currentPage: 1,
