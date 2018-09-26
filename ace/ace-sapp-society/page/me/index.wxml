@@ -1,0 +1,53 @@
+<view class='index'>
+    <view class='banner'>
+        <image src='../../image/mine-banner.png' class='banner-image'></image>
+        <view class='user-info'>
+            <view class='user-top'>
+                <view class='user-head'>
+                    <image src='../../image/head.jpg'></image>
+                </view>
+                <view class='user-opt'>
+                    <view><text class='user-opt-name'>可惜我是水瓶座</text></view>
+                    <view><button class='user-opt-btn'>取消绑定</button></view>
+                </view>
+            </view>
+            <view class='user-bottom'>
+                <view class='data'>
+                    <view><text class='num'>66</text></view>
+                    <view><text class='name'>爱心币收入</text></view>
+                </view>
+                <view class='data'>
+                    <view><text class='num'>36</text></view>
+                    <view><text class='name'>爱心币支出</text></view>
+                </view>
+                <view class='data'>
+                    <view><text class='num'>30</text></view>
+                    <view><text class='name'>爱心币剩余</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='menu-list'>
+        <view class='menu-item' bindtap='loveRanking'>
+            <image src='../../image/icon_rank.png' class='menu-icon'></image>
+            <text class='menu-title'>爱心币排行</text>
+            <image class='menu-rediret' src='../../image/rediret.png'></image>
+        </view>
+         <view class='menu-item'>
+            <image src='../../image/icon_activity.png' class='menu-icon'></image>
+            <text class='menu-title'>我的活动</text>
+            <image class='menu-rediret' src='../../image/rediret.png'></image>
+        </view>
+        <view class='menu-item'>
+            <image src='../../image/icon_order.png' class='menu-icon'></image>
+            <text class='menu-title'>商城订单</text>
+            <image class='menu-rediret' src='../../image/rediret.png'></image>
+        </view>
+        <view class='menu-item'>
+            <image src='../../image/icon_aboutus.png' class='menu-icon'></image>
+            <text class='menu-title'>关于我们</text>
+            <image class='menu-rediret' src='../../image/rediret.png'></image>
+        </view>
+    </view>
+</view>

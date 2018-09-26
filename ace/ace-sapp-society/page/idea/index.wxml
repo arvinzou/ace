@@ -50,6 +50,6 @@
         </view>
     </view>
     <view class='footer'>
-        <button class='release'>发布点子</button>
+        <button class='release' bindtap='releaseIdea'>发布点子</button>
     </view>
 </view>

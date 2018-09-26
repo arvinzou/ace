@@ -13,13 +13,9 @@ Page({
   onLoad: function (options) {
     
   },
-
-/**
- * 发布我有点子
- */
-  releaseIdea: function(){
+  detail: function(){
       wx.navigateTo({
-          url: '../releaseIdea/index'
+          url: '../coinDetail/index'
       })
   },
   /**
