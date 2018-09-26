@@ -157,10 +157,10 @@
         <%--人气老师模板--%>
         <script id="teacher-tpl" type="text/template">
             {@each data as item, index}
-            <div class="swiper-slide">
+            <div class="swiper-slide" onclick="loadCounselor('\${item.id}');">
                 <div class="teacher-box">
                     <div class="teacher-cover">
-                        <img src="img/head1.png" class="cover-img" />
+                        <img src="\${item.headimgurl}" class="cover-img" />
                     </div>
                     <div class="teacher-info"><span class="teacher-name">\${item.name}</span></div>
                     <div class="teacher-info"><span class="teacher-certification">\${item.certification}</span></div>
