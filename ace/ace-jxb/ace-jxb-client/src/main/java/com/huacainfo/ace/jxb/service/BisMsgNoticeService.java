@@ -2,7 +2,9 @@ package com.huacainfo.ace.jxb.service;
 
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.jxb.model.OrderComplaint;
 import com.huacainfo.ace.jxb.model.TeacherAudit;
+import com.huacainfo.ace.jxb.vo.BaseOrderVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 
 /**
@@ -37,4 +39,17 @@ public interface BisMsgNoticeService {
      * @return ResultResponse
      */
     ResultResponse memberJoinMsg(Userinfo newOne, String studioId) throws Exception;
+
+    /**
+     * 提交投诉-消息通知
+     */
+    ResultResponse sendOrderComplaintMsg(OrderComplaint complaint) throws Exception;
+
+    /**
+     * 咨询订单再次提醒消息
+     *
+     * @param orderVo 订单vo
+     * @return 发送结果
+     */
+    ResultResponse consultOrderRemind(BaseOrderVo orderVo) throws Exception;
 }

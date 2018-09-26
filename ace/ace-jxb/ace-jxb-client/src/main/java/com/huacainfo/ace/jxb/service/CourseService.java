@@ -109,4 +109,13 @@ public interface CourseService {
      * @return MessageResponse
      */
     MessageResponse updateLineState(String courseId, String state, UserProp userProp) throws Exception;
+
+    /**
+     * 设置是否精品课程
+     *
+     * @param id 课程ID
+     * @param fine    普通 0  精品 1
+     * @return MessageResponse
+     */
+    MessageResponse updateFine(String id,String fine, UserProp userProp);
 }

@@ -8,10 +8,14 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.dao.CircleDao;
 import com.huacainfo.ace.society.dao.SubjectIdeaAnnexDao;
 import com.huacainfo.ace.society.service.SubjectIdeaAnnexService;
-import com.huacainfo.ace.society.vo.SubjectIdeaAnnexQVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaAnnexVo;
+import com.huacainfo.ace.society.vo.*;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +31,7 @@ import com.huacainfo.ace.society.model.SubjectIdea;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.SubjectIdeaService;
-import com.huacainfo.ace.society.vo.SubjectIdeaVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaQVo;
+
 @Service("subjectIdeaService")
 /**
 * @author: Arvin
@@ -45,6 +48,8 @@ private DataBaseLogService dataBaseLogService;
 private AuditRecordService auditRecordService;
 @Autowired
 private SubjectIdeaAnnexDao subjectIdeaAnnexDao;
+@Autowired
+private SqlSessionTemplate sqlSession;
 
 /**
 *
@@ -63,20 +68,26 @@ private SubjectIdeaAnnexDao subjectIdeaAnnexDao;
     */
     @Override
     public PageResult
-    <SubjectIdeaVo> findSubjectIdeaList(SubjectIdeaQVo condition, int start,
-        int limit, String orderBy) throws Exception {
-        PageResult
-        <SubjectIdeaVo> rst = new PageResult<>();
-            List
-            <SubjectIdeaVo> list = this.subjectIdeaDao.findList(condition,
-                start, limit, orderBy);
+    <SubjectIdeaVo> findSubjectIdeaList(SubjectIdeaQVo condition, int start, int limit, String orderBy) throws Exception {
+            SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+            Configuration configuration = session.getConfiguration();
+            configuration.setSafeResultHandlerEnabled(false);
+            SubjectIdeaDao dao = session.getMapper(SubjectIdeaDao.class);
+            PageResult<SubjectIdeaVo> rst = new PageResult<>();
+            try {
+                List<SubjectIdeaVo> list = dao.findList(condition, start, limit, orderBy);
                 rst.setRows(list);
                 if (start <= 1) {
-                int allRows = this.subjectIdeaDao.findCount(condition);
-                rst.setTotal(allRows);
+                    int allRows = dao.findCount(condition);
+                    rst.setTotal(allRows);
                 }
-                return rst;
-                }
+            }catch (Exception e){
+                session.close();
+            }finally {
+                session.close();
+            }
+            return rst;
+    }
 
                 /**
                 *
