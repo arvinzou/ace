@@ -1,0 +1,55 @@
+<view class='index'>
+    <view class='cover'>
+         <text>封面图（固定）</text>
+    </view>
+    <view class='ideaList'>
+        <view class='ideaItem'>
+            <view class='title_box'><text>健全公共文体设施实施办法健全公共文体设施实施办法健全公共文体设施实施办法</text></view>
+            <view class='content_box'><text>可以购买一些健身器材，让居民锻炼，建图书馆可以购买一些健身器材，让居民锻炼，建图书馆
+            </text></view>
+            <view class='item_footer'>
+                <view class='time_box'>
+                    <text class='name'>刘鑫蕊</text>
+                    <text class='time'>08-29</text>
+                </view>
+                <view class='file_box'>
+                    <image src='../../image/attach.png' class='attach'></image>
+                    <text>附件</text>
+                </view>
+            </view>
+        </view>
+        <view class='ideaItem'>
+            <view class='title_box'><text>健全公共文体设施实施办法健全公共文体设施实施办法健全公共文体设施实施办法</text></view>
+            <view class='content_box'><text>可以购买一些健身器材，让居民锻炼，建图书馆可以购买一些健身器材，让居民锻炼，建图书馆
+            </text></view>
+            <view class='item_footer'>
+                <view class='time_box'>
+                    <text class='name'>刘鑫蕊</text>
+                    <text class='time'>08-29</text>
+                </view>
+                <view class='file_box'>
+                    <image src='../../image/attach.png' class='attach'></image>
+                    <text>附件</text>
+                </view>
+            </view>
+        </view>
+        <view class='ideaItem'>
+            <view class='title_box'><text>健全公共文体设施实施办法健全公共文体设施实施办法健全公共文体设施实施办法</text></view>
+            <view class='content_box'><text>可以购买一些健身器材，让居民锻炼，建图书馆可以购买一些健身器材，让居民锻炼，建图书馆
+            </text></view>
+            <view class='item_footer'>
+                <view class='time_box'>
+                    <text class='name'>刘鑫蕊</text>
+                    <text class='time'>08-29</text>
+                </view>
+                <view class='file_box'>
+                    <image src='../../image/attach.png' class='attach'></image>
+                    <text>附件</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='footer'>
+        <button class='release'>发布点子</button>
+    </view>
+</view>

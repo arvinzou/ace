@@ -34,11 +34,11 @@
 
 
                                                 <div class="row custom-toolbar">
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-2">
 
                                                     </div>
 
-                                                    <div class="col-md-8">
+                                                    <div class="col-md-10">
 
                                                         <form onsubmit="return t_query()">
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
@@ -52,6 +52,13 @@
                                                                 <button type="button" class="btn btn-default" onclick="changeType('1');">通过</button>
                                                                 <button type="button" class="btn btn-default" onclick="changeType('2');">驳回</button>
                                                             </div>
+
+                                                            <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('fine','');">全部</button>
+                                                                <button type="button" class="btn btn-default"  onclick="setParams('fine','1');">精品</button>
+                                                                <button type="button" class="btn btn-default" onclick="setParams('fine','0');">普通</button>
+                                                            </div>
+
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                                                                 <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节</button>
                                                                 <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列</button>
@@ -113,7 +120,10 @@
             <div class="row">
                 <div class="col-md-2"><img src="\${item.cover}" class="cover"/></div>
                 <div class="col-md-10">
-                    <div class="describtion">\${item.name}</div>
+                    <div class="describtion">
+                        \${item.name}
+                        {@if item.fine==1}<span class="label label-lg label-danger">精品</span>{@/if}
+                    </div>
                     <div class="cost">\${item.srcCount}节
                         {@if item.costType != '0'}
                         ￥\${item.cost}
@@ -168,6 +178,8 @@
             {@if item.auditRst==0}
             <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
             {@/if}
+
+            <a class="operation" href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置精品</a>
         </td>
     </tr>
     {@/each}
@@ -185,8 +197,7 @@
 
 
 <!--审核弹框-->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="audit"
-     aria-labelledby="gridSystemModalLabel">
+<div class="modal fade"  id="audit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -226,6 +237,51 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade bs-example-modal-lg" id="modal-status">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">设置状态</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-status" role="form">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label class="col-md-2 view-label">对象</label>
+                            <div class="col-md-10 status-title">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">状态</label>
+                            <div class="col-md-10">
+                                <div class="radio-group-container">
+                                    <input type="hidden" name="id">
+                                    <label>
+                                        <input type="radio" name="fine" value="0"><span style="padding:10px">普通</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="fine" value="1"><span style="padding:10px">精品</span>
+                                    </label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green status">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     .cover{
         width: 70px;
@@ -243,6 +299,7 @@
     }
 </style>
 <jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>
