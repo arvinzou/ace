@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/banner")
+
+
 /**
  * @author: 陈晓克
  * @version: 2018-09-26
