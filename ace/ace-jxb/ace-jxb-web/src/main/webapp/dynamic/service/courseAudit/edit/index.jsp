@@ -64,9 +64,9 @@
     <div class="form-body">
         <div class="form-group">
             <label class="col-md-2 control-label">
-
+                <span class="label-red">*</span>
                 课程类别
-                <span class="required" aria-required="true"> * </span>
+
                 ﻿
             </label>
             <div class="col-md-10 radio-group-container">
