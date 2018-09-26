@@ -18,10 +18,7 @@ import com.huacainfo.ace.jxb.model.CounselorCheckResult;
 import com.huacainfo.ace.jxb.model.CounselorPostLevel;
 import com.huacainfo.ace.jxb.model.PostLevel;
 import com.huacainfo.ace.jxb.service.PostLevelService;
-import com.huacainfo.ace.jxb.vo.CounselorPostLevelQVo;
-import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
-import com.huacainfo.ace.jxb.vo.PostLevelQVo;
-import com.huacainfo.ace.jxb.vo.PostLevelVo;
+import com.huacainfo.ace.jxb.vo.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -309,7 +306,7 @@ public class PostLevelServiceImpl implements PostLevelService {
      * @return
      */
     @Override
-    public MessageResponse cfgCounselorPostlervel(String counselorId, String postId) {
+    public MessageResponse cfgCounselorPostLevel(String counselorId, String postId) {
         CounselorPostLevelVo vo = counselorPostLevelDao.findByCounselorId(counselorId);
         if (vo == null) {
             return new MessageResponse(ResultCode.FAIL, "咨询师岗位信息丢失");
@@ -319,6 +316,26 @@ public class PostLevelServiceImpl implements PostLevelService {
         counselorPostLevelDao.updateByPrimaryKeySelective(vo);
 
         return new MessageResponse(ResultCode.SUCCESS, "指定成功");
+    }
+
+    /**
+     * 收入管理报表
+     *
+     * @param condition
+     * @param start
+     * @param limit
+     * @param orderBy
+     */
+    @Override
+    public PageResult<IncomeReportVo> incomeReport(IncomeReportQVo condition, int start, int limit, String orderBy) {
+        PageResult<IncomeReportVo> rst = new PageResult<>();
+        List<IncomeReportVo> list = postLevelDao.incomeReport(condition, start, limit, orderBy);
+        rst.setRows(list);
+        if (start <= 1) {
+            int allRows = postLevelDao.findIncomeReportCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
     }
 
     /**
