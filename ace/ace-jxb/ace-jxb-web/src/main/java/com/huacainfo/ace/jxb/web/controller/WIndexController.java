@@ -46,6 +46,7 @@ public class WIndexController extends JxbBaseController {
     public ResultResponse findList() throws Exception {
         CourseQVo condition = new CourseQVo();
         condition.setCostType("1");
+        condition.setFine("1");
         PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 4, "RAND()");
         List<CourseVo> list = rst.getRows();
         BaseOrderQVo baseOrder = new BaseOrderQVo();
@@ -99,15 +100,15 @@ public class WIndexController extends JxbBaseController {
         condition.setCostType("1");
         condition.setName(name);
         PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 5, "RAND()");
-        CounselorQVo cc = new CounselorQVo();
-        //只显示注册通过的咨询师
-        cc.setRegAuditRst("1");
-        cc.setConsultState("1");
-        cc.setName(name);
-        PageResult<CounselorVo> rst1 = counselorService.findCounselorList(cc, 0, 5, "RAND()");
+//        CounselorQVo cc = new CounselorQVo();
+//        //只显示注册通过的咨询师
+//        cc.setRegAuditRst("1");
+//        cc.setConsultState("1");
+//        cc.setName(name);
+//        PageResult<CounselorVo> rst1 = counselorService.findCounselorList(cc, 0, 5, "RAND()");
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("Course", rst);
-        map.put("Counselor", rst1);
+//        map.put("Counselor", rst1);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", map);
     }
 
@@ -116,14 +117,7 @@ public class WIndexController extends JxbBaseController {
      */
     @RequestMapping("/banner")
     public ResultResponse banner() throws Exception {
-        EvaluatTplQVo evaluatTplQVo = new EvaluatTplQVo();
-        evaluatTplQVo.setSyid("jxb");
-        ResultResponse rr = this.evaluatTplService.getEvaluatTplList(evaluatTplQVo, 1, 2, null);
-        CourseQVo condition = new CourseQVo();
-        PageResult<CourseVo> rst1 = this.courseService.findCourseList(condition, 0, 2, null);
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("test", rr.getData());
-        map.put("Course", rst1.getRows());
-        return new ResultResponse(ResultCode.SUCCESS, "查询成功", map);
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功",null);
     }
 }
