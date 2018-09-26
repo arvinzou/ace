@@ -25,6 +25,11 @@ Page({
           url: '../loveRanking/index'
       })
   },
+    myActivity: function(){
+        wx.navigateTo({
+            url: '../myActivity/index'
+        })
+    },
   /**
    * 生命周期函数--监听页面显示
    */
