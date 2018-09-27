@@ -1,7 +1,6 @@
 @import "../common/lib/weui.wxss";
 @import "../common/index.wxss";
 .index {
-    background: rgba(246, 246, 246, 1);
     font-size: 24rpx;
     font-family: PingFang-SC-Medium;
     font-weight: 500;
@@ -10,7 +9,7 @@
 
 .head_card, .detailed_card, .coin_assign, .partner_list, .content {
     background-color: #fff;
-    margin-bottom: 22rpx;
+    margin-bottom: 20rpx;
 }
 
 .head_card .imgage {

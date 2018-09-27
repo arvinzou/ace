@@ -1,0 +1,72 @@
+<view class='index'>
+    <view class='steps'>
+        <view class='step step-action step-one'>基本信息</view>
+        <view class='step'>活动详情</view>
+        <view class='step-end'>发布成功</view>
+    </view>
+    <view class='prompt'>活动主办成功，活动发起者可获得50爱心币</view>
+    <view class='cover'>
+        添加活动封面
+    </view>
+
+    <view class='form-content'>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <view class="input-style bottom-line">
+                <view class="title">活动标题<text>*</text></view>
+                <input/>
+            </view>
+            <view class="input-style bottom-line">
+                <view class="title">发起者<text>*</text></view>
+                <input/>
+            </view>
+            <view class="input-style bottom-line">
+                <view class="title">活动地点<text>*</text></view>
+                <input/>
+            </view>
+            <view class="input-style bottom-line">
+                <view class="title">活动人数<text>*</text></view>
+                <input/>
+            </view>
+            <view class="selectTime-style bottom-line">
+                <view class="title">活动人数<text>*</text></view>
+                <input/>
+            </view>
+
+
+
+
+            <view class="section section_gap">
+                <view class="section__title">slider</view>
+                <slider name="slider" show-value></slider>
+            </view>
+
+            <view class="section">
+                <view class="section__title">input</view>
+                <input name="input" placeholder="please input here" />
+            </view>
+            <view class="section section_gap">
+                <view class="section__title">radio</view>
+                <radio-group name="radio-group">
+                    <label>
+                        <radio value="radio1" />radio1</label>
+                    <label>
+                        <radio value="radio2" />radio2</label>
+                </radio-group>
+            </view>
+            <view class="section section_gap">
+                <view class="section__title">checkbox</view>
+                <checkbox-group name="checkbox">
+                    <label>
+                        <checkbox value="checkbox1" />checkbox1</label>
+                    <label>
+                        <checkbox value="checkbox2" />checkbox2</label>
+                </checkbox-group>
+            </view>
+            <view class="btn-area">
+                <button formType="submit">Submit</button>
+                <button formType="reset">Reset</button>
+            </view>
+        </form>
+    </view>
+
+</view>
