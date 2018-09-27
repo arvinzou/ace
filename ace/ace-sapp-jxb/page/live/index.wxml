@@ -23,7 +23,7 @@
     <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
   </view>
   <view class='chat-box' hidden="{{currentTab!==0}}">
-    <block wx:for-items="{{message}}" wx:key="{{item.*}}">
+    <block wx:for-items="{{message}}">
       <view class='chat-content'>
 
         <image src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
@@ -60,7 +60,7 @@
     </view>
   </view>
   <view class='chat-box' hidden="{{currentTab!==1}}">
-    <block wx:for-items="{{list}}" wx:key="{{item.*}}">
+    <block wx:for-items="{{list}}">
       <view class="wrap">
         <view class='report-box-firse'>
 
@@ -82,7 +82,7 @@
               <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;' controls="{{1>0}}"></audio>
               <view class="pictures" data-count="{{item.imageList.length}}">
                 <view class="imglist{{item.imageList.length}}">
-                  <block wx:for-items="{{item.imageList}}" wx:for-item="imgitem" wx:for-index="imgindex" wx:key="{{item.*}}">
+                  <block wx:for-items="{{item.imageList}}" wx:for-item="imgitem" wx:for-index="imgindex" >
                     <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
 
                   </block>
@@ -90,7 +90,7 @@
                 </view>
               </view>
 
-              <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="{{item.*}}">
+              <block wx:for-items="{{item.comments}}" wx:for-item="citem">
                 <view class='chat-content'>
                   <image src='{{citem.headimgurl}}' class='headimg'></image>
                   <view class='chat-right'>

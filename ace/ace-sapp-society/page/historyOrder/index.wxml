@@ -1,0 +1,85 @@
+<view class='index'>
+    <view class='order-list'>
+        <view class='order-item'>
+            <view class='content'>
+                <view class='state'>
+                    <text>待领取</text>
+                </view>
+                <view class='order-content'>
+                    <view class='content-left'>
+                        <view class='image-box'></view>
+                    </view>
+                    <view class='content-right'>
+                        <view class='order-title'>
+                            <text>瑞士军刀拖箱瑞士军刀拖箱瑞士军刀拖箱</text>
+                        </view>
+                        <view class='method'>
+                            <text>自提</text>
+                        </view>
+                        <view style='height:35rpx'>
+                            <text class='number'>500</text>
+                            <text class='number-title'>爱心币</text>
+                        </view>
+                    </view>
+                    <view class='opt'>
+                        <button class='opt-btn'>确认领取</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='order-item'>
+            <view class='content'>
+                <view class='state'>
+                    <text>待使用</text>
+                </view>
+                <view class='order-content'>
+                    <view class='content-left'>
+                        <view class='image-box'></view>
+                    </view>
+                    <view class='content-right'>
+                        <view class='order-title'>
+                            <text>芙蓉街道羽毛球馆</text>
+                        </view>
+                        <view class='method'>
+                            <text>使用时间:2018-9-18 9:00-11:00</text>
+                        </view>
+                        <view style='height:35rpx'>
+                            <text class='number'>500</text>
+                            <text class='number-title'>爱心币</text>
+                        </view>
+                    </view>
+                    <view class='opt'>
+                        <button class='opt-btn'>确认使用</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class='order-item'>
+            <view class='content'>
+                <view class='state'>
+                    <text>交易成功</text>
+                </view>
+                <view class='order-content'>
+                    <view class='content-left'>
+                        <view class='image-box'></view>
+                    </view>
+                    <view class='content-right'>
+                        <view class='order-title'>
+                            <text>大容量电饭煲</text>
+                        </view>
+                        <view class='method'>
+                            <text>自提</text>
+                        </view>
+                        <view style='height:35rpx'>
+                            <text class='number'>500</text>
+                            <text class='number-title'>爱心币</text>
+                        </view>
+                    </view>
+                    <view class='opt'>
+                        <button class='opt-btn-after'>已领取</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

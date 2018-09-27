@@ -53,12 +53,11 @@ body{
 	display: block;
 	text-align: center;
 	border-radius: 0.36rem;
-	color: #A0A7B6;
+	color: #ffffff;
 	border: none;
 	outline: none;
 	margin-top: 0.45rem;
-	border: 1px solid #A0A7B6;
-	background: #FFFFFF;
+	background: #FF7C12;
 }
 .dorder{
 	height: 1rem;
@@ -88,4 +87,21 @@ body{
 .finished{
 	font-size: 0.373333rem;
 	color:#0EC8C4;
+}
+.commit{
+	width: 4.906666rem;
+	height: 1.2rem;
+	border-radius: 0.586666rem;
+	color: #ffffff;
+	background:rgba(255,124,18,1);
+	opacity:0.96;
+	font-size: 0.453333rem;
+	font-weight:500;
+	border: none;
+}
+.complaint-title{
+	color: #1C2843;
+	font-size: 0.453333rem;
+	font-weight: bold;
+	text-align: center;
 }

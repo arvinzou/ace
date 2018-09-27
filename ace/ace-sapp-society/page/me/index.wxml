@@ -39,7 +39,7 @@
             <text class='menu-title'>我的活动</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
-        <view class='menu-item'>
+        <view class='menu-item' bindtap='historyOrder'>
             <image src='../../image/icon_order.png' class='menu-icon'></image>
             <text class='menu-title'>商城订单</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>
