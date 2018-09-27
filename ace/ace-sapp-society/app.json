@@ -20,7 +20,7 @@
     "list": [
       {
         "pagePath": "page/index/index",
-        "iconPath": "image/icon_首页_未选中@3x.png",
+        "iconPath": "image/icon_首页_未选中.png",
         "selectedIconPath": "image/icon_首页_选中@3x.png",
         "text": "首页"
       },
