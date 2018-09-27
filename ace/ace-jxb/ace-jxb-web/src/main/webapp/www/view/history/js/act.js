@@ -109,7 +109,11 @@ function commit(){
                 $("#myModal").modal('hide');
                 $("textarea[name = 'comment']").val("");
             }else {
-                alert(result.errorMessage);
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
                 return;
             }
         },
