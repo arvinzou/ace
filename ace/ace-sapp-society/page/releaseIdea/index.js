@@ -13,15 +13,6 @@ Page({
   onLoad: function (options) {
     
   },
-
-/**
- * 发布我有点子
- */
-  releaseIdea: function(){
-      wx.navigateTo({
-          url: '../releaseIdea/index'
-      })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
