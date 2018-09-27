@@ -101,10 +101,10 @@ jQuery(function ($) {
             }
 
             var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            if (rowData.status == "2") {
-                alert("项目已审核，无法删除")
-                return;
-            }
+            // if (rowData.status == "2") {
+            //     alert("项目已审核，无法删除")
+            //     return;
+            // }
             jQuery(cfg.grid_selector).jqGrid(
                 'delGridRow',
                 gr,

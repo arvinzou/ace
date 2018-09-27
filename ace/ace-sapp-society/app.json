@@ -3,7 +3,13 @@
     "page/index/index",
     "page/activity/index",
     "page/mall/index",
-    "page/me/index"
+    "page/me/index",
+    "page/behavior/index",
+    "page/coinDetail/index",
+    "page/idea/index",
+    "page/loveRanking/index",
+    "page/myActivity/index",
+    "page/releaseIdea/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
