@@ -178,4 +178,27 @@ public class CircleController extends SocietyBaseController {
         }
         return rst;
     }
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(圈子分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <CircleVo>
+     * @author: 陈晓克
+     * @version: 2018-09-20
+     */
+    @RequestMapping(value = "/www/findCircleList")
+    @ResponseBody
+    public PageResult<CircleVo> findCircleListWww(CircleQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setCorpId(this.getCurUserProp().getCorpId());
+        PageResult<CircleVo> rst = this.circleService.findCircleList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
+    }
 }
