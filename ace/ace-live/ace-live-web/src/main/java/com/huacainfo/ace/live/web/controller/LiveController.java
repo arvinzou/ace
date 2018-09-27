@@ -74,7 +74,7 @@ public class LiveController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLive(String jsons) throws Exception {
         Live obj = JSON.parseObject(jsons, Live.class);
-        obj.setStatus("1");
+        obj.setAuditStatus("1");
         return this.liveService
                 .insertLive(obj, this.getCurUserProp());
     }
@@ -189,7 +189,7 @@ public class LiveController extends LiveBaseController {
         SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
         if(rst.getStatus()==0){
             Live obj = JSON.parseObject(jsons, Live.class);
-            obj.setStatus("0");
+            obj.setAuditStatus("0");
             return this.liveService.insertLive(obj, rst.getValue());
         }
        return rst;
@@ -280,12 +280,12 @@ public class LiveController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-09-18
      */
-    @RequestMapping(value = "/www/updateStatus")
+    @RequestMapping(value = "/www/updateAuditStatus")
     @ResponseBody
-    public MessageResponse updateStatusWww(String id,String status) throws Exception {
+    public MessageResponse updateAuditStatus(String id,String status) throws Exception {
         SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
         if(rst.getStatus()==0){
-            return this.liveService.updateStatus(id,status,rst.getValue());
+            return this.liveService.updateAuditStatus(id,status,rst.getValue());
         }
         return rst;
     }

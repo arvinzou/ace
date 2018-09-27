@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.society.model.Circle;
 import com.huacainfo.ace.society.model.CircleImg;
 import com.huacainfo.ace.society.model.Img;
@@ -34,6 +36,10 @@ public class CircleController extends SocietyBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private CircleService circleService;
+
+    @Autowired
+    private AuthorityService authorityService;
+
 
     /**
      * @throws
@@ -147,5 +153,29 @@ public class CircleController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse audit(String id, String rst, String text) throws Exception {
         return this.circleService.audit(id, rst, text, this.getCurUserProp());
+    }
+
+    /**
+     * @throws
+     * @Title:insertCircle
+     * @Description: TODO(添加圈子)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-20
+     */
+    @RequestMapping(value = "/www/insertCircle")
+    @ResponseBody
+    public MessageResponse insertCircleWww(String jsons) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(rst.getStatus()==0){
+            JSONObject json = JSON.parseObject(jsons);
+            json.put("uid",this.getCurWxUser().getUnionId());
+            Circle obj = JSON.parseObject(((JSONObject) json.get("circle")).toJSONString(), Circle.class);
+            List<CircleImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), CircleImg.class);
+            return this.circleService.insertCircle(obj,imgs);
+        }
+        return rst;
     }
 }
