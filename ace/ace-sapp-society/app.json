@@ -28,25 +28,25 @@
       {
         "pagePath": "page/index/index",
         "iconPath": "image/icon_首页_未选中.png",
-        "selectedIconPath": "image/icon_首页_选中@3x.png",
+        "selectedIconPath": "image/icon_首页_选中.png",
         "text": "首页"
       },
       {
         "pagePath": "page/activity/index",
-        "iconPath": "image/icon_活动回顾_未选中@3x.png",
-        "selectedIconPath": "image/icon_活动回顾_选中@3x.png",
+        "iconPath": "image/icon_活动回顾_未选中.png",
+        "selectedIconPath": "image/icon_活动回顾_选中.png",
         "text": "活动回顾"
       },
       {
         "pagePath": "page/mall/index",
-        "iconPath": "image/icon_爱心商城_未选中@3x.png",
-        "selectedIconPath": "image/icon_爱心商城_选中@3x.png",
+        "iconPath": "image/icon_爱心商城_未选中.png",
+        "selectedIconPath": "image/icon_爱心商城_选中.png",
         "text": "爱心商城"
       },
       {
         "pagePath": "page/me/index",
-        "iconPath": "image/icon_个人中心_未选中@3x.png",
-        "selectedIconPath": "image/icon_个人中心_选中@3x.png",
+        "iconPath": "image/icon_个人中心_未选中.png",
+        "selectedIconPath": "image/icon_个人中心_选中.png",
         "text": "个人中心"
       }
     ]
