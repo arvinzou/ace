@@ -9,7 +9,8 @@
     "page/idea/index",
     "page/loveRanking/index",
     "page/myActivity/index",
-    "page/releaseIdea/index"
+    "page/releaseIdea/index",
+    "page/historyOrder/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
