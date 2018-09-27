@@ -111,6 +111,9 @@
         <if test="condition.auditStatus!=null and condition.auditStatus!=&quot;&quot;">
             and t.auditStatus =#{condition.auditStatus,jdbcType=CHAR}
         </if>
+        <if test="condition.createUserId!=null and condition.createUserId!=&quot;&quot;">
+            and t.createUserId =#{condition.createUserId,jdbcType=CHAR}
+        </if>
     </sql>
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
