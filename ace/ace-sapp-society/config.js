@@ -13,8 +13,8 @@ var config = {
     appsecret: '96214b4a01153935995cc027ddf26d75',
     companyId: '0010007',
     ak: 'cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB',
-    frontColor: '#ffffff',
-    backgroundColor: "#3C3C3C",
+    frontColor: '#000000',
+    backgroundColor: "#fff",
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/uf/www/captcha/image.do`
 };

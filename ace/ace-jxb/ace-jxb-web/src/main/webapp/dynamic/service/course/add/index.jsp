@@ -27,6 +27,19 @@
                                                         <div class="form-panel">
                                                             <!--具体界面元素开始-->
                                                             <form class="form-horizontal" id="fm-add" role="form">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-2 control-label"><span class="label-red">*</span>课程类别</label>
+                                                                    <div class="col-md-10 radio-group-container">
+                                                                        <label>
+                                                                            <input type="radio" name="type" value="1"><span style="padding:10px">单课程</span>
+
+                                                                        </label>
+                                                                        <label>
+                                                                            <input type="radio" name="type" value="2" checked><span style="padding:10px">系列课程</span>
+
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="form-body">
                                                                     <div class="form-group">
                                                                         <label class="col-md-2 control-label">
@@ -74,7 +87,7 @@
                                                                                     <div class="row">
                                                                                         <label class="col-md-3 control-label">课程售价</label>
                                                                                         <div class="col-md-9">
-                                                                                            <input name="cost" type="text" style="width:70%" class="form-control" placeholder="请输入课程原价（单位：元）" onchange="if(!/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(this.value) || this.value == 0){alert('请输入合法金额！');this.value='';}"/>
+                                                                                            <input name="cost" type="text" style="width:70%" class="form-control" placeholder="请输入课程售价（单位：元）" onchange="if(!/^([1-9][\d]{0,7}|0)(\.[\d]{1,2})?$/.test(this.value) || this.value == 0){alert('请输入合法金额！');this.value='';}"/>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="row">

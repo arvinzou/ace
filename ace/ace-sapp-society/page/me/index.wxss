@@ -1,0 +1,116 @@
+@import "../common/lib/weui.wxss";
+
+.index{
+    width: 100%;
+}
+.banner{
+    width: 94%;
+    height: 318rpx;
+    margin: 30rpx auto;
+    position: relative;
+}
+.banner-image{
+    width: 100%;
+    height: 100%;
+}
+.user-info{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    position: absolute;
+    top: 30rpx;
+    left: 30rpx;
+}
+.user-head{
+    width: 92rpx;
+    height: 92rpx;
+    float: left;
+    margin-left: 20rpx;
+    margin-right: 27rpx;
+}
+.user-opt{
+    width: 300rpx;
+    height: 92rpx;
+    float: left;
+}
+.user-top::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.user-head image{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.user-opt-name{
+    color: #FFFFFF;
+    font-size: 32rpx;
+}
+.user-opt-btn{
+    width: 120rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    background:rgba(248,153,16,1);
+    color: #FFFFFF;
+    font-size: 24rpx;
+    border-radius: 20rpx;
+    border: none;
+    outline: none;
+}
+.user-bottom{
+    width: 100%;
+    margin-top: 20rpx;
+}
+.data{
+    width: 33.33%;
+    float: left;
+    text-align: center;
+}
+.user-bottom::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.num{
+    color: #FFFFFF;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.name{
+    color: #FFFFFF;
+    font-size: 26rpx;
+}
+.menu-list{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+
+}
+.menu-item{
+    width: 90%;
+    height: 120rpx;
+    border-bottom: 1px solid #efefef;
+    margin: 0 auto;
+}
+.menu-icon{
+    width: 44rpx;
+    height: 44rpx;
+    margin-top: 38rpx;
+    float: left;
+}
+.menu-title{
+    width: 200rpx;
+    height: 30rpx;
+    float: left;
+    color: #666666;
+    font-size: 30rpx;
+    margin-top: 35rpx;
+    margin-left: 30rpx;
+}
+.menu-rediret{
+    width: 21rpx;
+    height: 20rpx;
+    margin-top: 50rpx;
+    float: right;
+}

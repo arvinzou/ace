@@ -1,0 +1,48 @@
+<view class='index'>
+    <view class="page">
+        <!--顶部导航栏-->
+        <view class="swiper-tab">
+            <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">文明行为</view>
+            <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">不文明行为</view>
+        </view>
+        <!--内容主体-->
+        <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
+            <swiper-item>
+                <view class='content'>
+                    <view class='content-item'>
+                        <view class='content-left'>
+                            <image src='../../image/head.jpg' class='head'></image>
+                        </view>
+                        <view class='content-right'>
+                            <view class='nickname'><text>不漂亮</text></view>
+                            <view class='remark'><text>这球打得太棒了吧，秋咪~</text></view>
+                            <view class='attach'>
+                                <video src='../../image/test.mp4' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class='content-item'>
+                            <view class='content-left'>
+                                <image src='../../image/head.jpg' class='head'></image>
+                            </view>
+                            <view class='content-right'>
+                                <view class='nickname'><text>不漂亮</text></view>
+                                <view class='remark'><text>雨再怎么小，下久了地面总会被打湿，我的心也湿成了一片。。。。。</text></view>
+                                <view class='attach'>
+                                    <image src='../../image/default.jpg' class='attach-image'></image>
+                                    <image src='../../image/default.jpg' class='attach-image'></image>
+                                    <image src='../../image/default.jpg' class='attach-image'></image>
+                                    <image src='../../image/default.jpg' class='attach-image'></image>
+                                    <image src='../../image/default.jpg' class='attach-image'></image>
+                                </view>
+                            </view>
+                        </view>
+                </view>
+            </swiper-item>
+            <swiper-item>
+                <view>我是不文明行为</view>
+            </swiper-item>
+        </swiper>
+    </view>
+</view>

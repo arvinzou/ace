@@ -54,7 +54,6 @@ function payTypeCheck(dom) {
 
 function save(params) {
     $.extend(params, {
-        type: urlParams.type,
         id:urlParams.did,
         category: '1',
         mediType: '1',
