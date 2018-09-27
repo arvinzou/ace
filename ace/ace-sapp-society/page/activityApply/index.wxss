@@ -1,6 +1,11 @@
 @import "../common/lib/weui.wxss";
 @import "../common/index.wxss";
 
+.index {
+    height: 100%;
+    overflow-y: auto;
+}
+
 .steps, .cover {
     margin-bottom: 20rpx;
 }
@@ -21,28 +26,41 @@
     color: #a5a5a5;
 }
 
-.form-content {
-    background-color: #fff;
-    padding: 0rpx 30rpx;
+.btn-bkClick {
+    margin-right: 40rpx;
 }
 
-.form-content .input-style {
+.form {
+    padding-top: 100rpx;
+}
+
+.reuslt {
+    background: #fff;
+    text-align: center;
     display: flex;
-    font-size: 28rpx;
-    font-weight: 500;
-    color: rgba(153, 153, 153, 1);
-    height: 100rpx;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 1000rpx;
+}
+
+.fontStyle1 {
+    font-size: 34rpx;
+}
+
+.fontStyle2 {
+    font-size: 30rpx;
+}
+
+.fontStyle3 {
+    font-size: 30rpx;
+}
+
+.reuslt .massage {
     align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
-.form-content .input-style view {
-    width: 140rpx;
-}
-.form-content .input-style text{
-    color: #FF2222
-}
-
-.form-content .input-style input {
-    flex-grow: 1;
-color:rgba(34,34,34,1);
+.reuslt .btn-clicking {
+    align-self: flex-end;
 }
