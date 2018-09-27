@@ -30,6 +30,11 @@ Page({
             url: '../myActivity/index'
         })
     },
+    historyOrder:function(){
+        wx.navigateTo({
+            url: '../historyOrder/index'
+        })
+    },
   /**
    * 生命周期函数--监听页面显示
    */
