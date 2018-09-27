@@ -84,3 +84,37 @@ function orderList(data){
 function showDetail(orderId){
     window.location.href = contextPath + '/www/view/consultantDetail/index.jsp?id='+orderId;
 }
+
+var orderID;
+function setVal(id){
+    orderID = id;
+}
+function commit(){
+    var content = $("textarea[name = 'comment']").val();
+    if(content == undefined || content == ''){
+        alert("请输入投诉的内容！");
+        return;
+    }
+    $.ajax({
+        url: contextPath+ "/www/order/submitComplaint",
+        type:"post",
+        async:false,
+        data:{
+            orderId: orderID,
+            content: content
+        },
+        success:function(result){
+            if(result.status == 0) {
+               alert("提交投诉内容成功！");
+                $("#myModal").modal('hide');
+                $("textarea[name = 'comment']").val("");
+            }else {
+                alert(result.errorMessage);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
