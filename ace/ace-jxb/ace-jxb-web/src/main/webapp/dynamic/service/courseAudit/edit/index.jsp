@@ -63,6 +63,19 @@
     <script id="tpl-fm" type="text/template">
     <div class="form-body">
         <div class="form-group">
+            <label class="col-md-2 control-label"><span class="label-red">*</span>课程类别</label>
+            <div class="col-md-10 radio-group-container">
+                <label>
+                    <input type="radio" name="type" value="1"  \${data.o.type==1?'checked':''}><span style="padding:10px">单课程</span>
+
+                </label>
+                <label>
+                    <input type="radio" name="type" value="2"  \${data.o.type==2?'checked':''}><span style="padding:10px">系列课程</span>
+
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 control-label">
                 <span class="label-red">*</span>课程名称</label>
             <div class="col-md-6">

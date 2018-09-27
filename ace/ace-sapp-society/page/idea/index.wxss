@@ -1,4 +1,5 @@
 @import "../common/lib/weui.wxss";
+@import "../common/index.wxss";
 
 .index{
     width: 100%;

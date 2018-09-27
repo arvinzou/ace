@@ -87,18 +87,8 @@ public class CourseSourceServiceImpl implements CourseSourceService {
         if (CommonUtils.isBlank(o.getFree())) {
             return new MessageResponse(1, "可试听不能为空！");
         }
-
-
-        int temp = this.courseSourceDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "课程资源名称重复！");
-        }
-
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-//        o.setStatus("1");
-//        o.setCreateUserName(userProp.getName());
-//        o.setCreateUserId(userProp.getUserId());
         this.courseSourceDao.insertSelective(o);
         this.dataBaseLogService.log("添加课程资源", "课程资源", "",
                 o.getId(), o.getId(), userProp);
@@ -131,11 +121,6 @@ public class CourseSourceServiceImpl implements CourseSourceService {
         if (CommonUtils.isBlank(o.getFree())) {
             return new MessageResponse(1, "可试听不能为空！");
         }
-
-
-//        o.setLastModifyDate(new Date());
-//        o.setLastModifyUserName(userProp.getName());
-//        o.setLastModifyUserId(userProp.getUserId());
         this.courseSourceDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更课程资源", "课程资源", "",
                 o.getId(), o.getId(), userProp);
