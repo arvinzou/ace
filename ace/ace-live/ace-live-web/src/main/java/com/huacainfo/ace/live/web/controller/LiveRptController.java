@@ -1,8 +1,11 @@
 package com.huacainfo.ace.live.web.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.model.LiveImg;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,10 @@ public class LiveRptController extends LiveBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private LiveRptService liveRptService;
+
+
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * @throws
@@ -251,6 +258,31 @@ public class LiveRptController extends LiveBaseController {
     @ResponseBody
     public MessageResponse updateAudit(String id,String rst,String text) throws Exception {
         return this.liveRptService.updateAudit(id,rst,text,this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertLiveRpt
+     * @Description: TODO(添加图文直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    @RequestMapping(value = "/www/insertLiveRpt")
+    @ResponseBody
+    public MessageResponse insertLiveRptWww(String jsons) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(rst.getStatus()==0){
+            JSONObject json = JSON.parseObject(jsons);
+            json.put("uid",this.getCurWxUser().getUnionId());
+            LiveRpt obj = JSON.parseObject(((JSONObject) json.get("rpt")).toJSONString(), LiveRpt.class);
+            List<LiveImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), LiveImg.class);
+            return this.liveRptService.insertLiveRpt(obj, imgs);
+        }
+        return rst;
     }
 
 }

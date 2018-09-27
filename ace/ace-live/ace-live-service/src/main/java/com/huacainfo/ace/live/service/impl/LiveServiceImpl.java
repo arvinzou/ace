@@ -114,7 +114,6 @@ public class LiveServiceImpl implements LiveService {
         o.setNop(Long.valueOf(0));
         o.setPop(Long.valueOf(0));
         o.setCreateDate(new Date());
-        o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         o.setDeptId(userProp.getCorpId());
@@ -199,12 +198,17 @@ public class LiveServiceImpl implements LiveService {
      * @version: 2017-12-28
      */
     @Override
-    public MessageResponse deleteLiveByLiveId(String id,
-                                              UserProp userProp) throws Exception {
+    public MessageResponse deleteLiveByLiveId(String id, UserProp userProp) throws Exception {
+        LiveVo o=this.liveDao.selectByPrimaryKey(id);
+        if(CommonUtils.isBlank(o)){
+            return new MessageResponse(1, "提交的主键不存在！");
+        }
+        if(!o.getStatus().equals("0")){
+            return new MessageResponse(1, "已提交审核，不能删除！");
+        }
         this.liveDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除直播", "直播", String.valueOf(id),
-                String.valueOf(id), "直播", userProp);
-        return new MessageResponse(0, "直播删除完成！");
+        this.dataBaseLogService.log("删除直播", "直播", String.valueOf(id), String.valueOf(id), "直播", userProp);
+        return new MessageResponse(0, "删除成功！");
     }
 
     @Override
