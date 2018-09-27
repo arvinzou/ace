@@ -72,6 +72,7 @@ public class LiveController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLive(String jsons) throws Exception {
         Live obj = JSON.parseObject(jsons, Live.class);
+
         return this.liveService
                 .insertLive(obj, this.getCurUserProp());
     }
