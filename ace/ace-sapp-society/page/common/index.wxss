@@ -12,6 +12,7 @@
 .btn {
     width: 690rpx;
     height: 90rpx;
+    margin: 0px auto;
     border-radius: 6rpx;
     line-height: 90rpx;
     text-align: center;
@@ -38,6 +39,12 @@
     background: rgba(217, 217, 217, 1);
 }
 
+.btn-bkClick {
+    background: #fff;
+    border: 1px solid rgba(255, 153, 6, 1);
+    color: rgba(255, 153, 6, 1);
+}
+
 /* 下线条 */
 
 .bottom-line {
@@ -58,6 +65,16 @@
     background: rgba(214, 214, 214, 1);
     font-size: 28rpx;
     color: rgba(255, 255, 255, 1);
+    position: fixed;
+    box-shadow: 0px 2px 8px #aaa;
+}
+
+.steps .step-one {
+    z-index: 100;
+}
+
+.steps .step-two {
+    z-index: 90;
 }
 
 .steps::after {
@@ -97,6 +114,7 @@
 }
 
 /* 提示框样式 */
+
 .prompt {
     padding: 20rpx 30rpx;
     display: table;
@@ -105,4 +123,75 @@
     font-size: 26rpx;
     font-weight: 500;
     color: rgba(255, 153, 6, 1);
+}
+
+.form .form-part {
+    padding: 0rpx 30rpx;
+    background-color: #fff;
+    margin-bottom: 20rpx;
+}
+
+.form .btn-part {
+    padding: 20rpx 0rpx;
+    margin: 70rpx 20rpx 0rpx;
+    display: flex;
+}
+
+.form .input-style {
+    display: flex;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+    height: 100rpx;
+    align-items: center;
+}
+
+.form .switch-style {
+    display: flex;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+    height: 100rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form .textarea-style textarea {
+    width: 100%;
+    height: 380rpx;
+    overflow: auto;
+}
+
+.form .textarea-style .textLen {
+    padding: 15rpx 0 30rpx;
+    text-align: right;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(255, 153, 6, 1);
+}
+
+.form .textarea-style .title {
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+}
+
+.form .input-style .title {
+    width: 140rpx;
+    margin-right: 10rpx;
+}
+
+.form .input-style text {
+    color: #f22;
+}
+
+.form .input-style .input-value {
+    flex-grow: 1;
+    color: rgba(34, 34, 34, 1);
+}
+
+.hidden {
+    display: none !important;
 }
