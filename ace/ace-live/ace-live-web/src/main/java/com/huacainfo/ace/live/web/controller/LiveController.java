@@ -254,9 +254,9 @@ public class LiveController extends LiveBaseController {
     public PageResult<LiveVo> findLiveListWww(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
         SingleResult<UserProp> user=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
         if(user.getStatus()==0){
-            PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
             condition.setDeptId(user.getValue().getCorpId());
             condition.setCreateUserId(user.getValue().getUserId());
+            PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
             if (rst.getTotal() == 0) {
                 rst.setTotal(page.getTotalRecord());
             }

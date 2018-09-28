@@ -1,4 +1,4 @@
-var server = "https://zx.huacainfo.com";
+var server = "http://zx.huacainfo.com";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
 var hlsserver ="http://139.224.0.227:9999/hls/";
@@ -30,7 +30,9 @@ var config = {
     deleteCourseById: `${server}/jxb/www/jxb/deleteCoursById`,
     deleteLiveById: `${server}/jxb/www/jxb/deleteLiveById`,
     proxyService: `${server}/jxb/www/jxb/proxyService`,
-    getLiveListByUserId: `${server}/jxb/www/jxb/getLiveListByUserId`,
+  findLiveList: `${server}/live/live/www/findLiveList`,
     getCourseListByUserId: `${server}/jxb/www/jxb/getCourseListByUserId`
 };
 module.exports = config
+
+

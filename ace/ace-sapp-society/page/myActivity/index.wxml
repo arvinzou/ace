@@ -1,65 +1,74 @@
 <view class='index'>
+  <view class="navbar">
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+  </view>
+  <view hidden="{{currentTab!==0}}">
     <view class='activity-item'>
-        <view class='activity'>
-            <view class='activity-top'>
-                <view class='activity-top-left'>
+      <view class='activity'>
+        <view class='activity-top'>
+          <view class='activity-top-left'>
 
-                </view>
-                <view class='activity-top-right'>
-                    <view class='title'>
-                        <text>芙蓉社区举行电脑普及致力芙蓉社区举行电脑普及致力</text>
-                    </view>
-                    <view class='activity-label'>公益活动</view>
-                    <view class='tips'>
-                        <text>报名审核通过后奖励爱心币X50</text>
-                    </view>
-                </view>
+          </view>
+          <view class='activity-top-right'>
+            <view class='title'>
+              <text>芙蓉社区举行电脑普及致力芙蓉社区举行电脑普及致力</text>
             </view>
-            <view class='activity-bottom'>
-                <view class='adopt'>发布已通过</view>
+            <view class='activity-label'>公益活动</view>
+            <view class='tips'>
+              <text>报名审核通过后奖励爱心币X50</text>
             </view>
+          </view>
         </view>
+        <view class='activity-bottom'>
+          <view class='adopt'>发布已通过</view>
+        </view>
+      </view>
     </view>
     <view class='activity-item'>
-        <view class='activity'>
-            <view class='activity-top'>
-                <view class='activity-top-left'>
+      <view class='activity'>
+        <view class='activity-top'>
+          <view class='activity-top-left'>
 
-                </view>
-                <view class='activity-top-right'>
-                    <view class='title'>
-                        <text>芙蓉社区举行电脑普及致力芙蓉社区举行电脑普及致力</text>
-                    </view>
-                    <view class='activity-label'>公益活动</view>
-                    <view class='tips'>
-                        <text>报名审核通过后奖励爱心币X50</text>
-                    </view>
-                </view>
+          </view>
+          <view class='activity-top-right'>
+            <view class='title'>
+              <text>芙蓉社区举行电脑普及致力芙蓉社区举行电脑普及致力</text>
             </view>
-            <view class='activity-bottom'>
-                <view class='audit'>签到待审核</view>
+            <view class='activity-label'>公益活动</view>
+            <view class='tips'>
+              <text>报名审核通过后奖励爱心币X50</text>
             </view>
+          </view>
         </view>
+        <view class='activity-bottom'>
+          <view class='audit'>签到待审核</view>
+        </view>
+      </view>
     </view>
     <view class='activity-item'>
-        <view class='activity'>
-            <view class='activity-top'>
-                <view class='activity-top-left'>
+      <view class='activity'>
+        <view class='activity-top'>
+          <view class='activity-top-left'>
 
-                </view>
-                <view class='activity-top-right'>
-                    <view class='title'>
-                        <text>芙蓉社区举行电脑普及致力芙蓉社区举行电脑普及致力</text>
-                    </view>
-                    <view class='activity-label'>公益活动</view>
-                    <view class='tips'>
-                        <text>报名审核通过后奖励爱心币X50</text>
-                    </view>
-                </view>
+          </view>
+          <view class='activity-top-right'>
+            <view class='title'>
+              <text>芙蓉社区举行电脑普及致力芙蓉社区举行电脑普及致力</text>
             </view>
-            <view class='activity-bottom'>
-                <view class='report'>待报道</view>
+            <view class='activity-label'>公益活动</view>
+            <view class='tips'>
+              <text>报名审核通过后奖励爱心币X50</text>
             </view>
+          </view>
         </view>
+        <view class='activity-bottom'>
+          <view class='report'>待报道</view>
+        </view>
+      </view>
     </view>
+  </view>
+<view hidden="{{currentTab!==1}}">
+<navigator url="../myLive/index">直播</navigator>
+
+</view>
 </view>

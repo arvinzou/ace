@@ -106,3 +106,44 @@
     clear: both;
     display: block;
 }
+
+
+
+.navbar {
+   /* z-index: 100;*/
+    width: 100%;
+    /*position: fixed; */
+    font-weight: bold;
+    font-size: 32rpx;
+    color: #666;
+    flex: none;
+    display: flex;
+    background: #fff;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.navbar .item.active {
+    font-size: 34rpx;
+    color: #FF9906;
+}
+
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    width: 60rpx;
+    margin: 0 auto;
+    background:#FF9906;
+    border-radius: 10%;
+}

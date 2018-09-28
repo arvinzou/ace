@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    currentTab: 0,
+    navbar: ['线下活动', '秀我直播','文明随手拍','我有点子','邻里圈子']
   },
 
   /**
@@ -62,5 +63,15 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+    navbarTap: function (e) {
+    let that = this;
+    if (that.data.currentTab === e.target.dataset.idx) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.idx
+      })
+    }
   }
 })
