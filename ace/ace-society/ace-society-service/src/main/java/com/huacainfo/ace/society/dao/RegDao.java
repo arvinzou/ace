@@ -1,6 +1,7 @@
 package com.huacainfo.ace.society.dao;
 
 import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.society.vo.CustomerVo;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -13,4 +14,5 @@ public interface RegDao {
     int isExitByTel(@Param("tel") String tel);
 
 
+    CustomerVo findByUserId(String userId);
 }

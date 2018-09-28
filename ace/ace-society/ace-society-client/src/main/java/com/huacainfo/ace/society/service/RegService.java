@@ -3,6 +3,7 @@ package com.huacainfo.ace.society.service;
 import com.huacainfo.ace.common.model.BaseModel;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.society.vo.CustomerVo;
 
 /**
  * @Auther: Arvin
@@ -24,4 +25,11 @@ public interface RegService {
      * @return
      */
     ResultResponse register(String regType, BaseModel regInfo, Userinfo userinfo) throws Exception;
+
+    /**
+     * 根据用户ID，查找客户资料
+     *
+     * @return CustomerVo
+     */
+    CustomerVo findByUserId(String userId);
 }

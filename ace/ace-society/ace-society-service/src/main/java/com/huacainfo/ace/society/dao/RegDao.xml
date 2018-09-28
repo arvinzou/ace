@@ -28,4 +28,58 @@
         select count(*) from portal.users where mobile = #{tel} or account = #{tel}
     </select>
 
+    <!--**********************************-->
+    <resultMap id="CustomerResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
+        <discriminator javaType="String" column="regType">
+            <case value="1" resultMap="PersonResultMap"/>
+            <case value="2" resultMap="SocietyOrgResultMap"/>
+        </discriminator>
+    </resultMap>
+
+    <resultMap id="PersonResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
+        <result column="regType" jdbcType="VARCHAR" property="regType"/>
+        <association property="person" column="pId" javaType="com.huacainfo.ace.society.model.PersonInfo">
+            <id property="id" jdbcType="VARCHAR" column="pId"/>
+            <result column="pName" jdbcType="VARCHAR" property="realName"/>
+            <result column="pMobile" jdbcType="VARCHAR" property="mobilePhone"/>
+            <result column="politicalStatus" jdbcType="CHAR" property="politicalStatus"/>
+            <result column="pAccPoints" jdbcType="INTEGER" property="accPoints"/>
+            <result column="pValidPoints" jdbcType="INTEGER" property="validPoints"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="SocietyOrgResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
+        <result column="regType" jdbcType="VARCHAR" property="regType"/>
+        <association property="person" column="orgId" javaType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+            <id property="id" jdbcType="VARCHAR" column="orgId"/>
+            <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
+            <result column="orgType" jdbcType="CHAR" property="orgType"/>
+            <result column="orgAddr" jdbcType="VARCHAR" property="orgAddr"/>
+            <result column="orgCover" jdbcType="VARCHAR" property="orgCover"/>
+            <result column="orgSummary" jdbcType="VARCHAR" property="orgSummary"/>
+            <result column="contactPerson" jdbcType="VARCHAR" property="contactPerson"/>
+            <result column="contactPhone" jdbcType="VARCHAR" property="contactPhone"/>
+            <result column="orgAccPoints" jdbcType="INTEGER" property="accPoints"/>
+            <result column="orgValidPoints" jdbcType="INTEGER" property="validPoints"/>
+        </association>
+    </resultMap>
+
+
+    <select id="findByUserId" parameterType="java.lang.String" resultMap="CustomerResultMap">
+        select
+          t.user_level as regType,
+          p.id as pId,
+          p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
+          p.accPoints as pAccPoints, p.validPoints as pValidPoints,
+
+          org.id as orgId
+          org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
+	      org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
+	      org.validPoints as orgValidPoints
+        from portal.users t
+        left join society.person_info p on t.user_id = p.id
+        LEFT join society.society_org_info s on t.user_id =  s.id
+        where t.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

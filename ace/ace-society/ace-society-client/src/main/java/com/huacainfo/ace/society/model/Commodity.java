@@ -24,7 +24,7 @@ public class Commodity extends BaseModel {
 
     private BigDecimal salePrice;
     /**
-     * 商品状态0-下架1-在售
+     * 商品状态0-下架 1-在售
      */
     private String state;
 
