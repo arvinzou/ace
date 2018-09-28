@@ -64,13 +64,13 @@ Page({
       function (data) {
         console.log(data.data);
         var formData = data.value;
-        formData.files = [formData.imageSrc];
         formData.date = formData.startTime.substring(0, 10);
         formData.time = formData.startTime.substring(11, 20);
         formData.typeIndex = util.indexOf(that.data.typeCodes, formData.type);
         that.setData({
           categoryItems: util.initRadioGroupData(that.data.categoryItems, formData.category),
-          formData
+          formData,
+          files: [formData.imageSrc]
         });
       }
     );

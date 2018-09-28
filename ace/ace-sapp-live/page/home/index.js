@@ -105,12 +105,7 @@ Page({
   //删除事件
   del: function (e) {
     var that=this;
-    var url = '';
-    if (that.data.currentTab == 0) {
-      url = cfg.deleteLiveById;
-    } else {
-      url = cfg.deleteCourseById;
-    }
+    var url = cfg.deleteLiveByLiveId;
     console.log();
     util.request(url, { id: e.currentTarget.dataset.id},
       function (data) {

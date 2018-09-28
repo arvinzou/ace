@@ -24,7 +24,7 @@ var config = {
     insertLive: `${server}/live/live/www/insertLive`,
     updateLive: `${server}/live/live/www/updateLive`,
     selectLiveByPrimaryKey: `${server}/live/live/www/selectLiveByPrimaryKey`,
-    deleteLiveById: `${server}/jxb/www/jxb/deleteLiveById`,
+  deleteLiveByLiveId: `${server}/live/live/www/deleteLiveByLiveId`,
     proxyService: `${server}/jxb/www/jxb/proxyService`,
     findLiveList: `${server}/live/live/www/findLiveList`
 };

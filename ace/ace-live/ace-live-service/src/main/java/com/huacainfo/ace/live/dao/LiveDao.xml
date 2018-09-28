@@ -33,7 +33,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        t.id,    t.name,   t.category,t.deptId,  t.endTime,  t.startTime,t.remark,   t.nop,   t.pop,
+        t.id,    t.name,   t.category,t.deptId,  t.endTime,  t.startTime,t.remark,   t.nop,   t.pop,t.rtmpUrl,
        t.imageSrc, t.status,t.createUserName, t.createDate,t.auditStatus
     </sql>
     <sql id="Blob_Column_List">
