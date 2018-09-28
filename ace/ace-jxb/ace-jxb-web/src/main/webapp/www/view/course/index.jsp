@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<title>课程列表</title>
+		<title>精品课程</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />

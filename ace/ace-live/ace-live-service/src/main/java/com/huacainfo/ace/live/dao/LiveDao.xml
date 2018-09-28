@@ -59,7 +59,7 @@
         latitude, longitude, status,
         createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
-        content)
+        content,auditStatus)
         values (#{id,jdbcType=VARCHAR},  #{name,jdbcType=VARCHAR},
         #{category,jdbcType=VARCHAR}, #{deptId,jdbcType=VARCHAR}, #{endTime,jdbcType=TIMESTAMP},
         #{startTime,jdbcType=TIMESTAMP},
@@ -69,7 +69,7 @@
         #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
-        #{content,jdbcType=LONGVARCHAR})
+        #{content,jdbcType=LONGVARCHAR},#{auditStatus})
     </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.live.model.Live">
@@ -110,6 +110,9 @@
         </if>
         <if test="condition.auditStatus!=null and condition.auditStatus!=&quot;&quot;">
             and t.auditStatus =#{condition.auditStatus,jdbcType=CHAR}
+        </if>
+        <if test="condition.createUserId!=null and condition.createUserId!=&quot;&quot;">
+            and t.createUserId =#{condition.createUserId,jdbcType=CHAR}
         </if>
     </sql>
     <select id="findCount" resultType="int">
@@ -414,6 +417,12 @@
         update live
         set
         status = #{status}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateAuditStatus">
+        update live
+        set
+        auditStatus = #{status}
         where id = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>

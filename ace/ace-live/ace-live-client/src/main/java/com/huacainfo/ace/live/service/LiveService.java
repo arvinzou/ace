@@ -119,4 +119,19 @@ public interface LiveService {
      * @version: 2018-09-18
      */
     public abstract MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(设置直播状态1预告2直播中3结束)
+     * @param: @param id
+     * @param status
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    public abstract MessageResponse updateAuditStatus(String id,String status, UserProp userProp) throws Exception;
 }
