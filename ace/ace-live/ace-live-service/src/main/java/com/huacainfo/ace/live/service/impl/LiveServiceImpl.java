@@ -85,7 +85,9 @@ public class LiveServiceImpl implements LiveService {
     @Override
     public MessageResponse insertLive(Live o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
+        if(CommonUtils.isBlank(o.getId())){
+            o.setId(GUIDUtil.getGUID());
+        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }

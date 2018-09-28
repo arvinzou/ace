@@ -29,7 +29,8 @@ Page({
       { name: '图文直播', value: '1' }
     ],
     typeCodes: ["01", "02", "03", "04"],
-    types: ["亲子关系", "婚姻家庭", "职场压力",'其他']
+    types: ["亲子关系", "婚姻家庭", "职场压力",'其他'],
+    files:[]
   },
   onReady: function (res) {
   },
@@ -98,7 +99,7 @@ Page({
     var now = new Date();
     now.setDate(now.getDate() + 10);
     var data = util.extend(that.data.formData, e.detail.value);
-    data.imageSrc = that.data.formData.files[0];
+    data.imageSrc = that.data.files[0];
     data.startTime = that.data.formData.date + " " + that.data.formData.time
     data.endTime = util.formatTime(now,"Y-M-D h:m:s");
     console.log(data);
@@ -129,6 +130,7 @@ Page({
       }
     );
   },
+
   valueChange: function (e) {
     console.log(e);
     if (e.detail && e.detail.value.length > 0) {
@@ -137,6 +139,7 @@ Page({
       });
     }
   },
+
   chooseWxImage: function (type) {
     var that = this;
     wx.chooseImage({
@@ -160,10 +163,10 @@ Page({
               wx.hideLoading();
               var obj = JSON.parse(resp.data);
               console.log(obj);
-              var formData = that.data.formData;
-              formData.files.push(obj.file_path);
+              var files = that.data.files;
+              files.push(obj.file_path);
               that.setData({
-                formData: formData
+                files: files
               });
             },
             fail: function (res) {
@@ -186,7 +189,7 @@ Page({
   },
   chooseImage: function () {
     let that = this;
-    var files = that.data.formData.files;
+    var files = that.data.files;
     if (files&&files.length > 0) {
       wx.showModal({ title: "提示", showCancel:false,content: "封面限制为单个图片" });
       return ;
@@ -208,19 +211,20 @@ Page({
     var idx = e.target.dataset.index;
     console.log(idx);
     let that = this;
-    var files = that.data.formData.files;
+    var files = that.data.files;
     if (files.length > 0) {
       files.remove(idx);
     }
-    that.setData({ formData: that.data.formData});
+    that.setData({ files: that.data.files});
   },
   formReset: function (e) {
     console.log("clear");
-    that.data.formData.files = [];
+    that.data.files = [];
     this.setData({
       formData: that.data.formData
     });
   },
+
   categoryChange: function (e) {
     console.log('radio发生change事件，携带value值为：', e.detail.value);
     var categoryItems = this.data.categoryItems;
@@ -242,23 +246,16 @@ Page({
   bindDateChange: function (e) {
     var that=this;
     that.data.formData.date = e.detail.value;
-    this.setData({
-      formData: that.data.formData
-    })
+
   },
   bindTimeChange: function (e) {
     var that = this;
     that.data.formData.time = e.detail.value + ":00";
-    this.setData({
-      formData: that.data.formData
-    })
+ 
   },
   bindTypeChange: function (e) {
     console.log('picker type code 发生选择改变，携带值为', e.detail.value);
     var that=this;
     that.data.formData.typeIndex = e.detail.value;
-    that.setData({
-      formData: that.data.formData
-    })
   },
 });

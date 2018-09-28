@@ -3,7 +3,7 @@
     <view class="kind-list">
 
       <view class="kind-list-item">
-        <input name="name" class="weui-flex__item-body" value="{{formData.name}}" maxlength="10" placeholder="请输入标题" />
+        <input name="name" class="weui-flex__item-body" value="{{formData.name}}" maxlength="10" placeholder="请输入直播名称" />
       </view>
       <view class="kind-list-item">
 
@@ -34,9 +34,9 @@
           </view>
           <view class="weui-uploader__bd">
             <view class="weui-uploader__files" id="uploaderFiles">
-              <block wx:for="{{formData.files}}" wx:for-index="idx" wx:key="*this">
+              <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
                 <view class="cover" id="{{item}}">
-                  <image src="{{serverfile}}{{item}}" data-id="{{item}}" mode="aspectFill" class='coverImg' bindtap="previewImage" />
+                  <image src="{{item}}" data-id="{{item}}" mode="aspectFill" class='coverImg' bindtap="previewImage" />
                   <image class="removeImgBtn" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
                 </view>
               </block>
