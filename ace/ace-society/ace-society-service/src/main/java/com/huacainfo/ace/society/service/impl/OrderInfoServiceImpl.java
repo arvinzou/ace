@@ -23,6 +23,7 @@ import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.OrderInfoService;
+import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.service.RegService;
 import com.huacainfo.ace.society.vo.CommodityVo;
 import com.huacainfo.ace.society.vo.CustomerVo;
@@ -68,6 +69,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     private SocietyOrgInfoDao societyOrgInfoDao;
     @Autowired
     private OrderDetailDao orderDetailDao;
+    @Autowired
+    private PointsRecordService pointsRecordService;
 
 
     @Autowired
@@ -382,6 +385,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             if (updCount != 1) {
                 throw new CustomException("更新用户爱心币失败");
             }
+            //积分流水
+
         } else if (RegType.ORG.equals(customerVo.getRegType())) {
             SocietyOrgInfo org = societyOrgInfoDao.selectByPrimaryKey(info.getUserId());
             if (payPoints > org.getValidPoints()) {
@@ -396,6 +401,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             if (updCount != 1) {
                 throw new CustomException("更新用户爱心币失败");
             }
+            //积分流水
         } else {
             return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
         }
