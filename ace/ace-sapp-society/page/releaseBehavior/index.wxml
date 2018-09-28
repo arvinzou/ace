@@ -1,0 +1,30 @@
+<view class='index'>
+  <view class='tips'><text>请在遵守国家法律的情况下发表内容，待审核发布后发布平台，您将得到50爱心币</text></view>
+  <view class='form-box'>
+    <view class='form'>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <view class='form-label'>
+                <view class='form-label-left'>行为类型<text>*</text></view>
+                <view class='form-label-right'>
+                    <picker mode = selector bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        <view class="picker">{{array[index]}}</view>
+                    </picker>
+                </view>
+            </view>
+            <view class='section-area'>
+                <textarea placeholder="文字是丰富内容的一种方式..." auto-focus class='idea-content' maxlength='200' placeholder-class='input-area'/>
+            </view>
+        </form>
+        </view>
+  </view>
+  <view class='form-box'>
+        <view class='form'>
+            <view class='file'>
+                <image src='../../image/add.png' class='file-attach'></image>
+            </view>
+        </view>
+  </view>
+</view>
+<view class='footer'>
+    <button class='release-btn'>发表</button>
+</view>
