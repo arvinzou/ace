@@ -10,10 +10,12 @@
         <view class="live-title">
           <view>{{item.name}}</view>
         </view>
-        <view class="status-box {{item.status=='1'?'bg-danger':''}}{{item.status=='2'?'bg-info':''}}">{{item.status=='0'?'暂存':''}}{{item.status=='1'?'直播中':''}}{{item.status=='2'?'历史':''}}</view>
+        <view class="status-box {{item.status=='2'?'bg-danger':''}}{{item.status=='1'?'bg-info':''}}">{{item.status=='1'?'预播':''}}{{item.status=='2'?'直播':''}}{{item.status=='3'?'历史':''}}
+        <text wx:if="{{item.status!=1}}"> {{item.nop}}/{{item.pop}}</text>
+        </view>
 
         <view class="audit-status-box {{item.auditStatus=='3'?'bg-danger':''}}{{item.auditStatus=='2'?'bg-success':''}}">{{item.auditStatus=='0'?'暂存':''}}{{item.auditStatus=='1'?'待审':''}}{{item.auditStatus=='2'?'通过':''}}{{item.auditStatus=='3'?'驳回':''}}</view>
-        <view class='time-box'>{{item.startTime}}</view>
+        <view class='time-box' wx:if="{{item.status==1}}">{{item.startTime}}</view>
       </view>
       <view class="opt">
         <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>

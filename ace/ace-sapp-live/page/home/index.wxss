@@ -209,11 +209,11 @@
   left:15rpx;
   top:15rpx;
   border-radius: 10rpx;
-  color:blue;
+  color:#fff;
   text-align: center;
   padding: 5rpx;
-  border:1rpx solid blue;
-  background:hsl(0, 0%, 91%);
+  border:1rpx solid #fff;
+  background:blue;
 }
 .bg-danger{
     background:red;
