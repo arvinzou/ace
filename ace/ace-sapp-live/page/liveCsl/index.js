@@ -32,16 +32,6 @@ Page({
     types: ["亲子关系", "婚姻家庭", "职场压力",'其他']
   },
   onReady: function (res) {
-    console.log('index.js.onReady');
-    var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
   },
   initData:function(param){
     console.log('initData');
@@ -69,10 +59,10 @@ Page({
   },
   initEdit: function (param) {
     var that=this;
-    util.request(cfg.getLiveById, {id: that.data.param.id},
+    util.request(cfg.selectLiveByPrimaryKey, {id: that.data.param.id},
       function (data) {
         console.log(data.data);
-        var formData = data.data;
+        var formData = data.value;
         formData.files = [formData.imageSrc];
         formData.date = formData.startTime.substring(0, 10);
         formData.time = formData.startTime.substring(11, 20);
@@ -114,11 +104,11 @@ Page({
     console.log(data);
     var url = '';
     if (that.data.param.act=='add'){
-      url = cfg.insertLiveSapp;
+      url = cfg.insertLive;
       data.nop = 0;
       data.pop = 0;
     }else{
-      url = cfg.updateLiveSapp;
+      url = cfg.updateLive;
     }
     util.request(url, { jsons: JSON.stringify(data) },
       function (data) {
@@ -164,7 +154,7 @@ Page({
             header: {
               'content-type': 'multipart/form-data'
             },
-            formData: { id: that.data.fromData.id, collectionName: "jxb", companyId: cfg.companyId },
+            formData: {collectionName: "live", companyId: cfg.companyId },
             success: function (resp) {
               console.log(resp);
               wx.hideLoading();

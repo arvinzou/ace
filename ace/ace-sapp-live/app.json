@@ -4,8 +4,7 @@
     "page/me/index",
     "page/live/index",
     "page/rpt/index",
-    "page/liveCsl/index",
-    "page/courseCsl/index"
+    "page/liveCsl/index"
   ],
     "window": {
       "navigationBarTextStyle": "black",

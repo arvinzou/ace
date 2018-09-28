@@ -15,7 +15,7 @@
         </view>
 
         <view class="audit-status-box {{item.auditStatus=='3'?'bg-danger':''}}{{item.auditStatus=='2'?'bg-success':''}}">{{item.auditStatus=='0'?'暂存':''}}{{item.auditStatus=='1'?'待审':''}}{{item.auditStatus=='2'?'通过':''}}{{item.auditStatus=='3'?'驳回':''}}</view>
-        <view class='time-box' wx:if="{{item.status==1}}">{{item.startTime}}</view>
+        <view class='time-box' wx:if="{{item.status==1}}">开始时间：{{item.startTime}}</view>
       </view>
       <view class="opt">
         <view class="opt-btn btn-edit" catchtap="edit" data-id="{{item.id}}">编辑</view>

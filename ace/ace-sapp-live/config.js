@@ -1,4 +1,4 @@
-var server = "http://zx.huacainfo.com";
+var server = "http://127.0.0.1";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
 var hlsserver ="http://139.224.0.227:9999/hls/";
@@ -16,22 +16,17 @@ var config = {
     frontColor: '#000000',
     backgroundColor: "#ffffff",
     loginUrl: `${server}/portal/www/authority.do`,
-    checkImageUrl: `${server}/uf/www/captcha/image.do`,
-    uploadUrl: `${server}/jxb/www/jxb/upload`,
+    checkImageUrl: `${server}/live/www/captcha/image`,
+    uploadUrl: `${server}/portal/www/upload.do`,
     getLiveMsgList: `${server}/jxb/www/jxb/getLiveMsgList`,
     insertLiveRptSapp: `${server}/jxb/www/jxb/insertLiveRptSapp`,
     getLiveRptList: `${server}/jxb/www/jxb/getLiveRptList`,
-    insertLiveSapp: `${server}/jxb/www/jxb/insertLiveSapp`,
-    insertCourseSapp: `${server}/jxb/www/jxb/insertCourseSapp`,
-    updateLiveSapp: `${server}/jxb/www/jxb/updateLiveSapp`,
-    updateCourseSapp: `${server}/jxb/www/jxb/updateCourseSapp`,
-    getCoursById: `${server}/jxb/www/jxb/getCoursById`,
-    getLiveById: `${server}/jxb/www/jxb/getLiveById`,
-    deleteCourseById: `${server}/jxb/www/jxb/deleteCoursById`,
+    insertLive: `${server}/live/live/www/insertLive`,
+    updateLive: `${server}/live/live/www/updateLive`,
+    selectLiveByPrimaryKey: `${server}/live/live/www/selectLiveByPrimaryKey`,
     deleteLiveById: `${server}/jxb/www/jxb/deleteLiveById`,
     proxyService: `${server}/jxb/www/jxb/proxyService`,
-  findLiveList: `${server}/live/live/www/findLiveList`,
-    getCourseListByUserId: `${server}/jxb/www/jxb/getCourseListByUserId`
+    findLiveList: `${server}/live/live/www/findLiveList`
 };
 module.exports = config
 

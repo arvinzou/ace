@@ -185,9 +185,9 @@
   </select>
 
   <select id="selectSysUserByUnionId" resultType="map">
-    select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+    select t.user_id userId,t.mobile mobile,t.name userName,a.department_name corpName,t.department_id corpId from users t left join department a
     on t.department_id=a.department_id
-    where t.appOpenId=#{unionId} limit 0,1
+    where (t.appOpenId=#{unionId} or t.openId=#{unionId}) limit 0,1
   </select>
 
   <select id="selectSysUserByMobile" resultType="map">

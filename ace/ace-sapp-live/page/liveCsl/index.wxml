@@ -23,16 +23,7 @@
         <view class="weui-textarea-counter">{{maxRemark}}/200</view>
       </view>
 
-      <view class="kind-list-item" style='display: flex;flex-direction: row'>
-        <view class="packerDate">
-          内容类型
-        </view>
-        <view class="packerDate">
-          <picker bindchange="bindTypeChange" name="type" value="{{typeCodes[formData.typeIndex]}}" range="{{types}}">
-            <view class="weui-select">{{types[formData.typeIndex]}}</view>
-          </picker>
-        </view>
-      </view>
+
 
 
       <view class="kind-list-item">
@@ -82,11 +73,6 @@
       <view class="kind-list-item">
         <textarea name="rtmpUrl" value="{{formData.rtmpUrl}}" maxlength="200" class="weui-textarea" placeholder="请输入直播url" style="height: 100rpx" />
       </view>
-
-      <view class="kind-list-item">
-        <input name="addr" value="{{formData.addr}}" class="weui-flex__item-body" maxlength="50" placeholder="请输入直播所在城市" />
-      </view>
-
       <view class="kind-list-item weui-flex">
         <view class="weui-flex__item-icon">
           <image class="icon" src="../../image/checkcode.png" />
@@ -94,7 +80,6 @@
         <input name="captcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="验证码" />
         <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>
       </view>
-
       <view>
         <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:100%;color:#fff;background-color:blue; border-radius: 2px;" formType="submit">提交</button>
       </view>

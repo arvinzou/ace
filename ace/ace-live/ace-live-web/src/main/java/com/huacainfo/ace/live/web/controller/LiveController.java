@@ -289,4 +289,21 @@ public class LiveController extends LiveBaseController {
         }
         return rst;
     }
+
+    /**
+     * @throws
+     * @Title:selectLiveByPrimaryKey
+     * @Description: TODO(获取直播)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Live>
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/www/selectLiveByPrimaryKey")
+    @ResponseBody
+    public SingleResult<LiveVo> selectLiveByPrimaryKeyWww(String id)
+            throws Exception {
+        return this.liveService.selectLiveByPrimaryKey(id);
+    }
 }
