@@ -103,5 +103,5 @@ public interface OrderInfoService {
      * @param info 订单信息
      * @return ResultResponse
      */
-    ResultResponse create(OrderInfoVo info);
+    ResultResponse create(OrderInfoVo info) throws Exception;
 }

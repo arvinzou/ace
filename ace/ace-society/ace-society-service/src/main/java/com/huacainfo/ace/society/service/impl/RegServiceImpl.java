@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.RegDao;
 import com.huacainfo.ace.society.model.PersonInfo;
@@ -20,6 +21,11 @@ import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.PersonInfoService;
 import com.huacainfo.ace.society.service.RegService;
 import com.huacainfo.ace.society.service.SocietyOrgInfoService;
+import com.huacainfo.ace.society.vo.CustomerVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +49,19 @@ public class RegServiceImpl implements RegService {
     private PersonInfoService personInfoService;
     @Autowired
     private SocietyOrgInfoService societyOrgInfoService;
+    @Autowired
+    private UsersService usersService;
+
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
 
     /**
      * 判断该号码是否已经注册过
@@ -178,4 +197,33 @@ public class RegServiceImpl implements RegService {
         u.setName("system");
         return u;
     }
+
+    /**
+     * 根据用户ID，查找客户资料
+     *
+     * @return
+     */
+    @Override
+    public CustomerVo findByUserId(String userId) {
+        SqlSession session = getSqlSession();
+        RegDao dao = session.getMapper(RegDao.class);
+
+        try {
+            //用户资料
+            CustomerVo customerVo = dao.findByUserId(userId);
+            return customerVo;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return null;
+    }
+
+
 }
