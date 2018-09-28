@@ -3,7 +3,7 @@
          <text>封面图（固定）</text>
     </view>
     <view class='ideaList'>
-        <view class='ideaItem'>
+        <view class='ideaItem' bindtap='showDetal'>
             <view class='title_box'><text>健全公共文体设施实施办法健全公共文体设施实施办法健全公共文体设施实施办法</text></view>
             <view class='content_box'><text>可以购买一些健身器材，让居民锻炼，建图书馆可以购买一些健身器材，让居民锻炼，建图书馆
             </text></view>
@@ -18,7 +18,7 @@
                 </view>
             </view>
         </view>
-        <view class='ideaItem'>
+        <view class='ideaItem' bindtap='showDetal'>
             <view class='title_box'><text>健全公共文体设施实施办法健全公共文体设施实施办法健全公共文体设施实施办法</text></view>
             <view class='content_box'><text>可以购买一些健身器材，让居民锻炼，建图书馆可以购买一些健身器材，让居民锻炼，建图书馆
             </text></view>
@@ -33,7 +33,7 @@
                 </view>
             </view>
         </view>
-        <view class='ideaItem'>
+        <view class='ideaItem' bindtap='showDetal'>
             <view class='title_box'><text>健全公共文体设施实施办法健全公共文体设施实施办法健全公共文体设施实施办法</text></view>
             <view class='content_box'><text>可以购买一些健身器材，让居民锻炼，建图书馆可以购买一些健身器材，让居民锻炼，建图书馆
             </text></view>

@@ -45,4 +45,7 @@
             </swiper-item>
         </swiper>
     </view>
+    <view class='camera-box' bindtap='releaseBehavior'>
+        <image class='camera' src='../../image/camera.png'></image>
+    </view>
 </view>
