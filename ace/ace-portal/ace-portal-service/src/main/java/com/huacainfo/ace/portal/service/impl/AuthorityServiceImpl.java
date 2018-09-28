@@ -310,13 +310,13 @@ public class AuthorityServiceImpl implements AuthorityService {
 		return new MessageResponse(0,"OK");
 	}
 	@Override
-	public  SingleResult<UserProp> getCurUserPropByOpenId(String openId)throws Exception{
+	public  SingleResult<UserProp> getCurUserPropByOpenId(String unionId)throws Exception{
 		UserProp o=new UserProp();
 		SingleResult<UserProp> rst=new SingleResult(0,"成功。");
-		if (StringUtils.isEmpty(openId)) {
-			return new SingleResult(1, "没有获取到微信用户信息openId！");
+		if (StringUtils.isEmpty(unionId)) {
+			return new SingleResult(1, "没有获取到微信用户信息unionId！");
 		}
-		Users users = wxUserDao.selectSysUserByOpenid(openId);
+		Users users = wxUserDao.selectSysUserByOpenid(unionId);
 		if (null == users) {
 			return new SingleResult(1, "未授权的微信用户，请联系系统管理员！");
 		}
@@ -324,7 +324,8 @@ public class AuthorityServiceImpl implements AuthorityService {
 		o.setUserId(users.getUserId());
 		o.setCorpId(users.getDepartmentId());
 		o.setAreaCode(users.getAreaCode());
-		o.setOpenId(openId);
+		o.setOpenId(unionId);
+		o.setAppOpenId(unionId);
 		rst.setValue(o);
 		return rst;
 	}

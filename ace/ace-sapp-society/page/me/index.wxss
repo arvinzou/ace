@@ -57,6 +57,9 @@
     border-radius: 20rpx;
     border: none;
     outline: none;
+    padding-left:0 !important;
+    padding-right:0 !important;
+    margin-left:0;
 }
 .user-bottom{
     width: 100%;

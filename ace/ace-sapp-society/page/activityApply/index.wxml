@@ -1,0 +1,133 @@
+<scroll-view scroll-y class='index' scroll-top='{{ topNum }}'>
+    <view class='steps'>
+        <view class='step step-one {{stepNum==1?"step-action":""}}  step-one'>基本信息</view>
+        <view class='step step-two {{stepNum==2?"step-action":""}}'>活动详情</view>
+        <view class='step-end {{stepNum==3?"step-action":""}}'>发布成功</view>
+    </view>
+    <view class='form'>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <view class='partOne {{stepNum==1?"":"hidden"}}'>
+                <view class='prompt'>活动主办成功，活动发起者可获得50爱心币</view>
+                <view class='cover'>
+                    添加活动封面
+                </view>
+                <view class='form-part'>
+                    <view class="input-style bottom-line">
+                        <view class="title">活动标题
+                            <text>*</text>
+                        </view>
+                        <input class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">发起者
+                            <text>*</text>
+                        </view>
+                        <input class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">活动地点
+                            <text>*</text>
+                        </view>
+                        <input class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">活动人数
+                            <text>*</text>
+                        </view>
+                        <input class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">开始时间
+                            <text>*</text>
+                        </view>
+                        <picker class='input-value' mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">结束时间
+                            <text>*</text>
+                        </view>
+                        <picker class='input-value' mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="switch-style bottom-line">
+                        <view class="title">活动开始时间前均可报名
+                        </view>
+                        <switch checked bindchange="switch1Change" />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">报名截止
+                            <text>*</text>
+                        </view>
+                        <picker class='input-value' mode="multiSelector" value="{{dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][dateTime[0]]}}-{{dateTimeArray[1][dateTime[1]]}}-{{dateTimeArray[2][dateTime[2]]}} {{dateTimeArray[3][dateTime[3]]}}:{{dateTimeArray[4][dateTime[4]]}}
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+
+
+                <view class='btn-part'>
+                    <view bindtap='nextOne' class='btn btn-clicking'>
+                        下一步
+                    </view>
+                </view>
+
+            </view>
+
+
+            <view class='partTwo {{stepNum==2?"":"hidden"}}'>
+                <view class='form-part'>
+                    <view class="textarea-style ">
+                        <view class="title bottom-line">活动目的
+                            <text>*</text>
+                        </view>
+                        <textarea maxlength='300' />
+                        <view class='textLen'>200</view>
+                    </view>
+                </view>
+
+                <view class='form-part'>
+                    <view class="textarea-style">
+                        <view class="title bottom-line">活动方式
+                            <text>*</text>
+                        </view>
+                        <textarea maxlength='300' />
+                        <view class='textLen'>210</view>
+                    </view>
+                </view>
+
+
+                <view class='btn-part'>
+                    <view bindtap='previousOne' class='btn btn-bkClick'>
+                        上一步
+                    </view>
+                    <view bindtap='nextOne' class='btn btn-clicking'>
+                        提交
+                    </view>
+                </view>
+
+            </view>
+
+        </form>
+    </view>
+    <view class='reuslt {{stepNum==3?"":"hidden"}}'>
+        <view class='massage'>
+            <icon type="success" size="80" />
+            <text class='fontStyle1'>发布成功</text>
+            <text class='fontStyle2'>活动由芙蓉街道统一管理</text>
+            <text class='fontStyle3'>待审核通过后活动进入平台</text>
+            <text class='fontStyle3'>联系电话：0736-2323252</text>
+        </view>
+        <view class='btn btn-clicking'>
+            关闭
+        </view>
+    </view>
+</scroll-view>

@@ -1,5 +1,7 @@
 package com.huacainfo.ace.live.web.controller;
 
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,8 @@ public class LiveController extends LiveBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private LiveService liveService;
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * @throws
@@ -48,13 +52,11 @@ public class LiveController extends LiveBaseController {
     @RequestMapping(value = "/findLiveList")
     @ResponseBody
     public PageResult<LiveVo> findLiveList(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),
-                        page.getOrderBy());
+        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
         condition.setDeptId(this.getCurUserProp().getCorpId());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
@@ -72,6 +74,7 @@ public class LiveController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLive(String jsons) throws Exception {
         Live obj = JSON.parseObject(jsons, Live.class);
+        obj.setAuditStatus("1");
         return this.liveService
                 .insertLive(obj, this.getCurUserProp());
     }
@@ -167,5 +170,123 @@ public class LiveController extends LiveBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id,String status) throws Exception {
         return this.liveService.updateStatus(id,status,this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertLive
+     * @Description: TODO(添加直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/www/insertLive")
+    @ResponseBody
+    public MessageResponse insertLiveWww(String jsons) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(rst.getStatus()==0){
+            Live obj = JSON.parseObject(jsons, Live.class);
+            obj.setAuditStatus("0");
+            return this.liveService.insertLive(obj, rst.getValue());
+        }
+       return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:updateLive
+     * @Description: TODO(更新直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/www/updateLive")
+    @ResponseBody
+    public MessageResponse updateLiveWww(String jsons) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(rst.getStatus()==0){
+            Live obj = JSON.parseObject(jsons, Live.class);
+            return this.liveService.updateLive(obj, rst.getValue());
+        }
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:deleteLiveByLiveId
+     * @Description: TODO(删除直播)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/www/deleteLiveByLiveId")
+    @ResponseBody
+    public MessageResponse deleteLiveByLiveIdWww(String id) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(rst.getStatus()==0){
+            return this.liveService.deleteLiveByLiveId(id,rst.getValue());
+        }
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(直播分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult<LiveVo>
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/www/findLiveList")
+    @ResponseBody
+    public PageResult<LiveVo> findLiveListWww(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
+        SingleResult<UserProp> user=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(user.getStatus()==0){
+            PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
+            condition.setDeptId(user.getValue().getCorpId());
+            condition.setCreateUserId(user.getValue().getUserId());
+            if (rst.getTotal() == 0) {
+                rst.setTotal(page.getTotalRecord());
+            }
+            return rst;
+        }
+        PageResult<LiveVo> prt=new PageResult();
+        prt.setStatus(1);
+        prt.setErrorMessage(user.getErrorMessage());
+        return prt;
+    }
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(设置直播状态1预告2直播中3结束)
+     * @param: @param id
+     * @param status
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    @RequestMapping(value = "/www/updateAuditStatus")
+    @ResponseBody
+    public MessageResponse updateAuditStatus(String id,String status) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(rst.getStatus()==0){
+            return this.liveService.updateAuditStatus(id,status,rst.getValue());
+        }
+        return rst;
     }
 }
