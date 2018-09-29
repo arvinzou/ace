@@ -287,7 +287,7 @@ public class LiveRptController extends LiveBaseController {
         return rst;
     }
     private  String createMessage(String cmd){
-        return  "{\"header\":{\"cmd\":"+cmd+"},\"message\":{}}";
+        return  "{\"header\":{\"cmd\":\""+cmd+"\"},\"message\":{}}";
     }
 
     @RequestMapping(value = "/cls")

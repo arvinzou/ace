@@ -35,7 +35,7 @@ function setParams(key,value){
 }
 /*互动加载表格数据*/
 function getPageList() {
-    var url = contextPath+ "/liveMsg/findLiveMsgList";
+    var url = contextPath+ "/liveMsg/findLiveMsgLists";
     params['content']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {

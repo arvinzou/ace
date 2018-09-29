@@ -49,9 +49,9 @@ public class LiveMsgController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/findLiveMsgList")
+    @RequestMapping(value = "/findLiveMsgLists")
     @ResponseBody
-    public PageResult<LiveMsgVo> findLiveMsgList(LiveMsgQVo condition,
+    public PageResult<LiveMsgVo> findLiveMsgLists(LiveMsgQVo condition,
                                                  PageParamNoChangeSord page) throws Exception {
         condition.setDeptId(this.getCurUserProp().getCorpId());
         PageResult<LiveMsgVo> rst = this.liveMsgService
@@ -173,7 +173,7 @@ public class LiveMsgController extends LiveBaseController {
         return this.liveMsgService.updateStatus(id,status);
     }
     private  String createMessage(String cmd){
-       return  "{\"header\":{\"cmd\":"+cmd+"},\"message\":{}}";
+       return  "{\"header\":{\"cmd\":\""+cmd+"\"},\"message\":{}}";
     }
 
     @RequestMapping(value = "/cls")
