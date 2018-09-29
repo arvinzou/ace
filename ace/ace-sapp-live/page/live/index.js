@@ -1,6 +1,7 @@
 var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
+
 const app = getApp();
 var dict = {};
 dict['1001'] = '已经连接推流服务器';
@@ -39,6 +40,7 @@ var wxuser = {
   nickname: "热情的沙漠",
   openid: "oFvIjw8x1--0lQkUhO1Ta3L59o3c"
 };
+
 Page({
   data: {
     serverfile: cfg.serverfile,
@@ -113,13 +115,11 @@ Page({
   onLoad: function (params) {
     var that = this;
     console.log('index.js.onLoad');
-   // var id = "c7b43a21-552d-4e52-9845-93e85add6e25";
-    //id = '9f4ebcc2-621b-4354-88ac-f2f7735e7e6b';
     that.setData({
       id: params.id
     });
     that.initData(that.data.id);
-    var url = "wss://" + cfg.websocketurl + "/jxb/websocket/" + that.data.id + "/" + wxuser.openid + "/msg";
+    var url = "ws://" + cfg.websocketurl + "/live/www/websocket/" + that.data.id + "/" + wxuser.openid + "/chat";
     console.log(url);
 
     openSocket.connect(function (data) { // WebSocket初始化连接

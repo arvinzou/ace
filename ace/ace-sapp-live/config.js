@@ -2,7 +2,7 @@ var server = "http://127.0.0.1";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
 var hlsserver ="http://139.224.0.227:9999/hls/";
-var websocketurl= 'zx.huacainfo.com';
+var websocketurl= '127.0.0.1';
 var config = {
     rtmpserver,
     websocketurl,
@@ -25,8 +25,8 @@ var config = {
     updateLive: `${server}/live/live/www/updateLive`,
     selectLiveByPrimaryKey: `${server}/live/live/www/selectLiveByPrimaryKey`,
   deleteLiveByLiveId: `${server}/live/live/www/deleteLiveByLiveId`,
-    proxyService: `${server}/jxb/www/jxb/proxyService`,
-    findLiveList: `${server}/live/live/www/findLiveList`
+    findLiveList: `${server}/live/live/www/findLiveList`,
+  updateAuditStatus: `${server}/live/live/www/updateAuditStatus`
 };
 module.exports = config
 

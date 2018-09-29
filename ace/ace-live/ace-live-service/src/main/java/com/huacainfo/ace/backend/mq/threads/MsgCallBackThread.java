@@ -3,7 +3,7 @@ package com.huacainfo.ace.backend.mq.threads;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.tools.SpringUtils;
-import com.huacainfo.ace.live.service.WWWService;
+import com.huacainfo.ace.portal.service.BackendService;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import org.slf4j.Logger;
@@ -11,26 +11,26 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
-public class LiveVisitCallBackThread extends Thread {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LiveVisitCallBackThread.class);
+public class MsgCallBackThread extends Thread {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MsgCallBackThread.class);
 
     private KafkaStream<byte[], byte[]> stream = null;
-    private WWWService wwwService;
 
-    public LiveVisitCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
+
+    public MsgCallBackThread(String name, KafkaStream<byte[], byte[]> stream) {
         super(name);
         this.stream = stream;
         this.init();
     }
 
-    public LiveVisitCallBackThread(ThreadGroup group, String name, KafkaStream<byte[], byte[]> stream) {
+    public MsgCallBackThread(ThreadGroup group, String name, KafkaStream<byte[], byte[]> stream) {
         super(group, name);
         this.stream = stream;
         this.init();
     }
 
     private void init() {
-        this.wwwService = (WWWService) SpringUtils.getBean("wwwService");
+
     }
 
     @Override
@@ -41,7 +41,7 @@ public class LiveVisitCallBackThread extends Thread {
             byte[] bytes = it.next().message();
             JSONObject o = JSON.parseObject(new String(bytes));
             @SuppressWarnings("unchecked")
-            Map<String, String> data = JSON.parseObject(o.get("content").toString(), Map.class);
+            Map<String, Object> data = JSON.parseObject(o.get("content").toString(), Map.class);
             try {
                 doCallBack(data);
             } catch (Exception ex) {
@@ -50,12 +50,13 @@ public class LiveVisitCallBackThread extends Thread {
         }
     }
 
-    public void doCallBack(Map<String, String> data) {
-        LOGGER.info("接收消息->{}", data);
+    public void doCallBack(Map<String, Object> data) {
+        LOGGER.error("=======================================doCallBack -> {}", data);
+        BackendService service= (BackendService)SpringUtils.getBean((String) data.get("service"));
         try {
-            this.wwwService.updateRptVisitNum(data.get("id"));
-        } catch (Exception e) {
-            LOGGER.error("系统出错{}", e);
+            service.service(data);
+        } catch (Exception ex) {
+            LOGGER.error("处理失败", ex);
         }
     }
 

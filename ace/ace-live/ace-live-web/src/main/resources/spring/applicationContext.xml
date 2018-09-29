@@ -38,7 +38,4 @@
 	<import resource="classpath:spring/spring-ace-live-service.xml"/>
 	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
     <import resource="classpath:spring/spring-ace-live-backend.xml"/>
-
-
-
 </beans>
