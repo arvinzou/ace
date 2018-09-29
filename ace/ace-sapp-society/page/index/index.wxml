@@ -2,14 +2,40 @@
     <view class='container'>
         <view class='box'>
             <view class='activity-menu'>
-                <view class='activity-left'><text>火力全开</text></view>
-                <view class='activity-right'>
+                <view class='menu-left'><text>火力全开</text></view>
+                <view class='menu-right' bindtap='showMoreActivity'>
                     <text class='see-text'>查看更多</text>
                     <!--<image class='see-image' src='../../rediret.png'></image>-->
                 </view>
             </view>
             <view class='activity'>
-
+                <view class='activity-left'>
+                    <image class='activity-image' src='../../image/default.jpg'></image>
+                    <view class='activity-warn'>
+                        <view class='activity-warn-box'>
+                            <view class='activity-warn-title'><text>距离活动开始</text></view>
+                            <view class='activity-warn-time'>
+                                <text class='time-num'>00</text>
+                                <text class='time-title'>天</text>
+                                <text class='time-num'>24</text>
+                                <text class='time-title'>：</text>
+                                <text class='time-num'>00</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class='activity-right'>
+                    <view class='activity-title'>
+                        <text class='stage'>第一期</text>
+                        <text class='title01'>党建活动党建活动党建活动党建活动</text>
+                    </view>
+                    <view class='applytime'><text>报名截止时间：09-10 10:30</text></view>
+                    <view class='activity-footer'>
+                        <view class='sign-number'><text>已报名:10</text></view>
+                        <view class='activity-state'><image src='../../image/icon_having.png'></image></view>
+                    </view>
+                </view>
+                <view class='activity-type'>党建活动</view>
             </view>
         </view>
     </view>
