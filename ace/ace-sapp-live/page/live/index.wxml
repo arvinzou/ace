@@ -18,12 +18,11 @@
     </cover-view>
   </cover-view>
   <!--导航条-->
-
   <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
     <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
   </view>
   <view class='chat-box' hidden="{{currentTab!==0}}">
-    <block wx:for-items="{{message}}">
+    <block wx:for-items="{{message}}" wx:key="*">
       <view class='chat-content'>
 
         <image src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
@@ -60,7 +59,7 @@
     </view>
   </view>
   <view class='chat-box' hidden="{{currentTab!==1}}">
-    <block wx:for-items="{{list}}">
+    <block wx:for-items="{{list}}" wx:key="*">
       <view class="wrap">
         <view class='report-box-firse'>
 
@@ -90,7 +89,7 @@
                 </view>
               </view>
 
-              <block wx:for-items="{{item.comments}}" wx:for-item="citem">
+              <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
                 <view class='chat-content'>
                   <image src='{{citem.headimgurl}}' class='headimg'></image>
                   <view class='chat-right'>

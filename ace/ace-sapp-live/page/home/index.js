@@ -103,6 +103,7 @@ Page({
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
   //删除事件
+
   del: function (e) {
     var that=this;
     var url = cfg.deleteLiveByLiveId;
@@ -138,5 +139,25 @@ Page({
     wx.navigateTo({
       url: '../live/index?id=' + e.currentTarget.dataset.id
     });
+  },
+  submit: function (e) {
+    var that = this;
+    var url = cfg.updateAuditStatus;
+    console.log();
+    util.request(url, { id: e.currentTarget.dataset.id, status:'1' },
+      function (data) {
+        if (data.status == 1) {
+          wx.showModal({
+            title: '提示',
+            content: data.errorMessage,
+            showCancel: false
+          })
+        } else {
+          that.data.listLive=[];
+          that.initData();
+        }
+      }
+    );
+
   }
 });
