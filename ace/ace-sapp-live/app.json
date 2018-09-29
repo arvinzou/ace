@@ -1,0 +1,24 @@
+{
+  "pages": [
+    "page/home/index",
+    "page/live/index",
+    "page/rpt/index",
+    "page/liveCsl/index",
+    "page/userinfo/index",
+    "page/bind/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "芙蓉街道",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff",
+    "enablePullDownRefresh": true
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

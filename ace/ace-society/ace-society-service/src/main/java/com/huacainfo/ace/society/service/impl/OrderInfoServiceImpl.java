@@ -2,19 +2,31 @@ package com.huacainfo.ace.society.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.society.dao.OrderInfoDao;
+import com.huacainfo.ace.society.constant.OrderState;
+import com.huacainfo.ace.society.constant.PayType;
+import com.huacainfo.ace.society.constant.RegType;
+import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.OrderDetail;
 import com.huacainfo.ace.society.model.OrderInfo;
+import com.huacainfo.ace.society.model.PersonInfo;
+import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.OrderInfoService;
+import com.huacainfo.ace.society.service.PointsRecordService;
+import com.huacainfo.ace.society.service.RegService;
+import com.huacainfo.ace.society.vo.CommodityVo;
+import com.huacainfo.ace.society.vo.CustomerVo;
 import com.huacainfo.ace.society.vo.OrderInfoQVo;
 import com.huacainfo.ace.society.vo.OrderInfoVo;
 import org.apache.ibatis.session.Configuration;
@@ -29,7 +41,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("orderInfoService")
 /**
@@ -45,6 +59,19 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private AuditRecordService auditRecordService;
+    @Autowired
+    private CommodityDao commoditydao;
+    @Autowired
+    private RegService regService;
+    @Autowired
+    private PersonInfoDao personInfoDao;
+    @Autowired
+    private SocietyOrgInfoDao societyOrgInfoDao;
+    @Autowired
+    private OrderDetailDao orderDetailDao;
+    @Autowired
+    private PointsRecordService pointsRecordService;
+
 
     @Autowired
     private SqlSessionTemplate sqlSession;
@@ -295,17 +322,134 @@ public class OrderInfoServiceImpl implements OrderInfoService {
      * @return ResultResponse
      */
     @Override
-    public ResultResponse create(OrderInfoVo info) {
+    public ResultResponse create(OrderInfoVo info) throws Exception {
         if (CollectionUtils.isEmpty(info.getDetailList())) {
             return new ResultResponse(ResultCode.FAIL, "缺少订单明细");
         }
+        //用户资料
+        CustomerVo customerVo = regService.findByUserId(info.getUserId());
+        if (null == customerVo) {
+            return new ResultResponse(ResultCode.FAIL, "用户资料缺失");
+        }
+        //支付金额计算
+        BigDecimal subTotal;
         BigDecimal payAmount = BigDecimal.ZERO;
+        CommodityVo commodity;
         for (OrderDetail item : info.getDetailList()) {
+            commodity = commoditydao.selectVoByPrimaryKey(item.getCommodityId());
+            if (null == commodity || commodity.getState().equals("1")) {
+                return new ResultResponse(ResultCode.FAIL, "商品资料有误");
+            }
+            if (item.getPurchaseQty() <= 0) {
+                return new ResultResponse(ResultCode.FAIL, "商品购买数量有误");
+            }
+            subTotal = commodity.getSalePrice().multiply(new BigDecimal(item.getPurchaseQty()));
+            item.setCommodityName(commodity.getCommodityName());
+            item.setCommodityCover(commodity.getCommodityCover());
+            item.setSalePrice(commodity.getSalePrice());
+            item.setSubtotal(subTotal);
 
+            payAmount = payAmount.add(subTotal);
+        }
+        info.setPayAmount(payAmount);
+        //扣除积分
+        if (PayType.POINTS.equals(info.getPayType())) {
+
+            return createPointsOrder(info, customerVo);
+        } else {
+            return new ResultResponse(ResultCode.FAIL, "支付类型不支持");
+        }
+    }
+
+    /**
+     * 创建积分订单
+     *
+     * @param info       订单信息
+     * @param customerVo 客户信息
+     * @return ResultResponse
+     */
+    private ResultResponse createPointsOrder(OrderInfoVo info, CustomerVo customerVo) {
+        int payPoints = info.getPayAmount().intValue();
+        int updCount;
+        if (RegType.PERSON.equals(customerVo.getRegType())) {
+            PersonInfo personInfo = personInfoDao.selectByPrimaryKey(info.getUserId());
+            if (payPoints > personInfo.getValidPoints()) {
+                return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
+            }
+            personInfo.setValidPoints(personInfo.getValidPoints() - payPoints);
+            personInfo.setLastModifyDate(DateUtil.getNowDate());
+            personInfo.setLastModifyUserId("0000-0000");
+            personInfo.setLastModifyUserName("system");
+
+            updCount = personInfoDao.updateByPrimaryKey(personInfo);
+            if (updCount != 1) {
+                throw new CustomException("更新用户爱心币失败");
+            }
+            //积分流水
+
+        } else if (RegType.ORG.equals(customerVo.getRegType())) {
+            SocietyOrgInfo org = societyOrgInfoDao.selectByPrimaryKey(info.getUserId());
+            if (payPoints > org.getValidPoints()) {
+                return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
+            }
+
+            org.setValidPoints(org.getValidPoints() - payPoints);
+            org.setLastModifyDate(DateUtil.getNowDate());
+            org.setLastModifyUserId("0000-0000");
+            org.setLastModifyUserName("system");
+            updCount = societyOrgInfoDao.updateByPrimaryKey(org);
+            if (updCount != 1) {
+                throw new CustomException("更新用户爱心币失败");
+            }
+            //积分流水
+        } else {
+            return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
+        }
+        //入库订单信息
+        info.setPayAmount(info.getPayAmount());
+        info.setPayDate(DateUtil.getNowDate());
+        info.setReceiveType("1");
+        info.setOrderState(OrderState.ORDER_STATE_PAID);
+        info = insertOrder(info);
+        //返回信息
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("orderId", info.getId());
+        rtnMap.put("payAmount", info.getPayAmount());
+        return new ResultResponse(ResultCode.SUCCESS, "订单创建成功", rtnMap);
+    }
+
+    /**
+     * 订单数据入库
+     *
+     * @param info
+     * @return
+     */
+    private OrderInfoVo insertOrder(OrderInfoVo info) {
+        String orderId = StringUtil.isEmpty(info.getId()) ? GUIDUtil.getGUID() : info.getId();
+        String orderState = StringUtil.isEmpty(info.getOrderState())
+                ? OrderState.ORDER_STATE_NEW : info.getOrderState();
+        info.setId(orderId);
+        info.setOrderNo(StringUtil.genOrderNo18Str(orderId));
+        info.setCreateDate(DateUtil.getNowDate());
+        info.setCreateUserId("0000-0000");
+        info.setCreateUserName("system");
+        info.setStatus("1");
+        info.setOrderState(orderState);
+        //明细入库
+        for (OrderDetail detail : info.getDetailList()) {
+            detail.setId(GUIDUtil.getGUID());
+            detail.setOrderId(orderId);
+            detail.setDetailState(orderState);
+            detail.setStatus("1");
+            detail.setCreateDate(DateUtil.getNowDate());
+            detail.setCreateUserId("0000-0000");
+            detail.setCreateUserName("system");
+            orderDetailDao.insert(detail);
         }
 
+        orderInfoDao.insert(info);
 
-        return null;
+        return info;
     }
 
 }

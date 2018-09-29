@@ -49,9 +49,9 @@ public class LiveMsgController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/findLiveMsgList")
+    @RequestMapping(value = "/findLiveMsgLists")
     @ResponseBody
-    public PageResult<LiveMsgVo> findLiveMsgList(LiveMsgQVo condition,
+    public PageResult<LiveMsgVo> findLiveMsgLists(LiveMsgQVo condition,
                                                  PageParamNoChangeSord page) throws Exception {
         condition.setDeptId(this.getCurUserProp().getCorpId());
         PageResult<LiveMsgVo> rst = this.liveMsgService
@@ -166,6 +166,33 @@ public class LiveMsgController extends LiveBaseController {
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
     public MessageResponse updateStatus(String id,String status) throws Exception {
-        return this.liveMsgService.updateStatus(id,status);
+        MessageResponse rst =this.liveMsgService.updateStatus(id,status);
+        LiveMsgVo o=this.liveMsgService.selectLiveMsgByPrimaryKey(id).getValue();
+        this.cls(this.createMessage("reload.msg"),o.getRid());
+        return rst;
+    }
+    private  String createMessage(String cmd){
+       return  "{\"header\":{\"cmd\":\""+cmd+"\"},\"message\":{}}";
+    }
+
+    @RequestMapping(value = "/cls")
+    @ResponseBody
+    public MessageResponse cls(String message, String rid) throws Exception {
+        logger.debug("{} {}", rid, message);
+        //群发指令
+        if (MyWebSocket.rooms.get(rid) == null) {
+            CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+            MyWebSocket.rooms.put(rid, webSocketSet);
+            logger.debug("create new room rid:{}", rid);
+        }
+        for (MyWebSocket  item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "OK");
     }
 }

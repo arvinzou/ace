@@ -1,2 +1,113 @@
-<!--page/index/index.wxml-->
-<text></text>
+<view class='index'>
+    <view class='container'>
+        <view class='box'>
+            <view class='activity-menu'>
+                <view class='menu-left'><text>火力全开</text></view>
+                <view class='menu-right' bindtap='showMoreActivity'>
+                    <text class='see-text'>查看更多</text>
+                    <!--<image class='see-image' src='../../rediret.png'></image>-->
+                </view>
+            </view>
+            <view class='activity'>
+                <view class='activity-left'>
+                    <image class='activity-image' src='../../image/default.jpg'></image>
+                    <view class='activity-warn'>
+                        <view class='activity-warn-box'>
+                            <view class='activity-warn-title'><text>距离活动开始</text></view>
+                            <view class='activity-warn-time'>
+                                <text class='time-num'>00</text>
+                                <text class='time-title'>天</text>
+                                <text class='time-num'>24</text>
+                                <text class='time-title'>：</text>
+                                <text class='time-num'>00</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class='activity-right'>
+                    <view class='activity-title'>
+                        <text class='stage'>第一期</text>
+                        <text class=''>党建活动党建活动党建活动党建活动</text>
+                    </view>
+                    <view class='applytime'><text>报名截止时间：09-10 10:30</text></view>
+                    <view class='activity-footer'>
+                        <view class='sign-number'><text>已报名:10</text></view>
+                        <view class='activity-state'><image src='../../image/icon_having.png'></image></view>
+                    </view>
+                </view>
+                <view class='activity-type'>党建活动</view>
+            </view>
+        </view>
+    </view>
+    <view class='container'>
+        <view class='box'>
+            <view class='index-menu'>
+                <view class='menu-item'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_party.png'></image></view>
+                    <view class='menu-item-title'><text>智慧党建</text></view>
+                </view>
+                <view class='menu-item'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_party.png'></image></view>
+                    <view class='menu-item-title'><text>公益活动</text></view>
+                </view>
+                 <view class='menu-item'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_party.png'></image></view>
+                    <view class='menu-item-title'><text>普及活动</text></view>
+                </view>
+                <view class='menu-item'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_activity.png'></image></view>
+                    <view class='menu-item-title'><text>创意活动</text></view>
+                </view>
+            </view>
+            <view class='index-menu' style='margin-top:30rpx;'>
+                <view class='menu-item' bindtap='behavior'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_behavior.png'></image></view>
+                    <view class='menu-item-title'><text>文明随手拍</text></view>
+                </view>
+                <view class='menu-item'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_live.png'></image></view>
+                    <view class='menu-item-title'><text>秀我直播</text></view>
+                </view>
+                 <view class='menu-item' bindtap='idea'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_party.png'></image></view>
+                    <view class='menu-item-title'><text>我有点子</text></view>
+                </view>
+                <view class='menu-item'>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_circle.png'></image></view>
+                    <view class='menu-item-title'><text>邻里圈子</text></view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='container'>
+        <view class='activity-list'>
+            <view class='title01'><text>精选往事</text></view>
+            <view class='activity-item'>
+                <view class='activity-item-left'>
+                    <view class='title02'><text>心理咨询无用？不，是你不了解真正的心理咨询</text></view>
+                    <view class='type01'>普及活动</view>
+                    <view class='publish-person'>
+                        <text class='publish-person-name'>刘鑫蕊</text>
+                        <text class='publish-person-time'>08-27</text>
+                    </view>
+                </view>
+                <view class='activity-item-right'>
+                    <image class='activity-list-image' src='../../image/default.jpg'></image>
+                </view>
+            </view>
+
+            <view class='activity-item'>
+                <view class='title02'><text>天源新城——广场舞</text></view>
+                <view class='activity-content'>
+                
+                </view>
+                 <view class='publish-person'>
+                        <view class='type02' style='float:left;'>秀我直播</view>
+                        <text class='publish-person-name' style='float:left;padding-top:30rpx;'>刘鑫蕊</text>
+                        <text class='publish-person-time' style='float:left;padding-top:30rpx;'>08-27</text>
+                    </view>
+            </view>
+        </view>
+    </view>
+</view>

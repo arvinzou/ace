@@ -33,7 +33,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        t.id,    t.name,   t.category,t.deptId,  t.endTime,  t.startTime,t.remark,   t.nop,   t.pop,
+        t.id,    t.name,   t.category,t.deptId,  t.endTime,  t.startTime,t.remark,   t.nop,   t.pop,t.rtmpUrl,
        t.imageSrc, t.status,t.createUserName, t.createDate,t.auditStatus
     </sql>
     <sql id="Blob_Column_List">
@@ -257,7 +257,7 @@
         '' liker,
         a.nickname reporter,
         '' thumbnail,
-        ifnull(concat(#{fastdfs_server},f.logo),a.headimgurl) headimgurl,
+        ifnull(f.logo,a.headimgurl) headimgurl,
         ifnull(f.short_name,a.nickname) nickname,
         a.openid,
         b.id imgId,
@@ -274,10 +274,10 @@
         date_format(c.createTime,'%H:%i:%s') c_createTime
 
         from live_rpt t
-        left join portal.userinfo a on t.uid=a.openid
+        left join portal.userinfo a on t.uid=a.unionid
         left join live_img b on t.id=b.rptId
         left join live_cmt c on t.id=c.rptId
-        left join portal.userinfo d on c.uid=d.openid
+        left join portal.userinfo d on c.uid=d.unionid
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id
         where t.rid=#{rid} and t.status='2'
@@ -299,7 +299,7 @@
     </select>
     <select id="getLiveMsgList" resultType="map">
         select t.id, t.rid, t.uid, t.content, date_format(t.createTime,'%H:%i:%s') createTime from live_msg t where
-        t.rid=#{rid}
+        t.rid=#{rid} and t.status!='3'
         order by t.createTime
     </select>
     <select id="getTotalNumAndOrgInfo" resultType="map">

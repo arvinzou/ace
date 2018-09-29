@@ -1,0 +1,151 @@
+<view class='index'>
+    <view class='steps'>
+        <view class='step step-one {{stepNum==1?"step-action":""}}  step-one'>第一步</view>
+        <view class='step step-two {{stepNum==2?"step-action":""}}'>第二步</view>
+        <view class='step-end {{stepNum==3?"step-action":""}}'>最后一步</view>
+    </view>
+
+    <view class='form'>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <view class='stepOne partOne {{stepNum==1?"":"hidden"}}'>
+            <view class='cover'>
+                添加照片
+            </view>
+            <view class='form-content'>
+                <view class='tips'>
+                    <text>温馨提示：党组织必须在添加照片的情况下进行后续操作</text>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">注册类型
+                        <text>*</text>
+                    </view>
+                    <picker mode = selector bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                        <view class="picker">{{array[index]}}</view>
+                    </picker>
+                </view>
+                <view class='opt-tips'>
+                    <text>操作说明：个人和党员为线下活动的参与者，社会组织和党组织为线下活动的发起者；请按实际情况选取注册类型进行后续注册</text>
+                </view>
+
+                 <view class='btn-part'>
+                    <view bindtap='nextOne' class='btn btn-clicking'>
+                        下一步
+                    </view>
+                </view>
+            </view>
+
+        </view>
+
+        <!--社会组织党组织注册页面-->
+        <view class='stepTwo partTwo {{stepNum==2 && (index == 1 || index == 3)?"":"hidden"}}'>
+            <view class='form-content'>
+                <view class="input-style bottom-line">
+                    <view class="title">组织名称
+                        <text>*</text>
+                    </view>
+                    <input placeholder='请输入组织名称' placeholder-class='placeholder-text'></input>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">组织地址</view>
+                    <input placeholder='请输入组织地址' placeholder-class='placeholder-text'></input>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">联系人
+                        <text>*</text>
+                    </view>
+                    <input placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">联系电话
+                        <text>*</text>
+                    </view>
+                    <input placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number'></input>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">性别</view>
+                    <radio-group name="radio-group">
+                        <label>
+                            <radio value="1" />男</label>
+                        <label>
+                            <radio value="2" />女</label>
+                    </radio-group>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">年龄</view>
+                    <input placeholder='请输入年龄' placeholder-class='placeholder-text' type='number'></input>
+                </view>
+
+                <view class='btn-part'>
+                    <view bindtap='previousOne' class='btn btn-bkClick'>
+                        上一步
+                    </view>
+                    <view bindtap='nextOne' class='btn btn-clicking'>
+                        提交
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!--个人注册详情页面-->
+        <view class='stepTwo partTwo {{stepNum==2 &&(index == 0 || index == 2)?"":"hidden"}}'>
+            <view class='form-content'>
+                <view class="input-style bottom-line">
+                    <view class="title">所属组织
+                        <text>*</text>
+                    </view>
+                    <picker mode = selector bindchange="bindPickerChange1" value="{{group_index}}" range="{{groupArray}}">
+                        <view class="picker">{{groupArray[group_index]}}</view>
+                    </picker>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">姓名
+                        <text>*</text>
+                    </view>
+                    <input placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">联系电话
+                        <text>*</text>
+                    </view>
+                    <input placeholder='请输入手机号码' placeholder-class='placeholder-text'></input>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">性别</view>
+                    <radio-group name="radio-group">
+                        <label>
+                            <radio value="1" />男</label>
+                        <label>
+                            <radio value="2" />女</label>
+                    </radio-group>
+                </view>
+                <view class="input-style bottom-line">
+                    <view class="title">年龄</view>
+                    <input placeholder='请输入年龄' placeholder-class='placeholder-text' type='number'></input>
+                </view>
+                <view class='btn-part'>
+                    <view bindtap='previousOne' class='btn btn-bkClick'>
+                        上一步
+                    </view>
+                    <view bindtap='nextOne' class='btn btn-clicking'>
+                        提交
+                    </view>
+                </view>
+            </view>
+        </view>
+
+        <!--第三步，提交成功-->
+       <view class='reuslt {{stepNum==3?"":"hidden"}}'>
+        <view class='massage'>
+            <icon type="success" size="80" />
+            <text class='fontStyle1'>注册成功！</text>
+            <text class='fontStyle2'>注册由芙蓉街道统一管理</text>
+            <text class='fontStyle3'>待审核通过后正式入驻平台</text>
+            <text class='fontStyle3'>联系电话：0736-2323252</text>
+        </view>
+        <view class='btn btn-clicking'>
+            关闭
+        </view>
+    </view>
+    </form>
+    </view>
+</view>

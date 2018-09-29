@@ -85,7 +85,9 @@ public class LiveServiceImpl implements LiveService {
     @Override
     public MessageResponse insertLive(Live o, UserProp userProp)
             throws Exception {
-        o.setId(GUIDUtil.getGUID());
+        if(CommonUtils.isBlank(o.getId())){
+            o.setId(GUIDUtil.getGUID());
+        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
@@ -140,6 +142,10 @@ public class LiveServiceImpl implements LiveService {
             throws Exception {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
+        }
+        LiveVo obj=this.liveDao.selectByPrimaryKey(o.getId());
+        if(obj.getAuditStatus().equals("1")||obj.getAuditStatus().equals("2")){
+            return new MessageResponse(1, "已提交审核，不能编辑！");
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
@@ -204,7 +210,7 @@ public class LiveServiceImpl implements LiveService {
         if(CommonUtils.isBlank(o)){
             return new MessageResponse(1, "提交的主键不存在！");
         }
-        if(!o.getStatus().equals("0")){
+        if(o.getAuditStatus().equals("1")||o.getAuditStatus().equals("2")){
             return new MessageResponse(1, "已提交审核，不能删除！");
         }
         this.liveDao.deleteByPrimaryKey(id);

@@ -7,17 +7,18 @@
     "page/liveCsl/index",
     "page/courseCsl/index"
   ],
-  "window": {
-    "navigationBarTextStyle": "#fff",
-    "navigationBarTitleText": "微直播",
-    "navigationBarBackgroundColor": "#3C3C3C",
-    "backgroundColor": "#F8F8F8"
-  },
-  "tabBar": {
-    "color": "#353536",
-    "selectedColor": "#353536",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
+    "window": {
+      "navigationBarTextStyle": "black",
+      "navigationBarTitleText": "芙蓉街道",
+      "navigationBarBackgroundColor": "#fff",
+      "backgroundColor": "#fff",
+      "enablePullDownRefresh": true
+    },
+    "tabBar": {
+      "color": "#000000",
+      "selectedColor": "#000000",
+      "borderStyle": "#000000",
+      "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "page/home/index",

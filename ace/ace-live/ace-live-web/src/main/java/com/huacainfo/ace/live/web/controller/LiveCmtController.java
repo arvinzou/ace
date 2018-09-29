@@ -1,5 +1,8 @@
 package com.huacainfo.ace.live.web.controller;
 
+import com.huacainfo.ace.live.service.LiveRptService;
+import com.huacainfo.ace.live.service.LiveService;
+import com.huacainfo.ace.live.web.websocket.MyWebSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,9 @@ import com.huacainfo.ace.live.service.LiveCmtService;
 import com.huacainfo.ace.live.vo.LiveCmtVo;
 import com.huacainfo.ace.live.vo.LiveCmtQVo;
 
+import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArraySet;
+
 @Controller
 @RequestMapping("/liveCmt")
 /**
@@ -32,6 +38,9 @@ public class LiveCmtController extends LiveBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private LiveCmtService liveCmtService;
+
+    @Autowired
+    private LiveRptService liveRptService;
 
     /**
      * @throws
@@ -144,6 +153,34 @@ public class LiveCmtController extends LiveBaseController {
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
     public MessageResponse updateStatus(String id,String status) throws Exception {
+       String rptId= this.liveCmtService.selectLiveCmtByPrimaryKey(id).getValue().getRptId();
+       String rid=liveRptService.selectLiveRptByPrimaryKey(rptId).getValue().getRid();
+       this.cls(this.createMessage("relaod.rpt"),rid);
         return this.liveCmtService.updateStatus(id,status);
+    }
+
+    private  String createMessage(String cmd){
+        return  "{\"header\":{\"cmd\":\""+cmd+"\"},\"message\":{}}";
+    }
+
+    @RequestMapping(value = "/cls")
+    @ResponseBody
+    public MessageResponse cls(String message, String rid) throws Exception {
+        logger.debug("{} {}", rid, message);
+        //群发指令
+        if (MyWebSocket.rooms.get(rid) == null) {
+            CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+            MyWebSocket.rooms.put(rid, webSocketSet);
+            logger.debug("create new room rid:{}", rid);
+        }
+        for (MyWebSocket  item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "OK");
     }
 }

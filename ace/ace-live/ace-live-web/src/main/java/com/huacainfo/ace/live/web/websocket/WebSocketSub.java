@@ -22,7 +22,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * Created by chenxiaoke on 2017/12/19.
  */
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint(value = "/websocketsub/{rid}/{uid}")
+@ServerEndpoint(value = "/www/websocketsub/{rid}/{uid}")
 public class WebSocketSub {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。

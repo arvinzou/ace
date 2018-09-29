@@ -1,0 +1,126 @@
+@import "../common/lib/weui.wxss";
+@import "../common/index.wxss";
+
+.index{
+    width: 100%;
+    background-color: #F6F6F6;
+}
+.content{
+    width: 100%;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+}
+.idea-title{
+    width: 100%;
+    height: 85rpx;
+    line-height: 85rpx;
+    color: #222222;
+    font-size: 36rpx;
+    font-weight: bold;
+}
+.idea-info{
+    width: 100%;
+    height: 85rpx;
+    line-height: 85rpx;
+    border-bottom: 1px solid #efefef;
+}
+.head{
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 50%;
+    margin-top:15rpx;
+    float: left;
+}
+.fontstyle{
+    color: #425DAE;
+    font-size: 26rpx;
+    float: left;
+}
+.datetime{
+    color: #999999;
+    font-size: 26rpx;
+    font-weight:500;
+    padding-left: 20rpx;
+    float: left;
+}
+.download{
+    color: #425DAE;
+    font-size: 26rpx;
+    float: right;
+}
+.idea-info::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.download-file{
+    width: 26rpx;
+    height: 24rpx;
+    float: right;
+    margin-top: 30rpx;
+    margin-right: 12rpx;
+}
+.idea-content{
+    font-size: 28rpx;
+    font-weight:500;
+    color:#222222;
+    line-height:44rpx;
+    text-indent: 20rpx;
+    padding-top: 52rpx;
+    padding-bottom: 52rpx;
+}
+.comment{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+}
+.comment-item{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    border-bottom: 1px solid #efefef;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}
+.comment-item-left{
+    width: 20%;
+    height: auto;
+    float: left;
+}
+.comment-item-right{
+    width: 80%;
+    height: auto;
+    float: left;
+}
+.comment-item::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.head-image{
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+}
+.nickname{
+    color: #666666;
+     font-weight: bold;
+     font-size: 26rpx;
+     line-height:53rpx;
+}
+.comment-time{
+    font-size:20rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(153,153,153,1);
+    line-height:53rpx;
+}
+.comment-content{
+    font-size:28rpx;
+    font-family:PingFang-SC-Medium;
+    font-weight:500;
+    color:rgba(34,34,34,1);
+    line-height:44rpx;
+}

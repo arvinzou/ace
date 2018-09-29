@@ -34,7 +34,7 @@ import com.huacainfo.ace.common.kafka.KafkaProducerService;
  * Created by chenxiaoke on 2017/12/19.
  */
 //该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint(value = "/websocket/{rid}/{uid}/{topic}"/*, configurator = HttpSessionConfigurator.class*/)
+@ServerEndpoint(value = "/www/websocket/{rid}/{uid}/{service}"/*, configurator = HttpSessionConfigurator.class*/)
 public class MyWebSocket {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
@@ -83,7 +83,7 @@ public class MyWebSocket {
      * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
      */
     @OnOpen
-    public void onOpen(Session session, /*EndpointConfig config,*/ @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
+    public void onOpen(Session session, /*EndpointConfig config,*/ @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
         //this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         this.session = session;
         this.rid = rid;
@@ -101,7 +101,7 @@ public class MyWebSocket {
      * 连接关闭调用的方法
      */
     @OnClose
-    public void onClose(@PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
+    public void onClose(@PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
         removeSession(this);  //从set中删除
         subOnlineCount();           //在线数减1
         logger.debug("有一连接关闭！当前在线人数为{}", getOnlineCount());
@@ -115,15 +115,15 @@ public class MyWebSocket {
      * @param session 可选的参数
      */
     @OnMessage
-    public void onMessage(String message, Session session, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("topic") String topic) {
+    public void onMessage(String message, Session session, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
         logger.debug("rid:{} uid:{} 来自客户端的消息:{}", rid, uid, message);
 
         Map<String, String> data = new HashMap<String, String>();
         data.put("rid", rid);
         data.put("uid", uid);
         data.put("message", message);
+        data.put("service",service);
         this.logger.info("{}", data);
-        this.kafkaProducerService.sendMsg(topic, data);
 
         //群发消息
         for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
@@ -133,6 +133,12 @@ public class MyWebSocket {
                 logger.error(e.getMessage());
                 continue;
             }
+        }
+        try {
+            this.kafkaProducerService.sendMsg("topic.sys.msg.live", data);
+        }catch (Exception e){
+            this.logger.error("{}",e);
+            this.logger.error("================kafka 服务连接错误=====================");
         }
     }
 

@@ -29,7 +29,7 @@ public class WOrderController extends SocietyBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/create")
-    public ResultResponse create(OrderInfoVo info) {
+    public ResultResponse create(OrderInfoVo info) throws Exception {
         if (!StringUtil.areNotEmpty(info.getPayType(), info.getReceiveType())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }

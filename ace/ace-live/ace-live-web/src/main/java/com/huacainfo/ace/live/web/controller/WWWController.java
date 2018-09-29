@@ -377,12 +377,7 @@ public class WWWController extends LiveBaseController {
         MessageResponse checked = liveService.checkIsBandUsers(openid);
         //验证通过
         if (0 == checked.getStatus()) {
-//            Map<String, String> params = new HashMap<>();
-//            params.put("jsons", jsons);
-//            this.kafkaProducerService.sendMsg("live", data);
-
             Live live = JsonUtil.toObject(jsons, Live.class);
-
             return liveService.insertLive(openid, live);
         } else {
 
@@ -390,4 +385,6 @@ public class WWWController extends LiveBaseController {
 
         }
     }
+
+
 }
