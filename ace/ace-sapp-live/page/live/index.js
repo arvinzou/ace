@@ -79,6 +79,7 @@ Page({
       title: dict[e.detail.code]
     })
   },
+  
   netstatus(e) {
     this.setData(
       {
@@ -90,15 +91,18 @@ Page({
     console.log(data);
     var that = this;
     var message = that.data.message;
-    if (data.header.type == '2') {
+    if (data.header.cmd == 'reload.rpt') {
       that.loadRpt();
       return;
     }
-    if (data.header.type == '3') {
+    if (data.header.cmd == 'reload.msg') {
       that.loadMsg();
       return;
     }
-    message.push(data);
+    if (data.header.cmd == 'content') {
+      message.push(data);
+    }
+    
     that.setData({ message: message });
     that.setData({ toView: 1000 });
     wx.pageScrollTo({
@@ -256,7 +260,7 @@ Page({
     var that = this;
     var message = {};
     message.header = {
-      type: 1,
+      cmd: 'content',
       wxuser: {
         headimgurl: that.data.userinfo.avatarUrl,
         nickname: that.data.userinfo.nickName,

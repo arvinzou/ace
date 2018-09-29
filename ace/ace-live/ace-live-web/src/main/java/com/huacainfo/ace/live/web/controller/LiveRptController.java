@@ -257,6 +257,8 @@ public class LiveRptController extends LiveBaseController {
     @RequestMapping(value = "/updateAudit")
     @ResponseBody
     public MessageResponse updateAudit(String id,String rst,String text) throws Exception {
+        LiveRptVo o=this.liveRptService.selectLiveRptByPrimaryKey(id).getValue();
+        this.cls(this.createMessage("reload.rpt"),o.getRid());
         return this.liveRptService.updateAudit(id,rst,text,this.getCurUserProp());
     }
 
@@ -284,5 +286,28 @@ public class LiveRptController extends LiveBaseController {
         }
         return rst;
     }
+    private  String createMessage(String cmd){
+        return  "{\"header\":{\"cmd\":"+cmd+"},\"message\":{}}";
+    }
 
+    @RequestMapping(value = "/cls")
+    @ResponseBody
+    public MessageResponse cls(String message, String rid) throws Exception {
+        logger.debug("{} {}", rid, message);
+        //群发指令
+        if (MyWebSocket.rooms.get(rid) == null) {
+            CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+            MyWebSocket.rooms.put(rid, webSocketSet);
+            logger.debug("create new room rid:{}", rid);
+        }
+        for (MyWebSocket  item : MyWebSocket.rooms.get(rid)) {
+            try {
+                item.sendMessage(message);
+            } catch (IOException e) {
+                logger.error(e.getMessage());
+                continue;
+            }
+        }
+        return new MessageResponse(0, "OK");
+    }
 }
