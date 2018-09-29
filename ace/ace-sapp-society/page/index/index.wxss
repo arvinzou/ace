@@ -158,7 +158,7 @@
     clear: both;
     display: block;
 }
-.activity-image{
+.activity-list-image{
     width: 186rpx;
     height: 146rpx;
     margin-left: 20rpx;
@@ -208,11 +208,14 @@
 }
 .activity-title{
     width: 100%;
-    height: 80rpx;
+    height: 60rpx;
     overflow: hidden;  
     text-overflow: ellipsis; 
     white-space: nowrap;
     padding-left: 30rpx;
+    color: #222222;
+    font-size: 30rpx;
+    font-weight: bold;
 }
 .stage{
     width: 82rpx;
@@ -226,7 +229,7 @@
     border:2px solid rgba(255,127,127,1);
     border-radius:4rpx; 
     font-size: 20rpx;
-    margin-top: 30rpx;
+    margin-top: 10rpx;
     margin-right: 10rpx;
 }
 .activity-image{
@@ -285,7 +288,6 @@
     position: absolute;
     bottom:30rpx;
     text-align:center;
-    left: 30rpx;
 }
 .activity-warn-title{
     color: #FFFFFF;
