@@ -54,6 +54,7 @@ Page({
     this.setData({
       WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
       checkImageUrl: cfg.checkImageUrl,
+      userinfo: wx.getStorageSync('userinfo'),
       fileList: []
     });
   },
@@ -68,7 +69,7 @@ Page({
     data.rpt = {};
     data.captcha = e.detail.value.captcha;
     data.rpt.rid = that.data.id;
-    data.rpt.uid = 'oFvIjw7bU8IN-GYgxYCwwf_fOKZY';
+    data.rpt.uid = that.data.userinfo.unionId;
     data.rpt.mediaContent = that.data.mediUrl;
     data.rpt.content = e.detail.value.docText;
 
@@ -86,7 +87,7 @@ Page({
       data.rpt.mediaType = '3';
     }
     console.log(data);
-    util.request(cfg.insertLiveRptSapp, { jsons: JSON.stringify(data) },
+    util.request(cfg.insertLiveRpt, { jsons: JSON.stringify(data) },
       function (data) {
         that.setData({
           loading: false,
@@ -134,13 +135,13 @@ Page({
             header: {
               'content-type': 'multipart/form-data'
             },
-            formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
+            formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
             success: function (resp) {
               console.log(resp);
               wx.hideLoading();
               var obj = JSON.parse(resp.data);
               console.log(obj);
-              fileList.push(cfg.serverfile + obj.file_path);
+              fileList.push(obj.file_path);
               that.setData({
                 files: fileList
               });

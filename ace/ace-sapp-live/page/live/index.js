@@ -1,7 +1,6 @@
 var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
-
 const app = getApp();
 var dict = {};
 dict['1001'] = '已经连接推流服务器';
@@ -90,19 +89,22 @@ Page({
   renderChartBox: function (data) {
     console.log(data);
     var that = this;
-    var message = that.data.message;
+    var message=[];
     if (data.header.cmd == 'reload.rpt') {
       that.loadRpt();
       return;
     }
     if (data.header.cmd == 'reload.msg') {
+      message = [];
       that.loadMsg();
       return;
     }
     if (data.header.cmd == 'content') {
+      message = that.data.message;
       message.push(data);
     }
     
+
     that.setData({ message: message });
     that.setData({ toView: 1000 });
     wx.pageScrollTo({
@@ -335,6 +337,7 @@ Page({
   },
   loadMsg:function(){
     var that=this;
+    that.data.message=[];
     util.request(cfg.getLiveMsgList, { rid: that.data.id },
       function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -347,6 +350,8 @@ Page({
   },
   loadRpt: function () {
     var that = this;
+    that.data.list=[];
+    that.setData({ list: [] });
     util.request(cfg.getLiveRptList, { rid: that.data.id, page: 1 },
       function (data) {
         that.setData({ list: data.data });
@@ -364,7 +369,7 @@ Page({
     console.log(res);
     if (res.scrollTop >= 30) {
       if (true) {
-        that.setData({ pusherSizeH: 16, pusherSizeW: 50 });
+        that.setData({ pusherSizeH: 0, pusherSizeW: 0 });
       }
     } else {
       if (true) {

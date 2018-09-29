@@ -19,7 +19,7 @@ var config = {
     checkImageUrl: `${server}/live/www/captcha/image`,
     uploadUrl: `${server}/portal/www/upload.do`,
     getLiveMsgList: `${server}/live/www/live/getLiveMsgList`,
-    insertLiveRptSapp: `${server}/live/www/live/insertLiveRptSapp`,
+  insertLiveRpt: `${server}/live/liveRpt/www/insertLiveRpt`,
     getLiveRptList: `${server}/live/www/live/getLiveRptList`,
     insertLive: `${server}/live/live/www/insertLive`,
     updateLive: `${server}/live/live/www/updateLive`,

@@ -258,8 +258,12 @@ public class LiveRptController extends LiveBaseController {
     @ResponseBody
     public MessageResponse updateAudit(String id,String rst,String text) throws Exception {
         LiveRptVo o=this.liveRptService.selectLiveRptByPrimaryKey(id).getValue();
+
+        MessageResponse response=this.liveRptService.updateAudit(id,rst,text,this.getCurUserProp());
+
         this.cls(this.createMessage("reload.rpt"),o.getRid());
-        return this.liveRptService.updateAudit(id,rst,text,this.getCurUserProp());
+        return  response;
+
     }
 
 

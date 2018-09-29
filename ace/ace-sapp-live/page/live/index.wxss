@@ -168,40 +168,49 @@ swiper{
 }
 
 .headimgp {
-	width:50rpx;height:50rpx;border-radius:50%;vertical-align:middle;
+	width:70rpx;height:70rpx;border-radius:0rpx;vertical-align:middle;
 }
 
 .rpt-content{
-  padding-top: 10rpx;
-  padding-bottom: 30rpx;
+  padding-top: 1rpx;
+  padding-bottom: 1rpx;
   border-top: solid 1px #ebebeb;
-  border-bottom: solid 1px #ebebeb;
 }
 .content {
-	padding-top: 20rpx;
-  padding-bottom: 20rpx;
+	padding-top: 10rpx;
+  padding-bottom: 10rpx;
 	font-size: 30rpx;
 	line-height: 35rpx;
 }
 
 .reporter{
   padding-bottom: 10rpx;
+   padding-left: 10rpx;
 }
 .head-date{
-  position: relative;
-  left: -70rpx;
-  top: -35rpx;
+  position:relative;
+  left:-80rpx;
+  bottom:-70rpx;
+  background:#fff;
+  width:70rpx;
+  color:blue;
+  border-radius:50%;
+  height:70rpx;
+  padding:2.5rpx;
+  line-height:70rpx;
+  text-align:center;
+   border:1rpx solid blue;
 }
 .wrap {
 	padding-left: 40rpx;
   padding-right: 40rpx;
-  padding-top: 30rpx;
+  padding-top: 2rpx;
 }
 .report-box-second{
   flex-direction:column;
   padding-left: 40rpx;
   padding-right: 40rpx;
-  padding-bottom: 20rpx;
+  padding-bottom: 2rpx;
 }
 .report-box-firse{
   border-left: solid 1px #ebebeb;
@@ -315,7 +324,6 @@ swiper{
    /* z-index: 100;*/
     width: 100%;
     /*position: fixed; */
-    font-weight: bold;
     font-size: 32rpx;
     color: #666;
     flex: none;
@@ -347,7 +355,7 @@ swiper{
     width: 60rpx;
     margin: 0 auto;
     background:blue;
-    border-radius: 10%;
+    border-radius: 20%;
 }
 .comments{
   background-color:#e5e5e5;

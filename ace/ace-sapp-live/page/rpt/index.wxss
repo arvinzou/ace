@@ -29,7 +29,7 @@
 }
 .active{
     color:#F65959;
-    border-bottom: 4rpx solid #F65959;
+    border-bottom: 4rpx solid blue;
 }
 swiper{
   margin: 5rpx;
@@ -98,7 +98,6 @@ swiper{
    /* z-index: 100;*/
     width: 100%;
     /*position: fixed; */
-    font-weight: bold;
     font-size: 32rpx;
     color: #666;
     flex: none;
@@ -116,7 +115,7 @@ swiper{
 
 .navbar .item.active {
     font-size: 34rpx;
-    color: #d83e3f;
+    color:blue;
 }
 
 .navbar .item.active:after {
@@ -129,10 +128,10 @@ swiper{
     height: 6rpx;
     width: 60rpx;
     margin: 0 auto;
-    background: #d83e3f;
-    border-radius: 10%;
+    background: blue;
+    border-radius: 20%;
 }
 .active {
-  color:#F65959;
+  color:blue;
   border-bottom:4rpx solid #fff;
 }

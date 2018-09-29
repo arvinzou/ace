@@ -1,5 +1,5 @@
 <view class='index'>
-  <cover-view style='display:flex;flex-direction:row;position:fixed;width:100%'>
+  <view style='display:flex;flex-direction:row;position:fixed;width:100%'>
     <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:{{pusherSizeW}}%; height:{{pusherSizeH}}vh;flex:1"
       waiting-image="../../image/video-cover.jpg">
       <cover-view class="info-tip" hidden="{{pusherSizeH==16}}">
@@ -16,7 +16,7 @@
         <cover-view wx:if="{{info.netSpeed}}">发送速度:{{info.netSpeed}}</cover-view>
       </cover-view>
     </cover-view>
-  </cover-view>
+  </view>
   <!--导航条-->
   <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
     <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
@@ -67,13 +67,13 @@
             <view class="head-date">
               {{item.createDate}}
             </view>
-            <view class="reporter">
-              <image wx:if="item.rpt.headimgurl.length>0" src="{{item.rpt.headimgurl}}" class="headimgp" />
+            <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
+              <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
 
               <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
             </view>
             <view class='rpt-content'>
-              <view wx:if="item.content.length>0" class="content">
+              <view wx:if="{{item.content.length>0}}" class="content">
                 <text>{{item.content}}</text>
               </view>
 
