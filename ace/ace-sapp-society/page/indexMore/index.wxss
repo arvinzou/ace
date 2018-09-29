@@ -1,192 +1,18 @@
+@import "../common/lib/weui.wxss";
+
 .index{
     width: 100%;
     height: auto;
     background: #F6F6F6;
 }
-.container{
+.activity-list{
     width: 100%;
     height: auto;
     background: #FFFFFF;
     margin-bottom: 20rpx;
 }
-.box{
-    width: 90%;
-    height: auto;
-    margin: 0 auto;
-}
-.activity-menu{
-    width: 100%;
-    height: 100rpx;
-    line-height: 100rpx;
-}
-.activity-menu::after{
-    content: '';
-    clear: both;
-    display: block;
-}
-.menu-left{
-    width: 50%;
-    height: 100%;
-    float: left;
-}
-.menu-right{
-    width: 50%;
-    height: 100%;
-    float: right;
-    text-align: right;
-}
-.menu-left text{
-    font-size:40rpx;
-    font-family:MFLiHei_Noncommercial-Regular;
-    font-weight:bold;
-    color:rgba(255,153,6,1);
-    line-height:44rpx;
-}
-.see-text{
-    height:25rpx;
-    font-size:26rpx;
-    font-weight:500;
-    color:rgba(153,153,153,1);
-}
-.see-image{
-    width: 12rpx;
-    height: 22rpx;
-}
-
-.box{
-    width: 90%;
-    height: 362rpx;
-    padding-top: 30rpx;
-    margin: 0 auto;
-}
-.index-menu{
-    width: 100%;
-    height: 151rpx;
-}
-.index-menu::after{
-    content: '';
-    clear: both;
-    display: block;
-}
-.menu-item{
-    width: 25%;
-    height: 100%;
-    float: left;
-    text-align: center;
-}
-.menu-item image{
-    width: 91rpx;
-    height: 91rpx;
-}
-.menu-item-title{
-    font-size:26rpx;
-    font-weight:500;
-    color:rgba(102,102,102,1);
-    line-height:45rpx;
-}
-.activity-list{
-    width: 90%;
-    height: auto;
-    margin: 0 auto;
-}
-.activity-item{
-    width: 100%;
-    height: 100%;
-    border-bottom: 1px solid #efefef;
-     padding-bottom: 30rpx;
-}
-.title01{
-    width: 100%;
-    height: 90rpx;
-    line-height: 90rpx;
-    border-bottom: 1px solid #efefef;
-    color: #222222;
-    font-size: 32rpx;
-    font-weight: bold;
-}
-.activity-item-left{
-    width: 70%;
-    height: auto;
-    float: left;
-}
-.activity-item-right{
-    width: 30%;
-    height: auto;
-    float: left;
-}
-.activity-item::after{
-    content: '';
-    clear: both;
-    display: block;
-}
-.title02{
-    color: #222222;
-    font-size: 32rpx;
-    font-weight: bold;
-    padding-top: 30rpx;
-}
-.type01{
-    width: 98rpx;
-    height: 40rpx;
-    color: #425DAE;
-    font-size: 20rpx;
-    font-weight: bold;
-    text-align: center;
-    background:rgba(214,224,255,1);
-    opacity:0.52;
-    border-radius:4rpx; 
-    margin-top: 30rpx;
-}
-.publish-person-name{
-    color: #999999;
-    font-size: 26rpx;
-    font-weight: 500;
-    padding-right: 60rpx;
-}
-.publish-person-time{
-    color: #999999;
-    font-size: 26rpx;
-    font-weight: 500;
-}
-.publish-person{
-    width: 100%;
-    height: 60rpx;
-    line-height: 60rpx;
-}
-.publish-person::after{
-    content: '';
-    clear: both;
-    display: block;
-}
-.activity-list-image{
-    width: 186rpx;
-    height: 146rpx;
-    margin-left: 20rpx;
-    margin-top: 30rpx;
-}
-.activity-content{
-    width: 100%;
-    height: 392rpx;
-    background: #F6F6F6;
-    margin-top: 28rpx;
-}
-.type02{
-    width: 98rpx;
-    height: 40rpx;
-    line-height: 40rpx;
-    color: #FF5E93;
-    font-size: 20rpx;
-    font-weight: bold;
-    text-align: center;
-    background:rgba(255,214,238,1);
-    opacity:0.52;
-    border-radius:4rpx; 
-    margin-top: 40rpx;
-    margin-right: 60rpx;
-}
-
 .activity{
-    width: 100%;
+    width: 90%;
     height: auto;
     margin: 0 auto;
     padding-top: 30rpx;
@@ -213,9 +39,6 @@
     text-overflow: ellipsis; 
     white-space: nowrap;
     padding-left: 30rpx;
-    color: #222222;
-    font-size: 30rpx;
-    font-weight: bold;
 }
 .stage{
     width: 82rpx;
@@ -324,14 +147,4 @@
 }
 .lft{
     margin-left: 35rpx;
-}
-.activity-warn-box{
-    width: 200rpx;
-    height: auto;
-    margin: 0 auto;
-}
-.activity-warn-box::after{
-    content: '';
-    clear: both;
-    display: block;
 }
