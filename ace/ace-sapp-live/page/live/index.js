@@ -87,6 +87,7 @@ Page({
     );
   },
   renderChartBox: function (data) {
+    console.log("===============接收信息===================");
     console.log(data);
     var that = this;
     var message=[];
