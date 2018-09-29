@@ -166,11 +166,12 @@ public class LiveMsgController extends LiveBaseController {
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
     public MessageResponse updateStatus(String id,String status) throws Exception {
+        MessageResponse rst =this.liveMsgService.updateStatus(id,status);
         if(status.equals("3")){
             LiveMsgVo o=this.liveMsgService.selectLiveMsgByPrimaryKey(id).getValue();
             this.cls(this.createMessage("reload.msg"),o.getRid());
         }
-        return this.liveMsgService.updateStatus(id,status);
+        return rst;
     }
     private  String createMessage(String cmd){
        return  "{\"header\":{\"cmd\":\""+cmd+"\"},\"message\":{}}";
