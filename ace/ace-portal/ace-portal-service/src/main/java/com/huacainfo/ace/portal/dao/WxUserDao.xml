@@ -157,13 +157,13 @@
     limit 0,1
   </select>
   <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
-    <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+    <id column="user_id" property="userId" jdbcType="VARCHAR"/>
     <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
     <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
     <result column="SEX" property="sex" jdbcType="CHAR"/>
     <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
-    <result column="NAME" property="name" jdbcType="VARCHAR"/>
-    <result column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR"/>
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR"/>
     <result column="AREA_CODE" property="areaCode" jdbcType="CHAR"/>
     <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
     <result column="STAUTS" property="stauts" jdbcType="CHAR"/>
@@ -185,9 +185,9 @@
   </select>
 
   <select id="selectSysUserByUnionId" resultType="map">
-    select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+    select t.user_id userId,t.mobile mobile,t.name userName,a.department_name corpName,t.department_id corpId from users t left join department a
     on t.department_id=a.department_id
-    where t.appOpenId=#{unionId} limit 0,1
+    where (t.appOpenId=#{unionId} or t.openId=#{unionId}) limit 0,1
   </select>
 
   <select id="selectSysUserByMobile" resultType="map">

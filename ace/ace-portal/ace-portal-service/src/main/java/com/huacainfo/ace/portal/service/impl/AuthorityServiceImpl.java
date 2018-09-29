@@ -81,42 +81,21 @@ public class AuthorityServiceImpl implements AuthorityService {
 			_3rd_session=userinfo.getString("openId");
 			userinfo.put("unionId",_3rd_session);
 		}
-		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
-        if(CommonUtils.isNotEmpty(user)){
-        	if(CommonUtils.isNotEmpty(user.getMobile())){
-				Map<String, Object> userProp=this.wxUserDao.selectSysUserByUnionId(user.getUnionId());
-				user.setUserProp(userProp);
-				userinfo.put("userProp",JSON.parseObject(JSON.toJSONString(userProp)));
-			}
-		}
-
-		if(CommonUtils.isNotEmpty(user)){
-			userinfo.put("areaCode",user.getAreaCode());
-			userinfo.put("category",user.getCategory());
-			userinfo.put("party",user.getParty());
-			userinfo.put("role",user.getRole());
-			if(CommonUtils.isNotEmpty(user)){
-				if(CommonUtils.isNotEmpty(user.getRole())){
-					if(user.getRole().equals("admin")){
-						userinfo.put("category","");
-						userinfo.put("party","");
-						logger.info("admin in login");
-					}
-				}
-			}
-		}
+		Map<String, Object> userProp=this.wxUserDao.selectSysUserByUnionId(_3rd_session);
+		userinfo.put("userProp",JSON.parseObject(JSON.toJSONString(userProp)));
 		Map<String, Object> o = new HashMap<String, Object>();
 		o.put("status","0");
         o.put("session_key", session_key);
         o.put("openid", openid);
         o.put("expires_in", expires_in);
         o.put("3rd_session", _3rd_session);
-        o.put("userinfo",user);
         redisTemplate.opsForValue().set(_3rd_session + "openid", openid);
         redisTemplate.opsForValue().set(_3rd_session + "session_key", session_key);
 		redisTemplate.opsForValue().set(_3rd_session, userinfo);
 		WxUser wxUser= JSON.parseObject(userinfo.toString(),WxUser.class);
 		wxUser.setAppId(appid);
+		wxUser.setUserProp(userProp);
+		o.put("userinfo",wxUser);
 		if(CommonUtils.isNotEmpty(latitude)){
 			wxUser.setLatitude(new java.math.BigDecimal(latitude));
 		}
