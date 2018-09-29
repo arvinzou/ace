@@ -1,37 +1,18 @@
 {
   "pages": [
     "page/home/index",
-    "page/me/index",
     "page/live/index",
     "page/rpt/index",
-    "page/liveCsl/index"
+    "page/liveCsl/index",
+    "page/userinfo/index",
+    "page/bind/index"
   ],
-    "window": {
-      "navigationBarTextStyle": "black",
-      "navigationBarTitleText": "芙蓉街道",
-      "navigationBarBackgroundColor": "#fff",
-      "backgroundColor": "#fff",
-      "enablePullDownRefresh": true
-    },
-    "tabBar": {
-      "color": "#000000",
-      "selectedColor": "#000000",
-      "borderStyle": "#000000",
-      "backgroundColor": "#fff",
-    "list": [
-      {
-        "pagePath": "page/home/index",
-        "iconPath": "image/home.png",
-        "selectedIconPath": "image/home_s.png",
-        "text": "首页"
-      },
-      {
-        "pagePath": "page/me/index",
-        "iconPath": "image/me.png",
-        "selectedIconPath": "image/me_s.png",
-        "text": "我的"
-      }
-    ]
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "芙蓉街道",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff",
+    "enablePullDownRefresh": true
   },
   "networkTimeout": {
     "request": 10000,

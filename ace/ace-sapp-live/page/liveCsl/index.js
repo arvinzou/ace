@@ -75,20 +75,18 @@ Page({
       }
     );
   },
+  
   onLoad: function (param) {
     var that = this;
-    console.log('index.js.onLoad');
-    console.log(param);
-    this.setData({param: param});
-    if (wx.getStorageSync('userinfo')){
-      console.log('logined');
-      that.initData(param);
-    }else{
-      console.log('logining');
-      util.login(function (res) {
-        that.initData(param);
-      });
+    if (!util.isLogin()) {
+      wx.navigateTo({ url: "../userinfo/index?url=../liveCls/index?id=" + params.id });
     }
+    that.setData({
+      userinfo: wx.getStorageSync('userinfo')
+    });
+    console.log(param);
+    that.setData({param: param});
+    that.initData(param);
   },
   formSubmit: function (e) {
     var that = this;

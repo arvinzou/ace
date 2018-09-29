@@ -1,17 +1,17 @@
 var cfg = require("../config.js");
 function formatLocation(longitude, latitude) {
-    if (typeof longitude === 'string' && typeof latitude === 'string') {
-        longitude = parseFloat(longitude)
-        latitude = parseFloat(latitude)
-    }
+  if (typeof longitude === 'string' && typeof latitude === 'string') {
+    longitude = parseFloat(longitude)
+    latitude = parseFloat(latitude)
+  }
 
-    longitude = longitude.toFixed(2)
-    latitude = latitude.toFixed(2)
+  longitude = longitude.toFixed(2)
+  latitude = latitude.toFixed(2)
 
-    return {
-        longitude: longitude.toString().split('.'),
-        latitude: latitude.toString().split('.')
-    }
+  return {
+    longitude: longitude.toString().split('.'),
+    latitude: latitude.toString().split('.')
+  }
 }
 
 
@@ -19,50 +19,50 @@ function formatLocation(longitude, latitude) {
 
 
 function request(url, data, success, fail, complete) {
-    console.log('request url-->', url);
-    console.log('request data-->', data);
-    var _url = url,
-        _data = data,
-        _success = success,
-        _fail = fail,
-        _complete = complete;
-    wx.showNavigationBarLoading();
-    wx.showLoading({ title: "请求中" });
-    wx.request({
-        url: url,
-        data: data,
-        method: "GET",
-        dataType: "json",
-        header: {
-            'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
-        },
-        success: function (res) {
-            console.log(res);
-            wx.hideNavigationBarLoading() //完成停止加载
-            wx.hideLoading();
-            if (typeof _success == "function") {
-                _success(res.data);
-            }
-        },
-        fail: function (res) {
-            wx.hideNavigationBarLoading() //完成停止加载
-            wx.hideLoading();
-            if (typeof _fail == "function") {
-                _fail(res);
-            }
-        },
-        complete: function (res) {
-            if (typeof _complete == "function") {
-                _complete(res);
-            }
-        }
-    });
+  console.log('request url-->', url);
+  console.log('request data-->', data);
+  var _url = url,
+    _data = data,
+    _success = success,
+    _fail = fail,
+    _complete = complete;
+  wx.showNavigationBarLoading();
+  wx.showLoading({ title: "请求中" });
+  wx.request({
+    url: url,
+    data: data,
+    method: "GET",
+    dataType: "json",
+    header: {
+      'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
+    },
+    success: function (res) {
+      console.log(res);
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.hideLoading();
+      if (typeof _success == "function") {
+        _success(res.data);
+      }
+    },
+    fail: function (res) {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.hideLoading();
+      if (typeof _fail == "function") {
+        _fail(res);
+      }
+    },
+    complete: function (res) {
+      if (typeof _complete == "function") {
+        _complete(res);
+      }
+    }
+  });
 }
 function uuid() {
   var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
   var uuid = [], i;
-  var radix =chars.length;
-  var len=28;
+  var radix = chars.length;
+  var len = 28;
   if (len) {
     for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * radix];
   } else {
@@ -81,7 +81,7 @@ function uuid() {
 function formatNumber(n) {
   n = n.toString()
   return n[1] ? n : '0' + n
-} 
+}
 function formatTime(date, format) {
   var formateArr = ['Y', 'M', 'D', 'h', 'm', 's'];
   var returnArr = [];
@@ -100,21 +100,30 @@ function formatTime(date, format) {
   return format;
 }
 function formatDate(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
-    return [year, month, day].map(formatNumber).join('-');
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+  return [year, month, day].map(formatNumber).join('-');
 }
-function security(role){
+function isLogin() {
+  console.log("==============isLogin===============");
   var userinfo = wx.getStorageSync('userinfo');
   console.log(userinfo);
-  if (!userinfo){
-      wx.showToast({
-        title: '身份未识别',
-        icon: 'none',
-        duration: 5000
-      })
-      return false;
+  if (!userinfo.userProp) {
+    return false;
+  }
+  return true;
+}
+function security(role) {
+  var userinfo = wx.getStorageSync('userinfo');
+  console.log(userinfo);
+  if (!userinfo) {
+    wx.showToast({
+      title: '身份未识别',
+      icon: 'none',
+      duration: 5000
+    })
+    return false;
   }
   if (!userinfo.role) {
     wx.showToast({
@@ -125,7 +134,7 @@ function security(role){
     return false;
   }
   if (role) {
-    if (userinfo.role!=role) {
+    if (userinfo.role != role) {
       wx.showToast({
         title: '系统未授权',
         icon: 'none',
@@ -137,14 +146,20 @@ function security(role){
   return true;
 }
 function login(callback) {
+  console.log("start login");
   var that = this;
   var _callback = callback;
   wx.getLocation({
     type: 'gcj02',
     success: function (rst) {
+      console.log(rst);
       wx.login({
         success: function (o) {
+          console.log(o);
           wx.getUserInfo({
+            fail: function (res) {
+              wx.showModal({ title: "提示", showCancel: false, content: "获取用户失败" });
+            },
             success: function (res) {
               wx.request({
                 url: cfg.loginUrl,
@@ -161,7 +176,7 @@ function login(callback) {
                   wx.setStorageSync('WX-SESSION-ID', res.data.value['3rd_session']);
                   wx.setStorageSync('userinfo', res.data.value['userinfo']);
                   console.log('login success', res);
-                  if (_callback){
+                  if (_callback) {
                     console.log('login callback');
                     _callback(res);
                   }
@@ -177,6 +192,47 @@ function login(callback) {
       })
     }
   });
+
+}
+
+function bind(captcha, mobile, callback) {
+  console.log("start bind");
+  var that = this;
+  var _callback = callback;
+  wx.showNavigationBarLoading();
+  wx.showLoading({ title: "请求中" });
+  wx.request({
+    url: cfg.bindUrl,
+    data: {
+      captcha: captcha,
+      mobile
+    },
+    header: {
+      'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
+    },
+    success: function (res) {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.hideLoading();
+
+      if (res.data.status == 0 && res.data.value.status == 0) {
+        wx.setStorageSync('userinfo', res.data.value['userinfo']);
+        console.log('login success', res);
+        if (_callback) {
+          console.log('bind callback');
+          _callback(res);
+        }
+      } else {
+        wx.showModal({ title: "提示", showCancel: false, content: res.data.errorMessage });
+      }
+
+    },
+    fail: function ({ errMsg }) {
+      wx.hideNavigationBarLoading() //完成停止加载
+      wx.hideLoading();
+      console.log('request fail', errMsg);
+      wx.showModal({ title: "提示", showCancel: false, content: "鉴权失败" });
+    }
+  })
 
 }
 /** 
@@ -227,14 +283,14 @@ function objToStrMap(obj) {
   }
   return strMap;
 }
-function extend(o1,o2){
+function extend(o1, o2) {
   let map = objToStrMap(o1);
   for (let k of Object.keys(o2)) {
     map.set(k, o2[k]);
   }
   return strMapToObj(map);
 }
-function initRadioGroupData(list,value){
+function initRadioGroupData(list, value) {
   for (var i = 0, len = list.length; i < len; ++i) {
     if (list[i].value == value) {
       list[i].checked = true;
@@ -251,20 +307,22 @@ function indexOf(arr, item) {
   return arr.indexOf(item);
 }
 module.exports = {
-    formatTime: formatTime,
-    formatLocation: formatLocation,
-    request: request,
-    uuid: uuid,
-    formatDate:formatDate,
-    login:login,
-    security: security,
-    stringToJson: stringToJson,
-    jsonToString: jsonToString,
-    mapToJson: mapToJson,
-    jsonToMap: jsonToMap,
-    strMapToObj: strMapToObj,
-    objToStrMap: objToStrMap,
-    extend: extend,
-    initRadioGroupData: initRadioGroupData,
-    indexOf: indexOf
+  formatTime: formatTime,
+  formatLocation: formatLocation,
+  request: request,
+  uuid: uuid,
+  formatDate: formatDate,
+  login: login,
+  bind: bind,
+  isLogin: isLogin,
+  security: security,
+  stringToJson: stringToJson,
+  jsonToString: jsonToString,
+  mapToJson: mapToJson,
+  jsonToMap: jsonToMap,
+  strMapToObj: strMapToObj,
+  objToStrMap: objToStrMap,
+  extend: extend,
+  initRadioGroupData: initRadioGroupData,
+  indexOf: indexOf
 }

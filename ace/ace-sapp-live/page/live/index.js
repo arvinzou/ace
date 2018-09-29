@@ -36,9 +36,9 @@ dict['3003'] = 'RTMP服务器握手失败';
 dict['3004'] = 'RTMP服务器主动断开';
 dict['3005'] = 'RTMP 读/写失败';
 var wxuser = {
-  headimgurl: "http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJLnWlZ5QwperRWRswicfELLia3cqTuLJapz3jX27VY19mwRianduy9cibSefAlnGRxNH341Qnic5w9aEg/132",
-  nickname: "热情的沙漠",
-  openid: "oFvIjw8x1--0lQkUhO1Ta3L59o3c"
+  headimgurl: "",
+  nickname: "",
+  openid: ""
 };
 
 Page({
@@ -70,19 +70,8 @@ Page({
     pusherSizeW: 100
   },
   onReady: function (res) {
-    console.log('index.js.onReady');
     var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
     this.data.videoContext = wx.createLivePusherContext("video-livePusher");
-    util.login();
-
   },
   statechange(e) {
     console.log('live-pusher code:', e.detail.code)
@@ -101,8 +90,12 @@ Page({
     console.log(data);
     var that = this;
     var message = that.data.message;
-    if (data.header.type != '1') {
+    if (data.header.type == '2') {
       that.loadRpt();
+      return;
+    }
+    if (data.header.type == '3') {
+      that.loadMsg();
       return;
     }
     message.push(data);
@@ -114,21 +107,23 @@ Page({
   },
   onLoad: function (params) {
     var that = this;
-    console.log('index.js.onLoad');
+    if (!util.isLogin()) {
+      wx.navigateTo({ url: "../userinfo/index?url=../live/index?id=" + params.id });
+    }
+    that.setData({
+      userinfo: wx.getStorageSync('userinfo')
+    });
     that.setData({
       id: params.id
     });
     that.initData(that.data.id);
-    var url = "ws://" + cfg.websocketurl + "/live/www/websocket/" + that.data.id + "/" + wxuser.openid + "/chat";
+    var url = "ws://" + cfg.websocketurl + "/live/www/websocket/" + that.data.id + "/" + that.data.userinfo.unionId + "/chat";
     console.log(url);
-
     openSocket.connect(function (data) { // WebSocket初始化连接
       if (data) {
         that.renderChartBox(data);
       }
     }, url);
-
-
     setInterval(() => {
       console.log("心跳检查websocket");
       if (app.globalData.socketConnectFail) { // WebSocket断线重连
@@ -148,9 +143,6 @@ Page({
   },
   play(e) {
     var that = this;
-    if (!util.security('admin')) {
-      return;
-    }
     var pusherStatus = that.data.pusherStatus;
     var userinfo = wx.getStorageSync('userinfo');
     that.setData({
@@ -265,7 +257,12 @@ Page({
     var message = {};
     message.header = {
       type: 1,
-      wxuser: wxuser
+      wxuser: {
+        headimgurl: that.data.userinfo.avatarUrl,
+        nickname: that.data.userinfo.nickName,
+        openid: that.data.userinfo.openId,
+        unionid: that.data.userinfo.unionId
+      }
     };
 
     message.createTime = util.formatTime(new Date(), 'h:m:s');
@@ -273,20 +270,12 @@ Page({
     wx.sendSocketMessage({
       data: JSON.stringify(message),
     });
+    console.log(message);
     that.setData({ contentText: '' });
   },
   initData(id) {
     var that = this;
-    util.request(cfg.getLiveMsgList, { rid: id },
-      function (data) {
-
-        for (var i = 0; i < data.length; i++) {
-          var o = JSON.parse(data[i].content);
-          console.log(o);
-          that.renderChartBox(o);
-        }
-      }
-    );
+    that.loadMsg();
     that.loadRpt();
 
   },
@@ -332,18 +321,6 @@ Page({
     });
     that.loadRpt();
   },
-  //点击切换
-  clickTab: function (e) {
-    var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current
-      })
-    }
-    that.loadRpt();
-  },
   rpt: function () {
     var that = this;
     console.log('../rpt/index?id=' + that.data.id);
@@ -351,6 +328,18 @@ Page({
       url: '../rpt/index?id=' + that.data.id,
     })
 
+  },
+  loadMsg:function(){
+    var that=this;
+    util.request(cfg.getLiveMsgList, { rid: that.data.id },
+      function (data) {
+        for (var i = 0; i < data.length; i++) {
+          var o = JSON.parse(data[i].content);
+          console.log(o);
+          that.renderChartBox(o);
+        }
+      }
+    );
   },
   loadRpt: function () {
     var that = this;
@@ -402,6 +391,7 @@ Page({
     let that = this;
     wx.stopPullDownRefresh();
     that.loadRpt();
+    that.loadMsg();
 
   }
 });

@@ -17,7 +17,14 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    that.initData();
+    if (!util.isLogin()) {
+      wx.navigateTo({ url: "../userinfo/index?url=../home/index" });
+    }else{
+      that.initData();
+      that.setData({
+        userinfo: wx.getStorageSync('userinfo')
+      });
+    }
   },
   onPullDownRefresh: function () {
     let that = this;

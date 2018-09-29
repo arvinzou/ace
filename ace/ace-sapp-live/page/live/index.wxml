@@ -81,7 +81,7 @@
               <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;' controls="{{1>0}}"></audio>
               <view class="pictures" data-count="{{item.imageList.length}}">
                 <view class="imglist{{item.imageList.length}}">
-                  <block wx:for-items="{{item.imageList}}" wx:for-item="imgitem" wx:for-index="imgindex" >
+                  <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex" >
                     <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
 
                   </block>
