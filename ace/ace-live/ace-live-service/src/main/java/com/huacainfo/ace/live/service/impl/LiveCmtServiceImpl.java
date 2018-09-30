@@ -82,7 +82,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
      * @version: 2018-01-13
      */
     @Override
-    public MessageResponse insertLiveCmt(LiveCmt o, String corpId)
+    public MessageResponse insertLiveCmt(LiveCmt o)
             throws Exception {
         o.setId(UUID.randomUUID().toString());
         if (CommonUtils.isBlank(o.getRptId())) {

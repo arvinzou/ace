@@ -268,9 +268,9 @@ public class WWWController extends LiveBaseController {
         Map<String, String> data = new HashMap<String, String>();
         data.put("id", id);
         data.put("type", type);
+        data.put("service", "like");
         this.logger.info("{}", data);
-        String topic = "liker";
-        this.kafkaProducerService.sendMsg(topic, data);
+        this.kafkaProducerService.sendMsg("topic.sys.msg.live", data);
         return new MessageResponse(0, "OK");
     }
 

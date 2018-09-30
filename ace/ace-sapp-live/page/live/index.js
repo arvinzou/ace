@@ -60,6 +60,7 @@ Page({
     toView: 0,
     contentText: '',
     hiddenmodalput: true,
+    hiddenmodalcmt:true,
     display: 'show',
     currentTab: 0,
     navbar: ['互动聊天', '图文直播'],
@@ -403,5 +404,70 @@ Page({
     that.loadRpt();
     that.loadMsg();
 
-  }
+  },
+  addlike:function(e){
+    console.log(e.currentTarget.dataset.id);
+  },
+  addcmt: function (e) {
+    console.log(e.currentTarget.dataset.id);
+    var that=this;
+    that.setData({
+      hiddenmodalcmt: false,
+      rptId: e.currentTarget.dataset.id
+    })
+  },
+  //确认  
+  confirmCmt: function (e) {
+    console.log('form发生了submit事件，携带数据为：', e);
+    var that = this;
+    if (!that.data.contentCmtText) {
+      wx.showToast({
+        title: '发送内容不为空',
+        icon: 'none',
+        duration: 1000
+      })
+      return false;
+    }
+    that.cmtFormSubmit();
+    that.setData({
+      hiddenmodalcmt: true
+    })
+  },
+  contentCmtInput: function (e) {
+    this.setData({
+      contentCmtText: e.detail.value
+    })
+  },
+  cmtFormSubmit: function () {
+    var that = this;
+    var data = {};
+    data.rptId = that.data.rptId;
+    data.uid = that.data.userinfo.unionId;
+    data.content = that.data.contentCmtText;
+    util.request(cfg.insertLiveCmt, { jsons: JSON.stringify(data)},
+      function (data) {
+        that.setData({ hiddenmodalcmt:true });
+        that.setData({ contentCmtText: '' });
+      }
+    );
+    
+  },
+  initData(id) {
+    var that = this;
+    that.loadMsg();
+    that.loadRpt();
+
+  },
+  //点击按钮痰喘指定的hiddenmodalput弹出框  
+  modalinputCmt: function () {
+    this.setData({
+      hiddenmodalcmt: !this.data.hiddenmodalcmt
+    })
+  },
+  //取消按钮  
+  cancelCmt: function () {
+    this.setData({
+      hiddenmodalcmt: true
+    });
+  },
 });

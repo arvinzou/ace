@@ -1,6 +1,7 @@
 package com.huacainfo.ace.live.service.impl;
 
 
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -40,6 +41,9 @@ public class WWWServiceImpl implements WWWService {
     private SqlSessionTemplate sqlSession;
 
     private int defaultPageSize = 10;
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     /**
      * @throws
@@ -199,12 +203,25 @@ public class WWWServiceImpl implements WWWService {
     public Map<String, Object> updateRptLikeNum(String id, String type) {
         Map<String, Object> rst = new HashMap<>();
         rst.put("status", 0);
+        String rid="";
         if (type.equals("1")) {
             this.liveDao.updateLiveLikeNum(id);
+
+
         } else {
             this.liveDao.updateRptLikeNum(id);
+
+
+
         }
 
+
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", rid);
+        data.put("cmd", "reload.rpt");
+        data.put("body", type);
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg("topic.sys.msg.live.client", data);
         return rst;
     }
 

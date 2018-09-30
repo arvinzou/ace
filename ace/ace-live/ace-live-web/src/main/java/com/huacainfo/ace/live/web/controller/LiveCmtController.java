@@ -83,8 +83,7 @@ public class LiveCmtController extends LiveBaseController {
     @ResponseBody
     public MessageResponse insertLiveCmt(String jsons) throws Exception {
         LiveCmt obj = JSON.parseObject(jsons, LiveCmt.class);
-        return this.liveCmtService
-                .insertLiveCmt(obj,this.getCurUserProp().getCorpId());
+        return this.liveCmtService.insertLiveCmt(obj);
     }
 
     /**
@@ -140,11 +139,11 @@ public class LiveCmtController extends LiveBaseController {
     }
 
     /**
+     * @param status
      * @throws
      * @Title:updateStatus
      * @Description: TODO(审核)
      * @param: @param id
-     * @param status
      * @param: @throws Exception
      * @return: MessageResponse
      * @author: 陈晓克
@@ -152,15 +151,37 @@ public class LiveCmtController extends LiveBaseController {
      */
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
-    public MessageResponse updateStatus(String id,String status) throws Exception {
-       String rptId= this.liveCmtService.selectLiveCmtByPrimaryKey(id).getValue().getRptId();
-       String rid=liveRptService.selectLiveRptByPrimaryKey(rptId).getValue().getRid();
-       this.cls(this.createMessage("relaod.rpt"),rid);
-        return this.liveCmtService.updateStatus(id,status);
+    public MessageResponse updateStatus(String id, String status) throws Exception {
+        MessageResponse rst = this.liveCmtService.updateStatus(id, status);
+        String rptId = this.liveCmtService.selectLiveCmtByPrimaryKey(id).getValue().getRptId();
+        String rid = liveRptService.selectLiveRptByPrimaryKey(rptId).getValue().getRid();
+        this.cls(this.createMessage("reload.rpt"), rid);
+        return rst;
     }
 
-    private  String createMessage(String cmd){
-        return  "{\"header\":{\"cmd\":\""+cmd+"\"},\"message\":{}}";
+    /**
+     * @throws
+     * @Title:insertLiveCmt
+     * @Description: TODO(添加评论)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-13
+     */
+    @RequestMapping(value = "/www/insertLiveCmt")
+    @ResponseBody
+    public MessageResponse insertLiveCmtWww(String jsons) throws Exception {
+        LiveCmt obj = JSON.parseObject(jsons, LiveCmt.class);
+        MessageResponse rst=this.liveCmtService.insertLiveCmt(obj);
+        String rptId=obj.getRptId();
+        String rid = liveRptService.selectLiveRptByPrimaryKey(rptId).getValue().getRid();
+        this.cls(this.createMessage("reload.rpt"), rid);
+        return  rst;
+    }
+
+    private String createMessage(String cmd) {
+        return "{\"header\":{\"cmd\":\"" + cmd + "\"},\"message\":{}}";
     }
 
     @RequestMapping(value = "/cls")
@@ -173,7 +194,7 @@ public class LiveCmtController extends LiveBaseController {
             MyWebSocket.rooms.put(rid, webSocketSet);
             logger.debug("create new room rid:{}", rid);
         }
-        for (MyWebSocket  item : MyWebSocket.rooms.get(rid)) {
+        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
             try {
                 item.sendMessage(message);
             } catch (IOException e) {
