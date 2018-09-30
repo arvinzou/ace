@@ -1,0 +1,32 @@
+<view class="index">
+    <view class='singleActivity'>
+        <view class='content'>
+            <view class='cover'>
+                <image mode='widthFix' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
+            </view>
+            <view class='title'>周末太阳山爬山活动志愿者招募志愿者招…周末太阳山爬山活动志愿者招募志愿者招… </view>
+            <view class='startTime'>活动开始时间：2018-09-06 19:30</view>
+            <view class='tag taging'>报名进行中</view>
+        </view>
+    </view>
+    <view class='singleActivity'>
+        <view class='content'>
+            <view class='cover'>
+                <image mode='widthFix' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
+            </view>
+            <view class='title'>周末太阳山爬山活动志愿者招募志愿者招…周末太阳山爬山活动志愿者招募志愿者招… </view>
+            <view class='startTime'>活动开始时间：2018-09-06 19:30</view>
+            <view class='tag taging'>报名进行中</view>
+        </view>
+    </view>
+    <view class='singleActivity'>
+        <view class='content'>
+            <view class='cover'>
+                <image mode='widthFix' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
+            </view>
+            <view class='title'>周末太阳山爬山活动志愿者招募志愿者招…周末太阳山爬山活动志愿者招募志愿者招… </view>
+            <view class='startTime'>活动开始时间：2018-09-06 19:30</view>
+            <view class='tag taging'>报名进行中</view>
+        </view>
+    </view>
+</view>

@@ -4,14 +4,20 @@
             <view class="section_title">场地</view>
             <scroll-view scroll-x style="width: 100%">
                 <view class='scroll-view-x'>
-                    <view class='image-box'>
+                    <view class='image-box' bindtap='siteDetail'>
                         <image src='../../image/test1.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>欢乐水世界</view>
                     </view>
-                    <view class='image-box'>
+                    <view class='image-box' bindtap='siteDetail'>
                         <image src='../../image/test2.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>屈原公园</view>
                     </view>
-                    <view class='image-box'>
+                    <view class='image-box' bindtap='siteDetail'>
                         <image src='../../image/test3.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>华彩伟业</view>
                     </view>
                 </view>
             </scroll-view>
@@ -22,7 +28,7 @@
         <view class='section_gap'>
             <view class="section_title">商品</view>
             <view class='commodity'>
-                <view class='commodity-item evenDiv'>
+                <view class='commodity-item evenDiv' bindtap='commodityDetal'>
                     <view class='cover'></view>
                     <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
                     <view class='commodity-label'>
@@ -33,7 +39,7 @@
                         <view class='commodity-label-right'><text class='opt'>兑换</text></view>
                     </view>
                 </view>
-                <view class='commodity-item'>
+                <view class='commodity-item' bindtap='commodityDetal'>
                     <view class='cover'></view>
                     <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
                     <view class='commodity-label'>
@@ -44,7 +50,7 @@
                         <view class='commodity-label-right'><text class='opt'>兑换</text></view>
                     </view>
                 </view>
-                <view class='commodity-item evenDiv'>
+                <view class='commodity-item evenDiv' bindtap='commodityDetal'>
                     <view class='cover'></view>
                     <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
                     <view class='commodity-label'>
@@ -55,7 +61,7 @@
                         <view class='commodity-label-right'><text class='opt'>兑换</text></view>
                     </view>
                 </view>
-                <view class='commodity-item'>
+                <view class='commodity-item' bindtap='commodityDetal'>
                     <view class='cover'></view>
                     <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
                     <view class='commodity-label'>
@@ -66,7 +72,7 @@
                         <view class='commodity-label-right'><text class='opt'>兑换</text></view>
                     </view>
                 </view>
-                <view class='commodity-item evenDiv'>
+                <view class='commodity-item evenDiv' bindtap='commodityDetal'>
                     <view class='cover'></view>
                     <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
                     <view class='commodity-label'>
