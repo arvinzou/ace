@@ -1,0 +1,30 @@
+<view class='index'>
+    <view class='container'>
+        <view class='commodity-cover'>
+            <text>商品图</text>
+        </view>
+        <view class='commodity-info'>
+            <view class='commodity-title'>瑞士军刀拖箱</view>
+            <view class='price-box'>
+                <view class='price-box-left'>
+                    <text class='num'>500</text>
+                    <text class='num-title'>爱心币</text>
+                </view>
+                <view class='price-box-right'>
+                    <text class='sold'>已兑1260</text>
+                    <text class='split'>|</text>
+                    <text class='stock'>库存48</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='container'>
+        <view class='title-box'>
+            <view class='title'>商品描述</view>
+        </view>
+    </view>
+</view>
+<view class='footer'>
+    <button class='exchange'>立即兑换</button>
+</view>
