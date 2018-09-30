@@ -21,7 +21,16 @@ Page({
   onReady: function () {
 
   },
-
+  commodityDetal: function(){
+      wx.navigateTo({
+          url: '../commodity/index'
+      })
+  },
+    siteDetail: function(){
+        wx.navigateTo({
+            url: '../site/index'
+        })
+    },
   /**
    * 生命周期函数--监听页面显示
    */
