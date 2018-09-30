@@ -6,12 +6,18 @@
                 <view class='scroll-view-x'>
                     <view class='image-box'>
                         <image src='../../image/test1.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>欢乐水世界</view>
                     </view>
                     <view class='image-box'>
                         <image src='../../image/test2.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>屈原公园</view>
                     </view>
                     <view class='image-box'>
                         <image src='../../image/test3.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>华彩伟业</view>
                     </view>
                 </view>
             </scroll-view>
