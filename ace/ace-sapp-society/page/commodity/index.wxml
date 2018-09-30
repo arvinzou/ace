@@ -26,5 +26,5 @@
     </view>
 </view>
 <view class='footer'>
-    <button class='exchange'>立即兑换</button>
+    <button class='exchange' bindtap='buy'>立即兑换</button>
 </view>
