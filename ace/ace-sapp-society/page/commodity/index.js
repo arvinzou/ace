@@ -14,23 +14,18 @@ Page({
   onLoad: function (options) {
 
   },
-
+    buy: function(){
+        wx.navigateTo({
+            url: '../settlement/index'
+        })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
   },
-  commodityDetal: function(){
-      wx.navigateTo({
-          url: '../commodity/index'
-      })
-  },
-    siteDetail: function(){
-        wx.navigateTo({
-            url: '../site/index'
-        })
-    },
+
   /**
    * 生命周期函数--监听页面显示
    */
