@@ -32,14 +32,20 @@ Page({
             type:'1'
         },
         clickObject: '',
+        timer: ''
     },
     // 显示工具菜单
     showTool: function(e) {
         var that = this;
-        console.log(e);
         var id = e.currentTarget.id;
         var type = e.currentTarget.dataset.type;
         var height = e.currentTarget.offsetTop + 5;
+        if(that.timer){
+            clearTimeout(that.timer);
+        }
+        that.timer=setTimeout(function(){
+           that.cencelClickStyle(true);
+        }, 3000);
         that.setData({
                 clickObject: id
             },
@@ -117,9 +123,6 @@ Page({
     addElement: function(content, type, editing) {
         var that = this;
         var id = 'e' + new Date().getTime();
-        console.log(that);
-        console.log(that.data.clickObject);
-
         that.data.textLists.splice(that.getElementIndex(that.data.clickObject), 0, {
             id: id,
             content: content,
@@ -139,7 +142,6 @@ Page({
     },
     //获取点击元素所在序列
     getElementIndex: function(id) {
-        console.log("id" + id);
         var len = this.data.textLists.length;
         var data = this.data.textLists;
         for (var i = 0; i < len; i++) {
@@ -162,7 +164,6 @@ Page({
             itemList: ['打开照相', '选取现有的'],
             itemColor: '#007aff',
             success(res) {
-                console.log(res.tapIndex);
                 if (res.tapIndex === 0) {
                     wx.chooseImage({
                         sourceType: ['camera'],
@@ -188,6 +189,7 @@ Page({
     },
     // 清除点击样式
     cencelClickStyle: function(isAll) {
+        clearTimeout(this.timer);
         if (isAll) {
             this.setData({
                 clickObject: '',
@@ -218,7 +220,6 @@ Page({
                 id: '111'
             },
             success: function(res) {
-                console.log(1);
                 var data = JSON.parse(res.data);
                 var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
                 that.addElement(url, 2, false)

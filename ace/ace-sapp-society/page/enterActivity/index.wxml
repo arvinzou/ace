@@ -1,0 +1,21 @@
+<view class='index'>
+    <view class='prompt'>请在活动进行中时签到，活动正常结束并发布后将会把爱心币 送至您名下
+    </view>
+    <view class='form'>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <view class="input-style bottom-line">
+                <view class="title">姓名
+                </view>
+                <input class='input-value' />
+            </view>
+            <view class="input-style bottom-line">
+                <view class="title">电话
+                </view>
+                <input class='input-value' />
+            </view>
+        </form>
+    </view>
+    <view class='btn-content'>
+        <view class='btn btn-clicking'>提交</view>
+    </view>
+</view>
