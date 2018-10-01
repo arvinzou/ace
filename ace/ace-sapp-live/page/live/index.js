@@ -407,6 +407,11 @@ Page({
   },
   addlike:function(e){
     console.log(e.currentTarget.dataset.id);
+    util.request(cfg.addLike, { type: "2", id: e.currentTarget.dataset.id},
+      function (data) {
+
+      }
+    );
   },
   addcmt: function (e) {
     console.log(e.currentTarget.dataset.id);

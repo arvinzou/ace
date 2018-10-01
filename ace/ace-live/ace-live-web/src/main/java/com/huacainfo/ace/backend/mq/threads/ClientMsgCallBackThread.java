@@ -2,16 +2,11 @@ package com.huacainfo.ace.backend.mq.threads;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
-import com.huacainfo.ace.portal.service.BackendService;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.Map;

@@ -1,5 +1,6 @@
 package com.huacainfo.ace.live.web.controller;
 
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.service.LiveService;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
@@ -22,6 +23,8 @@ import com.huacainfo.ace.live.vo.LiveCmtVo;
 import com.huacainfo.ace.live.vo.LiveCmtQVo;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Controller
@@ -41,6 +44,8 @@ public class LiveCmtController extends LiveBaseController {
 
     @Autowired
     private LiveRptService liveRptService;
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     /**
      * @throws
@@ -172,12 +177,12 @@ public class LiveCmtController extends LiveBaseController {
     @RequestMapping(value = "/www/insertLiveCmt")
     @ResponseBody
     public MessageResponse insertLiveCmtWww(String jsons) throws Exception {
-        LiveCmt obj = JSON.parseObject(jsons, LiveCmt.class);
-        MessageResponse rst=this.liveCmtService.insertLiveCmt(obj);
-        String rptId=obj.getRptId();
-        String rid = liveRptService.selectLiveRptByPrimaryKey(rptId).getValue().getRid();
-        this.cls(this.createMessage("reload.rpt"), rid);
-        return  rst;
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("jsons", jsons);
+        data.put("service","cmt");
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg("topic.sys.msg.live", data);
+        return  new MessageResponse(0,"OK");
     }
 
     private String createMessage(String cmd) {
