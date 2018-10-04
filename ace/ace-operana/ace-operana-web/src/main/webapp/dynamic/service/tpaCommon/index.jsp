@@ -32,9 +32,7 @@ var normId='${param.normId}';
         </div>
     </div>
 
-    <div class="toolbar">
 
-    </div>
         <table id="grid-table"></table>
 
     <div id="grid-pager"></div>

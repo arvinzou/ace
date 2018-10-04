@@ -167,12 +167,13 @@ function initMenu(){
         buildMenu(data);
      }else{
         $.ajax({
-                    url : portalPath + '/system/getTreeList.do?loadButton=false',
+                    url :'/portal/system/getTreeList.do?loadButton=false',
                     type : 'POST',
                     timeout : 30000,
                     dataType : 'json',
                     beforeSend:function(){
-                        loading=startLoading();
+                        try{ loading=startLoading();}catch(e){}
+
                         if(loading) {
                            loading.settext("正在加载，请稍后......");
                         }

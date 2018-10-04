@@ -146,6 +146,7 @@ public class PointsRecordController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse audit(String id, String rst, String message) throws Exception {
 
-        return this.pointsRecordService.audit(id, rst, message, this.getCurUserProp());
+        //return this.pointsRecordService.audit(id, rst, message, this.getCurUserProp());
+        return null;
     }
 }

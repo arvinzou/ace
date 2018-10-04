@@ -83,14 +83,15 @@ public class TpaServiceImpl implements TpaService {
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
+		o.setDeptId(this.tpaDao.selectCorpIdByUserId(o.getLiable()));
+
 		this.tpaDao.insert(o);
 		this.dataBaseLogService.log("添加TOP问题分析", "TOP问题分析", "", o.getNormId(), o.getNormId(), userProp);
 		return new MessageResponse(0, "添加TOP问题分析完成！");
 	}
 
 	public MessageResponse updateTpa(Tpa o, UserProp userProp) throws Exception {
-		int temp = this.tpaDao.isExit(o);
-		if (temp <= 0) {
+		if (CommonUtils.isEmpty(o.getId())) {
 			return this.insertTpa(o, userProp);
 		}
 		if (CommonUtils.isBlank(o.getId())) {
@@ -106,10 +107,10 @@ public class TpaServiceImpl implements TpaService {
 			return new MessageResponse(1, "指标编码不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getProductId())) {
-			return new MessageResponse(1, "产品编码不能为空！");
+			//return new MessageResponse(1, "产品编码不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getProbDiscri())) {
-			return new MessageResponse(1, "问题描述不能为空！");
+			//return new MessageResponse(1, "问题描述不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getProbAnsys())) {
 			//return new MessageResponse(1, "原因分析不能为空！");
@@ -118,12 +119,13 @@ public class TpaServiceImpl implements TpaService {
 			//return new MessageResponse(1, "改善措施不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getLiable())) {
-			return new MessageResponse(1, "责任人不能为空！");
+			//return new MessageResponse(1, "责任人不能为空！");
+		}else{
+			o.setDeptId(this.tpaDao.selectCorpIdByUserId(o.getLiable()));
 		}
-
-
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
+
 		this.tpaDao.updateByPrimaryKey(o);
 		this.dataBaseLogService.log("变更TOP问题分析", "TOP问题分析", "", o.getNormId(), o.getNormId(), userProp);
 		return new MessageResponse(0, "变更TOP问题分析完成！");

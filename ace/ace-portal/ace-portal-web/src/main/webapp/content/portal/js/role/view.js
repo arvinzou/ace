@@ -166,12 +166,9 @@ jQuery(function($) {
 
 	function style_delete_form(form) {
 		var buttons = form.next().find('.EditButton .fm-button');
-		buttons.addClass('btn btn-sm btn-white btn-round')
-				.find('[class*="-icon"]').hide();// ui-icon, s-icon
-		buttons.eq(0).addClass('btn-danger')
-				.prepend('<i class="ace-icon fa fa-trash-o"></i>');
-		buttons.eq(1).addClass('btn-default')
-				.prepend('<i class="ace-icon fa fa-times"></i>')
+		buttons.addClass('btn btn-sm btn-white btn-round').find('[class*="-icon"]').hide();// ui-icon, s-icon
+		buttons.eq(0).addClass('btn-danger').prepend('<i class="ace-icon fa fa-trash-o"></i>');
+		buttons.eq(1).addClass('btn-default').prepend('<i class="ace-icon fa fa-times"></i>')
 	}
 
 	function style_search_filters(form) {
@@ -280,12 +277,11 @@ function style_edit_form(form) {
 			.addClass('ace ace-switch ace-switch-5')
 			.after('<span class="lbl"></span>');
 	var buttons = form.next().find('.EditButton .fm-button');
-	buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();// ui-icon,
-	buttons.eq(0).addClass('btn-primary')
-			.prepend('<i class="ace-icon fa fa-check"></i>');
-	buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
-	buttons = form.next().find('.navButton a');
-	buttons.find('.ui-icon').hide();
-	buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
-	buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
+	//buttons.addClass('btn btn-sm').find('[class*="-icon"]').hide();// ui-icon,
+	//buttons.eq(0).addClass('btn-primary').prepend('<i class="ace-icon fa fa-check"></i>');
+	//buttons.eq(1).prepend('<i class="ace-icon fa fa-times"></i>')
+	//buttons = form.next().find('.navButton a');
+	//buttons.find('.ui-icon').hide();
+	//buttons.eq(0).append('<i class="ace-icon fa fa-chevron-left"></i>');
+	//buttons.eq(1).append('<i class="ace-icon fa fa-chevron-right"></i>');
 }

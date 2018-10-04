@@ -56,26 +56,36 @@
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Tpa">
     update tpa
-    set meetingId = #{meetingId,jdbcType=VARCHAR},
-      topicId = #{topicId,jdbcType=VARCHAR},
-      normId = #{normId,jdbcType=VARCHAR},
+    set
+
+    <if test="productId!=null">
       productId = #{productId,jdbcType=VARCHAR},
+    </if>
+    <if test="probDiscri!=null">
       probDiscri = #{probDiscri,jdbcType=VARCHAR},
+    </if>
+    <if test="probAnsys!=null">
       probAnsys = #{probAnsys,jdbcType=VARCHAR},
+    </if>
+    <if test="actions!=null">
       actions = #{actions,jdbcType=VARCHAR},
+    </if>
+    <if test="liable!=null">
       liable = #{liable,jdbcType=VARCHAR},
+    </if>
+    <if test="deptId!=null">
       deptId = #{deptId,jdbcType=VARCHAR},
+    </if>
+    <if test="category!=null">
       category=#{category},
+    </if>
     <if test="status!=null">
       status = #{status,jdbcType=VARCHAR},
     </if>
-
-
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where  probDiscri=#{probDiscri} and meetingId=#{meetingId} and topicId=#{topicId}
-    and  normId=#{normId}
+    where  id=#{id}
   </update>
 
   <sql id="whereCondition">
@@ -114,7 +124,6 @@
     from
     tpa where
     probDiscri=#{probDiscri}
-    and productId=#{productId}
     and meetingId=#{meetingId}
     and topicId=#{topicId}
     and  normId=#{normId}
@@ -233,5 +242,8 @@
 
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
 
+  </select>
+  <select id="selectCorpIdByUserId" resultType="string">
+    select department_id  from portal.users where user_id=#{userId}
   </select>
 </mapper>

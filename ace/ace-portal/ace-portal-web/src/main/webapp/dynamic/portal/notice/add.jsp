@@ -60,7 +60,9 @@
 				<textarea rows="" cols="" name="content"></textarea>
 			</div>
 			<br />
-			<div id="filelist-history"></div>
+			<div id="filelist-history">
+
+			</div>
 			<div id="filelist">Your browser doesn't have Flash, Silverlight
 				or HTML5 support.</div>
 
