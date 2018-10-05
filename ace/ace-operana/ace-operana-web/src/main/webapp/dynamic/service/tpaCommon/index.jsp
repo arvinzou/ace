@@ -84,5 +84,10 @@ window.onresize = function () {
 <script id="tpl-uploader" type="text/template"><span id="filelist-history"></span><br><span id="filelist"></span><br><span id="container"><a id="pickfiles" href="javascript:;">[添加附件]</a><br><a id="uploadfiles" href="javascript:;">[上传]</a><br></span><br><span id="console"></span>
 </script>
 <div id="tableExport"></div>
+<style>
+
+.ui-jqgrid tr.jqgrow td { white-space: normal !important; height:auto; }
+
+</style>
 </body>
 </html>

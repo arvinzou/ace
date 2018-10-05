@@ -1138,6 +1138,7 @@ th[aria-selected=true] {
     float: none;
     right: 2px;
 }
+.ui-jqgrid tr.jqgrow td { white-space: normal !important; height:auto; }
 </style>
 
 
