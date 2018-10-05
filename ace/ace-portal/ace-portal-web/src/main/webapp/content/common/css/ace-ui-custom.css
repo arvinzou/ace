@@ -529,3 +529,32 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     justify-content: center;
     align-items: center;
 }
+
+.ui-jqgrid tr.jqgrow td { white-space: normal !important; height:auto; }
+.paginationbar {
+    width: 100%;
+    text-align: right;
+}
+.ui-jqgrid tr.ui-row-ltr td {
+    text-align: left;
+    border-right-width: 0px;
+    border-right-color: inherit;
+    border-right-style: solid;
+}
+.ui-jqgrid .ui-jqgrid-labels th {
+    border-right: 0px solid #e7ecf1 !important;
+    text-align: left !important;
+}
+.ui-jqgrid .ui-jqgrid-btable {
+    border-left: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-top: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-right: 0px solid #e7ecf1;
+}
+.ui-jqgrid .ui-jqgrid-labels {
+    border-left: 0px solid #e7ecf1 !important;
+}
+

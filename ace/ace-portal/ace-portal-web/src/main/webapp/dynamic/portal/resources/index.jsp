@@ -80,7 +80,7 @@
 			<div data-options="region:'center',border:false,fit:true" id="easyui-center">
 			<table id="grid-table"></table>
 	
-			<div id="grid-pager"></div>
+			<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
 		</div>
 		<div id="cc-west" class="easyui-west" data-options="region:'west',split:true" title="我的树" style="width:200px;">
 		 <ul id="tt" class="easyui-tree" data-options="

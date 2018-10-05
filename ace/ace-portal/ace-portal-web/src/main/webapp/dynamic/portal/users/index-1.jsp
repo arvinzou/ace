@@ -224,7 +224,7 @@ pageEncoding="utf-8"%>
 
                 <table id="grid-table"></table>
 
-                <div id="grid-pager"></div>
+                <div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
             </div>
             <!--end--->
         </div>

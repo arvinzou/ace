@@ -3873,7 +3873,7 @@ $.jgrid.extend({
 			$("#gview_"+$.jgrid.jqID($t.p.id)).css("width",nwidth+"px");
 			$($t.grid.bDiv).css("width",nwidth+"px");
 			$($t.grid.hDiv).css("width",nwidth+"px");
-			if($t.p.pager ) {$($t.p.pager).css("width",nwidth+"px");}
+			//if($t.p.pager ) {$($t.p.pager).css("width",nwidth+"px");}
 			if($t.p.toppager ) {$($t.p.toppager).css("width",nwidth+"px");}
 			if($t.p.toolbar[0] === true){
 				$($t.grid.uDiv).css("width",nwidth+"px");

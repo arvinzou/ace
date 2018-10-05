@@ -29,7 +29,7 @@ jQuery(function($) {
 			records : "total",
 			id : cfg.dataId
 		},
-		height : cfg.gridHeight,
+		height : 'auto',
 		colNames : _colNames,
 		colModel : _colModel(),
 		rownumbers : true,

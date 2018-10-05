@@ -64,7 +64,7 @@
 
 		<table id="grid-table"></table>
 
-		<div id="grid-pager"></div>
+		<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
 		<div id="dialog-message" class="hide">
 			<div class="easyui-panel" style="padding:5px;width:350px;height:400px">        
 				<ul id="tt" class="easyui-tree" data-options="url:'${pageContext.request.contextPath}/role/selectRoleResourceTreeList.do?roleId=1',method:'get',animate:true,checkbox:true,lines:false">

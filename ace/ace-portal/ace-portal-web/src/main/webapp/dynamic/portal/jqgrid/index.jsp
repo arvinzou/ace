@@ -1139,6 +1139,32 @@ th[aria-selected=true] {
     right: 2px;
 }
 .ui-jqgrid tr.jqgrow td { white-space: normal !important; height:auto; }
+.paginationbar {
+    width: 100%;
+    text-align: right;
+}
+.ui-jqgrid tr.ui-row-ltr td {
+    text-align: left;
+    border-right-width: 0px;
+    border-right-color: inherit;
+    border-right-style: solid;
+}
+.ui-jqgrid .ui-jqgrid-labels th {
+    border-right: 0px solid #e7ecf1 !important;
+    text-align: left !important;
+}
+.ui-jqgrid .ui-jqgrid-btable {
+    border-left: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-top: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-right: 0px solid #e7ecf1;
+}
+.ui-jqgrid .ui-jqgrid-labels {
+    border-left: 0px solid #e7ecf1 !important;
+}
 </style>
 
 
@@ -1210,8 +1236,9 @@ th[aria-selected=true] {
 	</div>
 
 	<table id="grid-table"></table>
+	<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
 
-	<ul id="grid-pager" class="pagination"></ul>
+
 
 	<div id="dialog-message" class="hide">
 		<div class="easyui-panel" style="padding:5px;width:350px;height:400px">
@@ -1251,9 +1278,7 @@ window.onresize = function () {
 	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
 	////parent.autoWidth();
 }
-jQuery(function ($) {
 
-});
 
 
 

@@ -84,7 +84,7 @@
 
 		<table id="grid-table"></table>
 
-		<div id="grid-pager"></div>
+		<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
 		<div id="dialog-message" class="hide">
 		<div class="easyui-panel" id="msg-content" style="padding:5px;width:630px;height:100px">        
 				    
