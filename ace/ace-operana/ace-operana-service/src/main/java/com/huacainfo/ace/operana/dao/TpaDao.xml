@@ -231,6 +231,26 @@
     where t.meetingId=#{condition.meetingId}
     and   t.topicId=#{condition.topicId}
     and   t.normId=#{condition.normId}
+    <if test="condition.productId!=null and condition.productId!=&quot;&quot;">
+      and t.productId=#{condition.productId}
+    </if>
+    <if test="condition.liable!=null and condition.liable!=&quot;&quot;">
+      and t.liable=#{condition.liable}
+    </if>
+    <if test="condition.status!=null and condition.status!=&quot;&quot;">
+      and t.status=#{condition.status}
+    </if>
+    <if test='condition.startDate!=null and condition.startDate!=""'>
+      <![CDATA[
+			and t.createDate>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+			]]>
+    </if>
+    <if test='condition.endDate!=null and condition.endDate!=""'>
+      <![CDATA[
+				and t.createDate<=str_to_date(#{condition.endDate},'%Y-%m-%d')
+	]]>
+    </if>
+
   </sql>
   <select id="findCountCommon" resultType="int">
     SELECT COUNT(*)

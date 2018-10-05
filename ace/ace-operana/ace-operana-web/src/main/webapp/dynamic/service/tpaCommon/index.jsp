@@ -18,6 +18,71 @@ var normId='${param.normId}';
 </script>
 <body>
 <div class="page-content">
+
+    <div class="widget-box" id="widget-box">
+        <div class="widget-header">
+            <h5 class="widget-title smaller">设置查询条件</h5>
+
+            <div class="widget-toolbar"></div>
+        </div>
+
+        <div class="widget-body">
+            <div class="widget-main padding-6">
+                <form action="#" id="fm-search">
+
+                   责任人： <select  class="easyui-combogrid" name="liable" style="width:350px;"
+                            data-options="
+           idField : 'USER_ID',
+					textField : 'NAME',
+					url : '/portal/system/selectUsers.do',
+					mode : 'remote',
+					fitColumns : true,
+					method : 'get',
+					columns : [[{
+						field : 'NAME',
+						title : '姓名',
+						width : 100
+					}, {
+						field : 'DEPARTMENT_NAME',
+						title : '部门',
+						width : 100
+					}]]
+        "></select>
+
+
+                    产品编码： <input name="productId" type="text"
+                               style="width: 100px;"/>
+
+
+                    状态：
+                    <input
+                            class="easyui-combobox" style="width: 100px" name="status"
+                            data-options="
+                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=92&selected=false',
+                    method:'get',
+                    valueField:'code',
+                    textField:'name',
+                    panelHeight:'auto'"/>
+
+
+                    任务创建时间：
+                    <input class="easyui-datebox" name="startDate" style="width:100px;">
+                    至
+                    <input class="easyui-datebox" name="endDate" style="width:100px;">
+                    <button class="btn btn-info" id="btn-search"
+                            authority="false">
+                        查询
+                        <i
+                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
     <div>
         <div class="div-left header-title-custom">任务</div>
         <div class="div-right header-title-custom">
