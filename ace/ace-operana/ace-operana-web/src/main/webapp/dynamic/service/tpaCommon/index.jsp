@@ -30,7 +30,7 @@ var normId='${param.normId}';
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                   责任人： <select  class="easyui-combogrid" name="liable" style="width:350px;"
+                   责任人： <select  class="easyui-combogrid" name="liable" style="width:300px;"
                             data-options="
            idField : 'USER_ID',
 					textField : 'NAME',
