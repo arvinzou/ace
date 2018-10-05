@@ -24,8 +24,9 @@ var normId='${param.normId}';
             <div style="text-align:right"><a class="blue" href="javascript:add()" data-rel="tooltip" data-placement="top"
                                              title="添加"><i class="ace-icon fa fa-plus-square"></i></a>
 
-                <a class="blue" href="javascript:reload()" data-rel="tooltip" data-placement="top" title="刷新"><i
+                <a class="blue" href="javascript:reload()"  title="刷新"><i
                         class="ace-icon glyphicon glyphicon-refresh"></i></a>
+                <a href="javascript:exportExcel()" style="color:blue">Excel</a>
 
 
             </div>
@@ -43,6 +44,14 @@ var normId='${param.normId}';
 
 
 <jsp:include page="../../common/footer-1.jsp"/>
+
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}//content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
 
 <script
         src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
@@ -69,6 +78,11 @@ window.onresize = function () {
 <script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
+
+
+
+<script id="tpl-uploader" type="text/template"><span id="filelist-history"></span><br><span id="filelist"></span><br><span id="container"><a id="pickfiles" href="javascript:;">[添加附件]</a><br><a id="uploadfiles" href="javascript:;">[上传]</a><br></span><br><span id="console"></span>
+</script>
+<div id="tableExport"></div>
 </body>
 </html>
