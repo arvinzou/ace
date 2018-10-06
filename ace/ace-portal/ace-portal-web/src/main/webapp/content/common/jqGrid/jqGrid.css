@@ -465,7 +465,7 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 }
 
 .ui-jqdialog-content input.FormElement {
-	width: auto
+	width: 85%
 }
 
 .ui-jqdialog-content select.FormElement {
