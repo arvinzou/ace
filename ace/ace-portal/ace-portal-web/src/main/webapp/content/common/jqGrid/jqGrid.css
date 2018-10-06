@@ -80,7 +80,7 @@ tr.ui-search-toolbar select {margin: 1px 0 0 0}
 .ui-jqgrid .ui-subgrid td.subgrid-cell {border-width: 0 0 1px 0;}
 .ui-jqgrid .ui-th-subgrid {height:20px;}
 /* loading */
-.ui-jqgrid .loading {position: absolute; top: 45%;left: 45%;width: auto;z-index:101;padding: 6px; margin: 5px;text-align: center;font-weight: bold;display: none;border-width: 2px !important; font-size:11px;}
+.ui-jqgrid .loading {position: absolute; top: 45%;left: 45%;width: auto;z-index:101;padding: 6px; margin: 5px;text-align: center;font-weight: 300;display: none;border-width: 0px !important; font-size:12px;}
 .ui-jqgrid .jqgrid-overlay {display:none;z-index:100;}
 /* IE * html .jqgrid-overlay {width: expression(this.parentNode.offsetWidth+'px');height: expression(this.parentNode.offsetHeight+'px');} */
 * .jqgrid-overlay iframe {position:absolute;top:0;left:0;z-index:-1;}
@@ -381,8 +381,8 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 	font-weight: bold;
 	font-size: 12px;
 	background-color: #FFF;
-	border: 2px solid #8EB8D1;
-	color: #E2B018
+	border: 0px solid #8EB8D1;
+	color: #1890ff
 }
 
 .ui-jqgrid .ui-search-toolbar {
