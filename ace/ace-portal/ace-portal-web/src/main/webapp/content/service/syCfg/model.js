@@ -1,5 +1,4 @@
-var _colNames = [ '系统编号', '系统名称',  '创建日期', '创建人姓名',
-		'最后修改日期', '最后修改人姓名' ];
+var _colNames = [ '系统编号', '系统名称',  '创建日期' ];
 var _colModel = function() {
 	return [
 			{
@@ -42,21 +41,6 @@ var _colModel = function() {
 				},
 				editable : false,
 				hidden : false
-			}, {
-				name : 'createUserName',
-				width : 100,
-				editable : false,
-				hidden : true
-			}, {
-				name : 'lastModifyDate',
-				width : 100,
-				editable : false,
-				hidden : true
-			}, {
-				name : 'lastModifyUserName',
-				width : 100,
-				editable : false,
-				hidden : true
 			}
 
 	];
