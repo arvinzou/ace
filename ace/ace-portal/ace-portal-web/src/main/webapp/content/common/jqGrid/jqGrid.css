@@ -1056,9 +1056,7 @@ input[readonly] {
        outline: 0;
 }
 th[aria-selected=true] {
-    background-image: -webkit-linear-gradient(top, #fff 0, #fff 100%);
-    background-image: linear-gradient(to bottom, #fff 0, #fff 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient();
+color:#1890ff
 }
 .ui-jqdialog-content .FormGrid {
     margin: 0;
@@ -1087,7 +1085,7 @@ th[aria-selected=true] {
 }
 .ui-icon {
     text-indent: 0;
-    color: #307ecc;
+    color: #1890ff;
     float: none;
     right: 2px;
 }
@@ -1119,4 +1117,17 @@ th[aria-selected=true] {
     border-left: 0px solid #e7ecf1 !important;
     background:#edf2f74f;
     color:#000000;
+}
+.ui-state-disabled {
+    color: #BBB;
+}
+.ui-grid-ico-sort:before {
+    display: inline;
+    content: "\f0d7";
+    font-family: FontAwesome;
+    font-size: 12px;
+}
+
+.ui-icon-asc:before {
+    content: "\f0d8";
 }
