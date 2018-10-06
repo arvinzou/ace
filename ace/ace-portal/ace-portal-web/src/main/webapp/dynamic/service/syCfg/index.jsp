@@ -23,6 +23,7 @@
 				<button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/syCfg/insertSyCfg.do"></button>
 
 
+
 			</div>
 			<div class="col-md-4">
 			</div>
@@ -58,7 +59,6 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
 <jsp:include page="/dynamic/common/footer.jsp" />
-
 <script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 	<script

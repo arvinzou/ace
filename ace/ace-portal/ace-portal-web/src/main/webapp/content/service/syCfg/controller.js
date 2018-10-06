@@ -38,56 +38,6 @@ jQuery(function($) {
 							}
 						})
 			});
-	$('#btn-view-edit').on(
-			'click',
-			function() {
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-						console.log(gr);
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext)
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'editGridRow',
-						gr,
-						{
-							closeAfterAdd : true,
-							recreateForm : true,
-							viewPagerButtons : true,
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-
-							}
-						})
-			});
-	$('#btn-view-del').on(
-			'click',
-			function() {
-				
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext);
-					return;
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'delGridRow',
-						gr,
-						{
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-
-							}
-						})
-			});
 });
 
 
@@ -110,7 +60,7 @@ function edit(rowid){
 							}
 						});
 }
-
+var show=false;
 function del(rowid){
     console.log(rowid);
 	jQuery(cfg.grid_selector).jqGrid(
@@ -119,9 +69,11 @@ function del(rowid){
     						{
     							beforeShowForm : function(e) {
     								var form = $(e[0]);
-    								form.closest('.ui-jqdialog').find(
-    										'.ui-jqdialog-titlebar').wrapInner(
-    										'<div class="widget-header" />')
+    								if(!show){
+    								    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+    								}
+
+    								show=true;
 
     							}
     						});

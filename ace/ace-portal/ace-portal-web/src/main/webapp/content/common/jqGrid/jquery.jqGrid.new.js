@@ -6383,7 +6383,7 @@ $.extend($.jgrid,{
 		// {text:'textbutt', id:"buttid", onClick : function(){...}}
 		// if the id is not provided we set it like info_button_+ the index in the array - i.e info_button_0,info_button_1...
 		};
-		$.extend(true, mopt, $.jgrid.jqModal || {}, {caption:"<b>"+caption+"</b>"}, modalopt || {});
+		$.extend(true, mopt, $.jgrid.jqModal || {}, {caption:""+caption+""}, modalopt || {});
 		console.log("==========================");
 		console.log(mopt);
 		var jm = mopt.jqModal, self = this;

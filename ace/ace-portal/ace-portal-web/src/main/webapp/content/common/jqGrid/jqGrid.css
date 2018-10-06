@@ -633,14 +633,13 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 }
 
 .ui-jqdialog .ui-widget-header {
-	background-image: -webkit-linear-gradient(top, #fff 0, #eee 100%);
-	background-image: linear-gradient(to bottom, #fff 0, #eee 100%);
+	background-image: -webkit-linear-gradient(top, #fff 0, #fff 100%);
+	background-image: linear-gradient(to bottom, #fff 0, #fff 100%);
 	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',
-		endColorstr='#ffeeeeee', GradientType=0 );
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffeeeeee', GradientType=0 );
 	border-image: none;
 	border-bottom: 1px solid solid;
-	color: #669FC7;
+	color: #000000;
 	min-height: 38px;
 	position: relative
 }
@@ -689,7 +688,7 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 }
 
 .fm-button.ui-state-default:hover {
-	background-color: #8b9aa3
+	background-color: #fff
 }
 
 .ui-jqgrid .ui-jqgrid-htable .ui-search-toolbar th {
@@ -923,7 +922,7 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
     color:#666
 }
 .ui-jqdialog .ui-widget-header .ui-jqdialog-title {
-    color:#666
+    color:#000000
 }
 .ui-jqdialog-content td.EditButton {
     padding: 5px;
