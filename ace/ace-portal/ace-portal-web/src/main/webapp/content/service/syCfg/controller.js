@@ -43,6 +43,7 @@ jQuery(function($) {
 			function() {
 				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
 						'selrow');
+						console.log(gr);
 				if (!gr) {
 					$.jgrid.info_dialog($.jgrid.nav.alertcap,
 							$.jgrid.nav.alerttext)
@@ -88,3 +89,40 @@ jQuery(function($) {
 						})
 			});
 });
+
+
+
+function edit(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+						'editGridRow',
+						rowid,
+						{
+							closeAfterAdd : true,
+							recreateForm : true,
+							viewPagerButtons : true,
+							beforeShowForm : function(e) {
+								var form = $(e[0]);
+								form.closest('.ui-jqdialog').find(
+										'.ui-jqdialog-titlebar').wrapInner(
+										'<div class="widget-header" />')
+
+							}
+						});
+}
+
+function del(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+    						'delGridRow',
+    						rowid,
+    						{
+    							beforeShowForm : function(e) {
+    								var form = $(e[0]);
+    								form.closest('.ui-jqdialog').find(
+    										'.ui-jqdialog-titlebar').wrapInner(
+    										'<div class="widget-header" />')
+
+    							}
+    						});
+}

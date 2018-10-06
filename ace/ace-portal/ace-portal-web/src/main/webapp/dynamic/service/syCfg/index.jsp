@@ -21,10 +21,7 @@
 			<div class="col-md-4">
 
 				<button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/syCfg/insertSyCfg.do"></button>
-				<button class="btn green" id="btn-view-edit" authority="${pageContext.request.contextPath}/syCfg/updateSyCfg.do">
-				</button>
-				<button class="btn green" id="btn-view-del" authority="${pageContext.request.contextPath}/syCfg/deleteSyCfgBySyCfgId.do">
-				</button>
+
 
 			</div>
 			<div class="col-md-4">
