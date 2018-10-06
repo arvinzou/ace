@@ -46,12 +46,12 @@ var _colModel = function() {
                 name : 'opt',
                 width : 50,
                 renderer : function(value, cur) {
-                    var rowid=$.jgrid.getAccessor(cur, 'id');
+                    var rowid=$.jgrid.getAccessor(cur, cfg.dataId);
                     var opt=[];
-                    if(authorConfig.hasOwnProperty(contextPath+'/syCfg/updateSyCfg.do')){
+                    if(authorConfig.hasOwnProperty(cfg.grid_edit_data_url )){
                         opt.push('<a href="javascript:edit(\''+rowid+'\')">编辑</a> ');
                     }
-                    if(authorConfig.hasOwnProperty(contextPath+'/syCfg/deleteSyCfgBySyCfgId.do')){
+                    if(authorConfig.hasOwnProperty(cfg.grid_delete_data_url)){
                         opt.push('<a href="javascript:del(\''+rowid+'\')">删除</a>');
                     }
 
