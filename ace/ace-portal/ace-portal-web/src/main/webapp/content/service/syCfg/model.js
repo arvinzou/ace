@@ -40,6 +40,7 @@ var _colModel = function() {
 					maxlength : "50"
 				},
 				editable : false,
+
 				hidden : false
 			}
 
