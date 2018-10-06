@@ -1,4 +1,7 @@
 jQuery(function($) {
+    $(window).on('resize.jqGrid', function() {
+		resizeJqGrid();
+	})
 	jQuery(cfg.grid_selector).jqGrid(
 			{
 				prmNames : {
@@ -30,7 +33,7 @@ jQuery(function($) {
 				shrinkToFit : true,
 				autoScroll : false,
 				loadComplete : function() {
-					$(cfg.grid_selector).jqGrid('setGridWidth',$(".portlet-body").width());
+					resizeJqGrid();
 				},
 				editurl : cfg.grid_edit_data_url,// nothing is saved
 				addurl : cfg.grid_add_data_url,
@@ -38,3 +41,9 @@ jQuery(function($) {
 				caption : cfg.caption
 			});
 			});
+function style_edit_form(form) {
+
+}
+function resizeJqGrid(){
+    $(cfg.grid_selector).jqGrid('setGridWidth',$(".portlet-body").width());
+}

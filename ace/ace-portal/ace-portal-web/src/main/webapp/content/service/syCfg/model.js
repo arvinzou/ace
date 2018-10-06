@@ -1,4 +1,4 @@
-var _colNames = [ '系统编号', '系统名称', 'logo', '图标样式', '背景样式', '创建日期', '创建人姓名',
+var _colNames = [ '系统编号', '系统名称',  '创建日期', '创建人姓名',
 		'最后修改日期', '最后修改人姓名' ];
 var _colModel = function() {
 	return [
@@ -32,36 +32,6 @@ var _colModel = function() {
 				},
 				editrules : {
 					required : true
-				}
-			}, {
-				name : 'LOGO',
-				width : 100,
-				editable : true,
-				editoptions : {
-					size : "20",
-					maxlength : "50"
-				}
-			}, {
-				name : 'iconCls',
-				width : 100,
-				editable : true,
-				edittype : "select",
-				renderer : function(value) {
-					return rsd(value, "81");
-				},
-				editoptions : {
-					value : odparse("81")
-				}
-			}, {
-				name : 'colorCls',
-				width : 100,
-				editable : true,
-				edittype : "select",
-				renderer : function(value) {
-					return rsd(value, "82");
-				},
-				editoptions : {
-					value : odparse("82")
 				}
 			}, {
 				name : 'createDate',
