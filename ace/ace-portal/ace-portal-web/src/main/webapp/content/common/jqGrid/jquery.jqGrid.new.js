@@ -8242,8 +8242,8 @@ $.jgrid.extend({
 								trdata[0].rp = rp;
 
 							}
-							$("td:eq("+(cp-2)+")",trdata[0]).html(frmopt.label === undefined ? obj.p.colNames[i]: frmopt.label);
-							$("td:eq("+(cp-1)+")",trdata[0]).append(frmopt.elmprefix).append(elc).append(frmopt.elmsuffix);
+							$("td:eq("+(cp-2)+")",trdata[0]).html(frmopt.label === undefined ? obj.p.colNames[i]: frmopt.label).append(frmopt.elmsuffix);
+							$("td:eq("+(cp-1)+")",trdata[0]).append(frmopt.elmprefix).append(elc);
 
 							if(opt.colspan){
 								$("td:eq("+(cp-1)+")",trdata[0]).attr("colspan",3);
