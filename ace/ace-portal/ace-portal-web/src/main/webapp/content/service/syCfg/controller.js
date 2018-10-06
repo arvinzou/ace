@@ -34,7 +34,7 @@ jQuery(function($) {
 								form.closest('.ui-jqdialog').find(
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
-								style_edit_form(form);
+
 							}
 						})
 			});
@@ -59,7 +59,7 @@ jQuery(function($) {
 								form.closest('.ui-jqdialog').find(
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
-								style_edit_form(form);
+
 							}
 						})
 			});
@@ -83,18 +83,8 @@ jQuery(function($) {
 								form.closest('.ui-jqdialog').find(
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
-								style_edit_form(form);
+
 							}
 						})
 			});
-	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-		_title : function(title) {
-			var $title = this.options.title || '&nbsp;'
-			if (("title_html" in this.options)
-					&& this.options.title_html == true)
-				title.html($title);
-			else
-				title.text($title);
-		}
-	}));
 });
