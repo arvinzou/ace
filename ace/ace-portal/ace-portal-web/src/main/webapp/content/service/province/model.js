@@ -12,7 +12,7 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;'>*</span>"
 				},
 				editrules : {
 					required : true
@@ -29,7 +29,7 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
+					elmsuffix : "<span style='color:red;'></span>"
 				},
 				editrules : {
 					required : false
@@ -45,46 +45,25 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;'>*</span>"
 				},
 				editrules : {
 					required : true
 				}
-			}, {
-				name : 'opt',
-				width : 100,
-				hidden : false,
-				editable : false,
-				sortable : false,
-				renderer : function(value, cur) {
-					return renderBtn(cur);
-				}
-			}];
-}
-function aceSwitch(cellvalue, options, cell) {
-	console.log('aceSwitch');
-	setTimeout(function() {
-		$(cell).find('input[type=checkbox]').addClass(
-				'ace ace-switch ace-switch-5').after(
-				'<span class="lbl"></span>');
-	}, 0);
-}
-// enable datepicker
-function pickDate(cellvalue, options, cell) {
-	setTimeout(function() {
-		$(cell).find('input[type=text]').datepicker({
-			format : 'yyyy-mm-dd',
-			autoclose : true
-		});
-	}, 0);
-}
-function renderBtn(cur) {
-	var id = $.jgrid.getAccessor(cur, 'code');
-	var title = $.jgrid.getAccessor(cur, 'name');
-	var html = [];
-	html.push('<a target="_blank" href="');
-	html.push('javascript:preview(\'' + id + '\',\'' + title + '\')');
-	html.push('"');
-	html.push('><span class="badge badge-info">查看</span></a>');
-	return html.join(' ');
+			},  {
+                               name : 'opt',
+                               width : 50,
+                               renderer : function(value, cur) {
+                                   var rowid=$.jgrid.getAccessor(cur, cfg.dataId);
+                                   var opt=[];
+                                   if(authorConfig.hasOwnProperty(cfg.grid_edit_data_url )){
+                                       opt.push('<a href="javascript:edit(\''+rowid+'\')">编辑</a> ');
+                                   }
+                                   if(authorConfig.hasOwnProperty(cfg.grid_delete_data_url)){
+                                       opt.push('<a href="javascript:del(\''+rowid+'\')">删除</a>');
+                                   }
+               
+                                   return opt.join('');
+                               }
+                           }];
 }

@@ -42,7 +42,7 @@ pageEncoding="utf-8"%>
 
 					<div class="input-group">
 						<input type="text"
-							   name="name"
+							   name="configName"
 							   class="form-control"
 							   placeholder="请输入名称">
 						<span class="input-group-btn">
