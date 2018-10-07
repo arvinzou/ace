@@ -7,9 +7,8 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="data-spm" content="zy-spot-web.v3">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/mobase.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/index.css"/>
-    <script src="${pageContext.request.contextPath}/content/www/js/init-rem.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+    <script src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
     <!--用戶信息-->
     <script src="${pageContext.request.contextPath}/www/oauth2/cfg.do"></script>
 </head>
@@ -52,9 +51,9 @@
 
 
 </div>
-<script src="${pageContext.request.contextPath}/content/www/js/zepto-1.2.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/juicer-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/common.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/zepto-1.2.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/juicer-min.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/common.js"></script>
 <script src="js/act.js"></script>
 </body>
 </html>

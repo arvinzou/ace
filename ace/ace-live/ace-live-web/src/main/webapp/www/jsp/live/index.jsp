@@ -3,19 +3,19 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>常德融媒</title>
+    <title>直播</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
     <meta name="data-spm" content="zy-spot-web.v3">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/mobase.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/lib/prismplayer/index.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/lib/photoswipe-4.1.1/photoswipe.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/lib//photoswipe-4.1.1/default-skin.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/iconfont.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/live.css"/>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/www/css/mimax.css"/>
-    <!--<script src="${pageContext.request.contextPath}/content/www/js/jweixin-1.0.0.js"></script>-->
-    <script src="${pageContext.request.contextPath}/content/www/js/init-rem.js"></script>
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/www/common/plugins/prismplayer/index.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/www/common/plugins/photoswipe-4.1.1/photoswipe.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/www/common/plugins//photoswipe-4.1.1/default-skin.css">
+    <link rel="stylesheet" href="css/iconfont.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/mobase.css"/>
+    <link rel="stylesheet" href="css/mimax.css"/>
+    <script src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
     <script src="${pageContext.request.contextPath}/www/oauth2/cfg"></script>
 
 </head>
@@ -219,9 +219,9 @@
                     </div>
                     <!--
                    <ul class="share-list none" id="j-tpList">
-                       <li class="j-share-weibo"><img src="${pageContext.request.contextPath}/content/www/img/share_weibo.png"></li>
-                       <li class="j-share-weixin"><img src="${pageContext.request.contextPath}/content/www/img/share_weixin.png"></li>
-                       <li class="j-share-qq"><img src="${pageContext.request.contextPath}/content/www/img/share_qq.png"></li>
+                       <li class="j-share-weibo"><img src="${pageContext.request.contextPath}/www/common/img/share_weibo.png"></li>
+                       <li class="j-share-weixin"><img src="${pageContext.request.contextPath}/www/common/img/share_weixin.png"></li>
+                       <li class="j-share-qq"><img src="${pageContext.request.contextPath}/www/common/img/share_qq.png"></li>
                    </ul>
 
                    <p class="bd-icon"></p>
@@ -268,7 +268,7 @@
                         <li data-id="\${item.reportId}">
                             <div class="wrap">
                                 <div class="headpic">
-                                    <img src="${pageContext.request.contextPath}/content/www/img/live_ing.gif" style="width:.70rem">
+                                    <img src="${pageContext.request.contextPath}/www/common/img/live_ing.gif" style="width:.70rem">
                                     \${item.createDate}
                                 </div>
                                 <div class="reporter fn-clear">
@@ -277,7 +277,7 @@
                                         {@if item.rpt.headimgurl}
                                         <img src="\${item.rpt.headimgurl}" class="headimgp">
                                     {@else}
-                                        <img src="${pageContext.request.contextPath}/content/www/img/head_default.png" class="headimg">
+                                        <img src="${pageContext.request.contextPath}/www/common/img/head_default.png" class="headimg">
                                     {@/if}
 
                                           \${item.rpt.nickname}
@@ -350,11 +350,11 @@
                                     <div class="city">
 
                                         {@if item.likeNum}
-                                        <span class="zan-num"><img src="${pageContext.request.contextPath}/content/www/img/zan-cmt@2x.png"
+                                        <span class="zan-num"><img src="${pageContext.request.contextPath}/www/common/img/zan-cmt@2x.png"
                                                                    style="width:.35rem;height:.35rem"/> <span
                                                 id="liker\${item.reportId}">\${item.likeNum}</span></span>
                                         {@else}
-                                        <span class="zan-num"><img src="${pageContext.request.contextPath}/content/www/img/zan-cmt@2x.png"
+                                        <span class="zan-num"><img src="${pageContext.request.contextPath}/www/common/img/zan-cmt@2x.png"
                                                                    style="width:.35rem;height:.35rem"/> <span
                                                 id="liker\${item.reportId}">0</span></span>
                                         {@/if}
@@ -551,19 +551,19 @@
 
 
 
-<script src="${pageContext.request.contextPath}/content/www/js/jweixin-1.0.0.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/lib/prismplayer/prism-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/zepto-1.2.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/lib/jquery-1.11.0-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/juicer-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/sugar-h5.js?_t=1510794885000"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/roll.js?_t=1507519928000"></script>
-<script src="${pageContext.request.contextPath}/content/www/lib/photoswipe-4.1.1/photoswipe.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/lib/photoswipe-4.1.1/photoswipe-ui-default.js"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/common.js?_t=1511451507000"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/jweixin-1.0.0.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/plugins/prismplayer/prism-min.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/zepto-1.2.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/plugins/jquery-1.11.0-min.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/juicer-min.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/sugar-h5.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/roll.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/plugins/photoswipe-4.1.1/photoswipe.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/plugins/photoswipe-4.1.1/photoswipe-ui-default.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/common.js"></script>
 
-<script src="${pageContext.request.contextPath}/content/www/js/photoswipe.js?_t=1511436259000"></script>
-<script src="${pageContext.request.contextPath}/content/www/js/soshm.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/photoswipe.js"></script>
+<script src="${pageContext.request.contextPath}/www/common/js/soshm.js"></script>
 <script src="js/reconnecting-websocket.js"></script>
 <script src="js/act.js"></script>
 <script src="js/socket.js"></script>

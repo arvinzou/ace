@@ -85,19 +85,19 @@ a {
 
 .controls .c_play {
 	left: 0;
-	background: url(/live/content/www/img/controls_play.png) center center no-repeat;
+	background: url(/live/www/common/img/controls_play.png) center center no-repeat;
 	background-size: 100% auto
 }
 
 .controls .c_pause {
 	left: 0;
-	background: url(/live/content/www/img/controls_pause.png) center center no-repeat;
+	background: url(/live/www/common/img/controls_pause.png) center center no-repeat;
 	background-size: 100% auto
 }
 
 .controls .c_fullscren {
 	right: 0;
-	background: url(/live/content/www/img/controls_fullscren.png) center center no-repeat;
+	background: url(/live/www/common/img/controls_fullscren.png) center center no-repeat;
 	background-size: 100% auto
 }
 
@@ -181,7 +181,7 @@ a {
 	margin: -.8rem 0 0 -.8rem;
 	width: 1.6rem;
 	height: 1.6rem;
-	background: url(/live/content/www/img/play_new.png) center center no-repeat;
+	background: url(/live/www/common/img/play_new.png) center center no-repeat;
 	background-size: 100% auto;
 	z-index: 11
 }
@@ -214,7 +214,7 @@ a {
 
 .v-loading-new {
 	top: 0;
-	background: url(/live/content/www/img/v_loading_bg.jpg) center center no-repeat;
+	background: url(/live/www/common/img/v_loading_bg.jpg) center center no-repeat;
 	background-size: 100% 100%
 }
 
@@ -222,7 +222,7 @@ a {
 	width: 34%;
 	height: 24%;
 	margin: 1.49rem auto 0;
-	background: url(/live/content/www/img/login_x.png) center center no-repeat;
+	background: url(/live/www/common/img/login_x.png) center center no-repeat;
 	background-size: 100% 100%
 }
 
@@ -231,7 +231,7 @@ a {
 	width: 64%;
 	height: 2px;
 	margin: .34rem auto 0;
-	background: url(/live/content/www/img/v_line_bg.png) center center no-repeat;
+	background: url(/live/www/common/img/v_line_bg.png) center center no-repeat;
 	background-size: 100% 100%;
 	box-sizing: border-box
 }
@@ -247,7 +247,7 @@ a {
 .v-loading-new .v-line .v-line-s-box>div {
 	width: 30%;
 	height: 6px;
-	background: url(/live/content/www/img/v_line_s.png) center center no-repeat;
+	background: url(/live/www/common/img/v_line_s.png) center center no-repeat;
 	background-size: 100% 100%;
 	-webkit-animation: v-loading 1.5s cubic-bezier(1,.8,.8,1) infinite;
 	animation: v-loading 1.5s cubic-bezier(1,.8,.8,1) infinite;
@@ -295,7 +295,7 @@ a {
 	transform: translate(-.37rem,-.37rem);
 	width: .74rem;
 	height: .74rem;
-	background: url(/live/content/www/img/v_loading.gif) center center no-repeat;
+	background: url(/live/www/common/img/v_loading.gif) center center no-repeat;
 	background-size: 100% 100%
 }
 
@@ -413,7 +413,7 @@ a {
 	display: inline-block;
 	width: .37rem;
 	height: .37rem;
-	background: url(/live/content/www/img/v_close.png) center center no-repeat;
+	background: url(/live/www/common/img/v_close.png) center center no-repeat;
 	background-size: 100% 100%
 }
 
@@ -621,7 +621,7 @@ a {
 	width: .4rem;
 	height: .37rem;
 	vertical-align: middle;
-	background: url(/live/content/www/img/zan_gray.png) center left no-repeat;
+	background: url(/live/www/common/img/zan_gray.png) center left no-repeat;
 	background-size: 100% 100%
 }
 
@@ -631,7 +631,7 @@ a {
 	left: -.2rem;
 	width: .8rem;
 	height: .8rem;
-	background: url(/live/content/www/img/zan.png) right top no-repeat;
+	background: url(/live/www/common/img/zan.png) right top no-repeat;
 	background-size: auto .8rem
 }
 
@@ -641,7 +641,7 @@ a {
 	left: -.2rem;
 	width: .8rem;
 	height: .8rem;
-	background: url(/live/content/www/img/zan.png) left top no-repeat;
+	background: url(/live/www/common/img/zan.png) left top no-repeat;
 	background-size: auto .8rem
 }
 
@@ -669,7 +669,7 @@ a {
 	width: .37rem;
 	height: .34rem;
 	vertical-align: middle;
-	background: url(/live/content/www/img/share.png) center left no-repeat;
+	background: url(/live/www/common/img/share.png) center left no-repeat;
 	background-size: 100% 100%
 }
 
@@ -727,7 +727,7 @@ a {
 	bottom: 0;
 	width: .32rem;
 	height: .42rem;
-	background: url(/live/content/www/img/act.png) center center no-repeat;
+	background: url(/live/www/common/img/act.png) center center no-repeat;
 	background-size: 100% auto;
 	-webkit-transform: rotate(180deg);
 	transform: rotate(180deg)
@@ -749,7 +749,7 @@ a {
 	width: .32rem;
 	height: .42rem;
 	vertical-align: middle;
-	background: url(/live/content/www/img/location.png) center left no-repeat;
+	background: url(/live/www/common/img/location.png) center left no-repeat;
 	background-size: 100% 100%;
 	margin-right: .1rem
 }
@@ -778,7 +778,7 @@ a {
 	width: .9rem;
 	height: .48rem;
 	line-height: .48rem;
-	background: url(/live/content/www/img/sort.png) .21rem center no-repeat;
+	background: url(/live/www/common/img/sort.png) .21rem center no-repeat;
 	background-size: .26rem auto;
 	border: 1px solid #e4e4e4;
 	border-radius: .24rem;
@@ -805,13 +805,13 @@ a {
 
 .xcy-sort .xc-state.end {
 	color: #9b9b9b;
-	background-image: url(/live/content/www/img/state_end.png)
+	background-image: url(/live/www/common/img/state_end.png)
 }
 
 .xcy-sort .xc-state.ing {
 	color: #ff3535;
 	padding-right: .53rem;
-	background: url(/live/content/www/img/live_ing.gif) center right no-repeat;
+	background: url(/live/www/common/img/live_ing.gif) center right no-repeat;
 	background-size: .64rem .64rem
 }
 
@@ -1102,7 +1102,7 @@ a {
 	color: #97abce;
 	height: .37rem;
 	width: .5rem;
-	background: url(/live/content/www/img/pinglun.png) center center no-repeat;
+	background: url(/live/www/common/img/pinglun.png) center center no-repeat;
 	background-size: 100% 100%
 }
 
@@ -1150,7 +1150,7 @@ a {
 .xcy-report .actlayer p i.zan-w {
 	width: .42rem;
 	height: .37rem;
-	background-image: url(/live/content/www/img/zan_w.png)
+	background-image: url(/live/www/common/img/zan_w.png)
 }
 
 .xcy-report .actlayer p i.zan-w.bg-hide {
@@ -1160,7 +1160,7 @@ a {
 .xcy-report .actlayer p i.ping-w {
 	width: .4rem;
 	height: .37rem;
-	background-image: url(/live/content/www/img/ping_w.png)
+	background-image: url(/live/www/common/img/ping_w.png)
 }
 
 .xcy-report .actlayer .zan {
@@ -1169,7 +1169,7 @@ a {
 	left: -.29rem;
 	width: 1rem;
 	height: 1rem;
-	background: url(/live/content/www/img/zan.png) left top no-repeat;
+	background: url(/live/www/common/img/zan.png) left top no-repeat;
 	background-size: auto 1rem;
 	opacity: 0
 }
@@ -1246,7 +1246,7 @@ a {
 .xcy-nonews {
 	height: 1.6rem;
 	padding-top: 4.66rem;
-	background: url(/live/content/www/img/nonews.png) center .66rem no-repeat #fff;
+	background: url(/live/www/common/img/nonews.png) center .66rem no-repeat #fff;
 	background-size: 3.78rem auto;
 	text-align: center;
 	color: #a4a4a4;
@@ -1462,7 +1462,7 @@ a {
 	top: .2rem;
 	width: .7rem;
 	height: .7rem;
-	background: url(/live/content/www/img/close.png) center center no-repeat #000;
+	background: url(/live/www/common/img/close.png) center center no-repeat #000;
 	background-size: auto .7rem;
 	border-radius: .4rem;
 	cursor: pointer;
@@ -1497,7 +1497,7 @@ a {
 .xcy-fullview .download a {
 	margin-right: .15rem;
 	width: .3rem;
-	background: url(/live/content/www/img/download.png) center center no-repeat #000;
+	background: url(/live/www/common/img/download.png) center center no-repeat #000;
 	background-size: auto .6rem
 }
 
@@ -1519,7 +1519,7 @@ a {
 	width: 2.08rem;
 	height: 1.92rem;
 	margin: .32rem .64rem auto auto;
-	background-image: url/live/content/www/img/share_arrows.png)
+	background-image: url/live/www/common/img/share_arrows.png)
 }
 
 .share-box .s-text {
@@ -1529,18 +1529,18 @@ a {
 }
 
 .share-box .s-text.weixin {
-	background-image: url(/live/content/www/img/share_text_weixin.png)
+	background-image: url(/live/www/common/img/share_text_weixin.png)
 }
 
 .share-box .s-text.qq {
-	background-image: url(/live/content/www/img/share_text_qq.png)
+	background-image: url(/live/www/common/img/share_text_qq.png)
 }
 
 .share-box .s-btn {
 	width: 3.46rem;
 	height: 1.28rem;
 	margin: 1.3rem auto 0;
-	background-image: url(/live/content/www/img/share_btn.png)
+	background-image: url(/live/www/common/img/share_btn.png)
 }
 
 .mask {
