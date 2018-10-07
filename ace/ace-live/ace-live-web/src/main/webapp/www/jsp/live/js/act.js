@@ -936,7 +936,7 @@ $(function () {
 });
 $(window).on("scroll",
     function () {
-        console.log("======>" + $(window).scrollTop());
+//       console.log("======>" + $(window).scrollTop());
         if ($(window).scrollTop() >= 50) {
             $("#j-liveinfo .view").css("height", "2.62rem");
             $("#j-liveinfo .view").css("position", "fixed");
