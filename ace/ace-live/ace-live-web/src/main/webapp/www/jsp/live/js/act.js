@@ -244,7 +244,7 @@ function getInfo() {
                							}
                						});
 
-                i && i.data && (i.data.topic && (wxShareDict.title = i.data.topic, document.title = wxShareDict.title), i.data.remark && (wxShareDict.desc = i.data.remark), i.data.cover && (wxShareDict.imgUrl = i.data.cover), onshare()),
+                i && i.data && (i.data.topic , i.data.remark , i.data.cover),
                     increateNumTimeFn(),
                     lvsCmd.ajax(apiServer + "/www/live/getTotalNumAndOrgInfo", {
                             companyId: companyId,
@@ -447,37 +447,7 @@ function closeRemark() {
     $("#j-remark").addClass("fn-hide");
     $("#j-remark input[name=content]").blur();
 }
-function onshare() {
-    wxReady && (wx.onMenuShareTimeline({
-        title: wxShareDict.title,
-        link: wxShareDict.link,
-        imgUrl: wxShareDict.imgUrl,
-        success: function () {
-        },
-        cancel: function () {
-        }
-    }), wx.onMenuShareAppMessage({
-        title: wxShareDict.title,
-        desc: wxShareDict.desc,
-        link: wxShareDict.link,
-        imgUrl: wxShareDict.imgUrl,
-        type: "link",
-        dataUrl: "",
-        success: function () {
-        },
-        cancel: function () {
-        }
-    }), wx.onMenuShareQQ({
-        title: wxShareDict.title,
-        desc: wxShareDict.desc,
-        link: wxShareDict.link,
-        imgUrl: wxShareDict.imgUrl,
-        success: function () {
-        },
-        cancel: function () {
-        }
-    }))
-}
+
 function increateNumTimeFn() {
     if ($(window).scrollTop() > cutWindowScrollTop && (cutWindowScrollTop = $(window).scrollTop()), $("#j-report li").each(function () {
             var e = $(this).offset();
@@ -845,36 +815,8 @@ if (getReport(reportPage), setInterval(function () {
         }
         return !1
     }), "weixin" == webviewType) {
-    // var wxConfig = {
-    //     noncestr: "",
-    //     timestamp: (new Date).getTime(),
-    //     url: wxShareDict.link,
-    //     appid: ""
-    // };
-    lvsCmd.ajax(apiServer + "/www/live/getWxJsSign", {companyId: companyId},
-        function (e, i) {
-            wx.config({
-                debug: false,
-                appId: i.data.appId,
-                timestamp: i.data.timestamp,
-                nonceStr: i.data.nonceStr,
-                signature: i.data.signature,
-                jsApiList: ["onMenuShareTimeline", "onMenuShareAppMessage", "onMenuShareQQ"]
-            })
-            console.log(i.data);
-        })
 }
-var wxReady = !1;
 
-wx.ready(function () {
-    wxReady = !0,
-        onshare()
-});
-
-wx.error(function (res) {
-    // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
-    console.log("wx_config_error:" + res);
-});
 
 var cutWindowScrollTop = 0,
     viewReportList = {},
