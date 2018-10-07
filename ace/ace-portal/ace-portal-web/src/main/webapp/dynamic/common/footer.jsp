@@ -12,5 +12,6 @@
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/portal/js/main/menu${SESSION_USERPROP_KEY.cfg.portalType}.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
 
 

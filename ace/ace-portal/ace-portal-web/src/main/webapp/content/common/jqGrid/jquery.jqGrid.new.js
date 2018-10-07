@@ -8267,8 +8267,8 @@ $.jgrid.extend({
                             }
 
 						}else{
-                            $(tb).find('tr:last').find("td:eq(2)").html(frmopt.label === undefined ? obj.p.colNames[i]: frmopt.label);
-                            $(tb).find('tr:last').find("td:eq(3)").append(frmopt.elmprefix).append(elc).append(frmopt.elmsuffix);
+                            $(tb).find('tr:last').find("td:eq(2)").html(frmopt.label === undefined ? obj.p.colNames[i]: frmopt.label).append(frmopt.elmsuffix);
+                            $(tb).find('tr:last').find("td:eq(3)").append(frmopt.elmprefix).append(elc);
 						}
 						//console.log(tb);
 

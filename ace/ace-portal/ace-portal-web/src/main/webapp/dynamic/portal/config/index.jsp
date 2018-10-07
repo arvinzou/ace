@@ -1,88 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>config</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>系统配置</title>
 </head>
-<jsp:include page="../../common/common.jsp" />
-<table>
-	<tr><td></td></tr>
-</table>
+<jsp:include page="/dynamic/common/header.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}" />
 <body>
-	<div class="page-content">
-		<div class="widget-box" id="widget-box">
-			<div class="widget-header">
-				<h5 class="widget-title smaller">设置查询条件</h5>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<div class="portlet light ">
 
-				<div class="widget-toolbar"></div>
+	<div class="portlet-body">
+
+		<div class="row custom-toolbar">
+			<div class="col-md-4">
+
+				<button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/syCfg/insertSyCfg.do"></button>
+				<button type="button" class="btn  green" id="btn-view-deploy" authority="${pageContext.request.contextPath}/sysConfig/deployConfig.do"></button>
+
+
+
+			</div>
+			<div class="col-md-2">
 			</div>
 
-			<div class="widget-body">
-				<div class="widget-main padding-6">
-					<form action="#" id="fm-search">
-						参数名称： <input name="configName" type="text"
-							style="width: 200px;height:25px" />
+			<div class="col-md-6">
 
-						<button class="btn btn-info" id="btn-search"
-							authority="${pageContext.request.contextPath}/config/findConfigList.do">
-							 <i
-								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-						</button>
+				<form action="#" id="fm-search" >
 
-					</form>
-					<div class="space10"></div>
-					<div id="toolbar" class="toolbar">
-
-						<button class="btn btn-info" id="btn-view-add"
-							authority="${pageContext.request.contextPath}/config/insertConfig.do">
-							 <i
-								class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-						</button>
-						<button class="btn btn-info" id="btn-view-edit"
-							authority="${pageContext.request.contextPath}/config/updateConfig.do">
-							 <i
-								class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-						</button>
-						
-						
-						<button class="btn btn-purple" id="btn-view-deploy"
-							authority="${pageContext.request.contextPath}/sysConfig/deployConfig.do">
-							 <i
-								class="ace-icon glyphicon glyphicon-refresh  align-middle bigger-125 icon-on-right"></i>
-						</button>
+					<div class="btn-group" role="group"  style="float:left;padding-right:5px">
+						<button type="button" authority="false" class="btn btn-default"  onclick="setParams('category','');">全部</button>
+						<button type="button" authority="false" class="btn btn-default"  onclick="setParams('category','01');">基本参数</button>
+						<button type="button" authority="false" class="btn btn-default" onclick="setParams('category','02');">功能设置</button>
 					</div>
-				</div>
+
+
+					<div class="input-group">
+						<input type="text"
+							   name="name"
+							   class="form-control"
+							   placeholder="请输入名称">
+						<span class="input-group-btn">
+                                                                <button class="btn  btn-default search_btn"  id="btn-search"
+																		authority="${pageContext.request.contextPath}/config/findConfigList.do">
+                                                                        搜索
+                                                                </button>
+                                                            </span>
+					</div>
+				</form>
 			</div>
+
 		</div>
 
 		<table id="grid-table"></table>
 
 		<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
-		
-		
 	</div>
-	<jsp:include page="../../common/footer-1.jsp" />
-	<script
+</div>
+
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
+<script
 		src="${pageContext.request.contextPath}/content/portal/js/config/config.js?version=${cfg.version}"></script>
-	<script
+<script
 		src="${pageContext.request.contextPath}/content/portal/js/config/model.js?version=${cfg.version}"></script>
-	<script
+<script
 		src="${pageContext.request.contextPath}/content/portal/js/config/controller.js?version=${cfg.version}"></script>
-	<script
+<script
 		src="${pageContext.request.contextPath}/content/portal/js/config/view.js?version=${cfg.version}"></script>
-	<jsp:include page="../../common/footer-2.jsp" />
-	<script type="text/javascript">
-window.onresize = function () {
-	console.log('autoWidthJqgrid');
-	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-	//parent.autoWidth();
-}
-</script>
+<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+
+
+<style>
+
+</style>
 </body>
 </html>
