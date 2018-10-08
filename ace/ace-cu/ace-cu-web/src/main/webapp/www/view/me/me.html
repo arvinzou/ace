@@ -83,10 +83,10 @@
             <div class="help_box">
                 <div class="help_list" ng-repeat="project in projectList" ng-click="showProgress(project.id);">
                     <div class="help_list_left">
-                        <img ng-if="project.coverUrl == '' || project.coverUrl== null" src="img/default.png"
+                        <img ng-if="project.commodityCover == '' || project.commodityCover== null" src="img/default.png"
                              style="width: 100%;height: 100%;"/>
-                        <img ng-if="project.coverUrl != ''&&project.coverUrl!=undefined && project.coverUrl!=null"
-                             ng-src="{{project.coverUrl}}" style="width: 100%;height: 100%;"/>
+                        <img ng-if="project.commodityCover != ''&&project.commodityCover!=undefined && project.commodityCover!=null"
+                             ng-src="{{project.commodityCover}}" style="width: 100%;height: 100%;"/>
                     </div>
                     <div class="help_list_right">
                         <p class="help_title" ng-bind="project.title"></p>

@@ -187,7 +187,7 @@
     </div>
 
     <h5 class="header-title">项目封面</h5>
-    <div id="coverUrl" class="row" style="padding:10px">
+    <div id="commodityCover" class="row" style="padding:10px">
     </div>
 
     <h5 class="header-title">项目详情</h5>

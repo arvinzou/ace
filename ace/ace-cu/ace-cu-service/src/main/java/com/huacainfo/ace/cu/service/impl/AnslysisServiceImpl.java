@@ -107,35 +107,31 @@ public class AnslysisServiceImpl implements AnalysisService {
     public Map<String, Object> donateRank(String projectId, String needOpenId, String openId,
                                           int start, int limit, String orderBy) {
         Map<String, Object> respMap = new HashMap<>();
-
-
-        if ("1".equals(needOpenId)) {
-            //数据查询
-            List<Map<String, Object>> list = donateRank(projectId, "", start, limit, orderBy);
+        //数据查询
+        List<Map<String, Object>> list = donateRank(projectId, "", start, limit, orderBy);
+        if ("1".equals(needOpenId) && StringUtil.isNotEmpty(openId)) {
             //筛选过滤
-            if (StringUtil.isNotEmpty(openId)) {
-                Map<String, Object> ownData = new HashMap<>();
-                List<Map<String, Object>> removeList = new ArrayList<>();
-                for (Map<String, Object> map : list) {
-                    if (openId.equals(String.valueOf(map.get("openid")))) {
-                        ownData.putAll(map);
+            Map<String, Object> ownData = new HashMap<>();
+            List<Map<String, Object>> removeList = new ArrayList<>();
+            for (Map<String, Object> map : list) {
+                if (openId.equals(String.valueOf(map.get("openid")))) {
+                    ownData.putAll(map);
 //                        removeList.add(map);
-                    }
                 }
-//                list.removeAll(removeList);
-                //第一次查询集合不包含自己时，查询指定openid一次看是否有相关结果
-                if (ownData.size() == 0) {
-                    List<Map<String, Object>> ownList = donateRank(projectId, openId, start, limit, orderBy);
-                    ownData = CollectionUtils.isEmpty(ownList) ? null : ownList.get(0);
-                }
-                respMap.put("own", null == ownData ? getDefaultOwnData(openId) : ownData);
-                respMap.put("list", list);
             }
+//                list.removeAll(removeList);
+            //第一次查询集合不包含自己时，查询指定openid一次看是否有相关结果
+            if (ownData.size() == 0) {
+                List<Map<String, Object>> ownList = donateRank(projectId, openId, start, limit, orderBy);
+                ownData = CollectionUtils.isEmpty(ownList) ? null : ownList.get(0);
+            }
+            respMap.put("own", null == ownData ? getDefaultOwnData(openId) : ownData);
         } else {
             respMap.put("own", null);
-            respMap.put("list", null);
         }
 
+
+        respMap.put("list", list);
         return respMap;
     }
 

@@ -19,9 +19,9 @@
     <div class="raisebox">
         <div class="raise_item" ng-repeat="item in items" ng-click="showProjectInfo(item.id)">
             <div class="raise_item_image">
-                <img ng-if="item.coverUrl!=''&&item.coverUrl!=undefined&&item.coverUrl!=null"
-                     ng-src="{{item.coverUrl}}"/>
-                <img ng-if="item.coverUrl==''||item.coverUrl==undefined||item.coverUrl==null"
+                <img ng-if="item.commodityCover!=''&&item.commodityCover!=undefined&&item.commodityCover!=null"
+                     ng-src="{{item.commodityCover}}"/>
+                <img ng-if="item.commodityCover==''||item.commodityCover==undefined||item.commodityCover==null"
                      ng-src="img/project_default.png"/>
             </div>
             <div class="raise_item_cnt">

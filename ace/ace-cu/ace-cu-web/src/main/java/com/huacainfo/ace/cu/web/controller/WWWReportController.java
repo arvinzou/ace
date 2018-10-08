@@ -104,12 +104,14 @@ public class WWWReportController extends CuBaseController {
             //公众号用户信息
             Userinfo userinfo = getCurUserinfo();
             if (null == userinfo && StringUtil.isEmpty(openId)) {
-                return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+                userinfo = new Userinfo();
+                userinfo.setOpenid("");
+//     return new ResultResponse(ResultCode.FAIL, "微信授权失败");
             }
             openId = StringUtil.isEmpty(openId) ? userinfo.getOpenid() : openId;
 
-            Map<String, Object> respMap = analysisService.donateRank(projectId, needOpenId, openId,
-                    start, limit, orderBy);
+            Map<String, Object> respMap =
+                    analysisService.donateRank(projectId, needOpenId, openId, start, limit, orderBy);
             return new ResultResponse(ResultCode.SUCCESS, "查询成功", respMap);
         } else {
             openId = "";
