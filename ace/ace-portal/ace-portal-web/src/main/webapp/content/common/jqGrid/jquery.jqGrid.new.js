@@ -1765,10 +1765,13 @@ $.fn.jqGrid = function( pin ) {
 			console.log("lastpage "+ts.p.lastpage);
 			console.log(ts.p);
             if(ts.p.records>0){
-                  $(ts.p.pager).jqPaginator('option', {
-                        totalCounts: ts.p.records
-                  });
-                  $(".ui-jqgrid-bdiv").css("height",'');
+
+                  if(ts.p.pager!='#false'){
+                      $(ts.p.pager).jqPaginator('option', {
+                            totalCounts: ts.p.records
+                      });
+                      $(".ui-jqgrid-bdiv").css("height",'');
+                  }
             }
 			/**系统返回数据***/
 			if(si) {
@@ -2423,15 +2426,18 @@ $.fn.jqGrid = function( pin ) {
 			}
 		},
 		/*分页设置*/
-
-
 		setPager = function (pgid, tp){
 		console.log("==============分页设置开始===================");
-        		console.log(ts.p.rowList[0]);
+		console.log(pgid);
+		if(pgid=='#false'){
+		 return;
+		}
+
+        		console.log(ts.p.rowList[0]||10);
 
                 $.jqPaginator(pgid, {
                      totalCounts:1,
-                     pageSize: ts.p.rowList[0],
+                     pageSize: ts.p.rowList[0]||10,
                      visiblePages: 10,
                      currentPage: 1,
                      prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
@@ -2439,16 +2445,18 @@ $.fn.jqGrid = function( pin ) {
                      page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
                      onPageChange: function (num, type) {
                           ts.p.page=num;
-                          ts.p.rowNum=ts.p.rowList[0];
+                          ts.p.rowNum=ts.p.rowList[0]||10;
                           populate();
                           if(type=='init'){
                              $(pgid).jqPaginator('option', {
-                                   totalCounts: ts.p.records
+                                   totalCounts: ts.p.records||0
                              });
                           }
 
                      }
                  });
+
+
              console.log("==========分页设置结束=======================");
 
 

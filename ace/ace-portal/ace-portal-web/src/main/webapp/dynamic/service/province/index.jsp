@@ -18,7 +18,7 @@ pageEncoding="utf-8"%>
 	<div class="portlet-body">
 
 		<div class="row custom-toolbar">
-			<div class="col-md-4">
+			<div class="col-md-6">
 
 				<button type="button" class="btn  green" id="btn-view-add" authority="${portalPath}/province/insertProvince.do"></button>
 
@@ -27,23 +27,24 @@ pageEncoding="utf-8"%>
 			</div>
 
 
-			<div class="col-md-8">
+			<div class="col-md-6">
 
 				<form action="#" id="fm-search">
-					<div class="row">
 
-							<div class="col-md-6">
+							<div class="input-group" style="width:55%;float:left">
 								上级区划
 								<input id="cc1" name="parent_code"
-									   class="easyui-combotree"
+									   class="easyui-combotree form-control"
 									   data-options="url:'${portalPath}/system/selectProvinceTreeList.do',method:'get',animate: true,
                 lines:false,"
-									   style='width: 200px; line-height: 25px; height: 25px;'>
+									   style='width: 200px; line-height: 30px; height: 30px;'>
 								<a
 										href="javascript:clearQparams()">清除</a>
 							</div>
-						<div class="col-md-6">
-							<div class="input-group">
+
+
+							<div class="input-group" style="width:45%;float:right">
+
 								<input type="text"
 									   name="name"
 									   class="form-control"
@@ -56,8 +57,8 @@ pageEncoding="utf-8"%>
 									</button>
 								</span>
 							</div>
-						</div>
-					</div>
+
+
 				</form>
 			</div>
 

@@ -97,6 +97,7 @@ var _colModel = function() {
 				}
 			}, {
                              name : 'opt',
+                             sortable : false,
                              width : 50,
                              renderer : function(value, cur) {
                                  var rowid=$.jgrid.getAccessor(cur, cfg.dataId);

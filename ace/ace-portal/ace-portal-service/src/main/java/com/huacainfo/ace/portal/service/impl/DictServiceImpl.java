@@ -408,4 +408,12 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 				list);
 		return commonTreeUtils.getTreeList("0");
 	}
+	@Override
+	public  PageResult<DictVo> getTreeGrid() throws Exception{
+		PageResult<DictVo> rst = new PageResult<DictVo>();
+		List<DictVo> list = this.dictMapper.getTreeGrid();
+		rst.setRows(list);
+		rst.setTotal(list.size());
+		return rst;
+	}
 }
