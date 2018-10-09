@@ -13,6 +13,7 @@ public class Activity extends BaseModel {
 
     private String title;
 
+    /**1、公益活动，2、普及活动，3创意活动，4、党建活动*/
     private String category;
 
     private String summary;
