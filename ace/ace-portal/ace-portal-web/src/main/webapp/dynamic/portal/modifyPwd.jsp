@@ -1,48 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>密码修改</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<title>密码修改</title>
 </head>
-<jsp:include page="../common/common.jsp" />
+<jsp:include page="/dynamic/common/header.jsp"/>
 <body>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<div class="portlet light ">
 
-	<div class="page-content">
+	<div class="portlet-body">
+		<div class="form-panel">
+			<!--具体界面元素开始-->
+			<form class="form-horizontal" id="fm-password" role="form">
 
+					<div class="form-group">
+						<label class="col-md-2 control-label">新密码<span class="required">*</span></label>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="password" name="password" type="password">
+							<span class="help-block"> </span>
+						</div>
+					</div>
 
-		<div style="width:100%;">
-			<div style="width:60%;padding-left:30%;padding-top:10%;">
-			<form id="fm-password">
 				<div class="form-group">
-					<label class="control-label">新设密码：</label>
-					<input id="password" name="password" type="password" class="form-control"></div>
-				<div class="form-group">
-					<label class="control-label">重复输入：</label>
-					<input id="repassword" name="repassword" type="password" class="form-control"></div>
+					<label class="col-md-2 control-label">重复输入<span class="required">*</span></label>
+					<div class="col-md-4">
+						<input type="text" class="form-control" id="repassword" name="repassword" type="password">
+						<span class="help-block"> </span>
+					</div>
+				</div>
 
-				<button type="submit" class="btn btn-info" authority="false">提交</button>
+
+				<div class="form-actions">
+					<div class="row">
+						<div class="col-md-offset-3 col-md-7">
+							<button class="btn   green" type="submit" style="width:30%">保存</button>
+						</div>
+					</div>
+				</div>
 			</form>
-
-
-			</div>
-
 		</div>
 
-    </div>
-	<jsp:include page="../common/footer-1.jsp" />
-	<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
-	<script src="${portalPath}/content/common/js/jquery.format.js?v=${cfg.version}"></script>
-	<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-	<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
+	</div>
+</div>
+
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/jquery.format.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
 
 <script>
  var reg = /(?=.*[a-z])(?=.*\d)(?=.*[#@!~%^&*])[a-z\d#@!~%^&*]{8,16}/i;
 window.onload=function(){
+ $(".todo-header").html("密码修改");
 			jQuery.validator.addMethod("isPwdCode", function(value, element) {
 				var tel = /(?=.*[a-z])(?=.*\d)(?=.*[$#@!~%^&*])[a-z\d$#@!~%^&*]{6,16}/i;
 				return this.optional(element) || (tel.test(value));
@@ -123,7 +141,7 @@ function edit(params) {
 }
 </script>
 
- <style>
+<style>
 	  .error{
             color:red;
             padding-top: 7px;
