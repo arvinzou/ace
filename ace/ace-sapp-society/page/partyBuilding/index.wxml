@@ -1,2 +1,65 @@
-<!--page/index/index.wxml-->
-<text></text>
+<!--index.wxml-->
+<view class='index'>
+    <view class='head whiteBg separate'>
+        <view class='box'>
+            <view class='cover'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+                <view class='text'>
+                    <view>距离活动开始</view>
+                    <view class='time'>
+                        <text>00</text>天
+                        <text>00</text>时
+                        <text>00</text>分</view>
+                </view>
+            </view>
+            <view class='info'>
+                <view class='title'>
+                    <text class='partyTag'>第一期</text>
+                    <text class='texts'>动动党建活动动动动党建活动动</text>
+                </view>
+                <view class='time'>报名截止时间：09-10 10:30</view>
+                <view class='peoples'>已报名:10</view>
+            </view>
+        </view>
+    </view>
+
+    <view class='organization whiteBg separate'>
+        <view class='tilte'>
+            党小组
+        </view>
+        <view class='swiper'>
+            <swiper next-margin='176rpx'>
+                <swiper-item>
+                    <view class='item'>
+                        <image mode='aspectFill' src="http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120" class="slide-image" />
+                        <view class='name'>近心帮党小组</view>
+                    </view>
+                </swiper-item>
+                <swiper-item>
+                    <view class='item'>
+                        <image mode='aspectFill' src="http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120" class="slide-image" />
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+    <view class='pastActivity whiteBg separate'>
+        <view class='tilte'>
+            以往活动
+        </view>
+        <view class='lists'>
+            <!-- <view class='activity'>
+                <view class='image'>
+                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+                </view>
+                <view class='title'>
+                    践行群众路线，强化群众…践行群众路线，强化群众…
+                </view>
+                <text class='partyTag'>第一期</text>
+            </view> -->
+        </view>
+    </view>
+
+    <view class='typeTag'>公益活动</view>
+    <view class='typeTags'></view>
+</view>

@@ -1,0 +1,62 @@
+<view class="index">
+    <view class="topBar">
+        <scroll-view class="navbar" scroll-x="true" scroll-left="{{scrollNavbarLeft}}">
+            <view class="navbar-item {{ item.type }}" id="{{ idx }}" wx:for-index="idx" wx:for="{{ navbarArray }}" catchtap="onTapNavbar">
+                <view class="navbar-item-wrap">{{ item.text }}</view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class='activity-list'>
+        <view class='list-style-1 list-style'>
+            <view class='left'>
+                <view class='title'>心理咨询无用？不，是你不了解真正的心理咨询</view>
+                <view class='detail'>
+                    <text class='tag'>公益活动</text>
+                    <text>刘鑫蕊</text>
+                    <text>08-27</text>
+                    <text>18条评论</text>
+                </view>
+            </view>
+            <view class='right'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            </view>
+        </view>
+
+        <view class='list-style-2 list-style'>
+            <view class='title'>心理咨询无用？不，是你不了解真正的心理咨询</view>
+            <view class='images'>
+                <view class='image'>
+                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120' />
+                </view>
+                <view class='image'>
+                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120' />
+                </view>
+                <view class='image'>
+                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120' />
+                </view>
+            </view>
+            <view class='detail'>
+                <text class='tag'>公益活动</text>
+                <text>刘鑫蕊</text>
+                <text>08-27</text>
+                <text>18条评论</text>
+            </view>
+        </view>
+
+
+        <view class='list-style-3 list-style'>
+            <view class='title'>心理咨询无用？不，是你不了解真正的心理咨询</view>
+            <view class='images'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120' />
+            </view>
+            <view class='detail'>
+                <text class='tag'>公益活动</text>
+                <text>刘鑫蕊</text>
+                <text>08-27</text>
+                <text>18条评论</text>
+            </view>
+        </view>
+
+    </view>
+
+</view>
