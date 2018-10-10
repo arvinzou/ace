@@ -26,7 +26,7 @@ jQuery(function($) {
 				viewrecords : true,
 				rowNum : cfg.rowNum,
 				rowList : default_page_list,
-				pager : 'false',
+				pager : cfg.pager_selector,
 				altRows : true,
 				multiselect : false,
 				multiboxonly : true,
