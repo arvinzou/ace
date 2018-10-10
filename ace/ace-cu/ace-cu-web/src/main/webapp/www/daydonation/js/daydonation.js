@@ -90,11 +90,7 @@ window.onload = function(){
 };
 
 function donate(){
-    if(status != '2'){
-        alert("该项目未审核通过！")
-    }else{
-        window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
-    }
+    window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
 }
 /**
  * 跳转慈善榜单页面

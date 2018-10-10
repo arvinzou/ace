@@ -2,6 +2,7 @@ package com.huacainfo.ace.society.vo;
 
 import com.huacainfo.ace.society.model.OrderDetail;
 import com.huacainfo.ace.society.model.OrderInfo;
+import com.huacainfo.ace.society.model.SpaceOccupyInfo;
 
 import java.util.List;
 
@@ -21,6 +22,19 @@ public class OrderInfoVo extends OrderInfo {
      * 订单详情列表
      */
     private List<OrderDetail> detailList;
+
+    /**
+     * 场地预约情况
+     */
+    private SpaceOccupyInfo spaceOccupyInfo;
+
+    public SpaceOccupyInfo getSpaceOccupyInfo() {
+        return spaceOccupyInfo;
+    }
+
+    public void setSpaceOccupyInfo(SpaceOccupyInfo spaceOccupyInfo) {
+        this.spaceOccupyInfo = spaceOccupyInfo;
+    }
 
     public String getNickname() {
         return nickname;

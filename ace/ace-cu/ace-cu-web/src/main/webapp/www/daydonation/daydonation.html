@@ -172,7 +172,7 @@
                     {@each data as dua, index}
                     <li>
                         <span class="list_left">${dua.nickname} &nbsp; 捐赠<span class="money_default">${dua.donateAmount}</span>元</span>
-                        <span class="list_right">${dua.donateDate}</span>
+                        <span class="list_right">${(dua.donateDate).substring(10,dua.donateDate.length+1)}</span>
                     </li>
                     {@/each}
                 </marquee>

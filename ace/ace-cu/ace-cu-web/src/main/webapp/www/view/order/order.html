@@ -8,55 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="css/order.css" />
 		<link rel="stylesheet" type="text/css" href="css/city.css"/>
 		<link rel="stylesheet" type="text/css" href="css/switch.css" />
-		<style>
-			.money_01 span{
-				width: 2.3rem;
-				height: 1rem;
-				line-height: 1rem;
-				background:rgba(251,218,215,.4);
-				display: block;
-				text-align: center;
-				float: left;
-				border-radius: 0.2rem;
-				font-size: 0.4rem;
-				color: #EA4436;
-			}
-			.money_02{
-				width: 100%;
-				height: 1.6rem;
-				line-height: 1.6rem;
-				border-bottom: 1px solid #E4E6E9;
-			}
-			.money_02 span{
-				width: 2.3rem;
-				height: 1rem;
-				line-height: 1rem;
-				background:rgba(251,218,215,.4);
-				display: block;
-				text-align: center;
-				float: left;
-				border-radius: 0.2rem;
-				font-size: 0.4rem;
-				color: #EA4436;
-			}
-			.other_amount{
-				width: 2.3rem;
-				height: 1rem;
-				display: block;
-				float: left;
-				text-align: center;
-				background:rgba(251,218,215,.4);
-				border-radius: 0.2rem;
-				font-size: 0.4rem;
-				color: #EA4436;
-				margin-right: 0.2rem;
-				border: none;
-				outline:none;
-			}
-			.lightborder{
-				border: 2px solid #EA4436 !important;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -65,13 +16,13 @@
 				<div class="order_form">
 					<div class="title_01">选择捐款金额</div>
 					<div class="money_01">
-						<span class="lightborder" onclick="selectMoney(this, 10.00);" style="margin-right: 0.4rem;">¥ 10.00</span>
-						<span onclick="selectMoney(this, 50.00);" style="margin-right: 0.4rem;">¥ 50.00</span>
+						<span class="lightborder" onclick="selectMoney(this, 10.00);" >¥ 10.00</span>
+						<span onclick="selectMoney(this, 50.00);" >¥ 50.00</span>
 						<span onclick="selectMoney(this, 100.00);">¥ 100.00</span>
 					</div>
 					<div class="money_02">
-						<span onclick="selectMoney(this, 200.00);" style="margin-right: 0.4rem;">¥ 200.00</span>
-						<span onclick="selectMoney(this, 500.00);" style="margin-right: 0.4rem;">¥ 500.00</span>
+						<span onclick="selectMoney(this, 200.00);" >¥ 200.00</span>
+						<span onclick="selectMoney(this, 500.00);" >¥ 500.00</span>
 						<!--<span onclick="inputMoney(this);" class="other_amount">输入其他金额</span>-->
 						<input onclick="inputMoney(this);" type='number' id="amountMoney"   class="other_amount" type="text" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"  />
 					</div>
@@ -154,12 +105,12 @@
 					</div>
 				</div>
 			</div>
-			<div class="btnDiv"><button class="donateBtn" ng-click="donateMoney();">立即捐款</button></div>
+			<div class="btnDiv"><button class="donateBtn" onclick="donateMoney1();">立即捐款</button></div>
 		</div>
 
-		<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="/cu/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="js/jweixin-1.2.0.js"></script>
-		<script type="text/javascript" src="../js/init-rem.js"></script>
+		<script type="text/javascript" src="/cu/www/common/js/init-rem.js"></script>
 		<script type="text/javascript" src="js/LAreaData1.js"></script>
 		<script type="text/javascript" src="js/LAreaData2.js"></script>
 		<script type="text/javascript" src="js/LArea.js"></script>
