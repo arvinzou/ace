@@ -76,7 +76,7 @@
 
 <script id="project-tpl" type="text/template">
     {@each data as item, index}
-    <div class="help_list"  onclick="showProgress('${project.id}');">
+    <div class="help_list"  onclick="showProgress('${item.id}');">
         <div class="help_list_left">
             {@if item.commodityCover == '' || item.commodityCover == null || item.commodityCover == undefined}
             <img src="img/default.png" style="width: 100%;height: 100%;"/>
@@ -93,8 +93,9 @@
                     <span  class="money">${item.collectAmount}</span>
                     {@else if item.status != '2'}
                     <span  class="money">0</span>
-                    元</span>
                     {@/if}
+                    元</span>
+
 
                 {@if item.status == '2'}
                 <span style="padding-left: 1rem;">剩余<span class="money">${item.balanceDays}</span>天</span>
