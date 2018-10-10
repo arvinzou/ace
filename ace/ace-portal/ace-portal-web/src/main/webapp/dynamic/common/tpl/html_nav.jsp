@@ -14,7 +14,7 @@
 
 					<a href="#" class="navbar-brand">
 						<small>
-							${cfg.sys_name}${cfg.version}
+							${cfg.sys_name}
 						</small>
 					</a>
 					<div class="top-menu">
