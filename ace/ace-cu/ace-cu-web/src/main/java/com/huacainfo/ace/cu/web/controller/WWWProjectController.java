@@ -35,10 +35,31 @@ public class WWWProjectController extends CuBaseController {
     @Autowired
     private CuProcessRecordService cuProcessRecordService;
 
+
+    /**
+     * 查询项目列表 -字段过滤
+     *
+     * @param type    项目类型 0-普通项目 1-慈善一日捐 2-个人项目 3-支出项目 4-春节送温暖
+     * @param start   分页开始位置  --  必选
+     * @param limit   页数  --  必选
+     * @param orderBy 排序条件   --  可选，默认时间倒叙
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findListFilter")
+    @ResponseBody
+    public ResultResponse findListFilter(String type, int start, int limit, String orderBy) throws Exception {
+        if (StringUtil.isEmpty(type)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return cuProjectService.findListFilter(type, start, limit, orderBy);
+    }
+
     /**
      * 查询项目列表
      *
-     * @param type    项目类型 0-普通项目 1-专项项目 2-个人项目 3-支出项目
+     * @param type    项目类型 0-普通项目 1-慈善一日捐 2-个人项目 3-支出项目 4-春节送温暖
      * @param start   分页开始位置  --  必选
      * @param limit   页数  --  必选
      * @param orderBy 排序条件   --  可选，默认时间倒叙
