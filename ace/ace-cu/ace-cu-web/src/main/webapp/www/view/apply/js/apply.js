@@ -343,12 +343,16 @@ function applyProject(){
             })
         },
         success:function(result){
+            if(result.status == 0) {
                 id = result.data.id;
                 layer.open({
                     type:1,
                     content: $("#success_box").html(),
                     shadeClose:false
                 });
+            }else {
+                alert(result.info);
+            }
         },
         error:function(){
             alert("系统服务内部异常！");
