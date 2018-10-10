@@ -7,6 +7,10 @@
         <result column="orderId" jdbcType="VARCHAR" property="orderId"/>
         <result column="reserveDate" jdbcType="VARCHAR" property="reserveDate"/>
         <result column="reserveInterval" jdbcType="VARCHAR" property="reserveInterval"/>
+        <result column="year" jdbcType="VARCHAR" property="year"/>
+        <result column="month" jdbcType="VARCHAR" property="month"/>
+        <result column="day" jdbcType="VARCHAR" property="day"/>
+        <result column="whatDay" jdbcType="VARCHAR" property="whatDay"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -17,8 +21,9 @@
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, spaceId, orderId, reserveDate, reserveInterval, remark, status, createUserId, 
-    createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+        id, spaceId, orderId, reserveDate, reserveInterval, year, month, day, whatDay, remark,
+        status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+        lastModifyDate
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -31,16 +36,18 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.society.model.SpaceOccupyInfo">
-    insert into space_occupy_info (id, spaceId, orderId, 
-      reserveDate, reserveInterval, remark, 
-      status, createUserId, createUserName, 
-      createDate, lastModifyUserId, lastModifyUserName, 
-      lastModifyDate)
-    values (#{id,jdbcType=VARCHAR}, #{spaceId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, 
-      #{reserveDate,jdbcType=VARCHAR}, #{reserveInterval,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
-      #{lastModifyDate,jdbcType=TIMESTAMP})
+    insert into space_occupy_info (id, spaceId, orderId,
+        reserveDate, reserveInterval, year,
+        month, day, whatDay,
+        remark, status, createUserId,
+        createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{spaceId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR},
+        #{reserveDate,jdbcType=VARCHAR}, #{reserveInterval,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
+        #{month,jdbcType=VARCHAR}, #{day,jdbcType=VARCHAR}, #{whatDay,jdbcType=VARCHAR},
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.SpaceOccupyInfo">
@@ -49,6 +56,10 @@
       orderId = #{orderId,jdbcType=VARCHAR},
       reserveDate = #{reserveDate,jdbcType=VARCHAR},
       reserveInterval = #{reserveInterval,jdbcType=VARCHAR},
+        year = #{year,jdbcType=VARCHAR},
+        month = #{month,jdbcType=VARCHAR},
+        day = #{day,jdbcType=VARCHAR},
+        whatDay = #{whatDay,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -60,12 +71,87 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <update id="updateStatus" parameterType="com.huacainfo.ace.society.model.SpaceOccupyInfo">
-        update space_occupy_info
-        set status = #{status,jdbcType=CHAR},
-        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    <!--**********************************-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SpaceOccupyInfoVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+       id, spaceId, orderId, reserveDate, reserveInterval, year, month, day, whatDay, remark,
+       status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName,
+       lastModifyDate
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="From_Statement">
+        from space_occupy_info t
+    </sql>
+
+    <sql id="Where_Condition">
+        where 1=1
+        <if test="condition.spaceId !=null and condition.spaceId !=&quot;&quot;">
+            and t.spaceId = #{condition.spaceId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.year !=null and condition.year !=&quot;&quot;">
+            and t.year = #{condition.year,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.month !=null and condition.month !=&quot;&quot;">
+            and t.month = #{condition.month,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.day !=null and condition.day !=&quot;&quot;">
+            and t.day = #{condition.day,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.reserveInterval !=null and condition.reserveInterval !=&quot;&quot;">
+            and t.reserveInterval = #{condition.reserveInterval,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
         where id = #{id,jdbcType=VARCHAR}
-    </update>
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        select count(1)
+        from space_occupy_info
+        where 1=1
+        <if test="condition.spaceId !=null and condition.spaceId !=&quot;&quot;">
+            and t.spaceId = #{condition.spaceId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.year !=null and condition.year !=&quot;&quot;">
+            and t.year = #{condition.year,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.month !=null and condition.month !=&quot;&quot;">
+            and t.month = #{condition.month,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.day !=null and condition.day !=&quot;&quot;">
+            and t.day = #{condition.day,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.reserveInterval !=null and condition.reserveInterval !=&quot;&quot;">
+            and t.reserveInterval = #{condition.reserveInterval,jdbcType=VARCHAR}
+        </if>
+    </select>
+
 </mapper>

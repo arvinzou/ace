@@ -6,7 +6,9 @@ import java.util.Date;
 
 public class SpaceOccupyInfo extends BaseModel {
     private String id;
-
+    /**
+     * society.commodity.id
+     */
     private String spaceId;
 
     private String orderId;
@@ -14,6 +16,14 @@ public class SpaceOccupyInfo extends BaseModel {
     private String reserveDate;
 
     private String reserveInterval;
+
+    private String year;
+
+    private String month;
+
+    private String day;
+
+    private String whatDay;
 
     private String remark;
 
@@ -69,6 +79,38 @@ public class SpaceOccupyInfo extends BaseModel {
 
     public void setReserveInterval(String reserveInterval) {
         this.reserveInterval = reserveInterval == null ? null : reserveInterval.trim();
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month == null ? null : month.trim();
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day == null ? null : day.trim();
+    }
+
+    public String getWhatDay() {
+        return whatDay;
+    }
+
+    public void setWhatDay(String whatDay) {
+        this.whatDay = whatDay == null ? null : whatDay.trim();
     }
 
     public String getRemark() {

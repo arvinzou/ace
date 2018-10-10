@@ -8,6 +8,8 @@ import com.huacainfo.ace.society.model.SpaceOccupyInfo;
 import com.huacainfo.ace.society.vo.SpaceOccupyInfoQVo;
 import com.huacainfo.ace.society.vo.SpaceOccupyInfoVo;
 
+import java.util.List;
+
 /**
  * @author: Arvin
  * @version: 2018-09-14
@@ -28,9 +30,8 @@ public interface SpaceOccupyInfoService {
      * @author: Arvin
      * @version: 2018-09-14
      */
-    PageResult
-            <SpaceOccupyInfoVo> findSpaceOccupyInfoList(SpaceOccupyInfoQVo condition,
-                                                        int start, int limit, String orderBy) throws Exception;
+    PageResult<SpaceOccupyInfoVo> findSpaceOccupyInfoList(SpaceOccupyInfoQVo condition,
+                                                          int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +69,7 @@ public interface SpaceOccupyInfoService {
      * @author: Arvin
      * @version: 2018-09-14
      */
-    SingleResult
-            <SpaceOccupyInfoVo> selectSpaceOccupyInfoByPrimaryKey(String id) throws Exception;
+    SingleResult<SpaceOccupyInfoVo> selectSpaceOccupyInfoByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -85,16 +85,10 @@ public interface SpaceOccupyInfoService {
     MessageResponse deleteSpaceOccupyInfoBySpaceOccupyInfoId(String id, UserProp userProp) throws Exception;
 
     /**
-     * @throws
-     * @Title:audit
-     * @Description: TODO(审核场地占用情况)
-     * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param remark 审核备注
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2018-09-14
+     * 查询场地占用情况
+     *
+     * @param condition 查询条件
+     * @return ResultResponse
      */
-    MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
+    List<SpaceOccupyInfoVo> spaceOccupyInfo(SpaceOccupyInfoQVo condition);
 }
