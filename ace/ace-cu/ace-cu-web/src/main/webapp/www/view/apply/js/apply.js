@@ -330,7 +330,7 @@ function applyProject(){
     $.ajax({
         url: "/cu/www/project/applyProject",
         type:"post",
-        async:false,
+        dataType:"json",
         data:{
             json: JSON.stringify({
                 "realName": realName,
@@ -345,7 +345,6 @@ function applyProject(){
         success:function(result){
             if(result.status == 0) {
                 id = result.data.id;
-                $scope.projectId = id;
                 layer.open({
                     type:1,
                     content: $("#success_box").html(),

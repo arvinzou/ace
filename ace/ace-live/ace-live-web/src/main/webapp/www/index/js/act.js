@@ -14,7 +14,7 @@ function getList() {
                 $("#j-livelist").append(e),
                     e.find("li").on('click',
                         function () {
-                            location.href = "../jsp/live/index.jsp?companyId=" + companyId + "&showlink=" + showlink + "&id=" + $(this).data("id")
+                            location.href = "../jsp/live/index.jsp?companyId=" + companyId + "&id=" + $(this).data("id")
                         })
             } else lvsCmd.alert(g.errMsg);
             loadList = !1

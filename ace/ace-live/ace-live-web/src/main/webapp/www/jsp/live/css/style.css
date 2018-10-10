@@ -1635,6 +1635,7 @@ ul {
 .content-text {
 	margin-top: .13rem;
 	padding-right: .32rem;
+	padding-left: .32rem;
 	font-size: .37rem;
 	line-height: .58rem;
 	color: #999;

@@ -274,25 +274,7 @@ public class WWWController extends LiveBaseController {
         return new MessageResponse(0, "OK");
     }
 
-    @RequestMapping(value = "/insertLiveRpt")
-    @ResponseBody
-    public MessageResponse insertLiveRpt(String jsons) throws Exception {
 
-        Map<String, Object> params = JsonUtil.toMap(jsons);
-        String openid = (String) params.get("openid");
-        MessageResponse checked = liveService.checkIsBandUsers(openid);
-
-        //验证通过
-        if (0 == checked.getStatus()) {
-            Map<String, String> data = new HashMap<String, String>();
-            data.put("jsons", jsons);
-            this.kafkaProducerService.sendMsg("rpt", data);
-            return new MessageResponse(0, "OK");
-
-        } else {
-            return checked;
-        }
-    }
 
     @RequestMapping(value = "/upload")
     @ResponseBody
@@ -362,29 +344,13 @@ public class WWWController extends LiveBaseController {
     public MessageResponse visit(String id) throws Exception {
         Map<String, String> data = new HashMap<String, String>();
         data.put("id", id);
+        data.put("service", "visit");
         this.logger.info("{}", data);
-        String topic = "visit";
-        this.kafkaProducerService.sendMsg(topic, data);
+        this.kafkaProducerService.sendMsg("topic.sys.msg.live", data);
         return new MessageResponse(0, "OK");
     }
 
 
-    @RequestMapping(value = "/insertLive")
-    @ResponseBody
-    public MessageResponse insertLive(String jsons) throws Exception {
-        Map<String, Object> data = JsonUtil.toMap(jsons);
-        String openid = (String) data.get("openid");
-        MessageResponse checked = liveService.checkIsBandUsers(openid);
-        //验证通过
-        if (0 == checked.getStatus()) {
-            Live live = JsonUtil.toObject(jsons, Live.class);
-            return liveService.insertLive(openid, live);
-        } else {
-
-            return checked;
-
-        }
-    }
 
 
 }

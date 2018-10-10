@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
     <title>爱心贡献榜</title>
-    <link rel="stylesheet" type="text/css" href="../view/js/dropload/dropload.css"/>
+    <link rel="stylesheet" type="text/css" href="/cu/www/common/js/dropload/dropload.css"/>
     <link rel="stylesheet" type="text/css" href="css/donatelist.css"/>
 </head>
 <body>
@@ -49,12 +49,12 @@
             <img src="img/no2.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/>
             {@else if item.indexNum == 3}
             <img src="img/no3.png" style="width: 0.6rem;height: 0.8rem;padding-top: 0.1rem;"/>
-            {@else }
-            {{item.indexNum}}
+            {@else}
+            <span>${item.indexNum}</span>
             {@/if}
         </div>
         <div class="headImg">
-            <img src="${rank.headimgurl}"/>
+            <img src="${item.headimgurl}"/>
         </div>
         <div class="detail">
             <p class="user">${item.nickname}</p>

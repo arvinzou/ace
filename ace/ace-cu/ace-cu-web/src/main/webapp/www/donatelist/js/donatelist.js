@@ -25,9 +25,6 @@ window.onload = function(){
             if(result.status == 0) {
                 renderPage('mine', result.data.own, 'mine-tpl');
                 renderPage('donateList',  result.data.list, 'donate-tpl');
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
             }else {
                 alert(result.info);
             }
