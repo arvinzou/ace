@@ -17,10 +17,7 @@ import com.huacainfo.ace.society.constant.OrderState;
 import com.huacainfo.ace.society.constant.PayType;
 import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.*;
-import com.huacainfo.ace.society.model.OrderDetail;
-import com.huacainfo.ace.society.model.OrderInfo;
-import com.huacainfo.ace.society.model.PersonInfo;
-import com.huacainfo.ace.society.model.SocietyOrgInfo;
+import com.huacainfo.ace.society.model.*;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.OrderInfoService;
 import com.huacainfo.ace.society.service.PointsRecordService;
@@ -71,6 +68,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     private OrderDetailDao orderDetailDao;
     @Autowired
     private PointsRecordService pointsRecordService;
+    @Autowired
+    private SpaceOccupyInfoDao spaceOccupyInfoDao;
 
 
     @Autowired
@@ -343,6 +342,14 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             if (item.getPurchaseQty() <= 0) {
                 return new ResultResponse(ResultCode.FAIL, "商品购买数量有误");
             }
+            if ("1".equals(commodity.getCommodityType())) {
+//                return new ResultResponse(ResultCode.FAIL, "商品购买数量有误");
+                ResultResponse rs = checkSpaceOccupyInfo(commodity, item, info.getSpaceOccupyInfo());
+                if (rs.getStatus() == ResultCode.FAIL) {
+                    return rs;
+                }
+            }
+
             subTotal = commodity.getSalePrice().multiply(new BigDecimal(item.getPurchaseQty()));
             item.setCommodityName(commodity.getCommodityName());
             item.setCommodityCover(commodity.getCommodityCover());
@@ -359,6 +366,36 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         } else {
             return new ResultResponse(ResultCode.FAIL, "支付类型不支持");
         }
+    }
+
+    /**
+     * 检查场地占用情况
+     *
+     * @param commodity       商品信息
+     * @param item            下单明细
+     * @param spaceOccupyInfo 预约情况
+     * @return
+     */
+    private ResultResponse checkSpaceOccupyInfo(CommodityVo commodity,
+                                                OrderDetail item,
+                                                SpaceOccupyInfo spaceOccupyInfo) {
+        if (null == spaceOccupyInfo) {
+            return new ResultResponse(ResultCode.FAIL, "预约信息不能为空");
+        }
+        if (!StringUtil.areNotEmpty(spaceOccupyInfo.getSpaceId(),
+                spaceOccupyInfo.getYear(),
+                spaceOccupyInfo.getMonth(),
+                spaceOccupyInfo.getDay(),
+                spaceOccupyInfo.getReserveInterval())) {
+            return new ResultResponse(ResultCode.FAIL, "预约信息不能为空");
+        }
+
+        int isExist = spaceOccupyInfoDao.isExist(spaceOccupyInfo);
+        if (isExist > 0) {
+            return new ResultResponse(ResultCode.FAIL, "当前时间已被预约，请重新选择时间段");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "可以预约");
     }
 
     /**

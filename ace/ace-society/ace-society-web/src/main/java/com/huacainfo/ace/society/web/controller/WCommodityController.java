@@ -6,13 +6,18 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.society.service.CommodityService;
+import com.huacainfo.ace.society.service.SpaceOccupyInfoService;
 import com.huacainfo.ace.society.vo.CommodityQVo;
 import com.huacainfo.ace.society.vo.CommodityVo;
+import com.huacainfo.ace.society.vo.SpaceOccupyInfoQVo;
+import com.huacainfo.ace.society.vo.SpaceOccupyInfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Auther: Arvin
@@ -28,6 +33,8 @@ public class WCommodityController extends SocietyBaseController {
 
     @Autowired
     private CommodityService commodityService;
+    @Autowired
+    private SpaceOccupyInfoService spaceOccupyInfoService;
 
 
     /***
@@ -51,14 +58,34 @@ public class WCommodityController extends SocietyBaseController {
     /**
      * 获取商品详情
      *
-     * @param id society.commodity.id
+     * @param commodityId society.commodity.id
      * @return ResultResponse
      */
     @RequestMapping("/getDetail")
-    public ResultResponse getDetail(String id) throws Exception {
-        CommodityVo vo = commodityService.selectCommodityByPrimaryKey(id).getValue();
+    public ResultResponse getDetail(String commodityId) throws Exception {
+        CommodityVo vo = commodityService.selectCommodityByPrimaryKey(commodityId).getValue();
 
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", vo);
     }
 
+
+    /**
+     * 查询场地占用情况
+     *
+     * @param condition society.commodity.id
+     * @return ResultResponse
+     */
+    @RequestMapping("/spaceOccupyInfo")
+    public ResultResponse spaceOccupyInfo(SpaceOccupyInfoQVo condition) throws Exception {
+        if (!StringUtil.areNotEmpty(condition.getSpaceId(),
+                condition.getYear(), condition.getMonth(), condition.getDay(),
+                condition.getReserveInterval()
+        )) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        List<SpaceOccupyInfoVo> vo = spaceOccupyInfoService.spaceOccupyInfo(condition);
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", vo);
+    }
 }
