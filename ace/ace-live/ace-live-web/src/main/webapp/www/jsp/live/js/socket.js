@@ -1,7 +1,7 @@
     var wsk = null;
       //将消息显示在网页上
       function setMessageInnerHTML(innerHTML){
-                $("#chatContent").append(innerHTML);
+             $("#chatContent").append(innerHTML);
              var chatlist = document.getElementById('chatContent');
              chatlist.scrollTop = chatlist.scrollHeight;
       }
@@ -22,7 +22,7 @@
 
          var message={};
          message.header={
-            type:1,
+            cmd:'content',
             wxuser:wxuser
          };
          message.content=$("#j-remarkform").find("input[name=content]").val();
@@ -39,14 +39,14 @@
       function initWebSocket(){
       //判断当前浏览器是否支持WebSocket
             if('WebSocket' in window){
-              var url="ws://"+cfg.websocketurl+"/live/www/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
+              var url="ws://"+cfg.websocketurl+"/live/www/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/chat";
               wsk = new ReconnectingWebSocket(url);
               console.log("start init websocket at");
               console.log(url);
               console.log(wsk);
                 //连接发生错误的回调方法
               wsk.onerror = function(event){
-                  var url="ws://"+cfg.websocketurl+"/live/www/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/msg";
+                  var url="ws://"+cfg.websocketurl+"/live/www/websocket/"+lvsCmd.urlParams.id+"/"+wxuser.openid+"/chat";
                   //alert(wxuser.nickname+"对不起，网络初始化失败，5秒后尝试重新连接,状态码："+wsk.readyState);
                   console.log("websocket init onerror it will reconnecting after 5000 ms");
                   console.log(event);
@@ -65,16 +65,15 @@
               //接收到消息的回调方法
               wsk.onmessage = function(){
                   var data=JSON.parse(event.data);
-                    console.log(data);
-                  if(data.header.type==1){
+                   console.log(data);
+                   console.log(data.header.cmd);
+                  if(data.header.cmd=='content'){
                      var tpl = document.getElementById('tpl-msg').innerHTML;
                      var html = juicer(tpl, data);
                      $("#chatContent").append(html);
-                    // var chatlist = document.getElementById('chatlist');
-                     //chatlist.scrollTop = chatlist.scrollHeight;
                   }
-                  if(data.header.type==2){
-                        console.log(data.header.type);
+                  if(data.header.cmd='reload.msg'){
+
                        var tpl = document.getElementById('tpl-cmt').innerHTML;
                        var html = juicer(tpl, data);
                        var el="#cmtlist"+data.id;
@@ -82,15 +81,12 @@
                         $(el).removeClass("fn-hide");
                         var els="#j-remark-"+data.id+" em";
                         $(els).removeClass("fn-hide");
-                       //var cmtlist = document.getElementById(el);
-                       //cmtlist.scrollTop = cmtlist.scrollHeight;
+
                    }
-                   if(data.header.type==3){
+                   if(data.header.cmd='reload.rpt'){
                       load=false;
                       getReport(reportPage);
                   }
-                  //alert(data.header.type);
-
               };
 
               //连接关闭的回调方法
