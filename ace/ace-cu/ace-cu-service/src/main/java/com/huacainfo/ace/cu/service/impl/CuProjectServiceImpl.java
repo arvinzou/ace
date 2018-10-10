@@ -29,10 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("cuProjectService")
 /**
@@ -246,7 +243,7 @@ public class CuProjectServiceImpl implements CuProjectService {
         condition.setType(type);
         condition.setStatus("2");//'2' : "通过";
         condition.setStarted("1");//项目是否启动  0-否 1-true
-
+        //基础查询
         PageResult<CuProjectVo> rs = findCuProjectList(condition, start, limit, orderBy);
         List<CuProjectVo> list = rs.getRows();
         for (CuProjectVo projectVo : list) {
@@ -506,6 +503,51 @@ public class CuProjectServiceImpl implements CuProjectService {
         PageResult<CuDonateListVo> rs = cuDonateListService.findCuDonateListList(condition,
                 start, limit, orderBy);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rs);
+    }
+
+    /**
+     * 查询项目列表 -字段过滤
+     *
+     * @param type    项目类型 0-普通项目 1-慈善一日捐 2-个人项目 3-支出项目 4-春节送温暖
+     * @param start   分页开始位置  --  必选
+     * @param limit   页数  --  必选
+     * @param orderBy 排序条件   --  可选，默认时间倒叙
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse findListFilter(String type, int start, int limit, String orderBy) throws Exception {
+
+        CuProjectQVo condition = new CuProjectQVo();
+        condition.setType(type);
+        condition.setStatus("2");//'2' : "通过";
+        condition.setStarted("1");//项目是否启动  0-否 1-true
+        //基础查询
+        PageResult<CuProjectVo> rs = findCuProjectList(condition, start, limit, orderBy);
+        List<CuProjectVo> list = rs.getRows();
+
+        List<Map<String, Object>> dataList = new LinkedList<>();
+        Map<String, Object> data;
+        for (CuProjectVo projectVo : list) {
+//            setBalanceDays(projectVo);
+//            //统计 今日募集、今日捐赠人数
+//            if (ProjectConstant.P_TYPE_SPECIAL.equals(projectVo.getType())) {
+//                dataStatistics(projectVo);
+//            }
+            data = new HashMap<>();
+            data.put("id", projectVo.getId());
+            data.put("title", projectVo.getTitle());
+            data.put("projectName", projectVo.getProjectName());
+            data.put("coverUrl", projectVo.getCoverUrl());
+
+            dataList.add(data);
+        }
+        //返回字段过滤
+        PageResult<Map<String, Object>> rtn = new PageResult<>();
+        rtn.setTotal(rs.getTotal());
+        rtn.setRows(dataList);
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtn);
     }
 
     /**

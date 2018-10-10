@@ -1,6 +1,3 @@
-var ngControllerName = "angularjsCtrl";
-var ngAppName = "angularjsApp";
-var app =angular.module(ngAppName, []);
 var isBill = false;        //是否需要票据信息
 var isCustom = false;      //是否选择自定义金额
 var donateMoney = 10;       //捐款金额，初始化默认选择10元
@@ -9,8 +6,7 @@ var orderResultData = null;
 var payData = null;
 var isName = false;
 
-app.controller(ngControllerName,function($scope) {
-
+window.onload = function(){
     console.log(window.location.href);
     var url = window.location.href.substring(1);
     var projectId = url.substring(url.indexOf('=')+1);
@@ -139,9 +135,6 @@ app.controller(ngControllerName,function($scope) {
             success:function(result){
                 if(result.status == 0) {
                     orderResultData = result.data;
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
                     $.ajax({
                         url: "/cu//www/wxpay/ccbPay",
                         type:"post",

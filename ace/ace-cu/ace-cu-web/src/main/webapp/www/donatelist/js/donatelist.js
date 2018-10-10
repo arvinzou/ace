@@ -1,4 +1,6 @@
+
 window.onload = function(){
+
     var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
     var primaryId = null;
@@ -15,13 +17,14 @@ window.onload = function(){
     }
 
     $.ajax({
-        url: "/cu/www/project/getApplyProcess",
+        url: "/cu/www/report/donateRank",
         type:"post",
         async:false,
-        data:{applyId: primaryId},
+        data:{start:0, limit: 9999, projectId: primaryId, needOpenId: "1"},
         success:function(result){
             if(result.status == 0) {
-                renderPage('progress', result.data, 'progress-tpl');
+                renderPage('mine', result.data.own, 'mine-tpl');
+                renderPage('donateList',  result.data.list, 'donate-tpl');
             }else {
                 alert(result.info);
             }

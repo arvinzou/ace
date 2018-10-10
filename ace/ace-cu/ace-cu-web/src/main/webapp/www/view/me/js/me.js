@@ -1,8 +1,4 @@
-var ngControllerName = "angularjsCtrl";
-var ngAppName = "angularjsApp";
-var app =angular.module(ngAppName, []);
-
-app.controller(ngControllerName,function($scope){
+window.onload = function(){
     /**
      * 查询用户信息
      */
@@ -13,10 +9,7 @@ app.controller(ngControllerName,function($scope){
         data:{},
         success:function(result){
             if(result.status == 0) {
-                $scope.userInfo = result.data;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+                renderPage('userInfo', result.data, 'userInfo-tpl');
             }else {
                 alert(result.info);
             }
@@ -35,8 +28,9 @@ app.controller(ngControllerName,function($scope){
         data:{start:0, limit:9999},
         success:function(result){
             if(result.status == 0) {
-                $scope.donateList = result.data.rows;
-                $scope.times = result.data.total;
+                renderPage('nav_record', result.data, 'record-tpl');
+                renderPage('scoreBox', result.data, 'score-tpl');
+
                 var len = result.data.rows.length;
                 var arr = result.data.rows;
                 var total=0;
@@ -49,11 +43,11 @@ app.controller(ngControllerName,function($scope){
                         points += parseInt(arr[i].points);
                     }
                 }
-                $scope.totalAmount = total;
-                $scope.totalPoint = points;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+                $("#totalAmount").text(total);
+                $("#amount").text(total);
+                $("#totalPoint").text(points);
+                $("#times").text(result.data.total);
+
             }else {
                 alert(result.info);
             }
@@ -73,10 +67,7 @@ app.controller(ngControllerName,function($scope){
         data:{start:0, limit:9999},
         success:function(result){
             if(result.status == 0) {
-                $scope.projectList = result.data.rows;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+                renderPage('projectList', result.data.rows, 'project-tpl');
             }else {
                 alert(result.info);
             }
@@ -85,26 +76,27 @@ app.controller(ngControllerName,function($scope){
             alert("系统服务内部异常！");
         }
     });
+};
+function aboutus(){
+    window.location.href = '/cu/www/about/about.html';
+}
 
-    $scope.aboutus = function(){
-        window.location.href = '/cu/www/view/about/about.html';
-    }
+function apply(){
+    window.location.href = '/cu/www/view/apply/apply.html';
+}
 
-    $scope.apply = function(){
-        window.location.href = '/cu/www/view/apply/apply.html';
-    }
-
-    $scope.showProgress = function(id){
-        window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
-    }
-});
-app.filter('to_trusted', function ($sce) {
-        return function (text) {
-            return $sce.trustAsHtml(text);
-        }
-    }
-);
+function showProgress(id){
+    window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
+}
 function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
 	$("#"+divId).siblings().removeClass('dis').addClass('undis');
+}
+
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
 }

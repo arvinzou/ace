@@ -1,11 +1,6 @@
-var ngControllerName = "angularjsCtrl";
-var ngAppName = "angularjsApp";
-var app =angular.module(ngAppName, []);
-
-app.controller(ngControllerName,function($scope){
-
-    var projectId = null;
-    var status = null;
+var projectId = null;
+var status = null;
+window.onload = function(){
     $.ajax({
         url: "/cu/www/project/findList",
         type:"post",
@@ -13,14 +8,12 @@ app.controller(ngControllerName,function($scope){
         data:{start: 0, limit: 9999, type: "1"},
         success:function(result){
             if(result.status == 0) {
-                $scope.projectInfo = result.data.rows[0];
                 projectId = result.data.rows[0].id;
                 status = result.data.rows[0].status;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+                renderPage('statistics', result.data.rows[0], 'project-tpl');
+                renderPage('desscription', result.data.rows[0], 'des-tpl');
             }else {
-                alert(errorMessage);
+                alert(result.errorMessage);
             }
         },
         error:function(){
@@ -38,13 +31,9 @@ app.controller(ngControllerName,function($scope){
         data:{projectId: projectId, start: 0, limit: 99999},
         success:function(result){
             if(result.status == 0) {
-                $scope.useRecords = result.data.rows;
-                $scope.useTotal = result.data.total;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+                renderPage('useRecord', result.data, 'record-tpl');
             }else {
-                alert(errorMessage);
+                alert(result.errorMessage);
             }
         },
         error:function(){
@@ -62,14 +51,11 @@ app.controller(ngControllerName,function($scope){
         data:{projectId: projectId, start: 0, limit: 99999},
         success:function(result){
             if(result.status == 0) {
-                $scope.donationList = result.data.rows;
+                renderPage('donatiteList', result.data.rows, 'doante-tpl');
                 if(result.data.rows.length < 1){
                     $(".donate_list").hide();
                 }else{
                     $(".donate_list").show();
-                }
-                if (!$scope.$$phase) {
-                    $scope.$apply();
                 }
             }else {
                 alert(result.info);
@@ -90,12 +76,9 @@ app.controller(ngControllerName,function($scope){
         data:{start:0, limit: 999999, projectId: projectId, needOpenId: "1"},
         success:function(result){
             if(result.status == 0) {
-                $scope.rankList = result.data.list;
-                $scope.totalAmount =result.data.list.length;
-                $scope.own = result.data.own;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+                renderPage('rankList', result.data.list, 'rank-tpl');
+                renderPage('totalAmount', result.data.list.length, 'total-tpl');
+                renderPage('share_box', result.data.own, 'share-tpl');
             }else {
                 alert(result.info);
             }
@@ -104,55 +87,39 @@ app.controller(ngControllerName,function($scope){
             alert("系统服务内部异常！");
         }
     });
+};
 
-    $scope.donate = function(){
-        if(status != '2'){
-            alert("该项目未审核通过！")
-        }else{
-            window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
-        }
+function donate(){
+    if(status != '2'){
+        alert("该项目未审核通过！")
+    }else{
+        window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
     }
+}
+/**
+ * 跳转慈善榜单页面
+ */
+function donateRank(){
+    window.location.href = '/cu/www/donatelist/donatelist.html?projectId='+projectId;
+}
 
-    /**
-     * 跳转慈善榜单页面
-     */
-    $scope.donateRank = function(){
-        window.location.href = '/cu/www/view/donatelist/donatelist.html?projectId='+projectId;
-    }
+/**
+ * 使用记录查看更多
+ */
+function showMore(){
+    window.location.href = '/cu/www/daydonation/recordlist.html?projectId='+projectId;
+}
 
-    /**
-     * 使用记录查看更多
-     */
-    $scope.showMore = function(){
-        window.location.href = '/cu/www/view/daydonation/recordlist.html?projectId='+projectId;
-    }
-
-    /**
-     * 传递爱心
-     */
-    $scope.transmit = function(){
-        layer.open({
-            type:1,
-            content: $("#share_box").html(),
-            shadeClose:true
-        });
-    }
-});
-app.filter('to_trusted', function ($sce) {
-        return function (text) {
-            return $sce.trustAsHtml(text);
-        }
-    }
-);
-app.filter('formatDate', function() { //可以注入依赖
-    return function(text) {
-        if(text != undefined){
-            return text.substring(10,text.length+1);
-        }else{
-            return text;
-        }
-    }
-});
+/**
+ * 传递爱心
+ */
+function transmit(){
+    layer.open({
+        type:1,
+        content: $("#share_box").html(),
+        shadeClose:true
+    });
+}
 function troggle(obj, clazz){
     if($(obj).attr("name") == "down"){   //down展开，up收起
         $(obj).parent().siblings(clazz).removeClass("troggle");
@@ -163,4 +130,11 @@ function troggle(obj, clazz){
         $(obj).html("<span class=\"opt\">展开</span><img  src=\"img/down.png\" style=\"width: 0.3rem;height: 0.2rem;\">");
         $(obj).attr("name", "down");
     }
+}
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
 }
