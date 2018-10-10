@@ -4,7 +4,7 @@ var pageSize = 9999;
 window.onload = function(){
 	
 	$.ajax({
-        url: "/cu/www/project/findList",
+        url: "/cu/www/project/findListFilter",
         type:"post",
         async:false,
         data:{start: page, limit: pageSize, type: "0", orderBy: "sequence"},
