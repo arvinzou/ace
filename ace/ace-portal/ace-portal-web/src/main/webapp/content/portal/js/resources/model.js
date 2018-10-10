@@ -12,7 +12,7 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;'>*</span>"
 		},
 		editrules : {
 			required : true
@@ -25,7 +25,7 @@ var _colModel = function() {
 		hidden:true,
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;'>*</span>"
 		},
 		editrules : {
 			required : true
@@ -55,7 +55,7 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;'>*</span>"
 		},
 		editrules : {
 			required : true
@@ -93,7 +93,7 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;'>*</span>"
 		},
 		editrules : {
 			required : true
