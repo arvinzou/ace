@@ -180,7 +180,7 @@ window.onload = function(){
             }
         });
 	}
-});
+};
 
 function onBridgeReady(obj){
     wx.config({
