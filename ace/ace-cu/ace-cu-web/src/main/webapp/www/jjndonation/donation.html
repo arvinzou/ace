@@ -63,13 +63,13 @@
     </div>
     <div class="project_item_name">
         <p class="name_01">${data.projectName}</p>
-        {@if type != 2}
+        {@if data.type != 2}
         <p style="padding-bottom: 0.5rem;" class="name_02">${data.title}</p>
         {@/if}
     </div>
     <div class="project_item_raise" style="display: none;">
         <div class="raise_01">
-            {@if type != 2}
+            {@if data.type != 2}
             <p class="raise_money">${data.collectAmount}</p>
             <p class="raise_price">已募集(元)</p>
             {@else}
@@ -78,7 +78,7 @@
             {@/if}
         </div>
         <div class="raise_01">
-            {@if type != 2}
+            {@if data.type != 2}
             <p class="raise_money">${data.payoutAmount}</p>
             <p class="raise_price">已支出(元)</p>
             {@else}
@@ -87,7 +87,7 @@
             {@/if}
         </div>
         <div class="raise_01">
-            {@if type != 2}
+            {@if data.type != 2}
             <p class="raise_money">${data.balanceAmount}</p>
             <p class="raise_price">结余(元)</p>
             {@else}
