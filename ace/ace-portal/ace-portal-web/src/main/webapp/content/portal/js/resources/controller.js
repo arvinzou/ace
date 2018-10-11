@@ -64,32 +64,9 @@ jQuery(function($) {
 		$( "#btn-view-sort" ).on('click', function(e) {
     		e.preventDefault();
     		$('#modal-sort').modal('show');
-    		Travel("tt");
+    		getChildrenList();
+    		//Travel("tt");
 
-
-              var el = document.getElementById('sortable');
-
-                        var sortable = Sortable.create(el, {
-                            group: "words",
-                            animation: 150,
-                            onAdd: function (evt) {
-                                console.log('onAdd.bar:', evt.item);
-                            },
-                            onUpdate: function (evt) {
-                                console.log('onUpdate.bar:', evt.item);
-                            },
-                            onRemove: function (evt) {
-                                console.log('onRemove.bar:', evt.item);
-                            },
-                            onStart: function (evt) {
-                                console.log('onStart.foo:', evt.item);
-                            },
-                            onEnd: function (evt) {
-                                console.log('onEnd.foo:', evt.item);
-                                console.log(sortable.toArray());
-                                updateSequence(sortable.toArray());
-                            }
-                        });
 
 
 
@@ -199,27 +176,6 @@ function clearQparams(){
 		postData : {parentResourcesId:'',resourcesId:''}
 	}).trigger("reloadGrid");
 }
-function Travel(treeID){//参数为树的ID，注意不要添加#
-
-   var node = $('#'+treeID).tree('getSelected');
-   var html=[];
-   if(node){
-        var children = $('#'+treeID).tree('getChildren', node.target);
-        for (var i = 0; i < children.length; i++) {
-            //console.log(children[i].cls=='folder');
-            if(children[i].cls=='folder'||children[i].text.length>2){
-                html.push('<li draggable="false"  data-id="'+children[i].id+'" data-name="'+children[i].text+'">'+children[i].text+'</li>');
-            }
-
-        }
-   }else{
-        var roots=$('#'+treeID).tree('getRoots');
-        for(i=0;i<roots.length;i++){
-            html.push('<li class="dd-handle"  id="'+roots[i].id+'">'+roots[i].text+'</li>');
-        }
-   }
-    $(".sortable").html(html.join(""));
-}
 function updateSequence(arr){
     var data=[];
     for(var i=0;i<arr.length;i++){
@@ -293,3 +249,53 @@ jQuery(function($) {
             setTimeout("resizeJqGrid()",500);
 	});
 });
+
+
+function getChildrenList(){
+  var node = $('#tt').tree('getSelected');
+  var parentResourcesId="0";
+  if(node){
+    parentResourcesId=node.id;
+  }
+$.ajax({
+        type : "post",
+        url : cfg.grid_load_data_url,
+        data:{start:0,limit:9999,parentResourcesId:parentResourcesId},
+        success : function(rst, textStatus) {
+        console.log(rst);
+        var html=[];
+        $(rst.rows).each(function(i,o){
+             html.push('<li draggable="false"  data-id="'+o.resourcesId+'" data-name="'+o.resourcesName+'">'+o.resourcesName+'</li>');
+        });
+
+        $(".sortable").html(html.join(""));
+        var el = document.getElementById('sortable');
+        var sortable = Sortable.create(el, {
+            group: "words",
+            animation: 150,
+            onAdd: function (evt) {
+                console.log('onAdd.bar:', evt.item);
+            },
+            onUpdate: function (evt) {
+                console.log('onUpdate.bar:', evt.item);
+            },
+            onRemove: function (evt) {
+                console.log('onRemove.bar:', evt.item);
+            },
+            onStart: function (evt) {
+                console.log('onStart.foo:', evt.item);
+            },
+            onEnd: function (evt) {
+                console.log('onEnd.foo:', evt.item);
+                console.log(sortable.toArray());
+                updateSequence(sortable.toArray());
+            }
+        });
+
+        },
+        error : function() {
+            alert("对不起，出差了。");
+        }
+    });
+
+}
