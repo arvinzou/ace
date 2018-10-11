@@ -16,6 +16,8 @@ var config = {
     frontColor: '#000000',
     backgroundColor: "#fff",
     loginUrl: `${server}/portal/www/authority.do`,
-    checkImageUrl: `${server}/uf/www/captcha/image.do`
+    checkImageUrl: `${server}/uf/www/captcha/image.do`,
+    mallList: `${server}/society/www/commodity/getList`,
+    siteDetail: `${server}/society/www/commodity/getDetail`,
 };
 module.exports = config
