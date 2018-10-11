@@ -3151,6 +3151,8 @@ $.fn.jqGrid = function( pin ) {
 				} else {
 					ts.grid.bDiv.scrollTop = 0;
 				}
+
+
 			}
 			if (ts.grid.prevRowHeight && ts.p.scroll) {
 				delete ts.p.lastpage;
@@ -3158,7 +3160,18 @@ $.fn.jqGrid = function( pin ) {
 			} else {
 				ts.grid.populate();
 			}
+
 			if(ts.p._inlinenav===true) {$(ts).jqGrid('showAddEditButtons');}
+
+			/***
+            设置当前页面
+            */
+            if(ts.p.pager!='#false'){
+                console.log(ts.p.pager);
+                $(ts.p.pager).jqPaginator('option', {
+                    currentPage: ts.p.page
+                });
+            }
 			return false;
 		})
 		.dblclick(function(e) {
