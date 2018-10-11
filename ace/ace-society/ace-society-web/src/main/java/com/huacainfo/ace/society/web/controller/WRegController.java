@@ -14,6 +14,7 @@ import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.RegService;
+import com.huacainfo.ace.society.vo.CustomerVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,5 +132,22 @@ public class WRegController extends SocietyBaseController {
         return new ResultResponse(ResultCode.FAIL, "未知注册类型");
     }
 
+    /**
+     * 获取用户信息
+     *
+     * @param unionId 唯一主键
+     * @return ResultResponse
+     */
+    @RequestMapping("/findByUserId")
+    public ResultResponse findByUserId(String unionId) {
+        //公众号 or 小程序 获取unionId
 
+
+        CustomerVo vo = regService.findByUserId(unionId);
+        if (null == vo) {
+            return new ResultResponse(ResultCode.FAIL, "用户尚未注册");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "信息查询成功", vo);
+    }
 }
