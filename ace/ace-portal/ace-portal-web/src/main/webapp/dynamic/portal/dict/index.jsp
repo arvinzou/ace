@@ -82,7 +82,7 @@ pageEncoding="utf-8"%>
 	<div class="modal-dialog" role="document" style="width: 90%;">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				<button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 				</button>
 				<h4 class="modal-title">Excel导入</h4>
 			</div>

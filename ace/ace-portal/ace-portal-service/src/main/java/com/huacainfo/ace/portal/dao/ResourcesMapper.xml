@@ -182,7 +182,9 @@
 	</update>
 
 	<sql id="whereCondition">
-		from resources , users where resources.create_user_id=users.user_id
+		from resources
+		left join users on resources.create_user_id=users.user_id
+		where 0=0
 
 		<if
 			test="condition.resourcesName!=null and condition.resourcesName!=&quot;&quot;">

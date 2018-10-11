@@ -11,17 +11,11 @@ function init_uploader(){
 	        filters : {
 	            max_file_size : '10mb',
 	            mime_types: [
-	                //{title : "Image files", extensions : "jpg,gif,png"},
 	                {title : "Excel files", extensions : "xls,xlsx"}
 	            ]
 	        },
-	 
-	        // Resize images on clientside if we can
 	        resize : {width : 320, height : 240, quality : 90},
-	 
-	        url : contextPath+'/resources/importXls.do',
-	    	flash_swf_url : contextPath+'/content/common/js/plupload-2.1.2/js/Moxie.swf',
-	    	silverlight_xap_url : contextPath+'/content/common/js/plupload-2.1.2/js/Moxie.xap',
+	        url : contextPath+'/resources/importXls.do'
 	    });
 	 	var uploader = $('#uploader').pluploadQueue();
 	    uploader.bind("UploadComplete", function () {
@@ -31,27 +25,10 @@ function init_uploader(){
    			console.log(responseObject.response);
    			var rst=JSON.parse(responseObject.response);
    			if (!rst.state) {
-   				
-				bootbox.dialog({
-					title:'系统提示',
-					message:rst.errorMessage,
-					detail:rst.detail,
-					buttons: 			
-					{
-						"success" :
-						 {
-							"label" : "<i class='ace-icon fa fa-check'></i>确定",
-							"className" : "btn-sm btn-success",
-							"callback": function() {
-								$( "#dialog-message" ).dialog( "close" );
-							}
-						}
-					}
-				});
-		
+				alert(rst.errorMessage);
 			}else{
 				alert(rst.errorMessage);
-				$( "#dialog-message" ).dialog( "close" ); 
+				$('#modal-upload').modal('hide');
 				jQuery(cfg.grid_selector).jqGrid('setGridParam', {
 				}).trigger("reloadGrid");
 			}
