@@ -77,12 +77,12 @@
 
 
 		<div class="easyui-layout" id="cc" style="width:100%;height:400px">
-	
-		
+
+
 
 			<div data-options="region:'center',border:false,fit:true" id="easyui-center">
 			<table id="grid-table"></table>
-	
+
 			<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul>
 			</div>
 		</div>
@@ -102,7 +102,7 @@
                     });
                 }
             "></ul>
-		
+
 		</div>
 
 </div>
@@ -158,7 +158,7 @@
 			<div class="modal-dialog" role="document" style="width: 90%;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+						<button type="button" class="close"  authority="false" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title">Excel导入</h4>
 					</div>
@@ -182,7 +182,7 @@
 			<div class="modal-dialog" role="document" style="width: 90%;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+						<button type="button"  authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
 						</button>
 						<h4 class="modal-title">排序</h4>
 					</div>

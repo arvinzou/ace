@@ -30,7 +30,7 @@ var _colModel = function() {
 		editrules : {
 			required : true
 		}
-			
+
 	}, {
 		name : 'syid',
 		index : 'syid',

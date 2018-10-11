@@ -58,7 +58,7 @@ jQuery(function($) {
 		e.preventDefault();
 		reset_uploader();
 		$('#modal-upload').modal('show');
-		
+
 	});
 
 		$( "#btn-view-sort" ).on('click', function(e) {
@@ -77,14 +77,14 @@ function autotreeq(node){
 		page : 1,
 		postData : {resourcesId:node.id,parentResourcesId:''}
 	}).trigger("reloadGrid");
-	
+
 }
 function treeAutoSelect(){
 	var node = $('#tt').tree('getSelected');
 	if(node){
 		$(cfg.grid_selector).setSelection(node.id);
 	}
-	
+
 }
 function treeappend(){
 	if(!authorConfig.hasOwnProperty(cfg.grid_add_data_url)){
@@ -119,7 +119,7 @@ function treeedit(){
 	}
 	gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
 	'selrow');
-	
+
 	jQuery(cfg.grid_selector).jqGrid(
 			'editGridRow',
 			gr,
