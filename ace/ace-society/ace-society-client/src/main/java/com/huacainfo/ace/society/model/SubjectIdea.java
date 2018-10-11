@@ -1,8 +1,10 @@
 package com.huacainfo.ace.society.model;
 
+import com.huacainfo.ace.common.model.BaseModel;
+
 import java.util.Date;
 
-public class SubjectIdea {
+public class SubjectIdea extends BaseModel {
     private String id;
 
     private String subjectId;
@@ -26,6 +28,16 @@ public class SubjectIdea {
     private Date lastModifyDate;
 
     private String solution;
+
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getId() {
         return id;

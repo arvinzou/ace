@@ -136,6 +136,17 @@ function security(role){
   }
   return true;
 }
+
+function isLogin() {
+    console.log("==============isLogin===============");
+    var userinfo = wx.getStorageSync('userinfo');
+    console.log(userinfo);
+    if (!userinfo.userProp) {
+        return false;
+    }
+    return true;
+}
+
 function login(callback) {
   var that = this;
   var _callback = callback;
@@ -257,6 +268,7 @@ module.exports = {
     uuid: uuid,
     formatDate:formatDate,
     login:login,
+    isLogin: isLogin,
     security: security,
     stringToJson: stringToJson,
     jsonToString: jsonToString,
