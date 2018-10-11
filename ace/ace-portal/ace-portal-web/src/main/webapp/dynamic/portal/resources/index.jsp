@@ -52,7 +52,7 @@
 						上级资源：
 						<input id="cc1" name="parentResourcesId" class="easyui-combotree" data-options="url:'${pageContext.request.contextPath}/resources/selectResourcesTreeList.do?id=01',method:'get',animate: true,
                 lines:true," style='width:200px;line-height: 30px;height: 30px;'>
-						<a href="javascript:clearQparams()">清除</a>
+						<a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
 					</div>
 
 

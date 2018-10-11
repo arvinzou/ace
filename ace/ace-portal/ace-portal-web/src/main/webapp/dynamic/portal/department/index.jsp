@@ -7,90 +7,62 @@
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-<title>deparment</title>
+<title>机构管理</title>
 </head>
-<jsp:include page="../../common/common.jsp" />
-<style>
-.layout-user {
-	width: 60px;
-	height: 20px;
-	float: left;
-	margin: 1px 1px 1px;
-}
-</style>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
-<style type="text/css">
-		.excel{ background-color:#999; font-size:13px;}
-		.excel td{ background-color:#fff; white-space:nowrap;}
-		.excel th{ background-color:#E7E7E7; font-weight:normal;}
-</style>
+<jsp:include page="/dynamic/common/header.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}" />
 <body>
-	<div class="page-content">
-		<div class="widget-box" id="widget-box">
-			<div class="widget-header">
-				<h5 class="widget-title smaller">设置查询条件</h5>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<div class="portlet light ">
 
-				<div class="widget-toolbar"></div>
+	<div class="portlet-body">
+
+		<div class="row custom-toolbar">
+			<div class="col-md-4">
+
+
+				<button class="btn green" id="btn-view-add" authority="${pageContext.request.contextPath}/department/insertDepartment.do">
+
+				</button>
+
+
+
+
+
 			</div>
 
-			<div class="widget-body">
-				<div class="widget-main padding-6">
-					<form action="#" id="fm-search">
-					<!--地区： <input id="cc2" name="areaCode"
-							class="easyui-combotree"
-							data-options="url:'${pageContext.request.contextPath}/system/selectProvinceTreeList.do',method:'get',animate: true,
-                lines:false,"
-							style='width: 200px; line-height: 25px; height: 25px;'> <a
-							href="javascript:clearAreaCode()">清除</a> -->
-							
-						上级部门： <input id="cc1" name="parentDepartmentId"
-							class="easyui-combotree"
-							data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,
-                lines:false,"
-							style='width: 200px; line-height: 25px; height: 25px;'> <a
-							href="javascript:clearQparams()">清除</a> 部门名称： <input
-							name="departmentName" type="text" maxlength="20"
-							style="width: 200px;"/>
-						<button class="btn btn-info" id="btn-search"
-							authority="${pageContext.request.contextPath}/department/findDepartmentList.do">
-							<i
-								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-						</button>
+			<div class="col-md-8">
 
-					</form>
-					<div class="space10"></div>
-					<div id="toolbar" class="toolbar">
+				<form action="#" id="fm-search" >
 
-						<button class="btn btn-info" id="btn-view-add"
-							authority="${pageContext.request.contextPath}/department/insertDepartment.do">
-							<i
-								class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-						</button>
-						<button class="btn btn-info" id="btn-view-edit"
-							authority="${pageContext.request.contextPath}/department/updateDepartment.do">
-							<i
-								class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-						</button>
-						
-<!-- 						<button class="btn btn-purple" id="btn-view-ins" -->
-<!-- 							authority="/kernel/memberInfo/insertMemberInfo.do"> -->
-<!-- 							<i -->
-<!-- 								class="ace-icon fa  fahicon-gavel  align-middle bigger-125 icon-on-right"></i> -->
-<!-- 						</button> -->
-						<button class="btn btn-warning" id="btn-view-del"
-							authority="${pageContext.request.contextPath}/department/delDepartmentByPrimaryKey.do">
-							<i
-								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-						</button>
-                        <button class="btn btn-info" id="btn-view-import"
-                            authority="${pageContext.request.contextPath}/department/importXls.do">
-                            <i
-                                class="ace-icon glyphicon glyphicon-upload  align-middle bigger-125 icon-on-right"></i>
-                        </button>
+					<div class="input-group" style="float:left">
+						上级： <input id="cc1" name="parentDepartmentId"
+									 class="easyui-combotree"
+									 data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,lines:false,"
+									 style='width: 300px; line-height: 30px; height: 30px;'>
+						  <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
 					</div>
-				</div>
+
+
+
+
+					<div class="input-group" style="float:right;width:300px">
+						<input type="text"
+							   name="departmentName"
+							   class="form-control"
+							   placeholder="请输入名称">
+						<span class="input-group-btn">
+							<button class="btn  btn-default search_btn"  id="btn-search"
+									authority="${pageContext.request.contextPath}/department/findDepartmentList.do">
+									搜索
+							</button>
+						</span>
+					</div>
+				</form>
 			</div>
+
 		</div>
+
 		<div class="easyui-layout" id="cc" style="width: 100%; height: 300px;">
 
 
@@ -98,7 +70,9 @@
 				<div data-options="region:'center',border:false,fit:true" id="easyui-center">
 				<table id="grid-table"></table>
 
-				<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
+					<div style="text-align:left">
+						<ul id="grid-pager" class="pagination"></ul>
+					</div>
 			</div>
 			<div id="cc-west" class="easyui-west"
 				data-options="region:'west',split:true" title="我的树"
@@ -121,12 +95,21 @@
             "></ul>
 
 			</div>
-			<!--  
-		<div data-options="region:'south',split:true" style="height:50px;"></div>
-        <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
-        -->
+
 		</div>
-	</div>
+		<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
+		<jsp:include page="/dynamic/common/footer.jsp" />
+		<link rel="stylesheet" type="text/css"
+			  href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+		<link rel="stylesheet" type="text/css"
+			  href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+		<script type="text/javascript"
+				src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+		<script type="text/javascript"
+				src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+		<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+		<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 
 	<div id="mm" class="easyui-menu" style="width: 120px;">
 		<div onclick="treeappend()" data-options="iconCls:'icon-add'">添加</div>
@@ -139,7 +122,7 @@
 	</div>
 	
 
-	<jsp:include page="../../common/footer-1.jsp" />
+
 	<script
 		src="${pageContext.request.contextPath}/content/portal/js/department/config.js?version=${cfg.version}"></script>
 	<script
@@ -149,152 +132,17 @@
 	<script
 		src="${pageContext.request.contextPath}/content/portal/js/department/view.js?version=${cfg.version}"></script>
 
-	<jsp:include page="../../common/footer-2.jsp" />
-
-	<script type="text/javascript">
-		window.onresize = function() {
-			setTimeout("autoResize()", 100);
-			setTimeout("autoResize()",1000);
-		}
-		function autoResize() {
-			jQuery('.panel-tool').find('a').on('click', function(e) {
-				setTimeout("autoResize()", 1000);
-			});
-			var h = window.innerHeight - 130;
-            if(portalType=='2'){
-                h=window.innerHeight-250;
-            }
-			$('#cc').layout('resize', {
-				width : '100%',
-				height : h
-			});
-			$('#cc').css("height", h);
-			$(cfg.grid_selector).jqGrid('setGridHeight', h - 65);
-			var display = $('#cc-west').css('display');
-			console.log(display)
-			if (display == 'none') {
-				$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width()-25);
-			} else {
-				$(cfg.grid_selector).jqGrid('setGridWidth',
-						$(".page-content").width() - 185);
-			}
-			console.log('autoResize:' + h);
-			//parent.autoWidth();
-		}
-		jQuery(function($) {
-			jQuery('.layout-button-left').on('click', function(e) {
-				setTimeout("autoResize()", 1000);
-			});
-
-		});
-	</script>
-	
-	<div id="dialog-message2" class="hide">
-<!-- 		<select class="easyui-combogrid" -->
-<!-- 			style="width: 585px; height: 30px; line-height: 30px;" -->
-<!-- 			id="combogrid-tmp" -->
-<%-- 			data-options="panelWidth: 585,idField: 'USER_ID',textField: 'NAME',url: '${sessionScope.portalContextPath}/system/selectUsers.do', --%>
-<!-- 			mode:'remote',  -->
-<!-- 			fitColumns:true, -->
-<!-- 			method: 'get',columns: [[ -->
-<!-- 			{field:'USER_ID',title:'用户编号',width:150}, -->
-<!-- 			{field:'NAME',title:'姓名',width:100}, -->
-<!-- 			{field:'MOBILE',title:'手机号',width:150,align:'right'}, -->
-<!-- 			{field:'DEPARTMENT_NAME',title:'所属部门',width:250,align:'right'} -->
-<%-- 			 ]]"></select> --%>
-
-		<div style="height: 5px"></div>
-<!-- 		<div> -->
-<!-- 			<button class="btn btn-purple" id="btn-view-select-tmp" -->
-<!-- 				authority="false"> -->
-<!-- 				添加<i -->
-<!-- 					class="ace-icon glyphicon  glyphicon-plus  align-middle bigger-125 icon-on-right"></i> -->
-<!-- 			</button> -->
-<!-- 			<button class="btn btn-purple" id="btn-view-remove-tmp" -->
-<!-- 				authority="false"> -->
-<!-- 				清除<i -->
-<!-- 					class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i> -->
-<!-- 			</button> -->
-<!-- 		</div> -->
-		<div style="height: 5px"></div>
-		<div id="task-content-tmp" class="easyui-panel"
-			style="padding: 5px; width: 585px; height: 200px"></div>
-
-	<script type="text/javascript">
-	jQuery(function($) {
-		$( "#btn-view-select-tmp" ).on('click', function(e) {
-			e.preventDefault();
-			selectMobile();
-		});
-		$('#combogrid-tmp').combogrid({
-			onSelect: function(index,row){
-				selectMobile();
-			}
-		});
-		$( "#btn-view-remove-tmp" ).on('click', function(e) {
-			e.preventDefault();
-			$('#task-content-tmp').html('');
-		});
-	});
-	
-	function selectMobile(){
-		var html = new Array();
-		var g = $('#combogrid-tmp').combogrid('grid');	// get datagrid object
-		var r = g.datagrid('getSelected');	// get the selected row
-		var isExit=false;
-		if(r&&r.USER_ID){
-			$.each($('user'),function(i,obj){
-				if($(obj).attr("id")==r.USER_ID){
-					alert("重复人员。");
-					isExit=true;
-					return;
-				}
-			});
-			
-			html.push('<div class="layout-user" >');
-			html.push('<user id="'+r.USER_ID+'" class="badge badge-'+cssColor9[0]+'">');
-			html.push(r.NAME);
-			html.push('</user>');
-			html.push('</div>');
-			if(!isExit){
-				if(r.DEPARTMENT_NAME&&r.DEPARTMENT_NAME!=''){
-					if(confirm("已分配过的人员，确定要更改部门吗？")){
-						$('#task-content-tmp').html($('#task-content-tmp').html()+html.join(''));
-					}
-				}else{
-					$('#task-content-tmp').html($('#task-content-tmp').html()+html.join(''));
-					
-				}
-				
-			}
-			
-		}else{
-			alert("请选择人员且编号不能为空。");
-		}
-	}
-	</script>
-	</div>
-
-	<div id="dialog-message" class="hide">
-
-    		<div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-    </div>
-
-     <div style="margin:5px">
-
-    		           <a href="rs.xls" style="color:red">下载模板</a>.<br>
-
-
-     </div>
-
-
-
-    		</div>
-    <script
-    		src="${pageContext.request.contextPath}/content/portal/js/department/upload.js?version=${cfg.version}"></script>
-    		<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
-    			<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
-    	<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+		<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+		<style>
+.panel-header {
+    background-color: #edf2f74f;
+}
+.panel-header, .panel-body {
+    border-color: #edf2f74f;
+}
+.panel-header {
+    padding: 9px;
+}
+</style>
 </body>
 </html>
