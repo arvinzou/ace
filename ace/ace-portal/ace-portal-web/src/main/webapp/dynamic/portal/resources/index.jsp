@@ -81,17 +81,17 @@
 
 
 			<div data-options="region:'center',border:false,fit:true" id="easyui-center">
-			<table id="grid-table"></table>
-
-			<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul>
+					<table id="grid-table"></table>
+					<div style="text-align:left">
+						<ul id="grid-pager" class="pagination"></ul>
+					</div>
 			</div>
-		</div>
 		<div id="cc-west" class="easyui-west" data-options="region:'west',split:true" title="我的树" style="width:200px;">
 		 <ul id="tt" class="easyui-tree" data-options="
                url: '${pageContext.request.contextPath}/resources/selectResourcesTreeList.do?id=01',
                 method: 'get',
                 animate: true,
-                lines:true,
+                lines:false,
                 onContextMenu: function(e,node){
                     e.preventDefault();
                     $(this).tree('select',node.target);
@@ -205,7 +205,17 @@
 
 
 
-
+<style>
+.panel-header {
+    background-color: #edf2f74f;
+}
+.panel-header, .panel-body {
+    border-color: #edf2f74f;
+}
+.panel-header {
+    padding: 9px;
+}
+</style>
 
 
 </body>

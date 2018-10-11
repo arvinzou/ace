@@ -12,7 +12,6 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
-import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.RegDao;
 import com.huacainfo.ace.society.model.PersonInfo;
@@ -49,8 +48,7 @@ public class RegServiceImpl implements RegService {
     private PersonInfoService personInfoService;
     @Autowired
     private SocietyOrgInfoService societyOrgInfoService;
-    @Autowired
-    private UsersService usersService;
+
 
     @Autowired
     private SqlSessionTemplate sqlSession;
@@ -224,6 +222,5 @@ public class RegServiceImpl implements RegService {
         }
         return null;
     }
-
 
 }

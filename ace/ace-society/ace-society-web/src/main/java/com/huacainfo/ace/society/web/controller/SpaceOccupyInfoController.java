@@ -130,22 +130,4 @@ public class SpaceOccupyInfoController extends SocietyBaseController {
         return this.spaceOccupyInfoService.deleteSpaceOccupyInfoBySpaceOccupyInfoId(id, this.getCurUserProp());
     }
 
-    /**
-     * @throws
-     * @Title:audit
-     * @Description: TODO(审核场地占用情况)
-     * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param message 审核说明
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2018-09-14
-     */
-    @RequestMapping(value = "/audit")
-    @ResponseBody
-    public MessageResponse audit(String id, String rst, String message) throws Exception {
-
-        return this.spaceOccupyInfoService.audit(id, rst, message, this.getCurUserProp());
-    }
 }
