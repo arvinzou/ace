@@ -19,5 +19,7 @@ var config = {
     checkImageUrl: `${server}/uf/www/captcha/image.do`,
     mallList: `${server}/society/www/commodity/getList`,
     siteDetail: `${server}/society/www/commodity/getDetail`,
+    sendCode: `${server}/society/www/reg/sendCode`,
+    regist: `${server}/society/www/reg/register`,
 };
 module.exports = config

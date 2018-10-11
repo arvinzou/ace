@@ -1,11 +1,14 @@
-
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-     
+     commoditylist: [],
+     sitelist: []
   },
 
   /**
@@ -19,16 +22,34 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+      var that = this;
+      util.request(cfg.mallList, {"start": 0, "limit": 9999 },
+          function (ret) {
+              var datas = ret.data.rows;
+              var commodityArr = [];
+              var siteArr = [];
+              for(var i=0; i < datas.length; i++){
+                  if (datas[i].commodityType == '1'){
+                      siteArr.push(datas[i]);
+                  }else{
+                      commodityArr.push(datas[i]);
+                  }
+              }
+              that.setData({ commoditylist: commodityArr });
+              that.setData({ sitelist: siteArr });
+          }
+      );
   },
-  commodityDetal: function(){
+  commodityDetal: function(e){
+      var id = e.currentTarget.dataset.id;
       wx.navigateTo({
-          url: '../commodity/index'
+          url: '../commodity/index?id='+id
       })
   },
-    siteDetail: function(){
+    siteDetail: function(e){
+        var id = e.currentTarget.dataset.id;
         wx.navigateTo({
-            url: '../site/index'
+            url: '../site/index?id='+id
         })
     },
   /**

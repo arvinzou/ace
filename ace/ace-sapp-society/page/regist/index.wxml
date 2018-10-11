@@ -6,10 +6,14 @@
     </view>
 
     <view class='form'>
-    <form bindsubmit="formSubmit" bindreset="formReset">
         <view class='stepOne partOne {{stepNum==1?"":"hidden"}}'>
-            <view class='cover'>
-                添加照片
+            <view class='cover' bindtap='addImage'>
+                <block wx-if='{{ imageCover == null}}'>
+                    <text style='line-height:500rpx;'>添加照片</text>
+                </block>
+                <block wx-if='{{ imageCover != null}}'>
+                    <image src='{{ imageCover }}' class='image-cover'></image>
+                </block>
             </view>
             <view class='form-content'>
                 <view class='tips'>
@@ -18,8 +22,9 @@
                 <view class="input-style bottom-line">
                     <view class="title">注册类型
                         <text>*</text>
+
                     </view>
-                    <picker mode = selector bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                    <picker mode = selector bindchange="bindPickerChange" data-name='{{ array[index] }}' value="index" range="{{array}}">
                         <view class="picker">{{array[index]}}</view>
                     </picker>
                 </view>
@@ -37,61 +42,56 @@
         </view>
 
         <!--社会组织党组织注册页面-->
+        <form bindsubmit="orgFormSubmit">
         <view class='stepTwo partTwo {{stepNum==2 && (index == 1 || index == 3)?"":"hidden"}}'>
             <view class='form-content'>
                 <view class="input-style bottom-line">
                     <view class="title">组织名称
                         <text>*</text>
                     </view>
-                    <input placeholder='请输入组织名称' placeholder-class='placeholder-text'></input>
+                    <input name='orgName' placeholder='请输入组织名称' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title">组织地址</view>
-                    <input placeholder='请输入组织地址' placeholder-class='placeholder-text'></input>
+                    <input name='orgAddr' placeholder='请输入组织地址' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title">联系人
                         <text>*</text>
                     </view>
-                    <input placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
+                    <input name='contactPerson' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title">联系电话
                         <text>*</text>
                     </view>
-                    <input placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number'></input>
+                    <input name='contactPhone' placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number' bindblur='phoneInput'></input>
+                    <button class='code' bindtap='sendCode'>{{ btnName }}</button>
                 </view>
                 <view class="input-style bottom-line">
-                    <view class="title">性别</view>
-                    <radio-group name="radio-group">
-                        <label>
-                            <radio value="1" />男</label>
-                        <label>
-                            <radio value="2" />女</label>
-                    </radio-group>
+                    <view  class="title">验证码
+                        <text>*</text>
+                    </view>
+                    <input name='code' placeholder='请输入验证码' placeholder-class='placeholder-text'></input>
                 </view>
-                <view class="input-style bottom-line">
-                    <view class="title">年龄</view>
-                    <input placeholder='请输入年龄' placeholder-class='placeholder-text' type='number'></input>
-                </view>
-
                 <view class='btn-part'>
                     <view bindtap='previousOne' class='btn btn-bkClick'>
                         上一步
                     </view>
-                    <view bindtap='nextOne' class='btn btn-clicking'>
-                        提交
+                    <view class='btn btn-clicking'>
+                        <button class='submit'  formType="submit" >提交</button>
                     </view>
                 </view>
             </view>
         </view>
+        </form>
 
         <!--个人注册详情页面-->
+         <form bindsubmit="personFormSubmit">
         <view class='stepTwo partTwo {{stepNum==2 &&(index == 0 || index == 2)?"":"hidden"}}'>
             <view class='form-content'>
                 <view class="input-style bottom-line">
                     <view class="title">所属组织
-                        <text>*</text>
                     </view>
                     <picker mode = selector bindchange="bindPickerChange1" value="{{group_index}}" range="{{groupArray}}">
                         <view class="picker">{{groupArray[group_index]}}</view>
@@ -108,6 +108,7 @@
                         <text>*</text>
                     </view>
                     <input placeholder='请输入手机号码' placeholder-class='placeholder-text'></input>
+                    <button class='code'>获取验证码</button>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title">性别</view>
@@ -132,9 +133,11 @@
                 </view>
             </view>
         </view>
+        </form>
+
 
         <!--第三步，提交成功-->
-       <view class='reuslt {{stepNum==3?"":"hidden"}}'>
+       <view class='reuslt {{lastNum==3?"":"hidden"}}'>
         <view class='massage'>
             <icon type="success" size="80" />
             <text class='fontStyle1'>注册成功！</text>
@@ -146,6 +149,5 @@
             关闭
         </view>
     </view>
-    </form>
     </view>
 </view>
