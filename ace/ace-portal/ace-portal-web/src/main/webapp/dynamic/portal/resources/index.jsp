@@ -58,7 +58,7 @@
 
 
 
-					<div class="input-group" style="float:right;width:230px">
+					<div class="input-group" style="float:right;width:220px">
 						<input type="text"
 							   name="resourcesName"
 							   class="form-control"
