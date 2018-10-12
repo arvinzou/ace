@@ -108,10 +108,10 @@ color:rgba(34,34,34,1);
     font-size: 24rpx;
 }
 .submit{
-    background:rgba(255, 153, 6, 1);
+    background: rgba(255,153,6,1);
     color: #FFFFFF;
 }
-.image-cover{
+.cover image{
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -57,7 +57,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+      var that = this;
+      if (!util.isLogin()) {
+          wx.navigateTo({ url: "../userinfo/index?url=../regist/index" });
+      }
+      that.setData({
+          userinfo: wx.getStorageSync('userinfo')
+      });
   },
   bindPickerChange: function (e) {
         console.log('picker发送选择改变，携带值为', e.detail.value);
@@ -69,9 +75,9 @@ Page({
       var name = (that.data.array)[that.data.index];
       that.setData({ regName: name});
         if (name == '个人' || name == '党员') {
-            that.setData({ regType: '2'});
+            that.setData({ regType: '1'});
         }else{
-            that.setData({ regType: '1' });
+            that.setData({ regType: '2' });
         }
     },
 
@@ -120,7 +126,7 @@ Page({
         }else{
             orgType = '2';
         }
-        var jsonData = { "orgName": orgName, "orgAddr": orgAddr, "contactPerson": contactPerson, "contactPhone": contactPhone, "orgType": orgType}
+        var jsonData = { "orgName": orgName, "orgAddr": orgAddr, "contactPerson": contactPerson, "contactPhone": contactPhone, "orgType": orgType, "orgCover": that.data.imageCover }
         if (orgName == undefined || orgName == null || orgName == ''){
             wx.showModal({
                 title: '提示',
@@ -154,7 +160,7 @@ Page({
             return;
         }
 
-        util.request(cfg.regist, { "regType": that.data.regType, "mobile": contactPhone, "code": code, "jsonData": JSON.stringify(jsonData)},
+        util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": contactPhone, "code": code, "jsonData": JSON.stringify(jsonData)},
             function (ret) {
                 if (ret.status == 0){
                     that.setData({ lastNum: 3 });
@@ -165,7 +171,7 @@ Page({
                 }else{
                     wx.showModal({
                         title: '提示',
-                        content: ret.info,
+                        content: ret.errorMessage,
                         success: function (res) { }
                     });
                 }
@@ -280,14 +286,38 @@ Page({
     /**
      * 个人注册
      */
-    personFormSubmit: function(){
+    personFormSubmit: function(e){
         var that = this;
         var politicalStatus = null;
-        if (that.data.regName == '党组织') {
-            orgType = '1';
+        if (that.data.regName == '个人') {
+            politicalStatus = '1';
         } else {
-            orgType = '2';
+            politicalStatus = '2';
         }
+
+        var realName = e.detail.value.realName;
+        var mobilePhone = e.detail.value.mobilePhone;
+        var code = e.detail.value.code;
+        var jsonData = { "realName": realName, "mobilePhone": mobilePhone}
+        util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
+            function (ret) {
+                if (ret.status == 0) {
+                    that.setData({ lastNum: 3 });
+                    that.setData({
+                        stepNum: ++that.data.stepNum,
+                        topNum: 0,
+                    });
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: ret.info,
+                        success: function (res) { }
+                    });
+                }
+
+            }
+        );
+        
     },
   /**
    * 生命周期函数--监听页面初次渲染完成

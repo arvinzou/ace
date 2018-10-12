@@ -232,3 +232,103 @@ page {
 .icon-shanchu:before {
     content: "\e649";
 }
+
+.typeTag {
+    width: 120rpx;
+    height: 40rpx;
+    
+    font-size: 24rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    
+    line-height: 40rpx;
+    text-align: center;
+    position: relative;
+    margin-left: 40rpx;
+}
+
+.typeTag::before{
+    content: '';
+    display: block;
+    position: absolute;
+    border-width: 14rpx;
+    border-style: solid;
+    border-color: transparent;
+    
+    border-top-left-radius: 10rpx;
+    transform:rotate(-45deg);
+    left: -13rpx;
+    top: 6rpx;
+}
+
+.typeTag::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10rpx;
+    height: 10rpx;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 15rpx;
+    left: -10rpx;
+}
+
+.tagGreen{
+    background: #dbf7ec;
+    color: rgba(28, 188, 128, 1);
+}
+
+.tagGreen::before{
+    border-left-color: #dbf7ec;
+    border-top-color: #dbf7ec;
+}
+
+
+
+.tagPurPle{
+    background: #E3F2FF;
+    color: #5E9EFF;
+}
+
+.tagPurPle::before{
+    border-left-color: #E3F2FF;
+    border-top-color: #E3F2FF;
+}
+
+.tagRed{
+    background: #FEF2EF;
+    color: #F65246;
+}
+
+.tagRed::before{
+    border-left-color: #FEF2EF;
+    border-top-color: #FEF2EF;
+}
+
+.tagYellow{
+    background: #FFEBD0;
+    color: #FF9906;
+}
+
+.tagYellow::before{
+    border-left-color: #FFEBD0;
+    border-top-color: #FFEBD0;
+}
+
+/*活动状态 */
+.statusTag{
+    width: 134rpx;
+    height: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 22rpx;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    border-top-left-radius: 6rpx;
+    border-bottom-right-radius: 16rpx;
+    background-color: #B5B5B5
+}
+
+.statusTaging{
+    background:linear-gradient(90deg,rgba(251,81,82,1),rgba(251,117,81,1));
+}

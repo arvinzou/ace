@@ -41,21 +41,7 @@
     color:rgba(153,153,153,1);
 }
 
-.singleActivity .content .tag {
+.singleActivity .content .statusTag {
     position: absolute;
-    width: 134rpx;
-    height: 50rpx;
-    text-align: center;
-    line-height: 50rpx;
-    font-size: 22rpx;
-    font-weight: bold;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(181, 181, 181, 1);
-    border-top-left-radius: 6rpx;
-    border-bottom-right-radius: 16rpx;
     top:-17rpx;
-}
-
-.singleActivity .content .taging{
-    background:linear-gradient(90deg,rgba(251,81,82,1),rgba(251,117,81,1));
 }
