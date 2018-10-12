@@ -41,29 +41,17 @@ input,textarea{
 .other_amount:-ms-input-placeholder { /* Internet Explorer 10+ */
 	color:#EA4436;
 }
-.money_01{
+.money_01,.money_02{
 	width: 100%;
 	height: 1.6rem;
-}
-.money_01 span{
-	width: 2.3rem;
-	height: 1rem;
-	line-height: 1rem;
-	background:rgba(251,218,215,.4);
-	display: block;
-	text-align: center;
-	float: left;
-	border-radius: 0.2rem;
-	font-size: 0.4rem;
-	color: #EA4436;
+	display: flex;
+	justify-content: space-between;
 }
 .money_02{
-	width: 100%;
-	height: 1.6rem;
-	line-height: 1.6rem;
 	border-bottom: 1px solid #E4E6E9;
 }
-.money_02 span{
+
+.money_01 span , .money_02 span,.other_amount{
 	width: 2.3rem;
 	height: 1rem;
 	line-height: 1rem;
@@ -74,21 +62,15 @@ input,textarea{
 	border-radius: 0.2rem;
 	font-size: 0.4rem;
 	color: #EA4436;
+	border: 2px solid rgba(251,218,215,.4) ;
+	outline: none;
+	-webkit-appearance:none;
 }
-.other_amount{
-	width: 2.3rem;
-	height: 1rem;
-	display: block;
-	float: left;
-	text-align: center;
-	background:rgba(251,218,215,.4);
-	border-radius: 0.2rem;
-	font-size: 0.4rem;
-	color: #EA4436;
-	margin-right: 0.2rem;
-	border: none;
-	outline:none;
+.lightborder{
+	border: 2px solid #EA4436 !important;
 }
+
+
 .amount{
 	width: 4.6rem;
 	height: 1rem;

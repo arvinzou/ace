@@ -178,7 +178,7 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
         return rst;
     }
 
-   // @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 5000)
     public void queueTask() throws Exception {
         this.logger.info("queueTask executed");
         List<TaskCmcc> list = this.taskCmccMapper.selectByTask();
@@ -200,7 +200,7 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
         }
     }
 
-    //@Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 5000)
     public void queueTaskDetail() throws Exception {
         this.logger.info("===============================start dispatch for task queueTaskDetail=================================");
         this.logger.info("threadPool.dataSize:" + threadPool.dataSize());
@@ -293,7 +293,7 @@ public class TaskCmccServiceImpl implements TaskCmccService, ThreadProcess {
 
     }
 
-    //@Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 5000)
     public void workFlowMsgTask() {
         logger.info("workFlowMsgTask");
     }

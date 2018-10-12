@@ -1,6 +1,22 @@
-var _colNames = ['编号', '父编号', '类型', '编码', '名称', '拼音码', '创建时间', '图标'];
+var _colNames = ['名称','编号', '父编号', '类型', '编码',  '拼音码', '创建时间', '图标','操作'];
 var _colModel = function() {
-	return [
+	return [{
+            				name : 'name',
+            				index : 'name',
+            				width : 100,
+            				editable : true,
+            				editoptions : {
+            					size : "20",
+            					maxlength : "30"
+            				},
+            				formoptions : {
+            					elmprefix : "",
+            					elmsuffix : "<span style='color:red;'>*</span>"
+            				},
+            				editrules : {
+            					required : true
+            				}
+            			},
 			{
 				name : 'id',
 				hidden:true,
@@ -17,7 +33,7 @@ var _colModel = function() {
 				width : 100,
 				sortable : false,
 				editable : true,
-				hidden:false,
+				hidden:true,
 				editoptions : {
 					size : "20",
 					maxlength : "50",
@@ -25,7 +41,7 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
+					elmsuffix : "<span style='color:red;'></span>"
 				},
 				editrules : {
 					required : false
@@ -36,7 +52,7 @@ var _colModel = function() {
 				index : 'categoryId',
 				width : 100,
 				editable : true,
-				hidden:true,
+				hidden:false,
 				edittype : "combobox",
 				dataoptions : {
 					url : contextPath
@@ -64,29 +80,13 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+					elmsuffix : "<span style='color:red;'>*</span>"
 				},
 				editrules : {
 					required : true
 				}
 			},
-			{
-				name : 'name',
-				index : 'name',
-				width : 100,
-				editable : true,
-				editoptions : {
-					size : "20",
-					maxlength : "30"
-				},
-				formoptions : {
-					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-				},
-				editrules : {
-					required : true
-				}
-			},
+
 			{
 				name : 'spell',
 				index : 'spell',
@@ -99,7 +99,7 @@ var _colModel = function() {
 				},
 				formoptions : {
 					elmprefix : "",
-					elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'></span>"
+					elmsuffix : "<span style='color:red;'></span>"
 				},
 				editrules : {
 					required : false
@@ -120,23 +120,22 @@ var _colModel = function() {
 					maxlength : "200",
 					colspan : true
 				}
-			}];
+			}, {
+                                          name : 'opt',
+                                          sortable : false,
+                                          width : 50,
+                                          renderer : function(value, cur) {
+                                              var rowid=$.jgrid.getAccessor(cur, cfg.dataId);
+                                              var opt=[];
+                                              if(authorConfig.hasOwnProperty(cfg.grid_edit_data_url )){
+                                                  opt.push('<a href="javascript:edit(\''+rowid+'\')">编辑</a> ');
+                                              }
+                                              if(authorConfig.hasOwnProperty(cfg.grid_delete_data_url)){
+                                                  opt.push('<a href="javascript:del(\''+rowid+'\')">删除</a>');
+                                              }
+
+                                              return opt.join('');
+                                          }
+                                      }];
 }
 
-function aceSwitch(cellvalue, options, cell) {
-	console.log('aceSwitch');
-	setTimeout(function() {
-		$(cell).find('input[type=checkbox]').addClass(
-				'ace ace-switch ace-switch-5').after(
-				'<span class="lbl"></span>');
-	}, 0);
-}
-// enable datepicker
-function pickDate(cellvalue, options, cell) {
-	setTimeout(function() {
-		$(cell).find('input[type=text]').datepicker({
-			format : 'yyyy-mm-dd',
-			autoclose : true
-		});
-	}, 0);
-}

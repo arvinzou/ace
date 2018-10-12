@@ -26,8 +26,8 @@ var config = {
     selectLiveByPrimaryKey: `${server}/live/live/www/selectLiveByPrimaryKey`,
   deleteLiveByLiveId: `${server}/live/live/www/deleteLiveByLiveId`,
     findLiveList: `${server}/live/live/www/findLiveList`,
-  updateAuditStatus: `${server}/live/live/www/updateAuditStatus`
+  updateAuditStatus: `${server}/live/live/www/updateAuditStatus`,
+  insertLiveCmt: `${server}/live/liveCmt/www/insertLiveCmt`,
+  addLike: `${server}/live/www/live/addLike`
 };
 module.exports = config
-
-

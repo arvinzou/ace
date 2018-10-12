@@ -88,7 +88,10 @@
 
                 </view>
               </view>
-
+            <view class='cmt-bar'>
+            <image src='../../image/点赞.png'  class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
+            <image src='../../image/评论.png'  class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
+            </view>
               <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
                 <view class='chat-content'>
                   <image src='{{citem.headimgurl}}' class='headimg'></image>
@@ -117,7 +120,11 @@
 
 
   <modal hidden="{{hiddenmodalput}}" title="请输入要发表的内容" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
-    <input class="inputView" name="content" type="text" placeholder="说点啥唄" placeholder-style="color: #ccccc" bindblur="contentInput" value="{{contentText}}" />
+    <textarea class="inputView" name="content" type="text" placeholder="说点啥唄" placeholder-style="color: #ccccc" auto-focus="true" bindinput="contentInput" value="{{contentText}}" />
+  </modal>
+
+   <modal hidden="{{hiddenmodalcmt}}" title="请输入要发表的内容" confirm-text="提交" cancel-text="取消" bindcancel="cancelCmt" bindconfirm="confirmCmt">
+    <textarea class="inputViewCmt" name="content" type="text" placeholder="说点啥唄" placeholder-style="color: #ccccc" auto-focus="true" bindinput="contentCmtInput" value="{{contentCmtText}}" />
   </modal>
 
 </view>

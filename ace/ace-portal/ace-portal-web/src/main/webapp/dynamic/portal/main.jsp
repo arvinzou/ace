@@ -6,140 +6,19 @@ pageEncoding="utf-8"%>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<meta charset="utf-8"/>
 	<meta name="description" content="overview &amp; stats"/>
-	<meta name="viewport"
-		  content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 	<title>管理平台</title>
 
 </head>
-
-<jsp:include page="/dynamic/common/common.jsp"/>
-<link rel="stylesheet" href="${portalPath}/content/common/css/new.css?version=${cfg.version}"/>
-<link href="${portalPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
-	  id="style_components" type="text/css"/>
-<style>
-.charts-portal-ct1 {
-	width: 500px;
-	height: 300px
-}
-.charts-portal-ct2 {
-	width: 500px;
-	height: 300px
-}
-</style>
-
+<jsp:include page="/dynamic/common/header.jsp" />
 <body>
-<div style="height:10px;" class="background-white"></div>
-<div class="page-content background">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-	<!-- PAGE CONTENT BEGINS -->
-	<!-- Row starts -->
-	<div class="row">
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<div class="dashboard-stat2 ">
-				<div class="display">
-					<div class="number">
-						<h3 class="font-green-sharp">
-							<span data-counter="counterup" data-value="" id="sys">0</span>
-							<small class="font-green-sharp"></small>
-						</h3>
-						<small>子系统</small>
-					</div>
-					<div class="icon">
-						<i class="fa fa-desktop"></i>
-					</div>
-				</div>
-				<div class="progress-info">
-					<div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success green-sharp">
-                                                <span class="sr-only"></span>
-                                            </span>
-					</div>
-					<div class="status">
-						<div class="status-title">  </div>
-						<div class="status-number"> </div>
-					</div>
-				</div>
-			</div>
+
+		<div class="page-content-inner">
+
 		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<div class="dashboard-stat2 ">
-				<div class="display">
-					<div class="number">
-						<h3 class="font-red-haze">
-							<span data-counter="counterup" data-value="0" id="res">0</span>
-						</h3>
-						<small>资源</small>
-					</div>
-					<div class="icon">
-						<i class="fa fa-flag"></i>
-					</div>
-				</div>
-				<div class="progress-info">
-					<div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success red-haze">
-                                                <span class="sr-only"></span>
-                                            </span>
-					</div>
-					<div class="status">
-						<div class="status-title">  </div>
-						<div class="status-number">  </div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<div class="dashboard-stat2 ">
-				<div class="display">
-					<div class="number">
-						<h3 class="font-blue-sharp">
-							<span data-counter="counterup" data-value="0" id="wxuser">0</span>
-						</h3>
-						<small>微信用户</small>
-					</div>
-					<div class="icon">
-						<i class="fa fa-user-circle-o"></i>
-					</div>
-				</div>
-				<div class="progress-info">
-					<div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success blue-sharp">
-                                                <span class="sr-only"></span>
-                                            </span>
-					</div>
-					<div class="status">
-						<div class="status-title">  </div>
-						<div class="status-number"> </div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<div class="dashboard-stat2 ">
-				<div class="display">
-					<div class="number">
-						<h3 class="font-purple-soft">
-							<span data-counter="counterup" data-value="0" id="user">0</span>
-						</h3>
-						<small>系统用户</small>
-					</div>
-					<div class="icon">
-						<i class="fa fa-user-circle-o"></i>
-					</div>
-				</div>
-				<div class="progress-info">
-					<div class="progress">
-                                            <span style="width: 100%;" class="progress-bar progress-bar-success purple-soft">
-                                                <span class="sr-only"></span>
-                                            </span>
-					</div>
-					<div class="status">
-						<div class="status-title">  </div>
-						<div class="status-number"> </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 
 
@@ -181,7 +60,7 @@ pageEncoding="utf-8"%>
 				<div class="widget-box transparent background-white padding1" id="recent-box">
 					<div class="widget-header">
 						<h4 class="widget-title lighter smaller">
-							<i class="ace-icon glyphicon glyphicon-th-large green"></i>辖区公告
+							<i class="ace-icon glyphicon glyphicon-th-large green"></i>业务公告
 						</h4>
 
 						<div class="widget-toolbar no-border">
@@ -211,64 +90,86 @@ pageEncoding="utf-8"%>
 		</div>
 
 
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
+
+<jsp:include page="/dynamic/common/footer.jsp" />
+
+<script src="${pageContext.request.contextPath}/content/index/act.js?version=${cfg.version}"></script>
+
+
+<script id="tpl-portal" type="text/template">
+
+	<!-- PAGE CONTENT BEGINS -->
+	<!-- Row starts -->
+
+
+	<div class="row widget-row">
+		<div class="col-md-3">
+			<!-- BEGIN WIDGET THUMB -->
+			<div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+				<h4 class="widget-thumb-heading">子系统</h4>
+				<div class="widget-thumb-wrap">
+					<i class="widget-thumb-icon bg-purple fa fa-laptop"></i>
+					<div class="widget-thumb-body">
+						<span class="widget-thumb-subtitle">累计</span>
+						<span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.sys}">\${data.sys}</span>
+					</div>
+				</div>
+			</div>
+			<!-- END WIDGET THUMB -->
+		</div>
+		<div class="col-md-3">
+			<!-- BEGIN WIDGET THUMB -->
+			<div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+				<h4 class="widget-thumb-heading">资源</h4>
+				<div class="widget-thumb-wrap">
+					<i class="widget-thumb-icon bg-green fa fa-anchor"></i>
+					<div class="widget-thumb-body">
+						<span class="widget-thumb-subtitle">累计</span>
+						<span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.res}">\${data.res}</span>
+					</div>
+				</div>
+			</div>
+			<!-- END WIDGET THUMB -->
+		</div>
+		<div class="col-md-3">
+			<!-- BEGIN WIDGET THUMB -->
+			<div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+				<h4 class="widget-thumb-heading">微信用户</h4>
+				<div class="widget-thumb-wrap">
+					<i class="widget-thumb-icon bg-red  fa fa-user-secret"></i>
+					<div class="widget-thumb-body">
+						<span class="widget-thumb-subtitle">累计</span>
+						<span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.wxuser}">\${data.wxuser}</span>
+					</div>
+				</div>
+			</div>
+			<!-- END WIDGET THUMB -->
+		</div>
+		<div class="col-md-3">
+			<!-- BEGIN WIDGET THUMB -->
+			<div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+				<h4 class="widget-thumb-heading">系统用户</h4>
+				<div class="widget-thumb-wrap">
+					<i class="widget-thumb-icon bg-purple fa fa-user"></i>
+					<div class="widget-thumb-body">
+						<span class="widget-thumb-subtitle">累计有效</span>
+						<span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.user}">\${data.user}</span>
+					</div>
+				</div>
+			</div>
+			<!-- END WIDGET THUMB -->
+		</div>
+
+	</div>
 
 
 
-</div>
 
-<!-- /.page-content -->
+	</div>
 
 
-<jsp:include page="/dynamic/common/footer-1.jsp"/>
-
-<script
-		src="${portalPath}/content/common/js/echarts-2.27/echarts.js?version=${cfg.version}"></script>
-
-<script
-		src="${pageContext.request.contextPath}/content/index/config-1.js?version=${cfg.version}"></script>
-<script
-		src="${pageContext.request.contextPath}/content/index/config-2.js?version=${cfg.version}"></script>
-<script
-		src="${pageContext.request.contextPath}/content/index/controller.js?version=${cfg.version}"></script>
-<script
-		src="${pageContext.request.contextPath}/content/index/view.js?version=${cfg.version}"></script>
-<script
-		src="${portalPath}/content/common/js/jquery.stamper.js?version=${cfg.version}"></script>
-
-<jsp:include page="/dynamic/common/footer-2.jsp"/>
-
-<script type="text/javascript">
-window.onresize = function () {
-	//parent.autoWidth();
-}
 </script>
-<script
-		src="${pageContext.request.contextPath}/content/index/index.js?version=${cfg.version}"></script>
-<style>
-.padding1{
-    padding: 15px 15px 15px 15px;
-}
-.page-content {
-	background-color: #fff;
-	position: relative;
-	margin: 0;
-	padding: 10px 10px 0px 10px;
-}
-.page-content-2 {
-	background-color: #fff;
-	position: relative;
-	margin: 0;
-	padding: 0px 10px 10px 10px;
-}
-.background {
-	background-color: #BFCAD1;
-}
-.background-white {
-	background-color: #fff;
-}
-.stamper{padding-top:10px;height:100px;}
-.stamper span{float:right;display:inline-block;height:100%;width:200px;}
-
-</style>
 </body>
 </html>

@@ -1,17 +1,27 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
+      userinfo: wx.getStorageSync('userinfo'),
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+      var that = this;
+      if (!util.isLogin()) {
+          wx.navigateTo({ url: "../userinfo/index?url=../me/index" });
+      }
+      that.setData({
+          userinfo: wx.getStorageSync('userinfo')
+      });
   },
 
   /**

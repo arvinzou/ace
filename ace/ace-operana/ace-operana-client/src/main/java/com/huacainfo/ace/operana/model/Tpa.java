@@ -1,6 +1,7 @@
 package com.huacainfo.ace.operana.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Tpa implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
@@ -39,6 +40,11 @@ public class Tpa implements java.io.Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+
+    private String remark;
+
+    private List<Attach> attach;
 
     public String getId() {
         return id;
@@ -182,5 +188,21 @@ public class Tpa implements java.io.Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public List<Attach> getAttach() {
+        return attach;
+    }
+
+    public void setAttach(List<Attach> attach) {
+        this.attach = attach;
     }
 }

@@ -1,8 +1,3 @@
-var ngControllerName = "angularjsCtrl";
-var ngAppName = "angularjsApp";
-var hostPath = "http://127.0.0.1";
-var app =angular.module(ngAppName, []);
-
 var coverUrl01 = null;
 var coverUrl02 = null;
 var coverUrl03 = null;
@@ -10,7 +5,7 @@ var coverUrl04 = null;
 var coverUrl05 = null;
 var coverUrl06 = null;
 var id = "";
-app.controller(ngControllerName,function($scope){
+window.onload = function(){
 	var uploader1 = new plupload.Uploader({
             runtimes: 'html5,flash,silverlight,html4',
             browse_button: 'positive',
@@ -241,102 +236,103 @@ app.controller(ngControllerName,function($scope){
             }
         }
     });
+};
 
-        /**
-         * 发起申请
-         */
-	$scope.applyProject = function(){
-        var realName = $("input[name='realName']").val();
-		var idCard = $("input[name='idCard']").val();
-		var phoneNum = $("input[name='phoneNum']").val();
-		var flagAmount = $("input[name='flagAmount']").val();
-		var raiseTitle = $("input[name='raiseTitle']").val();
-		var raiseDes = $("textarea[name='raiseDes']").val();
-		
-		if(realName == '' || realName == undefined){
-			alert("真实姓名不能为空！");
-			return;
-		}
-		if(idCard == '' || idCard == undefined){
-			alert("身份证号不能为空！");
-			return;
-		}
-		if(phoneNum == '' || phoneNum == undefined){
-			alert("联系方式不能为空！");
-			return;
-		}
-		if((coverUrl01==null || coverUrl02 == null) ||(coverUrl01==undefined || coverUrl02 == undefined)){
-			alert("相关证明材料未上传！");
-			return;
-		}
-		if(coverUrl05 == null || coverUrl05 == undefined){
-            alert("相关证明材料未上传！");
-            return;
+/**
+ * 发起申请
+ */
+function applyProject(){
+    var realName = $("input[name='realName']").val();
+    var idCard = $("input[name='idCard']").val();
+    var phoneNum = $("input[name='phoneNum']").val();
+    var flagAmount = $("input[name='flagAmount']").val();
+    var raiseTitle = $("input[name='raiseTitle']").val();
+    var raiseDes = $("textarea[name='raiseDes']").val();
+
+    if(realName == '' || realName == undefined){
+        alert("真实姓名不能为空！");
+        return;
+    }
+    if(idCard == '' || idCard == undefined){
+        alert("身份证号不能为空！");
+        return;
+    }
+    if(phoneNum == '' || phoneNum == undefined){
+        alert("联系方式不能为空！");
+        return;
+    }
+    if((coverUrl01==null || coverUrl02 == null) ||(coverUrl01==undefined || coverUrl02 == undefined)){
+        alert("相关证明材料未上传！");
+        return;
+    }
+    if(coverUrl05 == null || coverUrl05 == undefined){
+        alert("相关证明材料未上传！");
+        return;
+    }
+    if(flagAmount == '' || flagAmount == undefined){
+        alert("目标金额不能为空！");
+        return
+    }
+    if(raiseTitle == '' || raiseTitle == undefined){
+        alert("筹款标题不能为空！");
+        return;
+    }
+    if(raiseDes == '' || raiseDes == undefined){
+        alert("筹款说明不能为空！");
+        return;
+    }
+    if((coverUrl03 ==null && coverUrl04 == null) || (coverUrl03==undefined && coverUrl04==undefined)){
+        alert("相关证明不能为空！");
+        return;
+    }
+    var list = [
+        {
+            "resName":"身份证正面照",
+            "resUrl":coverUrl01,
+            "type":"0"
+        },
+        {
+            "resName":"低保证或扶贫手册",
+            "resUrl":coverUrl02,
+            "type":"1"
+        },
+        {
+            "resName":"疾病诊断证明或意外事故",
+            "resUrl":coverUrl05,
+            "type":"2"
         }
-		if(flagAmount == '' || flagAmount == undefined){
-			alert("目标金额不能为空！");
-			return
-		}
-		if(raiseTitle == '' || raiseTitle == undefined){
-			alert("筹款标题不能为空！");
-			return;
-		}
-		if(raiseDes == '' || raiseDes == undefined){
-			alert("筹款说明不能为空！");
-			return;
-		}
-		if((coverUrl03 ==null && coverUrl04 == null) || (coverUrl03==undefined && coverUrl04==undefined)){
-			alert("相关证明不能为空！");
-			return;
-		}
-		var list = [
-			{
-				"resName":"身份证正面照",
-				"resUrl":coverUrl01,
-				"type":"0"
-			},
-			{
-				"resName":"低保证或扶贫手册",
-				"resUrl":coverUrl02,
-				"type":"1"
-			},
-            {
-                "resName":"疾病诊断证明或意外事故",
-                "resUrl":coverUrl05,
-                "type":"2"
-            }
-		];
-		if(coverUrl03 != null && coverUrl03 != undefined){
-			var temp = {
-				"resName":"证明文件",
-				"resUrl":coverUrl03,
-				"type":"3"
-			}
-			list.push(temp);
-		}
-		if(coverUrl04 != null && coverUrl04 != undefined){
-			var temp = {
-				"resName":"证明文件",
-				"resUrl":coverUrl04,
-				"type":"3"
-			}
-			list.push(temp);
-		}
-		if(coverUrl06 !=null && coverUrl06!= undefined){
-            var temp = {
-                "resName":"证明文件",
-                "resUrl":coverUrl06,
-                "type":"3"
-            }
-            list.push(temp);
+    ];
+    if(coverUrl03 != null && coverUrl03 != undefined){
+        var temp = {
+            "resName":"证明文件",
+            "resUrl":coverUrl03,
+            "type":"3"
         }
-		
-		$.ajax({
+        list.push(temp);
+    }
+    if(coverUrl04 != null && coverUrl04 != undefined){
+        var temp = {
+            "resName":"证明文件",
+            "resUrl":coverUrl04,
+            "type":"3"
+        }
+        list.push(temp);
+    }
+    if(coverUrl06 !=null && coverUrl06!= undefined){
+        var temp = {
+            "resName":"证明文件",
+            "resUrl":coverUrl06,
+            "type":"3"
+        }
+        list.push(temp);
+    }
+
+    $.ajax({
         url: "/cu/www/project/applyProject",
         type:"post",
-        async:false,
+        dataType:"json",
         data:{
-        	json: JSON.stringify({
+            json: JSON.stringify({
                 "realName": realName,
                 "idCard": idCard,
                 "mobileNumber": phoneNum,
@@ -349,7 +345,6 @@ app.controller(ngControllerName,function($scope){
         success:function(result){
             if(result.status == 0) {
                 id = result.data.id;
-                $scope.projectId = id;
                 layer.open({
                     type:1,
                     content: $("#success_box").html(),
@@ -363,9 +358,8 @@ app.controller(ngControllerName,function($scope){
             alert("系统服务内部异常！");
         }
     });
-    
-	}
-});
+
+}
 
 function showProjectProgress(){
     window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;

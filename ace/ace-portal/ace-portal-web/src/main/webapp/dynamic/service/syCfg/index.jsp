@@ -9,67 +9,58 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 <title>系统配置</title>
 </head>
-<jsp:include page="../../common/common.jsp" />
-<script type="text/javascript">
-
-
-</script>
+<jsp:include page="/dynamic/common/header.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}" />
 <body>
-	<div class="page-content">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<div class="portlet light ">
 
-		<div class="widget-box" id="widget-box">
-			<div class="widget-header">
-				<h5 class="widget-title smaller">设置查询条件</h5>
+	<div class="portlet-body">
 
-				<div class="widget-toolbar"></div>
+		<div class="row custom-toolbar">
+			<div class="col-md-4">
+
+				<button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/syCfg/insertSyCfg.do"></button>
+
+
+
+			</div>
+			<div class="col-md-4">
 			</div>
 
-			<div class="widget-body">
-				<div class="widget-main padding-6">
-					<form action="#" id="fm-search">
-					
-				名称：<input name="name" type="text"
-							style="width: 200px;height:25px" />
-						<button class="btn btn-info" id="btn-search"
-							authority="${pageContext.request.contextPath}/syCfg/findSyCfgList.do">
-							 <i
-								class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-						</button>
+			<div class="col-md-4">
 
-						
-					</form>
-					<div class="space10"></div>
-					<div id="toolbar" class="toolbar">
+				<form action="#" id="fm-search" >
 
-						
-						<button class="btn btn-info" id="btn-view-add"
-							authority="${pageContext.request.contextPath}/syCfg/insertSyCfg.do">
-							 <i
-								class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-						</button>
-						<button class="btn btn-info" id="btn-view-edit"
-							authority="${pageContext.request.contextPath}/syCfg/updateSyCfg.do">
-							 <i
-								class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-						</button>
-						<button class="btn btn-warning" id="btn-view-del"
-							authority="${pageContext.request.contextPath}/syCfg/deleteSyCfgBySyCfgId.do">
-							 <i
-								class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-						</button>
-						
+
+					<div class="input-group">
+						<input type="text"
+							   name="name"
+							   class="form-control"
+							   placeholder="请输入名称">
+						<span class="input-group-btn">
+                                                                <button class="btn  btn-default search_btn"  id="btn-search"
+																		 authority="${pageContext.request.contextPath}/syCfg/findSyCfgList.do">
+                                                                        搜索
+                                                                </button>
+                                                            </span>
 					</div>
-				</div>
+				</form>
 			</div>
+
 		</div>
 
 		<table id="grid-table"></table>
 
-		<div id="grid-pager"></div>
-		
-		
+		<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
 	</div>
-	<jsp:include page="../../common/footer-1.jsp" />
+</div>
+
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
+<jsp:include page="/dynamic/common/footer.jsp" />
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/syCfg/config.js?version=${cfg.version}"></script>
 	<script
@@ -78,14 +69,11 @@
 		src="${pageContext.request.contextPath}/content/service/syCfg/controller.js?version=${cfg.version}"></script>
 	<script
 		src="${pageContext.request.contextPath}/content/service/syCfg/view.js?version=${cfg.version}"></script>
-	<jsp:include page="../../common/footer-2.jsp" />
-	<script type="text/javascript">
-window.onresize = function () {
-	console.log('autoWidthJqgrid');
-	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-	//////parent.autoWidth();
-}
-</script>
+<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+
+
+<style>
+
+</style>
 </body>
 </html>

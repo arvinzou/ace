@@ -1,30 +1,27 @@
 package com.huacainfo.ace.live.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
-
-import com.huacainfo.ace.live.dao.LiveDao;
-import com.huacainfo.ace.live.model.Live;
-import com.huacainfo.ace.portal.model.SensitiveWords;
-import com.huacainfo.ace.portal.vo.SensitiveWordsVo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.live.dao.LiveCmtDao;
+import com.huacainfo.ace.live.dao.LiveDao;
+import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.model.LiveCmt;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.live.service.LiveCmtService;
-import com.huacainfo.ace.live.vo.LiveCmtVo;
 import com.huacainfo.ace.live.vo.LiveCmtQVo;
+import com.huacainfo.ace.live.vo.LiveCmtVo;
+import com.huacainfo.ace.live.vo.LiveRptVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 
 /**
@@ -39,9 +36,13 @@ public class LiveCmtServiceImpl implements LiveCmtService {
     private LiveCmtDao liveCmtDao;
     @Autowired
     private LiveDao liveDao;
-
+    @Autowired
+    private LiveRptDao liveRptDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     /**
      * @throws
@@ -82,7 +83,7 @@ public class LiveCmtServiceImpl implements LiveCmtService {
      * @version: 2018-01-13
      */
     @Override
-    public MessageResponse insertLiveCmt(LiveCmt o, String corpId)
+    public MessageResponse insertLiveCmt(LiveCmt o)
             throws Exception {
         o.setId(UUID.randomUUID().toString());
         if (CommonUtils.isBlank(o.getRptId())) {
@@ -98,6 +99,14 @@ public class LiveCmtServiceImpl implements LiveCmtService {
         o.setStatus("1");
         o.setCreateTime(new Date());
         this.liveCmtDao.insert(o);
+
+        LiveRptVo rpt=this.liveRptDao.selectByPrimaryKey(o.getRptId());
+        String rid=rpt.getRid();
+        Map<String, String> data = new HashMap<String, String>();
+        data.put("rid", rid);
+        data.put("cmd", "reload.rpt");
+        this.logger.info("{}", data);
+        this.kafkaProducerService.sendMsg("topic.sys.msg.live.client", data);
         return new MessageResponse(0, "添加评论完成！");
     }
 

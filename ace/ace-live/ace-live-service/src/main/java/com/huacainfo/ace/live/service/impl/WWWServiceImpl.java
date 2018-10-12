@@ -1,15 +1,18 @@
 package com.huacainfo.ace.live.service.impl;
 
 
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.live.dao.LiveDao;
+import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.live.service.WWWService;
 import com.huacainfo.ace.live.vo.LiveQVo;
+import com.huacainfo.ace.live.vo.LiveRptVo;
 import com.huacainfo.ace.live.vo.LiveVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.apache.ibatis.session.ExecutorType;
@@ -33,6 +36,11 @@ public class WWWServiceImpl implements WWWService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private LiveDao liveDao;
+
+
+    @Autowired
+    private LiveRptDao liveRptDao;
+
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -40,6 +48,9 @@ public class WWWServiceImpl implements WWWService {
     private SqlSessionTemplate sqlSession;
 
     private int defaultPageSize = 10;
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     /**
      * @throws
@@ -199,12 +210,20 @@ public class WWWServiceImpl implements WWWService {
     public Map<String, Object> updateRptLikeNum(String id, String type) {
         Map<String, Object> rst = new HashMap<>();
         rst.put("status", 0);
+        String rid="";
         if (type.equals("1")) {
             this.liveDao.updateLiveLikeNum(id);
         } else {
             this.liveDao.updateRptLikeNum(id);
+            LiveRptVo o=liveRptDao.selectByPrimaryKey(id);
+            rid=o.getRid();
+            Map<String, String> data = new HashMap<String, String>();
+            data.put("rid", rid);
+            data.put("cmd", "reload.rpt");
+            data.put("body", type);
+            this.logger.info("{}", data);
+            this.kafkaProducerService.sendMsg("topic.sys.msg.live.client", data);
         }
-
         return rst;
     }
 

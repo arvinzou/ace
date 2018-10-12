@@ -148,7 +148,7 @@
         <![CDATA[
         select
         2 commentApproveType,
-        concat(#{fastdfs_server},imageSrc) cover,
+        imageSrc cover,
         endTime,
         0 hasPassword,
         id,
@@ -181,7 +181,7 @@
         null appShortUrl,
         addr city,
         0 commentApproveType,
-        concat(#{fastdfs_server},imageSrc) cover,
+        imageSrc cover,
         endTime,
         id,
         pop likeNums,
@@ -335,7 +335,7 @@
         '' downloadDesc,
         short_name downloadTitle,
         '' iosDownload,
-        concat(#{fastdfs_server},t.logo) logo,
+        t.logo logo,
         '' sysValue
         from portal.department t where t.department_id= #{deptId}
     </select>

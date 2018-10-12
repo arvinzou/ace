@@ -40,4 +40,6 @@ public interface TpaDao {
 
 	int findCountCommon(@Param("condition") TpaQVo condition, @Param("orderBy") String orderBy);
 
+	String selectCorpIdByUserId(@Param("userId") String userId);
+
 }

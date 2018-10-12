@@ -10,7 +10,6 @@
 }
 
 .cover {
-    padding-top: 230rpx;
     background-color: #fff;
     width: 750rpx;
     height: 400rpx;
@@ -100,4 +99,20 @@ color:rgba(34,34,34,1);
     flex-direction: column;
     justify-content: space-around;
     height: 1000rpx;
+}
+.code{
+    width: 200rpx;
+    height: 60rpx;
+    margin-top: 10rpx;
+    color: #666666;
+    font-size: 24rpx;
+}
+.submit{
+    background: rgba(255,153,6,1);
+    color: #FFFFFF;
+}
+.cover image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

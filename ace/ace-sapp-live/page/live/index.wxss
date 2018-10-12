@@ -122,6 +122,14 @@ width: 80%;
     border-radius:10rpx;
     color: blue;
     font-size: 30rpx;
+    height: 200rpx;
+}
+.inputViewCmt{
+    border:  0px solid #C8C8C8;
+    border-radius:10rpx;
+    color: blue;
+    font-size: 30rpx;
+    height: 200rpx;
 }
 .submit{
   margin-left: 10rpx;
@@ -385,4 +393,17 @@ swiper{
 .active {
   color:blue;
   border-bottom:4rpx solid #fff;
+}
+.cmt-bar{
+  padding: 5rpx; 
+  text-align: right;
+}
+.cmt-addlike{
+  width: 40rpx;
+  height: 40rpx;
+}
+.cmt-addcmt{
+  width: 40rpx;
+  height: 40rpx;
+  padding-left: 10rpx;
 }

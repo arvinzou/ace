@@ -55,8 +55,7 @@
 			and (dict.category_id =#{condition.categoryId,jdbcType=VARCHAR} or dict.id=#{condition.categoryId,jdbcType=VARCHAR})
 		</if>
 		<if test="condition.name!=null and condition.name!=&quot;&quot;">
-			and dict.name like
-			concat(#{condition.name,jdbcType=VARCHAR},'%')
+			and dict.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%') or dict_category.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
 		</if>
 	</sql>
 	<select id="findCount" resultType="int">
@@ -198,6 +197,46 @@
         t.category_id = #{id}
         ORDER BY
         t. CODE
+    </select>
+
+    <select id="getTreeGrid" resultMap="BaseResultMapVo">
+        SELECT
+        concat(t.category_id,'') id,
+        NULL,
+        NULL,
+        t.NAME,
+        NULL,
+        t.CREATE_TIME,
+        NULL,
+        NULL,
+        '0' parent,
+        0 level,
+        0 isLeaf,
+        1 expanded,
+        1 loaded,
+        'fa  fa-laptop' icon
+        FROM
+        dict_category t
+        union
+        SELECT
+        dict.ID,
+        dict.CATEGORY_ID,
+        dict. CODE,
+        dict. NAME,
+        dict.REMARK,
+        dict.CREATE_TIME,
+        dict.PCODE,
+        dict.SPELL,
+        dict.CATEGORY_ID parent,
+        1 level,
+        1 isLeaf,
+        1 expanded,
+        1 loaded,
+        'fa  fa-fa-anchor' icon
+        FROM
+        dict
+
+
     </select>
 
 </mapper>

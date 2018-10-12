@@ -482,7 +482,7 @@ function guid() {
 .login-switch .iconfont {
     font-size: 52px;
     cursor: pointer;
-    color: #333;
+    color:#1890ff;
 }
 .iconfont {
     font-family: iconfont!important;

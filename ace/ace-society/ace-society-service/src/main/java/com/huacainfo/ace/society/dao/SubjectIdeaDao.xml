@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.society.dao.SubjectIdeaDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.SubjectIdea">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.SubjectIdea">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="subjectId" jdbcType="VARCHAR" property="subjectId" />
     <result column="userId" jdbcType="VARCHAR" property="userId" />
+        <result column="title" jdbcType="VARCHAR" property="title"/>
     <result column="solution" jdbcType="VARCHAR" property="solution"/>
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="CHAR" property="status" />
@@ -32,11 +33,8 @@
     <result column="solution" jdbcType="LONGVARCHAR" property="solution" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, subjectId, userId, remark, status, createUserId, createUserName, createDate, 
-    lastModifyUserId, lastModifyUserName, lastModifyDate, solution
-  </sql>
-  <sql id="Blob_Column_List">
-    solution
+    id, subjectId, userId, remark, status, createUserId, createUserName, createDate,
+      lastModifyUserId, lastModifyUserName, lastModifyDate, solution, title
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -51,14 +49,14 @@
   <insert id="insert" parameterType="com.huacainfo.ace.society.model.SubjectIdea">
     insert into subject_idea (id, subjectId, userId, 
       remark, status, createUserId, 
-      createUserName, createDate, lastModifyUserId, 
-      lastModifyUserName, lastModifyDate, solution
+      createUserName, createDate, lastModifyUserId,
+      lastModifyUserName, lastModifyDate, solution, title
       )
     values (#{id,jdbcType=VARCHAR}, #{subjectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{solution,jdbcType=LONGVARCHAR}
-      )
+      , #{title,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.SubjectIdea">
     insert into subject_idea
@@ -99,6 +97,9 @@
       <if test="solution != null">
         solution,
       </if>
+        <if test="title != null">
+            title,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -137,6 +138,9 @@
       <if test="solution != null">
         #{solution,jdbcType=LONGVARCHAR},
       </if>
+        <if test="title != null">
+            #{title,jdbcType=VARCHAR},
+        </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.SubjectIdea">
@@ -175,6 +179,9 @@
       <if test="solution != null">
         solution = #{solution,jdbcType=LONGVARCHAR},
       </if>
+        <if test="title != null">
+            title = #{title,jdbcType=VARCHAR},
+        </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -184,6 +191,8 @@
       userId = #{userId,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
+      title = #{title,jdbcType=VARCHAR},
+      solution = #{solution,jdbcType=LONGVARCHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
@@ -200,10 +209,12 @@
   </select>
   <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
-      t.id, t.subjectId,t.solution, t.userId, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+      t.id, t.subjectId ,t.title, t.solution, t.userId, t.remark, t.status, t.createUserId, t.createUserName,
+      t.createDate,
       t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark, e.ideaId,
       e.fileType, e.fileName, e.fileSize, e.fileUrl, e.remark as eremark
-    from subject_idea t LEFT JOIN  subject_idea_annex e on t.id = e.ideaId
+      from subject_idea t
+      LEFT JOIN subject_idea_annex e on t.id = e.ideaId
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}
@@ -237,4 +248,14 @@
     where 1=1
     and id =  #{id,jdbcType=VARCHAR}
   </select>
+
+
+    <update id="updateStatus" parameterType="com.huacainfo.ace.society.model.SubjectIdea">
+      update subject_idea
+      set status = #{status,jdbcType=CHAR},
+          lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+          lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+          lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

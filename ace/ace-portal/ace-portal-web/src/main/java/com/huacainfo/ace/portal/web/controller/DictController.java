@@ -286,4 +286,9 @@ public class DictController extends PortalBaseController {
 		}
 		return this.dictService.importXls(list, this.getCurUserProp());
 	}
+	@RequestMapping(value = "/getTreeGrid.do")
+	@ResponseBody
+	public  PageResult<DictVo> getTreeGrid() throws Exception{
+		return this.dictService.getTreeGrid();
+	}
 }

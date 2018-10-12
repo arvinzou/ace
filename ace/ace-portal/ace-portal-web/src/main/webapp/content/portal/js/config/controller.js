@@ -1,24 +1,8 @@
+var params = {};
 jQuery(function($) {
-	$.fn.spin = function(opts) {
-		this.each(function() {
-		  var $this = $(this),
-			  data = $this.data();
-
-		  if (data.spinner) {
-			data.spinner.stop();
-			delete data.spinner;
-		  }
-		  if (opts !== false) {
-			data.spinner = new Spinner($.extend({color: $this.css('color')}, opts)).spin(this);
-		  }
-		});
-		return this;
-	};
-
 	$('#btn-search').on('click', function() {
 		$('#fm-search').ajaxForm({
 			beforeSubmit : function(formData, jqForm, options) {
-				var params = {};
 				$.each(formData, function(n, obj) {
 					params[obj.name] = obj.value;
 				});
@@ -54,32 +38,7 @@ jQuery(function($) {
 							}
 						})
 			});
-	$('#btn-view-edit').on(
-			'click',
-			function() {
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext)
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'editGridRow',
-						gr,
-						{
-							closeAfterAdd : true,
-							recreateForm : true,
-							viewPagerButtons : true,
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
-							}
-						})
-			});
-	
+
 	
 
 	
@@ -95,77 +54,72 @@ jQuery(function($) {
 				
 				
 			});
-	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-		_title: function(title) {
-			var $title = this.options.title || '&nbsp;'
-			if( ("title_html" in this.options) && this.options.title_html == true )
-				title.html($title);
-			else title.text($title);
-		}
-	}));
-
-function style_ajax_button(btnId,status){
-	console.log(status);
-	var btn=$('#'+btnId);
-	if(status){
-		btn.find('i').removeClass('fa-check');
-		btn.find('i').addClass('fa-spinner fa-spin');
-		btn.attr('disabled',"true");
-		
-	}else{
-		btn.find('i').removeClass('fa-spinner');
-		btn.find('i').removeClass('fa-spin');
-		btn.find('i').addClass('fa-check');
-		btn.removeAttr("disabled");
-	}
-}
-function sb(btnId,status,iconCss){
-	console.log(status);
-	var btn=$('#'+btnId);
-	if(status){
-		btn.find('i').removeClass(iconCss);
-		btn.find('i').addClass('fa-spinner fa-spin');
-		btn.attr('disabled',"true");
-		
-	}else{
-		btn.find('i').removeClass('fa-spinner');
-		btn.find('i').removeClass('fa-spin');
-		btn.find('i').addClass(iconCss);
-		btn.removeAttr("disabled");
-	}
-}
+			 $(".btn-group .btn").bind('click', function (event) {
+                        $(event.target).siblings().removeClass("active");
+                        console.log(event);
+                        $(event.target).addClass("active");
+                    });
 });
-function sb(btnId,status,iconCss){
-	console.log(status);
-	var btn=$('#'+btnId);
-	if(status){
-		btn.find('i').removeClass(iconCss);
-		btn.find('i').addClass('fa-spinner fa-spin');
-		btn.attr('disabled',"true");
-		
-	}else{
-		btn.find('i').removeClass('fa-spinner');
-		btn.find('i').removeClass('fa-spin');
-		btn.find('i').addClass(iconCss);
-		btn.removeAttr("disabled");
-	}
-}
 function batchDeploy(url){
 	$.ajax({
 		type : "post",
 		url : url,
 		data:{time:new Date()},
 		beforeSend : function(XMLHttpRequest) {
-			sb('btn-view-deploy',true,'glyphicon glyphicon-refresh');
+			startLoad();
 		},
 		success : function(rst, textStatus) {
-			sb('btn-view-deploy',false,'glyphicon glyphicon-refresh');
+			stopLoad();
 		},
 		complete : function(XMLHttpRequest, textStatus) {
-			sb('btn-view-deploy',false,'glyphicon glyphicon-refresh');
+			stopLoad();
 		},
 		error : function() {
-			sb('btn-view-deploy',false,'glyphicon glyphicon-refresh');
+			stopLoad();
 		}
 	});
+
+}
+
+
+function edit(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+						'editGridRow',
+						rowid,
+						{
+							closeAfterAdd : true,
+							recreateForm : true,
+							viewPagerButtons : true,
+							beforeShowForm : function(e) {
+								var form = $(e[0]);
+								form.closest('.ui-jqdialog').find(
+										'.ui-jqdialog-titlebar').wrapInner(
+										'<div class="widget-header" />')
+
+							}
+						});
+}
+var show=false;
+function del(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+    						'delGridRow',
+    						rowid,
+    						{
+    							beforeShowForm : function(e) {
+    								var form = $(e[0]);
+    								if(!show){
+    								    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+    								}
+
+    								show=true;
+
+    							}
+    						});
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");
 }

@@ -167,32 +167,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .dataTables_paginate {
     text-align: right;
 }
-.pagination>li>a, .pagination>li>span {
-    position: relative;
-    float: left;
-    padding: 1px 5px 1px 5px;
-    line-height: 1.42857143;
-    text-decoration: underline;
-    color: blue;
-    background-color: #ffffff;
-    border: 0px solid #e7ecf1;
-    margin-left: -1px;
-}
+
 .dataTables_info {
     font-size: 12px;
 }
-.pagination>li.disabled>a, .pager>li.disabled>a, .pagination>li.disabled>a:hover, .pager>li.disabled>a:hover {
-    background-color: #FFFFFF;
-    border-color: #d9d9d9;
-    z-index: auto;
-}
-.pagination>li.active>a, .pagination>li.active>a:hover {
-    background-color: #FFFFFF;
-    border-color: #FFFFFF;
-    color: blue;
-    text-shadow: null;
-    z-index: 2;
-}
+
 .dataTables_wrapper label {
     display: inline-block;
     font-size: 12px;
@@ -478,7 +457,7 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
 a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
     -webkit-border-radius: 0!important;
     -moz-border-radius: 0!important;
-    border-radius: 2px!important;
+    border-radius: 0px!important;
 }
 .page-header.navbar.navbar-fixed-top, .page-header.navbar.navbar-static-top {
     z-index: 90;
@@ -487,3 +466,95 @@ a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, t
     margin:5px;
     max-height:40px;
 }
+
+.btn-info:hover, .btn-info:active, .open .btn-info.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+
+
+
+.btn-info, .btn-info:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+
+.btn-warning, .btn-warning:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+.btn-warning:hover, .btn-warning:active, .open .btn-warning.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+
+
+.btn-purple, .btn-purple:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+.btn-purple:hover, .btn-purple:active, .open .btn-purple.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+
+
+.btn-primary, .btn-primary:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+
+
+.btn-primary:hover, .btn-primary:active, .open .btn-primary.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+.navbar .navbar-brand {
+    color: #fff;
+    font-size: 14px;
+    text-shadow: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: auto;
+}
+
+.page-header.navbar .page-logo {
+    float: left;
+    display: block;
+    width: auto;
+    height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ui-jqgrid tr.jqgrow td { white-space: normal !important; height:auto; }
+.paginationbar {
+    width: 100%;
+    text-align: right;
+}
+.ui-jqgrid tr.ui-row-ltr td {
+    text-align: left;
+    border-right-width: 0px;
+    border-right-color: inherit;
+    border-right-style: solid;
+}
+.ui-jqgrid .ui-jqgrid-labels th {
+    border-right: 0px solid #e7ecf1 !important;
+    text-align: left !important;
+}
+.ui-jqgrid .ui-jqgrid-btable {
+    border-left: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-top: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-right: 0px solid #e7ecf1;
+}
+.ui-jqgrid .ui-jqgrid-labels {
+    border-left: 0px solid #e7ecf1 !important;
+}
+

@@ -43,7 +43,7 @@ public interface LiveCmtService {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    public abstract MessageResponse insertLiveCmt(LiveCmt obj, String corpId) throws Exception;
+    public abstract MessageResponse insertLiveCmt(LiveCmt obj) throws Exception;
 
     /**
      * @throws

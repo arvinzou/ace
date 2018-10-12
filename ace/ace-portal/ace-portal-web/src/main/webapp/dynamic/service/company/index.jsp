@@ -1,132 +1,137 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<html lang="cn">
+<html lang="en">
+
+
 <head>
     <meta charset="utf-8"/>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>企业单位基本信息</title>
+    <title>${cfg.sys_name}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="${cfg.sys_name}" name="${cfg.sys_name}"/>
+
+    <jsp:include page="/dynamic/common/header.jsp"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
 </head>
-<jsp:include page="../../common/header.jsp"/>
-<jsp:include page="../../common/common.jsp"/>
-<script type="text/javascript">
-</script>
+
 <body>
-<div class="page-content">
-<div>
-    <div class="pz-form">
-        <form id="j-editform" onsubmit="return false">
-            <div class="wrap fn-clear fn-pb40">
-                <div class="group2">
-                    <div class="formtitle fn-mb15">基本信息</div>
-                    <div class="rows row100">
-                        <div class="row-title">机构全称</div>
-                        <div class="row-content" data-field="departmentName"></div>
-                    </div>
-                    <div class="rows row100">
-                        <div class="row-title">机构简称</div>
-                        <div class="row-content" data-field="shortName"></div>
-                    </div>
-                    <div class="rows row100 ">
-                        <div class="row-title">LOGO</div>
-                        <div class="row-content">
-                            <div id="j-row-img-logo">
-                                <div class="fn-hide j-uploader-tip"><p><em></em></p></div>
-                                <div id="j-uploader-rst-logo"></div>
-                                <div id="j-cover-logo" class="xcy-cutimg">
-                                    <label class="upbtn">
-                                        <div class="imgbar fn-textleft fn-hide">
-                                            <span class="close"><i class="pz-icon icon-close"></i></span>
-                                            <span class="logo"></span>
-                                        </div>
-                                        <div class="fn-pt25">
-                                            <i class="pz-icon icon-img"></i>
-                                            <p class="fn-textcenter fn-mt5">点击选择LOGO图标</p>
-                                        </div>
 
-                                    </label>
-                                    <div class="fn-mt5 pz-color-gray">支持88px*88px图片大小</div>
-                                </div>
-
-                            </div>
-                            <div id="j-uploader-cnt-logo"></div>
-
-                        </div>
-                    </div>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
 
+<!-- BEGIN SAMPLE TABLE PORTLET-->
+<div class="portlet light">
 
-                </div>
-                <div class="group2 fn-pl40 fn-clear">
-                    <div class="formtitle fn-mb15">水印信息</div>
-                    <div class="rows row100">
-                        <div class="row-title">图片水印1</div>
-                        <div class="row-content">
-                            <div id="j-row-img-watermark1">
-                                <div class="fn-hide j-uploader-tip"><p><em></em></p></div>
-                                <div id="j-uploader-rst-watermark1"></div>
-                                <div id="j-cover-watermark1" class="xcy-cutimg">
-                                    <label class="upbtn">
-                                        <div class="imgbar fn-textleft fn-hide">
-                                            <span class="close"><i class="pz-icon icon-close"></i></span>
-                                            <span class="logo"></span>
-                                        </div>
-                                        <div class="fn-pt25">
-                                            <i class="pz-icon icon-img"></i>
-                                            <p class="fn-textcenter fn-mt5">点击选择水印图片</p>
-                                        </div>
+    <div class="portlet-body" id="courseSource">
+        <div class="form-panel">
+            <!--具体界面元素开始-->
+            <form class="form-horizontal" id="fm-edit" role="form">
 
-                                    </label>
-                                    <div class="fn-mt5 pz-color-gray">支持157px*44px图片大小格式png</div>
-                                </div>
-
-                            </div>
-                            <div id="j-uploader-cnt-watermark1"></div>
-                        </div>
-                    </div>
-
-                    <div class="rows row100 fn-mt20">
-                        <div class="row-title">图片水印2</div>
-                        <div class="row-content">
-                            <div id="j-row-img-watermark2">
-                                <div class="fn-hide j-uploader-tip"><p><em></em></p></div>
-                                <div id="j-uploader-rst-watermark2"></div>
-                                <div id="j-cover-watermark2" class="xcy-cutimg">
-                                    <label class="upbtn">
-                                        <div class="imgbar fn-textleft fn-hide">
-                                            <span class="pz-close"><i class="pz-icon pz-icon-close"></i></span>
-                                            <span class="logo"></span>
-                                        </div>
-                                        <div class="fn-pt25">
-                                            <i class="pz-icon icon-img"></i>
-                                            <p class="fn-textcenter fn-mt5">点击选择水印图片</p>
-                                        </div>
-
-                                    </label>
-                                    <div class="fn-mt5 pz-color-gray">支持80px*47px图片大小格式png</div>
-                                </div>
-
-                            </div>
-                            <div id="j-uploader-cnt-watermark2"></div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="actions actions-transparent fn-pt20">
-                <input type="submit" id="btn-submit" class="pz-btn btn-success btn-big" value="保存修改">
-            </div>
-        </form>
+            </form>
+        </div>
+        <!--具体界面元素结束-->
     </div>
 </div>
-</div>
-<jsp:include page="../../common/footer.jsp"/>
-<jsp:include page="../../common/footer-1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/service/company/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/view.js?version=${cfg.version}"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/content/service/company/style.css?version=${cfg.version}" />
+
+
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+
 </body>
+<script id="tpl-fm" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                机构全称
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="departmentName" value="\${data.o.departmentName}"
+                       placeholder="机构全称（建议字数在8个字以内，不超过20个字)">
+                <div class="error-departmentName"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                机构简称
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="shortName" value="\${data.o.shortName}"
+                       placeholder="机构简称（建议字数在5个字以内，不超过20个字)">
+                <div class="error-shortName"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                LOGO
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="hidden" name="logo" value="\${data.o.logo}">
+                <div style="padding: 10px;">建议图片大小为88*88</div>
+                <img style="max-width:480px;cursor:pointer;" id="logo" data-toggle="modal" data-xsize="88"
+                     data-ysize="88" data-cover="logo"
+                     data-target="#img-uploader"
+                     src="{@if data.o.logo}\${data.o.logo}{@else}${portalPath}/content/common/image/upload-default.jpg{@/if}">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                图片水印1
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="hidden" name="watermark1" value="\${data.o.watermark1}">
+                <div style="padding: 10px;">建议图片大小为157*44</div>
+                <img style="max-width:480px;cursor:pointer;" id="watermark1" data-toggle="modal" data-xsize="157"
+                     data-ysize="44" data-cover="watermark1"
+                     data-target="#img-uploader"
+                     src="{@if data.o.watermark1}\${data.o.watermark1}{@else}${portalPath}/content/common/image/upload-default.jpg{@/if}">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+
+                图片水印2
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="hidden" name="watermark2" value="\${data.o.watermark2}">
+                <div style="padding: 10px;">建议图片大小为157*44</div>
+                <img style="max-width:480px;cursor:pointer;" id="watermark2" data-toggle="modal" data-xsize="157"
+                     data-ysize="44" data-cover="watermark2"
+                     data-target="#img-uploader"
+                     src="{@if data.o.watermark2}\${data.o.watermark2}{@else}${portalPath}/content/common/image/upload-default.jpg{@/if}">
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-7">
+                <button class="btn  green" type="submit" style="width:30%">保存</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<jsp:include page="/dynamic/common/footer.jsp"/>
+<script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/upload.js"></script>
+<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
+<script src="js/act.js?v=${cfg.version}"></script>
 </html>

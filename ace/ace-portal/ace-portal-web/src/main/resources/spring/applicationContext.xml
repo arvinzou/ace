@@ -44,10 +44,14 @@
 	<import resource="classpath:spring/spring-ace-common-redis.xml" />
 	<import resource="classpath:spring/spring-ace-common-web.xml" />
 	<import resource="classpath:spring/spring-ace-common-dao.xml"/>
+
 	<import resource="classpath:spring/spring-ace-portal-service.xml"/>
 	<!--
 	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
 	-->
-
 	<bean id="loginFailureListener" class="com.huacainfo.ace.portal.web.listener.LoginFailureListener"/>
+
+
+
+
 </beans>

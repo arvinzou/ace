@@ -3,6 +3,10 @@ package com.huacainfo.ace.operana.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +35,31 @@ public class TpaServiceImpl implements TpaService {
 	@Autowired
 	private DataBaseLogService dataBaseLogService;
 
-	public PageResult<TpaVo> findTpaList(TpaQVo condition, int start, int limit, String orderBy) throws Exception {
-		Meeting meeting = this.meetingDao.selectByPrimaryKey(condition.getMeetingId());
-		int cwk = meeting.getCvalue();
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 
+	public PageResult<TpaVo> findTpaList(TpaQVo condition, int start, int limit, String orderBy) throws Exception {
+		SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+		Configuration configuration = session.getConfiguration();
+		configuration.setSafeResultHandlerEnabled(false);
+		TpaDao dao = session.getMapper(TpaDao.class);
+		MeetingDao meetingDao = session.getMapper(MeetingDao.class);
 		PageResult<TpaVo> rst = new PageResult<TpaVo>();
-		List<TpaVo> list = this.tpaDao.findList(condition, start, start + limit, "wk" + cwk);
-		rst.setRows(list);
-		if (start <= 1) {
-			int allRows = this.tpaDao.findCount(condition, "wk" + cwk);
-			rst.setTotal(allRows);
+		Meeting meeting = meetingDao.selectByPrimaryKey(condition.getMeetingId());
+		int cwk = meeting.getCvalue();
+		try {
+			List<TpaVo> list = dao.findList(condition, start, start + limit, "wk" + cwk);
+			rst.setRows(list);
+			if (start <= 1) {
+				int allRows = dao.findCount(condition, "wk" + cwk);
+				rst.setTotal(allRows);
+			}
+		}catch (Exception e){
+			session.close();
+		}finally {
+			session.close();
 		}
+
 		return rst;
 	}
 
@@ -83,14 +101,16 @@ public class TpaServiceImpl implements TpaService {
 		o.setStatus("1");
 		o.setCreateUserName(userProp.getName());
 		o.setCreateUserId(userProp.getUserId());
+		o.setCreateDate(new Date());
+		o.setDeptId(this.tpaDao.selectCorpIdByUserId(o.getLiable()));
+
 		this.tpaDao.insert(o);
 		this.dataBaseLogService.log("添加TOP问题分析", "TOP问题分析", "", o.getNormId(), o.getNormId(), userProp);
 		return new MessageResponse(0, "添加TOP问题分析完成！");
 	}
 
 	public MessageResponse updateTpa(Tpa o, UserProp userProp) throws Exception {
-		int temp = this.tpaDao.isExit(o);
-		if (temp <= 0) {
+		if (CommonUtils.isEmpty(o.getId())) {
 			return this.insertTpa(o, userProp);
 		}
 		if (CommonUtils.isBlank(o.getId())) {
@@ -106,10 +126,10 @@ public class TpaServiceImpl implements TpaService {
 			return new MessageResponse(1, "指标编码不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getProductId())) {
-			return new MessageResponse(1, "产品编码不能为空！");
+			//return new MessageResponse(1, "产品编码不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getProbDiscri())) {
-			return new MessageResponse(1, "问题描述不能为空！");
+			//return new MessageResponse(1, "问题描述不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getProbAnsys())) {
 			//return new MessageResponse(1, "原因分析不能为空！");
@@ -118,12 +138,13 @@ public class TpaServiceImpl implements TpaService {
 			//return new MessageResponse(1, "改善措施不能为空！");
 		}
 		if (CommonUtils.isBlank(o.getLiable())) {
-			return new MessageResponse(1, "责任人不能为空！");
+			//return new MessageResponse(1, "责任人不能为空！");
+		}else{
+			o.setDeptId(this.tpaDao.selectCorpIdByUserId(o.getLiable()));
 		}
-
-
 		o.setLastModifyUserName(userProp.getName());
 		o.setLastModifyUserId(userProp.getUserId());
+
 		this.tpaDao.updateByPrimaryKey(o);
 		this.dataBaseLogService.log("变更TOP问题分析", "TOP问题分析", "", o.getNormId(), o.getNormId(), userProp);
 		return new MessageResponse(0, "变更TOP问题分析完成！");
@@ -183,16 +204,27 @@ public class TpaServiceImpl implements TpaService {
 		return new MessageResponse(0, "变更TOP问题分析完成！");
 	}
 	public PageResult<TpaVo> findTpaListCommon(TpaQVo condition, int start, int limit, String orderBy) throws Exception {
+		SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+		Configuration configuration = session.getConfiguration();
+		configuration.setSafeResultHandlerEnabled(false);
+		TpaDao dao = session.getMapper(TpaDao.class);
+		PageResult<TpaVo> rst = new PageResult<TpaVo>();
 		Meeting meeting = this.meetingDao.selectByPrimaryKey(condition.getMeetingId());
 		int cwk = meeting.getCvalue();
-
-		PageResult<TpaVo> rst = new PageResult<TpaVo>();
-		List<TpaVo> list = this.tpaDao.findListCommon(condition, start, start + limit, "wk" + cwk);
-		rst.setRows(list);
-		if (start <= 1) {
-			int allRows = this.tpaDao.findCountCommon(condition, "wk" + cwk);
-			rst.setTotal(allRows);
+		try {
+			List<TpaVo> list = dao.findListCommon(condition, 0, 99999, "wk" + cwk);
+			rst.setRows(list);
+			if (start <= 1) {
+				int allRows = dao.findCountCommon(condition, "wk" + cwk);
+				rst.setTotal(allRows);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			session.close();
+		}finally {
+			session.close();
 		}
+
 		return rst;
 	}
 }

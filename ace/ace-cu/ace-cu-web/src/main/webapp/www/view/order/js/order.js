@@ -1,6 +1,3 @@
-var ngControllerName = "angularjsCtrl";
-var ngAppName = "angularjsApp";
-var app =angular.module(ngAppName, []);
 var isBill = false;        //是否需要票据信息
 var isCustom = false;      //是否选择自定义金额
 var donateMoney = 10;       //捐款金额，初始化默认选择10元
@@ -8,12 +5,12 @@ var needReceipt = 0;       //是否需要票据，0不需要，1是需要
 var orderResultData = null;
 var payData = null;
 var isName = false;
+var projectId = null;
 
-app.controller(ngControllerName,function($scope) {
-
+window.onload = function(){
     console.log(window.location.href);
     var url = window.location.href.substring(1);
-    var projectId = url.substring(url.indexOf('=')+1);
+    projectId = url.substring(url.indexOf('=')+1);
     console.log(projectId);
 
     $("#onoffswitch").on('click', function() {
@@ -58,136 +55,135 @@ app.controller(ngControllerName,function($scope) {
         $("#userInfo").show();
     });
 
-    $scope.donateMoney = function(){
-    	var realName = $("#realName").val();    //捐款人姓名
-		var phoneNum = $("#phoneNum").val();    //捐款人联系电话
-		var message = $("#message").val();      //留言
-		var largeAddress = null;  //省市区
-		var smallAddress = null;   //详细地址
-        var donatePostName = $("input[name = 'donatePostName']").val();
-		var sheng = null;    //省份
-		var shi  = null;     //市
-		var qu = null;       //区
-		if(isBill){
-            largeAddress = $("#demo1").val();
-            smallAddress = $("#detailAddress").val();
-            var billName = $("#billName").val();
-            var billphoneNumber = $("#billphoneNumber").val();
-            if(billName == null || billName == undefined || billName == ''){
-                alert("请输入收货人姓名！");
-                return;
-            }
-            if(largeAddress == null || largeAddress == undefined || largeAddress == ''){
-            	alert("请选择地址！");
-            	return;
-			}else{
-                sheng = largeAddress.split(",")[0];
-                shi = largeAddress.split(",")[1];
-                qu = largeAddress.split(",")[2];
-			}
-			if(smallAddress == null || smallAddress == undefined || smallAddress == ''){
-            	alert("请输入详细地址！");
-            	return;
-			}
-            if(billphoneNumber == null || billphoneNumber ==undefined || billphoneNumber ==''){
-                alert("收货人联系电话不能为空！");
-                return;
-            }
-            needReceipt = 1;
-		}
-		if(!isName){
-            if(realName == null || realName == undefined || realName ==''){
-                alert("捐款人姓名不能为空！");
-                return;
-            }
-            if(phoneNum == null || phoneNum == undefined || phoneNum ==''){
-                alert("联系电话不能为空！");
-                return;
-            }
-        }
-		if(isCustom){
-            donateMoney = $("#amountMoney").val();
-            if(donateMoney == null || donateMoney == undefined || donateMoney == ''){
-            	alert("请输入捐款金额！");
-            	return;
-            }
-        }
 
-        $.ajax({
-            url: "/cu/www/project/createDonateOrder",
-            type:"post",
-            async:false,
-            dataType:"json",
-            data:{json:JSON.stringify({
-                    "projectId": projectId,
-					"donateAmount": donateMoney,
-					"donateName": realName,
-                    "consigneeName": billName,
-					"mobileNumber": phoneNum,
-					"payType" : "2",     //0微信支付，1银行卡支付
-					"needReceipt":needReceipt,
-                    "country":"中国",
-					"province": sheng,
-					"city": shi,
-					"district": qu,
-					"address":smallAddress,
-					"remark": message,
-                    "consigneeMobileNumber":billphoneNumber,
-                    "donatePostName": donatePostName
-				})
-			    },
-            success:function(result){
-                if(result.status == 0) {
-                    orderResultData = result.data;
-                    if (!$scope.$$phase) {
-                        $scope.$apply();
-                    }
-                    $.ajax({
-                        url: "/cu//www/wxpay/ccbPay",
-                        type:"post",
-                        async:false,
-                        data:{
-                            payAmount: orderResultData.donateAmount,
-                            orderId: orderResultData.id
-                        },
-                        success:function(result){
-                            if(result.status == 0) {
-                               /* payData = result.data;
-                                onBridgeReady(payData);
-                                console.log(result);
-                                if (!$scope.$$phase) {
-                                    $scope.$apply();
-                                }*/
-                               var url = decodeURIComponent(result.data);
-                               console.log(url);
-                               window.location.href = url;
+};
 
-                            }else {
-                                if(result.info){
-                                    alert(result.info);
-                                }else if(result.errorMessage){
-                                    alert(result.errorMessage);
-                                }
-                                return;
+function donateMoney1 (){
+    var realName = $("#realName").val();    //捐款人姓名
+    var phoneNum = $("#phoneNum").val();    //捐款人联系电话
+    var message = $("#message").val();      //留言
+    var largeAddress = null;  //省市区
+    var smallAddress = null;   //详细地址
+    var donatePostName = $("input[name = 'donatePostName']").val();
+    var sheng = null;    //省份
+    var shi  = null;     //市
+    var qu = null;       //区
+    if(isBill){
+        largeAddress = $("#demo1").val();
+        smallAddress = $("#detailAddress").val();
+        var billName = $("#billName").val();
+        var billphoneNumber = $("#billphoneNumber").val();
+        if(billName == null || billName == undefined || billName == ''){
+            alert("请输入收货人姓名！");
+            return;
+        }
+        if(largeAddress == null || largeAddress == undefined || largeAddress == ''){
+            alert("请选择地址！");
+            return;
+        }else{
+            sheng = largeAddress.split(",")[0];
+            shi = largeAddress.split(",")[1];
+            qu = largeAddress.split(",")[2];
+        }
+        if(smallAddress == null || smallAddress == undefined || smallAddress == ''){
+            alert("请输入详细地址！");
+            return;
+        }
+        if(billphoneNumber == null || billphoneNumber ==undefined || billphoneNumber ==''){
+            alert("收货人联系电话不能为空！");
+            return;
+        }
+        needReceipt = 1;
+    }
+    if(!isName){
+        if(realName == null || realName == undefined || realName ==''){
+            alert("捐款人姓名不能为空！");
+            return;
+        }
+        if(phoneNum == null || phoneNum == undefined || phoneNum ==''){
+            alert("联系电话不能为空！");
+            return;
+        }
+    }
+    if(isCustom){
+        donateMoney = $("#amountMoney").val();
+        if(donateMoney == null || donateMoney == undefined || donateMoney == ''){
+            alert("请输入捐款金额！");
+            return;
+        }
+    }
+
+    $.ajax({
+        url: "/cu/www/project/createDonateOrder",
+        type:"post",
+        async:false,
+        dataType:"json",
+        data:{json:JSON.stringify({
+                "projectId": projectId,
+                "donateAmount": donateMoney,
+                "donateName": realName,
+                "consigneeName": billName,
+                "mobileNumber": phoneNum,
+                "payType" : "2",     //0微信支付，1银行卡支付
+                "needReceipt":needReceipt,
+                "country":"中国",
+                "province": sheng,
+                "city": shi,
+                "district": qu,
+                "address":smallAddress,
+                "remark": message,
+                "consigneeMobileNumber":billphoneNumber,
+                "donatePostName": donatePostName
+            })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                orderResultData = result.data;
+                $.ajax({
+                    url: "/cu//www/wxpay/ccbPay",
+                    type:"post",
+                    async:false,
+                    data:{
+                        payAmount: orderResultData.donateAmount,
+                        orderId: orderResultData.id
+                    },
+                    success:function(result){
+                        if(result.status == 0) {
+                            /* payData = result.data;
+                             onBridgeReady(payData);
+                             console.log(result);
+                             if (!$scope.$$phase) {
+                                 $scope.$apply();
+                             }*/
+                            var url = decodeURIComponent(result.data);
+                            console.log(url);
+                            window.location.href = url;
+
+                        }else {
+                            if(result.info){
+                                alert(result.info);
+                            }else if(result.errorMessage){
+                                alert(result.errorMessage);
                             }
-                        },
-                        error:function(){
-                            alert("系统服务内部异常！");
                             return;
                         }
-                    });
-                }else {
-                    alert(result.info);
-                    return;
-                }
-            },
-            error:function(){
-                alert("系统服务内部异常！");
+                    },
+                    error:function(){
+                        alert("系统服务内部异常！");
+                        return;
+                    }
+                });
+            }else {
+                alert(result.info);
                 return;
             }
-        });
-	}
-});
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+            return;
+        }
+    });
+}
 
 function onBridgeReady(obj){
     wx.config({

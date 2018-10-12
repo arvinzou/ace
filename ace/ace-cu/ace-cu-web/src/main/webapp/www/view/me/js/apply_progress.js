@@ -1,9 +1,4 @@
-var ngControllerName = "angularjsCtrl";
-var ngAppName = "angularjsApp";
-var app =angular.module(ngAppName, []);
-
-app.controller(ngControllerName,function($scope){
-
+window.onload = function(){
     var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
     var primaryId = null;
@@ -26,10 +21,7 @@ app.controller(ngControllerName,function($scope){
         data:{applyId: primaryId},
         success:function(result){
             if(result.status == 0) {
-                $scope.progressList = result.data;
-                if (!$scope.$$phase) {
-                    $scope.$apply();
-                }
+                renderPage('progress', result.data, 'progress-tpl');
             }else {
                 alert(result.info);
             }
@@ -38,4 +30,12 @@ app.controller(ngControllerName,function($scope){
             alert("系统服务内部异常！");
         }
     });
-});
+};
+
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
+}

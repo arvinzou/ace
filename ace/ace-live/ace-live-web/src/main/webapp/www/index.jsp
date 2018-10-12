@@ -6,7 +6,7 @@
 </head>
 <body>
 <script>
-location.href="/live/www/view/index.html?companyId=00010001";
+location.href="index/index.jsp?companyId=00010001";
 </script>
 </body>
 </html>

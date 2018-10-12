@@ -60,13 +60,14 @@
 				<textarea rows="" cols="" name="content"></textarea>
 			</div>
 			<br />
-			<div id="filelist-history"></div>
+			<div id="filelist-history">
+
+			</div>
 			<div id="filelist">Your browser doesn't have Flash, Silverlight
 				or HTML5 support.</div>
 
 			<div id="container">
-				附件：<a id="pickfiles" href="javascript:;">[添加附件]</a> <a
-					id="uploadfiles" href="javascript:;">[上传]</a>
+				附件：<a id="pickfiles" href="javascript:;">[添加附件]</a> <a id="uploadfiles" href="javascript:;">[上传]</a>
 			</div>
 			<br />
 			<pre id="console"></pre>

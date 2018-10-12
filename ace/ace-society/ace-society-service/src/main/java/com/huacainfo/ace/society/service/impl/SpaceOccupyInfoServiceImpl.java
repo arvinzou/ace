@@ -185,42 +185,15 @@ public class SpaceOccupyInfoServiceImpl implements SpaceOccupyInfoService {
 
 
     /**
-     * @throws
-     * @Title:audit
-     * @Description: TODO(审核场地占用情况)
-     * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param remark 审核备注
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2018-09-14
+     * 查询场地占用情况
+     *
+     * @param condition 查询条件
+     * @return ResultResponse
      */
     @Override
-    public MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception {
+    public List<SpaceOccupyInfoVo> spaceOccupyInfo(SpaceOccupyInfoQVo condition) {
 
-//        SpaceOccupyInfo obj = spaceOccupyInfoDao.selectByPrimaryKey(id);
-//        if (obj == null) {
-//            return new MessageResponse(ResultCode.FAIL, "场地占用情况数据丢失");
-//        }
-//
-//        //更改审核记录
-//        MessageResponse auditRs =
-//                auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId(), rst, remark,
-//                        userProp);
-//        if (ResultCode.FAIL == auditRs.getStatus()) {
-//            return auditRs;
-//        }
-//
-//        obj.setStatus(rst);
-//        obj.setLastModifyDate(DateUtil.getNowDate());
-//        obj.setLastModifyUserId(userProp.getUserId());
-//        obj.setLastModifyUserName(userProp.getName());
-//        spaceOccupyInfoDao.updateByPrimaryKeySelective(obj);
-//
-//
-//        dataBaseLogService.log("审核场地占用情况", "场地占用情况", id, id,                "场地占用情况", userProp);
-        return new MessageResponse(0, "场地占用情况审核完成！");
+        return spaceOccupyInfoDao.findList(condition, 0, 10, "");
     }
 
 }

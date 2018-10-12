@@ -6,19 +6,17 @@
 			<a href="#">
 				<img src="${cfg.logo}"
 					 alt="logo" class="logo-default"/> </a>
+
+			<a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand logo-default">
+				${cfg.sys_name}
+			</a>
 			<div class="menu-toggler sidebar-toggler" onclick="setTimeout('autoWidth()',100)">
 				<span></span>
 			</div>
 		</div>
 
-		<a href="${pageContext.request.contextPath}/index.jsp" class="navbar-brand">
-			<i class="fa fa-home"></i>
-		</a>
-		<a href="#" class="navbar-brand" style="color:#FFFFFF">
-			<small>
-				${cfg.sys_name}${cfg.version}${SESSION_USERPROP_KEY.cfg.portalType}
-			</small>
-		</a>
+
+
 		<div class="top-menu">
 			<ul class="nav navbar-nav pull-right">
 				<li class="dropdown dropdown-user">

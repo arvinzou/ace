@@ -1,0 +1,76 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+.reg-top{
+  flex-direction:column;
+  padding: 20px;
+}
+.reg-title{
+  font-size: 18px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+.reg-icon{
+  width:42px; 
+  height: 42px; 
+}
+.reg-logo-panel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     
+}
+.reg-logo-text{
+  line-height: 42px;
+  padding-left: 8px;
+}
+.reg-tabbar{
+  height: 50rpx;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px;
+}
+.reg-tabbar-login{
+  background: green;
+  color: #fff;
+  height: 22px;
+  padding:6px;
+  padding-right:20px;
+  padding-left:20px;
+  border-bottom-left-radius: 22px;
+  border-top-left-radius: 22px; 
+   border-bottom-right-radius: 22px;
+  border-top-right-radius: 22px; 
+  align-items: center;
+  justify-content: center;
+}
+.weui-btn {
+  margin-top: 50rpx;
+  border-radius: 2px;
+}
+button {
+margin-top:0rpx;
+margin-bottom:0rpx;
+}
+
+.reg-icon{
+  width:42px; 
+  height: 42px; 
+}
+.iconList20{
+  width:20px; height: 20px;
+  padding-right: 10rpx;
+  vertical-align: top;
+  
+}
+.weui-flex__item-body{
+  line-height: 25px;
+}
+.kind-list-item{
+  padding: 10px;
+}

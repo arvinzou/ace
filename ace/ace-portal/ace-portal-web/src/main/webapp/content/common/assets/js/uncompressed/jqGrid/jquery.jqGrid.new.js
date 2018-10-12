@@ -286,14 +286,6 @@
 })(jQuery);
 
 (function ($) {
-	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-		_title: function(title) {
-			var $title = this.options.title || '&nbsp;'
-			if( ("title_html" in this.options) && this.options.title_html == true )
-				title.html($title);
-			else title.text($title);
-		}
-	}));
 "use strict";
 $.jgrid = $.jgrid || {};
 $.extend($.jgrid,{
@@ -3873,7 +3865,7 @@ $.jgrid.extend({
 			$("#gview_"+$.jgrid.jqID($t.p.id)).css("width",nwidth+"px");
 			$($t.grid.bDiv).css("width",nwidth+"px");
 			$($t.grid.hDiv).css("width",nwidth+"px");
-			if($t.p.pager ) {$($t.p.pager).css("width",nwidth+"px");}
+			//if($t.p.pager ) {$($t.p.pager).css("width",nwidth+"px");}
 			if($t.p.toppager ) {$($t.p.toppager).css("width",nwidth+"px");}
 			if($t.p.toolbar[0] === true){
 				$($t.grid.uDiv).css("width",nwidth+"px");
@@ -8776,8 +8768,8 @@ $.jgrid.extend({
 			// buttons at footer
 			var bP = "<a id='"+bp+"' class='fm-button ui-state-default ui-corner-left'><span class='ui-icon ui-icon-triangle-1-w'></span></a>",
 			bN = "<a id='"+bn+"' class='fm-button ui-state-default ui-corner-right'><span class='ui-icon ui-icon-triangle-1-e'></span></a>",
-			bS  ="<a id='sData' class='fm-button ui-state-default ui-corner-all'>"+p.bSubmit+"</a>",
-			bC  ="<a id='cData' class='fm-button ui-state-default ui-corner-all'>"+p.bCancel+"</a>";
+			bS  ="<a id='sData' class='fm-button'>"+p.bSubmit+"</a>",
+			bC  ="<a id='cData' class='fm-button'>"+p.bCancel+"</a>";
 			var bt = "<table border='0' cellspacing='0' cellpadding='0' class='EditTable' id='"+frmtborg+"_2'><tbody><tr><td colspan='2'><hr class='ui-widget-content' style='margin:1px'/></td></tr><tr id='Act_Buttons'><td class='navButton'>"+(rtlb ? bN+bP : bP+bN)+"</td><td class='EditButton'>"+bS+bC+"</td></tr>";
 			bt += "<tr style='display:none' class='binfo'><td class='bottominfo' colspan='2'>"+rp_ge[$t.p.id].bottominfo+"</td></tr>";
 			bt += "</tbody></table>";
@@ -13336,7 +13328,7 @@ $.jgrid.extend({
 			multiselectData.availableList.css("height", 200);
 			$(".ui-dialog-title").addClass("ui-jqdialog-title");
 			$(".ui-dialog-buttonset").find("button").removeClass("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
-			$(".ui-dialog-buttonset").find("button").addClass("fm-button ui-state-default ui-corner-all fm-button-icon-left btn btn-sm btn-primary");
+			$(".ui-dialog-buttonset").find("button").addClass("fm-button ui-state-default ui-corner-all");
 		}
 	/****endcolumnChooser***/
 	,

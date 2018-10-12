@@ -26,9 +26,9 @@ public interface SpaceOccupyInfoDao {
 
     int findCount(@Param("condition") SpaceOccupyInfoQVo condition);
 
-    int isExit(SpaceOccupyInfo record);
+    int isExist(SpaceOccupyInfo record);
 
 
-    int updateStatus(SpaceOccupyInfo record);
+//    int updateStatus(SpaceOccupyInfo record);
 
 }

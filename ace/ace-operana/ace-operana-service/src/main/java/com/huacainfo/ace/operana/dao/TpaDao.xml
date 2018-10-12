@@ -20,9 +20,16 @@
     <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
     <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.operana.vo.TpaVo">
-
+  <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.operana.vo.TpaVo">
+    <result property="userName" column="userName"/>
+    <result property="deptName" column="deptName"/>
+    <collection property="attach" ofType="com.huacainfo.ace.operana.model.Attach">
+      <id property="attachId" column="attach_id"/>
+      <result property="url" column="file_url"/>
+      <result property="name" column="file_name"/>
+    </collection>
   </resultMap>
   <sql id="Base_Column_List">
     id, meetingId, topicId, normId, productId, probDiscri, probAnsys, actions, liable,deptId,category,
@@ -45,37 +52,50 @@
       probAnsys, actions, liable,deptId,category,
       status, createUserId, createUserName,
       createDate, lastModifyUserId, lastModifyUserName,
-      lastModifyDate)
+      lastModifyDate,remark)
     values (#{id,jdbcType=VARCHAR}, #{meetingId,jdbcType=VARCHAR}, #{topicId,jdbcType=VARCHAR},
       #{normId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, #{probDiscri,jdbcType=VARCHAR},
       #{probAnsys,jdbcType=VARCHAR}, #{actions,jdbcType=VARCHAR}, #{liable,jdbcType=VARCHAR},#{deptId,jdbcType=VARCHAR},#{category,jdbcType=VARCHAR},
       #{status,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR},
       #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
-      #{lastModifyDate,jdbcType=TIMESTAMP})
+      #{lastModifyDate,jdbcType=TIMESTAMP},#{remark})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.operana.model.Tpa">
     update tpa
-    set meetingId = #{meetingId,jdbcType=VARCHAR},
-      topicId = #{topicId,jdbcType=VARCHAR},
-      normId = #{normId,jdbcType=VARCHAR},
+    set
+
+    <if test="productId!=null">
       productId = #{productId,jdbcType=VARCHAR},
+    </if>
+    <if test="probDiscri!=null">
       probDiscri = #{probDiscri,jdbcType=VARCHAR},
+    </if>
+    <if test="probAnsys!=null">
       probAnsys = #{probAnsys,jdbcType=VARCHAR},
+    </if>
+    <if test="actions!=null">
       actions = #{actions,jdbcType=VARCHAR},
+    </if>
+    <if test="liable!=null">
       liable = #{liable,jdbcType=VARCHAR},
+    </if>
+    <if test="deptId!=null">
       deptId = #{deptId,jdbcType=VARCHAR},
+    </if>
+    <if test="category!=null">
       category=#{category},
+    </if>
     <if test="status!=null">
       status = #{status,jdbcType=VARCHAR},
     </if>
-
-
+    <if test="remark!=null">
+      remark = #{remark,jdbcType=VARCHAR},
+    </if>
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
-    where  probDiscri=#{probDiscri} and meetingId=#{meetingId} and topicId=#{topicId}
-    and  normId=#{normId}
+    where  id=#{id}
   </update>
 
   <sql id="whereCondition">
@@ -84,7 +104,8 @@
     status,lastModifyDate,id,deptId,category from tpa where meetingId=#{condition.meetingId} and topicId=#{condition.topicId}
     and  normId=#{condition.normId})a on (t.meetingId=a.meetingId and t.topicId=a.topicId and t.normId=a.normId and t.name=a.probDiscri)
     left join portal.users b on a.liable=b.user_id
-    left join portal.department c on a.deptId=c.department_id
+    left join portal.department c on a.deptId=c.department_id,
+    left join portal.attach attach on t.id=attach.notice_id
   </sql>
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
@@ -93,8 +114,9 @@
   <select id="findList" resultMap="BaseResultMapVo">
 
     select
-    t.meetingId, t.topicId, t.normId, ifnull(a.productId,t.productId) productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
-    a.deptId,a.category,a.status,t.${orderBy},ifnull(b.name,'') userName,a.lastModifyDate,a.id,ifnull(c.department_name,'') deptName
+    t.meetingId, t.topicId,t.remark, t.normId, ifnull(a.productId,t.productId) productId, t.name probDiscri, a.probAnsys, a.actions, a.liable,
+    a.deptId,a.category,a.status,t.${orderBy},ifnull(b.name,'') userName,a.lastModifyDate,a.id,ifnull(c.department_name,'') deptName,
+    attach.attach_id,attach.file_name ,attach.file_url
     <include refid="whereCondition"/>
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
@@ -114,7 +136,6 @@
     from
     tpa where
     probDiscri=#{probDiscri}
-    and productId=#{productId}
     and meetingId=#{meetingId}
     and topicId=#{topicId}
     and  normId=#{normId}
@@ -207,10 +228,31 @@
     from tpa t
     left join portal.users b on t.liable=b.user_id
     left join portal.department c on t.deptId=c.department_id
+    left join portal.attach attach on t.id=attach.notice_id
 
     where t.meetingId=#{condition.meetingId}
     and   t.topicId=#{condition.topicId}
     and   t.normId=#{condition.normId}
+    <if test="condition.productId!=null and condition.productId!=&quot;&quot;">
+      and t.productId=#{condition.productId}
+    </if>
+    <if test="condition.liable!=null and condition.liable!=&quot;&quot;">
+      and t.liable=#{condition.liable}
+    </if>
+    <if test="condition.status!=null and condition.status!=&quot;&quot;">
+      and t.status=#{condition.status}
+    </if>
+    <if test='condition.startDate!=null and condition.startDate!=""'>
+      <![CDATA[
+			and t.createDate>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+			]]>
+    </if>
+    <if test='condition.endDate!=null and condition.endDate!=""'>
+      <![CDATA[
+				and t.createDate<=str_to_date(#{condition.endDate},'%Y-%m-%d')
+	]]>
+    </if>
+
   </sql>
   <select id="findCountCommon" resultType="int">
     SELECT COUNT(*)
@@ -220,7 +262,8 @@
 
     select
     t.meetingId, t.topicId, t.normId, t.productId, t.probDiscri, t.probAnsys, t.actions, t.liable,
-    t.deptId,t.category,t.status,ifnull(b.name,'') userName,t.lastModifyDate,t.id,ifnull(c.department_name,'') deptName
+    t.deptId,t.category,t.status,ifnull(b.name,'') userName,t.lastModifyDate,t.id,ifnull(c.department_name,'') deptName,
+    attach.attach_id,attach.file_name ,attach.file_url,t.remark,t.createDate
     <include refid="whereConditionCommon"/>
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
@@ -233,5 +276,8 @@
 
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
 
+  </select>
+  <select id="selectCorpIdByUserId" resultType="string">
+    select department_id  from portal.users where user_id=#{userId}
   </select>
 </mapper>

@@ -34,4 +34,6 @@ public interface DictMapper {
 	List<Map<String,String>> selectAreaCode();
 
 	List<Map<String,Object>> selectDictAllTreeByCategoryId(String id);
+
+	List<DictVo> getTreeGrid();
 }

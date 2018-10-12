@@ -167,12 +167,13 @@ function initMenu(){
         buildMenu(data);
      }else{
         $.ajax({
-                    url : portalPath + '/system/getTreeList.do?loadButton=false',
+                    url :'/portal/system/getTreeList.do?loadButton=false',
                     type : 'POST',
                     timeout : 30000,
                     dataType : 'json',
                     beforeSend:function(){
-                        loading=startLoading();
+                        try{ loading=startLoading();}catch(e){}
+
                         if(loading) {
                            loading.settext("正在加载，请稍后......");
                         }
@@ -212,3 +213,61 @@ if(!window.console){
 
         }
      }
+
+
+
+function rsd(value, kernelKey, staticDictObjects) {
+	try {
+		if (!staticDictObjects) {
+			staticDictObjects = parent.staticDictObject;
+		}
+
+		var name = value;
+
+		if ((value + "") && ("" + value).indexOf(',') < 0) {
+			if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
+				for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+					if (staticDictObjects[kernelKey][i].CODE == value) {
+						name = staticDictObjects[kernelKey][i].NAME;
+						break;
+					}
+				}
+			}
+		} else {
+			if (value) {
+				var nameArray = [];
+				var v = (value + "").split(',');
+				for (var j = 0; j < v.length; j++) {
+					for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+						if (staticDictObjects[kernelKey][i].CODE == v[j]) {
+							nameArray.push(staticDictObjects[kernelKey][i].NAME);
+							break;
+						}
+					}
+				}
+				name = nameArray.join(',');
+			}
+		}
+	} catch (err) {
+		console.log("渲染错误", value + ":" + kernelKey + ":" + err);
+	}
+	return name;
+}
+
+function odparse(kernelKey, staticDictObjects) {
+	var rst = [];
+	try {
+		if (!staticDictObjects) {
+			staticDictObjects = parent.staticDictObject;
+		}
+		if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
+			for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+				rst.push(staticDictObjects[kernelKey][i].CODE + ":"
+						+ staticDictObjects[kernelKey][i].NAME);
+			}
+		}
+	} catch (err) {
+		console.log("渲染错误", value + ":" + kernelKey + ":" + err);
+	}
+	return rst.join(";");
+}
