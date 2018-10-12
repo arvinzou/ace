@@ -12,6 +12,3 @@ cfg.gridHeight = 'auto';
 cfg.jgridEditWinWidth = 550;
 cfg.jgridAlertWidth = 400;
 cfg.jgrdInfoDialogWidth = 500;
-if (cfg.gridHeight < 100) {
-	cfg.gridHeight = 250;
-}

@@ -1,26 +1,14 @@
-var _colNames = [ '角色编号', '所属系统','角色名称','类型', '创建时间', '备注','系统' ];
+var _colNames = [ '角色编号','角色名称','类型', '创建时间', '备注','系统','操作' ];
 var _colModel = function() {
 	return [ {
 		name : 'roleId',
 		index : 'roleId',
 		width : 8,
-		hidden:false,
+		hidden:true,
 		sortable : false,
-		editable : false,
+		editable : true,
 		editoptions : {
 			readonly : true
-		}
-	}, {
-		name : 'syid',
-		index : 'syid',
-		width : 8,
-		editable : false,
-		edittype : "select",
-		renderer : function(value) {
-			return rsd(value, "08");
-		},
-		editoptions : {
-			value : odparse("08")
 		}
 	}, {
 		name : 'roleName',
@@ -33,14 +21,14 @@ var _colModel = function() {
 		},
 		formoptions : {
 			elmprefix : "",
-			elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+			elmsuffix : "<span style='color:red;'>*</span>"
 		},
 		editrules : {
 			required : true
 		}
 	},{
 		name : 'type',
-		width : 5,
+		width : 10,
 		editable : true,
 		edittype : "select",
 		renderer : function(value) {
@@ -57,7 +45,7 @@ var _colModel = function() {
 	}, {
 		name : 'remark',
 		index : 'remark',
-		width : 10,
+		width : 5,
 		editable : true,
 		editoptions : {
 			size : "20",
@@ -74,7 +62,25 @@ var _colModel = function() {
       		editoptions : {
       			value : odparse("08")
       		}
-      	}];
+      	}, {
+          name : 'opt',
+          width : 5,
+          renderer : function(value, cur) {
+              var rowid=$.jgrid.getAccessor(cur, cfg.dataId);
+              var opt=[];
+              if(authorConfig.hasOwnProperty(cfg.grid_edit_data_url )){
+                  opt.push('<a href="javascript:edit(\''+rowid+'\')">编辑</a> ');
+              }
+              if(authorConfig.hasOwnProperty(cfg.insertRoleResources)){
+                  opt.push('<a href="javascript:role(\''+rowid+'\')">分配权限</a>  ');
+              }
+              if(authorConfig.hasOwnProperty(cfg.grid_delete_data_url)){
+                  opt.push('<a href="javascript:del(\''+rowid+'\')">删除</a>');
+              }
+
+              return opt.join('');
+          }
+      }];
 }
 function aceSwitch(cellvalue, options, cell) {
 	console.log('aceSwitch');
@@ -82,14 +88,5 @@ function aceSwitch(cellvalue, options, cell) {
 		$(cell).find('input[type=checkbox]').addClass(
 				'ace ace-switch ace-switch-5').after(
 				'<span class="lbl"></span>');
-	}, 0);
-}
-// enable datepicker
-function pickDate(cellvalue, options, cell) {
-	setTimeout(function() {
-		$(cell).find('input[type=text]').datepicker({
-			format : 'yyyy-mm-dd',
-			autoclose : true
-		});
 	}, 0);
 }

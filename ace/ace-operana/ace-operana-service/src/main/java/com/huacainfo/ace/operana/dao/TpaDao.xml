@@ -23,6 +23,8 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
   <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.operana.vo.TpaVo">
+    <result property="userName" column="userName"/>
+    <result property="deptName" column="deptName"/>
     <collection property="attach" ofType="com.huacainfo.ace.operana.model.Attach">
       <id property="attachId" column="attach_id"/>
       <result property="url" column="file_url"/>
