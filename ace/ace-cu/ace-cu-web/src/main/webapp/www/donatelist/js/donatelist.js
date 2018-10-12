@@ -23,7 +23,7 @@ window.onload = function(){
         data:{start:0, limit: 9999, projectId: primaryId, needOpenId: "1"},
         success:function(result){
             if(result.status == 0) {
-                renderPage('mine', result.data.own, 'mine-tpl');
+                //renderPage('mine', result.data.own, 'mine-tpl');
                 renderPage('donateList',  result.data.list, 'donate-tpl');
             }else {
                 alert(result.info);
