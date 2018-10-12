@@ -1,10 +1,10 @@
 var recordList = [];
 var type = "";
 var status = null;
+var primaryId = null;
 window.onload = function(){
 	var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
-    var primaryId = null;
     var paramArr = url.split("&");
     for(var i=0;i < paramArr.length;i++){
         num=paramArr[i].indexOf("=");
@@ -30,7 +30,6 @@ window.onload = function(){
         data:{projectId: primaryId},
         success:function(result){
             if(result.status == 0) {
-                $scope.projectInfo = result.data;
                 status = result.data.status;
                 renderPage('projectInfo', result.data, 'project-tpl');
             }else {
@@ -75,7 +74,6 @@ window.onload = function(){
         data:{projectId: primaryId, start: 0, limit: 9999},
         success:function(result){
             if(result.status == 0) {
-                $scope.donationList = result.data.rows;
                 renderPage('donateList', result.data.rows, 'donate-tpl');
             }else {
                 alert(result.info);
