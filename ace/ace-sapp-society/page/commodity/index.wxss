@@ -1,4 +1,4 @@
-@import "../../util/wxParse/wxParse.wxss";
+
 .index{
     width: 100%;
     background: #F6F6F6;
