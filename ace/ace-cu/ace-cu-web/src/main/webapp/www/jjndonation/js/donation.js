@@ -86,11 +86,7 @@ window.onload = function(){
 };
 
 function donate(){
-    if(status != '2'){
-        alert("该项目未审核通过！")
-    }else{
-        window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
-    }
+    window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
 }
 function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
