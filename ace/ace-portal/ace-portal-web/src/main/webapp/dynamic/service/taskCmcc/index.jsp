@@ -47,7 +47,7 @@
 							</div>
 
 							<div class="input-group" style="width:35%;float:right">
-								<input type="text" name="taskCmccName" class="form-control" placeholder="请输入名称">
+								<input type="text" name="taskName" class="form-control" placeholder="请输入名称">
 								<span class="input-group-btn">
 									<button class="btn  btn-default search_btn" id="btn-search" authority="${pageContext.request.contextPath}/taskCmcc/findTaskCmccList.do">
 										搜索

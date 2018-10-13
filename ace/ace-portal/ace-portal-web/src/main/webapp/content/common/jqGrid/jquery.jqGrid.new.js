@@ -1771,7 +1771,7 @@ $.fn.jqGrid = function( pin ) {
                       });
                       $(".ui-jqgrid-bdiv").css("height",'');
                       console.log("===============================");
-                      $(".totalCounts span").html(ts.p.records);
+                      $(ts.p.pager).parent().find(".totalCounts span").html(ts.p.records);
                   }
             }
 			/**系统返回数据***/
@@ -2458,7 +2458,7 @@ $.fn.jqGrid = function( pin ) {
                  });
 
 
-                 $(pgid).before('<div style="float:left;line-height:50px" class="totalCounts">共 <span>'+(ts.p.records||0)+'</span></div>');
+                 $(pgid).before('<div style="float:left;line-height:50px" class="totalCounts">共 <span>'+(ts.p.records||0)+'</span> 条记录</div>');
 
 
              console.log("==========分页设置结束=======================");
