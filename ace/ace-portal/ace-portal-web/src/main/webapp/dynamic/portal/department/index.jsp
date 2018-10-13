@@ -40,7 +40,7 @@
 									 class="easyui-combotree"
 									 data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,lines:false,"
 									 style='width: 300px; line-height: 30px; height: 30px;'>
-						  <a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
+						  <a href="javascript:clearQparams()">清除</a>
 					</div>
 
 
@@ -71,7 +71,7 @@
 				<table id="grid-table"></table>
 
 					<div style="text-align:left">
-						<ul id="grid-pager" class="pagination"></ul>
+						<ul id="grid-pager" class="pagination" style="padding-left:20px"></ul>
 					</div>
 			</div>
 			<div id="cc-west" class="easyui-west"
