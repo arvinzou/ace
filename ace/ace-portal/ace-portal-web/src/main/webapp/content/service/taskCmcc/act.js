@@ -10,6 +10,7 @@ jQuery(function($) {
 	});
 	$("#btn-view-save").on('click', function(e) {
 		e.preventDefault();
+		console.log("btn-view-save click");
 		save();
 	});
 	$("#btn-view-add").on('click', function(e) {
@@ -114,7 +115,7 @@ function save() {
 	$.each($(nodes), function(i, o) {
 		if (o.href != '') {
 			html.push('<div class="layout-user" >');
-			html.push('<user tel="' + o.href + '" class="badge badge-' + cssColor9[0] + '">');
+			html.push('<user tel="' + o.href + '" class="badge">');
 			html.push(o.text);
 			html.push('</user>');
 			html.push('</div>');
@@ -125,7 +126,7 @@ function save() {
 	$.each($(nodes), function(i, o) {
 		if (o.href != '') {
 			html.push('<div class="layout-user" >');
-			html.push('<user tel="' + o.href + '" class="badge badge-' + cssColor9[0] + '">');
+			html.push('<user tel="' + o.href + '" class="badge">');
 			html.push(o.text);
 			html.push('</user>');
 			html.push('</div>');
@@ -133,6 +134,7 @@ function save() {
 	});
 	$('#task-content').html(html.join('') + $('#task-content-view').html());
 	$('#task-content-view').html('');
+	$('#modal-tree').modal('hide');
 }
 function selectMobile() {
 	var html = new Array();
@@ -148,7 +150,7 @@ function selectMobile() {
 			}
 		});
 		html.push('<div class="layout-user" >');
-		html.push('<user tel="' + r.mobile + '" class="badge badge-' + cssColor9[0] + '">');
+		html.push('<user tel="' + r.mobile + '" class="badge">');
 		html.push(r.name);
 		html.push('</user>');
 		html.push('</div>');

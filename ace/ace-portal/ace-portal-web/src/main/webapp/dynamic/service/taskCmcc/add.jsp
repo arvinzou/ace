@@ -92,7 +92,7 @@
 
 		<script src="${pageContext.request.contextPath}/content/service/taskCmcc/act.js?version=${cfg.version}"></script>
 		<div class="modal fade" role="dialog" id="modal-tree">
-			<div class="modal-dialog" role="document" style="width:90%;">
+			<div class="modal-dialog" role="document" style="width:1050px;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -120,19 +120,19 @@
 
 							<div class="tab-content">
 								<div id="dept" class="tab-pane in active">
-									<div id="tree-dept-panel" class="easyui-panel" style="padding: 5px; width: 550px; height: 300px">
+									<div id="tree-dept-panel" class="easyui-panel" style="padding: 5px; width: 1000px; height: 300px">
 										<ul id="tree-dept"></ul>
 									</div>
 								</div>
 
 								<div id="free" class="tab-pane">
-									<div id="tree-free-panel" class="easyui-panel" style="padding: 5px; width: 550px; height: 300px">
+									<div id="tree-free-panel" class="easyui-panel" style="padding: 5px; width: 1000px; height: 300px">
 										<ul id="tree-free"></ul>
 									</div>
 								</div>
 								<div id="tmp" class="tab-pane">
 
-									<select class="easyui-combogrid" style="width: 560px; height: 25px; line-height: 25px;" id="combogrid-tmp"></select>
+									<select class="easyui-combogrid" style="width:1000px; height: 25px; line-height: 25px;" id="combogrid-tmp"></select>
 
 									<div style="height:5px"></div>
 									<div>
@@ -147,7 +147,7 @@
 										</button>
 									</div>
 									<div style="height:5px"></div>
-									<div id="task-content-view" class="easyui-panel" style="padding: 5px; width: 560px; height: 200px"></div>
+									<div id="task-content-view" class="easyui-panel" style="padding: 5px; width: 1000px; height: 200px"></div>
 
 								</div>
 
@@ -163,7 +163,7 @@
 		</div>
 		<style>
 			.layout-user {
-				width: 150px;
+				width: 80px;
 				height: 20px;
 				float: left;
 				margin: 1px 1px 1px;
