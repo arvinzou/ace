@@ -37,7 +37,7 @@
 								<div class="col-md-2 control-label"></div>
 
 								<div class="col-md-10">
-									<button class="btn green" id="btn-view-select" authority="false">
+									<button class="btn green" id="btn-view-add" authority="false">
 										添加
 									</button>
 									<button class="btn green" id="btn-view-remove" authority="false">
@@ -136,18 +136,18 @@
 
 									<div style="height:5px"></div>
 									<div>
-										<button class="btn green" id="btn-view-select-tmp" authority="false">
+										<button class="btn green" id="btn-add" authority="false">
 											添加
 										</button>
-										<button class="btn green" id="btn-view-remove-tmp" authority="false">
+										<button class="btn green" id="btn-remove-all" authority="false">
 											全部清除
 										</button>
-										<button class="btn green" id="btn-view-remove-tmp-last" authority="false">
+										<button class="btn green" id="btn-remove-last" authority="false">
 											删除最后
 										</button>
 									</div>
 									<div style="height:5px"></div>
-									<div id="task-content-tmp" class="easyui-panel" style="padding: 5px; width: 560px; height: 200px"></div>
+									<div id="task-content-view" class="easyui-panel" style="padding: 5px; width: 560px; height: 200px"></div>
 
 								</div>
 
