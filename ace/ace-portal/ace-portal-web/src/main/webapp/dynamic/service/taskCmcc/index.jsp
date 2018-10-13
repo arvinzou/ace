@@ -62,6 +62,7 @@
 				<table id="grid-table"></table>
 
 				<div class="paginationbar">
+
 					<ul id="grid-pager" class="pagination"></ul>
 				</div>
 			</div>
