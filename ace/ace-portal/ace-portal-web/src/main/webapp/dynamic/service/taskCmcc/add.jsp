@@ -14,61 +14,67 @@
 		<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 		<div class="portlet light ">
 			<div class="portlet-body">
-				<div class="profile-info-row">
-					<div class="profile-info-name">任务名称：</div>
+				<div class="form-panel">
+					<!--具体界面元素开始-->
+					<form class="form-horizontal" id="fm-add" role="form">
+						<div class="form-body">
+							<div class="form-group">
+								<div class="col-md-2 control-label">任务名称<span class="required">*</span></div>
 
-					<div class="profile-info-value">
-						<input style="width: 600px; height: 25px; line-height: 25px;" id="taskName" maxLength="20" /><span style='color:red;font-size:16px;font-weight:800'>*</span>
-					</div>
-				</div>
-				<div class="profile-info-row">
-					<div class="profile-info-name">发送给：</div>
+								<div class="col-md-10">
+									<input class="form-control" id="taskName" maxLength="20" style="width: 600px;"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-2 control-label">发送给<span class="required">*</span></div>
 
-					<div class="profile-info-value">
-						<div id="task-content" class="easyui-panel" style="padding: 5px; width: 600px; height: 100px"></div><span style='color:red;font-size:16px;font-weight:800'>*</span>
+								<div class="col-md-10">
+									<div id="task-content" class="easyui-panel" style="padding: 5px; width: 600px; height: 100px"></div>
 
-					</div>
-				</div>
-				<div class="profile-info-row">
-					<div class="profile-info-name"></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-2 control-label"></div>
 
-					<div class="profile-info-value">
-						<button class="btn btn-purple" id="btn-view-select" authority="false">
-							添加<i class="ace-icon glyphicon  glyphicon-plus  align-top bigger-125 icon-on-right"></i>
-						</button>
-						<button class="btn btn-purple" id="btn-view-remove" authority="false">
-							全部清除<i class="ace-icon glyphicon  glyphicon-remove  align-top bigger-125 icon-on-right"></i>
-						</button>
-						<button class="btn btn-purple" id="btn-view-remove-last" authority="false">
-							删除最后<i class="ace-icon glyphicon  glyphicon-remove  align-top bigger-125 icon-on-right"></i>
-						</button>
-					</div>
-				</div>
-				<div class="profile-info-row">
-					<div class="profile-info-name">发送给：</div>
+								<div class="col-md-10">
+									<button class="btn green" id="btn-view-select" authority="false">
+										添加
+									</button>
+									<button class="btn green" id="btn-view-remove" authority="false">
+										全部清除
+									</button>
+									<button class="btn green" id="btn-view-remove-last" authority="false">
+										删除最后
+									</button>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-2 control-label">发送给</div>
 
-					<div class="profile-info-value">
-						<textarea style="width: 600px; height: 50px; line-height: 30px;" id="telext"></textarea>
-						<div>多个手机号用;隔开</div>
-					</div>
-				</div>
-				<div class="profile-info-row">
-					<div class="profile-info-name">短信内容：</div>
+								<div class="col-md-10">
+									<textarea style="width: 600px; height: 50px; line-height: 30px;" id="telext" class="form-control"></textarea>
+									<div>多个手机号用;隔开</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-md-2 control-label">短信内容<span class="required">*</span></div>
 
-					<div class="profile-info-value">
-						<textarea style="width: 600px; height: 80px; line-height: 30px;" id="msg" maxLength="500" onkeyup="msgOnChange(this)"></textarea>
-						<div id="msg-des">普通短信长度为70个字，超过后部分手机将会以多条方式接收</div>
-					</div>
-				</div>
+								<div class="col-md-10">
+									<textarea style="width: 600px; height: 80px; line-height: 30px;" id="msg" maxLength="500" onkeyup="msgOnChange(this)" class="form-control"></textarea>
+									<div id="msg-des">普通短信长度为70个字，超过后部分手机将会以多条方式接收</div>
+								</div>
+							</div>
+							<div class="form-actions">
+								<div class="row">
+									<div class="col-md-offset-3 col-md-7">
+										<button class="btn   green" type="submit" style="width:30%" id="btn-view-submit">发送</button>
+									</div>
+								</div>
+							</div>
 
 
-				<div class="profile-info-row">
-					<div class="profile-info-name"></div>
-					<div class="profile-info-value">
-						<button class="btn btn-info" id="btn-view-submit" authority="false">
-							<i class="ace-icon fa fa-check bigger-110"></i> 发送
-						</button>
-					</div>
+						</div>
+					</form>
 				</div>
 
 			</div>
