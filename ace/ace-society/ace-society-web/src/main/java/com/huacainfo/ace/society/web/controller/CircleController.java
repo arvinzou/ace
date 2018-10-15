@@ -12,6 +12,7 @@ import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.society.model.Circle;
 import com.huacainfo.ace.society.model.CircleImg;
 import com.huacainfo.ace.society.model.Img;
+import com.huacainfo.ace.society.model.Rpt;
 import com.huacainfo.ace.society.service.CircleService;
 import com.huacainfo.ace.society.vo.CircleQVo;
 import com.huacainfo.ace.society.vo.CircleVo;
@@ -83,6 +84,8 @@ public class CircleController extends SocietyBaseController {
         List<CircleImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), CircleImg.class);
         return this.circleService.insertCircle(obj,imgs);
     }
+
+
 
     /**
      * @throws
@@ -168,16 +171,29 @@ public class CircleController extends SocietyBaseController {
     @RequestMapping(value = "/www/insertCircle")
     @ResponseBody
     public MessageResponse insertCircleWww(String jsons) throws Exception {
-        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
-        if(rst.getStatus()==0){
-            JSONObject json = JSON.parseObject(jsons);
-            json.put("uid",this.getCurWxUser().getUnionId());
-            Circle obj = JSON.parseObject(((JSONObject) json.get("circle")).toJSONString(), Circle.class);
-            List<CircleImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), CircleImg.class);
-            return this.circleService.insertCircle(obj,imgs);
-        }
-        return rst;
+        JSONObject json = JSON.parseObject(jsons);
+        json.put("uid",this.getCurWxUser().getUnionId());
+        Circle obj = JSON.parseObject(((JSONObject) json.get("circle")).toJSONString(), Circle.class);
+        List<CircleImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), CircleImg.class);
+        return this.circleService.insertCircle(obj,imgs);
     }
+    /**
+     * @throws
+     * @Title:getList
+     * @Description: TODO(圈子获取列表)
+     * @param: @param start 开始行号
+     * @param: @param limit 页面展示行数
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-10-15
+     */
+    @RequestMapping(value = "/www/getList")
+    @ResponseBody
+    public List<Rpt> getList(int start,int limit) throws Exception {
+        return this.circleService.getList(start,limit);
+    }
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -191,10 +207,11 @@ public class CircleController extends SocietyBaseController {
      * @author: 陈晓克
      * @version: 2018-09-20
      */
-    @RequestMapping(value = "/www/findCircleList")
+    @RequestMapping(value = "/myCircleList")
     @ResponseBody
-    public PageResult<CircleVo> findCircleListWww(CircleQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult<CircleVo> myCircleList(CircleQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setCorpId(this.getCurUserProp().getCorpId());
+        condition.setUid(this.getCurWxUser().getUnionId());
         PageResult<CircleVo> rst = this.circleService.findCircleList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

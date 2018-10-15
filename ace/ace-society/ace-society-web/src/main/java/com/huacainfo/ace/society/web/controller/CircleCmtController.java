@@ -72,11 +72,11 @@ public class CircleCmtController extends SocietyBaseController {
      * @author: 陈晓克
      * @version: 2018-09-20
      */
-    @RequestMapping(value = "/insertCircleCmt")
+    @RequestMapping(value = "/www/insertCircleCmt")
     @ResponseBody
     public MessageResponse insertCircleCmt(String jsons) throws Exception {
         CircleCmt obj = JSON.parseObject(jsons, CircleCmt.class);
-        return this.circleCmtService.insertCircleCmt(obj, this.getCurUserProp());
+        return this.circleCmtService.insertCircleCmt(obj);
     }
 
     /**

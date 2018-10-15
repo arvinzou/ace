@@ -13,7 +13,6 @@ window.onload = function(){
             value=paramArr[i].substr(num+1);
             if(name == "type"){
                 type = value;
-                $scope.type = type;
             }
             if(name == "projectId"){
                 primaryId = value;

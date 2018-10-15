@@ -2,6 +2,7 @@ package com.huacainfo.ace.society.dao;
 
 import java.util.List;
 
+import com.huacainfo.ace.society.model.Rpt;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.society.model.Circle;
 import com.huacainfo.ace.society.vo.CircleQVo;
@@ -29,5 +30,7 @@ public interface CircleDao {
 
 
     int updateStatus(@Param("id") String id,@Param("status") String status,@Param("lastAuditLogId") String lastAuditLogId);
+
+    List<Rpt> getList(@Param("start") int start, @Param("limit") int limit);
 
 }

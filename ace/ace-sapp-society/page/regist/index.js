@@ -29,28 +29,20 @@ Page({
           }
       ],
       index: 0,
-
-      groupArray: ['心阳光联盟', '华彩伟业'],
       objectGroupArray: [
-          {
-              id: 0,
-              name: '心阳光联盟'
-          },
-          {
-              id: 1,
-              name: '华彩伟业'
-          }
+          
       ],
       group_index: 0,
 
       stepNum: 1,
-      regType: null,
+      regType: 1,
       regName: null,
       phoneNum: null,
       lastNum: 0,
       stop: true,
       btnName: "获取验证码",
       imageCover: null,
+      orgId: null,
   },
 
   /**
@@ -64,6 +56,7 @@ Page({
       that.setData({
           userinfo: wx.getStorageSync('userinfo')
       });
+      that.orgList();
   },
   bindPickerChange: function (e) {
         console.log('picker发送选择改变，携带值为', e.detail.value);
@@ -82,9 +75,11 @@ Page({
     },
 
     bindPickerChange1: function (e) {
+        var that = this;
         console.log('picker发送选择改变，携带值为', e.detail.value)
-        this.setData({
-            group_index: e.detail.value
+        that.setData({
+            group_index: e.detail.value,
+            orgId: that.data.objectGroupArray[e.detail.value].value
         })
     },
     nextOne: function () {
@@ -298,7 +293,7 @@ Page({
         var realName = e.detail.value.realName;
         var mobilePhone = e.detail.value.mobilePhone;
         var code = e.detail.value.code;
-        var jsonData = { "realName": realName, "mobilePhone": mobilePhone}
+        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, orgId: that.data.orgId}
         util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
             function (ret) {
                 if (ret.status == 0) {
@@ -318,6 +313,39 @@ Page({
             }
         );
         
+    },
+    orgList: function(){
+        var that = this;
+        var groupName = [];
+        var groupObj = [];
+        util.request(cfg.orgList, { "unionId": "0"},
+            function (ret) {
+                if (ret.status == 0) {
+                    groupObj.push({ id: 0, value: null, name: '无组织' });
+                    var len = ret.data.length;
+                    var datas = ret.data;
+                    for (var i = 0; i < len; i++){
+                        var arrTemp = { id: i+1, value: datas[i].id, name: datas[i].orgName}
+                        groupName.push(datas[i].orgName);
+                        groupObj.push(arrTemp);
+                    }
+                    that.setData({ objectGroupArray: groupObj});
+                    console.log(that.data.groupArray);
+                    console.log(that.data.objectGroupArray);
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: ret.info,
+                        success: function (res) { }
+                    });
+                }
+
+            }
+        );
+
+    },
+    close: function(){
+        wx.switchTab({url: '../me/index'});
     },
   /**
    * 生命周期函数--监听页面初次渲染完成

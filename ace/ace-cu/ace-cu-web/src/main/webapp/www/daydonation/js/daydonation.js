@@ -24,86 +24,94 @@ window.onload = function(){
     /**
      * 使用记录列表
      */
-    $.ajax({
-        url: "/cu/www/project/findUsedRecordList",
-        type:"post",
-        async:false,
-        data:{projectId: projectId, start: 0, limit: 99999},
-        success:function(result){
-            if(result.status == 0) {
-                renderPage('useRecord', result.data, 'record-tpl');
-            }else {
-                alert(result.errorMessage);
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
-
-    /**
-     * 捐赠列表
-     */
-    $.ajax({
-        url: "/cu/www/project/findDonateListToday",
-        type:"post",
-        async:false,
-        data:{projectId: projectId, start: 0, limit: 99999},
-        success:function(result){
-            if(result.status == 0) {
-                renderPage('donatiteList', result.data.rows, 'doante-tpl');
-                if(result.data.rows.length < 1){
-                    $(".donate_list").hide();
-                }else{
-                    $(".donate_list").show();
+    if(projectId != null){
+        $.ajax({
+            url: "/cu/www/project/findUsedRecordList",
+            type:"post",
+            async:false,
+            data:{projectId: projectId, start: 0, limit: 99999},
+            success:function(result){
+                if(result.status == 0) {
+                    renderPage('useRecord', result.data, 'record-tpl');
+                }else {
+                    alert(result.errorMessage);
                 }
-            }else {
-                alert(result.info);
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
 
-    /**
-     * 一日捐榜单
-     */
-    $.ajax({
-        url: "/cu/www/report/donateRank",
-        type:"post",
-        async:false,
-        data:{start:0, limit: 999999, projectId: projectId, needOpenId: "1"},
-        success:function(result){
-            if(result.status == 0) {
-                renderPage('rankList', result.data.list, 'rank-tpl');
-                renderPage('totalAmount', result.data.list.length, 'total-tpl');
-                renderPage('share_box', result.data.own, 'share-tpl');
-            }else {
-                alert(result.info);
+        /**
+         * 捐赠列表
+         */
+        $.ajax({
+            url: "/cu/www/project/findDonateListToday",
+            type:"post",
+            async:false,
+            data:{projectId: projectId, start: 0, limit: 99999},
+            success:function(result){
+                if(result.status == 0) {
+                    renderPage('donatiteList', result.data.rows, 'doante-tpl');
+                    if(result.data.rows.length < 1){
+                        $(".donate_list").hide();
+                    }else{
+                        $(".donate_list").show();
+                    }
+                }else {
+                    alert(result.info);
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+
+        /**
+         * 一日捐榜单
+         */
+        $.ajax({
+            url: "/cu/www/report/donateRank",
+            type:"post",
+            async:false,
+            data:{start:0, limit: 999999, projectId: projectId, needOpenId: "1"},
+            success:function(result){
+                if(result.status == 0) {
+                    renderPage('rankList', result.data.list, 'rank-tpl');
+                    renderPage('totalAmount', result.data.list.length, 'total-tpl');
+                    renderPage('share_box', result.data.own, 'share-tpl');
+                }else {
+                    alert(result.info);
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
+            }
+        });
+    }
 };
 
 function donate(){
-    window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
+    if(projectId != null){
+        window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
+    }
 }
 /**
  * 跳转慈善榜单页面
  */
 function donateRank(){
-    window.location.href = '/cu/www/donatelist/donatelist.html?projectId='+projectId;
+    if(projectId != null){
+        window.location.href = '/cu/www/donatelist/donatelist.html?projectId='+projectId;
+    }
 }
 
 /**
  * 使用记录查看更多
  */
 function showMore(){
-    window.location.href = '/cu/www/daydonation/recordlist.html?projectId='+projectId;
+    if(projectId != null) {
+        window.location.href = '/cu/www/daydonation/recordlist.html?projectId=' + projectId;
+    }
 }
 
 /**

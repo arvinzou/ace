@@ -93,8 +93,8 @@
                 <view class="input-style bottom-line">
                     <view class="title">所属组织
                     </view>
-                    <picker mode = selector bindchange="bindPickerChange1" value="{{group_index}}" range="{{groupArray}}">
-                        <view class="picker">{{groupArray[group_index]}}</view>
+                    <picker style='width:100%' mode = selector bindchange="bindPickerChange1" value="{{objectGroupArray[group_index].value}}" range="{{objectGroupArray}}" range-key="name">
+                        <view style='width:100%' class="picker">{{objectGroupArray[group_index].name}}</view>
                     </picker>
                 </view>
                 <view class="input-style bottom-line">
@@ -151,7 +151,7 @@
             <text class='fontStyle3'>待审核通过后正式入驻平台</text>
             <text class='fontStyle3'>联系电话：0736-2323252</text>
         </view>
-        <view class='btn btn-clicking'>
+        <view class='btn btn-clicking' bindtap='close'>
             关闭
         </view>
     </view>

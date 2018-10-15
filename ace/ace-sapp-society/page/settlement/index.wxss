@@ -1,0 +1,184 @@
+@import "../common/lib/weui.wxss";
+@import "../common/index.wxss";
+
+.index{
+    width: 100%;
+    background-color: #F6F6F6;
+}
+.tips{
+    width: 100%;
+    height: 106rpx;
+    padding-top: 20rpx;
+    padding-left: 37rpx;
+    padding-right: 37rpx;
+    color: #FF9906;
+    font-size: 26rpx;
+    background:rgba(255,235,205,1);
+}
+.form-box{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+}
+.form{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
+.idea-content{
+    width: 100%;
+    height: 400rpx;
+}
+.section{
+    width: 100%;
+    height: 100rpx;
+    border-bottom: 1px solid #F2F2F2;
+}
+.form-title{
+    width: 10%;
+    float: left;
+    margin-right: 5%;
+    height: 30rpx;
+    padding-top: 35rpx;
+    color: #999999;
+    font-size: 28rpx;
+}
+.form-content{
+    width: 85%;
+    height: 30rpx;
+    margin-top: 35rpx;
+    float: left;
+}
+.section::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.input-text{
+    color: #DCDCDC;
+    font-size: 28rpx;
+}
+.section-area{
+    margin-top: 60rpx;
+}
+.section-num{
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #FF9906;
+    font-size: 28rpx;
+    text-align: right;
+}
+.file{
+    width: 154rpx;
+    height: 154rpx;
+    float: left;
+    margin-right: 10rpx;
+}
+.form::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.file-attach{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.footer{
+    width: 100%;
+    height: 100rpx;
+    background: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+}
+.buy{
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-align: center;
+    line-height: 100rpx !important;
+    color: #FFFFFF;
+    background: #FF9906;
+    font-size: 34rpx;
+    font-weight: bold;
+    padding:0 !important;
+    border-radius: 0 !important;
+}
+.userinfo{
+    color: #222222;
+    font-size: 30rpx;
+    font-weight: bold;
+    padding-right: 32rpx;
+    line-height: 100rpx;
+}
+.commodity-cover{
+    width: 30%;
+    height: 218rpx;
+    float: left;
+}
+.commodity-info{
+    width: 70%;
+    height: 218rpx;
+    float: left;
+}
+.form::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.cover{
+    width: 160rpx;
+    height: 160rpx;
+    object-fit: cover;
+    margin-top: 29rpx;
+}
+.info{
+    width: 100%;
+    height: 160rpx;
+    margin-top: 29rpx;
+}
+.commodity-name{
+    width: 100%;
+    height: 100rpx;
+    color: #222222;
+    font-size: 30rpx;
+    line-height: 42rpx;
+}
+.commodity-price{
+    width: 100%;
+    height: 100rpx;
+}
+.commodity-price-num{
+    font-size: 46rpx;
+    padding-right: 10rpx;
+    color: #FF9906;
+    font-weight: bold;
+}
+.commodity-price-unit{
+    font-size: 26rpx;
+    color: #FF9906;
+    font-weight: bold;
+}
+.footer-left{
+    width: 60%;
+    height: 100%;
+    line-height: 100rpx;
+    float: left;
+}
+.footer-right{
+    width: 40%;
+    height: 100%;
+    float: left;
+}
+.footer::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.total-name{
+    padding-left: 30rpx;
+    color: #222222;
+    font-size: 30rpx;
+}

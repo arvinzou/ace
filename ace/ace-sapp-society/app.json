@@ -11,10 +11,9 @@
     "page/myActivity/index",
     "page/releaseIdea/index",
     "page/historyOrder/index",
-    "page/myLive/index", 
-    "page/partyBuilding/index",
-    "page/activityList/index",
-    "page/style/index"
+    "page/commodity/index",
+    "page/site/index",
+    "page/settlement/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -52,13 +51,7 @@
         "iconPath": "image/icon_个人中心_未选中.png",
         "selectedIconPath": "image/icon_个人中心_选中.png",
         "text": "个人中心"
-      },
-      {
-        "pagePath": "page/style/index",
-        "iconPath": "image/icon_个人中心_未选中.png",
-        "selectedIconPath": "image/icon_个人中心_选中.png",
-        "text": "样式"
-    }
+      }
     ]
   },
   "networkTimeout": {
