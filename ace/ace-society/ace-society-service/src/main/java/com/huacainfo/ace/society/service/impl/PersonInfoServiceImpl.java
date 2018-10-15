@@ -15,7 +15,9 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.PersonInfoDao;
+import com.huacainfo.ace.society.dao.PersonOrgRelationDao;
 import com.huacainfo.ace.society.model.PersonInfo;
+import com.huacainfo.ace.society.model.PersonOrgRelation;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.PersonInfoService;
 import com.huacainfo.ace.society.vo.PersonInfoQVo;
@@ -42,6 +44,8 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private AuditRecordService auditRecordService;
+    @Autowired
+    private PersonOrgRelationDao personOrgRelationDao;
 
     /**
      * @throws
@@ -90,11 +94,17 @@ public class PersonInfoServiceImpl implements PersonInfoService {
             return new MessageResponse(1, "手机号不能为空！");
         }
 
-        o.setId(StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId());
+        String personId = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
+        o.setId(personId);
 
         int temp = this.personInfoDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "手机号码重复！");
+        }
+
+        //组织关系绑定
+        if (StringUtil.isNotEmpty(o.getOrgId())) {
+            bindOrgRelation(o, userProp);
         }
 
         o.setCreateDate(new Date());
@@ -105,6 +115,27 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         this.dataBaseLogService.log("添加个人信息", "个人信息", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加个人信息完成！");
+    }
+
+    /**
+     * 组织关系绑定
+     *
+     * @param o
+     * @param userProp
+     * @return
+     */
+    private MessageResponse bindOrgRelation(PersonInfo o, UserProp userProp) {
+        PersonOrgRelation relation = new PersonOrgRelation();
+        relation.setId(GUIDUtil.getGUID());
+        relation.setPersonId(o.getId());
+        relation.setOrgId(o.getOrgId());
+        relation.setCreateDate(new Date());
+        relation.setStatus("1");
+        relation.setCreateUserName(userProp.getName());
+        relation.setCreateUserId(userProp.getUserId());
+        personOrgRelationDao.insert(relation);
+
+        return new MessageResponse(ResultCode.SUCCESS, "绑定成功");
     }
 
     /**

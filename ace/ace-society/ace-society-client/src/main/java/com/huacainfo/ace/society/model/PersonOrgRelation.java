@@ -4,38 +4,15 @@ import com.huacainfo.ace.common.model.BaseModel;
 
 import java.util.Date;
 
-public class SocietyOrgInfo extends BaseModel {
+public class PersonOrgRelation extends BaseModel {
     private String id;
 
-    private String orgName;
-    /**
-     * 1-党组织 2-其他社会组织
-     */
-    private String orgType;
+    private String personId;
 
-    private String orgAddr;
-
-    private String orgCover;
-
-    private String orgSummary;
-
-    private String contactPerson;
-
-    private String contactPhone;
-
-    private Integer accPoints;
-
-    private Integer validPoints;
+    private String orgId;
 
     private String remark;
-    /**
-     * 状态
-     * 0-删除
-     * 1-暂存
-     * 2-提交审核
-     * 3-审核通过
-     * 4-审核驳回
-     */
+
     private String status;
 
     private String createUserId;
@@ -58,76 +35,20 @@ public class SocietyOrgInfo extends BaseModel {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getOrgName() {
-        return orgName;
+    public String getPersonId() {
+        return personId;
     }
 
-    public void setOrgName(String orgName) {
-        this.orgName = orgName == null ? null : orgName.trim();
+    public void setPersonId(String personId) {
+        this.personId = personId == null ? null : personId.trim();
     }
 
-    public String getOrgType() {
-        return orgType;
+    public String getOrgId() {
+        return orgId;
     }
 
-    public void setOrgType(String orgType) {
-        this.orgType = orgType == null ? null : orgType.trim();
-    }
-
-    public String getOrgAddr() {
-        return orgAddr;
-    }
-
-    public void setOrgAddr(String orgAddr) {
-        this.orgAddr = orgAddr == null ? null : orgAddr.trim();
-    }
-
-    public String getOrgCover() {
-        return orgCover;
-    }
-
-    public void setOrgCover(String orgCover) {
-        this.orgCover = orgCover == null ? null : orgCover.trim();
-    }
-
-    public String getOrgSummary() {
-        return orgSummary;
-    }
-
-    public void setOrgSummary(String orgSummary) {
-        this.orgSummary = orgSummary == null ? null : orgSummary.trim();
-    }
-
-    public String getContactPerson() {
-        return contactPerson;
-    }
-
-    public void setContactPerson(String contactPerson) {
-        this.contactPerson = contactPerson == null ? null : contactPerson.trim();
-    }
-
-    public String getContactPhone() {
-        return contactPhone;
-    }
-
-    public void setContactPhone(String contactPhone) {
-        this.contactPhone = contactPhone == null ? null : contactPhone.trim();
-    }
-
-    public Integer getAccPoints() {
-        return accPoints;
-    }
-
-    public void setAccPoints(Integer accPoints) {
-        this.accPoints = accPoints;
-    }
-
-    public Integer getValidPoints() {
-        return validPoints;
-    }
-
-    public void setValidPoints(Integer validPoints) {
-        this.validPoints = validPoints;
+    public void setOrgId(String orgId) {
+        this.orgId = orgId == null ? null : orgId.trim();
     }
 
     public String getRemark() {
