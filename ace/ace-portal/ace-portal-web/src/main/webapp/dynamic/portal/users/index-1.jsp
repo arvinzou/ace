@@ -1,358 +1,566 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<!--[if IE 8]>
-<html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]>
-<html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en">
-<!--<![endif]-->
+<html lang="cn">
 <head>
-    <meta charset="utf-8"/>
-    <title>${cfg.sys_name}</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="${cfg.sys_name}"
-          name="description"/>
-    <meta content="" name="author"/>
-    <script type="text/javascript">
-	var contextPath = '${pageContext.request.contextPath}';
-	var portalType='${SESSION_USERPROP_KEY.cfg.portalType}';
-	var layoutTopHeight=0;
-	var activeSyId ='${SESSION_USERPROP_KEY.activeSyId}';
-	var fastdfs_server='${cfg.fastdfs_server}';
-	var default_page_list=[${cfg.default_page_list}];
-    var cmenu='${param.id}';
-    </script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/system/getUserProp.do"></script>
-    <!-- bootstrap & fontawesome -->
-    <script
-            src="${pageContext.request.contextPath}/content/common/js/base.js?version=${cfg.version}"  defer="defer"></script>
-    <!-- basic scripts -->
-    <!--[if lte IE 8]>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/content/common/assets/js/gz/jquery1x.min.js?version=${cfg.version}"  defer="defer"></script>
-    <![endif]-->
-    <script type="text/javascript">
-			window.jQuery || document.write("<script  src='${pageContext.request.contextPath}/content/common/assets/js/gz/jquery.min.js?version=${cfg.version}'>"+"<"+"/script>");
-		</script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/system/getButtonAuthority.do?id=${param.id}"></script>
-
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet"
-          type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/components.min.css" rel="stylesheet"
-          id="style_components" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/global/css/plugins.min.css" rel="stylesheet"
-          type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout/css/layout.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout/css/themes/darkblue.min.css"
-          rel="stylesheet" type="text/css" id="style_color"/>
-    <link href="${pageContext.request.contextPath}/content/common/assets/layouts/layout/css/custom.min.css"
-          rel="stylesheet" type="text/css"/>
-    <link rel="shortcut icon" href="favicon.ico"/>
-
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/themes/gray/easyui.css?version=${cfg.version}">
-    <link rel="stylesheet" type="text/css"
-          href="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
-
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/assets/css/ace-fonts.css?version=${cfg.version}" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/ace-ie8.min.css?version=${cfg.version}" />
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/content/common/assets/css/ui.jqgrid.css?version=${cfg.version}" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/ui.multiselect.css?version=${cfg.version}" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}" />
-
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>user</title>
 </head>
+<jsp:include page="../../common/common.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
 
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
-<div class="page-wrapper">
-    <div class="page-header navbar navbar-fixed-top">
-        <div class="page-header-inner ">
-            <div class="page-logo">
-                <a href="#">
-                    <img src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/img/logo.png"
-                         alt="logo" class="logo-default"/> </a>
-                <div class="menu-toggler sidebar-toggler" onclick="setTimeout('autoWidth()',100)">
-                    <span></span>
-                </div>
-            </div>
-
-            <a href="#" class="navbar-brand" style="color:#FFFFFF">
-                <small>
-
-                    ${cfg.sys_name}${cfg.version}
-                </small>
-            </a>
-            <div class="top-menu">
-                <ul class="nav navbar-nav pull-right">
-                    <li class="dropdown dropdown-user">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
-                           data-close-others="true">
-                            <img alt="" class="img-circle"
-                                 src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/img/avatar3_small.jpg"/>
-                            <span class="username username-hide-on-mobile"> ${SESSION_USERPROP_KEY.name} </span>
-                            <i class="fa fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-default">
-                            <li><a href="javascript:userCfg();">
-                                <i class="ace-icon fa fa-cog"></i>
-                                个性化配置
-                            </a></li>
-                            <li>
-                                <a data-target="#stack1" data-toggle="modal">
-                                    <i class="ace-icon fa fa-key"></i> 密码修改
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-
-                            <li>
-                                <a href="${pageContext.request.contextPath}/dynamic/portal/security/loginOut.jsp">
-                                    <i class="icon-key"></i> 安全退出 </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-
-    <div class="page-container">
-        <div class="page-sidebar-wrapper">
-
-            <div class="page-sidebar navbar-collapse collapse">
-                <ul id="menu" class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false"
-                    data-auto-scroll="true"
-                    data-slide-speed="200" style="padding-top: 0px">
-
-                </ul>
-            </div>
-        </div>
-        <div class="page-content-wrapper">
-
-
-
-
-<!--start-->
-            <div class="page-content" style="min-height: 1240px;">
-
-                <div class="widget-box" id="widget-box">
-                    <div class="widget-header">
-                        <h5 class="widget-title smaller">用户管理</h5>
-
-                        <div class="widget-toolbar"></div>
-                    </div>
-
-                    <div class="widget-body">
-                        <div class="widget-main padding-6">
-                            <form action="#" id="fm-search">
-                                <%-- 地区： <input id="cc2" name="areaCode"
-                                                class="easyui-combotree"
-                                                data-options="url:'${pageContext.request.contextPath}/system/selectProvinceTreeList.do',method:'get',animate: true,
-                lines:false,"
-                                                style='width: 200px; line-height: 25px; height: 25px;'> <a
-                                    href="javascript:clearAreaCode()">清除</a>  --%>
-                                姓名： <input name="name" type="text" style="width: 200px;height:25px" />
-                                归属部门：
-                                <input name="departmentId" class="easyui-combotree"
-                                       data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do?id=01',method:'get',animate: true,
-                lines:false,"
-                                       style='width: 200px; line-height: 25px; height: 25px;'>
-                                <button class="btn btn-info" id="btn-search"
-                                        authority="${pageContext.request.contextPath}/users/findUsersList.do">
-                                    <i
-                                            class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-                                </button>
-
-                            </form>
-                            <div class="space10"></div>
-                            <div id="toolbar" class="toolbar">
-
-                                <button class="btn btn-info" id="btn-view-add"
-                                        authority="${pageContext.request.contextPath}/users/insertUsers.do">
-                                    <i
-                                            class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                                </button>
-                                <button class="btn btn-info" id="btn-view-edit"
-                                        authority="${pageContext.request.contextPath}/users/updateUsers.do">
-                                    <i
-                                            class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                                </button>
-                                <button class="btn btn-purple" id="btn-view-da"
-                                        authority="${pageContext.request.contextPath}/users/insertUsersRole.do">
-                                    <i
-                                            class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
-                                </button>
-                                <button class="btn btn-warning" id="btn-view-initpwd"
-                                        authority="${pageContext.request.contextPath}/users/updateUsersForInitPassword.do">
-                                    <i
-                                            class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
-                                </button>
-                                <button class="btn btn-warning" id="btn-view-del"
-                                        authority="${pageContext.request.contextPath}/users/updateUsersStautsByPrimaryKey.do">
-                                    <i
-                                            class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                                </button>
-                                <button class="btn btn-info" id="btn-view-import"
-                                        authority="${pageContext.request.contextPath}/users/importXls.do">
-                                    <i
-                                            class="ace-icon glyphicon glyphicon-upload  align-middle bigger-125 icon-on-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <table id="grid-table"></table>
-
-                <div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
-            </div>
-            <!--end--->
-        </div>
-    </div>
-</div>
-<div id="stack1" class="modal fade" tabindex="-1" data-width="300">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">密码修改</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <form id="fm-password">
-                            <fieldset>
-                                新设密码： <input id="password" type="password" style="width: 200px;"/>
-                            </fieldset>
-                            <fieldset>
-                                重复输入： <input id="repassword" type="password" style="width: 200px;"/>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn blue" onclick="submitform()">提交</button>
-                <button type="button" data-dismiss="modal" class="btn red">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--[if lt IE 9]>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/respond.min.js" defer="defer"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/excanvas.min.js" defer="defer"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/ie8.fix.min.js" defer="defer"></script>
-<![endif]-->
-
-<script src="${pageContext.request.contextPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js"
-        type="text/javascript" defer="defer"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/global/scripts/app.min.js"
-        type="text/javascript" defer="defer"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/layouts/layout/scripts/layout.min.js"
-        type="text/javascript" defer="defer"></script>
-<script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/ui-modals.min.js"
-        type="text/javascript" defer="defer"></script>
-<script
-        src="${pageContext.request.contextPath}/content/common/assets/js/gz/jquery-ui.min.js?version=${cfg.version}" defer="defer"></script>
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}" defer="defer"></script>
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/main/menu.js?version=${cfg.version}" defer="defer"></script>
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/main/portal.js?version=${cfg.version}" defer="defer"></script>
-
-
-<script
-        src="${pageContext.request.contextPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}" defer="defer"></script>
-
-<script
-        src="${pageContext.request.contextPath}/content/common/assets/js/gz/jquery.jqGrid.js?version=${cfg.version}" defer="defer"></script>
-
-<!--
-<script
-   src="${pageContext.request.contextPath}/content/common/assets/js/uncompressed/jqGrid/jquery.jqGrid.js?version=6"></script>
-   -->
-<script
-        src="${pageContext.request.contextPath}/content/common/assets/js/uncompressed/jqGrid/ui.multiselect.js?version=${cfg.version}" defer="defer"></script>
-
-<script
-        src="${pageContext.request.contextPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}" defer="defer"></script>
-
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/users/config.js?version=${cfg.version}" defer="defer"></script>
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/users/model.js?version=${cfg.version}" defer="defer"></script>
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/users/controller.js?version=${cfg.version}" defer="defer"></script>
-<script
-        src="${pageContext.request.contextPath}/content/portal/js/users/view.js?version=${cfg.version}" defer="defer"></script>
-
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/content/common/js/jquery.form.js?version=${cfg.version}" defer="defer"></script>
-
-<script type="text/javascript"
-        src="${pageContext.request.contextPath}/content/common/js/authority.js?version=${cfg.version}" defer="defer"></script>
-<script type="text/javascript">
-		function checkPwd() {
-			var passwd = '${SystemUser.users.password}';
-			if (passwd == '4297F44B13955235245B2497399D7A93'
-					|| passwd == '4297f44b13955235245b2497399d7a93') {
-				alert("${SystemUser.users.name}，你好！您目前使用的是默认密码为了确保安全，请您及时更换密码！");
-				$('#stack1').modal('show')
-			}
-		}
-		function autoWidth() {
-			$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-
-		}
-
-
-</script>
-<style>
-
- .page-content-wrapper .page-content {
-    margin-left: 200px;
-    margin-top: 0;
-    min-height: 600px;
-    padding: 5px 5px 5px;
-}
-.page-sidebar {
-    width: 200px;
-    float: left;
-    position: relative;
-    margin-right: -100%;
-}
-.tabs-header, .tabs-tool {
-    background-color: #ffffff;
-}
-a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
-    -webkit-border-radius: 0!important;
-    -moz-border-radius: 0!important;
-    border-radius: 2px!important;
-}
-
+<style type="text/css">
+		.excel{ background-color:#999; font-size:13px;}
+		.excel td{ background-color:#fff; white-space:nowrap;}
+		.excel th{ background-color:#E7E7E7; font-weight:normal;}
 </style>
-</body>
+<body>
+<div class="page-content">
+    <div class="widget-box" id="widget-box">
+        <div class="widget-header">
+            <h5 class="widget-title smaller">设置查询条件</h5>
 
+            <div class="widget-toolbar"></div>
+        </div>
+
+        <div class="widget-body">
+            <div class="widget-main padding-6">
+                <form action="#" id="fm-search">
+                    <%-- 地区： <input id="cc2" name="areaCode"
+                                    class="easyui-combotree"
+                                    data-options="url:'${pageContext.request.contextPath}/system/selectProvinceTreeList.do',method:'get',animate: true,
+                lines:false,"
+                                    style='width: 200px; line-height: 25px; height: 25px;'> <a
+                        href="javascript:clearAreaCode()">清除</a>  --%>
+                    姓名： <input name="name" type="text" style="width: 200px;height:25px" />
+                    归属部门：
+                    <input name="departmentId" class="easyui-combotree"
+                           data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do?id=01',method:'get',animate: true,
+                lines:false,"
+                           style='width: 200px;'>
+                    <button class="btn btn-info" id="btn-search"
+                            authority="${pageContext.request.contextPath}/users/findUsersList.do">
+                        <i
+                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+
+                </form>
+                <div class="space10"></div>
+                <div id="toolbar" class="toolbar">
+
+                    <button class="btn btn-info" id="btn-view-add"
+                            authority="${pageContext.request.contextPath}/users/insertUsers.do">
+                        <i
+                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-info" id="btn-view-edit"
+                            authority="${pageContext.request.contextPath}/users/updateUsers.do">
+                        <i
+                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-purple" id="btn-view-da"
+                            authority="${pageContext.request.contextPath}/users/insertUsersRole.do">
+                        <i
+                                class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-warning" id="btn-view-initpwd"
+                            authority="${pageContext.request.contextPath}/users/updateUsersForInitPassword.do">
+                        <i
+                                class="ace-icon glyphicon  glyphicon-cog  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-warning" id="btn-view-del"
+                            authority="${pageContext.request.contextPath}/users/updateUsersStautsByPrimaryKey.do">
+                        <i
+                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <button class="btn btn-info" id="btn-view-import"
+                            authority="${pageContext.request.contextPath}/users/importXls.do">
+                        <i
+                                class="ace-icon glyphicon glyphicon-upload  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table id="grid-table"></table>
+
+    <div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
+
+
+    <div id="dialog-message" class="hide">
+        <table >
+            <tr>
+                <td align="center" valign="top">
+                    <table id="allrole-grid-table"></table>
+                    <div id="allrole-grid-pager"></div>
+                </td>
+                <td align="center" valign="middle">
+                    <button class="btn btn-info" id="btn-view-da-add"
+                            authority="${pageContext.request.contextPath}/users/insertUsersRole.do">
+                        分配<i
+                            class="ace-icon fa   fa-angle-double-right  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                    <div style="height:3px"></div>
+                    <button class="btn btn-info" id="btn-view-da-del"
+                            authority="${pageContext.request.contextPath}/users/insertUsersRole.do">
+                        移除<i
+                            class="ace-icon fa  fa-angle-double-left  align-middle bigger-125 icon-on-right"></i>
+                    </button>
+                </td>
+                <td align="center" valign="top">
+                    <table id="myrole-grid-table"></table>
+                    <div id="myrole-grid-pager"></div>
+                </td>
+            </tr>
+        </table>
+
+
+
+    </div>
+    <div id="dialog-message-initpwd" class="hide">
+        <form action="/users/updateUsersForInitPassword.do" id="fm-initpwd">
+            <fieldset>
+                初始密码： <input id="init_passwd" type="password" style="width: 200px;" />
+            </fieldset>
+            <fieldset>
+                重复输入： <input id="init_rpasswd" type="password"
+                             style="width: 200px;" />
+            </fieldset>
+        </form>
+    </div>
+    <div id="dialog-confirm" class="hide">
+        <div class="alert alert-info bigger-110">
+            重新分配角色后，分配此角色的用户将获取新的权限.</div>
+
+        <div class="space-6"></div>
+
+        <p class="bigger-110 bolder center grey">
+            <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i> 您确定吗?
+        </p>
+    </div>
+    <div id="dialog-confirm-initpwd" class="hide">
+        <div class="alert alert-info bigger-110">初始密码后，系统将启用新的密码.</div>
+
+        <div class="space-6"></div>
+
+        <p class="bigger-110 bolder center grey">
+            <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i> 您确定吗?
+        </p>
+    </div>
+    <div id="dialog-message-weixin" class="hide">
+        <div>
+            昵称： <input type="text" name="q" id="q1"/>
+            <button class="btn btn-info" id="btn-search-weixin"
+                    authority="false">
+                查询
+                <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+            </button>
+        </div>
+        <div id="box-weixin">
+
+        </div>
+    </div>
+    <div id="dialog-message-sapp" class="hide">
+        <div>
+            昵称： <input type="text" name="q" id="q2"/>
+            <button class="btn btn-info" id="btn-search-sapp"
+                    authority="false">
+                查询
+                <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
+            </button>
+        </div>
+        <div id="box-sapp">
+
+        </div>
+    </div>
+</div>
+<jsp:include page="../../common/footer-1.jsp" />
+<script src="${portalPath}/content/common/assets/js/uncompressed/jquery.colorbox.js"></script>
+<script
+        src="${pageContext.request.contextPath}/content/portal/js/users/config.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/portal/js/users/model.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/portal/js/users/controller.js?version=${cfg.version}"></script>
+<script
+        src="${pageContext.request.contextPath}/content/portal/js/users/view.js?version=${cfg.version}"></script>
+<jsp:include page="../../common/footer-2.jsp" />
+
+<script type="text/javascript">
+window.onresize = function () {
+	autoSize();
+}
+parent.onresize = function () {
+	autoSize();
+}
+function autoSize(){
+	//parent.autoWidth();
+	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
+	$(cfg.grid_selector).jqGrid('setGridHeight',window.innerHeight-layoutTopHeight);
+
+}
+</script>
+
+<div id="dialog-message-upload" class="hide">
+
+    <div id="uploader">
+        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+    </div>
+
+    <div style="margin:5px">
+
+        <a href="rs.xls" style="color:red">下载模板</a>.<br>
+
+
+    </div>
+
+
+
+</div>
+<script
+        src="${pageContext.request.contextPath}/content/portal/js/users/upload.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css" />
+<style>
+        .layout-user {
+            width: 80px;
+            height: 80px;
+            float: left;
+            margin: 10px 10px 10px;
+            text-align:center;
+        }
+        .photo {
+            height: 60px;
+            max-height:60px;
+            max-width:60px;
+            vertical-align: middle;
+            border-radius:60px;
+        }
+        #cboxContent {
+            background-color: rgb(255, 255, 255);
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+            padding: 5px;
+        }
+        .ace-thumbnails > li {
+            float: left;
+            display: block;
+            position: relative;
+            overflow: hidden;
+            margin: 2px;
+            border-width: 0px;
+            border-style: solid;
+            border-color: #ddd;
+            border-image: initial;
+        }
+
+
+    </style>
+</body>
 </html>
+
+
+
+ function initWeixin(userId) {
+ 	$.ajax({
+ 		type: "get",
+ 		url: contextPath + "/users/selectWxUser.do",
+ 		data: {
+ 			userId: userId
+ 		},
+ 		success: function(rst, textStatus) {
+ 			renderWeixin(rst);
+ 		}
+ 	});
+ }
+
+ function renderWeixin(rst) {
+ 	var html = new Array();
+ 	html.push('<ul class="ace-thumbnails clearfix">');
+ 	$.each($(rst), function(i, o) {
+ 		html.push('<li>');
+ 		html.push('<a href="' + o.headimgurl + '" title="' + o.nickname + '" data-rel="colorbox" class="cboxElement">');
+ 		html.push('<img class="photo" src="' + o.headimgurl + '">');
+ 		html.push('</a>');
+ 		html.push('<div class="tools tools-bottom">');
+ 		html.push('<a href="javascript:delWeixin(\'' + o.unionid + '\')">');
+ 		html.push('<i class="ace-icon fa fa-times red"></i>');
+ 		html.push('</a>');
+ 		html.push('</div>');
+ 		html.push('<div style="text-align:center">');
+ 		html.push(o.nickname);
+ 		html.push('</div>');
+ 		html.push('</li>');
+ 	});
+ 	html.push('<li>');
+ 	html.push(
+ 		'<a href="javascript:false"><img style="padding:20px" alt="60x60" id="btn-image-upload-weixin" class="photo" src="' +
+ 		portalPath + '/content/common/image/add.png"></a>');
+ 	html.push('</li>');
+ 	html.push('</ul>');
+
+
+ 	$("#custom-weixin").html(html.join(""));
+
+ 	var $overflow = '';
+ 	var colorbox_params = {
+ 		rel: 'colorbox',
+ 		reposition: true,
+ 		scalePhotos: true,
+ 		scrolling: false,
+ 		previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+ 		next: '<i class="ace-icon fa fa-arrow-right"></i>',
+ 		close: '&times;',
+ 		current: '{current} of {total}',
+ 		maxWidth: '100%',
+ 		maxHeight: '100%',
+ 		onOpen: function() {
+ 			$overflow = document.body.style.overflow;
+ 			document.body.style.overflow = 'hidden';
+ 		},
+ 		onClosed: function() {
+ 			document.body.style.overflow = $overflow;
+ 		},
+ 		onComplete: function() {
+ 			$.colorbox.resize();
+ 		}
+ 	};
+
+ 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+ 	$('#btn-image-upload-weixin').on('click', function() {
+ 		dialog1 = $("#dialog-message-weixin").removeClass('hide').dialog({
+ 			modal: true,
+ 			width: 750,
+ 			title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>绑定</div></div>",
+ 			title_html: true,
+ 			buttons: [{
+ 				html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+ 				"class": "btn btn-info btn-xs",
+ 				click: function() {
+ 					$(this).dialog("close");
+ 				}
+ 			}]
+ 		});
+ 		$(dialog1).parent().css("top", "1px");
+ 		$(dialog1).css("max-height", window.innerHeight - layoutTopHeight + 50);
+
+ 	});
+ }
+
+ function delWeixin(id) {
+ 	var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+ 	var r = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+ 	$.ajax({
+ 		type: "post",
+ 		url: contextPath + "/users/deleteOpenIdById.do",
+ 		data: {
+ 			userId: r.userId
+ 		},
+ 		success: function(rst, textStatus) {
+ 			initWeixin(r.userId);
+ 		}
+ 	});
+ }
+
+ function insertWeixinUser(unionid, openId) {
+ 	var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+ 	var r = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+ 	$.ajax({
+ 		type: "post",
+ 		url: contextPath + "/users/updateOpenIdById.do",
+ 		data: {
+ 			userId: r.userId,
+ 			openId: unionid
+ 		},
+ 		success: function(rst, textStatus) {
+ 			initWeixin(r.userId);
+ 			$(dialog1).dialog("close");
+ 			$("#dialog-message-weixin").addClass('hide');
+ 		}
+ 	});
+ }
+
+
+ /**********************************************************************************************************************/
+
+
+
+
+ function initSapp(userId) {
+ 	$.ajax({
+ 		type: "get",
+ 		url: contextPath + "/users/selectAppWxUser.do",
+ 		data: {
+ 			userId: userId
+ 		},
+ 		success: function(rst, textStatus) {
+ 			renderSapp(rst);
+ 		}
+ 	});
+ }
+
+ function renderSapp(rst) {
+ 	var html = new Array();
+ 	html.push('<ul class="ace-thumbnails clearfix">');
+ 	$.each($(rst), function(i, o) {
+ 		html.push('<li>');
+ 		html.push('<a href="' + o.avatarUrl + '" title="' + o.nickName + '" data-rel="colorbox" class="cboxElement">');
+ 		html.push('<img class="photo" src="' + o.avatarUrl + '">');
+ 		html.push('</a>');
+ 		html.push('<div class="tools tools-bottom">');
+ 		html.push('<a href="javascript:delSapp(\'' + o.unionId + '\')">');
+ 		html.push('<i class="ace-icon fa fa-times red"></i>');
+ 		html.push('</a>');
+ 		html.push('</div>');
+ 		html.push('<div style="text-align:center">');
+ 		html.push(o.nickName);
+ 		html.push('</div>');
+ 		html.push('</li>');
+ 	});
+ 	html.push('<li>');
+ 	html.push(
+ 		'<a href="javascript:false"><img style="padding:20px" alt="60x60" id="btn-image-upload-sapp" class="photo" src="' +
+ 		portalPath + '/content/common/image/add.png"></a>');
+ 	html.push('</li>');
+ 	html.push('</ul>');
+
+
+ 	$("#custom-sapp").html(html.join(""));
+
+ 	var $overflow = '';
+ 	var colorbox_params = {
+ 		rel: 'colorbox',
+ 		reposition: true,
+ 		scalePhotos: true,
+ 		scrolling: false,
+ 		previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+ 		next: '<i class="ace-icon fa fa-arrow-right"></i>',
+ 		close: '&times;',
+ 		current: '{current} of {total}',
+ 		maxWidth: '100%',
+ 		maxHeight: '100%',
+ 		onOpen: function() {
+ 			$overflow = document.body.style.overflow;
+ 			document.body.style.overflow = 'hidden';
+ 		},
+ 		onClosed: function() {
+ 			document.body.style.overflow = $overflow;
+ 		},
+ 		onComplete: function() {
+ 			$.colorbox.resize();
+ 		}
+ 	};
+
+ 	$('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+ 	$('#btn-image-upload-sapp').on('click', function() {
+ 		dialog2 = $("#dialog-message-sapp").removeClass('hide').dialog({
+ 			modal: true,
+ 			width: 750,
+ 			title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>绑定</div></div>",
+ 			title_html: true,
+ 			buttons: [{
+ 				html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+ 				"class": "btn btn-info btn-xs",
+ 				click: function() {
+ 					$(this).dialog("close");
+ 				}
+ 			}]
+ 		});
+ 		$(dialog2).parent().css("top", "1px");
+ 		$(dialog2).css("max-height", window.innerHeight - layoutTopHeight + 50);
+
+ 	});
+ }
+
+ function delSapp(id) {
+ 	var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+ 	var r = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+ 	$.ajax({
+ 		type: "post",
+ 		url: contextPath + "/users/deleteAppOpenIdById.do",
+ 		data: {
+ 			userId: r.userId
+ 		},
+ 		success: function(rst, textStatus) {
+ 			initSapp(r.userId);
+ 		}
+ 	});
+ }
+
+ function insertSappUser(unionid, openId) {
+ 	var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+ 	var r = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+ 	$.ajax({
+ 		type: "post",
+ 		url: contextPath + "/users/updateUserAppOpenId.do",
+ 		data: {
+ 			userId: r.userId,
+ 			appOpenId: unionid
+ 		},
+ 		success: function(rst, textStatus) {
+ 			initSapp(r.userId);
+ 			$(dialog2).dialog("close");
+ 			$("#dialog-message-sapp").addClass('hide');
+ 		}
+ 	});
+ }
+
+$('#btn-search-weixin').on('click', function() {
+ 		$.ajax({
+ 			type: "post",
+ 			url: contextPath + "/users/selectAllWxUserList.do",
+ 			data: {
+ 				role: "",
+ 				nickname: $("#q1").val()
+ 			},
+ 			success: function(rst, textStatus) {
+ 				var html = [];
+ 				$.each($(rst), function(i, o) {
+ 					html.push('<div class="layout-user">');
+ 					html.push('<a href="javascript:insertWeixinUser(\'' + o.unionid + '\',\'' + o.openid + '\')">');
+ 					html.push('<img  class="photo" src="' + o.headimgurl + '">');
+ 					html.push('</a>');
+ 					html.push('<div style="text-align:center">');
+ 					html.push(o.nickname);
+ 					html.push('</div>');
+ 					html.push('</div>');
+ 				});
+ 				$("#box-weixin").html(html.join(""));
+ 			}
+ 		});
+ 	});
+
+
+ 	$('#btn-search-sapp').on('click', function() {
+ 		$.ajax({
+ 			type: "post",
+ 			url: contextPath + "/users/selectAllAppWxUserList.do",
+ 			data: {
+ 				role: "",
+ 				nickName: $("#q2").val()
+ 			},
+ 			success: function(rst, textStatus) {
+ 				var html = [];
+ 				$.each($(rst), function(i, o) {
+ 					html.push('<div class="layout-user">');
+ 					html.push('<a href="javascript:insertSappUser(\'' + o.unionId + '\',\'' + o.openId + '\')">');
+ 					html.push('<img  class="photo" src="' + o.avatarUrl + '">');
+ 					html.push('</a>');
+ 					html.push('<div style="text-align:center">');
+ 					html.push(o.nickName);
+ 					html.push('</div>');
+ 					html.push('</div>');
+ 				});
+ 				$("#box-sapp").html(html.join(""));
+ 			}
+ 		});
+ 	});

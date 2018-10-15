@@ -1,1 +1,175 @@
-/* page/index/index.wxss */
+.index {
+    background: #f6f6f6;
+}
+
+image {
+    width: 100%;
+    height: 100%;
+}
+
+view {
+    box-sizing: border-box;
+}
+
+.whiteBg {
+    background: #fff;
+}
+
+.separate {
+    margin-bottom: 20rpx;
+}
+
+.head .box {
+    margin: 0 30rpx;
+    padding: 30rpx 0rpx;
+    display: flex;
+    font-size: 26rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(102, 102, 102, 1);
+}
+
+.head .box .cover {
+    width: 270rpx;
+    height: 160rpx;
+    overflow: hidden;
+    margin-right: 28rpx;
+    position: relative;
+    font-size: 22rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+}
+
+.head .box .cover .text {
+    padding-top: 30rpx;
+    width: 270rpx;
+    height: 160rpx;
+    position: absolute;
+    top: 0;
+    background: rgba(30, 30, 30, 0.3);
+}
+
+.head .box .cover .text .time {
+    font-size: 26rpx;
+    margin-top: 14rpx;
+}
+
+.head .box .cover .text .time>text {
+    display: inline-block;
+    height: 50rpx;
+    width: 40rpx;
+    background: rgba(255, 153, 6, 1);
+    line-height: 50rpx;
+    border-radius: 4rpx;
+}
+
+.head .box .info {
+    flex-grow: 1;
+    width: 392rpx;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.head .box .info .texts {
+    line-height: 40rpx;
+}
+
+.head .box .info .title {
+    font-size: 30rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(34, 34, 34, 1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.head .box .info .peoples {
+}
+
+.partyTag {
+    width: 82rpx;
+    height: 30rpx;
+    text-align: center;
+    display: inline-block;
+    border: 2rpx solid rgba(255, 127, 127, 1);
+    border-radius: 4px;
+    font-size: 20rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(246, 82, 70, 1);
+    margin: 5rpx 10rpx 0 0;
+    vertical-align: top;
+}
+
+.organization, .pastActivity {
+    padding: 30rpx 30rpx;
+}
+
+.organization .tilte, .pastActivity .tilte {
+    font-size: 32rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(34, 34, 34, 1);
+    margin-bottom: 30rpx;
+}
+
+.organization .swiper {
+    height: 240rpx;
+    width: 100%;
+}
+
+.organization .swiper  swiper {
+    height: 100%;
+    width: 100%;
+}
+
+.organization .swiper .item {
+    width: 490rpx;
+    height: 240rpx;
+    position: relative;
+}
+
+.organization .swiper .item .name {
+    position: absolute;
+    bottom: 20rpx;
+    font-size: 26rpx;
+    font-family: PingFang-SC-Bold;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    width: 100%;
+}
+
+.pastActivity .lists {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.pastActivity .activity {
+    width: 333rpx;
+    margin-bottom: 20rpx;
+}
+
+.pastActivity .activity .image {
+    width: 333rpx;
+    height: 333rpx;
+    overflow: hidden;
+}
+
+.pastActivity .activity .title {
+    font-size: 28rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(34, 34, 34, 1);
+    margin: 20rpx 0 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -14,7 +14,10 @@ import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.RegService;
+import com.huacainfo.ace.society.service.SocietyOrgInfoService;
 import com.huacainfo.ace.society.vo.CustomerVo;
+import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
+import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +42,8 @@ public class WRegController extends SocietyBaseController {
 
     @Autowired
     private TaskCmccService taskCmccService;
+    @Autowired
+    private SocietyOrgInfoService societyOrgInfoService;
 
     @Autowired
     private RegService regService;
@@ -100,7 +106,6 @@ public class WRegController extends SocietyBaseController {
     public ResultResponse register(String regType, String mobile, String code,
                                    String jsonData,
                                    String unionId) throws Exception {
-
         WxUser wxUser = getCurWxUser();
         if (wxUser == null) {
             return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
@@ -108,7 +113,6 @@ public class WRegController extends SocietyBaseController {
         if (!StringUtil.areNotEmpty(regType, mobile, code, jsonData)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
-
         //验证码校验
 //        String sessionCode = (String) this.getRequest().getSession().getAttribute("j_captcha_cmcc_" + mobile);
 //        logger.debug("[society]RegController.register=>mobile:{},code:{},sessionCode:{}", mobile, code, sessionCode);
@@ -167,6 +171,30 @@ public class WRegController extends SocietyBaseController {
         if (null == vo) {
             return new ResultResponse(ResultCode.FAIL, "用户尚未注册");
         }
+
+        return new ResultResponse(ResultCode.SUCCESS, "信息查询成功", vo);
+    }
+
+
+    /**
+     * 获取用户信息
+     *
+     * @param unionId 唯一主键
+     * @return ResultResponse
+     */
+    @RequestMapping("/findOrgList")
+    public ResultResponse orgList(String unionId) throws Exception {
+        //公众号 or 小程序 获取unionId
+
+//        WxUser wxUser = getCurWxUser();
+//        if (wxUser == null) {
+//            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
+//        }
+
+        SocietyOrgInfoQVo condition = new SocietyOrgInfoQVo();
+        condition.setStatus("3");
+        List<SocietyOrgInfoVo> vo = societyOrgInfoService.findList(condition, 0, 100, "");
+
 
         return new ResultResponse(ResultCode.SUCCESS, "信息查询成功", vo);
     }

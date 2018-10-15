@@ -13,9 +13,10 @@ public class Activity extends BaseModel {
 
     private String title;
 
+    /**1、公益活动，2、普及活动，3创意活动，4、党建活动*/
     private String category;
 
-    private String summary;
+    private String mode;
 
     private String purpose;
 
@@ -133,12 +134,12 @@ public class Activity extends BaseModel {
         this.category = category == null ? null : category.trim();
     }
 
-    public String getSummary() {
-        return summary;
+    public String getMode() {
+        return mode;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
+    public void setMode(String mode) {
+        this.mode = mode == null ? null : mode.trim();
     }
 
     public String getCoverUrl() {

@@ -28,7 +28,14 @@ public class SocietyOrgInfo extends BaseModel {
     private Integer validPoints;
 
     private String remark;
-
+    /**
+     * 状态
+     * 0-删除
+     * 1-暂存
+     * 2-提交审核
+     * 3-审核通过
+     * 4-审核驳回
+     */
     private String status;
 
     private String createUserId;

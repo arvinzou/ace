@@ -6,7 +6,7 @@
             </view>
             <view class='title'>周末太阳山爬山活动志愿者招募志愿者招…周末太阳山爬山活动志愿者招募志愿者招… </view>
             <view class='startTime'>活动开始时间：2018-09-06 19:30</view>
-            <view class='tag taging'>报名进行中</view>
+            <view class='statusTag statusTaging'>报名进行中</view>
         </view>
     </view>
     <view class='singleActivity'>
@@ -29,4 +29,6 @@
             <view class='tag taging'>报名进行中</view>
         </view>
     </view>
+    <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
+    <view class="loading complete" hidden="{{!LoadOver}}">已加载全部</view>
 </view>
