@@ -23,6 +23,26 @@ private List<ActivityDetailVo>  activityDetailVoList;
 
     private int signNum;
 
+
+    private String headimgurl;
+    private String orgName;
+
+    public String getHeadimgurl() {
+        return headimgurl;
+    }
+
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
+    }
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
+
     public int getTotal() {
         return total;
     }

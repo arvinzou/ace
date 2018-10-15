@@ -6,6 +6,7 @@
     <result column="activityId" jdbcType="VARCHAR" property="activityId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="subTitle" jdbcType="VARCHAR" property="subTitle" />
+    <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
@@ -22,12 +23,12 @@
   <resultMap type="com.huacainfo.ace.society.vo.ActivityReportVo" id="voResultMap" extends="BaseResultMap"></resultMap>
 
   <sql id="Base_Column_List">
-    id, activityId, title, subTitle, remark, status, createUserId, createUserName, createDate, 
+    id, activityId, title, subTitle, coverUrl, remark, status, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
 
   <sql id="Vo_Column_List">
-    t.id, t.activityId, t.title, t.subTitle, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+    t.id, t.activityId, t.title, t.subTitle,t.coverUrl, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
     t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel
   </sql>
   <sql id="Blob_Column_List">
@@ -41,18 +42,28 @@
     from activity_report
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectByActivityId" parameterType="java.lang.String" resultMap="voResultMap">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from activity_report
+    where activityId = #{activityId,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from activity_report
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.society.model.ActivityReport">
     insert into activity_report (id, activityId, title, 
-      subTitle, remark, status, 
+      subTitle, coverUrl, remark, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
       content)
     values (#{id,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{subTitle,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{subTitle,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
@@ -71,6 +82,9 @@
       </if>
       <if test="subTitle != null">
         subTitle,
+      </if>
+      <if test="coverUrl != null">
+        coverUrl,
       </if>
       <if test="remark != null">
         remark,
@@ -113,6 +127,9 @@
       <if test="subTitle != null">
         #{subTitle,jdbcType=VARCHAR},
       </if>
+      <if test="coverUrl != null">
+        #{coverUrl,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
@@ -154,6 +171,9 @@
       <if test="subTitle != null">
         subTitle = #{subTitle,jdbcType=VARCHAR},
       </if>
+      <if test="coverUrl != null">
+        coverUrl = #{coverUrl,jdbcType=VARCHAR},
+      </if>
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
@@ -189,6 +209,7 @@
     set activityId = #{activityId,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       subTitle = #{subTitle,jdbcType=VARCHAR},
+      coverUrl = #{coverUrl,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -205,6 +226,7 @@
     set activityId = #{activityId,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       subTitle = #{subTitle,jdbcType=VARCHAR},
+      coverUrl = #{coverUrl,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},

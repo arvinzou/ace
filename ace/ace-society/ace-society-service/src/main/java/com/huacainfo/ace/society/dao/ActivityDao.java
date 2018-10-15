@@ -23,6 +23,8 @@ public interface ActivityDao {
 
     ActivityVo selectVoByPrimaryKey(String id);
 
+    ActivityVo selectVoByPrimaryKeyVo(String id);
+
     List<ActivityVo> findList(@Param("condition") ActivityQVo condition,
                               @Param("start") int start,
                               @Param("limit") int limit,

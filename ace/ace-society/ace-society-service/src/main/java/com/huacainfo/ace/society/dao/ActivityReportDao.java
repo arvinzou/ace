@@ -10,6 +10,7 @@ import com.huacainfo.ace.society.vo.ActivityReportVo;
 public interface ActivityReportDao {
 
     ActivityReport selectByPrimaryKey(String id);
+    ActivityReportVo selectByActivityId(String activityId);
 
     int deleteByPrimaryKey(String id);
 

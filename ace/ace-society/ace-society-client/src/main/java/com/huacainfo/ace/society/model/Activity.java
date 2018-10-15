@@ -36,6 +36,9 @@ public class Activity extends BaseModel {
 
     private Integer volunteerNum;
 
+    private Integer clazz;
+
+
     private Integer volunteerPoints;
 
     private Integer parterNum;
@@ -61,6 +64,15 @@ public class Activity extends BaseModel {
     private String content;
 
     private String coinconfigId;
+
+
+    public Integer getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Integer clazz) {
+        this.clazz = clazz;
+    }
 
     public String getCoinconfigId() {
         return coinconfigId;

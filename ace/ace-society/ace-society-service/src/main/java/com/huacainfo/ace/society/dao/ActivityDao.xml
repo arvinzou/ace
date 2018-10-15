@@ -16,6 +16,7 @@
         <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
         <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
         <result column="volunteerNum" jdbcType="INTEGER" property="volunteerNum"/>
+        <result column="clazz" jdbcType="INTEGER" property="clazz"/>
         <result column="volunteerPoints" jdbcType="INTEGER" property="volunteerPoints"/>
         <result column="parterNum" jdbcType="INTEGER" property="parterNum"/>
         <result column="parterPoints" jdbcType="INTEGER" property="parterPoints"/>
@@ -35,7 +36,7 @@
     <resultMap extends="ResultMapWithBLOBs" id="VoResultMap" type="com.huacainfo.ace.society.vo.ActivityVo"></resultMap>
     <sql id="Base_Column_List">
     id, initiatorId, title, category, mode,purpose, location, coverUrl, startSignImgUrl, endSignImgUrl, dendline, startDate, endDate,
-    volunteerNum, volunteerPoints, parterNum, parterPoints, remark, coinconfigId, status, createUserId,
+    volunteerNum,  clazz, volunteerPoints, parterNum, parterPoints, remark, coinconfigId, status, createUserId,
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
     <sql id="Blob_Column_List">
@@ -49,6 +50,18 @@
         from activity
         where id = #{id,jdbcType=VARCHAR}
     </select>
+    <select id="selectVoByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        a.id, a.initiatorId, a.title, a.category, a.mode,a.purpose, a.location, a.coverUrl, a.startSignImgUrl, a.endSignImgUrl, a.dendline, a.startDate, a.endDate,
+        a.volunteerNum, a.clazz, a.volunteerPoints, a.parterNum, a.parterPoints, a.remark, a.coinconfigId, a.status, a.createUserId,
+        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.headimgurl,s.orgName
+        from activity a
+--         LEFT  JOIN  portal.users u ON  a.initiatorId=u.user_id
+        LEFT  JOIN  portal.userinfo i ON  a.initiatorId=i.unionid
+        LEFT JOIN society_org_info s ON s.id=a.initiatorId
+        where a.id = #{id,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -57,6 +70,9 @@
         from activity
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from activity
     where id = #{id,jdbcType=VARCHAR}
@@ -65,7 +81,7 @@
     insert into activity (id, initiatorId, title, 
       category, mode, purpose, location, coverUrl, startSignImgUrl,endSignImgUrl,
       dendline, startDate, endDate, 
-      volunteerNum, volunteerPoints, parterNum, 
+      volunteerNum, clazz, volunteerPoints, parterNum,
       parterPoints, remark, coinconfigId, status,
       createUserId, createUserName, createDate, 
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
@@ -73,7 +89,7 @@
     values (#{id,jdbcType=VARCHAR}, #{initiatorId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{category,jdbcType=CHAR}, #{mode,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{startSignImgUrl,jdbcType=VARCHAR},#{endSignImgUrl,jdbcType=VARCHAR},
       #{dendline,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
-      #{volunteerNum,jdbcType=INTEGER}, #{volunteerPoints,jdbcType=INTEGER}, #{parterNum,jdbcType=INTEGER}, 
+      #{volunteerNum,jdbcType=INTEGER}, #{clazz,jdbcType=INTEGER}, #{volunteerPoints,jdbcType=INTEGER}, #{parterNum,jdbcType=INTEGER},
       #{parterPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},#{coinconfigId,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
@@ -123,6 +139,9 @@
             </if>
             <if test="volunteerNum != null">
                 volunteerNum,
+            </if>
+            <if test="clazz != null">
+                clazz,
             </if>
             <if test="volunteerPoints != null">
                 volunteerPoints,
@@ -207,6 +226,9 @@
             <if test="volunteerNum != null">
                 #{volunteerNum,jdbcType=INTEGER},
             </if>
+            <if test="clazz != null">
+                #{clazz,jdbcType=INTEGER},
+            </if>
             <if test="volunteerPoints != null">
                 #{volunteerPoints,jdbcType=INTEGER},
             </if>
@@ -290,6 +312,9 @@
             <if test="volunteerNum != null">
                 volunteerNum = #{volunteerNum,jdbcType=INTEGER},
             </if>
+            <if test="clazz != null">
+                clazz = #{clazz,jdbcType=INTEGER},
+            </if>
             <if test="volunteerPoints != null">
                 volunteerPoints = #{volunteerPoints,jdbcType=INTEGER},
             </if>
@@ -347,6 +372,7 @@
       startDate = #{startDate,jdbcType=TIMESTAMP},
       endDate = #{endDate,jdbcType=TIMESTAMP},
       volunteerNum = #{volunteerNum,jdbcType=INTEGER},
+      clazz = #{clazz,jdbcType=INTEGER},
       volunteerPoints = #{volunteerPoints,jdbcType=INTEGER},
       parterNum = #{parterNum,jdbcType=INTEGER},
       parterPoints = #{parterPoints,jdbcType=INTEGER},
@@ -377,6 +403,7 @@
       startDate = #{startDate,jdbcType=TIMESTAMP},
       endDate = #{endDate,jdbcType=TIMESTAMP},
       volunteerNum = #{volunteerNum,jdbcType=INTEGER},
+      clazz = #{clazz,jdbcType=INTEGER},
       volunteerPoints = #{volunteerPoints,jdbcType=INTEGER},
       parterNum = #{parterNum,jdbcType=INTEGER},
       parterPoints = #{parterPoints,jdbcType=INTEGER},

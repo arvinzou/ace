@@ -188,7 +188,7 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public SingleResult<ActivityVo> selectActivityByPrimaryKey(String id) throws Exception {
         SingleResult<ActivityVo> rst = new SingleResult<>();
-        ActivityVo activityVo=this.activityDao.selectVoByPrimaryKey(id);
+        ActivityVo activityVo=this.activityDao.selectVoByPrimaryKeyVo(id);
         if(!CommonUtils.isBlank(activityVo.getEndDate())){
             ActivityDetail activityDetail=new ActivityDetail();
             activityDetail.setActivityId(id);
