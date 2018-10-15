@@ -84,6 +84,8 @@ public class CircleController extends SocietyBaseController {
         return this.circleService.insertCircle(obj,imgs);
     }
 
+
+
     /**
      * @throws
      * @Title:updateCircle
@@ -168,15 +170,11 @@ public class CircleController extends SocietyBaseController {
     @RequestMapping(value = "/www/insertCircle")
     @ResponseBody
     public MessageResponse insertCircleWww(String jsons) throws Exception {
-        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
-        if(rst.getStatus()==0){
-            JSONObject json = JSON.parseObject(jsons);
-            json.put("uid",this.getCurWxUser().getUnionId());
-            Circle obj = JSON.parseObject(((JSONObject) json.get("circle")).toJSONString(), Circle.class);
-            List<CircleImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), CircleImg.class);
-            return this.circleService.insertCircle(obj,imgs);
-        }
-        return rst;
+        JSONObject json = JSON.parseObject(jsons);
+        json.put("uid",this.getCurWxUser().getUnionId());
+        Circle obj = JSON.parseObject(((JSONObject) json.get("circle")).toJSONString(), Circle.class);
+        List<CircleImg> imgs = JSON.parseArray(((JSONArray) json.get("imgs")).toJSONString(), CircleImg.class);
+        return this.circleService.insertCircle(obj,imgs);
     }
     /**
      * @throws

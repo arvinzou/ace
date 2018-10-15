@@ -43,7 +43,7 @@ public interface CircleCmtService {
         * @author: 陈晓克
         * @version: 2018-09-20
         */
-        MessageResponse insertCircleCmt(CircleCmt obj,UserProp userProp) throws Exception;
+        MessageResponse insertCircleCmt(CircleCmt obj) throws Exception;
 
         /**
         *

@@ -80,7 +80,7 @@ public class CircleCmtServiceImpl implements CircleCmtService {
      * @version: 2018-09-20
      */
     @Override
-    public MessageResponse insertCircleCmt(CircleCmt o, UserProp userProp) throws Exception {
+    public MessageResponse insertCircleCmt(CircleCmt o) throws Exception {
 
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
@@ -102,9 +102,6 @@ public class CircleCmtServiceImpl implements CircleCmtService {
         o.setId(GUIDUtil.getGUID());
         o.setStatus("1");
         this.circleCmtDao.insert(o);
-        this.dataBaseLogService.log("添加评论", "评论", "",
-                o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "添加评论完成！");
     }
 
