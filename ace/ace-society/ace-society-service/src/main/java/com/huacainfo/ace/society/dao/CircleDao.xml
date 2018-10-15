@@ -126,4 +126,81 @@
   <update id="updateStatus">
     update circle set status=#{status}, lastAuditLogId = #{lastAuditLogId} where id=#{id}
   </update>
+  <resultMap id="mapRpt" type="com.huacainfo.ace.society.model.Rpt">
+    <id property="reportId" column="reportId"/>
+    <result property="approvedTime" column="approvedTime"/>
+    <result property="content" column="content"/>
+    <result property="createDate" column="createDate"/>
+    <result property="duration" column="duration"/>
+    <result property="gmtCreate" column="gmtCreate"/>
+    <result property="pictures" column="pictures"/>
+    <result property="reporter" column="reporter"/>
+    <result property="thumbnail" column="thumbnail"/>
+    <result property="type" column="type"/>
+    <result property="likeNum" column="likeNum"/>
+    <result property="userType" column="userType"/>
+    <result property="watermarkConfig" column="watermarkConfig"/>
+    <result property="video" column="video"/>
+    <result property="audio" column="audio"/>
+    <association property="rpt" column="uid" javaType="com.huacainfo.ace.society.model.Reporter">
+      <id property="openid" column="openid"/>
+      <result property="headimgurl" column="headimgurl"/>
+      <result property="nickname" column="nickname"/>
+    </association>
+    <collection property="imageList" ofType="com.huacainfo.ace.society.model.Img">
+      <id property="id" column="imgId"/>
+      <result property="url" column="url"/>
+    </collection>
+    <collection property="comments" ofType="com.huacainfo.ace.society.model.Comments">
+      <id property="id" column="cmtId"/>
+      <result property="content" column="c_content"/>
+      <result property="reviewer" column="c_reviewer"/>
+      <result property="nickname" column="c_nickname"/>
+      <result property="headimgurl" column="c_headimgurl"/>
+      <result property="openid" column="c_openid"/>
+      <result property="createTime" column="c_createTime"/>
+    </collection>
+  </resultMap>
+  <select id="getList" resultMap="mapRpt">
+    SELECT
+    t.id reportId,
+    t.uid,
+    t.sort,
+    t.mediaType type,
+    t.status,
+    t.likeNum,
+    t.content,
+    t.mediaContent video,
+    t.createTime approvedTime,
+    0 duration,
+    t.createTime gmtCreate,
+    date_format(t.createTime, '%H:%i') createDate,
+    '' pictures,
+    '' liker,
+    a.nickname reporter,
+    '' thumbnail,
+    a.headimgurl headimgurl,
+    a.nickname nickname,
+    a.openid,
+    b.id imgId,
+    b.url,
+    c.id cmtId,
+    c.content c_content,
+    d.nickname c_reviewer,
+    d.headimgurl c_headimgurl,
+    d.nickname c_nickname,
+    d.openid c_openid,
+    date_format(c.createTime, '%H:%i:%s') c_createTime
+    FROM
+    circle t
+    LEFT JOIN portal.userinfo a ON t.uid = a.unionid
+    LEFT JOIN circle_img b ON t.id = b.circleId
+    LEFT JOIN circle_cmt c ON t.id = c.circleId
+    LEFT JOIN portal.userinfo d ON c.uid = d.unionid
+    WHERE
+    t. STATUS = '1'
+    ORDER BY
+    t.createTime DESC
+    limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+  </select>
 </mapper>

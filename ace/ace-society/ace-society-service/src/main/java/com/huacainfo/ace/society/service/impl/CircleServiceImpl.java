@@ -15,6 +15,7 @@ import com.huacainfo.ace.society.dao.CircleLogDao;
 import com.huacainfo.ace.society.model.Circle;
 import com.huacainfo.ace.society.model.CircleImg;
 import com.huacainfo.ace.society.model.CircleLog;
+import com.huacainfo.ace.society.model.Rpt;
 import com.huacainfo.ace.society.service.CircleService;
 import com.huacainfo.ace.society.vo.CircleQVo;
 import com.huacainfo.ace.society.vo.CircleVo;
@@ -231,4 +232,30 @@ public class CircleServiceImpl implements CircleService {
         return new MessageResponse(0, "审核成功！");
     }
 
+    /**
+     * @throws
+     * @Title:getList
+     * @Description: TODO(圈子获取列表)
+     * @param: @param start 开始行号
+     * @param: @param limit 页面展示行数
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-10-15
+     */
+    @Override
+    public List<Rpt> getList(int start, int limit)  throws Exception{
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        CircleDao dao = session.getMapper(CircleDao.class);
+        try {
+            return dao.getList(start,limit);
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
+        }
+        return null;
+    }
 }
