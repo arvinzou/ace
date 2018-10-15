@@ -76,7 +76,7 @@ public class CircleCmtController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse insertCircleCmt(String jsons) throws Exception {
         CircleCmt obj = JSON.parseObject(jsons, CircleCmt.class);
-        return this.circleCmtService.insertCircleCmt(obj, this.getCurUserProp());
+        return this.circleCmtService.insertCircleCmt(obj);
     }
 
     /**
