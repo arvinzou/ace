@@ -15,7 +15,9 @@
     <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
     <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+
+    </resultMap>
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SubjectIdeaVo">
   </resultMap>
   <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SubjectIdeaVo">
@@ -34,7 +36,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     id, subjectId, userId, remark, status, createUserId, createUserName, createDate,
-      lastModifyUserId, lastModifyUserName, lastModifyDate, solution, title
+      lastModifyUserId, lastModifyUserName, lastModifyDate, solution, title, category
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -50,13 +52,13 @@
     insert into subject_idea (id, subjectId, userId, 
       remark, status, createUserId, 
       createUserName, createDate, lastModifyUserId,
-      lastModifyUserName, lastModifyDate, solution, title
+      lastModifyUserName, lastModifyDate, solution, title, category
       )
     values (#{id,jdbcType=VARCHAR}, #{subjectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
-      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
-      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{solution,jdbcType=LONGVARCHAR}
-      , #{title,jdbcType=LONGVARCHAR})
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{solution,jdbcType=LONGVARCHAR},
+      #{title,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.SubjectIdea">
     insert into subject_idea
@@ -100,6 +102,10 @@
         <if test="title != null">
             title,
         </if>
+        <if test="category != null">
+            category,
+        </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -141,6 +147,10 @@
         <if test="title != null">
             #{title,jdbcType=VARCHAR},
         </if>
+        <if test="category != null">
+            #{category,jdbcType=VARCHAR},
+        </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.SubjectIdea">
@@ -182,6 +192,10 @@
         <if test="title != null">
             title = #{title,jdbcType=VARCHAR},
         </if>
+        <if test="category != null">
+            category = #{category,jdbcType=VARCHAR},
+        </if>
+
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -192,6 +206,7 @@
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
       title = #{title,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
       solution = #{solution,jdbcType=LONGVARCHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
@@ -210,11 +225,10 @@
   <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
       t.id, t.subjectId ,t.title, t.solution, t.userId, t.remark, t.status, t.createUserId, t.createUserName,
-      t.createDate,
-      t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,t.remark, e.ideaId,
-      e.fileType, e.fileName, e.fileSize, e.fileUrl, e.remark as eremark
-      from subject_idea t
-      LEFT JOIN subject_idea_annex e on t.id = e.ideaId
+      t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate, t.remark, t.category,
+      e.ideaId, e.fileType, e.fileName, e.fileSize, e.fileUrl, e.remark as eremark
+
+      <include refid="whereCondition"/>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
         ORDER BY ${orderBy}
@@ -228,6 +242,7 @@
 
   <sql id="whereCondition">
     from subject_idea t
+      LEFT JOIN subject_idea_annex e on t.id = e.ideaId
     where 1=1
     <if test="condition.solution !=null and condition.solution !=&quot;&quot;">
       and t.solution like concat('%',#{condition.solution,jdbcType=VARCHAR},'%')
@@ -235,6 +250,15 @@
     <if test="condition.subjectId !=null and condition.subjectId !=&quot;&quot;">
       and t.subjectId = #{condition.subjectId,jdbcType=VARCHAR}
     </if>
+      <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+          and t.userId = #{condition.userId,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.status !=null and condition.status !=&quot;&quot;">
+          and t.status = #{condition.status,jdbcType=VARCHAR}
+      </if>
+      <if test="condition.category !=null and condition.category !=&quot;&quot;">
+          and t.category = #{condition.category,jdbcType=VARCHAR}
+      </if>
   </sql>
 
   <select id="findCount" resultType="int">

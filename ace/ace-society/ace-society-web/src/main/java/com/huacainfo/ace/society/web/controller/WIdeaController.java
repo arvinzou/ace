@@ -38,13 +38,18 @@ public class WIdeaController extends SocietyBaseController {
                                    PageParamNoChangeSord page, String unionId) throws Exception {
 
 //        getCurUserinfo();//公众号用户
-        WxUser wxUser = getCurWxUser();//小程序用户
-        if ((null == wxUser || StringUtil.isEmpty(wxUser.getUnionId()))
-                && StringUtil.isEmpty(unionId)) {
-            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        /**
+         * 0-查询自己， 1-查询所有
+         */
+        if ("0".equals(condition.getGetAll())) {
+            WxUser wxUser = getCurWxUser();//小程序用户
+            if ((null == wxUser || StringUtil.isEmpty(wxUser.getUnionId()))
+                    && StringUtil.isEmpty(unionId)) {
+                return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+            }
+            condition.setUserId(StringUtil.isEmpty(unionId) ? wxUser.getUnionId() : unionId);
         }
 
-        condition.setUserId(StringUtil.isEmpty(unionId) ? wxUser.getUnionId() : unionId);
         PageResult<SubjectIdeaVo> rst =
                 ideaService.findSubjectIdeaList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

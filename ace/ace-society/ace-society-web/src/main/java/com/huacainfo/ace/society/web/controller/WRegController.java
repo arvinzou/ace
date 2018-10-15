@@ -185,7 +185,6 @@ public class WRegController extends SocietyBaseController {
     @RequestMapping("/findOrgList")
     public ResultResponse orgList(String unionId) throws Exception {
         //公众号 or 小程序 获取unionId
-
 //        WxUser wxUser = getCurWxUser();
 //        if (wxUser == null) {
 //            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");

@@ -12,7 +12,14 @@ public class SubjectIdea extends BaseModel {
     private String userId;
 
     private String remark;
-
+    /**
+     * 状态
+     * 0-删除
+     * 1-暂存
+     * 2-提交审核
+     * 3-审核通过
+     * 4-审核驳回
+     */
     private String status;
 
     private String createUserId;
@@ -30,6 +37,18 @@ public class SubjectIdea extends BaseModel {
     private String solution;
 
     private String title;
+    /**
+     * 点子分类
+     */
+    private String category;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;
