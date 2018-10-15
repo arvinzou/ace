@@ -1,58 +1,55 @@
-var _colNames = [ '编号', '名称', '模板','创建时间' ];
+var _colNames = ['编号', '名称', '模板', '创建时间', '操作'];
 var _colModel = function() {
-	return [ {
-		name : 'templateCmccId',
-		index : 'templateCmccId',
-		width : 150,
-		sortable : false,
-		editable : true,
-		editoptions : {
-			style:'width:98%;line-height: 30px;height: 30px;',
-			readonly : false
-		}
-	},{
-		name : 'name',
-		index : 'name',
-		width : 130,
-		editable : true,
-		editoptions : {
-			style:'width:98%;line-height: 30px;height: 30px;',
-			maxlength : "30"
-		}
-	},{
-		name : 'content',
-		index : 'content',
-		width : 350,
-		editable : true,
-		edittype:"textarea",
-		editoptions : {
-			rows:"6",
-			cols:"10",
-			style:'width:98%;line-height: 30px;height: 100px;',
-			maxlength : "200"
+	return [{
+		name: 'templateCmccId',
+		index: 'templateCmccId',
+		width: 150,
+		sortable: false,
+		editable: true,
+		editoptions: {
+			readonly: false
 		}
 	}, {
-		name : 'createTime',
-		width : 150,
-		sortable : true,
-		editable : false
-		
-	} ];
-}
-function aceSwitch(cellvalue, options, cell) {
-	console.log('aceSwitch');
-	setTimeout(function() {
-		$(cell).find('input[type=checkbox]').addClass(
-				'ace ace-switch ace-switch-5').after(
-				'<span class="lbl"></span>');
-	}, 0);
-}
-// enable datepicker
-function pickDate(cellvalue, options, cell) {
-	setTimeout(function() {
-		$(cell).find('input[type=text]').datepicker({
-			format : 'yyyy-mm-dd',
-			autoclose : true
-		});
-	}, 0);
+		name: 'name',
+		index: 'name',
+		width: 130,
+		editable: true,
+		editoptions: {
+			maxlength: "30"
+		}
+	}, {
+		name: 'content',
+		index: 'content',
+		width: 350,
+		editable: true,
+		edittype: "textarea",
+		editoptions: {
+			rows: "6",
+			cols: "10",
+			maxlength: "200",
+			style:'width:100%'
+		}
+	}, {
+		name: 'createTime',
+		width: 150,
+		sortable: true,
+		editable: false
+
+	}, {
+		name: 'opt',
+		sortable: false,
+		width: 50,
+		renderer: function(value, cur) {
+			var rowid = $.jgrid.getAccessor(cur, cfg.dataId);
+			var opt = [];
+			if (authorConfig.hasOwnProperty(cfg.grid_edit_data_url)) {
+				opt.push('<a href="javascript:edit(\'' + rowid + '\')">编辑</a> ');
+			}
+			if (authorConfig.hasOwnProperty(cfg.grid_delete_data_url)) {
+				opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>');
+			}
+
+			return opt.join('');
+		}
+	}];
 }

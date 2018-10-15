@@ -26,8 +26,7 @@
         <view class='title-box'>
             <view class='title'>商品描述</view>
             <view class='des'>
-               <import src="../../util/wxParse/wxParse.wxml" />
-               <template is="wxParse" data="{{wxParseData:detail_content.nodes}}" />
+               <rich-text nodes='{{ summary }}'></rich-text>
             </view>
         </view>
     </view>

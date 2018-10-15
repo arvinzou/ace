@@ -52,13 +52,13 @@
 						上级资源：
 						<input id="cc1" name="parentResourcesId" class="easyui-combotree" data-options="url:'${pageContext.request.contextPath}/resources/selectResourcesTreeList.do?id=01',method:'get',animate: true,
                 lines:true," style='width:200px;line-height: 30px;height: 30px;'>
-						<a href="javascript:clearQparams()">清除</a>
+						<a href="javascript:clearQparams()" style="padding-left:10px">清除</a>
 					</div>
 
 
 
 
-					<div class="input-group" style="float:right;width:230px">
+					<div class="input-group" style="float:right;width:220px">
 						<input type="text"
 							   name="resourcesName"
 							   class="form-control"
@@ -82,9 +82,9 @@
 
 			<div data-options="region:'center',border:false,fit:true" id="easyui-center">
 					<table id="grid-table"></table>
-					<div style="text-align:left">
-						<ul id="grid-pager" class="pagination"></ul>
-					</div>
+				<div style="text-align:left">
+					<ul id="grid-pager" class="pagination" style="padding-left:20px"></ul>
+				</div>
 			</div>
 		<div id="cc-west" class="easyui-west" data-options="region:'west',split:true" title="我的树" style="width:200px;">
 		 <ul id="tt" class="easyui-tree" data-options="

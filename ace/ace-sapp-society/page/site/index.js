@@ -1,6 +1,5 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
-var WxParse = require("../../util/wxParse/wxParse.js");
 const app = getApp();
 Page({
 
@@ -9,7 +8,8 @@ Page({
    */
   data: {
      siteId: null,
-     siteObj : null
+     siteObj : null,
+     summary: null,
   },
 
   /**
@@ -22,9 +22,10 @@ Page({
 
       util.request(cfg.siteDetail, { "commodityId": that.data.siteId },
           function (ret) {
+              var content = ret.data.summary;
+              content = content.replace('<img', '<img style="max-width:100%;height:auto" ');
               that.setData({ siteObj: ret.data});
-              var detail_content = that.data.siteObj.summary;
-              WxParse.wxParse('detail_content', 'html', detail_content, that, 5);
+              that.setData({ summary: content});
           }
       );
   },

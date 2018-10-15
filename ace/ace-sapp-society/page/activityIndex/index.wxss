@@ -1,0 +1,142 @@
+.navbar {
+    width: 690rpx !important;
+    margin: auto;
+    height: 100%;
+    white-space: nowrap;
+    font-size: 28rpx;
+    color: #666;
+}
+
+.topBar {
+    z-index: 4;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 84rpx;
+    border-bottom: 1px solid #ececec;
+    background-color: #fff;
+}
+
+.navbar-item {
+    display: inline-block;
+    width: 138rpx;
+    height: 100%;
+}
+
+.navbar-item-active {
+    color: #222;
+    font-weight: bold;
+    position: relative;
+}
+
+.navbar-item-active::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 40rpx;
+    height: 6rpx;
+    background: rgba(255, 153, 6, 1);
+    bottom: 0;
+    left: 49rpx;
+}
+
+.navbar-item-wrap {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.activity-list {
+    width: 690rpx;
+    margin: auto;
+    padding-top: 84rpx;
+    position: relative;
+}
+
+.list-style {
+    padding: 30rpx 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.list-style .title {
+    font-size: 32rpx;
+    font-weight: bold;
+    color: rgba(34, 34, 34, 1);
+}
+
+.list-style .tag {
+    display: inline-block;
+    width: 98rpx;
+    height: 40rpx;
+    background: rgba(214, 224, 255, 1);
+    border-radius: 4px;
+    font-size: 20rpx;
+    font-weight: bold;
+    color: rgba(66, 93, 174, 1);
+    line-height: 40rpx;
+    text-align: center;
+}
+
+.list-style .detail {
+    font-size: 26rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+    display: flex;
+    justify-content: space-between;
+    width: 478rpx;
+}
+
+.list-style-1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-style-1 .right {
+    width: 186rpx;
+    height: 146rpx;
+    overflow: hidden;
+}
+
+.list-style-1 .right image {
+    width: 100%;
+    height: 100%;
+}
+
+.list-style-1 .left {
+    width: 478rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.list-style-2 .images {
+    display: flex;
+    justify-content: space-between;
+    margin: 26rpx 0;
+}
+
+.list-style-2 .images .image {
+    width: 216rpx;
+    height: 170rpx;
+    overflow: hidden;
+}
+
+.list-style-2 .images .image image {
+    width: 100%;
+    height: 100%;
+}
+
+.list-style-3 .images {
+    width: 690rpx;
+    height: 392rpx;
+    margin: 26rpx 0;
+    overflow: hidden;
+}
+
+.list-style-3 .images  image {
+    width: 100%;
+    height: 100%;
+}

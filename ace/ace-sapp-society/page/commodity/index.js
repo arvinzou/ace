@@ -1,6 +1,5 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
-var WxParse = require("../../util/wxParse/wxParse.js");
 Page({
 
   /**
@@ -22,8 +21,6 @@ Page({
       util.request(cfg.siteDetail, { "commodityId": that.data.siteId },
           function (ret) {
               that.setData({ siteObj: ret.data });
-              var detail_content = that.data.siteObj.summary;
-              WxParse.wxParse('detail_content', 'html', detail_content, that, 0);
           }
       );
   },

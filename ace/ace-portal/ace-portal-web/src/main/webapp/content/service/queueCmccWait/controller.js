@@ -1,20 +1,4 @@
 jQuery(function($) {
-	$.fn.spin = function(opts) {
-		this.each(function() {
-		  var $this = $(this),
-			  data = $this.data();
-
-		  if (data.spinner) {
-			data.spinner.stop();
-			delete data.spinner;
-		  }
-		  if (opts !== false) {
-			data.spinner = new Spinner($.extend({color: $this.css('color')}, opts)).spin(this);
-		  }
-		});
-		return this;
-	};
-
 	$('#btn-search').on('click', function() {
 		$('#fm-search').ajaxForm({
 			beforeSubmit : function(formData, jqForm, options) {
@@ -25,7 +9,6 @@ jQuery(function($) {
 				$.extend(params, {
 					time : new Date()
 				});
-				// console.log(params);
 				jQuery(cfg.grid_selector).jqGrid('setGridParam', {
 					page : 1,
 					postData : params
@@ -34,22 +17,34 @@ jQuery(function($) {
 			}
 		});
 	});
-
-	
-
-function style_ajax_button(btnId,status){
-	console.log(status);
-	var btn=$('#'+btnId);
-	if(status){
-		btn.find('i').removeClass('fa-check');
-		btn.find('i').addClass('fa-spinner fa-spin');
-		btn.attr('disabled',"true");
-		
-	}else{
-		btn.find('i').removeClass('fa-spinner');
-		btn.find('i').removeClass('fa-spin');
-		btn.find('i').addClass('fa-check');
-		btn.removeAttr("disabled");
-	}
-}
+	$("input[name=startDate]").datetimepicker({
+			format: 'yyyy-mm-dd hh:mm',
+			language: 'zh-CN',
+			weekStart: 1,
+			todayBtn: 1, //显示‘今日’按钮
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+			clearBtn: true, //清除按钮
+			forceParse: 0
+		});
+		$('input[name=startDate]').focus(function() {
+			$(this).blur(); //不可输入状态
+		})
+		$("input[name=endDate]").datetimepicker({
+			format: 'yyyy-mm-dd hh:mm',
+			language: 'zh-CN',
+			weekStart: 1,
+			todayBtn: 1, //显示‘今日’按钮
+			autoclose: 1,
+			todayHighlight: 1,
+			startView: 2,
+			minView: 'hour', //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+			clearBtn: true, //清除按钮
+			forceParse: 0
+		});
+		$('input[name=endDate]').focus(function() {
+			$(this).blur(); //不可输入状态
+		})
 });
