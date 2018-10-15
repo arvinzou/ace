@@ -13,8 +13,7 @@
     "page/historyOrder/index",
     "page/commodity/index",
     "page/site/index",
-    "page/settlement/index",
-    "page/siteChoose/index"
+    "page/settlement/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
