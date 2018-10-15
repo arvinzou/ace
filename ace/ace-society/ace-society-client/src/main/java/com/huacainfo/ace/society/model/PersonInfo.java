@@ -42,6 +42,19 @@ public class PersonInfo extends BaseModel {
 
     private Date lastModifyDate;
 
+    /**
+     * 组织ID
+     */
+    private String orgId;
+
+    public String getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(String orgId) {
+        this.orgId = orgId;
+    }
+
     public String getId() {
         return id;
     }
