@@ -94,6 +94,7 @@ public class WActivityController extends SocietyBaseController {
     @RequestMapping(value = "/findActivityParticipants")
     @ResponseBody
     public ResultResponse selectActivityDByPrimaryKey(String activityId) throws Exception {
+
         ActivityDetailQVo activityDetailQVo=new ActivityDetailQVo();
         activityDetailQVo.setActivityId(activityId);
         List<ActivityDetailVo> activityDetailVos =this.activityDetailService.findActivityDetailList(activityDetailQVo,0,100,null).getRows();
