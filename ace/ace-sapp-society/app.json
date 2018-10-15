@@ -11,7 +11,10 @@
     "page/myActivity/index",
     "page/releaseIdea/index",
     "page/historyOrder/index",
-    "page/myLive/index"
+    "page/commodity/index",
+    "page/site/index",
+    "page/settlement/index",
+    "page/siteChoose/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
