@@ -6,8 +6,10 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.Circle;
 import com.huacainfo.ace.society.model.CircleImg;
+import com.huacainfo.ace.society.model.Rpt;
 import com.huacainfo.ace.society.vo.CircleVo;
 import com.huacainfo.ace.society.vo.CircleQVo;
+
 
 import java.util.List;
 
@@ -100,4 +102,17 @@ public interface CircleService {
      * @version: 2018-09-20
      */
     MessageResponse audit(String id,String rst,String text, UserProp userProp) throws Exception;
+
+    /**
+     * @throws
+     * @Title:getList
+     * @Description: TODO(圈子获取列表)
+     * @param: @param start 开始行号
+     * @param: @param limit 页面展示行数
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-10-15
+     */
+    List<Rpt> getList(int start,int limit)  throws Exception;
 }

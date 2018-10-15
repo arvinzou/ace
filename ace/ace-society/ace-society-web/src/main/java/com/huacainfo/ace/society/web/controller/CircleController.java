@@ -12,6 +12,7 @@ import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.society.model.Circle;
 import com.huacainfo.ace.society.model.CircleImg;
 import com.huacainfo.ace.society.model.Img;
+import com.huacainfo.ace.society.model.Rpt;
 import com.huacainfo.ace.society.service.CircleService;
 import com.huacainfo.ace.society.vo.CircleQVo;
 import com.huacainfo.ace.society.vo.CircleVo;
@@ -178,6 +179,23 @@ public class CircleController extends SocietyBaseController {
     }
     /**
      * @throws
+     * @Title:getList
+     * @Description: TODO(圈子获取列表)
+     * @param: @param start 开始行号
+     * @param: @param limit 页面展示行数
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-10-15
+     */
+    @RequestMapping(value = "/www/getList")
+    @ResponseBody
+    public List<Rpt> getList(int start,int limit) throws Exception {
+        return this.circleService.getList(start,limit);
+    }
+
+    /**
+     * @throws
      * @Title:find!{bean.name}List
      * @Description: TODO(圈子分页查询)
      * @param: @param condition
@@ -189,10 +207,11 @@ public class CircleController extends SocietyBaseController {
      * @author: 陈晓克
      * @version: 2018-09-20
      */
-    @RequestMapping(value = "/www/findCircleList")
+    @RequestMapping(value = "/myCircleList")
     @ResponseBody
-    public PageResult<CircleVo> findCircleListWww(CircleQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult<CircleVo> myCircleList(CircleQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setCorpId(this.getCurUserProp().getCorpId());
+        condition.setUid(this.getCurWxUser().getUnionId());
         PageResult<CircleVo> rst = this.circleService.findCircleList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
