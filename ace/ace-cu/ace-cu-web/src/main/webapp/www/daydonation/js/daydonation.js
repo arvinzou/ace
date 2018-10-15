@@ -90,20 +90,26 @@ window.onload = function(){
 };
 
 function donate(){
-    window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
+    if(projectId != null){
+        window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
+    }
 }
 /**
  * 跳转慈善榜单页面
  */
 function donateRank(){
-    window.location.href = '/cu/www/donatelist/donatelist.html?projectId='+projectId;
+    if(projectId != null){
+        window.location.href = '/cu/www/donatelist/donatelist.html?projectId='+projectId;
+    }
 }
 
 /**
  * 使用记录查看更多
  */
 function showMore(){
-    window.location.href = '/cu/www/daydonation/recordlist.html?projectId='+projectId;
+    if(projectId != null) {
+        window.location.href = '/cu/www/daydonation/recordlist.html?projectId=' + projectId;
+    }
 }
 
 /**
