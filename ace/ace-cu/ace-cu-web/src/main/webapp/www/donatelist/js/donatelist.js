@@ -16,23 +16,25 @@ window.onload = function(){
         }
     }
 
-    $.ajax({
-        url: "/cu/www/report/donateRank",
-        type:"post",
-        async:false,
-        data:{start:0, limit: 9999, projectId: primaryId, needOpenId: "1"},
-        success:function(result){
-            if(result.status == 0) {
-                //renderPage('mine', result.data.own, 'mine-tpl');
-                renderPage('donateList',  result.data.list, 'donate-tpl');
-            }else {
-                alert(result.info);
+    if(primaryId != null){
+        $.ajax({
+            url: "/cu/www/report/donateRank",
+            type:"post",
+            async:false,
+            data:{start:0, limit: 9999, projectId: primaryId, needOpenId: "1"},
+            success:function(result){
+                if(result.status == 0) {
+                    //renderPage('mine', result.data.own, 'mine-tpl');
+                    renderPage('donateList',  result.data.list, 'donate-tpl');
+                }else {
+                    alert(result.info);
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }
 };
 
 function renderPage(IDom, data, tempId) {
