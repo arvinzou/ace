@@ -7,8 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
-      userinfo: wx.getStorageSync('userinfo'),
+      
   },
 
   /**
@@ -16,14 +15,31 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      if (!util.isLogin()) {
+      console.log("util.is_login()============================================="+util.is_login());
+      if (!util.is_login()) {
           wx.navigateTo({ url: "../userinfo/index?url=../me/index" });
+      }else{
+          that.setData({
+              userinfo: wx.getStorageSync('userinfo')
+          });
+        
       }
-      that.setData({
-          userinfo: wx.getStorageSync('userinfo')
-      });
+      
   },
+  initUserData: function () {
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    return true;
+                } else {
+                    if (ret.info == '用户尚未注册') {
+                        return false;
+                    }
+                }
 
+            }
+        );
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -49,7 +65,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+      var that = this;
+      if (wx.getStorageSync('userinfo')){
+          if(!that.initUserData()){
+              wx.navigateTo({ url: "../regist/index" });
+          }
+      }
   },
 
   /**
