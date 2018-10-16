@@ -19,6 +19,8 @@ public class ActivityReport extends BaseModel {
 
     private String status;
 
+    private String coverUrl;
+
     private String createUserId;
 
     private String createUserName;
@@ -32,6 +34,14 @@ public class ActivityReport extends BaseModel {
     private Date lastModifyDate;
 
     private String content;
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
+    }
 
     public String getId() {
         return id;

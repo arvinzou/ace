@@ -1,19 +1,54 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+     userInfo: null,
+     commodityInfo: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+      var that = this;
+      console.log("+====================================="+util.isLogin());
+      if (!util.is_login()) {
+          wx.navigateTo({
+              url: "../userinfo/index?url=../settlement/index"
+          });
+      }
   },
 
+  initUserData: function(){
+      util.request(cfg.findUserInfo, {},
+          function (ret) {
+              if (ret.status == 0) {
+                  console.log(ret);
+              } else {
+                
+              }
+
+          }
+      );
+  },
+    initCommodityInfo: function (options){
+      var that = this;
+      util.request(cfg.siteDetail, { "commodityId": options.commodityId},
+          function (ret) {
+              if (ret.status == 0) {
+                  console.log(ret);
+                  that.setData({ commodityInfo: ret.data});
+              } else {
+
+              }
+
+          }
+      ); 
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -25,7 +60,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+     var that = this;
+      that.initUserData();
+      that.initCommodityInfo(options);
   },
 
   /**

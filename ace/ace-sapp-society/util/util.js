@@ -136,12 +136,20 @@ function security(role){
   }
   return true;
 }
-
 function isLogin() {
     console.log("==============isLogin===============");
     var userinfo = wx.getStorageSync('userinfo');
     console.log(userinfo);
     if (!userinfo.userProp) {
+        return false;
+    }
+    return true;
+}
+
+function is_login(){
+    var userinfo = wx.getStorageSync('userinfo');
+    console.log(userinfo);
+    if(!userinfo){
         return false;
     }
     return true;
@@ -190,6 +198,7 @@ function login(callback) {
   });
 
 }
+
 /** 
   * 
   * json转字符串 
@@ -278,5 +287,6 @@ module.exports = {
     objToStrMap: objToStrMap,
     extend: extend,
     initRadioGroupData: initRadioGroupData,
-    indexOf: indexOf
+    indexOf: indexOf,
+    is_login: is_login
 }

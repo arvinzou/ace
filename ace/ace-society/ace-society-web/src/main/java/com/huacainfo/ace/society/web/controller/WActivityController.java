@@ -4,17 +4,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.society.service.ActivityDetailService;
+import com.huacainfo.ace.society.service.ActivityReportService;
 import com.huacainfo.ace.society.service.ActivityService;
-import com.huacainfo.ace.society.vo.ActivityDetailQVo;
-import com.huacainfo.ace.society.vo.ActivityDetailVo;
-import com.huacainfo.ace.society.vo.ActivityQVo;
-import com.huacainfo.ace.society.vo.ActivityVo;
+import com.huacainfo.ace.society.service.SocietyOrgInfoService;
+import com.huacainfo.ace.society.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +41,12 @@ public class WActivityController extends SocietyBaseController {
 
     @Autowired
     private ActivityDetailService activityDetailService;
+
+    @Autowired
+    private SocietyOrgInfoService societyOrgInfoService;
+
+    @Autowired
+    private ActivityReportService activityReportService;
 
     /**
      * @throws
@@ -100,7 +106,46 @@ public class WActivityController extends SocietyBaseController {
         return new ResultResponse(ResultCode.SUCCESS,"获取成功",activityDetailVos);
     }
 
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(社会组织信息分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <SocietyOrgInfoVo>
+     * @author: Arvin
+     * @version: 2018-09-12
+     */
+    @RequestMapping(value = "/findSocietyOrgInfoList")
+    @ResponseBody
+    public PageResult<SocietyOrgInfoVo> findSocietyOrgInfoList(SocietyOrgInfoQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<SocietyOrgInfoVo> rst = this.societyOrgInfoService.findSocietyOrgInfoList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
 
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
 
+        return rst;
+    }
 
+    /**
+     * @throws
+     * @Title:selectActivityReportByPrimaryKey
+     * @Description: TODO(获取活动报道)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<ActivityReport>
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @RequestMapping(value = "/selectActivityReportByActivityId")
+    @ResponseBody
+    public ResultResponse selectActivityReportByActivityId(String activityId) throws Exception {
+        WxUser wxUser = getCurWxUser();
+        ActivityReportVo activityReportVo=this.activityReportService.selectActivityReportByActivityId(activityId,wxUser);
+        return  new ResultResponse(ResultCode.SUCCESS,"获取成功",activityReportVo);
+    }
 }

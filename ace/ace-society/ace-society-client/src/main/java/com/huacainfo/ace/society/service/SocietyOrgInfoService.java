@@ -8,8 +8,6 @@ import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 
-import java.util.List;
-
 /**
  * @author: Arvin
  * @version: 2018-09-12
@@ -30,8 +28,9 @@ public interface SocietyOrgInfoService {
      * @author: Arvin
      * @version: 2018-09-12
      */
-    PageResult<SocietyOrgInfoVo> findSocietyOrgInfoList(SocietyOrgInfoQVo condition,
-                                                        int start, int limit, String orderBy) throws Exception;
+    PageResult
+            <SocietyOrgInfoVo> findSocietyOrgInfoList(SocietyOrgInfoQVo condition,
+                                                      int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -69,7 +68,8 @@ public interface SocietyOrgInfoService {
      * @author: Arvin
      * @version: 2018-09-12
      */
-    SingleResult<SocietyOrgInfoVo> selectSocietyOrgInfoByPrimaryKey(String id) throws Exception;
+    SingleResult
+            <SocietyOrgInfoVo> selectSocietyOrgInfoByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
@@ -97,6 +97,4 @@ public interface SocietyOrgInfoService {
      * @version: 2018-09-12
      */
     MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
-
-    List<SocietyOrgInfoVo> findList(SocietyOrgInfoQVo condition, int start, int limit, String orderBy);
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.BisType;
@@ -156,6 +157,33 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         SingleResult<ActivityReportVo> rst = new SingleResult<>();
         rst.setValue(this.activityReportDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:selectActivityReportByPrimaryKey
+     * @Description: TODO(获取活动报道)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<ActivityReport>
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @Override
+    public ActivityReportVo selectActivityReportByActivityId(String id,WxUser wxUser) throws Exception {
+        ActivityReportVo activityReportVo=this.activityReportDao.selectByActivityId(id);
+        if(CommonUtils.isBlank(activityReportVo)){
+            activityReportVo.setId(GUIDUtil.getGUID());
+            activityReportVo.setActivityId(id);
+            activityReportVo.setCreateDate(new Date());
+            activityReportVo.setStatus("1");
+            activityReportVo.setCreateUserName(wxUser.getName());
+            activityReportVo.setCreateUserId(wxUser.getUnionId());
+            this.activityReportDao.insertSelective(activityReportVo);
+            this.dataBaseLogService.log("添加活动报道", "活动报道", "",
+                    wxUser.getUnionId(), wxUser.getUnionId(), null);
+        }
+        return activityReportVo;
     }
 
     /**

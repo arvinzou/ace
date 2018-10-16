@@ -14,7 +14,6 @@ public class PersonInfoVo extends PersonInfo {
      */
     private String headimgurl;
 
-
     public String getNickname() {
         return nickname;
     }

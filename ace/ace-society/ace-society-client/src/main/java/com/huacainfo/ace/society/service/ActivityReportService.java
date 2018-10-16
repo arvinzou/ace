@@ -1,5 +1,6 @@
 package com.huacainfo.ace.society.service;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -70,8 +71,9 @@ public interface ActivityReportService {
         * @author: huacai003
         * @version: 2018-09-13
         */
-        SingleResult
-        <ActivityReportVo> selectActivityReportByPrimaryKey(String id) throws Exception;
+        SingleResult<ActivityReportVo> selectActivityReportByPrimaryKey(String id) throws Exception;
+
+        ActivityReportVo selectActivityReportByActivityId(String id,WxUser wxUser) throws Exception;
 
             /**
             *
