@@ -38,6 +38,8 @@
 
     <resultMap id="PersonResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
         <association property="person" column="pId" javaType="com.huacainfo.ace.society.model.PersonInfo">
             <id property="id" jdbcType="VARCHAR" column="pId"/>
             <result column="pName" jdbcType="VARCHAR" property="realName"/>
@@ -50,7 +52,9 @@
 
     <resultMap id="SocietyOrgResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
-        <association property="person" column="orgId" javaType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <association property="societyOrg" column="orgId" javaType="com.huacainfo.ace.society.model.SocietyOrgInfo">
             <id property="id" jdbcType="VARCHAR" column="orgId"/>
             <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
             <result column="orgType" jdbcType="CHAR" property="orgType"/>
@@ -67,6 +71,7 @@
 
     <select id="findByUserId" parameterType="java.lang.String" resultMap="CustomerResultMap">
         select
+        wx.avatarUrl, wx.nickName,
           t.user_level as regType,
           p.id as pId,
           p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
@@ -77,8 +82,9 @@
 	      org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
 	      org.validPoints as orgValidPoints
         from portal.users t
+        left join portal.wx_user wx on t.user_id = wx.unionId
         left join society.person_info p on t.user_id = p.id
-        LEFT join society.society_org_info org on t.user_id = org.id
+        left join society.society_org_info org on t.user_id = org.id
         where t.user_id = #{userId,jdbcType=VARCHAR}
     </select>
 
