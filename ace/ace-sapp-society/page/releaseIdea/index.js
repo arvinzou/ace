@@ -29,7 +29,7 @@ Page({
       index: 0,
       fileUrl: '../../image/addFile.png',
       isUpload: false,
-      category: null,
+      category: '1',
       solutionNum: 0,
   },
 
@@ -67,7 +67,7 @@ Page({
           });
           return;
       }
-      util.request(cfg.releaseIdea, { "title": title, "category": that.data.category, "solution": solution, "unionId": "0" },
+      util.request(cfg.releaseIdea, { "params": JSON.stringify({ "title": title, "category": that.data.category, "solution": solution, "listSubjectIdeaAnnexVo": listSubjectIdeaAnnexVo })} ,
           function (ret) {
               if (ret.status == 0) {
                   console.log(ret);
