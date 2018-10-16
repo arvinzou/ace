@@ -1,7 +1,7 @@
 {
   "pages": [
-    "page/liveList/index",
     "page/myLive/index",
+    "page/liveList/index",
     "page/live/index",
     "page/rpt/index",
     "page/liveCsl/index",

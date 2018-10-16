@@ -309,7 +309,8 @@ function getReport(e, i) {
         lvsCmd.ajax(apiServer + "/www/live/getLiveRptList", {
                 rid: lvsCmd.urlParams.id,
                 sort: reportSort,
-                page: e
+                page: e,
+                time:new Date()
             },
             function (a, n) {
                 console.log(reportLoading);
