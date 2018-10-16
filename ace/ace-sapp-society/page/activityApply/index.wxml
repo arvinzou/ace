@@ -23,7 +23,13 @@
                         <view class="title">发起者
                             <text>*</text>
                         </view>
-                        <input onlyRead type='text' class='input-value' />
+                        <input onlyRead value='{{form.name}}' type='text' class='input-value' />
+                    </view>
+                    <view wx:if='{{category==4}}' class="input-style bottom-line">
+                        <view class="title">活动期次
+                            <text>*</text>
+                        </view>
+                        <input onlyRead name='clazz' value='{{form.clazz}}' type='number' class='input-value' />
                     </view>
                     <view class="input-style bottom-line">
                         <view class="title">活动地点

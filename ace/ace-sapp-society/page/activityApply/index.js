@@ -1,4 +1,5 @@
 var dateTimePicker = require('../../util/dateTimePicker.js');
+var util = require("../../util/util.js");
 import WxValidate from '../../util/WxValidate'
 
 const App = getApp()
@@ -16,7 +17,9 @@ Page({
         setDendline: true,
         modeNum: 0,
         purposeNum: 0,
+        category: '',
         form: {
+            name: '',
             title: '',
             location: '',
             mode: '',
@@ -25,10 +28,13 @@ Page({
             startDate: '',
             endDate: '',
             parterNum: '',
-            coverUrl: ''
+            coverUrl: '',
+            clazz: '',
         }
     },
-    onLoad() {
+    onLoad(e) {
+        console.log(e);
+        let cat = e.category;
         this.initValidate();
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
         // 精确到分的处理，将数组的秒去掉
@@ -38,8 +44,8 @@ Page({
             dateTimeArray: obj.dateTimeArray,
             startDate: obj.dateTime,
             endDate: obj.dateTime,
-            dendline: obj.dateTime
-
+            dendline: obj.dateTime,
+            category: cat
         });
     },
     changeDateTime(e) {
@@ -107,10 +113,19 @@ Page({
             this.showModal(error)
             return false
         }
+        util.request('http://192.168.2.189/society/www/activity/insertActivity', {
+                jsons: JSON.stringify(params)
+            },
+            function(data) {
+                if (data.status==0){
+                    this.nextOne();
+                }
+                this.showModal({
+                    msg: data.errorMessage,
+                })
 
-        this.showModal({
-            msg: '提交成功',
-        })
+            }
+        );
     },
 
     initValidate() {
@@ -139,6 +154,10 @@ Page({
                 required: true,
                 digits: true
             },
+            clazz: {
+                required: true,
+                digits: true
+            },
         }
         const messages = {
             title: {
@@ -164,6 +183,10 @@ Page({
             parterNum: {
                 required: '请填写参与人数',
                 digits: '参与人数请填写数字'
+            },
+            clazz: {
+                required: '请填写活动期次',
+                digits: '活动期次请填写数字'
             },
         }
         this.WxValidate = new WxValidate(rules, messages)
@@ -233,7 +256,7 @@ Page({
                 var data = JSON.parse(res.data);
                 var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
                 that.setData({
-                    form:{
+                    form: {
                         coverUrl: url
                     }
                 })

@@ -13,7 +13,7 @@ Page({
         LoadOver: false,
         Loadingstatus: false,
         showBtn: false,
-        hiddenBtn: false,
+        hiddenBtn: true,
         orgs: [],
     },
 
@@ -22,11 +22,18 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-        if (!util.isLogin()) {
-            that.setData({
-                hiddenBtn: true,
-            });
-        }
+
+        if (util.isLogin()) {
+            util.request('http://192.168.2.189/society/www/activity/getUserType', {},
+                function(rst) {
+                    if (rst.data.type == 1) {
+                        that.setData({
+                            hiddenBtn: false,
+                        });
+                    }
+                }
+            );
+        };
         that.initOrgData();
         that.initdata();
     },
@@ -178,6 +185,13 @@ Page({
         let title = data.title;
         wx.navigateTo({
             url: '../activityInfo/index?id=' + p + "&title=" + title
+        })
+    },
+    createActivity: function(e) {
+        let data = e.currentTarget.dataset
+        let p = data.category;
+        wx.navigateTo({
+            url: '../activityApply/index?category=' + p
         })
     },
 

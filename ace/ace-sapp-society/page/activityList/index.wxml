@@ -19,7 +19,7 @@
             </block>
         </view>
     </view>
-    <view class="bottm-btn {{showBtn?'btn-show':''}}">
+    <view class="bottm-btn {{showBtn?'btn-show':''}}" hidden='{{hiddenBtn}}'>
         <view bindtap='createActivity' data-category='{{category}}' class='btn btn-clicking'>发布活动</view>
     </view>
     <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>

@@ -9,9 +9,21 @@ Page({
         Loadingstatus:false,
         nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),
         showBtn:false,
+        hiddenBtn: true,
     },
     onLoad: function(options) {
         let that = this;
+        if (util.isLogin()) {
+            util.request('http://192.168.2.189/society/www/activity/getUserType', {},
+                function (rst) {
+                    if (rst.data.type == 2) {
+                        that.setData({
+                            hiddenBtn: false,
+                        });
+                    }
+                }
+            );
+        };
         let category = options.category;
         if (!category) {
             wx.navigateBack({})
@@ -129,6 +141,7 @@ Page({
         let p = data.category;
         wx.navigateTo({ url: '../activityApply/index?category=' + p })
     },
+    
 
     onPageScroll: function (e) {
 
