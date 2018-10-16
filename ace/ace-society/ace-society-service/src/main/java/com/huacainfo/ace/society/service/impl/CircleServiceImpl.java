@@ -244,14 +244,15 @@ public class CircleServiceImpl implements CircleService {
      * @version: 2018-10-15
      */
     @Override
-    public List<Rpt> getList(int start, int limit)  throws Exception{
+    public List<Rpt> getList(String uid,String status,int start, int limit)  throws Exception{
         SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
         CircleDao dao = session.getMapper(CircleDao.class);
         try {
-            return dao.getList(start,limit);
+            return dao.getList(status,uid,start,limit);
         }catch (Exception e){
+           this.logger.error("{}",e);
             session.close();
         }finally {
             session.close();

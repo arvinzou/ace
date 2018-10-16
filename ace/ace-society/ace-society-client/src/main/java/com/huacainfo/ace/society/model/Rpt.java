@@ -8,33 +8,23 @@ import java.util.List;
  */
 public class Rpt implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
-    private Date approvedTime;
     private String content;
     private String createDate;
-    private int duration;
-    private Date gmtCreate;
     private List<Img> imageList;
-    private String pictures;
     private String reportId;
-    private String reporter;
-    private String thumbnail;
     private String type;
-    private String userType;
-    private String watermarkConfig;
     private String video;
-    private String audio;
-    Reporter rpt;
+    private Long likeNum;
+    private String status;
+
+    private String auditMessage;
+
+    private Reporter rpt;
     private List<Comments> comments;
 
-    private Long likeNum;
 
-    public Date getApprovedTime() {
-        return approvedTime;
-    }
 
-    public void setApprovedTime(Date approvedTime) {
-        this.approvedTime = approvedTime;
-    }
+
 
     public String getContent() {
         return content;
@@ -52,21 +42,6 @@ public class Rpt implements java.io.Serializable {
         this.createDate = createDate;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
 
     public List<Img> getImageList() {
         return imageList;
@@ -76,13 +51,6 @@ public class Rpt implements java.io.Serializable {
         this.imageList = imageList;
     }
 
-    public String getPictures() {
-        return pictures;
-    }
-
-    public void setPictures(String pictures) {
-        this.pictures = pictures;
-    }
 
     public String getReportId() {
         return reportId;
@@ -92,21 +60,6 @@ public class Rpt implements java.io.Serializable {
         this.reportId = reportId;
     }
 
-    public String getReporter() {
-        return reporter;
-    }
-
-    public void setReporter(String reporter) {
-        this.reporter = reporter;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
 
     public String getType() {
         return type;
@@ -116,21 +69,6 @@ public class Rpt implements java.io.Serializable {
         this.type = type;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public String getWatermarkConfig() {
-        return watermarkConfig;
-    }
-
-    public void setWatermarkConfig(String watermarkConfig) {
-        this.watermarkConfig = watermarkConfig;
-    }
 
     public String getVideo() {
         return video;
@@ -138,14 +76,6 @@ public class Rpt implements java.io.Serializable {
 
     public void setVideo(String video) {
         this.video = video;
-    }
-
-    public String getAudio() {
-        return audio;
-    }
-
-    public void setAudio(String audio) {
-        this.audio = audio;
     }
 
 
@@ -171,5 +101,21 @@ public class Rpt implements java.io.Serializable {
 
     public void setLikeNum(Long likeNum) {
         this.likeNum = likeNum;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getAuditMessage() {
+        return auditMessage;
+    }
+
+    public void setAuditMessage(String auditMessage) {
+        this.auditMessage = auditMessage;
     }
 }

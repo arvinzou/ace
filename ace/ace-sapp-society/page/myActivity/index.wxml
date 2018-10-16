@@ -71,4 +71,8 @@
 <navigator url="../myLive/index">直播</navigator>
 
 </view>
+<view hidden="{{currentTab!==4}}">
+<navigator url="../myCircle/index">邻里圈子</navigator>
+
+</view>
 </view>

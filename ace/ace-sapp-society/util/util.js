@@ -297,7 +297,8 @@ module.exports = {
     objToStrMap: objToStrMap,
     extend: extend,
     initRadioGroupData: initRadioGroupData,
-    indexOf: indexOf
+    indexOf: indexOf,
+    isLogin, isLogin
 }
 
 Date.prototype.Format = function(fmt) {

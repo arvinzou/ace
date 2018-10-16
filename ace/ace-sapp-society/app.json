@@ -20,7 +20,9 @@
     "page/postReport/index",
     "page/activityApply/index",
     "page/reportInfo/index",
-    "page/activityIndex/index"
+    "page/activityIndex/index",
+    "page/myCircle/index",
+    "page/circleAdd/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

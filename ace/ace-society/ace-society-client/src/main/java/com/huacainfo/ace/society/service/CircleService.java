@@ -114,5 +114,5 @@ public interface CircleService {
      * @author: 陈晓克
      * @version: 2018-10-15
      */
-    List<Rpt> getList(int start,int limit)  throws Exception;
+    List<Rpt> getList(String uid,String status,int start,int limit)  throws Exception;
 }
