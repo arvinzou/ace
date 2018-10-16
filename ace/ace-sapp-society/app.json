@@ -23,7 +23,8 @@
     "page/activityIndex/index",
     "page/myCircle/index",
     "page/circleAdd/index",
-    "page/circle/index"
+    "page/circle/index",
+    "page/regist/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
