@@ -1,54 +1,12 @@
 <view class="index">
     <view class='head'>
-    已报名志愿者 12/30人
+    已报名志愿者{{list.length}}人
     </view>
-    <view class='persons bottom-line'>
+    <view class='persons bottom-line' wx:for='{{list}}'>
         <view class='headImg'>
-        <image mode='aspectFill' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
+        <image mode='aspectFill' src='{{item.headimgurl}}'></image>
         </view>
-        <text class='name'>王恩</text>
-        <text class='tel'>18277177517</text>
-    </view>
-    <view class='persons bottom-line'>
-        <view class='headImg'>
-        <image mode='aspectFill' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-        </view>
-        <text class='name'>王恩</text>
-        <text class='tel'>18277177517</text>
-    </view>
-    <view class='persons bottom-line'>
-        <view class='headImg'>
-        <image mode='aspectFill' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-        </view>
-        <text class='name'>王恩</text>
-        <text class='tel'>18277177517</text>
-    </view>
-    <view class='persons bottom-line'>
-        <view class='headImg'>
-        <image mode='aspectFill' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-        </view>
-        <text class='name'>王恩</text>
-        <text class='tel'>18277177517</text>
-    </view>
-    <view class='persons bottom-line'>
-        <view class='headImg'>
-        <image mode='aspectFill' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-        </view>
-        <text class='name'>王恩</text>
-        <text class='tel'>18277177517</text>
-    </view>
-    <view class='persons bottom-line'>
-        <view class='headImg'>
-        <image mode='aspectFill' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-        </view>
-        <text class='name'>王恩</text>
-        <text class='tel'>18277177517</text>
-    </view>
-    <view class='persons bottom-line'>
-        <view class='headImg'>
-        <image mode='aspectFill' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-        </view>
-        <text class='name'>王恩</text>
-        <text class='tel'>18277177517</text>
+        <text class='name'>{{item.name}}</text>
+        <text bindtap="callphone" data-mobile='{{item.mobile}}' class='tel'>{{item.mob}}<text class="iconfont icon-dianhua"></text></text>
     </view>
 </view>

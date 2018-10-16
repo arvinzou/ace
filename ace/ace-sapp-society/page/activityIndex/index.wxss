@@ -1,3 +1,9 @@
+.index{
+    height: 100%;
+}
+
+
+
 .navbar {
     width: 690rpx !important;
     margin: auto;
@@ -49,9 +55,11 @@
 }
 
 .activity-list {
+    height: 100%;
     width: 690rpx;
     margin: auto;
     padding-top: 84rpx;
+    overflow-y: auto;
     position: relative;
 }
 
@@ -110,33 +118,4 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-}
-
-.list-style-2 .images {
-    display: flex;
-    justify-content: space-between;
-    margin: 26rpx 0;
-}
-
-.list-style-2 .images .image {
-    width: 216rpx;
-    height: 170rpx;
-    overflow: hidden;
-}
-
-.list-style-2 .images .image image {
-    width: 100%;
-    height: 100%;
-}
-
-.list-style-3 .images {
-    width: 690rpx;
-    height: 392rpx;
-    margin: 26rpx 0;
-    overflow: hidden;
-}
-
-.list-style-3 .images  image {
-    width: 100%;
-    height: 100%;
 }

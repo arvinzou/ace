@@ -4,13 +4,21 @@
             <view class="section_title">场地</view>
             <scroll-view scroll-x style="width: 100%">
                 <view class='scroll-view-x'>
-                    <block wx:for="{{ sitelist }}">
-                        <view class='image-box' bindtap='siteDetail' data-id='{{ item.id }}'>
-                            <image src='{{ item.commodityCover}}'></image>
-                            <view class='coin-num'>{{ item.costPoints }}爱心币</view>
-                            <view class='site-name'>{{ item.commodityName }}</view>
-                        </view>
-                    </block>
+                    <view class='image-box' bindtap='siteDetail'>
+                        <image src='../../image/test1.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>欢乐水世界</view>
+                    </view>
+                    <view class='image-box' bindtap='siteDetail'>
+                        <image src='../../image/test2.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>屈原公园</view>
+                    </view>
+                    <view class='image-box' bindtap='siteDetail'>
+                        <image src='../../image/test3.jpg'></image>
+                        <view class='coin-num'>200爱心币</view>
+                        <view class='site-name'>华彩伟业</view>
+                    </view>
                 </view>
             </scroll-view>
         </view>
@@ -20,38 +28,61 @@
         <view class='section_gap'>
             <view class="section_title">商品</view>
             <view class='commodity'>
-            <block wx:for="{{ commoditylist }}">
-                <view class='commodity-item evenDiv' bindtap='commodityDetal' data-id='{{ item.id }}'  wx:if="{{ index % 2 == 0}}">
-                    <view class='cover'><image src='{{ item.commodityCover }}'></image></view>
-                    <view class='commodity-title'>
-                        <text>{{ index }}{{ item.commodityName }}</text>
-                    </view>
+                <view class='commodity-item evenDiv' bindtap='commodityDetal'>
+                    <view class='cover'></view>
+                    <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
                     <view class='commodity-label'>
                         <view class='commodity-label-left'>
-                            <text class='num'>{{ item.costPoints }}</text>
+                            <text class='num'>150</text>
                             <text class='num-title'>爱心币</text>
                         </view>
-                        <view class='commodity-label-right'>
-                            <text class='opt'>兑换</text>
-                        </view>
+                        <view class='commodity-label-right'><text class='opt'>兑换</text></view>
                     </view>
                 </view>
-                <view class='commodity-item' bindtap='commodityDetal' wx:if="{{ index % 2 != 0}}">
-                    <view class='cover'><image src='{{ item.commodityCover }}'></image></view>
-                    <view class='commodity-title'>
-                        <text>{{ index }}{{ item.commodityName }}</text>
-                    </view>
+                <view class='commodity-item' bindtap='commodityDetal'>
+                    <view class='cover'></view>
+                    <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
                     <view class='commodity-label'>
                         <view class='commodity-label-left'>
-                            <text class='num'>{{ item.costPoints }}</text>
+                            <text class='num'>150</text>
                             <text class='num-title'>爱心币</text>
                         </view>
-                        <view class='commodity-label-right'>
-                            <text class='opt'>兑换</text>
-                        </view>
+                        <view class='commodity-label-right'><text class='opt'>兑换</text></view>
                     </view>
                 </view>
-                </block>
+                <view class='commodity-item evenDiv' bindtap='commodityDetal'>
+                    <view class='cover'></view>
+                    <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
+                    <view class='commodity-label'>
+                        <view class='commodity-label-left'>
+                            <text class='num'>150</text>
+                            <text class='num-title'>爱心币</text>
+                        </view>
+                        <view class='commodity-label-right'><text class='opt'>兑换</text></view>
+                    </view>
+                </view>
+                <view class='commodity-item' bindtap='commodityDetal'>
+                    <view class='cover'></view>
+                    <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
+                    <view class='commodity-label'>
+                        <view class='commodity-label-left'>
+                            <text class='num'>150</text>
+                            <text class='num-title'>爱心币</text>
+                        </view>
+                        <view class='commodity-label-right'><text class='opt'>兑换</text></view>
+                    </view>
+                </view>
+                <view class='commodity-item evenDiv' bindtap='commodityDetal'>
+                    <view class='cover'></view>
+                    <view class='commodity-title'><text>瑞士军刀拖箱</text></view>
+                    <view class='commodity-label'>
+                        <view class='commodity-label-left'>
+                            <text class='num'>150</text>
+                            <text class='num-title'>爱心币</text>
+                        </view>
+                        <view class='commodity-label-right'><text class='opt'>兑换</text></view>
+                    </view>
+                </view>
             </view>
         </view>
     </view>

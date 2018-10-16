@@ -1,30 +1,58 @@
 var dateTimePicker = require('../../util/dateTimePicker.js');
+import WxValidate from '../../util/WxValidate'
+
+const App = getApp()
 
 Page({
     data: {
         topNum: 0,
         dateTimeArray: null,
-        dateTime: null,
+        startDate: null,
+        endDate: null,
+        dendline: null,
         startYear: 2000,
         endYear: 2050,
-        stepNum:1,
+        stepNum: 1,
+        setDendline: true,
+        modeNum: 0,
+        purposeNum: 0,
+        form: {
+            title: '',
+            location: '',
+            mode: '',
+            purpose: '',
+            dendline: '',
+            startDate: '',
+            endDate: '',
+            parterNum: '',
+            coverUrl: ''
+        }
     },
     onLoad() {
+        this.initValidate();
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
         // 精确到分的处理，将数组的秒去掉
         var lastArray = obj.dateTimeArray.pop();
         var lastTime = obj.dateTime.pop();
-
         this.setData({
             dateTimeArray: obj.dateTimeArray,
-            dateTime: obj.dateTime
+            startDate: obj.dateTime,
+            endDate: obj.dateTime,
+            dendline: obj.dateTime
+
         });
     },
     changeDateTime(e) {
-        this.setData({ dateTime1: e.detail.value });
+        let name = e.currentTarget.dataset.name;
+        let temp = {};
+        temp[name] = e.detail.value,
+            this.setData(temp);
     },
     changeDateTimeColumn(e) {
-        var arr = this.data.dateTime, dateArr = this.data.dateTimeArray;
+        console.log(e);
+        let name = e.currentTarget.dataset.name;
+        var arr = this.data[name],
+            dateArr = this.data.dateTimeArray;
 
         arr[e.detail.column] = e.detail.value;
         dateArr[2] = dateTimePicker.getMonthDay(dateArr[0][arr[0]], dateArr[1][arr[1]]);
@@ -34,14 +62,185 @@ Page({
         });
     },
 
-    nextOne:function(){
-        var that=this;
-        this.setData({ stepNum: ++that.data.stepNum,
-            topNum:0,});
+    nextOne: function() {
+        var that = this;
+        this.setData({
+            stepNum: ++that.data.stepNum,
+            topNum: 0,
+        });
     },
 
-    previousOne:function() {
+    previousOne: function() {
         var that = this;
-        this.setData({ stepNum: --that.data.stepNum, topNum:  0,});
+        this.setData({
+            stepNum: --that.data.stepNum,
+            topNum: 0,
+        });
     },
+
+    showModal(error) {
+        wx.showModal({
+            content: error.msg,
+            showCancel: false,
+        })
+    },
+
+
+    formSubmit(e) {
+        const params = e.detail.value
+        const startDate = this.formatDT(params.startDate);
+        const endDate = this.formatDT(params.endDate);
+        const dendline = this.formatDT(params.dendline ? params.dendline : params.endDate);
+        if (!(startDate < dendline && dendline <= endDate)) {
+            wx.showModal({
+                title: '提示',
+                content: '设置时间错误'
+            });
+            return;
+        }
+        params.startDate = startDate;
+        params.endDate = endDate;
+        params.dendline = dendline;
+        console.log(params);
+        if (!this.WxValidate.checkForm(params)) {
+            const error = this.WxValidate.errorList[0]
+            this.showModal(error)
+            return false
+        }
+
+        this.showModal({
+            msg: '提交成功',
+        })
+    },
+
+    initValidate() {
+        const rules = {
+            title: {
+                required: true,
+                minlength: 5,
+                maxlength: 34
+            },
+            location: {
+                required: true,
+                minlength: 5,
+                maxlength: 34
+            },
+            mode: {
+                required: true,
+                minlength: 10,
+                maxlength: 300
+            },
+            purpose: {
+                required: true,
+                minlength: 10,
+                maxlength: 300
+            },
+            parterNum: {
+                required: true,
+                digits: true
+            },
+        }
+        const messages = {
+            title: {
+                required: '请填写活动名称',
+                minlength: '活动名称最少要5个字',
+                maxlength: '输入活动名称太长'
+            },
+            location: {
+                required: '请填写活动地址',
+                minlength: '请填写正确的活动地址',
+                maxlength: '填写的活动地址名称太长'
+            },
+            mode: {
+                required: '请填写活动方式',
+                minlength: '请填写正确的活动方式',
+                maxlength: '填写的活动方式太长'
+            },
+            purpose: {
+                required: '请填写活动目的',
+                minlength: '请填写正确的活动目的',
+                maxlength: '填写的活动目的太长'
+            },
+            parterNum: {
+                required: '请填写参与人数',
+                digits: '参与人数请填写数字'
+            },
+        }
+        this.WxValidate = new WxValidate(rules, messages)
+    },
+    formatDT(arr) {
+        return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1]) + '-' + this.FN(arr[2]) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':00';
+    },
+
+    FN(num) {
+        return num >= 10 ? num : '0' + num;
+    },
+
+    switchChange(e) {
+        this.setData({
+            setDendline: e.detail.value
+        })
+    },
+    checkFontNum(e) {
+        let name = e.currentTarget.dataset.name;
+        let temp = {};
+        temp[name] = e.detail.cursor,
+            this.setData(temp);
+    },
+    //添加图爿
+    addCover() {
+        var that = this;
+        wx.showActionSheet({
+            itemList: ['打开照相', '选取现有的'],
+            itemColor: '#007aff',
+            success(res) {
+                if (res.tapIndex === 0) {
+                    wx.chooseImage({
+                        sourceType: ['camera'],
+                        success(res) {
+                            that.uploadFileFun(res.tempFilePaths[0]);
+                        }
+                    })
+                } else if (res.tapIndex === 1) {
+                    wx.chooseImage({
+                        count: 1, // 设置最多三张
+                        sizeType: ['original', 'compressed'],
+                        sourceType: ['album', 'camera'],
+                        success(res) {
+                            var tempFilePaths = res.tempFilePaths;
+                            for (var i = 0; i < tempFilePaths.length; i++) {
+                                that.uploadFileFun(tempFilePaths[i]);
+                            }
+                        }
+                    })
+                }
+            }
+        })
+    },
+    // 上传文件方法
+    uploadFileFun: function(tempFilePaths) {
+        var that = this;
+        wx.uploadFile({
+            url: 'http://zx.huacainfo.com/portal/www/uploadFile.do',
+            filePath: tempFilePaths,
+            name: 'file',
+
+            formData: {
+                collectionName: 'ceshi',
+                id: '111'
+            },
+            success: function(res) {
+                var data = JSON.parse(res.data);
+                var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
+                that.setData({
+                    form:{
+                        coverUrl: url
+                    }
+                })
+            },
+            fail: function(res) {
+                return null
+            },
+        })
+    }
 })

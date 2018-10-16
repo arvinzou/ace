@@ -1,11 +1,14 @@
+var util = require("../../util/util.js");
 Page({
     data: {
         list:[],
         category: '',
         start:0,
-        limit:10,
+        limit:6,
         LoadOver:false,
         Loadingstatus:false,
+        nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),
+        showBtn:false,
     },
     onLoad: function(options) {
         let that = this;
@@ -16,7 +19,7 @@ Page({
         }
         that.data.category = category;
         that.setBarTitleText(category);
-        initdata();
+        that.initdata();
     },
 
     setBarTitleText: function(category) {
@@ -43,19 +46,21 @@ Page({
         if(that.data.LoadOver){
             return;
         }
-        util.request(cfg.selectActivityPageList, {
+        that.showLoading();
+        util.request('http://192.168.2.189/society/www/activity/findActivityList', {
                 category: that.data.category,
                 start: that.data.start,
                 limit: that.data.limit
             },
             function(data) {
+                console.log(data.data);
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.setData({
-                    list: that.data.list.concat(data)
+                    list: that.data.list.concat(data.data),
+                    Loadingstatus: false,
                 });
-                hideLoading();
-                if (data.rows.length < that.data.limit) {
+                if (data.data.length < that.data.limit) {
                     that.setData({
                         LoadOver: true,
                     });
@@ -68,17 +73,15 @@ Page({
         console.log('--------下拉刷新-------')
         var that = this;
         that.clearStatus();
-        that.initData('');
+        that.initdata();
     },
 
-    // 上拉加载
+    // // 上拉加载
     onReachBottom: function () {
         var that = this;
         console.log('-------------上拉加载-------------');
-        that.data.start+=10;
-        Loadingstatus: true,
-        showLoading();
-        that.initData();
+        that.data.start += that.data.limit;
+        that.initdata();
     },
     // 清空状态
     clearStatus: function () {
@@ -108,14 +111,47 @@ Page({
     },
     // 显示加载
     showLoading:function(){
-        that.setData({
-            Loadingstatus: false,
-        });
-    },
-    // 隐藏加载
-    hideLoading:function(){
+        let that=this;
         that.setData({
             Loadingstatus: true,
         });
-    }
+    },
+    viewContent: function (e) {
+        console.log(e);
+        let data = e.currentTarget.dataset
+        let p = data.id;
+        let title = data.title;
+        wx.navigateTo({ url: '../activityInfo/index?id=' + p + "&title=" + title})
+    },
+
+    createActivity: function (e) {
+        let data = e.currentTarget.dataset
+        let p = data.category;
+        wx.navigateTo({ url: '../activityApply/index?category=' + p })
+    },
+
+    onPageScroll: function (e) {
+
+        if (e.scrollTop <= 0) {
+            // 滚动到最顶部
+            e.scrollTop = 0;
+        } else if (e.scrollTop > this.data.scrollHeight) {
+            // 滚动到最底部
+            e.scrollTop = this.data.scrollHeight;
+        }
+        if (e.scrollTop > this.data.scrollTop || e.scrollTop >= this.data.scrollHeight) {
+            this.setData({
+                showBtn: true,
+            });
+        } else {
+            this.setData({
+                showBtn: false,
+            });
+        }
+        //给scrollTop重新赋值 
+        this.setData({
+            scrollTop: e.scrollTop
+        })
+    },
+    
 })
