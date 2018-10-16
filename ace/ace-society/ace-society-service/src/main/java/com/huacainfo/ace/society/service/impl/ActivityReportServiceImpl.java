@@ -173,15 +173,16 @@ public class ActivityReportServiceImpl implements ActivityReportService {
     public ActivityReportVo selectActivityReportByActivityId(String id,WxUser wxUser) throws Exception {
         ActivityReportVo activityReportVo=this.activityReportDao.selectByActivityId(id);
         if(CommonUtils.isBlank(activityReportVo)){
+            activityReportVo =new ActivityReportVo();
             activityReportVo.setId(GUIDUtil.getGUID());
             activityReportVo.setActivityId(id);
             activityReportVo.setCreateDate(new Date());
             activityReportVo.setStatus("1");
-            activityReportVo.setCreateUserName(wxUser.getName());
+            activityReportVo.setCreateUserName(wxUser.getNickName());
             activityReportVo.setCreateUserId(wxUser.getUnionId());
             this.activityReportDao.insertSelective(activityReportVo);
-            this.dataBaseLogService.log("添加活动报道", "活动报道", "",
-                    wxUser.getUnionId(), wxUser.getUnionId(), null);
+//            this.dataBaseLogService.log("添加活动报道", "活动报道", "",
+//                    wxUser.getUnionId(), wxUser.getUnionId(), null);
         }
         return activityReportVo;
     }
