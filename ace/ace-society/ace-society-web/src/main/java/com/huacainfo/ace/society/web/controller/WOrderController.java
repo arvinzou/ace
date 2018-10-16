@@ -1,9 +1,10 @@
 package com.huacainfo.ace.society.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
-import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.society.service.OrderInfoService;
 import com.huacainfo.ace.society.vo.OrderInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,20 @@ public class WOrderController extends SocietyBaseController {
      * @return ResultResponse
      */
     @RequestMapping("/create")
-    public ResultResponse create(OrderInfoVo info) throws Exception {
-        if (!StringUtil.areNotEmpty(info.getPayType(), info.getReceiveType())) {
+    public ResultResponse create(String params, String unionId) throws Exception {
+        WxUser wxUser = getCurWxUser();//小程序用户
+        if (null == wxUser && StringUtil.isEmpty(unionId)) {
+            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
+        }
+        unionId = StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId();
+
+        if (StringUtil.isEmpty(params)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
-        Userinfo u = getUserInfo(info.getUserId());
-        if (u == null || StringUtil.isEmpty(u.getUnionid())) {
-            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
-        }
+
+
+        OrderInfoVo info = JsonUtil.toObject(params, OrderInfoVo.class);
+        info.setUserId(unionId);
 
         return orderInfoService.create(info);
     }

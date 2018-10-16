@@ -263,6 +263,7 @@ public class BehaviorServiceImpl implements BehaviorService {
         params.setCreateDate(new Date());
         params.setCreateUserName("system");
         params.setCreateUserId("8888");
+        behaviorDao.insert(params);
         //附件保存
         if (!CollectionUtils.isEmpty(params.getBehaviorAnnexList())) {
             for (BehaviorAnnexVo annex : params.getBehaviorAnnexList()) {
@@ -275,7 +276,7 @@ public class BehaviorServiceImpl implements BehaviorService {
                 behaviorAnnexDao.insert(annex);
             }
         }
-        behaviorDao.insert(params);
+
 
         return new ResultResponse(ResultCode.SUCCESS, "提交成功");
     }
