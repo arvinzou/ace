@@ -116,7 +116,7 @@ Page({
   onLoad: function (params) {
     var that = this;
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../live/index?id=" + params.id });
+      wx.navigateTo({ url: "../userinfo/index?url=../preview/index?id=" + params.id });
     }
     that.setData({
       userinfo: wx.getStorageSync('userinfo')
@@ -280,12 +280,6 @@ Page({
     });
     console.log(message);
     that.setData({ contentText: '' });
-  },
-  initData(id) {
-    var that = this;
-    that.loadMsg();
-    that.loadRpt();
-
   },
   //点击按钮痰喘指定的hiddenmodalput弹出框  
   modalinput: function () {
@@ -461,6 +455,7 @@ Page({
     var that = this;
     that.loadMsg();
     that.loadRpt();
+    that.loadLive(id);
 
   },
   //点击按钮痰喘指定的hiddenmodalput弹出框  
@@ -475,4 +470,16 @@ Page({
       hiddenmodalcmt: true
     });
   },
+  loadLive:function(id){
+    var that=this;
+    util.request(cfg.loadLive, { id: id },
+      function (data) {
+        console.log(data);
+        that.setData({ rtmpurl: data.rtmpUrl,live:data});
+        wx.setNavigationBarTitle({
+          title: data.name
+        })
+      }
+    );
+  }
 });
