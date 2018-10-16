@@ -1,0 +1,54 @@
+<view class='index'>
+    <view class='container'>
+        <view class='commodity-cover'>
+            <text>场地图</text>
+        </view>
+    </view>
+    <view class='container'>
+        <view class='date-box'>
+            <view class='title'>场地开放时间</view>
+            <view class='container-fluid'>
+                <view class='days'>
+                    <view class='days-item'>日</view>
+                    <view class='days-item'>一</view>
+                    <view class='days-item'>二</view>
+                    <view class='days-item'>三</view>
+                    <view class='days-item'>四</view>
+                    <view class='days-item'>五</view>
+                    <view class='days-item'>六</view>
+                    <view class='days-item'>日</view>
+                </view>
+                <view class='date'>
+                    <view class='date-item'>
+                        <view class='date-active'>9</view>
+                    </view>
+                    <view class='date-item'>
+                        <view>10</view>
+                    </view>
+                    <view class='date-item'>
+                        <view>11</view>
+                    </view>
+                    <view class='date-item'>
+                        <view>12</view>
+                    </view>
+                    <view class='date-item'>
+                        <view>13</view>
+                    </view>
+                    <view class='date-item'>
+                        <view>14</view>
+                    </view>
+                    <view class='date-item'>
+                        <view>15</view>
+                    </view>
+                    <view class='date-item'>
+                        <view>16</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='container'>
+        
+    </view>
+</view>

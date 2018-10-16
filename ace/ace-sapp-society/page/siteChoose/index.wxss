@@ -1,0 +1,81 @@
+.index{
+    width: 100%;
+    background: #F6F6F6;
+    margin-bottom: 150rpx;
+}
+.container{
+    width: 100%;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+}
+.commodity-cover{
+    width: 100%;
+    height: 488rpx;
+    background: #F6F6F6;
+    color: #999999;
+    line-height: 488rpx;
+    text-align: center;
+}
+.date-box{
+    width: 90%;
+    height: auto;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+    border-bottom: 1px solid #F2F2F2;
+    margin: 0 auto;
+}
+.title{
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    color: #222222;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.days{
+    width: 100%;
+    height: 63rpx;
+    border-radius: 32rpx;
+    color: #666666;
+    font-size: 28rpx;
+    font-weight: bold;
+    background:rgba(245,245,245,1);
+    line-height: 63rpx;
+}
+.days::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.days-item{
+    width: 12.5%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.date{
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 28rpx;
+    color: #666666;
+    font-weight: bold;
+}
+.date::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.date-item{
+    width: 12.5%;
+    height: 80rpx;
+    text-align: center;
+    float: left;
+
+}
+.date-active{
+    border-radius: 50%;
+    color: #FFFFFF;
+    background: rgba(255,153,6,1);
+}
