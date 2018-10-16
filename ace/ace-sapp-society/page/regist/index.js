@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+      unionId : null,
       array: ['个人', '社会组织', '党员', '党组织'],
       objectArray: [
           {
@@ -43,6 +44,7 @@ Page({
       btnName: "获取验证码",
       imageCover: null,
       orgId: null,
+      userinfo: null,
   },
 
   /**
@@ -50,14 +52,9 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      if (!util.isLogin()) {
-          wx.navigateTo({ url: "../userinfo/index?url=../regist/index" });
-      }
-      that.setData({
-          userinfo: wx.getStorageSync('userinfo')
-      });
-      that.orgList();
+      
   },
+  
   bindPickerChange: function (e) {
         console.log('picker发送选择改变，携带值为', e.detail.value);
         var that = this;
