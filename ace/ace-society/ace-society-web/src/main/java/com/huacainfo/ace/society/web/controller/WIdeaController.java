@@ -79,7 +79,7 @@ public class WIdeaController extends SocietyBaseController {
         }
         unionId = StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId();
 
-        if (!StringUtil.isEmpty(params)) {
+        if (StringUtil.isEmpty(params)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 

@@ -99,8 +99,7 @@ public class WBehaviorController extends SocietyBaseController {
         }
         unionId = StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId();
 
-        if (!StringUtil.areNotEmpty(id, unionId)) {
-            String a = "demo";
+        if (StringUtil.isEmpty(id)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 

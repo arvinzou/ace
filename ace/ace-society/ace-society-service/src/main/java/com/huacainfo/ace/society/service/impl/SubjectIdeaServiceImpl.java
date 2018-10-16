@@ -279,6 +279,7 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         params.setCreateDate(new Date());
         params.setCreateUserName("system");
         params.setCreateUserId("8888");
+        subjectIdeaDao.insert(params);
         //附件保存
         if (!CollectionUtils.isEmpty(params.getListSubjectIdeaAnnexVo())) {
             for (SubjectIdeaAnnexVo annex : params.getListSubjectIdeaAnnexVo()) {
@@ -291,7 +292,6 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
                 subjectIdeaAnnexDao.insert(annex);
             }
         }
-        subjectIdeaDao.insert(params);
 
         return new ResultResponse(ResultCode.SUCCESS, "提交成功");
     }
