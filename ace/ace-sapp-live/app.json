@@ -1,11 +1,13 @@
 {
   "pages": [
-    "page/home/index",
+    "page/myLive/index",
+    "page/liveList/index",
     "page/live/index",
     "page/rpt/index",
     "page/liveCsl/index",
     "page/userinfo/index",
-    "page/bind/index"
+    "page/bind/index",
+    "page/preview/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

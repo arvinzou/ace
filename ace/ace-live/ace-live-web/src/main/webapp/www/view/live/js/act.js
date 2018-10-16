@@ -309,7 +309,8 @@ function getReport(e, i) {
         lvsCmd.ajax(apiServer + "/www/live/getLiveRptList", {
                 rid: lvsCmd.urlParams.id,
                 sort: reportSort,
-                page: e
+                page: e,
+                time:new Date()
             },
             function (a, n) {
                 console.log(reportLoading);
@@ -782,23 +783,12 @@ if (getReport(reportPage), setInterval(function () {
             return;
         }
         if (a) {
-            var message = {};
-            message.header = {
-                type: 2,
-                wxuser: wxuser
-            };
-            message.content = a;
-            message.id = i;
-            message.createTime = new Date().pattern("hh:mm:ss");
             var n = {
-                companyId: lvsCmd.urlParams.companyId,
-                rid: lvsCmd.urlParams.id,
                 rptId: i,
-                message: JSON.stringify(message),
-                topic: "cmt",
+                content: a,
                 uid: wxuser.openid
             };
-            lvsCmd.ajax(apiServer + "/www/live/cmt", n,
+            lvsCmd.ajax(apiServer + "/liveCmt/www/insertLiveCmt", {jsons:JSON.stringify(n)},
                 function (e, n) {
                     if (e) if (0 == n.status) {
                         $("#j-remarkform input[name=content]").val("");

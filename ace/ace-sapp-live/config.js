@@ -1,8 +1,8 @@
-var server = "http://127.0.0.1";
+var server = "https://zx.huacainfo.com/";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
 var hlsserver ="http://139.224.0.227:9999/hls/";
-var websocketurl= '127.0.0.1';
+var websocketurl = 'zx.huacainfo.com';
 var config = {
     rtmpserver,
     websocketurl,
@@ -11,7 +11,7 @@ var config = {
     hlsserver,
     appid: 'wxcf3d50130f9844f5',
     appsecret: '10a109f311c9803c2a8fd17b14bf09dd',
-    companyId: '0010007',
+    companyId: '00010001',
     ak: 'cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB',
     frontColor: '#000000',
     backgroundColor: "#ffffff",
@@ -28,6 +28,8 @@ var config = {
     findLiveList: `${server}/live/live/www/findLiveList`,
   updateAuditStatus: `${server}/live/live/www/updateAuditStatus`,
   insertLiveCmt: `${server}/live/liveCmt/www/insertLiveCmt`,
-  addLike: `${server}/live/www/live/addLike`
+  addLike: `${server}/live/www/live/addLike`,
+  getliveListByCorpId: `${server}/live/live/www/getliveListByCorpId`,
+  loadLive: `${server}/live/live/www/loadLive`
 };
 module.exports = config

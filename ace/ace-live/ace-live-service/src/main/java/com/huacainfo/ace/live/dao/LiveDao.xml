@@ -161,7 +161,7 @@
         status state,
         name topic,
         category type,
-        null watermarkConfig from live where deptId=#{companyId}
+        null watermarkConfig from live where deptId=#{companyId} and auditStatus='2'
         order by status, startTime desc
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
 
@@ -276,7 +276,7 @@
         from live_rpt t
         left join portal.userinfo a on t.uid=a.unionid
         left join live_img b on t.id=b.rptId
-        left join live_cmt c on t.id=c.rptId
+        left join (select rptId,id,content,uid,createTime from live_cmt where status!='3') c on t.id=c.rptId
         left join portal.userinfo d on c.uid=d.unionid
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id

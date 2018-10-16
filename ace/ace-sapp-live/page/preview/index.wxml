@@ -1,21 +1,7 @@
 <view>
   <view style='display:flex;flex-direction:row;position:fixed;width:100%'>
-    <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:{{pusherSizeW}}%; height:{{pusherSizeH}}vh;flex:1"
-      waiting-image="../../image/video-cover.jpg">
-      <cover-view class="info-tip" hidden="{{pusherSizeH==16}}">
-        <cover-view class="tip-item" wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
-        <cover-view class="tip-item" wx:if="{{info.audioBitrate}}">音频输出:{{info.audioBitrate}}kbps</cover-view>
-        <cover-view class="tip-item" wx:if="{{info.netSpeed}}">发送速度:{{info.netSpeed}}</cover-view>
-      </cover-view>
-      <cover-image src='../../image/video-cover.jpg' mode="aspectFill" class='{{display}}' style="width:100%;height:{{pusherSizeH}}vh;position: relative;top:0rpx;right:0rpx"></cover-image>
-    </live-pusher>
-    <cover-view hidden="{{pusherSizeH==35}}" style='background: #000;height:{{pusherSizeH}}vh; flex:1;'>
-      <cover-view style='color:#fff;font-size:25rpx;padding:40rpx;'>
-        <cover-view wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
-        <cover-view wx:if="{{info.audioBitrate}}">音频输出:{{info.audioBitrate}}kbps</cover-view>
-        <cover-view wx:if="{{info.netSpeed}}">发送速度:{{info.netSpeed}}</cover-view>
-      </cover-view>
-    </cover-view>
+    
+    <live-player src="{{rtmpurl}}" mode="RTC" autoplay bindstatechange="statechange" binderror="error" style="width:{{pusherSizeW}}%; height:{{pusherSizeH}}vh;flex:1" />
   </view>
   <!--导航条-->
   <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
@@ -36,24 +22,7 @@
         </view>
       </view>
     </block>
-    <view class="circle play" bindtap="play">
-      <image class="imgsmall" src="{{playimg}}" />
-    </view>
-
-    <view class="circle camera" bindtap="camera">
-      <image class="imgsmall" src="{{cameraimg}}" />
-    </view>
-    <view class="circle muted" bindtap="muted">
-      <image class="imgsmall" src="{{mutedimg}}" />
-    </view>
-    <!--
-      <view class="circle aspect" bindtap="aspect">
-       <image class="imgsmall" src="{{aspectimg}}" />
-      </view>
-       <view class="circle orientation" bindtap="orientation">
-       <image class="imgsmall" src="{{orientationimg}}" />
-      </view>
--->
+  
     <view class="circle chat" bindtap="modalinput">
       <image class="imgsmall" src="../../image/chat.png" />
     </view>
@@ -61,10 +30,6 @@
   <view class='chat-box' hidden="{{currentTab!==1}}">
     <block wx:for-items="{{list}}" wx:key="*">
       <view class="wrap">
-
-
-        
-
           <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
             <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
 
@@ -109,9 +74,7 @@
       </view>
     </block>
 
-    <view class="btn-add-rpt" bindtap="rpt">
-      <image class="btn-img" src="../../image/add-red.png" />
-    </view>
+
 
 
   </view>

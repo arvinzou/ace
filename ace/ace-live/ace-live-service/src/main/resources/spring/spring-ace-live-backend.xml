@@ -22,6 +22,4 @@
         <constructor-arg index="3" value="${kafka.consumer.msg.threads}"/>
         <constructor-arg index="4" value="${kafka.consumer.msg.newonly}"/>
     </bean>
-
-
 </beans>

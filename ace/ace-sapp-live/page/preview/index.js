@@ -60,7 +60,7 @@ Page({
     toView: 0,
     contentText: '',
     hiddenmodalput: true,
-    hiddenmodalcmt:true,
+    hiddenmodalcmt: true,
     display: 'show',
     currentTab: 0,
     navbar: ['互动聊天', '图文直播'],
@@ -79,7 +79,7 @@ Page({
       title: dict[e.detail.code]
     })
   },
-  
+
   netstatus(e) {
     this.setData(
       {
@@ -91,7 +91,7 @@ Page({
     console.log("===============接收信息===================");
     console.log(data);
     var that = this;
-    var message=[];
+    var message = [];
     if (data.header.cmd == 'reload.rpt') {
       that.loadRpt();
       return;
@@ -105,7 +105,7 @@ Page({
       message = that.data.message;
       message.push(data);
     }
-    
+
 
     that.setData({ message: message });
     that.setData({ toView: 1000 });
@@ -116,7 +116,7 @@ Page({
   onLoad: function (params) {
     var that = this;
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../live/index?id=" + params.id });
+      wx.navigateTo({ url: "../userinfo/index?url=../preview/index?id=" + params.id });
     }
     that.setData({
       userinfo: wx.getStorageSync('userinfo')
@@ -281,12 +281,6 @@ Page({
     console.log(message);
     that.setData({ contentText: '' });
   },
-  initData(id) {
-    var that = this;
-    that.loadMsg();
-    that.loadRpt();
-
-  },
   //点击按钮痰喘指定的hiddenmodalput弹出框  
   modalinput: function () {
     this.setData({
@@ -337,9 +331,9 @@ Page({
     })
 
   },
-  loadMsg:function(){
-    var that=this;
-    that.data.message=[];
+  loadMsg: function () {
+    var that = this;
+    that.data.message = [];
     util.request(cfg.getLiveMsgList, { rid: that.data.id },
       function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -352,7 +346,7 @@ Page({
   },
   loadRpt: function () {
     var that = this;
-    that.data.list=[];
+    that.data.list = [];
     that.setData({ list: [] });
     util.request(cfg.getLiveRptList, { rid: that.data.id, page: 1 },
       function (data) {
@@ -405,9 +399,9 @@ Page({
     that.loadMsg();
 
   },
-  addlike:function(e){
+  addlike: function (e) {
     console.log(e.currentTarget.dataset.id);
-    util.request(cfg.addLike, { type: "2", id: e.currentTarget.dataset.id},
+    util.request(cfg.addLike, { type: "2", id: e.currentTarget.dataset.id },
       function (data) {
 
       }
@@ -415,7 +409,7 @@ Page({
   },
   addcmt: function (e) {
     console.log(e.currentTarget.dataset.id);
-    var that=this;
+    var that = this;
     that.setData({
       hiddenmodalcmt: false,
       rptId: e.currentTarget.dataset.id
@@ -449,18 +443,19 @@ Page({
     data.rptId = that.data.rptId;
     data.uid = that.data.userinfo.unionId;
     data.content = that.data.contentCmtText;
-    util.request(cfg.insertLiveCmt, { jsons: JSON.stringify(data)},
+    util.request(cfg.insertLiveCmt, { jsons: JSON.stringify(data) },
       function (data) {
-        that.setData({ hiddenmodalcmt:true });
+        that.setData({ hiddenmodalcmt: true });
         that.setData({ contentCmtText: '' });
       }
     );
-    
+
   },
   initData(id) {
     var that = this;
     that.loadMsg();
     that.loadRpt();
+    that.loadLive(id);
 
   },
   //点击按钮痰喘指定的hiddenmodalput弹出框  
@@ -475,4 +470,16 @@ Page({
       hiddenmodalcmt: true
     });
   },
+  loadLive:function(id){
+    var that=this;
+    util.request(cfg.loadLive, { id: id },
+      function (data) {
+        console.log(data);
+        that.setData({ rtmpurl: data.rtmpUrl,live:data});
+        wx.setNavigationBarTitle({
+          title: data.name
+        })
+      }
+    );
+  }
 });

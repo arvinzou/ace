@@ -69,6 +69,7 @@ public class OAuth2Controller extends LiveBaseController {
     @RequestMapping(value = "/cfg")
     public ModelAndView userinfo() throws Exception {
         Object o = this.getSession(CommonKeys.SESSION_USERINFO_KEY);
+
         Map<String, Object> cfg = new HashMap<>();
         cfg.put("fastdfs_server", PropertyUtil.getProperty("fastdfs_server"));
         cfg.put("websocketurl", PropertyUtil.getProperty("websocketurl"));

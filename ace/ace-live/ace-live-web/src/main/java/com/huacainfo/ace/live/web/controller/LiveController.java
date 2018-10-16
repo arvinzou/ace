@@ -268,6 +268,16 @@ public class LiveController extends LiveBaseController {
         return prt;
     }
 
+    @RequestMapping(value = "/www/getliveListByCorpId")
+    @ResponseBody
+    public PageResult<LiveVo> getliveListByCorpId(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:updateStatus
@@ -305,5 +315,22 @@ public class LiveController extends LiveBaseController {
     public SingleResult<LiveVo> selectLiveByPrimaryKeyWww(String id)
             throws Exception {
         return this.liveService.selectLiveByPrimaryKey(id);
+    }
+
+    /**
+     * @throws
+     * @Title:selectLiveByPrimaryKey
+     * @Description: TODO(获取直播)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<Live>
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/www/loadLive")
+    @ResponseBody
+    public LiveVo loadLive(String id)
+            throws Exception {
+        return this.liveService.selectLiveByPrimaryKey(id).getValue();
     }
 }

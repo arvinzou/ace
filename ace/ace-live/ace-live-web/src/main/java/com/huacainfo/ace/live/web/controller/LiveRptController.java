@@ -121,22 +121,11 @@ public class LiveRptController extends LiveBaseController {
      */
     @RequestMapping(value = "/updateLiveRptStatus")
     @ResponseBody
-    public MessageResponse updateLiveRptStatus(String id, String status, String message, String rid) throws Exception {
+    public MessageResponse updateLiveRptStatus(String id, String status) throws Exception {
         MessageResponse rst= this.liveRptService.updateLiveRptStatus(id, status);
         if (0==rst.getStatus()) {
-            if (MyWebSocket.rooms.get(rid) == null) {
-                CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
-                MyWebSocket.rooms.put(rid, webSocketSet);
-                logger.debug("create new room rid:{}", rid);
-            }
-            for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
-                try {
-                    item.sendMessage(message);
-                } catch (IOException e) {
-                    logger.error(e.getMessage());
-                    continue;
-                }
-            }
+            LiveRptVo o=this.liveRptService.selectLiveRptByPrimaryKey(id).getValue();
+            this.cls(this.createMessage("reload.rpt"),o.getRid());
         }
         return rst;
     }

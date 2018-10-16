@@ -281,10 +281,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 			return new MessageResponse(1,"没有找到对应的用户");
 		}
 		if(CommonUtils.isBlank(o.getRole())){
-			return new MessageResponse(1,"没有分配权限");
+			//return new MessageResponse(1,"没有分配权限");
 		}
 		if(!o.getRole().equals("admin")){
-			return new MessageResponse(1,"权限非admin");
+			//return new MessageResponse(1,"权限非admin");
 		}
 		return new MessageResponse(0,"OK");
 	}
