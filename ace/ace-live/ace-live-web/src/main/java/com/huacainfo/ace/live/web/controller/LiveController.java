@@ -268,6 +268,16 @@ public class LiveController extends LiveBaseController {
         return prt;
     }
 
+    @RequestMapping(value = "/www/getliveListByCorpId")
+    @ResponseBody
+    public PageResult<LiveVo> getliveListByCorpId(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:updateStatus

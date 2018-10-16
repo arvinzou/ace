@@ -28,6 +28,7 @@ var config = {
     findLiveList: `${server}/live/live/www/findLiveList`,
   updateAuditStatus: `${server}/live/live/www/updateAuditStatus`,
   insertLiveCmt: `${server}/live/liveCmt/www/insertLiveCmt`,
-  addLike: `${server}/live/www/live/addLike`
+  addLike: `${server}/live/www/live/addLike`,
+  getliveListByCorpId: `${server}/live/live/www/getliveListByCorpId`
 };
 module.exports = config
