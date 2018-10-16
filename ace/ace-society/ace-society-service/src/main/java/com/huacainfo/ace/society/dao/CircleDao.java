@@ -33,4 +33,6 @@ public interface CircleDao {
 
     List<Rpt> getList(@Param("status")String status,@Param("uid") String uid,@Param("start") int start, @Param("limit") int limit);
 
+    int updateAddLike(@Param("id") String id);
+
 }
