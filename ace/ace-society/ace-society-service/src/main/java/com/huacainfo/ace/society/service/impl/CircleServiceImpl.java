@@ -259,4 +259,19 @@ public class CircleServiceImpl implements CircleService {
         }
         return null;
     }
+    /**
+     * @throws
+     * @Title:updateAddLike
+     * @Description: TODO(点赞)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-10-16
+     */
+    @Override
+    public MessageResponse updateAddLike(String id){
+        this.circleDao.updateAddLike(id);
+        return new MessageResponse(0, "点赞成功！");
+    }
 }
