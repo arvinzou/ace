@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.society.service.SubjectIdeaService;
 import com.huacainfo.ace.society.vo.SubjectIdeaQVo;
 import com.huacainfo.ace.society.vo.SubjectIdeaVo;
@@ -68,17 +69,24 @@ public class WIdeaController extends SocietyBaseController {
      * @throws Exception
      */
     @RequestMapping("/submit")
-    public ResultResponse submit(SubjectIdeaVo params, String unionId) throws Exception {
+    public ResultResponse submit(String params, String unionId) throws Exception {
 
 //        getUserInfo(unionId);
 //        getCurUserinfo();//公众号用户
-//        getCurWxUser();//小程序用户
+        WxUser wxUser = getCurWxUser();//小程序用户
+        if (null == wxUser && StringUtil.isEmpty(unionId)) {
+            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
+        }
+        unionId = StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId();
 
-        if (StringUtil.isNotEmpty(unionId)) {
-            params.setUserId(unionId);
+        if (!StringUtil.isEmpty(params)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
-        return ideaService.submit(params);
+        SubjectIdeaVo vo = JsonUtil.toObject(params, SubjectIdeaVo.class);
+        vo.setUserId(unionId);
+
+        return ideaService.submit(vo);
     }
 
     /**
@@ -93,7 +101,13 @@ public class WIdeaController extends SocietyBaseController {
 
 //        getUserInfo(unionId);
 //        getCurUserinfo();//公众号用户
-//        getCurWxUser();//小程序用户
+
+        WxUser wxUser = getCurWxUser();//小程序用户
+        if (null == wxUser && StringUtil.isEmpty(unionId)) {
+            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
+        }
+        unionId = StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId();
+
 
         if (!StringUtil.areNotEmpty(ideaId, unionId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
@@ -115,6 +129,12 @@ public class WIdeaController extends SocietyBaseController {
 //        getUserInfo(unionId);
 //        getCurUserinfo();//公众号用户
 //        getCurWxUser();//小程序用户
+
+        WxUser wxUser = getCurWxUser();//小程序用户
+        if (null == wxUser && StringUtil.isEmpty(unionId)) {
+            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
+        }
+        unionId = StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId();
 
         if (!StringUtil.areNotEmpty(ideaId, unionId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");

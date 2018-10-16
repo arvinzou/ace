@@ -163,11 +163,11 @@ public class WRegController extends SocietyBaseController {
         //公众号 or 小程序 获取unionId
 
         WxUser wxUser = getCurWxUser();
-        if (wxUser == null) {
+        if (wxUser == null && StringUtil.isEmpty(unionId)) {
             return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
         }
 
-        CustomerVo vo = regService.findByUserId(wxUser.getUnionId());
+        CustomerVo vo = regService.findByUserId(StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId());
         if (null == vo) {
             return new ResultResponse(ResultCode.FAIL, "用户尚未注册");
         }
