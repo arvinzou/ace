@@ -43,7 +43,7 @@ public interface ActivityService {
      * @author: huacai003
      * @version: 2018-09-11
      */
-    MessageResponse insertActivity(Activity obj, UserProp userProp) throws Exception;
+    MessageResponse insertActivity(Activity obj) throws Exception;
 
     /**
      * @throws

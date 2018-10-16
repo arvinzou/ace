@@ -32,4 +32,5 @@ public interface SocietyOrgInfoDao {
 
     int isExit(SocietyOrgInfo record);
 
+
 }

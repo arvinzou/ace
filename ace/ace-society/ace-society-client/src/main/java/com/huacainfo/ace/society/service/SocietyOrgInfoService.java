@@ -3,6 +3,7 @@ package com.huacainfo.ace.society.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
@@ -99,4 +100,5 @@ public interface SocietyOrgInfoService {
     MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
 
     List<SocietyOrgInfoVo> findList(SocietyOrgInfoQVo condition, int start, int limit, String orderBy);
+    ResultResponse getUserType(String unionId);
 }

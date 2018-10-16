@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.Activity;
+import com.huacainfo.ace.society.model.ActivityReport;
 import com.huacainfo.ace.society.service.ActivityDetailService;
 import com.huacainfo.ace.society.service.ActivityReportService;
 import com.huacainfo.ace.society.service.ActivityService;
@@ -67,6 +68,24 @@ public class WActivityController extends SocietyBaseController {
     public ResultResponse findActivityList(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS,"获取成功",rst);
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertActivity
+     * @Description: TODO(添加线下活动)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @RequestMapping(value = "/insertActivity")
+    @ResponseBody
+    public MessageResponse insertActivity(String jsons) throws Exception {
+        Activity obj = JSON.parseObject(jsons, Activity.class);
+        return this.activityService.insertActivity(obj);
     }
 
     /**
@@ -147,5 +166,29 @@ public class WActivityController extends SocietyBaseController {
         WxUser wxUser = getCurWxUser();
         ActivityReportVo activityReportVo=this.activityReportService.selectActivityReportByActivityId(activityId,wxUser);
         return  new ResultResponse(ResultCode.SUCCESS,"获取成功",activityReportVo);
+    }
+
+    /**
+     * @throws
+     * @Title:updateActivityReport
+     * @Description: TODO(更新活动报道)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @RequestMapping(value = "/updateActivityReport")
+    @ResponseBody
+    public MessageResponse updateActivityReport(String jsons) throws Exception {
+        ActivityReport obj = JSON.parseObject(jsons, ActivityReport.class);
+        return this.activityReportService.updateActivityReport(obj, this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/getUserType")
+    @ResponseBody
+    public ResultResponse getUserType() throws Exception {
+//        WxUser wxUser = getCurWxUser();
+        return  this.societyOrgInfoService.getUserType("o6qFn1J84GDX6dMs9jivNpfuu4rA");
     }
 }

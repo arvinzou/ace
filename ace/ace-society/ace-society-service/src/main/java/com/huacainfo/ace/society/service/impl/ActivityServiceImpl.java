@@ -86,8 +86,9 @@ public class ActivityServiceImpl implements ActivityService {
      * @version: 2018-09-11
      */
     @Override
-    public MessageResponse insertActivity(Activity o, UserProp userProp) throws Exception {
+    public MessageResponse insertActivity(Activity o) throws Exception {
 
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键-GUID不能为空！");
         }
@@ -103,15 +104,13 @@ public class ActivityServiceImpl implements ActivityService {
         if (temp > 0) {
             return new MessageResponse(1, "线下活动名称重复！");
         }
-
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        o.setStatus("1");
-        o.setCreateUserName(userProp.getName());
-        o.setCreateUserId(userProp.getUserId());
+        o.setStatus("2");
+        o.setCreateUserName("测试测试");
+        o.setCreateUserId("88888888");
         this.activityDao.insertSelective(o);
-        this.dataBaseLogService.log("添加线下活动", "线下活动", "",
-                o.getId(), o.getId(), userProp);
+//        this.dataBaseLogService.log("添加线下活动", "线下活动", "",
+//                o.getId(), o.getId(), null);
 
         return new MessageResponse(0, "添加线下活动完成！");
     }
@@ -260,5 +259,7 @@ public class ActivityServiceImpl implements ActivityService {
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
     }
+
+
 
 }
