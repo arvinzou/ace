@@ -1,5 +1,5 @@
 
-var server = "http://127.0.0.1";
+var server = "https://zx.huacainfo.com";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
 var hlsserver ="http://139.224.0.227:9999/hls/";
@@ -23,7 +23,8 @@ var config = {
     ideaList: `${server}/society/www/idea/findList`,
     releaseIdea: `${server}/society/www/idea/submit`,
     ideaDetail: `${server}/society/www/idea/getIdeaDetail`,
-    findUserInfo: `${server}/society/www/reg/findByUserId`
+    findUserInfo: `${server}/society/www/reg/findByUserId`,
+    createOrder: `${server}/society/www/order/create`
 };
 module.exports = config
 
