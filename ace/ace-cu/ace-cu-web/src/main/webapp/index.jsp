@@ -8,7 +8,7 @@
     <meta name="description" content="overview &amp; stats"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>常德市工商联非公经济电子服务平台</title>
+    <title>常德市慈善总会</title>
 
 </head>
 
