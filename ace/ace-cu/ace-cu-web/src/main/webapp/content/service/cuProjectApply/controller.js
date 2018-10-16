@@ -1,15 +1,4 @@
 jQuery(function ($) {
-    $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-        _title: function (title) {
-            var $title =
-                this.options.title || '&nbsp;'
-            if (("title_html" in this.options)
-                && this.options.title_html == true)
-                title.html($title);
-            else
-                title.text($title);
-        }
-    }));
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -30,204 +19,28 @@ jQuery(function ($) {
         });
     });
 
-    $('#btn-view-add').on(
-        'click',
-        function () {
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow',
-                'new',
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: false,
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
-    $('#btn-view-edit').on(
-        'click',
-        function () {
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext)
-            }
-            var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            //
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow',
-                gr,
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: true,
-                    beforeSubmit: function (postdata) {
-                        //提交按钮，不需要修改
-                        return [false, "", ""];
-                    },
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                        //富文本编辑器
-                        loadText(gd.id);
-                    }
-                });
-            //图片加载
-            $("#tr_title_ID h5").after("<div id='custom-idCardInfo'></div>");
-            $("#tr_title_FP h5").after("<div id='custom-fp'></div>");
-            $("#tr_title_ZD h5").after("<div id='custom-zd'></div>");
-            $("#tr_title_OT h5").after("<div id='custom-others'></div>");
-            initIdCardInfo(gd.id, "custom-idCardInfo");
-            initFP(gd.id, "custom-fp");
-            initZD(gd.id, "custom-zd");
-            initOthers(gd.id, "custom-others");
-        });
-    $('#btn-view-del').on(
-        'click',
-        function () {
+    $('#btn-view-add').on('click', function () {
+        jQuery(cfg.grid_selector).jqGrid(
+            'editGridRow',
+            'new',
+            {
+                closeAfterAdd: true,
+                recreateForm: true,
+                viewPagerButtons: false,
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find(
+                        '.ui-jqdialog-titlebar').wrapInner(
+                        '<div class="widget-header" />')
+                    style_edit_form(form);
+                }
+            })
+    });
 
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
-                return;
-            }
-            jQuery(cfg.grid_selector).jqGrid(
-                'delGridRow',
-                gr,
-                {
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
-
-    //审核按钮
-    $('#btn-view-audit').on(
-        'click',
-        function (e) {
-            e.preventDefault();
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
-                return;
-            }
-            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            if (rowData.status != "1") {
-                alert("不能重复审核！")
-                return;
-            }
-            var dialog = $("#dialog-message-audit").removeClass('hide').dialog({
-                modal: true,
-                width: 380,
-                title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> " + rowData.title + "</h4></div>",
-                title_html: true,
-                buttons: [
-                    {
-                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                        "class": "btn btn-info btn-xs",
-                        id: 'ajax_button_audit',
-                        click: function () {
-                            //for testing
-                            var audit_result = $('input[name="audit_result"]:checked').val();
-                            var audit_opinion = $('#audit_opinion').val();
-                            if (audit_result == undefined) {
-                                alert("请选择审核结果!");
-                                return;
-                            }
-                            $(this).dialog("close");
-                            $.ajax({
-                                type: "post",
-                                url: contextPath + "/cuProjectApply/audit",
-                                data: {id: rowData.id, auditResult: audit_result, auditOpinion: audit_opinion},
-                                beforeSend: function (XMLHttpRequest) {
-                                    style_ajax_button('ajax_button_audit', true);
-                                },
-                                success: function (rst, textStatus) {
-                                    style_ajax_button('ajax_button_audit', false);
-                                    if (rst) {
-                                        bootbox.dialog({
-                                            title: '系统提示',
-                                            message: rst.errorMessage,
-                                            buttons: {
-                                                "success": {
-                                                    "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                                    "className": "btn-sm btn-success",
-                                                    "callback": function () {
-                                                        dialog.dialog("close");
-                                                        //重载数据
-                                                        jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                                            page: 1
-                                                        }).trigger("reloadGrid");
-                                                    }
-                                                }
-                                            }
-                                        });
-                                    }
-                                    ;
-                                },
-                                complete: function (XMLHttpRequest, textStatus) {
-                                    style_ajax_button('ajax_button_audit', false);
-                                },
-                                error: function () {
-                                    style_ajax_button('ajax_button_audit', true);
-                                }
-                            });
-                        }
-                    },
-                    {
-                        html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                        "class": "btn btn-xs",
-                        click: function () {
-                            $(this).dialog("close");
-                        }
-                    }
-                ]
-            });
-        });
 });
 
 function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
-        modal: false,
-        width: 800,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
-
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
-    $(dialog).parent().css("top", "1px");
-    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
+    $('#modal-preview').modal('show');
     loadView(id);
 }
 function loadView(id) {
@@ -241,19 +54,8 @@ function loadView(id) {
         },
         success: function (rst, textStatus) {
             $.each(rst.value, function (key, value) {
-                // if (key == 'category') {
-                //     value = rsd(value, '83');
-                // }
-                // if (key == 'status') {
-                //     value == "1" ? "正常" : "关闭";
-                // }
-                if (key.indexOf('Date') != -1 ||
-                    key.indexOf('time') != -1 ||
-                    key.indexOf('Time') != -1 ||
-                    key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
-                }
-                $("#dialog-message-view").find('#' + key).html(value);
+                //bind value
+                $("#modal-preview").find('#' + key).html(value);
             });
         },
         error: function () {
@@ -280,7 +82,6 @@ function initSimditor(textarea, text) {
         editor.setValue(text);
     }
 }
-
 function loadText(id) {
     $.ajax({
         type: "post",
@@ -289,6 +90,7 @@ function loadText(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
+            console.log(JSON.stringify(rst));
             initSimditor($("textarea[name=description]"), rst.value.content);
         },
         error: function () {
@@ -296,7 +98,6 @@ function loadText(id) {
         }
     });
 }
-
 function initIdCardInfo(applyId, divId) {
     $.ajax({
         type: "get",
@@ -355,3 +156,103 @@ function renderImage(rst, divId) {
     $("#" + divId).html(html.join(""));
 }
 
+
+//编辑
+function edit(rowid) {
+
+    jQuery(cfg.grid_selector).jqGrid('editGridRow', rowid, {
+        closeAfterAdd: true,
+        recreateForm: true,
+        viewPagerButtons: true,
+        beforeSubmit: function (postdata) {
+            //提交按钮，不需要修改
+            return [false, "", ""];
+        },
+        beforeShowForm: function (e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog').find(
+                '.ui-jqdialog-titlebar').wrapInner(
+                '<div class="widget-header" />');
+            //富文本编辑器
+            loadText(rowid);
+        }
+    });
+    //图片加载
+    $("#tr_title_ID h5").after("<div id='custom-idCardInfo'></div>");
+    $("#tr_title_FP h5").after("<div id='custom-fp'></div>");
+    $("#tr_title_ZD h5").after("<div id='custom-zd'></div>");
+    $("#tr_title_OT h5").after("<div id='custom-others'></div>");
+    initIdCardInfo(rowid, "custom-idCardInfo");
+    initFP(rowid, "custom-fp");
+    initZD(rowid, "custom-zd");
+    initOthers(rowid, "custom-others");
+}
+var show = false;
+function del(rowid) {
+    console.log(rowid);
+    jQuery(cfg.grid_selector).jqGrid('delGridRow',
+        rowid,
+        {
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                if (!show) {
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+                }
+
+                show = true;
+
+            }
+        });
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+}
+
+function audit(rowId, statusVal) {
+    console.log("******************" + rowId + "||" + statusVal);
+    if (statusVal != "1") {
+        alert("请勿重复受理！")
+        return;
+    }
+
+    //审核弹框
+    $('#modal-audit').modal('show');
+    //审核保存按钮事件监听
+    $('#btn-view-audit').on('click', function (e) {
+        //for testing
+        var audit_result = $('input[name="audit_result"]:checked').val();
+        var audit_opinion = $('#audit_opinion').val();
+        if (audit_result == undefined) {
+            alert("请选择审核结果!");
+            return;
+        }
+        $.ajax({
+            type: "post",
+            url: contextPath + "/cuProjectApply/audit",
+            data: {id: rowId, auditResult: audit_result, auditOpinion: audit_opinion},
+            beforeSend: function (XMLHttpRequest) {
+                startLoad();
+            },
+            success: function (rst, textStatus) {
+                stopLoad();
+                if (rst) {
+                    console.log(JSON.stringify(rst));
+                    $('#modal-audit').modal('hide');
+                    alert(rst.errorMessage);
+                    //重载数据
+                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {page: 1}).trigger("reloadGrid");
+                }
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+                stopLoad();
+            },
+            error: function () {
+                alert("错误提醒", "系统发生异常,请联系系统管理员！");
+                stopLoad();
+            }
+        });
+    });
+
+}

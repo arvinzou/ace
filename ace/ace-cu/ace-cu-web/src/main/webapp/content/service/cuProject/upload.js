@@ -22,19 +22,12 @@ function init_uploader(config) {
                         extensions: config.extensions
                     }]
             },
-
-            // Resize images on clientside if we can
             resize: {
                 width: 600,
                 height: 600,
                 quality: 90
             },
-
-            url: config.url,
-            flash_swf_url: portalPath
-            + '/content/plupload-2.1.2/js/Moxie.swf',
-            silverlight_xap_url: portalPath
-            + '/content/plupload-2.1.2/js/Moxie.xap',
+            url: config.url
         });
     var uploader = $('#uploader').pluploadQueue();
     uploader.bind("UploadComplete", function () {
@@ -53,54 +46,10 @@ function init_uploader(config) {
         console.log(responseObject.response);
         var rst = JSON.parse(responseObject.response);
         if (!rst.state) {
-            bootbox.dialog({
-                title: '系统提示',
-                message: rst.errorMessage,
-                detail: rst.detail,
-                buttons: {
-                    "success": {
-                        "label": "<i class='ace-icon fa fa-check'></i>确定",
-                        "className": "btn-sm btn-success",
-                        "callback": function () {
-                            $("#dialog-message").dialog("close");
-                        }
-                    }
-                }
-            });
-
+            alert(rst.errorMessage);
         } else {
-
-            if (config.target) {
-                $('input[name=' + config.target + ']').val(rst.value);
-                if (config.target == 'grid') {
-                    jQuery(cfgsub.grid_selector).jqGrid('setGridParam', {
-                        page: 1,
-                        postData: {}
-                    }).trigger("reloadGrid");
-                }
-            } else {
-                bootbox.dialog({
-                    title: '系统提示',
-                    message: rst.errorMessage,
-                    detail: rst.detail,
-                    buttons: {
-                        "success": {
-                            "label": "<i class='ace-icon fa fa-check'></i>确定",
-                            "className": "btn-sm btn-success",
-                            "callback": function () {
-                                $("#dialog-message").dialog("close");
-                            }
-                        }
-                    }
-                });
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                    page: 1,
-                    postData: {
-                        areaCode: ''
-                    }
-                }).trigger("reloadGrid");
-            }
-            $("#dialog-message").dialog("close");
+            $('#modal-upload').modal('hide');
+            $('input[name=' + config.target + ']').val(rst.value);
         }
     });
 }
@@ -127,51 +76,22 @@ function appendUploadBtn(id) {
         };
         reset_uploader(config);
         $("#tt").addClass('hide');
-        var dialog = $("#dialog-message").removeClass('hide').dialog(
-            {
-                modal: true,
-                width: 750,
-                title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件上传</div></div>",
-                title_html: true,
-                buttons: [
-                    {
-                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                        "class": "btn btn-info btn-xs",
-                        click: function () {
-                            $(this).dialog(
-                                "close");
-                        }
-                    }
-                ]
-            }
-        );
+        $('#modal-upload').modal('show');
+
 
     });
 
     $("#btn-upload-view" + id).on('click', function (e) {
         e.preventDefault();
-        var dialog = $("#dialog-message-file").removeClass('hide')
-            .dialog(
-                {
-                    modal: true,
-                    width: 500,
-                    title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
-                    title_html: true,
-                    buttons: [{
-                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                        "class": "btn btn-info btn-xs",
-                        click: function () {
-                            $(this).dialog("close");
-                        }
-                    }
-
-                    ]
-                });
+        $('#modal-upload-view').modal('show');
         var fileName = $('input[name=' + id + ']').val();
         if (!fileName || fileName == '') {
             return;
         }
         var src = fileName;
+        if (src.indexOf("http") == -1) {
+            src = fastdfs_server + src;
+        }
         var img = new Image();
         $(img).attr("src", "");
         //图片加载加载后执行
@@ -189,106 +109,3 @@ function appendUploadBtn(id) {
 
     });
 }
-
-// function initPhoto(id) {
-//     $.ajax({
-//         type: "post",
-//         url: contextPath + "/organizationSub/findOrganizationSubList.do",
-//         data: {organizationId: id},
-//         success: function (rst, textStatus) {
-//             initPhotoDom(rst.rows, id);
-//
-//         }
-//     });
-// }
-//
-// function initPhotoDom(rst, id) {
-//     var html = new Array();
-//     html.push('<ul class="ace-thumbnails clearfix">');
-//     $.each($(rst), function (i, o) {
-//         html.push('<li>');
-//         html.push('<a href="' + fastdfs_server + o.url + '" title="' + o.name + '" data-rel="colorbox" class="cboxElement">');
-//         html.push('<img alt="60x60" class="photo" src="' + fastdfs_server + o.url + '">');
-//         html.push('</a>');
-//         html.push('<div class="tools tools-bottom">');
-//         html.push('<a href="javascript:delPhoto(\'' + o.id + '\',\'' + o.organizationId + '\')">');
-//         html.push('<i class="ace-icon fa fa-times red"></i>');
-//         html.push('</a>');
-//         html.push('</div>');
-//         html.push('</li>');
-//     });
-//
-//     html.push('<li>');
-//
-//     html.push('<a href="javascript:false"><img style="padding:20px" alt="60x60" id="btn-image-upload" class="photo" src="' + portalPath + '/content/common/image/add.png"></a>');
-//
-//     html.push('</li>');
-//     html.push('</ul>');
-//
-//
-//     $("#custom-dia").html(html.join(""));
-//
-//     var $overflow = '';
-//     var colorbox_params = {
-//         rel: 'colorbox',
-//         reposition: true,
-//         scalePhotos: true,
-//         scrolling: false,
-//         previous: '<i class="ace-icon fa fa-arrow-left"></i>',
-//         next: '<i class="ace-icon fa fa-arrow-right"></i>',
-//         close: '&times;',
-//         current: '{current} of {total}',
-//         maxWidth: '100%',
-//         maxHeight: '100%',
-//         onOpen: function () {
-//             $overflow = document.body.style.overflow;
-//             document.body.style.overflow = 'hidden';
-//         },
-//         onClosed: function () {
-//             document.body.style.overflow = $overflow;
-//         },
-//         onComplete: function () {
-//             $.colorbox.resize();
-//         }
-//     };
-//
-//     $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
-//     $('#btn-image-upload').on('click', function () {
-//         var config = {
-//             extensions: "ppt,doc,xls,pdf,txt,docx,pptx,xlsx",
-//             url: contextPath
-//             + '/organizationSub/uploadFile.do',
-//             target: "grid",
-//             multipart_params: {
-//                 id: id
-//             }
-//         };
-//         reset_uploader(config);
-//         $("#tt").addClass('hide');
-//         var dialog = $("#dialog-message").removeClass('hide').dialog({
-//             modal: true,
-//             width: 750,
-//             title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >图片上传</div></div>",
-//             title_html: true,
-//             buttons: [{
-//                 html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-//                 "class": "btn btn-info btn-xs",
-//                 click: function () {
-//                     $(this).dialog("close");
-//                 }
-//             }]
-//         });
-//
-//     });
-// }
-//
-// function delPhoto(id, activityId) {
-//     $.ajax({
-//         type: "post",
-//         url: contextPath + "/organizationSub/deleteOrganizationSubByOrganizationSubId.do",
-//         data: {id: id},
-//         success: function (rst, textStatus) {
-//             initPhoto(activityId);
-//         }
-//     });
-// }

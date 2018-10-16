@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<link rel="stylesheet" href="${portalPath}/content/common/pizza/ui.css?version=${cfg.version}"/>
-<script src="${portalPath}/content/common/tplform/tplform-2.0.3.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/juicer/juicer-min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/plupload/plupload.full.min.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+<!--[if lt IE 9]>
+<script src="${portalPath}/content/common/assets/global/plugins/respond.min.js"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/ie8.fix.min.js"></script>
+<![endif]-->
+<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=${cfg.version}"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/js.cookie.min.js?v=${cfg.version}"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/js/init-rem.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="${portalPath}/content/portal/js/main/menu${SESSION_USERPROP_KEY.cfg.portalType}.js?v=${cfg.version}"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
+
+
