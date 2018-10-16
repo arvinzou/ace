@@ -1,0 +1,42 @@
+<view>
+
+<block wx:for-items="{{list}}" wx:key="*">
+      <view class="wrap">
+       
+
+          <view class='report-box-second'>
+            <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
+              <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
+
+              <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
+              <text style='padding:10rpx'>{{item.createDate}}</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==1}}">待审</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==2}}">通过</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==3}}">退回</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==3}}">{{item.auditMessage}}</text>
+            </view>
+            <view class='rpt-content'>
+              <view wx:if="{{item.content.length>0}}" class="content">
+                <text>{{item.content}}</text>
+              </view>
+
+              <video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:100%;height:35vh' objectFit="contain"></video>
+              <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;' controls="{{1>0}}"></audio>
+              <view class="pictures" data-count="{{item.imageList.length}}">
+                <view class="imglist{{item.imageList.length}}">
+                  <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex" >
+                    <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
+
+                  </block>
+
+                </view>
+              </view>
+            </view>
+          </view>
+      </view>
+    </block>
+
+    <view class="btn-add-rpt" bindtap="add">
+      <image class="btn-img" src="../../image/add-red.png" />
+    </view>
+</view>

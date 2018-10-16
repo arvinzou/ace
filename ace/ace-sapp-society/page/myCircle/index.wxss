@@ -1,0 +1,224 @@
+
+@import "../common/lib/weui.wxss";
+
+.img {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0rpx auto;
+}
+
+
+.circle{  
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center; 
+  width: 80rpx;  
+  height:80rpx;  
+  border-radius: 50%;  
+  font-size: 36rpx;  
+  bottom: 30rpx; 
+}
+.imgsmall {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 2rpx auto;
+}
+
+.headimg{
+  width: 80rpx;
+  height: 80rpx;
+  margin: 2rpx auto;
+  border-radius: 50%; 
+}
+
+
+.hide{
+ display: none;
+}
+.show{ 
+ display: block;
+}
+
+.add{
+   right: 40rpx;
+}
+
+.headimgp {
+	width:70rpx;height:70rpx;border-radius:0rpx;vertical-align:middle;
+}
+
+.rpt-content{
+  padding-top: 1rpx;
+  padding-bottom: 1rpx;
+  border-top: solid 1px #ebebeb;
+}
+.rpt-content:first-child{
+  border-top: solid 0px #ebebeb;
+}
+.content {
+	padding-top: 10rpx;
+  padding-bottom: 10rpx;
+	font-size: 30rpx;
+	line-height: 35rpx;
+}
+
+.reporter{
+  padding-bottom: 10rpx;
+   padding-left: 0rpx;
+}
+.wrap {
+	padding-left: 40rpx;
+  padding-right: 40rpx;
+  padding-top: 2rpx;
+}
+.report-box-second{
+  flex-direction:column;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-bottom: 2rpx;
+}
+.pictures {
+  width: 100%;
+  margin-bottom: 20rpx; 
+}
+.pictures .imglist1 {
+  height: 36vh;
+  background: #fff;
+  position: relative;
+}
+.pictures .imglist1 .img1 {
+  height: 100%;
+  width: 100%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+.pictures .imglist2 {
+  height: 36vh;
+  background: #fff;
+  position: relative;
+}
+
+.pictures .imglist2 .img1 {
+	height: 100%;
+  width: 49.5%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+.pictures .imglist2 .img2 {
+	height: 100%;
+  width: 50%;
+	right: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+
+.pictures .imglist3 {
+  height: 36vh;
+  background: #fff;
+  position: relative;
+}
+
+.pictures .imglist3 .img1 {
+  height: 100%;
+  width: 49.5%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+
+.pictures .imglist3 .img2 {
+  height:  49.5%;
+  width: 50%;
+	right:0%;
+  top:0%;
+  position: absolute;
+}
+
+.pictures .imglist3 .img3 {
+	width: 50%;
+  height:50%;
+  right:0%;
+  top: 50%;
+  position: absolute;
+}
+.pictures .imglist4 {
+	height: 36vh;
+  background: #fff;
+  position: relative;
+}
+
+.pictures .imglist4 .img1 {
+  width: 49.5%;
+  height:49.5%;
+  left:0%;
+  top: 0%;
+  position: absolute;
+}
+
+.pictures .imglist4 .img2 {
+  width: 50%;
+  height:49.5%;
+  right:0%;
+  top: 0%;
+  position: absolute;
+}
+.pictures .imglist4 .img3 {
+  width: 49.5%;
+  height:50%;
+  left:0%;
+  bottom: 0%;
+  position: absolute;
+}
+.pictures .imglist4 .img4 {
+  width: 50%;
+  height:50%;
+  right:0%;
+  bottom: 0%;
+  position: absolute;
+}
+
+
+
+.btn-add-rpt{
+  right: 40rpx;
+  bottom: 30rpx; 
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  border-radius: 50%;  
+  background:blue; 
+}
+.btn-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #fff; 
+}
+.status1{
+  background: blue;
+  color: #fff;
+  border-radius: 10rpx;
+  text-align: center;
+  padding: 5rpx;
+  border:1rpx solid #fff;
+}
+.status2{
+  background:green;
+  color: #fff;
+  border-radius: 10rpx;
+  text-align: center;
+  padding: 5rpx;
+  border:1rpx solid #fff;
+}
+.status3{
+  background:red;
+  color: #fff;
+  border-radius: 10rpx;
+  text-align: center;
+  padding: 5rpx;
+  border:1rpx solid #fff;
+}

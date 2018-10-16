@@ -22,7 +22,8 @@
     "page/reportInfo/index",
     "page/activityIndex/index",
     "page/myCircle/index",
-    "page/circleAdd/index"
+    "page/circleAdd/index",
+    "page/circle/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
