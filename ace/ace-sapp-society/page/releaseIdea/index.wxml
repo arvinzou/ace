@@ -1,27 +1,33 @@
+<form bindsubmit="formSubmit">
 <view class='index'>
   <view class='tips'><text>审核发布后，您可获得50爱心币</text></view>
   <view class='form-box'>
     <view class='form'>
-        <form bindsubmit="formSubmit" bindreset="formReset">
             <view class='section'>
                 <text class='form-title'>标题</text>
-                <input class='form-content' name="input" placeholder="请输入标题，不超过15字" maxlength='15' placeholder-class='input-text'/>
+                <input name='title' class='form-content' placeholder="请输入标题，不超过15字" maxlength='15' placeholder-class='input-text'/>
+            </view>
+             <view class='section'>
+                <text class='form-title'>点子类型</text>
+                 <picker class='form-content' mode = selector bindchange="bindPickerChange"  value="{{index}}"  range="{{array}}">
+                    <view class="picker">{{array[index]}}</view>
+                 </picker>
             </view>
             <view class='section-area'>
-                <textarea placeholder="请写出您的想法，不超过200字" auto-focus class='idea-content' maxlength='200' placeholder-class='input-text'/>
+                <textarea name='solution'  bindinput='checkFontNum' data-name='solutionNum' placeholder="请写出您的想法，不超过200字" auto-focus class='idea-content' maxlength='200' placeholder-class='input-text'/>
             </view>
-            <view class='section-num'><text>200</text></view>
-        </form>
+            <view class='section-num'><text>{{200-solutionNum >= 0 ? 200-solutionNum: 0}}</text></view>
         </view>
   </view>
   <view class='form-box'>
         <view class='form'>
-            <view class='file'>
-                <image src='../../image/addFile.png' class='file-attach'></image>
+            <view class='file' bindtap='addFile'>
+                <image src='{{ fileUrl }}' class='file-attach'></image>
             </view>
         </view>
   </view>
 </view>
 <view class='footer'>
-    <button class='release-btn'>发表</button>
+    <button class='release-btn' formType="submit">发表</button>
 </view>
+</form>
