@@ -1,3 +1,4 @@
+
 var server = "http://127.0.0.1";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
@@ -13,7 +14,16 @@ var config = {
     appsecret: '96214b4a01153935995cc027ddf26d75',
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
-    uploadUrl: `${server}/portal/www/upload.do`
+    uploadUrl: `${server}/portal/www/upload.do`,
+    mallList: `${server}/society/www/commodity/getList`,
+    siteDetail: `${server}/society/www/commodity/getDetail`,
+    sendCode: `${server}/society/www/reg/sendCode`,
+    regist: `${server}/society/www/reg/register`,
+    orgList: `${server}/society/www/reg/findOrgList`,
+    ideaList: `${server}/society/www/idea/findList`,
+    releaseIdea: `${server}/society/www/idea/submit`,
+    ideaDetail: `${server}/society/www/idea/getIdeaDetail`,
+    findUserInfo: `${server}/society/www/reg/findByUserId`
 };
 module.exports = config
 

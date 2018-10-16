@@ -115,4 +115,15 @@ public interface CircleService {
      * @version: 2018-10-15
      */
     List<Rpt> getList(String uid,String status,int start,int limit)  throws Exception;
+    /**
+     * @throws
+     * @Title:updateAddLike
+     * @Description: TODO(点赞)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-10-16
+     */
+    MessageResponse updateAddLike(String id);
 }

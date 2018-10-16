@@ -213,4 +213,7 @@
     t.createTime desc
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
+  <update id="updateAddLike">
+    update circle set likeNum=ifnull(likeNum,0)+1 where id=#{id}
+  </update>
 </mapper>

@@ -212,4 +212,19 @@ public class CircleController extends SocietyBaseController {
     public List<Rpt> myCircleList(String status,int start,int limit) throws Exception {
         return this.circleService.getList(this.getCurWxUser().getUnionId(),status,start,limit);
     }
+    /**
+     * @throws
+     * @Title:updateAddLike
+     * @Description: TODO(点赞)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-10-16
+     */
+    @RequestMapping(value = "/www/updateAddLike")
+    @ResponseBody
+    public MessageResponse updateAddLike(String id){
+        return this.circleService.updateAddLike(id);
+    }
 }
