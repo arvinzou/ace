@@ -1,0 +1,42 @@
+<view class='index'>
+  <view class='tips'><text>物品将于每月月底最后一个工作日统一发放，提货人凭手机凭证提货，如有问题请咨询0736-7111361</text></view>
+  <view class='form-box'>
+    <view class='form'>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <view class='section'>
+                <text class='userinfo'>黄大仙</text>
+                <text class='userinfo'>1808895068</text>
+            </view>
+            <view class='section'>
+                <input  class='form-content' name="input" placeholder="请输入提货地址" maxlength='50' placeholder-class='input-text'></input>
+            </view>
+        </form>
+        </view>
+  </view>
+  <view class='form-box'>
+      <view class='form'>
+           <view class='commodity-cover'><image src='{{ commodityInfo.commodityCover }}' class='cover'></image></view>
+           <view class='commodity-info'>
+                <view class='info'>
+                    <view class='commodity-name'>{{ commodityInfo.commodityName }}</view>
+                    <view class='commodity-price'>
+                        <text class='commodity-price-num'>{{ commodityInfo.costPoints }}</text>
+                        <text class='commodity-price-unit'>爱心币</text>
+                    </view>
+                </view>
+           </view>
+      </view>
+  </view>
+</view>
+<view class='footer'>
+    <view class='footer-left'>
+        <text class='total-name'>共计：</text>
+        <text class='total'>
+           <text class='commodity-price-num'>{{ commodityInfo.costPoints }}</text>
+           <text class='commodity-price-unit'>爱心币</text>
+        </text>
+    </view>
+    <view class='footer-right'>
+        <button class='buy'>确定兑换</button>
+    </view>
+</view>

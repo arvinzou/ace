@@ -1,0 +1,36 @@
+<view class='index'>
+    <view class='container'>
+        <view class='commodity-cover'>
+            <image src='{{ siteObj.commodityCover }}'></image>
+        </view>
+        <view class='commodity-info'>
+            <view class='commodity-title'>{{ siteObj.commodityName }}</view>
+            <view class='price-box'>
+                <view class='price-box-left'>
+                    <text class='num'>{{ siteObj.costPoints }}</text>
+                    <text class='num-title'>爱心币</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='container'>
+        <view class='choose_box'>
+            <text class='choose-state'>未选</text>
+            <input class='choose-input' placeholder='请选择预约时间' placeholder-class='placeholder-text'></input>
+            <image src='../../rediret.png' class='choose-image'></image>
+        </view>
+    </view>
+
+    <view class='container'>
+        <view class='title-box'>
+            <view class='title'>商品描述</view>
+            <view class='des'>
+               <rich-text nodes='{{ summary }}'></rich-text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='footer'>
+    <button class='exchange' bindtap='change'>立即兑换</button>
+</view>
