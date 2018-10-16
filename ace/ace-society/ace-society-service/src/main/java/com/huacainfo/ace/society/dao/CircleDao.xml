@@ -74,7 +74,7 @@
     left join portal.userinfo a on t.uid=a.openid
     left join circle_img b on t.id=b.circleId
     left join circle_log q on t.lastAuditLogId=q.id
-    where t.corpId=#{condition.corpId}
+    where 0=0
     <if test='condition.content!=null and condition.content!=""'>
       and t.content like
       concat('%',#{condition.content,jdbcType=VARCHAR},'%')
@@ -89,10 +89,15 @@
     <if test='condition.uid!=null and condition.uid!=""'>
       and t.uid =#{condition.uid,jdbcType=VARCHAR}
     </if>
+
+    <if test='condition.corpId!=null and condition.corpId!=""'>
+      and t.corpId =#{condition.corpId,jdbcType=VARCHAR}
+    </if>
   </sql>
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
-    from circle t where t.corpId=#{condition.corpId}
+    from circle t where 0=0
+
     <if test='condition.content!=null and condition.content!=""'>
       and t.content like
       concat('%',#{condition.content,jdbcType=VARCHAR},'%')
@@ -103,6 +108,13 @@
     </if>
     <if test='condition.status!=null and condition.status!=""'>
       and t.status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.uid!=null and condition.uid!=""'>
+      and t.uid =#{condition.uid,jdbcType=VARCHAR}
+    </if>
+
+    <if test='condition.corpId!=null and condition.corpId!=""'>
+      and t.corpId =#{condition.corpId,jdbcType=VARCHAR}
     </if>
   </select>
   <select id="findList" resultMap="BaseResultMapVo">
@@ -131,20 +143,13 @@
   </update>
   <resultMap id="mapRpt" type="com.huacainfo.ace.society.model.Rpt">
     <id property="reportId" column="reportId"/>
-    <result property="approvedTime" column="approvedTime"/>
     <result property="content" column="content"/>
     <result property="createDate" column="createDate"/>
-    <result property="duration" column="duration"/>
-    <result property="gmtCreate" column="gmtCreate"/>
-    <result property="pictures" column="pictures"/>
-    <result property="reporter" column="reporter"/>
-    <result property="thumbnail" column="thumbnail"/>
     <result property="type" column="type"/>
     <result property="likeNum" column="likeNum"/>
-    <result property="userType" column="userType"/>
-    <result property="watermarkConfig" column="watermarkConfig"/>
     <result property="video" column="video"/>
-    <result property="audio" column="audio"/>
+    <result property="status" column="status"/>
+    <result property="auditMessage" column="auditMessage"/>
     <association property="rpt" column="uid" javaType="com.huacainfo.ace.society.model.Reporter">
       <id property="openid" column="openid"/>
       <result property="headimgurl" column="headimgurl"/>
@@ -170,18 +175,12 @@
     t.uid,
     t.sort,
     t.mediaType type,
-    t.status,
+    ifnull(e.rst,'1') status,
     t.likeNum,
     t.content,
     t.mediaContent video,
-    t.createTime approvedTime,
-    0 duration,
-    t.createTime gmtCreate,
     date_format(t.createTime, '%H:%i') createDate,
-    '' pictures,
-    '' liker,
     a.nickname reporter,
-    '' thumbnail,
     a.headimgurl headimgurl,
     a.nickname nickname,
     a.openid,
@@ -193,17 +192,25 @@
     d.headimgurl c_headimgurl,
     d.nickname c_nickname,
     d.openid c_openid,
-    date_format(c.createTime, '%H:%i:%s') c_createTime
+    date_format(c.createTime, '%H:%i:%s') c_createTime,
+    e.statement auditMessage
     FROM
     circle t
     LEFT JOIN portal.userinfo a ON t.uid = a.unionid
     LEFT JOIN circle_img b ON t.id = b.circleId
     LEFT JOIN circle_cmt c ON t.id = c.circleId
     LEFT JOIN portal.userinfo d ON c.uid = d.unionid
+    left join circle_log e on t.lastAuditLogId=e.id
     WHERE
-    t. STATUS = '2'
+    0=0
+    <if test='uid!=null'>
+      and t.uid =#{uid,jdbcType=VARCHAR}
+    </if>
+    <if test='status!=null'>
+      and t.status =#{status,jdbcType=VARCHAR}
+    </if>
     ORDER BY
-    t.createTime DESC
-    limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
+    t.createTime desc
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
 </mapper>
