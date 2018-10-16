@@ -40,7 +40,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    that.setData({
+      userinfo: wx.getStorageSync('userinfo')
+    });
   },
 
   /**
@@ -115,7 +118,7 @@ Page({
     var that = this;
     that.setData({
       hiddenmodalcmt: false,
-      rptId: e.currentTarget.dataset.id
+      id: e.currentTarget.dataset.id
     })
   },
   //确认  
@@ -143,13 +146,14 @@ Page({
   cmtFormSubmit: function () {
     var that = this;
     var data = {};
-    data.rptId = that.data.rptId;
+    data.circleId = that.data.id;
     data.uid = that.data.userinfo.unionId;
     data.content = that.data.contentCmtText;
-    util.request(cfg.insertLiveCmt, { jsons: JSON.stringify(data) },
+    util.request(cfg.server + "/society/circleCmt/www/insertCircleCmt", { jsons: JSON.stringify(data) },
       function (data) {
         that.setData({ hiddenmodalcmt: true });
         that.setData({ contentCmtText: '' });
+        that.initData();
       }
     );
 
