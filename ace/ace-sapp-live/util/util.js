@@ -114,6 +114,15 @@ function isLogin() {
   }
   return true;
 }
+function isGetUserinfo() {
+  console.log("==============isLogin===============");
+  var userinfo = wx.getStorageSync('userinfo');
+  console.log(userinfo);
+  if (!userinfo) {
+    return false;
+  }
+  return true;
+}
 function security(role) {
   var userinfo = wx.getStorageSync('userinfo');
   console.log(userinfo);
@@ -324,5 +333,6 @@ module.exports = {
   objToStrMap: objToStrMap,
   extend: extend,
   initRadioGroupData: initRadioGroupData,
-  indexOf: indexOf
+  indexOf: indexOf,
+  isGetUserinfo: isGetUserinfo
 }

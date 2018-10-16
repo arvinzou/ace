@@ -280,7 +280,7 @@
         left join portal.userinfo d on c.uid=d.unionid
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id
-        where t.rid=#{rid} and t.status='2'
+        where t.rid=#{rid} and t.status='2' and c.status!='3'
         <choose>
             <when test='sort!=null and sort=="0"'>
                 order by t.sort,t.createTime desc,c.createTime
