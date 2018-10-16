@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.society.dao.BehaviorDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.Behavior">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.Behavior">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="userId" jdbcType="VARCHAR" property="userId" />
@@ -183,9 +183,15 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+
+    <sql id="Vo_Column_List">
+        t.id, t.title, t.userId, t.compendium, t.submitDate,
+        t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
   <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List"/>
+      <include refid="Vo_Column_List"/>
     <include refid="whereCondition"/>
     <choose>
       <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -219,4 +225,13 @@
     from behavior
     where 1=1
   </select>
+
+    <update id="updateStatus" parameterType="com.huacainfo.ace.society.model.Behavior">
+        update behavior
+        set status = #{status,jdbcType=CHAR},
+            lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

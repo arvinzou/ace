@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-      
+      userinfoData : null,
   },
 
   /**
@@ -27,9 +27,11 @@ Page({
       
   },
   initUserData: function () {
+        var that = this;
         util.request(cfg.findUserInfo, {},
             function (ret) {
                 if (ret.status == 0) {
+                    that.setData({ userinfoData: ret.data});
                     return true;
                 } else {
                     if (ret.info == '用户尚未注册') {
@@ -66,8 +68,9 @@ Page({
    */
   onShow: function () {
       var that = this;
+      console.log("that.initUserData()=======================================" + that.initUserData());
       if (wx.getStorageSync('userinfo')){
-          if(!that.initUserData()){
+          if(that.initUserData() == false){
               wx.navigateTo({ url: "../regist/index" });
           }
       }

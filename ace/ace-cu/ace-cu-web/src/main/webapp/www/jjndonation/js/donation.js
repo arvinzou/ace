@@ -32,6 +32,7 @@ window.onload = function(){
             if(result.status == 0) {
                 status = result.data.status;
                 renderPage('projectInfo', result.data, 'project-tpl');
+                renderPage('projectDetail', result.data, 'detail-tpl');
             }else {
                 alert(result.info);
             }
