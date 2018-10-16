@@ -1,19 +1,35 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    detail: null,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-  },
+      var that = this;
+      util.request(cfg.ideaDetail, { "ideaId": options.ideaId, "unionId": "0" },
+          function (ret) {
+              if (ret.status == 0) {
+                  console.log(ret);
+                  that.setData({ detail: ret.data});
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: ret.errorMessage,
+                      success: function (res) { }
+                  });
+              }
 
+          }
+      );
+  },
 /**
  * 发布评论
  */
