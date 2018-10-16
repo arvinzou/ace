@@ -1,6 +1,5 @@
 @import "../common/lib/weui.wxss";
 @import "../common/index.wxss";
-
 .index {
     font-size: 24rpx;
     font-family: PingFang-SC-Medium;
