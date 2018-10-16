@@ -72,7 +72,7 @@
                     <view class='menu-item-image'><image src='../../image/icon_menu_idea.png'></image></view>
                     <view class='menu-item-title'><text>我有点子</text></view>
                 </view>
-                <view class='menu-item'>
+                <view class='menu-item' url='../circle/index'>
                     <view class='menu-item-image'><image src='../../image/icon_menu_circle.png'></image></view>
                     <view class='menu-item-title'><text>邻里圈子</text></view>
                 </view>

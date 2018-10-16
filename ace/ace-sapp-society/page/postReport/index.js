@@ -1,4 +1,4 @@
-// page/index/index.js
+var util = require("../../util/util.js");
 Page({
 
     /**
@@ -29,22 +29,57 @@ Page({
         toolBar: {
             top: '0px',
             show: false,
-            type:'1'
+            type: '1'
         },
         clickObject: '',
-        timer: ''
+        timer: '',
+        showBtn: false,
+        coverUrl:'',
+        title:'',
     },
+
+    onLoad: function (options) {
+        let that = this;
+        console.log(options);
+        let activityId = options.id;
+        if (!activityId) {
+            // wx.navigateBack({})
+            // return;
+            activityId=2;
+        }
+        that.data.activityId = activityId;
+        that.initdata();
+    },
+
+    // 获取列表
+    initdata: function() {
+        let that = this;
+        util.request('http://192.168.2.189/society/www/activity/selectActivityReportByActivityId', {
+            activityId: that.data.activityId,
+            },
+            function(rst) {
+                console.log(rst);
+                console.log(rst.data);
+                wx.hideNavigationBarLoading() //完成停止加载
+                wx.stopPullDownRefresh() //停止下拉刷新
+                that.setData({
+                    list: rst.data
+                });
+            }
+        );
+    },
+
     // 显示工具菜单
     showTool: function(e) {
         var that = this;
         var id = e.currentTarget.id;
         var type = e.currentTarget.dataset.type;
         var height = e.currentTarget.offsetTop + 5;
-        if(that.timer){
+        if (that.timer) {
             clearTimeout(that.timer);
         }
-        that.timer=setTimeout(function(){
-           that.cencelClickStyle(true);
+        that.timer = setTimeout(function() {
+            that.cencelClickStyle(true);
         }, 3000);
         that.setData({
                 clickObject: id
@@ -57,7 +92,7 @@ Page({
                         toolBar: {
                             top: height + res[0].height + 'px',
                             show: true,
-                            type:type
+                            type: type
                         }
                     });
                 })
@@ -77,10 +112,10 @@ Page({
     endEdit: function(e) {
         var todo = this.findEditing();
         var content = e.detail.value
-        if (content.trim()){
+        if (content.trim()) {
             todo.editing = false;
-            todo.content =content;
-        }else{
+            todo.content = content;
+        } else {
             this.data.textLists.splice(this.getElementIndex(todo.id), 1);
         }
         this.updateData(true);
@@ -130,7 +165,7 @@ Page({
             editing: editing,
         });
         that.setData({
-            clickObject:id,
+            clickObject: id,
         })
         that.updateData(true);
     },
@@ -157,8 +192,16 @@ Page({
         this.updateData(true);
     },
     //添加图爿
-    addImage() {
+    addImage(e) {
         var that = this;
+        let cover = e.currentTarget.dataset.cover;
+        let num=3;
+        if(cover=='cover'){
+            num=1;
+            this.data.isCover=true;
+        }else{
+            this.data.isCover = false;
+        }
         that.cencelClickStyle(false);
         wx.showActionSheet({
             itemList: ['打开照相', '选取现有的'],
@@ -173,7 +216,7 @@ Page({
                     })
                 } else if (res.tapIndex === 1) {
                     wx.chooseImage({
-                        count: 3, // 设置最多三张
+                        count: num, // 设置最多三张
                         sizeType: ['original', 'compressed'],
                         sourceType: ['album', 'camera'],
                         success(res) {
@@ -197,8 +240,7 @@ Page({
                     show: false,
                 }
             });
-        }
-        else{
+        } else {
             this.setData({
                 toolBar: {
                     show: false,
@@ -222,11 +264,63 @@ Page({
             success: function(res) {
                 var data = JSON.parse(res.data);
                 var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
+                if (that.data.isCover){
+                    that.setData({
+                        form: {
+                            coverUrl: url
+                        }
+                    })
+                    return;
+                }
                 that.addElement(url, 2, false)
             },
             fail: function(res) {
                 return null
             },
         })
+    },
+    onPageScroll: function (e) {
+
+        if (e.scrollTop <= 0) {
+            // 滚动到最顶部
+            e.scrollTop = 0;
+        } else if (e.scrollTop > this.data.scrollHeight) {
+            // 滚动到最底部
+            e.scrollTop = this.data.scrollHeight;
+        }
+        if (e.scrollTop > this.data.scrollTop || e.scrollTop >= this.data.scrollHeight) {
+            this.setData({
+                showBtn: true,
+            });
+        } else {
+            this.setData({
+                showBtn: false,
+            });
+        }
+        //给scrollTop重新赋值 
+        this.setData({
+            scrollTop: e.scrollTop
+        })
+    },
+    postReport:function(){
+        util.request('http://192.168.2.189/society/www/activity/findActivityList', {
+            category: that.data.category,
+            start: that.data.start,
+            limit: that.data.limit
+        },function (data) {
+                console.log(data.data);
+                wx.hideNavigationBarLoading() //完成停止加载
+                wx.stopPullDownRefresh() //停止下拉刷新
+                that.setData({
+                    list: that.data.list.concat(data.data),
+                    Loadingstatus: false,
+                });
+                if (data.data.length < that.data.limit) {
+                    that.setData({
+                        LoadOver: true,
+                    });
+                }
+            }
+        );
     }
 })

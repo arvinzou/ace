@@ -1,6 +1,6 @@
 <view class='index'>
     <view class='content'>
-        <view class='idea-title'><text>健全公共问题设施实施办法</text></view>
+        <view class='idea-title'><text>{{ detail.title }}</text></view>
         <view class='idea-info'>
             <image src='../../image/head.jpg' class='head'></image>
             <text class='fontstyle' style='padding-left:20rpx;'>可惜我是水瓶座</text>
@@ -9,8 +9,7 @@
             <image class='download-file' src='../../image/attach.png'></image>
         </view>
         <view class='idea-content'>
-            公共文化设施开展学雷锋志愿服务，要以培育和践行社会主义核心价值观、满足人民群众日益增长的精神文化需求为出发点，以公共图书馆、博物馆、文化馆、美术馆、科技馆和革命纪念馆为平台，稳步推进公共文化设施志愿服务站点建设，广泛吸引志愿者参与文化志愿服务，发展壮大学雷锋志愿服务队伍，加强志愿服务保障和支持。
-8月初，文化部制定并印发了《文化志愿服务管理办法》。办法规定了文化志愿服务的范围，明确了文化志愿者应享有的权利和履行的义务，同时规定了文化志愿服务组织单位应履行的职责。办法还提出，文化志愿服务组织单位应结合实际建立文化志愿服务激励回馈制度和文化志愿服务嘉许制度。有良好服务记录的文化志愿者可获得艺术观摩与培训、文化艺术消费、公益性文化服务等方面的优惠待遇等。
+            {{ detail.solution }}
         </view>
     </view>
     <view class='comment'>

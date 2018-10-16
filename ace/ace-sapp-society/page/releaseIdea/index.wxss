@@ -35,7 +35,7 @@
     border-bottom: 1px solid #F2F2F2;
 }
 .form-title{
-    width: 10%;
+    width: 20%;
     float: left;
     margin-right: 5%;
     height: 30rpx;
@@ -44,7 +44,7 @@
     font-size: 28rpx;
 }
 .form-content{
-    width: 85%;
+    width: 75%;
     height: 30rpx;
     margin-top: 35rpx;
     float: left;

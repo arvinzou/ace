@@ -38,6 +38,7 @@
     height: 60rpx;
     display: flex;
     align-items: center;
+    margin-top: 20rpx;
 }
 
 .headimage {
@@ -92,9 +93,10 @@
     border-radius: 50%;
     width: 26rpx;
     height: 26rpx;
-    line-height: 26rpx;
+    line-height: 23rpx;
     text-align: center;
     margin-left: 12rpx;
+    font-size: 24rpx;
 }
 
 .coin_assign {
@@ -194,5 +196,3 @@
     align-items: center;
     background-color: #fff;
 }
-
-

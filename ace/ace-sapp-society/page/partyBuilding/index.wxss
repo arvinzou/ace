@@ -1,3 +1,4 @@
+@import "../common/index.wxss";
 .index {
     background: #f6f6f6;
 }
@@ -19,77 +20,15 @@ view {
     margin-bottom: 20rpx;
 }
 
-.head .box {
-    margin: 0 30rpx;
-    padding: 30rpx 0rpx;
-    display: flex;
-    font-size: 26rpx;
-    font-family: PingFang-SC-Medium;
-    font-weight: 500;
-    color: rgba(102, 102, 102, 1);
-}
-
-.head .box .cover {
-    width: 270rpx;
-    height: 160rpx;
+.headBanner{
+    width: 100%;
+    height: 300rpx;
     overflow: hidden;
-    margin-right: 28rpx;
-    position: relative;
-    font-size: 22rpx;
-    font-family: PingFang-SC-Medium;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 1);
-    text-align: center;
 }
 
-.head .box .cover .text {
-    padding-top: 30rpx;
-    width: 270rpx;
-    height: 160rpx;
-    position: absolute;
-    top: 0;
-    background: rgba(30, 30, 30, 0.3);
-}
-
-.head .box .cover .text .time {
-    font-size: 26rpx;
-    margin-top: 14rpx;
-}
-
-.head .box .cover .text .time>text {
-    display: inline-block;
-    height: 50rpx;
-    width: 40rpx;
-    background: rgba(255, 153, 6, 1);
-    line-height: 50rpx;
-    border-radius: 4rpx;
-}
-
-.head .box .info {
-    flex-grow: 1;
-    width: 392rpx;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-}
-
-.head .box .info .texts {
-    line-height: 40rpx;
-}
-
-.head .box .info .title {
-    font-size: 30rpx;
-    font-family: PingFang-SC-Bold;
-    font-weight: bold;
-    color: rgba(34, 34, 34, 1);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-}
-
-.head .box .info .peoples {
+.headBanner image{
+    width: 100%;
+    height: 100%;
 }
 
 .partyTag {
@@ -115,8 +54,23 @@ view {
     font-size: 32rpx;
     font-family: PingFang-SC-Bold;
     font-weight: bold;
-    color: rgba(34, 34, 34, 1);
+    color:rgba(216,30,6,1);
     margin-bottom: 30rpx;
+    padding-left: 70rpx;
+    position: relative;
+}
+
+.icon-icon-test{
+    position: absolute;
+    top:0;
+    left: 0;
+}
+.iconImage{
+    width: 40rpx;
+    height: 40rpx;
+    position: absolute;
+    top:5rpx;
+    left: 0;
 }
 
 .organization .swiper {
@@ -158,8 +112,8 @@ view {
 }
 
 .pastActivity .activity .image {
-    width: 333rpx;
-    height: 333rpx;
+    width: 330rpx;
+    height: 190rpx;
     overflow: hidden;
 }
 
@@ -172,4 +126,8 @@ view {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.btn-clicking{
+    background-color:rgba(216,30,6,1);
 }

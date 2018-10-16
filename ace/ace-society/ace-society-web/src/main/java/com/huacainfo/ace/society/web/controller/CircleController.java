@@ -190,8 +190,8 @@ public class CircleController extends SocietyBaseController {
      */
     @RequestMapping(value = "/www/getList")
     @ResponseBody
-    public List<Rpt> getList(int start,int limit) throws Exception {
-        return this.circleService.getList(start,limit);
+    public List<Rpt> getList(String status,String uid,int start,int limit) throws Exception {
+        return this.circleService.getList(uid,status,start,limit);
     }
 
     /**
@@ -207,15 +207,9 @@ public class CircleController extends SocietyBaseController {
      * @author: 陈晓克
      * @version: 2018-09-20
      */
-    @RequestMapping(value = "/myCircleList")
+    @RequestMapping(value = "/www/myCircleList")
     @ResponseBody
-    public PageResult<CircleVo> myCircleList(CircleQVo condition, PageParamNoChangeSord page) throws Exception {
-        condition.setCorpId(this.getCurUserProp().getCorpId());
-        condition.setUid(this.getCurWxUser().getUnionId());
-        PageResult<CircleVo> rst = this.circleService.findCircleList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
-        return rst;
+    public List<Rpt> myCircleList(String status,int start,int limit) throws Exception {
+        return this.circleService.getList(this.getCurWxUser().getUnionId(),status,start,limit);
     }
 }
