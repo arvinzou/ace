@@ -1,11 +1,12 @@
 <view class='index'>
-    <view class='cover'>
-        <text>添加报道封面</text>
+    <view class='cover' bindtap='addImage' data-cover='cover'>
+        <image mode='aspectFill' hidden='{{!form.coverUrl}}' src='{{form.coverUrl}}'></image>
+        <text hidden='{{form.coverUrl}}'>添加活动封面</text>
     </view>
 
     <view class='content'>
         <view class='title bottom-line'>
-            <textarea maxlength='35' placeholder="标题" auto-height placeholder-style="font-size:36rpx;font-weight:bold;color:#666;"></textarea>
+            <textarea id='title' maxlength='35' value='{{title}}' placeholder="标题" auto-height placeholder-style="font-size:36rpx;font-weight:bold;color:#666;"></textarea>
         </view>
         <view class='editor-content'>
             <view class='editor'>
@@ -36,5 +37,9 @@
             </view>
         </view>
 
+    </view>
+    <view class="btn-part {{showBtn?'btn-show':''}}">
+        <view bindtap='saveReport' class='btn btn-bkClick'>保存</view>
+        <view bindtap='postReport' class='btn btn-clicking'>发布</view>
     </view>
 </view>

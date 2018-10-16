@@ -1,4 +1,6 @@
 {
     "navigationBarTitleText": "智慧党建",
+    "navigationBarBackgroundColor": "#E12F17",
+    "navigationBarTextStyle": "white",
     "enablePullDownRefresh": true
 }

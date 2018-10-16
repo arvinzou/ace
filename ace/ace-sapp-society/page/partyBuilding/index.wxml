@@ -1,43 +1,19 @@
 <!--index.wxml-->
 <view class='index'>
-    <view class='head whiteBg separate'>
-        <view class='box'>
-            <view class='cover'>
-                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
-                <view class='text'>
-                    <view>距离活动开始</view>
-                    <view class='time'>
-                        <text>00</text>天
-                        <text>00</text>时
-                        <text>00</text>分</view>
-                </view>
-            </view>
-            <view class='info'>
-                <view class='title'>
-                    <text class='partyTag'>第一期</text>
-                    <text class='texts'>动动党建活动动动动党建活动动</text>
-                </view>
-                <view class='time'>报名截止时间：09-10 10:30</view>
-                <view class='peoples'>已报名:10</view>
-            </view>
-        </view>
+    <view class='headBanner separate'>
+        <image mode='aspectFill' src='../../image/partybanner.png'></image>
     </view>
 
     <view class='organization whiteBg separate'>
         <view class='tilte'>
-            党小组
+            <text class='iconfont icon-icon-test'></text>党小组
         </view>
         <view class='swiper'>
             <swiper next-margin='176rpx'>
-                <swiper-item>
+                <swiper-item wx:for='{{orgs}}'>
                     <view class='item'>
-                        <image mode='aspectFill' src="http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120" class="slide-image" />
-                        <view class='name'>近心帮党小组</view>
-                    </view>
-                </swiper-item>
-                <swiper-item>
-                    <view class='item'>
-                        <image mode='aspectFill' src="http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120" class="slide-image" />
+                        <image mode='aspectFill' src="{{item.orgCover}}" class="slide-image" />
+                        <view class='name'>{{item.orgName}}</view>
                     </view>
                 </swiper-item>
             </swiper>
@@ -45,19 +21,23 @@
     </view>
     <view class='pastActivity whiteBg separate'>
         <view class='tilte'>
-            以往活动
+           <image class='iconImage' src='../../image/icon_party.png'></image> 以往活动
         </view>
         <view class='lists'>
-            <!-- <view class='activity'>
+            <view class='activity' wx:for='{{list}}' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
                 <view class='image'>
-                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+                    <image mode='aspectFill' src='{{item.coverUrl}}'></image>
                 </view>
                 <view class='title'>
-                    践行群众路线，强化群众…践行群众路线，强化群众…
+                    {{item.title}}
                 </view>
-                <text class='partyTag'>第一期</text>
-            </view> -->
+                <text class='partyTag'>第{{item.clazz}}期</text>
+            </view>
         </view>
     </view>
-    <view class='typeTags'>11111111111111</view>
+    <view class="bottm-btn {{showBtn?'btn-show':''}}" hidden='{{hiddenBtn}}'>
+        <view bindtap='createActivity' data-category='{{category}}' class='btn btn-clicking'>发布活动</view>
+    </view>
+    <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
+    <view class="loading" hidden="{{!LoadOver}}">已加载全部</view>
 </view>

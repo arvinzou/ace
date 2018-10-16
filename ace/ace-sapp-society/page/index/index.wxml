@@ -47,11 +47,11 @@
                     <view class='menu-item-title'><text>智慧党建</text></view>
                 </navigator>
                 <navigator class='menu-item' url='../activityList/index?category=1' >
-                    <view class='menu-item-image'><image src='../../image/icon_welfare.png'></image></view>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_party.png'></image></view>
                     <view class='menu-item-title'><text>公益活动</text></view>
                 </navigator>
                  <navigator class='menu-item' url='../activityList/index?category=2'>
-                    <view class='menu-item-image'><image src='../../image/icon_universal.png'></image></view>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_party.png'></image></view>
                     <view class='menu-item-title'><text>普及活动</text></view>
                 </navigator>
                 <navigator class='menu-item' url='../activityList/index?category=3'>
@@ -69,7 +69,7 @@
                     <view class='menu-item-title'><text>秀我直播</text></view>
                 </view>
                  <view class='menu-item' bindtap='idea'>
-                    <view class='menu-item-image'><image src='../../image/icon_menu_idea.png'></image></view>
+                    <view class='menu-item-image'><image src='../../image/icon_menu_party.png'></image></view>
                     <view class='menu-item-title'><text>我有点子</text></view>
                 </view>
                 <view class='menu-item'>

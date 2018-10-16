@@ -1,34 +1,27 @@
 <view class="index">
-    <view class='singleActivity'>
-        <view class='content'>
+    <view class='singleActivity' wx:for="{{list}}">
+        <view class='content {{item.endSignImgUrl?"opacity":""}}' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
             <view class='cover'>
-                <image mode='widthFix' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
+                <image mode='widthFix' src='{{item.coverUrl}}'></image>
             </view>
-            <view class='title'>周末太阳山爬山活动志愿者招募志愿者招…周末太阳山爬山活动志愿者招募志愿者招… </view>
-            <view class='startTime'>活动开始时间：2018-09-06 19:30</view>
-            <view class='statusTag statusTaging'>报名进行中</view>
+            <view class='title'>{{item.title}} </view>
+            <block wx:if="{{item.endSignImgUrl}}">
+                <view class='startTime'>活动结束时间：{{item.endDate}}</view>
+                <view class='statusTag'>活动已结束</view>
+            </block>
+            <block wx:elif="{{item.dendline<nowDate}}">
+                <view class='startTime'>活动开始时间：{{item.startDate}}</view>
+                <view class='statusTag'>报名已结束</view>
+            </block>
+            <block wx:else>
+                 <view class='startTime'>活动开始时间：{{item.startDate}}</view>
+                <view class='statusTag statusTaging'>报名进行中</view>
+            </block>
         </view>
     </view>
-    <view class='singleActivity'>
-        <view class='content'>
-            <view class='cover'>
-                <image mode='widthFix' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-            </view>
-            <view class='title'>周末太阳山爬山活动志愿者招募志愿者招…周末太阳山爬山活动志愿者招募志愿者招… </view>
-            <view class='startTime'>活动开始时间：2018-09-06 19:30</view>
-            <view class='tag taging'>报名进行中</view>
-        </view>
-    </view>
-    <view class='singleActivity'>
-        <view class='content'>
-            <view class='cover'>
-                <image mode='widthFix' src='http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg'></image>
-            </view>
-            <view class='title'>周末太阳山爬山活动志愿者招募志愿者招…周末太阳山爬山活动志愿者招募志愿者招… </view>
-            <view class='startTime'>活动开始时间：2018-09-06 19:30</view>
-            <view class='tag taging'>报名进行中</view>
-        </view>
+    <view class="bottm-btn {{showBtn?'btn-show':''}}">
+        <view bindtap='createActivity' data-category='{{category}}' class='btn btn-clicking'>发布活动</view>
     </view>
     <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
-    <view class="loading complete" hidden="{{!LoadOver}}">已加载全部</view>
+    <view class="loading" hidden="{{!LoadOver}}">已加载全部</view>
 </view>

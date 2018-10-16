@@ -5,6 +5,9 @@
     margin-bottom: 20rpx;
     background-color: #fff;
 }
+.opacity{
+  opacity: 0.5;
+}
 
 .singleActivity .content {
     width: 690rpx;
@@ -45,3 +48,5 @@
     position: absolute;
     top:-17rpx;
 }
+
+

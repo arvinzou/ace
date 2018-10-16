@@ -1,54 +1,184 @@
-//index.js
-//获取应用实例
-const app = getApp()
+var util = require("../../util/util.js");
 
 Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        list: [],
+        category: 4,
+        start: 0,
+        limit: 8,
+        LoadOver: false,
+        Loadingstatus: false,
+        showBtn: false,
+        hiddenBtn: false,
+        orgs: [],
+    },
+
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function(options) {
+        let that = this;
+        if (!util.isLogin()) {
+            that.setData({
+                hiddenBtn: true,
+            });
         }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
+        that.initOrgData();
+        that.initdata();
+    },
+
+    initOrgData: function() {
+        let that = this;
+        util.request('http://192.168.2.189/society/www/activity/findSocietyOrgInfoList', {
+                orgType: '1',
+                start: that.data.start,
+                limit: 100
+            },
+            function(rst) {
+                console.log(rst.rows);
+                wx.hideNavigationBarLoading() //完成停止加载
+                wx.stopPullDownRefresh() //停止下拉刷新
+                that.setData({
+                    orgs: rst.rows,
+                });
+            }
+        );
+    },
+    // 显示加载
+    showLoading: function() {
+        let that = this;
+        that.setData({
+            Loadingstatus: true,
+        });
+    },
+
+    initdata: function() {
+        console.log("initData");
+        let that = this;
+        if (that.data.LoadOver) {
+            return;
+        }
+        that.showLoading();
+        util.request('http://192.168.2.189/society/www/activity/findActivityList', {
+                category: that.data.category,
+                start: that.data.start,
+                limit: that.data.limit
+            },
+            function(data) {
+                console.log(data.data);
+                wx.hideNavigationBarLoading() //完成停止加载
+                wx.stopPullDownRefresh() //停止下拉刷新
+                that.setData({
+                    list: that.data.list.concat(data.data),
+                    Loadingstatus: false,
+                });
+                if (data.data.length < that.data.limit) {
+                    that.setData({
+                        LoadOver: true,
+                    });
+                }
+            }
+        );
+    },
+
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function() {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function() {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function() {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function() {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function() {
+        console.log('--------下拉刷新-------')
+        var that = this;
+        that.clearStatus();
+        that.initdata();
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+        var that = this;
+        console.log('-------------上拉加载-------------');
+        that.data.start += that.data.limit;
+        that.initdata();
+    },
+    // 清空状态
+    clearStatus: function() {
+        let that = this;
+        that.data.start = 0;
+        that.setData({
+            LoadOver: false,
+            list: [],
+        })
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function() {
+
+    },
+    onPageScroll: function(e) {
+
+        if (e.scrollTop <= 0) {
+            // 滚动到最顶部
+            e.scrollTop = 0;
+        } else if (e.scrollTop > this.data.scrollHeight) {
+            // 滚动到最底部
+            e.scrollTop = this.data.scrollHeight;
+        }
+        if (e.scrollTop > this.data.scrollTop || e.scrollTop >= this.data.scrollHeight) {
+            this.setData({
+                showBtn: true,
+            });
+        } else {
+            this.setData({
+                showBtn: false,
+            });
+        }
+        //给scrollTop重新赋值 
+        this.setData({
+            scrollTop: e.scrollTop
+        })
+    },
+    viewContent: function(e) {
+        console.log(e);
+        let data = e.currentTarget.dataset
+        let p = data.id;
+        let title = data.title;
+        wx.navigateTo({
+            url: '../activityInfo/index?id=' + p + "&title=" + title
+        })
+    },
+
 })

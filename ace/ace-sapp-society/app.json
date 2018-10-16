@@ -11,9 +11,16 @@
     "page/myActivity/index",
     "page/releaseIdea/index",
     "page/historyOrder/index",
-    "page/commodity/index",
-    "page/site/index",
-    "page/settlement/index"
+    "page/myLive/index", 
+    "page/partyBuilding/index",
+    "page/activityList/index",
+    "page/style/index",
+    "page/activityInfo/index",
+    "page/participants/index",
+    "page/postReport/index",
+    "page/activityApply/index",
+    "page/reportInfo/index",
+    "page/activityIndex/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -35,7 +42,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "page/activity/index",
+        "pagePath": "page/postReport/index",
         "iconPath": "image/icon_活动回顾_未选中.png",
         "selectedIconPath": "image/icon_活动回顾_选中.png",
         "text": "活动回顾"

@@ -16,15 +16,6 @@ var config = {
     frontColor: '#000000',
     backgroundColor: "#fff",
     loginUrl: `${server}/portal/www/authority.do`,
-    checkImageUrl: `${server}/uf/www/captcha/image.do`,
-    mallList: `${server}/society/www/commodity/getList`,
-    siteDetail: `${server}/society/www/commodity/getDetail`,
-    sendCode: `${server}/society/www/reg/sendCode`,
-    regist: `${server}/society/www/reg/register`,
-    orgList: `${server}/society/www/reg/findOrgList`,
-    ideaList: `${server}/society/www/idea/findList`,
-    releaseIdea: `${server}/society/www/idea/submit`,
-    ideaDetail: `${server}/society/www/idea/getIdeaDetail`,
-    findUserInfo: `${server}/society/www/reg/findByUserId`
+    checkImageUrl: `${server}/uf/www/captcha/image.do`
 };
 module.exports = config
