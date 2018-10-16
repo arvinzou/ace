@@ -72,13 +72,13 @@
           p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
           p.accPoints as pAccPoints, p.validPoints as pValidPoints,
 
-          org.id as orgId
+        org.id as orgId,
           org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
 	      org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
 	      org.validPoints as orgValidPoints
         from portal.users t
         left join society.person_info p on t.user_id = p.id
-        LEFT join society.society_org_info s on t.user_id =  s.id
+        LEFT join society.society_org_info org on t.user_id = org.id
         where t.user_id = #{userId,jdbcType=VARCHAR}
     </select>
 
