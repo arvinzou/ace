@@ -15,12 +15,12 @@
   </view>
   <view class='form-box'>
       <view class='form'>
-           <view class='commodity-cover'><image src='../../image/default.jpg' class='cover'></image></view>
+           <view class='commodity-cover'><image src='{{ commodityInfo.commodityCover }}' class='cover'></image></view>
            <view class='commodity-info'>
                 <view class='info'>
-                    <view class='commodity-name'>瑞士军刀拖箱瑞士军刀拖箱瑞士军刀拖箱</view>
+                    <view class='commodity-name'>{{ commodityInfo.commodityName }}</view>
                     <view class='commodity-price'>
-                        <text class='commodity-price-num'>500</text>
+                        <text class='commodity-price-num'>{{ commodityInfo.costPoints }}</text>
                         <text class='commodity-price-unit'>爱心币</text>
                     </view>
                 </view>
@@ -32,7 +32,7 @@
     <view class='footer-left'>
         <text class='total-name'>共计：</text>
         <text class='total'>
-           <text class='commodity-price-num'>500</text>
+           <text class='commodity-price-num'>{{ commodityInfo.costPoints }}</text>
            <text class='commodity-price-unit'>爱心币</text>
         </text>
     </view>
