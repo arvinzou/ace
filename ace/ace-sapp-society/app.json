@@ -28,7 +28,9 @@
     "page/commodity/index",
     "page/settlement/index",
     "page/site/index",
-    "page/siteChoose/index"
+    "page/siteChoose/index",
+    "page/userinfo/index",
+    "page/ideaDetail/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
