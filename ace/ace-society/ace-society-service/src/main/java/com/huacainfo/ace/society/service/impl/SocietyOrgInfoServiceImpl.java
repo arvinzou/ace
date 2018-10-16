@@ -58,14 +58,11 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     @Override
     public PageResult<SocietyOrgInfoVo> findSocietyOrgInfoList(SocietyOrgInfoQVo condition, int start,
                                                                int limit, String orderBy) throws Exception {
-        PageResult
-                <SocietyOrgInfoVo> rst = new PageResult<>();
-        List
-                <SocietyOrgInfoVo> list = this.societyOrgInfoDao.findList(condition,
-                start, limit, orderBy);
+        PageResult<SocietyOrgInfoVo> rst = new PageResult<>();
+        List<SocietyOrgInfoVo> list = societyOrgInfoDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.societyOrgInfoDao.findCount(condition);
+            int allRows = societyOrgInfoDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
@@ -149,8 +146,7 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
      */
     @Override
     public SingleResult<SocietyOrgInfoVo> selectSocietyOrgInfoByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <SocietyOrgInfoVo> rst = new SingleResult<>();
+        SingleResult<SocietyOrgInfoVo> rst = new SingleResult<>();
         rst.setValue(this.societyOrgInfoDao.selectVoByPrimaryKey(id));
         return rst;
     }
@@ -214,6 +210,13 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
 
         dataBaseLogService.log("审核社会组织信息", "社会组织信息", id, id, "社会组织信息", userProp);
         return new MessageResponse(0, "社会组织信息审核完成！");
+    }
+
+    @Override
+    public List<SocietyOrgInfoVo> findList(SocietyOrgInfoQVo condition, int start, int limit, String orderBy) {
+        List<SocietyOrgInfoVo> list = societyOrgInfoDao.findList(condition, start, limit, orderBy);
+
+        return list;
     }
 
 }
