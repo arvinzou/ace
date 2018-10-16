@@ -56,7 +56,7 @@
 <script id="project-tpl" type="text/template">
     <div class="project_item_image" style="height: 6rem;">
         {@if data.coverUrl != '' && data.coverUrl != undefined && data.coverUrl != null}
-        <img src="${projectInfo.commodityCover}" width="100%" height="100%"/>
+        <img src="${data.coverUrl}" width="100%" height="100%"/>
         {@else}
         <img src="img/project_default.png" width="100%" height="100%"/>
         {@/if}
@@ -91,7 +91,7 @@
             <p class="raise_money">${data.balanceAmount}</p>
             <p class="raise_price">结余(元)</p>
             {@else}
-            <p class="raise_money"> ${(data.endDate).substring(0,10)}</p>
+            <p class="raise_money"> ${data.endDate}</p>
             <p class="raise_price">截止时间</p>
             {@/if}
         </div>
