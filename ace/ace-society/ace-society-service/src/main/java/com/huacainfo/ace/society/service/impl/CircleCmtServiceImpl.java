@@ -81,26 +81,15 @@ public class CircleCmtServiceImpl implements CircleCmtService {
      */
     @Override
     public MessageResponse insertCircleCmt(CircleCmt o) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getCircleId())) {
             return new MessageResponse(1, "圈子编号不能为空！");
         }
         if (CommonUtils.isBlank(o.getUid())) {
             return new MessageResponse(1, "用户编号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCreateTime())) {
-            return new MessageResponse(1, "入库日期不能为空！");
-        }
-
-
         o.setId(GUIDUtil.getGUID());
         o.setStatus("1");
+        o.setCreateTime(new Date());
         this.circleCmtDao.insert(o);
         return new MessageResponse(0, "添加评论完成！");
     }
