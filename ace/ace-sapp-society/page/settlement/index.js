@@ -56,7 +56,7 @@ Page({
   formSubmit: function(e){
       var that = this;
       var detailState = e.detail.value.detailState;
-      var orderDetail = { "commodityId": that.data.commodityId, "commodityInfo": that.data.commodityInfo.commodityName, "commodityCover": that.data.commodityInfo.commodityCover, "salePrice": that.data.commodityInfo.costPoints, "purchaseQty":1};
+      var orderDetail = { "commodityId": that.data.commodityId, "commodityName": that.data.commodityInfo.commodityName, "commodityCover": that.data.commodityInfo.commodityCover, "salePrice": that.data.commodityInfo.costPoints, "purchaseQty":1};
       var orderDetailList = [];
       orderDetailList.push(orderDetail);
       if (detailState == '' || detailState == undefined || detailState == null){
