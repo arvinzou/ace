@@ -38,7 +38,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      if (!util.is_login()) {
+      if (!util.isGetUserInfo()) {
           wx.switchTab({ url: "../userinfo/index?url=../releaseIdea/index" });
       }
   },

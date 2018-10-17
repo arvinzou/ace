@@ -15,7 +15,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      console.log("util.is_login()=============================================" + util.isGetUserInfo());
+      console.log("util.isGetUserInfo()=============================================" + util.isGetUserInfo());
       if (!util.isGetUserInfo()) {
           wx.navigateTo({ url: "../userinfo/index?url=../me/index" });
       }else{

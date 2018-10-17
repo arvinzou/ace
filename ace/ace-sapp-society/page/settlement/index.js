@@ -18,7 +18,7 @@ Page({
       var that = this;
       that.setData({ commodityId: options.commodityId})
       console.log("+====================================="+util.isLogin());
-      if (!util.is_login()) {
+      if (!util.isGetUserInfo()) {
           wx.navigateTo({
               url: "../userinfo/index?url=../settlement/index"
           });
