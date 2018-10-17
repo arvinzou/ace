@@ -23,9 +23,10 @@ Page({
     onLoad: function(options) {
         let that = this;
 
-        if (util.isLogin()) {
-            util.request('http://192.168.2.189/society/www/activity/getUserType', {},
+        if (util.isGetUserInfo()) {
+            util.request('http://192.168.2.189/society/www/reg/findByUserId', {},
                 function(rst) {
+                    console.log(rst);
                     if (rst.data.type == 1) {
                         that.setData({
                             hiddenBtn: false,

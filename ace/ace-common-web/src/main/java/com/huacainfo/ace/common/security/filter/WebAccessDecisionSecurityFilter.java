@@ -79,7 +79,9 @@ public class WebAccessDecisionSecurityFilter implements Filter {
                         String scope = PropertyUtil.getProperty("scope");
                         String params = getParamsStr(httpReq);
                         String state = httpReq.getRequestURI() + params + "attach=test";
-                        //PropertyUtil.getProperty("state");
+                        this.logger.info("state ============>{}",state);
+                        String encode= URLEncoder.encode(state,"utf-8");
+                        this.logger.info("encode ============>{}",encode);
                         redirectPage = this.authorize(appid, redirect_uri, scope, state);
                         accessable = false;
                     } else {
@@ -190,6 +192,13 @@ public class WebAccessDecisionSecurityFilter implements Filter {
         this.logger.debug("params:" + rtnStr.toString());
 
         return rtnStr.toString();
+    }
+
+    public static void main(String args[]) throws Exception{
+
+       String url= URLEncoder.encode("/live/www/view/live/index.jsp?companyId=00010001&id=90f5c89a-2af1-4485-96f1-2577ac3b8bee&attach=test","utf-8");
+       System.out.println(url);
+
     }
 
 }

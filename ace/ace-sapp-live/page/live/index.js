@@ -321,14 +321,6 @@ Page({
       contentText: e.detail.value
     })
   },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
-    });
-    that.loadRpt();
-  },
   rpt: function () {
     var that = this;
     console.log('../rpt/index?id=' + that.data.id);
@@ -401,8 +393,6 @@ Page({
   onPullDownRefresh: function () {
     let that = this;
     wx.stopPullDownRefresh();
-    that.loadRpt();
-    that.loadMsg();
 
   },
   addlike:function(e){

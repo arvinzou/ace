@@ -25,7 +25,7 @@ Page({
         if (!activityId) {
             // wx.navigateBack({})
             // return;
-            activityId = 2;
+            activityId = 3;
         }
         that.data.activityId = activityId;
         that.initdata();
@@ -42,6 +42,8 @@ Page({
                 let contents = null;
                 if (data.content) {
                     contents = JSON.parse(data.content);
+                }else{
+                    contents=[];
                 }
 
                 wx.hideNavigationBarLoading() //完成停止加载
@@ -142,8 +144,9 @@ Page({
     },
     // 添加元素
     addElement: function(content, type, editing) {
-        var that = this;
-        var id = 'e' + new Date().getTime();
+        let that = this;
+        let id = 'e' + new Date().getTime();
+        let index = that.getElementIndex(that.data.clickObject);
         that.data.content.splice(that.getElementIndex(that.data.clickObject), 0, {
             id: id,
             content: content,
@@ -163,13 +166,18 @@ Page({
     },
     //获取点击元素所在序列
     getElementIndex: function(id) {
-        var len = this.data.content.length;
-        var data = this.data.content;
-        for (var i = 0; i < len; i++) {
+        let contents = this.data.content;
+        if(!contents){
+            return 0;
+        }
+        let len=contents.length;
+        let data = this.data.content;
+        for (let i = 0; i < len; i++) {
             if (data[i].id == id) {
                 return i;
             }
         }
+        return len;
     },
     // 删除元素
     delElement: function() {
@@ -252,9 +260,7 @@ Page({
                 var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
                 if (that.data.isCover) {
                     that.setData({
-                        form: {
-                            coverUrl: url
-                        }
+                        coverUrl: url
                     })
                     return;
                 }
@@ -315,23 +321,36 @@ Page({
     },
     postReport: function() {
         let that = this;
-        if (that.data.content.length > 0 && that.data.title && that.data.coverUrl) {
+        if (!(that.data.content.length > 0 && that.data.title && that.data.coverUrl)) {
             wx.showModal({
                 title: '提示',
                 content: '内容不能为空',
             })
+            return;
         }
+        that.updateFun();
     },
     updateFun: function() {
         let that = this;
+        that.endEdit();
         util.request('http://192.168.2.189/society/www/activity/updateActivityReport', {
                 jsons: JSON.stringify(that.data),
             },
             function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
-                
             }
         );
-    }
+    },
+    getTitle:function(e){
+        let that=this;
+        that.data.title = e.detail.value;
+    },
+    /**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+    onPullDownRefresh: function () {
+        this.saveReport();
+        this.initdata();
+    },
 })

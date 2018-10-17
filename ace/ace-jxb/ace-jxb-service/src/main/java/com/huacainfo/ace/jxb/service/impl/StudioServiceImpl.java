@@ -68,10 +68,21 @@ public class StudioServiceImpl implements StudioService {
      * @version: 2018-07-25
      */
     @Override
-    public PageResult<StudioVo> findStudioList(StudioQVo condition, int start,
-                                               int limit, String orderBy) throws Exception {
+    public PageResult<StudioVo> findStudioList(StudioQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<StudioVo> rst = new PageResult<>();
         List<StudioVo> list = studioDao.findList(condition, start, limit, orderBy);
+        rst.setRows(list);
+        if (start <= 1) {
+            int allRows = studioDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+    @Override
+    public PageResult<StudioVo> findTopStudioList(StudioQVo condition, int start, int limit, String orderBy) throws Exception{
+        PageResult<StudioVo> rst = new PageResult<>();
+        List<StudioVo> list = studioDao.findTopList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = studioDao.findCount(condition);

@@ -49,7 +49,7 @@ public class LiveController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2017-12-27
      */
-    @RequestMapping(value = "/findLiveList")
+    @RequestMapping(value = "/findLiveLists")
     @ResponseBody
     public PageResult<LiveVo> findLiveList(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());

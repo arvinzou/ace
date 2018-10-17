@@ -198,6 +198,25 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+
+    <select id="findTopList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select count(1) as num,s.*
+        from studio s
+        left join counselor c on c.studioId=s.id
+        left join course cc on cc.createUserId=c.id
+        group by s.id
+        HAVING s.status='1'
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
     <sql id="whereCondition">
         from studio t
         left join counselor c on t.counselorId =c.id

@@ -5,11 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.huacainfo.ace.portal.service.impl.TokenThread;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 public class PortalServiceApp {
 	private static Logger LOGGER = LoggerFactory
 			.getLogger(PortalServiceApp.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		AbstractApplicationContext ctx = null;
 		try {
 			ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
