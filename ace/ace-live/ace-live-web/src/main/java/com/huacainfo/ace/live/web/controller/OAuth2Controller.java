@@ -51,17 +51,14 @@ public class OAuth2Controller extends LiveBaseController {
     private OAuth2Service oAuth2Service;
     @RequestMapping(value = "/redirect")
     public void redirect(String code, String state,HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         this.logger.info("code->{} state -> {}", code, state);
-        String decode= URLDecoder.decode(state);
-        this.logger.info("decode -> {}", decode);
         logger.info("=========================  start get Userinfo from weixin pltfrom======================");
-        SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, decode, state);
+        SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
         this.logger.info("{}", rst.getErrorMessage());
         if (rst.getState()) {
             this.logger.info("==================={}  in session ======================", rst.getValue().getNickname());
             this.getRequest().getSession().setAttribute(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
-            response.sendRedirect(decode);
+            response.sendRedirect(state);
         } else {
             response.sendRedirect(request.getContextPath()+"/www/common/error.jsp");
         }
