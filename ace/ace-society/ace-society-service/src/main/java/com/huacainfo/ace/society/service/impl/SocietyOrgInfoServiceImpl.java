@@ -4,8 +4,10 @@ package com.huacainfo.ace.society.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -24,7 +26,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("societyOrgInfoService")
 /**
@@ -218,5 +222,18 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
 
         return list;
     }
+
+    @Override
+    public ResultResponse getUserType(String unionId) {
+        SocietyOrgInfo societyOrgInfo= societyOrgInfoDao.selectByPrimaryKey(unionId);
+        String type="0";
+        if(!CommonUtils.isBlank(societyOrgInfo)){
+            type=societyOrgInfo.getOrgType();
+        }
+        Map<String,String> map= new HashMap<String,String>();
+        map.put("type",type);
+        return new ResultResponse(ResultCode.SUCCESS,"获取成功",map);
+    }
+
 
 }

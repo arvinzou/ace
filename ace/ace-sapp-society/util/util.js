@@ -146,7 +146,7 @@ function isLogin() {
     return true;
 }
 
-function is_login(){
+function isGetUserInfo(){
     var userinfo = wx.getStorageSync('userinfo');
     console.log(userinfo);
     if(!userinfo){
@@ -288,7 +288,7 @@ module.exports = {
     extend: extend,
     initRadioGroupData: initRadioGroupData,
     indexOf: indexOf,
-    is_login: is_login
+    isGetUserInfo: isGetUserInfo
 }
 
 

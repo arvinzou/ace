@@ -125,7 +125,7 @@ Page({
       id: params.id
     });
     that.initData(that.data.id);
-    var url = "ws://" + cfg.websocketurl + "/live/www/websocket/" + that.data.id + "/" + that.data.userinfo.unionId + "/chat";
+    var url = "wss://" + cfg.websocketurl + "/live/www/websocket/" + that.data.id + "/" + that.data.userinfo.unionId + "/chat";
     console.log(url);
     openSocket.connect(function (data) { // WebSocket初始化连接
       if (data) {

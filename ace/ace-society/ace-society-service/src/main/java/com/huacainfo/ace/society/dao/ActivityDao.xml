@@ -454,7 +454,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Activity">
     select count(1)
     from activity
-    where status <![CDATA[ <> ]]> 0
+    where title = #{title,jdbcType=VARCHAR}
     </select>
 
 </mapper>

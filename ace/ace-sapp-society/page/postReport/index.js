@@ -5,27 +5,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        textLists: [{
-                id: 'ele-1',
-                content: '1211122222222222222222222222222222222222222222222222222222222222222222',
-                type: 1
-            },
-            {
-                id: 'ele-2',
-                content: 'http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg',
-                type: 2
-            },
-            {
-                id: 'ele-3',
-                content: '我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字',
-                type: 1
-            },
-            {
-                id: 'ele-4',
-                content: 'http://t2.hddhhn.com/uploads/tu/201707/115/52.jpg',
-                type: 2
-            },
-        ],
+        content: [],
         toolBar: {
             top: '0px',
             show: false,
@@ -34,18 +14,18 @@ Page({
         clickObject: '',
         timer: '',
         showBtn: false,
-        coverUrl:'',
-        title:'',
+        coverUrl: '',
+        title: '',
+        activityId: ''
     },
 
-    onLoad: function (options) {
+    onLoad: function(options) {
         let that = this;
-        console.log(options);
         let activityId = options.id;
         if (!activityId) {
             // wx.navigateBack({})
             // return;
-            activityId=2;
+            activityId = 2;
         }
         that.data.activityId = activityId;
         that.initdata();
@@ -55,15 +35,21 @@ Page({
     initdata: function() {
         let that = this;
         util.request('http://192.168.2.189/society/www/activity/selectActivityReportByActivityId', {
-            activityId: that.data.activityId,
+                activityId: that.data.activityId,
             },
             function(rst) {
-                console.log(rst);
-                console.log(rst.data);
+                let data = rst.data;
+                let contents = null;
+                if (data.content) {
+                    contents = JSON.parse(data.content);
+                }
+
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.setData({
-                    list: rst.data
+                    content: contents,
+                    title: data.title,
+                    coverUrl: data.coverUrl
                 });
             }
         );
@@ -116,20 +102,20 @@ Page({
             todo.editing = false;
             todo.content = content;
         } else {
-            this.data.textLists.splice(this.getElementIndex(todo.id), 1);
+            this.data.content.splice(this.getElementIndex(todo.id), 1);
         }
         this.updateData(true);
         this.updateStorage();
     },
     // 获取单个数据信息
     getTodo: function(id) {
-        return this.data.textLists.filter(function(t) {
+        return this.data.content.filter(function(t) {
             return id == t.id;
         })[0];
     },
     // 查找正在修改的元素
     findEditing: function() {
-        return this.data.textLists.filter(function(t) {
+        return this.data.content.filter(function(t) {
             return t.editing == true;
         })[0];
     },
@@ -138,27 +124,27 @@ Page({
     updateData: function(resetTodos) {
         var data = {};
         if (resetTodos) {
-            data.textLists = this.data.textLists;
+            data.content = this.data.content;
         }
         this.setData(data);
     },
     // 保存在内存
     updateStorage: function() {
         var storage = [];
-        this.data.textLists.forEach(function(t) {
+        this.data.content.forEach(function(t) {
             storage.push({
                 id: t.id,
                 text: t.text,
                 complete: t.complete
             })
         });
-        wx.setStorageSync('textLists', storage);
+        wx.setStorageSync('content', storage);
     },
     // 添加元素
     addElement: function(content, type, editing) {
         var that = this;
         var id = 'e' + new Date().getTime();
-        that.data.textLists.splice(that.getElementIndex(that.data.clickObject), 0, {
+        that.data.content.splice(that.getElementIndex(that.data.clickObject), 0, {
             id: id,
             content: content,
             type: type,
@@ -177,8 +163,8 @@ Page({
     },
     //获取点击元素所在序列
     getElementIndex: function(id) {
-        var len = this.data.textLists.length;
-        var data = this.data.textLists;
+        var len = this.data.content.length;
+        var data = this.data.content;
         for (var i = 0; i < len; i++) {
             if (data[i].id == id) {
                 return i;
@@ -187,7 +173,7 @@ Page({
     },
     // 删除元素
     delElement: function() {
-        this.data.textLists.splice(this.getElementIndex(this.data.clickObject), 1);
+        this.data.content.splice(this.getElementIndex(this.data.clickObject), 1);
         this.cencelClickStyle(true);
         this.updateData(true);
     },
@@ -195,11 +181,11 @@ Page({
     addImage(e) {
         var that = this;
         let cover = e.currentTarget.dataset.cover;
-        let num=3;
-        if(cover=='cover'){
-            num=1;
-            this.data.isCover=true;
-        }else{
+        let num = 3;
+        if (cover == 'cover') {
+            num = 1;
+            this.data.isCover = true;
+        } else {
             this.data.isCover = false;
         }
         that.cencelClickStyle(false);
@@ -264,7 +250,7 @@ Page({
             success: function(res) {
                 var data = JSON.parse(res.data);
                 var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
-                if (that.data.isCover){
+                if (that.data.isCover) {
                     that.setData({
                         form: {
                             coverUrl: url
@@ -279,7 +265,7 @@ Page({
             },
         })
     },
-    onPageScroll: function (e) {
+    onPageScroll: function(e) {
 
         if (e.scrollTop <= 0) {
             // 滚动到最顶部
@@ -302,24 +288,49 @@ Page({
             scrollTop: e.scrollTop
         })
     },
-    postReport:function(){
+    postReport: function() {
         util.request('http://192.168.2.189/society/www/activity/findActivityList', {
             category: that.data.category,
             start: that.data.start,
             limit: that.data.limit
-        },function (data) {
-                console.log(data.data);
+        }, function(data) {
+            console.log(data.data);
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.stopPullDownRefresh() //停止下拉刷新
+            that.setData({
+                list: that.data.list.concat(data.data),
+                Loadingstatus: false,
+            });
+            if (data.data.length < that.data.limit) {
+                that.setData({
+                    LoadOver: true,
+                });
+            }
+        });
+    },
+    saveReport: function() {
+        let that = this;
+        that.data.status = "1";
+        that.updateFun();
+    },
+    postReport: function() {
+        let that = this;
+        if (that.data.content.length > 0 && that.data.title && that.data.coverUrl) {
+            wx.showModal({
+                title: '提示',
+                content: '内容不能为空',
+            })
+        }
+    },
+    updateFun: function() {
+        let that = this;
+        util.request('http://192.168.2.189/society/www/activity/updateActivityReport', {
+                jsons: JSON.stringify(that.data),
+            },
+            function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
-                that.setData({
-                    list: that.data.list.concat(data.data),
-                    Loadingstatus: false,
-                });
-                if (data.data.length < that.data.limit) {
-                    that.setData({
-                        LoadOver: true,
-                    });
-                }
+                
             }
         );
     }
