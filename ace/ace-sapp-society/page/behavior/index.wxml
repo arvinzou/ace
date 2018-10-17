@@ -9,39 +9,54 @@
         <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
             <swiper-item>
                 <view class='content'>
+                <block wx:for='{{ behaviorList }}'>
                     <view class='content-item'>
                         <view class='content-left'>
                             <image src='../../image/head.jpg' class='head'></image>
                         </view>
                         <view class='content-right'>
                             <view class='nickname'><text>不漂亮</text></view>
-                            <view class='remark'><text>这球打得太棒了吧，秋咪~</text></view>
+                            <view class='remark'><text>{{ item.compendium }}</text></view>
                             <view class='attach'>
-                                <video src='../../image/test.mp4' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>
+                                <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
+                                <block wx-if='{{ fileItem.fileType == 2 }}'>
+                                <video src='{{ fileItem.fileUrl }}' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>
+                                </block>
+                                <block wx-if='{{ fileItem.fileType == 1 }}'>
+                                    <image src='{{ fileItem.fileUrl}}' class='attach-image'></image>
+                                </block>
+                                </block>
                             </view>
                         </view>
                     </view>
-
-                    <view class='content-item'>
-                            <view class='content-left'>
-                                <image src='../../image/head.jpg' class='head'></image>
-                            </view>
-                            <view class='content-right'>
-                                <view class='nickname'><text>不漂亮</text></view>
-                                <view class='remark'><text>雨再怎么小，下久了地面总会被打湿，我的心也湿成了一片。。。。。</text></view>
-                                <view class='attach'>
-                                    <image src='../../image/default.jpg' class='attach-image'></image>
-                                    <image src='../../image/default.jpg' class='attach-image'></image>
-                                    <image src='../../image/default.jpg' class='attach-image'></image>
-                                    <image src='../../image/default.jpg' class='attach-image'></image>
-                                    <image src='../../image/default.jpg' class='attach-image'></image>
-                                </view>
-                            </view>
-                        </view>
+                </block>
                 </view>
             </swiper-item>
+
             <swiper-item>
-                <view>我是不文明行为</view>
+                 <view class='content'>
+                <block wx:for='{{ behaviorList }}'>
+                    <view class='content-item'>
+                        <view class='content-left'>
+                            <image src='../../image/head.jpg' class='head'></image>
+                        </view>
+                        <view class='content-right'>
+                            <view class='nickname'><text>不漂亮</text></view>
+                            <view class='remark'><text>{{ item.compendium }}</text></view>
+                            <view class='attach'>
+                                <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
+                                <block wx-if='{{ fileItem.fileType == 2 }}'>
+                                <video src='{{ fileItem.fileUrl }}' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>
+                                </block>
+                                <block wx-if='{{ fileItem.fileType == 1 }}'>
+                                    <image src='{{ fileItem.fileUrl}}' class='attach-image'></image>
+                                </block>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                </view>
             </swiper-item>
         </swiper>
     </view>
