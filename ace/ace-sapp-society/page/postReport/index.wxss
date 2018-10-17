@@ -34,7 +34,7 @@
 
 .content {
     background-color: #fff;
-    padding: 0rpx 30rpx;
+    padding: 0rpx 30rpx 110rpx;
 }
 
 .content .title {
@@ -97,8 +97,9 @@
     color: #ff9a09;
 }
 
-.icon-wenzis {
+.icon-wenben {
     color: #21c181;
+    font-size: 34rpx;
 }
 
 .icon-tianjiatupian {
