@@ -24,7 +24,7 @@
                 <view class='commodity-item evenDiv' bindtap='commodityDetal' data-id='{{ item.id }}'  wx:if="{{ index % 2 == 0}}">
                     <view class='cover'><image src='{{ item.commodityCover }}'></image></view>
                     <view class='commodity-title'>
-                        <text>{{ index }}{{ item.commodityName }}</text>
+                        <text>{{ item.commodityName }}</text>
                     </view>
                     <view class='commodity-label'>
                         <view class='commodity-label-left'>
