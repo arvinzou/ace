@@ -36,6 +36,8 @@ public class WIndexController extends JxbBaseController {
     private BaseOrderService baseOrderService;
     @Autowired
     private BannerService bannerService;
+    @Autowired
+    private StudioService studioService;
 
 
 
@@ -112,5 +114,14 @@ public class WIndexController extends JxbBaseController {
     public ResultResponse banner() throws Exception {
         BannerQVo bannerQVo = new BannerQVo();
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", bannerService.findBannerList(bannerQVo,0,4,null));
+    }
+
+    /**
+     * @return ResultResponse data(list)
+     */
+    @RequestMapping("/studio")
+    public ResultResponse studio() throws Exception {
+        StudioQVo studioQVo =new StudioQVo();
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", studioService.findTopStudioList(studioQVo,0,10,"num desc"));
     }
 }
