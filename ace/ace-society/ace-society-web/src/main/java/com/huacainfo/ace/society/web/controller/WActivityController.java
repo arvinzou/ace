@@ -164,8 +164,8 @@ public class WActivityController extends SocietyBaseController {
     @ResponseBody
     public ResultResponse selectActivityReportByActivityId(String activityId) throws Exception {
         WxUser wxUser = getCurWxUser();
-        ActivityReportVo activityReportVo=this.activityReportService.selectActivityReportByActivityId(activityId,wxUser);
-        return  new ResultResponse(ResultCode.SUCCESS,"获取成功",activityReportVo);
+        ActivityReport activityReport=this.activityReportService.selectActivityReportByActivityId(activityId,wxUser);
+        return  new ResultResponse(ResultCode.SUCCESS,"获取成功",activityReport);
     }
 
     /**
@@ -180,9 +180,10 @@ public class WActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/updateActivityReport")
     @ResponseBody
-    public MessageResponse updateActivityReport(String jsons) throws Exception {
+    public ResultResponse updateActivityReport(String jsons) throws Exception {
         ActivityReport obj = JSON.parseObject(jsons, ActivityReport.class);
-        return this.activityReportService.updateActivityReport(obj, this.getCurUserProp());
+        WxUser wxUser = getCurWxUser();
+        return this.activityReportService.WxUpdateActivityReport(obj,wxUser);
     }
 
     @RequestMapping(value = "/getUserType")

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.BisType;
@@ -130,9 +131,6 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         if (CommonUtils.isBlank(o.getActivityId())) {
             return new MessageResponse(1, "活动编码不能为空！");
         }
-        if (CommonUtils.isBlank(o.getTitle())) {
-            return new MessageResponse(1, "报道标题不能为空！");
-        }
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -141,6 +139,40 @@ public class ActivityReportServiceImpl implements ActivityReportService {
 
         return new MessageResponse(0, "变更活动报道完成！");
     }
+
+
+    /**
+     * @throws
+     * @Title:updateActivityReport
+     * @Description: TODO(更新活动报道)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @Override
+    public ResultResponse WxUpdateActivityReport(ActivityReport o, WxUser wxUser) throws Exception {
+        if (CommonUtils.isBlank(o.getActivityId())) {
+            return new ResultResponse(ResultCode.FAIL, "活动编码不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new ResultResponse(ResultCode.FAIL, "报道标题不能为空！");
+        }
+        ActivityReport activityReport=this.activityReportDao.selectByActivityId(o.getActivityId());
+        activityReport.setContent(o.getContent());
+        activityReport.setTitle(o.getTitle());
+        activityReport.setCoverUrl(o.getCoverUrl());
+        activityReport.setLastModifyDate(new Date());
+        activityReport.setLastModifyUserName(wxUser.getNickName());
+        activityReport.setLastModifyUserId(wxUser.getUnionId());
+        this.activityReportDao.updateByPrimaryKeySelective(activityReport);
+//        this.dataBaseLogService.log("变更活动报道", "活动报道", "", activityReport.getId(), activityReport.getId(), null);
+        return new ResultResponse(ResultCode.SUCCESS, "变更活动报道完成！");
+    }
+
+
 
     /**
      * @throws
@@ -170,21 +202,21 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      * @version: 2018-09-13
      */
     @Override
-    public ActivityReportVo selectActivityReportByActivityId(String id,WxUser wxUser) throws Exception {
-        ActivityReportVo activityReportVo=this.activityReportDao.selectByActivityId(id);
-        if(CommonUtils.isBlank(activityReportVo)){
-            activityReportVo =new ActivityReportVo();
-            activityReportVo.setId(GUIDUtil.getGUID());
-            activityReportVo.setActivityId(id);
-            activityReportVo.setCreateDate(new Date());
-            activityReportVo.setStatus("1");
-            activityReportVo.setCreateUserName(wxUser.getNickName());
-            activityReportVo.setCreateUserId(wxUser.getUnionId());
-            this.activityReportDao.insertSelective(activityReportVo);
+    public ActivityReport selectActivityReportByActivityId(String id,WxUser wxUser) throws Exception {
+        ActivityReport activityReport=this.activityReportDao.selectByActivityId(id);
+        if(CommonUtils.isBlank(activityReport)){
+            activityReport =new ActivityReport();
+            activityReport.setId(GUIDUtil.getGUID());
+            activityReport.setActivityId(id);
+            activityReport.setCreateDate(new Date());
+            activityReport.setStatus("1");
+            activityReport.setCreateUserName(wxUser.getNickName());
+            activityReport.setCreateUserId(wxUser.getUnionId());
+            this.activityReportDao.insertSelective(activityReport);
 //            this.dataBaseLogService.log("添加活动报道", "活动报道", "",
 //                    wxUser.getUnionId(), wxUser.getUnionId(), null);
         }
-        return activityReportVo;
+        return activityReport;
     }
 
     /**
