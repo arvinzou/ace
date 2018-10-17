@@ -40,7 +40,7 @@ function setParams(key, value) {
 }
 /*直播加载表格数据*/
 function getPageList() {
-    var url = contextPath + "/live/findLiveList";
+    var url = contextPath + "/live/findLiveLists";
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
