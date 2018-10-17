@@ -43,8 +43,8 @@ window.onload = function(){
                         points += parseInt(arr[i].points);
                     }
                 }
-                $("#totalAmount").text(total);
-                $("#amount").text(total);
+                $("#totalAmount").text(total.toFixed(2).toString());
+                $("#amount").text(total.toFixed(2).toString());
                 $("#totalPoint").text(points);
                 $("#times").text(result.data.total);
 
