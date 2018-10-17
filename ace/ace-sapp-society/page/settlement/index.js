@@ -18,7 +18,7 @@ Page({
       var that = this;
       that.setData({ commodityId: options.commodityId})
       console.log("+====================================="+util.isLogin());
-      if (!util.isGetUserInfo()) {
+      if (!util.is_login()) {
           wx.navigateTo({
               url: "../userinfo/index?url=../settlement/index"
           });
@@ -33,9 +33,7 @@ Page({
                     that.setData({ userinfoData: ret.data });
                     return true;
                 } else {
-                    if (ret.info == '用户尚未注册') {
-                        return false;
-                    }
+                    return false;
                 }
 
             }
@@ -69,7 +67,15 @@ Page({
           });
           return;
       }
-      util.request(cfg.createOrder, { "params": JSON.stringify({ "nickname": that.data.userinfoData.nickName, "headimgurl": that.data.userinfoData.avatarUrl, "detailList": orderDetail }) },
+      var receiveName = null;
+      var receivePhone = null;
+      if (that.data.userinfoData.regType == '2'){
+          receiveName = that.data.userinfoData.societyOrg.contactPerson;
+          receivePhone = that.data.userinfoData.societyOrg.contactPhone;
+      }else{
+
+      }
+      util.request(cfg.createOrder, { "params": JSON.stringify({ "nickname": that.data.userinfoData.nickName, "headimgurl": that.data.userinfoData.avatarUrl, "payType": '1', 'payAmount': that.data.commodityInfo.costPoints, "receiveType": '2', "address": detailState, "receiveName": receiveName, "receivePhone": receivePhone, "detailList": orderDetail }) },
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
