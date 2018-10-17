@@ -137,7 +137,7 @@ function courseClick(){
  * 在线直播点击（该功能在建设中）
  */
 function liveClick(){
-    alert("该功能在建设中，敬请期待!");
+    window.location.href = 'http://zx.huacainfo.com/live/www/index/index.jsp?companyId=0010007';
 }
 
 /**

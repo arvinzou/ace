@@ -30,8 +30,9 @@ Page({
       );
   },
   change: function(){
+    var that = this;
     wx.navigateTo({
-        url: '../siteChoose/index'
+        url: '../siteChoose/index?siteId=' + that.data.siteId
     })
   },
   /**
