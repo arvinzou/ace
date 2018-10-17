@@ -27,7 +27,9 @@ Page({
     } else if (that.data.type == 'switchTab'){
         wx.switchTab({
             url: that.data.url
-        })
+        });
+    }else{
+        wx.navigateTo({ url: that.data.url });
     }
   },
   bindgetuserinfo: function (e) {
