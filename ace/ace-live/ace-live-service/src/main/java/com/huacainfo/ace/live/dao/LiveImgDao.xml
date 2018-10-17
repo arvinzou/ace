@@ -26,7 +26,7 @@
         where id = #{id,jdbcType=VARCHAR}
     </delete>
 
-    <delete id="deleteByRptId" parameterType="java.lang.String">
+    <delete id="deleteByRid" parameterType="java.lang.String">
         delete from live_img
         where rptId = #{rptId,jdbcType=VARCHAR}
     </delete>

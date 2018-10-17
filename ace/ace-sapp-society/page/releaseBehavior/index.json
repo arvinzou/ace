@@ -1,4 +1,4 @@
 {
-    "navigationBarTitleText": "文明随手拍",
-    "enablePullDownRefresh": true
+  "navigationBarTitleText": "图文直播",
+  "enablePullDownRefresh": false
 }

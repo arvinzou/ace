@@ -38,8 +38,8 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      if (!util.isGetUserInfo()) {
-          wx.switchTab({ url: "../userinfo/index?url=../releaseIdea/index" });
+      if (!util.is_login()) {
+          wx.navigateTo({ url: "../userinfo/index?url=../releaseIdea/index&type=navigateTo" });
       }
   },
   formSubmit: function(e){

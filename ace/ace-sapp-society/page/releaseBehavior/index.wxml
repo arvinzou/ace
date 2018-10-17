@@ -1,30 +1,70 @@
 <view class='index'>
-  <view class='tips'><text>请在遵守国家法律的情况下发表内容，待审核发布后发布平台，您将得到50爱心币</text></view>
-  <view class='form-box'>
-    <view class='form'>
-        <form bindsubmit="formSubmit" bindreset="formReset">
-            <view class='form-label'>
-                <view class='form-label-left'>行为类型<text>*</text></view>
-                <view class='form-label-right'>
-                    <picker mode = selector bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                        <view class="picker">{{array[index]}}</view>
-                    </picker>
-                </view>
-            </view>
-            <view class='section-area'>
-                <textarea placeholder="文字是丰富内容的一种方式..." auto-focus class='idea-content' maxlength='200' placeholder-class='input-area'/>
-            </view>
-        </form>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="kind-list">
+      <view class="kind-list-item">
+        <textarea name="docText" value="{{docText}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入内容" style="height: 300rpx" />
+        <view class="weui-textarea-counter">{{max}}/500</view>
+      </view>
+      <view class="kind-list-item">
+        <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
+          <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
         </view>
-  </view>
-  <view class='form-box'>
-        <view class='form'>
-            <view class='file'>
-                <image src='../../image/add.png' class='file-attach'></image>
+        <view hidden="{{currentTab!==0}}">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title"></view>
+              <view class="weui-uploader__info">{{files.length}}</view>
             </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{files}}" wx:for-index="idx" wx:key="*this">
+                  <view class="weui-uploader__file" id="{{item}}">
+                    <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" bindtap="previewImage" />
+                    <image class="btn-img-small" bindtap="delImage" src="../../image/del-red.png" data-index="{{item}}" />
+                  </view>
+                </block>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseImage"></view>
+              </view>
+            </view>
+          </view>
         </view>
-  </view>
-</view>
-<view class='footer'>
-    <button class='release-btn'>发表</button>
+        <view hidden="{{currentTab!==1}}">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title"></view>
+             
+            </view>
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFilesVideo">
+        
+                <view style='position:relative;' class='{{displayVideo}} recorder'>
+                   <video src="{{mediUrl}}" style='width:100%;height:35vh' objectFit="contain" class='{{displayVideo}}'></video>
+            <cover-image class="removeImgBtnVideo {{displayVideo}}" bindtap="delVideo" src="../../image/del-red.png"/>
+         </view>
+              </view>
+              <view class="weui-uploader__input-box">
+                <view class="weui-uploader__input" bindtap="chooseVideo"></view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+
+      <view class="kind-list-item weui-flex">
+        <view class="weui-flex__item-icon">
+          <image class="iconList20" src="../../image/checkcode.png" />
+        </view>
+        <input name="captcha" type="number" class="weui-flex__item-body" maxlength="10" placeholder="验证码" />
+        <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>
+      </view>
+
+      <view>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:100%;color:#fff;background-color:blue; border-radius: 2px;" formType="submit">提交</button>
+      </view>
+    </view>
+  </form>
+  
 </view>

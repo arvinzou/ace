@@ -1,3 +1,5 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
     /**
@@ -5,6 +7,7 @@ Page({
      */
     data: {
         currentTab: 0, //当前选中的Tab项
+        behaviorList: [],
     },
 
     swichNav: function(e) {
@@ -20,9 +23,15 @@ Page({
     },
     swiperChange: function(e) {
         console.log(e);
+        var that = this;
         this.setData({
             currentTab: e.detail.current,
-        })
+        });
+        if (e.detail.current == '0'){
+            that.initBehaviorList("1");
+        }else{
+            that.initBehaviorList("0");
+        }
     },
     releaseBehavior: function(){
         wx.navigateTo({
@@ -33,7 +42,26 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        var that = this;
+        that.initBehaviorList("1");
+    },
+    initBehaviorList: function(type){
+        var that = this;
+        util.request(cfg.behaviorList, { "start": 0, "limit": 999, "type": type},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    that.setData({ behaviorList: ret.data.rows });
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: ret.errorMessage,
+                        success: function (res) { }
+                    });
+                }
 
+            }
+        );
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

@@ -14,7 +14,7 @@ function App() {
 /*直播初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 10,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
@@ -30,6 +30,8 @@ function initPage() {
 }
 /*直播条件查询*/
 function t_query() {
+    params['initType'] = 'init';
+    params['start']=0;
     getPageList();
     return false;
 }
@@ -40,15 +42,17 @@ function setParams(key, value) {
 }
 /*直播加载表格数据*/
 function getPageList() {
-    var url = contextPath + "/live/findLiveList";
+    var url = contextPath + "/live/findLiveLists";
     params['name'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
         if (rst.status == 0) {
             if (params.initType == "init") {
+                console.log("===============params.initType == init============="+rst.total);
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total
+                    totalCounts: rst.total==0?1:rst.total,
+                    currentPage: 1
                 });
             }
             render($("#page-list"), rst.rows, "tpl-list");

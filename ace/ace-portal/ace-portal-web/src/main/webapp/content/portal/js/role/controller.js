@@ -75,10 +75,10 @@ function save(){
         });
 }
 
-function role(roleId){
-     roleId=roleId;
+function role(id){
+     roleId=id;
      $('#modal-role').modal('show');
-     $('#tt').tree('options').url=contextPath+'/role/selectRoleResourceTreeList.do?roleId='+roleId
+     $('#tt').tree('options').url=contextPath+'/role/selectRoleResourceTreeList.do?roleId='+id
      $("#tt").tree('reload');
      $('#tt').tree({cascadeCheck:true});
 }

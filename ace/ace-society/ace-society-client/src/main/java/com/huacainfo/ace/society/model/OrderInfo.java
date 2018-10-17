@@ -38,7 +38,7 @@ public class OrderInfo extends BaseModel {
 
     private String address;
     /**
-     * 1-待付款 2-已付款 3-已自提   4-已配送
+     * 1-待付款 2-已付款 3-已自提 4-已配送
      */
     private String orderState;
 

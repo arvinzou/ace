@@ -70,7 +70,7 @@ public class ActivityController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse insertActivity(String jsons) throws Exception {
         Activity obj = JSON.parseObject(jsons, Activity.class);
-        return this.activityService.insertActivity(obj, this.getCurUserProp());
+        return this.activityService.insertActivity(obj);
     }
 
     /**
