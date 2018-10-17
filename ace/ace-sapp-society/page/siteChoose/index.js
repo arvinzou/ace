@@ -22,11 +22,11 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      that.setData({ siteId: options.siteId});
+      that.setData({ siteId: wx.getStorageSync('siteId')});
       that.getDates(8);
       if (!util.is_login()) {
           wx.navigateTo({
-              url: "../userinfo/index?url=../settlement/index"
+              url: "../userinfo/index?url=../siteChoose/index&type=navigateTo"
           });
       }
   },
