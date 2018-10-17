@@ -14,13 +14,13 @@
         </view>
     </view>
 
-    <view class='container'>
+    <!--<view class='container'>
         <view class='choose_box'>
             <text class='choose-state'>未选</text>
             <input class='choose-input' placeholder='请选择预约时间' placeholder-class='placeholder-text'></input>
             <image src='../../rediret.png' class='choose-image'></image>
         </view>
-    </view>
+    </view>-->
 
     <view class='container'>
         <view class='title-box'>
