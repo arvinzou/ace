@@ -361,3 +361,40 @@ page {
 .separate{
     margin-bottom: 20rpx;
 }
+
+
+.tags_b{
+    display: inline-block;
+    width: 98rpx;
+    height: 40rpx;
+    border-radius: 4px;
+    font-size: 20rpx;
+    font-weight: bold;
+    line-height: 40rpx;
+    text-align: center;
+}
+
+.tags_pj{
+    background: rgba(214, 224, 255, 1);
+    color: rgba(66, 93, 174, 1);
+}
+
+
+.tags_dj{
+    color:rgba(243,79,62,1);
+    background:rgba(254,242,239,1);
+}
+
+.tags_cy{
+    color:rgba(255,153,6,1);
+   background:rgba(255,235,208,1);
+}
+
+.tags_gy{
+    color:rgba(28,188,128,1);
+   background:rgba(219,247,236,1);
+}
+.tags_zb{
+    color:rgba(239,107,205,1);
+    background:rgba(255,214,238,1);
+}
