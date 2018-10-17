@@ -192,4 +192,28 @@ public class WActivityController extends SocietyBaseController {
 //        WxUser wxUser = getCurWxUser();
         return  this.societyOrgInfoService.getUserType("o6qFn1J84GDX6dMs9jivNpfuu4rA");
     }
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(活动报道分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <ActivityReportVo>
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @RequestMapping(value = "/findPublicActivityReportList")
+    @ResponseBody
+    public ResultResponse findPublicActivityReportList(String category, PageParamNoChangeSord page) throws Exception {
+        ActivityReportQVo activityReportQVo=new ActivityReportQVo();
+        activityReportQVo.setCategory(category);
+        activityReportQVo.setStatus("3");
+        List<ActivityReportVo> rst = this.activityReportService.findActivityReportList(activityReportQVo, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
+        return new ResultResponse(ResultCode.SUCCESS,"获取数据",rst);
+    }
+
 }

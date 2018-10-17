@@ -160,7 +160,7 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new ResultResponse(ResultCode.FAIL, "报道标题不能为空！");
         }
-        ActivityReport activityReport=this.activityReportDao.selectByActivityId(o.getActivityId());
+        ActivityReport activityReport = this.activityReportDao.selectByActivityId(o.getActivityId());
         activityReport.setContent(o.getContent());
         activityReport.setTitle(o.getTitle());
         activityReport.setCoverUrl(o.getCoverUrl());
@@ -171,7 +171,6 @@ public class ActivityReportServiceImpl implements ActivityReportService {
 //        this.dataBaseLogService.log("变更活动报道", "活动报道", "", activityReport.getId(), activityReport.getId(), null);
         return new ResultResponse(ResultCode.SUCCESS, "变更活动报道完成！");
     }
-
 
 
     /**
@@ -202,10 +201,10 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      * @version: 2018-09-13
      */
     @Override
-    public ActivityReport selectActivityReportByActivityId(String id,WxUser wxUser) throws Exception {
-        ActivityReport activityReport=this.activityReportDao.selectByActivityId(id);
-        if(CommonUtils.isBlank(activityReport)){
-            activityReport =new ActivityReport();
+    public ActivityReport selectActivityReportByActivityId(String id, WxUser wxUser) throws Exception {
+        ActivityReport activityReport = this.activityReportDao.selectByActivityId(id);
+        if (CommonUtils.isBlank(activityReport)) {
+            activityReport = new ActivityReport();
             activityReport.setId(GUIDUtil.getGUID());
             activityReport.setActivityId(id);
             activityReport.setCreateDate(new Date());
@@ -254,8 +253,8 @@ public class ActivityReportServiceImpl implements ActivityReportService {
      */
     @Override
     public MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception {
-        ActivityReport activityReport=activityReportDao.selectByPrimaryKey(id);
-        if(null==activityReport){
+        ActivityReport activityReport = activityReportDao.selectByPrimaryKey(id);
+        if (null == activityReport) {
             return new MessageResponse(ResultCode.FAIL, "活动报道信息丢失！");
         }
         MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY_REPORT, id, id, rst, remark, userProp);

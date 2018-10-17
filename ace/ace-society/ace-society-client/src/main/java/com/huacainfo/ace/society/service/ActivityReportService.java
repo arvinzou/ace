@@ -30,9 +30,7 @@ public interface ActivityReportService {
      * @author: huacai003
      * @version: 2018-09-13
      */
-    PageResult
-            <ActivityReportVo> findActivityReportList(ActivityReportQVo condition,
-                                                      int start, int limit, String orderBy) throws Exception;
+    PageResult<ActivityReportVo> findActivityReportList(ActivityReportQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
