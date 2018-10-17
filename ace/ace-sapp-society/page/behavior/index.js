@@ -1,3 +1,5 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
     /**
@@ -5,6 +7,7 @@ Page({
      */
     data: {
         currentTab: 0, //当前选中的Tab项
+        behaviorList: [],
     },
 
     swichNav: function(e) {
@@ -33,7 +36,26 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        var that = this;
+        that.initBehaviorList();
+    },
+    initBehaviorList: function(){
+        var that = this;
+        util.request(cfg.behaviorList, { "start": 0, "limit": 999},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                   // that.setData({ ideaList: ret.data.rows });
+                } else {
+                    wx.showModal({
+                        title: '提示',
+                        content: ret.errorMessage,
+                        success: function (res) { }
+                    });
+                }
 
+            }
+        );
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

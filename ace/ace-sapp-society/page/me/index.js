@@ -15,9 +15,9 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      console.log("util.isGetUserInfo()=============================================" + util.isGetUserInfo());
-      if (!util.isGetUserInfo()) {
-          wx.navigateTo({ url: "../userinfo/index?url=../me/index" });
+      console.log("util.is_login()=============================================" + util.is_login());
+      if (!util.is_login()) {
+          wx.navigateTo({ url: "../userinfo/index?url=../me/index&type=switchTab" });
       }else{
           that.setData({
               userinfo: wx.getStorageSync('userinfo')
@@ -70,7 +70,7 @@ Page({
       var that = this;
       console.log("that.initUserData()=======================================" + that.initUserData());
       if (wx.getStorageSync('userinfo')){
-          if(that.initUserData() == false){
+          if (that.initUserData() == false){
               wx.navigateTo({ url: "../regist/index" });
           }
       }

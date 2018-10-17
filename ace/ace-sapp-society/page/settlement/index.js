@@ -16,11 +16,12 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      that.setData({ commodityId: options.commodityId})
+      //that.setData({ commodityId: options.commodityId})
+      
       console.log("+====================================="+util.isLogin());
       if (!util.is_login()) {
           wx.navigateTo({
-              url: "../userinfo/index?url=../settlement/index"
+              url: "../userinfo/index?url=../settlement/index&type=navigateTo"
           });
       }
   },
@@ -41,7 +42,7 @@ Page({
     },
     initCommodityInfo: function (){
       var that = this;
-        util.request(cfg.siteDetail, { "commodityId": that.data.commodityId},
+        util.request(cfg.siteDetail, { "commodityId": wx.getStorageSync('commodityId')},
           function (ret) {
               if (ret.status == 0) {
                   console.log(ret);
@@ -56,7 +57,7 @@ Page({
   formSubmit: function(e){
       var that = this;
       var detailState = e.detail.value.detailState;
-      var orderDetail = { "commodityId": that.data.commodityId, "commodityName": that.data.commodityInfo.commodityName, "commodityCover": that.data.commodityInfo.commodityCover, "salePrice": that.data.commodityInfo.costPoints, "purchaseQty":1};
+      var orderDetail = { "commodityId": wx.getStorageSync('commodityId'), "commodityName": that.data.commodityInfo.commodityName, "commodityCover": that.data.commodityInfo.commodityCover, "salePrice": that.data.commodityInfo.costPoints, "purchaseQty":1};
       var orderDetailList = [];
       orderDetailList.push(orderDetail);
       if (detailState == '' || detailState == undefined || detailState == null){
