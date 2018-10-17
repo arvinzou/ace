@@ -82,7 +82,7 @@ public class WebAccessDecisionSecurityFilter implements Filter {
                         this.logger.info("state ============>{}",state);
                         String encode= URLEncoder.encode(state,"utf-8");
                         this.logger.info("encode ============>{}",encode);
-                        redirectPage = this.authorize(appid, redirect_uri, scope, state);
+                        redirectPage = this.authorize(appid, redirect_uri, scope, encode);
                         accessable = false;
                     } else {
                         accessable = true;
