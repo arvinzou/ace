@@ -31,6 +31,7 @@ Page({
   },
   change: function(){
     var that = this;
+    wx.setStorageSync("siteId", that.data.siteId);
     wx.navigateTo({
         url: '../siteChoose/index?siteId=' + that.data.siteId
     })
