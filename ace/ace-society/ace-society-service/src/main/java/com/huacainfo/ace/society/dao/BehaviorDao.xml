@@ -3,6 +3,7 @@
 <mapper namespace="com.huacainfo.ace.society.dao.BehaviorDao">
     <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.Behavior">
     <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="type" jdbcType="VARCHAR" property="type"/>
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="userId" jdbcType="VARCHAR" property="userId" />
     <result column="compendium" jdbcType="VARCHAR" property="compendium" />
@@ -16,12 +17,10 @@
     <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
-  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.BehaviorVo">
 
-  </resultMap>
   <sql id="Base_Column_List">
-    id, title, userId, compendium, submitDate, remark, status, createUserId, createUserName, 
-    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+    id, title, userId, compendium, submitDate, remark, status, createUserId, createUserName,
+      createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -43,13 +42,13 @@
     insert into behavior (id, title, userId, 
       compendium, submitDate, remark, 
       status, createUserId, createUserName, 
-      createDate, lastModifyUserId, lastModifyUserName, 
-      lastModifyDate)
+      createDate, lastModifyUserId, lastModifyUserName,
+      lastModifyDate, type)
     values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{compendium,jdbcType=VARCHAR}, #{submitDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
       #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
-      #{lastModifyDate,jdbcType=TIMESTAMP})
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.Behavior">
     insert into behavior
@@ -93,6 +92,9 @@
       <if test="lastModifyDate != null">
         lastModifyDate,
       </if>
+        <if test="type != null">
+            type,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -134,6 +136,10 @@
       <if test="lastModifyDate != null">
         #{lastModifyDate,jdbcType=TIMESTAMP},
       </if>
+        <if test="type != null">
+            #{type,jdbcType=VARCHAR},
+        </if>
+
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.society.model.Behavior">
@@ -163,6 +169,9 @@
       <if test="lastModifyDate != null">
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
       </if>
+        <if test="type != null">
+            type = #{type,jdbcType=VARCHAR},
+        </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -179,17 +188,35 @@
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
-      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
 
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.BehaviorVo">
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <collection property="behaviorAnnexList" column="nexId" javaType="ArrayList"
+                    ofType="com.huacainfo.ace.society.model.BehaviorAnnex">
+            <id property="id" jdbcType="VARCHAR" column="nexId"/>
+            <result column="behaviorId" jdbcType="VARCHAR" property="behaviorId"/>
+            <result column="fileType" jdbcType="VARCHAR" property="fileType"/>
+            <result column="fileName" jdbcType="VARCHAR" property="fileName"/>
+            <result column="fileUrl" jdbcType="DECIMAL" property="fileUrl"/>
+        </collection>
+    </resultMap>
+
     <sql id="Vo_Column_List">
-        t.id, t.title, t.userId, t.compendium, t.submitDate,
+        wx.avatarUrl, wx.nickName,
+        nex.id as nexId,
+        nex.behaviorId, nex.fileType, nex.fileName, nex.fileSize, nex.fileUrl,
+
+        t.id, t.type, t.title, t.userId, t.compendium, t.submitDate,
         t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
-  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
     select
       <include refid="Vo_Column_List"/>
     <include refid="whereCondition"/>
@@ -206,6 +233,8 @@
 
   <sql id="whereCondition">
     from behavior t
+      left join portal.wx_user wx on t.userId = wx.unionId
+      left join behavior_annex nex on t.id = nex.behaviorId
     where 1=1
     <if test="condition.title !=null and condition.title !=&quot;&quot;">
       and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')

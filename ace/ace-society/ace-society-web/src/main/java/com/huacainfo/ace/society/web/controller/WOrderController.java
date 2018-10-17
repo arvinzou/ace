@@ -26,7 +26,7 @@ public class WOrderController extends SocietyBaseController {
     /**
      * 创建订单
      *
-     * @param info 订单信息
+     * @param params 订单信息
      * @return ResultResponse
      */
     @RequestMapping("/create")

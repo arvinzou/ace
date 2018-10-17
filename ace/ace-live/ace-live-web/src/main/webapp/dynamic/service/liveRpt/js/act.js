@@ -26,10 +26,13 @@ function initPage() {
 }
 /*报道条件查询*/
 function t_query(){
+params['initType'] = 'init';
+    params['start']=0;
     getPageList();
     return false;
 }
 function setParams(key,value){
+
     params[key]=value;
      getPageList();
 }
@@ -43,7 +46,7 @@ function getPageList() {
         if (rst.status == 0) {
             if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total
+                    totalCounts: rst.total==0?1:rst.total
                 });
             }
             render($("#page-list"), rst.rows, "tpl-list");

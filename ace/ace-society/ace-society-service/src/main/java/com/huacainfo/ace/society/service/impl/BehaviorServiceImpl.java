@@ -23,6 +23,10 @@ import com.huacainfo.ace.society.vo.BehaviorAnnexQVo;
 import com.huacainfo.ace.society.vo.BehaviorAnnexVo;
 import com.huacainfo.ace.society.vo.BehaviorQVo;
 import com.huacainfo.ace.society.vo.BehaviorVo;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +53,18 @@ public class BehaviorServiceImpl implements BehaviorService {
     @Autowired
     private AuditRecordService auditRecordService;
 
+
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -66,12 +82,28 @@ public class BehaviorServiceImpl implements BehaviorService {
     @Override
     public PageResult<BehaviorVo> findBehaviorList(BehaviorQVo condition, int start,
                                                    int limit, String orderBy) throws Exception {
+        //sql
+        SqlSession session = getSqlSession();
+        BehaviorDao dao = session.getMapper(BehaviorDao.class);
+        //query
         PageResult<BehaviorVo> rst = new PageResult<>();
-        List<BehaviorVo> list = this.behaviorDao.findList(condition, start, start + limit, orderBy);
-        rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.behaviorDao.findCount(condition);
-            rst.setTotal(allRows);
+        try {
+            List<BehaviorVo> list = dao.findList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = behaviorDao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
         return rst;
     }

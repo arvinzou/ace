@@ -2,10 +2,9 @@ package com.huacainfo.ace.society.model;
 
 import com.huacainfo.ace.common.model.BaseModel;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Behavior extends BaseModel{
+public class Behavior extends BaseModel {
     private String id;
 
     private String title;
@@ -31,6 +30,19 @@ public class Behavior extends BaseModel{
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    /**
+     * 行为类别 0-不文明 1-文明
+     */
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getId() {
         return id;
