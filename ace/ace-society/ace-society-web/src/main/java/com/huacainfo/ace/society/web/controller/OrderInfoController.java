@@ -47,9 +47,8 @@ public class OrderInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/findOrderInfoList")
     @ResponseBody
-    public PageResult
-            <OrderInfoVo> findOrderInfoList(OrderInfoQVo condition,
-                                            PageParamNoChangeSord page) throws Exception {
+    public PageResult<OrderInfoVo> findOrderInfoList(OrderInfoQVo condition,
+                                                     PageParamNoChangeSord page) throws Exception {
 
         PageResult
                 <OrderInfoVo> rst = this.orderInfoService
@@ -107,8 +106,7 @@ public class OrderInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/selectOrderInfoByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <OrderInfoVo> selectOrderInfoByPrimaryKey(String id) throws Exception {
+    public SingleResult<OrderInfoVo> selectOrderInfoByPrimaryKey(String id) throws Exception {
         return this.orderInfoService.selectOrderInfoByPrimaryKey(id);
     }
 
