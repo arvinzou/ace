@@ -1,20 +1,14 @@
 package com.huacainfo.ace.live.service.impl;
 
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArraySet;
-
-import com.huacainfo.ace.common.tools.CommonUtils;
-
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.live.dao.LiveDao;
+import com.huacainfo.ace.live.service.TaskService;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.huacainfo.ace.common.kafka.KafkaProducerService;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import com.huacainfo.ace.live.service.TaskService;
 
 /**
  * Created by chenxiaoke on 2017/10/9.
