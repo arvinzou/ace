@@ -362,7 +362,7 @@ function applyProject(){
 }
 
 function showProjectProgress(){
-    window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
+    window.location.href = '/cu/www/view/me/apply_progress.jsp?projectId='+id;
 }
 /*图片上传成功后*/
 function viewCover(img, clazz, imgClazz, textClazz) {

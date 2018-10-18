@@ -1,5 +1,6 @@
 var projectId = null;
 var status = null;
+var openId = null;
 window.onload = function(){
     $.ajax({
         url: "/cu/www/project/findList",
@@ -49,7 +50,7 @@ window.onload = function(){
             url: "/cu/www/project/findDonateListToday",
             type:"post",
             async:false,
-            data:{projectId: projectId, start: 0, limit: 99999},
+            data:{projectId: projectId, start: 0, limit: 4},
             success:function(result){
                 if(result.status == 0) {
                     renderPage('donatiteList', result.data.rows, 'doante-tpl');
@@ -79,7 +80,8 @@ window.onload = function(){
                 if(result.status == 0) {
                     renderPage('rankList', result.data.list, 'rank-tpl');
                     renderPage('totalAmount', result.data.list.length, 'total-tpl');
-                    renderPage('share_box', result.data.own, 'share-tpl');
+                    //renderPage('share_box', result.data.own, 'share-tpl');
+                    openId = result.data.own.openid;
                 }else {
                     alert(result.info);
                 }
@@ -93,7 +95,7 @@ window.onload = function(){
 
 function donate(){
     if(projectId != null){
-        window.location.href = '/cu/www/view/order/order.html?projectId='+projectId;
+        window.location.href = '/cu/www/view/order/order.jsp?projectId='+projectId;
     }
 }
 /**
@@ -101,7 +103,7 @@ function donate(){
  */
 function donateRank(){
     if(projectId != null){
-        window.location.href = '/cu/www/donatelist/donatelist.html?projectId='+projectId;
+        window.location.href = '/cu/www/donatelist/donatelist.jsp?projectId='+projectId;
     }
 }
 
@@ -110,7 +112,7 @@ function donateRank(){
  */
 function showMore(){
     if(projectId != null) {
-        window.location.href = '/cu/www/view/daydonation/recordlist.html?projectId=' + projectId;
+        window.location.href = '/cu/www/view/daydonation/recordlist.jsp?projectId=' + projectId;
     }
 }
 
@@ -118,11 +120,16 @@ function showMore(){
  * 传递爱心
  */
 function transmit(){
-    layer.open({
+    /*layer.open({
         type:1,
         content: $("#share_box").html(),
         shadeClose:true
-    });
+    });*/
+    if(openId == '' || openId == null || openId == undefined){
+        alert("未查询到您的捐款信息！");
+    }else{
+        window.location.href = '/cu/www/share/share.jsp?projectId='+projectId+'&openId='+openId;
+    }
 }
 function troggle(obj, clazz){
     if($(obj).attr("name") == "down"){   //down展开，up收起
