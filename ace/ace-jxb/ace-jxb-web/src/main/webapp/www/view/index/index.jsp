@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-		<title>心阳光联盟</title>
+		<title>心阳光家庭教育</title>
 		<script type="text/javascript" src="../common/js/init-rem.js"></script>
 		<script type="text/javascript">
 			(function() {
