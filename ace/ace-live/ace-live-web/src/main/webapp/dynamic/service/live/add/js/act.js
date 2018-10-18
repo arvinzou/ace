@@ -97,7 +97,7 @@ function initEvents() {
         }
     });
 	$("input[name=startTime]").datetimepicker({
-	　　　　　　format: 'yyyy-mm-dd hh:mm',
+	　　　　　　format: 'yyyy-mm-dd hh:ii',
 	　　　　　　language: 'zh-CN',
 	　　　　　　weekStart: 1,
 	　　　　　　todayBtn: 1,//显示‘今日’按钮

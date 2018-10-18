@@ -18,7 +18,7 @@ jQuery(function($) {
 		});
 	});
 	$("input[name=startDate]").datetimepicker({
-			format: 'yyyy-mm-dd hh:mm',
+			format: 'yyyy-mm-dd hh:ii',
 			language: 'zh-CN',
 			weekStart: 1,
 			todayBtn: 1, //显示‘今日’按钮
@@ -33,7 +33,7 @@ jQuery(function($) {
 			$(this).blur(); //不可输入状态
 		})
 		$("input[name=endDate]").datetimepicker({
-			format: 'yyyy-mm-dd hh:mm',
+			format: 'yyyy-mm-dd hh:ii',
 			language: 'zh-CN',
 			weekStart: 1,
 			todayBtn: 1, //显示‘今日’按钮

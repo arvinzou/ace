@@ -149,20 +149,6 @@
                 </div>
                 {@/if}
 
-                <!--
-                <div id="j-replayvideo" class="videomsg fn-hide">
-                  <div class="tip">哎呀，摄像头被挡住了，请稍后再试</div>
-                </div>
-                <div id="j-livevideo">
-                {@if !ispc}
-                {@if data.cover && data.cover != 'https://xcycdn.zhongguowangshi.com'}
-                  <video poster="\${data.cover}?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0" src="\${data.playStreamUrl}" controls="controls" playsinline="playsinline" webkit-playsinline="webkit-playsinline"></video>
-                {@else}
-                  <video poster="//xcycdn.zhongguowangshi.com/live-img/ic_default_pic@2x.png?x-oss-process=image/resize,m_fill,w_750,h_422,limit_0" src="\${data.playStreamUrl}" controls="controls" playsinline="playsinline" webkit-playsinline="webkit-playsinline"></video>
-                {@/if}
-                {@/if}
-                </div>
-                -->
                 {@else}
                 {@if data.cover}
                 <img src="\${data.cover}">

@@ -242,6 +242,9 @@
     <if test="condition.status !=null and condition.status !=&quot;&quot;">
       and t.status =  #{condition.status,jdbcType=CHAR}
     </if>
+      <if test="condition.type !=null and condition.type !=&quot;&quot;">
+          and t.type = #{condition.type,jdbcType=CHAR}
+      </if>
   </sql>
 
   <select id="findCount" resultType="int">

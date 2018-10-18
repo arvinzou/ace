@@ -30,5 +30,5 @@ function renderPage(IDom, data, tempId) {
 }
 
 function help(projectId){
-    window.location.href = '/cu/www/donation/donation.html?projectId='+projectId;
+    window.location.href = '/cu/www/donation/donation.jsp?projectId='+projectId;
 }

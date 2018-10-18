@@ -127,11 +127,6 @@ public class LiveRptServiceImpl implements LiveRptService {
             this.liveImgDao.insert(img);
         }
         this.liveRptDao.insert(o);
-        Map<String, String> data = new HashMap<String, String>();
-        data.put("rid", "rsub");
-        data.put("message", JSON.toJSON(o).toString());
-        this.logger.info("{}", data);
-       // this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
         return new MessageResponse(0, "发布成功！");
     }
 
@@ -167,11 +162,6 @@ public class LiveRptServiceImpl implements LiveRptService {
             this.liveImgDao.insert(img);
         }
         this.liveRptDao.updateByPrimaryKey(obj);
-        Map<String, String> data = new HashMap<String, String>();
-        data.put("rid", "rsub");
-        data.put("message", JSON.toJSON(obj).toString());
-        this.logger.info("{}", data);
-        //this.kafkaProducerService.sendMsg("LIVE-MSG-QM", data);
         return new MessageResponse(0, "发布成功！");
     }
 
