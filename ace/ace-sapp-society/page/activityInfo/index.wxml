@@ -76,14 +76,14 @@
         </view>
     </view>
     <view class='btn_content'>
-        <view bindtap='apply' data-id='111' class='btn btn-clicking'>
+        <view bindtap='apply' class='btn btn-clicking'>
             立即报名
         </view>
         <view class='btn btn-noClick'>
             已经报名
         </view>
         <view class='btn btn-unClick'>
-            活动结束
+            报名结束
         </view>
     </view>
 

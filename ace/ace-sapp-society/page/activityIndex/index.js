@@ -135,8 +135,6 @@ Page({
                 temp.LoadOver = true;
             }
         }
-        console.log(that.data);
-        console.log(temp);
         that.setData({
             vdata: temp
         })
@@ -204,5 +202,12 @@ Page({
         let that = this;
         let temp=that.data.vdata;
         temp.scroll = e.detail.scrollTop;
+    },
+    viewInfo:function(e){
+        let that=this;
+        let data = e.currentTarget.dataset
+        let p = data.id;
+        let title = data.title;
+        wx.navigateTo({ url: '../reportInfo/index?id=' + p + "&title=" + title })
     }
 });
