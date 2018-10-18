@@ -191,6 +191,7 @@
 
 .btn_content {
     display: flex;
+    padding: 0 30rpx;
     height: 120rpx;
     justify-content: space-around;
     align-items: center;

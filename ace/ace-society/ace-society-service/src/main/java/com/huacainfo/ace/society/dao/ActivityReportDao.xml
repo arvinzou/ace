@@ -28,7 +28,7 @@
   </sql>
 
   <sql id="Vo_Column_List">
-    t.id, t.activityId, t.title, t.subTitle,t.coverUrl, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+    t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
     t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category
   </sql>
   <sql id="Blob_Column_List">
@@ -41,6 +41,16 @@
     <include refid="Blob_Column_List" />
     from activity_report
     where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="voResultMap">
+    select
+     t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl, t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,p.headimgurl as headimgurl
+    from activity_report t
+    LEFT JOIN activity a ON a.id=t.activityId
+    LEFT JOIN portal.userinfo p ON p.unionid=t.createUserId
+    where t.id = #{id,jdbcType=VARCHAR}
   </select>
 
   <select id="selectByActivityId" parameterType="java.lang.String" resultMap="voResultMap">

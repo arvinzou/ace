@@ -1,7 +1,6 @@
 {
   "pages": [
     "page/index/index",
-    "page/activity/index",
     "page/mall/index",
     "page/me/index",
     "page/behavior/index",
@@ -14,7 +13,6 @@
     "page/myLive/index", 
     "page/partyBuilding/index",
     "page/activityList/index",
-    "page/style/index",
     "page/activityInfo/index",
     "page/participants/index",
     "page/postReport/index",
@@ -30,7 +28,8 @@
     "page/site/index",
     "page/siteChoose/index",
     "page/userinfo/index",
-    "page/ideaDetail/index"
+    "page/ideaDetail/index",
+    "page/enterActivity/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -52,7 +51,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "page/postReport/index",
+        "pagePath": "page/activityIndex/index",
         "iconPath": "image/icon_活动回顾_未选中.png",
         "selectedIconPath": "image/icon_活动回顾_选中.png",
         "text": "活动回顾"

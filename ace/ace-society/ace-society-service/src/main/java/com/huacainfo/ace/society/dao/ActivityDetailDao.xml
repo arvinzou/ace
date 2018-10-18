@@ -29,6 +29,17 @@
         from activity_detail
         where id = #{id,jdbcType=VARCHAR}
     </select>
+
+
+    <select id="selectPersonaldetails" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from activity_detail
+        where activityId = #{activityId,jdbcType=VARCHAR}
+        and userId = #{unionId,jdbcType=VARCHAR}
+    </select>
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from activity_detail
     where id = #{id,jdbcType=VARCHAR}

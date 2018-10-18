@@ -12,8 +12,8 @@ Page({
   },
   onLoad: function (params) {
     var that = this;
+    console.log(params);
     that.setData(params);
-    
   },
   onPullDownRefresh: function () {
     let that = this;
@@ -36,7 +36,7 @@ Page({
     console.log(e.detail.userInfo);
     var that = this;
     util.login(that.goback);
-  }
+  },
 });
 
 

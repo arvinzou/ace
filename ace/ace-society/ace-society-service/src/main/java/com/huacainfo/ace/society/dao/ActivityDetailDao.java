@@ -23,6 +23,9 @@ public interface ActivityDetailDao {
 
     ActivityDetailVo selectVoByPrimaryKey(String id);
 
+
+    ActivityDetailVo selectPersonaldetails(@Param("activityId")String activityId,@Param("unionId")String unionId);
+
     List<ActivityDetailVo> findList(@Param("condition") ActivityDetail condition, @Param("start") int start, @Param("limit") int limit, @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") ActivityDetailQVo condition);

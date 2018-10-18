@@ -60,7 +60,7 @@
 					</div>
 					<div class="menu-item" onclick="courseClick();">
 						<img src="img/icon-course.png" class="menu-icon" />
-						<p class="menu-title">心理课程</p>
+						<p class="menu-title">精品课程</p>
 					</div>
 					<div class="menu-item" onclick="liveClick();">
 						<img src="img/icon-live.png" class="menu-icon" />
@@ -109,7 +109,7 @@
 		<!--精品课程结束-->
 
 		<!--优秀工作室开始-->
-		<div class="content" style="margin-bottom: 1.5rem;">
+		<div class="content">
 			<div class="teacher">
 				<div class="container">
 					<div class="course-title">优秀工作室</div>

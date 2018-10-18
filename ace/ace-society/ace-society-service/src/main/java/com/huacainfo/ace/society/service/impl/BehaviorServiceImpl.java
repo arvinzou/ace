@@ -283,13 +283,15 @@ public class BehaviorServiceImpl implements BehaviorService {
         if (StringUtil.isEmpty(params.getUserId())) {
             return new ResultResponse(ResultCode.FAIL, "提交人ID不能为空");
         }
-        if (StringUtil.isEmpty(params.getTitle())) {
-            return new ResultResponse(ResultCode.FAIL, "标题不能为空");
+        if (StringUtil.isEmpty(params.getType())) {
+            return new ResultResponse(ResultCode.FAIL, "行为类型不能为空");
         }
         if (StringUtil.isEmpty(params.getCompendium())) {
             return new ResultResponse(ResultCode.FAIL, "简述不能为空");
         }
         String behaviorId = GUIDUtil.getGUID();
+        params.setSubmitDate(DateUtil.getNowDate());
+
         params.setId(behaviorId);
         params.setStatus("1");
         params.setCreateDate(new Date());

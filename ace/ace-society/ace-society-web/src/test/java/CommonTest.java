@@ -16,7 +16,7 @@ public class CommonTest {
         //        System.out.println(StringUtil.genOrderNo18Str(GUIDUtil.getGUID()));
 
 
-        generatorGUID(1);
+        generatorGUID(2);
     }
 
 
