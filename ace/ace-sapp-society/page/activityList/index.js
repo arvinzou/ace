@@ -4,7 +4,7 @@ Page({
         list:[],
         category: '',
         start:0,
-        limit:6,
+        limit:10,
         LoadOver:false,
         Loadingstatus:false,
         nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),

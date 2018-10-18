@@ -9,7 +9,7 @@ Page({
         list: [],
         category: 4,
         start: 0,
-        limit: 8,
+        limit: 10,
         LoadOver: false,
         Loadingstatus: false,
         showBtn: false,

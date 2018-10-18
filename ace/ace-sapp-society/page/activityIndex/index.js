@@ -73,7 +73,7 @@ Page({
         },
         vdata: {},
         nowType: 'dj',
-        limit: 8,
+        limit: 10,
         loadingModalHide: false
     },
 
