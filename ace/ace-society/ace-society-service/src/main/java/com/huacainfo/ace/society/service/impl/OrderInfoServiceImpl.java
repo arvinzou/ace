@@ -332,6 +332,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         }
         //支付金额计算
         BigDecimal subTotal;
+        BigDecimal salePrice;
         BigDecimal payAmount = BigDecimal.ZERO;
         CommodityVo commodity;
         for (OrderDetail item : info.getDetailList()) {
@@ -349,11 +350,18 @@ public class OrderInfoServiceImpl implements OrderInfoService {
                     return rs;
                 }
             }
+            //获取销售价格
+            if (PayType.POINTS.equals(info.getPayType())) {
+                salePrice = new BigDecimal(null == commodity.getCostPoints() ? 0 : commodity.getCostPoints());
+            } else {
+                salePrice = null == item.getSalePrice() ? BigDecimal.ZERO : item.getSalePrice();
+            }
+            salePrice = salePrice.setScale(2, BigDecimal.ROUND_HALF_UP);
 
-            subTotal = commodity.getSalePrice().multiply(new BigDecimal(item.getPurchaseQty()));
+            subTotal = salePrice.multiply(new BigDecimal(item.getPurchaseQty()));
             item.setCommodityName(commodity.getCommodityName());
             item.setCommodityCover(commodity.getCommodityCover());
-            item.setSalePrice(commodity.getSalePrice());
+            item.setSalePrice(new BigDecimal(commodity.getCostPoints()).setScale(2, BigDecimal.ROUND_HALF_UP));
             item.setSubtotal(subTotal);
 
             payAmount = payAmount.add(subTotal);
@@ -472,6 +480,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         info.setCreateUserName("system");
         info.setStatus("1");
         info.setOrderState(orderState);
+        orderInfoDao.insert(info);
         //明细入库
         for (OrderDetail detail : info.getDetailList()) {
             detail.setId(GUIDUtil.getGUID());
@@ -483,8 +492,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             detail.setCreateUserName("system");
             orderDetailDao.insert(detail);
         }
-
-        orderInfoDao.insert(info);
 
         return info;
     }

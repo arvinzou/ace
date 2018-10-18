@@ -1,2 +1,74 @@
-<!--page/reportInfo/index.wxml-->
-<text>page/reportInfo/index.wxml</text>
+<view class='index'>
+    <view class='head whiteBg'>
+        <view class='title'>健全公共问题设施实施办法</view>
+        <view class='info'>
+            <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            <text class='name'>嘻嘻芙蓉嘻嘻嘻嘻芙蓉嘻嘻</text>
+            <text class='dateTime'>2018-9-25 13:56</text>
+            <text class='type typeTag tagGreen'>公益活动</text>
+        </view>
+        <view class='bottom-line'></view>
+    </view>
+    <view class='body separate whiteBg'>
+        <view class='content'>
+            <view>
+                作为"守格言、话成长"活动的延续，8日中午北京市学习型城市研究中心特邀研究员、东城区教育研修学院高级教师马成奎莅临东城区崇文幼儿园就"明确党员角色定位、自觉发挥先锋模范作用"进行专题讲座。讲座由"党员教师角色定位的重点、学习优秀党员主动发挥角色作用、如何进行党员角色定位"三部分组成。讲座通过对新时代活雷锋、新楷模的生动刻画，极大激发了崇幼教师弘扬雷峰精神、爱岗敬业、争做先锋模范的热情。
+            </view>
+            <image mode='widthFix' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+
+            <view>
+                作为"守格言、话成长"活动的延续，8日中午北京市学习型城市研究中心特邀研究员、东城区教育研修学院高级教师马成奎莅临东城区崇文幼儿园就"明确党员角色定位、自觉发挥先锋模范作用"进行专题讲座。讲座由"党员教师角色定位的重点、学习优秀党员主动发挥角色作用、如何进行党员角色定位"三部分组成。讲座通过对新时代活雷锋、新楷模的生动刻画，极大激发了崇幼教师弘扬雷峰精神、爱岗敬业、争做先锋模范的热情。
+            </view>
+            <image mode='widthFix' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+        </view>
+    </view>
+
+    <view class='foot whiteBg'>
+        <view class='comments'>
+            <view class='comment bottom-line'>
+                <view class='top'>
+                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+
+
+                    <view class='right'>
+                        <view class='name'>半分</view>
+                        <view class='time'>2018-04-03 13:15</view>
+                    </view>
+                </view>
+                <view class='bottom '>
+                    多杰出的创意品牌将在这里双双呈现罕见的创意合作，你还可以加入互动，亲手参与创作，相信你能从这些专心致志因此非常快乐的年轻人身上，找到属于你的乐趣。
+                </view>
+            </view>
+
+            <view class='comment bottom-line'>
+                <view class='top'>
+                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+
+
+                    <view class='right'>
+                        <view class='name'>半分</view>
+                        <view class='time'>2018-04-03 13:15</view>
+                    </view>
+                </view>
+                <view class='bottom'>
+                    多杰出的创意品牌将在这里双双呈现罕见的创意合作，你还可以加入互动，亲手参与创作，相信你能从这些专心致志因此非常快乐的年轻人身上，找到属于你的乐趣。
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class='commentBox whiteBg top-line'>
+        <view bindtap='actionComment' class='input'>一起参与讨论</view> 
+        <text class='iconfont icon-dianzan pop'> <text>2000</text> </text> 
+        <text class='iconfont icon-pinglun pop'> <text>2000</text></text>
+    </view>
+    <view class="model"  wx:if='{{actionComment}}'>
+        <view class='inner-model' catchtap='hiddenComment'></view>
+        <view class='box whiteBg'>
+            <form bindsubmit="formSubmit" bindreset="formReset">
+            <textarea focus='true' auto-focus="true" show-confirm-bar='false'></textarea>
+            <button class='submit' formType="submit">发送</button>
+            </form>
+        </view>
+    </view>
+</view>

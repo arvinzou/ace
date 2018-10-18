@@ -23,9 +23,15 @@ Page({
     },
     swiperChange: function(e) {
         console.log(e);
+        var that = this;
         this.setData({
             currentTab: e.detail.current,
-        })
+        });
+        if (e.detail.current == '0'){
+            that.initBehaviorList("1");
+        }else{
+            that.initBehaviorList("0");
+        }
     },
     releaseBehavior: function(){
         wx.navigateTo({
@@ -37,15 +43,15 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
-        that.initBehaviorList();
+        that.initBehaviorList("1");
     },
-    initBehaviorList: function(){
+    initBehaviorList: function(type){
         var that = this;
-        util.request(cfg.behaviorList, { "start": 0, "limit": 999},
+        util.request(cfg.behaviorList, { "start": 0, "limit": 999, "type": type},
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
-                   // that.setData({ ideaList: ret.data.rows });
+                    that.setData({ behaviorList: ret.data.rows });
                 } else {
                     wx.showModal({
                         title: '提示',

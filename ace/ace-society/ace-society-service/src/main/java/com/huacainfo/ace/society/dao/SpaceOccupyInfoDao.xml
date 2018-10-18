@@ -135,22 +135,22 @@
 
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
         select count(1)
-        from space_occupy_info
+        from space_occupy_info t
         where 1=1
-        <if test="condition.spaceId !=null and condition.spaceId !=&quot;&quot;">
-            and t.spaceId = #{condition.spaceId,jdbcType=VARCHAR}
+        <if test="spaceId !=null and spaceId !=&quot;&quot;">
+            and spaceId = #{spaceId,jdbcType=VARCHAR}
         </if>
-        <if test="condition.year !=null and condition.year !=&quot;&quot;">
-            and t.year = #{condition.year,jdbcType=VARCHAR}
+        <if test="year !=null and year !=&quot;&quot;">
+            and year = #{year,jdbcType=VARCHAR}
         </if>
-        <if test="condition.month !=null and condition.month !=&quot;&quot;">
-            and t.month = #{condition.month,jdbcType=VARCHAR}
+        <if test="month !=null and month !=&quot;&quot;">
+            and month = #{month,jdbcType=VARCHAR}
         </if>
-        <if test="condition.day !=null and condition.day !=&quot;&quot;">
-            and t.day = #{condition.day,jdbcType=VARCHAR}
+        <if test="day !=null and day !=&quot;&quot;">
+            and day = #{day,jdbcType=VARCHAR}
         </if>
-        <if test="condition.reserveInterval !=null and condition.reserveInterval !=&quot;&quot;">
-            and t.reserveInterval = #{condition.reserveInterval,jdbcType=VARCHAR}
+        <if test="reserveInterval !=null and reserveInterval !=&quot;&quot;">
+            and reserveInterval = #{reserveInterval,jdbcType=VARCHAR}
         </if>
     </select>
 

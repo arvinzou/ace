@@ -6,7 +6,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-		<title>心阳光联盟</title>
+		<title>心阳光家庭教育</title>
 		<script type="text/javascript" src="../common/js/init-rem.js"></script>
 		<script type="text/javascript">
 			(function() {
@@ -108,6 +108,23 @@
 		</div>
 		<!--精品课程结束-->
 
+		<!--优秀工作室开始-->
+		<div class="content" style="margin-bottom: 1.5rem;">
+			<div class="teacher">
+				<div class="container">
+					<div class="course-title">优秀工作室</div>
+					<div class="teacherlist">
+						<div class="swiper-container swiper-container_workroom">
+							<div class="swiper-wrapper" id="hotWorkrooms">
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--优秀工作室结束-->
+
 		<!--人气老师开始-->
 		<div class="content" style="margin-bottom: 1.5rem;">
 			<div class="teacher">
@@ -153,6 +170,24 @@
 			</div>
 		</div>
 		<!--底部结束-->
+
+		<%--优秀工作室模板开始--%>
+		<script id="workroom-tpl" type="text/template">
+			{@each data as item, index}
+			<div class="swiper-slide" onclick="loadWorkroom('\${item.id}');">
+				<div class="teacher-box">
+					<div class="teacher-cover">
+						<img src="\${item.logoImgUrl}" class="cover-img" />
+					</div>
+					<div class="workroom-info"><p class="teacher-name">\${item.name}</p></div>
+					<div style="padding-top: 0.4rem;padding-bottom: 0.4rem;">
+						<a href="javascript:void(0);" class="consult" onclick="loadWorkroom('\${item.id}');">查看</a>
+					</div>
+				</div>
+			</div>
+			{@/each}
+		</script>
+		<%--优秀工作室模板结束--%>
 
         <%--人气老师模板--%>
         <script id="teacher-tpl" type="text/template">
