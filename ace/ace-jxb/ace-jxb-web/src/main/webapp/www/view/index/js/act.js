@@ -2,9 +2,9 @@ window.onload = function(){
     hotTeachers();
     freecourse();
     qualityCourse();
+    initWorkroom();
     initBanner();
     initSwriper();
-    initWorkroom();
     $('#activeSearch').click(activeSearch);
     $('.search').on('click', '.notice', cancelSearch);
     $("input").keyup(searching);
@@ -26,6 +26,11 @@ function initSwriper() {
       slidesPerView: 'auto',
       spaceBetween: 20,
       freeMode: true
+    });
+    var workroomSwiper = new Swiper('.swiper-container_workroom', {
+        slidesPerView: 'auto',
+        spaceBetween: 20,
+        freeMode: true
     });
 }
 function renderPage(IDom, data, tempId) {

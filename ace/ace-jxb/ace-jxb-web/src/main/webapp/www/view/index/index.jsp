@@ -114,7 +114,7 @@
 				<div class="container">
 					<div class="course-title">优秀工作室</div>
 					<div class="teacherlist">
-						<div class="swiper-container swiper-container_teacher">
+						<div class="swiper-container swiper-container_workroom">
 							<div class="swiper-wrapper" id="hotWorkrooms">
 
 							</div>
