@@ -6,7 +6,7 @@ Page({
     },
     onLoad: function(options) {
         let that = this;
-        console.log(options);
+
         let id = options.id;
         let tit = options.title;
         if (!id) {
@@ -25,15 +25,18 @@ Page({
                 id: that.data.id,
             },
             function(rst) {
-                console.log(rst);
-                console.log(rst.data);
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.setData({
                     list: rst.data
                 });
+
             }
         );
+    },
+
+    btnControl:function(){
+        
     },
 
     setBarTitleText: function(tit) {
@@ -42,11 +45,12 @@ Page({
         })
     },
 
-    viewParticipants: function (e) {
-        console.log(e);
+    viewParticipants: function(e) {
         let data = e.currentTarget.dataset
         let p = data.id;
-        wx.navigateTo({ url: '../participants/index?id=' + p })
+        wx.navigateTo({
+            url: '../participants/index?id=' + p
+        })
     },
 
 })

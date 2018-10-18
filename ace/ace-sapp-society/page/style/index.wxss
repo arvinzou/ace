@@ -1,9 +1,0 @@
-@import "../common/index.wxss";
-
-.br{
-    height: 20rpx;
-}
-
-.steps{
-    position: static;
-}
