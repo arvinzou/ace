@@ -4,6 +4,7 @@ window.onload = function(){
     qualityCourse();
     initBanner();
     initSwriper();
+    initWorkroom();
     $('#activeSearch').click(activeSearch);
     $('.search').on('click', '.notice', cancelSearch);
     $("input").keyup(searching);
@@ -119,6 +120,42 @@ function qualityCourse(){
     });
 }
 
+/**
+ * 优秀工作室
+ */
+function initWorkroom(){
+    $.ajax({
+        url: contextPath+ "/www/index/studio",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0) {
+                renderPage('hotWorkrooms', result.data.rows, 'workroom-tpl');
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+/**
+ * 优秀工作室点击查看详情
+ * @param id
+ */
+function loadWorkroom(id){
+    window.location.href = contextPath + '/www/view/joinedRoom/index.jsp?id='+id;
+}
 /**
  * 顾问在线点击
  */
