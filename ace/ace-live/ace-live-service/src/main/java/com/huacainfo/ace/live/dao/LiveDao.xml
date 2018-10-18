@@ -353,7 +353,7 @@
         FROM
         live
         WHERE
-        deptId = #{deptId}
+        deptId = #{deptId} and auditStatus='2'
         ) a
         LEFT JOIN (
         SELECT

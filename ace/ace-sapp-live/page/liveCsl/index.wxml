@@ -2,34 +2,10 @@
   <form catchsubmit="formSubmit" catchreset="formReset">
     <view class="kind-list">
 
-      <view class="kind-list-item">
-        <input name="name" class="weui-flex__item-body" value="{{formData.name}}" maxlength="10" placeholder="请输入直播名称" />
-      </view>
-      <view class="kind-list-item">
-
-        <radio-group bindchange="categoryChange" name="category">
-          <label wx:for="{{categoryItems}}" wx:key="value" class='radio'>
-            <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.name}}
-          </label>
-        </radio-group>
-      </view>
-      <view class="kind-list-item">
-        <textarea name="content" value="{{formData.content}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入直播介绍" style="height: 300rpx" />
-        <view class="weui-textarea-counter">{{max}}/500</view>
-      </view>
-
-      <view class="kind-list-item">
-        <textarea name="remark" value="{{formData.remark}}" bindinput="remarkChange" maxlength="200" class="weui-textarea" placeholder="请输入直播简介" style="height: 100rpx" />
-        <view class="weui-textarea-counter">{{maxRemark}}/200</view>
-      </view>
-
-
-
-
-      <view class="kind-list-item">
+    <view class="kind-list-item">
         <view class="weui-uploader">
           <view class="weui-uploader__hd">
-            <view class="weui-uploader__title">直播封面</view>
+            <view class="weui-uploader__title">封面</view>
             <view class="weui-uploader__info">{{formData.files.length}}</view>
           </view>
           <view class="weui-uploader__bd">
@@ -47,6 +23,32 @@
           </view>
         </view>
       </view>
+
+      <view class="kind-list-item">
+        <input name="name" class="weui-flex__item-body" value="{{formData.name}}" maxlength="50" placeholder="请输入名称" />
+      </view>
+      <view class="kind-list-item">
+
+        <radio-group bindchange="categoryChange" name="category">
+          <label wx:for="{{categoryItems}}" wx:key="value" class='radio'>
+            <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.name}}
+          </label>
+        </radio-group>
+      </view>
+      <view class="kind-list-item">
+        <textarea name="content" value="{{formData.content}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入介绍" style="height: 300rpx" />
+        <view class="weui-textarea-counter">{{max}}/500</view>
+      </view>
+
+      <view class="kind-list-item">
+        <textarea name="remark" value="{{formData.remark}}" bindinput="remarkChange" maxlength="200" class="weui-textarea" placeholder="请输入简介" style="height: 100rpx" />
+        <view class="weui-textarea-counter">{{maxRemark}}/200</view>
+      </view>
+
+
+
+
+      
       <view class="kind-list-item" style='display: flex;flex-direction: row'>
         <view class='packerDate'>
           <view class="weui-cell__hd">
@@ -81,7 +83,7 @@
         <image class="weui-vcode-img weui-flex__item-body" src="{{checkImageUrl}}?id={{WXSESSIONID}}" style="width:90px;height:30px;text-align:right"></image>
       </view>
       <view>
-        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:100%;color:#fff;background-color:blue; border-radius: 2px;" formType="submit">提交</button>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#1a9fff; border-radius: 2px;" formType="submit">提交</button>
       </view>
     </view>
   </form>

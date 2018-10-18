@@ -2,19 +2,28 @@
 
 
   <view class='live-list'>
+    <view  wx:for="{{listLive}}" wx:key="" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
 
-    <navigator url="../live/index?id={{item.id}}" wx:for="{{listLive}}" wx:key="" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" style='height: 450rpx;'>
       <view class="content">
-        <image src="{{item.imageSrc}}" mode="aspectFill" class='coverImg' />
+        <view class='list-item-cover'>
+          <image src="{{item.imageSrc}}" mode="aspectFill" class='coverImg' />
+          <view class="status-box">
+            <view class="status-icon-text">
+              {{item.status=='1'?'预播':''}}{{item.status=='2'?'直播':''}}{{item.status=='3'?'历史':''}}
+            </view>
+            <view class='status-icon-{{item.category}}'></view>
+           
+          </view>
+        </view>
+        <view class='list-item-text'>
+          <view class="live-title">
+            {{item.name}}
+          </view>
+     <view class='time-box' wx:if="{{item.status==1}}">{{item.startTime}}</view>
+           <text wx:if="{{item.status!=1}}" class='nop-pop'> {{item.nop}}/{{item.pop}}</text>
+                <text class="audit-status {{item.auditStatus=='3'?'bg-danger':''}}{{item.auditStatus=='2'?'bg-success':''}} {{item.auditStatus=='1'?'bg-info':''}} {{item.auditStatus=='0'?'bg-info':''}}">{{item.auditStatus=='0'?'暂存':''}}{{item.auditStatus=='1'?'待审':''}}{{item.auditStatus=='2'?'通过':''}}{{item.auditStatus=='3'?'驳回':''}}</text>
 
-        <view class="live-title">
-          <view>{{item.name}}</view>
         </view>
-        <view class="status-box {{item.status=='2'?'bg-danger':''}}{{item.status=='1'?'bg-info':''}}">{{item.status=='1'?'预播':''}}{{item.status=='2'?'直播':''}}{{item.status=='3'?'历史':''}}
-        <text wx:if="{{item.status!=1}}"> {{item.nop}}/{{item.pop}}</text>
-        </view>
-        <view class="audit-status-box {{item.auditStatus=='3'?'bg-danger':''}}{{item.auditStatus=='2'?'bg-success':''}}">{{item.auditStatus=='0'?'暂存':''}}{{item.auditStatus=='1'?'待审':''}}{{item.auditStatus=='2'?'通过':''}}{{item.auditStatus=='3'?'驳回':''}}</view>
-        <view class='time-box' wx:if="{{item.status==1}}">开始时间：{{item.startTime}}</view>
       </view>
       <view class="opt">
         <view class="opt-btn btn-edit" wx:if="{{item.auditStatus==0||item.auditStatus==3}}" catchtap="edit" data-id="{{item.id}}">编辑</view>
@@ -22,10 +31,10 @@
         <view class="opt-btn btn-submit" wx:if="{{item.auditStatus==0||item.auditStatus==3}}" catchtap="submit" data-id="{{item.id}}" data-index="{{index}}">提交</view>
         <view class="opt-btn btn-del" wx:if="{{item.auditStatus==0||item.auditStatus==3}}" catchtap="del" data-id="{{item.id}}" data-index="{{index}}">删除</view>
       </view>
-    </navigator>
+    </view>
   </view>
 
-<view class="btn-add" bindtap="add">
-  <image class="btn-img" src="../../image/add-red.png" />
-</view>
+  <view class="btn-add" bindtap="add">
+    <image class="btn-img" src="../../image/add-red.png" />
+  </view>
 </view>

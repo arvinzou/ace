@@ -18,7 +18,7 @@ Page({
   onLoad: function () {
     var that = this;
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../home/index" });
+      wx.navigateTo({ url: "../userinfo/index?url=../myLive/index" });
     }else{
       that.initData();
       that.setData({
@@ -40,15 +40,15 @@ Page({
   },
   initData: function () {
     var that = this;
-    util.request(cfg.findLiveList, {start:start,limit:limit },
+    util.request(cfg.findLiveList, {start:0,limit:9999 },
       function (data) {
         console.log(data);
         data.rows.forEach(function (o, i) {
           o.isTouchMove = false;
-          that.data.listLive.push(o);
+          //that.data.listLive.push(o);
         });
         that.setData({
-          listLive: that.data.listLive
+          listLive: data.rows
         });
         wx.stopPullDownRefresh();
       }
