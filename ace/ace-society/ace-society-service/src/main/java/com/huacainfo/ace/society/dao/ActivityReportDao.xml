@@ -287,7 +287,10 @@
       and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
     </if>
     <if test="condition.category !=null and condition.category !=&quot;&quot;">
-      and a.category =#{condition.category,jdbcType=VARCHAR}
+      and category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.status !=null and condition.status !=&quot;&quot;">
+      and t.status =#{condition.status,jdbcType=CHAR}
     </if>
   </sql>
 

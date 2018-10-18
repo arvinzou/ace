@@ -145,7 +145,7 @@ public class LiveServiceImpl implements LiveService {
         }
         LiveVo obj=this.liveDao.selectByPrimaryKey(o.getId());
         if(obj.getAuditStatus().equals("1")||obj.getAuditStatus().equals("2")){
-            return new MessageResponse(1, "已提交审核，不能编辑！");
+            //return new MessageResponse(1, "已提交审核，不能编辑！");
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");

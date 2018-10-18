@@ -211,6 +211,9 @@ public class ActivityReportServiceImpl implements ActivityReportService {
             activityReport.setStatus("1");
             activityReport.setCreateUserName(wxUser.getNickName());
             activityReport.setCreateUserId(wxUser.getUnionId());
+            activityReport.setLastModifyUserName(wxUser.getNickName());
+            activityReport.setLastModifyUserId(wxUser.getUnionId());
+            activityReport.setLastModifyDate(new Date());
             this.activityReportDao.insertSelective(activityReport);
 //            this.dataBaseLogService.log("添加活动报道", "活动报道", "",
 //                    wxUser.getUnionId(), wxUser.getUnionId(), null);

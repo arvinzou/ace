@@ -23,7 +23,7 @@ Page({
     onLoad: function(options) {
         let that = this;
 
-        if (util.isGetUserInfo()) {
+        if (util.is_login()) {
             util.request('http://192.168.2.189/society/www/reg/findByUserId', {},
                 function(rst) {
                     console.log(rst);

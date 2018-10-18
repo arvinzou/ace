@@ -31,14 +31,14 @@ window.onload = function(){
  * 查看救急难项目详情
  */
 function showProjectInfo(id){
-    window.location.href = '/cu/www/jjndonation/donation.html?projectId='+id+'&type=2';
+    window.location.href = '/cu/www/jjndonation/donation.jsp?projectId='+id+'&type=2';
 }
 
 /**
  * 发起筹款
  */
 function raiseMoney(){
-    window.location.href = '/cu/www/view/apply/read.html';
+    window.location.href = '/cu/www/view/apply/read.jsp';
 }
 
 function renderPage(IDom, data, tempId) {

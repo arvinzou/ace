@@ -38,7 +38,7 @@ function t_query() {
 
 function setParams(key, value) {
     params[key] = value;
-    getPageList();
+    t_query();
 }
 /*直播加载表格数据*/
 function getPageList() {
