@@ -1730,6 +1730,9 @@ $.fn.jqGrid = function( pin ) {
 			}
 		},
 		addJSONData = function(data,t, rcnt, more, adjust) {
+
+		    console.log("=========addJSONData============");
+
 			var startReq = new Date();
 			if(data) {
 				if(ts.p.treeANode === -1 && !ts.p.scroll) {
@@ -1760,20 +1763,24 @@ $.fn.jqGrid = function( pin ) {
 			}else{
 				ts.p.lastpage=1;
 			}
+			var rows=$.jgrid.getAccessor(data,dReader.root);
+            if(rows.length==0){
+                ts.p.records=0;
+            }
 			console.log("records "+ts.p.records);
 			console.log("rowNum "+ts.p.rowNum);
 			console.log("lastpage "+ts.p.lastpage);
 			console.log(ts.p);
-            if(ts.p.records>0){
-                  if(ts.p.pager!='#false'){
-                      $(ts.p.pager).jqPaginator('option', {
-                            totalCounts: ts.p.records
-                      });
-                      $(".ui-jqgrid-bdiv").css("height",'');
-                      console.log("===============================");
-                      $(ts.p.pager).parent().find(".totalCounts span").html(ts.p.records);
-                  }
-            }
+
+            if(ts.p.pager!='#false'){
+                  $(ts.p.pager).jqPaginator('option', {
+                        totalCounts: ts.p.records==0?1:ts.p.records,
+                        currentPage: ts.p.page
+                  });
+                  $(".ui-jqgrid-bdiv").css("height",'');
+                  console.log("===============================");
+                  $(ts.p.pager).parent().find(".totalCounts span").html(ts.p.records);
+              }
 			/**系统返回数据***/
 			if(si) {
 				addSubGridCell = $.jgrid.getMethod("addSubGridCell");
@@ -3174,6 +3181,7 @@ $.fn.jqGrid = function( pin ) {
                 console.log(ts.p.pager);
                 $(ts.p.pager).jqPaginator('option', {
                     currentPage: ts.p.page
+
                 });
 
             }

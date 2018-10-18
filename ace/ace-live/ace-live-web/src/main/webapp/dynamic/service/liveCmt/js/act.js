@@ -33,7 +33,7 @@ function t_query(){
 }
 function setParams(key,value){
     params[key]=value;
-    getPageList();
+   t_query();
 }
 /*评论加载表格数据*/
 function getPageList() {
@@ -45,7 +45,8 @@ function getPageList() {
         if (rst.status == 0) {
             if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                     totalCounts: rst.total==0?1:rst.total
+                       totalCounts: rst.total==0?1:rst.total,
+                       currentPage: 1
                 });
             }
             render($("#page-list"), rst.rows, "tpl-list");
