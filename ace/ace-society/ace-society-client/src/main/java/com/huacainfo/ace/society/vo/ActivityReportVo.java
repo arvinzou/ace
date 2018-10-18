@@ -9,6 +9,16 @@ public class ActivityReportVo extends ActivityReport {
 
     private String category;
 
+    private String headimgurl;
+
+    public String getHeadimgurl() {
+        return headimgurl;
+    }
+
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl;
+    }
+
     public String getCategory() {
         return category;
     }

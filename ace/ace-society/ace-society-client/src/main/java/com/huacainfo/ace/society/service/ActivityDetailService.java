@@ -1,7 +1,9 @@
 package com.huacainfo.ace.society.service;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.ActivityDetail;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
@@ -70,8 +72,8 @@ public interface ActivityDetailService {
         * @author: huacai003
         * @version: 2018-09-13
         */
-        SingleResult
-        <ActivityDetailVo> selectActivityDetailByPrimaryKey(String id) throws Exception;
+        SingleResult<ActivityDetailVo> selectActivityDetailByPrimaryKey(String id) throws Exception;
+        ResultResponse personalActivitydetails(String activityId, String unionId) throws Exception;
 
             /**
             *

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.BisType;
@@ -165,12 +167,32 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
      * @version: 2018-09-13
      */
     @Override
-    public SingleResult
-            <ActivityDetailVo> selectActivityDetailByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <ActivityDetailVo> rst = new SingleResult<>();
+    public SingleResult<ActivityDetailVo> selectActivityDetailByPrimaryKey(String id) throws Exception {
+        SingleResult<ActivityDetailVo> rst = new SingleResult<>();
         rst.setValue(this.activityDetailDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:selectActivityDetailByPrimaryKey
+     * @Description: TODO(获取活动报道)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<ActivityDetail>
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @Override
+    public ResultResponse personalActivitydetails(String activityId,String unionId) throws Exception {
+        if(CommonUtils.isBlank(activityId)){
+            return new ResultResponse(ResultCode.FAIL,"缺少参数");
+        }
+        if(CommonUtils.isBlank(unionId)){
+            return new ResultResponse(ResultCode.FAIL,"缺少参数");
+        }
+        ActivityDetailVo  activityDetailVo=this.activityDetailDao.selectPersonaldetails(activityId,unionId);
+        return new ResultResponse(ResultCode.SUCCESS,"获取成功",activityDetailVo);
     }
 
     /**
