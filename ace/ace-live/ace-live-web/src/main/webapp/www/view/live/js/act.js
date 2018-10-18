@@ -786,7 +786,7 @@ if (getReport(reportPage), setInterval(function () {
             var n = {
                 rptId: i,
                 content: a,
-                uid: wxuser.openid
+                uid: wxuser.unionid
             };
             lvsCmd.ajax(apiServer + "/liveCmt/www/insertLiveCmt", {jsons:JSON.stringify(n)},
                 function (e, n) {
