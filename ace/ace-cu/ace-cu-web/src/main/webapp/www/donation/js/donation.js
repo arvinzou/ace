@@ -116,7 +116,7 @@ window.onload = function(){
 };
 
 function donate(){
-    window.location.href = '/cu/www/view/order/order.html?projectId='+primaryId;
+    window.location.href = '/cu/www/view/order/order.jsp?projectId='+primaryId;
 }
 
 function hoverli(divId){

@@ -78,15 +78,15 @@ window.onload = function(){
     });
 };
 function aboutus(){
-    window.location.href = '/cu/www/about/about.html';
+    window.location.href = '/cu/www/about/about.jsp';
 }
 
 function apply(){
-    window.location.href = '/cu/www/view/apply/apply.html';
+    window.location.href = '/cu/www/view/apply/apply.jsp';
 }
 
 function showProgress(id){
-    window.location.href = '/cu/www/view/me/apply_progress.html?projectId='+id;
+    window.location.href = '/cu/www/view/me/apply_progress.jsp?projectId='+id;
 }
 function hoverli(divId){
 	$("#"+divId).removeClass('undis').addClass('dis');
