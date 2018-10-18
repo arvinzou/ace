@@ -6,9 +6,10 @@ Page({
      * 页面的初始数据
      */
     data: {
-        id:'',
-        list:{},
+        id: '',
+        list: {},
         actionComment: false,
+        commentVal: '',
     },
 
     /**
@@ -29,24 +30,24 @@ Page({
     },
 
     // 获取列表
-    initdata: function () {
+    initdata: function() {
         let that = this;
         util.request('http://192.168.2.189/society/www/activity/selectActivityReportByPrimaryKey', {
-            id: that.data.id,
-        },
-            function (rst) {
-                console.log(rst);
-                console.log(rst.data);
+                id: that.data.id,
+            },
+            function(rst) {
+                let temp = rst.data;
+                temp.content=JSON.parse(temp.content);
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.setData({
-                    list: rst.data
+                    list: temp
                 });
             }
         );
     },
     // 设置头标题
-    setBarTitleText: function (tit) {
+    setBarTitleText: function(tit) {
         wx.setNavigationBarTitle({
             title: tit
         })
@@ -84,7 +85,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-
+        return;
     },
 
     /**
@@ -100,15 +101,30 @@ Page({
     onShareAppMessage: function() {
 
     },
-    actionComment: function () {
+    actionComment: function() {
         this.setData({
             actionComment: true,
         })
     },
-    hiddenComment:function(e){
-        console.log(e);
-        this.setData({
-            actionComment: false,
-        })
+    hiddenComment: function(e) {
+        let that = this;
+        if (that.data.commentVal) {
+            wx.showModal({
+                title: '提示',
+                content: '确定放弃评论？',
+                success: function(res) {
+                    if (!res.confirm) {
+                        return;
+                    }
+                    that.setData({
+                        actionComment: false,
+                    })
+                }
+            })
+        }
+    },
+    getValue: function(e) {
+        let that = this;
+        that.data.commentVal = e.detail.value;
     }
 })

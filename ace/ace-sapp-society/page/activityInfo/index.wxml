@@ -1,13 +1,13 @@
 <view class='index'>
     <view class="head_card">
         <view class='imgage'>
-            <image src='{{list.coverUrl}}'></image>
+            <image src='{{activityInfo.coverUrl}}'></image>
         </view>
         <view class='base_info'>
-            <text>{{list.title}}</text>
+            <text>{{activityInfo.title}}</text>
             <view class='organizer'>
-                <image class='headimage' src='{{list.headimgurl}}'></image>
-                <text>{{list.orgName}}</text>
+                <image class='headimage' src='{{activityInfo.headimgurl}}'></image>
+                <text>{{activityInfo.orgName}}</text>
                 <text class='remark'>活动组织方</text>
             </view>
         </view>
@@ -16,20 +16,20 @@
         <view class='time bottom-line'>
             <view>
                 <view class='title'>开始时间</view>
-                <view class='value'>{{list.startDate}}</view>
+                <view class='value'>{{activityInfo.startDate}}</view>
             </view>
             <view>
                 <view class='title'>结束时间</view>
-                <view class='value'>{{list.endDate}}</view>
+                <view class='value'>{{activityInfo.endDate}}</view>
             </view>
         </view>
         <view class='add_type bottom-line'>
             <view class='title'>活动地点：</view>
-            <view class='value'>{{list.location}}</view>
+            <view class='value'>{{activityInfo.location}}</view>
         </view>
         <view class='add_type'>
             <view class='title'>活动类型：</view>
-            <view class='value'>{{list.category=='1'?'公益活动':(list.category=='2'?'普及活动':'创意活动')}}</view>
+            <view class='value'>{{activityInfo.category=='1'?'公益活动':(activityInfo.category=='2'?'普及活动':'创意活动')}}</view>
         </view>
     </view>
     <view class='help'>
@@ -40,22 +40,22 @@
     <view class='coin_assign'>
         <view>志愿者：
         </view>
-        <view class='coin_mark'>+{{list.parterPoints}}爱心币
+        <view class='coin_mark'>+{{activityInfo.parterPoints}}爱心币
         </view>
     </view>
 
     <view class='partner_list'>
         <view class='total'>
             参与人员：
-            <text class='number'>{{list.activityDetailVoList.length}}/{{list.parterNum}}人</text>
+            <text class='number'>{{activityInfo.activityDetailVoList.length}}/{{activityInfo.parterNum}}人</text>
         </view>
-        <view class='list' bindtap="viewParticipants" data-id='{{list.id}}'>
+        <view class='list' bindtap="viewParticipants" data-id='{{activityInfo.id}}'>
             <view class='headImage_list'>
-                <block wx:for="{{list.activityDetailVoList}}">
+                <block wx:for="{{activityInfo.activityDetailVoList}}">
                    <image wx:if='{{index<8}}' class='headimage' src='{{item.data}}'></image>
                 </block>
             </view>
-            <view hidden='{{list.activityDetailVoList.length<8}}' class='ellipsis'></view>
+            <view hidden='{{activityInfo.activityDetailVoList.length<8}}' class='ellipsis'></view>
             <view class='more'></view>
         </view>
     </view>
@@ -64,7 +64,7 @@
             活动目的
         </view>
         <view class='content_text'>
-            {{list.purpose}}
+            {{activityInfo.purpose}}
         </view>
     </view>
     <view class='content'>
@@ -72,19 +72,18 @@
             活动方式
         </view>
         <view class='content_text'>
-            {{list.mode}}
+            {{activityInfo.mode}}
         </view>
     </view>
-    <view class='btn_content'>
-        <view bindtap='apply' class='btn btn-clicking'>
+    <view class='btn_content' hidden='{{btnFlag==2}}'>
+        <view bindtap="apply" wx:if="{{btnFlag==1||btnFlag==3}}" class='btn btn-clicking'>
             立即报名
         </view>
-        <view class='btn btn-noClick'>
+        <view wx:elif="{{btnFlag==4}}" class='btn btn-noClick'>
             已经报名
         </view>
-        <view class='btn btn-unClick'>
+        <view wx:elif="{{btnFlag==0}}" class='btn btn-unClick'>
             报名结束
         </view>
     </view>
-
 </view>

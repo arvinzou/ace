@@ -2,7 +2,10 @@ var util = require("../../util/util.js");
 Page({
     data: {
         id: '',
-        activityInfo: {}
+        activityInfo: {},
+        btnFlag: 1,
+        nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),
+        method: false
     },
     onLoad: function(options) {
         let that = this;
@@ -27,16 +30,35 @@ Page({
             function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
+                that.data.activityInfo = rst.data;
+                that.btnControl();
                 that.setData({
-                    list: rst.data
+                    activityInfo: rst.data
                 });
 
             }
         );
     },
 
-    btnControl:function(){
-        
+    btnControl: function() {
+        let that = this;
+        if (that.data.activityInfo.dendline > that.data.nowDate) {
+            util.request('http://192.168.2.189/society/www/activity/getApplyStatus', {
+                    activityId: that.data.activityInfo.id,
+                },
+                function(rst) {
+                    //        code:1、未注册和鉴权2、账户类型为组织，3、未注册，4、已注册
+                    let code = rst.data.code;
+                    that.setData({
+                        btnFlag: code,
+                    })
+                }
+            );
+        } else {
+            that.setData({
+                btnFlag: 0,
+            })
+        }
     },
 
     setBarTitleText: function(tit) {
@@ -52,5 +74,10 @@ Page({
             url: '../participants/index?id=' + p
         })
     },
-
+    apply:function(){
+        let that=this;
+        wx.navigateTo({
+            url: '../enterActivity/index?id='+ that.data.activityInfo.id
+        })
+    }
 })
