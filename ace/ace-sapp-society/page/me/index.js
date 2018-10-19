@@ -39,6 +39,7 @@ Page({
                 } else {
                     if (ret.info == '用户尚未注册') {
                         that.setData({ isRegist: false});
+                        wx.navigateTo({ url: "../regist/index" });
                     }
                 }
 
@@ -73,9 +74,6 @@ Page({
       var that = this;
       if (wx.getStorageSync('userinfo')){
           that.initUserData();
-          if (!that.data.isRegist){
-              wx.navigateTo({ url: "../regist/index" });
-          }
       }
   },
 
