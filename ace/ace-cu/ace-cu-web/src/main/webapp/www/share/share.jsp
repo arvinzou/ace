@@ -20,7 +20,7 @@
         </div>
         <div class="dua_user_info">
             <p>\${data.nickname}</p>
-            <p>感谢你的第 \${data.donateCount} 次捐赠，您已经：</p>
+            <p>感谢您的第 \${data.donateCount} 次捐赠，您已经：</p>
         </div>
         <div class="dua_statics">
                     <span class="dua_statics01">
