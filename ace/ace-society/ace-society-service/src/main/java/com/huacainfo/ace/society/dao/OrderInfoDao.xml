@@ -141,6 +141,12 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and t.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.receivePhone !=null and condition.receivePhone !=&quot;&quot;">
+            and t.receivePhone = #{condition.receivePhone,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">

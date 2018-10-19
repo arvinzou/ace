@@ -1,61 +1,40 @@
 <view class='index'>
+
     <view class='banner'>
-        <image src='../../image/mine-banner.png' class='banner-image'></image>
-        <block wx:if='{{ userinfoData.regType == 2}}'>
-            <view class='user-info'>
-                <view class='user-top'>
-                    <view class='user-head'>
-                        <image src='{{ userinfoData.avatarUrl }}'></image>
-                    </view>
-                    <view class='user-opt'>
-                        <view><text class='user-opt-name'>{{ userinfoData.nickName }}</text></view>
-                        <view><button class='user-opt-btn'>取消绑定</button></view>
-                    </view>
+        <view class='userInfo'>
+            <view class='top'>
+                <view class='headImage'>
+                    <image mode='aspectFill' src='{{ userinfoData.avatarUrl }}'></image>
                 </view>
-                <view class='user-bottom'>
-                    <view class='data'>
-                        <view><text class='num'>{{ userinfoData.societyOrg.accPoints }}</text></view>
-                        <view><text class='name'>爱心币收入</text></view>
-                    </view>
-                    <view class='data'>
-                        <view><text class='num'>{{ userinfoData.societyOrg.accPoints -  userinfoData.societyOrg.validPoints}}</text></view>
-                        <view><text class='name'>爱心币支出</text></view>
-                    </view>
-                    <view class='data'>
-                        <view><text class='num'>{{ userinfoData.societyOrg.validPoints }}</text></view>
-                        <view><text class='name'>爱心币剩余</text></view>
-                    </view>
+
+                <view class='textInfo'>
+                    <view class='name'>{{ userinfoData.nickName }}</view>
+                    <view class='center'>取消绑定</view>
                 </view>
             </view>
-        </block>
-        <block wx:else>
-            <view class='user-info'>
-                <view class='user-top'>
-                    <view class='user-head'>
-                        <image src='{{ userinfoData.avatarUrl }}'></image>
-                    </view>
-                    <view class='user-opt'>
-                        <view><text class='user-opt-name'>{{ userinfoData.nickName }}</text></view>
-                        <view><button class='user-opt-btn'>取消绑定</button></view>
-                    </view>
+            <view class='data'>
+                <view>
+                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.accPoints }}</view>
+                    <view wx:else>{{ userinfoData.person.accPoints }}</view>
+                    <view>爱心币收入</view>
                 </view>
-                <view class='user-bottom'>
-                    <view class='data'>
-                        <view><text class='num'>{{ userinfoData.person.accPoints }}</text></view>
-                        <view><text class='name'>爱心币收入</text></view>
-                    </view>
-                    <view class='data'>
-                        <view><text class='num'>{{ userinfoData.person.accPoints -  userinfoData.societyOrg.validPoints}}</text></view>
-                        <view><text class='name'>爱心币支出</text></view>
-                    </view>
-                    <view class='data'>
-                        <view><text class='num'>{{ userinfoData.person.validPoints }}</text></view>
-                        <view><text class='name'>爱心币剩余</text></view>
-                    </view>
+                <view>
+                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.accPoints - userinfoData.societyOrg.validPoints}}</view>
+                    <view wx:else>{{ userinfoData.person.accPoints - userinfoData.person.validPoints}}</view>
+                    <view>爱心币支出</view>
+                </view>
+                <view>
+                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.validPoints }}</view>
+                    <view wx:else>{{ userinfoData.person.validPoints }}</view>
+                    <view>爱心币剩余</view>
                 </view>
             </view>
-        </block>
+        </view>
     </view>
+
+
+
+
 
     <view class='menu-list'>
         <view class='menu-item' bindtap='loveRanking'>
@@ -63,7 +42,7 @@
             <text class='menu-title'>爱心币排行</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
-         <view class='menu-item' bindtap='myActivity'>
+        <view class='menu-item' bindtap='myActivity'>
             <image src='../../image/icon_activity.png' class='menu-icon'></image>
             <text class='menu-title'>我的活动</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>

@@ -15,22 +15,17 @@ public interface PointsRecordDao {
 
     int insert(PointsRecord record);
 
-
     int updateByPrimaryKey(PointsRecord record);
-
 
     PointsRecordVo selectVoByPrimaryKey(String id);
 
-    List
-            <PointsRecordVo> findList(@Param("condition") PointsRecordQVo condition,
-                                      @Param("start") int start,
-                                      @Param("limit") int limit,
-                                      @Param("orderBy") String orderBy);
+    List<PointsRecordVo> findList(@Param("condition") PointsRecordQVo condition,
+                                  @Param("start") int start,
+                                  @Param("limit") int limit,
+                                  @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") PointsRecordQVo condition);
 
     int isExit(PointsRecord record);
-
-    int updateStatus(PointsRecord record);
 
 }

@@ -50,9 +50,8 @@ public class OrderInfoController extends SocietyBaseController {
     public PageResult<OrderInfoVo> findOrderInfoList(OrderInfoQVo condition,
                                                      PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <OrderInfoVo> rst = this.orderInfoService
-                .findOrderInfoList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<OrderInfoVo> rst =
+                orderInfoService.findOrderInfoList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
