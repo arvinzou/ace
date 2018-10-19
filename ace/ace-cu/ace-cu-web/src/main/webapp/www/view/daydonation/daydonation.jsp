@@ -183,23 +183,32 @@
         <!--捐赠排行渲染模板-->
         <script id="rank-tpl" type="text/template">
             <ul style="width: 5.2rem;">
-                {@if data.length > 0}
+                {@if data[0] != '' && data[0] != null && data[0] != undefined}
                 <li class="topone">
                     <img src="\${data[0].headimgurl}"/>
                 </li>
+                {@/if}
+                {@if data[1] != '' && data[1] != null && data[1] != undefined}
                 <li class="toptwo">
                     <img src="\${data[1].headimgurl}" />
                 </li>
+                {@/if}
+                {@if data[2] != '' && data[2] != null && data[2] != undefined}
                 <li class="topthree">
                     <img src="\${data[2].headimgurl}" />
                 </li>
+                {@/if}
+                {@if data[3] != '' && data[3] != null && data[3] != undefined}
                 <li class="topfour">
                     <img src="\${data[3].headimgurl}" />
                 </li>
+                {@/if}
+                {@if data[0] != '' && data[0] != null && data[0] != undefined}
                 <li>
                     <a href="#" onclick="donateRank();" style="color: #E2E2E2;">...</a>
                 </li>
                 {@/if}
+
             </ul>
         </script>
 

@@ -79,6 +79,7 @@ window.onload = function(){
             success:function(result){
                 if(result.status == 0) {
                     renderPage('rankList', result.data.list, 'rank-tpl');
+                    console.log("===================================aa"+result.data.list[0]);
                     renderPage('totalAmount', result.data.list.length, 'total-tpl');
                     //renderPage('share_box', result.data.own, 'share-tpl');
                     openId = result.data.own.openid;
@@ -103,7 +104,7 @@ function donate(){
  */
 function donateRank(){
     if(projectId != null){
-        window.location.href = '/cu/www/donatelist/donatelist.jsp?projectId='+projectId;
+        window.location.href = '/cu/www/view/donatelist/donatelist.jsp?projectId='+projectId;
     }
 }
 

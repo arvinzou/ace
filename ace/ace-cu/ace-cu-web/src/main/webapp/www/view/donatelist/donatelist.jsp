@@ -14,31 +14,31 @@
     <div class="banner">
         <img src="img/banner.png"/>
     </div>
-    <!--<div class="mine">
+    <div class="mine">
         <div class="mineItem" id="mine">
 
         </div>
-    </div>-->
+    </div>
     <div class="list" id="donateList">
 
     </div>
 </div>
 
-<%--<script id="mine-tpl" type="text/template">
+<script id="mine-tpl" type="text/template">
     <div class="topnum">
-        ${data.indexNum}
+        \${data.indexNum}
     </div>
     <div class="headImg">
-        <img src="${data.headimgurl}"/>
+        <img src="\${data.headimgurl}"/>
     </div>
     <div class="detail">
         <p class="user">我</p>
-        <p class="user_detail">捐赠<span class="unit">${data.donateDays}</span>天</p>
+        <p class="user_detail">捐赠<span class="unit">\${data.donateDays}</span>天</p>
     </div>
-    <div class="money"><span class="money_amount">${data.totalDonateAmount}</span><span
+    <div class="money"><span class="money_amount">\${data.totalDonateAmount}</span><span
             class="unit">元</span></div>
     <div style="clear: both;"></div>
-</script>--%>
+</script>
 
 <script id="donate-tpl" type="text/template">
     {@each data as item, index}
