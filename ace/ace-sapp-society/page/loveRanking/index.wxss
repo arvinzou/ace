@@ -68,6 +68,11 @@
     margin-right: 23rpx;
     background: #CCCDC8;
 }
+.head image{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
 .name{
     color: #222222;
     font-size: 30rpx;
