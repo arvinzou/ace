@@ -38,7 +38,8 @@ function showProjectInfo(id){
  * 发起筹款
  */
 function raiseMoney(){
-    window.location.href = '/cu/www/view/apply/read.jsp';
+    var time = new Date().getTime();
+    window.location.href = '/cu/www/view/apply/read.jsp?v='+time;
 }
 
 function renderPage(IDom, data, tempId) {
