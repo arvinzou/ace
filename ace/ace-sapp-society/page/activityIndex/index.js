@@ -1,4 +1,5 @@
 var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
     data: {
         navbarArray: [
@@ -100,7 +101,7 @@ Page({
             return;
         }
         that.showLoading();
-        util.request('http://192.168.2.189/society/www/activity/findPublicActivityReportList', {
+        util.request(cfg.publicActivityReports, {
                 category: temp.category,
                 start: temp.start,
                 limit: that.data.limit,

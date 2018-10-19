@@ -3,15 +3,15 @@ var server = "https://zx.huacainfo.com";
 var serverfile = "https://zx.huacainfo.com/";
 var rtmpserver ="rtmp://zx.huacainfo.com/live/";
 var hlsserver ="http://139.224.0.227:9999/hls/";
-var websocketurl= 'zx.huacainfo.com';
+var websocketurl= `zx.huacainfo.com`;
 var config = {
     rtmpserver,
     websocketurl,
     server,
     serverfile,
     hlsserver,
-    appid: 'wx70ba7c5dca85e4da',
-    appsecret: '96214b4a01153935995cc027ddf26d75',
+    appid: `wx70ba7c5dca85e4da`,
+    appsecret: `96214b4a01153935995cc027ddf26d75`,
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
     uploadUrl: `${server}/portal/www/upload.do`,
@@ -24,7 +24,19 @@ var config = {
     releaseIdea: `${server}/society/www/idea/submit`,
     ideaDetail: `${server}/society/www/idea/getIdeaDetail`,
     findUserInfo: `${server}/society/www/reg/findByUserId`,
-    createOrder: `${server}/society/www/order/create`
+    createOrder: `${server}/society/www/order/create`,
+    findActivityReport:`${server}/society/www/activity/selectActivityReportByPrimaryKey`,
+    findSocietyOrgInfos:`${server}/society/www/activity/findSocietyOrgInfoList`,
+    findActivitys:`${server}/society/www/activity/findActivityList`,
+    findActivity:`${server}/society/www/activity/selectActivityByPrimaryKey`,
+    publicActivityReports:`${server}/society/www/activity/findPublicActivityReportList`,
+    applyStatus:`${server}/society/www/activity/getApplyStatus`,
+    insertActivity:`${server}/society/www/activity/insertActivity`,
+    participants:`${server}/society/www/activity/findActivityParticipants`,
+    selectActivityReport:`${server}/society/www/activity/selectActivityReportByActivityId`,
+    updateActivityReport:`${server}/society/www/activity/updateActivityReport`,
+
+
 };
 module.exports = config
 

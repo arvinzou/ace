@@ -1,4 +1,5 @@
 var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
     data: {
         list:[],
@@ -14,7 +15,7 @@ Page({
     onLoad: function(options) {
         let that = this;
         if (util.isLogin()) {
-            util.request('http://192.168.2.189/society/www/activity/getUserType', {},
+            util.request(cfg.findUserInfo, {},
                 function (rst) {
                     if (rst.data.type == 2) {
                         that.setData({
@@ -59,7 +60,7 @@ Page({
             return;
         }
         that.showLoading();
-        util.request('http://192.168.2.189/society/www/activity/findActivityList', {
+        util.request(cfg.findActivitys, {
                 category: that.data.category,
                 start: that.data.start,
                 limit: that.data.limit
