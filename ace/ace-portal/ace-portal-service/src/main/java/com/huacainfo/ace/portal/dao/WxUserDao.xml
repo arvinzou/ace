@@ -151,10 +151,13 @@
     <include refid="Base_Column_List" />
     from wx_user
     where mobile=#{mobile}
-    <if test='appid!=null and appid!=""'>
-      and appId=#{appid,jdbcType=VARCHAR}
-    </if>
     limit 0,1
+  </select>
+  <select id="isExitByMobile" parameterType="java.lang.String" resultType="int">
+    select
+   count(1)
+    from users
+    where mobile=#{mobile} and stauts='1'
   </select>
   <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
     <id column="user_id" property="userId" jdbcType="VARCHAR"/>

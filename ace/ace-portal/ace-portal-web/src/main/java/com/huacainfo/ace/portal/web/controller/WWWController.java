@@ -192,8 +192,8 @@ public class WWWController extends PortalBaseController {
             return new ResponseEntity<>(rst, HttpStatus.NOT_ACCEPTABLE);
         }
         this.logger.info("{}", rst);
-        if (o.containsKey("id")) {
-            String id = o.get("id");
+        if (p.containsKey("id")) {
+            String id = (String) p.get("id");
             if (CommonUtils.isNotEmpty(id)) {
                 this.redisTemplate.opsForValue().set((String) p.get("name"), id);
             }

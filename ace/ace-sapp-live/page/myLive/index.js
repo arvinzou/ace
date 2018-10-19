@@ -165,6 +165,12 @@ Page({
         }
       }
     );
-
-  }
+  },
+  rpt: function (e) {
+    console.log(e);
+    var that = this;
+    wx.navigateTo({
+      url: '../rpt/index?id=' + e.currentTarget.dataset.id
+    });
+  },
 });

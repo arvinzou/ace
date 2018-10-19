@@ -24,7 +24,7 @@ pageEncoding="utf-8"%>
 						<form action="#" id="fm-search">
 							<div class="input-group" style="float:left">
 								归属
-								<input name="departmentId" class="easyui-combotree" data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do?id=01',method:'get',animate: true,
+								<input name="departmentId" class="easyui-combotree" data-options="url:'${pageContext.request.contextPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,
                 lines:false,"
 								 style='width: 250px;height:30px;line-height:30px'>
 							</div>

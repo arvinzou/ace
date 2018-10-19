@@ -60,7 +60,7 @@ page{
   padding: 2%;
 }
 .tip-item{
-    color: blue;
+    color: #1a9fff;
 }
 .chat-box{
   font-size: 25rpx;
@@ -88,7 +88,7 @@ page{
 .chat-text{
   color: #fff;
   border-radius:15rpx;
-  background:blue;
+  background:#1a9fff;
   padding: 10rpx;
 }
 
@@ -302,12 +302,12 @@ width: 80%;
    /* z-index: 100;*/
     width: 100%;
     /*position: fixed; */
-    font-size: 32rpx;
+    font-size: 30rpx;
     color: #666;
     flex: none;
     display: flex;
     background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
+    border-bottom: 1rpx #e5e5e5 solid;
 }
 
 .navbar .item {
@@ -318,8 +318,8 @@ width: 80%;
 }
 
 .navbar .item.active {
-    font-size: 34rpx;
-    color: blue;
+    font-size: 30rpx;
+    color: #1a9fff;
 }
 
 .navbar .item.active:after {
@@ -332,7 +332,7 @@ width: 80%;
     height: 6rpx;
     width: 60rpx;
     margin: 0 auto;
-    background:blue;
+    background:#1a9fff;
     border-radius: 20%;
 }
 .comments{
@@ -352,16 +352,14 @@ width: 80%;
   align-items: center;  
   justify-content: center;  
   border-radius: 50%;  
-  background:blue; 
 }
 .btn-img {
   width: 120rpx;
   height: 120rpx;
   border-radius: 50%;
-  background: #fff; 
 }
 .active {
-  color:blue;
+  color:#1a9fff;
   border-bottom:4rpx solid #fff;
 }
 .cmt-bar{

@@ -13,27 +13,7 @@
   padding-right: 10rpx;
   vertical-align: top;
 }
-.swiper-tab{
-    width: 100%;
-    border-bottom: 2rpx solid #ccc;
-    text-align: center;
-    height: 6vh;
-    line-height: 6vh;
-    display: flex;
-    flex-flow: row;
-    justify-content: space-between;
-}
-.swiper-tab-item{
-    width: 33.3%; 
-    color:#434343;
-}
-.active{
-    color:#F65959;
-    border-bottom: 4rpx solid blue;
-}
-swiper{
-  margin: 5rpx;
-}
+
 .hide{
  display: none;
 }
@@ -98,12 +78,12 @@ swiper{
    /* z-index: 100;*/
     width: 100%;
     /*position: fixed; */
-    font-size: 32rpx;
+    font-size: 30rpx;
     color: #666;
     flex: none;
     display: flex;
     background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
+    border-bottom: 1rpx #e5e5e5 solid;
 }
 
 .navbar .item {
@@ -114,8 +94,8 @@ swiper{
 }
 
 .navbar .item.active {
-    font-size: 34rpx;
-    color:blue;
+    font-size: 30rpx;
+    color:#1a9fff;
 }
 
 .navbar .item.active:after {
@@ -126,12 +106,12 @@ swiper{
     left: 0;
     right: 0;
     height: 6rpx;
-    width: 60rpx;
+    width: 40rpx;
     margin: 0 auto;
-    background: blue;
+    background: #1a9fff;
     border-radius: 20%;
 }
 .active {
-  color:blue;
+  color:#1a9fff;
   border-bottom:4rpx solid #fff;
 }
