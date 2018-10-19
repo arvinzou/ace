@@ -14,18 +14,9 @@ Page({
     },
     onLoad: function(options) {
         let that = this;
-        if (util.isLogin()) {
-            util.request(cfg.findUserInfo, {},
-                function (rst) {
-                    if (rst.data.type == 2) {
-                        that.setData({
-                            hiddenBtn: false,
-                        });
-                    }
-                }
-            );
-        };
+        that.ifCreatBtn();
         let category = options.category;
+        console.log(category);
         if (!category) {
             wx.navigateBack({})
             return;
@@ -34,6 +25,32 @@ Page({
         that.setBarTitleText(category);
         that.initdata();
     },
+
+    ifCreatBtn:function(){
+        let that = this;
+        let sysUserInfo = util.getSysUser();
+        if (!sysUserInfo){
+            util.request(cfg.findUserInfo, {},
+                function (rst) {
+                    if (rst.status == 0) {
+                        util.setSysUser(rst.data);
+                        if (rst.data.societyOrg.orgType == 2) {
+                            that.setData({
+                                hiddenBtn: false,
+                            });
+                        }
+                        return;
+                    }
+                }
+            );
+        }
+        if (sysUserInfo.societyOrg.orgType == 2) {
+            that.setData({
+                hiddenBtn: false,
+            });
+        }
+    },
+    
 
     setBarTitleText: function(category) {
         let barText = '';
@@ -137,10 +154,10 @@ Page({
         wx.navigateTo({ url: '../activityInfo/index?id=' + p + "&title=" + title})
     },
 
-    createActivity: function (e) {
-        let data = e.currentTarget.dataset
-        let p = data.category;
-        wx.navigateTo({ url: '../activityApply/index?category=' + p })
+    createActivity: function () {
+        let that =this; 
+        let category = that.data.category;
+        wx.navigateTo({ url: '../activityApply/index?category=' + category })
     },
     
 
