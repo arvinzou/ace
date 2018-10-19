@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<title>我加入的工作室</title>
+		<title>优秀工作室详情</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
         <jsp:include page="../../../dynamic/common/base.jsp" />
         <script type="text/javascript" src="../../common/js/loader.js"></script>
