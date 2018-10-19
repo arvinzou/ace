@@ -1,4 +1,5 @@
 var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
     /**
@@ -22,7 +23,7 @@ Page({
         that.initdata();
     },
     initdata: function() {
-        util.request('http://192.168.2.189/society/www/reg/findByUserId', {},
+        util.request(cfg.findUserInfo, {},
             function (rst) {
                 if (rst.data.status == 1) {
                     wx.navigateTo({ url: '../me/index'});

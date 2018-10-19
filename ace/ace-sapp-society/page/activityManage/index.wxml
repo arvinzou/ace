@@ -1,0 +1,105 @@
+<view class='index'>
+    <view class='activityInfo separate'>
+
+        <view class='content'>
+            <view class='img'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            </view>
+            <view class='info'>
+                <text class='title'>芙蓉社区举行电脑普及致力…</text>
+                <text class='type'>公益活动</text>
+                <text class='remark'>报名审核通过后奖励爱心币X50</text>
+            </view>
+        </view>
+        <view class='status status1'>签到待审核</view>
+        <view class='status status2'>签到待审核</view>
+        <view class='status status3'>签到待审核</view>
+        <!-- <view class='status status4' >签到待审核</view> -->
+    </view>
+
+    <view class='activityInfo separate'>
+
+        <view class='content'>
+            <view class='img'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            </view>
+            <view class='info'>
+                <text class='title'>芙蓉社区举行电脑普及致力…</text>
+                <text class='type'>公益活动</text>
+                <text class='remark'>报名审核通过后奖励爱心币X50</text>
+            </view>
+        </view>
+        <view class='status status1'>签到待审核</view>
+        <view class='status status2'>签到待审核</view>
+        <view class='status status3'>签到待审核</view>
+        <view class='status status4' >签到待审核</view>
+    </view>
+    <view class='activityInfo separate'>
+
+        <view class='content'>
+            <view class='img'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            </view>
+            <view class='info'>
+                <text class='title'>芙蓉社区举行电脑普及致力…</text>
+                <text class='type'>公益活动</text>
+                <text class='remark'>报名审核通过后奖励爱心币X50</text>
+            </view>
+        </view>
+        <view class='status status1'>签到待审核</view>
+        <view class='status status2'>签到待审核</view>
+        <view class='status status3'>签到待审核</view>
+        <view class='status status4' >签到待审核</view>
+    </view>
+    <view class='activityInfo separate'>
+
+        <view class='content'>
+            <view class='img'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            </view>
+            <view class='info'>
+                <text class='title'>芙蓉社区举行电脑普及致力…</text>
+                <text class='type'>公益活动</text>
+                <text class='remark'>报名审核通过后奖励爱心币X50</text>
+            </view>
+        </view>
+        <view class='status status1'>签到待审核</view>
+        <view class='status status2'>签到待审核</view>
+        <view class='status status3'>签到待审核</view>
+        <view class='status status4' >签到待审核</view>
+    </view>
+    <view class='activityInfo separate'>
+
+        <view class='content'>
+            <view class='img'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            </view>
+            <view class='info'>
+                <text class='title'>芙蓉社区举行电脑普及致力…</text>
+                <text class='type'>公益活动</text>
+                <text class='remark'>报名审核通过后奖励爱心币X50</text>
+            </view>
+        </view>
+        <view class='status status1'>签到待审核</view>
+        <view class='status status2'>签到待审核</view>
+        <view class='status status3'>签到待审核</view>
+        <view class='status status4' >签到待审核</view>
+    </view>
+    <view class='activityInfo separate'>
+
+        <view class='content'>
+            <view class='img'>
+                <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
+            </view>
+            <view class='info'>
+                <text class='title'>芙蓉社区举行电脑普及致力…</text>
+                <text class='type'>公益活动</text>
+                <text class='remark'>报名审核通过后奖励爱心币X50</text>
+            </view>
+        </view>
+        <view class='status status1'>签到待审核</view>
+        <view class='status status2'>签到待审核</view>
+        <view class='status status3'>签到待审核</view>
+        <view class='status status4' >签到待审核</view>
+    </view>
+</view>

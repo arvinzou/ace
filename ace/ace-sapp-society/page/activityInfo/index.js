@@ -1,4 +1,5 @@
 var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
     data: {
         id: '',
@@ -24,7 +25,7 @@ Page({
     // 获取列表
     initdata: function() {
         let that = this;
-        util.request('http://192.168.2.189/society/www/activity/selectActivityByPrimaryKey', {
+        util.request(cfg.findActivity, {
                 id: that.data.id,
             },
             function(rst) {
@@ -43,7 +44,7 @@ Page({
     btnControl: function() {
         let that = this;
         if (that.data.activityInfo.dendline > that.data.nowDate) {
-            util.request('http://192.168.2.189/society/www/activity/getApplyStatus', {
+            util.request(cfg.applyStatus, {
                     activityId: that.data.activityInfo.id,
                 },
                 function(rst) {

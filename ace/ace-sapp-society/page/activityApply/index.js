@@ -1,6 +1,8 @@
 var dateTimePicker = require('../../util/dateTimePicker.js');
+import WxValidate from '../../util/WxValidate';
 var util = require("../../util/util.js");
-import WxValidate from '../../util/WxValidate'
+var cfg = require("../../config.js");
+
 
 const App = getApp()
 
@@ -113,7 +115,7 @@ Page({
             this.showModal(error)
             return false
         }
-        util.request('http://192.168.2.189/society/www/activity/insertActivity', {
+        util.request(cfg.insertActivity, {
                 jsons: JSON.stringify(params)
             },
             function(data) {
