@@ -159,7 +159,7 @@ function initWorkroom(){
  * @param id
  */
 function loadWorkroom(id){
-    window.location.href = contextPath + '/www/view/joinedRoom/index.jsp?id='+id;
+    window.location.href = contextPath + '/www/view/exeRoom/index.jsp?id='+id;
 }
 /**
  * 顾问在线点击

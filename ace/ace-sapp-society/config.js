@@ -24,7 +24,18 @@ var config = {
     releaseIdea: `${server}/society/www/idea/submit`,
     ideaDetail: `${server}/society/www/idea/getIdeaDetail`,
     findUserInfo: `${server}/society/www/reg/findByUserId`,
-    createOrder: `${server}/society/www/order/create`
+    createOrder: `${server}/society/www/order/create`,
+    behaviorList: `${server}/society/www/behavior/findList`,
+    findActivityReport:`${server}/society/www/activity/selectActivityReportByPrimaryKey`,
+    findSocietyOrgInfos:`${server}/society/www/activity/findSocietyOrgInfoList`,
+    findActivitys:`${server}/society/www/activity/findActivityList`,
+    findActivity:`${server}/society/www/activity/selectActivityByPrimaryKey`,
+    publicActivityReports:`${server}/society/www/activity/findPublicActivityReportList`,
+    applyStatus:`${server}/society/www/activity/getApplyStatus`,
+    insertActivity:`${server}/society/www/activity/insertActivity`,
+    participants:`${server}/society/www/activity/findActivityParticipants`,
+    selectActivityReport:`${server}/society/www/activity/selectActivityReportByActivityId`,
+    updateActivityReport:`${server}/society/www/activity/updateActivityReport`,
 };
 module.exports = config
 

@@ -1,4 +1,5 @@
 var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 
 Page({
 
@@ -24,7 +25,7 @@ Page({
         let that = this;
 
         if (util.is_login()) {
-            util.request('http://192.168.2.189/society/www/reg/findByUserId', {},
+            util.request(cfg.findUserInfo, {},
                 function(rst) {
                     console.log(rst);
                     if (rst.data.type == 1) {
@@ -41,7 +42,7 @@ Page({
 
     initOrgData: function() {
         let that = this;
-        util.request('http://192.168.2.189/society/www/activity/findSocietyOrgInfoList', {
+        util.request(cfg.findSocietyOrgInfos, {
                 orgType: '1',
                 start: that.data.start,
                 limit: 100
@@ -71,7 +72,7 @@ Page({
             return;
         }
         that.showLoading();
-        util.request('http://192.168.2.189/society/www/activity/findActivityList', {
+        util.request(cfg.findActivitys, {
                 category: that.data.category,
                 start: that.data.start,
                 limit: that.data.limit

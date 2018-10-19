@@ -1,5 +1,5 @@
 var util = require("../../util/util.js");
-
+var cfg = require("../../config.js");
 Page({
 
   /**
@@ -29,7 +29,7 @@ Page({
     // 获取列表
     initdata: function () {
         let that = this;
-        util.request('http://192.168.2.189/society/www/activity/findActivityParticipants', {
+        util.request(cfg.participants, {
             activityId: that.data.activityId,
         },
             function (rst) {

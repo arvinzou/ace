@@ -255,3 +255,15 @@ function isMoney(s) {
         return false;
     }
 }
+
+function checkText(obj){
+    var name = $(obj).val();
+    if(name == ""){
+        return;
+    }
+    if(name.match("/[`~!@#$%^&*()_+<>?:\"{},.\\/;'[\\]]/im")){
+        alert("请不要输入特殊字符!");
+        $(obj).val("");
+    }
+    return;
+}

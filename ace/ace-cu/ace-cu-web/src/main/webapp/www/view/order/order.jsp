@@ -25,7 +25,7 @@
 						<span onclick="selectMoney(this, 200.00);" >¥ 200.00</span>
 						<span onclick="selectMoney(this, 500.00);" >¥ 500.00</span>
 						<!--<span onclick="inputMoney(this);" class="other_amount">输入其他金额</span>-->
-						<input onclick="inputMoney(this);" type='number' id="amountMoney"   class="other_amount" type="text" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"  />
+						<input onclick="inputMoney(this);" type='number' id="amountMoney"   class="other_amount" type="number" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"  />
 					</div>
 					<div id="userInfo">
 						<div class="title_01">捐款信息</div>
@@ -37,19 +37,19 @@
 						<div class="form">
 							<p>
 								<span class="form_title">捐款人姓名</span>
-								<input id="realName" class="form_text" maxlength="10" type="text" placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
+								<input id="realName" class="form_text" maxlength="10" type="text" oninput="checkText(this);" placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
 							</p>
 						</div>
 						<div class="form">
 							<p>
 								<span class="form_title">联系电话</span>
-								<input id="phoneNum" maxlength="11" class="form_text" type="text" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'"  onchange="if(/\D/.test(this.value)){alert('联系电话格式不正确！');this.value='';}"/>
+								<input id="phoneNum" maxlength="11" class="form_text" type="number" placeholder="请输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入联系电话'"  onchange="if(/\D/.test(this.value)){alert('联系电话格式不正确！');this.value='';}"/>
 							</p>
 						</div>
 						<div class="form">
 							<p>
 								<span class="form_title">捐款单位名称</span>
-								<input id="donatePostName" name="donatePostName" class="form_text" type="text" placeholder="请输入捐款单位名称" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款单位名称'" />
+								<input id="donatePostName" type="text" name="donatePostName" class="form_text" type="text" placeholder="请输入捐款单位名称" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款单位名称'" />
 							</p>
 						</div>
 					</div>
@@ -81,13 +81,13 @@
 						<div class="form">
 							<p>
 								<span class="form_title">收货人姓名</span>
-								<input id="billName" class="form_text" maxlength="10" type="text" placeholder="请输入姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入姓名'" />
+								<input id="billName" class="form_text" type="text" maxlength="10" type="text" placeholder="请输入姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入姓名'" />
 							</p>
 						</div>
 						<div class="form">
 							<p>
 								<span class="form_title">联系电话</span>
-								<input id="billphoneNumber" class="form_text" type="text" maxlength="11" placeholder="请输入收货人联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入收货人联系电话'" onchange="if(/\D/.test(this.value)){alert('联系电话格式不正确！');this.value='';}"/>
+								<input id="billphoneNumber" class="form_text" type="number" maxlength="11" placeholder="请输入收货人联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='请输入收货人联系电话'" onchange="if(/\D/.test(this.value)){alert('联系电话格式不正确！');this.value='';}"/>
 							</p>
 						</div>
 						<div class="form">
@@ -137,6 +137,11 @@
                 this.value = me.n;
                 return
             }
+            if(this.value.length > 8){
+                this.value='';
+                this.value = me.n;
+                return
+			}
             if(!/^\d{0,9}\.{0,1}(\d{1,2})?$/.test(this.value)){//校验不超过两位小数
                 this.value = me.n;
             }
