@@ -256,14 +256,3 @@ function isMoney(s) {
     }
 }
 
-function checkText(obj){
-    var name = $(obj).val();
-    if(name == ""){
-        return;
-    }
-    if(!name.match("/[^\\w\u4e00-\u9fa5]/g")){
-        alert("请不要输入特殊字符!");
-        $(obj).val("");
-    }
-    return;
-}
