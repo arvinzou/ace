@@ -1,4 +1,5 @@
 var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
     /**
@@ -34,7 +35,7 @@ Page({
     // 获取列表
     initdata: function() {
         let that = this;
-        util.request('http://192.168.2.189/society/www/activity/selectActivityReportByActivityId', {
+        util.request(cfg.selectActivityReport, {
                 activityId: that.data.activityId,
             },
             function(rst) {
@@ -294,26 +295,26 @@ Page({
             scrollTop: e.scrollTop
         })
     },
-    postReport: function() {
-        util.request('http://192.168.2.189/society/www/activity/findActivityList', {
-            category: that.data.category,
-            start: that.data.start,
-            limit: that.data.limit
-        }, function(data) {
-            console.log(data.data);
-            wx.hideNavigationBarLoading() //完成停止加载
-            wx.stopPullDownRefresh() //停止下拉刷新
-            that.setData({
-                list: that.data.list.concat(data.data),
-                Loadingstatus: false,
-            });
-            if (data.data.length < that.data.limit) {
-                that.setData({
-                    LoadOver: true,
-                });
-            }
-        });
-    },
+    // postReport: function() {
+    //     util.request(cfg.findActivitys, {
+    //         category: that.data.category,
+    //         start: that.data.start,
+    //         limit: that.data.limit
+    //     }, function(data) {
+    //         console.log(data.data);
+    //         wx.hideNavigationBarLoading() //完成停止加载
+    //         wx.stopPullDownRefresh() //停止下拉刷新
+    //         that.setData({
+    //             list: that.data.list.concat(data.data),
+    //             Loadingstatus: false,
+    //         });
+    //         if (data.data.length < that.data.limit) {
+    //             that.setData({
+    //                 LoadOver: true,
+    //             });
+    //         }
+    //     });
+    // },
     saveReport: function() {
         let that = this;
         that.data.status = "1";
@@ -333,7 +334,7 @@ Page({
     updateFun: function() {
         let that = this;
         that.endEdit();
-        util.request('http://192.168.2.189/society/www/activity/updateActivityReport', {
+        util.request(cfg.updateActivityReport, {
                 jsons: JSON.stringify(that.data),
             },
             function(rst) {

@@ -255,3 +255,4 @@ function isMoney(s) {
         return false;
     }
 }
+

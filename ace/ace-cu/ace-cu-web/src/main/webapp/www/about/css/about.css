@@ -4,6 +4,7 @@
 }
 .about_box{
 	width: 10rem;
+	height: auto;
 }
 .about_title_box{
 	width: 10rem;
@@ -19,7 +20,7 @@
 }
 .about_content{
 	width: 10rem;
-	margin-bottom: 1rem;
+	margin-bottom: 0.3rem;
 }
 .item{
 	width: 9rem;

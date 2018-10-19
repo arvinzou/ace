@@ -13,6 +13,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.constant.OrderState;
 import com.huacainfo.ace.society.constant.PayType;
 import com.huacainfo.ace.society.constant.RegType;
@@ -430,8 +431,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             if (updCount != 1) {
                 throw new CustomException("更新用户爱心币失败");
             }
-            //积分流水
-
         } else if (RegType.ORG.equals(customerVo.getRegType())) {
             SocietyOrgInfo org = societyOrgInfoDao.selectByPrimaryKey(info.getUserId());
             if (payPoints > org.getValidPoints()) {
@@ -446,7 +445,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             if (updCount != 1) {
                 throw new CustomException("更新用户爱心币失败");
             }
-            //积分流水
         } else {
             return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
         }
@@ -456,6 +454,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         info.setReceiveType("1");
         info.setOrderState(OrderState.ORDER_STATE_PAID);
         info = insertOrder(info);
+        //积分流水记录
+        pointsRecordService.addPointsRecord(info.getUserId(), BisType.ORDER_CONSUME, info.getId(), payPoints);
+
         //返回信息
         Map<String, Object> rtnMap = new HashMap<>();
         rtnMap.put("orderId", info.getId());

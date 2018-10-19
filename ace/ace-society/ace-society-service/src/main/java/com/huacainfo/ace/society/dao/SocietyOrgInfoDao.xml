@@ -307,6 +307,6 @@
         select count(1)
         from society_org_info
         where contactPhone = #{contactPhone,jdbcType=VARCHAR}
-        id != #{id,jdbcType=VARCHAR}
+        and id != #{id,jdbcType=VARCHAR}
     </select>
 </mapper>
