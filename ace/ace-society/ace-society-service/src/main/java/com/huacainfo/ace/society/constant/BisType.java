@@ -46,5 +46,13 @@ public interface BisType {
      */
     String COURSE = "course";
 
+
+    /**
+     * ================
+     * 爱心币流水变动业务类型
+     */
+
+    String ORDER_CONSUME = "ORDER_CONSUME";
+
 }
 

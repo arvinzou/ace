@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.report.PointsRank">
+    <select id="query" resultType="map">
+        select
+        (@i:=@i+1) as i,
+        v.nickName, v.avatarUrl, v.accPoints, v.userId
+        from (
+        SELECT
+        w.nickName, w.avatarUrl, a.accPoints, a.userId
+        FROM(
+        SELECT
+        SUM(t.points) AS accPoints, t.userId as userId
+        FROM society.points_record t
+        WHERE 1 = 1
+        AND t.points > 0
+        <if test="userId!=null and userId!=&quot;&quot;">
+            AND t.userId = #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate!=null and createDate!=&quot;&quot;">
+            AND t.createDate LIKE concat('%',#{createDate,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="startDate!=null and startDate!=&quot;&quot;">
+            AND t.createDate >= #{startDate,jdbcType=VARCHAR}
+        </if>
+        <if test="endDate!=null and endDate!=&quot;&quot;">
+            AND t.createDate &lt;= #{endDate,jdbcType=VARCHAR}
+        </if>
+        GROUP BY t.userId
+        ) a
+        LEFT JOIN portal.wx_user w ON a.userId = w.unionId
+        ORDER BY a.accPoints DESC
+        )v , (select @i:=0) as it
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+</mapper>

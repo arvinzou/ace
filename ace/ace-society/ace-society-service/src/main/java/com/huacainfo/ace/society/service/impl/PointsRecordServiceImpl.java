@@ -1,17 +1,19 @@
 package com.huacainfo.ace.society.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.PointsRecordDao;
 import com.huacainfo.ace.society.model.PointsRecord;
-import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.vo.PointsRecordQVo;
 import com.huacainfo.ace.society.vo.PointsRecordVo;
@@ -35,8 +37,6 @@ public class PointsRecordServiceImpl implements PointsRecordService {
     private PointsRecordDao pointsRecordDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
-    @Autowired
-    private AuditRecordService auditRecordService;
 
     /**
      * @throws
@@ -177,8 +177,7 @@ public class PointsRecordServiceImpl implements PointsRecordService {
      * @version: 2018-09-28
      */
     @Override
-    public MessageResponse deletePointsRecordByPointsRecordId(String id, UserProp userProp) throws
-            Exception {
+    public MessageResponse deletePointsRecordByPointsRecordId(String id, UserProp userProp) throws Exception {
         this.pointsRecordDao.deleteByPrimaryKey(id);
         this.dataBaseLogService.log("删除积分流水", "积分流水", id, id,
                 "积分流水", userProp);
@@ -196,7 +195,27 @@ public class PointsRecordServiceImpl implements PointsRecordService {
      */
     @Override
     public ResultResponse addPointsRecord(String userId, String bisType, String bisId, int points) {
-        return null;
+        switch (bisType) {
+            case BisType.ORDER_CONSUME:
+                points = -points;
+                break;
+            default:
+                break;
+        }
+
+        PointsRecord record = new PointsRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setUserId(userId);
+        record.setBisType(bisType);
+        record.setBisId(bisId);
+        record.setPoints(points);
+        record.setStatus("1");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setCreateUserId("system");
+        record.setCreateUserName("system");
+        pointsRecordDao.insert(record);
+
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功");
     }
 
 }
