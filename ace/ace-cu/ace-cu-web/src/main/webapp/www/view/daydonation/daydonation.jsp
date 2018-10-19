@@ -214,7 +214,7 @@
 
         <!--一日捐总数统计渲染模板-->
         <script id="total-tpl" type="text/template">
-            <span>\${totalAmount}人参与一日捐</span>
+            <span>\${data}人参与一日捐</span>
         </script>
 
         <!--分享页面渲染-->

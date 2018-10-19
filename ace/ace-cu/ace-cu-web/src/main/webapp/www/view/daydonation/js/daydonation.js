@@ -79,7 +79,7 @@ window.onload = function(){
             success:function(result){
                 if(result.status == 0) {
                     renderPage('rankList', result.data.list, 'rank-tpl');
-                    console.log("===================================aa"+result.data.list[0]);
+                    console.log("===================================aa"+result.data.list.length);
                     renderPage('totalAmount', result.data.list.length, 'total-tpl');
                     //renderPage('share_box', result.data.own, 'share-tpl');
                     openId = result.data.own.openid;
