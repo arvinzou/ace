@@ -1,7 +1,7 @@
 <view class='index'>
 
-    <view class='banner'>
-        <view class='userInfo'>
+    <view class='banner separate'>
+        <view class='userInfo' style="background-image: url(\"data:image/svg+xml,%3Csvg class='wave-container' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 24 150 28' preserveAspectRatio='none'%3E %3Cdefs%3E %3Cpath id='gentle-wave' d='M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z'%3E%3C/path%3E %3C/defs%3E %3Cg class='parallax'%3E %3Cuse xlink:href='%23gentle-wave' x='{{num1}}' y='2' fill='rgba(255,255,255,.2)'%3E%3C/use%3E %3Cuse xlink:href='%23gentle-wave' x='{{num2}}' y='5' fill='rgba(255,255,255,.2)'%3E%3C/use%3E %3Cuse xlink:href='%23gentle-wave' x='{{num3}}' y='8' fill='rgba(255,255,255,.2)'%3E%3C/use%3E %3C/g%3E %3C/svg%3E\")">
             <view class='top'>
                 <view class='headImage'>
                     <image mode='aspectFill' src='{{ userinfoData.avatarUrl }}'></image>
