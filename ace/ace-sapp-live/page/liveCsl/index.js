@@ -54,7 +54,7 @@ Page({
         date: util.formatDate(new Date()),
         time: util.formatTime(new Date(), "h:m:s"),
         type: 0,
-        rtmpUrl: cfg.rtmpserver + that.data.userinfo.mobile + "?id=" + id
+        rtmpUrl: cfg.hlsserver + that.data.userinfo.userProp.mobile+".m3u8"
       }
     });
   },
@@ -75,14 +75,14 @@ Page({
       }
     );
   },
-  
   onLoad: function (param) {
     var that = this;
     if (!util.isLogin()) {
       wx.navigateTo({ url: "../userinfo/index?url=../liveCls/index?id=" + params.id });
     }
     that.setData({
-      userinfo: wx.getStorageSync('userinfo')
+      userinfo: wx.getStorageSync('userinfo'),
+      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
     });
     console.log(param);
     that.setData({param: param});

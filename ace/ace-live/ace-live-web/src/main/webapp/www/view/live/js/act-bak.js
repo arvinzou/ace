@@ -3,7 +3,99 @@ var userDict = {};
 userDict.identityNo = "9999";
 userDict.identityName = "HHHH";
 userDict.identityType = "youke";
+function createH5Video(e, i, a, n) {
+    if ($("#j-video-wrap").data("poster", e).data("src", i), "ios" == videoOsType) {
+        if ($("#j-video-controls .c_timeline").addClass("fn-hide"), $("#j-video-controls").removeClass("fn-hide"), $("#j-video-controls .c_timeline").length) $("#j-video-controls .c_play").on(tap,
+            function () {
+                $(this).hasClass("c_pause") ? ($("#j-video-wrap video")[0].pause(), $(this).removeClass("c_pause"), $("#j-livevideo-tip").removeClass("fn-hide").find("img").hide()) : ($("#j-video-wrap video")[0].play(), $(this).addClass("c_pause"), $("#j-livevideo-tip").addClass("fn-hide"))
+            });
+        else {
+            var o = !0;
+            $("#j-video-controls .c_play").on(tap,
+                function () {
+                    $(this).hasClass("c_pause") ? ($("#j-livevideo-main").addClass("fn-hide"), $("#j-video-wrap").html(""), $("#j-livevideo-tip").removeClass("fn-hide")) : (playH5Video(o), o = !1)
+                })
+        }
+        $("#j-video-controls .c_fullscren").on(tap,
+            function () {
+                fullH5Video($("#j-video-wrap video")[0]);
 
+
+            })
+    } else $("#j-video-controls").remove();
+
+}
+function playH5Video(e) {
+    function i() {
+
+        if (r[0].duration && !isNaN(r[0].duration)) {
+            var e = Math.ceil(r[0].duration);
+            $("#j-video-controls .c_timeline").removeClass("fn-hide"),
+                $("#j-video-controls .c_timeline .endtime").html(videoFn.formatVideoTime(e));
+            var a = Math.ceil(r[0].currentTime);
+            $("#j-video-controls .c_timeline .starttime").html(videoFn.formatVideoTime(a)),
+                $("#j-video-controls .c_timeline .playtime").html(videoFn.formatVideoTime(a) + "/" + videoFn.formatVideoTime(e)),
+                $("#j-video-controls .c_timeline .overline").width(a / e * 100 + "%")
+        }
+        s && !r[0].paused ? ($("#j-video-controls .c_play").addClass("c_pause"), setTimeout(i, 500)) : (s = !1, $("#j-video-controls .c_play").removeClass("c_pause"))
+    }
+
+    $("#j-livevideo-main").removeClass("fn-hide"),
+        $("#j-livevideo-tip").addClass("fn-hide");
+    var a = $("#j-video-controls"),
+        n = !1,
+        o = $("#j-video-wrap").data("poster"),
+        t = $("#j-video-wrap").data("src");
+
+    t.indexOf("m3u8") > -1 && (e = !0),
+    e && ("ios" == videoOsType ? ($("#j-livevideo").hasClass("minvideobar") ? $("#j-v-loading").removeClass("fn-hide") : $("#j-v-loading-new").removeClass("fn-hide"), $("#j-video-wrap").html('<video poster="' + o + '" src="' + t + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>')) : $("#j-video-wrap").html('<video poster="' + o + '" playsinline="true" x-webkit-airplay="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" src="' + t + '" controls="controls"></video>'));
+    var r = $("#j-video-wrap video");
+
+    if (r[0].play(), $("#j-video-controls .c_play").addClass("c_pause"), $("#j-video-controls .c_timeline").length) {
+        var s = !1;
+        i()
+    }
+    r.off("waiting").on("waiting",
+        function () {
+            $("#j-v-loading").removeClass("fn-hide")
+        }),
+        r.off(tap).on(tap,
+            function () {
+                a.hasClass("fn-hide") ? a.removeClass("fn-hide") : ($("#j-livevideo-tip").removeClass("fn-hide").find("img").hide(), this.pause())
+            });
+    var d = setInterval(function () {
+            n && (a.addClass("fn-hide"), clearInterval(d))
+        },
+        5e3);
+    r.off("play").on("play",
+        function () {
+            n = !0,
+            s || (s = !0, i(), clickSetSpeed($("#j-livevideo-main")))
+        }),
+        r.off("playing").on("playing",
+            function () {
+                $("#j-v-loading").addClass("fn-hide"),
+                    $("#j-v-loading-new").addClass("fn-hide"),
+                    $("#j-video-controls").removeClass("fn-hide")
+            }),
+        r.off("pause").on("pause",
+            function () {
+                $("#j-livevideo-tip").removeClass("fn-hide").find("img").hide(),
+                    n = !1,
+                s || (s = !1)
+            }),
+        r.off("ended").on("ended",
+            function (e) {
+                $("#j-livevideo-tip").removeClass("fn-hide").find("img").show()
+            }),
+        $("#j-livevideo-main video").off("error").on("error",
+            function (e) {
+                $("#j-livevideo-main, #j-livevideo-tip .playbtn").addClass("fn-hide"),
+                    $("#j-livevideo-tip, #j-livevideo-tip .tip, #j-livevideo-tip .v-mask").removeClass("fn-hide"),
+                    $("#j-v-loading-new").addClass("fn-hide"),
+                    $("#j-v-loading").addClass("fn-hide")
+            })
+}
 function clickSetSpeed(e) {
     var i = e,
         a = i.find(".overline"),
@@ -17,6 +109,9 @@ function clickSetSpeed(e) {
             a.width(100 * s + "%"),
                 n[0].currentTime = r * s
         })
+}
+function fullH5Video(e) {
+    e.requestFullscreen ? e.requestFullscreen() : e.webkitRequestFullscreen ? e.webkitRequestFullscreen() : e.webkitEnterFullscreen ? e.webkitEnterFullscreen() : e.webkitDisplayingFullscreen && e.webkitDisplayingFullscreen()
 }
 
 function getInfo() {
@@ -62,8 +157,63 @@ function getInfo() {
 
             if (e) {
                 $("#content").html(i.data.content);
-                $("#j-liveinfo").html(liveinfoTpl.render(i));
-                n();
+
+                if (void 0 == window.orientation && (i.ispc = !0), $("#j-liveinfo").html(liveinfoTpl.render(i)), $("#j-livevideo").length) {
+                    var o = "/live/content/www/img/ic_default_pic@2x.png";
+                    o = i.data.cover;
+                    var t = i.data.playStreamUrl;
+                    if (void 0 == window.orientation) {
+                        $("#j-livevideo-main").addClass("prism-player").removeClass("fn-hide"),
+                            $("#j-livevideo-tip").addClass("fn-hide");
+                        var r = {
+                            id: "j-video-wrap",
+                            source: t,
+                            cover: o,
+                            autoplay: !1,
+                            width: "100%",
+                            height: $("#j-liveinfo .view").height() + "px"
+                        };
+                        t.indexOf(".m3u8") > -1 && (r.useFlashPrism = !0),
+                            new prismplayer(r)
+                    } else {
+
+                        createH5Video(o, t, i.data.playStreamUrlHd, i.data.playStreamUrlSd);
+                        var s = !0;
+                        if ($("#j-livevideo-tip").on(tap,
+                                function () {
+                                    playH5Video(s),
+                                    s && (s = !1),
+                                        $("#j-video-wrap video").on("error",
+                                            function () {
+                                                s = !0
+                                            })
+                                }), userAgent.indexOf("iphone") > -1 || userAgent.indexOf("ipad") > -1 || userAgent.indexOf("mac") > -1) {
+                            var d = !1,
+                                l = 3 * containWidth / 10,
+                                c = 5.62 * containWidth / 10;
+                            $(window).scroll(a),
+                                a(),
+                                $("#j-v-close").on(tap,
+                                    function () {
+                                        $("#j-livevideo").removeClass("minvideobar"),
+                                            $("#j-video-wrap").height(c),
+                                            $("#j-video-wrap video")[0] ? ($("#j-video-wrap video")[0].pause(), $("#j-livevideo-tip").removeClass("fn-hide").find("img").hide()) : $("#j-livevideo-tip").removeClass("fn-hide"),
+                                            d = !0
+                                    })
+                        }
+                    }
+                    ;
+
+                    $("#j-video-wrap").find("video").attr("x-webkit-airplay", "true");
+                    $("#j-video-wrap").find("video").attr("webkit-playsinline", "true");
+                    $("#j-video-wrap").find("video").attr("playsinline", "true");
+
+                    $("#j-video-wrap").find("video").attr("x5-video-player-type", "h5");
+                    $("#j-video-wrap").find("video").attr("x5-video-player-fullscreen", "true");
+                    $("#j-video-wrap").find("video").attr("controls", "controls");
+
+                }
+                n(),
                     joeFn.shareObj({
                         clickObj: $("#j-share"),
                         shareParams: {}
@@ -317,7 +467,12 @@ function increateNumTimeFn() {
                 increaseNum: e
             };
             isLogin ? (i.identityNo = userDict.identityNo, i.identityType = userDict.identityType) : i.identityType = webviewType
-
+            /*
+             lvsCmd.ajax(apiServer + "/h5/live/increaseNum.json", i,
+             function(e, i) {
+             isPostView = !1,
+             increateNumTimeFn()
+             })*/
         } else setTimeout(increateNumTimeFn, 1e3)
     }
 }
@@ -336,6 +491,7 @@ wxShareDict.imgUrl = document.location.origin + "/static/img/logo.png";
 var liveinfoTpl = juicer($("#j-liveinfo script").html());
 if ($("#j-liveinfo script").remove(), userAgent.indexOf("iphone") > -1 || userAgent.indexOf("ipad") > -1 || userAgent.indexOf("mac") > -1) var videoOsType = "ios";
 else var videoOsType = "android";
+//alert(videoOsType);
 var videoFn = {
     formatVideoTime: function (e) {
         if (e > 60) {
@@ -713,43 +869,59 @@ $(function () {
 });
 $(window).on("scroll",
     function () {
+//       console.log("======>" + $(window).scrollTop());
         if ($(window).scrollTop() >= 50) {
             $("#j-liveinfo .view").css("height", "2.62rem");
             $("#j-liveinfo .view").css("position", "fixed");
             $("#j-liveinfo .view").css("z-index", 310);
             $("#j-liveinfo .content").css("padding-top", "2.62rem");
+            $("#j-livevideo-main").css("height", "2.62rem");
+            //$("#j-livevideo-main").css("width","5rem");
             $("#j-video-wrap video").css("width", "5rem");
             $("#j-video-wrap video").css("height", "2.62rem");
-            $("#j-video-wrap img").css("width", "5rem");
-            $("#j-video-wrap img").css("height", "2.62rem");
-            $("#j-video-wrap img").css("float", "left");
             $("#j-video-wrap .prism-cover").css("width", "5rem");
             $("#j-video-wrap .prism-cover").css("height", "2.62rem");
             $("#j-video-wrap .prism-cover").css("float", "left");
-            $("#j-video-wrap").css("width", "10rem");
+            $("#j-video-wrap").css("height", "110px");
+            $("#j-video-wrap").css("width", "5rem");
+            $("#j-video-wrap .prism-big-play-btn").css("left", "25%!important");
+            $("#j-video-wrap .prism-big-play-btn").css("top", "25%!important");
+            $("#j-video-wrap .prism-big-play-btn").css("zoom", 0.3);
             $("#j-video-text").removeClass("fn-hide");
-            $("#j-video-wrap video").css("float", "left");
+            $("#j-video-wrap").css("float", "left");
             $("#j-video-text").css("float", "right");
+
+            $("#j-liveinfo .view img").css("width", "5rem");
+            $("#j-liveinfo .view img").css("float", "left");
             $(".count_down").addClass("fn-hide");
+            $("#j-livevideo").css("height", "2.8rem");
+
+
+
         } else {
             $("#j-liveinfo .view").css("height", "5.62rem");
             $("#j-liveinfo .view").css("position", "relative");
             $("#j-liveinfo .view").css("z-index", 0);
+            $("#j-liveinfo .content").css("padding-top", ".26rem");
+            $("#j-livevideo-main").css("height", "5.62rem");
+            //$("#j-livevideo-main").css("width","10rem");
             $("#j-video-wrap video").css("width", "10rem");
             $("#j-video-wrap video").css("height", "5.62rem");
-            $("#j-video-wrap img").css("width", "10rem");
-            $("#j-video-wrap img").css("height", "5.62rem");
-            $("#j-video-wrap img").css("float", "null");
             $("#j-video-wrap .prism-cover").css("width", "10rem");
             $("#j-video-wrap .prism-cover").css("height", "5.62rem");
+            $("#j-video-wrap").css("height", "210px");
             $("#j-video-wrap").css("width", "10rem");
+            $("#j-video-wrap .prism-big-play-btn").css("left", "50%!important");
+            $("#j-video-wrap .prism-big-play-btn").css("top", "50%!important");
+            $("#j-video-wrap .prism-big-play-btn").css("zoom", 0.6);
             $("#j-video-text").addClass("fn-hide");
             $("#j-video-wrap").css("float", "null");
             $("#j-video-text").css("float", "null");
             $("#j-video-wrap .prism-cover").css("float", "null");
+            $("#j-liveinfo .view img").css("width", "10rem");
+            $("#j-liveinfo .view img").css("float", "null");
             $(".count_down").removeClass("fn-hide");
             $("#j-livevideo").css("height", "5.62rem");
-            $("#j-liveinfo .content").css("padding-top", "0.2rem");
 
         }
     });

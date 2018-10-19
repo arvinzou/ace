@@ -1,6 +1,7 @@
 package com.huacainfo.ace.live.web.controller;
 
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.live.service.LiveRptService;
 import com.huacainfo.ace.live.service.LiveService;
 import com.huacainfo.ace.live.web.websocket.MyWebSocket;
@@ -46,6 +47,9 @@ public class LiveCmtController extends LiveBaseController {
     private LiveRptService liveRptService;
     @Autowired
     private KafkaProducerService kafkaProducerService;
+
+
+
 
     /**
      * @throws
@@ -177,6 +181,7 @@ public class LiveCmtController extends LiveBaseController {
     @RequestMapping(value = "/www/insertLiveCmt")
     @ResponseBody
     public MessageResponse insertLiveCmtWww(String jsons) throws Exception {
+
         Map<String, String> data = new HashMap<String, String>();
         data.put("jsons", jsons);
         data.put("service","cmt");

@@ -18,7 +18,7 @@
     </cover-view>
   </view>
   <!--导航条-->
-  <view class="navbar" style='padding-top:{{pusherSizeH}}vh'>
+  <view class="navbar">
     <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
   </view>
   <view class='chat-box' hidden="{{currentTab!==0}}">

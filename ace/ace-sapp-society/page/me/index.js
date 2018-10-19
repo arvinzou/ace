@@ -8,6 +8,7 @@ Page({
    */
   data: {
       userinfoData : null,
+      isRegist: false
   },
 
   /**
@@ -31,11 +32,14 @@ Page({
         util.request(cfg.findUserInfo, {},
             function (ret) {
                 if (ret.status == 0) {
-                    that.setData({ userinfoData: ret.data});
-                    return true;
+                    that.setData({ 
+                        userinfoData: ret.data,
+                        isRegist: true
+                    });
                 } else {
                     if (ret.info == '用户尚未注册') {
-                        return false;
+                        that.setData({ isRegist: false});
+                        wx.navigateTo({ url: "../regist/index" });
                     }
                 }
 
@@ -68,11 +72,8 @@ Page({
    */
   onShow: function () {
       var that = this;
-      console.log("that.initUserData()=======================================" + that.initUserData());
       if (wx.getStorageSync('userinfo')){
-          if (that.initUserData() == false){
-              wx.navigateTo({ url: "../regist/index" });
-          }
+          that.initUserData();
       }
   },
 

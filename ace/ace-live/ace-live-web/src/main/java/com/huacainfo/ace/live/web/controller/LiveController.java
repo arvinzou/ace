@@ -1,10 +1,12 @@
 package com.huacainfo.ace.live.web.controller;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.service.AuthorityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,6 +38,9 @@ public class LiveController extends LiveBaseController {
     private LiveService liveService;
     @Autowired
     private AuthorityService authorityService;
+
+    @Autowired
+    private RedisOperations<String, Object> redisTemplate;
 
     /**
      * @throws
@@ -186,6 +191,19 @@ public class LiveController extends LiveBaseController {
     @RequestMapping(value = "/www/insertLive")
     @ResponseBody
     public MessageResponse insertLiveWww(String jsons) throws Exception {
+
+        JSONObject o=JSON.parseObject(jsons);
+        String captcha=o.getString("captcha");
+        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session + "j_captcha_weui");
+        this.logger.info("captcha->{}",captcha);
+        this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+        if(CommonUtils.isBlank(captcha)){
+            return new MessageResponse(1,"验证码不能为空！");
+        }
+        if(!captcha.equals(j_captcha_weui)){
+            return new MessageResponse(1,"验证码错误！");
+        }
         SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
         if(rst.getStatus()==0){
             Live obj = JSON.parseObject(jsons, Live.class);
@@ -209,6 +227,18 @@ public class LiveController extends LiveBaseController {
     @RequestMapping(value = "/www/updateLive")
     @ResponseBody
     public MessageResponse updateLiveWww(String jsons) throws Exception {
+        JSONObject o=JSON.parseObject(jsons);
+        String captcha=o.getString("captcha");
+        String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+        String j_captcha_weui=(String) this.redisTemplate.opsForValue().get(_3rd_session + "j_captcha_weui");
+        this.logger.info("captcha->{}",captcha);
+        this.logger.info("j_captcha_weui->{}",j_captcha_weui);
+        if(CommonUtils.isBlank(captcha)){
+            return new MessageResponse(1,"验证码不能为空！");
+        }
+        if(!captcha.equals(j_captcha_weui)){
+            return new MessageResponse(1,"验证码错误！");
+        }
         SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
         if(rst.getStatus()==0){
             Live obj = JSON.parseObject(jsons, Live.class);

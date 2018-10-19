@@ -51,4 +51,6 @@ public interface WxUserDao {
 
     int updateBindMiniApp(@Param("openId") String openId,@Param("userId") String userId);
 
+    int isExitByMobile(String mobile);
+
 }
