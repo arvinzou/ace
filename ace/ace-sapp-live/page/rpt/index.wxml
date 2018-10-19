@@ -72,7 +72,7 @@
       </view>
 
       <view>
-        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:100%;color:#fff;background-color:blue; border-radius: 2px;" formType="submit">提交</button>
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:100%;color:#fff;background-color:#1a9fff; border-radius: 2px;position: fixed;bottom:0" formType="submit">提交</button>
       </view>
     </view>
   </form>

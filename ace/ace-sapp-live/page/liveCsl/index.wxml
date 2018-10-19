@@ -44,11 +44,6 @@
         <textarea name="remark" value="{{formData.remark}}" bindinput="remarkChange" maxlength="200" class="weui-textarea" placeholder="请输入简介" style="height: 100rpx" />
         <view class="weui-textarea-counter">{{maxRemark}}/200</view>
       </view>
-
-
-
-
-      
       <view class="kind-list-item" style='display: flex;flex-direction: row'>
         <view class='packerDate'>
           <view class="weui-cell__hd">

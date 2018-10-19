@@ -154,7 +154,7 @@ Page({
     var pusherStatus = that.data.pusherStatus;
     var userinfo = wx.getStorageSync('userinfo');
     that.setData({
-      rtmpurl: cfg.rtmpserver + userinfo.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
+      rtmpurl: cfg.rtmpserver + userinfo.userProp.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
     });
     if (pusherStatus == 'stop') {
       wx.showModal({
@@ -360,14 +360,14 @@ Page({
   },
   onPageScroll: function (res) {
     let that = this;
-    console.log(res);
+   // console.log(res);
     if (res.scrollTop >= 30) {
       if (true) {
-        that.setData({ pusherSizeH: 0, pusherSizeW: 0 });
+        //that.setData({ pusherSizeH: 0, pusherSizeW: 0 });
       }
     } else {
       if (true) {
-        that.setData({ pusherSizeH: 35, pusherSizeW: 100 });
+        //that.setData({ pusherSizeH: 35, pusherSizeW: 100 });
       }
     }
   },
