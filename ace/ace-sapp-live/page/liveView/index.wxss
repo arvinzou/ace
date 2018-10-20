@@ -93,7 +93,6 @@ page{
   flex-direction: row;
   padding-left: 20rpx;
   padding-right: 20rpx;
-  padding-top: 20rpx;
 }
 .chat-right{
   flex:1;
@@ -178,13 +177,14 @@ width: 80%;
 .rpt-content{
   padding-top: 1rpx;
   padding-bottom: 1rpx;
-  border-top: solid 1px #ebebeb;
+  border-top: solid 1rpx #ebebeb;
 }
 .content {
 	padding-top: 10rpx;
   padding-bottom: 10rpx;
 	font-size: 30rpx;
-	line-height: 35rpx;
+	line-height: 50rpx;
+  color: #666;
 }
 
 .reporter{
@@ -381,12 +381,13 @@ width: 80%;
   text-align: right;
 }
 .cmt-addlike{
-  width: 40rpx;
-  height: 40rpx;
+  width: 30rpx;
+  height: 30rpx;
+  float: left;
 }
 .cmt-addcmt{
-  width: 40rpx;
-  height: 40rpx;
+  width: 30rpx;
+  height: 30rpx;
   padding-left: 10rpx;
 }
 .live-remark{
