@@ -46,11 +46,14 @@
                 <img src="\${data.cover}">
 
                 {@else}
+
+
+
                         {@if data.state == 2}
-                         <video src="\${data.playStreamUrl}" x-webkit-airplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" controls="controls" style="width: 10rem; height: 5.62rem;"></video>
+                         <video poster="\${data.cover}" src="\${data.playStreamUrl}" x-webkit-airplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" controls="controls" style="width: 10rem; height: 5.62rem;"></video>
                         {@/if}
                         {@if data.state == 3}
-                        <video src="\${data.mp4Url}" x-webkit-airplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" controls="controls" style="width: 10rem; height: 5.62rem;"></video>
+                        <video poster="\${data.cover}" src="\${data.mp4Url}" x-webkit-airplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" controls="controls" style="width: 10rem; height: 5.62rem;"></video>
                         {@/if}
 
 
@@ -201,11 +204,7 @@
                                         <img src="">
                                         {@/if}
                                     </div>
-                                    <!-- <div class="v-loading-new fn-hide">
-                                      <div class="v-logo"></div>
-                                      <div class="v-line"><div class="v-line-s-box"><div></div></div></div>
-                                      <p>即将播放...</p>
-                                    </div> -->
+
                                     <div class="v-loading fn-hide"><i></i></div>
                                     <video playsinline="true" x-webkit-airplay="true" webkit-playsinline="true"
                                            x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>
