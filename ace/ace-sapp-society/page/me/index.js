@@ -8,6 +8,9 @@ Page({
    */
   data: {
       userinfoData : null,
+      num1:parseInt(Math.random()*100),
+      num2: parseInt(Math.random() * 100),
+      num3: parseInt(Math.random() * 100),
   },
 
   /**
@@ -19,9 +22,12 @@ Page({
       if (!util.is_login()) {
           wx.navigateTo({ url: "../userinfo/index?url=../me/index&type=switchTab" });
       }else{
-          that.setData({
-              userinfo: wx.getStorageSync('userinfo')
-          });
+          console.log("that.initUserData()=======================================" + that.initUserData());
+          if (wx.getStorageSync('userinfo')) {
+              if (!that.initUserData()) {
+                  wx.navigateTo({ url: "../regist/index" });
+              }
+          }
         
       }
       
@@ -34,9 +40,7 @@ Page({
                     that.setData({ userinfoData: ret.data});
                     return true;
                 } else {
-                    if (ret.info == '用户尚未注册') {
-                        return false;
-                    }
+                    return false;
                 }
 
             }
@@ -67,13 +71,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      var that = this;
-      console.log("that.initUserData()=======================================" + that.initUserData());
-      if (wx.getStorageSync('userinfo')){
-          if (that.initUserData() == false){
-              wx.navigateTo({ url: "../regist/index" });
-          }
-      }
+      
   },
 
   /**

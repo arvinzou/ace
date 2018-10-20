@@ -88,6 +88,8 @@ public class WActivityController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse insertActivity(String jsons) throws Exception {
         Activity obj = JSON.parseObject(jsons, Activity.class);
+        WxUser wxUser = getCurWxUser();
+        obj.setInitiatorId(wxUser.getUnionId());
         return this.activityService.insertActivity(obj);
     }
 

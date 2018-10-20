@@ -52,20 +52,24 @@ switch{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 1000rpx;
+    height: 100%;
+    padding-top: 160rpx;
 }
 
-.fontStyle1 {
-    font-size: 34rpx;
+.reuslt .massage .fontStyle1 {
+font-size:40rpx;
+font-weight:bold;
+color:rgba(34,34,34,1);
+margin: 30rpx 0;
 }
 
-.fontStyle2 {
-    font-size: 30rpx;
+.reuslt .massage  .fontStyle2 {
+font-size:28rpx;
+font-weight:500;
+color:rgba(102,102,102,1);
+margin: 10rpx 0;
 }
 
-.fontStyle3 {
-    font-size: 30rpx;
-}
 
 .reuslt .massage {
     align-items: center;
@@ -73,11 +77,28 @@ switch{
     flex-direction: column;
 }
 
-.reuslt .btn-clicking {
+.reuslt .massage .image{
+    width: 182rpx;
+    height: 218rpx;
+    padding-left: 10rpx;
+}
+
+.reuslt .massage image{
+    width: 182rpx;
+}
+
+
+.reuslt .btn-bkClick {
     align-self: flex-end;
+    width:335rpx;
+    margin: auto;
 }
 
 
 .point{
     color:rgba(251, 81, 82, 1) !important;
+}
+
+.phone{
+    color: #72ACE3;
 }
