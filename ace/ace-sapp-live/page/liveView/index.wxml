@@ -66,12 +66,22 @@
     </view>
   </block>
 
-  <view class="circle chat" bindtap="modalinput">
+  <view class="circle chat" bindtap="modalinput" wx:if="{{0>1}}">
     <image class="imgsmall" src="../../image/chat.png" />
   </view>
     <modal hidden="{{hiddenmodalput}}" title="请输入要发表的内容" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
     <textarea class="inputView" name="content" type="text" placeholder="说点啥唄" placeholder-style="color: #ccccc" auto-focus="true" bindinput="contentInput" value="{{contentText}}" />
   </modal>
+  <view class='chat-toolbar'>
+   <view class='chat-message-box'>
+      <view style='flex:1'><image src='../../image/icon_关闭弹幕.png' class='chat-icon'></image></view>
+      <view style='flex:7'>
+       <input type="text" placeholder="请输入要发表的内容" class='chat-input'/>
+       </view>
+       <view style='flex:1'><image src='../../image/icon_展开更多内容.png' class='chat-icon'></image></view>
+       <view style='flex:1'><image src='../../image/icon_点赞.png' class='chat-icon'></image></view>
+    </view>
+    </view>
 </view>
 <view class='chat-box' hidden="{{currentTab!=1}}">
   <block wx:for-items="{{list}}" wx:key="*">

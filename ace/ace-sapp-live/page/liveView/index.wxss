@@ -381,13 +381,13 @@ width: 80%;
   text-align: right;
 }
 .cmt-addlike{
-  width: 30rpx;
-  height: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
   float: left;
 }
 .cmt-addcmt{
-  width: 30rpx;
-  height: 30rpx;
+  width: 40rpx;
+  height: 40rpx;
   padding-left: 10rpx;
 }
 .live-remark{
@@ -428,11 +428,13 @@ max-height: 80rpx;
 .live-remark{
   font-size: 30rpx;
   color: #666;
+  line-height: 50rpx;
 }
 .live-content{
   font-size: 30rpx;
   padding: 20rpx;
   color: #666;
+  line-height: 50rpx;
 }
 .live-content-title{
   font-size:30rpx;padding-left:20rpx;
@@ -449,4 +451,26 @@ max-height: 80rpx;
   margin-right:20rpx;
   margin-bottom:20rpx;
   border-bottom: 1rpx #e5e5e5 solid;
+}
+.chat-input{
+   border: 0rpx #e5e5e5 solid;
+   border-radius: 25rpx;  
+   padding: 10rpx;
+   height: 50rpx;
+   background: #e5e5e5;
+   color: #000000;
+}
+.chat-message-box{
+   display:flex;
+   flex-direction:row;
+}
+.chat-toolbar{
+   position: fixed;
+   bottom:2rpx;
+   width: 100%;
+}
+.chat-icon{
+  max-width: 50rpx;
+  max-height: 50rpx;
+  padding: 10rpx;
 }

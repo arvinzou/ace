@@ -124,7 +124,7 @@ Page({
       userinfo: wx.getStorageSync('userinfo')
     });
     that.setData({
-      id:'9f4ebcc2-621b-4354-88ac-f2f7735e7e6b'
+      id:params.id
     });
     that.initData(that.data.id);
     var url = "wss://" + cfg.websocketurl + "/live/www/websocket/" + that.data.id + "/" + that.data.userinfo.unionId + "/chat";
