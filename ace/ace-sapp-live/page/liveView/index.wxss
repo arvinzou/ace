@@ -1,0 +1,447 @@
+@import "../common/lib/weui.wxss";
+page{
+  background:#fff
+}
+
+.live-top-box-scoll{
+  display:flex;flex-direction:row;width:100%;position:fixed;z-index: 9999;
+}
+.live-top-box-noscoll{
+  display:flex;flex-direction:row;width:100%;
+
+}
+.live-top-box-right{
+  flex:1;
+  background: rgb(207, 207, 212);
+}
+.live-top-box-right-text{
+  padding:30rpx;color:#fff;
+}
+.controls {
+  position: relative;
+  display: flex;
+  height: 10vh;
+  margin-top: 95%;
+}
+.img {
+  width: 80rpx;
+  height: 80rpx;
+  margin: 0rpx auto;
+}
+
+
+.chat{
+   right: 20rpx;
+}
+.camera{  
+  right: 110rpx; 
+}
+.muted{  
+  right: 200rpx; 
+}
+.play{  
+  right: 290rpx; 
+}
+.orientation{    
+  right: 390rpx;   
+}
+.aspect{   
+  right: 480rpx; 
+}
+.circle{  
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center; 
+  width: 80rpx;  
+  height:80rpx;  
+  border-radius: 50%;  
+  font-size: 36rpx;  
+  bottom: 30rpx; 
+}
+.imgsmall {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 2rpx auto;
+}
+.info-tip{
+  position: fixed;  
+  display: flex; 
+  flex-direction: column; 
+  top: 10rpx; 
+  right: 2%; 
+  width: 200rpx;   
+  font-size: 25rpx;
+  padding: 2%;
+}
+.tip-item{
+    color: #0F8DFF;
+}
+.chat-box{
+  font-size: 25rpx;
+  height: 65vh;
+  padding: 10rpx;
+}
+.headimg{
+  width: 80rpx;
+  height: 80rpx;
+  margin: 2rpx auto;
+  border-radius: 50%; 
+}
+.chat-content{  
+  display: flex;  
+  flex-direction: row;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 20rpx;
+}
+.chat-right{
+  flex:1;
+  padding-left: 20rpx;
+}
+
+.chat-text{
+  color: #fff;
+  border-radius:15rpx;
+  background:#0F8DFF;
+  padding: 10rpx;
+}
+
+.block{
+  display: block
+}
+.chat-nickname{
+  padding-bottom: 10rpx;
+}
+.chat-send-box{  
+  display: flex;  
+  flex-direction: row; 
+  height: 8vh;
+  background: #fff;
+  padding: 10rpx;
+}
+.chat-item-left{
+width: 80%;
+}
+.chat-item-right{
+  width: 20%;
+}
+.button-hover {
+  background-color: red;
+}
+/** 添加自定义button点击态样式类**/
+.other-button-hover {
+  background-color: red;
+}
+
+.inputView{
+    border:  0px solid #C8C8C8;
+    border-radius:10rpx;
+    color: #0F8DFF;
+    font-size: 30rpx;
+    height: 200rpx;
+}
+.inputViewCmt{
+    border:  0px solid #C8C8C8;
+    border-radius:10rpx;
+    color: #0F8DFF;
+    font-size: 30rpx;
+    height: 200rpx;
+}
+.submit{
+  margin-left: 10rpx;
+  height: 80%;
+}
+.submit text{
+  vertical-align:middle;
+  font-size: 30rpx;
+}
+
+.hide{
+ display: none;
+}
+.show{ 
+ display: block;
+}
+
+
+
+
+.add{
+   right: 40rpx;
+}
+
+.headimgp {
+	width:70rpx;height:70rpx;border-radius:0rpx;vertical-align:middle;
+}
+
+.rpt-content{
+  padding-top: 1rpx;
+  padding-bottom: 1rpx;
+  border-top: solid 1px #ebebeb;
+}
+.content {
+	padding-top: 10rpx;
+  padding-bottom: 10rpx;
+	font-size: 30rpx;
+	line-height: 35rpx;
+}
+
+.reporter{
+  padding-bottom: 10rpx;
+}
+.head-date{
+  position:relative;
+  left:-80rpx;
+  bottom:-70rpx;
+  background:#fff;
+  width:70rpx;
+  color:#0F8DFF;
+  border-radius:50%;
+  height:70rpx;
+  padding:2.5rpx;
+  line-height:70rpx;
+  text-align:center;
+   border:1rpx solid #0F8DFF;
+}
+.wrap {
+	padding-left: 40rpx;
+  padding-right: 40rpx;
+  padding-top: 2rpx;
+}
+.pictures {
+  width: 100%;
+  margin-bottom: 20rpx; 
+}
+.pictures .imglist1 {
+  height: 36vh;
+  background: #fff;
+  position: relative;
+}
+.pictures .imglist1 .img1 {
+  height: 100%;
+  width: 100%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+.pictures .imglist2 {
+  height: 36vh;
+  background: #fff;
+  position: relative;
+}
+
+.pictures .imglist2 .img1 {
+	height: 100%;
+  width: 49.5%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+.pictures .imglist2 .img2 {
+	height: 100%;
+  width: 50%;
+	right: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+
+.pictures .imglist3 {
+  height: 36vh;
+  background: #fff;
+  position: relative;
+}
+
+.pictures .imglist3 .img1 {
+  height: 100%;
+  width: 49.5%;
+	left: 0rpx;
+  top:0rpx;
+  position: absolute;
+}
+
+.pictures .imglist3 .img2 {
+  height:  49.5%;
+  width: 50%;
+	right:0%;
+  top:0%;
+  position: absolute;
+}
+
+.pictures .imglist3 .img3 {
+	width: 50%;
+  height:50%;
+  right:0%;
+  top: 50%;
+  position: absolute;
+}
+.pictures .imglist4 {
+	height: 36vh;
+  background: #fff;
+  position: relative;
+}
+
+.pictures .imglist4 .img1 {
+  width: 49.5%;
+  height:49.5%;
+  left:0%;
+  top: 0%;
+  position: absolute;
+}
+
+.pictures .imglist4 .img2 {
+  width: 50%;
+  height:49.5%;
+  right:0%;
+  top: 0%;
+  position: absolute;
+}
+.pictures .imglist4 .img3 {
+  width: 49.5%;
+  height:50%;
+  left:0%;
+  bottom: 0%;
+  position: absolute;
+}
+.pictures .imglist4 .img4 {
+  width: 50%;
+  height:50%;
+  right:0%;
+  bottom: 0%;
+  position: absolute;
+}
+
+
+
+.navbar {
+   /* z-index: 100;*/
+    width: 100%;
+    /*position: fixed; */
+    font-size: 30rpx;
+    color: #666;
+    flex: none;
+    display: flex;
+    background: #FDFDFD;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.navbar .item.active {
+    font-size: 30rpx;
+}
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    width: 30rpx;
+    margin: 0 auto;
+    background:#0F8DFF;
+    border-radius: 20%;
+}
+.comments{
+  background-color:#e5e5e5;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.comment-text{
+  border-radius:15rpx;
+  padding: 10rpx;
+}
+.btn-add-rpt{
+  right: 40rpx;
+  bottom: 30rpx; 
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center;  
+  border-radius: 50%;  
+  background:#0F8DFF; 
+}
+.btn-img {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  background: #fff; 
+}
+.active {
+  border-bottom:4rpx solid #fff;
+}
+.cmt-bar{
+  padding: 5rpx; 
+  text-align: right;
+}
+.cmt-addlike{
+  width: 40rpx;
+  height: 40rpx;
+}
+.cmt-addcmt{
+  width: 40rpx;
+  height: 40rpx;
+  padding-left: 10rpx;
+}
+.live-remark{
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+.live-name{
+  font-size:35rpx;
+}
+.live-org{
+  display: flex;
+  flex-direction: row;
+}
+.live-org-logo{
+  flex:1;
+  padding: 2rpx;
+}
+.live-org-name{
+  flex:8;
+  display: flex;
+  flex-direction: column;
+}
+.live-org-allname{
+  flex:6;
+  font-size:30rpx;
+  color:#0F8DFF;
+}
+
+.live-org-shortname{
+  flex:5;
+  font-size:25rpx;
+}
+.org-logo{
+max-width: 80rpx;
+max-height: 80rpx;
+}
+.live-remark{
+  font-size: 30rpx;
+  color: #666;
+}
+.live-content{
+  font-size: 30rpx;
+  padding: 20rpx;
+  color: #666;
+}
+.live-content-title{
+  font-size:30rpx;padding-left:20rpx;
+}
+.live-content-time{
+  padding:20rpx;
+  font-size: 30rpx;
+  color: #666;
+}
+.live-content-line{
+  margin:20rpx;
+  border-bottom: 1rpx #e5e5e5 solid;
+}

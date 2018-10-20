@@ -307,7 +307,8 @@
         SELECT
         companyAlias,
         companyName,
-        totalNum
+        totalNum,
+        logo
         FROM
         (
         SELECT
@@ -322,7 +323,8 @@
         SELECT
         department_id deptId,
         short_name companyAlias,
-        department_name companyName
+        department_name companyName,
+        logo
         FROM
         portal.department
         WHERE
@@ -345,7 +347,8 @@
         SELECT
         companyAlias,
         companyName,
-        totalNum
+        totalNum,
+        logo
         FROM
         (
         SELECT
@@ -360,7 +363,8 @@
         SELECT
         department_id deptId,
         short_name companyAlias,
-        department_name companyName
+        department_name companyName,
+        logo
         FROM
         portal.department
         WHERE
