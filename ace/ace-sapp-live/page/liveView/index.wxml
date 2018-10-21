@@ -1,14 +1,11 @@
 <view class='{{scoll}}'>
   <image wx:if="{{live.category==1||live.status!=2}}" src='{{live.imageSrc}}' style="width:100%; height:{{pusherSizeH}}vh;flex:1;"></image>
-
-  <live-player wx:if="{{live.category==2&&live.status==2}}" src="rtmp://zx.huacainfo.com/live/13922861673" mode="RTC" autoplay bindstatechange="statechange" binderror="error" style="width:100%; height:{{pusherSizeH}}vh;flex:1;" object-fit="fillCrop">
-  </live-player>
-
-
+  <video wx:if="{{live.category==2&&live.status==2}}" src="{{live.status==2?live.rtmpUrl:live.mp4Url}}" 
+  poster="{{live.imageSrc}}" style="width:100%; height:{{pusherSizeH}}vh;flex:1;" object-fit="fill">
+  </video>
   <view wx:if="{{nameDisplay}}" class='live-top-box-right' style='height:{{pusherSizeH}}vh;'>
     <view class='live-top-box-right-text'>{{live.name}}</view>
   </view>
-
 </view>
 
 
