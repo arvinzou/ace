@@ -83,8 +83,8 @@ page{
   padding: 10rpx;
 }
 .headimg{
-  width: 80rpx;
-  height: 80rpx;
+  width: 60rpx;
+  height: 60rpx;
   margin: 2rpx auto;
   border-radius: 50%; 
 }
@@ -101,9 +101,12 @@ page{
 
 .chat-text{
   color: #fff;
-  border-radius:15rpx;
   background:#0F8DFF;
   padding: 10rpx;
+  border-top-left-radius:15rpx;
+  border-top-right-radius:15rpx;
+  border-bottom-left-radius: 0rpx;
+  border-bottom-right-radius: 15rpx;
 }
 
 .block{
@@ -346,7 +349,7 @@ width: 80%;
     width: 30rpx;
     margin: 0 auto;
     background:#0F8DFF;
-    border-radius: 20%;
+    border-radius: 3rpx;
 }
 .comments{
   background-color:#e5e5e5;
@@ -397,6 +400,7 @@ width: 80%;
 }
 .live-name{
   font-size:35rpx;
+  padding: 20rpx;
 }
 .live-org{
   display: flex;
@@ -454,7 +458,7 @@ max-height: 80rpx;
 }
 .chat-input{
    border: 0rpx #e5e5e5 solid;
-   border-radius: 25rpx;  
+   border-radius: 30rpx;  
    padding: 10rpx;
    height: 50rpx;
    background: #e5e5e5;
@@ -465,12 +469,33 @@ max-height: 80rpx;
    flex-direction:row;
 }
 .chat-toolbar{
-   position: fixed;
-   bottom:2rpx;
-   width: 100%;
+  position: fixed;
+  bottom:0rpx;
+  width: 100%;
+  background:#FDFDFD;
+  padding-top: 10rpx;
+  border-top: 1px #f0f0f0 solid;
 }
 .chat-icon{
   max-width: 50rpx;
   max-height: 50rpx;
   padding: 10rpx;
+}
+.submit-chat{
+  color:#fff;
+  font-size:25rpx; 
+  padding: 15rpx;
+  border: 1rpx #fff solid;
+  background: #0F8DFF;
+  border-radius: 15rpx;
+  width: 70rpx;
+  height: 40rpx;  
+  text-align: center;
+  float: right;
+  margin-right: 10rpx;
+}
+.navbar-content{
+  font-size: 25rpx;
+  height: 65vh;
+  padding: 0rpx;
 }
