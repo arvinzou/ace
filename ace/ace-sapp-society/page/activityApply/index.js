@@ -167,7 +167,7 @@ Page({
             location: {
                 required: true,
                 minlength: 5,
-                maxlength: 34
+                maxlength: 20
             },
             mode: {
                 required: true,

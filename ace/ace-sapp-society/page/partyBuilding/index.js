@@ -143,6 +143,8 @@ Page({
         var that = this;
         that.clearStatus();
         that.initdata();
+        wx.stopPullDownRefresh();
+        return;
     },
 
     /**

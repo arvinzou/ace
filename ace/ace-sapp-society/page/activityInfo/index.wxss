@@ -76,6 +76,10 @@
     color: rgba(34, 34, 34, 1);
 }
 
+.detailed_card .title{
+    width: 130rpx；
+}
+
 .detailed_card .add_type {
     display: flex;
     align-items: center;
