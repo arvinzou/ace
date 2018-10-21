@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.society.model.Activity;
+import com.huacainfo.ace.society.model.ActivityDetail;
 import com.huacainfo.ace.society.model.ActivityReport;
 import com.huacainfo.ace.society.service.*;
 import com.huacainfo.ace.society.vo.*;
@@ -53,22 +54,57 @@ public class WActivityController extends SocietyBaseController {
     private RegService regService;
 
     /**
-     * @throws
-     * @Title:find!{bean.name}List
-     * @Description: TODO(线下活动分页查询)
-     * @param: @param condition
-     * @param: @param page
-     * @param: @return
-     * @param: @throws Exception
-     * @return: PageResult
-     * <ActivityVo>
-     * @author: huacai003
-     * @version: 2018-09-11
+     * @Description: TODO(公开的活动列表)
      */
     /*获取活动列表*/
-    @RequestMapping(value = "/findActivityList")
+    @RequestMapping(value = "/findPublicActivityList")
     @ResponseBody
-    public ResultResponse findActivityList(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findPublicActivityList(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setStatus("3");
+        List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
+    }
+
+    /**
+     * @Description: TODO(查找活动组织的活动列表)
+     */
+    /*获取活动列表*/
+    @RequestMapping(value = "/findAdminSelfActivityList")
+    @ResponseBody
+    public ResultResponse findAdminSelfActivityList(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
+        WxUser wxUser = getCurWxUser();
+        condition.setInitiatorId(wxUser.getUnionId());
+        if(wxUser == null){
+            return  new ResultResponse(ResultCode.FAIL,"没有获取到用户信息");
+        }
+        List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
+    }
+
+
+    /**
+     * @Description: TODO(查找用户报名的活动列表)
+     */
+    @RequestMapping(value = "/findUserSelfActivityList")
+    @ResponseBody
+    public ResultResponse findUserSelfActivityList(ActivityQVo condition,PageParamNoChangeSord page) throws Exception {
+        WxUser wxUser = getCurWxUser();
+        if(wxUser == null){
+            return  new ResultResponse(ResultCode.FAIL,"没有获取到用户信息");
+        }
+        condition.setUserId(wxUser.getUnionId());
+        List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
+    }
+
+    /**
+     * @Description: TODO(查找正在进行的活动)
+     */
+    @RequestMapping(value = "/findActivitying")
+    @ResponseBody
+    public ResultResponse findActivitying(ActivityQVo condition,PageParamNoChangeSord page) throws Exception {
+        condition.setStatus("3");
+        condition.setIngId("ing");
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
     }
@@ -89,19 +125,29 @@ public class WActivityController extends SocietyBaseController {
     public MessageResponse insertActivity(String jsons) throws Exception {
         Activity obj = JSON.parseObject(jsons, Activity.class);
         WxUser wxUser = getCurWxUser();
-        obj.setInitiatorId(wxUser.getUnionId());
-        return this.activityService.insertActivity(obj);
+        if(wxUser == null){
+            return  new MessageResponse(ResultCode.FAIL,"系统繁忙，稍后重试");
+        }
+        return this.activityService.insertActivity(obj ,  wxUser);
     }
 
+
     /**
-     * @throws
-     * @Title:selectActivityByPrimaryKey
-     * @Description: TODO(获取线下活动)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<Activity>
-     * @author: huacai003
-     * @version: 2018-09-11
+     * @Description: TODO(活动签到)
+     */
+    @RequestMapping(value = "/activitySign")
+    @ResponseBody
+    public MessageResponse activitySign(String filePath,String type,String id) throws Exception {
+        WxUser wxUser = getCurWxUser();
+        if(wxUser == null){
+            return  new MessageResponse(ResultCode.FAIL,"没有获取到用户信息");
+        }
+        return this.activityService.activitySign(filePath, type, id ,  wxUser);
+    }
+
+
+    /**
+     * @Description: TODO(根据id查找活动)
      */
     @RequestMapping(value = "/selectActivityByPrimaryKey")
     @ResponseBody
@@ -112,14 +158,7 @@ public class WActivityController extends SocietyBaseController {
 
 
     /**
-     * @throws
-     * @Title:findActivityParticipants
      * @Description: TODO(获取参与人列表)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<Activity>
-     * @author: huacai003
-     * @version: 2018-09-11
      */
     @RequestMapping(value = "/findActivityParticipants")
     @ResponseBody
@@ -131,17 +170,8 @@ public class WActivityController extends SocietyBaseController {
     }
 
     /**
-     * @throws
-     * @Title:find!{bean.name}List
      * @Description: TODO(社会组织信息分页查询)
-     * @param: @param condition
-     * @param: @param page
-     * @param: @return
-     * @param: @throws Exception
-     * @return: PageResult
-     * <SocietyOrgInfoVo>
-     * @author: Arvin
-     * @version: 2018-09-12
+     * 主要是获取党组织
      */
     @RequestMapping(value = "/findSocietyOrgInfoList")
     @ResponseBody
@@ -156,14 +186,7 @@ public class WActivityController extends SocietyBaseController {
     }
 
     /**
-     * @throws
-     * @Title:selectActivityReportByActivityId
-     * @Description: TODO(获取活动报道)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<ActivityReport>
-     * @author: huacai003
-     * @version: 2018-09-13
+     * @Description: TODO(根据活动ID获取活动报道)
      */
     @RequestMapping(value = "/selectActivityReportByActivityId")
     @ResponseBody
@@ -174,14 +197,7 @@ public class WActivityController extends SocietyBaseController {
     }
 
     /**
-     * @throws
-     * @Title:updateActivityReport
      * @Description: TODO(更新活动报道)
-     * @param: @param jsons
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: huacai003
-     * @version: 2018-09-13
      */
     @RequestMapping(value = "/updateActivityReport")
     @ResponseBody
@@ -191,25 +207,9 @@ public class WActivityController extends SocietyBaseController {
         return this.activityReportService.WxUpdateActivityReport(obj, wxUser);
     }
 
-    @RequestMapping(value = "/getUserType")
-    @ResponseBody
-    public ResultResponse getUserType() throws Exception {
-        WxUser wxUser = getCurWxUser();
-        return this.societyOrgInfoService.getUserType(wxUser.getUnionId());
-    }
 
     /**
-     * @throws
-     * @Title:find!{bean.name}List
-     * @Description: TODO(活动报道分页查询)
-     * @param: @param condition
-     * @param: @param page
-     * @param: @return
-     * @param: @throws Exception
-     * @return: PageResult
-     * <ActivityReportVo>
-     * @author: huacai003
-     * @version: 2018-09-13
+     * @Description: TODO(查找审核通过活动报道分页查询)
      */
     @RequestMapping(value = "/findPublicActivityReportList")
     @ResponseBody
@@ -222,14 +222,7 @@ public class WActivityController extends SocietyBaseController {
     }
 
     /**
-     * @throws
-     * @Title:selectActivityReportByPrimaryKey
      * @Description: TODO(获取活动报道)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<ActivityReport>
-     * @author: huacai003
-     * @version: 2018-09-13
      */
     @RequestMapping(value = "/selectActivityReportByPrimaryKey")
     @ResponseBody
@@ -240,14 +233,7 @@ public class WActivityController extends SocietyBaseController {
 
 
     /**
-     * @throws
-     * @Title:selectActivityDetailByPrimaryKey
      * @Description: TODO(获取活动报道)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<ActivityDetail>
-     * @author: huacai003
-     * @version: 2018-09-13
      */
     @RequestMapping(value = "/personalActivitydetails")
     @ResponseBody
@@ -258,14 +244,7 @@ public class WActivityController extends SocietyBaseController {
 
 
     /**
-     * @throws
-     * @Title:selectActivityDetailByPrimaryKey
-     * @Description: TODO(获取活动报道)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<ActivityDetail>
-     * @author: huacai003
-     * @version: 2018-09-13
+     * @Description: TODO(获取活动报名情况)
      */
     @RequestMapping(value = "/getApplyStatus")
     @ResponseBody
@@ -292,4 +271,18 @@ public class WActivityController extends SocietyBaseController {
         map.put("code","4");
         return new ResultResponse(ResultCode.FAIL, "已报名",map);
     }
+
+
+    /**
+     * @Description: TODO(删除线下活动)
+     */
+    @RequestMapping(value = "/delActivity")
+    @ResponseBody
+    public MessageResponse deleteActivityByActivityId(String jsons) throws Exception {
+        JSONObject json = JSON.parseObject(jsons);
+        String id = json.getString("id");
+        return this.activityService.deleteActivityByActivityId(id, this.getCurUserProp());
+    }
+
+
 }

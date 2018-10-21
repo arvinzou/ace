@@ -223,17 +223,4 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         return list;
     }
 
-    @Override
-    public ResultResponse getUserType(String unionId) {
-        SocietyOrgInfo societyOrgInfo= societyOrgInfoDao.selectByPrimaryKey(unionId);
-        String type="0";
-        if(!CommonUtils.isBlank(societyOrgInfo)){
-            type=societyOrgInfo.getOrgType();
-        }
-        Map<String,String> map= new HashMap<String,String>();
-        map.put("type",type);
-        return new ResultResponse(ResultCode.SUCCESS,"获取成功",map);
-    }
-
-
 }

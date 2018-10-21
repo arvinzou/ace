@@ -1,6 +1,7 @@
 package com.huacainfo.ace.society.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -43,7 +44,9 @@ public interface ActivityService {
      * @author: huacai003
      * @version: 2018-09-11
      */
-    MessageResponse insertActivity(Activity obj) throws Exception;
+    MessageResponse insertActivity(Activity obj, WxUser wxUser) throws Exception;
+
+    MessageResponse insertActivity(Activity obj,UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -57,6 +60,8 @@ public interface ActivityService {
      * @version: 2018-09-11
      */
     MessageResponse updateActivity(Activity obj, UserProp userProp) throws Exception;
+
+     MessageResponse activitySign(String filePath,String type,String id, WxUser wxUser) throws Exception;
     MessageResponse softDelete(Activity obj, UserProp userProp) throws Exception;
 
     /**
