@@ -12,6 +12,7 @@ var config = {
     hlsserver,
     appid: 'wx70ba7c5dca85e4da',
     appsecret: '96214b4a01153935995cc027ddf26d75',
+    companyId: '00010001',
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
     uploadUrl: `${server}/portal/www/upload.do`,
@@ -40,7 +41,20 @@ var config = {
     findOrderList: `${server}/society/www/user/findOrderList`,
     findPointsRecord: `${server}/society/www/user/findPointsRecord`,
     findActivitying: `${server}/society/www/activity/findActivitying`,
-    findPublicActivityReportList: `${server}/society/www/activity/findPublicActivityReportList`
+    findPublicActivityReportList: `${server}/society/www/activity/findPublicActivityReportList`,
+        getLiveMsgList: `${server}/live/www/live/getLiveMsgList`,
+      insertLiveRpt: `${server}/live/liveRpt/www/insertLiveRpt`,
+        getLiveRptList: `${server}/live/www/live/getLiveRptList`,
+        insertLive: `${server}/live/live/www/insertLive`,
+        updateLive: `${server}/live/live/www/updateLive`,
+        selectLiveByPrimaryKey: `${server}/live/live/www/selectLiveByPrimaryKey`,
+      deleteLiveByLiveId: `${server}/live/live/www/deleteLiveByLiveId`,
+        findLiveList: `${server}/live/live/www/findLiveList`,
+      updateAuditStatus: `${server}/live/live/www/updateAuditStatus`,
+      insertLiveCmt: `${server}/live/liveCmt/www/insertLiveCmt`,
+      addLike: `${server}/live/www/live/addLike`,
+      getliveListByCorpId: `${server}/live/live/www/getliveListByCorpId`,
+      loadLive: `${server}/live/live/www/loadLive`
 };
 module.exports = config
 

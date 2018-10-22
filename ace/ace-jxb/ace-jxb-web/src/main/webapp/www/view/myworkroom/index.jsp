@@ -46,10 +46,10 @@
 		</div>
 
 		<script id="roomInfoTemp" type="text/template">
-            <div class="col-xs-3 col-sm-3">
+            <div class="col-xs-3 col-sm-3" style="padding-right: 0 !important;">
                 <img class="head" src="\${roombase.logoImgUrl}" />
                 </div>
-                <div class="col-xs-9 col-sm-9">
+                <div class="col-xs-9 col-sm-9" style="padding-left: 0 !important;">
                 <p class="room_title">\${roombase.name}</p>
                 <p class="room_title01">帮助过<span class="num" id="num"></span>人</p>
             </div>

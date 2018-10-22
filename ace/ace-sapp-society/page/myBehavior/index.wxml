@@ -1,0 +1,100 @@
+<view class='index'>
+    <view class="page">
+        <!--顶部导航栏-->
+        <view class="swiper-tab">
+            <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">文明行为</view>
+            <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">不文明行为</view>
+        </view>
+        <!--内容主体-->
+        <swiper class="swiper" current="{{currentTab}}" duration="200" bindchange="swiperChange">
+            <swiper-item>
+                <view class='content'>
+                <block wx:for='{{ behaviorList }}'>
+                    <view class='content-item' bindtap=''>
+                        <view class='content-left'>
+                            <image src='{{item.avatarUrl}}' class='head'></image>
+                        </view>
+                        <view class='content-right'>
+                            <view class='nickname'>
+                                <text class='name'>{{item.nickName}}</text>
+                                <text class='submitDate'>{{item.submitDate}}</text>
+                                <view class='status'>
+                                    <block wx:if='{{item.status == 1}}'>
+                                        暂存
+                                    </block>
+                                    <block wx:elif='{{item.status == 2}}'>
+                                        待审
+                                    </block>
+                                    <block wx:elif='{{item.status == 3}}'>
+                                        通过
+                                    </block>
+                                    <block wx:elif='{{item.status == 4}}'>
+                                        驳回
+                                    </block>
+                                </view>
+                            </view>
+                            <view class='remark'><text>{{ item.compendium }}</text></view>
+                            <view class='attach'>
+                                <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
+                                <block wx-if='{{ fileItem.fileType == 2 }}'>
+                                <video src='{{ fileItem.fileUrl }}' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>
+                                </block>
+                                <block wx-if='{{ fileItem.fileType == 1 }}'>
+                                    <image src='{{ fileItem.fileUrl}}' class='attach-image'></image>
+                                </block>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                </view>
+            </swiper-item>
+
+            <swiper-item>
+                 <view class='content'>
+                <block wx:for='{{ behaviorList }}'>
+                    <view class='content-item'>
+                        <view class='content-left'>
+                            <image src='{{item.avatarUrl}}' class='head'></image>
+                        </view>
+                        <view class='content-right'>
+                            <view class='nickname'>
+                                <text class='name'>{{item.nickName}}</text>
+                                <text class='submitDate'>{{item.submitDate}}</text>
+                                <view class='status'>
+                                    <block wx:if='{{item.status == 1}}'>
+                                        暂存
+                                    </block>
+                                    <block wx:elif='{{item.status == 2}}'>
+                                        待审
+                                    </block>
+                                    <block wx:elif='{{item.status == 3}}'>
+                                        通过
+                                    </block>
+                                    <block wx:elif='{{item.status == 4}}'>
+                                        驳回
+                                    </block>
+                                </view>
+                            </view>
+                            <view class='remark'><text>{{ item.compendium }}</text></view>
+                            <view class='attach'>
+                                <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
+                                <block wx-if='{{ fileItem.fileType == 2 }}'>
+                                <video src='{{ fileItem.fileUrl }}' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>
+                                </block>
+                                <block wx-if='{{ fileItem.fileType == 1 }}'>
+                                    <image src='{{ fileItem.fileUrl}}' class='attach-image'></image>
+                                </block>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class='camera-box' bindtap='releaseBehavior'>
+        <image class='camera' src='../../image/camera.png'></image>
+    </view>
+</view>
