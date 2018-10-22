@@ -28,7 +28,7 @@ Page({
    */
   activityIng: function(limit){
       var that = this;
-      util.request(cfg.findActivitying, {},
+      util.request(cfg.findActivitying, {"start":0, "limit": limit},
           function (ret) {
               if (ret.status == 0) {
                  console.log(ret);
