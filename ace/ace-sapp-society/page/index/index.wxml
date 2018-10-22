@@ -66,10 +66,10 @@
                     <view class='menu-item-image'><image src='../../image/icon_menu_behavior.png'></image></view>
                     <view class='menu-item-title'><text>文明随手拍</text></view>
                 </view>
-                <view class='menu-item'>
+                <navigator class='menu-item' url='../liveHome/index'>
                     <view class='menu-item-image'><image src='../../image/icon_menu_live.png'></image></view>
                     <view class='menu-item-title'><text>秀我直播</text></view>
-                </view>
+                </navigator>
                  <view class='menu-item' bindtap='idea'>
                     <view class='menu-item-image'><image src='../../image/icon_menu_idea.png'></image></view>
                     <view class='menu-item-title'><text>我有点子</text></view>
