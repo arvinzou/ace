@@ -259,5 +259,4 @@ function initAuditForm(id) {
             alert("对不起出错了！");
         }
     });
-
 }
