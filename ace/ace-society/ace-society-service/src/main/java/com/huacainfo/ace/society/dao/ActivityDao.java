@@ -30,6 +30,11 @@ public interface ActivityDao {
                               @Param("limit") int limit,
                               @Param("orderBy") String orderBy);
 
+    List<ActivityVo> findUserList(@Param("condition") ActivityQVo condition,
+                              @Param("start") int start,
+                              @Param("limit") int limit,
+                              @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") ActivityQVo condition);
 
     int isExit(Activity record);

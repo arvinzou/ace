@@ -23,9 +23,28 @@ private List<ActivityDetailVo>  activityDetailVoList;
 
     private int signNum;
 
+    private String adStatus;
+
+    private String arStatus;
 
     private String headimgurl;
     private String orgName;
+
+    public String getAdStatus() {
+        return adStatus;
+    }
+
+    public void setAdStatus(String adStatus) {
+        this.adStatus = adStatus;
+    }
+
+    public String getArStatus() {
+        return arStatus;
+    }
+
+    public void setArStatus(String arStatus) {
+        this.arStatus = arStatus;
+    }
 
     public String getHeadimgurl() {
         return headimgurl;

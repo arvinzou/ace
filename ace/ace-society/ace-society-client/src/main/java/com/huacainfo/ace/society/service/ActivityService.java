@@ -29,9 +29,8 @@ public interface ActivityService {
      * @author: huacai003
      * @version: 2018-09-11
      */
-    PageResult
-            <ActivityVo> findActivityList(ActivityQVo condition,
-                                          int start, int limit, String orderBy) throws Exception;
+    PageResult<ActivityVo> findActivityList(ActivityQVo condition, int start, int limit, String orderBy) throws Exception;
+    PageResult<ActivityVo> findUserActivityList(ActivityQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
