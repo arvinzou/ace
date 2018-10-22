@@ -42,7 +42,7 @@
                 <view><image src='../../image/icon_me_activity.png'></image></view>
                 <view><text>线下活动</text></view>
             </navigator>
-            <navigator class='activity-menu-item'>
+            <navigator class='activity-menu-item' url='../myLive/index'>
                 <view><image src='../../image/icon_me_live.png'></image></view>
                 <view><text>秀我直播</text></view>
             </navigator>
