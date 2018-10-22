@@ -5,15 +5,15 @@
             <view class='activity'>
                 <view class='activity-left'>
                     <image class='activity-image' src='{{item.coverUrl}}'></image>
-                    <block wx:if='{{isEnd == false}}'>
+                    <block wx:if='{{item.isEnd == false}}'>
                     <view class='activity-warn'>
                         <view class='activity-warn-title'><text>距离活动开始</text></view>
                         <view class='activity-warn-time'>
-                            <text class='time-num lft'>{{days}}</text>
+                            <text class='time-num lft'>{{item.days}}</text>
                             <text class='time-title'>天</text>
-                            <text class='time-num'>{{hours}}</text>
+                            <text class='time-num'>{{item.hours}}</text>
                             <text class='time-title'>：</text>
-                            <text class='time-num'>{{minutes}}</text>
+                            <text class='time-num'>{{item.minutes}}</text>
                         </view>
                     </view>
                     </block>
@@ -23,7 +23,7 @@
                         <text class='stage'>第一期</text>
                         <text class='title01'>{{item.title}}</text>
                     </view>
-                    <view class='applytime'><text>报名截止：09-10 10:30</text></view>
+                    <view class='applytime'><text>报名截止：{{item.dendline}}</text></view>
                     <view class='activity-footer'>
                         <view class='sign-number'><text>已报名:{{item.parterNum}}</text></view>
                         <view class='activity-state'><image src='../../image/icon_having.png'></image></view>

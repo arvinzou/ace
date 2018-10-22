@@ -29,8 +29,11 @@ Page({
                     for (var i = 0; i < ret.data.length; i++ ){
                         //剩余报名天数
                         ret.data[i].leastDays = that.diy_time(new Date(), ret.data[i].dendline);
-                        console.log("剩余报名天数==========================" + ret.data[i].leastDays);
                         ret.data[i].dendline = ret.data[i].dendline.substring(0, 16);
+                        ret.data[i].days = that.data.days;
+                        ret.data[i].hours = that.data.hours;
+                        ret.data[i].minutes = that.data.minutes;
+                        ret.data[i].isEnd = that.data.isEnd;
                     }
                     that.setData({ activity: ret.data });
 
@@ -69,7 +72,11 @@ Page({
             hours: hours,
             minutes: minutes
         });
-
+        if (date3 < 0) {
+            that.setData({
+                isEnd: true
+            });
+        }
     },
 
   /**
