@@ -10,12 +10,12 @@
             <swiper-item>
                 <view class='content'>
                 <block wx:for='{{ behaviorList }}'>
-                    <view class='content-item'>
+                    <view class='content-item' bindtap=''>
                         <view class='content-left'>
-                            <image src='../../image/head.jpg' class='head'></image>
+                            <image src='{{item.avatarUrl}}' class='head'></image>
                         </view>
                         <view class='content-right'>
-                            <view class='nickname'><text>不漂亮</text></view>
+                            <view class='nickname'><text>{{item.nickName}}</text></view>
                             <view class='remark'><text>{{ item.compendium }}</text></view>
                             <view class='attach'>
                                 <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
