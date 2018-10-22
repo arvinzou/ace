@@ -38,7 +38,8 @@ Page({
     pusherSizeH: 35,
     paddingtop: 0,
     nameDisplay:false,
-    scoll:'live-top-box-noscoll'
+    scoll:'live-top-box-noscoll',
+    sort:'0'
   },
   onReady: function (res) {
     var that = this;
@@ -302,7 +303,7 @@ Page({
     var that = this;
     that.data.list = [];
     that.setData({ list: [] });
-    util.request(cfg.getLiveRptList, { rid: that.data.id, page: 1 },
+    util.request(cfg.getLiveRptList, { rid: that.data.id, page: 1, sort:that.data.sort },
       function (data) {
         that.setData({ list: data.data });
       }
@@ -443,7 +444,7 @@ Page({
     util.request(cfg.loadLive, { id: id },
       function (data) {
         console.log(data);
-        that.setData({ rtmpurl: data.rtmpUrl, live: data });
+        that.setData({ rtmpurl: data.rtmpUrl, live: data,startDate:data.startTime.substring(0,10) });
         wx.setNavigationBarTitle({
           title: data.name
         })
@@ -458,5 +459,14 @@ Page({
         that.setData({org:data.data});
       }
     );
+  },
+  sort:function(){
+    var that=this;
+    if (that.data.sort=='0'){
+      that.setData({ sort: '1' });
+    }else{
+      that.setData({ sort: '0' });
+    }
+    that.loadRpt();
   }
 });

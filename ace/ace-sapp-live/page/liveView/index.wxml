@@ -78,6 +78,25 @@
 </view>
 
 <view class='chat-box' hidden="{{currentTab!=1}}">
+<view class='order-box wrap'>
+  <view class='order-box-time'>
+  {{startDate}}
+  </view>
+
+   <view class='order-box-button' bindtap='sort'>
+   <view class='order-button'>
+      <image src="../../image/sort.png" class='sort-img'>
+      </image>
+      <text style='flex:3'>{{sort=='1'?'倒序':'顺序'}}</text>
+   </view>
+  </view>
+   <view class='order-box-space'>
+   
+  </view>
+   <view class='order-box-status'>
+   <text class='color-{{live.status}}'>{{live.status=='1'?'预播':''}}{{live.status=='2'?'直播中':''}}{{live.status=='3'?'已结束':''}}</text>
+  </view>
+</view>
   <block wx:for-items="{{list}}" wx:key="*">
     <view class="wrap">
       <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">

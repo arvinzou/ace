@@ -499,3 +499,59 @@ max-height: 80rpx;
   height: 65vh;
   padding: 0rpx;
 }
+.order-box{
+  display: flex;
+  flex-direction: row;
+  padding: 20rpx;
+  font-size: 30rpx;
+}
+.order-box-time{
+  flex:2
+}
+.order-box-button{
+  flex:1
+}
+.order-box-space{
+  flex:3
+}
+.order-box-status{
+  flex:1;
+  float: right;
+ 
+}
+.order-button{
+  width: 130rpx;
+  height: 50rpx;
+  border: 1rpx rgb(224, 221, 221) solid;
+  border-radius: 25rpx;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+.sort-img{
+  padding:10rpx;max-height:30rpx;max-width:30rpx;flex:2
+}
+.color-1{
+  color: blue;
+  border: 1rpx blue solid;
+  border-radius: 15rpx;
+  text-align: center;
+   padding: 5rpx;
+  font-size: 25rpx;
+}
+.color-2{
+  color: red;
+  border: 1rpx red solid;
+  border-radius: 15rpx;
+  text-align: center;
+    padding: 5rpx;
+  font-size: 25rpx;
+}
+.color-3{
+  color: gray;
+  border: 1rpx gray solid;
+  border-radius: 15rpx;
+  text-align: center;
+  padding: 5rpx;
+  font-size: 25rpx;
+}
