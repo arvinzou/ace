@@ -7,7 +7,11 @@ Page({
    */
   data: {
       activity: null,
-      reportData: null
+      reportData: null,
+      days: '00',
+      hours: '00',
+      minutes: '00',
+      isEnd: false
   },
 
   /**
@@ -47,10 +51,36 @@ Page({
           }
       );
   },
-  diy_time: function(time1, time2){
-        time1 = Date.parse(time1);
-        time2 = Date.parse(new Date(time2));
-        return Math.abs(parseInt((time2 - time1) / 1000 / 3600 / 24));
+  diy_time: function(startTime, endTime){
+      var that = this;
+        //time1 = Date.parse(time1);
+        //time2 = Date.parse(new Date(time2));
+        //return Math.abs(parseInt((time2 - time1) / 1000 / 3600 / 24));
+     
+      var date3 = new Date(endTime).getTime() - startTime.getTime();   //时间差的毫秒数      
+      //计算出相差天数
+      var days = Math.floor(date3 / (24 * 3600 * 1000))
+      //计算出小时数
+      var leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数
+      var hours = Math.floor(leave1 / (3600 * 1000))
+      //计算相差分钟数
+      var leave2 = leave1 % (3600 * 1000)        //计算小时数后剩余的毫秒数
+      var minutes = Math.floor(leave2 / (60 * 1000))
+      //计算相差秒数
+      var leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数
+      var seconds = Math.round(leave3 / 1000)
+      console.log(" 相差 " + days + "天 " + hours + "小时 " + minutes + " 分钟" + seconds + " 秒");
+      that.setData({
+          days: days,
+          hours: hours,
+          minutes: minutes
+      });
+      if(date3 < 0){
+          that.setData({
+              isEnd: true
+          });
+      }
+
   },
 
   /**
