@@ -37,7 +37,7 @@
     <sql id="Base_Column_List">
     t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,
     t.volunteerNum,  t.clazz, t.volunteerPoints, t.parterNum, t.parterPoints, t.remark, t.coinconfigId, t.status, t.createUserId,
-    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ad.status as adStatus,ar.status as arStatus,
+    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ad.status as adStatus,ar.status as arStatus
   </sql>
     <sql id="Blob_Column_List">
     t.content
