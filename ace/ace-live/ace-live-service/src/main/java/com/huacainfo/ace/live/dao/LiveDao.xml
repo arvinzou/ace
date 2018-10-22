@@ -189,7 +189,8 @@
         (case  when nop<10000 then concat(nop,"") else concat(round(nop/10000,2),"万") end) numOfPartakeString,
         0 partakeState,
         0 playStreamState,
-        ifnull(mp4Url,rtmpUrl) playStreamUrl,
+        rtmpUrl playStreamUrl,
+        mp4Url,
         0 position,
         remark,
         content,
@@ -306,7 +307,8 @@
         SELECT
         companyAlias,
         companyName,
-        totalNum
+        totalNum,
+        logo
         FROM
         (
         SELECT
@@ -321,7 +323,8 @@
         SELECT
         department_id deptId,
         short_name companyAlias,
-        department_name companyName
+        department_name companyName,
+        logo
         FROM
         portal.department
         WHERE
@@ -344,7 +347,8 @@
         SELECT
         companyAlias,
         companyName,
-        totalNum
+        totalNum,
+        logo
         FROM
         (
         SELECT
@@ -359,7 +363,8 @@
         SELECT
         department_id deptId,
         short_name companyAlias,
-        department_name companyName
+        department_name companyName,
+        logo
         FROM
         portal.department
         WHERE

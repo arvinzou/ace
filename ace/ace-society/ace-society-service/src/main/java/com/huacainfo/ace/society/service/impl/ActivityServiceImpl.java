@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.BisType;
@@ -86,7 +88,7 @@ public class ActivityServiceImpl implements ActivityService {
      * @version: 2018-09-11
      */
     @Override
-    public MessageResponse insertActivity(Activity o) throws Exception {
+    public MessageResponse insertActivity(Activity o, WxUser wxUser) throws Exception {
 
         o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
@@ -106,11 +108,42 @@ public class ActivityServiceImpl implements ActivityService {
         }
         o.setCreateDate(new Date());
         o.setStatus("2");
-        o.setCreateUserName("测试测试");
-        o.setCreateUserId("88888888");
+        o.setInitiatorId(wxUser.getUnionId());
+        o.setCreateUserName(wxUser.getNickName());
+        o.setCreateUserId(wxUser.getUnionId());
         this.activityDao.insertSelective(o);
-//        this.dataBaseLogService.log("添加线下活动", "线下活动", "",
-//                o.getId(), o.getId(), null);
+        this.dataBaseLogService.log("添加线下活动", "线下活动", "",
+                o.getId(), o.getId(), null);
+
+        return new MessageResponse(0, "添加线下活动完成！");
+    }
+
+    @Override
+    public MessageResponse insertActivity(Activity o,UserProp userProp) throws Exception {
+        o.setId(GUIDUtil.getGUID());
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键-GUID不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "活动名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getStartDate())) {
+            return new MessageResponse(1, "开展时间不能为空！");
+        }
+
+
+        int temp = this.activityDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "线下活动名称重复！");
+        }
+        o.setCreateDate(new Date());
+        o.setStatus("2");
+        o.setInitiatorId(userProp.getUserId());
+        o.setCreateUserName(userProp.getName());
+        o.setCreateUserId(userProp.getUserId());
+        this.activityDao.insertSelective(o);
+        this.dataBaseLogService.log("添加线下活动", "线下活动", "",
+                o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加线下活动完成！");
     }
@@ -146,6 +179,65 @@ public class ActivityServiceImpl implements ActivityService {
 
         return new MessageResponse(0, "变更线下活动完成！");
     }
+
+
+    /**
+     * @throws
+     * @Title:updateActivity
+     * @Description: TODO(更新线下活动)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @Override
+    public MessageResponse activitySign(String filePath,String type,String id, WxUser wxUser) throws Exception {
+        if (CommonUtils.isBlank(id)){
+            return new MessageResponse(ResultCode.FAIL, "主键-GUID不能为空");
+        }
+        if(CommonUtils.isBlank(type)){
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        Activity activity=activityDao.selectByPrimaryKey(id);
+        if(activity==null){
+            return new MessageResponse(ResultCode.FAIL, "没有找到相关活动");
+        }
+        if("activityStart".equals(type)){
+            activity.setEndSignImgUrl(filePath);
+        }
+        else if("activityEnd".equals(type)){
+            activity.setEndSignImgUrl(filePath);
+        }
+        else if("selfSign".equals(type)){
+            ActivityDetail activityDetail=activityDetailDao.selectPersonaldetails(id,wxUser.getUnionId());
+            if(activityDetail==null){
+                return new MessageResponse(ResultCode.FAIL, "在报名名单中没有找到报名记录");
+            }
+            activityDetail.setSignImgUrl(filePath);
+            activityDetail.setSignInState("1");
+            activityDetail.setSignInDate(new Date());
+            activityDetail.setLastModifyDate(new Date());
+            activityDetail.setLastModifyUserName(wxUser.getNickName());
+            activityDetail.setLastModifyUserId(wxUser.getUnionId());
+            activityDetailDao.updateByPrimaryKey(activityDetail);
+            this.dataBaseLogService.log("变更线下活动", "线下活动", "",
+                    activityDetail.getId(), activityDetail.getId(), null);
+
+            return new MessageResponse(ResultCode.SUCCESS, "变更线下活动完成！");
+        }else {
+            return new MessageResponse(ResultCode.FAIL, "参数错误");
+        }
+        activity.setLastModifyDate(new Date());
+        activity.setLastModifyUserName(wxUser.getNickName());
+        activity.setLastModifyUserId(wxUser.getUnionId());
+        this.activityDao.updateByPrimaryKeySelective(activity);
+        this.dataBaseLogService.log("变更线下活动", "线下活动", "",
+                activity.getId(), activity.getId(), null);
+        return new MessageResponse(ResultCode.SUCCESS, "变更线下活动完成！");
+    }
+
 
     /**
      * @throws

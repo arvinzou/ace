@@ -1,65 +1,190 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
+        list: [],
+        start: 0,
+        limit: 10,
+        LoadOver: false,
+        Loadingstatus: false,
+        url:'',
+    },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    
-  },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function(options) {
+        let that=this;
+        that.optionUrl();
+        that.initdata();
+    },
+    optionUrl:function(){
+        let that = this;
+        let user = util.getSysUser();
+        if (user.regType == 2) {
+            that.data.url = cfg.findActivitys;
+        } else {
+            that.data.url = cfg.findActivitys;
+        }
+    },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    
-  },
+    // 获取列表
+    initdata: function() {
+        console.log("initData");
+        let that = this;
+        if (that.data.LoadOver) {
+            return;
+        }
+        that.showLoading();
+        util.request(that.data.url, {
+                category: 1,
+                start: that.data.start,
+                limit: that.data.limit
+            },
+            function(data) {
+                console.log(data.data);
+                wx.hideNavigationBarLoading() //完成停止加载
+                wx.stopPullDownRefresh() //停止下拉刷新
+                that.setData({
+                    list: that.data.list.concat(data.data),
+                    Loadingstatus: false,
+                });
+                if (data.data.length < that.data.limit) {
+                    that.setData({
+                        LoadOver: true,
+                    });
+                }
+            }
+        );
+    },
+    // 显示加载
+    showLoading: function () {
+        let that = this;
+        that.setData({
+            Loadingstatus: true,
+        });
+    },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    
-  },
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function() {
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
+    },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function() {
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
+    },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  }
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function() {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function() {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function() {
+        console.log('--------下拉刷新-------')
+        var that = this;
+        that.clearStatus();
+        that.initdata();
+    },
+
+    // 清空状态
+    clearStatus: function () {
+        let that = this;
+        that.data.start = 0;
+        that.setData({
+            LoadOver: false,
+            list: [],
+        })
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function() {
+        var that = this;
+        console.log('-------------上拉加载-------------');
+        that.data.start += that.data.limit;
+        that.initdata();
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function() {
+
+    },
+    activitySign:function(e){
+        let that = this;
+        let typ=e.currentTarget.dataset.type;
+        let id = e.currentTarget.dataset.id;
+        wx.chooseImage({
+            sourceType: ['camera'],
+            success(res) {
+                that.uploadFileFun(res.tempFilePaths[0], typ);
+            }
+        })
+    },
+
+    delActivity: function (e) {
+        let that = this;
+        let id = e.currentTarget.dataset.id;
+        util.request(cfg, {
+            id: id,
+        },
+        function (data) {
+                console.log(data.data);
+                wx.hideNavigationBarLoading(); //完成停止加载
+                wx.stopPullDownRefresh(); //停止下拉刷新
+                that.onPullDownRefresh();
+            }
+        );
+    },
+
+    // 上传文件方法
+    uploadFileFun: function (tempFilePaths, typ,id) {
+        let that = this;
+        wx.uploadFile({
+            url: 'http://zx.huacainfo.com/portal/www/uploadFile.do',
+            filePath: tempFilePaths,
+            name: 'file',
+
+            formData: {
+                collectionName: 'ceshi',
+                id: '111'
+            },
+            success: function (res) {
+                var data = JSON.parse(res.data);
+                var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
+                
+                
+            },
+            fail: function (res) {
+                wx.showModal({
+                    title: '提示',
+                    content: '图爿上传失败',
+                })
+            },
+        })
+    }
 })

@@ -42,6 +42,7 @@ public class AnslysisServiceImpl implements AnalysisService {
      * @param condition 查询条件
      * @return List<Map<String, Object>>
      */
+    @Override
     public Map<String, Object> pointsRank(String unionId, String rankType, Map<String, Object> condition) {
         ReportDao dao = (ReportDao) SpringUtils.getBean("pointsRank");
         //默认查询条件

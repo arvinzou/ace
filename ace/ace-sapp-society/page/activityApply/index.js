@@ -31,13 +31,13 @@ Page({
             endDate: '',
             parterNum: '',
             coverUrl: '',
-            clazz: '',
         }
     },
     onLoad(e) {
         console.log(e);
         let cat = e.category;
         this.initValidate();
+        let name = util.getSysUser().societyOrg.orgName;
         var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
         // 精确到分的处理，将数组的秒去掉
         var lastArray = obj.dateTimeArray.pop();
@@ -47,7 +47,10 @@ Page({
             startDate: obj.dateTime,
             endDate: obj.dateTime,
             dendline: obj.dateTime,
-            category: cat
+            category: cat,
+            form:{
+                name: name
+            }
         });
     },
     changeDateTime(e) {
@@ -68,6 +71,14 @@ Page({
         this.setData({
             dateTimeArray: dateArr
         });
+    },
+    callphone: function (e) {
+        console.log(e);
+        let data = e.currentTarget.dataset
+        let pmobile = data.mobile;
+        wx.makePhoneCall({
+            phoneNumber: pmobile
+        })
     },
 
     nextOne: function() {
@@ -93,12 +104,28 @@ Page({
         })
     },
 
+    colseThis:function(){
+        wx.navigateBack({});
+        return;
+    },
+
 
     formSubmit(e) {
+        let that=this;
         const params = e.detail.value
-        const startDate = this.formatDT(params.startDate);
-        const endDate = this.formatDT(params.endDate);
-        const dendline = this.formatDT(params.dendline ? params.dendline : params.endDate);
+        const startDate = that.formatDT(params.startDate);
+        const endDate = that.formatDT(params.endDate);
+        const dendline = that.formatDT(params.dendline ? params.dendline : params.endDate);
+        const clazz=params.clazz;
+        params.coverUrl = that.data.form.coverUrl;
+        params.category = that.data.category;
+        if (that.data.category==4&&!clazz){
+            wx.showModal({
+                title: '提示',
+                content: '请填写活动期数',
+            });
+            return;
+        }
         if (!(startDate < dendline && dendline <= endDate)) {
             wx.showModal({
                 title: '提示',
@@ -110,9 +137,9 @@ Page({
         params.endDate = endDate;
         params.dendline = dendline;
         console.log(params);
-        if (!this.WxValidate.checkForm(params)) {
-            const error = this.WxValidate.errorList[0]
-            this.showModal(error)
+        if (!that.WxValidate.checkForm(params)) {
+            const error = that.WxValidate.errorList[0]
+            that.showModal(error)
             return false
         }
         util.request(cfg.insertActivity, {
@@ -120,12 +147,12 @@ Page({
             },
             function(data) {
                 if (data.status==0){
-                    this.nextOne();
+                    that.nextOne();
+                    return;
                 }
-                this.showModal({
+                that.showModal({
                     msg: data.errorMessage,
                 })
-
             }
         );
     },
@@ -140,7 +167,7 @@ Page({
             location: {
                 required: true,
                 minlength: 5,
-                maxlength: 34
+                maxlength: 20
             },
             mode: {
                 required: true,
@@ -157,9 +184,12 @@ Page({
                 digits: true
             },
             clazz: {
-                required: true,
+                required: false,
                 digits: true
             },
+            coverUrl:{
+                required: true,
+            }
         }
         const messages = {
             title: {
@@ -187,13 +217,17 @@ Page({
                 digits: '参与人数请填写数字'
             },
             clazz: {
-                required: '请填写活动期次',
-                digits: '活动期次请填写数字'
+                required: '请填写活动期数',
+                digits: '活动期数请填写数字'
+            },
+            coverUrl: {
+                required: '没有上传封面',
             },
         }
         this.WxValidate = new WxValidate(rules, messages)
     },
     formatDT(arr) {
+        console.log(arr);
         return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1]) + '-' + this.FN(arr[2]) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':00';
     },
 
@@ -258,9 +292,7 @@ Page({
                 var data = JSON.parse(res.data);
                 var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
                 that.setData({
-                    form: {
-                        coverUrl: url
-                    }
+                    ["form.coverUrl"]: url
                 })
             },
             fail: function(res) {

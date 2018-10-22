@@ -37,7 +37,7 @@
 						<div class="form">
 							<p>
 								<span class="form_title">捐款人姓名</span>
-								<input id="realName" class="form_text" maxlength="10" type="text" oninput="checkText(this);" placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
+								<input id="realName" class="form_text" maxlength="10" type="text"  placeholder="请输入捐款人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入捐款人姓名'" />
 							</p>
 						</div>
 						<div class="form">

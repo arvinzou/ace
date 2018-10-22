@@ -23,151 +23,51 @@
 <div class="fn-contain">
     <div id="j-liveinfo" class="xcy-liveinfo">
         <script type="text/template">
-            <div class="view">
+            <div class="view" id="j-video-wrap">
+
                 {@if data.type == 1}
 
-                <!-- state：8=图片、32=视屏、其他=直播   -->
                 {@if data.state == 1}
-                {@if data.cover}
                 <img src="\${data.cover}">
-                <div class="count_down">
-                    <div class="count_down_content">
-                        <span class="day_num"></span>天<span class="hour_num"></span>小时<span class="min_num"></span>分<span class="sec_num"></span>秒
-                        <div class="djs">直播倒计时</div>
-                    </div>
-                </div>
+                {@else}
+                <img src="\${data.cover}">
+                {@/if}
                 <div id="j-video-text" class="fn-hide" style="width:5rem;">
 
                     <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">即将播放：</span><p style="color:#fff;font-size:.35rem">\${data.topic}</p></div>
                 </div>
-                {@else}
-                <img src="">
-                {@/if}
-                {@else if data.state == 3}
-                <div id="j-livevideo" class="large-video">
-                    <div class="playtitle">
-                        <div id="j-v-close" class="v-close"><i></i></div>
-                        <div class="text"><span>正在播放：</span>
-                            <p>\${data.topic}</p></div>
-                    </div>
-                    <div id="j-livevideo-main" class="videowrap fn-hide">
-                        <div id="j-video-controls" class="videocontrols fn-hide">
-                            <div class="controls">
-                                <span class="c_play"></span>
-                                <span class="c_fullscren"></span>
-                                <div class="c_timeline fn-hide">
-                                    <span class="playtime">00:00/00:00</span>
-                                    <span class="starttime">00:00</span>
-                                    <span class="endtime">00:00</span>
-                                    <div class="timeline">
-                                        <p class="line overline"><em></em></p>
-                                        <p class="line"></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="j-video-wrap"></div>
-                        <div id="j-video-text" class="fn-hide" style="width:5rem;">
-                            <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">\${data.topic}</p></div>
-                        </div>
-                    </div>
-                    <div id="j-v-loading" class="v-loading fn-hide"><i></i></div>
-                    <div id="j-v-loading-new" class="v-loading-new fn-hide">
-                        <div class="v-logo"></div>
-                        <div class="v-line">
-                            <div class="v-line-s-box">
-                                <div></div>
-                            </div>
-                        </div>
-                        <p>即将播放...</p>
-                    </div>
-                    <div id="j-livevideo-tip" class="playposter">
-                        <div class="v-mask fn-hide"></div>
-                        <span class="playbtn"></span>
-                        <div class="tip fn-hide">
-                            <p>获取不到视频画面，请刷新重试</p>
-                        </div>
-                        {@if data.cover}
-                        <img src="\${data.cover}">
-                        <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff;">
-                            <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">\${data.topic}</p></div>
-                        </div>
-                        {@else}
-                        <img src="">
-                        {@/if}
-                    </div>
-                </div>
-                {@else}
-                <div id="j-livevideo">
-                    <div class="playtitle">
-                        <div id="j-v-close" class="v-close"><i></i></div>
-                        <div class="text"><span>正在播放：</span>
-                            <p>\${data.topic}</p></div>
-                    </div>
-                    <div id="j-livevideo-main" class="videowrap">
-                        <div class="videotypelist fn-hide">
-                            <ul>
-                                <li data-type="hd">高清</li>
-                                <li data-type="bd">标清</li>
-                                <li data-type="sd">低清</li>
-                            </ul>
-                        </div>
-                        <div id="j-video-controls" class="videocontrols fn-hide">
-                            <div class="controls">
-                                <span class="c_play"></span>
-                                <span class="c_fullscren"></span>
-                                <span class="c_videotype fn-hide">标清</span>
-                            </div>
-                        </div>
-                        <div id="j-video-wrap"></div>
-                        <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff">
-                            <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">\${data.topic}</p></div>
-                        </div>
-                    </div>
-                    <div id="j-v-loading" class="v-loading fn-hide"><i></i></div>
-                    <div id="j-v-loading-new" class="v-loading-new fn-hide">
-                        <div class="v-logo"></div>
-                        <div class="v-line">
-                            <div class="v-line-s-box">
-                                <div></div>
-                            </div>
-                        </div>
-                        <p>即将播放...</p>
-                    </div>
-                    <div id="j-livevideo-tip" class="playposter">
-                        <div class="v-mask fn-hide"></div>
-                        <span class="playbtn"></span>
-                        <div class="tip fn-hide">
-                            <p>获取不到直播画面，请刷新重试</p>
-                        </div>
-                        {@if data.cover}
-                        <img src="\${data.cover}">
-                        {@else}
-                        <img src="">
-                        {@/if}
-                    </div>
-                </div>
+
                 {@/if}
 
-                {@else}
-                {@if data.cover}
-                <img src="\${data.cover}">
+                {@if data.type == 2}
+
+
                 {@if data.state == 1}
-                <div class="count_down">
-                    <div class="count_down_content">
-                        <span class="day_num"></span>天<span class="hour_num"></span>小时<span class="min_num"></span>分<span class="sec_num"></span>秒
-                        <div class="djs">直播倒计时</div>
-                    </div>
-                </div>
-                {@/if}
-                <div id="j-video-text" class="fn-hide" style="width:5rem;color:#fff">
-                    <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">正在播放：</span><p style="color:#fff;font-size:.35rem">\${data.topic}</p></div>
-                </div>
+                <img src="\${data.cover}">
+
                 {@else}
-                <img src="">
+
+
+
+                        {@if data.state == 2}
+                         <video poster="\${data.cover}" src="\${data.playStreamUrl}" x-webkit-airplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" controls="controls" style="width: 10rem; height: 5.62rem;"></video>
+                        {@/if}
+                        {@if data.state == 3}
+                        <video poster="\${data.cover}" src="\${data.mp4Url}" x-webkit-airplay="true" webkit-playsinline="true" playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" controls="controls" style="width: 10rem; height: 5.62rem;"></video>
+                        {@/if}
+
+
+
                 {@/if}
+                <div id="j-video-text" class="fn-hide" style="width:5rem;">
+
+                    <div class="text" style="padding:.4rem"><span style="color:#d4d4d4;font-size:.3rem">即将播放：</span><p style="color:#fff;font-size:.35rem">\${data.topic}</p></div>
+                </div>
+
                 {@/if}
+
             </div>
+
             <div class="content">
                 <div class="title">\${data.topic}</div>
                 <div class="org">
@@ -304,11 +204,7 @@
                                         <img src="">
                                         {@/if}
                                     </div>
-                                    <!-- <div class="v-loading-new fn-hide">
-                                      <div class="v-logo"></div>
-                                      <div class="v-line"><div class="v-line-s-box"><div></div></div></div>
-                                      <p>即将播放...</p>
-                                    </div> -->
+
                                     <div class="v-loading fn-hide"><i></i></div>
                                     <video playsinline="true" x-webkit-airplay="true" webkit-playsinline="true"
                                            x5-video-player-type="h5" x5-video-player-fullscreen="true"></video>

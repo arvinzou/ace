@@ -75,7 +75,7 @@
             {{activityInfo.mode}}
         </view>
     </view>
-    <view class='btn_content' hidden='{{btnFlag==2}}'>
+    <view class='btn_content' hidden='{{hiddenBtn}}'>
         <view bindtap="apply" wx:if="{{btnFlag==1||btnFlag==3}}" class='btn btn-clicking'>
             立即报名
         </view>

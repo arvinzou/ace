@@ -23,21 +23,34 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
+        that.ifCreatBtn();
+        that.initOrgData();
+        that.initdata();
+    },
 
-        if (util.is_login()) {
+    ifCreatBtn: function () {
+        let that = this;
+        let sysUserInfo = util.getSysUser();
+        if (!sysUserInfo) {
             util.request(cfg.findUserInfo, {},
-                function(rst) {
-                    console.log(rst);
-                    if (rst.data.type == 1) {
-                        that.setData({
-                            hiddenBtn: false,
-                        });
+                function (rst) {
+                    if (rst.status == 0) {
+                        util.setSysUser(rst.data);
+                        if (rst.data.societyOrg.orgType == 2) {
+                            that.setData({
+                                hiddenBtn: false,
+                            });
+                        }
+                        return;
                     }
                 }
             );
-        };
-        that.initOrgData();
-        that.initdata();
+        }
+        if (sysUserInfo.societyOrg.orgType == 1) {
+            that.setData({
+                hiddenBtn: false,
+            });
+        }
     },
 
     initOrgData: function() {
@@ -130,6 +143,8 @@ Page({
         var that = this;
         that.clearStatus();
         that.initdata();
+        wx.stopPullDownRefresh();
+        return;
     },
 
     /**

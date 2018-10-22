@@ -100,5 +100,4 @@ public interface SocietyOrgInfoService {
     MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
 
     List<SocietyOrgInfoVo> findList(SocietyOrgInfoQVo condition, int start, int limit, String orderBy);
-    ResultResponse getUserType(String unionId);
 }

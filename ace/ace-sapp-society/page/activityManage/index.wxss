@@ -39,7 +39,7 @@
 }
 
 .activityInfo .content text {
-    display: inline-block;
+    display: block;
 }
 
 .activityInfo .content .title {
@@ -51,15 +51,8 @@
     white-space: nowrap;
 }
 
-.activityInfo .content .type {
-    height: 34rpx;
-    padding: 0rpx 14rpx;
-    line-height: 34rpx;
-    border: 2rpx solid rgba(255, 153, 6, 1);
-    border-radius: 4rpx;
-    font-size: 20rpx;
-    font-weight: bold;
-    color: rgba(255, 153, 6, 1);
+.activityInfo .content .tags_b {
+   margin:15rpx 0;
 }
 
 .activityInfo .content .remark {

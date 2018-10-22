@@ -23,13 +23,13 @@
                         <view class="title">发起者
                             <text>*</text>
                         </view>
-                        <input onlyRead value='{{form.name}}' type='text' class='input-value' />
+                        <input disabled="true" value='{{form.name}}' type='text' class='input-value' />
                     </view>
                     <view wx:if='{{category==4}}' class="input-style bottom-line">
                         <view class="title">活动期次
                             <text>*</text>
                         </view>
-                        <input onlyRead name='clazz' value='{{form.clazz}}' type='number' class='input-value' />
+                        <input  name='clazz' value='{{form.clazz}}' type='number' class='input-value' />
                     </view>
                     <view class="input-style bottom-line">
                         <view class="title">活动地点
@@ -124,13 +124,14 @@
     </view>
     <view class='reuslt {{stepNum==3?"":"hidden"}}'>
         <view class='massage'>
-            <image mode='widthFix' src='../../image/icon_success.png'></image>
+            <view class='image'>
+                <image mode='widthFix' src='../../image/icon_success.png'></image>
+            </view>
             <text class='fontStyle1'>发布成功</text>
-            <text class='fontStyle2'>活动由芙蓉街道统一管理</text>
-            <text class='fontStyle3'>待审核通过后活动进入平台</text>
-            <text class='fontStyle3'>联系电话：0736-2323252</text>
+            <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>
+            <view class='fontStyle2'><text>联系电话：</text><text bindtap="callphone" data-mobile='0736-2323252' class="phone">0736-2323252</text></view>
         </view>
-        <view class='btn btn-clicking'>
+        <view bindtap='colseThis' class='btn btn-bkClick'>
             关闭
         </view>
     </view>

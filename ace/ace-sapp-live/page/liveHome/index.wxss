@@ -1,194 +1,59 @@
 @import "../common/index.wxss";
 @import "../common/lib/weui.wxss";
-.btn-circle{  
-  position: fixed;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center; 
-  width: 160rpx;  
-  height:160rpx;  
-  border-radius: 50%;   
-}
 
-.btn-add{
-  right: 40rpx;
-  bottom: 30rpx; 
-  position: fixed;  
-  display: flex;  
-  align-items: center;  
-  justify-content: center; 
-  border-radius: 50%; 
-}
-.btn-img {
-  width: 120rpx;
-  height: 120rpx;
-}
 .live-list{
-  position: relative;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
 }
 .live-item{
-    position: relative;
-    margin-bottom: 10rpx;
+    margin-bottom: 15rpx;
     overflow: hidden;
-   
+    background: #fff;
+    border-radius: 8rpx;
+    padding: 30rpx;
+    display: flex;
+    flex-direction: row;
 }
 
 .coverImg{
  width: 100%;
- height: 220rpx;
- border-radius: 10rpx;
+ height: 180rpx;
+ border-radius: 8rpx;
 }
-
+.list-item-cover{
+  flex:4;
+}
+.list-item-text{
+  flex:6;
+  display: flex;
+  flex-direction: column;
+  height: 180rpx;
+  padding-left:25rpx;
+}
 .live-title{
-    padding: 20rpx;
+    flex:4;
     font-size: 30rpx;
 }
 
-.touch-item {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  overflow: hidden;
-  background: #fff;
-  margin-bottom: 20rpx;
-}
-.content {
-  width: 100%;
-  margin-right:0;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
-  -webkit-transform: translateX(150rpx);
-  transform: translateX(150rpx);
-  margin-left: -150rpx;
-  padding: 10rpx;
-}
-.opt {
-  width: 150rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  -webkit-transform: translateX(150rpx);
-  transform: translateX(150rpx);
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
- background: #1a9fff;
-}
-.touch-move-active .content,
-.touch-move-active .opt {
-  -webkit-transform: translateX(0);
-  transform: translateX(0);
-}
-.opt-btn{
-  width:  150rpx;
-  height: 33.33%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0rpx;
-
-}
-.btn-del{
-  color:#fff;
-}
-.btn-preview{
-  color:#fff;
-}
-.btn-edit{
-  color:#fff;
+.live-item-bar{
+  flex:1;
 }
 
-.btn-submit{
- color:#fff;
+.time-box{
+  padding: 5rpx;
+  font-size: 25rpx;
+ float:right;
 }
-
-.btn-rpt{
-  color:#fff;
-}
-.audioContainer {
-	width: 100%;
-	height: 100%;
-}
-.audioContent {
-	width: 100%;
-  height: 600rpx;
-}
-
-.audio {
-	width: 99%;
-	height: 160rpx;
-	margin: 0 auto;
-	position: relative;
-	/*border:1px dashed #798092; */
-}
-
-
-.audioType {
-	text-align: center;
-	width: 60rpx;
-	height: 30rpx;
-	line-height: 30rpx;
-	background-color: #15BC83;
-	color: #FFFFFF;
-	position: absolute;
-	right: 10%;
-	bottom: 5%;
-  font-size: 20rpx;
-}
-.audioTitle {
-	width: 100%;
-	color: #1C2843;
-  font-size: 30rpx;
-	font-weight: bold;
-	margin-top: 11.25rpx;
-	margin-bottom: 7.5rpx;
-}
-.audioTitle p{
-	text-overflow : ellipsis; 
-  white-space : nowrap; 
-  overflow : hidden; 
-
-}
-.audioPrice {
-	width: 100%;
-	height: 45rpx;
-}
-
-.free {
-	font-family: "PingFang-SC-Medium";
-	font-size: 25rpx;
-	color: #15BC83;
-	font-weight: bold;
-	text-align: left;
-	float: left;
-}
-
-.pay {
-	font-family: "PingFang-SC-Medium";
-	font-size: 25rpx;
-	color: #FF7C12;
-	font-weight: bold;
-	text-align: left;
-	float: left;
-}
-
-.playsNum {
-	font-family: "PingFang-SC-Medium";
-	font-size: 20rpx;
-	color: #798092;
-	text-align: right;
-	float: right;
+.nop-pop{
+  float: right;
+  font-size: 25rpx;
 }
 .status-box {
-	position: absolute;
-  left: 15rpx;
-	bottom:30rpx;
 	border-radius: 5rpx;
 	background-color: #1a9fff;
   width: 110rpx;
   padding: 5rpx;
+  float: left;
 }
 .status-icon-text{
   float: left;
@@ -212,45 +77,4 @@ background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNv
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzIwcHgiIGhlaWdodD0iMjAwcHgiIHZpZXdCb3g9IjAgMCAzMjAgMjAwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0MS4yICgzNTM5NykgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+dmlkZW88L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0idmlkZW8iIGZpbGw9IiNGRkZGRkYiPgogICAgICAgICAgICA8cGF0aCBkPSJNMzA4LjksMTYuNSBDMzAyLjIsMTIuMyAyOTMuMywxMi4zIDI4NC41LDE2LjUgTDIyMC4xLDQ3LjYgTDIyMC4xLDM0LjggQzIyMC4xLDE1LjcgMjA0LjUsMC4xIDE4NS40LDAuMSBMMzQuNywwLjEgQzE1LjYsMCAwLDEzLjQgMCwyOS45IEwwLDE2NS4zIEMwLDE4NSA5LDIwMCAyMC45LDIwMCBMMzQuOCwyMDAgTDc4LjMsMjAwIEwxODUuNCwyMDAgQzIwNC41LDIwMCAyMjAuMSwxODQuNCAyMjAuMSwxNjUuMyBMMjIwLjEsMTUyLjUgTDI4NC42LDE4My45IEMyODksMTg2IDI5My40LDE4Ny4xIDI5Ny42LDE4Ny4xIEMzMDEuNywxODcuMSAzMDUuNiwxODYuMSAzMDguOSwxODQgQzMxNS42LDE3OS44IDMxOS41LDE3MS44IDMxOS41LDE2Mi4xIEwzMTkuNSwzOC40IEMzMTkuNSwyOC43IDMxNS42LDIwLjcgMzA4LjksMTYuNSBaIE0yMDYuMiwxNjUuMiBDMjA2LjIsMTc2LjcgMTk2LjksMTg2IDE4NS40LDE4NiBMNzguMywxODYgTDM0LjgsMTg2IEwyMC45LDE4NiBDMTkuNSwxODYgMTMuOSwxNzkuMyAxMy45LDE2NS4yIEwxMy45LDI5LjkgQzEzLjksMjEuMyAyMy40LDE0IDM0LjcsMTQgTDE4NS4zLDE0IEMxOTYuOCwxNCAyMDYuMSwyMy4zIDIwNi4xLDM0LjggTDIwNi4xLDE2NS4yIEwyMDYuMiwxNjUuMiBaIE0zMDUuNiwxNjIgQzMwNS42LDE2Ni44IDMwNC4xLDE3MC41IDMwMS41LDE3Mi4yIEMyOTguOSwxNzMuOCAyOTQuOSwxNzMuNSAyOTAuNiwxNzEuNCBMMjIwLjEsMTM3IEwyMjAuMSw2MyBMMjkwLjYsMjkgQzI5NSwyNi45IDI5OSwyNi42IDMwMS42LDI4LjMgQzMwNC4yLDI5LjkgMzA1LjcsMzMuNiAzMDUuNywzOC41IEwzMDUuNywxNjIgTDMwNS42LDE2MiBaIiBpZD0iU2hhcGUiPjwvcGF0aD4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==)
-}
-.bg-danger{
-  background: red;
-}
-.bg-info{
-  background:#1a9fff;
-}
-.bg-success{
-  background:green;
-}
-.list-item-cover{
-  width: 50%;
-  float: left;
-  position: relative;
-}
-.list-item-text{
-  width: 50%;
-  float: right;
-}
-.nop-pop{
-  position: absolute;
-    left: 52%;
-	bottom:25rpx;
-font-size: 25rpx;
-  padding: 5rpx;
-}
-.audit-status{
-  position: absolute;
-  right: 15rpx;
-	bottom:20rpx;
-  padding: 5rpx;
-  color: #fff;
-  border-radius: 5rpx;
-  font-size: 25rpx;
-}
-.time-box{
-  position: absolute;
-  left: 52%;
-	bottom:20rpx;
-  padding: 5rpx;
-  font-size: 25rpx;
 }

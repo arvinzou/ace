@@ -99,7 +99,7 @@ var _colModel = function() {
 			editable: true,
 			edittype: "combotree",
 			dataoptions: {
-				url: contextPath + '/system/selectDepartmentTreeList.do?id=01',
+				url: contextPath + '/system/selectDepartmentTreeList.do',
 				animate: true,
 				lines: false
 			},

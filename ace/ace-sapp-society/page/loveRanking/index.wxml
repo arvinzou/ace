@@ -1,33 +1,28 @@
 <view class='index'>
     <view class='rank_box'>
-        <view class='rank_item01 active' bindtap='changeType'>月度排行</view>
-        <view class='rank_item02' bindtap='changeType'>季度排行</view>
-        <view class='rank_item03' bindtap='changeType'>年度排行</view>
+        <view class='rank_item01 {{currentTab == "month"?"active": ""}}' data-value='month' bindtap='changeType'>月度排行</view>
+        <view class='rank_item02 {{currentTab == "season"?"active": ""}}' data-value='season' bindtap='changeType'>季度排行</view>
+        <view class='rank_item03 {{currentTab == "year"?"active": ""}}' data-value='year' bindtap='changeType'>年度排行</view>
     </view>
     <view class='rank_list'>
+      <block wx:for='{{rankList}}'>
         <view class='rank_item' bindtap='detail'>
-            <image class='top-image' src='../../image/icon_top01.png'></image>
-            <view class='head'></view>
-            <text class='name'>武大傻</text>
-            <text class='number'>62500</text>
+            <block wx:if='{{index == 0}}'>
+                <image class='top-image' src='../../image/icon_top01.png'></image>
+            </block>
+            <block wx:elif='{{index == 1}}'>
+                <image class='top-image' src='../../image/icon_top02.png'></image>
+            </block>
+            <block wx:elif='{{index == 2}}'>
+                <image class='top-image' src='../../image/icon_top03.png'></image>
+            </block>
+            <block wx:else>
+                <text class='top-text'>{{ index+1 }}</text>
+            </block>
+            <view class='head'><image src='{{item.avatarUrl}}'></image></view>
+            <text class='name'>{{item.nickName}}</text>
+            <text class='number'>{{item.accPoints}}</text>
         </view>
-        <view class='rank_item' bindtap='detail'>
-            <image class='top-image' src='../../image/icon_top02.png'></image>
-            <view class='head'></view>
-            <text class='name'>武大傻01</text>
-            <text class='number'>42500</text>
-        </view>
-        <view class='rank_item' bindtap='detail'>
-            <image class='top-image' src='../../image/icon_top03.png'></image>
-            <view class='head'></view>
-            <text class='name'>武大傻03</text>
-            <text class='number'>32500</text>
-        </view>
-        <view class='rank_item' bindtap='detail'>
-            <text class='top-text'>4</text>
-            <view class='head'></view>
-            <text class='name'>武大傻04</text>
-            <text class='number'>32500</text>
-        </view>
+        </block>
     </view>
 </view>
