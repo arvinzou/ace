@@ -35,6 +35,16 @@ public class ActivityReport extends BaseModel {
 
     private String content;
 
+    private  String top;
+
+    public String getTop() {
+        return top;
+    }
+
+    public void setTop(String top) {
+        this.top = top;
+    }
+
     public String getCoverUrl() {
         return coverUrl;
     }

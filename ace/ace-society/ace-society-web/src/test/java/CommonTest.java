@@ -1,4 +1,6 @@
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.RemindDateUtils;
 import org.junit.Test;
 
 /**
@@ -11,12 +13,15 @@ public class CommonTest {
 
     @Test
     public void test() {
+        String nowTimeStr = DateUtil.getNow();
+        String yearStr = nowTimeStr.substring(0, 4);
+        String monthStr = nowTimeStr.substring(0, 7);
 
+        System.out.println(nowTimeStr + "|" + yearStr + "|" + monthStr);
 
-        //        System.out.println(StringUtil.genOrderNo18Str(GUIDUtil.getGUID()));
-
-
-        generatorGUID(2);
+        System.out.println(DateUtil.toStr(RemindDateUtils.getCurrentSeasonStartTime(), DateUtil.DEFAULT_DATE_TIME_REGEX));
+        System.out.println(DateUtil.toStr(RemindDateUtils.getCurrentSeasonEndTime(), DateUtil.DEFAULT_DATE_TIME_REGEX));
+//        generatorGUID(2);
     }
 
 

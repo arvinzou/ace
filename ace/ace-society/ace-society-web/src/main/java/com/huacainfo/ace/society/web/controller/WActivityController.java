@@ -213,9 +213,7 @@ public class WActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/findPublicActivityReportList")
     @ResponseBody
-    public ResultResponse findPublicActivityReportList(String category, PageParamNoChangeSord page) throws Exception {
-        ActivityReportQVo activityReportQVo = new ActivityReportQVo();
-        activityReportQVo.setCategory(category);
+    public ResultResponse findPublicActivityReportList( ActivityReportQVo activityReportQVo, PageParamNoChangeSord page) throws Exception {
         activityReportQVo.setStatus("3");
         List<ActivityReportVo> rst = this.activityReportService.findActivityReportList(activityReportQVo, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取数据", rst);
