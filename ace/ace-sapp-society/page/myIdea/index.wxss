@@ -19,7 +19,7 @@
 }
 .ideaItem{
     width: 100%;
-    height: 233rpx;
+    height: 283rpx;
     background: #FFFFFF;
     margin-top: 30rpx;
 }
@@ -103,4 +103,12 @@
     font-size: 36rpx;
     font-weight: bold;
     margin-top: 15rpx;
+}
+.status{
+    width: 100%;
+    height: 50rpx;
+    line-height: 50rpx;
+    font-size: 24rpx;
+    padding-left: 30rpx;
+    color: #FFAB32;
 }
