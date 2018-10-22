@@ -88,6 +88,7 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
     @Override
     public MessageResponse insertActivityDetail(ActivityDetail o, UserProp userProp) throws Exception {
 
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键-GUID不能为空！");
         }
@@ -97,17 +98,14 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
         if (CommonUtils.isBlank(o.getUserId())) {
             return new MessageResponse(1, "用户编码不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdentity())) {
-            return new MessageResponse(1, "参与身份 1 - 志愿者 2 - 参与者不能为空！");
-        }
-
-
+//        if (CommonUtils.isBlank(o.getIdentity())) {
+//            return new MessageResponse(1, "参与身份 1 - 志愿者 2 - 参与者不能为空！");
+//        }
         int temp = this.activityDetailDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "活动报道名称重复！");
         }
-
-        o.setId(GUIDUtil.getGUID());
+        o.setSignInState("0");
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -116,6 +114,44 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
         this.dataBaseLogService.log("添加活动报道", "活动报道", "",
                 o.getId(), o.getId(), userProp);
 
+        return new MessageResponse(0, "添加活动报道完成！");
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertActivityDetail
+     * @Description: TODO(添加活动报道)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @Override
+    public MessageResponse insertActivityDetailW(ActivityDetail o, WxUser wxUser) throws Exception {
+
+        o.setId(GUIDUtil.getGUID());
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键-GUID不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getActivityId())) {
+            return new MessageResponse(1, "活动编码不能为空！");
+        }
+//        if (CommonUtils.isBlank(o.getIdentity())) {
+//            return new MessageResponse(1, "参与身份 1 - 志愿者 2 - 参与者不能为空！");
+//        }
+        int temp = this.activityDetailDao.isExit(o);
+        o.setUserId(wxUser.getUnionId());
+        o.setSignInState("0");
+        o.setCreateDate(new Date());
+        o.setStatus("1");
+        o.setCreateUserName(wxUser.getNickName());
+        o.setCreateUserId(wxUser.getUnionId());
+        this.activityDetailDao.insertSelective(o);
+        this.dataBaseLogService.log("添加活动报道", "活动报道", "",
+                o.getId(), o.getId(), null);
         return new MessageResponse(0, "添加活动报道完成！");
     }
 

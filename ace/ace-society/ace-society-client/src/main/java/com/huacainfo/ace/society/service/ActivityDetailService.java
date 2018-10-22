@@ -46,6 +46,7 @@ public interface ActivityDetailService {
         * @version: 2018-09-13
         */
         MessageResponse insertActivityDetail(ActivityDetail obj,UserProp userProp) throws Exception;
+        MessageResponse insertActivityDetailW(ActivityDetail obj,WxUser wxUser) throws Exception;
 
         /**
         *

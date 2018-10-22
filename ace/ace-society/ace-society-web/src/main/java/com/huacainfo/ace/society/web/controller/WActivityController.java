@@ -93,7 +93,7 @@ public class WActivityController extends SocietyBaseController {
             return  new ResultResponse(ResultCode.FAIL,"没有获取到用户信息");
         }
         condition.setUserId(wxUser.getUnionId());
-        List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
+        List<ActivityVo> rst = this.activityService.findUserActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
     }
 
@@ -280,6 +280,20 @@ public class WActivityController extends SocietyBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.activityService.deleteActivityByActivityId(id, this.getCurUserProp());
+    }
+
+    /**
+     * @Description: TODO(活动报名)
+     */
+    @RequestMapping(value = "/insertActivityDetail")
+    @ResponseBody
+    public MessageResponse insertActivityDetail(String jsons) throws Exception {
+        WxUser wxUser = getCurWxUser();
+        if(wxUser == null){
+            return  new MessageResponse(ResultCode.FAIL,"没有获取到用户信息");
+        }
+        ActivityDetail obj = JSON.parseObject(jsons, ActivityDetail.class);
+        return this.activityDetailService.insertActivityDetailW(obj, wxUser);
     }
 
 

@@ -78,6 +78,32 @@ public class ActivityServiceImpl implements ActivityService {
 
     /**
      * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(线下活动分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult
+     * <ActivityVo>
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @Override
+    public PageResult<ActivityVo> findUserActivityList(ActivityQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<ActivityVo> rst = new PageResult<>();
+        List<ActivityVo> list = this.activityDao.findUserList(condition, start, limit, orderBy);
+        rst.setRows(list);
+        if (start <= 1) {
+            int allRows = this.activityDao.findCount(condition);
+            rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+    /**
+     * @throws
      * @Title:insertActivity
      * @Description: TODO(添加线下活动)
      * @param: @param o
