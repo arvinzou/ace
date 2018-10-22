@@ -51,7 +51,9 @@ public interface BisType {
      * ================
      * 爱心币流水变动业务类型
      */
-
+    /**
+     * 订单消费
+     */
     String ORDER_CONSUME = "ORDER_CONSUME";
 
 }
