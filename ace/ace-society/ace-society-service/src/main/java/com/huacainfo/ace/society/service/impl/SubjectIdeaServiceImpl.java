@@ -236,7 +236,7 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         //更改审核记录
         MessageResponse auditRs =
                 auditRecordService.audit(BisType.SUBJECT_IDEA,
-                        obj.getId(), obj.getId(), rst, remark, userProp);
+                        obj.getId(), obj.getUserId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }

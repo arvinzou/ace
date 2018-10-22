@@ -7,11 +7,14 @@ import java.util.List;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.pushmsg.CommonUtil;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.ActivityDetailDao;
 import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.model.SubjectIdea;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.vo.ActivityDetailQVo;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
@@ -138,6 +141,7 @@ public class ActivityServiceImpl implements ActivityService {
         o.setCreateUserName(wxUser.getNickName());
         o.setCreateUserId(wxUser.getUnionId());
         this.activityDao.insertSelective(o);
+        auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, o.getId(), wxUser.getUnionId());
         this.dataBaseLogService.log("添加线下活动", "线下活动", "",
                 o.getId(), o.getId(), null);
 
@@ -362,7 +366,7 @@ public class ActivityServiceImpl implements ActivityService {
         if(null==activity){
             return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
         }
-        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id, id, rst, remark, userProp);
+        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id,activity.getInitiatorId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
@@ -378,6 +382,37 @@ public class ActivityServiceImpl implements ActivityService {
         return new MessageResponse(0, "线下活动审核完成！");
     }
 
+//    /**
+//     * “我的点子” 送审
+//     *
+//     * @param ideaId  点子ID
+//     * @param unionId
+//     * @return ResultResponse
+//     * @throws Exception
+//     */
+//    @Override
+//    public ResultResponse sendAudit(String id, String unionId) {
+////        Activity activity=activityDao.selectByPrimaryKey(id);
+////        if (null == activity) {
+////            return new ResultResponse(ResultCode.FAIL, "“点子”数据丢失");
+////        }
+//        //
+////        if (AuditState.SUBMIT_AUDIT.equals(idea.getStatus())) {
+////            return new ResultResponse(ResultCode.FAIL, "请勿重复送审");
+////        }
+//        //提交审核
+//        auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, id, unionId);
+////        //更新单据状态
+////        SubjectIdea record = new SubjectIdea();
+////        record.setId(id);
+////        record.setStatus(AuditState.SUBMIT_AUDIT);
+////        record.setLastModifyDate(DateUtil.getNowDate());
+////        record.setLastModifyUserId("system");
+////        record.setLastModifyUserId("8888");
+////        subjectIdeaDao.updateStatus(record);
+//
+//        return new ResultResponse(ResultCode.SUCCESS, "送审成功");
+//    }
 
 
 }
