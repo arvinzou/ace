@@ -38,7 +38,7 @@ body{
 	font-size: 0.426666rem;
 	font-weight: bold;
 	padding-top: 0.41rem;
-	padding-bottom: 0.386666rem;
+	/*padding-bottom: 0.386666rem;*/
 }
 .room_title01{
 	color: #5C6681;
