@@ -284,10 +284,10 @@
         where t.rid=#{rid} and t.status='2'
         <choose>
             <when test='sort!=null and sort=="0"'>
-                order by t.sort,t.createTime desc,c.createTime
+                order by t.createTime desc,c.createTime
             </when>
             <otherwise>
-                order by t.sort,t.createTime,c.createTime
+                order by t.createTime,c.createTime
             </otherwise>
         </choose>
         <!--

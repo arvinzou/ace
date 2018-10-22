@@ -47,14 +47,15 @@
   </view>
 </view>
 <view class='navbar-content'  hidden="{{currentTab!=2}}">
-<scroll-view scroll-y scroll-into-view="{{scrollintoview}}" style='height:49vh'>
+<scroll-view scroll-y scroll-into-view="{{scrollintoview}}" style='height:50vh'>
   <block wx:for-items="{{message}}" wx:key="*">
     <view class='chat-content' id="{{item.id}}" style='padding:10rpx'>
       <image src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
       <view class='chat-right'>
         <view class='chat-nickname'>
-          {{item.header.wxuser.nickname}} {{item.createTime}}
+          <view style='float:left'>{{item.header.wxuser.nickname}}</view> <view style='float:right'>{{item.createTime}}</view>
         </view>
+        
         <text class='chat-text' wx:if="{{item.content.length<=20}}">{{item.content}}</text>
         <text class='chat-text block' wx:if="{{item.content.length>20}}">{{item.content}}</text>
       </view>
@@ -63,10 +64,10 @@
 </scroll-view>
  <view class='chat-toolbar'>
     <view class='chat-message-box'>
-      <view style='flex:1'>
+      <view style='flex:2'>
         <image src='../../image/icon_关闭弹幕.png' class='chat-icon'></image>
       </view>
-      <view style='flex:9'>
+      <view style='flex:11'>
         <input type="text" placeholder="说点啥唄" class='chat-input' bindinput="contentInput" value="{{contentText}}" />
       </view>
       <view style='flex:2'>
@@ -78,7 +79,7 @@
 </view>
 
 <view class='chat-box' hidden="{{currentTab!=1}}">
-<view class='order-box wrap'>
+<view class='order-box'>
   <view class='order-box-time'>
   {{startDate}}
   </view>
