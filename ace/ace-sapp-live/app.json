@@ -1,8 +1,9 @@
 {
   "pages": [
+    "page/myLive/index",
     "page/liveHome/index",
     "page/liveView/index",
-    "page/myLive/index",
+    
     "page/liveList/index",
     "page/live/index",
     "page/rpt/index",

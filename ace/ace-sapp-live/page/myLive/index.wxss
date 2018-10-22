@@ -60,7 +60,7 @@
   -webkit-transform: translateX(150rpx);
   transform: translateX(150rpx);
   margin-left: -150rpx;
-  padding: 10rpx;
+  padding: 30rpx;
 }
 .opt {
   width: 150rpx;
