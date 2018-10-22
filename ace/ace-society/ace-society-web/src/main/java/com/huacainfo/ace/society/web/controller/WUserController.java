@@ -8,8 +8,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.society.service.AnalysisService;
 import com.huacainfo.ace.society.service.OrderInfoService;
+import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.vo.OrderInfoQVo;
 import com.huacainfo.ace.society.vo.OrderInfoVo;
+import com.huacainfo.ace.society.vo.PointsRecordQVo;
+import com.huacainfo.ace.society.vo.PointsRecordVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +32,8 @@ public class WUserController extends SocietyBaseController {
     private AnalysisService analysisService;
     @Autowired
     private OrderInfoService orderInfoService;
+    @Autowired
+    private PointsRecordService pointsRecordService;
 
 
     /**
@@ -72,6 +77,28 @@ public class WUserController extends SocietyBaseController {
 
         PageResult<OrderInfoVo> rst =
                 orderInfoService.findOrderInfoList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
+    }
+
+    /***
+     * 查询 积分变动流水
+     * @param condition 查询条件
+     * @param page 分页工具
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/findPointsRecord")
+    public ResultResponse findPointsRecord(PointsRecordQVo condition, PageParamNoChangeSord page) throws Exception {
+        WxUser wxUser = getCurWxUser();//小程序用户
+        if (null == wxUser && StringUtil.isEmpty(condition.getUserId())) {
+            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
+        }
+
+        PageResult<PointsRecordVo> rst = pointsRecordService.findPointsRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
