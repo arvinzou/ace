@@ -245,7 +245,10 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
         //获取历史二维码资料
         MemberQrcode qrcode = memberQrcodeDao.findByStudioId(studioId);
         if (null != qrcode) {
-            if (FORCE_REFRESH.equals(refresh)
+            //临时二维码是否过期
+            boolean isPastDue = checkIsPastDue(qrcode);
+            if (isPastDue
+                    || FORCE_REFRESH.equals(refresh)
                     || StringUtil.isEmpty(qrcode.getQrcodeUrl())) {
                 //生成新微信二维码
                 MemberQrcode newQRCode = getQRCodeURL(studio, qrcode);
@@ -276,6 +279,20 @@ public class MemberQrcodeServiceImpl implements MemberQrcodeService {
         rtnMap.put("qrcode", qrcode);
         rtnMap.put("studio", studio);
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rtnMap);
+    }
+
+    /**
+     * 检查二维码是否过期
+     *
+     * @param qrcode
+     * @return
+     */
+    private boolean checkIsPastDue(MemberQrcode qrcode) {
+        long between = DateUtil.getBetween(DateUtil.getNow(), qrcode.getExpireDate(), "Seconds");
+        if (between >= 0) {
+            return true;
+        }
+        return false;
     }
 
     private MemberQrcode getQRCodeURL(StudioVo studioVo, MemberQrcode orgCfg) throws Exception {

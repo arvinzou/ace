@@ -13,7 +13,9 @@ public class CourseAudit implements Serializable {
     private String auditor;
 
     private String statement;
-
+    /**
+     * 审核结果 0-待审核 1-审核通过 2-审核不通过
+     */
     private String rst;
 
     private Date createDate;
