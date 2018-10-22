@@ -297,4 +297,8 @@
         t.deptId = #{deptId,jdbcType=VARCHAR}
     </select>
 
+    <delete id="deleteByDeptId" parameterType="java.lang.String">
+        delete from vip_publicity
+        where deptId = #{deptId,jdbcType=VARCHAR}
+    </delete>
 </mapper>

@@ -157,4 +157,6 @@ public interface VipDepartmentService {
      */
     MessageResponse audit(String deptId, String nodeId,
                           String auditResult, String auditOpinion, UserProp curUserProp);
+
+    MessageResponse repealPublicity(String deptId, UserProp curUserProp);
 }

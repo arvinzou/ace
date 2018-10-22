@@ -324,8 +324,8 @@
         <if test='condition.status!=null and condition.status!=""'>
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
-        <if test='condition.departmentId!=null and condition.departmentId!=""'>
-            and t.department_id = #{condition.departmentId,jdbcType=VARCHAR}
+        <if test='condition.type!=null and condition.type!=""'>
+            and t.type = #{condition.type,jdbcType=VARCHAR}
         </if>
         <if test='condition.areaCode!=null and condition.areaCode!=""'>
             and t.area_code like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
@@ -384,7 +384,7 @@
         t.serviceTimeEnd, t.qrcode, t.serviceWay, t.logo, t.watermark1, t.watermark2
 		from portal.department t
 		left join portal.province a on t.area_code = a.code
-        LEFT JOIN portal.department d on t.parent_department_id = t.department_id
+        LEFT JOIN portal.department d on t.parent_department_id = d.department_id
 		where t.department_id = #{departmentId,jdbcType=VARCHAR}
 	</select>
 
@@ -394,7 +394,6 @@
 		where  status = '1'
 		and department_name = #{departmentName,jdbcType=VARCHAR}
 		and syid = #{syid}
-		and parent_department_id = #{parentDepartmentId,jdbcType=VARCHAR}
 	</select>
 
     <select id="isExitEmail" resultType="int">
