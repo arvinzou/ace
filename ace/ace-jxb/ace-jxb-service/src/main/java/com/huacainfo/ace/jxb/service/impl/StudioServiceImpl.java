@@ -80,7 +80,7 @@ public class StudioServiceImpl implements StudioService {
     }
 
     @Override
-    public PageResult<StudioVo> findTopStudioList(StudioQVo condition, int start, int limit, String orderBy) throws Exception{
+    public PageResult<StudioVo> findTopStudioList(StudioQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<StudioVo> rst = new PageResult<>();
         List<StudioVo> list = studioDao.findTopList(condition, start, limit, orderBy);
         rst.setRows(list);
@@ -413,4 +413,15 @@ public class StudioServiceImpl implements StudioService {
         return studioDao.findUserInfoByStudioId(studioId);
     }
 
+
+    /**
+     * 工作室数据报表
+     *
+     * @param studioId 工作室ID
+     * @return Map<String, Object>
+     */
+    @Override
+    public Map<String, Object> studioReport(String studioId) {
+        return studioDao.studioReport(studioId);
+    }
 }

@@ -1,10 +1,9 @@
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.ConsultOrder;
-import com.huacainfo.ace.jxb.vo.CounselorVo;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,10 +18,9 @@ public class CommonTest {
     @Test
     public void test() {
 
-        BigDecimal b = BigDecimal.ZERO;
-        CounselorVo vo = new CounselorVo();
+        long between = DateUtil.getBetween(DateUtil.getNow(), "2018-10-21 11:07:22", "Seconds");
 
-        System.out.println(JsonUtil.toJson(vo));
+        System.out.println(between);
     }
 
     public void orderParams() {

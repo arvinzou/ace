@@ -107,4 +107,22 @@ public class WStudioController extends JxbBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", studioVo);
     }
 
+    /**
+     * 获取我的工作室数据报表
+     * studioId    --  工作室ID
+     * memberCount --  成员数量
+     * courseCount --  课程数量
+     * consultCount    --  咨询数量
+     * liveCount    --  直播数量
+     */
+    @RequestMapping("/studioReport")
+    public ResultResponse studioReport(String studioId) throws Exception {
+        if (StringUtil.isEmpty(studioId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        Map<String, Object> rst = studioService.studioReport(studioId);
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
+    }
+
 }

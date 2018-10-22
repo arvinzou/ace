@@ -8,6 +8,7 @@ Page({
      */
     data: {
         userinfoData: null,
+        isRegist: false,
         num1: parseInt(Math.random() * 100),
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
@@ -24,36 +25,26 @@ Page({
                 url: "../userinfo/index?url=../me/index&type=switchTab"
             });
         } else {
-            console.log("that.initUserData()=======================================" + that.initUserData());
             if (wx.getStorageSync('userinfo')) {
-                if (!that.initUserData()) {
-                    wx.navigateTo({
-                        url: "../regist/index"
-                    });
-                }
+                that.initUserData();
             }
 
         }
     },
     initUserData: function() {
         var that = this;
-        var userinfoData = util.getSysUser();
-        if (userinfoData) {
-            that.setData({
-                userinfoData: userinfoData
-            });
-            return;
-        }
         util.request(cfg.findUserInfo, {},
             function(ret) {
                 if (ret.status == 0) {
-                    util.setSysUser(ret.data);
                     that.setData({
-                        userinfoData: ret.data
+                        userinfoData: ret.data,
+                        isRegist: true
                     });
-                    return true;
                 } else {
-                    return false;
+                    that.setData({
+                        isRegist: false
+                    });
+                    wx.navigateTo({ url: "../regist/index" });
                 }
 
             }
@@ -84,7 +75,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        var that = this;
+        if (wx.getStorageSync('userinfo')) {
+            that.initUserData();
+        }
     },
 
     /**

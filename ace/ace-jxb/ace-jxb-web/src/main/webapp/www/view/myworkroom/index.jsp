@@ -34,23 +34,8 @@
 
 				</div>
 			</div>
-			<div class="row item01">
-				<div class="col-xs-3 col-sm-3">
-					<p class="statics">824</p>
-					<p class="title">成员</p>
-				</div>
-				<div class="col-xs-3 col-sm-3">
-					<p class="statics">123</p>
-					<p class="title">咨询</p>
-				</div>
-				<div class="col-xs-3 col-sm-3">
-					<p class="statics">555</p>
-					<p class="title">课程</p>
-				</div>
-				<div class="col-xs-3 col-sm-3">
-					<p class="statics">1314</p>
-					<p class="title">直播</p>
-				</div>
+			<div class="row item01" id="report">
+
 			</div>
 		</div>
 		<div class="footer"></div>
@@ -66,7 +51,7 @@
                 </div>
                 <div class="col-xs-9 col-sm-9">
                 <p class="room_title">\${roombase.name}</p>
-                <p class="room_title01">帮助过<span class="num">228</span>人</p>
+                <p class="room_title01">帮助过<span class="num" id="num"></span>人</p>
             </div>
 		</script>
 		<script id="roomContentTemp" type="text/template">
@@ -136,6 +121,25 @@
 		<script id="workroomDetailTemp"  type="text/template">
 			<div>
 				\$\${detail}
+			</div>
+		</script>
+
+		<script id="report-tpl" type="text/template">
+			<div class="col-xs-3 col-sm-3">
+				<p class="statics">\${data.memberCount}</p>
+				<p class="title">成员</p>
+			</div>
+			<div class="col-xs-3 col-sm-3">
+				<p class="statics">\${data.consultCount}</p>
+				<p class="title">咨询</p>
+			</div>
+			<div class="col-xs-3 col-sm-3">
+				<p class="statics">\${data.courseCount}</p>
+				<p class="title">课程</p>
+			</div>
+			<div class="col-xs-3 col-sm-3">
+				<p class="statics">\${data.liveCount}</p>
+				<p class="title">直播</p>
 			</div>
 		</script>
 	</body>

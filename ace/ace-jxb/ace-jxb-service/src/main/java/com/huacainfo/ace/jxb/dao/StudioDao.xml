@@ -39,7 +39,7 @@
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Studio">
         insert into studio
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
+        <if test="id != null">
                 id,
             </if>
             <if test="name != null">
@@ -249,5 +249,66 @@
         from jxb.studio t
         left join portal.userinfo u on t.counselorId=u.unionid
         where t.id = #{studioId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="studioReport" parameterType="java.lang.String" resultType="map">
+        select
+            rst.studioId,
+            rst.memberCount,
+            (rst.courseCount1 + rst.courseCount2) as courseCount,
+            rst.consultCount,
+            rst.liveCount
+        from (
+            select
+            -- 工作室成员数量
+            (
+                    select
+                        count(1)
+                    from jxb.counselor c
+                    left join jxb.teacher_audit ta on  c.id=ta.id
+                    where ta.rst = '1'
+                    and c.studioId = studio.id
+            ) as memberCount,
+            -- 工作室主人课程数 - 1
+            (
+                select
+                    count(1)
+                from jxb.course c
+                left JOIN jxb.course_audit ca on ca.courseId = c.id
+                where ca.rst='1'
+                and c.createUserId = studio.counselorId
+            ) as courseCount1,
+            -- 工作室成员课程数 - 2
+            (
+                select
+                    count(1)
+                from jxb.course c
+                left JOIN jxb.course_audit ca on ca.courseId = c.id
+                where ca.rst='1'
+                and c.createUserId in (
+                    select s.id
+                    from jxb.counselor c
+                    left join jxb.teacher_audit ta on  c.id=ta.id
+                    left join jxb.studio s  on c.studioId =  s.id
+                    where ta.rst ='1'
+                )
+            ) as courseCount2,
+            --  工作室咨询数
+            (
+                select count(1)
+                from jxb.base_order t
+                left join jxb.counselor c on t.businessId =  c.id
+                where t.category = '1'
+                and t.payStatus in ( '2', '6', '7')
+                and c.studioId = studio.id
+            ) as consultCount,
+            -- 直播数
+            0 as liveCount,
+            studio.id as studioId
+            from jxb.studio studio
+            left join jxb.counselor c on studio.counselorId = c.id
+            where studio.`status`='1'
+        ) rst
+        where rst.studioId = #{studioId,jdbcType=VARCHAR}
     </select>
 </mapper>

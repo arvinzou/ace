@@ -37,7 +37,10 @@ var config = {
     selectActivityReport:`${server}/society/www/activity/selectActivityReportByActivityId`,
     updateActivityReport:`${server}/society/www/activity/updateActivityReport`,
     pointRank: `${server}/society/www/user/pointsRank`,
-    findOrderList: `${server}/society/www/user/findOrderList`
+    findOrderList: `${server}/society/www/user/findOrderList`,
+    findPointsRecord: `${server}/society/www/user/findPointsRecord`,
+    findActivitying: `${server}/society/www/activity/findActivitying`,
+    findPublicActivityReportList: `${server}/society/www/activity/findPublicActivityReportList`
 };
 module.exports = config
 

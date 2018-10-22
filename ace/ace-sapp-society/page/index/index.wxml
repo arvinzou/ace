@@ -10,28 +10,30 @@
             </view>
             <view class='activity'>
                 <view class='activity-left'>
-                    <image class='activity-image' src='../../image/default.jpg'></image>
+                    <image class='activity-image' src='{{activity.coverUrl}}'></image>
+                    <block wx:if='{{isEnd == false}}'>
                     <view class='activity-warn'>
                         <view class='activity-warn-box'>
                             <view class='activity-warn-title'><text>距离活动开始</text></view>
                             <view class='activity-warn-time'>
-                                <text class='time-num'>00</text>
+                                <text class='time-num'>{{days}}</text>
                                 <text class='time-title'>天</text>
-                                <text class='time-num'>24</text>
+                                <text class='time-num'>{{hours}}</text>
                                 <text class='time-title'>：</text>
-                                <text class='time-num'>00</text>
+                                <text class='time-num'>{{minutes}}</text>
                             </view>
                         </view>
                     </view>
+                    </block>
                 </view>
                 <view class='activity-right'>
                     <view class='activity-title'>
                         <text class='stage'>第一期</text>
-                        <text class=''>党建活动党建活动党建活动党建活动</text>
+                        <text class=''>{{activity.title}}</text>
                     </view>
-                    <view class='applytime'><text>报名截止时间：09-10 10:30</text></view>
+                    <view class='applytime'><text>报名截止：{{activity.dendline}}</text></view>
                     <view class='activity-footer'>
-                        <view class='sign-number'><text>已报名:10</text></view>
+                        <view class='sign-number'><text>已报名:{{activity.parterNum}}</text></view>
                         <view class='activity-state'><image src='../../image/icon_having.png'></image></view>
                     </view>
                 </view>
@@ -72,7 +74,7 @@
                     <view class='menu-item-image'><image src='../../image/icon_menu_idea.png'></image></view>
                     <view class='menu-item-title'><text>我有点子</text></view>
                 </view>
-                <navigator class='menu-item' url='../circle/index'>
+                <navigator class='menu-item' url='../myCircle/index'>
                     <view class='menu-item-image'><image src='../../image/icon_menu_circle.png'></image></view>
                     <view class='menu-item-title'><text>邻里圈子</text></view>
                 </navigator>
@@ -83,21 +85,36 @@
     <view class='container'>
         <view class='activity-list'>
             <view class='title01'><text>精选往事</text></view>
+            <block wx:for='{{reportData}}'>
             <view class='activity-item'>
                 <view class='activity-item-left'>
-                    <view class='title02'><text>心理咨询无用？不，是你不了解真正的心理咨询</text></view>
-                    <view class='type01'>普及活动</view>
+                    <view class='title02'><text>{{item.title}}</text></view>
+                    <view class='type01'>
+                        <block wx:if='{{item.category == 1}}'>
+                            公益活动
+                        </block>
+                        <block wx:elif='{{item.category == 2}}'>
+                            普及活动
+                        </block>
+                        <block wx:elif='{{item.category == 3}}'>
+                            创新活动
+                        </block>
+                        <block wx:else>
+                            党建活动
+                        </block>
+                    </view>
                     <view class='publish-person'>
-                        <text class='publish-person-name'>刘鑫蕊</text>
-                        <text class='publish-person-time'>08-27</text>
+                        <text class='publish-person-name'>{{item.createUserName}}</text>
+                        <text class='publish-person-time'>{{item.createDate}}</text>
                     </view>
                 </view>
                 <view class='activity-item-right'>
-                    <image class='activity-list-image' src='../../image/default.jpg'></image>
+                    <image class='activity-list-image' src='{{item.coverUrl}}'></image>
                 </view>
             </view>
+            </block>
 
-            <view class='activity-item'>
+            <!--<view class='activity-item'>
                 <view class='title02'><text>天源新城——广场舞</text></view>
                 <view class='activity-content'>
                 
@@ -107,7 +124,7 @@
                         <text class='publish-person-name' style='float:left;padding-top:30rpx;'>刘鑫蕊</text>
                         <text class='publish-person-time' style='float:left;padding-top:30rpx;'>08-27</text>
                     </view>
-            </view>
+            </view>-->
         </view>
     </view>
 </view>
