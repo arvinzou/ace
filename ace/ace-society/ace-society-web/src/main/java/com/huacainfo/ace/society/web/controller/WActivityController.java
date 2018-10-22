@@ -111,14 +111,7 @@ public class WActivityController extends SocietyBaseController {
 
 
     /**
-     * @throws
-     * @Title:insertActivity
      * @Description: TODO(添加线下活动)
-     * @param: @param jsons
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: huacai003
-     * @version: 2018-09-11
      */
     @RequestMapping(value = "/insertActivity")
     @ResponseBody

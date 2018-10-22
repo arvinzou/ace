@@ -1,8 +1,8 @@
 var loading = {};
-var params = {limit: 10};
+var params = {limit: 10,category:'1'};
 window.onload = function () {
     initPage();
-    // initEvents();
+    initEvents();
     $('#preview').on('click', '.btn-audit', audit);
     $('#preview').on('change', '.verify-btn', beforeActive);
     $('#info').on('click', '.personnelInfo', optionPersonner);
@@ -108,60 +108,30 @@ function edit(id) {
     window.location.href = 'edit/index.jsp?id=' + id;
 }
 
-// function initEvents() {
-//     $('#modal-audit').on('show.bs.modal', function (event) {
-//         var relatedTarget = $(event.relatedTarget);
-//         var id = relatedTarget.data('id');
-//         var modal = $(this);
-//         modal.find('.modal-body input[name=id]').val(id);
-//     })
-//     $('#modal-audit .btn-primary').on('click', function () {
-//         $('#modal-audit form').submit();
-//     });
-//     $('#modal-audit form').ajaxForm({
-//             beforeSubmit: function (formData, jqForm, options) {
-//                 var params = {};
-//                 $.each(formData, function (n, obj) {
-//                     params[obj.name] = obj.value;
-//                 });
-//                 $.extend(params, {
-//                     time: new Date()
-//                 });
-//                 console.log(params);
-//                 audit(params);
-//                 return false;
-//             }
-//         });
-//
-//
-// }
-/*线下活动审核*/
-function audit() {
-    var url = contextPath + "/activity/audit";
-    var id = $('#preview').data('id');
-    var rst1 = $('select[name=rst]').val();
-    var remark='ok';
-    if(rst1!=3){
-        remark = $('input[name=remark]').val();
-    };
-    var coinconfigId=$('#coinConfig').val();
-    if (!remark.trim()) {
-        $('input[name=remark]').focus();
-    }
-    var data = {
-        id: id,
-        rst: rst1,
-        remark: remark,
-        coinconfigId:coinconfigId
-    }
+/*个人信息审核*/
+function audit(params) {
     startLoad();
-    $.post(url, data, function (rst) {
-        stopLoad();
-        if (rst.status == 0) {
-            getPageList();
+    $.ajax({
+        url: contextPath + "/activity/audit",
+        type: "post",
+        async: false,
+        data: params,
+        success: function (rst) {
+            stopLoad();
+            $("#modal-audit").modal('hide');
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
         }
     });
 }
+
+
 
 /*线下活动上架*/
 function online(id) {
@@ -240,26 +210,101 @@ function deleteData(id) {
 }
 
 
+// function details(id) {
+//     var url = contextPath + "/activity/selectActivityByPrimaryKey";
+//     var data = {
+//         id: id,
+//     }
+//     $('#preview').data('id', id);
+//     startLoad();
+//     $.post(url, data, function (rst) {
+//         stopLoad();
+//         if (rst.status == 0) {
+//             renderPage("info", rst.value, "tpl-info");
+//             if (rst.value.status == 2) {
+//                 getCoinConfig(rst.value.category);
+//             }
+//             $('#preview').modal("show");
+//             return;
+//         }
+//         alert(rst.errorMessage);
+//     })
+// }
+
+/*查看详情*/
 function details(id) {
     var url = contextPath + "/activity/selectActivityByPrimaryKey";
-    var data = {
-        id: id,
-    }
-    $('#preview').data('id', id);
-    startLoad();
-    $.post(url, data, function (rst) {
-        stopLoad();
-        if (rst.status == 0) {
-            renderPage("info", rst.value, "tpl-info");
-            if (rst.value.status == 2) {
-                getCoinConfig(rst.value.category);
-            }
-            $('#preview').modal("show");
-            return;
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+            var navitem = document.getElementById('tpl-detail').innerHTML;
+            var html = juicer(navitem, {data: result.value});
+            $("#fm-detail").html(html);
+            $("#modal-detail").modal("show");
         }
-        alert(rst.errorMessage);
-    })
+    });
 }
+
+function initEvents() {
+    $('#modal-audit').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        var modal = $(this);
+        modal.find('.modal-body input[name=id]').val(id);
+        initAuditForm(id);
+    })
+    $('#modal-audit .btn-primary').on('click', function () {
+        $('#modal-audit form').submit();
+    });
+
+    $('#modal-audit form').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            var rstVal = $('input[name="rst"]:checked').val();
+            if (rstVal == undefined) {
+                alert("请选择审核结果!");
+                return;
+            }
+
+            var params = {};
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            $.extend(params, {
+                time: new Date()
+            });
+            console.log(params);
+            audit(params);
+            return false;
+        }
+    });
+
+
+}
+
+
+function initAuditForm(id) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/activity/selectActivityByPrimaryKey",
+        type: "post",
+        async: false,
+        data: {
+            id: id
+        },
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                render('#fm-audit', result.value, 'tpl-fm-audit');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
 
 
 function getCoinConfig(category) {
@@ -283,4 +328,9 @@ function renderPage(IDom, data, tempId) {
         data: data,
     });
     $("#" + IDom).html(html);
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    getPageList();
 }

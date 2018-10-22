@@ -3,6 +3,7 @@ package com.huacainfo.ace.fundtown.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -72,17 +73,39 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
 
     @Override
     public MessageResponse insertDepartment(VipDepartment o, UserProp userProp) throws Exception {
+        //父类先入驻
+        String parentId = GUIDUtil.getGUID();
+        if (o.getParent() != null) {
+            VipDepartment parent = o.getParent();
+            parent.setType("0");
+            parent.setDepartmentId(parentId);
+            int t = vipDepartmentDao.isExit(parent);
+            if (t > 0) {
+                return new MessageResponse(1, "已存在的部门名称！");
+            }
+            MessageResponse rs = insertDepartment(parent, userProp);
+            if (rs.getStatus() == ResultCode.FAIL) {
+                return rs;
+            }
+        }
 
+
+        if ("0".equals(o.getType())) {
+            parentId = "0";
+        }
+        o.setParentDepartmentId(parentId);
+        o.setDepartmentId(StringUtil.isEmpty(o.getDepartmentId()) ? GUIDUtil.getGUID() : o.getDepartmentId());
         o.setSyid(userProp.getActiveSyId());
         o.setRegDate(new Date());
         o.setCreateTime(new Date());
-        o.setStatus("1");
+        o.setStatus("2");
         if (CommonUtils.isBlank(o.getParentDepartmentId())) {
             return new MessageResponse(1, "所属协会不能为空！");
         }
         if (CommonUtils.isBlank(o.getDepartmentName())) {
             return new MessageResponse(1, "企业名称不能为空！");
         }
+
         int t = vipDepartmentDao.isExit(o);
         if (t > 0) {
             //return new MessageResponse(1, "已存在的部门名称！");
@@ -344,5 +367,13 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
         vipDepartmentDao.updateDepartmentByPrimaryKey(vip);
 
         return new MessageResponse(ResultCode.SUCCESS, "审核成功");
+    }
+
+    @Override
+    public MessageResponse repealPublicity(String deptId, UserProp curUserProp) {
+
+        int a = vipPublicityService.deleteByDeptId(deptId);
+
+        return new MessageResponse(ResultCode.SUCCESS, "撤销成功");
     }
 }

@@ -51,7 +51,9 @@ public class VipDepartment implements java.io.Serializable {
     private Date regDate;
 
     private String regCapital;
-
+    /**
+     * 投资方向
+     */
     private String regAreaCode;
 
     private String regAddr;
@@ -131,6 +133,18 @@ public class VipDepartment implements java.io.Serializable {
     private String watermark1;
     private String watermark2;
 
+    /**
+     * 所属机构信息
+     */
+    private VipDepartment parent;
+
+    public VipDepartment getParent() {
+        return parent;
+    }
+
+    public void setParent(VipDepartment parent) {
+        this.parent = parent;
+    }
 
     public String getDepartmentId() {
         return departmentId;
