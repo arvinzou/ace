@@ -6,7 +6,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        category: '',
+        user: {},
     },
 
     /**
@@ -14,24 +15,27 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
+        let category = options.category;
         let id = options.id;
         if (!id) {
             wx.navigateBack({})
             return;
         }
-        that.data.id = id;
+        that.setData({
+            category: category,
+            id: id,
+        })
         that.initdata();
     },
+
     initdata: function() {
-        util.request(cfg.findUserInfo, {},
-            function (rst) {
-                if (rst.data.status == 1) {
-                    wx.navigateTo({ url: '../me/index'});
-                    return;
-                }
-                
-            }
-        );
+        let that = this;
+        let sysuser = util.getSysUser();
+        if (sysuser) {
+            that.setData({
+                // user: sysuser.person
+            })
+        }
     },
 
     /**
@@ -81,5 +85,39 @@ Page({
      */
     onShareAppMessage: function() {
 
-    }
+    },
+    formSubmit: function(e) {
+        console.log('form发生了submit事件，携带数据为：', );
+        let that = this;
+        let vals = e.detail.value;
+        if (!vals.contactName || !vals.mobileNumber) {
+            wx.showModal({
+                title: '提示',
+                content: '报名资料不能为空',
+            })
+        }
+        vals.activityId = that.data.id;
+        util.request(cfg.insertActivityDetail, {
+                jsons: JSON.stringify(vals),
+            },
+            function(data) {
+                wx.hideNavigationBarLoading() //完成停止加载
+                wx.stopPullDownRefresh() //停止下拉刷新
+                if (data.status == 0) {
+                    wx.showToast({
+                        title: '报名成功',
+                        icon: 'success',
+                        duration: 1000
+                    })
+                    wx.navigateBack({});
+                    return;
+                }
+                that.showModal({
+                    msg: data.errorMessage,
+                })
+
+            }
+        );
+    },
+
 })
