@@ -89,7 +89,20 @@
             <view class='activity-item'>
                 <view class='activity-item-left'>
                     <view class='title02'><text>{{item.title}}</text></view>
-                    <view class='type01'>普及活动</view>
+                    <view class='type01'>
+                        <block wx:if='{{item.category == 1}}'>
+                            公益活动
+                        </block>
+                        <block wx:elif='{{item.category == 2}}'>
+                            普及活动
+                        </block>
+                        <block wx:elif='{{item.category == 3}}'>
+                            创新活动
+                        </block>
+                        <block wx:else>
+                            党建活动
+                        </block>
+                    </view>
                     <view class='publish-person'>
                         <text class='publish-person-name'>{{item.createUserName}}</text>
                         <text class='publish-person-time'>{{item.createDate}}</text>
