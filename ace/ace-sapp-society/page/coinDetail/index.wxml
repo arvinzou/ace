@@ -6,35 +6,18 @@
          <view class="th" style='width:15%'>角色</view>
          <view class="th" style='width:15%'>爱心币</view>
     </view>
+    <block wx:for='{{detailInfo}}'>
     <view class='tr bg-g'>
-        <view class="td" style='width:35%'>文明随手拍</view>
-        <view class="td" style='width:35%'>2018-09-15 </view>
+        <view class="td" style='width:35%'>{{item.bisId}}</view>
+        <view class="td" style='width:35%'>{{item.createDate}} </view>
         <view class="td" style='width:15%'>发布者</view>
-        <view class="td increase" style='width:15%'>+5000</view>
+        <block wx:if='{{item.bisType == "ADD"}}'>
+        <view class="td increase" style='width:15%'>+{{item.points}}</view>
+        </block>
+        <block wx:else>
+        <view class="td reduce" style='width:15%'>-{{item.points}}</view>
+        </block>
     </view>
-    <view class='tr bg-g'>
-        <view class="td" style='width:35%'>公益活动</view>
-        <view class="td" style='width:35%'>2018-09-15 </view>
-        <view class="td" style='width:15%'>志愿者</view>
-        <view class="td increase" style='width:15%'>+500</view>
-    </view>
-    <view class='tr bg-g'>
-        <view class="td" style='width:35%'>普及活动</view>
-        <view class="td" style='width:35%'>2018-09-15 </view>
-        <view class="td" style='width:15%'>参与者</view>
-        <view class="td reduce" style='width:15%'>-100</view>
-    </view>
-    <view class='tr bg-g'>
-        <view class="td" style='width:35%'>爱心商城</view>
-        <view class="td" style='width:35%'>2018-09-15 </view>
-        <view class="td" style='width:15%'>参与者</view>
-        <view class="td reduce" style='width:15%'>-100</view>
-    </view>
-    <view class='tr bg-g'>
-        <view class="td" style='width:35%'>文明随手拍</view>
-        <view class="td" style='width:35%'>2018-09-15 </view>
-        <view class="td" style='width:15%'>发布者</view>
-        <view class="td increase" style='width:15%'>+5000</view>
-    </view>
+    </block>
   </view>
 </view>

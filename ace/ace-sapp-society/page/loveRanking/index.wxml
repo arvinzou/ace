@@ -6,7 +6,7 @@
     </view>
     <view class='rank_list'>
       <block wx:for='{{rankList}}'>
-        <view class='rank_item' bindtap='detail'>
+        <view class='rank_item' bindtap='detail' data-id='{{item.userId}}'>
             <block wx:if='{{index == 0}}'>
                 <image class='top-image' src='../../image/icon_top01.png'></image>
             </block>

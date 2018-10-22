@@ -17,9 +17,9 @@ Page({
       var that = this;
       that.initRank(that.data.currentTab);
   },
-  detail: function(){
+  detail: function(e){
       wx.navigateTo({
-          url: '../coinDetail/index'
+          url: '../coinDetail/index?userId='+e.currentTarget.dataset.id
       })
   },
   initRank: function(rankType){
