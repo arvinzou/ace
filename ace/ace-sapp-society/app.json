@@ -10,7 +10,6 @@
     "page/myActivity/index",
     "page/releaseIdea/index",
     "page/historyOrder/index",
-    "page/myLive/index", 
     "page/partyBuilding/index",
     "page/activityList/index",
     "page/style/index",
@@ -32,7 +31,13 @@
     "page/ideaDetail/index",
     "page/indexMore/index",
     "page/myBehavior/index",
-    "page/myIdea/index"
+    "page/myIdea/index",
+    "page/liveHome/index",
+    "page/liveView/index",
+    "page/myLive/index",
+    "page/live/index",
+    "page/rpt/index",
+    "page/liveCsl/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

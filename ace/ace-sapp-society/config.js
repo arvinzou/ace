@@ -40,7 +40,20 @@ var config = {
     findOrderList: `${server}/society/www/user/findOrderList`,
     findPointsRecord: `${server}/society/www/user/findPointsRecord`,
     findActivitying: `${server}/society/www/activity/findActivitying`,
-    findPublicActivityReportList: `${server}/society/www/activity/findPublicActivityReportList`
+    findPublicActivityReportList: `${server}/society/www/activity/findPublicActivityReportList`,
+        getLiveMsgList: `${server}/live/www/live/getLiveMsgList`,
+      insertLiveRpt: `${server}/live/liveRpt/www/insertLiveRpt`,
+        getLiveRptList: `${server}/live/www/live/getLiveRptList`,
+        insertLive: `${server}/live/live/www/insertLive`,
+        updateLive: `${server}/live/live/www/updateLive`,
+        selectLiveByPrimaryKey: `${server}/live/live/www/selectLiveByPrimaryKey`,
+      deleteLiveByLiveId: `${server}/live/live/www/deleteLiveByLiveId`,
+        findLiveList: `${server}/live/live/www/findLiveList`,
+      updateAuditStatus: `${server}/live/live/www/updateAuditStatus`,
+      insertLiveCmt: `${server}/live/liveCmt/www/insertLiveCmt`,
+      addLike: `${server}/live/www/live/addLike`,
+      getliveListByCorpId: `${server}/live/live/www/getliveListByCorpId`,
+      loadLive: `${server}/live/live/www/loadLive`
 };
 module.exports = config
 

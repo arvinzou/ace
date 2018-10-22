@@ -2,13 +2,13 @@ var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
 const app = getApp();
-var start =0;
-var limit =5;
+var start = 0;
+var limit = 5;
 Page({
   data: {
     serverfile: cfg.serverfile,
     items: [],
-    listLive:[],
+    listLive: [],
     startX: 0, //开始坐标
     startY: 0
   },
@@ -18,8 +18,8 @@ Page({
   onLoad: function () {
     var that = this;
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../myLive/index" });
-    }else{
+      wx.navigateTo({ url: "../userinfo/index?url=../liveList/index" });
+    } else {
       that.initData();
       that.setData({
         userinfo: wx.getStorageSync('userinfo')
@@ -28,27 +28,21 @@ Page({
   },
   onPullDownRefresh: function () {
     let that = this;
-    start+=5;
+    start += 5;
     that.initData();
 
   },
-  add: function () {
-    let that = this;
-    wx.navigateTo({
-      url: '../liveCsl/index?act=add',
-    });
-  },
   initData: function () {
     var that = this;
-    util.request(cfg.findLiveList, {start:0,limit:9999 },
+    util.request(cfg.getliveListByCorpId, { start: start, limit: limit, auditStatus: '2', deptId: cfg.companyId },
       function (data) {
         console.log(data);
         data.rows.forEach(function (o, i) {
           o.isTouchMove = false;
-          //that.data.listLive.push(o);
+          that.data.listLive.push(o);
         });
         that.setData({
-          listLive: data.rows
+          listLive: that.data.listLive
         });
         wx.stopPullDownRefresh();
       }
@@ -58,7 +52,7 @@ Page({
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
     //开始触摸时 重置所有删除
-    var that=this;
+    var that = this;
     that.data.listLive.forEach(function (v, i) {
       if (v.isTouchMove)//只操作为true的
         v.isTouchMove = false;
@@ -68,7 +62,7 @@ Page({
       startY: e.changedTouches[0].clientY,
       listLive: that.data.listLive
     })
-    
+
   },
   //滑动事件处理
   touchmove: function (e) {
@@ -96,7 +90,7 @@ Page({
     that.setData({
       listLive: that.data.listLive
     })
-    
+
   },
   /**
    * 计算滑动角度
@@ -112,18 +106,18 @@ Page({
   //删除事件
 
   del: function (e) {
-    var that=this;
+    var that = this;
     var url = cfg.deleteLiveByLiveId;
     console.log();
-    util.request(url, { id: e.currentTarget.dataset.id},
+    util.request(url, { id: e.currentTarget.dataset.id },
       function (data) {
-        if(data.status==1){
+        if (data.status == 1) {
           wx.showModal({
             title: '提示',
             content: data.errorMessage,
             showCancel: false
           })
-        }else{
+        } else {
           that.data.listLive.splice(e.currentTarget.dataset.index, 1)
           that.setData({
             listLive: that.data.listLive
@@ -131,9 +125,9 @@ Page({
         }
       }
     );
-    
+
   },
-  edit:function(e){
+  edit: function (e) {
     console.log(e);
     var that = this;
     wx.navigateTo({
@@ -151,7 +145,7 @@ Page({
     var that = this;
     var url = cfg.updateAuditStatus;
     console.log();
-    util.request(url, { id: e.currentTarget.dataset.id, status:'1' },
+    util.request(url, { id: e.currentTarget.dataset.id, status: '1' },
       function (data) {
         if (data.status == 1) {
           wx.showModal({
@@ -160,17 +154,11 @@ Page({
             showCancel: false
           })
         } else {
-          that.data.listLive=[];
+          that.data.listLive = [];
           that.initData();
         }
       }
     );
-  },
-  rpt: function (e) {
-    console.log(e);
-    var that = this;
-    wx.navigateTo({
-      url: '../rpt/index?id=' + e.currentTarget.dataset.id
-    });
-  },
+
+  }
 });
