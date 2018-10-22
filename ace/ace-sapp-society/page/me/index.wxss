@@ -2,6 +2,7 @@
 
 .index{
     width: 100%;
+    background: #F6F6F6;
 }
 .menu-list{
     width: 100%;
@@ -41,6 +42,7 @@
 .banner {
     padding: 10rpx 30rpx 30rpx;
     color: #fff;
+    margin-bottom: 20rpx;
 }
 
 .banner .top::after {
@@ -106,4 +108,34 @@
     font-weight:bold;
     display: flex;
     justify-content: space-between;
+}
+.activity-menu{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+}
+.activity-menu-list{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
+.activity-menu-list::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.activity-menu-item{
+    width: 25%;
+    height: 90rpx;
+    float: left;
+    text-align: center;
+    color: #666666;
+    font-size: 24rpx;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}
+.activity-menu-item image{
+    width: 54rpx;
+    height: 54rpx;
 }

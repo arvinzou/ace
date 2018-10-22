@@ -2,15 +2,14 @@ var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 var start=0;
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     list:[],
-    hiddenmodalcmt: true,
+    hiddenmodalcmt:true
   },
-
+    
   /**
    * 生命周期函数--监听页面加载
    */

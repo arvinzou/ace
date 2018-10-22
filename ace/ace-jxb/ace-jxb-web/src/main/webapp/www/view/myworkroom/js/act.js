@@ -4,6 +4,7 @@ window.onload = function(){
     var primaryId = url.substring(url.indexOf('=')+1);
     console.log(primaryId);
     initData(primaryId);
+    initStudioReport(primaryId);
 };
 
 function initData(id){
@@ -51,6 +52,33 @@ function initData(id){
                     detail: result.data.introduce
                 });
                 $("#workroomDetail").append(detailHtml);
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function initStudioReport(id){
+    $.ajax({
+        url: contextPath+ "/www/studio/studioReport",
+        type:"post",
+        async:false,
+        data:{
+            "studioId": id
+        },
+        success:function(result){
+            if(result.status == 0) {
+                var roombaseTemp = document.getElementById('report-tpl').innerHTML;
+                var html = juicer(roombaseTemp, {
+                    data: result.data
+                });
+                $("#report").append(html);
+                $("#num").val(result.data.consultCount);
             }else {
                 alert(result.info);
                 return;

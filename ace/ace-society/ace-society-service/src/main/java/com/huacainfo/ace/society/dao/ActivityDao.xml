@@ -37,7 +37,7 @@
     <sql id="Base_Column_List">
     t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,
     t.volunteerNum,  t.clazz, t.volunteerPoints, t.parterNum, t.parterPoints, t.remark, t.coinconfigId, t.status, t.createUserId,
-    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ad.status as adStatus,ar.status as arStatus
   </sql>
     <sql id="Blob_Column_List">
     t.content
@@ -54,7 +54,7 @@
         select
         a.id, a.initiatorId, a.title, a.category, a.mode,a.purpose, a.location, a.coverUrl, a.startSignImgUrl, a.endSignImgUrl, a.dendline, a.startDate, a.endDate,
         a.volunteerNum, a.clazz, a.volunteerPoints, a.parterNum, a.parterPoints, a.remark, a.coinconfigId, a.status, a.createUserId,
-        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.headimgurl,s.orgName
+        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.headimgurl,s.orgName,
         from activity a
 --         LEFT  JOIN  portal.users u ON  a.initiatorId=u.user_id
         LEFT  JOIN  portal.userinfo i ON  a.initiatorId=i.unionid
@@ -422,6 +422,9 @@
     <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
+
+        <include refid="fromCondition1"/>
+
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -434,10 +437,40 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <sql id="whereCondition">
+
+    <select id="findUserList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+
+        <include refid="fromCondition2"/>
+
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <sql id="fromCondition1">
         from activity t
         LEFT JOIN  activity_detail ad on t.id=ad.activityId
-        where t.status <![CDATA[ <> ]]> 0
+        LEFT JOIN  activity_report ar on ar.activityId=t.id
+    </sql>
+
+    <sql id="fromCondition2">
+        from activity t
+        RIGHT JOIN  activity_detail ad on t.id=ad.activityId
+        LEFT JOIN  activity_report ar on ar.activityId=t.id
+    </sql>
+
+
+    <sql id="whereCondition">
         <if test="condition.title !=null and condition.title !=&quot;&quot;">
             and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
@@ -448,7 +481,7 @@
             and ad.userId =#{condition.userId,jdbcType=VARCHAR}
         </if>
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
-            and t.status =#{condition.status,jdbcType=VARCHAR}
+            and t.status =like concat(#{condition.title,jdbcType=CHAR},'%')
         </if>
         <if test="condition.ingId !=null and condition.ingId !=&quot;&quot;">
             and SYSDATE() <![CDATA[ < ]]> t.dendline

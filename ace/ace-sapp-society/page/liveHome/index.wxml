@@ -1,0 +1,31 @@
+<view class='index'>
+
+
+  <view class='live-list'>
+    <navigator wx:for="{{listLive}}" wx:key="" class='live-item' url='../liveView/index?id={{item.id}}'>
+      <view class='list-item-cover'>
+        <image src="{{item.cover}}" mode="aspectFill" class='coverImg' />
+
+      </view>
+      <view class='list-item-text'>
+        <view class="live-title">
+          {{item.topic}}
+        </view>
+        <view class='live-item-bar'>
+          <view class='time-box' wx:if="{{item.state==1}}">{{item.startTime}}</view>
+          <text  wx:if="{{item.state!=1}}" class='nop-pop'> {{item.numOfPartakeString}}</text>
+           <view class="status-box">
+            <view class="status-icon-text">
+              {{item.state=='1'?'预播':''}}{{item.state=='2'?'直播':''}}{{item.state=='3'?'历史':''}}
+            </view>
+            <view class='status-icon-{{item.type}}'></view>
+          </view>
+
+        </view>
+
+
+      </view>
+    </navigator>
+
+  </view>
+</view>
