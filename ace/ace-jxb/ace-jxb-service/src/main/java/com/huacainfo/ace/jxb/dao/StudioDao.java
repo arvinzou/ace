@@ -34,13 +34,15 @@ public interface StudioDao {
                             @Param("orderBy") String orderBy);
 
     List<StudioVo> findTopList(@Param("condition") StudioQVo condition,
-                            @Param("start") int start,
-                            @Param("limit") int limit,
-                            @Param("orderBy") String orderBy);
+                               @Param("start") int start,
+                               @Param("limit") int limit,
+                               @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") StudioQVo condition);
 
     List<Studio> isExit(Studio record);
 
     Map<String, Object> findUserInfoByStudioId(String studioId);
+
+    Map<String, Object> studioReport(String studioId);
 }

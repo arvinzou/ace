@@ -121,4 +121,12 @@ public interface StudioService {
     StudioVo getStudioDetail(String studioId) throws Exception;
 
     Map<String, Object> findUserInfoByStudioId(String studioId);
+
+    /**
+     * 工作室数据报表
+     *
+     * @param studioId 工作室ID
+     * @return Map<String, Object>
+     */
+    Map<String, Object> studioReport(String studioId);
 }
