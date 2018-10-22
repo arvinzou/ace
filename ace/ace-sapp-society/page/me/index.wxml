@@ -32,9 +32,34 @@
         </view>
     </view>
 
-
-
-
+    <view class='activity-menu'>
+        <view class='activity-menu-list'>
+            <navigator class='activity-menu-item'>
+                <view><image src='../../image/icon_me_party.png'></image></view>
+                <view><text>智慧党建</text></view>
+            </navigator>
+            <navigator class='activity-menu-item'>
+                <view><image src='../../image/icon_me_activity.png'></image></view>
+                <view><text>线下活动</text></view>
+            </navigator>
+            <navigator class='activity-menu-item'>
+                <view><image src='../../image/icon_me_live.png'></image></view>
+                <view><text>秀我直播</text></view>
+            </navigator>
+            <navigator class='activity-menu-item' url='../myCircle/index'>
+                <view><image src='../../image/icon_me_circle.png'></image></view>
+                <view><text>邻里圈子</text></view>
+            </navigator>
+            <navigator class='activity-menu-item'>
+                <view><image src='../../image/icon_me_behavior.png'></image></view>
+                <view><text>文明随手拍</text></view>
+            </navigator>
+            <navigator class='activity-menu-item'>
+                <view><image src='../../image/icon_me_idea.png'></image></view>
+                <view><text>我有点子</text></view>
+            </navigator>
+        </view>
+    </view>
 
     <view class='menu-list'>
         <view class='menu-item' bindtap='loveRanking'>
