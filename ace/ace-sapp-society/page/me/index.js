@@ -26,11 +26,7 @@ Page({
             });
         } else {
             if (wx.getStorageSync('userinfo')) {
-                if (that.data.isRegist == false) {
-                    wx.navigateTo({
-                        url: "../regist/index"
-                    });
-                }
+                that.initUserData();
             }
 
         }
