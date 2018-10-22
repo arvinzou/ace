@@ -86,3 +86,27 @@
     width: 100%;
     height: 100%;
 }
+.nickname::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.name{
+    float: left;
+}
+.submitDate{
+    float: left;
+    font-size: 24rpx; 
+}
+.status{
+    width: 80rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    display: block;
+    float: left;
+    color: #FFFFFF;
+    background: blue;
+    border-radius: 5rpx;
+    font-size:24rpx;
+}
