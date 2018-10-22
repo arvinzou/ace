@@ -92,4 +92,5 @@ public interface VipPublicityService {
     VipPublicityVo getVipInfo(String deptId);
 
 
+    int deleteByDeptId(String deptId);
 }

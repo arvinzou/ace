@@ -165,7 +165,7 @@ public class VipPublicityServiceImpl implements VipPublicityService {
         this.dataBaseLogService.log("删除入驻成员公示列表", "入驻成员公示列表",
                 String.valueOf(id),
                 String.valueOf(id), "入驻成员公示列表", userProp);
-        return new MessageResponse(0, "入驻成员公示列表删除完成！");
+        return new MessageResponse(0, "撤销成功！");
     }
 
 
@@ -178,6 +178,11 @@ public class VipPublicityServiceImpl implements VipPublicityService {
     @Override
     public VipPublicityVo getVipInfo(String deptId) {
         return vipPublicityDao.findByDeptId(deptId);//.selectVoByPrimaryKey(deptId);
+    }
+
+    @Override
+    public int deleteByDeptId(String deptId) {
+        return vipPublicityDao.deleteByDeptId(deptId);
     }
 
 }

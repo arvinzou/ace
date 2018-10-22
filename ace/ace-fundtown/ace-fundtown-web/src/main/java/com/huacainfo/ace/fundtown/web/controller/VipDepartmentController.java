@@ -1,7 +1,6 @@
 package com.huacainfo.ace.fundtown.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -134,12 +133,10 @@ public class VipDepartmentController extends BaseController {
      * @author: Arvin
      * @version: 2018-07-04
      */
-    @RequestMapping(value = "/deleteVipDepartmentByVipDepartmentId")
+    @RequestMapping(value = "/delete")
     @ResponseBody
-    public MessageResponse deleteVipDepartmentByVipDepartmentId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("departmentId");
-        return vipDepartmentService.delDepartmentByPrimaryKey(id, getCurUserProp());
+    public MessageResponse deleteVipDepartmentByVipDepartmentId(String departmentId) throws Exception {
+        return vipDepartmentService.delDepartmentByPrimaryKey(departmentId, getCurUserProp());
     }
 
     /**
@@ -238,5 +235,21 @@ public class VipDepartmentController extends BaseController {
         }
 
         return vipMemberResService.deleteVipMemberResByVipMemberResId(resId, getCurUserProp());
+    }
+
+    /**
+     * 信息公示
+     *
+     * @param deptId 企业ID
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/repealPublicity")
+    public MessageResponse repealPublicity(String deptId) throws Exception {
+        if (StringUtil.isEmpty(deptId)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return vipDepartmentService.repealPublicity(deptId, getCurUserProp());
     }
 }

@@ -5,51 +5,45 @@
 <%
     session.setAttribute("portalPath", "/portal");
     request.setAttribute("now", CommonUtils.formatDate(new Date()));
+    com.huacainfo.ace.common.model.UserProp user = (com.huacainfo.ace.common.model.UserProp) session.getAttribute("SESSION_USERPROP_KEY");
+    String portalType = (String) user.getCfg().get("portalType");
 
 %>
 <script type="text/javascript">
     var contextPath = '${pageContext.request.contextPath}';
     var portalPath = '${portalPath}';
-    var layoutTopHeight = 190;
+    var layoutTopHeight = 280;
     var fastdfs_server = '${cfg.fastdfs_server}';
     var default_page_list = [${cfg.default_page_list}];
     var now = '${now}';
     var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
+    var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
+    var version = '${cfg.version}';
 </script>
-<script type="text/javascript"
-        src="/portal/system/getButtonAuthority.do?id=${param.id}"></script>
-<script type="text/javascript"
-        src="/portal/system/getUserProp.do"></script>
-<script type="text/javascript"
-        src="/portal/content/common/js/base.js?version=${cfg.version}"></script>
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/bootstrap.min.css?version=${cfg.version}"/>
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/jquery-ui.min.css?version=${cfg.version}"/>
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/datepicker.css?version=${cfg.version}"/>
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/ui.jqgrid.css?version=${cfg.version}"/>
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/ace-fonts.css?version=${cfg.version}"/>
-<link rel="stylesheet" href="/portal/content/common/assets/css/ace-ie8.min.css?version=${cfg.version}"/>
-<!--[if lte IE 9]>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/content/common/assets/css/ace-part2.min.css?version=${cfg.version}" />
-<![endif]-->
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/ace-skins.min.css?version=${cfg.version}"/>
-<link rel="stylesheet"
-      href="/portal/content/common/assets/css/ace-rtl.min.css?version=${cfg.version}"/>
-<!--[if lte IE 9]>
-<link rel="stylesheet" href="/portal/content/common/assets/css/ace-ie.min.css?version=${cfg.version}" />
-<![endif]-->
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lte IE 8]>
-<script src="/portal/content/common/assets/js/gz/html5shiv.js?version=${cfg.version}"></script>
-<script src="/portal/content/common/assets/js/gz/respond.min.js?version=${cfg.version}"></script>
-<![endif]-->
-<link rel="stylesheet" href="/portal/content/common/css/ace-ui-custom.css?version=${cfg.version}"/>
-<link rel="stylesheet" href="/portal/content/common/css/ui.multiselect.css?version=${cfg.version}"/>
-<!--commoncss-->
+<script type="text/javascript" src="${portalPath}/system/getButtonAuthority.do?id=${param.id}"></script>
+<script type="text/javascript" src="${portalPath}/system/getUserProp.do"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/base.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/loading.js?v=${cfg.version}"></script>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/bootstrap.min.css?version=${cfg.version}"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/font-awesome.min.css?version=${cfg.version}"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/jquery-ui.min.css?version=${cfg.version}"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/ui.jqgrid.css?version=${cfg.version}"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-fonts.css?version=${cfg.version}"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/css/ace-ie8.min.css?version=${cfg.version}"/>
+<link rel="stylesheet" href="${portalPath}/content/common/css/ui.multiselect.css?version=${cfg.version}"/>
+<link href="${portalPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet"
+      type="text/css"/>
+<%if (portalType.equals("1")) {%>
+<link href="${portalPath}/content/common/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
+<link href="${portalPath}/content/common/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet"
+      type="text/css" id="style_color"/>
+<%} else {%>
+<link href="${portalPath}/content/common/assets/layouts/layout3/css/layout.min.css" rel="stylesheet" type="text/css"/>
+<link href="${portalPath}/content/common/assets/layouts/layout3/css/themes/default.min.css" rel="stylesheet"
+      type="text/css"/>
+<%}%>
+<link rel="stylesheet" href="${portalPath}/content/common/css/ace-ui-custom.css?version=${cfg.version}"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+<%if (portalType.equals("4")) {%>
+<link href="${portalPath}/content/common/assets/layouts/layout3/css/custom.min.css" rel="stylesheet" type="text/css"/>
+<%}%>
