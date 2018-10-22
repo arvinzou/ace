@@ -1,5 +1,6 @@
 {
   "pages": [
+    "page/liveHome/index",
     "page/index/index",
     "page/mall/index",
     "page/me/index",
@@ -32,7 +33,7 @@
     "page/indexMore/index",
     "page/myBehavior/index",
     "page/myIdea/index",
-    "page/liveHome/index",
+   
     "page/liveView/index",
     "page/myLive/index",
     "page/live/index",
