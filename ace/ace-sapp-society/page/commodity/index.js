@@ -7,7 +7,8 @@ Page({
    */
   data: {
       siteId: null,
-      siteObj: null
+      siteObj: null,
+      userinfoData: null
   },
 
   /**
@@ -23,8 +24,32 @@ Page({
               that.setData({ siteObj: ret.data });
           }
       );
+    
+      that.initUserInfo();
+
+      
+
   },
- buy: function(e){
+  /**
+   * 查询用户信息
+   */
+  initUserInfo: function(){
+      var that = this;
+      util.request(cfg.findUserInfo, {},
+          function (ret) {
+              if (ret.status == 0) {
+                  that.setData({
+                      userinfoData: ret.data,
+                  });
+              } else {
+                  wx.navigateTo({ url: "../regist/index" });
+              }
+
+          }
+      );
+  },
+  buy: function(e){
+     wx.setStorageSync("commodityId", e.currentTarget.dataset.id);
      wx.navigateTo({
          url: '../settlement/index?commodityId=' + e.currentTarget.dataset.id,
      })

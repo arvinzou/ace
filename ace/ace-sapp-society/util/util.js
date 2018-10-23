@@ -144,7 +144,7 @@ function isLogin() {
         return false;
     }
     return true;
-}
+} is_login
 
 function is_login(){
     var userinfo = wx.getStorageSync('userinfo');

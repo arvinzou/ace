@@ -36,7 +36,7 @@
                         </view>
                     </view>
                 </view>
-                <view class='commodity-item' bindtap='commodityDetal' wx:if="{{ index % 2 != 0}}">
+                <view class='commodity-item' bindtap='commodityDetal' data-id='{{ item.id }}' wx:if="{{ index % 2 != 0}}">
                     <view class='cover'><image src='{{ item.commodityCover }}'></image></view>
                     <view class='commodity-title'>
                         <text>{{ index }}{{ item.commodityName }}</text>
