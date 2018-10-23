@@ -49,8 +49,8 @@
 }
 
 .rpt-content{
-  padding-top: 1rpx;
-  padding-bottom: 1rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
   border-top: solid 1px #ebebeb;
 }
 .rpt-content:first-child{

@@ -174,10 +174,6 @@ width: 80%;
 .show{ 
  display: block;
 }
-
-
-
-
 .add{
    right: 40rpx;
 }
