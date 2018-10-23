@@ -1,5 +1,6 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
+var fileList = [];
 Page({
 
   /**
@@ -30,7 +31,7 @@ Page({
       fileUrl: '../../image/addFile.png',
       isUpload: false,
       category: '1',
-      solutionNum: 0,
+      solutionNum: 0
   },
 
   /**
@@ -43,12 +44,13 @@ Page({
       }
   },
   formSubmit: function(e){
+      console.log("fileList=================================="+fileList);
       var that = this;
       var title = e.detail.value.title;
       var solution = e.detail.value.solution;
       var listSubjectIdeaAnnexVo = [];
-      var ideaAnnex = { "fileUrl": that.data.fileUrl}
-      if (that.data.isUpload){
+      for(var i=0; i<fileList.length; i++){
+          var ideaAnnex = { "fileUrl": fileList[i] };
           listSubjectIdeaAnnexVo.push(ideaAnnex);
       }
       if(title == '' || title == undefined || title == null){
@@ -87,58 +89,6 @@ Page({
           }
       );
   },
-    addFile: function () {
-        var that = this;
-        wx.showActionSheet({
-            itemList: ['打开照相', '选取现有的'],
-            itemColor: '#007aff',
-            success(res) {
-                if (res.tapIndex === 0) {
-                    wx.chooseImage({
-                        success(res) {
-                            that.uploadFileFun(res.tempFilePaths[0]);
-                        }
-                    })
-                } else if (res.tapIndex === 1) {
-                    wx.chooseImage({
-                        //count: 3, // 设置最多三个文件
-                        //sizeType: ['original', 'compressed'],
-                        //sourceType: ['album', 'camera'],
-                        success(res) {
-                            var tempFilePaths = res.tempFilePaths;
-                            for (var i = 0; i < tempFilePaths.length; i++) {
-                                that.uploadFileFun(tempFilePaths[i]);
-                            }
-                        }
-                    })
-                }
-            }
-        })
-    },
-
-    uploadFileFun: function (tempFilePaths) {
-        var that = this;
-        wx.uploadFile({
-            url: 'http://zx.huacainfo.com/portal/www/uploadFile.do',
-            filePath: tempFilePaths,
-            name: 'file',
-
-            formData: {
-                collectionName: 'ceshi',
-                id: '111'
-            },
-            success: function (res) {
-                var data = JSON.parse(res.data);
-                var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
-                that.setData({ fileUrl: url });
-                that.setData({ isUpload: true});
-            },
-            fail: function (res) {
-                return null
-            },
-        })
-    },
-
     bindPickerChange: function (e) {
         var that = this;
         console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -152,6 +102,78 @@ Page({
         let temp = {};
         temp[name] = e.detail.cursor,
         this.setData(temp);
+    },
+
+    chooseWxImage: function (type) {
+        var that = this;
+        wx.chooseImage({
+            sizeType: ['original', 'compressed'],
+            sourceType: [type],
+            success: function (res) {
+
+                for (var i = 0; i < res.tempFilePaths.length; i++) {
+                    wx.showLoading({ title: "正在上传" });
+                    console.log(res.tempFilePaths[i]);
+                    wx.uploadFile({
+                        url: cfg.uploadUrl,
+                        filePath: res.tempFilePaths[i],
+                        name: 'file',
+                        header: {
+                            'content-type': 'multipart/form-data'
+                        },
+                        formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
+                        success: function (resp) {
+                            console.log(resp);
+                            wx.hideLoading();
+                            var obj = JSON.parse(resp.data);
+                            console.log(obj);
+                            fileList.push(obj.file_path);
+                            that.setData({
+                                files: fileList
+                            });
+                        },
+                        fail: function (res) {
+                            wx.hideLoading();
+                            wx.showModal({ title: "提示", content: "上传失败" })
+                        }
+                    })
+                }
+
+
+            }
+        })
+    },
+    previewImage: function (e) {
+        wx.previewImage({
+            current: e.currentTarget.id, // 当前显示图片的http链接
+            urls: this.data.files // 需要预览的图片http链接列表
+        })
+    },
+    chooseImage: function () {
+        let that = this;
+        wx.showActionSheet({
+            itemList: ['从相册中选择', '拍照'],
+            success: function (res) {
+                if (!res.cancel) {
+                    if (res.tapIndex == 0) {
+                        that.chooseWxImage('album')
+                    } else if (res.tapIndex == 1) {
+                        that.chooseWxImage('camera')
+                    }
+                }
+            }
+        })
+    },
+    delImage: function (e) {
+        var idx = e.target.dataset.index;
+        console.log(idx);
+        let that = this;
+        var files = that.data.files;
+        if (files.length > 0) {
+            files.remove(idx);
+            fileList.remove(idx);
+        }
+        that.setData({ files: files });
     },
   /**
    * 生命周期函数--监听页面初次渲染完成
