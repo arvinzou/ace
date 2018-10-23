@@ -4,6 +4,10 @@
 page{
   background:#fff
 }
+.index{
+  height: 100%;
+  overflow: auto;
+}
 .img {
   width: 80rpx;
   height: 80rpx;
