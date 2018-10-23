@@ -10,6 +10,7 @@ Page({
      siteId: null,
      siteObj : null,
      summary: null,
+     userinfoData: null
   },
 
   /**
@@ -28,6 +29,8 @@ Page({
               that.setData({ summary: content});
           }
       );
+
+      that.initUserInfo();
   },
   change: function(){
     var that = this;
@@ -36,6 +39,21 @@ Page({
         url: '../siteChoose/index?siteId=' + that.data.siteId
     })
   },
+    initUserInfo: function () {
+        var that = this;
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    that.setData({
+                        userinfoData: ret.data,
+                    });
+                } else {
+                    wx.navigateTo({ url: "../regist/index" });
+                }
+
+            }
+        );
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
