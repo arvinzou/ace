@@ -196,7 +196,6 @@ function login(callback) {
       })
     }
   });
-
 }
 
 /** 
@@ -264,12 +263,35 @@ function initRadioGroupData(list,value){
   }
   return list;
 }
+
+
 function indexOf(arr, item) {
   console.log("========indexOf=========");
   console.log(arr);
   console.log(item);
   return arr.indexOf(item);
 }
+
+
+function setSysUser(sysUserInfo){
+    wx.setStorageSync('sysUserInfo', sysUserInfo);
+}
+
+function getSysUser(){
+    var sysUserInfo = wx.getStorageSync('sysUserInfo');
+    if (!sysUserInfo) {
+        return false;
+    }
+    return sysUserInfo;
+}
+
+function delSysUser(){
+    wx.removeStorageSync('sysUserInfo');
+}
+
+
+
+
 module.exports = {
     formatTime: formatTime,
     formatLocation: formatLocation,
@@ -288,7 +310,10 @@ module.exports = {
     extend: extend,
     initRadioGroupData: initRadioGroupData,
     indexOf: indexOf,
-    is_login: is_login
+    is_login: is_login,
+    getSysUser: getSysUser,
+    setSysUser: setSysUser,
+    delSysUser: delSysUser
 }
 
 
@@ -307,3 +332,5 @@ Date.prototype.Format = function (fmt) {
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+
+
