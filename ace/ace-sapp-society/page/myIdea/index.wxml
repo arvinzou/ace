@@ -10,10 +10,12 @@
                     <text class='name'>{{ item.createUserName }}</text>
                     <text class='time'>{{ item.createDate }}</text>
                 </view>
-                <view class='file_box'>
-                    <image src='../../image/attach.png' class='attach'></image>
-                    <text>附件</text>
-                </view>
+                <block wx:if='{{item.listSubjectIdeaAnnexVo.length > 0}}'>
+                    <view class='file_box' bindtap='downloadFile' data-value='{{item.listSubjectIdeaAnnexVo}}'>
+                        <image src='../../image/attach.png' class='attach'></image>
+                        <text>附件</text>
+                    </view>
+                </block>
             </view>
             <view class='status'>
                 <block wx:if='{{item.status == 1}}'>
