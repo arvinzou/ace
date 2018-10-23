@@ -92,8 +92,8 @@ page{
 .chat-content{  
   display: flex;  
   flex-direction: row;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 40rpx;
 }
 .chat-right{
   flex:1;
