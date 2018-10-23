@@ -2,12 +2,10 @@
     <view class="page">
         <!--顶部导航栏-->
         <view class='navbar'>
-            <!--<view class="tab-item {{currentTab==0 ? '' : ''}}" data-current="0" bindtap="swichNav">文明行为</view>
-            <view class="tab-item {{currentTab==1 ? '' : ''}}" data-current="1" bindtap="swichNav">不文明行为</view>-->
             <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
         </view>
         <!--内容主体-->
-            <view class='content'>
+            <view class='content' hidden="{{currentTab!=0}}">
                 <block wx:for='{{ behaviorList }}'>
                     <view class='content-item' bindtap=''>
                         <view class='content-left'>
@@ -31,14 +29,14 @@
                 </block>
             </view>
 
-            <view class='content'>
+            <view class='content' hidden="{{currentTab!=1}}">
                 <block wx:for='{{ behaviorList }}'>
                     <view class='content-item'>
                         <view class='content-left'>
-                            <image src='../../image/head.jpg' class='head'></image>
+                            <image src='{{item.avatarUrl}}' class='head'></image>
                         </view>
                         <view class='content-right'>
-                            <view class='nickname'><text>不漂亮</text></view>
+                            <view class='nickname'><text>{{item.nickName}}</text></view>
                             <view class='remark'>{{ item.compendium }}</view>
                             <view class='attach'>
                                 <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
