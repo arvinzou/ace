@@ -89,11 +89,11 @@ page{
   margin: 2rpx auto;
   border-radius: 50%; 
 }
-.chat-content{  
-  display: flex;  
+.chat-content{
+  display: flex;
   flex-direction: row;
-  padding-left: 20rpx;
-  padding-right: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 40rpx;
 }
 .chat-right{
   flex:1;
