@@ -2,8 +2,6 @@
 
 <block wx:for-items="{{list}}" wx:key="*">
       <view class="wrap">
-       
-
           <view class='report-box-second'>
             <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
               <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
@@ -27,11 +25,12 @@
 
                 </view>
               </view>
-               <view class='cmt-bar'>
-               <text style='padding-right:10rpx;color:blue'>{{item.likeNum}}</text>
-            <image src='../../image/点赞.png'  class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
-            <image src='../../image/评论.png'  class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
-            </view>
+                <view class='cmt-bar'>
+
+          <image src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
+          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left'>{{item.likeNum}}</text>
+          <image src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
+        </view>
               <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
                 <view class='chat-content'>
                   <image src='{{citem.headimgurl}}' class='headimg'></image>
@@ -48,7 +47,16 @@
           </view>
       </view>
     </block>
-     <modal hidden="{{hiddenmodalcmt}}" title="请输入要发表的内容" confirm-text="提交" cancel-text="取消" bindcancel="cancelCmt" bindconfirm="confirmCmt">
-    <textarea class="inputViewCmt" name="content" type="text" placeholder="说点啥唄" placeholder-style="color: #ccccc" auto-focus="true" bindinput="contentCmtInput" value="{{contentCmtText}}" />
-  </modal>
+     
 </view>
+
+
+ <view class="model" wx:if='{{actionComment}}'>
+    <view class='inner-model' catchtap='hiddenComment'></view>
+    <view class='box whiteBg'>
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar='' name="commentVal"></textarea>
+        <button class='submit' formType="submit">发送</button>
+      </form>
+    </view>
+  </view>
