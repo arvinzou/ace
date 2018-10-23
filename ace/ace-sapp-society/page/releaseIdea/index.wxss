@@ -24,6 +24,8 @@
     width: 90%;
     height: auto;
     margin: 0 auto;
+    padding-top:30rpx;
+    padding-bottom:30rpx;
 }
 .idea-content{
     width: 100%;
@@ -103,4 +105,22 @@
     font-size: 36rpx;
     font-weight: bold;
     margin-top: 15rpx;
+}
+.btn-img-small {
+  position:absolute;
+  width: 40rpx;
+  height: 40rpx;
+  right:3rpx;
+  top:3rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+.removeImgBtn{
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  right:90rpx;
+  bottom:10rpx;
+  background: #fff;
+  border-radius: 50%;
 }

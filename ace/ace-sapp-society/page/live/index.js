@@ -2,6 +2,12 @@ var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
 const app = getApp();
+
+var wxuser = {
+  headimgurl: "",
+  nickname: "",
+  openid: ""
+};
 var dict = {};
 dict['1001'] = '已经连接推流服务器';
 dict['1002'] = '开始推流';
@@ -34,12 +40,6 @@ dict['3002'] = 'RTMP服务器连接失败';
 dict['3003'] = 'RTMP服务器握手失败';
 dict['3004'] = 'RTMP服务器主动断开';
 dict['3005'] = 'RTMP 读/写失败';
-var wxuser = {
-  headimgurl: "",
-  nickname: "",
-  openid: ""
-};
-
 Page({
   data: {
     serverfile: cfg.serverfile,
@@ -60,14 +60,17 @@ Page({
     toView: 0,
     contentText: '',
     hiddenmodalput: true,
-    hiddenmodalcmt:true,
+    hiddenmodalcmt: true,
     display: 'show',
     currentTab: 0,
-    navbar: ['互动聊天', '图文直播'],
+    navbar: ['简介', '直播', '互动'],
     id: null,
     list: [],
     pusherSizeH: 35,
-    pusherSizeW: 100
+    paddingtop: 0,
+    nameDisplay: false,
+    scoll: 'live-top-box-noscoll',
+    sort: '0'
   },
   onReady: function (res) {
     var that = this;
@@ -79,7 +82,6 @@ Page({
       title: dict[e.detail.code]
     })
   },
-  
   netstatus(e) {
     this.setData(
       {
@@ -91,7 +93,7 @@ Page({
     console.log("===============接收信息===================");
     console.log(data);
     var that = this;
-    var message=[];
+    var message = [];
     if (data.header.cmd == 'reload.rpt') {
       that.loadRpt();
       return;
@@ -102,21 +104,18 @@ Page({
       return;
     }
     if (data.header.cmd == 'content') {
+      data.id = "c" + util.uuid();
       message = that.data.message;
       message.push(data);
+      console.log(data);
+      that.setData({ message: message, scrollintoview: data.id });
     }
-    
 
-    that.setData({ message: message });
-    that.setData({ toView: 1000 });
-    wx.pageScrollTo({
-      scrollTop: 1000
-    });
   },
   onLoad: function (params) {
     var that = this;
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../live/index?id=" + params.id });
+      wx.navigateTo({ url: "../userinfo/index?url=../preview/index?id=" + params.id });
     }
     that.setData({
       userinfo: wx.getStorageSync('userinfo')
@@ -260,67 +259,6 @@ Page({
     }
   }
   ,
-  formSubmit: function () {
-    var that = this;
-    var message = {};
-    message.header = {
-      cmd: 'content',
-      wxuser: {
-        headimgurl: that.data.userinfo.avatarUrl,
-        nickname: that.data.userinfo.nickName,
-        openid: that.data.userinfo.openId,
-        unionid: that.data.userinfo.unionId
-      }
-    };
-
-    message.createTime = util.formatTime(new Date(), 'h:m:s');
-    message.content = that.data.contentText;
-    wx.sendSocketMessage({
-      data: JSON.stringify(message),
-    });
-    console.log(message);
-    that.setData({ contentText: '' });
-  },
-  initData(id) {
-    var that = this;
-    that.loadMsg();
-    that.loadRpt();
-
-  },
-  //点击按钮痰喘指定的hiddenmodalput弹出框  
-  modalinput: function () {
-    this.setData({
-      hiddenmodalput: !this.data.hiddenmodalput
-    })
-  },
-  //取消按钮  
-  cancel: function () {
-    this.setData({
-      hiddenmodalput: true
-    });
-  },
-  //确认  
-  confirm: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e);
-    var that = this;
-    if (!that.data.contentText) {
-      wx.showToast({
-        title: '发送内容不为空',
-        icon: 'none',
-        duration: 1000
-      })
-      return false;
-    }
-    that.formSubmit();
-    that.setData({
-      hiddenmodalput: true
-    })
-  },
-  contentInput: function (e) {
-    this.setData({
-      contentText: e.detail.value
-    })
-  },
   rpt: function () {
     var that = this;
     console.log('../rpt/index?id=' + that.data.id);
@@ -329,24 +267,29 @@ Page({
     })
 
   },
-  loadMsg:function(){
-    var that=this;
-    that.data.message=[];
+  loadMsg: function () {
+    var that = this;
+    that.data.message = [];
+
     util.request(cfg.getLiveMsgList, { rid: that.data.id },
       function (data) {
+        var scrollintoview = "";
         for (var i = 0; i < data.length; i++) {
           var o = JSON.parse(data[i].content);
+          o.id = "c" + data[i].id;
+          scrollintoview = o.id;
           console.log(o);
           that.renderChartBox(o);
         }
+        that.setData({ scrollintoview: scrollintoview });
       }
     );
   },
   loadRpt: function () {
     var that = this;
-    that.data.list=[];
+    that.data.list = [];
     that.setData({ list: [] });
-    util.request(cfg.getLiveRptList, { rid: that.data.id, page: 1 },
+    util.request(cfg.getLiveRptList, { rid: that.data.id, page: 1, sort: that.data.sort },
       function (data) {
         that.setData({ list: data.data });
       }
@@ -359,17 +302,9 @@ Page({
     })
   },
   onPageScroll: function (res) {
-    let that = this;
-   // console.log(res);
-    if (res.scrollTop >= 30) {
-      if (true) {
-        //that.setData({ pusherSizeH: 0, pusherSizeW: 0 });
-      }
-    } else {
-      if (true) {
-        //that.setData({ pusherSizeH: 35, pusherSizeW: 100 });
-      }
-    }
+    
+
+    
   },
   onReachBottom: function () {
     console.log("onReachBottom");
@@ -393,11 +328,13 @@ Page({
   onPullDownRefresh: function () {
     let that = this;
     wx.stopPullDownRefresh();
+    that.loadRpt();
+    that.loadMsg();
 
   },
-  addlike:function(e){
+  addlike: function (e) {
     console.log(e.currentTarget.dataset.id);
-    util.request(cfg.addLike, { type: "2", id: e.currentTarget.dataset.id},
+    util.request(cfg.addLike, { type: "2", id: e.currentTarget.dataset.id },
       function (data) {
 
       }
@@ -405,17 +342,96 @@ Page({
   },
   addcmt: function (e) {
     console.log(e.currentTarget.dataset.id);
-    var that=this;
+    var that = this;
     that.setData({
-      hiddenmodalcmt: false,
-      rptId: e.currentTarget.dataset.id
+      rptId: e.currentTarget.dataset.id,
+      actionComment: true,
+      commentType:'cmt'
     })
   },
-  //确认  
-  confirmCmt: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e);
+  sendComment: function (content) {
     var that = this;
-    if (!that.data.contentCmtText) {
+    var data = {};
+    data.rptId = that.data.rptId;
+    data.uid = that.data.userinfo.unionId;
+    data.content = content;
+    util.request(cfg.insertLiveCmt, { jsons: JSON.stringify(data) },
+      function (data) {
+        that.setData({
+          actionComment: false
+        });
+      }
+    );
+  },
+  initData(id) {
+    var that = this;
+    that.loadMsg();
+    that.loadRpt();
+    that.loadLive(id);
+    that.loadTotalNumAndOrgInfo(id);
+  },
+  
+  loadLive: function (id) {
+    var that = this;
+    util.request(cfg.loadLive, { id: id },
+      function (data) {
+        console.log(data);
+        that.setData({live: data, startDate: data.startTime.substring(0, 10) });
+        wx.setNavigationBarTitle({
+          title: data.name
+        })
+      }
+    );
+  },
+  loadTotalNumAndOrgInfo: function (id) {
+    var that = this;
+    util.request(cfg.server + "/live/www/live/getTotalNumAndOrgInfo", { id: id, companyId: cfg.companyId },
+      function (data) {
+        console.log(data);
+        that.setData({ org: data.data });
+      }
+    );
+  },
+  sort: function () {
+    var that = this;
+    if (that.data.sort == '0') {
+      that.setData({ sort: '1' });
+    } else {
+      that.setData({ sort: '0' });
+    }
+    that.loadRpt();
+  },
+  actionComment: function () {
+    this.setData({
+      actionComment: true,
+      commentType: 'chat'
+    })
+  },
+  hiddenComment: function (e) {
+    let that = this;
+    if (that.data.commentVal) {
+      wx.showModal({
+        title: '提示',
+        content: '确定放弃吗？',
+        success: function (res) {
+          if (!res.confirm) {
+            return;
+          }
+        }
+      });
+    }
+    that.setData({
+      actionComment: false,
+    });
+  },
+  getValue: function (e) {
+    let that = this;
+    that.data.commentVal = e.detail.value;
+  },
+  formSubmit: function (e) {
+    var  commentVal=e.detail.value.commentVal;
+    var that = this;
+    if (!commentVal) {
       wx.showToast({
         title: '发送内容不为空',
         icon: 'none',
@@ -423,46 +439,34 @@ Page({
       })
       return false;
     }
-    that.cmtFormSubmit();
+    if (that.data.commentType=='chat'){
+      that.sendChat(commentVal);
+    }
+    if (that.data.commentType == 'cmt') {
+      that.sendComment(commentVal);
+    }
     that.setData({
-      hiddenmodalcmt: true
-    })
-  },
-  contentCmtInput: function (e) {
-    this.setData({
-      contentCmtText: e.detail.value
-    })
-  },
-  cmtFormSubmit: function () {
-    var that = this;
-    var data = {};
-    data.rptId = that.data.rptId;
-    data.uid = that.data.userinfo.unionId;
-    data.content = that.data.contentCmtText;
-    util.request(cfg.insertLiveCmt, { jsons: JSON.stringify(data)},
-      function (data) {
-        that.setData({ hiddenmodalcmt:true });
-        that.setData({ contentCmtText: '' });
-      }
-    );
-    
-  },
-  initData(id) {
-    var that = this;
-    that.loadMsg();
-    that.loadRpt();
-
-  },
-  //点击按钮痰喘指定的hiddenmodalput弹出框  
-  modalinputCmt: function () {
-    this.setData({
-      hiddenmodalcmt: !this.data.hiddenmodalcmt
-    })
-  },
-  //取消按钮  
-  cancelCmt: function () {
-    this.setData({
-      hiddenmodalcmt: true
+      actionComment: false
     });
   },
+  sendChat:function(content){
+    var that=this;
+    var message = {};
+    message.header = {
+      cmd: 'content',
+      wxuser: {
+        headimgurl: that.data.userinfo.avatarUrl,
+        nickname: that.data.userinfo.nickName,
+        openid: that.data.userinfo.openId,
+        unionid: that.data.userinfo.unionId
+      }
+    };
+    message.createTime = util.formatTime(new Date(), 'h:m:s');
+    message.content = content;
+    wx.sendSocketMessage({
+      data: JSON.stringify(message),
+    });
+    console.log(message);
+  }
+
 });

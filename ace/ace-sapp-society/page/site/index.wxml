@@ -32,5 +32,20 @@
     </view>
 </view>
 <view class='footer'>
-    <button class='exchange' bindtap='change'>立即兑换</button>
+    <block wx:if='{{userinfoData.regType == "2"}}'>
+        <block wx:if='{{userinfoData.societyOrg.validPoints >= siteObj.costPoints}}'>
+            <button class='exchange' bindtap='change' data-id='{{ siteObj.id }}'>立即兑换</button>
+        </block>
+        <block wx:else>
+            <button class='unexchange'>积分不足</button>
+        </block>
+    </block>
+    <block wx:else>
+        <block wx:if='{{userinfoData.person.validPoints >= siteObj.costPoints}}'>
+            <button class='exchange' bindtap='change' data-id='{{ siteObj.id }}'>立即兑换</button>
+        </block>
+        <block wx:else>
+            <button class='unexchange'>积分不足</button>
+        </block>
+    </block>
 </view>

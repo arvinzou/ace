@@ -1,5 +1,62 @@
 var loading;
+
 var  urlParams = {};
+
+function rsd(value, kernelKey, staticDictObjects) {
+	try {
+		if (!staticDictObjects) {
+			staticDictObjects = parent.staticDictObject;
+		}
+
+		var name = value;
+
+		if ((value + "") && ("" + value).indexOf(',') < 0) {
+			if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
+				for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+					if (staticDictObjects[kernelKey][i].CODE == value) {
+						name = staticDictObjects[kernelKey][i].NAME;
+						break;
+					}
+				}
+			}
+		} else {
+			if (value) {
+				var nameArray = [];
+				var v = (value + "").split(',');
+				for (var j = 0; j < v.length; j++) {
+					for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+						if (staticDictObjects[kernelKey][i].CODE == v[j]) {
+							nameArray.push(staticDictObjects[kernelKey][i].NAME);
+							break;
+						}
+					}
+				}
+				name = nameArray.join(',');
+			}
+		}
+	} catch (err) {
+		console.log("渲染错误", value + ":" + kernelKey + ":" + err);
+	}
+	return name;
+}
+
+function odparse(kernelKey, staticDictObjects) {
+	var rst = [];
+	try {
+		if (!staticDictObjects) {
+			staticDictObjects = parent.staticDictObject;
+		}
+		if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
+			for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+				rst.push(staticDictObjects[kernelKey][i].CODE + ":"
+						+ staticDictObjects[kernelKey][i].NAME);
+			}
+		}
+	} catch (err) {
+		console.log("渲染错误", value + ":" + kernelKey + ":" + err);
+	}
+	return rst.join(";");
+}
 function getQueryString() {
       var qs = location.search.substr(1),
         args = {},
@@ -70,9 +127,9 @@ var buildMenu = function(menus) {
 		                        }
 		                    }
 							if (menu.leaf != true && menu.leaf != 'true') {
-								html.push('<a class="nav-link nav-toggle" href="#" url="'+menu.href+'"><i class=""></i><small>'+ menu.text + '</small><span class="arrow"></span>');
+								html.push('<a class="nav-link nav-toggle" href="#" url="'+menu.href+'"><i class=""></i>'+ menu.text + '<span class="arrow"></span>');
 							}else{
-							    html.push('<a class="nav-link" href="#" url="'+menu.href+'"><i class=""></i><small>'+ menu.text + '</small><span class="arrow"></span>');
+							    html.push('<a class="nav-link" href="#" url="'+menu.href+'"><i class=""></i>'+ menu.text + '<span class="arrow"></span>');
 							}
 							html.push('</a>');
 							//html.push('<b class="arrow"></b>');
@@ -82,33 +139,34 @@ var buildMenu = function(menus) {
 									html.push('<ul class="dropdown-menu">');
 									for (var i = 0; i < len; i++) {
 										if (childrens[i].href) {
-										    if(urlParams.id){
-                                                if(urlParams.id==childrens[i].id){
-                                                     html.push('<li class=" active" aria-haspopup="true">');
-                                                    											html.push('<a  class="nav-link" href="#" title="'
-                                                    															+ childrens[i].text
-                                                    															+ '" url="'
-                                                    															+ childrens[i].href
-                                                    															+ '" ><i class=""></i><small>'
-                                                    															+ childrens[i].text
-                                                    															+ '</small><span class="arrow"></span></a>');
-                                                }else{
-                                                    html.push('<li class="" aria-haspopup="true">');
-                                                   											html.push('<a  class="nav-link" href="#" title="'
-                                                   															+ childrens[i].text
-                                                   															+ '" url="'
-                                                   															+ childrens[i].href
-                                                   															+ '" ><i class=""></i><small>'
-                                                   															+ childrens[i].text
-                                                   															+ '</small><span class="arrow"></span></a>');
-                                                }
-                                            }
+                                             if(urlParams.id){
+                                                    if(urlParams.id==childrens[i].id){
+                                                        html.push('<li class="active" aria-haspopup="true">');
+                                                        html.push('<a  class="nav-link" href="#" title="'+ childrens[i].text+ '" url="'+ childrens[i].href+ '" ><i class=""></i>'+ childrens[i].text+ '<span class="arrow"></span></a>');
+                                                    }else{
+                                                        html.push('<li class="" aria-haspopup="true">');
+                                                        html.push('<a  class="nav-link" href="#" title="'+ childrens[i].text+ '" url="'+ childrens[i].href+ '" ><i class=""></i>'+ childrens[i].text+ '<span class="arrow"></span></a>');
+                                                    }
 
+                                             }else{
+                                                    html.push('<li class="" aria-haspopup="true">');
+                                                    html.push('<a  class="nav-link" href="#" title="'+ childrens[i].text+ '" url="'+ childrens[i].href+ '" ><i class=""></i>'+ childrens[i].text+ '<span class="arrow"></span></a>');
+                                             }
 										} else {
-										    html.push('<li class="dropdown-submenu" aria-haspopup="true">');
-											html.push('<a class="nav-toggle" href="#"><i class=""></i><small>'
-															+ childrens[i].text
-															+ '</small><span class="arrow"></span></a>');
+										    if(urlParams.id){
+                                                    if(urlParams.id==childrens[i].id){
+                                                          html.push('<li class="dropdown-submenu active" aria-haspopup="true">');
+                                                          html.push('<a class="nav-toggle" href="#"><i class=""></i>'+ childrens[i].text+ '<span class="arrow"></span></a>');
+                                                    }else{
+                                                          html.push('<li class="dropdown-submenu" aria-haspopup="true">');
+                                                          html.push('<a class="nav-toggle" href="#"><i class=""></i>'+ childrens[i].text+ '<span class="arrow"></span></a>');
+                                                    }
+
+                                             }else{
+                                                      html.push('<li class="dropdown-submenu" aria-haspopup="true">');
+                                                    html.push('<a class="nav-toggle" href="#"><i class=""></i>'+ childrens[i].text+ '<span class="arrow"></span></a>');
+                                             }
+
 										}
 										initSubMenu(childrens[i]);
 										html.push('</li>');
@@ -147,12 +205,12 @@ var buildMenu = function(menus) {
 	 console.log(activeNode);
          if(urlParams.id){
             //$(activeNode).parent().css('display','block');
-             $(activeNode).parent().parent().addClass("active");
+            // $(activeNode).parent().parent().addClass("active");
 
              //$(activeNode).parent().parent().parent().css('display','block');
-             $(activeNode).parent().parent().parent().parent().addClass("active");
+             //$(activeNode).parent().parent().parent().parent().addClass("active");
 
-             var title=$(activeNode).find("a small").html();
+             var title=$(activeNode).find("a").text();
 
              $("title").html(title);
              $(".todo-header").html(title);
@@ -230,7 +288,7 @@ function initMenu(){
         buildMenu(data);
      }else{
         $.ajax({
-                    url : portalPath + '/system/getTreeList.do?loadButton=false',
+                    url : portalPath + '/system/getTreeList.do?loadButton=false&client=c',
                     type : 'POST',
                     timeout : 30000,
                     dataType : 'json',

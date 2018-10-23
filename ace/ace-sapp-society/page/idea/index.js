@@ -35,7 +35,18 @@ initList: function(){
         }
     );
 },
-
+downloadFile: function(e){
+    var that = this;
+    var fileObjList = e.currentTarget.dataset.value;
+    var fileList = [];
+    for(var i=0; i<fileObjList.length; i++){
+        fileList.push(fileObjList[i].fileUrl);
+    }
+    wx.previewImage({
+        current: fileList[0], // 当前显示图片的http链接
+        urls: fileList// 需要预览的图片http链接列表
+    });
+},
 /**
  * 发布我有点子
  */

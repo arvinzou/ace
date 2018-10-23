@@ -37,7 +37,8 @@
     "page/myLive/index",
     "page/live/index",
     "page/rpt/index",
-    "page/liveCsl/index"
+    "page/liveCsl/index",
+    "page/releaseBehavior/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -12,7 +12,7 @@
                     <text style='line-height:500rpx;'>添加照片</text>
                 </block>
                 <block wx-if='{{ imageCover != null}}'>
-                    <image src='{{ imageCover }}' class='image-cover'></image>
+                    <image src='{{ imageCover }}' class='image-cover' mode="aspectFill"></image>
                 </block>
             </view>
             <view class='form-content'>

@@ -168,8 +168,8 @@
         </script>
         <!--捐赠列表渲染模板-->
         <script id="doante-tpl" type="text/template">
-            <ul style="height: 1.2rem;">
-                <marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 1.2rem;">
+            <ul style="height: 2.4rem;background: #FBDAD7;">
+                <marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 2.4rem;">
                     {@each data as dua, index}
                     <li>
                         <span class="list_left">\${dua.nickname} &nbsp; 捐赠<span class="money_default">\${dua.donateAmount}</span>元</span>

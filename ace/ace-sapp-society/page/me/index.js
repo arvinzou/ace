@@ -12,6 +12,7 @@ Page({
         num1: parseInt(Math.random() * 100),
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
+        userId: null
     },
 
     /**
@@ -26,6 +27,7 @@ Page({
             });
         } else {
             if (wx.getStorageSync('userinfo')) {
+                that.setData({ userId: wx.getStorageSync('WX-SESSION-ID')});
                 that.initUserData();
             }
 
@@ -77,6 +79,7 @@ Page({
     onShow: function() {
         var that = this;
         if (wx.getStorageSync('userinfo')) {
+            that.setData({userId: wx.getStorageSync('WX-SESSION-ID')})
             that.initUserData();
         }
     },
