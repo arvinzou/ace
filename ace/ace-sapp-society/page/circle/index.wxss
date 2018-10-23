@@ -44,7 +44,6 @@ page{
 .headimgp {
 	width:60rpx;height:60rpx;border-radius:0rpx;vertical-align:middle;
 }
-
 .rpt-content{
   padding-top: 20rpx;
   padding-bottom: 20rpx;
