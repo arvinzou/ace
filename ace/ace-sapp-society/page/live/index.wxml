@@ -127,7 +127,7 @@
         <view class='cmt-bar'>
 
           <image src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
-          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left'>{{item.likeNum}}</text>
+          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;color:red;line-height:50rpx'>{{item.likeNum}}</text>
           <image src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
         </view>
         <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">

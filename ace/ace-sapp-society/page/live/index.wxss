@@ -183,9 +183,8 @@ width: 80%;
 }
 
 .headimgp {
-	width:70rpx;height:70rpx;border-radius:0rpx;vertical-align:middle;
+width:70rpx;height:70rpx;border-radius:0rpx;vertical-align:middle;
 }
-
 .rpt-content{
   padding-top: 20rpx;
   padding-bottom: 20rpx;
