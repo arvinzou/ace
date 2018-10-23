@@ -108,6 +108,7 @@
     font-weight:bold;
     display: flex;
     justify-content: space-between;
+    text-align: center;
 }
 .activity-menu{
     width: 100%;
