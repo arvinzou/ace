@@ -3,10 +3,8 @@ var params = {limit: 10,category:'1'};
 window.onload = function () {
     initPage();
     initEvents();
-    $('#preview').on('click', '.btn-audit', audit);
-    $('#preview').on('change', '.verify-btn', beforeActive);
+    $('#preview').on('click', '.btn-sign-primary', auditActivity);
     $('#info').on('click', '.personnelInfo', optionPersonner);
-    $('#preview').modal('show');
 }
 
 /*不同的选项显示不同的按钮*/
@@ -210,27 +208,6 @@ function deleteData(id) {
 }
 
 
-// function details(id) {
-//     var url = contextPath + "/activity/selectActivityByPrimaryKey";
-//     var data = {
-//         id: id,
-//     }
-//     $('#preview').data('id', id);
-//     startLoad();
-//     $.post(url, data, function (rst) {
-//         stopLoad();
-//         if (rst.status == 0) {
-//             renderPage("info", rst.value, "tpl-info");
-//             if (rst.value.status == 2) {
-//                 getCoinConfig(rst.value.category);
-//             }
-//             $('#preview').modal("show");
-//             return;
-//         }
-//         alert(rst.errorMessage);
-//     })
-// }
-
 /*查看详情*/
 function details(id) {
     var url = contextPath + "/activity/selectActivityByPrimaryKey";
@@ -240,6 +217,21 @@ function details(id) {
             var html = juicer(navitem, {data: result.value});
             $("#fm-detail").html(html);
             $("#modal-detail").modal("show");
+        }
+    });
+}
+
+
+/*查看详情*/
+function signInfo(id) {
+    var url = contextPath + "/activity/selectActivityByPrimaryKey";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+            console.log(result);
+            var navitem = document.getElementById('tpl-fm-sign').innerHTML;
+            var html = juicer(navitem, {data: result.value});
+            $("#fm-sign").html(html);
+            $("#preview").modal("show");
         }
     });
 }
@@ -306,22 +298,6 @@ function initAuditForm(id) {
 }
 
 
-
-function getCoinConfig(category) {
-    var url = contextPath + "/coinConfig/findCoinConfigList";
-    var data = {
-        category: category,
-        start: 0,
-        limit: 10
-    }
-    $.getJSON(url, data, function (result) {
-        if (result.status == 0) {
-            renderPage('coinConfig', result.rows, 'tpl-coinConfig');
-        }
-    })
-}
-
-
 function renderPage(IDom, data, tempId) {
     var tpl = document.getElementById(tempId).innerHTML;
     var html = juicer(tpl, {
@@ -333,4 +309,41 @@ function renderPage(IDom, data, tempId) {
 function setParams(key, value) {
     params[key] = value;
     getPageList();
+}
+
+
+function auditActivity() {
+    var param={};
+    var rst=$('.signCheck input[name="rst"]:checked').val();
+    if (!rst) {
+        alert("请选择审核结果!");
+        return;
+    }
+    var id=$('.signCheck input[name="id"]').val();
+    var message=$('.signCheck textarea[name="message"]').val();
+    param={
+        rst:rst,
+        id:id,
+        message:message,
+    }
+    if(rst==32){
+        var list=[];
+        $('input[name="list"]:checked').each(function () {
+            console.log($(this).val());
+            list.push($(this).val());
+        })
+        param.list=list.join(",");
+    }
+    console.log(param);
+    var url = contextPath + "/activity/endAudit";
+    $.post(url, param, function (result) {
+        console.log(result);
+        if (result.status == 0) {
+            console.log(result);
+            var navitem = document.getElementById('tpl-fm-sign').innerHTML;
+            var html = juicer(navitem, {data: result.value});
+            $("#fm-sign").html(html);
+            $("#preview").modal("show");
+        }
+    });
 }

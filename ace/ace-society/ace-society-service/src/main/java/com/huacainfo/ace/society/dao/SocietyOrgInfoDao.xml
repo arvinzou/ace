@@ -296,6 +296,17 @@
         <include refid="Where_Condition"/>
     </select>
 
+
+    <update id="addcoin">
+        update society_org_info s
+              set s.accPoints=s.accPoints+(
+              select c.host+ CASE WHEN #{size,jdbcType=DECIMAL}>c.baseNum THEN (#{size,jdbcType=DECIMAL}-c.baseNum)*c.subjoinNum ELSE 0 END
+              from coin_config c
+              where c.id=#{coinId,jdbcType=VARCHAR}
+              )
+              where s.id=#{userId,jdbcType=VARCHAR}
+    </update>
+
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
