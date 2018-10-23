@@ -414,8 +414,10 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
         societyOrgInfoDao.addcoin(activity.getInitiatorId(),activity.getCategory(),list.size());
-        personInfoDao.addCoin(list,activity.getCategory());
-        activityDao.updateByPrimaryKey(activity);
+        if ("33".equals(rst)){
+            personInfoDao.addCoin(list,activity.getCategory());
+            activityDao.updateByPrimaryKey(activity);
+        }
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
     }

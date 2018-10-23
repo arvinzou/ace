@@ -197,7 +197,7 @@
         <div class="col-md-10">
             <div class="radio-group-container">
                 <label>
-                    <input type="radio" name="rst" value="32"><span style="padding:10px">通过</span>
+                    <input type="radio" name="rst" value="33"><span style="padding:10px">通过</span>
                 </label>
                 <label>
                     <input type="radio" name="rst" value="41"><span style="padding:10px">驳回</span>
@@ -376,12 +376,14 @@
         <td>
             {@if item.status==2}
             <span class="label label-lg label-info">发布审核</span>
-            {@else if item.status==3&&item.arStatus!=3}
-            <span class="label label-lg label-success">发布成功</span>
+            {@else if item.status==3}
+            <span class="label label-lg label-success">活动发布</span>
             {@else if item.status==4}
             <span class="label label-lg label-danger">发布驳回</span>
-            {@else if item.arStatus==3}
-            <span class="label label-lg label-info">结束审核</span>
+            {@else if item.arStatus==31}
+            <span class="label label-lg label-info">活动开始</span>
+            {@else if item.status==32}
+            <span class="label label-lg label-success">活动结束</span>
             {@else if item.status==33}
             <span class="label label-lg label-success">活动成功</span>
             {@else if item.status==41}
@@ -395,7 +397,7 @@
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
-            {@if item.arStatus==3}
+            {@if item.status==32}
             <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
             {@/if}
 

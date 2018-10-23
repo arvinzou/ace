@@ -326,7 +326,7 @@ function auditActivity() {
         id:id,
         message:message,
     }
-    if(rst==32){
+    if(rst==33){
         var list=[];
         $('input[name="list"]:checked').each(function () {
             console.log($(this).val());
