@@ -76,13 +76,8 @@
   </scroll-view>
   <view class='commentBox whiteBg top-line'>
     <view bindtap='actionComment' class='input'>说点啥唄</view>
-    <!--
-    <text class='iconfont icon-dianzan pop'> <text></text> </text>
-    <text class='iconfont icon-pinglun pop'> <text></text></text>
-    -->
   </view>
- 
-
+  
 </view>
 
 <view class='chat-box' hidden="{{currentTab!=1}}">
@@ -151,13 +146,7 @@
       </view>
     </view>
   </block>
-
-
-  
-</view>
-
-
-  <view class="model" wx:if='{{actionComment}}'>
+<view class="model" wx:if='{{actionComment}}'>
     <view class='inner-model' catchtap='hiddenComment'></view>
     <view class='box whiteBg'>
       <form bindsubmit="formSubmit" bindreset="formReset">
@@ -166,3 +155,4 @@
       </form>
     </view>
   </view>
+</view>

@@ -226,53 +226,7 @@ Page({
     }
   }
   ,
-  formSubmit: function () {
-    var that = this;
-    var message = {};
-    message.header = {
-      cmd: 'content',
-      wxuser: {
-        headimgurl: that.data.userinfo.avatarUrl,
-        nickname: that.data.userinfo.nickName,
-        openid: that.data.userinfo.openId,
-        unionid: that.data.userinfo.unionId
-      }
-    };
 
-    message.createTime = util.formatTime(new Date(), 'h:m:s');
-    message.content = that.data.contentText;
-    wx.sendSocketMessage({
-      data: JSON.stringify(message),
-    });
-    console.log(message);
-    that.setData({ contentText: '' });
-  },
-  submitChat: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e);
-    var that = this;
-    if (!that.data.contentText) {
-      wx.showToast({
-        title: '发送内容不为空',
-        icon: 'none',
-        duration: 1000
-      })
-      return false;
-    }
-    that.formSubmit();
-  },
-  contentInput: function (e) {
-    this.setData({
-      contentText: e.detail.value
-    })
-  },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
-    });
-    that.loadRpt();
-  },
   rpt: function () {
     var that = this;
     console.log('../rpt/index?id=' + that.data.id);
@@ -380,45 +334,24 @@ Page({
     console.log(e.currentTarget.dataset.id);
     var that = this;
     that.setData({
-      hiddenmodalcmt: false,
-      rptId: e.currentTarget.dataset.id
+      rptId: e.currentTarget.dataset.id,
+      actionComment: true,
+      commentType: 'cmt'
     })
   },
-  //确认  
-  confirmCmt: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e);
-    var that = this;
-    if (!that.data.contentCmtText) {
-      wx.showToast({
-        title: '发送内容不为空',
-        icon: 'none',
-        duration: 1000
-      })
-      return false;
-    }
-    that.cmtFormSubmit();
-    that.setData({
-      hiddenmodalcmt: true
-    })
-  },
-  contentCmtInput: function (e) {
-    this.setData({
-      contentCmtText: e.detail.value
-    })
-  },
-  cmtFormSubmit: function () {
+  sendComment: function (content) {
     var that = this;
     var data = {};
     data.rptId = that.data.rptId;
     data.uid = that.data.userinfo.unionId;
-    data.content = that.data.contentCmtText;
+    data.content = content;
     util.request(cfg.insertLiveCmt, { jsons: JSON.stringify(data) },
       function (data) {
-        that.setData({ hiddenmodalcmt: true });
-        that.setData({ contentCmtText: '' });
+        that.setData({
+          actionComment: false
+        });
       }
     );
-
   },
   initData(id) {
     var that = this;
@@ -427,24 +360,13 @@ Page({
     that.loadLive(id);
     that.loadTotalNumAndOrgInfo(id);
   },
-  //点击按钮痰喘指定的hiddenmodalput弹出框  
-  modalinputCmt: function () {
-    this.setData({
-      hiddenmodalcmt: !this.data.hiddenmodalcmt
-    })
-  },
-  //取消按钮  
-  cancelCmt: function () {
-    this.setData({
-      hiddenmodalcmt: true
-    });
-  },
+
   loadLive: function (id) {
     var that = this;
     util.request(cfg.loadLive, { id: id },
       function (data) {
         console.log(data);
-        that.setData({ rtmpurl: data.rtmpUrl, live: data,startDate:data.startTime.substring(0,10) });
+        that.setData({ live: data, startDate: data.startTime.substring(0, 10) });
         wx.setNavigationBarTitle({
           title: data.name
         })
@@ -453,20 +375,87 @@ Page({
   },
   loadTotalNumAndOrgInfo: function (id) {
     var that = this;
-    util.request(cfg.server + "/live/www/live/getTotalNumAndOrgInfo", { id: id, companyId: cfg.companyId},
+    util.request(cfg.server + "/live/www/live/getTotalNumAndOrgInfo", { id: id, companyId: cfg.companyId },
       function (data) {
         console.log(data);
-        that.setData({org:data.data});
+        that.setData({ org: data.data });
       }
     );
   },
-  sort:function(){
-    var that=this;
-    if (that.data.sort=='0'){
+  sort: function () {
+    var that = this;
+    if (that.data.sort == '0') {
       that.setData({ sort: '1' });
-    }else{
+    } else {
       that.setData({ sort: '0' });
     }
     that.loadRpt();
+  },
+  actionComment: function () {
+    this.setData({
+      actionComment: true,
+      commentType: 'chat'
+    })
+  },
+  hiddenComment: function (e) {
+    let that = this;
+    if (that.data.commentVal) {
+      wx.showModal({
+        title: '提示',
+        content: '确定放弃吗？',
+        success: function (res) {
+          if (!res.confirm) {
+            return;
+          }
+        }
+      });
+    }
+    that.setData({
+      actionComment: false,
+    });
+  },
+  getValue: function (e) {
+    let that = this;
+    that.data.commentVal = e.detail.value;
+  },
+  formSubmit: function (e) {
+    var commentVal = e.detail.value.commentVal;
+    var that = this;
+    if (!commentVal) {
+      wx.showToast({
+        title: '发送内容不为空',
+        icon: 'none',
+        duration: 1000
+      })
+      return false;
+    }
+    if (that.data.commentType == 'chat') {
+      that.sendChat(commentVal);
+    }
+    if (that.data.commentType == 'cmt') {
+      that.sendComment(commentVal);
+    }
+    that.setData({
+      actionComment: false
+    });
+  },
+  sendChat: function (content) {
+    var that = this;
+    var message = {};
+    message.header = {
+      cmd: 'content',
+      wxuser: {
+        headimgurl: that.data.userinfo.avatarUrl,
+        nickname: that.data.userinfo.nickName,
+        openid: that.data.userinfo.openId,
+        unionid: that.data.userinfo.unionId
+      }
+    };
+    message.createTime = util.formatTime(new Date(), 'h:m:s');
+    message.content = content;
+    wx.sendSocketMessage({
+      data: JSON.stringify(message),
+    });
+    console.log(message);
   }
 });
