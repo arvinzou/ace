@@ -74,6 +74,8 @@
 .submitDate{
     float: left;
     font-size: 24rpx; 
+    padding-left: 20rpx;
+    padding-right: 20rpx;
 }
 .status{
     width: 80rpx;
@@ -86,6 +88,7 @@
     background: blue;
     border-radius: 5rpx;
     font-size:24rpx;
+    margin-top: 10rpx;
 }
 .navbar {
    /* z-index: 100;*/
