@@ -91,8 +91,8 @@
 
     <!--**********************************-->
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.OrderInfoVo">
-        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
-        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickname"/>
+        <result column="avatarUrl" jdbcType="VARCHAR" property="headimgurl"/>
         <collection property="detailList" column="detailId" javaType="ArrayList"
                     ofType="com.huacainfo.ace.society.model.OrderDetail">
             <id property="id" jdbcType="VARCHAR" column="detailId"/>
@@ -108,7 +108,7 @@
         od.id as detailId, od.commodityId, od.commodityName, od.commodityCover,
         od.salePrice, od.purchaseQty, od.subtotal,
 
-        u.nickname,u.headimgurl,
+        wx.avatarUrl, wx.nickName,
         t.id, t.orderNo, t.userId, t.payType, t.payAmount, t.payDate, t.receiveType, t.receiveName, t.receivePhone,
         t.country, t.province, t.city, t.district, t.address, t.orderState, t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
@@ -132,8 +132,8 @@
 
     <sql id="From_Statement">
         from order_info t
+        left join portal.wx_user wx on t.userId = wx.unionId
         left join order_detail od on t.id = od.orderId
-        left join portal.userinfo u on t.userId = u.unionid
     </sql>
 
     <sql id="Where_Condition">
