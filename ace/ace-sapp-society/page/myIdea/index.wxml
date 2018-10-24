@@ -1,9 +1,9 @@
 <view class='index'>
     <view class='ideaList'>
     <block wx:for='{{ideaList}}'>
-        <view class='ideaItem' bindtap='showDetal' data-id='{{ item.id }}'>
-            <view class='title_box'><text>{{ item.title }}</text></view>
-            <view class='content_box'><text>{{ item.solution }}
+        <view class='ideaItem'>
+            <view class='title_box' bindtap='showDetal' data-id='{{ item.id }}'><text>{{ item.title }}</text></view>
+            <view class='content_box' bindtap='showDetal' data-id='{{ item.id }}'><text>{{ item.solution }}
             </text></view>
             <view class='item_footer'>
                 <view class='time_box'>
