@@ -141,4 +141,22 @@ public class ActivityReportController extends SocietyBaseController {
     public MessageResponse audit(String id, String rst, String remark) throws Exception {
         return this.activityReportService.audit(id, rst, remark, this.getCurUserProp());
     }
+
+    /**
+     * @throws
+     * @Title:audit
+     * @Description: TODO(审核活动报道)
+     * @param: @param id bean.id
+     * @param: @param rst 审核结果 3-通过 4-拒绝
+     * @param: @param remark 审核备注
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-13
+     */
+    @RequestMapping(value = "chosen")
+    @ResponseBody
+    public MessageResponse chosen(String id) throws Exception {
+        return this.activityReportService.chosen(id);
+    }
 }

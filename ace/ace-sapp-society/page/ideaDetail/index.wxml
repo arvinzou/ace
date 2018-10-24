@@ -2,15 +2,17 @@
     <view class='content'>
         <view class='idea-title'><text>{{ detail.title }}</text></view>
         <view class='idea-info'>
-            <image src='../../image/head.jpg' class='head'></image>
-            <text class='fontstyle' style='padding-left:20rpx;'>可惜我是水瓶座</text>
-            <text class='datetime'>2018-9-25 13:56</text>
-            <text class='download' style='padding-left12rpx'>下载附件</text>
-            <image class='download-file' src='../../image/attach.png'></image>
+            <image src='{{detail.avatarUrl}}' class='head'></image>
+            <text class='fontstyle' style='padding-left:20rpx;'>{{detail.nickname}}</text>
+            <text class='datetime'>{{detail.createDate}}</text>
+            <block wx:if='{{detail.listSubjectIdeaAnnexVo.length > 0}}'>
+                <text class='download' style='padding-left：12rpx' bindtap='downloadFile' data-value='{{detail.listSubjectIdeaAnnexVo}}'>下载附件</text>
+                <image class='download-file' src='../../image/attach.png'></image>
+            </block>
         </view>
         <view class='idea-content'>
             {{ detail.solution }}
-        </view>
+        </view>   
     </view>
     <view class='comment'>
         <view class='comment-item'>

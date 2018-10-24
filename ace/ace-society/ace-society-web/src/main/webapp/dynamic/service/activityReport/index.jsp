@@ -57,6 +57,7 @@
                 <tr>
                     <th width="35%">所属活动</th>
                     <th width="35%">报道标题</th>
+                    <th width="5%">备注</th>
                     <th width="10%">状态</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -159,6 +160,12 @@
         <td> \${item.activityTitel}</td>
         <td> \${item.title}</td>
 
+        {@if item.top==1}
+        <td><span class="label label-lg label-info">精选</span></td>
+        {@else}
+        <td></td>
+        {@/if}
+
         <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">已删除</span>
@@ -182,8 +189,9 @@
         </td>
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
-            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
-            <a class="operation" href="javascript:del('\${item.id}');">删除</a>
+            <%-- <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
+            <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
+            <a class="operation" href="javascript:top('\${item.id}');">设为精选</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
@@ -195,42 +203,28 @@
 <script id="tpl-detail" type="text/template">
     <table class="table table-bordered table-hover">
         <tr>
-            <td class="active"> 主键-GUID</td>
-            <td class="success"> \${data.id}</td>
-        </tr>
-        <tr>
             <td class="active"> 活动编码</td>
-            <td class="success"> \${data.activityId}</td>
+            <td class="success"> \${data.activityTitel}</td>
         </tr>
         <tr>
             <td class="active"> 报道标题</td>
             <td class="success"> \${data.title}</td>
         </tr>
         <tr>
-            <td class="active"> 报道副标题</td>
-            <td class="success"> \${data.subTitle}</td>
-        </tr>
-        <tr>
             <td class="active"> 报道内容</td>
-            <td class="success"> \${data.content}</td>
-        </tr>
-        <tr>
-            <td class="active"> 备注</td>
-            <td class="success"> \${data.remark}</td>
-        </tr>
-        <tr>
-            <td class="active"> 状态
-                0-删除
-                1-暂存
-                2-提交审核
-                3-审核通过
-                4-审核驳回
+            <td class="success">
+                {@each data.content as item, index}
+                {@if item.type==1}
+
+                <div>\${item.content}</div>
+                {@else if item.type==2}
+                <div style="width:100%">
+                    <img style="width:100%" src="\${item.content}" alt="">
+                </div>
+                {@/if}
+
+                {@/each}
             </td>
-            <td class="success"> \${data.status}</td>
-        </tr>
-        <tr>
-            <td class="active"> 创建人编号</td>
-            <td class="success"> \${data.createUserId}</td>
         </tr>
         <tr>
             <td class="active"> 创建人姓名</td>
@@ -239,18 +233,6 @@
         <tr>
             <td class="active"> 创建日期</td>
             <td class="success"> \${data.createDate}</td>
-        </tr>
-        <tr>
-            <td class="active"> 更新人编号</td>
-            <td class="success"> \${data.lastModifyUserId}</td>
-        </tr>
-        <tr>
-            <td class="active"> 更新人名称</td>
-            <td class="success"> \${data.lastModifyUserName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 更新日期</td>
-            <td class="success"> \${data.lastModifyDate}</td>
         </tr>
     </table>
 </script>

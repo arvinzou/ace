@@ -24,9 +24,8 @@ Page({
         let that = this;
         let activityId = options.id;
         if (!activityId) {
-            // wx.navigateBack({})
-            // return;
-            activityId = 3;
+            wx.navigateBack({})
+            return;
         }
         that.data.activityId = activityId;
         that.initdata();
@@ -329,11 +328,11 @@ Page({
             })
             return;
         }
+        that.data.status = "2";
         that.updateFun();
     },
     updateFun: function() {
         let that = this;
-        that.endEdit();
         util.request(cfg.updateActivityReport, {
                 jsons: JSON.stringify(that.data),
             },

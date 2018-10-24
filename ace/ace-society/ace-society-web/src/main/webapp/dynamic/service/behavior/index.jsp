@@ -40,6 +40,11 @@
                         <button type="button" class="btn btn-default" onclick="setParams('status','3');">通过</button>
                         <button type="button" class="btn btn-default" onclick="setParams('status','4');">驳回</button>
                     </div>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('type','')">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('type','1')">文明行为</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('type','0')">不文明行为</button>
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
@@ -61,7 +66,8 @@
                 <thead>
                 <tr>
                     <th>序号</th>
-                    <th width="35%">标题</th>
+                    <th width="20%">标题</th>
+                    <th width="15%">类型</th>
                     <th width="15%">提交人</th>
                     <th width="15%">反馈日期</th>
                     <th width="15%">状态</th>
@@ -86,7 +92,14 @@
     {@each data as item, index}
     <tr>
         <td>\${parseInt(index)+1}</td>
-        <td width="35%">\${item.title}</td>
+        <td width="20%">\${item.title}</td>
+        <td width="15%">
+            {@if item.type == '0'}
+            不文明行为
+            {@else}
+            文明行为
+            {@/if}
+        </td>
         <td width="15%">\${item.userId}</td>
         <td width="15%">\${item.submitDate}</td>
         <td width="15%">
