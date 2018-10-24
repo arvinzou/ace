@@ -127,7 +127,95 @@
     </div>
 </div>
 
+
+<!--签到弹框-->
+<div class="modal fade bs-example-modal-lg" role="dialog" id="preview">
+    <div class="modal-dialog" role="document" style="width: 90%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">活动签到审核</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal signCheck" id="fm-sign" role="form">
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-sign-primary btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
+
+
+<script id="tpl-fm-sign" type="text/template">
+    <div class="form-group">
+        <label class="col-md-2 view-label">组织者签到</label>
+        <div class="col-md-10 flexBox">
+            <div class="sign-content">
+                <div class="imgBox">
+                    <img src="\${data.startSignImgUrl}" alt="">
+                </div>
+                <text>\${data.startDate}</text>
+            </div>
+
+            <div class="sign-content">
+                <div class="imgBox">
+                    <img src="\${data.endSignImgUrl}" alt="">
+                </div>
+                <text>\${data.endDate}</text>
+            </div>
+
+        </div>
+
+        <label class="col-md-2 view-label">参与者签到</label>
+        <div class="col-md-10 flexBox" style="max-height: 362px;overflow-y: auto">
+            {@each data.activityDetailVoList as item, index}
+            {@if item.signInState==1}
+            <div class="sign-content">
+                <div class="imgBox">
+                    <img src="\${item.signImgUrl}" alt="">
+                    <input name="list" value="\${item.userId}" class="check" type="checkbox">
+                </div>
+                <text>\${item.name}</text>
+            </div>
+            {@/if}
+            {@/each}
+        </div>
+
+    </div>
+    <h4>结果</h4>
+    <hr>
+    <div class="form-group ">
+        <label class="col-md-2 control-label">审核说明</label>
+        <div class="col-md-10">
+            <div class="radio-group-container">
+                <label>
+                    <input type="radio" name="rst" value="33"><span style="padding:10px">通过</span>
+                </label>
+                <label>
+                    <input type="radio" name="rst" value="41"><span style="padding:10px">驳回</span>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">审核说明</label>
+        <div class="col-md-10">
+            <input type="hidden" name="id" value="\${data.id}">
+            <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+        </div>
+    </div>
+
+
+
+</script>
 
 
 <%--审核渲染模板--%>
@@ -288,12 +376,14 @@
         <td>
             {@if item.status==2}
             <span class="label label-lg label-info">发布审核</span>
-            {@else if item.status==3&&item.arStatus!=3}
-            <span class="label label-lg label-success">发布成功</span>
+            {@else if item.status==3}
+            <span class="label label-lg label-success">活动发布</span>
             {@else if item.status==4}
             <span class="label label-lg label-danger">发布驳回</span>
-            {@else if item.arStatus==3}
-            <span class="label label-lg label-info">结束审核</span>
+            {@else if item.arStatus==31}
+            <span class="label label-lg label-info">活动开始</span>
+            {@else if item.status==32}
+            <span class="label label-lg label-success">活动结束</span>
             {@else if item.status==33}
             <span class="label label-lg label-success">活动成功</span>
             {@else if item.status==41}
@@ -301,16 +391,15 @@
             {@/if}
         </td>
         <td>
-            <a class="operation" href="#" onclick="details('\${item.id}');">查看</a>
-
-            {@if item.arStatus==3}
-            <a class="operation" href="#" onclick="details('\${item.id}');">活动签到</a>
-            {@/if}
-
+            <a class="operation" href="javascript:details('\${item.id}');">查看</a>
+            <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
+            <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
-
+            {@if item.status==32}
+            <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
+            {@/if}
 
             <%--{@if item.status == '2'}--%>
             <%--<a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>--%>

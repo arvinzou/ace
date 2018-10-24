@@ -13,11 +13,14 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.ActivityDetailDao;
+import com.huacainfo.ace.society.dao.PersonInfoDao;
+import com.huacainfo.ace.society.dao.SocietyOrgInfoDao;
 import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.model.CoinConfig;
 import com.huacainfo.ace.society.model.SubjectIdea;
 import com.huacainfo.ace.society.service.AuditRecordService;
-import com.huacainfo.ace.society.vo.ActivityDetailQVo;
-import com.huacainfo.ace.society.vo.ActivityDetailVo;
+import com.huacainfo.ace.society.service.CoinConfigService;
+import com.huacainfo.ace.society.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +35,6 @@ import com.huacainfo.ace.society.dao.ActivityDao;
 import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.service.ActivityService;
-import com.huacainfo.ace.society.vo.ActivityVo;
-import com.huacainfo.ace.society.vo.ActivityQVo;
 
 @Service("activityService")
 /**
@@ -52,6 +53,12 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityDetailDao activityDetailDao;
     @Autowired
     private AuditRecordService auditRecordService;
+    @Autowired
+    private CoinConfigService coinConfigService;
+    @Autowired
+    private SocietyOrgInfoDao societyOrgInfoDao;
+    @Autowired
+    private PersonInfoDao personInfoDao;
 
     /**
      * @throws
@@ -371,9 +378,6 @@ public class ActivityServiceImpl implements ActivityService {
             return auditRs;
         }
         activity.setStatus(rst);
-        if(!CommonUtils.isBlank(coinconfigId)){
-            activity.setCoinconfigId(coinconfigId);
-        }
         activity.setLastModifyDate(DateUtil.getNowDate());
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
@@ -382,37 +386,40 @@ public class ActivityServiceImpl implements ActivityService {
         return new MessageResponse(0, "线下活动审核完成！");
     }
 
-//    /**
-//     * “我的点子” 送审
-//     *
-//     * @param ideaId  点子ID
-//     * @param unionId
-//     * @return ResultResponse
-//     * @throws Exception
-//     */
-//    @Override
-//    public ResultResponse sendAudit(String id, String unionId) {
-////        Activity activity=activityDao.selectByPrimaryKey(id);
-////        if (null == activity) {
-////            return new ResultResponse(ResultCode.FAIL, "“点子”数据丢失");
-////        }
-//        //
-////        if (AuditState.SUBMIT_AUDIT.equals(idea.getStatus())) {
-////            return new ResultResponse(ResultCode.FAIL, "请勿重复送审");
-////        }
-//        //提交审核
-//        auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, id, unionId);
-////        //更新单据状态
-////        SubjectIdea record = new SubjectIdea();
-////        record.setId(id);
-////        record.setStatus(AuditState.SUBMIT_AUDIT);
-////        record.setLastModifyDate(DateUtil.getNowDate());
-////        record.setLastModifyUserId("system");
-////        record.setLastModifyUserId("8888");
-////        subjectIdeaDao.updateStatus(record);
-//
-//        return new ResultResponse(ResultCode.SUCCESS, "送审成功");
-//    }
 
+    /**
+     * @throws
+     * @Title:audit
+     * @Description: TODO(审核线下活动)
+     * @param: @param id bean.id
+     * @param: @param rst 审核结果 3-通过 4-拒绝
+     * @param: @param remark 审核备注
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @Override
+    public MessageResponse endAudit(String id, String rst, String message, List list, UserProp userProp) throws Exception {
+        Activity activity=activityDao.selectByPrimaryKey(id);
+        if(null==activity){
+            return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
+        }
+        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id,activity.getInitiatorId(), rst, message, userProp);
+        if (ResultCode.FAIL == auditRs.getStatus()) {
+            return auditRs;
+        }
+        activity.setStatus(rst);
+        activity.setLastModifyDate(DateUtil.getNowDate());
+        activity.setLastModifyUserId(userProp.getUserId());
+        activity.setLastModifyUserName(userProp.getName());
+        societyOrgInfoDao.addcoin(activity.getInitiatorId(),activity.getCategory(),list.size());
+        if ("33".equals(rst)){
+            personInfoDao.addCoin(list,activity.getCategory());
+            activityDao.updateByPrimaryKey(activity);
+        }
+        dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
+        return new MessageResponse(0, "线下活动审核完成！");
+    }
 
 }

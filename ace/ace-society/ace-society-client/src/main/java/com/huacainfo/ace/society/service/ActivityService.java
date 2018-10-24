@@ -9,6 +9,8 @@ import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.society.vo.ActivityVo;
 import com.huacainfo.ace.society.vo.ActivityQVo;
 
+import java.util.List;
+
 /**
  * @author: huacai003
  * @version: 2018-09-11
@@ -101,4 +103,5 @@ public interface ActivityService {
      * @version: 2018-09-11
      */
     MessageResponse audit(String id, String rst, String remark,String coinconfigId, UserProp userProp) throws Exception;
+    MessageResponse endAudit(String id, String rst, String message, List list, UserProp userProp) throws Exception;
 }
