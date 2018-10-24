@@ -150,8 +150,6 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
         o.setCreateUserName(wxUser.getNickName());
         o.setCreateUserId(wxUser.getUnionId());
         this.activityDetailDao.insertSelective(o);
-        this.dataBaseLogService.log("添加活动报道", "活动报道", "",
-                o.getId(), o.getId(), null);
         return new MessageResponse(0, "添加活动报道完成！");
     }
 
