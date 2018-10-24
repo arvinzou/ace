@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.CommentRecordDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.CommentRecord">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="bisType" jdbcType="VARCHAR" property="bisType"/>
+        <result column="bisId" jdbcType="VARCHAR" property="bisId"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, bisType, bisId, userId, content, remark, status, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from comment_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from comment_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.society.model.CommentRecord">
+    insert into comment_record (id, bisType, bisId, 
+      userId, content, remark, 
+      status, createUserId, createUserName, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{bisType,jdbcType=VARCHAR}, #{bisId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.CommentRecord">
+    update comment_record
+    set bisType = #{bisType,jdbcType=VARCHAR},
+      bisId = #{bisId,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <!--**********************************-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.CommentRecordVo">
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        wx.avatarUrl, wx.nickName,
+        t.id, t.bisType, t.bisId, t.userId, t.content,
+        t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="From_Statement">
+        from comment_record t
+        left join portal.wx_user wx on t.userId = wx.unionId
+    </sql>
+
+    <sql id="Where_Condition">
+        where 1=1
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and t.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.bisType !=null and condition.bisType !=&quot;&quot;">
+            and t.bisType = #{condition.bisType,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.bisId !=null and condition.bisId !=&quot;&quot;">
+            and t.bisId = #{condition.bisId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.CommentRecord">
+        select count(1)
+        from comment_record
+        where 1=1
+    </select>
+</mapper>
