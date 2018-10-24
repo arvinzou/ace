@@ -85,7 +85,7 @@
     display: block;
     float: left;
     color: #FFFFFF;
-    background: blue;
+    background: #1a9fff;
     border-radius: 5rpx;
     font-size:24rpx;
     margin-top: 10rpx;
