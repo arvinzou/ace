@@ -19,7 +19,7 @@ Page({
 
 initList: function(){
     var that = this;
-    util.request(cfg.ideaList, {"start": 0, "limit": 999, "unionId": "0"},
+    util.request(cfg.ideaList, {"start": 0, "limit": 999, "status": "3"},
         function (ret) {
             if (ret.status == 0) {
                 console.log(ret);

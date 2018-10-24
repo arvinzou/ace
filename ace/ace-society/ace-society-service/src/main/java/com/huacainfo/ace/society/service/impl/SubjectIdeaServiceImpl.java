@@ -183,7 +183,7 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         SubjectIdeaVo subjectIdeaVo = this.subjectIdeaDao.selectVoByPrimaryKey(id);
 
         SubjectIdeaAnnexQVo annexQVo = new SubjectIdeaAnnexQVo();
-        annexQVo.setId(id);
+        annexQVo.setIdeaId(id);
         List<SubjectIdeaAnnexVo> listAnnex = subjectIdeaAnnexDao.findList(annexQVo, 0, 99, null);
         subjectIdeaVo.setListSubjectIdeaAnnexVo(listAnnex);
         rst.setValue(subjectIdeaVo);
@@ -292,6 +292,8 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
                 subjectIdeaAnnexDao.insert(annex);
             }
         }
+        //自动送审
+        sendAudit(ideaId, params.getUserId());
 
         return new ResultResponse(ResultCode.SUCCESS, "提交成功");
     }

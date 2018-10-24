@@ -43,7 +43,7 @@ Page({
     },
     initBehaviorList: function(type){
         var that = this;
-        util.request(cfg.behaviorList, { "start": 0, "limit": 999, "type": type},
+        util.request(cfg.behaviorList, { "start": 0, "limit": 999, "type": type, "status":"3"},
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);

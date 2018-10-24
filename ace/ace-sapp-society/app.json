@@ -38,7 +38,8 @@
     "page/live/index",
     "page/rpt/index",
     "page/liveCsl/index",
-    "page/releaseBehavior/index"
+    "page/releaseBehavior/index",
+    "page/aboutus/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

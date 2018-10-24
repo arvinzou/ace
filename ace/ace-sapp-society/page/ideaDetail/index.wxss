@@ -70,6 +70,8 @@
     text-indent: 20rpx;
     padding-top: 52rpx;
     padding-bottom: 52rpx;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 .comment{
     width: 100%;

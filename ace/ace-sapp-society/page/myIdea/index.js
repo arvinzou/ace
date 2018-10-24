@@ -21,7 +21,7 @@ Page({
 
   initList: function(){
     var that = this;
-    util.request(cfg.ideaList, {"start": 0, "limit": 999, "unionId": "0", "getAll": '0', "userId": that.data.userId},
+    util.request(cfg.ideaList, {"start": 0, "limit": 999, "unionId": "0", "userId": that.data.userId},
         function (ret) {
             if (ret.status == 0) {
                 console.log(ret);
