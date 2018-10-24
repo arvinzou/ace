@@ -5,32 +5,6 @@
     background-color: #f6f6f6;
     position: relative;
 }
-
-.swiper-tab {
-    display: flex;
-    flex-direction: row;
-    height: 86rpx;
-    line-height: 86rpx;
-    border-bottom: 1rpx solid #EBEBEB;
-}
-
-.tab-item {
-    width: 50%;
-    text-align: center;
-    font-size: 28rpx;
-    color: #666666;
-}
-
-.swiper {
-    height: 1100rpx;
-}
-
-.on {
-    color: #222222;
-    font-size: bold;
-    border-bottom: 6rpx solid #FF9906;
-}
-
 .content{
     width: 90%;
     margin: 49rpx auto;
@@ -68,6 +42,8 @@
 .remark{
     color: #1C2843;
     font-size: 28rpx;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 .attach-image{
     width: 158rpx;
@@ -81,6 +57,7 @@
     position: absolute;
     bottom: 200rpx;
     right: 10rpx;
+    z-index:200;
 }
 .camera{
     width: 100%;
@@ -97,6 +74,8 @@
 .submitDate{
     float: left;
     font-size: 24rpx; 
+    padding-left: 20rpx;
+    padding-right: 20rpx;
 }
 .status{
     width: 80rpx;
@@ -106,7 +85,43 @@
     display: block;
     float: left;
     color: #FFFFFF;
-    background: blue;
+    background: #1a9fff;
     border-radius: 5rpx;
     font-size:24rpx;
+    margin-top: 10rpx;
+}
+.navbar {
+   /* z-index: 100;*/
+    width: 100%;
+    /*position: fixed; */
+    font-size: 30rpx;
+    color: #666;
+    flex: none;
+    display: flex;
+    background: #FDFDFD;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 65rpx;
+}
+
+.navbar .item.active {
+    font-size: 30rpx;
+}
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    width: 40rpx;
+    margin: 0 auto;
+    background:#FF9906;
+    border-radius: 3rpx;
 }

@@ -4,6 +4,7 @@
 .index{
     width: 100%;
     background-color: #F6F6F6;
+    padding-bottom: 150rpx;
 }
 .cover{
     width: 750rpx;
@@ -15,7 +16,6 @@
 .ideaList{
     width: 90%;
     margin: 0 auto;
-    margin-bottom: 130rpx;
 }
 .ideaItem{
     width: 100%;

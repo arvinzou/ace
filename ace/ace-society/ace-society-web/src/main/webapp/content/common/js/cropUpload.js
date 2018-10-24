@@ -94,7 +94,6 @@ function uploadObject() {
     uploaderCropimg = new plupload.Uploader({
         browse_button: 'selectCropImg', //触发文件选择对话框的按钮，为那个元素id
         url: portalPath + '/files/uploadImage.do',//服务器端的上传页面地址
-        // url: 'http://zx.huacainfo.com/portal/www/upload.do',//服务器端的上传页面地址
         max_file_size: '2mb', //限制为2MB
         multi_selection: false,
         resize: {

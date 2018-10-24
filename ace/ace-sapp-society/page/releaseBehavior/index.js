@@ -34,20 +34,17 @@ Page({
     recorderStatus: false
   },
   onReady: function (res) {
-    console.log('index.js.onReady');
-    var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
+    
   },
 
   onLoad: function (param) {
     var that = this;
+    if (!util.is_login()) {
+        wx.navigateTo({
+            url: "../userinfo/index?url=../releaseBehavior/index&type=navigateTo"
+        });
+    }
+
     console.log('index.js.onLoad');
     console.log(param);
     this.setData(param);
@@ -65,23 +62,25 @@ Page({
       disabled: true
     });
     var data = {};
-    data.captcha = e.detail.value.captcha;
+    //data.captcha = e.detail.value.captcha;
     data.compendium = e.detail.value.docText;
-    /*var files = that.data.files;
-    for (var i = 0; i < files.length; i++) {
-      data.imgs.push({ url: files[i], w: 0, h: 0 });
-    }*/
+    data.type = e.detail.value.type;
+    data.title='ceshi';
+    data.submitDate = new Date();
     var behaviorAnnexList = [];
     for(var i=0; i<fileList.length; i++){
         var behaviorAnnex = {};
         if (that.data.currentTab == 0) {
             behaviorAnnex.fileType = '1';
         }
-        if (that.data.currentTab == 1) {
-            behaviorAnnex.fileType = '2';
-        }
         behaviorAnnex.fileUrl = fileList[i];
         behaviorAnnexList.push(behaviorAnnex);
+    }
+    if (that.data.currentTab == 1) {
+        var behaviorAnnextemp = {};
+        behaviorAnnextemp.fileType = '2';
+        behaviorAnnextemp.fileUrl = that.data.mediUrl;
+        behaviorAnnexList.push(behaviorAnnextemp);
     }
     data.behaviorAnnexList = behaviorAnnexList;
     console.log("============================================="+data);
@@ -93,7 +92,7 @@ Page({
         })
         wx.showModal({
           title: '提示',
-          content: data.errorMessage,
+          content: data.info,
           success: function (res) {
             if (res.confirm) {
               fileList = [];
@@ -239,7 +238,7 @@ Page({
             var obj = JSON.parse(resp.data);
             console.log(obj);
             that.setData({
-              mediUrl: cfg.serverfile + obj.file_path,
+              mediUrl: obj.file_path,
               displayVideo: 'show'
             });
           },
@@ -295,7 +294,7 @@ Page({
           var obj = JSON.parse(resp.data);
           console.log(obj);
           that.setData({
-            mediUrl: cfg.serverfile + obj.file_path,
+            mediUrl: obj.file_path,
             displayAudio: ' '
           });
         },
@@ -329,7 +328,31 @@ Page({
     let that = this;
     that.setData({ displayAudio: 'hide', mediUrl: null });
   },
+
+onShow: function () {
+    var that = this;
+    if (wx.getStorageSync('userinfo')) {
+        if (that.initUserData() == false) {
+            wx.navigateTo({ url: "../regist/index" });
+        }
+    }
+},
+initUserData: function () {
+    var that = this;
+    util.request(cfg.findUserInfo, {},
+        function (ret) {
+            if (ret.status == 0) {
+                that.setData({ userinfoData: ret.data });
+                return true;
+            } else {
+                return false;
+            }
+
+        }
+    );
+},
   /**
+   *
    * 点击选项卡
    */
   navbarTap: function (e) {

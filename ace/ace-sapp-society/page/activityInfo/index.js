@@ -105,7 +105,7 @@ Page({
     apply:function(){
         let that=this;
         wx.navigateTo({
-            url: '../enterActivity/index?id='+ that.data.activityInfo.id
+            url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
         })
     }
 })

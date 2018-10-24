@@ -52,6 +52,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
+      that.orgList();
       
   },
   
@@ -191,7 +192,7 @@ Page({
                 console.log(ret);
                 wx.showModal({
                     title: '提示',
-                    content: '短信发送成功！',
+                    content: ret.info,
                     success: function (res) {}
                 })
             }

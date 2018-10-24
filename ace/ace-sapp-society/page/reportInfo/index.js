@@ -117,12 +117,12 @@ Page({
                     if (!res.confirm) {
                         return;
                     }
-                    that.setData({
-                        actionComment: false,
-                    })
                 }
             })
         }
+        that.setData({
+            actionComment:false
+        });
     },
     getValue: function(e) {
         let that = this;

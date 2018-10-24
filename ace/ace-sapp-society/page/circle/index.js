@@ -6,8 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[],
-    hiddenmodalcmt:true
+    list:[]
   },
     
   /**
@@ -116,15 +115,36 @@ Page({
     console.log(e.currentTarget.dataset.id);
     var that = this;
     that.setData({
-      hiddenmodalcmt: false,
+      actionComment: true,
+      commentType: 'cmt',
       id: e.currentTarget.dataset.id
     })
   },
-  //确认  
-  confirmCmt: function (e) {
-    console.log('form发生了submit事件，携带数据为：', e);
+  hiddenComment: function (e) {
+    let that = this;
+    if (that.data.commentVal) {
+      wx.showModal({
+        title: '提示',
+        content: '确定放弃吗？',
+        success: function (res) {
+          if (!res.confirm) {
+            return;
+          }
+        }
+      });
+    }
+    that.setData({
+      actionComment: false,
+    });
+  },
+  getValue: function (e) {
+    let that = this;
+    that.data.commentVal = e.detail.value;
+  },
+  formSubmit: function (e) {
+    var commentVal = e.detail.value.commentVal;
     var that = this;
-    if (!that.data.contentCmtText) {
+    if (!commentVal) {
       wx.showToast({
         title: '发送内容不为空',
         icon: 'none',
@@ -132,41 +152,24 @@ Page({
       })
       return false;
     }
-    that.cmtFormSubmit();
+    if (that.data.commentType == 'cmt') {
+      that.sendComment(commentVal);
+    }
     that.setData({
-      hiddenmodalcmt: true
-    })
+      actionComment: false
+    });
   },
-  contentCmtInput: function (e) {
-    this.setData({
-      contentCmtText: e.detail.value
-    })
-  },
-  cmtFormSubmit: function () {
+  sendComment: function (content) {
     var that = this;
     var data = {};
     data.circleId = that.data.id;
     data.uid = that.data.userinfo.unionId;
-    data.content = that.data.contentCmtText;
+    data.content = content;
     util.request(cfg.server + "/society/circleCmt/www/insertCircleCmt", { jsons: JSON.stringify(data) },
       function (data) {
-        that.setData({ hiddenmodalcmt: true });
-        that.setData({ contentCmtText: '' });
         that.initData();
       }
     );
 
-  },
-  //点击按钮痰喘指定的hiddenmodalput弹出框  
-  modalinputCmt: function () {
-    this.setData({
-      hiddenmodalcmt: !this.data.hiddenmodalcmt
-    })
-  },
-  //取消按钮  
-  cancelCmt: function () {
-    this.setData({
-      hiddenmodalcmt: true
-    });
   }
 })

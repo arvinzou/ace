@@ -38,8 +38,13 @@
     <sql id="Base_Column_List">
     t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,
     t.volunteerNum,  t.clazz, t.volunteerPoints, t.parterNum, t.parterPoints, t.remark, t.coinconfigId, t.status, t.createUserId,
-    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ad.status as adStatus,ar.status as arStatus,s.orgName
+    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ar.status as arStatus,s.orgName
   </sql>
+
+    <sql id="Vo_Column_List1">
+      ad.status as adStatus
+    </sql>
+
 
     <sql id="Vo_Column_List">
         t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,
@@ -430,7 +435,6 @@
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
-
         <include refid="fromCondition1"/>
 
         <include refid="whereCondition"/>
@@ -448,7 +452,8 @@
 
     <select id="findUserList" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="Base_Column_List"/>,
+        <include refid="Vo_Column_List1"/>
 
         <include refid="fromCondition2"/>
 
@@ -467,7 +472,6 @@
 
     <sql id="fromCondition1">
         from activity t
-        LEFT JOIN  activity_detail ad on t.id=ad.activityId
         LEFT JOIN  activity_report ar on ar.activityId=t.id
         LEFT JOIN society_org_info s ON s.id=t.initiatorId
     </sql>

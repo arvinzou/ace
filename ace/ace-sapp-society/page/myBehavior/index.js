@@ -7,31 +7,28 @@ Page({
      */
     data: {
         currentTab: 0, //当前选中的Tab项
+        navbar: ['文明行为', '不文明行为'],
         behaviorList: [],
         userId: null
     },
 
-    swichNav: function(e) {
-        console.log(e);
-        var that = this;
-        if (this.data.currentTab === e.target.dataset.current) {
+    /**
+* 点击选项卡
+*/
+    navbarTap: function (e) {
+        let that = this;
+        if (that.data.currentTab === e.target.dataset.idx) {
             return false;
         } else {
             that.setData({
-                currentTab: e.target.dataset.current,
-            })
-        }
-    },
-    swiperChange: function(e) {
-        console.log(e);
-        var that = this;
-        this.setData({
-            currentTab: e.detail.current,
-        });
-        if (e.detail.current == '0'){
-            that.initBehaviorList(that.data.userId, "1");
-        }else{
-            that.initBehaviorList(that.data.userId, "0");
+                currentTab: e.target.dataset.idx
+            });
+            if (e.target.dataset.idx == 0) {
+                that.initBehaviorList(that.data.userId, '1');
+            } else {
+                that.initBehaviorList(that.data.userId, '0');
+            }
+
         }
     },
     releaseBehavior: function(){
@@ -98,7 +95,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-
+        var that = this;
+        that.initBehaviorList(that.data.userId,'1');
     },
 
     /**

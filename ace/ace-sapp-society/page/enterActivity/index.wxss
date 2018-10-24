@@ -10,4 +10,5 @@
     bottom: 0px;
     padding: 15rpx 30rpx;
     background: #fff;
+    left:0rpx;
 }
