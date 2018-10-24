@@ -17,18 +17,18 @@
                     </view>
                 </block>
             </view>
-            <view class='status'>
+            <view class='status-box'>
                 <block wx:if='{{item.status == 1}}'>
-                    暂存
+                    <view class='status'>暂存</view>
                 </block>
                 <block wx:elif='{{item.status == 2}}'>
-                    待审
+                    <view class='status'>待审</view>
                 </block>
                 <block wx:elif='{{item.status == 3}}'>
-                    通过
+                    <view class='status'>通过</view>
                 </block>
                 <block wx:elif='{{item.status == 4}}'>
-                    驳回
+                    <view class='status'>驳回</view>
                 </block>
             </view>
         </view>

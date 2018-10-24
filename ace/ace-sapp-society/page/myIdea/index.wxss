@@ -19,9 +19,10 @@
 }
 .ideaItem{
     width: 100%;
-    height: 283rpx;
+    height: auto;
     background: #FFFFFF;
     margin-top: 30rpx;
+    padding-bottom: 30rpx;
 }
 .title_box{
     height: 91rpx;
@@ -104,11 +105,17 @@
     font-weight: bold;
     margin-top: 15rpx;
 }
+.status-box{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
 .status{
-    width: 100%;
+    width: 80rpx;
     height: 50rpx;
     line-height: 50rpx;
+    text-align: center;
     font-size: 24rpx;
-    padding-left: 30rpx;
-    color: #FFAB32;
+    color: #FFFFFF;
+    background: #1a9fff;
 }
