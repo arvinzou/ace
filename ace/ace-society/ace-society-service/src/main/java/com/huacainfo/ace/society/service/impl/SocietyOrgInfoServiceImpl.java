@@ -4,7 +4,6 @@ package com.huacainfo.ace.society.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -26,9 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service("societyOrgInfoService")
 /**
@@ -98,13 +95,26 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         }
 
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus("2");//默认自动送审
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         societyOrgInfoDao.insert(o);
         dataBaseLogService.log("添加社会组织信息", "社会组织信息", "", o.getId(), o.getId(), userProp);
 
+        //自动送审
+        sendAudit(o);
+
         return new MessageResponse(0, "添加社会组织信息完成！");
+    }
+
+    public ResultResponse sendAudit(SocietyOrgInfo obj) {
+        if (null == obj) {
+            return new ResultResponse(ResultCode.FAIL, "数据记录丢失");
+        }
+        //提交审核
+        auditRecordService.submit(GUIDUtil.getGUID(), BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId());
+
+        return new ResultResponse(ResultCode.SUCCESS, "送审成功");
     }
 
     /**

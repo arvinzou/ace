@@ -223,6 +223,9 @@
   <sql id="whereCondition">
     from subject_idea_annex t
     where 1=1
+      <if test="condition.ideaId !=null and condition.ideaId !=&quot;&quot;">
+          and t.ideaId = #{condition.ideaId,jdbcType=CHAR}
+      </if>
   </sql>
 
   <select id="findCount" resultType="int">
