@@ -162,6 +162,7 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         }
         ActivityReport activityReport = this.activityReportDao.selectByActivityId(o.getActivityId());
         activityReport.setContent(o.getContent());
+        activityReport.setStatus(o.getStatus());
         activityReport.setTitle(o.getTitle());
         activityReport.setCoverUrl(o.getCoverUrl());
         activityReport.setLastModifyDate(new Date());

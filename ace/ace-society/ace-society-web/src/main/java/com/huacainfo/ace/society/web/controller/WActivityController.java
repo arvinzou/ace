@@ -74,8 +74,8 @@ public class WActivityController extends SocietyBaseController {
     public ResultResponse findAdminSelfActivityList(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
         WxUser wxUser = getCurWxUser();
         condition.setInitiatorId(wxUser.getUnionId());
-        if(wxUser == null){
-            return  new ResultResponse(ResultCode.FAIL,"没有获取到用户信息");
+        if (wxUser == null) {
+            return new ResultResponse(ResultCode.FAIL, "没有获取到用户信息");
         }
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
@@ -87,10 +87,10 @@ public class WActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/findUserSelfActivityList")
     @ResponseBody
-    public ResultResponse findUserSelfActivityList(ActivityQVo condition,PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findUserSelfActivityList(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
         WxUser wxUser = getCurWxUser();
-        if(wxUser == null){
-            return  new ResultResponse(ResultCode.FAIL,"没有获取到用户信息");
+        if (wxUser == null) {
+            return new ResultResponse(ResultCode.FAIL, "没有获取到用户信息");
         }
         condition.setUserId(wxUser.getUnionId());
         List<ActivityVo> rst = this.activityService.findUserActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
@@ -102,7 +102,7 @@ public class WActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/findActivitying")
     @ResponseBody
-    public ResultResponse findActivitying(ActivityQVo condition,PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findActivitying(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setStatus("3");
         condition.setIngId("ing");
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
@@ -118,10 +118,10 @@ public class WActivityController extends SocietyBaseController {
     public MessageResponse insertActivity(String jsons) throws Exception {
         Activity obj = JSON.parseObject(jsons, Activity.class);
         WxUser wxUser = getCurWxUser();
-        if(wxUser == null){
-            return  new MessageResponse(ResultCode.FAIL,"系统繁忙，稍后重试");
+        if (wxUser == null) {
+            return new MessageResponse(ResultCode.FAIL, "系统繁忙，稍后重试");
         }
-        return this.activityService.insertActivity(obj ,  wxUser);
+        return this.activityService.insertActivity(obj, wxUser);
     }
 
 
@@ -130,12 +130,12 @@ public class WActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/activitySign")
     @ResponseBody
-    public MessageResponse activitySign(String filePath,String type,String id) throws Exception {
+    public MessageResponse activitySign(String filePath, String type, String id) throws Exception {
         WxUser wxUser = getCurWxUser();
-        if(wxUser == null){
-            return  new MessageResponse(ResultCode.FAIL,"没有获取到用户信息");
+        if (wxUser == null) {
+            return new MessageResponse(ResultCode.FAIL, "没有获取到用户信息");
         }
-        return this.activityService.activitySign(filePath, type, id ,  wxUser);
+        return this.activityService.activitySign(filePath, type, id, wxUser);
     }
 
 
@@ -206,7 +206,7 @@ public class WActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/findPublicActivityReportList")
     @ResponseBody
-    public ResultResponse findPublicActivityReportList( ActivityReportQVo activityReportQVo, PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findPublicActivityReportList(ActivityReportQVo activityReportQVo, PageParamNoChangeSord page) throws Exception {
         activityReportQVo.setStatus("3");
         List<ActivityReportVo> rst = this.activityReportService.findActivityReportList(activityReportQVo, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取数据", rst);
@@ -240,27 +240,27 @@ public class WActivityController extends SocietyBaseController {
     @RequestMapping(value = "/getApplyStatus")
     @ResponseBody
     public ResultResponse getApplyStatus(String activityId) throws Exception {
-        Map<String,String> map=new HashMap<String ,String>();
-        map.put("code","1");
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("code", "1");
 //        code:1、未注册和鉴权2、账户类型为组织，3、未注册，4、已注册
         WxUser wxUser = getCurWxUser();
         if (wxUser == null) {
-            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败",map);
+            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败", map);
         }
         CustomerVo vo = regService.findByUserId(wxUser.getUnionId());
         if (null == vo) {
-            return new ResultResponse(ResultCode.FAIL, "用户尚未注册",map);
+            return new ResultResponse(ResultCode.FAIL, "用户尚未注册", map);
         }
-        if(vo.getPerson()==null){
-            return new ResultResponse(ResultCode.FAIL, "组织用户",map.put("code","2"));
+        if (vo.getPerson() == null) {
+            return new ResultResponse(ResultCode.FAIL, "组织用户", map.put("code", "2"));
         }
-        Object object=this.activityDetailService.personalActivitydetails(activityId, wxUser.getUnionId()).getData();
-        if(object==null){
-            map.put("code","3");
-            return new ResultResponse(ResultCode.FAIL, "未报名",map);
+        Object object = this.activityDetailService.personalActivitydetails(activityId, wxUser.getUnionId()).getData();
+        if (object == null) {
+            map.put("code", "3");
+            return new ResultResponse(ResultCode.FAIL, "未报名", map);
         }
-        map.put("code","4");
-        return new ResultResponse(ResultCode.FAIL, "已报名",map);
+        map.put("code", "4");
+        return new ResultResponse(ResultCode.FAIL, "已报名", map);
     }
 
 
@@ -282,8 +282,8 @@ public class WActivityController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse insertActivityDetail(String jsons) throws Exception {
         WxUser wxUser = getCurWxUser();
-        if(wxUser == null){
-            return  new MessageResponse(ResultCode.FAIL,"没有获取到用户信息");
+        if (wxUser == null) {
+            return new MessageResponse(ResultCode.FAIL, "没有获取到用户信息");
         }
         ActivityDetail obj = JSON.parseObject(jsons, ActivityDetail.class);
         return this.activityDetailService.insertActivityDetailW(obj, wxUser);

@@ -81,6 +81,7 @@
     box-sizing: border-box;
     border:2rpx solid rgba(255,153,6,1);
     color: #FF9906;
+    line-height: 46rpx;
 }
 
 .status3{
@@ -90,4 +91,3 @@
 .status4{
     background: #1CBC80;
 }
-

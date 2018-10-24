@@ -11,7 +11,9 @@ Page({
         limit: 10,
         LoadOver: false,
         Loadingstatus: false,
+        nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),
         url:'',
+        type:2,
     },
 
     /**
@@ -26,9 +28,10 @@ Page({
         let that = this;
         let user = util.getSysUser();
         if (user.regType == 2) {
-            that.data.url = cfg.findActivitys;
-        } else {
-            that.data.url = cfg.findActivitys;
+
+            that.data.url = cfg.adminActivityList;
+        } else if (user.regType == 1){
+            that.data.url = cfg.userActivityList;
         }
     },
 
@@ -51,6 +54,7 @@ Page({
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.setData({
+                    type:that.data.type,
                     list: that.data.list.concat(data.data),
                     Loadingstatus: false,
                 });
@@ -141,7 +145,7 @@ Page({
         wx.chooseImage({
             sourceType: ['camera'],
             success(res) {
-                that.uploadFileFun(res.tempFilePaths[0], typ);
+                that.uploadFileFun(res.tempFilePaths[0], typ,id);
             }
         })
     },
@@ -160,9 +164,19 @@ Page({
             }
         );
     },
+    postReport:function(e){
+        let that=this;
+        let id = e.currentTarget.dataset.id;
+        if(id){
+            wx.navigateTo({
+                url: '../postReport/index?id=' + id,
+            })
+        }
+        return;
+    },
 
     // 上传文件方法
-    uploadFileFun: function (tempFilePaths, typ,id) {
+    uploadFileFun: function (tempFilePaths, type,id) {
         let that = this;
         wx.uploadFile({
             url: 'http://zx.huacainfo.com/portal/www/uploadFile.do',
@@ -176,7 +190,27 @@ Page({
             success: function (res) {
                 var data = JSON.parse(res.data);
                 var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
-                
+                util.request(cfg.activitySign, {
+                    filePath: url,
+                    type: type,
+                    id: id,
+                },
+                    function (data) {
+                        console.log(data.data);
+                        wx.hideNavigationBarLoading() //完成停止加载
+                        wx.stopPullDownRefresh() //停止下拉刷新
+                        that.setData({
+                            type: that.data.type,
+                            list: that.data.list.concat(data.data),
+                            Loadingstatus: false,
+                        });
+                        if (data.data.length < that.data.limit) {
+                            that.setData({
+                                LoadOver: true,
+                            });
+                        }
+                    }
+                );
                 
             },
             fail: function (res) {
