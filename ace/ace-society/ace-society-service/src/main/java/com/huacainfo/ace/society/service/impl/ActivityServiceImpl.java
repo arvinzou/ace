@@ -144,6 +144,7 @@ public class ActivityServiceImpl implements ActivityService {
         }
         o.setCreateDate(new Date());
         o.setStatus("2");
+        o.setCoinconfigId(o.getCategory());
         o.setInitiatorId(wxUser.getUnionId());
         o.setCreateUserName(wxUser.getNickName());
         o.setCreateUserId(wxUser.getUnionId());
@@ -239,10 +240,12 @@ public class ActivityServiceImpl implements ActivityService {
             return new MessageResponse(ResultCode.FAIL, "没有找到相关活动");
         }
         if("activityStart".equals(type)){
-            activity.setEndSignImgUrl(filePath);
+            activity.setStartSignImgUrl(filePath);
+            activity.setStatus("31");
         }
         else if("activityEnd".equals(type)){
             activity.setEndSignImgUrl(filePath);
+            activity.setStatus("32");
         }
         else if("selfSign".equals(type)){
             ActivityDetail activityDetail=activityDetailDao.selectPersonaldetails(id,wxUser.getUnionId());
@@ -406,10 +409,10 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyDate(DateUtil.getNowDate());
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
-        societyOrgInfoDao.addcoin(activity.getInitiatorId(),activity.getCategory(),list.size());
+        activityDao.updateByPrimaryKey(activity);
         if ("33".equals(rst)){
-            personInfoDao.addCoin(list,activity.getCategory());
-            activityDao.updateByPrimaryKey(activity);
+            societyOrgInfoDao.addcoin(activity.getInitiatorId(),activity.getCoinconfigId(),list.size());
+            personInfoDao.addCoin(list,activity.getCoinconfigId());
         }
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
