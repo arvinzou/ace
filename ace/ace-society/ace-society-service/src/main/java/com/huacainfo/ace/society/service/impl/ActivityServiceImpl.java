@@ -149,9 +149,6 @@ public class ActivityServiceImpl implements ActivityService {
         o.setCreateUserId(wxUser.getUnionId());
         this.activityDao.insertSelective(o);
         auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, o.getId(), wxUser.getUnionId());
-        this.dataBaseLogService.log("添加线下活动", "线下活动", "",
-                o.getId(), o.getId(), null);
-
         return new MessageResponse(0, "添加线下活动完成！");
     }
 
@@ -259,8 +256,6 @@ public class ActivityServiceImpl implements ActivityService {
             activityDetail.setLastModifyUserName(wxUser.getNickName());
             activityDetail.setLastModifyUserId(wxUser.getUnionId());
             activityDetailDao.updateByPrimaryKey(activityDetail);
-            this.dataBaseLogService.log("变更线下活动", "线下活动", "",
-                    activityDetail.getId(), activityDetail.getId(), null);
 
             return new MessageResponse(ResultCode.SUCCESS, "变更线下活动完成！");
         }else {
@@ -270,8 +265,6 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyUserName(wxUser.getNickName());
         activity.setLastModifyUserId(wxUser.getUnionId());
         this.activityDao.updateByPrimaryKeySelective(activity);
-        this.dataBaseLogService.log("变更线下活动", "线下活动", "",
-                activity.getId(), activity.getId(), null);
         return new MessageResponse(ResultCode.SUCCESS, "变更线下活动完成！");
     }
 

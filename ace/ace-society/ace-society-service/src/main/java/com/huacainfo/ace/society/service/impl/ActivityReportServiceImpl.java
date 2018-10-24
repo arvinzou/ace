@@ -216,8 +216,6 @@ public class ActivityReportServiceImpl implements ActivityReportService {
             activityReport.setLastModifyDate(new Date());
             this.activityReportDao.insertSelective(activityReport);
             auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY_REPORT, activityReport.getId(), wxUser.getUnionId());
-            this.dataBaseLogService.log("添加活动报道", "活动报道", "",
-                    wxUser.getUnionId(), wxUser.getUnionId(), null);
         }
         return activityReport;
     }
