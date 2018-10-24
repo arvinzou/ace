@@ -169,6 +169,9 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         activityReport.setLastModifyUserName(wxUser.getNickName());
         activityReport.setLastModifyUserId(wxUser.getUnionId());
         this.activityReportDao.updateByPrimaryKeySelective(activityReport);
+        if ("2".equals(o.getStatus())){
+            auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY_REPORT, o.getId(), wxUser.getUnionId());
+        }
 //        this.dataBaseLogService.log("变更活动报道", "活动报道", "", activityReport.getId(), activityReport.getId(), null);
         return new ResultResponse(ResultCode.SUCCESS, "变更活动报道完成！");
     }
@@ -241,6 +244,14 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         return new MessageResponse(0, "活动报道删除完成！");
     }
 
+    @Override
+    public MessageResponse chosen(String id) throws Exception {
+        ActivityReport activityReport = this.activityReportDao.selectByActivityId(id);
+        activityReport.setTop(("1".equals(activityReport.getTop())?"0":"1"));
+        this.activityReportDao.updateByPrimaryKeySelective(activityReport);
+        return new MessageResponse(0, "活动报道修改完成！");
+    }
+
 
     /**
      * @throws
@@ -260,7 +271,7 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         if (null == activityReport) {
             return new MessageResponse(ResultCode.FAIL, "活动报道信息丢失！");
         }
-        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY_REPORT, id, id, rst, remark, userProp);
+        MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY_REPORT, id, activityReport.getCreateUserId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
