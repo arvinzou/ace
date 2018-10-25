@@ -28,6 +28,25 @@ Page({
         that.data.id = id;
         that.setBarTitleText(tit);
         that.initdata();
+        that.initComment();
+    },
+
+    initComment(){
+        let that = this;
+        util.request("http://192.168.2.189/society/www/comment/findAdmireTotal",{
+            id:that.data.id,
+            bisType:"reportLike",
+        },
+            function (rst){
+            console.log(rst);
+        });
+        util.request("http://192.168.2.189/society/www/comment/findList", {
+            id: that.data.id,
+            bisType: "reportLike",
+        },
+            function (rst) {
+                console.log(rst);
+            });
     },
 
     // 获取列表
@@ -121,8 +140,8 @@ Page({
             })
         }
         that.setData({
-            actionComment:false
-        });
+            actionComment: false,
+        })
     },
     getValue: function(e) {
         let that = this;

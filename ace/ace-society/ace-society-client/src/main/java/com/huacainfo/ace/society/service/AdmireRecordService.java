@@ -117,4 +117,6 @@ public interface AdmireRecordService {
      * @throws Exception
      */
     ResultResponse cancelAdmire(String bisType, String bisId, String userId);
+
+    ResultResponse findAdmireTotal(AdmireRecordQVo condition) throws Exception;
 }

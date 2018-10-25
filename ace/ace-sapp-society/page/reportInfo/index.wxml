@@ -63,7 +63,7 @@
 
     <view class='commentBox whiteBg top-line'>
         <view bindtap='actionComment' class='input'>一起参与讨论</view>
-        <text class='iconfont icon-dianzan pop'> <text>2000</text> </text>
+        <text class='iconfont liked icon-dianzan pop' bindtap='actionLike'> <text>2000</text> </text>
         <text class='iconfont icon-pinglun pop'> <text>2000</text></text>
     </view>
     <view class="model" wx:if='{{actionComment}}'>
