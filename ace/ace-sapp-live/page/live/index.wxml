@@ -1,156 +1,155 @@
 <view style=''>
   <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:{{pusherSizeH}}vh;flex:1;background:#eeeeee">
 
-   <cover-view class='info-tip'>
-    <cover-view style='color:#fff;font-size:25rpx;padding:40rpx;'>
-      <cover-view wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
-      <cover-view wx:if="{{info.audioBitrate}}">音频输出:{{info.audioBitrate}}kbps</cover-view>
-      <cover-view wx:if="{{info.netSpeed}}">发送速度:{{info.netSpeed}}</cover-view>
+    <cover-view class='info-tip'>
+      <cover-view style='color:#fff;font-size:25rpx;padding:40rpx;'>
+        <cover-view wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
+        <cover-view wx:if="{{info.audioBitrate}}">音频输出:{{info.audioBitrate}}kbps</cover-view>
+        <cover-view wx:if="{{info.netSpeed}}">发送速度:{{info.netSpeed}}</cover-view>
+      </cover-view>
     </cover-view>
-  </cover-view>
-  <cover-view class="controls" bindtap="play">
-    <cover-image class="imgsmall" src="{{playimg}}" />
-  </cover-view>
-  <cover-view class="controls-screenopt" bindtap="screenopt">
-    <cover-image class="imgsmall" src="{{screenopt}}" />
-  </cover-view>
+    <cover-view class="controls" bindtap="play">
+      <cover-image class="imgsmall" src="{{playimg}}" />
+    </cover-view>
+    <cover-view class="controls-screenopt" bindtap="screenopt">
+      <cover-image class="imgsmall" src="{{screenopt}}" />
+    </cover-view>
   </live-pusher>
- 
+
 </view>
 <!--导航条-->
 <view hidden="{{pusherSizeH==100}}">
-<view class="navbar" style='padding-top:{{paddingtop}}vh'>
-  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
-</view>
-<view class='chat-box' hidden="{{currentTab!=0}}">
-  <view class='live-name'>
-    {{live.name}}
+  <view class="navbar" style='padding-top:{{paddingtop}}vh'>
+    <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
   </view>
-  <view class='live-org'>
-    <view class='live-org-logo'>
-      <image src='{{org.logo}}' class='org-logo'></image>
+  <scroll-view scroll-y class='chat-box' hidden="{{currentTab!=0}}">
+    <view class='live-name'>
+      {{live.name}}
     </view>
-    <view class='live-org-name'>
-      <view class='live-org-allname'>{{org.companyAlias}}</view>
-      <view class='live-org-shortname'>{{org.companyName}}</view>
+    <view class='live-org'>
+      <view class='live-org-logo'>
+        <image src='{{org.logo}}' class='org-logo'></image>
+      </view>
+      <view class='live-org-name'>
+        <view class='live-org-allname'>{{org.companyAlias}}</view>
+        <view class='live-org-shortname'>{{org.companyName}}</view>
+      </view>
+
+    </view>
+    <view class='live-remark'>
+      摘要：{{live.remark}}
+    </view>
+    <view class='live-content-title'>
+      直播时间
+    </view>
+    <view class='live-content-time'>
+      {{live.startTime}}
+    </view>
+    <view class='live-content-line'></view>
+    <view class='live-content-title'>
+      直播简介
+    </view>
+    <view class='live-content'>
+      {{live.content}}
+    </view>
+  </scroll-view>
+  <view class='navbar-content' hidden="{{currentTab!=2}}">
+    <scroll-view scroll-y scroll-into-view="{{scrollintoview}}" style='height:50vh'>
+      <block wx:for-items="{{message}}" wx:key="*">
+        <view class='chat-content' id="{{item.id}}" style='padding:10rpx'>
+          <image src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
+          <view class='chat-right'>
+            <view class='chat-nickname'>
+              <view style='float:left'>{{item.header.wxuser.nickname}}</view>
+              <view style='float:right'>{{item.createTime}}</view>
+            </view>
+
+            <text class='chat-text' wx:if="{{item.content.length<=20}}">{{item.content}}</text>
+            <text class='chat-text block' wx:if="{{item.content.length>20}}">{{item.content}}</text>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+    <view class='commentBox whiteBg top-line'>
+      <view bindtap='actionComment' class='input'>说点啥唄</view>
     </view>
 
   </view>
-  <view class='live-remark'>
-    摘要：{{live.remark}}
-  </view>
-  <view class='live-content-title'>
-    直播时间
-  </view>
-  <view class='live-content-time'>
-    {{live.startTime}}
-  </view>
-  <view class='live-content-line'></view>
-  <view class='live-content-title'>
-    直播简介
-  </view>
-  <view class='live-content'>
-    {{live.content}}
-  </view>
-</view>
-<view class='navbar-content' hidden="{{currentTab!=2}}">
-  <scroll-view scroll-y scroll-into-view="{{scrollintoview}}" style='height:50vh'>
-    <block wx:for-items="{{message}}" wx:key="*">
-      <view class='chat-content' id="{{item.id}}" style='padding:10rpx'>
-        <image src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
-        <view class='chat-right'>
-          <view class='chat-nickname'>
-            <view style='float:left'>{{item.header.wxuser.nickname}}</view>
-            <view style='float:right'>{{item.createTime}}</view>
+
+  <scroll-view scroll-y class='chat-box' hidden="{{currentTab!=1}}">
+    <view class='order-box'>
+      <view class='order-box-time'>
+        {{startDate}}
+      </view>
+      <view class='order-box-button' bindtap='sort'>
+        <view class='order-button'>
+          <image src="../../image/sort.png" class='sort-img'>
+          </image>
+          <text style='flex:3'>{{sort=='1'?'倒序':'顺序'}}</text>
+        </view>
+      </view>
+      <view class='order-box-space'>
+
+      </view>
+      <view class='order-box-status'>
+        <text class='color-{{live.status}}'>{{live.status=='1'?'预播':''}}{{live.status=='2'?'直播中':''}}{{live.status=='3'?'已结束':''}}</text>
+      </view>
+    </view>
+    <block wx:for-items="{{list}}" wx:key="*">
+      <view class="wrap">
+        <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
+          <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
+
+          <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
+          <text style='padding:10rpx'>{{item.createDate}}</text>
+        </view>
+        <view class='rpt-content'>
+          <view wx:if="{{item.content.length>0}}" class="content">
+            {{item.content}}
           </view>
 
-          <text class='chat-text' wx:if="{{item.content.length<=20}}">{{item.content}}</text>
-          <text class='chat-text block' wx:if="{{item.content.length>20}}">{{item.content}}</text>
+          <video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:100%;height:35vh;padding:20rpx;' objectFit="contain"></video>
+          <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;padding:20rpx;' controls="{{1>0}}"></audio>
+          <view class="pictures" data-count="{{item.imageList.length}}">
+            <view class="imglist{{item.imageList.length}}">
+              <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex">
+                <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
+
+              </block>
+
+            </view>
+          </view>
+          <view class='cmt-bar'>
+
+            <image src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
+            <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;color:red;line-height:50rpx'>{{item.likeNum}}</text>
+            <image src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
+          </view>
+          <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
+            <view class='chat-content'>
+              <image src='{{citem.headimgurl}}' class='headimg'></image>
+              <view class='chat-right'>
+                <view class='chat-nickname'>
+                  {{citem.nickname}} {{citem.createTime}}
+                </view>
+                <text class='comment-text' wx:if="{{item.content.length<=20}}">{{citem.content}}</text>
+                <text class='comment-text block' wx:if="{{item.content.length>20}}">{{citem.content}}</text>
+              </view>
+            </view>
+          </block>
+
         </view>
       </view>
     </block>
   </scroll-view>
-  <view class='commentBox whiteBg top-line'>
-    <view bindtap='actionComment' class='input'>说点啥唄</view>
-  </view>
 
 </view>
-
-<view class='chat-box' hidden="{{currentTab!=1}}">
-  <view class='order-box'>
-    <view class='order-box-time'>
-      {{startDate}}
-    </view>
-
-    <view class='order-box-button' bindtap='sort'>
-      <view class='order-button'>
-        <image src="../../image/sort.png" class='sort-img'>
-        </image>
-        <text style='flex:3'>{{sort=='1'?'倒序':'顺序'}}</text>
-      </view>
-    </view>
-    <view class='order-box-space'>
-
-    </view>
-    <view class='order-box-status'>
-      <text class='color-{{live.status}}'>{{live.status=='1'?'预播':''}}{{live.status=='2'?'直播中':''}}{{live.status=='3'?'已结束':''}}</text>
-    </view>
+<view class="model" wx:if='{{actionComment}}'>
+  <view class='inner-model' catchtap='hiddenComment'></view>
+  <view class='box whiteBg'>
+    <form bindsubmit="formSubmit" bindreset="formReset">
+      <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar='' name="commentVal"></textarea>
+      <button class='submit' formType="submit">发送</button>
+    </form>
   </view>
-  <block wx:for-items="{{list}}" wx:key="*">
-    <view class="wrap">
-      <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
-        <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
-
-        <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
-        <text style='padding:10rpx'>{{item.createDate}}</text>
-      </view>
-      <view class='rpt-content'>
-        <view wx:if="{{item.content.length>0}}" class="content">
-          {{item.content}}
-        </view>
-
-        <video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:100%;height:35vh;padding:20rpx;' objectFit="contain"></video>
-        <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;padding:20rpx;' controls="{{1>0}}"></audio>
-        <view class="pictures" data-count="{{item.imageList.length}}">
-          <view class="imglist{{item.imageList.length}}">
-            <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex">
-              <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
-
-            </block>
-
-          </view>
-        </view>
-        <view class='cmt-bar'>
-
-          <image src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
-          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;color:red;line-height:50rpx'>{{item.likeNum}}</text>
-          <image src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
-        </view>
-        <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
-          <view class='chat-content'>
-            <image src='{{citem.headimgurl}}' class='headimg'></image>
-            <view class='chat-right'>
-              <view class='chat-nickname'>
-                {{citem.nickname}} {{citem.createTime}}
-              </view>
-              <text class='comment-text' wx:if="{{item.content.length<=20}}">{{citem.content}}</text>
-              <text class='comment-text block' wx:if="{{item.content.length>20}}">{{citem.content}}</text>
-            </view>
-          </view>
-        </block>
-
-      </view>
-    </view>
-  </block>
 </view>
-</view>
-  <view class="model" wx:if='{{actionComment}}'>
-    <view class='inner-model' catchtap='hiddenComment'></view>
-    <view class='box whiteBg'>
-      <form bindsubmit="formSubmit" bindreset="formReset">
-        <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar='' name="commentVal"></textarea>
-        <button class='submit' formType="submit">发送</button>
-      </form>
-    </view>
-  </view>
-  
