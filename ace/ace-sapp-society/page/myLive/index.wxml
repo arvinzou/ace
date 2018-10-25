@@ -35,7 +35,10 @@
     </view>
   </view>
 
-  <view class="btn-add" bindtap="add">
-    <image class="btn-img" src="../../image/添加.png" />
-  </view>
 </view>
+
+
+  <cover-view class="btn-add" bindtap="add">
+    <cover-image class="btn-img" src="../../image/添加.png" />
+  </cover-view>
+

@@ -134,10 +134,12 @@
             <span class="label label-lg label-success">通过</span>
             <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
-            {@else}
+            {@else if item.auditStatus==3}
             <span class="label label-lg label-danger">驳回</span>
             <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
+            {@else}
+            <span class="label label-lg label-info">暂存</span>
             {@/if}
         </td>
         <td >

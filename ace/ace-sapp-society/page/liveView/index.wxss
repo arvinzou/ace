@@ -1,7 +1,8 @@
 @import "../common/lib/weui.wxss";
 @import "../common/index.wxss";
 page{
-  background:#fff
+  background:#fff;
+    height: 100vh;
 }
 
 .live-top-box-scoll{
@@ -80,7 +81,7 @@ page{
 }
 .chat-box{
   font-size: 25rpx;
-  height: 65vh;
+  height: 58vh;
   padding: 10rpx;
 }
 .headimg{
@@ -89,8 +90,8 @@ page{
   margin: 2rpx auto;
   border-radius: 50%; 
 }
-.chat-content{  
-  display: flex;  
+.chat-content{
+  display: flex;
   flex-direction: row;
   margin-left: 30rpx;
   margin-right: 40rpx;
@@ -187,8 +188,8 @@ width: 80%;
 }
 
 .rpt-content{
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
   border-top: solid 1rpx #ebebeb;
 }
 .content {
@@ -341,7 +342,7 @@ width: 80%;
     position: relative;
     flex: auto;
     text-align: center;
-    line-height: 65rpx;
+    line-height: 7vh;
 }
 
 .navbar .item.active {

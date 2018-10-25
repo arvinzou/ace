@@ -1,5 +1,4 @@
 <view class='index'>
-
 <block wx:for-items="{{list}}" wx:key="*">
       <view class="wrap">
           <view class='report-box-second'>
