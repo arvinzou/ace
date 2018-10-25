@@ -273,7 +273,7 @@ public class AdmireRecordServiceImpl implements AdmireRecordService {
         int allRows = this.admireRecordDao.findCount(condition);
         Map<String,Object> map=new HashMap<String,Object>();
         map.put("allLike",allRows);
-        map.put("iLiet",myRows>0?"true":"false");
+        map.put("iLiet",myRows>0?true:false);
         return new ResultResponse(ResultCode.SUCCESS,"获取成功",map);
     }
 

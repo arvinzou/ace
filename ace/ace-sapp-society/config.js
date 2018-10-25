@@ -61,5 +61,7 @@ var config = {
     submitComment: `${server}/society/www/comment/submitComment`,
     findComments: `${server}/society/www/comment/findList`,
     findAdmires: `${server}/society/www/comment/findAdmireTotal`,
+    admire: `${server}/society/www/comment/admire`,
+    cancelAdmire: `${server}/society/www/comment/cancelAdmire`,
 };
 module.exports = config

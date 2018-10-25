@@ -100,7 +100,7 @@
             文明行为
             {@/if}
         </td>
-        <td width="15%">\${item.userId}</td>
+        <td width="15%">\${item.nickName}</td>
         <td width="15%">\${item.submitDate}</td>
         <td width="15%">
             {@if item.status==0}
