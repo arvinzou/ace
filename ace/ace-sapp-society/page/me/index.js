@@ -40,7 +40,7 @@ Page({
         util.request(cfg.findUserInfo, {},
             function(ret) {
                 if (ret.status == 0) {
-                    console.log(ret);
+                    /*console.log(ret);
                     var _activityHide=false,_partyHide=false;
                     if (ret.data.societyOrg.orgType==1){
                         _activityHide=true;
@@ -48,12 +48,10 @@ Page({
                     if (ret.data.societyOrg.orgType == 2 || ret.data.PersonInfo.politicalStatus==1) {
                         _partyHide = true;
                     }
-                    util.setSysUser(ret.data);
+                    util.setSysUser(ret.data);*/
                     that.setData({
                         userinfoData: ret.data,
-                        isRegist: true,
-                        activityHide:_activityHide,
-                        partyHide:_partyHide,
+                        isRegist: true
                     });
                 } else {
                     that.setData({

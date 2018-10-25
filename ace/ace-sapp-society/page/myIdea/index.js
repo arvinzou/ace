@@ -21,7 +21,7 @@ Page({
 
   initList: function(){
     var that = this;
-    util.request(cfg.ideaList, {"start": 0, "limit": 999, "unionId": "0", "userId": that.data.userId},
+      util.request(cfg.ideaList, { "getAll":"0","start": 0, "limit": 999, "unionId": that.data.userId, "userId": that.data.userId},
         function (ret) {
             if (ret.status == 0) {
                 console.log(ret);
@@ -59,7 +59,6 @@ Page({
       })
   },
   showDetal: function(e){
-      wx.setStorageSync('ideaId', e.currentTarget.dataset.id);
       wx.navigateTo({
           url: '../ideaDetail/index?ideaId=' + e.currentTarget.dataset.id
       })

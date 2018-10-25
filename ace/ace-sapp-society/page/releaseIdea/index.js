@@ -69,7 +69,7 @@ Page({
           });
           return;
       }
-      util.request(cfg.releaseIdea, { "params": JSON.stringify({ "title": title, "category": that.data.category, "solution": solution, "listSubjectIdeaAnnexVo": listSubjectIdeaAnnexVo })} ,
+      util.request(cfg.releaseIdea, { "params": JSON.stringify({ "title": title, "category": that.data.category, "solution": solution, "listSubjectIdeaAnnexVo": listSubjectIdeaAnnexVo }), "unionId": wx.getStorageSync('WX-SESSION-ID')} ,
           function (ret) {
               if (ret.status == 0) {
                   console.log(ret);
