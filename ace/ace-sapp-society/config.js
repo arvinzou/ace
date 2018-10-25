@@ -10,7 +10,7 @@ var config = {
     serverfile,
     hlsserver,
     appid: 'wx7e6a369d8fa12b12',
-    appsecret: '6989892c542e1e6d21a0274d558db869',
+    appsecret: 'eac1cdaebc47d72133d0872a5900f344',
     companyId: '0002',
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
