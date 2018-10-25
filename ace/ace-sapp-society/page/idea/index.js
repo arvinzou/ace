@@ -56,6 +56,7 @@ downloadFile: function(e){
       })
   },
   showDetal: function(e){
+      wx.setStorageSync('ideaId', e.currentTarget.dataset.id);
       wx.navigateTo({
           url: '../ideaDetail/index?ideaId=' + e.currentTarget.dataset.id
       })

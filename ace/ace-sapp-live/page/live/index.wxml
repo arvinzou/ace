@@ -1,10 +1,7 @@
 <view style=''>
   <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:{{pusherSizeH}}vh;flex:1;"
     waiting-image="{{live.imageSrc}}">
-
-
   </live-pusher>
-
   <cover-view class='info-tip'>
     <cover-view style='color:#fff;font-size:25rpx;padding:40rpx;'>
       <cover-view wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
@@ -12,16 +9,10 @@
       <cover-view wx:if="{{info.netSpeed}}">发送速度:{{info.netSpeed}}</cover-view>
     </cover-view>
   </cover-view>
-
   <cover-view class="controls" bindtap="play">
     <cover-image class="imgsmall" src="{{playimg}}" />
   </cover-view>
-
 </view>
-
-
-
-
 <!--导航条-->
 <view class="navbar" style='padding-top:{{paddingtop}}vh'>
   <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
@@ -77,7 +68,7 @@
   <view class='commentBox whiteBg top-line'>
     <view bindtap='actionComment' class='input'>说点啥唄</view>
   </view>
-  
+
 </view>
 
 <view class='chat-box' hidden="{{currentTab!=1}}">
@@ -146,7 +137,8 @@
       </view>
     </view>
   </block>
-<view class="model" wx:if='{{actionComment}}'>
+</view>
+  <view class="model" wx:if='{{actionComment}}'>
     <view class='inner-model' catchtap='hiddenComment'></view>
     <view class='box whiteBg'>
       <form bindsubmit="formSubmit" bindreset="formReset">
@@ -155,4 +147,3 @@
       </form>
     </view>
   </view>
-</view>
