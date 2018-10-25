@@ -91,7 +91,9 @@ public class Course implements Serializable {
      */
     private Date offlineDate;
 
-    /**是否精品课程*/
+    /**
+     * 是否精品课程  0-否 1-是
+     */
     private String fine;
 
     public Date getOnlineDate() {
