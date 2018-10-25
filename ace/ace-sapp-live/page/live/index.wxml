@@ -1,8 +1,7 @@
 <view style=''>
-  <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:{{pusherSizeH}}vh;flex:1;"
-    waiting-image="{{live.imageSrc}}">
-  </live-pusher>
-  <cover-view class='info-tip'>
+  <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:{{pusherSizeH}}vh;flex:1;background:#eeeeee">
+
+   <cover-view class='info-tip'>
     <cover-view style='color:#fff;font-size:25rpx;padding:40rpx;'>
       <cover-view wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
       <cover-view wx:if="{{info.audioBitrate}}">音频输出:{{info.audioBitrate}}kbps</cover-view>
@@ -12,8 +11,14 @@
   <cover-view class="controls" bindtap="play">
     <cover-image class="imgsmall" src="{{playimg}}" />
   </cover-view>
+  <cover-view class="controls-screenopt" bindtap="screenopt">
+    <cover-image class="imgsmall" src="{{screenopt}}" />
+  </cover-view>
+  </live-pusher>
+ 
 </view>
 <!--导航条-->
+<view hidden="{{pusherSizeH==100}}">
 <view class="navbar" style='padding-top:{{paddingtop}}vh'>
   <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
 </view>
@@ -138,6 +143,7 @@
     </view>
   </block>
 </view>
+</view>
   <view class="model" wx:if='{{actionComment}}'>
     <view class='inner-model' catchtap='hiddenComment'></view>
     <view class='box whiteBg'>
@@ -147,3 +153,4 @@
       </form>
     </view>
   </view>
+  

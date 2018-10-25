@@ -55,7 +55,9 @@ Page({
         time: util.formatTime(new Date(), "h:m:s"),
         type: 0,
         rtmpUrl: cfg.hlsserver + that.data.userinfo.userProp.mobile+".m3u8"
-      }
+      },
+      date: util.formatDate(new Date()),
+      time: util.formatTime(new Date(), "h:m:s")
     });
   },
   initEdit: function (param) {
@@ -70,7 +72,9 @@ Page({
         that.setData({
           categoryItems: util.initRadioGroupData(that.data.categoryItems, formData.category),
           formData,
-          files: [formData.imageSrc]
+          files: [formData.imageSrc],
+          date : formData.startTime.substring(0, 10),
+          time : formData.startTime.substring(11, 20)
         });
       }
     );
@@ -245,7 +249,7 @@ Page({
     var that=this;
     that.data.formData.date = e.detail.value;
     that.setData({
-      formData:that.data.formData
+      date: that.data.formData.date
     });
 
   },
@@ -253,7 +257,7 @@ Page({
     var that = this;
     that.data.formData.time = e.detail.value + ":00";
     that.setData({
-      formData: that.data.formData
+      time: that.data.formData.time
     });
   },
   bindTypeChange: function (e) {
