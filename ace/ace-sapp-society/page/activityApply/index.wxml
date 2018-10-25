@@ -1,4 +1,4 @@
-<scroll-view scroll-y class='index' scroll-top='{{ topNum }}'>
+<index class='index'>
     <view class='steps'>
         <view class='step step-one {{stepNum>=1?"step-action":""}}  step-one'>基本信息</view>
         <view class='step step-two {{stepNum>=2?"step-action":""}}'>活动详情</view>
@@ -29,25 +29,25 @@
                         <view class="title">活动期次
                             <text>*</text>
                         </view>
-                        <input  name='clazz' value='{{form.clazz}}' type='number' class='input-value' />
+                        <input name='clazz' value='{{form.clazz}}' type='number' class='input-value' />
                     </view>
                     <view class="input-style bottom-line">
                         <view class="title">活动地点
                             <text>*</text>
                         </view>
-                        <input name='location'  value='{{form.location}}' confirm-type="next" type='text' class='input-value' />
+                        <input name='location' value='{{form.location}}' confirm-type="next" type='text' class='input-value' />
                     </view>
                     <view class="input-style bottom-line">
-                        <view  class="title">活动人数
+                        <view class="title">活动人数
                             <text>*</text>
                         </view>
-                        <input name='parterNum'  value='{{form.parterNum}}' confirm-type="next" type='number' class='input-value' />
+                        <input name='parterNum' value='{{form.parterNum}}' confirm-type="next" type='number' class='input-value' />
                     </view>
                     <view class="input-style bottom-line">
                         <view class="title">开始时间
                             <text>*</text>
                         </view>
-                        <picker name='startDate' data-name='startDate'  class='input-value' mode="multiSelector" value="{{startDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                        <picker name='startDate' data-name='startDate' class='input-value' mode="multiSelector" value="{{startDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
                             <view class="tui-picker-detail">
                                 {{dateTimeArray[0][startDate[0]]}}-{{dateTimeArray[1][startDate[1]]}}-{{dateTimeArray[2][startDate[2]]}} {{dateTimeArray[3][startDate[3]]}}:{{dateTimeArray[4][startDate[4]]}}
                             </view>
@@ -72,7 +72,7 @@
                         <view class="title">报名截止
                             <text>*</text>
                         </view>
-                        <picker name='dendline'  data-name='dendline' value='{{form.dendline}}' class='input-value' mode="multiSelector" value="{{dendline}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                        <picker name='dendline' data-name='dendline' value='{{form.dendline}}' class='input-value' mode="multiSelector" value="{{dendline}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
                             <view class="tui-picker-detail">
                                 {{dateTimeArray[0][dendline[0]]}}-{{dateTimeArray[1][dendline[1]]}}-{{dateTimeArray[2][dendline[2]]}} {{dateTimeArray[3][dendline[3]]}}:{{dateTimeArray[4][dendline[4]]}}
                             </view>
@@ -95,7 +95,9 @@
                         <view class="title bottom-line">活动目的
                             <text>*</text>
                         </view>
-                        <textarea name='purpose' bindinput='checkFontNum' data-name="purposeNum"  value='{{form.purpose}}' maxlength='400' />
+                        <view>
+                            <textarea name='purpose' bindinput='checkFontNum' data-name="purposeNum" value='{{form.purpose}}' maxlength='400' />
+                        </view>
                         <view class="textLen {{purposeNum>300?'point':''}}">{{purposeNum}}</view>
                     </view>
                 </view>
@@ -105,7 +107,9 @@
                         <view class="title bottom-line">活动方式
                             <text>*</text>
                         </view>
-                        <textarea bindinput='checkFontNum' data-name="modeNum" name='mode'  value='{{form.mode}}' maxlength='400' />
+                        <view>
+                            <textarea bindinput='checkFontNum' data-name="modeNum" name='mode' value='{{form.mode}}' maxlength='400' />
+                        </view>
                         <view class='textLen {{modeNum>300?"point":""}}'>{{modeNum}}</view>
                     </view>
                 </view>
@@ -120,19 +124,22 @@
 
             </view>
 
+            <view class='reuslt {{stepNum==3?"":"hidden"}}'>
+                <view class='massage'>
+                    <view class='image'>
+                        <image mode='widthFix' src='../../image/icon_success.png'></image>
+                    </view>
+                    <text class='fontStyle1'>发布成功</text>
+                    <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>
+                    <view class='fontStyle2'>
+                        <text>联系电话：</text>
+                        <text bindtap="callphone" data-mobile='0736-2323252' class="phone">0736-2323252</text>
+                    </view>
+                </view>
+                <view bindtap='colseThis' class='btn btn-bkClick'>
+                    关闭
+                </view>
+            </view>
         </form>
     </view>
-    <view class='reuslt {{stepNum==3?"":"hidden"}}'>
-        <view class='massage'>
-            <view class='image'>
-                <image mode='widthFix' src='../../image/icon_success.png'></image>
-            </view>
-            <text class='fontStyle1'>发布成功</text>
-            <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>
-            <view class='fontStyle2'><text>联系电话：</text><text bindtap="callphone" data-mobile='0736-2323252' class="phone">0736-2323252</text></view>
-        </view>
-        <view bindtap='colseThis' class='btn btn-bkClick'>
-            关闭
-        </view>
-    </view>
-</scroll-view>
+</index>
