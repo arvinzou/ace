@@ -85,6 +85,9 @@ Page({
         this.setData({
             stepNum: ++that.data.stepNum,
         });
+        wx.pageScrollTo({
+            scrollTop: 0
+        })
     },
 
     previousOne: function() {
@@ -92,6 +95,9 @@ Page({
         this.setData({
             stepNum: --that.data.stepNum,
         });
+        wx.pageScrollTo({
+            scrollTop: 0
+        })
     },
 
     showModal(error) {

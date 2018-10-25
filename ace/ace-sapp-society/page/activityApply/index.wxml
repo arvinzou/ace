@@ -1,5 +1,5 @@
 <index class='index'>
-    <view class='steps'>
+    <view class='steps separate'>
         <view class='step step-one {{stepNum>=1?"step-action":""}}  step-one'>基本信息</view>
         <view class='step step-two {{stepNum>=2?"step-action":""}}'>活动详情</view>
         <view class='step-end {{stepNum>=3?"step-action":""}}'>发布成功</view>
@@ -8,7 +8,7 @@
         <form bindsubmit="formSubmit" bindreset="formReset">
             <view class='partOne {{stepNum==1?"":"hidden"}}'>
                 <view class='prompt'>活动主办成功，活动发起者可获得50爱心币</view>
-                <view bindtap='addCover' class='cover'>
+                <view bindtap='addCover' class='cover separate'>
                     <image mode='aspectFill' hidden='{{!form.coverUrl}}' src='{{form.coverUrl}}'></image>
                     <text hidden='{{form.coverUrl}}'>添加活动封面</text>
                 </view>
