@@ -244,12 +244,17 @@ Page({
   bindDateChange: function (e) {
     var that=this;
     that.data.formData.date = e.detail.value;
+    that.setData({
+      formData:that.data.formData
+    });
 
   },
   bindTimeChange: function (e) {
     var that = this;
     that.data.formData.time = e.detail.value + ":00";
- 
+    that.setData({
+      formData: that.data.formData
+    });
   },
   bindTypeChange: function (e) {
     console.log('picker type code 发生选择改变，携带值为', e.detail.value);

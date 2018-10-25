@@ -1,9 +1,8 @@
 {
   "pages": [
-   
+    "page/myLive/index",
     "page/liveHome/index",
     "page/liveView/index",
-    "page/myLive/index",
     "page/liveList/index",
     "page/live/index",
     "page/rpt/index",
@@ -14,7 +13,7 @@
   ],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "芙蓉街道",
+    "navigationBarTitleText": "微课程",
     "navigationBarBackgroundColor": "#fff",
     "backgroundColor": "#fff",
     "enablePullDownRefresh": true
