@@ -106,7 +106,7 @@ public class ActivityServiceImpl implements ActivityService {
         List<ActivityVo> list = this.activityDao.findUserList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
-            int allRows = this.activityDao.findCount(condition);
+            int allRows = this.activityDao.findUserCount(condition);
             rst.setTotal(allRows);
         }
         return rst;

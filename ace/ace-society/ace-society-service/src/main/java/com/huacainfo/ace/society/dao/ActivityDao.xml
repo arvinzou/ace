@@ -512,6 +512,13 @@
         <include refid="whereCondition"/>
     </select>
 
+
+    <select id="findUserCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="fromCondition2"/>
+        <include refid="whereCondition"/>
+    </select>
+
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Activity">
     select count(1)
     from activity
