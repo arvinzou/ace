@@ -44,7 +44,7 @@
 
     <view class='commentBox whiteBg top-line'>
         <view bindtap='actionComment' class='input'>一起参与讨论</view>
-        <text class='iconfont liked icon-dianzan pop' bindtap='actionLike'> <text>2000</text> </text>
+        <text class='iconfont {{like?"liked":""}} icon-dianzan pop' bindtap='actionLike'> <text>{{likeNum}}</text> </text>
         <text class='iconfont icon-pinglun pop'> <text>{{CTotal}}</text></text>
     </view>
     <view class="model" wx:if='{{actionComment}}'>

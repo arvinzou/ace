@@ -13,6 +13,8 @@ Page({
         commentVal: '',
         commentList:{},
         CTotal:0,
+        likeNum:0,
+        like:false,
     },
 
     /**
@@ -38,7 +40,7 @@ Page({
     getLikeNum(){
         let that = this;
         util.request(cfg.findAdmires, {
-            id: that.data.id,
+            bisId: that.data.id,
             bisType: "reportLike",
         },
             function (rst) {
@@ -188,5 +190,36 @@ Page({
                     content: '评论失败，稍后重试',
                 })
         });
+    },
+    actionLike:function(){
+        let that=this;
+        let url,num,iLike;
+        if(that.data.like){
+            url = cfg.cancelAdmire
+            num=-1;
+            iLike=false;
+        }else{
+            url = cfg.admire
+            num = 1;
+            iLike = true;
+        }
+
+        util.request(url, {
+            bisId: that.data.id,
+            bisType: "reportLike",
+        },
+            function (rst) {
+                if(rst.status==0){
+                    that.setData({
+                        likeNum: that.data.likeNum + num,
+                        like: iLike,
+                    });
+                    return;
+                }
+                wx.showModal({
+                    title: '提示',
+                    content: '点赞失败，请重试',
+                })
+            });
     }
 })
