@@ -13,14 +13,17 @@ Page({
     startY: 0
   },
   onReady: function (res) {
-
+    that.initData();
+  },
+  onShow: function () {
+      var that=this;
+      that.initData();
   },
   onLoad: function () {
     var that = this;
     if (!util.isLogin()) {
       wx.navigateTo({ url: "../userinfo/index?url=../myLive/index" });
     }else{
-      that.initData();
       that.setData({
         userinfo: wx.getStorageSync('userinfo')
       });

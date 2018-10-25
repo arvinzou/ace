@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.society.service.AdmireRecordService;
 import com.huacainfo.ace.society.service.CommentRecordService;
+import com.huacainfo.ace.society.vo.AdmireRecordQVo;
 import com.huacainfo.ace.society.vo.AdmireRecordVo;
 import com.huacainfo.ace.society.vo.CommentRecordQVo;
 import com.huacainfo.ace.society.vo.CommentRecordVo;
@@ -44,10 +45,27 @@ public class WCommentController extends SocietyBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
-
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }
+
+
+    /***
+     * 获取评论列表
+     * @param condition 查询条件
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/findAdmireTotal")
+    public ResultResponse findAdmireTotal(AdmireRecordQVo condition, String unionId) throws Exception {
+        WxUser wxUser = getCurWxUser();//小程序用户
+        if (null == wxUser && StringUtil.isEmpty(unionId)) {
+            return new ResultResponse(ResultCode.FAIL, "微信鉴权失败");
+        }
+        unionId = StringUtil.isNotEmpty(unionId) ? unionId : wxUser.getUnionId();
+        condition.setUserId(unionId);
+        return admireRecordService.findAdmireTotal(condition);
+    }
+
 
     /**
      * 提交评论
@@ -127,4 +145,26 @@ public class WCommentController extends SocietyBaseController {
 
         return admireRecordService.cancelAdmire(bisType, bisId, unionId);
     }
+
+    /**
+     * 获取点赞数量
+     * <p>
+     * 表单参数 ：   bisType  bisId ;
+     *
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/getAdmireNum")
+    public ResultResponse getAdmireNum(String bisType, String bisId) throws Exception {
+
+
+        if (!StringUtil.areNotEmpty(bisType, bisId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        int num = admireRecordService.getAdmireNum(bisType, bisId);
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", num);
+    }
+
 }

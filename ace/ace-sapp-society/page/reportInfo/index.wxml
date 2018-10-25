@@ -29,48 +29,29 @@
 
     <view class='foot whiteBg'>
         <view class='comments'>
-            <view class='comment bottom-line'>
+            <view wx:for="{{commentList}}" class='comment bottom-line'>
                 <view class='top'>
-                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
-
-
+                    <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
                     <view class='right'>
-                        <view class='name'>半分</view>
-                        <view class='time'>2018-04-03 13:15</view>
+                        <view class='name'>{{item.nickName}}</view>
+                        <view class='time'>{{item.createDate}}</view>
                     </view>
                 </view>
-                <view class='bottom '>
-                    多杰出的创意品牌将在这里双双呈现罕见的创意合作，你还可以加入互动，亲手参与创作，相信你能从这些专心致志因此非常快乐的年轻人身上，找到属于你的乐趣。
-                </view>
-            </view>
-
-            <view class='comment bottom-line'>
-                <view class='top'>
-                    <image mode='aspectFill' src='http://pic.616pic.com/bg_w1180/00/05/65/Z5fAJclFBJ.jpg!/fw/1120'></image>
-
-
-                    <view class='right'>
-                        <view class='name'>半分</view>
-                        <view class='time'>2018-04-03 13:15</view>
-                    </view>
-                </view>
-                <view class='bottom'>
-                    多杰出的创意品牌将在这里双双呈现罕见的创意合作，你还可以加入互动，亲手参与创作，相信你能从这些专心致志因此非常快乐的年轻人身上，找到属于你的乐趣。
-                </view>
+                <view class='bottom '>{{item.content}}</view>
             </view>
         </view>
     </view>
 
     <view class='commentBox whiteBg top-line'>
         <view bindtap='actionComment' class='input'>一起参与讨论</view>
-        <text class='iconfont icon-dianzan pop'> <text>2000</text> </text>
-        <text class='iconfont icon-pinglun pop'> <text>2000</text></text>
+        <text class='iconfont liked icon-dianzan pop' bindtap='actionLike'> <text>2000</text> </text>
+        <text class='iconfont icon-pinglun pop'> <text>{{CTotal}}</text></text>
     </view>
     <view class="model" wx:if='{{actionComment}}'>
         <view class='inner-model' catchtap='hiddenComment'></view>
         <view class='box whiteBg'>
             <form bindsubmit="formSubmit" bindreset="formReset">
-                <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar=''></textarea>
+                <textarea bindinput='getValue' name='content' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar=''></textarea>
                 <button class='submit' formType="submit">发送</button>
             </form>
         </view>

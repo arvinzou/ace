@@ -35,4 +35,6 @@ public interface AdmireRecordDao {
     int cancelAdmire(@Param("bisType") String bisType,
                      @Param("bisId") String bisId,
                      @Param("userId") String userId);
+
+    int getAdmireNum(String bisType, String bisId);
 }

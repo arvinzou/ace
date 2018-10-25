@@ -36,7 +36,7 @@
         </radio-group>
       </view>
       <view class="kind-list-item">
-        <textarea name="content" value="{{formData.content}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入介绍" style="height: 300rpx" />
+        <textarea name="content" value="{{formData.content}}" bindinput="valueChange" maxlength="500" class="weui-textarea" placeholder="请输入摘要" style="height: 300rpx" />
         <view class="weui-textarea-counter">{{max}}/500</view>
       </view>
 
@@ -50,8 +50,8 @@
             <view class="weui-label">开始日期</view>
           </view>
           <view class="weui-cell__bd">
-            <picker mode="date" value="{{formData.date}}" start="{{formData.date}}" bindchange="bindDateChange">
-              <view class="weui-input">{{formData.date}}</view>
+            <picker mode="date" value="{{date}}" start="{{date}}" bindchange="bindDateChange">
+              <view class="weui-input">{{date}}</view>
             </picker>
           </view>
         </view>
@@ -60,8 +60,8 @@
             <view class="weui-label">开始时间</view>
           </view>
           <view class="weui-cell__bd">
-            <picker mode="time" value="{{formData.time}}" start="{{formData.time}}" bindchange="bindTimeChange">
-              <view class="weui-input">{{formData.time}}</view>
+            <picker mode="time" value="{{time}}" start="{{time}}" bindchange="bindTimeChange">
+              <view class="weui-input">{{time}}</view>
             </picker>
           </view>
         </view>

@@ -279,7 +279,7 @@ function setSysUser(sysUserInfo){
 
 function getSysUser(){
     var sysUserInfo = wx.getStorageSync('sysUserInfo');
-    if (!sysUserInfo) {
+    if (!sysUserInfo){
         return false;
     }
     return sysUserInfo;

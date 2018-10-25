@@ -55,7 +55,9 @@ Page({
         time: util.formatTime(new Date(), "h:m:s"),
         type: 0,
         rtmpUrl: cfg.hlsserver + that.data.userinfo.userProp.mobile+".m3u8"
-      }
+      },
+      date: util.formatDate(new Date()),
+      time: util.formatTime(new Date(), "h:m:s")
     });
   },
   initEdit: function (param) {
@@ -70,7 +72,9 @@ Page({
         that.setData({
           categoryItems: util.initRadioGroupData(that.data.categoryItems, formData.category),
           formData,
-          files: [formData.imageSrc]
+          files: [formData.imageSrc],
+          date : formData.startTime.substring(0, 10),
+          time : formData.startTime.substring(11, 20)
         });
       }
     );
@@ -244,12 +248,17 @@ Page({
   bindDateChange: function (e) {
     var that=this;
     that.data.formData.date = e.detail.value;
+    that.setData({
+      date: that.data.formData.date
+    });
 
   },
   bindTimeChange: function (e) {
     var that = this;
     that.data.formData.time = e.detail.value + ":00";
- 
+    that.setData({
+      time: that.data.formData.time
+    });
   },
   bindTypeChange: function (e) {
     console.log('picker type code 发生选择改变，携带值为', e.detail.value);

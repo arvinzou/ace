@@ -26,7 +26,7 @@
 
 .navbar-item {
     display: inline-block;
-    width: 138rpx;
+    width: 25%;
     height: 100%;
 }
 
