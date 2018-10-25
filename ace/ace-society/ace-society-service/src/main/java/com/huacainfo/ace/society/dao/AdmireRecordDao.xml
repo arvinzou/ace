@@ -131,4 +131,11 @@
           and bisType = #{bisType,jdbcType=VARCHAR}
           and userId = #{userId,jdbcType=VARCHAR}
     </delete>
+
+    <select id="getAdmireNum" resultType="int">
+        SELECT COUNT(*)
+        from admire_record
+        where bisId = #{bisId,jdbcType=VARCHAR}
+          and bisType = #{bisType,jdbcType=VARCHAR}
+    </select>
 </mapper>

@@ -89,8 +89,8 @@ page{
   margin: 2rpx auto;
   border-radius: 50%; 
 }
-.chat-content{  
-  display: flex;  
+.chat-content{
+  display: flex;
   flex-direction: row;
   margin-left: 30rpx;
   margin-right: 40rpx;
@@ -174,20 +174,17 @@ width: 80%;
 .show{ 
  display: block;
 }
-
-
-
-
 .add{
    right: 40rpx;
 }
 
 .headimgp {
-width:70rpx;height:70rpx;border-radius:0rpx;vertical-align:middle;
+	width:70rpx;height:70rpx;border-radius:0rpx;vertical-align:middle;
 }
+
 .rpt-content{
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
   border-top: solid 1rpx #ebebeb;
 }
 .content {

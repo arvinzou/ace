@@ -196,7 +196,7 @@ public class PointsRecordServiceImpl implements PointsRecordService {
     @Override
     public ResultResponse addPointsRecord(String userId, String bisType, String bisId, int points) {
         switch (bisType) {
-            case BisType.ORDER_CONSUME:
+            case BisType.POINTS_ORDER_CONSUME:
                 points = -points;
                 break;
             default:
