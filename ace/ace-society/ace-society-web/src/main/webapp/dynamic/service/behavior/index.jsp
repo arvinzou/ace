@@ -92,7 +92,7 @@
     {@each data as item, index}
     <tr>
         <td>\${parseInt(index)+1}</td>
-        <td width="20%">\${item.title}</td>
+        <td width="20%">\${item.compendium}</td>
         <td width="15%">
             {@if item.type == '0'}
             不文明行为
@@ -120,7 +120,7 @@
         <td width="20%">
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-show" data-id="\${item.id}">查看</a>
             {@if item.status == '2'}
-            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
+            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-type="\${item.regType}" data-id="\${item.id}">审核</a>
             {@/if}
         </td>
     </tr>
@@ -180,18 +180,6 @@
 <script id="tpl-detail" type="text/template">
     <div class="form-body">
         <div class="form-group">
-            <label class="col-md-2 view-label">标题</label>
-            <div class="col-md-10">
-                \${data.title}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">提交人</label>
-            <div class="col-md-10">
-                \${data.userId}
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-md-2 view-label">简述</label>
             <div class="col-md-10">
                 \${data.compendium}
@@ -201,6 +189,12 @@
             <label class="col-md-2 view-label">备注</label>
             <div class="col-md-10">
                 \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">提交人</label>
+            <div class="col-md-10">
+                \${data.userId}
             </div>
         </div>
         <div class="form-group">
@@ -228,18 +222,6 @@
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
         <div class="form-group">
-            <label class="col-md-2 view-label">标题</label>
-            <div class="col-md-10">
-                \${data.title}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">提交人</label>
-            <div class="col-md-10">
-                \${data.userId}
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-md-2 view-label">简述</label>
             <div class="col-md-10">
                 \${data.compendium}
@@ -249,6 +231,12 @@
             <label class="col-md-2 view-label">备注</label>
             <div class="col-md-10">
                 \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">提交人</label>
+            <div class="col-md-10">
+                \${data.userId}
             </div>
         </div>
         <div class="form-group">
@@ -288,6 +276,7 @@
             <label class="col-md-2 control-label">说明</label>
             <div class="col-md-10">
                 <input type="hidden" name="id" value="\${data.id}">
+                <input type="hidden" name="userId" value="\${data.userId}">
                 <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
             </div>
         </div>
