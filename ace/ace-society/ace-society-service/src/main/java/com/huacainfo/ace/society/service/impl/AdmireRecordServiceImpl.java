@@ -24,7 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("admireRecordService")
 /**
@@ -263,19 +265,16 @@ public class AdmireRecordServiceImpl implements AdmireRecordService {
         return new ResultResponse(ResultCode.SUCCESS, "取消成功");
     }
 
-    /**
-     * 获取点赞数量
-     * <p>
-     * 表单参数 ：   bisType  bisId ;
-     *
-     * @param bisType
-     * @param bisId
-     * @return ResultResponse
-     * @throws Exception
-     */
+
     @Override
-    public int getAdmireNum(String bisType, String bisId) {
-        return admireRecordDao.getAdmireNum(bisType, bisId);
+    public ResultResponse findAdmireTotal(AdmireRecordQVo condition) throws Exception {
+        int myRows=this.admireRecordDao.findCount(condition);
+        condition.setUserId(null);
+        int allRows = this.admireRecordDao.findCount(condition);
+        Map<String,Object> map=new HashMap<String,Object>();
+        map.put("allLike",allRows);
+        map.put("iLiet",myRows>0?true:false);
+        return new ResultResponse(ResultCode.SUCCESS,"获取成功",map);
     }
 
 }

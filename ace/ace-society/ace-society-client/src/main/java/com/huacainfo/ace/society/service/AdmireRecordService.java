@@ -118,13 +118,5 @@ public interface AdmireRecordService {
      */
     ResultResponse cancelAdmire(String bisType, String bisId, String userId);
 
-    /**
-     * 获取点赞数量
-     * <p>
-     * 表单参数 ：   bisType  bisId ;
-     *
-     * @return ResultResponse
-     * @throws Exception
-     */
-    int getAdmireNum(String bisType, String bisId);
+    ResultResponse findAdmireTotal(AdmireRecordQVo condition) throws Exception;
 }

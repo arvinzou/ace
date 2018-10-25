@@ -1,5 +1,6 @@
 var loading = {};
 var params = {limit: 5};
+var orgType = null;
 window.onload = function (){
     initPage();
     initEvents();
@@ -64,6 +65,7 @@ function initEvents() {
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
+        orgType = relatedTarget.data('type');
         initForm(id);
     })
     $('#modal-audit .btn-primary').on('click', function () {
@@ -89,6 +91,7 @@ function initEvents() {
 /*市民行为详情审核*/
 function audit(params){
     startLoad();
+    params.orgType = orgType;
     $.ajax({
         url: contextPath + "/behavior/audit",
         type:"post",

@@ -57,10 +57,6 @@ Page({
     aspectimg: "../../image/aspect_916.png",
     aspect: "9:16",
     message: [],
-    toView: 0,
-    contentText: '',
-    hiddenmodalput: true,
-    hiddenmodalcmt: true,
     display: 'show',
     currentTab: 0,
     navbar: ['简介', '直播', '互动'],
@@ -70,7 +66,8 @@ Page({
     paddingtop: 0,
     nameDisplay: false,
     scoll: 'live-top-box-noscoll',
-    sort: '0'
+    sort: '0',
+    screenopt:'../../image/全屏.png'
   },
   onReady: function (res) {
     var that = this;
@@ -467,6 +464,21 @@ Page({
       data: JSON.stringify(message),
     });
     console.log(message);
+  },
+  screenopt:function(){
+    var that = this;
+    var pusherSizeH = that.data.pusherSizeH;
+    if (pusherSizeH ==35) {
+      that.setData({
+        pusherSizeH: 100,
+        screenopt: "../../image/退出全屏.png"
+      });
+    } else {
+      that.setData({
+        pusherSizeH:35,
+        screenopt: "../../image/全屏.png"
+      });
+    }
   }
 
 });

@@ -94,7 +94,7 @@ Page({
         this.cencelClickStyle(false);
         todo.editing = true;
         this.updateData(true);
-        this.updateStorage();
+        
     },
     // 修改结束
     endEdit: function(e) {
@@ -107,7 +107,7 @@ Page({
             this.data.content.splice(this.getElementIndex(todo.id), 1);
         }
         this.updateData(true);
-        this.updateStorage();
+        
     },
     // 获取单个数据信息
     getTodo: function(id) {
@@ -129,18 +129,6 @@ Page({
             data.content = this.data.content;
         }
         this.setData(data);
-    },
-    // 保存在内存
-    updateStorage: function() {
-        var storage = [];
-        this.data.content.forEach(function(t) {
-            storage.push({
-                id: t.id,
-                text: t.text,
-                complete: t.complete
-            })
-        });
-        wx.setStorageSync('content', storage);
     },
     // 添加元素
     addElement: function(content, type, editing) {
@@ -294,26 +282,6 @@ Page({
             scrollTop: e.scrollTop
         })
     },
-    // postReport: function() {
-    //     util.request(cfg.findActivitys, {
-    //         category: that.data.category,
-    //         start: that.data.start,
-    //         limit: that.data.limit
-    //     }, function(data) {
-    //         console.log(data.data);
-    //         wx.hideNavigationBarLoading() //完成停止加载
-    //         wx.stopPullDownRefresh() //停止下拉刷新
-    //         that.setData({
-    //             list: that.data.list.concat(data.data),
-    //             Loadingstatus: false,
-    //         });
-    //         if (data.data.length < that.data.limit) {
-    //             that.setData({
-    //                 LoadOver: true,
-    //             });
-    //         }
-    //     });
-    // },
     saveReport: function() {
         let that = this;
         that.data.status = "1";

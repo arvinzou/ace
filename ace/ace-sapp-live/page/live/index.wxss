@@ -62,18 +62,18 @@ page{
 }
 .controls{
   position:fixed;
-  top:25.5vh;
-  right:5%;
+  right:20rpx;
+  top:140rpx;
 }
 .info-tip{
   position: fixed;  
   display: flex; 
   flex-direction: column; 
-  top: 10rpx; 
-  right: 2%; 
+  top: 20rpx; 
+  left: 20rpx; 
   width: 300rpx;   
   font-size: 25rpx;
-  padding: 2%;
+  padding: 0rpx;
 }
 .tip-item{
     color: #0F8DFF;
@@ -515,10 +515,10 @@ max-height: 80rpx;
   flex:2
 }
 .order-box-button{
-  flex:1
+  flex:2
 }
 .order-box-space{
-  flex:3
+  flex:2
 }
 .order-box-status{
   flex:1;
@@ -660,4 +660,9 @@ max-height: 80rpx;
     font-weight:bold;
     color:rgba(255,255,255,1);
     -webkit-appearance:none;
+}
+.controls-screenopt{
+  position:fixed;
+  right:20rpx;
+  top:20rpx;
 }

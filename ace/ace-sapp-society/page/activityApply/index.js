@@ -8,7 +8,6 @@ const App = getApp()
 
 Page({
     data: {
-        topNum: 0,
         dateTimeArray: null,
         startDate: null,
         endDate: null,
@@ -85,16 +84,20 @@ Page({
         var that = this;
         this.setData({
             stepNum: ++that.data.stepNum,
-            topNum: 0,
         });
+        wx.pageScrollTo({
+            scrollTop: 0
+        })
     },
 
     previousOne: function() {
         var that = this;
         this.setData({
             stepNum: --that.data.stepNum,
-            topNum: 0,
         });
+        wx.pageScrollTo({
+            scrollTop: 0
+        })
     },
 
     showModal(error) {

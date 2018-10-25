@@ -11,6 +11,10 @@ Page({
         list: {},
         actionComment: false,
         commentVal: '',
+        commentList:{},
+        CTotal:0,
+        likeNum:0,
+        like:false,
     },
 
     /**
@@ -28,7 +32,39 @@ Page({
         that.data.id = id;
         that.setBarTitleText(tit);
         that.initdata();
+        that.getLikeNum();
+        that.getCommentList();
     },
+
+
+    getLikeNum(){
+        let that = this;
+        util.request(cfg.findAdmires, {
+            bisId: that.data.id,
+            bisType: "reportLike",
+        },
+            function (rst) {
+                console.log(rst);
+            });
+    },
+
+    getCommentList:function(){
+        let that = this;
+        util.request(cfg.findComments, {
+            id: that.data.id,
+            bisType: "reportComment",
+        },
+            function (rst) {
+                if(rst.status==0){
+                    that.setData({
+                        commentList:rst.data.rows,
+                        CTotal:rst.data.total
+                    })
+                }
+                console.log(rst);
+            });
+    },
+
 
     // 获取列表
     initdata: function() {
@@ -121,11 +157,69 @@ Page({
             })
         }
         that.setData({
-            actionComment:false
-        });
+            actionComment: false,
+        })
     },
     getValue: function(e) {
         let that = this;
         that.data.commentVal = e.detail.value;
+    },
+    formSubmit: function (e) {
+        let that=this;
+        let vals=e.detail.value;
+        if (!vals.content){
+            wx.showModal({
+                title: '提示',
+                content: '没有输入任何内容',
+            })
+            return;
+        }
+        vals.bisType="reportComment";
+        vals.bisId=that.data.id;
+        util.request(cfg.submitComment, vals,
+            function (rst) {
+                if(rst.status==0){
+                    that.setData({
+                        actionComment: false,
+                    })
+                    that.getCommentList();
+                    return;
+                }
+                wx.showModal({
+                    title: '提示',
+                    content: '评论失败，稍后重试',
+                })
+        });
+    },
+    actionLike:function(){
+        let that=this;
+        let url,num,iLike;
+        if(that.data.like){
+            url = cfg.cancelAdmire
+            num=-1;
+            iLike=false;
+        }else{
+            url = cfg.admire
+            num = 1;
+            iLike = true;
+        }
+
+        util.request(url, {
+            bisId: that.data.id,
+            bisType: "reportLike",
+        },
+            function (rst) {
+                if(rst.status==0){
+                    that.setData({
+                        likeNum: that.data.likeNum + num,
+                        like: iLike,
+                    });
+                    return;
+                }
+                wx.showModal({
+                    title: '提示',
+                    content: '点赞失败，请重试',
+                })
+            });
     }
 })
