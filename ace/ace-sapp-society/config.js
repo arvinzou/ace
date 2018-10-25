@@ -1,8 +1,8 @@
-var server = "https://zhsh.wuling.gov.cn";
-var serverfile = "https://zhsh.wuling.gov.cn/";
-var rtmpserver = "rtmp://zhsh.wuling.gov.cn/live/";
-var hlsserver = "http://zhsh.wuling.gov.cn:9999/hls/";
-var websocketurl = 'zhsh.wuling.gov.cn';
+var server = "https://zx.huacainfo.com";
+var serverfile = "https://zx.huacainfo.com/";
+var rtmpserver ="rtmp://zx.huacainfo.com/live/";
+var hlsserver ="http://139.224.0.227:9999/hls/";
+var websocketurl= 'zx.huacainfo.com';
 var config = {
     rtmpserver,
     websocketurl,
@@ -61,5 +61,7 @@ var config = {
     submitComment: `${server}/society/www/comment/submitComment`,
     findComments: `${server}/society/www/comment/findList`,
     findAdmires: `${server}/society/www/comment/findAdmireTotal`,
+    admire: `${server}/society/www/comment/admire`,
+    cancelAdmire: `${server}/society/www/comment/cancelAdmire`,
 };
 module.exports = config
