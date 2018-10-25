@@ -9,8 +9,8 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.7.0",
-	"appid": "wx70ba7c5dca85e4da",
-	"projectname": "%E8%8A%99%E8%93%89%E8%A1%97%E9%81%93%E5%B0%8F%E7%A8%8B%E5%BA%8F",
+  "appid": "wx7e6a369d8fa12b12",
+  "projectname": "%E8%8A%99%E8%93%89%E8%A1%97%E9%81%93%E7%A4%BE%E4%BC%9A%E6%9C%8D%E5%8A%A1%E6%99%BA%E6%85%A7%E5%B9%B3%E5%8F%B0",
 	"condition": {
 		"search": {
 			"current": -1,
