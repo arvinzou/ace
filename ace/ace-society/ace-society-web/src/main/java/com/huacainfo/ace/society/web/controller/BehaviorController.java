@@ -142,8 +142,8 @@ public class BehaviorController extends SocietyBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse audit(String id, String rst, String remark) throws Exception {
+    public MessageResponse audit(String id,String userId, String orgType, String rst, String remark) throws Exception {
 
-        return this.behaviorService.audit(id, rst, remark, this.getCurUserProp());
+        return this.behaviorService.audit(id,userId, orgType, rst, remark, this.getCurUserProp());
     }
 }

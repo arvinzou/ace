@@ -45,8 +45,6 @@ var config = {
     adminActivityList: `${server}/society/www/activity/findAdminSelfActivityList`,
     userActivityList: `${server}/society/www/activity/findUserSelfActivityList`,
     activitySign: `${server}/society/www/activity/activitySign`,
-
-
     getLiveMsgList: `${server}/live/www/live/getLiveMsgList`,
     insertLiveRpt: `${server}/live/liveRpt/www/insertLiveRpt`,
     getLiveRptList: `${server}/live/www/live/getLiveRptList`,
