@@ -43,6 +43,7 @@
     padding: 10rpx 30rpx 30rpx;
     color: #fff;
     margin-bottom: 20rpx;
+    background-color: #fff;
 }
 
 .banner .top::after {
