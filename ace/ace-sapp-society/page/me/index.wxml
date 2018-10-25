@@ -19,8 +19,8 @@
                     <view>爱心币收入</view>
                 </view>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.accPoints?userinfoData.societyOrg.accPoints:0 - userinfoData.societyOrg.validPoints?userinfoData.societyOrg.validPoints:0}}</view>
-                    <view wx:else>{{ userinfoData.person.accPoints?userinfoData.person.accPoints:0 - userinfoData.person.validPoints?userinfoData.person.validPoints:0}}</view>
+                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.accPoints - userinfoData.societyOrg.validPoints}}</view>
+                    <view wx:else>{{ userinfoData.person.accPoints - userinfoData.person.validPoints}}</view>
                     <view>爱心币支出</view>
                 </view>
                 <view>

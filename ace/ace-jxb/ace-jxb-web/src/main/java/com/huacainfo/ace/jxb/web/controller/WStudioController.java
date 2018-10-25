@@ -2,10 +2,15 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.jxb.service.CourseService;
 import com.huacainfo.ace.jxb.service.MemberQrcodeService;
 import com.huacainfo.ace.jxb.service.StudioService;
+import com.huacainfo.ace.jxb.vo.CourseQVo;
+import com.huacainfo.ace.jxb.vo.CourseVo;
 import com.huacainfo.ace.jxb.vo.StudioVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +30,8 @@ public class WStudioController extends JxbBaseController {
     private MemberQrcodeService memberQrcodeService;
     @Autowired
     private StudioService studioService;
+    @Autowired
+    private CourseService courseService;
 
 
     /**
@@ -123,6 +130,53 @@ public class WStudioController extends JxbBaseController {
 
         Map<String, Object> rst = studioService.studioReport(studioId);
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
+    }
+
+    /**
+     * 查询工作室课程列表
+     *
+     * @return
+     */
+    @RequestMapping("/findCourseList")
+    public ResultResponse findCourseList(String studioId, PageParamNoChangeSord page) throws Exception {
+        if (StringUtil.isEmpty(studioId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少工作室ID");
+        }
+
+        CourseQVo condition = new CourseQVo();
+        condition.setStudioId(studioId);
+        PageResult<CourseVo> rst =
+                courseService.findCourseList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
+    }
+
+
+    /**
+     * 查询工作室 -- 精品课程
+     *
+     * @return
+     */
+    @RequestMapping("/findExcellentCourse")
+    public ResultResponse findExcellentCourse(String studioId, PageParamNoChangeSord page) throws Exception {
+        if (StringUtil.isEmpty(studioId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少工作室ID");
+        }
+
+        CourseQVo condition = new CourseQVo();
+        condition.setStudioId(studioId);
+        condition.setFine("1");
+
+        PageResult<CourseVo> rst =
+                courseService.findCourseList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }
 
 }

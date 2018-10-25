@@ -1,8 +1,8 @@
-var server = "https://zx.huacainfo.com";
-var serverfile = "https://zx.huacainfo.com/";
-var rtmpserver ="rtmp://zx.huacainfo.com/live/";
-var hlsserver ="http://139.224.0.227:9999/hls/";
-var websocketurl= 'zx.huacainfo.com';
+var server = "https://zhsh.wuling.gov.cn";
+var serverfile = "https://zhsh.wuling.gov.cn/";
+var rtmpserver = "rtmp://zhsh.wuling.gov.cn/live/";
+var hlsserver = "http://zhsh.wuling.gov.cn:9999/hls/";
+var websocketurl = 'zhsh.wuling.gov.cn';
 var config = {
     rtmpserver,
     websocketurl,

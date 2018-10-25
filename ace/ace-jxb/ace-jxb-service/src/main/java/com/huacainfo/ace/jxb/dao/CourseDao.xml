@@ -397,6 +397,14 @@
         <if test="condition.fine !=null and condition.fine !=&quot;&quot;">
             and t.fine = #{condition.fine,jdbcType=VARCHAR}
         </if>
+        <if test="condition.studioId !=null and condition.studioId !=&quot;&quot;">
+            and ( c.studioId = #{condition.studioId,jdbcType=VARCHAR}
+            or t.createUserId = (select s.counselorId
+            from studio s
+            where s.id = #{condition.studioId,jdbcType=VARCHAR}
+            )
+            )
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">

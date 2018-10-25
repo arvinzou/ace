@@ -55,7 +55,7 @@
     width: 141rpx;
     height: 141rpx;
     position: absolute;
-    bottom: 200rpx;
+    top: 200rpx;
     right: 10rpx;
     z-index:200;
 }
