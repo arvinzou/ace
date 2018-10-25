@@ -95,7 +95,7 @@ public interface BehaviorService {
      * @author: lcan
      * @version: 2018-09-11
      */
-    MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
+    MessageResponse audit(String id, String userId, String userType,String rst, String remark, UserProp userProp) throws Exception;
 
     /**
      * 提交文明随手拍

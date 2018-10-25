@@ -85,8 +85,6 @@ page {
     background: rgba(214, 214, 214, 1);
     font-size: 28rpx;
     color: rgba(255, 255, 255, 1);
-    position: fixed;
-    box-shadow: 0px 2px 8px #aaa;
     z-index:100;
 }
 
@@ -95,7 +93,7 @@ page {
 }
 
 .steps .step-two {
-    z-index: 90;
+    z-index: 99;
 }
 
 .steps::after {

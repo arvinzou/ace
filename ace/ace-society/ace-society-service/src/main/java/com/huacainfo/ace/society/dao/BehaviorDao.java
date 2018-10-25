@@ -19,7 +19,7 @@ public interface BehaviorDao {
 
     int updateByPrimaryKey(Behavior record);
 
-    int updateByPrimaryKeySelective(Behavior record);
+    int updateByPrimaryKeySelective(@Param("condition") Behavior condition);
 
     BehaviorVo selectVoByPrimaryKey(String id);
 
