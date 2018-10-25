@@ -164,7 +164,7 @@ public class RegServiceImpl implements RegService {
         o.setStauts("1");
         o.setPassword(CommonUtils.getMd5(pwd));
         o.setName(reg.getNickname());
-        o.setDepartmentId("0010010");
+        o.setDepartmentId("0002");
         o.setCurSyid("society");
         o.setOpenId(reg.getUnionId());
         o.setCreateTime(DateUtil.getNowDate());
