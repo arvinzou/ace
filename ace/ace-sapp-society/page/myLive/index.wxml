@@ -36,6 +36,6 @@
   </view>
 
   <view class="btn-add" bindtap="add">
-    <image class="btn-img" src="../../image/add-red.png" />
+    <image class="btn-img" src="../../image/添加.png" />
   </view>
 </view>
