@@ -127,4 +127,26 @@ public class WCommentController extends SocietyBaseController {
 
         return admireRecordService.cancelAdmire(bisType, bisId, unionId);
     }
+
+    /**
+     * 获取点赞数量
+     * <p>
+     * 表单参数 ：   bisType  bisId ;
+     *
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/getAdmireNum")
+    public ResultResponse getAdmireNum(String bisType, String bisId) throws Exception {
+
+
+        if (!StringUtil.areNotEmpty(bisType, bisId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        int num = admireRecordService.getAdmireNum(bisType, bisId);
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", num);
+    }
+
 }

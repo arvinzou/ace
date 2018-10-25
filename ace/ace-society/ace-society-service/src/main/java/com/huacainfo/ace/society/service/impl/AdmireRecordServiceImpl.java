@@ -263,4 +263,19 @@ public class AdmireRecordServiceImpl implements AdmireRecordService {
         return new ResultResponse(ResultCode.SUCCESS, "取消成功");
     }
 
+    /**
+     * 获取点赞数量
+     * <p>
+     * 表单参数 ：   bisType  bisId ;
+     *
+     * @param bisType
+     * @param bisId
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public int getAdmireNum(String bisType, String bisId) {
+        return admireRecordDao.getAdmireNum(bisType, bisId);
+    }
+
 }
