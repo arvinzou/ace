@@ -16,6 +16,24 @@ public class BehaviorVo extends Behavior {
      * 昵称
      */
     private String nickName;
+    private String regType;
+    private String unionId;
+    public String getRegType() {
+        return regType;
+    }
+
+    public void setRegType(String regType) {
+        this.regType = regType;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
     private List<BehaviorAnnexVo> behaviorAnnexList;
 
     public String getAvatarUrl() {
