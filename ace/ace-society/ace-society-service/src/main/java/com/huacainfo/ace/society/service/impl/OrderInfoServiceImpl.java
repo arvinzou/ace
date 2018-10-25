@@ -455,7 +455,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         info.setOrderState(OrderState.ORDER_STATE_PAID);
         info = insertOrder(info);
         //积分流水记录
-        pointsRecordService.addPointsRecord(info.getUserId(), BisType.ORDER_CONSUME, info.getId(), payPoints);
+        pointsRecordService.addPointsRecord(info.getUserId(), BisType.POINTS_ORDER_CONSUME, info.getId(), payPoints);
 
         //返回信息
         Map<String, Object> rtnMap = new HashMap<>();

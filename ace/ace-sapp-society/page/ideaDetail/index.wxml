@@ -2,37 +2,48 @@
     <view class='content'>
         <view class='idea-title'><text>{{ detail.title }}</text></view>
         <view class='idea-info'>
-            <image src='../../image/head.jpg' class='head'></image>
-            <text class='fontstyle' style='padding-left:20rpx;'>可惜我是水瓶座</text>
-            <text class='datetime'>2018-9-25 13:56</text>
-            <text class='download' style='padding-left12rpx'>下载附件</text>
-            <image class='download-file' src='../../image/attach.png'></image>
+            <image src='{{detail.avatarUrl}}' class='head'></image>
+            <text class='fontstyle' style='padding-left:20rpx;'>{{detail.nickname}}</text>
+            <text class='datetime'>{{detail.createDate}}</text>
+            <block wx:if='{{detail.listSubjectIdeaAnnexVo.length > 0}}'>
+                <text class='download' style='padding-left：12rpx' bindtap='downloadFile' data-value='{{detail.listSubjectIdeaAnnexVo}}'>下载附件</text>
+                <image class='download-file' src='../../image/attach.png'></image>
+            </block>
         </view>
         <view class='idea-content'>
             {{ detail.solution }}
-        </view>
+        </view>   
     </view>
     <view class='comment'>
+    <block wx:for='{{commentList}}' wx:key='*'>
         <view class='comment-item'>
             <view class='comment-item-left'>
-                <image class='head-image' src='../../image/head.jpg'></image>
+                <image class='head-image' src='{{item.avatarUrl}}'></image>
             </view>
             <view class='comment-item-right'>
-                <view class='nickname'><text>可惜我是水瓶座</text></view>
-                <view class='comment-time'><text>2018-04-03 13:15</text></view>
-                <view class='comment-content'><text>刚刚看完的这个视频，多少了解了自闭症的信息，比如自闭症和疫苗没有关系，自闭症和遗传基因有关系，而且还有别的原因，但是现在没有太好的方法等等</text></view>
+                <view class='nickname'><text>{{item.nickName}}</text></view>
+                <view class='comment-time'><text>{{item.createDate}}</text></view>
+                <view class='comment-content'><text>{{item.content}}</text></view>
             </view>
         </view>
+    </block>
+    </view>
 
-        <view class='comment-item'>
-            <view class='comment-item-left'>
-                <image class='head-image' src='../../image/head.jpg'></image>
-            </view>
-            <view class='comment-item-right'>
-                <view class='nickname'><text>可惜我是水瓶座</text></view>
-                <view class='comment-time'><text>2018-04-03 13:15</text></view>
-                <view class='comment-content'><text>刚刚看完的这个视频，多少了解了自闭症的信息，比如自闭症和疫苗没有关系，自闭症和遗传基因有关系，而且还有别的原因，但是现在没有太好的方法等等</text></view>
-            </view>
-        </view>
+    <!--评论点赞-->
+    <view class='cmt-bar'>
+          <image src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{detail.id}}"></image>
+          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'></text>
+          <image src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{detail.id}}"></image>
     </view>
 </view>
+
+<!--评论弹框-->
+ <view class="model" wx:if='{{actionComment}}'>
+    <view class='inner-model' catchtap='hiddenComment'></view>
+    <view class='box whiteBg'>
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar='' name="commentVal"></textarea>
+        <button class='submit' formType="submit">发送</button>
+      </form>
+    </view>
+  </view>

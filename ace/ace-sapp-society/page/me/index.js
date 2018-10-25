@@ -12,7 +12,9 @@ Page({
         num1: parseInt(Math.random() * 100),
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
-        userId: null
+        userId: null,
+        activityHide:false,
+        partyHide:false
     },
 
     /**
@@ -38,9 +40,20 @@ Page({
         util.request(cfg.findUserInfo, {},
             function(ret) {
                 if (ret.status == 0) {
+                    console.log(ret);
+                    var _activityHide=false,_partyHide=false;
+                    if (ret.data.societyOrg.orgType==1){
+                        _activityHide=true;
+                    }
+                    if (ret.data.societyOrg.orgType == 2 || ret.data.PersonInfo.politicalStatus==1) {
+                        _partyHide = true;
+                    }
+                    util.setSysUser(ret.data);
                     that.setData({
                         userinfoData: ret.data,
-                        isRegist: true
+                        isRegist: true,
+                        activityHide:_activityHide,
+                        partyHide:_partyHide,
                     });
                 } else {
                     that.setData({

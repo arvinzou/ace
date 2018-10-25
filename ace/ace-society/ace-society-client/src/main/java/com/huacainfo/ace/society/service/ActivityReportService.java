@@ -86,6 +86,7 @@ public interface ActivityReportService {
      * @version: 2018-09-13
      */
     MessageResponse deleteActivityReportByActivityReportId(String id, UserProp userProp) throws Exception;
+    MessageResponse chosen(String id) throws Exception;
 
     /**
      * @throws

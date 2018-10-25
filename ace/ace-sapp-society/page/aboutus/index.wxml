@@ -1,0 +1,6 @@
+<view class='index'>
+    <view class='map-box'>
+        <map id="myMap" show-location longitude='111.6520303488' latitude='29.0327722622' style='width:100%; height:100%'/>
+    </view>
+    <button bindtap='map'>定位</button>
+</view>

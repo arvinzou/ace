@@ -15,23 +15,31 @@
             </view>
         </view>
 
-        <view wx:if='{{item.status==2}}' class='status status3'>活动待审核</view>
-        <view wx:if='{{item.category==1}}' class='status status4'>发布已通过</view>
-        <view wx:if='活动开始事件<当前时间' bindtap='activitySign' data-type='activityStart' data-id='{{item.id}}' class='status status1'>活动开始</view>
+        <view wx:if='{{item.status==2}}' class='status status1'>活动待审核</view>
+         <view wx:if='{{item.status==32}}' class='status status1'>活动有效审核</view>
+        <view wx:if='{{item.status==3}}' class='status status4'>发布已通过</view>
+        <view wx:if='{{item.status==3&&item.startDate<nowDate}}' bindtap='activitySign' data-type='activityStart' data-id='{{item.id}}' class='status status1'>活动开始</view>
 
-        <view wx:if='user&&活动开始状态' bindtap='activitySign' data-type='selfSign' data-id='{{item.id}}' class='status status1'>现场签到</view>
+        <view wx:if='{{item.status==31&&type==1}}' bindtap='activitySign' data-type='selfSign' data-id='{{item.id}}' class='status status1'>现场签到</view>
 
-        <view wx:if='admin&&活动开始状态' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status1'>活动结束</view>
+        <view wx:if='{{item.status==31&&type==2}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status1'>活动结束</view>
+        <view wx:if='{{item.status==33}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status1'>活动完成</view>
         
-        <view wx:if='user&&活动结束状态（确定怎么谁发布' bindtap='postReport' data-id='{{item.id}}' class='status status1'>待报道</view>
+        <view wx:if='{{item.status==32&&!item.arStatus}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>发布报道</view>
 
-        <view wx:if='user&&报道发布状态' class='status status2'>报道待审核</view>
+        <view wx:if='{{item.arStatus==1||item.arStatus==4}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>报道编辑</view>
+
+        <view wx:if='{{item.arStatus==2}}' bindtap='postReport' data-id='{{item.id}}' class='status status1'>报道审核</view>
+
+        <view wx:if='{{item.arStatus==3}}' bindtap='postReport' data-id='{{item.id}}' class='status status4'>报道发布</view>
+
+        <view wx:if='{{item.arStatus==4}}' bindtap='postReport' data-id='{{item.id}}' class='status status3'>报道驳回</view>
 
         <view wx:if='{{item.status==2}}' class='status status2'>签到待审核</view>
         
         <view wx:if='{{item.status==4}}' class='status status1'>审核失败</view>
 
-        <view wx:if='{{item.status==4}}' class='status status1'>审核失败</view>
+        <view wx:if='{{item.status==41}}' class='status status1'>活动无效</view>
         <view wx:if='{{item.status==4}}' bindtap='delActivit' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>删除</view>
         <view wx:if='{{item.status==4}}' bindtap='delActivit' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>修改</view>
     </view>

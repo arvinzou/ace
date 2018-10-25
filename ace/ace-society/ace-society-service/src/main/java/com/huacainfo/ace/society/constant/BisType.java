@@ -54,7 +54,20 @@ public interface BisType {
     /**
      * 订单消费
      */
-    String ORDER_CONSUME = "ORDER_CONSUME";
+    String POINTS_ORDER_CONSUME = "ORDER_CONSUME";
 
+
+    /**
+     * ================
+     * 评论模块业务类型（点赞共用此业务类型）
+     */
+    /**
+     * 点子评论-业务类型
+     */
+    String COMMENT_IDEA = "idea";
+    /**
+     * 活动评论-业务类型
+     */
+    String COMMENT_ACTIVITY = "activity";
 }
 

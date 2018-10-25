@@ -43,7 +43,7 @@ Page({
     },
     initBehaviorList: function(type){
         var that = this;
-        util.request(cfg.behaviorList, { "start": 0, "limit": 999, "type": type},
+        util.request(cfg.behaviorList, { "start": 0, "limit": 999, "type": type, "status":"3"},
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
@@ -92,7 +92,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-
+        var that = this;
+        that.initBehaviorList('1');
     },
 
     /**

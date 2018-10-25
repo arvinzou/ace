@@ -19,7 +19,7 @@ Page({
 
 initList: function(){
     var that = this;
-    util.request(cfg.ideaList, {"start": 0, "limit": 999, "unionId": "0"},
+    util.request(cfg.ideaList, {"start": 0, "limit": 999, "status": "3"},
         function (ret) {
             if (ret.status == 0) {
                 console.log(ret);
@@ -56,6 +56,7 @@ downloadFile: function(e){
       })
   },
   showDetal: function(e){
+      wx.setStorageSync('ideaId', e.currentTarget.dataset.id);
       wx.navigateTo({
           url: '../ideaDetail/index?ideaId=' + e.currentTarget.dataset.id
       })
@@ -92,7 +93,8 @@ downloadFile: function(e){
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    
+      var that = this;
+      that.initList();
   },
 
   /**

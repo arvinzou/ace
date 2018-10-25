@@ -108,14 +108,28 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         }
 
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus("2");//默认自动送审
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.personInfoDao.insert(o);
         this.dataBaseLogService.log("添加个人信息", "个人信息", "", o.getId(), o.getId(), userProp);
 
+        //自动送审
+        sendAudit(o);
+
         return new MessageResponse(0, "添加个人信息完成！");
     }
+
+    public ResultResponse sendAudit(PersonInfo obj) {
+        if (null == obj) {
+            return new ResultResponse(ResultCode.FAIL, "数据记录丢失");
+        }
+        //提交审核
+        auditRecordService.submit(GUIDUtil.getGUID(), BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId());
+
+        return new ResultResponse(ResultCode.SUCCESS, "送审成功");
+    }
+
 
     /**
      * 组织关系绑定

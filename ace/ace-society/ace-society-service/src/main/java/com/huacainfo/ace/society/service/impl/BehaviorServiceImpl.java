@@ -310,7 +310,8 @@ public class BehaviorServiceImpl implements BehaviorService {
                 behaviorAnnexDao.insert(annex);
             }
         }
-
+        //自动送审
+        sendAudit(behaviorId, params.getUserId());
 
         return new ResultResponse(ResultCode.SUCCESS, "提交成功");
     }

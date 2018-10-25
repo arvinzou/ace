@@ -1,18 +1,17 @@
-
-var server = "https://zx.huacainfo.com";
-var serverfile = "https://zx.huacainfo.com/";
-var rtmpserver ="rtmp://zx.huacainfo.com/live/";
-var hlsserver ="http://139.224.0.227:9999/hls/";
-var websocketurl= 'zx.huacainfo.com';
+var server = "https://zhsh.wuling.gov.cn";
+var serverfile = "https://zhsh.wuling.gov.cn/";
+var rtmpserver = "rtmp://zhsh.wuling.gov.cn/live/";
+var hlsserver = "http://zhsh.wuling.gov.cn:9999/hls/";
+var websocketurl = 'zhsh.wuling.gov.cn';
 var config = {
     rtmpserver,
     websocketurl,
     server,
     serverfile,
     hlsserver,
-    appid: 'wx70ba7c5dca85e4da',
-    appsecret: '96214b4a01153935995cc027ddf26d75',
-    companyId: '00010001',
+    appid: 'wx7e6a369d8fa12b12',
+    appsecret: 'eac1cdaebc47d72133d0872a5900f344',
+    companyId: '0002',
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
     uploadUrl: `${server}/portal/www/upload.do`,

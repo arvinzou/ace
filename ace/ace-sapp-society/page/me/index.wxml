@@ -34,11 +34,11 @@
 
     <view class='activity-menu'>
         <view class='activity-menu-list'>
-            <navigator class='activity-menu-item'>
+            <navigator hidden="{{partyHide}}" class='activity-menu-item'>
                 <view><image src='../../image/icon_me_party.png'></image></view>
                 <view><text>智慧党建</text></view>
             </navigator>
-            <navigator class='activity-menu-item'>
+            <navigator hidden="{{activityHide}}" url='../activityManage/index' class='activity-menu-item'>
                 <view><image src='../../image/icon_me_activity.png'></image></view>
                 <view><text>线下活动</text></view>
             </navigator>
@@ -72,10 +72,10 @@
             <text class='menu-title'>商城订单</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
-        <view class='menu-item'>
+        <navigator class='menu-item' url='../../aboutus/index'>
             <image src='../../image/icon_aboutus.png' class='menu-icon'></image>
             <text class='menu-title'>关于我们</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>
-        </view>
+        </navigator>
     </view>
 </view>
