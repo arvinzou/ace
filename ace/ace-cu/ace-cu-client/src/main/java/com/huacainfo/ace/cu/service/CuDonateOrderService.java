@@ -12,6 +12,7 @@ import com.huacainfo.ace.cu.vo.CuDonateOrderQVo;
 import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -128,4 +129,12 @@ public interface CuDonateOrderService {
      * @return 处理结果
      */
     ResultResponse ccbCallBack(CcbCallbackLog params);
+
+    /**
+     * 根据订单ID，查询订单捐款人，捐献报表
+     *
+     * @param orderId 订单ID
+     * @return
+     */
+    Map<String, Object> findDonateReport(String orderId);
 }

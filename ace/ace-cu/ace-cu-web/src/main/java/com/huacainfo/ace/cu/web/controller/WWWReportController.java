@@ -137,4 +137,49 @@ public class WWWReportController extends CuBaseController {
         List<CuProject> list = cuProjectService.findAllProjectList(projectType);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
     }
+
+    /**
+     * 查询某人的捐献记录
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findDonateRecord")
+    public ResultResponse findDonateRecord(String projectId, String openId) throws Exception {
+        //公众号用户信息
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo && StringUtil.isEmpty(openId)) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+        if (StringUtil.isEmpty(projectId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        openId = StringUtil.isNotEmpty(openId) ? openId : userinfo.getOpenid();
+        Map<String, Object> list = analysisService.findDonateRecord(projectId, openId);
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", list);
+    }
+
+
+    /**
+     * 查询某人的捐献记录
+     *
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getShareData")
+    public ResultResponse findDonateHis(String orderId) throws Exception {
+        if (StringUtil.isEmpty(orderId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        Map<String, Object> rtn = analysisService.findDonateHis(orderId);
+
+        if (rtn == null) {
+            return new ResultResponse(ResultCode.FAIL, "订单数据不存在");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtn);
+    }
+
 }

@@ -391,4 +391,33 @@
         donatePostName = #{donatePostName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <select id="findDonateReport" parameterType="java.lang.String" resultType="java.util.Map">
+        select
+            u.nickname, u.headimgurl,
+            IFNULL(a.totalAmount,0) as donateTotal,
+	        IFNULL(b.num,0) as donateNum,
+	        IFNULL(c.days,0) as donateDays
+        from cu.cu_donate_order t
+        left join portal.userinfo u on u.openid = t.openId
+        left join (SELECT
+                       t.openId, SUM(t.donateAmount) as totalAmount
+                   FROM `cu_donate_order` t
+                   where t.`status`='2'
+                   GROUP by t.openId ) a on a.openId = t.openid
+        left JOIN (SELECT
+                      t.openId, count(t.openId) as num
+                  FROM `cu_donate_order` t
+                  where t.`status`='2'
+                  GROUP by t.openId ) b on b.openId = t.openid
+        left join (select a.openId, count(a.openId) as days
+                  from (
+                      SELECT
+                          DISTINCT	t.openId, SUBSTR(t.donateDate,1	,10) as dayTime
+                      FROM `cu_donate_order` t
+                      where t.`status`='2'
+                  )a
+                  GROUP BY a.openId) c on c.openId = t.openid
+        where t.id = #{orderId,jdbcType=VARCHAR}
+    </select>
 </mapper>
