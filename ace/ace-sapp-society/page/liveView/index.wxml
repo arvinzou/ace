@@ -14,7 +14,7 @@
 <view class="navbar" style='padding-top:{{paddingtop}}vh'>
   <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
 </view>
-<view class='chat-box' hidden="{{currentTab!=0}}">
+<scroll-view scroll-y class='chat-box' hidden="{{currentTab!=0}}">
   <view class='live-name'>
     {{live.name}}
   </view>
@@ -44,7 +44,7 @@
   <view class='live-content'>
     {{live.content}}
   </view>
-</view>
+</scroll-view>
 <view class='navbar-content' hidden="{{currentTab!=2}}">
   <scroll-view scroll-y scroll-into-view="{{scrollintoview}}" style='height:50vh'>
     <block wx:for-items="{{message}}" wx:key="*">
@@ -66,7 +66,7 @@
     <view bindtap='actionComment' class='input'>说点啥唄</view>
   </view>
 </view>
-<view class='chat-box' hidden="{{currentTab!=1}}">
+<scroll-view scroll-y class='chat-box' hidden="{{currentTab!=1}}">
   <view class='order-box'>
     <view class='order-box-time'>
       {{startDate}}
@@ -132,7 +132,7 @@
       </view>
     </view>
   </block>
-</view>
+</scroll-view>
 
  <view class="model" wx:if='{{actionComment}}'>
     <view class='inner-model' catchtap='hiddenComment'></view>

@@ -304,6 +304,11 @@
               from coin_config c
               where c.id=#{coinId,jdbcType=VARCHAR}
               )
+              ,s.accPoints=s.accPoints+(
+              select c.host+ CASE WHEN #{size,jdbcType=DECIMAL}>c.baseNum THEN (#{size,jdbcType=DECIMAL}-c.baseNum)*c.subjoinNum ELSE 0 END
+              from coin_config c
+              where c.id=#{coinId,jdbcType=VARCHAR}
+              )
               where s.id=#{userId,jdbcType=VARCHAR}
     </update>
 

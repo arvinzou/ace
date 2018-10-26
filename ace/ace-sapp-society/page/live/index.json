@@ -1,4 +1,5 @@
 {
     "navigationBarTitleText": "微直播",
-    "enablePullDownRefresh": true
+    "enablePullDownRefresh": false,
+    "disableScroll": true
 }

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "page/myLive/index",
+    "page/index/index",
     "page/liveHome/index",
+    "page/myLive/index",
     "page/liveView/index",
     "page/liveList/index",
     "page/live/index",
@@ -10,6 +11,7 @@
     "page/userinfo/index",
     "page/bind/index",
     "page/preview/index"
+    
   ],
   "window": {
     "navigationBarTextStyle": "black",
