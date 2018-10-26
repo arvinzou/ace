@@ -410,9 +410,22 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
         activityDao.updateByPrimaryKey(activity);
+
         if ("33".equals(rst)){
-            societyOrgInfoDao.addcoin(activity.getInitiatorId(),activity.getCoinconfigId(),list.size());
-            personInfoDao.addCoin(list,activity.getCoinconfigId());
+            CoinConfig coinConfig=coinConfigService.selectCoinConfigByPrimaryKey(activity.getCoinconfigId()).getValue();
+            int oCoin=coinConfig.getHost();
+            int signNum=list.size();
+            int baseNum=coinConfig.getBaseNum();
+            int pCoin=coinConfig.getParticipant();
+            int pCoin1=pCoin;
+            if(baseNum<signNum){
+                oCoin=oCoin+(signNum-baseNum)*coinConfig.getSubjoinNum();
+            }
+            if(pCoin1<0){
+                pCoin1=0;
+            }
+            societyOrgInfoDao.addcoin(activity.getInitiatorId(),oCoin);
+            personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin1);
         }
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
