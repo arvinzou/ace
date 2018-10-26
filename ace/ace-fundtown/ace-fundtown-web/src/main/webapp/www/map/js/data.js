@@ -91,7 +91,7 @@ var massage = {
         ]
     },
     柳叶湖清科基金小镇: {
-        address: '常德武陵区柳叶湖度假区维一柳岸小区',
+        address: '湖南省常德市柳叶湖旅游度假区环湖南路',
         images: [
             'img/qkxz/1.jpg',
             'img/qkxz/2.jpg',

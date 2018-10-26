@@ -283,7 +283,7 @@ Page({
     uploadFileFun: function(tempFilePaths) {
         var that = this;
         wx.uploadFile({
-            url: 'http://zx.huacainfo.com/portal/www/uploadFile.do',
+            url: cfg.server+'/portal/www/uploadFile.do',
             filePath: tempFilePaths,
             name: 'file',
 
@@ -293,7 +293,7 @@ Page({
             },
             success: function(res) {
                 var data = JSON.parse(res.data);
-                var url = 'http://zx.huacainfo.com/' + data.value[0].fileUrl;
+                var url = cfg.server + data.value[0].fileUrl;
                 that.setData({
                     ["form.coverUrl"]: url
                 })

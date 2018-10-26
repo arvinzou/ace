@@ -85,7 +85,7 @@ function save(params) {
 			stopLoad();
 			alert(result.errorMessage);
 			if (result.status == 0) {
-				window.location.href = '../../live/index.jsp?id=' + urlParams.id;
+				//window.location.href = '../../live/index.jsp?id=' + urlParams.id;
 			}
 		},
 		error: function() {

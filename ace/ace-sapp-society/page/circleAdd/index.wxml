@@ -40,7 +40,7 @@
               <view class="weui-uploader__files" id="uploaderFilesVideo">
         
                 <view style='position:relative;' class='{{displayVideo}} recorder'>
-                   <video src="{{mediUrl}}" style='width:100%;height:35vh' objectFit="contain" class='{{displayVideo}}'></video>
+                   <video src="{{mediUrl}}" style='width:100%;height:25vh' objectFit="contain" class='{{displayVideo}}'></video>
             <cover-image class="removeImgBtnVideo {{displayVideo}}" bindtap="delVideo" src="../../image/del-red.png"/>
          </view>
               </view>
@@ -53,8 +53,9 @@
         </view>
         <view hidden="{{currentTab!==2}}" class='recorder-box'>
           <view style='position:relative;' class='{{displayAudio}} recorder'>
-            <audio src="{{mediUrl}}" name="录音" controls="{{1>0}}" class='{{displayAudio}}'></audio>
-            <cover-image class="removeImgBtn {{displayAudio}}" bindtap="delAideo" src="../../image/del-red.png"/>
+                      <view bindtap='playAudio' data-url="{{mediUrl}}" class='{{displayAudio}}' style='color:blue;padding-right:40rpx'>试听</view>
+
+                      <view bindtap='delAideo' data-url="{{mediUrl}}" class='{{displayAudio}}' style='color:blue'>取消</view>
          </view>
             
           <view class='recorder'>

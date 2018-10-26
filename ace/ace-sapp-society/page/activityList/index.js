@@ -8,7 +8,7 @@ Page({
         limit:10,
         LoadOver:false,
         Loadingstatus:false,
-        nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),
+        nowDate: new Date(),
         showBtn:false,
         hiddenBtn: true,
     },

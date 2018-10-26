@@ -110,7 +110,7 @@ public class TpaServiceImpl implements TpaService {
 	}
 
 	public MessageResponse updateTpa(Tpa o, UserProp userProp) throws Exception {
-		if (CommonUtils.isEmpty(o.getId())) {
+		if (CommonUtils.isEmpty(o.getId())||o.getId().length()>20) {
 			return this.insertTpa(o, userProp);
 		}
 		if (CommonUtils.isBlank(o.getId())) {

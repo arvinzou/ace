@@ -37,6 +37,8 @@ public interface ActivityDao {
 
     int findCount(@Param("condition") ActivityQVo condition);
 
+    int findUserCount(@Param("condition") ActivityQVo condition);
+
     int isExit(Activity record);
 
 }

@@ -1,7 +1,8 @@
 @import "../common/lib/weui.wxss";
 @import "../common/index.wxss";
 page{
-  background:#fff
+  background:#fff;
+    height: 100vh;
 }
 
 .live-top-box-scoll{
@@ -80,7 +81,7 @@ page{
 }
 .chat-box{
   font-size: 25rpx;
-  height: 65vh;
+  height: 58vh;
   padding: 10rpx;
 }
 .headimg{
@@ -341,7 +342,7 @@ width: 80%;
     position: relative;
     flex: auto;
     text-align: center;
-    line-height: 65rpx;
+    line-height: 7vh;
 }
 
 .navbar .item.active {

@@ -179,6 +179,7 @@ public class ActivityController extends SocietyBaseController {
     @RequestMapping(value = "/endAudit")
     @ResponseBody
     public MessageResponse endAudit(String id, String rst, String message, String list) throws Exception {
+        list=list==null?"":list;
         String[] lists=list.split(",");
         return this.activityService.endAudit(id, rst, message,Arrays.asList(lists) ,this.getCurUserProp());
     }
