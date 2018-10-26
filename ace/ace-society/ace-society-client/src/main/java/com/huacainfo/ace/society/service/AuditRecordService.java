@@ -1,6 +1,7 @@
 package com.huacainfo.ace.society.service;
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -97,6 +98,8 @@ public interface AuditRecordService {
      */
     MessageResponse audit(String bisType, String bisId, String userId,
                           String rst, String remark, UserProp userProp) throws Exception;
+
+    MessageResponse reaudit(String bisType, String bisId, String userId, String rst, String remark, WxUser wxUser) throws Exception;
 
     /**
      * 提交审核

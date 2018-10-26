@@ -3,6 +3,7 @@ package com.huacainfo.ace.society.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -226,6 +227,21 @@ public class AuditRecordServiceImpl implements AuditRecordService {
         auditRecordDao.updateByPrimaryKeySelective(record);
         dataBaseLogService.log("审核审核记录", "审核记录",
                 String.valueOf(record.getId()), String.valueOf(record.getId()), "审核记录", userProp);
+        return new MessageResponse(0, "审核记录审核完成！");
+    }
+
+    @Override
+    public MessageResponse reaudit(String bisType, String bisId, String userId, String rst, String remark, WxUser wxUser) throws Exception {
+        AuditRecord record = auditRecordDao.findBisType(bisType, bisId, userId);
+        if (record == null) {
+            return new MessageResponse(ResultCode.FAIL, "审核记录丢失");
+        }
+        record.setAuditState(rst);
+        record.setAudtiRemark(remark);
+        record.setLastModifyDate(DateUtil.getNowDate());
+        record.setLastModifyUserId(wxUser.getUnionId());
+        record.setLastModifyUserName(wxUser.getName());
+        auditRecordDao.updateByPrimaryKeySelective(record);
         return new MessageResponse(0, "审核记录审核完成！");
     }
 

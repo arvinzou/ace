@@ -44,7 +44,7 @@
     height: 6rpx;
     background: rgba(255, 153, 6, 1);
     bottom: 0;
-    left: 49rpx;
+    left: 66rpx;
 }
 
 .navbar-item-wrap {

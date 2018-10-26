@@ -1,0 +1,145 @@
+<index class='index'>
+    <view class='steps separate'>
+        <view class='step step-one {{stepNum>=1?"step-action":""}}  step-one'>基本信息</view>
+        <view class='step step-two {{stepNum>=2?"step-action":""}}'>活动详情</view>
+        <view class='step-end {{stepNum>=3?"step-action":""}}'>发布成功</view>
+    </view>
+    <view class='form'>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <view class='partOne {{stepNum==1?"":"hidden"}}'>
+                <view class='prompt'>活动主办成功，活动发起者可获得50爱心币</view>
+                <view bindtap='addCover' class='cover separate'>
+                    <image mode='aspectFill' hidden='{{!form.coverUrl}}' src='{{form.coverUrl}}'></image>
+                    <text hidden='{{form.coverUrl}}'>添加活动封面</text>
+                </view>
+                <view class='form-part'>
+                    <view class="input-style bottom-line">
+                        <view class="title">活动标题
+                            <text>*</text>
+                        </view>
+                        <input name='title' value='{{form.title}}' confirm-type="next" type='text' class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">发起者
+                            <text>*</text>
+                        </view>
+                        <input disabled="true" value='{{form.orgName}}' type='text' class='input-value' />
+                    </view>
+                    <view wx:if='{{category==4}}' class="input-style bottom-line">
+                        <view class="title">活动期次
+                            <text>*</text>
+                        </view>
+                        <input name='clazz' value='{{form.clazz}}' type='number' class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">活动地点
+                            <text>*</text>
+                        </view>
+                        <input name='location' value='{{form.location}}' confirm-type="next" type='text' class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">活动人数
+                            <text>*</text>
+                        </view>
+                        <input name='parterNum' value='{{form.parterNum}}' confirm-type="next" type='number' class='input-value' />
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">开始时间
+                            <text>*</text>
+                        </view>
+                        <picker name='startDate' data-name='startDate' class='input-value' mode="multiSelector" value="{{startDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][startDate[0]]}}-{{dateTimeArray[1][startDate[1]]}}-{{dateTimeArray[2][startDate[2]]}} {{dateTimeArray[3][startDate[3]]}}:{{dateTimeArray[4][startDate[4]]}}
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="input-style bottom-line">
+                        <view class="title">结束时间
+                            <text>*</text>
+                        </view>
+                        <picker name='endDate' data-name='endDate' value='endDate' class='input-value' mode="multiSelector" value="{{endDate}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][endDate[0]]}}-{{dateTimeArray[1][endDate[1]]}}-{{dateTimeArray[2][endDate[2]]}} {{dateTimeArray[3][endDate[3]]}}:{{dateTimeArray[4][endDate[4]]}}
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="switch-style bottom-line">
+                        <view class="title">活动开始时间前均可报名
+                        </view>
+                        <switch color='#FFAB32' checked bindchange="switchChange" />
+                    </view>
+                    <view wx:if='{{!setDendline}}' class="input-style bottom-line">
+                        <view class="title">报名截止
+                            <text>*</text>
+                        </view>
+                        <picker name='dendline' data-name='dendline' value='{{form.dendline}}' class='input-value' mode="multiSelector" value="{{dendline}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{dateTimeArray}}">
+                            <view class="tui-picker-detail">
+                                {{dateTimeArray[0][dendline[0]]}}-{{dateTimeArray[1][dendline[1]]}}-{{dateTimeArray[2][dendline[2]]}} {{dateTimeArray[3][dendline[3]]}}:{{dateTimeArray[4][dendline[4]]}}
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+
+
+                <view class='btn-part'>
+                    <view bindtap='nextOne' class='btn btn-clicking'>
+                        下一步
+                    </view>
+                </view>
+            </view>
+
+
+            <view class='partTwo {{stepNum==2?"":"hidden"}}'>
+                <view class='form-part'>
+                    <view class="textarea-style ">
+                        <view class="title bottom-line">活动目的
+                            <text>*</text>
+                        </view>
+                        <view>
+                            <textarea name='purpose' bindinput='checkFontNum' data-name="purposeNum" value='{{form.purpose}}' maxlength='400' />
+                        </view>
+                        <view class="textLen {{purposeNum>300?'point':''}}">{{purposeNum}}</view>
+                    </view>
+                </view>
+
+                <view class='form-part'>
+                    <view class="textarea-style">
+                        <view class="title bottom-line">活动方式
+                            <text>*</text>
+                        </view>
+                        <view>
+                            <textarea bindinput='checkFontNum' data-name="modeNum" name='mode' value='{{form.mode}}' maxlength='400' />
+                        </view>
+                        <view class='textLen {{modeNum>300?"point":""}}'>{{modeNum}}</view>
+                    </view>
+                </view>
+
+
+                <view class='btn-part'>
+                    <view bindtap='previousOne' class='btn btn-bkClick'>
+                        上一步
+                    </view>
+                    <button class='btn btn-clicking' formType="submit">提交</button>
+                </view>
+
+            </view>
+
+            <view class='reuslt {{stepNum==3?"":"hidden"}}'>
+                <view class='massage'>
+                    <view class='image'>
+                        <image mode='widthFix' src='../../image/icon_success.png'></image>
+                    </view>
+                    <text class='fontStyle1'>发布成功</text>
+                    <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>
+                    <view class='fontStyle2'>
+                        <text>联系电话：</text>
+                        <text bindtap="callphone" data-mobile='0736-2323252' class="phone">0736-2323252</text>
+                    </view>
+                </view>
+                <view bindtap='colseThis' class='btn btn-bkClick'>
+                    关闭
+                </view>
+            </view>
+        </form>
+    </view>
+</index>

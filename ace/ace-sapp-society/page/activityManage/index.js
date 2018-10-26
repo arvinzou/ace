@@ -149,7 +149,7 @@ Page({
             }
         })
     },
-
+    // 删除活动
     delActivity: function (e) {
         let that = this;
         let id = e.currentTarget.dataset.id;
@@ -163,6 +163,14 @@ Page({
                 that.onPullDownRefresh();
             }
         );
+    },
+    //修改活动
+    editActivit: function (e) {
+        let that = this;
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../activityEdit/index?id='+id,
+        })
     },
     postReport:function(e){
         let that=this;

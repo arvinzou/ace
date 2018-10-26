@@ -1,6 +1,6 @@
 <view class='index'>
-    <view wx:for="{{list}}" class='activityInfo separate'>
-
+<block wx:for="{{list}}">
+    <view class='activityInfo separate'>
         <view class='content'>
             <view class='img'>
                 <image mode='aspectFill' src='{{item.coverUrl}}'></image>
@@ -16,7 +16,7 @@
         </view>
 
         <view wx:if='{{item.status==2}}' class='status status1'>活动待审核</view>
-         <view wx:if='{{item.status==32}}' class='status status1'>活动有效审核</view>
+        <view wx:if='{{item.status==32}}' class='status status1'>活动有效审核</view>
         <view wx:if='{{item.status==3}}' class='status status4'>发布已通过</view>
         <view wx:if='{{item.status==3&&item.startDate<nowDate}}' bindtap='activitySign' data-type='activityStart' data-id='{{item.id}}' class='status status1'>活动开始</view>
 
@@ -24,7 +24,7 @@
 
         <view wx:if='{{item.status==31&&type==2}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status1'>活动结束</view>
         <view wx:if='{{item.status==33}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status1'>活动完成</view>
-        
+
         <view wx:if='{{item.status==32&&!item.arStatus}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>发布报道</view>
 
         <view wx:if='{{item.arStatus==1||item.arStatus==4}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>报道编辑</view>
@@ -35,14 +35,15 @@
 
         <view wx:if='{{item.arStatus==4}}' bindtap='postReport' data-id='{{item.id}}' class='status status3'>报道驳回</view>
 
-        <view wx:if='{{item.status==2}}' class='status status2'>签到待审核</view>
-        
-        <view wx:if='{{item.status==4}}' class='status status1'>审核失败</view>
+        <view wx:if='{{item.status==32}}' class='status status2'>签到待审核</view>
+
+        <view wx:if='{{item.status==4}}' class='status status5'>审核失败</view>
 
         <view wx:if='{{item.status==41}}' class='status status1'>活动无效</view>
         <view wx:if='{{item.status==4}}' bindtap='delActivit' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>删除</view>
-        <view wx:if='{{item.status==4}}' bindtap='delActivit' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>修改</view>
+        <view wx:if='{{item.status==4}}' bindtap='editActivit' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>修改</view>
     </view>
+    </block>
 
     <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
     <view class="loading" hidden="{{!LoadOver}}">已加载全部</view>

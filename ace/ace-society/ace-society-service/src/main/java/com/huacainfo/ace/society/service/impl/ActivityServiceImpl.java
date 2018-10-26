@@ -153,6 +153,60 @@ public class ActivityServiceImpl implements ActivityService {
         return new MessageResponse(0, "添加线下活动完成！");
     }
 
+
+    /**
+     * @throws
+     * @Title:insertActivity
+     * @Description: TODO(修改)
+     * @param: @param o
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @Override
+    public MessageResponse updateActivity(Activity o, WxUser wxUser) throws Exception {
+
+        if (CommonUtils.isBlank(o.getId())) {
+            return new MessageResponse(1, "主键-GUID不能为空！");
+        }
+
+        Activity activity=activityDao.selectByPrimaryKey(o.getId());
+        if(activity==null){
+            return new MessageResponse(1, "活动数据丢失");
+        }
+        if (CommonUtils.isBlank(o.getTitle())) {
+            return new MessageResponse(1, "活动名称不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getStartDate())) {
+            return new MessageResponse(1, "开展时间不能为空！");
+        }
+        if (!CommonUtils.isBlank(o.getClazz())){
+            activity.setClazz(o.getClazz());
+        }
+        activity.setTitle(o.getTitle());
+        activity.setLocation(o.getLocation());
+        activity.setMode(o.getMode());
+        activity.setPurpose(o.getPurpose());
+        activity.setDendline(o.getDendline());
+        activity.setStartDate(o.getStartDate());
+        activity.setEndDate(o.getEndDate());
+        activity.setParterNum(o.getParterNum());
+        activity.setCoverUrl(o.getCoverUrl());
+        activity.setStatus("2");
+        o.setLastModifyDate(new Date());
+        o.setLastModifyUserName(wxUser.getName());
+        o.setLastModifyUserId(wxUser.getUnionId());
+        this.activityDao.updateByPrimaryKeySelective(o);
+        MessageResponse auditRs = auditRecordService.reaudit(BisType.ACTIVITY, activity.getId(),activity.getInitiatorId(), activity.getStatus(), "再次提交审核", wxUser);
+        if (ResultCode.FAIL == auditRs.getStatus()) {
+            return auditRs;
+        }
+        auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, o.getId(), wxUser.getUnionId());
+        return new MessageResponse(0, "添加线下活动完成！");
+    }
+
     @Override
     public MessageResponse insertActivity(Activity o,UserProp userProp) throws Exception {
         o.setId(GUIDUtil.getGUID());
@@ -259,7 +313,6 @@ public class ActivityServiceImpl implements ActivityService {
             activityDetail.setLastModifyUserName(wxUser.getNickName());
             activityDetail.setLastModifyUserId(wxUser.getUnionId());
             activityDetailDao.updateByPrimaryKey(activityDetail);
-
             return new MessageResponse(ResultCode.SUCCESS, "变更线下活动完成！");
         }else {
             return new MessageResponse(ResultCode.FAIL, "参数错误");
