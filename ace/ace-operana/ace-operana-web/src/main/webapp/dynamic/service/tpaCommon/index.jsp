@@ -14,7 +14,7 @@ pageEncoding="utf-8"%>
 var meetingId='${param.meetingId}';
 var topicId='${param.topicId}';
 var normId='${param.normId}';
-
+  default_page_list = [99999];
 </script>
 <body>
 <div class="page-content">
@@ -30,7 +30,7 @@ var normId='${param.normId}';
             <div class="widget-main padding-6">
                 <form action="#" id="fm-search">
 
-                   责任人： <select  class="easyui-combogrid" name="liable" style="width:300px;"
+                   责任人： <select  class="easyui-combogrid" name="liable" style="width:200px;"
                             data-options="
            idField : 'USER_ID',
 					textField : 'NAME',
@@ -77,26 +77,34 @@ var normId='${param.normId}';
                     </button>
 
 
+
+
+                    <a class="btn btn-info"
+                       authority="false" onclick="add()" id="btn-add">
+                        添加
+                        <i
+                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </a>
+
+                    <a class="btn btn-info"
+                       authority="false" onclick="exportExcel()">
+                        导出
+                        <i
+                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
+                    </a>
+
                 </form>
 
 
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="div-left header-title-custom">任务</div>
-        <div class="div-right header-title-custom">
-            <div style="text-align:right"><a class="blue" href="javascript:add()" data-rel="tooltip" data-placement="top"
-                                             title="添加"><i class="ace-icon fa fa-plus-square"></i></a>
 
-                <a class="blue" href="javascript:reload()"  title="刷新"><i
-                        class="ace-icon glyphicon glyphicon-refresh"></i></a>
-                <a href="javascript:exportExcel()" style="color:blue">Excel</a>
+
+
 
 
             </div>
         </div>
     </div>
+
 
 
         <table id="grid-table"></table>
@@ -137,6 +145,12 @@ window.onresize = function () {
 	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight+100);
 
 }
+jQuery(function($) {
+    if($.inArray("4", userProp.roleType)==-1){
+        $("#btn-add").hide();
+    }
+});
+
 
 </script>
 <script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
