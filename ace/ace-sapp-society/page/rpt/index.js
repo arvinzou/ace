@@ -240,10 +240,13 @@ Page({
             wx.hideLoading();
             var obj = JSON.parse(resp.data);
             console.log(obj);
-            that.setData({
-              mediUrl: cfg.serverfile + obj.file_path,
-              displayVideo: 'show'
-            });
+            if (obj.success){
+              that.setData({
+                mediUrl: obj.file_path,
+                displayVideo: 'show'
+              });
+            }
+            
           },
           fail: function (res) {
             wx.hideLoading();
@@ -269,14 +272,13 @@ Page({
       that.setData({
         playimg: "../../image/record_on.png",
         recorderStatus: false
-
       });
     } else {
       recorderManager.start(options);
       that.setData({
         playimg: "../../image/record_off.png",
         recorderStatus: true,
-        displayAudio: 'none'
+        displayAudio: 'hide'
       });
     }
     recorderManager.onStop((res) => {
@@ -297,7 +299,7 @@ Page({
           var obj = JSON.parse(resp.data);
           console.log(obj);
           that.setData({
-            mediUrl: cfg.serverfile + obj.file_path,
+            mediUrl:  obj.file_path,
             displayAudio: ' '
           });
         },
@@ -330,6 +332,8 @@ Page({
   delAideo: function () {
     let that = this;
     that.setData({ displayAudio: 'hide', mediUrl: null });
+    that.innerAudioContext.stop();
+    that.innerAudioContext.destroy();
   },
   /**
    * 点击选项卡
@@ -344,5 +348,12 @@ Page({
         currentTab: e.target.dataset.idx
       })
     }
+  },
+  playAudio:function(e){
+    var that=this;
+    var url = e.target.dataset.url;
+    this.innerAudioContext =wx.createInnerAudioContext();
+    this.innerAudioContext.src=url;
+    this.innerAudioContext.play();
   }
 });

@@ -57,8 +57,8 @@ public class LiveController extends LiveBaseController {
     @RequestMapping(value = "/findLiveLists")
     @ResponseBody
     public PageResult<LiveVo> findLiveList(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
         condition.setDeptId(this.getCurUserProp().getCorpId());
+        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -362,5 +362,30 @@ public class LiveController extends LiveBaseController {
     public LiveVo loadLive(String id)
             throws Exception {
         return this.liveService.selectLiveByPrimaryKey(id).getValue();
+    }
+
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(直播分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult<LiveVo>
+     * @author: 陈晓克
+     * @version: 2017-12-27
+     */
+    @RequestMapping(value = "/findMyLiveList")
+    @ResponseBody
+    public PageResult<LiveVo> findMyLiveList(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
+        condition.setDeptId(this.getCurUserProp().getCorpId());
+        condition.setCreateUserId(this.getCurUserProp().getUserId());
+        PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
     }
 }
