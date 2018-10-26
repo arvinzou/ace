@@ -7,7 +7,7 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="Pragma" content="no-cache"/>
-    <title>爱心传递</title>
+    <title>携手慈善，传递爱心</title>
     <link rel="stylesheet" type="text/css" href="css/style.css?v=<%=System.currentTimeMillis() %>" />
 </head>
 <body>
@@ -22,18 +22,22 @@
         </div>
         <div class="dua_user_info">
             <p>\${data.nickname}</p>
-            <p>感谢您的第 \${data.donateCount} 次捐赠，您已经：</p>
+            <p>感谢您的第 \${data.donateNum} 次捐赠，您已经：</p>
         </div>
         <div class="dua_statics">
                     <span class="dua_statics01">
-                        <p>捐赠天数</p>
+                        <p>捐款天数</p>
                         <p><span class="dua_number">\${data.donateDays}</span>天</p>
                     </span>
-            <span class="dua_statics01">
-                        <p>捐赠金额</p>
-                        <p><span class="dua_number">\${data.totalDonateAmount}</span>元</p>
+                    <span class="dua_statics01">
+                        <p>合计金额</p>
+                        <p><span class="dua_number">\${data.donateTotal}</span>元</p>
                     </span>
         </div>
+       <%-- <div class="totalAmount">
+            <span class="totalAmount_title">合计金额(元)：</span>
+            <span class="totalAmount_num">\${data.donateTotal}</span>
+        </div>--%>
         <div class="donate" onclick="window.location.href='/cu/www/view/daydonation/daydonation.jsp'">
             <span>我&nbsp;要&nbsp;捐&nbsp;款</span>
         </div>
@@ -53,6 +57,6 @@
 <script type="text/javascript" src="/cu/www/common/js/init-rem.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="js/jweixin-1.4.0.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/juicer/juicer-min.js?v=<%=System.currentTimeMillis() %>"></script>
-<script type="text/javascript" src="js/share.js?v=<%=System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="js/receipt.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
 </html>
