@@ -48,7 +48,7 @@
 <div id="fineCourse" class="fine_course">
     <div class="course_header">
         <div class="header_title">精品课程</div>
-        <div class="header_link">查看更多</div>
+        <div class="header_link" onclick="more();">查看更多</div>
     </div>
     <div class="quality-courselist" id="qualityCourse">
 

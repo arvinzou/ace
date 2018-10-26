@@ -1,7 +1,8 @@
+var primaryId = null;
 window.onload = function() {
     console.log(window.location.href);
     var url =   window.location.search.substring(1);
-    var primaryId = url.substring(url.indexOf('=')+1);
+    primaryId = url.substring(url.indexOf('=')+1);
     console.log(primaryId);
     initData(primaryId);
     initStudioReport(primaryId);
@@ -126,4 +127,11 @@ function invate(id){
  */
 function courseDetail(id){
     window.location.href = contextPath + '/www/view/courseSummary/index.jsp?id='+id;
+}
+
+/**
+ *查看精品课程更多
+ */
+function more(){
+    window.location.href = contextPath + '/www/view/studioCourse/index.jsp?id='+primaryId;
 }
