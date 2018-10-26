@@ -14,7 +14,7 @@ window.onload = function(){
         }
         console.log("orderId================================="+orderId);
     }
-    orderId = '137f6a8d61164a388338460e19623124';
+
     if(orderId != null){
         $.ajax({
             url: "/cu/www/report/getShareData",
@@ -80,7 +80,7 @@ function zdyShare(data){
 
     wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
         wx.updateTimelineShareData({
-            title: '常德慈善总会，慈善一日捐', // 分享标题
+            title: '携手慈善，传递爱心', // 分享标题
             desc: '我已经捐款了，希望一起大家传递爱心哦~', // 分享描述
             link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
             imgUrl: 'https://zx.huacainfo.com/cu/www/share/img/logo.jpg' // 分享图标
