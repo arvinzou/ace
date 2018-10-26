@@ -30,7 +30,7 @@ public interface SocietyOrgInfoDao {
 
     int findCount(@Param("condition") SocietyOrgInfoQVo condition);
 
-    int addcoin(@Param("userId")String userId, @Param("coinId")String coinId, @Param("size")int size);
+    int addcoin(@Param("userId")String userId, @Param("addCoin")Integer addCoin);
 
     int isExit(SocietyOrgInfo record);
 
