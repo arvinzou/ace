@@ -265,14 +265,12 @@
 
     <update id="addCoin" parameterType="java.util.Arrays">
         update person_info p
-        set p.accPoints=p.accPoints+(
-        select c.participant
-        from coin_config c
-          where c.id=#{coinId,jdbcType=VARCHAR}
-        )
+        set
+        p.accPoints=p.accPoints+#{pCoin1,jdbcType=DECIMAL},
+        p.validPoints=p.validPoints+#{pCoin,jdbcType=DECIMAL}
         where id in
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
-                #{item}
+            #{item}
         </foreach>
     </update>
 
