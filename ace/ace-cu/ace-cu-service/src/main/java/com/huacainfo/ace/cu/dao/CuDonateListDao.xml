@@ -295,6 +295,10 @@
         <if test="condition.projectName!=null and condition.projectName!=&quot;&quot;">
             and p.projectName like concat('%',#{condition.projectName,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.donatePostName!=null and condition.donatePostName!=&quot;&quot;">
+            and o.donatePostName like concat('%',#{condition.donatePostName,jdbcType=VARCHAR},'%')
+        </if>
+
     </sql>
 
     <select id="findCount" resultType="int">

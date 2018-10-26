@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.tools.PropertyUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.cu.dao.report.ReportDao;
 import com.huacainfo.ace.cu.service.AnalysisService;
+import com.huacainfo.ace.cu.service.CuDonateOrderService;
 import com.huacainfo.ace.cu.service.CuUserService;
 import com.huacainfo.ace.cu.vo.CuUserVo;
 import org.slf4j.Logger;
@@ -25,6 +26,8 @@ public class AnslysisServiceImpl implements AnalysisService {
     private static final Logger logger = LoggerFactory.getLogger(AnslysisServiceImpl.class);
     @Autowired
     private CuUserService cuUserService;
+    @Autowired
+    private CuDonateOrderService cuDonateOrderService;
 
     @Override
     public ListResult<Map<String, Object>> query(Map<String, Object> condition,
@@ -133,6 +136,31 @@ public class AnslysisServiceImpl implements AnalysisService {
 
         respMap.put("list", list);
         return respMap;
+    }
+
+    @Override
+    public Map<String, Object> findDonateRecord(String projectId, String openId) {
+
+        List<Map<String, Object>> ownList = donateRank(projectId, openId, 0, 10, "");
+        //a.nickname, a.headimgurl, a.openid,
+        //a.totalDonateAmount, a.donateCount, a.donateDays
+        Map<String, Object> rtn = CollectionUtils.isEmpty(ownList) ? null : ownList.get(0);
+        if (rtn == null) {
+            rtn = new HashMap<>();
+            rtn.put("nickname", "-");
+            rtn.put("headimgurl", "-");
+            rtn.put("openid", "");
+            rtn.put("totalDonateAmount", "0");
+            rtn.put("donateCount", "0");
+            rtn.put("donateDays", "0");
+        }
+
+        return rtn;
+    }
+
+    @Override
+    public Map<String, Object> findDonateHis(String orderId) throws Exception {
+        return cuDonateOrderService.findDonateReport(orderId);
     }
 
     private Map<String, Object> getDefaultOwnData(String openId) {

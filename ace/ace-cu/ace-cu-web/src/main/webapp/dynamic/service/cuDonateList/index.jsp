@@ -52,19 +52,11 @@
 
                     </div>
 
-                    <div class="input-group form-group">
-                        <input type="text"
-                               name="nickname"
-                               class="form-control"
-                               style="width: 200px"
-                               placeholder="请输入微信昵称">
-                    </div>
-
                     <div class="input-group" style="width: 250px;float: right">
                         <input type="text"
-                               name="projectName"
+                               name="donatePostName"
                                class="form-control"
-                               placeholder="请输入项目名称">
+                               placeholder="请输入捐款单位名称">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn" id="btn-search"
                                     authority="${pageContext.request.contextPath}/cuDonateList/findCuDonateListList">

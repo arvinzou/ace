@@ -34,4 +34,8 @@ public interface AnalysisService {
      */
     Map<String, Object> donateRank(String projectId, String needOpenId, String openId,
                                    int start, int limit, String orderBy);
+
+    Map<String, Object> findDonateRecord(String projectId, String openId);
+
+    Map<String, Object> findDonateHis(String orderId) throws Exception;
 }

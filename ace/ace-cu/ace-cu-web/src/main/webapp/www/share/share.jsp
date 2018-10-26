@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
     <title>爱心传递</title>
     <link rel="stylesheet" type="text/css" href="css/style.css?v=<%=System.currentTimeMillis() %>" />
 </head>
@@ -42,6 +44,7 @@
         </div>
         <div class="dua_right">
             <p>长按识别二维码</p>
+            <p>点击右上方分享到朋友圈</p>
             <p>关注常德慈善,为慈善事业助力！</p>
         </div>
     </div>
