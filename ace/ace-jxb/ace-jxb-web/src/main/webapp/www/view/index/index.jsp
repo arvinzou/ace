@@ -6,6 +6,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
 		<title>心阳光家庭教育</title>
 		<script type="text/javascript" src="../common/js/init-rem.js"></script>
 		<script type="text/javascript">
@@ -31,6 +33,10 @@
 	</head>
 
 	<body>
+		<div class="index">
+
+
+
 		<div class="content">
 			<div class="search">
 				<div class="container">
@@ -141,7 +147,7 @@
 			</div>
 		</div>
 		<!--人气老师结束-->
-		
+
 		<!--底部开始-->
 		<div class="footer">
 			<div class="menu_footer">
@@ -150,6 +156,8 @@
 			<div class="menu_footer">
 				<div class="menu_footer_box" style="margin: 0 auto;" onclick="mine();"><img src="img/icon-mine-active.png" class="footer-icon"/><span class="footer-title">个人中心</span></div>
 			</div>
+		</div>
+
 		</div>
 
 		<div class="search_list">
