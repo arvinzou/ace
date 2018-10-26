@@ -112,40 +112,142 @@ Page({
     );
   },
   valueChange: function (e) {
-    console.log(e);
-    if (e.detail && e.detail.value.length > 0) {
-      this.setData({
-        max: e.detail.value.length
-      });
-    }
-  },
-  chooseWxImage: function (type) {
-    var that = this;
-    wx.chooseImage({
-      sizeType: ['original', 'compressed'],
-      sourceType: [type],
-      success: function (res) {
+      console.log(e);
+      if (e.detail && e.detail.value.length > 0) {
+        this.setData({
+          max: e.detail.value.length
+        });
+      }
+    },
+    chooseWxImage: function (type) {
+      var that = this;
+      wx.chooseImage({
+        sizeType: ['original', 'compressed'],
+        sourceType: [type],
+        success: function (res) {
 
-        for (var i = 0; i < res.tempFilePaths.length; i++) {
+          for (var i = 0; i < res.tempFilePaths.length; i++) {
+            wx.showLoading({ title: "正在上传" });
+            console.log(res.tempFilePaths[i]);
+            wx.uploadFile({
+              url: cfg.uploadUrl,
+              filePath: res.tempFilePaths[i],
+              name: 'file',
+              header: {
+                'content-type': 'multipart/form-data'
+              },
+              formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
+              success: function (resp) {
+                console.log(resp);
+                wx.hideLoading();
+                var obj = JSON.parse(resp.data);
+                console.log(obj);
+                fileList.push(obj.file_path);
+                that.setData({
+                  files: fileList
+                });
+              },
+              fail: function (res) {
+                wx.hideLoading();
+                wx.showModal({ title: "提示", content: "上传失败" })
+              }
+            })
+          }
+
+
+        }
+      })
+    },
+    previewImage: function (e) {
+      wx.previewImage({
+        current: e.currentTarget.id, // 当前显示图片的http链接
+        urls: this.data.files // 需要预览的图片http链接列表
+      })
+    },
+    chooseImage: function () {
+      let that = this;
+      wx.showActionSheet({
+        itemList: ['从相册中选择', '拍照'],
+        success: function (res) {
+          if (!res.cancel) {
+            if (res.tapIndex == 0) {
+              that.chooseWxImage('album')
+            } else if (res.tapIndex == 1) {
+              that.chooseWxImage('camera')
+            }
+          }
+        }
+      })
+    },
+    delImage: function (e) {
+      var idx = e.target.dataset.index;
+      console.log(idx);
+      let that = this;
+      var files = that.data.files;
+      if (files.length > 0) {
+        files.remove(idx);
+        fileList.remove(idx);
+      }
+      that.setData({ files: files });
+    },
+    formReset: function (e) {
+      console.log("clear");
+      fileList = [];
+      this.setData({
+        files: fileList
+      });
+    },
+    //滑动切换
+    swiperTab: function (e) {
+      var that = this;
+      that.setData({
+        currentTab: e.detail.current
+      });
+      if (this.data.currentTab == 0 || this.data.currentTab == 2) {
+        that.delVideo();
+      }
+    },
+    //点击切换
+    clickTab: function (e) {
+      var that = this;
+      if (this.data.currentTab === e.target.dataset.current) {
+        return false;
+      } else {
+        that.setData({
+          currentTab: e.target.dataset.current
+        })
+        if (this.data.currentTab == 0 || this.data.currentTab == 2) {
+          that.delVideo();
+        }
+      }
+    },
+    chooseVideo: function () {
+      let that = this;
+      wx.chooseVideo({
+        sourceType: ['album', 'camera'],
+        success: function (res) {
           wx.showLoading({ title: "正在上传" });
-          console.log(res.tempFilePaths[i]);
+          var file = res.tempFilePath;
           wx.uploadFile({
             url: cfg.uploadUrl,
-            filePath: res.tempFilePaths[i],
+            filePath: file,
             name: 'file',
             header: {
               'content-type': 'multipart/form-data'
             },
-            formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
+            formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
             success: function (resp) {
               console.log(resp);
               wx.hideLoading();
               var obj = JSON.parse(resp.data);
               console.log(obj);
-              fileList.push(obj.file_path);
-              that.setData({
-                files: fileList
-              });
+              if (obj.success){
+                that.setData({
+                  mediUrl: obj.file_path,
+                  displayVideo: 'show'
+                });
+              }
+
             },
             fail: function (res) {
               wx.hideLoading();
@@ -153,79 +255,35 @@ Page({
             }
           })
         }
-
-
+      });
+    },
+    startRecorder: function () {
+      let that = this;
+      var recorderManager = wx.getRecorderManager();
+      const options = {
+        duration: 600000,
+        sampleRate: 44100,
+        numberOfChannels: 2,
+        encodeBitRate: 192000,
+        format: 'mp3',
+        frameSize: 50
       }
-    })
-  },
-  previewImage: function (e) {
-    wx.previewImage({
-      current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.files // 需要预览的图片http链接列表
-    })
-  },
-  chooseImage: function () {
-    let that = this;
-    wx.showActionSheet({
-      itemList: ['从相册中选择', '拍照'],
-      success: function (res) {
-        if (!res.cancel) {
-          if (res.tapIndex == 0) {
-            that.chooseWxImage('album')
-          } else if (res.tapIndex == 1) {
-            that.chooseWxImage('camera')
-          }
-        }
+      if (that.data.recorderStatus) {
+        recorderManager.stop();
+        that.setData({
+          playimg: "../../image/record_on.png",
+          recorderStatus: false
+        });
+      } else {
+        recorderManager.start(options);
+        that.setData({
+          playimg: "../../image/record_off.png",
+          recorderStatus: true,
+          displayAudio: 'hide'
+        });
       }
-    })
-  },
-  delImage: function (e) {
-    var idx = e.target.dataset.index;
-    console.log(idx);
-    let that = this;
-    var files = that.data.files;
-    if (files.length > 0) {
-      files.remove(idx);
-      fileList.remove(idx);
-    }
-    that.setData({ files: files });
-  },
-  formReset: function (e) {
-    console.log("clear");
-    fileList = [];
-    this.setData({
-      files: fileList
-    });
-  },
-  //滑动切换
-  swiperTab: function (e) {
-    var that = this;
-    that.setData({
-      currentTab: e.detail.current
-    });
-    if (this.data.currentTab == 0 || this.data.currentTab == 2) {
-      that.delVideo();
-    }
-  },
-  //点击切换
-  clickTab: function (e) {
-    var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.current
-      })
-      if (this.data.currentTab == 0 || this.data.currentTab == 2) {
-        that.delVideo();
-      }
-    }
-  },
-  chooseVideo: function () {
-    let that = this;
-    wx.chooseVideo({
-      sourceType: ['album', 'camera'],
-      success: function (res) {
+      recorderManager.onStop((res) => {
+        console.log('recorder stop', res);
         wx.showLoading({ title: "正在上传" });
         var file = res.tempFilePath;
         wx.uploadFile({
@@ -242,8 +300,8 @@ Page({
             var obj = JSON.parse(resp.data);
             console.log(obj);
             that.setData({
-              mediUrl: cfg.serverfile + obj.file_path,
-              displayVideo: 'show'
+              mediUrl:  obj.file_path,
+              displayAudio: ' '
             });
           },
           fail: function (res) {
@@ -251,99 +309,52 @@ Page({
             wx.showModal({ title: "提示", content: "上传失败" })
           }
         })
+      })
+    },
+    stopRecorder: function () {
+      let that = this;
+      var recorderManager = wx.getRecorderManager();
+      const options = {
+        duration: 600000,
+        sampleRate: 44100,
+        numberOfChannels: 2,
+        encodeBitRate: 192000,
+        format: 'mp3',
+        frameSize: 50
       }
-    });
-  },
-  startRecorder: function () {
-    let that = this;
-    var recorderManager = wx.getRecorderManager();
-    const options = {
-      duration: 600000,
-      sampleRate: 44100,
-      numberOfChannels: 2,
-      encodeBitRate: 192000,
-      format: 'mp3',
-      frameSize: 50
-    }
-    if (that.data.recorderStatus) {
-      recorderManager.stop();
-      that.setData({
-        playimg: "../../image/record_on.png",
-        recorderStatus: false
 
-      });
-    } else {
       recorderManager.start(options);
-      that.setData({
-        playimg: "../../image/record_off.png",
-        recorderStatus: true,
-        displayAudio: 'none'
-      });
+    },
+    delVideo: function () {
+      console.log("delVideo");
+      let that = this;
+      that.setData({ displayVideo: 'hide', mediUrl: null });
+    },
+    delAideo: function () {
+      let that = this;
+      that.setData({ displayAudio: 'hide', mediUrl: null });
+      that.innerAudioContext.stop();
+      that.innerAudioContext.destroy();
+    },
+    /**
+     * 点击选项卡
+     */
+    navbarTap: function (e) {
+      console.log(e);
+      let that = this;
+      if (that.data.currentTab == e.target.dataset.idx) {
+        return false;
+      } else {
+        that.setData({
+          currentTab: e.target.dataset.idx
+        })
+      }
+    },
+    playAudio:function(e){
+      var that=this;
+      var url = e.target.dataset.url;
+      this.innerAudioContext =wx.createInnerAudioContext();
+      this.innerAudioContext.src=url;
+      this.innerAudioContext.play();
     }
-    recorderManager.onStop((res) => {
-      console.log('recorder stop', res);
-      wx.showLoading({ title: "正在上传" });
-      var file = res.tempFilePath;
-      wx.uploadFile({
-        url: cfg.uploadUrl,
-        filePath: file,
-        name: 'file',
-        header: {
-          'content-type': 'multipart/form-data'
-        },
-        formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
-        success: function (resp) {
-          console.log(resp);
-          wx.hideLoading();
-          var obj = JSON.parse(resp.data);
-          console.log(obj);
-          that.setData({
-            mediUrl: cfg.serverfile + obj.file_path,
-            displayAudio: ' '
-          });
-        },
-        fail: function (res) {
-          wx.hideLoading();
-          wx.showModal({ title: "提示", content: "上传失败" })
-        }
-      })
-    })
-  },
-  stopRecorder: function () {
-    let that = this;
-    var recorderManager = wx.getRecorderManager();
-    const options = {
-      duration: 600000,
-      sampleRate: 44100,
-      numberOfChannels: 2,
-      encodeBitRate: 192000,
-      format: 'mp3',
-      frameSize: 50
-    }
-
-    recorderManager.start(options);
-  },
-  delVideo: function () {
-    console.log("delVideo");
-    let that = this;
-    that.setData({ displayVideo: 'hide', mediUrl: null });
-  },
-  delAideo: function () {
-    let that = this;
-    that.setData({ displayAudio: 'hide', mediUrl: null });
-  },
-  /**
-   * 点击选项卡
-   */
-  navbarTap: function (e) {
-    console.log(e);
-    let that = this;
-    if (that.data.currentTab == e.target.dataset.idx) {
-      return false;
-    } else {
-      that.setData({
-        currentTab: e.target.dataset.idx
-      })
-    }
-  }
 });

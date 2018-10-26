@@ -716,7 +716,7 @@ $(window).on("scroll",
         if ($(window).scrollTop() >= 50) {
             $("#j-liveinfo .view").css("height", "2.62rem");
             $("#j-liveinfo .view").css("position", "fixed");
-            $("#j-liveinfo .view").css("z-index", 310);
+            $("#j-liveinfo .view").css("z-index", 10);
             $("#j-liveinfo .content").css("padding-top", "2.62rem");
             $("#j-video-wrap video").css("width", "5rem");
             $("#j-video-wrap video").css("height", "2.62rem");

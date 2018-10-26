@@ -126,6 +126,9 @@ Page({
           success: function (res) {
             if (res.confirm&&data.status==0) {
               that.initData(that.data.param);
+              wx.navigateTo({
+                url: '../myLive/index'
+              })
             }
           }
         })
