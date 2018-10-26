@@ -6,6 +6,7 @@ import com.huacainfo.ace.cu.vo.CuDonateOrderVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CuDonateOrderDao {
 
@@ -32,4 +33,5 @@ public interface CuDonateOrderDao {
 
     int isExit(CuDonateOrder record);
 
+    Map<String, Object> findDonateReport(String orderId);
 }
