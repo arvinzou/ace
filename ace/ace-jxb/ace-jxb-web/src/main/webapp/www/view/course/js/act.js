@@ -11,21 +11,16 @@ function App() {
 
 window.onload = function(){
     startLoad();
+    renderPage($("#menuObject"), staticDictObject['149'], "menuObject-tpl");
     courseList();
-
-    var th_width = $(".news-module li").eq(0).width();
-    var th_left = $(".news-module li").eq(0).position().left;
-    var slider_width = $(".news-slider").width();
-    var slider_left = th_left + (th_width/2) - slider_width/2;
-    $(".news-slider").css("left",slider_left-8);
-    $(".news-module li").on("click",function(){
-        var n = $(this).index();
-        var th_width = $(this).width();
-        var th_left = $(this).position().left;
-        var slider_width = $(".news-slider").width();
-        var slider_left = th_left + (th_width/2) - slider_width/2;
-        $(".news-slider").css("left",slider_left);
-        $(this).addClass("active").siblings().removeClass("active");
+    initSwriper();
+    // var th_width = $(".news-module li").eq(0).width();
+    // var th_left = $(".news-module li").eq(0).position().left;
+    // var slider_width = $(".news-slider").width();
+    // var slider_left = th_left + (th_width/2) - slider_width/2;
+    // $(".news-slider").css("left",slider_left-8);
+    $(".swiper-container .swiper-slide").on("click",function(){
+        $(this).addClass("swiper-slide-active").siblings().removeClass("swiper-slide-active");
     });
 
     var level = $(".course_nav_ul .active").text();
@@ -135,4 +130,20 @@ function completeLoading() {
     if (document.readyState == "complete") {
         stopLoad();
     }
+}
+
+function renderPage(dom, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(dom).html(html);
+}
+
+/*初始化Swriper*/
+function initSwriper() {
+    var menuSwiper = new Swiper('.swiper-container', {
+        spaceBetween: 10,
+        slidesPerView: 'auto'
+    })
 }

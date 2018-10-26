@@ -193,11 +193,7 @@ li {
 	z-index: 500;
 }
 
-.citylist2 .active {
-    color: #fff;
-    background-color: #5BD5CB;
-    border: 1px solid #5BD5CB;
-}
+
 
 .course_List {
     padding-top: 1.3rem;
@@ -285,4 +281,31 @@ li {
     font-size: 0.32rem;
     color: rgba(196, 200, 214, 1);
     line-height: 0.4rem;
+}
+
+
+.swiper-container .swiper-slide{
+	width: 1.5rem;
+	height: 1.3rem;
+	line-height: 1.3rem;
+	font-size:0.373333rem;
+	position: relative;
+	color:rgba(28,40,67,1);
+	text-align: center;
+}
+
+.swiper-slide-active{
+	color: #1C2843;
+	font-weight:bold;
+}
+.swiper-slide-active::after{
+	content: '';
+	display: block;
+	width:0.4rem;
+	height:0.053333rem;
+	background:rgba(73,208,197,1);
+	border-radius:0.026666rem;
+	position: absolute;
+	bottom: 0.106666rem;
+	right:0.55rem;
 }
