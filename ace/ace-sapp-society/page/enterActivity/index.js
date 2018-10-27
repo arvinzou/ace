@@ -33,7 +33,7 @@ Page({
         let sysuser = util.getSysUser();
         if (sysuser) {
             that.setData({
-                // user: sysuser.person
+                user: sysuser.person
             })
         }
     },
@@ -87,7 +87,6 @@ Page({
 
     },
     formSubmit: function(e) {
-        console.log('form发生了submit事件，携带数据为：', );
         let that = this;
         let vals = e.detail.value;
         if (!vals.contactName || !vals.mobileNumber) {
@@ -97,6 +96,7 @@ Page({
             })
         }
         vals.activityId = that.data.id;
+        vals.identity='1';
         util.request(cfg.insertActivityDetail, {
                 jsons: JSON.stringify(vals),
             },
@@ -108,12 +108,13 @@ Page({
                         title: '报名成功',
                         icon: 'success',
                         duration: 1000
-                    })
+                    });
                     wx.navigateBack({});
                     return;
                 }
-                that.showModal({
-                    msg: data.errorMessage,
+                wx.showModal({
+                    title: '提示',
+                    content: data.errorMessage,
                 })
 
             }

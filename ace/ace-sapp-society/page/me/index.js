@@ -20,6 +20,7 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
+        console.log(options);
         console.log("util.is_login()=============================================" + util.is_login());
         if (!util.is_login()) {
             wx.navigateTo({

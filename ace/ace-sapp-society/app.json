@@ -41,6 +41,7 @@
     "page/releaseBehavior/index",
     "page/activityManage/index",
     "page/activityEdit/index",
+    "page/enterActivity/index",
     "page/aboutus/index"
   ],
   "window": {

@@ -30,22 +30,19 @@ Page({
                 function (rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
-                        if ((rst.data.person.politicalStatus == 2 && that.data.activityInfo.category == 4) || (that.data.activityInfo.category != 4 && data.person)) {
-                            that.setData({
-                                hiddenBtn: false,
-                            });
-                        }
-                        return;
+                        // （党员&&党建活动）||（不是党建活动&&人员）
+                        if (rst.data.regType==2) {
+                            return;
+                        } 
                     }
                 }
             );
-        }
-        if ((rst.data.person.politicalStatus == 2 && that.data.activityInfo.category == 4) || (that.data.activityInfo.category != 4 && data.person)) {
-            that.setData({
-                hiddenBtn: false,
-            });
+        } else if(sysUserInfo.regType == 2) {
             return;
         }
+        that.setData({
+            hiddenBtn: false,
+        });
         that.btnControl();
     },
 

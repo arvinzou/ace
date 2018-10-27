@@ -32,8 +32,11 @@ var config = {
     findActivity: `${server}/society/www/activity/selectActivityByPrimaryKey`,
     publicActivityReports: `${server}/society/www/activity/findPublicActivityReportList`,
     applyStatus: `${server}/society/www/activity/getApplyStatus`,
-    insertActivity: `${server}/society/www/activity/insertActivity`,
+    insertActivity: `${server}/society/www/activity/insertActivity`, 
     updateActivity: `${server}/society/www/activity/updateActivity`,
+
+    insertActivityDetail: `${server}/society/www/activity/insertActivityDetail`,
+
     participants: `${server}/society/www/activity/findActivityParticipants`,
     selectActivityReport: `${server}/society/www/activity/selectActivityReportByActivityId`,
     updateActivityReport: `${server}/society/www/activity/updateActivityReport`,
