@@ -109,8 +109,6 @@
         <br>
         <span id="status"></span>
     </div>
-</div>
-
 <h5 class="header-title">封面地址</h5>
 <div class="row" style="padding:10px" id="coverUrl">
 </div>
