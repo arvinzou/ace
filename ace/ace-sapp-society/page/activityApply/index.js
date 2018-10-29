@@ -231,7 +231,8 @@ Page({
     },
     formatDT(arr) {
         console.log(arr);
-        return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1]) + '-' + this.FN(arr[2]) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':00';
+        console.log('20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':00');
+        return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1] + 1) + '-' + this.FN(arr[2] + 1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':00';
     },
 
     FN(num) {
