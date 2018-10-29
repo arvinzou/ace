@@ -17,10 +17,10 @@ Page({
     console.log(" 生命周期函数--监听页面加载");
     var that = this;
     start=0;
-    if (!util.isLogin()) {
+    if (!util.is_login()) {
       wx.navigateTo({ url: "../userinfo/index?url=../myCircle/index" });
     }
-    if (util.isLogin()){
+    if (util.is_login()){
       that.setData({
         userinfo: wx.getStorageSync('userinfo')
       });

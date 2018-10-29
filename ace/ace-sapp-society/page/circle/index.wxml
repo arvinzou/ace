@@ -26,9 +26,9 @@
               </view>
                 <view class='cmt-bar'>
 
-          <image src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
+          <image src='../../image/zan.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
           <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'>{{item.likeNum}}</text>
-          <image src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
+          <image src='../../image/comment.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
         </view>
               <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
                 <view class='chat-content'>
