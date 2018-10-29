@@ -1,4 +1,4 @@
-<view style=''>
+<cover-view style=''>
   <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:{{pusherSizeH}}vh;flex:1;background:#eeeeee">
 
   
@@ -18,7 +18,7 @@
       <cover-image class="imgsmall" src="{{screenopt}}" />
     </cover-view>
 
-</view>
+</cover-view>
 <!--导航条-->
 <view hidden="{{pusherSizeH==100}}">
   <view class="navbar" style='padding-top:{{paddingtop}}vh'>
@@ -143,6 +143,9 @@
         </view>
       </view>
     </block>
+         <cover-view class="btn-add" bindtap="rpt" data-id="{{live.id}}">
+        <cover-image class="btn-img" src="../../image/添加.png" />
+      </cover-view>
   </scroll-view>
 
 </view>

@@ -1,4 +1,4 @@
-<view style=''>
+<cover-view style=''>
   <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:{{pusherSizeH}}vh;flex:1;background:#eeeeee">
   </live-pusher>
   <cover-view class='info-tip'>
@@ -14,7 +14,7 @@
     <cover-view class="controls-screenopt" bindtap="screenopt">
       <cover-image class="imgsmall" src="{{screenopt}}" />
     </cover-view>
-</view>
+</cover-view>
 <!--导航条-->
 <view hidden="{{pusherSizeH==100}}">
   <view class="navbar" style='padding-top:{{paddingtop}}vh'>
@@ -116,6 +116,7 @@
               </block>
 
             </view>
+
           </view>
           <view class='cmt-bar'>
 
@@ -123,6 +124,7 @@
             <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;color:red;line-height:50rpx'>{{item.likeNum}}</text>
             <image src='../../image/cmt.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
           </view>
+          
           <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
             <view class='chat-content'>
               <image src='{{citem.headimgurl}}' class='headimg'></image>
@@ -139,8 +141,10 @@
         </view>
       </view>
     </block>
+      <cover-view class="btn-add" bindtap="rpt" data-id="{{live.id}}">
+    <cover-image class="btn-img" src="../../image/添加.png" />
+  </cover-view>
   </scroll-view>
-
 </view>
 <view class="model" wx:if='{{actionComment}}'>
   <view class='inner-model' catchtap='hiddenComment'></view>

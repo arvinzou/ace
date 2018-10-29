@@ -13,6 +13,7 @@ Page({
     startY: 0
   },
   onReady: function (res) {
+    var that = this;
     that.initData();
   },
   onShow: function () {
@@ -175,5 +176,5 @@ Page({
     wx.navigateTo({
       url: '../rpt/index?id=' + e.currentTarget.dataset.id
     });
-  },
+  }
 });

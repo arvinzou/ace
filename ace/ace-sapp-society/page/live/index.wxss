@@ -667,3 +667,16 @@ max-height: 80rpx;
   right:20rpx;
   top:20rpx;
 }
+.btn-add{
+  right: 40rpx;
+  bottom: 30rpx; 
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center; 
+  border-radius: 50%; 
+}
+.btn-img {
+  width: 120rpx;
+  height: 120rpx;
+}
