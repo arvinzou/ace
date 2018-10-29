@@ -137,3 +137,6 @@
 .whiteBg{
   background: #fff;
 }
+page{
+font-family: "微软雅黑"
+}

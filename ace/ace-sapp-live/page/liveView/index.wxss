@@ -342,7 +342,7 @@ width: 80%;
     position: relative;
     flex: auto;
     text-align: center;
-    line-height: 7vh;
+    line-height: 6vh;
 }
 
 .navbar .item.active {

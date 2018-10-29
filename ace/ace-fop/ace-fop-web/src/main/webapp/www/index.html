@@ -27,34 +27,30 @@
                         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                             <!-- 轮播（Carousel）指标 -->
                             <ol class="carousel-indicators">
-                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                                <li data-target="#myCarousel" data-slide-to="3"></li>
+                                <li data-target="#myCarousel" data-slide-to="0" class="active"  ng-if="notice_slices[0].coverUrl!='' && notice_slices[0].coverUrl!=null && notice_slices[0].coverUrl!= undefined"></li>
+                                <li data-target="#myCarousel" data-slide-to="1" ng-if="notice_slices[1].coverUrl!='' && notice_slices[1].coverUrl!=null && notice_slices[1].coverUrl!=undefined"></li>
+                                <li data-target="#myCarousel" data-slide-to="2" ng-if="notice_slices[2].coverUrl!='' && notice_slices[2].coverUrl!=null && notice_slices[2].coverUrl!=undefined"></li>
+                                <li data-target="#myCarousel" data-slide-to="3" ng-if="notice_slices[3].coverUrl!='' && notice_slices[3].coverUrl!=null && notice_slices[3].coverUrl!=undefined"></li>
                             </ol>
                             <!-- 轮播（Carousel）项目 -->
                             <div class="carousel-inner">
-                                <div class="item active" ng-click="showBannerInfo(0);" ng-cloak>
-                                    <img ng-if="notice_slices[0].coverUrl!=''" ng-src="{{notice_slices[0].coverUrl}}"
-                                         style="width: 100%;height: 100%;object-fit: cover;" alt="First slide">
+                                <div class="item active" ng-click="showBannerInfo(0);" ng-cloak  ng-if="notice_slices[0].coverUrl!='' && notice_slices[0].coverUrl!=null && notice_slices[0].coverUrl!=undefined">
+                                    <img ng-src="{{notice_slices[0].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="First slide">
                                     <div class="slice_title"><span class="slice_title_01" ng-cloak>{{notice_slices[0].title}}</span>
                                     </div>
                                 </div>
-                                <div class="item" ng-click="showBannerInfo(1);" ng-cloak>
-                                    <img ng-if="notice_slices[1].coverUrl!=''" ng-src="{{notice_slices[1].coverUrl}}"
-                                         style="width: 100%;height: 100%;object-fit: cover;" alt="Second slide">
+                                <div class="item" ng-click="showBannerInfo(1);" ng-cloak ng-if="notice_slices[1].coverUrl!=''&& notice_slices[1].coverUrl!=null && notice_slices[1].coverUrl!=undefined">
+                                    <img ng-src="{{notice_slices[1].coverUrl}}" style="width: 100%;height: 100%;object-fit: cover;" alt="Second slide">
                                     <div class="slice_title"><span class="slice_title_01" ng-cloak>{{notice_slices[1].title}}</span>
                                     </div>
                                 </div>
-                                <div class="item" ng-click="showBannerInfo(2);" ng-cloak>
-                                    <img ng-if="notice_slices[2].coverUrl!=''" ng-src="{{notice_slices[2].coverUrl}}"
-                                         style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+                                <div class="item" ng-click="showBannerInfo(2);" ng-cloak ng-if="notice_slices[2].coverUrl!=''&& notice_slices[2].coverUrl!=null && notice_slices[2].coverUrl!=undefined">
+                                    <img style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide" ng-src="{{notice_slices[2].coverUrl}}">
                                     <div class="slice_title"><span class="slice_title_01" ng-cloak>{{notice_slices[2].title}}</span>
                                     </div>
                                 </div>
-                                <div class="item" ng-click="showBannerInfo(3);" ng-cloak>
-                                    <img ng-if="notice_slices[3].coverUrl!=''" ng-src="{{notice_slices[3].coverUrl}}"
-                                         style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide">
+                                <div class="item" ng-click="showBannerInfo(3);" ng-cloak ng-if="notice_slices[3].coverUrl!='' && notice_slices[3].coverUrl!=null && notice_slices[3].coverUrl!=undefined">
+                                    <img style="width: 100%;height: 100%;object-fit: cover;" alt="Third slide" ng-src="{{notice_slices[3].coverUrl}}">
                                     <div class="slice_title"><span class="slice_title_01" ng-cloak>{{notice_slices[3].title}}</span>
                                     </div>
                                 </div>

@@ -46,7 +46,7 @@ function getConfig(){
         url: "/portal/www/wx/jsapi/getConfig",
         type:"post",
         async:false,
-        data:{"sysId": "hcwy", "url": window.location.href},
+        data:{"sysId": "cu", "url": window.location.href},
         success:function(result){
             if(result.status == 0) {
                 console.log("**************************"+result);
@@ -102,3 +102,6 @@ function renderPage(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
+
+
+

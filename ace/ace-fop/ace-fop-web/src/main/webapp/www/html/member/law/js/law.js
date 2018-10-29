@@ -182,11 +182,14 @@ app.controller(ngControllerName,function($scope){
         $scope.infoData = info;
     }
     $scope.update = function(id){
+
         $.ajax({
-            url: "/fop/www/updateInformationServiceDo",
+            url: "/fop/www/updateQuestion",
             type:"post",
             async:false,
-            data:{modules: "3", id: id, title: $scope.infoData.title, content: $scope.infoData.content},
+            data:{
+                jsons: JSON.stringify({id: id, title: $scope.infoData.title, content: $scope.infoData.content, subType: $scope.infoData.subType})
+            },
             success:function(result){
                 if(result.status == 0) {
                     console.log(result);

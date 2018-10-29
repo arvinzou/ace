@@ -20,12 +20,11 @@
                     <text>温馨提示：党组织必须在添加照片的情况下进行后续操作</text>
                 </view>
                 <view class="input-style bottom-line">
-                    <view class="title">注册类型
+                    <view class="title" style='width:25%'>注册类型
                         <text>*</text>
-
                     </view>
-                    <picker mode = selector bindchange="bindPickerChange" data-name='{{ array[index] }}' value="index" range="{{array}}">
-                        <view class="picker">{{array[index]}}</view>
+                    <picker style='width:75%' mode = selector bindchange="bindPickerChange" data-name='{{ array[index] }}' value="index" range="{{array}}">
+                        <view style='width:75%' class="picker">{{array[index]}}</view>
                     </picker>
                 </view>
                 <view class='opt-tips'>

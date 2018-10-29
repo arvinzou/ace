@@ -72,7 +72,7 @@
             <text class='menu-title'>商城订单</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
-        <navigator class='menu-item' url='../../aboutus/index'>
+        <navigator class='menu-item' url='../aboutus/index'>
             <image src='../../image/icon_aboutus.png' class='menu-icon'></image>
             <text class='menu-title'>关于我们</text>
             <image class='menu-rediret' src='../../image/rediret.png'></image>
