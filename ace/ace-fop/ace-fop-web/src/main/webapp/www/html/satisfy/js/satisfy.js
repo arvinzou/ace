@@ -383,7 +383,6 @@ app.controller(ngControllerName,function($scope) {
             return;
         }else{
             $event.target.dataset.target=div;
-            clearForm();
         }
     }
 
@@ -413,11 +412,12 @@ app.controller(ngControllerName,function($scope) {
                                 skin: 'myskin'
                             });
                             $scope.search();
-                            $scope.initChart();
+                            //$scope.initChart();
                             $("#myModal_1").modal('hide');
                             if (!$scope.$$phase) {
                                 $scope.$apply();
                             }
+                            clearForm();
                         } else {
                             layer.alert(result.errorMessage, {
                                 icon: 5,
@@ -460,11 +460,12 @@ app.controller(ngControllerName,function($scope) {
                         skin: 'myskin'
                     });
                     $scope.search();
-                    $scope.initChart();
+                    //$scope.initChart();
                     $("#myModal_2").modal('hide');
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
+                    clearForm();
                 } else {
                     layer.alert(result.errorMessage, {
                         icon: 5,
@@ -540,6 +541,7 @@ var option1 = {
     ]
 };
 
+
 var option2 = {
     title: {
         text: '平台服务满意度',
@@ -576,6 +578,8 @@ var option2 = {
         }
     ]
 };
+
+
 
 function viewChart() {
     var url = "/fop/www/statisticalData";
