@@ -224,7 +224,7 @@ app.controller(ngControllerName,function($scope){
         if(coverImg_edit != null){
             fileUrl = coverImg_edit;
         }else{
-            fileUrl = $scope.infoData
+            fileUrl = $scope.infoData.fileUrl;
         }
         $scope.items[rowIndex].content = $("#pcontent").val();
         $.ajax({
