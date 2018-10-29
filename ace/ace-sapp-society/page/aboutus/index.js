@@ -34,7 +34,7 @@ Page({
         wx.openLocation({
             latitude: 29.0327722622,
             longitude: 111.6520303488,
-            scale:28
+            scale:15
         })
     },
   /**
