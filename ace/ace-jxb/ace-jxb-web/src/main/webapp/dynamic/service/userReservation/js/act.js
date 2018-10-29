@@ -113,10 +113,7 @@ function initForm(){
         success:function(result){
             if(result.status == 0) {
                var data={};
-               data['o']=true;
-               if(result.data){
-                   data['o']=result.data;
-               }
+               data['o']=result.data;
                data['dict149']=staticDictObject['149'];
                data['dict152']=staticDictObject['152'];
                render($("#fm-edit"),data,'tpl-fm');

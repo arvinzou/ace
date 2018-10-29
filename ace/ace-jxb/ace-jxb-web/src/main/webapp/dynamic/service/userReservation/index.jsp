@@ -66,8 +66,7 @@
                 {@each data.dict149 as item,index}
                     {@if item.CODE!=''}
                     <div style="float:left;padding:2px;width:100px" >
-                        <input type="checkbox" name="objects" id="d149\${index}"
-                                value="\${item.NAME}" \${data.o?'':data.o.objects.split(',').contains(item.NAME)?'checked':''}>
+                        <input type="checkbox" name="objects" id="d149\${index}" value="\${item.NAME}" \${data.o?(data.o.objects.split(',').contains(item.NAME)?'checked':''):''}>
                         <label for="d149\${index}">
                            \${item.NAME}
                         </label>
@@ -94,7 +93,7 @@
                 <div style="float:left;padding:2px;width:150px">
                     <input type="checkbox" id="d152\${index}" name="field"
                             value="\${item.NAME}"
-                          \${data.o?'':data.o.field.split(',').contains(item.NAME)?'checked':''}>
+                          \${data.o?(data.o.field.split(',').contains(item.NAME)?'checked':''):''}>
                     <label for="d152\${index}">
                        \${item.NAME}
                     </label>
@@ -114,7 +113,7 @@
 
         </label>
         <div class="col-md-4">
-            <input type="text" class="form-control" name="telephoneCon" value="\${data.o?'':data.o.productList[0].price}">
+            <input type="text" class="form-control" name="telephoneCon" value="\${data.o?(data.o.productList[0].price):''}">
             <div class="error-telephoneCon"></div>
         </div>
         <div class="col-md-6">
@@ -129,7 +128,7 @@
 
         </label>
         <div class="col-md-4">
-            <input type="text" class="form-control" name="wecharCon" value="\${data.o?'':data.o.productList[1].price}">
+            <input type="text" class="form-control" name="wecharCon" value="\${data.o?(data.o.productList[1].price):''}">
             <div class="error-wecharCon"></div>
         </div>
         <div class="col-md-6">
@@ -144,7 +143,7 @@
                     aria-required="true">*</span>面对面咨询
         </label>
         <div class="col-md-4">
-            <input type="text" class="form-control" name="facetofaceCon" value="\${data.o?'':data.o.productList[2].price}">
+            <input type="text" class="form-control" name="facetofaceCon" value="\${data.o?(data.o.productList[2].price):''}">
             <div class="error-facetofaceCon"></div>
         </div>
         <div class="col-md-6">
@@ -158,7 +157,7 @@
             面对面咨询地址
         </label>
         <div class="col-md-10">
-            <textarea class="form-control"  name="city" rows="3">\${data.o?'':data.o.city}</textarea>
+            <textarea class="form-control"  name="city" rows="3">\${data.o?(data.o.city):''}</textarea>
             <div class="error-city"></div>
         </div>
     </div>
@@ -171,7 +170,7 @@
         </label>
         <div class="col-md-10">
 
-            <input type="checkbox" value="1" name="status" \${data.o?'':data.o.status==1?'checked':''}>
+            <input type="checkbox" value="1" name="status" \${data.o?(data.o.status==1?'checked':''):''}>
         </div>
     </div>
     <div class="form-actions">
