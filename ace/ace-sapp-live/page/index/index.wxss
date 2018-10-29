@@ -1,0 +1,12 @@
+.item{
+  color: #fff;
+  background: #0F8DFF;
+  flex:4;
+  padding: 20rpx;
+  text-align: center
+}
+.space{
+  flex:2;
+  padding: 20rpx;
+  text-align: center
+}

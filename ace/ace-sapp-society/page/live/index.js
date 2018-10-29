@@ -67,7 +67,7 @@ Page({
     nameDisplay: false,
     scoll: 'live-top-box-noscoll',
     sort: '0',
-    screenopt:'../../image/全屏.png'
+    screenopt:'../../image/fillwin.png'
   },
   onReady: function (res) {
     var that = this;
@@ -471,14 +471,21 @@ Page({
     if (pusherSizeH ==35) {
       that.setData({
         pusherSizeH: 100,
-        screenopt: "../../image/退出全屏.png"
+        screenopt: "../../image/exitfillwin.png"
       });
     } else {
       that.setData({
         pusherSizeH:35,
-        screenopt: "../../image/全屏.png"
+        screenopt: "../../image/fillwin.png"
       });
     }
+  },
+  rpt: function (e) {
+    console.log(e);
+    var that = this;
+    wx.navigateTo({
+      url: '../rpt/index?id=' + e.currentTarget.dataset.id
+    });
   }
 
 });

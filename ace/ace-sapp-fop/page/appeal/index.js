@@ -43,6 +43,9 @@ Page({
     var that = this;
     console.log('index.js.onLoad');
     console.log(param);
+    if (!that.data.scene){
+      that.data.scene="2e968824893a4ec19a00b62bfede0b14";
+    }
     if(!util.isLogin()){
       wx.navigateTo({ url: "../userinfo/index?url=../appeal/index?scene=" + that.data.scene });
     }
@@ -309,10 +312,19 @@ Page({
   delAideo: function () {
     let that = this;
     that.setData({ displayAudio: 'hide', mediUrl: null });
+    that.innerAudioContext.stop();
+    that.innerAudioContext.destroy();
+  },
+  playAudio: function (e) {
+    var that = this;
+    var url = e.target.dataset.url;
+    this.innerAudioContext = wx.createInnerAudioContext();
+    this.innerAudioContext.src = url;
+    this.innerAudioContext.play();
   },
   /**
-   * 点击选项卡
-   */
+ * 点击选项卡
+ */
   navbarTap: function (e) {
     console.log(e);
     let that = this;

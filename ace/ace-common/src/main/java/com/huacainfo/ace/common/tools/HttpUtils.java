@@ -298,11 +298,9 @@ public class HttpUtils {
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
 		JSONObject p=new JSONObject();
-		//p.put("access_token","9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE");
-		p.put("scene","0987654321");
+		p.put("scene","2e968824893a4ec19a00b62bfede0b14");
 		p.put("page","page/home/index");
-        //System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE", p, "utf-8"));
-		String url="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=9_lWtH0NqTR9mkO_g-e7s9sZtsmr4PryiU1DirS90vV9qVmjQCuvaFbtzNKbPh_QoAe_WHLyMfBJQmiTlJz_9k6mdBd4B0CD9iGeEYYYBOMJIWNqXh4Yjhh7tHEB0NUKcAHAHOE";
+		String url="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=15_dWpYoxmg9miI0ZhgxGyWHZnL2WzRbY37TPHaww_Qsn93o6kmgBLYf2bXIlxLrtam5RxzwBwHB7h0qx7NeS6YnpvGHFhLLHqpUtsJC3aqr3zvdrF62hyaKaduKw4DIJhADAINO";
 		File img=new File("/Users/chenxiaoke/Documents/"+GUIDUtil.getGUID()+".jpg");
 		OutputStream out=new FileOutputStream(img);
 

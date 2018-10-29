@@ -104,10 +104,11 @@
         </view>
         <view hidden="{{currentTab!==2}}" class='recorder-box'>
           <view style='position:relative;' class='{{displayAudio}} recorder'>
-            <audio src="{{mediUrl}}" name="录音" controls="{{1>0}}" class='{{displayAudio}}'></audio>
-            <image class="removeImgBtn {{displayAudio}}" bindtap="delAideo" src="../../image/del-red.png" />
-          </view>
-
+          <view bindtap='playAudio' data-url="{{mediUrl}}" class='{{displayAudio}}' style='color:blue;padding-right:40rpx'>试听</view>
+          
+          <view bindtap='delAideo' data-url="{{mediUrl}}" class='{{displayAudio}}' style='color:blue'>取消</view>
+         </view>
+            
           <view class='recorder'>
             <image class="playimg" src="{{playimg}}" bindtap="startRecorder" />
           </view>
