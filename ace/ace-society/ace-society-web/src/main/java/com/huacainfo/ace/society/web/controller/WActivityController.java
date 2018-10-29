@@ -285,10 +285,12 @@ public class WActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/delActivity")
     @ResponseBody
-    public MessageResponse deleteActivityByActivityId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
-        return this.activityService.deleteActivityByActivityId(id, this.getCurUserProp());
+    public MessageResponse deleteActivityByActivityId(String id) throws Exception {
+        WxUser wxUser = getCurWxUser();
+        if (wxUser == null) {
+            return new MessageResponse(ResultCode.FAIL, "没有获取到用户信息");
+        }
+        return this.activityService.deleteActivityByActivityId(id,wxUser);
     }
 
     /**

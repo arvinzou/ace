@@ -35,13 +35,11 @@
 
         <view wx:if='{{item.arStatus==4}}' bindtap='postReport' data-id='{{item.id}}' class='status status3'>报道驳回</view>
 
-        <view wx:if='{{item.status==32}}' class='status status2'>签到待审核</view>
-
         <view wx:if='{{item.status==4}}' class='status status5'>审核失败</view>
 
         <view wx:if='{{item.status==41}}' class='status status1'>活动无效</view>
-        <view wx:if='{{item.status==4}}' bindtap='delActivit' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>删除</view>
-        <view wx:if='{{item.status==4}}' bindtap='editActivit' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>修改</view>
+        <view wx:if='{{item.status==4}}' bindtap='delActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>删除</view>
+        <view wx:if='{{item.status==4}}' bindtap='editActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>修改</view>
     </view>
     </block>
 
