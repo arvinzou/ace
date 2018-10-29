@@ -30,6 +30,17 @@ app.controller(ngControllerName,function($scope){
             return;
         }
 
+        var userProp = parent.parent.userProp;
+        if (userProp == null || userProp == ''){
+            layer.alert("请先登录后再发布！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            flag = false;
+            layer.close(layerIndex);
+            return;
+        }
+
         $.ajax({
             url: "/fop/www/dataSwapper/search",
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -71,6 +82,21 @@ app.controller(ngControllerName,function($scope){
             window.open('searchRet.html?type='+type+'&keyword='+keyword);
         }
     });
+
+
+    /**
+     * 发布之前判断是否已经登录
+     */
+    $scope.before_search = function () {
+        var userProp = parent.parent.userProp;
+        if (userProp == null || userProp == ''){
+            layer.alert("请先登录后再发布！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
 });
 function checkParam(obj){
     if($(obj).val() == '0'){
