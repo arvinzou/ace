@@ -30,6 +30,19 @@ public class CuDonateListQVo extends CuDonateList {
     private String startDate;
     private String endDate;
 
+    /**
+     * 捐款单位名称
+     */
+    private String donatePostName;
+
+    public String getDonatePostName() {
+        return donatePostName;
+    }
+
+    public void setDonatePostName(String donatePostName) {
+        this.donatePostName = donatePostName;
+    }
+
     public String getProjectName() {
         return projectName;
     }

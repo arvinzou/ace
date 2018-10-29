@@ -180,8 +180,8 @@ function initUpload(){
             FileUploaded: function (uploader, file, responseObject) {
                 var rst = JSON.parse(responseObject.response);
                 /* viewCover(rst.value[0], '.pictureContainer2','.viewPicture2 img','.uploadText2');*/
-                $("#mediUrl").val(rst.value[0]);
-                coverImg = rst.value[0];
+                $("#mediUrl").val("http://zx.huacainfo.com/"+rst.value[0]);
+                coverImg = "http://zx.huacainfo.com/"+rst.value[0];
             }
         }
     });

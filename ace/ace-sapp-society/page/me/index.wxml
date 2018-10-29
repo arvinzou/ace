@@ -34,13 +34,13 @@
 
     <view class='activity-menu'>
         <view class='activity-menu-list'>
-            <navigator hidden="{{partyHide}}" class='activity-menu-item'>
+            <!-- <navigator hidden="{{partyHide}}" class='activity-menu-item'>
                 <view><image src='../../image/icon_me_party.png'></image></view>
                 <view><text>智慧党建</text></view>
-            </navigator>
+            </navigator> -->
             <navigator hidden="{{activityHide}}" url='../activityManage/index' class='activity-menu-item'>
                 <view><image src='../../image/icon_me_activity.png'></image></view>
-                <view><text>线下活动</text></view>
+                <view><text>我的活动</text></view>
             </navigator>
             <navigator class='activity-menu-item' url='../myLive/index'>
                 <view><image src='../../image/icon_me_live.png'></image></view>

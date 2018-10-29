@@ -7,7 +7,8 @@ Page({
    */
   data: {
     detail: null,
-    commentList: []
+    commentList: [],
+    allLike: null
   },
 
   /**
@@ -24,11 +25,12 @@ Page({
           });
           that.initData();
           that.initCommentList();
+          that.initAdmireTotal();
       }
   },
   initData: function (){
       var that = this;
-        util.request(cfg.ideaDetail, { "ideaId": wx.getStorageSync('ideaId'), "unionId": "0" },
+        util.request(cfg.ideaDetail, { "ideaId": wx.getStorageSync('ideaId'), "unionId": wx.getStorageSync('WX-SESSION-ID') },
           function (ret) {
               if (ret.status == 0) {
                   console.log(ret);
@@ -51,6 +53,24 @@ Page({
               if (ret.status == 0) {
                   console.log(ret);
                   that.setData({ commentList: ret.data.rows });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: ret.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
+  }, 
+  initAdmireTotal: function(){
+      var that = this;
+      util.request(cfg.server + "/society/www/comment/findAdmireTotal", { "bisId": wx.getStorageSync('ideaId'), "bisType": "idea", "unionId": wx.getStorageSync('WX-SESSION-ID')},
+          function (ret) {
+              if (ret.status == 0) {
+                  console.log(ret);
+                  that.setData({ allLike: ret.data.allLike});
               } else {
                   wx.showModal({
                       title: '提示',
@@ -104,6 +124,7 @@ Page({
       var that = this;
       that.initData();
       that.initCommentList();
+      that.initAdmireTotal();
   },
  formSubmit: function (e) {
         var commentVal = e.detail.value.commentVal;

@@ -1,4 +1,4 @@
-var server = "https://zhsh.wuling.gov.cn";
+var server = "https://zhsh.wuling.gov.cn/";
 var serverfile = "https://zhsh.wuling.gov.cn/";
 var rtmpserver = "rtmp://zhsh.wuling.gov.cn/live/";
 var hlsserver = "http://zhsh.wuling.gov.cn:9999/hls/";
@@ -32,7 +32,11 @@ var config = {
     findActivity: `${server}/society/www/activity/selectActivityByPrimaryKey`,
     publicActivityReports: `${server}/society/www/activity/findPublicActivityReportList`,
     applyStatus: `${server}/society/www/activity/getApplyStatus`,
-    insertActivity: `${server}/society/www/activity/insertActivity`,
+    insertActivity: `${server}/society/www/activity/insertActivity`, 
+    updateActivity: `${server}/society/www/activity/updateActivity`,
+
+    insertActivityDetail: `${server}/society/www/activity/insertActivityDetail`,
+
     participants: `${server}/society/www/activity/findActivityParticipants`,
     selectActivityReport: `${server}/society/www/activity/selectActivityReportByActivityId`,
     updateActivityReport: `${server}/society/www/activity/updateActivityReport`,

@@ -49,6 +49,8 @@ public interface ActivityService {
 
     MessageResponse insertActivity(Activity obj,UserProp userProp) throws Exception;
 
+    MessageResponse updateActivity(Activity o, WxUser wxUser) throws Exception;
+
     /**
      * @throws
      * @Title:updateActivity

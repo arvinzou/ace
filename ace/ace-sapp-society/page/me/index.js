@@ -13,8 +13,6 @@ Page({
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
         userId: null,
-        activityHide:false,
-        partyHide:false
     },
 
     /**
@@ -22,6 +20,7 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
+        console.log(options);
         console.log("util.is_login()=============================================" + util.is_login());
         if (!util.is_login()) {
             wx.navigateTo({
@@ -32,7 +31,6 @@ Page({
                 that.setData({ userId: wx.getStorageSync('WX-SESSION-ID')});
                 that.initUserData();
             }
-
         }
     },
     initUserData: function() {
@@ -40,18 +38,11 @@ Page({
         util.request(cfg.findUserInfo, {},
             function(ret) {
                 if (ret.status == 0) {
-                    /*console.log(ret);
-                    var _activityHide=false,_partyHide=false;
-                    if (ret.data.societyOrg.orgType==1){
-                        _activityHide=true;
-                    }
-                    if (ret.data.societyOrg.orgType == 2 || ret.data.PersonInfo.politicalStatus==1) {
-                        _partyHide = true;
-                    }
-                    util.setSysUser(ret.data);*/
+                    console.log(ret);
+                    util.setSysUser(ret.data);
                     that.setData({
                         userinfoData: ret.data,
-                        isRegist: true
+                        isRegist: true,
                     });
                 } else {
                     that.setData({
@@ -59,7 +50,6 @@ Page({
                     });
                     wx.navigateTo({ url: "../regist/index" });
                 }
-
             }
         );
     },

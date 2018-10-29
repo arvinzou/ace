@@ -1,7 +1,8 @@
 var subDateTime = function (dateTime,startIndex, endIndx) {
     console.log(2);
     return dateTime.substring(startIndex,endIndx);
-}
+};
+
 
 module.exports = {
     subDateTime: subDateTime,

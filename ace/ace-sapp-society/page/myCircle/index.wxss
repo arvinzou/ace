@@ -58,9 +58,11 @@
 }
 .content {
 	padding-top: 10rpx;
-  padding-bottom: 10rpx;
+    padding-bottom: 10rpx;
 	font-size: 30rpx;
 	line-height: 35rpx;
+    word-break:break-all;
+    word-wrap:break-word;
 }
 
 .reporter{

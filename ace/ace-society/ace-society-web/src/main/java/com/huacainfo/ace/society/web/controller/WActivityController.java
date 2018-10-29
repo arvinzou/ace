@@ -126,6 +126,22 @@ public class WActivityController extends SocietyBaseController {
 
 
     /**
+     * @Description: TODO(修改线下活动)
+     */
+    @RequestMapping(value = "/updateActivity")
+    @ResponseBody
+    public MessageResponse updateActivity(String jsons) throws Exception {
+        Activity obj = JSON.parseObject(jsons, Activity.class);
+        WxUser wxUser = getCurWxUser();
+        if (wxUser == null) {
+            return new MessageResponse(ResultCode.FAIL, "系统繁忙，稍后重试");
+        }
+        return this.activityService.updateActivity(obj, wxUser);
+    }
+
+
+
+    /**
      * @Description: TODO(活动签到)
      */
     @RequestMapping(value = "/activitySign")

@@ -39,6 +39,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Service("cuDonateOrderService")
@@ -411,6 +412,17 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         }
 
         return new ResultResponse(ResultCode.FAIL, "[慈善总会]支付未完成，原因: 龙支付通知结果[交易失败]");
+    }
+
+    /**
+     * 根据订单ID，查询订单捐款人，捐献报表
+     *
+     * @param orderId 订单ID
+     * @return
+     */
+    @Override
+    public Map<String, Object> findDonateReport(String orderId) {
+        return cuDonateOrderDao.findDonateReport(orderId);
     }
 
     private ResultResponse updateUserPoints(CuDonateOrder order) {
