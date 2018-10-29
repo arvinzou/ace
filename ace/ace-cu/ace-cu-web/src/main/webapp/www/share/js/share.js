@@ -102,3 +102,6 @@ function renderPage(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
+
+
+
