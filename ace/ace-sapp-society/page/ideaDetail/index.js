@@ -7,7 +7,8 @@ Page({
    */
   data: {
     detail: null,
-    commentList: []
+    commentList: [],
+    allLike: null
   },
 
   /**
@@ -69,7 +70,7 @@ Page({
           function (ret) {
               if (ret.status == 0) {
                   console.log(ret);
-                  
+                  that.setData({ allLike: ret.data.allLike});
               } else {
                   wx.showModal({
                       title: '提示',
@@ -123,6 +124,7 @@ Page({
       var that = this;
       that.initData();
       that.initCommentList();
+      that.initAdmireTotal();
   },
  formSubmit: function (e) {
         var commentVal = e.detail.value.commentVal;
