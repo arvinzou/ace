@@ -94,4 +94,9 @@
 
 .status5{
     background: #F34F3E;
+    
+}
+
+.opacity6{
+    opacity: .6;
 }

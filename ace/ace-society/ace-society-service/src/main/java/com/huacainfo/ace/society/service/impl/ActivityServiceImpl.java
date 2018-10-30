@@ -408,6 +408,28 @@ public class ActivityServiceImpl implements ActivityService {
                 String.valueOf(id), "线下活动", userProp);*/
         return new MessageResponse(0, "线下活动删除完成！");
     }
+    /**
+     * @throws
+     * @Title:deleteActivityByActivityId
+     * @Description: TODO(删除线下活动)
+     * @param: @param id
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @Override
+    public MessageResponse deleteActivityByActivityId(String id, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            return new MessageResponse(1, "主键-GUID不能为空！");
+        }
+        this.activityDao.deleteByPrimaryKey(id);
+
+       this.dataBaseLogService.log("删除线下活动", "线下活动", String.valueOf(id),
+                String.valueOf(id), "线下活动", userProp);
+        return new MessageResponse(0, "线下活动删除完成！");
+    }
 
 
     /**

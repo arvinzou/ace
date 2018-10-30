@@ -27,10 +27,15 @@ Page({
         let that = this;
         let user = util.getSysUser();
         if (user.regType == 2) {
-
             that.data.url = cfg.adminActivityList;
+            that.setData({
+                type: 2
+            })
         } else if (user.regType == 1){
             that.data.url = cfg.userActivityList;
+            that.setData({
+                type:1
+            })
         }
     },
 
@@ -71,6 +76,14 @@ Page({
         that.setData({
             Loadingstatus: true,
         });
+    },
+    //时间没到点击签到
+    notTimeSign:function(){
+        wx.showToast({
+            title: '活动没有开始',
+            icon: 'info',
+            duration: 2000
+        })
     },
 
     /**

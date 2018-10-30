@@ -92,6 +92,8 @@ public interface ActivityService {
      */
     MessageResponse deleteActivityByActivityId(String id, WxUser wxUser) throws Exception;
 
+    MessageResponse deleteActivityByActivityId(String id, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:audit
