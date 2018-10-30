@@ -20,9 +20,21 @@ public class SubjectIdeaVo extends SubjectIdea implements Serializable {
     private String avatarUrl;
 
     /**
+     * 用户类型，组织/个人
+     */
+    private String regType;
+    /**
      * 议题标题
      */
     private String title;
+
+    public String getRegType() {
+        return regType;
+    }
+
+    public void setRegType(String regType) {
+        this.regType = regType;
+    }
 
     private List<SubjectIdeaAnnexVo> listSubjectIdeaAnnexVo;
 
