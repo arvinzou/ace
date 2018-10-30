@@ -23,7 +23,7 @@ Page({
    */
   onReady: function () {
       var that = this;
-      util.request(cfg.mallList, {"start": 0, "limit": 9999 },
+      util.request(cfg.mallList, { "start": 0, "limit": 9999, "state": "1"},
           function (ret) {
               var datas = ret.data.rows;
               var commodityArr = [];

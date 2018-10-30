@@ -129,7 +129,7 @@ function transmit(){
     if(openId == '' || openId == null || openId == undefined){
         alert("未查询到您的捐款信息！");
     }else{
-        window.location.href = '/cu/www/share/share.jsp?projectId='+projectId+'&openId='+openId;
+        window.location.href = 'https://cswx.changde.gov.cn/cu/www/share/share.jsp?projectId='+projectId+'&openId='+openId;
     }
 }
 function troggle(obj, clazz){

@@ -90,7 +90,7 @@ public interface ActivityService {
      * @author: huacai003
      * @version: 2018-09-11
      */
-    MessageResponse deleteActivityByActivityId(String id, UserProp userProp) throws Exception;
+    MessageResponse deleteActivityByActivityId(String id, WxUser wxUser) throws Exception;
 
     /**
      * @throws
