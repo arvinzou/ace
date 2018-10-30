@@ -155,6 +155,7 @@ Page({
         let typ=e.currentTarget.dataset.type;
         let id = e.currentTarget.dataset.id;
         wx.chooseImage({
+            sizeType: ['compressed'],
             sourceType: ['camera'],
             success(res) {
                 that.uploadFileFun(res.tempFilePaths[0], typ,id);
