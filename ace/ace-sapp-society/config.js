@@ -1,4 +1,4 @@
-var server = "https://zhsh.wuling.gov.cn/";
+var server = "https://zhsh.wuling.gov.cn";
 var serverfile = "https://zhsh.wuling.gov.cn/";
 var rtmpserver = "rtmp://zhsh.wuling.gov.cn/live/";
 var hlsserver = "http://zhsh.wuling.gov.cn:9999/hls/";
@@ -70,5 +70,6 @@ var config = {
     admire: `${server}/society/www/comment/admire`,
     cancelAdmire: `${server}/society/www/comment/cancelAdmire`, 
     delActivity: `${server}/society/www/activity/delActivity`,
+    getCoin: `${server}/society/www/activity/getCoin`,
 };
 module.exports = config
