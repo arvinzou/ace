@@ -75,9 +75,9 @@
           <view class="text-line" wx:if="{{o.list.length>0}}"></view>
           <block wx:for-items="{{o.list}}" wx:for-item="file" wx:key="*item">
   
-          <navigator bindtap="previewFile" wx:if="{{file.type==2}}" data-url="{{file.mediUrl}}">
+          <view bindtap="previewFile" wx:if="{{file.type==2}}" data-url="{{file.mediUrl}}">
            <view class="title-strong-file item-text"> {{file.name}}</view>
-          </navigator>
+          </view>
  
       </block>
         </view>
