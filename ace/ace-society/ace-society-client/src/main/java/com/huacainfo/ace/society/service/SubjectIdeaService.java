@@ -95,7 +95,7 @@ public interface SubjectIdeaService {
      * @author: Arvin
      * @version: 2018-09-13
      */
-    MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
+    MessageResponse audit(String id, String userId, String orgType, String rst, String remark, UserProp userProp) throws Exception;
 
     /**
      * 提交“我的点子”

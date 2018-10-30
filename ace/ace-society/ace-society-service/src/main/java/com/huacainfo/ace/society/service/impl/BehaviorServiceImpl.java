@@ -271,9 +271,9 @@ public class BehaviorServiceImpl implements BehaviorService {
         behaviorDao.updateByPrimaryKeySelective(behavior);
         CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey("behavior");
         if(RegType.PERSON.equals(userType)){
-//            personInfoDao.addCoin(null,coinConfigVo.getId());
+           personInfoDao.addcoinSingle(userId,coinConfigVo.getSubjoinNum() );
         }else{
-//            societyOrgInfoDao.addcoin(id,coinConfigVo.getId(),0);
+            societyOrgInfoDao.addcoin(userId,coinConfigVo.getSubjoinNum());
         }
 
         dataBaseLogService.log("审核市民行为详情", "市民行为详情",

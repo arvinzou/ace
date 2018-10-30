@@ -274,5 +274,12 @@
         </foreach>
     </update>
 
+    <update id="addcoinSingle">
+        update person_info s
+        set s.accPoints=s.accPoints+#{addCoin,jdbcType=DECIMAL}
+        ,s.validPoints=s.validPoints+#{addCoin,jdbcType=DECIMAL}
+        where s.id=#{userId,jdbcType=VARCHAR}
+    </update>
+
 
 </mapper>

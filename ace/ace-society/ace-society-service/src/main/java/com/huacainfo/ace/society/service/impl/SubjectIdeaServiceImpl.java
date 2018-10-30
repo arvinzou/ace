@@ -14,15 +14,12 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
-import com.huacainfo.ace.society.dao.SubjectIdeaAnnexDao;
-import com.huacainfo.ace.society.dao.SubjectIdeaDao;
+import com.huacainfo.ace.society.constant.RegType;
+import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.SubjectIdea;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.SubjectIdeaService;
-import com.huacainfo.ace.society.vo.SubjectIdeaAnnexQVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaAnnexVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaQVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaVo;
+import com.huacainfo.ace.society.vo.*;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -54,6 +51,12 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
     private SubjectIdeaAnnexDao subjectIdeaAnnexDao;
     @Autowired
     private SqlSessionTemplate sqlSession;
+    @Autowired
+    private SocietyOrgInfoDao societyOrgInfoDao;
+    @Autowired
+    private PersonInfoDao personInfoDao;
+    @Autowired
+    private CoinConfigDao coinConfigDao;
 
     /**
      * @throws
@@ -225,7 +228,7 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
      * @version: 2018-09-13
      */
     @Override
-    public MessageResponse audit(String id, String rst, String remark,
+    public MessageResponse audit(String id, String userId, String orgType, String rst, String remark,
                                  UserProp userProp) throws Exception {
 
         SubjectIdea obj = subjectIdeaDao.selectByPrimaryKey(id);
@@ -246,10 +249,15 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         obj.setLastModifyUserId(userProp.getUserId());
         obj.setLastModifyUserName(userProp.getName());
         subjectIdeaDao.updateByPrimaryKeySelective(obj);
-
-
         dataBaseLogService.log("审核议题点子", "议题点子",
                 String.valueOf(id), String.valueOf(id), "议题点子", userProp);
+
+        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey("idea");
+        if(RegType.PERSON.equals(orgType)){
+            personInfoDao.addcoinSingle(userId,coinConfigVo.getSubjoinNum() );
+        }else{
+            societyOrgInfoDao.addcoin(userId,coinConfigVo.getSubjoinNum());
+        }
         return new MessageResponse(0, "议题点子审核完成！");
     }
 

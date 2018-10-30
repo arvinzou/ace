@@ -1,5 +1,6 @@
 var loading = {};
 var params = {limit: 5};
+var orgType = null;
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li><span>解决方案</span></li>");
@@ -92,6 +93,7 @@ function initEvents() {
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
+        orgType = relatedTarget.data('type');
         initForm(id);
     })
     $('#modal-audit .btn-primary').on('click', function () {
@@ -118,6 +120,7 @@ function initEvents() {
 /*议题点子审核*/
 function audit(params) {
     startLoad();
+    params.orgType = orgType;
     $.ajax({
         url: contextPath + "/subjectIdea/audit",
         type: "post",

@@ -23,6 +23,7 @@
     <resultMap id="BaseResultMapVo" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.SubjectIdeaVo">
         <result column="nickName" jdbcType="VARCHAR" property="nickname"/>
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="regType" jdbcType="VARCHAR" property="regType"/>
         <collection property="listSubjectIdeaAnnexVo" ofType="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
             <id property="id" column="annexId"/>
             <result property="ideaId" column="ideaId"/>
@@ -230,7 +231,7 @@
     </select>
     <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
         select
-        wx.avatarUrl, wx.nickName,
+        wx.avatarUrl, wx.nickName, u.user_level as regType,
 
         t.id, t.subjectId ,t.title, t.solution, t.userId, t.remark, t.status, t.createUserId, t.createUserName,
         t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate, t.remark, t.category,
@@ -252,6 +253,7 @@
         from subject_idea t
         LEFT JOIN subject_idea_annex e on t.id = e.ideaId
         left join portal.wx_user wx on t.userId = wx.unionId
+        left join  portal.users u on u.user_id = wx.unionId
         where 1=1
         <if test="condition.solution !=null and condition.solution !=&quot;&quot;">
             and t.solution like concat('%',#{condition.solution,jdbcType=VARCHAR},'%')

@@ -89,7 +89,7 @@
                 {@/if}
             {@/each}
         </td>
-        <td> \${item.createUserName}</td>
+        <td> \${item.nickname}</td>
         <td> \${item.createDate}</td>
         <td>
             {@if item.status==0}
@@ -109,7 +109,7 @@
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             {@if item.status==2}
-            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
+            <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-type="\${item.regType}" data-id="\${item.id}">审核</a>
             {@/if}
         </td>
     </tr>
@@ -289,6 +289,7 @@
             <label class="col-md-2 control-label">说明</label>
             <div class="col-md-10">
                 <input type="hidden" name="id" value="\${data.id}">
+                <input type="hidden" name="userId" value="\${data.userId}">
                 <textarea name="remark" style="width: 100%;height: 100px;"></textarea>
             </div>
         </div>
