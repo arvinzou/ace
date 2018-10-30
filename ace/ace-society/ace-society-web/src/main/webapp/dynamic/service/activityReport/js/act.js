@@ -1,5 +1,6 @@
 var loading = {};
 var params = {limit: 5};
+
 window.onload = function () {
     initPage();
     initEvents();
@@ -83,7 +84,7 @@ function edit(id) {
 }
 
 
-function top(id) {
+function setTop(id) {
     var url = contextPath + "/activityReport/selectActivityReportByPrimaryKey";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {

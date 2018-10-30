@@ -389,6 +389,9 @@
             {@else if item.status==41}
             <span class="label label-lg label-danger">活动无效</span>
             {@/if}
+            {@if item.status==32&&item.arStatus==2}
+            <span class="label label-lg label-info">报道待审核</span>
+            {@/if}
         </td>
         <td>
             <a class="operation" href="javascript:details('\${item.id}');">查看</a>
@@ -397,7 +400,7 @@
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
-            {@if item.status==32}
+            {@if item.status==32&&item.arStatus==3}
             <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
             {@/if}
 
