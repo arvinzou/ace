@@ -166,11 +166,13 @@ public class RegServiceImpl implements RegService {
         o.setName(reg.getNickname());
         o.setDepartmentId("0002");
         o.setCurSyid("society");
-        o.setOpenId(reg.getUnionId());
         o.setCreateTime(DateUtil.getNowDate());
         o.setUserLevel(regType);//身份标识 1 -- 个人/党员 ，2 - 社会/党组织 3-管理员
         o.setSex(reg.getSex());
-        this.regDao.insertReg(o);
+        //
+        o.setOpenId(reg.getUnionId());
+        o.setAppOpenId(reg.getUnionId());
+        regDao.insertReg(o);
 
         //密码短信通知 -- 暂不启用
 //        sendRegSmsNotice(o, reg.getNickname(), reg.getMobile(), pwd);
