@@ -165,7 +165,7 @@ public class OAuth2ServiceImpl implements OAuth2Service {
 
     @Override
     public SingleResult<Map<String, Object>> bind(String unionid, String mobile) throws Exception {
-        SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
+        SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "绑定成功.");
         Map<String, Object> o = new HashMap<String, Object>();
         o.put("status", "1");
         Userinfo user = this.userinfoDao.selectByPrimaryKey(unionid);

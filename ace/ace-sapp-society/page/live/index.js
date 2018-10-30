@@ -2,7 +2,6 @@ var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
 const app = getApp();
-
 var wxuser = {
   headimgurl: "",
   nickname: "",
