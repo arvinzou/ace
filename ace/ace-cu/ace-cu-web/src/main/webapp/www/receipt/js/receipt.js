@@ -63,7 +63,32 @@ function zdyShare(data){
         timestamp: data.timestamp, // 必填，
         nonceStr: data.nonceStr, // 必填，
         signature: data.signature,// 必填，签名，见附录1
-        jsApiList: ['updateAppMessageShareData','updateTimelineShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','updateAppMessageShareData','updateTimelineShareData'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+
+    wx.ready(function () {
+        wx.onMenuShareTimeline({
+            title: '携手慈善，传递爱心', // 分享标题
+            link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: 'https://cswx.changde.gov.cn/cu/www/share/img/logo.jpg', // 分享图标
+            success: function () {
+                // 用户点击了分享后执行的回调函数
+            }
+        });
+    });
+
+    wx.ready(function () {
+        wx.onMenuShareAppMessage({
+            title: '携手慈善，传递爱心', // 分享标题
+            desc: '我已经捐款了，希望一起大家传递爱心哦~', // 分享描述
+            link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: 'https://cswx.changde.gov.cn/cu/www/share/img/logo.jpg', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+            // 用户点击了分享后执行的回调函数
+            }
+        });
     });
 
     wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
