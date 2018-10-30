@@ -229,10 +229,12 @@ Page({
                             wx.showToast({
                                 title: '成功',
                                 icon: 'success',
-                                duration: 2000
+                                duration: 2000,
+                                complete: function () {
+                                    that.onPullDownRefresh();
+                                    return;
+                                }
                             })
-                            that.onPullDownRefresh();
-                            return;
                         }
                         wx.showToast({
                             title: '失败!',

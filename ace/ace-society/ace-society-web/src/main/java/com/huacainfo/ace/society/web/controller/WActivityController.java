@@ -50,6 +50,10 @@ public class WActivityController extends SocietyBaseController {
 
     @Autowired
     private ActivityReportService activityReportService;
+
+    @Autowired
+    private CoinConfigService coinConfigService;
+
     @Autowired
     private RegService regService;
 
@@ -305,6 +309,23 @@ public class WActivityController extends SocietyBaseController {
         }
         ActivityDetail obj = JSON.parseObject(jsons, ActivityDetail.class);
         return this.activityDetailService.insertActivityDetailW(obj, wxUser);
+    }
+
+    /**
+     * @throws
+     * @Title:selectCoinConfigByPrimaryKey
+     * @Description: TODO(获取爱心币配置)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<CoinConfig>
+     * @author: huacai003
+     * @version: 2018-09-17
+     */
+    @RequestMapping(value = "/getCoin")
+    @ResponseBody
+    public ResultResponse selectCoinConfigByPrimaryKey(String id) throws Exception {
+        CoinConfigVo coinConfigVo=this.coinConfigService.selectCoinConfigByPrimaryKey(id).getValue();
+        return new ResultResponse(ResultCode.SUCCESS,"获取到数据",coinConfigVo);
     }
 
 
