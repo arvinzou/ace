@@ -119,7 +119,7 @@ Page({
         }else{
             orgType = '2';
         }
-        var jsonData = { "orgName": orgName, "orgAddr": orgAddr, "contactPerson": contactPerson, "contactPhone": contactPhone, "orgType": orgType, "orgCover": that.data.imageCover }
+        var jsonData = { "orgName": orgName, "orgAddr": orgAddr, "contactPerson": contactPerson, "contactPhone": contactPhone, "orgType": orgType, "orgCover": that.data.imageCover, "validPoints": 0, "accPoints": 0}
         if (orgName == undefined || orgName == null || orgName == ''){
             wx.showModal({
                 title: '提示',
@@ -291,7 +291,7 @@ Page({
         var realName = e.detail.value.realName;
         var mobilePhone = e.detail.value.mobilePhone;
         var code = e.detail.value.code;
-        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, orgId: that.data.orgId}
+        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0}
         util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
             function (ret) {
                 if (ret.status == 0) {

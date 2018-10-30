@@ -191,6 +191,7 @@ Page({
             success(res) {
                 if (res.tapIndex === 0) {
                     wx.chooseImage({
+                        sizeType: ['compressed'],
                         sourceType: ['camera'],
                         success(res) {
                             that.uploadFileFun(res.tempFilePaths[0]);
