@@ -191,15 +191,14 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setParterNum(o.getParterNum());
         activity.setCoverUrl(o.getCoverUrl());
         activity.setStatus("2");
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(wxUser.getName());
-        o.setLastModifyUserId(wxUser.getUnionId());
-        this.activityDao.updateByPrimaryKeySelective(o);
+        activity.setLastModifyDate(new Date());
+        activity.setLastModifyUserName(wxUser.getName());
+        activity.setLastModifyUserId(wxUser.getUnionId());
+        this.activityDao.updateByPrimaryKeySelective(activity);
         MessageResponse auditRs = auditRecordService.reaudit(BisType.ACTIVITY, activity.getId(),activity.getInitiatorId(), activity.getStatus(), "再次提交审核", wxUser);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
-        auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, o.getId(), wxUser.getUnionId());
         return new MessageResponse(0, "添加线下活动完成！");
     }
 
@@ -392,10 +391,21 @@ public class ActivityServiceImpl implements ActivityService {
      * @version: 2018-09-11
      */
     @Override
-    public MessageResponse deleteActivityByActivityId(String id, UserProp userProp) throws Exception {
-        this.activityDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除线下活动", "线下活动", String.valueOf(id),
-                String.valueOf(id), "线下活动", userProp);
+    public MessageResponse deleteActivityByActivityId(String id, WxUser wxUser) throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            return new MessageResponse(1, "主键-GUID不能为空！");
+        }
+        Activity activity=activityDao.selectByPrimaryKey(id);
+        if(null==activity){
+            return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
+        }
+        activity.setStatus("0");
+        activity.setLastModifyDate(new Date());
+        activity.setLastModifyUserName(wxUser.getName());
+        activity.setLastModifyUserId(wxUser.getUnionId());
+        this.activityDao.updateByPrimaryKeySelective(activity);
+/*        this.dataBaseLogService.log("删除线下活动", "线下活动", String.valueOf(id),
+                String.valueOf(id), "线下活动", userProp);*/
         return new MessageResponse(0, "线下活动删除完成！");
     }
 

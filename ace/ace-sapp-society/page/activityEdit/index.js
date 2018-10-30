@@ -63,9 +63,10 @@ Page({
 
     fotmatPicker(dataTime){
         var val = [];
+        console.log(dataTime);
         val.push(parseInt(dataTime.substring(2, 4)));
-        val.push(parseInt(dataTime.substring(5, 7)));
-        val.push(parseInt(dataTime.substring(8, 10)));
+        val.push(parseInt(dataTime.substring(5, 7)-1));
+        val.push(parseInt(dataTime.substring(8, 10))-1);
         val.push(parseInt(dataTime.substring(11, 13)));
         val.push(parseInt(dataTime.substring(14, 16)));
         console.log(val);
@@ -249,7 +250,7 @@ Page({
         this.WxValidate = new WxValidate(rules, messages)
     },
     formatDT(arr) {
-        return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1]) + '-' + this.FN(arr[2]) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':00';
+        return '20' + this.FN(arr[0]) + '-' + this.FN(arr[1]+1) + '-' + this.FN(arr[2]+1) + ' ' + this.FN(arr[3]) + ':' + this.FN(arr[4]) + ':00';
     },
 
     FN(num) {

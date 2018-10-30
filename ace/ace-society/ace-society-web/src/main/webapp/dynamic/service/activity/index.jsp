@@ -380,7 +380,7 @@
             <span class="label label-lg label-success">活动发布</span>
             {@else if item.status==4}
             <span class="label label-lg label-danger">发布驳回</span>
-            {@else if item.arStatus==31}
+            {@else if item.status==31}
             <span class="label label-lg label-info">活动开始</span>
             {@else if item.status==32}
             <span class="label label-lg label-success">活动结束</span>

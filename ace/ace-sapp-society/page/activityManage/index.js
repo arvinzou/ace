@@ -22,7 +22,6 @@ Page({
     onLoad: function(options) {
         let that=this;
         that.optionUrl();
-        that.initdata();
     },
     optionUrl:function(){
         let that = this;
@@ -85,7 +84,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        this.initdata();
     },
 
     /**
@@ -153,19 +152,27 @@ Page({
     delActivity: function (e) {
         let that = this;
         let id = e.currentTarget.dataset.id;
-        util.request(cfg, {
-            id: id,
-        },
-        function (data) {
-                console.log(data.data);
-                wx.hideNavigationBarLoading(); //完成停止加载
-                wx.stopPullDownRefresh(); //停止下拉刷新
-                that.onPullDownRefresh();
+        wx.showModal({
+            title: '提示',
+            content: '确定删除活动吗？',
+            success: function (res) {
+                if (res.confirm) {
+                    util.request(cfg.delActivity, {
+                        id: id,
+                    },
+                        function (data) {
+                            console.log(data.data);
+                            wx.hideNavigationBarLoading(); //完成停止加载
+                            wx.stopPullDownRefresh(); //停止下拉刷新
+                            that.onPullDownRefresh();
+                        }
+                    );
+                } 
             }
-        );
+        });
     },
     //修改活动
-    editActivit: function (e) {
+    editActivity: function (e) {
         let that = this;
         let id = e.currentTarget.dataset.id;
         wx.navigateTo({
@@ -203,20 +210,22 @@ Page({
                     type: type,
                     id: id,
                 },
-                    function (data) {
-                        console.log(data.data);
-                        wx.hideNavigationBarLoading() //完成停止加载
-                        wx.stopPullDownRefresh() //停止下拉刷新
-                        that.setData({
-                            type: that.data.type,
-                            list: that.data.list.concat(data.data),
-                            Loadingstatus: false,
-                        });
-                        if (data.data.length < that.data.limit) {
-                            that.setData({
-                                LoadOver: true,
-                            });
+                    function (rst) {
+                        console.log(rst);
+                        if (rst.status==0){
+                            wx.showToast({
+                                title: '成功',
+                                icon: 'success',
+                                duration: 2000
+                            })
+                            that.onPullDownRefresh();
+                            return;
                         }
+                        wx.showToast({
+                            title: '失败!',
+                            icon: 'none',
+                            duration: 2000
+                        })
                     }
                 );
                 
