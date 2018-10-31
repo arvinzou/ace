@@ -58,61 +58,54 @@ jQuery(function ($) {
     $('#btn-view-edit').on(
         'click',
         function () {
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
+            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
             if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext)
+                $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext)
             }
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow',
-                gr,
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: true,
-                    beforeSubmit: function (postdata) {
-                        postdata.content = editor.getValue();
-                        return [true, "", ""];
-                    },
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                        $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
-                        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-                        var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-                        loadText(gd.id);
-                        appendUploadBtn("fileUrl");
-                    }
-                })
+            jQuery(cfg.grid_selector).jqGrid('editGridRow', gr, {
+                closeAfterAdd: true,
+                recreateForm: true,
+                viewPagerButtons: true,
+                beforeSubmit: function (postdata) {
+                    postdata.content = editor.getValue();
+                    return [true, "", ""];
+                },
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find(
+                        '.ui-jqdialog-titlebar').wrapInner(
+                        '<div class="widget-header" />')
+                    style_edit_form(form);
+                    $("#TblGrid_grid-table").after("<div id='custom-dia'></div>");
+                    var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
+                    var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
+                    loadText(gd.id);
+                    appendUploadBtn("fileUrl");
+                }
+            })
         });
-    $('#btn-view-del').on(
-        'click',
-        function () {
+    $('#btn-view-del').on('click', function () {
 
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
-                return;
-            }
-            jQuery(cfg.grid_selector).jqGrid(
-                'delGridRow',
-                gr,
-                {
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
+            'selrow');
+        if (!gr) {
+            $.jgrid.info_dialog($.jgrid.nav.alertcap,
+                $.jgrid.nav.alerttext);
+            return;
+        }
+        jQuery(cfg.grid_selector).jqGrid(
+            'delGridRow',
+            gr,
+            {
+                beforeShowForm: function (e) {
+                    var form = $(e[0]);
+                    form.closest('.ui-jqdialog').find(
+                        '.ui-jqdialog-titlebar').wrapInner(
+                        '<div class="widget-header" />')
+                    style_edit_form(form);
+                }
+            })
+    });
 });
 
 function preview(id, title) {

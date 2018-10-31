@@ -267,7 +267,7 @@ Page({
             },
             success: function (res) {
                 var data = JSON.parse(res.data);
-                var url = cfg.server + data.value[0].fileUrl;
+                var url = cfg.serverfile + data.value[0].fileUrl;
                 that.setData({ imageCover: url});
             },
             fail: function (res) {

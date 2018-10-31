@@ -88,10 +88,6 @@ color:rgba(34,34,34,1);
 .btn-bkClick {
     margin-right: 40rpx;
 }
-
-.form {
-    padding-top: 100rpx;
-}
 .reuslt {
     background: #fff;
     text-align: center;

@@ -8,7 +8,8 @@ Page({
   data: {
     detail: null,
     commentList: [],
-    allLike: null
+    allLike: null,
+    isComment: 0
   },
 
   /**
@@ -23,6 +24,9 @@ Page({
           that.setData({
               userinfo: wx.getStorageSync('userinfo')
           });
+          if (options.belongTo == 0){
+              that.setData({ isComment: 1});
+          }
           that.initData();
           that.initCommentList();
           that.initAdmireTotal();

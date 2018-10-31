@@ -254,6 +254,9 @@
     <if test="condition.type !=null and condition.type !=&quot;&quot;">
       and t.type =  #{condition.type,jdbcType=CHAR}
     </if>
+    <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+      and t.userId =  #{condition.userId,jdbcType=CHAR}
+    </if>
   </sql>
 
   <select id="findCount" resultType="int">
