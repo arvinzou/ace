@@ -5,6 +5,7 @@
             <view class='activity'>
                 <view class='activity-left'>
                     <image class='activity-image' src='{{item.coverUrl}}'></image>
+                    <view class='mask'></view>
                     <block wx:if='{{item.isEnd == false}}'>
                     <view class='activity-warn'>
                         <view class='activity-warn-title'><text>距离活动开始</text></view>
@@ -30,7 +31,18 @@
                     </view>
                 </view>
                 <view class='activity-type'>
-                    党建活动
+                     <block wx:if='{{item.category == "1"}}'>
+                        公益活动
+                    </block>
+                    <block wx:elif='{{item.category == "2"}}'>
+                        普及活动
+                    </block>
+                    <block wx:elif='{{item.category == "3"}}'>
+                        创意活动
+                    </block>
+                    <block wx:elif='{{item.category == "4"}}'>
+                        党建活动
+                    </block>
                 </view>
             </view>
         </view>
