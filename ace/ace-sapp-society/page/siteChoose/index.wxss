@@ -139,3 +139,6 @@
     color: #FFFFFF;
     background:rgba(255,171,50,1);
 }
+.hidden{
+    display:none;
+}

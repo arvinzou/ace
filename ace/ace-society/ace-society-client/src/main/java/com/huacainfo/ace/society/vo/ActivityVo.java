@@ -30,6 +30,26 @@ private List<ActivityDetailVo>  activityDetailVoList;
     private String headimgurl;
     private String orgName;
 
+    private Integer participant;
+
+    private Integer host;
+
+    public Integer getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(Integer participant) {
+        this.participant = participant;
+    }
+
+    public Integer getHost() {
+        return host;
+    }
+
+    public void setHost(Integer host) {
+        this.host = host;
+    }
+
     public String getAdStatus() {
         return adStatus;
     }
