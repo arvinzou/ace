@@ -25,19 +25,21 @@
         </view>
     </view>
 
-    <view class='container'>
+    <block wx:for='{{ dateArray }}'>
+    <view class='container {{siteDate.date == item.date?"": "hidden"}}'>
         <view class='time-box'>
             <view class='time-span time-span-title'>上午</view>
             <view class='time-span time-span-title'>下午</view>
         </view>
         <view class='time-box'>
             <view class='time-span'>
-                <view class='slot {{timeIndex == 0? "time-active": ""}}' bindtap='timeSelect' data-value='0'>9:00-11:00</view>
+                <view class='slot {{timeIndex == 0 && item.occupyUp !="9:00-11:00" ? "time-active": ""}}' bindtap='timeSelect' data-value='0'>9:00-11:00</view>
             </view>
             <view class='time-span'>
-                <view class='slot {{timeIndex == 1? "time-active": ""}}'  data-value='1' bindtap='timeSelect'>15:00-17:00</view></view>
+                <view class='slot {{timeIndex == 1 && item.occupyDown !="15:00-17:00" ? "time-active": ""}}'  data-value='1' bindtap='timeSelect'>15:00-17:00</view></view>
         </view>
     </view>
+    </block>
 </view>
 <view class='footer'>
     <button class='confirm' formType="submit">确定</button>

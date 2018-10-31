@@ -93,6 +93,16 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.OrderInfoVo">
         <result column="nickName" jdbcType="VARCHAR" property="nickname"/>
         <result column="avatarUrl" jdbcType="VARCHAR" property="headimgurl"/>
+        <association property="spaceOccupyInfo" column="occupyId"
+                     javaType="com.huacainfo.ace.society.model.SpaceOccupyInfo">
+            <id property="id" column="occupyId"/>
+            <result property="reserveDate" column="reserveDate"/>
+            <result property="reserveInterval" column="reserveInterval"/>
+            <result property="year" column="year"/>
+            <result property="month" column="month"/>
+            <result property="day" column="day"/>
+            <result property="whatDay" column="whatDay"/>
+        </association>
         <collection property="detailList" column="detailId" javaType="ArrayList"
                     ofType="com.huacainfo.ace.society.model.OrderDetail">
             <id property="id" jdbcType="VARCHAR" column="detailId"/>
@@ -105,6 +115,9 @@
         </collection>
     </resultMap>
     <sql id="Vo_Column_List">
+        s.id as occupyId,
+        s.reserveDate, s.reserveInterval, s.`year`, s.`month`, s.`day`, s.whatDay,
+
         od.id as detailId, od.commodityId, od.commodityName, od.commodityCover,
         od.salePrice, od.purchaseQty, od.subtotal,
 
@@ -134,6 +147,7 @@
         from order_info t
         left join portal.wx_user wx on t.userId = wx.unionId
         left join order_detail od on t.id = od.orderId
+        left join space_occupy_info s on t.id = s.orderId
     </sql>
 
     <sql id="Where_Condition">

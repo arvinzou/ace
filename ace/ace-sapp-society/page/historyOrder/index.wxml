@@ -15,6 +15,7 @@
                         <view class='order-title'>
                             <text>{{orderItem.commodityName}}</text>
                         </view>
+                        <view class='reserveDate' wx:if='{{item.spaceOccupyInfo.reserveDate!=undefined && item.spaceOccupyInfo.reserveDate!=""}}'><text>使用时间{{item.spaceOccupyInfo.reserveDate}}{{item.spaceOccupyInfo.reserveInterval}}</text></view>
                         <view class='method'>
                             <block wx:if='{{orderItem.receiveType == 1}}'>
                             <text>自提</text>

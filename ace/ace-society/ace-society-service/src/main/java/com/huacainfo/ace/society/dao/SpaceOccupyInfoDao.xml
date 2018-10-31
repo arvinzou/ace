@@ -118,6 +118,9 @@
         <if test="condition.reserveInterval !=null and condition.reserveInterval !=&quot;&quot;">
             and t.reserveInterval = #{condition.reserveInterval,jdbcType=VARCHAR}
         </if>
+        <if test="condition.nowDateTime !=null and condition.nowDateTime !=&quot;&quot;">
+            and t.reserveDate >= #{condition.nowDateTime,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">

@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.society.service.CommodityService;
 import com.huacainfo.ace.society.service.SpaceOccupyInfoService;
 import com.huacainfo.ace.society.vo.CommodityQVo;
@@ -77,13 +78,11 @@ public class WCommodityController extends SocietyBaseController {
      */
     @RequestMapping("/spaceOccupyInfo")
     public ResultResponse spaceOccupyInfo(SpaceOccupyInfoQVo condition) throws Exception {
-        if (!StringUtil.areNotEmpty(condition.getSpaceId(),
-                condition.getYear(), condition.getMonth(), condition.getDay(),
-                condition.getReserveInterval()
-        )) {
+        if (!StringUtil.areNotEmpty(condition.getSpaceId())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
+        condition.setNowDateTime(DateUtil.getNow().substring(0, 10));
         List<SpaceOccupyInfoVo> vo = spaceOccupyInfoService.spaceOccupyInfo(condition);
 
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", vo);
