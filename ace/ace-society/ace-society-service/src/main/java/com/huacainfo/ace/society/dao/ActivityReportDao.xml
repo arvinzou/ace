@@ -30,7 +30,11 @@
 
   <sql id="Vo_Column_List">
     t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl, t.remark, t.status, t.top, t.createUserId, t.createUserName, t.createDate,
-    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category
+    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,
+    (SELECT COUNT(*)
+      FROM society.comment_record
+      WHERE bisType='reportComment' AND bisId=t.id
+    ) as commentTotal
   </sql>
   <sql id="Blob_Column_List">
     content

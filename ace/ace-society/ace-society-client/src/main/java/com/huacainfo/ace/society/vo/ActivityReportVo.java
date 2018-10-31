@@ -11,6 +11,16 @@ public class ActivityReportVo extends ActivityReport {
 
     private String headimgurl;
 
+    private Integer commentTotal;
+
+    public Integer getCommentTotal() {
+        return commentTotal;
+    }
+
+    public void setCommentTotal(Integer commentTotal) {
+        this.commentTotal = commentTotal;
+    }
+
     public String getHeadimgurl() {
         return headimgurl;
     }

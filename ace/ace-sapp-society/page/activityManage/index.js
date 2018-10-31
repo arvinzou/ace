@@ -49,7 +49,6 @@ Page({
         }
         that.showLoading();
         util.request(that.data.url, {
-                category: 1,
                 start: that.data.start,
                 limit: that.data.limit
             },
@@ -211,7 +210,6 @@ Page({
             url: cfg.server+'/portal/www/uploadFile.do',
             filePath: tempFilePaths,
             name: 'file',
-
             formData: {
                 collectionName: 'ceshi',
                 id: '111'
@@ -233,15 +231,15 @@ Page({
                                 duration: 2000,
                                 complete: function () {
                                     that.onPullDownRefresh();
-                                    return;
                                 }
                             })
+                        }else{
+                            wx.showToast({
+                                title: '失败!',
+                                icon: 'none',
+                                duration: 2000
+                            })
                         }
-                        wx.showToast({
-                            title: '失败!',
-                            icon: 'none',
-                            duration: 2000
-                        })
                     }
                 );
                 
