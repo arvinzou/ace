@@ -309,7 +309,10 @@
       and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
     </if>
     <if test="condition.category !=null and condition.category !=&quot;&quot;">
-      and category =#{condition.category,jdbcType=VARCHAR}
+      and a.category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.aStatus !=null and condition.aStatus !=&quot;&quot;">
+      and a.status =#{condition.aStatus,jdbcType=VARCHAR}
     </if>
     <if test="condition.top !=null and condition.top !=&quot;&quot;">
       and top =#{condition.top,jdbcType=CHAR}

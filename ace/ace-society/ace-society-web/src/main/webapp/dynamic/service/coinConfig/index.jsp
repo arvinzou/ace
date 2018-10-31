@@ -30,13 +30,13 @@
 
         </div>
         <div class="actions">
-        </div>
+    </div>
     </div>
     <div class="portlet-body">
 
         <div class="row custom-tollbar">
             <div class="col-sm-8">
-                <a href="javascript:void(0);" onclick="add();" class="btn green">创建</a>
+                <%--<a href="javascript:void(0);" onclick="add();" class="btn green">创建</a>--%>
 
             </div>
             <div class="col-sm-4">
