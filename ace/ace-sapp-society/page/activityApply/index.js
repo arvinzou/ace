@@ -271,7 +271,6 @@ Page({
             success(res) {
                 if (res.tapIndex === 0) {
                     wx.chooseImage({
-                        sizeType: ['compressed'],
                         sourceType: ['camera'],
                         success(res) {
                             that.uploadFileFun(res.tempFilePaths[0]);
@@ -280,7 +279,7 @@ Page({
                 } else if (res.tapIndex === 1) {
                     wx.chooseImage({
                         count: 1, // 设置最多三张
-                        sizeType: ['compressed'],
+                        sizeType: ['original', 'compressed'],
                         sourceType: ['album', 'camera'],
                         success(res) {
                             var tempFilePaths = res.tempFilePaths;
@@ -307,7 +306,7 @@ Page({
             },
             success: function(res) {
                 var data = JSON.parse(res.data);
-                var url = cfg.server + data.value[0].fileUrl;
+                var url = cfg.serverfile + data.value[0].fileUrl;
                 that.setData({
                     ["form.coverUrl"]: url
                 })
