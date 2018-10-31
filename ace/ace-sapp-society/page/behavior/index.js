@@ -41,6 +41,13 @@ Page({
         var that = this;
         that.initBehaviorList("1");
     },
+    previewImage: function (e) {
+        console.log(e);
+        wx.previewImage({
+            current: e.currentTarget.id,
+            urls: [e.currentTarget.id]
+        })
+    },
     initBehaviorList: function(type){
         var that = this;
         util.request(cfg.behaviorList, { "start": 0, "limit": 999, "type": type, "status":"3"},

@@ -109,3 +109,8 @@
     clear: both;
     display: block;
 }
+.reserveDate{
+    color: #666666;
+    font-size: 22rpx;
+    padding-left: 30rpx;
+}

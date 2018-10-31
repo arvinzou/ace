@@ -20,7 +20,7 @@
                                 <video src='{{ fileItem.fileUrl }}' class='file-attach' show-center-play-btn='true'></video>
                                 </block>
                                 <block wx-if='{{ fileItem.fileType == 1 }}'>
-                                    <image src='{{ fileItem.fileUrl}}' class='attach-image'></image>
+                                    <image src='{{ fileItem.fileUrl}}' class='attach-image' bindtap="previewImage"></image>
                                 </block>
                                 </block>
                             </view>
@@ -44,7 +44,7 @@
                                 <video src='{{ fileItem.fileUrl }}' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>
                                 </block>
                                 <block wx-if='{{ fileItem.fileType == 1 }}'>
-                                    <image src='{{ fileItem.fileUrl}}' class='attach-image'></image>
+                                    <image src='{{ fileItem.fileUrl}}' class='attach-image' bindtap="previewImage"></image>
                                 </block>
                                 </block>
                             </view>
