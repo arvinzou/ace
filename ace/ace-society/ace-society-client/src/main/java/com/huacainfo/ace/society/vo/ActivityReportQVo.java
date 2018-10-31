@@ -7,6 +7,16 @@ public class ActivityReportQVo extends ActivityReport {
     private static final long serialVersionUID = 1L;
     private String category;
 
+    private String aStatus;
+
+    public String getaStatus() {
+        return aStatus;
+    }
+
+    public void setaStatus(String aStatus) {
+        this.aStatus = aStatus;
+    }
+
     public String getCategory() {
         return category;
     }

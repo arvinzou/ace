@@ -58,11 +58,16 @@
                 类型
             </label>
             <div class="col-md-10">
-                <select disabled name="category" id="">
-                    <option \${data.o.category==5?'selected':''} value="1">随手拍</option>
-                    <option \${data.o.category==6?'selected':''} value="2">我有点子</option>
-                    <option \${data.o.category==7?'selected':''} value="3">秀我直播</option>
-                    <option \${data.o.category==8?'selected':''} value="4">邻里圈子</option>
+                <select  name="category" id="">
+                    {@if data.o.category==5}
+                    <option selected value="5">随手拍</option>
+                    {@else if data.o.category==6}
+                    <option selected value="6">我有点子</option>
+                    {@else if data.o.category==7}
+                    <option selected value="7">秀我直播</option>
+                    {@else if data.o.category==8}
+                    <option selected value="8">邻里圈子</option>
+                    {@/if}
                 </select>
             </div>
         </div>

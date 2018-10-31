@@ -126,7 +126,7 @@ Page({
 
       }
       console.log("==============================="+spaceOccupyInfo.toString());
-      util.request(cfg.createOrder, { "params": JSON.stringify({ "nickname": that.data.userinfoData.nickName, "headimgurl": that.data.userinfoData.avatarUrl, "payType": '1', 'payAmount': that.data.siteInfo.costPoints, "receiveType": '2', "receiveName": receiveName, "receivePhone": receivePhone, "spaceOccupyInfo": spaceOccupyInfo, "detailList": orderDetailList })},
+      util.request(cfg.createOrder, { "params": JSON.stringify({ "nickname": that.data.userinfoData.nickName, "headimgurl": that.data.userinfoData.avatarUrl, "payType": '2', 'payAmount': that.data.siteInfo.costPoints, "receiveType": '2', "receiveName": receiveName, "receivePhone": receivePhone, "spaceOccupyInfo": spaceOccupyInfo, "detailList": orderDetailList })},
           function (ret) {
               if (ret.status == 0) {
                   console.log(ret);
