@@ -238,6 +238,14 @@
     border-radius: 4rpx;
     position: relative;
 }
+.mask{
+    width: 270rpx;
+    height: 160rpx;
+    position: absolute;
+    background:#000; 
+    opacity:0.5; 
+    bottom: 40rpx;
+}
 .applytime{
     color: #666666;
     font-size: 26rpx;
