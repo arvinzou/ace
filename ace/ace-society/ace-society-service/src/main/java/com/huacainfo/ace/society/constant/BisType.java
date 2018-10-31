@@ -54,8 +54,71 @@ public interface BisType {
     /**
      * 订单消费
      */
-    String POINTS_ORDER_CONSUME = "ORDER_CONSUME";
-
+    String POINTS_ORDER_CONSUME = "ORDER-CONSUME";
+    /**
+     * 公益活动 - 发起者
+     */
+    String POINTS_WELFARE_SPONSOR = "WELFARE-SPONSOR";
+    /**
+     * 公益活动 - 参与者 - 加
+     */
+    String POINTS_WELFARE_PARTER_ADD = "WELFARE-PARTER-ADD";
+    /**
+     * 公益活动 - 参与者 - 减
+     */
+    String POINTS_WELFARE_PARTER_SUB = "WELFARE-PARTER-SUB";
+    /**
+     * 普及活动 - 发起者
+     */
+    String POINTS_ORDINARY_SPONSOR = "ORDINARY-SPONSOR";
+    /**
+     * 普及活动 - 参与者 - 加
+     */
+    String POINTS_ORDINARY_PARTER_ADD = "ORDINARY-PARTER-ADD";
+    /**
+     * 普及活动 - 参与者 - 减
+     */
+    String POINTS_ORDINARY_PARTER_SUB = "ORDINARY-PARTER-SUB";
+    /**
+     * 创意活动 - 发起者
+     */
+    String POINTS_CREATIVE_SPONSOR = "CREATIVE-SPONSOR";
+    /**
+     * 创意活动 - 参与者 - 加
+     */
+    String POINTS_CREATIVE_PARTER_ADD = "CREATIVE-PARTER-ADD";
+    /**
+     * 创意活动 - 参与者 - 减
+     */
+    String POINTS_CREATIVE_PARTER_SUB = "CREATIVE-PARTER-SUB";
+    /**
+     * 党建活动 - 发起者
+     */
+    String POINTS_PARTY_SPONSOR = "PARTY-SPONSOR";
+    /**
+     * 党建活动 - 参与者 - 加
+     */
+    String POINTS_PARTY_PARTER_ADD = "PARTY-PARTER-ADD";
+    /**
+     * 党建活动 - 参与者 - 减
+     */
+    String POINTS_PARTY_PARTER_SUB = "PARTY-PARTER-SUB";
+    /**
+     * 随手拍 - 发行
+     */
+    String POINTS_BEHAVIOR = "BEHAVIOR-ISSUE";
+    /**
+     * 我有点子 - 发行
+     */
+    String POINTS_IDEA = "IDEA-ISSUE";
+    /**
+     * 直播 - 发行
+     */
+    String POINTS_LIVE = "LIVE-ISSUE";
+    /**
+     * 邻里圈子 - 发行
+     */
+    String POINTS_GROUP = "GROUP-ISSUE";
 
     /**
      * ================
