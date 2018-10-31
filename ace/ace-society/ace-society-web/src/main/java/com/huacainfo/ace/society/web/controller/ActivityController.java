@@ -1,13 +1,5 @@
 package com.huacainfo.ace.society.web.controller;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEPhongLighting_POINTPeer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -16,12 +8,16 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.society.service.ActivityService;
-import com.huacainfo.ace.society.vo.ActivityVo;
 import com.huacainfo.ace.society.vo.ActivityQVo;
+import com.huacainfo.ace.society.vo.ActivityVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/activity")
@@ -75,7 +71,7 @@ public class ActivityController extends SocietyBaseController {
     @ResponseBody
     public MessageResponse insertActivity(String jsons) throws Exception {
         Activity obj = JSON.parseObject(jsons, Activity.class);
-        return this.activityService.insertActivity(obj,this.getCurUserProp());
+        return this.activityService.insertActivity(obj, this.getCurUserProp());
     }
 
     /**
@@ -160,8 +156,8 @@ public class ActivityController extends SocietyBaseController {
      */
     @RequestMapping(value = "/audit")
     @ResponseBody
-    public MessageResponse audit(String id, String rst, String message,String coinconfigId) throws Exception {
-        return this.activityService.audit(id, rst, message,coinconfigId ,this.getCurUserProp());
+    public MessageResponse audit(String id, String rst, String message, String coinconfigId) throws Exception {
+        return this.activityService.audit(id, rst, message, coinconfigId, this.getCurUserProp());
     }
 
     /**
@@ -179,9 +175,9 @@ public class ActivityController extends SocietyBaseController {
     @RequestMapping(value = "/endAudit")
     @ResponseBody
     public MessageResponse endAudit(String id, String rst, String message, String list) throws Exception {
-        list=list==null?"":list;
-        String[] lists=list.split(",");
-        return this.activityService.endAudit(id, rst, message,Arrays.asList(lists) ,this.getCurUserProp());
+        list = list == null ? "" : list;
+        String[] lists = list.split(",");
+        return this.activityService.endAudit(id, rst, message, Arrays.asList(lists), this.getCurUserProp());
     }
 
 

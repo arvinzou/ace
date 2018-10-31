@@ -326,6 +326,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         if (CollectionUtils.isEmpty(info.getDetailList())) {
             return new ResultResponse(ResultCode.FAIL, "缺少订单明细");
         }
+        //预设orderId
+        info.setId(GUIDUtil.getGUID());
         //用户资料
         CustomerVo customerVo = regService.findByUserId(info.getUserId());
         if (null == customerVo) {
@@ -338,18 +340,20 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         CommodityVo commodity;
         for (OrderDetail item : info.getDetailList()) {
             commodity = commoditydao.selectVoByPrimaryKey(item.getCommodityId());
-            if (null == commodity || commodity.getState().equals("1")) {
+            if (null == commodity || !"1".equals(commodity.getState())) {
                 return new ResultResponse(ResultCode.FAIL, "商品资料有误");
             }
             if (item.getPurchaseQty() <= 0) {
                 return new ResultResponse(ResultCode.FAIL, "商品购买数量有误");
             }
+            //爱心场地
             if ("1".equals(commodity.getCommodityType())) {
-//                return new ResultResponse(ResultCode.FAIL, "商品购买数量有误");
                 ResultResponse rs = checkSpaceOccupyInfo(commodity, item, info.getSpaceOccupyInfo());
                 if (rs.getStatus() == ResultCode.FAIL) {
                     return rs;
                 }
+                //插入预定记录
+                spaceOccupyRecord(info, commodity);
             }
             //获取销售价格
             if (PayType.POINTS.equals(info.getPayType())) {
@@ -370,11 +374,28 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         info.setPayAmount(payAmount);
         //扣除积分
         if (PayType.POINTS.equals(info.getPayType())) {
-
-            return createPointsOrder(info, customerVo);
+            ResultResponse rs = createPointsOrder(info, customerVo);
+            if (rs.getStatus() == ResultCode.FAIL) {
+                throw new CustomException(rs.getInfo());
+            }
+            return rs;
         } else {
-            return new ResultResponse(ResultCode.FAIL, "支付类型不支持");
+            throw new CustomException("支付类型不支持");
         }
+    }
+
+    /**
+     * 记录场地预定信息
+     *
+     * @param info      订单信息
+     * @param commodity 下单场地信息
+     */
+    private void spaceOccupyRecord(OrderInfoVo info, CommodityVo commodity) {
+        SpaceOccupyInfo params = info.getSpaceOccupyInfo();
+        params.setId(GUIDUtil.getGUID());
+        params.setSpaceId(commodity.getId());
+        params.setOrderId(info.getId());
+        spaceOccupyInfoDao.insert(params);
     }
 
     /**
