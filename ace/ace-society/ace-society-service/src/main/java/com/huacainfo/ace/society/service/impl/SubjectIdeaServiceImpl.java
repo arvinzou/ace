@@ -18,6 +18,7 @@ import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.SubjectIdea;
 import com.huacainfo.ace.society.service.AuditRecordService;
+import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.service.SubjectIdeaService;
 import com.huacainfo.ace.society.vo.*;
 import org.apache.ibatis.session.Configuration;
@@ -57,6 +58,8 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
     private PersonInfoDao personInfoDao;
     @Autowired
     private CoinConfigDao coinConfigDao;
+    @Autowired
+    private PointsRecordService pointsRecordService;
 
     /**
      * @throws
@@ -237,9 +240,8 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         }
 
         //更改审核记录
-        MessageResponse auditRs =
-                auditRecordService.audit(BisType.SUBJECT_IDEA,
-                        obj.getId(), obj.getUserId(), rst, remark, userProp);
+        MessageResponse auditRs = auditRecordService.audit(BisType.SUBJECT_IDEA,
+                obj.getId(), obj.getUserId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
@@ -253,11 +255,15 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
                 String.valueOf(id), String.valueOf(id), "议题点子", userProp);
 
         CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey("idea");
-        if(RegType.PERSON.equals(orgType)){
-            personInfoDao.addcoinSingle(userId,coinConfigVo.getSubjoinNum() );
-        }else{
-            societyOrgInfoDao.addcoin(userId,coinConfigVo.getSubjoinNum());
+        int points = coinConfigVo.getSubjoinNum();
+        if (RegType.PERSON.equals(orgType)) {
+            personInfoDao.addcoinSingle(userId, points);
+        } else {
+            societyOrgInfoDao.addcoin(userId, points);
         }
+        //补增积分流水
+        pointsRecordService.addPointsRecord(userId, BisType.POINTS_IDEA, id, points);
+
         return new MessageResponse(0, "议题点子审核完成！");
     }
 

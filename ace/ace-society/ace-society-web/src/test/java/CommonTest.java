@@ -1,3 +1,4 @@
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
@@ -11,7 +12,8 @@ public class CommonTest {
 
     @Test
     public void test() {
-        generatorGUID(1);
+        System.out.println(DateUtil.getNow().substring(0, 10));
+//        generatorGUID(1);
     }
 
 
