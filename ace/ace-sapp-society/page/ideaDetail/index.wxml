@@ -30,7 +30,7 @@
     </view>
 
     <!--评论点赞-->
-    <view class='cmt-bar {{isComment==1?"hidden": ""}}'>
+    <view class='cmt-bar'>
           <image src='../../image/zan.png' class='cmt-addlike' bindtap='addlike' data-id="{{detail.id}}"></image>
           <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'>{{allLike}}</text>
           <image src='../../image/comment.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{detail.id}}"></image>
