@@ -8,7 +8,7 @@
                     <!--<image class='see-image' src='../../rediret.png'></image>-->
                 </view>
             </view>
-            <view class='activity'>
+            <view class='activity' bindtap='showActivityDetail' data-id='{{activity.id}}'>
                 <view class='activity-left'>
                     <image class='activity-image' src='{{activity.coverUrl}}'></image>
                     <view class='mask'></view>
