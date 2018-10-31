@@ -55,7 +55,7 @@
     width: 141rpx;
     height: 141rpx;
     right:40rpx;
-    bottom:30rpx;
+    top:30rpx;
     position:fixed;
     display:flex;
     align-items:center;
