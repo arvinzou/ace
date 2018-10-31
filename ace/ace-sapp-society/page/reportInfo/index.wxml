@@ -15,7 +15,7 @@
     <view class='body separate whiteBg'>
         <view class='content'>
 
-            <block wx:for="{{list.content}}">
+            <block wx:for="{{list.content}}" wx:key="*">
 
                 <block wx:if="{{item.type==1}}">
                     <view>{{item.content}}</view>
@@ -29,7 +29,7 @@
 
     <view class='foot whiteBg'>
         <view class='comments'>
-            <view wx:for="{{commentList}}" class='comment bottom-line'>
+            <view wx:for="{{commentList}}" wx:key="*" class='comment bottom-line'>
                 <view class='top'>
                     <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
                     <view class='right'>
