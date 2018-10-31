@@ -98,7 +98,7 @@
 .release{
     width: 90%;
     height: 90rpx;
-    background:rgba(255,153,6,1);
+    background:rgba(255,171,50,1);
     color: #FFFFFF;
     font-size: 36rpx;
     font-weight: bold;

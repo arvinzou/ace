@@ -26,7 +26,7 @@
     height: 60rpx;
     line-height: 60rpx;
     text-align: right;
-    color: #FF9906;
+    color: #ffab32;
     font-size: 26rpx;
 }
 .content-left{
@@ -68,13 +68,13 @@
     padding-left: 30rpx
 }
 .number{
-    color: #FF9906;
+    color: #ffab32;
     font-size: 46rpx;
     font-weight: bold;
     padding-left: 30rpx;
 }
 .number-title{
-    color: #FF9906;
+    color: #ffab32;
     font-size: 26rpx;
     font-weight: bold;
 }
@@ -85,7 +85,7 @@
     font-size: 26rpx;
     text-align: center;
     color: #FFFFFF;
-    background: #FF9906;
+    background: #ffab32;
     border-radius: 6rpx;
     float: right;
     padding-left: 0 !important;
@@ -97,8 +97,8 @@
     line-height: 50rpx;
     font-size: 26rpx;
     text-align: center;
-    color: #FF9906;
-    border: 1rpx solid #FF9906;
+    color: #ffab32;
+    border: 1rpx solid #ffab32;
     border-radius: 6rpx;
     float: right;
     padding-left: 0 !important;

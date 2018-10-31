@@ -317,7 +317,7 @@ page {
 
 .tagYellow {
     background: #ffebd0;
-    color: #ff9906;
+    color: #ffab32;
 }
 
 .tagYellow::before {
@@ -381,7 +381,7 @@ page {
 }
 
 .tags_cy{
-    color:rgba(255,153,6,1);
+    color:rgba(255,171,50,1);
    background:rgba(255,235,208,1);
 }
 

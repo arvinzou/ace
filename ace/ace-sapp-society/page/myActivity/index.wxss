@@ -51,9 +51,9 @@
     height: 34rpx;
     line-height: 34rpx;
     text-align: center;
-    color: #FF9906;
+    color: #ffab32;
     border-radius: 4rpx;
-    border: 1px solid #FF9906;
+    border: 1px solid #ffab32;
     font-size: 20rpx;
     font-weight: bold;
     margin-left: 27rpx;
@@ -84,7 +84,7 @@
     border-radius: 6rpx;
     color: #FFFFFF;
     font-size: 26rpx;
-    background: #FF9906;
+    background: #ffab32;
     float: right;
 }
 .report{
@@ -93,10 +93,10 @@
     line-height: 50rpx;
     text-align: center;
     border-radius: 6rpx;
-    color: #FF9906;
+    color: #ffab32;
     font-size: 26rpx;
     float: right;
-    border:1px solid rgba(255,153,6,1);
+    border:1px solid rgba(255,171,50,1);
 }
 .activity-bottom{
     margin-top: 30rpx;
@@ -131,7 +131,7 @@
 
 .navbar .item.active {
     font-size: 34rpx;
-    color: #FF9906;
+    color: #ffab32;
 }
 
 .navbar .item.active:after {
@@ -144,6 +144,6 @@
     height: 6rpx;
     width: 60rpx;
     margin: 0 auto;
-    background:#FF9906;
+    background:#ffab32;
     border-radius: 10%;
 }

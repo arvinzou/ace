@@ -81,7 +81,7 @@
 .date-active{
     border-radius: 50%;
     color: #FFFFFF;
-    background: rgba(255,153,6,1);
+    background: rgba(255,171,50,1);
 }
 .time-box{
     width: 90%;
@@ -131,11 +131,11 @@
     color:#FFFFFF;
     font-size:36rpx;
     font-weight:bold;
-    background:rgba(255,153,6,1);
+    background:rgba(255,171,50,1);
     border-radius:6rpx;
     margin:0 auto;
 }
 .time-active{
     color: #FFFFFF;
-    background:rgba(255,153,6,1); 
+    background:rgba(255,171,50,1);
 }

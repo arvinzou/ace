@@ -9,29 +9,29 @@
     margin: 30rpx auto;
     text-align: center;
     line-height: 90rpx;
-    color: #FF9906;
+    color: #ffab32;
     font-size: 30rpx;
 }
 .rank_item01{
     width: 32%;
     height: 100%;
     border-radius: 6rpx  0rpx   0rpx  6rpx;
-    border: 2px solid #FF9906;
+    border: 2px solid #ffab32;
     float: left;
 }
 .rank_item02{
     width: 32%;
     height: 100%;
     border-left: none;
-    border-top: 2px solid #FF9906;
-    border-bottom: 2px solid #FF9906;
+    border-top: 2px solid #ffab32;
+    border-bottom: 2px solid #ffab32;
     float: left;
 }
 .rank_item03{
     width: 32%;
     height: 100%;
     border-radius:0rpx 6rpx 6rpx 0rpx;
-    border:2px solid rgba(255,153,6,1);
+    border:2px solid rgba(255,171,50,1);
     float: left;
 }
 .rank_box::after{
@@ -40,7 +40,7 @@
     display: block;
 }
 .active{
-    background: #FF9906;
+    background: #ffab32;
     color: #FFFFFF;
 }
 .rank_list{
@@ -82,7 +82,7 @@
 .number{
     float: right;
     line-height: 120rpx;
-    color: #FF9906;
+    color: #ffab32;
     font-weight: bold;
     font-size: 36rpx;
 }
