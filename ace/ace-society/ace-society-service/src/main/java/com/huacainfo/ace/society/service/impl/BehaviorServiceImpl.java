@@ -19,7 +19,7 @@ import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.Behavior;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.BehaviorService;
-import com.huacainfo.ace.society.service.CoinConfigService;
+import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.vo.*;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
@@ -58,6 +58,8 @@ public class BehaviorServiceImpl implements BehaviorService {
     private PersonInfoDao personInfoDao;
     @Autowired
     private CoinConfigDao coinConfigDao;
+    @Autowired
+    private PointsRecordService pointsRecordService;
 
     private SqlSession getSqlSession() {
         SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
@@ -251,7 +253,8 @@ public class BehaviorServiceImpl implements BehaviorService {
      * @version: 2018-09-11
      */
     @Override
-    public MessageResponse audit(String id,String userId, String userType, String rst, String remark, UserProp userProp) throws Exception {
+    public MessageResponse audit(String id, String userId, String userType,
+                                 String rst, String remark, UserProp userProp) throws Exception {
         Behavior behavior = behaviorDao.selectByPrimaryKey(id);
         if (null == behavior) {
             return new MessageResponse(ResultCode.FAIL, "市民文明拍信息丢失！");
@@ -270,11 +273,14 @@ public class BehaviorServiceImpl implements BehaviorService {
         behavior.setLastModifyUserName(userProp.getName());
         behaviorDao.updateByPrimaryKeySelective(behavior);
         CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey("behavior");
-        if(RegType.PERSON.equals(userType)){
-           personInfoDao.addcoinSingle(userId,coinConfigVo.getSubjoinNum() );
-        }else{
-            societyOrgInfoDao.addcoin(userId,coinConfigVo.getSubjoinNum());
+        int points = coinConfigVo.getSubjoinNum();
+        if (RegType.PERSON.equals(userType)) {
+            personInfoDao.addcoinSingle(userId, points);
+        } else {
+            societyOrgInfoDao.addcoin(userId, points);
         }
+        //补增积分流水
+        pointsRecordService.addPointsRecord(userId, BisType.POINTS_BEHAVIOR, id, points);
 
         dataBaseLogService.log("审核市民行为详情", "市民行为详情",
                 String.valueOf(id), String.valueOf(id), "市民行为详情", userProp);

@@ -197,7 +197,55 @@ public class PointsRecordServiceImpl implements PointsRecordService {
     public ResultResponse addPointsRecord(String userId, String bisType, String bisId, int points) {
         switch (bisType) {
             case BisType.POINTS_ORDER_CONSUME:
-                points = -points;
+                points = -Math.abs(points);
+                break;
+            case BisType.POINTS_WELFARE_SPONSOR:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_WELFARE_PARTER_ADD:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_WELFARE_PARTER_SUB:
+                points = -Math.abs(points);
+                break;
+            case BisType.POINTS_ORDINARY_SPONSOR:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_ORDINARY_PARTER_ADD:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_ORDINARY_PARTER_SUB:
+                points = -Math.abs(points);
+                break;
+            case BisType.POINTS_CREATIVE_SPONSOR:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_CREATIVE_PARTER_ADD:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_CREATIVE_PARTER_SUB:
+                points = -Math.abs(points);
+                break;
+            case BisType.POINTS_PARTY_SPONSOR:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_PARTY_PARTER_ADD:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_PARTY_PARTER_SUB:
+                points = -Math.abs(points);
+                break;
+            case BisType.POINTS_BEHAVIOR:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_IDEA:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_LIVE:
+                points = Math.abs(points);
+                break;
+            case BisType.POINTS_GROUP:
+                points = Math.abs(points);
                 break;
             default:
                 break;
