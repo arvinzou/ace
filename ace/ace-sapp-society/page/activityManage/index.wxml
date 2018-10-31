@@ -11,7 +11,8 @@
                     <text wx:elif='{{item.category==2}}' class='tags_b tags_pj'>普及活动</text>
                     <text wx:elif='{{item.category==3}}' class='tags_b tags_cy'>创意活动</text>
                     <text wx:elif='{{item.category==4}}' class='tags_b tags_dj'>党建活动</text>
-                    <text class='remark'>报名审核通过后奖励爱心币X{{}}</text>
+                    <text wx:if='{{type==2}}' class='remark'>活动成功后奖励爱心币X{{item.host}}</text>
+                    <text wx:if='{{type==1}}' class='remark'>爱心币X{{item.participant}}</text>
                 </view>
             </view>
 
@@ -36,13 +37,13 @@
 
             <view wx:if='{{item.status==32&&!item.arStatus&&type==2}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>发布报道</view>
 
-            <view wx:if='{{(item.arStatus==1||item.arStatus==4)&&type==2&&item.status==32}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>报道编辑</view>
+            <view wx:if='{{(item.arStatus==1||item.arStatus==4)&&type==2&&item.status<"4"}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>报道编辑</view>
 
-            <view wx:if='{{item.arStatus==2&&type==2&&item.status==32}}' bindtap='postReport' data-id='{{item.id}}' class='status status1'>报道审核</view>
+            <view wx:if='{{item.arStatus==2&&type==2&&item.status<"4"}}' bindtap='postReport' data-id='{{item.id}}' class='status status1'>报道审核</view>
 
-            <view wx:if='{{item.arStatus==3&&type==2&&(item.status==32||item.status==32)}}' class='status status4'>报道发布成功</view>
+            <view wx:if='{{item.arStatus==3&&type==2&&item.status<"4"}}' class='status status4'>报道发布成功</view>
 
-            <view wx:if='{{item.arStatus==4&&type==2&&item.status==32}}'  class='status status5'>报道驳回</view>
+            <view wx:if='{{item.arStatus==4&&type==2&&item.status<"4"}}'  class='status status5'>报道驳回</view>
 
             <view wx:if='{{item.status==4&&type==2}}' class='status status5'>审核失败</view>
 
