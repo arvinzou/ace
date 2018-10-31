@@ -168,6 +168,11 @@ function loadView(id) {
                     value = Common.DateFormatter(value);
                 }
                 $("#dialog-message-view").find('#' + key).html(value);
+
+                if (key == 'list') {
+                    //上传附件显示
+                    renderImage(value);
+                }
             });
         },
         error: function () {
@@ -447,4 +452,53 @@ function resetDialogFileDom() {
     var html = [];
     html.push('<div id="load" class="loading"></div>');
     $("#dialog-message-file").append(html.join(''));
+}
+
+
+function renderImage(data) {
+    var html = new Array();
+    html.push('<ul class="ace-thumbnails clearfix">');
+    $.each($(data), function (i, o) {
+        //诉求人上传附件
+        if (o.type == '1') {
+            /**
+             * img - 图片，file - 文件 ，video- 视频，audio - 音频
+             */
+            switch (o.mediType) {
+                case 'img' :
+                    html.push('<li>');
+                    html.push('<a href="' + o.mediUrl + '" title="' + o.name + '" target="view_window" data-rel="colorbox" class="cboxElement">');
+                    html.push('<img height="200" width="200" class="photo" src="' + o.mediUrl + '">');
+                    html.push('</a>');
+                    html.push('</li>');
+                    break;
+                case 'file' :
+                    html.push('<li>');
+                    html.push('<a href="' + o.mediUrl + '" target="_blank">' + o.name + '</a>');
+                    html.push();
+                    html.push('</li>');
+                    break;
+                case 'video' :
+                    html.push('<li>');
+                    html.push('<a href="' + o.mediUrl + '" title="' + o.name + '" target="view_window" data-rel="colorbox" class="cboxElement">');
+                    html.push('<video  src="' + o.mediUrl + '" controls="controls"></video>');
+                    html.push('</a>');
+                    html.push('</li>');
+                    break;
+                case 'audio' :
+                    html.push('<li>');
+                    html.push('<a href="' + o.mediUrl + '" title="' + o.name + '" target="view_window" data-rel="colorbox" class="cboxElement">');
+                    html.push('<audio controls="controls">');
+                    html.push('<source src="' + o.mediUrl + '" type="audio/mp3" />');
+                    html.push('</audio>');
+                    html.push('</a>');
+                    html.push('</li>');
+                    break;
+                default :
+                    break;
+            }
+        }
+    });
+    html.push('</ul>');
+    $("#appealAddons").html(html.join(""));
 }

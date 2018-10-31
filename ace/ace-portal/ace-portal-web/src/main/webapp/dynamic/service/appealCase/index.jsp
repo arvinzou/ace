@@ -32,7 +32,6 @@
                 <form action="#" id="fm-search">
 
 
-
                     标题： <input name="title" type="text" style="width: 200px;"/>
                     <button class="btn btn-info" id="btn-search"
                             authority="${pageContext.request.contextPath}/appealCase/findAppealCaseList.do">
@@ -65,7 +64,9 @@
 
     <table id="grid-table"></table>
 
-    <div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
+    <div class="paginationbar">
+        <ul id="grid-pager" class="pagination"></ul>
+    </div>
 
 
 </div>
@@ -102,7 +103,6 @@
 <div id="dialog-message-view" class="hide">
 
 
-
     <h5 class="header-title">诉求内容</h5>
 
     <div class="row" style="padding:10px">
@@ -124,16 +124,18 @@
 
 
     <h5 class="header-title">答复内容</h5>
-
     <div class="row" style="padding:10px">
         <span id="answerContent"></span>
 
     </div>
+    <h5 class="header-title">答复时间</h5>
     <div class="row" style="padding:10px">
         <span id="answerTime"></span>
+    </div>
+    <h5 class="header-title">诉求人上传附件</h5>
+    <div id="appealAddons" class="row" style="padding:10px">
 
     </div>
-
 </div>
 
 <jsp:include page="../../common/footer-1.jsp"/>
@@ -163,9 +165,9 @@
 </script>
 <style>
     .photo {
-        height: 25px;
-        max-height: 25px;
-        max-width: 25px;
+        height: 100px;
+        max-height: 100px;
+        max-width: 100px;
         vertical-align: middle;
     }
 

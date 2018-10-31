@@ -14,8 +14,8 @@ public class MenuCreate {
 
 
     public static void main(String[] args) {
-        Menu m = jxbMenu();
-        String accessToken = "13_Dvk6gTzk2fJGhjM8ByVdGvjicwIiiErdD4fBuiqsoNRDA3SnkzHaG7HgqAhCgxCsy7i7M4lAW_-F6W0yD6VdJ4CY1qOQfuobUW7AaEwbF5NGOywMoc1ABDpncJiKOkoLT0_hgi733LhM-q30YIOfAJALVB";
+        Menu m = hcwyMenu();
+        String accessToken = "14_TSRjJVLQ_Ai2FB2bE8UfE5pyDCNk7iqBdeFRQ-Kf5Ju7fFXqIoHpozoDEAsODUPbU971JFdR-TcuKiNkEzQ796gj_zeAYkBnd1S1WQrqZ-F8kCBAqZkL0IJSj0YZESaABAOTH";
 //        String accessToken = getAccessToken("wxfdb1e4819dee7b62", "dc51907c900e5bcb9527daec79d05e61");
         System.out.println(createMenu(accessToken, m));
     }
@@ -74,7 +74,7 @@ public class MenuCreate {
     public static Menu hcwyMenu() {
         //方案产品
         Button btn1Sub_a = new Button(MenuButtonType.VIEW, "直播案例",
-                "http://zx.huacainfo.com/live/www/view/index.html?companyId=00010001");
+                "http://zx.huacainfo.com/live/www/index/index.jsp?companyId=00010001");
         Button btn1Sub_b = new Button(MenuButtonType.VIEW, "百度推广",
                 "http://m.huacainfo.com/2/65/p497112663f1446");
         Button btn1Sub_c = new Button(MenuButtonType.VIEW, "解决方案",
