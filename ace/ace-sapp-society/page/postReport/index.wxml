@@ -6,14 +6,14 @@
 
     <view class='content'>
         <view class='title bottom-line'>
-            <textarea id='title' bindblur='getTitle' maxlength='35' value='{{title}}' placeholder="标题" auto-height placeholder-style="font-size:36rpx;font-weight:bold;color:#666;"></textarea>
+            <textarea id='title' bindblur='getTitle' maxlength='35' value='{{title}}'  show-confirm-bar='' placeholder="标题" auto-height placeholder-style="font-size:36rpx;font-weight:bold;color:#666;"></textarea>
         </view>
         <view class='editor-content'>
             <view class='editor'>
                 <view bindtap='{{item.editing!=true?"showTool":""}}' wx:for="{{content}}" data-type='{{item.type}}' wx:for-item="item" id='{{item.id}}' class='ele-content {{clickObject==item.id?"ele-action":""}}'>
                     <block wx:if="{{item.type==1}}">
                         <view class='textStyle' wx-if="{{!item.editing}}">{{item.content}}</view>
-                        <textarea class='textStyle' wx-if="{{item.editing}}" bindblur="endEdit" value='{{item.content}}' adjust-position auto-focus auto-height></textarea>
+                        <textarea class='textStyle' wx-if="{{item.editing}}"  show-confirm-bar='' bindblur="endEdit" value='{{item.content}}' adjust-position auto-focus auto-height></textarea>
                     </block>
                     <block wx:else>
                         <image lazy-load="true" mode="widthFix" src='{{item.content}}' />
