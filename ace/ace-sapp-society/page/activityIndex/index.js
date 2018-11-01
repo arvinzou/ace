@@ -26,6 +26,13 @@ Page({
                 type: 'cy'
             }
         ],
+        vdata: {},
+        loadingModalHide: false
+    },
+
+    store:{
+        nowType: 'dj',
+        limit: 10,
         lists: {
             jx: {
                 list: [],
@@ -72,10 +79,6 @@ Page({
                 Loadingstatus: false,
             },
         },
-        vdata: {},
-        nowType: 'dj',
-        limit: 10,
-        loadingModalHide: false
     },
 
     onLoad: function() {
@@ -91,12 +94,12 @@ Page({
 
     setVdata: function() {
         let that = this;
-        let temp = that.data.lists[that.data.nowType];
+        let temp = that.store.lists[that.store.nowType];
         that.data.vdata = temp;
     },
     getVdata: function() {
         let that = this;
-        that.data.lists[that.data.nowType] = that.data.vdata;
+        that.store.lists[that.store.nowType] = that.data.vdata;
     },
 
     initdata: function() {
@@ -109,7 +112,7 @@ Page({
         util.request(cfg.publicActivityReports, {
                 category: temp.category,
                 start: temp.start,
-                limit: that.data.limit,
+            limit: that.store.limit,
             },
             function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
@@ -137,7 +140,7 @@ Page({
         temp.Loadingstatus = false;
         if (data) {
             temp.list = temp.list.concat(data);
-            if (data.length < that.data.limit) {
+            if (data.length < that.store.limit) {
                 temp.LoadOver = true;
             }
         }
@@ -162,7 +165,7 @@ Page({
         var that = this;
         console.log('-------------上拉加载-------------');
         let temp = that.data.vdata;
-        temp.start += that.data.limit;
+        temp.start += that.store.limit;
         that.initdata();
     },
 
@@ -178,7 +181,7 @@ Page({
             item.active = '';
             if (index === targetChannelIndex) {
                 item.active = 'navbar-item-active';
-                that.data.nowType = item.type;
+                that.store.nowType = item.type;
             }
         });
         that.setData({

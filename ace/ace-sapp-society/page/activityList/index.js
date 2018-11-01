@@ -3,14 +3,16 @@ var cfg = require("../../config.js");
 Page({
     data: {
         list:[],
-        category: '',
-        start:0,
-        limit:10,
         LoadOver:false,
         Loadingstatus:false,
         nowDate: util.formatTime(new Date(), 'Y-M-D h:m:s'),
         showBtn:false,
         hiddenBtn: true,
+    },
+    store:{
+        category: '',
+        start: 0,
+        limit: 10,
     },
     onLoad: function(options) {
         let that = this;
@@ -21,7 +23,7 @@ Page({
             wx.navigateBack({})
             return;
         }
-        that.data.category = category;
+        that.store.category = category;
         that.setBarTitleText(category);
         that.initdata();
     },
@@ -34,7 +36,7 @@ Page({
                 function (rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
-                        if (rst.data.societyOrg.orgType == 2) {
+                        if (rst.data.societyOrg&&rst.data.societyOrg.orgType == 2) {
                             that.setData({
                                 hiddenBtn: false,
                             });
@@ -44,7 +46,7 @@ Page({
                 }
             );
         }
-        if (sysUserInfo.societyOrg.orgType == 2) {
+        if (sysUserInfo.societyOrg &&sysUserInfo.societyOrg.orgType == 2) {
             that.setData({
                 hiddenBtn: false,
             });
@@ -78,23 +80,22 @@ Page({
         }
         that.showLoading();
         util.request(cfg.findActivitys, {
-                category: that.data.category,
-                start: that.data.start,
-                limit: that.data.limit
+            category: that.store.category,
+            start: that.store.start,
+            limit: that.store.limit
             },
             function(data) {
                 console.log(data.data);
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
+                if (data.data.length < that.store.limit) {
+                    that.data.LoadOver=true;
+                }
                 that.setData({
                     list: that.data.list.concat(data.data),
                     Loadingstatus: false,
+                    LoadOver: that.data.LoadOver,
                 });
-                if (data.data.length < that.data.limit) {
-                    that.setData({
-                        LoadOver: true,
-                    });
-                }
             }
         );
     },
@@ -110,13 +111,13 @@ Page({
     onReachBottom: function () {
         var that = this;
         console.log('-------------上拉加载-------------');
-        that.data.start += that.data.limit;
+        that.store.start += that.store.limit;
         that.initdata();
     },
     // 清空状态
     clearStatus: function () {
         let that = this;
-        that.data.start = 0;
+        that.store.start = 0;
         that.setData({
             LoadOver: false,
             list: [],
@@ -156,13 +157,15 @@ Page({
 
     createActivity: function () {
         let that =this; 
-        let category = that.data.category;
+        let category = that.store.category;
         wx.navigateTo({ url: '../activityApply/index?category=' + category })
     },
     
 
     onPageScroll: function (e) {
-
+        if (this.data.hiddenBtn){
+            return;
+        }
         if (e.scrollTop <= 0) {
             // 滚动到最顶部
             e.scrollTop = 0;
