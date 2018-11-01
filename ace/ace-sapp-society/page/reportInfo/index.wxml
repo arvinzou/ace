@@ -2,7 +2,7 @@
     <view class='head whiteBg'>
         <view class='title'>{{list.title}}</view>
         <view class='info'>
-            <image mode='aspectFill' src='{{list.headimgurl}}'></image>
+            <image lazy-load="true" mode='aspectFill' src='{{list.headimgurl}}'></image>
             <text class='name'>{{list.createUserName}}</text>
             <text class='dateTime'>{{list.lastModifyDate}}</text>
             <text wx:if="{{list.category==1}}" class='type typeTag tagGreen'>公益活动</text>
@@ -21,7 +21,7 @@
                     <view>{{item.content}}</view>
                 </block>
                 <block wx:else>
-                    <image mode="widthFix" src='{{item.content}}' />
+                    <image lazy-load="true" mode="widthFix" src='{{item.content}}' />
                 </block>
             </block>
         </view>
@@ -30,7 +30,7 @@
     <view wx:for="{{commentList}}" wx:key="*" class='comments whiteBg'>
         <view class='comment bottom-line'>
             <view class='top'>
-                <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
+                <image lazy-load="true" mode='aspectFill' src='{{item.avatarUrl}}'></image>
                 <view class='right'>
                     <view class='name'>{{item.nickName}}</view>
                     <view class='time'>{{item.createDate}}</view>

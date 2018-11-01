@@ -5,7 +5,7 @@
     </view>
     <view class='persons bottom-line' wx:for='{{list}}'>
         <view class='headImg'>
-        <image mode='aspectFill' src='{{item.headimgurl}}'></image>
+        <image lazy-load="true" mode='aspectFill' src='{{item.headimgurl}}'></image>
         </view>
         <text class='name'>{{item.name}}</text>
         <text bindtap="callphone" data-mobile='{{item.mobile}}' class='tel'>{{filter.phoneNumSecret(item.mobile)}}<text class="iconfont icon-dianhua"></text></text>

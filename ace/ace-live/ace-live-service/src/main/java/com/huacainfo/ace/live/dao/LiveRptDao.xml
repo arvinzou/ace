@@ -44,7 +44,9 @@
         q.statement,q.createDate auditDate
         from live_rpt t
         left join live c on t.rid=c.id
-        left join portal.userinfo a on t.uid=a.openid
+        left join (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+        select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+        where n.unionId not in(select unionid from portal.userinfo)) a on t.uid=a.openid
         left join live_img b on t.id=b.rptId
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id
@@ -86,7 +88,9 @@
     <sql id="whereCondition">
         from live_rpt t
         left join live c on t.rid=c.id
-        left join portal.userinfo a on t.uid=a.openid
+        left join (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+        select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+        where n.unionId not in(select unionid from portal.userinfo)) a on t.uid=a.openid
         left join live_img b on t.id=b.rptId
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id
@@ -180,7 +184,9 @@
             rpt.rid
         FROM
             live.live_rpt rpt
-        LEFT JOIN portal.userinfo u ON rpt.uid = u.openid
+        LEFT JOIN (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+        select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+        where n.unionId not in(select unionid from portal.userinfo)) u ON rpt.uid = u.openid
         WHERE
             rpt.rid = #{rid,jdbcType=VARCHAR}
         and rpt.id = #{id,jdbcType=VARCHAR}

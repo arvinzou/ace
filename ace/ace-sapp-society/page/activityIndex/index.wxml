@@ -22,7 +22,7 @@
                 </view>
             </view>
             <view class='right'>
-                <image mode='aspectFill' src='{{item.coverUrl}}'></image>
+                <image lazy-load="true" mode='aspectFill' src='{{item.coverUrl}}'></image>
             </view>
         </view>
         <view class="loading" hidden="{{!vdata.Loadingstatus}}">正在载入更多...</view>

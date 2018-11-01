@@ -1,6 +1,6 @@
 <view class='index'>
     <view class='cover' bindtap='addImage' data-cover='cover'>
-        <image mode='aspectFill' hidden='{{!coverUrl}}' src='{{coverUrl}}'></image>
+        <image lazy-load="true" mode='aspectFill' hidden='{{!coverUrl}}' src='{{coverUrl}}'></image>
         <text hidden='{{coverUrl}}'>添加活动封面</text>
     </view>
 
@@ -16,7 +16,7 @@
                         <textarea class='textStyle' wx-if="{{item.editing}}" bindblur="endEdit" value='{{item.content}}' adjust-position auto-focus auto-height></textarea>
                     </block>
                     <block wx:else>
-                        <image mode="widthFix" src='{{item.content}}' />
+                        <image lazy-load="true" mode="widthFix" src='{{item.content}}' />
                     </block>
                 </view>
                 <view bindtap='showTool' data-type='3' id='ele' class='add'>＋添加内容</view>

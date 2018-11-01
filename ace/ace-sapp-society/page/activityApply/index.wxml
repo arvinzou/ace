@@ -9,7 +9,7 @@
             <view class='partOne {{stepNum==1?"":"hidden"}}'>
                 <view class='prompt'>活动主办成功，活动发起者可获得{{host}}爱心币</view>
                 <view bindtap='addCover' class='cover separate'>
-                    <image mode='aspectFill' hidden='{{!form.coverUrl}}' src='{{form.coverUrl}}'></image>
+                    <image lazy-load="true" mode='aspectFill' hidden='{{!form.coverUrl}}' src='{{form.coverUrl}}'></image>
                     <text hidden='{{form.coverUrl}}'>添加活动封面</text>
                 </view>
                 <view class='form-part'>
@@ -127,7 +127,7 @@
             <view class='reuslt {{stepNum==3?"":"hidden"}}'>
                 <view class='massage'>
                     <view class='image'>
-                        <image mode='widthFix' src='../../image/icon_success.png'></image>
+                        <image lazy-load="true" mode='widthFix' src='../../image/icon_success.png'></image>
                     </view>
                     <text class='fontStyle1'>发布成功</text>
                     <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>

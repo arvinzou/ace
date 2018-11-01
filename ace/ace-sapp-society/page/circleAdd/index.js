@@ -72,7 +72,7 @@ Page({
     data.circle.uid = that.data.userinfo.unionId;
     data.circle.mediaContent = that.data.mediUrl;
     data.circle.content = e.detail.value.docText;
-    data.circle.corpId="001001";
+    data.circle.corpId="00012";
 
     var files = that.data.files;
     for (var i = 0; i < files.length; i++) {

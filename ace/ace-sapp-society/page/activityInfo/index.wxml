@@ -1,12 +1,12 @@
 <view class='index'>
     <view class="head_card">
         <view class='imgage'>
-            <image src='{{activityInfo.coverUrl}}'></image>
+            <image lazy-load="true" src='{{activityInfo.coverUrl}}'></image>
         </view>
         <view class='base_info'>
             <text>{{activityInfo.title}}</text>
             <view class='organizer'>
-                <image class='headimage' src='{{activityInfo.headimgurl}}'></image>
+                <image lazy-load="true" class='headimage' src='{{activityInfo.headimgurl}}'></image>
                 <text>{{activityInfo.orgName}}</text>
                 <text class='remark'>活动组织方</text>
             </view>
@@ -52,7 +52,7 @@
         <view class='list' bindtap="viewParticipants" data-id='{{activityInfo.id}}'>
             <view class='headImage_list'>
                 <block wx:for="{{activityInfo.activityDetailVoList}}">
-                   <image wx:if='{{index<8}}' class='headimage' src='{{item.headimgurl}}'></image>
+                   <image lazy-load="true" wx:if='{{index<8}}' class='headimage' src='{{item.headimgurl}}'></image>
                 </block>
             </view>
             <view hidden='{{activityInfo.activityDetailVoList.length<8}}' class='ellipsis'></view>
