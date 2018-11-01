@@ -136,6 +136,8 @@
                 {@/if}
 
             </td>
+
+
             <td>
                 <div class="row"><strong>\${item.liveName}</strong></div>
                 <div class="row describtion">\${item.content}</div>
