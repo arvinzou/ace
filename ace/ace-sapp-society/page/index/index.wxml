@@ -2,12 +2,17 @@
     <view class='container'>
         <view class='box'>
             <view class='activity-menu'>
-                <view class='menu-left'><text>火力全开</text></view>
+                <view class='menu-left'>
+                    <image class='hot' src='../../image/hot.png' style='margin-top:30rpx'></image>
+                </view>
                 <view class='menu-right' bindtap='showMoreActivity'>
+                    <block wx-if='{{activity.id !="" && activity.id != undefined && activity.id != null}}'>
                     <text class='see-text'>查看更多</text>
+                    </block>
                     <!--<image class='see-image' src='../../rediret.png'></image>-->
                 </view>
             </view>
+            <block wx-if='{{activity.id !="" && activity.id != undefined && activity.id != null}}'>
             <view class='activity' bindtap='showActivityDetail' data-id='{{activity.id}}'>
                 <view class='activity-left'>
                     <image class='activity-image' src='{{activity.coverUrl}}'></image>
@@ -29,12 +34,14 @@
                 </view>
                 <view class='activity-right'>
                     <view class='activity-title'>
-                        <text class='stage'>第一期</text>
+                        <block wx-if='{{activity.category == "4"}}'>
+                            <text class='stage'>第{{activity.clazz}}期</text>
+                        </block>
                         <text class=''>{{activity.title}}</text>
                     </view>
                     <view class='applytime'><text>报名截止：{{activity.dendline}}</text></view>
                     <view class='activity-footer'>
-                        <view class='sign-number'><text>已报名:{{activity.parterNum}}</text></view>
+                        <view class='sign-number'><text>已报名:{{activity.activityDetailVoList.length >0? activity.activityDetailVoList.length: 0}}</text></view>
                         <view class='activity-state'><image src='../../image/icon_having.png'></image></view>
                     </view>
                 </view>
@@ -53,6 +60,7 @@
                     </block>
                 </view>
             </view>
+            </block>
         </view>
     </view>
     <view class='container'>
