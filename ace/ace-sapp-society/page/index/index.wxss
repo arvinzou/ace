@@ -13,6 +13,7 @@
     width: 90%;
     height: auto;
     margin: 0 auto;
+    padding-top: 30rpx;
 }
 .activity-menu{
     width: 100%;
@@ -53,12 +54,6 @@
     height: 22rpx;
 }
 
-.box{
-    width: 90%;
-    height: 362rpx;
-    padding-top: 30rpx;
-    margin: 0 auto;
-}
 .index-menu{
     width: 100%;
     height: 151rpx;
@@ -341,4 +336,8 @@
     content: '';
     clear: both;
     display: block;
+}
+.hot{
+    width: 182rpx;
+    height: 50rpx;
 }

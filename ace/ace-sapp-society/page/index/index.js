@@ -34,7 +34,7 @@ Page({
                  console.log(ret);
                   if(ret.data[0]){
                       //剩余报名天数
-                      ret.data[0].leastDays = that.diy_time(new Date(), ret.data[0].dendline);
+                      ret.data[0].leastDays = that.diy_time(util.formatTime(new Date(), 'Y-M-D h:m:s'), ret.data[0].dendline);
                       console.log("剩余报名天数==========================" + ret.data[0].leastDays);
                       ret.data[0].dendline = ret.data[0].dendline.substring(0,16);
                       that.setData({ activity: ret.data[0] });
@@ -53,7 +53,7 @@ Page({
   },
   diy_time: function(startTime, endTime){
       var that = this;
-      var date3 = new Date(endTime).getTime() - startTime.getTime();   //时间差的毫秒数      
+      var date3 = util.formatTime(new Date(endTime), 'Y-M-D h:m:s').getTime() - startTime.getTime();   //时间差的毫秒数      
       //计算出相差天数
       var days = Math.floor(date3 / (24 * 3600 * 1000))
       //计算出小时数
