@@ -3,7 +3,8 @@ var _colModel = function() {
 	return [
 			{
 				name : 'noticeId',
-				width : 100
+				width : 100,
+				hidden:true
 			},
 			{
 				name : 'title',
@@ -46,7 +47,7 @@ var _colModel = function() {
 				editable : false
 			} , {
                         name : 'opt',
-                        width : 5,
+                        width : 50,
                         renderer : function(value, cur) {
                             var rowid=$.jgrid.getAccessor(cur, cfg.dataId);
                             var opt=[];

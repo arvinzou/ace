@@ -36,7 +36,7 @@ function reloadGrid(){
 }
 
 function edit(rowid){
-    console.log(rowid);
+   location.href="edit/index.jsp?id="+urlParams.id+"&did="+rowid;
 }
 var show=false;
 function del(rowid){
