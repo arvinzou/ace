@@ -126,11 +126,13 @@
                 <div class="my-gallery" style="float:left;padding:5px"><img src="\${img.url}" class="cover"/></div>
 
                 {@/each}
-                {@if item.mediaContent.indexOf('.mp3')!=-1}
-                <div class="row"><audio src="\${item.mediaContent}" controls ></audio></div>
-                {@/if}
-                {@if item.mediaContent.indexOf('.mp4')!=-1}
-                <div class="row"><video src="\${item.mediaContent}" controls style="width:160px;height:90px"></video></div>
+                {@if item.mediaContent}
+                    {@if item.mediaContent.indexOf('.mp3')!=-1}
+                    <div class="row"><audio src="\${item.mediaContent}" controls ></audio></div>
+                    {@/if}
+                    {@if item.mediaContent.indexOf('.mp4')!=-1}
+                    <div class="row"><video src="\${item.mediaContent}" controls style="width:160px;height:90px"></video></div>
+                    {@/if}
                 {@/if}
 
             </td>
