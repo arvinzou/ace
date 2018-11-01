@@ -506,9 +506,11 @@ public class ActivityServiceImpl implements ActivityService {
                 pCoin1=0;
             }
             addOrgPointsRecord(activity.getCategory(),oCoin,activity.getInitiatorId(),activity.getId());
-            addPeoplePointsRecord(activity.getCategory(),pCoin1,activity.getInitiatorId(),activity.getId());
             societyOrgInfoDao.addcoin(activity.getInitiatorId(),oCoin);
             personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin1);
+            for(Object item:list){
+                addPeoplePointsRecord(activity.getCategory(),pCoin1,(String)item,activity.getId());
+            }
         }
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
