@@ -68,7 +68,7 @@
   </update>
   <sql id="whereCondition">
     from appeal t inner join users a on a.user_id=t.createUserId
-    left join userinfo b on t.openId=b.openid
+    left join userinfo b on t.openId=b.unionid
     where a.department_id=#{condition.corpId}
     <if test='condition.name!=null and condition.name!=""'>
       and t.name like

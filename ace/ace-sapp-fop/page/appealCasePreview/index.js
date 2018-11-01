@@ -45,10 +45,11 @@ Page({
   },
   previewImage: function (e) {
     console.log(e);
-    var that = this;
+    var urls=[];
+    urls.push(e.target.dataset.url);
     wx.previewImage({
-      current: '', // 当前显示图片的http链接
-      urls: [e.currentTarget.dataset.url] // 需要预览的图片http链接列表
+      current: e.target.dataset.url, 
+      urls: urls
     })
   },
   previewFile: function (e) {

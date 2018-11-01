@@ -80,7 +80,7 @@ Page({
   },
   initData: function () {
     var that = this;
-    util.request(cfg.getList, { submitOpenId: that.data.userinfo.unionId },
+    util.request(cfg.getList, { submitOpenId: that.data.userinfo.openId },
       function (data) {
         wx.stopPullDownRefresh();
         that.setData({
@@ -92,7 +92,7 @@ Page({
         }
       }
     );
-    util.request(cfg.getList, { answerOpenId: that.data.userinfo.unionId },
+    util.request(cfg.getList, { answerOpenId: that.data.userinfo.openId },
       function (data) {
         wx.stopPullDownRefresh();
         that.setData({
@@ -119,5 +119,11 @@ Page({
         currentTab: e.target.dataset.idx
       })
     }
+  },
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: [e.currentTarget.id] // 需要预览的图片http链接列表
+    })
   }
 })

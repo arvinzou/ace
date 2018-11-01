@@ -18,7 +18,7 @@
 			<div class="portlet-body">
 
 				<div class="row custom-toolbar">
-					<div class="col-md-4">
+					<div class="col-md-3">
 
 						
 
@@ -53,7 +53,17 @@
 									</button>
 								</span>
 							</div>
+
+
 						</form>
+					</div>
+
+					<div class="col-md-1 toolbar">
+
+
+
+
+
 					</div>
 
 				</div>
@@ -77,5 +87,12 @@
 		<script src="${pageContext.request.contextPath}/content/service/queueCmccHis/controller.js?version=${cfg.version}"></script>
 		<script src="${pageContext.request.contextPath}/content/service/queueCmccHis/view.js?version=${cfg.version}"></script>
 		<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+
+
+		<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+		<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+		<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+		<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
+		<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 	</body>
 </html>
