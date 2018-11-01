@@ -8,7 +8,7 @@
         </scroll-view>
     </view>
     <scroll-view  bindscroll='recordY' scroll-top='{{vdata.scroll}}' scroll-y class='activity-list'>
-        <view wx:for='{{vdata.list}}' class='list-style-1 list-style' bindtap='viewInfo' data-title='{{item.title}}' data-id='{{item.id}}'>
+        <view wx:key="*" wx:for='{{vdata.list}}' class='list-style-1 list-style' bindtap='viewInfo' data-title='{{item.title}}' data-id='{{item.id}}'>
             <view class='left'>
                 <view class='title'>{{item.title}}</view>
                 <view class='detail'>
