@@ -276,7 +276,7 @@ jQuery(function($) {
      initMenu();
 });
 function autoWidth(){
-    if(cfg){
+    try{
         $(cfg.grid_selector).jqGrid('setGridWidth',$(".page-content").width());
-    }
+    }catch(e){}
 }
