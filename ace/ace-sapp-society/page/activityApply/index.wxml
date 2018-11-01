@@ -96,7 +96,7 @@
                             <text>*</text>
                         </view>
                         <view>
-                            <textarea name='purpose' bindinput='checkFontNum' data-name="purposeNum" value='{{form.purpose}}' maxlength='400' />
+                            <textarea  show-confirm-bar='' name='purpose' bindinput='checkFontNum' data-name="purposeNum" value='{{form.purpose}}' maxlength='400' />
                         </view>
                         <view class="textLen {{purposeNum>300?'point':''}}">{{purposeNum}}</view>
                     </view>
@@ -108,7 +108,7 @@
                             <text>*</text>
                         </view>
                         <view>
-                            <textarea bindinput='checkFontNum' data-name="modeNum" name='mode' value='{{form.mode}}' maxlength='400' />
+                            <textarea  show-confirm-bar='' bindinput='checkFontNum' data-name="modeNum" name='mode' value='{{form.mode}}' maxlength='400' />
                         </view>
                         <view class='textLen {{modeNum>300?"point":""}}'>{{modeNum}}</view>
                     </view>
