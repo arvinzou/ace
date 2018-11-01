@@ -43,7 +43,7 @@ function t_query() {
 /*社会组织信息加载表格数据*/
 function getPageList() {
     var url = contextPath + "/societyOrgInfo/findSocietyOrgInfoList";
-    params['name'] = $("input[name=keyword]").val();
+    params['orgName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
