@@ -1,21 +1,71 @@
 <view class='index'>
   <view class='table'>
     <view class="tr bg-w">
-         <view class="th" style='width:35%'>类型</view>
-         <view class="th" style='width:35%'>时间</view>
-         <view class="th" style='width:15%'>角色</view>
+         <view class="th" style='width:40%'>类型</view>
+         <view class="th" style='width:45%'>时间</view>
          <view class="th" style='width:15%'>爱心币</view>
     </view>
     <block wx:for='{{detailInfo}}'>
     <view class='tr bg-g'>
-        <view class="td" style='width:35%'>{{item.bisId}}</view>
+        <view class="td" style='width:35%'>
+            <block wx:if='{{item.bisType == "ORDER-CONSUME"}}'>
+                订单消费
+            </block>
+            <block wx:elif='{{item.bisType == "WELFARE-SPONSOR"}}'>
+                公益活动 - 发起者
+            </block>
+            <block wx:elif='{{item.bisType == "WELFARE-PARTER-ADD"}}'>
+                公益活动 - 参与者 - 加
+            </block>
+            <block wx:elif='{{item.bisType == "WELFARE-PARTER-SUB"}}'>
+                公益活动 - 参与者 - 减
+            </block>
+            <block wx:elif='{{item.bisType == "ORDINARY-SPONSOR"}}'>
+                普及活动 - 发起者
+            </block>
+            <block wx:elif='{{item.bisType == "ORDINARY-PARTER-ADD"}}'>
+                普及活动 - 参与者 - 加
+            </block>
+            <block wx:elif='{{item.bisType == "ORDINARY-PARTER-SUB"}}'>
+                普及活动 - 参与者 - 减
+            </block>
+            <block wx:elif='{{item.bisType == "CREATIVE-SPONSOR"}}'>
+                创意活动 - 发起者
+            </block>
+            <block wx:elif='{{item.bisType == "CREATIVE-PARTER-ADD"}}'>
+                创意活动 - 参与者 - 加
+            </block>
+            <block wx:elif='{{item.bisType == "CREATIVE-PARTER-SUB"}}'>
+                创意活动 - 参与者 - 减
+            </block>
+            <block wx:elif='{{item.bisType == "PARTY-SPONSOR"}}'>
+                党建活动 - 发起者
+            </block>
+            <block wx:elif='{{item.bisType == "PARTY-PARTER-ADD"}}'>
+                党建活动 - 参与者 - 加
+            </block>
+            <block wx:elif='{{item.bisType == "PARTY-PARTER-SUB"}}'>
+                党建活动 - 参与者 - 减
+            </block>
+            <block wx:elif='{{item.bisType == "BEHAVIOR-ISSUE"}}'>
+                随手拍 - 发行
+            </block>
+            <block wx:elif='{{item.bisType == "IDEA-ISSUE"}}'>
+                我有点子 - 发行
+            </block>
+            <block wx:elif='{{item.bisType == "LIVE-ISSUE"}}'>
+                直播 - 发行
+            </block>
+             <block wx:elif='{{item.bisType == "GROUP-ISSUE"}}'>
+                邻里圈子 - 发行
+            </block>
+        </view>
         <view class="td" style='width:35%'>{{item.createDate}} </view>
-        <view class="td" style='width:15%'>发布者</view>
         <block wx:if='{{item.bisType == "ADD"}}'>
         <view class="td increase" style='width:15%'>+{{item.points}}</view>
         </block>
         <block wx:else>
-        <view class="td reduce" style='width:15%'>-{{item.points}}</view>
+        <view class="td reduce" style='width:15%'>{{item.points}}</view>
         </block>
     </view>
     </block>

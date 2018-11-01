@@ -56,7 +56,6 @@
 .order-title{
     color: #222222;
     font-size: 30rpx;
-    height: 71rpx;
     line-height: 42rpx;
     padding-left: 30rpx;
 }
