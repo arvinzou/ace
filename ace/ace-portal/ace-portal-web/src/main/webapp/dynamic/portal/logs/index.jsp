@@ -20,7 +20,7 @@ pageEncoding="utf-8"%>
 	<div class="portlet-body">
 
 		<div class="row custom-toolbar">
-			<div class="col-md-4">
+			<div class="col-md-3">
 
 
 
@@ -63,6 +63,13 @@ pageEncoding="utf-8"%>
 					</div>
 				</form>
 			</div>
+			<div class="col-md-1 toolbar">
+
+
+
+
+
+			</div>
 
 		</div>
 
@@ -90,8 +97,10 @@ pageEncoding="utf-8"%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
 
-<style>
-
-</style>
+<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 </body>
 </html>
