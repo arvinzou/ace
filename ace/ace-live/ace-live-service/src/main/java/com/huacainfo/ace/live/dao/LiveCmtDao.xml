@@ -42,7 +42,9 @@
     </update>
 
     <sql id="whereCondition">
-        from live_cmt t left join portal.userinfo a on t.uid=a.unionid
+        from live_cmt t left join (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+        select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+        where n.unionId not in(select unionid from portal.userinfo)) a on t.uid=a.unionid
 
         left join live_rpt b on b.id=t.rptId
 
