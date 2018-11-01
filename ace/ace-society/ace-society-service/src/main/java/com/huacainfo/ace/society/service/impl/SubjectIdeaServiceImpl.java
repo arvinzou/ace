@@ -14,6 +14,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.constant.CoinConfigType;
 import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.SubjectIdea;
@@ -254,7 +255,7 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         dataBaseLogService.log("审核议题点子", "议题点子",
                 String.valueOf(id), String.valueOf(id), "议题点子", userProp);
 
-        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey("idea");
+        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(CoinConfigType.IDEA);
         int points = coinConfigVo.getSubjoinNum();
         if (RegType.PERSON.equals(orgType)) {
             personInfoDao.addcoinSingle(userId, points);

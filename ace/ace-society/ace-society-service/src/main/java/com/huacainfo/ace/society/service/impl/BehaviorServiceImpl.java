@@ -14,6 +14,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.constant.CoinConfigType;
 import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.Behavior;
@@ -272,7 +273,7 @@ public class BehaviorServiceImpl implements BehaviorService {
         behavior.setLastModifyUserId(userProp.getUserId());
         behavior.setLastModifyUserName(userProp.getName());
         behaviorDao.updateByPrimaryKeySelective(behavior);
-        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey("behavior");
+        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(CoinConfigType.TAKE_A_PHOTO);
         int points = coinConfigVo.getSubjoinNum();
         if (RegType.PERSON.equals(userType)) {
             personInfoDao.addcoinSingle(userId, points);
