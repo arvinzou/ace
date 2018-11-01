@@ -4,7 +4,7 @@
         <view class='userInfo' style="background-image: url(\"data:image/svg+xml,%3Csvg class='wave-container' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 24 150 28' preserveAspectRatio='none'%3E %3Cdefs%3E %3Cpath id='gentle-wave' d='M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z'%3E%3C/path%3E %3C/defs%3E %3Cg class='parallax'%3E %3Cuse xlink:href='%23gentle-wave' x='{{num1}}' y='2' fill='rgba(255,255,255,.2)'%3E%3C/use%3E %3Cuse xlink:href='%23gentle-wave' x='{{num2}}' y='5' fill='rgba(255,255,255,.2)'%3E%3C/use%3E %3Cuse xlink:href='%23gentle-wave' x='{{num3}}' y='8' fill='rgba(255,255,255,.2)'%3E%3C/use%3E %3C/g%3E %3C/svg%3E\")">
             <view class='top'>
                 <view class='headImage'>
-                    <image mode='aspectFill' src='{{ userinfoData.avatarUrl }}'></image>
+                    <image lazy-load="true" mode='aspectFill' src='{{ userinfoData.avatarUrl }}'></image>
                 </view>
 
                 <view class='textInfo'>
@@ -35,27 +35,27 @@
     <view class='activity-menu'>
         <view class='activity-menu-list'>
             <!-- <navigator hidden="{{partyHide}}" class='activity-menu-item'>
-                <view><image src='../../image/icon_me_party.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_me_party.png'></image></view>
                 <view><text>智慧党建</text></view>
             </navigator> -->
             <navigator hidden="{{activityHide}}" url='../activityManage/index' class='activity-menu-item'>
-                <view><image src='../../image/icon_me_activity.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_me_activity.png'></image></view>
                 <view><text>我的活动</text></view>
             </navigator>
             <navigator class='activity-menu-item' url='../myLive/index'>
-                <view><image src='../../image/icon_me_live.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_me_live.png'></image></view>
                 <view><text>秀我直播</text></view>
             </navigator>
             <navigator class='activity-menu-item' url='../myCircle/index'>
-                <view><image src='../../image/icon_me_circle.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_me_circle.png'></image></view>
                 <view><text>邻里圈子</text></view>
             </navigator>
             <navigator class='activity-menu-item' url='../myBehavior/index?userId={{userId}}'>
-                <view><image src='../../image/icon_me_behavior.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_me_behavior.png'></image></view>
                 <view><text>文明随手拍</text></view>
             </navigator>
             <navigator class='activity-menu-item' url='../myIdea/index?userId={{userId}}'>
-                <view><image src='../../image/icon_me_idea.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_me_idea.png'></image></view>
                 <view><text>我有点子</text></view>
             </navigator>
         </view>
@@ -63,19 +63,19 @@
 
     <view class='menu-list'>
         <view class='menu-item' bindtap='loveRanking'>
-            <image src='../../image/icon_rank.png' class='menu-icon'></image>
+            <image lazy-load="true" src='../../image/icon_rank.png' class='menu-icon'></image>
             <text class='menu-title'>爱心币排行</text>
-            <image class='menu-rediret' src='../../image/rediret.png'></image>
+            <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
         <view class='menu-item' bindtap='historyOrder'>
-            <image src='../../image/icon_order.png' class='menu-icon'></image>
+            <image lazy-load="true" src='../../image/icon_order.png' class='menu-icon'></image>
             <text class='menu-title'>商城订单</text>
-            <image class='menu-rediret' src='../../image/rediret.png'></image>
+            <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
         <navigator class='menu-item' url='../aboutus/index'>
-            <image src='../../image/icon_aboutus.png' class='menu-icon'></image>
+            <image lazy-load="true" src='../../image/icon_aboutus.png' class='menu-icon'></image>
             <text class='menu-title'>关于我们</text>
-            <image class='menu-rediret' src='../../image/rediret.png'></image>
+            <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </navigator>
     </view>
 </view>

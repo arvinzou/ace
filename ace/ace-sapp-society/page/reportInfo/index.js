@@ -157,7 +157,7 @@ Page({
             function (rst) {
                 if (rst.status == 0) {
                     that.setData({
-                        likeNum: that.data.likeNum + num,
+                        likeNum: that.data.likeNum,
                         like: iLike,
                     });
                     return;

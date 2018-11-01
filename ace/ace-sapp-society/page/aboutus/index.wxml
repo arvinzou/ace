@@ -1,6 +1,6 @@
 <view class='index'>
     <view class='banner'>
-        <image src='../../image/about_banner.png'></image>
+        <image lazy-load="true" src='../../image/about_banner.png'></image>
     </view>
     <view class='content'>
         <view class='title'><text>芙蓉街道介绍</text></view>
@@ -26,7 +26,7 @@
     <button bindtap='map'>定位</button>
 
     <view class='code'>
-        <image src='../../image/weixin-code.png'></image>
+        <image lazy-load="true" src='../../image/weixin-code.png'></image>
     </view>
     <view class='contact'>
         <view>联系电话：0736-7111361</view>

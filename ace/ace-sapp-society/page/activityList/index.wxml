@@ -2,7 +2,7 @@
     <view class='singleActivity' wx:for="{{list}}">
         <view class='content {{item.endSignImgUrl?"opacity":""}}' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
             <view class='cover'>
-                <image mode='widthFix' src='{{item.coverUrl}}'></image>
+                <image lazy-load="true" mode='widthFix' src='{{item.coverUrl}}'></image>
             </view>
             <view class='title'>{{item.title}} </view>
             <block wx:if="{{item.endSignImgUrl}}">

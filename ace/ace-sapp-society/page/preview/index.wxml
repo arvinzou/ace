@@ -11,7 +11,7 @@
     <block wx:for-items="{{message}}" wx:key="*">
       <view class='chat-content'>
 
-        <image src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
+        <image lazy-load="true" src='{{item.header.wxuser.headimgurl}}' class='headimg'></image>
 
         <view class='chat-right'>
           <view class='chat-nickname'>
@@ -24,14 +24,14 @@
     </block>
   
     <view class="circle chat" bindtap="modalinput">
-      <image class="imgsmall" src="../../image/chat.png" />
+      <image lazy-load="true" class="imgsmall" src="../../image/chat.png" />
     </view>
   </view>
   <view class='chat-box' hidden="{{currentTab!==1}}">
     <block wx:for-items="{{list}}" wx:key="*">
       <view class="wrap">
           <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
-            <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
+            <image lazy-load="true" wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
 
             <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
             <text style='padding:10rpx'>{{item.createDate}}</text>
@@ -46,7 +46,7 @@
             <view class="pictures" data-count="{{item.imageList.length}}">
               <view class="imglist{{item.imageList.length}}">
                 <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex">
-                  <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
+                  <image lazy-load="true" class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
 
                 </block>
 
@@ -54,13 +54,13 @@
             </view>
             <view class='cmt-bar'>
            
-              <image src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
+              <image lazy-load="true" src='../../image/点赞.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
                <text style='padding-right:5rpx;padding-left:5rpx;color:blue;font-size:30rpx'>{{item.likeNum}}</text>
-              <image src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
+              <image lazy-load="true" src='../../image/评论.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
             </view>
             <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
               <view class='chat-content'>
-                <image src='{{citem.headimgurl}}' class='headimg'></image>
+                <image lazy-load="true" src='{{citem.headimgurl}}' class='headimg'></image>
                 <view class='chat-right'>
                   <view class='chat-nickname'>
                     {{citem.nickname}} {{citem.createTime}}

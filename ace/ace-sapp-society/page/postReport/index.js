@@ -317,7 +317,7 @@ Page({
                 }
             }
         );
-    },
+    },      
     getTitle:function(e){
         let that=this;
         that.data.title = e.detail.value;
