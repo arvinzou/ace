@@ -154,7 +154,7 @@ public class ActivityReportController extends SocietyBaseController {
      * @author: huacai003
      * @version: 2018-09-13
      */
-    @RequestMapping(value = "chosen")
+    @RequestMapping(value = "/chosen")
     @ResponseBody
     public MessageResponse chosen(String id) throws Exception {
         return this.activityReportService.chosen(id);

@@ -169,29 +169,32 @@
         <td>
             {@if item.status==0}
             <span class="label label-lg label-danger">已删除</span>
-            <div style="padding-top:10px"></div>
+
             {@else if item.status==1}
             <span class="label label-lg label-info">暂存</span>
-            <div style="padding-top:10px"></div>
+
             {@else if item.status==2}
             <span class="label label-lg label-warning">提交审核</span>
-            <div style="padding-top:10px"></div>
+
             {@else if item.status==3}
-            <span class="label label-lg label-success">审核通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
+            <span class="label label-lg label-success" title="\${item.auditRemark}">审核通过</span>
             {@else if item.status==4}
-            <span class="label label-lg label-info">被驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
+            <span class="label label-lg label-info" title="\${item.auditRemark}">被驳回</span>
             {@else}
             <span class="label label-lg label-danger">暂存</span>
-            <div style="padding-top:10px"></div>
+
             {@/if}
         </td>
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             <%-- <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
+
+            {@if item.top==1}
+            <a class="operation" href="javascript:setTop('\${item.id}');">取消精选</a>
+            {@else}
             <a class="operation" href="javascript:setTop('\${item.id}');">设为精选</a>
+            {@/if}
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
