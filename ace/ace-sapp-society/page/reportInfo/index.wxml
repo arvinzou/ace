@@ -48,7 +48,7 @@
         <text class='iconfont {{like?"liked":""}} icon-dianzan pop' bindtap='actionLike'> <text>{{likeNum}}</text> </text>
         <text class='iconfont icon-pinglun pop'> <text>{{CTotal}}</text></text>
     </view>
-    <view class="model" wx:if='{{actionComment}}'>
+    <view class="commentModel" wx:if='{{actionComment}}'>
         <view class='inner-model' catchtap='hiddenComment'></view>
         <view class='box whiteBg'>
             <form bindsubmit="formSubmit" bindreset="formReset">
