@@ -1,14 +1,4 @@
 jQuery(function ($) {
-    $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-        _title: function (title) {
-            var $title = this.options.title || '&nbsp;'
-            if (("title_html" in this.options)
-                && this.options.title_html == true)
-                title.html($title);
-            else
-                title.text($title);
-        }
-    }));
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -29,122 +19,140 @@ jQuery(function ($) {
             }
         });
     });
-
-    $('#btn-view-add').on(
-        'click',
-        function () {
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow',
-                'new',
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: false,
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
-    $('#btn-view-edit').on(
-        'click',
-        function () {
-            //每次点击先清空其原有内容
-            resetDialogFileDom();
-
-            //
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext)
-                return;
-            }
-            var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-            if (rowData.status != "2") {
-                alert("诉求未受理或已办结!")
-                return;
-            }
-            cfg.appealCaseId = rowData.id;
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow', gr,
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: true,
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog')
-                            .find('.ui-jqdialog-titlebar')
-                            .wrapInner('<div class="widget-header" />');
-                        style_edit_form(form);
-                        //加载附件
-                        $("#TblGrid_grid-table").after("<div id='filelist-history'></div>" +
-                            "<div id='filelist'></div>" +
-                            "<div id='container'>" +
-                            "附件：<a id='pickfiles' href='javascript:;'>[添加附件]</a> " +
-                            " <a id='uploadfiles' href='javascript:;'>[上传]</a>" +
-                            "</div>");
-                        loadAttach(rowData.id);
-                        initUploader("pickfiles", rowData.id);
-
-                        //添加资源暂时图标
-                        appendMediaIcon("mediUrl", rowData.mediType);
-                    }
-                });
-        });
-    $('#btn-view-del').on(
-        'click',
-        function () {
-
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
-                return;
-            }
-            jQuery(cfg.grid_selector).jqGrid(
-                'delGridRow',
-                gr,
-                {
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
-});
-
-function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
-        modal: false,
-        width: 800,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    $(this).dialog("close");
+    $(".btn-group .btn").bind('click', function (event) {
+            $(event.target).siblings().removeClass("active");
+            console.log(event);
+            $(event.target).addClass("active");
+    });
+    /*表单验证*/
+        $("#fm-accept").validate({
+            onfocusout: function (element) {
+                $(element).valid();
+            },
+            errorPlacement: function(error, element) {
+                 $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
+            },
+            rules: {
+                answerDept: {
+                    required: true
+                },
+                operator: {
+                    required: true
                 }
             },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
+            messages: {
+                answerDept: {
+                    required: '请输入受理部门'
+                },
+                operator: {
+                    required: '请输入受理人员'
                 }
             }
-        ]
+        });
+    $('#modal-accept .accept').on('click', function () {
+            $('#modal-accept form').submit();
     });
-    $(dialog).parent().css("top", "1px");
-    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
+    $('#modal-accept form').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            var params = {};
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            $.extend(params, {
+                time: new Date()
+            });
+            console.log(params);
+            acceptAppealCase(params);
+            return false;
+        }
+    });
+
+
+
+     $("#fm-proc").validate({
+                onfocusout: function (element) {
+                    $(element).valid();
+                },
+                errorPlacement: function(error, element) {
+                     $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
+                },
+                rules: {
+                    detailsOfProgress: {
+                        required: true
+                    }
+                },
+                messages: {
+                    detailsOfProgress: {
+                        required: '请输入处理进度'
+                    }
+                }
+            });
+        $('#modal-proc .proc').on('click', function () {
+                $('#modal-proc form').submit();
+        });
+        $('#modal-proc form').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                var params = {};
+                $.each(formData, function (n, obj) {
+                    params[obj.name] = obj.value;
+                });
+                $.extend(params, {
+                    time: new Date()
+                });
+                console.log(params);
+                progressAppealCase(params);
+                return false;
+            }
+        });
+
+
+
+     $("#fm-answer").validate({
+                onfocusout: function (element) {
+                    $(element).valid();
+                },
+                errorPlacement: function(error, element) {
+                     $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
+                },
+                rules: {
+                    answerContent: {
+                        required: true
+                    }
+                },
+                messages: {
+                    answerContent: {
+                        required: '请输入答复内容'
+                    }
+                }
+            });
+        $('#modal-answer .answer').on('click', function () {
+                $('#modal-answer form').submit();
+        });
+        $('#modal-answer form').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                var params = {};
+                $.each(formData, function (n, obj) {
+                    params[obj.name] = obj.value;
+                });
+                $.extend(params, {
+                    time: new Date()
+                });
+                console.log(params);
+                answerAppealCase(params);
+                return false;
+            }
+        });
+});
+/*页面渲染*/
+function render(obj, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(obj).html(html);
+}
+function preview(id, title) {
+    $("#modal-preview").modal("show");
     loadView(id);
 }
 function loadView(id) {
@@ -165,15 +173,13 @@ function loadView(id) {
                     value == "1" ? "正常" : "关闭";
                 }
                 if (key.indexOf('Date') != -1 || key.indexOf('time') != -1 || key.indexOf('Time') != -1 || key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
-                }
-                $("#dialog-message-view").find('#' + key).html(value);
 
-                if (key == 'list') {
-                    //上传附件显示
-                    renderImage(value);
                 }
             });
+            var data = {};
+            data['o'] = rst.value;
+            render('#fm-preview', data, 'tpl-preview');
+            initPhotoPreview(".my-gallery img");
         },
         error: function () {
             alert("加载错误！");
@@ -182,136 +188,92 @@ function loadView(id) {
 }
 
 //受理诉求
-function acceptAppealCase(id, title) {
-    var dialog = $("#dialog-message-accept").removeClass('hide').dialog({
-        modal: true,
-        width: 400,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    var answer_dept = $('#answer_dept').val();
-                    var operator = $('#operator').val();
-                    console.log("answer_dept:" + answer_dept);
-                    console.log("deal_person_name:" + operator);
-                    if (strIsEmpty(answer_dept) || strIsEmpty(operator)) {
-                        alert("受理科室和经办领导不能为空!");
-                        return;
-                    }
-                    $(this).dialog("close");
-                    $.ajax({
-                        type: "post",
-                        url: contextPath + "/www/appealCase/updateAccept.do",
-                        data: {id: id, answerDept: answer_dept, operator: operator},
-                        beforeSend: function (XMLHttpRequest) {
-                        },
-                        success: function (rst, textStatus) {
-                            if (rst) {
-                                bootbox.dialog({
-                                    title: '系统提示',
-                                    message: rst.errorMessage,
-                                    buttons: {
-                                        "success": {
-                                            "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                            "className": "btn-sm btn-success",
-                                            "callback": function () {
-                                                dialog.dialog("close");
-                                                //重载数据
-                                                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                                    page: 1
-                                                }).trigger("reloadGrid");
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                            ;
-                        },
-                        complete: function (XMLHttpRequest, textStatus) {
-                        },
-                        error: function () {
-                        }
-                    });
-                }
-            },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
+function acceptAppealCase(data) {
+   $.ajax({
+       type: "post",
+       url: contextPath + "/www/appealCase/updateAccept.do",
+       data:data,
+       beforeSend: function (XMLHttpRequest) {
+            startLoad();
+       },
+       success: function (rst, textStatus) {
+           $("#modal-accept").modal("hide");
+           if (rst) {
+              alert(rst.errorMessage);
+           }
+           jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+       },
+       complete: function (XMLHttpRequest, textStatus) {
+            stopLoad();
+       },
+       error: function () {
+            stopLoad();
+       }
+   });
 }
-
+function  accept(id, title) {
+    $("#modal-accept").modal("show");
+    $('#modal-accept input[name=id]').val(id);
+    $('#modal-accept .title').html(title);
+}
+function  proc(id, title) {
+    $("#modal-proc").modal("show");
+    $('#modal-proc input[name=id]').val(id);
+    $('#modal-proc .title').html(title);
+    getDetailsOfProgress(id);
+}
+function  answer(id, title) {
+    $("#modal-answer").modal("show");
+    $('#modal-answer input[name=id]').val(id);
+    $('#modal-answer .title').html(title);
+}
 //处理详情
-function progressAppealCase(id, title) {
-    var dialog = $("#dialog-message-progress").removeClass('hide').dialog({
-        modal: true,
-        width: 600,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    var details_of_progress = $('#details_of_progress').val();
-                    if (strIsEmpty(details_of_progress)) {
-                        alert("处理内容不能为空!");
-                        return;
-                    }
-                    $(this).dialog("close");
-                    $.ajax({
-                        type: "post",
-                        url: contextPath + "/www/appealCase/updateDetailsOfProgress.do",
-                        data: {id: id, detailsOfProgress: details_of_progress},
-                        beforeSend: function (XMLHttpRequest) {
-                        },
-                        success: function (rst, textStatus) {
-                            if (rst) {
-                                bootbox.dialog({
-                                    title: '系统提示',
-                                    message: rst.errorMessage,
-                                    buttons: {
-                                        "success": {
-                                            "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                            "className": "btn-sm btn-success",
-                                            "callback": function () {
-                                                dialog.dialog("close");
-                                                //重载数据
-                                                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                                    page: 1
-                                                }).trigger("reloadGrid");
-                                            }
-                                        }
-                                    }
-                                });
-                            }
-                            ;
-                        },
-                        complete: function (XMLHttpRequest, textStatus) {
-                        },
-                        error: function () {
-                        }
-                    });
-                }
-            },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
+function progressAppealCase(data) {
+
+     $.ajax({
+        type: "post",
+        url: contextPath + "/www/appealCase/updateDetailsOfProgress.do",
+        data: data,
+        beforeSend: function (XMLHttpRequest) {
+            startLoad();
+        },
+        success: function (rst, textStatus) {
+            if (rst) {
+                alert(rst.errorMessage);
+                $("#modal-proc").modal("hide");
             }
-        ]
+        },
+        complete: function (XMLHttpRequest, textStatus) {
+            stopLoad();
+        },
+        error: function () {
+            stopLoad();
+        }
     });
 }
-
+function answerAppealCase(data) {
+   $.ajax({
+       type: "post",
+       url: contextPath + "/www/appealCase/reply.do",
+       data:data,
+       beforeSend: function (XMLHttpRequest) {
+            startLoad();
+       },
+       success: function (rst, textStatus) {
+           $("#modal-answer").modal("hide");
+           if (rst) {
+              alert(rst.errorMessage);
+           }
+           jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+       },
+       complete: function (XMLHttpRequest, textStatus) {
+            stopLoad();
+       },
+       error: function () {
+            stopLoad();
+       }
+   });
+}
 //字符串判空
 function strIsEmpty(obj) {
     if (typeof obj == "undefined" || obj == null || obj == "") {
@@ -320,185 +282,255 @@ function strIsEmpty(obj) {
         return false;
     }
 }
+var params={};
+function setParams(key, value) {
+	params[key] = value;
+	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+		postData: params
+	}).trigger("reloadGrid");
+}
+function initPhotoPreview(imgSelector) {
+    $(imgSelector).each(function(i,o){
+		var orgin = o;
+		var image = new Image();
+		image.src = orgin.src;
+		image.onload = function () {
+			$(orgin).wrap('<figure><a href="'+orgin.src+'"  data-size="'+image.width+'x'+image.height+'"></a></figure>');
+		}
+	});
+	initPhotoSwipeFromDOM('.my-gallery');
+}
+var initPhotoSwipeFromDOM = function (gallerySelector) {
+    var parseThumbnailElements = function (el) {
+        var thumbElements = el.childNodes,
+            numNodes = thumbElements.length,
+            items = [],
+            figureEl,
+            linkEl,
+            size,
+            item;
 
-//加载附件信息
-function loadAttach(appealCaseId) {
+        for (var i = 0; i < numNodes; i++) {
+
+            figureEl = thumbElements[i]; // <figure> element
+
+            // 仅包括元素节点
+            if (figureEl.nodeType !== 1) {
+                continue;
+            }
+            linkEl = figureEl.children[0]; // <a> element
+
+            size = linkEl.getAttribute('data-size').split('x');
+
+            // 创建幻灯片对象
+            item = {
+                src: linkEl.getAttribute('href'),
+                w: parseInt(size[0], 10),
+                h: parseInt(size[1], 10)
+            };
+
+
+
+            if (figureEl.children.length > 1) {
+                // <figcaption> content
+                item.title = figureEl.children[1].innerHTML;
+            }
+
+            if (linkEl.children.length > 0) {
+                // <img> 缩略图节点, 检索缩略图网址
+                item.msrc = linkEl.children[0].getAttribute('src');
+            }
+
+            item.el = figureEl; // 保存链接元素 for getThumbBoundsFn
+            items.push(item);
+        }
+
+        return items;
+    };
+
+    // 查找最近的父节点
+    var closest = function closest(el, fn) {
+        return el && (fn(el) ? el : closest(el.parentNode, fn));
+    };
+
+    // 当用户点击缩略图触发
+    var onThumbnailsClick = function (e) {
+        e = e || window.event;
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+        var eTarget = e.target || e.srcElement;
+
+        // find root element of slide
+        var clickedListItem = closest(eTarget, function (el) {
+            return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+        });
+
+        if (!clickedListItem) {
+            return;
+        }
+
+        // find index of clicked item by looping through all child nodes
+        // alternatively, you may define index via data- attribute
+        var clickedGallery = clickedListItem.parentNode,
+            childNodes = clickedListItem.parentNode.childNodes,
+            numChildNodes = childNodes.length,
+            nodeIndex = 0,
+            index;
+
+        for (var i = 0; i < numChildNodes; i++) {
+            if (childNodes[i].nodeType !== 1) {
+                continue;
+            }
+
+            if (childNodes[i] === clickedListItem) {
+                index = nodeIndex;
+                break;
+            }
+            nodeIndex++;
+        }
+
+
+
+        if (index >= 0) {
+            // open PhotoSwipe if valid index found
+            openPhotoSwipe(index, clickedGallery);
+        }
+        return false;
+    };
+
+    // parse picture index and gallery index from URL (#&pid=1&gid=2)
+    var photoswipeParseHash = function () {
+        var hash = window.location.hash.substring(1),
+            params = {};
+
+        if (hash.length < 5) {
+            return params;
+        }
+
+        var vars = hash.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            if (!vars[i]) {
+                continue;
+            }
+            var pair = vars[i].split('=');
+            if (pair.length < 2) {
+                continue;
+            }
+            params[pair[0]] = pair[1];
+        }
+
+        if (params.gid) {
+            params.gid = parseInt(params.gid, 10);
+        }
+
+        return params;
+    };
+
+    var openPhotoSwipe = function (index, galleryElement, disableAnimation, fromURL) {
+        var pswpElement = document.querySelectorAll('.pswp')[0],
+            gallery,
+            options,
+            items;
+
+        items = parseThumbnailElements(galleryElement);
+
+        // 这里可以定义参数
+        options = {
+            barsSize: {
+                top: 100,
+                bottom: 100
+            },
+            fullscreenEl: false, // 是否支持全屏按钮
+            shareButtons: [
+
+                {
+                    id: 'download',
+                    label: '保存图片',
+                    url: '{{raw_image_url}}',
+                    download: true
+                }
+            ], // 分享按钮
+
+            // define gallery index (for URL)
+            galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+            getThumbBoundsFn: function (index) {
+                // See Options -> getThumbBoundsFn section of documentation for more info
+                var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                    pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                    rect = thumbnail.getBoundingClientRect();
+
+                return {
+                    x: rect.left,
+                    y: rect.top + pageYScroll,
+                    w: rect.width
+                };
+            }
+
+        };
+
+        // PhotoSwipe opened from URL
+        if (fromURL) {
+            if (options.galleryPIDs) {
+                // parse real index when custom PIDs are used
+                for (var j = 0; j < items.length; j++) {
+                    if (items[j].pid == index) {
+                        options.index = j;
+                        break;
+                    }
+                }
+            } else {
+                // in URL indexes start from 1
+                options.index = parseInt(index, 10) - 1;
+            }
+        } else {
+            options.index = parseInt(index, 10);
+        }
+
+        // exit if index not found
+        if (isNaN(options.index)) {
+            return;
+        }
+
+        if (disableAnimation) {
+            options.showAnimationDuration = 0;
+        }
+
+        // Pass data to PhotoSwipe and initialize it
+        gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+        gallery.init();
+    };
+
+    // loop through all gallery elements and bind events
+    var galleryElements = document.querySelectorAll(gallerySelector);
+
+    for (var i = 0, l = galleryElements.length; i < l; i++) {
+        galleryElements[i].setAttribute('data-pswp-uid', i + 1);
+        galleryElements[i].onclick = onThumbnailsClick;
+    }
+
+    // Parse URL and open gallery if it contains #&pid=3&gid=1
+    var hashData = photoswipeParseHash();
+    if (hashData.pid && hashData.gid) {
+        openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+    }
+};
+
+
+function getDetailsOfProgress(id) {
     $.ajax({
         type: "post",
-        url: contextPath + "/www/appealCase/findFileList.do",
-        data: {appealCaseId: appealCaseId},
+        url: cfg.view_load_data_url,
+        data: {
+            id: id
+        },
+        beforeSend: function (XMLHttpRequest) {
+        },
         success: function (rst, textStatus) {
-            console.log(rst);
-            //
-            if (rst && rst.status == 0) {
-                initAttachDom(rst.data, appealCaseId);
-            } else {
-                bootbox.dialog({
-                    title: '系统提示',
-                    message: rst.info,
-                    detail: rst.info,
-                    buttons: {
-                        "success": {
-                            "label": "<i class='ace-icon fa fa-check'></i>确定",
-                            "className": "btn-sm btn-success",
-                            "callback": function () {
-                                //$( this ).dialog( "close" );
-                            }
-                        }
-                    }
-                });
-            }
+            $('#modal-proc textarea[name=detailsOfProgress]').html(rst.value.detailsOfProgress);
+        },
+        error: function () {
+            alert("加载错误！");
         }
     });
-}
-function initAttachDom(data, appealCaseId) {
-    var html = [];
-    var fileName;
-    $.each(data,
-        function (n, file) {
-            fileName = strIsEmpty(file.name) ? '未知文件名' : file.name;
-            html.push('<div id="' + file.id + '">' +
-                '<a href="' + file.mediUrl + '" target="_blank">' + fileName + '</a>   ' +
-                ' <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' ' +
-                'href="javascript:deleteAttach(\'' + file.id + '\',\'' + appealCaseId + '\')"></a>' +
-                '<b></b></div>');
-        });
-    $('#filelist-history').html(html.join(''));
-}
-function deleteAttach(id, appealCaseId) {
-    console.log("id=" + id + ",appealCaseId=" + appealCaseId);
-    $.ajax({
-        type: "post",
-        url: contextPath + "/www/appealCase/deleteAppealCaseFile.do",
-        data: {id: id},
-        success: function (rst, textStatus) {
-            if (rst && rst.status == 0) {
-                loadAttach(appealCaseId);
-            } else {
-                bootbox.dialog({
-                    title: '系统提示',
-                    message: rst.info,
-                    detail: rst.info,
-                    buttons: {
-                        "success": {
-                            "label": "<i class='ace-icon fa fa-check'></i>确定",
-                            "className": "btn-sm btn-success",
-                            "callback": function () {
-                            }
-                        }
-                    }
-                });
-            }
-        }
-    });
-}
-
-function appendMediaIcon(id, mediaType) {
-    //renderPage
-    var html = new Array();
-    html.push("<a id='btn-media-view-" + id + "' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
-    $("#" + id).after(html.join(''));
-
-    //append button click event
-    $("#btn-media-view-" + id).on('click',
-        function (e) {
-            e.preventDefault();
-            var dialog = $("#dialog-message-file")
-                .removeClass('hide')
-                .dialog({
-                    modal: true,
-                    width: 650,
-                    height: 400,
-                    title: "<div class='widget-header widget-header-small'><div class='widget-header-pd' >文件</div></div>",
-                    title_html: true,
-                    buttons: [{
-                        html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                        "class": "btn btn-info btn-xs",
-                        click: function () {
-                            $(this).dialog("close");
-                        }
-                    }]
-                });
-            var fileName = $('input[name=' + id + ']').val();
-            if (!fileName || fileName == '') {
-                return;
-            }
-            var src = fileName;
-            ///** mediaType 1-图片，2-视频，3-音频
-            if ("1" == mediaType) {
-                var img = new Image();
-                $(img).attr("src", "");
-                //图片加载加载后执行
-                $(img).load(function () {
-                    //图片默认隐藏
-                    $(this).hide();
-                    //移除小动画
-                    $(".loading").removeClass("loading").append(this);
-                    //使用fadeIn特效
-                    $(this).fadeIn("slow");
-                }).error(function () {
-                    //加载失败时的处理
-                }).attr("src", src);//最后设置src
-            } else {
-                html = [];
-                html.push("<video src='" + fileName + "' controls='controls' autoplay='true'></video>");
-                $("#dialog-message-file").append(html.join(''));
-            }
-        });
-}
-
-function resetDialogFileDom() {
-    $("#dialog-message-file").empty();
-    var html = [];
-    html.push('<div id="load" class="loading"></div>');
-    $("#dialog-message-file").append(html.join(''));
-}
-
-
-function renderImage(data) {
-    var html = new Array();
-    html.push('<ul class="ace-thumbnails clearfix">');
-    $.each($(data), function (i, o) {
-        //诉求人上传附件
-        if (o.type == '1') {
-            /**
-             * img - 图片，file - 文件 ，video- 视频，audio - 音频
-             */
-            switch (o.mediType) {
-                case 'img' :
-                    html.push('<li>');
-                    html.push('<a href="' + o.mediUrl + '" title="' + o.name + '" target="view_window" data-rel="colorbox" class="cboxElement">');
-                    html.push('<img height="200" width="200" class="photo" src="' + o.mediUrl + '">');
-                    html.push('</a>');
-                    html.push('</li>');
-                    break;
-                case 'file' :
-                    html.push('<li>');
-                    html.push('<a href="' + o.mediUrl + '" target="_blank">' + o.name + '</a>');
-                    html.push();
-                    html.push('</li>');
-                    break;
-                case 'video' :
-                    html.push('<li>');
-                    html.push('<a href="' + o.mediUrl + '" title="' + o.name + '" target="view_window" data-rel="colorbox" class="cboxElement">');
-                    html.push('<video  src="' + o.mediUrl + '" controls="controls"></video>');
-                    html.push('</a>');
-                    html.push('</li>');
-                    break;
-                case 'audio' :
-                    html.push('<li>');
-                    html.push('<a href="' + o.mediUrl + '" title="' + o.name + '" target="view_window" data-rel="colorbox" class="cboxElement">');
-                    html.push('<audio controls="controls">');
-                    html.push('<source src="' + o.mediUrl + '" type="audio/mp3" />');
-                    html.push('</audio>');
-                    html.push('</a>');
-                    html.push('</li>');
-                    break;
-                default :
-                    break;
-            }
-        }
-    });
-    html.push('</ul>');
-    $("#appealAddons").html(html.join(""));
 }

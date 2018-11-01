@@ -30,27 +30,31 @@
 
 
           <view class="text-line"></view>
-         
+
           <view class="text-content">
-           <view class="title-strong-big2">诉求内容</view>
+            <view class="title-strong-big2">诉求内容</view>
             <rich-text class='item-text' style="text-indent:0px;" nodes="{{o.content}}"></rich-text>
+
+
+
+
+            <view class="weui-uploader__bd">
+              <view class="weui-uploader__files" id="uploaderFiles">
+                <block wx:for="{{o.list}}" wx:for-index="idx" wx:key="*this">
+                  <view class="weui-uploader__file" wx:if="{{item.type==1}}">
+                    <image class="weui-uploader__img" data-url="{{item.mediUrl}}" src="{{item.mediUrl}}" mode="aspectFill" bindtap="previewImage" />
+                  </view>
+                </block>
+              </view>
+            </view>
           </view>
-          <view class="title-strong" wx:if="{{o.list.length>0}}">附件</view>
-          <view class="text-line" wx:if="{{o.list.length>0}}"></view>
-           <block wx:for-items="{{o.list}}" wx:for-item="file" wx:key="*item">
-  
-          <navigator bindtap="previewFile" wx:if="{{file.type==1}}" data-url="{{file.mediUrl}}">
-              <view class="title-strong-file item-text"> {{file.name}}</view>
-          </navigator>
-       
-      </block>
         </view>
       </view>
-      <view class="kind-list-item" wx:if="{{o.mediType == '2'&&o.mediUrl.length>0}}">
-        <video src="{{o.mediUrl}}" style='width:100%;height:35vh' objectFit="contain"></video>
+      <view class="kind-list-item" wx:if="{{o.mediType == '2'&&o.mediUrl.length>0}}" style="padding:20rpx">
+        <video src="{{o.mediUrl}}" style='width:100%;height:35vh;' objectFit="contain"></video>
       </view>
-      <view class="kind-list-item" wx:if="{{o.mediType == '3'&&o.mediUrl.length>0}}">
-        <audio src="{{o.mediUrl}}" name="录音" controls="{{1>0}}"></audio>
+      <view class="kind-list-item" wx:if="{{o.mediType == '3'&&o.mediUrl.length>0}}" style="padding:20rpx">
+        <audio src="{{o.mediUrl}}" name="录音" controls="{{1>0}}" style="width:100%"></audio>
       </view>
 
     </view>
@@ -71,15 +75,13 @@
           <view class="text-content">
             <rich-text style="text-indent:0px;" class='item-text' nodes="{{o.answerContent}}"></rich-text>
           </view>
-         <view class="title-strong" wx:if="{{o.list.length>0}}">附件</view>
+          <view class="title-strong" wx:if="{{o.list.length>0}}">附件</view>
           <view class="text-line" wx:if="{{o.list.length>0}}"></view>
           <block wx:for-items="{{o.list}}" wx:for-item="file" wx:key="*item">
-  
-          <view bindtap="previewFile" wx:if="{{file.type==2}}" data-url="{{file.mediUrl}}">
-           <view class="title-strong-file item-text"> {{file.name}}</view>
-          </view>
- 
-      </block>
+            <view bindtap="previewFile" wx:if="{{file.type==2}}" data-url="{{file.mediUrl}}">
+              <view class="title-strong-file item-text"> {{file.name}}</view>
+            </view>
+          </block>
         </view>
       </view>
     </view>
@@ -88,11 +90,11 @@
 
 
 
-<modal hidden="{{hidden}}" title="接收处理" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" no-cancel="{{nocancel}}">
-    <input class="weui-input" name="answerDept" value="{{answerDept}}" placeholder="请输入处理部门或科室" bindinput="bindinputAnswerDept"/>
-     <input class="weui-input" name="operator" value="{{operator}}" placeholder="请输入经办领导" bindinput="bindinputOperator"/>
+  <modal hidden="{{hidden}}" title="接收处理" confirm-text="确定" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm" no-cancel="{{nocancel}}">
+    <input class="weui-input" name="answerDept" value="{{answerDept}}" placeholder="请输入处理部门或科室" bindinput="bindinputAnswerDept" />
+    <input class="weui-input" name="operator" value="{{operator}}" placeholder="请输入经办领导" bindinput="bindinputOperator" />
 
-    
-</modal>
+
+  </modal>
 
 </view>

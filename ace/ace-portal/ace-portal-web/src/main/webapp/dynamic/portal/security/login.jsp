@@ -160,7 +160,7 @@
                     <span></span>
                 </label>
                 <div class="pull-right forget-password-block">
-                    <a data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
+                    <a href="repasswd.jsp" class="forget-password">忘记密码了</a>
                 </div>
             </div>
 
@@ -210,6 +210,9 @@
 
                     <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="请输入注册使用的手机号"
                            name="mobile" id="mobile"/>
+                    <div style="padding:10px">
+
+                    </div>
                 </div>
 
             </div>

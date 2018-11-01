@@ -258,6 +258,7 @@ function initForm(id) {
         }
     });
 }
+
 function initPhotoPreview(imgSelector) {
     $(imgSelector).each(function(i,o){
 		var orgin = o;

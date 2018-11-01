@@ -143,9 +143,7 @@
         where t.openid = #{condition.openid,jdbcType=VARCHAR}
     </select>
     <select id="getListByDeptId" resultType="map">
-        select t.unionid openid,t.nickname from userinfo t where t.appid in(
-        select appid from wx_cfg a WHERE a.type='app' and a.deptId=#{deptId}
-        )
+        select t.unionid openid,t.nickname from userinfo t where 0=0
         <if test='q!=null and q!=""'>
             and (t.unionid=#{q} or t.nickname like
             concat('%',#{q},'%'))

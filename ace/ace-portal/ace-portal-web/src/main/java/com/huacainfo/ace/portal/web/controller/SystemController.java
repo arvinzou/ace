@@ -315,7 +315,17 @@ public class SystemController extends PortalBaseController{
 	 */
 	@RequestMapping(value = "/retrievePassword.do")
 	@ResponseBody
-	public MessageResponse retrievePassword(String mobile)throws Exception {
+	public MessageResponse retrievePassword(String mobile,String j_captcha)throws Exception {
+		String j_captcha_s=(String) this.getRequest().getSession().getAttribute("j_captcha");
+		if(CommonUtils.isBlank(mobile)){
+			return new MessageResponse(1,"手机号不能为空.");
+		}
+		if(CommonUtils.isBlank(j_captcha)){
+			return new MessageResponse(1,"验证码不能为空.");
+		}
+		if(!j_captcha.equals(j_captcha_s)){
+			return new MessageResponse(1,"验证码错误.");
+		}
 		return this.systemService.updateForRetrievePassword(mobile);
 		
 	}
