@@ -52,8 +52,11 @@ Page({
       );
   },
   diy_time: function(startTime, endTime){
+      console.log("startTime=,endTime="+startTime+":"+endTime);
       var that = this;
-      var date3 = new Date(endTime).getTime() - startTime.getTime();   //时间差的毫秒数      
+      var date3 = util.formateStringToDate(endTime).getTime() - startTime.getTime();   //时间差的毫秒数  
+      console.log("newDate=======================" + startTime.getTime()) ;   
+      console.log("endTime=======================" + util.formateStringToDate(endTime).getTime()); 
       //计算出相差天数
       var days = Math.floor(date3 / (24 * 3600 * 1000))
       //计算出小时数
