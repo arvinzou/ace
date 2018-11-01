@@ -87,7 +87,7 @@
     <tr>
         <td>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-12">
                     <img src="\${item.headimgurl}" class="cover"/>
                     <a>\${item.nickname}</a>
                 </div>
