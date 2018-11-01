@@ -246,7 +246,10 @@ public class ActivityReportServiceImpl implements ActivityReportService {
 
     @Override
     public MessageResponse chosen(String id) throws Exception {
-        ActivityReport activityReport = this.activityReportDao.selectByActivityId(id);
+        ActivityReport activityReport = this.activityReportDao.selectByPrimaryKey(id);
+        if(CommonUtils.isBlank(activityReport)){
+            return new MessageResponse(ResultCode.FAIL, "报道丢失。");
+        }
         activityReport.setTop(("1".equals(activityReport.getTop())?"0":"1"));
         this.activityReportDao.updateByPrimaryKeySelective(activityReport);
         return new MessageResponse(0, "活动报道修改完成！");

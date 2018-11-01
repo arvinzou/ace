@@ -150,32 +150,36 @@ Page({
       success: function (res) {
 
         for (var i = 0; i < res.tempFilePaths.length; i++) {
-          wx.showLoading({ title: "正在上传" });
-          console.log(res.tempFilePaths[i]);
-          wx.uploadFile({
-            url: cfg.uploadUrl,
-            filePath: res.tempFilePaths[i],
-            name: 'file',
-            header: {
-              'content-type': 'multipart/form-data'
-            },
-            formData: {collectionName: "live", companyId: cfg.companyId },
-            success: function (resp) {
-              console.log(resp);
-              wx.hideLoading();
-              var obj = JSON.parse(resp.data);
-              console.log(obj);
-              var files = that.data.files;
-              files.push(obj.file_path);
-              that.setData({
-                files: files
-              });
-            },
-            fail: function (res) {
-              wx.hideLoading();
-              wx.showModal({ title: "提示", content: "上传失败" })
+            if (res.tempFiles[i].size <= 2000000){
+                wx.showLoading({ title: "正在上传" });
+                console.log(res.tempFilePaths[i]);
+                wx.uploadFile({
+                    url: cfg.uploadUrl,
+                    filePath: res.tempFilePaths[i],
+                    name: 'file',
+                    header: {
+                    'content-type': 'multipart/form-data'
+                    },
+                    formData: {collectionName: "live", companyId: cfg.companyId },
+                    success: function (resp) {
+                    console.log(resp);
+                    wx.hideLoading();
+                    var obj = JSON.parse(resp.data);
+                    console.log(obj);
+                    var files = that.data.files;
+                    files.push(obj.file_path);
+                    that.setData({
+                        files: files
+                    });
+                    },
+                    fail: function (res) {
+                    wx.hideLoading();
+                    wx.showModal({ title: "提示", content: "上传失败" });
+                    }
+                });
+            }else{
+                wx.showModal({ title: "提示", content: "上传图片大小不能超过2M！" });
             }
-          })
         }
 
 

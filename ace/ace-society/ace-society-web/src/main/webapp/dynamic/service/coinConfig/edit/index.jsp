@@ -59,10 +59,15 @@
             </label>
             <div class="col-md-10">
                 <select name="category" id="">
-                    <option \${data.o.category==1?'selected':''} value="1">公益活动</option>
-                    <option \${data.o.category==2?'selected':''} value="2">普及活动</option>
-                    <option \${data.o.category==3?'selected':''} value="3">创意活动</option>
-                    <option \${data.o.category==4?'selected':''} value="4">党建活动</option>
+                    {@if data.o.category==1}
+                    <option selected value="2">公益活动</option>
+                    {@else if data.o.category==2}
+                    <option selected value="2">普及活动</option>
+                    {@else if data.o.category==3}
+                    <option selected value="3">创意活动</option>
+                    {@else if data.o.category==4}
+                    <option selected value="4">党建活动</option>
+                    {@/if}
                 </select>
             </div>
         </div>

@@ -120,34 +120,39 @@ Page({
     wx.chooseImage({
       sizeType: ['original', 'compressed'],
       sourceType: [type],
+      sizeType: ['compressed'],
       success: function (res) {
-
         for (var i = 0; i < res.tempFilePaths.length; i++) {
-          wx.showLoading({ title: "正在上传" });
           console.log(res.tempFilePaths[i]);
-          wx.uploadFile({
-            url: cfg.uploadUrl,
-            filePath: res.tempFilePaths[i],
-            name: 'file',
-            header: {
-              'content-type': 'multipart/form-data'
-            },
-            formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
-            success: function (resp) {
-              console.log(resp);
-              wx.hideLoading();
-              var obj = JSON.parse(resp.data);
-              console.log(obj);
-              fileList.push(obj.file_path);
-              that.setData({
-                files: fileList
-              });
-            },
-            fail: function (res) {
-              wx.hideLoading();
-              wx.showModal({ title: "提示", content: "上传失败" })
-            }
-          })
+          var tempFilesSize = res.tempFiles[0].size;  //获取图片的大小，单位B
+          if (tempFilesSize <= 2000000) {   //图片小于或
+            wx.showLoading({ title: "正在上传" });
+            wx.uploadFile({
+                url: cfg.uploadUrl,
+                filePath: res.tempFilePaths[i],
+                name: 'file',
+                header: {
+                'content-type': 'multipart/form-data'
+                },
+                formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
+                success: function (resp) {
+                console.log(resp);
+                wx.hideLoading();
+                var obj = JSON.parse(resp.data);
+                console.log(obj);
+                fileList.push(obj.file_path);
+                that.setData({
+                    files: fileList
+                });
+                },
+                fail: function (res) {
+                wx.hideLoading();
+                wx.showModal({ title: "提示", content: "上传失败" })
+                }
+            })
+          }else{
+              wx.showModal({ title: "提示", content: "上传图片大小不能超过2M!" });
+          }
         }
 
 
@@ -222,31 +227,36 @@ Page({
     wx.chooseVideo({
       sourceType: ['album', 'camera'],
       success: function (res) {
-        wx.showLoading({ title: "正在上传" });
-        var file = res.tempFilePath;
-        wx.uploadFile({
-          url: cfg.uploadUrl,
-          filePath: file,
-          name: 'file',
-          header: {
-            'content-type': 'multipart/form-data'
-          },
-          formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
-          success: function (resp) {
-            console.log(resp);
-            wx.hideLoading();
-            var obj = JSON.parse(resp.data);
-            console.log(obj);
-            that.setData({
-              mediUrl: obj.file_path,
-              displayVideo: 'show'
+        var fileSize = res.size;
+        if (fileSize < 2000000 && res.duration <=10){
+            wx.showLoading({ title: "正在上传" });
+            var file = res.tempFilePath;
+            wx.uploadFile({
+            url: cfg.uploadUrl,
+            filePath: file,
+            name: 'file',
+            header: {
+                'content-type': 'multipart/form-data'
+            },
+            formData: { id: that.data.id, collectionName: "jxb", companyId: cfg.companyId },
+            success: function (resp) {
+                console.log(resp);
+                wx.hideLoading();
+                var obj = JSON.parse(resp.data);
+                console.log(obj);
+                that.setData({
+                mediUrl: obj.file_path,
+                displayVideo: 'show'
+                });
+            },
+            fail: function (res) {
+                wx.hideLoading();
+                wx.showModal({ title: "提示", content: "上传失败" })
+            }
             });
-          },
-          fail: function (res) {
-            wx.hideLoading();
-            wx.showModal({ title: "提示", content: "上传失败" })
-          }
-        })
+        }else{
+            wx.showModal({ title: "提示", content: "上传视频大小不能超过2M,时长不能超过10秒！" })
+        }
       }
     });
   },

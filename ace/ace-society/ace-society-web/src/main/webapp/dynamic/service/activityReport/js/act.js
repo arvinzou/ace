@@ -85,14 +85,10 @@ function edit(id) {
 
 
 function setTop(id) {
-    var url = contextPath + "/activityReport/selectActivityReportByPrimaryKey";
+    var url = contextPath + "/activityReport/chosen";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
-            var navitem = document.getElementById('tpl-detail').innerHTML;
-            result.value.content=JSON.parse(result.value.content);
-            var html = juicer(navitem, {data: result.value});
-            $("#detail-info").html(html);
-            $("#modal-detail").modal("show");
+            getPageList();
         }
     })
 }

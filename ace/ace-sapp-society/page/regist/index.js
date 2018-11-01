@@ -164,7 +164,7 @@ Page({
                 }else{
                     wx.showModal({
                         title: '提示',
-                        content: ret.errorMessage,
+                        content: ret.info,
                         success: function (res) { }
                     });
                 }

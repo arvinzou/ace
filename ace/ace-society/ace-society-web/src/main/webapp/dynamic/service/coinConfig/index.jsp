@@ -187,7 +187,7 @@
             {@else}
             <a class="operation" href="javascript:edit1('\${item.id}');">编辑</a>
             {@/if}
-            <a class="operation" href="javascript:del('\${item.id}');">删除</a>
+            <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
         </td>
     </tr>
     {@/each}
