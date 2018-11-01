@@ -80,13 +80,7 @@
         <td> \$\${item.solution}</td>
         <td>
             {@each item.listSubjectIdeaAnnexVo as fileItem}
-                {@if fileItem.fileType == '0'}
-                <div class="fileListBox"><a href="\${fileItem.fileUrl}" download="\${fileItem.fileUrl}">\${fileItem.fileName}</a></div>
-                {@else if fileItem.fileType == '1'}
                 <div class="fileListBox"><img src="\${fileItem.fileUrl}" style="width: 70px;height: 70px;"/></div>
-                {@else if fileItem.fileType == '2'}
-                <div class="fileListBox"><video src="\${fileItem.fileUrl}" width="70" height="70"></video></div>
-                {@/if}
             {@/each}
         </td>
         <td> \${item.nickname}</td>
@@ -149,7 +143,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">创建人姓名</label>
             <div class="col-md-10">
-                \${data.createUserName}
+                \${data.nickname}
             </div>
         </div>
 
@@ -165,13 +159,7 @@
                 {@each data.listSubjectIdeaAnnexVo as item, index}
                 <div class="fileBox">
                     <div class="file">
-                        {@if item.fileType == '0'}
-                        <a href="\${item.fileUrl}" download="点子附件">\${item.fileName}</a>
-                        {@else if item.fileType == '1'}
                         <img src="\${item.fileUrl}" style="width: 300px; height: 150px;"/>
-                        {@else if item.fileType == '2'}
-                        <video src="\${item.fileUrl}"  width="300" height="150" controls></video>
-                        {@/if}
                     </div>
                 </div>
                 {@/each}
@@ -242,7 +230,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">创建人姓名</label>
             <div class="col-md-10">
-                \${data.createUserName}
+                \${data.nickname}
             </div>
         </div>
 
@@ -258,13 +246,7 @@
                 {@each data.listSubjectIdeaAnnexVo as item, index}
                 <div class="fileBox">
                     <div class="file">
-                        {@if item.fileType == '0'}
-                        <a href="\${item.fileUrl}" download="点子附件">\${item.fileName}</a>
-                        {@else if item.fileType == '1'}
                         <img src="\${item.fileUrl}" style="width: 300px; height: 150px;"/>
-                        {@else if item.fileType == '2'}
-                        <video src="\${item.fileUrl}"  width="300" height="150" controls></video>
-                        {@/if}
                     </div>
                 </div>
                 {@/each}
