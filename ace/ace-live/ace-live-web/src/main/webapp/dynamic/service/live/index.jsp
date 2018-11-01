@@ -244,6 +244,7 @@
         </div>
     </div>
 </div>
+
 <script id="tpl-fm" type="text/template">
 	<div class="form-body">
 	                          <div class="form-group">

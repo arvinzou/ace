@@ -10,7 +10,7 @@ var TYPE_NAME = {
         //powerpoint: 'MS-Powerpoint'
        // pdf: 'PDF'
 };
-var $menu = $('<span class="widget-toolbar no-border"><button class="btn btn-xs bigger btn-white dropdown-toggle" data-toggle="dropdown" authority="false">导出<i class="ace-icon fa fa-chevron-down icon-on-right"></i></button><ul class="dropdown-menu dropdown-default dropdown-menu-right dropdown-caret dropdown-close" role="menu" aria-labelledby="dropdownMenu"></ul></span>');
+var $menu = $('<span class="widget-toolbar no-border"><button class="btn btn-xs bigger btn-white dropdown-toggle" data-toggle="dropdown" authority="false">导出<i class="ace-icon  fa fa-chevron-down icon-on-right"></i></button><ul class="dropdown-menu dropdown-default dropdown-menu-right dropdown-caret dropdown-close" role="menu" aria-labelledby="dropdownMenu"></ul></span>');
 //var exportTypes = ['txt','excel','json','xml','png','csv','sql','doc','pdf','powerpoint'];
 var exportTypes = ['txt','excel','json','xml','png','csv','sql','doc'];
 var tempStr = "";

@@ -377,10 +377,8 @@ public class AppealCaseController extends PortalBaseController {
      */
     @RequestMapping(value = "/reply.do")
     @ResponseBody
-    public MessageResponse reply(String jsons) throws Exception {
+    public MessageResponse reply(AppealCase obj) throws Exception {
 
-        logger.info(jsons);
-        AppealCase obj = JSON.parseObject(jsons, AppealCase.class);
 
         return this.appealCaseService.updateAppealCase(obj, this.getCurUserProp());
     }
