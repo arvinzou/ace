@@ -74,6 +74,24 @@ Page({
     data.circle.content = e.detail.value.docText;
     data.circle.corpId="00012";
 
+      if ((e.detail.value.docText == '' || e.detail.value.docText == undefined || e.detail.value.docText == null)&&
+      (that.data.mediUrl == '' || that.data.mediUrl == undefined || that.data.mediUrl == null)) {
+          wx.showModal({
+              title: '提示',
+              content: '发布内容不能为空！',
+              success: function (res) { }
+          });
+          return;
+      }
+    if (e.detail.value.captcha == '' || e.detail.value.captcha == undefined || e.detail.value.captcha ==null){
+        wx.showModal({
+            title: '提示',
+            content: '验证码不能为空！',
+            success: function (res) { }
+        });
+        return;
+    }
+
     var files = that.data.files;
     for (var i = 0; i < files.length; i++) {
       data.imgs.push({ url: files[i], w: 0, h: 0 });
