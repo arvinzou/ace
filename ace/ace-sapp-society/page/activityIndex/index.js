@@ -80,6 +80,11 @@ Page({
 
     onLoad: function() {
         let that = this;
+        if (!util.isLogin()) {
+            wx.navigateTo({
+                url: "../userinfo/index?url=../activityIndex/index&type=switchTab"
+            });
+        }
         that.setVdata();
         that.initdata();
     },

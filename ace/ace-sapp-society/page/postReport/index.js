@@ -308,6 +308,13 @@ Page({
             function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
+                if (that.data.status == "2"){
+                    wx.navigateBack({});
+                }else{
+                    wx.showToast({
+                        title: '保存成功',
+                    })
+                }
             }
         );
     },
