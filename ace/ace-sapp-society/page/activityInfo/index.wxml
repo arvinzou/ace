@@ -52,7 +52,7 @@
         <view class='list' bindtap="viewParticipants" data-id='{{activityInfo.id}}'>
             <view class='headImage_list'>
                 <block wx:for="{{activityInfo.activityDetailVoList}}">
-                   <image wx:if='{{index<8}}' class='headimage' src='{{item.data}}'></image>
+                   <image wx:if='{{index<8}}' class='headimage' src='{{item.headimgurl}}'></image>
                 </block>
             </view>
             <view hidden='{{activityInfo.activityDetailVoList.length<8}}' class='ellipsis'></view>

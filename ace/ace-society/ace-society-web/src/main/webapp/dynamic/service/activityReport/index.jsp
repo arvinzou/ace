@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>爱心币配置</title>
+    <title></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
@@ -120,10 +120,10 @@
                             <div class="col-md-10">
                                 <div class="radio-group-container">
                                     <label>
-                                        <input type="radio" name="rst" value="1"><span style="padding:10px">通过</span>
+                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="rst" value="2"><span style="padding:10px">退回</span>
+                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
                                     </label>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             <%-- <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
-            <a class="operation" href="javascript:top('\${item.id}');">设为精选</a>
+            <a class="operation" href="javascript:setTop('\${item.id}');">设为精选</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}

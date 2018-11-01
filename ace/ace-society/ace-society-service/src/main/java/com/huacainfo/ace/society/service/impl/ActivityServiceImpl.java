@@ -12,14 +12,11 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
-import com.huacainfo.ace.society.dao.ActivityDetailDao;
-import com.huacainfo.ace.society.dao.PersonInfoDao;
-import com.huacainfo.ace.society.dao.SocietyOrgInfoDao;
-import com.huacainfo.ace.society.model.ActivityDetail;
-import com.huacainfo.ace.society.model.CoinConfig;
-import com.huacainfo.ace.society.model.SubjectIdea;
+import com.huacainfo.ace.society.dao.*;
+import com.huacainfo.ace.society.model.*;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.CoinConfigService;
+import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,8 +28,6 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.society.dao.ActivityDao;
-import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.service.ActivityService;
 
@@ -59,6 +54,11 @@ public class ActivityServiceImpl implements ActivityService {
     private SocietyOrgInfoDao societyOrgInfoDao;
     @Autowired
     private PersonInfoDao personInfoDao;
+
+    @Autowired
+    private PointsRecordService pointsRecordService;
+    @Autowired
+    private PointsRecordDao pointsRecordDao;
 
     /**
      * @throws
@@ -408,6 +408,28 @@ public class ActivityServiceImpl implements ActivityService {
                 String.valueOf(id), "线下活动", userProp);*/
         return new MessageResponse(0, "线下活动删除完成！");
     }
+    /**
+     * @throws
+     * @Title:deleteActivityByActivityId
+     * @Description: TODO(删除线下活动)
+     * @param: @param id
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: huacai003
+     * @version: 2018-09-11
+     */
+    @Override
+    public MessageResponse deleteActivityByActivityId(String id, UserProp userProp) throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            return new MessageResponse(1, "主键-GUID不能为空！");
+        }
+        this.activityDao.deleteByPrimaryKey(id);
+
+       this.dataBaseLogService.log("删除线下活动", "线下活动", String.valueOf(id),
+                String.valueOf(id), "线下活动", userProp);
+        return new MessageResponse(0, "线下活动删除完成！");
+    }
 
 
     /**
@@ -483,11 +505,94 @@ public class ActivityServiceImpl implements ActivityService {
             if(pCoin1<0){
                 pCoin1=0;
             }
+            addOrgPointsRecord(activity.getCategory(),oCoin,activity.getInitiatorId(),activity.getId());
             societyOrgInfoDao.addcoin(activity.getInitiatorId(),oCoin);
             personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin1);
+            for(Object item:list){
+                addPeoplePointsRecord(activity.getCategory(),pCoin1,(String)item,activity.getId());
+            }
         }
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
     }
 
+    public ResultResponse addOrgPointsRecord(String type,int coin,String userId,  String bisId){
+        String bisType="";
+        switch (type) {
+            case "1":
+                bisType=BisType.POINTS_WELFARE_SPONSOR;
+                break;
+            case "2":
+                bisType=BisType.POINTS_ORDINARY_SPONSOR;
+                break;
+            case "3":
+                bisType=BisType.POINTS_CREATIVE_SPONSOR;
+                break;
+            case "4":
+                bisType=BisType.POINTS_PARTY_SPONSOR;
+                break;
+            default:
+                break;
+        }
+        PointsRecord record = new PointsRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setUserId(userId);
+        record.setBisType(bisType);
+        record.setBisId(bisId);
+        record.setPoints(coin);
+        record.setStatus("1");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setCreateUserId("system");
+        record.setCreateUserName("system");
+        pointsRecordDao.insert(record);
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功");
+    }
+
+
+    public ResultResponse addPeoplePointsRecord(String type,int coin,String userId,  String bisId){
+        if(coin<0){
+            type="-"+type;
+        }
+        String bisType="";
+        switch (type) {
+            case "1":
+                bisType=BisType.POINTS_WELFARE_PARTER_ADD;
+                break;
+            case "-1":
+                bisType=BisType.POINTS_WELFARE_PARTER_SUB;
+                break;
+            case "2":
+                bisType=BisType.POINTS_ORDINARY_PARTER_ADD;
+                break;
+            case "-2":
+                bisType=BisType.POINTS_ORDINARY_PARTER_SUB;
+                break;
+            case "3":
+                bisType=BisType.POINTS_CREATIVE_PARTER_ADD;
+                break;
+            case "-3":
+                bisType=BisType.POINTS_CREATIVE_PARTER_SUB;
+                break;
+            case "4":
+                bisType=BisType.POINTS_PARTY_PARTER_ADD;
+                break;
+            case "-4":
+                bisType=BisType.POINTS_PARTY_PARTER_SUB;
+                break;
+            default:
+                break;
+        }
+        PointsRecord record = new PointsRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setUserId(userId);
+        record.setBisType(bisType);
+        record.setBisId(bisId);
+        record.setPoints(coin);
+        record.setStatus("1");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setCreateUserId("system");
+        record.setCreateUserName("system");
+        pointsRecordDao.insert(record);
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功");
+    }
 }

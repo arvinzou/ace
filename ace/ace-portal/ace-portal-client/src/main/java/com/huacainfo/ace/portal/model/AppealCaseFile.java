@@ -9,7 +9,9 @@ public class AppealCaseFile implements java.io.Serializable {
     private String appealCaseId;
 
     private String name;
-
+    /**
+     * 类型（1诉求2答复）
+     */
     private String type;
 
     /**

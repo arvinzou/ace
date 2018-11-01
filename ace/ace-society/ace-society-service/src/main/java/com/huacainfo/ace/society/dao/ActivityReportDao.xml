@@ -30,7 +30,11 @@
 
   <sql id="Vo_Column_List">
     t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl, t.remark, t.status, t.top, t.createUserId, t.createUserName, t.createDate,
-    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category
+    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,
+    (SELECT COUNT(*)
+      FROM society.comment_record
+      WHERE bisType='reportComment' AND bisId=t.id
+    ) as commentTotal
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -309,7 +313,10 @@
       and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
     </if>
     <if test="condition.category !=null and condition.category !=&quot;&quot;">
-      and category =#{condition.category,jdbcType=VARCHAR}
+      and a.category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.aStatus !=null and condition.aStatus !=&quot;&quot;">
+      and a.status =#{condition.aStatus,jdbcType=VARCHAR}
     </if>
     <if test="condition.top !=null and condition.top !=&quot;&quot;">
       and top =#{condition.top,jdbcType=CHAR}

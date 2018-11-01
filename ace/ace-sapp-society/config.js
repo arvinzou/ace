@@ -1,4 +1,4 @@
-var server = "https://zhsh.wuling.gov.cn/";
+var server = "https://zhsh.wuling.gov.cn";
 var serverfile = "https://zhsh.wuling.gov.cn/";
 var rtmpserver = "rtmp://zhsh.wuling.gov.cn/live/";
 var hlsserver = "http://zhsh.wuling.gov.cn:9999/hls/";
@@ -11,6 +11,8 @@ var config = {
     hlsserver,
   appid: 'wx7e6a369d8fa12b12',
   appsecret: 'eac1cdaebc47d72133d0872a5900f344',
+    // appid: 'wx70ba7c5dca85e4da',
+    // appsecret: '96214b4a01153935995cc027ddf26d75',
     companyId: '0002',
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
@@ -66,6 +68,8 @@ var config = {
     findComments: `${server}/society/www/comment/findList`,
     findAdmires: `${server}/society/www/comment/findAdmireTotal`,
     admire: `${server}/society/www/comment/admire`,
-    cancelAdmire: `${server}/society/www/comment/cancelAdmire`,
+    cancelAdmire: `${server}/society/www/comment/cancelAdmire`, 
+    delActivity: `${server}/society/www/activity/delActivity`,
+    getCoin: `${server}/society/www/activity/getCoin`,
 };
 module.exports = config

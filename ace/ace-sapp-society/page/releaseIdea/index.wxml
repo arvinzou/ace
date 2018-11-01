@@ -5,7 +5,7 @@
     <view class='form'>
             <view class='section'>
                 <text class='form-title'>标题</text>
-                <input name='title' class='form-content' placeholder="请输入标题，不超过15字" maxlength='15' placeholder-class='input-text'/>
+                <input name='title' class='form-content' placeholder="请输入标题，不超过15字" maxlength='15' placeholder-class='input-text' auto-focus/>
             </view>
              <view class='section'>
                 <text class='form-title'>点子类型</text>
@@ -14,7 +14,7 @@
                  </picker>
             </view>
             <view class='section-area'>
-                <textarea name='solution'  bindinput='checkFontNum' data-name='solutionNum' placeholder="请写出您的想法，不超过200字" auto-focus class='idea-content' maxlength='200' placeholder-class='input-text'/>
+                <textarea name='solution'  bindinput='checkFontNum' data-name='solutionNum' placeholder="请写出您的想法，不超过200字" class='idea-content' maxlength='200' placeholder-class='input-text'/>
             </view>
             <view class='section-num'><text>{{200-solutionNum >= 0 ? 200-solutionNum: 0}}</text></view>
         </view>

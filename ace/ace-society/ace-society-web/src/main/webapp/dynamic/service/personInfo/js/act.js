@@ -46,7 +46,7 @@ function t_query() {
 /*个人信息加载表格数据*/
 function getPageList() {
     var url = contextPath + "/personInfo/findPersonInfoList";
-    params['name'] = $("input[name=keyword]").val();
+    params['realName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

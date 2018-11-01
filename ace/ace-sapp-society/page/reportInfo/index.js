@@ -11,10 +11,15 @@ Page({
         list: {},
         actionComment: false,
         commentVal: '',
-        commentList:{},
+        commentList:[],
         CTotal:0,
         likeNum:0,
         like:false,
+        likeUrl:'',
+        LoadOver: false,
+        Loadingstatus: false,
+        start: 0,
+        limit: 10,
     },
 
     /**
@@ -22,7 +27,6 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
-        console.log(options);
         let id = options.id;
         let tit = options.title;
         if (!id) {
@@ -44,25 +48,52 @@ Page({
             bisType: "reportLike",
         },
             function (rst) {
-                console.log(rst);
+                that.setData({
+                    likeNum: rst.data.allLike,
+                    like: rst.data.iLiet,
+                    initNum: rst.data.allLike
+                })
             });
     },
 
     getCommentList:function(){
         let that = this;
+        if (that.data.LoadOver) {
+            return;
+        }
+        that.showLoading();
         util.request(cfg.findComments, {
-            id: that.data.id,
+            bisId: that.data.id,
             bisType: "reportComment",
+            start: that.data.start,
+            limit: that.data.limit,
         },
             function (rst) {
                 if(rst.status==0){
+                    if(that.data.start==0){
+                        that.setData({
+                            CTotal:rst.data.total,
+                        })
+                    }
                     that.setData({
-                        commentList:rst.data.rows,
-                        CTotal:rst.data.total
-                    })
+                        commentList: that.data.commentList.concat(rst.data.rows),
+                        Loadingstatus: false,
+                    });
+                    if (rst.data.rows.length < that.data.limit) {
+                        that.setData({
+                            LoadOver: true,
+                        });
+                    }
                 }
-                console.log(rst);
             });
+    },
+
+    // 显示加载
+    showLoading: function () {
+        let that = this;
+        that.setData({
+            Loadingstatus: true,
+        });
     },
 
 
@@ -108,14 +139,34 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function() {
-
+        
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function() {
-
+        let that =this;
+        if (that.data.initNum == that.data.likeNum){
+            return;
+        }
+        util.request(that.data.likeUrl, {
+            bisId: that.data.id,
+            bisType: "reportLike",
+        },
+            function (rst) {
+                if (rst.status == 0) {
+                    that.setData({
+                        likeNum: that.data.likeNum + num,
+                        like: iLike,
+                    });
+                    return;
+                }
+                wx.showModal({
+                    title: '提示',
+                    content: '点赞失败，请重试',
+                })
+            });
     },
 
     /**
@@ -129,7 +180,10 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        var that = this;
+        console.log('-------------上拉加载-------------');
+        that.data.start += that.data.limit;
+        that.getCommentList();
     },
 
     /**
@@ -182,6 +236,7 @@ Page({
                     that.setData({
                         actionComment: false,
                     })
+                    that.clearStatus();
                     that.getCommentList();
                     return;
                 }
@@ -191,35 +246,31 @@ Page({
                 })
         });
     },
+    // 清空状态
+    clearStatus: function () {
+        let that = this;
+        that.data.start = 0;
+        that.setData({
+            LoadOver: false,
+            commentList: [],
+        })
+    },
     actionLike:function(){
         let that=this;
         let url,num,iLike;
-        if(that.data.like){
+        if (that.data.like) {
             url = cfg.cancelAdmire
-            num=-1;
-            iLike=false;
-        }else{
+            num = -1;
+            iLike = false;
+        } else {
             url = cfg.admire
             num = 1;
             iLike = true;
         }
-
-        util.request(url, {
-            bisId: that.data.id,
-            bisType: "reportLike",
-        },
-            function (rst) {
-                if(rst.status==0){
-                    that.setData({
-                        likeNum: that.data.likeNum + num,
-                        like: iLike,
-                    });
-                    return;
-                }
-                wx.showModal({
-                    title: '提示',
-                    content: '点赞失败，请重试',
-                })
-            });
+        that.setData({
+            likeNum: that.data.likeNum + num,
+            like: iLike,
+            likeUrl:url,
+        });
     }
 })

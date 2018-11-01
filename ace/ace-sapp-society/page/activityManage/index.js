@@ -27,10 +27,15 @@ Page({
         let that = this;
         let user = util.getSysUser();
         if (user.regType == 2) {
-
             that.data.url = cfg.adminActivityList;
+            that.setData({
+                type: 2
+            })
         } else if (user.regType == 1){
             that.data.url = cfg.userActivityList;
+            that.setData({
+                type:1
+            })
         }
     },
 
@@ -44,7 +49,6 @@ Page({
         }
         that.showLoading();
         util.request(that.data.url, {
-                category: 1,
                 start: that.data.start,
                 limit: that.data.limit
             },
@@ -71,6 +75,14 @@ Page({
         that.setData({
             Loadingstatus: true,
         });
+    },
+    //时间没到点击签到
+    notTimeSign:function(){
+        wx.showToast({
+            title: '活动没有开始',
+            icon: 'info',
+            duration: 2000
+        })
     },
 
     /**
@@ -142,6 +154,7 @@ Page({
         let typ=e.currentTarget.dataset.type;
         let id = e.currentTarget.dataset.id;
         wx.chooseImage({
+            sizeType: ['compressed'],
             sourceType: ['camera'],
             success(res) {
                 that.uploadFileFun(res.tempFilePaths[0], typ,id);
@@ -197,14 +210,13 @@ Page({
             url: cfg.server+'/portal/www/uploadFile.do',
             filePath: tempFilePaths,
             name: 'file',
-
             formData: {
                 collectionName: 'ceshi',
                 id: '111'
             },
             success: function (res) {
                 var data = JSON.parse(res.data);
-                var url = cfg.server + data.value[0].fileUrl;
+                var url = cfg.serverfile + data.value[0].fileUrl;
                 util.request(cfg.activitySign, {
                     filePath: url,
                     type: type,
@@ -216,16 +228,18 @@ Page({
                             wx.showToast({
                                 title: '成功',
                                 icon: 'success',
+                                duration: 2000,
+                                complete: function () {
+                                    that.onPullDownRefresh();
+                                }
+                            })
+                        }else{
+                            wx.showToast({
+                                title: '失败!',
+                                icon: 'none',
                                 duration: 2000
                             })
-                            that.onPullDownRefresh();
-                            return;
                         }
-                        wx.showToast({
-                            title: '失败!',
-                            icon: 'none',
-                            duration: 2000
-                        })
                     }
                 );
                 

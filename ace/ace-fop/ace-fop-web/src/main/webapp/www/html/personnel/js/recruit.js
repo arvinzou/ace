@@ -1,6 +1,8 @@
 var ngControllerName = "angularjsCtrl";
 var ngAppName = "angularjsApp";
 var app =angular.module(ngAppName, []);
+var pageSize=10;
+var currentPage = 1;
 
 app.controller(ngControllerName,function($scope){
     console.log(window.location.search);

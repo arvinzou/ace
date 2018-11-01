@@ -8,7 +8,7 @@ Page({
         limit:10,
         LoadOver:false,
         Loadingstatus:false,
-        nowDate: new Date(),
+        nowDate: util.formatTime(new Date(), 'Y-M-D h:m:s'),
         showBtn:false,
         hiddenBtn: true,
     },

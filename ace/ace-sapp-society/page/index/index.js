@@ -53,10 +53,6 @@ Page({
   },
   diy_time: function(startTime, endTime){
       var that = this;
-        //time1 = Date.parse(time1);
-        //time2 = Date.parse(new Date(time2));
-        //return Math.abs(parseInt((time2 - time1) / 1000 / 3600 / 24));
-     
       var date3 = new Date(endTime).getTime() - startTime.getTime();   //时间差的毫秒数      
       //计算出相差天数
       var days = Math.floor(date3 / (24 * 3600 * 1000))
@@ -116,6 +112,12 @@ Page({
   showMoreActivity: function(){
       wx.navigateTo({
           url: '../indexMore/index'
+      })
+  },
+  showActivityDetail: function(e){
+      var that = this;
+      wx.navigateTo({
+          url: '../activityInfo/index?id=' + e.currentTarget.dataset.id,
       })
   },
   /**

@@ -89,13 +89,13 @@
     float: left;
 }
 .num{
-    color: #FF9906;
+    color: #ffab32;
     font-size: 34rpx;
     font-weight: bold;
     padding-right: 10rpx;
 }
 .num-title{
-    color: #FF9906;
+    color: #ffab32;
     font-size: 22rpx;
     font-weight: bold;
 }
@@ -106,7 +106,7 @@
     text-align: center;
     display: block;
     color: #FFFFFF;
-    background:linear-gradient(45deg,rgba(255,153,6,1),rgba(255,177,60,1));
+    background:linear-gradient(45deg,rgba(255,171,50,1),rgba(255,177,60,1));
     border-radius:4rpx;
     font-size: 28rpx;
     font-weight: bold;
@@ -121,7 +121,7 @@
     height: 40rpx;
     line-height: 40rpx;
     text-align: center;
-    background:linear-gradient(45deg,rgba(255,153,6,1),rgba(255,177,60,1));
+    background:linear-gradient(45deg,rgba(255,171,50,1),rgba(255,177,60,1));
     color: #FFFFFF;
     font-size: 28rpx;
     font-weight: bold;

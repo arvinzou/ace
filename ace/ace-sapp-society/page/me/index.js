@@ -22,7 +22,7 @@ Page({
         var that = this;
         console.log(options);
         console.log("util.is_login()=============================================" + util.is_login());
-        if (!util.is_login()) {
+        if (!util.isLogin()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../me/index&type=switchTab"
             });

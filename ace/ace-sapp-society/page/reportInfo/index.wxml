@@ -8,14 +8,14 @@
             <text wx:if="{{list.category==1}}" class='type typeTag tagGreen'>公益活动</text>
             <text wx:elif="{{list.category==2}}" class='type typeTag tagPurPle'>普及活动</text>
             <text wx:elif="{{list.category==3}}" class='type typeTag tagYellow'>创意活动</text>
-            <text wx:elif="{{list.category==4}}"  class='type typeTag tagRed'>党建活动</text>
+            <text wx:elif="{{list.category==4}}" class='type typeTag tagRed'>党建活动</text>
         </view>
         <view class='bottom-line'></view>
     </view>
     <view class='body separate whiteBg'>
         <view class='content'>
 
-            <block wx:for="{{list.content}}">
+            <block wx:for="{{list.content}}" wx:key="*">
 
                 <block wx:if="{{item.type==1}}">
                     <view>{{item.content}}</view>
@@ -27,20 +27,21 @@
         </view>
     </view>
 
-    <view class='foot whiteBg'>
-        <view class='comments'>
-            <view wx:for="{{commentList}}" class='comment bottom-line'>
-                <view class='top'>
-                    <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
-                    <view class='right'>
-                        <view class='name'>{{item.nickName}}</view>
-                        <view class='time'>{{item.createDate}}</view>
-                    </view>
+    <view wx:for="{{commentList}}" wx:key="*" class='comments whiteBg'>
+        <view class='comment bottom-line'>
+            <view class='top'>
+                <image mode='aspectFill' src='{{item.avatarUrl}}'></image>
+                <view class='right'>
+                    <view class='name'>{{item.nickName}}</view>
+                    <view class='time'>{{item.createDate}}</view>
                 </view>
-                <view class='bottom '>{{item.content}}</view>
             </view>
+            <view class='bottom '>{{item.content}}</view>
         </view>
     </view>
+
+    <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
+    <view class="loading" hidden="{{!LoadOver}}">已加载全部</view>
 
     <view class='commentBox whiteBg top-line'>
         <view bindtap='actionComment' class='input'>一起参与讨论</view>

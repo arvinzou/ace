@@ -14,15 +14,13 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
-import com.huacainfo.ace.society.dao.SubjectIdeaAnnexDao;
-import com.huacainfo.ace.society.dao.SubjectIdeaDao;
+import com.huacainfo.ace.society.constant.RegType;
+import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.SubjectIdea;
 import com.huacainfo.ace.society.service.AuditRecordService;
+import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.service.SubjectIdeaService;
-import com.huacainfo.ace.society.vo.SubjectIdeaAnnexQVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaAnnexVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaQVo;
-import com.huacainfo.ace.society.vo.SubjectIdeaVo;
+import com.huacainfo.ace.society.vo.*;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -54,6 +52,14 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
     private SubjectIdeaAnnexDao subjectIdeaAnnexDao;
     @Autowired
     private SqlSessionTemplate sqlSession;
+    @Autowired
+    private SocietyOrgInfoDao societyOrgInfoDao;
+    @Autowired
+    private PersonInfoDao personInfoDao;
+    @Autowired
+    private CoinConfigDao coinConfigDao;
+    @Autowired
+    private PointsRecordService pointsRecordService;
 
     /**
      * @throws
@@ -225,7 +231,7 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
      * @version: 2018-09-13
      */
     @Override
-    public MessageResponse audit(String id, String rst, String remark,
+    public MessageResponse audit(String id, String userId, String orgType, String rst, String remark,
                                  UserProp userProp) throws Exception {
 
         SubjectIdea obj = subjectIdeaDao.selectByPrimaryKey(id);
@@ -234,9 +240,8 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         }
 
         //更改审核记录
-        MessageResponse auditRs =
-                auditRecordService.audit(BisType.SUBJECT_IDEA,
-                        obj.getId(), obj.getUserId(), rst, remark, userProp);
+        MessageResponse auditRs = auditRecordService.audit(BisType.SUBJECT_IDEA,
+                obj.getId(), obj.getUserId(), rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
@@ -246,10 +251,19 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         obj.setLastModifyUserId(userProp.getUserId());
         obj.setLastModifyUserName(userProp.getName());
         subjectIdeaDao.updateByPrimaryKeySelective(obj);
-
-
         dataBaseLogService.log("审核议题点子", "议题点子",
                 String.valueOf(id), String.valueOf(id), "议题点子", userProp);
+
+        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey("idea");
+        int points = coinConfigVo.getSubjoinNum();
+        if (RegType.PERSON.equals(orgType)) {
+            personInfoDao.addcoinSingle(userId, points);
+        } else {
+            societyOrgInfoDao.addcoin(userId, points);
+        }
+        //补增积分流水
+        pointsRecordService.addPointsRecord(userId, BisType.POINTS_IDEA, id, points);
+
         return new MessageResponse(0, "议题点子审核完成！");
     }
 

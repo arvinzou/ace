@@ -1,6 +1,6 @@
 <view class='index'>
     <view class='cover'>
-         <text>封面图（固定）</text>
+        <image src='../../image/idea-banner.png'></image>
     </view>
     <view class='ideaList'>
     <block wx:for='{{ideaList}}'>

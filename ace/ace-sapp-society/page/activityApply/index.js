@@ -33,15 +33,16 @@ Page({
         }
     },
     onLoad(e) {
-        console.log(e);
+        let that=this;
         let cat = e.category;
-        this.initValidate();
+        that.initValidate();
         let name = util.getSysUser().societyOrg.orgName;
-        var obj = dateTimePicker.dateTimePicker(this.data.startYear, this.data.endYear);
+        var obj = dateTimePicker.dateTimePicker(that.data.startYear, that.data.endYear);
         // 精确到分的处理，将数组的秒去掉
         var lastArray = obj.dateTimeArray.pop();
         var lastTime = obj.dateTime.pop();
-        this.setData({
+        that.getCoin(cat);
+        that.setData({
             dateTimeArray: obj.dateTimeArray,
             startDate: obj.dateTime,
             endDate: obj.dateTime,
@@ -52,6 +53,17 @@ Page({
             }
         });
     },
+    getCoin: function (cat){
+        let that =this;
+        util.request(cfg.getCoin,{id:cat},function(rst){
+            if(rst.status==0){
+                that.setData({
+                    host: rst.data.host
+                })
+            }
+        })
+    },
+
     changeDateTime(e) {
         let name = e.currentTarget.dataset.name;
         let temp = {};
@@ -294,7 +306,7 @@ Page({
             },
             success: function(res) {
                 var data = JSON.parse(res.data);
-                var url = cfg.server + data.value[0].fileUrl;
+                var url = cfg.serverfile + data.value[0].fileUrl;
                 that.setData({
                     ["form.coverUrl"]: url
                 })

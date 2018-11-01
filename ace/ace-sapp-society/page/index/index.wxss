@@ -39,7 +39,7 @@
     font-size:40rpx;
     font-family:MFLiHei_Noncommercial-Regular;
     font-weight:bold;
-    color:rgba(255,153,6,1);
+    color:rgba(255,171,50,1);
     line-height:44rpx;
 }
 .see-text{
@@ -238,6 +238,14 @@
     border-radius: 4rpx;
     position: relative;
 }
+.mask{
+    width: 270rpx;
+    height: 160rpx;
+    position: absolute;
+    background:#000; 
+    opacity:0.5; 
+    bottom: 40rpx;
+}
 .applytime{
     color: #666666;
     font-size: 26rpx;
@@ -299,7 +307,7 @@
     display: block;
     line-height: 45rpx;
     border-radius: 4rpx;
-    background: rgba(255,153,6,1);
+    background: rgba(255,171,50,1);
     color: #FFFFFF;
     font-size: 26rpx;
     text-align: center;

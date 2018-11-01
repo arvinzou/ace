@@ -191,6 +191,7 @@ Page({
             success(res) {
                 if (res.tapIndex === 0) {
                     wx.chooseImage({
+                        sizeType: ['compressed'],
                         sourceType: ['camera'],
                         success(res) {
                             that.uploadFileFun(res.tempFilePaths[0]);
@@ -245,7 +246,7 @@ Page({
             },
             success: function(res) {
                 var data = JSON.parse(res.data);
-                var url = cfg.server + data.value[0].fileUrl;
+                var url = cfg.serverfile + data.value[0].fileUrl;
                 if (that.data.isCover) {
                     that.setData({
                         coverUrl: url
@@ -307,6 +308,13 @@ Page({
             function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
+                if (that.data.status == "2"){
+                    wx.navigateBack({});
+                }else{
+                    wx.showToast({
+                        title: '保存成功',
+                    })
+                }
             }
         );
     },

@@ -107,7 +107,8 @@ public class FilesController extends PortalBaseController {
 
     @RequestMapping(value = "/uploadImage.do")
     @ResponseBody
-    public Map<String, Object> uploadImage(@RequestParam MultipartFile[] file, String collectionName, String x, String y, String desWidth, String desHeight, String srcWidth,
+    public Map<String, Object> uploadImage(@RequestParam MultipartFile[] file, String collectionName,
+                                           String x, String y, String desWidth, String desHeight, String srcWidth,
                                            String srcHeight) throws Exception {
 
         Map<String, Object> rst = new HashMap<String, Object>();

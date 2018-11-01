@@ -79,8 +79,8 @@
 
 .status2{
     box-sizing: border-box;
-    border:2rpx solid rgba(255,153,6,1);
-    color: #FF9906;
+    border:2rpx solid rgba(255,171,50,1);
+    color: #ffab32;
     line-height: 46rpx;
 }
 
@@ -94,4 +94,9 @@
 
 .status5{
     background: #F34F3E;
+    
+}
+
+.opacity6{
+    opacity: .6;
 }

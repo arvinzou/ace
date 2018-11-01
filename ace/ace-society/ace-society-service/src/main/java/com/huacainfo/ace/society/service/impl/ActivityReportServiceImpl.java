@@ -170,7 +170,7 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         activityReport.setLastModifyUserId(wxUser.getUnionId());
         this.activityReportDao.updateByPrimaryKeySelective(activityReport);
         if ("2".equals(o.getStatus())){
-            auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY_REPORT, o.getId(), wxUser.getUnionId());
+            auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY_REPORT, activityReport.getId(), wxUser.getUnionId());
         }
 //        this.dataBaseLogService.log("变更活动报道", "活动报道", "", activityReport.getId(), activityReport.getId(), null);
         return new ResultResponse(ResultCode.SUCCESS, "变更活动报道完成！");

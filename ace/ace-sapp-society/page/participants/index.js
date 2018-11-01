@@ -37,12 +37,6 @@ Page({
                 console.log();
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
-                let datas = rst.data;
-                for (let item in datas){
-                    let str = datas[item].mobile;
-                    console.log(str);
-                    datas[item].mob= str.substr(0, 3) + "****" + str.substr(7);
-                }
                 that.setData({
                     list: rst.data
                 });
