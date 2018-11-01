@@ -73,7 +73,7 @@ var jiaoyu = [{
 
 var self = [{
     name: "柳叶湖清科基金小镇",
-    value: [111.737953, 29.057274, 9]
+    value: [111.737636,29.057699, 9]
 }]
 
 var massage = {
