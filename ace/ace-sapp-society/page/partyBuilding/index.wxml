@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class='index'>
     <view class='headBanner separate'>
-        <image mode='aspectFill' src='../../image/partybanner.png'></image>
+        <image lazy-load="true" mode='aspectFill' src='../../image/partybanner.png'></image>
     </view>
 
     <view class='organization whiteBg separate'>
@@ -12,7 +12,7 @@
             <swiper next-margin='176rpx'>
                 <swiper-item wx:for='{{orgs}}'>
                     <view class='item'>
-                        <image mode='aspectFill' src="{{item.orgCover}}" class="slide-image" />
+                        <image lazy-load="true" mode='aspectFill' src="{{item.orgCover}}" class="slide-image" />
                         <view class='name'>{{item.orgName}}</view>
                     </view>
                 </swiper-item>
@@ -21,12 +21,12 @@
     </view>
     <view class='pastActivity whiteBg separate'>
         <view class='tilte'>
-            <image class='iconImage' src='../../image/icon_party.png'></image> 以往活动
+            <image lazy-load="true" class='iconImage' src='../../image/icon_party.png'></image> 以往活动
         </view>
         <view class='lists'>
             <view class='activity' wx:for='{{list}}' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
                 <view class='image'>
-                    <image mode='aspectFill' src='{{item.coverUrl}}'></image>
+                    <image lazy-load="true" mode='aspectFill' src='{{item.coverUrl}}'></image>
                 </view>
                 <view class='title'>
                     {{item.title}}

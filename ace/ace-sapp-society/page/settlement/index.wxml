@@ -22,7 +22,7 @@
   </view>
   <view class='form-box'>
       <view class='form'>
-           <view class='commodity-cover'><image src='{{ commodityInfo.commodityCover }}' class='cover'></image></view>
+           <view class='commodity-cover'><image lazy-load="true" src='{{ commodityInfo.commodityCover }}' class='cover'></image></view>
            <view class='commodity-info'>
                 <view class='info'>
                     <view class='commodity-name'>{{ commodityInfo.commodityName }}</view>

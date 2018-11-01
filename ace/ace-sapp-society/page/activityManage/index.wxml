@@ -49,7 +49,9 @@
 
             <view wx:if='{{item.status==41&&type==2}}' class='status status1'>活动无效</view>
 
-            <view wx:if='{{item.status==4&&type==2}}' bindtap='delActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>删除</view>
+            <view wx:if='{{item.status==42&&type==2}}' class='status status1'>活动超时</view>
+
+            <view wx:if='{{(item.status==4||item.status==42)&&type==2}}' bindtap='delActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>删除</view>
 
             <view wx:if='{{item.status==4&&type==2}}' bindtap='editActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>修改</view>
         </view>
