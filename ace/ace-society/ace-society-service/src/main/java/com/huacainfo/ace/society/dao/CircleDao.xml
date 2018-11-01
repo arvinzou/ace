@@ -71,7 +71,9 @@
 
   <sql id="whereCondition">
     from circle t
-    left join portal.userinfo a on t.uid=a.openid
+    left join (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+    select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+    where n.unionId not in(select unionid from portal.userinfo)) a on t.uid=a.openid
     left join circle_img b on t.id=b.circleId
     left join circle_log q on t.lastAuditLogId=q.id
     where 0=0
@@ -196,10 +198,14 @@
     e.statement auditMessage
     FROM
     circle t
-    LEFT JOIN portal.userinfo a ON t.uid = a.unionid
+    LEFT JOIN (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+    select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+    where n.unionId not in(select unionid from portal.userinfo)) a ON t.uid = a.unionid
     LEFT JOIN circle_img b ON t.id = b.circleId
     LEFT JOIN circle_cmt c ON t.id = c.circleId
-    LEFT JOIN portal.userinfo d ON c.uid = d.unionid
+    LEFT JOIN (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+    select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+    where n.unionId not in(select unionid from portal.userinfo)) d ON c.uid = d.unionid
     left join circle_log e on t.lastAuditLogId=e.id
     WHERE
     0=0

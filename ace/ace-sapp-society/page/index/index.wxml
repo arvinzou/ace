@@ -2,12 +2,17 @@
     <view class='container'>
         <view class='box'>
             <view class='activity-menu'>
-                <view class='menu-left'><text>火力全开</text></view>
+                <view class='menu-left'>
+                    <image class='hot' src='../../image/hot.png'></image>
+                </view>
                 <view class='menu-right' bindtap='showMoreActivity'>
+                    <block wx-if='{{activity.id !="" && activity.id != undefined && activity.id != null}}'>
                     <text class='see-text'>查看更多</text>
+                    </block>
                     <!--<image class='see-image' src='../../rediret.png'></image>-->
                 </view>
             </view>
+            <block wx-if='{{activity.id !="" && activity.id != undefined && activity.id != null}}'>
             <view class='activity' bindtap='showActivityDetail' data-id='{{activity.id}}'>
                 <view class='activity-left'>
                     <image class='activity-image' src='{{activity.coverUrl}}'></image>
@@ -53,6 +58,7 @@
                     </block>
                 </view>
             </view>
+            </block>
         </view>
     </view>
     <view class='container'>
