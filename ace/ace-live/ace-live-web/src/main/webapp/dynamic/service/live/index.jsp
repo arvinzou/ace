@@ -129,17 +129,17 @@
         <td  >\${item.nop}/\${item.pop}</td>
         <td >
             {@if item.auditStatus==1}
-            <span class="label label-lg label-info">待审</span>
+            <span class="label label-lg label-info">暂存</span>
             {@else if item.auditStatus==2}
-            <span class="label label-lg label-success">通过</span>
+            <span class="label label-lg label-info">待审</span>
             <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
             {@else if item.auditStatus==3}
-            <span class="label label-lg label-danger">驳回</span>
+            <span class="label label-lg label-success">通过</span>
             <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
             {@else}
-            <span class="label label-lg label-info">暂存</span>
+            <span class="label label-lg label-danger">驳回</span>
             {@/if}
         </td>
         <td >
@@ -290,10 +290,10 @@
 	                            <div class="col-md-10">
 	                                <div class="radio-group-container">
 	                                    <label>
-	                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
+	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
 	                                    </label>
 	                                    <label>
-	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
+	                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
 	                                    </label>
 	                                </div>
 	                            </div>
