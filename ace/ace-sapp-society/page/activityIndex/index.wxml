@@ -18,7 +18,7 @@
                     <text wx:elif='{{item.category==4}}' class='tags_b tags_dj'>党建活动</text>
                     <text>{{item.createUserName}}</text>
                     <text>{{filter.subDateTime(item.lastModifyDate,5,10)}}</text>
-                    <text>18条评论</text>
+                    <text>{{item.commentTotal}}条评论</text>
                 </view>
             </view>
             <view class='right'>

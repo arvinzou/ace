@@ -11,11 +11,15 @@ Page({
         list: {},
         actionComment: false,
         commentVal: '',
-        commentList:{},
+        commentList:[],
         CTotal:0,
         likeNum:0,
         like:false,
         likeUrl:'',
+        LoadOver: false,
+        Loadingstatus: false,
+        start: 0,
+        limit: 10,
     },
 
     /**
@@ -54,18 +58,42 @@ Page({
 
     getCommentList:function(){
         let that = this;
+        if (that.data.LoadOver) {
+            return;
+        }
+        that.showLoading();
         util.request(cfg.findComments, {
-            id: that.data.id,
+            bisId: that.data.id,
             bisType: "reportComment",
+            start: that.data.start,
+            limit: that.data.limit,
         },
             function (rst) {
                 if(rst.status==0){
+                    if(that.data.start==0){
+                        that.setData({
+                            CTotal:rst.data.total,
+                        })
+                    }
                     that.setData({
-                        commentList:rst.data.rows,
-                        CTotal:rst.data.total
-                    })
+                        commentList: that.data.commentList.concat(rst.data.rows),
+                        Loadingstatus: false,
+                    });
+                    if (rst.data.rows.length < that.data.limit) {
+                        that.setData({
+                            LoadOver: true,
+                        });
+                    }
                 }
             });
+    },
+
+    // 显示加载
+    showLoading: function () {
+        let that = this;
+        that.setData({
+            Loadingstatus: true,
+        });
     },
 
 
@@ -152,7 +180,10 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function() {
-
+        var that = this;
+        console.log('-------------上拉加载-------------');
+        that.data.start += that.data.limit;
+        that.getCommentList();
     },
 
     /**
@@ -205,6 +236,7 @@ Page({
                     that.setData({
                         actionComment: false,
                     })
+                    that.clearStatus();
                     that.getCommentList();
                     return;
                 }
@@ -213,6 +245,15 @@ Page({
                     content: '评论失败，稍后重试',
                 })
         });
+    },
+    // 清空状态
+    clearStatus: function () {
+        let that = this;
+        that.data.start = 0;
+        that.setData({
+            LoadOver: false,
+            commentList: [],
+        })
     },
     actionLike:function(){
         let that=this;

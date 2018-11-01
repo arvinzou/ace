@@ -40,11 +40,7 @@ public class WCommentController extends SocietyBaseController {
     @RequestMapping("/findList")
     public ResultResponse findList(CommentRecordQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        PageResult<CommentRecordVo> rst =
-                commentRecordService.findCommentRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
+        PageResult<CommentRecordVo> rst = commentRecordService.findCommentRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }
 
