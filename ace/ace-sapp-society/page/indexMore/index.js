@@ -28,7 +28,7 @@ Page({
                     console.log(ret);
                     for (var i = 0; i < ret.data.length; i++ ){
                         //剩余报名天数
-                        ret.data[i].leastDays = that.diy_time(new Date(), ret.data[i].dendline);
+                        ret.data[i].leastDays = that.diy_time(new Date(), ret.data[i].startDate);
                         ret.data[i].dendline = ret.data[i].dendline.substring(0, 16);
                         ret.data[i].days = that.data.days;
                         ret.data[i].hours = that.data.hours;
