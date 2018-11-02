@@ -87,7 +87,7 @@ Page({
    */
   initReport: function(){
       var that = this;
-      util.request(cfg.findPublicActivityReportList, { "start": 0, "limit": 2},
+      util.request(cfg.findPublicActivityReportList, { "start": 0, "limit": 10},
           function (ret) {
               if (ret.status == 0) {
                   that.setData({ reportData: ret.data})

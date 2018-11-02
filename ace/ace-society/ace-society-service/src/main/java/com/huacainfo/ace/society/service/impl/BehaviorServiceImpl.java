@@ -274,7 +274,7 @@ public class BehaviorServiceImpl implements BehaviorService {
         behavior.setLastModifyUserName(userProp.getName());
         behaviorDao.updateByPrimaryKeySelective(behavior);
         CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(CoinConfigType.TAKE_A_PHOTO);
-        int points = coinConfigVo.getSubjoinNum();
+        int points = coinConfigVo.getHost();
         if (RegType.PERSON.equals(userType)) {
             personInfoDao.addcoinSingle(userId, points);
         } else {

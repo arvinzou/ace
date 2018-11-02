@@ -156,10 +156,6 @@ Page({
         },
             function (rst) {
                 if (rst.status == 0) {
-                    that.setData({
-                        likeNum: that.data.likeNum,
-                        like: that.data.iLike,
-                    });
                     return;
                 }
                 wx.showModal({
@@ -209,10 +205,11 @@ Page({
                     }
                 }
             })
+        }else{
+            that.setData({
+                actionComment: false,
+            })
         }
-        that.setData({
-            actionComment: false,
-        })
     },
     getValue: function(e) {
         let that = this;
