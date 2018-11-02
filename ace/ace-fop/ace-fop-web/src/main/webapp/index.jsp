@@ -110,7 +110,7 @@ pageEncoding="utf-8"%>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">企业</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-laptop"></i>
+                    <i class="widget-thumb-icon bg-purple glyphicon glyphicon-home"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.company}">\${data.company}</span>
@@ -124,7 +124,7 @@ pageEncoding="utf-8"%>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">会员</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green fa fa-anchor"></i>
+                    <i class="widget-thumb-icon bg-green glyphicon glyphicon-user"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.member}">\${data.member}</span>
@@ -138,7 +138,7 @@ pageEncoding="utf-8"%>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">发布信息</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red  fa fa-user-secret"></i>
+                    <i class="widget-thumb-icon bg-red glyphicon glyphicon-th"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.info}">\${data.info}</span>
@@ -152,7 +152,7 @@ pageEncoding="utf-8"%>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">微信用户</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-user"></i>
+                    <i class="widget-thumb-icon bg-purple fa fa-mobile"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.userinfo}">\${data.userinfo}</span>
