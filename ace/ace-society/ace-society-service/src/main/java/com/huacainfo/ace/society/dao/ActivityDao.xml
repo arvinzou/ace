@@ -527,4 +527,24 @@
     where title = #{title,jdbcType=VARCHAR}
     </select>
 
+
+    <select id="findCloseList" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Vo_Column_List"/>
+        from activity t
+        WHERE 1 = 1
+        AND t.`status` IN ('2', '3')
+        AND TIMESTAMPDIFF(HOUR , t.startDate, NOW()) >= 2
+    </select>
+
+    <update id="autoCloseTimeOutData" parameterType="com.huacainfo.ace.society.model.Activity">
+        update activity
+        set `status`='42',
+                 remark = '超时自动关闭',
+                 lastModifyDate = NOW(),
+                 lastModifyUserId = 'system',
+                 lastModifyUserName = 'system'
+        WHERE `status` IN ('2', '3')
+        AND TIMESTAMPDIFF(HOUR , startDate, NOW()) >= 2
+    </update>
 </mapper>
