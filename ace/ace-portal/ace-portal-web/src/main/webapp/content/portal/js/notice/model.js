@@ -50,16 +50,21 @@ var _colModel = function() {
                         width : 50,
                         renderer : function(value, cur) {
                             var rowid=$.jgrid.getAccessor(cur, cfg.dataId);
+                            var status=$.jgrid.getAccessor(cur, 'status');
+                            var tops=$.jgrid.getAccessor(cur, 'top');
                             var opt=[];
                             if(authorConfig.hasOwnProperty(cfg.grid_edit_data_url )){
                                 opt.push('<a href="javascript:edit(\''+rowid+'\')">编辑</a> ');
                             }
-                            if(authorConfig.hasOwnProperty(cfg.insertRoleResources)){
-                                opt.push('<a href="javascript:role(\''+rowid+'\')">分配权限</a>  ');
-                            }
+
                             if(authorConfig.hasOwnProperty(cfg.grid_delete_data_url)){
                                 opt.push('<a href="javascript:del(\''+rowid+'\')">删除</a>');
                             }
+                            if(tops=='0'){
+                                opt.push('<a href="javascript:optTop(\''+rowid+'\')">置顶</a>');
+                            }
+
+
 
                             return opt.join('');
                         }

@@ -140,7 +140,7 @@
                 <div id="filelist-history"></div>
                 <div id="filelist"></div>
                 <div id="container">
-                    附件：<a id="pickfiles" href="javascript:;">[添加附件]</a> <a id="uploadfiles" href="javascript:;">[上传]</a>
+                    <a id="pickfiles" href="javascript:;">[添加附件]</a> <a id="uploadfiles" href="javascript:;">[上传]</a>
                 </div>
                 <br/>
                 <pre id="console"></pre>
