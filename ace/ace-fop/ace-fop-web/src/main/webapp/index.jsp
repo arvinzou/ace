@@ -110,7 +110,7 @@ pageEncoding="utf-8"%>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">企业</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple glyphicon glyphicon-home"></i>
+                    <i class="widget-thumb-icon bg-purple glyphicon glyphicon-star-empty"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.company}">\${data.company}</span>
@@ -124,7 +124,7 @@ pageEncoding="utf-8"%>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">会员</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green glyphicon glyphicon-user"></i>
+                    <i class="widget-thumb-icon bg-green glyphicon glyphicon-star"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.member}">\${data.member}</span>
