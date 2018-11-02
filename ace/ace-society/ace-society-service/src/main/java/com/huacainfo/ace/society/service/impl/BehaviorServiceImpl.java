@@ -288,6 +288,7 @@ public class BehaviorServiceImpl implements BehaviorService {
         return new MessageResponse(0, "市民行为详情审核完成！");
     }
 
+
     /**
      * 提交文明随手拍
      *
