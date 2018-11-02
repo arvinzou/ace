@@ -237,7 +237,7 @@
     <sql id="Vo_Column_List">
     t.id, t.activityId, t.userId, t.identity, t.points, t.signInState, t.signInDate, t.remark,t.signImgUrl, t.status,
     t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-    u.name,u.mobile,i.headimgurl,i.nickname
+    u.name,u.mobile,i.avatarUrl as headimgurl,i.nickName as nickname
   </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -258,7 +258,7 @@
     <sql id="whereCondition">
         from activity_detail t
         LEFT  JOIN  portal.users u ON  t.userId=u.user_id
-        LEFT  JOIN  portal.userinfo i ON  t.userId=i.unionid
+        LEFT  JOIN  portal.wx_user i ON  t.userId=i.unionid
         where t.status <![CDATA[ <> ]]> 0
         <!--<if test="condition.title !=null and condition.title !=&quot;&quot;">-->
             <!--and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')-->

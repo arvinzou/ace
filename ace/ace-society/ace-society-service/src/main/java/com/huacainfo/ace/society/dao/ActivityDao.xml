@@ -67,10 +67,10 @@
         select
         a.id, a.initiatorId, a.title, a.category, a.mode,a.purpose, a.location, a.coverUrl, a.startSignImgUrl, a.endSignImgUrl, a.dendline, a.startDate, a.endDate,
         a.volunteerNum, a.clazz, a.volunteerPoints, a.parterNum, a.parterPoints, a.remark, a.coinconfigId, a.status, a.createUserId,
-        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.headimgurl,s.orgName
+        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.avatarUrl as headimgurl,s.orgName
         from activity a
 --         LEFT  JOIN  portal.users u ON  a.initiatorId=u.user_id
-        LEFT  JOIN  portal.userinfo i ON  a.initiatorId=i.unionid
+        LEFT  JOIN  portal.wx_user i ON  a.initiatorId=i.unionid
         LEFT JOIN society_org_info s ON s.id=a.initiatorId
         where a.id = #{id,jdbcType=VARCHAR}
     </select>
@@ -435,8 +435,8 @@
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Base_Column_List"/>
+        ,(select COUNT(*) FROM activity_detail aa WHERE aa.activityId=t.id) as amount
         <include refid="fromCondition1"/>
-
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
