@@ -289,7 +289,10 @@ function delSysUser(){
     wx.removeStorageSync('sysUserInfo');
 }
 
-
+function formateStringToDate(dateString){
+    dateString = dateString.replace(/-/g, "/");
+    return new Date(dateString);
+}
 
 
 module.exports = {
@@ -313,7 +316,8 @@ module.exports = {
     is_login: is_login,
     getSysUser: getSysUser,
     setSysUser: setSysUser,
-    delSysUser: delSysUser
+    delSysUser: delSysUser,
+    formateStringToDate: formateStringToDate
 }
 
 

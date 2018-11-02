@@ -36,7 +36,7 @@ function reloadGrid(){
 }
 
 function edit(rowid){
-    console.log(rowid);
+   location.href="edit/index.jsp?id="+urlParams.id+"&did="+rowid;
 }
 var show=false;
 function del(rowid){
@@ -59,4 +59,47 @@ var params={};
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");
+}
+
+function optTop(noticeId){
+	$.ajax({
+		type : "get",
+		url : contextPath + "/notice/updateForTopByPrimaryKey.do",
+		data:{noticeId:noticeId},
+		beforeSend : function(XMLHttpRequest) {
+            startLoad();
+		},
+		success : function(rst, textStatus) {
+			alert(rst.errorMessage);
+		},
+		complete : function(XMLHttpRequest, textStatus) {
+            stopLoad();
+		},
+		error : function() {
+		    stopLoad();
+		}
+	});
+}
+function status(noticeId){
+	$.ajax({
+		type : "get",
+		url : contextPath + "/notice/updateForStatusByPrimaryKey.do",
+		data:{noticeId:noticeId,status:'1',groupId:'2'},
+		beforeSend : function(XMLHttpRequest) {
+             startLoad();
+		},
+		success : function(rst, textStatus) {
+			if(rst&&rst.state){
+				reloadGrid();
+			}else{
+				alert(rst.errorMessage);
+			}
+		},
+		complete : function(XMLHttpRequest, textStatus) {
+            stopLoad();
+		},
+		error : function() {
+		    stopLoad();
+		}
+	});
 }

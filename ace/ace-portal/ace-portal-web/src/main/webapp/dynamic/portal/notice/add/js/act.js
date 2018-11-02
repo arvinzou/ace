@@ -1,5 +1,6 @@
 var loading = {};
 var editor;
+var noticeId=guid();
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li><span>创建公告</span></li>");
@@ -35,12 +36,12 @@ function render(obj, data, tplId) {
 
 function initPage() {
     initEditor();
-    initUpload();
+    uploader.init();
 }
 
 function initEvents() {
     /*表单验证*/
-    $("input[name=noticeId]").val(guid());
+    $("input[name=noticeId]").val(noticeId);
     $("#fm-add").validate({
         onfocusout: function (element) {
             $(element).valid();
@@ -113,10 +114,11 @@ function initEvents() {
 }
 /*保存表单**/
 function save(params) {
-    $.extend(params, {startTime:params['startTime']+":00"});
+    $.extend(params, {deadline:params['deadline']+":00"});
+    $.extend(params, {top:'0'});
     startLoad();
     $.ajax({
-        url: contextPath + "/notice/insertNotice",
+        url: contextPath + "/notice/insertNotice.do",
         type: "post",
         async: false,
         data: {
@@ -140,4 +142,37 @@ function guid() {
        return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
     }
     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+
+function loadAttach(noticeId){
+	$.ajax({
+		type : "get",
+		url : contextPath + "/attach/findAttachList.do",
+		data:{noticeId:noticeId},
+		success : function(rst, textStatus) {
+			if(rst&&rst.state){
+				var html=[];
+				$.each(rst.value, function(n, file) {
+					html.push('<div id="' + file.fileUrl + '"><a href="'+fastdfs_server+file.fileUrl+'" target="_blank">' + file.fileName + '</a> (' + parseInt(file.fileSize/1024) + 'kb) <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' href="javascript:deleteAttach(\''+file.attachId+'\')"></a><b></b></div>');
+				});
+				$('#filelist-history').html(html.join(''));
+			}else{
+				alert(rst.errorMessage);
+			}
+		}
+	});
+}
+function deleteAttach(fileName){
+	$.ajax({
+		type : "get",
+		url : contextPath + "/attach/deleteAttachByFileName.do",
+		data:{fileName:fileName},
+		success : function(rst, textStatus) {
+			if(rst&&rst.state){
+				loadAttach(noticeId);
+			}else{
+				alert(rst.errorMessage);
+			}
+		}
+	});
 }
