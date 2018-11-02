@@ -21,7 +21,7 @@
     </view>
     <view class='pastActivity whiteBg separate'>
         <view class='tilte'>
-            <image lazy-load="true" class='iconImage' src='../../image/icon_party.png'></image> 以往活动
+            <image lazy-load="true" class='iconImage' src='../../image/icon_party.png'></image> 往期活动
         </view>
         <view class='lists'>
             <view class='activity' wx:for='{{list}}' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
