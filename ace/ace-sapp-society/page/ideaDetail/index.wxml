@@ -29,15 +29,23 @@
     </block>
     </view>
 
-    <!--评论点赞-->
-    <view class='cmt-bar'>
-          <image src='../../image/zan.png' class='cmt-addlike' bindtap='addlike' data-id="{{detail.id}}"></image>
-          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'>{{allLike}}</text>
-          <image src='../../image/comment.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{detail.id}}"></image>
+    <view class='commentBox whiteBg top-line'>
+        <view bindtap='actionComment' class='input'>一起参与讨论</view>
+        <text class='iconfont {{like?"liked":""}} icon-dianzan pop' bindtap='actionLike'> <text>{{likeNum}}</text> </text>
+        <text class='iconfont icon-pinglun pop'> <text>{{CTotal}}</text></text>
+    </view>
+    <view class="commentModel" wx:if='{{actionComment}}'>
+        <view class='inner-model' catchtap='hiddenComment'></view>
+        <view class='box whiteBg'>
+            <form bindsubmit="formSubmit" bindreset="formReset">
+                <textarea bindinput='getValue' name='content' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar=''></textarea>
+                <button class='submit' formType="submit">发送</button>
+            </form>
+        </view>
     </view>
 </view>
 
-<!--评论弹框-->
+<!--评论弹框
  <view class="model" wx:if='{{actionComment}}'>
     <view class='inner-model' catchtap='hiddenComment'></view>
     <view class='box whiteBg'>
@@ -47,3 +55,11 @@
       </form>
     </view>
   </view>
+
+
+      <!--评论点赞
+    <view class='cmt-bar'>
+          <image src='../../image/zan.png' class='cmt-addlike' bindtap='addlike' data-id="{{detail.id}}"></image>
+          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'>{{allLike}}</text>
+          <image src='../../image/comment.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{detail.id}}"></image>
+    </view>-->

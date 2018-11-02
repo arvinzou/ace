@@ -33,7 +33,7 @@
 
             <view wx:if='{{item.status==31&&type==2}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status1'>活动结束</view>
 
-            <view wx:if='{{item.status==33}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status4'>活动成功</view>
+            <view wx:if='{{item.status==33}}' class='status status4'>活动成功</view>
 
             <view wx:if='{{item.status==32&&!item.arStatus&&type==2}}' bindtap='postReport' data-id='{{item.id}}' class='status status2'>发布报道</view>
 
