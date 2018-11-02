@@ -8,12 +8,7 @@ cfg.pager_selector= "#grid-pager";
 //cfg.caption= "公告";
 cfg.rowNum= default_page_list[0];
 cfg.dataId= 'noticeId';
-cfg.gridHeight=window.innerHeight-layoutTopHeight;//
-//cfg.gridHeight= 'auto',
-
+cfg.gridHeight= 'auto',
 cfg.jgridEditWinWidth=700;
 cfg.jgridAlertWidth=400;
 cfg.jgrdInfoDialogWidth=500;
-if(cfg.gridHeight<100){
-	cfg.gridHeight=250;
-}
