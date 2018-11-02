@@ -39,10 +39,24 @@
                         </block>
                         <text class=''>{{activity.title}}</text>
                     </view>
-                    <view class='applytime'><text>报名截止：{{activity.dendline}}</text></view>
+                    <view class='applytime'>
+                        <block wx:if='{{activity.status == "3"}}'>
+                            <text>报名截止：{{activity.dendline}}</text>
+                        </block>
+                        <block wx:elif='{{activity.status == "31"}}'>
+                            <text>开始时间：{{activity.startDate}}</text>
+                        </block>
+                        <block wx:else>
+                            <text>结束时间：{{activity.endDate}}</text>
+                        </block>
+                    </view>
                     <view class='activity-footer'>
                         <view class='sign-number'><text>已报名:{{activity.activityDetailVoList.length >0? activity.activityDetailVoList.length: 0}}</text></view>
-                        <view class='activity-state'><image src='../../image/icon_having.png'></image></view>
+                        <view class='activity-state'>
+                            <block wx:if='activity.status=="3"'>
+                                <image src='../../image/icon_signing.png'></image>
+                            </block>
+                        </view>
                     </view>
                 </view>
                 <view class='activity-type'>
@@ -108,7 +122,7 @@
         <view class='activity-list'>
             <view class='title01'><text>精选往事</text></view>
             <block wx:for='{{reportData}}'>
-            <view class='activity-item'>
+            <view class='activity-item' bindtap='showFineDetail' data-id='item.id'>
                 <view class='activity-item-left'>
                     <view class='title02'><text>{{item.title}}</text></view>
                     <view class='type01'>
