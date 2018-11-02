@@ -86,7 +86,7 @@
     <orderEntry type="library" name="Maven: xom:xom:1.2.5" level="project" />
     <orderEntry type="library" name="Maven: xerces:xercesImpl:2.8.0" level="project" />
     <orderEntry type="library" name="Maven: xalan:xalan:2.7.0" level="project" />
-    <orderEntry type="module" module-name="ace-live-client" />
+    <orderEntry type="library" name="Maven: com.huacainfo:ace-live-client:1.0" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.0.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />

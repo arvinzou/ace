@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.fop.dao.report.Portal">
     <select id="query" resultType="map">
         SELECT
-        'company' AS 'name',
+        'company' AS 'id',
         sum(c) AS 'value'
         FROM
         (
@@ -24,7 +24,7 @@
         ) a
         UNION ALL
         SELECT
-        'member' AS 'name',
+        'member' AS 'id',
         sum(c) AS 'value'
         FROM
         (
@@ -45,7 +45,7 @@
         ) b
         UNION ALL
         SELECT
-        'info' AS 'name',
+        'info' AS 'id',
         sum(c) AS 'value'
         FROM
         (
@@ -63,7 +63,7 @@
         ) a
         UNION ALL
         SELECT
-        'userinfo' AS 'name',
+        'userinfo' AS 'id',
         count(1) 'value'
         FROM
         portal.userinfo

@@ -25,10 +25,10 @@ function render(obj, data, tplId) {
     		url : contextPath + '/anslysis/query.do',
     		data:data,
     		success : function(rst) {
-    		    var data=rst.value[0];
+    		    var data={};
     		    console.log(rst.value);
     			$.each(rst.value, function(i,o) {
-    				//data[o.name]=o.value;
+    				data[o.id]=o.value;
     			});
     			console.log(data);
     			render($(".page-content-inner"), data, tplId)

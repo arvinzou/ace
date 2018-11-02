@@ -38,17 +38,7 @@ public class AnslysisServiceImpl implements AnalysisService {
         condition.put("start", start);
         condition.put("limit", limit);
         List<Map<String, Object>> list = dao.query(condition);
-
-        List<Map<String, Object>> p = new ArrayList<>();
-//        if ("memberArea".equals(reportId)) {
-        p = parseMemberAreaLData(p, list);
-//        } else {
-//            for (Map<String, Object> e : list) {
-//                p.add(CommonUtils.sortMapByKey(e));
-//            }
-//        }
-
-        rst.setValue(p);
+        rst.setValue(list);
         return rst;
     }
 
