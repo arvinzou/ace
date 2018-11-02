@@ -256,7 +256,7 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
                 String.valueOf(id), String.valueOf(id), "议题点子", userProp);
 
         CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(CoinConfigType.IDEA);
-        int points = coinConfigVo.getSubjoinNum();
+        int points = coinConfigVo.getHost();
         if (RegType.PERSON.equals(orgType)) {
             personInfoDao.addcoinSingle(userId, points);
         } else {
