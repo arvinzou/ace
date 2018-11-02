@@ -22,14 +22,16 @@ Page({
   },
   activityIng: function (limit) {
         var that = this;
-        util.request(cfg.findActivitying, {"start":0, "limit":limit},
+      util.request(cfg.findActivitying, { "start": 0, "limit": limit, "orderBy": "status", "sord":"asc"},
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
                     for (var i = 0; i < ret.data.length; i++ ){
                         //剩余报名天数
-                        ret.data[i].leastDays = that.diy_time(new Date(), ret.data[i].dendline);
+                        ret.data[i].leastDays = that.diy_time(new Date(), ret.data[i].startDate);
                         ret.data[i].dendline = ret.data[i].dendline.substring(0, 16);
+                        ret.data[i].startDate = ret.data[i].startDate.substring(0, 16);
+                        ret.data[i].endDate = ret.data[i].endDate.substring(0, 16);
                         ret.data[i].days = that.data.days;
                         ret.data[i].hours = that.data.hours;
                         ret.data[i].minutes = that.data.minutes;
