@@ -22,16 +22,16 @@
 
             <view wx:if='{{item.status==3&&type==2}}' class='status status4'>发布已通过</view>
 
-            <view wx:if='{{item.status==3&&item.startDate<nowDate&&type==2}}' bindtap='activitySign' data-type='activityStart' data-id='{{item.id}}' class='status status1'>活动开始</view>
+            <view wx:if='{{item.status==3&&item.startDate<nowDate&&type==2}}' bindtap='activitySign' data-type='activityStart' data-id='{{item.id}}' class='status status2'>活动开始</view>
 
-            <view wx:if='{{item.status==31&&type==1&&item.adStatus==0}}' bindtap='activitySign' data-type='selfSign' data-id='{{item.id}}' class='status status1'>现场签到</view>
-            <view wx:if='{{item.status==3&&type==1}}' bindtap='notTimeSign' class='status status1 .opacity6'>现场签到</view>
+            <view wx:if='{{item.status==31&&type==1&&item.adStatus==0}}' bindtap='activitySign' data-type='selfSign' data-id='{{item.id}}' class='status status2'>现场签到</view>
+            <view wx:if='{{item.status==3&&type==1}}' bindtap='notTimeSign' class='status status2 .opacity6'>现场签到</view>
 
             <view wx:if='{{item.status>"31"&&type==1&&item.adStatus==0}}' class='status status5'>活动未签到</view>
 
             <view wx:if='{{type==1&&item.adStatus==1}}' class='status status4'>签到成功</view>
 
-            <view wx:if='{{item.status==31&&type==2}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status1'>活动结束</view>
+            <view wx:if='{{item.status==31&&type==2}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status2'>活动结束</view>
 
             <view wx:if='{{item.status==33}}' class='status status4'>活动成功</view>
 
@@ -51,9 +51,9 @@
 
             <view wx:if='{{item.status==42&&type==2}}' class='status status1'>活动超时</view>
 
-            <view wx:if='{{(item.status==4||item.status==42)&&type==2}}' bindtap='delActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>删除</view>
+            <view wx:if='{{(item.status==4||item.status==42)&&type==2}}' bindtap='delActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status2'>删除</view>
 
-            <view wx:if='{{item.status==4&&type==2}}' bindtap='editActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status1'>修改</view>
+            <view wx:if='{{item.status==4&&type==2}}' bindtap='editActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status2'>修改</view>
         </view>
     </block>
 
