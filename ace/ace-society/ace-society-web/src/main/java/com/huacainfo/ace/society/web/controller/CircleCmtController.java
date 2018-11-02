@@ -51,7 +51,7 @@ public class CircleCmtController extends SocietyBaseController {
     public PageResult
             <CircleCmtVo> findCircleCmtList(CircleCmtQVo condition,
                                             PageParamNoChangeSord page) throws Exception {
-        condition.setCorpId(this.getCurUserProp().getCorpId());
+        //condition.setCorpId(this.getCurUserProp().getCorpId());
         PageResult
                 <CircleCmtVo> rst = this.circleCmtService
                 .findCircleCmtList(condition, page.getStart(), page.getLimit(), page.getOrderBy());

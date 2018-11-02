@@ -20,9 +20,10 @@
 
 
   <sql id="whereCondition">
-    from circle_cmt t left join portal.userinfo a on t.uid=a.unionid
+    from circle_cmt t   LEFT JOIN (select m.unionid,m.openid,m.headimgurl,m.nickname from portal.userinfo m union all
+    select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+    where n.unionId not in(select unionid from portal.userinfo)) d ON t.uid = d.unionid
     left join circle b on b.id=t.circleId
-    where b.corpId=#{condition.corpId}
     <if test='condition.content!=null and condition.content!=""'>
       and (t.content like concat('%',#{condition.content,jdbcType=VARCHAR},'%') or a.nickname=#{condition.content})
     </if>
@@ -36,7 +37,7 @@
   </select>
   <select id="findList" resultMap="BaseResultMapVo">
     select
-    t.id, t.status, t.createTime,t.content,a.nickname,a.headimgurl
+    t.id, t.status, t.createTime,t.content,d.nickname,d.headimgurl, t.uid
     <include refid="whereCondition"/>
     <choose>
       <when test='orderBy!=null and orderBy!=""'>
