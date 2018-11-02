@@ -28,7 +28,7 @@
 }
 .active{
     color:#F65959;
-    border-bottom: 4rpx solid blue;
+    border-bottom: 4rpx solid #1a9fff;
 }
 swiper{
   margin: 5rpx;
@@ -114,7 +114,7 @@ swiper{
 
 .navbar .item.active {
     font-size: 34rpx;
-    color:blue;
+    color:#1a9fff;
 }
 
 .navbar .item.active:after {
@@ -127,10 +127,10 @@ swiper{
     height: 6rpx;
     width: 60rpx;
     margin: 0 auto;
-    background: blue;
+    background: #1a9fff;
     border-radius: 20%;
 }
 .active {
-  color:blue;
+  color:#1a9fff;
   border-bottom:4rpx solid #fff;
 }
