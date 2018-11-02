@@ -10,7 +10,9 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.dao.AuditRecordDao;
 import com.huacainfo.ace.society.model.Activity;
+import com.huacainfo.ace.society.model.AuditRecord;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,8 @@ public class ActivityReportServiceImpl implements ActivityReportService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private AuditRecordService auditRecordService;
+    @Autowired
+    private AuditRecordDao auditRecordDao;
 
     /**
      * @throws
@@ -170,9 +174,13 @@ public class ActivityReportServiceImpl implements ActivityReportService {
         activityReport.setLastModifyUserId(wxUser.getUnionId());
         this.activityReportDao.updateByPrimaryKeySelective(activityReport);
         if ("2".equals(o.getStatus())){
-            auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY_REPORT, activityReport.getId(), wxUser.getUnionId());
+            AuditRecord record = auditRecordDao.findBisType(BisType.ACTIVITY_REPORT, activityReport.getId(),activityReport.getCreateUserId());
+            if (record == null) {
+                auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY_REPORT, activityReport.getId(), wxUser.getUnionId());
+            }else if(!record.getAuditState().equals(activityReport.getStatus())){
+                auditRecordService.reaudit(BisType.ACTIVITY_REPORT,activityReport.getId(),activityReport.getCreateUserId(),activityReport.getStatus(),"重新审核",wxUser);
+            }
         }
-//        this.dataBaseLogService.log("变更活动报道", "活动报道", "", activityReport.getId(), activityReport.getId(), null);
         return new ResultResponse(ResultCode.SUCCESS, "变更活动报道完成！");
     }
 

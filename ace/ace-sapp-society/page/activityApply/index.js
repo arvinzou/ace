@@ -130,7 +130,7 @@ Page({
         const params = e.detail.value
         const startDate = that.formatDT(params.startDate);
         const endDate = that.formatDT(params.endDate);
-        const dendline = that.formatDT(params.dendline ? params.dendline : params.endDate);
+        const dendline = that.formatDT(params.dendline ? params.dendline : params.startDate);
         const clazz=params.clazz;
         params.coverUrl = that.data.form.coverUrl;
         params.category = that.data.category;
@@ -141,7 +141,7 @@ Page({
             });
             return;
         }
-        if (!(startDate < dendline && dendline <= endDate)) {
+        if (!(startDate < endDate && dendline <= startDate)) {
             wx.showModal({
                 title: '提示',
                 content: '设置时间错误'
