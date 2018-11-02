@@ -2,49 +2,72 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.fop.dao.report.Portal">
     <select id="query" resultType="map">
-    SELECT
-        'person' id,
-    count(1) 'value'
-    FROM
-    portal.department
-    union alls
-    SELECT
-    'user' id,
-    count(1) 'value'
-    FROM
-    portal.users where syid='fop'
-    union all
-    SELECT
-    'resources' id,
-    count(1) 'value'
-    FROM
-    portal.resources where syid='fop'
+        SELECT
+        'company' AS 'name',
+        sum(c) AS 'value'
+        FROM
+        (
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_company c
+        WHERE
+        c.companyType IN ('0', '4')
+        AND c.`status` IN ('1', '2')
+        UNION ALL
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_association a
+        WHERE
+        a.`status` IN ('1', '2')
+        ) a
+        UNION ALL
+        SELECT
+        'member' AS 'name',
+        sum(c) AS 'value'
+        FROM
+        (
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_company c
+        WHERE
+        c.companyType IN ('0', '4')
+        AND c.`status` = '2'
+        UNION ALL
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_association a
+        WHERE
+        a.`status` = '2'
+        ) b
+        UNION ALL
+        SELECT
+        'info' AS 'name',
+        sum(c) AS 'value'
+        FROM
+        (
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_association
+        WHERE
+        `status` IN ('1', '2')
+        UNION ALL
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.information_service
+        ) a
+        UNION ALL
+        SELECT
+        'userinfo' AS 'name',
+        count(1) 'value'
+        FROM
+        portal.userinfo
   </select>
 
-    <select id="portalCount" resultType="java.util.Map" parameterType="java.lang.String">
-        select
-        r.cCount + r.aCount as companyCount,
-        r.mcCount + r.maCount as memberCount,
-        iCount as infoCount
-        from (
-        SELECT
-        (
-        SELECT count(1) FROM fop.fop_company c
-        WHERE c.companyType in ('0','4')
-        and c.`status` IN ('1','2')
-        ) AS cCount,
-        ( SELECT count(1) FROM fop.fop_association a WHERE a.`status` IN ('1','2') ) AS aCount,
-        (
-        SELECT count(1)
-        FROM fop.fop_company c
-        WHERE c.companyType in ('0','4')
-        and c.`status` IN ('2')
-        ) AS mcCount,
-        (SELECT count(1) FROM fop.fop_association a WHERE a.`status` IN ('1','2') ) AS maCount,
-        (SELECT count(1) FROM fop.information_service) AS iCount
-        FROM
-        fop.fop_company t
-        LIMIT 1
-        ) r
-    </select>
+
 </mapper>
