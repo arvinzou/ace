@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.society.service.AnalysisService;
 import com.huacainfo.ace.society.service.OrderInfoService;
 import com.huacainfo.ace.society.service.PointsRecordService;
@@ -104,5 +105,14 @@ public class WUserController extends SocietyBaseController {
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
+    }
+
+
+    /***
+     * 获取当前服务器时间
+     */
+    @RequestMapping("/getNowDateTime")
+    public String getNowDateTime() throws Exception {
+        return DateUtil.getNow();
     }
 }

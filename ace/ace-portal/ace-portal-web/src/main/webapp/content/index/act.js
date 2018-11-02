@@ -62,12 +62,12 @@ function initNoticeTopList1() {
 									html.push('<span">■</span> ');
 
 									html.push('</td>');
-									html.push('<td align="left">【');
-									html.push(o.departmentName);
+									html.push('<td align="left">');
 
-									html.push('】');
 
-									html.push('<a href="javascript:parent.addPanel(\''+o.category+'\',\''+o.url+'\',true)">');
+
+
+									html.push('<a href="'+o.url+'" target="_blank">');
 
 									html.push(o.title);
 
@@ -80,7 +80,7 @@ function initNoticeTopList1() {
 									}
 									html.push('</td>');
 									html.push('<td width="150px" align="right">');
-									html.push(o.publishTime);
+									html.push(o.createTime);
 									html.push('</td>');
 
 
@@ -121,12 +121,12 @@ function initNoticeTopList2() {
                         									html.push('<span">■</span> ');
 
                         									html.push('</td>');
-                        									html.push('<td align="left">【');
-                        									html.push(o.departmentName);
+                        									html.push('<td align="left">');
 
-                        									html.push('】');
 
-                        									html.push('<a href="javascript:parent.addPanel(\''+o.category+'\',\''+o.url+'\',true)">');
+
+
+                        									html.push('<a href="'+o.url+'" target="_blank">');
 
                         									html.push(o.title);
 
@@ -139,7 +139,7 @@ function initNoticeTopList2() {
                         									}
                         									html.push('</td>');
                         									html.push('<td width="150px" align="right">');
-                        									html.push(o.publishTime);
+                        									html.push(o.createTime);
                         									html.push('</td>');
 
 

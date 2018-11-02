@@ -1,11 +1,11 @@
 package com.huacainfo.ace.society.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.society.vo.ActivityQVo;
 import com.huacainfo.ace.society.vo.ActivityVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ActivityDao {
 
@@ -31,9 +31,9 @@ public interface ActivityDao {
                               @Param("orderBy") String orderBy);
 
     List<ActivityVo> findUserList(@Param("condition") ActivityQVo condition,
-                              @Param("start") int start,
-                              @Param("limit") int limit,
-                              @Param("orderBy") String orderBy);
+                                  @Param("start") int start,
+                                  @Param("limit") int limit,
+                                  @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") ActivityQVo condition);
 
@@ -41,4 +41,16 @@ public interface ActivityDao {
 
     int isExit(Activity record);
 
+    /***
+     * 获取待关闭活动
+     * @return List
+     */
+    List<Activity> findCloseList();
+
+    /**
+     * 自动关闭超时活动数据
+     *
+     * @return int
+     */
+    int autoCloseTimeOutData();
 }

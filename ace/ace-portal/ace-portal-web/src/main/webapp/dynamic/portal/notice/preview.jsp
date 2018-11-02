@@ -8,6 +8,18 @@
 	request.setAttribute("noticeId", noticeId);
 	request.setAttribute("taskId", taskId);
 %>
+<%
+session.setAttribute("portalPath", "/portal");
+%>
+<script type="text/javascript">
+    var contextPath = '${pageContext.request.contextPath}';
+    var portalPath = '${portalPath}';
+    var version = '${cfg.version}';
+    var fastdfs_server = '${cfg.fastdfs_server}';
+    var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
+    var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
+    var default_page_list=[${cfg.default_page_list}];
+</script>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -21,19 +33,22 @@
 	var noticeId = '${noticeId}';
 	var taskId = '${taskId}';
 </script>
-<jsp:include page="../../common/common.jsp" />
 
-
+<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}" type="text/javascript"></script>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}" />
 <body>
 	<div class="page-content">
 		<div align="center">
 			<h3 id="notice-title"></h3>
 
-			<span id="notice-department"></span><span id="notice-publisher"></span> <span id="notice-publishTime"></span>
+			  <span id="notice-department"></span>  <span id="notice-publisher"></span>  <span id="notice-publishTime"></span>
 		</div>
-		<hr align="center" width="100%" size="1" noshade>
+		<hr align="center" width="100%" size="1" noshade style="color:eeeeee">
+
 		<div id="notice-content"></div>
-		<hr align="center" width="100%" size="1" noshade>
+
+		<hr align="center" width="100%" size="1" noshade style="color:eeeeee">
+
 		<div id="filelist-history"></div>
 
 	</div>
@@ -45,9 +60,8 @@
 
 
 
-	<jsp:include page="../../common/footer-1.jsp" />
 
-	<jsp:include page="../../common/footer-2.jsp" />
+
 	<script type="text/javascript">
 		jQuery(function($) {
 			loadAttach(noticeId);
@@ -73,26 +87,12 @@
 								$("#notice-publisher").html(
 										rst.value.name);
 								$("#notice-publishTime").html(
-										rst.value.publishTime);
+										rst.value.createTime);
 								$("#notice-department").html(
 										rst.value.departmentName);
 
 							} else {
-								bootbox
-										.dialog({
-											title : '系统提示',
-											message : rst.errorMessage,
-											detail : rst.detail,
-											buttons : {
-												"success" : {
-													"label" : "<i class='ace-icon fa fa-check'></i>确定",
-													"className" : "btn-sm btn-success",
-													"callback" : function() {
-														//$( this ).dialog( "close" );
-													}
-												}
-											}
-										});
+
 							}
 						},
 						complete : function(XMLHttpRequest, textStatus) {
@@ -115,14 +115,14 @@
 						success : function(rst, textStatus) {
 							if (rst && rst.state) {
 								var html = [];
-								html.push('<h3>附件列表</h3>');
+								html.push('附件列表');
 								$
 										.each(
 												rst.value,
 												function(n, file) {
 
 													html
-															.push('<div id="' + file.fileUrl + '"><a style="font-size:25px" href="'
+															.push('<div id="' + file.fileUrl + '"><a href="'
 																	+ fastdfs_server+file.fileUrl
 																	+ '" target="_blank">'
 																	+ file.fileName
@@ -130,24 +130,10 @@
 																	+ parseInt(file.fileSize / 1024)
 																	+ 'kb) <b></b></div>');
 												});
-								//document.getElementById('filelist').innerHTML=html.join('');
+
 								$('#filelist-history').html(html.join(''));
 							} else {
-								bootbox
-										.dialog({
-											title : '系统提示',
-											message : rst.errorMessage,
-											detail : rst.detail,
-											buttons : {
-												"success" : {
-													"label" : "<i class='ace-icon fa fa-check'></i>确定",
-													"className" : "btn-sm btn-success",
-													"callback" : function() {
-														//$( this ).dialog( "close" );
-													}
-												}
-											}
-										});
+
 							}
 						},
 						complete : function(XMLHttpRequest, textStatus) {
@@ -169,7 +155,7 @@
 				success : function(rst, textStatus) {
 				},
 				complete : function(XMLHttpRequest, textStatus) {
-					parent.initTaskList();
+
 				},
 				error : function() {
 				}
