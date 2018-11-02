@@ -23,7 +23,7 @@
                     <view class="title" style='width:25%'>注册类型
                         <text>*</text>
                     </view>
-                    <picker style='width:75%' mode = selector bindchange="bindPickerChange" data-name='{{ array[index] }}' value="index" range="{{array}}">
+                    <picker style='width:75%' mode = 'selector' bindchange="bindPickerChange" data-name='{{ array[index] }}' value="index" range="{{array}}">
                         <view style='width:75%' class="picker">{{array[index]}}</view>
                     </picker>
                 </view>
@@ -143,16 +143,22 @@
 
         <!--第三步，提交成功-->
        <view class='reuslt {{lastNum==3?"":"hidden"}}'>
-        <view class='massage'>
-            <icon type="success" size="80" />
-            <text class='fontStyle1'>注册成功！</text>
-            <text class='fontStyle2'>注册由芙蓉街道统一管理</text>
-            <text class='fontStyle3'>待审核通过后正式入驻平台</text>
-            <text class='fontStyle3'>联系电话：0736-2323252</text>
-        </view>
-        <view class='btn btn-clicking' bindtap='close'>
-            关闭
-        </view>
+       
+       <view class='massage'>
+                    <view class='image'>
+                        <image lazy-load="true" mode='widthFix' src='../../image/icon_success.png'></image>
+                    </view>
+                    <text class='fontStyle1'>发布成功</text>
+                    <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>
+                    <view class='fontStyle2'>
+                        <text>联系电话：</text>
+                        <text bindtap="callphone" data-mobile='0736-2323252' class="phone">0736-2323252</text>
+                    </view>
+                </view>
+                <view bindtap='colseThis' class='btn btn-bkClick'>
+                    关闭
+                </view>
+
     </view>
     </view>
 </view>
