@@ -42,8 +42,8 @@ Page({
                 let contents = null;
                 if (data.content) {
                     contents = JSON.parse(data.content);
-                }else{
-                    contents=[];
+                } else {
+                    contents = [];
                 }
 
                 wx.hideNavigationBarLoading() //完成停止加载
@@ -94,7 +94,7 @@ Page({
         this.cencelClickStyle(false);
         todo.editing = true;
         this.updateData(true);
-        
+
     },
     // 修改结束
     endEdit: function(e) {
@@ -107,7 +107,7 @@ Page({
             this.data.content.splice(this.getElementIndex(todo.id), 1);
         }
         this.updateData(true);
-        
+
     },
     // 获取单个数据信息
     getTodo: function(id) {
@@ -155,10 +155,10 @@ Page({
     //获取点击元素所在序列
     getElementIndex: function(id) {
         let contents = this.data.content;
-        if(!contents){
+        if (!contents) {
             return 0;
         }
-        let len=contents.length;
+        let len = contents.length;
         let data = this.data.content;
         for (let i = 0; i < len; i++) {
             if (data[i].id == id) {
@@ -236,7 +236,7 @@ Page({
     uploadFileFun: function(tempFilePaths) {
         var that = this;
         wx.uploadFile({
-            url: cfg.server+'/portal/www/uploadFile.do',
+            url: cfg.server + '/portal/www/uploadFile.do',
             filePath: tempFilePaths,
             name: 'file',
 
@@ -308,24 +308,39 @@ Page({
             function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
-                if (that.data.status == "2"){
-                    wx.navigateBack({});
-                }else{
-                    wx.showToast({
-                        title: '保存成功',
-                    })
+                if (rst.status == 0) {
+                    if (that.data.status == "2") {
+                        wx.showToast({
+                            title: '发布成功',
+                            icon: 'success',
+                            duration: 1500,
+                            mask: true,
+                            complete: function() {
+                                wx.navigateBack({});
+                            }
+                        })
+
+                    } else {
+                        wx.showToast({
+                            title: '保存成功',
+                        })
+                    }
+                    return;
                 }
+                wx.showToast({
+                    title: '操作失败',
+                })
             }
         );
-    },      
-    getTitle:function(e){
-        let that=this;
+    },
+    getTitle: function(e) {
+        let that = this;
         that.data.title = e.detail.value;
     },
     /**
- * 页面相关事件处理函数--监听用户下拉动作
- */
-    onPullDownRefresh: function () {
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function() {
         this.saveReport();
         this.initdata();
     },
