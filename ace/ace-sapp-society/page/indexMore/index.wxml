@@ -21,13 +21,35 @@
                 </view>
                 <view class='activity-right'>
                     <view class='activity-title'>
+                        <block wx:if='{{item.category == "4"}}'>
                         <text class='stage'>第{{item.clazz}}期</text>
+                        </block>
                         <text class='title01'>{{item.title}}</text>
                     </view>
-                    <view class='applytime'><text>报名截止：已报名:{{item.activityDetailVoList.length >0? item.activityDetailVoList.length: 0}}</text></view>
+                    <view class='applytime'>
+                        <block wx:if='{{item.status == "3"}}'>
+                            <text>报名截止：{{item.dendline}}</text>
+                        </block>
+                        <block wx:elif='{{item.status == "31"}}'>
+                            <text>开始时间：{{item.startDate}}</text>
+                        </block>
+                        <block wx:else>
+                            <text>结束时间：{{item.endDate}}</text>
+                        </block>
+                    </view>
                     <view class='activity-footer'>
-                        <view class='sign-number'><text>已报名:{{item.parterNum}}</text></view>
-                        <view class='activity-state'><image src='../../image/icon_having.png'></image></view>
+                        <view class='sign-number'><text>已报名:{{item.activityDetailVoList.length >0? item.activityDetailVoList.length: 0}}</text></view>
+                        <view class='activity-state'>
+                             <block wx:if='{{item.status == "3"}}'>
+                                <image src='../../image/icon_signing.png'></image>
+                            </block>
+                            <block wx:elif='{{item.status == "31"}}'>
+                                <image src='../../image/icon_having.png'></image>
+                            </block>
+                            <block wx:else>
+                                <image src='../../image/icon_over.png'></image>
+                            </block>
+                        </view>
                     </view>
                 </view>
                 <view class='activity-type'>

@@ -48,7 +48,6 @@
 <script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>

@@ -1,16 +1,39 @@
 var loading = {};
 var editor;
 var noticeId=guid();
-window.onload = function () {
+function guid() {
+    function S4() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+window.onload = function (){
     jQuery(function ($) {
-        $(".breadcrumb").append("<li><span>创建公告</span></li>");
+        $(".breadcrumb").append("<li><span>创建企业走访</span></li>");
         initPage();
         initEvents();
+        	$("input[name=visitDate]").datetimepicker({
+        	　　　　　　format: 'yyyy-mm-dd hh:ii',
+        	　　　　　　language: 'zh-CN',
+        	　　　　　　weekStart: 1,
+        	　　　　　　todayBtn: 1,//显示‘今日’按钮
+        	　　　　　　autoclose: 1,
+        	　　　　　　todayHighlight: 1,
+        	　　　　　　startView: 2,
+        	　　　　　　minView: '0',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+        	　　　　　　clearBtn:true,//清除按钮
+        	　　　　　　forceParse: 0
+        	　　	});
+        	$('input[name=visitDate]').focus(function(){
+        　　　　　　$(this).blur();//不可输入状态
+        　　　　})
+
     });
+
 }
 
 function initEditor() {
-    editor = new Simditor({
+        editor = new Simditor({
         textarea: $('textarea[name=content]'),
         toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol',
             'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'
@@ -35,51 +58,30 @@ function render(obj, data, tplId) {
 
 function initPage() {
     initEditor();
-    uploader.init();
 }
-
-function initEvents() {
+function initEvents(){
+     $("input[name=id]").val(noticeId);
     /*表单验证*/
-    $("input[name=noticeId]").val(noticeId);
     $("#fm-add").validate({
-        onfocusout: function (element) {
-            $(element).valid();
-        },
-		errorPlacement: function(error, element) {
-             $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
-        },
+        onfocusout: function(element) { $(element).valid(); },
         rules: {
-            title: {
-                required: true,
-                maxlength: 100
-            },
-            category: {
-                required: true
-            },
-            deadline: {
-                required: true
-            },
-            content: {
-                required: true
-            }
-        },
+             companyId: {required: true,maxlength:50},
+             title: {required: true,maxlength:200},
+             content: {required: true}
+         },
         messages: {
-            title: {
-                required: "请输入标题",
-                maxlength: "标题字符长度不能超过100"
-            },
-            category: {
-                required: "请选择公告类型"
-            },
-            deadline: {
-                required: "请输入有效日期"
-            },
-            content: {
-                required: "请输入内容"
-            }
+                companyId: {
+                    required: "请输入走访企业名称",
+                    maxlength:"走访企业名称字符长度不能超过50"
+                }, title: {
+                    required: "请输入标题",
+                    maxlength:"标题字符长度不能超过200"
+                },content: {
+                    required: "请输入走访内容"
+                }
         }
     });
-    /*监听表单提交*/
+     /*监听表单提交*/
     $('#fm-add').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
@@ -87,37 +89,23 @@ function initEvents() {
                 params[obj.name] = obj.value;
             });
             $.extend(params, {
-                time: new Date(),
-                status: '1'
+time: new Date()
             });
+            $.extend(params, {visitDate:params['visitDate']+":00"});
             console.log(params);
             save(params);
             return false;
         }
     });
-	$("input[name=deadline]").datetimepicker({
-	　　　　　　format: 'yyyy-mm-dd hh:ii',
-	　　　　　　language: 'zh-CN',
-	　　　　　　weekStart: 1,
-	　　　　　　todayBtn: 1,//显示‘今日’按钮
-	　　　　　　autoclose: 1,
-	　　　　　　todayHighlight: 1,
-	　　　　　　startView: 2,
-	　　　　　　minView: '0',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
-	　　　　　　clearBtn:true,//清除按钮
-	　　　　　　forceParse: 0
-	　　	});
-	$('input[name=deadline]').focus(function(){
-　　　　　　$(this).blur();//不可输入状态
-　　　　})
+     uploader.init();
 }
 /*保存表单**/
 function save(params) {
-    $.extend(params, {deadline:params['deadline']+":00"});
-    $.extend(params, {top:'0'});
+    $.extend(params, {
+    });
     startLoad();
     $.ajax({
-        url: contextPath + "/notice/insertNotice.do",
+        url: contextPath + "/fopVisit/insertFopVisit",
         type: "post",
         async: false,
         data: {
@@ -125,28 +113,24 @@ function save(params) {
         },
         success: function (result) {
             stopLoad();
-            alert(result.errorMessage);
+			alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = '../index.jsp?id='+urlParams.id;
+                window.location.href ='../index.jsp?id='+urlParams.id;
             }
         },
         error: function () {
-			 startLoad();
+            stopLoad();
             alert("对不起出错了！");
         }
     });
 }
-function guid() {
-    function S4() {
-       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
-    }
-    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
-}
+
+
 
 function loadAttach(noticeId){
 	$.ajax({
 		type : "get",
-		url : contextPath + "/attach/findAttachList.do",
+		url : portalPath + "/attach/findAttachList.do",
 		data:{noticeId:noticeId},
 		success : function(rst, textStatus) {
 			if(rst&&rst.state){
@@ -164,7 +148,7 @@ function loadAttach(noticeId){
 function deleteAttach(fileName){
 	$.ajax({
 		type : "get",
-		url : contextPath + "/attach/deleteAttachByFileName.do",
+		url : portalPath + "/attach/deleteAttachByFileName.do",
 		data:{fileName:fileName},
 		success : function(rst, textStatus) {
 			if(rst&&rst.state){

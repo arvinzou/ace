@@ -34,9 +34,11 @@ Page({
                  console.log(ret);
                   if(ret.data[0]){
                       //剩余报名天数
-                      ret.data[0].leastDays = that.diy_time(new Date(), ret.data[0].dendline);
+                      ret.data[0].leastDays = that.diy_time(new Date(), ret.data[0].startDate);
                       console.log("剩余报名天数==========================" + ret.data[0].leastDays);
                       ret.data[0].dendline = ret.data[0].dendline.substring(0,16);
+                      ret.data[0].startDate = ret.data[0].startDate.substring(0, 16);
+                      ret.data[0].endDate = ret.data[0].endDate.substring(0, 16);
                       that.setData({ activity: ret.data[0] });
                   }
                   
@@ -55,8 +57,6 @@ Page({
       console.log("startTime=,endTime="+startTime+":"+endTime);
       var that = this;
       var date3 = util.formateStringToDate(endTime).getTime() - startTime.getTime();   //时间差的毫秒数  
-      console.log("newDate=======================" + startTime.getTime()) ;   
-      console.log("endTime=======================" + util.formateStringToDate(endTime).getTime()); 
       //计算出相差天数
       var days = Math.floor(date3 / (24 * 3600 * 1000))
       //计算出小时数
@@ -87,7 +87,7 @@ Page({
    */
   initReport: function(){
       var that = this;
-      util.request(cfg.findPublicActivityReportList, { "start": 0, "limit": 10},
+      util.request(cfg.findPublicActivityReportList, { "start": 0, "limit": 2},
           function (ret) {
               if (ret.status == 0) {
                   that.setData({ reportData: ret.data})
@@ -121,6 +121,12 @@ Page({
       var that = this;
       wx.navigateTo({
           url: '../activityInfo/index?id=' + e.currentTarget.dataset.id,
+      })
+  },
+  showFineDetail: function(e){
+      var that = this;
+      wx.navigateTo({
+          url: '../reportInfo/index?id=' + e.currentTarget.dataset.id,
       })
   },
   /**
