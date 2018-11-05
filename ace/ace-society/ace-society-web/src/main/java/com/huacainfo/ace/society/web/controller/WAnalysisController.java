@@ -26,9 +26,9 @@ public class WAnalysisController extends SocietyBaseController {
             String reportId)
             throws Exception {
         Map<String, Object> condition = this.getParams();
-        if (CommonUtils.isBlank(condition.get("deptId"))) {
+        /*if (CommonUtils.isBlank(condition.get("deptId"))) {
             condition.put("deptId", this.getCurUserProp().getCorpId());
-        }
+        }*/
         this.logger.info("condition ->{}", condition);
         return analysisService.query(condition, reportId);
     }
