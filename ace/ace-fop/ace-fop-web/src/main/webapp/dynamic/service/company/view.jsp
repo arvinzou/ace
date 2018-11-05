@@ -201,19 +201,9 @@ urlParams=getQueryString();
         background-color: #FBFCFD;
     }
 
-    textarea {
-        height: 200px;
-        width: 100%;
-        resize: none;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        border: #C9D8DB 1px solid;
-    }
 
-    input {
-        border: none !important;
-    }
+
+
 </style>
 
 
