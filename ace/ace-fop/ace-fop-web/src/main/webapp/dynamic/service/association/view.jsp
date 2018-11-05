@@ -185,7 +185,8 @@
                             <td align="right" class="tdbg">办公电话</td>
                             <td><input type="text" name="phoneNumber" readonly="true" value="\${phoneNumber}"/></td>
                             <td align="right" class="tdbg">地址</td>
-                            <td><input type="text" name="address" readonly="true" value="\${address}"/>
+                            <td>
+                                <a name="address" href="location.jsp?did=\${id}" target="_blank">\${address} </a>
                             </td>
                         </tr>
                         <tr>
