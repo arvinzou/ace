@@ -30,6 +30,6 @@ public interface ConfigMapper {
 
     List<Config> selectBasicConfigListByCategory(String category);
 
-    ConfigVo findByKey(@Param("syId") String syId,
-                       @Param("cfgKey") String cfgKey);
+    Config findByKey(@Param("syId") String syId,
+                     @Param("cfgKey") String cfgKey);
 }
