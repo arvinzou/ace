@@ -1,35 +1,37 @@
 package com.huacainfo.ace.society.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
-import com.huacainfo.ace.common.pushmsg.CommonUtil;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.society.constant.AuditState;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.*;
-import com.huacainfo.ace.society.model.*;
+import com.huacainfo.ace.society.model.Activity;
+import com.huacainfo.ace.society.model.ActivityDetail;
+import com.huacainfo.ace.society.model.CoinConfig;
+import com.huacainfo.ace.society.model.PointsRecord;
+import com.huacainfo.ace.society.service.ActivityService;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.CoinConfigService;
 import com.huacainfo.ace.society.service.PointsRecordService;
-import com.huacainfo.ace.society.vo.*;
+import com.huacainfo.ace.society.vo.ActivityDetailVo;
+import com.huacainfo.ace.society.vo.ActivityQVo;
+import com.huacainfo.ace.society.vo.ActivityVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.society.service.ActivityService;
+import java.util.Date;
+import java.util.List;
 
 @Service("activityService")
 /**
@@ -506,7 +508,7 @@ public class ActivityServiceImpl implements ActivityService {
                 pCoin1=0;
             }
             addOrgPointsRecord(activity.getCategory(),oCoin,activity.getInitiatorId(),activity.getId());
-            societyOrgInfoDao.addcoin(activity.getInitiatorId(),oCoin);
+            societyOrgInfoDao.addCoin(activity.getInitiatorId(), oCoin);
             personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin1);
             for(Object item:list){
                 addPeoplePointsRecord(activity.getCategory(),pCoin1,(String)item,activity.getId());

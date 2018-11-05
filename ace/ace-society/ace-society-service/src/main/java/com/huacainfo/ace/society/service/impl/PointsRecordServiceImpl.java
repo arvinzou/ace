@@ -3,6 +3,7 @@ package com.huacainfo.ace.society.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -12,9 +13,17 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.constant.CoinConfigType;
+import com.huacainfo.ace.society.constant.RegType;
+import com.huacainfo.ace.society.dao.CoinConfigDao;
+import com.huacainfo.ace.society.dao.PersonInfoDao;
 import com.huacainfo.ace.society.dao.PointsRecordDao;
+import com.huacainfo.ace.society.dao.SocietyOrgInfoDao;
 import com.huacainfo.ace.society.model.PointsRecord;
 import com.huacainfo.ace.society.service.PointsRecordService;
+import com.huacainfo.ace.society.service.RegService;
+import com.huacainfo.ace.society.vo.CoinConfigVo;
+import com.huacainfo.ace.society.vo.CustomerVo;
 import com.huacainfo.ace.society.vo.PointsRecordQVo;
 import com.huacainfo.ace.society.vo.PointsRecordVo;
 import org.slf4j.Logger;
@@ -37,6 +46,14 @@ public class PointsRecordServiceImpl implements PointsRecordService {
     private PointsRecordDao pointsRecordDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SocietyOrgInfoDao societyOrgInfoDao;
+    @Autowired
+    private PersonInfoDao personInfoDao;
+    @Autowired
+    private CoinConfigDao coinConfigDao;
+    @Autowired
+    private RegService regService;
 
     /**
      * @throws
@@ -264,6 +281,112 @@ public class PointsRecordServiceImpl implements PointsRecordService {
         pointsRecordDao.insert(record);
 
         return new ResultResponse(ResultCode.SUCCESS, "记录成功");
+    }
+
+    /**
+     * 加积分
+     *
+     * @param userId      用户unionId
+     * @param coinCfgType 积分配置类型
+     * @param bisId       业务单据ID
+     * @return 变动结果
+     */
+    @Override
+    public ResultResponse addPoints(String userId, String coinCfgType, String bisId) {
+        //参数校验
+        if (StringUtil.isEmpty(userId)) {
+            return new ResultResponse(ResultCode.FAIL,
+                    "积分变动失败[userId=" + userId + ", bisId=" + bisId + "]" +
+                            " - " + "缺少用户ID");
+        }
+        if (StringUtil.isEmpty(coinCfgType)) {
+            return new ResultResponse(ResultCode.FAIL,
+                    "积分变动失败[userId=" + userId + ", bisId=" + bisId + "]" +
+                            " - " + "缺少积分配置类型");
+        }
+        if (StringUtil.isEmpty(bisId)) {
+            return new ResultResponse(ResultCode.FAIL,
+                    "积分变动失败[userId=" + userId + ", bisId=" + bisId + "]" +
+                            " - " + "缺少业务单据ID");
+        }
+        //解析业务类型
+        String bisType = parseBisType(coinCfgType);
+        if (StringUtil.isEmpty(bisType)) {
+            return new ResultResponse(ResultCode.FAIL,
+                    "积分变动失败[userId=" + userId + ", bisId=" + bisId + "]" + " - " + "解析业务类型失败");
+        }
+        //获取用户信息
+        CustomerVo customer = regService.findByUserId(userId);
+        if (customer == null) {
+            return new ResultResponse(ResultCode.FAIL,
+                    "积分变动失败[userId=" + userId + ", bisId=" + bisId + "]" + " - " + "用户信息不存在");
+        }
+        //获取金币配置信息
+        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(coinCfgType);
+        int points = coinConfigVo.getHost();
+        if (RegType.PERSON.equals(customer.getRegType())) {
+            personInfoDao.addCoinSingle(userId, points);
+        } else {
+            societyOrgInfoDao.addCoin(userId, points);
+        }
+        //补增积分流水
+        addPointsRecord(userId, BisType.POINTS_BEHAVIOR, bisId, points);
+
+        return new ResultResponse(ResultCode.SUCCESS,
+                "积分变动成功[userId=" + userId + ", bisId=" + bisId + "]");
+    }
+
+    /**
+     * //解析业务类型
+     *
+     * @param coinCfgType 金币配置类型
+     */
+    private String parseBisType(String coinCfgType) {
+        switch (coinCfgType) {
+            /**
+             * 公益活动
+             */
+            case CoinConfigType.WELFARE:
+                return BisType.POINTS_WELFARE_SPONSOR;
+            /**
+             * 普及活动
+             */
+            case CoinConfigType.ORDINARY:
+                return BisType.POINTS_ORDINARY_SPONSOR;
+            /**
+             * 创意活动
+             */
+            case CoinConfigType.CREATIVE:
+                return BisType.POINTS_CREATIVE_SPONSOR;
+            /**
+             * 党建活动
+             */
+            case CoinConfigType.PARTY_BUILDING:
+                return BisType.POINTS_PARTY_SPONSOR;
+            /**
+             * 随手拍
+             */
+            case CoinConfigType.TAKE_A_PHOTO:
+                return BisType.POINTS_BEHAVIOR;
+            /**
+             * 我有点子
+             */
+            case CoinConfigType.IDEA:
+                return BisType.POINTS_IDEA;
+            /**
+             * 直播
+             */
+            case CoinConfigType.LIVE:
+                return BisType.POINTS_LIVE;
+            /**
+             * 邻里圈子
+             */
+            case CoinConfigType.GROUP:
+                return BisType.POINTS_GROUP;
+            default:
+                return "";
+
+        }
     }
 
 }

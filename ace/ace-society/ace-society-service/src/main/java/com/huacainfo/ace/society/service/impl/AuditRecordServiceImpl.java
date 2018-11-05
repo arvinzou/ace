@@ -170,8 +170,7 @@ public class AuditRecordServiceImpl implements AuditRecordService {
      * @version: 2018-09-11
      */
     @Override
-    public SingleResult
-            <AuditRecordVo> selectAuditRecordByPrimaryKey(String id) throws Exception {
+    public SingleResult<AuditRecordVo> selectAuditRecordByPrimaryKey(String id) throws Exception {
         SingleResult
                 <AuditRecordVo> rst = new SingleResult<>();
         rst.setValue(this.auditRecordDao.selectVoByPrimaryKey(id));
@@ -221,10 +220,11 @@ public class AuditRecordServiceImpl implements AuditRecordService {
         }
         record.setAuditState(rst);
         record.setAudtiRemark(remark);
+        record.setStatus("1");
         record.setLastModifyDate(DateUtil.getNowDate());
         record.setLastModifyUserId(userProp.getUserId());
         record.setLastModifyUserName(userProp.getName());
-        auditRecordDao.updateByPrimaryKeySelective(record);
+        auditRecordDao.updateByPrimaryKey(record);
         dataBaseLogService.log("审核审核记录", "审核记录",
                 String.valueOf(record.getId()), String.valueOf(record.getId()), "审核记录", userProp);
         return new MessageResponse(0, "审核记录审核完成！");
@@ -256,17 +256,29 @@ public class AuditRecordServiceImpl implements AuditRecordService {
     @Override
     public ResultResponse submit(String id, String bisType, String bisId, String userId) {
         id = StringUtil.isEmpty(id) ? GUIDUtil.getGUID() : id;
-        AuditRecord record = new AuditRecord();
-        record.setId(id);
-        record.setBisId(bisId);
-        record.setBisType(bisType);
-        record.setUserId(userId);
-        record.setAuditState(AuditState.SUBMIT_AUDIT);
-        record.setStatus("1");
-        record.setCreateUserId("system");
-        record.setCreateUserName("system");
-        record.setCreateDate(DateUtil.getNowDate());
-        auditRecordDao.insertSelective(record);
+
+        AuditRecord record = auditRecordDao.findBisType(bisType, bisId, userId);
+        if (record == null) {
+            record = new AuditRecord();
+            record.setId(id);
+            record.setBisId(bisId);
+            record.setBisType(bisType);
+            record.setUserId(userId);
+            record.setAuditState(AuditState.SUBMIT_AUDIT);
+            record.setStatus("1");
+            record.setCreateUserId("system");
+            record.setCreateUserName("system");
+            record.setCreateDate(DateUtil.getNowDate());
+            auditRecordDao.insertSelective(record);
+        } else {
+            record.setStatus("1");
+            record.setAuditState(AuditState.SUBMIT_AUDIT);
+            record.setLastModifyUserName("system");
+            record.setLastModifyUserId("system");
+            record.setLastModifyDate(DateUtil.getNowDate());
+            auditRecordDao.updateByPrimaryKey(record);
+        }
+
 
         return new ResultResponse(ResultCode.SUCCESS, "成功提交审核");
     }

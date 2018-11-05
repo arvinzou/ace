@@ -125,7 +125,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
             return new ResultResponse(ResultCode.FAIL, "数据记录丢失");
         }
         //提交审核
-        auditRecordService.submit(GUIDUtil.getGUID(), BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId());
+        auditRecordService.submit(GUIDUtil.getGUID(), BisType.PERSON_INFO, obj.getId(), obj.getId());
 
         return new ResultResponse(ResultCode.SUCCESS, "送审成功");
     }

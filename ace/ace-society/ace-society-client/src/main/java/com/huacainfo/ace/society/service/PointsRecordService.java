@@ -93,4 +93,14 @@ public interface PointsRecordService {
      * @return ResultResponse
      */
     ResultResponse addPointsRecord(String userId, String bisType, String bisId, int points);
+
+    /**
+     * 加积分
+     *
+     * @param userId      用户unionId
+     * @param coinCfgType 积分配置类型
+     * @param bisId       业务单据ID
+     * @return 变动结果
+     */
+    ResultResponse addPoints(String userId, String coinCfgType, String bisId);
 }

@@ -30,9 +30,13 @@ public interface PersonInfoDao {
 
     int findCount(@Param("condition") PersonInfoQVo condition);
 
-    int addCoin(@Param("list") List list,@Param("coinId")String coinId,@Param("pCoin")Integer pCoin,@Param("pCoin1")Integer pCoin1);
+    int addCoin(@Param("list") List list,
+                @Param("coinId") String coinId,
+                @Param("pCoin") Integer pCoin,
+                @Param("pCoin1") Integer pCoin1);
 
-    int addcoinSingle(@Param("userId")String userId, @Param("addCoin")Integer addCoin);
+    int addCoinSingle(@Param("userId") String userId,
+                      @Param("addCoin") Integer addCoin);
 
     int isExit(PersonInfo record);
 
