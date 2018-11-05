@@ -18,6 +18,7 @@ import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.model.WxFormid;
 import com.huacainfo.ace.portal.service.*;
+import com.huacainfo.ace.portal.vo.AttachVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,7 @@ public class WWWController extends PortalBaseController {
      */
     @RequestMapping(value = "/uploadFile.do")
     @ResponseBody
-    public ListResult<Attach> uploadFile(@RequestParam MultipartFile[] file, String id, String collectionName)
+    public ListResult<AttachVo> uploadFile(@RequestParam MultipartFile[] file, String id, String collectionName)
             throws Exception {
 
         String[] fileNames = new String[file.length];
