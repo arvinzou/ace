@@ -205,7 +205,7 @@ session.setAttribute("portalPath", "/portal");
                     <tr>
                         <td width="15%" align="right" class="tdbg">企业通讯地址</td>
                         <td width="35%">
-                            <span name="address">\${address}</span>
+                            <a name="address" href="location.jsp?did=\${id}" target="_blank">\${address} </a>
                         </td>
                         <td width="15%" align="right">所属工商联</td>
                         <td width="35%">
