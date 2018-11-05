@@ -201,7 +201,8 @@
         select
         <include refid="Base_Column_List"/>
         from audit_record
-        where bisType = #{bisType,jdbcType=VARCHAR}
+        where status = '1'
+        and bisType = #{bisType,jdbcType=VARCHAR}
         and bisId = #{bisId,jdbcType=VARCHAR}
         and userId = #{userId,jdbcType=VARCHAR}
     </select>

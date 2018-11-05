@@ -20,7 +20,9 @@ public class AuditRecord extends BaseModel {
     private String audtiRemark;
 
     private String remark;
-
+    /**
+     *
+     */
     private String status;
 
     private String createUserId;

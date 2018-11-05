@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5};
+var params = {limit: 10};
 var orgType = null;
 window.onload = function (){
     initPage();
@@ -22,7 +22,7 @@ function initPage() {
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
             params['start']=(num-1)*params.limit;
-            params['initType']=type;
+            params['initType'] = type;
             getPageList();
         }
     });

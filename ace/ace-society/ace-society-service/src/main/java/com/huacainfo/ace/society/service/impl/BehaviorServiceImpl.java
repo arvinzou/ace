@@ -11,17 +11,21 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.constant.CoinConfigType;
-import com.huacainfo.ace.society.constant.RegType;
-import com.huacainfo.ace.society.dao.*;
+import com.huacainfo.ace.society.dao.BehaviorAnnexDao;
+import com.huacainfo.ace.society.dao.BehaviorDao;
 import com.huacainfo.ace.society.model.Behavior;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.BehaviorService;
 import com.huacainfo.ace.society.service.PointsRecordService;
-import com.huacainfo.ace.society.vo.*;
+import com.huacainfo.ace.society.vo.BehaviorAnnexQVo;
+import com.huacainfo.ace.society.vo.BehaviorAnnexVo;
+import com.huacainfo.ace.society.vo.BehaviorQVo;
+import com.huacainfo.ace.society.vo.BehaviorVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -53,12 +57,6 @@ public class BehaviorServiceImpl implements BehaviorService {
     private AuditRecordService auditRecordService;
     @Autowired
     private SqlSessionTemplate sqlSession;
-    @Autowired
-    private SocietyOrgInfoDao societyOrgInfoDao;
-    @Autowired
-    private PersonInfoDao personInfoDao;
-    @Autowired
-    private CoinConfigDao coinConfigDao;
     @Autowired
     private PointsRecordService pointsRecordService;
 
@@ -260,7 +258,6 @@ public class BehaviorServiceImpl implements BehaviorService {
         if (null == behavior) {
             return new MessageResponse(ResultCode.FAIL, "市民文明拍信息丢失！");
         }
-
         //更改审核记录
         MessageResponse auditRs = auditRecordService.audit(BisType.BEHAVIOR, behavior.getId(),
                 userId, rst, remark, userProp);
@@ -273,15 +270,11 @@ public class BehaviorServiceImpl implements BehaviorService {
         behavior.setLastModifyUserId(userProp.getUserId());
         behavior.setLastModifyUserName(userProp.getName());
         behaviorDao.updateByPrimaryKeySelective(behavior);
-        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(CoinConfigType.TAKE_A_PHOTO);
-        int points = coinConfigVo.getHost();
-        if (RegType.PERSON.equals(userType)) {
-            personInfoDao.addcoinSingle(userId, points);
-        } else {
-            societyOrgInfoDao.addcoin(userId, points);
+        //积分变动
+        if ("3".equals(rst)) {
+            ResultResponse pointsRst = pointsRecordService.addPoints(userId, CoinConfigType.TAKE_A_PHOTO, id);
+            logger.debug(JsonUtil.toJson(pointsRst));
         }
-        //补增积分流水
-        pointsRecordService.addPointsRecord(userId, BisType.POINTS_BEHAVIOR, id, points);
 
         dataBaseLogService.log("审核市民行为详情", "市民行为详情",
                 String.valueOf(id), String.valueOf(id), "市民行为详情", userProp);
