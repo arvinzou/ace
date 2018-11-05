@@ -3,41 +3,25 @@ var _colModel = function () {
     return [
         $!{bean.columModel},
         {
-            name: 'opt',
-            width: 100,
-            hidden: false,
-            editable: false,
+            name : 'opt',
             sortable: false,
-            renderer: function (value, cur) {
-                return renderBtn(cur);
+            width : 100,
+            renderer : function(value, cur) {
+                var rowid=$.jgrid.getAccessor(cur, cfg.dataId);
+                var title=$.jgrid.getAccessor(cur,'fullName');
+                var opt=[];
+                if(authorConfig.hasOwnProperty(cfg.grid_edit_data_url )){
+                    opt.push('<a href="javascript:edit(\''+rowid+'\')">编辑</a> ');
+                }
+                if(authorConfig.hasOwnProperty(cfg.grid_delete_data_url)){
+                    opt.push('<a href="javascript:del(\''+rowid+'\')">删除</a>  ');
+                }
+                opt.push('<a target="_blank" href="');
+                opt.push('javascript:preview(\'' + rowid + '\',\'' + title + '\')');
+                opt.push('"');
+                opt.push('>查看</a>');
+                return opt.join('');
             }
         }
     ];
-}
-function aceSwitch(cellvalue, options, cell) {
-    console.log('aceSwitch');
-    setTimeout(function () {
-        $(cell).find('input[type=checkbox]').addClass(
-            'ace ace-switch ace-switch-5').after(
-            '<span class="lbl"></span>');
-    }, 0);
-}
-// enable datepicker
-function pickDate(cellvalue, options, cell) {
-    setTimeout(function () {
-        $(cell).find('input[type=text]').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true
-        });
-    }, 0);
-}
-function renderBtn(cur) {
-    var id = $.jgrid.getAccessor(cur, 'id');
-    var title = $.jgrid.getAccessor(cur, 'name');
-    var html = [];
-    html.push('<a target="_blank" href="');
-    html.push('javascript:preview(\'' + id + '\',\'' + title + '\')');
-    html.push('"');
-    html.push('><span class="badge badge-info">查看</span></a>');
-    return html.join(' ');
 }

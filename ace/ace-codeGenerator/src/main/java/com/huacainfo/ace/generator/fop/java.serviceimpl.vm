@@ -17,7 +17,6 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.dao.$!{bean.name}Dao;
 import com.huacainfo.ace.fop.model.$!{bean.name};
 import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.fop.service.AuditRecordService;
 import com.huacainfo.ace.fop.service.$!{bean.name}Service;
 import com.huacainfo.ace.fop.vo.$!{bean.name}Vo;
 import com.huacainfo.ace.fop.vo.$!{bean.name}QVo;
@@ -51,20 +50,16 @@ private DataBaseLogService dataBaseLogService;
     */
     @Override
     public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,
-        int limit, String orderBy) throws Exception {
-        PageResult
-        <$!{bean.name}Vo> rst = new PageResult<>();
-            List
-            <$!{bean.name}Vo> list = this.$!{bean.lowerName}Dao.findList(condition,
-                start, limit, orderBy);
-                rst.setRows(list);
-                if (start <= 1) {
-                int allRows = this.$!{bean.lowerName}Dao.findCount(condition);
-                rst.setTotal(allRows);
-                }
-                return rst;
-                }
+    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,int limit, String orderBy) throws Exception {
+            PageResult<$!{bean.name}Vo> rst = new PageResult<>();
+            List<$!{bean.name}Vo> list = this.$!{bean.lowerName}Dao.findList(condition,start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+            int allRows = this.$!{bean.lowerName}Dao.findCount(condition);
+            rst.setTotal(allRows);
+            }
+            return rst;
+        }
 
                 /**
                 *
@@ -80,12 +75,10 @@ private DataBaseLogService dataBaseLogService;
                 */
                 @Override
                 public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp) throws Exception {
-
-                $!{bean.validate}
-
-                int temp = this.$!{bean.lowerName}Dao.isExit(o);
-                if (temp > 0) {
-                return new MessageResponse(1, "$!{bean.tableChineseName}名称重复！");
+                        $!{bean.validate}
+                        int temp = this.$!{bean.lowerName}Dao.isExit(o);
+                        if (temp > 0) {
+                        return new MessageResponse(1, "$!{bean.tableChineseName}名称重复！");
                 }
 
                 o.setId(GUIDUtil.getGUID());
@@ -97,7 +90,7 @@ private DataBaseLogService dataBaseLogService;
                 this.dataBaseLogService.log("添加$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
                 o.getId(),o.getId(), userProp);
 
-                return new MessageResponse(0, "添加$!{bean.tableChineseName}完成！");
+                return new MessageResponse(0, "保存成功！");
                 }
 
                 /**
@@ -123,7 +116,7 @@ private DataBaseLogService dataBaseLogService;
                 this.dataBaseLogService.log("变更$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
                 o.getId(), o.getId(), userProp);
 
-                return new MessageResponse(0, "变更$!{bean.tableChineseName}完成！");
+                return new MessageResponse(0, "保存成功！");
                 }
 
                 /**
@@ -140,8 +133,7 @@ private DataBaseLogService dataBaseLogService;
                 @Override
                 public SingleResult
                 <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception {
-                    SingleResult
-                    <$!{bean.name}Vo> rst = new SingleResult<>();
+                         SingleResult<$!{bean.name}Vo> rst = new SingleResult<>();
                         rst.setValue(this.$!{bean.lowerName}Dao.selectVoByPrimaryKey(id));
                         return rst;
                         }
@@ -164,7 +156,7 @@ private DataBaseLogService dataBaseLogService;
                         this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);
                         this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
                         "$!{bean.tableChineseName}", userProp);
-                        return new MessageResponse(0, "$!{bean.tableChineseName}删除完成！");
+                        return new MessageResponse(0, "删除成功！");
                         }
 
 

@@ -100,7 +100,7 @@
                 附件
 
             </label>
-            <div class="col-md-10">
+            <div class="col-md-8">
 
                 <div id="filelist-history"></div>
                 <div id="filelist"></div>
