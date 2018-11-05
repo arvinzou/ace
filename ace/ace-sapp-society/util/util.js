@@ -58,6 +58,48 @@ function request(url, data, success, fail, complete) {
         }
     });
 }
+
+function post(url, data, success, fail, complete) {
+    console.log('request url-->', url);
+    console.log('request data-->', data);
+    var _url = url,
+        _data = data,
+        _success = success,
+        _fail = fail,
+        _complete = complete;
+    wx.showNavigationBarLoading();
+    wx.showLoading({ title: "请求中" });
+    wx.request({
+        url: url,
+        data: data,
+        method: "post",
+        dataType: "json",
+        header: {
+            'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
+        },
+        success: function (res) {
+            console.log(res);
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.hideLoading();
+            if (typeof _success == "function") {
+                _success(res.data);
+            }
+        },
+        fail: function (res) {
+            wx.hideNavigationBarLoading() //完成停止加载
+            wx.hideLoading();
+            if (typeof _fail == "function") {
+                _fail(res);
+            }
+        },
+        complete: function (res) {
+            if (typeof _complete == "function") {
+                _complete(res);
+            }
+        }
+    });
+}
+
 function uuid() {
   var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
   var uuid = [], i;
@@ -299,6 +341,7 @@ module.exports = {
     formatTime: formatTime,
     formatLocation: formatLocation,
     request: request,
+    post: post,
     uuid: uuid,
     formatDate:formatDate,
     login:login,

@@ -208,4 +208,15 @@
     mobile = #{mobile,jdbcType=VARCHAR}
     where unionId = #{unionId,jdbcType=VARCHAR}
   </update>
+
+  <select id="getSysWxUsers" resultMap="BaseResultMapVo">
+
+    select
+     w.unionId, w.openId, w.nickName, w.gender, w.city, w.province, w.country, w.avatarUrl, w.mobile, w.addr,
+    w.email, w.name,w.latitude, w.longitude,w.areaCode,w.category,w.role,w.party,w.deptId,w.appId
+    from portal.users u
+    right join portal.wx_user w on u.user_id=w.unionId
+    where u.cur_syid=#{sysId}
+  </select>
+
 </mapper>

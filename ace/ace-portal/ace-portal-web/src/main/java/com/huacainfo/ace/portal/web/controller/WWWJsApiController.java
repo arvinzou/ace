@@ -102,4 +102,26 @@ public class WWWJsApiController extends BaseController {
         return new ResultResponse(ResultCode.SUCCESS, "获取AccessToken", rtnMap);
     }
 
+
+    /**
+     * 获取微信相关开发配置
+     *
+     * @param sysId 系统id
+     * @return map
+     */
+    @RequestMapping(value = "/getWxCfg")
+    public ResultResponse getConfig(String sysId) {
+        if (StringUtil.isEmpty(sysId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        WxCfg wxCfg = wxCfgService.findBySysId(sysId);
+        //失败可能原因：1、授权地址配置失败；2、IP白名单未配置
+        if (null == wxCfg || StringUtil.isEmpty(wxCfg.getAccessToken())) {
+            return new ResultResponse(ResultCode.FAIL, "微信配置获取异常");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", wxCfg);
+    }
+
 }
