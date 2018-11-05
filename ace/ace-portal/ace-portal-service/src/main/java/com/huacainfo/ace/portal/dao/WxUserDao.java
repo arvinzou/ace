@@ -53,4 +53,6 @@ public interface WxUserDao {
 
     int isExitByMobile(String mobile);
 
+    List<WxUserVo> getSysWxUsers(@Param("sysId") String sysId);
+
 }

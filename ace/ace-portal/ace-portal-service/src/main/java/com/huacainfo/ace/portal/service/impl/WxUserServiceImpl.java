@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.FaceUtils;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
@@ -100,6 +102,10 @@ public class WxUserServiceImpl implements WxUserService {
 	@Override
 	public List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception{
 		return this.wxUserDao.selectWxUser(condition);
+	}
+	@Override
+	 public  ResultResponse getSysWxUsers(String sysId)throws Exception{
+		return new ResultResponse(ResultCode.SUCCESS,"获取成功",this.wxUserDao.getSysWxUsers(sysId));
 	}
 
 
