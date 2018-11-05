@@ -77,5 +77,10 @@
             <text class='menu-title'>关于我们</text>
             <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </navigator>
+         <navigator class='menu-item' url='../datas/index'>
+            <image lazy-load="true" src='../../image/icon_aboutus.png' class='menu-icon'></image>
+            <text class='menu-title'>数据监控</text>
+            <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
+        </navigator>
     </view>
 </view>

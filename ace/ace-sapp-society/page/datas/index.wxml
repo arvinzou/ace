@@ -1,0 +1,56 @@
+<view class='index'>
+   <!--访问数据统计-->
+   <view class='box'>
+    <view class='container'>
+            <view class='title'>本月概况</view>
+            <view class='content'>
+                <view class='data-item'>
+                    <view class='data-num'>{{statistics.session_cnt}}</view>
+                    <view class='data-title'>打开次数</view>
+                </view>
+                <view class='data-item'>
+                    <view class='data-num'>{{statistics.visit_pv}}</view>
+                    <view class='data-title'>访问次数</view>
+                </view>
+                <view class='data-item'>
+                    <view class='data-num'>{{statistics.visit_uv}}</view>
+                    <view class='data-title'>访问人数</view>
+                </view>
+                <view class='data-item'>
+                    <view class='data-num'>{{statistics.visit_uv_new}}</view>
+                    <view class='data-title'>新用户数</view>
+                </view>
+            </view>
+    </view>
+   </view>
+
+   <!--新增用户统计-->
+   <!--<view class='box'>
+       <view class='container'>
+            <view class='title'>新增用户</view>
+            <view class='content'>
+                
+            </view>
+       </view>
+   </view>-->
+
+    <!--会员统计统计-->
+   <view class='box'>
+       <view class='container'>
+            <view class='title'>会员统计</view>
+            <view class='content'>
+                <canvas canvas-id="userCanvas" style='width:350px;height:350px;margin:0 auto;'></canvas>
+            </view>
+       </view>
+   </view>
+  
+  <!--后台数据统计-->
+  <view class='box'>
+   <view class='container'>
+        <view class='title'>活动统计</view>
+        <view class='content'>
+           <canvas canvas-id="activityCanvas" style='width:350px;height:300px;margin:0 auto;'></canvas>
+        </view>
+   </view>
+</view>
+</view>
