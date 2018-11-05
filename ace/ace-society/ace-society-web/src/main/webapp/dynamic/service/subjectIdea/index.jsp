@@ -51,8 +51,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="5%"> 序号</th>
-                    <th width="20%"> 解决方案</th>
+                    <th width="25%"> 解决方案</th>
                     <th width="30%"> 附件</th>
                     <th width="10%"> 提交人</th>
                     <th width="10%"> 创建日期</th>
@@ -76,7 +75,6 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \${parseInt(index)+1}</td>
         <td> \$\${item.solution}</td>
         <td>
             {@each item.listSubjectIdeaAnnexVo as fileItem}

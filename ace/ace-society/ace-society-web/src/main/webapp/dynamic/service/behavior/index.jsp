@@ -65,7 +65,6 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>序号</th>
                     <th width="20%">标题</th>
                     <th width="15%">类型</th>
                     <th width="15%">提交人</th>
@@ -91,7 +90,6 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td>\${parseInt(index)+1}</td>
         <td width="20%">\${item.compendium}</td>
         <td width="15%">
             {@if item.type == '0'}
