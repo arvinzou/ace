@@ -297,7 +297,7 @@
     </select>
 
 
-    <update id="addcoin">
+    <update id="addCoin">
         update society_org_info s
               set s.accPoints=s.accPoints+#{addCoin,jdbcType=DECIMAL}
               ,s.validPoints=s.validPoints+#{addCoin,jdbcType=DECIMAL}

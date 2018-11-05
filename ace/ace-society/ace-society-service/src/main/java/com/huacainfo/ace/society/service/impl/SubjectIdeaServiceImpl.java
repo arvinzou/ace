@@ -11,17 +11,20 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.constant.CoinConfigType;
-import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.SubjectIdea;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.service.SubjectIdeaService;
-import com.huacainfo.ace.society.vo.*;
+import com.huacainfo.ace.society.vo.SubjectIdeaAnnexQVo;
+import com.huacainfo.ace.society.vo.SubjectIdeaAnnexVo;
+import com.huacainfo.ace.society.vo.SubjectIdeaQVo;
+import com.huacainfo.ace.society.vo.SubjectIdeaVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -254,16 +257,11 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         subjectIdeaDao.updateByPrimaryKeySelective(obj);
         dataBaseLogService.log("审核议题点子", "议题点子",
                 String.valueOf(id), String.valueOf(id), "议题点子", userProp);
-
-        CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(CoinConfigType.IDEA);
-        int points = coinConfigVo.getHost();
-        if (RegType.PERSON.equals(orgType)) {
-            personInfoDao.addcoinSingle(userId, points);
-        } else {
-            societyOrgInfoDao.addcoin(userId, points);
+        //积分变动
+        if ("3".equals(rst)) {
+            ResultResponse pointsRst = pointsRecordService.addPoints(userId, CoinConfigType.IDEA, id);
+            logger.debug(JsonUtil.toJson(pointsRst));
         }
-        //补增积分流水
-        pointsRecordService.addPointsRecord(userId, BisType.POINTS_IDEA, id, points);
 
         return new MessageResponse(0, "议题点子审核完成！");
     }

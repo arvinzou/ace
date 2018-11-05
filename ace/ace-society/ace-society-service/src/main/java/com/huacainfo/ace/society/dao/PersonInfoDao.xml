@@ -274,7 +274,7 @@
         </foreach>
     </update>
 
-    <update id="addcoinSingle">
+    <update id="addCoinSingle">
         update person_info s
         set s.accPoints=s.accPoints+#{addCoin,jdbcType=DECIMAL}
         ,s.validPoints=s.validPoints+#{addCoin,jdbcType=DECIMAL}
