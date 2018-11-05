@@ -2,6 +2,7 @@ package com.huacainfo.ace.portal.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.portal.vo.WxUserVo;
@@ -19,7 +20,5 @@ public interface WxUserService {
 	public abstract MessageResponse deleteRoleById(String id,UserProp userProp) throws Exception;
 	public abstract MessageResponse updateRoleById(String id,String role,UserProp userProp) throws Exception;
 	List<Map<String,Object>> selectWxUser(Map<String,Object> condition)throws Exception;
-
-
-
+	ResultResponse getSysWxUsers(String sysId)throws Exception;
 }

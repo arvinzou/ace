@@ -7,7 +7,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>诉求模板</title>
+    <title>企业会员</title>
 </head>
 <link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
 <jsp:include page="/dynamic/common/header.jsp"/>
@@ -20,7 +20,7 @@ pageEncoding="utf-8"%>
 
         <div class="row custom-toolbar">
             <form action="#" id="fm-search" >
-            <div class="col-md-1">
+            <div class="col-md-2 toolbar">
 
                 <button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/fopCompany/insertFopCompany"></button>
 
@@ -74,8 +74,7 @@ pageEncoding="utf-8"%>
                     </div>
 
             </div>
-            <div class="col-md-1 toolbar">
-            </div>
+
             </form>
         </div>
 
