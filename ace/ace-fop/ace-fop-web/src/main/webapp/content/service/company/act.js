@@ -13,7 +13,7 @@ function loadView(id) {
             var renderHtml = juicer(tpl, rst.value);
             $('.main_box').html(renderHtml);
 
-
+initGrid();
 
             $.each(rst.value, function (key, value) {
                 if (key == "thirdLaborRelation") {
