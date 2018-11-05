@@ -244,6 +244,7 @@
         select
         <include refid="Base_Column_List"/>
         from fop_ai_question
-        where question like concat(#{keyWord,jdbcType=VARCHAR},'%')
+        where status = '1'
+        and question like concat(#{keyWord,jdbcType=VARCHAR},'%')
     </select>
 </mapper>

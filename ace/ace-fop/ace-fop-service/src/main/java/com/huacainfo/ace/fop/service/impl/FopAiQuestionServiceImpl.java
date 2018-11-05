@@ -170,12 +170,13 @@ public class FopAiQuestionServiceImpl implements FopAiQuestionService {
         if (null == fopAiQuestion) {
             return new MessageResponse(ResultCode.FAIL, "记录丢失");
         }
+        fopAiQuestionDao.deleteByPrimaryKey(id);
 
-        fopAiQuestion.setStatus("0");
-        fopAiQuestion.setLastModifyDate(new Date());
-        fopAiQuestion.setLastModifyUserName(userProp.getName());
-        fopAiQuestion.setLastModifyUserId(userProp.getUserId());
-        fopAiQuestionDao.updateByPrimaryKeySelective(fopAiQuestion);
+//        fopAiQuestion.setStatus("0");
+//        fopAiQuestion.setLastModifyDate(new Date());
+//        fopAiQuestion.setLastModifyUserName(userProp.getName());
+//        fopAiQuestion.setLastModifyUserId(userProp.getUserId());
+//        fopAiQuestionDao.updateByPrimaryKeySelective(fopAiQuestion);
         dataBaseLogService.log("删除AI客服", "AI客服", id, id, "AI客服", userProp);
         return new MessageResponse(0, "AI客服删除完成！");
     }
