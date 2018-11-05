@@ -126,7 +126,7 @@ public class ConfigServiceImpl implements ConfigService {
      * @return ConfigVo
      */
     @Override
-    public ConfigVo findByKey(String syId, String cfgKey) {
+    public Config findByKey(String syId, String cfgKey) {
         return configMapper.findByKey(syId, cfgKey);
     }
 
