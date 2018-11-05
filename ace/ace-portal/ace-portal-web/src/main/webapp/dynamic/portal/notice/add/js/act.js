@@ -6,7 +6,6 @@ window.onload = function () {
         $(".breadcrumb").append("<li><span>创建公告</span></li>");
         initPage();
         initEvents();
-
     });
 }
 

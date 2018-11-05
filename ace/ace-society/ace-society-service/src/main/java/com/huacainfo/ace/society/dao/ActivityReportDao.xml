@@ -51,10 +51,10 @@
   <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="voResultMap">
     select
      t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl, t.remark, t.status, t.top, t.createUserId, t.createUserName, t.createDate,
-    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,p.headimgurl as headimgurl
+    t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,p.avatarUrl as headimgurl
     from activity_report t
     LEFT JOIN activity a ON a.id=t.activityId
-    LEFT JOIN portal.userinfo p ON p.unionid=t.createUserId
+    LEFT JOIN portal.wx_user p ON p.unionid=t.createUserId
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
 

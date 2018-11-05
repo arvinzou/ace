@@ -107,10 +107,13 @@ Page({
                     wx.showToast({
                         title: '报名成功',
                         icon: 'success',
-                        duration: 1000
+                        duration: 2000,
+                        complete: function () {
+                            wx.navigateBack({});
+                            return;
+                         }
+                        
                     });
-                    wx.navigateBack({});
-                    return;
                 }
                 wx.showModal({
                     title: '提示',

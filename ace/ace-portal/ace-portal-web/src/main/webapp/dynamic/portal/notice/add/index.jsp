@@ -137,16 +137,16 @@
         <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
         <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
 
-        <script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
+
         <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
         <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
         <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
         <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 
 
-    <script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+    <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+    <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+    <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
     <script src="${pageContext.request.contextPath}/content/portal/js/notice/upload.js?version=${cfg.version}"></script>
 
         <script src="js/act.js?v=${cfg.version}"></script>

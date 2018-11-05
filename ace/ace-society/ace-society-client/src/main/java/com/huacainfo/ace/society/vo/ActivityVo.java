@@ -23,6 +23,8 @@ private List<ActivityDetailVo>  activityDetailVoList;
 
     private int signNum;
 
+    private int amount;
+
     private String adStatus;
 
     private String arStatus;
@@ -36,6 +38,14 @@ private List<ActivityDetailVo>  activityDetailVoList;
 
     public Integer getParticipant() {
         return participant;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public void setParticipant(Integer participant) {
