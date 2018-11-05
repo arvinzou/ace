@@ -3,13 +3,21 @@
 
 <%
     String companyId = request.getParameter("companyId");
-//    request.setAttribute("edit", "true");
-//    if (CommonUtils.isBlank(companyId)) {
-//        companyId = String.valueOf(new java.util.Date().getTime());
-//        request.setAttribute("edit", "false");
-//    }
     request.setAttribute("companyId", companyId);
 %>
+
+<%
+session.setAttribute("portalPath", "/portal");
+%>
+<script type="text/javascript">
+    var contextPath = '${pageContext.request.contextPath}';
+    var portalPath = '${portalPath}';
+    var version = '${cfg.version}';
+    var fastdfs_server = '${cfg.fastdfs_server}';
+    var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
+    var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
+    var default_page_list=[${cfg.default_page_list}];
+</script>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -129,34 +137,18 @@
     }
 </style>
 
-<jsp:include page="../../common/common.jsp"/>
+
 <body>
 <div class="page-content">
-    <%--<div class="widget-box" id="widget-box">--%>
-    <%--<div class="widget-header">--%>
-    <%--<h5 class="widget-title smaller">查看详情</h5>--%>
-    <%--<div class="widget-toolbar"></div>--%>
-    <%--</div>--%>
 
-    <%--<div class="widget-body">--%>
-    <%----%>
-    <%--</div>--%>
-    <%--</div>--%>
-
-    <%--render 渲染div--%>
     <div class="main_box">
 
     </div>
 </div>
-
-<jsp:include page="../../common/footer-1.jsp"/>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}" type="text/javascript"></script>
 
 <script src="${pageContext.request.contextPath}/content/common/juicer/juicer-min.js"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/company/controller.js"></script>
-
-
-<jsp:include page="../../common/footer-2.jsp"/>
+<script src="${pageContext.request.contextPath}/content/service/company/act.js"></script>
 
 <script id="tpl-view-page" type="text/template">
     <div class="title_box">

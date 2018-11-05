@@ -44,9 +44,9 @@
 
 
 
-        <table tableName="fop_visit"
-               domainObjectName="FopVisit"
-               mapperName="FopVisitDao"
+        <table tableName="fop_pm"
+               domainObjectName="Pm"
+               mapperName="PmDao"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

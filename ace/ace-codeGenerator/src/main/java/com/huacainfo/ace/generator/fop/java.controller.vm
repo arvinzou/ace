@@ -49,19 +49,13 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
     */
     @RequestMapping(value = "/find$!{bean.name}List")
     @ResponseBody
-    public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,
-        PageParamNoChangeSord page) throws Exception {
-
-        PageResult
-        <$!{bean.name}Vo> rst = this.$!{bean.lowerName}Service
-            .find$!{bean.name}List(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-            if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-            }
-
-            return rst;
-            }
+    public PageResult<$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,PageParamNoChangeSord page) throws Exception {
+        PageResult<$!{bean.name}Vo> rst = this.$!{bean.lowerName}Service.find$!{bean.name}List(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+        rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
+    }
 
             /**
             *
@@ -77,8 +71,8 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             @RequestMapping(value = "/insert$!{bean.name}")
             @ResponseBody
             public MessageResponse insert$!{bean.name}(String jsons) throws Exception {
-            $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service.insert$!{bean.name}(obj, this.getCurUserProp());
+                $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
+                return this.$!{bean.lowerName}Service.insert$!{bean.name}(obj, this.getCurUserProp());
             }
 
             /**
@@ -95,8 +89,8 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             @RequestMapping(value = "/update$!{bean.name}")
             @ResponseBody
             public MessageResponse update$!{bean.name}(String jsons) throws Exception {
-            $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service.update$!{bean.name}(obj, this.getCurUserProp());
+                $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
+                return this.$!{bean.lowerName}Service.update$!{bean.name}(obj, this.getCurUserProp());
             }
 
             /**
@@ -112,10 +106,9 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
             */
             @RequestMapping(value = "/select$!{bean.name}ByPrimaryKey")
             @ResponseBody
-            public SingleResult
-            <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)throws Exception {
+            public SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)throws Exception {
                 return this.$!{bean.lowerName}Service.select$!{bean.name}ByPrimaryKey(id);
-                }
+            }
 
                 /**
                 *
