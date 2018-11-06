@@ -253,7 +253,7 @@
         from subject_idea t
         LEFT JOIN subject_idea_annex e on t.id = e.ideaId
         left join portal.wx_user wx on t.userId = wx.unionId
-        left join  portal.users u on u.user_id = wx.unionId
+        right join  portal.users u on u.user_id = wx.unionId
         where 1=1
         <if test="condition.solution !=null and condition.solution !=&quot;&quot;">
             and t.solution like concat('%',#{condition.solution,jdbcType=VARCHAR},'%')
