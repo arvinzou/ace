@@ -40,7 +40,8 @@
     "page/activityManage/index",
     "page/activityEdit/index",
     "page/enterActivity/index",
-    "page/aboutus/index"
+    "page/aboutus/index",
+    "page/datas/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
