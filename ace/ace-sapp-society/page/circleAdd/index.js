@@ -142,8 +142,10 @@ Page({
       wx.chooseImage({
         sizeType: ['original', 'compressed'],
         sourceType: [type],
+        count: 4,
         success: function (res) {
-
+         
+          if (res.tempFilePaths.length <= 4){
           for (var i = 0; i < res.tempFilePaths.length; i++) {
             wx.showLoading({ title: "正在上传" });
             console.log(res.tempFilePaths[i]);
@@ -167,11 +169,13 @@ Page({
               },
               fail: function (res) {
                 wx.hideLoading();
-                wx.showModal({ title: "提示", content: "上传失败" })
+                wx.showModal({ title: "提示", content: "上传失败" });
               }
             })
           }
-
+          }else{
+              wx.showModal({ title: "提示", content: "允许上传图片最多为4张！" });
+          }
 
         }
       })

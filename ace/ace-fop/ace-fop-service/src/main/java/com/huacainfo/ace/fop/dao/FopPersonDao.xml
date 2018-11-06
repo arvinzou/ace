@@ -384,9 +384,6 @@
       email = #{email,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
@@ -415,5 +412,8 @@
         <include refid="Base_Column_List"/>
         from fop_person
         where mobileNumer = #{mobileNumber,jdbcType=VARCHAR}
+    </select>
+    <select id="selectPersonIdByCropId" resultType="string">
+        select max(personId) from fop_company where departmentId=#{id}
     </select>
 </mapper>

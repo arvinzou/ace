@@ -250,4 +250,25 @@ public class FopPersonServiceImpl implements FopPersonService {
         }
         return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
     }
+
+    /**
+     * @throws
+     * @Title:selectFopPersonByCurCorpId
+     * @Description: TODO(获取法人信息)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<FopPerson>
+     * @author: 陈晓克
+     * @version: 2018-11-06
+     */
+    @Override
+    public  SingleResult<FopPersonVo> selectFopPersonByCurCorpId(String corpId) throws Exception{
+        SingleResult<FopPersonVo> rst = new SingleResult<FopPersonVo>();
+        String personId=this.fopPersonDao.selectPersonIdByCropId(corpId);
+        if(CommonUtils.isBlank(personId)){
+            return new SingleResult(1,"企业法人信息没找到！");
+        }
+        rst.setValue(this.fopPersonDao.selectVoByPrimaryKey(personId));
+        return rst;
+    }
 }
