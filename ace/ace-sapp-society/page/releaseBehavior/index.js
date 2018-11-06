@@ -121,7 +121,9 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: [type],
       sizeType: ['compressed'],
+      count: 4,
       success: function (res) {
+        if (res.tempFiles.length <= 4){
         for (var i = 0; i < res.tempFilePaths.length; i++) {
           console.log(res.tempFilePaths[i]);
           var tempFilesSize = res.tempFiles[0].size;  //获取图片的大小，单位B
@@ -153,6 +155,9 @@ Page({
           }else{
               wx.showModal({ title: "提示", content: "上传图片大小不能超过2M!" });
           }
+        }
+        }else{
+            wx.showModal({ title: "提示", content: "最多仅上传4张图片!" });
         }
 
 
