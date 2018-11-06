@@ -43,11 +43,37 @@ Page({
       );
   },
     initData: function (access_tocken){
+      var nowDate = new Date();
+      var year = nowDate.getFullYear();
+      var month = nowDate.getMonth();
+      var lastDay = null;
+      switch(month){
+          case 1: lastDay = 31; break;
+          case 2: lastDay = 28; break;
+          case 3: lastDay = 31; break;
+          case 4: lastDay = 30; break;
+          case 5: lastDay = 31; break;
+          case 6: lastDay = 30; break;
+          case 7: lastDay = 31; break;
+          case 8: lastDay = 31; break;
+          case 9: lastDay = 30; break;
+          case 10: lastDay = 31; break;
+          case 11: lastDay = 30; break;
+          case 12: lastDay = 31; break;
+      }
+      if(month < 10){
+          month = "0"+month;
+      }
+    
+      var begin_date = year+""+month+"01";
+      var end_date = year + "" + month + lastDay;
+      console.log("begin_date====================="+begin_date);
+      console.log("end_date======================="+end_date);
       var that = this;
         util.post('https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyvisittrend?access_token=' + access_tocken, 
             {
-                "begin_date": "20181001",
-                "end_date": "20181031"
+                "begin_date": begin_date,
+                "end_date": end_date
             },
           function (ret) {
               that.setData({ statistics: ret.list[0]})
