@@ -500,19 +500,17 @@ public class ActivityServiceImpl implements ActivityService {
             int signNum=list.size();
             int baseNum=coinConfig.getBaseNum();
             int pCoin=coinConfig.getParticipant();
-            int pCoin1=pCoin;
             if(baseNum<signNum){
                 oCoin=oCoin+(signNum-baseNum)*coinConfig.getSubjoinNum();
             }
-            if(pCoin1<0){
-                pCoin1=0;
+            if (pCoin>0){
+                personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin);
+                for(Object item:list){
+                    addPeoplePointsRecord(activity.getCategory(),pCoin,(String)item,activity.getId());
+                }
             }
             addOrgPointsRecord(activity.getCategory(),oCoin,activity.getInitiatorId(),activity.getId());
             societyOrgInfoDao.addCoin(activity.getInitiatorId(), oCoin);
-            personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin1);
-            for(Object item:list){
-                addPeoplePointsRecord(activity.getCategory(),pCoin1,(String)item,activity.getId());
-            }
         }
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
@@ -552,34 +550,19 @@ public class ActivityServiceImpl implements ActivityService {
 
 
     public ResultResponse addPeoplePointsRecord(String type,int coin,String userId,  String bisId){
-        if(coin<0){
-            type="-"+type;
-        }
         String bisType="";
         switch (type) {
             case "1":
                 bisType=BisType.POINTS_WELFARE_PARTER_ADD;
                 break;
-            case "-1":
-                bisType=BisType.POINTS_WELFARE_PARTER_SUB;
-                break;
             case "2":
                 bisType=BisType.POINTS_ORDINARY_PARTER_ADD;
-                break;
-            case "-2":
-                bisType=BisType.POINTS_ORDINARY_PARTER_SUB;
                 break;
             case "3":
                 bisType=BisType.POINTS_CREATIVE_PARTER_ADD;
                 break;
-            case "-3":
-                bisType=BisType.POINTS_CREATIVE_PARTER_SUB;
-                break;
             case "4":
                 bisType=BisType.POINTS_PARTY_PARTER_ADD;
-                break;
-            case "-4":
-                bisType=BisType.POINTS_PARTY_PARTER_SUB;
                 break;
             default:
                 break;
