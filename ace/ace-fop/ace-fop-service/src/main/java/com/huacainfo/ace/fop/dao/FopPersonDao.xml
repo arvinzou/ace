@@ -384,9 +384,6 @@
       email = #{email,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
