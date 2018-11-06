@@ -7,7 +7,7 @@
       </view>
       <view class='kind-list-item'>
             <radio-group name="type">
-                <label style='padding-right:30rpx'><radio value="1" />文明行为</label><label>
+                <label style='padding-right:30rpx'><radio value="1" checked='checked'/>文明行为</label><label>
                 <label><radio  value="0" />不文明行为</label></label>      
             </radio-group>
       </view>
