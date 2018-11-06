@@ -79,11 +79,13 @@ time: new Date(),
 function save(params) {
     $.extend(params, {
     });
-    startLoad();
     $.ajax({
         url: contextPath + "/$!{bean.lowerName}/update$!{bean.name}",
         type: "post",
         async: false,
+        beforeSend: function (XMLHttpRequest) {
+            startLoad();
+        },
         data: {
             jsons: JSON.stringify(params)
         },
