@@ -15,6 +15,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.ValidateUtils;
+import com.huacainfo.ace.fop.common.api.DataSwapperApi;
 import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.PayType;
@@ -33,6 +34,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 
@@ -594,17 +596,37 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     public SingleResult<FopCompanyVo> selectFopCompanyByPrimaryKey(String id) throws Exception {
         SingleResult<FopCompanyVo> rst = new SingleResult<>();
         FopCompanyVo vo = this.fopCompanyDao.selectVoByPrimaryKey(id);
-//        vo.setCreditCode(StringUtil.isEmpty(vo.getCreditCode()) ? "" : vo.getCreditCode());
-//        vo.setFullName(StringUtil.isEmpty(vo.getFullName()) ? "" : vo.getFullName());
-//        vo.setShortName(StringUtil.isEmpty(vo.getShortName()) ? "" : vo.getShortName());
-//        vo.setCompanyCode(StringUtil.isEmpty(vo.getCompanyCode()) ? "" : vo.getCompanyCode());
-//        vo.setCompanyLinkUrl(StringUtil.isEmpty(vo.getCompanyLinkUrl()) ? "" : vo.getCompanyLinkUrl());
-//        vo.setAreaCode(StringUtil.isEmpty(vo.getAreaCode()) ? "" : vo.getAreaCode());
-//        vo.setAreaCodeName(StringUtil.isEmpty(vo.getAreaCodeName()) ? "" : vo.getAreaCodeName());
-//        vo.setCompanyProperty(StringUtil.isEmpty(vo.getCompanyProperty()) ? "" : vo.getCompanyProperty());
-//        vo.setCompanyPropertyName(StringUtil.isEmpty(vo.getCompanyPropertyName()) ? "" : vo.getCompanyPropertyName());
+        //api 接口信息查询
+        try {
+            vo = invokeApi(vo);
+        } catch (Exception e) {
+            logger.error("fop_company[" + id + "]接口查询异常：{}", e);
+        }
         rst.setValue(vo);
         return rst;
+    }
+
+    private FopCompanyVo invokeApi(FopCompanyVo vo) {
+        if (vo != null) {
+
+            // 1、市工商局_企业变更记录信息 示例： 430721052016062700021
+            if (StringUtil.isNotEmpty(vo.getLpIdentityCard())) {
+                List<Map<String, Object>> list = DataSwapperApi.sgsj_qybgjlxx(vo.getLpIdentityCard());
+                vo.setSgsj(CollectionUtils.isEmpty(list) ? null : list.get(0));
+            }
+            //2、市国税局_税务登记信息 -- 示例： 430702198704016527
+            if (StringUtil.isNotEmpty(vo.getLpIdentityCard())) {
+                List<Map<String, Object>> list = DataSwapperApi.sgsj_swdjxx(vo.getLpIdentityCard());
+                vo.setGuosj(CollectionUtils.isEmpty(list) ? null : list.get(0));
+            }
+            //todo 3、市人社局_企业养老保险单位参保信息   示例：709696
+            if (StringUtil.isNotEmpty(vo.getCreditCode())) {
+                List<Map<String, Object>> list = DataSwapperApi.srsj_qyylbxdwsbxx(vo.getCreditCode());
+                vo.setSrsj(CollectionUtils.isEmpty(list) ? null : list.get(0));
+            }
+        }
+
+        return vo;
     }
 
     @Override
