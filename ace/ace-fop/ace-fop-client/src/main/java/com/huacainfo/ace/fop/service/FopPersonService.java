@@ -86,4 +86,17 @@ public interface FopPersonService {
     ResultResponse insertPerson(FopCompanyVo o, UserProp userProp) throws Exception;
 
     FopPerson selectByMobile(String mobileNumber);
+
+
+    /**
+     * @throws
+     * @Title:selectFopPersonByCurCorpId
+     * @Description: TODO(获取法人信息)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<FopPerson>
+     * @author: 陈晓克
+     * @version: 2018-11-06
+     */
+    public abstract SingleResult<FopPersonVo> selectFopPersonByCurCorpId(String corpId) throws Exception;
 }

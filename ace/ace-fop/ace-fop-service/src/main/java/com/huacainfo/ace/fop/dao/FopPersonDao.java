@@ -33,4 +33,6 @@ public interface FopPersonDao {
     int isExit(FopPerson record);
 
     FopPerson selectByMobile(String mobileNumber);
+
+    String selectPersonIdByCropId(String id);
 }
