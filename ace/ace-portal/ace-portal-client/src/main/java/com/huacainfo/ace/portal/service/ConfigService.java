@@ -97,6 +97,6 @@ public interface ConfigService {
      * @param cfgKey key
      * @return ConfigVo
      */
-    ConfigVo findByKey(String syId, String cfgKey);
+    Config findByKey(String syId, String cfgKey);
 
 }

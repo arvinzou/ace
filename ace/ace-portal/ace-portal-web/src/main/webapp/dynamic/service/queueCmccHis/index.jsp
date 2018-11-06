@@ -18,7 +18,7 @@
 			<div class="portlet-body">
 
 				<div class="row custom-toolbar">
-					<div class="col-md-3">
+					<div class="col-md-4 toolbar">
 
 						
 
@@ -58,13 +58,7 @@
 						</form>
 					</div>
 
-					<div class="col-md-1 toolbar">
 
-
-
-
-
-					</div>
 
 				</div>
 

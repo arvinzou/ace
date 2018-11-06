@@ -7,7 +7,7 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8" />
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>银行</title>
+    <title>党员信息</title>
 </head>
 <link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
 <jsp:include page="/dynamic/common/header.jsp"/>
@@ -20,61 +20,46 @@ pageEncoding="utf-8"%>
 
         <div class="row custom-toolbar">
             <form action="#" id="fm-search" >
-                <div class="col-md-2  toolbar">
+            <div class="col-md-1">
 
-                    <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
+                <button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/pm/insertPm"></button>
 
 
 
+
+            </div>
+            <div class="col-md-7">
+                <div class="btn-group" role="group"  style="float:left;padding-right:5px">
 
                 </div>
-                <div class="col-md-7">
-                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                        地区 <input  name="areaCode"
-                                   class="easyui-combotree"
-                                   data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=00',
-                                    method:'get',animate: true, lines:false,"
-                                   style='width: 200px;height:30px'>
-                    </div>
-                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                        性质 <input class="easyui-combobox" style="width: 150px;height:30px" name="companyProperty"
-                                  data-options="
-                                url:'${portalPath}/dict/findListByCategoryId.do?categoryId=134&selected=false',
-                                method:'get',
-                                valueField:'code',
-                                textField:'name',
-                                panelHeight:'auto'">
-                    </div>
-                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                        职务 <input class="easyui-combobox" style="width: 150px;height:30px" name="fopPost"
-                                  data-options="
-                                url:'${portalPath}/dict/findListByCategoryId.do?categoryId=150&selected=false',
-                                method:'get',
-                                valueField:'code',
-                                textField:'name',
-                                panelHeight:'auto'">
-                    </div>
+                <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+
+                </div>
+                <div class="btn-group" role="group"  style="float:left;padding-right:5px">
 
                 </div>
 
-                <div class="col-md-3">
+            </div>
+
+            <div class="col-md-3">
 
 
                     <div class="input-group">
                         <input type="text"
                                name="fullName"
                                class="form-control"
-                               placeholder="请输入企业名称">
+                               placeholder="请输入党员名称">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn"  id="btn-search"
-                                    authority="false">
+                                    authority="${pageContext.request.contextPath}/pm/findPmList">
 									搜索
 							</button>
 						</span>
                     </div>
 
-                </div>
-
+            </div>
+            <div class="col-md-1 toolbar">
+            </div>
             </form>
         </div>
 
@@ -146,18 +131,15 @@ pageEncoding="utf-8"%>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/bank/config.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/pm/config.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/bank/model.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/pm/model.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/bank/controller.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/pm/controller.js?version=${cfg.version}"></script>
 <script
-        src="${pageContext.request.contextPath}/content/service/bank/view.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/company/upload.js?version=${cfg.version}"></script>
+        src="${pageContext.request.contextPath}/content/service/pm/view.js?version=${cfg.version}"></script>
 
-
-
+<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
 <script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
