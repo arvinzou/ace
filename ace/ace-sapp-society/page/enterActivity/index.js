@@ -97,10 +97,15 @@ Page({
         }
         vals.activityId = that.data.id;
         vals.identity='1';
+        wx.showLoading({
+            title: '报名中...',
+            mask:true
+        })
         util.request(cfg.insertActivityDetail, {
                 jsons: JSON.stringify(vals),
             },
             function(data) {
+                wx.hideLoading();
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 if (data.status == 0) {

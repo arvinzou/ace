@@ -253,7 +253,7 @@
         from subject_idea t
         LEFT JOIN subject_idea_annex e on t.id = e.ideaId
         left join portal.wx_user wx on t.userId = wx.unionId
-        right join  portal.users u on u.user_id = wx.unionId
+        left join  portal.users u on u.user_id = t.userId
         where 1=1
         <if test="condition.solution !=null and condition.solution !=&quot;&quot;">
             and t.solution like concat('%',#{condition.solution,jdbcType=VARCHAR},'%')
@@ -274,7 +274,23 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
-        <include refid="whereCondition"/>
+         from subject_idea t
+        where 1=1
+        <if test="condition.solution !=null and condition.solution !=&quot;&quot;">
+            and t.solution like concat('%',#{condition.solution,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.subjectId !=null and condition.subjectId !=&quot;&quot;">
+            and t.subjectId = #{condition.subjectId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and t.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and t.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
     </select>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Subject">
