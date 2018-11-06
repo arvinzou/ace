@@ -189,10 +189,14 @@
                 \${data.remark}
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">提交人</label>
+       <div class="form-group">
+            <label class="col-md-2 view-label">类型</label>
             <div class="col-md-10">
-                \${data.userId}
+                {@if data.type == '1'}
+                 文明行为
+                {@else if data.type == '0'}
+                 不文明行为
+                {@/if}
             </div>
         </div>
         <div class="form-group">
@@ -204,7 +208,7 @@
                         {@if item.fileType == '0'}
                         <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileName}</a>
                         {@else if item.fileType == '1'}
-                        <img src="\${item.fileUrl}" style="width: 300px;height: 150px;"/>
+                        <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
                         {@else if item.fileType == '2'}
                         <video src="\${item.fileUrl}" width="300" height="150" controls></video>
                         {@/if}
@@ -232,9 +236,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 view-label">提交人</label>
+            <label class="col-md-2 view-label">类型</label>
             <div class="col-md-10">
-                \${data.userId}
+                {@if data.type == '1'}
+                文明行为
+                {@else if data.type == '0'}
+                不文明行为
+                {@/if}
             </div>
         </div>
         <div class="form-group">
@@ -246,7 +254,7 @@
                         {@if item.fileType == '0'}
                         <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileName}</a>
                         {@else if item.fileType == '1'}
-                        <img src="\${item.fileUrl}" style="width: 300px;height: 150px;"/>
+                        <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
                         {@else if item.fileType == '2'}
                         <video src="\${item.fileUrl}" width="300" height="150" controls></video>
                         {@/if}
