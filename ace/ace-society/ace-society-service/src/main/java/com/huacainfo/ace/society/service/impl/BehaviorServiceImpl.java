@@ -259,7 +259,7 @@ public class BehaviorServiceImpl implements BehaviorService {
             return new MessageResponse(ResultCode.FAIL, "市民文明拍信息丢失！");
         }
         //更改审核记录
-        MessageResponse auditRs = auditRecordService.audit(BisType.BEHAVIOR, behavior.getId(),
+        MessageResponse auditRs = auditRecordService.audit(CoinConfigType.TAKE_A_PHOTO, behavior.getId(),
                 userId, rst, remark, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
