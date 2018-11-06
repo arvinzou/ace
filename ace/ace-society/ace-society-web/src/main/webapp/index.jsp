@@ -188,8 +188,8 @@
 
 </script>
 
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=GA3nfXHbDcQaNEXmPBkaGdx2gvLMMBGy"></script>
-<script type="text/javascript" src="http://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=GA3nfXHbDcQaNEXmPBkaGdx2gvLMMBGy"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
 
 
 <script type='text/javascript'>
