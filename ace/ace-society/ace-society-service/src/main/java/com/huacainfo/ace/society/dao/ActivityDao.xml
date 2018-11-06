@@ -67,10 +67,11 @@
         select
         a.id, a.initiatorId, a.title, a.category, a.mode,a.purpose, a.location, a.coverUrl, a.startSignImgUrl, a.endSignImgUrl, a.dendline, a.startDate, a.endDate,
         a.volunteerNum, a.clazz, a.volunteerPoints, a.parterNum, a.parterPoints, a.remark, a.coinconfigId, a.status, a.createUserId,
-        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.avatarUrl as headimgurl,s.orgName
+        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.avatarUrl as headimgurl,s.orgName,c.host,c.participant
         from activity a
 --         LEFT  JOIN  portal.users u ON  a.initiatorId=u.user_id
         LEFT  JOIN  portal.wx_user i ON  a.initiatorId=i.unionid
+        LEFT  JOIN coin_config c ON  c.id=a.coinconfigId
         LEFT JOIN society_org_info s ON s.id=a.initiatorId
         where a.id = #{id,jdbcType=VARCHAR}
     </select>
