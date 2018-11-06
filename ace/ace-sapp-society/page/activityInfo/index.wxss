@@ -116,6 +116,13 @@
     color: rgba(28, 188, 128, 1);
 }
 
+.coin_assign .coin_xf {
+    font-size: 28rpx;
+    font-weight: bold;
+    color: rgb(219, 65, 72);
+}
+
+
 .partner_list {
     padding: 24rpx 30rpx;
 }

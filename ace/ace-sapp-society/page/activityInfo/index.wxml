@@ -38,10 +38,12 @@
     </view>
 
     <view class='coin_assign'>
-        <view>志愿者：
-        </view>
-        <view class='coin_mark'>+{{activityInfo.parterPoints}}爱心币
-        </view>
+        <block wx:if="{{activityInfo.participant>=0}}">
+            <view>志愿者：</view><view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
+        </block>
+        <block wx:if="{{activityInfo.participant<0}}">
+            <view>参与者：</view><view class='coin_xf'>{{activityInfo.participant}}爱心币</view>
+        </block>
     </view>
 
     <view class='partner_list'>

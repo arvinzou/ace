@@ -17,7 +17,7 @@ function App() {
 /*议题点子初始化分页*/
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 10,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
