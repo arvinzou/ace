@@ -19,8 +19,12 @@
                     <view>爱心币收入</view>
                 </view>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.accPoints- userinfoData.societyOrg.validPoints}}</view>
-                    <view wx:else>{{ userinfoData.societyOrg.accPoints- userinfoData.societyOrg.validPoints}}</view>
+                    <view wx:if='{{ userinfoData.regType == 2}}'>
+                        {{ userinfoData.societyOrg.accPoints- userinfoData.societyOrg.validPoints}}
+                    </view>
+                    <view wx:else>
+                        {{ userinfoData.person.accPoints- userinfoData.person.validPoints}}
+                    </view>
                     <view>爱心币支出</view>
                 </view>
                 <view>
@@ -77,10 +81,12 @@
             <text class='menu-title'>关于我们</text>
             <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </navigator>
+        <!--<block wx-if='{{wxUser.role == "admin"}}'>-->
          <navigator class='menu-item' url='../datas/index'>
             <image lazy-load="true" src='../../image/icon_aboutus.png' class='menu-icon'></image>
             <text class='menu-title'>数据监控</text>
             <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </navigator>
+        <!--</block>-->
     </view>
 </view>
