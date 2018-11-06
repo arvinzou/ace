@@ -108,15 +108,15 @@ public class WeChatController extends MsgControllerAdapter {
         String oriId = inFollowEvent.getToUserName();//开发者微信号
         String openId = inFollowEvent.getFromUserName();//发送方帐号（一个OpenID）
 
-//        ConfigWechat wechat = AccessUtil.getWechatByOriId(oriId);
-//        logger.debug("WeChatController.processInFollowEvent.oriId[" + oriId + "]"
-//                + ",ConfigWechat[" + wechat.toString() + "]"
-//                + ",openId[" + openId + "]");
 
         //如果为关注事件
         if (InFollowEvent.EVENT_INFOLLOW_SUBSCRIBE.equals(inFollowEvent.getEvent())) {
             //业务逻辑处理
-//            wechatToWebService.generateNewCustomer(wechat, openId, null);
+            //1、推送欢迎话术
+            OutTextMsg outTextMsg = weChatService.welcome(inFollowEvent, openId);
+            if (outTextMsg != null) {
+                responseMsg = render(outTextMsg);
+            }
         }
         // 如果为取消关注事件，将无法接收到传回的信息
         else if (InFollowEvent.EVENT_INFOLLOW_UNSUBSCRIBE.equals(inFollowEvent.getEvent())) {
@@ -141,16 +141,10 @@ public class WeChatController extends MsgControllerAdapter {
         //讲消息转送客服处理
         OutTextMsg customMsg = weChatService.getCustomerResponse(inTextMsg);
 
-//        new OutTextMsg(inTextMsg);
-//        customMsg.setContent("here is your input:" + userInput + "," +
-//                "\nhello world!, this is testing time.....");
-
-
         if (null == customMsg) {
             return "success";
         }
         return render(customMsg);
-
     }
 
     /**
@@ -165,10 +159,8 @@ public class WeChatController extends MsgControllerAdapter {
         String eventKey = inMenuEvent.getEventKey();
         String fromOpenId = inMenuEvent.getFromUserName();
         String toOpenId = inMenuEvent.getToUserName();
-
-
         OutTextMsg outMsg = new OutTextMsg(inMenuEvent);
-        outMsg.setContent("hello world!,eventKey:" + inMenuEvent.getEventKey());
+        outMsg.setContent("[常德市工商联]hello world!,eventKey:" + inMenuEvent.getEventKey());
 
         //查询自动回复表
         return render(outMsg);
@@ -184,6 +176,8 @@ public class WeChatController extends MsgControllerAdapter {
     protected String processInQrCodeEvent(InQrCodeEvent inQrCodeEvent) {
 
         //推荐人scene，被推荐人fromusername，原始id：tousername(进一步得到sysAccount)
+        String openId = inQrCodeEvent.getFromUserName();//发送方帐号（一个OpenID）
+
 
         // 1. 用户未关注时，进行关注后的事件推送： subscribe
         if (InQrCodeEvent.EVENT_INQRCODE_SUBSCRIBE.equals(inQrCodeEvent.getEvent())) {
@@ -191,13 +185,20 @@ public class WeChatController extends MsgControllerAdapter {
             if (scene.startsWith("qrscene")) {
                 scene = scene.substring(scene.indexOf('_') + 1);
             }
+            //关注通知
+            //1、推送欢迎话术
+            OutTextMsg outTextMsg = weChatService.welcome(inQrCodeEvent, openId);
+            if (outTextMsg != null) {
+                return render(outTextMsg);
+            }
         }
         // 2. 用户已关注时的事件推送： SCAN
         else if (InQrCodeEvent.EVENT_INQRCODE_SCAN.equals(inQrCodeEvent.getEvent())) {
+
         }
 
         OutTextMsg outMsg = new OutTextMsg(inQrCodeEvent);
-        outMsg.setContent("hello world!,eventKey:" + inQrCodeEvent.getEventKey());
+        outMsg.setContent("[常德市工商联]hello world!,eventKey:" + inQrCodeEvent.getEventKey());
         return render(outMsg);
     }
 }

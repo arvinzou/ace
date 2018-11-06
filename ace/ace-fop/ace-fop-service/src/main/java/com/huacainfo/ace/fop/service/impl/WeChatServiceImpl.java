@@ -1,6 +1,7 @@
 package com.huacainfo.ace.fop.service.impl;
 
 import com.huacainfo.ace.common.kafka.KafkaProducerService;
+import com.huacainfo.ace.common.plugins.wechat.entity.msg.in.InMsg;
 import com.huacainfo.ace.common.plugins.wechat.entity.msg.in.InTextMsg;
 import com.huacainfo.ace.common.plugins.wechat.entity.msg.out.OutTextMsg;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -9,6 +10,8 @@ import com.huacainfo.ace.fop.common.constant.MsgTmplCode;
 import com.huacainfo.ace.fop.dao.FopAiQuestionDao;
 import com.huacainfo.ace.fop.model.FopAiQuestion;
 import com.huacainfo.ace.fop.service.WeChatService;
+import com.huacainfo.ace.portal.model.Config;
+import com.huacainfo.ace.portal.service.ConfigService;
 import com.huacainfo.ace.portal.service.WxCfgService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +22,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 @Service("weChatService")
 /**
@@ -35,6 +37,8 @@ public class WeChatServiceImpl implements WeChatService {
     private KafkaProducerService kafkaProducerService;
     @Autowired
     private FopAiQuestionDao fopAiQuestionDao;
+    @Autowired
+    private ConfigService configService;
 
     /**
      * 获取回复客服消息
@@ -51,11 +55,8 @@ public class WeChatServiceImpl implements WeChatService {
         //TODO 以后考虑异步回复问题 ,根据用户输入查询AI问题结果
         List<FopAiQuestion> questionList = fopAiQuestionDao.findQuestion(userInput);
         if (!CollectionUtils.isEmpty(questionList)) {
-            Random r = new Random();
-            int index = r.nextInt(questionList.size());
-            FopAiQuestion question = questionList.get(index);
+            FopAiQuestion question = questionList.get(0);
             outTextMsg.setContent(question.getAnswer());
-
             return outTextMsg;
         }
 
@@ -74,6 +75,23 @@ public class WeChatServiceImpl implements WeChatService {
         }
 
         return null;
+    }
+
+    /**
+     * 回复欢迎语
+     *
+     * @param openId
+     */
+    @Override
+    public OutTextMsg welcome(InMsg inMsg, String openId) {
+        Config welcome = configService.findByKey("fop", "wechat_welcome");
+        if (welcome == null) {
+            return null;
+        }
+
+        OutTextMsg out = new OutTextMsg(inMsg);
+        out.setContent(welcome.getConfigValue());
+        return out;
     }
 
     private void sendToAdmin(String userInput) {

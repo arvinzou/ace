@@ -110,7 +110,7 @@ public class WWWJsApiController extends BaseController {
      * @return map
      */
     @RequestMapping(value = "/getWxCfg")
-    public ResultResponse getConfig(String sysId) {
+    public ResultResponse getWxCfg(String sysId) {
         if (StringUtil.isEmpty(sysId)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
@@ -120,6 +120,10 @@ public class WWWJsApiController extends BaseController {
         if (null == wxCfg || StringUtil.isEmpty(wxCfg.getAccessToken())) {
             return new ResultResponse(ResultCode.FAIL, "微信配置获取异常");
         }
+        //私密信息不外漏
+        wxCfg.setAppId("");
+        wxCfg.setAppScret("");
+
 
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", wxCfg);
     }
