@@ -239,7 +239,7 @@
   <sql id="whereCondition">
     from behavior t
       left join portal.wx_user wx on t.userId = wx.unionId
-      right join portal.users u on u.user_id = wx.unionId
+      left join portal.users u on u.user_id = t.userId
       left join behavior_annex nex on t.id = nex.behaviorId
     where 1=1
     <if test="condition.title !=null and condition.title !=&quot;&quot;">
@@ -261,7 +261,23 @@
 
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
-    <include refid="whereCondition"/>
+     from behavior t
+    where  1=1
+    <if test="condition.title !=null and condition.title !=&quot;&quot;">
+      and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="condition.status !=null and condition.status !=&quot;&quot;">
+      and t.status =  #{condition.status,jdbcType=CHAR}
+    </if>
+    <if test="condition.id !=null and condition.id !=&quot;&quot;">
+      and t.id =  #{condition.id,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.type !=null and condition.type !=&quot;&quot;">
+      and t.type =  #{condition.type,jdbcType=CHAR}
+    </if>
+    <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+      and t.userId =  #{condition.userId,jdbcType=CHAR}
+    </if>
   </select>
 
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Behavior">
