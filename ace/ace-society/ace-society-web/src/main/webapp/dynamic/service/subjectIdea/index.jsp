@@ -78,7 +78,7 @@
         <td> \$\${item.solution}</td>
         <td>
             {@each item.listSubjectIdeaAnnexVo as fileItem}
-                <div class="fileListBox"><img src="\${fileItem.fileUrl}" style="width: 70px;height: 70px;"/></div>
+                <div class="fileListBox"><img src="\${fileItem.fileUrl}" style="width: 70px;height: 70px;object-fit: cover;"/></div>
             {@/each}
         </td>
         <td> \${item.nickname}</td>
@@ -157,7 +157,7 @@
                 {@each data.listSubjectIdeaAnnexVo as item, index}
                 <div class="fileBox">
                     <div class="file">
-                        <img src="\${item.fileUrl}" style="width: 300px; height: 150px;"/>
+                        <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
                     </div>
                 </div>
                 {@/each}
@@ -244,7 +244,7 @@
                 {@each data.listSubjectIdeaAnnexVo as item, index}
                 <div class="fileBox">
                     <div class="file">
-                        <img src="\${item.fileUrl}" style="width: 300px; height: 150px;"/>
+                        <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
                     </div>
                 </div>
                 {@/each}
