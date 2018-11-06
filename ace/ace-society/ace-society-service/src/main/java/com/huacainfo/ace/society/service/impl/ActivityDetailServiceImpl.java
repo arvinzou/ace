@@ -1,6 +1,7 @@
 package com.huacainfo.ace.society.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,9 +11,16 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.dao.ActivityDao;
+import com.huacainfo.ace.society.dao.PersonInfoDao;
+import com.huacainfo.ace.society.dao.PointsRecordDao;
+import com.huacainfo.ace.society.model.PointsRecord;
+import com.huacainfo.ace.society.service.ActivityService;
+import com.huacainfo.ace.society.vo.ActivityVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.huacainfo.ace.common.model.UserProp;
@@ -42,6 +50,14 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private AuditRecordService auditRecordService;
+
+    @Autowired
+    private ActivityDao activityDao;
+    @Autowired
+    private PersonInfoDao personInfoDao;
+    @Autowired
+    private PointsRecordDao pointsRecordDao;
+
 
     /**
      * @throws
@@ -134,23 +150,72 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
 
         o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键-GUID不能为空！");
+            return new MessageResponse(ResultCode.FAIL, "主键-GUID不能为空！");
         }
         if (CommonUtils.isBlank(o.getActivityId())) {
-            return new MessageResponse(1, "活动编码不能为空！");
+            return new MessageResponse(ResultCode.FAIL, "活动编码不能为空！");
         }
-//        if (CommonUtils.isBlank(o.getIdentity())) {
-//            return new MessageResponse(1, "参与身份 1 - 志愿者 2 - 参与者不能为空！");
-//        }
-        int temp = this.activityDetailDao.isExit(o);
-        o.setUserId(wxUser.getUnionId());
-        o.setSignInState("0");
-        o.setCreateDate(new Date());
-        o.setStatus("1");
-        o.setCreateUserName(wxUser.getNickName());
-        o.setCreateUserId(wxUser.getUnionId());
-        this.activityDetailDao.insertSelective(o);
-        return new MessageResponse(0, "添加活动报道完成！");
+        String unionId=wxUser.getUnionId();
+
+        ActivityDetailVo activityDetailVo = this.activityDetailDao.selectPersonaldetails(o.getActivityId(),unionId);
+        if (!CommonUtils.isBlank(activityDetailVo)) {
+            return new MessageResponse(ResultCode.FAIL, "已经报名");
+        }
+        ActivityVo activityVo = activityDao.selectVoByPrimaryKeyVo(o.getActivityId());
+        int allRows = this.activityDetailDao.findCount((ActivityDetailQVo) o);
+        if (activityVo.getParterNum() > allRows) {
+            int coinNum = activityVo.getParticipant();
+            o.setIdentity("1");
+            if (!(coinNum > 0)) {
+                List<String> list = new ArrayList<>();
+                list.add(unionId);
+                personInfoDao.addCoin(list, activityVo.getCoinconfigId(), coinNum, 0);
+                subPeoplePointsRecord(activityVo.getCategory(), coinNum, unionId, activityVo.getId());
+                o.setIdentity("2");
+            }
+            o.setUserId(unionId);
+            o.setSignInState("0");
+            o.setCreateDate(new Date());
+            o.setStatus("1");
+            o.setCreateUserName(wxUser.getNickName());
+            o.setCreateUserId(unionId);
+            this.activityDetailDao.insertSelective(o);
+            return new MessageResponse(ResultCode.SUCCESS, "添加活动报道完成！");
+        }
+        return new MessageResponse(ResultCode.FAIL, "报名人数已满！");
+    }
+
+
+    public ResultResponse subPeoplePointsRecord(String type, int coin, String userId, String bisId) {
+        String bisType = "";
+        switch (type) {
+            case "1":
+                bisType = BisType.POINTS_WELFARE_PARTER_SUB;
+                break;
+            case "2":
+                bisType = BisType.POINTS_ORDINARY_PARTER_SUB;
+                break;
+            case "3":
+                bisType = BisType.POINTS_CREATIVE_PARTER_SUB;
+                break;
+            case "4":
+                bisType = BisType.POINTS_PARTY_PARTER_SUB;
+                break;
+            default:
+                break;
+        }
+        PointsRecord record = new PointsRecord();
+        record.setId(GUIDUtil.getGUID());
+        record.setUserId(userId);
+        record.setBisType(bisType);
+        record.setBisId(bisId);
+        record.setPoints(coin);
+        record.setStatus("1");
+        record.setCreateDate(DateUtil.getNowDate());
+        record.setCreateUserId("system");
+        record.setCreateUserName("system");
+        pointsRecordDao.insert(record);
+        return new ResultResponse(ResultCode.SUCCESS, "记录成功");
     }
 
     /**
@@ -218,15 +283,15 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
      * @version: 2018-09-13
      */
     @Override
-    public ResultResponse personalActivitydetails(String activityId,String unionId) throws Exception {
-        if(CommonUtils.isBlank(activityId)){
-            return new ResultResponse(ResultCode.FAIL,"缺少参数");
+    public ResultResponse personalActivitydetails(String activityId, String unionId) throws Exception {
+        if (CommonUtils.isBlank(activityId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少参数");
         }
-        if(CommonUtils.isBlank(unionId)){
-            return new ResultResponse(ResultCode.FAIL,"缺少参数");
+        if (CommonUtils.isBlank(unionId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少参数");
         }
-        ActivityDetailVo  activityDetailVo=this.activityDetailDao.selectPersonaldetails(activityId,unionId);
-        return new ResultResponse(ResultCode.SUCCESS,"获取成功",activityDetailVo);
+        ActivityDetailVo activityDetailVo = this.activityDetailDao.selectPersonaldetails(activityId, unionId);
+        return new ResultResponse(ResultCode.SUCCESS, "获取成功", activityDetailVo);
     }
 
     /**

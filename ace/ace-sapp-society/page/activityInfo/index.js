@@ -108,8 +108,38 @@ Page({
     },
     apply:function(){
         let that=this;
-        wx.navigateTo({
-            url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
-        })
+        let coin = that.data.activityInfo.participant;
+        if (coin<0){
+            wx.showModal({
+                title: '提示',
+                content: "参加活动需要"+coin+爱心币,
+                success: function (res) {
+                    console.log(res)
+                    if (res.confirm) {
+                        let user=util.getSysUser();
+                        if (user.person.validPoints>coin){
+                            wx.navigateTo({
+                                url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
+                            })
+                        }else{
+                            wx.showToast({
+                                title: '爱心币不足',
+                                icon: 'success',
+                                duration: 2000,
+                                complete: function () {
+                                    return;
+                                }
+                            });
+                        }
+                    } else{
+                        return;
+                    }
+                }
+            })
+        }else{
+            wx.navigateTo({
+                url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
+            })
+        }
     }
 })
