@@ -186,9 +186,9 @@
 
 .btn-add-rpt{
   right: 40rpx;
-  bottom: 30rpx; 
-  position: fixed;  
-  display: flex;  
+  position: absolute;  
+  top: 30rpx; 
+  z-index: 999;
   align-items: center;  
   justify-content: center;  
   border-radius: 50%;  

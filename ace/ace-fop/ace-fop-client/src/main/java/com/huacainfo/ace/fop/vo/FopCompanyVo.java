@@ -5,6 +5,7 @@ import com.huacainfo.ace.fop.model.FopCompany;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 public class FopCompanyVo extends FopCompany {
@@ -75,6 +76,43 @@ public class FopCompanyVo extends FopCompany {
     private FopPersonVo person;
     private List<FopCompanyOrgVo> olist;
     private List<FopCompanyContributionVo> clist;
+
+    /**
+     * 市工商局_企业变更记录信息
+     */
+    private Map<String, Object> sgsj;
+    /**
+     * 市地税局_税务登记信息
+     */
+    private Map<String, Object> guosj;
+    /**
+     * 市人社局_企业养老保险单位参保信息
+     */
+    private Map<String, Object> srsj;
+
+    public Map<String, Object> getSgsj() {
+        return sgsj;
+    }
+
+    public void setSgsj(Map<String, Object> sgsj) {
+        this.sgsj = sgsj;
+    }
+
+    public Map<String, Object> getGuosj() {
+        return guosj;
+    }
+
+    public void setGuosj(Map<String, Object> guosj) {
+        this.guosj = guosj;
+    }
+
+    public Map<String, Object> getSrsj() {
+        return srsj;
+    }
+
+    public void setSrsj(Map<String, Object> srsj) {
+        this.srsj = srsj;
+    }
 
     public String getAreaCodeName() {
         return areaCodeName;
