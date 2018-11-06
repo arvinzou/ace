@@ -303,17 +303,12 @@ Page({
     uploadFileFun: function(tempFilePaths) {
         var that = this;
         wx.uploadFile({
-            url: cfg.server+'/portal/www/uploadFile.do',
+            url: cfg.uploadUrl,
             filePath: tempFilePaths,
             name: 'file',
-
-            formData: {
-                collectionName: 'ceshi',
-                id: '111'
-            },
             success: function(res) {
                 var data = JSON.parse(res.data);
-                var url = cfg.serverfile + data.value[0].fileUrl;
+                var url = data.file_path;
                 that.setData({
                     ["form.coverUrl"]: url
                 })
