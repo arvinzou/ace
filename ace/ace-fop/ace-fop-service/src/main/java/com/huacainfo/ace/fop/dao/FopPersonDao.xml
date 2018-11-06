@@ -416,4 +416,7 @@
         from fop_person
         where mobileNumer = #{mobileNumber,jdbcType=VARCHAR}
     </select>
+    <select id="selectPersonIdByCropId" resultType="string">
+        select max(personId) from fop_company where departmentId=#{id}
+    </select>
 </mapper>

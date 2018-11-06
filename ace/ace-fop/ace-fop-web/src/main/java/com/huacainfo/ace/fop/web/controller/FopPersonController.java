@@ -3,6 +3,7 @@ package com.huacainfo.ace.fop.web.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -10,6 +11,8 @@ import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.FopPersonService;
 import com.huacainfo.ace.fop.vo.FopPersonQVo;
 import com.huacainfo.ace.fop.vo.FopPersonVo;
+import com.huacainfo.ace.portal.service.AuthorityService;
+import org.apache.poi.ss.formula.functions.T;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class FopPersonController extends FopBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private FopPersonService fopPersonService;
+
+    @Autowired
+    private AuthorityService authorityService;
 
     /**
      * @throws
@@ -129,5 +135,47 @@ public class FopPersonController extends FopBaseController {
         String id = json.getString("id");
         return this.fopPersonService.deleteFopPersonByFopPersonId(id,
                 this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:updateFopPerson
+     * @Description: TODO(更新企业管理)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @RequestMapping(value = "/www/updateFopPerson")
+    @ResponseBody
+    public MessageResponse updateFopPersonWww(String jsons) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurUserinfo().getUnionid());
+        if(rst.getStatus()==0){
+            FopPerson obj = JSON.parseObject(jsons, FopPerson.class);
+            return this.fopPersonService.updateFopPerson(obj, rst.getValue());
+        }
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:selectFopPersonByPrimaryKey
+     * @Description: TODO(获取企业管理)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<FopPerson>
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @RequestMapping(value = "/www/selectFopPersonByCurCorpId")
+    @ResponseBody
+    public SingleResult selectFopPersonByCurCorpId() throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurUserinfo().getUnionid());
+        if(rst.getStatus()==0){
+            return this.fopPersonService.selectFopPersonByCurCorpId(rst.getValue().getCorpId());
+        }
+        return rst;
     }
 }
