@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list:[]
+      list:[],
+      maskFlag: true,
+      videoUrl: null
   },
     
   /**
@@ -26,7 +28,21 @@ Page({
       that.initData();
     }
   },
-
+    viewVideo: function (e) {
+        console.log("查看视频地址=====================================" + e.currentTarget.id);
+        var that = this;
+        that.setData({
+            videoUrl: e.currentTarget.id,
+            maskFlag: false
+        });
+    },
+    exitVideo: function (e) {
+        console.log("==================================退出视频观看");
+        var that = this;
+        that.setData({
+            maskFlag: true
+        });
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
