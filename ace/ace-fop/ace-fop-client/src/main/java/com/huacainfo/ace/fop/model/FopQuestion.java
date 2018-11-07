@@ -35,7 +35,9 @@ public class FopQuestion implements Serializable {
     private Long accCount;
 
     private String remark;
-
+    /**
+     * 1-待审 2-审核通过 3-审核驳回  4-递交律师处理
+     */
     private String status;
 
     private String createUserId;
@@ -49,6 +51,17 @@ public class FopQuestion implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+
+    private String displayName;
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
     public String getRelationType() {
         return relationType;
