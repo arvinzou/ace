@@ -1,10 +1,8 @@
 function loadView(id) {
     $.ajax({
         type: "post",
-        url:contextPath + '/fopCompany/selectFopCompanyByPrimaryKey',
-        data: {
-            id: id
-        },
+        url: contextPath + '/fopCompany/selectFopCompanyByPrimaryKey',
+        data: {id: id},
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
@@ -13,7 +11,7 @@ function loadView(id) {
             var renderHtml = juicer(tpl, rst.value);
             $('.main_box').html(renderHtml);
 
-initGrid();
+            initGrid();
 
             $.each(rst.value, function (key, value) {
                 if (key == "thirdLaborRelation") {
@@ -99,43 +97,43 @@ initGrid();
 }
 var Common = {
 
-	// EasyUI用DataGrid用日期格式化
-	TimeFormatter : function(value, rec, index) {
-		if (value == undefined) {
-			return "";
-		}
-		/* json格式时间转js时间格式 */
-		value = value.substr(1, value.length - 2);
-		var obj = eval('(' + "{Date: new " + value + "}" + ')');
-		var dateValue = obj["Date"];
-		if (dateValue.getFullYear() < 1900) {
-			return "";
-		}
-		var val = dateValue.format("yyyy-mm-dd HH:MM");
-		return val.substr(11, 5);
-	},
-	DateTimeFormatter : function(value, rec, index) {
-		if (value == undefined) {
-			return "";
-		}
-		/* json格式时间转js时间格式 */
-		value = value.substr(1, value.length - 2);
-		var obj = eval('(' + "{Date: new " + value + "}" + ')');
-		var dateValue = obj["Date"];
-		if (dateValue.getFullYear() < 1900) {
-			return "";
-		}
+    // EasyUI用DataGrid用日期格式化
+    TimeFormatter: function (value, rec, index) {
+        if (value == undefined) {
+            return "";
+        }
+        /* json格式时间转js时间格式 */
+        value = value.substr(1, value.length - 2);
+        var obj = eval('(' + "{Date: new " + value + "}" + ')');
+        var dateValue = obj["Date"];
+        if (dateValue.getFullYear() < 1900) {
+            return "";
+        }
+        var val = dateValue.format("yyyy-mm-dd HH:MM");
+        return val.substr(11, 5);
+    },
+    DateTimeFormatter: function (value, rec, index) {
+        if (value == undefined) {
+            return "";
+        }
+        /* json格式时间转js时间格式 */
+        value = value.substr(1, value.length - 2);
+        var obj = eval('(' + "{Date: new " + value + "}" + ')');
+        var dateValue = obj["Date"];
+        if (dateValue.getFullYear() < 1900) {
+            return "";
+        }
 
-		return dateValue.format("yyyy-mm-dd HH:MM");
-	},
+        return dateValue.format("yyyy-mm-dd HH:MM");
+    },
 
-	// EasyUI用DataGrid用日期格式化
-	DateFormatter : function(value, rec, index) {
-		if (value == undefined) {
-			return "";
-		}
-		return value.substr(0, 10);
-	}
+    // EasyUI用DataGrid用日期格式化
+    DateFormatter: function (value, rec, index) {
+        if (value == undefined) {
+            return "";
+        }
+        return value.substr(0, 10);
+    }
 };
 
 function rsd(value, kernelKey) {

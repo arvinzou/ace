@@ -7,7 +7,7 @@
 %>
 
 <%
-session.setAttribute("portalPath", "/portal");
+    session.setAttribute("portalPath", "/portal");
 %>
 <script type="text/javascript">
     var contextPath = '${pageContext.request.contextPath}';
@@ -16,7 +16,7 @@ session.setAttribute("portalPath", "/portal");
     var fastdfs_server = '${cfg.fastdfs_server}';
     var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
     var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
-    var default_page_list=[${cfg.default_page_list}];
+    var default_page_list = [${cfg.default_page_list}];
 </script>
 <!DOCTYPE html>
 <html lang="cn">
@@ -28,96 +28,102 @@ session.setAttribute("portalPath", "/portal");
     <title>基本信息</title>
     <script type="text/javascript" src="${portalPath}/system/getUserProp.do"></script>
     <script type="text/javascript" src="${portalPath}/system/getButtonAuthority.do?id=${param.id}"></script>
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}" />
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css?v=${cfg.version}"/>
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/css/components.min.css?v=${cfg.version}" />
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/layout.min.css?v=${cfg.version}" />
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/themes/default.min.css?v=${cfg.version}"/>
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css?v=${cfg.version}"/>
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/custom.min.css?v=${cfg.version}" />
-    <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}" />
+    <link rel="stylesheet"
+          href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${portalPath}/content/common/assets/global/plugins/font-awesome/css/font-awesome.min.css?v=${cfg.version}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${portalPath}/content/common/assets/global/css/components.min.css?v=${cfg.version}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/layout.min.css?v=${cfg.version}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/themes/default.min.css?v=${cfg.version}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${portalPath}/content/common/assets/global/plugins/simple-line-icons/simple-line-icons.min.css?v=${cfg.version}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/custom.min.css?v=${cfg.version}"/>
+    <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 
-<script>
+    <script>
 
-var  urlParams = {};
+        var urlParams = {};
 
-function rsd(value, kernelKey, staticDictObjects) {
-	try {
-		if (!staticDictObjects) {
-			staticDictObjects = parent.staticDictObject;
-		}
+        function rsd(value, kernelKey, staticDictObjects) {
+            try {
+                if (!staticDictObjects) {
+                    staticDictObjects = parent.staticDictObject;
+                }
 
-		var name = value;
+                var name = value;
 
-		if ((value + "") && ("" + value).indexOf(',') < 0) {
-			if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
-				for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
-					if (staticDictObjects[kernelKey][i].CODE == value) {
-						name = staticDictObjects[kernelKey][i].NAME;
-						break;
-					}
-				}
-			}
-		} else {
-			if (value) {
-				var nameArray = [];
-				var v = (value + "").split(',');
-				for (var j = 0; j < v.length; j++) {
-					for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
-						if (staticDictObjects[kernelKey][i].CODE == v[j]) {
-							nameArray.push(staticDictObjects[kernelKey][i].NAME);
-							break;
-						}
-					}
-				}
-				name = nameArray.join(',');
-			}
-		}
-	} catch (err) {
-		console.log("渲染错误", value + ":" + kernelKey + ":" + err);
-	}
-	return name;
-}
-
-function odparse(kernelKey, staticDictObjects) {
-	var rst = [];
-	try {
-		if (!staticDictObjects) {
-			staticDictObjects = parent.staticDictObject;
-		}
-		if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
-			for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
-				rst.push(staticDictObjects[kernelKey][i].CODE + ":"
-						+ staticDictObjects[kernelKey][i].NAME);
-			}
-		}
-	} catch (err) {
-		console.log("渲染错误", value + ":" + kernelKey + ":" + err);
-	}
-	return rst.join(";");
-}
-function getQueryString() {
-      var qs = location.search.substr(1),
-        args = {},
-        items = qs.length ? qs.split("&") : [],
-        item = null,
-        len = items.length;
-
-      for(var i = 0; i < len; i++) {
-        item = items[i].split("=");
-        var name = decodeURIComponent(item[0]),
-          value = decodeURIComponent(item[1]);
-        if(name) {
-          args[name] = value;
+                if ((value + "") && ("" + value).indexOf(',') < 0) {
+                    if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
+                        for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+                            if (staticDictObjects[kernelKey][i].CODE == value) {
+                                name = staticDictObjects[kernelKey][i].NAME;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    if (value) {
+                        var nameArray = [];
+                        var v = (value + "").split(',');
+                        for (var j = 0; j < v.length; j++) {
+                            for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+                                if (staticDictObjects[kernelKey][i].CODE == v[j]) {
+                                    nameArray.push(staticDictObjects[kernelKey][i].NAME);
+                                    break;
+                                }
+                            }
+                        }
+                        name = nameArray.join(',');
+                    }
+                }
+            } catch (err) {
+                console.log("渲染错误", value + ":" + kernelKey + ":" + err);
+            }
+            return name;
         }
-      }
-      return args;
-}
-urlParams=getQueryString();
-</script>
+
+        function odparse(kernelKey, staticDictObjects) {
+            var rst = [];
+            try {
+                if (!staticDictObjects) {
+                    staticDictObjects = parent.staticDictObject;
+                }
+                if (staticDictObjects && kernelKey && staticDictObjects[kernelKey]) {
+                    for (var i = 0; i < staticDictObjects[kernelKey].length; i++) {
+                        rst.push(staticDictObjects[kernelKey][i].CODE + ":"
+                            + staticDictObjects[kernelKey][i].NAME);
+                    }
+                }
+            } catch (err) {
+                console.log("渲染错误", value + ":" + kernelKey + ":" + err);
+            }
+            return rst.join(";");
+        }
+        function getQueryString() {
+            var qs = location.search.substr(1),
+                args = {},
+                items = qs.length ? qs.split("&") : [],
+                item = null,
+                len = items.length;
+
+            for (var i = 0; i < len; i++) {
+                item = items[i].split("=");
+                var name = decodeURIComponent(item[0]),
+                    value = decodeURIComponent(item[1]);
+                if (name) {
+                    args[name] = value;
+                }
+            }
+            return args;
+        }
+        urlParams = getQueryString();
+    </script>
 
 </head>
-
 
 
 <script type="text/javascript">
@@ -126,6 +132,12 @@ urlParams=getQueryString();
 </script>
 
 <style>
+    .ta-text {
+        width: 100%;
+        height: 100%;
+        padding: 1px;
+    }
+
     .main_box {
         width: 95%;
         margin: 0 auto;
@@ -199,9 +211,8 @@ urlParams=getQueryString();
 
     .tdbg {
         background-color: #FBFCFD;
+        /*text-align: center;*/
     }
-
-
 
 
 </style>
@@ -288,9 +299,6 @@ urlParams=getQueryString();
             <div class="info_title">
                 <span class="info_title_01">党员信息 </span>
             </div>
-
-
-
 
 
             <div id="pm" class="portlet-body">
@@ -380,7 +388,7 @@ urlParams=getQueryString();
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <textarea disabled="disabled" name="lpResume">\${lpResume}</textarea>
+                            <textarea class="ta-text" disabled="disabled" name="lpResume">\${lpResume}</textarea>
                         </td>
                     </tr>
                     <tr>
@@ -390,7 +398,8 @@ urlParams=getQueryString();
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <textarea disabled="disabled" name="lpAchievement">\${lpAchievement}</textarea>
+                            <textarea class="ta-text" disabled="disabled"
+                                      name="lpAchievement">\${lpAchievement}</textarea>
                         </td>
                     </tr>
                 </table>
@@ -420,7 +429,8 @@ urlParams=getQueryString();
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <textarea disabled="disabled" name="majorVariety">\${majorVariety}</textarea>
+                            <textarea class="ta-text" disabled="disabled"
+                                      name="majorVariety">\${majorVariety}</textarea>
                         </td>
                     </tr>
                 </table>
@@ -540,10 +550,10 @@ urlParams=getQueryString();
                 </tr>
                 <tr>
                     <td width="50%">
-                        <textarea disabled="disabled" name="reemployContribution">\${reemployContribution}</textarea>
+                        <textarea class="ta-text" disabled="disabled" name="reemployContribution">\${reemployContribution}</textarea>
                     </td>
                     <td width="50%">
-                        <textarea disabled="disabled" name="educationContribution">\${educationContribution}</textarea>
+                        <textarea class="ta-text" disabled="disabled" name="educationContribution">\${educationContribution}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -552,10 +562,11 @@ urlParams=getQueryString();
                 </tr>
                 <tr>
                     <td width="50%" align="center">
-                        <textarea disabled="disabled" name="helpPoorContribution">\${helpPoorContribution}</textarea>
+                        <textarea class="ta-text" disabled="disabled" name="helpPoorContribution">\${helpPoorContribution}</textarea>
                     </td>
                     <td width="50%" align="center">
-                        <textarea disabled="disabled" name="otherContribution">\${otherContribution}</textarea>
+                        <textarea class="ta-text" disabled="disabled"
+                                  name="otherContribution">\${otherContribution}</textarea>
                     </td>
                 </tr>
             </table>
@@ -582,6 +593,106 @@ urlParams=getQueryString();
             </table>
         </div>
     </div>
+    <%--市工商局_企业变更记录信息--%>
+    {@if sgsj != null}
+    <div class="info">
+        <div class="info_title">
+            <span class="info_title_01">市工商局-企业变更记录信息</span>
+        </div>
+        <div id="sgjs">
+            <table id="tb_sgsj" class="form_info" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="50%" align="right" class="tdbg" style="text-align: center;">变更日期</td>
+                    <td width="50%" name="updDateTime" style="text-align: center;">\${sgsj.变更日期}</td>
+                </tr>
+                <tr>
+                    <td width="50%" align="center" class="tdbg">变更前内容</td>
+                    <td width="50%" align="center" class="tdbg">变更后内容</td>
+                </tr>
+                <tr>
+                    <td width="50%" height="150px" align="center">
+                        <textarea class="ta-text" disabled="disabled" name="gsjBefore">
+                            \${sgsj.变更前内容}
+                        </textarea>
+                    </td>
+                    <td width="50%" height="150px" align="center">
+                        <textarea class="ta-text" disabled="disabled" name="gsjAfter">
+                            \${sgsj.变更后内容}
+                        </textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {@/if}
+    <%--市国税局_税务登记信息--%>
+    {@if guosj != null}
+    <div class="info">
+        <div class="info_title">
+            <span class="info_title_01">市国税局_税务登记信息</span>
+        </div>
+        <div id="guosj">
+            <table class="form_info" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="15%" align="right" class="tdbg">法人代表</td>
+                    <td width="35%"><span>\${guosj.法人代表}</span></td>
+                    <td width="15%" align="right" class="tdbg">经营范围</td>
+                    <td width="35%"><span>\${guosj.经营范围}</span></td>
+                </tr>
+                <tr>
+                    <td width="15%" align="right" class="tdbg">法人代表身份证号</td>
+                    <td width="35%"><span>\${guosj.法人代表身份证号}</span></td>
+                    <td width="15%" align="right" class="tdbg">纳税人状态</td>
+                    <td width="35%"><span>\${guosj.纳税人状态}</span></td>
+                </tr>
+                <tr>
+                    <td width="15%" align="right" class="tdbg">经营地址</td>
+                    <td width="35%"><span>\${guosj.经营地址}</span></td>
+                    <td width="15%" align="right" class="tdbg">纳税人识别号</td>
+                    <td width="35%"><span>\${guosj.纳税人识别号}</span></td>
+                </tr>
+                <tr>
+                    <td width="15%" align="right" class="tdbg">注册地址</td>
+                    <td width="35%"><span>\${guosj.注册地址}</span></td>
+                    <td width="15%" align="right" class="tdbg">登记注册类型</td>
+                    <td width="35%"><span>\${guosj.登记注册类型}</span></td>
+                </tr>
+                <tr>
+                    <td width="15%" align="right" class="tdbg">纳税人名称</td>
+                    <td width="35%"><span>\${guosj.纳税人名称}</span></td>
+                    <td width="15%" align="right" class="tdbg">开业设立日期</td>
+                    <td width="35%"><span>\${guosj.开业设立日期}</span></td>
+                </tr>
+                <tr>
+                    <td width="15%" align="right" class="tdbg">行业</td>
+                    <td width="35%"><span>\${guosj.行业}</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {@/if}
+    <%--市人社局_企业养老保险单位参保信息--%>
+    {@if srsj != null}
+    <div class="info">
+        <div class="info_title">
+            <span class="info_title_01">市人社局-企业养老保险单位参保信息</span>
+        </div>
+        <div id="srsj">
+            <table class="form_info" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="15%" align="right" class="tdbg">累计纳税（元）</td>
+                    <td width="35%">
+                        <span name="accTaxAmount">\${srsj.A}</span>
+                    </td>
+                    <td width="15%" align="right" class="tdbg">当年纳税（元）</td>
+                    <td width="35%">
+                        <span name="yearTaxAmount">\${srsj.B}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {@/if}
 </script>
 
 <script type="text/javascript">
@@ -590,7 +701,7 @@ urlParams=getQueryString();
         var cid = url.substring(url.indexOf('=') + 1);
 
         loadView(cid);
-
+        //api content
     }
 </script>
 
@@ -599,9 +710,12 @@ urlParams=getQueryString();
 <script src="${portalPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
-<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}" type="text/javascript"></script>
-<script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=${cfg.version}" type="text/javascript"></script>
-<script src="${portalPath}/content/common/assets/global/plugins/js.cookie.min.js?v=${cfg.version}" type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery.min.js?v=${cfg.version}"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/bootstrap/js/bootstrap.min.js?v=${cfg.version}"
+        type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/js.cookie.min.js?v=${cfg.version}"
+        type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/init-rem.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/js/loading.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>

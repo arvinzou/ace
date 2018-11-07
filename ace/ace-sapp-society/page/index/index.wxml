@@ -51,7 +51,7 @@
                         </block>
                     </view>
                     <view class='activity-footer'>
-                        <view class='sign-number'><text>已报名:{{activity.activityDetailVoList.length >0? activity.activityDetailVoList.length: 0}}</text></view>
+                        <view class='sign-number'><text>已报名:{{activity.amount}}</text></view>
                         <view class='activity-state'>
                            <block wx:if='{{activity.status == "3"}}'>
                                 <image src='../../image/icon_signing.png'></image>
