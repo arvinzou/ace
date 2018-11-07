@@ -127,7 +127,7 @@ public class FopAssociationServiceImpl implements FopAssociationService {
         o.setDepartmentId(department.getDepartmentId());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setStatus("2");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.fopAssociationDao.insertSelective(o);

@@ -33,11 +33,22 @@ jQuery(function($) {
                         '.ui-jqdialog-titlebar').wrapInner(
                         '<div class="widget-header" />')
                     appendButtons();
+                    $("#sData").click(function(){  checkNum();       });
                 }
             })
     });
 
 });
+function checkNum(){
+    var num1 = $("#viceNum").val();
+    var num2 = $("#directorNum").val();
+    var reg=(/^\d*$/);
+    if(reg.test(num1)===false || reg.test(num2)===false  )
+    {
+     alert("人数只能为数字");
+     return false;
+     }
+}
 
 function preview(id, title) {
     window.open(contextPath + '/dynamic/service/association/view.jsp?companyId=' + id);
