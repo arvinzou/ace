@@ -55,7 +55,7 @@
     width: 141rpx;
     height: 141rpx;
     right:40rpx;
-    top:30rpx;
+    bottom:30rpx;
     position:fixed;
     display:flex;
     align-items:center;
@@ -135,4 +135,26 @@
 .attach{
     width: 100%;
     height: auto;
+}
+.videoImg{
+    width: 90%;
+    height: 300rpx;
+}
+.mask{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color:#000;
+    z-index:9999;
+    top:0;
+    left:0;
+    opacity:0.7;
+}
+.controls{
+    width: 100%;
+    height: 80%;
+    font-weight: bold;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
