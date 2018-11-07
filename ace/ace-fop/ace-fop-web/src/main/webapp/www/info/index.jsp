@@ -21,7 +21,9 @@
 <jsp:include page="/dynamic/common/footer-1-www.jsp"/>
 <script src="${portalPath}/content/common/js/dict_fop.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/localization/messages_zh.js?v=${cfg.version}"></script>
 <script src="js/act.js" ></script>
 </html>
 
@@ -32,7 +34,8 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label"><span class="label-red">*</span>姓名</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="realName" value="\${data.o.realName}" placeholder="请输入姓名">
+                <input class="weui-input" type="text"  name="realName" value="\${data.o.realName}" placeholder="请输入姓名" maxlength="20">
+                <input type="hidden" name="id" value="\${data.o.id}">
             </div>
             <div class="error-realName" style="color:red"></div>
         </div>
@@ -44,7 +47,7 @@
                     <p>男</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" name="sex" id="x11" \${data.o.sex==1?'checked="checked"':''}>
+                    <input type="radio" class="weui-check" name="sex" value="1" id="x11" \${data.o.sex==1?'checked="checked"':''}>
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>
@@ -54,7 +57,7 @@
                     <p>女</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" name="sex" class="weui-check" id="x12" \${data.o.sex==2?'checked="checked"':''}>
+                    <input type="radio" name="sex" value="2"  id="x12" \${data.o.sex==2?'checked="checked"':''}>
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>
@@ -62,7 +65,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">籍贯</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="nativePlace" value="\${data.o.nativePlace}" placeholder="请输入籍贯">
+                <input class="weui-input" type="text"  name="nativePlace" value="\${data.o.nativePlace}" placeholder="请输入籍贯" maxlength="20">
             </div>
         </div>
         <div class="weui-cell">
@@ -89,8 +92,9 @@
                 <label for="" class="weui-label">政治面貌</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="political" value="\${data.o.political}" placeholder="请输入政治面貌">
+                <input class="weui-input" type="text"  name="political" value="\${data.o.political}" placeholder="请输入政治面貌" maxlength="10">
             </div>
+            <div class="error-political" style="color:red"></div>
         </div>
 
         <div class="weui-cell">
@@ -118,7 +122,7 @@
                 <label for="" class="weui-label">技术职称</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="skillJobTitle" value="\${data.o.skillJobTitle}" placeholder="请输入技术职称">
+                <input class="weui-input" type="text"  name="skillJobTitle" value="\${data.o.skillJobTitle}" placeholder="请输入技术职称" maxlength="20">
             </div>
         </div>
 
@@ -127,7 +131,7 @@
                 <label for="" class="weui-label">单位职务</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="deptPost" value="\${data.o.deptPost}" placeholder="请输入单位职务">
+                <input class="weui-input" type="text"  name="deptPost" value="\${data.o.deptPost}" placeholder="请输入单位职务" maxlength="20">
             </div>
         </div>
 
@@ -136,7 +140,7 @@
                 <label for="" class="weui-label">身份证号</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="identityCard" value="\${data.o.identityCard}" placeholder="请输入身份证号">
+                <input class="weui-input" type="text"  name="identityCard" value="\${data.o.identityCard}" placeholder="请输入身份证号" maxlength="18">
             </div>
         </div>
 
@@ -145,7 +149,7 @@
                 <label for="" class="weui-label">社会职务</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="societyPost" value="\${data.o.societyPost}" placeholder="请输入主要社会职务">
+                <input class="weui-input" type="text"  name="societyPost" value="\${data.o.societyPost}" placeholder="请输入主要社会职务" maxlength="50">
             </div>
         </div>
 
@@ -154,7 +158,7 @@
                 <label for="" class="weui-label">传真</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="fax" value="\${data.o.fax}" placeholder="请输入传真">
+                <input class="weui-input" type="text"  name="fax" value="\${data.o.fax}" placeholder="请输入传真" maxlength="20">
             </div>
         </div>
 
@@ -163,7 +167,7 @@
                 <label for="" class="weui-label">邮政编码</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="number" pattern="[0-9]*"  name="postcode" value="\${data.o.postcode}" placeholder="请输入邮政编码">
+                <input class="weui-input" type="text" pattern="[0-9]*"  name="postcode" value="\${data.o.postcode}" placeholder="请输入邮政编码" maxlength="8">
             </div>
         </div>
 
@@ -172,7 +176,7 @@
                 <label for="" class="weui-label">办公电话</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="phoneNumber" value="\${data.o.phoneNumber}" placeholder="请输入办公电话">
+                <input class="weui-input" type="text"  name="phoneNumber" value="\${data.o.phoneNumber}" placeholder="请输入办公电话" maxlength="20">
             </div>
         </div>
 
@@ -182,7 +186,7 @@
                 <label for="" class="weui-label">移动电话</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="number" pattern="[0-9]*"  name="mobileNumer" value="\${data.o.mobileNumer}" placeholder="请输入移动电话">
+                <input class="weui-input" type="number" pattern="[0-9]*"  name="mobileNumer" value="\${data.o.mobileNumer}" placeholder="请输入移动电话" maxlength="11">
             </div>
             <div class="error-mobileNumer" style="color:red"></div>
         </div>
@@ -192,8 +196,9 @@
                 <label for="" class="weui-label">电子邮箱</label>
             </div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="text"  name="email" value="\${data.o.email}" placeholder="请输入电子邮箱">
+                <input class="weui-input" type="text"  name="email" value="\${data.o.email}" placeholder="请输入电子邮箱" maxlength="30">
             </div>
+            <div class="error-email" style="color:red"></div>
         </div>
         <div class="weui-cells__title">简历</div>
         <div class="weui-cells weui-cells_form">
@@ -211,6 +216,15 @@
                     <textarea class="weui-textarea" placeholder="请输入特长及成就" rows="5" name="achievement">\${data.o.achievement}</textarea>
                     <div class="weui-textarea-counter"><span></span></div>
                 </div>
+            </div>
+        </div>
+        <div class="weui-cell weui-cell_vcode">
+            <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+            <div class="weui-cell__bd">
+                <input name="captcha" class="weui-input" type="number" placeholder="请输入验证码">
+            </div>
+            <div class="weui-cell__ft">
+                <img class="weui-vcode-img" src="${pageContext.request.contextPath}/captcha/www/image?id=\${data.o.id}">
             </div>
         </div>
 
