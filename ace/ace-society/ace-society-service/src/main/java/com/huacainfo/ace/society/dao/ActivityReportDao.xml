@@ -29,7 +29,7 @@
   </sql>
 
   <sql id="Vo_Column_List">
-    t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl, t.remark, t.status, t.top, t.createUserId, t.createUserName, t.createDate,
+    t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl,t.remark, t.status, t.top, t.createUserId, t.createUserName, t.createDate,
     t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,
     (SELECT COUNT(*)
       FROM society.comment_record
@@ -314,6 +314,12 @@
     </if>
     <if test="condition.category !=null and condition.category !=&quot;&quot;">
       and a.category =#{condition.category,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.clist !=null and condition.clist.size > 0">
+      and a.category in
+      <foreach collection="condition.clist" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+      </foreach>
     </if>
     <if test="condition.aStatus !=null and condition.aStatus !=&quot;&quot;">
       and a.status =#{condition.aStatus,jdbcType=VARCHAR}
