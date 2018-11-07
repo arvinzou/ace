@@ -83,6 +83,16 @@
                 场地封面
             </label>
             <div class="col-md-10" style="text-align: left">
+                {@if data.o.commodityCover!=undefined && data.o.commodityCover!=null && data.o.commodityCover!=''}
+                <img class="cover"
+                     id="commodityCover"
+                     data-toggle="modal"
+                     data-xsize="150" data-ysize="150"
+                     data-cover="commodityCover"
+                     data-target="#cropModal"
+                     src="\${data.o.commodityCover}">
+                <span class="help-block"></span>
+                {@else}
                 <img class="cover"
                      id="commodityCover"
                      data-toggle="modal"
@@ -91,6 +101,7 @@
                      data-target="#cropModal"
                      src="${pageContext.request.contextPath}/content/common/img/addImg1.png?v=${cfg.version}">
                 <span class="help-block"></span>
+                {@/if}
             </div>
         </div>
         <div class="form-group">

@@ -69,7 +69,7 @@
   width: 60rpx;
   height: 60rpx;
   right:10rpx;
-  top:50rpx;
+  top:10rpx;
   background: #fff;
   border-radius: 50%;
 }

@@ -18,9 +18,10 @@
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
     </resultMap>
+
     <sql id="Base_Column_List">
-    id, fromId, flowType, personId, auditResult, auditOpinion, auditDate, remark, status, 
-    createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
+        id, fromId, flowType, personId, auditResult, auditOpinion, auditDate, remark, status,
+        createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -221,7 +222,8 @@
         then (select fullName from fop.fop_association where id = t.fromId)
         END as requestName
         ,
-        t.id, t.fromId, t.flowType, t.personId, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        (select name from portal.users p WHERE p.user_id=t.personId) as personId,
+        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
         t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -248,12 +250,12 @@
 
     <sql id="whereCondition">
         from fop_flow_record t
-        where t.status <![CDATA[ <> ]]> 0
+        where t.status <![CDATA[ <> ]]> 1
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
         <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and t.status = #{condition.status,jdbcType=CHAR}
+            and t.auditResult = #{condition.status,jdbcType=CHAR}-2
         </if>
         <if test="condition.flowType!=null and condition.flowType!=&quot;&quot;">
         </if>
