@@ -76,7 +76,11 @@ Page({
                   wx.showModal({
                       title: '提示',
                       content: ret.info,
-                      success: function (res) { }
+                      success: function (res) { 
+                          wx.navigateTo({
+                              url: '../myIdea/index?userId=' + wx.getStorageSync('WX-SESSION-ID'),
+                          })
+                      }
                   });
               } else {
                   wx.showModal({
