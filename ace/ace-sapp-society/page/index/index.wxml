@@ -51,7 +51,7 @@
                         </block>
                     </view>
                     <view class='activity-footer'>
-                        <view class='sign-number'><text>已报名:{{activity.activityDetailVoList.length >0? activity.activityDetailVoList.length: 0}}</text></view>
+                        <view class='sign-number'><text>已报名:{{activity.amount}}</text></view>
                         <view class='activity-state'>
                            <block wx:if='{{activity.status == "3"}}'>
                                 <image src='../../image/icon_signing.png'></image>
@@ -128,7 +128,7 @@
         <view class='activity-list'>
             <view class='title01'><text>精选往事</text></view>
             <block wx:key="*" wx:for='{{reportData}}'>
-            <view class='activity-item' bindtap='showFineDetail' data-id='item.id'>
+            <view class='activity-item' bindtap='viewInfo' data-title='{{item.title}}' data-id='{{item.id}}'>
                 <view class='activity-item-left'>
                     <view class='title02'><text>{{item.title}}</text></view>
                     <view class='type01'>

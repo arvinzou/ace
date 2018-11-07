@@ -178,4 +178,10 @@ public class FopPersonController extends FopBaseController {
         }
         return rst;
     }
+
+    @RequestMapping(value = "/www/selectFopPersonByPrimaryKey")
+    @ResponseBody
+    public SingleResult<FopPersonVo> selectFopPersonByPrimaryKeyWww(String id) throws Exception {
+        return this.fopPersonService.selectFopPersonByPrimaryKey(id);
+    }
 }

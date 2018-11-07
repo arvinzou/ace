@@ -13,6 +13,7 @@ Page({
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
         userId: null,
+        wxUser:null
     },
 
     /**
@@ -30,7 +31,8 @@ Page({
             if (wx.getStorageSync('userinfo')) {
                 that.setData({ userId: wx.getStorageSync('WX-SESSION-ID')});
                 that.initUserData();
-            }
+                that.initWxUserData();
+            };
         }
     },
     initUserData: function() {
@@ -50,6 +52,17 @@ Page({
                     });
                     wx.navigateTo({ url: "../regist/index" });
                 }
+            }
+        );
+    },
+    initWxUserData: function(){
+        var that = this;
+        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', { "id": wx.getStorageSync('WX-SESSION-ID')},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    that.setData({ wxUser: ret.value});
+                } 
             }
         );
     },
@@ -82,6 +95,7 @@ Page({
         if (wx.getStorageSync('userinfo')) {
             that.setData({userId: wx.getStorageSync('WX-SESSION-ID')})
             that.initUserData();
+            that.initWxUserData();
         }
     },
 
@@ -111,6 +125,7 @@ Page({
         });
         util.delSysUser();
         that.initUserData();
+        that.initWxUserData();
         wx.stopPullDownRefresh();
         return;
     },
