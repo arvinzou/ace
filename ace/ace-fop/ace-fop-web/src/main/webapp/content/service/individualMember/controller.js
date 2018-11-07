@@ -33,11 +33,51 @@ jQuery(function($) {
                         '.ui-jqdialog-titlebar').wrapInner(
                         '<div class="widget-header" />')
                     appendButtons();
-                }
-            })
-    });
-
+    $("#sData").click(function(){
+        checkCard();
+        checkNum();
+        MoneyCheck();
+        });
+    }
+})
 });
+});
+
+function checkCard(){
+      var card = $("#lpIdentityCard").val();
+      var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+      if(card==''){
+      $("#lpIdentityCard").val("");
+}
+      else if(reg.test(card) === false){
+      alert("身份证输入不合法");
+      return false;
+      }
+}
+
+function checkNum(){
+      var num1 = $("#crewSize").val();
+      var num2 = $("#partyPeoples").val();
+      var num3 = $("#laborContractNum").val();
+      var reg=(/^\d*$/);
+      if(reg.test(num1)===false || reg.test(num2)===false || reg.test(num3)===false )
+      {
+      alert("人数只能为数字");
+      return false;
+      }
+}
+
+function MoneyCheck(){
+      var num1 = $("#registeredCapital").val();
+      var num2 = $("#fixedAssets").val();
+      var num3 = $("#workingCapital").val();
+      var reg = /^\d*\.{0,1}\d{0,2}$/;
+      if(reg.test(num1)===false || reg.test(num2)===false || reg.test(num3)===false )
+      {
+      alert("金额只能是数字和小数点后两位");
+      return false;
+      }
+}
 
 function preview(id, title) {
     window.open(contextPath + '/dynamic/service/company/view.jsp?companyId=' + id);

@@ -197,7 +197,7 @@
         <div class="col-md-10">
             <div class="radio-group-container">
                 <label>
-                    <input type="radio" name="rst" value="33"><span style="padding:10px">通过</span>
+                    <input checked type="radio" name="rst" value="33"><span style="padding:10px">通过</span>
                 </label>
                 <label>
                     <input type="radio" name="rst" value="41"><span style="padding:10px">驳回</span>
@@ -283,7 +283,7 @@
             <div class="col-md-10">
                 <div class="radio-group-container">
                     <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                        <input checked type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
                     </label>
                     <label>
                         <input type="radio" name="rst" value="4"><span style="padding:10px">驳回</span>

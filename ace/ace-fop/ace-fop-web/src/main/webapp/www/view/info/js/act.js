@@ -21,7 +21,7 @@ function initPage() {
 
 function initEvents() {
     /*表单验证*/
-    $("#fm-add").validate({
+    $("#fm-edit").validate({
         onfocusout: function (element) {
             $(element).valid();
         },
@@ -29,48 +29,31 @@ function initEvents() {
              $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
         },
         rules: {
-            name: {
+            realName: {
                 required: true,
-                maxlength: 100
+                maxlength: 20
             },
-            category: {
-                required: true
-            },
-            remark: {
-                required: true,
-                maxlength: 500
-            },
-            content: {
-                required: true
+            email:{
+                email:true
             }
         },
         messages: {
-            name: {
-                required: "请输入名称",
-                maxlength: "名称字符长度不能超过100"
-            },
-            category: {
-                required: "请选择直播类型"
-            },
-            remark: {
-                required: "请输入摘要",
-                maxlength: "摘要字符长度不能超过500"
-            },
-            content: {
-                required: "请输入活动介绍"
+            realName: {
+                required: "请输入姓名",
+                maxlength: "姓名字符长度不能超过20"
             }
         }
     });
     /*监听表单提交*/
-    $('#fm-add').ajaxForm({
+    $('#fm-edit').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
             var params = {};
             $.each(formData, function (n, obj) {
                 params[obj.name] = obj.value;
             });
             $.extend(params, {
-                time: new Date(),
-                //coverUrl: $('#coverUrl').attr("src"),
+                time: new Date()
+
             });
             console.log(params);
             save(params);
@@ -81,7 +64,7 @@ function initEvents() {
 /*保存表单**/
 function save(params) {
     $.ajax({
-        url: contextPath + "/live/insertLive",
+        url: contextPath + "/fopPerson/www/updateFopPerson",
         type: "post",
         async: false,
         beforeSend: function (XMLHttpRequest) {
@@ -92,7 +75,8 @@ function save(params) {
         },
         success: function (result) {
             stopLoad();
-            alert(result.errorMessage);
+            //alert(result.errorMessage);
+            $.alert(result.errorMessage, "系统提示");
         },
         error: function () {
 			stopLoad();
@@ -106,12 +90,27 @@ function loadPersonData() {
         type: "post",
         url: contextPath+"/fopPerson/www/selectFopPersonByCurCorpId",
         data: {
+            id:'01824693943746a39c59f264d1f93b8c'
         },
         beforeSend: function (XMLHttpRequest) {
             startLoad();
         },
         success: function (rst, textStatus) {
             stopLoad();
+            var data = {};
+            data['o'] = rst.value;
+            if( rst.value.birthDate){
+              data['o'].birthDate = rst.value.birthDate.substr(0,10);
+            }
+            if( rst.value.recruitmentDate){
+              data['o'].recruitmentDate = rst.value.recruitmentDate.substring(0,10);
+            }
+
+
+            data['dict']=staticDictObject;
+            console.log(data);
+            render('#fm-edit', data, 'tpl-fm');
+            initEvents();
         },
         error: function () {
             stopLoad();

@@ -96,8 +96,8 @@
 
                     <div class="profile-info-value">
 							<textarea style="width: 600px; height: 80px; line-height: 30px;"
-                                      id="msg" maxLength="500" onkeyup="msgOnChange(this)"></textarea>
-                        <div id="msg-des">普通短信长度为70个字，超过后部分手机将会以多条方式接收</div>
+                                      id="msg" maxLength="70" onkeyup="msgOnChange(this)"></textarea>
+                        <div id="msg-des">普通短信长度为70个字</div>
                     </div>
                 </div>
 
@@ -181,6 +181,7 @@
          $('#msg-des').html('普通短信长度为70个字,还可输入<span class="badge badge-warning">'+(70-msg.length)+"</span>字符");
          */
     }
+
 </script>
 </body>
 </html>

@@ -132,6 +132,9 @@ public class FopLawPaperServiceImpl implements FopLawPaperService {
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "文书标题不能为空！");
         }
+        if (CommonUtils.isBlank(o.getContent())) {
+            return new MessageResponse(1, "法律内容不能为空！");
+        }
 
 
         o.setLastModifyDate(new Date());

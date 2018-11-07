@@ -40,6 +40,9 @@
         <div class="badding_opt">
             <button id="cancelBand" onclick="cancelBand();">取消绑定</button>
         </div>
+        <div class="badding_opt">
+            <button  onclick="location.href='../info/index.jsp'">法人信息</button>
+        </div>
         <!--<div class="info">已绑定车辆</div>-->
     </div>
     <div class="footer">

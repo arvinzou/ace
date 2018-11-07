@@ -110,7 +110,7 @@ public class FopPersonServiceImpl implements FopPersonService {
         this.fopPersonDao.insertSelective(o);
         this.dataBaseLogService.log("添加个人档案", "个人档案", "", o.getId(),
                 o.getId(), userProp);
-        return new MessageResponse(0, "添加个人档案完成");
+        return new MessageResponse(0, "保存成功");
     }
 
     /**
@@ -149,7 +149,7 @@ public class FopPersonServiceImpl implements FopPersonService {
         this.fopPersonDao.updateByPrimaryKeySelective(o);
         this.dataBaseLogService.log("变更企业管理", "企业管理", "", o.getId(),
                 o.getId(), userProp);
-        return new MessageResponse(0, "变更企业管理完成！");
+        return new MessageResponse(0, "保存成功！");
 
     }
 
@@ -223,7 +223,7 @@ public class FopPersonServiceImpl implements FopPersonService {
         fopPersonDao.insertSelective(person);
         dataBaseLogService.log("添加个人档案", "企业注册-自动插入", "", person.getId(),
                 person.getId(), userProp);
-        return new ResultResponse(ResultCode.SUCCESS, "添加个人档案完成", person);
+        return new ResultResponse(ResultCode.SUCCESS, "保存成功", person);
     }
 
     @Override
