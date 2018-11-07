@@ -96,6 +96,7 @@ Page({
         var that = this;
         var index = e.currentTarget.dataset.index;
         that.setData({
+            videoIndex: index,
             videoUrl: e.currentTarget.id,
             maskFlag: false
         });
