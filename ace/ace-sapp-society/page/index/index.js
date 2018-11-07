@@ -123,12 +123,13 @@ Page({
           url: '../activityInfo/index?id=' + e.currentTarget.dataset.id,
       })
   },
-  showFineDetail: function(e){
-      var that = this;
-      wx.navigateTo({
-          url: '../reportInfo/index?id=' + e.currentTarget.dataset.id,
-      })
-  },
+    viewInfo: function (e) {
+        let that = this;
+        let data = e.currentTarget.dataset
+        let p = data.id;
+        let title = data.title;
+        wx.navigateTo({ url: '../reportInfo/index?id=' + p + "&title=" + title })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
