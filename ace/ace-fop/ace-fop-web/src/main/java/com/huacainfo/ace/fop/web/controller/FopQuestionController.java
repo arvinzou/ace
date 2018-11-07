@@ -50,7 +50,11 @@ public class FopQuestionController extends FopBaseController {
     @RequestMapping(value = "/findFopQuestionList")
     @ResponseBody
     public PageResult<FopQuestionVo> findFopQuestionList(FopQuestionQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<FopQuestionVo> rst = this.fopQuestionService.findFopQuestionList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (getCurUserProp().getAccount().equals("lawer")) {
+            condition.setIsLawer("1");
+        }
+        PageResult<FopQuestionVo> rst = fopQuestionService.findFopQuestionList(condition,
+                page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }

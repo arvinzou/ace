@@ -142,3 +142,7 @@
 .hidden{
     display:none;
 }
+.occupy{
+    color: #DCDCDC;
+    background: #F5F5F5;
+}

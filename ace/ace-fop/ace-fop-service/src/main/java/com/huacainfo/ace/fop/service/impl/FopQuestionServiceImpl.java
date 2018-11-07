@@ -2,7 +2,6 @@ package com.huacainfo.ace.fop.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
-import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -12,7 +11,6 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.dao.*;
 import com.huacainfo.ace.fop.model.*;
@@ -380,26 +378,39 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         if (null == obj) {
             return new MessageResponse(ResultCode.FAIL, "记录数据丢失");
         }
-        if (obj.getStatus().equals("2")) {
-            return new MessageResponse(ResultCode.FAIL, "请勿重复发布");
+        //账户区别，处理审核分支
+        String account = userProp.getAccount();
+        String status = "1";//1-待审 2-审核通过 3-审核驳回  4-递交律师处理
+        //工商联管理人员
+        if ("fop".equals(account) && "0".equals(auditResult)) {
+            status = "4";
+        } else if ("lawer".equals(account)) {
+            if (!"4".equals(obj.getStatus())) {
+                return new MessageResponse(ResultCode.FAIL, "尚未通过工商联审核");
+            }
+            status = "0".equals(auditResult) ? "2" : "3";
         }
-        //提交审核流程
-        String flowId = GUIDUtil.getGUID();
-        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.LAW_HELP, id, userProp);
-        if (ResultCode.FAIL == rs.getStatus()) {
-            return rs;
+        obj.setStatus(status);
+        fopQuestionDao.updateByPrimaryKey(obj);
+//        //提交审核流程
+//        String flowId = GUIDUtil.getGUID();
+//        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.LAW_HELP, id, userProp);
+//        if (ResultCode.FAIL == rs.getStatus()) {
+//            return rs;
+//        }
+//        //自动审核通过
+//        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
+//        record.setAuditResult(auditResult);
+//        record.setAuditOpinion(auditOpinion);
+//        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
+//        if (ResultCode.FAIL == rs1.getStatus()) {
+//            throw new CustomException(rs1.getErrorMessage());
+//        }
+
+        //消息提醒 -- 审核结果推送给客户
+        if ("lawer".equals(account) && "0".equals(auditResult)) {
+//            sendMessageNotice(obj, auditResult, auditOpinion);
         }
-        //自动审核通过
-        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
-        record.setAuditResult(auditResult);
-        record.setAuditOpinion(auditOpinion);
-        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
-        if (ResultCode.FAIL == rs1.getStatus()) {
-            throw new CustomException(rs1.getErrorMessage());
-        }
-        //审核结果推送给客户
-        //消息提醒
-        sendMessageNotice(obj, auditResult, auditOpinion);
 
         return new MessageResponse(ResultCode.SUCCESS, "发布成功");
     }

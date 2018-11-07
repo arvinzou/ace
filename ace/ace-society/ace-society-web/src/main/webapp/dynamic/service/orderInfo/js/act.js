@@ -32,7 +32,7 @@ function t_query() {
 /*订单管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/orderInfo/findOrderInfoList";
-    params['name'] = $("input[name=keyword]").val();
+    params['orderNo'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

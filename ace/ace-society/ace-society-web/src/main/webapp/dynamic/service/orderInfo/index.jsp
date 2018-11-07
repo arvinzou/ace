@@ -36,7 +36,7 @@
             <div class="col-sm-5">
                 <form onsubmit="return t_query()">
                     <div class="input-group">
-                        <input type="text" name="keyword" class="form-control " placeholder="请输入名称">
+                        <input type="text" name="keyword" class="form-control " placeholder="请输入订单编号">
                         <span class="input-group-btn">
                             <button class="btn  btn-default search_btn" type="submit">搜索</button>
                         </span>
