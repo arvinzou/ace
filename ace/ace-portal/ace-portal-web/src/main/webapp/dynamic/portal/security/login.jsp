@@ -147,7 +147,7 @@
 
 
                 <a href="#" id="flashImage"><img id="imageF"
-                                                 src="${pageContext.request.contextPath}/captcha/image.do?date=${date}"/>
+                                                 src="${pageContext.request.contextPath}/captcha/image.do?date=${date}" style="max-height:30px"/>
                 </a>
 
 

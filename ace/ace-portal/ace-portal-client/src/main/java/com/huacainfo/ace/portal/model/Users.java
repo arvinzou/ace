@@ -269,6 +269,8 @@ public class Users implements java.io.Serializable{
 				", id='" + id + '\'' +
 				", formId='" + formId + '\'' +
 				", openId='" + openId + '\'' +
+				", appOpenId='" + appOpenId + '\'' +
+				", locked='" + locked + '\'' +
 				'}';
 	}
 }

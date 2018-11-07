@@ -285,15 +285,17 @@
 			<label class="col-md-2 view-label">诉求内容</label>
 			<div class="col-md-8">
 				<div class="row">\${data.o.content}</div>
-				{@if data.o.mediUrl.indexOf('.mp3')!=-1}
-				<div class="row"><audio src="\${data.o.mediUrl}" controls ></audio></div>
-				{@/if}
-				{@if data.o.mediUrl.indexOf('.mp4')!=-1}
-				<div class="row"><video src="\${ data.o.mediUrl}" controls style="width:360px;height:90px"></video></div>
+				{@if data.o.mediUrl}
+					{@if data.o.mediUrl.indexOf('.mp3')!=-1}
+					<div class="row"><audio src="\${data.o.mediUrl}" controls ></audio></div>
+					{@/if}
+					{@if data.o.mediUrl.indexOf('.mp4')!=-1}
+					<div class="row"><video src="\${ data.o.mediUrl}" controls style="width:360px;height:90px"></video></div>
+					{@/if}
 				{@/if}
 
-				{@each data.o.list as img, idx}
-				<div class="my-gallery" style="float:left;padding:5px"><img src="\${img.mediUrl}" class="cover"/></div>
+				{@each data.o.list as item, index}
+				<div class="my-gallery" style="float:left;padding:5px"><img src="\${item.mediUrl}" class="cover"/></div>
 				{@/each}
 
 			</div>
