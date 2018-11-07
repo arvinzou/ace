@@ -8,6 +8,20 @@ public class FopQuestionQVo extends FopQuestion {
 
     private String replied;
 
+    /**
+     * 0-否，1-true
+     */
+    private String isLawer;
+    private boolean iself;
+
+    public String getIsLawer() {
+        return isLawer;
+    }
+
+    public void setIsLawer(String isLawer) {
+        this.isLawer = isLawer;
+    }
+
     public String getReplied() {
         return replied;
     }
@@ -15,8 +29,6 @@ public class FopQuestionQVo extends FopQuestion {
     public void setReplied(String replied) {
         this.replied = replied;
     }
-
-    private boolean iself;
 
     public boolean getIself() {
         return iself;

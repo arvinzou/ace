@@ -1,7 +1,7 @@
 <view class='index'>
     <block wx:for="{{list}}" wx:key="*">
         <view class='activityInfo separate'>
-            <view class='content'>
+            <view class='content' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
                 <view class='img'>
                     <image mode='aspectFill' src='{{item.coverUrl}}'></image>
                 </view>
