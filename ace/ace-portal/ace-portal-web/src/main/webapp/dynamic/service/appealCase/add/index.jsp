@@ -49,6 +49,32 @@ session.setAttribute("portalPath", "/portal");
             <!--具体界面元素开始-->
             <form class="form-horizontal" id="fm-add" role="form">
                 <input type="hidden" name="noticeId" value="">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+
+                        诉求类型
+                        <span class="required" aria-required="true"> * </span>
+                    </label>
+                    <div class="col-md-10 radio-group-container">
+                        <label>
+                            <input type="radio" name="category" value="1" checked><span style="padding:10px">政策</span>
+
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="2"><span style="padding:10px">资金</span>
+
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="3"><span style="padding:10px">法律</span>
+
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="4"><span style="padding:10px">其他</span>
+
+                        </label>
+                        <div class="error-category"></div>
+                    </div>
+                </div>
                 <div class="form-body">
                     <div class="form-group">
                         <label class="col-md-2 control-label">

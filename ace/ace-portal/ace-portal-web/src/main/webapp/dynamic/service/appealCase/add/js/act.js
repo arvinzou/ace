@@ -99,7 +99,6 @@ function initEvents() {
 			});
 			$.extend(params, {
 				appealId:urlParams.did,
-				category:'1',
 				mediType:'1'
 
 			});
