@@ -108,7 +108,6 @@ public class WActivityController extends SocietyBaseController {
     @ResponseBody
     public ResultResponse findActivitying(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setStatus("3");
-        condition.setIngId("ing");
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
     }

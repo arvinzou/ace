@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.PointsRecord;
 import com.huacainfo.ace.society.service.PointsRecordService;
@@ -148,5 +149,23 @@ public class PointsRecordController extends SocietyBaseController {
 
         //return this.pointsRecordService.audit(id, rst, message, this.getCurUserProp());
         return null;
+    }
+
+    /**
+     * @throws
+     * @Title:audit
+     * @Description: TODO(审核积分流水)
+     * @param: @param id bean.id
+     * @param: @param rst 审核结果 3-通过 4-拒绝
+     * @param: @param message 审核说明
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: arvin
+     * @version: 2018-09-28
+     */
+    @RequestMapping(value = "/addCoin")
+    @ResponseBody
+    public ResultResponse addCoin(String userId, String bisType, String bisId) throws Exception {
+        return pointsRecordService.addPoints(userId,bisType,bisId);
     }
 }
