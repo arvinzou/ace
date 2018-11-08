@@ -11,7 +11,7 @@ Page({
         behaviorList: [],
         userId: null,
         start: 0,
-        limit: 3,
+        limit: 9999,
         LoadOver: false,
         Loadingstatus: false,
         behaviorType : "1",
@@ -27,7 +27,7 @@ Page({
         that.setData({
             LoadOver: false,
             start: 0,
-            limit: 3,
+            limit: 9999,
             behaviorList: []
         });
         if (that.data.currentTab === e.target.dataset.idx) {
