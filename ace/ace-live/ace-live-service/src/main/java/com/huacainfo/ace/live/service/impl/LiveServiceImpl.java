@@ -3,9 +3,8 @@ package com.huacainfo.ace.live.service.impl;
 
 import java.util.*;
 
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.StringUtils;
+import com.huacainfo.ace.common.plugins.wechat.util.Util;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.live.dao.LiveLogDao;
 import com.huacainfo.ace.live.dao.LiveRptDao;
 import com.huacainfo.ace.live.model.LiveLog;
@@ -19,7 +18,6 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.live.dao.LiveDao;
 import com.huacainfo.ace.live.model.Live;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -267,6 +265,10 @@ public class LiveServiceImpl implements LiveService {
         if (StringUtils.isEmpty(text)) {
             return new MessageResponse(1, "审核说明不能为空!");
         }
+        LiveVo liveVo =liveDao.selectByPrimaryKey(id);
+        if(CommonUtils.isBlank(liveVo)){
+            return new MessageResponse(1, "没有获取到直播数据!");
+        }
         String logId=GUIDUtil.getGUID();
         LiveLog log=new LiveLog();
         log.setId(logId);
@@ -277,6 +279,14 @@ public class LiveServiceImpl implements LiveService {
         log.setCreateDate(new Date());
         this.liveLogDao.insert(log);
         this.liveDao.updateAudit(id,rst,logId);
+        if("3".equals(rst)){
+            Map<String ,Object> map=new HashMap<String,Object>();
+            map.put("userId",liveVo.getCreateUserId());
+            map.put("bisType","7");
+            map.put("bisId",id);
+            String url="https://zhsh.wuling.gov.cn/society/pointsRecord/addCoin";
+            HttpUtils.httpPost(url,map);
+        }
         this.dataBaseLogService.log("直播审核", "直播", "",id, id, userProp);
         return new MessageResponse(0, "审核成功！");
     }
