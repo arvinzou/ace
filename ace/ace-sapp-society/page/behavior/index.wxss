@@ -45,12 +45,21 @@
     word-break: break-all;
     word-wrap: break-word;
 }
-.attach-image{
-    width: 158rpx;
-    height: 158rpx;
-    margin-right: 10rpx;
-    margin-bottom: 10rpx;
+.attach-image02{
+    width:45%;
+    height:300rpx;
+    margin-right:3%;
+    margin-bottom:10rpx;
+    object-fit: cover;
 }
+.attach-image01{
+    width:93%;
+    height:300rpx;
+    margin-right:3%;
+    margin-bottom:10rpx;
+    object-fit: cover;
+}
+
 .camera-box{
     width: 141rpx;
     height: 141rpx;
