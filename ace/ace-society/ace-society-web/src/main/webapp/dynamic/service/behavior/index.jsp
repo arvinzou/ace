@@ -270,7 +270,7 @@
             <div class="col-md-10">
                 <div class="radio-group-container">
                     <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                        <input type="radio" name="rst" value="3" checked><span style="padding:10px">通过</span>
                     </label>
                     <label>
                         <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
