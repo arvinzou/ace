@@ -15,13 +15,4 @@ private String userId;
         this.userId = userId;
     }
 
-    public String ingId;
-
-    public String getIngId() {
-        return ingId;
-    }
-
-    public void setIngId(String ingId) {
-        this.ingId = ingId;
-    }
 }

@@ -504,9 +504,6 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status like concat(#{condition.status,jdbcType=CHAR},'%')
         </if>
-        <if test="condition.ingId !=null and condition.ingId !=&quot;&quot;">
-            and SYSDATE() <![CDATA[ < ]]> t.dendline
-        </if>
     </sql>
 
     <select id="findCount" resultType="int">
