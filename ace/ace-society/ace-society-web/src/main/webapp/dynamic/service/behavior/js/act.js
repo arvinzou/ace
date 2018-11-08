@@ -42,7 +42,8 @@ function getPageList() {
         if (rst.status == 0) {
             if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total
+                    totalCounts: rst.total==0?1:rst.total,
+                    currentPage: 1
                 });
             }
             render($("#page-list"), rst.rows, "tpl-list");
