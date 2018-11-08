@@ -162,7 +162,7 @@
             and t.receivePhone = #{condition.receivePhone,jdbcType=VARCHAR}
         </if>
         <if test="condition.orderNo !=null and condition.orderNo !=&quot;&quot;">
-            and t.orderNo = #{condition.orderNo,jdbcType=VARCHAR}
+            and t.orderNo like concat('%',#{condition.orderNo,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

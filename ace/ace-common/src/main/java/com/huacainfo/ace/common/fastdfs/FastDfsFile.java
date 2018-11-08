@@ -1,8 +1,5 @@
 package com.huacainfo.ace.common.fastdfs;
 
-import java.io.File;
-import java.io.OutputStream;
-
 import org.apache.commons.pool2.ObjectPool;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.FileInfo;
@@ -12,6 +9,9 @@ import org.csource.fastdfs.TrackerServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.File;
+import java.io.OutputStream;
 
 public class FastDfsFile implements IFile {
 	@Autowired
@@ -63,6 +63,30 @@ public class FastDfsFile implements IFile {
 		}
 
 	}
+
+    @Override
+    public String saveFile(byte[] bytes, String fileSaveName) throws Exception {
+        TrackerServer trackerServer = null;
+        try {
+            trackerServer = this.getTrackerServer();
+            AspireFdfsStorageClient storageClient = getStorageClient(trackerServer);
+            String[] rst = storageClient.upload_file(bytes,
+                    getFileExtName(fileSaveName),
+                    getNameValuePairs(fileSaveName));
+            if (rst == null || rst.length < 2) {
+                throw new java.lang.Exception("保存文件失败,错误码："
+                        + storageClient.getErrorCode());
+            }
+            LOGGER.info("保存文件成功,返回：" + rst[0] + "/" + rst[1]);
+            return rst[0] + "/" + rst[1] + "?filename=" + fileSaveName;
+        } finally {
+            if (trackerServer != null) {
+                fastDfsPool.returnObject(trackerServer);
+            }
+        }
+
+    }
+
 
 	public byte[] getFileBytes(String groupName, String fileName,
 			Long startPos, int length) throws Exception {

@@ -17,10 +17,19 @@
     <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, behaviorId, fileType, fileName, fileSize, fileUrl, remark, status, createUserId, 
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
+
+  <select id="getBehaviorAnnexListByBehaviorId" parameterType="java.lang.String"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    behavior_annex WHERE behaviorId = #{id}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

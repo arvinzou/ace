@@ -41,7 +41,7 @@
                         <div class="col-md-10">
                             <input type="text" class="form-control"
                                    name="commodityName" maxlength="50"
-                                   placeholder="请输入场地名称（建议字数在14个字以内，不超过50个字)">
+                                   placeholder="请输入场地名称（不超过50个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                             <textarea type="text" class="form-control"
                                       style="text-align: left;"
                                       name="summary" maxlength="2147483647"
-                                      placeholder="请输入场地简介（建议字数在14个字以内，不超过2147483647个字)">
+                                      placeholder="请输入场地简介">
                             </textarea>
                             <span class="help-block"></span>
                         </div>

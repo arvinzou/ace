@@ -50,8 +50,7 @@ public class BehaviorController extends SocietyBaseController {
     public PageResult<BehaviorVo> findBehaviorList(BehaviorQVo condition,
                                                    PageParamNoChangeSord page) throws Exception {
 
-        PageResult<BehaviorVo> rst =
-                behaviorService.findBehaviorList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<BehaviorVo> rst = behaviorService.findBehaviorList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }

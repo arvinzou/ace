@@ -202,9 +202,9 @@
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
-        <collection property="behaviorAnnexList" column="nexId" javaType="ArrayList"
-                    ofType="com.huacainfo.ace.society.model.BehaviorAnnex">
-            <id property="id" jdbcType="VARCHAR" column="nexId"/>
+        <collection property="behaviorAnnexList" column="id" javaType="ArrayList"
+                    ofType="com.huacainfo.ace.society.model.BehaviorAnnex" select="com.huacainfo.ace.society.dao.BehaviorAnnexDao.getBehaviorAnnexListByBehaviorId">
+            <id property="id" jdbcType="VARCHAR" column="id"/>
             <result column="behaviorId" jdbcType="VARCHAR" property="behaviorId"/>
             <result column="fileType" jdbcType="VARCHAR" property="fileType"/>
             <result column="fileName" jdbcType="VARCHAR" property="fileName"/>
@@ -212,11 +212,9 @@
         </collection>
     </resultMap>
 
+
     <sql id="Vo_Column_List">
         wx.avatarUrl, wx.nickName, u.user_level as regType,
-        nex.id as nexId,
-        nex.behaviorId, nex.fileType, nex.fileName, nex.fileSize, nex.fileUrl,
-
         t.id, t.type, t.title, t.userId, t.compendium, t.submitDate,
         t.remark, t.status, t.createUserId, t.createUserName, t.createDate,
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
@@ -240,7 +238,6 @@
     from behavior t
       left join portal.wx_user wx on t.userId = wx.unionId
       left join portal.users u on u.user_id = t.userId
-      left join behavior_annex nex on t.id = nex.behaviorId
     where 1=1
     <if test="condition.title !=null and condition.title !=&quot;&quot;">
       and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')

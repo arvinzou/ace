@@ -24,6 +24,15 @@
     id, ideaId, fileType, fileName, fileSize, fileUrl, remark, status, createUserId, 
     createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
+
+  <select id="findListByIdeaId" parameterType="java.lang.String"
+          resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    subject_idea_annex WHERE ideaId=#{id}
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

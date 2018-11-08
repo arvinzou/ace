@@ -24,8 +24,8 @@
         <result column="nickName" jdbcType="VARCHAR" property="nickname"/>
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
-        <collection property="listSubjectIdeaAnnexVo" ofType="com.huacainfo.ace.society.model.SubjectIdeaAnnex">
-            <id property="id" column="annexId"/>
+        <collection property="listSubjectIdeaAnnexVo" ofType="com.huacainfo.ace.society.model.SubjectIdeaAnnex" column="id" select="com.huacainfo.ace.society.dao.SubjectIdeaAnnexDao.findListByIdeaId">
+            <id property="id" column="id"/>
             <result property="ideaId" column="ideaId"/>
             <result property="fileType" column="fileType"/>
             <result property="fileName" column="fileName"/>
@@ -234,8 +234,7 @@
         wx.avatarUrl, wx.nickName, u.user_level as regType,
 
         t.id, t.subjectId ,t.title, t.solution, t.userId, t.remark, t.status, t.createUserId, t.createUserName,
-        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate, t.remark, t.category,
-        e.id as annexId, e.ideaId, e.fileType, e.fileName, e.fileSize, e.fileUrl, e.remark as eremark
+        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate, t.remark, t.category
 
         <include refid="whereCondition"/>
         <choose>
@@ -251,7 +250,6 @@
 
     <sql id="whereCondition">
         from subject_idea t
-        LEFT JOIN subject_idea_annex e on t.id = e.ideaId
         left join portal.wx_user wx on t.userId = wx.unionId
         left join  portal.users u on u.user_id = t.userId
         where 1=1

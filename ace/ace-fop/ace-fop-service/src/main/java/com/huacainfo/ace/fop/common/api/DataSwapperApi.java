@@ -19,7 +19,7 @@ import java.util.Map;
 public class DataSwapperApi {
 
     public static final String DOMAIN = "http://10.33.10.4:8080/gateway/api";//生产部署地址
-    //    public static final String DOMAIN = "http://59.231.66.49:8080/gateway/api"; //本地测试
+    //        public static final String DOMAIN = "http://59.231.66.49:8080/gateway/api"; //本地测试
     public static final String API_VERSION = "/1.0?";
     private static Logger logger = LoggerFactory.getLogger(DataSwapperApi.class);
     private static Map<String, String> DATA_PROVIDER = new HashMap<>();

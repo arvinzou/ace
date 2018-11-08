@@ -227,7 +227,7 @@
         <%--订单商品列表--%>
         {@each data.detailList as item, index}
         <div class="form-group">
-            <label class="col-md-2 view-label">商品 \${index}</label>
+            <label class="col-md-2 view-label">商品</label>
             <div class="col-md-10">
                 <img src="\${item.commodityCover}" class="cover"/>
                 <a>\${item.commodityName} x \${item.purchaseQty}</a>
