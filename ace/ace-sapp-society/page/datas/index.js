@@ -70,13 +70,17 @@ Page({
       console.log("begin_date====================="+begin_date);
       console.log("end_date======================="+end_date);
       var that = this;
-        util.post('https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyvisittrend?access_token=' + access_tocken, 
-            {
-                "begin_date": begin_date,
-                "end_date": end_date
+        util.request(cfg.server+'/society/www/user/wxSearch.do',
+            {   
+                "access_tocken": access_tocken,
+                "json":JSON.stringify({
+                    "begin_date": begin_date,
+                    "end_date": end_date
+                })
             },
           function (ret) {
-              that.setData({ statistics: ret.list[0]})
+
+              that.setData({ statistics: JSON.parse(ret.data).list[0]})
           }
       );
   },

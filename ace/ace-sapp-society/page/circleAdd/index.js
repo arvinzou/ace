@@ -73,7 +73,7 @@ Page({
     data.circle.mediaContent = that.data.mediUrl;
     data.circle.content = e.detail.value.docText;
     data.circle.corpId="0002";
-
+    console.log("============================================data", data);
       if ((e.detail.value.docText == '' || e.detail.value.docText == undefined || e.detail.value.docText == null)&&
       (that.data.mediUrl == '' || that.data.mediUrl == undefined || that.data.mediUrl == null)) {
           wx.showModal({
