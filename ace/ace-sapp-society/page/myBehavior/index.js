@@ -14,7 +14,9 @@ Page({
         limit: 3,
         LoadOver: false,
         Loadingstatus: false,
-        behaviorType : "1"
+        behaviorType : "1",
+        maskFlag: true,
+        videoUrl: null
     },
 
     /**
@@ -88,6 +90,23 @@ Page({
 
             }
         );
+    },
+    viewVideo: function (e) {
+        console.log("查看视频地址=====================================" + e.currentTarget.id);
+        var that = this;
+        var index = e.currentTarget.dataset.index;
+        that.setData({
+            videoIndex: index,
+            videoUrl: e.currentTarget.id,
+            maskFlag: false
+        });
+    },
+    exitVideo: function (e) {
+        console.log("==================================退出视频观看");
+        var that = this;
+        that.setData({
+            maskFlag: true
+        });
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

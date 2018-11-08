@@ -80,7 +80,7 @@ Page({
   },
   initData: function () {
     var that = this;
-    util.request(cfg.getList, { submitOpenId: that.data.userinfo.openId },
+    util.request(cfg.getList, { submitOpenId: that.data.userinfo.unionId },
       function (data) {
         wx.stopPullDownRefresh();
         that.setData({
@@ -92,7 +92,7 @@ Page({
         }
       }
     );
-    util.request(cfg.getList, { answerOpenId: that.data.userinfo.openId },
+    util.request(cfg.getList, { answerOpenId: that.data.userinfo.unionId },
       function (data) {
         wx.stopPullDownRefresh();
         that.setData({

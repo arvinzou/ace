@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.society.service.AnalysisService;
 import com.huacainfo.ace.society.service.OrderInfoService;
 import com.huacainfo.ace.society.service.PointsRecordService;
@@ -16,6 +17,7 @@ import com.huacainfo.ace.society.vo.PointsRecordQVo;
 import com.huacainfo.ace.society.vo.PointsRecordVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -114,5 +116,14 @@ public class WUserController extends SocietyBaseController {
     @RequestMapping("/getNowDateTime")
     public String getNowDateTime() throws Exception {
         return DateUtil.getNow();
+    }
+
+
+    @RequestMapping(value = "/wxSearch.do")
+    @ResponseBody
+    public ResultResponse search(String access_tocken, String json ) throws Exception {
+        String url = "https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyvisittrend?access_token="+access_tocken;
+        String body = HttpUtils.httpPost(url,json);
+        return new ResultResponse(ResultCode.SUCCESS,"成功",body);
     }
 }

@@ -118,7 +118,7 @@ public class AppealCaseController extends PortalBaseController {
         }
         JSONObject o = JSON.parseObject(jsons);
         AppealCase obj = JSON.parseObject(o.get("o").toString(), AppealCase.class);
-        obj.setSubmitOpenId(this.getCurWxUser().getOpenId());
+        obj.setSubmitOpenId(this.getCurWxUser().getUnionId());
         obj.setLatitude(this.getCurWxUser().getLatitude());
         obj.setLongitude(this.getCurWxUser().getLongitude());
         List<AppealCaseFile> list = JSON.parseArray(o.get("list").toString(), AppealCaseFile.class);
@@ -381,5 +381,37 @@ public class AppealCaseController extends PortalBaseController {
 
 
         return this.appealCaseService.updateAppealCase(obj, this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertAppealCase
+     * @Description: TODO(添加诉求)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-11-07
+     */
+    @RequestMapping(value = "/insertAppealCasePc.do")
+    @ResponseBody
+    public MessageResponse insertAppealCasePc(String jsons) throws Exception {
+        Map<String, Object> params = JsonUtil.toMap(jsons);
+        String captcha = (String) params.get("captcha");
+        String j_captcha = (String) this.getSession("j_captcha");
+        this.logger.info("captcha->{}", captcha);
+        this.logger.info("j_captcha->{}", j_captcha);
+        if (CommonUtils.isBlank(captcha)) {
+            return new MessageResponse(1, "验证码不能为空！");
+        }
+        if (!captcha.equals(j_captcha)) {
+            return new MessageResponse(1, "验证码错误！");
+        }
+        JSONObject o = JSON.parseObject(jsons);
+        AppealCase obj = JSON.parseObject(o.get("o").toString(), AppealCase.class);
+        obj.setSubmitOpenId(this.getCurUserProp().getAppOpenId());
+        List<AppealCaseFile> list = JSON.parseArray(o.get("list").toString(), AppealCaseFile.class);
+        return this.appealCaseService.insertAppealCase(obj, list);
     }
 }

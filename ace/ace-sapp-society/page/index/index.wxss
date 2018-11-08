@@ -14,6 +14,7 @@
     height: auto;
     margin: 0 auto;
     padding-top: 30rpx;
+    padding-bottom: 30rpx;
 }
 .activity-menu{
     width: 100%;
@@ -123,6 +124,7 @@
 .type01{
     width: 98rpx;
     height: 40rpx;
+    line-height: 40rpx;
     color: #425DAE;
     font-size: 20rpx;
     font-weight: bold;

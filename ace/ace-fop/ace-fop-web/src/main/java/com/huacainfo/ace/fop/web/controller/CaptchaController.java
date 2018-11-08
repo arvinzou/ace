@@ -1,20 +1,20 @@
-package com.huacainfo.ace.portal.web.controller;
+package com.huacainfo.ace.fop.web.controller;
+
 import com.huacainfo.ace.common.tools.CommonUtils;
-import org.springframework.data.redis.core.RedisOperations;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.util.Random;
+import com.huacainfo.ace.portal.web.controller.PortalBaseController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.Random;
 
 @Controller
 @RequestMapping("/captcha")
@@ -42,7 +42,7 @@ public class CaptchaController extends PortalBaseController {
 	 * @author: chenxiaoke
 	 * @version: 2016年11月17日 下午1:36:28
 	 */
-	@RequestMapping(value = "/image.do")
+	@RequestMapping(value = "/www/image")
 	public void image(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		//清除缓存，每次访问该页面时都从服务器端读取
@@ -87,7 +87,7 @@ public class CaptchaController extends PortalBaseController {
 		    // 设置每个数字的颜色
 		    g.setColor(new Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110)));
 		//在画板上写数字，起始位置
-			g.drawString(rand,20*i+30,40);
+		    g.drawString(rand,20*i+30,40);
 		}
 		// 保存进session
 		this.getRequest().getSession().setAttribute("j_captcha",sRand);

@@ -41,6 +41,10 @@ public class HttpUtils {
 			throws Exception {
 		return httpPost(url, params, 30 * 1000, 30 * 1000, "UTF-8");
 	}
+	public static String httpPost(String url, String json)
+			throws Exception {
+		return httpPost(url, json, 30 * 1000, 30 * 1000, "UTF-8");
+	}
 
 	public static String httpPost(String url, Map<String, String> params,
 			List<File> fileLists) throws Exception {
@@ -68,6 +72,17 @@ public class HttpUtils {
 		return sendHttpPost(httpPost, encoding);
 	}
 
+	public static String httpPost(String url, String json,
+			int timeoutMillseconds, int requestTimeoutMillseconds,
+			String encoding) throws Exception {
+		HttpPost httpPost = new HttpPost(url);
+		RequestConfig.Builder builder = getRequestConfigBuider(
+				timeoutMillseconds, requestTimeoutMillseconds);
+		httpPost.setConfig(builder.build());
+		httpPost.setEntity(new StringEntity(json, encoding));
+		return sendHttpPost(httpPost, encoding);
+	}
+
 
 	public static String httpPost(String httpUrl, Map<String, String> params,
 			List<File> fileLists, int timeoutMillseconds,
@@ -82,9 +97,11 @@ public class HttpUtils {
 			meBuilder.addPart(key, new StringBody(params.get(key),
 					ContentType.TEXT_PLAIN));
 		}
-		for (File file : fileLists) {
-			FileBody fileBody = new FileBody(file);
-			meBuilder.addPart("files", fileBody);
+		if(null != fileLists) {
+			for (File file : fileLists) {
+				FileBody fileBody = new FileBody(file);
+				meBuilder.addPart("files", fileBody);
+			}
 		}
 		HttpEntity reqEntity = meBuilder.build();
 		httpPost.setEntity(reqEntity);

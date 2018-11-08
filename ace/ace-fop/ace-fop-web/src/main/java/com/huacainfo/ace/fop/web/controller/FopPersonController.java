@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.model.FopPerson;
 import com.huacainfo.ace.fop.service.FopPersonService;
 import com.huacainfo.ace.fop.vo.FopPersonQVo;
@@ -151,6 +152,17 @@ public class FopPersonController extends FopBaseController {
     @RequestMapping(value = "/www/updateFopPerson")
     @ResponseBody
     public MessageResponse updateFopPersonWww(String jsons) throws Exception {
+        JSONObject o=JSON.parseObject(jsons);
+        String captcha=o.getString("captcha");
+        String j_captcha=(String) this.getSession("j_captcha");
+        this.logger.info("captcha->{}",captcha);
+        this.logger.info("j_captcha->{}",j_captcha);
+        if(CommonUtils.isBlank(captcha)){
+            return new MessageResponse(1,"验证码不能为空！");
+        }
+        if(!captcha.equals(j_captcha)){
+            return new MessageResponse(1,"验证码错误！");
+        }
         SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurUserinfo().getUnionid());
         if(rst.getStatus()==0){
             FopPerson obj = JSON.parseObject(jsons, FopPerson.class);

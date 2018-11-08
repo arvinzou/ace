@@ -1,6 +1,8 @@
 package com.huacainfo.ace.common.model;
 
 import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.Map;
 public class UserProp implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
 
     /**
      * 用户标识
@@ -290,5 +293,8 @@ public class UserProp implements Serializable {
 
     public void setAppOpenId(String appOpenId) {
         this.appOpenId = appOpenId;
+
+
+
     }
 }

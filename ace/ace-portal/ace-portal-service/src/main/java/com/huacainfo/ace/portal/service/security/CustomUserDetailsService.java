@@ -83,6 +83,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			this.logger.info("授予用户：{}的角色列表：{} 归属社保类型 {} 系统 {}",
 					syUser.getAccount(), auths, roleType, syid);
 			logger.info("===========================加载用户信息开始=====================================");
+			logger.info("syUser{}",syUser);
 			BasicUsers o = new BasicUsers(syUser.getUserId(),
 					passwd, account,
 					syUser.getName(), syUser.getName(),

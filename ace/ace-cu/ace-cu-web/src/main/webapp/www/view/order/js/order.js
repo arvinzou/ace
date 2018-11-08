@@ -140,7 +140,7 @@ function donateMoney1 (){
             if(result.status == 0) {
                 orderResultData = result.data;
                 $.ajax({
-                    url: "/cu//www/wxpay/ccbPay",
+                    url: "/cu/www/wxpay/ccbPay",
                     type:"post",
                     async:false,
                     data:{

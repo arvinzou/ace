@@ -153,7 +153,7 @@ public class AppealCaseServiceImpl implements AppealCaseService {
         //企业发布诉求，通知管理员
         sendNoticeToAdministrator(o);
 
-        return new MessageResponse(0, "提交诉求完成！");
+        return new MessageResponse(0, "提交成功！");
     }
 
     /**

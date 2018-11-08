@@ -32,6 +32,9 @@ function initEvents() {
             realName: {
                 required: true,
                 maxlength: 20
+            },
+            email:{
+                email:true
             }
         },
         messages: {
@@ -49,11 +52,11 @@ function initEvents() {
                 params[obj.name] = obj.value;
             });
             $.extend(params, {
-                time: new Date(),
-                //coverUrl: $('#coverUrl').attr("src"),
+                time: new Date()
+
             });
             console.log(params);
-//            save(params);
+            save(params);
             return false;
         }
     });
@@ -61,7 +64,7 @@ function initEvents() {
 /*保存表单**/
 function save(params) {
     $.ajax({
-        url: contextPath + "/live/insertLive",
+        url: contextPath + "/fopPerson/www/updateFopPerson",
         type: "post",
         async: false,
         beforeSend: function (XMLHttpRequest) {
@@ -72,7 +75,8 @@ function save(params) {
         },
         success: function (result) {
             stopLoad();
-            alert(result.errorMessage);
+            //alert(result.errorMessage);
+            $.alert(result.errorMessage, "系统提示");
         },
         error: function () {
 			stopLoad();
@@ -84,7 +88,7 @@ function save(params) {
 function loadPersonData() {
     $.ajax({
         type: "post",
-        url: contextPath+"/fopPerson/www/selectFopPersonByPrimaryKey",
+        url: contextPath+"/fopPerson/www/selectFopPersonByCurCorpId",
         data: {
             id:'01824693943746a39c59f264d1f93b8c'
         },

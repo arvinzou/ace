@@ -41,6 +41,7 @@ jQuery(function ($) {
             // parent.addPanel('短信任务添加', contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid, true);
             window.location.href = contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid;
         });
+
     $('#btn-view-edit').on(
         'click',
         function () {
@@ -66,6 +67,8 @@ jQuery(function ($) {
                     }
                 })
         });
+
+
 
     $('#btn-view-del').on(
         'click',
