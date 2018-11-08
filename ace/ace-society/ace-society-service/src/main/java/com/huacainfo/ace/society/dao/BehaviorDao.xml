@@ -202,7 +202,7 @@
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
-        <collection property="behaviorAnnexList" column="nexId" javaType="ArrayList"
+        <collection property="behaviorAnnexList" column="id" javaType="ArrayList"
                     ofType="com.huacainfo.ace.society.model.BehaviorAnnex" select="com.huacainfo.ace.society.dao.BehaviorAnnexDao.getBehaviorAnnexListByBehaviorId">
             <id property="id" jdbcType="VARCHAR" column="id"/>
             <result column="behaviorId" jdbcType="VARCHAR" property="behaviorId"/>
