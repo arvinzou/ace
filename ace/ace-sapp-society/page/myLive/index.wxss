@@ -183,11 +183,11 @@
 }
 .status-box {
 	position: absolute;
-  left: 15rpx;
+    left: 15rpx;
 	bottom:30rpx;
 	border-radius: 5rpx;
 	background-color: #1a9fff;
-  width: 110rpx;
+  width: 115rpx;
   padding: 5rpx;
 }
 .status-icon-text{
