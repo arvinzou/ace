@@ -112,12 +112,12 @@ Page({
         if (coin<0){
             wx.showModal({
                 title: '提示',
-                content: "参加活动需要"+coin+爱心币,
+                content: "参加活动需要"+coin+"爱心币",
                 success: function (res) {
                     console.log(res)
                     if (res.confirm) {
                         let user=util.getSysUser();
-                        if (user.person.validPoints>coin){
+                        if (user.person.validPoints>-coin){
                             wx.navigateTo({
                                 url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
                             })

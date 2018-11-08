@@ -198,7 +198,7 @@ page {
 }
 
 .form .input-style .title {
-    width: 140rpx;
+    width: 142rpx;
     margin-right: 10rpx;
 }
 
