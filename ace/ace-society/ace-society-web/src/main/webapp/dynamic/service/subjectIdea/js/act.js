@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 40};
+var params = {limit: 5};
 var orgType = null;
 window.onload = function () {
     jQuery(function ($) {
