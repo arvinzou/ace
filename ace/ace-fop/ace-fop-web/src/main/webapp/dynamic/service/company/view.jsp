@@ -302,23 +302,7 @@
                 </table>
             </div>
         </div>
-        <div class="info">
-            <a id="btn-view-add" href="javascript:void(0);" style="float:right;padding-top:15px">添加</a>
-        </div>
-        <div class="info">
-            <div class="info_title">
-                <span class="info_title_01">党员信息 </span>
-            </div>
 
-
-            <div id="pm" class="portlet-body">
-
-
-                <table id="grid-table"></table>
-
-
-            </div>
-        </div>
         <!--企业法人代表信息-->
         <div class="info">
             <div class="info_title">
@@ -485,6 +469,21 @@
             </div>
         </div>
 
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">党员信息 </span>
+            </div>
+
+
+            <div id="pm" class="portlet-body">
+
+
+                <table id="grid-table"></table>
+
+
+            </div>
+        </div>
+
 
         <!--工会组织建立情况-->
         <div class="info">
@@ -607,10 +606,6 @@
     <%--=====================================附件资源列表==============================--%>
     <%--电子表格--%>
     <div class="info">
-        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=1"
-           style="float:right;padding-top:15px">文件上传</a>
-    </div>
-    <div class="info">
         <div class="info_title row" style="margin: 0 !important;">
             <span class="info_title_01">电子表格</span>
         </div>
@@ -621,10 +616,6 @@
         </div>
     </div>
     <%--同心助学--%>
-    <div class="info">
-        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=2"
-           style="float:right;padding-top:15px">文件上传</a>
-    </div>
     <div class="info">
         <div class="info_title row" style="margin: 0 !important;">
             <span class="info_title_01">同心助学</span>
@@ -637,10 +628,6 @@
     </div>
     <%--精准扶贫--%>
     <div class="info">
-        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=3"
-           style="float:right;padding-top:15px">文件上传</a>
-    </div>
-    <div class="info">
         <div class="info_title row" style="margin: 0 !important;">
             <span class="info_title_01">精准扶贫</span>
         </div>
@@ -651,10 +638,6 @@
         </div>
     </div>
     <%--企业党建--%>
-    <div class="info">
-        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=4"
-           style="float:right;padding-top:15px">文件上传</a>
-    </div>
     <div class="info">
         <div class="info_title row" style="margin: 0 !important;">
             <span class="info_title_01">企业党建</span>

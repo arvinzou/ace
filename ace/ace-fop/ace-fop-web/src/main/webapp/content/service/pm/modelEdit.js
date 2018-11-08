@@ -1,4 +1,4 @@
-var _colNames = ['姓名', '性别', '出生日期', '手机', '入党日期'];
+var _colNames = ['姓名', '性别', '出生日期', '手机', '入党日期', '操作'];
 var _colModel = function () {
     return [
         {
@@ -125,6 +125,24 @@ var _colModel = function () {
                 required: false
             }
         }
+        ,
+        {
+            name: 'opt',
+            sortable: false,
+            width: 100,
+            renderer: function (value, cur) {
+                var rowid = $.jgrid.getAccessor(cur, cfg.dataId);
+                var title = $.jgrid.getAccessor(cur, 'fullName');
+                var opt = [];
+                if (true) {
+                    opt.push('<a href="javascript:edit(\'' + rowid + '\')">编辑</a> ');
+                }
+                if (true) {
+                    opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
+                }
 
+                return opt.join('');
+            }
+        }
     ];
 }

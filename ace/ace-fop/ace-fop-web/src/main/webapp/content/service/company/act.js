@@ -101,6 +101,109 @@ function loadView(id) {
 
 
 }
+
+function loadEditView(id) {
+    $.ajax({
+        type: "post",
+        url: contextPath + '/fopCompany/findByPK',
+        data: {id: id},
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            console.log(JSON.stringify(rst));
+            //动态渲染
+            var tpl = document.getElementById('tpl-view-page').innerHTML;//'tpl-company'
+            var renderHtml = juicer(tpl, rst.value);
+            $('.main_box').html(renderHtml);
+
+            initGrid();
+
+            $.each(rst.value, function (key, value) {
+                if (key == "thirdLaborRelation") {
+                    var rst = "";
+                    switch (value) {
+                        case '0' :
+                            rst = "否";
+                            break;
+                        case '1' :
+                            rst = "是";
+                            break;
+                        default :
+                            rst = "";
+                    }
+                    value = rst;
+                }
+                //企业类型 "0": "企业会员", "4": "个人会员"},//, "1": "团体企业", "2": "律师事务所", "3": "银行机构"
+                if (key == "companyType") {
+                    var rst = "";
+                    switch (value) {
+                        case '0' :
+                            rst = "企业会员";
+                            break;
+                        case '1' :
+                            rst = "团体企业";
+                            break;
+                        case '2' :
+                            rst = "律师事务所";
+                            break;
+                        case '3' :
+                            rst = "银行机构";
+                            break;
+                        case '4' :
+                            rst = "个人会员";
+                            break;
+                        default :
+                            rst = "N/A";
+                    }
+                    value = rst;
+                }
+                //status
+                if (key == "status") {
+                    if ("1" == value) {
+                        value = "非会员";
+                    }
+                    if ("2" == value) {
+                        value = "会员";
+                    }
+                }
+                //文化程度
+                if (key == "lpEducation") {
+                    value = rsd(value, "10");
+                }
+                //民族
+                if (key == "lpNationality") {
+                    value = rsd(value, "09");
+                }
+                //性别
+                if (key == "lpSex") {
+                    value = rsd(value, "01");
+                }
+                //企业性质
+                if (key == "companyProperty") {
+                    value = rsd(value, "134");
+                }
+                //日期格式化
+                if (key.indexOf('Dt') != -1 ||
+                    key.indexOf('Date') != -1 ||
+                    key.indexOf('time') != -1 ||
+                    key.indexOf('Time') != -1 ||
+                    key.indexOf('birthday') != -1) {
+                    value = Common.DateFormatter(value);
+                }
+                $(".form_info").find('span[name=' + key + ']').html(value);
+            });
+
+            //
+            initPhotoPreview(".my-gallery img");
+        },
+        error: function () {
+            alert("加载错误！");
+        }
+    });
+
+
+}
+
 var Common = {
 
     // EasyUI用DataGrid用日期格式化
