@@ -29,7 +29,7 @@
         }
     </style>
     <script type="text/javascript"
-            src="http://api.map.baidu.com/api?v=2.0&ak=cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB"></script>
+            src="https://api.map.baidu.com/api?v=2.0&ak=cPY4B8MAYgPQYOuDKPTNvUin31DBPDCB"></script>
     <title>地图定位</title>
 </head>
 <jsp:include page="../../common/common.jsp"/>

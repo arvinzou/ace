@@ -16,6 +16,11 @@ Page({
     },
     onLoad: function(options) {
         let that = this;
+        if (!util.isLogin()) {
+            wx.navigateTo({
+                url: "../userinfo/index?url=../activityList/index&type=switchTab"
+            });
+        }
         that.ifCreatBtn();
         let category = options.category;
         console.log(category);
