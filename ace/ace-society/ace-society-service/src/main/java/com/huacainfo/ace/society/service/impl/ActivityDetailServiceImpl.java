@@ -162,7 +162,9 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
             return new MessageResponse(ResultCode.FAIL, "已经报名");
         }
         ActivityVo activityVo = activityDao.selectVoByPrimaryKeyVo(o.getActivityId());
-        int allRows = this.activityDetailDao.findCount((ActivityDetailQVo) o);
+        ActivityDetailQVo activityDetailQVo=new ActivityDetailQVo();
+        activityDetailQVo.setActivityId(o.getActivityId());
+        int allRows = this.activityDetailDao.findCount(activityDetailQVo);
         if (activityVo.getParterNum() > allRows) {
             int coinNum = activityVo.getParticipant();
             o.setIdentity("1");
