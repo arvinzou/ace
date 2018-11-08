@@ -168,7 +168,7 @@
                 {@/if}
              </td>
         <td><a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-               <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>
+               <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>--%>
                {@if item.status==1}
                <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
                {@/if}
