@@ -32,4 +32,6 @@ List
 
     int isExit(BehaviorAnnex record);
 
+    List<BehaviorAnnexVo> getBehaviorAnnexListByBehaviorId(String id);
+
     }
