@@ -116,4 +116,14 @@ public interface FopCompanyService {
      * @param id 唯一主键
      */
     MessageResponse reJoin(String id, UserProp curUserProp) throws Exception;
+
+    /**
+     * 上传企业档案附件
+     *
+     * @param url       附件地址
+     * @param category  分类
+     * @param companyId 公司ID
+     * @return ResultResponse
+     */
+    ResultResponse uploadAnnex(String url, String category, String companyId);
 }

@@ -2,6 +2,7 @@
 package com.huacainfo.ace.fop.vo;
 
 import com.huacainfo.ace.fop.model.FopCompany;
+import com.huacainfo.ace.fop.model.FopCompanyAnnex;
 
 import java.util.Date;
 import java.util.List;
@@ -89,6 +90,55 @@ public class FopCompanyVo extends FopCompany {
      * 市人社局_企业养老保险单位参保信息
      */
     private Map<String, Object> srsj;
+
+    /**
+     * 电子表格 electronic spreadsheet
+     */
+    private List<FopCompanyAnnex> esAnnex;
+    /**
+     * 2-同心助学   Concentric study
+     */
+    private List<FopCompanyAnnex> csAnnex;
+    /**
+     * 3-精准扶贫 poverty alleviation
+     */
+    private List<FopCompanyAnnex> paAnnex;
+    /**
+     * 4-企业党建 Enterprise party building
+     */
+    private List<FopCompanyAnnex> epbAnnex;
+
+    public List<FopCompanyAnnex> getEsAnnex() {
+        return esAnnex;
+    }
+
+    public void setEsAnnex(List<FopCompanyAnnex> esAnnex) {
+        this.esAnnex = esAnnex;
+    }
+
+    public List<FopCompanyAnnex> getCsAnnex() {
+        return csAnnex;
+    }
+
+    public void setCsAnnex(List<FopCompanyAnnex> csAnnex) {
+        this.csAnnex = csAnnex;
+    }
+
+    public List<FopCompanyAnnex> getPaAnnex() {
+        return paAnnex;
+    }
+
+    public void setPaAnnex(List<FopCompanyAnnex> paAnnex) {
+        this.paAnnex = paAnnex;
+    }
+
+    public List<FopCompanyAnnex> getEpbAnnex() {
+        return epbAnnex;
+    }
+
+    public void setEpbAnnex(List<FopCompanyAnnex> epbAnnex) {
+        this.epbAnnex = epbAnnex;
+    }
 
     public Map<String, Object> getSgsj() {
         return sgsj;

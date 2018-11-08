@@ -28,6 +28,8 @@
     <title>基本信息</title>
     <script type="text/javascript" src="${portalPath}/system/getUserProp.do"></script>
     <script type="text/javascript" src="${portalPath}/system/getButtonAuthority.do?id=${param.id}"></script>
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
     <link rel="stylesheet"
           href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}"/>
     <link rel="stylesheet" type="text/css"
@@ -43,6 +45,9 @@
     <link rel="stylesheet" type="text/css"
           href="${portalPath}/content/common/assets/layouts/layout${SESSION_USERPROP_KEY.cfg.portalType}/css/custom.min.css?v=${cfg.version}"/>
     <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
+
+    <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+    <script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 
     <script>
 
@@ -122,7 +127,6 @@
         }
         urlParams = getQueryString();
     </script>
-
 </head>
 
 
@@ -132,6 +136,12 @@
 </script>
 
 <style>
+    .cover {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+
     .ta-text {
         width: 100%;
         height: 100%;
@@ -593,6 +603,69 @@
             </table>
         </div>
     </div>
+
+    <%--=====================================附件资源列表==============================--%>
+    <%--电子表格--%>
+    <div class="info">
+        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=1"
+           style="float:right;padding-top:15px">文件上传</a>
+    </div>
+    <div class="info">
+        <div class="info_title row" style="margin: 0 !important;">
+            <span class="info_title_01">电子表格</span>
+        </div>
+        <div class="row" style="margin: 0 !important;">
+            {@each esAnnex as item, idx}
+            <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/></div>
+            {@/each}
+        </div>
+    </div>
+    <%--同心助学--%>
+    <div class="info">
+        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=2"
+           style="float:right;padding-top:15px">文件上传</a>
+    </div>
+    <div class="info">
+        <div class="info_title row" style="margin: 0 !important;">
+            <span class="info_title_01">同心助学</span>
+        </div>
+        <div class="row" style="margin: 0 !important;">
+            {@each csAnnex as item, idx}
+            <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/></div>
+            {@/each}
+        </div>
+    </div>
+    <%--精准扶贫--%>
+    <div class="info">
+        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=3"
+           style="float:right;padding-top:15px">文件上传</a>
+    </div>
+    <div class="info">
+        <div class="info_title row" style="margin: 0 !important;">
+            <span class="info_title_01">精准扶贫</span>
+        </div>
+        <div class="row" style="margin: 0 !important;">
+            {@each paAnnex as item, idx}
+            <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/></div>
+            {@/each}
+        </div>
+    </div>
+    <%--企业党建--%>
+    <div class="info">
+        <a target="view_window" href="./hwplugin/capture.jsp?did=\${id}&category=4"
+           style="float:right;padding-top:15px">文件上传</a>
+    </div>
+    <div class="info">
+        <div class="info_title row" style="margin: 0 !important;">
+            <span class="info_title_01">企业党建</span>
+        </div>
+        <div class="row" style="margin: 0 !important;">
+            {@each epbAnnex as item, idx}
+            <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/></div>
+            {@/each}
+        </div>
+    </div>
+
     <%--市工商局_企业变更记录信息--%>
     {@if sgsj != null}
     <div class="info">
@@ -666,6 +739,8 @@
                 <tr>
                     <td width="15%" align="right" class="tdbg">行业</td>
                     <td width="35%"><span>\${guosj.行业}</span></td>
+                    <td width="15%" align="right" class="tdbg"></td>
+                    <td width="35%"><span></span></td>
                 </tr>
             </table>
         </div>
@@ -734,13 +809,44 @@
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/pm/config.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/pm/model.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/pm/controller.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/pm/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/pm/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/pm/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/pm/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/pm/view.js?version=${cfg.version}"></script>
+
+
+<div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

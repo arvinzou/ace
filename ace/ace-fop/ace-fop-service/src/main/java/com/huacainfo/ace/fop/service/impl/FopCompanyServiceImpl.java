@@ -20,6 +20,7 @@ import com.huacainfo.ace.fop.common.constant.FlowType;
 import com.huacainfo.ace.fop.common.constant.FopConstant;
 import com.huacainfo.ace.fop.common.constant.PayType;
 import com.huacainfo.ace.fop.dao.FopAssociationDao;
+import com.huacainfo.ace.fop.dao.FopCompanyAnnexDao;
 import com.huacainfo.ace.fop.dao.FopCompanyDao;
 import com.huacainfo.ace.fop.dao.FopCompanyOrgDao;
 import com.huacainfo.ace.fop.model.*;
@@ -81,6 +82,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     private FopCompanyOrgDao fopCompanyOrgDao;
     @Autowired
     private FopMemberService fopMemberService;
+    @Autowired
+    private FopCompanyAnnexDao fopCompanyAnnexDao;
 
     /**
      * @throws
@@ -602,8 +605,45 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         } catch (Exception e) {
             logger.error("fop_company[" + id + "]接口查询异常：{}", e);
         }
+        //附录查询
+        setAnnexAttr(vo);
+
         rst.setValue(vo);
         return rst;
+    }
+
+    private void setAnnexAttr(FopCompanyVo vo) {
+        List<FopCompanyAnnex> all = fopCompanyAnnexDao.findByComId(vo.getId());
+        /**
+         * 1-电子表格 2-同心助学 3-精准扶贫 4-企业党建
+         */
+        List<FopCompanyAnnex> es = new LinkedList<>();
+        List<FopCompanyAnnex> cs = new LinkedList<>();
+        List<FopCompanyAnnex> pa = new LinkedList<>();
+        List<FopCompanyAnnex> epb = new LinkedList<>();
+        for (FopCompanyAnnex annex : all) {
+            switch (annex.getCategory()) {
+                case "1"://电子表格
+                    es.add(annex);
+                    break;
+                case "2"://同心助学
+                    cs.add(annex);
+                    break;
+                case "3"://精准扶贫
+                    pa.add(annex);
+                    break;
+                case "4"://企业党建
+                    epb.add(annex);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        vo.setEsAnnex(es);
+        vo.setCsAnnex(cs);
+        vo.setPaAnnex(pa);
+        vo.setEpbAnnex(epb);
     }
 
     private FopCompanyVo invokeApi(FopCompanyVo vo) {
@@ -773,6 +813,33 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         dataBaseLogService.log("会员恢复", "退会再入会", String.valueOf(id), String.valueOf(id), "企业管理", userProp);
 
         return new MessageResponse(ResultCode.SUCCESS, "恢复成功");
+    }
+
+    /**
+     * 上传企业档案附件
+     *
+     * @param url       附件地址
+     * @param category  分类
+     * @param companyId 公司ID
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse uploadAnnex(String url, String category, String companyId) {
+        FopCompanyAnnex annex = new FopCompanyAnnex();
+        annex.setId(GUIDUtil.getGUID());
+        annex.setCompanyId(companyId);
+        annex.setCategory(category);
+        annex.setFileUrl(url);
+        annex.setFileType("image");
+        annex.setFileName("");
+        annex.setFileSize("");
+        annex.setStatus("1");
+        annex.setCreateDate(DateUtil.getNowDate());
+        annex.setCreateUserId("system");
+        annex.setCreateUserName("system");
+        fopCompanyAnnexDao.insert(annex);
+
+        return new ResultResponse(ResultCode.SUCCESS, "上传成功");
     }
 
     @Override
