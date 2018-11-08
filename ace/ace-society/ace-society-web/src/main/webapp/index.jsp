@@ -19,17 +19,22 @@
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
-<div class="page-content-inner">
+<div class="">
 
-</div>
+    <div class="row widget-row">
+        <div class="col-md-6">
+            <div id="container" style="height: 612px">
 
-<div class="row widget-row">
-    <div class="col-md-12">
-        <div id="container" style="height: 920px">
+            </div>
+        </div>
+        <div class="col-md-6 page-content-inner">
 
         </div>
     </div>
+
 </div>
+
+
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
@@ -37,7 +42,7 @@
 
 
     <div class="row widget-row">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">会员个人</h4>
                 <div class="widget-thumb-wrap">
@@ -49,7 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">会员组织</h4>
                 <div class="widget-thumb-wrap">
@@ -61,7 +66,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+    </div>
+    <div class="row widget-row">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">线下活动</h4>
                 <div class="widget-thumb-wrap">
@@ -73,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">线下活动</h4>
                 <div class="widget-thumb-wrap">
@@ -90,7 +97,7 @@
 
 
     <div class="row widget-row">
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">文明随手拍</h4>
                 <div class="widget-thumb-wrap">
@@ -102,7 +109,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">我有点子</h4>
                 <div class="widget-thumb-wrap">
@@ -114,7 +121,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+    </div>
+    <div class="row widget-row">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">秀我直播</h4>
                 <div class="widget-thumb-wrap">
@@ -126,7 +135,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">朋友圈</h4>
                 <div class="widget-thumb-wrap">
@@ -201,8 +210,8 @@
 
     var map = new BMap.Map("container", {
         enableMapClick: false,
-        minZoom: 10,
-        maxZoom: 16,
+        minZoom: 9,
+        maxZoom: 12,
     }); // 创建地图实例，禁止点击地图底图
     //设置样式
     map.setMapStyle({
@@ -218,13 +227,21 @@
 
 //    map.enableDragging(); //禁止拖动
     map.disableDoubleClickZoom(); //禁止双击缩放
-//    map.enableScrollWheelZoom(true);
+    map.enableScrollWheelZoom(true);
     var blist = [];
     var headimg="data:image/png;base64,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"
     var districtLoading = 0;
 
     function getBoundary() {
-        addDistrict("湖南常德市");
+        addDistrict("常德临澧县", "#f5f7f9","#efeffe");
+        addDistrict("常德武陵区", "#f5f7f9","#cceaff");
+        addDistrict("常德鼎城区", "#f5f7f9","#edffee");
+        addDistrict("常德安乡县", "#f5f7f9","#e9faf3");
+        addDistrict("常德澧县", "#f5f7f9","#ffffd9");
+        addDistrict("常德汉寿县", "#f5f7f9","#d7e7ff");
+        addDistrict("常德桃源县", "#f5f7f9","#ffe8e8");
+        addDistrict("常德津市", "#f5f7f9","#fffbed");
+        addDistrict("常德石门县", "#f5f7f9","#dcfdfe");
     }
 
     /**
@@ -232,20 +249,26 @@
      * @param {} districtName 行政区划名
      * @returns  无返回值
      */
-    function addDistrict(districtName) {
+    function addDistrict(districtName, fillColor,bgColot) {
         //使用计数器来控制加载过程
         districtLoading++;
+        /*创建行政区域搜索的对象实例*/
         var bdary = new BMap.Boundary();
+        /*prop1:查询省,prop2:callback*/
         bdary.get(districtName, function(rs) { //获取行政区域
+            /*count:搜索到几个行政区划。*/
             var count = rs.boundaries.length; //行政区域的点有多少个
             if(count === 0) {
                 alert('未能获取当前输入行政区域');
                 return;
             }
             for(var i = 0; i < count; i++) {
+
                 blist.push({
                     points: rs.boundaries[i],
-                    name: districtName
+                    name: districtName,
+                    color: fillColor,
+                    bgColor:bgColot,
                 });
             };
             //加载完成区域点后计数器-1
@@ -257,25 +280,29 @@
         });
     }
 
+
     /**
      * 各种鼠标事件绑定
      */
     function click(evt) {
-        alert(evt.target.name);
+//				alert(evt.target.name);
     }
 
     function mouseover(evt) {
-        evt.target.label.setZIndex(99);
-        evt.target.label.setPosition(evt.point);
-        evt.target.label.show();
+        evt.target.setFillColor(evt.target.bgColor);
+        //				evt.target.label.setZIndex(99);
+        //				evt.target.label.setPosition(evt.point);
+        //				evt.target.label.show();
     }
 
     function mousemove(evt) {
-        evt.target.label.setPosition(evt.point);
+
+        //				evt.target.label.setPosition(evt.point);
     }
 
     function mouseout(evt) {
-        evt.target.label.hide();
+        evt.target.setFillColor("#f5f7f9");
+        //				evt.target.label.hide();
     }
 
     function drawBoundary() {
@@ -311,32 +338,52 @@
         pArray.push(pNW);
         //循环添加各闭合区域
         for(var i = 0; i < blist.length; i++) {
-            //添加显示用标签层
-            var label = new BMap.Label(blist[i].name, {
-                offset: new BMap.Size(20, -10)
-            });
-            label.hide();
-            map.addOverlay(label);
+            //此类表示地图上的文本标注。
+            //添加选中行政区划的文本标签的用途
+            /*		var label = new BMap.Label(blist[i].name, {
+                        offset: new BMap.Size(20, -10)
+                    });
+                    label.setStyle({
+                        color:"#ffffff",
+                        borderWidth:"0px",
+                        backgroundColor:"transparent"
+                    })
+                    label.hide();*/
+            /*在地图添加此覆盖物*/
+            /*map.addOverlay(label);*/
 
             //添加多边形层并显示
+            //此类表示一个多边形覆盖物。
             var ply = new BMap.Polygon(blist[i].points, {
-                strokeWeight: 5,
-                strokeColor: "#FF0000",
-                fillOpacity: 0.001,
-                fillColor: " #FFFFFF"
+                strokeWeight: 2,
+                strokeColor: "#ffffff",
+                fillOpacity: 1,
+//						strokeStyle:"dashed",
+                fillColor: blist[i].color
             }); //建立多边形覆盖物
-            ply.name = blist[i].name;
-            ply.label = label;
+            /*覆盖物添加名称*/
+            //					ply.name = blist[i].name;
+            /*添加标签*/
+            //					ply.label = label;
+            /*添加事件*/
+            ply.bgColor = blist[i].bgColor;
             ply.addEventListener("click", click);
             ply.addEventListener("mouseover", mouseover);
             ply.addEventListener("mouseout", mouseout);
             ply.addEventListener("mousemove", mousemove);
+            /*地图添加这个覆盖物*/
             map.addOverlay(ply);
 
             //添加名称标签层
-            var centerlabel = new BMap.Label(blist[i].name, {
+            var centerlabel = new BMap.Label(blist[i].name.substring(2), {
                 offset: new BMap.Size(0, 0)
             });
+            centerlabel.setStyle({
+                color: "#3064ae",
+                fontSize: "14px",
+                borderWidth: "0px",
+                backgroundColor: "transparent"
+            })
             centerlabel.setPosition(ply.getBounds().getCenter());
             map.addOverlay(centerlabel);
 
@@ -359,7 +406,7 @@
             strokeColor: "#000000",
             strokeWeight: 0.00001,
             fillColor: "#ffffff",
-            fillOpacity: 0.9
+            fillOpacity: 1
         }); //建立多边形覆盖物
         map.addOverlay(plyall);
     }
@@ -391,7 +438,7 @@
                 if(!img){
                   img=headimg;
                 }
-                var myIcon = new BMap.Icon(img, new BMap.Size(50, 50));
+                var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
                 map.addOverlay(new BMap.Marker(data.points[i],{ icon: myIcon }));
             }
         }
@@ -411,12 +458,17 @@
 <style type="text/css">
     .BMap_Marker>div {
         border-radius: 50% !important;
+        border:4px solid rgba(255, 255, 255, 1);
+        box-shadow:0px 3px 4px 2px rgba(24,144,255,0.1);
     }
 
     .BMap_Marker img {
         width: 100%;
         height: 100%;
         object-position: 50% 50%;
+    }
+    .anchorBL{
+        display: none;
     }
 </style>
 
