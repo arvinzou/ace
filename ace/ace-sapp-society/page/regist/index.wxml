@@ -155,7 +155,7 @@
                         <text bindtap="callphone" data-mobile='0736-2323252' class="phone">0736-2323252</text>
                     </view>
                 </view>
-                <view bindtap='colseThis' class='btn btn-bkClick'>
+                <view bindtap='close' class='btn btn-bkClick'>
                     关闭
                 </view>
 
