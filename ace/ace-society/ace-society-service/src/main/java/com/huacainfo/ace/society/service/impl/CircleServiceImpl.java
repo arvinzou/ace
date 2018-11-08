@@ -1,22 +1,24 @@
 package com.huacainfo.ace.society.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.CoinConfigType;
 import com.huacainfo.ace.society.dao.CircleDao;
 import com.huacainfo.ace.society.dao.CircleImgDao;
 import com.huacainfo.ace.society.dao.CircleLogDao;
-import com.huacainfo.ace.society.model.Circle;
-import com.huacainfo.ace.society.model.CircleImg;
-import com.huacainfo.ace.society.model.CircleLog;
-import com.huacainfo.ace.society.model.Rpt;
+import com.huacainfo.ace.society.dao.CoinConfigDao;
+import com.huacainfo.ace.society.model.*;
 import com.huacainfo.ace.society.service.CircleService;
+import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.vo.CircleQVo;
 import com.huacainfo.ace.society.vo.CircleVo;
 import org.apache.ibatis.session.Configuration;
@@ -43,6 +45,8 @@ public class CircleServiceImpl implements CircleService {
 
     @Autowired
     private CircleLogDao circleLogDao;
+@Autowired
+    private PointsRecordService pointsRecordService;
 
 
     @Autowired
@@ -210,13 +214,17 @@ public class CircleServiceImpl implements CircleService {
     @Override
     public MessageResponse audit(String id,String rst,String text, UserProp userProp) throws Exception {
         if (StringUtils.isEmpty(id)) {
-            return new MessageResponse(1, "报道ID不能为空!");
+            return new MessageResponse(ResultCode.FAIL, "报道ID不能为空!");
         }
         if (StringUtils.isEmpty(rst)) {
-            return new MessageResponse(1, "审核结果不能为空!");
+            return new MessageResponse(ResultCode.FAIL, "审核结果不能为空!");
         }
         if (StringUtils.isEmpty(text)) {
-            return new MessageResponse(1, "审核说明不能为空!");
+            return new MessageResponse(ResultCode.FAIL, "审核说明不能为空!");
+        }
+        Circle circle=circleDao.selectVoByPrimaryKey(id);
+        if(CommonUtils.isBlank(circle)){
+            return new MessageResponse(ResultCode.FAIL, "邻里圈子数据丢失!");
         }
         String logId=GUIDUtil.getGUID();
         CircleLog log=new CircleLog();
@@ -226,10 +234,17 @@ public class CircleServiceImpl implements CircleService {
         log.setRst(rst);
         log.setStatement(text);
         log.setCreateDate(new Date());
+        if("2".equals(rst)){
+            ResultResponse pointsRst = pointsRecordService.addPoints(circle.getUid(), CoinConfigType.GROUP, id);
+            if(pointsRst.getStatus()==1){
+                return new MessageResponse(pointsRst.getStatus(), pointsRst.getInfo());
+            }
+        }
         this.circleLogDao.insert(log);
         this.circleDao.updateStatus(id,rst,logId);
+
         dataBaseLogService.log("审核圈子", "圈子", id, id,"圈子", userProp);
-        return new MessageResponse(0, "审核成功！");
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功！");
     }
 
     /**
