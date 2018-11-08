@@ -523,10 +523,10 @@ max-height: 80rpx;
   flex:1
 }
 .order-box-space{
-  flex:3
+  flex:2
 }
 .order-box-status{
-  flex:1;
+  flex:2;
   float: right;
  
 }
@@ -547,7 +547,10 @@ max-height: 80rpx;
   border: 1rpx blue solid;
   border-radius: 15rpx;
   text-align: center;
-   padding: 5rpx;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
   font-size: 25rpx;
 }
 .color-2{
@@ -555,7 +558,10 @@ max-height: 80rpx;
   border: 1rpx red solid;
   border-radius: 15rpx;
   text-align: center;
-    padding: 5rpx;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
   font-size: 25rpx;
 }
 .color-3{
