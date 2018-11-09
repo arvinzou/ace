@@ -183,6 +183,10 @@ public class WWWWxPayController extends CuBaseController {
     @RequestMapping(value = "/ccbCallBack")
     public ResultResponse ccbCallBack(CcbCallbackLog params) {
         logger.debug("[慈善总会]ccbCallBack.info:{}", params.toString());
+        if (null == params) {
+            logger.debug("[慈善总会]ccbCallBack.info:{}", "回调参数异常");
+            return new ResultResponse(ResultCode.FAIL, "回调参数异常");
+        }
 
         return cuDonateOrderService.ccbCallBack(params);
     }

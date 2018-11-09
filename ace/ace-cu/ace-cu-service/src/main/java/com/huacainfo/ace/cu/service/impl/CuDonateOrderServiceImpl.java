@@ -405,13 +405,22 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         } catch (Exception e) {
             logger.error("[慈善总会]龙支付回调日志入库异常：{}", e);
         }
+
         String orderId = params.getORDERID();
         BigDecimal payAmount = params.getPAYMENT();
-        if ("Y".equals(params.getSUCCESS())) {
-            return pay(orderId, OrderConstant.PAY_TYPE_CCB, payAmount);
-        }
+        try {
+            if (1 == 1) {
+                throw new CustomException("异常测试");
+            }
 
-        return new ResultResponse(ResultCode.FAIL, "[慈善总会]支付未完成，原因: 龙支付通知结果[交易失败]");
+            if ("Y".equals(params.getSUCCESS())) {
+                return pay(orderId, OrderConstant.PAY_TYPE_CCB, payAmount);
+            }
+            return new ResultResponse(ResultCode.FAIL, "[慈善总会]支付未完成，原因: 龙支付通知结果[交易失败]");
+        } catch (Exception e) {
+            logger.error("[慈善总会]支付结果处理异常[orderId={}]：{}", orderId, e);
+            return new ResultResponse(ResultCode.FAIL, "[慈善总会]支付未完成，原因: 支付结果处理异常[逻辑处理异常]");
+        }
     }
 
     /**
