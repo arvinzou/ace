@@ -51,7 +51,6 @@
 .rpt-content{
   padding-top: 20rpx;
   padding-bottom: 20rpx;
-  border-top: solid 1px #ebebeb;
 }
 .rpt-content:first-child{
   border-top: solid 0px #ebebeb;
@@ -70,9 +69,10 @@
    padding-left: 0rpx;
 }
 .wrap {
-	padding-left: 40rpx;
+  padding-left: 40rpx;
   padding-right: 40rpx;
-  padding-top: 2rpx;
+  padding-top: 30rpx;
+  border-bottom: solid 1px #ebebeb;
 }
 .report-box-second{
   flex-direction:column;
