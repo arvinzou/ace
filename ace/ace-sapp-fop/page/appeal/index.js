@@ -47,7 +47,7 @@ Page({
       that.data.scene="2e968824893a4ec19a00b62bfede0b14";
     }
     if(!util.isLogin()){
-      wx.navigateTo({ url: "../userinfo/index?url=../appeal/index?scene=" + that.data.scene });
+      wx.navigateTo({ url: "../userinfo/index?act=a&url=../appeal/index?scene=" + that.data.scene});
     }
     this.setData(param);
     this.setData({
