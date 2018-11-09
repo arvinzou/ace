@@ -70,7 +70,7 @@ Page({
             return;
         }
         that.showLoading();
-        util.request(cfg.behaviorList, { "start": that.data.start, "limit": that.data.limit, "type": type, "status":"3"},
+        util.request(cfg.server +'/society/www/behavior/findList', { "start": that.data.start, "limit": that.data.limit, "type": type, "status":"3"},
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
@@ -110,8 +110,11 @@ Page({
     exitVideo: function(e){
         console.log("==================================退出视频观看");
         var that = this;
+        var videoContent = wx.createVideoContext("video");
+        videoContent.pause();
         that.setData({
-            maskFlag: true
+            maskFlag: true,
+            videoUrl:null
         });
     },
     /**

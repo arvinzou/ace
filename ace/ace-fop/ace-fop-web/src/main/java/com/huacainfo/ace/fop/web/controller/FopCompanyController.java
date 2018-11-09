@@ -123,6 +123,13 @@ public class FopCompanyController extends FopBaseController {
         return this.fopCompanyService.selectFopCompanyByPrimaryKey(id);
     }
 
+    @RequestMapping(value = "/findByPK")
+    @ResponseBody
+    public SingleResult<FopCompanyVo> findByPK(String id)
+            throws Exception {
+        return this.fopCompanyService.findByPK(id);
+    }
+
     /**
      * @throws
      * @Title:deleteFopCompanyByFopCompanyId

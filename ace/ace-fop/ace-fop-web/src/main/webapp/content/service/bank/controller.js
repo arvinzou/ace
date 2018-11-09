@@ -79,6 +79,10 @@ function MoneyCheck(){
      }
 }
 
+function editPreview(id) {
+    window.open(contextPath + '/dynamic/service/company/edit.jsp?companyId=' + id);
+}
+
 function preview(id, title) {
     window.open(contextPath + '/dynamic/service/company/view.jsp?companyId=' + id);
 }

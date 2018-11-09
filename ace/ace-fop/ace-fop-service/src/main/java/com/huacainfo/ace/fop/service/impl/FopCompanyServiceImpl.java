@@ -843,6 +843,16 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     @Override
+    public SingleResult<FopCompanyVo> findByPK(String id) {
+        SingleResult<FopCompanyVo> rst = new SingleResult<>();
+        FopCompanyVo vo = this.fopCompanyDao.selectVoByPrimaryKey(id);
+        //附录查询
+        setAnnexAttr(vo);
+        rst.setValue(vo);
+        return rst;
+    }
+
+    @Override
     public ResultResponse selectCompanyInfo(UserProp userProp) throws Exception {
         ResultResponse rr = getCompanyId(userProp);
         if (ResultCode.FAIL == rr.getStatus()) {
