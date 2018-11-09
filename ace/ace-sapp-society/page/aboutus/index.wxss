@@ -20,12 +20,15 @@
     width: 90%;
     height: auto;
     background: #FFFFFF;
-    margin: 30rpx auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 30rpx;
+    
 }
 .title{
     width: 100%;
     height: 80rpx;
-    line-height: 80rpx;
+    line-height: 40rpx;
     text-align: center;
     color: #FFAD38;
     font-size: 34rpx;
@@ -36,6 +39,7 @@
     color: #666666;
     font-size: 26rpx;
     line-height: 40rpx;
+    text-indent: 2em;
 }
 .code{
     width: 150rpx;
