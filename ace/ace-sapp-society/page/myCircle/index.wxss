@@ -51,7 +51,7 @@
 .rpt-content{
   padding-top: 20rpx;
   padding-bottom: 20rpx;
-  border-top: solid 1px #ebebeb;
+  border-top: solid 0.5px #ebebeb;
 }
 .rpt-content:first-child{
   border-top: solid 0px #ebebeb;

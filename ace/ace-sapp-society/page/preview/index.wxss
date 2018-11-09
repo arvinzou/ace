@@ -163,7 +163,7 @@ width: 80%;
 .rpt-content{
   padding-top: 1rpx;
   padding-bottom: 1rpx;
-  border-top: solid 1px #ebebeb;
+  border-top: solid 0.5px #ebebeb;
 }
 .content {
 	padding-top: 10rpx;
@@ -307,7 +307,7 @@ width: 80%;
     flex: none;
     display: flex;
     background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
+    border-bottom: 0.5px #e5e5e5 solid;
 }
 
 .navbar .item {

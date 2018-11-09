@@ -360,7 +360,7 @@ icon {
   height: 2.58823529em;
   margin-left: 5px;
   padding: 0 0.6em 0 0.7em;
-  border-left: 1px solid #E5E5E5;
+  border-left: 0.5px solid #E5E5E5;
   line-height: 2.58823529em;
   vertical-align: middle;
   font-size: 17px;
@@ -720,7 +720,7 @@ icon {
   vertical-align: middle;
 }
 .weui-loadmore_line {
-  border-top: 1px solid #E5E5E5;
+  border-top: 0.5px solid #E5E5E5;
   margin-top: 2.4em;
 }
 .weui-loadmore__tips_in-line {
@@ -848,7 +848,7 @@ icon {
 }
 .weui-media-box__info__meta_extra {
   padding-left: 1em;
-  border-left: 1px solid #CECECE;
+  border-left: 0.5px solid #CECECE;
 }
 .weui-media-box__title_in-text {
   margin-bottom: 8px;
@@ -969,7 +969,7 @@ icon {
   display: flex;
   box-sizing: border-box;
   background-color: #f8f8f8;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 0.5px solid #E5E5E5;
 }
 .weui-icon-search {
   margin-right: 8px;
