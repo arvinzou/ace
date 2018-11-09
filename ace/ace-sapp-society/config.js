@@ -1,8 +1,9 @@
 var server = "https://zhsh.wuling.gov.cn";
 var serverfile = "https://zhsh.wuling.gov.cn/";
-var rtmpserver = "rtmp://zhsh.wuling.gov.cn/live/";
-var hlsserver = "http://zhsh.wuling.gov.cn:9999/hls/";
+var rtmpserver = "rtmp://218.75.136.123/live/";
+var hlsserver = "http://218.75.136.123:9999/hls/";
 var websocketurl = 'zhsh.wuling.gov.cn';
+
 var config = {
     rtmpserver,
     websocketurl,

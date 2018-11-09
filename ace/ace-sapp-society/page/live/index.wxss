@@ -62,9 +62,10 @@ page{
   margin: 2rpx auto;
 }
 .controls{
-  position:fixed;
+  position:absolute;
   right:20rpx;
   top:140rpx;
+  z-index: 99999;
 }
 .info-tip{
   position: fixed;  
@@ -663,7 +664,7 @@ max-height: 80rpx;
     -webkit-appearance:none;
 }
 .controls-screenopt{
-  position:fixed;
+  position:absolute;
   right:20rpx;
   top:20rpx;
 }

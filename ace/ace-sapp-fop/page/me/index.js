@@ -11,9 +11,10 @@ Page({
     currentTab: 0,
     navbar: ['我提交', '我答复']
   },
+  
   onLoad: function () {
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../me/index"});
+      wx.navigateTo({ url: "../userinfo/index?url=../me/index&act=b"});
     }
     var that=this;
     that.initData();
@@ -80,7 +81,8 @@ Page({
   },
   initData: function () {
     var that = this;
-    util.request(cfg.getList, { submitOpenId: that.data.userinfo.unionId },
+    var userinfo=wx.getStorageSync('userinfo');
+    util.request(cfg.getList, { submitOpenId: userinfo.unionId },
       function (data) {
         wx.stopPullDownRefresh();
         that.setData({
@@ -92,7 +94,7 @@ Page({
         }
       }
     );
-    util.request(cfg.getList, { answerOpenId: that.data.userinfo.unionId },
+    util.request(cfg.getList, { answerOpenId: userinfo.unionId },
       function (data) {
         wx.stopPullDownRefresh();
         that.setData({
