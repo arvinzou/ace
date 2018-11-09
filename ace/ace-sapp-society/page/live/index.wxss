@@ -65,6 +65,7 @@ page{
   position:fixed;
   right:20rpx;
   top:140rpx;
+  z-index: 99999;
 }
 .info-tip{
   position: fixed;  
