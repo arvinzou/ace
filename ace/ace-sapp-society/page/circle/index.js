@@ -39,8 +39,11 @@ Page({
     exitVideo: function (e) {
         console.log("==================================退出视频观看");
         var that = this;
+        var videoContent = wx.createVideoContext("video");
+        videoContent.pause();
         that.setData({
-            maskFlag: true
+            maskFlag: true,
+            videoUrl: null
         });
     },
   /**
