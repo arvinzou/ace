@@ -8,6 +8,7 @@ Page({
         nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),
         method: false,
         hiddenBtn: true,
+        showBtn: false,
     },
     onLoad: function(options) {
         let that = this;
@@ -144,5 +145,30 @@ Page({
                 url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
             })
         }
-    }
+    },
+    onPageScroll: function (e) {
+        if (this.data.hiddenBtn) {
+            return;
+        }
+        if (e.scrollTop <= 0) {
+            // 滚动到最顶部
+            e.scrollTop = 0;
+        } else if (e.scrollTop > this.data.scrollHeight) {
+            // 滚动到最底部
+            e.scrollTop = this.data.scrollHeight;
+        }
+        if (e.scrollTop > this.data.scrollTop || e.scrollTop >= this.data.scrollHeight) {
+            this.setData({
+                showBtn: true,
+            });
+        } else {
+            this.setData({
+                showBtn: false,
+            });
+        }
+        //给scrollTop重新赋值 
+        this.setData({
+            scrollTop: e.scrollTop
+        })
+    },
 })

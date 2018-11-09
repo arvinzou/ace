@@ -92,7 +92,7 @@
     margin: 0 0 22rpx 30rpx;
 }
 
-.help view {
+/* .help view {
     border: 0.5px solid;
     border-radius: 50%;
     width: 26rpx;
@@ -101,7 +101,7 @@
     text-align: center;
     margin-left: 12rpx;
     font-size: 24rpx;
-}
+} */
 
 .coin_assign {
     height: 120rpx;

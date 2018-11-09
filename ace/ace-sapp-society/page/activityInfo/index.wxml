@@ -34,7 +34,6 @@
     </view>
     <view class='help'>
         活动积分
-        <view>?</view>
     </view>
 
     <view class='coin_assign'>
@@ -77,7 +76,7 @@
             {{activityInfo.mode}}
         </view>
     </view>
-    <view class='btn_content' hidden='{{hiddenBtn}}'>
+    <view class='btn_content bottm-btn {{showBtn?"btn-show":""}}' hidden='{{hiddenBtn}}'>
         <view wx:if="{{activityInfo.activityDetailVoList.length>activityInfo.parterNum-1}}" class='btn btn-unClick'>
             名额已满
         </view>
