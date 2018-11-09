@@ -48,6 +48,9 @@
       </view>
     </block>
      
+     <view class="btn-add-rpt" bindtap="add">
+      <image class="btn-img" src="../../image/add-red.png" />
+    </view>
 </view>
 
 
