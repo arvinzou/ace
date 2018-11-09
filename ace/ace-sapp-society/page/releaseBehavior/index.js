@@ -233,7 +233,6 @@ Page({
       sourceType: ['album', 'camera'],
       success: function (res) {
         var fileSize = res.size;
-        if (fileSize < 2000000 && res.duration <=10){
             wx.showLoading({ title: "正在上传" });
             var file = res.tempFilePath;
             wx.uploadFile({
@@ -259,9 +258,7 @@ Page({
                 wx.showModal({ title: "提示", content: "上传失败" })
             }
             });
-        }else{
-            wx.showModal({ title: "提示", content: "上传视频大小不能超过2M,时长不能超过10秒！" })
-        }
+        
       }
     });
   },
