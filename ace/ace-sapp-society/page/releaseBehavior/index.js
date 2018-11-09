@@ -121,7 +121,7 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: [type],
       sizeType: ['compressed'],
-      count: 4,
+      count: 1,
       success: function (res) {
         if (res.tempFiles.length <= 4){
         for (var i = 0; i < res.tempFilePaths.length; i++) {
