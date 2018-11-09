@@ -151,6 +151,7 @@ Page({
     that.setData({
       rtmpurl: cfg.rtmpserver + userinfo.userProp.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
     });
+    
     if (pusherStatus == 'stop') {
       wx.showModal({
         title: '系统提示',

@@ -19,10 +19,18 @@ Page({
   },
   goback:function(e){
     var that=this;
+    console.log(that.data.url);
     if (!util.isLogin()) {
       wx.navigateTo({ url: "../bind/index?url=" + that.data.url });
     }else{
-      wx.navigateTo({ url:that.data.url });
+      if (that.data.act=='a'){
+        wx.navigateTo({ url: that.data.url });
+      }else{
+        wx.switchTab({
+          url: that.data.url
+        })
+      }
+      
     }
   },
   bindgetuserinfo:function(e){

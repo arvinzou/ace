@@ -36,7 +36,7 @@ Page({
                 function (rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
-                        if (rst.data.societyOrg.orgType == 2) {
+                        if (rst.data.regType==2&&rst.data.societyOrg.orgType == 1) {
                             that.setData({
                                 hiddenBtn: false,
                             });
@@ -46,7 +46,7 @@ Page({
                 }
             );
         }
-        if (sysUserInfo.societyOrg.orgType == 1) {
+        if (sysUserInfo.regType == 2 &&sysUserInfo.societyOrg.orgType == 1) {
             that.setData({
                 hiddenBtn: false,
             });

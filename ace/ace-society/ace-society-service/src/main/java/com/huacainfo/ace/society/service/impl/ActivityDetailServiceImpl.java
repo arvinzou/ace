@@ -182,7 +182,7 @@ public class ActivityDetailServiceImpl implements ActivityDetailService {
             o.setCreateUserName(wxUser.getNickName());
             o.setCreateUserId(unionId);
             this.activityDetailDao.insertSelective(o);
-            return new MessageResponse(ResultCode.SUCCESS, "添加活动报道完成！");
+            return new MessageResponse(ResultCode.SUCCESS, "活动报名成功！");
         }
         return new MessageResponse(ResultCode.FAIL, "报名人数已满！");
     }
