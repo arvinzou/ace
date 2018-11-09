@@ -37,9 +37,9 @@
 
                                                                     <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                                                                         <button type="button" class="btn btn-default"  onclick="setParams('status','');">全部</button>
-                                                                        <button type="button" class="btn btn-default"  onclick="setParams('status','1');">待审</button>
-                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">通过</button>
-                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">驳回</button>
+                                                                        <button type="button" class="btn btn-default"  onclick="setParams('status','2');">待审</button>
+                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">通过</button>
+                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','4');">驳回</button>
                                                                     </div>
                                                                     <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                                                                         <button type="button" class="btn btn-default"  onclick="setParams('mediaType','');">全部</button>
@@ -155,13 +155,13 @@
             </td>
 
             <td>
-                {@if item.status==1}
+                {@if item.status==2}
                 <span class="label label-lg label-info">待审</span>
-                {@else if item.status==2}
+                {@else if item.status==3}
                 <span class="label label-lg label-success">通过</span>
                 <div style="padding-top:5px">\${item.auditDate}</div>
                 <div style="padding-top:5px">\${item.statement}</div>
-                {@else if item.status==3}
+                {@else if item.status==4}
                 <span class="label label-lg label-danger">驳回</span>
                 <div style="padding-top:5px">\${item.auditDate}</div>
                 <div style="padding-top:5px">\${item.statement}</div>
@@ -169,7 +169,7 @@
              </td>
         <td><a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
                <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>--%>
-               {@if item.status==1}
+               {@if item.status==2}
                <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
                {@/if}
 
@@ -201,13 +201,13 @@
                                     <input type="hidden" name="id">
                                     <input type="hidden" name="text" value="系统强制设置状态">
                                     <label>
-                                        <input type="radio" name="rst" value="1"><span style="padding:10px">待审</span>
+                                        <input type="radio" name="rst" value="2"><span style="padding:10px">待审</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
+                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
                                     </label>
                                     <label>
-                                        <input type="radio" name="rst" value="3"><span style="padding:10px">驳回</span>
+                                        <input type="radio" name="rst" value="4"><span style="padding:10px">驳回</span>
                                     </label>
                                 </div>
                             </div>
@@ -313,10 +313,10 @@
 	                            <div class="col-md-10">
 	                                <div class="radio-group-container">
 	                                    <label>
-	                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
+	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
 	                                    </label>
 	                                    <label>
-	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
+	                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
 	                                    </label>
 	                                </div>
 	                            </div>
