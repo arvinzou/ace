@@ -101,9 +101,12 @@ Page({
 
     viewParticipants: function(e) {
         let data = e.currentTarget.dataset
+        let that=this;
         let p = data.id;
+        let flag = that.data.activityInfo.createUserId == wx.getStorageSync('userinfo').unionId
+        console.log(flag);
         wx.navigateTo({
-            url: '../participants/index?id=' + p
+            url: '../participants/index?id=' + p + "&flag=" + flag,
         })
     },
     apply:function(){

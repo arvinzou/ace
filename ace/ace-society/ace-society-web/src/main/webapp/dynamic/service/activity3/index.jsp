@@ -31,7 +31,7 @@
 
             </div>
             <div class="col-sm-8">
-                <div class="col-sm-8">
+                <div class="col-sm-12">
                     <form onsubmit="return t_query()">
                         <div class="btn-group" role="group" style="float:left;padding-right:5px">
                             <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
@@ -91,7 +91,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">个人信息详情</h4>
+                <h4 class="modal-title">活动详情</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
