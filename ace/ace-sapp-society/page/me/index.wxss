@@ -13,7 +13,7 @@
 .menu-item{
     width: 90%;
     height: 120rpx;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 0.5px solid #efefef;
     margin: 0 auto;
 }
 .menu-icon{

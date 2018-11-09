@@ -71,7 +71,7 @@ page{
   padding-left: 40rpx;
   padding-right: 40rpx;
   padding-top: 30rpx;
-  border-bottom: solid 1px #ebebeb;
+  border-bottom: solid 0.5px #ebebeb;
 }
 .report-box-second{
   flex-direction:column;
