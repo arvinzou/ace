@@ -33,10 +33,10 @@
         </view>
         <view class='time-box'>
             <view class='time-span'>
-                <view class='slot {{timeIndex == 0 ? "time-active": ""}} {{item.occupyUp =="9:00-11:00"?"occupy":""}}' bindtap='timeSelect' data-value='0'>9:00-11:00</view>
+                <view class='slot {{timeIndex == 0 ? "time-active": ""}} {{item.occupyUp =="9:00-11:00"||siteDate.time>9?"occupy":""}}' bindtap='timeSelect' data-value='0'>9:00-11:00</view>
             </view>
             <view class='time-span'>
-                <view class='slot {{timeIndex == 1? "time-active": ""}} {{item.occupyDown =="15:00-17:00"?"occupy":"" }}'  data-value='1' bindtap='timeSelect'>15:00-17:00</view></view>
+                <view class='slot {{timeIndex == 1? "time-active": ""}} {{item.occupyDown =="15:00-17:00"||siteDate.time>15?"occupy":"" }}'  data-value='1' bindtap='timeSelect'>15:00-17:00</view></view>
         </view>
     </view>
     </block>

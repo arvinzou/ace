@@ -16,7 +16,8 @@ Page({
     siteDate: null,
     timeInterval:'9:00-11:00',
     timeIndex: 0,
-    occupy:[]
+    occupy:[],
+    today:null
   },
   /**
    * 生命周期函数--监听页面加载
@@ -70,7 +71,9 @@ Page({
       }
       console.log("==========================================" + dateArry);
       that.setData({ dateArray: dateArry});
-      that.setData({ siteDate: dateArry[0]});
+      var nowDate = new Date();
+      dateArry[0].time = nowDate.getHours()+1;
+      that.setData({ siteDate: dateArry[0], today: dateArry[0]});
   },
   initsiteInfo: function () {
         var that = this;
@@ -147,10 +150,17 @@ Page({
           }
       );
   },
+
   chooseDate: function(e){
       var that = this;
       var id = e.currentTarget.dataset.id;
       var tempArr = that.data.dateArray;
+      if(id != 0){
+          tempArr[id].time = 0;
+      }else{
+          var nowDate = new Date();
+          tempArr[id].time = nowDate.getHours() + 1;
+      }
       that.setData({
           id: id,
           index: id,
