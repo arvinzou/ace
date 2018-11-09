@@ -15,9 +15,8 @@ Page({
    */
   onLoad: function (options) {
       let that = this;
-      console.log(options);
       let activityId = options.id;
-      
+      that.data.flag=options.flag;
       if (!activityId) {
           wx.navigateBack({})
           return;
@@ -45,11 +44,18 @@ Page({
     },
 
     callphone: function (e) {
-        let data = e.currentTarget.dataset
-        let pmobile = data.mobile;
-        wx.makePhoneCall({
-            phoneNumber: pmobile
-        })
+        let that=this;
+        if (that.data.flag=='false'){
+            wx.showToast({
+                title: '没有呼叫权限',
+            })
+        }else{
+            let data = e.currentTarget.dataset
+            let pmobile = data.mobile;
+            wx.makePhoneCall({
+                phoneNumber: pmobile
+            })
+        }
     },
 
   /**

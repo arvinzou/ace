@@ -31,7 +31,7 @@
 
             </div>
             <div class="col-sm-8">
-                <div class="col-sm-8">
+                <div class="col-sm-12">
                     <form onsubmit="return t_query()">
                         <div class="btn-group" role="group" style="float:left;padding-right:5px">
                             <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
