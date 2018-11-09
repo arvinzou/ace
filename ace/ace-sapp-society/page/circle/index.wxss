@@ -6,7 +6,6 @@ page{
 }
 .index{
   height: 100%;
-  overflow: auto;
 }
 .img {
   width: 80rpx;
