@@ -185,13 +185,11 @@ page{
 
 .btn-add-rpt{
   right: 40rpx;
-  bottom: 30rpx; 
   position: fixed;  
-  display: flex;  
+  bottom: 30rpx; 
   align-items: center;  
   justify-content: center;  
   border-radius: 50%;  
-  background:blue; 
 }
 .btn-img {
   width: 120rpx;
