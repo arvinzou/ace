@@ -17,6 +17,10 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
     <%--custom css--%>
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
+    <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+    <script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 
 </head>
 <body>
@@ -208,7 +212,9 @@
                         {@if item.fileType == '0'}
                         <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileName}</a>
                         {@else if item.fileType == '1'}
-                        <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
+                        <div class="my-gallery">
+                            <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
+                        </div>
                         {@else if item.fileType == '2'}
                         <video src="\${item.fileUrl}" width="300" height="150" controls></video>
                         {@/if}
@@ -254,7 +260,9 @@
                         {@if item.fileType == '0'}
                         <a href="\${item.fileUrl}" download="\${item.fileName}">\${item.fileName}</a>
                         {@else if item.fileType == '1'}
-                        <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
+                        <div class="my-gallery">
+                            <img src="\${item.fileUrl}" style="width: 320px;height: 180px;object-fit: cover"/>
+                        </div>
                         {@else if item.fileType == '2'}
                         <video src="\${item.fileUrl}" width="300" height="150" controls></video>
                         {@/if}
@@ -288,6 +296,41 @@
         </div>
     </div>
 </script>
+
+
+<div id="j-pswp" class="pswp"role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <%--==============common footer==============--%>

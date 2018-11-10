@@ -13,7 +13,7 @@
     width: 100%;
     padding-top: 38rpx;
     padding-bottom: 38rpx;
-    border-bottom: 1px solid #E5E5E5;
+    border-bottom: 0.5px solid #E5E5E5;
 }
 .content-left{
     width: 15%;
@@ -86,7 +86,7 @@
     flex: none;
     display: flex;
     background: #FDFDFD;
-    border-bottom: 1px #e5e5e5 solid;
+    border-bottom: 0.5px #e5e5e5 solid;
 }
 
 .navbar .item {

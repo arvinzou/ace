@@ -71,7 +71,7 @@ page{
   padding-left: 40rpx;
   padding-right: 40rpx;
   padding-top: 30rpx;
-  border-bottom: solid 1px #ebebeb;
+  border-bottom: solid 0.5px #ebebeb;
 }
 .report-box-second{
   flex-direction:column;
@@ -185,13 +185,11 @@ page{
 
 .btn-add-rpt{
   right: 40rpx;
-  bottom: 30rpx; 
   position: fixed;  
-  display: flex;  
+  bottom: 30rpx; 
   align-items: center;  
   justify-content: center;  
   border-radius: 50%;  
-  background:blue; 
 }
 .btn-img {
   width: 120rpx;

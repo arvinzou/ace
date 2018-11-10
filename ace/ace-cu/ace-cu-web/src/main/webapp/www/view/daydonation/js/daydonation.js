@@ -50,7 +50,7 @@ window.onload = function(){
             url: "/cu/www/project/findDonateListToday",
             type:"post",
             async:false,
-            data:{projectId: projectId, start: 0, limit: 4},
+            data:{projectId: projectId, start: 0, limit: 100},
             success:function(result){
                 if(result.status == 0) {
                     renderPage('donatiteList', result.data.rows, 'doante-tpl');

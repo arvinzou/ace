@@ -9,10 +9,6 @@
                 <view class='startTime'>活动结束时间：{{item.endDate}}</view>
                 <view class='statusTag'>活动已结束</view>
             </block>
-            <block wx:elif="{{item.dendline<nowDate}}">
-                <view class='startTime'>活动开始时间：{{item.startDate}}</view>
-                <view class='statusTag'>报名已结束</view>
-            </block>
             <block wx:elif="{{item.status==3}}">
                  <view class='startTime'>活动开始时间：{{item.startDate}}</view>
                 <view class='statusTag statusTaging'>报名进行中</view>
@@ -20,6 +16,10 @@
             <block wx:elif="{{item.status==31}}">
                  <view class='startTime'>活动结束时间：{{item.endDate}}</view>
                 <view class='statusTag statusTaging'>活动进行中</view>
+            </block>
+            <block wx:elif="{{item.dendline<nowDate}}">
+                <view class='startTime'>活动开始时间：{{item.startDate}}</view>
+                <view class='statusTag'>报名已结束</view>
             </block>
         </view>
     </view>

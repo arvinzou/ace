@@ -30,7 +30,7 @@
 .title_box{
     height: 91rpx;
     line-height: 91rpx;
-    border-bottom: 1px solid #E5E5E5;
+    border-bottom: 0.5px solid #E5E5E5;
     padding-left: 30rpx;
     padding-right: 30rpx;
     overflow: hidden;

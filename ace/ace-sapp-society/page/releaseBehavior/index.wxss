@@ -102,7 +102,7 @@ swiper{
     flex: none;
     display: flex;
     background: #fff;
-    border-bottom: 1px #e5e5e5 solid;
+    border-bottom: 0.5px #e5e5e5 solid;
 }
 
 .navbar .item {

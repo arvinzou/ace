@@ -142,7 +142,7 @@ Page({
       wx.chooseImage({
         sizeType: ['original', 'compressed'],
         sourceType: [type],
-        count: 4,
+        count: 1,
         success: function (res) {
          
           if (res.tempFilePaths.length <= 4){
