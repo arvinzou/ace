@@ -10,10 +10,10 @@
 
               <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
               <text style='padding:10rpx'>{{item.createDate}}</text>
-              <text class='status{{item.status}}' wx:if="{{item.status==1}}">待审</text>
-              <text class='status{{item.status}}' wx:if="{{item.status==2}}">通过</text>
-              <text class='status{{item.status}}' wx:if="{{item.status==3}}">退回</text>
-              <text class='status{{item.status}}' wx:if="{{item.status==3}}">{{item.auditMessage}}</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==1}}">暂存</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==2}}">待审</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==3}}">通过</text>
+              <text class='status{{item.status}}' wx:if="{{item.status==4}}">驳回</text>
             </view>
             <view class='rpt-content'>
               <view wx:if="{{item.content.length>0}}" class="content">
