@@ -1,4 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<%
-response.sendRedirect("/fop/www/index.html");
-%>
+<script>
+    location.href = "/fop/www/html/member/member.html";
+</script>
