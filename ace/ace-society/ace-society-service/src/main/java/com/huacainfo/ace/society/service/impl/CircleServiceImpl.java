@@ -113,7 +113,7 @@ public class CircleServiceImpl implements CircleService {
             return new MessageResponse(1, "用户编号不能为空！");
         }
         o.setId(GUIDUtil.getGUID());
-        o.setStatus("2");
+        o.setStatus("1");
         o.setCreateTime(new Date());
         for (CircleImg img : imgs) {
             img.setId(GUIDUtil.getGUID());
@@ -242,7 +242,7 @@ public class CircleServiceImpl implements CircleService {
         log.setRst(rst);
         log.setStatement(text);
         log.setCreateDate(new Date());
-        if("2".equals(rst)){
+        if("3".equals(rst)){
             ResultResponse pointsRst = pointsRecordService.addPoints(circle.getUid(), CoinConfigType.GROUP, id);
             if(pointsRst.getStatus()==1){
                 return new MessageResponse(pointsRst.getStatus(), pointsRst.getInfo());
