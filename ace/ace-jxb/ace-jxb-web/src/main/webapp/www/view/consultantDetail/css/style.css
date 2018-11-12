@@ -96,3 +96,7 @@ body{
 	word-break: break-all;
 	word-wrap:break-word;
 }
+
+.formcmt img{
+	width: 0.373333rem;
+}
