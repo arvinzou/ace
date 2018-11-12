@@ -46,6 +46,11 @@ public interface BisType {
      */
     String COURSE = "course";
 
+    /**
+     * 邻里圈子审核
+     */
+    String CIRCLE = "circle";
+
 
     /**
      * ================
