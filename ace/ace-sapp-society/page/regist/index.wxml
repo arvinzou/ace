@@ -148,7 +148,7 @@
                     <view class='image'>
                         <image lazy-load="true" mode='widthFix' src='../../image/icon_success.png'></image>
                     </view>
-                    <text class='fontStyle1'>发布成功</text>
+                    <text class='fontStyle1'>注册成功</text>
                     <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>
                     <view class='fontStyle2'>
                         <text>联系电话：</text>
