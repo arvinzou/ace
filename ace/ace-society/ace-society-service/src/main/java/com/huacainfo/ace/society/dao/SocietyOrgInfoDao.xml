@@ -288,6 +288,9 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.orgType !=null and condition.orgType !=&quot;&quot;">
+            and t.orgType = #{condition.orgType,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findCount" resultType="int">
