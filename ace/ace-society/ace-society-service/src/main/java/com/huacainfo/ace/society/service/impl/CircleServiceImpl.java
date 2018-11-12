@@ -108,7 +108,7 @@ public class CircleServiceImpl implements CircleService {
             return new MessageResponse(1, "用户编号不能为空！");
         }
         o.setId(GUIDUtil.getGUID());
-        o.setStatus("1");
+        o.setStatus("2");
         o.setCreateTime(new Date());
         for (CircleImg img : imgs) {
             img.setId(GUIDUtil.getGUID());
