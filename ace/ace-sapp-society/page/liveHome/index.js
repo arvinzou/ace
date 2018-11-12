@@ -50,7 +50,7 @@ Page({
   initData: function () {
     var that = this;
     that.initUserData();
-    util.request(cfg.server + "/live/www/live/getListByCompany", { page: page, companyId: cfg.companyId },
+      util.request(cfg.server + "/live/www/live/getListByCompany", { page: page, companyId: cfg.companyId, auditStatus: "3" },
       function (data) {
         console.log(data.data);
         data.data.forEach(function (o, i) {
