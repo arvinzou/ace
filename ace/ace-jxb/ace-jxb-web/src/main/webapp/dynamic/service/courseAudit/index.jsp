@@ -182,7 +182,7 @@
 
             {@if item.auditRst==1}
                 <a class="operation" href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置精品</a>
-            {@if}
+            {@/if}
 
 
         </td>
