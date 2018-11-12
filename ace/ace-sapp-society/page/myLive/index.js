@@ -176,5 +176,10 @@ Page({
     wx.navigateTo({
       url: '../rpt/index?id=' + e.currentTarget.dataset.id
     });
+  },
+  view: function(e){
+      wx.navigateTo({
+          url: '../liveView/index?id='+e.currentTarget.dataset.id,
+      })
   }
 });

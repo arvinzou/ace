@@ -14,6 +14,7 @@ Page({
         num3: parseInt(Math.random() * 100),
         userId: null,
         wxUser:null
+
     },
 
     /**

@@ -328,6 +328,7 @@ function commitComments(){
             if(result.status == 0) {
                 alert("感谢您的评价，下次我们会做得更好！");
                 initCommentsList();
+                $('#myModal').modal('hide');
             }else {
                 alert(result.info);
                 return;

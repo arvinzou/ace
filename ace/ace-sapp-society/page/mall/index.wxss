@@ -67,6 +67,9 @@
     line-height: 80rpx;
     color: #222222;
     font-size: 28rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .commodity-label{
     width: 100%;

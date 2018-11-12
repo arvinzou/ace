@@ -151,7 +151,8 @@ function commitComments(){
         success:function(result){
             if(result.status == 0) {
                 alert("感谢您的评价，下次我们会做得更好！");
-                window.location.reload();
+                initCommentsList();
+                $('#myModal').modal('hide');
             }else {
                 alert(result.info);
                 return;
