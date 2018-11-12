@@ -52,12 +52,11 @@
                 </div>
             </label>
             <label class="weui-cell weui-check__label" for="x12">
-
                 <div class="weui-cell__bd">
                     <p>女</p>
                 </div>
                 <div class="weui-cell__ft">
-                    <input type="radio" name="sex" value="2"  id="x12" \${data.o.sex==2?'checked="checked"':''}>
+                    <input type="radio" class="weui-check" name="sex" value="2" id="x12" \${data.o.sex==2?'checked="checked"':''}>
                     <span class="weui-icon-checked"></span>
                 </div>
             </label>
