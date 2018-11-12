@@ -470,14 +470,29 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 }
 
 .ui-jqdialog-content input.FormElement {
-	width: 85%
+	width: 85%;
+	background-color: #fff;
+    border: 1px solid #ebedf2;
+    outline: 0!important;
+    box-shadow: none!important;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
 }
-
+.ui-jqdialog-content input.FormElement:focus {
+    border-color: #1890ff;
+}
 .ui-jqdialog-content select.FormElement {
-	padding: 1px;
-	height: 25px;
-	line-height: 25px;
-	width: auto
+	width: 85%;
+	background-color: #fff;
+    border: 1px solid #ebedf2;
+    outline: 0!important;
+    box-shadow: none!important;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
 }
 
 .ui-jqdialog-content td.EditButton {
