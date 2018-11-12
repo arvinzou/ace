@@ -27,42 +27,42 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-                                                            <div class="col-md-3">
-                                                                <a href="add/index.jsp?id=${param.id}"  class="btn green">创建</a>
-                                                            </div>
+            <div class="col-md-3">
+                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+            </div>
 
-                                                            <div class="col-md-9">
+            <div class="col-md-9">
 
-                                                                <form onsubmit="return t_query()">
+                <form onsubmit="return t_query()">
 
-                                                                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                        <button type="button" class="btn btn-default"  onclick="setParams('status','');">全部</button>
-                                                                        <button type="button" class="btn btn-default"  onclick="setParams('status','2');">待审</button>
-                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">通过</button>
-                                                                        <button type="button" class="btn btn-default" onclick="setParams('status','4');">驳回</button>
-                                                                    </div>
-                                                                    <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                                                                        <button type="button" class="btn btn-default"  onclick="setParams('mediaType','');">全部</button>
-                                                                        <button type="button" class="btn btn-default"  onclick="setParams('mediaType','2');">图文</button>
-                                                                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','3');">音频频</button>
-                                                                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','1');">视频</button>
-                                                                    </div>
-                                                                    <div class="input-group">
-                                                                        <input type="text"
-                                                                               name="keyword"
-                                                                               class="form-control"
-                                                                               placeholder="请输入内容">
-                                                                        <span class="input-group-btn">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">待审</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">通过</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','4');">驳回</button>
+                    </div>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','');">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','2');">图文</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','3');">音频频</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','1');">视频</button>
+                    </div>
+                    <div class="input-group">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control"
+                               placeholder="请输入内容">
+                        <span class="input-group-btn">
                                                                         <button class="btn  btn-default search_btn"
                                                                                 type="submit">
                                                                                 搜索
                                                                         </button>
                                                                     </span>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
+                    </div>
+                </form>
+            </div>
 
-                                                        </div>
+        </div>
 
 
         <div class="table-scrollable">
@@ -120,62 +120,65 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-            <td>
-                {@each item.imageList as img, idx}
+        <td>
+            {@each item.imageList as img, idx}
 
-                <div class="my-gallery" style="float:left;padding:5px"><img src="\${img.url}" class="cover"/></div>
+            <div class="my-gallery" style="float:left;padding:5px"><img src="\${img.url}" class="cover"/></div>
 
-                {@/each}
-                {@if item.mediaContent}
-                    {@if item.mediaContent.indexOf('.mp3')!=-1}
-                    <div class="row"><audio src="\${item.mediaContent}" controls ></audio></div>
-                    {@/if}
-                    {@if item.mediaContent.indexOf('.mp4')!=-1}
-                    <div class="row"><video src="\${item.mediaContent}" controls style="width:160px;height:90px"></video></div>
-                    {@/if}
-                {@/if}
+            {@/each}
+            {@if item.mediaContent}
+            {@if item.mediaContent.indexOf('.mp3')!=-1}
+            <div class="row">
+                <audio src="\${item.mediaContent}" controls></audio>
+            </div>
+            {@/if}
+            {@if item.mediaContent.indexOf('.mp4')!=-1}
+            <div class="row">
+                <video src="\${item.mediaContent}" controls style="width:160px;height:90px"></video>
+            </div>
+            {@/if}
+            {@/if}
 
-            </td>
-
-
-            <td>
-                <div class="row"><strong>\${item.liveName}</strong></div>
-                <div class="row describtion">\${item.content}</div>
-
+        </td>
 
 
+        <td>
+            <div class="row"><strong>\${item.liveName}</strong></div>
+            <div class="row describtion">\${item.content}</div>
 
-            </td>
 
-            <td style="text-align:center">
-                <div class="row describtion"><img src="\${item.rpt.headimgurl}" style="max-width:30px;"></div>
-                <div class="row describtion">\${item.rpt.nickname}</div>
-                <div class="row describtion">\${item.createTime}</div>
+        </td>
 
-            </td>
+        <td style="text-align:center">
+            <div class="row describtion"><img src="\${item.rpt.headimgurl}" style="max-width:30px;"></div>
+            <div class="row describtion">\${item.rpt.nickname}</div>
+            <div class="row describtion">\${item.createTime}</div>
 
-            <td>
-                {@if item.status==2}
-                <span class="label label-lg label-info">待审</span>
-                {@else if item.status==3}
-                <span class="label label-lg label-success">通过</span>
-                <div style="padding-top:5px">\${item.auditDate}</div>
-                <div style="padding-top:5px">\${item.statement}</div>
-                {@else if item.status==4}
-                <span class="label label-lg label-danger">驳回</span>
-                <div style="padding-top:5px">\${item.auditDate}</div>
-                <div style="padding-top:5px">\${item.statement}</div>
-                {@/if}
-             </td>
+        </td>
+
+        <td>
+            {@if item.status==2}
+            <span class="label label-lg label-info">待审</span>
+            {@else if item.status==3}
+            <span class="label label-lg label-success">通过</span>
+            <div style="padding-top:5px">\${item.auditDate}</div>
+            <div style="padding-top:5px">\${item.statement}</div>
+            {@else if item.status==4}
+            <span class="label label-lg label-danger">驳回</span>
+            <div style="padding-top:5px">\${item.auditDate}</div>
+            <div style="padding-top:5px">\${item.statement}</div>
+            {@/if}
+        </td>
         <td><a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-               <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>--%>
-               {@if item.status==2}
-               <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-               {@/if}
+            <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>--%>
+            {@if item.status==2}
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+            {@/if}
 
-             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+               data-target="#modal-preview">查看</a>
 
-             <a href="javascript:del('\${item.id}');">删除</a>
+            <a href="javascript:del('\${item.id}');">删除</a>
 
         </td>
     </tr>
@@ -225,7 +228,7 @@
 
 
 <!--审核弹框-->
-<div class="modal fade"  role="dialog" id="modal-audit">
+<div class="modal fade" role="dialog" id="modal-audit">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
@@ -245,7 +248,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade"  role="dialog" id="modal-preview">
+<div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
@@ -255,9 +258,9 @@
             </div>
             <div class="modal-body">
                 <div class="form-horizontal" role="form">
-                        <div class="form-body"  id="fm-preview">
+                    <div class="form-body" id="fm-preview">
 
-                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -267,7 +270,7 @@
     </div>
 </div>
 <script id="tpl-fm" type="text/template">
-	<div class="form-body">
+    <div class="form-body">
 
         <div class="form-group">
             <label class="col-md-2 view-label">内容</label>
@@ -283,11 +286,15 @@
                 <div class="my-gallery" style="float:left;padding:5px"><img src="\${img.url}" class="cover"/></div>
 
                 {@/each}
-                {@if data.o.mediaContent.indexOf('.mp3')!=-1}
-                <div class="row"><audio src="\${data.o.mediaContent}" controls ></audio></div>
+                {@if data.o.mediaContent&&data.o.mediaContent.indexOf('.mp3')!=-1}
+                <div class="row">
+                    <audio src="\${data.o.mediaContent}" controls></audio>
+                </div>
                 {@/if}
-                {@if data.o.mediaContent.indexOf('.mp4')!=-1}
-                <div class="row"><video src="\${data.o.mediaContent}" controls style="width:160px;height:90px"></video></div>
+                {@if data.o.mediaContent&&data.o.mediaContent.indexOf('.mp4')!=-1}
+                <div class="row">
+                    <video src="\${data.o.mediaContent}" controls style="width:160px;height:90px"></video>
+                </div>
                 {@/if}
             </div>
         </div>
@@ -299,73 +306,77 @@
         </div>
         <h4>结果</h4>
         <hr>
-	                        <div class="form-group " id="operation">
-	                            <label class="col-md-2 control-label">结果</label>
-	                            <div class="col-md-10">
-	                                <div class="radio-group-container">
-	                                    <label>
-	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
-	                                    </label>
-	                                    <label>
-	                                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
-	                                    </label>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="form-group">
-	                            <label class="col-md-2 control-label">说明</label>
-	                            <div class="col-md-10">
-	                                <input type="hidden" name="id" value="\${data.o.id}">
-	                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-	                            </div>
-	                        </div>
-	                    </div>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">结果</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.o.id}">
+                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
+            </div>
+        </div>
+    </div>
 
 </script>
 
 <script id="tpl-preview" type="text/template">
 
 
-<div class="form-group">
-                     <label class="col-md-2 view-label">内容</label>
-                     <div class="col-md-10">
-                           \${data.o.content}
-                     </div>
-                    </div>
-                                  <div class="form-group">
-                     <label class="col-md-2 view-label">多媒体资源</label>
-                     <div class="col-md-10">
-                         {@each data.o.imageList as img, idx}
+    <div class="form-group">
+        <label class="col-md-2 view-label">内容</label>
+        <div class="col-md-10">
+            \${data.o.content}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">多媒体资源</label>
+        <div class="col-md-10">
+            {@each data.o.imageList as img, idx}
 
-                         <div class="my-gallery" style="float:left;padding:5px"><img src="\${img.url}" class="cover"/></div>
+            <div class="my-gallery" style="float:left;padding:5px"><img src="\${img.url}" class="cover"/></div>
 
-                         {@/each}
-                         {@if data.o.mediaContent.indexOf('.mp3')!=-1}
-                         <div class="row"><audio src="\${data.o.mediaContent}" controls ></audio></div>
-                         {@/if}
-                         {@if data.o.mediaContent.indexOf('.mp4')!=-1}
-                         <div class="row"><video src="\${data.o.mediaContent}" controls style="width:160px;height:90px"></video></div>
-                         {@/if}
-                     </div>
-                    </div>
-                                  <div class="form-group">
-                     <label class="col-md-2 view-label">日期</label>
-                     <div class="col-md-10">
-                           \${data.o.createTime}
-                     </div>
-                    </div>
+            {@/each}
+            {@if data.o.mediaContent.indexOf('.mp3')!=-1}
+            <div class="row">
+                <audio src="\${data.o.mediaContent}" controls></audio>
+            </div>
+            {@/if}
+            {@if data.o.mediaContent.indexOf('.mp4')!=-1}
+            <div class="row">
+                <video src="\${data.o.mediaContent}" controls style="width:160px;height:90px"></video>
+            </div>
+            {@/if}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">日期</label>
+        <div class="col-md-10">
+            \${data.o.createTime}
+        </div>
+    </div>
 
-                                  <div class="form-group">
-                     <label class="col-md-2 view-label">源</label>
-                     <div class="col-md-10">
-                         <div class="row describtion"><img src="\${data.o.rpt.headimgurl}" style="max-width:30px;"></div>
-                         <div class="row describtion">\${data.o.rpt.nickname}</div>
-                         <div class="row describtion">\${data.o.createTime}</div>
-                     </div>
-                    </div>
-                             </script>
+    <div class="form-group">
+        <label class="col-md-2 view-label">源</label>
+        <div class="col-md-10">
+            <div class="row describtion"><img src="\${data.o.rpt.headimgurl}" style="max-width:30px;"></div>
+            <div class="row describtion">\${data.o.rpt.nickname}</div>
+            <div class="row describtion">\${data.o.createTime}</div>
+        </div>
+    </div>
+</script>
 
-<div id="j-pswp" class="pswp"role="dialog" aria-hidden="true">
+<div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
     <div class="pswp__bg"></div>
     <div class="pswp__scroll-wrap">
         <div class="pswp__container">
@@ -398,24 +409,26 @@
             </div>
         </div>
     </div>
-<style>
-    .cover{
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-    .describtion{
-        padding:5px;
-    }
-    .cost{
-          padding-top: 5px;
-          padding-left:15px;
-          color:#FE6500;
-    }
-</style>
-<jsp:include page="/dynamic/common/footer.jsp"/>
-<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
-<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
-<script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
-<script src="js/act.js?v=${cfg.version}"></script>
+    <style>
+        .cover {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+        }
+
+        .describtion {
+            padding: 5px;
+        }
+
+        .cost {
+            padding-top: 5px;
+            padding-left: 15px;
+            color: #FE6500;
+        }
+    </style>
+    <jsp:include page="/dynamic/common/footer.jsp"/>
+    <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+    <script src="js/act.js?v=${cfg.version}"></script>
 </html>
