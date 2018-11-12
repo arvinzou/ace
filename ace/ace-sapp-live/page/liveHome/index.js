@@ -27,15 +27,14 @@ Page({
     listLive: [],
     startX: 0, //开始坐标
     startY: 0,
-    nameDisplay:'none'
+    nameDisplay:'none',
+    sysUserInfo: null
   },
-  onReady: function (res) {
 
-  },
   onLoad: function () {
     var that = this;
     if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../myLive/index" });
+      wx.navigateTo({ url: "../userinfo/index?url=../liveHome/index" });
     } else {
       that.initData();
       that.setData({
@@ -47,10 +46,10 @@ Page({
     let that = this;
     page += 1;
     that.initData();
-
   },
   initData: function () {
     var that = this;
+    that.initUserData();
     util.request(cfg.server + "/live/www/live/getListByCompany", { page: page, companyId: cfg.companyId },
       function (data) {
         console.log(data.data);
@@ -66,5 +65,25 @@ Page({
       }
     );
   },
+    initUserData: function () {
+        var that = this;
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    util.setSysUser(ret.data);
+                    that.setData({ sysUserInfo: ret.data});
+                } else {
+                    wx.navigateTo({ url: "../regist/index" });
+                }
+            }
+        );
+    },
 
+    add: function () {
+        let that = this;
+        wx.navigateTo({
+            url: '../liveCsl/index?act=add',
+        });
+    },
 });

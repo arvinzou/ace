@@ -60,7 +60,7 @@
   -webkit-transform: translateX(150rpx);
   transform: translateX(150rpx);
   margin-left: -150rpx;
-  padding: 30rpx;
+  padding: 10rpx;
 }
 .opt {
   width: 150rpx;
@@ -183,11 +183,11 @@
 }
 .status-box {
 	position: absolute;
-  left: 15rpx;
+    left: 15rpx;
 	bottom:30rpx;
 	border-radius: 5rpx;
 	background-color: #1a9fff;
-  width: 110rpx;
+  width: 115rpx;
   padding: 5rpx;
 }
 .status-icon-text{

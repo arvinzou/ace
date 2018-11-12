@@ -2,7 +2,6 @@ var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
 const app = getApp();
-
 var wxuser = {
   headimgurl: "",
   nickname: "",
@@ -152,6 +151,7 @@ Page({
     that.setData({
       rtmpurl: cfg.rtmpserver + userinfo.userProp.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
     });
+    
     if (pusherStatus == 'stop') {
       wx.showModal({
         title: '系统提示',
@@ -480,12 +480,12 @@ Page({
       });
     }
   },
-     rpt: function (e) {
-       console.log(e);
-       var that = this;
-       wx.navigateTo({
-         url: '../rpt/index?id=' + e.currentTarget.dataset.id
-       });
-     }
+  rpt: function (e) {
+    console.log(e);
+    var that = this;
+    wx.navigateTo({
+      url: '../rpt/index?id=' + e.currentTarget.dataset.id
+    });
+  }
 
 });

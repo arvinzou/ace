@@ -36,14 +36,6 @@ Page({
   onReady: function (res) {
     console.log('index.js.onReady');
     var that = this;
-    wx.setNavigationBarColor({
-      frontColor: cfg.frontColor,
-      backgroundColor: cfg.backgroundColor,
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    });
   },
 
   onLoad: function (param) {
