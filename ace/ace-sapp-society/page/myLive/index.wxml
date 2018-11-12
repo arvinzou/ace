@@ -3,8 +3,7 @@
 
   <view class='live-list'>
     <view  wx:for="{{listLive}}" wx:key="" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
-
-      <view class="content">
+      <view class="content" data-id='{{item.id}}' bindtap='view'>
         <view class='list-item-cover'>
           <image src="{{item.imageSrc}}" mode="aspectFill" class='coverImg' />
           <view class="status-box">
@@ -34,11 +33,12 @@
       </view>
     </view>
   </view>
-
 </view>
 
 
+<block wx:if='{{sysUserInfo.regType == "2"}}'>
   <cover-view class="btn-add" bindtap="add">
     <cover-image class="btn-img" src="../../image/添加.png" />
   </cover-view>
+</block>
 
