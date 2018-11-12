@@ -31,7 +31,10 @@ Page({
     displayVideo: 'hide',
     displayAudio: 'hide',
     playimg: "../../image/record_on.png",
-    recorderStatus: false
+    recorderStatus: false,
+    isRegist: false,
+    userinfoData: null,
+    wxUser: null
   },
   onReady: function (res) {
     console.log('index.js.onReady');
@@ -48,15 +51,25 @@ Page({
 
   onLoad: function (param) {
     var that = this;
-    console.log('index.js.onLoad');
-    console.log(param);
-    this.setData(param);
-    this.setData({
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
-      checkImageUrl: cfg.checkImageUrl,
-      userinfo: wx.getStorageSync('userinfo'),
-      fileList: []
-    });
+      if (!util.is_login()) {
+          wx.navigateTo({ url: "../userinfo/index?url=../circleAdd/index&type=navigateTo" });
+      } else {
+          if (wx.getStorageSync('userinfo')) {
+              that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') });
+              that.initUserData();
+              that.initWxUserData();
+              console.log('index.js.onLoad');
+              console.log(param);
+              this.setData(param);
+              this.setData({
+                  WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
+                  checkImageUrl: cfg.checkImageUrl,
+                  userinfo: wx.getStorageSync('userinfo'),
+                  fileList: []
+              });
+          }
+      }
+   
   },
   formSubmit: function (e) {
     var that = this;
@@ -378,5 +391,36 @@ Page({
       this.innerAudioContext =wx.createInnerAudioContext();
       this.innerAudioContext.src=url;
       this.innerAudioContext.play();
-    }
+    },
+    initUserData: function () {
+        var that = this;
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    util.setSysUser(ret.data);
+                    that.setData({
+                        userinfoData: ret.data,
+                        isRegist: true,
+                    });
+                } else {
+                    that.setData({
+                        isRegist: false
+                    });
+                    wx.navigateTo({ url: "../regist/index" });
+                }
+            }
+        );
+    },
+    initWxUserData: function () {
+        var that = this;
+        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', { "id": wx.getStorageSync('WX-SESSION-ID') },
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    that.setData({ wxUser: ret.value });
+                }
+            }
+        );
+    },
 });

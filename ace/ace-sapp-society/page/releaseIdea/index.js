@@ -31,7 +31,10 @@ Page({
       fileUrl: '../../image/addFile.png',
       isUpload: false,
       category: '1',
-      solutionNum: 0
+      solutionNum: 0,
+      isRegist: false,
+      userinfoData: null,
+      wxUser: null
   },
 
   /**
@@ -41,6 +44,12 @@ Page({
       var that = this;
       if (!util.is_login()) {
           wx.navigateTo({ url: "../userinfo/index?url=../releaseIdea/index&type=navigateTo" });
+      }else{
+          if (wx.getStorageSync('userinfo')) {
+              that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') });
+              that.initUserData();
+              that.initWxUserData();
+          }
       }
   },
   formSubmit: function(e){
@@ -178,6 +187,37 @@ Page({
             fileList.remove(idx);
         }
         that.setData({ files: files });
+    },
+    initUserData: function () {
+        var that = this;
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    util.setSysUser(ret.data);
+                    that.setData({
+                        userinfoData: ret.data,
+                        isRegist: true,
+                    });
+                } else {
+                    that.setData({
+                        isRegist: false
+                    });
+                    wx.navigateTo({ url: "../regist/index" });
+                }
+            }
+        );
+    },
+    initWxUserData: function () {
+        var that = this;
+        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', { "id": wx.getStorageSync('WX-SESSION-ID') },
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    that.setData({ wxUser: ret.value });
+                }
+            }
+        );
     },
   /**
    * 生命周期函数--监听页面初次渲染完成
