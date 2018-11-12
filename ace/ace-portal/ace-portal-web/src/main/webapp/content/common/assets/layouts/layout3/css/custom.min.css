@@ -238,3 +238,9 @@ body{
 	width: 30px;
 	height: 30px;
 }
+.combo .combo-text {
+    border: 1px solid #ebedf2;
+    height: 34px;
+    font-size: 14px;
+    line-height: 1.42857;
+}

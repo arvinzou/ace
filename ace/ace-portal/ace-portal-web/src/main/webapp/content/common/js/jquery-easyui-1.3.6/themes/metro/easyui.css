@@ -284,16 +284,14 @@
   white-space: nowrap;
   margin: 0;
   padding: 0;
+  background-color: #fff;
   border-width: 1px;
   border-style: solid;
+  border-color: #ebedf2;
   overflow: hidden;
   vertical-align: middle;
 }
 .combo .combo-text {
-  font-size: 12px;
-  border: 0px;
-  line-height: 20px;
-  height: 20px;
   margin: 0;
   padding: 0px 2px;
   *margin-top: -1px;
@@ -302,6 +300,10 @@
   _height: 18px;
   _line-height: 18px;
   vertical-align: baseline;
+  border-width: 0px;
+  height: 34px;
+  font-size: 14px;
+  line-height: 1.42857;
 }
 .combo-arrow {
   width: 18px;

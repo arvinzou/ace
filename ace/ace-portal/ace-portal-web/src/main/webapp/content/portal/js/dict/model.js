@@ -62,7 +62,7 @@ var _colModel = function() {
 					textField : 'name'
 				},
 				editoptions : {
-					style : 'width:176px;line-height: 25px;height: 25px;'
+					style : 'width:176px;line-height: 34px;height: 34px;'
 				},
 				renderer : function(value, cur) {
 					return $.jgrid.getAccessor(cur, 'categoryName');
