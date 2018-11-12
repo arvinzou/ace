@@ -8,15 +8,19 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.StringUtils;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.AuditState;
+import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.constant.CoinConfigType;
 import com.huacainfo.ace.society.dao.CircleDao;
 import com.huacainfo.ace.society.dao.CircleImgDao;
 import com.huacainfo.ace.society.dao.CircleLogDao;
 import com.huacainfo.ace.society.dao.CoinConfigDao;
 import com.huacainfo.ace.society.model.*;
+import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.CircleService;
 import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.vo.CircleQVo;
@@ -45,10 +49,11 @@ public class CircleServiceImpl implements CircleService {
 
     @Autowired
     private CircleLogDao circleLogDao;
-@Autowired
+    @Autowired
     private PointsRecordService pointsRecordService;
 
-
+    @Autowired
+    private AuditRecordService auditRecordService;
     @Autowired
     private SqlSessionTemplate sqlSession;
 
@@ -117,6 +122,9 @@ public class CircleServiceImpl implements CircleService {
             this.circleImgDao.insert(img);
         }
         this.circleDao.insert(o);
+
+        //自动送审
+        sendAudit(o.getId(), o.getUid());
         return new MessageResponse(0, "提交成功！");
     }
 
@@ -288,5 +296,32 @@ public class CircleServiceImpl implements CircleService {
     public MessageResponse updateAddLike(String id){
         this.circleDao.updateAddLike(id);
         return new MessageResponse(0, "点赞成功！");
+    }
+
+    /**
+     * 邻里圈子自动送审
+     * @param id
+     * @param unionId
+     * @return
+     */
+    @Override
+    public ResultResponse sendAudit(String id, String unionId) {
+        CircleVo circleVo = circleDao.selectVoByPrimaryKey(id);
+        if (null == circleVo) {
+            return new ResultResponse(ResultCode.FAIL, "邻里圈子数据丢失！");
+        }
+        //
+        if (AuditState.SUBMIT_AUDIT.equals(circleVo.getStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "请勿重复送审");
+        }
+        //提交审核
+        auditRecordService.submit(GUIDUtil.getGUID(), BisType.CIRCLE, id, unionId);
+        //更新单据状态
+        Circle record = new Circle();
+        record.setId(id);
+        record.setStatus(AuditState.SUBMIT_AUDIT);
+        circleDao.updateByPrimaryKey(record);
+
+        return new ResultResponse(ResultCode.SUCCESS, "送审成功");
     }
 }
