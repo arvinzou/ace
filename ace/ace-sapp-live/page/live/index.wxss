@@ -62,9 +62,15 @@ page{
   margin: 2rpx auto;
 }
 .controls{
-  position:fixed;
+  position:absolute;
   right:20rpx;
   top:140rpx;
+  z-index: 99999;
+}
+.controls-camera{
+  position:absolute;
+  right:20rpx;
+  top:260rpx;
 }
 .info-tip{
   position: fixed;  
@@ -331,14 +337,14 @@ width: 80%;
     flex: none;
     display: flex;
     background: #FDFDFD;
-    border-bottom: 1px #e5e5e5 solid;
+    border-bottom: 0.5px #e5e5e5 solid;
 }
 
 .navbar .item {
     position: relative;
     flex: auto;
     text-align: center;
-    line-height: 6vh;
+    line-height: 7vh;
 }
 
 .navbar .item.active {
@@ -483,7 +489,7 @@ max-height: 80rpx;
   background:#FDFDFD;
   padding-top: 15rpx;
   padding-bottom: 0rpx;
-  border-top: 1px #f0f0f0 solid;
+  border-top: 0.5px #f0f0f0 solid;
 }
 .chat-icon{
   max-width: 50rpx;
@@ -663,20 +669,18 @@ max-height: 80rpx;
     -webkit-appearance:none;
 }
 .controls-screenopt{
-  position:fixed;
+  position:absolute;
   right:20rpx;
   top:20rpx;
 }
-
-
 .btn-add{
   right: 40rpx;
-  bottom: 30rpx;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+  bottom: 30rpx; 
+  position: fixed;  
+  display: flex;  
+  align-items: center;  
+  justify-content: center; 
+  border-radius: 50%; 
 }
 .btn-img {
   width: 120rpx;

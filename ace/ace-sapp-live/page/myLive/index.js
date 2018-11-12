@@ -10,14 +10,16 @@ Page({
     items: [],
     listLive:[],
     startX: 0, //开始坐标
-    startY: 0
+    startY: 0,
+    sysUserInfo: wx.getStorageSync("sysUserInfo")
   },
   onReady: function (res) {
-
-  },
-  onShow: function () {
     var that = this;
     that.initData();
+  },
+  onShow: function () {
+      var that=this;
+      that.initData();
   },
   onLoad: function () {
     var that = this;
@@ -176,4 +178,9 @@ Page({
       url: '../rpt/index?id=' + e.currentTarget.dataset.id
     });
   },
+  view: function(e){
+      wx.navigateTo({
+          url: '../liveView/index?id='+e.currentTarget.dataset.id,
+      })
+  }
 });

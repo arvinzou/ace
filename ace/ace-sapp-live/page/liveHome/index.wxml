@@ -29,3 +29,9 @@
 
   </view>
 </view>
+
+<block wx:if='{{sysUserInfo.regType == "2"}}'>
+ <cover-view class="btn-add" bindtap="add" id='{{sysUserInfo.regType}}'>
+    <cover-image class="btn-img" src="../../image/添加.png" />
+  </cover-view>
+</block>
