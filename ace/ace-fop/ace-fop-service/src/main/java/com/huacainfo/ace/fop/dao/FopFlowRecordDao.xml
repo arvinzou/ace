@@ -235,7 +235,11 @@
 
     <select id="findList" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
+       a.fullName as requestName,
+        p.name as personId,
+        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -250,7 +254,15 @@
 
     <sql id="whereCondition">
         from fop_flow_record t
+        inner join (select id,fullName from fop.fop_company
+        union all
+        select id,fullName from fop.fop_association) a on t.fromId=a.id
+        left join portal.users p on t.personId=p.user_id
+
         where t.status <![CDATA[ <> ]]> 1
+        <if test="condition.name!=null">
+            and a.fullName like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
         <if test="condition.id!=null and condition.id!=&quot;&quot;">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
