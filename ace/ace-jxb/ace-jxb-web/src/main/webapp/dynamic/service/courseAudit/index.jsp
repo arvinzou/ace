@@ -180,7 +180,11 @@
             <a class="operation" href="javascript:void(0);" id="auditOpt\${index}"  onclick="openAudit('\${item.id}','\${index}');">审核</a>
             {@/if}
 
-            <a class="operation" href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置精品</a>
+            {@if item.auditRst==1}
+                <a class="operation" href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置精品</a>
+            {@/if}
+
+
         </td>
     </tr>
     {@/each}
