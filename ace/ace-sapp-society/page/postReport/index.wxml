@@ -13,7 +13,7 @@
                 <view bindtap='{{item.editing!=true?"showTool":""}}' wx:for="{{content}}" data-type='{{item.type}}' wx:for-item="item" id='{{item.id}}' class='ele-content {{clickObject==item.id?"ele-action":""}}'>
                     <block wx:if="{{item.type==1}}">
                         <view class='textStyle' wx-if="{{!item.editing}}">{{item.content}}</view>
-                        <textarea class='textStyle' wx-if="{{item.editing}}"  show-confirm-bar='' bindblur="endEdit" value='{{item.content}}' adjust-position auto-focus auto-height></textarea>
+                        <textarea class='textStyle' maxlength='-1' wx-if="{{item.editing}}"  show-confirm-bar='' bindblur="endEdit" value='{{item.content}}' adjust-position auto-focus auto-height></textarea>
                     </block>
                     <block wx:else>
                         <image lazy-load="true" mode="widthFix" src='{{item.content}}' />
