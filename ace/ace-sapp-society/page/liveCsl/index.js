@@ -30,7 +30,10 @@ Page({
     ],
     typeCodes: ["01", "02", "03", "04"],
     types: ["亲子关系", "婚姻家庭", "职场压力",'其他'],
-    files:[]
+    files:[],
+    isRegist: false,
+    userinfoData: null,
+    wxUser: null
   },
   onReady: function (res) {
   },
@@ -83,14 +86,28 @@ Page({
     var that = this;
     if (!util.isLogin()) {
       wx.navigateTo({ url: "../userinfo/index?url=../liveCls/index?id=" + params.id });
+    }else{
+        if (wx.getStorageSync('userinfo')) {
+            that.initUserData();
+            that.initWxUserData();
+            that.setData({
+                userinfo: wx.getStorageSync('userinfo'),
+                WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
+            });
+            console.log(param);
+            that.setData({ param: param });
+            that.initData(param);
+        }
     }
-    that.setData({
-      userinfo: wx.getStorageSync('userinfo'),
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
-    });
-    console.log(param);
-    that.setData({param: param});
-    that.initData(param);
+    
+  },
+  onShow: function(){
+      var that = this;
+      if (wx.getStorageSync('userinfo')) {
+          that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') })
+          that.initUserData();
+          that.initWxUserData();
+      }
   },
   formSubmit: function (e) {
     var that = this;
@@ -269,4 +286,35 @@ Page({
     var that=this;
     that.data.formData.typeIndex = e.detail.value;
   },
+    initUserData: function () {
+        var that = this;
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    util.setSysUser(ret.data);
+                    that.setData({
+                        userinfoData: ret.data,
+                        isRegist: true,
+                    });
+                } else {
+                    that.setData({
+                        isRegist: false
+                    });
+                    wx.navigateTo({ url: "../regist/index" });
+                }
+            }
+        );
+    },
+    initWxUserData: function () {
+        var that = this;
+        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', { "id": wx.getStorageSync('WX-SESSION-ID') },
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    that.setData({ wxUser: ret.value });
+                }
+            }
+        );
+    },
 });

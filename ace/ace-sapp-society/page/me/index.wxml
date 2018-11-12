@@ -20,10 +20,20 @@
                 </view>
                 <view>
                     <view wx:if='{{ userinfoData.regType == 2}}'>
-                        {{ userinfoData.societyOrg.accPoints- userinfoData.societyOrg.validPoints}}
+                        <block wx:if='{{userinfoData.societyOrg.accPoints==undefined && userinfoData.societyOrg.validPoints==undefined}}'>
+                        0
+                        </block>
+                        <block wx:else>
+                         {{ userinfoData.societyOrg.accPoints- userinfoData.societyOrg.validPoints}}
+                        </block>
                     </view>
                     <view wx:else>
+                        <block wx:if='{{userinfoData.person.accPoints==undefined && userinfoData.person.validPoints==undefined }}'>
+                        0
+                        </block>
+                        <block wx:else>
                         {{ userinfoData.person.accPoints- userinfoData.person.validPoints}}
+                        </block>
                     </view>
                     <view>爱心币支出</view>
                 </view>

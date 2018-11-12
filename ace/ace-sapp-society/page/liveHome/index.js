@@ -80,4 +80,10 @@ Page({
         );
     },
 
+    add: function () {
+        let that = this;
+        wx.navigateTo({
+            url: '../liveCsl/index?act=add',
+        });
+    },
 });
