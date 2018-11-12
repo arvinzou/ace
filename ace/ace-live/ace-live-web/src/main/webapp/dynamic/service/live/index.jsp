@@ -128,9 +128,9 @@
         </td>
         <td  >\${item.nop}/\${item.pop}</td>
         <td >
-            {@if item.auditStatus==1 || item.auditStatus==0}
+            {@if item.auditStatus==0}
             <span class="label label-lg label-info">暂存</span>
-            {@else if item.auditStatus==2}
+            {@else if item.auditStatus==2 || item.auditStatus==1}
             <span class="label label-lg label-info">待审</span>
             <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
