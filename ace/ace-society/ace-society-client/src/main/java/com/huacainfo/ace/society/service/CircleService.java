@@ -3,6 +3,7 @@ package com.huacainfo.ace.society.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.Circle;
 import com.huacainfo.ace.society.model.CircleImg;
@@ -49,6 +50,14 @@ public interface CircleService {
      * @version: 2018-09-20
      */
     MessageResponse insertCircle(Circle o, List<CircleImg> imgs) throws Exception;
+
+    /**
+     * 邻里圈子送审
+     * @param id
+     * @param unionId
+     * @return
+     */
+    ResultResponse sendAudit(String id, String unionId);
 
     /**
      * @throws
