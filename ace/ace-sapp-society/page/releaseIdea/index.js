@@ -230,7 +230,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+      var that = this;
+      if (wx.getStorageSync('userinfo')) {
+          that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') })
+          that.initUserData();
+          that.initWxUserData();
+      }
   },
 
   /**

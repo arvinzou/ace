@@ -71,6 +71,14 @@ Page({
       }
    
   },
+  onShow: function(){
+      var that = this;
+      if (wx.getStorageSync('userinfo')) {
+          that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') })
+          that.initUserData();
+          that.initWxUserData();
+      }
+  },
   formSubmit: function (e) {
     var that = this;
     that.setData({
