@@ -104,7 +104,7 @@ var _colModel = function() {
 				lines: false
 			},
 			editoptions: {
-				style: 'width:250px;line-height: 30px;height: 30px;'
+				style: 'width:250px;line-height: 34px;height: 34px;'
 			},
 			renderer: function(value, cur) {
 				return $.jgrid.getAccessor(cur, 'departmentName');
@@ -124,7 +124,7 @@ var _colModel = function() {
 			editable: false,
 			edittype: "combotree",
 			editoptions: {
-				style: 'width:175px;line-height: 25px;height: 25px;',
+				style: 'width:175px;line-height: 34px;height: 34px;',
 				readonly: true
 			},
 			dataoptions: {
@@ -142,7 +142,7 @@ var _colModel = function() {
 			hidden: true,
 			edittype: "datebox",
 			editoptions: {
-				style: 'width:175px;height:30px'
+				style: 'width:175px;line-height: 34px;height: 34px;'
 			},
 			dataoptions: {
 				formatter: function(date) {

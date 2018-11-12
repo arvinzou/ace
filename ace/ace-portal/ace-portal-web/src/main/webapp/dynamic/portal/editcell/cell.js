@@ -61,7 +61,7 @@ $(function() {
 				$('#grid').jqGrid('setColProp', 'cityname', {
 					edittype : "combotree",
 					editoptions : {
-						style:'width:175px;line-height: 25px;height: 25px;'
+						style:'width:175px;line-height: 34px;height: 34px;'
 					},
 					dataoptions:{
 						url: contextPath +'/system/selectProvinceTreeList.do',
@@ -92,7 +92,7 @@ $(function() {
 			editable : true,
 			edittype : "combotree",
 			editoptions : {
-				style:'width:175px;line-height: 25px;height: 25px;'
+				style:'width:175px;line-height: 34px;height: 34px;'
 			},
 			dataoptions:{
 				url: contextPath +'/system/selectProvinceTreeList.do',

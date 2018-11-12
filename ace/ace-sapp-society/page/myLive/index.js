@@ -10,7 +10,8 @@ Page({
     items: [],
     listLive:[],
     startX: 0, //开始坐标
-    startY: 0
+    startY: 0,
+    sysUserInfo: wx.getStorageSync("sysUserInfo")
   },
   onReady: function (res) {
     var that = this;
