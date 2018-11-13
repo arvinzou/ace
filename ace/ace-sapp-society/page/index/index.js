@@ -39,6 +39,8 @@ Page({
                       ret.data[0].dendline = ret.data[0].dendline.substring(0,16);
                       ret.data[0].startDate = ret.data[0].startDate.substring(0, 16);
                       ret.data[0].endDate = ret.data[0].endDate.substring(0, 16);
+
+                      ret.data[0].range = util.formateStringToDate(ret.data[0].dendline).getTime() - new Date().getTime();
                       that.setData({ activity: ret.data[0] });
                   }
                   
