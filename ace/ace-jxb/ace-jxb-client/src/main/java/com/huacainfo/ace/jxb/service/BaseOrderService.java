@@ -159,4 +159,14 @@ public interface BaseOrderService {
      * 提交投诉
      */
     ResultResponse submitComplaint(OrderComplaint complaint);
+
+    /**
+     * 创建打赏订单
+     *
+     * @param unionid 用户ID， 可选
+     * @param data    订单参数，必选
+     * @return ResultResponse
+     * @throws Exception
+     */
+    ResultResponse createTipOrder(String unionid, String data) throws Exception;
 }
