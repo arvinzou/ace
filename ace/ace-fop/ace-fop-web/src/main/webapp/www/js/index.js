@@ -4,6 +4,7 @@ var index = 0;
 var myMap;
 var brandIndex =1 ;
 var app =angular.module(ngAppName, []);
+
 app.controller(ngControllerName,function($scope) {
     /**
      * 查询公告栏信息
