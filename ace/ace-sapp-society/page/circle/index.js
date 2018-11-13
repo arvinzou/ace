@@ -101,7 +101,7 @@ Page({
   },
   initData:function(){
     var that=this;
-      util.request(cfg.server + "/society/circle/www/myCircleList", { start: start, limit: 1000, status:"3"},
+      util.request(cfg.server + "/society/circle/www/getList", { start: start, limit: 1000, status:"3"},
       function (data) {
         that.setData({
           list: data
