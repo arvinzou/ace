@@ -25,9 +25,17 @@
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from fop_flow_record
-        where id = #{id,jdbcType=VARCHAR}
+        a.fullName as requestName,
+        p.name as personId,
+        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        from fop_flow_record t
+        left join (select id,fullName from fop.fop_company
+        union all
+        select id,fullName from fop.fop_association) a on t.fromId=a.id
+        left join portal.users p on t.personId=p.user_id
+
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from fop_flow_record
