@@ -214,22 +214,18 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopFlowRecordVo">
         <result column="requestName" jdbcType="CHAR" property="requestName"/>
     </resultMap>
-    <sql id="Vo_Column_List">
-        CASE
-        when t.flowType in ('0','3')
-        then (select fullName from fop.fop_company where id = t.fromId)
-        when t.flowType = '1'
-        then (select fullName from fop.fop_association where id = t.fromId)
-        END as requestName
-        ,
-        (select name from portal.users p WHERE p.user_id=t.personId) as personId,
-        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
-        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
-    </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
+        a.fullName as requestName,
+        p.name as personId,
+        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         from fop_flow_record t
+        left join (select id,fullName from fop.fop_company
+        union all
+        select id,fullName from fop.fop_association) a on t.fromId=a.id
+        left join portal.users p on t.personId=p.user_id
+
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
