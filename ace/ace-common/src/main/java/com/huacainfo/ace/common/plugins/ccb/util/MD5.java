@@ -19,12 +19,11 @@ public class MD5
     }
 
     /**
-     * ������ϢժҪ��
+     * 计算消息摘要。
      *
-     * @param data   ����ժҪ�����ݡ�
-     * @param offset ����ƫ�Ƶ�ַ��
-     * @param length ���ݳ��ȡ�
-     * @return ժҪ�����(16�ֽ�)
+     * @param str    计算摘要的数据。
+     * @param offset 数据偏移地址。
+     * @return 摘要结果。(16字节)
      */
     public static String md5Str(String str, int offset) {
         try {
@@ -54,7 +53,7 @@ public class MD5
     }
 
     /**
-     * ���ֽ�ת��Ϊ��Ӧ��16��������
+     * 将字节转换为对应的16进制明文
      *
      * @param b byte
      * @return String

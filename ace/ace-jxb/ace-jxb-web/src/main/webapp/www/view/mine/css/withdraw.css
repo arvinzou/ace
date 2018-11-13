@@ -1,0 +1,191 @@
+body{
+    background:rgba(247,249,252,1) !important;
+}
+*{
+    font-weight:500;
+}
+div p{
+    margin: 0;
+}
+
+.money_card{
+    width:9.2rem;
+    background:rgba(255,255,255,1);
+    border-radius:0.266666rem;
+    padding: 0.533333rem  0.533333rem 0.8rem;
+    margin:0.4rem auto 0;
+}
+
+.money_card .title{
+    font-size:0.373333rem;
+    color:rgba(28,40,67,1);
+}
+
+.money_card .form{
+    font-size:1.066666rem;
+    font-weight:bold;
+    color:rgba(28,40,67,1);
+    display: flex;
+    flex-direction: row;
+    border-bottom: 2px solid rgba(247,248,252,1);
+}
+
+.money_card .form input{
+   width: 100%;
+    border: 0px;
+}
+
+.money_card .form input:focus{
+    outline:none;
+    -webkit-appearance:none;
+}
+
+
+.money_card .info{
+    font-size:0.346666rem;
+    line-height: 1.413333rem;
+    color:rgba(121,128,146,1);
+}
+
+.money_card .red_text{;
+    color:#FF3756;
+    display: none;
+}
+
+.money_card .clickBtn,.rst_model .clickBtn{
+    width:6.4rem;
+    height:1.173333rem;
+    background:rgba(92,225,214,1);
+    border-radius:0.586666rem;
+    line-height:1.173333rem;
+    font-size:0.453333rem;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    text-align: center;
+    margin: auto;
+    opacity: 0.6;
+}
+
+.money_card .action_btn{
+    opacity: 1;
+}
+
+.rules{
+    position: absolute;
+    bottom: 1.066666rem;
+    width: 100%;
+}
+
+.rules .text{
+    font-size:0.373333rem;
+    font-weight:500;
+    text-decoration:underline;
+    color:rgba(255,124,18,1);
+    width: 2.4rem;
+    text-align: center;
+    margin: auto;
+}
+
+.rules_text{
+    position: absolute;
+    background:rgba(255,255,255,1);
+    padding: 0.666666rem 0.4rem 1.066666rem;
+    bottom: -1rem;
+    width: 100%;
+    opacity: 0;
+    transition:bottom 0.5s, opacity  0.5s;
+    -webkit-transition:bottom 0.5s, opacity  0.5s;/* Safari and Chrome */
+}
+
+.rules_text p{
+    font-size:0.48rem;
+    font-weight:bold;
+    color:rgba(0,0,0,1);
+    text-align: center;
+    margin-bottom: 0.7rem;
+}
+
+.rules_text ul{
+    color: #A0A7B6;
+    font-size: 0.36rem;
+    list-style-type:circle;
+    padding-left: 0.666666rem;
+    line-height: 0.65rem;
+
+}
+
+.rules_text ul li{
+    margin-bottom: 0.133333rem;
+}
+
+.rules_text ul li span{
+    text-decoration:underline;
+}
+
+.rules_text ul li a{
+    color: #5CE1D6;
+}
+
+.my_model{
+    opacity:0;
+    z-index: -1;
+    transition:z-index 0.51s,opacity  0.51s;
+    -webkit-transition:z-index 0.51s,opacity  0.51s;/* Safari and Chrome */
+}
+
+.my_model_a{
+    z-index: 10000;
+    opacity:100;
+}
+
+.my_model_a .rules_text{
+    bottom: 0px;
+    opacity: 100;
+}
+
+.rst_model,.my_model{
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.5);
+    position: fixed;
+    top:0;
+}
+
+
+.rst_model .result_box{
+    background:url("./../img/bg.png") no-repeat rgba(255,255,255,1) ;
+    margin: 1.786666rem auto 0;
+    width:8rem;
+    border-radius:0.533333rem;
+    padding: 4.066666rem 0.666666rem  0.666666rem;
+    background-size: 100% auto;
+    text-align: center;
+}
+
+.rst_model .result_box .text1{
+    font-size:0.48rem;
+    font-weight:bold;
+    color:rgba(28,40,67,1);
+    line-height: 1.8rem;
+}
+
+.rst_model .result_box .text2{
+    line-height: 0.8rem;
+}
+
+
+.rst_model .result_box .text2,.rst_model .result_box .text3{
+    font-size:0.32rem;
+    font-weight:500;
+    color:rgba(160,167,182,1);
+}
+
+.rst_model .result_box .text3{
+    color: #5CE1D6;
+    text-decoration:underline;
+}
+
+.rst_model .clickBtn{
+    opacity: 1;
+    margin-top: 0.7rem;
+}
