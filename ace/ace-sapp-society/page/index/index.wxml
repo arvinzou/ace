@@ -54,7 +54,12 @@
                         <view class='sign-number'><text>已报名:{{activity.amount}}</text></view>
                         <view class='activity-state'>
                            <block wx:if='{{activity.status == "3"}}'>
-                                <image src='../../image/icon_signing.png'></image>
+                                <block wx:if='{{activity.range>0}}'>
+                                    <image src='../../image/icon_signing.png'></image>
+                                </block>
+                                <block wx:else>
+                                    <image src='../../image/sign_over.png'></image>
+                                </block>
                             </block>
                             <block wx:elif='{{activity.status == "31"}}'>
                                 <image src='../../image/icon_having.png'></image>

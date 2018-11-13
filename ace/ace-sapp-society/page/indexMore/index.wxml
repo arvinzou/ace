@@ -39,16 +39,19 @@
                     </view>
                     <view class='activity-footer'>
                         <view class='sign-number'><text>已报名:{{item.amount}}</text></view>
-                        <view class='activity-state'>
-                             <block wx:if='{{item.status == "3"}}'>
+                        <view class='activity-state' wx:if='{{item.status == "3"}}'>
+                            <block wx:if='{{item.range>0}}'>
                                 <image src='../../image/icon_signing.png'></image>
                             </block>
-                            <block wx:elif='{{item.status == "31"}}'>
-                                <image src='../../image/icon_having.png'></image>
-                            </block>
                             <block wx:else>
-                                <image src='../../image/icon_over.png'></image>
+                                <image src='../../image/sign_over.png'></image>
                             </block>
+                        </view>
+                        <view  class='activity-state' wx:elif='{{item.status == "31"}}'>
+                            <image src='../../image/icon_having.png'></image>
+                        </view>
+                        <view  class='activity-state' wx:else>
+                            <image src='../../image/icon_over.png'></image>
                         </view>
                     </view>
                 </view>
