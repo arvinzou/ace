@@ -117,8 +117,9 @@ try {
 var text=html.join("\n");
 
 $(function(){
-    $("#header").append(text);
-
+    $("#header").html(text);
+    $("#loadBefore").show();
+    $("#loading").hide();
     $('.nav-list>li').hover(function(){
         var $ul=$(this).find('ul');
         var oW=$(this).width();//li
