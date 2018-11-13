@@ -186,4 +186,29 @@ public class WOrderController extends JxbBaseController {
 
         return baseOrderService.submitComplaint(complaint);
     }
+
+    /**
+     * 创建打赏订单
+     *
+     * @param unionid 用户ID， 可选
+     * @param data    订单参数，必选 咨询师ID,打赏金额(元) Demo: {"payMoney":"1","businessId":"cccc" }
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/createTipOrder")
+    public ResultResponse createTipOrder(String unionid, String data) throws Exception {
+        if (null == data) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        if (StringUtil.isEmpty(unionid)) {
+            Userinfo userinfo = getCurUserinfo();
+            unionid = userinfo.getUnionid();
+        }
+
+        try {
+            return baseOrderService.createTipOrder(unionid, data);
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
+    }
 }

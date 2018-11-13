@@ -18,7 +18,6 @@ public class QrDemo {
 
     public static void main(String[] args) throws Exception {
         String bankURL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain";
-
         //定值变量 -- 真实信息
         String MERCHANTID = "105000083980372";//商户代码
         String POSID = "023328365";//商户柜台代码

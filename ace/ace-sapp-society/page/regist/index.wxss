@@ -34,8 +34,8 @@
     align-items: center;
 }
 
-.form-content .input-style view {
-    width: 140rpx;
+.form-content .input-style .title {
+    width: 210rpx;
 }
 .form-content .input-style text{
     color: #FF2222;
@@ -137,7 +137,6 @@ margin: 10rpx 0;
 }
 
 .code{
-    width: 200rpx;
     height: 60rpx;
     margin-top: 10rpx;
     color: #666666;

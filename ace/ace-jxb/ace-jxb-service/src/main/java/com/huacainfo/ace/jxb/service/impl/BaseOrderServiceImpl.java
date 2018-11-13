@@ -24,10 +24,7 @@ import com.huacainfo.ace.jxb.model.OrderComplaint;
 import com.huacainfo.ace.jxb.service.BaseOrderService;
 import com.huacainfo.ace.jxb.service.BisMsgNoticeService;
 import com.huacainfo.ace.jxb.service.OrderCalculationService;
-import com.huacainfo.ace.jxb.vo.BaseOrderQVo;
-import com.huacainfo.ace.jxb.vo.BaseOrderVo;
-import com.huacainfo.ace.jxb.vo.ConsultProductVo;
-import com.huacainfo.ace.jxb.vo.CourseVo;
+import com.huacainfo.ace.jxb.vo.*;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.portal.service.EvaluatTplService;
@@ -618,6 +615,59 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         }
 
         return new ResultResponse(ResultCode.SUCCESS, "受理成功");
+    }
+
+    /**
+     * 创建打赏订单
+     *
+     * @param unionid 用户ID， 可选
+     * @param data    订单参数，必选
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse createTipOrder(String unionid, String data) throws Exception {
+        Map<String, Object> params = JsonUtil.toMap(data);
+        BaseOrder base = JsonUtil.toObject(params.get("base").toString(), BaseOrder.class);
+        //打赏金额
+        BigDecimal payMoney = null == base.getPayMoney() ? BigDecimal.ZERO : base.getPayMoney();
+        if (BigDecimal.ZERO.compareTo(payMoney) >= 0) {
+            return new ResultResponse(ResultCode.FAIL, "非法打赏金额");
+        }
+        if (StringUtil.isEmpty(base.getBusinessId())) {
+            return new ResultResponse(ResultCode.FAIL, "缺少咨询师信息");
+        }
+        //咨询师资料
+        CounselorVo c = counselorDao.selectVoByPrimaryKey(base.getBusinessId());
+        if (c == null || !"1".equals(c.getRegAuditRst())) {
+            return new ResultResponse(ResultCode.FAIL, "咨询师资料异常");
+        }
+        base.setBusinessName(c.getName());//卖家名称
+        base.setBusinessId(c.getId());//卖家ID
+        //客户资料
+        base.setConsumerId(unionid);
+        Users user = usersService.selectUsersByPrimaryKey(base.getConsumerId()).getValue();
+        if (null == user) {
+            return new ResultResponse(ResultCode.FAIL, "没有注册账号。");
+        }
+        //入库主订单
+        String orderId = GUIDUtil.getGUID();
+        base.setId(orderId);
+        base.setCategory("4");//打赏订单
+        base.setAmount(1);
+        base.setCommodityId("tip");
+        base.setCommodityName("打赏商品");
+        base.setPrice(payMoney);
+        base.setPayMoney(payMoney);
+        base.setPayStatus(PayStatus.NEW_ORDER);
+        base.setCreateDate(DateUtil.getNowDate());
+        baseOrderDao.insertSelective(base);
+
+        //订单创建完成
+        Map<String, Object> rtnMap = new HashMap<>();
+        rtnMap.put("orderId", orderId);
+        rtnMap.put("payMoney", payMoney);
+        return new ResultResponse(ResultCode.SUCCESS, "订单创建成功", rtnMap);
     }
 
 

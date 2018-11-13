@@ -198,7 +198,7 @@
   border-radius: 50%;
   background: #fff; 
 }
-.status1{
+.status1,.status2{
   background: #1a9fff;
   color: #fff;
   border-radius: 10rpx;
@@ -206,7 +206,7 @@
   padding: 5rpx;
   border:1rpx solid #fff;
 }
-.status2{
+.status3{
   background:green;
   color: #fff;
   border-radius: 10rpx;
@@ -214,7 +214,7 @@
   padding: 5rpx;
   border:1rpx solid #fff;
 }
-.status3{
+.status4{
   background:red;
   color: #fff;
   border-radius: 10rpx;

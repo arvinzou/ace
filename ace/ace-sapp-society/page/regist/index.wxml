@@ -45,33 +45,33 @@
         <view class='stepTwo partTwo {{stepNum==2 && (index == 1 || index == 3)?"":"hidden"}}'>
             <view class='form-content'>
                 <view class="input-style bottom-line">
-                    <view class="title">组织名称
+                    <view class="title" style='width:25%'>组织名称
                         <text>*</text>
                     </view>
-                    <input name='orgName' placeholder='请输入组织名称' placeholder-class='placeholder-text'></input>
+                    <input name='orgName' style='width:75%' placeholder='请输入组织名称' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
-                    <view class="title">组织地址</view>
-                    <input name='orgAddr' placeholder='请输入组织地址' placeholder-class='placeholder-text'></input>
+                    <view class="title" style='width:25%'>组织地址</view>
+                    <input name='orgAddr' style='width:75%' placeholder='请输入组织地址' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
-                    <view class="title">联系人
+                    <view class="title" style='width:25%'>联系人
                         <text>*</text>
                     </view>
-                    <input name='contactPerson' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
+                    <input name='contactPerson' style='width:75%' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
-                    <view class="title">联系电话
+                    <view class="title" style='width:25%'>联系电话
                         <text>*</text>
                     </view>
-                    <input name='contactPhone' placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number' bindblur='phoneInput'></input>
-                    <button class='code' bindtap='sendCode'>{{ btnName }}</button>
+                    <input name='contactPhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number' bindblur='phoneInput'></input>
+                    <button class='code' bindtap='sendCode' style='width:25%;padding:0'>{{ btnName }}</button>
                 </view>
                 <view class="input-style bottom-line">
-                    <view  class="title">验证码
+                    <view  class="title" style='width:25%'>验证码
                         <text>*</text>
                     </view>
-                    <input name='code' placeholder='请输入验证码' placeholder-class='placeholder-text'></input>
+                    <input name='code' style='width:75%' placeholder='请输入验证码' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class='btn-part'>
                     <view bindtap='previousOne' class='btn btn-bkClick'>
@@ -90,30 +90,30 @@
         <view class='stepTwo partTwo {{stepNum==2 &&(index == 0 || index == 2)?"":"hidden"}}'>
             <view class='form-content'>
                 <view class="input-style bottom-line">
-                    <view class="title">所属组织
+                    <view class="title" style='width:25%'>所属组织
                     </view>
-                    <picker style='width:100%' mode = selector bindchange="bindPickerChange1" value="{{objectGroupArray[group_index].value}}" range="{{objectGroupArray}}" range-key="name">
-                        <view style='width:100%' class="picker">{{objectGroupArray[group_index].name}}</view>
+                    <picker style='width:75%' mode = selector bindchange="bindPickerChange1" value="{{objectGroupArray[group_index].value}}" range="{{objectGroupArray}}" range-key="name">
+                        <view style='width:75%' class="picker">{{objectGroupArray[group_index].name}}</view>
                     </picker>
                 </view>
                 <view class="input-style bottom-line">
-                    <view class="title">姓名
+                    <view class="title" style='width:25%'>姓名
                         <text>*</text>
                     </view>
-                    <input name='realName' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
+                    <input name='realName' style='width:75%' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
-                    <view class="title">联系电话
+                    <view class="title" style='width:25%'>联系电话
                         <text>*</text>
                     </view>
-                    <input name='mobilePhone' placeholder='请输入手机号码' placeholder-class='placeholder-text' bindblur='phoneInput'></input>
-                    <button class='code' bindtap='sendCode'>{{ btnName }}</button>
+                    <input name='mobilePhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' bindblur='phoneInput'></input>
+                    <button class='code' bindtap='sendCode' style='width:25%;padding:0'>{{ btnName }}</button>
                 </view>
                 <view class="input-style bottom-line">
-                    <view  class="title">验证码
+                    <view  class="title" style='width:25%'>验证码
                         <text>*</text>
                     </view>
-                    <input name='code' placeholder='请输入验证码' placeholder-class='placeholder-text'></input>
+                    <input name='code' style='width:75%' placeholder='请输入验证码' placeholder-class='placeholder-text'></input>
                 </view>
                 <!--<view class="input-style bottom-line">
                     <view class="title">性别</view>

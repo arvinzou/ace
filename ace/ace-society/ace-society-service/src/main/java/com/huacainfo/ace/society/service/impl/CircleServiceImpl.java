@@ -242,7 +242,7 @@ public class CircleServiceImpl implements CircleService {
         log.setRst(rst);
         log.setStatement(text);
         log.setCreateDate(new Date());
-        if("2".equals(rst)){
+        if("3".equals(rst)){
             ResultResponse pointsRst = pointsRecordService.addPoints(circle.getUid(), CoinConfigType.GROUP, id);
             if(pointsRst.getStatus()==1){
                 return new MessageResponse(pointsRst.getStatus(), pointsRst.getInfo());

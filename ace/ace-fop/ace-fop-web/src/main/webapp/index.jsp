@@ -1,5 +1,7 @@
-<%@page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+<%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@ pageEncoding="utf-8"%>
 <div class="row">
     <div class="col-xs-12 col-sm-6">
         <!-- #section:custom/widget-box -->
-        <div class="widget-box transparent background-white padding1" id="recent-box">
+        <div class="widget-box transparent background-white padding1">
             <div class="widget-header">
                 <h4 class="widget-title lighter smaller">
                     <i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
@@ -57,7 +59,7 @@ pageEncoding="utf-8"%>
 
     <div class="col-xs-12 col-sm-6">
         <!-- #section:custom/widget-box -->
-        <div class="widget-box transparent background-white padding1" id="recent-box">
+        <div class="widget-box transparent background-white padding1">
             <div class="widget-header">
                 <h4 class="widget-title lighter smaller">
                     <i class="ace-icon glyphicon glyphicon-th-large green"></i>业务公告

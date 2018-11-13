@@ -15,7 +15,7 @@ function initMyChar() {
 function chart() {
     $.ajax({
         type: "post",
-        url: contextPath + '/anslysis/query.do',
+        url: contextPath + '/anslysis/report',
         data: {
             reportId: 'serviceStatistics'
         },

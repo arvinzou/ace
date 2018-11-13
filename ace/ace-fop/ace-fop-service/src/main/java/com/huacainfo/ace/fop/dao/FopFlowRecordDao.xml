@@ -25,9 +25,17 @@
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from fop_flow_record
-        where id = #{id,jdbcType=VARCHAR}
+        a.fullName as requestName,
+        p.name as personId,
+        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        from fop_flow_record t
+        left join (select id,fullName from fop.fop_company
+        union all
+        select id,fullName from fop.fop_association) a on t.fromId=a.id
+        left join portal.users p on t.personId=p.user_id
+
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from fop_flow_record
@@ -214,28 +222,28 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopFlowRecordVo">
         <result column="requestName" jdbcType="CHAR" property="requestName"/>
     </resultMap>
-    <sql id="Vo_Column_List">
-        CASE
-        when t.flowType in ('0','3')
-        then (select fullName from fop.fop_company where id = t.fromId)
-        when t.flowType = '1'
-        then (select fullName from fop.fop_association where id = t.fromId)
-        END as requestName
-        ,
-        (select name from portal.users p WHERE p.user_id=t.personId) as personId,
-        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
-        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
-    </sql>
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
+        a.fullName as requestName,
+        p.name as personId,
+        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         from fop_flow_record t
+        left join (select id,fullName from fop.fop_company
+        union all
+        select id,fullName from fop.fop_association) a on t.fromId=a.id
+        left join portal.users p on t.personId=p.user_id
+
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
+       a.fullName as requestName,
+        p.name as personId,
+        t.id, t.fromId, t.flowType, t.auditResult, t.auditOpinion, t.auditDate, t.remark, t.status,
+        t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -250,12 +258,19 @@
 
     <sql id="whereCondition">
         from fop_flow_record t
-        where t.status <![CDATA[ <> ]]> 1
-        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+        inner join (select id,fullName from fop.fop_company
+        union all
+        select id,fullName from fop.fop_association) a on t.fromId=a.id
+        left join portal.users p on t.personId=p.user_id
+        where 1=1
+        <if test="condition.name!=null">
+            and a.fullName like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.id!=null">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
-        <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and t.auditResult = #{condition.status,jdbcType=CHAR}-2
+        <if test="condition.status!=null">
+            and ifnull(t.auditResult,'9') = #{condition.status,jdbcType=CHAR}
         </if>
         <if test="condition.flowType!=null and condition.flowType!=&quot;&quot;">
         </if>

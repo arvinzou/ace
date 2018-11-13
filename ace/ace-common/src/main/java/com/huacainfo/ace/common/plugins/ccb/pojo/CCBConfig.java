@@ -26,14 +26,42 @@ public class CCBConfig implements Serializable {
      */
     private String pub30Str;
 
+    /**
+     * 查询密码 -- 商户平台登录密码
+     */
+    private String qupwd;
+
     public CCBConfig() {
     }
 
+    /**
+     * 支付下单配置
+     */
     public CCBConfig(String merchantId, String posId, String branchId, String pub32Str) {
         this.merchantId = merchantId;
         this.posId = posId;
         this.branchId = branchId;
         this.pub30Str = pub32Str;
+    }
+
+    /**
+     * 订单查询配置
+     */
+    public static CCBConfig getQueryCfg(String merchantId, String branchId, String posId, String qupwd) {
+        CCBConfig cfg = new CCBConfig();
+        cfg.merchantId = merchantId;
+        cfg.posId = posId;
+        cfg.branchId = branchId;
+        cfg.qupwd = qupwd;
+        return cfg;
+    }
+
+    public String getQupwd() {
+        return qupwd;
+    }
+
+    public void setQupwd(String qupwd) {
+        this.qupwd = qupwd;
     }
 
     public String getMerchantId() {

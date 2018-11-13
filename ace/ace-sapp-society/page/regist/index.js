@@ -286,6 +286,30 @@ Page({
         var realName = e.detail.value.realName;
         var mobilePhone = e.detail.value.mobilePhone;
         var code = e.detail.value.code;
+        if (realName == undefined || realName == '' || realName ==null){
+            wx.showModal({
+                title: '提示',
+                content: '请输入名称！',
+                success: function (res) { }
+            });
+            return;
+        }
+        if (mobilePhone == undefined || mobilePhone == '' || mobilePhone == null){
+            wx.showModal({
+                title: '提示',
+                content: '请输入手机号码！',
+                success: function (res) { }
+            });
+            return;
+        }
+        if (code == undefined || code == '' || code == null){
+            wx.showModal({
+                title: '提示',
+                content: '请输入验证码！',
+                success: function (res) { }
+            });
+            return;
+        }
         var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0}
         util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
             function (ret) {
