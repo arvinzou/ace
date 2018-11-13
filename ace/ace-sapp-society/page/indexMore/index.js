@@ -36,6 +36,8 @@ Page({
                         ret.data[i].hours = that.data.hours;
                         ret.data[i].minutes = that.data.minutes;
                         ret.data[i].isEnd = that.data.isEnd;
+                        
+                        ret.data[i].range = util.formateStringToDate(ret.data[i].dendline).getTime() - new Date().getTime();
                     }
                     that.setData({ activity: ret.data });
 
@@ -79,6 +81,7 @@ Page({
                 isEnd: true
             });
         }
+        
     },
     showActivityDetail: function (e) {
         var that = this;

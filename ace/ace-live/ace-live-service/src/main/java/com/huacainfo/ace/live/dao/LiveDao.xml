@@ -232,6 +232,7 @@
             <id property="openid" column="openid"/>
             <result property="headimgurl" column="headimgurl"/>
             <result property="nickname" column="nickname"/>
+            <result property="userId" column="userId"/>
         </association>
         <collection property="imageList" ofType="com.huacainfo.ace.live.model.Img">
             <id property="id" column="imgId"/>
@@ -272,7 +273,8 @@
         d.headimgurl c_headimgurl,
         d.nickname c_nickname,
         d.openid c_openid,
-        date_format(c.createTime,'%H:%i:%s') c_createTime
+        date_format(c.createTime,'%H:%i:%s') c_createTime,
+        e.user_id userId
 
         from live_rpt t
         left join (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all

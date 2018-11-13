@@ -183,6 +183,7 @@ function initData(id){
         }
     });
 }
+
 function createOrder(){
     var content = $("#read").attr("src");
     //基本信息
