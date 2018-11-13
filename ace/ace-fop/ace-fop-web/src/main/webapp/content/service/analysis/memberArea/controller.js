@@ -15,7 +15,7 @@ function initMyChar() {
 function chart() {
     $.ajax({
         type: "post",
-        url: contextPath + '/anslysis/query.do?areaCode=4307',
+        url: contextPath + '/anslysis/report?areaCode=4307',
         data: {
             reportId: 'memberArea'
         },

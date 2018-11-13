@@ -43,4 +43,16 @@ public class AnalysisController extends BaseController implements Serializable {
     }
 
 
+    @RequestMapping(value = "/report")
+    @ResponseBody
+    public ListResult<Map<String, Object>> report(String reportId) throws Exception {
+        Map<String, Object> condition = this.getParams();
+        if (CommonUtils.isBlank(condition.get("deptId"))) {
+            condition.put("deptId", this.getCurUserProp().getCorpId());
+        }
+        if (CommonUtils.isBlank(condition.get("areaCode"))) {
+            condition.put("areaCode", this.getCurUserProp().getAreaCode());
+        }
+        return analysisService.report(condition, reportId, 0, 0);
+    }
 }

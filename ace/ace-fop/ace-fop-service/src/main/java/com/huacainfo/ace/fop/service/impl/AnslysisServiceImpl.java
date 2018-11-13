@@ -77,4 +77,19 @@ public class AnslysisServiceImpl implements AnalysisService {
 
         return rtnMap;
     }
+
+    @Override
+    public ListResult<Map<String, Object>> report(Map<String, Object> condition, String reportId, int start, int limit) {
+        ListResult<Map<String, Object>> rst = new ListResult<>();
+        ReportDao dao = (ReportDao) SpringUtils.getBean(reportId);
+        condition.put("start", start);
+        condition.put("limit", limit);
+
+        //
+        List<Map<String, Object>> p = new ArrayList<>();
+        p = parseMemberAreaLData(p, dao.query(condition));
+        rst.setValue(p);
+        return rst;
+
+    }
 }
