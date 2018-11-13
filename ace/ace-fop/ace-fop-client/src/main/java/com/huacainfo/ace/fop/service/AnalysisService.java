@@ -14,4 +14,6 @@ public interface AnalysisService {
      * @return
      */
     Map<String, Object> portalCount() throws Exception;
+
+    ListResult<Map<String, Object>> report(Map<String, Object> condition, String reportId, int start, int limit);
 }
