@@ -34,9 +34,9 @@ pageEncoding="utf-8"%>
 
                     <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" authority="false"  onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" authority="false"  onclick="setParams('status','1');">待审</button>
-                        <button type="button" class="btn btn-default" authority="false" onclick="setParams('status','2');">通过</button>
-                        <button type="button" class="btn btn-default" authority="false" onclick="setParams('status','3');">驳回</button>
+                        <button type="button" class="btn btn-default" authority="false"  onclick="setParams('status','9');">待审</button>
+                        <button type="button" class="btn btn-default" authority="false" onclick="setParams('status','0');">通过</button>
+                        <button type="button" class="btn btn-default" authority="false" onclick="setParams('status','1');">驳回</button>
                     </div>
                     <div class="input-group">
                         <input type="text"

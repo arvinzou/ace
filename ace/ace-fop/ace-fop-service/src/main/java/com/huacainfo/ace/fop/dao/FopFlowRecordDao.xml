@@ -263,15 +263,15 @@
         select id,fullName from fop.fop_association) a on t.fromId=a.id
         left join portal.users p on t.personId=p.user_id
 
-        where t.status <![CDATA[ <> ]]> 1
+        where t.status='1'
         <if test="condition.name!=null">
             and a.fullName like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
-        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+        <if test="condition.id!=null">
             and t.id = #{condition.id,jdbcType=VARCHAR}
         </if>
-        <if test="condition.status!=null and condition.status!=&quot;&quot;">
-            and t.auditResult = #{condition.status,jdbcType=CHAR}-2
+        <if test="condition.status!=null">
+            and ifnull(t.auditResult,'9') = #{condition.status,jdbcType=CHAR}
         </if>
         <if test="condition.flowType!=null and condition.flowType!=&quot;&quot;">
         </if>
