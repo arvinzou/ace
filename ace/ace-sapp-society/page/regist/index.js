@@ -229,11 +229,11 @@ Page({
         wx.showActionSheet({
             itemList: ['打开照相', '选取现有的'],
             itemColor: '#007aff',
-            success(res) {
+            success:function(res) {
                 if (res.tapIndex === 0) {
                     wx.chooseImage({
                         sourceType: ['camera'],
-                        success(res) {
+                        success:function(res) {
                             that.uploadFileFun(res.tempFilePaths[0]);
                         }
                     });
@@ -242,7 +242,7 @@ Page({
                         count: 1, // 设置最多三张
                         sizeType: ['original', 'compressed'],
                         sourceType: ['album', 'camera'],
-                        success(res) {
+                        success:function(res) {
                             var tempFilePaths = res.tempFilePaths;
                             for (var i = 0; i < tempFilePaths.length; i++) {
                                 that.uploadFileFun(tempFilePaths[i]);
