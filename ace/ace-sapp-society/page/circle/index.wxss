@@ -186,7 +186,7 @@ page{
 .btn-add-rpt{
   right: 40rpx;
   position: fixed;  
-  bottom: 30rpx; 
+  bottom: 70rpx; 
   align-items: center;  
   justify-content: center;  
   border-radius: 50%;  

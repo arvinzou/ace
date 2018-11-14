@@ -55,8 +55,8 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="25%"> 解决方案</th>
-                    <th width="30%"> 附件</th>
+                    <th width="20%"> 标题</th>
+                    <th width="35%"> 附件</th>
                     <th width="10%"> 提交人</th>
                     <th width="10%"> 创建日期</th>
                     <th width="10%"> 状态</th>
@@ -79,7 +79,7 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \$\${item.solution}</td>
+        <td> \${item.title}</td>
         <td>
             {@each item.listSubjectIdeaAnnexVo as fileItem}
                 <div class="fileListBox my-gallery"><img src="\${fileItem.fileUrl}" style="width: 70px;height: 70px;object-fit: cover;"/></div>
@@ -115,7 +115,13 @@
 <script id="tpl-detail" type="text/template">
     <div class="form-body">
         <div class="form-group">
-            <label class="col-md-2 view-label">解决方案</label>
+            <label class="col-md-2 view-label">标题</label>
+            <div class="col-md-10">
+                \${data.title}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">点子内容</label>
             <div class="col-md-10">
                 \$\${data.solution}
             </div>
