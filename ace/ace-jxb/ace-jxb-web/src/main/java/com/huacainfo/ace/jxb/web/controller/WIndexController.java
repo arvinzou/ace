@@ -48,6 +48,7 @@ public class WIndexController extends JxbBaseController {
     public ResultResponse findList() throws Exception {
         CourseQVo condition = new CourseQVo();
         condition.setFine("1");
+        condition.setLineState("1");
         PageResult<CourseVo> rst = this.courseService.findCourseList(condition, 0, 4, "RAND()");
         List<CourseVo> list = rst.getRows();
         BaseOrderQVo baseOrder = new BaseOrderQVo();
@@ -69,6 +70,7 @@ public class WIndexController extends JxbBaseController {
     public ResultResponse findListFree() throws Exception {
         CourseQVo condition = new CourseQVo();
         condition.setCostType("0");
+        condition.setLineState("1");
         PageResult<CourseVo> rst1 = this.courseService.findCourseList(condition, 0, 10, "RAND()");
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst1);
     }
