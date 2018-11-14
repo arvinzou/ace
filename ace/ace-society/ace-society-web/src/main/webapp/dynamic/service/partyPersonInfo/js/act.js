@@ -1,10 +1,9 @@
 var loading = {};
-var params = {limit: 5,politicalStatus:1};
+var params = {limit: 5,politicalStatus:2};
 window.onload = function () {
     initPage();
     initEvents();
     initJuicerMethod();
-
 }
 function App() {
     console.log("=============================App Start==============================");

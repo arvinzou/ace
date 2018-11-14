@@ -31,10 +31,7 @@ Page({
     displayVideo: 'hide',
     displayAudio: 'hide',
     playimg: "../../image/record_on.png",
-    recorderStatus: false,
-    isRegist: false,
-    userinfoData: null,
-    wxUser: null
+    recorderStatus: false
   },
   onReady: function (res) {
     
@@ -42,23 +39,9 @@ Page({
 
   onLoad: function (param) {
     var that = this;
-    if (!util.is_login()) {
-        wx.navigateTo({
-            url: "../userinfo/index?url=../releaseBehavior/index&type=navigateTo"
-        });
-    }else{
-        if (wx.getStorageSync('userinfo')) {
-            that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') });
-            that.initUserData();
-            that.initWxUserData();
-        }
-    }
-
-    console.log('index.js.onLoad');
-    console.log(param);
+    that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') });
     this.setData(param);
     this.setData({
-      WXSESSIONID: wx.getStorageSync('WX-SESSION-ID'),
       checkImageUrl: cfg.checkImageUrl,
       userinfo: wx.getStorageSync('userinfo'),
       fileList: []
@@ -351,12 +334,7 @@ Page({
   },
 
 onShow: function () {
-    var that = this;
-    if (wx.getStorageSync('userinfo')) {
-        that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') })
-        that.initUserData();
-        that.initWxUserData();
-    }
+   
 },
   /**
    *

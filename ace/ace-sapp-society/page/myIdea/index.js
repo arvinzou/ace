@@ -7,7 +7,8 @@ Page({
    */
   data: {
     ideaList : [],
-    userId: null
+    userId: null,
+    sysUserInfo: wx.getStorageSync("sysUserInfo")
   },
 
   /**

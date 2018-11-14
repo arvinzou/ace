@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ideaList : []
+    ideaList : [],
+    sysUserInfo: wx.getStorageSync("sysUserInfo")
   },
 
   /**
@@ -95,6 +96,7 @@ downloadFile: function(e){
   onPullDownRefresh: function () {
       var that = this;
       that.initList();
+      wx.stopPullDownRefresh()
   },
 
   /**

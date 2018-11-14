@@ -238,6 +238,7 @@ Page({
       var that = this;
       that.getConfig();
       that.initSocietyData();
+      wx.stopPullDownRefresh();
   },
 
   /**
