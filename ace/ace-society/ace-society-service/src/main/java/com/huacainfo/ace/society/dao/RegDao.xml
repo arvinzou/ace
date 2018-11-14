@@ -47,6 +47,7 @@
             <result column="politicalStatus" jdbcType="CHAR" property="politicalStatus"/>
             <result column="pAccPoints" jdbcType="INTEGER" property="accPoints"/>
             <result column="pValidPoints" jdbcType="INTEGER" property="validPoints"/>
+            <result column="pStatus" jdbcType="CHAR" property="status"></result>
         </association>
     </resultMap>
 
@@ -65,6 +66,7 @@
             <result column="contactPhone" jdbcType="VARCHAR" property="contactPhone"/>
             <result column="orgAccPoints" jdbcType="INTEGER" property="accPoints"/>
             <result column="orgValidPoints" jdbcType="INTEGER" property="validPoints"/>
+            <result column="orgStatus" jdbcType="CHAR" property="status"></result>
         </association>
     </resultMap>
 
