@@ -96,6 +96,7 @@ downloadFile: function(e){
   onPullDownRefresh: function () {
       var that = this;
       that.initList();
+      wx.stopPullDownRefresh()
   },
 
   /**
