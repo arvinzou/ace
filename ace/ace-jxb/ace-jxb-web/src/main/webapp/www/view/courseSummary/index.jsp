@@ -50,7 +50,7 @@
 				<div class="comments menuHide" id="comments">
 					<a href="#" class="myComment">
 						<div class="row dialog">
-						<div class="row star_title"><p>我的评价</p></div>
+						<div class="row star_title"><p>点击评价</p></div>
 						<div class="row star_defalut">
 							<img src="img/star_gray.png"/>
 							<img src="img/star_gray.png"/>
