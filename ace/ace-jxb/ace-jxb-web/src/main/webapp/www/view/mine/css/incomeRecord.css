@@ -1,0 +1,11 @@
+.month{
+    margin:0.266666rem auto 0;
+    width:9.2rem;
+}
+
+.month input{
+    border: 0px;
+    height: 1rem;
+    width: 2.2rem;
+    background:rgba(247,249,252,1);
+}
