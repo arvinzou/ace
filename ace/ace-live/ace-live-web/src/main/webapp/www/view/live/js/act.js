@@ -753,19 +753,19 @@ $(window).on("scroll",
 
         }
     });
-function openOrder(){
+function openOrder(userId){
     $.modal({
       title: "打赏",
       text: "请选择打赏金额",
       buttons: [
         { text: "0.1元", onClick: function(){
-            createOrder(wxuser.userProp.userId,0.1);
+            createOrder(userId,0.1);
         } },
         { text: "1元", onClick: function(){
-            createOrder(wxuser.userProp.userId,1);
+            createOrder(userId,1);
         } },
          { text: "5元", onClick: function(){
-                    createOrder(wxuser.userProp.userId,5);
+                    createOrder(userId,5);
                 } },
         { text: "取消", className: "default", onClick: function(){ console.log(3)} },
       ]
@@ -783,7 +783,7 @@ function createOrder(userId,payMoney){
         url: "/jxb/www/order/createTipOrder",
         type:"post",
         async:false,
-        data:{data:JSON.stringify(data)},
+        data:{data:JSON.stringify(data),unionid:userId},
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
