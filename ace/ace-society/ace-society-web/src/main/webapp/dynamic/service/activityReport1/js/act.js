@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 10,aStatus:33,clist:"4"};
+var params = {limit: 10,clist:"4"};
 
 window.onload = function () {
     initPage();
