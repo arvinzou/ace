@@ -16,7 +16,8 @@ Page({
         behaviorType: "1",
         videoIndex: null,
         maskFlag: true,
-        videoUrl: null
+        videoUrl: null,
+        sysUserInfo: wx.getStorageSync("sysUserInfo")
     },
     /**
   * 点击选项卡

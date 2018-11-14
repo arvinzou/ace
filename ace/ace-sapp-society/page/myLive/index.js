@@ -23,13 +23,9 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../myLive/index" });
-    }else{
       that.setData({
         userinfo: wx.getStorageSync('userinfo')
       });
-    }
   },
   onPullDownRefresh: function () {
     let that = this;
@@ -182,5 +178,13 @@ Page({
       wx.navigateTo({
           url: '../liveView/index?id='+e.currentTarget.dataset.id,
       })
-  }
+  },
+  status: function (e) {
+    console.log(e);
+    var that = this;
+    
+    wx.navigateTo({
+      url: '../liveStatus/index?id=' + e.currentTarget.dataset.id
+    });
+  },
 });

@@ -15,23 +15,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      var that = this;
+      that.initData();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+     
+  },
+  initData: function(){
       var that = this;
-      util.request(cfg.mallList, { "start": 0, "limit": 9999, "state": "1"},
+      util.request(cfg.mallList, { "start": 0, "limit": 9999, "state": "1" },
           function (ret) {
               var datas = ret.data.rows;
               var commodityArr = [];
               var siteArr = [];
-              for(var i=0; i < datas.length; i++){
-                  if (datas[i].commodityType == '1'){
+              for (var i = 0; i < datas.length; i++) {
+                  if (datas[i].commodityType == '1') {
                       siteArr.push(datas[i]);
-                  }else{
+                  } else {
                       commodityArr.push(datas[i]);
                   }
               }
@@ -77,7 +81,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+      var that = this;
+      that.initData();
   },
 
   /**

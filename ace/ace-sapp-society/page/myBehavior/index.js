@@ -16,7 +16,8 @@ Page({
         Loadingstatus: false,
         behaviorType : "1",
         maskFlag: true,
-        videoUrl: null
+        videoUrl: null,
+        sysUserInfo: wx.getStorageSync("sysUserInfo")
     },
 
     /**

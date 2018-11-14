@@ -1,6 +1,7 @@
 package com.huacainfo.ace.common.plugins.wechat.util;
 
 import com.huacainfo.ace.common.tools.CommonUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,10 +16,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Map;
@@ -316,15 +314,6 @@ public class HttpKit {
     }
 
     /**
-     * https 域名校验
-     */
-    private class TrustAnyHostnameVerifier implements HostnameVerifier {
-        public boolean verify(String hostname, SSLSession session) {
-            return true;
-        }
-    }
-
-    /**
      * 涉及资金回滚的接口会使用到商户证书，包括退款、撤销接口的请求
      *
      * @param url      请求的地址
@@ -333,60 +322,69 @@ public class HttpKit {
      * @param certPass 证书密码
      * @return String 回调的xml信息
      */
-//    public static String postSSL(String url, String data, byte[] cert, String certPass) {
-//        HttpsURLConnection conn = null;
-//        OutputStream out = null;
-//        InputStream inputStream = null;
-//        ByteArrayInputStream byteArrayInputStream = null;
-//        BufferedReader reader = null;
-//        try {
-//            KeyStore clientStore = KeyStore.getInstance("PKCS12");
-//            byteArrayInputStream = new ByteArrayInputStream(cert);
-//            clientStore.load(byteArrayInputStream, certPass.toCharArray());
-//            KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-//            kmf.init(clientStore, certPass.toCharArray());
-//            KeyManager[] kms = kmf.getKeyManagers();
-//            SSLContext sslContext = SSLContext.getInstance("TLSv1");
-//
-//            sslContext.init(kms, null, new SecureRandom());
-//            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
-//            URL _url = new URL(url);
-//            conn = (HttpsURLConnection) _url.openConnection();
-//
-//            conn.setConnectTimeout(25000);
-//            conn.setReadTimeout(25000);
-//            conn.setRequestMethod("POST");
-//            conn.setDoOutput(true);
-//            conn.setDoInput(true);
-//
-//            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-//            conn.setRequestProperty("User-Agent", DEFAULT_USER_AGENT);
-//            conn.connect();
-//
-//            out = conn.getOutputStream();
-//            out.write(data.getBytes(CHARSET));
-//            out.flush();
-//
-//            inputStream = conn.getInputStream();
-//            reader = new BufferedReader(new InputStreamReader(inputStream, CHARSET));
-//            StringBuilder sb = new StringBuilder();
-//            String line = null;
-//            while ((line = reader.readLine()) != null) {
-//                sb.append(line).append("\n");
-//            }
-//            return sb.toString();
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            IOUtils.closeQuietly(out);
-//            IOUtils.closeQuietly(reader);
-//            IOUtils.closeQuietly(inputStream);
-//            IOUtils.closeQuietly(byteArrayInputStream);
-//            if (conn != null) {
-//                conn.disconnect();
-//            }
-//        }
-//    }
+    public static String postSSL(String url, String data, byte[] cert, String certPass) {
+        HttpsURLConnection conn = null;
+        OutputStream out = null;
+        InputStream inputStream = null;
+        ByteArrayInputStream byteArrayInputStream = null;
+        BufferedReader reader = null;
+        try {
+            KeyStore clientStore = KeyStore.getInstance("PKCS12");
+            byteArrayInputStream = new ByteArrayInputStream(cert);
+            clientStore.load(byteArrayInputStream, certPass.toCharArray());
+            KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+            kmf.init(clientStore, certPass.toCharArray());
+            KeyManager[] kms = kmf.getKeyManagers();
+            SSLContext sslContext = SSLContext.getInstance("TLSv1");
+
+            sslContext.init(kms, null, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslContext.getSocketFactory());
+            URL _url = new URL(url);
+            conn = (HttpsURLConnection) _url.openConnection();
+
+            conn.setConnectTimeout(25000);
+            conn.setReadTimeout(25000);
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+
+            conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestProperty("User-Agent", DEFAULT_USER_AGENT);
+            conn.connect();
+
+            out = conn.getOutputStream();
+            out.write(data.getBytes(CHARSET));
+            out.flush();
+
+            inputStream = conn.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(inputStream, CHARSET));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            IOUtils.closeQuietly(out);
+            IOUtils.closeQuietly(reader);
+            IOUtils.closeQuietly(inputStream);
+            IOUtils.closeQuietly(byteArrayInputStream);
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+    }
+
+    /**
+     * https 域名校验
+     */
+    private class TrustAnyHostnameVerifier implements HostnameVerifier {
+        public boolean verify(String hostname, SSLSession session) {
+            return true;
+        }
+    }
 
     /**
      * https 证书管理
