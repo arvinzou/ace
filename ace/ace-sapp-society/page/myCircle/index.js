@@ -9,7 +9,9 @@ Page({
   data: {
       list:[],
       maskFlag: true,
-      videoUrl: null
+      videoUrl: null,
+      userinfo: wx.getStorageSync('userinfo'),
+      sysUserInfo: wx.getStorageSync("sysUserInfo")
   },
 
   /**
@@ -19,15 +21,7 @@ Page({
     console.log(" 生命周期函数--监听页面加载");
     var that = this;
     start=0;
-    if (!util.is_login()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../myCircle/index" });
-    }
-    if (util.is_login()){
-      that.setData({
-        userinfo: wx.getStorageSync('userinfo')
-      });
-      that.initData();
-    }
+    that.initData();
   },
     viewVideo: function (e) {
         console.log("查看视频地址=====================================" + e.currentTarget.id);
