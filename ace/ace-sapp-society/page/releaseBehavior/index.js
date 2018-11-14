@@ -74,6 +74,10 @@ Page({
         behaviorAnnextemp.fileUrl = that.data.mediUrl;
         behaviorAnnexList.push(behaviorAnnextemp);
     }
+    if (behaviorAnnexList.length < 1){
+        wx.showModal({ title: "提示", content: "文明随手拍文件缺失！" });
+        return;
+    }
     data.behaviorAnnexList = behaviorAnnexList;
     console.log("============================================="+data);
       util.request(cfg.server + "/society/www/behavior/submit", { "params": JSON.stringify(data) },
