@@ -16,7 +16,9 @@
                 </view>
             </block>
             <view class='section'>
-                <input  class='form-content' name="detailState" placeholder="请输入提货地址" maxlength='50' placeholder-class='input-text'></input>
+                <input style='display:none;'  class='form-content' name="detailState" value='常德市武陵区芙蓉街道社区2楼202' maxlength='50' placeholder-class='input-text'></input>
+                <view class='site'>常德市武陵区芙蓉街道社区2楼202</view>
+                <view class='site-warn'>(默认提货地址)</view>
             </view>
         </view>
   </view>
