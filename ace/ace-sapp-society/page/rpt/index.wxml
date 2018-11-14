@@ -44,7 +44,7 @@
             <cover-image class="removeImgBtnVideo {{displayVideo}}" bindtap="delVideo" src="../../image/del-red.png"/>
          </view>
               </view>
-              <view class="weui-uploader__input-box">
+              <view class="weui-uploader__input-box" wx:if="{{chooseVideoShow}}">
                 <view class="weui-uploader__input" bindtap="chooseVideo"></view>
               </view>
             </view>
