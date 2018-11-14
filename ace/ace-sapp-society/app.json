@@ -41,8 +41,7 @@
     "page/activityEdit/index",
     "page/enterActivity/index",
     "page/aboutus/index",
-    "page/datas/index",
-    "page/liveStatus/index"
+    "page/datas/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
