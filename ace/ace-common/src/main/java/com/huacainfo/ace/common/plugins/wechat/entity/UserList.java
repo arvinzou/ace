@@ -1,9 +1,13 @@
 package com.huacainfo.ace.common.plugins.wechat.entity;
 
+import java.util.List;
+
 /**
- * Created by HuaCai008 on 2018/6/11.
+ * Created by ArvinZou on 2018/6/11.
  */
 public class UserList {
+    // 一次性拉取OPENID的最大个数
+    public static final int MAX_GET_COUNT = 10000;
 
     /**
      * 关注该公众账号的总用户数
@@ -54,14 +58,14 @@ public class UserList {
         this.next_openid = next_openid;
     }
 
-    class UserOpenIds {
-        private String[] openid;
+    public class UserOpenIds {
+        private List<String> openid;
 
-        public String[] getOpenid() {
+        public List<String> getOpenid() {
             return openid;
         }
 
-        public void setOpenid(String[] openid) {
+        public void setOpenid(List<String> openid) {
             this.openid = openid;
         }
     }

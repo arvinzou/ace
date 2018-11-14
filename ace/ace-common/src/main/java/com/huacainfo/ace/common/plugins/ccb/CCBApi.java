@@ -2,6 +2,7 @@ package com.huacainfo.ace.common.plugins.ccb;
 
 
 import com.huacainfo.ace.common.plugins.ccb.pojo.CCBConfig;
+import com.huacainfo.ace.common.plugins.ccb.pojo.CCBOrder;
 import com.huacainfo.ace.common.plugins.ccb.pojo.QrURLResp;
 import com.huacainfo.ace.common.plugins.ccb.util.HttpClientUtil;
 import com.huacainfo.ace.common.plugins.ccb.util.MD5;
@@ -27,6 +28,134 @@ public class CCBApi {
     public static final String BANK_URL = "https://ibsbjstar.ccb.com.cn/CCBIS/ccbMain";
     public static final String CHARSET_ISO_8859_1 = "ISO-8859-1";
     private static Logger logger = LoggerFactory.getLogger(CCBApi.class);
+
+
+    /**
+     * 订单查询接口 --  按时间区间查询
+     *
+     * @return CCBOrder
+     */
+    public static CCBOrder query(String dateTime, String startDt, String endDt, CCBConfig cfg) {
+        String QUPWD = cfg.getQupwd();//"7251211" //商户平台登录密码
+        String MERCHANTID = cfg.getMerchantId();// "105000083980372";          //商户代码
+        String BRANCHID = cfg.getBranchId();//"430000000";                 //分行代码
+        String POSID = cfg.getPosId();// "023328365";                    //柜台号
+        //单个查询,优先级高于时间区间 -- 商户订单号
+        String ORDERID = "";//"b3b6b840f0124e4db576449bd1939d76";
+        //与订单ID二选一
+        //时间区间查询 -- 交易日期
+        String ORDERDATE = dateTime;    //订单日期
+        String BEGORDERTIME = startDt;  // "00:00:00";
+        String ENDORDERTIME = endDt;    //"23:59:59";
+        String BEGORDERID = "";
+        String ENDORDERID = "";
+
+        String TXCODE = "410408";//交易码TXCODE=410408，这个参数的值是固定的，不可以修改
+        String SEL_TYPE = "3";//1页面形式  2文件返回形式 (提供TXT和XML格式文件的下载) 3 XML页面形式
+        String TYPE = "0";//0支付流水 1退款流水
+        String KIND = "0";//0 未结算流水        1 已结算流水
+        String STATUS = "3";//0失败  1成功  2不确定 3全部（已结算流水查询不支持全部）
+        String PAGE = "1";
+        String CHANNEL = "";
+        String OPERATOR = "";
+
+        String param = "MERCHANTID=" + MERCHANTID + "&BRANCHID=" + BRANCHID + "&POSID=" + POSID
+                + "&ORDERDATE=" + ORDERDATE + "&BEGORDERTIME=" + BEGORDERTIME + "&ENDORDERTIME=" + ENDORDERTIME
+                + "&ORDERID=" + ORDERID
+                + "&QUPWD=&TXCODE=" + TXCODE + "&TYPE=" + TYPE + "&KIND=" + KIND + "&STATUS=" + STATUS
+                + "&SEL_TYPE=" + SEL_TYPE + "&PAGE=" + PAGE + "&OPERATOR=" + OPERATOR + "&CHANNEL=" + CHANNEL;
+        Map map = new HashMap();
+        map.put("MERCHANTID", MERCHANTID);
+        map.put("BRANCHID", BRANCHID);
+        map.put("POSID", POSID);
+        map.put("ORDERDATE", ORDERDATE);
+        map.put("BEGORDERTIME", BEGORDERTIME);
+        map.put("ENDORDERTIME", ENDORDERTIME);
+        map.put("BEGORDERID", BEGORDERID);
+        map.put("ENDORDERID", ENDORDERID);
+        map.put("QUPWD", QUPWD);
+        map.put("TXCODE", TXCODE);
+        map.put("TYPE", TYPE);
+        map.put("KIND", KIND);
+        map.put("STATUS", STATUS);
+        map.put("ORDERID", ORDERID);
+        map.put("PAGE", PAGE);
+        map.put("CHANNEL", CHANNEL);
+        map.put("SEL_TYPE", SEL_TYPE);
+        map.put("OPERATOR", OPERATOR);
+        map.put("MAC", MD5.md5Str(param));
+
+        String ret = HttpClientUtil.httpPost(BANK_URL, map);
+
+        System.out.println("=======================return=======================");
+        System.out.println(ret);
+
+        return null;
+    }
+
+    /**
+     * 订单查询接口 -- 按商户订单号查询
+     *
+     * @return CCBOrder
+     */
+    public static CCBOrder query(String orderId, CCBConfig cfg) {
+        String MERCHANTID = cfg.getMerchantId();// "105000083980372";          //商户代码
+        String BRANCHID = cfg.getBranchId();//"430000000";                 //分行代码
+        String POSID = cfg.getPosId();// "023328365";                    //柜台号
+        String QUPWD = cfg.getQupwd();//"7251211" //商户平台登录密码
+
+        //单个查询,优先级高于时间区间 -- 商户订单号
+        String ORDERID = orderId;//"b3b6b840f0124e4db576449bd1939d76";
+        //与订单ID二选一
+        //时间区间查询 -- 交易日期
+        String ORDERDATE = "";                  //订单日期
+        String BEGORDERTIME = "00:00:00";
+        String ENDORDERTIME = "23:59:59";
+        String BEGORDERID = "";
+        String ENDORDERID = "";
+
+        String TXCODE = "410408";//交易码TXCODE=410408，这个参数的值是固定的，不可以修改
+        String SEL_TYPE = "3";//1页面形式  2文件返回形式 (提供TXT和XML格式文件的下载) 3 XML页面形式
+        String TYPE = "0";//0支付流水 1退款流水
+        String KIND = "0";//0 未结算流水        1 已结算流水
+        String STATUS = "3";//0失败  1成功  2不确定 3全部（已结算流水查询不支持全部）
+        String PAGE = "1";
+        String CHANNEL = "";
+        String OPERATOR = "";
+
+        String param = "MERCHANTID=" + MERCHANTID + "&BRANCHID=" + BRANCHID + "&POSID=" + POSID
+                + "&ORDERDATE=" + ORDERDATE + "&BEGORDERTIME=" + BEGORDERTIME + "&ENDORDERTIME=" + ENDORDERTIME
+                + "&ORDERID=" + ORDERID
+                + "&QUPWD=&TXCODE=" + TXCODE + "&TYPE=" + TYPE + "&KIND=" + KIND + "&STATUS=" + STATUS
+                + "&SEL_TYPE=" + SEL_TYPE + "&PAGE=" + PAGE + "&OPERATOR=" + OPERATOR + "&CHANNEL=" + CHANNEL;
+        Map map = new HashMap();
+        map.put("MERCHANTID", MERCHANTID);
+        map.put("BRANCHID", BRANCHID);
+        map.put("POSID", POSID);
+        map.put("ORDERDATE", ORDERDATE);
+        map.put("BEGORDERTIME", BEGORDERTIME);
+        map.put("ENDORDERTIME", ENDORDERTIME);
+        map.put("BEGORDERID", BEGORDERID);
+        map.put("ENDORDERID", ENDORDERID);
+        map.put("QUPWD", QUPWD);
+        map.put("TXCODE", TXCODE);
+        map.put("TYPE", TYPE);
+        map.put("KIND", KIND);
+        map.put("STATUS", STATUS);
+        map.put("ORDERID", ORDERID);
+        map.put("PAGE", PAGE);
+        map.put("CHANNEL", CHANNEL);
+        map.put("SEL_TYPE", SEL_TYPE);
+        map.put("OPERATOR", OPERATOR);
+        map.put("MAC", MD5.md5Str(param));
+
+        String ret = HttpClientUtil.httpPost(BANK_URL, map);
+
+        System.out.println("=======================return=======================");
+        System.out.println(ret);
+
+        return null;
+    }
 
     /**
      * 发起支付接口

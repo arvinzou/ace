@@ -48,13 +48,44 @@ body{
 }
 .banner{
 	width: 90%;
-	height: 3.773333rem;
+	height: 3.2rem;
 	margin: 0.24rem auto;
-	border-radius: 0.32rem;
-	background: #5CE1D6;
+	border-radius: 0.266666rem;
+	background: #55E0D4;
 	color: #FFFFFF;
-	text-align: center;
+	padding:0.533333rem 0.586666rem 0.48rem;
+	font-size: 0.32rem;
+	position: relative;
 }
+
+.banner .getmoney{
+	position: absolute;
+	width:1.573333rem;
+	height:0.586666rem;
+	background:rgba(255,255,255,0.4);
+	border-radius:0.293333rem 0px 0px 0.293333rem;
+	right: 0;
+	top:0.533333rem;
+	font-weight:500;
+	line-height:0.586666rem;
+}
+
+.banner .getmoney img{
+	width: 0.4rem;
+	margin: 0 0.1rem 0.03rem 0.2rem;
+}
+
+.banner .income{
+	font-size: 0.906666rem;
+	line-height: 1rem;
+	font-size: 0.906666rem;
+	margin-bottom: 0.35rem;
+}
+
+.box p{
+	margin: 0;
+}
+
 .title02{
 	font-size: 0.32rem;
 /*	padding-left: 0.866666rem;*/
