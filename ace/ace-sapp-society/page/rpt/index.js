@@ -31,7 +31,8 @@ Page({
     displayVideo: 'hide',
     displayAudio: 'hide',
     playimg: "../../image/record_on.png",
-    recorderStatus: false
+    recorderStatus: false,
+    chooseVideoShow:true
   },
   onReady: function (res) {
     console.log('index.js.onReady');
@@ -235,10 +236,11 @@ Page({
             if (obj.success){
               that.setData({
                 mediUrl: obj.file_path,
-                displayVideo: 'show'
+                displayVideo: 'show',
+                chooseVideoShow: false
               });
             }
-            
+
           },
           fail: function (res) {
             wx.hideLoading();
@@ -319,7 +321,7 @@ Page({
   delVideo: function () {
     console.log("delVideo");
     let that = this;
-    that.setData({ displayVideo: 'hide', mediUrl: null });
+    that.setData({ displayVideo: 'hide', mediUrl: null, chooseVideoShow: true });
   },
   delAideo: function () {
     let that = this;

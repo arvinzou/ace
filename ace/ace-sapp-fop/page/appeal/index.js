@@ -34,6 +34,7 @@ Page({
     recorderStatus: false,
     categorys: ["政策","资金", "法律", "其他"],
     categoryIndex: 0,
+    chooseVideoShow: true
   },
   onReady: function (res) {
 
@@ -222,7 +223,7 @@ Page({
             var obj = JSON.parse(resp.data);
             console.log(obj);
             that.setData({
-              
+              chooseVideoShow: false,
               mediUrl:  obj.file_path,
               displayVideo: 'show'
             });
@@ -307,7 +308,7 @@ Page({
   delVideo: function () {
     console.log("delVideo");
     let that = this;
-    that.setData({ displayVideo: 'hide', mediUrl: null });
+    that.setData({ displayVideo: 'hide', mediUrl: null, chooseVideoShow: true });
   },
   delAideo: function () {
     let that = this;

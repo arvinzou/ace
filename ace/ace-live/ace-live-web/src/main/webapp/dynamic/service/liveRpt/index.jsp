@@ -306,7 +306,6 @@
             <div class="col-md-10">
                 <div class="row describtion"><img src="\${data.o.rpt.headimgurl}" style="max-width:30px;"></div>
                 <div class="row describtion">\${data.o.rpt.nickname}</div>
-                <div class="row describtion">\${data.o.createTime}</div>
             </div>
         </div>
         <h4>结果</h4>

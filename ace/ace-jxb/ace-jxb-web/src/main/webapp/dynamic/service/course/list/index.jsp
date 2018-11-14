@@ -150,7 +150,7 @@
                 \${item.createDate}
             </td>
             <td width="15%" >
-                \${item.duration}秒
+                \${item.duration}分钟
             </td>
             <td width="10%" >
                 {@if item.free == 1}
