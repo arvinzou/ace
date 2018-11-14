@@ -236,7 +236,7 @@ Page({
                         success(res) {
                             that.uploadFileFun(res.tempFilePaths[0]);
                         }
-                    })
+                    });
                 } else if (res.tapIndex === 1) {
                     wx.chooseImage({
                         count: 1, // 设置最多三张
@@ -310,7 +310,7 @@ Page({
             });
             return;
         }
-        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0}
+        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0, "politicalStatus": politicalStatus}
         util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
             function (ret) {
                 if (ret.status == 0) {
