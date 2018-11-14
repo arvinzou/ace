@@ -388,4 +388,26 @@ public class LiveController extends LiveBaseController {
         }
         return rst;
     }
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(设置直播状态1预告2直播中3结束)
+     * @param: @param id
+     * @param status
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    @RequestMapping(value = "/www/updateStatus")
+    @ResponseBody
+    public MessageResponse updateStatusWww(String id,String status) throws Exception {
+        SingleResult<UserProp> rst=authorityService.getCurUserPropByOpenId(this.getCurWxUser().getUnionId());
+        if(rst.getStatus()==0){
+            return this.liveService.updateStatus(id,status,rst.getValue());
+        }
+        return rst;
+    }
 }
