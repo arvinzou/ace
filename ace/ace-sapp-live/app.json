@@ -10,8 +10,8 @@
     "page/liveCsl/index",
     "page/userinfo/index",
     "page/bind/index",
-    "page/preview/index"
-    
+    "page/preview/index",
+    "page/liveStatus/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
