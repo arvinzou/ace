@@ -66,7 +66,9 @@ Page({
     nameDisplay: false,
     scoll: 'live-top-box-noscoll',
     sort: '0',
-    screenopt:'../../image/fillwin.png'
+    screenopt:'../../image/fillwin.png',
+    devicePosition:"front",
+    frontimg: '../../image/front.png'
   },
   onReady: function (res) {
     var that = this;
@@ -486,6 +488,14 @@ Page({
     wx.navigateTo({
       url: '../rpt/index?id=' + e.currentTarget.dataset.id
     });
+  },
+  front:function(e){
+    console.log(e);
+    var that=this;
+    if (that.data.devicePosition =="front"){
+      that.setData({ devicePosition:"back"});
+    }else{
+      that.setData({ devicePosition: "front" });
+    }
   }
-
 });
