@@ -192,6 +192,7 @@ Page({
       var that = this;
       that.activityIng(1);
       that.initReport();
+      wx.stopPullDownRefresh();
   },
 
   /**
