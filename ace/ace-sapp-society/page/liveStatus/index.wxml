@@ -1,0 +1,18 @@
+<view class='index'>
+  <form catchsubmit="formSubmit" catchreset="formReset">
+    <view class="kind-list">
+      <view class="kind-list-item">
+
+        <radio-group bindchange="statusChange" name="status">
+          <label wx:for="{{statusItems}}" wx:key="value" class='radio'>
+            <radio value="{{item.value}}" checked="{{item.checked}}" /> {{item.name}}
+          </label>
+        </radio-group>
+      </view>
+      
+      <view class="kind-list-item">
+        <button class="weui-btn" disabled="{{disabled}}" loading="{{loading}}" style="width:98%;color:#fff;background-color:#1a9fff; border-radius: 2px;" formType="submit">提交</button>
+      </view>
+    </view>
+  </form>
+</view>
