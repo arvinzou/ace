@@ -34,7 +34,8 @@ Page({
     recorderStatus: false,
     isRegist: false,
     userinfoData: null,
-    wxUser: null
+    wxUser: null,
+    chooseVideoShow: true
   },
   onReady: function (res) {
     console.log('index.js.onReady');
@@ -287,7 +288,8 @@ Page({
               if (obj.success){
                 that.setData({
                   mediUrl: obj.file_path,
-                  displayVideo: 'show'
+                  displayVideo: 'show',
+                  chooseVideoShow: false
                 });
               }
 
@@ -371,7 +373,7 @@ Page({
     delVideo: function () {
       console.log("delVideo");
       let that = this;
-      that.setData({ displayVideo: 'hide', mediUrl: null });
+      that.setData({ displayVideo: 'hide', mediUrl: null, chooseVideoShow: true });
     },
     delAideo: function () {
       let that = this;
