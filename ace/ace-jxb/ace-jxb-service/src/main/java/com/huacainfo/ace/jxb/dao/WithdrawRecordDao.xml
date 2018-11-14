@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.WithdrawRecordDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.WithdrawRecord">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="counselorId" jdbcType="VARCHAR" property="counselorId"/>
+        <result column="openId" jdbcType="VARCHAR" property="openId"/>
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
+        <result column="withdrawType" jdbcType="CHAR" property="withdrawType"/>
+        <result column="applyAmount" jdbcType="DECIMAL" property="applyAmount"/>
+        <result column="taxAmount" jdbcType="DECIMAL" property="taxAmount"/>
+        <result column="actAmount" jdbcType="DECIMAL" property="actAmount"/>
+        <result column="auditRst" jdbcType="CHAR" property="auditRst"/>
+        <result column="auditRemark" jdbcType="VARCHAR" property="auditRemark"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, counselorId, openId, withdrawType, applyAmount, taxAmount, actAmount, auditRst, 
+    auditRemark, remark, status, createDate, updateDate, realName
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from withdraw_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from withdraw_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.WithdrawRecord">
+    insert into withdraw_record (id, counselorId, openId, 
+      withdrawType, applyAmount, taxAmount, 
+      actAmount, auditRst, auditRemark, 
+      remark, status, createDate, updateDate,
+      realName)
+    values (#{id,jdbcType=VARCHAR}, #{counselorId,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
+      #{withdrawType,jdbcType=CHAR}, #{applyAmount,jdbcType=DECIMAL}, #{taxAmount,jdbcType=DECIMAL}, 
+      #{actAmount,jdbcType=DECIMAL}, #{auditRst,jdbcType=CHAR}, #{auditRemark,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{realName,jdbcType=VARCHAR})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.WithdrawRecord">
+    update withdraw_record
+    set counselorId = #{counselorId,jdbcType=VARCHAR},
+      openId = #{openId,jdbcType=VARCHAR},
+      realName = #{realName,jdbcType=VARCHAR},
+      withdrawType = #{withdrawType,jdbcType=CHAR},
+      applyAmount = #{applyAmount,jdbcType=DECIMAL},
+      taxAmount = #{taxAmount,jdbcType=DECIMAL},
+      actAmount = #{actAmount,jdbcType=DECIMAL},
+      auditRst = #{auditRst,jdbcType=CHAR},
+      auditRemark = #{auditRemark,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from withdraw_record t
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--vo结果集-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.WithdrawRecordVo">
+
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        id, counselorId, openId, realName, withdrawType, applyAmount, taxAmount, actAmount,
+        auditRst, auditRemark, remark, status, createDate, updateDate
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from withdraw_record t
+        where 1=1
+        <if test="condition.montDateStr !=null and condition.montDateStr !=&quot;&quot;">
+            and t.createDate like concat(#{condition.montDateStr,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.withdrawType !=null and condition.withdrawType !=&quot;&quot;">
+            and t.withdrawType = #{condition.withdrawType,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.counselorId !=null and condition.counselorId !=&quot;&quot;">
+            and t.counselorId = #{condition.counselorId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.auditRst !=null and condition.auditRst !=&quot;&quot;">
+            and t.auditRst = #{condition.auditRst,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.auditRstArray !=null">
+            and t.auditRst in
+            <foreach collection="condition.auditRstArray" item="item" separator="," open="(" close=")">
+                #{item}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <update id="updateAuditRst" parameterType="com.huacainfo.ace.jxb.model.WithdrawRecord">
+        update withdraw_record
+        set auditRst = #{auditRst,jdbcType=CHAR},
+        auditRemark = #{auditRemark,jdbcType=VARCHAR},
+        updateDate = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

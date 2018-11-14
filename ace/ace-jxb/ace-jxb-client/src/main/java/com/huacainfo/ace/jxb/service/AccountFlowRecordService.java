@@ -31,7 +31,7 @@ public interface AccountFlowRecordService {
      *
      * @param userId   用户ID
      * @param userType 用户类型 1-咨询师，2-家长
-     * @param bisType  业务类型 1-订单入账
+     * @param bisType  业务类型 1-订单入账 2-账户提现
      * @param amount   金额数值
      * @param srcId    源头单据id
      * @param srcType  源头单据类型 1-订单id（base_order.id）

@@ -1,10 +1,13 @@
 package com.huacainfo.ace.jxb.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.PostLevelService;
+import com.huacainfo.ace.jxb.service.WithdrawRecordService;
+import com.huacainfo.ace.jxb.vo.WithdrawRecordVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +24,8 @@ public class WCounselorController extends JxbBaseController {
     private CounselorService counselorService;
     @Autowired
     private PostLevelService postLevelService;
+    @Autowired
+    private WithdrawRecordService withdrawRecordService;
 
 
     /**
@@ -49,5 +54,27 @@ public class WCounselorController extends JxbBaseController {
     public ResultResponse examine(String quarter, String counselorId) {
 
         return postLevelService.examine(quarter, counselorId);
+    }
+
+    /**
+     * 余额提现申请
+     *
+     * @param unionid unionid 可选
+     * @param openId  openId 可选
+     * @param params  必须
+     * @return ResultResponse
+     */
+    @RequestMapping("/withdraw")
+    public ResultResponse withdraw(String unionid, String openId, WithdrawRecordVo params) throws Exception {
+        if (StringUtil.isEmpty(unionid)) {
+            Userinfo userinfo = getCurUserinfo();
+            unionid = userinfo.getUnionid();
+            openId = userinfo.getOpenid();
+        }
+        params.setCounselorId(StringUtil.isEmpty(params.getCounselorId()) ? unionid : params.getCounselorId());
+        params.setOpenId(openId);
+
+
+        return withdrawRecordService.withdraw(params);
     }
 }
