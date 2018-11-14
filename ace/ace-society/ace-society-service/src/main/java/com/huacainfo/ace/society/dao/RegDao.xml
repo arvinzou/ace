@@ -75,7 +75,7 @@
           t.user_level as regType,
           p.id as pId,
           p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
-          p.accPoints as pAccPoints, p.validPoints as pValidPoints, p.status as pStatus
+          p.accPoints as pAccPoints, p.validPoints as pValidPoints, p.status as pStatus,
 
         org.id as orgId,
           org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
