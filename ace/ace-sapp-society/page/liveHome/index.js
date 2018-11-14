@@ -33,11 +33,16 @@ Page({
 
   onLoad: function () {
     var that = this;
+    page = 1;
     that.initData();
     that.setData({
         userinfo: wx.getStorageSync('userinfo')
     });
    
+  },
+  onShow:function(){
+    page = 0;
+    console.log("onShow");
   },
   onPullDownRefresh: function () {
     let that = this;
@@ -53,6 +58,7 @@ Page({
           o.startTime = new Date(o.startTime).Format('yyyy-MM-dd hh:mm');
           that.data.listLive.push(o);
         });
+  
        
         that.setData({
           listLive: that.data.listLive
