@@ -3,19 +3,20 @@ package com.huacainfo.ace.jxb.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.api.WeChatPayApi;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.jxb.constant.AuditConstant;
 import com.huacainfo.ace.jxb.constant.RegType;
 import com.huacainfo.ace.jxb.dao.CounselorDao;
 import com.huacainfo.ace.jxb.dao.WithdrawRecordDao;
+import com.huacainfo.ace.jxb.dao.WithdrawWxLogDao;
 import com.huacainfo.ace.jxb.model.WithdrawRecord;
+import com.huacainfo.ace.jxb.model.WithdrawWxLog;
 import com.huacainfo.ace.jxb.service.AccountFlowRecordService;
 import com.huacainfo.ace.jxb.service.WithdrawRecordService;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
@@ -29,7 +30,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("withdrawRecordService")
 /**
@@ -44,9 +47,11 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
     @Autowired
+    private AccountFlowRecordService accountFlowRecordService;
+    @Autowired
     private CounselorDao counselorDao;
     @Autowired
-    private AccountFlowRecordService accountFlowRecordService;
+    private WithdrawWxLogDao withdrawWxLogDao;
 
     /**
      * @Description: TODO(提现申请记录分页查询)
@@ -206,11 +211,71 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
     @Override
     public MessageResponse audit(String id, String rst, String remark,
                                  UserProp userProp) throws Exception {
+        WithdrawRecord record = withdrawRecordDao.selectByPrimaryKey(id);
+        if (record == null) {
+            return new MessageResponse(ResultCode.FAIL, "记录丢失");
+        }
+        //扣税操作
+        BigDecimal tax = null == record.getTaxAmount() ? BigDecimal.ZERO : record.getTaxAmount();
+        BigDecimal actAmount = record.getApplyAmount().subtract(tax);
+        if (actAmount.compareTo(BigDecimal.ZERO) <= 0) {
+            return new MessageResponse(ResultCode.FAIL, "无效提现金额");
+        }
+        record.setActAmount(actAmount);
+        record.setAuditRst(rst);
+        record.setAuditRemark(remark);
+        record.setUpdateDate(DateUtil.getNowDate());
+        withdrawRecordDao.updateByPrimaryKey(record);
+        //调用微信企业支付接口
+        if (rst.equals(AuditConstant.PASS) && "1".equals(record.getWithdrawType())) {
+            Map<String, Object> apiRst;
+            try {
+                apiRst = callMchPay(record);
+            } catch (Exception e) {
+                logger.error("[" + id + "]企业付款调用异常：{}", e);
+                apiRst = new HashMap<>();
+                apiRst.put("err_code", "-1");
+                apiRst.put("err_msg", e.getMessage());
+            }
+            //接口日志记录
+            WithdrawWxLog log = new WithdrawWxLog();
+            log.setId(GUIDUtil.getGUID());
+            log.setRecordId(record.getId());
+            log.setLogTxt(JsonUtil.toJson(apiRst));
+            log.setStatus("1");
+            log.setCreateDate(DateUtil.getNowDate());
+            withdrawWxLogDao.insert(log);
+        }
 
-
-        dataBaseLogService.log("审核提现申请记录", "提现申请记录", id, id,
-                "提现申请记录", userProp);
+        dataBaseLogService.log("审核提现申请记录", "提现申请记录", id, id, "提现申请记录", userProp);
         return new MessageResponse(ResultCode.SUCCESS, "提现申请记录审核完成！");
+    }
+
+    /**
+     * 调用微信企业支付接口
+     *
+     * @param record
+     * @return
+     */
+    private Map<String, Object> callMchPay(WithdrawRecord record) {
+        String outTradeNo = record.getId();
+        String openId = record.getOpenId();//ogxN71k1hAUwgYDDIhzMplqWbo4U
+        String realName = record.getRealName();//"罗灿";
+        String amount = record.getActAmount().toString();// "1";
+        String desc = record.getAuditRemark();//"企业付款测试";
+
+        String mchAppId = PropertyUtil.getProperty("appid");
+        String mchId = PropertyUtil.getProperty("mch_id");
+        String apiKey = PropertyUtil.getProperty("api_key");
+        byte[] certBytes = FileUtil.File2byte(PropertyUtil.getProperty("cert_path"));
+        Map<String, Object> rst = WeChatPayApi.mchPay(outTradeNo, openId, realName, amount, desc,
+                mchAppId, mchId, apiKey, certBytes);
+//        if ("SUCCESS".equals(rst.get("return_code"))
+//                && "200".equals(rst.get("rst_code"))) {
+//            Map<String, Object> map = (Map<String, Object>) rst.get("body");
+//        }
+
+        return rst;
     }
 
     /**

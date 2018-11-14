@@ -15,17 +15,14 @@ public interface WithdrawWxLogDao {
 
     int insert(WithdrawWxLog record);
 
-
     int updateByPrimaryKey(WithdrawWxLog record);
-
 
     WithdrawWxLogVo selectVoByPrimaryKey(String id);
 
-    List
-            <WithdrawWxLogVo> findList(@Param("condition") WithdrawWxLogQVo condition,
-                                       @Param("start") int start,
-                                       @Param("limit") int limit,
-                                       @Param("orderBy") String orderBy);
+    List<WithdrawWxLogVo> findList(@Param("condition") WithdrawWxLogQVo condition,
+                                   @Param("start") int start,
+                                   @Param("limit") int limit,
+                                   @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") WithdrawWxLogQVo condition);
 
