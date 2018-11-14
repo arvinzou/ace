@@ -39,8 +39,10 @@
 
 
 <block wx:if='{{sysUserInfo.regType == "2"}}'>
+<block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>
   <cover-view class="btn-add" bindtap="add">
     <cover-image class="btn-img" src="../../image/添加.png" />
   </cover-view>
+</block>
 </block>
 
