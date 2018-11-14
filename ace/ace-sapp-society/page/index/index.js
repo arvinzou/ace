@@ -190,8 +190,10 @@ Page({
    */
   onPullDownRefresh: function () {
       var that = this;
+      that.initUserData();
       that.activityIng(1);
       that.initReport();
+      wx.stopPullDownRefresh();
   },
 
   /**
