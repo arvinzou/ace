@@ -495,7 +495,7 @@ Page({
     if (that.data.devicePosition =="front"){
       that.setData({ devicePosition:"back"});
     }else{
-      that.setData({ devicePosition: "front" });
+      that.setData({ devicePosition: "front"});
     }
   }
 });
