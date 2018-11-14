@@ -75,12 +75,12 @@
           t.user_level as regType,
           p.id as pId,
           p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
-          p.accPoints as pAccPoints, p.validPoints as pValidPoints,
+          p.accPoints as pAccPoints, p.validPoints as pValidPoints, p.status as pStatus
 
         org.id as orgId,
           org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
 	      org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
-	      org.validPoints as orgValidPoints
+	      org.validPoints as orgValidPoints, org.status as orgStatus
         from portal.users t
         left join portal.wx_user wx on t.user_id = wx.unionId
         left join society.person_info p on t.user_id = p.id
