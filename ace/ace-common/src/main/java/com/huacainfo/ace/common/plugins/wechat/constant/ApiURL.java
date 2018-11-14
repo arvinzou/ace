@@ -39,5 +39,14 @@ public interface ApiURL {
      */
     String USER_LIST_API_URL = https + "api.weixin.qq.com/cgi-bin/user/get?access_token=#ACCESS_TOKEN#&next_openid=#NEXT_OPENID#";
 
+    /**
+     * 商户号 - 企业付款接口地址
+     */
+    String MCH_PAY_API_URL = https + "api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers";
+    /**
+     * 商户号 - 企业付款结果查询接口地址
+     */
+    String MCH_PAY_QRY_API_URL = https + "api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo";
+
 
 }

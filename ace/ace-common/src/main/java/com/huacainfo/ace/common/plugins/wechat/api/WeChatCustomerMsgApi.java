@@ -25,18 +25,18 @@ import java.util.Map;
  * @version 1.0
  * @since JDK 1.8
  */
-public class WeChatCustomerMessageApi {
+public class WeChatCustomerMsgApi {
     private static String customMessageUrl = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=";
 
     /**
      * 发送客服消息send
      *
-     * @param sysAccount 账套号
-     * @param openId     微信唯一识别ID
-     * @param text       消息内容
+     * @param accessToken 授权token
+     * @param openId      微信唯一识别ID
+     * @param text        消息内容
      * @return 发送结果
      */
-    public static ApiResult sendText(String sysAccount, String openId, String text) {
+    public static ApiResult sendText(String accessToken, String openId, String text) {
         Map<String, Object> json = new HashMap<String, Object>();
         json.put("touser", openId);
         json.put("msgtype", "text");
@@ -45,7 +45,7 @@ public class WeChatCustomerMessageApi {
         textObj.put("content", text);
 
         json.put("text", textObj);
-        return sendMsg(sysAccount, json);
+        return sendMsg(accessToken, json);
     }
 
     /**
@@ -67,7 +67,7 @@ public class WeChatCustomerMessageApi {
      * @param articles 图文内容
      * @return ApiResult
      */
-    public static ApiResult sendNews(String sysAccount, String openId, List<Articles> articles) {
+    public static ApiResult sendNews(String accessToken, String openId, List<Articles> articles) {
         Map<String, Object> json = new HashMap<String, Object>();
         json.put("touser", openId);
         json.put("msgtype", "news");
@@ -76,7 +76,7 @@ public class WeChatCustomerMessageApi {
         news.put("articles", articles);
 
         json.put("news", news);
-        return sendMsg(sysAccount, json);
+        return sendMsg(accessToken, json);
     }
 
     /**
