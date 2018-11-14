@@ -1,10 +1,8 @@
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.jxb.model.BaseOrder;
-import com.huacainfo.ace.jxb.model.ConsultOrder;
+import com.huacainfo.ace.common.plugins.wechat.api.WeChatPayApi;
+import com.huacainfo.ace.common.tools.FileUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -17,35 +15,29 @@ public class CommonTest {
 
     @Test
     public void test() {
+        String outTradeNo = GUIDUtil.getGUID();
+        System.out.println(outTradeNo);
+        String openId = "ogxN71k1hAUwgYDDIhzMplqWbo4U";
+        String realName = "罗灿";
+        String amount = "1";
+        String desc = "企业付款测试";
+        String mchAppId = "wx6a39a6f86925a42d";
+        String mchId = "1500768651";
+        String apiKey = "8fbcb758e1074713bfd39ffd88beb5e1";
+        byte[] certBytes = FileUtil.File2byte("F:\\cert\\apiclient_cert.p12");
+        Map<String, Object> rst = WeChatPayApi.mchPay(outTradeNo, openId, realName, amount, desc,
+                mchAppId, mchId, apiKey, certBytes);
+        System.out.println(rst);
 
-        long between = DateUtil.getBetween(DateUtil.getNow(), "2018-10-21 11:07:22", "Seconds");
+        if ("SUCCESS".equals(rst.get("return_code"))
+                && "200".equals(rst.get("rst_code"))) {
+            Map<String, Object> map = (Map<String, Object>) rst.get("body");
+            System.out.println(map);
+        }
 
-        System.out.println(between);
+//        System.out.println(DateUtil.getNow().substring(8, 10));
+
     }
 
-    public void orderParams() {
-        BaseOrder baseOrder = new BaseOrder();
-        baseOrder.setCategory("1");//1-咨询订单 2-课程订单
-        baseOrder.setConsumerId("o6qFn1EofA_YlWe0h4rUjF5Ksopk");//买家id
-        baseOrder.setCommodityId("1");//商品id
-        baseOrder.setAmount(1);
-
-
-        ConsultOrder consultInfo = new ConsultOrder();
-        consultInfo.setTel("Tel18000");
-        consultInfo.setName("Name");
-        consultInfo.setAge(1);
-        consultInfo.setSex("Sex");
-        consultInfo.setInfo("Info");
-        consultInfo.setSecName("SecName");
-        consultInfo.setRelationship("Relationship");
-        consultInfo.setSecTel("SecTel");
-
-        Map<String, Object> params = new HashMap<>();
-        params.put("base", baseOrder);
-        params.put("consult", consultInfo);
-
-        System.out.println(JsonUtil.toJson(params));
-    }
 
 }

@@ -89,7 +89,10 @@ public interface WithdrawRecordService {
      * @Title:audit
      * @Description: TODO(审核提现申请记录)
      * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
+     * @param: @param rst 审核结果
+     * String TEMP = "temp";//提交审核
+     * String PASS = "pass";//审核通过 -- 提现成功
+     * String REJECT = "reject";//驳回审核 -- 提现失败
      * @param: @param remark 审核备注
      * @param: @throws Exception
      * @return: MessageResponse
@@ -105,4 +108,6 @@ public interface WithdrawRecordService {
      * @return ResultResponse
      */
     ResultResponse withdraw(WithdrawRecordVo params) throws Exception;
+
+
 }

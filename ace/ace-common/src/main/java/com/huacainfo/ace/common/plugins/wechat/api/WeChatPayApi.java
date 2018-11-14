@@ -5,7 +5,6 @@ import com.huacainfo.ace.common.plugins.wechat.util.AmountKit;
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.plugins.wechat.util.PaymentKit;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.tools.JsonUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,11 +21,12 @@ public class WeChatPayApi {
     public static final String FAIL = "-1";
     public static final String SUCCESS = "200";
 
-    private static Map<String, String> rtnMsg(String rstCode, String msg) {
-        Map<String, String> rtn = new HashMap<>();
+    private static Map<String, Object> rtnMsg(String rstCode, String msg, Object body) {
+        Map<String, Object> rtn = new HashMap<>();
         rtn.put("return_code", "SUCCESS");
         rtn.put("rst_code", rstCode);
         rtn.put("return_msg", msg);
+        rtn.put("body", body);
         return rtn;
     }
 
@@ -44,16 +44,16 @@ public class WeChatPayApi {
      */
     @RequestMapping("/mchPay")
     @ResponseBody
-    public static Map<String, String> mchPay(String outTradeNo, String openId, String realName, String amount, String desc,
+    public static Map<String, Object> mchPay(String outTradeNo, String openId, String realName, String amount, String desc,
                                              String mchAppId, String mchId, String apiKey, byte[] certBytes) {
         if (!StringUtil.areNotEmpty(outTradeNo, openId, realName, amount)) {
-            return rtnMsg(FAIL, "缺少付款必要信息");
+            return rtnMsg(FAIL, "缺少付款必要信息", null);
         }
         if (!StringUtil.areNotEmpty(mchAppId, mchId, apiKey)) {
-            return rtnMsg(FAIL, "缺少商户配置信息");
+            return rtnMsg(FAIL, "缺少商户配置信息", null);
         }
         if (null == certBytes || certBytes.length == 0) {
-            return rtnMsg(FAIL, "缺少企业付款证书");
+            return rtnMsg(FAIL, "缺少企业付款证书", null);
         }
 
         Map<String, String> params = new HashMap<>();
@@ -75,10 +75,10 @@ public class WeChatPayApi {
         try {
             xmlStr = HttpKit.postSSL(ApiURL.MCH_PAY_API_URL, PaymentKit.toXml(params), certBytes, mchId);
         } catch (Exception e) {
-            return rtnMsg(FAIL, "企业支付异常：\n" + e.getMessage());
+            return rtnMsg(FAIL, "企业支付异常：\n" + e.getMessage(), null);
         }
 
-        return rtnMsg(SUCCESS, JsonUtil.toJson(PaymentKit.xmlToMap(xmlStr)));
+        return rtnMsg(SUCCESS, "调用成功", PaymentKit.xmlToMap(xmlStr));
     }
 
     /**
@@ -89,16 +89,16 @@ public class WeChatPayApi {
      */
     @RequestMapping("/mchPayQuery")
     @ResponseBody
-    public static Map<String, String> mchPayQuery(String outTradeNo,
+    public static Map<String, Object> mchPayQuery(String outTradeNo,
                                                   String appId, String mchId, String apiKey, byte[] certBytes) {
         if (StringUtil.isEmpty(outTradeNo)) {
-            return rtnMsg(FAIL, "缺少必要信息");
+            return rtnMsg(FAIL, "缺少必要信息", null);
         }
         if (!StringUtil.areNotEmpty(appId, mchId, apiKey)) {
-            return rtnMsg(FAIL, "缺少商户配置信息");
+            return rtnMsg(FAIL, "缺少商户配置信息", null);
         }
         if (null == certBytes || certBytes.length == 0) {
-            return rtnMsg(FAIL, "缺少企业付款证书");
+            return rtnMsg(FAIL, "缺少企业付款证书", null);
         }
         //post参数
         Map<String, String> params = new HashMap<>();
@@ -111,6 +111,6 @@ public class WeChatPayApi {
         params.put("sign", sign);
         String xmlStr = HttpKit.postSSL(ApiURL.MCH_PAY_QRY_API_URL, PaymentKit.toXml(params), certBytes, mchId);
 
-        return rtnMsg(SUCCESS, JsonUtil.toJson(PaymentKit.xmlToMap(xmlStr)));
+        return rtnMsg(SUCCESS, "调用成功", PaymentKit.xmlToMap(xmlStr));
     }
 }
