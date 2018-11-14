@@ -31,10 +31,7 @@ Page({
       fileUrl: '../../image/addFile.png',
       isUpload: false,
       category: '1',
-      solutionNum: 0,
-      isRegist: false,
-      userinfoData: null,
-      wxUser: null
+      solutionNum: 0
   },
 
   /**
@@ -42,15 +39,8 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      if (!util.is_login()) {
-          wx.navigateTo({ url: "../userinfo/index?url=../releaseIdea/index&type=navigateTo" });
-      }else{
-          if (wx.getStorageSync('userinfo')) {
-              that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') });
-              that.initUserData();
-              that.initWxUserData();
-          }
-      }
+      that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') });
+              
   },
   formSubmit: function(e){
       console.log("fileList=================================="+fileList);
@@ -230,12 +220,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      var that = this;
-      if (wx.getStorageSync('userinfo')) {
-          that.setData({ userId: wx.getStorageSync('WX-SESSION-ID') })
-          that.initUserData();
-          that.initWxUserData();
-      }
+    
   },
 
   /**
