@@ -75,7 +75,8 @@ function post(url, data, success, fail, complete) {
         method: "post",
         dataType: "json",
         header: {
-            'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
+            'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID'),//每次请求带上登录标志
+            "Content-Type": "application/x-www-form-urlencoded"
         },
         success: function (res) {
             console.log(res);

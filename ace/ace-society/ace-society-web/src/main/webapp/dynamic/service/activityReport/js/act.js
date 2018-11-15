@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 10,aStatus:33,clist:"1,2,3"};
+var params = {limit: 10,clist:"1,2,3"};
 
 window.onload = function () {
     initPage();
@@ -108,7 +108,7 @@ function detail(id) {
             var navitem = document.getElementById('tpl-detail').innerHTML;
             result.value.content=JSON.parse(result.value.content);
             var html = juicer(navitem, {data: result.value});
-            $("#detail-info").html(html);
+            $("#fm-detail").html(html);
             $("#modal-detail").modal("show");
         }
     })

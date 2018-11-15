@@ -182,5 +182,13 @@ Page({
       wx.navigateTo({
           url: '../liveView/index?id='+e.currentTarget.dataset.id,
       })
-  }
+  },
+  status: function (e) {
+    console.log(e);
+    var that = this;
+    
+    wx.navigateTo({
+      url: '../liveStatus/index?id=' + e.currentTarget.dataset.id
+    });
+  },
 });

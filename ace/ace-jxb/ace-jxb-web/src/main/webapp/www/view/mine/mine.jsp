@@ -41,21 +41,31 @@
 			</div>
 			<div class="row">
 				<div class="banner">
-					<div class="row" style="padding-top: 0.826666rem;"><p class="title02">累计总收益（元）</p></div>
-					<div class="row">
-						{@if data.counselor.amount == undefined || data.counselor.amount == null}
-						<p class="statics">0.00</p>
-						{@else}
-						<p class="statics">\${data.counselor.amount}</p>
-						{@/if}
-					</div>
-					<%--<div class="row"><p class="title02">账户余额：
-						{@if data.counselor.income == undefined || data.counselor.income== null}
-							0.00
-						{@else}
-							\${data.counselor.income}
-						{@/if}
-						元</p></div>--%>
+
+					<p class="title">可提现收益(元）</p>
+					<p class="income">\${data.counselor.income?data.counselor.income:'0.00'}</p>
+
+					<p class="info">累计总收益:
+					\${data.counselor.amount}元&nbsp;&nbsp;
+					   已提现收益:\${data.counselor.amount-data.counselor.amount}元</p>
+
+
+					<%--<div class="row" style="padding-top: 0.826666rem;"><p class="title02">累计总收益（元）</p></div>--%>
+					<%--<div class="row">--%>
+						<%--{@if data.counselor.amount == undefined || data.counselor.amount == null}--%>
+						<%--<p class="statics">0.00</p>--%>
+						<%--{@else}--%>
+						<%--<p class="statics">\${data.counselor.amount}</p>--%>
+						<%--{@/if}--%>
+					<%--</div>--%>
+					<%--<div class="row"><p class="title02">账户余额：--%>
+						<%--{@if data.counselor.income == undefined || data.counselor.income== null}--%>
+							<%--0.00--%>
+						<%--{@else}--%>
+							<%--\${data.counselor.income}--%>
+						<%--{@/if}--%>
+						<%--元</p></div>--%>
+					<div class="getmoney"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAeCAMAAACVFoclAAAASFBMVEVHcEz///////////////////////////////////////////////////////////////////////////////////////////8FevL4AAAAF3RSTlMABfjok+8PPsKAYzOcWErRGH2tgtYgbo9YVV8AAAEdSURBVCjPhVNZooMgDJQ9gBWXZ+f+Ny2CKLT0NV8sQ2aGJMNQgk2SBOeC5MSGTmgrcIVY9AfgEe/DYmbG5smGiHm090wCZO69IUDWVGwFd+0bx7FWEAll3mmNgrw1gPtP6Z6HIlcLuJ47c7FY0PBvMIEswkHltCvGBjEhnCsBm7IDe4OQ+TxdpSRUDp4iGyBcTukwaApZ9Aifc88FsR/5K2cnhINVjKO7ZKU/OSA1QiuczsYUyx/i9mZxRCqWniiquTtBVkqNtRYYrY1CzBHeB5CO3EvlHahruKXvvn8sssS+CIklqaJcD6bKs5oll4E6lWtZetXvIpoOsnbvNUCvC/2qf3by9msaRvZ1oszSmajD0aaqqdx0t2G/TPYL/CESjlk2tF0AAAAASUVORK5CYII=" alt="">提现</div>
 				</div>
 			</div>
 			<div class="row statics_detail">

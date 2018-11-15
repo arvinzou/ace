@@ -22,7 +22,7 @@ Page({
   },
   activityIng: function (limit) {
         var that = this;
-      util.request(cfg.findActivitying, { "start": 0, "limit": limit, "orderBy": "status", "sord":"asc"},
+      util.request(cfg.findActivitying, { "start": 0, "limit": limit, "orderBy": "status asc,dendline", "sord":"desc"},
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
@@ -36,6 +36,8 @@ Page({
                         ret.data[i].hours = that.data.hours;
                         ret.data[i].minutes = that.data.minutes;
                         ret.data[i].isEnd = that.data.isEnd;
+                        
+                        ret.data[i].range = util.formateStringToDate(ret.data[i].dendline).getTime() - new Date().getTime();
                     }
                     that.setData({ activity: ret.data });
 
@@ -79,6 +81,7 @@ Page({
                 isEnd: true
             });
         }
+        
     },
     showActivityDetail: function (e) {
         var that = this;

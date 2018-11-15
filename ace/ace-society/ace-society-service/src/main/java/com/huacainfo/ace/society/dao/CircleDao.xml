@@ -62,10 +62,20 @@
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.Circle">
     update circle
-    set
-      mediaType = #{mediaType,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR},
-      mediaContent = #{mediaContent,jdbcType=LONGVARCHAR}
+    <set>
+      <if test="mediaType != null and mediaType != &quot;&quot;">
+        mediaType = #{mediaType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status != &quot;&quot;">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="content != null and content != &quot;&quot;">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mediaContent != null and mediaContent != &quot;&quot;">
+        mediaContent = #{mediaContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -177,7 +187,7 @@
     t.uid,
     t.sort,
     t.mediaType type,
-    ifnull(e.rst,'1') status,
+    t.status,
     t.likeNum,
     t.content,
     t.mediaContent video,

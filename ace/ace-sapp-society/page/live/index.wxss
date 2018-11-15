@@ -67,6 +67,16 @@ page{
   top:140rpx;
   z-index: 99999;
 }
+.controls-camera{
+  position:absolute;
+  right:20rpx;
+  top:260rpx;
+}
+controls-front{
+  position:absolute;
+  right:20rpx;
+  top:260rpx;
+}
 .info-tip{
   position: fixed;  
   display: flex; 
@@ -663,11 +673,7 @@ max-height: 80rpx;
     color:rgba(255,255,255,1);
     -webkit-appearance:none;
 }
-.controls-screenopt{
-  position:absolute;
-  right:20rpx;
-  top:20rpx;
-}
+
 .btn-add{
   right: 40rpx;
   bottom: 30rpx; 
@@ -680,4 +686,26 @@ max-height: 80rpx;
 .btn-img {
   width: 120rpx;
   height: 120rpx;
+}
+
+.controls-screenopt{
+  position:absolute;
+  right:20rpx;
+  top:20rpx;
+}
+.controls{
+  position:absolute;
+  right:20rpx;
+  top:120rpx;
+  z-index: 99999;
+}
+.controls-camera{
+  position:absolute;
+  right:20rpx;
+  top:220rpx;
+}
+.controls-front{
+  position:absolute;
+  right:20rpx;
+  top:320rpx;
 }

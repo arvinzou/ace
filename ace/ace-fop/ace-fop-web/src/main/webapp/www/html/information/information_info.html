@@ -177,6 +177,7 @@
 </head>
 
 <body>
+<div id="loadBefore" hidden="hidden">
 <div id="header"></div>
 <div class="current_site" ng-cloak ng-if="info.noticeType=='1'">当前位置：市情要闻  >> {{info.title}}</div>
 <div class="current_site" ng-cloak ng-if="info.noticeType=='2'">当前位置：工作动态  >> {{info.title}}</div>
@@ -199,6 +200,11 @@
         <div class="content_info">
         </div>
     </div>
+</div>
+</div>
+
+<div id="loading" class="loading">
+    加载中...
 </div>
 </body>
 

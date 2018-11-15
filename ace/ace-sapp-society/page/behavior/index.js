@@ -55,6 +55,7 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
+        that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo")});
         that.initBehaviorList(that.data.behaviorType);
     },
     previewImage: function (e) {

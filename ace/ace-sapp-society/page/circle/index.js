@@ -8,7 +8,8 @@ Page({
   data: {
       list:[],
       maskFlag: true,
-      videoUrl: null
+      videoUrl: null,
+      userinfo: wx.getStorageSync('userinfo')
   },
     
   /**
@@ -17,16 +18,9 @@ Page({
   onLoad: function (options) {
     console.log(" 生命周期函数--监听页面加载");
     var that = this;
+    that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo")});
     start=0;
-    if (!util.is_login()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../myCircle/index" });
-    }
-    if (util.is_login()){
-      that.setData({
-        userinfo: wx.getStorageSync('userinfo')
-      });
-      that.initData();
-    }
+    that.initData();
   },
     viewVideo: function (e) {
         console.log("查看视频地址=====================================" + e.currentTarget.id);
@@ -57,10 +51,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that=this;
-    that.setData({
-      userinfo: wx.getStorageSync('userinfo')
-    });
+    
   },
 
   /**
@@ -101,7 +92,7 @@ Page({
   },
   initData:function(){
     var that=this;
-      util.request(cfg.server + "/society/circle/www/myCircleList", { start: start, limit: 1000, status:"3"},
+      util.request(cfg.server + "/society/circle/www/getList", { start: start, limit: 1000, status:"3"},
       function (data) {
         that.setData({
           list: data
@@ -116,9 +107,14 @@ Page({
   },
   previewImage: function (e) {
     console.log(e);
+    var list = e.currentTarget.dataset.list;
+    var arrTemp = [];
+    for(var i=0; i<list.length; i++){
+        arrTemp.push(list[i].url);
+    }
     wx.previewImage({
       current: e.currentTarget.id, 
-      urls: [ e.currentTarget.id]
+      urls: arrTemp
     })
   },
   addlike: function (e) {

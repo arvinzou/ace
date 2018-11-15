@@ -7,7 +7,8 @@ Page({
    */
   data: {
     ideaList : [],
-    userId: null
+    userId: null,
+    sysUserInfo: wx.getStorageSync("sysUserInfo")
   },
 
   /**
@@ -15,7 +16,9 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      that.setData({userId: options.userId});
+      that.setData({
+          userId: options.userId,
+          sysUserInfo: wx.getStorageSync("sysUserInfo")});
       that.initList();
   },
 

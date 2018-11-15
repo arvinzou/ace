@@ -9,7 +9,39 @@
 
                 <view class='textInfo'>
                     <view class='name'>{{ userinfoData.nickName }}</view>
-                    <!--<view class='center'>取消绑定</view>-->
+                    <view class='center'>
+                        <block wx:if='{{userinfoData.regType=="2"}}'>
+                            <block wx:if='{{userinfoData.societyOrg.status == "1"}}'>
+                                暂存
+                            </block>
+                            <block wx:if='{{userinfoData.societyOrg.status == "2"}}'>
+                                待审
+                            </block>
+                            <block wx:if='{{userinfoData.societyOrg.status == "3"}}'>
+                                审核通过
+                            </block>
+                            <block wx:if='{{userinfoData.societyOrg.status == "4"}}'>
+                                驳回
+                            </block>
+                        </block>
+                        <block wx:elif='{{userinfoData.regType=="1"}}'>
+                            <block wx:if='{{userinfoData.person.status == "1"}}'>
+                                暂存
+                            </block>
+                            <block wx:if='{{userinfoData.person.status == "2"}}'>
+                                待审
+                            </block>
+                            <block wx:if='{{userinfoData.person.status == "3"}}'>
+                                审核通过
+                            </block>
+                            <block wx:if='{{userinfoData.person.status == "4"}}'>
+                                驳回
+                            </block>
+                        </block>
+                        <block wx:else>
+                            未注册
+                        </block>
+                    </view>
                 </view>
             </view>
             <view class='data'>

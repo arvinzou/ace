@@ -45,6 +45,7 @@ function payTypeCheck(dom) {
     if (dom == 'noPay') {
         payType = '0';
         $('.price-panel').hide();
+
     } else {
         payType = '1';
         $('.price-panel').removeClass('hide');
@@ -130,6 +131,12 @@ function initForm(){
                data['dict149']=staticDictObject['149'];
                data['dict150']=staticDictObject['150'];
                renderPage($("#fm-add"),data, 'tpl-fm');
+               if(data.o.costType == "1"){
+                   $('.price-panel').removeClass('hide');
+                   $('.price-panel').show();
+               }else{
+                   $('.price-panel').hide();
+               }
                initEditor();
                $('input[name=name]').maxlength({
                        alwaysShow: true,

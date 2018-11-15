@@ -14,6 +14,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
+      that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo")});
       that.initList();
   },
 
@@ -95,6 +96,7 @@ downloadFile: function(e){
   onPullDownRefresh: function () {
       var that = this;
       that.initList();
+      wx.stopPullDownRefresh()
   },
 
   /**

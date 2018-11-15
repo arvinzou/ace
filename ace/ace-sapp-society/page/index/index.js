@@ -19,8 +19,17 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      that.activityIng(1);
-      that.initReport();
+      if (!util.isLogin()) {
+          wx.navigateTo({
+              url: "../userinfo/index?url=../index/index&type=switchTab"
+          });
+      } else {
+          if (wx.getStorageSync('userinfo')) {
+              that.initUserData();
+              that.activityIng(1);
+              that.initReport();
+          };
+      }
   },
 
   /**
@@ -28,7 +37,7 @@ Page({
    */
   activityIng: function(limit){
       var that = this;
-      util.request(cfg.findActivitying, {"start":0, "limit": limit},
+      util.request(cfg.findActivitying, { "start": 0, "limit": limit, "orderBy": "status asc,dendline", "sord": "desc"},
           function (ret) {
               if (ret.status == 0) {
                  console.log(ret);
@@ -39,6 +48,8 @@ Page({
                       ret.data[0].dendline = ret.data[0].dendline.substring(0,16);
                       ret.data[0].startDate = ret.data[0].startDate.substring(0, 16);
                       ret.data[0].endDate = ret.data[0].endDate.substring(0, 16);
+
+                      ret.data[0].range = util.formateStringToDate(ret.data[0].dendline).getTime() - new Date().getTime();
                       that.setData({ activity: ret.data[0] });
                   }
                   
@@ -130,6 +141,17 @@ Page({
         let title = data.title;
         wx.navigateTo({ url: '../reportInfo/index?id=' + p + "&title=" + title })
     },
+    initUserData: function () {
+        var that = this;
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    console.log(ret);
+                    util.setSysUser(ret.data);
+                }
+            }
+        );
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -141,7 +163,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      var that = this;
+      if (wx.getStorageSync('userinfo')) {
+          that.initUserData();
+          that.activityIng(1);
+          that.initReport();
+      }
   },
 
   /**
@@ -165,6 +192,7 @@ Page({
       var that = this;
       that.activityIng(1);
       that.initReport();
+      wx.stopPullDownRefresh();
   },
 
   /**

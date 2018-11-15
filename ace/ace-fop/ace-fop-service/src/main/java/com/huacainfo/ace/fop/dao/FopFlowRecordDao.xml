@@ -262,8 +262,7 @@
         union all
         select id,fullName from fop.fop_association) a on t.fromId=a.id
         left join portal.users p on t.personId=p.user_id
-
-        where t.status='1'
+        where 1=1
         <if test="condition.name!=null">
             and a.fullName like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>

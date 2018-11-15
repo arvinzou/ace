@@ -1,4 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%
+session.setAttribute("portalPath", "/portal");
+
+%>
+<script type="text/javascript">
+	var contextPath = '${pageContext.request.contextPath}';
+	var portalPath = '${portalPath}';
+	var fastdfs_server = 'http://zx.huacainfo.com/';
+</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +26,8 @@
     <link rel="stylesheet" href="css/mimax.css"/>
     <script src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
     <script src="${pageContext.request.contextPath}/www/oauth2/cfg"></script>
+    <link rel="stylesheet" href="${portalPath}/content/common/weui/weui.min.css" />
+    <link rel="stylesheet" href="${portalPath}/content/common/weui/jquery-weui.min.css" />
 
 </head>
 <body>
@@ -161,12 +172,13 @@
 
                                     <div style="float:left;color:#999999">
                                         {@if item.rpt.headimgurl}
-                                        <img src="\${item.rpt.headimgurl}" class="headimgp">
+                                        <a href="javascript:openOrder('\${item.rpt.userId}')"><img src="\${item.rpt.headimgurl}" class="headimgp"></a>
                                     {@else}
-                                        <img src="${pageContext.request.contextPath}/www/common/img/head_default.png" class="headimg">
+                                        <a href="javascript:openOrder('\${item.rpt.userId}')"><img src="${pageContext.request.contextPath}/www/common/img/head_default.png" class="headimg"></a>
                                     {@/if}
 
-                                          \${item.rpt.nickname}
+                                        <a href="javascript:openOrder('\${item.rpt.userId}')">\${item.rpt.nickname}</a>
+                                        <a href="javascript:openOrder('\${item.rpt.userId}')">打赏</a>
                                     </div>
 
                                     <em{@if item.createDate == "刚刚"} class="ganggang"{@/if}></em>
@@ -436,14 +448,14 @@
 <script src="${pageContext.request.contextPath}/www/common/js/jweixin-1.0.0.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/plugins/prismplayer/prism-min.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/js/zepto-1.2.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/www/common/plugins/jquery-1.11.0-min.js"></script>
+<script src="${portalPath}/content/common/weui/jquery-2.1.4.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/weui/jquery-weui.min.js?v=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/www/common/js/juicer-min.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/js/sugar-h5.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/js/roll.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/plugins/photoswipe-4.1.1/photoswipe.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/plugins/photoswipe-4.1.1/photoswipe-ui-default.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/js/common.js"></script>
-
 <script src="${pageContext.request.contextPath}/www/common/js/photoswipe.js"></script>
 <script src="${pageContext.request.contextPath}/www/common/js/soshm.js"></script>
 <script src="js/reconnecting-websocket.js"></script>

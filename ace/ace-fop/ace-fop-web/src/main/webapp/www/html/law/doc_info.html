@@ -176,6 +176,7 @@
 </head>
 
 <body>
+<div id="loadBefore" hidden="hidden">
 <div id="header"></div>
 <div class="current_site" ng-if="info.category=='0'" ng-cloak>当前位置：法律规范详情  >> {{info.title}}</div>
 <div class="current_site" ng-if="info.category=='1'" ng-cloak>当前位置：案例指导详情  >> {{info.title}}</div>
@@ -195,6 +196,11 @@
         <div class="content_info">
         </div>
     </div>
+</div>
+</div>
+
+<div id="loading" class="loading">
+    加载中...
 </div>
 </body>
 </html>

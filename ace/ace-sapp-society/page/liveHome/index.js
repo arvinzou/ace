@@ -27,20 +27,22 @@ Page({
     listLive: [],
     startX: 0, //开始坐标
     startY: 0,
-    nameDisplay:'none',
-    sysUserInfo: null
+    nameDisplay:'none'
   },
 
   onLoad: function () {
     var that = this;
-    if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../liveHome/index" });
-    } else {
-      that.initData();
-      that.setData({
+    page = 1;
+    that.initData();
+    that.setData({
+        sysUserInfo: wx.getStorageSync("sysUserInfo"),
         userinfo: wx.getStorageSync('userinfo')
-      });
-    }
+    });
+   
+  },
+  onShow:function(){
+    page = 0;
+    console.log("onShow");
   },
   onPullDownRefresh: function () {
     let that = this;
@@ -49,7 +51,6 @@ Page({
   },
   initData: function () {
     var that = this;
-    that.initUserData();
       util.request(cfg.server + "/live/www/live/getListByCompany", { page: page, companyId: cfg.companyId, auditStatus: "3" },
       function (data) {
         console.log(data.data);
@@ -57,6 +58,7 @@ Page({
           o.startTime = new Date(o.startTime).Format('yyyy-MM-dd hh:mm');
           that.data.listLive.push(o);
         });
+  
        
         that.setData({
           listLive: that.data.listLive
@@ -65,20 +67,7 @@ Page({
       }
     );
   },
-    initUserData: function () {
-        var that = this;
-        util.request(cfg.findUserInfo, {},
-            function (ret) {
-                if (ret.status == 0) {
-                    console.log(ret);
-                    util.setSysUser(ret.data);
-                    that.setData({ sysUserInfo: ret.data});
-                } else {
-                    wx.navigateTo({ url: "../regist/index" });
-                }
-            }
-        );
-    },
+   
 
     add: function () {
         let that = this;

@@ -227,6 +227,7 @@ public class WActivityController extends SocietyBaseController {
     @ResponseBody
     public ResultResponse findPublicActivityReportList(ActivityReportQVo activityReportQVo, PageParamNoChangeSord page) throws Exception {
         activityReportQVo.setStatus("3");
+        activityReportQVo.setaStatus("33");
         List<ActivityReportVo> rst = this.activityReportService.findActivityReportList(activityReportQVo, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取数据", rst);
     }

@@ -343,7 +343,7 @@ function auditActivity() {
             var navitem = document.getElementById('tpl-fm-sign').innerHTML;
             var html = juicer(navitem, {data: result.value});
             $("#fm-sign").html(html);
-            $("#preview").modal("show");
+            $("#preview").modal("hide");
         }
     });
 }

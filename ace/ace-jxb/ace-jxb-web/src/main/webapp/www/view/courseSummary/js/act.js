@@ -40,6 +40,8 @@ function App() {
 window.onload = function(){
     var url =   window.location.search.substring(1);
     primaryId = url.substring(url.indexOf('=')+1);
+    juicer.register('getObjectName', getObjectName);
+    juicer.register('getPurportName', getPurportName);
     initData(primaryId);
     $('.myComment').click(commentModal);
 }
@@ -362,4 +364,22 @@ function findOrderByCommodityid(){
         }
     });
     return isBuy;
+}
+
+function getObjectName(code){
+    var dataList = staticDictObject['149'];
+    for(var i=0; i<dataList.length; i++){
+        if(code == dataList[i].CODE){
+            return dataList[i].NAME;
+        }
+    }
+}
+
+function getPurportName(code){
+    var dataList = staticDictObject['150'];
+    for(var i=0;i<dataList.length; i++){
+        if(code == dataList[i].CODE){
+            return dataList[i].NAME;
+        }
+    }
 }

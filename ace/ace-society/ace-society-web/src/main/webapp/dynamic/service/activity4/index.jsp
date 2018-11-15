@@ -113,7 +113,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">个人信息审核</h4>
+                <h4 class="modal-title">活动审核</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
@@ -382,6 +382,8 @@
             <span class="label label-lg label-danger">发布驳回</span>
             {@else if item.status==31}
             <span class="label label-lg label-info">活动开始</span>
+            {@else if item.arStatus==2}
+            <span class="label label-lg label-info">报道待审核</span>
             {@else if item.status==32}
             <span class="label label-lg label-success">活动结束</span>
             {@else if item.status==33}
@@ -397,7 +399,7 @@
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
-            {@if item.status==32}
+            {@if item.status==32&&item.arStatus==3}
             <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
             {@/if}
 

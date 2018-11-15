@@ -134,9 +134,7 @@ public class CircleController extends SocietyBaseController {
      */
     @RequestMapping(value = "/deleteCircleByCircleId")
     @ResponseBody
-    public MessageResponse deleteCircleByCircleId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+    public MessageResponse deleteCircleByCircleId(String id) throws Exception {
         return this.circleService.deleteCircleByCircleId(id, this.getCurUserProp());
     }
 

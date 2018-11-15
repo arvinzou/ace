@@ -1,6 +1,5 @@
 
-  <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" style="width:100%; height:{{pusherSizeH}}vh;flex:1;">
-
+  <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" device-position="{{devicePosition}}" waiting-image="{{live.imageSrc}}" style="width:100%; height:{{pusherSizeH}}vh;flex:1;" id="pushPlayer">
     <cover-view class='info-tip'>
       <cover-view style='color:#fff;font-size:25rpx;padding:40rpx;'>
         <cover-view wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
@@ -13,6 +12,12 @@
     </cover-view>
     <cover-view class="controls-screenopt" bindtap="screenopt">
       <cover-image class="imgsmall" src="{{screenopt}}" />
+    </cover-view>
+     <cover-view class="controls-camera" bindtap="camera">
+      <cover-image class="imgsmall" src="{{cameraimg}}" />
+    </cover-view>
+     <cover-view class="controls-front" bindtap="front">
+      <cover-image class="imgsmall" src="{{frontimg}}" />
     </cover-view>
   </live-pusher>
 

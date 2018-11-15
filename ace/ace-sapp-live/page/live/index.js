@@ -66,11 +66,13 @@ Page({
     nameDisplay: false,
     scoll: 'live-top-box-noscoll',
     sort: '0',
-    screenopt:'../../image/fillwin.png'
+    screenopt:'../../image/fillwin.png',
+    devicePosition:"front",
+    frontimg: '../../image/front.png'
   },
   onReady: function (res) {
     var that = this;
-    this.data.videoContext = wx.createLivePusherContext("video-livePusher");
+    this.data.pushPlayerCtx = wx.createLivePusherContext("pushPlayer");
   },
   statechange(e) {
     console.log('live-pusher code:', e.detail.code)
@@ -166,7 +168,7 @@ Page({
               pusherStatus: 'start',
               display: 'hide'
             });
-            that.data.videoContext.start();
+            that.data.pushPlayerCtx.start();
 
           } else if (res.cancel) {
           }
@@ -187,7 +189,7 @@ Page({
               pusherStatus: 'stop',
               display: 'show'
             });
-            that.data.videoContext.stop();
+            that.data.pushPlayerCtx.stop();
           } else if (res.cancel) {
           }
         }
@@ -486,6 +488,28 @@ Page({
     wx.navigateTo({
       url: '../rpt/index?id=' + e.currentTarget.dataset.id
     });
+  },
+  front:function(e){
+    console.log(e);
+    var that=this;
+    if (that.data.devicePosition =="front"){
+      that.setData({ devicePosition:"back"});
+      wx.setNavigationBarTitle({
+        title: "已切换至后置摄像头"
+      })
+    }else{
+      that.setData({ devicePosition: "front" });
+      wx.setNavigationBarTitle({
+        title: "已切换至前置摄像头"
+      })
+    }
+    that.data.pushPlayerCtx.switchCamera({
+      success:function(e){
+          console.log(e);
+      },
+      fail:function(e) {
+        console.log(e);
+      }
+    });
   }
-
 });

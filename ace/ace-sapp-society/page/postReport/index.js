@@ -297,7 +297,7 @@ Page({
     },
     updateFun: function() {
         let that = this;
-        util.request(cfg.updateActivityReport, {
+        util.post(cfg.updateActivityReport, {
                 jsons: JSON.stringify(that.data),
             },
             function(rst) {

@@ -229,20 +229,20 @@ Page({
         wx.showActionSheet({
             itemList: ['打开照相', '选取现有的'],
             itemColor: '#007aff',
-            success(res) {
+            success:function(res) {
                 if (res.tapIndex === 0) {
                     wx.chooseImage({
                         sourceType: ['camera'],
-                        success(res) {
+                        success:function(res) {
                             that.uploadFileFun(res.tempFilePaths[0]);
                         }
-                    })
+                    });
                 } else if (res.tapIndex === 1) {
                     wx.chooseImage({
                         count: 1, // 设置最多三张
                         sizeType: ['original', 'compressed'],
                         sourceType: ['album', 'camera'],
-                        success(res) {
+                        success:function(res) {
                             var tempFilePaths = res.tempFilePaths;
                             for (var i = 0; i < tempFilePaths.length; i++) {
                                 that.uploadFileFun(tempFilePaths[i]);
@@ -286,7 +286,31 @@ Page({
         var realName = e.detail.value.realName;
         var mobilePhone = e.detail.value.mobilePhone;
         var code = e.detail.value.code;
-        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0}
+        if (realName == undefined || realName == '' || realName ==null){
+            wx.showModal({
+                title: '提示',
+                content: '请输入名称！',
+                success: function (res) { }
+            });
+            return;
+        }
+        if (mobilePhone == undefined || mobilePhone == '' || mobilePhone == null){
+            wx.showModal({
+                title: '提示',
+                content: '请输入手机号码！',
+                success: function (res) { }
+            });
+            return;
+        }
+        if (code == undefined || code == '' || code == null){
+            wx.showModal({
+                title: '提示',
+                content: '请输入验证码！',
+                success: function (res) { }
+            });
+            return;
+        }
+        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0, "politicalStatus": politicalStatus}
         util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
             function (ret) {
                 if (ret.status == 0) {
