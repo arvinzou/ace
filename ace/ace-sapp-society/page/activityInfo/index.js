@@ -20,25 +20,25 @@ Page({
         }
         that.data.id = id;
         that.setBarTitleText(tit);
-        
+
     },
 
-    ifCreatBtn: function () {
+    ifCreatBtn: function() {
         let that = this;
         let sysUserInfo = util.getSysUser();
         if (!sysUserInfo) {
             util.request(cfg.findUserInfo, {},
-                function (rst) {
+                function(rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
                         // （党员&&党建活动）||（不是党建活动&&人员）
-                        if (rst.data.regType==2) {
+                        if (rst.data.regType == 2 && (that.data.activityInfo.category == 4 && rst.data.person.status == 1)) {
                             return;
-                        } 
+                        }
                     }
                 }
             );
-        } else if(sysUserInfo.regType == 2) {
+        } else if (sysUserInfo.regType == 2 && (that.data.activityInfo.category == 4 && sysUserInfo.person.status == 1)) {
             return;
         }
         that.setData({
@@ -66,10 +66,10 @@ Page({
         );
     },
     /**
- * 生命周期函数--监听页面显示
- */
-    onShow: function () {
-        let that=this;
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function() {
+        let that = this;
         that.initdata();
     },
 
@@ -102,7 +102,7 @@ Page({
 
     viewParticipants: function(e) {
         let data = e.currentTarget.dataset
-        let that=this;
+        let that = this;
         let p = data.id;
         let flag = that.data.activityInfo.createUserId == wx.getStorageSync('userinfo').unionId
         console.log(flag);
@@ -110,43 +110,43 @@ Page({
             url: '../participants/index?id=' + p + "&flag=" + flag,
         })
     },
-    apply:function(){
-        let that=this;
+    apply: function() {
+        let that = this;
         let coin = that.data.activityInfo.participant;
-        if (coin<0){
+        if (coin < 0) {
             wx.showModal({
                 title: '提示',
-                content: "参加活动需要"+coin+"爱心币",
-                success: function (res) {
+                content: "参加活动需要" + coin + "爱心币",
+                success: function(res) {
                     console.log(res)
                     if (res.confirm) {
-                        let user=util.getSysUser();
-                        if (user.person.validPoints>-coin){
+                        let user = util.getSysUser();
+                        if (user.person.validPoints > -coin) {
                             wx.navigateTo({
                                 url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
                             })
-                        }else{
+                        } else {
                             wx.showToast({
                                 title: '爱心币不足',
                                 icon: 'success',
                                 duration: 2000,
-                                complete: function () {
+                                complete: function() {
                                     return;
                                 }
                             });
                         }
-                    } else{
+                    } else {
                         return;
                     }
                 }
             })
-        }else{
+        } else {
             wx.navigateTo({
                 url: '../enterActivity/index?id=' + that.data.activityInfo.id + '&category=' + that.data.activityInfo.category
             })
         }
     },
-    onPageScroll: function (e) {
+    onPageScroll: function(e) {
         if (this.data.hiddenBtn) {
             return;
         }
@@ -172,9 +172,9 @@ Page({
         })
     },
     /**
- * 页面相关事件处理函数--监听用户下拉动作
- */
-    onPullDownRefresh: function () {
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function() {
         wx.stopPullDownRefresh();
         return;
     },

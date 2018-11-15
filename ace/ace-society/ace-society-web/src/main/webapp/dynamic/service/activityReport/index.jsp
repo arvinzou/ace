@@ -235,9 +235,9 @@
                 {@each data.content as item, index}
                 {@if item.type==1}
 
-                <div>\${item.content}</div>
+                <div style="max-width:480px;" >\${item.content}</div>
                 {@else if item.type==2}
-                <div style="width:100%">
+                <div style="max-width:480px">
                     <img style="width:100%" src="\${item.content}" alt="">
                 </div>
                 {@/if}
