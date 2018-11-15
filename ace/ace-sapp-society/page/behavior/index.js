@@ -16,8 +16,7 @@ Page({
         behaviorType: "1",
         videoIndex: null,
         maskFlag: true,
-        videoUrl: null,
-        sysUserInfo: wx.getStorageSync("sysUserInfo")
+        videoUrl: null
     },
     /**
   * 点击选项卡
@@ -56,6 +55,7 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
+        that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo")});
         that.initBehaviorList(that.data.behaviorType);
     },
     previewImage: function (e) {
