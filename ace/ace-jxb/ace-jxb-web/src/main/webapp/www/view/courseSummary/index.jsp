@@ -15,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
+		<script src="${portalPath}/content/common/js/dict_jxb.js?version=${version}"></script>
 		<script type="text/javascript" src="js/act.js"></script>
 	</head>
 
@@ -79,47 +80,9 @@
             </div>
             <div class="row">
                 <div class="col-xs-9 col-md-9">
-					{@if data.objects == '00'}
-					<span class="tags">幼儿</span>
-					{@else if data.objects == '01'}
-					<span class="tags">小学</span>
-					{@else if data.objects == '02'}
-					<span class="tags">初中</span>
-					{@else if data.objects == '03'}
-					<span class="tags">高中</span>
-					{@/if}
+					<span class="tags">\${getObjectName(data.objects)}</span>
 					<span class="tags">·</span>
-					{@if data.purport == '00'}
-					<span class="tags">学习方法</span>
-					{@else if data.purport == '01'}
-					<span class="tags">团队合作</span>
-					{@else if data.purport == '02'}
-					<span class="tags">沟通表达</span>
-					{@else if data.purport == '03'}
-					<span class="tags">自我认知</span>
-					{@else if data.purport == '04'}
-					<span class="tags">阅读习惯</span>
-					{@else if data.purport == '05'}
-					<span class="tags">情商培养</span>
-					{@else if data.purport == '06'}
-					<span class="tags">习惯养成</span>
-					{@else if data.purport == '07'}
-					<span class="tags">亲子沟通</span>
-					{@else if data.purport == '08'}
-					<span class="tags">心理教育</span>
-					{@else if data.purport == '09'}
-					<span class="tags">性格养成</span>
-					{@else if data.purport == '10'}
-					<span class="tags">品格教养</span>
-					{@else if data.purport == '11'}
-					<span class="tags">思维训练</span>
-					{@else if data.purport == '13'}
-					<span class="tags">入学焦虑</span>
-					{@else if data.purport == '14'}
-					<span class="tags">幼小衔接</span>
-					{@else if data.purport == '15'}
-					<span class="tags">其他</span>
-					{@/if}
+					<span class="tags">\${getPurportName(data.purport)}</span>
 				</div>
             <div class="col-xs-3 col-md-3"><span class="popular">\${data.demandNum}人听课</span></div>
             </div>

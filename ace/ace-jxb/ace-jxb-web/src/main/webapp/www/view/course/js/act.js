@@ -11,14 +11,13 @@ function App() {
 
 window.onload = function(){
     startLoad();
+    juicer.register('getObjectName', getObjectName);
+    juicer.register('getPurportName', getPurportName);
     renderPage($("#menuObject"), staticDictObject['149'], "menuObject-tpl");
+    renderAppend($("#method"), staticDictObject['150'], "method-tpl");
     courseList();
     initSwriper();
-    // var th_width = $(".news-module li").eq(0).width();
-    // var th_left = $(".news-module li").eq(0).position().left;
-    // var slider_width = $(".news-slider").width();
-    // var slider_left = th_left + (th_width/2) - slider_width/2;
-    // $(".news-slider").css("left",slider_left-8);
+
     $(".swiper-container .swiper-slide").on("click",function(){
         $(this).addClass("swiper-slide-active").siblings().removeClass("swiper-slide-active");
     });
@@ -139,6 +138,13 @@ function renderPage(dom, data, tplId) {
     });
     $(dom).html(html);
 }
+function renderAppend(dom, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(dom).append(html);
+}
 
 /*初始化Swriper*/
 function initSwriper() {
@@ -147,3 +153,22 @@ function initSwriper() {
         slidesPerView: 'auto'
     })
 }
+
+function getObjectName(code){
+    var dataList = staticDictObject['149'];
+    for(var i=0; i<dataList.length; i++){
+        if(code == dataList[i].CODE){
+            return dataList[i].NAME;
+        }
+    }
+}
+
+function getPurportName(code){
+    var dataList = staticDictObject['150'];
+    for(var i=0;i<dataList.length; i++){
+        if(code == dataList[i].CODE){
+            return dataList[i].NAME;
+        }
+    }
+}
+

@@ -143,42 +143,40 @@
 
 
         <td>
-            <div class="row"><strong>\${item.liveName}</strong></div>
             <div class="row describtion">\${item.content}</div>
-
-
         </td>
 
         <td style="text-align:center">
+            {@if item.rpt!=undefined}
             <div class="row describtion"><img src="\${item.rpt.headimgurl}" style="max-width:30px;"></div>
             <div class="row describtion">\${item.rpt.nickname}</div>
             <div class="row describtion">\${item.createTime}</div>
-
+            {@/if}
         </td>
 
         <td>
-            {@if item.status==2}
+            {@if item.status=="1"}
+            <span class="label label-lg label-info">暂存</span>
+            {@else if item.status=="2"}
             <span class="label label-lg label-info">待审</span>
-            {@else if item.status==3}
+            {@else if item.status=="3"}
             <span class="label label-lg label-success">通过</span>
             <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
-            {@else if item.status==4}
+            {@else if item.status=="4"}
             <span class="label label-lg label-danger">驳回</span>
             <div style="padding-top:5px">\${item.auditDate}</div>
             <div style="padding-top:5px">\${item.statement}</div>
             {@/if}
         </td>
-        <td><a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>--%>
+        <td>
+            <%--<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>--%>
             {@if item.status==2}
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
             {@/if}
-
             <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
                data-target="#modal-preview">查看</a>
-
-            <a href="javascript:del('\${item.id}');">删除</a>
+            <%--<a href="javascript:del('\${item.id}');">删除</a>--%>
 
         </td>
     </tr>

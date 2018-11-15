@@ -173,6 +173,8 @@ function initData(id){
                     operation: result.data,
                 });
                 $("#appointment").html(appointhtml);
+
+                renderPage('#warn', result.data.counselorVo, 'warn-tpl')
             }else {
                 alert(result.info);
                 return;
@@ -395,4 +397,12 @@ function checkTags(obj){
     }else{
         $(obj).removeClass('tagCheck').addClass('tagUncheck');
     }
+}
+
+function renderPage(dom, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(dom).html(html);
 }

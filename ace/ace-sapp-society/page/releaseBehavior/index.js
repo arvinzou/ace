@@ -75,7 +75,7 @@ Page({
         behaviorAnnexList.push(behaviorAnnextemp);
     }
     if (behaviorAnnexList.length < 1){
-        wx.showModal({ title: "提示", content: "文明随手拍文件缺失！" });
+        wx.showModal({ title: "提示", content: "请上传图片或视频！" });
         return;
     }
     data.behaviorAnnexList = behaviorAnnexList;
@@ -122,8 +122,6 @@ Page({
         if (res.tempFiles.length <= 4){
         for (var i = 0; i < res.tempFilePaths.length; i++) {
           console.log(res.tempFilePaths[i]);
-          var tempFilesSize = res.tempFiles[0].size;  //获取图片的大小，单位B
-          if (tempFilesSize <= 2000000) {   //图片小于或
             wx.showLoading({ title: "正在上传" });
             wx.uploadFile({
                 url: cfg.uploadUrl,
@@ -148,9 +146,6 @@ Page({
                 wx.showModal({ title: "提示", content: "上传失败" })
                 }
             })
-          }else{
-              wx.showModal({ title: "提示", content: "上传图片大小不能超过2M!" });
-          }
         }
         }else{
             wx.showModal({ title: "提示", content: "最多仅上传4张图片!" });
