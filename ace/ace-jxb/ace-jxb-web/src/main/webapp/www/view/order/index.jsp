@@ -215,7 +215,6 @@
             </div>
             </div>
 	</script>
-	</body>
 	
 	<!--预约须知-->
 	<div class="notes" id="notes" style="display: none;">
@@ -225,10 +224,8 @@
 		<div class="row">
 			<p class="stitle"><span class="dot"></span><span>回应时长</span></p>
 		</div>
-		<div class="row">
-			<p class="note_content">
-				您好，如果您的预约方式是立即咨询，我们会在1小时内，以私信方式与您协商好咨询时间；如果您的预约方式是预约咨询，我们会在24小时内在约定时间里以私信方式与您协商好咨询时间。我们将与您进行电话/视频咨询（即您预约时选择的方式）。面对面咨询地点在常德。
-			</p>
+		<div class="row" id="warn">
+
 		</div>
 		<div class="row">
 			<p class="stitle"><span class="dot"></span><span>若变更预约</span></p>
@@ -248,4 +245,11 @@
 			<button class="readnote" onclick="closeTips();">我知道了</button>
 		</div>--%>
 	</div>
+
+		<script id="warn-tpl" type="text/template">
+			<p class="note_content" >
+				您好，您的预约方式是{@if data.onlineStatus=="0"}预约咨询，我们会在24小时内{@else}立即咨询，我们会在1小时内{@/if}，以私信方式与您协商好咨询时间；如果您的预约方式是预约咨询，我们会在24小时内在约定时间里以私信方式与您协商好咨询时间。我们将与您进行电话/视频咨询（即您预约时选择的方式）。面对面咨询地点在常德。
+			</p>
+		</script>
+	</body>
 </html>
