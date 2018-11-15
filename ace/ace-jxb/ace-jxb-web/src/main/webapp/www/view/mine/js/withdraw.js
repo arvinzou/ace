@@ -1,14 +1,67 @@
 
 window.onload = function(){
+    initInfo();
     $('.rules').on('click','.text',showModal);
     $('.my_model').on('click','.rules_text',stopPropagation);
     $('.my_model').click(hideModal);
-    $('.form').on('keyup',"input",vMoney);
-    $('.form').on('keydown',"input",gMoney);
+    $('.form').on('keyup',".applyAmount",vMoney);
+    $('.form').on('keydown',".applyAmount",gMoney);
     $('.money_card').on('click',".action_btn",actionMoney);
+    $('.rst_model1').on('click','.backBtn',backWeb);
+    $('.realname').on('blur','.realName',vRealName);
+    $('.realname').on('focus','.realName',initRealName);
 };
 
 var imoney='';
+var amount=300;
+
+function initRealName() {
+    $('.realname .realName').css('color','#A0A7B6');
+}
+
+/**
+ * 验证名字*/
+function vRealName() {
+    var str=$('.realname .realName').val();
+    var han = /^[\u4e00-\u9fa5]+$/;
+    if (!han.test(str)) {
+        $(".form .applyAmount").prop("readonly",true);
+        $('.realname .realName').css('color','#FF3366');
+    }else{
+        $(".form .applyAmount").prop("readonly",false);
+        $('.realname .realName').css('color','#A0A7B6');
+    };
+}
+
+
+/**返回*/
+function  backWeb() {
+    window.history.back();
+}
+
+
+/*初始化信息*/
+function initInfo() {
+    // var day=new Date().getDay();
+    // if(day>7){
+    //     $('.rst_model1').show();
+    //     return;
+    // }
+    //当月有没有提现
+    // $.getJSON();
+    // var url=contextPath+"/www/reg/findInfo";
+    // var data={};
+    // $.getJSON(url,data,function (rst) {
+    //     if(rst.status == 0 && rst.data.memberType == '1'){
+    //         amount=rst.data.counselor.income;
+    //         amount=amount?amount:0.00;
+    //         $('.money_card .info.stutas').html("可提现金额"+amount+"元");
+    //         if(amount<50){
+    //             $('.rst_model1').show();
+    //         }
+    //     }
+    // })
+}
 
 function showModal() {
     $('.my_model').addClass('my_model_a');
@@ -23,7 +76,7 @@ function stopPropagation() {
 }
 
 function vMoney() {
-    var that= $('.form input');
+    var that= $('.form .applyAmount');
     var money=that.val();
     var regu = /^0\.\d+$|^0\.?$|^[1-9]\d*$|^[1-9]\d*(\.\d+)?$/;
     if(regu.test(money)){
@@ -31,7 +84,7 @@ function vMoney() {
         if(index!=-1){
             that.val(money.substring(0,index+3));
         }
-        if(money>49.99&&money<5000.01){
+        if(money>49.99&&money<5000.01&&money<(amount+0.01)){
             $('.money_card .clickBtn').addClass('action_btn');
             $('.money_card .info').hide();
             $('.money_card .stutas').show();
@@ -54,13 +107,21 @@ function vMoney() {
 
 
 function gMoney() {
-    var that= $('.form input');
+    var that= $('.form .applyAmount');
     imoney=that.val();
 }
 
 
 function actionMoney() {
-    var that= $('.form input');
-    var money=that.val();
-    console.log(money);
+    var applyAmount= $('.form .applyAmount').val();
+    var realName=$('.realname .realName').val();
+    if(!(applyAmount&&realName)){
+        alert("姓名和金额不能为空");
+        return;
+    }
+    var url=contextPath+"/www/counselor/withdraw";
+    var data={applyAmount:applyAmount,realName:realName};
+    $.post(url,data,function (rst) {
+        console.log(rst);
+    })
 }

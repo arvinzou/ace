@@ -13,11 +13,15 @@
     <script type="text/javascript" src="js/withdraw.js"></script>
 </head>
 <body>
+<div class="realname">
+    <span class="title">提现至微信钱包</span> <input class="realName" type="text" placeholder="请输入真实姓名">
+</div>
+
 <div class="money_card">
     <p class="title">收益提现</p>
     <div class="form">
         <div>￥</div>
-        <div><input type="number"></div>
+        <div><input class="applyAmount" type="number"></div>
     </div>
     <p class="info stutas">可提现金额 0.00元</p>
     <p class="info red_text stutas1">提现金额需大于50元且不超过5000元</p>
@@ -53,6 +57,34 @@
         </div>
     </div>
 </div>
+
+
+<div class="rst_model">
+    <div class="result_box">
+        <p class="text1">提现申请提交成功~ </p>
+        <p class="text2">工作人员会在三天内进行审核，请耐心等待~ </p>
+        <p class="text3">查看提现记录</p>
+        <div class="clickBtn">
+            确认
+        </div>
+    </div>
+</div>
+
+
+<div class="rst_model rst_model1">
+    <div class="result_box">
+        <p>您不能提现，原因可能是:</p>
+        <ul>
+            <li>您本月已经提现过，下个月再来哦~</li>
+            <li>提现时间为每月1号-7号，当前时间不可提现</li>
+            <li>提现金额需大于50元,您当前金额不能提现</li>
+        </ul>
+        <div class="clickBtn backBtn">
+            返回
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

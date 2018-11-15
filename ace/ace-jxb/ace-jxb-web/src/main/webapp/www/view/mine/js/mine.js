@@ -1,6 +1,6 @@
 window.onload = function(){
-
     initData();
+    $('.banner').on('click','.getmoney',doWithdraw);
 };
 var consulorId = "";
 var signStatus = "1";     //已经签到状态为2
@@ -56,6 +56,14 @@ function initData(){
     });
 
 }
+
+/**
+ * 开始提现*/
+
+function doWithdraw(){
+    window.location.href = contextPath + '/www/view/mine/withdraw.jsp';
+}
+
 
 /**
  * 签到
