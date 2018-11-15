@@ -1,6 +1,9 @@
 package com.huacainfo.ace.society.service;
 
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.portal.service.WeChatApiService;
 import com.huacainfo.ace.society.dao.ActivityDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +24,14 @@ public class QuartzManager {
     @Autowired
     private ActivityDao activityDao;
 
+    @Autowired
+    private WeChatApiService weChatApiService;
+
     /**
      * 每隔1分钟 自动关闭一次 超时的活动数据
      */
     @Scheduled(cron = "0 */1 * * * ?")
     public void autoCloseActivity() {
-//        List<Activity> list = activityDao.findCloseList();
         try {
             int count = activityDao.autoCloseTimeOutData();
             logger.info("[" + DateUtil.getNow() + "]自动关闭超时活动【" + count + "】条");
@@ -36,4 +41,17 @@ public class QuartzManager {
     }
 
 
+    /**
+     * 拉取公众号已关注用户列表  每天am 11：50 执行一次
+     */
+    @Scheduled(cron = "0 15 14 * * ?")
+    public void sysUserList() throws Exception {
+        logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表--开始-----");
+        try {
+            ResultResponse rs = weChatApiService.synUserList("society");
+            logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：{}", JsonUtil.toJson(rs));
+        } catch (Exception e) {
+            logger.error("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：\n{}", e);
+        }
+    }
 }
