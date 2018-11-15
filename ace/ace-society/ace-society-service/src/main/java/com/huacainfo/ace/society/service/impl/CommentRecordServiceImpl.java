@@ -66,6 +66,7 @@ public class CommentRecordServiceImpl implements CommentRecordService {
             int allRows = this.commentRecordDao.findCount(condition);
             rst.setTotal(allRows);
         }
+        System.out.println("输出结果 " + rst.getTotal());
         return rst;
     }
 
@@ -205,25 +206,7 @@ public class CommentRecordServiceImpl implements CommentRecordService {
     public MessageResponse audit(String id, String rst, String remark,
                                  UserProp userProp) throws Exception {
 
-        CommentRecord obj = commentRecordDao.selectByPrimaryKey(id);
-        if (obj == null) {
-            return new MessageResponse(ResultCode.FAIL, "评论管理数据丢失");
-        }
-
-        //更改审核记录
-        MessageResponse auditRs =
-                auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getUserId(),
-                        rst, remark, userProp);
-        if (ResultCode.FAIL == auditRs.getStatus()) {
-            return auditRs;
-        }
-
-        obj.setStatus(rst);
-        obj.setLastModifyDate(DateUtil.getNowDate());
-        obj.setLastModifyUserId(userProp.getUserId());
-        obj.setLastModifyUserName(userProp.getName());
-        commentRecordDao.updateStatus(obj);
-
+        this.commentRecordDao.updateStatus(id, rst);
 
         dataBaseLogService.log("审核评论管理", "评论管理", id, id, "评论管理", userProp);
         return new MessageResponse(0, "评论管理审核完成！");

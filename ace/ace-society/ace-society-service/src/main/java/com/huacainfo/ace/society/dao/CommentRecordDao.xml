@@ -96,14 +96,15 @@
 
     <sql id="Where_Condition">
         where 1=1
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
             and t.userId = #{condition.userId,jdbcType=VARCHAR}
         </if>
-        <if test="condition.bisType !=null and condition.bisType !=&quot;&quot;">
-            and t.bisType = #{condition.bisType,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.bisId !=null and condition.bisId !=&quot;&quot;">
-            and t.bisId = #{condition.bisId,jdbcType=VARCHAR}
+        <if test="condition.content !=null and condition.content!=&quot;&quot;">
+            AND t.content LIKE CONCAT(CONCAT('%',#{condition.content}),'%')
+
         </if>
     </sql>
 
@@ -125,4 +126,11 @@
         from comment_record
         where 1=1
     </select>
+
+    <update id="updateStatus">
+        update comment_record
+        set
+        status = #{status}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>

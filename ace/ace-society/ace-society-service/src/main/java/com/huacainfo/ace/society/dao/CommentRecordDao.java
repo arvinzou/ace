@@ -30,6 +30,6 @@ public interface CommentRecordDao {
 
     int isExit(CommentRecord record);
 
-    int updateStatus(CommentRecord record);
+    int updateStatus(@Param("id") String id, @Param("status") String status);
 
 }
