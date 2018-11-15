@@ -16,8 +16,7 @@ Page({
         Loadingstatus: false,
         behaviorType : "1",
         maskFlag: true,
-        videoUrl: null,
-        sysUserInfo: wx.getStorageSync("sysUserInfo")
+        videoUrl: null
     },
 
     /**
@@ -57,7 +56,8 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
-        that.setData({userId: options.userId});
+        that.setData({userId: options.userId,
+            sysUserInfo: wx.getStorageSync("sysUserInfo")});
         that.initBehaviorList(options.userId, that.data.behaviorType);
     },
     initBehaviorList: function(userId,type){

@@ -9,8 +9,7 @@ Page({
       list:[],
       maskFlag: true,
       videoUrl: null,
-      userinfo: wx.getStorageSync('userinfo'),
-      sysUserInfo: wx.getStorageSync("sysUserInfo")
+      userinfo: wx.getStorageSync('userinfo')
   },
     
   /**
@@ -19,6 +18,7 @@ Page({
   onLoad: function (options) {
     console.log(" 生命周期函数--监听页面加载");
     var that = this;
+    that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo")});
     start=0;
     that.initData();
   },
@@ -107,9 +107,14 @@ Page({
   },
   previewImage: function (e) {
     console.log(e);
+    var list = e.currentTarget.dataset.list;
+    var arrTemp = [];
+    for(var i=0; i<list.length; i++){
+        arrTemp.push(list[i].url);
+    }
     wx.previewImage({
       current: e.currentTarget.id, 
-      urls: [ e.currentTarget.id]
+      urls: arrTemp
     })
   },
   addlike: function (e) {
