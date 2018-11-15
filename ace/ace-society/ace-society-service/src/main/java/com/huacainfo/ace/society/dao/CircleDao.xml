@@ -57,7 +57,7 @@
     values (#{id,jdbcType=VARCHAR}, #{corpId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
       #{sort,jdbcType=INTEGER}, #{mediaType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=CHAR}, #{likeNum,jdbcType=BIGINT}, #{lastAuditLogId,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR})
+      #{content,jdbcType=LONGVARCHAR}, #{mediaContent,jdbcType=LONGVARCHAR})
   </insert>
 
   <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.Circle">
