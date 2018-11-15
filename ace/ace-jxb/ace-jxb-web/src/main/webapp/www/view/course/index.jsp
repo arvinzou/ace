@@ -37,23 +37,9 @@
                     <div class="citylist2">
                         <div class="xzk">
                             <div class="leibie">针对能力</div>
-                            <ul class="shangquan">
+                            <ul class="shangquan" id="method">
                                 <li class="active">不限</li>
-                                <li data-value="00">学习方法</li>
-                                <li data-value="01">团队合作</li>
-                                <li data-value="02">沟通表达</li>
-                                <li data-value="03">自我认知</li>
-                                <li data-value="04">阅读习惯</li>
-                                <li data-value="05">情商培养</li>
-                                <li data-value="06">习惯养成</li>
-                                <li data-value="07">亲子沟通</li>
-                                <li data-value="08">心理教育</li>
-                                <li data-value="09">性格养成</li>
-                                <li data-value="10">品格教养</li>
-                                <li data-value="11">思维训练</li>
-                                <li data-value="13">入学焦虑</li>
-                                <li data-value="14">幼小衔接</li>
-                                <li data-value="15">其他</li>
+
                             </ul>
                         </div>
                         <div class="xzk">
@@ -118,47 +104,9 @@
                 \${item.name}
             </p>
             <p class="test_remark">
-                {@if item.objects == '00'}
-                <span>幼儿</span>
-                {@else if item.objects == '01'}
-                <span>小学</span>
-                {@else if item.objects == '02'}
-                <span>初中</span>
-                {@else if item.objects == '03'}
-                <span>高中</span>
-                {@/if}
+                <span>\${getObjectName(item.objects)}</span>
                 <span>·</span>
-                {@if item.purport == '00'}
-                <span>学习方法</span>
-                {@else if item.purport == '01'}
-                <span>团队合作</span>
-                {@else if item.purport == '02'}
-                <span>沟通表达</span>
-                {@else if item.purport == '03'}
-                <span>自我认知</span>
-                {@else if item.purport == '04'}
-                <span>阅读习惯</span>
-                {@else if item.purport == '05'}
-                <span>情商培养</span>
-                {@else if item.purport == '06'}
-                <span>习惯养成</span>
-                {@else if item.purport == '07'}
-                <span>亲子沟通</span>
-                {@else if item.purport == '08'}
-                <span>心理教育</span>
-                {@else if item.purport == '09'}
-                <span>性格养成</span>
-                {@else if item.purport == '10'}
-                <span>品格教养</span>
-                {@else if item.purport == '11'}
-                <span>思维训练</span>
-                {@else if item.purport == '13'}
-                <span>入学焦虑</span>
-                {@else if item.purport == '14'}
-                <span>幼小衔接</span>
-                {@else if item.purport == '15'}
-                <span>其他</span>
-                {@/if}
+                <span>\${getPurportName(item.purport)}</span>
             </p>
 
             <span class="price">
@@ -173,6 +121,14 @@
             	</span>
         </div>
     </li>
+    {@/each}
+</script>
+
+<script id="method-tpl" type="text/template">
+    {@each data as item, index}
+    {@if item.CODE != ''}
+    <li data-value="\${item.CODE}">\${item.NAME}</li>
+    {@/if}
     {@/each}
 </script>
 </html>
