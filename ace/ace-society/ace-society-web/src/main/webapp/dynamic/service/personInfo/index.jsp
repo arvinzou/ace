@@ -88,7 +88,11 @@
         <td>
             <div class="row">
                 <div class="col-md-12">
-                    <img src="\${item.headimgurl}" class="cover"/>
+                    {@if item.headimgurl !='' && item.headimgurl!=undefined && item.item.headimgurl!=null}
+                        <img src="\${item.headimgurl}" class="cover"/>
+                    {@else}
+                        <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
+                    {@/if}
                     <a>\${item.nickname}</a>
                 </div>
             </div>
