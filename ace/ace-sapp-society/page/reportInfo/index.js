@@ -64,7 +64,7 @@ Page({
         that.showLoading();
         util.request(cfg.findComments, {
             bisId: that.data.id,
-            bisType: "reportComment",
+            bisType: "reportComment_" + that.data.list.category,
             start: that.data.start,
             limit: that.data.limit,
         },

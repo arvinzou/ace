@@ -32,13 +32,13 @@ Page({
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
                         // （党员&&党建活动）||（不是党建活动&&人员）
-                        if (rst.data.regType == 2 && (that.data.activityInfo.category == 4 && rst.data.person.status == 1)) {
+                        if (rst.data.regType == 2 || (that.data.activityInfo.category == 4 && rst.data.person.status == 1)) {
                             return;
                         }
                     }
                 }
             );
-        } else if (sysUserInfo.regType == 2 && (that.data.activityInfo.category == 4 && sysUserInfo.person.status == 1)) {
+        } else if (sysUserInfo.regType == 2 || (that.data.activityInfo.category == 4 && sysUserInfo.person.status == 1)) {
             return;
         }
         that.setData({
