@@ -7,16 +7,23 @@ window.onload = function(){
     $('.form').on('keyup',".applyAmount",vMoney);
     $('.form').on('keydown',".applyAmount",gMoney);
     $('.money_card').on('click',".action_btn",actionMoney);
-    $('.rst_model1').on('click','.backBtn',backWeb);
+    $('.rst_model').on('click','.backBtn',backWeb);
+    $('.rst_model').on('click','.withdrawHistroy',withdrawHistroy);
     $('.realname').on('blur','.realName',vRealName);
     $('.realname').on('focus','.realName',initRealName);
 };
 
 var imoney='';
-var amount=300;
+var amount;
 
 function initRealName() {
     $('.realname .realName').css('color','#A0A7B6');
+}
+
+/**
+ * 取款记录*/
+function withdrawHistroy() {
+    window.location.href = contextPath + '/www/view/mine/earnings.jsp';
 }
 
 /**
@@ -49,18 +56,18 @@ function initInfo() {
     // }
     //当月有没有提现
     // $.getJSON();
-    // var url=contextPath+"/www/reg/findInfo";
-    // var data={};
-    // $.getJSON(url,data,function (rst) {
-    //     if(rst.status == 0 && rst.data.memberType == '1'){
-    //         amount=rst.data.counselor.income;
-    //         amount=amount?amount:0.00;
-    //         $('.money_card .info.stutas').html("可提现金额"+amount+"元");
-    //         if(amount<50){
-    //             $('.rst_model1').show();
-    //         }
-    //     }
-    // })
+    var url=contextPath+"/www/reg/findInfo";
+    var data={};
+    $.getJSON(url,data,function (rst) {
+        if(rst.status == 0 && rst.data.memberType == '1'){
+            amount=rst.data.counselor.income;
+            amount=amount?amount:0.00;
+            $('.money_card .info.stutas').html("可提现金额"+amount+"元");
+            if(amount<50){
+                $('.rst_model1').show();
+            }
+        }
+    })
 }
 
 function showModal() {
@@ -120,8 +127,13 @@ function actionMoney() {
         return;
     }
     var url=contextPath+"/www/counselor/withdraw";
-    var data={applyAmount:applyAmount,realName:realName};
+    // var url="http://localhost/jxb/www/counselor/withdraw";
+    var data={applyAmount:applyAmount,realName:realName,withdrawType:1};
     $.post(url,data,function (rst) {
-        console.log(rst);
+        if(rst.status==0){
+            $('.rst_model').show();
+            return;
+        }
+        alert(rst.info);
     })
 }
