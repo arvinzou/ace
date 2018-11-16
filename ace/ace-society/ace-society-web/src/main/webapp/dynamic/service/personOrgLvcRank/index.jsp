@@ -16,6 +16,8 @@
     <%--common css--%>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+              rel="stylesheet" type="text/css"/>
     <%--custom css--%>
 </head>
 <body>
@@ -32,27 +34,25 @@
         </div>
 
          <div class="col-sm-7">
-                        <form onsubmit="return t_query()">
-                            <div class="input-group">
-                             		开始日：<input class="inline laydate-icon" id="startDate" style="width:200px; margin-right:10px;">
-                             		结束日：<input class="inline laydate-icon" id="endDate" style="width:200px;">
-                                <span class="input-group-btn">
-                                    <button class="btn  btn-default search_btn" type="submit">搜索</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
+                                                  <form onsubmit="return t_query()">
+                                                    <div class="input-group">
+                                                                         开始日：<input class="inline laydate-icon" name="startDate" style="width:200px; margin-right:10px;">
+                                                                         结束日：<input class="inline laydate-icon" name="endDate" style="width:200px; margin-right:10px;">
+                                                          <span class="input-group-btn">
+                                                              <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                                                          </span>
+                                                      </div>
+                                                  </form>
+                                              </div>
 
 
         <div class="table-scrollable">
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="20%"> 排名</th>
-                    <th width="20%"> 用户</th>
-                    <th width="20%"> </th>
-                    <th width="20%"> 累计获得爱心币</th>
-                    <th width="20%"> 创建日期</th>
+                    <th width="30%"> 排名</th>
+                    <th width="40%"> 用户</th>
+                    <th width="30%"> 累计获得爱心币</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -78,9 +78,7 @@
     <tr>
         <td> \${item.i}</td>
         <td> \${item.nickName}</td>
-        <td> \${item.avatarUrl}</td>
         <td> \${item.accPoints}</td>
-        <td> \${item.createDate}</td>
     </tr>
     {@/each}
 </script>
@@ -101,12 +99,7 @@
                 \${data.nickName}
             </div>
         </div>
-          <div class="form-group">
-                    <label class="col-md-2 view-label"></label>
-                    <div class="col-md-10">
-                        \${data.avatarUrl}
-                    </div>
-                </div>
+
         <div class="form-group">
             <label class="col-md-2 view-label">累计获得爱心币</label>
             <div class="col-md-10">
@@ -114,12 +107,6 @@
             </div>
         </div>
 
-         <div class="form-group">
-                    <label class="col-md-2 view-label">累计获得爱心币</label>
-                    <div class="col-md-10">
-                        \${data.createDate}
-                   </div>
-                </div>
 
     </div>
 </script>
@@ -146,5 +133,10 @@
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+
+<script src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+        type="text/javascript"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

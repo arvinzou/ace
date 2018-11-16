@@ -41,7 +41,7 @@ public interface PersonInfoDao {
 
     int isExit(PersonInfo record);
 
-    List<Map<String, Object>> querysocietyOrg();
+    List<Map<String, Object>> querysocietyOrg(Map<String, Object> condition);
 
-    List<Map<String, Object>> queryperson();
+    List<Map<String, Object>> queryperson(Map<String, Object> condition);
 }

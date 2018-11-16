@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.params.Params;
 
 import java.util.*;
 
@@ -275,9 +276,9 @@ public class PersonInfoServiceImpl implements PersonInfoService {
 
 
     @Override
-    public List<Map<String, Object>> querysocietyOrg() {
+    public List<Map<String, Object>> querysocietyOrg(Map<String, Object> condition) {
         //所有排行
-        List<Map<String, Object>> rtn = personInfoDao.querysocietyOrg();
+        List<Map<String, Object>> rtn = personInfoDao.querysocietyOrg(condition);
 
         //返回结果
 
@@ -285,9 +286,9 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     }
 
     @Override
-    public List<Map<String, Object>> queryperson() {
+    public List<Map<String, Object>> queryperson(Map<String, Object> condition) {
         //所有排行
-        List<Map<String, Object>> rtn = personInfoDao.queryperson();
+        List<Map<String, Object>> rtn = personInfoDao.queryperson(condition);
 
         //返回结果
 
