@@ -104,7 +104,9 @@
         </if>
         <if test="condition.content !=null and condition.content!=&quot;&quot;">
             AND t.content LIKE CONCAT(CONCAT('%',#{condition.content}),'%')
-
+        </if>
+        <if test="condition.bisId !=null and condition.bisId !=&quot;&quot;">
+            and t.bisId = #{condition.bisId,jdbcType=VARCHAR}
         </if>
     </sql>
 
