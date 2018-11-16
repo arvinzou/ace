@@ -318,6 +318,9 @@ public class MessageTemplateServiceImpl implements MessageTemplateService, Backe
         }
         //调用接口，推送消息
         String accessToken = getAccessToken(openid);
+        if (StringUtil.isEmpty(accessToken)) {
+            return new ResultResponse(ResultCode.FAIL, "发送失败-获取授权token失败", msgTemplate);
+        }
         String wxResponse = MessageSendApi.sendTemplate(accessToken, templateData);
         logger.debug("requestParams: {}" + params + "," + "wxResponse: {}" + wxResponse);
 

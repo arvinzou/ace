@@ -14,6 +14,22 @@
 
                 <view class='textInfo'>
                     <view class='name'>{{ userinfoData.nickName }}</view>
+                    <block wx:if='{{userinfoData.regType == "2"}}'>
+                        <block wx:if='{{userinfoData.societyOrg.orgType == "1"}}'>
+                            <view class='member-type'>会员类型: 党组织</view>
+                        </block>
+                        <block wx:else>
+                            <view class='member-type'>会员类型: 社会组织</view>
+                        </block>
+                    </block>
+                    <block wx:if='{{userinfoData.regType == "1"}}'>
+                        <block wx:if='{{userinfoData.person.politicalStatus == "1"}}'>
+                            <view class='member-type'>会员类型：个人</view>
+                        </block>
+                        <block wx:if='{{userinfoData.person.politicalStatus == "2"}}'>
+                            <view class='member-type'>会员类型：党员</view>
+                        </block>
+                    </block>
                     <view class='center'>
                         <block wx:if='{{userinfoData.regType=="2"}}'>
                             <block wx:if='{{userinfoData.societyOrg.status == "1"}}'>
