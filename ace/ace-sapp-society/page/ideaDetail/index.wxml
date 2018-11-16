@@ -2,7 +2,12 @@
     <view class='content'>
         <view class='idea-title'><text>{{ detail.title }}</text></view>
         <view class='idea-info'>
-            <image src='{{detail.avatarUrl}}' class='head'></image>
+            <block wx:if='{{detail.avatarUrl!="" && detail.avatarUrl!=null && detail.avatarUrl!=undefined}}'>
+                <image src='{{detail.avatarUrl}}' class='head'></image>
+            </block>
+            <block wx:else>
+                <image src='../../image/default_header.png' class='head'></image>
+            </block>
             <text class='fontstyle' style='padding-left:20rpx;'>{{detail.nickname}}</text>
             <text class='datetime'>{{detail.createDate}}</text>
             <block wx:if='{{detail.listSubjectIdeaAnnexVo.length > 0}}'>
@@ -18,7 +23,12 @@
     <block wx:for='{{commentList}}' wx:key='*'>
         <view class='comment-item'>
             <view class='comment-item-left'>
-                <image class='head-image' src='{{item.avatarUrl}}'></image>
+                <block wx:if='{{item.avatarUrl!="" && item.avatarUrl!=null && item.avatarUrl!=undefined}}'>
+                    <image class='head-image' src='{{item.avatarUrl}}'></image>
+                </block>
+                <block wx:else>
+                    <image class='head-image' src='../../image/default_header.png'></image>
+                </block>
             </view>
             <view class='comment-item-right'>
                 <view class='nickname'><text>{{item.nickName}}</text></view>
