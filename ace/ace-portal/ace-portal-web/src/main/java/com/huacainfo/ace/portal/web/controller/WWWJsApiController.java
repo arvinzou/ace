@@ -86,7 +86,7 @@ public class WWWJsApiController extends BaseController {
         }
         WxCfg wxCfg = wxCfgService.findBySysId(sysId);
         //失败可能原因：1、授权地址配置失败；2、IP白名单未配置
-        if (null == wxCfg || StringUtil.isEmpty(wxCfg.getTicket())) {
+        if (null == wxCfg) {
             return new ResultResponse(ResultCode.FAIL, "微信配置获取异常");
         }
         //AccessToken
