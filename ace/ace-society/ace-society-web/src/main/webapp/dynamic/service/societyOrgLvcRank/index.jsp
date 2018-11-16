@@ -16,6 +16,8 @@
     <%--common css--%>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+          rel="stylesheet" type="text/css"/>
     <%--custom css--%>
 </head>
 <body>
@@ -27,53 +29,50 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-5">
+            <div class="col-md-4">
 
-        </div>
+            </div>
 
-         <div class="col-sm-7">
-                        <form onsubmit="return t_query()">
-                            <div class="input-group">
-                            <ul class="inline">
-                                      开始日：<input class="inline laydate-icon" id="startDate" style="width:200px; margin-right:10px;">
-                                      结束日：<input class="inline laydate-icon" id="endDate" style="width:200px;">
-                            </ul>
-
-                                <span class="input-group-btn">
+            <div class="col-sm-8">
+                <form onsubmit="return t_query()">
+                    <div class="input-group">
+                        开始日：<input class="inline laydate-icon" name="startDate" style="width:200px; margin-right:10px;">
+                        结束日：<input class="inline laydate-icon" name="endDate" style="width:200px;">
+                        <span class="input-group-btn">
                                     <button class="btn  btn-default search_btn" type="submit">搜索</button>
                                 </span>
-                            </div>
-                        </form>
                     </div>
+                </form>
+            </div>
 
 
-        <div class="table-scrollable">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th width="20%"> 排名</th>
-                    <th width="20%"> 用户</th>
-                    <th width="20%"> </th>
-                    <th width="20%"> 累计获得爱心币</th>
-                    <th width="20%"> 创建日期</th>
-                </tr>
-                </thead>
-                <tbody id="page-list">
+            <div class="table-scrollable">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th width="20%"> 排名</th>
+                        <th width="20%"> 用户</th>
+                        <th width="20%"> 头像</th>
+                        <th width="20%"> 累计获得爱心币</th>
+                        <th width="20%"> 创建日期</th>
+                    </tr>
+                    </thead>
+                    <tbody id="page-list">
 
-                </tbody>
-            </table>
-        </div>
-        <div class="paginationbar">
-            <ul class="pagination" id="pagination1"></ul>
+                    </tbody>
+                </table>
+            </div>
+            <div class="paginationbar">
+                <ul class="pagination" id="pagination1"></ul>
+            </div>
+
         </div>
 
     </div>
 
-</div>
-
-<%--=============common jsp-suffix===============--%>
-<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<%--==============common jsp-suffix==============--%>
+    <%--=============common jsp-suffix===============--%>
+    <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+    <%--==============common jsp-suffix==============--%>
 </body>
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
@@ -104,12 +103,12 @@
                 \${data.nickName}
             </div>
         </div>
-          <div class="form-group">
-                    <label class="col-md-2 view-label"></label>
-                    <div class="col-md-10">
-                        \${data.avatarUrl}
-                    </div>
-                </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">头像</label>
+            <div class="col-md-10">
+                \${data.avatarUrl}
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-md-2 view-label">累计获得爱心币</label>
             <div class="col-md-10">
@@ -117,12 +116,12 @@
             </div>
         </div>
 
-         <div class="form-group">
-                    <label class="col-md-2 view-label">累计获得爱心币</label>
-                    <div class="col-md-10">
-                        \${data.createDate}
-                   </div>
-                </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">累计获得爱心币</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
 
     </div>
 </script>
@@ -149,5 +148,10 @@
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+
+<script src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"
+        type="text/javascript"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>
