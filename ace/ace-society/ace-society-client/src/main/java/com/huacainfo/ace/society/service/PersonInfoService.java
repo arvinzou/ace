@@ -2,13 +2,13 @@ package com.huacainfo.ace.society.service;
 
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.vo.PersonInfoQVo;
 import com.huacainfo.ace.society.vo.PersonInfoVo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -105,4 +105,10 @@ public interface PersonInfoService {
      * @return ResultResponse
      */
     ResultResponse register(PersonInfo personInfo, Userinfo userinfo);
+
+
+    List<Map<String, Object>> querysocietyOrg();
+
+    List<Map<String, Object>> queryperson();
+
 }

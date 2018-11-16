@@ -5,10 +5,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -27,8 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service("personInfoService")
 /**
@@ -38,6 +34,8 @@ import java.util.List;
  */
 public class PersonInfoServiceImpl implements PersonInfoService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+
     @Autowired
     private PersonInfoDao personInfoDao;
     @Autowired
@@ -275,4 +273,25 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         return null;
     }
 
+
+    @Override
+    public List<Map<String, Object>> querysocietyOrg() {
+        //所有排行
+        List<Map<String, Object>> rtn = personInfoDao.querysocietyOrg();
+
+        //返回结果
+
+        return rtn;
+    }
+
+    @Override
+    public List<Map<String, Object>> queryperson() {
+        //所有排行
+        List<Map<String, Object>> rtn = personInfoDao.queryperson();
+
+        //返回结果
+
+        return rtn;
+
+    }
 }
