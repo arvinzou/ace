@@ -112,6 +112,13 @@ Page({
             videoUrl: null
         });
     },
+    previewImage: function (e) {
+        console.log(e);
+        wx.previewImage({
+            current: e.currentTarget.id,
+            urls: [e.currentTarget.id]
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

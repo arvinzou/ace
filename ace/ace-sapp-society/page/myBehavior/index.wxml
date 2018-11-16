@@ -40,7 +40,7 @@
                                 <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
                                 <block wx-if='{{ fileItem.fileType == 2 }}'>
                                 <!--<video src='{{ fileItem.fileUrl }}' class='file-attach' show-center-play-btn='true'></video>-->
-                                <image src='../../image/video.png' data-index='{{index}}' id='{{ fileItem.fileUrl }}' class='videoImg' bindtap='viewVideo'></image>
+                                <image src='../../image/video.png' data-index='{{index}}' id='{{ fileItem.fileUrl }}' class='videoImg' bindtap='viewVideo' bindtap="previewImage"></image>
                                 </block>
                                 <block wx-if='{{ fileItem.fileType == 1 }}'>
                                     <block wx:if='{{item.behaviorAnnexList.length ==1}}'>
