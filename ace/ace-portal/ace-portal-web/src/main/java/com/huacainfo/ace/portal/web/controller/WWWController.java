@@ -121,7 +121,8 @@ public class WWWController extends PortalBaseController {
             i++;
 
         }
-        return this.attachService.upload(files, id, this.getCurUserProp());
+        //return this.attachService.upload(files, id, this.getCurUserProp());
+        return null;
     }
 
     @RequestMapping(value = "/regUser.do")

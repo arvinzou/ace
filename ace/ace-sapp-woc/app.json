@@ -1,8 +1,7 @@
 {
   "pages": [
     "page/home/index",
-    "page/search/index",
-    "page/trafficPreview/index"
+    "page/search/index"
   ],
   "window": {
     "navigationBarTextStyle": "#fff",

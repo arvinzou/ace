@@ -106,7 +106,8 @@ public class AttachController extends PortalBaseController{
 	        files[i]=obj;
 			i++;
 		}
-		return this.attachService.upload(files,noticeId, this.getCurUserProp());
+		//return this.attachService.upload(files,noticeId, this.getCurUserProp());
+		return null;
 	}
 	
 	
