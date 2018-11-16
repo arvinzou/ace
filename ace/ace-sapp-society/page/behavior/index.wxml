@@ -22,21 +22,18 @@
                             <view class='attach'>
                                 <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem' wx:for-index='fIndex'>
                                 <block wx:if='{{ fileItem.fileType == 2 }}'>
-                                    <!--<block wx-if='{{index == videoIndex}}'>
-                                    <video id='video{{index}}' src='{{ fileItem.fileUrl }}' ></video>
-                                    </block>-->
                                     <image src='../../image/video.png' data-index='{{index}}' id='{{ fileItem.fileUrl }}' class='videoImg' bindtap='viewVideo'></image>
                                 </block>
                                 <block wx:if='{{ fileItem.fileType == 1 }}'>
                                     <block wx:if='{{item.behaviorAnnexList.length ==1}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage"></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
                                     </block>
                                     <block wx:elif='{{item.behaviorAnnexList.length > 1 && item.behaviorAnnexList.length % 2 !=0}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage"></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
                                         
                                     </block>
                                     <block wx:else>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage"></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
                                     </block>
                                 </block>
                                 </block>
@@ -63,19 +60,18 @@
                             <view class='attach'>
                                 <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
                                 <block wx:if='{{ fileItem.fileType == 2 }}'>
-                                <!--<video src='{{ fileItem.fileUrl }}' class='file-attach' width='359' height='232' show-center-play-btn='true'></video>-->
                                  <image src='../../image/video.png' data-index='{{index}}' id='{{ fileItem.fileUrl }}' class='videoImg' bindtap='viewVideo'></image>
                                 </block>
                                 <block wx:if='{{ fileItem.fileType == 1 }}'>
                                     <block wx:if='{{item.behaviorAnnexList.length ==1}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage"></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
                                     </block>
                                     <block wx:elif='{{item.behaviorAnnexList.length > 1 && item.behaviorAnnexList.length % 2 !=0}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage"></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
                                         
                                     </block>
                                     <block wx:else>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage"></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
                                     </block>
                                 </block>
                                 </block>
