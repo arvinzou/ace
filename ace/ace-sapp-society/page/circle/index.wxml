@@ -3,8 +3,12 @@
         <view class="wrap">
             <view class='report-box-second'>
                 <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
-                    <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
-
+                    <block wx:if='{{item.rpt.headimgurl!="" && item.rpt.headimgurl!=null && item.rpt.headimgurl!=undefined}}'>
+                        <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
+                    </block>
+                    <block wx:else>
+                        <image src="../../image/default_header.png" class="headimgp" />
+                    </block>
                     <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
                     <text style='padding:10rpx'>{{item.createDate}}</text>
                 </view>
@@ -33,7 +37,12 @@
                     </view>
                     <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
                         <view class='chat-content'>
-                            <image src='{{citem.headimgurl}}' class='headimg'></image>
+                            <block wx:if='{{citem.headimgurl!="" && citem.headimgurl!=null && citem.headimgurl!=undefined}}'>
+                                <image src='{{citem.headimgurl}}' class='headimg'></image>
+                            </block>
+                            <block wx:else>
+                                <image src='../../image/default_header.png' class='headimg'></image>
+                            </block>
                             <view class='chat-right'>
                                 <view class='chat-nickname'>
                                     {{citem.nickname}} {{citem.createTime}}

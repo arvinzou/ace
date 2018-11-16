@@ -111,7 +111,11 @@
     {@each data as item, index}
     <tr>
         <td>
+            {@if item.headimgurl!='' && item.headimgurl!=null && item.headimgurl!=undefined}
             <img src="\${item.headimgurl}" class="cover"/>
+            {@else}
+            <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
+            {@/if}
             <a>\${item.nickname}</a>
         </td>
         <td> \${item.orderNo}</td>

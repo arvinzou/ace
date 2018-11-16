@@ -68,7 +68,9 @@ Page({
     sort: '0',
     screenopt:'../../image/fillwin.png',
     devicePosition:"front",
-    frontimg: '../../image/front.png'
+    frontimg: '../../image/front.png',
+    hiddenBtn: true,
+    showBtn: false
   },
   onReady: function (res) {
     var that = this;
@@ -301,9 +303,7 @@ Page({
     })
   },
   onPageScroll: function (res) {
-
-
-
+    
   },
   onReachBottom: function () {
     console.log("onReachBottom");

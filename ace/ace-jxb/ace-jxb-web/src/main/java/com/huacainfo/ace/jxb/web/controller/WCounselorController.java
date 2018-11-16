@@ -1,12 +1,15 @@
 package com.huacainfo.ace.jxb.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.jxb.service.CounselorService;
 import com.huacainfo.ace.jxb.service.PostLevelService;
 import com.huacainfo.ace.jxb.service.WithdrawRecordService;
+import com.huacainfo.ace.jxb.vo.WithdrawRecordQVo;
 import com.huacainfo.ace.jxb.vo.WithdrawRecordVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,5 +79,30 @@ public class WCounselorController extends JxbBaseController {
 
 
         return withdrawRecordService.withdraw(params);
+    }
+
+
+    /**
+     * 提现申请 历史列表
+     *
+     * @param unionid unionid 可选
+     * @return ResultResponse
+     */
+    @RequestMapping("/findWithdrawList")
+    public ResultResponse findWithdrawList(String unionid, WithdrawRecordQVo condition,
+                                           PageParamNoChangeSord page) throws Exception {
+        if (StringUtil.isEmpty(unionid)) {
+            Userinfo userinfo = getCurUserinfo();
+            unionid = userinfo.getUnionid();
+        }
+        condition.setCounselorId(unionid);
+
+        PageResult<WithdrawRecordVo> rst = this.withdrawRecordService
+                .findWithdrawRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }
 }

@@ -68,8 +68,7 @@ public interface WithdrawRecordService {
      * @author: Arvin
      * @version: 2018-11-14
      */
-    SingleResult
-            <WithdrawRecordVo> selectWithdrawRecordByPrimaryKey(String id) throws Exception;
+    SingleResult<WithdrawRecordVo> selectWithdrawRecordByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws
