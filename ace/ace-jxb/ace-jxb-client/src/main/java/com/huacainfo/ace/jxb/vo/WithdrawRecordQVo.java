@@ -14,6 +14,20 @@ public class WithdrawRecordQVo extends WithdrawRecord {
      */
     private String montDateStr;
 
+    /**
+     * 咨询师名称
+     */
+    private String teacherName;
+
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
     public String getMontDateStr() {
         return montDateStr;
     }
