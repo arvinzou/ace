@@ -37,7 +37,7 @@ Page({
 
       stepNum: 1,
       regType: 1,
-      regName: null,
+      regName: "个人",
       phoneNum: null,
       lastNum: 0,
       stop: true,
