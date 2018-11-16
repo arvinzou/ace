@@ -66,17 +66,23 @@
         select
         <include refid="Vo_Column_List"/>
         from withdraw_record t
+        left join counselor c on t.counselorId= c.id
         where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <!--vo结果集-->
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.WithdrawRecordVo">
-
+        <result column="teacherName" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="apiRst" jdbcType="VARCHAR" property="apiRst"/>
+        <result column="apiRemark" jdbcType="VARCHAR" property="apiRemark"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
-        id, counselorId, openId, realName, withdrawType, applyAmount, taxAmount, actAmount,
-        auditRst, auditRemark, remark, status, createDate, updateDate
+        c.`name` as teacherName, 'FAILED' as apiRst, '接口权限尚未开通' as apiRemark,
+
+        t.id, t.counselorId, t.openId, t.realName, t.withdrawType, t.applyAmount,
+        IFNULL(t.taxAmount,0) as taxAmount, IFNULL(t.actAmount, t.applyAmount) as actAmount,
+        t.auditRst, t.auditRemark, t.remark, t.status, t.createDate, t.updateDate
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -96,7 +102,11 @@
 
     <sql id="whereCondition">
         from withdraw_record t
+        left join counselor c on t.counselorId= c.id
         where 1=1
+        <if test="condition.teacherName !=null and condition.teacherName !=&quot;&quot;">
+            and c.`name` like concat(#{condition.teacherName,jdbcType=VARCHAR},'%')
+        </if>
         <if test="condition.montDateStr !=null and condition.montDateStr !=&quot;&quot;">
             and t.createDate like concat(#{condition.montDateStr,jdbcType=VARCHAR},'%')
         </if>

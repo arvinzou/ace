@@ -77,7 +77,7 @@
     width: 100%;
     height: auto;
     background: #FFFFFF;
-    margin-bottom: 120rpx;
+    padding-bottom: 120rpx;
 }
 .comment-item{
     width: 90%;

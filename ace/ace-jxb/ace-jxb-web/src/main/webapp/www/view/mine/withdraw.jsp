@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="telephone=yes">
     <title>提现</title>
     <link rel="stylesheet" type="text/css" href="css/withdraw.css"/>
     <jsp:include page="../../../dynamic/common/base.jsp"/>
@@ -21,7 +21,7 @@
     <p class="title">收益提现</p>
     <div class="form">
         <div>￥</div>
-        <div><input class="applyAmount" type="number"></div>
+        <div><input class="applyAmount" type="number" pattern="\d*"></div>
     </div>
     <p class="info stutas">可提现金额 0.00元</p>
     <p class="info red_text stutas1">提现金额需大于50元且不超过5000元</p>
@@ -51,20 +51,8 @@
     <div class="result_box">
         <p class="text1">提现申请提交成功~ </p>
         <p class="text2">工作人员会在三天内进行审核，请耐心等待~ </p>
-        <p class="text3">查看提现记录</p>
-        <div class="clickBtn">
-            确认
-        </div>
-    </div>
-</div>
-
-
-<div class="rst_model">
-    <div class="result_box">
-        <p class="text1">提现申请提交成功~ </p>
-        <p class="text2">工作人员会在三天内进行审核，请耐心等待~ </p>
-        <p class="text3">查看提现记录</p>
-        <div class="clickBtn">
+        <p class="text3 withdrawHistroy">查看提现记录</p>
+        <div class="clickBtn backBtn">
             确认
         </div>
     </div>
@@ -87,4 +75,8 @@
 
 
 </body>
+
+
+
+
 </html>

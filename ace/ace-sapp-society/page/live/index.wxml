@@ -113,7 +113,7 @@
             {{item.content}}
           </view>
 
-          <video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:100%;height:35vh;padding:20rpx;' objectFit="contain"></video>
+          <video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:94%;height:35vh;padding:20rpx;' objectFit="contain"></video>
           <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;padding:20rpx;' controls="{{1>0}}"></audio>
           <view class="pictures" data-count="{{item.imageList.length}}">
             <view class="imglist{{item.imageList.length}}">
@@ -148,9 +148,11 @@
         </view>
       </view>
     </block>
-      <cover-view class="btn-add" bindtap="rpt" data-id="{{live.id}}">
-    <cover-image class="btn-img" src="../../image/添加.png" />
-  </cover-view>
+
+      <!--<cover-view class='btn-add' bindtap="rpt" data-id="{{live.id}}">
+            <cover-image class="btn-img" src="../../image/添加.png" />
+     </cover-view>-->
+     <view class='add-report'>发布报道</view>
   </scroll-view>
 </view>
 <view class="model" wx:if='{{actionComment}}'>
