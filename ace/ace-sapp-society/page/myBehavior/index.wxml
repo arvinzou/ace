@@ -9,7 +9,12 @@
                 <block wx:for='{{ behaviorList }}'>
                     <view class='content-item' bindtap=''>
                         <view class='content-left'>
-                            <image src='{{item.avatarUrl}}' class='head'></image>
+                            <block wx:if='{{item.avatarUrl!="" && item.avatarUrl!=null && item.avatarUrl!=undefined}}'>
+                                <image src='{{item.avatarUrl}}' class='head'></image>
+                            </block>
+                            <block wx:else>
+                                <image src='../../image/default_header.png' class='head'></image>
+                            </block>
                         </view>
                         <view class='content-right'>
                             <view class='nickname'>
@@ -60,7 +65,12 @@
                 <block wx:for='{{ behaviorList }}'>
                     <view class='content-item'>
                         <view class='content-left'>
-                            <image src='{{item.avatarUrl}}' class='head'></image>
+                            <block wx:if='{{item.avatarUrl!="" && item.avatarUrl!=null && item.avatarUrl!=undefined}}'>
+                                <image src='{{item.avatarUrl}}' class='head'></image>
+                            </block>
+                            <block wx:else>
+                                <image src='../../image/default_header.png' class='head'></image>
+                            </block>
                         </view>
                         <view class='content-right'>
                             <view class='nickname'>
