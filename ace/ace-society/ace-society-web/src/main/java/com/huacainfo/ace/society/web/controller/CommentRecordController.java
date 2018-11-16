@@ -56,7 +56,6 @@ public class CommentRecordController extends SocietyBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-        System.out.println("--wwww--" + rst.getTotal());
         return rst;
     }
 

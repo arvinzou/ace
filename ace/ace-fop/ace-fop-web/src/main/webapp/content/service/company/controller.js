@@ -78,7 +78,7 @@ jQuery(function($) {
                               {
                               alert("金额只能是数字和小数点后两位");
                               return false;
-                           }
+                            }
            }
 
 function editPreview(id) {

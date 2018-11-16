@@ -188,6 +188,8 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         if (!CommonUtils.isValidMobile(o.getLpMobile())) {
             return new MessageResponse(ResultCode.FAIL, "不是手机号码");
         }
+
+
         //设置主键标识
         o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getFullName())) {
