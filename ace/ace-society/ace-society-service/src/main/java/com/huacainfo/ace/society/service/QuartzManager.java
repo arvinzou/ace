@@ -3,7 +3,7 @@ package com.huacainfo.ace.society.service;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.portal.service.WeChatApiService;
+//import com.huacainfo.ace.portal.service.WeChatApiService;
 import com.huacainfo.ace.society.dao.ActivityDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class QuartzManager {
     private ActivityDao activityDao;
 
     @Autowired
-    private WeChatApiService weChatApiService;
+    //private WeChatApiService weChatApiService;
 
     /**
      * 每隔1分钟 自动关闭一次 超时的活动数据
@@ -48,8 +48,8 @@ public class QuartzManager {
     public void sysUserList() throws Exception {
         logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表--开始-----");
         try {
-            ResultResponse rs = weChatApiService.synUserList("society");
-            logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：{}", JsonUtil.toJson(rs));
+           // ResultResponse rs = weChatApiService.synUserList("society");
+           // logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：{}", JsonUtil.toJson(rs));
         } catch (Exception e) {
             logger.error("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：\n{}", e);
         }
