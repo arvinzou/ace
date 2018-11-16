@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5,orgType:2};
+var params = {limit: 5, orgType: 2};
 window.onload = function () {
     initPage();
     initEvents();
@@ -7,13 +7,17 @@ window.onload = function () {
 }
 function App() {
     console.log("=============================App Start==============================");
-    loadCustom();
+    // loadCustom();
 }
 /*加载资源*/
 function loadCustom() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
+
+    // urls.push({path: portalPath, url: '/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', type: 'css'});
+    // urls.push({path: portalPath, url: '/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', type: 'js'});
+    // urls.push({path: portalPath, url: '/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
@@ -67,13 +71,28 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
-    ﻿
-     $(".btn-group .btn").bind('click', function (event) {
-            $(event.target).siblings().removeClass("active");
-            console.log(event);
-            $(event.target).addClass("active");
-        });
- }
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
+
+    $("input[name=startDate]").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language: 'zh-CN',
+        weekStart: 1,
+        todayBtn: 1,//显示‘今日’按钮
+        autoclose: true,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 'hour',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+        clearBtn: true,//清除按钮
+        forceParse: 0
+    });
+    $('input[name=startDate]').focus(function () {
+        $(this).blur();//不可输入状态
+    });
+}
 
 
 //juicer自定义函数
@@ -81,7 +100,7 @@ function initJuicerMethod() {
     juicer.register('parseJson', parseJson);
 }
 
-function parseJson(text){
+function parseJson(text) {
     return JSON.parse(text)
 }
 
