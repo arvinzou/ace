@@ -3,10 +3,10 @@ import org.junit.Test;
 
 /**
  * @Auther: Arvin
- * @Date: 2018/11/12 15:14
+ * @Date: 2018/11/12 15:26
  * @Description:
  */
-public class TestDemo {
+public class UnitTest {
     @Test
     public void test() throws Exception {
         WeChatApiServiceImpl obj = new WeChatApiServiceImpl();
