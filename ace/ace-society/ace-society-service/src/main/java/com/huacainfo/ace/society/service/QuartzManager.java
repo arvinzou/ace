@@ -44,7 +44,7 @@ public class QuartzManager {
     /**
      * 拉取公众号已关注用户列表  每天am 11：50 执行一次
      */
-    @Scheduled(cron = "0 15 14 * * ?")
+    @Scheduled(cron = "0 55 8 * * ?")
     public void sysUserList() throws Exception {
         logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表--开始-----");
         try {
