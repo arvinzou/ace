@@ -26,10 +26,10 @@
         <result column="departmentId" jdbcType="VARCHAR" property="departmentId"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId, 
-    directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId,
+        directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
         lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId, areaCode, belongTo
-  </sql>
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -43,29 +43,29 @@
         where departmentId = #{departmentId,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from fop_association
-    where id = #{id,jdbcType=VARCHAR}
-  </delete>
+        delete from fop_association
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
-    insert into fop_association (id, fullName, shortName, 
-      abcCode, address, phoneNumber, 
-      establishDate, pseronId, directorNum, 
-      viceNum, remark, status, 
-      createUserId, createUserName, createDate,
+        insert into fop_association (id, fullName, shortName,
+        abcCode, address, phoneNumber,
+        establishDate, pseronId, directorNum,
+        viceNum, remark, status,
+        createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
         latitude ,longitude, departmentId, areaCode, belongTo
-      )
-    values (#{id,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
-      #{abcCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, 
-      #{establishDate,jdbcType=TIMESTAMP}, #{pseronId,jdbcType=VARCHAR}, #{directorNum,jdbcType=INTEGER}, 
-      #{viceNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        )
+        values (#{id,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+        #{abcCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
+        #{establishDate,jdbcType=TIMESTAMP}, #{pseronId,jdbcType=VARCHAR}, #{directorNum,jdbcType=INTEGER},
+        #{viceNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
         #{lastModifyDate,jdbcType=TIMESTAMP},
         #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{departmentId,jdbcType=VARCHAR},
         #{areaCode,jdbcType=VARCHAR}, #{belongTo,jdbcType=VARCHAR}
-      )
-  </insert>
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
         insert into fop_association
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -285,31 +285,31 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
-    update fop_association
-    set fullName = #{fullName,jdbcType=VARCHAR},
-      shortName = #{shortName,jdbcType=VARCHAR},
-      abcCode = #{abcCode,jdbcType=VARCHAR},
+        update fop_association
+        set fullName = #{fullName,jdbcType=VARCHAR},
+        shortName = #{shortName,jdbcType=VARCHAR},
+        abcCode = #{abcCode,jdbcType=VARCHAR},
         areaCode = #{areaCode,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
-      establishDate = #{establishDate,jdbcType=TIMESTAMP},
-      pseronId = #{pseronId,jdbcType=VARCHAR},
-      directorNum = #{directorNum,jdbcType=INTEGER},
-      viceNum = #{viceNum,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=CHAR},
-      createUserId = #{createUserId,jdbcType=VARCHAR},
-      createUserName = #{createUserName,jdbcType=VARCHAR},
-      createDate = #{createDate,jdbcType=TIMESTAMP},
-      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
-      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+        establishDate = #{establishDate,jdbcType=TIMESTAMP},
+        pseronId = #{pseronId,jdbcType=VARCHAR},
+        directorNum = #{directorNum,jdbcType=INTEGER},
+        viceNum = #{viceNum,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
         lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
         latitude = #{latitude,jdbcType=DECIMAL},
         longitude = #{longitude,jdbcType=DECIMAL},
         departmentId = #{departmentId,jdbcType=VARCHAR},
         belongTo = #{belongTo,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=VARCHAR}
-  </update>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 
 
     <sql id="Vo_Column_List">

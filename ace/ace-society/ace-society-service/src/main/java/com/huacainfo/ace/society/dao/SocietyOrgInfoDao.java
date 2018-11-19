@@ -6,6 +6,7 @@ import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SocietyOrgInfoDao {
 
@@ -34,6 +35,7 @@ public interface SocietyOrgInfoDao {
                 @Param("addCoin") Integer addCoin);
 
     int isExit(SocietyOrgInfo record);
+
 
 
 }

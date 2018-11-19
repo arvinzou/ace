@@ -72,6 +72,7 @@
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
 
+
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>

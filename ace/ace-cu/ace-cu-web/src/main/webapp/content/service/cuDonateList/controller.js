@@ -9,7 +9,8 @@ jQuery(function ($) {
                 $.extend(params, {
                     time: new Date()
                 });
-                // console.log(params);
+                console.log("***********************");
+                console.log(params);
                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {
                     page: 1,
                     postData: params
@@ -20,11 +21,11 @@ jQuery(function ($) {
     });
 
     $("input[name=startDate]").datetimepicker({
-        format: 'yyyy-mm-dd hh:mm',
+        format: 'yyyy-mm-dd hh:ii',
         language: 'zh-CN',
         weekStart: 1,
         todayBtn: 1,//显示‘今日’按钮
-        autoclose: 1,
+        autoclose: true,
         todayHighlight: 1,
         startView: 2,
         minView: 'hour',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
@@ -32,19 +33,19 @@ jQuery(function ($) {
         forceParse: 0
     });
     $('input[name=startDate]').focus(function () {
-        $(this).blur();//不可输入状态
+        // $(this).blur();//不可输入状态
     });
 
 
     $("input[name=endDate]").datetimepicker({
-        format: 'yyyy-mm-dd hh:mm',
+        format: 'yyyy-mm-dd hh:ii',
         language: 'zh-CN',
         weekStart: 1,
         todayBtn: 1,//显示‘今日’按钮
         autoclose: 1,
         todayHighlight: 1,
         startView: 2,
-        minView: 'hour',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+        minView: '0',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
         clearBtn: true,//清除按钮
         forceParse: 0
     });
@@ -53,21 +54,18 @@ jQuery(function ($) {
     });
 
     $('#btn-view-add').on('click', function () {
-        jQuery(cfg.grid_selector).jqGrid(
-            'editGridRow',
-            'new',
-            {
-                closeAfterAdd: true,
-                recreateForm: true,
-                viewPagerButtons: false,
-                beforeShowForm: function (e) {
-                    var form = $(e[0]);
-                    form.closest('.ui-jqdialog').find(
-                        '.ui-jqdialog-titlebar').wrapInner(
-                        '<div class="widget-header" />')
-                    style_edit_form(form);
-                }
-            })
+        jQuery(cfg.grid_selector).jqGrid('editGridRow', 'new', {
+            closeAfterAdd: true,
+            recreateForm: true,
+            viewPagerButtons: false,
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find(
+                    '.ui-jqdialog-titlebar').wrapInner(
+                    '<div class="widget-header" />')
+                style_edit_form(form);
+            }
+        })
     });
 
 });

@@ -33,28 +33,26 @@
 
             </div>
 
-            <div class="col-sm-8">
-                <form onsubmit="return t_query()">
-                    <div class="input-group">
-                        开始日：<input class="inline laydate-icon" name="startDate" style="width:200px; margin-right:10px;">
-                        结束日：<input class="inline laydate-icon" name="endDate" style="width:200px;">
-                        <span class="input-group-btn">
-                                    <button class="btn  btn-default search_btn" type="submit">搜索</button>
-                                </span>
-                    </div>
-                </form>
-            </div>
+               <div class="col-sm-7">
+                                                     <form onsubmit="return t_query()">
+                                                        <div class="input-group">
+                                                                        开始日：<input class="inline laydate-icon" name="startDate" style="width:200px; margin-right:10px;">
+                                                                        结束日：<input class="inline laydate-icon" name="endDate" style="width:200px; margin-right:10px;">
+                                                                <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn" type="submit">搜索</button>
+                                                                </span>
+                                                       </div>
+                                    </form>
+                                </div>
 
 
             <div class="table-scrollable">
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th width="20%"> 排名</th>
-                        <th width="20%"> 用户</th>
-                        <th width="20%"> 头像</th>
-                        <th width="20%"> 累计获得爱心币</th>
-                        <th width="20%"> 创建日期</th>
+                        <th width="30%"> 排名</th>
+                        <th width="40%"> 用户</th>
+                        <th width="30%"> 累计获得爱心币</th>
                     </tr>
                     </thead>
                     <tbody id="page-list">
@@ -80,9 +78,7 @@
     <tr>
         <td> \${item.i}</td>
         <td> \${item.nickName}</td>
-        <td> \${item.avatarUrl}</td>
         <td> \${item.accPoints}</td>
-        <td> \${item.createDate}</td>
     </tr>
     {@/each}
 </script>
@@ -103,23 +99,12 @@
                 \${data.nickName}
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">头像</label>
-            <div class="col-md-10">
-                \${data.avatarUrl}
-            </div>
+
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">累计获得爱心币</label>
             <div class="col-md-10">
                 \${data.accPoints}
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">累计获得爱心币</label>
-            <div class="col-md-10">
-                \${data.createDate}
             </div>
         </div>
 

@@ -49,7 +49,10 @@
                     <div class="input-group date form_datetime"
                          style="width:15%;float:left;border: 1px solid #efefef;">
                         <input type="text" size="16" name="endDate" readonly="false" class="form-control">
+                    </div>
 
+                    <div class="input-group form-group" style="width: 250px;">
+                        <input type="text" name="projectName" class="form-control" placeholder="项目名称">
                     </div>
 
                     <div class="input-group" style="width: 250px;float: right">
@@ -247,7 +250,7 @@
 <style>
     .form-group {
         padding-left: 10px;
-        padding-right: 10px;
+        padding-right: 5px;
         float: left;
     }
 
