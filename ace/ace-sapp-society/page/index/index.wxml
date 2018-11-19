@@ -22,11 +22,11 @@
                         <view class='activity-warn-box'>
                             <view class='activity-warn-title'><text>距离活动开始</text></view>
                             <view class='activity-warn-time'>
-                                <text class='time-num'>{{days}}</text>
-                                <text class='time-title'>天</text>
                                 <text class='time-num'>{{hours}}</text>
-                                <text class='time-title'>：</text>
+                                <text class='time-title'>:</text>
                                 <text class='time-num'>{{minutes}}</text>
+                                <text class='time-title'>:</text>
+                                <text class='time-num'>{{second}}</text>
                             </view>
                         </view>
                     </view>

@@ -26,7 +26,6 @@ Page({
       } else {
           if (wx.getStorageSync('userinfo')) {
               that.initUserData();
-              that.activityIng(1);
               that.initReport();
           };
       }
@@ -69,30 +68,44 @@ Page({
       var that = this;
       var date3 = util.formateStringToDate(endTime).getTime() - startTime.getTime();   //时间差的毫秒数  
       //计算出相差天数
-      var days = Math.floor(date3 / (24 * 3600 * 1000))
+      var seconds = Math.floor(date3 / 1000);
       //计算出小时数
-      var leave1 = date3 % (24 * 3600 * 1000)    //计算天数后剩余的毫秒数
-      var hours = Math.floor(leave1 / (3600 * 1000))
-      //计算相差分钟数
-      var leave2 = leave1 % (3600 * 1000)        //计算小时数后剩余的毫秒数
-      var minutes = Math.floor(leave2 / (60 * 1000))
-      //计算相差秒数
-      var leave3 = leave2 % (60 * 1000)      //计算分钟数后剩余的毫秒数
-      var seconds = Math.round(leave3 / 1000)
-      console.log(" 相差 " + days + "天 " + hours + "小时 " + minutes + " 分钟" + seconds + " 秒");
-      that.setData({
-          days: days,
-          hours: hours,
-          minutes: minutes
-      });
-      if(date3 < 0){
+      if(seconds<0){
           that.setData({
               isEnd: true
           });
+          return;
       }
-
+      that.data.seconds = seconds;
+        that.formatTime();
+        that.actionClock();
+      
   },
-
+  
+    formatTime:function(){
+        var that=this;
+        var seconds=that.data.seconds;
+        var hours = Math.floor(seconds/3600);
+        var minutes = Math.floor((seconds % 3600)/60);
+        var second = Math.floor(seconds % 3600%60);
+        that.setData({
+            second: second<10?'0'+second:second,
+            hours: hours < 10 ? '0' + hours : hours,
+            minutes: minutes < 10 ? '0' + minutes : minutes
+        });
+        if (seconds < 0) {
+            that.setData({
+                isEnd: true
+            });
+        }
+    },
+    actionClock:function(){
+        var that =this;
+        setInterval(function(){
+            that.data.seconds = (that.data.seconds)-1;
+            that.formatTime();
+        }, 1000);
+    },
   /**
    * 精选往事
    */
