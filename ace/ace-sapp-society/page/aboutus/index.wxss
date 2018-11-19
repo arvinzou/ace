@@ -39,8 +39,9 @@
     color: #666666;
     font-size: 26rpx;
     line-height: 40rpx;
-    text-indent: 2em;
+    text-indent:2em;
 }
+
 .code{
     width: 150rpx;
     height: 150rpx;

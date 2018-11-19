@@ -70,7 +70,9 @@ Page({
     devicePosition:"front",
     frontimg: '../../image/front.png',
     hiddenBtn: true,
-    showBtn: false
+    showBtn: false,
+    maskFlag: true,
+    videoUrl: null
   },
   onReady: function (res) {
     var that = this;
@@ -511,5 +513,24 @@ Page({
         console.log(e);
       }
     });
-  }
+  },
+  viewVideo: function (e) {
+    console.log("查看视频地址=====================================" + e.currentTarget.id);
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    that.setData({
+        videoUrl: e.currentTarget.id,
+        maskFlag: false
+    });
+ },
+ exitVideo: function (e) {
+    console.log("==================================退出视频观看");
+    var that = this;
+    var videoContent = wx.createVideoContext("video");
+    videoContent.pause();
+    that.setData({
+        maskFlag: true,
+        videoUrl: null
+    });
+},
 });

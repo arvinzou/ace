@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -189,6 +190,21 @@ public class WWWWxPayController extends CuBaseController {
         }
 
         return cuDonateOrderService.ccbCallBack(params);
+    }
+
+
+    /**
+     * 建行支付结果通知
+     *
+     * @return String
+     */
+    @RequestMapping(value = "/orderPay")
+    public ResultResponse orderPay(String orderId, String payType, String payAmount) {
+        if (!StringUtil.areNotEmpty(orderId, payType, payAmount)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少参数");
+        }
+
+        return cuDonateOrderService.pay(orderId, OrderConstant.PAY_TYPE_CCB, new BigDecimal(payAmount).setScale(2));
     }
 
 }

@@ -1,5 +1,5 @@
 
-  <live-pusher url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" device-position="{{devicePosition}}" waiting-image="{{live.imageSrc}}" style="width:100%; height:{{pusherSizeH}}vh;flex:1;" id="pushPlayer">
+  <live-pusher hidden='{{!maskFlag}}' url="{{rtmpurl}}" mode="SD" autopush="{{autopush}}" aspect="{{aspect}}" orientation="{{orientation}}" beauty="10" whiteness="10" bindstatechange="statechange" enable-camera="{{enablecamera}}" muted="{{muted}}" bindnetstatus="netstatus" device-position="{{devicePosition}}" waiting-image="{{live.imageSrc}}" style="width:100%; height:{{pusherSizeH}}vh;flex:1;" id="pushPlayer">
     <cover-view class='info-tip'>
       <cover-view style='color:#fff;font-size:25rpx;padding:40rpx;'>
         <cover-view wx:if="{{info.videoBitrate}}">视频输出:{{info.videoBitrate}}kbps</cover-view>
@@ -113,7 +113,7 @@
             {{item.content}}
           </view>
 
-          <video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:94%;height:35vh;padding:20rpx;' objectFit="contain"></video>
+          <image src='../../image/video.png' data-index='{{index}}' id='{{ item.video }}' class='videoImg {{item.type==1?"show":"hide"}}' bindtap='viewVideo'></image>
           <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;padding:20rpx;' controls="{{1>0}}"></audio>
           <view class="pictures" data-count="{{item.imageList.length}}">
             <view class="imglist{{item.imageList.length}}">
@@ -152,7 +152,7 @@
       <!--<cover-view class='btn-add' bindtap="rpt" data-id="{{live.id}}">
             <cover-image class="btn-img" src="../../image/添加.png" />
      </cover-view>-->
-     <view class='add-report'>发布报道</view>
+     <view class='add-report' bindtap="rpt" data-id="{{live.id}}">发布报道</view>
   </scroll-view>
 </view>
 <view class="model" wx:if='{{actionComment}}'>
@@ -163,6 +163,13 @@
       <button class='submit' formType="submit">发送</button>
     </form>
   </view>
+</view>
+
+
+ <view class='mask' hidden='{{maskFlag}}' bindtap='exitVideo'>
+    <video id='video' src='{{videoUrl}}' style='width:100%;height:100%;' autoplay='true' direction='0' loop='true' show-play-btn='true' show-center-play-btn='false'>
+        <cover-view class="video-controls" bindtap='exitVideo'></cover-view>
+    </video>
 </view>
 
    
