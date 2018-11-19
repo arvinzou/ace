@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ace-CodeGenerator" />
+        <module name="ace-common" />
+        <module name="ace-common-dao" />
+        <module name="ace-common-web" />
+        <module name="ace-fop-client" />
+        <module name="ace-fop-rest" />
+        <module name="ace-fop-service" />
+        <module name="ace-fop-web" />
+        <module name="ace-jxb-client" />
+        <module name="ace-jxb-service" />
+        <module name="ace-jxb-web" />
+        <module name="ace-live-client" />
+        <module name="ace-live-service" />
+        <module name="ace-live-web" />
+        <module name="ace-portal-client" />
+        <module name="ace-portal-service" />
+        <module name="ace-portal-web" />
+        <module name="ace-society-client" />
+        <module name="ace-society-service" />
+        <module name="ace-society-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8" />
+  </component>
+</project>

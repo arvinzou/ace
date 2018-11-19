@@ -26,6 +26,12 @@ div p{
     padding: 0.533333rem  0.533333rem 0.8rem;
 }
 
+.realname .title{
+    height: 0.4rem;
+    line-height: 0.4rem;
+    display: inline-block;
+}
+
 .money_card .title,.realname .title{
     font-size:0.373333rem;
     color:rgba(28,40,67,1);

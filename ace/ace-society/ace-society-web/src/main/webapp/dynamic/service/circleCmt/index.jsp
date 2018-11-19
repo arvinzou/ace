@@ -123,10 +123,8 @@
             {@/if}
         </td>
         <td>
-
              <a href="javascript:audit('\${item.id}','3');">屏蔽</a>
              <a href="javascript:audit('\${item.id}','2');">通过</a>
-
         </td>
     </tr>
     {@/each}

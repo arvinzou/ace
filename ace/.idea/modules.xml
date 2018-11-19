@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live.iml" filepath="$PROJECT_DIR$/ace-live/ace-live.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-client/ace-live-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-service/ace-live-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" filepath="$PROJECT_DIR$/ace-live/ace-live-web/ace-live-web.iml" />
+    </modules>
+  </component>
+</project>
