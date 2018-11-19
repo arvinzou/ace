@@ -116,6 +116,14 @@ function initForm(){
                data['o']=result.data;
                data['dict149']=staticDictObject['149'];
                data['dict152']=staticDictObject['152'];
+                var array = new Array();
+                var target=data.o.productList;
+                for(var item in target){
+                    console.log(item);
+                    array[parseInt(target[item].type)-1]=target[item];
+                }
+                console.log(array);
+                data.o.productList=array;
                render($("#fm-edit"),data,'tpl-fm');
                initPage();
             }else {
