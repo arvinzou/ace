@@ -12,39 +12,29 @@
     <script type="text/javascript" src="../../common/js/loader.js"></script>
     <script type="text/javascript" src="js/earnings.js"></script>
 </head>
-<body>
-    <div class="list">
-        <div class="top">
-            <span class="name">收益提现</span>
-            <span class="money_style">+<span>200.00 </span></span>
-        </div>
-        <div class="info">
-            <span class="time">2018-04-07  17:30:15 </span>
-            <span class="stutas">提现成功</span>
-        </div>
-    </div>
-
-    <div class="list">
-        <div class="top">
-            <span class="name">收益提现</span>
-            <span class="money_style">+<span>200.00 </span></span>
-        </div>
-        <div class="info">
-            <span class="time">2018-04-07  17:30:15 </span>
-            <span class="stutas stutas1">待审核</span>
-        </div>
-    </div>
-
-    <div class="list">
-        <div class="top">
-            <span class="name">收益提现</span>
-            <span class="money_style">+<span>200.00 </span></span>
-        </div>
-        <div class="info">
-            <span class="time">2018-04-07  17:30:15 </span>
-            <span class="stutas stutas2">提现失败</span>
-        </div>
-    </div>
+<body id="list">
 
 </body>
+
+<script id="tmp-list" type="text/template">
+    {@each data as item}
+    <div class="list">
+        <div class="top">
+            <span class="name">收益提现</span>
+            <span class="money_style">+<span>\${item.applyAmount} </span></span>
+        </div>
+        <div class="info">
+            <span class="time">\${item.createDate} </span>
+            {@if item.auditRst == 'pass'}
+            <span class="stutas">提现成功</span>
+            {@else if item.auditRst == 'temp'}
+            <span class="stutas stutas1">待审核</span>
+            {@else if item.auditRst == 'reject'}
+            <span class="stutas stutas2">提现失败</span>
+            {@/if}
+        </div>
+    </div>
+    {@/each}
+</script>
+
 </html>

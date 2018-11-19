@@ -96,11 +96,11 @@
 
 <!--投诉模态框-->
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="margin:4rem 0.5rem !important;">
-        <div class="modal-content">
-            <div class="modal-body">
+    <div class="modal-dialog" style="margin:2rem 0.5rem !important;">
+        <div class="modal-content" style="height: 12rem;border-radius: 0.533333rem !important;">
+            <div class="modal-body" style="height: 10rem;">
                 <h3 class="complaint-title">投诉TA</h3>
-                <textarea style="width: 100%; height: 6rem;" name="comment" placeholder="请在此输入您在购买和咨询服务过程中遇到的问题，我们收到投诉后会及时与您联系~"
+                <textarea style="width: 100%; height: 8rem;line-height: 0.666666rem; border: none;" name="comment" placeholder="请在此输入您在购买和咨询服务过程中遇到的问题，我们收到投诉后会及时与您联系~"
                                   maxlength="200"
                                   onfocus="this.placeholder=''"
                                   onblur="this.placeholder='请在此输入您在购买和咨询服务过程中遇到的问题，我们收到投诉后会及时与您联系~'"></textarea>

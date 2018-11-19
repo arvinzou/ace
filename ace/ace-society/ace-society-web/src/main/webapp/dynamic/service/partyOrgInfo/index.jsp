@@ -58,7 +58,7 @@
                 <thead>
                 <tr>
                     <th width="10%"> 组织名称</th>
-                    <th width="10%"> 组织类型</th>
+                    <%--<th width="10%"> 组织类型</th>--%>
                     <th width="10%"> 联系人姓名</th>
                     <th width="10%"> 联系人手机号</th>
                     <th width="10%"> 累计获得爱心币</th>
@@ -89,7 +89,7 @@
     {@each data as item, index}
     <tr>
         <td> \${item.orgName}</td>
-        <td> \${item.orgType}</td>
+        <%--<td> \${item.orgType}</td>--%>
         <td> \${item.contactPerson}</td>
         <td> \${item.contactPhone}</td>
         <td> \${item.accPoints}</td>

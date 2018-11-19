@@ -256,7 +256,7 @@
         wx.nickName, wx.avatarUrl,
         t.id, t.orgName, t.orgAddr, t.orgCover, t.orgSummary, t.contactPerson, t.contactPhone, t.accPoints,
         t.validPoints, t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
-        t.lastModifyUserName, t.lastModifyDate
+        t.lastModifyUserName, t.lastModifyDate, t.orgType
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

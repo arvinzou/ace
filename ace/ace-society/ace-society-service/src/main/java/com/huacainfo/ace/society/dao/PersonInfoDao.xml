@@ -281,5 +281,67 @@
         where s.id=#{userId,jdbcType=VARCHAR}
     </update>
 
+    <select id="querysocietyOrg" resultType="java.util.HashMap">
+        select
+        (@i:=@i+1) as i,
+        v.user_level as regType,
+        v.nickName, v.avatarUrl, v.accPoints, v.userId
+        from (
+        SELECT u.user_level,w.nickName, w.avatarUrl, a.accPoints, a.userId FROM
+        (SELECT
+        SUM(t.points) AS accPoints,
+        t.userId AS userId
+        FROM
+        society.points_record t
+        WHERE
+        1 = 1
+        AND t.points > 0
+        <if test="startDate!=null and startDate!=&quot;&quot;">
+            AND t.createDate >= #{startDate,jdbcType=VARCHAR}
+        </if>
+        <if test="endDate!=null and endDate!=&quot;&quot;">
+            AND t.createDate &lt;= #{endDate,jdbcType=VARCHAR}
+        </if>
+        GROUP BY
+        t.userId
+        ) a
+        LEFT JOIN portal.wx_user w ON a.userId = w.unionId
+        left join portal.users u on u.user_id = a.userId
+        WHERE u.user_level=2
+        ORDER BY a.accPoints DESC
+        )v , (select @i:=0) as it
+    </select>
+
+
+    <select id="queryperson" resultType="java.util.HashMap">
+        select
+        (@i:=@i+1) as i,
+        v.user_level as regType,
+        v.nickName, v.avatarUrl, v.accPoints, v.userId
+        from (
+        SELECT u.user_level,w.nickName, w.avatarUrl, a.accPoints, a.userId FROM
+        (SELECT
+        SUM(t.points) AS accPoints,
+        t.userId AS userId
+        FROM
+        society.points_record t
+        WHERE
+        1 = 1
+        AND t.points > 0
+        <if test="startDate!=null and startDate!=&quot;&quot;">
+            AND t.createDate >= #{startDate,jdbcType=VARCHAR}
+        </if>
+        <if test="endDate!=null and endDate!=&quot;&quot;">
+            AND t.createDate &lt;= #{endDate,jdbcType=VARCHAR}
+        </if>
+        GROUP BY
+        t.userId
+        ) a
+        LEFT JOIN portal.wx_user w ON a.userId = w.unionId
+        left join portal.users u on u.user_id = a.userId
+        WHERE u.user_level=1
+        ORDER BY a.accPoints DESC
+        )v , (select @i:=0) as it
+    </select>
 
 </mapper>

@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class QrDemo {
 
-    public static final String PUB_ALL_STR = "30819c300d06092a864886f70d010101050003818a0030818602818075975c936982556e6dbe8187c365e4a2c63e56232be670e6896f1085073d8502a1a4225b39e89f552de12bd1df5d97638106c584855eab00287c362402e44e0c8cf5c292feb9832089a3848e1b928f9cbaac73422ffa0a07b37f9a73703348599d6926d7e29f452ef7260c9796acfbd0cb831ee7d477951e6c46c575320042ad020111";
+   /* public static final String PUB_ALL_STR = "30819c300d06092a864886f70d010101050003818a0030818602818075975c936982556e6dbe8187c365e4a2c63e56232be670e6896f1085073d8502a1a4225b39e89f552de12bd1df5d97638106c584855eab00287c362402e44e0c8cf5c292feb9832089a3848e1b928f9cbaac73422ffa0a07b37f9a73703348599d6926d7e29f452ef7260c9796acfbd0cb831ee7d477951e6c46c575320042ad020111";
 
 
     public static void main(String[] args) throws Exception {
@@ -46,20 +46,20 @@ public class QrDemo {
         tmp.append("&TXCODE=").append(TXCODE);//交易码 Y    由建行统一分配为530550
         tmp.append("&REMARK1=").append(REMARK1);//备注1   N
         tmp.append("&REMARK2=").append(REMARK2);//备注2   N
-        /**
+        *//**
          * 返回类型 Y
          * 0或空：返回页面二维码
          1：返回JSON格式【二维码信息串】
          2：返回聚合扫码页面二维码
          3：返回聚合扫码JSON格式【二维码信息串】
          聚合扫码只能上送2或3
-         */
+         *//*
         tmp.append("&RETURNTYPE=").append(RETURNTYPE);
-        /**
+        *//**
          * 格式：
          YYYYMMDDHHMMSS如：20120214143005
          银行系统时间> TIMEOUT时拒绝交易，若送空值则不判断超时。
-         */
+         *//*
         tmp.append("&TIMEOUT=").append(TIMEOUT);//订单超时时间    N
         tmp.append("&PUB=").append(PUB32TR2);//PUB字段为对应柜台的公钥后30位
 
@@ -99,5 +99,5 @@ public class QrDemo {
         } catch (UnsupportedEncodingException e) {
             return str;
         }
-    }
+    }*/
 }

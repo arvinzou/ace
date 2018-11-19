@@ -2,9 +2,11 @@ package com.huacainfo.ace.society.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.SocietyOrgInfoService;
@@ -16,6 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/societyOrgInfo")
@@ -148,4 +153,5 @@ public class SocietyOrgInfoController extends SocietyBaseController {
 
         return this.societyOrgInfoService.audit(id, rst, message, this.getCurUserProp());
     }
+
 }

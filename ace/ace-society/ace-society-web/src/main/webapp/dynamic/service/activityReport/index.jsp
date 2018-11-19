@@ -85,31 +85,26 @@
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">个人信息详情</h4>
+                <h4 class="modal-title">报道信息详情</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-                    <div class="form-body">
-                        <div class="table-scrollable" id="detail-info">
-                            <%--详情模板填充--%>
-                        </div>
-                    </div>
+                    <%--详情模板填充--%>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <%--
-                <button type="button" class="btn btn-primary">确定</button>
-                --%>
+                <%--<button type="button" class="btn btn-primary">确定</button>--%>
             </div>
         </div>
     </div>
 </div>
+
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
@@ -210,43 +205,65 @@
     </tr>
     {@/each}
 </script>
-<%--详情juicer模板--%>
+
+
+<%--详情模板--%>
 <script id="tpl-detail" type="text/template">
-    <table class="table table-bordered table-hover">
-        <tr>
-            <td class="active"> 活动编码</td>
-            <td class="success"> \${data.activityTitel}</td>
-        </tr>
-        <tr>
-            <td class="active"> 报道标题</td>
-            <td class="success"> \${data.title}</td>
-        </tr>
-        <tr>
-            <td class="active"> 报道内容</td>
-            <td class="success">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">活动名称</label>
+            <div class="col-md-10">
+                \${data.activityTitel}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">报道封面</label>
+            <div class="col-md-10">
+                <img src="\${data.coverUrl}" style="max-width:480px;"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">报道标题</label>
+            <div class="col-md-10">
+                \${data.title}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">报道内容</label>
+            <div class="col-md-10">
                 {@each data.content as item, index}
                 {@if item.type==1}
 
-                <div>\${item.content}</div>
+                <div style="max-width:480px;" >\${item.content}</div>
                 {@else if item.type==2}
-                <div style="width:100%">
+                <div style="max-width:480px">
                     <img style="width:100%" src="\${item.content}" alt="">
                 </div>
                 {@/if}
 
                 {@/each}
-            </td>
-        </tr>
-        <tr>
-            <td class="active"> 创建人姓名</td>
-            <td class="success"> \${data.createUserName}</td>
-        </tr>
-        <tr>
-            <td class="active"> 创建日期</td>
-            <td class="success"> \${data.createDate}</td>
-        </tr>
-    </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">报道创建时间</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+    </div>
 </script>
+
+
+
+
+
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>

@@ -1,13 +1,8 @@
 package com.huacainfo.ace.portal.web.controller;
 
-import com.huacainfo.ace.common.fastdfs.IFile;
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.portal.model.Attach;
-import com.huacainfo.ace.portal.service.AttachService;
-import com.huacainfo.ace.portal.service.FilesService;
-import com.huacainfo.ace.portal.vo.AttachQVo;
-import com.huacainfo.ace.portal.vo.AttachVo;
+import java.io.File;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,17 +12,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.util.Date;
+import com.huacainfo.ace.common.fastdfs.IFile;
+import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.portal.model.Attach;
+import com.huacainfo.ace.portal.service.AttachService;
+import com.huacainfo.ace.portal.service.FilesService;
+import com.huacainfo.ace.portal.vo.AttachQVo;
+import com.huacainfo.ace.portal.vo.AttachVo;
 @Controller
 @RequestMapping("/attach")
 public class AttachController extends PortalBaseController{
 	private static final long serialVersionUID = 1L;
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
+	@Autowired
 	private IFile fileSaver;
 	@Autowired
 	private FilesService filesService;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private AttachService attachService;
 	/**
@@ -80,8 +82,8 @@ public class AttachController extends PortalBaseController{
 	 */
 	@RequestMapping(value = "/uploadFile.do")
 	@ResponseBody
-    public ListResult<AttachVo> uploadFile(@RequestParam MultipartFile[] file, String noticeId, String collectionName)
-            throws Exception {
+	public ListResult<AttachVo>  uploadFile(@RequestParam MultipartFile[] file,String noticeId, String collectionName)
+			throws Exception {
 		String[] fileNames=new String[file.length];
 		Attach[] files=new Attach[file.length];
 		int i=0;
@@ -106,7 +108,8 @@ public class AttachController extends PortalBaseController{
 	        files[i]=obj;
 			i++;
 		}
-		return this.attachService.upload(files,noticeId, this.getCurUserProp());
+		//return this.attachService.upload(files,noticeId, this.getCurUserProp());
+		return null;
 	}
 	
 	

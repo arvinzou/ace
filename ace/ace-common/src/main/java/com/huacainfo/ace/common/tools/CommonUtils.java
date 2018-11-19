@@ -395,6 +395,7 @@ public class CommonUtils extends StringUtils {
     public static long getRandomNum(int maxNum) {
         Random r = new Random();
         return Long.valueOf(r.nextInt(maxNum));
+
     }
 
     public static String getStringByExpression(String expression,

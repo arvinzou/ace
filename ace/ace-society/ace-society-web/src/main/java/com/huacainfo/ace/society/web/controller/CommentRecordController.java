@@ -10,6 +10,7 @@ import com.huacainfo.ace.society.model.CommentRecord;
 import com.huacainfo.ace.society.service.CommentRecordService;
 import com.huacainfo.ace.society.vo.CommentRecordQVo;
 import com.huacainfo.ace.society.vo.CommentRecordVo;
+import org.apache.xml.res.XMLErrorResources_tr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,9 +56,9 @@ public class CommentRecordController extends SocietyBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
+
 
     /**
      * @throws

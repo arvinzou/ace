@@ -1,7 +1,7 @@
 package com.huacainfo.ace.common.plugins.wechat.util;
 
 import com.huacainfo.ace.common.tools.CommonUtils;
-import org.apache.commons.compress.utils.IOUtils;
+//import org.apache.commons.compress.utils.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -367,10 +367,10 @@ public class HttpKit {
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
-            IOUtils.closeQuietly(out);
-            IOUtils.closeQuietly(reader);
-            IOUtils.closeQuietly(inputStream);
-            IOUtils.closeQuietly(byteArrayInputStream);
+            //IOUtils.closeQuietly(out);
+            //IOUtils.closeQuietly(reader);
+            //IOUtils.closeQuietly(inputStream);
+            //IOUtils.closeQuietly(byteArrayInputStream);
             if (conn != null) {
                 conn.disconnect();
             }

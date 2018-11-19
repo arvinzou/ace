@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.portal.service.WeChatApiService;
 import com.huacainfo.ace.society.service.AnalysisService;
 import com.huacainfo.ace.society.service.OrderInfoService;
 import com.huacainfo.ace.society.service.PointsRecordService;
@@ -37,7 +38,8 @@ public class WUserController extends SocietyBaseController {
     private OrderInfoService orderInfoService;
     @Autowired
     private PointsRecordService pointsRecordService;
-
+    @Autowired
+    private WeChatApiService weChatApiService;
 
     /**
      * 爱心币排行
@@ -109,7 +111,6 @@ public class WUserController extends SocietyBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }
 
-
     /***
      * 获取当前服务器时间
      */
@@ -118,12 +119,20 @@ public class WUserController extends SocietyBaseController {
         return DateUtil.getNow();
     }
 
-
     @RequestMapping(value = "/wxSearch.do")
     @ResponseBody
-    public ResultResponse search(String access_tocken, String json ) throws Exception {
-        String url = "https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyvisittrend?access_token="+access_tocken;
-        String body = HttpUtils.httpPost(url,json);
-        return new ResultResponse(ResultCode.SUCCESS,"成功",body);
+    public ResultResponse search(String access_tocken, String json) throws Exception {
+        String url = "https://api.weixin.qq.com/datacube/getweanalysisappidmonthlyvisittrend?access_token=" + access_tocken;
+        String body = HttpUtils.httpPost(url, json);
+        return new ResultResponse(ResultCode.SUCCESS, "成功", body);
     }
+
+    @RequestMapping(value = "/synUserList")
+    @ResponseBody
+    public ResultResponse synUserList() throws Exception {
+        ResultResponse rs = weChatApiService.synUserList("society");
+
+        return rs;
+    }
+
 }

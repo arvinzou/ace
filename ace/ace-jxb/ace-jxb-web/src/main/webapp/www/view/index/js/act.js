@@ -105,6 +105,8 @@ function qualityCourse(){
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
+            "lineState":"1",
+            "auditRst":"1"
         },
         success:function(result){
             if(result.status == 0) {

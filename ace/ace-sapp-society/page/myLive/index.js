@@ -10,8 +10,7 @@ Page({
     items: [],
     listLive:[],
     startX: 0, //开始坐标
-    startY: 0,
-    sysUserInfo: wx.getStorageSync("sysUserInfo")
+    startY: 0
   },
   onReady: function (res) {
     var that = this;
@@ -24,7 +23,8 @@ Page({
   onLoad: function () {
     var that = this;
       that.setData({
-        userinfo: wx.getStorageSync('userinfo')
+        userinfo: wx.getStorageSync('userinfo'),
+          sysUserInfo: wx.getStorageSync("sysUserInfo")
       });
   },
   onPullDownRefresh: function () {

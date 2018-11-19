@@ -19,7 +19,7 @@ Page({
 
   initOrderList: function(){
       var that = this;
-      util.request(cfg.findOrderList, { "start": 0, "limit": 999 },
+      util.request(cfg.findOrderList, { "start": 0, "limit": 999, "userId": wx.getStorageSync("WX-SESSION-ID")},
           function (ret) {
               if (ret.status == 0) {
                   that.setData({
@@ -68,6 +68,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+      var that = this;
+      that.initOrderList();
       wx.stopPullDownRefresh();
   },
 

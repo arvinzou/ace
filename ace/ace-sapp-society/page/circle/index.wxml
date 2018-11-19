@@ -1,82 +1,91 @@
-<view class='index'>
-<block wx:for-items="{{list}}" wx:key="*">
-      <view class="wrap">
-          <view class='report-box-second'>
-            <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
-              <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
-
-              <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
-              <text style='padding:10rpx'>{{item.createDate}}</text>
-            </view>
-            <view class='rpt-content'>
-              <view wx:if="{{item.content.length>0}}" class="content">
-                <text>{{item.content}}</text>
-              </view>
-
-              <!--<video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:100%;height:35vh' objectFit="contain"></video>-->
-              <image src='../../image/video.png' data-index='{{index}}' id='{{ item.video }}' class='videoImg {{item.type==1?"show":"hide"}}' bindtap='viewVideo'></image>
-              <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;' controls="{{1>0}}"></audio>
-              <view class="pictures" data-count="{{item.imageList.length}}">
-                <view class="imglist{{item.imageList.length}}">
-                  <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex" >
-                    <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
-
-                  </block>
-
+<scroll-view scroll-y="true" class='index'>
+    <block wx:for-items="{{list}}" wx:key="*">
+        <view class="wrap">
+            <view class='report-box-second'>
+                <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
+                    <block wx:if='{{item.rpt.headimgurl!="" && item.rpt.headimgurl!=null && item.rpt.headimgurl!=undefined}}'>
+                        <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
+                    </block>
+                    <block wx:else>
+                        <image src="../../image/default_header.png" class="headimgp" />
+                    </block>
+                    <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
+                    <text style='padding:10rpx'>{{item.createDate}}</text>
                 </view>
-              </view>
-                <view class='cmt-bar'>
-
-          <image src='../../image/zan.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
-          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'>{{item.likeNum}}</text>
-          <image src='../../image/comment.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
-        </view>
-              <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
-                <view class='chat-content'>
-                  <image src='{{citem.headimgurl}}' class='headimg'></image>
-                  <view class='chat-right'>
-                    <view class='chat-nickname'>
-                      {{citem.nickname}} {{citem.createTime}}
+                <view class='rpt-content'>
+                    <view wx:if="{{item.content.length>0}}" class="content">
+                        <text>{{item.content}}</text>
                     </view>
-                    <text class='comment-text' wx:if="{{item.content.length<=20}}">{{citem.content}}</text>
-                    <text class='comment-text block' wx:if="{{item.content.length>20}}">{{citem.content}}</text>
-                  </view>
+
+                    <!--<video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:100%;height:35vh' objectFit="contain"></video>-->
+                    <image src='../../image/video.png' data-index='{{index}}' id='{{ item.video }}' class='videoImg {{item.type==1?"show":"hide"}}' bindtap='viewVideo'></image>
+                    <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;' controls="{{1>0}}"></audio>
+                    <view class="pictures" data-count="{{item.imageList.length}}">
+                        <view class="imglist{{item.imageList.length}}">
+                            <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex">
+                                <image class="img{{imgindex+1}}" bindtap="previewImage" data-list='{{item.imageList}}' id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
+
+                            </block>
+
+                        </view>
+                    </view>
+                    <view class='cmt-bar'>
+
+                        <image src='../../image/zan.png' class='cmt-addlike' bindtap='addlike' data-id="{{item.reportId}}"></image>
+                        <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'>{{item.likeNum}}</text>
+                        <image src='../../image/comment.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{item.reportId}}"></image>
+                    </view>
+                    <block wx:for-items="{{item.comments}}" wx:for-item="citem" wx:key="*">
+                        <view class='chat-content'>
+                            <block wx:if='{{citem.headimgurl!="" && citem.headimgurl!=null && citem.headimgurl!=undefined}}'>
+                                <image src='{{citem.headimgurl}}' class='headimg'></image>
+                            </block>
+                            <block wx:else>
+                                <image src='../../image/default_header.png' class='headimg'></image>
+                            </block>
+                            <view class='chat-right'>
+                                <view class='chat-nickname'>
+                                    {{citem.nickname}} {{citem.createTime}}
+                                </view>
+                                <text class='comment-text' wx:if="{{item.content.length<=20}}">{{citem.content}}</text>
+                                <text class='comment-text block' wx:if="{{item.content.length>20}}">{{citem.content}}</text>
+                            </view>
+                        </view>
+                    </block>
                 </view>
-              </block>
             </view>
-          </view>
-      </view>
-    </block>
-     
-     <block wx:if='{{sysUserInfo.regType == "2"}}'>
-        <block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>
-        <view class="btn-add-rpt" bindtap="add">
-        <image class="btn-img" src="../../image/add-red.png" />
         </view>
+    </block>
+
+    <block wx:if='{{sysUserInfo.regType == "2"}}'>
+        <block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>
+            <view class="btn-add-rpt" bindtap="add">
+                <image class="btn-img" src="../../image/add-red.png" />
+            </view>
         </block>
     </block>
     <block wx:if='{{sysUserInfo.regType == "1"}}'>
         <block wx:if='{{sysUserInfo.person.status =="3"}}'>
-        <view class="btn-add-rpt" bindtap="add">
-        <image class="btn-img" src="../../image/add-red.png" />
-        </view>
+            <view class="btn-add-rpt" bindtap="add">
+                <image class="btn-img" src="../../image/add-red.png" />
+            </view>
         </block>
     </block>
-</view>
+</scroll-view>
 
 
- <view class="model" wx:if='{{actionComment}}'>
+<view class="model" wx:if='{{actionComment}}'>
     <view class='inner-model' catchtap='hiddenComment'></view>
     <view class='box whiteBg'>
-      <form bindsubmit="formSubmit" bindreset="formReset">
-        <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar='' name="commentVal"></textarea>
-        <button class='submit' formType="submit">发送</button>
-      </form>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar='' name="commentVal"></textarea>
+            <button class='submit' formType="submit">发送</button>
+        </form>
     </view>
-  </view>
+</view>
 
 <!--视频播放-->
-  <view class='mask' hidden='{{maskFlag}}' bindtap='exitVideo'>
+<view class='mask' hidden='{{maskFlag}}' bindtap='exitVideo'>
     <video id='video' src='{{videoUrl}}' style='width:100%;height:100%;' autoplay='true' direction='0' loop='true' show-play-btn='true' show-center-play-btn='false'>
         <cover-view class="controls" bindtap='exitVideo'></cover-view>
     </video>

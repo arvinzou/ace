@@ -16,7 +16,9 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
-      that.setData({userId: options.userId});
+      that.setData({
+          userId: options.userId,
+          sysUserInfo: wx.getStorageSync("sysUserInfo")});
       that.initList();
   },
 

@@ -134,8 +134,21 @@ public interface BisType {
      */
     String COMMENT_IDEA = "idea";
     /**
-     * 活动评论-业务类型
+     * 公益活动评论-业务类型
      */
-    String COMMENT_ACTIVITY = "activity";
+    String REPORT_WELGARE = "reportComment_1";
+    /**
+     * 公益活动评论-业务类型
+     */
+    String REPORT_POPULAR = "reportComment_2";
+    /**
+     * 公益活动评论-业务类型
+     */
+    String REPORT_CREATIVE= "reportComment_3";
+    /**
+     * 公益活动评论-业务类型
+     */
+    String REPORT_PARTY = "reportComment_4";
+
 }
 

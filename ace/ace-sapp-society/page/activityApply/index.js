@@ -213,19 +213,19 @@ Page({
                 maxlength: '输入活动名称太长'
             },
             location: {
-                required: '请填写活动地址',
-                minlength: '请填写正确的活动地址',
-                maxlength: '填写的活动地址名称太长'
+                required: '请填写活动地点',
+                minlength: '填写活动地点最少5个字',
+                maxlength: '填写活动地点最多20个字'
             },
             mode: {
                 required: '请填写活动方式',
-                minlength: '请填写正确的活动方式',
-                maxlength: '填写的活动方式太长'
+                minlength: '填写的活动方式最少10个字',
+                maxlength: '填写的活动方式字数太多'
             },
             purpose: {
                 required: '请填写活动目的',
-                minlength: '请填写正确的活动目的',
-                maxlength: '填写的活动目的太长'
+                minlength: '请填写活动目的至少10个字',
+                maxlength: '填写的活动目的太多'
             },
             parterNum: {
                 required: '请填写参与人数',

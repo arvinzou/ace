@@ -2,13 +2,13 @@ package com.huacainfo.ace.society.service;
 
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.vo.PersonInfoQVo;
 import com.huacainfo.ace.society.vo.PersonInfoVo;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -105,4 +105,21 @@ public interface PersonInfoService {
      * @return ResultResponse
      */
     ResultResponse register(PersonInfo personInfo, Userinfo userinfo);
+
+    /**
+     * 组织爱心币排行
+     *
+     * @param condition 查询条件
+     * @return List<Map   <   String   ,       Object>>
+     */
+    List<Map<String, Object>> querysocietyOrg(Map<String, Object> condition);
+
+    /**
+     * 个人爱心币排行
+     *
+     * @param condition 查询条件
+     * @return List<Map   <   String   ,       Object>>
+     */
+    List<Map<String, Object>> queryperson(Map<String, Object> condition);
+
 }

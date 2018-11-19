@@ -1,10 +1,17 @@
+import com.huacainfo.ace.portal.service.impl.WeChatApiServiceImpl;
 import org.junit.Test;
 
 /**
- * Created by HuaCai008 on 2018/5/14.
+ * @Auther: Arvin
+ * @Date: 2018/11/12 15:14
+ * @Description:
  */
 public class TestDemo {
     @Test
     public void test() throws Exception {
+        WeChatApiServiceImpl obj = new WeChatApiServiceImpl();
+
+        obj.synUserList("society");
+
     }
 }

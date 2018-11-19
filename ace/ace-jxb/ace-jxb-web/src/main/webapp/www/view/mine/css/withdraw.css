@@ -8,17 +8,39 @@ div p{
     margin: 0;
 }
 
-.money_card{
+.realname{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.533333rem;
+}
+
+
+.money_card,.realname{
+    margin:0.4rem auto 0;
     width:9.2rem;
     background:rgba(255,255,255,1);
     border-radius:0.266666rem;
-    padding: 0.533333rem  0.533333rem 0.8rem;
-    margin:0.4rem auto 0;
 }
 
-.money_card .title{
+.money_card{
+    padding: 0.533333rem  0.533333rem 0.8rem;
+}
+
+.realname .title{
+    height: 0.4rem;
+    line-height: 0.4rem;
+    display: inline-block;
+}
+
+.money_card .title,.realname .title{
     font-size:0.373333rem;
     color:rgba(28,40,67,1);
+}
+
+.realname input{
+    font-size:0.373333rem;;
+    color:rgba(160,167,182,1);
+    border: 0px;
 }
 
 .money_card .form{
@@ -35,7 +57,7 @@ div p{
     border: 0px;
 }
 
-.money_card .form input:focus{
+.money_card .form input:focus,.realname input:focus{
     outline:none;
     -webkit-appearance:none;
 }
@@ -105,13 +127,15 @@ div p{
     margin-bottom: 0.7rem;
 }
 
+ul{
+    list-style-type:circle !important;
+    padding-left: 0.666666rem !important;
+}
+
 .rules_text ul{
     color: #A0A7B6;
     font-size: 0.36rem;
-    list-style-type:circle;
-    padding-left: 0.666666rem;
     line-height: 0.65rem;
-
 }
 
 .rules_text ul li{
@@ -150,7 +174,24 @@ div p{
     position: fixed;
     top:0;
 }
+.rst_model1 p{
+    font-size:0.48rem;
+    font-weight:bold;
+    color:rgba(28,40,67,1);
+    line-height: 1.2rem;
+}
 
+.rst_model1 ul{
+    text-align: left;
+}
+
+.rst_model1 ul li{
+    margin-bottom: 0.2rem;
+}
+
+.rst_model{
+    display: none;
+}
 
 .rst_model .result_box{
     background:url("./../img/bg.png") no-repeat rgba(255,255,255,1) ;

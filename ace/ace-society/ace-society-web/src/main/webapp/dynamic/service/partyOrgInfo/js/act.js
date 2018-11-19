@@ -195,6 +195,21 @@ function outline(id) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('parseOrgType', parseOrgType);
+}
+
+/**
+ * 1-党组织 2-其他社会组织
+ */
+function parseOrgType(type) {
+    switch (type) {
+        case '1':
+            return "党组织";
+        case '2':
+            return "社会组织";
+        default:
+            return "社会组织";
+    }
 }
 
 /**

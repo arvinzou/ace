@@ -27,8 +27,7 @@ Page({
     listLive: [],
     startX: 0, //开始坐标
     startY: 0,
-    nameDisplay:'none',
-    sysUserInfo: wx.getStorageSync("sysUserInfo")
+    nameDisplay:'none'
   },
 
   onLoad: function () {
@@ -36,6 +35,7 @@ Page({
     page = 1;
     that.initData();
     that.setData({
+        sysUserInfo: wx.getStorageSync("sysUserInfo"),
         userinfo: wx.getStorageSync('userinfo')
     });
    

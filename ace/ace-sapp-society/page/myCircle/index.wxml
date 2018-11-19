@@ -6,8 +6,12 @@
 
           <view class='report-box-second'>
             <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
-              <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
-
+              <block wx:if='{{item.rpt.headimgurl!="" && item.rpt.headimgurl!=null && item.rpt.headimgurl!=undefined}}'>
+                <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
+              </block>
+              <block wx:else>
+                <image src="../../image/default_header.png" class="headimgp" />
+              </block>
               <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
               <text style='padding:10rpx'>{{item.createDate}}</text>
               <text class='status{{item.status}}' wx:if="{{item.status==1}}">暂存</text>
@@ -26,7 +30,7 @@
               <view class="pictures" data-count="{{item.imageList.length}}">
                 <view class="imglist{{item.imageList.length}}">
                   <block wx:for-items="{{item.imageList}}" wx:key="*" wx:for-item="imgitem" wx:for-index="imgindex" >
-                    <image class="img{{imgindex+1}}" bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
+                    <image class="img{{imgindex+1}}" data-list='{{item.imageList}}' bindtap="previewImage" id="{{imgitem.url}}" mode="aspectFill" src="{{imgitem.url}}" />
 
                   </block>
 

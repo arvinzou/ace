@@ -6,8 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ideaList : [],
-    sysUserInfo: wx.getStorageSync("sysUserInfo")
+    ideaList : []
   },
 
   /**
@@ -15,6 +14,7 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
+      that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo")});
       that.initList();
   },
 

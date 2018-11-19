@@ -37,7 +37,7 @@ Page({
    */
   activityIng: function(limit){
       var that = this;
-      util.request(cfg.findActivitying, {"start":0, "limit": limit},
+      util.request(cfg.findActivitying, { "start": 0, "limit": limit, "orderBy": "status asc,dendline", "sord": "desc"},
           function (ret) {
               if (ret.status == 0) {
                  console.log(ret);

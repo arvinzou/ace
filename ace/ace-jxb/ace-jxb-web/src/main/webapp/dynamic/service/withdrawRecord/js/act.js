@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5};
+var params = {limit: 20};
 window.onload = function () {
     initPage();
     initEvents();
@@ -36,7 +36,7 @@ function setParams(key, value) {
 /*提现申请记录加载表格数据*/
 function getPageList() {
     var url = contextPath + "/withdrawRecord/findWithdrawRecordList";
-    params['name'] = $("input[name=keyword]").val();
+    params['teacherName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
@@ -76,18 +76,33 @@ function detail(id) {
             $("#detail-info").html(html);
             $("#modal-detail").modal("show");
         }
-    })
+    });
+}
+
+function transferInfo() {
+    alert("尚未获得企业付款查询接口权限");
 }
 
 function initEvents() {
-﻿   $('#modal-preview').on('show.bs.modal', function (event) {
+    /*企业付款查询*/
+    // $('#modal-wx').on('click', function (event) {
+    //     // var relatedTarget = $(event.relatedTarget);
+    //     // var id = relatedTarget.data('id');
+    //     // var title = relatedTarget.data('title');
+    //     // var modal = $(this);
+    //     // console.log(relatedTarget);
+    //     alert("尚未获得企业付款查询接口权限");
+    // });
+    /*查看*/
+    $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var title = relatedTarget.data('title');
         var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
-    })
+    });
+    //审核
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -95,7 +110,7 @@ function initEvents() {
         var modal = $(this);
         console.log(relatedTarget);
         initForm(id);
-    })
+    });
     $('#modal-audit .audit').on('click', function () {
         $('#modal-audit form').submit();
     });
@@ -118,8 +133,6 @@ function initEvents() {
         console.log(event);
         $(event.target).addClass("active");
     });
-
-
 }
 /*提现申请记录审核*/
 function audit(params) {
@@ -200,36 +213,48 @@ function outline(id) {
 
 //juicer自定义函数
 function initJuicerMethod() {
-    juicer.register('parseStatus', parseStatus);
+    juicer.register('parseAuditRst', parseAuditRst);
+    juicer.register('parseType', parseType);
+    juicer.register('parseApiRst', parseApiRst);
+
+
 }
 
-/**
- * 状态
- * 0-删除
- * 1-暂存
- * 2-提交审核
- * 3-审核通过
- * 4-审核驳回
- */
-function parseStatus(status) {
-    switch (status) {
-        case '0':
-            return "删除";
-        case '1':
-            return "暂存";
-        case '2':
-            return "待审";
-        case '3':
-            return "通过";
-        case '4':
-            return "驳回";
+function parseApiRst(val) {
+    switch (val) {
+        case "SUCCESS":
+            return "成功";
+        case "FAILED":
+            return "失败";
         default:
-            return "";
+            return "失败";
     }
 }
 
+function parseType(val) {
+    switch (val) {
+        case "1":
+            return "微信提现";
+        case "2":
+            return "线下打款";
+        default:
+            return "微信提现";
+    }
+}
 
-﻿
+function parseAuditRst(val) {
+    switch (val) {
+        case "temp":
+            return "待审";
+        case "pass":
+            return "通过";
+        case "reject":
+            return "驳回";
+        default:
+            return "待审";
+    }
+}
+
 function initPreview(id) {
     startLoad();
     $.ajax({

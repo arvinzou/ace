@@ -6,6 +6,7 @@ import com.huacainfo.ace.society.vo.PersonInfoVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PersonInfoDao {
 
@@ -40,4 +41,7 @@ public interface PersonInfoDao {
 
     int isExit(PersonInfo record);
 
+    List<Map<String, Object>> querysocietyOrg(Map<String, Object> condition);
+
+    List<Map<String, Object>> queryperson(Map<String, Object> condition);
 }

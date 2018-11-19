@@ -21,40 +21,26 @@
 <div class="portlet light">
 
     <div class="portlet-body">
+    <div class="row custom-toolbar">
+                         <div class="col-md-7">
 
-        <div class="row custom-toolbar">
-            <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
-            </div>
+                         </div>
 
-            <div class="col-md-9">
+            <div class="col-md-5">
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('Status','');">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('Status','1');">待审</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('Status','2');">通过</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('Status','3');">屏蔽</button>
                     </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
+
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
-                               placeholder="请输入直播名称">
+                               placeholder="请输入内容">
                         <span class="input-group-btn">
                                                                         <button class="btn  btn-default search_btn"
                                                                                 type="submit">
@@ -72,22 +58,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 主键</th>
-                    <th width="10%"> 业务类型</th>
-                    <th width="10%"> 业务ID</th>
-                    <th width="10%"> 评论人ID</th>
-                    <th width="10%"> 评论内容</th>
-                    <th width="10%"> 备注</th>
-                    <th width="10%"> 状态
-                        0-删除 1-有效
-                    </th>
-                    <th width="10%"> 创建人编号</th>
-                    <th width="10%"> 创建人姓名</th>
-                    <th width="10%"> 创建日期</th>
-                    <th width="10%"> 更新人编号</th>
-                    <th width="10%"> 更新人名称</th>
-                    <th width="10%"> 更新日期</th>
-                    <th width="15%">操作</th>
+                    <th width="20%"> 用户</th>
+                    <th width="50%"> 内容</th>
+                    <th width="10%"> 时间</th>
+                    <th width="10%"> 状态</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -102,8 +77,6 @@
     </div>
 
 </div>
-
-
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
@@ -113,333 +86,33 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \&{item.id}</td>
-        <td> \&{item.bisType}</td>
-        <td> \&{item.bisId}</td>
-        <td> \&{item.userId}</td>
-        <td> \&{item.content}</td>
-        <td> \&{item.remark}</td>
-        <td> \&{item.status}</td>
-        <td> \&{item.createUserId}</td>
-        <td> \&{item.createUserName}</td>
-        <td> \&{item.createDate}</td>
-        <td> \&{item.lastModifyUserId}</td>
-        <td> \&{item.lastModifyUserName}</td>
-        <td> \&{item.lastModifyDate}</td>
+
+        <td> \${item.nickName}</td>
+        <td> \${item.content}</td>
+        <td> \${item.createDate}</td>
+
         <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
+            {@if item.status==1}
+            <span class="label label-lg label-info">待审</span>
             {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
+            <span class="label label-lg label-success">通过</span>
             {@else}
-            <span class="label label-lg label-danger">暂存</span>
+            <span class="label label-lg label-danger">屏蔽</span>
             {@/if}
         </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
 
-            <a href="javascript:del('\${item.id}');">删除</a>
+          <td>
 
-        </td>
+                     <a href="javascript:audit('\${item.id}','3');">屏蔽</a>
+                     <a href="javascript:audit('\${item.id}','2');">通过</a>
+
+                </td>
+
     </tr>
     {@/each}
 </script>
 ﻿
-<div class="modal fade " id="modal-status">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">设置状态</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">详细</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">业务类型</label>
-            <div class="col-md-10">
-                \${bisType}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">业务ID</label>
-            <div class="col-md-10">
-                \${bisId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">评论人ID</label>
-            <div class="col-md-10">
-                \${userId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">评论内容</label>
-            <div class="col-md-10">
-                \${content}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">备注</label>
-            <div class="col-md-10">
-                \${remark}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">状态
-                0-删除 1-有效 </label>
-            <div class="col-md-10">
-                \${status}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人编号</label>
-            <div class="col-md-10">
-                \${createUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建人姓名</label>
-            <div class="col-md-10">
-                \${createUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">创建日期</label>
-            <div class="col-md-10">
-                \${createDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人编号</label>
-            <div class="col-md-10">
-                \${lastModifyUserId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新人名称</label>
-            <div class="col-md-10">
-                \${lastModifyUserName}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">更新日期</label>
-            <div class="col-md-10">
-                \${lastModifyDate}
-            </div>
-        </div>
-
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
-
-<script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">业务类型</label>
-        <div class="col-md-10">
-            \${bisType}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">业务ID</label>
-        <div class="col-md-10">
-            \${bisId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">评论人ID</label>
-        <div class="col-md-10">
-            \${userId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">评论内容</label>
-        <div class="col-md-10">
-            \${content}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${remark}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态
-            0-删除 1-有效 </label>
-        <div class="col-md-10">
-            \${status}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人编号</label>
-        <div class="col-md-10">
-            \${createUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建人姓名</label>
-        <div class="col-md-10">
-            \${createUserName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">创建日期</label>
-        <div class="col-md-10">
-            \${createDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人编号</label>
-        <div class="col-md-10">
-            \${lastModifyUserId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新人名称</label>
-        <div class="col-md-10">
-            \${lastModifyUserName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">更新日期</label>
-        <div class="col-md-10">
-            \${lastModifyDate}
-        </div>
-    </div>
-</script>
 <style>
     .cover {
         width: 70px;
@@ -459,7 +132,6 @@
     }
 </style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
-<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>

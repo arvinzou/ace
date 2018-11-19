@@ -95,7 +95,13 @@
     <tr>
 
                             <td>
-                                <div class="col-md-4 my-gallery"><img src="\${item.headimgurl}" class="cover"/></div>
+                                <div class="col-md-4 my-gallery">
+                                    {@if item.headimgurl!='' && item.headimgurl!=null && item.headimgurl!=undefined}
+                                    <img src="\${item.headimgurl}" class="cover"/>
+                                    {@else}
+                                    <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
+                                    {@/if}
+                                </div>
                                 <div class="col-md-8">
                                     <div class="describtion">\${item.nickname}</div>
                                 </div>
@@ -117,10 +123,8 @@
             {@/if}
         </td>
         <td>
-
              <a href="javascript:audit('\${item.id}','3');">屏蔽</a>
              <a href="javascript:audit('\${item.id}','2');">通过</a>
-
         </td>
     </tr>
     {@/each}

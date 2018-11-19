@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
     <title>提现</title>
     <link rel="stylesheet" type="text/css" href="css/withdraw.css"/>
     <jsp:include page="../../../dynamic/common/base.jsp"/>
@@ -13,11 +15,15 @@
     <script type="text/javascript" src="js/withdraw.js"></script>
 </head>
 <body>
+<div class="realname">
+    <span class="title">提现至微信钱包</span> <input class="realName" type="text" placeholder="请输入真实姓名">
+</div>
+
 <div class="money_card">
     <p class="title">收益提现</p>
     <div class="form">
         <div>￥</div>
-        <div><input type="number"></div>
+        <div><input class="applyAmount" type="number" pattern="\d*"></div>
     </div>
     <p class="info stutas">可提现金额 0.00元</p>
     <p class="info red_text stutas1">提现金额需大于50元且不超过5000元</p>
@@ -37,7 +43,7 @@
             <li>为保障提现成功，微信账号必须实名认证，否则审核不予通过。如需实名认证，请前往<span>微信钱包—支付中心—支付管理—实名认证</span>，进行认证后进行提现。</li>
             <li>账户提交提现申请后，工作人员会在三天内进行审核。</li>
             <li>微信支付的结算周期为T+3, 提现申请审核通过后, 3个工作日内款项会自动转至您的微信钱包。</li>
-            <li>如需其他帮助，请拨打 <a href="tel:0736-7083862">0736-7083862</a></li>
+            <%--<li>如需其他帮助，请拨打 <a href="tel:0736-7083862">0736-7083862</a></li>--%>
         </ul>
     </div>
 </div>
@@ -47,12 +53,32 @@
     <div class="result_box">
         <p class="text1">提现申请提交成功~ </p>
         <p class="text2">工作人员会在三天内进行审核，请耐心等待~ </p>
-        <p class="text3">查看提现记录</p>
-        <div class="clickBtn">
+        <p class="text3 withdrawHistroy">查看提现记录</p>
+        <div class="clickBtn backBtn">
             确认
         </div>
     </div>
 </div>
 
+
+<div class="rst_model rst_model1">
+    <div class="result_box">
+        <p>您不能提现，原因可能是:</p>
+        <ul>
+            <li>您本月已经提现过，下个月再来哦~</li>
+            <li>提现时间为每月1号-7号，当前时间不可提现</li>
+            <li>提现金额需大于50元,您当前金额不能提现</li>
+        </ul>
+        <div class="clickBtn backBtn">
+            返回
+        </div>
+    </div>
+</div>
+
+
 </body>
+
+
+
+
 </html>

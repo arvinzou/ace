@@ -1,7 +1,19 @@
 window.onload = function(){
-
     initData();
+    $('.banner').on('click','.getmoney',doWithdraw);
+    $('#mine').on('click','.banner',withdrawHistroy);
 };
+
+
+/**
+ * 取款记录*/
+function withdrawHistroy() {
+    window.location.href = contextPath + '/www/view/mine/earnings.jsp';
+}
+
+
+
+
 var consulorId = "";
 var signStatus = "1";     //已经签到状态为2
 var signDays = 0;
@@ -56,6 +68,15 @@ function initData(){
     });
 
 }
+
+/**
+ * 开始提现*/
+
+function doWithdraw(){
+    window.location.href = contextPath + '/www/view/mine/withdraw.jsp';
+    return false;
+}
+
 
 /**
  * 签到
