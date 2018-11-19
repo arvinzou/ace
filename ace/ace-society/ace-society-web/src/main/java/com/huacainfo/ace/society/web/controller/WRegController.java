@@ -114,11 +114,8 @@ public class WRegController extends SocietyBaseController {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         //验证码校验
-//        String sessionCode = (String) this.getRequest().getSession().getAttribute("j_captcha_cmcc_" + mobile);
-//        logger.debug("[society]RegController.register=>mobile:{},code:{},sessionCode:{}", mobile, code, sessionCode);
         String redisKey = "sms_code-" + wxUser.getUnionId() + "-" + mobile;
         String redisCode = redisGet(redisKey);
-
         if (!code.equals(redisCode)) {
             return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
         }
