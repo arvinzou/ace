@@ -250,17 +250,6 @@
         background-color: #BDE1FF;
     }
 
-    .headimgbox img {
-        text-align: center;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .headimgbox + p {
-        line-height: 1.05rem;
-    }
-
     .input_style {
         border-bottom: 1px solid #c2cad8 !important;
     }
@@ -373,9 +362,8 @@
         </label>
         <div class="col-md-10">
             <div>
-                <div  id="headimg">
-
-                    <img style="max-width:400px;cursor:pointer"
+                <div class="headimgbox"  id="headimg">
+                    <img style="max-width:400px;cursor:pointer;background-color: "
                          id="imagePhotoUrl"
                          data-toggle="\${data.regAuditRst==1?'':'modal'}"
                          data-xsize="400" data-ysize="400"
