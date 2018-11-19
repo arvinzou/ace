@@ -251,7 +251,7 @@
 									{@/each}
 								</span>
                     <span><img src="img/icon-more.png" class="more"/></span>
-                    <span class="user-nums">\${item.consumerList.total}人在听</span>
+                    <span class="user-nums">\${item.demandNum}人在听</span>
                 </div>
             </div>
             {@else}
