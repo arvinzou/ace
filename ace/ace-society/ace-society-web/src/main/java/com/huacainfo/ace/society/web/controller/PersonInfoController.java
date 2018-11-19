@@ -18,7 +18,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import redis.clients.jedis.params.Params;
 
+import javax.sound.midi.SoundbankResource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -152,15 +155,17 @@ public class PersonInfoController extends SocietyBaseController {
 
     @RequestMapping("/querysocietyOrg")
     @ResponseBody
-    public ResultResponse querysociety() throws Exception {
-        List<Map<String, Object>> rtn = personInfoService.querysocietyOrg();
+    public ResultResponse querysociety(Map<String, Object> condition) throws Exception {
+        condition.putAll(getParams());
+        List<Map<String, Object>> rtn = personInfoService.querysocietyOrg(condition);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtn);
     }
 
     @RequestMapping("/queryperson")
     @ResponseBody
-    public ResultResponse queryperson() throws Exception {
-        List<Map<String, Object>> rtn = personInfoService.queryperson();
+    public ResultResponse queryperson(Map<String, Object> condition) throws Exception {
+        condition.putAll(getParams());
+        List<Map<String, Object>> rtn = personInfoService.queryperson(condition);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtn);
     }
 }

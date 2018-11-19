@@ -15,9 +15,6 @@ function loadCustom() {
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
     urls.push({path: portalPath, url: '/content/common/js/jquery.form.js', type: 'js'});
 
-    // urls.push({path: portalPath, url: '/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css', type: 'css'});
-    // urls.push({path: portalPath, url: '/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js', type: 'js'});
-    // urls.push({path: portalPath, url: '/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
     }
@@ -47,6 +44,8 @@ function t_query() {
 /*社会组织信息加载表格数据*/
 function getPageList() {
     var url = contextPath + "/personInfo/querysocietyOrg";
+    params['startDate']= $("input[name=startDate]").val();
+    params['endDate']= $("input[name=endDate]").val();
     startLoad();
     $.getJSON(url, params, function (rtn) {
         stopLoad();
@@ -92,6 +91,22 @@ function initEvents() {
     $('input[name=startDate]').focus(function () {
         $(this).blur();//不可输入状态
     });
+
+     $("input[name=endDate]").datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            language: 'zh-CN',
+            weekStart: 1,
+            todayBtn: 1,//显示‘今日’按钮
+            autoclose: true,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 'hour',  //Number, String. 默认值：0, 'hour'，日期时间选择器所能够提供的最精确的时间选择视图。
+            clearBtn: true,//清除按钮
+            forceParse: 0
+        });
+        $('input[name=startDate]').focus(function () {
+            $(this).blur();//不可输入状态
+        });
 }
 
 

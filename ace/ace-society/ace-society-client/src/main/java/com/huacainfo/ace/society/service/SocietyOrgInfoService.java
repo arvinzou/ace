@@ -10,6 +10,7 @@ import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -100,4 +101,5 @@ public interface SocietyOrgInfoService {
     MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
 
     List<SocietyOrgInfoVo> findList(SocietyOrgInfoQVo condition, int start, int limit, String orderBy);
+
 }

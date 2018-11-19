@@ -106,9 +106,20 @@ public interface PersonInfoService {
      */
     ResultResponse register(PersonInfo personInfo, Userinfo userinfo);
 
+    /**
+     * 组织爱心币排行
+     *
+     * @param condition 查询条件
+     * @return List<Map   <   String   ,       Object>>
+     */
+    List<Map<String, Object>> querysocietyOrg(Map<String, Object> condition);
 
-    List<Map<String, Object>> querysocietyOrg();
-
-    List<Map<String, Object>> queryperson();
+    /**
+     * 个人爱心币排行
+     *
+     * @param condition 查询条件
+     * @return List<Map   <   String   ,       Object>>
+     */
+    List<Map<String, Object>> queryperson(Map<String, Object> condition);
 
 }
