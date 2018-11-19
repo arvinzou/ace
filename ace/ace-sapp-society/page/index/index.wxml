@@ -131,7 +131,7 @@
 
     <view class='container'>
         <view class='activity-list'>
-            <view class='title01'><text>精选往事</text></view>
+            <view class='title01'><text class='title-active'>精选往事</text></view>
             <block wx:key="*" wx:for='{{reportData}}'>
             <view class='activity-item' bindtap='viewInfo' data-title='{{item.title}}' data-id='{{item.id}}'>
                 <view class='activity-item-left'>

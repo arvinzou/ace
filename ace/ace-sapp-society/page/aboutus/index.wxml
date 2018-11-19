@@ -2,6 +2,7 @@
     <view class='banner'>
         <image lazy-load="true" src='../../image/about_banner.png'></image>
     </view>
+    <view class='banner-footer'></view>
     <view class='content'>
         <view class='title'><text>芙蓉街道介绍</text></view>
         <view class='detail'>
@@ -33,16 +34,18 @@
             <text>爱心币兑换商品后会扣除实际爱心币但不影响排名。兑换商品会在月末进行统一发放。</text>
         </view>
     </view>
-    <view class='map-box'>
-        <map id="myMap" show-location longitude='111.6520303488' latitude='29.0327722622' style='width:100%; height:100%'/>
-    </view>
-    <button bindtap='map'>定位</button>
+    <view class='content'>
+        <view class='map-box'>
+            <map id="myMap" show-location longitude='111.6520303488' latitude='29.0327722622' style='width:100%; height:100%'/>
+        </view>
+        <button bindtap='map'>定位</button>
 
-    <view class='code'>
-        <image lazy-load="true" src='../../image/weixin-code.png'></image>
-    </view>
-    <view class='contact'>
-        <view>联系电话：0736-7111361</view>
-        <view>联系地址：湖南省常德市武陵区竹叶路</view>
+        <view class='code'>
+            <image lazy-load="true" src='../../image/weixin-code.png'></image>
+        </view>
+        <view class='contact'>
+            <view>联系电话：0736-7111361</view>
+            <view>联系地址：湖南省常德市武陵区竹叶路</view>
+        </view>
     </view>
 </view>
