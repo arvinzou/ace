@@ -12,6 +12,8 @@ div p{
     display: flex;
     justify-content: space-between;
     padding: 0.533333rem;
+    display: flex;
+    align-items: center;
 }
 
 
