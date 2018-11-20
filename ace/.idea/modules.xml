@@ -8,6 +8,11 @@
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" filepath="$PROJECT_DIR$/ace-common-dao/ace-common-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-common-web/ace-common-web.iml" filepath="$PROJECT_DIR$/ace-common-web/ace-common-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-cu/ace-cu.iml" filepath="$PROJECT_DIR$/ace-cu/ace-cu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-cu/ace-cu-client/ace-cu-client.iml" filepath="$PROJECT_DIR$/ace-cu/ace-cu-client/ace-cu-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-cu/ace-cu-rest/ace-cu-rest.iml" filepath="$PROJECT_DIR$/ace-cu/ace-cu-rest/ace-cu-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-cu/ace-cu-service/ace-cu-service.iml" filepath="$PROJECT_DIR$/ace-cu/ace-cu-service/ace-cu-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ace-cu/ace-cu-web/ace-cu-web.iml" filepath="$PROJECT_DIR$/ace-cu/ace-cu-web/ace-cu-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb.iml" />
       <module fileurl="file://$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" filepath="$PROJECT_DIR$/ace-jxb/ace-jxb-client/ace-jxb-client.iml" />
