@@ -108,6 +108,7 @@ div p{
     width: 2.4rem;
     text-align: center;
     margin: auto;
+    z-index: -5;
 }
 
 .rules_text{

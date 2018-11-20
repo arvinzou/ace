@@ -138,7 +138,7 @@ Page({
         const params = e.detail.value
         const startDate = that.formatDT(params.startDate);
         const endDate = that.formatDT(params.endDate);
-        const dendline = that.formatDT(params.dendline ? params.dendline : params.endDate);
+        const dendline = that.formatDT(params.dendline ? params.dendline : params.startDate);
         const clazz=params.clazz;
         params.coverUrl = that.data.form.coverUrl;
         params.category = that.data.form.category;
