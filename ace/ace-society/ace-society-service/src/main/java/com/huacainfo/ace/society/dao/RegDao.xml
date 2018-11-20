@@ -30,13 +30,6 @@
 
     <!--**********************************-->
     <resultMap id="CustomerResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
-        <discriminator javaType="String" column="regType">
-            <case value="1" resultMap="PersonResultMap"/>
-            <case value="2" resultMap="SocietyOrgResultMap"/>
-        </discriminator>
-    </resultMap>
-
-    <resultMap id="PersonResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
         <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
@@ -49,12 +42,6 @@
             <result column="pValidPoints" jdbcType="INTEGER" property="validPoints"/>
             <result column="pStatus" jdbcType="CHAR" property="status"></result>
         </association>
-    </resultMap>
-
-    <resultMap id="SocietyOrgResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
-        <result column="regType" jdbcType="VARCHAR" property="regType"/>
-        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
-        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
         <association property="societyOrg" column="orgId" javaType="com.huacainfo.ace.society.model.SocietyOrgInfo">
             <id property="id" jdbcType="VARCHAR" column="orgId"/>
             <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
@@ -69,7 +56,6 @@
             <result column="orgStatus" jdbcType="CHAR" property="status"></result>
         </association>
     </resultMap>
-
 
     <select id="findByUserId" parameterType="java.lang.String" resultMap="CustomerResultMap">
         select
@@ -89,7 +75,7 @@
         s.contactPerson, s.contactPhone, s.accPoints, s.validPoints, s.status
         from society_org_info s, org_admin a
         where a.orgId = s.id )org on org.userId = p.id
-        where t.user_id = #{userId,jdbcType=VARCHAR}
+        where p.id = #{userId,jdbcType=VARCHAR}
     </select>
 
 </mapper>

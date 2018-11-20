@@ -181,7 +181,7 @@ function courseClick(){
  * 在线直播点击（该功能在建设中）
  */
 function liveClick(){
-    window.location.href = 'http://zx.huacainfo.com/live/www/index/index.jsp?companyId=0010007';
+    window.location.href = 'https://appaIftvdOv1044.h5.xiaoeknow.com';
 }
 
 /**
