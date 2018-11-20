@@ -59,7 +59,8 @@
                 <thead>
                 <tr>
                     <th width="20%"> 用户</th>
-                    <th width="50%"> 内容</th>
+                    <th width="30%"> 内容</th>
+                    <th width="20%"> 类型</th>
                     <th width="10%"> 时间</th>
                     <th width="10%"> 状态</th>
                     <th width="10%">操作</th>
@@ -89,6 +90,19 @@
 
         <td> \${item.nickName}</td>
         <td> \${item.content}</td>
+        <td>
+             {@if item.bisType=='idea'}
+             <span>点子评论</span>
+             {@else if item.bisType=='reportComment_1'}
+             <span>公益活动评论</span>
+             {@else if item.bisType=='reportComment_2'}
+             <span>普及活动评论</span>
+             {@else if item.bisType=='reportComment_3'}
+             <span>创意活动评论</span>
+             {@else item.bisType=='reportComment_4'}
+             <span>党建活动评论</span>
+             {@/if}
+        </td>
         <td> \${item.createDate}</td>
 
         <td>

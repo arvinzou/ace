@@ -34,17 +34,20 @@
             </div>
 
                <div class="col-sm-7">
-                                                     <form onsubmit="return t_query()">
-                                                        <div class="input-group">
-                                                                        开始日：<input class="inline laydate-icon" name="startDate" style="width:200px; margin-right:10px;">
-                                                                        结束日：<input class="inline laydate-icon" name="endDate" style="width:200px; margin-right:10px;">
-                                                                <span class="input-group-btn">
-                                                                        <button class="btn  btn-default search_btn" type="submit">搜索</button>
-                                                                </span>
-                                                       </div>
-                                    </form>
-                                </div>
-
+    <form onsubmit="return t_query()">
+         <div class="input-group">
+              <div style="float:right;margin-right:15px" >
+              <input class="easyui-datebox" name="startDate"
+                     style="width: 150px; height: 30px; line-height: 25px;"> 至
+              <input class="easyui-datebox" name="endDate"
+                     style="width: 150px; height: 30px; line-height: 25px;">
+              </div>
+         <div class="input-group-btn">
+              <button class="btn  btn-default search_btn" type="submit">搜索</button>
+         </div>
+         </div>
+     </form>
+</div>
 
             <div class="table-scrollable">
                 <table class="table table-hover">

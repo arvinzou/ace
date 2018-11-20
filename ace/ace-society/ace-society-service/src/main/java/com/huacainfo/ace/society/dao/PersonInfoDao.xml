@@ -296,11 +296,11 @@
         WHERE
         1 = 1
         AND t.points > 0
-        <if test="startDate!=null and startDate!=&quot;&quot;">
-            AND t.createDate >= #{startDate,jdbcType=VARCHAR}
+        <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
+            AND t.createDate >= #{condition.startDate,jdbcType=VARCHAR}
         </if>
-        <if test="endDate!=null and endDate!=&quot;&quot;">
-            AND t.createDate &lt;= #{endDate,jdbcType=VARCHAR}
+        <if test="condition.endDate!=null and condition.endDate!=&quot;&quot;">
+            AND t.createDate &lt;= #{condition.endDate,jdbcType=VARCHAR}
         </if>
         GROUP BY
         t.userId
@@ -310,6 +310,7 @@
         WHERE u.user_level=2
         ORDER BY a.accPoints DESC
         )v , (select @i:=0) as it
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
 
@@ -328,11 +329,11 @@
         WHERE
         1 = 1
         AND t.points > 0
-        <if test="startDate!=null and startDate!=&quot;&quot;">
-            AND t.createDate >= #{startDate,jdbcType=VARCHAR}
+        <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
+            AND t.createDate >= #{condition.startDate,jdbcType=VARCHAR}
         </if>
-        <if test="endDate!=null and endDate!=&quot;&quot;">
-            AND t.createDate &lt;= #{endDate,jdbcType=VARCHAR}
+        <if test="condition.endDate!=null and condition.endDate!=&quot;&quot;">
+            AND t.createDate &lt;= #{condition.endDate,jdbcType=VARCHAR}
         </if>
         GROUP BY
         t.userId
@@ -342,6 +343,7 @@
         WHERE u.user_level=1
         ORDER BY a.accPoints DESC
         )v , (select @i:=0) as it
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
 </mapper>
