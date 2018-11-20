@@ -10,16 +10,15 @@ Page({
    */
   data: {
       unionId : null,
-      array: ['个人', '党员'],
+      array: ['社会组织', '党组织'],
       objectArray: [
           {
               id: 0,
-              name: '个人'
+              name: '社会组织'
           },
-         
           {
               id: 1,
-              name: '党员'
+              name: '党组织'
           }
       ],
       index: 0,
@@ -30,11 +29,10 @@ Page({
 
       stepNum: 1,
       regType: 1,
-      regName: "个人",
+      regName: "社会组织",
       phoneNum: null,
       lastNum: 0,
       stop: true,
-      btnName: "获取验证码",
       imageCover: null,
       orgId: null,
       userinfo: null,
@@ -104,15 +102,15 @@ Page({
         var orgName = e.detail.value.orgName;
         var orgAddr = e.detail.value.orgAddr;
         var contactPerson = e.detail.value.contactPerson;
-        var contactPhone = that.data.phoneNum;
-        var code = e.detail.value.code;
+        var contactPhone = e.detail.value.contactPhone;
+        var email = e.detail.value.email;
         var orgType = null;
         if (that.data.regName == '党组织'){
             orgType = '1';
         }else{
             orgType = '2';
         }
-        var jsonData = { "orgName": orgName, "orgAddr": orgAddr, "contactPerson": contactPerson, "contactPhone": contactPhone, "orgType": orgType, "orgCover": that.data.imageCover, "validPoints": 0, "accPoints": 0}
+        var jsonData = { "orgName": orgName, "orgAddr": orgAddr, "contactPerson": contactPerson, "contactPhone": contactPhone, "orgType": orgType, "orgCover": that.data.imageCover, "validPoints": 0, "accPoints": 0, "email": email}
         if (orgName == undefined || orgName == null || orgName == ''){
             wx.showModal({
                 title: '提示',
@@ -129,24 +127,16 @@ Page({
             });
             return;
         }
-        if (contactPhone == undefined || contactPhone == null || contactPhone == ''){
+        if ((contactPhone == undefined || contactPhone == null || contactPhone == '') && (email == undefined || email == null || email == '')){
             wx.showModal({
                 title: '提示',
-                content: '联系电话不能为空！',
-                success: function (res) { }
-            });
-            return;
-        }
-        if (code == undefined || code == null || code == ''){
-            wx.showModal({
-                title: '提示',
-                content: '验证码不能为空！',
+                content: '联系方式至少填写一种！',
                 success: function (res) { }
             });
             return;
         }
 
-        util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": contactPhone, "code": code, "jsonData": JSON.stringify(jsonData)},
+        util.request(cfg.server +'/society/www/user/newOrgInfo', { "unionId": wx.getStorageSync("WX-SESSION-ID"), "jsonData": JSON.stringify(jsonData)},
             function (ret) {
                 if (ret.status == 0){
                     that.setData({ lastNum: 3 });
@@ -165,58 +155,7 @@ Page({
             }
         );
     },
-    phoneInput: function(e){
-        var that = this;
-        that.setData({ phoneNum: e.detail.value});
-    },
-    sendCode: function(e){
-        var that = this;
-        var phone = that.data.phoneNum;
-        if(phone == null || phone == undefined){
-            wx.showModal({
-                title: '提示',
-                content: '请输入手机号码！',
-                success: function (res) { }
-            });
-            return;
-        }
-        util.request(cfg.sendCode, { "mobile": phone },
-            function (ret) {
-                console.log(ret);
-                wx.showModal({
-                    title: '提示',
-                    content: ret.info,
-                    success: function (res) {}
-                })
-            }
-        );
-        that.settime();
-    },
-    settime: function () {
-        var that = this;
-        var btnName = "获取验证码";
-        if (countdown == 0) {
-            btnName = "获取验证码";
-            countdown = 30;
-            stop = true;
-        } else {
-            stop = false;
-            btnName = "重新发送 " + countdown + "";
-            countdown--;
-        }
-        that.setData({
-            countdown: countdown,
-            btnName: btnName,
-            stop: stop
-        })
-        if (!stop) {
-            setTimeout(function () {
-                that.settime()
-            }, 1000)
-        }
-
-    },
-
+   
     addImage: function(){
         var that = this;
         wx.showActionSheet({
@@ -264,66 +203,7 @@ Page({
         })
     },
 
-    /**
-     * 个人注册
-     */
-    personFormSubmit: function(e){
-        var that = this;
-        var politicalStatus = null;
-        if (that.data.regName == '个人') {
-            politicalStatus = '1';
-        } else {
-            politicalStatus = '2';
-        }
-
-        var realName = e.detail.value.realName;
-        var mobilePhone = e.detail.value.mobilePhone;
-        var code = e.detail.value.code;
-        if (realName == undefined || realName == '' || realName ==null){
-            wx.showModal({
-                title: '提示',
-                content: '请输入名称！',
-                success: function (res) { }
-            });
-            return;
-        }
-        if (mobilePhone == undefined || mobilePhone == '' || mobilePhone == null){
-            wx.showModal({
-                title: '提示',
-                content: '请输入手机号码！',
-                success: function (res) { }
-            });
-            return;
-        }
-        if (code == undefined || code == '' || code == null){
-            wx.showModal({
-                title: '提示',
-                content: '请输入验证码！',
-                success: function (res) { }
-            });
-            return;
-        }
-        var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0, "politicalStatus": politicalStatus}
-        util.request(cfg.regist, {"unionId":wx.getStorageSync("WX-SESSION-ID"), "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
-            function (ret) {
-                if (ret.status == 0) {
-                    that.setData({ lastNum: 3 });
-                    that.setData({
-                        stepNum: ++that.data.stepNum,
-                        topNum: 0,
-                    });
-                } else {
-                    wx.showModal({
-                        title: '提示',
-                        content: ret.info,
-                        success: function (res) { }
-                    });
-                }
-
-            }
-        );
-        
-    },
+   
     orgList: function(){
         var that = this;
         var groupName = [];
