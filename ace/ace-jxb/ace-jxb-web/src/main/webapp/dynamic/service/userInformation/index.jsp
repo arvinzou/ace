@@ -250,6 +250,11 @@
         background-color: #BDE1FF;
     }
 
+    .headimgbox img{
+        width: 100%;
+        height: 100%;
+    }
+
     .input_style {
         border-bottom: 1px solid #c2cad8 !important;
     }
