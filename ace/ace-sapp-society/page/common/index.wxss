@@ -152,7 +152,6 @@ page {
 
 .btn-part {
     padding: 20rpx 0rpx;
-    margin: 70rpx 20rpx 0rpx;
     display: flex;
 }
 
