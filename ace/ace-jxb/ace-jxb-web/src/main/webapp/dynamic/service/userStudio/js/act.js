@@ -73,7 +73,11 @@ function createStudio() {
 
 /*创建我的工作室*/
 function createMyStudio() {
-    var data = {json: submitForm()};
+    var sult=submitForm();
+    if(!sult){
+        return;
+    };
+    var data = {json: sult};
     var url = contextPath+'/studio/insertStudioVo';
     $.post(url, data, function (result) {
         if (result.status == 0) {
@@ -246,14 +250,14 @@ function submitForm() {
             formObject[key] = result.message;
         } else {
             $('#' + idName).next().text(result.message);
-            return
+            return null;
         }
     }
     ;
     var logoImgUrl = $('#logo').prop('src');
     if (logoImgUrl.indexOf("zx.huacainfo.com") == -1) {
         alert("需要上传形象照");
-        return;
+        return null;
     }
     formObject.logoImgUrl = logoImgUrl;
     var imgs = $('.idCardBoxs .imgSrc');
@@ -262,7 +266,7 @@ function submitForm() {
     var lth = imgs.length;
     if (lth == 0) {
         alert("需要上传轮播图");
-        return;
+        return null;
     }
     for (var i = 0; i < lth; i++) {
         var url = imgs.eq(i).find('img').prop('src');
