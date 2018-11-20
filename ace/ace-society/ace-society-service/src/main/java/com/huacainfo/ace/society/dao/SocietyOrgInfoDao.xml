@@ -10,6 +10,7 @@
         <result column="orgSummary" jdbcType="VARCHAR" property="orgSummary"/>
         <result column="contactPerson" jdbcType="VARCHAR" property="contactPerson"/>
         <result column="contactPhone" jdbcType="VARCHAR" property="contactPhone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="accPoints" jdbcType="INTEGER" property="accPoints"/>
         <result column="validPoints" jdbcType="INTEGER" property="validPoints"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
@@ -24,7 +25,7 @@
     <sql id="Base_Column_List">
         id, orgName, orgType, orgAddr, orgCover, orgSummary, contactPerson, contactPhone,
         accPoints, validPoints, remark, status, createUserId, createUserName, createDate,
-        lastModifyUserId, lastModifyUserName, lastModifyDate
+        lastModifyUserId, lastModifyUserName, lastModifyDate, email
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -42,14 +43,16 @@
         contactPerson, contactPhone, accPoints,
         validPoints, remark, status,
         createUserId, createUserName, createDate,
-        lastModifyUserId, lastModifyUserName, lastModifyDate
+        lastModifyUserId, lastModifyUserName, lastModifyDate, email
         )
         values (#{id,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgType,jdbcType=CHAR},
         #{orgAddr,jdbcType=VARCHAR}, #{orgCover,jdbcType=VARCHAR}, #{orgSummary,jdbcType=VARCHAR},
         #{contactPerson,jdbcType=VARCHAR}, #{contactPhone,jdbcType=VARCHAR}, #{accPoints,jdbcType=INTEGER},
         #{validPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
         #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
-        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{email,jdbcType=VARCHAR}
         )
     </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
@@ -109,6 +112,9 @@
             <if test="lastModifyDate != null">
                 lastModifyDate,
             </if>
+            <if test="email != null">
+                email,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -164,6 +170,9 @@
             </if>
             <if test="lastModifyDate != null">
                 #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -221,6 +230,10 @@
             <if test="lastModifyDate != null">
                 lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -233,6 +246,7 @@
         orgSummary = #{orgSummary,jdbcType=VARCHAR},
         contactPerson = #{contactPerson,jdbcType=VARCHAR},
         contactPhone = #{contactPhone,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
         accPoints = #{accPoints,jdbcType=INTEGER},
         validPoints = #{validPoints,jdbcType=INTEGER},
         remark = #{remark,jdbcType=VARCHAR},
@@ -256,7 +270,7 @@
         wx.nickName, wx.avatarUrl,
         t.id, t.orgName, t.orgAddr, t.orgCover, t.orgSummary, t.contactPerson, t.contactPhone, t.accPoints,
         t.validPoints, t.remark, t.status, t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId,
-        t.lastModifyUserName, t.lastModifyDate, t.orgType
+        t.lastModifyUserName, t.lastModifyDate, t.orgType, t.email
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

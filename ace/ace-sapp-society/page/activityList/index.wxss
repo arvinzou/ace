@@ -8,7 +8,6 @@
 .gray{
   -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
-    filter: gray;
 }
 
 .singleActivity .content {

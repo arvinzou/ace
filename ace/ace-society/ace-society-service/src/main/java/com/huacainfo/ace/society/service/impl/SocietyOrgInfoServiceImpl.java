@@ -13,7 +13,11 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.BisType;
+import com.huacainfo.ace.society.dao.OrgAdminDao;
+import com.huacainfo.ace.society.dao.PersonInfoDao;
 import com.huacainfo.ace.society.dao.SocietyOrgInfoDao;
+import com.huacainfo.ace.society.model.OrgAdmin;
+import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.SocietyOrgInfoService;
@@ -26,7 +30,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service("societyOrgInfoService")
 /**
@@ -36,12 +39,18 @@ import java.util.Map;
  */
 public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private PersonInfoDao personInfoDao;
+    @Autowired
+    private OrgAdminDao orgAdminDao;
     @Autowired
     private SocietyOrgInfoDao societyOrgInfoDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private AuditRecordService auditRecordService;
+
 
     /**
      * @throws
@@ -87,9 +96,11 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         if (CommonUtils.isBlank(o.getOrgName())) {
             return new MessageResponse(1, "组织名称不能为空！");
         }
+        if (CommonUtils.isBlank(o.getEmail())) {
+            return new MessageResponse(1, "邮箱不能为空！");
+        }
 
         o.setId(StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId());
-
         int temp = this.societyOrgInfoDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "社会组织信息名称重复！");
@@ -101,7 +112,6 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         o.setCreateUserId(userProp.getUserId());
         societyOrgInfoDao.insert(o);
         dataBaseLogService.log("添加社会组织信息", "社会组织信息", "", o.getId(), o.getId(), userProp);
-
         //自动送审
         sendAudit(o);
 
@@ -232,6 +242,38 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         List<SocietyOrgInfoVo> list = societyOrgInfoDao.findList(condition, start, limit, orderBy);
 
         return list;
+    }
+
+    /**
+     * 新组织信息创建
+     *
+     * @param params 表单参数
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse newOrgInfo(String crtUserId, SocietyOrgInfoVo params) throws Exception {
+        //检查个人信息是否存在
+        PersonInfo person = personInfoDao.selectByPrimaryKey(crtUserId);
+        if (person == null) {
+            return new ResultResponse(ResultCode.FAIL, "用户信息不存在");
+        }
+        //添加组织信息
+        UserProp u = new UserProp();
+        u.setUserId("system");
+        u.setName("system");
+        String orgId = GUIDUtil.getGUID();
+        params.setId(orgId);
+        MessageResponse ms = insertSocietyOrgInfo(params, u);
+        if (ms.getStatus() == ResultCode.SUCCESS) {
+            //添加组织管理员列表 --默认创建者即为管理员
+            OrgAdmin admin = new OrgAdmin();
+            admin.setId(GUIDUtil.getGUID());
+            admin.setUserId(crtUserId);
+            admin.setOrgId(orgId);
+            admin.setCreateDate(DateUtil.getNowDate());
+            orgAdminDao.insert(admin);
+        }
+        return new ResultResponse(ms);
     }
 
 }

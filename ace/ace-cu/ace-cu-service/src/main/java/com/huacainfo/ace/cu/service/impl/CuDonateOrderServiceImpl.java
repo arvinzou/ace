@@ -409,10 +409,6 @@ public class CuDonateOrderServiceImpl implements CuDonateOrderService {
         String orderId = params.getORDERID();
         BigDecimal payAmount = params.getPAYMENT();
         try {
-            if (1 == 1) {
-                throw new CustomException("异常测试");
-            }
-
             if ("Y".equals(params.getSUCCESS())) {
                 return pay(orderId, OrderConstant.PAY_TYPE_CCB, payAmount);
             }

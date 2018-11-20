@@ -99,7 +99,7 @@ public class InformationServiceServiceImpl implements InformationServiceService 
     @Override
     public PageResult<InformationServiceVo> findInformationServiceList(InformationServiceQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<InformationServiceVo> rst = new PageResult<InformationServiceVo>();
-        List<InformationServiceVo> list = this.informationServiceDao.findList(condition, start, start + limit, orderBy);
+        List<InformationServiceVo> list = this.informationServiceDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.informationServiceDao.findCount(condition);
