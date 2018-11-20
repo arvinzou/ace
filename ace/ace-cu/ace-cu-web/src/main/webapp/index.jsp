@@ -129,7 +129,7 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">爱心项目</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple glyphicon glyphicon-star-empty"></i>
+                    <i class="widget-thumb-icon bg-purple fa fa-heart"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.project}">\${data.project}</span>
@@ -143,7 +143,7 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">捐款人次</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green glyphicon glyphicon-star"></i>
+                    <i class="widget-thumb-icon bg-green fa fa-user"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.count}">\${data.count}</span>
@@ -157,7 +157,7 @@
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">捐款金额</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red glyphicon glyphicon-th"></i>
+                    <i class="widget-thumb-icon bg-red fa fa-cny"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.money}">\${data.money}</span>
