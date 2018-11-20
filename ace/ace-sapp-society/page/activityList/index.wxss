@@ -5,9 +5,8 @@
     margin-bottom: 20rpx;
     background-color: #fff;
 }
-.gray{
-  -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
+.opacity{
+  opacity: 0.5
 }
 
 .singleActivity .content {
