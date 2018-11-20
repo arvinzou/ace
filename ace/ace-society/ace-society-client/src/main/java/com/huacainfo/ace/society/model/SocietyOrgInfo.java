@@ -22,6 +22,10 @@ public class SocietyOrgInfo extends BaseModel {
     private String contactPerson;
 
     private String contactPhone;
+    /**
+     * 电子邮箱
+     */
+    private String email;
 
     private Integer accPoints;
 
@@ -42,6 +46,14 @@ public class SocietyOrgInfo extends BaseModel {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getId() {
         return id;

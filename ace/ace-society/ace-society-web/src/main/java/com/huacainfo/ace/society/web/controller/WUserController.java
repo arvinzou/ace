@@ -8,14 +8,13 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.HttpUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.service.WeChatApiService;
 import com.huacainfo.ace.society.service.AnalysisService;
 import com.huacainfo.ace.society.service.OrderInfoService;
 import com.huacainfo.ace.society.service.PointsRecordService;
-import com.huacainfo.ace.society.vo.OrderInfoQVo;
-import com.huacainfo.ace.society.vo.OrderInfoVo;
-import com.huacainfo.ace.society.vo.PointsRecordQVo;
-import com.huacainfo.ace.society.vo.PointsRecordVo;
+import com.huacainfo.ace.society.service.SocietyOrgInfoService;
+import com.huacainfo.ace.society.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,6 +39,22 @@ public class WUserController extends SocietyBaseController {
     private PointsRecordService pointsRecordService;
     @Autowired
     private WeChatApiService weChatApiService;
+    @Autowired
+    private SocietyOrgInfoService societyOrgInfoService;
+
+    /**
+     * 新组织信息创建
+     */
+    @RequestMapping("/newOrgInfo")
+    public ResultResponse newOrgInfo(String unionId, String jsonData) throws Exception {
+        //微信用户信息
+        WxUser wxUser = getCurWxUser();
+        unionId = StringUtil.isNotEmpty(unionId) ? unionId : (null == wxUser ? "" : wxUser.getUnionId());
+        //申请表单
+        SocietyOrgInfoVo params = JsonUtil.toObject(jsonData, SocietyOrgInfoVo.class);
+
+        return societyOrgInfoService.newOrgInfo(unionId, params);
+    }
 
     /**
      * 爱心币排行

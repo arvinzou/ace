@@ -10,7 +10,6 @@ import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author: Arvin
@@ -102,4 +101,11 @@ public interface SocietyOrgInfoService {
 
     List<SocietyOrgInfoVo> findList(SocietyOrgInfoQVo condition, int start, int limit, String orderBy);
 
+    /**
+     * 新组织信息创建
+     *
+     * @param params 表单参数
+     * @return ResultResponse
+     */
+    ResultResponse newOrgInfo(String crtUserId, SocietyOrgInfoVo params) throws Exception;
 }
