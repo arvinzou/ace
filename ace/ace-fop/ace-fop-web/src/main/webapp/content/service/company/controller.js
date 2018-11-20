@@ -1,4 +1,4 @@
-jQuery(function($) {
+jQuery(function ($) {
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -34,52 +34,50 @@ jQuery(function($) {
                         '<div class="widget-header" />')
                     appendButtons();
 
-                     $("#sData").click(function(){
-                           checkCard();
-                           checkNum();
-                           MoneyCheck();
-                 });
+                    $("#sData").click(function () {
+                        checkCard();
+                        checkNum();
+                        MoneyCheck();
+                    });
                 }
             })
     });
 });
 
 
-          function checkCard(){
-                         var card = $("#lpIdentityCard").val();
-                         var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-                           if(card==''){
-                               $("#lpIdentityCard").val("");
-                                               }
-                            else if(reg.test(card) === false){
-                                 alert("身份证输入不合法");
-                                 return false;
-                            }
-                  }
+function checkCard() {
+    var card = $("#lpIdentityCard").val();
+    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if (card == '') {
+        $("#lpIdentityCard").val("");
+    }
+    else if (reg.test(card) === false) {
+        alert("身份证输入不合法");
+        return false;
+    }
+}
 
-          function checkNum(){
-                         var num1 = $("#crewSize").val();
-                         var num2 = $("#partyPeoples").val();
-                         var num3 = $("#laborContractNum").val();
-                         var reg=(/^\d*$/);
-                            if(reg.test(num1)===false || reg.test(num2)===false || reg.test(num3)===false )
-                                 {
-                                  alert("人数只能为数字");
-                                  return false;
-                            }
-                      }
+function checkNum() {
+    var num1 = $("#crewSize").val();
+    var num2 = $("#partyPeoples").val();
+    var num3 = $("#laborContractNum").val();
+    var reg = (/^\d*$/);
+    if (reg.test(num1) === false || reg.test(num2) === false || reg.test(num3) === false) {
+        alert("人数只能为数字");
+        return false;
+    }
+}
 
-           function MoneyCheck(){
-                         var num1 = $("#registeredCapital").val();
-                         var num2 = $("#fixedAssets").val();
-                         var num3 = $("#workingCapital").val();
-                         var reg = /^\d*\.{0,1}\d{0,2}$/;
-                              if(reg.test(num1)===false || reg.test(num2)===false || reg.test(num3)===false )
-                              {
-                              alert("金额只能是数字和小数点后两位");
-                              return false;
-                            }
-           }
+function MoneyCheck() {
+    var num1 = $("#registeredCapital").val();
+    var num2 = $("#fixedAssets").val();
+    var num3 = $("#workingCapital").val();
+    var reg = /^\d*\.{0,1}\d{0,2}$/;
+    if (reg.test(num1) === false || reg.test(num2) === false || reg.test(num3) === false) {
+        alert("金额只能是数字和小数点后两位");
+        return false;
+    }
+}
 
 function editPreview(id) {
     window.open(contextPath + '/dynamic/service/company/edit.jsp?companyId=' + id);
@@ -119,44 +117,44 @@ function addr(addr) {
 }
 
 
-function edit(rowid){
+function edit(rowid) {
     console.log(rowid);
-	jQuery(cfg.grid_selector).jqGrid(
-						'editGridRow',
-						rowid,
-						{
-							closeAfterAdd : true,
-							recreateForm : true,
-							viewPagerButtons : true,
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />');
-										  appendButtons();
+    jQuery(cfg.grid_selector).jqGrid(
+        'editGridRow',
+        rowid,
+        {
+            closeAfterAdd: true,
+            recreateForm: true,
+            viewPagerButtons: true,
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                form.closest('.ui-jqdialog').find(
+                    '.ui-jqdialog-titlebar').wrapInner(
+                    '<div class="widget-header" />');
+                appendButtons();
 
-							}
-						});
-}
-var show=false;
-function del(rowid){
-    console.log(rowid);
-	jQuery(cfg.grid_selector).jqGrid('delGridRow',
-    rowid,
-    {
-        beforeShowForm : function(e) {
-            var form = $(e[0]);
-            if(!show){
-                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
             }
+        });
+}
+var show = false;
+function del(rowid) {
+    console.log(rowid);
+    jQuery(cfg.grid_selector).jqGrid('delGridRow',
+        rowid,
+        {
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                if (!show) {
+                    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+                }
 
-            show=true;
+                show = true;
 
-        }
-    });
+            }
+        });
 }
 
 function setParams(key, value) {
     params[key] = value;
-    jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");
+    jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }

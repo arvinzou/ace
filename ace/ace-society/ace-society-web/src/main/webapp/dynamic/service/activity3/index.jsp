@@ -390,6 +390,8 @@
             <span class="label label-lg label-success">活动成功</span>
             {@else if item.status==41}
             <span class="label label-lg label-danger">活动无效</span>
+            {@else if item.status==42}
+            <span class="label label-lg label-danger">活动超时</span>
             {@/if}
         </td>
         <td>

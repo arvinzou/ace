@@ -24,7 +24,7 @@
                             <view class='activity-warn-time'>
                                 <text class='time-num'>{{hours}}</text>
                                 <text class='time-title'>:</text>
-                                <text class='time-num'>{{minutes}}</text>
+                                <text class='time-num'>{{minutes}} </text>
                                 <text class='time-title'>:</text>
                                 <text class='time-num'>{{second}}</text>
                             </view>

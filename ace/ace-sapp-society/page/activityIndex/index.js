@@ -2,83 +2,61 @@ var util = require("../../util/util.js");
 var cfg = require("../../config.js");
 Page({
     data: {
+        limit: 10,
+        category: 1,
         navbarArray: [
-            //     {
-            //     text: '活动精选',
-            //     active: 'navbar-item-active'
-            //  }, 
-            {
-                text: '党建活动',
-                active: 'navbar-item-active',
-                type: 'dj'
-            },
             {
                 text: '公益活动',
-                active: '',
-                type: 'gy'
+                active: 'navbar-item-active',
+                type: '1'
             }, {
                 text: '普及活动',
                 active: '',
-                type: 'pj'
+                type: '2'
             }, {
                 text: '创意活动',
                 active: '',
-                type: 'cy'
+                type: '3'
+            }, {
+                text: '党建活动',
+                active: '',
+                type: '4'
             }
         ],
-        vdata: {},
-        loadingModalHide: false
-    },
-
-    store:{
-        nowType: 'dj',
-        limit: 10,
-        lists: {
-            jx: {
+        lists: [{
                 list: [],
                 start: 0,
-                scroll: 0,
-                isfrist: true,
-                LoadOver: false,
-                Loadingstatus: false,
-            },
-            gy: {
-                list: [],
-                start: 0,
-                scroll: 0,
                 isfrist: true,
                 category: '1',
                 LoadOver: false,
                 Loadingstatus: false,
             },
-            pj: {
+            {
                 list: [],
                 start: 0,
-                scroll: 0,
                 isfrist: true,
                 category: '2',
                 LoadOver: false,
                 Loadingstatus: false,
             },
-            dj: {
+            {
                 list: [],
                 start: 0,
-                scroll: 0,
-                isfrist: true,
-                category: '4',
-                LoadOver: false,
-                Loadingstatus: false,
-            },
-            cy: {
-                list: [],
-                start: 0,
-                scroll: 0,
                 isfrist: true,
                 category: '3',
                 LoadOver: false,
                 Loadingstatus: false,
             },
-        },
+            {
+                list: [],
+                start: 0,
+                isfrist: true,
+                category: '4',
+                LoadOver: false,
+                Loadingstatus: false,
+            }
+        ]
+
     },
 
     onLoad: function() {
@@ -88,31 +66,39 @@ Page({
                 url: "../userinfo/index?url=../activityIndex/index&type=switchTab"
             });
         }
-        that.setVdata();
         that.initdata();
     },
-
-    setVdata: function() {
-        let that = this;
-        let temp = that.store.lists[that.store.nowType];
-        that.data.vdata = temp;
+    loadMore: function () {
+        var self = this;
+        // 当前页是最后一页
+        if (self.data.currentPage == self.data.allPages) {
+            self.onReachBottom();
+            return;
+        }
     },
-    getVdata: function() {
-        let that = this;
-        that.store.lists[that.store.nowType] = that.data.vdata;
+
+    changeActivity:function(e){
+        let that=this;
+        let index = e.detail.current;
+        that.switchChannel(index);
+        let temp=that.getTarget();
+        if (temp.isfrist) {
+            that.initdata();
+            return;
+        }
     },
 
     initdata: function() {
         let that = this;
-        let temp = that.data.vdata;
+        let temp = that.getTarget();
         if (temp.LoadOver) {
             return;
         }
         that.showLoading();
         util.request(cfg.publicActivityReports, {
-                category: temp.category,
+                category: that.data.category,
                 start: temp.start,
-            limit: that.store.limit,
+                limit: that.data.limit,
             },
             function(rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
@@ -123,40 +109,50 @@ Page({
             }
         );
     },
+
+    getTarget:function(){
+        let that = this;
+        return  that.data.lists[that.data.category - 1];
+    },
+
     showLoading: function() {
         let that = this;
-        let temp = that.data.vdata;
-        temp.Loadingstatus=true;
+        let temp = that.getTarget();
+        temp.Loadingstatus = true;
+        that.setDataTarget();
+    },
+    setDataTarget:function(){
+        let that = this;
+        var tempDate = 'lists[' + (that.data.category - 1) + ']';
         that.setData({
-            vdata: temp
+            category:that.data.category,
+            [tempDate]: that.getTarget(),
         });
     },
 
 
     viewData: function(data) {
         let that = this;
-        let temp = that.data.vdata;
+        let temp = that.getTarget();
         temp.isfrist = false;
         temp.Loadingstatus = false;
         if (data) {
             temp.list = temp.list.concat(data);
-            if (data.length < that.store.limit) {
+            if (data.length < that.data.limit) {
                 temp.LoadOver = true;
             }
         }
-        that.setData({
-            vdata: temp
-        })
+        that.setDataTarget();
     },
 
     // 下拉刷新
     onPullDownRefresh: function() {
-        let that=this;
-        let temp = that.data.vdata;
-        temp.list=[];
-        temp.start=0;
-        temp.LoadOver=false;
-        that.getVdata();
+        let that = this;
+        console.log('-------------下拉加载-------------');
+        let temp = that.getTarget();
+        temp.list = [];
+        temp.start = 0;
+        temp.LoadOver = false;
         that.initdata();
     },
 
@@ -164,8 +160,8 @@ Page({
     onReachBottom: function() {
         var that = this;
         console.log('-------------上拉加载-------------');
-        let temp = that.data.vdata;
-        temp.start += that.store.limit;
+        let temp = that.getTarget();
+        temp.start += that.data.limit;
         that.initdata();
     },
 
@@ -176,24 +172,16 @@ Page({
         let that = this;
         that.getArticles(targetChannelIndex);
         let navbarArray = that.data.navbarArray;
-        that.getVdata();
         navbarArray.forEach((item, index, array) => {
             item.active = '';
             if (index === targetChannelIndex) {
                 item.active = 'navbar-item-active';
-                that.store.nowType = item.type;
             }
         });
         that.setData({
+            category: targetChannelIndex+1,
             navbarArray: navbarArray,
         });
-        that.setVdata();
-        let temp=that.data.vdata;
-        if (temp.isfrist) {
-            that.initdata();
-            return;
-        }
-        that.viewData();
     },
     getArticles: function(index) {
         this.setData({
@@ -207,16 +195,13 @@ Page({
             });
         }, 500);
     },
-    recordY: function(e) {
+    viewInfo: function(e) {
         let that = this;
-        let temp=that.data.vdata;
-        temp.scroll = e.detail.scrollTop;
-    },
-    viewInfo:function(e){
-        let that=this;
         let data = e.currentTarget.dataset
         let p = data.id;
         let title = data.title;
-        wx.navigateTo({ url: '../reportInfo/index?id=' + p + "&title=" + title })
+        wx.navigateTo({
+            url: '../reportInfo/index?id=' + p + "&title=" + title
+        })
     }
 });
