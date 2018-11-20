@@ -7,165 +7,162 @@
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>诉求服务</title>
+    <title>满意度调查</title>
 </head>
-<jsp:include page="../../common/common.jsp"/>
-<script type="text/javascript">
+<jsp:include page="/dynamic/common/header.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 
-
-</script>
 <body>
-<div class="page-content">
-    <div class="widget-box" id="widget-box">
-        <div class="widget-header">
-            <h5 class="widget-title smaller">设置查询条件</h5>
-            <div class="widget-toolbar"></div>
-        </div>
-        <div class="widget-body">
-            <div class="widget-main padding-6">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<div class="portlet light ">
+
+    <div class="portlet-body">
+
+        <div class="row custom-toolbar">
+            <div class="col-md-2 toolbar">
+
+            </div>
+
+            <div class="col-md-10">
                 <form action="#" id="fm-search">
-                    类别：<input name="category" class="easyui-combobox" style="width: 200px"
-                              data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=69&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'">
-
-                    名称： <input name="name" type="text" style="width: 200px;"/>
-                    <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/questionnaireResult/findFopQuestionnaireResultList">
-                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                    <div class="input-group" style="width: 250px;float: right">
+                        <input type="text" name="title" class="form-control" placeholder="">
+                        <span class="input-group-btn">
+							<button class="btn  btn-default search_btn" id="btn-search"
+                                    authority="${pageContext.request.contextPath}/questionnaireResult/findFopQuestionnaireResultList">
+									搜索
+							</button>
+						</span>
+                    </div>
                 </form>
-                <div class="space10"></div>
-                <div id="toolbar" class="toolbar">
+            </div>
 
-                    <%--<button class="btn btn-info" id="btn-view-add"--%>
-                    <%--authority="${pageContext.request.contextPath}/questionnaireResult/insertFopQuestionnaireResult">--%>
-                    <%--<i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
-                    <%--<button class="btn btn-info" id="btn-view-edit"--%>
-                    <%--authority="${pageContext.request.contextPath}/questionnaireResult/updateFopQuestionnaireResult">--%>
-                    <%--<i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>--%>
-                    <%--</button>--%>
-                    <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/questionnaireResult/deleteByPrimaryKey">
-                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+        </div>
+
+        <table id="grid-table">
+
+        </table>
+
+        <div class="paginationbar">
+            <ul id="grid-pager" class="pagination"></ul>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="modal-upload">
+    <div class="modal-dialog" role="document" style="width: 830px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">图片上传</h4>
+            </div>
+            <div class="modal-body">
+                <div id="uploader">
 
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
         </div>
     </div>
-
-    <table id="grid-table"></table>
-
-    <div id="grid-pager"></div>
-
-
-</div>
-<div id="dialog-message" class="hide">
-    <div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-    </div>
-</div>
-<div id="dialog-message-file" class="hide">
-    <div id="load" class="loading"></div>
 </div>
 
-<div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem hide">
-            <span class="labelItemHeader">关联ID</span>
-            <br>
-            <span id="relationId"></span>
-        </div>
-        <div class="labelItem hide">
-            <span class="labelItemHeader">关联类型</span>
-            <br>
-            <span id="relationType"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">答题人ID</span>
-            <br>
-            <span id="answerId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">答题人类型</span>
-            <br>
-            <span id="answerType"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">问卷ID</span>
-            <br>
-            <span id="questionnaireId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">调查结果</span>
-            <br>
-            <span id="result"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">备注</span>
-            <br>
-            <span id="remark"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">状态</span>
-            <br>
-            <span id="status"></span>
-        </div>
-    </div>
-    <h5 class="header-title">操作信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem hide">
-            <span class="labelItemHeader">创建人编号</span>
-            <br>
-            <span id="createUserId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">创建人姓名</span>
-            <br>
-            <span id="createUserName"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">入库日期</span>
-            <br>
-            <span id="createDate"></span>
-        </div>
-        <div class="labelItem hide">
-            <span class="labelItemHeader">最后更新人编号</span>
-            <br>
-            <span id="lastModifyUserId"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">最后更新人姓名</span>
-            <br>
-            <span id="lastModifyUserName"></span>
-        </div>
-        <div class="labelItem">
-            <span class="labelItemHeader">最后更新时间</span>
-            <br>
-            <span id="lastModifyDate"> </span>
-        </div>
-    </div>
+<div class="modal fade" role="dialog" id="modal-audit">
+    <div class="modal-dialog" role="document" style="width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">信息审核</h4>
+            </div>
 
+            <div class="modal-body">
+                <form class="form-horizontal" action="/fopQuestion/audit" id="fm-audit" role="form">
+                    <div class="form-body">
+                        <div class="form-group " id="operation">
+                            <label class="col-md-2 control-label">审核选项</label>
+                            <div class="col-md-10">
+                                <div class="radio-group-container">
+                                    <label>
+                                        <input type="radio" name="rst" value="0"><span style="padding:10px">通过</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="rst" value="1"><span style="padding:10px">驳回</span>
+                                    </label>
+                                    <input type="text" class="hide" name="id" value="1"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">审核说明</label>
+                            <div class="col-md-10">
+                                <input type="hidden" name="id" value="\${data.id}">
+                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
-<jsp:include page="../../common/footer-1.jsp"/>
+
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<jsp:include page="/dynamic/common/footer.jsp"/>
+
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
+
+<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+
+<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
+
+
 <script src="${pageContext.request.contextPath}/content/service/fopQuestionnaireResult/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/fopQuestionnaireResult/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/fopQuestionnaireResult/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/fopQuestionnaireResult/view.js?version=${cfg.version}"></script>
-<jsp:include page="../../common/footer-2.jsp"/>
-<script type="text/javascript">
-    window.onresize = function () {
-        console.log('autoWidthJqgrid');
-        $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-        $(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight - layoutTopHeight);
-        parent.autoWidth();
+
+<style>
+    .form-group {
+        padding-left: 10px;
+        padding-right: 5px;
+        float: left;
     }
-</script>
+
+    .labelItem {
+        width: 180px;
+        height: 38px;
+        float: left;
+        margin: 4px 4px 4px;
+    }
+
+    .labelItemHeader {
+        font-weight: 800;
+        font-size: 14px;
+    }
+
+</style>
 </body>
 </html>
