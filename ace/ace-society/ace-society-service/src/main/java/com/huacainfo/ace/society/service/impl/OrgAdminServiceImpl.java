@@ -102,8 +102,6 @@ public class OrgAdminServiceImpl implements OrgAdminService {
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
-        o.setCreateUserName(userProp.getName());
-        o.setCreateUserId(userProp.getUserId());
         this.orgAdminDao.insert(o);
         this.dataBaseLogService.log("添加组织管理者列表", "组织管理者列表", "",
                 o.getId(), o.getId(), userProp);
@@ -135,9 +133,6 @@ public class OrgAdminServiceImpl implements OrgAdminService {
         }
 
 
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
         this.orgAdminDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更组织管理者列表", "组织管理者列表", "",
                 o.getId(), o.getId(), userProp);
@@ -200,25 +195,6 @@ public class OrgAdminServiceImpl implements OrgAdminService {
     @Override
     public MessageResponse audit(String id, String rst, String remark,
                                  UserProp userProp) throws Exception {
-
-        OrgAdmin obj = orgAdminDao.selectByPrimaryKey(id);
-        if (obj == null) {
-            return new MessageResponse(ResultCode.FAIL, "组织管理者列表数据丢失");
-        }
-
-        //更改审核记录
-        MessageResponse auditRs =
-                auditRecordService.audit(BisType.SOCIETY_ORG_INFO, obj.getId(), obj.getId(), rst, remark,
-                        userProp);
-        if (ResultCode.FAIL == auditRs.getStatus()) {
-            return auditRs;
-        }
-
-        obj.setStatus(rst);
-        obj.setLastModifyDate(DateUtil.getNowDate());
-        obj.setLastModifyUserId(userProp.getUserId());
-        obj.setLastModifyUserName(userProp.getName());
-        orgAdminDao.updateStatus(obj);
 
 
         dataBaseLogService.log("审核组织管理者列表", "组织管理者列表", id, id,
