@@ -1,199 +1,367 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<html lang="cn">
+<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>企业产品</title>
+    <title>报道</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="${cfg.sys_name}" name="description"/>
+    <jsp:include page="/dynamic/common/header.jsp"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
+    <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+    <script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 </head>
-<jsp:include page="../../common/common.jsp"/>
-<link rel="stylesheet" href="${portalPath}/content/common/assets/css/colorbox.css"/>
-<link rel="stylesheet"
-      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
-      type="text/css" media="screen"/>
-<script type="text/javascript">
-
-
-</script>
 <body>
-<div class="page-content">
-    <div class="widget-box" id="widget-box">
-        <div class="widget-header">
-            <h5 class="widget-title smaller">设置查询条件</h5>
-            <div class="widget-toolbar"></div>
-        </div>
-        <div class="widget-body">
-            <div class="widget-main padding-6">
-                <form action="#" id="fm-search">
-                    标题： <input name="title" type="text" style="width: 200px;"/>
-                    <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/informationService/findInformationServiceList">
-                        <i class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                </form>
-                <div class="space10"></div>
-                <div id="toolbar" class="toolbar">
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<div class="portlet light">
 
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/informationService/insertInformationService">
-                        <i class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/informationService/updateInformationService">
-                        <i class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/informationService/deleteInformationServiceByInformationServiceId">
-                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <%--审核--%>
-                    <button class="btn btn-purple" id="btn-view-audit"
-                            authority="${pageContext.request.contextPath}/informationService/audit">
-                        <i class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+    <div class="portlet-body">
+
+        <div class="row custom-toolbar">
+            <div class="col-md-3">
+                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
+            </div>
+
+            <div class="col-md-9">
+
+                <form onsubmit="return t_query()">
+
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">待审</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">通过</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('status','4');">驳回</button>
+                    </div>
+                    <div class="input-group">
+                        <input type="text"
+                               name="keyword"
+                               class="form-control"
+                               placeholder="请输入标题">
+                        <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn"
+                                                                                type="submit">
+                                                                                搜索
+                                                                        </button>
+                                                                    </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="50%">标题</th>
+                    <th width="20%">发布企业</th>
+                    <th width="10%">发布时间</th>
+                    <th width="10%">状态</th>
+                    <th width="10%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="page-list">
+
+                </tbody>
+            </table>
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1"></ul>
+        </div>
+
+    </div>
+
+</div>
+
+<%--查看详情--%>
+<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">报道详情</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-detail" role="form">
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%--=============common jsp-suffix===============--%>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+<%--==============common jsp-suffix==============--%>
+</body>
+
+<%--列表juicer模板--%>
+<script id="tpl-list" type="text/template">
+    {@each data as item, index}
+    <tr>
+        <td>\${item.title}</td>
+        <td>\${item.companyName}</td>
+        <td>\${item.releaseDate}</td>
+        <td>
+            {@if item.status=="1"}
+            <span class="label label-lg label-info">审核中</span>
+            {@else if item.status=="2"}
+            <span class="label label-lg label-success">审核通过</span>
+            {@else if item.status=="3"}
+            <span class="label label-lg label-danger">审核不通过</span>
+            {@/if}
+        </td>
+        <td>
+            <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+            {@if item.status==1}
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+            {@/if}
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+               data-target="#modal-preview">查看</a>
+            <a href="javascript:del('\${item.id}');">删除</a>
+
+        </td>
+    </tr>
+    {@/each}
+</script>
+﻿
+<div class="modal fade" id="modal-status">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">设置状态</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-status" role="form">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">状态</label>
+                            <div class="col-md-10">
+                                <div class="radio-group-container">
+                                    <input type="hidden" name="id">
+                                    <input type="hidden" name="text" value="系统强制设置状态">
+                                    <label>
+                                        <input type="radio" name="rst" value="2"><span style="padding:10px">待审</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="rst" value="4"><span style="padding:10px">驳回</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green status">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--审核弹框-->
+<div class="modal fade" role="dialog" id="modal-audit">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">审核</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-audit" role="form">
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green audit">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" role="dialog" id="modal-preview">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">企业产品详情</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-preview">
+
+                    </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script id="tpl-fm" type="text/template">
+    <div class="form-body">
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">内容</label>
+            <div class="col-md-10">
+                \${data.o.content}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">多媒体资源</label>
+            <div class="col-md-10">
+                {@each data.o.imageList as img, idx}
+
+                <div class="my-gallery" style="float:left;padding:5px"><img src="\${img.url}" class="cover"/></div>
+
+                {@/each}
+                {@if data.o.mediaContent&&data.o.mediaContent.indexOf('.mp3')!=-1}
+                <div class="row">
+                    <audio src="\${data.o.mediaContent}" controls></audio>
+                </div>
+                {@/if}
+                {@if data.o.mediaContent&&data.o.mediaContent.indexOf('.mp4')!=-1}
+                <div class="row">
+                    <video src="\${data.o.mediaContent}" controls style="width:160px;height:90px"></video>
+                </div>
+                {@/if}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">日期</label>
+            <div class="col-md-10">
+                \${data.o.createTime}
+            </div>
+        </div>
+        <h4>结果</h4>
+        <hr>
+        <div class="form-group " id="operation">
+            <label class="col-md-2 control-label">结果</label>
+            <div class="col-md-10">
+                <div class="radio-group-container">
+                    <label>
+                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">说明</label>
+            <div class="col-md-10">
+                <input type="hidden" name="id" value="\${data.o.id}">
+                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
             </div>
         </div>
     </div>
 
-    <table id="grid-table"></table>
-
-    <div id="grid-pager"></div>
-    <div id="dialog-message-audit" class="hide">
-        <form action="/informationService/audit" id="fm-audit">
-            <fieldset>
-                审核结果：
-                <input id="audit_pass" name="audit_result" type="radio" value="0"/> 通过
-                <input id="audit_unpass" name="audit_result" type="radio" value="1"/> 不通过
-            </fieldset>
-            <div class="space-6"></div>
-            <fieldset>
-                审核备注： <textarea id="audit_opinion" cols="30" rows="10"></textarea>
-            </fieldset>
-        </form>
-    </div>
-
-</div>
-<div id="dialog-message" class="hide">
-    <div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-    </div>
-</div>
-<div id="dialog-message-file" class="hide">
-    <div id="load" class="loading"></div>
-</div>
-
-<div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-发布单位</span>
-            <br>
-            <span id="companyName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-标题</span>
-            <br>
-            <span id="title">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-发布时间</span>
-            <br>
-            <span id="releaseDate">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-点击次数</span>
-            <br>
-            <span id="click">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-状态</span>
-            <br>
-            <span id="status">
-</span>
-        </div>
-    </div>
-    <h5 class="header-title">上传图片</h5>
-    <div class="row" style="padding:10px" id="fileUrl">
-    </div>
-    <h5 class="header-title">详细情况</h5>
-    <div class="row" style="padding:10px" id="content">
-    </div>
-    <h5 class="header-title">备注</h5>
-    <div class="row" style="padding:10px" id="remark">
-    </div>
-    <h5 class="header-title">操作信息</h5>
-    <div class="row" style="padding:10px">
-        <div class="labelItem"><span class="labelItemHeader">
-创建人编号</span>
-            <br>
-            <span id="createUserId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-创建人姓名</span>
-            <br>
-            <span id="createUserName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-入库日期</span>
-            <br>
-            <span id="createDate">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人编号</span>
-            <br>
-            <span id="lastModifyUserId">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新人姓名</span>
-            <br>
-            <span id="lastModifyUserName">
-</span>
-        </div>
-        <div class="labelItem"><span class="labelItemHeader">
-最后更新时间</span>
-            <br>
-            <span id="lastModifyDate">
-</span>
-        </div>
-    </div>
-
-</div>
-<jsp:include page="../../common/footer-1.jsp"/>
-<script src="${pageContext.request.contextPath}/content/service/enterpriseProducts/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/enterpriseProducts/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/enterpriseProducts/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/enterpriseProducts/view.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/enterpriseProducts/upload.js?version=${cfg.version}"></script>
-
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script type="text/javascript"
-        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
-<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
-<jsp:include page="../../common/footer-2.jsp"/>
-<script type="text/javascript">
-    window.onresize = function () {
-        console.log('autoWidthJqgrid');
-        $(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-        $(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight - layoutTopHeight);
-        parent.autoWidth();
-    }
 </script>
-</body>
+
+<script id="tpl-preview" type="text/template">
+    <div class="form-group">
+        <label class="col-md-2 view-label">标题</label>
+        <div class="col-md-10">
+            \${data.title}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">产品封面</label>
+        <div class="col-md-10">
+            <div class="my-gallery"><img src="\${data.fileUrl}" class="cover"/></div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">发布企业</label>
+        <div class="col-md-10">
+            \${data.companyName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">发布时间</label>
+        <div class="col-md-10">
+            \${data.releaseDate}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">具体内容</label>
+        <div class="col-md-10">
+            \${data.releaseDate}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">源</label>
+        <div class="col-md-10">
+            <div class="row describtion"><img src="\${data.o.rpt.headimgurl}" style="max-width:30px;"></div>
+            <div class="row describtion">\${data.o.rpt.nickname}</div>
+            <div class="row describtion">\${data.o.createTime}</div>
+        </div>
+    </div>
+</script>
+
+<div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+    <jsp:include page="/dynamic/common/footer.jsp"/>
+    <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+    <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+    <script src="js/act.js?v=${cfg.version}"></script>
 </html>
