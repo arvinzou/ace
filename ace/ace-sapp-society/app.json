@@ -42,7 +42,8 @@
     "page/enterActivity/index",
     "page/aboutus/index",
     "page/datas/index",
-    "page/liveStatus/index"
+    "page/liveStatus/index",
+    "page/orgApply/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

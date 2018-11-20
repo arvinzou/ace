@@ -39,7 +39,9 @@ Page({
     paddingtop: 0,
     nameDisplay:false,
     scoll:'live-top-box-noscoll',
-    sort:'0'
+    sort:'0',
+    maskFlag: true,
+    videoUrl: null
   },
   onReady: function (res) {
     var that = this;
@@ -457,5 +459,24 @@ Page({
       data: JSON.stringify(message),
     });
     console.log(message);
-  }
+  },
+  viewVideo: function (e) {
+        console.log("查看视频地址=====================================" + e.currentTarget.id);
+        var that = this;
+        var index = e.currentTarget.dataset.index;
+        that.setData({
+            videoUrl: e.currentTarget.id,
+            maskFlag: false
+        });
+  },
+  exitVideo: function (e) {
+        console.log("==================================退出视频观看");
+        var that = this;
+        var videoContent = wx.createVideoContext("video");
+        videoContent.pause();
+        that.setData({
+            maskFlag: true,
+            videoUrl: null
+        });
+  },
 });

@@ -130,6 +130,11 @@ Page({
         wx.stopPullDownRefresh();
         return;
     },
+    call: function(){
+        wx.makePhoneCall({
+            phoneNumber: '0736-7111361' 
+        });
+    },
 
     /**
      * 页面上拉触底事件的处理函数

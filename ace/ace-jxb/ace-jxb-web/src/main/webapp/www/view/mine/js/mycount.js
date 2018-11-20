@@ -5,7 +5,15 @@ window.onload = function() {
     var primaryId = url.substring(url.indexOf('=')+1);
     console.log(primaryId);
     initData(primaryId);
+    $('#income').on('click','.income_list',incomeListHistroy);
 };
+
+/**
+ * 取款记录*/
+function incomeListHistroy() {
+    window.location.href = contextPath + '/www/view/mine/incomeRecord.jsp';
+}
+
 
 function initData(primaryId){
     $.ajax({

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/simditor/styles/simditor.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/swiper-4.3.5/dist/css/swiper.min.css">
 
 </head>
 

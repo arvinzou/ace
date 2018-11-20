@@ -64,6 +64,7 @@
         <module>ace-portal</module>
         <module>ace-society</module>
         <module>ace-jxb</module>
+        <module>ace-cu</module>
         <!--<module>ace-live</module>-->
 
 

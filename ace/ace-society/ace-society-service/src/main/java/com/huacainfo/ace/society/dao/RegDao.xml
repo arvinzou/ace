@@ -74,19 +74,21 @@
     <select id="findByUserId" parameterType="java.lang.String" resultMap="CustomerResultMap">
         select
         wx.avatarUrl, wx.nickName,
-          t.user_level as regType,
-          p.id as pId,
-          p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
-          p.accPoints as pAccPoints, p.validPoints as pValidPoints, p.status as pStatus,
-
+        case when org.id is null then '1' else '2' end as regType,
+        p.id as pId,
+        p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
+        p.accPoints as pAccPoints, p.validPoints as pValidPoints, p.status as pStatus,
         org.id as orgId,
-          org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
-	      org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
-	      org.validPoints as orgValidPoints, org.status as orgStatus
-        from portal.users t
-        left join portal.wx_user wx on t.user_id = wx.unionId
-        left join society.person_info p on t.user_id = p.id
-        left join society.society_org_info org on t.user_id = org.id
+        org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
+        org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
+        org.validPoints as orgValidPoints, org.status as orgStatus
+        from society.person_info p
+        left join portal.wx_user wx on p.id = wx.unionId
+        left join (select
+        a.userId, s.id, s.orgName, s.orgType, s.orgAddr, s.orgCover, s.orgSummary,
+        s.contactPerson, s.contactPhone, s.accPoints, s.validPoints, s.status
+        from society_org_info s, org_admin a
+        where a.orgId = s.id )org on org.userId = p.id
         where t.user_id = #{userId,jdbcType=VARCHAR}
     </select>
 

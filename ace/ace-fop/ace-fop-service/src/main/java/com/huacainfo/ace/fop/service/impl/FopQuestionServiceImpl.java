@@ -380,39 +380,25 @@ public class FopQuestionServiceImpl implements FopQuestionService {
         }
         //账户区别，处理审核分支
         String account = userProp.getAccount();
-        String status = "1";//1-待审 2-审核通过 3-审核驳回  4-递交律师处理
+        String status = "0".equals(auditResult) ? "2" : "3";//1-待审 2-审核通过 3-审核驳回  4-递交律师处理
         //工商联管理人员
-        if ("fop".equals(account) && "0".equals(auditResult)) {
+        if ("fop".equals(account)
+                && "0".equals(auditResult)
+                && "0".equals(obj.getSourceType())) {
             status = "4";
-        } else if ("lawer".equals(account)) {
+        } else if ("lawer".equals(account) && "0".equals(obj.getSourceType())) {
             if (!"4".equals(obj.getStatus())) {
                 return new MessageResponse(ResultCode.FAIL, "尚未通过工商联审核");
             }
-            status = "0".equals(auditResult) ? "2" : "3";
         }
         obj.setStatus(status);
         fopQuestionDao.updateByPrimaryKey(obj);
-//        //提交审核流程
-//        String flowId = GUIDUtil.getGUID();
-//        MessageResponse rs = fopFlowRecordService.submitFlowRecord(flowId, FlowType.LAW_HELP, id, userProp);
-//        if (ResultCode.FAIL == rs.getStatus()) {
-//            return rs;
-//        }
-//        //自动审核通过
-//        FopFlowRecord record = fopFlowRecordService.selectByPrimaryKey(flowId);
-//        record.setAuditResult(auditResult);
-//        record.setAuditOpinion(auditOpinion);
-//        MessageResponse rs1 = fopFlowRecordService.audit(record, userProp);
-//        if (ResultCode.FAIL == rs1.getStatus()) {
-//            throw new CustomException(rs1.getErrorMessage());
-//        }
-
         //消息提醒 -- 审核结果推送给客户
         if ("lawer".equals(account) && "0".equals(auditResult)) {
 //            sendMessageNotice(obj, auditResult, auditOpinion);
         }
 
-        return new MessageResponse(ResultCode.SUCCESS, "发布成功");
+        return new MessageResponse(ResultCode.SUCCESS, "审核成功");
     }
 
     private void sendMessageNotice(FopQuestion obj, String auditResult, String auditOpinion) {

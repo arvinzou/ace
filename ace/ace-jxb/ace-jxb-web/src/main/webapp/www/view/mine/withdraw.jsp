@@ -5,7 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <meta name="format-detection" content="telephone=yes">
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
     <title>提现</title>
     <link rel="stylesheet" type="text/css" href="css/withdraw.css"/>
     <jsp:include page="../../../dynamic/common/base.jsp"/>
@@ -41,7 +43,7 @@
             <li>为保障提现成功，微信账号必须实名认证，否则审核不予通过。如需实名认证，请前往<span>微信钱包—支付中心—支付管理—实名认证</span>，进行认证后进行提现。</li>
             <li>账户提交提现申请后，工作人员会在三天内进行审核。</li>
             <li>微信支付的结算周期为T+3, 提现申请审核通过后, 3个工作日内款项会自动转至您的微信钱包。</li>
-            <li>如需其他帮助，请拨打 <a href="tel:0736-7083862">0736-7083862</a></li>
+            <%--<li>如需其他帮助，请拨打 <a href="tel:0736-7083862">0736-7083862</a></li>--%>
         </ul>
     </div>
 </div>
