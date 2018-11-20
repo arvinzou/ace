@@ -227,28 +227,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                    <%--<div class="form-body">--%>
-                    <%--<div class="form-group " id="operation">--%>
-                    <%--<label class="col-md-2 control-label">审核结果</label>--%>
-                    <%--<div class="col-md-10">--%>
-                    <%--<div class="radio-group-container">--%>
-                    <%--<label>--%>
-                    <%--<input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>--%>
-                    <%--</label>--%>
-                    <%--<label>--%>
-                    <%--<input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>--%>
-                    <%--</label>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-group">--%>
-                    <%--<label class="col-md-2 control-label">审核说明</label>--%>
-                    <%--<div class="col-md-10">--%>
-                    <%--<input type="hidden" name="id"/>--%>
-                    <%--<textarea name="message" style="width: 100%;height: 100px;"></textarea>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
+
                 </form>
             </div>
             <div class="modal-footer">
