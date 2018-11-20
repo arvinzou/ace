@@ -26,7 +26,6 @@ Page({
         lists: [{
                 list: [],
                 start: 0,
-                scroll: 0,
                 isfrist: true,
                 category: '1',
                 LoadOver: false,
@@ -35,7 +34,6 @@ Page({
             {
                 list: [],
                 start: 0,
-                scroll: 0,
                 isfrist: true,
                 category: '2',
                 LoadOver: false,
@@ -44,7 +42,6 @@ Page({
             {
                 list: [],
                 start: 0,
-                scroll: 0,
                 isfrist: true,
                 category: '3',
                 LoadOver: false,
@@ -53,7 +50,6 @@ Page({
             {
                 list: [],
                 start: 0,
-                scroll: 0,
                 isfrist: true,
                 category: '4',
                 LoadOver: false,
@@ -76,7 +72,7 @@ Page({
         var self = this;
         // 当前页是最后一页
         if (self.data.currentPage == self.data.allPages) {
-           console.log(33333333333);
+            self.onReachBottom();
             return;
         }
     },
@@ -164,14 +160,13 @@ Page({
     onReachBottom: function() {
         var that = this;
         console.log('-------------上拉加载-------------');
-        let temp = that.data.vdata;
+        let temp = that.getTarget();
         temp.start += that.data.limit;
         that.initdata();
     },
 
     onTapNavbar: function(e) {
         this.switchChannel(parseInt(e.currentTarget.id));
-        console.log(parseInt(e.currentTarget.id));
     },
     switchChannel: function(targetChannelIndex) {
         let that = this;
@@ -199,11 +194,6 @@ Page({
                 articleContent: this.data.navbarArray[index].text
             });
         }, 500);
-    },
-    recordY: function(e) {
-        let that = this;
-        let temp = that.data.vdata;
-        temp.scroll = e.detail.scrollTop;
     },
     viewInfo: function(e) {
         let that = this;

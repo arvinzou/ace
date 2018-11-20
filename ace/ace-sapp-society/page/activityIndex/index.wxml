@@ -12,7 +12,7 @@
         <swiper current="{{category-1}}" bindchange="changeActivity">
             <block wx:key="*this" wx:for="{{lists}}" wx:for-item="items">
                 <swiper-item>
-                    <scroll-view bindscroll='recordY' scroll-top='{{items.scroll}}' scroll-y class='activity-list' bindscrolltolower="loadMore">
+                    <scroll-view  scroll-top='{{items.scroll}}' scroll-y class='activity-list' bindscrolltolower="loadMore">
                         <view wx:key="category" wx:for='{{items.list}}'wx:for-item="item" class='list-style-1 list-style bottom-line' bindtap='viewInfo' data-title='{{item.title}}' data-id='{{item.id}}'>
                             <view class='left'>
                                 <view class='title'>{{item.title}}</view>
