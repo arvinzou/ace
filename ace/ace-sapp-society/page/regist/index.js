@@ -10,23 +10,16 @@ Page({
    */
   data: {
       unionId : null,
-      array: ['个人', '社会组织', '党员', '党组织'],
+      array: ['个人', '党员'],
       objectArray: [
           {
               id: 0,
               name: '个人'
           },
+         
           {
               id: 1,
-              name: '社会组织'
-          },
-          {
-              id: 2,
               name: '党员'
-          },
-          {
-              id: 3,
-              name: '党组织'
           }
       ],
       index: 0,
@@ -311,7 +304,7 @@ Page({
             return;
         }
         var jsonData = { "realName": realName, "mobilePhone": mobilePhone, "orgId": that.data.orgId, "validPoints": 0, "accPoints": 0, "politicalStatus": politicalStatus}
-        util.request(cfg.regist, { "unionId": "0", "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
+        util.request(cfg.regist, {"unionId":wx.getStorageSync("WX-SESSION-ID"), "regType": that.data.regType, "mobile": mobilePhone, "code": code, "jsonData": JSON.stringify(jsonData) },
             function (ret) {
                 if (ret.status == 0) {
                     that.setData({ lastNum: 3 });

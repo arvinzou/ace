@@ -55,12 +55,22 @@
     justify-content: center;
 }
 
-.activity-list {
+.swiper_box {
     height: 100%;
     padding-top: 84rpx;
     overflow-y: auto;
     position: relative;
 }
+
+.swiper_box swiper{
+    height: 100%;
+}
+
+.activity-list{
+    height: 100%;
+    overflow-y: auto;
+}
+
 
 .list-style {
     padding: 30rpx 30rpx;

@@ -60,7 +60,7 @@ function initInfo() {
     var data={};
     $.getJSON(url,data,function (rst) {
         if(rst.status == 0 && rst.data.memberType == '1'){
-            amount=rst.data.counselor.amount;
+            amount=rst.data.counselor.account;
             amount=amount?amount:0.00;
             $('.money_card .info.stutas').html("可提现金额"+amount+"元");
             // if(amount<50){

@@ -11,7 +11,8 @@ Page({
       days: '00',
       hours: '00',
       minutes: '00',
-      isEnd: false
+      isEnd: false,
+      stopwatch:'',
   },
 
   /**
@@ -101,7 +102,8 @@ Page({
     },
     actionClock:function(){
         var that =this;
-        setInterval(function(){
+        clearInterval(that.data.stopwatch);
+        that.data.stopwatch=setInterval(function(){
             that.data.seconds = (that.data.seconds)-1;
             that.formatTime();
         }, 1000);

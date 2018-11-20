@@ -31,8 +31,8 @@ function initData(){
                     consulorId = result.data.counselor.id;
                     var amount=result.data.counselor.income;
                     result.data.counselor.income=amount?amount:0.00;
-                    amount=result.data.counselor.amount;
-                    result.data.counselor.amount=amount?amount:0.00;
+                    amount=result.data.counselor.account;
+                    result.data.counselor.account=amount?amount:0.00;
                     var myInfo = document.getElementById('myInfo').innerHTML;
                     var html = juicer(myInfo, {
                         data: result.data

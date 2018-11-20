@@ -43,11 +43,11 @@
 				<div class="banner">
 
 					<p class="title">可提现收益(元）</p>
-					<p class="income">\${data.counselor.income?data.counselor.income:'0.00'}</p>
+					<p class="income">\${data.counselor.income?data.counselor.account:'0.00'}</p>
 
 					<p class="info">累计总收益:
-					\${data.counselor.amount}元&nbsp;&nbsp;
-					   已提现收益:\${data.counselor.amount-data.counselor.amount}元</p>
+					\${data.counselor.income}元&nbsp;&nbsp;
+					   已提现收益:\${data.counselor.income-data.counselor.account}元</p>
 
 
 					<%--<div class="row" style="padding-top: 0.826666rem;"><p class="title02">累计总收益（元）</p></div>--%>

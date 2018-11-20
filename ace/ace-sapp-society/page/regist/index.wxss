@@ -60,6 +60,7 @@ color:rgba(34,34,34,1);
     color: #666666;
     font-size: 26rpx;
     padding-top: 30rpx;
+    margin-top: 30rpx;
 }
 .placeholder-text{
     color: #DCDCDC;
