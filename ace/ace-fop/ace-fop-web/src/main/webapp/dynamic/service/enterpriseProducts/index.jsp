@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
@@ -17,56 +17,28 @@ pageEncoding="utf-8"%>
 <div class="portlet light ">
 
     <div class="portlet-body">
+
         <div class="row custom-toolbar">
             <form action="#" id="fm-search" >
-            <div class="col-md-2 toolbar">
-                <button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/fopCompany/insertFopCompany"></button>
-            </div>
-            <div class="col-md-7">
-                <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                    地区 <input  name="areaCode"
-                            class="easyui-combotree"
-                            data-options="url:'${portalPath}/system/selectProvinceTreeList.do?id=00',
-                                    method:'get',animate: true, lines:false,"
-                            style='width: 200px;height:30px'>
+                <div class="col-md-2 toolbar">
+                    <button type="button" class="btn  green" id="btn-view-add"  authority="${pageContext.request.contextPath}/informationService/insertInformationService"></button>
                 </div>
-                <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                    性质 <input class="easyui-combobox" style="width: 150px;height:30px" name="companyProperty"
-                                data-options="
-                                url:'${portalPath}/dict/findListByCategoryId.do?categoryId=134&selected=false',
-                                method:'get',
-                                valueField:'code',
-                                textField:'name',
-                                panelHeight:'auto'">
-                </div>
-                <div class="btn-group" role="group"  style="float:left;padding-right:5px">
-                    职务 <input class="easyui-combobox" style="width: 150px;height:30px" name="fopPost"
-                                 data-options="
-                                url:'${portalPath}/dict/findListByCategoryId.do?categoryId=150&selected=false',
-                                method:'get',
-                                valueField:'code',
-                                textField:'name',
-                                panelHeight:'auto'">
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
+                <div class="col-md-7"></div>
+                <div class="col-md-3">
                     <div class="input-group">
                         <input type="text"
-                               name="fullName"
+                               name="title"
                                class="form-control"
-                               placeholder="请输入企业名称">
+                               placeholder="请输入标题">
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn"  id="btn-search"
-                                    authority="${pageContext.request.contextPath}/fopCompany/findFopCompanyList">
+                                    authority="${pageContext.request.contextPath}/informationService/findInformationServiceList">
 									搜索
 							</button>
 						</span>
                     </div>
 
-            </div>
+                </div>
 
             </form>
         </div>
@@ -122,15 +94,62 @@ pageEncoding="utf-8"%>
     </div>
 </div>
 
+
+<div class="modal fade" role="dialog" id="modal-audit">
+    <div class="modal-dialog" role="document" style="width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">信息审核</h4>
+            </div>
+
+            <div class="modal-body">
+                <form class="form-horizontal" action="/fop/informationService/audit" id="fm-audit" role="form">
+                    <div class="form-body">
+                        <div class="form-group " id="operation">
+                            <label class="col-md-2 control-label">审核选项</label>
+                            <div class="col-md-10">
+                                <div class="radio-group-container">
+                                    <label>
+                                        <input type="radio" name="rst" value="0"><span style="padding:10px">通过</span>
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="rst" value="1"><span style="padding:10px">驳回</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">审核说明</label>
+                            <div class="col-md-10">
+                                <input type="hidden" name="id" value="\${data.id}">
+                                <textarea name="message" style="width: 100%;height: 100px;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+                <button type="button" class="btn btn-primary" authority="false">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <jsp:include page="/dynamic/common/footer.jsp" />
-<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
+
 
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
+
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
