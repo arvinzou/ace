@@ -189,7 +189,7 @@ jQuery(function ($) {
 });
 
 function preview(id, title) {
-    window.open(contextPath + "/www/html/product/product_info.html?id=" + id);
+    window.open(contextPath + "/www/html/corporateStyle/coinfo.html?id=" + id);
 }
 
 function loadView(id) {
