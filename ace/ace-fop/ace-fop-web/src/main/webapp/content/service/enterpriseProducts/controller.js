@@ -1,4 +1,5 @@
 jQuery(function ($) {
+    initEvents();
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -58,6 +59,7 @@ jQuery(function ($) {
                     viewPagerButtons: true,
                     beforeSubmit: function (postdata) {
                         postdata.content = editor.getValue();
+                        console.log("postdata.content=============================="+ postdata.content);
                         return [true, "", ""];
                     },
                     beforeShowForm: function (e) {
@@ -266,6 +268,11 @@ function edit(rowid) {
             closeAfterAdd: true,
             recreateForm: true,
             viewPagerButtons: true,
+            beforeSubmit: function (postdata) {
+                postdata.content = editor.getValue();
+                console.log("postdata.content=============================="+ postdata.content);
+                return [true, "", ""];
+            },
             beforeShowForm: function (e) {
                 loadText(rowid);
                 appendUploadBtn("fileUrl");
@@ -293,4 +300,67 @@ function del(rowid) {
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+}
+
+function initEvents() {
+    //审核模态框
+    $('#modal-audit').on('shown.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        console.log(id);
+        var modal = $(this);
+        modal.find('.modal-body input[name=id]').val(id);
+    });
+    //审核框 确定按钮
+    $('#modal-audit .btn-primary').on('click', function () {
+        $('#modal-audit form').submit();
+    });
+    //审核框 提交事件
+    $('#modal-audit form').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            var rstVal = $('input[name="rst"]:checked').val();
+            if (rstVal == undefined) {
+                alert("请选择审核结果!");
+                return;
+            }
+            var params = {};
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            $.extend(params, {
+                time: new Date()
+            });
+            console.log(params);
+            audit(params);
+            return false;
+        }
+    });
+}
+
+function audit(params) {
+    console.log(params);
+    startLoad();
+    $.ajax({
+        type: "post",
+        url: contextPath + "/informationService/audit",
+        data: {
+            id: params.id,
+            auditResult: params.rst,
+            auditOpinion: params.message
+        },
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            stopLoad();
+            $("#modal-audit").modal('hide');
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+            }
+        },
+        complete: function (XMLHttpRequest, textStatus) {
+        },
+        error: function () {
+        }
+    });
 }
