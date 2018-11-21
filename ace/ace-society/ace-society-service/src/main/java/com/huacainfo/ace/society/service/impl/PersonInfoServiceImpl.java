@@ -276,9 +276,9 @@ public class PersonInfoServiceImpl implements PersonInfoService {
 
 
     @Override
-    public List<Map<String, Object>> querysocietyOrg(Map<String, Object> condition) {
+    public List<Map<String, Object>> querysocietyOrg(int start, int limit, Map<String, Object> condition) {
         //所有排行
-        List<Map<String, Object>> rtn = personInfoDao.querysocietyOrg(condition);
+        List<Map<String, Object>> rtn = personInfoDao.querysocietyOrg(start, limit, condition);
 
         //返回结果
 
@@ -286,9 +286,9 @@ public class PersonInfoServiceImpl implements PersonInfoService {
     }
 
     @Override
-    public List<Map<String, Object>> queryperson(Map<String, Object> condition) {
+    public List<Map<String, Object>> queryperson(int start, int limit, Map<String, Object> condition) {
         //所有排行
-        List<Map<String, Object>> rtn = personInfoDao.queryperson(condition);
+        List<Map<String, Object>> rtn = personInfoDao.queryperson(start, limit, condition);
 
         //返回结果
 

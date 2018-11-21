@@ -108,18 +108,20 @@ public interface PersonInfoService {
 
     /**
      * 组织爱心币排行
-     *
+     *@param start
+     * @param limit
      * @param condition 查询条件
      * @return List<Map   <   String   ,       Object>>
      */
-    List<Map<String, Object>> querysocietyOrg(Map<String, Object> condition);
+    List<Map<String, Object>> querysocietyOrg(int start, int limit, Map<String, Object> condition);
 
     /**
      * 个人爱心币排行
-     *
+     * @param start
+     * @param limit
      * @param condition 查询条件
      * @return List<Map   <   String   ,       Object>>
      */
-    List<Map<String, Object>> queryperson(Map<String, Object> condition);
+    List<Map<String, Object>> queryperson(int start, int limit, Map<String, Object> condition);
 
 }
