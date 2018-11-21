@@ -64,10 +64,11 @@
         <module>ace-portal</module>
         <module>ace-society</module>
         <module>ace-jxb</module>
-        <module>ace-cu</module>
+        <module>ace-fop</module>
+
         <!--<module>ace-live</module>-->
 
-
+        <module>ace-cu</module>
 
         <!--<module>ace-gis</module>-->
         <!--<module>ace-kernel</module>-->
@@ -77,7 +78,7 @@
         <module>ace-operana</module>
         -->
         <!--<module>ace-woc</module>-->
-        <!--<module>ace-fop</module>-->
+        <!---->
        <!--<module>ace-face</module>-->
         <!--<module>ace-jave</module>-->
         <!--<module>ace-uf</module>-->
