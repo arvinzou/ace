@@ -24,28 +24,6 @@ function initData(primaryId){
         success:function(result){
             if(result.status == 0) {
                 viewHtml('income', result.data, 'incomeTemp');
-                var total = 0;
-                var rewardIncome = result.data.rewardIncome;
-                var consultIncome = result.data.consultIncome;
-                var monthIncome = result.data.monthIncome;
-                var underlingIncome = result.data.underlingIncome;
-                var courseIncome = result.data.courseIncome;
-                if(rewardIncome != undefined){
-                    total += parseFloat(rewardIncome);
-                }
-                if(consultIncome != undefined){
-                    total += parseFloat(consultIncome);
-                }
-                if(monthIncome != undefined){
-                    total += parseFloat(monthIncome);
-                }
-                if(underlingIncome != undefined){
-                    total += parseFloat(underlingIncome);
-                }
-                if(courseIncome != undefined){
-                    total += parseFloat(courseIncome);
-                }
-                $("#totalIncome").text(total);
             }else {
                 alert(result.errorMessage);
                 return;
