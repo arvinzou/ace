@@ -213,18 +213,28 @@
             <div class="col-xs-4 col-md-4">
 				{@if item.grade == '1'}
               		<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/star_gray.png" class="comment_level"/>
+					<img src="img/star_gray.png" class="comment_level"/>
+					<img src="img/star_gray.png" class="comment_level"/>
+					<img src="img/star_gray.png" class="comment_level"/>
 				{@else if item.grade == '2'}
 					<img src="img/comment_level.png" class="comment_level" />
 					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/star_gray.png" class="comment_level"/>
+					<img src="img/star_gray.png" class="comment_level"/>
+					<img src="img/star_gray.png" class="comment_level"/>
 				{@else if item.grade == '3'}
 					<img src="img/comment_level.png" class="comment_level" />
 					<img src="img/comment_level.png" class="comment_level" />
 					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/star_gray.png" class="comment_level"/>
+					<img src="img/star_gray.png" class="comment_level"/>
 				{@else if item.grade == '4'}
 					<img src="img/comment_level.png" class="comment_level" />
 					<img src="img/comment_level.png" class="comment_level" />
 					<img src="img/comment_level.png" class="comment_level" />
 					<img src="img/comment_level.png" class="comment_level" />
+					<img src="img/star_gray.png" class="comment_level"/>
 				{@else if item.grade == '5'}
 					<img src="img/comment_level.png" class="comment_level" />
 					<img src="img/comment_level.png" class="comment_level" />
@@ -259,7 +269,7 @@
 				<span class="span_01"><%--试听--%></span>
 				<span class="span_02" style="display: none;">共计</span>
 				<span class="span_03" id="totalCost" style="display: none;"></span>
-				<button class="buy" onclick="buy();">立即购买</button>
+				<button class="buy" onclick="buy();" style="margin-left: 2.5rem;">立即购买</button>
 			</div>
 			{@/if}
 		</script>
