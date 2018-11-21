@@ -33,7 +33,6 @@ jQuery(function ($) {
                     beforeSubmit: function (postdata) {
                         postdata.content = editor.getValue();
                         return [true, "", ""];
-
                     },
                     beforeShowForm: function (e) {
                         initSimditor($("textarea[name=content]"), null);
@@ -122,6 +121,10 @@ function edit(rowid) {
             closeAfterAdd: true,
             recreateForm: true,
             viewPagerButtons: true,
+            beforeSubmit: function (postdata) {
+                postdata.content = editor.getValue();
+                return [true, "", ""];
+            },
             beforeShowForm: function (e) {
                 loadText(rowid);
                 appendUploadBtn("fileUrl");
@@ -139,7 +142,6 @@ function del(rowid) {
                 if (!show) {
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
                 }
-
                 show = true;
 
             }
