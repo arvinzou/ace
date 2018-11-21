@@ -160,8 +160,10 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.StudioVo">
         <result column="dutyName" jdbcType="VARCHAR" property="dutyName"/>
         <result column="dutyHeadImg" jdbcType="VARCHAR" property="dutyHeadImg"/>
+        <result column="subNum" jdbcType="VARCHAR" property="subNum"/>
     </resultMap>
     <sql id="Vo_Column_List">
+        (select count(1) from counselor c where c.studioId = t.id) as subNum,
         c.`name` as dutyName, c.imagePhotoUrl as dutyHeadImg,
         t.id, t.`name`, t.`level`, t.counselorId, t.logoImgUrl, t.status, t.createDate, t.introduce
     </sql>

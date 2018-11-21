@@ -5,6 +5,7 @@ import com.huacainfo.ace.jxb.vo.OrderCalculationQVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrderCalculationDao {
     int deleteByPrimaryKey(String id);
@@ -23,4 +24,6 @@ public interface OrderCalculationDao {
                                     @Param("start") int start,
                                     @Param("limit") int limit,
                                     @Param("orderBy") String orderBy);
+
+    Map<String, Object> incomeReport(String counselorId);
 }

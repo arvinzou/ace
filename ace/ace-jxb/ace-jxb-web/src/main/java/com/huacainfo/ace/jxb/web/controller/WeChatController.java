@@ -192,10 +192,11 @@ public class WeChatController extends MsgControllerAdapter {
         }
         //debug
         OutTextMsg outMsg = new OutTextMsg(inQrCodeEvent);
-        outMsg.setContent("Debug：\n" +
-                "eventKey=" + inQrCodeEvent.getEventKey() + "\n" +
-                "scene=" + scene
-        );
+//        outMsg.setContent("Debug：\n" +
+//                "eventKey=" + inQrCodeEvent.getEventKey() + "\n" +
+//                "scene=" + scene
+//        );
+        outMsg.setContent("欢迎您来到心阳光家庭教育平台。这里有专业的心理咨询师、家庭教育知识、精品课程、老师直播等等。让我们做智慧家长，帮助孩子更好成长。");
         return render(outMsg);
 
 //        return "success";

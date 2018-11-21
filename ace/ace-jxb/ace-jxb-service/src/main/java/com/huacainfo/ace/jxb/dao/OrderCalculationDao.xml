@@ -62,7 +62,7 @@
                 amount,
             </if>
             <if test="platformAmount != null">
-                platformAmount,
+            platformAmount,
             </if>
             <if test="studioRatio != null">
                 studioRatio,
@@ -225,4 +225,88 @@
             and t.grantTag = #{condition.grantTag,jdbcType=VARCHAR}
         </if>
     </sql>
+
+
+    <select id="incomeReport" parameterType="java.lang.String" resultType="map">
+        select vvv.tId, vvv.studioIncome+vvv.consultIncome+vvv.courseIncome+vvv.rewardIncome as totalIncome,
+               vvv.studioIncome,vvv.consultIncome , vvv.courseIncome, vvv.rewardIncome
+        from (
+                select vv.tId,
+                    MAX( CASE  WHEN  incomeType='studio' THEN income ELSE 0 END ) AS 'studioIncome',
+                    MAX( CASE  WHEN  incomeType='consult' THEN income ELSE 0 END ) AS 'consultIncome',
+                    MAX( CASE  WHEN  incomeType='course' THEN income ELSE 0 END ) AS 'courseIncome',
+                    MAX( CASE  WHEN  incomeType='reward' THEN income ELSE 0 END ) AS 'rewardIncome'
+                from (
+                -- 分销收益
+                    SELECT
+                        'studio'  as 'incomeType',
+                        v.sId as tId,
+                        sum(v.studioAmount) as income
+                    from (
+                        select
+                            s.counselorId as sId, t.category, t.payMoney,
+                            oc.ratio, oc.amount, oc.platformAmount, oc.studioRatio, oc.studioAmount
+                        from base_order t
+                        left join order_calculation oc on t.id = oc.orderId
+                        left join counselor c on  c.id = t.businessId
+                        left join studio s on c.studioId =s.id
+                        where 1=1
+                            and t.payStatus in ('2','6','7')
+                            and t.category in ('1','2','4')
+                            and s.counselorId is not null
+                    )v
+                    GROUP BY v.sId
+                -- 咨询订单
+                    UNION ALL
+                    SELECT
+                        'consult'  as 'incomeType',
+                        v.businessId as tId,
+                        SUM(v.amount) as income
+                    from (
+                        select
+                            t.businessId, t.category, t.payMoney,
+                            oc.ratio, oc.amount, oc.platformAmount, oc.studioRatio, oc.studioAmount
+                        from base_order t, order_calculation oc
+                        where t.id = oc.orderId
+                            and t.payStatus in ('2','6','7')
+                            and t.category = '1'
+                    )v
+                    GROUP BY v.businessId
+                -- 课程订单
+                    UNION ALL
+                    SELECT
+                        'course'  as 'incomeType',
+                        v.businessId as tId,
+                        sum(v.amount) as income
+                    from (
+                        select
+                            t.businessId, t.category, t.payMoney,
+                            oc.ratio, oc.amount, oc.platformAmount, oc.studioRatio, oc.studioAmount
+                        from base_order t, order_calculation oc
+                        where t.id = oc.orderId
+                            and t.payStatus in ('2','6','7')
+                            and t.category = '2'
+                    )v
+                    GROUP BY v.businessId
+                -- 打赏订单
+                    UNION ALL
+                    SELECT
+                        'reward'  as 'incomeType',
+                        v.businessId as tId,
+                        sum(v.amount) as income
+                    from (
+                        select
+                            t.businessId, t.category, t.payMoney,
+                            oc.ratio, oc.amount, oc.platformAmount, oc.studioRatio, oc.studioAmount
+                        from base_order t, order_calculation oc
+                        where t.id = oc.orderId
+                            and t.payStatus in ('2','6','7')
+                            and t.category = '4'
+                    )v
+                    GROUP BY v.businessId
+                )vv
+                GROUP BY vv.tid
+        )vvv
+        where vvv.tId = #{id,jdbcType=VARCHAR}
+    </select>
 </mapper>
