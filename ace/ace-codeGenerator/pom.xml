@@ -6,7 +6,7 @@
         <artifactId>ace</artifactId>
         <version>1.0</version>
     </parent>
-    <artifactId>ace-CodeGenerator</artifactId>
+    <artifactId>ace-codeGenerator</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.huacainfo</groupId>
