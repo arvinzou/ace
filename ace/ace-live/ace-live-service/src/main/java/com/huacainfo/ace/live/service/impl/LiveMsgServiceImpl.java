@@ -56,7 +56,7 @@ public class LiveMsgServiceImpl implements LiveMsgService {
                                                  int limit, String orderBy) throws Exception {
         PageResult<LiveMsgVo> rst = new PageResult<LiveMsgVo>();
         List<LiveMsgVo> list = this.liveMsgDao.findList(condition,
-                start, start + limit, orderBy);
+                start,  limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.liveMsgDao.findCount(condition);
@@ -159,5 +159,18 @@ public class LiveMsgServiceImpl implements LiveMsgService {
         this.dataBaseLogService.log("删除互动内容", "互动内容", String.valueOf(id),
                 String.valueOf(id), "互动内容", userProp);
         return new MessageResponse(0, "互动内容删除完成！");
+    }
+
+    @Override
+    public MessageResponse updateStatus(String id, String status)
+            throws Exception {
+        if (CommonUtils.isBlank(id)) {
+            return new MessageResponse(1, "主键不能为空！");
+        }
+        if (CommonUtils.isBlank(status)) {
+            return new MessageResponse(1, "状态不能为空！");
+        }
+        this.liveMsgDao.updateStatus(id, status);
+        return new MessageResponse(0, "OK！");
     }
 }

@@ -1,0 +1,154 @@
+@import "../common/lib/weui.wxss";
+
+.index{
+    width: 100%;
+    background: #F6F6F6;
+}
+.menu-list{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+
+}
+.menu-item{
+    width: 90%;
+    height: 120rpx;
+    border-bottom: 0.5px solid #efefef;
+    margin: 0 auto;
+}
+.menu-icon{
+    width: 44rpx;
+    height: 44rpx;
+    margin-top: 38rpx;
+    float: left;
+}
+.menu-title{
+    width: 200rpx;
+    height: 30rpx;
+    float: left;
+    color: #666666;
+    font-size: 30rpx;
+    margin-top: 35rpx;
+    margin-left: 30rpx;
+}
+.menu-rediret{
+    width: 21rpx;
+    height: 20rpx;
+    margin-top: 50rpx;
+    float: right;
+}
+
+
+.banner {
+    padding: 10rpx 30rpx 30rpx;
+    color: #fff;
+    margin-bottom: 20rpx;
+    background-color: #fff;
+}
+
+.banner .top::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.banner .userInfo {
+    box-sizing: border-box;
+    width: 690rpx;
+    height: 280rpx;
+    background-color: #ffa629;
+    border-radius: 22rpx;
+    padding: 30rpx;
+      background-size: 100% 50%;
+      background-repeat: no-repeat;
+      background-position-y: 100%;
+      box-shadow:0px 8px 21px 0px rgba(255,166,38,0.33);
+}
+
+.banner .userInfo .headImage {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    border: rgba(255, 255, 255, 0.3) solid 6rpx;
+    overflow: hidden;
+    margin-right: 22rpx;
+}
+
+.banner .userInfo image {
+    width: 100%;
+    height: 100%;
+}
+
+.banner .userInfo .textInfo {
+    width: 510rpx;
+}
+
+.banner .userInfo .top>view {
+    float: left;
+}
+
+.banner .userInfo .textInfo .name {
+    font-size: 32rpx;
+    font-weight: 500;
+}
+
+.banner .userInfo .textInfo .center {
+    width: 120rpx;
+    height: 40rpx;
+    background: rgba(246, 155, 25, 1);
+    border-radius: 20rpx;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    font-weight: 500;
+    text-align: center;
+}
+.center{
+    float: left;
+}
+.banner .userInfo .data{
+    width: 100%;
+    margin-top: 30rpx;
+    font-size:32rpx;
+    font-weight:bold;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+.activity-menu{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+}
+.activity-menu-list{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
+.activity-menu-list::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.activity-menu-item{
+    width: 25%;
+    height: 90rpx;
+    float: left;
+    text-align: center;
+    color: #666666;
+    font-size: 24rpx;
+    padding-top: 30rpx;
+    padding-bottom: 30rpx;
+}
+.activity-menu-item image{
+    width: 54rpx;
+    height: 54rpx;
+}
+.member-type{
+    font-size: 24rpx;
+    width: 300rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #FFFFFF;
+    float: left;
+}

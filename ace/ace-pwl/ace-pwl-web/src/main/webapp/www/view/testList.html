@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+	<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="css/testList.css"/>
+    <script src="js/init_rem.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>测试列表</title>
+</head>
+<body>
+<div class="test_list">
+    <ul id="vue_test">
+        <li v-for="item in testlist" :data-id="item.id">
+            <span>{{item.name}}</span>
+            <div class="buttom">
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/testList.js">
+</script>
+</html>

@@ -160,7 +160,7 @@ public class HttpKit {
     /**
      * 通过网络访问json并读取文件
      *
-     * @param url:http://127.0.0.1:80/dashboard/dept_uuid.json
+     * @param url:http://192.168.2.253:80/dashboard/dept_uuid.json
      * @return:json文件的内容
      */
     public static String loadJson(String url, String charset) {

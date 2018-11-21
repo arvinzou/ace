@@ -1,0 +1,58 @@
+body{
+    background:rgba(247,249,252,1)!important;
+    padding-top: 0.133333rem;
+}
+
+*{
+    font-weight:500;
+}
+
+.list{
+    margin:0.266666rem auto 0;
+    width:9.2rem;
+    padding: 0.4rem;
+    background:rgba(255,255,255,1);
+    border-radius:0.066666rem;
+}
+
+.list .top,.list .info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list .top .name{
+    font-size:0.4rem;
+    font-weight:bold;
+    color:rgba(28,40,67,1);
+    width: 70%;
+}
+
+.list .top {
+    margin-bottom: 0.2rem;
+}
+
+.list .top .money_style{
+    font-size:0.426666rem;
+    font-weight:bold;
+    color:rgba(14,200,196,1);
+}
+
+.list .info .time{
+    font-size:0.32rem;
+    color:rgba(160,167,182,1);
+}
+
+.list .info .stutas{
+    font-size:0.32rem;
+    color:rgba(160,167,182,1);
+}
+
+.list .info .stutas1{
+
+    color:#FF7C12;
+}
+
+.list .info .stutas2{
+
+    color:#FF4F51;
+}

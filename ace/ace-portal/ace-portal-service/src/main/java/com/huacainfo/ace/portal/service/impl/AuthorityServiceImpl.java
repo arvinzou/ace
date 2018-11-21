@@ -10,9 +10,11 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.portal.model.Users;
 import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.Arrays;
@@ -25,9 +27,6 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.Encryptor;
-import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.dao.WxUserDao;
 
@@ -49,12 +48,11 @@ public class AuthorityServiceImpl implements AuthorityService {
 	private String access_token;
 	//获取到的access_token
 	private int  expires_in; //有效时间（两个小时，7200s）
-
-	public SingleResult<Map<String, String>> authority(String appid, String appsecret, String code,
+	@Override
+	public SingleResult<Map<String, Object>> authority(String appid, String appsecret, String code,
 			String encryptedData, String iv,String latitude,String longitude) throws Exception {
-		// appid wxa09a5be5fd228680
-		// appsecret d520d29f8c26c7e3885d80b1812a8d91
-		SingleResult<Map<String, String>> rst = new SingleResult<Map<String, String>>(0, "OK");
+		logger.info("============================================================================");
+		SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
 		StringBuffer url = new StringBuffer("");
 		url.append("https://api.weixin.qq.com");
 		url.append("/sns/jscode2session?");
@@ -65,19 +63,17 @@ public class AuthorityServiceImpl implements AuthorityService {
 		url.append("&js_code=");
 		url.append(code);
 		url.append("&grant_type=authorization_code");
-		//logger.info("url -> {}", url.toString());
+		logger.info("url -> {}", url.toString());
 		String res = HttpUtils.httpGet(url.toString());
 		logger.info("res -> {}", res);
 		JSONObject json = JSON.parseObject(res);
 		if (CommonUtils.isNotBlank(json.getString("errcode"))) {
-			return new SingleResult<Map<String, String>>(1, json.getString("errmsg"));
+			return new SingleResult<Map<String, Object>>(1, json.getString("errmsg"));
 		}
 		String session_key = json.getString("session_key");
 		String openid = json.getString("openid");
 		String expires_in = json.getString("expires_in");
         JSONObject userinfo = this.getUserInfo(encryptedData,session_key,iv);
-
-
 		logger.info("session_key -> {} openid -> {} expires_in -> {} userinfo ->{}", session_key, openid, expires_in,
 				userinfo);
         String _3rd_session =userinfo.getString("unionId");
@@ -85,25 +81,10 @@ public class AuthorityServiceImpl implements AuthorityService {
 			_3rd_session=userinfo.getString("openId");
 			userinfo.put("unionId",_3rd_session);
 		}
-		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
-		if(CommonUtils.isNotEmpty(user)){
-			userinfo.put("areaCode",user.getAreaCode());
-			userinfo.put("category",user.getCategory());
-			userinfo.put("party",user.getParty());
-			userinfo.put("role",user.getRole());
-			if(CommonUtils.isNotEmpty(user)){
-				if(CommonUtils.isNotEmpty(user.getRole())){
-					if(user.getRole().equals("admin")){
-
-						userinfo.put("category","");
-						userinfo.put("party","");
-						logger.info("admin in login");
-					}
-				}
-
-			}
-		}
-        Map<String, String> o = new HashMap<String, String>();
+		Map<String, Object> userProp=this.wxUserDao.selectSysUserByUnionId(_3rd_session);
+		userinfo.put("userProp",JSON.parseObject(JSON.toJSONString(userProp)));
+		Map<String, Object> o = new HashMap<String, Object>();
+		o.put("status","0");
         o.put("session_key", session_key);
         o.put("openid", openid);
         o.put("expires_in", expires_in);
@@ -112,6 +93,9 @@ public class AuthorityServiceImpl implements AuthorityService {
         redisTemplate.opsForValue().set(_3rd_session + "session_key", session_key);
 		redisTemplate.opsForValue().set(_3rd_session, userinfo);
 		WxUser wxUser= JSON.parseObject(userinfo.toString(),WxUser.class);
+		wxUser.setAppId(appid);
+		wxUser.setUserProp(userProp);
+		o.put("userinfo",wxUser);
 		if(CommonUtils.isNotEmpty(latitude)){
 			wxUser.setLatitude(new java.math.BigDecimal(latitude));
 		}
@@ -121,6 +105,35 @@ public class AuthorityServiceImpl implements AuthorityService {
 		this.saveOrUpdateWxUser(wxUser);
 		rst.setValue(o);
 		return rst;
+	}
+
+	@Override
+	public SingleResult<Map<String, Object>> bind(String _3rd_session,String mobile) throws Exception {
+		SingleResult<Map<String, Object>> rst = new SingleResult<Map<String, Object>>(0, "OK");
+		Map<String, Object> o = new HashMap<String, Object>();
+		o.put("status","1");
+		WxUser user=this.wxUserDao.selectByPrimaryKey(_3rd_session);
+		this.wxUserDao.updateMobile(_3rd_session,mobile);
+		user.setMobile(mobile);
+		o.put("userinfo",user);
+		if(CommonUtils.isNotEmpty(mobile)) {
+			Map<String, Object> userProp=this.wxUserDao.selectSysUserByMobile(mobile);
+			if(CommonUtils.isNotEmpty(userProp)){
+				user.setDeptId((String) userProp.get("corpName"));
+				user.setName((String) userProp.get("name"));
+				user.setMobile((String) userProp.get("tel"));
+				this.wxUserDao.updateReg(user);
+				this.wxUserDao.updateBindMiniApp(user.getUnionId(),(String) userProp.get("userId"));
+				user.setUserProp(userProp);
+				o.put("status","0");
+				o.put("userProp",userProp);
+				o.put("userinfo",user);
+			}else{
+				rst.setErrorMessage("绑定失败，没有找到系统用户，请确认手机号是否已注册为系统用户。");
+			}
+		}
+		rst.setValue(o);
+		return  rst;
 	}
 	private void saveOrUpdateWxUser(WxUser o){
 		int t=this.wxUserDao.isExit(o);
@@ -247,6 +260,45 @@ public class AuthorityServiceImpl implements AuthorityService {
 		WxUser o=this.wxUserDao.selectByPrimaryKey(id);
 		logger.info("==============>WxUser=====>{}",o);
 		SingleResult<WxUser> rst=new SingleResult(0,"成功。");
+		rst.setValue(o);
+		return rst;
+	}
+	/**
+	 *
+	 * @Title:authority
+	 * @Description:  TODO(直播推流鉴权)
+	 * @param:        @param p
+	 * @param:        @throws Exception
+	 * @return:       MessageResponse
+	 * @throws
+	 * @author: Arvin
+	 * @version: 2018-03-22
+	 */
+	@Override
+	public  MessageResponse authority(Map<String,Object> p) throws Exception{
+		int t=this.wxUserDao.isExitByMobile((String) p.get("name"));
+		if(t==0){
+			return new MessageResponse(1,"没有找到对应的用户");
+		}
+		return new MessageResponse(0,"OK");
+	}
+	@Override
+	public  SingleResult<UserProp> getCurUserPropByOpenId(String unionId)throws Exception{
+		UserProp o=new UserProp();
+		SingleResult<UserProp> rst=new SingleResult(0,"成功。");
+		if (StringUtils.isEmpty(unionId)) {
+			return new SingleResult(1, "没有获取到微信用户信息unionId！");
+		}
+		Users users = wxUserDao.selectSysUserByOpenid(unionId);
+		if (null == users) {
+			return new SingleResult(1, "未授权的微信用户，请联系系统管理员！");
+		}
+		o.setName(users.getName());
+		o.setUserId(users.getUserId());
+		o.setCorpId(users.getDepartmentId());
+		o.setAreaCode(users.getAreaCode());
+		o.setOpenId(unionId);
+		o.setAppOpenId(unionId);
 		rst.setValue(o);
 		return rst;
 	}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.live.dao.report.Portal">
+  <select id="query" resultType="map">
+    SELECT
+    'live' id,
+    count(1) value
+    FROM
+    live
+    WHERE
+    deptId =#{deptId}
+    union all
+    SELECT
+    'rpt' id,
+    count(1) rpt
+    FROM
+    live_rpt inner join live on live_rpt.rid=live.id
+    WHERE
+    live.deptId =#{deptId}
+    union all
+    SELECT
+    'cmt' id,
+    count(1) cmt
+    FROM
+    live_cmt
+    inner join live_rpt on live_rpt.id=live_cmt.rptId
+    inner join live on live_rpt.rid=live.id
+    WHERE
+    live.deptId =#{deptId}
+    union all
+    SELECT
+    'msg' id,
+    count(1) msg
+    FROM
+    live_msg
+    inner join live on live_msg.rid=live.id
+    WHERE
+    live.deptId =#{deptId}
+  </select>
+</mapper>

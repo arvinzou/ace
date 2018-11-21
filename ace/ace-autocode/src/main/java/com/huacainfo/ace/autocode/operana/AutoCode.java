@@ -1,6 +1,5 @@
-package com.huacainfo.ace.autocode.operana;
+package com.huacainfo.ace.generator.operana;
 
-import com.huacainfo.ace.autocode.base.AutoCodeUtils;
 public class AutoCode {
 	public static void main(String[] args) throws Exception{
 //		AutoCodeUtils autoCodeUtils=new AutoCodeUtils("operana","指标文件","陈晓克");

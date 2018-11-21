@@ -1,6 +1,7 @@
 package com.huacainfo.ace.common.tools;
-
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpEntity;
+import org.apache.commons.httpclient.*;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
@@ -22,24 +23,27 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
+import org.apache.http.entity.StringEntity;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-
+import com.alibaba.fastjson.JSONObject;
 public class HttpUtils {
 
 	public static String httpPost(String url, Map<String, Object> params)
 			throws Exception {
 		return httpPost(url, params, 30 * 1000, 30 * 1000, "UTF-8");
+	}
+	public static String httpPost(String url, String json)
+			throws Exception {
+		return httpPost(url, json, 30 * 1000, 30 * 1000, "UTF-8");
 	}
 
 	public static String httpPost(String url, Map<String, String> params,
@@ -68,6 +72,17 @@ public class HttpUtils {
 		return sendHttpPost(httpPost, encoding);
 	}
 
+	public static String httpPost(String url, String json,
+			int timeoutMillseconds, int requestTimeoutMillseconds,
+			String encoding) throws Exception {
+		HttpPost httpPost = new HttpPost(url);
+		RequestConfig.Builder builder = getRequestConfigBuider(
+				timeoutMillseconds, requestTimeoutMillseconds);
+		httpPost.setConfig(builder.build());
+		httpPost.setEntity(new StringEntity(json, encoding));
+		return sendHttpPost(httpPost, encoding);
+	}
+
 
 	public static String httpPost(String httpUrl, Map<String, String> params,
 			List<File> fileLists, int timeoutMillseconds,
@@ -82,9 +97,11 @@ public class HttpUtils {
 			meBuilder.addPart(key, new StringBody(params.get(key),
 					ContentType.TEXT_PLAIN));
 		}
-		for (File file : fileLists) {
-			FileBody fileBody = new FileBody(file);
-			meBuilder.addPart("files", fileBody);
+		if(null != fileLists) {
+			for (File file : fileLists) {
+				FileBody fileBody = new FileBody(file);
+				meBuilder.addPart("files", fileBody);
+			}
 		}
 		HttpEntity reqEntity = meBuilder.build();
 		httpPost.setEntity(reqEntity);
@@ -104,20 +121,31 @@ public class HttpUtils {
 	}
 
 	public static String httpsGet(String url, int timeoutMillseconds,
-			int requestTimeoutMillseconds, String encoding)
+			int requestTimeoutMillseconds, String encoding,Map<String,String> header)
 			throws URISyntaxException, MalformedURLException, IOException {
 		RequestConfig.Builder builder = getRequestConfigBuider(
 				timeoutMillseconds, requestTimeoutMillseconds);
 		HttpGet httpGet = new HttpGet();
 		httpGet.setConfig(builder.build());
 		httpGet.setURI(new URI(url));
+		if(header!=null){
+			for (Map.Entry<String, String> entry : header.entrySet()) {
+				httpGet.addHeader(entry.getKey(),entry.getValue());
+			}
+		}
+
 
 		return sendHttpsGet(httpGet, encoding);
 	}
 
 	public static String httpsGet(String url) throws URISyntaxException,
 			MalformedURLException, IOException {
-		return httpsGet(url, 30 * 1000, 30 * 1000, "UTF-8");
+		return httpsGet(url, 30 * 1000, 30 * 1000, "UTF-8",null);
+	}
+
+	public static String httpsGet(String url,Map<String,String> header) throws URISyntaxException,
+			MalformedURLException, IOException {
+		return httpsGet(url, 30 * 1000, 30 * 1000, "UTF-8",header);
 	}
 
 	public static String httpGet(String url) throws URISyntaxException,
@@ -259,9 +287,40 @@ public class HttpUtils {
         }
         return result;
     }
-
+	/**
+	 * post请求
+	 * @param url
+	 * @param json
+	 * @return
+	 */
+	public static int getwxacodeunlimit(String url, JSONObject json, OutputStream out){
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpPost post = new HttpPost(url);
+		JSONObject response = null;
+		try {
+			StringEntity s = new StringEntity(json.toString());
+			s.setContentEncoding("UTF-8");
+			s.setContentType("application/json");//发送json数据需要设置contentType
+			post.setEntity(s);
+			HttpResponse res = client.execute(post);
+			if(res.getStatusLine().getStatusCode() == HttpStatus.SC_OK){
+				HttpEntity entity = res.getEntity();
+				res.getEntity().writeTo(out);
+			}
+			return res.getStatusLine().getStatusCode();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 	public static void main(String args[]) throws URISyntaxException,
 			MalformedURLException, IOException {
-        System.out.println(HttpUtils.sslPost("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx29ecb720b03ea466&secret=03ea9a47442c14208943043e62114fc6&code=0012s83S0BIVL92VMV1S0lg63S02s83a&grant_type=authorization_code", null, "utf-8"));
+		JSONObject p=new JSONObject();
+		p.put("scene","2e968824893a4ec19a00b62bfede0b14");
+		p.put("page","page/home/index");
+		String url="https://api.weixin.qq.com/wxa/getwxacodeunlimit?access_token=15_dWpYoxmg9miI0ZhgxGyWHZnL2WzRbY37TPHaww_Qsn93o6kmgBLYf2bXIlxLrtam5RxzwBwHB7h0qx7NeS6YnpvGHFhLLHqpUtsJC3aqr3zvdrF62hyaKaduKw4DIJhADAINO";
+		File img=new File("/Users/chenxiaoke/Documents/"+GUIDUtil.getGUID()+".jpg");
+		OutputStream out=new FileOutputStream(img);
+
+		HttpUtils.getwxacodeunlimit(url,p,out);
     }
 }

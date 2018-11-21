@@ -8,10 +8,7 @@ cfg.pager_selector= "#grid-pager";
 //cfg.caption= "部门";
 cfg.rowNum= default_page_list[0];
 cfg.dataId= 'departmentId';
-cfg.gridHeight=window.innerHeight-layoutTopHeight;
+cfg.gridHeight='auto';
 cfg.jgridEditWinWidth=800;
 cfg.jgridAlertWidth=400;
 cfg.jgrdInfoDialogWidth=500;
-if(cfg.gridHeight<100){
-	cfg.gridHeight=window.innerHeight-layoutTopHeight;
-}

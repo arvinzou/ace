@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/testindex.css"/>
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+    <script src="js/reminit.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/swiper.min.js"></script>
+    <script type="text/javascript" src="js/juicer-min.js"></script>
+
+    <title>心理评测</title>
+</head>
+
+<body>
+<div class="content">
+    <div class="search">
+        <div class="container">
+            <div id="activeSearch" class="search_box">
+                输入标题进行搜索
+            </div>
+            <div class="notice">
+                <i class="iconfont">&#xe702;</i>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="container">
+            <div class="swiper-container swiper-container_panel">
+                <div class="swiper-wrapper">
+
+                </div>
+                <div class="swiper-pagination swiper-container_panel"></div>
+            </div>
+        </div>
+    </div>
+    <!--<div class="menu">-->
+        <!--<div class="container">-->
+            <!--<div class="swiper-container swiper-container_menu">-->
+                <!--<div class="swiper-wrapper">-->
+
+                <!--</div>-->
+                <!--<div class="swiper-pagination swiper-container_menu"></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="recommen">
+        <div class="title">
+            <span>
+                精选测试
+            </span>
+            <span class="allList">
+                全部
+            </span>
+        </div>
+        <div class="test_list">
+            <ul id="testLists">
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="search_list">
+
+    <div class="search">
+        <div class="container">
+            <div class="search_box">
+                <input type="search" name="" id="search_input" value="输入标题进行搜索"
+                       onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+                       onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+                       style="color:rgba(196,200,214,1);"/>
+            </div>
+            <div class="notice">
+                <i class="iconfont">&#xe67c;</i>
+            </div>
+        </div>
+    </div>
+
+    <div class="test_list search_test_list">
+        <ul id="testListss">
+        </ul>
+    </div>
+</div>
+</body>
+
+<script id="temp_testLists" type="text/template">
+    {@each data as item}
+    <li data-id="${item.id}">
+        <div class="left_div">
+            <p class="test_title">
+                ${item.name}
+            </p>
+            <p class="test_remark">${item.summary}</p>
+
+            <span class="price">
+                           {@if item.discountCost==0}
+                            <span class="free">免费</span>
+                            {@else}
+                            <span class="no_free">
+                                <span class="now_price">￥${item.discountCost}</span>
+                                <span class="old_price">￥${item.originalCost}</span>
+                            </span>
+                            {@/if}
+									</span>
+            <span class="test_total">
+										<span class="number">${item.testedTotal}</span>人测过
+									</span>
+        </div>
+        <div class="right_div">
+            <img src="${item.cover}" alt="">
+        </div>
+    </li>
+    {@/each}
+</script>
+
+
+<script src="js/testIndex.js" type="text/javascript"></script>
+
+</html>

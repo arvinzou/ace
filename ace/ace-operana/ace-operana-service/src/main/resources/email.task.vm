@@ -1,40 +1,11 @@
 <html>
 <body>
-<h1>电装运行会议任务处理进度报告</h1>
+各位：请查收电装会议纪要进度跟踪报告 </br>
+确认明细，请访问：<a href='http://10.10.90.135/portal/dynamic/portal/index-1.jsp'>http://10.10.90.135/portal/dynamic/portal/index-1.jsp</a> </br>
 $!{o.tasklist}
-<div style="font-size:16px;font-weight:800">
-    抄送：$!{o.userlist}
-</div>
 <div style="font-size:16px">
-    <h3>$!{o.sysDate}</h3>
+   $!{o.sysDate}
 </div>
-<style type="text/css">
-table.hovertable {
-	font-family: verdana,arial,sans-serif;
-	font-size:14px;
-	color:#333333;
-	border-width: 1px;
-	border-color: #6699FF;
-	border-collapse: collapse;
-}
-table.hovertable th {
-	background-color:#6699FF;
-	border-width: 1px;
-	padding: 4px;
-	border-style: solid;
-	border-color: #6699FF;
-	color:#fff
-}
-table.hovertable tr {
-	background-color:#fff;
-}
-table.hovertable td {
-	border-width: 1px;
-	padding: 4px;
-	border-style: solid;
-	border-color: #6699FF;
-}
-</style>
 
 </body>
 </html>

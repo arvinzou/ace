@@ -1,0 +1,47 @@
+<form bindsubmit="formSubmit">
+<view class='index'>
+    <view class='container'>
+        <view class='commodity-cover'>
+            <image lazy-load="true" src='{{ siteInfo.commodityCover }}'></image>
+        </view>
+    </view>
+    <view class='container'>
+        <view class='date-box'>
+            <view class='title'>场地开放时间</view>
+            <view class='container-fluid'>
+                <view class='days'>
+                    <block wx:for='{{ dateArray }}'>
+                        <view class='days-item'>{{ item.week_chise }}</view>
+                    </block>
+                </view>
+                <view class='date'>
+                    <block wx:for='{{ dateArray }}'>
+                        <view class='date-item'>
+                            <view class='{{index == id?"date-active": ""}}' data-id='{{index}}' bindtap='chooseDate'>{{ item.day}}</view>
+                        </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <block wx:for='{{ dateArray }}'>
+    <view class='container {{siteDate.date == item.date?"": "hidden"}}'>
+        <view class='time-box'>
+            <view class='time-span time-span-title'>上午</view>
+            <view class='time-span time-span-title'>下午</view>
+        </view>
+        <view class='time-box'>
+            <view class='time-span'>
+                <view class='slot {{timeIndex == 0 ? "time-active": ""}} {{item.occupyUp =="9:00-11:00"||siteDate.time>9?"occupy":""}}' bindtap='timeSelect' data-value='0'>9:00-11:00</view>
+            </view>
+            <view class='time-span'>
+                <view class='slot {{timeIndex == 1? "time-active": ""}} {{item.occupyDown =="15:00-17:00"||siteDate.time>15?"occupy":"" }}'  data-value='1' bindtap='timeSelect'>15:00-17:00</view></view>
+        </view>
+    </view>
+    </block>
+</view>
+<view class='footer'>
+    <button class='confirm' formType="submit">确定</button>
+</view>
+</form>

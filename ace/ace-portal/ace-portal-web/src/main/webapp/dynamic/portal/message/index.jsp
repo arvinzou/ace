@@ -92,7 +92,7 @@
 
 		<table id="grid-table"></table>
 
-		<div id="grid-pager"></div>
+		<div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
 
 
 	</div>
@@ -117,7 +117,7 @@
 					$(".page-content").width());
 			$(cfg.grid_selector).jqGrid('setGridHeight',
 					window.innerHeight-layoutTopHeight);
-			parent.autoWidth();
+			//parent.autoWidth();
 		}
 	</script>
 </body>

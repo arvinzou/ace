@@ -33,6 +33,9 @@ public class AnalysisController extends PortalBaseController {
 		if (CommonUtils.isBlank(condition.get("areaCode"))) {
 			condition.put("areaCode",this.getCurUserProp().getAreaCode());
 		}
+		if (CommonUtils.isBlank(condition.get("userId"))) {
+			condition.put("userId",this.getCurUserProp().getUserId());
+		}
 		return analysisPortalService.query(condition, reportId,0,0);
 	}	
 }

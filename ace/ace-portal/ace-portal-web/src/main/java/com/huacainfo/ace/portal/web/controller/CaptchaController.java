@@ -1,11 +1,12 @@
 package com.huacainfo.ace.portal.web.controller;
-
+import com.huacainfo.ace.common.tools.CommonUtils;
+import org.springframework.data.redis.core.RedisOperations;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,9 @@ public class CaptchaController extends PortalBaseController {
 	 */
 	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private RedisOperations<String, Object> redisTemplate;
 
 	/**
 	 * 
@@ -47,7 +51,7 @@ public class CaptchaController extends PortalBaseController {
 		response.setDateHeader("Expires", 0);
 
 		// 定义显示图片的宽度和高度
-		int width=70, height=22;
+		int width=130, height=53;
 		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
 		// 画图画板
@@ -62,7 +66,7 @@ public class CaptchaController extends PortalBaseController {
 		g.fillRect(0, 0, width, height);
 
 		//设置字体
-		g.setFont(new Font("Times New Roman",Font.PLAIN,18));
+		g.setFont(new Font("Times New Roman",Font.PLAIN,43));
 
 		// 设置线条颜色并画线，155条
 		g.setColor(getRandColor(160,200));
@@ -83,11 +87,17 @@ public class CaptchaController extends PortalBaseController {
 		    // 设置每个数字的颜色
 		    g.setColor(new Color(20+random.nextInt(110),20+random.nextInt(110),20+random.nextInt(110)));
 		//在画板上写数字，起始位置
-		    g.drawString(rand,13*i+6,16);
+			g.drawString(rand,20*i+30,40);
 		}
 		// 保存进session
 		this.getRequest().getSession().setAttribute("j_captcha",sRand);
 		logger.debug("j_captcha:{}",this.getRequest().getSession().getAttribute("j_captcha"));
+
+		String id = request.getParameter("id");
+		if(CommonUtils.isNotEmpty(id)) {
+			this.getRequest().getSession().setAttribute("j_captcha_weui",sRand);
+			redisTemplate.opsForValue().set(id + "j_captcha_weui", sRand);
+		}
 		// 显示图片
 		g.dispose();
 		//转换成一张图片，格式为JPEG

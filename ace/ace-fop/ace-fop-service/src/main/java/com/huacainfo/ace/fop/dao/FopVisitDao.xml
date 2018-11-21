@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopVisitDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopVisit">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.fop.vo.FopVisitVo">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, companyId, title, visitDate, remark, status, createUserId, createUserName, createDate, 
+    lastModifyUserId, lastModifyUserName, lastModifyDate
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from fop_visit
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from fop_visit
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopVisit">
+    insert into fop_visit (id, companyId, title, 
+      visitDate, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{visitDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopVisit">
+    update fop_visit
+    set
+      title = #{title,jdbcType=VARCHAR},
+      visitDate = #{visitDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="findList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select
+    <include refid="Base_Column_List"/>
+    <include refid="whereCondition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <sql id="whereCondition">
+    from fop_visit t
+    where 1=1
+    <if test="condition.title !=null">
+      and (t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%') or  t.companyId like concat('%',#{condition.title,jdbcType=VARCHAR},'%'))
+    </if>
+    <if test='condition.startDate!=null'>
+      <![CDATA[
+			and visitDate>=str_to_date(#{condition.startDate},'%Y-%m-%d %H:%i:%S')
+			]]>
+    </if>
+    <if test='condition.endDate!=null'>
+      <![CDATA[
+			and visitDate<=str_to_date(#{condition.endDate},'%Y-%m-%d %H:%i:%S')
+	  ]]>
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition"/>
+  </select>
+  <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopVisit">
+    select count(1)
+    from fop_visit
+    where title = #{title,jdbcType=VARCHAR}
+  </select>
+</mapper>

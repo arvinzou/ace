@@ -1,0 +1,75 @@
+<view class='index'>
+    <view class='content'>
+        <view class='idea-title'><text>{{ detail.title }}</text></view>
+        <view class='idea-info'>
+            <block wx:if='{{detail.avatarUrl!="" && detail.avatarUrl!=null && detail.avatarUrl!=undefined}}'>
+                <image src='{{detail.avatarUrl}}' class='head'></image>
+            </block>
+            <block wx:else>
+                <image src='../../image/default_header.png' class='head'></image>
+            </block>
+            <text class='fontstyle' style='padding-left:20rpx;'>{{detail.nickname}}</text>
+            <text class='datetime'>{{detail.createDate}}</text>
+            <block wx:if='{{detail.listSubjectIdeaAnnexVo.length > 0}}'>
+                <text class='download' style='padding-left：12rpx' bindtap='downloadFile' data-value='{{detail.listSubjectIdeaAnnexVo}}'>下载附件</text>
+                <image class='download-file' src='../../image/attach.png'></image>
+            </block>
+        </view>
+        <view class='idea-content'>
+            {{ detail.solution }}
+        </view>   
+    </view>
+    <view class='comment'>
+    <block wx:for='{{commentList}}' wx:key='*'>
+        <view class='comment-item'>
+            <view class='comment-item-left'>
+                <block wx:if='{{item.avatarUrl!="" && item.avatarUrl!=null && item.avatarUrl!=undefined}}'>
+                    <image class='head-image' src='{{item.avatarUrl}}'></image>
+                </block>
+                <block wx:else>
+                    <image class='head-image' src='../../image/default_header.png'></image>
+                </block>
+            </view>
+            <view class='comment-item-right'>
+                <view class='nickname'><text>{{item.nickName}}</text></view>
+                <view class='comment-time'><text>{{item.createDate}}</text></view>
+                <view class='comment-content'><text>{{item.content}}</text></view>
+            </view>
+        </view>
+    </block>
+    </view>
+
+    <view class='commentBox whiteBg top-line'>
+        <view bindtap='actionComment' class='input'>一起参与讨论</view>
+        <text class='iconfont {{like?"liked":""}} icon-dianzan pop' bindtap='actionLike'> <text>{{likeNum}}</text> </text>
+        <text class='iconfont icon-pinglun pop'> <text>{{CTotal}}</text></text>
+    </view>
+    <view class="commentModel" wx:if='{{actionComment}}'>
+        <view class='inner-model' catchtap='hiddenComment'></view>
+        <view class='box whiteBg'>
+            <form bindsubmit="formSubmit" bindreset="formReset">
+                <textarea bindinput='getValue' name='content' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar=''></textarea>
+                <button class='submit' formType="submit">发送</button>
+            </form>
+        </view>
+    </view>
+</view>
+
+<!--评论弹框
+ <view class="model" wx:if='{{actionComment}}'>
+    <view class='inner-model' catchtap='hiddenComment'></view>
+    <view class='box whiteBg'>
+      <form bindsubmit="formSubmit" bindreset="formReset">
+        <textarea bindinput='getValue' focus="true" auto-focus='true' cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar='' name="commentVal"></textarea>
+        <button class='submit' formType="submit">发送</button>
+      </form>
+    </view>
+  </view>
+
+
+      <!--评论点赞
+    <view class='cmt-bar'>
+          <image src='../../image/zan.png' class='cmt-addlike' bindtap='addlike' data-id="{{detail.id}}"></image>
+          <text style='padding-right:5rpx;padding-left:5rpx;font-size:25rpx;float:left;line-height:50rpx;color:red'>{{allLike}}</text>
+          <image src='../../image/comment.png' class='cmt-addcmt' bindtap='addcmt' data-id="{{detail.id}}"></image>
+    </view>-->

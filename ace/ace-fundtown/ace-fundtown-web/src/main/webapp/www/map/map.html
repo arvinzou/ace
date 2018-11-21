@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+    <link rel="stylesheet" href="css/map.css"/>
+    <link rel="stylesheet" href="../css/swiper.min.css"/>
+    <script src="../js/index.min.js"></script>
+    <script src='js/data.js'></script>
+    <script src='../js/jquery.min.js'></script>
+    <script src="../js/jweixin-1.2.0.js"></script>
+    <script src="../js/init-wx.js"></script>
+    <script src='../js/echarts.min.js'></script>
+    <script src='../js/bmap.min.js'></script>
+    <title>小镇配套</title>
+</head>
+
+<body>
+
+<div id='main'>
+
+</div>
+<div class="company_info">
+    <div class="info">
+        <div class="text">
+            <p class="name"></p>
+            <p class="address"></p>
+        </div>
+        <div class="navigation">
+            <i class="iconfont btn_navigation">&#xe9b6;</i>
+        </div>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../js/swiper.min.js"></script>
+<script src="https://api.map.baidu.com/api?v=2.0&ak=YZjRB8FYnf7SdG7BfOGQQIGseKlMmTgF"></script>
+<script type="text/javascript" src="js/map.js"></script>
+<script>
+    swiper = new Swiper('.swiper-container', {
+        spaceBetween: 15,
+        resistanceRatio: 1,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+</script>
+
+</html>

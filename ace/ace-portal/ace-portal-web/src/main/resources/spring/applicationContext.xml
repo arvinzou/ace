@@ -22,13 +22,36 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="config"
+		  class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8"></property>
+	</bean>
+	<bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<array>
+				<value>classpath:cmcc.properties</value>
+			</array>
+		</property>
+	</bean>
 	<import resource="classpath:spring/spring-ace-common-fastdfs.xml" />
 	<import resource="classpath:spring/spring-ace-common-monitor.xml" />
 	<import resource="classpath:spring/spring-ace-common-kafka.xml" />
 	<import resource="classpath:spring/spring-ace-common-redis.xml" />
 	<import resource="classpath:spring/spring-ace-common-web.xml" />
-	<import resource="classpath:spring/spring-ace-common-dao.xml" />
-	 <!--<import resource="classpath:spring/spring-ace-portal-service.xml" />-->
+	<import resource="classpath:spring/spring-ace-common-dao.xml"/>
 
+	<import resource="classpath:spring/spring-ace-portal-service.xml"/>
+	<!--
 	<import resource="classpath:dubbo/dubbo-ace-portal-consumer.xml" />
+	-->
+	<bean id="loginFailureListener" class="com.huacainfo.ace.portal.web.listener.LoginFailureListener"/>
+
+
+
+
 </beans>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="js/index.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <title>下载</title>
+    <style>
+        .button {
+            height: 1.2266rem;
+            border-radius: 0.6133rem;
+            background: rgba(50, 131, 249, 0.86);
+            border: none;
+            font-size: 0.506666rem;
+            margin: 3rem auto 0;
+            width: 3.5rem;
+        }
+
+        .button a {
+            color: rgba(256, 256, 256, 1);
+            text-decoration: none;
+            line-height: 1.2266rem;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        p {
+            text-align: center;
+            margin: 0.5rem;
+            font-size: 0.3rem;
+        }
+    </style>
+</head>
+<body>
+<div class="button"></div>
+<p>如果点击后文件没有开始下载。请点击屏幕右上角，用浏览器打开。</p>
+</body>
+<script>
+    $(function () {
+        function parseQueryString(url) {
+            var obj = {};
+            var start = url.indexOf("?") + 1;
+            var str = url.substr(start);
+            var arr = str.split("&");
+            for (var i = 0; i < arr.length; i++) {
+                var arr2 = arr[i].split("=");
+                obj[arr2[0]] = arr2[1];
+            }
+            return obj;
+        }
+
+        var ulr = window.location.href;//'http://zx.huacainfo.com/fundtown/www/download.html?id=b95afac02ed749589b4595a3388a8afc'//
+        var obj = parseQueryString(ulr);
+        $('.button').append($('<a class="file_p" href="/fundtown/www/download/file?id=' + obj.id + '">下载文件</a>'));
+    })
+    //    window.location.href = "http://zx.huacainfo.com/group1/M00/00/30/i-AA41tETbuALdd5AAGEABN52a4982.doc?filename=公司登记（备案）申请书.doc";
+</script>
+</html>

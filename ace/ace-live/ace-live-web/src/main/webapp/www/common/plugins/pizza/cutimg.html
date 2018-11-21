@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<script type="text/template" id="pzCutimg">
+    <div class="pz-boxhead">
+        <em class="icon pz-icon icon-cut"></em>
+        <span class="title">图片截取</span>
+        <span class="close j-overlay-close">
+    <em class="pz-icon icon-close"></em>
+  </span>
+    </div>
+    <div class="pz-boxbody">
+        <div class="pz-form">
+            <div class="wrap fn-pd10 fn-fs16">
+                <div class="pz-boxbody">
+                    <canvas class="j-cutimg-mask" width="${width + padding * 2}" height="${height + padding * 2}"
+                            style="position:absolute;z-index:1;width:${(width + padding * 2) * scale}px;height:${(height + padding * 2) * scale}px;cursor:default;"></canvas>
+                    <div class="j-cutimg-show"
+                         style="position:relative;overflow:hidden;width:${(width + padding * 2) * scale}px;height:${(height + padding * 2) * scale}px;"></div>
+                </div>
+                <div class="j-cutimg-range fn-mt10 fn-hide"><input type="range" value="0" min="0" max="1" step="0.01"
+                                                                   style="width:100%;"></div>
+            </div>
+            <div class="actions fn-pd10 fn-clear">
+                <label class="fn-left"><input type="checkbox" class="j-cutimg-original" value="yes"> 上传原图</label>
+                <div class="fn-right"><input type="button" class="pz-btn btn-success j-cutimg-true" value="确定"></div>
+            </div>
+        </div>
+    </div>
+</script>
+<script src="/live/content/www/lib/jquery-1.11.0-min.js"></script>
+<script type="text/javascript">
+
+</script>
+<script src="/live/content/www/lib/pizza/tpl.js"></script>
+</body>
+</html>

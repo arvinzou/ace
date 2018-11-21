@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.cu.dao.report.Portal">
+    <select id="query" resultType="map">
+        SELECT
+        'users' id,
+        count(1) 'value'
+        FROM
+        portal.userinfo
+        UNION ALL
+        SELECT
+        'project' id,
+        count(1) 'value'
+        FROM
+        cu_project
+        WHERE
+        started = '1'
+        AND `status` = '2'
+        UNION ALL
+        SELECT
+        'count' id,
+        count(1) 'value'
+        FROM
+        cu_donate_order
+        WHERE
+        `status` = '2'
+        UNION ALL
+        SELECT
+        'money' id,
+        sum(donateAmount) 'value'
+        FROM
+        cu_donate_order
+        WHERE
+        `status` = '2'
+  </select>
+
+</mapper>

@@ -8,10 +8,7 @@ cfg.pager_selector= "#grid-pager";
 cfg.caption= "";
 cfg.rowNum= 10;
 cfg.dataId= 'queueId';
-cfg.gridHeight=window.innerHeight - layoutTopHeight;
+cfg.gridHeight='auto';
 cfg.jgridEditWinWidth=550;
 cfg.jgridAlertWidth=400;
 cfg.jgrdInfoDialogWidth=500;
-if(cfg.gridHeight<100){
-	cfg.gridHeight=250;
-}

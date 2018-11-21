@@ -33,11 +33,7 @@ jQuery(function($) {
 							recreateForm : true,
 							viewPagerButtons : false,
 							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
+
 							}
 						})
 				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
@@ -49,189 +45,17 @@ jQuery(function($) {
 				}
 				appendMapBtn("regAddr");
 			});
-	$('#btn-view-edit').on(
-			'click',
-			function() {
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext)
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'editGridRow',
-						gr,
-						{
-							closeAfterAdd : true,
-							recreateForm : true,
-							viewPagerButtons : true,
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
-							}
-						})
-						appendMapBtn("regAddr");
-			});
-	
-	$('#btn-view-del').on(
-			'click',
-			function() {
-				
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext);
-					return;
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'delGridRow',
-						gr,
-						{
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
-							}
-						})
-			});
-	
-	
-	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-		_title: function(title) {
-			var $title = this.options.title || '&nbsp;'
-			if( ("title_html" in this.options) && this.options.title_html == true )
-				title.html($title);
-			else title.text($title);
-		}
-	}));
+
 	
 	$('#tt').tree({
 		onClick: function(node){
 			autotreeq(node);
 		}
 	});
-	$( "#btn-view-da" ).on('click', function(e) {
-		e.preventDefault();
-		var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-		'selrow');
-		if (!gr) {
-			$.jgrid.info_dialog($.jgrid.nav.alertcap,
-					$.jgrid.nav.alerttext);
-			return;
-		}
-		var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
-		var departmentId=r.departmentId;
-		var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
-			modal: true,
-			width:610,
-			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i>机构人员</h4></div>",
-			title_html: true,
-			buttons: [ 
-				
-				{
-					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-					"class" : "btn btn-info btn-xs",
-					id:'btn-view-submit',
-					click: function() {
-						$( this ).dialog( "close" ); 
-						//batchUpdateUserAndTeacherByUserIds(departmentId);
-						
-					} 
-				},
-				{
-					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-					"class" : "btn btn-xs",
-					click: function() {
-						$( this ).dialog( "close" ); 
-					} 
-				}
-			]
-		});
-		selectUsersListByDepartmentId(departmentId);
-		
-	});
-	
-	$( "#btn-view-ins" ).on('click', function(e) {
-		e.preventDefault();
-		var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-		'selrow');
-		if (!gr) {
-			$.jgrid.info_dialog($.jgrid.nav.alertcap,
-					$.jgrid.nav.alerttext);
-			return;
-		}
-		var r=jQuery(cfg.grid_selector).jqGrid('getRowData',gr);
-		var departmentId=r.departmentId;
-		if(confirm("确定要申请入会吗？")){
-			insertMemberInfo(departmentId);
-		}
-	});
-		$( "#btn-view-import" ).on('click', function(e) {
-    		e.preventDefault();
-    		reset_uploader();
-    		var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
-    			modal: true,
-    			width:750,
-    			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> 导入</h4></div>",
-    			title_html: true,
-    			buttons: [
-
-    				/*{
-    					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 重置",
-    					"class" : "btn btn-info btn-xs",
-    					id:'ajax_button',
-    					click: function() {
-    						reset_uploader();
-
-    					}
-    				},*/
-    				{
-    					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
-    					"class" : "btn btn-xs",
-    					click: function() {
-    						$( this ).dialog( "close" );
-    					}
-    				}
-    			]
-    		});
-
-    	});
 });
 
-function selectUsersListByDepartmentId(departmentId){
-	$.ajax({
-		type : "post",
-		url : contextPath + "/department/selectUsersListByDepartmentId.do",
-		data:{departmentId:departmentId},
-		beforeSend : function(XMLHttpRequest) {
-		},
-		success : function(rst, textStatus) {
-			var html=new Array();
-			$.each($(rst.value),function(i,o){
-				html.push('<div class="layout-user" >');
-				html.push('<user id="'+o.user_id+'" class="badge badge-'+cssColor9[0]+'">');
-				html.push(o.name);
-				html.push('</user>');
-				html.push('</div>');
-			});
-			$('#task-content-tmp').html(html.join(''));
-			//alert(html.join(''));
-		},
-		complete : function(XMLHttpRequest, textStatus) {
-		},
-		error : function() {
-		}
-	});
-}
+
 function autotreeq(node){
-	//$('#fm-search').find(":input[name='departmentId']").val(node.id);
-	//console.log(params);
 	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
 		page : 1,
 		postData : {departmentId:node.id,parentDepartmentId:''}
@@ -260,11 +84,7 @@ function treeappend(){
 				recreateForm : true,
 				viewPagerButtons : false,
 				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find(
-							'.ui-jqdialog-titlebar').wrapInner(
-							'<div class="widget-header" />')
-					style_edit_form(form);
+
 				}
 			})
 	$('#parentDepartmentId').val(node.id);
@@ -292,11 +112,7 @@ function treeedit(){
 				recreateForm : true,
 				viewPagerButtons : true,
 				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find(
-							'.ui-jqdialog-titlebar').wrapInner(
-							'<div class="widget-header" />')
-					style_edit_form(form);
+
 				}
 			})
 }
@@ -321,31 +137,10 @@ function treeremove(){
 				recreateForm : true,
 				viewPagerButtons : true,
 				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find(
-							'.ui-jqdialog-titlebar').wrapInner(
-							'<div class="widget-header" />')
-					style_edit_form(form);
+
 				}
 			})
 }
-/*
-function append(){
-    var t = $('#tt');
-    var node = t.tree('getSelected');
-    t.tree('append', {
-        parent: (node?node.target:null),
-        data: [{
-            text: 'new item1'
-        },{
-            text: 'new item2'
-        }]
-    });
-}
-function removeit(){
-    var node = $('#tt').tree('getSelected');
-    $('#tt').tree('remove', node.target);
-}*/
 function collapse(){
     var node = $('#tt').tree('getSelected');
     $('#tt').tree('collapse',node.target);
@@ -372,58 +167,55 @@ function clearAreaCode(){
 		postData : {areaCode:'',parentDepartmentId:'',departmentId:''}
 	}).trigger("reloadGrid");
 }
-function insertMemberInfo(departmentId){
-	var params={memberCode:departmentId};
-	$.ajax({
-		type : "post",
-		url : "/kernel/memberInfo/insertMemberInfo.do",
-		data:{jsons : JSON.stringify(params)},
-		beforeSend : function(XMLHttpRequest) {
-		},
-		success : function(rst, textStatus) {
-			if (rst) {
-				bootbox.dialog({
-					title:'系统提示',
-					message:rst.errorMessage,
-					detail:rst.detail,
-					buttons: 			
-					{
-						"success" :
-						 {
-							"label" : "<i class='ace-icon fa fa-check'></i>确定",
-							"className" : "btn-sm btn-success",
-							"callback": function() {
-								
+
+
+
+
+
+function edit(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+						'editGridRow',
+						rowid,
+						{
+							closeAfterAdd : true,
+							recreateForm : true,
+							viewPagerButtons : true,
+							beforeShowForm : function(e) {
+								var form = $(e[0]);
+								form.closest('.ui-jqdialog').find(
+										'.ui-jqdialog-titlebar').wrapInner(
+										'<div class="widget-header" />')
+
 							}
-						}
-					}
-				});
-		
-			}
-		},
-		complete : function(XMLHttpRequest, textStatus) {
-		},
-		error : function() {
-		}
+						});
+}
+var show=false;
+function del(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+    						'delGridRow',
+    						rowid,
+    						{
+    							beforeShowForm : function(e) {
+    								var form = $(e[0]);
+    								if(!show){
+    								    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+    								}
+
+    								show=true;
+
+    							}
+    						});
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");
+}
+
+jQuery(function($) {
+	jQuery('.layout-button-left').on( 'click', function(e) {
+            setTimeout("resizeJqGrid()",500);
 	});
-}
-function appendMapBtn(id) {
-	var html = new Array();
-	html
-			.push("<a id='btn-map-add-"
-					+ id
-					+ "' class='ace-icon fa fa-location-arrow bigger-110' href='javascript:false'>选取</a>");
-	$("#" + id).after(html.join(''));
-	$('#btn-map-add-'+id).on('click', function() {
-            window.open("map.jsp");
-    	});
-}
-function latitude(latitude){
-    $("#latitude").val(latitude);
-}
-function longitude(longitude){
-    $("#longitude").val(longitude);
-}
-function addr(addr){
-    $("#regAddr").val(addr);
-}
+});

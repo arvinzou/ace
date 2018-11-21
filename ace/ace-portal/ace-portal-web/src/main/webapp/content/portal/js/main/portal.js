@@ -1,22 +1,5 @@
 
-$.ajax({
-	url : contextPath + '/system/getTreeList.do?loadButton=false&icon=ace',
-	type : 'POST',
-	timeout : 30000,
-	dataType : 'json',
-	success : function(data) {
-		buildMenu(data);
-		//initWorkflowList();
-		if(activeSyId=='sys'){
-		    addPanel('首页', '/portal/dynamic/portal/main.jsp', false);
-		}else{
-		    addPanel('首页', '/' + activeSyId + '/index.jsp', false);
-		}
 
-		console.log(userProp.roleType);
-		initSysPan();
-	}
-});
 function addPanel(title, src, closable) {
 	var screenHeight = window.innerHeight - 76;
 	if (portalType == '2') {
@@ -58,6 +41,28 @@ function reloadGrid() {
 	win.reloadGrid();
 }
 jQuery(function($) {
+
+
+$.ajax({
+	url : contextPath + '/system/getTreeList.do?loadButton=false&icon=ace',
+	type : 'POST',
+	timeout : 30000,
+	dataType : 'json',
+	success : function(data) {
+
+		buildMenu(data);
+
+		//initWorkflowList();
+		if(activeSyId=='sys'){
+		    addPanel('首页', '/portal/dynamic/portal/main.jsp', false);
+		}else{
+		    addPanel('首页', '/' + activeSyId + '/index.jsp', false);
+		}
+
+		console.log(userProp.roleType);
+		initSysPan();
+	}
+});
 
 });
 

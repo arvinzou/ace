@@ -189,7 +189,7 @@ jQuery(function ($) {
             page: "page",
             total: "totalPages",
             records: "total",
-            id: 'deviceId',
+            id: 'id',
         },
         postData: {
             deviceStatus: 1,
@@ -243,7 +243,7 @@ jQuery(function ($) {
             page: "page",
             total: "totalPages",
             records: "total",
-            id: 'deviceId'
+            id: 'id'
         },
         multiselect: true,
         // multikey: "ctrlKey",

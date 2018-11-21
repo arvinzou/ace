@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopAssociationDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopAssociation">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="fullName" jdbcType="VARCHAR" property="fullName"/>
+        <result column="shortName" jdbcType="VARCHAR" property="shortName"/>
+        <result column="abcCode" jdbcType="VARCHAR" property="abcCode"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="phoneNumber" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="establishDate" jdbcType="TIMESTAMP" property="establishDate"/>
+        <result column="pseronId" jdbcType="VARCHAR" property="pseronId"/>
+        <result column="directorNum" jdbcType="INTEGER" property="directorNum"/>
+        <result column="viceNum" jdbcType="INTEGER" property="viceNum"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="departmentId" jdbcType="VARCHAR" property="departmentId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, fullName, shortName, abcCode, address, phoneNumber, establishDate, pseronId,
+        directorNum, viceNum, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, latitude ,longitude, departmentId, areaCode, belongTo
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_association
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByDepartmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_association
+        where departmentId = #{departmentId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from fop_association
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        insert into fop_association (id, fullName, shortName,
+        abcCode, address, phoneNumber,
+        establishDate, pseronId, directorNum,
+        viceNum, remark, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate,
+        latitude ,longitude, departmentId, areaCode, belongTo
+        )
+        values (#{id,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+        #{abcCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR},
+        #{establishDate,jdbcType=TIMESTAMP}, #{pseronId,jdbcType=VARCHAR}, #{directorNum,jdbcType=INTEGER},
+        #{viceNum,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{departmentId,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR}, #{belongTo,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        insert into fop_association
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="fullName != null">
+                fullName,
+            </if>
+            <if test="shortName != null">
+                shortName,
+            </if>
+            <if test="abcCode != null">
+                abcCode,
+            </if>
+            <if test="areaCode != null">
+                areaCode,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="phoneNumber != null">
+                phoneNumber,
+            </if>
+            <if test="establishDate != null">
+                establishDate,
+            </if>
+            <if test="pseronId != null">
+                pseronId,
+            </if>
+            <if test="directorNum != null">
+                directorNum,
+            </if>
+            <if test="viceNum != null">
+                viceNum,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="departmentId != null">
+                departmentId,
+            </if>
+            <if test="belongTo != null">
+                belongTo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="fullName != null">
+                #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="abcCode != null">
+                #{abcCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="establishDate != null">
+                #{establishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pseronId != null">
+                #{pseronId,jdbcType=VARCHAR},
+            </if>
+            <if test="directorNum != null">
+                #{directorNum,jdbcType=INTEGER},
+            </if>
+            <if test="viceNum != null">
+                #{viceNum,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="latitude != null">
+                #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="longitude != null">
+                #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="departmentId != null">
+                #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="belongTo != null">
+                #{belongTo,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        update fop_association
+        <set>
+            <if test="fullName != null">
+                fullName = #{fullName,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                shortName = #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="abcCode != null">
+                abcCode = #{abcCode,jdbcType=VARCHAR},
+            </if>
+            <if test="areaCode != null">
+                areaCode = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phoneNumber != null">
+                phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="establishDate != null">
+                establishDate = #{establishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="pseronId != null">
+                pseronId = #{pseronId,jdbcType=VARCHAR},
+            </if>
+            <if test="directorNum != null">
+                directorNum = #{directorNum,jdbcType=INTEGER},
+            </if>
+            <if test="viceNum != null">
+                viceNum = #{viceNum,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="departmentId != null">
+                departmentId = #{departmentId,jdbcType=VARCHAR},
+            </if>
+            <if test="belongTo != null">
+                belongTo = #{belongTo,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        update fop_association
+        set fullName = #{fullName,jdbcType=VARCHAR},
+        shortName = #{shortName,jdbcType=VARCHAR},
+        abcCode = #{abcCode,jdbcType=VARCHAR},
+        areaCode = #{areaCode,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        phoneNumber = #{phoneNumber,jdbcType=VARCHAR},
+        establishDate = #{establishDate,jdbcType=TIMESTAMP},
+        pseronId = #{pseronId,jdbcType=VARCHAR},
+        directorNum = #{directorNum,jdbcType=INTEGER},
+        viceNum = #{viceNum,jdbcType=INTEGER},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+        latitude = #{latitude,jdbcType=DECIMAL},
+        longitude = #{longitude,jdbcType=DECIMAL},
+        departmentId = #{departmentId,jdbcType=VARCHAR},
+        belongTo = #{belongTo,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+
+    <sql id="Vo_Column_List">
+        c.belongTo,
+        c.id, c.fullName, c.shortName, c.abcCode, c.address, c.phoneNumber, c.establishDate, c.pseronId,
+        c.directorNum, c.viceNum, c.remark, c.status, c.createUserId, c.createUserName, c.createDate,
+        c.lastModifyUserId,
+        c.lastModifyUserName, c.lastModifyDate, c.latitude ,c.longitude, c.departmentId, c.areaCode,
+        pp.name as areaCodeName
+    </sql>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopAssociationVo">
+
+    </resultMap>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_association
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <sql id="whereCondition">
+        where c.status <![CDATA[ <> ]]> 0
+        <if test="condition.id!=null and condition.id!=&quot;&quot;">
+            and c.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and c.status = #{condition.status,jdbcType=CHAR}
+        </if>
+        <if test="condition.fullName!=null and condition.fullName!=&quot;&quot;">
+            and c.fullName like
+            concat('%',#{condition.fullName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.phoneNumber!=null and condition.phoneNumber!=&quot;&quot;">
+            and c.phoneNumber = #{condition.phoneNumber,jdbcType=CHAR}
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and c.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.belongTo!=null and condition.belongTo!=&quot;&quot;">
+            and c.belongTo = #{condition.belongTo,jdbcType=CHAR}
+        </if>
+    </sql>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from fop_association c
+        left join portal.province pp on pp.code=c.areaCode
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY c.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.fop.model.FopAssociation">
+        select count(*)
+        from fop_association
+        where phoneNumber = #{phoneNumber,jdbcType=VARCHAR}
+        or fullName = #{fullName,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        FROM fop_association c
+        <include refid="whereCondition"/>
+    </select>
+</mapper>

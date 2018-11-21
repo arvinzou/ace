@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.CircleDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.Circle">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="corpId" jdbcType="VARCHAR" property="corpId" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="mediaType" jdbcType="VARCHAR" property="mediaType" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="likeNum" jdbcType="BIGINT" property="likeNum" />
+    <result column="lastAuditLogId" jdbcType="VARCHAR" property="lastAuditLogId" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="mediaContent" jdbcType="LONGVARCHAR" property="mediaContent" />
+  </resultMap>
+
+  <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.society.vo.CircleVo">
+    <result column="statement" jdbcType="VARCHAR" property="statement"/>
+    <result column="auditDate" jdbcType="TIMESTAMP" property="auditDate"/>
+    <association property="rpt" column="uid" javaType="com.huacainfo.ace.society.model.Reporter">
+      <id property="openid" column="openid"/>
+      <result property="headimgurl" column="headimgurl"/>
+      <result property="nickname" column="nickname"/>
+    </association>
+    <collection property="imageList" ofType="com.huacainfo.ace.society.model.Img">
+      <id property="id" column="imgId"/>
+      <result property="url" column="url"/>
+    </collection>
+  </resultMap>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select
+    t.id,t.uid, t.sort, t.mediaType, t.createTime, t.status, t.likeNum,t.content, t.mediaContent,
+    a.nickname reporter,
+    a.headimgurl,
+    a.nickname nickname,
+    a.openid,
+    b.id imgId,
+    b.url,
+    q.statement,q.createDate auditDate
+    from circle t
+    left join portal.userinfo a on t.uid=a.openid
+    left join circle_img b on t.id=b.circleId
+    left join circle_log q on t.lastAuditLogId=q.id
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from circle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.society.model.Circle">
+    insert into circle (id, corpId, uid, 
+      sort, mediaType, createTime, 
+      status, likeNum, lastAuditLogId, 
+      content, mediaContent)
+    values (#{id,jdbcType=VARCHAR}, #{corpId,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{mediaType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=CHAR}, #{likeNum,jdbcType=BIGINT}, #{lastAuditLogId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR}, #{mediaContent,jdbcType=LONGVARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.Circle">
+    update circle
+    <set>
+      <if test="mediaType != null and mediaType != &quot;&quot;">
+        mediaType = #{mediaType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status != &quot;&quot;">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="content != null and content != &quot;&quot;">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="mediaContent != null and mediaContent != &quot;&quot;">
+        mediaContent = #{mediaContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="whereCondition">
+    from circle t
+    left join (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+    select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+    where n.unionId not in(select unionid from portal.userinfo)) a on t.uid=a.openid
+    left join circle_img b on t.id=b.circleId
+    left join circle_log q on t.lastAuditLogId=q.id
+    where 0=0
+    <if test='condition.content!=null and condition.content!=""'>
+      and t.content like
+      concat('%',#{condition.content,jdbcType=VARCHAR},'%')
+    </if>
+
+    <if test='condition.mediaType!=null and condition.mediaType!=""'>
+      and t.mediaType =#{condition.mediaType,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and t.status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.uid!=null and condition.uid!=""'>
+      and t.uid =#{condition.uid,jdbcType=VARCHAR}
+    </if>
+
+    <if test='condition.corpId!=null and condition.corpId!=""'>
+      and t.corpId =#{condition.corpId,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    from circle t where 0=0
+
+    <if test='condition.content!=null and condition.content!=""'>
+      and t.content like
+      concat('%',#{condition.content,jdbcType=VARCHAR},'%')
+    </if>
+
+    <if test='condition.mediaType!=null and condition.mediaType!=""'>
+      and t.mediaType =#{condition.mediaType,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.status!=null and condition.status!=""'>
+      and t.status =#{condition.status,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.uid!=null and condition.uid!=""'>
+      and t.uid =#{condition.uid,jdbcType=VARCHAR}
+    </if>
+
+    <if test='condition.corpId!=null and condition.corpId!=""'>
+      and t.corpId =#{condition.corpId,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="findList" resultMap="BaseResultMapVo">
+    select
+    t.id,t.uid, t.sort, t.mediaType, t.createTime, t.status, t.likeNum,t.content, t.mediaContent,
+    a.nickname reporter,
+    a.headimgurl,
+    a.nickname nickname,
+    a.openid,
+    b.id imgId,
+    b.url,
+    q.statement,q.createDate auditDate
+    <include refid="whereCondition"/>
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY t.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY t.createTime desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <update id="updateStatus">
+    update circle set status=#{status}, lastAuditLogId = #{lastAuditLogId} where id=#{id}
+  </update>
+  <resultMap id="mapRpt" type="com.huacainfo.ace.society.model.Rpt">
+    <id property="reportId" column="reportId"/>
+    <result property="content" column="content"/>
+    <result property="createDate" column="createDate"/>
+    <result property="type" column="type"/>
+    <result property="likeNum" column="likeNum"/>
+    <result property="video" column="video"/>
+    <result property="status" column="status"/>
+    <result property="auditMessage" column="auditMessage"/>
+    <association property="rpt" column="uid" javaType="com.huacainfo.ace.society.model.Reporter">
+      <id property="openid" column="openid"/>
+      <result property="headimgurl" column="headimgurl"/>
+      <result property="nickname" column="nickname"/>
+    </association>
+    <collection property="imageList" ofType="com.huacainfo.ace.society.model.Img">
+      <id property="id" column="imgId"/>
+      <result property="url" column="url"/>
+    </collection>
+    <collection property="comments" ofType="com.huacainfo.ace.society.model.Comments">
+      <id property="id" column="cmtId"/>
+      <result property="content" column="c_content"/>
+      <result property="reviewer" column="c_reviewer"/>
+      <result property="nickname" column="c_nickname"/>
+      <result property="headimgurl" column="c_headimgurl"/>
+      <result property="openid" column="c_openid"/>
+      <result property="createTime" column="c_createTime"/>
+    </collection>
+  </resultMap>
+  <select id="getList" resultMap="mapRpt">
+    SELECT
+    t.id reportId,
+    t.uid,
+    t.sort,
+    t.mediaType type,
+    t.status,
+    t.likeNum,
+    t.content,
+    t.mediaContent video,
+    date_format(t.createTime, '%H:%i') createDate,
+    a.nickname reporter,
+    a.headimgurl headimgurl,
+    a.nickname nickname,
+    a.openid,
+    b.id imgId,
+    b.url,
+    c.id cmtId,
+    c.content c_content,
+    d.nickname c_reviewer,
+    d.headimgurl c_headimgurl,
+    d.nickname c_nickname,
+    d.openid c_openid,
+    date_format(c.createTime, '%H:%i:%s') c_createTime,
+    e.statement auditMessage
+    FROM
+    circle t
+    LEFT JOIN (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+    select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+    where n.unionId not in(select unionid from portal.userinfo)) a ON t.uid = a.unionid
+    LEFT JOIN circle_img b ON t.id = b.circleId
+    LEFT JOIN circle_cmt c ON t.id = c.circleId
+    LEFT JOIN (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
+    select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
+    where n.unionId not in(select unionid from portal.userinfo)) d ON c.uid = d.unionid
+    left join circle_log e on t.lastAuditLogId=e.id
+    WHERE
+    0=0
+    <if test='uid!=null'>
+      and t.uid =#{uid,jdbcType=VARCHAR}
+    </if>
+    <if test='status!=null'>
+      and t.status =#{status,jdbcType=VARCHAR}
+    </if>
+    ORDER BY
+    t.createTime desc
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+  <update id="updateAddLike">
+    update circle set likeNum=ifnull(likeNum,0)+1 where id=#{id}
+  </update>
+</mapper>

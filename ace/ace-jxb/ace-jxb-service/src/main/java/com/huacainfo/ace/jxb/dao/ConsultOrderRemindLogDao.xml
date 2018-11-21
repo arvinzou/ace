@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.ConsultOrderRemindLogDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.ConsultOrderRemindLog">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="tag" jdbcType="CHAR" property="tag"/>
+        <result column="info" jdbcType="VARCHAR" property="info"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, tag, info, remark, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from consult_order_remind_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from consult_order_remind_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.ConsultOrderRemindLog">
+    insert into consult_order_remind_log (id, tag, info, remark, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{tag,jdbcType=CHAR}, #{info,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.ConsultOrderRemindLog">
+    update consult_order_remind_log
+    set tag = #{tag,jdbcType=CHAR},
+      info = #{info,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="OrderResultMap" type="com.huacainfo.ace.jxb.model.BaseOrder">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="consumerId" jdbcType="VARCHAR" property="consumerId"/>
+        <result column="commodityId" jdbcType="VARCHAR" property="commodityId"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="businessId" jdbcType="VARCHAR" property="businessId"/>
+        <result column="commodityName" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="businessName" jdbcType="VARCHAR" property="businessName"/>
+        <result column="amount" jdbcType="INTEGER" property="amount"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="payMoney" jdbcType="DECIMAL" property="payMoney"/>
+        <result column="payStatus" jdbcType="CHAR" property="payStatus"/>
+        <result column="payTime" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <!--咨询订单返回map-->
+    <resultMap id="VoResultMap" extends="OrderResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+        <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
+        <result column="remindTag" jdbcType="VARCHAR" property="remindTag"/>
+        <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
+            <id property="id" column="businessId"/>
+            <result property="name" column="tName"/>
+            <result property="certification" column="certification"/>
+            <result property="imagePhotoUrl" column="imagePhotoUrl"/>
+            <result property="level" column="tLevel"/>
+        </association>
+        <association property="consultProduct" column="commodityId"
+                     javaType="com.huacainfo.ace.jxb.model.ConsultProduct">
+            <id property="id" column="commodityId"/>
+            <result property="type" column="cpType"/>
+        </association>
+        <association property="consultOrder" column="id" javaType="com.huacainfo.ace.jxb.model.ConsultOrder">
+            <id property="id" column="id"/>
+            <result column="tel" property="tel"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+            <result column="sex" property="sex"/>
+            <result column="tags" property="tags"/>
+            <result column="info" property="info"/>
+            <result column="secName" property="secName"/>
+            <result column="relationship" property="relationship"/>
+            <result column="secTel" property="secTel"/>
+            <result column="reserveDate" property="reserveDate"/>
+        </association>
+    </resultMap>
+
+    <select id="findRemindList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+            IFNULL(log.tag,'0') as remindTag,
+
+            ui.nickname as consumerName, ui.headimgurl as consumerImgUrl,
+
+            co.tel, co.name, co.age, co.sex, co.tags, co.info, co.secName, co.relationship,
+            co.secTel, co.reserveDate, cp.type as cpType,
+
+            c.name as tName,c.certification ,c.imagePhotoUrl,c.level as tLevel,
+
+            t.id, t.consumerId, t.commodityId, t.category, t.businessId, t.commodityName, t.businessName, t.amount,
+            t.price, t.payMoney, t.payStatus, t.payTime, t.createDate
+
+        from base_order t
+         left join jxb.counselor c on t.businessId = c.id
+         left join consult_order co on t.id=co.id
+         left join jxb.consult_product cp on cp.id = t.commodityId
+         left join consult_order_remind_log log on t.id = log.id
+         left join portal.userinfo ui on t.consumerId = ui.unionid
+        where t.category = '1'
+        and (TIMESTAMPDIFF(Hour,NOW(), co.reserveDate) &lt;= 1
+             and TIMESTAMPDIFF(Hour,NOW(), co.reserveDate) >= 0 )
+        and IFNULL(log.tag,'0') = '0'
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.jxb.model.ConsultOrderRemindLog">
+        select count(1)
+        from consult_order_remind_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.JxbCallBackLogDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.JxbCallBackLog">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="appid" jdbcType="VARCHAR" property="appid"/>
+        <result column="mch_id" jdbcType="VARCHAR" property="mch_id"/>
+        <result column="device_info" jdbcType="VARCHAR" property="device_info"/>
+        <result column="nonce_str" jdbcType="VARCHAR" property="nonce_str"/>
+        <result column="sign" jdbcType="VARCHAR" property="sign"/>
+        <result column="sign_type" jdbcType="VARCHAR" property="sign_type"/>
+        <result column="result_code" jdbcType="VARCHAR" property="result_code"/>
+        <result column="err_code" jdbcType="VARCHAR" property="err_code"/>
+        <result column="err_code_des" jdbcType="VARCHAR" property="err_code_des"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="is_subscribe" jdbcType="VARCHAR" property="is_subscribe"/>
+        <result column="trade_type" jdbcType="VARCHAR" property="trade_type"/>
+        <result column="bank_type" jdbcType="VARCHAR" property="bank_type"/>
+        <result column="total_fee" jdbcType="DECIMAL" property="total_fee"/>
+        <result column="settlement_total_fee" jdbcType="DECIMAL" property="settlement_total_fee"/>
+        <result column="fee_type" jdbcType="VARCHAR" property="fee_type"/>
+        <result column="cash_fee" jdbcType="DECIMAL" property="cash_fee"/>
+        <result column="cash_fee_type" jdbcType="VARCHAR" property="cash_fee_type"/>
+        <result column="coupon_fee" jdbcType="DECIMAL" property="coupon_fee"/>
+        <result column="coupon_count" jdbcType="DECIMAL" property="coupon_count"/>
+        <result column="coupon_type_0" jdbcType="INTEGER" property="coupon_type_0"/>
+        <result column="coupon_id_0" jdbcType="VARCHAR" property="coupon_id_0"/>
+        <result column="coupon_fee_0" jdbcType="DECIMAL" property="coupon_fee_0"/>
+        <result column="transaction_id" jdbcType="VARCHAR" property="transaction_id"/>
+        <result column="out_trade_no" jdbcType="VARCHAR" property="out_trade_no"/>
+        <result column="attach" jdbcType="VARCHAR" property="attach"/>
+        <result column="time_end" jdbcType="VARCHAR" property="time_end"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, appid, mch_id, device_info, nonce_str, sign, sign_type, result_code, err_code, 
+    err_code_des, openid, is_subscribe, trade_type, bank_type, total_fee, settlement_total_fee, 
+    fee_type, cash_fee, cash_fee_type, coupon_fee, coupon_count, coupon_type_0, coupon_id_0, 
+    coupon_fee_0, transaction_id, out_trade_no, attach, time_end, remark, status, createDate, 
+    updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jxb_call_back_log
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from jxb_call_back_log
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.JxbCallBackLog">
+    insert into jxb_call_back_log (id, appid, mch_id, 
+      device_info, nonce_str, sign, 
+      sign_type, result_code, err_code, 
+      err_code_des, openid, is_subscribe, 
+      trade_type, bank_type, total_fee, 
+      settlement_total_fee, fee_type, cash_fee, 
+      cash_fee_type, coupon_fee, coupon_count, 
+      coupon_type_0, coupon_id_0, coupon_fee_0, 
+      transaction_id, out_trade_no, attach, 
+      time_end, remark, status, 
+      createDate, updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR}, #{mch_id,jdbcType=VARCHAR}, 
+      #{device_info,jdbcType=VARCHAR}, #{nonce_str,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, 
+      #{sign_type,jdbcType=VARCHAR}, #{result_code,jdbcType=VARCHAR}, #{err_code,jdbcType=VARCHAR}, 
+      #{err_code_des,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{is_subscribe,jdbcType=VARCHAR}, 
+      #{trade_type,jdbcType=VARCHAR}, #{bank_type,jdbcType=VARCHAR}, #{total_fee,jdbcType=DECIMAL}, 
+      #{settlement_total_fee,jdbcType=DECIMAL}, #{fee_type,jdbcType=VARCHAR}, #{cash_fee,jdbcType=DECIMAL}, 
+      #{cash_fee_type,jdbcType=VARCHAR}, #{coupon_fee,jdbcType=DECIMAL}, #{coupon_count,jdbcType=DECIMAL}, 
+      #{coupon_type_0,jdbcType=INTEGER}, #{coupon_id_0,jdbcType=VARCHAR}, #{coupon_fee_0,jdbcType=DECIMAL}, 
+      #{transaction_id,jdbcType=VARCHAR}, #{out_trade_no,jdbcType=VARCHAR}, #{attach,jdbcType=VARCHAR}, 
+      #{time_end,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.JxbCallBackLog">
+        insert into jxb_call_back_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="appid != null">
+                appid,
+            </if>
+            <if test="mch_id != null">
+                mch_id,
+            </if>
+            <if test="device_info != null">
+                device_info,
+            </if>
+            <if test="nonce_str != null">
+                nonce_str,
+            </if>
+            <if test="sign != null">
+                sign,
+            </if>
+            <if test="sign_type != null">
+                sign_type,
+            </if>
+            <if test="result_code != null">
+                result_code,
+            </if>
+            <if test="err_code != null">
+                err_code,
+            </if>
+            <if test="err_code_des != null">
+                err_code_des,
+            </if>
+            <if test="openid != null">
+                openid,
+            </if>
+            <if test="is_subscribe != null">
+                is_subscribe,
+            </if>
+            <if test="trade_type != null">
+                trade_type,
+            </if>
+            <if test="bank_type != null">
+                bank_type,
+            </if>
+            <if test="total_fee != null">
+                total_fee,
+            </if>
+            <if test="settlement_total_fee != null">
+                settlement_total_fee,
+            </if>
+            <if test="fee_type != null">
+                fee_type,
+            </if>
+            <if test="cash_fee != null">
+                cash_fee,
+            </if>
+            <if test="cash_fee_type != null">
+                cash_fee_type,
+            </if>
+            <if test="coupon_fee != null">
+                coupon_fee,
+            </if>
+            <if test="coupon_count != null">
+                coupon_count,
+            </if>
+            <if test="coupon_type_0 != null">
+                coupon_type_0,
+            </if>
+            <if test="coupon_id_0 != null">
+                coupon_id_0,
+            </if>
+            <if test="coupon_fee_0 != null">
+                coupon_fee_0,
+            </if>
+            <if test="transaction_id != null">
+                transaction_id,
+            </if>
+            <if test="out_trade_no != null">
+                out_trade_no,
+            </if>
+            <if test="attach != null">
+                attach,
+            </if>
+            <if test="time_end != null">
+                time_end,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="updateDate != null">
+                updateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="appid != null">
+                #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="mch_id != null">
+                #{mch_id,jdbcType=VARCHAR},
+            </if>
+            <if test="device_info != null">
+                #{device_info,jdbcType=VARCHAR},
+            </if>
+            <if test="nonce_str != null">
+                #{nonce_str,jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null">
+                #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="sign_type != null">
+                #{sign_type,jdbcType=VARCHAR},
+            </if>
+            <if test="result_code != null">
+                #{result_code,jdbcType=VARCHAR},
+            </if>
+            <if test="err_code != null">
+                #{err_code,jdbcType=VARCHAR},
+            </if>
+            <if test="err_code_des != null">
+                #{err_code_des,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null">
+                #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="is_subscribe != null">
+                #{is_subscribe,jdbcType=VARCHAR},
+            </if>
+            <if test="trade_type != null">
+                #{trade_type,jdbcType=VARCHAR},
+            </if>
+            <if test="bank_type != null">
+                #{bank_type,jdbcType=VARCHAR},
+            </if>
+            <if test="total_fee != null">
+                #{total_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="settlement_total_fee != null">
+                #{settlement_total_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="fee_type != null">
+                #{fee_type,jdbcType=VARCHAR},
+            </if>
+            <if test="cash_fee != null">
+                #{cash_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="cash_fee_type != null">
+                #{cash_fee_type,jdbcType=VARCHAR},
+            </if>
+            <if test="coupon_fee != null">
+                #{coupon_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="coupon_count != null">
+                #{coupon_count,jdbcType=DECIMAL},
+            </if>
+            <if test="coupon_type_0 != null">
+                #{coupon_type_0,jdbcType=INTEGER},
+            </if>
+            <if test="coupon_id_0 != null">
+                #{coupon_id_0,jdbcType=VARCHAR},
+            </if>
+            <if test="coupon_fee_0 != null">
+                #{coupon_fee_0,jdbcType=DECIMAL},
+            </if>
+            <if test="transaction_id != null">
+                #{transaction_id,jdbcType=VARCHAR},
+            </if>
+            <if test="out_trade_no != null">
+                #{out_trade_no,jdbcType=VARCHAR},
+            </if>
+            <if test="attach != null">
+                #{attach,jdbcType=VARCHAR},
+            </if>
+            <if test="time_end != null">
+                #{time_end,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.JxbCallBackLog">
+        update jxb_call_back_log
+        <set>
+            <if test="appid != null">
+                appid = #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="mch_id != null">
+                mch_id = #{mch_id,jdbcType=VARCHAR},
+            </if>
+            <if test="device_info != null">
+                device_info = #{device_info,jdbcType=VARCHAR},
+            </if>
+            <if test="nonce_str != null">
+                nonce_str = #{nonce_str,jdbcType=VARCHAR},
+            </if>
+            <if test="sign != null">
+                sign = #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="sign_type != null">
+                sign_type = #{sign_type,jdbcType=VARCHAR},
+            </if>
+            <if test="result_code != null">
+                result_code = #{result_code,jdbcType=VARCHAR},
+            </if>
+            <if test="err_code != null">
+                err_code = #{err_code,jdbcType=VARCHAR},
+            </if>
+            <if test="err_code_des != null">
+                err_code_des = #{err_code_des,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null">
+                openid = #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="is_subscribe != null">
+                is_subscribe = #{is_subscribe,jdbcType=VARCHAR},
+            </if>
+            <if test="trade_type != null">
+                trade_type = #{trade_type,jdbcType=VARCHAR},
+            </if>
+            <if test="bank_type != null">
+                bank_type = #{bank_type,jdbcType=VARCHAR},
+            </if>
+            <if test="total_fee != null">
+                total_fee = #{total_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="settlement_total_fee != null">
+                settlement_total_fee = #{settlement_total_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="fee_type != null">
+                fee_type = #{fee_type,jdbcType=VARCHAR},
+            </if>
+            <if test="cash_fee != null">
+                cash_fee = #{cash_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="cash_fee_type != null">
+                cash_fee_type = #{cash_fee_type,jdbcType=VARCHAR},
+            </if>
+            <if test="coupon_fee != null">
+                coupon_fee = #{coupon_fee,jdbcType=DECIMAL},
+            </if>
+            <if test="coupon_count != null">
+                coupon_count = #{coupon_count,jdbcType=DECIMAL},
+            </if>
+            <if test="coupon_type_0 != null">
+                coupon_type_0 = #{coupon_type_0,jdbcType=INTEGER},
+            </if>
+            <if test="coupon_id_0 != null">
+                coupon_id_0 = #{coupon_id_0,jdbcType=VARCHAR},
+            </if>
+            <if test="coupon_fee_0 != null">
+                coupon_fee_0 = #{coupon_fee_0,jdbcType=DECIMAL},
+            </if>
+            <if test="transaction_id != null">
+                transaction_id = #{transaction_id,jdbcType=VARCHAR},
+            </if>
+            <if test="out_trade_no != null">
+                out_trade_no = #{out_trade_no,jdbcType=VARCHAR},
+            </if>
+            <if test="attach != null">
+                attach = #{attach,jdbcType=VARCHAR},
+            </if>
+            <if test="time_end != null">
+                time_end = #{time_end,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                updateDate = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.JxbCallBackLog">
+    update jxb_call_back_log
+    set appid = #{appid,jdbcType=VARCHAR},
+      mch_id = #{mch_id,jdbcType=VARCHAR},
+      device_info = #{device_info,jdbcType=VARCHAR},
+      nonce_str = #{nonce_str,jdbcType=VARCHAR},
+      sign = #{sign,jdbcType=VARCHAR},
+      sign_type = #{sign_type,jdbcType=VARCHAR},
+      result_code = #{result_code,jdbcType=VARCHAR},
+      err_code = #{err_code,jdbcType=VARCHAR},
+      err_code_des = #{err_code_des,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      is_subscribe = #{is_subscribe,jdbcType=VARCHAR},
+      trade_type = #{trade_type,jdbcType=VARCHAR},
+      bank_type = #{bank_type,jdbcType=VARCHAR},
+      total_fee = #{total_fee,jdbcType=DECIMAL},
+      settlement_total_fee = #{settlement_total_fee,jdbcType=DECIMAL},
+      fee_type = #{fee_type,jdbcType=VARCHAR},
+      cash_fee = #{cash_fee,jdbcType=DECIMAL},
+      cash_fee_type = #{cash_fee_type,jdbcType=VARCHAR},
+      coupon_fee = #{coupon_fee,jdbcType=DECIMAL},
+      coupon_count = #{coupon_count,jdbcType=DECIMAL},
+      coupon_type_0 = #{coupon_type_0,jdbcType=INTEGER},
+      coupon_id_0 = #{coupon_id_0,jdbcType=VARCHAR},
+      coupon_fee_0 = #{coupon_fee_0,jdbcType=DECIMAL},
+      transaction_id = #{transaction_id,jdbcType=VARCHAR},
+      out_trade_no = #{out_trade_no,jdbcType=VARCHAR},
+      attach = #{attach,jdbcType=VARCHAR},
+      time_end = #{time_end,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

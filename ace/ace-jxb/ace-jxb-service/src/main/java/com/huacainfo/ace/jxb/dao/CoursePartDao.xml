@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.CoursePartDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.CoursePart">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="courseId" jdbcType="VARCHAR" property="courseId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="displaySeq" jdbcType="INTEGER" property="displaySeq"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, courseId, name, displaySeq, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course_part
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from course_part
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.CoursePart">
+    insert into course_part (id, courseId, name, 
+      displaySeq, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{displaySeq,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.CoursePart">
+        insert into course_part
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="courseId != null">
+                courseId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="displaySeq != null">
+                displaySeq,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="courseId != null">
+                #{courseId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="displaySeq != null">
+                #{displaySeq,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.CoursePart">
+        update course_part
+        <set>
+            <if test="courseId != null">
+                courseId = #{courseId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="displaySeq != null">
+                displaySeq = #{displaySeq,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.CoursePart">
+    update course_part
+    set courseId = #{courseId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      displaySeq = #{displaySeq,jdbcType=INTEGER},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CoursePartVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+            id, courseId, name, displaySeq, createDate
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from course_part t
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from course_part t
+        where 1=1
+        <if test="condition.courseId !=null and condition.courseId !=&quot;&quot;">
+            and t.courseId = #{condition.courseId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.CoursePart">
+        select count(1)
+        from course_part
+        where name = #{name,jdbcType=VARCHAR}
+    </select>
+
+    <!---->
+    <resultMap id="VoCollectionResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CoursePartVo">
+        <collection property="sourceList" ofType="com.huacainfo.ace.jxb.model.CourseSource">
+            <id property="id" column="srcId"/>
+            <result property="courseId" column="courseId"/>
+            <result property="partId" column="id"/>
+            <result property="name" column="srcName"/>
+            <result property="mediUrl" column="srcMediUrl"/>
+            <result property="duration" column="srcDuration"/>
+            <result property="free" column="srcFree"/>
+            <result property="displaySeq" column="srcSeq"/>
+        </collection>
+    </resultMap>
+
+    <select id="findByCourseId" parameterType="java.lang.String" resultMap="VoCollectionResultMap">
+        SELECT
+            s.id as srcId, s.`name` as srcName,s.mediUrl as  srcMediUrl,
+            IFNULL(s.duration,0) as srcDuration, IFNULL(s.free ,'0')as srcFree,
+            IFNULL(s.displaySeq ,0)as srcSeq,
+            t.id, t.courseId, t.`name`, t.displaySeq
+        from course_part t
+        left join course_source s on t.id = s.partId
+        where t.courseId = #{courseId,jdbcType=VARCHAR}
+        order by t.displaySeq asc, s.createDate asc
+    </select>
+</mapper>

@@ -1016,5 +1016,5 @@ var App = function() {
 <!-- END THEME LAYOUT SCRIPTS -->
 
 jQuery(document).ready(function() {    
-   App.init(); // init metronic core componets
+   //App.init(); // init metronic core componets
 });

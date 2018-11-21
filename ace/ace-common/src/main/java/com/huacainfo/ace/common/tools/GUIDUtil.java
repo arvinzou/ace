@@ -54,4 +54,9 @@ public final class GUIDUtil {
         }
         return ss;
     }
+
+    public static void main(String args[]){
+       System.out.println( GUIDUtil.getGUID());
+
+    }
 }

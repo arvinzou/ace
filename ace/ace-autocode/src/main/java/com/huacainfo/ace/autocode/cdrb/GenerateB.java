@@ -1,4 +1,4 @@
-package com.huacainfo.ace.autocode.cdrb;
+package com.huacainfo.ace.generator.cdrb;
 
 import java.io.File;
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class GenerateB extends HtmlGenerateService{
             e.put("text", text);
             e.put("pages", i);
             e.put("total", list.size());
-            body = generateText("com/huacainfo/ace/autocode/cdrb/index.html.vm", e);
+            body = generateText("com/huacainfo/ace/generator/cdrb/index.html.vm", e);
             this.writeFile(generateHtmlPath, "index-" + i + ".html", body);
             // logger.info("{}",body);
             i++;

@@ -9,6 +9,8 @@ public class Reporter implements java.io.Serializable {
     private String nickname;
     private String openid;
 
+    private String userId;
+
     public String getHeadimgurl() {
         return headimgurl;
     }
@@ -31,5 +33,13 @@ public class Reporter implements java.io.Serializable {
 
     public void setOpenid(String openid) {
         this.openid = openid;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

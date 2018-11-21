@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>人才信息</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link href="css/publicity.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/personnel.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/module.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/hotkeys.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/uploader.js"></script>
+    <script type="text/javascript" src="/portal/content/common/simditor/scripts/simditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/portal/content/common/simditor/styles/simditor.css"/>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../js/user.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/personnel.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <style>
+        .poblicSearch{
+            width: 250px;
+            height: 35px;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+<body>
+<div id="loadBefore" hidden="hidden">
+<div id="header"></div>
+<div class="bodybg">
+    <div class="juz">
+        <div class="main">
+            <div class="title01">
+                <span class="title_lager">人才信息</span><span
+                    class="title_small">/&nbsp;Talent Information</span>
+                <button class="law_help" data-toggle="modal" data-target=""
+                         ng-click="before_release($event);">发布招聘
+                 </button>
+            </div>
+            <div class="searchTable">
+                <span class="s_title poblicSearch"><input type="text" id="key_word" placeholder="请输入关键字搜索"/><button style="height: 35px;" class="glyphicon glyphicon-search" ng-click="search();"></button></span>
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr style="font-weight: bolder;">
+                        <td align="left" style="color: #565B70;">岗位名称</td>
+                        <td width="40%" align="left" style="color: #565B70;">发布公司</td>
+                        <td width="20%" align="right" style="color: #565B70;">发布时间</td>
+                    </tr>
+                    <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items"
+                        ng-click="showInfo($index)">
+                        <td ng-bind="item.title"></td>
+                        <td width="40%" ng-bind="item.companyName"></td>
+                        <td align="right" style="color: #999;" width="20%" ng-bind="item.releaseDate | formatDate"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="paganation">
+
+            </div>
+        </div>
+        <div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="loading" class="loading">
+    加载中...
+</div>
+</body>
+
+
+<!--发布招聘模态框-->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">发布招聘</h4>
+            </div>
+            <div class="modal-body">
+                <form id="fm-add">
+                <div><label>职位名称<span class="require">*</span></label><br>
+                    <input class="input_style" type="text" placeholder="请输入职位名称" name="postname"
+                           onfocus="this.placeholder=''"
+                           onblur="this.placeholder='请输入职位名称'"/>
+                </div>
+                <div><label>具体内容<span class="require">*</span></label><br>
+                    <textarea name="content" id="editor" placeholder="请描述职位的具体内容" onfocus="this.placeholder=''"
+                              onblur="this.placeholder='请描述职位的具体内容'"></textarea>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="submit btn btn-primary"  ng-click="releaseInfo();">
+                    提交
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

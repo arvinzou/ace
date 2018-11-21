@@ -29,4 +29,6 @@ public interface LiveCmtDao {
     int isExit(LiveCmt record);
 
     List<String> findSensitiveWordsListBydeptId(String deptId);
+
+    int updateStatus( @Param("id") String id,@Param("status") String status);
 }

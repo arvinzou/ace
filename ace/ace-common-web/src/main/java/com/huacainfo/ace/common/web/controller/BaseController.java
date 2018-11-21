@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.tools.CommonKeys;
 
@@ -28,6 +27,7 @@ public class BaseController implements Serializable {
 
 	@Autowired
 	private RedisOperations<String, Object> redisTemplate;
+
 
 	protected HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes) RequestContextHolder
@@ -77,5 +77,7 @@ public class BaseController implements Serializable {
         logger.info("{}", object);
         return (Userinfo) object;
     }
+
+
 
 }

@@ -16,6 +16,7 @@
         <result column="scope" jdbcType="VARCHAR" property="scope"/>
         <result column="expires_in" jdbcType="BIGINT" property="expires_in"/>
         <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
     </resultMap>
 
     <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.portal.vo.UserinfoVo"
@@ -24,7 +25,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         unionid, openid, appid, nickname, sex, city, province, country, headimgurl, access_token,
-        refresh_token, scope, expires_in,role
+        refresh_token, scope, expires_in,role, mobile
     </sql>
     <sql id="Blob_Column_List">
         privilege
@@ -46,12 +47,12 @@
         nickname, sex, city,
         province, country, headimgurl,
         access_token, refresh_token, scope,
-        expires_in, privilege)
+        expires_in, privilege, mobile)
         values (#{unionid,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR},
         #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
         #{province,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{headimgurl,jdbcType=VARCHAR},
         #{access_token,jdbcType=VARCHAR}, #{refresh_token,jdbcType=VARCHAR}, #{scope,jdbcType=VARCHAR},
-        #{expires_in,jdbcType=BIGINT}, #{privilege,jdbcType=LONGVARCHAR})
+        #{expires_in,jdbcType=BIGINT}, #{privilege,jdbcType=LONGVARCHAR}, #{mobile,jdbcType=VARCHAR})
     </insert>
 
 
@@ -69,7 +70,8 @@
         refresh_token = #{refresh_token,jdbcType=VARCHAR},
         privilege = #{privilege,jdbcType=LONGVARCHAR},
         scope = #{scope,jdbcType=VARCHAR},
-        expires_in = #{expires_in,jdbcType=BIGINT}
+        expires_in = #{expires_in,jdbcType=BIGINT},
+        mobile = #{mobile,jdbcType=VARCHAR}
         where unionid = #{unionid,jdbcType=VARCHAR}
     </update>
 
@@ -115,7 +117,7 @@
     </update>
 
     <select id="selectWxUser" resultType="map">
-        select  unionid, openid, appid, nickname, sex, city, province, country, headimgurl, access_token,
+        select unionid, openid, appid, nickname, sex, city, province, country, headimgurl, access_token,
         refresh_token, scope, expires_in,role from userinfo
         where 0=0
         <if test='condition.nickname!=null and condition.nickname!=""'>
@@ -130,4 +132,114 @@
         </if>
         ORDER BY unionid
     </select>
+
+    <select id="selectUserInfoVo" resultType="map">
+        select
+            w.appScret,w.accessToken,w.ticket,
+            t.unionid, t.openid, t.appid, t.nickname, t.sex, t.city, t.province, t.country, t.headimgurl, t.access_token,
+            t.refresh_token, t.scope, t.expires_in, t.role
+        from userinfo t
+        left join wx_cfg w on t.appid = w.appId
+        where t.openid = #{condition.openid,jdbcType=VARCHAR}
+    </select>
+    <select id="getListByDeptId" resultType="map">
+        select t.unionid openid,t.nickname from userinfo t where 0=0
+        <if test='q!=null and q!=""'>
+            and (t.unionid=#{q} or t.nickname like
+            concat('%',#{q},'%'))
+        </if>
+
+        order by t.unionid
+        limit 0,20
+    </select>
+
+
+    <select id="selectSysUserByMobile" resultType="map">
+        select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+        on t.department_id=a.department_id
+        where t.mobile=#{mobile} limit 0,1
+    </select>
+
+    <select id="selectSysUserByUnionId" resultType="map">
+        select t.user_id userId,t.mobile tel,t.name,a.department_name corpName from users t left join department a
+        on t.department_id=a.department_id
+        where t.openId=#{unionId} limit 0,1
+    </select>
+    <update id="updateBindApp">
+        update users set openId=#{openId},appOpenId=#{openId} where user_id=#{userId}
+    </update>
+
+    <update id="updateReg" parameterType="com.huacainfo.ace.common.model.Userinfo">
+        update userinfo
+        set
+        mobile = #{mobile,jdbcType=VARCHAR}
+        where unionid = #{unionid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateUnbind">
+        update users set openId=null,appOpenId=null where openId=#{unionid};
+        update userinfo set mobile = null where unionid = #{unionid,jdbcType=VARCHAR};
+    </update>
+
+    <select id="findByOpenId" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from userinfo
+        where openid = #{openid,jdbcType=VARCHAR}
+        AND appid = #{appid,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.common.model.Userinfo">
+        update userinfo
+        <set>
+            <if test="openid != null">
+                openid = #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="appid != null">
+                appid = #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="headimgurl != null">
+                headimgurl = #{headimgurl,jdbcType=VARCHAR},
+            </if>
+            <if test="access_token != null">
+                access_token = #{access_token,jdbcType=VARCHAR},
+            </if>
+            <if test="refresh_token != null">
+                refresh_token = #{refresh_token,jdbcType=VARCHAR},
+            </if>
+            <if test="scope != null">
+                scope = #{scope,jdbcType=VARCHAR},
+            </if>
+            <if test="expires_in != null">
+                expires_in = #{expires_in,jdbcType=BIGINT},
+            </if>
+            <if test="role != null">
+                role = #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="privilege != null">
+                privilege = #{privilege,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where unionid = #{unionid,jdbcType=VARCHAR}
+    </update>
 </mapper>

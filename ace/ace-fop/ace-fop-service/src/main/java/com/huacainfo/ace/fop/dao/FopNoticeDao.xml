@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.FopNoticeDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.fop.model.FopNotice">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="subTitle" jdbcType="VARCHAR" property="subTitle"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="coverUrl" jdbcType="VARCHAR" property="coverUrl"/>
+        <result column="noticeType" jdbcType="CHAR" property="noticeType"/>
+        <result column="releaseDate" jdbcType="TIMESTAMP" property="releaseDate"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="top" jdbcType="CHAR" property="top"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="description" jdbcType="LONGVARCHAR" property="description"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, subTitle,source, coverUrl, noticeType, releaseDate, remark, status, top,createUserId,
+        createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, description
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_notice
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from fop_notice
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.fop.model.FopNotice">
+        insert into fop_notice (id, title, subTitle,source,
+        coverUrl, noticeType, releaseDate,
+        remark, status, top,createUserId,
+        createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, description
+        )
+        values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+        #{subTitle,jdbcType=VARCHAR},#{source,jdbcType=VARCHAR},
+        #{coverUrl,jdbcType=VARCHAR}, #{noticeType,jdbcType=CHAR}, #{releaseDate,jdbcType=TIMESTAMP},
+        #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},#{top,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
+        #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+        #{description,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.fop.model.FopNotice">
+        insert into fop_notice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="subTitle != null">
+                subTitle,
+            </if>
+            <if test="source != null">
+                source,
+            </if>
+            <if test="coverUrl != null">
+                coverUrl,
+            </if>
+            <if test="noticeType != null">
+                noticeType,
+            </if>
+            <if test="releaseDate != null">
+                releaseDate,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="top != null">
+                top,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subTitle != null">
+                #{subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="coverUrl != null">
+                #{coverUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeType != null">
+                #{noticeType,jdbcType=CHAR},
+            </if>
+            <if test="releaseDate != null">
+                #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="top != null">
+                #{top,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.fop.model.FopNotice">
+        update fop_notice
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subTitle != null">
+                subTitle = #{subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=VARCHAR},
+            </if>
+            <if test="coverUrl != null">
+                coverUrl = #{coverUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeType != null">
+                noticeType = #{noticeType,jdbcType=CHAR},
+            </if>
+            <if test="releaseDate != null">
+                releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="top != null">
+                top = #{top,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.fop.model.FopNotice">
+        update fop_notice
+        set title = #{title,jdbcType=VARCHAR},
+        subTitle = #{subTitle,jdbcType=VARCHAR},source = #{source,jdbcType=VARCHAR},
+        coverUrl = #{coverUrl,jdbcType=VARCHAR},
+        noticeType = #{noticeType,jdbcType=CHAR},
+        releaseDate = #{releaseDate,jdbcType=TIMESTAMP},
+        remark = #{remark,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR},
+        top = #{top,jdbcType=CHAR},
+        createUserId = #{createUserId,jdbcType=VARCHAR},
+        createUserName = #{createUserName,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+        lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+        lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+        lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.fop.vo.FopNoticeVo">
+
+    </resultMap>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from fop_notice
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.fop.vo.FopNoticeVo"></resultMap>
+
+    <select id="findList" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.releaseDate DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from fop_notice
+        where
+        title=#{title}
+    </select>
+
+    <sql id="whereCondition">
+        from fop_notice
+        where status <![CDATA[ <> ]]> 0
+        <if test='condition.title!=null and condition.title!=""'>
+            and title like
+            concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.status!=null and condition.status!=&quot;&quot;">
+            and status = #{condition.status,jdbcType=CHAR}
+        </if>
+        <!--<if test="condition.trainees!=null and condition.trainees!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.trainees,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+
+        <!--<if test="condition.dept!=null and condition.dept!=&quot;&quot;">-->
+        <!--and name like-->
+        <!--concat('%',#{condition.dept,jdbcType=VARCHAR},'%')-->
+        <!--</if>-->
+        <if test="condition.top!=null and condition.top!=&quot;&quot;">
+            and top =#{condition.top,jdbcType=CHAR}
+        </if>
+        <if test="condition.noticeType!=null and condition.noticeType!=&quot;&quot;">
+            and noticeType =#{condition.noticeType,jdbcType=CHAR}
+        </if>
+    </sql>
+
+
+</mapper>

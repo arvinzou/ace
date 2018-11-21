@@ -36,6 +36,9 @@ public interface DictService extends WebContextDictService {
 	public abstract PageResult<DictVo> findDictList(Dict condition, int start,
 			int limit, String orderBy) throws Exception;
 
+	public  PageResult<DictVo> getTreeGrid() throws Exception;
+
+
 	/**
 	 * 
 	 * @Title:insertDict

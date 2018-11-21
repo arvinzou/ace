@@ -1,0 +1,7 @@
+<view class='index'>
+   
+
+      <button class="weui-btn" open-type="getUserInfo"  bindgetuserinfo="bindgetuserinfo" style=" width:60%;color:#fff;background-color:#1A56A8; border-radius: 10rpx;position: absolute;top: 20%;left:20%">获取用户信息</button>
+
+
+</view>

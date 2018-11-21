@@ -174,8 +174,8 @@ pageEncoding="utf-8"%>
                     <div class="div-left header-title">会议文件</div>
                     <div class="div-right header-title">
                         <div style="text-align:right"> <a data-rel="tooltip" data-placement="top"
-                                                                        title="会议文件"
-                                                                        class="blue" href="javascript:filesSetting()"><i
+                                                          title="会议文件"
+                                                          class="blue" href="javascript:filesSetting()"><i
                                 class="ace-icon fa fa-plus-circle"></i></a></div>
                     </div>
                 </div>

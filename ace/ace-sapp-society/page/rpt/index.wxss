@@ -1,0 +1,117 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+
+.kind-list-item{
+  padding: 10px;
+}
+.weui-btn {
+  margin-top: 15px;
+  border-radius: 2px;
+}
+.iconList20{
+  width:20px; height: 20px;
+  padding-right: 10rpx;
+  vertical-align: top;
+}
+
+.hide{
+ display: none;
+}
+.show{ 
+ display: block;
+}
+
+.circle{
+  width: 250rpx;  
+  height:250rpx;  
+  border-radius: 50%;  
+  font-size: 36rpx;  
+  background: #C8C8C8;  
+}
+.playimg{
+  width: 200rpx;
+  height: 200rpx;
+  margin: 25rpx;
+}
+.recorder-box{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.recorder{
+  display: flex;
+  justify-content: center;
+  padding-top: 30rpx;
+  width: 100%;
+}
+
+.btn-img-small {
+  position:absolute;
+  width: 40rpx;
+  height: 40rpx;
+  right:3rpx;
+  top:3rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+.removeImgBtn{
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  right:90rpx;
+  bottom:10rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+.removeImgBtnVideo{
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  right:10rpx;
+  top:50rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.navbar {
+   /* z-index: 100;*/
+    width: 100%;
+    /*position: fixed; */
+    font-size: 30rpx;
+    color: #666;
+    flex: none;
+    display: flex;
+    background: #fff;
+    border-bottom: 1rpx #e5e5e5 solid;
+}
+
+.navbar .item {
+    position: relative;
+    flex: auto;
+    text-align: center;
+    line-height: 80rpx;
+}
+
+.navbar .item.active {
+    font-size: 30rpx;
+    color:#1a9fff;
+}
+
+.navbar .item.active:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    width: 40rpx;
+    margin: 0 auto;
+    background: #1a9fff;
+    border-radius: 20%;
+}
+.active {
+  color:#1a9fff;
+  border-bottom:4rpx solid #fff;
+}

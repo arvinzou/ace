@@ -1,0 +1,34 @@
+body {
+    background-color: #F7F9FC;
+    color: #8B8AA6;
+    padding: 0.426666rem 0 1.813333rem;
+    position: relative;
+    min-height: 100vh;
+}
+
+.bank_content {
+    height: 12.253333rem;
+    background: url(../image/card6.png) center no-repeat;
+    width: 10rem;
+    font-size: 0.37rem;
+    line-height: 0.693333rem;
+    background-size: 100% 100%;
+    padding: 3.6rem 0.93rem 0;
+    margin: auto;
+}
+
+.bottom_div {
+    text-align: center;
+    line-height: 1.813333rem;
+    height: 1.813333rem;
+    color: #8B8AA6;
+    font-size: 0.32rem;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.bottom_text .margin {
+    margin-bottom: 0.3rem;
+}
+

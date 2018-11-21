@@ -1,0 +1,121 @@
+body{
+	background-color: #F3F3F3;
+    min-width: 900px;
+}
+.satify_main{
+	width: 100%;
+}
+.satify_body{
+    width: 1100px;
+	margin: 30px auto;
+}
+
+.left_list {
+    width: 68%;
+	float: left;
+	background-color: #FFFFFF;
+    box-sizing: border-box;
+    padding: 10px 30px 20px;
+}
+
+.right_research{
+	width: 30%;
+	float: right;
+}
+.left_list_title{
+	width: 100%;
+	height: 62px;
+	line-height: 62px;
+}
+
+#appeal {
+    width: 100%;
+	height: 300px;
+}
+
+#react {
+	width: 100%;
+	height: 300px;
+}
+
+.title_lager{
+    width: 10%;
+	height: 62px;
+    line-height: 62px;
+    vertical-align: middle;
+	display: inline-block;
+	border-bottom: 3px solid #FF9F00;
+	color: #565B70;
+    font-size: 16px;
+    font-weight: bolder;
+    overflow: hidden;
+}
+.title_small{
+    width: 90%;
+	height: 62px;
+    line-height: 62px;
+    vertical-align: middle;
+	display: inline-block;
+	border-bottom: 1px solid #E1E5ED;
+	color: #C3CBD6;
+}
+.searchTable tr {
+	height: 50px;
+	line-height: 50px;
+	color: #565B70;
+}
+
+.searchTable tr .dot {
+	width: 8px;
+	height: 8px;
+	background-color: #E1E5ED;
+}
+
+.searchTable tr {
+    border-bottom: 1px dashed #E1E5ED;
+}
+/*.searchTable tr:hover {*/
+	/*color: #FF9F00;*/
+	/*border-bottom: 1px solid #FF9F00 !important;*/
+	/*border-top: 1px solid #FF9F00 !important;*/
+	/*border-left: 1px solid #FF9F00 !important;*/
+	/*border-right: 1px solid #FF9F00 !important;*/
+	/**/
+/*}*/
+.research{
+	width: 100%;
+    height: auto;
+	background-color: #FFFFFF;
+	margin-bottom: 30px;
+}
+.research_title{
+	width: 100%;
+	height: 62px;
+	border-bottom: 1px solid #E1E5ED;
+}
+.research_title span{
+	width: 50%;
+	height: 62px;
+	display: inline-block;
+	line-height: 62px;
+	text-align: left;
+	padding-left: 10px;
+	font-size: 14px;
+	color: #31364B;
+	vertical-align: middle;
+}
+.research_title a{
+	width: 40%;
+	height: 62px;
+	line-height: 62px;
+	display: inline-block;
+	color: #1A56A8;
+	text-align: right;
+	padding-right: 10px;
+	vertical-align: middle;
+}
+.research_body{
+	width: 100%;
+    height: auto;
+}
+

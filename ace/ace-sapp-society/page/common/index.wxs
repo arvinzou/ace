@@ -1,0 +1,20 @@
+var subDateTime = function (dateTime,startIndex, endIndx) {
+    console.log(2);
+    return dateTime.substring(startIndex,endIndx);
+};
+
+var phoneNumSecret=function(phoneNum){
+    console.log(phoneNum);
+    if(!phoneNum){
+        return '';
+    }
+    console.log(11111111111111);
+    console.log(phoneNum.substring(0, 3) + "****" + phoneNum.substring(7));
+    return phoneNum.substring(0, 3) + "****" + phoneNum.substring(7);
+};
+
+
+module.exports = {
+    subDateTime: subDateTime,
+    phoneNumSecret: phoneNumSecret
+};

@@ -1,0 +1,126 @@
+@import "../common/lib/weui.wxss";
+@import "../common/index.wxss";
+
+.index{
+    width: 100%;
+    background-color: #F6F6F6;
+}
+.tips{
+    width: 100%;
+    height: 70rpx;
+    line-height: 70rpx;
+    padding-left: 37rpx;
+    color: #ffab32;
+    font-size: 26rpx;
+    background:rgba(255,239,217,1);
+}
+.form-box{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+}
+.form{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    padding-top:30rpx;
+    padding-bottom:30rpx;
+}
+.idea-content{
+    width: 100%;
+    height: 400rpx;
+}
+.section{
+    width: 100%;
+    height: 100rpx;
+    border-bottom: 0.5px solid #F2F2F2;
+}
+.form-title{
+    width: 20%;
+    float: left;
+    margin-right: 5%;
+    height: 30rpx;
+    padding-top: 35rpx;
+    color: #999999;
+    font-size: 28rpx;
+}
+.form-content{
+    width: 75%;
+    height: 30rpx;
+    margin-top: 35rpx;
+    float: left;
+}
+.section::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.input-text{
+    color: #DCDCDC;
+    font-size: 28rpx;
+}
+.section-area{
+    margin-top: 60rpx;
+}
+.section-num{
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #ffab32;
+    font-size: 28rpx;
+    text-align: right;
+}
+.file{
+    width: 154rpx;
+    height: 154rpx;
+    float: left;
+    margin-right: 10rpx;
+}
+.form::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.file-attach{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.footer{
+    width: 100%;
+    height: 120rpx;
+    background: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+}
+.release-btn{
+    width: 90%;
+    height: 90rpx;
+    text-align: center;
+    line-height: 90rpx;
+    color: #FFFFFF;
+    background: #ffab32;
+    border-radius: 6rpx;
+    font-size: 36rpx;
+    font-weight: bold;
+    margin-top: 15rpx;
+}
+.btn-img-small {
+  position:absolute;
+  width: 40rpx;
+  height: 40rpx;
+  right:3rpx;
+  top:3rpx;
+  background: #fff;
+  border-radius: 50%;
+}
+.removeImgBtn{
+  position:absolute;
+  width: 60rpx;
+  height: 60rpx;
+  right:90rpx;
+  bottom:10rpx;
+  background: #fff;
+  border-radius: 50%;
+}

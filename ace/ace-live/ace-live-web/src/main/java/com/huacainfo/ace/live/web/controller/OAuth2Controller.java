@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Properties;
@@ -48,9 +49,8 @@ public class OAuth2Controller extends LiveBaseController {
 
     @Autowired
     private OAuth2Service oAuth2Service;
-    @RequestMapping(value = "/redirect.do")
-    public ModelAndView redirect(String code, String state) throws Exception {
-        String viewName = "index";
+    @RequestMapping(value = "/redirect")
+    public void redirect(String code, String state,HttpServletRequest request, HttpServletResponse response) throws Exception {
         this.logger.info("code->{} state -> {}", code, state);
         logger.info("=========================  start get Userinfo from weixin pltfrom======================");
         SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
@@ -58,17 +58,16 @@ public class OAuth2Controller extends LiveBaseController {
         if (rst.getState()) {
             this.logger.info("==================={}  in session ======================", rst.getValue().getNickname());
             this.getRequest().getSession().setAttribute(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
+            response.sendRedirect(state);
         } else {
-            viewName = "error";
+            response.sendRedirect(request.getContextPath()+"/www/common/error.jsp");
         }
-        logger.info("=========================  complete get Userinfo from weixin pltfrom rst {} ======================", rst.getState());
-        ModelAndView mav = new ModelAndView(viewName);
-        return mav;
     }
 
-    @RequestMapping(value = "/cfg.do")
+    @RequestMapping(value = "/cfg")
     public ModelAndView userinfo() throws Exception {
         Object o = this.getSession(CommonKeys.SESSION_USERINFO_KEY);
+
         Map<String, Object> cfg = new HashMap<>();
         cfg.put("fastdfs_server", PropertyUtil.getProperty("fastdfs_server"));
         cfg.put("websocketurl", PropertyUtil.getProperty("websocketurl"));
@@ -95,4 +94,12 @@ public class OAuth2Controller extends LiveBaseController {
         mav.addObject("js", sb.toString());
         return mav;
     }
+
+   /* @RequestMapping(value = "/bind")
+    @ResponseBody
+    public SingleResult<Map<String,Object>> bind(String mobile)throws Exception {
+
+        SingleResult<Map<String,Object>> rst= this.oAuth2Service.bind(,mobile);
+        return rst;
+    }*/
 }

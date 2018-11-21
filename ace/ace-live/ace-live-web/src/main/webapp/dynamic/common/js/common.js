@@ -1,6 +1,6 @@
 /*取消提示*/
 var imgHost = 'http://zx.huacainfo.com/';
-var userUrl = '/portal/system/getUserProp.do';
+var userUrl = '/portal/system/getUserProp';
 var limit = 1000;
 var userProp;
 var start = 0;

@@ -12,7 +12,7 @@ import org.springframework.data.redis.connection.RedisNode;
 
 public class AspireRedisClusterConfiguration extends RedisClusterConfiguration {
 	/**
-	 * 示例：127.0.0.1:23679,127.0.0.1:23680,127.0.0.1:23681
+	 * 示例：192.168.2.253:23679,192.168.2.253:23680,192.168.2.253:23681
 	 * 
 	 * @param redisClusterNodes
 	 */

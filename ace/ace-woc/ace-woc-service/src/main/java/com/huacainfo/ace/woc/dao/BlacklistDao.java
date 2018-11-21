@@ -29,6 +29,10 @@ public interface BlacklistDao {
 			@Param("start") int start, @Param("limit") int limit,
 			@Param("orderBy") String orderBy);
 
+    List<BlacklistVo> findLists(@Param("condition") BlacklistQVo condition,
+                                @Param("start") int start, @Param("limit") int limit,
+                                @Param("orderBy") String orderBy);
+
 	int findCount(@Param("condition") BlacklistQVo condition);
 
 	int isExit(Blacklist record);

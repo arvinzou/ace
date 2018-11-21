@@ -120,4 +120,21 @@ public interface LiveRptService {
     MessageResponse updateSequence(String data);
 
     MessageResponse deleteLiveRptAndImgLiveByRptId(String id,UserProp userProp);
+
+
+
+    /**
+     * @throws
+     * @Title:updateAudit
+     * @Description: TODO(审核)
+     * @param: @param id
+     * @param rst
+     * @param text
+     * @param: @param  userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-09-18
+     */
+    public abstract MessageResponse updateAudit(String id,String rst,String text, UserProp userProp) throws Exception;
 }

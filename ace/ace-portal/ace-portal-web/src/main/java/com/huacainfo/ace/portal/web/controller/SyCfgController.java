@@ -2,6 +2,7 @@ package com.huacainfo.ace.portal.web.controller;
 
 import java.util.Map;
 
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class SyCfgController extends PortalBaseController {
 
 	@RequestMapping(value = "/findSyCfgList.do")
 	@ResponseBody
-	public PageResult<SyCfgVo> findSyCfgList(SyCfgQVo condition, PageParam page)
+	public PageResult<SyCfgVo> findSyCfgList(SyCfgQVo condition, PageParamNoChangeSord page)
 			throws Exception {
 		PageResult<SyCfgVo> rst = this.syCfgService.findSyCfgList(condition,
 				page.getStart(), page.getLimit(), page.getOrderBy());

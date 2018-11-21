@@ -7,7 +7,7 @@
         <version>1.0</version>
     </parent>
     <properties>
-        <maven.tomcat.port>6003</maven.tomcat.port>
+        <maven.tomcat.port>6006</maven.tomcat.port>
         <maven.tomcat.path>/woc</maven.tomcat.path>
     </properties>
     <artifactId>ace-woc-web</artifactId>
@@ -30,18 +30,7 @@
             <type>jar</type>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.23</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.0</version>
-            <type>jar</type>
-            <scope>provided</scope>
-        </dependency>
+        
     </dependencies>
     <build>
         <plugins>

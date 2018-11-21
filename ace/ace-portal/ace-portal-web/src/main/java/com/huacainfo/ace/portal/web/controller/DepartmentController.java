@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.apache.commons.io.FileUtils;
+import java.net.URL;
 
 import java.io.File;
 import java.util.*;
@@ -116,17 +118,14 @@ public class DepartmentController extends PortalBaseController {
 				this.getCurUserProp());
 	}
 
-	private void downFiles(String filePath,String fileName) throws Exception{
+	private void downFiles(String url,String fileName) throws Exception{
 		String dir=System.getProperty("user.home")+File.separator+"files"+File.separator;
 		this.logger.info("user.home-> {}",dir);
 		File tmp = new File(dir);
 		if (!tmp.exists()) {
 			tmp.mkdirs();
 		}
-		java.io.File file=new java.io.File(dir+ fileName);
-		java.io.OutputStream os=new java.io.FileOutputStream(file);
-		fileSaver.outputFile(filePath,os);
-		os.close();
+		FileUtils.copyURLToFile(new URL(url), new File(dir, fileName));
 	}
 	/**
 	 * 

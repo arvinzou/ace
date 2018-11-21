@@ -1,0 +1,23 @@
+.fileBox{
+    width: 320px;
+    height: 180px;
+    text-align: center;
+    line-height: 150px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background:rgba(242,245,249,1);
+}
+.fileBox:after{
+    content: '';
+    clear: both;
+}
+.fileListBox{
+    width: 70px;
+    height: 70px;
+    float: left;
+    background:rgba(242,245,249,1);
+    margin-right: 10px;
+    text-align: center;
+    line-height: 70px;
+}

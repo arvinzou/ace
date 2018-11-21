@@ -1,0 +1,14 @@
+var cfg = {};
+cfg.view_load_data_url = contextPath + '/www/appealCase/selectAppealCaseByPrimaryKey.do';
+cfg.grid_load_data_url = contextPath + '/www/appealCase/findAppealCaseList.do';
+cfg.grid_add_data_url = contextPath + '/www/appealCase/insertAppealCase.do';
+cfg.grid_edit_data_url = contextPath + '/www/appealCase/reply.do';
+cfg.grid_delete_data_url = contextPath + '/www/appealCase/deleteAppealCaseByAppealCaseId.do';
+cfg.grid_selector = "#grid-table";
+cfg.pager_selector = "#grid-pager";
+cfg.rowNum = default_page_list[0];
+cfg.dataId = 'id';
+cfg.gridHeight = 'auto';
+cfg.jgridEditWinWidth = 750;
+cfg.jgridAlertWidth = 400;
+cfg.jgrdInfoDialogWidth = 500;

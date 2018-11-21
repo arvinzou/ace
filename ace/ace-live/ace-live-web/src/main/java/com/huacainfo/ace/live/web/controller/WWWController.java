@@ -90,14 +90,14 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-01
      */
-    @RequestMapping(value = "/getListByCompany.do")
+    @RequestMapping(value = "/getListByCompany")
     @ResponseBody
     public Map<String, Object> getListByCompany(int page, String companyId) throws Exception {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
         return this.wwwService.getLiveList(companyId, page, p);
     }
 
-    @RequestMapping(value = "/getTotalNumAndOrgInfo.do")
+    @RequestMapping(value = "/getTotalNumAndOrgInfo")
     @ResponseBody
     public Map<String, Object> getTotalNumAndOrgInfo(String companyId, String id) throws Exception {
         Map<String, Object> rst = new HashMap<>();
@@ -108,7 +108,7 @@ public class WWWController extends LiveBaseController {
         return rst;
     }
 
-    @RequestMapping(value = "/getShareContent.do")
+    @RequestMapping(value = "/getShareContent")
     @ResponseBody
     public Map<String, Object> getShareContent(String companyId) throws Exception {
         Map<String, Object> rst = new HashMap<>();
@@ -117,7 +117,7 @@ public class WWWController extends LiveBaseController {
         return rst;
     }
 
-    @RequestMapping(value = "/getWxJsSign.do")
+    @RequestMapping(value = "/getWxJsSign")
     @ResponseBody
     public Map<String, Object> getWxJsSign(String companyId) throws Exception {
         String url = this.getRequest().getHeader("referer");
@@ -143,7 +143,7 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-01
      */
-    @RequestMapping(value = "/getInfo.do")
+    @RequestMapping(value = "/getInfo")
     @ResponseBody
     public Map<String, Object> getInfo() throws Exception {
         Map<String, Object> p = this.getParams();
@@ -164,7 +164,7 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-03
      */
-    @RequestMapping(value = "/insertLiveMsg.do")
+    @RequestMapping(value = "/insertLiveMsg")
     @ResponseBody
     public MessageResponse insertLiveMsg(String jsons) throws Exception {
         LiveMsg obj = JSON.parseObject(jsons, LiveMsg.class);
@@ -172,7 +172,7 @@ public class WWWController extends LiveBaseController {
                 .insertLiveMsg(obj);
     }
 
-    @RequestMapping(value = "/sendMsg.do")
+    @RequestMapping(value = "/sendMsg")
     @ResponseBody
     public MessageResponse sendMsg(String message, String rid, String uid) throws Exception {
         logger.debug("{} {}", rid, message);
@@ -200,7 +200,7 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-07
      */
-    @RequestMapping(value = "/getLiveRptList.do")
+    @RequestMapping(value = "/getLiveRptList")
     @ResponseBody
     public Map<String, Object> getLiveRptList(int page, String rid) {
         Map<String, Object> p = this.getPageParam(page, this.getParams());
@@ -218,14 +218,14 @@ public class WWWController extends LiveBaseController {
      * @author: 陈晓克
      * @version: 2018-01-07
      */
-    @RequestMapping(value = "/getLiveMsgList.do")
+    @RequestMapping(value = "/getLiveMsgList")
     @ResponseBody
     public List<Map<String, Object>> getLiveMsgList() {
         return this.wwwService.getLiveMsgList(this.getParams());
     }
 
 
-    @RequestMapping(value = "/cmt.do")
+    @RequestMapping(value = "/cmt")
     @ResponseBody
     public MessageResponse cmt(String companyId,String message, String rid, String uid, String rptId, String topic) throws Exception {
         logger.debug("{} {}", rid, message);
@@ -262,39 +262,21 @@ public class WWWController extends LiveBaseController {
         return new MessageResponse(0, "OK");
     }
 
-    @RequestMapping(value = "/addLike.do")
+    @RequestMapping(value = "/addLike")
     @ResponseBody
     public MessageResponse addLike(String id, String type) throws Exception {
         Map<String, String> data = new HashMap<String, String>();
         data.put("id", id);
         data.put("type", type);
+        data.put("service", "like");
         this.logger.info("{}", data);
-        String topic = "liker";
-        this.kafkaProducerService.sendMsg(topic, data);
+        this.kafkaProducerService.sendMsg("topic.sys.msg.live", data);
         return new MessageResponse(0, "OK");
     }
 
-    @RequestMapping(value = "/insertLiveRpt.do")
-    @ResponseBody
-    public MessageResponse insertLiveRpt(String jsons) throws Exception {
 
-        Map<String, Object> params = JsonUtil.toMap(jsons);
-        String openid = (String) params.get("openid");
-        MessageResponse checked = liveService.checkIsBandUsers(openid);
 
-        //验证通过
-        if (0 == checked.getStatus()) {
-            Map<String, String> data = new HashMap<String, String>();
-            data.put("jsons", jsons);
-            this.kafkaProducerService.sendMsg("rpt", data);
-            return new MessageResponse(0, "OK");
-
-        } else {
-            return checked;
-        }
-    }
-
-    @RequestMapping(value = "/upload.do")
+    @RequestMapping(value = "/upload")
     @ResponseBody
     public Map<String, Object> upload(@RequestParam MultipartFile[] file, String collectionName, String marktext, String companyId)
             throws Exception {
@@ -351,43 +333,24 @@ public class WWWController extends LiveBaseController {
         return rst;
     }
 
-    @RequestMapping(value = "/uploadAmr.do")
+    @RequestMapping(value = "/uploadAmr")
     @ResponseBody
     public SingleResult<Map<String, String>> uploadAmr(String deptId, String serverId) throws Exception {
         return this.WxCfgService.getRecordFile(deptId, serverId);
     }
 
-    @RequestMapping(value = "/visit.do")
+    @RequestMapping(value = "/visit")
     @ResponseBody
     public MessageResponse visit(String id) throws Exception {
         Map<String, String> data = new HashMap<String, String>();
         data.put("id", id);
+        data.put("service", "visit");
         this.logger.info("{}", data);
-        String topic = "visit";
-        this.kafkaProducerService.sendMsg(topic, data);
+        this.kafkaProducerService.sendMsg("topic.sys.msg.live", data);
         return new MessageResponse(0, "OK");
     }
 
 
-    @RequestMapping(value = "/insertLive.do")
-    @ResponseBody
-    public MessageResponse insertLive(String jsons) throws Exception {
-        Map<String, Object> data = JsonUtil.toMap(jsons);
-        String openid = (String) data.get("openid");
-        MessageResponse checked = liveService.checkIsBandUsers(openid);
-        //验证通过
-        if (0 == checked.getStatus()) {
-//            Map<String, String> params = new HashMap<>();
-//            params.put("jsons", jsons);
-//            this.kafkaProducerService.sendMsg("live", data);
 
-            Live live = JsonUtil.toObject(jsons, Live.class);
 
-            return liveService.insertLive(openid, live);
-        } else {
-
-            return checked;
-
-        }
-    }
 }

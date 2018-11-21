@@ -1,0 +1,56 @@
+#operation{
+    height: 60px;
+    text-align: left;
+    line-height: 60px;
+}
+#info table{
+    width: 100%;
+    padding-left: 10px;
+}
+
+.commontr{
+    height: 30px;
+}
+.str{
+    height: 80px;
+}
+.table tr{
+    line-height: 60px !important;
+}
+
+.operation{
+    width: auto;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    display: block;
+    float: left;
+    padding: 5px;
+}
+.operation:after{
+    content: '';
+    clear: both;
+}
+.portlet-title{
+    position: relative;
+}
+.create_course{
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+}
+.make_course{
+    position: absolute;
+    bottom: 10px;
+    right: 110px;
+}
+.active{
+    background: #ffffff !important;
+    color: #000 !important;
+}
+.active a{
+    color: #1a9fff;
+}
+.tdcontent{
+    padding-top: 30px!important;
+}

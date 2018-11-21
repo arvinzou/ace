@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.CourseCmtDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.CourseCmt">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="courseId" jdbcType="VARCHAR" property="courseId"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="grade" jdbcType="VARCHAR" property="grade"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, courseId, userId, createDate, content, grade
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from course_cmt
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from course_cmt
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
+        insert into course_cmt (
+        id, courseId, userId, createDate, content, grade
+        )
+        values (
+        #{id,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR},
+        #{grade,jdbcType=VARCHAR} )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
+        insert into course_cmt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="courseId != null">
+                courseId,
+            </if>
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="grade != null">
+                grade,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="courseId != null">
+                #{courseId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="grade != null">
+                #{grade,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
+        update course_cmt
+        <set>
+            <if test="courseId != null">
+                courseId = #{courseId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                userId = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="grade != null">
+                grade = #{grade,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
+    update course_cmt
+    set courseId = #{courseId,jdbcType=VARCHAR},
+        userId = #{userId,jdbcType=VARCHAR},
+        content = #{content,jdbcType=LONGVARCHAR},
+        grade = #{grade,jdbcType=VARCHAR},
+        createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.CourseCmtVo">
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="courseName" jdbcType="VARCHAR" property="courseName"/>
+    </resultMap>
+    <sql id="Vo_Column_List">
+        c.`name` as courseName,
+        u.nickname, u.headimgurl,
+        t.id, t.courseId, t.userId, t.createDate, t.content, t.grade
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from course_cmt t
+        left join portal.userinfo u on t.userId = u.unionid
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from course_cmt t
+        left join jxb.course c on t.courseId=c.id
+        left join portal.userinfo u on t.userId = u.unionid
+        where 1=1
+        <if test="condition.courseId !=null and condition.courseId !=&quot;&quot;">
+            and t.courseId = #{condition.courseId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.courseName !=null and condition.courseName !=&quot;&quot;">
+            and c.`name` like concat('%',#{condition.courseName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.nickname !=null and condition.nickname !=&quot;&quot;">
+            and u.nickname like concat('%',#{condition.nickname,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.counselorId !=null and condition.counselorId !=&quot;&quot;">
+            and c.createUserId = #{condition.counselorId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.CourseCmt">
+        select count(1)
+        from counselor
+        where 1=1
+    </select>
+</mapper>

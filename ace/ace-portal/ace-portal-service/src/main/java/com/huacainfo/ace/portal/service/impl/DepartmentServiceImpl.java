@@ -6,7 +6,7 @@ import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult ;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
@@ -283,4 +283,32 @@ public class DepartmentServiceImpl implements DepartmentService {
 				"rs.xls", userProp);
 		return new MessageResponse(0, "导入完成！");
 	}
+
+    /**
+     * 可指定department_id，插入记录
+     *
+     * @param o
+     * @param userProp
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse insertDepartmentWithDepId(Department o, UserProp userProp) throws Exception {
+
+        if (CommonUtils.isBlank(o.getParentDepartmentId())) {
+            return new MessageResponse(1, "所属协会不能为空！");
+        }
+        if (CommonUtils.isBlank(o.getDepartmentName())) {
+            return new MessageResponse(1, "企业名称不能为空！");
+        }
+
+        o.setRegDate(new Date());
+        o.setCreateTime(new Date());
+        o.setStatus("1");
+        o.setSyid(userProp.getActiveSyId());
+        this.departmentDao.insertDepartmentWithDepId(o);
+        this.dataBaseLogService.log("添加新机构", "机构", "企业名称：" + o.getDepartmentName() + "营业执照号：" + o.getBussLicenseNo() + ",企业编号：" + o.getDepartmentId(), "",
+                o.getDepartmentName(), userProp);
+        return new MessageResponse(0, "添加新机构完成！");
+    }
 }

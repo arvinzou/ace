@@ -1,12 +1,12 @@
 package com.huacainfo.ace.portal.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.tools.SpringUtils;
 import com.huacainfo.ace.common.web.tools.AccessToken;
 import com.huacainfo.ace.common.web.tools.AccessTokenUtil;
 import com.huacainfo.ace.portal.service.WxCfgService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -15,54 +15,58 @@ import java.util.Map;
  * Created by chenxiaoke on 2017/8/16.
  */
 public class TokenThread implements Runnable {
-	public static AccessToken access_token = null;
+    public static AccessToken access_token = null;
 
     Logger logger = LoggerFactory.getLogger(TokenThread.class);
 
     private WxCfgService wxCfgService;
 
 
+    public TokenThread() {
 
-
-	public TokenThread(){
-
-		this.wxCfgService=(WxCfgService)SpringUtils.getBean("wxCfgService");
+        this.wxCfgService = (WxCfgService) SpringUtils.getBean("wxCfgService");
         logger.info("TokenThread start -> {}", new java.util.Date());
     }
 
-	@Override
-	public void run() {
-		while (true) {
-			try {
-				// 调用工具类获取access_token(每日最多获取100000次，每次获取的有效期为7200秒)
-				List<Map<String,Object>> list=this.wxCfgService.selectAppList();
-				for(Map<String,Object> o:list){
-					access_token = AccessTokenUtil.getAccessToken((String) o.get("appId"), (String) o.get("appScret"));
-                    String ticket = AccessTokenUtil.gettTcket(access_token.getAccess_token());
-                    this.wxCfgService.updateAccessTokenTicket((String) o.get("appId"), access_token.getAccess_token(), ticket, access_token.getExpires_in());
-                    if (null != access_token) {
-						logger.info("accessToken获取成功：{},{}",access_token.getAccess_token(), access_token.getExpires_in());
-					}
-				}
-
-
-				if (null != access_token) {
-					// 7000秒之后重新进行获取
-					Thread.sleep((access_token.getExpires_in() - 500) * 1000);
-				} else {
-					// 获取失败时，60秒之后尝试重新获取
-					Thread.sleep(60 * 1000);
-				}
-			} catch (InterruptedException e) {
-                logger.error("{}",e);
-			}
-		}
-	}
-
     public static void main(String args[]) {
         Logger logger = LoggerFactory.getLogger(TokenThread.class);
-        AccessToken o = AccessTokenUtil.getAccessToken("wx29ecb720b03ea466", "03ea9a47442c14208943043e62114fc6");
+        AccessToken o = AccessTokenUtil.getAccessToken("wx6a39a6f86925a42d", "cb637c9f653a6db86c42f8e788a52c4a");
         logger.info("{}", o);
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                // 调用工具类获取access_token(每日最多获取100000次，每次获取的有效期为7200秒)
+                List<Map<String, Object>> list = this.wxCfgService.selectAppList();
+                String ticket;
+                for (Map<String, Object> o : list) {
+                    logger.info("==========开始【" + o.get("appId") + "】accessToken获取==========");
+                    access_token = AccessTokenUtil.getAccessToken((String) o.get("appId"), (String) o.get("appScret"));
+                    if (null == access_token
+                            || StringUtil.isEmpty(access_token.getAccess_token())) {
+                        continue;
+                    }
+                    ticket = AccessTokenUtil.gettTcket(access_token.getAccess_token());
+                    this.wxCfgService.updateAccessTokenTicket((String) o.get("appId"), access_token.getAccess_token(), ticket, access_token.getExpires_in());
+                    if (null != access_token) {
+                        logger.info("【" + o.get("appId") + "】accessToken获取成功：{},{}", access_token.getAccess_token(), access_token.getExpires_in());
+                    }
+                }
+
+
+                if (null != access_token) {
+                    // 7000秒之后重新进行获取
+                    Thread.sleep((access_token.getExpires_in() - 500) * 1000);
+                } else {
+                    // 获取失败时，60秒之后尝试重新获取
+                    Thread.sleep(60 * 1000);
+                }
+            } catch (Exception e) {
+                logger.error("{}", e);
+            }
+        }
     }
 
 }

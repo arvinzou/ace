@@ -1,0 +1,35 @@
+package com.huacainfo.ace.cu.dao;
+
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+import com.huacainfo.ace.cu.model.$!{bean.name};
+import com.huacainfo.ace.cu.vo.$!{bean.name}QVo;
+import com.huacainfo.ace.cu.vo.$!{bean.name}Vo;
+
+public interface $!{bean.name}Dao {
+
+$!{bean.name} selectByPrimaryKey(String id);
+
+int deleteByPrimaryKey(String id);
+
+int insert($!{bean.name} record);
+
+int insertSelective($!{bean.name} record);
+
+int updateByPrimaryKey($!{bean.name} record);
+
+int updateByPrimaryKeySelective($!{bean.name} record);
+
+$!{bean.name}Vo selectVoByPrimaryKey(String id);
+
+List
+<$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
+    @Param("start") int start,
+    @Param("limit") int limit,
+    @Param("orderBy") String orderBy);
+
+    int findCount(@Param("condition") $!{bean.name}QVo condition);
+
+    int isExit($!{bean.name} record);
+
+    }

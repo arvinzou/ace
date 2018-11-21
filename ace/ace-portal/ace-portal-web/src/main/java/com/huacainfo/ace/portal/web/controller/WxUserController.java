@@ -1,5 +1,6 @@
 package com.huacainfo.ace.portal.web.controller;
 
+import com.huacainfo.ace.common.result.ResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,4 +88,12 @@ public class WxUserController extends PortalBaseController {
 	public List<Map<String,Object>> selectWxUser()throws Exception{
 		return this.wxUserService.selectWxUser(this.getParams());
 	}
+
+	@RequestMapping(value = "/getSysWxUsers.do")
+	@ResponseBody
+	public ResultResponse getSysWxUsers()throws Exception{
+		return this.wxUserService.getSysWxUsers(this.getCurUserProp().getActiveSyId());
+	}
+
+
 }

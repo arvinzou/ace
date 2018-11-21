@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.EvaluatCaseDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.EvaluatCase">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="evaluatTplId" jdbcType="VARCHAR" property="evaluatTplId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="cntImg" jdbcType="VARCHAR" property="cntImg" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="solution" jdbcType="VARCHAR" property="solution" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, evaluatTplId, title, type, cntImg, score, solution, sort, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from evaluat_case
+        where id = #{EvaluatCaseId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluat_case
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <!--  <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatCase">
+        insert into evaluat_case (id, evaluatTplId, title,
+          type, cntImg, score,
+          solution, sort, createDate
+          )
+        values (#{id,jdbcType=VARCHAR}, #{evaluatTplId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+          #{type,jdbcType=VARCHAR}, #{cntImg,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER},
+          #{solution,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}
+          )
+      </insert>-->
+    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.EvaluatCase">
+        insert into evaluat_case
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="evaluatTplId != null">
+                evaluatTplId,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="cntImg != null">
+                cntImg,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="solution != null">
+                solution,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="evaluatTplId != null">
+                #{evaluatTplId,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="cntImg != null">
+                #{cntImg,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="solution != null">
+                #{solution,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatCase">
+    update evaluat_case
+      <set>
+          <if test="evaluatTplId != null">
+              evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR},
+          </if>
+          <if test="title != null">
+              title = #{title,jdbcType=VARCHAR},
+          </if>
+          <if test="type != null">
+              type = #{type,jdbcType=VARCHAR},
+          </if>
+          <if test="cntImg != null">
+              cntImg = #{cntImg,jdbcType=VARCHAR},
+          </if>
+          <if test="score != null">
+              score = #{score,jdbcType=INTEGER},
+          </if>
+          <if test="solution != null">
+              solution = #{solution,jdbcType=VARCHAR},
+          </if>
+          <if test="sort != null">
+              sort = #{sort,jdbcType=INTEGER},
+          </if>
+          <if test="createDate != null">
+              createDate = #{createDate,jdbcType=TIMESTAMP},
+          </if>
+      </set>
+      where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <!--  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.EvaluatCase">
+        update evaluat_case
+        set evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR},
+          title = #{title,jdbcType=VARCHAR},
+          type = #{type,jdbcType=VARCHAR},
+          cntImg = #{cntImg,jdbcType=VARCHAR},
+          score = #{score,jdbcType=INTEGER},
+          solution = #{solution,jdbcType=VARCHAR},
+          sort = #{sort,jdbcType=INTEGER},
+          createDate = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=VARCHAR}
+      </update>-->
+
+
+    <sql id="whereCondition">
+        from evaluat_case where 0=0
+        <if test='condition.title!=null and condition.title!=""'>
+            and title like concat(#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.evaluatTplId!=null and condition.evaluatTplId!=""'>
+            and evaluatTplId =#{condition.evaluatTplId,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="findList" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="isExit" resultType="int">
+        select count(*)
+        from
+        evaluat_case where
+        title=#{condition.title,jdbcType=VARCHAR}
+        and
+        evaluatTplId=#{condition.evaluatTplId,jdbcType=VARCHAR}
+        and
+        id !=#{condition.id,jdbcType=VARCHAR}
+    </select>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.portal.vo.EvaluatCaseVo">
+
+    </resultMap>
+
+    <delete id="deleteByEvaluatTplId" parameterType="java.lang.String">
+        delete from evaluat_case
+        where evaluatTplId = #{evaluatTplId,jdbcType=VARCHAR}
+    </delete>
+
+
+</mapper>

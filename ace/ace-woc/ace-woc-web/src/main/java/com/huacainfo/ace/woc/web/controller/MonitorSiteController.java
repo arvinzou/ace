@@ -70,7 +70,6 @@ public class MonitorSiteController extends WocBaseController {
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
@@ -184,8 +183,7 @@ public class MonitorSiteController extends WocBaseController {
      */
     @RequestMapping(value = "/findMonitorSiteDetailList")
     @ResponseBody
-    public PageResult<MonitorSiteDetailVo> findMonitorSiteDetailList(MonitorSiteDetailQVo condition,
-                                                                     PageParamNoChangeSord page) throws Exception {
+    public PageResult<MonitorSiteDetailVo> findMonitorSiteDetailList(MonitorSiteDetailQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<MonitorSiteDetailVo> rst = this.monitorSiteDetailService
                 .findMonitorSiteDetailList(condition, page.getStart(), page.getLimit(),
                         page.getOrderBy());

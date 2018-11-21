@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -400,5 +401,81 @@ public class UsersController extends PortalBaseController {
 	@ResponseBody
 	public List<Map<String,Object>> selectWxUser()throws Exception{
 		return this.usersService.selectWxUser(this.getParams());
+	}
+
+
+
+	/**
+	 * @throws
+	 * @Title:updateUserAppOpenId
+	 * @Description: TODO(绑定小程序用户)
+	 * @param: @param userId
+	 * @param: @param appOpenId
+	 * @param: @param  userProp
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	@RequestMapping(value = "/updateUserAppOpenId.do")
+	@ResponseBody
+	public  MessageResponse updateUserAppOpenId(String userId,String appOpenId)throws Exception{
+		return this.usersService.updateUserAppOpenId(userId,appOpenId,this.getCurUserProp());
+	}
+	/**
+	 * @throws
+	 * @Title:selectAppWxUser
+	 * @Description: TODO(查询已绑定的小程序用户)
+	 * @param: @param Map<String,Object> userId
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	@RequestMapping(value = "/selectAppWxUser.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectAppWxUser()throws Exception{
+		return this.usersService.selectAppWxUser(this.getParams());
+	}
+	/**
+	 * @throws
+	 * @Title:selectAllAppWxUserList
+	 * @Description: TODO(查询appId下所有小程序用户)
+	 * @param: @param userProp
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+    @RequestMapping(value = "/selectAllAppWxUserList.do")
+    @ResponseBody
+	public List<Map<String,Object>> selectAllAppWxUserList()throws Exception{
+		Map<String,Object> p=this.getParams();
+		p.put("corpId",this.getCurUserProp().getCorpId());
+		return this.usersService.selectAllAppWxUserList(p);
+	}
+	/**
+	 * @throws
+	 * @Title:selectAllWxUserList
+	 * @Description: TODO(查询appId下所有公众号用户)
+	 * @param: @param userProp
+	 * @param: @throws Exception
+	 * @return: List<Map<String,Object>>
+	 * @author: 陈晓克
+	 * @version: 2018-04-25
+	 */
+	@RequestMapping(value = "/selectAllWxUserList.do")
+	@ResponseBody
+	public List<Map<String,Object>> selectAllWxUserList()throws Exception{
+		Map<String,Object> p=this.getParams();
+		p.put("corpId",this.getCurUserProp().getCorpId());
+		return this.usersService.selectAllWxUserList(p);
+	}
+
+
+	@RequestMapping(value = "/deleteAppOpenIdById.do")
+	@ResponseBody
+	public MessageResponse deleteAppOpenIdById(String userId) throws Exception {
+		return this.usersService.deleteAppOpenIdById(userId, this.getCurUserProp());
 	}
 }

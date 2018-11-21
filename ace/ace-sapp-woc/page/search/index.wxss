@@ -1,0 +1,281 @@
+@import "../common/lib/weui.wxss";
+
+.lf{
+	float: left;
+}
+.rt{
+	float: right;
+}
+
+.tel{
+    width: 90%;
+    margin: 0 auto;
+	border-bottom: 2rpx solid #E4E6E9;
+	height: 100rpx;
+	line-height:100rpx;
+}
+.chepai{
+	height: 100rpx;
+	line-height:100rpx;
+}
+.chepai_num{
+    width: 11%;
+    height: 80rpx;
+    float: left;
+    line-height: 80rpx;
+    text-align: center;
+    border: 2rpx solid #3C82FC;
+}
+.chepai3{
+    margin-left: 6%;
+}
+.default{
+    color: #E4E6E9;
+}
+.tap_select{
+    color: #3C82FC;
+}
+.chepai2{
+   margin-left: 1%;
+   background-color: #3C82FC;
+   color: #7FAEFF;
+}
+.chepai1{
+    margin-left: 6%;
+    background-color: #3C82FC;
+    color: #7FAEFF;
+}
+.provinces{
+    width: 90%;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding:0 0;
+	position: absolute;
+	top: 450rpx;
+	left: 5%;
+	z-index: 10000;
+    color: #000000;
+}
+.charac{
+    width: 90%;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding:0 0;
+	position: absolute;
+	top: 450rpx;
+	left: 5%;
+	z-index: 10000;
+    color: #000000;
+}
+.pro_li{
+	font-size: 36rpx;
+	height: 70rpx;
+	width: 10%;
+	line-height: 70rpx;
+	text-align: center;
+	border: 2rpx solid #E4E6E9;
+	margin: 1% 1.6%;
+	background-color:#fff; 
+}
+.pro_li_bank{
+    font-size: 36rpx;
+	height: 70rpx;
+	width: 10%;
+	line-height: 70rpx;
+	text-align: center;
+	/* border: 2rpx solid #E4E6E9; */
+	margin: 1% 1.6%;
+	background-color:#fff; 
+}
+.pro_close{
+	width: 70rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	font-size: 32rpx;
+	text-align: center;
+	background-color: #fff;
+    margin-left: 1.6%;
+}
+.pro_del{
+	width: 70rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	font-size: 32rpx;
+	text-align: center;
+	border: 2rpx solid #E4E6E9;
+	margin: 5rpx;
+}
+.keyNums{
+    width: 90%;
+	overflow: hidden;
+	background-color: #FFFFFF;
+	padding:0 0;
+	position: absolute;
+	top:450rpx;
+	left: 5%;
+	z-index: 10000;
+    color: #000000;
+}
+.pro_ok{
+	width: 100rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	font-size: 32rpx;
+	text-align: center;
+	background-color: #fff;
+	border: 2rpx solid #E4E6E9;
+	margin: 5rpx ;
+	/* margin-left: 35%; */
+}
+.pro_d{
+	width: 100rpx;
+	height: 70rpx;
+	line-height: 70rpx;
+	font-size: 32rpx;
+	text-align: center;
+	background-color: #fff;
+	border: 2rpx solid #E4E6E9;
+	margin: 5rpx;
+}
+.header{
+  width: 100%;
+  height: 400rpx;
+}
+.main{
+  width: 100%;
+  position: relative;
+}
+.container{
+  width: 100%;
+}
+.formTitle{
+  padding-top: 50rpx;
+  text-align: center;
+  font-size: 38rpx;
+  font-weight: bolder;
+  color: #25324E;
+  margin-bottom: 50rpx;
+}
+.phoneContainer{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  border-bottom: 2rpx solid #E4E6E9;
+  height: 100rpx;
+  line-height:100rpx;
+}
+.phoneContainer input{
+    width: 100%;
+    height: 100%;
+    color: #3C82FC;
+}
+.randCode{
+   width: 90%;
+   margin: 0 auto;
+   border-bottom: 2rpx solid #E4E6E9;
+   height: 100rpx;
+   line-height:100rpx;
+}
+.getCheck{
+    width: 100%;
+    height: 60%;
+    line-height: 60%;
+    color: #798092;
+    margin-top: 10%;
+}
+.randCode input{
+    width: 100%;
+    height: 100%;
+    color: #3C82FC;
+}
+.searchBtn{
+  padding-top: 50rpx;
+  width: 70%;
+  margin: 0 auto;
+}
+.searchContainer{
+  background-color: #FFFFFF;
+  width: 90%;
+  height: 700rpx;
+  position: absolute; 
+  top: 250rpx; 
+  left: 5%;
+  border-radius: 5%;
+}
+.record{
+    width: 100%;
+    margin-top: 500rpx;
+}
+.carNum{
+  color: #3C82FC;
+  font-size: 36rpx;
+  text-align: center;
+}
+.totalNum{
+  color: #798092;
+  text-align: center;
+  font-size: 24rpx;
+}
+.detail{
+  width: 90%;
+  height: 400rpx;
+  margin: 10% auto;
+  background-color: #FFFFFF;
+  border-radius: 5%;
+}
+.loadDetail{
+  width:90%;
+  margin: 0 auto;
+  height: 100rpx;
+  line-height: 100rpx; 
+  color: #798092;
+  display: flex;
+  border-bottom: 2rpx solid #E4E6E9;
+  
+}
+.loadDetail_1{
+  display: flex;
+  width: 90%;
+  color: #3C82FC;
+  margin: 0 auto;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 2rpx solid #E4E6E9; 
+}
+.location{
+  width: 60%;
+  height: 50rpx;
+}
+.load{
+  width: 20%;
+  height: 50rpx;
+}
+.loadPercent{
+  width: 20%;
+  height: 50rpx;
+}
+.searchBtn button{
+    color: #FFFFFF;
+    background-color: #3C82FC;
+}
+.checkTime{
+    width: 90%;
+    margin: 0 auto;
+    height: 100rpx;
+    line-height: 100rpx;
+    border-bottom: 2rpx solid #E4E6E9;
+    color: #798092;
+}
+.more{
+    width: 90%;
+    margin: 0 auto;
+    height: 100rpx;
+    line-height: 100rpx;
+    color: #798092;
+    /* border-bottom: 2rpx solid #E4E6E9; */
+}
+.recodeItem{
+    padding-top: 50rpx;
+}
+
+

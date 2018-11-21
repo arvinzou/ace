@@ -11,8 +11,8 @@ body {
   font-size: 100% !important;
 }
 .btn {
-  padding: 1px 4px;
-  font-size: 12px;
+  padding: 3px 10px;
+  font-size: 14px;
   line-height: 1.22857143;
 }
 .space10{
@@ -24,46 +24,37 @@ body {
   height: 36px;
   padding-top: 2px !important;
   padding-bottom: 2px !important;
-  border-bottom: 1px solid #E1E1E1 !important;
-  border-top: 1px solid #E1E1E1 !important;
-  border-left: 1px solid #E1E1E1 !important;
-  border-right: 1px solid #E1E1E1 !important;
+  border-bottom: 1px solid #e7ecf1 !important;
+  border-top: 1px solid #e7ecf1 !important;
+  border-left: 1px solid #e7ecf1 !important;
+  border-right: 1px solid #e7ecf1 !important;
 }
 .ui-jqgrid .ui-jqgrid-htable th span.ui-jqgrid-resize {
   height: 29px !important;
 }
 .ui-jqgrid .ui-jqgrid-htable th div {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-.widget-header {
-  min-height: 30px;
-  height: 30px;
-  font-size: 14px;
-  color:#000000;
-  font-weight:800
+.ui-jqdialog .ui-widget-header .widget-header {
+    border-bottom: none;
+    min-height: 30px;
+    height: 30px;
+    padding:15px;
 }
 .widget-header>.widget-title {
-    line-height: 30px;
-    font-size: 14px;
-      color:#000000;
-      font-weight:800
+    color:#666
 }
 /*表格编辑窗口标题栏高度*/
 .ui-jqdialog .ui-widget-header {
-    min-height: 30px;
-    font-size: 14px;
-      color:#000000;
-      font-weight:800
+    color:#666
 }
 .ui-jqdialog .ui-widget-header .ui-jqdialog-title {
-    line-height: 30px;
-   font-size: 14px;
-     color:#000000;
-     font-weight:800
+    color:#666
 }
 .ui-jqdialog-content td.EditButton {
     padding: 5px;
+    color:#666
 }
 .ui-jqdialog-content td.navButton {
     padding-bottom: 3px;
@@ -99,7 +90,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .ui-jqgrid .ui-jqgrid-htable th div {
     overflow: hidden;
     position: relative;
-    height: 28px;
+    height: 35px;
 }
 
 .ui-jqgrid .tree-plus {
@@ -176,32 +167,11 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .dataTables_paginate {
     text-align: right;
 }
-.pagination>li>a, .pagination>li>span {
-    position: relative;
-    float: left;
-    padding: 1px 5px 1px 5px;
-    line-height: 1.42857143;
-    text-decoration: underline;
-    color: blue;
-    background-color: #ffffff;
-    border: 0px solid #ddd;
-    margin-left: -1px;
-}
+
 .dataTables_info {
     font-size: 12px;
 }
-.pagination>li.disabled>a, .pager>li.disabled>a, .pagination>li.disabled>a:hover, .pager>li.disabled>a:hover {
-    background-color: #FFFFFF;
-    border-color: #d9d9d9;
-    z-index: auto;
-}
-.pagination>li.active>a, .pagination>li.active>a:hover {
-    background-color: #FFFFFF;
-    border-color: #FFFFFF;
-    color: blue;
-    text-shadow: null;
-    z-index: 2;
-}
+
 .dataTables_wrapper label {
     display: inline-block;
     font-size: 12px;
@@ -217,7 +187,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     padding: 3px;
     line-height: 1.42857143;
     vertical-align: top;
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #e7ecf1;
 }
 .center{
     text-align:center;
@@ -233,7 +203,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-bottom: 5px;
     margin-top: 5px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e7ecf1;
     font-weight:800;
     font-size:14px;
 }
@@ -242,7 +212,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     margin-bottom: 5px;
     margin-top: 5px;
     padding-bottom: 4px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e7ecf1;
     font-weight:800;
     font-size:14px;
     color:#000000;
@@ -275,12 +245,13 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     background-color: #ffffff !important;
 }
 .EditTable {
-   background-color: #ffffff;
+   background-color: #fff;
+   height:60px;
 }
 .widget-header {
-    background: #ffffff;
-     background-image: -webkit-linear-gradient();
-     background-image: linear-gradient();
+    background: #fff;
+    background-image: -webkit-linear-gradient();
+    background-image: linear-gradient();
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient();
 }
@@ -295,21 +266,17 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     filter: progid:DXImageTransform.Microsoft.gradient();
 }
 .ui-jqgrid tr.ui-row-ltr td, .ui-jqgrid tr.ui-row-rtl td {
-    border-color: #ddd;
+    border-color: #e7ecf1;
 }
 .ui-jqgrid .ui-jqgrid-labels th {
-    border-right: 1px solid #ddd !important;
+    border-right: 1px solid #e7ecf1 !important;
     text-align: left !important;
 }
 .ui-jqgrid-btable .ui-widget-content.ui-priority-secondary{
-    background-color: #fff;
+    background-color: #fbfcfd;
 
 }
-.ui-jqgrid .ui-jqgrid-bdiv {
-    border-top: 1px solid #E1E1E1;
-    border-left: 1px solid #E1E1E1;
-    border-right: 1px solid #E1E1E1;
-}
+
 .ui-jqgrid-btable .ui-widget-content.ui-state-highlight {
     background-color: #C8D046;
 }
@@ -325,12 +292,12 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     filter: progid:DXImageTransform.Microsoft.gradient();
 }
 .profile-user-info-striped {
-     border: 0px solid #ddd;
+     border: 0px solid #e7ecf1;
 }
 .profile-user-info-striped .profile-info-name {
      color: #000000;
      background-color: #fff;
-     border-top: 0px solid #ddd;
+     border-top: 0px solid #e7ecf1;
 }
 
 .profile-info-name {
@@ -339,14 +306,14 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
     font-weight: normal;
     color: #000000;
     background-color: transparent;
-     border-top: 0px dotted #ddd;
+     border-top: 0px dotted #e7ecf1;
     display: table-cell;
     width: auto;
     vertical-align: middle;
 }
 
 .profile-user-info-striped .profile-info-value {
-     border-top: 0px dotted #ddd;
+     border-top: 0px dotted #e7ecf1;
     padding-left: 1px;
 }
 .profile-info-value {
@@ -355,7 +322,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 .profile-info-value {
     display: table-cell;
     padding: 6px 4px 6px 6px;
-    border-top: 0px dotted #ddd;
+    border-top: 0px dotted #e7ecf1;
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
@@ -408,11 +375,11 @@ input[readonly] {
     min-height: 25px;
 }
 .ui-dialog, .ui-jqdialog {
-       border: 1px solid #999;
        border: 1px solid rgba(0,0,0,.2);
        border-radius: 0px;
        -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
-       box-shadow: 0 3px 9px rgba(0,0,0,.5);
+       box-shadow: 0 5px 15px rgba(0,0,0,.5);
+       outline: 0;
 }
 th[aria-selected=true] {
     background-image: -webkit-linear-gradient(top, #fff 0, #fff 100%);
@@ -452,10 +419,142 @@ input[type="checkbox"].ace.ace-switch + .lbl::after {
 .ui-jqgrid .ui-jqgrid-hdiv {
     overflow-x: '';
 }
-.ui-jqgrid tr.jqgrow td {
+/*.ui-jqgrid tr.jqgrow td {
   white-space: normal !important;
   height:auto;
   vertical-align:text-top;
   padding-top:1px;
   word-break:break-all;
+ }*/
+
+ .ui-jqgrid tr.ui-row-ltr td, .ui-jqgrid tr.ui-row-rtl td {
+     border-bottom: 1px solid #e7ecf1;
+     padding: 7px 4px;
+     border-color: #e7ecf1;
  }
+
+.ui-dialog .widget-header, .ui-jqdialog .widget-header {
+    margin: 0;
+    padding: 15px;
+    border-width: 0 0 1px 0;
+}
+
+ .page-content-wrapper .page-content {
+    margin-left: 200px;
+    margin-top: 0;
+    min-height: 600px;
+    padding: 0px 0px 0px;
+}
+.page-sidebar {
+    width: 200px;
+    float: left;
+    position: relative;
+    margin-right: -100%;
+}
+.tabs-header, .tabs-tool {
+    background-color: #ffffff;
+}
+a, button, code, div, img, input, label, li, p, pre, select, span, svg, table, td, textarea, th, ul {
+    -webkit-border-radius: 0!important;
+    -moz-border-radius: 0!important;
+    border-radius: 0px!important;
+}
+.page-header.navbar.navbar-fixed-top, .page-header.navbar.navbar-static-top {
+    z-index: 90;
+}
+.page-header.navbar .page-logo .logo-default {
+    margin:5px;
+    max-height:40px;
+}
+
+.btn-info:hover, .btn-info:active, .open .btn-info.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+
+
+
+.btn-info, .btn-info:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+
+.btn-warning, .btn-warning:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+.btn-warning:hover, .btn-warning:active, .open .btn-warning.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+
+
+.btn-purple, .btn-purple:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+.btn-purple:hover, .btn-purple:active, .open .btn-purple.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+
+
+.btn-primary, .btn-primary:focus {
+    background-color: #1890ff !important;
+    border-color: #1890ff;
+}
+
+
+.btn-primary:hover, .btn-primary:active, .open .btn-primary.dropdown-toggle {
+    background-color: blue !important;
+    border-color: blue;
+}
+.navbar .navbar-brand {
+    color: #fff;
+    font-size: 14px;
+    text-shadow: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: auto;
+}
+
+.page-header.navbar .page-logo {
+    float: left;
+    display: block;
+    width: auto;
+    height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ui-jqgrid tr.jqgrow td { white-space: normal !important; height:auto; }
+.paginationbar {
+    width: 100%;
+    text-align: right;
+}
+.ui-jqgrid tr.ui-row-ltr td {
+    text-align: left;
+    border-right-width: 0px;
+    border-right-color: inherit;
+    border-right-style: solid;
+}
+.ui-jqgrid .ui-jqgrid-labels th {
+    border-right: 0px solid #e7ecf1 !important;
+    text-align: left !important;
+}
+.ui-jqgrid .ui-jqgrid-btable {
+    border-left: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-top: 0px solid #e7ecf1;
+}
+.ui-jqgrid-hdiv .ui-jqgrid-htable {
+    border-right: 0px solid #e7ecf1;
+}
+.ui-jqgrid .ui-jqgrid-labels {
+    border-left: 0px solid #e7ecf1 !important;
+}
+

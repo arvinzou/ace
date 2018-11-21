@@ -59,6 +59,10 @@ public class Users implements java.io.Serializable{
 	private String formId;
 
 	private String openId;
+
+	private String appOpenId;
+
+	private String locked;
 	
 	
 	public String getCurSyid() {
@@ -221,7 +225,21 @@ public class Users implements java.io.Serializable{
 		this.openId = openId;
 	}
 
+	public String getAppOpenId() {
+		return appOpenId;
+	}
 
+	public void setAppOpenId(String appOpenId) {
+		this.appOpenId = appOpenId;
+	}
+
+	public String getLocked() {
+		return locked;
+	}
+
+	public void setLocked(String locked) {
+		this.locked = locked;
+	}
 
 	@Override
 	public String toString() {
@@ -251,6 +269,8 @@ public class Users implements java.io.Serializable{
 				", id='" + id + '\'' +
 				", formId='" + formId + '\'' +
 				", openId='" + openId + '\'' +
+				", appOpenId='" + appOpenId + '\'' +
+				", locked='" + locked + '\'' +
 				'}';
 	}
 }

@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:amq="http://activemq.apache.org/schema/core" xmlns:jms="http://www.springframework.org/schema/jms"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-       xsi:schemaLocation="
-	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
-	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-	http://activemq.apache.org/schema/core  http://activemq.apache.org/schema/core/activemq-core-5.2.0.xsd
-	http://www.springframework.org/schema/jms  http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
-	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
-	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+
+
+
+
+
+
 	http://code.alibabatech.com/schema/dubbo  http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
     <import resource="classpath:dubbo/dubbo-ace-common-provider.xml"/>
     <dubbo:service interface="com.huacainfo.ace.portal.service.DataBaseLogService"
@@ -92,4 +87,62 @@
 
     <dubbo:service interface="com.huacainfo.ace.portal.service.SensitiveWordsService"
                    ref="sensitiveWordsService"/>
+
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.ArticleService"
+                   ref="articleService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.ArticleCategoryService"
+                   ref="articleCategoryService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.ArticleCmtService"
+                   ref="articleCmtService"/>
+
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.TplService"
+                   ref="tplService"/>
+
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.TplPageService"
+                   ref="tplPageService"/>
+
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.AppealService"
+                   ref="appealService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.AppealCaseService"
+                   ref="appealCaseService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.MessageTemplateService"
+                   ref="messageTemplateService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WechatService"
+                   ref="wechatService"/>
+
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatCaseService"
+                   ref="evaluatCaseService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatCaseSubService"
+                   ref="evaluatCaseSubService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatCmtService"
+                   ref="evaluatCmtService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatGaugeService"
+                   ref="evaluatGaugeService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatTplService"
+                   ref="evaluatTplService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatTypeService"
+                   ref="evaluatTypeService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.EvaluatDataService"
+                   ref="evaluatDataService"/>
+
+    <dubbo:service interface="com.huacainfo.ace.portal.service.CanvasTmplService"
+                   ref="canvasTmplService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.CanvasTmplItemService"
+                   ref="canvasTmplItemService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WeChatAuthorizeService"
+                   ref="weChatAuthorizeService"/>
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WeChatApiService"
+                   ref="weChatApiService"/>
+
 </beans>

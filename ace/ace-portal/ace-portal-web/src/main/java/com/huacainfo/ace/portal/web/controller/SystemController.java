@@ -1,18 +1,5 @@
 package com.huacainfo.ace.portal.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -21,6 +8,18 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DictUtils;
 import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.service.SystemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 @Controller
 @RequestMapping("/system")
 public class SystemController extends PortalBaseController{
@@ -65,10 +64,18 @@ public class SystemController extends PortalBaseController{
 	 */
 	@RequestMapping(value = "/getTreeList.do")
 	@ResponseBody
-	public List<Tree> getTreeList(String loadButton)throws Exception {
+	public List<Tree> getTreeList(String loadButton,String client)throws Exception {
 		//loadbutton=false;
 		boolean lb=Boolean.valueOf(loadButton);
-		List<Tree> list=this.systemService.getTreeList(this.getSessionUserResources(),"0",lb);
+		String rootId="0";
+		if(CommonUtils.isNotEmpty(client)){
+			Map<String,String> cfg=(Map<String,String>)this.getSession("cfg");
+			if(CommonUtils.isNotEmpty(cfg.get("menuRootId"))){
+				rootId=cfg.get("menuRootId");
+			}
+		}
+		this.logger.info("=======================rootId:{}",rootId);
+		List<Tree> list=this.systemService.getTreeList(this.getSessionUserResources(),rootId,lb);
 		return list;
 	}
 	/**
@@ -86,11 +93,7 @@ public class SystemController extends PortalBaseController{
 		List<Resources> list=null;
 		List<Resources> rst=new ArrayList<Resources>();
 		Object o=this.getSession(SESSION_USER_RESOURCES);
-		System.out.println("=====================1=====================");
-		this.logger.info("=======================1================================");
-		//如果没有获取到SESSION_USER_RESOUCES的值，
 		if(CommonUtils.isBlank(o)){
-			this.logger.info("==========================is blank========================="+this.getCurUserProp().getUserId());
 			list=this.systemService.getResourcesByUserId(this.getCurUserProp().getUserId());
 			this.getRequest().getSession().setAttribute(SESSION_USER_RESOURCES, list);
 		}else{
@@ -100,10 +103,6 @@ public class SystemController extends PortalBaseController{
 			if(e.getSyid().equals(this.getCurUserProp().getActiveSyId())||e.getSyid().equals("sys")){
 				rst.add(e);
 			}
-		}
-		//测试
-		for(Resources li:list){
-			this.logger.info(li.toString());
 		}
 		return list;
 	}
@@ -316,8 +315,18 @@ public class SystemController extends PortalBaseController{
 	 */
 	@RequestMapping(value = "/retrievePassword.do")
 	@ResponseBody
-	public MessageResponse retrievePassword(String email)throws Exception {
-		return this.systemService.updateForRetrievePassword(email);
+	public MessageResponse retrievePassword(String mobile,String j_captcha)throws Exception {
+		String j_captcha_s=(String) this.getRequest().getSession().getAttribute("j_captcha");
+		if(CommonUtils.isBlank(mobile)){
+			return new MessageResponse(1,"手机号不能为空.");
+		}
+		if(CommonUtils.isBlank(j_captcha)){
+			return new MessageResponse(1,"验证码不能为空.");
+		}
+		if(!j_captcha.equals(j_captcha_s)){
+			return new MessageResponse(1,"验证码错误.");
+		}
+		return this.systemService.updateForRetrievePassword(mobile);
 		
 	}
 	/**
@@ -414,5 +423,31 @@ public class SystemController extends PortalBaseController{
 			}
 		}
 		return rst;
+	}
+
+	/**
+	 *
+	 * @Title:selectUserinfo
+	 * @Description:  TODO(获取微信用户)
+	 * @param:        @param q
+	 * @param:        @param id
+	 * @param:        @return
+	 * @param:        @throws Exception
+	 * @return:       Map<String,Object>
+	 * @throws
+	 * @author: chenxiaoke
+	 * @version: 2018年05月17日 下午2:39:33
+	 */
+	@RequestMapping(value = "/selectUserinfo.do")
+	@ResponseBody
+	public Map<String,Object> selectUserinfo(String q,String id)throws Exception {
+		Map<String,Object> params=new HashMap<String,Object>();
+		params.put("q", id);
+		if(!CommonUtils.isBlank(q)){
+			params.put("q", q);
+		}
+		params.put("deptId", this.getCurUserProp().getCorpId());
+		this.logger.info("",params);
+		return this.systemService.selectUserinfo(params);
 	}
 }

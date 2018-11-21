@@ -1,6 +1,7 @@
 package com.huacainfo.ace.common.model;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 public class WxUser implements java.io.Serializable {
 	private static final long serialVersionUID = 1302490874428907510L;
@@ -42,8 +43,10 @@ public class WxUser implements java.io.Serializable {
 
 	private BigDecimal longitude;
 
-	private String faceToken;
-	private String photo;
+	private String appId;
+
+	private java.util.Map<String,Object> userProp;
+
 
 	public String getUnionId() {
 		return unionId;
@@ -157,30 +160,6 @@ public class WxUser implements java.io.Serializable {
 		this.longitude = longitude;
 	}
 
-	@Override
-	public String toString() {
-		return "WxUser{" +
-				"unionId='" + unionId + '\'' +
-				", openId='" + openId + '\'' +
-				", nickName='" + nickName + '\'' +
-				", gender='" + gender + '\'' +
-				", city='" + city + '\'' +
-				", province='" + province + '\'' +
-				", country='" + country + '\'' +
-				", avatarUrl='" + avatarUrl + '\'' +
-				", mobile='" + mobile + '\'' +
-				", addr='" + addr + '\'' +
-				", email='" + email + '\'' +
-				", name='" + name + '\'' +
-				", role='" + role + '\'' +
-				", areaCode='" + areaCode + '\'' +
-				", category='" + category + '\'' +
-				", party='" + party + '\'' +
-				", latitude=" + latitude +
-				", longitude=" + longitude +
-				'}';
-	}
-
 	public String getAreaCode() {
 		return areaCode;
 	}
@@ -221,19 +200,45 @@ public class WxUser implements java.io.Serializable {
 		this.deptId = deptId;
 	}
 
-	public String getFaceToken() {
-		return faceToken;
+	public String getAppId() {
+		return appId;
 	}
 
-	public void setFaceToken(String faceToken) {
-		this.faceToken = faceToken;
+	public void setAppId(String appId) {
+		this.appId = appId;
 	}
 
-	public String getPhoto() {
-		return photo;
+	@Override
+	public String toString() {
+		return "WxUser{" +
+				"unionId='" + unionId + '\'' +
+				", openId='" + openId + '\'' +
+				", nickName='" + nickName + '\'' +
+				", gender='" + gender + '\'' +
+				", city='" + city + '\'' +
+				", province='" + province + '\'' +
+				", country='" + country + '\'' +
+				", avatarUrl='" + avatarUrl + '\'' +
+				", mobile='" + mobile + '\'' +
+				", addr='" + addr + '\'' +
+				", email='" + email + '\'' +
+				", name='" + name + '\'' +
+				", role='" + role + '\'' +
+				", areaCode='" + areaCode + '\'' +
+				", category='" + category + '\'' +
+				", deptId='" + deptId + '\'' +
+				", party='" + party + '\'' +
+				", latitude=" + latitude +
+				", longitude=" + longitude +
+				", appId='" + appId + '\'' +
+				'}';
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public Map<String, Object> getUserProp() {
+		return userProp;
+	}
+
+	public void setUserProp(Map<String, Object> userProp) {
+		this.userProp = userProp;
 	}
 }

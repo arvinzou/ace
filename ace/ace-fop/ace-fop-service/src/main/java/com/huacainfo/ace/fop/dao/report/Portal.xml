@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fop.dao.report.Portal">
+    <select id="query" resultType="map">
+        SELECT
+        'company' AS 'id',
+        sum(c) AS 'value'
+        FROM
+        (
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_company c
+        WHERE
+        c.companyType IN ('0', '4')
+        AND c.`status` IN ('1', '2')
+        UNION ALL
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_association a
+        WHERE
+        a.`status` IN ('1', '2')
+        ) a
+        UNION ALL
+        SELECT
+        'member' AS 'id',
+        sum(c) AS 'value'
+        FROM
+        (
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_company c
+        WHERE
+        c.companyType IN ('0', '4')
+        AND c.`status` = '2'
+        UNION ALL
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_association a
+        WHERE
+        a.`status` = '2'
+        ) b
+        UNION ALL
+        SELECT
+        'info' AS 'id',
+        sum(c) AS 'value'
+        FROM
+        (
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.fop_association
+        WHERE
+        `status` IN ('1', '2')
+        UNION ALL
+        SELECT
+        count(1) AS 'c'
+        FROM
+        fop.information_service
+        ) a
+        UNION ALL
+        SELECT
+        'userinfo' AS 'id',
+        count(1) 'value'
+        FROM
+        portal.userinfo
+  </select>
+
+
+</mapper>

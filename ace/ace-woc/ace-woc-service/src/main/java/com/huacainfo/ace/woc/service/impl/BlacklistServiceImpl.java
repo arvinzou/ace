@@ -1,27 +1,26 @@
 package com.huacainfo.ace.woc.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
+import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.dao.BlacklistDao;
 import com.huacainfo.ace.woc.model.Blacklist;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.woc.service.BlacklistService;
-import com.huacainfo.ace.woc.vo.BlacklistVo;
 import com.huacainfo.ace.woc.vo.BlacklistQVo;
+import com.huacainfo.ace.woc.vo.BlacklistVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service("blacklistService")
 /**
@@ -53,7 +52,7 @@ public class BlacklistServiceImpl implements BlacklistService {
     public PageResult<BlacklistVo> findBlacklistList(BlacklistQVo condition, int start,
                                                      int limit, String orderBy) throws Exception {
         PageResult<BlacklistVo> rst = new PageResult<BlacklistVo>();
-        List<BlacklistVo> list = this.blacklistDao.findList(condition,
+        List<BlacklistVo> list = this.blacklistDao.findLists(condition,
                 start, start + limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -78,19 +77,14 @@ public class BlacklistServiceImpl implements BlacklistService {
     public MessageResponse insertBlacklist(Blacklist o, UserProp userProp)
             throws Exception {
 
-        if(CommonUtils.isBlank(o.getPersonId())
+        if (CommonUtils.isBlank(o.getPersonId())
                 && CommonUtils.isBlank(o.getVehicleId())
-                && CommonUtils.isBlank(o.getDepartmentId())){
+                && CommonUtils.isBlank(o.getDepartmentId())) {
             return new MessageResponse(1, "所属人，所属车辆，所属部门必选其一！");
         }
         if (CommonUtils.isBlank(o.getIsBlack())) {
             return new MessageResponse(1, "是否黑名单不能为空！");
         }
-
-//        int temp = this.blacklistDao.isExit(o);
-//        if (temp > 0) {
-//            return new MessageResponse(1, "黑名单档案名称重复！");
-//        }
 
         o.setId(GUIDUtil.getGUID());
         o.setLastModifyDate(DateUtil.getNowDate());

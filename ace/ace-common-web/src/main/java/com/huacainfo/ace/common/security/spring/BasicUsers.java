@@ -5,12 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.huacainfo.ace.common.model.UserProp;
 
 public class BasicUsers extends UserProp implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
 	private String password;
 	private String username;
@@ -24,6 +27,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 
 	public BasicUsers() {
 
+
 	}
 
 
@@ -32,7 +36,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 			String areaCode, boolean accountNonExpired,
 			boolean accountNonLocked, boolean credentialsNonExpired,
 			boolean enabled, Collection<GrantedAuthority> authorities,
-			List<String> roleType, String parentCorpId,String email,String account,List<String> role, String[] syid, String activeSyId,Map<String,Object> cfg,String openId) {
+			List<String> roleType, String parentCorpId,String email,String account,List<String> role, String[] syid, String activeSyId,Map<String,Object> cfg,String openId,String appOpenId) {
 		super();
 		this.password = password;
 		this.username = username;
@@ -57,6 +61,7 @@ public class BasicUsers extends UserProp implements UserDetails {
 		setActiveSyId(activeSyId);
 		setCfg(cfg);
 		setOpenId(openId);
+		setAppOpenId(appOpenId);
 	}
 
 	public String getPassword() {

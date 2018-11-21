@@ -1,0 +1,93 @@
+<view class='index'>
+    <view class="head_card">
+        <view class='imgage'>
+            <image lazy-load="true" mode='aspectFill' src='{{activityInfo.coverUrl}}'></image>
+        </view>
+        <view class='base_info'>
+            <text>{{activityInfo.title}}</text>
+            <view class='organizer'>
+                <image lazy-load="true" class='headimage' src='{{activityInfo.headimgurl}}'></image>
+                <text>{{activityInfo.orgName}}</text>
+                <text class='remark'>活动组织方</text>
+            </view>
+        </view>
+    </view>
+    <view class='detailed_card'>
+        <view class='time bottom-line'>
+            <view>
+                <view class='title'>开始时间</view>
+                <view class='value'>{{activityInfo.startDate}}</view>
+            </view>
+            <view>
+                <view class='title'>结束时间</view>
+                <view class='value'>{{activityInfo.endDate}}</view>
+            </view>
+        </view>
+        <view class='add_type bottom-line'>
+            <view class='title'>活动地点：</view>
+            <view class='value'>{{activityInfo.location}}</view>
+        </view>
+        <view class='add_type'>
+            <view class='title'>活动类型：</view>
+            <view class='value'>{{activityInfo.category=='1'?'公益活动':(activityInfo.category=='2'?'普及活动':'创意活动')}}</view>
+        </view>
+    </view>
+    <view class='help'>
+        活动积分
+    </view>
+
+    <view class='coin_assign'>
+        <block wx:if="{{activityInfo.participant>=0}}">
+            <view>志愿者：</view><view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
+        </block>
+        <block wx:if="{{activityInfo.participant<0}}">
+            <view>参与者：</view><view class='coin_xf'>{{activityInfo.participant}}爱心币</view>
+        </block>
+    </view>
+
+    <view class='partner_list'>
+        <view class='total'>
+            参与人员：
+            <text class='number'>{{activityInfo.activityDetailVoList.length}}/{{activityInfo.parterNum}}人</text>
+        </view>
+        <view class='list' bindtap="viewParticipants" data-id='{{activityInfo.id}}'>
+            <view class='headImage_list'>
+                <block wx:for="{{activityInfo.activityDetailVoList}}">
+                   <image lazy-load="true" wx:if='{{index<8}}' class='headimage' src='{{item.headimgurl?item.headimgUrl:"../../image/default_header.png"}}'></image>
+                </block>
+            </view>
+            <view hidden='{{activityInfo.activityDetailVoList.length<8}}' class='ellipsis'></view>
+            <view class='more'></view>
+        </view>
+    </view>
+    <view class='content'>
+        <view class='content_title bottom-line'>
+            活动目的
+        </view>
+        <view class='content_text'>
+            {{activityInfo.purpose}}
+        </view>
+    </view>
+    <view class='content'>
+        <view class='content_title bottom-line'>
+            活动方式
+        </view>
+        <view class='content_text'>
+            {{activityInfo.mode}}
+        </view>
+    </view>
+    <view class='btn_content bottm-btn {{showBtn?"btn-show":""}}' hidden='{{hiddenBtn}}'>
+        <view wx:if="{{activityInfo.activityDetailVoList.length>activityInfo.parterNum-1}}" class='btn btn-unClick'>
+            名额已满
+        </view>
+        <view bindtap="apply" wx:elif="{{btnFlag==1||btnFlag==3}}" class='btn btn-clicking'>
+            立即报名
+        </view>
+        <view wx:elif="{{btnFlag==4}}" class='btn btn-noClick'>
+            已经报名
+        </view>
+        <view wx:elif="{{btnFlag==0}}" class='btn btn-unClick'>
+            报名结束
+        </view>
+    </view>
+</view>

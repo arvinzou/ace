@@ -1,14 +1,14 @@
 package com.huacainfo.ace.portal.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.service.WebContextParamService;
 import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.model.Users;
+
+import java.util.List;
+import java.util.Map;
 
 public interface SystemService extends WebContextParamService {
 	/**
@@ -242,5 +242,15 @@ public interface SystemService extends WebContextParamService {
     public MessageResponse updateCurSyid(String syid, String userId);
 
 	public Map<String,Object> selectUserCfgByUserId(String userId);
+
+	public Map<String, Object> selectUserinfo(Map<String,Object> params)  throws Exception;
+
+
+
+	public abstract Users selectUsersByCode(String code,String state)  throws Exception;
+
+	public MessageResponse lockUser(String account);
+
+	public void taskAutoUnLockUserAccount();
 
 }

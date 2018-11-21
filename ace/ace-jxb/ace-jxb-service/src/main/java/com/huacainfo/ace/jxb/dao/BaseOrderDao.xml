@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.BaseOrderDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.BaseOrder">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="consumerId" jdbcType="VARCHAR" property="consumerId"/>
+        <result column="commodityId" jdbcType="VARCHAR" property="commodityId"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="businessId" jdbcType="VARCHAR" property="businessId"/>
+        <result column="commodityName" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="businessName" jdbcType="VARCHAR" property="businessName"/>
+        <result column="amount" jdbcType="INTEGER" property="amount"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="payMoney" jdbcType="DECIMAL" property="payMoney"/>
+        <result column="payStatus" jdbcType="CHAR" property="payStatus"/>
+        <result column="payTime" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, consumerId, commodityId, category, businessId, commodityName, businessName, amount, 
+    price, payMoney, payStatus, payTime, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from base_order
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from base_order t
+        left join jxb.counselor c on t.businessId = c.id
+        left join jxb.consult_product cp on cp.id = t.commodityId
+        left join jxb.consult_order co on co.id = t.id
+        left join jxb.course cr on cr.id = t.commodityId
+        left join portal.userinfo ui on t.consumerId = ui.unionid
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from base_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+    insert into base_order (id, consumerId, commodityId, 
+      category, businessId, commodityName, 
+      businessName, amount, price, 
+      payMoney, payStatus, payTime, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{consumerId,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{businessId,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{businessName,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{payMoney,jdbcType=DECIMAL}, #{payStatus,jdbcType=CHAR}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+        insert into base_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="consumerId != null">
+                consumerId,
+            </if>
+            <if test="commodityId != null">
+                commodityId,
+            </if>
+            <if test="category != null">
+                category,
+            </if>
+            <if test="businessId != null">
+                businessId,
+            </if>
+            <if test="commodityName != null">
+                commodityName,
+            </if>
+            <if test="businessName != null">
+                businessName,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="payMoney != null">
+                payMoney,
+            </if>
+            <if test="payStatus != null">
+                payStatus,
+            </if>
+            <if test="payTime != null">
+                payTime,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="consumerId != null">
+                #{consumerId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                #{commodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="businessId != null">
+                #{businessId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessName != null">
+                #{businessName,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="payMoney != null">
+                #{payMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="payStatus != null">
+                #{payStatus,jdbcType=CHAR},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+        update base_order
+        <set>
+            <if test="consumerId != null">
+                consumerId = #{consumerId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityId != null">
+                commodityId = #{commodityId,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null">
+                category = #{category,jdbcType=VARCHAR},
+            </if>
+            <if test="businessId != null">
+                businessId = #{businessId,jdbcType=VARCHAR},
+            </if>
+            <if test="commodityName != null">
+                commodityName = #{commodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="businessName != null">
+                businessName = #{businessName,jdbcType=VARCHAR},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="payMoney != null">
+                payMoney = #{payMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="payStatus != null">
+                payStatus = #{payStatus,jdbcType=CHAR},
+            </if>
+            <if test="payTime != null">
+                payTime = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+    update base_order
+    set consumerId = #{consumerId,jdbcType=VARCHAR},
+      commodityId = #{commodityId,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      businessId = #{businessId,jdbcType=VARCHAR},
+      commodityName = #{commodityName,jdbcType=VARCHAR},
+      businessName = #{businessName,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      payMoney = #{payMoney,jdbcType=DECIMAL},
+      payStatus = #{payStatus,jdbcType=CHAR},
+      payTime = #{payTime,jdbcType=TIMESTAMP},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <!--咨询订单返回map-->
+    <resultMap id="consult-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+        <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
+        <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
+            <id property="id" column="businessId"/>
+            <result property="name" column="tName"/>
+            <result property="certification" column="certification"/>
+            <result property="imagePhotoUrl" column="imagePhotoUrl"/>
+            <result property="level" column="tLevel"/>
+        </association>
+        <association property="consultProduct" column="commodityId"
+                     javaType="com.huacainfo.ace.jxb.model.ConsultProduct">
+            <id property="id" column="commodityId"/>
+            <result property="type" column="cpType"/>
+        </association>
+        <association property="consultOrder" column="id" javaType="com.huacainfo.ace.jxb.model.ConsultOrder">
+            <id property="id" column="id"/>
+            <result column="tel" property="tel"/>
+            <result column="name" property="name"/>
+            <result column="age" property="age"/>
+            <result column="sex" property="sex"/>
+            <result column="tags" property="tags"/>
+            <result column="info" property="info"/>
+            <result column="secName" property="secName"/>
+            <result column="relationship" property="relationship"/>
+            <result column="secTel" property="secTel"/>
+            <result column="reserveDate" property="reserveDate"/>
+        </association>
+    </resultMap>
+
+    <!--课程订单返回map-->
+    <resultMap id="course-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+        <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
+        <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
+            <id property="id" column="businessId"/>
+            <result property="name" column="tName"/>
+            <result property="certification" column="certification"/>
+            <result property="imagePhotoUrl" column="imagePhotoUrl"/>
+            <result property="level" column="tLevel"/>
+        </association>
+        <association property="course" column="courseId" javaType="com.huacainfo.ace.jxb.model.Course">
+            <id property="id" column="courseId"/>
+            <result column="courseType" jdbcType="VARCHAR" property="type"/>
+            <result column="courseCategory" jdbcType="VARCHAR" property="category"/>
+            <result column="courseMediType" jdbcType="VARCHAR" property="mediType"/>
+            <result column="courseName" jdbcType="VARCHAR" property="name"/>
+            <result column="courseCover" jdbcType="VARCHAR" property="cover"/>
+            <result column="courseDuration" jdbcType="INTEGER" property="duration"/>
+            <result column="courseCostType" jdbcType="VARCHAR" property="costType"/>
+            <result column="courseCost" jdbcType="DECIMAL" property="cost"/>
+            <result column="coursePCost" jdbcType="DECIMAL" property="primeCost"/>
+            <result column="courseDemanNum" jdbcType="INTEGER" property="demandNum"/>
+            <result column="courseLikeNum" jdbcType="INTEGER" property="likeNum"/>
+            <result column="courseObj" jdbcType="VARCHAR" property="objects"/>
+            <result column="courseAObj" jdbcType="VARCHAR" property="applicationObject"/>
+            <result column="coursePurport" jdbcType="VARCHAR" property="purport"/>
+            <result column="courseRemark" jdbcType="VARCHAR" property="remark"/>
+            <result column="courseStatus" jdbcType="CHAR" property="status"/>
+            <result column="courseCrtUid" jdbcType="VARCHAR" property="createUserId"/>
+            <result column="courseCrtDt" jdbcType="TIMESTAMP" property="createDate"/>
+            <result column="courseDesc" jdbcType="LONGVARCHAR" property="introduce"/>
+        </association>
+    </resultMap>
+
+    <!--评测订单返回map-->
+    <resultMap id="evaluate-VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+        <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
+    </resultMap>
+
+    <!--订单vo对象-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+        <discriminator javaType="String" column="category">
+            <case value="1" resultMap="consult-VoResultMap"/>
+            <case value="2" resultMap="course-VoResultMap"/>
+            <case value="3" resultMap="evaluate-VoResultMap"/>
+        </discriminator>
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        ui.nickname as consumerName, ui.headimgurl as consumerImgUrl,
+        cr.id as courseId, cr.type as courseType, cr.category as courseCategory,
+        cr.mediType as courseMediType, cr.name as courseName, cr.cover as courseCover,
+        cr.duration as courseDuration, cr.costType as courseCostType, cr.cost as courseCost,
+        cr.demandNum as courseDemanNum, cr.likeNum as courseLikeNum, cr.remark as courseRemark,
+        cr.status as courseStatus, cr.createUserId as courseCrtUid, cr.introduce as courseDesc,
+        cr.primeCost as coursePCost, cr.objects as courseObj, cr.applicationObject as courseAObj,
+        cr.purport as coursePurport, cr.createDate as courseCrtDt,
+
+        co.tel, co.name, co.age, co.sex, co.tags, co.info, co.secName, co.relationship, co.secTel, co.reserveDate,
+        cp.type as cpType,
+
+        c.name as tName,c.certification ,c.imagePhotoUrl,c.level as tLevel,
+
+        t.id, t.consumerId, t.commodityId, t.category, t.businessId, t.commodityName, t.businessName, t.amount,
+        t.price, t.payMoney, t.payStatus, t.payTime, t.createDate
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from base_order t
+        left join jxb.counselor c on t.businessId = c.id
+        left join jxb.consult_product cp on cp.id = t.commodityId
+        left join jxb.consult_order co on co.id = t.id
+        left join jxb.course cr on cr.id = t.commodityId
+        left join portal.userinfo ui on t.consumerId = ui.unionid
+        where 1=1
+        <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
+            and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.commodityId !=null and condition.commodityId !=&quot;&quot;">
+            and t.commodityId = #{condition.commodityId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.consumerId !=null and condition.consumerId !=&quot;&quot;">
+            and t.consumerId = #{condition.consumerId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
+            and t.businessId = #{condition.businessId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
+            and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and t.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.statusArray !=null">
+            and t.payStatus in
+            <foreach collection="condition.statusArray" item="item" separator="," open="(" close=")">
+                ${item}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.BaseOrder">
+        select count(1)
+        from base_order
+        where 1=1
+        and commodityId = #{commodityId,jdbcType=VARCHAR}
+        and consumerId = #{consumerId,jdbcType=VARCHAR}
+        and payStatus in ('2','6','7')
+    </select>
+
+    <select id="orderStatistics" resultType="int">
+        SELECT COUNT(*)
+        from base_order
+        where 1=1
+        <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
+            and payStatus = #{condition.payStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.consumerId !=null and condition.consumerId !=&quot;&quot;">
+            and consumerId = #{condition.consumerId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
+            and businessId = #{condition.businessId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
+            and commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+</mapper>

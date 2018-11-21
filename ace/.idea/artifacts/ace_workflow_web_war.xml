@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ace-workflow-web:war">
-    <output-path>$PROJECT_DIR$/ace-workflow/ace-workflow-web/target</output-path>
-    <root id="archive" name="ace-workflow-web-1.0.war">
-      <element id="artifact" artifact-name="ace-workflow-web:war exploded" />
-    </root>
-  </artifact>
-</component>

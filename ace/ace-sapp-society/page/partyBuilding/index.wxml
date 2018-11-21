@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<view class='index'>
+    <view class='headBanner separate'>
+        <image lazy-load="true" mode='aspectFill' src='../../image/partybanner.png'></image>
+    </view>
+
+    <view class='organization whiteBg separate'>
+        <view class='tilte'>
+            <text class='iconfont icon-icon-test'></text>党小组
+        </view>
+        <view class='swiper'>
+            <swiper next-margin='176rpx'>
+                <swiper-item wx:for='{{orgs}}'>
+                    <view class='item'>
+                        <image lazy-load="true" mode='aspectFill' src="{{item.orgCover}}" class="slide-image" />
+                        <view class='name'>{{item.orgName}}</view>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+    <view class='pastActivity whiteBg separate'>
+        <view class='tilte'>
+            <image lazy-load="true" class='iconImage' src='../../image/icon_party.png'></image> 往期活动
+        </view>
+        <view class='lists'>
+            <view class='activity' wx:for='{{list}}' bindtap="viewContent" data-id='{{item.id}}' data-title='{{item.title}}'>
+                <view class='image'>
+                    <image lazy-load="true" mode='aspectFill' src='{{item.coverUrl}}'></image>
+                </view>
+                <view class='title'>
+                    {{item.title}}
+                </view>
+                <text class='partyTag'>第{{item.clazz}}期</text>
+            </view>
+        </view>
+    </view>
+    <view class="bottm-btn {{showBtn?'btn-show':''}}" hidden='{{hiddenBtn}}'>
+        <view bindtap='createActivity' data-category='{{category}}' class='btn btn-clicking'>发布活动</view>
+    </view>
+    <view class="loading" hidden="{{!Loadingstatus}}">正在载入更多...</view>
+    <view class="loading" hidden="{{!LoadOver}}">已加载全部</view>
+</view>

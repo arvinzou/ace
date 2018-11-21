@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" /><meta http-equiv="Expires" content="0" />
+    <link rel="stylesheet" type="text/css" href="test/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="test/css/testing1.css"/>
+    <link rel="stylesheet" type="text/css" href="test/css/swiper.min.css"/>
+    <script src="test/js/reminit.js" type="text/javascript" charset="utf-8"></script>
+    <script src="test/js/juicer-min.js" type="text/javascript" charset="utf-8"></script>
+    <title>心理评测</title>
+</head>
+
+<body>
+<div class="test_main">
+    <div id="testInfo">
+
+    </div>
+    <div class="button">
+        <div class="box">
+            <input class="start" type="button" name="" value="开始测试"/>
+            <input class="right result" type="button" name="" value="查看结果"/>
+            <input class="pay" type="button" name="" value="立即购买"/>
+        </div>
+    </div>
+</div>
+<div class="test_content">
+    <div class="swiper-container swiper-container1">
+        <div class="swiper-wrapper">
+
+        </div>
+
+    </div>
+    <div class="bottom_bar">
+    </div>
+</div>
+<div class="test_result">
+    <div class="center">
+        <div class="content">
+            <div class="text">
+                <p>
+
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script id="temp_testInfo" type="text/template">
+
+    <div class="cover">
+        <img src="${data.cover}" alt=""/>
+    </div>
+    <div class="test_info">
+        <p class="title">${data.name}</p>
+        <p class="price">￥${data.discountCost}</p>
+        <div class="test_info_bottom">
+            <div class="table">
+                <span>·${data.evaluatCaseList.length}道精选问题</span>
+                <span>·预计${parseInt(data.evaluatCaseList.length/3)}分钟</span>
+                <span>·${data.testedTotal}人已测</span>
+            </div>
+        </div>
+    </div>
+    <div class="explanation">
+        <p class="title">
+            测什么
+        </p>
+        <div class="content">
+            $${data.introduce}
+        </div>
+        <p class="title">
+            测试须知
+        </p>
+        <div class="content">
+            $${data.notice}
+        </div>
+    </div>
+
+</script>
+<script type="text/javascript" src="test/js/jquery.min.js"></script>
+<script type="text/javascript" src="test/js/swiper.min.js"></script>
+<script type="text/javascript" src="../../common/js/jweixin-1.2.0.js"></script>
+<script src="test/js/testing1.js"></script>
+
+</html>

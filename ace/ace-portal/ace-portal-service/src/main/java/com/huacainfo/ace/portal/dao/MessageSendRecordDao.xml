@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.portal.dao.MessageSendRecordDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.portal.model.MessageSendRecord">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="sendFrom" jdbcType="VARCHAR" property="sendFrom"/>
+        <result column="sendType" jdbcType="CHAR" property="sendType"/>
+        <result column="sendDate" jdbcType="TIMESTAMP" property="sendDate"/>
+        <result column="sendTo" jdbcType="VARCHAR" property="sendTo"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <result column="sendBody" jdbcType="LONGVARCHAR" property="sendBody"/>
+        <result column="sendResult" jdbcType="LONGVARCHAR" property="sendResult"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sendFrom, sendType, sendDate, sendTo, remark, status, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, sendBody, sendResult
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from message_send_record
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from message_send_record
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.portal.model.MessageSendRecord">
+    insert into message_send_record (id, sendFrom, sendType, 
+      sendDate, sendTo, remark, 
+      status, createUserId, createUserName, 
+      createDate, lastModifyUserId, lastModifyUserName, 
+      lastModifyDate, sendBody, sendResult
+      )
+    values (#{id,jdbcType=VARCHAR}, #{sendFrom,jdbcType=VARCHAR}, #{sendType,jdbcType=CHAR}, 
+      #{sendDate,jdbcType=TIMESTAMP}, #{sendTo,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, 
+      #{lastModifyDate,jdbcType=TIMESTAMP}, #{sendBody,jdbcType=LONGVARCHAR}, #{sendResult,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.portal.model.MessageSendRecord">
+        insert into message_send_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="sendFrom != null">
+                sendFrom,
+            </if>
+            <if test="sendType != null">
+                sendType,
+            </if>
+            <if test="sendDate != null">
+                sendDate,
+            </if>
+            <if test="sendTo != null">
+                sendTo,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createUserId != null">
+                createUserId,
+            </if>
+            <if test="createUserName != null">
+                createUserName,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId,
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName,
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate,
+            </if>
+            <if test="sendBody != null">
+                sendBody,
+            </if>
+            <if test="sendResult != null">
+                sendResult,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="sendFrom != null">
+                #{sendFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="sendType != null">
+                #{sendType,jdbcType=CHAR},
+            </if>
+            <if test="sendDate != null">
+                #{sendDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendTo != null">
+                #{sendTo,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendBody != null">
+                #{sendBody,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="sendResult != null">
+                #{sendResult,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.portal.model.MessageSendRecord">
+        update message_send_record
+        <set>
+            <if test="sendFrom != null">
+                sendFrom = #{sendFrom,jdbcType=VARCHAR},
+            </if>
+            <if test="sendType != null">
+                sendType = #{sendType,jdbcType=CHAR},
+            </if>
+            <if test="sendDate != null">
+                sendDate = #{sendDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendTo != null">
+                sendTo = #{sendTo,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createUserId != null">
+                createUserId = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserName != null">
+                createUserName = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifyUserId != null">
+                lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyUserName != null">
+                lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="lastModifyDate != null">
+                lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendBody != null">
+                sendBody = #{sendBody,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="sendResult != null">
+                sendResult = #{sendResult,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.portal.model.MessageSendRecord">
+    update message_send_record
+    set sendFrom = #{sendFrom,jdbcType=VARCHAR},
+      sendType = #{sendType,jdbcType=CHAR},
+      sendDate = #{sendDate,jdbcType=TIMESTAMP},
+      sendTo = #{sendTo,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      sendBody = #{sendBody,jdbcType=LONGVARCHAR},
+      sendResult = #{sendResult,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

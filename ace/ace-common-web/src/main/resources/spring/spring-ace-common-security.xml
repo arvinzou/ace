@@ -24,6 +24,8 @@
     <http pattern="/system/selectProvinceTreeList.do" security="none"/>
     <http pattern="/content/**" security="none"/>
     <http pattern="/www/**" security="none"/>
+
+
     <!--end-->
     <http auto-config="true" use-expressions="false">
 
@@ -125,4 +127,6 @@
                 class="org.springframework.security.access.vote.RoleVoter">
         <beans:property name="rolePrefix" value="AUTH_"/>
     </beans:bean>
+
+
 </beans:beans>

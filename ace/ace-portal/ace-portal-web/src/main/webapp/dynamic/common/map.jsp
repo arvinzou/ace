@@ -5,40 +5,55 @@ pageEncoding="utf-8"%>
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>地图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <title>地图—地址选取</title>
 </head>
-<link rel="stylesheet" href="http://lbs.qq.com/tool/getpoint/common.css">
-<script src="http://lbs.qq.com/tool/getpoint/jquery-1.9.1.min.js"></script>
-<link rel="stylesheet" href="http://lbs.qq.com/tool/getpoint/jquery-ui.min.css">
-<script src="http://lbs.qq.com/tool/getpoint/jquery-ui-1.10.4.min.js"></script>
-<script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+<link rel="stylesheet" href="https://lbs.qq.com/tool/getpoint/common.css">
+<script src="https://lbs.qq.com/tool/getpoint/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" href="https://lbs.qq.com/tool/getpoint/jquery-ui.min.css">
+<script src="https://lbs.qq.com/tool/getpoint/jquery-ui-1.10.4.min.js"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<script src="../../content/common/juicer/juicer-min.js"></script>
 <style type="text/css">
 * {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+input {
+    border: 0;
+    outline: none;
 }
 
 #main {
-    height: 553px;
-    border: 1px solid #000000;
+    height: 100%;
     border-top: 0px;
+    padding-top: 40px;
+    position: relative;
+
 }
 
 #tooles {
-    height: 23px;
-    background: #000000;
-    position: relative;
+    height: 40px;
+    background: #1995ea;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
     z-index: 100;
     color:white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-
-
-#cur_city, #no_value {
+#cur_city {
     height: 20px;
-    position: absolute;
     top: 3px;
     left: 10px;
 }
@@ -60,52 +75,108 @@ pageEncoding="utf-8"%>
 }
 
 .search {
-    width: 280px;
-    height: 53px;
-    padding-left: 10px;
-    float: left;
-    margin-left: 15px;
-    margin-right: 30px;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 99;
 }
 
-.search_t {
-    width: 200px;
-    height: 18px;
+.search .result_list {
+    background-color: #fff;
+    width: 368px;
+    margin-top: 10px;
+    padding: 20px 0;
+    box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+    display: none;
 
-    padding: 3px;
-    margin-top: 13px;
-    line-height: 20px;
 }
 
-.search_c {
-    width: 220px;
-    height: 40px;
-    float: left;
+.search .result_list .lists {
+    width: 340px;
+    margin: auto;
+    max-height: 780px;
+    overflow: auto;
 }
 
-.btn, .btn_active {
-    width: 49px;
-    height: 24px;
-    line-height: 24px;
-    font-size: 14px;
-    float: left;
-    background: url(http://lbs.qq.com/tool/getpoint/img/btn.png);
-    margin-top: 14px;
-    text-align: center;
+.search .result_list .lists li {
+    background-color: #dddddd38;
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border-radius: 6px;
     cursor: pointer;
 }
 
-.btn_active {
-    background: url(http://lbs.qq.com/tool/getpoint/img/btn.png) -49px 0px;
+.search .result_list .lists li p {
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
-.poi {
-    width: 570px;
-    height: 41;
-    padding-top: 12px;
+
+.search_t {
+    width: 330px;
+    height: 38px;
+    padding: 3px 10px;
+    line-height: 38px;
     float: left;
-    position: relative;
+
 }
+
+#delectInputVal {
+    width: 38px;
+    height: 38px;
+    float: left;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#delectInputVal div {
+    width: 38px;
+    height: 26px;
+    line-height: 24px;
+    border-left: 1px solid #eee;
+    color: #999;
+    font-size: 26px;
+    text-align: center;
+}
+
+.search_c {
+    width: 428px;
+    height: auto;
+    box-shadow: 1px 2px 1px rgba(0, 0, 0, .15);
+}
+
+.search_c::after {
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.btn, .btn_active {
+    width: 60px;
+    height: 38px;
+    line-height: 38px;
+    font-size: 16px;
+    float: left;
+    background-color: #269AEA;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+    -webkit-touch-callout: none; /*系统默认菜单被禁用*/
+    -webkit-user-select: none; /*webkit浏览器*/
+    -khtml-user-select: none; /*早期浏览器*/
+    -moz-user-select: none; /*火狐*/
+    -ms-user-select: none; /*IE10*/
+    user-select: none;
+}
+
+.btn_active {
+    background-color: #0f598c;
+}
+
 
 .poi_note {
     width: 63px;
@@ -115,64 +186,38 @@ pageEncoding="utf-8"%>
 
 #poi_cur {
     width: 160px;
-    height: 22px;
+    height: 30px;
     margin-right: 10px;
-    margin-top: 3px;
     line-height: 26px;
-
     float: left;
     text-align: center;
 }
 
 #addr_cur {
     width: 260px;
-    height: 22px;
-    margin-right: 5px;
-    margin-top: 3px;
+    height: 30px;
     line-height: 26px;
-
     float: left;
     text-align: center;
 }
 
-.btn_copy {
-    width: 49px;
-    height: 24px;
-    background: url(http://lbs.qq.com/tool/getpoint//img/btn_cpoy.png) 0px 0px;
-    float: left;
-}
 
-.already {
-    width: 52px;
-    line-height: 26px;
-    padding-left: 5px;
-    float: left;
-    color: red;
-    display: none;
-}
 
-.info_list {
-    margin-bottom: 5px;
-    cleat: both;
-    cursor: pointer;
-}
-
-#txt_pannel {
-    height: 500px;
-}
 
 #city {
-    width: 356px;
-    height: 433px;
-    padding: 10px;
-    border: 2px solid #D6D6D6;
+    width: 450px;
+    height: 480px;
+    padding: 20px;
     position: absolute;
-    left: 44px;
-    top: 20px;
+    left: 0px;
+    top: 40px;
     z-index: 999;
     background: #fff;
     overflow: auto;
     color: black;
+    box-shadow: 1px 2px 20px rgba(0, 0, 0, 0.32);
+    border-bottom: 20px solid #fff;
+    border-top: 20px solid #fff;
 }
 
 #city .city_class {
@@ -192,7 +237,7 @@ pageEncoding="utf-8"%>
 }
 
 #city .city_container_right {
-    width: 289px;
+    width: 340px;
     float: left;
 }
 
@@ -201,7 +246,7 @@ pageEncoding="utf-8"%>
     height: 20px;
     display: inline-block;
     float: right;
-    font-size: 20px;
+    font-size: 34px;
     font-weight: normal;
     cursor: pointer;
 }
@@ -222,57 +267,52 @@ pageEncoding="utf-8"%>
 .hide {
     display: none;
 }
-#bside_left {
-    width: 300px;
-    height: 500px;
-    padding: 10px 0px 10px 10px;
-    float: left;
-    overflow: auto;
-}
-#bside_rgiht {
-    width: 900px;
-    height: 530px;
-    margin-left: 10px;
-    border-left: 1px solid #000000;
-    float: right;
-    font-size: 12px;
-}
+
 
 #container {
-    height: 520px;
-    border: 5px solid #fff;
+    height: 100%;
 }
 
 #no_value{
-    color:red;
+    color: red;
     position: relative;
-    width:200px;
+    width: 100%;
+    text-align: center;
 }
+
+#map_content {
+    height: 100%;
+    position: relative;
+}
+
+.smnoprint div {
+    line-height: 30px !important;
+    border: none !important;
+}
+
+.smnoprint {
+    margin: 20px !important;
+}
+
+#closeSide {
+    width: 50px;
+    height: 30px;
+    line-height: 30px;
+    border: 0px;
+    background-color: #999999;
+    color: #fff;
+    cursor: pointer;
+}
+
 </style>
 
 <body>
-<div style="height:727px;position:relative;">
-
-
-    <div style="height:53px;">
-        <div class="search">
-            <div class="search_c"><input type="text" class="search_t" onKeyPress="if(event.keyCode==13) {btnSearch.click();return false;}"/></div>
-            <div id="btn_search" class="btn">搜索</div>
-        </div>
-        <div class="poi">
-            <div class="poi_note">当前坐标：</div>
-            <input type="text" id="poi_cur" />
-            <div class="poi_note">当前地址：</div>
-            <input type="text" id="addr_cur" />
-        </div>
-    </div>
     <div id="main">
-
         <div id="tooles">
             <div id="cur_city">
                 <strong>北京市</strong><span class="change_city">[<span style="text-decoration:underline;">更换城市</span>]<span id="level">当前缩放等级：10</span></span>
                 <div id="city" class="hide">
-                    <h3 class="city_class">热门城市<span class="close">X</span></h3>
+                    <h3 class="city_class">热门城市<span class="close">×</span></h3>
                     <div class="city_container">
                         <span class="city_name">北京</span>
                         <span class="city_name">深圳</span>
@@ -797,27 +837,43 @@ pageEncoding="utf-8"%>
                     <div style="clear:both"></div>
                 </div>
             </div>
-
+            <div class="poi">
+                <div class="poi_note">当前坐标：</div>
+                <input type="text" id="poi_cur"/>
+                <div class="poi_note">当前地址：</div>
+                <input type="text" id="addr_cur"/>
+                <button id="closeSide">确定</button>
+            </div>
         </div>
-        <div style="width:100%">
+        <div id="map_content" style="height:100%">
+            <div class="search">
+                <div id="search_c" class="search_c">
+                    <input type="text" class="search_t"
+                           onKeyPress="if(event.keyCode==13) {btnSearch.click();return false;}"/>
+                    <div id="delectInputVal">
+                        <div>×</div>
+                    </div>
+                    <div id="btn_search" class="btn">搜索</div>
+                </div>
+                <div id="result_list" class="result_list">
+                    <ul id="lists" class="lists">
 
-            <div id="bside_left">
 
+                    </ul>
+                </div>
             </div>
-            <div id="bside_rgiht">
-                <div id="container"></div>
-            </div>
+            <div id="container"></div>
         </div>
     </div>
-</div>
-
 <script type="text/javascript">
 
 var container = document.getElementById("container");
 var map = new qq.maps.Map(container, {
-            zoom: 10
+        zoom: 10,
+        zoomControl: false,
+        panControl: false,
 
-        }),
+    }),
     label = new qq.maps.Label({
          map: map,
          offset: new qq.maps.Size(15,-12),
@@ -827,7 +883,8 @@ var map = new qq.maps.Map(container, {
     markerArray = [],
     curCity = document.getElementById("cur_city"),
     btnSearch = document.getElementById("btn_search"),
-    bside = document.getElementById("bside_left"),
+    bside = document.getElementById("lists"),
+    pside = document.getElementById("result_list"),
     url, query_city,
     cityservice = new qq.maps.CityService({
         complete: function (result) {
@@ -855,10 +912,14 @@ qq.maps.event.addListener(map, "mousemove", function (e) {
 
 var url3;
 qq.maps.event.addListener(map, "click", function (e) {
+    var value = document.getElementById("search_c").getElementsByTagName("input")[0].value;
+    if (!value.trim()) {
+        pside.style.display = "none";
+    }
     document.getElementById("poi_cur").value = e.latLng.getLat().toFixed(6) + "," + e.latLng.getLng().toFixed(6);
     window.opener.latitude(e.latLng.getLat().toFixed(6));
     window.opener.longitude(e.latLng.getLng().toFixed(6));
-    url3 = encodeURI("http://apis.map.qq.com/ws/geocoder/v1/?location=" + e.latLng.getLat() + "," + e.latLng.getLng() + "&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
+    url3 = encodeURI("https://apis.map.qq.com/ws/geocoder/v1/?location=" + e.latLng.getLat() + "," + e.latLng.getLng() + "&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
     $.getJSON(url3, function (result) {
     console.log(result);
         if(result.result!=undefined){
@@ -878,16 +939,20 @@ var listener_arr = [];
 var isNoValue = false;
 qq.maps.event.addDomListener(btnSearch, 'click', function () {
     var value = this.parentNode.getElementsByTagName("input")[0].value;
+    if (!value.trim()) {
+        return;
+    }
+    pside.style.display = "block";
     var latlngBounds = new qq.maps.LatLngBounds();
     for(var i= 0,l=listener_arr.length;i<l;i++){
         qq.maps.event.removeListener(listener_arr[i]);
     }
     listener_arr.length = 0;
     query_city = curCity.children[0].innerHTML;
-    url = encodeURI("http://apis.map.qq.com/ws/place/v1/search?keyword=" + value + "&boundary=region(" + query_city + ",0)&page_size=9&page_index=1&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
+    url = encodeURI("https://apis.map.qq.com/ws/place/v1/search?keyword=" + value + "&boundary=region(" + query_city + ",0)&page_size=9&page_index=1&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB&output=jsonp&&callback=?");
     $.getJSON(url, function (result) {
     console.log(url);
-     console.log(result);
+        console.log(result);
 
         if (result.count) {
             isNoValue = false;
@@ -939,48 +1004,37 @@ qq.maps.event.addDomListener(btnSearch, 'click', function () {
                 });
                 listener_arr.push(listener3);
                 map.fitBounds(latlngBounds);
-                var div = document.createElement("div");
+                var div = document.createElement("li");
                 div.className = "info_list";
-                var order = document.createElement("div");
-                var leftn = -54 - 17 * n;
-                order.style.cssText = "width:17px;height:17px;margin:3px 3px 0px 0px;float:left;background:url(./img/marker_n.png) " + leftn + "px 0px";
-                div.appendChild(order);
-                var pannel = document.createElement("div");
-                pannel.style.cssText = "width:200px;float:left;";
-                div.appendChild(pannel);
-                var name = document.createElement("p");
-                name.style.cssText = "margin:0px;color:#0000CC";
+                var name = document.createElement("h4");
                 name.innerHTML = ele.title;
-                pannel.appendChild(name);
+                div.appendChild(name);
                 var address = document.createElement("p");
-                address.style.cssText = "margin:0px;";
                 address.innerHTML = "地址：" + ele.address;
-                pannel.appendChild(address);
+                div.appendChild(address);
                 if (ele.tel != undefined) {
                     var phone = document.createElement("p");
-                    phone.style.cssText = "margin:0px;";
+
                     phone.innerHTML = "电话：" + ele.tel;
-                    pannel.appendChild(phone);
+                    div.appendChild(phone);
                 }
                 var position = document.createElement("p");
-                position.style.cssText = "margin:0px;";
                 position.innerHTML = "坐标：" + ele.location.lat.toFixed(6) + "，" + ele.location.lng.toFixed(6);
-                pannel.appendChild(position);
+                div.appendChild(position);
                 bside.appendChild(div);
-                div.style.height = pannel.offsetHeight + "px";
                 div.isClicked = false;
                 div.index = n;
                 marker.div = div;
                 div.marker = marker;
             });
-            $("#bside_left").delegate(".info_list", "mouseover", function (e) {
+            $("#lists").delegate(".info_list", "mouseover", function (e) {
 
                 var n = this.index;
 
                 setCurrent(markerArray, n, false);
                 setCurrent(markerArray, n, true);
             });
-            $("#bside_left").delegate(".info_list", "mouseout", function () {
+            $("#lists").delegate(".info_list", "mouseout", function () {
                 each(markerArray, function (n, ele) {
                     if (!ele.isClicked) {
                         setAnchor(ele, true);
@@ -988,7 +1042,7 @@ qq.maps.event.addDomListener(btnSearch, 'click', function () {
                     }
                 })
             });
-            $("#bside_left").delegate(".info_list", "click", function (e) {
+            $("#lists").delegate(".info_list", "click", function (e) {
                 var n = this.index;
                 setFlagClicked(markerArray, n);
                 setCurrent(markerArray, n, false);
@@ -997,13 +1051,12 @@ qq.maps.event.addDomListener(btnSearch, 'click', function () {
                 document.getElementById("addr_cur").value = this.childNodes[1].childNodes[1].innerHTML.substring(3);
             });
         } else {
-
             bside.innerHTML = "";
             each(markerArray, function (n, ele) {
                 ele.setMap(null);
             });
             markerArray.length = 0;
-            var novalue = document.createElement('div');
+            var novalue = document.createElement('li');
             novalue.id = "no_value";
             novalue.innerHTML = "对不起，没有搜索到您要找的结果!";
             bside.appendChild(novalue);
@@ -1024,13 +1077,13 @@ function setAnchor(marker, flag) {
         var anchor = new qq.maps.Point(10, 30),
                 origin = new qq.maps.Point(left, 0),
                 size = new qq.maps.Size(27, 33),
-                icon = new qq.maps.MarkerImage("http://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
+                icon = new qq.maps.MarkerImage("https://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
         marker.setIcon(icon);
     } else {
         var anchor = new qq.maps.Point(10, 30),
                 origin = new qq.maps.Point(left, 35),
                 size = new qq.maps.Size(27, 33),
-                icon = new qq.maps.MarkerImage("http://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
+                icon = new qq.maps.MarkerImage("https://lbs.qq.com/tool/getpoint//img/marker10.png", size, origin, anchor);
         marker.setIcon(icon);
     }
 }
@@ -1091,6 +1144,14 @@ curCity.onclick = function (e) {
     }
 };
 
+
+var delectInputVal = document.getElementById("delectInputVal");
+
+delectInputVal.onclick = function (e) {
+    document.getElementById("search_c").getElementsByTagName("input")[0].value = '';
+    pside.style.display = "none";
+};
+
 var url2;
 city.onclick = function (e) {
     var e = e || window.event,
@@ -1102,7 +1163,7 @@ city.onclick = function (e) {
 
             curCity.children[0].innerHTML = target.innerHTML;
 
-        url2 = encodeURI("http://apis.map.qq.com/ws/geocoder/v1/?region=" + curCity.children[0].innerHTML + "&address=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
+        url2 = encodeURI("https://apis.map.qq.com/ws/geocoder/v1/?region=" + curCity.children[0].innerHTML + "&address=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
         $.getJSON(url2, function (result) {
             map.setCenter(new qq.maps.LatLng(result.result.location.lat, result.result.location.lng));
             map.setZoom(10);
@@ -1114,7 +1175,7 @@ city.onclick = function (e) {
 var url4;
 $(".search_t").autocomplete({
     source:function(request,response){
-        url4 = encodeURI("http://apis.map.qq.com/ws/place/v1/suggestion/?keyword=" + request.term + "&region=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
+        url4 = encodeURI("https://apis.map.qq.com/ws/place/v1/suggestion/?keyword=" + request.term + "&region=" + curCity.children[0].innerHTML + "&key=K76BZ-W3O2Q-RFL5S-GXOPR-3ARIT-6KFE5&output=jsonp&&callback=?");
         $.getJSON(url4,function(result){
 
             response($.map(result.data,function(item){
@@ -1133,5 +1194,16 @@ function each(obj, fn) {
     }
 }
 </script>
+    <script id="tpl-li" type="text/template">
+        {@each data as item}
+        <li>
+            <h4>\${item.title}</h4>
+            <p>地址：\${item.address}</p>
+            <p>电话：\${item.tel}</p>
+            <p>坐标：\${item.location.lat},\${item.location.lng}</p>
+        </li>
+        {@/each}
+    </script>
+
 </body>
 </html>

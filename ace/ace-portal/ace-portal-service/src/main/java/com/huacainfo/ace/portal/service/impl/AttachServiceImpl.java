@@ -47,16 +47,17 @@ public class AttachServiceImpl implements AttachService {
         return rst;
     }
     @Override
-    public ListResult<Attach> upload(Attach[] file, String noticeId, UserProp userProp) throws Exception {
-        ListResult<Attach> rst = new ListResult<Attach>();
-        List<Attach> list = new ArrayList<Attach>();
+    public ListResult<AttachVo> upload(Attach[] file, String noticeId, UserProp userProp) throws Exception {
+        ListResult<AttachVo> rst = new ListResult<AttachVo>();
         for (Attach o : file) {
-            list.add(o);
             this.attachMapper.insert(o);
             if(CommonUtils.isNotEmpty(userProp)){
                 this.dataBaseLogService.log("附件上传", "附件上传", "", o.getFileName(), o.getFileName(), userProp);
             }
         }
+        AttachQVo condition=new AttachQVo();
+        condition.setNoticeId(noticeId);
+        List<AttachVo> list = this.attachMapper.findList(condition);
         rst.setErrorMessage("上传成功");
         rst.setValue(list);
         rst.getOther().put("noticeId", noticeId);

@@ -26,11 +26,21 @@
         <result column="lastModifyDate" property="lastModifyDate" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    s.id,s.siteName,s.siteCode,s.areaCode,s.roadwayNum,s.checkpointsNum,s.latitude,
-    s.longitude,s.address,s.constructDate,s.buildDeptId,
-    s.roadId,s.adminDepId,s.sitStatus,s.remark,s.status,
-    s.createUserId,s.createUserName,s.createDate,s.lastModifyUserId,s.lastModifyUserName,
-    s.lastModifyDate,r.roadName as roadName,d.department_name as buildDeptName,d1.department_name as adminDeptName
+        id, siteName, siteCode,
+        areaCode, roadwayNum, checkpointsNum,
+        latitude, longitude, address,
+        constructDate, buildDeptId, roadId, adminDepId,
+        sitStatus, remark, status,
+        createUserId, createUserName, createDate,
+        lastModifyUserId, lastModifyUserName, lastModifyDate
+    </sql>
+    <sql id="Base_Column_List_Vo">
+        s.id,s.siteName,s.siteCode,s.areaCode,s.roadwayNum,s.checkpointsNum,s.latitude,
+        s.longitude,s.address,s.constructDate,s.buildDeptId,
+        s.roadId,s.adminDepId,s.sitStatus,s.remark,s.status,
+        s.createUserId,s.createUserName,s.createDate,s.lastModifyUserId,s.lastModifyUserName,
+        s.lastModifyDate,r.roadName as roadName,d.department_name as buildDeptName,d1.department_name as
+        adminDeptName,p.name as areaName
 </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMapVo" parameterType="java.lang.String">
         select
@@ -41,28 +51,36 @@
         left join portal.department d1 on s.adminDepId=d1.department_id
         where s.id = #{id,jdbcType=VARCHAR}
     </select>
+
+    <select id="selectByPrimaryKeyInfo" resultMap="BaseResultMapVo" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List_Vo"/>
+        from site s
+        left join road r on s.roadId=r.id
+        left join portal.department d on s.buildDeptId=d.department_id
+        left join portal.department d1 on s.adminDepId=d1.department_id
+        left join portal.province p on s.areaCode=p.code
+        where s.id = #{id,jdbcType=VARCHAR}
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from site
     where id = #{id,jdbcType=VARCHAR}
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.woc.model.Site">
-    insert into site (id, siteName, siteCode, 
-      areaCode, roadwayNum, checkpointsNum, 
-      latitude, longitude, address, 
-      constructDate, buildDeptId, roadId, adminDepId,
-      sitStatus, remark, status, 
-      createUserId, createUserName, createDate, 
-      lastModifyUserId, lastModifyUserName, lastModifyDate
-      )
-    values (#{id,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{roadwayNum,jdbcType=INTEGER}, #{checkpointsNum,jdbcType=INTEGER}, 
-      #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, 
-      #{constructDate,jdbcType=TIMESTAMP},#{buildDeptId,jdbcType=VARCHAR}, #{roadId,jdbcType=VARCHAR}, #{adminDepId,jdbcType=VARCHAR},
-      #{sitStatus,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        insert into site (
+        <include refid="Base_Column_List"/>
+        )
+        values (#{id,jdbcType=VARCHAR}, #{siteName,jdbcType=VARCHAR}, #{siteCode,jdbcType=VARCHAR},
+        #{areaCode,jdbcType=VARCHAR}, #{roadwayNum,jdbcType=INTEGER}, #{checkpointsNum,jdbcType=INTEGER},
+        #{latitude,jdbcType=DECIMAL}, #{longitude,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR},
+        #{constructDate,jdbcType=TIMESTAMP},#{buildDeptId,jdbcType=VARCHAR}, #{roadId,jdbcType=VARCHAR},
+        #{adminDepId,jdbcType=VARCHAR},
+        #{sitStatus,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
+        #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+        #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
+        #{lastModifyDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.woc.model.Site">
         insert into site
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -202,6 +220,17 @@
             </if>
         </trim>
     </insert>
+
+    <update id="checkpointsNumAdd" parameterType="java.lang.String">
+        update site
+        set checkpointsNum=checkpointsNum+1
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="checkpointsNumSub" parameterType="java.lang.String">
+        update site
+        set checkpointsNum=checkpointsNum-1
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
     <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.woc.model.Site">
         update site
         <set>
@@ -299,11 +328,20 @@
 
     <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.woc.vo.SiteVo"></resultMap>
 
-    <sql id="whereCondition">
+    <sql id="whereCondition_Vo">
         from site s
         left join road r on s.roadId=r.id
         left join portal.department d on s.buildDeptId=d.department_id
         left join portal.department d1 on s.adminDepId=d1.department_id
+        left join portal.province p on s.areaCode=p.code
+        where 0=0
+        <if test='condition.siteName!=null and condition.siteName!=""'>
+            and siteName like
+            concat('%',#{condition.siteName,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+    <sql id="whereCondition">
+        from site s
         where 0=0
         <if test='condition.siteName!=null and condition.siteName!=""'>
             and siteName like
@@ -326,7 +364,6 @@
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-
     </select>
 
     <select id="findCount" resultType="int">
@@ -343,7 +380,7 @@
     </select>
 
     <select id="selectSite" resultType="map">
-        select t.id,concat('卡点名称：',t.siteName,'  卡点编号：',t.siteCode) as name
+        select t.id,t.siteName,t.siteCode
         from site t
         where 0=0
         <if test='params.q !=null and params.q!=""'>
@@ -353,5 +390,28 @@
         </if>
         order by t.createDate
         limit 0,20
+    </select>
+
+    <select id="findListInfo" resultMap="BaseResultMapVo">
+        select m.* from(
+        select
+        <include refid="Base_Column_List_Vo"/>
+        <include refid="whereCondition_Vo"/>
+        ) m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from site
     </select>
 </mapper>

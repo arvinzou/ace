@@ -88,7 +88,7 @@
 
     <div id="dialog-message-view" class="hide">
 <h5 class="header-title">基本信息</h5><div  class="row"  style="padding:10px">
-<div class="labelItem"><span class="labelItemHeader">
+<div class="labelItem hide"><span class="labelItemHeader">
 主键</span>
 <br>
 <span id="id">
@@ -126,7 +126,7 @@
 </div>
 </div>
 <h5 class="header-title">操作信息</h5><div  class="row"  style="padding:10px">
-<div class="labelItem"><span class="labelItemHeader">
+<div class="labelItem hide"><span class="labelItemHeader">
 创建人编号</span>
 <br>
 <span id="createUserId">
@@ -144,7 +144,7 @@
 <span id="createDate">
 </span>
 </div>
-<div class="labelItem"><span class="labelItemHeader">
+<div class="labelItem hide"><span class="labelItemHeader">
 最后更新人编号</span>
 <br>
 <span id="lastModifyUserId">

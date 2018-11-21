@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "page/index/index",
+    "page/liveHome/index",
+    "page/myLive/index",
+    "page/liveView/index",
+    "page/liveList/index",
+    "page/live/index",
+    "page/rpt/index",
+    "page/liveCsl/index",
+    "page/userinfo/index",
+    "page/bind/index",
+    "page/preview/index",
+    "page/liveStatus/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "微课程",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff",
+    "enablePullDownRefresh": true
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

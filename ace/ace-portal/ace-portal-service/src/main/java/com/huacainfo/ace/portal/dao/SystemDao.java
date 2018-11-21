@@ -78,6 +78,9 @@ public interface SystemDao {
 	 */
 	public abstract Users selectUsersByAccount(@Param("account") String account);
 
+
+	public abstract Users  selectUsersByOpenId(@Param("openId") String openId);
+
 	public abstract List<Map<String, String>> selectRoleListByUserId(
 			@Param("userId") String userId);
 
@@ -117,5 +120,11 @@ public interface SystemDao {
 	 */
 	public abstract void updateEmail(@Param("email") String email,
 			@Param("userId") String userId);
+
+	int updateUserLocked(@Param("locked")String locked,@Param("account")String account);
+
+	public List<Map<String, Object>> getLockedList();
+
+	public abstract Users selectUsersByMobile(@Param("mobile") String mobile);
 
 }

@@ -2,6 +2,8 @@ package com.huacainfo.ace.portal.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.portal.model.Users;
 import org.apache.ibatis.annotations.Param;
 
 import com.huacainfo.ace.common.model.WxUser;
@@ -30,11 +32,27 @@ public interface WxUserDao {
     int updateReg(WxUser record);
 
     int updateRole(@Param("unionId") String unionId,@Param("role") String role);
+    int updateMobile(@Param("unionId") String unionId,@Param("mobile") String mobile);
 
-    int updateFaceToken(@Param("unionId") String unionId,@Param("faceToken") String faceToken,@Param("photo") String photo);
 
     java.util.Map<String,Object> selectPersonageByMobile(String mobile);
 
     List<Map<String,Object>> selectWxUser(@Param("condition") Map<String,Object> condition);
+
+    WxUser selectByMobile(String mobile);
+
+    Users selectSysUserByOpenid(String openid);
+
+    Map<String,Object> selectSysUserByUnionId(String unionId);
+
+    Map<String,Object> selectSysUserByMobile(String mobile);
+
+
+
+    int updateBindMiniApp(@Param("openId") String openId,@Param("userId") String userId);
+
+    int isExitByMobile(String mobile);
+
+    List<WxUserVo> getSysWxUsers(@Param("sysId") String sysId);
 
 }

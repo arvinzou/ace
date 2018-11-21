@@ -34,9 +34,7 @@ jQuery(function($) {
 							viewPagerButtons : false,
 							beforeShowForm : function(e) {
 								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
+
 								style_edit_form(form);
 							}
 						})
@@ -48,65 +46,8 @@ jQuery(function($) {
 					$('#resourcesLevel').val(parseInt(r.resourcesLevel)+1);
 				}
 			});
-	$('#btn-view-edit').on(
-			'click',
-			function() {
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext)
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'editGridRow',
-						gr,
-						{
-							closeAfterAdd : true,
-							recreateForm : true,
-							viewPagerButtons : true,
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
-							}
-						})
-			});
-	
-	$('#btn-view-del').on(
-			'click',
-			function() {
-				
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext);
-					return;
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'delGridRow',
-						gr,
-						{
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
-							}
-						})
-			});
 
-	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-		_title: function(title) {
-			var $title = this.options.title || '&nbsp;'
-			if( ("title_html" in this.options) && this.options.title_html == true )
-				title.html($title);
-			else title.text($title);
-		}
-	}));
+
 
 	$('#tt').tree({
 		onClick: function(node){
@@ -116,91 +57,34 @@ jQuery(function($) {
 	$( "#btn-view-import" ).on('click', function(e) {
 		e.preventDefault();
 		reset_uploader();
-		var dialog = $( "#dialog-message" ).removeClass('hide').dialog({
-			modal: true,
-			width:750,
-			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-cog'></i> 导入</h4></div>",
-			title_html: true,
-			buttons: [ 
-				
-				/*{
-					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 重置",
-					"class" : "btn btn-info btn-xs",
-					id:'ajax_button',
-					click: function() {
-						reset_uploader();				
-						
-					} 
-				},*/
-				{
-					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
-					"class" : "btn btn-xs",
-					click: function() {
-						$( this ).dialog( "close" ); 
-					} 
-				}
-			]
-		});
-		
+		$('#modal-upload').modal('show');
+
 	});
 
 		$( "#btn-view-sort" ).on('click', function(e) {
     		e.preventDefault();
-    		var dialog = $( "#dialog-sort" ).removeClass('hide').dialog({
-    			modal: false,
-    			width:600,
-    			title: "<div class='widget-header widget-header-small'><h4 class='smaller'>排序</h4></div>",
-    			title_html: true,
-    			buttons: [
+    		$('#modal-sort').modal('show');
+    		getChildrenList();
+    		//Travel("tt");
 
-    				/*{
-    					html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 重置",
-    					"class" : "btn btn-info btn-xs",
-    					id:'ajax_button',
-    					click: function() {
-    						reset_uploader();
-
-    					}
-    				},*/
-    				{
-    					html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
-    					"class" : "btn btn-xs",
-    					click: function() {
-    						$( this ).dialog( "close" );
-    					}
-    				}
-    			]
-    		});
-    		Travel("tt");
-    		$( ".sortable" ).sortable({
-                      cursor: "move",
-                      items :"li",                        //只是li可以拖动
-                      opacity: 0.6,                       //拖动时，透明度为0.6
-                      revert: true,                       //释放时，增加动画
-                      stop : function(event, ui){       //更新排序之后
-                          updateSequence($(this).sortable("toArray"));
-                      }
-            });
 
 
 
     	});
 });
 function autotreeq(node){
-	//$('#fm-search').find(":input[name='resourcesId']").val(node.id);
-	//console.log(params);
 	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
 		page : 1,
 		postData : {resourcesId:node.id,parentResourcesId:''}
 	}).trigger("reloadGrid");
-	
+
 }
 function treeAutoSelect(){
 	var node = $('#tt').tree('getSelected');
 	if(node){
 		$(cfg.grid_selector).setSelection(node.id);
 	}
-	
+
 }
 function treeappend(){
 	if(!authorConfig.hasOwnProperty(cfg.grid_add_data_url)){
@@ -217,11 +101,7 @@ function treeappend(){
 				recreateForm : true,
 				viewPagerButtons : false,
 				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find(
-							'.ui-jqdialog-titlebar').wrapInner(
-							'<div class="widget-header" />')
-					style_edit_form(form);
+
 				}
 			})
 	$('#parentResourcesId').val(node.id);
@@ -239,7 +119,7 @@ function treeedit(){
 	}
 	gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
 	'selrow');
-	
+
 	jQuery(cfg.grid_selector).jqGrid(
 			'editGridRow',
 			gr,
@@ -248,11 +128,7 @@ function treeedit(){
 				recreateForm : true,
 				viewPagerButtons : true,
 				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find(
-							'.ui-jqdialog-titlebar').wrapInner(
-							'<div class="widget-header" />')
-					style_edit_form(form);
+
 				}
 			})
 }
@@ -277,31 +153,10 @@ function treeremove(){
 				recreateForm : true,
 				viewPagerButtons : true,
 				beforeShowForm : function(e) {
-					var form = $(e[0]);
-					form.closest('.ui-jqdialog').find(
-							'.ui-jqdialog-titlebar').wrapInner(
-							'<div class="widget-header" />')
-					style_edit_form(form);
+
 				}
 			})
 }
-/*
-function append(){
-    var t = $('#tt');
-    var node = t.tree('getSelected');
-    t.tree('append', {
-        parent: (node?node.target:null),
-        data: [{
-            text: 'new item1'
-        },{
-            text: 'new item2'
-        }]
-    });
-}
-function removeit(){
-    var node = $('#tt').tree('getSelected');
-    $('#tt').tree('remove', node.target);
-}*/
 function collapse(){
     var node = $('#tt').tree('getSelected');
     $('#tt').tree('collapse',node.target);
@@ -321,27 +176,6 @@ function clearQparams(){
 		postData : {parentResourcesId:'',resourcesId:''}
 	}).trigger("reloadGrid");
 }
-function Travel(treeID){//参数为树的ID，注意不要添加#
-
-   var node = $('#'+treeID).tree('getSelected');
-   var html=[];
-   if(node){
-        var children = $('#'+treeID).tree('getChildren', node.target);
-        for (var i = 0; i < children.length; i++) {
-            //console.log(children[i].cls=='folder');
-            if(children[i].cls=='folder'){
-                html.push('<li class="dd-handle"  id="'+children[i].id+'">'+children[i].text+'</li>');
-            }
-
-        }
-   }else{
-        var roots=$('#'+treeID).tree('getRoots');
-        for(i=0;i<roots.length;i++){
-            html.push('<li class="dd-handle"  id="'+roots[i].id+'">'+roots[i].text+'</li>');
-        }
-   }
-    $(".sortable").html(html.join(""));
-}
 function updateSequence(arr){
     var data=[];
     for(var i=0;i<arr.length;i++){
@@ -355,22 +189,7 @@ function updateSequence(arr){
         },
         success : function(rst, textStatus) {
             if (!rst.state) {
-                bootbox.dialog({
-                    title:'系统提示',
-                    message:rst.errorMessage,
-                    detail:rst.detail,
-                    buttons:
-                    {
-                        "success" :
-                         {
-                            "label" : "<i class='ace-icon fa fa-check'></i>确定",
-                            "className" : "btn-sm btn-success",
-                            "callback": function() {
-                            }
-                        }
-                    }
-                });
-
+                alert(rst.errorMessage);
             }
         },
         complete : function(XMLHttpRequest, textStatus) {
@@ -380,4 +199,103 @@ function updateSequence(arr){
 
         }
     });
+}
+
+
+function edit(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+						'editGridRow',
+						rowid,
+						{
+							closeAfterAdd : true,
+							recreateForm : true,
+							viewPagerButtons : true,
+							beforeShowForm : function(e) {
+								var form = $(e[0]);
+								form.closest('.ui-jqdialog').find(
+										'.ui-jqdialog-titlebar').wrapInner(
+										'<div class="widget-header" />')
+
+							}
+						});
+}
+var show=false;
+function del(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+    						'delGridRow',
+    						rowid,
+    						{
+    							beforeShowForm : function(e) {
+    								var form = $(e[0]);
+    								if(!show){
+    								    form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+    								}
+
+    								show=true;
+
+    							}
+    						});
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");
+}
+
+jQuery(function($) {
+	jQuery('.layout-button-left').on( 'click', function(e) {
+            setTimeout("resizeJqGrid()",500);
+	});
+});
+
+
+function getChildrenList(){
+  var node = $('#tt').tree('getSelected');
+  var parentResourcesId="0";
+  if(node){
+    parentResourcesId=node.id;
+  }
+$.ajax({
+        type : "post",
+        url : cfg.grid_load_data_url,
+        data:{start:0,limit:9999,parentResourcesId:parentResourcesId},
+        success : function(rst, textStatus) {
+        console.log(rst);
+        var html=[];
+        $(rst.rows).each(function(i,o){
+             html.push('<li draggable="false"  data-id="'+o.resourcesId+'" data-name="'+o.resourcesName+'">'+o.resourcesName+'</li>');
+        });
+
+        $(".sortable").html(html.join(""));
+        var el = document.getElementById('sortable');
+        var sortable = Sortable.create(el, {
+            group: "words",
+            animation: 150,
+            onAdd: function (evt) {
+                console.log('onAdd.bar:', evt.item);
+            },
+            onUpdate: function (evt) {
+                console.log('onUpdate.bar:', evt.item);
+            },
+            onRemove: function (evt) {
+                console.log('onRemove.bar:', evt.item);
+            },
+            onStart: function (evt) {
+                console.log('onStart.foo:', evt.item);
+            },
+            onEnd: function (evt) {
+                console.log('onEnd.foo:', evt.item);
+                console.log(sortable.toArray());
+                updateSequence(sortable.toArray());
+            }
+        });
+
+        },
+        error : function() {
+            alert("对不起，出差了。");
+        }
+    });
+
 }

@@ -43,7 +43,7 @@ public interface LiveCmtService {
      * @author: 陈晓克
      * @version: 2018-01-13
      */
-    public abstract MessageResponse insertLiveCmt(LiveCmt obj, String corpId) throws Exception;
+    public abstract MessageResponse insertLiveCmt(LiveCmt obj) throws Exception;
 
     /**
      * @throws
@@ -84,5 +84,20 @@ public interface LiveCmtService {
     public abstract MessageResponse deleteLiveCmtByLiveCmtId(String id, UserProp userProp) throws Exception;
 
     List<String> findSensitiveWordsList(String deptId) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(更新状态)
+     * @param: @param id
+     * @param: @param status
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2018-01-03
+     */
+    public abstract MessageResponse updateStatus(String id, String status) throws Exception;
 
 }

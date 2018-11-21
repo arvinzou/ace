@@ -1,0 +1,141 @@
+<view class='index'>
+    <view class="page">
+        <!--顶部导航栏-->
+        <view class="navbar">
+             <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text>
+        </view>
+        <!--内容主体-->
+        <view class='content' hidden="{{currentTab!=0}}">
+                <block wx:for='{{ behaviorList }}'>
+                    <view class='content-item' bindtap=''>
+                        <view class='content-left'>
+                            <block wx:if='{{item.avatarUrl!="" && item.avatarUrl!=null && item.avatarUrl!=undefined}}'>
+                                <image src='{{item.avatarUrl}}' class='head'></image>
+                            </block>
+                            <block wx:else>
+                                <image src='../../image/default_header.png' class='head'></image>
+                            </block>
+                        </view>
+                        <view class='content-right'>
+                            <view class='nickname'>
+                                <text class='name'>{{item.nickName}}</text>
+                                <text class='submitDate'>{{item.submitDate}}</text>
+                                <view class='status'>
+                                    <block wx:if='{{item.status == 1}}'>
+                                        暂存
+                                    </block>
+                                    <block wx:elif='{{item.status == 2}}'>
+                                        待审
+                                    </block>
+                                    <block wx:elif='{{item.status == 3}}'>
+                                        通过
+                                    </block>
+                                    <block wx:elif='{{item.status == 4}}'>
+                                        驳回
+                                    </block>
+                                </view>
+                            </view>
+                            <view class='remark'><text>{{ item.compendium }}</text></view>
+                            <view class='attach'>
+                                <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
+                                <block wx-if='{{ fileItem.fileType == 2 }}'>
+                                <!--<video src='{{ fileItem.fileUrl }}' class='file-attach' show-center-play-btn='true'></video>-->
+                                <image src='../../image/video.png' data-index='{{index}}' id='{{ fileItem.fileUrl }}' class='videoImg' bindtap='viewVideo'></image>
+                                </block>
+                                <block wx-if='{{ fileItem.fileType == 1 }}'>
+                                    <block wx:if='{{item.behaviorAnnexList.length ==1}}'>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                    </block>
+                                    <block wx:elif='{{item.behaviorAnnexList.length > 1 && item.behaviorAnnexList.length % 2 !=0}}'>
+                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        
+                                    </block>
+                                    <block wx:else>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                    </block>
+                                </block>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+
+            <view class='content' hidden="{{currentTab!=1}}">
+                <block wx:for='{{ behaviorList }}'>
+                    <view class='content-item'>
+                        <view class='content-left'>
+                            <block wx:if='{{item.avatarUrl!="" && item.avatarUrl!=null && item.avatarUrl!=undefined}}'>
+                                <image src='{{item.avatarUrl}}' class='head'></image>
+                            </block>
+                            <block wx:else>
+                                <image src='../../image/default_header.png' class='head'></image>
+                            </block>
+                        </view>
+                        <view class='content-right'>
+                            <view class='nickname'>
+                                <text class='name'>{{item.nickName}}</text>
+                                <text class='submitDate'>{{item.submitDate}}</text>
+                                <view class='status'>
+                                    <block wx:if='{{item.status == 1}}'>
+                                        暂存
+                                    </block>
+                                    <block wx:elif='{{item.status == 2}}'>
+                                        待审
+                                    </block>
+                                    <block wx:elif='{{item.status == 3}}'>
+                                        通过
+                                    </block>
+                                    <block wx:elif='{{item.status == 4}}'>
+                                        驳回
+                                    </block>
+                                </view>
+                            </view>
+                            <view class='remark'><text>{{ item.compendium }}</text></view>
+                            <view class='attach'>
+                                <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
+                                <block wx-if='{{ fileItem.fileType == 2 }}'>
+                                    <image src='../../image/video.png' data-index='{{index}}' id='{{ fileItem.fileUrl }}' class='videoImg' bindtap='viewVideo'></image>
+                                </block>
+                                <block wx-if='{{ fileItem.fileType == 1 }}'>
+                                    <block wx:if='{{item.behaviorAnnexList.length ==1}}'>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                    </block>
+                                    <block wx:elif='{{item.behaviorAnnexList.length > 1 && item.behaviorAnnexList.length % 2 !=0}}'>
+                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        
+                                    </block>
+                                    <block wx:else>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                    </block>
+                                </block>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                </view>
+            </view>
+
+    <block wx:if='{{sysUserInfo.regType == "2"}}'>
+        <block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>      
+        <view class='camera-box' bindtap='releaseBehavior'>
+            <image class='camera' src='../../image/camera.png'></image>
+        </view>
+        </block>
+    </block>
+    <block wx:if='{{sysUserInfo.regType == "1"}}'>
+        <block wx:if='{{sysUserInfo.person.status =="3"}}'>      
+        <view class='camera-box' bindtap='releaseBehavior'>
+            <image class='camera' src='../../image/camera.png'></image>
+        </view>
+        </block>
+    </block>
+</view>
+
+
+<view class='mask' hidden='{{maskFlag}}' bindtap='exitVideo'>
+    <video id='video' src='{{videoUrl}}' style='width:100%;height:100%;' autoplay='true' direction='0' loop='true' show-play-btn='true' show-center-play-btn='false'>
+        <cover-view class="controls" bindtap='exitVideo'></cover-view>
+    </video>
+</view>

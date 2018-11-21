@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.$!{bean.name};
 import com.huacainfo.ace.portal.vo.$!{bean.name}Vo;
 import com.huacainfo.ace.portal.vo.$!{bean.name}QVo;
+import java.util.Map;
 /**
  * @author: $!{annotation.authorName}
  * @version: $!{annotation.version}
@@ -80,6 +81,31 @@ public interface $!{bean.name}Service {
 	    * @version: $!{annotation.version}
 	 */
 	public abstract MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws Exception;
+
+ /**
+	 *
+	    * @Title:getList
+	    * @Description:  TODO(查询$!{bean.tableChineseName})
+	 		* @param:        @param params
+	 		* @param:        @throws Exception
+	 		* @return:       List<Map<String,Object>>
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
+	public abstract Map<String,Object> getList(Map<String,Object> params) throws Exception;
+/**
+	 *
+	    * @Title:getById
+	    * @Description:  TODO(获取$!{bean.tableChineseName})
+	 		* @param:        @param id
+	 		* @param:        @throws Exception
+	 		* @return:       Map<String,Object>
+	 		* @throws
+	    * @author: $!{annotation.authorName}
+	    * @version: $!{annotation.version}
+	 */
+    public abstract Map<String,Object> getById(String id) throws Exception;
 
 	
 }

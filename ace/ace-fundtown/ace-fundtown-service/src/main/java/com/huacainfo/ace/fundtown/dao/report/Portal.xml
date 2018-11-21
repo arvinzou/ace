@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.fundtown.dao.report.Portal">
+    <select id="query" resultType="map">
+    SELECT
+        'person' id,
+    count(1) 'value'
+    FROM
+    portal.department
+    union alls
+    SELECT
+    'user' id,
+    count(1) 'value'
+    FROM
+    portal.users where syid='fop'
+    union all
+    SELECT
+    'resources' id,
+    count(1) 'value'
+    FROM
+    portal.resources where syid='fop'
+  </select>
+
+    <select id="portalCount" resultType="java.util.Map" parameterType="java.lang.String">
+        SELECT
+            (select count(1) from  fop.fop_company ) as companyCount,
+            (SELECT count(1) from fop.fop_member ) as memberCount,
+        (select count(1) from fop.information_service ) as infoCount
+        FROM fop.fop_company t
+        LIMIT 1
+    </select>
+</mapper>

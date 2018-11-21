@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="ace-rvc-web:war">
-    <output-path>$PROJECT_DIR$/ace-rvc/ace-rvc-web/target</output-path>
-    <root id="archive" name="ace-rvc-web-1.0.war">
-      <element id="artifact" artifact-name="ace-rvc-web:war exploded" />
-    </root>
-  </artifact>
-</component>

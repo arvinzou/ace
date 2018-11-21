@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+<link href="../css/comon0.css" rel="stylesheet" type="text/css" />
+<link href="../css/login.css" rel="stylesheet" type="text/css" />
+<SCRIPT language=JavaScript src="../js/jquery.js"></SCRIPT>
+<SCRIPT language=JavaScript src="../js/jquery.reveal.js"></SCRIPT>
+</head>
+<script>
+function setTab(name, cursel, n) {
+    for (var i = 1; i <= n; i++) {
+        var menu = document.getElementById(name + i);
+        var con = document.getElementById("con_" + name + "_" + i);
+        menu.className = i == cursel ? "ved" : "";
+        con.style.display = i == cursel ? "block" : "none";
+    }
+}
+
+$(document).ready(function(e) {
+$(".leftQY .nr li").click(function(){
+		
+		$(this).addClass("hover").siblings().removeClass("hover")
+		
+		
+		})
+		
+});
+</script>
+<body class="body_login">
+
+ <div class="login">
+  <div class="tabtit">
+   <a href="#none" class="ved" id="one1" onclick="setTab('one', 1, 3);">用户登录</a><a href="#none" id="one2" onclick="setTab('one', 2, 3);" style="border-left:none;">企业CA登录</a><a href="#none" style="border-left:none;" id="one3" onclick="setTab('one', 3, 3);">个人用户登录</a>
+   </div>
+   <div class="conbox" id="con_one_1" style=" display: block;height:200px;">
+    <ul>
+     <li><input type="text" class="txt bg1" value="用户名/邮箱/手机号码/证件号码" onfocus="if(this.value == '用户名'){ this.value = '';this.style.color='#333';}" onblur="if (value==''){value='用户名';style.color='#888'}" ></li>
+     <li><input type="text" class="txt bg2" value="密码"onfocus="if(this.value == '密码'){ this.value = '';this.style.color='#333';}" onblur="if (value==''){value='密码';style.color='#888'}" ></li>
+     <li><input type="text" class="yzm bg3" value="验证码"onfocus="if(this.value == '验证码'){ this.value = '';this.style.color='#333';}" onblur="if (value==''){value='验证码';style.color='#888'}" ><b><img src="../images/login/1.gif"></b></li>
+     <li style="height:10px"></li>
+    </ul>
+    <a href="#" class="tjbtn" data-reveal-id="myModal" data-animation="fade">登录</a>
+   </div>
+   <div class="conbox" id="con_one_2" style="display:none;height:200px;">
+    <ul>
+     <li style=" text-align: center; font-size:14px; color:#08840e;  padding: 20px 0px;"> 企业CA控件正常！可以正常使用。</li>
+    </ul>
+    <a href="#" class="tjbtn" data-reveal-id="myModal" data-animation="fade">登录</a>
+   </div>
+   
+   <div class="conbox" id="con_one_3" style="display:none;height:200px;">
+   <ul>
+     <li style=" text-align: center; font-size:14px;  padding: 20px 0px;"> <img src="../images/temp.png" width="129" height="126"  alt=""/ style=" margin-bottom:10px;display:inline-block;"><br>请扫描上方二维码登录！</li>
+    </ul>
+    
+   </div>
+   <div class="psbox"><a href="#">注册用户</a></div>
+<div class="footer">版权所有&nbsp;&nbsp;湖南省常德市工商联&nbsp;&nbsp;业务支持热线：<span>12366-2</span></div>
+ </div>
+ 
+
+
+<!-----切换身份------->
+
+<div id="myModal" class="reveal-modal" style="width:820px;">
+		<div class="tc_tit">企业身份选择</div>
+            <a href="#" class="close_btn close-reveal-modal">×</a>	  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="50%" valign="top">
+       <div class="leftQY">
+            <div class="sh_title01"><div class="blold">企业企业</div><span></span></div>
+            <div class="nr" style="display:none">
+                <h1>暂无企业，请新建企业</h1>
+                <div style=" padding:35px 0 40px 118px;" class="add_com"><a href="#none">新建企业</a></div>
+                  <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn_read btn_read01"  href="bszm.html"> 确定进入 </a> </div>
+            </div>
+            <div class="nr">
+                <h1>请选择企业</h1>
+                <ul>
+                  <li class="hover">测试4401060044827（测试4401060044827-财务负责人）</li>
+                  <li>湖南华彩伟业网络科技有限公司（湖南华彩伟业网络科技有限公司-法人）</li>
+
+                </ul>
+                  <div style=" text-align:center; padding:20px 0 40px 0 ;"> <a class="btn btn01"   href="bszm.html"> 企业进入 </a> </div>
+            </div>            
+            
+       </div>
+    </td>
+    <td valign="top">
+      <div class="rightGR">
+           <div class="sh_title01"><div class="blold">个人企业</div><span></span></div>
+           <div class="nr">
+               <ul>
+               <li>用户名称：张三</li>
+               <li>证件号码：455222199901010101</li>
+               </ul>
+                <div style=" text-align:center; padding:20px 0 40px 0 ; "> <a class="btn btn01" style=" background-color:#00a33a;" href="bszm03.html"> 个人进入 </a> </div>
+           </div>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>
+        
+     
+   
+</body>
+</html>

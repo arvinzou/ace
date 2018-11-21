@@ -1,8 +1,16 @@
-var _colNames = ['主键', '车牌号', '车辆颜色', '所属人', '所属企业',
-    '轴数', '车辆类型', '车辆品牌', '发动机号码', '车辆识别代码', '领证单位',
-    '行驶证注册日期', '行驶证发证日期', '总质量', '整备质量',
-    '核定载质量', '外廓尺寸', '准牵引总量', '备注', '状态', '创建人编号',
-    '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间', '操作'];
+var _colNames = ['主键',
+    '基本信息',
+    '车牌号', '车辆颜色', '轴数', '车辆类型', '车辆品牌',
+    '总质量', '整备质量', '核定载质量', '准牵引总量',
+
+    '所属信息',
+    '所属人', '所属企业',
+
+    '行驶证信息',
+    '领证单位', '行驶证注册日期', '行驶证发证日期', '发动机号码', '车辆识别代码', '外廓尺寸',
+
+    '备注', '状态',
+    '创建人编号', '创建人姓名', '入库日期', '最后更新人编号', '最后更新人姓名', '最后更新时间', '操作'];
 var _colModel = function () {
     return [
         /*主键*/
@@ -14,6 +22,15 @@ var _colModel = function () {
             editoptions: {
                 maxlength: "50"
             },
+        },
+//  基本信息 ---------------------------
+        {
+            name: 'title1',
+            editable: true,
+            hidden: true,
+            editoptions: {
+                title: true
+            }
         },
         /*车牌号*/
         {
@@ -40,59 +57,6 @@ var _colModel = function () {
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50"
-            },
-        },
-        /*所属人ID*/
-        {
-            name: 'ownerId',
-            editable: true,
-            hidden: false,
-            width: 100,
-            edittype: "combogrid",
-            dataoptions: {
-                panelWidth: 400,
-                idField: 'id',
-                textField: 'name',
-                url: contextPath + '/person/selectPerson',
-                mode: 'remote',
-                fitColumns: true,
-                method: 'get',
-                columns: [[{
-                    field: 'name',
-                    title: '姓名+(身份证)',
-                    width: 200
-                }]]
-            },
-            editoptions: {
-                style: 'width:200px;height:25px;',
-            },
-            renderer: function (value, cur) {
-                return $.jgrid.getAccessor(cur, 'personName');
-            },
-            formoptions: {
-                elmprefix: "",
-                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-            },
-            editrules: {
-                required: true
-            }
-        },
-        /*所属企业*/
-        {
-            name: 'ownerCompanyId',
-            editable : true,
-            hidden : false,
-            width : 200,
-            edittype : "combotree",
-            editoptions : {
-                style : 'width:200px;height:25px;'
-            },
-            dataoptions : {
-                url : portalPath + '/department/selectDepartmentTreeList.do',
-                required : false
-            },
-            renderer : function(value, cur) {
-                return $.jgrid.getAccessor(cur, 'deptName');
             },
         },
         /*轴数*/
@@ -133,113 +97,6 @@ var _colModel = function () {
             editoptions: {
                 style: 'width:200px;',
                 maxlength: "50"
-            },
-        },
-        /*发动机编号*/
-        {
-            name: 'engineNo',
-            editable: true,
-            hidden: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;',
-                maxlength: "50"
-            },
-        },
-        /*车辆识别代码*/
-        {
-            name: 'VIN',
-            editable: true,
-            hidden: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;',
-                maxlength: "50"
-            },
-        },
-        /*领证单位*/
-        {
-            name: 'licenceIssuingAuthority',
-            editable: true,
-            hidden: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;',
-                maxlength: "50"
-            },
-        },
-        /*行驶证注册日期*/
-        {
-            name: 'RegisterDate',
-            editable: true,
-            hidden: true,
-            width: 100,
-            edittype: "datebox",
-            editoptions: {
-                style: 'width:200px;height:25px;',
-                maxlength: "20"
-            },
-            dataoptions: {
-                formatter: function (date) {
-                    var y = date.getFullYear();
-                    var m = date.getMonth() + 1;
-                    var d = date.getDate();
-                    return y + '-' + (m < 10 ? ('0' + m) : m) + '-'
-                        + (d < 10 ? ('0' + d) : d);
-                },
-                parser: function (s) {
-                    if (!s)
-                        return new Date();
-                    var ss = (s.split('-'));
-                    var y = parseInt(ss[0], 10);
-                    var m = parseInt(ss[1], 10);
-                    var d = parseInt(ss[2], 10);
-                    if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-                        return new Date(y, m - 1, d);
-                    } else {
-                        return new Date();
-                    }
-                }
-            },
-            renderer: function (value) {
-                return value == null ? "" : value.substring(0, 8);
-            },
-        },
-        /*行驶证发证日期*/
-        {
-            name: 'IssueDate',
-            editable: true,
-            hidden: true,
-            width: 100,
-            edittype: "datebox",
-            editoptions: {
-                style: 'width:200px;height:25px;',
-                maxlength: "20"
-            },
-            dataoptions: {
-                formatter: function (date) {
-                    var y = date.getFullYear();
-                    var m = date.getMonth() + 1;
-                    var d = date.getDate();
-                    return y + '-' + (m < 10 ? ('0' + m) : m) + '-'
-                        + (d < 10 ? ('0' + d) : d);
-                },
-                parser: function (s) {
-                    if (!s)
-                        return new Date();
-                    var ss = (s.split('-'));
-                    var y = parseInt(ss[0], 10);
-                    var m = parseInt(ss[1], 10);
-                    var d = parseInt(ss[2], 10);
-                    if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-                        return new Date(y, m - 1, d);
-                    } else {
-                        return new Date();
-                    }
-                }
-            },
-            renderer: function (value) {
-                return value == null ? "" : value.substring(0, 8);
             },
         },
         /*总质量*/
@@ -293,6 +150,213 @@ var _colModel = function () {
             editrules: {required: true, number: true, custom: true, custom_func: checkFloat},
 
         },
+        /*牵引总质量*/
+        {
+            name: 'tractionMass',
+            editable: true,
+            hidden: true,
+            width: 200,
+            editoptions: {
+                style: 'width:200px;',
+                maxlength: "11",
+                colspan: true
+            },
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {
+                required: true,
+                number: true,
+                custom: true,
+                custom_func: checkFloat
+            },
+        },
+
+//  所属信息 ---------------------------
+        {
+            name: 'title2',
+            editable: true,
+            hidden: true,
+            editoptions: {
+                title: true
+            }
+        },
+        /*所属人ID*/
+        {
+            name: 'ownerId',
+            editable: true,
+            hidden: false,
+            width: 100,
+            edittype: "combogrid",
+            dataoptions: {
+                panelWidth: 300,
+                idField: 'id',
+                textField: 'name',
+                url: contextPath + '/person/selectPerson',
+                mode: 'remote',
+                fitColumns: true,
+                method: 'get',
+                columns: [[{
+                    field: 'name',
+                    title: '姓名',
+                    width: 50
+                }, {
+                    field: 'paperworkId',
+                    title: '身份证',
+                    width: 100
+                }]]
+            },
+            editoptions: {
+                style: 'width:200px;height:25px;',
+            },
+            renderer: function (value, cur) {
+                return $.jgrid.getAccessor(cur, 'personName');
+            },
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            },
+            editrules: {
+                required: true
+            }
+        },
+        /*所属企业*/
+        {
+            name: 'ownerCompanyId',
+            editable: true,
+            hidden: false,
+            width: 200,
+            edittype: "combotree",
+            editoptions: {
+                style: 'width:200px;height:25px;'
+            },
+            dataoptions: {
+                url: portalPath + '/department/selectDepartmentTreeList.do',
+                required: false
+            },
+            renderer: function (value, cur) {
+                var departmentName = $.jgrid.getAccessor(cur, 'departmentName');
+                return departmentName ? departmentName : '';
+            },
+        },
+
+//  行驶证信息 ---------------------------
+        {
+            name: 'title3',
+            editable: true,
+            hidden: true,
+            editoptions: {
+                title: true
+            }
+        },
+        /*领证单位*/
+        {
+            name: 'licenceIssuingAuthority',
+            editable: true,
+            hidden: true,
+            width: 200,
+            editoptions: {
+                style: 'width:200px;',
+                maxlength: "50"
+            },
+        },
+        /*行驶证注册日期*/
+        {
+            name: 'registerDate',
+            editable: true,
+            hidden: true,
+            width: 100,
+            edittype: "datebox",
+            editoptions: {
+                style: 'width:200px;height:25px;',
+                maxlength: "20"
+            },
+            dataoptions: {
+                formatter: function (date) {
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+                    return y + '-' + (m < 10 ? ('0' + m) : m) + '-'
+                        + (d < 10 ? ('0' + d) : d);
+                },
+                parser: function (s) {
+                    if (!s)
+                        return new Date();
+                    var ss = (s.split('-'));
+                    var y = parseInt(ss[0], 10);
+                    var m = parseInt(ss[1], 10);
+                    var d = parseInt(ss[2], 10);
+                    if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+                        return new Date(y, m - 1, d);
+                    } else {
+                        return new Date();
+                    }
+                }
+            },
+            renderer: function (value) {
+                return value == null ? "" : value.substring(0, 8);
+            },
+        },
+        /*行驶证发证日期*/
+        {
+            name: 'issueDate',
+            editable: true,
+            hidden: true,
+            width: 100,
+            edittype: "datebox",
+            editoptions: {
+                style: 'width:200px;height:25px;',
+                maxlength: "20"
+            },
+            dataoptions: {
+                formatter: function (date) {
+                    var y = date.getFullYear();
+                    var m = date.getMonth() + 1;
+                    var d = date.getDate();
+                    return y + '-' + (m < 10 ? ('0' + m) : m) + '-'
+                        + (d < 10 ? ('0' + d) : d);
+                },
+                parser: function (s) {
+                    if (!s)
+                        return new Date();
+                    var ss = (s.split('-'));
+                    var y = parseInt(ss[0], 10);
+                    var m = parseInt(ss[1], 10);
+                    var d = parseInt(ss[2], 10);
+                    if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+                        return new Date(y, m - 1, d);
+                    } else {
+                        return new Date();
+                    }
+                }
+            },
+            renderer: function (value) {
+                return value == null ? "" : value.substring(0, 8);
+            },
+        },
+        /*发动机编号*/
+        {
+            name: 'engineNo',
+            editable: true,
+            hidden: true,
+            width: 200,
+            editoptions: {
+                style: 'width:200px;',
+                maxlength: "50"
+            },
+        },
+        /*车辆识别代码*/
+        {
+            name: 'vIN',
+            editable: true,
+            hidden: true,
+            width: 200,
+            editoptions: {
+                style: 'width:200px;',
+                maxlength: "50"
+            },
+        },
         /*外廓尺寸*/
         {
             name: 'containerInsideSize',
@@ -304,23 +368,7 @@ var _colModel = function () {
                 maxlength: "50"
             },
         },
-        /*牵引总质量*/
-        {
-            name: 'tractionMass',
-            editable: true,
-            hidden: true,
-            width: 200,
-            editoptions: {
-                style: 'width:200px;',
-                maxlength: "11",
-                colspan: true,
-            },
-            formoptions: {
-                elmprefix: "",
-                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-            },
-            editrules: {required: true, number: true, custom: true, custom_func: checkFloat},
-        },
+
         /*备注*/
         {
             name: 'remark',
@@ -361,7 +409,6 @@ var _colModel = function () {
                 return rst;
             }
         },
-
         {
             name: 'createUserId',
             hidden: true,

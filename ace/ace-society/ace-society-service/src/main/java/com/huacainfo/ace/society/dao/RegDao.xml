@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.RegDao">
+
+    <insert id="insertReg" parameterType="com.huacainfo.ace.portal.model.Users">
+        insert into portal.users (user_id, account, password,
+        sex, id_card, name,
+        department_id, area_code, birthday,
+        stauts, last_login_time, mobile, email, seat, user_level,
+        create_time, fax, telphone, qq, openId, cur_syid, appOpenId)
+        values (#{userId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        #{departmentId,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE},
+        #{stauts,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{mobile,jdbcType=VARCHAR},
+        #{email,jdbcType=VARCHAR}, #{seat,jdbcType=VARCHAR}, #{userLevel,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP}, #{fax,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR},
+        #{qq,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{curSyid,jdbcType=VARCHAR},
+        #{appOpenId,jdbcType=VARCHAR})
+        ;
+        insert into portal.users_role (user_id, role_id, create_time)
+        values(#{userId,jdbcType=VARCHAR}, '51bfc19d-1295-41d8-bd28-fd9a98f289ee', now())
+        ;
+        insert into portal.user_cfg (id, userId, cfgKey,cfgValue)
+        values (#{userId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 'portalType','1');
+    </insert>
+
+    <select id="isExitByTel" resultType="int">
+        select count(*) from portal.users where mobile = #{tel} or account = #{tel}
+    </select>
+
+    <!--**********************************-->
+    <resultMap id="CustomerResultMap" type="com.huacainfo.ace.society.vo.CustomerVo">
+        <result column="regType" jdbcType="VARCHAR" property="regType"/>
+        <result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <association property="person" column="pId" javaType="com.huacainfo.ace.society.model.PersonInfo">
+            <id property="id" jdbcType="VARCHAR" column="pId"/>
+            <result column="pName" jdbcType="VARCHAR" property="realName"/>
+            <result column="pMobile" jdbcType="VARCHAR" property="mobilePhone"/>
+            <result column="politicalStatus" jdbcType="CHAR" property="politicalStatus"/>
+            <result column="pAccPoints" jdbcType="INTEGER" property="accPoints"/>
+            <result column="pValidPoints" jdbcType="INTEGER" property="validPoints"/>
+            <result column="pStatus" jdbcType="CHAR" property="status"></result>
+        </association>
+        <association property="societyOrg" column="orgId" javaType="com.huacainfo.ace.society.model.SocietyOrgInfo">
+            <id property="id" jdbcType="VARCHAR" column="orgId"/>
+            <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
+            <result column="orgType" jdbcType="CHAR" property="orgType"/>
+            <result column="orgAddr" jdbcType="VARCHAR" property="orgAddr"/>
+            <result column="orgCover" jdbcType="VARCHAR" property="orgCover"/>
+            <result column="orgSummary" jdbcType="VARCHAR" property="orgSummary"/>
+            <result column="contactPerson" jdbcType="VARCHAR" property="contactPerson"/>
+            <result column="contactPhone" jdbcType="VARCHAR" property="contactPhone"/>
+            <result column="orgAccPoints" jdbcType="INTEGER" property="accPoints"/>
+            <result column="orgValidPoints" jdbcType="INTEGER" property="validPoints"/>
+            <result column="orgStatus" jdbcType="CHAR" property="status"></result>
+        </association>
+    </resultMap>
+
+    <select id="findByUserId" parameterType="java.lang.String" resultMap="CustomerResultMap">
+        select
+        wx.avatarUrl, wx.nickName,
+        case when org.id is null then '1' else '2' end as regType,
+        p.id as pId,
+        p.realName as pName, p.mobilePhone as pMobile, p.politicalStatus,
+        p.accPoints as pAccPoints, p.validPoints as pValidPoints, p.status as pStatus,
+        org.id as orgId,
+        org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
+        org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
+        org.validPoints as orgValidPoints, org.status as orgStatus
+        from society.person_info p
+        left join portal.wx_user wx on p.id = wx.unionId
+        left join (select
+        a.userId, s.id, s.orgName, s.orgType, s.orgAddr, s.orgCover, s.orgSummary,
+        s.contactPerson, s.contactPhone, s.accPoints, s.validPoints, s.status
+        from society_org_info s, org_admin a
+        where a.orgId = s.id )org on org.userId = p.id
+        where p.id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

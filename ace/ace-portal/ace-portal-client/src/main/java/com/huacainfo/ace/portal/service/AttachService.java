@@ -49,5 +49,5 @@ public interface AttachService {
 	    * @author: chenxiaoke 
 	    * @version: 2016年11月16日 下午3:11:21
 	 */
-	public abstract ListResult<Attach> upload(Attach[] file,String noticeId,UserProp userProp) throws Exception;
+	public abstract ListResult<AttachVo> upload(Attach[] file,String noticeId,UserProp userProp) throws Exception;
 }

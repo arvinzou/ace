@@ -1,0 +1,6 @@
+<view style='display:flex;padding:30rpx'>
+
+<navigator class='item' url='../myLive/index'>我的直播</navigator>
+<view class='space'></view>
+<navigator class='item' url='../liveHome/index'>直播</navigator>
+</view>

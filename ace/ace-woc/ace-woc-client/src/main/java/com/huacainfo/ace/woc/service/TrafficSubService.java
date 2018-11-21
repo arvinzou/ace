@@ -40,6 +40,8 @@ public interface TrafficSubService {
 	    * @author: 王恩
 	    * @version: 2018-03-21
 	 */
+    public abstract MessageResponse insertTrafficSubAuto(TrafficSub obj, UserProp userProp) throws Exception;
+
 	public abstract MessageResponse insertTrafficSub(TrafficSub obj,UserProp userProp) throws Exception;
 
     /**

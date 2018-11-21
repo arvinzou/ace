@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.CommodityDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.Commodity">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="commodityType" jdbcType="VARCHAR" property="commodityType"/>
+        <result column="commodityName" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
+        <result column="commodityCover" jdbcType="VARCHAR" property="commodityCover"/>
+        <result column="costPoints" jdbcType="INTEGER" property="costPoints"/>
+        <result column="origPrice" jdbcType="DECIMAL" property="origPrice"/>
+        <result column="salePrice" jdbcType="DECIMAL" property="salePrice"/>
+        <result column="state" jdbcType="CHAR" property="state"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huacainfo.ace.society.model.Commodity">
+        <result column="summary" jdbcType="LONGVARCHAR" property="summary"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, commodityType, commodityName, category, commodityCover, costPoints, origPrice, salePrice,
+        state, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, summary
+  </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        from commodity
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from commodity
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.society.model.Commodity">
+    insert into commodity (id, commodityType, commodityName,
+        category, commodityCover, costPoints,
+      origPrice, salePrice, state, 
+      remark, status, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate, summary
+      )
+    values (#{id,jdbcType=VARCHAR}, #{commodityType,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR},
+        #{category,jdbcType=CHAR}, #{commodityCover,jdbcType=VARCHAR}, #{costPoints,jdbcType=INTEGER},
+      #{origPrice,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, #{state,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{summary,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.Commodity">
+    update commodity
+    set commodityType = #{commodityType,jdbcType=VARCHAR},
+      commodityName = #{commodityName,jdbcType=VARCHAR},
+      category = #{category,jdbcType=CHAR},
+        commodityCover = #{commodityCover,jdbcType=VARCHAR},
+      costPoints = #{costPoints,jdbcType=INTEGER},
+      origPrice = #{origPrice,jdbcType=DECIMAL},
+      salePrice = #{salePrice,jdbcType=DECIMAL},
+      state = #{state,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP},
+      summary = #{summary,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+    <!--**********************************-->
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.CommodityVo">
+
+    </resultMap>
+    <sql id="Vo_Column_List">
+        id, commodityType, commodityName, category, commodityCover, costPoints, origPrice, salePrice,
+        state, remark, status, createUserId, createUserName, createDate, lastModifyUserId,
+        lastModifyUserName, lastModifyDate, summary
+    </sql>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="From_Statement">
+        from commodity t
+    </sql>
+
+    <sql id="Where_Condition">
+        where 1=1
+        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
+            and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.commodityType !=null and condition.commodityType !=&quot;&quot;">
+            and t.commodityType = #{condition.commodityType,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and t.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.state !=null and condition.state !=&quot;&quot;">
+            and t.state = #{condition.state,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.PersonInfo">
+        select count(1)
+        from commodity
+        where commodityName = #{commodityName,jdbcType=VARCHAR}
+        and id != #{id,jdbcType=VARCHAR}
+        AND status = 1
+    </select>
+</mapper>

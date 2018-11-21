@@ -1,0 +1,32 @@
+@import "../common/lib/weui.wxss";
+
+.index{
+    width: 100%;
+}
+.tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.bg-w{
+    height: 70rpx;
+    background: rgba(245,245,245,1);
+    color: #666666;
+    font-size: 26rpx;
+}
+.bg-g{
+    height: 100rpx;
+    background: #FFFFFF;
+    color: #666666;
+    font-size: 28rpx;
+}
+.reduce{
+    color: #333333;
+    font-size: 28rpx;
+}
+.increase{
+    color: #FFA31E;
+    font-size: 28rpx;
+}

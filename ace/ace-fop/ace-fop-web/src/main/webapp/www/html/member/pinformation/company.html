@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html  ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<head>
+    <meta charset="UTF-8">
+    <title>完善资料</title>
+    <link rel="stylesheet" type="text/css" href="css/pinformation.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/comon0.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="../../../js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="../../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
+    <script type="text/javascript" src="../../../js/common.js"></script>
+    <link rel="shortcut icon" href="../../../images/favicon.ico">
+    <script type="text/javascript" src="js/company.js"></script>
+</head>
+<body>
+<div id="loadBefore" hidden="hidden">
+<div id="header"></div>
+<div class="main_box">
+    <div class="title_box">
+            <div class="col-lg-12 col-md-12 col-xs-12" style="text-align: center;">
+                <span class="title_box_title">企业信息</span>
+            </div>
+    </div>
+    <div class="form_box">
+        <!--基本信息-->
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">基本信息</span><span
+                    style="float: right;color: #1A56A8; text-decoration: underline;"><a style="color: #1A56A8"
+                                                                                        href="../file/企业入会申请表.doc"
+                                                                                        download="企业入会申请表.doc">企业入会申请表.doc</a></span>
+            </div>
+            <div id="companyInfo">
+                <table class="form_info" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">企业名称</td>
+                        <td width="35%"><input type="text" maxlength="100" ng-model="companyInfo.fullName" name="fullName" placeholder="输入企业名称" onfocus="this.placeholder=''" onblur="this.placeholder='输入企业名称'"/></td>
+                        <td width="15%" align="right" class="tdbg"><span style="color: red">*</span>法人代表身份证号码</td>
+                        <td width="35%"><input type="text" maxlength="18" name="identityCard" ng-model="person.identityCard" placeholder="输入法人代表身份证号码" onfocus="this.placeholder=''" onblur="this.placeholder='输入法人代表身份证号码'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">企业性质</td>
+                        <td width="35%">
+                            <select name="companyType" id="companyType" ng-model="companyInfo.companyProperty">
+                                <option value="">请选择企业性质</option>
+                                <option value="1">私营企业</option>
+                                <option value="2">港澳台商投资企业</option>
+                                <option value="3">外商投资企业</option>
+                                <option value="4">股份合作企业</option>
+                                <option value="5">其他联营企业</option>
+                                <option value="6">有限责任公司</option>
+                                <option value="7">股份有限公司</option>
+                                <option value="9">个体工商户</option>
+                                <option value="8">其他企业</option>
+                            </select>
+                        </td>
+                        <td width="15%" align="right" class="tdbg">成立时间</td>
+                        <td width="35%"><input type="text"  ng-model="companyInfo.establishDate" name="establishDate" id="establishDate" placeholder="选择成立时间" onfocus="this.placeholder=''" onblur="this.placeholder='选择成立时间'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">职工人数</td>
+                        <td width="35%"><input type="text" ng-model="companyInfo.crewSize" name="crewSize" placeholder="输入职工人数" onfocus="this.placeholder=''" onblur="this.placeholder='输入职工人数'"/></td>
+                        <td width="15%" align="right" class="tdbg">注册资金（万元）</td>
+                        <td width="35%"><input type="text" ng-model="companyInfo.registeredCapital" name="registeredCapital" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">固定资金（万元）</td>
+                        <td width="35%"><input type="text" ng-model="companyInfo.fixedAssets" name="fixedAssets" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"/></td>
+                        <td width="15%" align="right" class="tdbg">自有流动资金（万元）</td>
+                        <td width="35%"><input type="text" ng-model="companyInfo.workingCapital" name="workingCapital" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">企业通讯地址</td>
+                        <td width="35%">
+                            <input type="text" id="address" ng-model="companyInfo.address" name="address"/>
+                            <a class="maper" href="/portal/dynamic/common/map.jsp" target="_blank"><span class="glyphicon glyphicon-map-marker"></span>选取</a>
+                            <input type="text" id="latitude" style="display: none;"/>
+                            <input type="text" id="longitude" style="display: none;"/>
+                        </td>
+                        <td width="15%" align="right">所属工商联</td>
+                        <td width="35%">
+                            <select id="belongTo" ng-model="companyInfo.belongTo">
+                                <option value="">请选择</option>
+                                <option value="常德市工商联">常德市工商联</option>
+                                <option value="武陵区工商联">武陵区工商联</option>
+                                <option value="鼎城区工商联">鼎城区工商联</option>
+                                <option value="汉寿县工商联">汉寿县工商联</option>
+                                <option value="桃源县工商联">桃源县工商联</option>
+                                <option value="临澧县工商联">临澧县工商联</option>
+                                <option value="澧县工商联">澧县工商联</option>
+                                <option value="津市市工商联">津市市工商联</option>
+                                <option value="石门县工商联">石门县工商联</option>
+                                <option value="安乡县工商联">安乡县工商联</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+
+        <!--企业法人代表信息-->
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">企业法人代表信息</span>
+            </div>
+            <div id="person">
+                <table class="form_info" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">姓名</td>
+                        <td width="35%"><input type="text" ng-model="person.realName" name="realName" placeholder="输入姓名" onfocus="this.placeholder=''" onblur="this.placeholder='输入姓名'"/></td>
+                        <td width="15%" align="right" class="tdbg">性别</td>
+                        <td width="35%">
+                            <select name="sex" id="sex" ng-model="person.sex">
+                                <option value="">请选择性别</option>
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">出生年月</td>
+                        <td width="35%"><input ng-model="person.birthDate" name="birthDate" id="birthDate" type="text" placeholder="选择出生年月" onfocus="this.placeholder=''" onblur="this.placeholder='选择出生年月'"/></td>
+                        <td width="15%" align="right" class="tdbg">籍贯</td>
+                        <td width="35%"><input ng-model="person.nativePlace" name="nativePlace" type="text" placeholder="输入籍贯" onfocus="this.placeholder=''" onblur="this.placeholder='输入籍贯'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">民族</td>
+                        <td width="35%">
+                            <select id="nationality"  ng-model="person.nationality">
+                                <option value="">请选择</option>
+                                <option value="01">汉族</option>
+                                <option value="02">蒙古族</option>
+                                <option value="03">回族</option>
+                                <option value="04">藏族</option>
+                                <option value="05">维吾尔族</option>
+                                <option value="06">苗族</option>
+                                <option value="07">彝族</option>
+                                <option value="08">壮族</option>
+                                <option value="09">布依族</option>
+                                <option value="10">朝鲜族</option>
+                                <option value="11">满族</option>
+                                <option value="12">侗族</option>
+                                <option value="13">瑶族</option>
+                                <option value="14">白族</option>
+                                <option value="15">土家族</option>
+                                <option value="16">哈尼族</option>
+                                <option value="17">哈萨克族</option>
+                                <option value="18">傣族</option>
+                                <option value="19">黎族</option>
+                                <option value="20">僳僳族</option>
+                                <option value="21">佤族</option>
+                                <option value="22">畲族</option>
+                                <option value="23">高山族</option>
+                                <option value="24">拉祜族</option>
+                                <option value="25">水族</option>
+                                <option value="26">东乡族</option>
+                                <option value="27">纳西族</option>
+                                <option value="28">景颇族</option>
+                                <option value="29">柯尔克孜族</option>
+                                <option value="30">土族</option>
+                            </select>
+                        </td>
+                        <td width="15%" align="right" class="tdbg">政治面貌</td>
+                        <td width="35%"><input ng-model="person.political" name="political" type="text" placeholder="输入政治面貌" onfocus="this.placeholder=''" onblur="this.placeholder='输入政治面貌'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">参加工作时间</td>
+                        <td width="35%"><input ng-model="person.recruitmentDate" name="recruitmentDate" id="recruitmentDate" type="text" placeholder="选择时间" onfocus="this.placeholder=''" onblur="this.placeholder='选择时间'"/></td>
+                        <td width="15%" align="right" class="tdbg">文化程度</td>
+                        <td width="35%">
+                            <!--<select id="education" ng-options="e as e.name for e in education track by e.code" ng-model="person.education">
+                               <option value="">请选择</option>
+                            </select>-->
+                            <select id="education"  ng-model="person.education">
+                                <option value="" class="">请选择</option>
+                                <option value="05">初中</option>
+                                <option value="02">中专</option>
+                                <option value="15">高中</option>
+                                <option value="07">大专</option>
+                                <option value="11">本科</option>
+                                <option value="14">硕士</option>
+                                <option value="06">博士</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">技术职称</td>
+                        <td width="35%"><input ng-model="person.skillJobTitle" name="skillJobTitle" type="text" placeholder="输入技术职称" onfocus="this.placeholder=''" onblur="this.placeholder='输入技术职称'"/></td>
+                        <td width="15%" align="right" class="tdbg">单位职务</td>
+                        <td width="35%"><input ng-model="person.deptPost" name="deptPost" type="text" placeholder="输入单位职务" onfocus="this.placeholder=''" onblur="this.placeholder='输入单位职务'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">主要社会职务</td>
+                        <td width="35%"><input ng-model="person.societyPost" name="societyPost" type="text" placeholder="输入主要社会职务" onfocus="this.placeholder=''" onblur="this.placeholder='输入主要社会职务'"/></td>
+                        <td width="15%" align="right" class="tdbg">邮政编码</td>
+                        <td width="35%"><input ng-model="person.postcode" name="postcode" type="text" placeholder="输入邮政编码" onfocus="this.placeholder=''" onblur="this.placeholder='输入邮政编码'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">传真</td>
+                        <td width="35%"><input ng-model="person.fax" name="fax" type="text" placeholder="输入传真" onfocus="this.placeholder=''" onblur="this.placeholder='输入传真'"/></td>
+                        <td width="15%" align="right" class="tdbg">电子邮箱</td>
+                        <td width="35%"><input ng-model="person.email" name="email" type="text" placeholder="输入电子信箱" onfocus="this.placeholder=''" onblur="this.placeholder='输入电子信箱'"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="center" class="tdbg">个人简历</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <textarea ng-model="person.resume" name="resume" placeholder="介绍自己~" onfocus="this.placeholder=''" onblur="this.placeholder='介绍自己~'"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" align="center" class="tdbg">
+                            特长及成就
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <textarea ng-model="person.achievement" name="achievement" placeholder="描述特长及成就~" onfocus="this.placeholder=''" onblur="this.placeholder='描述特长及成就~'"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--企业生产经营信息-->
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">企业生产（经营）信息</span>
+            </div>
+            <div id="production">
+                <table class="form_info" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">自有生产（经营）场地（㎡）</td>
+                        <td width="35%"><input ng-model="companyInfo.ownSpace" name="ownSpace" type="text" placeholder="输入面积" onfocus="this.placeholder=''" onblur="this.placeholder='输入面积'"/></td>
+                        <td width="15%" align="right" class="tdbg">租赁生产（经营）场地（㎡）</td>
+                        <td width="35%"><input ng-model="companyInfo.tenancySpace" name="tenancySpace" type="text" placeholder="输入面积" onfocus="this.placeholder=''" onblur="this.placeholder='输入面积'"/></td>
+                    </tr>
+                    <tr>
+                       <td colspan="4" align="center" class="tdbg">
+                           企业生产（经营）主要品种
+                       </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <textarea ng-model="companyInfo.majorVariety" name="majorVariety" placeholder="描述主要品种~" onfocus="this.placeholder=''" onblur="this.placeholder='描述主要品种~'"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--党组织建立情况-->
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">党组织建立情况</span>
+            </div>
+            <div id="group">
+                <table class="form_info" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">党组织类型</td>
+                        <td width="35%"><input name="companyOrgType" ng-model="dang.orgType" type="text" placeholder="输入党组织类型" onfocus="this.placeholder=''" onblur="this.placeholder='输入党组织类型'"/></td>
+                        <td width="15%" align="right" class="tdbg">党员人数</td>
+                        <td width="35%"><input name="peopleNum" ng-model="dang.peopleNum" type="text" placeholder="输入党员人数" onfocus="this.placeholder=''" onblur="this.placeholder='输入党员人数'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">党组织成立时间</td>
+                        <td width="35%"><input name="dzz_establishDate" ng-model="dang.establishDate" id="dzz_establishDate" type="text" placeholder="选择党组织成立时间" onfocus="this.placeholder=''" onblur="this.placeholder='选择党组织成立时间'"/></td>
+                        <td width="15%" align="right" class="tdbg">党组织负责人</td>
+                        <td width="35%"><input name="dutyPersonName" ng-model="dang.dutyPersonName" type="text" placeholder="输入负责人姓名" onfocus="this.placeholder=''" onblur="this.placeholder='输入负责人姓名'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">联系电话</td>
+                        <td width="35%"><input name="dutyPersonPhone" ng-model="dang.dutyPersonPhone" type="text" placeholder="输入负责人联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='输入负责人联系电话'"/></td>
+                        <td width="15%">&nbsp;</td>
+                        <td width="35%">&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--工会组织建立情况-->
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">工会组织建立情况</span>
+            </div>
+            <div id="gonghui">
+                <table class="form_info" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">工会组织成立时间</td>
+                        <td width="35%"><input name="gh_establishDate" ng-model="gonghui.establishDate" id="gh_establishDate" type="text" placeholder="选择成立时间" onfocus="this.placeholder=''" onblur="this.placeholder='选择成立时间'"/></td>
+                        <td width="15%" align="right" class="tdbg">工会组织负责人</td>
+                        <td width="35%"> <input name="gh_dutyPersonName" ng-model="gonghui.dutyPersonName" type="text" placeholder="输入工会组织负责人" onfocus="this.placeholder=''" onblur="this.placeholder='输入工会组织负责人'"/></td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">联系电话</td>
+                        <td width="35%"><input name="gh_dutyPersonPhone" ng-model="gonghui.dutyPersonPhone" type="text" placeholder="输入联系电话" onfocus="this.placeholder=''" onblur="this.placeholder='输入联系电话'"/></td>
+                        <td width="15%">&nbsp;</td>
+                        <td width="35%">&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--构建和谐劳动关系情况-->
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">构建和谐劳动关系情况</span>
+            </div>
+            <div id="labor">
+                <table class="form_info" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">劳动合同签订人数</td>
+                        <td width="35%"><input ng-model="companyInfo.laborContractNum" name="laborContractNum" type="text" placeholder="输入人数" onfocus="this.placeholder=''" onblur="this.placeholder='输入人数'"/></td>
+                        <td width="15%" align="right" class="tdbg">是否建立劳动关系三方协调机制</td>
+                        <td width="35%">
+                            <select name="thirdLaborRelation" id="thirdLaborRelation" ng-model="companyInfo.thirdLaborRelation">
+                                <option value=""> 请选择</option>
+                                <option value="1"> 是</option>
+                                <option value="0"> 否</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="15%" align="right" class="tdbg">社会保险参保地</td>
+                        <td width="35%"><input ng-model="companyInfo.socialInsuranceAddr" name="socialInsuranceAddr" type="text" placeholder="输入参保地" onfocus="this.placeholder=''" onblur="this.placeholder='输入参保地'"/></td>
+                        <td width="15%" align="right" class="tdbg">社会保险登记证号</td>
+                        <td width="35%"><input ng-model="companyInfo.socialInsuranceNum" name="socialInsuranceNum" type="text" placeholder="输入登记证号" onfocus="this.placeholder=''" onblur="this.placeholder='输入登记证号'"/></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--对社会公益事业作过何种贡献-->
+    <div class="info">
+        <div class="info_title">
+            <span class="info_title_01">对社会公益事业作过何种贡献</span>
+        </div>
+        <div id="contribution">
+            <table class="form_info" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="50%"  align="center" class="tdbg">安排下岗职工再就业</td>
+                    <td width="50%"  align="center" class="tdbg">助学兴教</td>
+                </tr>
+                <tr>
+                    <td width="50%"><textarea type="text" name="xg_work" ng-model="work.itemValue" placeholder="输入详情" onfocus="this.placeholder=''" onblur="this.placeholder='输入详情'"></textarea></td>
+                    <td width="50%"><textarea type="text" name="education" ng-model="edu.itemValue" placeholder="输入详情" onfocus="this.placeholder=''" onblur="this.placeholder='输入详情'"></textarea></td>
+                </tr>
+                <tr>
+                    <td width="50%" align="center" class="tdbg">帮困扶贫</td>
+                    <td width="50%" align="center" class="tdbg">其他</td>
+                </tr>
+                <tr>
+                    <td width="50%" align="center"><textarea type="text" name="poverty" ng-model="poverty.itemValue" placeholder="输入详情" onfocus="this.placeholder=''" onblur="this.placeholder='输入详情'"></textarea></td>
+                    <td width="50%" align="center"><textarea type="text" name="others" ng-model="others.itemValue" placeholder="输入详情" onfocus="this.placeholder=''" onblur="this.placeholder='输入详情'"></textarea></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <!--纳税情况-->
+    <div class="info">
+        <div class="info_title">
+            <span class="info_title_01">纳税情况</span>
+        </div>
+        <div id="tax">
+            <table class="form_info" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="15%" align="right" class="tdbg">累计纳税（元）</td>
+                    <td width="35%"><input ng-model="companyInfo.accTaxAmount" name="accTaxAmount" type="text" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"/></td>
+                    <td width="15%" align="right" class="tdbg">当年纳税（元）</td>
+                    <td width="35%"><input ng-model="companyInfo.yearTaxAmount" name="yearTaxAmount" type="text" placeholder="输入金额" onfocus="this.placeholder=''" onblur="this.placeholder='输入金额'"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="form_footer">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-xs-12 commit">
+                <button  ng-click="insertInformation();">提交</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div id="loading" class="loading">
+    加载中...
+</div>
+</body>
+</html>

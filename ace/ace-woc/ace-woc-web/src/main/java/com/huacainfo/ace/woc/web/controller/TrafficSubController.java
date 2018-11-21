@@ -1,10 +1,13 @@
 package com.huacainfo.ace.woc.web.controller;
 
+import com.huacainfo.ace.common.fastdfs.IFile;
+import com.huacainfo.ace.portal.service.FilesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -17,6 +20,9 @@ import com.huacainfo.ace.woc.model.TrafficSub;
 import com.huacainfo.ace.woc.service.TrafficSubService;
 import com.huacainfo.ace.woc.vo.TrafficSubVo;
 import com.huacainfo.ace.woc.vo.TrafficSubQVo;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 @Controller
 @RequestMapping("/trafficSub")
@@ -32,7 +38,13 @@ public class TrafficSubController extends WocBaseController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private TrafficSubService trafficSubService;
-     /**
+
+	@Autowired
+	private IFile fileSaver;
+	@Autowired
+	private FilesService filesService;
+
+	/**
 	 *
 	    * @Title:find!{bean.name}List
 	    * @Description:  TODO(通行记录子表分页查询)
@@ -130,5 +142,57 @@ public class TrafficSubController extends WocBaseController {
 		String id = json.getString("id");
 		return this.trafficSubService.deleteTrafficSubByTrafficSubId(id,
 				this.getCurUserProp());
+	}
+
+	/**
+	 * @throws
+	 * @Title:deleteTrafficSubByTrafficSubId
+	 * @Description: TODO(删除通行记录子表)
+	 * @param: @param jsons
+	 * @param: @throws Exception
+	 * @return: MessageResponse
+	 * @author: 王恩
+	 * @version: 2018-03-21
+	 */
+	@RequestMapping(value = "/deleteTrafficSubByTrafficSubIdSub")
+	@ResponseBody
+	public MessageResponse deleteTrafficSubByTrafficSubIdSub(String id)
+			throws Exception {
+		return this.trafficSubService.deleteTrafficSubByTrafficSubId(id,
+				this.getCurUserProp());
+	}
+
+	@RequestMapping(value = "/uploadFile")
+	@ResponseBody
+	public SingleResult<String[]> uploadFile(@RequestParam MultipartFile[] file, String id)
+			throws Exception {
+		SingleResult<String[]> rst = new SingleResult<String[]>(0, "上传成功！");
+		String[] fileNames = new String[file.length];
+		String dir = this.getRequest().getSession().getServletContext()
+				.getRealPath(File.separator)
+				+ "tmp";
+		File tmp = new File(dir);
+		if (!tmp.exists()) {
+			tmp.mkdirs();
+		}
+		int i = 0;
+		for (MultipartFile o : file) {
+			File dest = new File(dir + File.separator + o.getName());
+			o.transferTo(dest);
+			fileNames[i] = this.fileSaver.saveFile(dest, o.getOriginalFilename());
+			dest.delete();
+			filesService.insertFiles(fileNames[i], this.getCurUserProp());
+			TrafficSub obj = new TrafficSub();
+			obj.setTrafficId(id);
+			obj.setFileUrl(fileNames[i]);
+			obj.setCategory("6");
+			if (fileNames[i].lastIndexOf(".mp4") != -1 || fileNames[i].lastIndexOf(".Mp4") != -1 || fileNames[i].lastIndexOf(".mP4") != -1 || fileNames[i].lastIndexOf(".MP4") != -1) {
+				obj.setCategory("5");
+			}
+			this.trafficSubService.insertTrafficSub(obj, this.getCurUserProp());
+			i++;
+		}
+		rst.setValue(fileNames);
+		return rst;
 	}
 }

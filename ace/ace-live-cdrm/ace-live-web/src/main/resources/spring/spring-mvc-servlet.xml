@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+
+
+
+
+
+
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       default-autowire="byName">
+    <context:component-scan base-package="com.huacainfo.ace.live.web.controller">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:mvc.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!--<import resource="classpath:spring/spring-ace-common-servlet.xml" />-->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+    <bean id="jsonHttpMessageConverter"
+          class="com.huacainfo.ace.common.web.converter.MappingFastJsonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>${spring.mvc.supportedMediaTypes}</value>
+            </list>
+        </property>
+        <property name="serializerFeature">
+            <list>
+                <value>QuoteFieldNames</value>
+            </list>
+        </property>
+    </bean>
+    <!--注解适配器 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+            </list>
+        </property>
+    </bean>
+    <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="${spring.mvc.charset}"/>
+        <!-- 指定所上传文件的总大小不能超过20MB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+        <property name="maxUploadSize" value="${spring.mvc.maxUploadSize}"/>
+    </bean>
+    <!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="${spring.mvc.resourceView.prefix}" p:suffix="${spring.mvc.resourceView.suffix}"/>
+    <bean id="exceptionHandler" class="com.huacainfo.ace.common.web.handler.ExceptionHandler"/>
+</beans>

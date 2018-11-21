@@ -1,0 +1,286 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+.container {
+	width: 100%;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.col-xs-6,.col-sm-6{
+	padding: 0;
+}
+.row {
+	margin: 0!important;
+	padding:0!important;
+}
+
+.banner {
+	width: 100%;
+	height: 2.666666rem;
+	background: rgba(73, 208, 197, 1);
+	z-index: 400;
+}
+
+.navbox {
+	width: 100%;
+	height: 1.066666rem;
+	z-index: 400;
+}
+
+.imgbox {
+	text-align: center;
+}
+
+.imgbox img {
+	width: 1.613333rem;
+	height: 1.613333rem;
+	margin-top: 0.3rem;
+	border-radius: 0.133333rem;
+}
+
+.consulelist {
+	padding-top: 0.266666rem;
+	padding-bottom: 0.266666rem;
+	border-bottom: 1px solid #F7F8FC;
+}
+
+.content_01 {
+	height: 1rem;
+	line-height: 1rem;
+}
+
+.content_01 img {
+	width: 0.4rem;
+	height: 0.346666rem;
+	margin-right: 0.133333rem;
+}
+
+.left {
+	font-size: 0.426666rem;
+	color: #1C2843;
+	font-weight: bold;
+}
+.online{
+	text-align: right;
+	color: #49D0C5;
+	padding-right: 0.4rem;
+	font-size: 0.346666rem;
+	font-weight: bold;
+}
+.offline{
+	text-align: right;
+	color: #5C6681;
+	font-size: 0.346666rem;
+	font-weight: bold;
+	padding-right: 0.4rem;
+}
+.content_02{
+	width: 100%;
+	height: 0.813333rem;
+	line-height: 0.48rem;
+	color: #A0A7B6;
+	padding-right: 0.4rem;
+	overflow: hidden;  /*溢出隐藏*/
+}
+.content_03{
+	height: 0.8rem;
+}
+.money{
+	color: #FF7C12;
+	font-size: 0.373333rem;
+	font-weight: bold;
+}
+.help_times{
+	color: #C4C8D6;
+	font-size: 0.32rem;
+}
+
+.clabel li:nth-child(4n+0) {
+	margin-right: 0px;
+}
+
+.clabel li{
+	width: 1.6rem;
+	height: 0.68rem;
+	line-height: 0.68rem;
+	display: block;
+	float: left;
+	border-radius: 0.34rem;
+	color: #c6cad3;
+	border: 1px solid #c6cad3;
+	font-size: 0.3rem;
+	text-align: center;
+	margin-right: 0.2rem;
+	margin-bottom: 0.2rem;
+}
+
+.checked{
+	background-color: #49D0C5;
+	color: #FFFFFF !important;
+	border: none !important;
+}
+.checked a{
+	color: #FFFFFF;
+}
+/* 下拉筛选样式*/
+
+.selectbox {
+	height: 1rem;
+	width: 100%;
+	clear: both;
+	margin: auto;
+}
+
+.selemediv {
+	width: 33.33%;
+	height: 1rem;
+	float: left;
+	position: relative;
+}
+.selemenu:after{
+	content: '';
+	clear: both;
+}
+.selemenu {
+	width: 100%;
+	height: 1rem;
+	background: #fff;
+	color: #5C6681;
+	text-indent: 10px;
+	border: none;
+	text-align: center;
+	/*background: url(../img/xiala.png) 80% no-repeat;*/
+}
+.selemenu {
+	font-size: 14px;
+	line-height: 35px;
+	border-bottom: 1px solid #F7F8FC;
+}
+
+.citylist span {
+	width: 2.2rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	display: block;
+	float: left;
+	cursor: pointer;
+	text-align: center;
+	font-size: 0.373333rem;
+}
+.citylist span .active{
+	color: #49D0C5;
+	border: 1px solid  #49D0C5;
+}
+
+.citylist span:after{
+	content: '';
+	clear: both;
+}
+.citylist span:hover {
+	background: #eee;
+}
+
+.citylist {
+	border-top: 1px solid #F7F8FC;
+}
+.menuList1{
+	display: none;
+	background: #fff;
+	font-size: 12px;
+	position: absolute;
+	left: 0;
+	top: 35px;
+	width: 10rem;
+	box-shadow: 0px 5px 5px #ccc;
+	z-index: 500;
+}
+.menuList2{
+	display: none;
+	background: #fff;
+	font-size: 12px;
+	position: absolute;
+	left: -3.333rem;
+	top: 35px;
+	width: 10rem;
+	box-shadow: 0px 5px 5px #ccc;
+	z-index: 500;
+}
+.menuList3{
+	display: none;
+	background: #fff;
+	font-size: 12px;
+	position: absolute;
+	left: -6.666rem;
+	top: 35px;
+	width: 10rem;
+	box-shadow: 0px 5px 5px #ccc;
+	z-index: 500;
+}
+.citylist2 {
+	box-shadow: 0px 5px 5px #ccc;
+	font-size: 14px;
+	color: #666;
+	padding: 20px 40px;
+	position: absolute;
+	top: 35px;
+	left: 0;
+	background: #fff;
+	border-bottom: 1px solid #f6f6f6;
+	display: none;
+	z-index: 500;
+}
+
+.citylist ul {
+	float: left;
+	width: 80%;
+	line-height: 54px;
+}
+
+.citylist ul li {
+	float: left;
+	cursor: pointer
+}
+
+/*.citylist ul li:hover {
+	color: #ff4400
+}*/
+.citylist  li {
+	float: left;
+	cursor: pointer;
+	font-size: 0.373333rem;
+	color: rgba(160, 167, 182, 1);
+	margin-right: 0.213333rem;
+	text-align: center;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	border: 1px solid #D9DCE2;
+	border-radius: 0.4rem;
+	width: 2.1rem;
+	margin-bottom: 0.466666rem;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+.xzk {
+	width: 9.2rem;
+	margin-left: 0.4rem;
+	margin-right: 0.4rem;
+	overflow: hidden;
+	clear: both;
+	z-index: 500;
+	margin-top: 0.6rem;
+}
+
+.citylist .active {
+	color: #fff;
+	background-color: #5BD5CB;
+	border: 1px solid #5BD5CB;
+}
+.drop_down{
+	width: 0.2rem;
+	height: 0.12rem;
+}

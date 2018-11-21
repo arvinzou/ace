@@ -14,6 +14,10 @@ public class UsersVo extends Users{
 
 	private String nickname;
 
+	private String sappnickname;
+
+	private String avatarUrl;
+
 	private String headimgurl;
 
 	public String getDepartmentName() {
@@ -46,5 +50,23 @@ public class UsersVo extends Users{
 
 	public void setHeadimgurl(String headimgurl) {
 		this.headimgurl = headimgurl;
+	}
+
+
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public String getSappnickname() {
+		return sappnickname;
+	}
+
+	public void setSappnickname(String sappnickname) {
+		this.sappnickname = sappnickname;
 	}
 }

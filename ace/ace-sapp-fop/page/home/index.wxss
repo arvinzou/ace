@@ -1,0 +1,46 @@
+@import "../common/index.wxss";
+@import "../common/lib/weui.wxss";
+
+.body {
+  padding: 20rpx;
+}
+
+.swiper {
+  width: 100%;
+  height: 300rpx;
+}
+.text-content {
+  padding: 10px;
+  text-align: center;
+}
+
+.text-content-center {
+  width: 100%;
+  text-align: center;
+}
+
+
+.qrcode {
+  height: 200rpx;
+  width: 200rpx;
+  margin-top: 50rpx;
+  margin-bottom: 10rpx;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.title-strong {
+  font-size: 35rpx;
+  font-weight: 800;
+  color: #1A56A8;
+  padding: 20rpx;
+}
+.rich-text{
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+  color: #000000;
+  font-size: 28rpx;
+}
+
+page {
+background-color:#fff;
+}

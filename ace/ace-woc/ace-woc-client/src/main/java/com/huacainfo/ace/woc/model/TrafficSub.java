@@ -14,6 +14,9 @@ public class TrafficSub implements Serializable {
 
     private String deviceId;
 
+    /**
+     * 资料类型 1车牌照片 2车辆后照 3侧面照 4全景照 5视频
+     */
     private String category;
 
     private Date inspectTime;

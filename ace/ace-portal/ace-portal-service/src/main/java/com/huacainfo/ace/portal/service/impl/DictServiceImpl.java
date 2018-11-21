@@ -105,6 +105,7 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		}
 		o.setSpell(CommonUtils.getPinYinHeadChar(o.getName()));
 		this.dictMapper.updateByPrimaryKey(o);
+		logger.info(o.toString());
 		this.dataBaseLogService.log("变更字典", "字典", "", o.getName(),
 				o.getName(), userProp);
 		return new MessageResponse(0, "字典变更完成！");
@@ -406,5 +407,13 @@ public class DictServiceImpl implements DictService,WebContextDictService{
 		CommonTreeUtils commonTreeUtils = new CommonTreeUtils(
 				list);
 		return commonTreeUtils.getTreeList("0");
+	}
+	@Override
+	public  PageResult<DictVo> getTreeGrid() throws Exception{
+		PageResult<DictVo> rst = new PageResult<DictVo>();
+		List<DictVo> list = this.dictMapper.getTreeGrid();
+		rst.setRows(list);
+		rst.setTotal(list.size());
+		return rst;
 	}
 }

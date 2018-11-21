@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.jxb.dao.PostLevelDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.jxb.model.PostLevel">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="postName" jdbcType="VARCHAR" property="postName"/>
+        <result column="postIndex" jdbcType="VARCHAR" property="postIndex"/>
+        <result column="ratio" jdbcType="DECIMAL" property="ratio"/>
+        <result column="counselorNum" jdbcType="INTEGER" property="counselorNum"/>
+        <result column="turnover" jdbcType="DECIMAL" property="turnover"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="updateDate" jdbcType="TIMESTAMP" property="updateDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, postName, postIndex, ratio, counselorNum, turnover, remark, status, createDate, 
+    updateDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from post_level
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from post_level
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.jxb.model.PostLevel">
+    insert into post_level (id, postName, postIndex, 
+      ratio, counselorNum, turnover, 
+      remark, status, createDate, 
+      updateDate)
+    values (#{id,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, #{postIndex,jdbcType=VARCHAR}, 
+      #{ratio,jdbcType=DECIMAL}, #{counselorNum,jdbcType=INTEGER}, #{turnover,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.PostLevel">
+        insert into post_level
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="postName != null">
+                postName,
+            </if>
+            <if test="postIndex != null">
+                postIndex,
+            </if>
+            <if test="ratio != null">
+                ratio,
+            </if>
+            <if test="counselorNum != null">
+                counselorNum,
+            </if>
+            <if test="turnover != null">
+                turnover,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+            <if test="updateDate != null">
+                updateDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="postName != null">
+                #{postName,jdbcType=VARCHAR},
+            </if>
+            <if test="postIndex != null">
+                #{postIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="ratio != null">
+                #{ratio,jdbcType=DECIMAL},
+            </if>
+            <if test="counselorNum != null">
+                #{counselorNum,jdbcType=INTEGER},
+            </if>
+            <if test="turnover != null">
+                #{turnover,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.jxb.model.PostLevel">
+        update post_level
+        <set>
+            <if test="postName != null">
+                postName = #{postName,jdbcType=VARCHAR},
+            </if>
+            <if test="postIndex != null">
+                postIndex = #{postIndex,jdbcType=VARCHAR},
+            </if>
+            <if test="ratio != null">
+                ratio = #{ratio,jdbcType=DECIMAL},
+            </if>
+            <if test="counselorNum != null">
+                counselorNum = #{counselorNum,jdbcType=INTEGER},
+            </if>
+            <if test="turnover != null">
+                turnover = #{turnover,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                updateDate = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.jxb.model.PostLevel">
+    update post_level
+    set postName = #{postName,jdbcType=VARCHAR},
+      postIndex = #{postIndex,jdbcType=VARCHAR},
+      ratio = #{ratio,jdbcType=DECIMAL},
+      counselorNum = #{counselorNum,jdbcType=INTEGER},
+      turnover = #{turnover,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      updateDate = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <select id="examine" resultType="map">
+        select
+        (
+        SELECT count(1)
+        from counselor c, teacher_audit a1
+        WHERE a1.counselorId = c.id
+        AND a1.rst = '1'
+        AND c.studioId IN (SELECT s.id FROM jxb.studio s WHERE s.counselorId = t.id)
+        ) as cNum,
+        (
+        select IFNULL(sum(b.payMoney),0)
+        from base_order b
+        where b.payTime BETWEEN #{startDt,jdbcType=VARCHAR} and #{endDt,jdbcType=VARCHAR}
+        and b.businessId in
+        (
+        SELECT c.id
+        from counselor c, teacher_audit a1
+        WHERE a1.counselorId = c.id
+        AND a1.rst = '1'
+        AND c.studioId IN (SELECT s.id FROM jxb.studio s WHERE s.counselorId = t.id)
+        )
+        )as cTurnover,
+        t.id,t.name,t.imagePhotoUrl
+        from counselor t, teacher_audit a
+        where 1=1
+        and a.counselorId = t.id
+        and a.rst = '1'
+        <if test="counselorId !=null and counselorId !=&quot;&quot;">
+            and t.counselorId = #{counselorId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="findConfig" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from post_level
+        ORDER BY postIndex
+    </select>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.PostLevelVo">
+    </resultMap>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        <include refid="whereCondition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY postIndex ASC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <sql id="whereCondition">
+        from post_level
+        where 1=1
+        <!--<if test="condition.counselorId !=null and condition.counselorId !=&quot;&quot;">-->
+        <!--and counselorId = #{condition.counselorId,jdbcType=VARCHAR}-->
+        <!--</if>-->
+    </sql>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+
+    <select id="getLowestPost" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from post_level
+        order by postIndex DESC
+        limit 1
+    </select>
+
+    <!--报表查询-->
+    <resultMap id="ReportResultMap" type="com.huacainfo.ace.jxb.vo.IncomeReportVo">
+        <result column="certification" jdbcType="VARCHAR" property="certification"/>
+        <result column="imagePhotoUrl" jdbcType="VARCHAR" property="imagePhotoUrl"/>
+        <result column="teacherName" jdbcType="VARCHAR" property="teacherName"/>
+        <result column="devPeopleNum" jdbcType="INTEGER" property="devPeopleNum"/>
+        <result column="ratio" jdbcType="DECIMAL" property="ratio"/>
+        <result column="consultIncomeTotal" jdbcType="DECIMAL" property="consultIncomeTotal"/>
+        <result column="consultIncomeTeacher" jdbcType="DECIMAL" property="consultIncomeTeacher"/>
+        <result column="consultIncomePlatform" jdbcType="DECIMAL" property="consultIncomePlatform"/>
+        <result column="courseIncomeTotal" jdbcType="DECIMAL" property="courseIncomeTotal"/>
+        <result column="courseIncomeTeacher" jdbcType="DECIMAL" property="courseIncomeTeacher"/>
+        <result column="courseIncomePlatform" jdbcType="DECIMAL" property="courseIncomePlatform"/>
+        <result column="studioIncome" jdbcType="DECIMAL" property="studioIncome"/>
+        <result column="teacherTotal" jdbcType="DECIMAL" property="teacherTotal"/>
+        <result column="platformTotal" jdbcType="DECIMAL" property="platformTotal"/>
+    </resultMap>
+
+    <select id="incomeReport" parameterType="java.lang.String" resultMap="ReportResultMap">
+        select
+        -- 咨询收入
+        IFNULL(consultIncome.validAmount ,0) as consultIncomeTotal,
+        IFNULL(consultIncome.teacherAmount,0) as consultIncomeTeacher,
+        IFNULL(consultIncome.platformAmount,0) as consultIncomePlatform,
+        -- 课程收入
+        IFNULL(courseIncome.validAmount,0) as courseIncomeTotal,
+        IFNULL(courseIncome.teacherAmount,0) as courseIncomeTeacher,
+        IFNULL(courseIncome.platformAmount,0) as courseIncomePlatform,
+        -- 提成收入
+        IFNULL(studioIncome.studioAmount,0) as studioIncome,
+        -- 老师收入总计
+        IFNULL(consultIncome.teacherAmount,0) + IFNULL(courseIncome.teacherAmount,0) +
+        IFNULL(studioIncome.studioAmount,0) as teacherTotal,
+        -- 公司收入总计
+        IFNULL(consultIncome.platformAmount,0) + IFNULL(courseIncome.platformAmount,0) as platformTotal,
+        -- 基本信息
+        c.`name` as teacherName, c.imagePhotoUrl, c.certification,
+        IFNULL(ccr.counselorNum ,0) as devPeopleNum,
+        pl.ratio
+        <include refid="Report_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY c.`name`
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findIncomeReportCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="Report_Condition"/>
+    </select>
+
+    <sql id="Report_Condition">
+        from jxb.counselor_post_level cpl
+        left join jxb.counselor_check_result ccr on cpl.counselorId=ccr.counselorId
+        left join jxb.post_level pl on cpl.postId = pl.id
+        left join jxb.counselor c on cpl.counselorId = c.id
+        -- 咨询收入报表
+        left join (SELECT
+        consult.teacherId as teacherId,
+        sum(consult.payMoney) as payAmount,
+        sum(consult.validAmount) as validAmount,
+        sum(consult.teacherAmount) as teacherAmount,
+        sum(consult.platformAmount) as platformAmount,
+        sum(consult.studioAmount) as studioAmount
+        from ( SELECT
+        o.payMoney,
+        o.payMoney - IFNULL(oc.studioAmount ,0) as validAmount,
+        IFNULL(oc.amount,0) as teacherAmount,
+        IFNULL(oc.platformAmount,0) as platformAmount,
+        IFNULL(oc.studioAmount ,0) as studioAmount,
+        o.businessId as teacherId
+        FROM base_order o
+        left join order_calculation oc on o.id = oc.orderId and oc.cpuTag = 1
+        WHERE o.payStatus in ('2','6','7')
+        and o.category = '1'
+        <if test="condition.dateTime !=null and condition.dateTime !=&quot;&quot;">
+            and o.payTime like concat(#{condition.dateTime,jdbcType=VARCHAR},'%')
+        </if>
+        ) consult
+        GROUP BY consult.teacherId
+        )consultIncome on consultIncome.teacherId = c.id
+        -- 课程收入报表
+        left join (SELECT
+        course.teacherId as teacherId,
+        sum(course.payMoney) as payAmount,
+        sum(course.validAmount) as validAmount,
+        sum(course.teacherAmount) as teacherAmount,
+        sum(course.platformAmount) as platformAmount,
+        sum(course.studioAmount) as studioAmount
+        from ( SELECT
+        o.payMoney,
+        o.payMoney - IFNULL(oc.studioAmount ,0) as validAmount,
+        IFNULL(oc.amount,0) as teacherAmount,
+        IFNULL(oc.platformAmount,0) as platformAmount,
+        IFNULL(oc.studioAmount ,0) as studioAmount,
+        o.businessId as teacherId
+        FROM base_order o
+        left join order_calculation oc on o.id = oc.orderId and oc.cpuTag = 1
+        WHERE o.payStatus in ('2','6','7')
+        and o.category = '2'
+        <if test="condition.dateTime !=null and condition.dateTime !=&quot;&quot;">
+            and o.payTime like concat(#{condition.dateTime,jdbcType=VARCHAR},'%')
+        </if>
+        )course
+        )courseIncome ON courseIncome.teacherId = c.id
+        -- 提成收入报表
+        LEFT JOIN (SELECT
+        s.counselorId ,
+        sum(oc.studioAmount) as studioAmount
+        FROM base_order o
+        left join order_calculation oc on o.id = oc.orderId and oc.cpuTag = 1
+        left join counselor c on o.businessId = c.id
+        left join studio s on c.studioId = s.id
+        WHERE o.payStatus in ('2','6','7')
+        and o.category = '2'
+        and IFNULL(oc.studioAmount, 0) != 0
+        <if test="condition.dateTime !=null and condition.dateTime !=&quot;&quot;">
+            and o.payTime like concat(#{condition.dateTime,jdbcType=VARCHAR},'%')
+        </if>
+        GROUP BY s.counselorId
+        )studioIncome on studioIncome.counselorId = c.id
+        where 1=1
+        <if test="condition.teacherName !=null and condition.teacherName !=&quot;&quot;">
+            and c.`name` like concat(#{condition.teacherName,jdbcType=VARCHAR},'%')
+        </if>
+    </sql>
+</mapper>

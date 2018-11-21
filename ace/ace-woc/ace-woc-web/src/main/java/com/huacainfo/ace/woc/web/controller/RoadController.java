@@ -138,8 +138,8 @@ public class RoadController extends WocBaseController {
 
 	@RequestMapping(value = "/selectRoad")
 	@ResponseBody
-	public Map<String,Object> selectAuthor(String q, String id)throws Exception {
-		Map<String,Object> params=new HashMap<String,Object>();
+    public Map<String, Object> selectRoad(String q, String id) throws Exception {
+        Map<String,Object> params=new HashMap<String,Object>();
 		params.put("q", id);
 		if(!CommonUtils.isBlank(q)){
 			params.put("q", q);

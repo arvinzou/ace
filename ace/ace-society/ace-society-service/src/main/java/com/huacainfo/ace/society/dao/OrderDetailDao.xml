@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.society.dao.OrderDetailDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.society.model.OrderDetail">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="orderId" jdbcType="VARCHAR" property="orderId"/>
+        <result column="commodityId" jdbcType="VARCHAR" property="commodityId"/>
+        <result column="commodityName" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="commodityCover" jdbcType="VARCHAR" property="commodityCover"/>
+        <result column="salePrice" jdbcType="DECIMAL" property="salePrice"/>
+        <result column="purchaseQty" jdbcType="INTEGER" property="purchaseQty"/>
+        <result column="subtotal" jdbcType="DECIMAL" property="subtotal"/>
+        <result column="detailState" jdbcType="CHAR" property="detailState"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, orderId, commodityId, commodityName, commodityCover, salePrice, purchaseQty, detailState, remark,
+    status, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    lastModifyDate, subtotal
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_detail
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.society.model.OrderDetail">
+    insert into order_detail (id, orderId, commodityId, 
+      commodityCover, salePrice, purchaseQty,
+      detailState, remark, status, 
+      createUserId, createUserName, createDate, 
+      lastModifyUserId, lastModifyUserName, lastModifyDate, subtotal, commodityName
+      )
+    values (#{id,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, 
+      #{commodityCover,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL}, #{purchaseQty,jdbcType=INTEGER},
+      #{detailState,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP},
+      #{subtotal,jdbcType=DECIMAL}, #{commodityName,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.society.model.OrderDetail">
+    update order_detail
+    set orderId = #{orderId,jdbcType=VARCHAR},
+      commodityId = #{commodityId,jdbcType=VARCHAR},
+      commodityName = #{commodityName,jdbcType=VARCHAR},
+      commodityCover = #{commodityCover,jdbcType=VARCHAR},
+      salePrice = #{salePrice,jdbcType=DECIMAL},
+      purchaseQty = #{purchaseQty,jdbcType=INTEGER},
+      subtotal = #{subtotal,jdbcType=DECIMAL},
+      detailState = #{detailState,jdbcType=CHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createUserId = #{createUserId,jdbcType=VARCHAR},
+      createUserName = #{createUserName,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

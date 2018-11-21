@@ -1,0 +1,95 @@
+{
+  "pages": [
+    "page/index/index",
+    "page/mall/index",
+    "page/me/index",
+    "page/behavior/index",
+    "page/coinDetail/index",
+    "page/idea/index",
+    "page/loveRanking/index",
+    "page/releaseIdea/index",
+    "page/historyOrder/index",
+    "page/partyBuilding/index",
+    "page/activityList/index",
+    "page/activityInfo/index",
+    "page/participants/index",
+    "page/postReport/index",
+    "page/activityApply/index",
+    "page/reportInfo/index",
+    "page/activityIndex/index",
+    "page/myCircle/index",
+    "page/circleAdd/index",
+    "page/circle/index",
+    "page/regist/index",
+    "page/commodity/index",
+    "page/settlement/index",
+    "page/site/index",
+    "page/siteChoose/index",
+    "page/userinfo/index",
+    "page/ideaDetail/index",
+    "page/indexMore/index",
+    "page/myBehavior/index",
+    "page/myIdea/index",
+    "page/liveHome/index",
+    "page/liveView/index",
+    "page/myLive/index",
+    "page/live/index",
+    "page/rpt/index",
+    "page/liveCsl/index",
+    "page/releaseBehavior/index",
+    "page/activityManage/index",
+    "page/activityEdit/index",
+    "page/enterActivity/index",
+    "page/aboutus/index",
+    "page/datas/index",
+    "page/liveStatus/index",
+    "page/orgApply/index",
+    "page/myOrg/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "芙蓉街道",
+    "navigationBarBackgroundColor": "#fff",
+    "backgroundColor": "#fff",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "borderStyle": "#000000",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "page/index/index",
+        "iconPath": "image/icon_首页_未选中.png",
+        "selectedIconPath": "image/icon_首页_选中.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "page/activityIndex/index",
+        "iconPath": "image/icon_活动回顾_未选中.png",
+        "selectedIconPath": "image/icon_活动回顾_选中.png",
+        "text": "活动回顾"
+      },
+      {
+        "pagePath": "page/mall/index",
+        "iconPath": "image/icon_爱心商城_未选中.png",
+        "selectedIconPath": "image/icon_爱心商城_选中.png",
+        "text": "爱心商城"
+      },
+      {
+        "pagePath": "page/me/index",
+        "iconPath": "image/icon_个人中心_未选中.png",
+        "selectedIconPath": "image/icon_个人中心_选中.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

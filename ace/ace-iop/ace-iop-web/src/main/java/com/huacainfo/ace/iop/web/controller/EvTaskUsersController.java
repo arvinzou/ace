@@ -47,8 +47,7 @@ public class EvTaskUsersController extends BaseController {
 	@RequestMapping(value = "/insertEvTaskUsers")
 	@ResponseBody
 	public MessageResponse insertEvTaskUsers(String jsons) throws Exception{
-		EvTaskUsers obj = JSON.parseObject(jsons, EvTaskUsers.class);
-		return this.evTaskUsersService.insertEvTaskUsers(obj, this.getCurUserProp());
+		return this.evTaskUsersService.insertEvTaskUsers(jsons, this.getCurUserProp());
 	}
 
 	@RequestMapping(value = "/updateEvTaskUsers")

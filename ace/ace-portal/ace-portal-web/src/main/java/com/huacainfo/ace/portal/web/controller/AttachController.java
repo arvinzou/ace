@@ -82,7 +82,7 @@ public class AttachController extends PortalBaseController{
 	 */
 	@RequestMapping(value = "/uploadFile.do")
 	@ResponseBody
-	public ListResult<Attach>  uploadFile(@RequestParam MultipartFile[] file,String noticeId, String collectionName)
+	public ListResult<AttachVo>  uploadFile(@RequestParam MultipartFile[] file,String noticeId, String collectionName)
 			throws Exception {
 		String[] fileNames=new String[file.length];
 		Attach[] files=new Attach[file.length];
@@ -108,7 +108,8 @@ public class AttachController extends PortalBaseController{
 	        files[i]=obj;
 			i++;
 		}
-		return this.attachService.upload(files,noticeId, this.getCurUserProp());
+		//return this.attachService.upload(files,noticeId, this.getCurUserProp());
+		return null;
 	}
 	
 	

@@ -193,10 +193,10 @@ public class NoticeController extends PortalBaseController {
 	@ResponseBody
 	public MessageResponse updateForStatusByPrimaryKey(
 			HttpServletRequest request, String noticeId, String status,
-			String departmentId, String groupId) throws Exception {
+			String groupId) throws Exception {
 		String contextPath = request.getContextPath();
 		return this.noticeService.updateForStatusByPrimaryKey(noticeId, status,
-				departmentId, groupId, contextPath, this.getCurUserProp());
+				this.getCurUserProp().getCorpId(), groupId, contextPath, this.getCurUserProp());
 	}
 	/**
 	 * 

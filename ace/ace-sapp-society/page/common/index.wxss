@@ -1,0 +1,491 @@
+.index {
+    color: #7a7e83;
+}
+
+page {
+    background-color: #f6f6f6;
+}
+
+.index view {
+    box-sizing: border-box;
+}
+
+/*按钮*/
+
+.btn {
+    width: 690rpx;
+    height: 90rpx;
+    margin: 0px auto;
+    border-radius: 6rpx;
+    line-height: 90rpx;
+    text-align: center;
+    font-size: 36rpx;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+}
+
+/*点击态*/
+
+.btn-clicking {
+    background: rgba(255, 153, 6, 1);
+}
+
+/*点击未激活态*/
+
+.btn-noClick {
+    background: rgba(255, 153, 6, 0.6);
+}
+
+/*不可点击态*/
+
+.btn-unClick {
+    background: rgba(217, 217, 217, 1);
+}
+
+.btn-bkClick {
+    background: #fff;
+    border: 1px solid rgba(255, 153, 6, 1);
+    color: rgba(255, 153, 6, 1);
+}
+
+
+.bottm-btn{
+    position: fixed;
+    width: 750rpx;
+    bottom: 0;
+    opacity: 100;
+    padding: 15rpx 0;
+    background-color:rgba(250, 250, 250, 0.8);
+    transition:bottom 0.5s, opacity  0.5s;
+    -webkit-transition:bottom 0.5s, opacity  0.5s;/* Safari and Chrome */
+}
+
+.btn-show{
+    bottom: -120rpx;
+    opacity: 0;
+}
+
+/* 下线条 */
+
+.bottom-line {
+    border-bottom: 0.5px solid #efefef;
+}
+
+/* 上线条 */
+
+.top-line {
+    border-top: 0.5px solid #efefef;
+}
+
+/* 步骤 */
+
+.steps {
+    width: 100%;
+    height: 80rpx;
+    background: rgba(214, 214, 214, 1);
+    font-size: 28rpx;
+    color: rgba(255, 255, 255, 1);
+    z-index:100;
+}
+
+.steps .step-one {
+    z-index: 100;
+}
+
+.steps .step-two {
+    z-index: 99;
+}
+
+.steps::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.steps .step, .steps .step-end {
+    width: 33.3333%;
+    line-height: 80rpx;
+    text-align: center;
+    float: left;
+    position: relative;
+}
+
+.steps .step::after {
+    content: '';
+    display: block;
+    background-color: rgba(214, 214, 214, 1);
+    width: 57rpx;
+    height: 57rpx;
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 11rpx;
+    right: -26rpx;
+    border-bottom: 4rpx solid #fff;
+    border-right: 4rpx solid #fff;
+}
+
+.steps .step-action::after {
+    background: rgba(255, 153, 6, 1);
+}
+
+.steps .step-action {
+    background: rgba(255, 153, 6, 1);
+}
+
+/* 提示框样式 */
+
+.prompt {
+    padding: 20rpx 30rpx;
+    display: table;
+    width: 100%;
+    background: rgba(255, 235, 205, 1);
+    font-size: 26rpx;
+    font-weight: 500;
+    color: rgba(255, 153, 6, 1);
+}
+
+.form .form-part {
+    padding: 0rpx 30rpx;
+    background-color: #fff;
+    margin-bottom: 20rpx;
+}
+
+.btn-part {
+    padding: 20rpx 0rpx;
+    display: flex;
+}
+
+.form .input-style {
+    display: flex;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+    height: 100rpx;
+    align-items: center;
+}
+
+.form .switch-style {
+    display: flex;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+    height: 100rpx;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form .textarea-style textarea {
+    width: 100%;
+    height: 380rpx;
+    overflow: auto;
+}
+
+.form .textarea-style .textLen {
+    padding: 15rpx 0 30rpx;
+    text-align: right;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(255, 153, 6, 1);
+}
+
+.form .textarea-style .title {
+    height: 100rpx;
+    line-height: 100rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: rgba(153, 153, 153, 1);
+}
+
+.form .input-style .title {
+    width: 210rpx;
+    margin-right: 10rpx;
+}
+
+.form .input-style text {
+    color: #f22;
+}
+
+.form .input-style .input-value {
+    flex-grow: 1;
+    color: rgba(34, 34, 34, 1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+
+@font-face {font-family: "iconfont";
+  src:url('data:application/x-font-woff;charset=utf-8;base64,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') format('woff'),
+  url('iconfont.ttf?t=1539573832779') format('truetype'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pinglun:before { content: "\e630"; }
+
+.icon-dianzan:before { content: "\e60a"; }
+
+.icon-dianhua:before { content: "\e67f"; }
+
+.icon-ccgl-shujuzidianxiugaijilu-5:before { content: "\e56e"; }
+
+.icon-tianjiatupian:before { content: "\e62a"; }
+
+.icon-wenben:before { content: "\e613"; }
+
+.icon-fuwenben-wenjian:before { content: "\e691"; }
+
+.icon-shanchu:before { content: "\e649"; }
+
+.icon-icon-test:before { content: "\e603"; }
+
+.typeTag {
+    width: 120rpx;
+    height: 40rpx;
+    font-size: 24rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    line-height: 40rpx;
+    text-align: center;
+    position: relative;
+    margin-left: 40rpx;
+}
+
+.typeTag::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-width: 14rpx;
+    border-style: solid;
+    border-color: transparent;
+    border-top-left-radius: 10rpx;
+    transform: rotate(-45deg);
+    left: -13rpx;
+    top: 6rpx;
+}
+
+.typeTag::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10rpx;
+    height: 10rpx;
+    background-color: #fff;
+    border-radius: 50%;
+    top: 15rpx;
+    left: -10rpx;
+}
+
+.tagGreen {
+    background: #dbf7ec;
+    color: rgba(28, 188, 128, 1);
+}
+
+.tagGreen::before {
+    border-left-color: #dbf7ec;
+    border-top-color: #dbf7ec;
+}
+
+.tagPurPle {
+    background: #e3f2ff;
+    color: #5e9eff;
+}
+
+.tagPurPle::before {
+    border-left-color: #e3f2ff;
+    border-top-color: #e3f2ff;
+}
+
+.tagRed {
+    background: #fef2ef;
+    color: #f65246;
+}
+
+.tagRed::before {
+    border-left-color: #fef2ef;
+    border-top-color: #fef2ef;
+}
+
+.tagYellow {
+    background: #ffebd0;
+    color: #ffab32;
+}
+
+.tagYellow::before {
+    border-left-color: #ffebd0;
+    border-top-color: #ffebd0;
+}
+
+/*活动状态 */
+
+.statusTag {
+    width: 134rpx;
+    height: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 22rpx;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    border-top-left-radius: 6rpx;
+    border-bottom-right-radius: 16rpx;
+    background-color: #b5b5b5;
+}
+
+.statusTaging {
+    background: linear-gradient(90deg, rgba(251, 81, 82, 1), rgba(251, 117, 81, 1));
+}
+
+.loading {
+    margin: 20rpx 0;
+    text-align: center;
+    font-size: 24rpx;
+}
+.whiteBg{
+    background: #fff;
+}
+
+.separate{
+    margin-bottom: 20rpx;
+}
+
+
+.tags_b{
+    display: inline-block;
+    width: 98rpx;
+    height: 40rpx;
+    border-radius: 4px;
+    font-size: 20rpx;
+    font-weight: bold;
+    line-height: 40rpx;
+    text-align: center;
+}
+
+.tags_pj{
+    background: rgba(214, 224, 255, 1);
+    color: rgba(66, 93, 174, 1);
+}
+
+
+.tags_dj{
+    color:rgba(243,79,62,1);
+    background:rgba(254,242,239,1);
+}
+
+.tags_cy{
+    color:rgba(255,171,50,1);
+   background:rgba(255,235,208,1);
+}
+
+.tags_gy{
+    color:rgba(28,188,128,1);
+   background:rgba(219,247,236,1);
+}
+.tags_zb{
+    color:rgba(239,107,205,1);
+    background:rgba(255,214,238,1);
+}
+
+
+.commentBox {
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    padding:16rpx 30rpx;
+
+}
+
+.commentBox .pop {
+    position: relative;
+    font-size: 42rpx;
+}
+.commentBox .pop::first-letter{
+    margin-right: 40rpx;
+}
+
+.commentBox .pop text {
+    position: absolute;
+    left: 22rpx;
+    padding: 0 10rpx;
+    height: 20rpx;
+    background: rgba(246, 82, 70, 1);
+    border-radius: 10rpx;
+    font-size:14rpx;
+    font-weight:bold;
+    line-height: 20rpx;
+    color:rgba(255,255,255,1);
+}
+
+.commentBox .input{
+    height:68rpx;
+    background:rgba(239,239,239,1);
+    opacity:0.4;
+    border-radius:34rpx;
+    width: 500rpx;
+    margin-right: 40rpx;
+    font-size:26rpx;
+    line-height: 68rpx;
+    font-weight:500;
+    color:rgba(102,102,102,1);
+    padding:0 34rpx;
+}
+
+.commentModel{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,.4);
+    z-index: 100;
+}
+
+.commentModel .inner-model{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+}
+
+.commentModel .box{
+    position: fixed;
+    bottom:0vh;
+    width: 100%;
+    padding:40rpx 20rpx 20rpx;
+}
+
+.commentModel .box::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+
+.commentModel .box textarea{
+    width: 640rpx;
+    background:rgba(249,249,249,1);
+    border-radius:6px;
+    padding: 34rpx;
+    margin-bottom: 20rpx;
+    /* line-height: 30rpx; */
+}
+
+.commentModel .box .submit{
+    width:138rpx;
+    height:60rpx;
+    float: right;
+    line-height: 60rpx;
+    text-align: center;
+    background:rgba(255,171,50,1);
+    border-radius:30rpx;
+    font-size:34rpx;
+    font-weight:bold;
+    color:rgba(255,255,255,1);
+    -webkit-appearance:none;
+}

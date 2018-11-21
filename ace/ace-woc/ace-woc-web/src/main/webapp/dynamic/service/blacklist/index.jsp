@@ -142,7 +142,7 @@
     </div>
     <h5 class="header-title">操作信息</h5>
     <div class="row" style="padding:10px">
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">创建人编号</span>
             <br>
             <span id="createUserId"></span>
@@ -157,7 +157,7 @@
             <br>
             <span id="createDate"></span>
         </div>
-        <div class="labelItem">
+        <div class="labelItem hide">
             <span class="labelItemHeader">最后更新人编号</span>
             <br>
             <span id="lastModifyUserId"></span>

@@ -61,6 +61,8 @@
     <!-- BEGIN THEME LAYOUT STYLES -->
     <!-- END THEME LAYOUT STYLES -->
     <link rel="shortcut icon" href="favicon.ico"/>
+
+
 </head>
 <!-- END HEAD -->
 <script type="text/javascript">
@@ -73,12 +75,24 @@
 <!-- BEGIN LOGO -->
 <div class="logo">
 
-
+        <img src="${pageContext.request.contextPath}/content/common/assets/pages/img/logo-big.png" alt="">
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="content">
     <!-- BEGIN LOGIN FORM -->
+    <div class="login-box-warp">
+        <div class="login-box no-longlogin module-static" id="J_LoginBox">
+            <div class="hd">
+                <div class="login-switch" onselectstart="return false;">
+                    <i class="iconfont quick" style="display:none" id="J_Static2Quick" onclick="javascript:switchLoginType('J_Static2Quick','J_Quick2Static')" ></i>
+                    <i class="iconfont static" style="display:block" id="J_Quick2Static" onclick="javascript:switchLoginType('J_Quick2Static','J_Static2Quick')"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <form class="login_form" id="login_form" name="login_form"
           action="${pageContext.request.contextPath}/j_spring_security_check"
           method="post">
@@ -87,64 +101,72 @@
             <span style="color: red;font-size:16px">${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}${sessionScope['j_captcha_error']}</span>
         </div>
         <div class="form-title">
-            <span class="form-subtitle">欢迎，请登录.</span>
+            <span class="form-subtitle">密码登录.</span>
         </div>
-        <div class="alert alert-danger display-hide">
-            <button class="close" data-close="alert"></button>
-            <span> 请输入账号与密码. </span>
+        <div id="J_Static2Quick_box" style="display:none;width:100%;text-align:center">
+
+
         </div>
-        <div class="form-group">
-            <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
-            <label class="control-label visible-ie8 visible-ie9">账号</label>
-            <div class="input-icon">
-                <i class="fa fa-user"></i>
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
-                       placeholder="账号" name="j_username" id="j_username" value="${username}"/>
+        <div id="J_Quick2Static_box" style="display:block">
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button>
+                <span> 请输入账号与密码. </span>
             </div>
-        </div>
+            <div class="form-group">
+                <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                <label class="control-label visible-ie8 visible-ie9">账号</label>
+                <div class="input-icon">
+                    <i class="fa fa-user"></i>
 
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">密码</label>
-            <div class="input-icon">
-                <i class="fa fa-lock"></i>
-                <input class="form-control  placeholder-no-fix" type="password" autocomplete="off"
-                       placeholder="密码" name="j_password" id="j_password" value="${password}"/>
+
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
+                           placeholder="账号" name="j_username" id="j_username" value="${username}"/>
+                </div>
             </div>
 
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">验证码</label>
-            <input class="form-control  placeholder-no-fix" type="text" name="j_captcha"
-                   autocomplete="off" id="j_captcha"
-                   placeholder="验证码" value=""/>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">密码</label>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i>
+                    <input class="form-control  placeholder-no-fix" type="password" autocomplete="off"
+                           placeholder="密码" name="j_password" id="j_password" value="${password}"/>
+                </div>
 
-
-            </label>
-        </div>
-        <div class="form-group-captcha">
-            <label class="control-label visible-ie8 visible-ie9">验证码</label>
-
-
-            <a href="#" id="flashImage"><img id="imageF"
-                                             src="${pageContext.request.contextPath}/captcha/image.do?date=${date}"/>
-            </a>
-
-
-            </label>
-        </div>
-
-        <div class="form-actions">
-            <label class="rememberme mt-checkbox mt-checkbox-outline">
-                <input type="checkbox" name="ch" ${ch} value="true"/> 两周之内记住我
-                <span></span>
-            </label>
-            <div class="pull-right forget-password-block">
-                <a data-target="#stack1" data-toggle="modal" class="forget-password">忘记密码了</a>
             </div>
-        </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">验证码</label>
+                <input class="form-control  placeholder-no-fix" type="text" name="j_captcha"
+                       autocomplete="off" id="j_captcha"
+                       placeholder="验证码" value=""/>
 
-        <div class="form-actions">
-            <button type="button" id="btn-login-submit" class="btn red btn-block uppercase">登录</button>
+
+                </label>
+            </div>
+            <div class="form-group-captcha">
+                <label class="control-label visible-ie8 visible-ie9">验证码</label>
+
+
+                <a href="#" id="flashImage"><img id="imageF"
+                                                 src="${pageContext.request.contextPath}/captcha/image.do?date=${date}" style="max-height:30px"/>
+                </a>
+
+
+                </label>
+            </div>
+
+            <div class="form-actions">
+                <label class="rememberme mt-checkbox mt-checkbox-outline">
+                    <input type="checkbox" name="ch" ${ch} value="true"/> 两周之内记住我
+                    <span></span>
+                </label>
+                <div class="pull-right forget-password-block">
+                    <a href="repasswd.jsp" class="forget-password">忘记密码了</a>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" id="btn-login-submit" class="btn green btn-block uppercase">登录</button>
+            </div>
         </div>
 
 
@@ -153,7 +175,7 @@
     <div align="center">
         <h6>
             <span style="font-family: '微软雅黑'">建议WIN7以上系统使用IE9以上浏览器，XP、MAC系统使用</span><a
-                href="http://rj.baidu.com/soft/detail/14744.html?ald"
+                href="https://sm.myapp.com/original/Browser/68.0.3440.106_chrome_installer.exe"
                 target="_blank" style="font-family: '微软雅黑'">谷歌浏览器</a> <span
                 style="font-family: '微软雅黑'">分辨率1024*768以上为佳</span>
         </h6>
@@ -183,11 +205,14 @@
             <div class="modal-body">
                 <div class="row" style="padding:10px">
                     <div style="padding:10px">
-                        输入注册的个人邮箱，系统将重置的密码发送到此邮箱.
+                        输入注册的个人手机号，系统将重置的密码以短信的方式发生到此手机.
                     </div>
 
-                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="邮箱"
-                           name="email" id="email"/>
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="请输入注册使用的手机号"
+                           name="mobile" id="mobile"/>
+                    <div style="padding:10px">
+
+                    </div>
                 </div>
 
             </div>
@@ -239,6 +264,10 @@
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="${pageContext.request.contextPath}/content/common/assets/pages/scripts/login.min.js"
         type="text/javascript"></script>
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"
+        type="text/javascript"></script>
+
+
 
 <script type="text/javascript">
 
@@ -278,7 +307,7 @@
             return false;
         }
         if (!reg.test(password.value)) {
-            alert("尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
+           // alert("尊敬的用户您的密码过于简单，建议您把密码修改为，长度大于8位 、包含字母、数字、特殊符号，谢谢！");
         }
         var form = document.getElementById("login_form");
         form.submit();
@@ -335,7 +364,7 @@
                             url: contextPath
                             + "/system/retrievePassword.do",
                             data: {
-                                email: $('#email').val()
+                                mobile: $('#mobile').val()
                             },
                             beforeSend: function (XMLHttpRequest) {
 
@@ -357,20 +386,45 @@
                 });
     });
 
+    function switchLoginType(cur,other){
+        $("#"+cur).css("display","none");
+        $("#"+other).css("display","block");
 
+         $("#"+cur+"_box").css("display","none");
+        $("#"+other+"_box").css("display","block");
+        if(cur=='J_Quick2Static'){
+             $(".form-subtitle").html("微信扫码，安全登录");
+        }else{
+             $(".form-subtitle").html("密码登录");
+        }
+    }
+function guid() {
+    function S4() {
+       return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+    }
+    return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+}
+ var obj = new WxLogin({
+     self_redirect:false,
+     id:"J_Static2Quick_box",
+     appid: "wx8571545c5cc9d78c",
+     scope: "snsapi_login",
+     redirect_uri: encodeURI('http://zx.huacainfo.com/portal/dynamic/portal/security/callbak.jsp?j_username='+guid()),
+     state: "huacai",
+     style: "",
+     href: ""
+ });
+
+    if (sessionStorage) {
+        sessionStorage.clear();
+    }
 </script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
 <style>
-    .login .logo {
-        margin: 0px auto 0;
-        padding: 15px;
-        text-align: left;
-        height: 150px;
 
-    }
 
     .login .content {
         margin: 10px auto;
@@ -402,15 +456,68 @@
     .form-group-captcha {
         margin-bottom: 5px;
     }
-    body {
+   /* body {
         background-image: url(${cfg.sys_login_bg_img});
         background-size: cover;
-    }
+    }*/
     .content {
         border: 1px solid #eee;
     }
     .progress-bar-box {
         text-align:center;
     }
+
+@font-face{font-family:iconfont;src:url(//at.alicdn.com/t/font_1451959379_8626566.eot);src:url(//at.alicdn.com/t/font_1451959379_8626566.eot?#iefix) format('embedded-opentype'),url(//at.alicdn.com/t/font_1451959379_8626566.woff) format('woff'),url(//at.alicdn.com/t/font_1451959379_8626566.ttf) format('truetype'),url(//at.alicdn.com/t/font_1451959379_8626566.svg#iconfont) format('svg')}.iconfont{font-family:iconfont!important;font-size:16px;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}
+.login-box {
+    width: 300px;
+    color: #6c6c6c;
+    background: #fff;
+    position: relative;
+    margin: 0 auto;
+}
+.login-switch {
+    width: 52px;
+    position: absolute;
+    right: 5px;
+    -moz-user-select: none;
+}
+
+.login-switch .iconfont {
+    font-size: 52px;
+    cursor: pointer;
+    color:#1890ff;
+}
+.iconfont {
+    font-family: iconfont!important;
+    font-size: 14px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: .2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+i, cite, em, var, address, dfn {
+    font-style: italic;
+}
+.qrcode{
+    max-width:250px;
+    padding-bottom:40px;
+}
+.login .logo {
+    margin: 30px auto 20px;
+    padding: 15px;
+    text-align: center;
+}
 </style>
+
+<script type="text/javascript">
+	if(sessionStorage){
+         sessionStorage.clear();
+    }
+</script>
 </html>

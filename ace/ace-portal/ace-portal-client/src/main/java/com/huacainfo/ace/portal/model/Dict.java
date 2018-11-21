@@ -97,4 +97,20 @@ public class Dict implements java.io.Serializable{
 	public void setSyid(String syid) {
 		this.syid = syid;
 	}
+
+    @Override
+    public String toString() {
+        return "Dict{" +
+                "id=" + id +
+                ", categoryId='" + categoryId + '\'' +
+                ", code='" + code + '\'' +
+                ", pcode='" + pcode + '\'' +
+                ", name='" + name + '\'' +
+                ", remark='" + remark + '\'' +
+                ", spell='" + spell + '\'' +
+                ", syid='" + syid + '\'' +
+                ", createTime=" + createTime +
+                ", selected=" + selected +
+                '}';
+    }
 }
