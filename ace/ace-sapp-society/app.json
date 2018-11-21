@@ -43,7 +43,8 @@
     "page/aboutus/index",
     "page/datas/index",
     "page/liveStatus/index",
-    "page/orgApply/index"
+    "page/orgApply/index",
+    "page/myOrg/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",
