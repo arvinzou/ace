@@ -26,7 +26,7 @@
                 <div class="col-md-3">
                     <div class="input-group">
                         <input type="text"
-                               name="title"
+                               name="financeTitle"
                                class="form-control"
                                placeholder="请输入标题">
                         <span class="input-group-btn">

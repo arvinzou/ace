@@ -35,11 +35,6 @@ jQuery(function ($) {
 
                     },
                     beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
                         initSimditor($("textarea[name=financeContent]"), null);
                     }
                 })
@@ -164,7 +159,7 @@ function edit(rowid) {
             recreateForm: true,
             viewPagerButtons: true,
             beforeSubmit: function (postdata) {
-                postdata.content = editor.getValue();
+                postdata.financeContent = editor.getValue();
                 return [true, "", ""];
             },
             beforeShowForm: function (e) {
@@ -199,7 +194,7 @@ function audit(params) {
     startLoad();
     $.ajax({
         type: "post",
-        url: contextPath + "/fopGeHelp/audit",
+        url: contextPath + "/fopFinanceProject/audit",
         data: {
             id: params.id,
             auditResult: params.rst,
