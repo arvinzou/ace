@@ -138,15 +138,15 @@ public interface BisType {
      */
     String REPORT_WELGARE = "reportComment_1";
     /**
-     * 公益活动评论-业务类型
+     * 普及活动评论-业务类型
      */
     String REPORT_POPULAR = "reportComment_2";
     /**
-     * 公益活动评论-业务类型
+     * 创意活动评论-业务类型
      */
     String REPORT_CREATIVE= "reportComment_3";
     /**
-     * 公益活动评论-业务类型
+     * 党建活动评论-业务类型
      */
     String REPORT_PARTY = "reportComment_4";
 
