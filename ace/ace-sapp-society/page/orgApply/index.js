@@ -75,10 +75,10 @@ Page({
         var that = this;
         
         //党组织必须在添加照片的情况下才能进行后续的操作
-        if (that.data.regName == '党组织' && that.data.imageCover == null){
+        if (that.data.imageCover == null){
             wx.showModal({
                 title: '提示',
-                content: '类型为党组织时，必须添加党组织照片！',
+                content: '请上传组织照片！',
                 success: function (res) { }
             });
             return;

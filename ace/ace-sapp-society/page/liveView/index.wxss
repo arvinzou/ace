@@ -369,6 +369,9 @@ width: 80%;
 .comment-text{
   border-radius:15rpx;
   padding: 10rpx;
+  display: block;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .btn-add-rpt{
   right: 40rpx;

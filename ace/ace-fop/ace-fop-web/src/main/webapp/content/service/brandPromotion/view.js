@@ -98,7 +98,7 @@ jQuery(function ($) {
         searchicon: 'ace-icon fa fa-search orange',
         refresh: authorConfig.hasOwnProperty(cfg.grid_load_data_url) || false,
         refreshicon: 'ace-icon fa fa-refresh green',
-        view: authorConfig.hasOwnProperty(cfg.grid_load_data_url) || false,
+         view: authorConfig.hasOwnProperty(cfg.grid_load_data_url) || false,
         viewicon: 'ace-icon fa fa-search-plus grey'
     }, {
         // edit record form
