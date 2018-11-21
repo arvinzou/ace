@@ -155,17 +155,29 @@ public class PersonInfoController extends SocietyBaseController {
 
     @RequestMapping("/querysocietyOrg")
     @ResponseBody
-    public ResultResponse querysociety(Map<String, Object> condition) throws Exception {
+    public ResultResponse querysociety(int start, int limit, Map<String, Object> condition) throws Exception {
         condition.putAll(getParams());
-        List<Map<String, Object>> rtn = personInfoService.querysocietyOrg(condition);
+        String str = (String) condition.get("start");
+        start = Integer.valueOf(str);
+
+        String str1 = (String) condition.get("limit");
+        limit = Integer.valueOf(str1);
+
+        List<Map<String, Object>> rtn = personInfoService.querysocietyOrg(start, limit, condition);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtn);
     }
 
     @RequestMapping("/queryperson")
     @ResponseBody
-    public ResultResponse queryperson(Map<String, Object> condition) throws Exception {
+    public ResultResponse queryperson(int start, int limit, Map<String, Object> condition) throws Exception {
         condition.putAll(getParams());
-        List<Map<String, Object>> rtn = personInfoService.queryperson(condition);
+        String str = (String) condition.get("start");
+        start = Integer.valueOf(str);
+
+        String str1 = (String) condition.get("limit");
+        limit = Integer.valueOf(str1);
+
+        List<Map<String, Object>> rtn = personInfoService.queryperson(start, limit, condition);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtn);
     }
 }

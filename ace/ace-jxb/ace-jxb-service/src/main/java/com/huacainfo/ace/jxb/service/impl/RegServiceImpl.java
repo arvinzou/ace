@@ -216,7 +216,7 @@ public class RegServiceImpl implements RegService {
         o.setSex(reg.getSex());
         this.regDao.insertReg(o);
 
-        //密码短信通知 -- 暂不启用
+        //密码短信通知
         sendRegSmsNotice(o, reg.getNickname(), reg.getMobile(), pwd);
         //******************
         return new MessageResponse(0, "注册成功.");
@@ -226,7 +226,7 @@ public class RegServiceImpl implements RegService {
         TaskCmcc obj = new TaskCmcc();
         Map<String, Object> msg = new HashMap<>();
         msg.put("taskName", "账号" + mobile);
-        msg.put("msg", nickname + "你好，注册成功，账号" + mobile + "，密码" + pwd + "。【近心帮】");
+        msg.put("msg", nickname + "你好，注册成功，账号" + mobile + "，密码" + pwd + "。【心阳光家庭教育】");
         msg.put("tel", mobile + "," + mobile + ";");
         CommonBeanUtils.copyMap2Bean(o, msg);
         this.taskCmccService.insertTaskCmcc(obj);

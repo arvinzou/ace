@@ -6,6 +6,7 @@ jQuery(function ($) {
                 $.each(formData, function (n, obj) {
                     params[obj.name] = obj.value;
                 });
+
                 $.extend(params, {
                     time: new Date()
                 });
@@ -40,6 +41,7 @@ jQuery(function ($) {
                     }
                 })
         });
+
 });
 
 function preview(id, title) {
@@ -125,6 +127,10 @@ function edit(rowid) {
             closeAfterAdd: true,
             recreateForm: true,
             viewPagerButtons: true,
+            beforeSubmit: function (postdata) {
+                postdata.content = editor.getValue();
+                return [true, "", ""];
+            },
             beforeShowForm: function (e) {
                 loadText(rowid);
                 appendUploadBtn("fileUrl");

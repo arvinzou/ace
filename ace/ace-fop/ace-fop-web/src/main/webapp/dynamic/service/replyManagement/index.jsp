@@ -27,8 +27,6 @@
 
         <div class="row custom-toolbar">
             <div class="col-md-2 toolbar">
-                <button type="button" class="btn  green" id="btn-view-add"
-                        authority="${pageContext.request.contextPath}/fopQuestion/insertFopQuestion"></button>
             </div>
 
             <div class="col-md-10">
