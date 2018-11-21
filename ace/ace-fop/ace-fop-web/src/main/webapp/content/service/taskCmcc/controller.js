@@ -35,74 +35,65 @@ jQuery(function ($) {
         });
     });
 
-    $('#btn-view-add').on(
-        'click',
-        function () {
-            // parent.addPanel('短信任务添加', contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid, true);
-            window.location.href = contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid;
-        });
-
-    $('#btn-view-edit').on(
-        'click',
-        function () {
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext)
-            }
-            jQuery(cfg.grid_selector).jqGrid(
-                'editGridRow',
-                gr,
-                {
-                    closeAfterAdd: true,
-                    recreateForm: true,
-                    viewPagerButtons: true,
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
+    $('#btn-view-add').on('click', function () {
+        window.location.href = contextPath + '/dynamic/service/taskCmcc/add.jsp?id=' + urlid;
+    });
 
 
+    initEvents();
 
-    $('#btn-view-del').on(
-        'click',
-        function () {
+});
 
-            var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-                'selrow');
-            if (!gr) {
-                $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                    $.jgrid.nav.alerttext);
-                return;
-            }
-            jQuery(cfg.grid_selector).jqGrid(
-                'delGridRow',
-                gr,
-                {
-                    beforeShowForm: function (e) {
-                        var form = $(e[0]);
-                        form.closest('.ui-jqdialog').find(
-                            '.ui-jqdialog-titlebar').wrapInner(
-                            '<div class="widget-header" />')
-                        style_edit_form(form);
-                    }
-                })
-        });
-    //
-    $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-        _title: function (title) {
-            var $title = this.options.title || '&nbsp;'
-            if (("title_html" in this.options) && this.options.title_html == true)
-                title.html($title);
-            else title.text($title);
+//初始化模态框事件
+function initModalEvents() {
+    //详情模态框
+    $('#modal-detail').on('shown.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        console.log(id);
+        var modal = $(this);
+        modal.find('.modal-body input[name=id]').val(id);
+        detail(id);
+    });
+}
+//初始化按钮事件
+function initBtnEvents() {
+    $('#tree-dept').tree({
+        checkbox: true,
+        url: '/fop/fopCallRecord/selectMemberCheckTreeList',
+        onBeforeExpand: function (node, param) {
+        },
+        onClick: function (node) {
         }
-    }));
+    });
+
+    $('#combogrid-tmp').combogrid({
+        panelWidth: 530,
+        idField: 'id',
+        textField: 'fullName',
+        url: '/fop/fopCallRecord/selectSendList',
+        mode: 'remote',
+        fitColumns: false,
+        method: 'get', columns: [[
+            {field: 'mobile', title: '手机号', width: 100, align: 'right'},
+            {field: 'fullName', title: '企业/团体/个人名称', width: 390, align: 'right'}
+        ]],
+        keyHandler: {
+            up: function () {
+            },
+
+            down: function () {
+            },
+
+            enter: function () {
+            },
+            query: function (q) {
+                $('#combogrid-tmp').combogrid("grid").datagrid("reload", {'q': q});
+                $('#combogrid-tmp').combogrid("setValue", q);
+            }
+
+        }
+    });
 
     $("#btn-view-select-tmp").on('click', function (e) {
         e.preventDefault();
@@ -174,7 +165,6 @@ jQuery(function ($) {
     });
 
     $("#btn-view-remove-last").on('click', function (e) {
-
         $('#task-content').find('div:last').remove();
     });
 
@@ -184,7 +174,6 @@ jQuery(function ($) {
     });
 
     $("#btn-view-remove-tmp-last").on('click', function (e) {
-
         $('#task-content-tmp').find('div:last').remove();
     });
 
@@ -192,8 +181,6 @@ jQuery(function ($) {
         e.preventDefault();
         var tel = new Array();
         $.each($('user'), function (i, obj) {
-            //console.log($(obj).html());
-            //console.log($(obj).attr("tel"));
             tel.push($(obj).attr("tel") + "," + $(obj).html());
         });
         var telext = $('#telext').val();
@@ -255,11 +242,9 @@ jQuery(function ($) {
 
     $("#btn-view-detail").on('click', function (e) {
         e.preventDefault();
-        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-            'selrow');
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
         if (!gr) {
-            $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                $.jgrid.nav.alerttext);
+            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
             return;
         }
         var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
@@ -315,17 +300,13 @@ jQuery(function ($) {
             error: function () {
             }
         });
-
-
     });
 
     $("#btn-view-repeat").on('click', function (e) {
         e.preventDefault();
-        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-            'selrow');
+        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
         if (!gr) {
-            $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                $.jgrid.nav.alerttext);
+            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
             return;
         }
         var gd = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
@@ -348,59 +329,18 @@ jQuery(function ($) {
                 $('#btn-view-repeat').removeAttr("disabled");
             }
         });
-
     });
+}
+//初始化事件列表
+function initEvents() {
 
+    initModalEvents();
 
-});
-
-jQuery(function ($) {
-    $('#tree-dept').tree({
-        checkbox: true,
-        url: '/fop/fopCallRecord/selectMemberCheckTreeList',
-        onBeforeExpand: function (node, param) {
-
-        },
-        onClick: function (node) {
-
-        }
-    });
-
-
-    $('#combogrid-tmp').combogrid({
-        panelWidth: 530,
-        idField: 'id',
-        textField: 'fullName',
-        url: '/fop/fopCallRecord/selectSendList',
-        mode: 'remote',
-        fitColumns: false,
-        method: 'get', columns: [[
-            {field: 'mobile', title: '手机号', width: 100, align: 'right'},
-            {field: 'fullName', title: '企业/团体/个人名称', width: 390, align: 'right'}
-        ]],
-        keyHandler: {
-            up: function () {
-            },
-
-            down: function () {
-            },
-
-            enter: function () {
-            },
-            query: function (q) {
-                $('#combogrid-tmp').combogrid("grid").datagrid("reload", {'q': q});
-                $('#combogrid-tmp').combogrid("setValue", q);
-            }
-
-        }
-    });
-
-
-});
+    initBtnEvents();
+    //
+}
 
 function reloadGrid() {
-    // console.log('reloadGrid');
-
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
 }
 
@@ -447,3 +387,47 @@ function selectMobile() {
         alert("请选择人员且手机号不能为空。");
     }
 }
+//删除
+function del(rowid) {
+    jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
+        beforeShowForm: function (e) {
+            var form = $(e[0]);
+            form.closest('.ui-jqdialog')
+                .find('.ui-jqdialog-titlebar')
+                .wrapInner('<div class="widget-header" />');
+
+        }
+    })
+}
+//
+function detail(rowid) {
+    $.ajax({
+        type: "post",
+        url: contextPath + "/taskCmcc/selectById.do",
+        data: {id: rowid},
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            var html = new Array();
+            var nodes = rst.value.tel.split(';');
+            $.each($(nodes), function (i, o) {
+                if (o.href != '') {
+                    html.push('<div class="layout-user" >');
+                    html.push('<user  class="badge badge-grey">');
+                    html.push(o);
+                    html.push('</user>');
+                    html.push('</div>');
+                }
+
+            });
+            $('#task-content').html(html.join(''));
+            $('#msg-content').html(rst.value.msg);
+        },
+        complete: function (XMLHttpRequest, textStatus) {
+
+        },
+        error: function () {
+        }
+    });
+}
+

@@ -1,4 +1,4 @@
-var _colNames = ['编号', '发送状态', '任务名称', '短信内容', '创建时间', '发送人'];
+var _colNames = ['编号', '发送状态', '任务名称', '短信内容', '创建时间', '发送人', '操作'];
 var _colModel = function () {
     return [{
         name: 'taskId',
@@ -41,7 +41,7 @@ var _colModel = function () {
     }, {
         name: 'msg',
         index: 'msg',
-        width: 400,
+        width: 350,
         editable: true,
         editoptions: {
             size: "20",
@@ -61,6 +61,15 @@ var _colModel = function () {
             size: "20",
             maxlength: "30"
         }
+    }, {
+        name: 'opt',
+        width: 80,
+        hidden: false,
+        editable: false,
+        sortable: false,
+        renderer: function (value, cur) {
+            return renderBtn(cur);
+        }
     }];
 }
 function aceSwitch(cellvalue, options, cell) {
@@ -79,4 +88,16 @@ function pickDate(cellvalue, options, cell) {
             autoclose: true
         });
     }, 0);
+}
+
+function renderBtn(cur) {
+    var rowid = $.jgrid.getAccessor(cur, cfg.dataId);
+    var title = $.jgrid.getAccessor(cur, 'title');
+    var opt = [];
+
+    opt.push('<a class="operation" href="#" data-toggle="modal" data-target="#modal-detail" data-id="' + rowid + '">详情</a> ');
+    if (authorConfig.hasOwnProperty(cfg.grid_delete_data_url)) {
+        opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
+    }
+    return opt.join('');
 }

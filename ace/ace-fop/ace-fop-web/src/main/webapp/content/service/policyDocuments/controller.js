@@ -6,6 +6,7 @@ jQuery(function ($) {
                 $.each(formData, function (n, obj) {
                     params[obj.name] = obj.value;
                 });
+
                 $.extend(params, {
                     time: new Date()
                 });
@@ -40,6 +41,7 @@ jQuery(function ($) {
                     }
                 })
         });
+
 });
 
 function preview(id, title) {
