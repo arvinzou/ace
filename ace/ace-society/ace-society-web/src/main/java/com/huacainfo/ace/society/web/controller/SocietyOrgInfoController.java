@@ -4,12 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.SocietyOrgInfoService;
+import com.huacainfo.ace.society.vo.OrgAdminVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 import org.slf4j.Logger;
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -52,12 +52,10 @@ public class SocietyOrgInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/findSocietyOrgInfoList")
     @ResponseBody
-    public PageResult
-            <SocietyOrgInfoVo> findSocietyOrgInfoList(SocietyOrgInfoQVo condition,
-                                                      PageParamNoChangeSord page) throws Exception {
+    public PageResult<SocietyOrgInfoVo> findSocietyOrgInfoList(SocietyOrgInfoQVo condition,
+                                                               PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <SocietyOrgInfoVo> rst = this.societyOrgInfoService
+        PageResult<SocietyOrgInfoVo> rst = this.societyOrgInfoService
                 .findSocietyOrgInfoList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -112,8 +110,7 @@ public class SocietyOrgInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/selectSocietyOrgInfoByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <SocietyOrgInfoVo> selectSocietyOrgInfoByPrimaryKey(String id) throws Exception {
+    public SingleResult<SocietyOrgInfoVo> selectSocietyOrgInfoByPrimaryKey(String id) throws Exception {
         return this.societyOrgInfoService.selectSocietyOrgInfoByPrimaryKey(id);
     }
 
@@ -154,4 +151,65 @@ public class SocietyOrgInfoController extends SocietyBaseController {
         return this.societyOrgInfoService.audit(id, rst, message, this.getCurUserProp());
     }
 
+    /**
+     * 查询组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findOrgAdmin")
+    @ResponseBody
+    public SingleResult<OrgAdminVo> findOrgAdmin(String orgId) throws Exception {
+        if (StringUtil.isEmpty(orgId)) {
+            return null;
+        }
+        return this.societyOrgInfoService.findOrgAdmin(orgId);
+    }
+
+    /**
+     * 移除组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @RequestMapping(value = "/removeAdmin")
+    @ResponseBody
+    public MessageResponse removeAdmin(String orgId) throws Exception {
+        if (!StringUtil.areNotEmpty(orgId)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        return societyOrgInfoService.removeAdmin(orgId);
+    }
+
+    /**
+     * 添加/更换 组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @RequestMapping(value = "/addAdmin")
+    @ResponseBody
+    public MessageResponse addAdmin(String orgId, String userId) throws Exception {
+        if (!StringUtil.areNotEmpty(orgId, userId)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        return societyOrgInfoService.addAdmin(orgId, userId);
+    }
+
+    /**
+     * 查询 待选负责人列表
+     *
+     * @param keyword 查询关键字
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @RequestMapping(value = "/findAdminList")
+    @ResponseBody
+    public Map<String, Object> findAdminList(String keyword) throws Exception {
+
+        return societyOrgInfoService.findAdminList(keyword);
+    }
 }

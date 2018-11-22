@@ -1,27 +1,26 @@
 package com.huacainfo.ace.society.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
-
-import com.huacainfo.ace.common.tools.GUIDUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.dao.OrgAdminDao;
 import com.huacainfo.ace.society.model.OrgAdmin;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.OrgAdminService;
-import com.huacainfo.ace.society.vo.OrgAdminVo;
 import com.huacainfo.ace.society.vo.OrgAdminQVo;
+import com.huacainfo.ace.society.vo.OrgAdminVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 @Service("orgAdminService")
 /**
@@ -53,13 +52,10 @@ public class OrgAdminServiceImpl implements OrgAdminService {
      * @version: 2018-11-19
      */
     @Override
-    public PageResult
-            <OrgAdminVo> findOrgAdminList(OrgAdminQVo condition, int start,
-                                          int limit, String orderBy) throws Exception {
-        PageResult
-                <OrgAdminVo> rst = new PageResult<>();
-        List
-                <OrgAdminVo> list = this.orgAdminDao.findList(condition,
+    public PageResult<OrgAdminVo> findOrgAdminList(OrgAdminQVo condition, int start,
+                                                   int limit, String orderBy) throws Exception {
+        PageResult<OrgAdminVo> rst = new PageResult<>();
+        List<OrgAdminVo> list = this.orgAdminDao.findList(condition,
                 start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -94,7 +90,7 @@ public class OrgAdminServiceImpl implements OrgAdminService {
         }
 
 
-        int temp = this.orgAdminDao.isExit(o);
+        int temp = this.orgAdminDao.isExist(o);
         if (temp > 0) {
             return new MessageResponse(1, "组织管理者列表名称重复！");
         }
@@ -151,10 +147,8 @@ public class OrgAdminServiceImpl implements OrgAdminService {
      * @version: 2018-11-19
      */
     @Override
-    public SingleResult
-            <OrgAdminVo> selectOrgAdminByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <OrgAdminVo> rst = new SingleResult<>();
+    public SingleResult<OrgAdminVo> selectOrgAdminByPrimaryKey(String id) throws Exception {
+        SingleResult<OrgAdminVo> rst = new SingleResult<>();
         rst.setValue(this.orgAdminDao.selectVoByPrimaryKey(id));
         return rst;
     }

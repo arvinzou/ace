@@ -5,8 +5,8 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.OrgAdmin;
-import com.huacainfo.ace.society.vo.OrgAdminVo;
 import com.huacainfo.ace.society.vo.OrgAdminQVo;
+import com.huacainfo.ace.society.vo.OrgAdminVo;
 
 /**
  * @author: Arvin
@@ -28,9 +28,8 @@ public interface OrgAdminService {
      * @author: Arvin
      * @version: 2018-11-19
      */
-    PageResult
-            <OrgAdminVo> findOrgAdminList(OrgAdminQVo condition,
-                                          int start, int limit, String orderBy) throws Exception;
+    PageResult<OrgAdminVo> findOrgAdminList(OrgAdminQVo condition,
+                                            int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -68,8 +67,7 @@ public interface OrgAdminService {
      * @author: Arvin
      * @version: 2018-11-19
      */
-    SingleResult
-            <OrgAdminVo> selectOrgAdminByPrimaryKey(String id) throws Exception;
+    SingleResult<OrgAdminVo> selectOrgAdminByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

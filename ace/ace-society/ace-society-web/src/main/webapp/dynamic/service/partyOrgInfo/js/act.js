@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5,orgType:1};
+var params = {limit: 5, orgType: 1};
 window.onload = function () {
     initPage();
     initEvents();
@@ -94,7 +94,7 @@ function initEvents() {
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
         initAuditForm(id);
-    })
+    });
     $('#modal-audit .btn-primary').on('click', function () {
         $('#modal-audit form').submit();
     });
@@ -113,7 +113,14 @@ function initEvents() {
         }
     });
 
-
+    //负责人模态框
+    $('#modal-admin').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        var modal = $(this);
+        modal.find('.modal-body input[name=id]').val(id);
+        initAdminForm(id);
+    });
 }
 /*社会组织信息审核*/
 function audit(params) {
@@ -264,3 +271,116 @@ function initAuditForm(id) {
     });
 
 }
+
+//初始化负责人框
+function initAdminForm(orgId) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/societyOrgInfo/findOrgAdmin",
+        type: "post",
+        async: false,
+        data: {orgId: orgId},
+        success: function (result) {
+            stopLoad();
+            if (result.status == 0) {
+                render('#admin-list', result.value, 'tpl-fm-admin');
+            } else {
+                alert(result.errorMessage);
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+    //查询负责人列表
+    $('#combogrid-admin').combogrid({
+        panelWidth: 530,
+        required: true,
+        value: '',
+        idField: 'id',
+        textField: 'realName',
+        url: '/society/societyOrgInfo/findAdminList',
+        mode: 'remote',
+        fitColumns: false,
+        method: 'get',
+        columns: [[
+            {field: 'userId', title: '用户ID', width: 60, align: 'center', hidden: true},
+            {field: 'nickName', title: '微信昵称', width: 175, align: 'center'},
+            {field: 'realName', title: '真实姓名', width: 175, align: 'center'},
+            {field: 'mobilePhone', title: '手机号', width: 175, align: 'center'}
+        ]],
+        onSelect: function (index, row) {
+            console.log("orgId=" + orgId);
+            console.log(JSON.stringify(row));
+            selectAdmin(row.userId, orgId);
+        },
+        keyHandler: {
+            up: function () {
+            },
+
+            down: function () {
+            },
+
+            enter: function () {
+            },
+            query: function (q) {
+                $('#combogrid-admin').combogrid("grid").datagrid("reload", {'keyword': q});
+                $('#combogrid-admin').combogrid("setValue", q);
+            }
+        }
+    });
+}
+//移除负责人
+function removeAdmin(orgId) {
+    if (confirm("确定移除当前负责人么？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/societyOrgInfo/removeAdmin",
+            type: "post",
+            async: false,
+            data: {orgId: orgId},
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    initAdminForm(orgId);
+                } else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
+}
+//候选负责人
+function selectAdmin(userId, orgId) {
+    if (confirm("确认选择此人作为组织负责人么？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + "/societyOrgInfo/addAdmin",
+            type: "post",
+            async: false,
+            data: {
+                orgId: orgId,
+                userId: userId
+            },
+            success: function (rst) {
+                stopLoad();
+                if (rst.status == 0) {
+                    initAdminForm(orgId);
+                } else {
+                    alert(rst.errorMessage);
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起，出错了！");
+            }
+        });
+    }
+}
+
+
