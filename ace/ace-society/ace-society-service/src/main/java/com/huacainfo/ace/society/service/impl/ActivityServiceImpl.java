@@ -18,13 +18,11 @@ import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.society.model.ActivityDetail;
 import com.huacainfo.ace.society.model.CoinConfig;
 import com.huacainfo.ace.society.model.PointsRecord;
-import com.huacainfo.ace.society.service.ActivityService;
-import com.huacainfo.ace.society.service.AuditRecordService;
-import com.huacainfo.ace.society.service.CoinConfigService;
-import com.huacainfo.ace.society.service.PointsRecordService;
+import com.huacainfo.ace.society.service.*;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import com.huacainfo.ace.society.vo.ActivityQVo;
 import com.huacainfo.ace.society.vo.ActivityVo;
+import com.huacainfo.ace.society.vo.CustomerVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +59,8 @@ public class ActivityServiceImpl implements ActivityService {
     private PointsRecordService pointsRecordService;
     @Autowired
     private PointsRecordDao pointsRecordDao;
+    @Autowired
+    private RegService regService;
 
     /**
      * @throws
@@ -134,18 +134,16 @@ public class ActivityServiceImpl implements ActivityService {
         if (CommonUtils.isBlank(o.getStartDate())) {
             return new MessageResponse(1, "开展时间不能为空！");
         }
-
-
-        int temp = this.activityDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "线下活动名称重复！");
-        }
         o.setCreateDate(new Date());
         o.setStatus("2");
         o.setCoinconfigId(o.getCategory());
         o.setInitiatorId(wxUser.getUnionId());
         o.setCreateUserName(wxUser.getNickName());
         o.setCreateUserId(wxUser.getUnionId());
+        int temp = this.activityDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "线下活动名称重复！");
+        }
         this.activityDao.insertSelective(o);
         auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, o.getId(), wxUser.getUnionId());
         return new MessageResponse(0, "添加线下活动完成！");
@@ -509,8 +507,10 @@ public class ActivityServiceImpl implements ActivityService {
                     addPeoplePointsRecord(activity.getCategory(),pCoin,(String)item,activity.getId());
                 }
             }
-            addOrgPointsRecord(activity.getCategory(),oCoin,activity.getInitiatorId(),activity.getId());
-            societyOrgInfoDao.addCoin(activity.getInitiatorId(), oCoin);
+            CustomerVo vo=regService.findByUserId(activity.getInitiatorId());
+            String orgId=vo.getSocietyOrg().getId();
+            addOrgPointsRecord(activity.getCategory(),oCoin,orgId,activity.getId());
+            societyOrgInfoDao.addCoin(orgId, oCoin);
         }
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
