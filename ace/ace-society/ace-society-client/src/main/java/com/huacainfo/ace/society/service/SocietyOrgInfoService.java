@@ -6,10 +6,12 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
+import com.huacainfo.ace.society.vo.OrgAdminVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -108,4 +110,41 @@ public interface SocietyOrgInfoService {
      * @return ResultResponse
      */
     ResultResponse newOrgInfo(String crtUserId, SocietyOrgInfoVo params) throws Exception;
+
+    /**
+     * 查询组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    SingleResult<OrgAdminVo> findOrgAdmin(String orgId) throws Exception;
+
+    /**
+     * 移除组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    MessageResponse removeAdmin(String orgId);
+
+    /**
+     * 添加/更换 组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    MessageResponse addAdmin(String orgId, String userId);
+
+
+    /**
+     * 查询 待选负责人列表
+     *
+     * @param keyword 查询关键字
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    Map<String, Object> findAdminList(String keyword);
 }

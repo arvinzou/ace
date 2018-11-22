@@ -6,6 +6,7 @@ import com.huacainfo.ace.society.vo.OrgAdminVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface OrgAdminDao {
 
@@ -26,8 +27,15 @@ public interface OrgAdminDao {
 
     int findCount(@Param("condition") OrgAdminQVo condition);
 
-    int isExit(OrgAdmin record);
+    int isExist(OrgAdmin record);
 
     int updateStatus(OrgAdmin record);
 
+    OrgAdminVo findByOrgId(String orgId);
+
+    int deleteByOrgId(String orgId);
+
+    List<Map<String, Object>> findAdminList(@Param("keyword") String keyword);
+
+    OrgAdminVo findByUserId(String userId);
 }

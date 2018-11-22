@@ -41,4 +41,71 @@
       updateDate = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+    <sql id="Vo_Column_List">
+        wx.nickName, wx.avatarUrl, p.realName, p.mobilePhone,
+        t.id, t.userId, t.orgId, t.remark, t.status, t.createDate, t.updateDate
+    </sql>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.OrgAdminVo">
+        <result column="nickName" jdbcType="VARCHAR" property="nickname"/>
+        <result column="avatarUrl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="realName" jdbcType="VARCHAR" property="realName"/>
+        <result column="mobilePhone" jdbcType="VARCHAR" property="mobilePhone"/>
+    </resultMap>
+
+    <sql id="From_Statement">
+       from org_admin t
+       left join person_info p on t.userId = p.id
+       left join portal.wx_user wx on t.userId = wx.unionId
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from org_admin t
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByOrgId" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.orgId = #{orgId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findByUserId" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where t.userId = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByOrgId" parameterType="java.lang.String">
+        delete from org_admin
+        where orgId = #{orgId,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="findAdminList" resultType="map">
+        select
+        p.id as userId, wx.nickName, p.realName, p.mobilePhone
+        from person_info p
+        left join portal.wx_user wx on p.id = wx.unionId
+        where 1=1
+        <if test='keyword !=null and keyword!=""'>
+            and (p.realName LIKE concat('%',#{keyword,jdbcType=VARCHAR},'%')
+            OR p.mobilePhone LIKE concat('%',#{keyword,jdbcType=VARCHAR},'%')
+            OR wx.nickName LIKE concat('%',#{keyword,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        order by p.createDate desc
+        limit 0, 5
+    </select>
+
+    <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.society.model.OrgAdmin">
+        select count(1)
+        from org_admin
+        where userId = #{userId,jdbcType=VARCHAR}
+        and orgId != #{orgId,jdbcType=VARCHAR}
+    </select>
 </mapper>
