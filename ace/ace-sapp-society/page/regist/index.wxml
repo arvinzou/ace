@@ -53,7 +53,7 @@
                     <view class="title" style='width:25%'>联系电话
                         <text>*</text>
                     </view>
-                    <input name='contactPhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number' bindblur='phoneInput'></input>
+                    <input name='contactPhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number' bindinput='phoneInput'></input>
                     <button class='code' bindtap='sendCode' style='width:25%;padding:0'>{{ btnName }}</button>
                 </view>
                 <view class="input-style bottom-line">

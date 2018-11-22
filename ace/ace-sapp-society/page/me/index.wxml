@@ -67,32 +67,15 @@
             </view>
             <view class='data'>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.accPoints?userinfoData.societyOrg.accPoints:0 }}</view>
-                    <view wx:else>{{ userinfoData.person.accPoints?userinfoData.person.accPoints:0 }}</view>
+                    <view>{{ userinfoData.person.accPoints?userinfoData.person.accPoints:0 }}</view>
                     <view>爱心币收入</view>
                 </view>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>
-                        <block wx:if='{{userinfoData.societyOrg.accPoints==undefined && userinfoData.societyOrg.validPoints==undefined}}'>
-                        0
-                        </block>
-                        <block wx:else>
-                         {{ userinfoData.societyOrg.accPoints- userinfoData.societyOrg.validPoints}}
-                        </block>
-                    </view>
-                    <view wx:else>
-                        <block wx:if='{{userinfoData.person.accPoints==undefined && userinfoData.person.validPoints==undefined }}'>
-                        0
-                        </block>
-                        <block wx:else>
-                        {{ userinfoData.person.accPoints- userinfoData.person.validPoints}}
-                        </block>
-                    </view>
+                    <view>{{ userinfoData.person.accPoints- userinfoData.person.validPoints}}</view>
                     <view>爱心币支出</view>
                 </view>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.validPoints?userinfoData.societyOrg.validPoints:0 }}</view>
-                    <view wx:else>{{ userinfoData.person.validPoints?userinfoData.person.validPoints:0 }}</view>
+                    <view>{{ userinfoData.person.validPoints?userinfoData.person.validPoints:0 }}</view>
                     <view>爱心币剩余</view>
                 </view>
             </view>
