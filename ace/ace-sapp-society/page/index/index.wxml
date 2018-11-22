@@ -6,14 +6,12 @@
                     <image class='hot' src='../../image/hot.png' style='margin-top:30rpx'></image>
                 </view>
                 <view class='menu-right' bindtap='showMoreActivity'>
-                    <block wx-if='{{activity.id !="" && activity.id != undefined && activity.id != null}}'>
-                    <text class='see-text'>查看更多</text>
-                    </block>
-                    <!--<image class='see-image' src='../../rediret.png'></image>-->
+                    <text class='see-text'>查看更多 ></text>
+                    <!--<image class='see-image' src='../../image/rediret.png'></image>-->
                 </view>
             </view>
 
-            <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" >
+            <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style='height:200rpx'>
             <block wx:for='{{activity}}' wx:for-index="idx">
             <swiper-item>
             <view class='activity' bindtap='showActivityDetail' data-id='{{item.id}}'>
