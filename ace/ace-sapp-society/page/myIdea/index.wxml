@@ -35,18 +35,9 @@
        </block>
     </view>
 
-    <block wx:if='{{sysUserInfo.regType == "2"}}'>
-        <block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>
-        <view class='footer'>
-            <button class='release' bindtap='releaseIdea'>发布点子</button>
-        </view>
-        </block>
-    </block>
-    <block wx:if='{{sysUserInfo.regType == "1"}}'>
         <block wx:if='{{sysUserInfo.person.status =="3"}}'>
         <view class='footer'>
             <button class='release' bindtap='releaseIdea'>发布点子</button>
         </view>
         </block>
-    </block>
 </view>

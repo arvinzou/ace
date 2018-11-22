@@ -31,7 +31,7 @@
                     <text>操作说明：个人和党员为线下活动的参与者，社会组织和党组织为线下活动的发起者；请按实际情况选取类型进行后续操作</text>
                 </view>
 
-                 <view class='btn-part'>
+                 <view class='btn-part' style='position:fixed;bottom:0;'>
                     <view bindtap='nextOne' class='btn btn-clicking'>
                         下一步
                     </view>
