@@ -134,18 +134,16 @@ public class ActivityServiceImpl implements ActivityService {
         if (CommonUtils.isBlank(o.getStartDate())) {
             return new MessageResponse(1, "开展时间不能为空！");
         }
-
-
-        int temp = this.activityDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "线下活动名称重复！");
-        }
         o.setCreateDate(new Date());
         o.setStatus("2");
         o.setCoinconfigId(o.getCategory());
         o.setInitiatorId(wxUser.getUnionId());
         o.setCreateUserName(wxUser.getNickName());
         o.setCreateUserId(wxUser.getUnionId());
+        int temp = this.activityDao.isExit(o);
+        if (temp > 0) {
+            return new MessageResponse(1, "线下活动名称重复！");
+        }
         this.activityDao.insertSelective(o);
         auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, o.getId(), wxUser.getUnionId());
         return new MessageResponse(0, "添加线下活动完成！");

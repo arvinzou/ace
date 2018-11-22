@@ -522,7 +522,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.Activity">
     select count(1)
     from activity
-    where title = #{title,jdbcType=VARCHAR}
+    where status <![CDATA[ <> ]]> 0 AND title = #{title,jdbcType=VARCHAR} AND initiatorId = #{initiatorId,jdbcType=VARCHAR}
     </select>
 
 
