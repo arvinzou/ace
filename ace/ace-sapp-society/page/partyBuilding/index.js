@@ -24,8 +24,6 @@ Page({
     onLoad: function(options) {
         let that = this;
         that.ifCreatBtn();
-        that.initOrgData();
-        that.initdata();
     },
 
     ifCreatBtn: function () {
@@ -118,7 +116,9 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-
+        let that = this;
+        that.initOrgData();
+        that.initdata();
     },
 
     /**

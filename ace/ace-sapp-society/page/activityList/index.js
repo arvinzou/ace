@@ -16,29 +16,25 @@ Page({
     },
     onLoad: function(options) {
         let that = this;
-        if (util.isLogin()) {
-            that.ifCreatBtn();
-        }
         let category = options.category;
-        console.log(category);
         if (!category) {
             wx.navigateBack({})
             return;
         }
         that.store.category = category;
-        that.setBarTitleText(category);
-        that.initdata();
+        that.ifCreatBtn();
+        that.setBarTitleText();
     },
 
     ifCreatBtn:function(){
         let that = this;
         let sysUserInfo = util.getSysUser();
-        if (!sysUserInfo){
+        if (util.isLogin()&&!sysUserInfo){
             util.request(cfg.findUserInfo, {},
                 function (rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
-                        if (rst.data.societyOrg&&rst.data.societyOrg.orgType == 2) {
+                        if (rst.data.societyOrg) {
                             that.setData({
                                 hiddenBtn: false,
                             });
@@ -48,7 +44,7 @@ Page({
                 }
             );
         }
-        if (sysUserInfo.societyOrg &&sysUserInfo.societyOrg.orgType == 2) {
+        if (sysUserInfo.societyOrg) {
             that.setData({
                 hiddenBtn: false,
             });
@@ -56,8 +52,10 @@ Page({
     },
     
 
-    setBarTitleText: function(category) {
+    setBarTitleText: function() {
+        let that=this;
         let barText = '';
+        let category = that.store.category
         switch (category) {
             case '1':
                 barText = '公益活动';
@@ -100,6 +98,10 @@ Page({
                 });
             }
         );
+    },
+    onShow:function(){
+        let that=this;
+        that.initdata();
     },
     //下拉刷新
     onPullDownRefresh: function () {
