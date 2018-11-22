@@ -103,13 +103,13 @@
         <view class='activity-menu-list'>
             <block wx:if='{{userinfoData.regType == 1}}'>
             <navigator  class='activity-menu-item' url='../orgApply/index'>
-                <view><image lazy-load="true" src='../../image/icon_me_party.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_myorg.png'></image></view>
                 <view><text>申请组织</text></view>
             </navigator>
             </block>
             <block wx:if='{{userinfoData.regType == 2}}'>
             <navigator  class='activity-menu-item' url='../myOrg/index'>
-                <view><image lazy-load="true" src='../../image/icon_me_party.png'></image></view>
+                <view><image lazy-load="true" src='../../image/icon_myorg.png'></image></view>
                 <view><text>我的组织</text></view>
             </navigator>
             </block>
