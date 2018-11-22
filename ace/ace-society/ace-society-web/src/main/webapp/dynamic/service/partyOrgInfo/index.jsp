@@ -9,7 +9,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8"/>
-    <title>社会组织信息</title>
+    <title>党组织信息</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
@@ -137,7 +137,11 @@
         <div class="form-group">
             <label class="col-md-2 view-label">组织类型</label>
             <div class="col-md-10">
-                \${data.orgType}
+                {@if data.orgType == "1"}
+                 党组织
+                {@else if data.orgType == "2"}
+                社会组织
+                {@/if}
             </div>
         </div>
         <div class="form-group">
