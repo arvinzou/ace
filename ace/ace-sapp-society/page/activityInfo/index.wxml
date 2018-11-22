@@ -80,7 +80,10 @@
         <view wx:if="{{activityInfo.activityDetailVoList.length>activityInfo.parterNum-1}}" class='btn btn-unClick'>
             名额已满
         </view>
-        <view bindtap="apply" wx:elif="{{btnFlag==1||btnFlag==3}}" class='btn btn-clicking'>
+        <view bindtap="signIn" wx:elif="{{btnFlag==1}}" class='btn btn-clicking'>
+            立即报名
+        </view>
+        <view bindtap="apply" wx:elif="{{btnFlag==3}}" class='btn btn-clicking'>
             立即报名
         </view>
         <view wx:elif="{{btnFlag==4}}" class='btn btn-noClick'>

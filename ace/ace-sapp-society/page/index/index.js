@@ -57,15 +57,17 @@ Page({
      */
     onLoad: function (options) {
         var that = this;
-        if (!util.isLogin()) {
+        // 判断有没有鉴权
+        if (!util.is_login()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../index/index&type=switchTab"
             });
-        } else {
-            if (wx.getStorageSync('userinfo')) {
+        }
+        // 判断有没有登陆
+        if (util.isLogin()) {
+            if (!util.getSysUser()) {
                 that.initUserData();
-                that.initReport();
-            };
+            }
         }
     },
 
@@ -233,11 +235,9 @@ Page({
      */
     onShow: function () {
         var that = this;
-        if (wx.getStorageSync('userinfo')) {
-            that.initUserData();
-            that.activityIng(5);
-            that.initReport();
-        }
+        var that = this;
+        that.activityIng(5);
+        that.initReport();
     },
 
     /**

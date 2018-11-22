@@ -4,9 +4,18 @@
     </view>
     <view class='banner'>
         <view class='row'>
-            <view class='row-left'>
-                <text>{{userinfoData.societyOrg.orgName}}</text>
+            <view class='content'>
+                {{userinfoData.societyOrg.orgName}}
             </view>
+            
+        </view>
+        <view class='row'>
+            <block wx:if='{{userinfoData.societyOrg.orgType=="1"}}'>
+                <text class='partyType'>党组织</text>
+            </block>
+            <block wx:if='{{userinfoData.societyOrg.orgType=="2"}}'>
+                <text class='societyType'>社会组织</text>
+            </block>
             <view class='row-right'>
                 <block wx:if='{{userinfoData.societyOrg.status == "1"}}'>
                     <text>暂存</text>
@@ -21,14 +30,6 @@
                     <text>驳回</text>
                 </block>
             </view>
-        </view>
-        <view class='row'>
-            <block wx:if='{{userinfoData.societyOrg.orgType=="1"}}'>
-                <text class='partyType'>党组织</text>
-            </block>
-            <block wx:if='{{userinfoData.societyOrg.orgType=="2"}}'>
-                <text class='societyType'>社会组织</text>
-            </block>
         </view>
         <view class='coin-box'>
             <view class='coin-item'>

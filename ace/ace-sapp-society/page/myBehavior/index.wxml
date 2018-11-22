@@ -44,14 +44,14 @@
                                 </block>
                                 <block wx-if='{{ fileItem.fileType == 1 }}'>
                                     <block wx:if='{{item.behaviorAnnexList.length ==1}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill' data-list='{{item.behaviorAnnexList}}'></image>
                                     </block>
                                     <block wx:elif='{{item.behaviorAnnexList.length > 1 && item.behaviorAnnexList.length % 2 !=0}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill' data-list='{{item.behaviorAnnexList}}'></image>
                                         
                                     </block>
                                     <block wx:else>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill' data-list='{{item.behaviorAnnexList}}'></image>
                                     </block>
                                 </block>
                                 </block>
@@ -99,14 +99,14 @@
                                 </block>
                                 <block wx-if='{{ fileItem.fileType == 1 }}'>
                                     <block wx:if='{{item.behaviorAnnexList.length ==1}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image01'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill' data-list='{{item.behaviorAnnexList}}'></image>
                                     </block>
                                     <block wx:elif='{{item.behaviorAnnexList.length > 1 && item.behaviorAnnexList.length % 2 !=0}}'>
-                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='{{fIndex+1 == item.behaviorAnnexList.length?"attach-image01":"attach-image02"}}'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill' data-list='{{item.behaviorAnnexList}}'></image>
                                         
                                     </block>
                                     <block wx:else>
-                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill'></image>
+                                        <image src='{{ fileItem.fileUrl}}' class='attach-image02'  id='{{fileItem.fileUrl}}'  bindtap="previewImage" mode='aspectFill' data-list='{{item.behaviorAnnexList}}'></image>
                                     </block>
                                 </block>
                                 </block>
@@ -117,20 +117,11 @@
                 </view>
             </view>
 
-    <block wx:if='{{sysUserInfo.regType == "2"}}'>
-        <block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>      
-        <view class='camera-box' bindtap='releaseBehavior'>
-            <image class='camera' src='../../image/camera.png'></image>
-        </view>
-        </block>
-    </block>
-    <block wx:if='{{sysUserInfo.regType == "1"}}'>
         <block wx:if='{{sysUserInfo.person.status =="3"}}'>      
         <view class='camera-box' bindtap='releaseBehavior'>
             <image class='camera' src='../../image/camera.png'></image>
         </view>
         </block>
-    </block>
 </view>
 
 

@@ -20,25 +20,38 @@ Page({
         }
         that.data.id = id;
         that.setBarTitleText(tit);
-
     },
 
     ifCreatBtn: function() {
         let that = this;
+        //没有登陆显示登陆按钮
+        if(!util.isLogin()){
+            that.setData({
+                hiddenBtn: false,
+            });
+            return;
+        }
+        // 已经登陆过了。获取用户信息
         let sysUserInfo = util.getSysUser();
+        // 如果没有用户信息
         if (!sysUserInfo) {
             util.request(cfg.findUserInfo, {},
                 function(rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
-                        // （党员&&党建活动）||（不是党建活动&&人员）
-                        if (rst.data.regType == 2 || (that.data.activityInfo.category == 4 && rst.data.person.status == 1)) {
+                        // 如果党建活动，人员是个人。
+                        if (that.data.activityInfo.category == 4 && rst.data.person.politicalStatus == 1){
+                            return;
+                        }
+                        // 如果是创建人本人
+                        if (that.data.activityInfo.initiatorId==rst.data.person.id){
                             return;
                         }
                     }
                 }
             );
-        } else if (sysUserInfo.regType == 2 || (that.data.activityInfo.category == 4 && sysUserInfo.person.status == 1)) {
+        }
+        else if ((that.data.activityInfo.category == 4 && sysUserInfo.person.politicalStatus == 1) || (that.data.activityInfo.initiatorId == rst.data.person.id)) {
             return;
         }
         that.setData({
@@ -178,4 +191,9 @@ Page({
         wx.stopPullDownRefresh();
         return;
     },
+    signIn:function(){
+        wx.navigateTo({
+            url: '../regist/index',
+        })
+    }
 })

@@ -59,10 +59,14 @@ Page({
         that.initBehaviorList(that.data.behaviorType);
     },
     previewImage: function (e) {
-        console.log(e);
+        var list = e.currentTarget.dataset.list;
+        var arrTemp = [];
+        for (var i = 0; i < list.length; i++) {
+            arrTemp.push(list[i].fileUrl);
+        }
         wx.previewImage({
             current: e.currentTarget.id,
-            urls: [e.currentTarget.id]
+            urls: arrTemp
         })
     },
     initBehaviorList: function(type){
