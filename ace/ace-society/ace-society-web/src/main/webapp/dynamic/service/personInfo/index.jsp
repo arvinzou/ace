@@ -88,7 +88,7 @@
         <td>
             <div class="row">
                 <div class="col-md-12">
-                    {@if item.headimgurl !='' && item.headimgurl!=undefined && item.item.headimgurl!=null}
+                    {@if item.headimgurl!=null && item.headimgurl !=''}
                         <img src="\${item.headimgurl}" class="cover"/>
                     {@else}
                         <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
@@ -99,7 +99,7 @@
         </td>
         <td>\${item.realName}</td>
         <td>\${item.mobilePhone}</td>
-        <td>\${item.politicalStatus}</td>
+        <td>\${parsePStatus(item.politicalStatus)}</td>
         <td>\${item.accPoints}</td>
         <td>\${item.validPoints}</td>
         <td>
@@ -156,28 +156,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-audit" role="form">
-                    <%--<div class="form-body">--%>
-                    <%--<div class="form-group " id="operation">--%>
-                    <%--<label class="col-md-2 control-label">审核结果</label>--%>
-                    <%--<div class="col-md-10">--%>
-                    <%--<div class="radio-group-container">--%>
-                    <%--<label>--%>
-                    <%--<input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>--%>
-                    <%--</label>--%>
-                    <%--<label>--%>
-                    <%--<input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>--%>
-                    <%--</label>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-                    <%--<div class="form-group">--%>
-                    <%--<label class="col-md-2 control-label">审核说明</label>--%>
-                    <%--<div class="col-md-10">--%>
-                    <%--<input type="hidden" name="id"/>--%>
-                    <%--<textarea name="message" style="width: 100%;height: 100px;"></textarea>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
-                    <%--</div>--%>
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -212,7 +191,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">政治面貌</label>
             <div class="col-md-10">
-                \${data.politicalStatus}
+                \${parsePStatus(data.politicalStatus)}
             </div>
         </div>
         <div class="form-group">
@@ -284,7 +263,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">政治面貌</label>
             <div class="col-md-10">
-                \${data.politicalStatus}
+                \${parsePStatus(data.politicalStatus)}
             </div>
         </div>
         <div class="form-group">

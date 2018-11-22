@@ -206,7 +206,20 @@ function outline(id) {
 
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('parsePStatus', parsePStatus);
 }
+
+function parsePStatus(val) {
+    switch (val) {
+        case '1':
+            return "个人";
+        case '2':
+            return "党员";
+        default:
+            return "个人";
+    }
+}
+
 /**
  * 状态
  * 0-删除
@@ -215,8 +228,8 @@ function initJuicerMethod() {
  * 3-审核通过
  * 4-审核驳回
  */
-function parseStatus(status) {
-    switch (status) {
+function parseStatus(val) {
+    switch (val) {
         case '0':
             return "已删除";
         case '1':
