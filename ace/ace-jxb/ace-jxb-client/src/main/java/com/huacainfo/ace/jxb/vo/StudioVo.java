@@ -29,6 +29,19 @@ public class StudioVo extends Studio {
      */
     private List<CounselorVo> memberList;
 
+    /**
+     * 工作室成员数量
+     */
+    private int subNum;
+
+    public int getSubNum() {
+        return subNum;
+    }
+
+    public void setSubNum(int subNum) {
+        this.subNum = subNum;
+    }
+
     public List<CounselorVo> getMemberList() {
         return memberList;
     }

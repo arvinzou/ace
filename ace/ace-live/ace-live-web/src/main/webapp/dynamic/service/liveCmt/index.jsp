@@ -95,7 +95,13 @@
     <tr>
 
                             <td>
-                                <div class="col-md-4 my-gallery"><img src="\${item.headimgurl}" class="cover"/></div>
+                                <div class="col-md-4 my-gallery">
+                                    {@if item.headimgurl!='' && item.headimgurl!=null && item.headimgurl!=undefined}
+                                    <img src="\${item.headimgurl}" class="cover"/>
+                                    {@else}
+                                    <img src="../../common/img/default_header.png" class="cover"/>
+                                    {/@if}
+                                </div>
                                 <div class="col-md-8">
                                     <div class="describtion">\${item.nickname}</div>
                                 </div>

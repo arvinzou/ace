@@ -17,6 +17,7 @@ function withdrawHistroy() {
 var consulorId = "";
 var signStatus = "1";     //已经签到状态为2
 var signDays = 0;
+var consultStrate = null;
 function initData(){
     $.ajax({
         url: contextPath+"/www/reg/findInfo",
@@ -28,6 +29,7 @@ function initData(){
                 window.location.href = contextPath + '/www/view/regist/regist.html';
             }else{
                 if(result.status == 0 && result.data.memberType == '1') {
+                    consultStrate = result.data.counselor.consultState;
                     consulorId = result.data.counselor.id;
                     var amount=result.data.counselor.income;
                     result.data.counselor.income=amount?amount:0.00;
@@ -113,15 +115,20 @@ function myStudio(){
 
 
 function switchOffline(){
-    var attrContent = $("#offline").attr('src');
-    if(attrContent.indexOf('on') > 0){
-        //在线状态 0-离线 1-在线
-        if(onoffline('0')){
-            $("#offline").attr('src',contextPath+ '/www/view/mine/img/switch_off.png');
-        }
+    if(consultStrate != "1"){
+        alert("无法操作，咨询师未认证或咨询师已下架！");
+        return;
     }else{
-        if(onoffline('1')) {
-            $("#offline").attr('src', contextPath + '/www/view/mine/img/switch_on.png');
+        var attrContent = $("#offline").attr('src');
+        if(attrContent.indexOf('on') > 0){
+            //在线状态 0-离线 1-在线
+            if(onoffline('0')){
+                $("#offline").attr('src',contextPath+ '/www/view/mine/img/switch_off.png');
+            }
+        }else{
+            if(onoffline('1')) {
+                $("#offline").attr('src', contextPath + '/www/view/mine/img/switch_on.png');
+            }
         }
     }
 }

@@ -22,58 +22,53 @@
 
 <body>
 
-<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <input type="text" hidden value="" id="auditId"/>
 
 
-                                            <div class="portlet light ">
-                                                <div class="portlet-body">
-                                                    <div class="row custom-toolbar">
-                                                        <div class="col-md-9">
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       class="form-control"
-                                                                       placeholder="请输入工作室名称">
-                                                                <span class="input-group-btn">
-                                                                <button class="btn  btn-default search_btn"
-                                                                        type="submit">
-                                                                        搜索
-                                                                </button>
-                                                            </span>
-                                                            </div>
+<div class="portlet light ">
+    <div class="portlet-body">
+        <div class="row custom-toolbar">
+            <div class="col-md-9">
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="请输入工作室名称">
+                    <span class="input-group-btn">
+                        <button class="btn  btn-default search_btn" type="submit"> 搜索 </button>
+                    </span>
+                </div>
 
-                                                        </div>
+            </div>
 
-                                                    </div>
-                                                    <div class="table-scrollable">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                            <tr>
+        </div>
+        <div class="table-scrollable">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th width="35%">工作室</th>
+                    <th width="15%">创建人</th>
+                    <th width="15%">成员数量</th>
+                    <th width="15%">状态</th>
+                    <th width="20%">操作</th>
+                </tr>
+                </thead>
+                <tbody id="audioList">
 
-                                                                <th width="35%">工作室</th>
-                                                                <th width="15%">创建人</th>
-                                                                <th width="15%">成员数量</th>
-                                                                <th width="15%">状态</th>
-                                                                <th width="20%">操作</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody id="audioList">
-
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                    <div class="paginationbar">
-                                                        <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                </tbody>
+            </table>
+        </div>
+        <div class="paginationbar">
+            <ul class="pagination" id="pagination1" style="padding-left: 15px;"></ul>
+        </div>
+    </div>
+</div>
 
 <script id="list" type="text/template">
     {@each data as item,index}
     <tr>
-
         <td>
             <div class="row">
                 <div class="col-md-3"><img src="\${item.logoImgUrl}" class="cover"/></div>
@@ -83,7 +78,7 @@
             </div>
         </td>
         <td> \${item.dutyName}</td>
-        <td> \${item.level}</td>
+        <td> \${item.subNum}</td>
         <td>
             {@if item.status==0}
             <span class="label label-lg label-info"> 待审核 </span>
@@ -94,8 +89,10 @@
             {@/if}
         </td>
         <td>
-            <a href="#" class="operation" data-target="#opt" data-toggle="modal" onclick="setval('\${item.id}','\${item.status}');">审核</a>
-            <a href="#" class="operation" data-target="#myModal" data-toggle="modal" onclick="edit('\${item.id}');">查看 </a>
+            <a href="#" class="operation" data-target="#opt" data-toggle="modal"
+               onclick="setval('\${item.id}','\${item.status}');">审核</a>
+            <a href="#" class="operation" data-target="#myModal" data-toggle="modal"
+               onclick="edit('\${item.id}');">查看 </a>
         </td>
     </tr>
     {@/each}
@@ -177,7 +174,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 </body>
 
 <style>
@@ -200,21 +197,23 @@
         height: 100%;
     }
 
-    .cover{
+    .cover {
         width: 70px;
         height: 70px;
         object-fit: cover;
     }
-    .describtion{
-        padding-left:8px;
-        height:50px;
+
+    .describtion {
+        padding-left: 8px;
+        height: 50px;
     }
-    .cost{
-          padding-top: 5px;
-          padding-left:8px;
-          color:#FE6500;
+
+    .cost {
+        padding-top: 5px;
+        padding-left: 8px;
+        color: #FE6500;
     }
 </style>
-<jsp:include page="/dynamic/common/footer.jsp" />
+<jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 </html>

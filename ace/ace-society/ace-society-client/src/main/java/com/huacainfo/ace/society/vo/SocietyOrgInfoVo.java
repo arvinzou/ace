@@ -7,27 +7,15 @@ public class SocietyOrgInfoVo extends SocietyOrgInfo {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 微信昵称
+     * 组织管理者用户ID
      */
-    private String nickname;
-    /**
-     * 微信头像
-     */
-    private String headimgurl;
+    private String adminId;
 
-    public String getNickname() {
-        return nickname;
+    public String getAdminId() {
+        return adminId;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getHeadimgurl() {
-        return headimgurl;
-    }
-
-    public void setHeadimgurl(String headimgurl) {
-        this.headimgurl = headimgurl;
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 }

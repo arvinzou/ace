@@ -12,10 +12,7 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.jxb.dao.BaseOrderDao;
-import com.huacainfo.ace.jxb.dao.CounselorDao;
-import com.huacainfo.ace.jxb.dao.CourseDao;
-import com.huacainfo.ace.jxb.dao.StudioDao;
+import com.huacainfo.ace.jxb.dao.*;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.service.CounselorService;
@@ -57,6 +54,8 @@ public class CounselorServiceImpl implements CounselorService {
     private BaseOrderDao baseOrderDao;
     @Autowired
     private CourseDao courseDao;
+    @Autowired
+    private OrderCalculationDao orderCalculationDao;
 
     /**
      * @throws
@@ -316,14 +315,18 @@ public class CounselorServiceImpl implements CounselorService {
     @Override
     public ResultResponse accountInfo(String counselorId) {
 
+        Map<String, Object> income = orderCalculationDao.incomeReport(counselorId);
+        if (income == null) {
+            income = new HashMap<>();
+            income.put("tId", counselorId);
+            income.put("totalIncome", 0);
+            income.put("studioIncome", 0);
+            income.put("consultIncome", 0);
+            income.put("courseIncome", 0);
+            income.put("rewardIncome", 0);
+        }
 
-        Map<String, Object> rtnMap = new HashMap<>();
-        rtnMap.put("monthIncome", 168);
-        rtnMap.put("consultIncome", 800);
-        rtnMap.put("courseIncome", 666);
-        rtnMap.put("underlingIncome", 288.88);
-        rtnMap.put("rewardIncome", 66.66);
-        return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtnMap);
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", income);
     }
 
 }
