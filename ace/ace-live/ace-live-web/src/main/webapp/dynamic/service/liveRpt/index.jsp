@@ -28,7 +28,7 @@
 
         <div class="row custom-toolbar">
                                                             <div class="col-md-3">
-                                                                <a href="add/index.jsp?id=${param.id}"  class="btn green">创建</a>
+                                                                <%--<a href="add/index.jsp?id=${param.id}"  class="btn green">创建</a>--%>
                                                             </div>
 
                                                             <div class="col-md-9">
