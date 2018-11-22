@@ -8,57 +8,93 @@ Page({
     data: {
         activity: null,
         reportData: null,
-        days: '00',
-        hours: '00',
-        minutes: '00',
-        isEnd: false,
         stopwatch: '',
+        autoplay: true,
+        interval: 5000,
+        duration: 500,
+        timer: {
+            0: {
+                hour: "00",
+                minute: "00",
+                second: "00",
+                seconds: 0,
+                isEnd: false
+            },
+            1: {
+                hour: "00",
+                minute: "00",
+                second: "00",
+                seconds: 0,
+                isEnd: false
+            },
+            2: {
+                hour: "00",
+                minute: "00",
+                second: "00",
+                seconds: 0,
+                isEnd: false
+            },
+            3: {
+                hour: "00",
+                minute: "00",
+                second: "00",
+                seconds: 0,
+                isEnd: false,
+            },
+            4: {
+                hour: "00",
+                minute: "00",
+                second: "00",
+                seconds: 0,
+                isEnd: false
+            }
+            
+        },
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         var that = this;
-        // 判断有没有鉴权
-        if (!util.is_login()) {
+        if (!util.isLogin()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../index/index&type=switchTab"
             });
-        }
-        // 判断有没有登陆
-        if (util.isLogin()){
-            if (!util.getSysUser()){
+        } else {
+            if (wx.getStorageSync('userinfo')) {
                 that.initUserData();
-            }
+                that.initReport();
+            };
         }
     },
 
     /**
      * 正在进行中的活动
      */
-    activityIng: function(limit) {
+    activityIng: function (limit) {
         var that = this;
         util.request(cfg.findActivitying, {
-                "start": 0,
-                "limit": limit,
-                "orderBy": "status asc,dendline",
-                "sord": "desc"
-            },
-            function(ret) {
+            "start": 0,
+            "limit": limit,
+            "orderBy": "status asc,dendline",
+            "sord": "desc"
+        },
+            function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
-                    if (ret.data[0]) {
-                        //剩余报名天数
-                        ret.data[0].leastDays = that.diy_time(new Date(), ret.data[0].startDate);
-                        console.log("剩余报名天数==========================" + ret.data[0].leastDays);
-                        ret.data[0].dendline = ret.data[0].dendline.substring(0, 16);
-                        ret.data[0].startDate = ret.data[0].startDate.substring(0, 16);
-                        ret.data[0].endDate = ret.data[0].endDate.substring(0, 16);
-
-                        ret.data[0].range = util.formateStringToDate(ret.data[0].dendline).getTime() - new Date().getTime();
+                    if (ret.data.length > 0) {
+                        for (var i = 0; i < ret.data.length; i++) {
+                            ret.data[i].leastDays = that.diy_time(new Date(), ret.data[i].startDate, i);
+                            ret.data[i].dendline = ret.data[i].dendline.substring(0, 16);
+                            ret.data[i].startDate = ret.data[i].startDate.substring(0, 16);
+                            ret.data[i].endDate = ret.data[i].endDate.substring(0, 16);
+                            ret.data[i].range = util.formateStringToDate(ret.data[0].dendline).getTime() - new Date().getTime();
+                        }
+                        that.clockfuntion();
+                        that.actionClock();
                         that.setData({
-                            activity: ret.data[0]
+                            activity: ret.data
                         });
                     }
 
@@ -66,68 +102,69 @@ Page({
                     wx.showModal({
                         title: '提示',
                         content: ret.errorMessage,
-                        success: function(res) {}
+                        success: function (res) { }
                     });
                 }
 
             }
         );
     },
-    diy_time: function(startTime, endTime) {
+
+
+    clockfuntion:function() {
+        var that=this;
+        var time = that.data.timer;
+        for (var item in time) {
+            time[item].seconds = time[item].seconds-1;
+            that.formatTime(time[item]);
+        }
+        that.setData({
+            timer: time,
+        })
+    },
+
+    diy_time: function (startTime, endTime, i) {
         console.log("startTime=,endTime=" + startTime + ":" + endTime);
         var that = this;
         var date3 = util.formateStringToDate(endTime).getTime() - startTime.getTime(); //时间差的毫秒数  
-        //计算出相差天数
-        var seconds = Math.floor(date3 / 1000);
-        //计算出小时数
-        if (seconds < 0) {
-            that.setData({
-                isEnd: true
-            });
-            return;
-        }
-        that.data.seconds = seconds;
-        that.formatTime();
-        that.actionClock();
-
+        var time = that.data.timer[i];
+        time.seconds = Math.floor(date3 / 1000);
     },
 
-    formatTime: function() {
+    formatTime: function (time) {
         var that = this;
-        var seconds = that.data.seconds;
+        var seconds = time.seconds;
+        if (seconds < 0) {
+            time.isEnd = true;
+            return;
+
+        }
         var hours = Math.floor(seconds / 3600);
         var minutes = Math.floor((seconds % 3600) / 60);
         var second = Math.floor(seconds % 3600 % 60);
-        that.setData({
-            second: second < 10 ? '0' + second : second,
-            hours: hours < 10 ? '0' + hours : hours,
-            minutes: minutes < 10 ? '0' + minutes : minutes
-        });
-        if (seconds < 0) {
-            that.setData({
-                isEnd: true
-            });
-        }
+        time.second = second < 10 ? '0' + second : second;
+        time.hour = hours < 10 ? '0' + hours : hours;
+        time.minute = minutes < 10 ? '0' + minutes : minutes;
     },
-    actionClock: function() {
+    actionClock: function () {
         var that = this;
         clearInterval(that.data.stopwatch);
-        that.data.stopwatch = setInterval(function() {
-            that.data.seconds = (that.data.seconds) - 1;
-            that.formatTime();
+        that.data.stopwatch = setInterval(function () {
+            console.log(11111111111);
+            that.clockfuntion();
         }, 1000);
     },
     /**
      * 精选往事
      */
-    initReport: function() {
+    initReport: function () {
         var that = this;
         util.request(cfg.findPublicActivityReportList, {
-                "start": 0,
-                "limit": 2,
-                "top": "1"
-            },
-            function(ret) {
+            "start": 0,
+            "limit": 2,
+            "top": "1"
+        },
+            function (ret) {
                 if (ret.status == 0) {
                     that.setData({
                         reportData: ret.data
@@ -136,35 +173,35 @@ Page({
                     wx.showModal({
                         title: '提示',
                         content: ret.errorMessage,
-                        success: function(res) {}
+                        success: function (res) { }
                     });
                 }
 
             }
         );
     },
-    behavior: function() {
+    behavior: function () {
         wx.navigateTo({
             url: '../behavior/index'
         })
     },
-    idea: function() {
+    idea: function () {
         wx.navigateTo({
             url: '../idea/index'
         })
     },
-    showMoreActivity: function() {
+    showMoreActivity: function () {
         wx.navigateTo({
             url: '../indexMore/index'
         })
     },
-    showActivityDetail: function(e) {
+    showActivityDetail: function (e) {
         var that = this;
         wx.navigateTo({
             url: '../activityInfo/index?id=' + e.currentTarget.dataset.id,
         })
     },
-    viewInfo: function(e) {
+    viewInfo: function (e) {
         let that = this;
         let data = e.currentTarget.dataset
         let p = data.id;
@@ -173,10 +210,10 @@ Page({
             url: '../reportInfo/index?id=' + p + "&title=" + title
         })
     },
-    initUserData: function() {
+    initUserData: function () {
         var that = this;
         util.request(cfg.findUserInfo, {},
-            function(ret) {
+            function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);
                     util.setSysUser(ret.data);
@@ -187,39 +224,42 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function() {
+    onReady: function () {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {
+    onShow: function () {
         var that = this;
-        that.activityIng(1);
-        that.initReport();
+        if (wx.getStorageSync('userinfo')) {
+            that.initUserData();
+            that.activityIng(5);
+            that.initReport();
+        }
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function() {
+    onHide: function () {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function() {
+    onUnload: function () {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
         var that = this;
-        that.activityIng(1);
+        that.activityIng(5);
         that.initReport();
         wx.stopPullDownRefresh();
     },
@@ -227,14 +267,14 @@ Page({
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function() {
+    onReachBottom: function () {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
 
     }
-})
+});
