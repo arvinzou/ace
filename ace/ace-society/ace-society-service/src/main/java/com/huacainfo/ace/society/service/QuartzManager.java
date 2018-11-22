@@ -1,15 +1,21 @@
 package com.huacainfo.ace.society.service;
 
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
-//import com.huacainfo.ace.portal.service.WeChatApiService;
+import com.huacainfo.ace.portal.service.WeChatApiService;
 import com.huacainfo.ace.society.dao.ActivityDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
+
+//import com.huacainfo.ace.portal.service.WeChatApiService;
 
 /**
  * @Auther: Arvin
@@ -25,7 +31,10 @@ public class QuartzManager {
     private ActivityDao activityDao;
 
     @Autowired
-    //private WeChatApiService weChatApiService;
+    private WeChatApiService weChatApiService;
+
+    @Autowired
+    private KafkaProducerService kafkaProducerService;
 
     /**
      * 每隔1分钟 自动关闭一次 超时的活动数据
@@ -42,14 +51,18 @@ public class QuartzManager {
 
 
     /**
-     * 拉取公众号已关注用户列表  每天am 11：50 执行一次
+     * 拉取公众号已关注用户列表  每天pm 23：30 执行一次
      */
-    @Scheduled(cron = "0 55 8 * * ?")
+    @Scheduled(cron = "0 30 23 * * ?")
     public void sysUserList() throws Exception {
         logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表--开始-----");
         try {
+            Map<String, Object> data = new HashMap<>();
+            data.put("sysId", "society");
+            data.put("service", "weChatApiService");
+            kafkaProducerService.sendMsg("topic.sys.msg", data);
            // ResultResponse rs = weChatApiService.synUserList("society");
-           // logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：{}", JsonUtil.toJson(rs));
+//            logger.debug("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：{}", JsonUtil.toJson(rs));
         } catch (Exception e) {
             logger.error("[" + DateUtil.getNow() + "]拉取公众号已关注用户列表：\n{}", e);
         }
