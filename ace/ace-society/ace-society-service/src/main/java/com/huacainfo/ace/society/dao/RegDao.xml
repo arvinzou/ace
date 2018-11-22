@@ -51,9 +51,12 @@
             <result column="orgSummary" jdbcType="VARCHAR" property="orgSummary"/>
             <result column="contactPerson" jdbcType="VARCHAR" property="contactPerson"/>
             <result column="contactPhone" jdbcType="VARCHAR" property="contactPhone"/>
+            <result column="orgEmail" jdbcType="VARCHAR" property="email"/>
             <result column="orgAccPoints" jdbcType="INTEGER" property="accPoints"/>
             <result column="orgValidPoints" jdbcType="INTEGER" property="validPoints"/>
-            <result column="orgStatus" jdbcType="CHAR" property="status"></result>
+            <result column="orgStatus" jdbcType="CHAR" property="status"/>
+            <result column="orgCrtDate" jdbcType="TIMESTAMP" property="createDate"/>
+            <result column="orgUpdDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
         </association>
     </resultMap>
 
@@ -67,12 +70,15 @@
         org.id as orgId,
         org.orgName, org.orgType, org.orgAddr, org.orgCover, org.orgSummary,
         org.contactPerson, org.contactPhone, org.accPoints as orgAccPoints,
-        org.validPoints as orgValidPoints, org.status as orgStatus
+        org.validPoints as orgValidPoints, org.status as orgStatus, org.email as orgEmail,
+        org.createDate as orgCrtDate, org.orgUpdDate as orgUpdDate
         from society.person_info p
         left join portal.wx_user wx on p.id = wx.unionId
         left join (select
-        a.userId, s.id, s.orgName, s.orgType, s.orgAddr, s.orgCover, s.orgSummary,
-        s.contactPerson, s.contactPhone, s.accPoints, s.validPoints, s.status
+        a.userId,
+        s.createDate, s.lastModifyDate as orgUpdDate,
+        s.id, s.orgName, s.orgType, s.orgAddr, s.orgCover, s.orgSummary,
+        s.contactPerson, s.contactPhone, s.email, s.accPoints, s.validPoints, s.status
         from society_org_info s, org_admin a
         where a.orgId = s.id )org on org.userId = p.id
         where p.id = #{userId,jdbcType=VARCHAR}
