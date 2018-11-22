@@ -82,20 +82,11 @@
                 </view>
          </view>
 
-    <block wx:if='{{sysUserInfo.regType == "2"}}'>
-        <block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>
-        <view class='camera-box' bindtap='releaseBehavior'>
-            <image class='camera' src='../../image/camera.png'></image>
-        </view>
-        </block>
-    </block>
-    <block wx:if='{{sysUserInfo.regType == "1"}}'>
         <block wx:if='{{sysUserInfo.person.status =="3"}}'>
         <view class='camera-box' bindtap='releaseBehavior'>
             <image class='camera' src='../../image/camera.png'></image>
         </view>
         </block>
-    </block>
 </view>
 
 <view class='mask' hidden='{{maskFlag}}' bindtap='exitVideo'>

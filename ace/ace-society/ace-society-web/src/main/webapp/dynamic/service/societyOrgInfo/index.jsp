@@ -89,7 +89,7 @@
     {@each data as item, index}
     <tr>
         <td> \${item.orgName}</td>
-        <%--<td> \${parseOrgType(item.orgType)}</td>--%>
+        <%--<td> \${item.orgType}</td>--%>
         <td> \${item.contactPerson}</td>
         <td> \${item.contactPhone}</td>
         <td> \${item.accPoints}</td>
@@ -112,10 +112,10 @@
             {@/if}
         </td>
         <td>
-            <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-detail">查看</a>--%>
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
+            <a class="operation" href="#" data-toggle="modal" data-target="#modal-admin" data-id="\${item.id}">负责人</a>
             {@if item.status==2}
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
@@ -123,7 +123,6 @@
     </tr>
     {@/each}
 </script>
-
 
 <%--详情juicer模板--%>
 <script id="tpl-detail" type="text/template">
@@ -137,7 +136,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">组织类型</label>
             <div class="col-md-10">
-                \${parseOrgType(data.orgType)}
+                \${data.orgType}
             </div>
         </div>
         <div class="form-group">
@@ -208,9 +207,87 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <%--
-                <button type="button" class="btn btn-primary">确定</button>
-                --%>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%--组织管理员 -- 列表juicer模板--%>
+<script id="tpl-fm-admin" type="text/template">
+    <tr>
+        {@if data == null}
+        <td>
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
+                    <a>暂无</a>
+                </div>
+            </div>
+        </td>
+        <td> 暂无</td>
+        <td> 暂无</td>
+        <td> 暂无</td>
+        {@else}
+        <td>
+            <div class="row">
+                <div class="col-md-12">
+                    {@if data.headimgurl!=null && data.headimgurl !=''}
+                    <img src="\${data.headimgurl}" class="cover"/>
+                    {@else}
+                    <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
+                    {@/if}
+                    <a>\${data.nickname}</a>
+                </div>
+            </div>
+        </td>
+        <td> \${data.realName}</td>
+        <td> \${data.mobilePhone}</td>
+        <td>
+            <a class="operation" href="javascript:removeAdmin('\${data.orgId}');"> 移除 </a>
+        </td>
+        {@/if}
+    </tr>
+</script>
+
+<!--组织管理员管理 -->
+<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-admin">
+    <div class="modal-dialog" role="document" style="width: 60%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">负责人信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row custom-toolbar">
+                    <div class="col-md-5">
+                        <a class="btn  green"> 选择 </a>&nbsp;&nbsp;
+                        <select class="easyui-combogrid" style="width:300px; height: 30px; line-height: 30px;"
+                                id="combogrid-admin"></select>
+                    </div>
+                    <div class="col-sm-7">
+
+                    </div>
+                </div>
+                <div class="table-scrollable">
+                    <table class="table table-hover" style="width: 80%">
+                        <thead>
+                        <tr>
+                            <th width="30%"> 微信昵称</th>
+                            <th width="30%"> 姓名</th>
+                            <th width="30%"> 手机号码</th>
+                            <th width="10%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody id="admin-list">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
         </div>
     </div>
@@ -249,7 +326,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">组织类型</label>
             <div class="col-md-10">
-                \${parseOrgType(data.orgType)}
+                \${data.orgType}
             </div>
         </div>
         <div class="form-group">
@@ -348,5 +425,15 @@
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

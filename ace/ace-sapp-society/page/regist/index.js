@@ -168,10 +168,12 @@ Page({
     phoneInput: function(e){
         var that = this;
         that.setData({ phoneNum: e.detail.value});
+        console.log("phoneNum启动！");
     },
     sendCode: function(e){
         var that = this;
         var phone = that.data.phoneNum;
+        console.log("========================================phone"+phone);
         if(phone == null || phone == undefined){
             wx.showModal({
                 title: '提示',

@@ -30,57 +30,15 @@
                             <view class='member-type'>会员类型：党员</view>
                         </block>
                     </block>
-                    <view class='center'>
-                        <block wx:if='{{userinfoData.regType=="2"}}'>
-                            <block wx:if='{{userinfoData.societyOrg.status == "1"}}'>
-                                暂存
-                            </block>
-                            <block wx:if='{{userinfoData.societyOrg.status == "2"}}'>
-                                待审
-                            </block>
-                            <block wx:if='{{userinfoData.societyOrg.status == "3"}}'>
-                                审核通过
-                            </block>
-                            <block wx:if='{{userinfoData.societyOrg.status == "4"}}'>
-                                驳回
-                            </block>
-                        </block>
-                        <block wx:elif='{{userinfoData.regType=="1"}}'>
-                            <block wx:if='{{userinfoData.person.status == "1"}}'>
-                                暂存
-                            </block>
-                            <block wx:if='{{userinfoData.person.status == "2"}}'>
-                                待审
-                            </block>
-                            <block wx:if='{{userinfoData.person.status == "3"}}'>
-                                审核通过
-                            </block>
-                            <block wx:if='{{userinfoData.person.status == "4"}}'>
-                                驳回
-                            </block>
-                        </block>
-                        <block wx:else>
-                            未注册
-                        </block>
-                    </view>
                 </view>
             </view>
             <view class='data'>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.accPoints?userinfoData.societyOrg.accPoints:0 }}</view>
-                    <view wx:else>{{ userinfoData.person.accPoints?userinfoData.person.accPoints:0 }}</view>
+                    <view>{{ userinfoData.person.accPoints?userinfoData.person.accPoints:0 }}</view>
                     <view>爱心币收入</view>
                 </view>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>
-                        <block wx:if='{{userinfoData.societyOrg.accPoints==undefined && userinfoData.societyOrg.validPoints==undefined}}'>
-                        0
-                        </block>
-                        <block wx:else>
-                         {{ userinfoData.societyOrg.accPoints- userinfoData.societyOrg.validPoints}}
-                        </block>
-                    </view>
-                    <view wx:else>
+                    <view>
                         <block wx:if='{{userinfoData.person.accPoints==undefined && userinfoData.person.validPoints==undefined }}'>
                         0
                         </block>
@@ -91,8 +49,7 @@
                     <view>爱心币支出</view>
                 </view>
                 <view>
-                    <view wx:if='{{ userinfoData.regType == 2}}'>{{ userinfoData.societyOrg.validPoints?userinfoData.societyOrg.validPoints:0 }}</view>
-                    <view wx:else>{{ userinfoData.person.validPoints?userinfoData.person.validPoints:0 }}</view>
+                    <view>{{ userinfoData.person.validPoints?userinfoData.person.validPoints:0 }}</view>
                     <view>爱心币剩余</view>
                 </view>
             </view>

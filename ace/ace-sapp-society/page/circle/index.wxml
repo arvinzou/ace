@@ -57,20 +57,11 @@
         </view>
     </block>
 
-    <block wx:if='{{sysUserInfo.regType == "2"}}'>
-        <block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>
-            <view class="btn-add-rpt" bindtap="add">
-                <image class="btn-img" src="../../image/add-red.png" />
-            </view>
-        </block>
-    </block>
-    <block wx:if='{{sysUserInfo.regType == "1"}}'>
         <block wx:if='{{sysUserInfo.person.status =="3"}}'>
             <view class="btn-add-rpt" bindtap="add">
                 <image class="btn-img" src="../../image/add-red.png" />
             </view>
         </block>
-    </block>
 </scroll-view>
 
 

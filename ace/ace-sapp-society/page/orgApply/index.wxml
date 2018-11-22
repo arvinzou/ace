@@ -17,7 +17,7 @@
             </view>
             <view class='form-content'>
                 <view class='tips'>
-                    <text>温馨提示：党组织必须在添加照片的情况下进行后续操作</text>
+                    <text>温馨提示：组织必须在添加照片的情况下进行后续操作</text>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title" style='width:25%'>组织类型
@@ -31,7 +31,7 @@
                     <text>操作说明：个人和党员为线下活动的参与者，社会组织和党组织为线下活动的发起者；请按实际情况选取类型进行后续操作</text>
                 </view>
 
-                 <view class='btn-part'>
+                 <view class='btn-part' style='position:fixed;bottom:0;'>
                     <view bindtap='nextOne' class='btn btn-clicking'>
                         下一步
                     </view>
@@ -48,22 +48,22 @@
                     <view class="title" style='width:25%'>组织名称
                         <text>*</text>
                     </view>
-                    <input name='orgName' style='width:75%' placeholder='请输入组织名称' placeholder-class='placeholder-text'></input>
+                    <input type='text' maxlength='30' name='orgName' style='width:75%' placeholder='请输入组织名称' placeholder-class='placeholder-text' ></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title" style='width:25%'>组织地址</view>
-                    <input name='orgAddr' style='width:75%' placeholder='请输入组织地址' placeholder-class='placeholder-text'></input>
+                    <input type='text' name='orgAddr' maxlength='50' style='width:75%' placeholder='请输入组织地址' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title" style='width:25%'>联系人
                         <text>*</text>
                     </view>
-                    <input name='contactPerson' style='width:75%' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
+                    <input maxlength='20' type='text' name='contactPerson' style='width:75%' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title" style='width:25%'>联系电话
                     </view>
-                    <input name='contactPhone' style='width:75%' placeholder='请输入手机号码' placeholder-class='placeholder-text'              type='number'></input>
+                    <input maxlength='11' name='contactPhone' style='width:75%' placeholder='请输入手机号码' placeholder-class='placeholder-text'              type='number'></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view  class="title" style='width:25%'>邮箱

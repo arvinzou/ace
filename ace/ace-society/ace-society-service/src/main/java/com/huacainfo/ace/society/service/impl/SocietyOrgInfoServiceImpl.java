@@ -21,6 +21,7 @@ import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.SocietyOrgInfoService;
+import com.huacainfo.ace.society.vo.OrgAdminVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoQVo;
 import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 import org.slf4j.Logger;
@@ -29,7 +30,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("societyOrgInfoService")
 /**
@@ -266,14 +269,95 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         MessageResponse ms = insertSocietyOrgInfo(params, u);
         if (ms.getStatus() == ResultCode.SUCCESS) {
             //添加组织管理员列表 --默认创建者即为管理员
-            OrgAdmin admin = new OrgAdmin();
-            admin.setId(GUIDUtil.getGUID());
-            admin.setUserId(crtUserId);
-            admin.setOrgId(orgId);
-            admin.setCreateDate(DateUtil.getNowDate());
-            orgAdminDao.insert(admin);
+            insertOrgAdmin(crtUserId, orgId);
         }
         return new ResultResponse(ms);
+    }
+
+    private int insertOrgAdmin(String userId, String orgId) {
+        OrgAdmin admin = new OrgAdmin();
+        admin.setId(GUIDUtil.getGUID());
+        admin.setUserId(userId);
+        admin.setOrgId(orgId);
+        admin.setCreateDate(DateUtil.getNowDate());
+        return orgAdminDao.insert(admin);
+    }
+
+    /**
+     * 查询组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @Override
+    public SingleResult<OrgAdminVo> findOrgAdmin(String orgId) throws Exception {
+        SingleResult<OrgAdminVo> rst = new SingleResult<>();
+        rst.setValue(orgAdminDao.findByOrgId(orgId));
+
+        return rst;
+    }
+
+    /**
+     * 移除组织负责人
+     *
+     * @param orgId 组织ID
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse removeAdmin(String orgId) {
+        int i = orgAdminDao.deleteByOrgId(orgId);
+        if (i == 1) {
+            return new MessageResponse(ResultCode.SUCCESS, "移除成功");
+        }
+        return new MessageResponse(ResultCode.FAIL, "移除失败");
+    }
+
+    /**
+     * 添加/更换 组织负责人
+     *
+     * @param orgId  组织ID
+     * @param userId
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse addAdmin(String orgId, String userId) {
+        OrgAdmin params = new OrgAdmin();
+        params.setOrgId(orgId);
+        params.setUserId(userId);
+        int count = orgAdminDao.isExist(params);
+        if (count != 0) {
+            return new MessageResponse(ResultCode.FAIL, "此人已作为其他组织负责人，请重新选择");
+        }
+        //只保留一个组织负责人
+        OrgAdminVo o = orgAdminDao.findByOrgId(orgId);
+        if (o != null) {
+            orgAdminDao.deleteByOrgId(orgId);
+        }
+
+        int i = insertOrgAdmin(userId, orgId);
+        if (i == 1) {
+            return new MessageResponse(ResultCode.SUCCESS, "添加/更换成功");
+        }
+        return new MessageResponse(ResultCode.FAIL, "添加/更换失败");
+    }
+
+    /**
+     * 查询 待选负责人列表
+     *
+     * @param keyword 查询关键字
+     * @return SingleResult<OrgAdminVo>
+     * @throws Exception
+     */
+    @Override
+    public Map<String, Object> findAdminList(String keyword) {
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, Object>> list = orgAdminDao.findAdminList(keyword);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
     }
 
 }

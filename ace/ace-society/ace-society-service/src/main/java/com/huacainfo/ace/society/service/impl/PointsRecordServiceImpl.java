@@ -14,7 +14,6 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.constant.CoinConfigType;
-import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.CoinConfigDao;
 import com.huacainfo.ace.society.dao.PersonInfoDao;
 import com.huacainfo.ace.society.dao.PointsRecordDao;
@@ -324,11 +323,11 @@ public class PointsRecordServiceImpl implements PointsRecordService {
         //获取金币配置信息
         CoinConfigVo coinConfigVo = coinConfigDao.selectVoByPrimaryKey(coinCfgType);
         int points = coinConfigVo.getHost();
-        if (RegType.PERSON.equals(customer.getRegType())) {
-            personInfoDao.addCoinSingle(userId, points);
-        } else {
-            societyOrgInfoDao.addCoin(userId, points);
-        }
+//        if (RegType.PERSON.equals(customer.getRegType())) {
+        personInfoDao.addCoinSingle(userId, points);
+//        } else {
+//            societyOrgInfoDao.addCoin(userId, points);
+//        }
         //补增积分流水
         addPointsRecord(userId, BisType.POINTS_BEHAVIOR, bisId, points);
 
