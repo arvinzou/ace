@@ -53,7 +53,7 @@
                     <view class="title" style='width:25%'>联系电话
                         <text>*</text>
                     </view>
-                    <input name='contactPhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number' bindblur='phoneInput'></input>
+                    <input name='contactPhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' type='number' bindinput='phoneInput'></input>
                     <button class='code' bindtap='sendCode' style='width:25%;padding:0'>{{ btnName }}</button>
                 </view>
                 <view class="input-style bottom-line">
@@ -89,34 +89,21 @@
                     <view class="title" style='width:25%'>姓名
                         <text>*</text>
                     </view>
-                    <input name='realName' style='width:75%' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
+                    <input type='text' name='realName' style='width:75%' placeholder='请输入姓名' placeholder-class='placeholder-text'></input>
                 </view>
                 <view class="input-style bottom-line">
                     <view class="title" style='width:25%'>联系电话
                         <text>*</text>
                     </view>
-                    <input name='mobilePhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' bindblur='phoneInput'></input>
+                    <input type='number' name='mobilePhone' style='width:50%' placeholder='请输入手机号码' placeholder-class='placeholder-text' bindblur='phoneInput'></input>
                     <button class='code' bindtap='sendCode' style='width:25%;padding:0'>{{ btnName }}</button>
                 </view>
                 <view class="input-style bottom-line">
                     <view  class="title" style='width:25%'>验证码
                         <text>*</text>
                     </view>
-                    <input name='code' style='width:75%' placeholder='请输入验证码' placeholder-class='placeholder-text'></input>
+                    <input type='number' name='code' style='width:75%' placeholder='请输入验证码' placeholder-class='placeholder-text'></input>
                 </view>
-                <!--<view class="input-style bottom-line">
-                    <view class="title">性别</view>
-                    <radio-group name="radio-group">
-                        <label>
-                            <radio name='' value="1" />男</label>
-                        <label>
-                            <radio value="2" />女</label>
-                    </radio-group>
-                </view>
-                <view class="input-style bottom-line">
-                    <view class="title">年龄</view>
-                    <input placeholder='请输入年龄' placeholder-class='placeholder-text' type='number'></input>
-                </view>-->
                 <view class='btn-part'>
                     <view bindtap='previousOne' class='btn btn-bkClick'>
                         上一步

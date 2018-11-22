@@ -95,7 +95,13 @@
     <tr>
 
                             <td>
-                                <div class="col-md-4 my-gallery"><img src="\${parseJson(item.content).header.wxuser.headimgurl}" class="cover"/></div>
+                                <div class="col-md-4 my-gallery">
+                                    {@if parseJson(item.content).header.wxuser.headimgurl != null && parseJson(item.content).header.wxuser.headimgurl!=undefined && parseJson(item.content).header.wxuser.headimgurl!=''}
+                                    <img src="\${parseJson(item.content).header.wxuser.headimgurl}" class="cover"/>
+                                    {@else}
+                                    <img src="../../common/img/default_header.png" class="cover"/>
+                                    {@/if}
+                                </div>
                                 <div class="col-md-8">
                                     <div class="describtion">\${parseJson(item.content).header.wxuser.nickname}</div>
                                 </div>

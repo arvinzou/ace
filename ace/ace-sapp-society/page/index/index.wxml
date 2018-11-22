@@ -6,27 +6,28 @@
                     <image class='hot' src='../../image/hot.png' style='margin-top:30rpx'></image>
                 </view>
                 <view class='menu-right' bindtap='showMoreActivity'>
-                    <block wx-if='{{activity.id !="" && activity.id != undefined && activity.id != null}}'>
-                    <text class='see-text'>查看更多</text>
-                    </block>
-                    <!--<image class='see-image' src='../../rediret.png'></image>-->
+                    <text class='see-text'>查看更多 ></text>
+                    <!--<image class='see-image' src='../../image/rediret.png'></image>-->
                 </view>
             </view>
-            <block wx-if='{{activity.id !="" && activity.id != undefined && activity.id != null}}'>
-            <view class='activity' bindtap='showActivityDetail' data-id='{{activity.id}}'>
+
+            <swiper autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style='height:200rpx'>
+            <block wx:for='{{activity}}' wx:for-index="idx">
+            <swiper-item>
+            <view class='activity' bindtap='showActivityDetail' data-id='{{item.id}}'>
                 <view class='activity-left'>
-                    <image class='activity-image' src='{{activity.coverUrl}}'></image>
+                    <image class='activity-image' src='{{item.coverUrl}}'></image>
                     <view class='mask'></view>
-                    <block wx:if='{{isEnd == false}}'>
+                    <block wx:if='{{timer[idx].isEnd == false && item.status =="3" }}'>
                     <view class='activity-warn'>
                         <view class='activity-warn-box'>
                             <view class='activity-warn-title'><text>距离活动开始</text></view>
                             <view class='activity-warn-time'>
-                                <text class='time-num'>{{hours}}</text>
+                                <text class='time-num'>{{timer[idx].hour}}</text>
                                 <text class='time-title'>:</text>
-                                <text class='time-num'>{{minutes}} </text>
+                                <text class='time-num'>{{timer[idx].minute}} </text>
                                 <text class='time-title'>:</text>
-                                <text class='time-num'>{{second}}</text>
+                                <text class='time-num'>{{timer[idx].second}}</text>
                             </view>
                         </view>
                     </view>
@@ -35,33 +36,33 @@
                 <view class='activity-right'>
                     <view class='activity-title'>
                         <block wx-if='{{activity.category == "4"}}'>
-                            <text class='stage'>第{{activity.clazz}}期</text>
+                            <text class='stage'>第{{item.clazz}}期</text>
                         </block>
-                        <text class=''>{{activity.title}}</text>
+                        <text class=''>{{item.title}}</text>
                     </view>
                     <view class='applytime'>
                         <block wx:if='{{activity.status == "3"}}'>
-                            <text>报名截止：{{activity.dendline}}</text>
+                            <text>报名截止：{{item.dendline}}</text>
                         </block>
                         <block wx:elif='{{activity.status == "31"}}'>
-                            <text>开始时间：{{activity.startDate}}</text>
+                            <text>开始时间：{{item.startDate}}</text>
                         </block>
                         <block wx:else>
-                            <text>结束时间：{{activity.endDate}}</text>
+                            <text>结束时间：{{item.endDate}}</text>
                         </block>
                     </view>
                     <view class='activity-footer'>
-                        <view class='sign-number'><text>已报名:{{activity.amount}}</text></view>
+                        <view class='sign-number'><text>已报名:{{item.amount}}</text></view>
                         <view class='activity-state'>
-                           <block wx:if='{{activity.status == "3"}}'>
-                                <block wx:if='{{activity.range>0}}'>
+                           <block wx:if='{{item.status == "3"}}'>
+                                <block wx:if='{{item.range>0}}'>
                                     <image src='../../image/icon_signing.png'></image>
                                 </block>
                                 <block wx:else>
                                     <image src='../../image/sign_over.png'></image>
                                 </block>
                             </block>
-                            <block wx:elif='{{activity.status == "31"}}'>
+                            <block wx:elif='{{item.status == "31"}}'>
                                 <image src='../../image/icon_having.png'></image>
                             </block>
                             <block wx:else>
@@ -71,21 +72,24 @@
                     </view>
                 </view>
                 <view class='activity-type'>
-                    <block wx:if='{{activity.category == "1"}}'>
+                    <block wx:if='{{item.category == "1"}}'>
                         公益活动
                     </block>
-                    <block wx:elif='{{activity.category == "2"}}'>
+                    <block wx:elif='{{item.category == "2"}}'>
                         普及活动
                     </block>
-                    <block wx:elif='{{activity.category == "3"}}'>
+                    <block wx:elif='{{item.category == "3"}}'>
                         创意活动
                     </block>
-                    <block wx:elif='{{activity.category == "4"}}'>
+                    <block wx:elif='{{item.category == "4"}}'>
                         党建活动
                     </block>
                 </view>
             </view>
+            </swiper-item>
             </block>
+            </swiper>
+    
         </view>
     </view>
     <view class='container'>

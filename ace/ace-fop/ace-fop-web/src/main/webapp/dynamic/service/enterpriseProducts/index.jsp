@@ -20,13 +20,11 @@
 
         <div class="row custom-toolbar">
             <form action="#" id="fm-search" >
-                <div class="col-md-5 toolbar">
+                <div class="col-md-2 toolbar">
                     <button type="button" class="btn  green" id="btn-view-add"  authority="${pageContext.request.contextPath}/informationService/insertInformationService"></button>
                 </div>
+                <div class="col-md-7"></div>
                 <div class="col-md-3">
-
-                </div>
-                <div class="col-md-4">
                     <div class="input-group">
                         <input type="text"
                                name="title"
@@ -48,6 +46,51 @@
         <table id="grid-table"></table>
 
         <div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
+    </div>
+</div>
+
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+
+
+<div class="modal fade"  role="dialog" id="modal-upload">
+    <div class="modal-dialog" role="document" style="width: 830px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button"  authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">图片上传</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="uploader">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade"  role="dialog" id="modal-file">
+    <div class="modal-dialog" role="document" style="width: 830px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button"  authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">图片</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="load" class="loading"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -96,52 +139,6 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
-
-
-<div class="modal fade"  role="dialog" id="modal-upload">
-    <div class="modal-dialog" role="document" style="width: 830px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button"  authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">图片上传</h4>
-            </div>
-            <div class="modal-body">
-
-                <div id="uploader">
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade"  role="dialog" id="modal-file">
-    <div class="modal-dialog" role="document" style="width: 830px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button"  authority="false" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">图片</h4>
-            </div>
-            <div class="modal-body">
-
-                <div id="load" class="loading"></div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <jsp:include page="/dynamic/common/footer.jsp" />
 
 
@@ -167,7 +164,6 @@
         src="${pageContext.request.contextPath}/content/service/enterpriseProducts/view.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/enterpriseProducts/upload.js?version=${cfg.version}"></script>
-
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
 

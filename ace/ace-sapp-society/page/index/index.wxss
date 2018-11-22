@@ -213,6 +213,7 @@
     color: #222222;
     font-size: 30rpx;
     font-weight: bold;
+
 }
 .stage{
     width: 82rpx;
