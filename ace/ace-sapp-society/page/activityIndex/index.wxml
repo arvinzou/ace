@@ -2,14 +2,14 @@
 <view class="index">
     <view class="topBar">
         <scroll-view class="navbar" scroll-x="true" scroll-left="{{scrollNavbarLeft}}">
-            <view wx:key="*this" class="navbar-item {{ item.active}}" id="{{ idx }}" wx:for-index="idx" wx:for="{{ navbarArray }}" catchtap="onTapNavbar">
+            <view wx:key="*this" class="navbar-item {{ item.active}}" id="{{idx}}" wx:for-index="idx" wx:for="{{ navbarArray }}" catchtap="onTapNavbar">
                 <view class="navbar-item-wrap">{{ item.text }}</view>
             </view>
         </scroll-view>
     </view>
 
     <view class="swiper_box">
-        <swiper current="{{category}}" bindchange="changeActivity">
+        <swiper current="{{category-1}}" bindchange="changeActivity">
             <block wx:key="*this" wx:for="{{lists}}" wx:for-item="items">
                 <swiper-item>
                     <scroll-view  scroll-top='{{items.scroll}}' scroll-y class='activity-list' bindscrolltolower="loadMore">

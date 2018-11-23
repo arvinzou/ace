@@ -157,7 +157,6 @@ Page({
         var that = this;
         clearInterval(that.data.stopwatch);
         that.data.stopwatch = setInterval(function () {
-            console.log(11111111111);
             that.clockfuntion();
         }, 1000);
     },
@@ -247,7 +246,8 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+        var that=this;
+        clearInterval(that.data.stopwatch);
     },
 
     /**
