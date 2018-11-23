@@ -50,7 +50,7 @@ Page({
                 }
             );
         }
-        else if ((that.data.activityInfo.category == 4 && sysUserInfo.person.politicalStatus == 1) || (that.data.activityInfo.initiatorId == rst.data.person.id)) {
+        else if ((that.data.activityInfo.category == 4 && sysUserInfo.person.politicalStatus == 1) || (that.data.activityInfo.initiatorId == sysUserInfo.person.id)) {
             return;
         }
         that.setData({
