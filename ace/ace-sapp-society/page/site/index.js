@@ -10,7 +10,8 @@ Page({
      siteId: null,
      siteObj : null,
      summary: null,
-     userinfoData: null
+     userinfoData: null,
+     feeType: 1
   },
 
   /**
@@ -36,9 +37,14 @@ Page({
     var that = this;
     wx.setStorageSync("siteId", that.data.siteId);
     wx.navigateTo({
-        url: '../siteChoose/index?siteId=' + that.data.siteId
+        url: '../siteChoose/index?siteId=' + that.data.siteId + '&feeType=' + that.data.feeType
     })
   },
+    feeTypeChange: function (e) {
+        console.log('radio发生change事件，携带value值为：', e.detail.value);
+        var that = this;
+        that.setData({ feeType: e.detail.value });
+    },
     initUserInfo: function () {
         var that = this;
         util.request(cfg.findUserInfo, {},
