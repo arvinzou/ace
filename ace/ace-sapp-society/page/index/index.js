@@ -79,6 +79,7 @@ Page({
         util.request(cfg.findActivitying, {
             "start": 0,
             "limit": limit,
+            "status":"3",
             "orderBy": "status asc,dendline",
             "sord": "desc"
         },
@@ -91,12 +92,18 @@ Page({
                             ret.data[i].dendline = ret.data[i].dendline.substring(0, 16);
                             ret.data[i].startDate = ret.data[i].startDate.substring(0, 16);
                             ret.data[i].endDate = ret.data[i].endDate.substring(0, 16);
-                            ret.data[i].range = util.formateStringToDate(ret.data[0].dendline).getTime() - new Date().getTime();
+                            ret.data[i].range = util.formateStringToDate(ret.data[i].dendline).getTime() - new Date().getTime();
                         }
                         that.clockfuntion();
                         that.actionClock();
+                        var tempActivity = [];
+                        for (var j = 0; j < ret.data.length; j++){
+                            if (ret.data[j].range > 0 && ret.data[j].status == "3"){
+                                tempActivity.push(ret.data[j]);
+                            }
+                        }
                         that.setData({
-                            activity: ret.data
+                            activity: tempActivity
                         });
                     }
 

@@ -77,7 +77,7 @@ Page({
       }else{
 
       }
-      util.request(cfg.createOrder, { "params": JSON.stringify({ "nickname": that.data.userinfoData.nickName, "headimgurl": that.data.userinfoData.avatarUrl, "payType": '1', 'payAmount': that.data.commodityInfo.costPoints, "receiveType": '2', "address": detailState, "receiveName": receiveName, "receivePhone": receivePhone, "detailList": orderDetail }) },
+      util.request(cfg.createOrder, { "params": JSON.stringify({ "feeType": that.data.feeType, "nickname": that.data.userinfoData.nickName, "headimgurl": that.data.userinfoData.avatarUrl, "payType": '1', 'payAmount': that.data.commodityInfo.costPoints, "receiveType": '2', "address": detailState, "receiveName": receiveName, "receivePhone": receivePhone, "detailList": orderDetail }) },
             function (ret) {
                 if (ret.status == 0) {
                     console.log(ret);

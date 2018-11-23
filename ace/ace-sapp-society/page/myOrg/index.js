@@ -17,7 +17,20 @@ Page({
         var that = this;
         that.setData({ userinfoData: wx.getStorageSync("sysUserInfo")});
     },
-    
+    initUserData: function () {
+        var that = this;
+        let userInfo = util.getSysUser();
+        if (!userInfo) {
+            wx.navigateTo({
+                url: "../regist/index"
+            });
+        }
+        that.setData({
+            userinfoData: userInfo,
+            isRegist: true,
+        });
+
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -49,7 +62,11 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-       
+       var that = this;
+       that.initUserData();
+        that.setData({ userinfoData: wx.getStorageSync("sysUserInfo") });
+        wx.stopPullDownRefresh();
+        return;
     },
     phoneCall: function(){
         wx.makePhoneCall({
