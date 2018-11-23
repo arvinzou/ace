@@ -236,7 +236,7 @@ public class CircleServiceImpl implements CircleService {
         }
         //更改审核记录
         MessageResponse auditRs = auditRecordService.audit(BisType.CIRCLE, circle.getId(),
-                userProp.getUserId(), rst, text, userProp);
+                circle.getUid(), rst, text, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }

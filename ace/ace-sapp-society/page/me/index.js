@@ -13,7 +13,7 @@ Page({
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
         userId: null,
-        wxUser:null
+        wxUser: null
 
     },
 
@@ -21,49 +21,33 @@ Page({
      * 生命周期函数--监听页面加载;
      */
     onLoad: function(options) {
-        var that = this;
-        console.log(options);
-        console.log("util.is_login()=============================================" + util.is_login());
-        if (!util.isLogin()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../me/index&type=switchTab"
-            });
-        } else {
-            if (wx.getStorageSync('userinfo')) {
-                that.setData({ userId: wx.getStorageSync('WX-SESSION-ID')});
-                that.initUserData();
-                that.initWxUserData();
-            };
-        }
+
     },
     initUserData: function() {
         var that = this;
-        util.request(cfg.findUserInfo, {},
+        let userInfo = util.getSysUser();
+        if(!userInfo){
+            wx.navigateTo({
+                url: "../regist/index"
+            });
+        }
+        that.setData({
+            userinfoData: userInfo,
+            isRegist: true,
+        });
+
+    },
+    initWxUserData: function() {
+        var that = this;
+        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', {
+                "id": wx.getStorageSync('WX-SESSION-ID')
+            },
             function(ret) {
                 if (ret.status == 0) {
-                    console.log(ret);
-                    util.setSysUser(ret.data);
                     that.setData({
-                        userinfoData: ret.data,
-                        isRegist: true,
+                        wxUser: ret.value
                     });
-                } else {
-                    that.setData({
-                        isRegist: false
-                    });
-                    wx.navigateTo({ url: "../regist/index" });
                 }
-            }
-        );
-    },
-    initWxUserData: function(){
-        var that = this;
-        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', { "id": wx.getStorageSync('WX-SESSION-ID')},
-            function (ret) {
-                if (ret.status == 0) {
-                    console.log(ret);
-                    that.setData({ wxUser: ret.value});
-                } 
             }
         );
     },
@@ -93,11 +77,36 @@ Page({
      */
     onShow: function() {
         var that = this;
-        if (wx.getStorageSync('userinfo')) {
-            that.setData({userId: wx.getStorageSync('WX-SESSION-ID')})
-            that.initUserData();
-            that.initWxUserData();
+
+        // 判断有没有鉴权
+        if (!util.is_login()) {
+            wx.navigateTo({
+                url: "../userinfo/index?url=../me/index&type=switchTab"
+            });
         }
+        // 判断有没有注册
+        var userInfo = util.getSysUser();
+        if (userInfo) {
+            that.initUserData();
+        } else {
+            that.getSysUserInfo();
+        }
+        that.setData({
+            userId: wx.getStorageSync('WX-SESSION-ID')
+        })
+        that.initWxUserData();
+    },
+
+    getSysUserInfo:function(){
+        let that=this;
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                if (ret.status == 0) {
+                    util.setSysUser(ret.data);
+                    that.initUserData();
+                }
+            }
+        );
     },
 
     /**
@@ -118,21 +127,21 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-        let that=this;
+        let that = this;
         that.setData({
             num1: parseInt(Math.random() * 100),
             num2: parseInt(Math.random() * 100),
             num3: parseInt(Math.random() * 100),
         });
         util.delSysUser();
-        that.initUserData();
+        that.getSysUserInfo();
         that.initWxUserData();
         wx.stopPullDownRefresh();
         return;
     },
-    call: function(){
+    call: function() {
         wx.makePhoneCall({
-            phoneNumber: '0736-7111361' 
+            phoneNumber: '0736-7111361'
         });
     },
 
