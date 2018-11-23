@@ -16,8 +16,10 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.constant.CoinConfigType;
-import com.huacainfo.ace.society.dao.*;
+import com.huacainfo.ace.society.dao.SubjectIdeaAnnexDao;
+import com.huacainfo.ace.society.dao.SubjectIdeaDao;
 import com.huacainfo.ace.society.model.SubjectIdea;
+import com.huacainfo.ace.society.service.AuditNoticeService;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.service.SubjectIdeaService;
@@ -57,13 +59,9 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
     @Autowired
     private SqlSessionTemplate sqlSession;
     @Autowired
-    private SocietyOrgInfoDao societyOrgInfoDao;
-    @Autowired
-    private PersonInfoDao personInfoDao;
-    @Autowired
-    private CoinConfigDao coinConfigDao;
-    @Autowired
     private PointsRecordService pointsRecordService;
+    @Autowired
+    private AuditNoticeService auditNoticeService;
 
     /**
      * @throws
@@ -262,9 +260,24 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
             ResultResponse pointsRst = pointsRecordService.addPoints(userId, CoinConfigType.IDEA, id);
             logger.debug(JsonUtil.toJson(pointsRst));
         }
+        //
+        //发送微信公众号模板消息
+        sendToCustomer(id, obj.getUserId(), rst, remark);
 
         return new MessageResponse(0, "议题点子审核完成！");
     }
+
+    private void sendToCustomer(String id, String userId, String rst, String remark) {
+        try {
+            String content = "业务类型： 【我有点子】\n" +
+                    "审核结果：  " + (AuditState.PASS.equals(rst) ? "审核通过" : "审核失败") + "\n" +
+                    "审核描述：  " + (StringUtil.isEmpty(remark) ? "" : remark);
+            auditNoticeService.sendToCustomer(userId, content);
+        } catch (Exception e) {
+            logger.error("[society]" + "【我有点子】" + "审核消息发送异常[id={}]：{}", id, e);
+        }
+    }
+
 
     /**
      * 提交“我的点子”
@@ -340,7 +353,20 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         record.setLastModifyUserId("8888");
         subjectIdeaDao.updateStatus(record);
 
+        //送审通知
+        sendToAdmin(idea);
+
         return new ResultResponse(ResultCode.SUCCESS, "送审成功");
+    }
+
+    private void sendToAdmin(SubjectIdea obj) {
+        try {
+            String content = "业务类型： 【我有点子发布】\n" +
+                    "标题：  " + obj.getTitle();
+            auditNoticeService.sendToAdmin(content);
+        } catch (Exception e) {
+            logger.error("[society]" + "【我有点子发布】" + "送审消息发送异常[id={}]：{}", obj.getId(), e);
+        }
     }
 
     /**

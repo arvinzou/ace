@@ -10,6 +10,10 @@ import java.util.List;
 public class OrderInfoVo extends OrderInfo {
     private static final long serialVersionUID = 1L;
     /**
+     * 支付扣减类型 1-个人 2-组织
+     */
+    private String feeType;
+    /**
      * 微信昵称
      */
     private String nickname;
@@ -27,6 +31,14 @@ public class OrderInfoVo extends OrderInfo {
      * 场地预约情况
      */
     private SpaceOccupyInfo spaceOccupyInfo;
+
+    public String getFeeType() {
+        return feeType;
+    }
+
+    public void setFeeType(String feeType) {
+        this.feeType = feeType;
+    }
 
     public SpaceOccupyInfo getSpaceOccupyInfo() {
         return spaceOccupyInfo;

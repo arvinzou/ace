@@ -84,4 +84,34 @@
         where p.id = #{userId,jdbcType=VARCHAR}
     </select>
 
+
+    <resultMap id="AdministratorRstMap" type="com.huacainfo.ace.common.model.Userinfo">
+        <id column="unionid" jdbcType="VARCHAR" property="unionid"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="appid" jdbcType="VARCHAR" property="appid"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="access_token" jdbcType="VARCHAR" property="access_token"/>
+        <result column="refresh_token" jdbcType="VARCHAR" property="refresh_token"/>
+        <result column="scope" jdbcType="VARCHAR" property="scope"/>
+        <result column="expires_in" jdbcType="BIGINT" property="expires_in"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+    </resultMap>
+
+    <select id="findAdministrator" parameterType="java.lang.String" resultMap="AdministratorRstMap">
+        SELECT
+        ui.unionid, ui.openid, ui.appid, ui.nickname, ui.sex, ui.city,
+        ui.province, ui.country, ui.headimgurl, ui.access_token,
+        ui.refresh_token, ui.scope, ui.expires_in, ui.role, ui.mobile
+        FROM portal.`config` t
+        left join portal.users u on t.config_value = u.account
+        left join portal.userinfo ui on u.user_id = ui.unionid
+        where t.syid = 'society'
+        and t.config_key = 'admin_mobile'
+    </select>
 </mapper>

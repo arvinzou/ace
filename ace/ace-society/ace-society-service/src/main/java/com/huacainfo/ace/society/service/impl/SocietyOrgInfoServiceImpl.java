@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.OrgAdminDao;
 import com.huacainfo.ace.society.dao.PersonInfoDao;
@@ -19,6 +20,7 @@ import com.huacainfo.ace.society.dao.SocietyOrgInfoDao;
 import com.huacainfo.ace.society.model.OrgAdmin;
 import com.huacainfo.ace.society.model.PersonInfo;
 import com.huacainfo.ace.society.model.SocietyOrgInfo;
+import com.huacainfo.ace.society.service.AuditNoticeService;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.SocietyOrgInfoService;
 import com.huacainfo.ace.society.vo.OrgAdminVo;
@@ -53,6 +55,8 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private AuditRecordService auditRecordService;
+    @Autowired
+    private AuditNoticeService auditNoticeService;
 
 
     /**
@@ -216,7 +220,7 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     @Override
     public MessageResponse audit(String id, String rst, String remark,
                                  UserProp userProp) throws Exception {
-        SocietyOrgInfo obj = societyOrgInfoDao.selectByPrimaryKey(id);
+        SocietyOrgInfoVo obj = societyOrgInfoDao.selectVoByPrimaryKey(id);
         if (obj == null) {
             return new MessageResponse(ResultCode.FAIL, "组织信息丢失");
 
@@ -234,10 +238,22 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         obj.setLastModifyUserName(userProp.getName());
         societyOrgInfoDao.updateByPrimaryKeySelective(obj);
 
-        //todo 发送微信公众号模板消息
+        //发送微信公众号模板消息
+        sendToCustomer(obj, rst, remark);
 
         dataBaseLogService.log("审核社会组织信息", "社会组织信息", id, id, "社会组织信息", userProp);
-        return new MessageResponse(0, "社会组织信息审核完成！");
+        return new MessageResponse(0, "审核成功！");
+    }
+
+    private void sendToCustomer(SocietyOrgInfoVo obj, String rst, String remark) {
+        try {
+            String content = "业务类型： 【组织信息审核】\n" +
+                    "审核结果：  " + (AuditState.PASS.equals(rst) ? "审核通过" : "审核失败") + "\n" +
+                    "审核描述：  " + (StringUtil.isEmpty(remark) ? "" : remark);
+            auditNoticeService.sendToCustomer(obj.getAdminId(), content);
+        } catch (Exception e) {
+            logger.error("[society]组织审核消息发送异常[id={}]：{}", obj.getId(), e);
+        }
     }
 
     @Override
@@ -271,7 +287,20 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
             //添加组织管理员列表 --默认创建者即为管理员
             insertOrgAdmin(crtUserId, orgId);
         }
+        //通知管理员去审核
+        sendToAdmin(params);
+
         return new ResultResponse(ms);
+    }
+
+    private void sendToAdmin(SocietyOrgInfoVo params) {
+        try {
+            String content = "业务类型： 【新组织注册】\n" +
+                    "组织名称：  " + params.getOrgName();
+            auditNoticeService.sendToAdmin(content);
+        } catch (Exception e) {
+            logger.error("[society]组织送审消息发送异常[orgId={}]：{}", params.getId(), e);
+        }
     }
 
     private int insertOrgAdmin(String userId, String orgId) {
