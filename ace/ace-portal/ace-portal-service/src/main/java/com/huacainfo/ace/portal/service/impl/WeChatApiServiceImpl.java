@@ -8,9 +8,11 @@ import com.huacainfo.ace.common.plugins.wechat.constant.WeChatConstants;
 import com.huacainfo.ace.common.plugins.wechat.entity.UserList;
 import com.huacainfo.ace.common.plugins.wechat.util.HttpKit;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.model.WxCfg;
+import com.huacainfo.ace.portal.service.BackendService;
 import com.huacainfo.ace.portal.service.UserinfoService;
 import com.huacainfo.ace.portal.service.WeChatApiService;
 import com.huacainfo.ace.portal.service.WxCfgService;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: Arvin
@@ -28,7 +31,7 @@ import java.util.List;
  * @Description:
  */
 @Service("weChatApiService")
-public class WeChatApiServiceImpl implements WeChatApiService {
+public class WeChatApiServiceImpl implements WeChatApiService, BackendService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -47,6 +50,8 @@ public class WeChatApiServiceImpl implements WeChatApiService {
      */
     @Override
     public ResultResponse synUserList(String sysId) throws Exception {
+        Thread t = new Thread();
+        t.start();
         //获取微信配置相关信息
         WxCfg wxCfg = wxCfgService.findBySysId(sysId);
         if (wxCfg == null || StringUtil.isEmpty(wxCfg.getAccessToken())) {
@@ -124,5 +129,17 @@ public class WeChatApiServiceImpl implements WeChatApiService {
         }
 
         return null;
+    }
+
+    @Override
+    public MessageResponse service(Map<String, Object> data) throws Exception {
+
+        String sysId = (String) data.get("sysId");
+        logger.debug("weChatApiService.service.[{}]", sysId);
+
+        ResultResponse rs = synUserList(sysId);
+        logger.debug("weChatApiService.service.[{}]", JsonUtil.toJson(rs));
+
+        return new MessageResponse(rs.getStatus(), rs.getInfo());
     }
 }

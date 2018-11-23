@@ -17,7 +17,9 @@
             <view class='activity' bindtap='showActivityDetail' data-id='{{item.id}}'>
                 <view class='activity-left'>
                     <image class='activity-image' src='{{item.coverUrl}}'></image>
-                    <view class='mask'></view>
+                    <block wx:if='{{timer[idx].isEnd == false && item.status =="3" }}'>
+                        <view class='mask'></view>
+                    </block>
                     <block wx:if='{{timer[idx].isEnd == false && item.status =="3" }}'>
                     <view class='activity-warn'>
                         <view class='activity-warn-box'>
@@ -32,6 +34,21 @@
                         </view>
                     </view>
                     </block>
+
+                    <view class='activity-type'>
+                    <block wx:if='{{item.category == "1"}}'>
+                        公益活动
+                    </block>
+                    <block wx:elif='{{item.category == "2"}}'>
+                        普及活动
+                    </block>
+                    <block wx:elif='{{item.category == "3"}}'>
+                        创意活动
+                    </block>
+                    <block wx:elif='{{item.category == "4"}}'>
+                        党建活动
+                    </block>
+                </view>
                 </view>
                 <view class='activity-right'>
                     <view class='activity-title'>
@@ -70,20 +87,6 @@
                             </block>
                         </view>
                     </view>
-                </view>
-                <view class='activity-type'>
-                    <block wx:if='{{item.category == "1"}}'>
-                        公益活动
-                    </block>
-                    <block wx:elif='{{item.category == "2"}}'>
-                        普及活动
-                    </block>
-                    <block wx:elif='{{item.category == "3"}}'>
-                        创意活动
-                    </block>
-                    <block wx:elif='{{item.category == "4"}}'>
-                        党建活动
-                    </block>
                 </view>
             </view>
             </swiper-item>

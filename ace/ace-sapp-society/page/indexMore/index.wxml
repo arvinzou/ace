@@ -5,8 +5,10 @@
             <view class='activity'>
                 <view class='activity-left'>
                     <image class='activity-image' src='{{item.coverUrl}}'></image>
-                    <view class='mask'></view>
-                    <block wx:if='{{item.isEnd == false}}'>
+                    <block wx:if='{{item.isEnd == false && item.status =="3"}}'>
+                        <view class='mask'></view>
+                    </block>
+                    <block wx:if='{{item.isEnd == false && item.status =="3"}}'>
                     <view class='activity-warn'>
                         <view class='activity-warn-title'><text>距离活动开始</text></view>
                         <view class='activity-warn-time'>
@@ -18,6 +20,21 @@
                         </view>
                     </view>
                     </block>
+
+                    <view class='activity-type'>
+                     <block wx:if='{{item.category == "1"}}'>
+                        公益活动
+                    </block>
+                    <block wx:elif='{{item.category == "2"}}'>
+                        普及活动
+                    </block>
+                    <block wx:elif='{{item.category == "3"}}'>
+                        创意活动
+                    </block>
+                    <block wx:elif='{{item.category == "4"}}'>
+                        党建活动
+                    </block>
+                </view>
                 </view>
                 <view class='activity-right'>
                     <view class='activity-title'>
@@ -54,20 +71,6 @@
                             <image src='../../image/icon_over.png'></image>
                         </view>
                     </view>
-                </view>
-                <view class='activity-type'>
-                     <block wx:if='{{item.category == "1"}}'>
-                        公益活动
-                    </block>
-                    <block wx:elif='{{item.category == "2"}}'>
-                        普及活动
-                    </block>
-                    <block wx:elif='{{item.category == "3"}}'>
-                        创意活动
-                    </block>
-                    <block wx:elif='{{item.category == "4"}}'>
-                        党建活动
-                    </block>
                 </view>
             </view>
         </view>

@@ -5,11 +5,15 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.result.*;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.PersonInfoDao;
 import com.huacainfo.ace.society.dao.PersonOrgRelationDao;
@@ -23,9 +27,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.params.Params;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service("personInfoService")
 /**
@@ -115,6 +120,8 @@ public class PersonInfoServiceImpl implements PersonInfoService {
 
         //自动送审
         sendAudit(o);
+        //自动审核通过
+        audit(personId, AuditState.PASS, "自动审核", userProp);
 
         return new MessageResponse(0, "添加个人信息完成！");
     }

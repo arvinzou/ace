@@ -22,10 +22,13 @@
 .activity-left{
     width: 40%;
     float: left;
+    height: 160rpx;
+    position: relative;
 }
 .activity-right{
     width: 60%;
     float: left;
+    height: 160rpx;
 }
 .activity::after{
     content: '';
@@ -67,7 +70,7 @@
     position: absolute;
     background:#000; 
     opacity:0.5; 
-    bottom: 40rpx;
+    bottom: 0rpx;
 }
 .applytime{
     color: #666666;
@@ -111,12 +114,13 @@
     color: #FFFFFF;
     font-size: 20rpx;
     font-weight: bold;
+    top: -5rpx;
 }
 .activity-warn{
     width: 270rpx;
     height: 120rpx;
     position: absolute;
-    bottom:30rpx;
+    bottom:0rpx;
     text-align:center;
 }
 .activity-warn-title{
