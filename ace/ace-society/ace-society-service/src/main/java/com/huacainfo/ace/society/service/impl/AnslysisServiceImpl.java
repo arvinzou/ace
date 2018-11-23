@@ -71,7 +71,6 @@ public class AnslysisServiceImpl implements AnalysisService {
         //所有排行
         List<Map<String, Object>> rankList = dao.query(condition);
 
-
         //返回结果
         Map<String, Object> rtnMap = new HashMap<>();
         rtnMap.put("list", rankList);
