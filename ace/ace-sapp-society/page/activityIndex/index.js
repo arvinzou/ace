@@ -6,6 +6,11 @@ Page({
         category: 1,
         navbarArray: [
             {
+                text: '党建活动',
+                active: '',
+                type: '4'
+            },
+            {
                 text: '公益活动',
                 active: 'navbar-item-active',
                 type: '1'
@@ -17,10 +22,6 @@ Page({
                 text: '创意活动',
                 active: '',
                 type: '3'
-            }, {
-                text: '党建活动',
-                active: '',
-                type: '4'
             }
         ],
         lists: [{

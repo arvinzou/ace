@@ -38,6 +38,7 @@
     "page/liveCsl/index",
     "page/releaseBehavior/index",
     "page/activityManage/index",
+    "page/orgActivityManage/index",
     "page/activityEdit/index",
     "page/enterActivity/index",
     "page/aboutus/index",

@@ -9,7 +9,7 @@
     </view>
 
     <view class="swiper_box">
-        <swiper current="{{category-1}}" bindchange="changeActivity">
+        <swiper current="{{category}}" bindchange="changeActivity">
             <block wx:key="*this" wx:for="{{lists}}" wx:for-item="items">
                 <swiper-item>
                     <scroll-view  scroll-top='{{items.scroll}}' scroll-y class='activity-list' bindscrolltolower="loadMore">
@@ -17,10 +17,10 @@
                             <view class='left'>
                                 <view class='title'>{{item.title}}</view>
                                 <view class='detail'>
-                                    <text wx:if='{{item.category==1}}' class='tags_b  tags_gy'>公益活动</text>
-                                    <text wx:elif='{{item.category==2}}' class='tags_b tags_pj'>普及活动</text>
-                                    <text wx:elif='{{item.category==3}}' class='tags_b tags_cy'>创意活动</text>
-                                    <text wx:elif='{{item.category==4}}' class='tags_b tags_dj'>党建活动</text>
+                                    <text wx:if='{{item.category==4}}' class='tags_b  tags_gy'>党建活动</text>
+                                    <text wx:elif='{{item.category==1}}' class='tags_b tags_pj'>公益活动</text>
+                                    <text wx:elif='{{item.category==2}}' class='tags_b tags_cy'>普及活动</text>
+                                    <text wx:elif='{{item.category==3}}' class='tags_b tags_dj'>创意活动</text>
                                     <text>{{item.createUserName}}</text>
                                     <text>{{filter.subDateTime(item.lastModifyDate,5,10)}}</text>
                                     <text>{{item.commentTotal}}条评论</text>

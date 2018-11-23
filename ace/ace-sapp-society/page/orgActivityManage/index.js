@@ -26,10 +26,11 @@ Page({
     optionUrl:function(){
         let that = this;
         let user = util.getSysUser();
-        that.data.url = cfg.userActivityList;
+        that.data.url = cfg.adminActivityList;
         that.setData({
-                type:1
-            })
+            type: 2
+        })
+        
     },
 
 

@@ -63,11 +63,9 @@ Page({
                 url: "../userinfo/index?url=../index/index&type=switchTab"
             });
         }
-        // 判断有没有登陆
-        if (util.isLogin()) {
-            if (!util.getSysUser()) {
-                that.initUserData();
-            }
+        // 判断有没有注册
+        if (!util.getSysUser()) {
+            that.initUserData();
         }
     },
 
@@ -224,7 +222,6 @@ Page({
         util.request(cfg.findUserInfo, {},
             function (ret) {
                 if (ret.status == 0) {
-                    console.log(ret);
                     util.setSysUser(ret.data);
                 }
             }
@@ -241,7 +238,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        var that = this;
         var that = this;
         that.activityIng(5);
         that.initReport();

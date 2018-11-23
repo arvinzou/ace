@@ -29,12 +29,13 @@ Page({
     ifCreatBtn:function(){
         let that = this;
         let sysUserInfo = util.getSysUser();
-        if (util.isLogin()&&!sysUserInfo){
+        //如果没有注册，尝试重新申请获取一次。
+        if (sysUserInfo){
             util.request(cfg.findUserInfo, {},
                 function (rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
-                        if (rst.data.societyOrg) {
+                        if (rst.data.regType == '2' && rst.data.societyOrg.status == '3') {
                             that.setData({
                                 hiddenBtn: false,
                             });
@@ -44,7 +45,7 @@ Page({
                 }
             );
         }
-        if (sysUserInfo.societyOrg) {
+        if (sysUserInfo.regType == '2' && sysUserInfo.societyOrg.status == '3') {
             that.setData({
                 hiddenBtn: false,
             });

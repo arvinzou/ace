@@ -24,13 +24,6 @@ Page({
 
     ifCreatBtn: function() {
         let that = this;
-        //没有登陆显示登陆按钮
-        if(!util.isLogin()){
-            that.setData({
-                hiddenBtn: false,
-            });
-            return;
-        }
         // 已经登陆过了。获取用户信息
         let sysUserInfo = util.getSysUser();
         // 如果没有用户信息
@@ -39,6 +32,12 @@ Page({
                 function(rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
+                        if (!rst.data){
+                            that.setData({
+                                hiddenBtn: false,
+                            }); 
+                            return;
+                        }
                         // 如果党建活动，人员是个人。
                         if (that.data.activityInfo.category == 4 && rst.data.person.politicalStatus == 1){
                             return;
