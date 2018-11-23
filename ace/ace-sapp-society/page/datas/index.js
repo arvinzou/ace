@@ -103,7 +103,7 @@ Page({
    */
   initSocietyData: function(e){
       var that = this;
-      util.request(cfg.server+'/society/www/anslysis/query', { "reportId": "portal", },
+      util.request(cfg.server+'/society/www/anslysis/query', { "reportId": "portal" },
           function (ret) {
               if (ret.status == 0) {
                   var retData = ret.value;

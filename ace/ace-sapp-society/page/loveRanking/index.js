@@ -8,7 +8,8 @@ Page({
     data: {
         rankList: [],
         currentTab: 'month',
-        personTab: 0
+        personTab: 0,
+        userType: "1"
     },
 
     /**
@@ -16,7 +17,7 @@ Page({
      */
     onLoad: function(options) {
         var that = this;
-        that.initRank(that.data.currentTab);
+        that.initRank(that.data.currentTab, that.data.userType);
     },
     detail: function(e) {
         wx.navigateTo({
@@ -26,13 +27,19 @@ Page({
     navbarTap: function(e) {
         var that = this;
         var index = e.currentTarget.dataset.index;
+        if(index == 0){
+            that.setData({ userType: "1" });
+        }else{
+            that.setData({ userType: "2" });
+        }
         that.setData({ personTab: index});
-        that.initRank(that.data.currentTab);
+        that.initRank(that.data.currentTab, that.data.userType);
     },
-    initRank: function(rankType) {
+    initRank: function(rankType, userType) {
         var that = this;
         util.request(cfg.pointRank, {
-                "rankType": rankType
+                "rankType": rankType,
+                "userType": userType
             },
             function(ret) {
                 if (ret.status == 0) {
@@ -57,7 +64,7 @@ Page({
         that.setData({
             currentTab: temp
         });
-        that.initRank(that.data.currentTab);
+        that.initRank(that.data.currentTab, that.data.userType);
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -91,6 +98,8 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
+        var that = this;
+        that.initRank(that.data.currentTab, that.data.userType);
         wx.stopPullDownRefresh();
     },
 
