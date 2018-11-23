@@ -339,10 +339,7 @@ function auditActivity() {
     $.post(url, param, function (result) {
         console.log(result);
         if (result.status == 0) {
-            console.log(result);
-            var navitem = document.getElementById('tpl-fm-sign').innerHTML;
-            var html = juicer(navitem, {data: result.value});
-            $("#fm-sign").html(html);
+            getPageList();
             $("#preview").modal("hide");
         }
     });
