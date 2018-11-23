@@ -18,6 +18,7 @@
                         <view class='reserveDate' wx:if='{{item.spaceOccupyInfo.reserveDate!=undefined && item.spaceOccupyInfo.reserveDate!=""}}'><text>使用时间{{item.spaceOccupyInfo.reserveDate}} {{item.spaceOccupyInfo.reserveInterval}}</text></view>
                         <view class='method'>
                             <text>自提</text>
+                            
                         </view>
                         <view style='height:35rpx'>
                             <text class='number'>{{orderItem.salePrice}}</text>

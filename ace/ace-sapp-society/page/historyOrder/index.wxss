@@ -2,6 +2,7 @@
 
 .index{
     width: 100%;
+    height: 100%;
     background: #F6F6F6;
 }
 .order-list{
@@ -36,7 +37,7 @@
 }
 .content-right{
     width: 75%;
-    height: 160rpx;
+    height: auto;
     float: left;
 }
 .order-content::after{
