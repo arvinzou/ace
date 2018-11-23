@@ -262,19 +262,29 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
         }
         //
         //发送微信公众号模板消息
-        sendToCustomer(id, obj.getUserId(), rst, remark);
+        sendToCustomer(obj, rst, remark);
 
         return new MessageResponse(0, "议题点子审核完成！");
     }
 
-    private void sendToCustomer(String id, String userId, String rst, String remark) {
+    private void sendToCustomer(SubjectIdea obj, String rst, String remark) {
         try {
-            String content = "业务类型： 【我有点子】\n" +
-                    "审核结果：  " + (AuditState.PASS.equals(rst) ? "审核通过" : "审核失败") + "\n" +
-                    "审核描述：  " + (StringUtil.isEmpty(remark) ? "" : remark);
-            auditNoticeService.sendToCustomer(userId, content);
+            StringBuffer content = new StringBuffer();
+            content.append("我有点子发布审核通知\n")
+                    .append(obj.getTitle())
+                    .append("，我有点子发布审核")
+                    .append((AuditState.PASS.equals(rst) ? "通过" : "驳回"));
+            if (StringUtil.isNotEmpty(remark)) {
+                content.append("，[" + remark + "].\n");
+            } else {
+                content.append(".\n");
+            }
+            content.append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToCustomer(obj.getUserId(), content.toString());
         } catch (Exception e) {
-            logger.error("[society]" + "【我有点子】" + "审核消息发送异常[id={}]：{}", id, e);
+            logger.error("[society]" + "【我有点子发布】" + "审核消息发送异常[id={}]：{}", obj.getId(), e);
         }
     }
 
@@ -361,9 +371,15 @@ public class SubjectIdeaServiceImpl implements SubjectIdeaService {
 
     private void sendToAdmin(SubjectIdea obj) {
         try {
-            String content = "业务类型： 【我有点子发布】\n" +
-                    "标题：  " + obj.getTitle();
-            auditNoticeService.sendToAdmin(content);
+
+            StringBuffer content = new StringBuffer();
+            content.append("我有点子发布审核通知\n")
+                    .append(obj.getTitle())
+                    .append(" 我有点子发布成功，请及时审核.\n")
+                    .append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToAdmin(content.toString());
         } catch (Exception e) {
             logger.error("[society]" + "【我有点子发布】" + "送审消息发送异常[id={}]：{}", obj.getId(), e);
         }

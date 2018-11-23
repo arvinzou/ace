@@ -280,21 +280,31 @@ public class BehaviorServiceImpl implements BehaviorService {
             logger.debug(JsonUtil.toJson(pointsRst));
         }
         //发送微信公众号模板消息
-        sendToCustomer(id, userId, rst, remark);
+        sendToCustomer(behavior, rst, remark);
         //系统日志
         dataBaseLogService.log("审核市民行为详情", "市民行为详情",
                 String.valueOf(id), String.valueOf(id), "市民行为详情", userProp);
         return new MessageResponse(0, "市民行为详情审核完成！");
     }
 
-    private void sendToCustomer(String id, String userId, String rst, String remark) {
+    private void sendToCustomer(Behavior behavior, String rst, String remark) {
         try {
-            String content = "业务类型： 【市民行为】\n" +
-                    "审核结果：  " + (AuditState.PASS.equals(rst) ? "审核通过" : "审核失败") + "\n" +
-                    "审核描述：  " + (StringUtil.isEmpty(remark) ? "" : remark);
-            auditNoticeService.sendToCustomer(userId, content);
+            StringBuffer content = new StringBuffer();
+            content.append("市民行为发布审核通知\n")
+                    .append(behavior.getTitle())
+                    .append("，市民行为发布审核")
+                    .append((AuditState.PASS.equals(rst) ? "通过" : "驳回"));
+            if (StringUtil.isNotEmpty(remark)) {
+                content.append("，[" + remark + "].\n");
+            } else {
+                content.append(".\n");
+            }
+            content.append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToCustomer(behavior.getUserId(), content.toString());
         } catch (Exception e) {
-            logger.error("[society]" + "【市民行为】" + "审核消息发送异常[id={}]：{}", id, e);
+            logger.error("[society]" + "【市民行为】" + "审核消息发送异常[id={}]：{}", behavior.getId(), e);
         }
     }
 
@@ -379,9 +389,14 @@ public class BehaviorServiceImpl implements BehaviorService {
 
     private void sendToAdmin(Behavior obj) {
         try {
-            String content = "业务类型： 【市民行为发布】\n" +
-                    "标题：  " + obj.getTitle();
-            auditNoticeService.sendToAdmin(content);
+            StringBuffer content = new StringBuffer();
+            content.append("市民行为发布审核通知\n")
+                    .append(obj.getTitle())
+                    .append(" 市民行为发布成功，请及时审核.\n")
+                    .append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToAdmin(content.toString());
         } catch (Exception e) {
             logger.error("[society]" + "【市民行为】" + "送审消息发送异常[id={}]：{}", obj.getId(), e);
         }

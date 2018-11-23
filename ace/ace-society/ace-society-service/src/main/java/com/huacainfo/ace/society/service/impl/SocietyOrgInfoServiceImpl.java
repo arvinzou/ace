@@ -247,10 +247,24 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
 
     private void sendToCustomer(SocietyOrgInfoVo obj, String rst, String remark) {
         try {
-            String content = "业务类型： 【组织信息审核】\n" +
-                    "审核结果：  " + (AuditState.PASS.equals(rst) ? "审核通过" : "审核失败") + "\n" +
-                    "审核描述：  " + (StringUtil.isEmpty(remark) ? "" : remark);
-            auditNoticeService.sendToCustomer(obj.getAdminId(), content);
+//            注册审核通知
+//            XXX，注册审核通过/驳回，[机构名称不规范].
+//            芙蓉街道XXX系统
+//            2018-11-23 14：28
+            StringBuffer content = new StringBuffer();
+            content.append("注册审核通知\n")
+                    .append(obj.getOrgName())
+                    .append("，注册审核")
+                    .append((AuditState.PASS.equals(rst) ? "通过" : "驳回"));
+            if (StringUtil.isNotEmpty(remark)) {
+                content.append("，[" + remark + "].\n");
+            } else {
+                content.append(".\n");
+            }
+            content.append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToCustomer(obj.getAdminId(), content.toString());
         } catch (Exception e) {
             logger.error("[society]组织审核消息发送异常[id={}]：{}", obj.getId(), e);
         }
@@ -295,9 +309,18 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
 
     private void sendToAdmin(SocietyOrgInfoVo params) {
         try {
-            String content = "业务类型： 【新组织注册】\n" +
-                    "组织名称：  " + params.getOrgName();
-            auditNoticeService.sendToAdmin(content);
+//            注册审核通知
+//            XXX注册成功，请及时审核.
+//                    芙蓉街道XXX系统
+//            2018 - 11 - 23 14：28
+            StringBuffer content = new StringBuffer();
+            content.append("注册审核通知\n")
+                    .append(params.getOrgName())
+                    .append(" 注册成功，请及时审核.\n")
+                    .append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToAdmin(content.toString());
         } catch (Exception e) {
             logger.error("[society]组织送审消息发送异常[orgId={}]：{}", params.getId(), e);
         }
