@@ -14,11 +14,21 @@
         FROM society.points_record t
         WHERE 1 = 1
         AND t.points > 0
+        and EXISTS (
+        <choose>
+            <when test="userType=='1'">
+                select 1 from person_info where id = t.userId
+            </when>
+            <otherwise>
+                select 1 from society_org_info where id = t.userId
+            </otherwise>
+        </choose>
+        )
         <if test="userId!=null and userId!=&quot;&quot;">
             AND t.userId = #{userId,jdbcType=VARCHAR}
         </if>
         <if test="createDate!=null and createDate!=&quot;&quot;">
-            AND t.createDate LIKE concat('%',#{createDate,jdbcType=VARCHAR},'%')
+            AND t.createDate LIKE concat(#{createDate,jdbcType=VARCHAR},'%')
         </if>
         <if test="startDate!=null and startDate!=&quot;&quot;">
             AND t.createDate >= #{startDate,jdbcType=VARCHAR}

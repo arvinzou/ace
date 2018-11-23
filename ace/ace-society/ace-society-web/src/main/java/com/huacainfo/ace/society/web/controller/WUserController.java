@@ -59,11 +59,13 @@ public class WUserController extends SocietyBaseController {
     /**
      * 爱心币排行
      *
+     * @param userType 1-个人 2-组织
      * @param rankType year-年度排行，month-月度排行 season-季度排行
      * @return List<Map<String, Object>>
      */
     @RequestMapping("/pointsRank")
-    public ResultResponse pointsRank(String rankType, String unionId, String start, String limit) throws Exception {
+    public ResultResponse pointsRank(String rankType, String userType, String unionId,
+                                     String start, String limit) throws Exception {
         //微信用户信息
         WxUser wxUser = getCurWxUser();
         unionId = StringUtil.isNotEmpty(unionId) ? unionId : (null == wxUser ? "" : wxUser.getUnionId());
@@ -75,6 +77,8 @@ public class WUserController extends SocietyBaseController {
         if (StringUtil.isEmpty(limit)) {
             condition.put("limit", 50);
         }
+        userType = "1".equals(userType) ? "2" : "1";
+        condition.put("userType", userType);
 
         Map<String, Object> rtn = analysisService.pointsRank(unionId, rankType, condition);
 
