@@ -44,8 +44,6 @@ pageEncoding="utf-8"%>
             </div>
 
             <div class="col-md-3">
-
-
                     <div class="input-group">
                         <input type="text"
                                name="title"
