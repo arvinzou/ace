@@ -136,7 +136,11 @@
         <div class="form-group">
             <label class="col-md-2 view-label">组织类型</label>
             <div class="col-md-10">
-                \${data.orgType}
+                {@if data.orgType == "2"}
+                 社会组织
+                {@else if data.orgType == "1"}
+                党组织
+                {@/if}
             </div>
         </div>
         <div class="form-group">

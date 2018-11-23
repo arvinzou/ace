@@ -227,7 +227,6 @@ function signInfo(id) {
     var url = contextPath + "/activity/selectActivityByPrimaryKey";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
-            console.log(result);
             var navitem = document.getElementById('tpl-fm-sign').innerHTML;
             var html = juicer(navitem, {data: result.value});
             $("#fm-sign").html(html);
@@ -263,7 +262,6 @@ function initEvents() {
             $.extend(params, {
                 time: new Date()
             });
-            console.log(params);
             audit(params);
             return false;
         }
@@ -329,20 +327,14 @@ function auditActivity() {
     if(rst==33){
         var list=[];
         $('input[name="list"]:checked').each(function () {
-            console.log($(this).val());
             list.push($(this).val());
         })
         param.list=list.join(",");
     }
-    console.log(param);
     var url = contextPath + "/activity/endAudit";
     $.post(url, param, function (result) {
-        console.log(result);
         if (result.status == 0) {
-            console.log(result);
-            var navitem = document.getElementById('tpl-fm-sign').innerHTML;
-            var html = juicer(navitem, {data: result.value});
-            $("#fm-sign").html(html);
+            getPageList();
             $("#preview").modal("hide");
         }
     });

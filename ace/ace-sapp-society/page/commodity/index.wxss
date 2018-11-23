@@ -131,3 +131,8 @@
 .wxParse-img{
   display: flex;
 }
+.fee-content{
+    width: 90%;
+    height: 80rpx;
+    margin: 15rpx auto;
+}

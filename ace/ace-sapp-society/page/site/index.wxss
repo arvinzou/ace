@@ -161,3 +161,8 @@ rich-text  .rich-img {
     width: 100%;
     height: auto ;
 }
+.fee-content{
+    width: 90%;
+    height: 80rpx;
+    margin: 15rpx auto;
+}
