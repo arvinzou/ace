@@ -7,7 +7,9 @@
         v.nickName, v.avatarUrl, v.accPoints, v.userId
         from (
         SELECT
-        w.nickName, w.avatarUrl, a.accPoints, a.userId
+        IFNULL(w.nickName,org.orgName) as nickName,
+        IFNULL(w.avatarUrl,org.orgCover) as avatarUrl,
+        a.accPoints, a.userId
         FROM(
         SELECT
         SUM(t.points) AS accPoints, t.userId as userId
@@ -16,7 +18,7 @@
         AND t.points > 0
         and EXISTS (
         <choose>
-            <when test="userType=='1'">
+            <when test="userType == 1">
                 select 1 from person_info where id = t.userId
             </when>
             <otherwise>
@@ -39,6 +41,7 @@
         GROUP BY t.userId
         ) a
         LEFT JOIN portal.wx_user w ON a.userId = w.unionId
+        left join society_org_info org on a.userId = org.id
         ORDER BY a.accPoints DESC
         )v , (select @i:=0) as it
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

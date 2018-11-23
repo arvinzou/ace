@@ -77,7 +77,7 @@ public class WUserController extends SocietyBaseController {
         if (StringUtil.isEmpty(limit)) {
             condition.put("limit", 50);
         }
-        userType = "1".equals(userType) ? "2" : "1";
+        userType = StringUtil.isEmpty(userType) ? "1" : userType;
         condition.put("userType", userType);
 
         Map<String, Object> rtn = analysisService.pointsRank(unionId, rankType, condition);

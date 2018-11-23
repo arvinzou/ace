@@ -8,7 +8,7 @@
     FROM
     portal.users t
     WHERE
-    t.user_level='2' and t.stauts='1'
+      t.user_level='1' and t.stauts='1' and t.cur_syid ='society'
     union all
     SELECT
     'org' id,
