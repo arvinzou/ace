@@ -16,17 +16,12 @@ import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.constant.OrderState;
 import com.huacainfo.ace.society.constant.PayType;
-import com.huacainfo.ace.society.constant.RegType;
 import com.huacainfo.ace.society.dao.*;
 import com.huacainfo.ace.society.model.*;
-import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.OrderInfoService;
 import com.huacainfo.ace.society.service.PointsRecordService;
 import com.huacainfo.ace.society.service.RegService;
-import com.huacainfo.ace.society.vo.CommodityVo;
-import com.huacainfo.ace.society.vo.CustomerVo;
-import com.huacainfo.ace.society.vo.OrderInfoQVo;
-import com.huacainfo.ace.society.vo.OrderInfoVo;
+import com.huacainfo.ace.society.vo.*;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -51,12 +46,13 @@ import java.util.Map;
  */
 public class OrderInfoServiceImpl implements OrderInfoService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private OrgAdminDao orgAdminDao;
     @Autowired
     private OrderInfoDao orderInfoDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
-    @Autowired
-    private AuditRecordService auditRecordService;
     @Autowired
     private CommodityDao commoditydao;
     @Autowired
@@ -438,9 +434,11 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     private ResultResponse createPointsOrder(OrderInfoVo info, CustomerVo customerVo) {
         int payPoints = info.getPayAmount().intValue();
         int updCount;
-        if (RegType.PERSON.equals(customerVo.getRegType())) {
+        String feeType = info.getFeeType();
+        //个人积分扣除
+        if ("1".equals(feeType)) {
             PersonInfo personInfo = personInfoDao.selectByPrimaryKey(info.getUserId());
-            if (payPoints > personInfo.getValidPoints()) {
+            if (null == personInfo || payPoints > personInfo.getValidPoints()) {
                 return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
             }
             personInfo.setValidPoints(personInfo.getValidPoints() - payPoints);
@@ -452,12 +450,19 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             if (updCount != 1) {
                 throw new CustomException("更新用户爱心币失败");
             }
-        } else if (RegType.ORG.equals(customerVo.getRegType())) {
-            SocietyOrgInfo org = societyOrgInfoDao.selectByPrimaryKey(info.getUserId());
-            if (payPoints > org.getValidPoints()) {
-                return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
+            //积分流水记录
+            pointsRecordService.addPointsRecord(info.getUserId(),
+                    BisType.POINTS_ORDER_CONSUME, info.getId(), payPoints);
+        }//组织积分扣除
+        else if ("2".equals(feeType)) {
+            OrgAdminVo orgAdminVo = orgAdminDao.findByUserId(info.getUserId());
+            if (orgAdminVo == null) {
+                return new ResultResponse(ResultCode.FAIL, "用户组织信息不存在");
             }
-
+            SocietyOrgInfo org = societyOrgInfoDao.selectByPrimaryKey(orgAdminVo.getOrgId());
+            if (org == null || payPoints > org.getValidPoints()) {
+                return new ResultResponse(ResultCode.FAIL, "组织爱心币不足");
+            }
             org.setValidPoints(org.getValidPoints() - payPoints);
             org.setLastModifyDate(DateUtil.getNowDate());
             org.setLastModifyUserId("0000-0000");
@@ -466,6 +471,9 @@ public class OrderInfoServiceImpl implements OrderInfoService {
             if (updCount != 1) {
                 throw new CustomException("更新用户爱心币失败");
             }
+            //积分流水记录
+            pointsRecordService.addPointsRecord(orgAdminVo.getOrgId(),
+                    BisType.POINTS_ORDER_CONSUME, info.getId(), payPoints);
         } else {
             return new ResultResponse(ResultCode.FAIL, "用户爱心币不足");
         }
@@ -475,8 +483,6 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         info.setReceiveType("1");
         info.setOrderState(OrderState.ORDER_STATE_PAID);
         info = insertOrder(info);
-        //积分流水记录
-        pointsRecordService.addPointsRecord(info.getUserId(), BisType.POINTS_ORDER_CONSUME, info.getId(), payPoints);
 
         //返回信息
         Map<String, Object> rtnMap = new HashMap<>();

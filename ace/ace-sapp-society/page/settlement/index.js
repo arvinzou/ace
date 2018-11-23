@@ -9,6 +9,7 @@ Page({
      commodityInfo: null,
      commodityId: null,
      userinfoData: null,
+     feeType: null
   },
 
   /**
@@ -17,7 +18,7 @@ Page({
   onLoad: function (options) {
       var that = this;
       //that.setData({ commodityId: options.commodityId})
-      
+      that.setData({ feeType: options.feeType});
       console.log("+====================================="+util.isLogin());
       if (!util.is_login()) {
           wx.navigateTo({
@@ -42,7 +43,7 @@ Page({
     },
     initCommodityInfo: function (){
       var that = this;
-        util.request(cfg.siteDetail, { "commodityId": wx.getStorageSync('commodityId')},
+        util.request(cfg.siteDetail, { "commodityId": wx.getStorageSync('commodityId'), "feeType": that.data.feeType},
           function (ret) {
               if (ret.status == 0) {
                   console.log(ret);

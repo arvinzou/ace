@@ -17,14 +17,18 @@ Page({
     timeInterval:'9:00-11:00',
     timeIndex: 0,
     occupy:[],
-    today:null
+    today:null,
+    feeType:null
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
       var that = this;
-      that.setData({ siteId: wx.getStorageSync('siteId')});
+      that.setData({ 
+          siteId: wx.getStorageSync('siteId'),
+          feeType: options.feeType
+          });
       that.initSpaceOccupy();
       if (!util.is_login()) {
           wx.navigateTo({

@@ -12,12 +12,18 @@
                     <view class="title" style='width:25%'>注册类型
                         <text>*</text>
                     </view>
-                    <picker style='width:75%' mode = 'selector' bindchange="bindPickerChange" data-name='{{ array[index] }}' value="index" range="{{array}}">
+                    <!--<picker style='width:75%' mode = 'selector' bindchange="bindPickerChange" data-name='{{ array[index] }}' value="index" range="{{array}}">
                         <view style='width:75%' class="picker">{{array[index]}}</view>
-                    </picker>
+                    </picker>-->
+                    <radio-group class="radio-group" bindchange="radioChange">
+                        <label class="radio">
+                            <radio value="1" checked="checked"/>个人
+                            <radio value='2' style='margin-left:30rpx;'>党员</radio>
+                        </label>
+                    </radio-group>
                 </view>
                 <view class='opt-tips'>
-                    <text>操作说明：个人和党员为线下活动的参与者，社会组织和党组织为线下活动的发起者；请按实际情况选取注册类型进行后续注册</text>
+                    <text>操作说明：个人和党员为线下活动的参与者，请按实际情况选取注册类型进行后续注册</text>
                 </view>
 
                  <view class='btn-part regist-btn' style='position:fixed;bottom:0;'>

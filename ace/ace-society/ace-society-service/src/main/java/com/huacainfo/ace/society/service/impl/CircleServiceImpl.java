@@ -234,6 +234,12 @@ public class CircleServiceImpl implements CircleService {
         if(CommonUtils.isBlank(circle)){
             return new MessageResponse(ResultCode.FAIL, "邻里圈子数据丢失!");
         }
+        //更改审核记录
+        MessageResponse auditRs = auditRecordService.audit(BisType.CIRCLE, circle.getId(),
+                userProp.getUserId(), rst, text, userProp);
+        if (ResultCode.FAIL == auditRs.getStatus()) {
+            return auditRs;
+        }
         String logId=GUIDUtil.getGUID();
         CircleLog log=new CircleLog();
         log.setId(logId);

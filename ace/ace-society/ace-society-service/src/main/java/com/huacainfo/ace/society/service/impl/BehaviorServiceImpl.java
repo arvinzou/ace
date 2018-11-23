@@ -19,6 +19,7 @@ import com.huacainfo.ace.society.constant.CoinConfigType;
 import com.huacainfo.ace.society.dao.BehaviorAnnexDao;
 import com.huacainfo.ace.society.dao.BehaviorDao;
 import com.huacainfo.ace.society.model.Behavior;
+import com.huacainfo.ace.society.service.AuditNoticeService;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import com.huacainfo.ace.society.service.BehaviorService;
 import com.huacainfo.ace.society.service.PointsRecordService;
@@ -47,6 +48,7 @@ import java.util.List;
  */
 public class BehaviorServiceImpl implements BehaviorService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private BehaviorDao behaviorDao;
     @Autowired
@@ -59,6 +61,8 @@ public class BehaviorServiceImpl implements BehaviorService {
     private SqlSessionTemplate sqlSession;
     @Autowired
     private PointsRecordService pointsRecordService;
+    @Autowired
+    private AuditNoticeService auditNoticeService;
 
     private SqlSession getSqlSession() {
         SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
@@ -275,10 +279,23 @@ public class BehaviorServiceImpl implements BehaviorService {
             ResultResponse pointsRst = pointsRecordService.addPoints(userId, CoinConfigType.TAKE_A_PHOTO, id);
             logger.debug(JsonUtil.toJson(pointsRst));
         }
-
+        //发送微信公众号模板消息
+        sendToCustomer(id, userId, rst, remark);
+        //系统日志
         dataBaseLogService.log("审核市民行为详情", "市民行为详情",
                 String.valueOf(id), String.valueOf(id), "市民行为详情", userProp);
         return new MessageResponse(0, "市民行为详情审核完成！");
+    }
+
+    private void sendToCustomer(String id, String userId, String rst, String remark) {
+        try {
+            String content = "业务类型： 【市民行为】\n" +
+                    "审核结果：  " + (AuditState.PASS.equals(rst) ? "审核通过" : "审核失败") + "\n" +
+                    "审核描述：  " + (StringUtil.isEmpty(remark) ? "" : remark);
+            auditNoticeService.sendToCustomer(userId, content);
+        } catch (Exception e) {
+            logger.error("[society]" + "【市民行为】" + "审核消息发送异常[id={}]：{}", id, e);
+        }
     }
 
 
@@ -354,7 +371,20 @@ public class BehaviorServiceImpl implements BehaviorService {
         record.setLastModifyUserId("8888");
         behaviorDao.updateStatus(record);
 
+        //送审通知
+        sendToAdmin(obj);
+
         return new ResultResponse(ResultCode.SUCCESS, "送审成功");
+    }
+
+    private void sendToAdmin(Behavior obj) {
+        try {
+            String content = "业务类型： 【市民行为发布】\n" +
+                    "标题：  " + obj.getTitle();
+            auditNoticeService.sendToAdmin(content);
+        } catch (Exception e) {
+            logger.error("[society]" + "【市民行为】" + "送审消息发送异常[id={}]：{}", obj.getId(), e);
+        }
     }
 
     /**
