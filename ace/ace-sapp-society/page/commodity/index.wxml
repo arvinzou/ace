@@ -19,32 +19,43 @@
             </view>
         </view>
     </view>
-
-
     <view class='container'>
         <view class='title-box'>
             <view class='title'>商品描述</view>
             <view class='des wxParse'>
-               <rich-text nodes='{{ siteObj.summary }}'></rich-text>
+                <rich-text nodes='{{ siteObj.summary }}'></rich-text>
             </view>
+        </view>
+    </view>
+    <view class='container'>
+        <view class='title'>消费积分对象</view>
+        <view class='fee-content'>
+            <radio-group class="radio-group" bindchange="feeTypeChange">
+            <label class="radio">
+                <radio value="1" checked="checked" />个人积分
+                <radio value="2" style='margin-left:30rpx;'/>组织积分
+            </label>
+        </radio-group>
         </view>
     </view>
 </view>
 <view class='footer'>
-    <block wx:if='{{userinfoData.regType == "2"}}'>
-        <block wx:if='{{userinfoData.societyOrg.validPoints >= siteObj.costPoints}}'>
-            <button class='exchange' bindtap='buy' data-id='{{ siteObj.id }}'>立即兑换</button>
+    <block wx:if='{{userinfoData!="" && userinfoData!=null}}'>
+        <block wx:if='{{feeType == "2"}}'>
+            <block wx:if='{{userinfoData.societyOrg.validPoints >= siteObj.costPoints}}'>
+                <button class='exchange' bindtap='buy' data-id='{{ siteObj.id }}'>立即兑换</button>
+            </block>
+            <block wx:else>
+                <button class='unexchange'>积分不足</button>
+            </block>
         </block>
-        <block wx:else>
-            <button class='unexchange'>积分不足</button>
-        </block>
-    </block>
-    <block wx:else>
-        <block wx:if='{{userinfoData.person.validPoints >= siteObj.costPoints}}'>
-            <button class='exchange' bindtap='buy' data-id='{{ siteObj.id }}'>立即兑换</button>
-        </block>
-        <block wx:else>
-            <button class='unexchange'>积分不足</button>
+        <block wx:elif='{{feeType == "1"}}'>
+            <block wx:if='{{userinfoData.person.validPoints >= siteObj.costPoints}}'>
+                <button class='exchange' bindtap='buy' data-id='{{ siteObj.id }}'>立即兑换</button>
+            </block>
+            <block wx:else>
+                <button class='unexchange'>积分不足</button>
+            </block>
         </block>
     </block>
 </view>
