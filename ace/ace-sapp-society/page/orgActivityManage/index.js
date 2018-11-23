@@ -26,11 +26,7 @@ Page({
     optionUrl:function(){
         let that = this;
         let user = util.getSysUser();
-        that.data.url = cfg.adminActivityList;
-        that.setData({
-            type: 2
-        })
-        
+        that.data.url = cfg.adminActivityList;  
     },
 
 
