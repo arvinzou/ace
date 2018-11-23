@@ -28,31 +28,23 @@ pageEncoding="utf-8"%>
 
 
             </div>
-            <div class="col-md-9">
-
-                <div class="btn-group" role="group"  style="float:right;padding-right:5px">
-                    担保方式：<input
-                                           class="easyui-combobox" style="width: 200px" name="suretyType"
-                                           data-options="
-                                       url:'${portalPath}/dict/findListByCategoryId.do?categoryId=130&selected=false',
-                                       method:'get',
-                                       valueField:'code',
-                                       textField:'name',
-                                       panelHeight:'auto'">&nbsp;&nbsp;
-                    贷款名称： <input name="productName" type="text"
-                                    style="width: 200px;"/>&nbsp;&nbsp;
-                    贷款额度<input name="btmAmount" type="text" style="width: 50px;"/>万元 —
-                               <input name="topAmount" type="text" style="width: 50px;"/>万元&nbsp;&nbsp;
-                    贷款年利率<input name="btmRate" type="text" style="width: 50px;"/>% —
-                               <input name="topRate" type="text" style="width: 50px;"/>%
-
+                <div class="col-md-5">
                 </div>
 
 
-            </div>
+            <div class="col-md-5">
 
-            <div class="col-md-1" style="float:right;padding-right:5px">
+                <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                    <button type="button" authority="false" class="btn btn-default"  onclick="setParams('suretyType','');">全部</button>
+                    <button type="button" authority="false" class="btn btn-default"  onclick="setParams('suretyType','1');">信用担保</button>
+                    <button type="button" authority="false" class="btn btn-default" onclick="setParams('suretyType','2');">抵押担保</button>
+                </div>
+
                     <div class="input-group" >
+                        <input type="text"
+                               name="productName"
+                               class="form-control"
+                               placeholder="请输入贷款名称">
 
                         <span class="input-group-btn">
 							<button class="btn  btn-default search_btn"  id="btn-search"

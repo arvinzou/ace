@@ -76,6 +76,11 @@ function initEvents() {
             return false;
         }
     });
+     $(".btn-group .btn").bind('click', function (event) {
+            $(event.target).siblings().removeClass("active");
+            console.log(event);
+            $(event.target).addClass("active");
+        });
 }
 function audit(params) {
     console.log(params);
@@ -107,34 +112,6 @@ function audit(params) {
 
 function preview(id, title) {
     window.open(contextPath + "/www/html/finance/product_info.html?id=" + id);
-
-
-    // var dialog = $("#dialog-message-view").removeClass('hide').dialog({
-    //     modal: false,
-    //     width: 800,
-    //     title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-    //     title_html: true,
-    //     buttons: [
-    //
-    //         {
-    //             html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-    //             "class": "btn btn-info btn-xs",
-    //             click: function () {
-    //                 $(this).dialog("close");
-    //             }
-    //         },
-    //         {
-    //             html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-    //             "class": "btn btn-xs",
-    //             click: function () {
-    //                 $(this).dialog("close");
-    //             }
-    //         }
-    //     ]
-    // });
-    // $(dialog).parent().css("top", "1px");
-    // $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
-    // loadView(id);
 }
 
 function edit(rowid){
@@ -236,4 +213,9 @@ function loadText(id) {
             alert("加载错误！");
         }
     });
+}
+var params={};
+function setParams(key, value) {
+    params[key] = value;
+    jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");
 }
