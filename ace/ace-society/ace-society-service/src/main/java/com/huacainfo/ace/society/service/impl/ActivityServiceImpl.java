@@ -54,9 +54,6 @@ public class ActivityServiceImpl implements ActivityService {
     private SocietyOrgInfoDao societyOrgInfoDao;
     @Autowired
     private PersonInfoDao personInfoDao;
-
-    @Autowired
-    private PointsRecordService pointsRecordService;
     @Autowired
     private PointsRecordDao pointsRecordDao;
     @Autowired
@@ -482,6 +479,9 @@ public class ActivityServiceImpl implements ActivityService {
         if(null==activity){
             return new MessageResponse(ResultCode.FAIL, "线下活动信息丢失！");
         }
+        if(activity.getStatus().equals(rst)){
+            return new MessageResponse(ResultCode.FAIL, "活动状态重复修改");
+        }
         MessageResponse auditRs = auditRecordService.audit(BisType.ACTIVITY, id,activity.getInitiatorId(), rst, message, userProp);
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
@@ -491,7 +491,6 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
         activityDao.updateByPrimaryKey(activity);
-
         if ("33".equals(rst)){
             CoinConfig coinConfig=coinConfigService.selectCoinConfigByPrimaryKey(activity.getCoinconfigId()).getValue();
             int oCoin=coinConfig.getHost();
@@ -503,8 +502,10 @@ public class ActivityServiceImpl implements ActivityService {
             }
             if (pCoin>0){
                 personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin);
-                for(Object item:list){
-                    addPeoplePointsRecord(activity.getCategory(),pCoin,(String)item,activity.getId());
+                if(!CommonUtils.isBlank(list)){
+                    for(Object item:list){
+                        addPeoplePointsRecord(activity.getCategory(),pCoin,(String)item,activity.getId());
+                    }
                 }
             }
             CustomerVo vo=regService.findByUserId(activity.getInitiatorId());
