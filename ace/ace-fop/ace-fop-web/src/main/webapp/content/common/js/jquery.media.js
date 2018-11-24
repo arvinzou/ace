@@ -353,7 +353,7 @@ $.fn.media.xaml = function(el, opts) {
 	var props = {
 		width: opts.width,
 		height: opts.height,
-		background: opts.bgColor,
+		color: opts.bgColor,
 		inplaceInstallPrompt: opts.silverlight.inplaceInstallPrompt,
 		isWindowless: opts.silverlight.isWindowless,
 		framerate: opts.silverlight.framerate,
