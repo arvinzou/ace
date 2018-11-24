@@ -243,6 +243,8 @@ public class WWWServiceImpl implements WWWService {
         Map<String, Object> rst = new HashMap<>();
         rst.put("status", 0);
         this.liveDao.updateLiveVisitNum(id);
+        int count=this.liveDao.selectNop(id);
+        this.liveDao.updateLiveNopNum(id,count);
         return rst;
     }
 }
