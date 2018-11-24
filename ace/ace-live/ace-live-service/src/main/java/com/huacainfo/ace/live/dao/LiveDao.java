@@ -63,4 +63,8 @@ public interface LiveDao {
     int updateStatus( @Param("id") String id,@Param("status") String status);
 
     int updateAuditStatus( @Param("id") String id,@Param("status") String status);
+
+    int updateLiveNopNum( @Param("id")String id , @Param("count")int count);
+
+    int selectNop(String id);
 }

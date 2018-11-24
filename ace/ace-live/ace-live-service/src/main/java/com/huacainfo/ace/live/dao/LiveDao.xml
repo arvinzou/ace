@@ -111,11 +111,10 @@
         <if test="condition.auditStatus!=null and condition.auditStatus!=&quot;&quot;">
             and t.auditStatus =#{condition.auditStatus,jdbcType=CHAR}
         </if>
-        <!--
+
         <if test="condition.createUserId!=null and condition.createUserId!=&quot;&quot;">
             and t.createUserId =#{condition.createUserId,jdbcType=CHAR}
         </if>
-        -->
     </sql>
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
@@ -387,8 +386,10 @@
         update live set pop=ifnull(pop,0)+1 where id=#{id}
     </update>
     <update id="updateLiveVisitNum">
-        update live set nop=ifnull(nop,0)+1 where id=#{id}
+        update live set pop=ifnull(pop,0)+1 where id=#{id};
     </update>
+
+
 
     <resultMap id="SysUsersMap" type="com.huacainfo.ace.portal.model.Users">
         <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
@@ -437,5 +438,16 @@
         set
         auditStatus = #{status}
         where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectNop" resultType="int">
+        SELECT sum(p) from (
+        select count(DISTINCT(t.uid)) p from live_cmt t inner join live_rpt a on t.rptId=a.id
+        where a.rid=#{id}
+        union all
+        select count(DISTINCT(t.uid)) p from live_msg t where t.rid=#{id}) m;
+    </select>
+    <update id="updateLiveNopNum">
+        update live set nop=#{count} where id=#{id};
     </update>
 </mapper>
