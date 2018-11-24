@@ -501,8 +501,8 @@ public class ActivityServiceImpl implements ActivityService {
                 oCoin=oCoin+(signNum-baseNum)*coinConfig.getSubjoinNum();
             }
             if (pCoin>0){
-                personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin);
                 if(!CommonUtils.isBlank(list)){
+                    personInfoDao.addCoin(list,activity.getCoinconfigId(),pCoin,pCoin);
                     for(Object item:list){
                         addPeoplePointsRecord(activity.getCategory(),pCoin,(String)item,activity.getId());
                     }
