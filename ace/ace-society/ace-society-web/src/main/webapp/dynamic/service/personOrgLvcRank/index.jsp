@@ -55,7 +55,7 @@
                 <thead>
                 <tr>
                     <th width="30%"> 排名</th>
-                    <th width="40%"> 用户</th>
+                    <th width="40%"> 微信名称</th>
                     <th width="30%"> 累计获得爱心币</th>
                 </tr>
                 </thead>
