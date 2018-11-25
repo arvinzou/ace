@@ -2,7 +2,7 @@
     <view class='head whiteBg'>
         <view class='title'>{{list.title}}</view>
         <view class='info'>
-            <image lazy-load="true" mode='aspectFill' src='{{list.headimgurl}}'></image>
+            <image lazy-load="true" mode='aspectFill' src='{{list.headimgurl?list.headimgurl:"../../image/default_header.png"}}'></image>
             <text class='name'>{{list.createUserName}}</text>
             <text class='dateTime'>{{list.lastModifyDate}}</text>
             <text wx:if="{{list.category==1}}" class='type typeTag tagGreen'>公益活动</text>

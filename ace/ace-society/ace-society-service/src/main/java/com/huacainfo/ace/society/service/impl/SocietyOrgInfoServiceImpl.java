@@ -2,6 +2,7 @@ package com.huacainfo.ace.society.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -11,11 +12,15 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.OrgAdminDao;
 import com.huacainfo.ace.society.dao.PersonInfoDao;
+import com.huacainfo.ace.society.dao.RegDao;
 import com.huacainfo.ace.society.dao.SocietyOrgInfoDao;
 import com.huacainfo.ace.society.model.OrgAdmin;
 import com.huacainfo.ace.society.model.PersonInfo;
@@ -46,6 +51,8 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
+    private RegDao regDao;
+    @Autowired
     private PersonInfoDao personInfoDao;
     @Autowired
     private OrgAdminDao orgAdminDao;
@@ -57,6 +64,8 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
     private AuditRecordService auditRecordService;
     @Autowired
     private AuditNoticeService auditNoticeService;
+    @Autowired
+    private UsersService usersService;
 
 
     /**
@@ -294,6 +303,17 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         u.setName("system");
         String orgId = GUIDUtil.getGUID();
         params.setId(orgId);
+        //补增portal.department信息
+        ResultResponse rsDept = insertDeptInfo(params);
+        if (rsDept.getStatus() == ResultCode.FAIL) {
+            return new ResultResponse(ResultCode.FAIL, "部门信息新增失败");
+        }
+        //更新portal.users.department_id信息
+        ResultResponse usrDept = updateUsersDeptId(crtUserId, orgId);
+        if (rsDept.getStatus() == ResultCode.FAIL) {
+            throw new CustomException(usrDept.getInfo());
+        }
+        //入库组织信息
         MessageResponse ms = insertSocietyOrgInfo(params, u);
         if (ms.getStatus() == ResultCode.SUCCESS) {
             //添加组织管理员列表 --默认创建者即为管理员
@@ -303,6 +323,38 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         }
 
         return new ResultResponse(ms);
+    }
+
+    private ResultResponse updateUsersDeptId(String crtUserId, String orgId) throws Exception {
+        Users users = usersService.selectUsersByPrimaryKey(crtUserId).getValue();
+        if (users == null) {
+            return new ResultResponse(ResultCode.FAIL, "个人账户不存在");
+        }
+
+        users.setDepartmentId(orgId);
+        int i = regDao.updateUsersDeptId(users);
+        if (i == 1) {
+            return new ResultResponse(ResultCode.SUCCESS, "个人账户更新成功");
+        }
+        return new ResultResponse(ResultCode.FAIL, "个人账户更新失败");
+    }
+
+    private ResultResponse insertDeptInfo(SocietyOrgInfoVo params) {
+        Department d = new Department();
+        d.setDepartmentId(params.getId());
+        d.setParentDepartmentId("0002");
+        d.setDepartmentName(params.getOrgName());
+        d.setRegDate(new Date());
+        d.setCreateTime(new Date());
+        d.setStatus("1");
+        d.setSyid("society");
+
+        int i = regDao.insertDepartmentWithDepId(d);
+        if (i == 1) {
+            return new ResultResponse(ResultCode.SUCCESS, "新增成功");
+        }
+
+        return new ResultResponse(ResultCode.FAIL, "新增失败");
     }
 
     private void sendToAdmin(SocietyOrgInfoVo params) {
@@ -373,7 +425,7 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
      * @throws Exception
      */
     @Override
-    public MessageResponse addAdmin(String orgId, String userId) {
+    public MessageResponse addAdmin(String orgId, String userId) throws Exception {
         OrgAdmin params = new OrgAdmin();
         params.setOrgId(orgId);
         params.setUserId(userId);
@@ -386,9 +438,12 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         if (o != null) {
             orgAdminDao.deleteByOrgId(orgId);
         }
-
+        //
         int i = insertOrgAdmin(userId, orgId);
         if (i == 1) {
+            //更新个人账户部门信息
+            updateUsersDeptId(userId, orgId);
+
             return new MessageResponse(ResultCode.SUCCESS, "添加/更换成功");
         }
         return new MessageResponse(ResultCode.FAIL, "添加/更换失败");
