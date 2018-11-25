@@ -26,7 +26,7 @@ Page({
     optionUrl:function(){
         let that = this;
         let user = util.getSysUser();
-        that.data.url = cfg.userActivityList;
+        that.data.url = cfg.adminActivityList;  
     },
 
 
@@ -150,6 +150,47 @@ Page({
                 that.uploadFileFun(res.tempFilePaths[0], typ,id);
             }
         })
+    },
+    // 删除活动
+    delActivity: function (e) {
+        let that = this;
+        let id = e.currentTarget.dataset.id;
+        wx.showModal({
+            title: '提示',
+            content: '确定删除活动吗？',
+            success: function (res) {
+                if (res.confirm) {
+                    util.request(cfg.delActivity, {
+                        id: id,
+                    },
+                        function (data) {
+                            console.log(data.data);
+                            wx.hideNavigationBarLoading(); //完成停止加载
+                            wx.stopPullDownRefresh(); //停止下拉刷新
+                            that.onPullDownRefresh();
+                        }
+                    );
+                } 
+            }
+        });
+    },
+    //修改活动
+    editActivity: function (e) {
+        let that = this;
+        let id = e.currentTarget.dataset.id;
+        wx.navigateTo({
+            url: '../activityEdit/index?id='+id,
+        })
+    },
+    postReport:function(e){
+        let that=this;
+        let id = e.currentTarget.dataset.id;
+        if(id){
+            wx.navigateTo({
+                url: '../postReport/index?id=' + id,
+            })
+        }
+        return;
     },
 
     // 上传文件方法

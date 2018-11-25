@@ -34,7 +34,7 @@ Page({
                 function (rst) {
                     if (rst.status == 0) {
                         util.setSysUser(rst.data);
-                        if (rst.data.regType==2&&rst.data.societyOrg.orgType == 1) {
+                        if (rst.data.regType == 2 && rst.data.societyOrg.orgType == 1 && rst.data.societyOrg.status=='3') {
                             that.setData({
                                 hiddenBtn: false,
                             });
@@ -44,7 +44,7 @@ Page({
                 }
             );
         }
-        if (sysUserInfo.regType == 2 &&sysUserInfo.societyOrg.orgType == 1) {
+        if (sysUserInfo.regType == 2 && sysUserInfo.societyOrg.orgType == 1 && sysUserInfo.societyOrg.status == "3") {
             that.setData({
                 hiddenBtn: false,
             });
@@ -56,7 +56,8 @@ Page({
         util.request(cfg.findSocietyOrgInfos, {
                 orgType: '1',
                 start: that.data.start,
-                limit: 100
+                limit: 100,
+                status:'3',
             },
             function(rst) {
                 console.log(rst.rows);
@@ -173,7 +174,6 @@ Page({
 
     },
     onPageScroll: function(e) {
-
         if (e.scrollTop <= 0) {
             // 滚动到最顶部
             e.scrollTop = 0;

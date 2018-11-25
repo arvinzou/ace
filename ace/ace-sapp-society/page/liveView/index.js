@@ -361,6 +361,7 @@ Page({
     that.loadRpt();
     that.loadLive(id);
     that.loadTotalNumAndOrgInfo(id);
+    that.visit(id);
   },
 
   loadLive: function (id) {
@@ -479,4 +480,12 @@ Page({
             videoUrl: null
         });
   },
+  visit:function(id){
+    var that = this;
+    util.request(cfg.server + "/live/www/live/visit", { id: id},
+      function (data) {
+        console.log(data);
+      }
+    );
+  }
 });

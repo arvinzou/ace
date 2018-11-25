@@ -6,8 +6,13 @@ Page({
         category: 1,
         navbarArray: [
             {
-                text: '公益活动',
+                text: '党建活动',
                 active: 'navbar-item-active',
+                type: '4'
+            },
+            {
+                text: '公益活动',
+                active: '',
                 type: '1'
             }, {
                 text: '普及活动',
@@ -17,10 +22,6 @@ Page({
                 text: '创意活动',
                 active: '',
                 type: '3'
-            }, {
-                text: '党建活动',
-                active: '',
-                type: '4'
             }
         ],
         lists: [{
@@ -96,7 +97,7 @@ Page({
         }
         that.showLoading();
         util.request(cfg.publicActivityReports, {
-                category: that.data.category,
+            category: that.data.category == 1 ? '4' : that.data.category-1,
                 start: temp.start,
                 limit: that.data.limit,
             },
@@ -124,6 +125,8 @@ Page({
     setDataTarget:function(){
         let that = this;
         var tempDate = 'lists[' + (that.data.category - 1) + ']';
+        console.log(tempDate);
+        console.log(that.data);
         that.setData({
             category:that.data.category,
             [tempDate]: that.getTarget(),
@@ -170,6 +173,7 @@ Page({
     },
     switchChannel: function(targetChannelIndex) {
         let that = this;
+        console.log(targetChannelIndex);
         that.getArticles(targetChannelIndex);
         let navbarArray = that.data.navbarArray;
         navbarArray.forEach((item, index, array) => {

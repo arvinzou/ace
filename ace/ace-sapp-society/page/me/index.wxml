@@ -14,22 +14,20 @@
 
                 <view class='textInfo'>
                     <view class='name'>{{ userinfoData.nickName }}</view>
-                    <block wx:if='{{userinfoData.regType == "2"}}'>
+                    <!--<block wx:if='{{userinfoData.regType == "2"}}'>
                         <block wx:if='{{userinfoData.societyOrg.orgType == "1"}}'>
                             <view class='member-type'>会员类型: 党组织</view>
                         </block>
                         <block wx:else>
                             <view class='member-type'>会员类型: 社会组织</view>
                         </block>
-                    </block>
-                    <block wx:if='{{userinfoData.regType == "1"}}'>
+                    </block>-->
                         <block wx:if='{{userinfoData.person.politicalStatus == "1"}}'>
                             <view class='member-type'>会员类型：个人</view>
                         </block>
                         <block wx:if='{{userinfoData.person.politicalStatus == "2"}}'>
                             <view class='member-type'>会员类型：党员</view>
                         </block>
-                    </block>
                 </view>
             </view>
             <view class='data'>
@@ -69,10 +67,14 @@
                 <view><image lazy-load="true" src='../../image/icon_myorg.png'></image></view>
                 <view><text>我的组织</text></view>
             </navigator>
+             <navigator hidden="{{activityHide}}" url='../orgActivityManage/index' class='activity-menu-item'>
+                <view><image lazy-load="true" src='../../image/icon_me_activity.png'></image></view>
+                <view><text>组织活动</text></view>
+            </navigator>
             </block>
             <navigator hidden="{{activityHide}}" url='../activityManage/index' class='activity-menu-item'>
                 <view><image lazy-load="true" src='../../image/icon_me_activity.png'></image></view>
-                <view><text>我的活动</text></view>
+                <view><text>参与活动</text></view>
             </navigator>
             <navigator class='activity-menu-item' url='../myLive/index'>
                 <view><image lazy-load="true" src='../../image/icon_me_live.png'></image></view>
