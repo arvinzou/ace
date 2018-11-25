@@ -297,7 +297,7 @@
         FROM society.points_record t
         WHERE 1 = 1
         AND t.points > 0
-        and (select 1 from person_info where id = t.userId)
+        and EXISTS(select 1 from person_info where id = t.userId)
         <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
             AND t.createDate >= #{condition.startDate,jdbcType=VARCHAR}
         </if>
@@ -328,7 +328,7 @@
         FROM society.points_record t
         WHERE 1 = 1
         AND t.points > 0
-        and (select 1 from society_org_info where id = t.userId)
+        and EXISTS(select 1 from society_org_info where id = t.userId)
         <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
             AND t.createDate >= #{condition.startDate,jdbcType=VARCHAR}
         </if>
