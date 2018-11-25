@@ -92,6 +92,7 @@ Page({
                 if (data.data.length < that.store.limit) {
                     that.data.LoadOver=true;
                 }
+                console.log(that.data.nowDate);
                 that.setData({
                     list: that.data.list.concat(data.data),
                     Loadingstatus: false,

@@ -43,7 +43,7 @@
 
         <block wx:if='{{sysUserInfo.person.status =="3"}}'>
         <view class="btn-add-rpt" bindtap="add">
-        <image class="btn-img" src="../../image/add-red.png" />
+        <image class='btn-img' src='../../image/camera.png'></image>
         </view>
         </block>
 </view>

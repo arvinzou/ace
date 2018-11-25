@@ -11,7 +11,7 @@
                 </view>
             </view>
 
-            <swiper  interval="{{interval}}" style='height:200rpx' circular='true'>
+            <swiper  interval="{{interval}}" style='height:200rpx' circular='true' autoplay='true' interval='5000'>
             <block wx:for='{{activity}}' wx:for-index="idx">
             <swiper-item>
             <view class='activity' bindtap='showActivityDetail' data-id='{{item.id}}'>

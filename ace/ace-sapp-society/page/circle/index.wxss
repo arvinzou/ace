@@ -324,8 +324,8 @@ page{
     -webkit-appearance:none;
 }
 .videoImg{
-    width: 90%;
-    height: 300rpx;
+    width: 100%;
+    height: 30vh;
 }
 .mask{
     width: 100%;

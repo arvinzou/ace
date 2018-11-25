@@ -6,7 +6,7 @@
         <view class='base_info'>
             <text>{{activityInfo.title}}</text>
             <view class='organizer'>
-                <image lazy-load="true" class='headimage' src='{{activityInfo.headimgurl}}'></image>
+                <image lazy-load="true" class='headimage' src='{{activityInfo.headimgurl?activityInfo.headimgUrl:"../../image/default_header.png"}}'></image>
                 <text>{{activityInfo.orgName}}</text>
                 <text class='remark'>活动组织方</text>
             </view>
@@ -38,7 +38,7 @@
 
     <view class='coin_assign'>
         <block wx:if="{{activityInfo.participant>=0}}">
-            <view>志愿者：</view><view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
+            <view>参与者：</view><view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
         </block>
         <block wx:if="{{activityInfo.participant<0}}">
             <view>参与者：</view><view class='coin_xf'>{{activityInfo.participant}}爱心币</view>
