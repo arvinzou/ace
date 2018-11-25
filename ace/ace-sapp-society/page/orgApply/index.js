@@ -62,7 +62,19 @@ Page({
             topNum: 0,
         });
     },
-
+    emailInput: function(e){
+        var email = e.detail.value;
+        var reg = new RegExp('^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+        if(!reg.test(email)){
+            wx.showModal({
+                title: '提示',
+                content: '邮箱格式不正确！',
+                success: function (res) { }
+            });
+            return;
+        }
+       
+    },
     /**
      * 组织注册
      */
@@ -100,15 +112,15 @@ Page({
             });
             return;
         }
-        if (email == undefined || email == null || email == '') {
+        var reg = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');  
+        if(!reg.test(email)){
             wx.showModal({
                 title: '提示',
-                content: '邮箱不能为空！',
-                success: function(res) {}
+                content: '邮箱格式不正确！',
+                success: function (res) { }
             });
             return;
         }
-
         util.request(cfg.server + '/society/www/user/newOrgInfo', {
                 "unionId": wx.getStorageSync("WX-SESSION-ID"),
                 "jsonData": JSON.stringify(jsonData)
