@@ -232,12 +232,17 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
-    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.ActivityDetailVo"></resultMap>
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.ActivityDetailVo">
+
+    </resultMap>
 
     <sql id="Vo_Column_List">
     t.id, t.activityId, t.userId, t.identity, t.points, t.signInState, t.signInDate, t.remark,t.signImgUrl, t.status,
     t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
-    u.name,u.mobile,i.avatarUrl as headimgurl,i.nickName as nickname
+        p.realName as name,
+        p.mobilePhone as mobile,
+        i.avatarUrl AS headimgurl,
+        i.nickName AS nickname
   </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -257,7 +262,7 @@
 
     <sql id="whereCondition">
         from activity_detail t
-        LEFT  JOIN  portal.users u ON  t.userId=u.user_id
+        LEFT JOIN person_info p ON t.userId = p.id
         LEFT  JOIN  portal.wx_user i ON  t.userId=i.unionid
         where t.status <![CDATA[ <> ]]> 0
         <!--<if test="condition.title !=null and condition.title !=&quot;&quot;">-->
