@@ -4,6 +4,7 @@ package com.huacainfo.ace.society.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -12,12 +13,10 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.*;
-import com.huacainfo.ace.society.model.Activity;
-import com.huacainfo.ace.society.model.ActivityDetail;
-import com.huacainfo.ace.society.model.CoinConfig;
-import com.huacainfo.ace.society.model.PointsRecord;
+import com.huacainfo.ace.society.model.*;
 import com.huacainfo.ace.society.service.*;
 import com.huacainfo.ace.society.vo.ActivityDetailVo;
 import com.huacainfo.ace.society.vo.ActivityQVo;
@@ -58,6 +57,8 @@ public class ActivityServiceImpl implements ActivityService {
     private PointsRecordDao pointsRecordDao;
     @Autowired
     private RegService regService;
+    @Autowired
+    private AuditNoticeService auditNoticeService;
 
     /**
      * @throws
@@ -142,6 +143,13 @@ public class ActivityServiceImpl implements ActivityService {
             return new MessageResponse(1, "线下活动名称重复！");
         }
         this.activityDao.insertSelective(o);
+        StringBuffer content = new StringBuffer();
+        content.append("活动发布审核通知\n")
+                .append(wxUser.getNickName())
+                .append(" 刚刚发布了一个活动，请及时审核.\n")
+                .append("芙蓉街道智慧服务社区系统\n")
+                .append(DateUtil.getNow());
+        auditNoticeService.sendToAdmin(content.toString());
         auditRecordService.submit(GUIDUtil.getGUID(), BisType.ACTIVITY, o.getId(), wxUser.getUnionId());
         return new MessageResponse(0, "添加线下活动完成！");
     }
@@ -196,6 +204,13 @@ public class ActivityServiceImpl implements ActivityService {
         if (ResultCode.FAIL == auditRs.getStatus()) {
             return auditRs;
         }
+        StringBuffer content = new StringBuffer();
+        content.append("活动发布审核通知\n")
+                .append(wxUser.getNickName())
+                .append(" 刚刚发布了一个活动，请及时审核.\n")
+                .append("芙蓉街道智慧服务社区系统\n")
+                .append(DateUtil.getNow());
+        auditNoticeService.sendToAdmin(content.toString());
         return new MessageResponse(0, "添加线下活动完成！");
     }
 
@@ -456,9 +471,33 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setLastModifyUserId(userProp.getUserId());
         activity.setLastModifyUserName(userProp.getName());
         activityDao.updateByPrimaryKey(activity);
+        sendToCustomer(activity, rst, remark);
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
     }
+
+
+    private void sendToCustomer(Activity activity, String rst, String remark) {
+        try {
+            StringBuffer content = new StringBuffer();
+            content.append("活动发布审核通知\n")
+                    .append(activity.getTitle())
+                    .append("，活动发布审核")
+                    .append((AuditState.PASS.equals(rst) ? "通过" : "驳回"));
+            if (StringUtil.isNotEmpty(remark)) {
+                content.append("，[" + remark + "].\n");
+            } else {
+                content.append(".\n");
+            }
+            content.append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToCustomer(activity.getInitiatorId(), content.toString());
+        } catch (Exception e) {
+            logger.error("[society]" + "【市民行为】" + "审核消息发送异常[id={}]：{}", activity.getId(), e);
+        }
+    }
+
 
 
     /**
@@ -513,8 +552,31 @@ public class ActivityServiceImpl implements ActivityService {
             addOrgPointsRecord(activity.getCategory(),oCoin,orgId,activity.getId());
             societyOrgInfoDao.addCoin(orgId, oCoin);
         }
+        sendToCustomers(activity, rst, message);
         dataBaseLogService.log("审核线下活动", "线下活动", String.valueOf(id), String.valueOf(id), "线下活动", userProp);
         return new MessageResponse(0, "线下活动审核完成！");
+    }
+
+
+    private void sendToCustomers(Activity activity, String rst, String remark) {
+        try {
+            StringBuffer content = new StringBuffer();
+            content.append("活动签到审核通知\n")
+                    .append(activity.getTitle())
+                    .append("，活动签到审核")
+                    .append("33".equals(rst) ? "通过" : "驳回");
+            if (StringUtil.isNotEmpty(remark)) {
+                content.append("，[" + remark + "].\n");
+            } else {
+                content.append(".\n");
+            }
+            content.append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+
+            auditNoticeService.sendToCustomer(activity.getInitiatorId(), content.toString());
+        } catch (Exception e) {
+            logger.error("[society]" + "【市民行为】" + "审核消息发送异常[id={}]：{}", activity.getId(), e);
+        }
     }
 
     public ResultResponse addOrgPointsRecord(String type,int coin,String userId,  String bisId){

@@ -13,6 +13,7 @@ import com.huacainfo.ace.society.constant.BisType;
 import com.huacainfo.ace.society.dao.AuditRecordDao;
 import com.huacainfo.ace.society.model.Activity;
 import com.huacainfo.ace.society.model.AuditRecord;
+import com.huacainfo.ace.society.service.AuditNoticeService;
 import com.huacainfo.ace.society.service.AuditRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +48,8 @@ public class ActivityReportServiceImpl implements ActivityReportService {
     private AuditRecordService auditRecordService;
     @Autowired
     private AuditRecordDao auditRecordDao;
+    @Autowired
+    private AuditNoticeService auditNoticeService;
 
     /**
      * @throws
@@ -180,6 +183,13 @@ public class ActivityReportServiceImpl implements ActivityReportService {
             }else if(!record.getAuditState().equals(activityReport.getStatus())){
                 auditRecordService.reaudit(BisType.ACTIVITY_REPORT,activityReport.getId(),activityReport.getCreateUserId(),activityReport.getStatus(),"重新审核",wxUser);
             }
+            StringBuffer content = new StringBuffer();
+            content.append("活动报道发布审核通知\n")
+                    .append(wxUser.getNickName())
+                    .append(" 刚刚发布了一个活动报道，请及时审核.\n")
+                    .append("芙蓉街道智慧服务社区系统\n")
+                    .append(DateUtil.getNow());
+            auditNoticeService.sendToAdmin(content.toString());
         }
         return new ResultResponse(ResultCode.SUCCESS, "变更活动报道完成！");
     }
