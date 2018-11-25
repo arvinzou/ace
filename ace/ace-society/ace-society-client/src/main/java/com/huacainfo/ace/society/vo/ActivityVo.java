@@ -36,6 +36,16 @@ private List<ActivityDetailVo>  activityDetailVoList;
 
     private Integer host;
 
+    private String orgCover;
+
+    public String getOrgCover() {
+        return orgCover;
+    }
+
+    public void setOrgCover(String orgCover) {
+        this.orgCover = orgCover;
+    }
+
     public Integer getParticipant() {
         return participant;
     }

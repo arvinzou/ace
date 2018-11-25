@@ -73,7 +73,7 @@
                     </view>
                     <view class="input-style bottom-line">
                         <view class="title" style='width:25%'>邮箱
-                         <text>*</text>
+                  
                         </view>
                         <input name='email' style='width:75%' placeholder='请输入邮箱' placeholder-class='placeholder-text'></input>
                     </view>
@@ -97,7 +97,7 @@
                     <image lazy-load="true" mode='widthFix' src='../../image/icon_success.png'></image>
                 </view>
                 <text class='fontStyle1'>注册组织成功</text>
-                <text class='fontStyle2'>活动由芙蓉街道统一管理,待审核通过后活动进入平台</text>
+                <text class='fontStyle2'>芙蓉街</text>
                 <view class='fontStyle2'>
                     <text>联系电话：</text>
                     <text bindtap="callphone" data-mobile='0736-2323252' class="phone">0736-2323252</text>
