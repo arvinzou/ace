@@ -185,7 +185,7 @@ public class WActivityController extends SocietyBaseController {
     public ResultResponse selectActivityDByPrimaryKey(String activityId) throws Exception {
         ActivityDetailQVo activityDetailQVo = new ActivityDetailQVo();
         activityDetailQVo.setActivityId(activityId);
-        List<ActivityDetailVo> activityDetailVos = this.activityDetailService.findActivityDetailList(activityDetailQVo, 0, 100, null).getRows();
+        List<ActivityDetailVo> activityDetailVos = this.activityDetailService.findActivityDetailList(activityDetailQVo, 0, 1000, null).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", activityDetailVos);
     }
 

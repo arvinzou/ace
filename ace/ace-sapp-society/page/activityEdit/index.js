@@ -149,7 +149,7 @@ Page({
             });
             return;
         }
-        if (!(startDate < dendline && dendline <= endDate)) {
+        if (!(startDate < endDate && dendline <= startDate)) {
             wx.showModal({
                 title: '提示',
                 content: '设置时间错误'

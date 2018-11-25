@@ -170,12 +170,20 @@ Page({
         const endDate = that.formatDT(params.endDate);
         const dendline = that.formatDT(params.dendline ? params.dendline : params.startDate);
         const clazz = params.clazz;
+        const parterNum = params.parterNum;
         params.coverUrl = that.data.form.coverUrl;
         params.category = that.data.category;
         if (that.data.category == 4 && !clazz) {
             wx.showModal({
                 title: '提示',
                 content: '请填写活动期数',
+            });
+            return;
+        }
+        if (parterNum>1000) {
+            wx.showModal({
+                title: '提示',
+                content: '参与人员不可以大于1000',
             });
             return;
         }
