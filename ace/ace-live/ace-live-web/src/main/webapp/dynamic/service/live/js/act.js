@@ -1,7 +1,6 @@
 var loading = {};
 var params = {
-    limit: 10,
-    'deptId': userProp.corpId
+    limit: 10
 };
 window.onload = function () {
     initPage();
