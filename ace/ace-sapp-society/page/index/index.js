@@ -12,6 +12,7 @@ Page({
         autoplay: true,
         interval: 5000,
         duration: 500,
+        isFrist:true,
         timer: {
             0: {
                 hour: "00",
@@ -56,17 +57,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        var that = this;
-        // 判断有没有鉴权
-        if (!util.is_login()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../index/index&type=switchTab"
-            });
-        }
-        // 判断有没有注册
-        if (util.getSysUser()) {
-            that.initUserData();
-        }
+       
     },
 
     /**
@@ -238,7 +229,15 @@ Page({
      */
     onShow: function () {
         var that = this;
-        if (util.getSysUser()) {
+        // 判断有没有鉴权
+        if (!util.is_login()) {
+            wx.navigateTo({
+                url: "../userinfo/index?url=../index/index&type=switchTab"
+            });
+            return;
+        }
+        if (!util.getSysUser()&&that.data.isFrist) {
+            that.data.isFrist=false;
             that.initUserData();
         }
         that.activityIng(5);
@@ -265,9 +264,6 @@ Page({
      */
     onPullDownRefresh: function () {
         var that = this;
-        if (util.getSysUser()) {
-            that.initUserData();
-        }
         that.activityIng(5);
         that.initReport();
         wx.stopPullDownRefresh();
