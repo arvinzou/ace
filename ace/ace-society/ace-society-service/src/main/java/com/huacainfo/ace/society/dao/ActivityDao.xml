@@ -38,7 +38,7 @@
     <sql id="Base_Column_List">
     t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,
     t.volunteerNum,  t.clazz, t.volunteerPoints, t.parterNum, t.parterPoints, t.remark, t.coinconfigId, t.status, t.createUserId,
-    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ar.status as arStatus,s.orgName,cc.host,cc.participant
+    t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ar.status as arStatus,s.orgName s.orgCover,cc.host,cc.participant
   </sql>
 
     <sql id="Vo_Column_List1">
@@ -67,7 +67,7 @@
         select
         a.id, a.initiatorId, a.title, a.category, a.mode,a.purpose, a.location, a.coverUrl, a.startSignImgUrl, a.endSignImgUrl, a.dendline, a.startDate, a.endDate,
         a.volunteerNum, a.clazz, a.volunteerPoints, a.parterNum, a.parterPoints, a.remark, a.coinconfigId, a.status, a.createUserId,
-        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.avatarUrl as headimgurl,s.orgName,c.host,c.participant
+        a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.avatarUrl as headimgurl,s.orgName,s.orgCover,c.host,c.participant
         from activity a
 --         LEFT  JOIN  portal.users u ON  a.initiatorId=u.user_id
         LEFT  JOIN  portal.wx_user i ON  a.initiatorId=i.unionid
