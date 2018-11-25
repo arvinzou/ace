@@ -87,9 +87,6 @@ function initEvents() {
         clearBtn: true,//清除按钮
         forceParse: 0
     });
-    $('input[name=startDate]').focus(function () {
-        $(this).blur();//不可输入状态
-    });
 
      $("input[name=endDate]").datetimepicker({
             format: 'yyyy-mm-dd hh:ii',
@@ -103,9 +100,7 @@ function initEvents() {
             clearBtn: true,//清除按钮
             forceParse: 0
         });
-        $('input[name=startDate]').focus(function () {
-            $(this).blur();//不可输入状态
-        });
+
 }
 
 
