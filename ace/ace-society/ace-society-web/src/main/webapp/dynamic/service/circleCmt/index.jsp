@@ -96,7 +96,7 @@
 
                             <td>
                                 <div class="col-md-4 my-gallery">
-                                    {@if item.headimgurl!='' && item.headimgurl!=null && item.headimgurl!=undefined && item.headimgurl.length>3'}
+                                    {@if item.headimgurl}
                                     <img src="\${item.headimgurl}" class="cover"/>
                                     {@else}
                                     <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
@@ -130,6 +130,8 @@
     {@/each}
 </script>
 ﻿
+
+
 
 
 <style>
