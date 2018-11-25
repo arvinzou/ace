@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,6 +110,11 @@ public class WActivityController extends SocietyBaseController {
     public ResultResponse findActivitying(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setStatus("3");
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
+        for(int i=1;i<rst.size();i++){
+           if(!"3".equals(rst.get(i).getStatus())){
+               rst.remove(i);
+           }
+        }
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
     }
 

@@ -13,7 +13,17 @@
             </view>
         </view>
     </view>
-
+     <view class='container'>
+        <view class='title'>消费积分对象</view>
+        <view class='fee-content'>
+            <radio-group class="radio-group" bindchange="feeTypeChange">
+            <label class="radio">
+                <radio value="1" checked="checked" />个人积分
+                <radio value="2" style='margin-left:30rpx;'/>组织积分
+            </label>
+        </radio-group>
+        </view>
+    </view>
     <!--<view class='container'>
         <view class='choose_box'>
             <text class='choose-state'>未选</text>
@@ -28,17 +38,6 @@
             <view class='des'>
                <rich-text nodes='{{ summary }}'></rich-text>
             </view>
-        </view>
-    </view>
-    <view class='container'>
-        <view class='title'>消费积分对象</view>
-        <view class='fee-content'>
-            <radio-group class="radio-group" bindchange="feeTypeChange">
-            <label class="radio">
-                <radio value="1" checked="checked" />个人积分
-                <radio value="2" style='margin-left:30rpx;'/>组织积分
-            </label>
-        </radio-group>
         </view>
     </view>
 </view>
