@@ -33,14 +33,14 @@
 
         </div>
 
-         <div class="col-sm-7">
+         <div class="col-sm-7" style="float:right">
     <form onsubmit="return t_query()">
          <div class="input-group">
               <div style="float:right;margin-right:15px" >
-              <input class="easyui-datebox" name="startDate"
-                     style="width: 150px; height: 30px; line-height: 25px;"> 至
-              <input class="easyui-datebox" name="endDate"
-                     style="width: 150px; height: 30px; line-height: 25px;">
+              时间：<input class="easyui-datebox" name="startDate"
+                     style="width: 200px; height: 30px; line-height: 25px;"> 至
+                    <input class="easyui-datebox" name="endDate"
+                     style="width: 200px; height: 30px; line-height: 25px;">
               </div>
          <div class="input-group-btn">
               <button class="btn  btn-default search_btn" type="submit">搜索</button>
