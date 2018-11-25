@@ -103,14 +103,12 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         if (CommonUtils.isBlank(o.getOrgName())) {
             return new MessageResponse(1, "组织名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getEmail())) {
-            return new MessageResponse(1, "邮箱不能为空！");
-        }
+
 
         o.setId(StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId());
         int temp = this.societyOrgInfoDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "社会组织信息名称重复！");
+            return new MessageResponse(1, "组织信息名称重复！");
         }
 
         o.setCreateDate(new Date());
@@ -118,11 +116,11 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         societyOrgInfoDao.insert(o);
-        dataBaseLogService.log("添加社会组织信息", "社会组织信息", "", o.getId(), o.getId(), userProp);
+        dataBaseLogService.log("添加组织信息", "组织信息", "", o.getId(), o.getId(), userProp);
         //自动送审
         sendAudit(o);
 
-        return new MessageResponse(0, "添加社会组织信息完成！");
+        return new MessageResponse(0, "添加组织信息完成！");
     }
 
     public ResultResponse sendAudit(SocietyOrgInfo obj) {
@@ -300,9 +298,9 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
         if (ms.getStatus() == ResultCode.SUCCESS) {
             //添加组织管理员列表 --默认创建者即为管理员
             insertOrgAdmin(crtUserId, orgId);
+            //通知管理员去审核
+            sendToAdmin(params);
         }
-        //通知管理员去审核
-        sendToAdmin(params);
 
         return new ResultResponse(ms);
     }
