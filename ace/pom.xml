@@ -65,6 +65,7 @@
         <module>ace-society</module>
         <module>ace-jxb</module>
         <module>ace-fop</module>
+        <module>ace-live</module>
 
         <!--<module>ace-live</module>-->
 
