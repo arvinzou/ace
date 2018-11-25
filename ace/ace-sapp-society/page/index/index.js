@@ -57,16 +57,6 @@ Page({
      */
     onLoad: function (options) {
         var that = this;
-        // 判断有没有鉴权
-        if (!util.is_login()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../index/index&type=switchTab"
-            });
-        }
-        // 判断有没有注册
-        if (!util.getSysUser()) {
-            that.initUserData();
-        }
     },
 
     /**
@@ -238,6 +228,15 @@ Page({
      */
     onShow: function () {
         var that = this;
+        if (!util.is_login()) {
+            wx.navigateTo({
+                url: "../userinfo/index?url=../index/index&type=switchTab"
+            });
+        }
+        // 判断有没有注册
+        if (!util.getSysUser()) {
+            that.initUserData();
+        }
         that.activityIng(5);
         that.initReport();
     },

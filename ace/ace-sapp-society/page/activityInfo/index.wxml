@@ -6,7 +6,7 @@
         <view class='base_info'>
             <text>{{activityInfo.title}}</text>
             <view class='organizer'>
-                <image lazy-load="true" class='headimage' src='{{activityInfo.headimgurl}}'></image>
+                <image lazy-load="true" class='headimage' src='{{activityInfo.headimgurl?activityInfo.headimgUrl:"../../image/default_header.png"}}'></image>
                 <text>{{activityInfo.orgName}}</text>
                 <text class='remark'>活动组织方</text>
             </view>
