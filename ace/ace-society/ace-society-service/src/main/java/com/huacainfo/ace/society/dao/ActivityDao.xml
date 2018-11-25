@@ -475,7 +475,8 @@
     <sql id="fromCondition1">
         from activity t
         LEFT JOIN  activity_report ar on ar.activityId=t.id
-        LEFT JOIN society_org_info s ON s.id=t.initiatorId
+        LEFT JOIN org_admin o ON o.userId=a.initiatorId
+        LEFT JOIN society_org_info s ON s.id=o.orgId
         LEFT JOIN coin_config cc ON t.coinconfigId=cc.id
     </sql>
 
@@ -483,7 +484,8 @@
         from activity t
         RIGHT JOIN  activity_detail ad on t.id=ad.activityId
         LEFT JOIN  activity_report ar on ar.activityId=t.id
-        LEFT JOIN society_org_info s ON s.id=t.initiatorId
+        LEFT JOIN org_admin o ON o.userId=a.initiatorId
+        LEFT JOIN society_org_info s ON s.id=o.orgId
         LEFT JOIN coin_config cc ON t.coinconfigId=cc.id
     </sql>
 
