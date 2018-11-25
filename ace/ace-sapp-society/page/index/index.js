@@ -64,7 +64,7 @@ Page({
             });
         }
         // 判断有没有注册
-        if (!util.getSysUser()) {
+        if (util.getSysUser()) {
             that.initUserData();
         }
     },
@@ -238,6 +238,9 @@ Page({
      */
     onShow: function () {
         var that = this;
+        if (util.getSysUser()) {
+            that.initUserData();
+        }
         that.activityIng(5);
         that.initReport();
     },
@@ -262,6 +265,9 @@ Page({
      */
     onPullDownRefresh: function () {
         var that = this;
+        if (util.getSysUser()) {
+            that.initUserData();
+        }
         that.activityIng(5);
         that.initReport();
         wx.stopPullDownRefresh();
