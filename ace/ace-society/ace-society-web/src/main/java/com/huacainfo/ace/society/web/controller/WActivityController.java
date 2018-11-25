@@ -110,10 +110,12 @@ public class WActivityController extends SocietyBaseController {
     public ResultResponse findActivitying(ActivityQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setStatus("3");
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
-        for(int i=1;i<rst.size();i++){
-           if(!"3".equals(rst.get(i).getStatus())){
-               rst.remove(i);
-           }
+        if(page.getLimit()<9){
+            for(int i=1;i<rst.size();i++){
+                if(!"3".equals(rst.get(i).getStatus())){
+                    rst.remove(i);
+                }
+            }
         }
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", rst);
     }
@@ -183,7 +185,7 @@ public class WActivityController extends SocietyBaseController {
     public ResultResponse selectActivityDByPrimaryKey(String activityId) throws Exception {
         ActivityDetailQVo activityDetailQVo = new ActivityDetailQVo();
         activityDetailQVo.setActivityId(activityId);
-        List<ActivityDetailVo> activityDetailVos = this.activityDetailService.findActivityDetailList(activityDetailQVo, 0, 100, null).getRows();
+        List<ActivityDetailVo> activityDetailVos = this.activityDetailService.findActivityDetailList(activityDetailQVo, 0, 1000, null).getRows();
         return new ResultResponse(ResultCode.SUCCESS, "获取成功", activityDetailVos);
     }
 

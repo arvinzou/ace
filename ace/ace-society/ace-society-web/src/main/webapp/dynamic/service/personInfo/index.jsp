@@ -88,7 +88,7 @@
         <td>
             <div class="row">
                 <div class="col-md-12">
-                    {@if item.headimgurl!=null && item.headimgurl !=''}
+                    {@if item.headimgurl!=null && item.headimgurl !='' && item.headimgurl != undefined && item.headimgul!='-'}
                         <img src="\${item.headimgurl}" class="cover"/>
                     {@else}
                         <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>

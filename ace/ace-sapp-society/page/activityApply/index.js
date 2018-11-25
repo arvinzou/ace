@@ -30,10 +30,20 @@ Page({
             endDate: '',
             parterNum: '',
             coverUrl: '',
-        }
+        },
+        index: 0,
     },
+
+    bindPickerChange: function(e) {
+        let that = this;
+        that.setData({
+            index: e.detail.value,
+            category: parseInt(e.detail.value) + 1
+        })
+    },
+
     onLoad(e) {
-        let that=this;
+        let that = this;
         let cat = e.category;
         that.initValidate();
         let name = util.getSysUser().societyOrg.orgName;
@@ -41,6 +51,29 @@ Page({
         // 精确到分的处理，将数组的秒去掉
         var lastArray = obj.dateTimeArray.pop();
         var lastTime = obj.dateTime.pop();
+        var sysUser = util.getSysUser();
+        let array = ['公益活动', '普及活动', '创意活动'];
+        let objectArray = [{
+                id: 1,
+                name: '公益活动'
+            },
+            {
+                id: 2,
+                name: '普及活动'
+            },
+            {
+                id: 3,
+                name: '创意活动'
+            },
+
+        ];
+        if (sysUser.societyOrg.orgType == 1) {
+            array.push('党建活动');
+            objectArray.push({
+                id: 4,
+                name: '党建活动'
+            });
+        }
         that.getCoin(cat);
         that.setData({
             dateTimeArray: obj.dateTimeArray,
@@ -48,15 +81,20 @@ Page({
             endDate: obj.dateTime,
             dendline: obj.dateTime,
             category: cat,
-            form:{
+            array:array,
+            objectArray: objectArray,
+            form: {
                 name: name
-            }
+            },
+            index: cat - 1
         });
     },
-    getCoin: function (cat){
-        let that =this;
-        util.request(cfg.getCoin,{id:cat},function(rst){
-            if(rst.status==0){
+    getCoin: function(cat) {
+        let that = this;
+        util.request(cfg.getCoin, {
+            id: cat
+        }, function(rst) {
+            if (rst.status == 0) {
                 that.setData({
                     host: rst.data.host
                 })
@@ -83,7 +121,7 @@ Page({
             dateTimeArray: dateArr
         });
     },
-    callphone: function (e) {
+    callphone: function(e) {
         console.log(e);
         let data = e.currentTarget.dataset
         let pmobile = data.mobile;
@@ -119,25 +157,33 @@ Page({
         })
     },
 
-    colseThis:function(){
+    colseThis: function() {
         wx.navigateBack({});
         return;
     },
 
 
     formSubmit(e) {
-        let that=this;
+        let that = this;
         const params = e.detail.value
         const startDate = that.formatDT(params.startDate);
         const endDate = that.formatDT(params.endDate);
         const dendline = that.formatDT(params.dendline ? params.dendline : params.startDate);
-        const clazz=params.clazz;
+        const clazz = params.clazz;
+        const parterNum = params.parterNum;
         params.coverUrl = that.data.form.coverUrl;
         params.category = that.data.category;
-        if (that.data.category==4&&!clazz){
+        if (that.data.category == 4 && !clazz) {
             wx.showModal({
                 title: '提示',
                 content: '请填写活动期数',
+            });
+            return;
+        }
+        if (parterNum>1000) {
+            wx.showModal({
+                title: '提示',
+                content: '参与人员不可以大于1000',
             });
             return;
         }
@@ -161,7 +207,7 @@ Page({
                 jsons: JSON.stringify(params)
             },
             function(data) {
-                if (data.status==0){
+                if (data.status == 0) {
                     that.nextOne();
                     return;
                 }
@@ -176,22 +222,22 @@ Page({
         const rules = {
             title: {
                 required: true,
-                minlength: 5,
+                minlength: 1,
                 maxlength: 34
             },
             location: {
                 required: true,
-                minlength: 5,
+                minlength: 1,
                 maxlength: 20
             },
             mode: {
                 required: true,
-                minlength: 10,
+                minlength: 1,
                 maxlength: 300
             },
             purpose: {
                 required: true,
-                minlength: 10,
+                minlength: 1,
                 maxlength: 300
             },
             parterNum: {
@@ -200,9 +246,10 @@ Page({
             },
             clazz: {
                 required: false,
-                digits: true
+                digits: true,
+
             },
-            coverUrl:{
+            coverUrl: {
                 required: true,
             }
         }
