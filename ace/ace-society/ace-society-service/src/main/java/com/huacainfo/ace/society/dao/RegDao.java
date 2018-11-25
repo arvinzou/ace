@@ -1,6 +1,7 @@
 package com.huacainfo.ace.society.dao;
 
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.portal.model.Department;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.society.vo.CustomerVo;
 import org.apache.ibatis.annotations.Param;
@@ -18,4 +19,8 @@ public interface RegDao {
     CustomerVo findByUserId(String userId);
 
     Userinfo findAdministrator();
+
+    int insertDepartmentWithDepId(Department department);
+
+    int updateUsersDeptId(@Param("users") Users users);
 }

@@ -226,7 +226,7 @@ Page({
             })
             return;
         }
-        vals.bisType="reportComment";
+        vals.bisType = "reportComment_" + that.data.list.category;
         vals.bisId=that.data.id;
         util.request(cfg.submitComment, vals,
             function (rst) {

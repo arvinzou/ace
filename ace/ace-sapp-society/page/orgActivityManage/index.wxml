@@ -21,6 +21,8 @@
 
             <view wx:if='{{item.status==3}}' class='status status4'>发布已通过</view>
 
+            <view wx:if='{{item.status==3&&item.startDate>nowDate}}' bindtap='notTimeStart' class='status status2 .opacity6'>活动开始</view>
+
             <view wx:if='{{item.status==3&&item.startDate<nowDate}}' bindtap='activitySign' data-type='activityStart' data-id='{{item.id}}' class='status status2'>活动开始</view>
 
             <view wx:if='{{item.status==31}}' bindtap='activitySign' data-type='activityEnd' data-id='{{item.id}}' class='status status2'>活动结束</view>

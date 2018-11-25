@@ -329,7 +329,7 @@ public class PointsRecordServiceImpl implements PointsRecordService {
 //            societyOrgInfoDao.addCoin(userId, points);
 //        }
         //补增积分流水
-        addPointsRecord(userId, BisType.POINTS_BEHAVIOR, bisId, points);
+        addPointsRecord(userId, bisType, bisId, points);
 
         return new ResultResponse(ResultCode.SUCCESS,
                 "积分变动成功[userId=" + userId + ", bisId=" + bisId + "]");
