@@ -136,7 +136,7 @@ public interface SocietyOrgInfoService {
      * @return SingleResult<OrgAdminVo>
      * @throws Exception
      */
-    MessageResponse addAdmin(String orgId, String userId);
+    MessageResponse addAdmin(String orgId, String userId) throws Exception;
 
 
     /**

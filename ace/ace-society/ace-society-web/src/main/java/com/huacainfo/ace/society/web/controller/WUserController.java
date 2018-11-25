@@ -1,6 +1,7 @@
 package com.huacainfo.ace.society.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
@@ -53,7 +54,11 @@ public class WUserController extends SocietyBaseController {
         //申请表单
         SocietyOrgInfoVo params = JsonUtil.toObject(jsonData, SocietyOrgInfoVo.class);
 
-        return societyOrgInfoService.newOrgInfo(unionId, params);
+        try {
+            return societyOrgInfoService.newOrgInfo(unionId, params);
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
     }
 
     /**

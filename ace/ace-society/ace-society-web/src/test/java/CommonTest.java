@@ -1,7 +1,6 @@
-import com.huacainfo.ace.common.plugins.wechat.api.WeChatCustomerMsgApi;
-import com.huacainfo.ace.common.plugins.wechat.util.ApiResult;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.common.tools.JsonUtil;
+import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 import org.junit.Test;
 
 /**
@@ -14,12 +13,16 @@ public class CommonTest {
 
     @Test
     public void test() {
-        String token = "15_ocQycMihxwZQLm2_t1Q_jdFYeQ5k9hsa-2eBkCBZ0zODLqAcf-Y99m4vvMwXngT08_5Y_MPbicn_VyZElkYJzGv8KqgyueQ4VJy8m-2WzY8YOfOEc5L6FIl1vBv5jh3cKJ5_B1TD-vTHROXBTJSaAFABRA";
-        String openId = "oBj7Dvo5XzAYo6dlKlkj_4OQXXgM";
-        ApiResult a = WeChatCustomerMsgApi.sendText(token, openId, "hello world \nhello world ");
 
-        System.out.println(JsonUtil.toJson(a));
+        SocietyOrgInfoVo d = new SocietyOrgInfoVo();
+        d.setOrgName("组织测试");
+        d.setOrgType("1");
+        d.setOrgCover("cover");
+        d.setContactPerson("ArvinZou");
+        d.setContactPhone("123456");
+        d.setEmail("309@qq.com");
 
+        System.out.println(JsonUtil.toJson(d));
 //        System.out.println(DateUtil.getNow().substring(0, 10));
 //        generatorGUID(1);
     }
