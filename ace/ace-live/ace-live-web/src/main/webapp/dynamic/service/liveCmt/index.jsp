@@ -96,11 +96,11 @@
 
                             <td>
                                 <div class="col-md-4 my-gallery">
-                                    {@if item.headimgurl!='' && item.headimgurl!=null && item.headimgurl!=undefined}
+                                    {@if item.headimgurl}
                                     <img src="\${item.headimgurl}" class="cover"/>
                                     {@else}
                                     <img src="../../common/img/default_header.png" class="cover"/>
-                                    {/@if}
+                                    {@/if}
                                 </div>
                                 <div class="col-md-8">
                                     <div class="describtion">\${item.nickname}</div>
@@ -114,13 +114,13 @@
                             <td>
 
 
-            {@if item.status==1}
+                                {@if item.status==1}
                                 <span class="label label-lg label-success">通过</span>
-            {@else if item.status==2}
-                <span class="label label-lg label-success">通过</span>
-            {@else}
+                                {@else if item.status==2}
+                                <span class="label label-lg label-success">通过</span>
+                                {@else}
                                 <span class="label label-lg label-danger">屏蔽</span>
-            {@/if}
+                                {@/if}
         </td>
         <td>
 

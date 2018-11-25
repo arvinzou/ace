@@ -95,7 +95,7 @@
         left join portal.users e on t.uid=e.openId
         left join portal.department f on e.department_id=f.department_id
         left join live_log q on t.lastAuditLogId=q.id
-        where c.deptId=#{condition.deptId}
+        where 0=0
         <if test='condition.content!=null and condition.content!=""'>
             and t.content like
             concat('%',#{condition.content,jdbcType=VARCHAR},'%')
