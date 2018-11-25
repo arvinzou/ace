@@ -360,6 +360,48 @@
                 \${data.purpose}
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">参与者签到列表</label>
+            <div class="col-md-10">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-1 view-label"></label>
+            <div class="col-md-11">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th width="30%">微信昵称</th>
+                        <th width="20%">真实姓名</th>
+                        <th width="25%">手机号码</th>
+                        <th width="25%">签到时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {@each data.activityDetailVoList as item, index}
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {@if item.headimgurl!=null && item.headimgurl !=''}
+                                    <img src="\${item.headimgurl}" class="cover"/>
+                                    {@else}
+                                    <img src="${pageContext.request.contextPath}/content/common/img/default_header.png"
+                                         class="cover"/>
+                                    {@/if}
+                                    <a>\${item.nickname}</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>\${item.name}</td>
+                        <td>\${item.mobile}</td>
+                        <td>\${item.signInDate}</td>
+                    </tr>
+                    {@/each}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </script>
 

@@ -55,7 +55,7 @@ function t_query() {
 /*活动报道加载表格数据*/
 function getPageList() {
     var url = contextPath + "/activityReport/findActivityReportList";
-    params['name'] = $("input[name=keyword]").val();
+    params['title'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

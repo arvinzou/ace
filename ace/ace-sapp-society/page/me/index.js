@@ -35,7 +35,6 @@ Page({
             userinfoData: userInfo,
             isRegist: true,
         });
-
     },
     initWxUserData: function() {
         var that = this;
@@ -83,6 +82,7 @@ Page({
             wx.navigateTo({
                 url: "../userinfo/index?url=../me/index&type=switchTab"
             });
+            return;
         }
         // 判断有没有注册
         var userInfo = util.getSysUser();
@@ -101,10 +101,8 @@ Page({
         let that=this;
         util.request(cfg.findUserInfo, {},
             function (ret) {
-                if (ret.status == 0) {
-                    util.setSysUser(ret.data);
-                    that.initUserData();
-                }
+                util.setSysUser(ret.data);
+                that.initUserData();
             }
         );
     },
@@ -134,8 +132,7 @@ Page({
             num3: parseInt(Math.random() * 100),
         });
         util.delSysUser();
-        that.getSysUserInfo();
-        that.initWxUserData();
+        that.onShow();
         wx.stopPullDownRefresh();
         return;
     },

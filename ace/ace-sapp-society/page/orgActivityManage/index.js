@@ -14,6 +14,8 @@ Page({
         nowDate: new Date().Format("yyyy-MM-dd HH:mm:ss"),
         url:'',
         type:2,
+        showBtn: false,
+        hiddenBtn: true,
     },
 
     /**
@@ -86,7 +88,16 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function() {
-        this.initdata();
+        let that=this;
+        let sysUserInfo = util.getSysUser();
+        //如果没有注册，尝试重新申请获取一次。
+        if (sysUserInfo.societyOrg.status == '3') {
+            that.setData({
+                hiddenBtn: false,
+            });
+        }
+        that.clearStatus();
+        that.initdata();
     },
 
     /**
@@ -252,5 +263,34 @@ Page({
             icon: 'info',
             duration: 2000
         })
+    },
+    onPageScroll: function (e) {
+        if (this.data.hiddenBtn) {
+            return;
+        }
+        if (e.scrollTop <= 0) {
+            // 滚动到最顶部
+            e.scrollTop = 0;
+        } else if (e.scrollTop > this.data.scrollHeight) {
+            // 滚动到最底部
+            e.scrollTop = this.data.scrollHeight;
+        }
+        if (e.scrollTop > this.data.scrollTop || e.scrollTop >= this.data.scrollHeight) {
+            this.setData({
+                showBtn: true,
+            });
+        } else {
+            this.setData({
+                showBtn: false,
+            });
+        }
+        //给scrollTop重新赋值 
+        this.setData({
+            scrollTop: e.scrollTop
+        })
+    },
+    createActivity: function () {
+        let that = this;
+        wx.navigateTo({ url: '../activityApply/index?category=1'})
     },
 })

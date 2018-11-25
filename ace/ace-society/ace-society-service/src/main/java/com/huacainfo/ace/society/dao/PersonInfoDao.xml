@@ -281,69 +281,66 @@
         where s.id=#{userId,jdbcType=VARCHAR}
     </update>
 
-    <select id="querysocietyOrg" resultType="java.util.HashMap">
+
+    <select id="queryperson" resultType="map">
         select
         (@i:=@i+1) as i,
-        v.user_level as regType,
         v.nickName, v.avatarUrl, v.accPoints, v.userId
         from (
-        SELECT u.user_level,w.nickName, w.avatarUrl, a.accPoints, a.userId FROM
-        (SELECT
-        SUM(t.points) AS accPoints,
-        t.userId AS userId
-        FROM
-        society.points_record t
-        WHERE
-        1 = 1
+        SELECT
+        IFNULL(w.nickName,org.orgName) as nickName,
+        IFNULL(w.avatarUrl,org.orgCover) as avatarUrl,
+        a.accPoints, a.userId
+        FROM(
+        SELECT
+        SUM(t.points) AS accPoints, t.userId as userId
+        FROM society.points_record t
+        WHERE 1 = 1
         AND t.points > 0
+        and EXISTS(select 1 from person_info where id = t.userId)
         <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
             AND t.createDate >= #{condition.startDate,jdbcType=VARCHAR}
         </if>
         <if test="condition.endDate!=null and condition.endDate!=&quot;&quot;">
             AND t.createDate &lt;= #{condition.endDate,jdbcType=VARCHAR}
         </if>
-        GROUP BY
-        t.userId
+        GROUP BY t.userId
         ) a
         LEFT JOIN portal.wx_user w ON a.userId = w.unionId
-        left join portal.users u on u.user_id = a.userId
-        WHERE u.user_level=2
+        left join society_org_info org on a.userId = org.id
         ORDER BY a.accPoints DESC
         )v , (select @i:=0) as it
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-
-    <select id="queryperson" resultType="java.util.HashMap">
+    <select id="querysocietyOrg" resultType="map">
         select
         (@i:=@i+1) as i,
-        v.user_level as regType,
         v.nickName, v.avatarUrl, v.accPoints, v.userId
         from (
-        SELECT u.user_level,w.nickName, w.avatarUrl, a.accPoints, a.userId FROM
-        (SELECT
-        SUM(t.points) AS accPoints,
-        t.userId AS userId
-        FROM
-        society.points_record t
-        WHERE
-        1 = 1
+        SELECT
+        IFNULL(w.nickName,org.orgName) as nickName,
+        IFNULL(w.avatarUrl,org.orgCover) as avatarUrl,
+        a.accPoints, a.userId
+        FROM(
+        SELECT
+        SUM(t.points) AS accPoints, t.userId as userId
+        FROM society.points_record t
+        WHERE 1 = 1
         AND t.points > 0
+        and EXISTS(select 1 from society_org_info where id = t.userId)
         <if test="condition.startDate!=null and condition.startDate!=&quot;&quot;">
             AND t.createDate >= #{condition.startDate,jdbcType=VARCHAR}
         </if>
         <if test="condition.endDate!=null and condition.endDate!=&quot;&quot;">
             AND t.createDate &lt;= #{condition.endDate,jdbcType=VARCHAR}
         </if>
-        GROUP BY
-        t.userId
+        GROUP BY t.userId
         ) a
         LEFT JOIN portal.wx_user w ON a.userId = w.unionId
-        left join portal.users u on u.user_id = a.userId
-        WHERE u.user_level=1
+        left join society_org_info org on a.userId = org.id
         ORDER BY a.accPoints DESC
         )v , (select @i:=0) as it
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
-
 </mapper>

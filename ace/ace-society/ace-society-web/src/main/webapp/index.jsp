@@ -199,8 +199,6 @@
 
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=GA3nfXHbDcQaNEXmPBkaGdx2gvLMMBGy"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
-
-
 <script type='text/javascript'>
     //提示：下面的代码用jquery，所以如果有不能运行的情况请引用后尝试
     //百度地图api container对应前端div名称 前端要引用2.0版本的百度地图api
