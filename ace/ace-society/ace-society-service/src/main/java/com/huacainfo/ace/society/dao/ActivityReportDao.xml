@@ -33,7 +33,7 @@
     t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,
     (SELECT COUNT(*)
       FROM society.comment_record
-      WHERE bisType='reportComment' AND bisId=t.id
+      WHERE bisType like concat('reportComment','%') AND bisId=t.id
     ) as commentTotal
   </sql>
   <sql id="Blob_Column_List">

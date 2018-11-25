@@ -57,7 +57,7 @@ public class LiveController extends LiveBaseController {
     @RequestMapping(value = "/findLiveLists")
     @ResponseBody
     public PageResult<LiveVo> findLiveList(LiveQVo condition, PageParamNoChangeSord page) throws Exception {
-        condition.setDeptId(this.getCurUserProp().getCorpId());
+        //condition.setDeptId(this.getCurUserProp().getCorpId());
         PageResult<LiveVo> rst = this.liveService.findLiveList(condition, page.getStart(), page.getLimit(),page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
