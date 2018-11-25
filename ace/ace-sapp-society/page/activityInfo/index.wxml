@@ -38,7 +38,7 @@
 
     <view class='coin_assign'>
         <block wx:if="{{activityInfo.participant>=0}}">
-            <view>志愿者：</view><view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
+            <view>参与者：</view><view class='coin_mark'>+{{activityInfo.participant}}爱心币</view>
         </block>
         <block wx:if="{{activityInfo.participant<0}}">
             <view>参与者：</view><view class='coin_xf'>{{activityInfo.participant}}爱心币</view>

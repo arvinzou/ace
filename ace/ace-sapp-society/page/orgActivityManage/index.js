@@ -244,5 +244,13 @@ Page({
         let p = data.id;
         let title = data.title;
         wx.navigateTo({ url: '../activityInfo/index?id=' + p + "&title=" + title })
-    }
+    },
+    //时间没到点击签到
+    notTimeStart: function () {
+        wx.showToast({
+            title: '没有到开始时间',
+            icon: 'info',
+            duration: 2000
+        })
+    },
 })
