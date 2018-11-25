@@ -23,10 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("www/activity")
@@ -112,7 +109,7 @@ public class WActivityController extends SocietyBaseController {
         List<ActivityVo> rst = this.activityService.findActivityList(condition, page.getStart(), page.getLimit(), page.getOrderBy()).getRows();
         if(page.getLimit()<9){
             for(int i=1;i<rst.size();i++){
-                if(!"3".equals(rst.get(i).getStatus())){
+                if(!"3".equals(rst.get(i).getStatus())||(rst.get(i).getDendline().getTime())<System.currentTimeMillis()){
                     rst.remove(i);
                 }
             }
