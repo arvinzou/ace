@@ -149,12 +149,12 @@
                 <img src="\${data.orgCover}" style="max-width:480px;"/>
             </div>
         </div>
-        <div class="form-group">
+      <%--  <div class="form-group">
             <label class="col-md-2 view-label">组织介绍</label>
             <div class="col-md-10">
                 \${data.orgSummary}
             </div>
-        </div>
+        </div>--%>
 
         <div class="form-group">
             <label class="col-md-2 view-label">组织地址</label>

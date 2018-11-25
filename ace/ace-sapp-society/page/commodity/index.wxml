@@ -25,7 +25,9 @@
             <radio-group class="radio-group" bindchange="feeTypeChange">
             <label class="radio">
                 <radio value="1" checked="checked" />个人积分
+                <block wx:if='{{userinfoData.regType == "2"}}'>
                 <radio value="2" style='margin-left:30rpx;'/>组织积分
+                </block>
             </label>
         </radio-group>
         </view>
