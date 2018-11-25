@@ -16,6 +16,13 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
 </head>
+<style>
+    .cover {
+        width: 55px;
+        height: 55px;
+        object-fit: cover;
+    }
+</style>
 <body>
 
 <!--隐藏存放ID-->
@@ -214,7 +221,6 @@
     </div>
 
 
-
 </script>
 
 
@@ -314,7 +320,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">活动封面</label>
             <div class="col-md-10">
-                <img src="\${data.coverUrl}" style="max-width:480px;"/>
+                <img src="\${data.coverUrl}" style="max-width:480px;max-height: 480px"/>
             </div>
         </div>
 
@@ -360,6 +366,49 @@
                 \${data.purpose}
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="col-md-2 view-label">参与者签到列表</label>
+            <div class="col-md-10">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-1 view-label"></label>
+            <div class="col-md-11">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th width="30%">微信昵称</th>
+                        <th width="20%">真实姓名</th>
+                        <th width="25%">手机号码</th>
+                        <th width="25%">签到时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {@each data.activityDetailVoList as item, index}
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {@if item.headimgurl!=null && item.headimgurl !=''}
+                                    <img src="\${item.headimgurl}" class="cover"/>
+                                    {@else}
+                                    <img src="${pageContext.request.contextPath}/content/common/img/default_header.png"
+                                         class="cover"/>
+                                    {@/if}
+                                    <a>\${item.nickname}</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>\${item.name}</td>
+                        <td>\${item.mobile}</td>
+                        <td>\${item.signInDate}</td>
+                    </tr>
+                    {@/each}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </script>
 
@@ -402,7 +451,7 @@
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>
             {@/if}
             {@if item.status==32&&item.arStatus==3}
-                <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
+            <a class="operation" href="#" onclick="signInfo('\${item.id}');">活动签到</a>
             {@/if}
             <%--{@if item.status == '2'}--%>
             <%--<a class="operation" href="#" data-toggle="modal" data-target="#modal-audit" data-id="\${item.id}">审核</a>--%>
