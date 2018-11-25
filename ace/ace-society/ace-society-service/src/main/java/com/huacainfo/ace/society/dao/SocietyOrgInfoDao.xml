@@ -329,7 +329,6 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.society.model.SocietyOrgInfo">
         select count(1)
         from society_org_info
-        where contactPhone = #{contactPhone,jdbcType=VARCHAR}
-        and id != #{id,jdbcType=VARCHAR}
+        where orgName = #{orgName,jdbcType=VARCHAR}
     </select>
 </mapper>
