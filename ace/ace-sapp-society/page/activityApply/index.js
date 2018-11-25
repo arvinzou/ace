@@ -176,22 +176,22 @@ Page({
         const rules = {
             title: {
                 required: true,
-                minlength: 5,
+                minlength: 1,
                 maxlength: 34
             },
             location: {
                 required: true,
-                minlength: 5,
+                minlength: 1,
                 maxlength: 20
             },
             mode: {
                 required: true,
-                minlength: 10,
+                minlength: 1,
                 maxlength: 300
             },
             purpose: {
                 required: true,
-                minlength: 10,
+                minlength: 1,
                 maxlength: 300
             },
             parterNum: {
@@ -200,7 +200,8 @@ Page({
             },
             clazz: {
                 required: false,
-                digits: true
+                digits: true,
+                
             },
             coverUrl:{
                 required: true,
