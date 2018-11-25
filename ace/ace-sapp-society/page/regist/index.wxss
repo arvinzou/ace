@@ -62,7 +62,7 @@ color:rgba(34,34,34,1);
     padding-top: 30rpx;
     margin-top: 30rpx;
 }
-.placeholder-text{
+ .placeholder-text{
     color: #DCDCDC;
     font-size: 28rpx;
 }
