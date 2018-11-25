@@ -115,7 +115,7 @@
 
 
             {@if item.status==1}
-                <span class="label label-lg label-info">待审</span>
+                                <span class="label label-lg label-success">通过</span>
             {@else if item.status==2}
                 <span class="label label-lg label-success">通过</span>
             {@else}
