@@ -92,15 +92,15 @@
         <td> \${item.content}</td>
         <td>
              {@if item.bisType=='idea'}
-             <span>点子评论</span>
+             <span>点子</span>
              {@else if item.bisType=='reportComment_1'}
-             <span>公益活动评论</span>
+             <span>公益活动</span>
              {@else if item.bisType=='reportComment_2'}
-             <span>普及活动评论</span>
+             <span>普及活动</span>
              {@else if item.bisType=='reportComment_3'}
-             <span>创意活动评论</span>
+             <span>创意活动</span>
              {@else item.bisType=='reportComment_4'}
-             <span>党建活动评论</span>
+             <span>党建活动</span>
              {@/if}
         </td>
         <td> \${item.createDate}</td>
