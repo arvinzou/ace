@@ -113,14 +113,17 @@ Page({
             return;
         }
         var reg = new RegExp('^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$');  
-        if(!reg.test(email)){
+      if (email){
+          if (!reg.test(email)) {
             wx.showModal({
-                title: '提示',
-                content: '邮箱格式不正确！',
-                success: function (res) { }
+              title: '提示',
+              content: '邮箱格式不正确！',
+              success: function (res) { }
             });
             return;
+          }
         }
+        
         util.request(cfg.server + '/society/www/user/newOrgInfo', {
                 "unionId": wx.getStorageSync("WX-SESSION-ID"),
                 "jsonData": JSON.stringify(jsonData)
