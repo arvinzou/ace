@@ -166,7 +166,7 @@
         status state,
         name topic,
         category type,
-        null watermarkConfig from live where deptId=#{companyId} and auditStatus='2'
+        null watermarkConfig from live where auditStatus='2'
         order by status, startTime desc
         limit #{start,jdbcType=DECIMAL}, #{end,jdbcType=DECIMAL}
 
