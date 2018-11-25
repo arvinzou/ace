@@ -97,7 +97,7 @@
     <sql id="whereCondition">
         from live t left join live_log a on t.lastAuditLogId=a.id
 
-        where t.deptId=#{condition.deptId}
+        where 0=0
         <if test='condition.name!=null and condition.name!=""'>
             and t.name like
             concat('%',#{condition.name,jdbcType=VARCHAR},'%')
@@ -114,6 +114,10 @@
 
         <if test="condition.createUserId!=null and condition.createUserId!=&quot;&quot;">
             and t.createUserId =#{condition.createUserId,jdbcType=CHAR}
+        </if>
+
+        <if test="condition.deptId!=null and condition.deptId!=&quot;&quot;">
+            and t.deptId =#{condition.deptId,jdbcType=CHAR}
         </if>
     </sql>
     <select id="findCount" resultType="int">
