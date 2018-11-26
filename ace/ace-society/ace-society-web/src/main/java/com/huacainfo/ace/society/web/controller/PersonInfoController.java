@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -18,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import redis.clients.jedis.params.Params;
 
-import javax.sound.midi.SoundbankResource;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -179,5 +177,22 @@ public class PersonInfoController extends SocietyBaseController {
 
         List<Map<String, Object>> rtn = personInfoService.queryperson(start, limit, condition);
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rtn);
+    }
+
+    /**
+     * 更新政治面貌
+     *
+     * @param id     主键
+     * @param pState 面貌状态值
+     * @return MessageResponse
+     */
+    @RequestMapping("/updPStatus")
+    @ResponseBody
+    public MessageResponse updPStatus(String id, String pState) {
+        if (!StringUtil.areNotEmpty(id, pState)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少输入参数");
+        }
+
+        return personInfoService.updPStatus(id, pState);
     }
 }

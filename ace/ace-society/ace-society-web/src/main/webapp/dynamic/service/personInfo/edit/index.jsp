@@ -21,27 +21,27 @@
 <%--==============common jsp-prefix==============--%>
 
 
-                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
-                                        <div class="portlet light">
-                                            <div class="portlet-title">
-                                                <div class="caption">
-                                                    编辑个人信息
-                                                </div>
-                                                <div class="actions">
+<!-- BEGIN SAMPLE TABLE PORTLET-->
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            编辑个人信息
+        </div>
+        <div class="actions">
 
-                                                </div>
-                                            </div>
-                                            <div class="portlet-body" id="courseSource">
-                                                <div class="form-panel">
-                                                    <!--具体界面元素开始-->
-                                                    <form class="form-horizontal" id="fm-edit" role="form">
+        </div>
+    </div>
+    <div class="portlet-body" id="courseSource">
+        <div class="form-panel">
+            <!--具体界面元素开始-->
+            <form class="form-horizontal" id="fm-edit" role="form">
 
-                                                    </form>
-                                                </div>
-                                                <!--具体界面元素结束-->
-                                            </div>
-                                        </div>
-                                        <!-- END SAMPLE TABLE PORTLET-->
+            </form>
+        </div>
+        <!--具体界面元素结束-->
+    </div>
+</div>
+<!-- END SAMPLE TABLE PORTLET-->
 
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -51,68 +51,85 @@
 
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 <span class="label-red">*</span>
-                姓名
+                主键
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="realName" value="\{data.o.realName}" maxlength="50"
+                <input type="text" class="form-control" name="id" value="\${data.o.id}" maxlength="50"
                        placeholder="请输入姓名（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                <span class="label-red">*</span>
-                手机号
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="mobilePhone" value="\{data.o.mobilePhone}" maxlength="20"
-                       placeholder="请输入手机号（建议字数在14个字以内，不超过20个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
+
+        <%--<div class="form-group">--%>
+        <%--<label class="col-md-2 control-label">--%>
+        <%--<span class="label-red">*</span>--%>
+        <%--姓名--%>
+        <%--</label>--%>
+        <%--<div class="col-md-10">--%>
+        <%--<input type="text" class="form-control" name="realName" value="\{data.o.realName}" maxlength="50"--%>
+        <%--placeholder="请输入姓名（建议字数在14个字以内，不超过50个字)">--%>
+        <%--<span class="help-block"></span>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+
+        <%--<div class="form-group">--%>
+        <%--<label class="col-md-2 control-label">--%>
+        <%--<span class="label-red">*</span>--%>
+        <%--手机号--%>
+        <%--</label>--%>
+        <%--<div class="col-md-10">--%>
+        <%--<input type="text" class="form-control" name="mobilePhone" value="\{data.o.mobilePhone}" maxlength="20"--%>
+        <%--placeholder="请输入手机号（建议字数在14个字以内，不超过20个字)">--%>
+        <%--<span class="help-block"></span>--%>
+        <%--</div>--%>
+        <%--</div>--%>
         <div class="form-group">
             <label class="col-md-2 control-label">
                 政治面貌
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="politicalStatus" value="\{data.o.politicalStatus}"
-                       maxlength="2" placeholder="请输入政治面貌（建议字数在14个字以内，不超过2个字)">
+                <select class="form-control" name="politicalStatus" style="max-width: 300px;">
+                    <option value="1">普通个人</option>
+                    <option value="2">党员</option>
+                </select>
+                <%--<input type="text" class="form-control" name="politicalStatus" value="\{data.o.politicalStatus}"--%>
+                <%--maxlength="2" placeholder="请输入政治面貌（建议字数在14个字以内，不超过2个字)">--%>
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                累计获取积分
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="accPoints" value="\{data.o.accPoints}" maxlength="10"
-                       placeholder="请输入累计获取积分（建议字数在14个字以内，不超过10个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                可用积分
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="validPoints" value="\{data.o.validPoints}" maxlength="10"
-                       placeholder="请输入可用积分（建议字数在14个字以内，不超过10个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">
-                备注
-            </label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" name="remark" value="\{data.o.remark}" maxlength="200"
-                       placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
-                <span class="help-block"></span>
-            </div>
-        </div>
+        <%--<div class="form-group">--%>
+        <%--<label class="col-md-2 control-label">--%>
+        <%--累计获取积分--%>
+        <%--</label>--%>
+        <%--<div class="col-md-10">--%>
+        <%--<input type="text" class="form-control" name="accPoints" value="\{data.o.accPoints}" maxlength="10"--%>
+        <%--placeholder="请输入累计获取积分（建议字数在14个字以内，不超过10个字)">--%>
+        <%--<span class="help-block"></span>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+        <%--<label class="col-md-2 control-label">--%>
+        <%--可用积分--%>
+        <%--</label>--%>
+        <%--<div class="col-md-10">--%>
+        <%--<input type="text" class="form-control" name="validPoints" value="\{data.o.validPoints}" maxlength="10"--%>
+        <%--placeholder="请输入可用积分（建议字数在14个字以内，不超过10个字)">--%>
+        <%--<span class="help-block"></span>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+        <%--<div class="form-group">--%>
+        <%--<label class="col-md-2 control-label">--%>
+        <%--备注--%>
+        <%--</label>--%>
+        <%--<div class="col-md-10">--%>
+        <%--<input type="text" class="form-control" name="remark" value="\{data.o.remark}" maxlength="200"--%>
+        <%--placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">--%>
+        <%--<span class="help-block"></span>--%>
+        <%--</div>--%>
+        <%--</div>--%>
     </div>
     <div class="form-actions">
         <div class="row">
@@ -125,6 +142,7 @@
 
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
+<script type="text/javascript" src="/portal/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>
