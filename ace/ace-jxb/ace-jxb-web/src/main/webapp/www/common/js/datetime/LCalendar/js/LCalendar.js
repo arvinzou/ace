@@ -59,11 +59,11 @@ window.LCalendar = (function() {
                 _self.gearDate = document.createElement("div");
                 _self.gearDate.className = "gearDate";
                 _self.gearDate.innerHTML = '<div class="date_ctrl slideInUp">' +
-                    '<div class="date_btn_box">' +
+                    '<div class="date_btn_box" style="font-size: 0.3rem;">' +
                     '<div class="date_btn lcalendar_cancel">取消</div>' +
                     '<div class="date_btn lcalendar_finish">确定</div>' +
                     '</div>' +
-                    '<div class="date_roll_mask">' +
+                    '<div class="date_roll_mask" style="font-size: 0.2rem;">' +
                     '<div class="date_roll">' +
                     '<div>' +
                     '<div class="gear date_yy" data-datetype="date_yy"></div>' +

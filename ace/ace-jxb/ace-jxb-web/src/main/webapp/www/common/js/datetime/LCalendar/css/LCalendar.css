@@ -92,7 +92,7 @@
 .date_roll>div,
 .datetime_roll>div,
 .time_roll>div {
-    font-size: 2.3em;
+    font-size: 0.45rem;
     height: 10em;
     float: left;
     background-color: transparent;
@@ -167,7 +167,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    font-size: .8em;
+    font-size: .45em;
     line-height: 2.5em
 }
 
@@ -203,7 +203,7 @@
 
 .date_btn {
     color: #0575f2;
-    font-size: 1.6em;
+    font-size: 1.0em;
     line-height: 1em;
     text-align: center;
     padding: .8em 1em
