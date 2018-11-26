@@ -54,7 +54,7 @@
                     <th width="15%"> 订单编号</th>
                     <th width="15%"> 付款方式</th>
                     <th width="10%"> 订单状态</th>
-                    <th width="10%"> 付款金额</th>
+                    <th width="10%"> 爱心币</th>
                     <th width="15%"> 付款时间</th>
                     <th width="10%"> 收货类型</th>
                     <th width="10%">操作</th>
@@ -189,7 +189,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 view-label">付款金额</label>
+            <label class="col-md-2 view-label">爱心币</label>
             <div class="col-md-10">
                 \${data.payAmount}
             </div>
