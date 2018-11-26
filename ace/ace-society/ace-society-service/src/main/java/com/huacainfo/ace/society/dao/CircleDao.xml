@@ -125,9 +125,6 @@
       and t.uid =#{condition.uid,jdbcType=VARCHAR}
     </if>
 
-    <if test='condition.corpId!=null and condition.corpId!=""'>
-      and t.corpId =#{condition.corpId,jdbcType=VARCHAR}
-    </if>
   </select>
   <select id="findList" resultMap="BaseResultMapVo">
     select
