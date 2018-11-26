@@ -94,7 +94,8 @@ function initFineCourse(id){
         type:"post",
         async:false,
         data:{
-            "studioId": id
+            "studioId": id,
+            "lineState":"1"
         },
         success:function(result){
             if(result.status == 0) {

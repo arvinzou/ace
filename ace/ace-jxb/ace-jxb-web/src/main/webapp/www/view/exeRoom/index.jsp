@@ -57,6 +57,7 @@
 
 <script id="course-tpl" type="text/template">
     {@each data as item, index}
+    {@if item.lineState == "1"}
     {@if index % 2 == 0}
     <div class="quality-course-item box_margin" onclick="courseDetail('\${item.id}');">
         <div class="quality-course-cover"><img src="\${item.cover}" style="width: 100%;height: 100%;object-fit: cover;border-radius: 0.133333rem;"/></div>
@@ -73,6 +74,7 @@
 
         </div>
     </div>
+    {@/if}
     {@/if}
     {@/each}
 </script>
