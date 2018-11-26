@@ -343,4 +343,10 @@
         )v , (select @i:=0) as it
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
+
+    <update id="updPStatus" parameterType="java.lang.String">
+        update person_info
+        set politicalStatus = #{pState,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>
