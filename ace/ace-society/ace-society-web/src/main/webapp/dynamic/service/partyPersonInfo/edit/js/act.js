@@ -3,6 +3,7 @@ var editor;
 window.onload = function () {
     jQuery(function ($) {
         initForm();
+        initEvents();
     });
 }
 function App() {
@@ -40,28 +41,28 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    initEditor();
-    initUpload();
+    // initEditor();
+    // initUpload();
 }
 function initEvents() {
     /*表单验证*/
-    $("#fm-edit").validate({
-        onfocusout: function (element) {
-            $(element).valid();
-        },
-        rules: {
-            realName: {required: true, maxlength: 50}, mobilePhone: {required: true, maxlength: 20}
-        },
-        messages: {
-            realName: {
-                required: "请输入姓名",
-                maxlength: "姓名字符长度不能超过50"
-            }, mobilePhone: {
-                required: "请输入手机号",
-                maxlength: "手机号字符长度不能超过20"
-            }
-        }
-    });
+    // $("#fm-edit").validate({
+    //     onfocusout: function (element) {
+    //         $(element).valid();
+    //     },
+    //     rules: {
+    //         realName: {required: true, maxlength: 50}, mobilePhone: {required: true, maxlength: 20}
+    //     },
+    //     messages: {
+    //         realName: {
+    //             required: "请输入姓名",
+    //             maxlength: "姓名字符长度不能超过50"
+    //         }, mobilePhone: {
+    //             required: "请输入手机号",
+    //             maxlength: "手机号字符长度不能超过20"
+    //         }
+    //     }
+    // });
     /*监听表单提交*/
     $('#fm-edit').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
@@ -83,20 +84,22 @@ function save(params) {
     $.extend(params, {});
     startLoad();
     $.ajax({
-        url: contextPath + "/personInfo/updatePersonInfo",
+        url: contextPath + "/personInfo/updPStatus",
         type: "post",
         async: false,
         data: {
-            jsons: JSON.stringify(params)
+            id: params.id,
+            pState: params.politicalStatus
         },
         success: function (result) {
             stopLoad();
             alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = '../index.jsp';
+                window.location.href = '../index.jsp?id=' + urlParams.id;
             }
         },
         error: function () {
+            stopLoad();
             alert("对不起出错了！");
         }
     });
@@ -114,7 +117,7 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                renderPage($("#fm-edit"), data, 'tpl-fm');
+                render($("#fm-edit"), data, 'tpl-fm');
                 initPage();
             } else {
                 alert(result.errorMessage);

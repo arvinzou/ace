@@ -124,4 +124,12 @@ public interface PersonInfoService {
      */
     List<Map<String, Object>> queryperson(int start, int limit, Map<String, Object> condition);
 
+    /**
+     * 更新政治面貌
+     *
+     * @param id     主键
+     * @param pState 面貌状态值
+     * @return MessageResponse
+     */
+    MessageResponse updPStatus(String id, String pState);
 }

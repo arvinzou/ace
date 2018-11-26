@@ -302,4 +302,21 @@ public class PersonInfoServiceImpl implements PersonInfoService {
         return rtn;
 
     }
+
+    /**
+     * 更新政治面貌
+     *
+     * @param id     主键
+     * @param pState 面貌状态值
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse updPStatus(String id, String pState) {
+        int i = personInfoDao.updPStatus(id, pState);
+        if (i == 1) {
+            return new MessageResponse(ResultCode.SUCCESS, "变更成功");
+        }
+
+        return new MessageResponse(ResultCode.FAIL, "变更失败");
+    }
 }
