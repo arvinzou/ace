@@ -235,7 +235,7 @@
             <div class="col-md-10">
                 <img src="\${item.commodityCover}" class="cover"/>
                 <a>\${item.commodityName} x \${item.purchaseQty}</a>
-                单价：\${item.salePrice} 元 小计：\${item.subtotal} 元
+                单价：\${item.salePrice} 爱心币 小计：\${item.subtotal} 爱心币
             </div>
         </div>
         {@/each}
