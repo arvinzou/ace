@@ -236,7 +236,7 @@
         <td>
             <div class="row">
                 <div class="col-md-12">
-                    {@if data.headimgurl!=null && data.headimgurl !=''}
+                    {@if data.headimgurl!=null && data.headimgurl !='' && data.headimgurl.length>3}
                     <img src="\${data.headimgurl}" class="cover"/>
                     {@else}
                     <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
