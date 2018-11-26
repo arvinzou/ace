@@ -143,8 +143,8 @@ Page({
         console.log('--------下拉刷新-------')
         var that = this;
         that.clearStatus();
+        that.initOrgData();
         that.initdata();
-        wx.stopPullDownRefresh();
         return;
     },
 
