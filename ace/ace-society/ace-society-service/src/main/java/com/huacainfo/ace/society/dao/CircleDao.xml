@@ -101,10 +101,6 @@
     <if test='condition.uid!=null and condition.uid!=""'>
       and t.uid =#{condition.uid,jdbcType=VARCHAR}
     </if>
-
-    <if test='condition.corpId!=null and condition.corpId!=""'>
-      and t.corpId =#{condition.corpId,jdbcType=VARCHAR}
-    </if>
   </sql>
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
