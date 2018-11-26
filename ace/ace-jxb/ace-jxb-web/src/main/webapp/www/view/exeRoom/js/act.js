@@ -73,7 +73,7 @@ function initStudioReport(id){
                     data: result.data
                 });
                 $("#report").append(html);
-                $("#num").val(result.data.consultCount);
+                $("#num").text(result.data.consultCount);
             }else {
                 alert(result.info);
                 return;

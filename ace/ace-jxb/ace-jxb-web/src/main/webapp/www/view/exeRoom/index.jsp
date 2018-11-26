@@ -85,7 +85,7 @@
     </div>
     <div class="col-xs-9 col-sm-9" style="padding-left: 0 !important;">
         <p class="room_title">\${roombase.name}</p>
-        <p class="room_title01">帮助过<span class="num">228</span>人</p>
+        <p class="room_title01">帮助过<span class="num" id="num"></span>人</p>
     </div>
 </script>
 <script id="roomContentTemp" type="text/template">
