@@ -72,8 +72,7 @@
 --         LEFT  JOIN  portal.users u ON  a.initiatorId=u.user_id
         LEFT  JOIN  portal.wx_user i ON  a.initiatorId=i.unionid
         LEFT  JOIN coin_config c ON  c.id=a.coinconfigId
-        LEFT JOIN org_admin o ON o.userId=a.initiatorId
-        LEFT JOIN society_org_info s ON s.id=o.orgId
+        LEFT JOIN society_org_info s ON s.id=(SELECT de.department_id FROM PORTAL.users de where de.user_id = t.initiatorId)
         where a.id = #{id,jdbcType=VARCHAR}
     </select>
 
@@ -475,8 +474,7 @@
     <sql id="fromCondition1">
         from activity t
         LEFT JOIN  activity_report ar on ar.activityId=t.id
-        LEFT JOIN org_admin o ON o.userId=t.initiatorId
-        LEFT JOIN society_org_info s ON s.id=o.orgId
+        LEFT JOIN society_org_info s ON s.id=(SELECT de.department_id FROM PORTAL.users de where de.user_id = t.initiatorId)
         LEFT JOIN coin_config cc ON t.coinconfigId=cc.id
     </sql>
 
@@ -484,8 +482,7 @@
         from activity t
         RIGHT JOIN  activity_detail ad on t.id=ad.activityId
         LEFT JOIN  activity_report ar on ar.activityId=t.id
-        LEFT JOIN org_admin o ON o.userId=t.initiatorId
-        LEFT JOIN society_org_info s ON s.id=o.orgId
+        LEFT JOIN society_org_info s ON s.id=(SELECT de.department_id FROM PORTAL.users de where de.user_id = t.initiatorId)
         LEFT JOIN coin_config cc ON t.coinconfigId=cc.id
     </sql>
 
@@ -496,7 +493,14 @@
             and t.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.initiatorId !=null and condition.initiatorId !=&quot;&quot;">
-            and t.initiatorId =#{condition.initiatorId,jdbcType=VARCHAR}
+            and t.initiatorId  in(
+            select u.user_id from portal.users u
+            where u.department_id = (
+            SELECT
+            t.department_id
+            FROM
+            PORTAL.users T
+            where t.user_id = #{condition.initiatorId,jdbcType=VARCHAR}))
         </if>
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
             and ad.userId =#{condition.userId,jdbcType=VARCHAR}

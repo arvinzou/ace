@@ -20,7 +20,7 @@ Page({
         stop: true,
         imageCover: null,
         orgId: null,
-        userinfo: null,
+        userinfo: null
     },
 
     /**
@@ -245,6 +245,16 @@ Page({
         wx.switchTab({
             url: '../me/index'
         });
+    },
+    inputFocus: function(e){
+        var value = e.detail.value;
+        var tips = e.currentTarget.dataset.tips;
+        if(value == ""){
+
+        }
+    },
+    inputBlur: function(e){
+
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

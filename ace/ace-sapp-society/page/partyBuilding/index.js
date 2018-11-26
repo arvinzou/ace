@@ -23,6 +23,7 @@ Page({
      */
     onLoad: function(options) {
         let that = this;
+        that.initOrgData();
         that.ifCreatBtn();
     },
 
@@ -55,7 +56,7 @@ Page({
         let that = this;
         util.request(cfg.findSocietyOrgInfos, {
                 orgType: '1',
-                start: that.data.start,
+                start: 0,
                 limit: 100,
                 status:'3',
             },
@@ -118,7 +119,6 @@ Page({
      */
     onShow: function() {
         let that = this;
-        that.initOrgData();
         that.initdata();
     },
 
