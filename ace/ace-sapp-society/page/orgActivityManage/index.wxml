@@ -43,7 +43,7 @@
 
             <view wx:if='{{item.status==41}}' class='status status1'>活动无效</view>
 
-            <view wx:if='{{item.status==42}}' class='status status1'>活动超时</view>
+            <view wx:if='{{item.status==42}}' class='status status5'>活动超时</view>
 
             <view wx:if='{{(item.status==4||item.status==42) }}' bindtap='delActivity' data-type='{{item.id}}' data-id='{{item.id}}' class='status status2'>删除</view>
 

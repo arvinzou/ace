@@ -236,7 +236,7 @@ Page({
      */
     onShow: function () {
         var that = this;
-        // 判断有没有鉴权
+        //判断有没有鉴权
         if (!util.is_login()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../index/index&type=switchTab"

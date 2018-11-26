@@ -57,6 +57,7 @@
 
 <script id="course-tpl" type="text/template">
     {@each data as item, index}
+    {@if item.lineState == "1"}
     {@if index % 2 == 0}
     <div class="quality-course-item box_margin" onclick="courseDetail('\${item.id}');">
         <div class="quality-course-cover"><img src="\${item.cover}" style="width: 100%;height: 100%;object-fit: cover;border-radius: 0.133333rem;"/></div>
@@ -74,6 +75,7 @@
         </div>
     </div>
     {@/if}
+    {@/if}
     {@/each}
 </script>
 
@@ -83,7 +85,7 @@
     </div>
     <div class="col-xs-9 col-sm-9" style="padding-left: 0 !important;">
         <p class="room_title">\${roombase.name}</p>
-        <p class="room_title01">帮助过<span class="num">228</span>人</p>
+        <p class="room_title01">帮助过<span class="num" id="num"></span>人</p>
     </div>
 </script>
 <script id="roomContentTemp" type="text/template">
