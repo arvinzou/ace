@@ -62,7 +62,7 @@ Page({
 
     onLoad: function() {
         let that = this;
-        if (!util.isLogin()) {
+        if (!util.is_login()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../activityIndex/index&type=switchTab"
             });

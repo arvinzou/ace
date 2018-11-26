@@ -64,7 +64,7 @@
                             <img class="cover"
                                  id="commodityCover"
                                  data-toggle="modal"
-                                 data-xsize="167" data-ysize="167"
+                                 data-xsize="187" data-ysize="155"
                                  data-cover="commodityCover"
                                  data-target="#cropModal"
                                  src="${pageContext.request.contextPath}/content/common/img/addImg1.png?v=${cfg.version}">

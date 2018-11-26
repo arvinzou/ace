@@ -20,6 +20,7 @@
             <view wx:if='{{item.status>"31"&&type==1&&item.adStatus==0}}' class='status status5'>活动未签到</view>
             <view wx:if='{{item.adStatus==1}}' class='status status4'>签到成功</view>
             <view wx:if='{{item.status==33}}' class='status status4'>活动成功</view>
+            <view wx:if='{{item.status==42}}' class='status status5'>活动超时</view>
         </view>
     </block>
 

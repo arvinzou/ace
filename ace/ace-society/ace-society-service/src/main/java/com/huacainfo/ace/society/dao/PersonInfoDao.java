@@ -48,4 +48,7 @@ public interface PersonInfoDao {
     List<Map<String, Object>> queryperson(@Param("start") int start,
                                           @Param("limit") int limit,
                                           @Param("condition") Map<String, Object> condition);
+
+    int updPStatus(@Param("id") String id,
+                   @Param("pState") String pState);
 }

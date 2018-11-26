@@ -91,6 +91,13 @@ Page({
                                 tempActivity.push(ret.data[j]);
                             }
                         }
+                        if(tempActivity.length<1){
+                            for(var j=0; j<ret.data.length; j++){
+                                if (ret.data[j].range < 0 && ret.data[j].status == "3"){
+                                    tempActivity.push(ret.data[j]);
+                                }
+                            }
+                        }
                         that.setData({
                             activity: tempActivity
                         });
@@ -229,7 +236,7 @@ Page({
      */
     onShow: function () {
         var that = this;
-        // 判断有没有鉴权
+        //判断有没有鉴权
         if (!util.is_login()) {
             wx.navigateTo({
                 url: "../userinfo/index?url=../index/index&type=switchTab"

@@ -41,14 +41,24 @@ Page({
    
   },
   onShow:function(){
-    page = 0;
+    page = 1;
     console.log("onShow");
   },
   onPullDownRefresh: function () {
     let that = this;
-    page += 1;
+    page=1;
+     that.data.listLive=[];
     that.initData();
   },
+
+    // // 上拉加载
+    onReachBottom: function () {
+        var that = this;
+        console.log('-------------上拉加载-------------');
+        page += 1;
+        that.initData();
+    },
+
   initData: function () {
     var that = this;
       util.request(cfg.server + "/live/www/live/getListByCompany", { page: page, companyId: cfg.companyId, auditStatus: "3" },

@@ -35,12 +35,6 @@ function initData(id){
                 });
                 $("#memberList").append(memberHtml);
 
-                var footerTemp = document.getElementById('footerTemp').innerHTML;
-                var footerHtml = juicer(footerTemp, {
-                    footer: result.data
-                });
-                $(".footer").append(footerHtml);
-
                 var slideTemp = document.getElementById('bannerSlideTemp').innerHTML;
                 var slideHtml = juicer(slideTemp, {
                     slide: result.data.imgList
@@ -77,7 +71,7 @@ function initStudioReport(id){
                     data: result.data
                 });
                 $("#report").append(html);
-                $("#num").val(result.data.consultCount);
+                $("#num").text(result.data.consultCount);
             }else {
                 alert(result.info);
                 return;

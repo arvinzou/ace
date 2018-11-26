@@ -75,7 +75,7 @@
                         <view class="title" style='width:25%'>邮箱
                   
                         </view>
-                        <input name='email' style='width:75%' placeholder='请输入邮箱' placeholder-class='placeholder-text'></input>
+                        <input name='email' style='width:75%' placeholder='请输入邮箱' placeholder-class='placeholder-text' ></input>
                     </view>
                     <view class='btn-part'>
                         <view bindtap='previousOne' class='btn btn-bkClick'>

@@ -49,13 +49,13 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="20%"> 场地名称</th>
+                    <th width="30%"> 场地名称</th>
                     <%--<th width="20%"> 场地分类</th>--%>
-                    <th width="20%"> 爱心币</th>
+                    <th width="30%"> 爱心币</th>
                     <th width="20%"> 状态</th>
-                    <th width="20%"> 已预约场次</th>
+                    <%--<th width="20%"> 已预约场次</th>--%>
                     <%--<th width="10%"> 备注</th>--%>
-                    <th width="10%">操作</th>
+                    <th width="20%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -92,7 +92,7 @@
             {@/if}
         </td>
         <%--<td> \${item.remark}</td>--%>
-        <td> 0</td>
+        <%--<td> 0</td>--%>
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             {@if item.state==1}
