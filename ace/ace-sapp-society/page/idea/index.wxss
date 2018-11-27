@@ -77,10 +77,12 @@
     font-size: 26rpx;
     padding-right: 23rpx;
     padding-left: 30rpx;
+    float: left;
 }
 .time{
     color: #999999;
     font-size: 26rpx;
+    float: left;
 }
 .attach{
     width: 26rpx;
@@ -107,4 +109,56 @@
     font-size: 36rpx;
     font-weight: bold;
     margin-top: 15rpx;
+}
+.gongyi{
+    display: block;
+    color: #1CBC80;
+    background: #DBF7EC;
+    font-size: 24rpx;
+    float: left;
+    margin-left: 15rpx;
+    height: 31rpx;
+    line-height: 31rpx;
+    text-align: center;
+    padding: 5rpx;
+    margin-top: 10rpx;
+}
+.puji{
+    display: block;
+    color: #5E9EFF;
+    background: #E3F2FF;
+    font-size: 24rpx;
+    float: left;
+    margin-left: 15rpx;
+    height: 31rpx;
+    line-height: 31rpx;
+    text-align: center;
+    padding: 5rpx;
+    margin-top: 10rpx;
+}
+.chuangyi{
+    display: block;
+    color: #FF9906;
+    background: #FFEBD0;
+    font-size: 24rpx;
+    float: left;
+    margin-left: 15rpx;
+    height: 31rpx;
+    line-height: 31rpx;
+    text-align: center;
+    padding: 5rpx;
+    margin-top: 10rpx;
+}
+.dangjian{
+    display: block;
+    color: rgba(246, 82, 70, 1);   
+    background: #FEF2EF;
+    font-size: 24rpx;
+    float: left;
+    margin-left: 15rpx;
+    height: 31rpx;
+    line-height: 31rpx;
+    text-align: center;
+    padding: 5rpx;
+    margin-top: 10rpx;
 }

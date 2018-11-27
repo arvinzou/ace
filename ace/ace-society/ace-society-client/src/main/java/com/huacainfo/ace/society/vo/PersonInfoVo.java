@@ -1,6 +1,5 @@
 package com.huacainfo.ace.society.vo;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.society.model.PersonInfo;
 
 
@@ -24,7 +23,7 @@ public class PersonInfoVo extends PersonInfo {
     }
 
     public String getHeadimgurl() {
-        return StringUtil.isEmpty(headimgurl) ? "-" : headimgurl;
+        return headimgurl;
     }
 
     public void setHeadimgurl(String headimgurl) {

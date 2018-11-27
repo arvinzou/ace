@@ -1,8 +1,5 @@
 @import "../common/index.wxss";
 
-.index{
-}
-
 .head {
     padding: 0 30rpx;
 }

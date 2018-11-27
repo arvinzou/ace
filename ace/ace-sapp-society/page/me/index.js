@@ -9,11 +9,12 @@ Page({
     data: {
         userinfoData: null,
         isRegist: false,
+        actionComment:false,
         num1: parseInt(Math.random() * 100),
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
         userId: null,
-        wxUser: null
+        loginUser: null
 
     },
 
@@ -21,35 +22,29 @@ Page({
      * 生命周期函数--监听页面加载;
      */
     onLoad: function(options) {
+    
 
     },
     initUserData: function() {
         var that = this;
-        let userInfo = util.getSysUser();
-        if(!userInfo){
-            wx.navigateTo({
-                url: "../regist/index"
-            });
-        }
-        that.setData({
-            userinfoData: userInfo,
-            isRegist: true,
-        });
-    },
-    initWxUserData: function() {
-        var that = this;
-        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', {
-                "id": wx.getStorageSync('WX-SESSION-ID')
-            },
-            function(ret) {
-                if (ret.status == 0) {
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                util.setSysUser(ret.data);
+                if (!ret.data) {
+                    wx.navigateTo({
+                        url: "../regist/index"
+                    });
+                }else{
                     that.setData({
-                        wxUser: ret.value
+                        userinfoData: ret.data,
+                        isRegist: true,
                     });
                 }
             }
         );
+        
     },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -76,37 +71,23 @@ Page({
      */
     onShow: function() {
         var that = this;
-
-        // 判断有没有鉴权
-        if (!util.is_login()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../me/index&type=switchTab"
-            });
-            return;
-        }
+        that.initUserAdmin();
         // 判断有没有注册
-        var userInfo = util.getSysUser();
-        if (userInfo) {
-            that.initUserData();
-        } else {
-            that.getSysUserInfo();
-        }
+        that.initUserData();
         that.setData({
             userId: wx.getStorageSync('WX-SESSION-ID')
         })
-        that.initWxUserData();
     },
 
-    getSysUserInfo:function(){
-        let that=this;
-        util.request(cfg.findUserInfo, {},
+    initUserAdmin: function(){
+        var that = this;
+        util.request(cfg.server+'/portal/www/isAdmin.do', {},
             function (ret) {
-                util.setSysUser(ret.data);
-                that.initUserData();
+                console.log(ret);
+                that.setData({ loginUser: ret.status});
             }
         );
     },
-
     /**
      * 生命周期函数--监听页面隐藏
      */
@@ -154,5 +135,56 @@ Page({
      */
     onShareAppMessage: function() {
 
-    }
+    },
+    actionComment: function () {
+        this.setData({
+            actionComment: true,
+        })
+    }, 
+    formSubmit: function (e) {
+        let that = this;
+        let vals = e.detail.value;
+        if (!vals.content) {
+            wx.showModal({
+                title: '提示',
+                content: '没有输入任何内容',
+            })
+            return;
+        }
+        util.request(cfg.feedBack, vals,
+            function (rst) {
+                if (rst.status == 0) {
+                    that.setData({
+                        actionComment: false,
+                    })
+                    wx.showModal({
+                        title: '提交成功',
+                        content: '感谢您的反馈，我们会尽快处理',
+                    })
+                    return;
+                }
+                wx.showModal({
+                    title: '提交失败',
+                    content: '请稍后重试',
+                })
+            });
+    },
+    hiddenComment: function (e) {
+        let that = this;
+        if (that.data.commentVal) {
+            wx.showModal({
+                title: '提示',
+                content: '确定放弃输入？',
+                success: function (res) {
+                    if (!res.confirm) {
+                        return;
+                    }
+                }
+            })
+        } else {
+            that.setData({
+                actionComment: false,
+            })
+        }
+    },
 })

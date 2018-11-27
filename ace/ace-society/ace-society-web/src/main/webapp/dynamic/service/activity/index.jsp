@@ -15,14 +15,9 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
 </head>
-<style>
-    .cover {
-        width: 55px;
-        height: 55px;
-        object-fit: cover;
-    }
-</style>
 <body>
 
 <!--隐藏存放ID-->
@@ -158,6 +153,43 @@
     </div>
 </div>
 
+
+
+<div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 
 
@@ -235,8 +267,8 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">活动封面</label>
-            <div class="col-md-10">
-                <img src="\${data.coverUrl}" style="max-width:480px;"/>
+            <div class="col-md-10 my-gallery">
+                <img src="\${data.coverUrl}"/>
             </div>
         </div>
 
@@ -319,7 +351,7 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">活动封面</label>
-            <div class="col-md-10">
+            <div class="my-gallery col-md-10">
                 <img src="\${data.coverUrl}" style="max-width:480px;max-height: 480px"/>
             </div>
         </div>
@@ -465,5 +497,8 @@
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+
 </html>

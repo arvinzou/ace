@@ -28,29 +28,9 @@ Page({
         let sysUserInfo = util.getSysUser();
         // 如果没有用户信息
         if (!sysUserInfo) {
-            util.request(cfg.findUserInfo, {},
-                function(rst) {
-                    if (rst.status == 0) {
-                        util.setSysUser(rst.data);
-                        if (!rst.data){
-                            that.setData({
-                                hiddenBtn: false,
-                            }); 
-                            return;
-                        }
-                        // 如果党建活动，人员是个人。
-                        if (that.data.activityInfo.category == 4 && rst.data.person.politicalStatus == 1){
-                            return;
-                        }
-                        // 如果是创建人本人
-                        if (that.data.activityInfo.initiatorId==rst.data.person.id){
-                            return;
-                        }
-                    }
-                }
-            );
+            return;
         }
-        else if ((that.data.activityInfo.category == 4 && sysUserInfo.person.politicalStatus == 1) || (that.data.activityInfo.initiatorId == sysUserInfo.person.id)) {
+        if ((that.data.activityInfo.category == 4 && sysUserInfo.person.politicalStatus == 1) || (that.data.activityInfo.initiatorId == sysUserInfo.person.id)) {
             return;
         }
         that.setData({

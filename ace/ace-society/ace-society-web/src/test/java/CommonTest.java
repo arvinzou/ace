@@ -1,7 +1,10 @@
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.common.tools.JsonUtil;
-import com.huacainfo.ace.society.vo.SocietyOrgInfoVo;
 import org.junit.Test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @Auther: Arvin
@@ -14,15 +17,6 @@ public class CommonTest {
     @Test
     public void test() {
 
-        SocietyOrgInfoVo d = new SocietyOrgInfoVo();
-        d.setOrgName("组织测试");
-        d.setOrgType("1");
-        d.setOrgCover("cover");
-        d.setContactPerson("ArvinZou");
-        d.setContactPhone("123456");
-        d.setEmail("309@qq.com");
-
-        System.out.println(JsonUtil.toJson(d));
 //        System.out.println(DateUtil.getNow().substring(0, 10));
 //        generatorGUID(1);
     }
@@ -34,4 +28,6 @@ public class CommonTest {
             System.out.println(GUIDUtil.getGUID());
         }
     }
+
+
 }

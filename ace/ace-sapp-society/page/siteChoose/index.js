@@ -14,8 +14,8 @@ Page({
     index:0,
     id: 0,
     siteDate: null,
-    timeInterval:'9:00-11:00',
-    timeIndex: 0,
+    timeInterval:null,
+    timeIndex: 2,
     occupy:[],
     today:null,
     feeType:null
@@ -121,6 +121,14 @@ Page({
   },
   formSubmit: function(){
       var that = this;
+      if(that.data.timeInterval == null || that.data.timeInterval=="" || that.data.timeInterval==undefined){
+          wx.showModal({
+              title: '提示',
+              content: '请选择需要兑换的时间段！',
+              success: function (res) { }
+          });
+          return;
+      }
       var spaceOccupyInfo = { "spaceId": that.data.siteId, "reserveDate": that.data.siteDate.date, "reserveInterval": that.data.timeInterval, "year": that.data.siteDate.year, "month": that.data.siteDate.month, "day": that.data.siteDate.day, "whatDay": that.data.siteDate.week, "createUserId": wx.getStorageSync("WX-SESSION-ID"), "createUserName": that.data.userinfoData.nickName, "createDate": new Date()};
       var orderDetail = { "commodityId": that.data.siteId, "commodityName": that.data.siteInfo.commodityName, "commodityCover": that.data.siteInfo.commodityCover, "salePrice": that.data.siteInfo.costPoints, "purchaseQty": 1 };
       var orderDetailList = [];
@@ -146,7 +154,7 @@ Page({
               } else {
                   wx.showModal({
                       title: '提示',
-                      content: ret.errorMessage,
+                      content: ret.info,
                       success: function (res) { }
                   });
               }
