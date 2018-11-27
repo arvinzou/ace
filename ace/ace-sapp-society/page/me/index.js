@@ -14,7 +14,7 @@ Page({
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
         userId: null,
-        wxUser: null
+        loginUser: null
 
     },
 
@@ -22,6 +22,7 @@ Page({
      * 生命周期函数--监听页面加载;
      */
     onLoad: function(options) {
+    
 
     },
     initUserData: function() {
@@ -37,20 +38,7 @@ Page({
             isRegist: true,
         });
     },
-    initWxUserData: function() {
-        var that = this;
-        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', {
-                "id": wx.getStorageSync('WX-SESSION-ID')
-            },
-            function(ret) {
-                if (ret.status == 0) {
-                    that.setData({
-                        wxUser: ret.value
-                    });
-                }
-            }
-        );
-    },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -85,6 +73,8 @@ Page({
             });
             return;
         }
+
+        that.initUserAdmin();
         // 判断有没有注册
         var userInfo = util.getSysUser();
         if (userInfo) {
@@ -95,7 +85,6 @@ Page({
         that.setData({
             userId: wx.getStorageSync('WX-SESSION-ID')
         })
-        that.initWxUserData();
     },
 
     getSysUserInfo:function(){
@@ -107,7 +96,15 @@ Page({
             }
         );
     },
-
+    initUserAdmin: function(){
+        var that = this;
+        util.request(cfg.server+'/portal/www/isAdmin.do', {},
+            function (ret) {
+                console.log(ret);
+                that.setData({ loginUser: ret.status});
+            }
+        );
+    },
     /**
      * 生命周期函数--监听页面隐藏
      */
