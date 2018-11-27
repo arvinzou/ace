@@ -106,25 +106,39 @@
             <text class='menu-title'>商城订单</text>
             <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
-        <!--<block wx-if='{{wxUser.role == "admin"}}'>-->
+        <block wx-if='{{loginUser == 0}}'>
          <navigator class='menu-item' url='../datas/index'>
             <image lazy-load="true" src='../../image/icon_datas.png' class='menu-icon'></image>
             <text class='menu-title'>数据监控</text>
             <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </navigator>
-        <!--</block>-->
+        </block>
         <navigator class='menu-item' url='../aboutus/index'>
             <image lazy-load="true" src='../../image/icon_aboutus.png' class='menu-icon'></image>
             <text class='menu-title'>关于我们</text>
             <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </navigator>
+        <view class='menu-item' bindtap='actionComment'>
+            <image lazy-load="true" src='../../image/message.png' class='menu-icon'></image>
+            <text class='menu-title'>站内信</text>
+            <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
+        </view>
         <view class='menu-item' bindtap='call'>
             <image lazy-load="true" src='../../image/icon_phone.png' class='menu-icon'></image>
             <text class='menu-title'>联系电话</text>
             <image lazy-load="true" class='menu-rediret' src='../../image/rediret.png'></image>
         </view>
-        <view class='menu-item'>
-            <button open-type="contact">进入客服会话</button>
+    </view>
+
+    <view class="commentModel" wx:if='{{actionComment}}'>
+        <view class='inner-model' catchtap='hiddenComment'></view>
+        <view class='box whiteBg'>
+            <form bindsubmit="formSubmit" bindreset="formReset">
+                <input type='text' auto-focus='true' focus="true" name='title' placeholder='请输入标题' maxlength='20' cursor-spacing='160' confirm-type='next'></input>
+                <textarea bindinput='getValue' placeholder='请输入内容' name='content'  cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar=''></textarea>
+                <button class='submit' formType="submit">提交</button>
+            </form>
         </view>
     </view>
+
 </view>

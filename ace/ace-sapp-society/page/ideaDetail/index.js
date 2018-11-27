@@ -159,8 +159,8 @@ Page({
     onPullDownRefresh: function() {
         var that = this;
         that.initData();
-        that.initCommentList();
-        that.initAdmireTotal();
+        that.getLikeNum();
+        that.getCommentList();
     },
     formSubmit: function(e) {
         let that = this;
