@@ -467,13 +467,17 @@ page {
     display: block;
 }
 
-.commentModel .box textarea{
+.commentModel .box textarea ,.commentModel .box input{
     width: 640rpx;
     background:rgba(249,249,249,1);
     border-radius:6px;
     padding: 34rpx;
     margin-bottom: 20rpx;
     /* line-height: 30rpx; */
+}
+
+.commentModel .box input{
+    padding: 14rpx 34rpx ;
 }
 
 .commentModel .box .submit{

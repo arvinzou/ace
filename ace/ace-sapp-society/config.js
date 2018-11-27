@@ -72,5 +72,6 @@ var config = {
     cancelAdmire: `${server}/society/www/comment/cancelAdmire`, 
     delActivity: `${server}/society/www/activity/delActivity`,
     getCoin: `${server}/society/www/activity/getCoin`,
+    feedBack: `${server}/society/www/user/feedBack`,
 };
 module.exports = config

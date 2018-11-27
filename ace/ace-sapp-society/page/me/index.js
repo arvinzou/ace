@@ -171,20 +171,21 @@ Page({
             })
             return;
         }
-        vals.bisId = that.data.id;
-        util.request(cfg.submitComment, vals,
+        util.request(cfg.feedBack, vals,
             function (rst) {
                 if (rst.status == 0) {
                     that.setData({
                         actionComment: false,
                     })
-                    that.clearStatus();
-                    that.getCommentList();
+                    wx.showModal({
+                        title: '提交成功',
+                        content: '感谢您的反馈，我们会尽快处理',
+                    })
                     return;
                 }
                 wx.showModal({
-                    title: '提示',
-                    content: '评论失败，稍后重试',
+                    title: '提交失败',
+                    content: '请稍后重试',
                 })
             });
     },
