@@ -19,6 +19,8 @@
             {{ detail.solution }}
         </view>   
     </view>
+
+    <block wx:if='{{commentList.length > 0}}'>
     <view class='comment'>
     <block wx:for='{{commentList}}' wx:key='*'>
         <view class='comment-item'>
@@ -38,6 +40,7 @@
         </view>
     </block>
     </view>
+    </block>
 
     <view class='commentBox whiteBg top-line'>
         <view bindtap='actionComment' class='input'>一起参与讨论</view>
