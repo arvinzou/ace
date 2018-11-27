@@ -14,7 +14,7 @@ Page({
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
         userId: null,
-        wxUser: null
+        loginUser: null
 
     },
 
@@ -22,35 +22,29 @@ Page({
      * 生命周期函数--监听页面加载;
      */
     onLoad: function(options) {
+    
 
     },
     initUserData: function() {
         var that = this;
-        let userInfo = util.getSysUser();
-        if(!userInfo){
-            wx.navigateTo({
-                url: "../regist/index"
-            });
-        }
-        that.setData({
-            userinfoData: userInfo,
-            isRegist: true,
-        });
-    },
-    initWxUserData: function() {
-        var that = this;
-        util.request(cfg.server + '/portal/www/selectWxUserByPrimaryKey.do', {
-                "id": wx.getStorageSync('WX-SESSION-ID')
-            },
-            function(ret) {
-                if (ret.status == 0) {
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                util.setSysUser(ret.data);
+                if (!ret.data) {
+                    wx.navigateTo({
+                        url: "../regist/index"
+                    });
+                }else{
                     that.setData({
-                        wxUser: ret.value
+                        userinfoData: ret.data,
+                        isRegist: true,
                     });
                 }
             }
         );
+        
     },
+
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
@@ -77,37 +71,23 @@ Page({
      */
     onShow: function() {
         var that = this;
-
-        // 判断有没有鉴权
-        if (!util.is_login()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../me/index&type=switchTab"
-            });
-            return;
-        }
+        that.initUserAdmin();
         // 判断有没有注册
-        var userInfo = util.getSysUser();
-        if (userInfo) {
-            that.initUserData();
-        } else {
-            that.getSysUserInfo();
-        }
+        that.initUserData();
         that.setData({
             userId: wx.getStorageSync('WX-SESSION-ID')
         })
-        that.initWxUserData();
     },
 
-    getSysUserInfo:function(){
-        let that=this;
-        util.request(cfg.findUserInfo, {},
+    initUserAdmin: function(){
+        var that = this;
+        util.request(cfg.server+'/portal/www/isAdmin.do', {},
             function (ret) {
-                util.setSysUser(ret.data);
-                that.initUserData();
+                console.log(ret);
+                that.setData({ loginUser: ret.status});
             }
         );
     },
-
     /**
      * 生命周期函数--监听页面隐藏
      */

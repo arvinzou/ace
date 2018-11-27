@@ -28,7 +28,11 @@ Page({
         function (ret) {
             if (ret.status == 0) {
                 console.log(ret);
-                that.setData({ ideaList: ret.data.rows});
+                var retData = ret.data.rows;
+                for (var i = 0; i < retData.length; i++) {
+                    retData[i].createDate = retData[i].createDate.substring(0, 10);
+                }
+                that.setData({ ideaList: retData });
             } else {
                 wx.showModal({
                     title: '提示',

@@ -1,4 +1,4 @@
-<view class='index'>
+<view class='index {{actionComment?"modelOverHide":""}}'>
 
     <block wx:for-items="{{list}}" wx:key="*">
         <view class="wrap">

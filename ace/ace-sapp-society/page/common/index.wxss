@@ -493,3 +493,8 @@ page {
     color:rgba(255,255,255,1);
     -webkit-appearance:none;
 }
+
+.modelOverHide{
+    height: 100%;
+    overflow: hidden;
+}
