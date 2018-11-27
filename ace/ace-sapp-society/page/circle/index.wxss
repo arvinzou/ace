@@ -96,7 +96,7 @@ page{
   padding-bottom: 2rpx;
 }
 .pictures {
-  width: 400rpx;
+  width: 420rpx;
   margin-bottom: 20rpx; 
   margin-left: 84rpx;
 }
@@ -134,7 +134,7 @@ page{
 }
 
 .pictures .imglist3 {
-  height: 18vh;
+  height: 36vh;
   background: #fff;
   position: relative;
 }
@@ -163,7 +163,7 @@ page{
   position: absolute;
 }
 .pictures .imglist4 {
-	height: 36vh;
+ height: 36vh;
   background: #fff;
   position: relative;
 }
