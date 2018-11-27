@@ -71,6 +71,7 @@
 
 .reporter{
    padding-left: 0rpx;
+   color: #666666;
 }
 .reporter::after{
     content: '';
@@ -215,6 +216,7 @@
   text-align: center;
   padding: 5rpx;
   border:1rpx solid #fff;
+  font-size: 24rpx;
 }
 .status3{
   background:green;
@@ -223,6 +225,7 @@
   text-align: center;
   padding: 5rpx;
   border:1rpx solid #fff;
+  font-size: 24rpx;
 }
 .status4{
   background:red;
@@ -231,6 +234,7 @@
   text-align: center;
   padding: 5rpx;
   border:1rpx solid #fff;
+  font-size: 24rpx;
 }
 .videoImg{
     width: 100%;
