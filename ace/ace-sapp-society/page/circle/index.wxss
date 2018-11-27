@@ -340,8 +340,9 @@ page{
     -webkit-appearance:none;
 }
 .videoImg{
-    width: 100%;
-    height: 30vh;
+    width: 420rpx;
+    height: 18vh;
+    margin-left: 84rpx;
 }
 .mask{
     width: 100%;
