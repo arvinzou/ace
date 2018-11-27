@@ -30,20 +30,8 @@ Page({
         let that = this;
         let sysUserInfo = util.getSysUser();
         //如果没有注册，尝试重新申请获取一次。
-        if (sysUserInfo){
-            util.request(cfg.findUserInfo, {},
-                function (rst) {
-                    if (rst.status == 0) {
-                        util.setSysUser(rst.data);
-                        if (rst.data.regType == '2' && rst.data.societyOrg.status == '3') {
-                            that.setData({
-                                hiddenBtn: false,
-                            });
-                        }
-                        return;
-                    }
-                }
-            );
+        if (!sysUserInfo){
+           return;
         }
         if (sysUserInfo.regType == '2' && sysUserInfo.societyOrg.status == '3') {
             that.setData({
