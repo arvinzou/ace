@@ -1,12 +1,14 @@
 package com.huacainfo.ace.society.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.society.dao.SpaceOccupyInfoDao;
@@ -20,6 +22,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -195,5 +200,77 @@ public class SpaceOccupyInfoServiceImpl implements SpaceOccupyInfoService {
 
         return spaceOccupyInfoDao.findList(condition, 0, 10, "");
     }
+
+    /***
+     * 管理员场地锁定
+     * @param spaceId 场地ID
+     * @param dateTime 锁定日期      demo: 2018-10-31
+     * @param interval 锁定时间段    demo: 15:00-17:00
+     * @param curUserProp
+
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse spaceLock(String spaceId, String dateTime, String interval,
+                                     UserProp curUserProp) {
+
+        String year = dateTime.substring(0, 4);
+        String month = dateTime.substring(5, 7);
+        String day = dateTime.substring(8, 10);
+        SpaceOccupyInfo obj = new SpaceOccupyInfo();
+        obj.setId(GUIDUtil.getGUID());
+        obj.setSpaceId(spaceId);
+        obj.setOrderId("admin");
+        obj.setReserveDate(dateTime);
+        obj.setReserveInterval(interval);
+        obj.setYear(year);
+        obj.setMonth(month);
+        obj.setDay(day);
+        obj.setWhatDay(dateToWeek(dateTime));
+        obj.setCreateDate(DateUtil.getNowDate());
+        obj.setCreateUserId(curUserProp.getUserId());
+        obj.setCreateUserName("管理员");
+
+        spaceOccupyInfoDao.insert(obj);
+
+        return new MessageResponse(ResultCode.SUCCESS, "锁定成功");
+    }
+
+    /***
+     * 管理员 移除场地锁定
+     * @param id 数据ID
+     * @param curUserProp
+
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse removeLock(String id, UserProp curUserProp) {
+
+        int i = spaceOccupyInfoDao.deleteByPrimaryKey(id);
+        return new MessageResponse(ResultCode.SUCCESS, "移除成功");
+    }
+
+    private String dateToWeek(String datetime) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+//        String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
+        String[] weekDays = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+        Calendar cal = Calendar.getInstance(); // 获得一个日历
+        Date datet = null;
+        try {
+            datet = f.parse(datetime);
+            cal.setTime(datet);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1; // 指示一个星期中的某天。
+        if (w < 0) {
+            w = 0;
+        }
+
+        return weekDays[w];
+    }
+
 
 }
