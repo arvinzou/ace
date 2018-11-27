@@ -58,4 +58,7 @@ public interface UserinfoDao {
                           @Param("appid") String appid);
 
     int updateByPrimaryKeySelective(Userinfo record);
+
+
+    int isAdmin(String unionid);
 }

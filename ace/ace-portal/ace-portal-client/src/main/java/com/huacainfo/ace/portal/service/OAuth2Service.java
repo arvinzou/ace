@@ -28,4 +28,6 @@ public interface OAuth2Service {
     public abstract MessageResponse unbind(String unionid) throws Exception;
 
 
+
+
 }

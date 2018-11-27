@@ -213,4 +213,5 @@ public class ArticleServiceImpl implements ArticleService {
 		rst.put("data",this.articleDao.getList(params));
 		return rst;
 	}
+
 }

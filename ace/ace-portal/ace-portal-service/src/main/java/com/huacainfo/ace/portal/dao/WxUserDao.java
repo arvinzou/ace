@@ -55,4 +55,6 @@ public interface WxUserDao {
 
     List<WxUserVo> getSysWxUsers(@Param("sysId") String sysId);
 
+    int isAdmin(String unionid);
+
 }

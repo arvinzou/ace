@@ -242,4 +242,11 @@
         </set>
         where unionid = #{unionid,jdbcType=VARCHAR}
     </update>
+
+    <select id="isAdmin" resultType="int">
+        select count(*)
+        from
+        wx_admin where
+        unionid=#{unionid}
+    </select>
 </mapper>

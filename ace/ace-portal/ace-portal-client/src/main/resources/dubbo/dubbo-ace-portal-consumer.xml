@@ -143,5 +143,8 @@
     <dubbo:reference interface="com.huacainfo.ace.portal.service.WeChatApiService"
                      id="weChatApiService"/>
 
+    <dubbo:reference interface="com.huacainfo.ace.portal.service.WxAdminService"
+                     id="wxAdminService"/>
+
 
 </beans>
