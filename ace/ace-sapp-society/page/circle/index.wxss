@@ -4,6 +4,7 @@
 page{
   background:#fff;
 }
+
 .index{
   height: 100%;
 }

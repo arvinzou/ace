@@ -9,6 +9,7 @@ Page({
       maskFlag: true,
       videoUrl: null,
       userinfo: wx.getStorageSync('userinfo')
+      
   },
     
   /**
