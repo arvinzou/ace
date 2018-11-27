@@ -1,4 +1,4 @@
-<view class='index'>
+<view class='index {{actionComment?"modelOverHide":""}}'>
     <view class='content'>
         <view class='idea-title'><text>{{ detail.title }}</text></view>
         <view class='idea-info'>
