@@ -259,6 +259,8 @@ page{
 .comment-text{
   border-radius:15rpx;
   padding: 10rpx;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 .headimg{
   width: 40rpx;
