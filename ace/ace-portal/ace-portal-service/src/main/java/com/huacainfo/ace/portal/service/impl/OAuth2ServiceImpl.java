@@ -147,6 +147,11 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         o.setExpires_in(Long.valueOf(expires_in));
         o.setAccess_token(access_token);
         o.setRefresh_token(refresh_token);
+
+        int t=userinfoDao.isAdmin(o.getUnionid());
+        if(t>0){
+            o.setRole("admin");
+        }
         if (this.userinfoDao.isExit(o) > 0) {
             this.userinfoDao.updateByPrimaryKeySelective(o);
         } else {

@@ -145,4 +145,7 @@
     <dubbo:service interface="com.huacainfo.ace.portal.service.WeChatApiService"
                    ref="weChatApiService"/>
 
+    <dubbo:service interface="com.huacainfo.ace.portal.service.WxAdminService"
+                   ref="wxAdminService"/>
+
 </beans>

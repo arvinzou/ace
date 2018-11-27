@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.Date;
 import java.util.Calendar;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.portal.model.WxFormid;
 import com.huacainfo.ace.portal.service.AuthorityService;
@@ -145,5 +146,21 @@ public class AuthorityController extends PortalBaseController{
 		int date = c.get(Calendar.DATE);
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		System.out.println(hour+""+date) ;
+	}
+
+	/**
+	 * 1、动态判断
+	 请求：/portal/www/isAdmin.do 无参数
+	 返回 status=0 管理员 status=1 非管理员
+	 2、登录判断
+	 获取微信用户后,role=admin为管理员
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/isAdmin.do")
+	@ResponseBody
+	public MessageResponse isAdmin()throws Exception {
+		String _3rd_session=this.getRequest().getHeader("WX-SESSION-ID");
+		return this.authorityService.isAdmin(_3rd_session);
 	}
 }

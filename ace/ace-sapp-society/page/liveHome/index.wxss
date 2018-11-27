@@ -58,7 +58,6 @@
 }
 .status-box{
     content: '';
-    clear: both;
     display: block
 }
 .status-icon-text{
