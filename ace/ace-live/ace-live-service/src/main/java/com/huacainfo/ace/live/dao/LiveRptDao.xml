@@ -118,7 +118,7 @@
         from live_rpt t
         left join live c on t.rid=c.id
 
-        where c.deptId=#{condition.deptId}
+        where 0=0
         <if test='condition.content!=null and condition.content!=""'>
             and t.content like
             concat('%',#{condition.content,jdbcType=VARCHAR},'%')
