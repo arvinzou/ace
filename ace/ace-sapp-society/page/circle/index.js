@@ -1,6 +1,5 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
-var start=0;
 Page({
   /**
    * 页面的初始数据
@@ -19,7 +18,6 @@ Page({
     console.log(" 生命周期函数--监听页面加载");
     var that = this;
     that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo")});
-    start=0;
     that.initData();
   },
     viewVideo: function (e) {
@@ -72,9 +70,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var that=this;
-    that.initData();
-    wx.stopPullDownRefresh();
+      var that = this;
+      that.setData({ sysUserInfo: wx.getStorageSync("sysUserInfo") });
+      that.initData();
+     wx.stopPullDownRefresh();
   },
 
   /**
@@ -92,7 +91,7 @@ Page({
   },
   initData:function(){
     var that=this;
-      util.request(cfg.server + "/society/circle/www/getList", { start: start, limit: 1000, status:"3"},
+      util.request(cfg.server + "/society/circle/www/getList", { start: 0, limit: 1000, status:"3"},
       function (data) {
         that.setData({
           list: data

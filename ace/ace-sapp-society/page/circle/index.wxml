@@ -1,4 +1,4 @@
-<scroll-view scroll-y="true" class='index'>
+<view class='index'>
     <block wx:for-items="{{list}}" wx:key="*">
         <view class="wrap">
             <view class='report-box-second'>
@@ -9,15 +9,15 @@
                     <block wx:else>
                         <image src="../../image/default_header.png" class="headimgp" />
                     </block>
-                    <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
-                    <text style='padding:10rpx'>{{item.createDate}}</text>
+                    <view class='reporter-right'>
+                        <view class='releaseName'>{{item.rpt.nickname}}</view>
+                        <view class='releaseTime'>{{item.createDate}}</view>
+                    </view>
                 </view>
                 <view class='rpt-content'>
                     <view wx:if="{{item.content.length>0}}" class="content">
                         <text>{{item.content}}</text>
                     </view>
-
-                    <!--<video class="{{item.type==1?'show':'hide'}}" src="{{item.video}}" style='width:100%;height:35vh' objectFit="contain"></video>-->
                     <image src='../../image/video.png' data-index='{{index}}' id='{{ item.video }}' class='videoImg {{item.type==1?"show":"hide"}}' bindtap='viewVideo'></image>
                     <audio class="{{item.type==3?'show':'hide'}}" src="{{item.video}}" name="录音" style='width:100%;' controls="{{1>0}}"></audio>
                     <view class="pictures" data-count="{{item.imageList.length}}">
@@ -63,7 +63,7 @@
                 <image class='btn-img' src='../../image/camera.png'></image>
             </view>
         </block>
-</scroll-view>
+</view>
 
 
 <view class="model" wx:if='{{actionComment}}'>
