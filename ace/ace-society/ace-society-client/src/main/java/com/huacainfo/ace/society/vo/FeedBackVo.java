@@ -1,10 +1,11 @@
 package com.huacainfo.ace.society.vo;
 
-import com.huacainfo.ace.society.model.PersonInfo;
+import com.huacainfo.ace.society.model.FeedBack;
 
 
-public class PersonInfoVo extends PersonInfo {
+public class FeedBackVo extends FeedBack {
     private static final long serialVersionUID = 1L;
+
     /**
      * 微信昵称
      */
@@ -29,4 +30,5 @@ public class PersonInfoVo extends PersonInfo {
     public void setHeadimgurl(String headimgurl) {
         this.headimgurl = headimgurl;
     }
+
 }

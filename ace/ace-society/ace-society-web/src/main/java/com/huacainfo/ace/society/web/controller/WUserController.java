@@ -11,10 +11,7 @@ import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.HttpUtils;
 import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.portal.service.WeChatApiService;
-import com.huacainfo.ace.society.service.AnalysisService;
-import com.huacainfo.ace.society.service.OrderInfoService;
-import com.huacainfo.ace.society.service.PointsRecordService;
-import com.huacainfo.ace.society.service.SocietyOrgInfoService;
+import com.huacainfo.ace.society.service.*;
 import com.huacainfo.ace.society.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +39,24 @@ public class WUserController extends SocietyBaseController {
     private WeChatApiService weChatApiService;
     @Autowired
     private SocietyOrgInfoService societyOrgInfoService;
+    @Autowired
+    private FeedBackService feedBackService;
+
+    /**
+     * 提交意见反馈
+     */
+    @RequestMapping("/feedBack")
+    public ResultResponse feedBack(String unionId, FeedBackVo params) throws Exception {
+        //微信用户信息
+        WxUser wxUser = getCurWxUser();
+        unionId = StringUtil.isNotEmpty(unionId) ? unionId : (null == wxUser ? "" : wxUser.getUnionId());
+        params.setUserId(unionId);
+        try {
+            return feedBackService.submit(params);
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
+    }
 
     /**
      * 新组织信息创建
