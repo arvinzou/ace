@@ -1,6 +1,8 @@
 
 package com.huacainfo.ace.live.web.websocket;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.SpringUtils;
@@ -117,6 +119,15 @@ public class MyWebSocket {
     @OnMessage
     public void onMessage(String message, Session session, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
         logger.debug("rid:{} uid:{} 来自客户端的消息:{}", rid, uid, message);
+        try{
+            JSONObject o=JSON.parseObject(message).getJSONObject("header");
+            if(o.containsKey("rid")){
+                rid=o.getString("rid");
+            }
+            logger.debug("================解析RID：{}", rid);
+        }catch (Exception e){
+            logger.error(e.getMessage());
+        }
 
         Map<String, String> data = new HashMap<String, String>();
         data.put("rid", rid);
@@ -124,6 +135,8 @@ public class MyWebSocket {
         data.put("message", message);
         data.put("service",service);
         this.logger.info("{}", data);
+
+
 
         //群发消息
         for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {

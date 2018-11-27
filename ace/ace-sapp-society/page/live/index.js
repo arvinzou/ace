@@ -455,10 +455,21 @@ Page({
     var message = {};
     message.header = {
       cmd: 'content',
+      rid: that.data.id,
       wxuser: {
         headimgurl: that.data.userinfo.avatarUrl,
         nickname: that.data.userinfo.nickName,
-        openid: that.data.userinfo.openId,
+        openid: that.dat
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        a.userinfo.openId,
         unionid: that.data.userinfo.unionId
       }
     };
