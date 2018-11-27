@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.portal.service.AuthorityService;
 import com.huacainfo.ace.portal.service.OAuth2Service;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.slf4j.Logger;
@@ -37,6 +38,10 @@ public class OAuth2Controller extends PortalBaseController {
 
     @Autowired
     private TaskCmccService taskCmccService;
+
+
+    @Autowired
+    private AuthorityService authorityService;
 
     @Value("#{config[appid]}")
     private String appid;
@@ -123,5 +128,20 @@ public class OAuth2Controller extends PortalBaseController {
         SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
         this.logger.info("===============>unionid-> {}",rst.getValue().getUnionid());
         return rst;
+    }
+
+    /**
+     * 1、动态判断
+     请求：/portal/www/isAdmin.do 无参数
+     返回 status=0 管理员 status=1 非管理员
+     2、登录判断
+     获取微信用户后,role=admin为管理员
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/isAdmin.do")
+    @ResponseBody
+    public MessageResponse isAdmin()throws Exception {
+        return this.authorityService.isAdmin(this.getCurUserinfo().getUnionid());
     }
 }
