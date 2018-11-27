@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * @author: 陈晓克
  * @version: 2018-11-26
- * @Description: TODO(管理员列表)
+ * @Description: TODO(微信管理员)
  */
 public class WxAdminServiceImpl implements WxAdminService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -39,7 +39,7 @@ public class WxAdminServiceImpl implements WxAdminService {
     /**
      * @throws
      * @Title:find!{bean.name}List
-     * @Description: TODO(管理员列表分页查询)
+     * @Description: TODO(微信管理员分页查询)
      * @param: @param condition
      * @param: @param start
      * @param: @param limit
@@ -65,7 +65,7 @@ public class WxAdminServiceImpl implements WxAdminService {
     /**
      * @throws
      * @Title:insertWxAdmin
-     * @Description: TODO(添加管理员列表)
+     * @Description: TODO(添加微信管理员)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -84,13 +84,9 @@ public class WxAdminServiceImpl implements WxAdminService {
         if (CommonUtils.isBlank(o.getHeadimg())) {
             return new MessageResponse(1, "头像不能为空！");
         }
-        if (CommonUtils.isBlank(o.getLastModifyDate())) {
-            return new MessageResponse(1, "最后更新时间不能为空！");
-        }
-
         int temp = this.wxAdminDao.isExit(o);
         if (temp > 0) {
-            return new MessageResponse(1, "管理员列表名称重复！");
+            return new MessageResponse(1, "重复,已经在列表内！");
         }
 
         o.setId(GUIDUtil.getGUID());
@@ -98,16 +94,16 @@ public class WxAdminServiceImpl implements WxAdminService {
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.wxAdminDao.insert(o);
-        this.dataBaseLogService.log("添加管理员列表", "管理员列表", "",
+        this.dataBaseLogService.log("添加微信管理员", "微信管理员", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "保存成功！");
+        return new MessageResponse(0, "添加成功！");
     }
 
     /**
      * @throws
      * @Title:updateWxAdmin
-     * @Description: TODO(更新管理员列表)
+     * @Description: TODO(更新微信管理员)
      * @param: @param o
      * @param: @param userProp
      * @param: @throws Exception
@@ -137,7 +133,7 @@ public class WxAdminServiceImpl implements WxAdminService {
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
         this.wxAdminDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更管理员列表", "管理员列表", "",
+        this.dataBaseLogService.log("变更微信管理员", "微信管理员", "",
                 o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "保存成功！");
@@ -146,7 +142,7 @@ public class WxAdminServiceImpl implements WxAdminService {
     /**
      * @throws
      * @Title:selectWxAdminByPrimaryKey
-     * @Description: TODO(获取管理员列表)
+     * @Description: TODO(获取微信管理员)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<WxAdmin>
@@ -163,7 +159,7 @@ public class WxAdminServiceImpl implements WxAdminService {
     /**
      * @throws
      * @Title:deleteWxAdminByWxAdminId
-     * @Description: TODO(删除管理员列表)
+     * @Description: TODO(删除微信管理员)
      * @param: @param id
      * @param: @param userProp
      * @param: @throws Exception
@@ -174,9 +170,9 @@ public class WxAdminServiceImpl implements WxAdminService {
     @Override
     public MessageResponse deleteWxAdminByWxAdminId(String id, UserProp userProp) throws Exception {
         this.wxAdminDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除管理员列表", "管理员列表", id, id,
-                "管理员列表", userProp);
-        return new MessageResponse(0, "成功！");
+        this.dataBaseLogService.log("删除微信管理员", "微信管理员", id, id,
+                "微信管理员", userProp);
+        return new MessageResponse(0, "删除成功！");
     }
 
 

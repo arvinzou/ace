@@ -19,6 +19,9 @@ import com.huacainfo.ace.portal.service.WxAdminService;
 import com.huacainfo.ace.portal.vo.WxAdminVo;
 import com.huacainfo.ace.portal.vo.WxAdminQVo;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/wxAdmin")
 /**
@@ -121,9 +124,24 @@ public class WxAdminController extends PortalBaseController {
      */
     @RequestMapping(value = "/deleteWxAdminByWxAdminId")
     @ResponseBody
-    public MessageResponse deleteWxAdminByWxAdminId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+    public MessageResponse deleteWxAdminByWxAdminId(String id) throws Exception {
+
         return this.wxAdminService.deleteWxAdminByWxAdminId(id, this.getCurUserProp());
+    }
+
+    /**
+     * @throws
+     * @Title:selectList
+     * @Description: TODO(根据昵称查询微信用户)
+     * @param: @param nickname
+     * @param: @throws Exception
+     * @return: List<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2018-11-26
+     */
+    @RequestMapping(value = "/selectList")
+    @ResponseBody
+    public List<Map<String,Object>> selectList(String nickname) throws Exception {
+      return this.wxAdminService.selectList(nickname);
     }
 }

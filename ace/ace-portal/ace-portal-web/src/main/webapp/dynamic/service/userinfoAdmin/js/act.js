@@ -61,23 +61,105 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 /*管理员列表添加*/
-function add(type){
-window.location.href = 'add/index.jsp?id=' + urlParams.id;
+function add(){
+     console.log("=========add=========");
+   $('#modal-add').modal('show');
 }
 function initEvents() {
-    ﻿   $('#modal-preview').on('show.bs.modal', function (event) {
-    		var relatedTarget = $(event.relatedTarget);
-    		var id = relatedTarget.data('id');
-    		var title = relatedTarget.data('title');
+    ﻿   $('#modal-add').on('show.bs.modal', function (event) {
     		var modal = $(this);
-
+            console.log("=========show.bs.modal=========");
+            query();
     	})
-         $(".btn-group .btn").bind('click', function (event) {
+        $(".btn-group .btn").bind('click', function (event) {
                 $(event.target).siblings().removeClass("active");
                 console.log(event);
                 $(event.target).addClass("active");
-            });
+         });
+}
 
 
 
+function getList(nickname){
+    $.ajax({
+ 		type: "post",
+ 		url: contextPath + "/wxAdmin/selectList",
+ 		data: {
+ 			nickname: nickname
+ 		},
+ 		beforeSend: function(XMLHttpRequest) {
+ 			startLoad();
+ 		},
+ 		success: function(rst, textStatus) {
+ 		    console.log(rst);
+            render($("#user-List"), rst, "tpl-user");
+ 		},
+ 		complete: function(XMLHttpRequest, textStatus) {
+ 			stopLoad();
+ 		},
+ 		error: function() {
+ 			stopLoad();
+ 			alert("对不起出错了。");
+ 		}
+ 	});
+}
+
+function query(){
+    var nickname=$("input[name=nickname]").val();
+    getList(nickname);
+    return false;
+}
+
+function insertWxUser(unionid,nickname,headimg){
+     $.ajax({
+            type: "post",
+            url: contextPath + "/wxAdmin/insertWxAdmin",
+            data: {
+                jsons: JSON.stringify({unionid:unionid,nickname:nickname,headimg:headimg})
+            },
+            beforeSend: function(XMLHttpRequest) {
+                startLoad();
+            },
+            success: function(rst, textStatus) {
+                alert(rst.errorMessage);
+               if(rst.status==0){
+                    t_query();
+                    $('#modal-add').modal('hide');
+               }
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+                stopLoad();
+            },
+            error: function() {
+                stopLoad();
+                alert("对不起出错了。");
+            }
+        });
+}
+
+function del(id){
+     $.ajax({
+            type: "post",
+            url: contextPath + "/wxAdmin/deleteWxAdminByWxAdminId",
+            data: {
+                id: id
+            },
+            beforeSend: function(XMLHttpRequest) {
+                startLoad();
+            },
+            success: function(rst, textStatus) {
+                alert(rst.errorMessage);
+               if(rst.status==0){
+                    t_query();
+                    $('#modal-add').modal('hide');
+               }
+            },
+            complete: function(XMLHttpRequest, textStatus) {
+                stopLoad();
+            },
+            error: function() {
+                stopLoad();
+                alert("对不起出错了。");
+            }
+        });
 }

@@ -94,6 +94,6 @@
     ) a
     WHERE
     a.nickname like
-    concat(#{nickname,jdbcType=VARCHAR},'%')
+    concat(#{nickname,jdbcType=VARCHAR},'%')  limit 0, 30
   </select>
 </mapper>

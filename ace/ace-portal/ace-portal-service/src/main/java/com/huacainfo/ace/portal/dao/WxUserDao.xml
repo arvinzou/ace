@@ -219,4 +219,11 @@
     where u.cur_syid=#{sysId}
   </select>
 
+  <select id="isAdmin" resultType="int">
+    select count(*)
+    from
+    wx_admin where
+    unionid=#{unionid}
+  </select>
+
 </mapper>

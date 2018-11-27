@@ -83,6 +83,13 @@ public class AuthorityServiceImpl implements AuthorityService {
 		}
 		Map<String, Object> userProp=this.wxUserDao.selectSysUserByUnionId(_3rd_session);
 		userinfo.put("userProp",JSON.parseObject(JSON.toJSONString(userProp)));
+
+		int t=wxUserDao.isAdmin(userinfo.getString("unionId"));
+		if(t>0){
+			userinfo.put("role","admin");
+		}
+
+
 		Map<String, Object> o = new HashMap<String, Object>();
 		o.put("status","0");
         o.put("session_key", session_key);

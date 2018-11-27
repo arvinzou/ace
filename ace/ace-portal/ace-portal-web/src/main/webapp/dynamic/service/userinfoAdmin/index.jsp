@@ -18,13 +18,14 @@
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+
 <div class="portlet light">
 
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
                                                             <div class="col-md-3">
-                                                                <a href="add/index.jsp?id=${param.id}"  class="btn green">创建</a>
+                                                                <a href="javascript:add()"  class="btn green">添加</a>
                                                             </div>
                                                             <div class="col-md-5">
 
@@ -105,20 +106,67 @@
     </tr>
     {@/each}
 </script>
+
+
+<script id="tpl-user" type="text/template">
+    {@each data as item, index}
+    <div class="layout-user">
+    <a href="javascript:insertWxUser('\${item.unionid}','å\${item.nickname}','\${item.headimgurl}')">
+    <img class="photo" src="\${item.headimgurl}"></a>
+        <div style="text-align:center">
+            \${item.nickname}
+        </div>
+    </div>
+    {@/each}
+</script>
 ﻿
-<div class="modal fade"  role="dialog" id="modal-preview">
+<div class="modal fade"  role="dialog" id="modal-add">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">详细</h4>
+                <h4 class="modal-title">微信用户</h4>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                        <div class="form-body"  id="fm-preview">
+
+                <div class="portlet light">
+
+                    <div class="portlet-body">
+
+                        <div class="row custom-toolbar">
+                            <div class="col-md-3">
+
+                            </div>
+                            <div class="col-md-5">
+
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <form onsubmit="return query()">
+                                    <div class="input-group">
+                                        <input type="text"
+                                               name="nickname"
+                                               class="form-control"
+                                               placeholder="请输入昵称">
+                                        <span class="input-group-btn">
+                                                                        <button class="btn  btn-default search_btn"
+                                                                                type="submit">
+                                                                                搜索
+                                                                        </button>
+                                                                    </span>
+                                    </div>
+                                </form>
+                            </div>
 
                         </div>
+                        <div id="user-List" class="row">
+
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="modal-footer">
