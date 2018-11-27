@@ -9,6 +9,7 @@ Page({
     data: {
         userinfoData: null,
         isRegist: false,
+        actionComment:false,
         num1: parseInt(Math.random() * 100),
         num2: parseInt(Math.random() * 100),
         num3: parseInt(Math.random() * 100),
@@ -154,5 +155,55 @@ Page({
      */
     onShareAppMessage: function() {
 
-    }
+    },
+    actionComment: function () {
+        this.setData({
+            actionComment: true,
+        })
+    }, 
+    formSubmit: function (e) {
+        let that = this;
+        let vals = e.detail.value;
+        if (!vals.content) {
+            wx.showModal({
+                title: '提示',
+                content: '没有输入任何内容',
+            })
+            return;
+        }
+        vals.bisId = that.data.id;
+        util.request(cfg.submitComment, vals,
+            function (rst) {
+                if (rst.status == 0) {
+                    that.setData({
+                        actionComment: false,
+                    })
+                    that.clearStatus();
+                    that.getCommentList();
+                    return;
+                }
+                wx.showModal({
+                    title: '提示',
+                    content: '评论失败，稍后重试',
+                })
+            });
+    },
+    hiddenComment: function (e) {
+        let that = this;
+        if (that.data.commentVal) {
+            wx.showModal({
+                title: '提示',
+                content: '确定放弃输入？',
+                success: function (res) {
+                    if (!res.confirm) {
+                        return;
+                    }
+                }
+            })
+        } else {
+            that.setData({
+                actionComment: false,
+            })
+        }
+    },
 })

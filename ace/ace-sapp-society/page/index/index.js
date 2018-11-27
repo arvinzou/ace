@@ -12,7 +12,6 @@ Page({
         autoplay: true,
         interval: 5000,
         duration: 500,
-        isFrist:true,
         timer: {
             0: {
                 hour: "00",
@@ -243,8 +242,8 @@ Page({
             });
             return;
         }
-        if (!util.getSysUser()&&that.data.isFrist) {
-            that.data.isFrist=false;
+        // 判断有没有登陆。没有登陆则反复获取userinfo
+        if (!util.getSysUser()) {
             that.initUserData();
         }
         that.activityIng(5);

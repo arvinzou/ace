@@ -29,7 +29,10 @@
         </view>
         <view class='add_type'>
             <view class='title'>活动类型：</view>
-            <view class='value'>{{activityInfo.category=='1'?'公益活动':(activityInfo.category=='2'?'普及活动':'创意活动')}}</view>
+            <view class='value' wx:if="{{activityInfo.category=='1'}}">公益活动</view>
+            <view class='value' wx:elif="{{activityInfo.category=='2'}}">普及活动</view>
+            <view class='value' wx:elif="{{activityInfo.category=='3'}}">创意活动</view>
+            <view class='value' wx:elif="{{activityInfo.category=='4'}}">党建活动</view>
         </view>
     </view>
     <view class='help'>
