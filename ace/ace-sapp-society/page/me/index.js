@@ -27,16 +27,22 @@ Page({
     },
     initUserData: function() {
         var that = this;
-        let userInfo = util.getSysUser();
-        if(!userInfo){
-            wx.navigateTo({
-                url: "../regist/index"
-            });
-        }
-        that.setData({
-            userinfoData: userInfo,
-            isRegist: true,
-        });
+        util.request(cfg.findUserInfo, {},
+            function (ret) {
+                util.setSysUser(ret.data);
+                if (!ret.data) {
+                    wx.navigateTo({
+                        url: "../regist/index"
+                    });
+                }else{
+                    that.setData({
+                        userinfoData: ret.data,
+                        isRegist: true,
+                    });
+                }
+            }
+        );
+        
     },
 
     /**
@@ -65,37 +71,14 @@ Page({
      */
     onShow: function() {
         var that = this;
-
-        // 判断有没有鉴权
-        if (!util.is_login()) {
-            wx.navigateTo({
-                url: "../userinfo/index?url=../me/index&type=switchTab"
-            });
-            return;
-        }
-
         that.initUserAdmin();
         // 判断有没有注册
-        var userInfo = util.getSysUser();
-        if (userInfo) {
-            that.initUserData();
-        } else {
-            that.getSysUserInfo();
-        }
+        that.initUserData();
         that.setData({
             userId: wx.getStorageSync('WX-SESSION-ID')
         })
     },
 
-    getSysUserInfo:function(){
-        let that=this;
-        util.request(cfg.findUserInfo, {},
-            function (ret) {
-                util.setSysUser(ret.data);
-                that.initUserData();
-            }
-        );
-    },
     initUserAdmin: function(){
         var that = this;
         util.request(cfg.server+'/portal/www/isAdmin.do', {},
