@@ -309,4 +309,13 @@ public class AuthorityServiceImpl implements AuthorityService {
 		rst.setValue(o);
 		return rst;
 	}
+
+	@Override
+	public  MessageResponse isAdmin(String unionid) throws Exception{
+		int t=wxUserDao.isAdmin(unionid);
+		if(t>0){
+			return new MessageResponse(0,"YES");
+		}
+		return new MessageResponse(1,"NO");
+	}
 }

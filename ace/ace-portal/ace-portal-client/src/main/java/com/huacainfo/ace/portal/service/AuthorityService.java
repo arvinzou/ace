@@ -20,5 +20,8 @@ public interface AuthorityService {
 	public abstract MessageResponse authority(Map<String,Object> p) throws Exception;
 
 	public  SingleResult<UserProp> getCurUserPropByOpenId(String openId)throws Exception;
+
+
+	public abstract MessageResponse isAdmin(String unionid) throws Exception;
 	
 }
