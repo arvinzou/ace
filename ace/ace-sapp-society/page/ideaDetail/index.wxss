@@ -126,6 +126,8 @@
     font-weight:500;
     color:rgba(34,34,34,1);
     line-height:44rpx;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 
