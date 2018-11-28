@@ -6,11 +6,10 @@
 
 .page {
     background-color: #fff;
+    height: 100%;
     width: 750rpx;
-    height: 400rpx;
     background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: 100% 100%;
+    background-size: 100%;
     text-align: center;
     color: #a5a5a5;
     overflow: hidden;
@@ -23,6 +22,7 @@
     background-color: #feaa2d;
     border-radius: 10rpx;
     position: absolute;
-    top: 500rpx;
+    top: 580rpx;
     margin-left:55rpx; 
+    line-height: 100rpx;
 }
