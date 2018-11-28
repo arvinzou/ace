@@ -184,7 +184,7 @@
     t.likeNum,
     t.content,
     t.mediaContent video,
-    date_format(t.createTime, '%H:%i') createDate,
+    date_format(t.createTime, '%Y-%m-%d %H:%i') createDate,
     a.nickname reporter,
     a.headimgurl headimgurl,
     a.nickname nickname,
@@ -197,7 +197,7 @@
     d.headimgurl c_headimgurl,
     d.nickname c_nickname,
     d.openid c_openid,
-    date_format(c.createTime, '%H:%i:%s') c_createTime,
+    date_format(c.createTime, '%Y-%m-%d %H:%i:%s') c_createTime,
     e.statement auditMessage
     FROM
     circle t
@@ -219,7 +219,7 @@
       and t.status =#{status,jdbcType=VARCHAR}
     </if>
     ORDER BY
-    t.createTime desc
+    t.createTime desc,c.createTime desc
     limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
   </select>
   <update id="updateAddLike">

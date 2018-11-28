@@ -18,30 +18,12 @@ var shareJson = [
         "title":"经开区",
         "child":[
             {
-                "content":"企事业办事窗口",
-                "url":"http://wsbs.hunan.gov.cn/virtualhall/instance/baseinfo.jsp?parentid_index=430705999000_1&parentid=430705999000_81&areaCode=430705999000"
-            },
-            {
                 "content":"招商引资",
                 "url":"http://cdjkq.changde.gov.cn/col/col17080/index.html"
             },
             {
                 "content":"专业园区",
                 "url":"http://cdjkq.changde.gov.cn/col/col17085/index.html"
-            }
-        ]
-    },
-    {
-        "id":"25",
-        "title":"高新区",
-        "child":[
-            {
-                "content":"办事指南",
-                "url":"http://www.dingcheng.gov.cn/gxq/bsfw/bszn/"
-            },
-            {
-                "content":"政策文件",
-                "url":"http://www.dingcheng.gov.cn/gxq/xxgk/zcwj/"
             }
         ]
     },
@@ -202,20 +184,8 @@ var shareJson = [
         "title":"税务局",
         "child":[
             {
-                "content":"税收法规",
-                "url":"http://www.cdgtax.gov.cn/cdgtax/law_search.jsp"
-            },
-            {
                 "content": "涉税查询",
                 "url":"http://www.hntax.gov.cn/taxpayer_search.jsp"
-            },
-            {
-                "content":"小微企业优惠",
-                "url":"http://www.cdgtax.gov.cn/cdgtax/zhuanti.jsp?smallclassid=20150727510393&&id=20150727510377"
-            },
-            {
-                "content": "湖南省国税局",
-                "url": "http://www.hntax.gov.cn/zhuanti/ygzzt/"
             },
             {
                 "content":"行政许可和处罚",

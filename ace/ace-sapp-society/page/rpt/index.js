@@ -116,34 +116,39 @@ Page({
     wx.chooseImage({
       sizeType: ['original', 'compressed'],
       sourceType: [type],
+      count:1,
       success: function (res) {
-
-        for (var i = 0; i < res.tempFilePaths.length; i++) {
-          wx.showLoading({ title: "正在上传" });
-          console.log(res.tempFilePaths[i]);
-          wx.uploadFile({
-            url: cfg.uploadUrl,
-            filePath: res.tempFilePaths[i],
-            name: 'file',
-            header: {
-              'content-type': 'multipart/form-data'
-            },
-            formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
-            success: function (resp) {
-              console.log(resp);
-              wx.hideLoading();
-              var obj = JSON.parse(resp.data);
-              console.log(obj);
-              fileList.push(obj.file_path);
-              that.setData({
-                files: fileList
-              });
-            },
-            fail: function (res) {
-              wx.hideLoading();
-              wx.showModal({ title: "提示", content: "上传失败" })
+        var len = res.tempFilePaths.length;
+        if(len<=4){
+            for (var i = 0; i < res.tempFilePaths.length; i++) {
+            wx.showLoading({ title: "正在上传" });
+            console.log(res.tempFilePaths[i]);
+            wx.uploadFile({
+                url: cfg.uploadUrl,
+                filePath: res.tempFilePaths[i],
+                name: 'file',
+                header: {
+                'content-type': 'multipart/form-data'
+                },
+                formData: { id: that.data.id, collectionName: "live", companyId: cfg.companyId },
+                success: function (resp) {
+                console.log(resp);
+                wx.hideLoading();
+                var obj = JSON.parse(resp.data);
+                console.log(obj);
+                fileList.push(obj.file_path);
+                that.setData({
+                    files: fileList
+                });
+                },
+                fail: function (res) {
+                wx.hideLoading();
+                wx.showModal({ title: "提示", content: "上传失败" })
+                }
+            })
             }
-          })
+        }else{
+            wx.showModal({ title: "提示", content: "报道允许添加的图片数量为4" });
         }
 
 

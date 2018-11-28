@@ -16,6 +16,8 @@
     <%--common css--%>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
     <%--custom css--%>
 </head>
 <body>
@@ -83,6 +85,44 @@
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
+
+
+
+<div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
@@ -136,25 +176,25 @@
         <div class="form-group">
             <label class="col-md-2 view-label">组织类型</label>
             <div class="col-md-10">
-                {@if data.orgType == "1"}
-                 党组织
-                {@else if data.orgType == "2"}
+                {@if data.orgType == "2"}
                 社会组织
+                {@else if data.orgType == "1"}
+                党组织
                 {@/if}
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">组织封面</label>
-            <div class="col-md-10">
-                <img src="\${data.orgCover}" style="max-width:480px;"/>
+            <div class="col-md-10 my-gallery">
+                <img src="\${data.orgCover}"/>
             </div>
         </div>
-      <%--  <div class="form-group">
-            <label class="col-md-2 view-label">组织介绍</label>
-            <div class="col-md-10">
-                \${data.orgSummary}
-            </div>
-        </div>--%>
+        <%-- <div class="form-group">
+             <label class="col-md-2 view-label">组织介绍</label>
+             <div class="col-md-10">
+                 \${data.orgSummary}
+             </div>
+         </div>--%>
 
         <div class="form-group">
             <label class="col-md-2 view-label">组织地址</label>
@@ -236,7 +276,7 @@
         <td>
             <div class="row">
                 <div class="col-md-12">
-                    {@if data.headimgurl!=null && data.headimgurl !=''}
+                    {@if data.headimgurl!=null && data.headimgurl !='' && data.headimgurl.length>3}
                     <img src="\${data.headimgurl}" class="cover"/>
                     {@else}
                     <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
@@ -339,8 +379,8 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">组织封面</label>
-            <div class="col-md-10">
-                <img src="\${data.orgCover}" style="max-width:480px;"/>
+            <div class="col-md-10 my-gallery">
+                <img src="\${data.orgCover}"/>
             </div>
         </div>
         <div class="form-group">
@@ -442,6 +482,9 @@
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+
+<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>
