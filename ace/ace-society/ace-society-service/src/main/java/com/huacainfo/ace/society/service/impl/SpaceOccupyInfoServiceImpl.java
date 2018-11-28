@@ -218,23 +218,30 @@ public class SpaceOccupyInfoServiceImpl implements SpaceOccupyInfoService {
         String year = dateTime.substring(0, 4);
         String month = dateTime.substring(5, 7);
         String day = dateTime.substring(8, 10);
+
         SpaceOccupyInfo obj = new SpaceOccupyInfo();
-        obj.setId(GUIDUtil.getGUID());
         obj.setSpaceId(spaceId);
-        obj.setOrderId("admin");
-        obj.setReserveDate(dateTime);
         obj.setReserveInterval(interval);
         obj.setYear(year);
         obj.setMonth(month);
         obj.setDay(day);
-        obj.setWhatDay(dateToWeek(dateTime));
-        obj.setCreateDate(DateUtil.getNowDate());
-        obj.setCreateUserId(curUserProp.getUserId());
-        obj.setCreateUserName("管理员");
 
-        spaceOccupyInfoDao.insert(obj);
+        int isExist = spaceOccupyInfoDao.isExist(obj);
+        if (isExist < 1) {
+            obj = new SpaceOccupyInfo();
+            obj.setId(GUIDUtil.getGUID());
+            obj.setOrderId("admin");
+            obj.setReserveDate(dateTime);
+            obj.setWhatDay(dateToWeek(dateTime));
+            obj.setCreateDate(DateUtil.getNowDate());
+            obj.setCreateUserId(curUserProp.getUserId());
+            obj.setCreateUserName("管理员");
+            spaceOccupyInfoDao.insert(obj);
 
-        return new MessageResponse(ResultCode.SUCCESS, "锁定成功");
+            return new MessageResponse(ResultCode.SUCCESS, "锁定成功");
+        }
+
+        return new MessageResponse(ResultCode.FAIL, "锁定失败，已被其他用户占用");
     }
 
     /***

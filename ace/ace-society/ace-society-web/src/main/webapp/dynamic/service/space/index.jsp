@@ -87,12 +87,11 @@
                 <div id='wrap'>
                     <div id='external-events'>
                         <h4>可选时间</h4>
-                        <div class='fc-event'>am 9:00-11:00</div>
-                        <div class='fc-event'>pm 15:00-17:00</div>
+                        <div class='fc-event'>AM 9:00-11:00</div>
+                        <div class='fc-event'>PM 15:00-17:00</div>
                     </div>
                     <div id='calendar'></div>
                     <div style='clear:both'></div>
-                    <div id='draggable1' class='cool-event hide'></div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -314,6 +313,10 @@
     }
 
     #external-events .fc-event {
+        height: 25px;
+        text-align: center;
+        padding-bottom: 5px;
+        padding-top: 5px;
         margin: 10px 0;
         cursor: pointer;
     }
@@ -339,11 +342,23 @@
     }
 
     .custom-occupy {
-        color: #e6fa00;
+        color: black;
+        background-color: yellow;
+        border: 0px solid white;
+        height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 5px;
     }
 
     .admin-occupy {
-        color: #660005;
+        color: white;
+        background-color: red;
+        border: 0px solid white;
+        height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 5px;
     }
 </style>
 
