@@ -347,11 +347,12 @@
     }
 </style>
 
-<script src="fullcalendar/moment.min.js"></script>
+
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <%--custom js--%>
+<script src="fullcalendar/moment.min.js"></script>
 <script src="fullcalendar/jquery-ui.custom.min.js"></script>
 <script src="fullcalendar/fullcalendar.min.js"></script>
 

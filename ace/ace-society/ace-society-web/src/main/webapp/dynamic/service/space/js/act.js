@@ -34,6 +34,8 @@ function initPage() {
             getPageList();
         }
     });
+
+
 }
 /*爱心商品条件查询*/
 function t_query() {
@@ -118,7 +120,7 @@ function getOccupyData(did) {
                         center: 'title',
                         right: 'month,agendaWeek,agendaDay'
                     },
-                    defaultDate: '2015-02-12',
+                    defaultDate: '2018-11-27',
                     monthNames: ['一月', '二月 ', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
                     dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
                     editable: true,
@@ -221,13 +223,16 @@ function initEvents() {
         });
     });
     //锁定弹框
+
     $('#modal-lock').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
         //日历插件初始化
-        calendarInit(id);
+        setTimeout(function(){
+            calendarInit(id);
+        }, 100);
     });
 
     $('#modal-audit').on('show.bs.modal', function (event) {
