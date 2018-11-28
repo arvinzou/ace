@@ -91,4 +91,23 @@ public interface SpaceOccupyInfoService {
      * @return ResultResponse
      */
     List<SpaceOccupyInfoVo> spaceOccupyInfo(SpaceOccupyInfoQVo condition);
+
+
+    /***
+     * 管理员场地锁定
+     * @param spaceId 场地ID
+     * @param dateTime 锁定日期
+     * @param interval 锁定时间段
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse spaceLock(String spaceId, String dateTime, String interval, UserProp curUserProp);
+
+    /***
+     * 管理员 移除场地锁定
+     * @param id 数据ID
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse removeLock(String id, UserProp curUserProp);
 }

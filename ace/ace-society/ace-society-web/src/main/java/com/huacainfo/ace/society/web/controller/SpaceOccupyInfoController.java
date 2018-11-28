@@ -47,13 +47,11 @@ public class SpaceOccupyInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/findSpaceOccupyInfoList")
     @ResponseBody
-    public PageResult
-            <SpaceOccupyInfoVo> findSpaceOccupyInfoList(SpaceOccupyInfoQVo condition,
-                                                        PageParamNoChangeSord page) throws Exception {
+    public PageResult<SpaceOccupyInfoVo> findSpaceOccupyInfoList(SpaceOccupyInfoQVo condition,
+                                                                 PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <SpaceOccupyInfoVo> rst = this.spaceOccupyInfoService
-                .findSpaceOccupyInfoList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<SpaceOccupyInfoVo> rst = spaceOccupyInfoService.findSpaceOccupyInfoList(condition,
+                page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
@@ -107,8 +105,7 @@ public class SpaceOccupyInfoController extends SocietyBaseController {
      */
     @RequestMapping(value = "/selectSpaceOccupyInfoByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <SpaceOccupyInfoVo> selectSpaceOccupyInfoByPrimaryKey(String id) throws Exception {
+    public SingleResult<SpaceOccupyInfoVo> selectSpaceOccupyInfoByPrimaryKey(String id) throws Exception {
         return this.spaceOccupyInfoService.selectSpaceOccupyInfoByPrimaryKey(id);
     }
 
@@ -129,5 +126,35 @@ public class SpaceOccupyInfoController extends SocietyBaseController {
         String id = json.getString("id");
         return this.spaceOccupyInfoService.deleteSpaceOccupyInfoBySpaceOccupyInfoId(id, this.getCurUserProp());
     }
+
+    /***
+     * 管理员场地锁定
+     * @param spaceId 场地ID
+     * @param dateTime 锁定日期
+     * @param interval 锁定时间段
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @RequestMapping(value = "/spaceLock")
+    @ResponseBody
+    public MessageResponse spaceLock(String spaceId, String dateTime, String interval) throws Exception {
+
+        return this.spaceOccupyInfoService.spaceLock(spaceId, dateTime, interval, this.getCurUserProp());
+    }
+
+
+    /***
+     * 管理员 移除场地锁定
+     * @param id 数据ID
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @RequestMapping(value = "/removeLock")
+    @ResponseBody
+    public MessageResponse removeLock(String id) throws Exception {
+
+        return this.spaceOccupyInfoService.removeLock(id, this.getCurUserProp());
+    }
+
 
 }

@@ -34,6 +34,8 @@ function initPage() {
             getPageList();
         }
     });
+
+
 }
 /*爱心商品条件查询*/
 function t_query() {
@@ -51,7 +53,7 @@ function getPageList() {
         if (rst.status == 0) {
             if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total==0?1:rst.total,
+                    totalCounts: rst.total == 0 ? 1 : rst.total,
                     currentPage: 1
                 });
             }
@@ -88,13 +90,157 @@ function detail(id) {
     })
 }
 
+function getOccupyData(did) {
+    $.ajax({
+        url: contextPath + "/spaceOccupyInfo/findSpaceOccupyInfoList",
+        type: "post",
+        async: true,
+        data: {spaceId: did},
+        success: function (rst) {
+            if (rst.status == 0) {
+                var data = [];
+                //遍历数据，获取已占用数据
+                $(rst.rows).each(function (index, item) {
+                    //index指下标
+                    //item指代对应元素内容
+                    //this指代每一个元素对象
+                    var itemData = {
+                        id: item.id,
+                        title: item.createUserName + ' ' + item.reserveInterval,
+                        start: item.reserveDate,
+                        className: item.orderId == 'admin' ? 'admin-occupy' : 'custom-occupy',
+                        orderId: item.orderId
+                    };
+                    data.push(itemData);
+                });
+                //默认配置选项
+                var options = {
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    defaultDate: '2018-11-27',
+                    monthNames: ['一月', '二月 ', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                    dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+                    editable: true,
+                    droppable: true,
+                    eventLimit: true,
+                    drop: function (date, allDay, jsEvent, ui) {//event 移动进入后触发
+                        var dateTime = JSON.stringify(date);
+                        dateTime = dateTime.substring(1, 11);
+                        var interval = $(this).text();
+                        interval = interval.substring(3, interval.length);
+                        if (confirm("确定锁定此时间么?")) {
+                            $.ajax({
+                                url: contextPath + "/spaceOccupyInfo/spaceLock",
+                                type: "post",
+                                async: false,
+                                data: {
+                                    spaceId: did,
+                                    dateTime: dateTime,
+                                    interval: interval
+                                },
+                                success: function (rst) {
+                                    stopLoad();
+                                    alert(rst.errorMessage);
+                                    if (rst.status == 0) {
+                                        calendarInit(did);
+                                    }
+                                },
+                                error: function () {
+                                    stopLoad();
+                                    alert("对不起出错了！");
+                                }
+                            });
+                        }
+                    },
+                    eventClick: function (event) {
+                        //取消预订问题
+                        var orderId = event.orderId;
+                        if ("admin" != orderId) {
+                            alert("不得移除客户占用!");
+                        }
+                        if (confirm("确定移除锁定么?")) {
+                            $.ajax({
+                                url: contextPath + "/spaceOccupyInfo/removeLock",
+                                type: "post",
+                                async: false,
+                                data: {id: event.id},
+                                success: function (rst) {
+                                    stopLoad();
+                                    alert(rst.errorMessage);
+                                    if (rst.status == 0) {
+                                        calendarInit(did);
+                                    }
+                                },
+                                error: function () {
+                                    stopLoad();
+                                    alert("对不起出错了！");
+                                }
+                            });
+                        }
+                    }
+                };
+                //被占用情况数据
+                options.events = data;
+                //init
+                $('#calendar').fullCalendar(options);
+                //$('#calendar').fullCalendar('render');
+                //$('#calendar').fullCalendar('today');
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
+
+function calendarInit(did) {
+    $('#calendar').fullCalendar('destroy');
+    //初始化
+    getOccupyData(did);
+}
+
 function initEvents() {
+    //注册拖动事件
+    $('#external-events .fc-event').each(function () {
+        // store data so the calendar knows to render an event upon drop
+        $(this).data('event',
+            {
+                title: '管理员 ' + $.trim($(this).text()).substring(3, $(this).text().length), // use the element's text as the event title
+                className: 'admin-occupy',
+                stick: true // maintain when user navigates (see docs on the renderEvent method)
+            }
+        );
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+            zIndex: 999,
+            revert: true, // will cause the event to go back to its
+            revertDuration: 0 //  original position after the drag
+        });
+    });
+    //锁定弹框
+
+    $('#modal-lock').on('show.bs.modal', function (event) {
+        var relatedTarget = $(event.relatedTarget);
+        var id = relatedTarget.data('id');
+        var modal = $(this);
+        modal.find('.modal-body input[name=id]').val(id);
+        //日历插件初始化
+        setTimeout(function(){
+            calendarInit(id);
+        }, 100);
+    });
+
     $('#modal-audit').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
-    })
+    });
     $('#modal-audit .btn-primary').on('click', function () {
         $('#modal-audit form').submit();
     });
@@ -113,8 +259,30 @@ function initEvents() {
         }
     });
 
-
 }
+
+function saveLock(params) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/commodity/spaceLock",
+        type: "post",
+        async: false,
+        data: params,
+        success: function (rst) {
+            stopLoad();
+            $("#modal-lock").modal('hide');
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                getPageList();
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
+}
+
 /*爱心商品删除*/
 function del(id) {
     var params = {id: id};
