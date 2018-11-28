@@ -313,9 +313,8 @@
     }
 
     #external-events .fc-event {
-        height: 25px;
+        height: 20px;
         text-align: center;
-        padding-bottom: 5px;
         padding-top: 5px;
         margin: 10px 0;
         cursor: pointer;
@@ -370,6 +369,8 @@
 <script src="fullcalendar/moment.min.js"></script>
 <script src="fullcalendar/jquery-ui.custom.min.js"></script>
 <script src="fullcalendar/fullcalendar.min.js"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/fullcalendar/lang/zh-cn.js?v=${cfg.version}"></script>
+
 
 <script src="js/act.js?v=${cfg.version}"></script>
 
