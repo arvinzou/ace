@@ -32,7 +32,7 @@ app.controller(ngControllerName,function($scope){
 
         var userProp = parent.parent.userProp;
         if (userProp == null || userProp == ''){
-            layer.alert("请先登录后再发布！", {
+            layer.alert("请先登录后再进行查询！", {
                 icon: 5,
                 skin: 'myskin'
             });

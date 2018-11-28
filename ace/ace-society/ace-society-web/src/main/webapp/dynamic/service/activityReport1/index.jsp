@@ -16,6 +16,9 @@
     <%--common css--%>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/photoswipe.css">
+    <link rel="stylesheet prefetch" href="${portalPath}/content/common/photoview/default-skin/default-skin.css">
     <%--custom css--%>
 </head>
 <body>
@@ -85,27 +88,26 @@
 
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 90%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">个人信息详情</h4>
+                <h4 class="modal-title">报道信息详情</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-
+                    <%--详情模板填充--%>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <%--
-                <button type="button" class="btn btn-primary">确定</button>
-                --%>
+                <%--<button type="button" class="btn btn-primary">确定</button>--%>
             </div>
         </div>
     </div>
 </div>
+
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-audit">
@@ -153,6 +155,41 @@
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
+
+<div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
+    <div class="pswp__bg"></div>
+    <div class="pswp__scroll-wrap">
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 
@@ -206,7 +243,8 @@
     </tr>
     {@/each}
 </script>
-<%--详情juicer模板--%>
+
+
 <%--详情模板--%>
 <script id="tpl-detail" type="text/template">
     <div class="form-body">
@@ -218,7 +256,7 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 view-label">报道封面</label>
-            <div class="col-md-10">
+            <div class="col-md-10 my-gallery">
                 <img src="\${data.coverUrl}" style="max-width:480px;"/>
             </div>
         </div>
@@ -259,8 +297,16 @@
         </div>
     </div>
 </script>
+
+
+
+
+
 <jsp:include page="/dynamic/common/footer.jsp"/>
+
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
+<script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

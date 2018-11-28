@@ -116,13 +116,11 @@ function getOccupyData(did) {
                 //默认配置选项
                 var options = {
                     header: {
+
                         left: 'prev,next today',
                         center: 'title',
                         right: 'month,agendaWeek,agendaDay'
                     },
-                    defaultDate: '2018-11-27',
-                    monthNames: ['一月', '二月 ', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-                    dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
                     editable: true,
                     droppable: true,
                     eventLimit: true,
@@ -144,9 +142,6 @@ function getOccupyData(did) {
                                 success: function (rst) {
                                     stopLoad();
                                     alert(rst.errorMessage);
-                                    if (rst.status == 0) {
-                                        calendarInit(did);
-                                    }
                                 },
                                 error: function () {
                                     stopLoad();
@@ -154,12 +149,15 @@ function getOccupyData(did) {
                                 }
                             });
                         }
+                        //重新刷新
+                        calendarInit(did);
                     },
                     eventClick: function (event) {
                         //取消预订问题
                         var orderId = event.orderId;
                         if ("admin" != orderId) {
                             alert("不得移除客户占用!");
+                            return;
                         }
                         if (confirm("确定移除锁定么?")) {
                             $.ajax({
@@ -186,8 +184,6 @@ function getOccupyData(did) {
                 options.events = data;
                 //init
                 $('#calendar').fullCalendar(options);
-                //$('#calendar').fullCalendar('render');
-                //$('#calendar').fullCalendar('today');
             }
         },
         error: function () {
@@ -230,7 +226,7 @@ function initEvents() {
         var modal = $(this);
         modal.find('.modal-body input[name=id]').val(id);
         //日历插件初始化
-        setTimeout(function(){
+        setTimeout(function () {
             calendarInit(id);
         }, 100);
     });

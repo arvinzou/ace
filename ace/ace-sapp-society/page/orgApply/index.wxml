@@ -7,7 +7,7 @@
 
     <view class='form'>
         <view class='stepOne partOne {{stepNum==1?"":"hidden"}}'>
-            <view class='cover' bindtap='addImage'>
+            <view class='cover addImgBg' bindtap='addImage'>
                 <block wx-if='{{ imageCover == null}}'>
                     <text style='line-height:500rpx;'>添加照片</text>
                 </block>

@@ -19,7 +19,7 @@ Page({
     pusherStatus: 'stop',
     playimg: "../../image/play_on.png",
     cameraimg: "../../image/camera_on.png",
-    mutedimg: "../../image/muted_on.png",
+    mutedimg: "../../image/record_on.png",
     rtmpurl: cfg.rtmpserver + "13922861673?id=249134995",
     orientation: "horizontal",
     orientationimg: "../../image/screen_horizontal.png",
@@ -192,7 +192,7 @@ Page({
     } else {
       that.setData({
         muted: !muted,
-        mutedimg: "../../image/muted_on.png",
+        mutedimg: "../../image/record_on.png",
       });
     }
   },

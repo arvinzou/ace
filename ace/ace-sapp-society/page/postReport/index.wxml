@@ -1,5 +1,5 @@
 <view class='index'>
-    <view class='cover' bindtap='addImage' data-cover='cover'>
+    <view class='cover addImgBg' bindtap='addImage' data-cover='cover'>
         <image lazy-load="true" mode='aspectFill' hidden='{{!coverUrl}}' src='{{coverUrl}}'></image>
         <text hidden='{{coverUrl}}'>添加活动封面</text>
     </view>
