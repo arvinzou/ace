@@ -459,17 +459,7 @@ Page({
       wxuser: {
         headimgurl: that.data.userinfo.avatarUrl,
         nickname: that.data.userinfo.nickName,
-        openid: that.dat
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        a.userinfo.openId,
+        openid: that.date.userinfo.openId,
         unionid: that.data.userinfo.unionId
       }
     };
