@@ -412,6 +412,7 @@ width: 80%;
 .cmt-bar{
   padding: 5rpx; 
   text-align: right;
+  width: 420rpx;
 }
 .cmt-addlike{
   width: 40rpx;
