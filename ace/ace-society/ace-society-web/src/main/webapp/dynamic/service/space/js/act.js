@@ -119,7 +119,7 @@ function getOccupyData(did) {
 
                         left: 'prev,next today',
                         center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
+                        right: 'month'//,agendaWeek,agendaDay'
                     },
                     editable: true,
                     droppable: true,
@@ -228,7 +228,7 @@ function initEvents() {
         //日历插件初始化
         setTimeout(function () {
             calendarInit(id);
-        }, 100);
+        }, 200);
     });
 
     $('#modal-audit').on('show.bs.modal', function (event) {

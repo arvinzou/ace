@@ -76,7 +76,7 @@
 <%--==============common jsp-suffix==============--%>
 
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-lock">
-    <div class="modal-dialog" role="document" style="width: 80%">
+    <div class="modal-dialog" role="document" style="width: 60%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
@@ -90,7 +90,7 @@
                         <div class='fc-event'>AM 9:00-11:00</div>
                         <div class='fc-event'>PM 15:00-17:00</div>
                     </div>
-                    <div id='calendar'></div>
+                    <div id='calendar' style="max-width: 800px;max-height: 800px"></div>
                     <div style='clear:both'></div>
                 </div>
             </div>
@@ -315,7 +315,7 @@
     #external-events .fc-event {
         height: 20px;
         text-align: center;
-        padding-top: 5px;
+        padding-bottom: 3px;
         margin: 10px 0;
         cursor: pointer;
     }
@@ -342,7 +342,7 @@
 
     .custom-occupy {
         color: black;
-        background-color: yellow;
+        background-color: green;
         border: 0px solid white;
         height: 20px;
         text-align: center;
