@@ -13,7 +13,13 @@
                 </view>
 
                 <view class='textInfo'>
-                    <view class='name'>{{ userinfoData.nickName }}</view>
+                    <block wx:if='{{userinfoData.person}}'>
+                        <view class='name'>{{ userinfoData.person.realName }}</view>
+                    </block>
+                    <block wx:else>
+                        <view class='name'>{{ userinfoData.nickName }}</view>
+                    </block>
+
                     <!--<block wx:if='{{userinfoData.regType == "2"}}'>
                         <block wx:if='{{userinfoData.societyOrg.orgType == "1"}}'>
                             <view class='member-type'>会员类型: 党组织</view>
