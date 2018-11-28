@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5,politicalStatus:1};
+var params = {limit: 10,politicalStatus:1};
 window.onload = function () {
     initPage();
     initEvents();
