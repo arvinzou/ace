@@ -17,7 +17,8 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
     <%--custom css--%>
-
+    <link rel="stylesheet" href="fullcalendar/fullcalendar.min.css">
+    <%--<link rel="stylesheet" href="fullcalendar/fullcalendar.print.css">--%>
 </head>
 <body>
 <%--==============common jsp-prefix==============--%>
@@ -74,6 +75,33 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
 
+<div class="modal fade bs-example-modal-lg" role="dialog" id="modal-lock">
+    <div class="modal-dialog" role="document" style="width: 80%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">爱心场地锁定</h4>
+            </div>
+            <div class="modal-body">
+                <div id='wrap'>
+                    <div id='external-events'>
+                        <h4>可选时间</h4>
+                        <div class='fc-event'>AM 9:00-11:00</div>
+                        <div class='fc-event'>PM 15:00-17:00</div>
+                    </div>
+                    <div id='calendar'></div>
+                    <div style='clear:both'></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--列表juicer模板--%>
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
@@ -96,6 +124,7 @@
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
             {@if item.state==1}
+            <a class="operation" href="#" data-toggle="modal" data-target="#modal-lock" data-id="\${item.id}">锁定</a>
             <a class="operation" href="javascript:outline('\${item.id}');">下架</a>
             {@else}
             <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
@@ -177,7 +206,6 @@
         </div>
     </div>
 </script>
-
 <%--查看详情--%>
 <div class="modal fade bs-example-modal-lg" role="dialog" id="modal-detail">
     <div class="modal-dialog" role="document" style="width: 90%">
@@ -189,7 +217,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="fm-detail" role="form">
-                            <%--详情模板填充--%>
+                    <%--详情模板填充--%>
                 </form>
             </div>
             <div class="modal-footer">
@@ -244,6 +272,7 @@
         </div>
     </div>
 </div>
+<div id="calendar1"></div>
 </body>
 <style>
     .cover {
@@ -262,10 +291,86 @@
         padding-left: 15px;
         color: #FE6500;
     }
+
+    #wrap {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    #external-events {
+        float: left;
+        width: 15%;
+        padding: 0 10px;
+        border: 1px solid #ccc;
+        background: #eee;
+        text-align: left;
+    }
+
+    #external-events h4 {
+        font-size: 16px;
+        margin-top: 0;
+        padding-top: 1em;
+    }
+
+    #external-events .fc-event {
+        height: 25px;
+        text-align: center;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        margin: 10px 0;
+        cursor: pointer;
+    }
+
+    #external-events p {
+        margin: 1.5em 0;
+        font-size: 11px;
+        color: #666;
+    }
+
+    #external-events p input {
+        margin: 0;
+        vertical-align: middle;
+    }
+
+    #calendar {
+        float: right;
+        width: 80%;
+    }
+
+    .fc-content {
+        text-align: center;
+    }
+
+    .custom-occupy {
+        color: black;
+        background-color: yellow;
+        border: 0px solid white;
+        height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 5px;
+    }
+
+    .admin-occupy {
+        color: white;
+        background-color: red;
+        border: 0px solid white;
+        height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 5px;
+    }
 </style>
+
+
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
-<script src="js/act.js?v=${cfg.version}"></script>
 <%--custom js--%>
+<script src="fullcalendar/moment.min.js"></script>
+<script src="fullcalendar/jquery-ui.custom.min.js"></script>
+<script src="fullcalendar/fullcalendar.min.js"></script>
+
+<script src="js/act.js?v=${cfg.version}"></script>
+
 </html>

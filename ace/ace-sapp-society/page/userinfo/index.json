@@ -1,1 +1,6 @@
-{}
+{
+    "navigationBarTitleText": "芙蓉街道",
+    "navigationBarBackgroundColor": "#feaa2d",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
+}
