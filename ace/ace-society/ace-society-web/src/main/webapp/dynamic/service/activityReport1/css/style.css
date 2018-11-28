@@ -1,0 +1,11 @@
+.my-gallery{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    padding: 0px;
+}
+
+.my-gallery img{
+    width: 100%;
+    height: 100%;
+}
