@@ -228,7 +228,6 @@ public class SpaceOccupyInfoServiceImpl implements SpaceOccupyInfoService {
 
         int isExist = spaceOccupyInfoDao.isExist(obj);
         if (isExist < 1) {
-            obj = new SpaceOccupyInfo();
             obj.setId(GUIDUtil.getGUID());
             obj.setOrderId("admin");
             obj.setReserveDate(dateTime);

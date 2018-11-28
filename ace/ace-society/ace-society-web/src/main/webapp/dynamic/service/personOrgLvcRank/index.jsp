@@ -33,10 +33,10 @@
 
         </div>
 
-         <div class="col-sm-7" style="float:right">
-    <form onsubmit="return t_query()">
+         <div class="col-sm-7" style="float:right" >
+               <form onsubmit="return t_query()">
          <div class="input-group">
-              <div style="float:right;margin-right:15px" >
+              <div style="float:right;margin-right:1px" >
               时间：<input autocomplete="off" class="easyui-datebox" name="startDate"
                      style="width: 200px; height: 30px; line-height: 25px;"> 至
                     <input autocomplete="off" class="easyui-datebox" name="endDate"
@@ -47,9 +47,6 @@
          </div>
          </div>
      </form>
-</div>
-
-
         <div class="table-scrollable">
             <table class="table table-hover">
                 <thead>
