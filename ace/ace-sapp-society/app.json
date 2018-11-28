@@ -53,10 +53,10 @@
     "navigationBarBackgroundColor": "#fff",
     "backgroundColor": "#fff",
     "enablePullDownRefresh": true
-  },
+  },        
   "tabBar": {
     "color": "#000000",
-    "selectedColor": "#000000",
+    "selectedColor": "#FFAB32",
     "borderStyle": "#000000",
     "backgroundColor": "#fff",
     "list": [

@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5, orgType: 1};
+var params = {limit: 10, orgType: 1};
 window.onload = function () {
     initPage();
     initEvents();
