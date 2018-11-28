@@ -109,6 +109,8 @@ page{
   border-top-right-radius:15rpx;
   border-bottom-left-radius: 15rpx;
   border-bottom-right-radius: 15rpx;
+  word-break: break-all;
+  word-wrap: break-word;
 }
 
 .block{
