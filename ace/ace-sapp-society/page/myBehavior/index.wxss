@@ -47,14 +47,14 @@
 }
 .attach-image02{
     width:49.5%;
-    height:36vh;
+    height:18vh;
     margin-right:0.5%;
     margin-bottom:-5rpx;
     object-fit: cover;
 }
 .attach-image01{
-    width:93%;
-    height:36vh;
+    width:420rpx;
+    height:18vh;
     margin-right:3%;
     margin-bottom:2rpx;
     object-fit: cover;
@@ -142,12 +142,12 @@
     height: 35vh;
 }
 .attach{
-    width: 100%;
+    width: 420rpx;
     height: auto;
 }
 .videoImg{
-    width: 90%;
-    height: 300rpx;
+    width: 420rpx;
+    height: 18vh;
 }
 .mask{
     width: 100%;

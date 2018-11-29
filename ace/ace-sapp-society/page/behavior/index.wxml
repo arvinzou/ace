@@ -18,6 +18,7 @@
                         </view>
                         <view class='content-right'>
                             <view class='nickname'><text>{{item.nickName}}</text></view>
+                            <view class='releaseTime'><text>{{item.submitDate}}</text></view>
                             <view class='remark'>{{ item.compendium }}</view>
                             <view class='attach'>
                                 <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem' wx:for-index='fIndex'>
@@ -56,6 +57,7 @@
                         </view>
                         <view class='content-right'>
                             <view class='nickname'><text>{{item.nickName}}</text></view>
+                            <view class='releaseTime'><text>{{item.submitDate}}</text></view>
                             <view class='remark'>{{ item.compendium }}</view>
                             <view class='attach'>
                                 <block wx:for='{{ item.behaviorAnnexList}}' wx:for-item='fileItem'>
