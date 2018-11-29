@@ -78,7 +78,7 @@ jQuery(function ($) {
       var url = contextPath + "/fopAiQuestion/selectFopAiQuestionByPrimaryKey";
       $.getJSON(url, {id: rowid}, function (result) {
           if (result.status == 0) {
-              var navitem = document.getElementById('fm-detail').innerHTML;
+              var navitem = document.getElementById('tpl-detail').innerHTML;
               var html = juicer(navitem, {data: result.value});
               $("#fm-detail").html(html);
               $("#modal-detail").modal("show");

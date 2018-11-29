@@ -61,6 +61,87 @@ pageEncoding="utf-8"%>
         <div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
     </div>
 
+<script id="tpl-detail" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">问题</label>
+            <div class="col-md-10">
+                \${data.question}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">答案</label>
+            <div class="col-md-10">
+                \${data.answer}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">所含关键字</label>
+            <div class="col-md-10">
+                \${data.keyWord}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">累计提问次数</label>
+            <div class="col-md-10">
+                \${data.accCount}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
+                \${data.status}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人编号</label>
+            <div class="col-md-10">
+                \${data.createUserId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">入库日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+         <div class="form-group">
+             <label class="col-md-2 view-label">最后更新人编号</label>
+             <div class="col-md-10">
+                 \${data.lastModifyUserId}
+             </div>
+         </div>
+        </div>
+         <div class="form-group">
+             <label class="col-md-2 view-label">最后更新人姓名</label>
+             <div class="col-md-10">
+                 \${data.lastModifyUserName}
+             </div>
+         </div>
+        </div>
+         <div class="form-group">
+             <label class="col-md-2 view-label">最后更新时间</label>
+             <div class="col-md-10">
+                 \${data.lastModifyDate}
+             </div>
+         </div>
+    </div>
+</script>
+
+
+
 <div class="modal fade" role="dialog" id="modal-detail">
     <div class="modal-dialog" role="document" style="width: 50%">
         <div class="modal-content">
@@ -72,42 +153,41 @@ pageEncoding="utf-8"%>
             </div>
 
             <div class="modal-body">
+
                 <form class="form-horizontal"  id="fm-detail" role="form">
                     <div class="form-body">
                           <h5 class="header-title">问题</h5>
                           <div class="row" style="padding:10px" id="question">
-                          \${data.question}
                           </div>
                           <h5 class="header-title">答案</h5>
                           <div class="row" style="padding:10px" id="answer">
-                          \${data.answer}
                           </div>
                           <h5 class="header-title">基本信息</h5>
                           <div class="row" style="padding:10px">
                               <div class="labelItem"><span class="labelItemHeader">
                       所含关键字</span>
                                   <br>
-                                  <span id="keyWord">\${data.keyWord}
+                                  <span id="keyWord">
                       </span>
                               </div>
                                   <br>
                               <div class="labelItem"><span class="labelItemHeader">
                       累计提问次数</span>
                                   <br>
-                                  <span id="accCount">\${data.accCount}
+                                  <span id="accCount">
                       </span>
                               </div>
                                    <br>
                               <div class="labelItem">
                                   <span class="labelItemHeader">备注</span>
                                   <br>
-                                  <span id="remark">\${data.remark}</span>
+                                  <span id="remark"></span>
                               </div>
                                   <br>
                               <div class="labelItem hide">
                                   <span class="labelItemHeader">状态</span>
                                   <br>
-                                  <span id="status">\${data.status}</span>
+                                  <span id="status"></span>
                               </div>
                                   <br>
                           </div>
@@ -116,42 +196,42 @@ pageEncoding="utf-8"%>
                               <div class="labelItem"><span class="labelItemHeader">
                       创建人编号</span>
                                   <br>
-                                  <span id="createUserId">\${data.createUserId}
+                                  <span id="createUserId">
                       </span>
                               </div>
                                   <br>
                               <div class="labelItem"><span class="labelItemHeader">
                       创建人姓名</span>
                                   <br>
-                                  <span id="createUserName">\${data.createUserName}
+                                  <span id="createUserName">
                       </span>
                               </div>
                                   <br>
                               <div class="labelItem"><span class="labelItemHeader">
                       入库日期</span>
                                   <br>
-                                  <span id="createDate">\${data.createDate}
+                                  <span id="createDate">
                       </span>
                               </div>
                                   <br>
                               <div class="labelItem"><span class="labelItemHeader">
                       最后更新人编号</span>
                                   <br>
-                                  <span id="lastModifyUserId">\${data.lastModifyUserId}
+                                  <span id="lastModifyUserId">
                       </span>
                               </div>
                                   <br>
                               <div class="labelItem"><span class="labelItemHeader">
                       最后更新人姓名</span>
                                   <br>
-                                  <span id="lastModifyUserName">\${data.lastModifyUserName}
+                                  <span id="lastModifyUserName">
                       </span>
                               </div>
                                   <br>
                               <div class="labelItem"><span class="labelItemHeader">
                       最后更新时间</span>
                                   <br>
-                                  <span id="lastModifyDate">\${data.lastModifyDate}
+                                  <span id="lastModifyDate">
                       </span>
                               </div>
                                   <br>
