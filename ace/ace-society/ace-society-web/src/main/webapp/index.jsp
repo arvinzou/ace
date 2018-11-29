@@ -205,6 +205,7 @@
     //需引用api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js
 
     var userlist = [];
+    var userJW=[];
 
     var map = new BMap.Map("container", {
         enableMapClick: false,
@@ -418,28 +419,30 @@
                 userlist=result.data;
                 var convertor = new BMap.Convertor();
                 var pointArr = [];
-                for(var i=0;i<userlist.length;i++) {
+                for(var i=1;i<userlist.length+1;i++) {
                     var pt = new BMap.Point(userlist[i].longitude, userlist[i].latitude);
                     pointArr.push(pt);
-
+                    if(i%10==0){
+                        convertor.translate(pointArr, 3, 5, translateCallback);
+                        pointArr = [];
+                    };
+                    if(i==userlist.length){
+                        for(var i = 0; i < userJW.length; i++) {
+                            var img=userlist[i].avatarUrl;
+                            if(!img){
+                                img=headimg;
+                            }
+                            var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
+                            map.addOverlay(new BMap.Marker(userJW[i],{ icon: myIcon }));
+                        }
+                    }
                 }
-
-                convertor.translate(pointArr, 3, 5, translateCallback)
             }
         })
     }
 
     translateCallback = function(data) {
-        if(data.status === 0) {
-            for(var i = 0; i < data.points.length; i++) {
-                var img=userlist[i].avatarUrl;
-                if(!img){
-                  img=headimg;
-                }
-                var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
-                map.addOverlay(new BMap.Marker(data.points[i],{ icon: myIcon }));
-            }
-        }
+        userJW.push(data.points);
     }
 
 
