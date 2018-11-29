@@ -193,6 +193,7 @@ function deleteChapter(partId){
             alert(result.errorMessage);
             stopLoad();
             if(result.status == 0) {
+                initPartEditList();
                 initPartList();
             }
         },
