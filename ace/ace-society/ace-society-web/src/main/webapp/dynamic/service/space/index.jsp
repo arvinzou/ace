@@ -341,7 +341,7 @@
     }
 
     .custom-occupy {
-        color: black;
+        color: white;
         background-color: green;
         border: 0px solid white;
         height: 20px;

@@ -1,61 +1,38 @@
 
 package com.huacainfo.ace.live.web.websocket;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.tools.CommonKeys;
-import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.kafka.KafkaProducerService;
 import com.huacainfo.ace.common.tools.SpringUtils;
-import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisOperations;
 
-import java.io.IOException;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.ServerEndpoint;
+import javax.websocket.*;
 import javax.websocket.server.PathParam;
-import javax.websocket.EndpointConfig;
-import javax.servlet.http.HttpSession;
+import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 
-import com.huacainfo.ace.common.kafka.KafkaProducerService;
-
-/**
- * Created by chenxiaoke on 2017/12/19.
- */
-//该注解用来指定一个URI，客户端可以通过这个URI来连接到WebSocket。类似Servlet的注解mapping。无需在web.xml中配置。
-@ServerEndpoint(value = "/www/websocket/{rid}/{uid}/{service}"/*, configurator = HttpSessionConfigurator.class*/)
+@ServerEndpoint(value = "/www/websocket/{rid}/{uid}/{service}")
 public class MyWebSocket {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    //静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。
     private static int onlineCount = 0;
 
-    //concurrent包的线程安全Set，用来存放每个客户端对应的MyWebSocket对象。若要实现服务端与单一客户端通信的话，可以使用Map来存放，其中Key可以为用户标识
-    // private static CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
+    public static ConcurrentHashMap<String, CopyOnWriteArraySet<MyWebSocket>> rooms = new ConcurrentHashMap();
 
-    public static Map<String, CopyOnWriteArraySet<MyWebSocket>> rooms = new ConcurrentHashMap();
-
-    //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
-    //private HttpSession httpSession;
-    private String rid;
-    private String uid;
+
 
     private RedisOperations<String, Object> redisTemplate;
 
     private KafkaProducerService kafkaProducerService;
+
+    private String roomId;
+    private String uid;
 
 
     public MyWebSocket() {
@@ -63,85 +40,55 @@ public class MyWebSocket {
         this.kafkaProducerService = (KafkaProducerService) SpringUtils.getBean("kafkaProducerService");
     }
 
-    public synchronized void addSession(MyWebSocket webSocket) {
-        if (MyWebSocket.rooms.get(rid) == null) {
-            CopyOnWriteArraySet<MyWebSocket> webSocketSet = new CopyOnWriteArraySet<MyWebSocket>();
-            MyWebSocket.rooms.put(rid, webSocketSet);
-            logger.debug("create new room rid:{} uid:{}", rid, uid);
+    public synchronized void addSession(MyWebSocket webSocket,String rid) {
+        if (!rooms.containsKey(rid)) {
+            CopyOnWriteArraySet<MyWebSocket> room = new CopyOnWriteArraySet();
+            rooms.put(rid, room);
             synchroRoomKeys();
+            logger.debug("=====================创建新的房间{} 用户 {}============", rid, uid);
+        }else {
+
+            logger.debug("=====================进入房间{} 用户 {}============", rid, uid);
         }
-        MyWebSocket.rooms.get(rid).add(webSocket);
-
-
+        rooms.get(rid).add(webSocket);
     }
 
     public synchronized void removeSession(MyWebSocket webSocket) {
-        MyWebSocket.rooms.get(rid).remove(webSocket);
+        rooms.get(webSocket.getRoomId()).remove(webSocket);
     }
 
-    /**
-     * 连接建立成功调用的方法
-     *
-     * @param session 可选的参数。session为与某个客户端的连接会话，需要通过它来给客户端发送数据
-     */
+
     @OnOpen
-    public void onOpen(Session session, /*EndpointConfig config,*/ @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
-        //this.httpSession = (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
+    public void onOpen(Session session,@PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
         this.session = session;
-        this.rid = rid;
-        this.uid = uid;
-        addSession(this);     //加入set中
-        addOnlineCount();           //在线数加1
-        logger.debug("有新连接加入！当前在线人数为{}", getOnlineCount());
-        logger.debug("rid:{} uid:{}", rid, uid);
-
-
+        this.roomId=rid;
+        this.uid=uid;
+        addSession(this,rid);
+        addOnlineCount();
 
     }
 
-    /**
-     * 连接关闭调用的方法
-     */
     @OnClose
     public void onClose(@PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
-        removeSession(this);  //从set中删除
-        subOnlineCount();           //在线数减1
-        logger.debug("有一连接关闭！当前在线人数为{}", getOnlineCount());
-        logger.debug("rid:{} uid:{}", rid, uid);
+        removeSession(this);
+        subOnlineCount();
+        logger.debug("========================有一连接关闭！rid:{} uid:{}" , rid, uid);
     }
 
-    /**
-     * 收到客户端消息后调用的方法
-     *
-     * @param message 客户端发送过来的消息
-     * @param session 可选的参数
-     */
     @OnMessage
     public void onMessage(String message, Session session, @PathParam("rid") String rid, @PathParam("uid") String uid, @PathParam("service") String service) {
-        logger.debug("rid:{} uid:{} 来自客户端的消息:{}", rid, uid, message);
-        try{
-            JSONObject o=JSON.parseObject(message).getJSONObject("header");
-            if(o.containsKey("rid")){
-                rid=o.getString("rid");
-            }
-            logger.debug("================解析RID：{}", rid);
-        }catch (Exception e){
-            logger.error(e.getMessage());
-        }
-
+        logger.debug("=====================rid:{} uid:{} 来自客户端的消息:{}", rid, uid, message);
         Map<String, String> data = new HashMap<String, String>();
         data.put("rid", rid);
         data.put("uid", uid);
         data.put("message", message);
         data.put("service",service);
         this.logger.info("{}", data);
-
-
-
         //群发消息
-        for (MyWebSocket item : MyWebSocket.rooms.get(rid)) {
+        for (MyWebSocket item : rooms.get(rid)) {
             try {
                 item.sendMessage(message);
+                this.logger.info("================发送消息RID {}=====================",item.getRoomId());
             } catch (IOException e) {
                 logger.error(e.getMessage());
                 continue;
@@ -155,24 +102,12 @@ public class MyWebSocket {
         }
     }
 
-    /**
-     * 发生错误时调用
-     *
-     * @param session
-     * @param error
-     */
     @OnError
     public void onError(Session session, Throwable error) {
         logger.debug("发生错误");
         logger.error(error.getMessage());
     }
 
-    /**
-     * 这个方法与上面几个方法不一样。没有用注解，是根据自己需要添加的方法。
-     *
-     * @param message
-     * @throws IOException
-     */
     public void sendMessage(String message) throws IOException {
         this.session.getBasicRemote().sendText(message);
     }
@@ -182,9 +117,9 @@ public class MyWebSocket {
     }
 
     public synchronized void addOnlineCount() {
-        MyWebSocket.onlineCount++;
-        String keynop = rid + ".nop";
-        String keypop = rid + ".pop";
+        onlineCount++;
+        String keynop = uid + ".nop";
+        String keypop = this.roomId + ".pop";
         Long nop = (Long) this.redisTemplate.opsForValue().get(keynop);
         Long pop = (Long) this.redisTemplate.opsForValue().get(keypop);
         if (nop == null) {
@@ -203,15 +138,24 @@ public class MyWebSocket {
     }
 
     private void synchroRoomKeys() {
-        String[] keys = new String[MyWebSocket.rooms.keySet().size()];
+        /*String[] keys = new String[rooms.keySet().size()];
         int i = 0;
-        Iterator<String> it = MyWebSocket.rooms.keySet().iterator();
+        Iterator<String> it = null;
         while (it.hasNext()) {
             keys[i] = it.next();
             i++;
         }
         logger.debug("synchroRoomKeys ->{}", keys);
         redisTemplate.opsForValue().set("live.rooms.keys", keys);
+        */
 
+    }
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
     }
 }

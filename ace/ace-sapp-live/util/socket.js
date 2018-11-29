@@ -1,7 +1,7 @@
 
 const app = getApp();
 export const connect = function (cb,url) {  // 定义一个方法
-  wx.connectSocket({ // 创建一个 WebSocket 连接
+  app.globalData.webSocket= wx.connectSocket({ // 创建一个 WebSocket 连接
     url: url,
     fail(err) {
       if (err) {

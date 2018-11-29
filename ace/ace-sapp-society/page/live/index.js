@@ -7,6 +7,7 @@ var wxuser = {
   nickname: "",
   openid: ""
 };
+var interval;
 var dict = {};
 dict['1001'] = '已经连接推流服务器';
 dict['1002'] = '开始推流';
@@ -133,7 +134,7 @@ Page({
         that.renderChartBox(data);
       }
     }, url);
-    setInterval(() => {
+    interval=setInterval(() => {
       console.log("心跳检查websocket");
       if (app.globalData.socketConnectFail) { // WebSocket断线重连
         console.log("websocket -> " + app.globalData.socketConnectFail);
@@ -534,4 +535,22 @@ Page({
         videoUrl: null
     });
 },
+  /**
+  * 生命周期函数--监听页面卸载
+  */
+  onUnload: function () {
+    clearInterval(interval);
+    console.log("======生命周期函数--监听页面卸载=========");
+    wx.closeSocket({
+      success: function () {
+        console.log("手动关闭socket连接");
+      },
+      fail: function () {
+        console.log("手动关闭socket失败");
+      },
+      complete: function () {
+
+      }
+    })
+  }
 });
