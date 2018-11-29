@@ -281,9 +281,6 @@ public class LiveRptServiceImpl implements LiveRptService {
         if (StringUtils.isEmpty(rst)) {
             return new MessageResponse(1, "审核结果不能为空!");
         }
-        if (StringUtils.isEmpty(text)) {
-            return new MessageResponse(1, "审核说明不能为空!");
-        }
         String logId=GUIDUtil.getGUID();
         LiveLog log=new LiveLog();
         log.setId(logId);
