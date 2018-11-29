@@ -227,9 +227,6 @@ public class CircleServiceImpl implements CircleService {
         if (StringUtils.isEmpty(rst)) {
             return new MessageResponse(ResultCode.FAIL, "审核结果不能为空!");
         }
-        if (StringUtils.isEmpty(text)) {
-            return new MessageResponse(ResultCode.FAIL, "审核说明不能为空!");
-        }
         Circle circle=circleDao.selectVoByPrimaryKey(id);
         if(CommonUtils.isBlank(circle)){
             return new MessageResponse(ResultCode.FAIL, "邻里圈子数据丢失!");

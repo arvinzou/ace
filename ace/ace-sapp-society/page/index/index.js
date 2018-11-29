@@ -164,7 +164,7 @@ Page({
         var that = this;
         util.request(cfg.findPublicActivityReportList, {
             "start": 0,
-            "limit": 2,
+            "limit": 4,
             "top": "1"
         },
             function (ret) {

@@ -1,15 +1,33 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.huacainfo</groupId>
-    <artifactId>ace</artifactId>
-    <version>1.0</version>
-  </parent>
-  <artifactId>ace-uf</artifactId>
-  <packaging>pom</packaging>
-  <modules>
-		<module>ace-uf-client</module> 
-		<module>ace-uf-service</module>
-		<module>ace-uf-web</module> 
-	</modules>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.huacainfo</groupId>
+        <artifactId>ace</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>ace-uf</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>ace-uf-client</module>
+        <module>ace-uf-service</module>
+        <module>ace-uf-web</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8001</port>
+                    <path>/uf</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <finalName>uf</finalName>
+                    <server>tomcat7</server>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
