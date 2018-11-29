@@ -233,10 +233,10 @@ public class InformationServiceServiceImpl implements InformationServiceService 
         if (CommonUtils.isBlank(o.getTitle())) {
             return new MessageResponse(1, "标题不能为空！");
         }
-        if (CommonUtils.isBlank(o.getContent())) {
-            return new MessageResponse(1, "内容不能为空！");
-        }
-//        o.setStatus("1");
+//        if (CommonUtils.isBlank(o.getContent())) {
+//            return new MessageResponse(1, "内容不能为空！");
+//        }
+        o.setStatus("1");
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
