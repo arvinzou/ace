@@ -262,9 +262,6 @@ public class LiveServiceImpl implements LiveService {
         if (StringUtils.isEmpty(rst)) {
             return new MessageResponse(1, "审核结果不能为空!");
         }
-        if (StringUtils.isEmpty(text)) {
-            return new MessageResponse(1, "审核说明不能为空!");
-        }
         LiveVo liveVo =liveDao.selectByPrimaryKey(id);
         if(CommonUtils.isBlank(liveVo)){
             return new MessageResponse(1, "没有获取到直播数据!");
