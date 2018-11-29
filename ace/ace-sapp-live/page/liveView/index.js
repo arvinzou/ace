@@ -2,7 +2,7 @@ var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
 const app = getApp();
-
+var interval;
 var wxuser = {
   headimgurl: "",
   nickname: "",
@@ -98,7 +98,7 @@ Page({
         that.renderChartBox(data);
       }
     }, url);
-    setInterval(() => {
+    interval=setInterval(() => {
       console.log("心跳检查websocket");
       if (app.globalData.socketConnectFail) { // WebSocket断线重连
         console.log("websocket -> " + app.globalData.socketConnectFail);
@@ -458,5 +458,24 @@ Page({
       data: JSON.stringify(message),
     });
     console.log(message);
+  }
+  ,
+  /**
+  * 生命周期函数--监听页面卸载
+  */
+  onUnload: function () {
+    clearInterval(interval);
+    console.log("======生命周期函数--监听页面卸载=========");
+    wx.closeSocket({
+      success: function () {
+        console.log("手动关闭socket连接");
+      },
+      fail: function () {
+        console.log("手动关闭socket失败");
+      },
+      complete: function () {
+        
+      }
+    })
   }
 });

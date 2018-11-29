@@ -104,9 +104,10 @@
       <view class="wrap">
         <view class="reporter" wx:if="{{item.rpt.headimgurl.length>0}}">
           <image wx:if="{{item.rpt.headimgurl.length>0}}" src="{{item.rpt.headimgurl}}" class="headimgp" />
-
-          <text style='padding:10rpx'>{{item.rpt.nickname}}</text>
-          <text style='padding:10rpx'>{{item.createDate}}</text>
+          <view class='reporter-right'>
+                <view class='releaseName'>{{item.rpt.nickname}}</view>
+                <view class='releaseTime'>{{item.createDate}}</view>
+          </view>
         </view>
         <view class='rpt-content'>
           <view wx:if="{{item.content.length>0}}" class="content">
@@ -149,10 +150,10 @@
       </view>
     </block>
 
-      <!--<cover-view class='btn-add' bindtap="rpt" data-id="{{live.id}}">
+      <cover-view class='btn-add' bindtap="rpt" data-id="{{live.id}}">
             <cover-image class="btn-img" src="../../image/添加.png" />
-     </cover-view>-->
-     <view class='add-report' bindtap="rpt" data-id="{{live.id}}">发布报道</view>
+     </cover-view>
+     <!--<view class='add-report' bindtap="rpt" data-id="{{live.id}}">发布报道</view>-->
   </scroll-view>
 </view>
 <view class="model" wx:if='{{actionComment}}'>
