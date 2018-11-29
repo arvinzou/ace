@@ -218,9 +218,9 @@
         <div class="form-group">
             <label class="col-md-2 view-label">政治面貌</label>
             <div class="col-md-10">
-                {@if item.politicalStatus == "1"}
+                {@if data.politicalStatus == "1"}
                 个人
-                {@else if item.politicalStatus == "2"}
+                {@else if data.politicalStatus == "2"}
                 党员
                 {@/if}
             </div>
@@ -294,7 +294,11 @@
         <div class="form-group">
             <label class="col-md-2 view-label">政治面貌</label>
             <div class="col-md-10">
-                \${data.politicalStatus}
+                {@if data.politicalStatus == "1"}
+                个人
+                {@else if data.politicalStatus == "2"}
+                党员
+                {@/if}
             </div>
         </div>
         <div class="form-group">
