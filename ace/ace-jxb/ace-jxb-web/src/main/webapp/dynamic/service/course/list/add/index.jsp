@@ -60,7 +60,7 @@
 																		<label class="col-md-2 control-label">
 																			<span class="label-red">*</span>课件时长</label>
 																		<div class="col-md-10">
-																			<input type="text" class="form-control" name="duration" maxlength="28" placeholder="请输入课件时长（如：10)，单位分钟">
+																			<input type="number" class="form-control" name="duration" maxlength="10" placeholder="请输入课件时长（如：10)，单位分钟">
 																			<span class="help-block"></span>
 																		</div>
 																	</div>
