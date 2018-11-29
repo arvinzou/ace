@@ -11,6 +11,7 @@
     <title>统战综合管理平台</title>
 
 </head>
+<%--<jsp:include page="/dynamic/common/header.jsp" />--%>
 
 <jsp:include page="/dynamic/common/common.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/css/new.css?version=${cfg.version}"/>
