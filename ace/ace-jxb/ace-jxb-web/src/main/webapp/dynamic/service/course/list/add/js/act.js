@@ -120,7 +120,6 @@ function initPage() {
     });
     $('input[name=duation]').maxlength({alwaysShow: true});
     initEditor();
-    initUpload();
 }
 
 jQuery(function ($) {
