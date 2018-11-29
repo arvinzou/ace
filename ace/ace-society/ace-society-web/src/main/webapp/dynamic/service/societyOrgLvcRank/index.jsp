@@ -29,24 +29,29 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-8">
+            <div class="col-md-4">
 
             </div>
 
-               <div class="col-sm-4" >
-    <form onsubmit="return t_query()">
+
+         <div class="col-sm-7" style="float:right" >
+               <form onsubmit="return t_query()">
          <div class="input-group">
               <div style="float:right;margin-right:1px" >
-              时间：<input autocomplete="off" class="easyui-datebox" name="startDate"
-                     style="width: 200px; height: 30px; line-height: 25px;"> 至
-                    <input autocomplete="off" class="easyui-datebox" name="endDate"
-                     style="width: 200px; height: 30px; line-height: 25px;">
+              <div style="width:40px;float:left;line-height:30px"> 时间:</div>
+              <input autocomplete="off"  name="startDate" class="form-control" style="width: 250px; height: 30px; line-height: 25px;">
+              <span class="input-group-addon" style="width:40px;float:left;">
+              <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;"> 至 </font>
+              </font>
+              </span>
+              <input autocomplete="off" name="endDate"  class="form-control"  style="width: 250px; height: 30px; line-height: 25px;" >
               </div>
          <div class="input-group-btn">
               <button class="btn  btn-default search_btn" type="submit">搜索</button>
          </div>
          </div>
-     </form>
+     </form>     </div></div>
             <div class="table-scrollable">
                 <table class="table table-hover">
                     <thead>
@@ -64,10 +69,6 @@
             <div class="paginationbar">
                 <ul class="pagination" id="pagination1"></ul>
             </div>
-
-        </div>
-
-    </div>
 
     <%--=============common jsp-suffix===============--%>
     <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
