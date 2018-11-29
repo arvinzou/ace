@@ -56,9 +56,13 @@ function edit(rowid){
 							closeAfterAdd : true,
 							recreateForm : true,
 							viewPagerButtons : true,
+							beforeSubmit: function (postdata) {
+                                 postdata.description = editor.getValue();
+                                 return [true, "", ""];
+                            },
 							beforeShowForm : function(e) {
-										  loadText(rowid);
-                                          appendUploadBtn("coverUrl");
+								loadText(rowid);
+                                appendUploadBtn("coverUrl");
 							}
 						});
 }

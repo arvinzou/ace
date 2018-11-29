@@ -400,3 +400,28 @@ textarea{
 .dis{
 	display: block;
 }
+input::-webkit-input-placeholder{
+	color: #a0a7b6;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color: #a0a7b6;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color: #a0a7b6;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+	color: #a0a7b6;
+}
+
+textarea::-webkit-input-placeholder{
+	color: #a0a7b6;
+}
+textarea::-moz-placeholder{   /* Mozilla Firefox 19+ */
+	color: #a0a7b6;
+}
+textarea:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+	color: #a0a7b6;
+}
+textarea:-ms-input-placeholder{  /* Internet Explorer 10-11 */
+	color: #a0a7b6;
+}

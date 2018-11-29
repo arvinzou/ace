@@ -197,7 +197,7 @@
 
 </script>
 
-<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=GA3nfXHbDcQaNEXmPBkaGdx2gvLMMBGy"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=YZjRB8FYnf7SdG7BfOGQQIGseKlMmTgF"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
 <script type='text/javascript'>
     //提示：下面的代码用jquery，所以如果有不能运行的情况请引用后尝试

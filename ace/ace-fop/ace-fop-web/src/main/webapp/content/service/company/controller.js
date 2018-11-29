@@ -36,8 +36,6 @@ jQuery(function ($) {
 
                     $("#sData").click(function () {
                         checkCard();
-                        checkNum();
-                        MoneyCheck();
                     });
                 }
             })
@@ -57,27 +55,8 @@ function checkCard() {
     }
 }
 
-function checkNum() {
-    var num1 = $("#crewSize").val();
-    var num2 = $("#partyPeoples").val();
-    var num3 = $("#laborContractNum").val();
-    var reg = (/^\d*$/);
-    if (reg.test(num1) === false || reg.test(num2) === false || reg.test(num3) === false) {
-        alert("人数只能为数字");
-        return false;
-    }
-}
 
-function MoneyCheck() {
-    var num1 = $("#registeredCapital").val();
-    var num2 = $("#fixedAssets").val();
-    var num3 = $("#workingCapital").val();
-    var reg = /^\d*\.{0,1}\d{0,2}$/;
-    if (reg.test(num1) === false || reg.test(num2) === false || reg.test(num3) === false) {
-        alert("金额只能是数字和小数点后两位");
-        return false;
-    }
-}
+
 
 function editPreview(id) {
     window.open(contextPath + '/dynamic/service/company/edit.jsp?companyId=' + id);
@@ -147,9 +126,7 @@ function del(rowid) {
                 if (!show) {
                     form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
                 }
-
                 show = true;
-
             }
         });
 }
@@ -158,3 +135,4 @@ function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }
+

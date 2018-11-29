@@ -99,7 +99,13 @@
         </td>
         <td>\${item.realName}</td>
         <td>\${item.mobilePhone}</td>
-        <td>\${item.politicalStatus}</td>
+        <td>
+            {@if item.politicalStatus == "1"}
+                个人
+            {@else if item.politicalStatus == "2"}
+                党员
+            {@/if}
+        </td>
         <td>\${item.accPoints}</td>
         <td>\${item.validPoints}</td>
         <td>
@@ -212,7 +218,11 @@
         <div class="form-group">
             <label class="col-md-2 view-label">政治面貌</label>
             <div class="col-md-10">
-                \${data.politicalStatus}
+                {@if data.politicalStatus == "1"}
+                个人
+                {@else if data.politicalStatus == "2"}
+                党员
+                {@/if}
             </div>
         </div>
         <div class="form-group">
@@ -284,7 +294,11 @@
         <div class="form-group">
             <label class="col-md-2 view-label">政治面貌</label>
             <div class="col-md-10">
-                \${data.politicalStatus}
+                {@if data.politicalStatus == "1"}
+                个人
+                {@else if data.politicalStatus == "2"}
+                党员
+                {@/if}
             </div>
         </div>
         <div class="form-group">

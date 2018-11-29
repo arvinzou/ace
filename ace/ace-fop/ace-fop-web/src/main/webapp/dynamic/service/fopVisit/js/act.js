@@ -70,6 +70,26 @@ window.location.href = 'add/index.jsp?id=' + urlParams.id;
 function edit(did){
 window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
+
+function del(id) {
+    if (confirm("确定删除该活动吗，删除后将不能恢复。")) {
+        var url = contextPath + "/fopVisit/deleteFopVisitByFopVisitId";
+        var data = {
+            jsons: JSON.stringify({
+                id: id,
+            })
+        }
+        startLoad();
+        $.post(url, data, function (rst) {
+            stopLoad();
+            if (rst.status == 0) {
+                getPageList();
+                return;
+            }
+            alert(rst.errorMessage);
+        })
+    }
+}
 /*查看详情*/
 function detail(id) {
 var url = contextPath + "/fopVisit/selectFopVisitByPrimaryKey";
