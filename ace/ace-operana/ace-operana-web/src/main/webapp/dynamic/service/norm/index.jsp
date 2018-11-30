@@ -3,182 +3,69 @@ pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="cn">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>指标</title>
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>系统配置</title>
 </head>
-<jsp:include page="../../common/common.jsp"/>
+<jsp:include page="/dynamic/common/header.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}" />
 <body>
-<div class="page-content">
-    <div class="widget-box" id="widget-box">
-        <div class="widget-header">
-            <h5 class="widget-title smaller">设置查询条件</h5>
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<div class="portlet light ">
 
-            <div class="widget-toolbar"></div>
-        </div>
+    <div class="portlet-body">
 
-        <div class="widget-body">
-            <div class="widget-main padding-6">
-                <form action="#" id="fm-search">
-                    部门： <input id="cc1" name="deptId"
-                               class="easyui-combotree"
-                               data-options="url:'${portalPath}/system/selectDepartmentTreeList.do',method:'get',animate: true,
-                lines:false"
-                               style='width: 200px; line-height: 25px; height: 25px;'/>
+        <div class="row custom-toolbar">
+            <div class="col-md-4">
 
-                    <a
-                            href="javascript:clearQparams()">清除</a>
-                    类别：<input
-                        class="easyui-combobox" style="width: 200px" name="category"
-                        data-options="
-                    url:'${portalPath}/dict/findListByCategoryId.do?categoryId=86&selected=false',
-                    method:'get',
-                    valueField:'code',
-                    textField:'name',
-                    panelHeight:'auto'"/>
-
-                    名称： <input name="name" type="text" style="width: 200px;"/>
-                    <button class="btn btn-info" id="btn-search"
-                            authority="${pageContext.request.contextPath}/norm/findNormList.do">
-                        <i
-                                class="ace-icon fa fa-search  align-middle bigger-125 icon-on-right"></i>
-                    </button>
+                <button type="button" class="btn  green" id="btn-view-add" authority="${pageContext.request.contextPath}/norm/insertNorm.do"></button>
 
 
-                </form>
-                <div class="space10"></div>
-                <div id="toolbar" class="toolbar">
 
-
-                    <button class="btn btn-info" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/norm/insertNorm.do">
-                        <i
-                                class="ace-icon fa fa-plus-square  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-info" id="btn-view-edit"
-                            authority="${pageContext.request.contextPath}/norm/updateNorm.do">
-                        <i
-                                class="ace-icon fa fa-edit  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-                    <button class="btn btn-warning" id="btn-view-del"
-                            authority="${pageContext.request.contextPath}/norm/deleteNormByNormId.do">
-                        <i
-                                class="ace-icon glyphicon  glyphicon-remove  align-middle bigger-125 icon-on-right"></i>
-                    </button>
-
-                </div>
             </div>
+            <div class="col-md-4">
+            </div>
+
+            <div class="col-md-4">
+
+                <form action="#" id="fm-search" >
+
+
+                    <div class="input-group">
+                        <input type="text"
+                               name="name"
+                               class="form-control"
+                               placeholder="请输入名称">
+                        <span class="input-group-btn">
+                                                                <button class="btn  btn-default search_btn"  id="btn-search"
+                                                                        authority="${pageContext.request.contextPath}/norm/findNormList.do">
+                                                                        搜索
+                                                                </button>
+                                                            </span>
+                    </div>
+                </form>
+            </div>
+
         </div>
+
+        <table id="grid-table"></table>
+
+        <div class="paginationbar"><ul id="grid-pager" class="pagination"></ul></div>
     </div>
-
-    <table id="grid-table"></table>
-
-    <div id="grid-pager"></div>
-
-
 </div>
 
-<div id="dialog-message" class="hide">
-    <div id="uploader">
-        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-    </div>
-</div>
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
-<div id="dialog-message-file" class="hide">
-    <div id="load" class="loading"></div>
-</div>
+<jsp:include page="/dynamic/common/footer.jsp" />
 
-
-<div id="dialog-message-view" class="hide">
-    <h5 class="header-title">基本信息</h5>
-    <div class="row" style="padding:10px">
-
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					指标编码</span><br>
-            <span id="id">
-				</span>
-        </div>
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					指标名称</span><br>
-            <span id="name">
-					</span>
-        </div>
-
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					说明</span><br>
-
-            <span id="remark">
-					</span>
-        </div>
-
-
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					指标分类</span><br>
-
-            <span id="category">
-					</span>
-        </div>
-
-
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					归属部门</span>
-            <br>
-            <span id="deptName">
-				</span>
-        </div>
-        <div class="labelItem">
-				<span class="labelItemHeader">
-					指标计算类型</span>
-            <br>
-            <span id="calType">
-					</span>
-        </div>
-
-
-
-
-
-    </div>
-
-    <h5 class="header-title">操作信息</h5>
-
-
-    <div class="row" style="padding:10px">
-        <div class="labelItem">
-					<span class="labelItemHeader">
-						创建人姓名</span>
-            <br>
-            <span id="createUserName">
-					</span>
-        </div>
-        <div class="labelItem">
-						<span class="labelItemHeader">
-							入库日期</span>
-            <br>
-            <span id="createDate">
-						</span>
-        </div>
-        <div class="labelItem">
-
-				<span class="labelItemHeader">
-					最后更新时间
-				</span>
-            <br>
-            <span id="lastModifyDate">
-					</span>
-        </div>
-    </div>
-
-</div>
-
-<jsp:include page="../../common/footer-1.jsp"/>
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript" src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/norm/config.js?version=${cfg.version}"></script>
 <script
@@ -187,20 +74,11 @@ pageEncoding="utf-8"%>
         src="${pageContext.request.contextPath}/content/service/norm/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/norm/view.js?version=${cfg.version}"></script>
-<jsp:include page="../../common/footer-2.jsp"/>
-<script type="text/javascript">
-window.onresize = function () {
-	console.log('autoWidthJqgrid');
-	$(cfg.grid_selector).jqGrid('setGridWidth', $(".page-content").width());
-	$(cfg.grid_selector).jqGrid('setGridHeight', window.innerHeight-layoutTopHeight);
-	parent.autoWidth();
-}
+<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
-</script>
-<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
+
+<style>
+
+</style>
 </body>
 </html>
