@@ -60,7 +60,7 @@
 																		<label class="col-md-2 control-label">
 																			<span class="label-red">*</span>课件时长</label>
 																		<div class="col-md-10">
-																			<input type="text" class="form-control" name="duration" maxlength="28" placeholder="请输入课件时长（如：300)，单位秒">
+																			<input type="number" class="form-control" name="duration" maxlength="10" placeholder="请输入课件时长（如：10)，单位分钟">
 																			<span class="help-block"></span>
 																		</div>
 																	</div>
@@ -80,11 +80,11 @@
                                                                     	<div class="col-md-10">
                                                                     		<div class="radio-group-container">
                                                                     					<label class="mt-radio mt-radio-outline">
-                                                                    						<input type="radio" name="free" value="1">是
+                                                                    						<input type="radio" name="free" value="0">是
                                                                     						<span></span>
                                                                     					</label>
                                                                     					<label class="mt-radio mt-radio-outline">
-                                                                    						<input type="radio" name="free" value="0" checked>否
+                                                                    						<input type="radio" name="free" value="1" checked>否
                                                                     						<span></span>
                                                                     					</label>
                                                                     					</div>

@@ -2,7 +2,7 @@
     width: 100px;
     height: 100px;
     object-fit: cover;
-    padding: 0px;
+    padding: 0px; overflow: hidden;
 }
 
 .my-gallery img{

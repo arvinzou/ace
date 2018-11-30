@@ -154,7 +154,7 @@
             </td>
             <td width="10%" >
                 {@if item.free == 1}
-								<span class="label label-lg label-info">否</span>
+                <span class="label label-lg label-info">否</span>
                 {@else if item.free == 0}
                  <span class="label label-lg label-danger">是</span>
                 {@/if}

@@ -77,7 +77,6 @@ function initPage() {
 				},
 				duration: {
 					required: true,
-					minlength: 2,
 					maxlength:10
 				}
 			},

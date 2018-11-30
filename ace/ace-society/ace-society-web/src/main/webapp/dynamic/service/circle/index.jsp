@@ -44,7 +44,7 @@
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('mediaType','');">全部</button>
                         <button type="button" class="btn btn-default" onclick="setParams('mediaType','2');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','3');">音频频</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','3');">音频</button>
                         <button type="button" class="btn btn-default" onclick="setParams('mediaType','1');">视频</button>
                     </div>
                     <div class="input-group">
@@ -309,7 +309,7 @@
             <div class="col-md-10">
                 <div class="radio-group-container">
                     <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">通过</span>
+                        <input type="radio" name="rst" value="3" checked><span style="padding:10px">通过</span>
                     </label>
                     <label>
                         <input type="radio" name="rst" value="4"><span style="padding:10px">退回</span>

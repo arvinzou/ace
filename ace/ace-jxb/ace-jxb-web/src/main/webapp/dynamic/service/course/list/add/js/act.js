@@ -81,7 +81,6 @@ function initPage() {
 				},
 				duration: {
 					required: true,
-					minlength: 2,
 					maxlength:10
 				}
 			},
@@ -97,9 +96,7 @@ function initPage() {
 					maxlength:"音频地址长度不能超过200"
 				},
 				duration: {
-					required: "请输入课件时长",
-					minlength:"课件时长至少2个字符",
-					maxlength:"课件时长长度不能超过10"
+					required: "请输入课件时长"
 				}
 			}
 		});
@@ -123,7 +120,6 @@ function initPage() {
     });
     $('input[name=duation]').maxlength({alwaysShow: true});
     initEditor();
-    initUpload();
 }
 
 jQuery(function ($) {

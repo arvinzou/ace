@@ -279,7 +279,7 @@
 		<script id="banner-tpl" type="text/template">
 			{@each data.rows as item, index}
 			<div class="swiper-slide">
-				<div class="swiper-slide"><img src="\${item.imgUrl}" /></div>
+				<div class="swiper-slide"><a href="\${item.url}"> <img src="\${item.imgUrl}" /></a></div>
 			</div>
 			{@/each}
 		</script>
