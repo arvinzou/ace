@@ -44,10 +44,10 @@ jQuery(function ($) {
               closeAfterAdd: true,
               recreateForm: true,
               viewPagerButtons: true,
-              beforeSubmit: function (postdata) {
-                  postdata.content = editor.getValue();
-                  return [true, "", ""];
-              },
+//              beforeSubmit: function (postdata) {
+//                  postdata.content = editor.getValue();
+//                  return [true, "", ""];
+//              },
               beforeShowForm: function (e) {
 
               }

@@ -91,7 +91,7 @@ function loadText(id) {
         success: function (rst, textStatus) {
             var content = rst.value.content;
             if (content) {
-                initSimditor($("textarea[name=content]"), content);
+                initSimditor($("textarea[name=content]"), rst.value.content);
             }
         },
         error: function () {
@@ -193,11 +193,9 @@ function edit(rowid) {
         },
         beforeShowForm: function (e) {
             var form = $(e[0]);
-            form.closest('.ui-jqdialog').find(
-                '.ui-jqdialog-titlebar').wrapInner(
-                '<div class="widget-header" />')
             //富文本
             initSimditor($("textarea[name=content]"), null);
+            loadText(rowid)
         }
     });
 }

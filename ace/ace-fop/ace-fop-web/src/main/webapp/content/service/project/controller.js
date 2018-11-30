@@ -264,7 +264,7 @@ function loadText(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
-            initSimditor($("textarea[name=coopDesc]"), rst.value.content);
+            initSimditor($("textarea[name=coopDesc]"), rst.value.coopDesc);
         },
         error: function () {
             alert("加载错误！");
