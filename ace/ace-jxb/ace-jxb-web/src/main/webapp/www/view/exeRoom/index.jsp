@@ -34,7 +34,7 @@
 
         </div>
     </div>
-    <div class="row item01" id="report">
+    <div class="row item01 border-bottom" id="report">
 
     </div>
 </div>

@@ -26,6 +26,7 @@ body{
 	top: -0.92rem;
 	left: 5%;
 	box-shadow:0px 0px 30px 2px rgba(232,240,251,1);
+	border-radius: 10px;
 }
 .head{
 	width: 1.333333rem;
@@ -37,8 +38,9 @@ body{
 	color: #1C2843;
 	font-size: 0.426666rem;
 	font-weight: bold;
-	padding-top: 0.41rem;
-	/*padding-bottom: 0.386666rem;*/
+	padding-top: 0.45rem;
+	/* padding-bottom: 0.386666rem; */
+	margin: 0 0 0.15rem;
 }
 .room_title01{
 	color: #5C6681;
@@ -67,18 +69,23 @@ body{
 	color: #1C2843;
 	font-size: 0.533333rem;
 	font-weight: bold;
-	padding-top: 0.466666rem;
 }
 .title{
 	color: #798092;
 	font-size: 0.32rem;
-	padding-bottom: 0.466666rem;
+	margin: 0;
 }
 .item01{
 	text-align: center;
 	background: #FFFFFF;
-	margin-top: 0.266666rem;
+	padding:0.426666rem 0;
 }
+
+.border-bottom{
+	border-top:0.266666rem solid rgba(247,249,252,1);
+	border-bottom:0.266666rem solid rgba(247,249,252,1);
+}
+
 .footer{
 	width: 100%;
 	height: 1.52rem;
