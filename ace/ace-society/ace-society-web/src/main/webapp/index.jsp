@@ -205,12 +205,11 @@
     //需引用api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js
 
     var userlist = [];
-    var userJW=[];
 
     var map = new BMap.Map("container", {
         enableMapClick: false,
-        minZoom: 9,
-        maxZoom: 12,
+//        minZoom: 9,
+//        maxZoom: 12,
     }); // 创建地图实例，禁止点击地图底图
     //设置样式
     map.setMapStyle({
@@ -409,6 +408,7 @@
         }); //建立多边形覆盖物
         map.addOverlay(plyall);
     }
+    var userTemp;
 
     function getUserInfo() {
 
@@ -423,18 +423,14 @@
                     var pt = new BMap.Point(userlist[i].longitude, userlist[i].latitude);
                     pointArr.push(pt);
                     if(i!=0&&i%10==0){
-                        convertor.translate(pointArr, 3, 5, translateCallback);
-                        pointArr = [];
-                    };
+                        userTemp=userlist.slice(i-10,i+1);
+                        convertor.translate(pointArr, 3, 5, translateCallback)
+                        pointArr=[];
+                    }
                     if(i+1==userlist.length){
-                        for(var i = 0; i < userJW.length; i++) {
-                            var img=userlist[i].avatarUrl;
-                            if(!img){
-                                img=headimg;
-                            }
-                            var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
-                            map.addOverlay(new BMap.Marker(userJW[i],{ icon: myIcon }));
-                        }
+                        userTemp=userlist.slice(i-i%10,i+1);
+                        convertor.translate(pointArr, 3, 5, translateCallback)
+                        pointArr=[];
                     }
                 }
             }
@@ -442,7 +438,16 @@
     }
 
     translateCallback = function(data) {
-        userJW.push(data.points);
+        if(data.status === 0) {
+            for(var i = 0; i < data.points.length; i++) {
+                var img=userTemp[i].avatarUrl;
+                if(!img){
+                  img=headimg;
+                }
+                var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
+                map.addOverlay(new BMap.Marker(data.points[i],{ icon: myIcon }));
+            }
+        }
     }
 
 
