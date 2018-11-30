@@ -168,12 +168,17 @@
     margin-right: 0px;
 }
 
-.citylist2 ul li:hover {
+/*.citylist2 ul li:hover {
     color: #fff;
     background-color: #5BD5CB;
     border: 1px solid #5BD5CB;
-}
+}*/
 
+.citylist2 ul .active {
+	color: #fff;
+	background-color: #5BD5CB;
+	border: 1px solid #5BD5CB;
+}
 
 .citylist2 .leibie {
 	line-height: 54px;
