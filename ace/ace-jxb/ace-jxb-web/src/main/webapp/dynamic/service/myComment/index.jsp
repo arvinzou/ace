@@ -33,7 +33,7 @@
                     <div class="input-group">
                         <input type="text" name="keyword"
                                class="form-control "
-                               placeholder="请输入昵称">
+                               placeholder="请输入课程名称">
 
                         <span class="input-group-btn">
                                                                <button class="btn  btn-default search_btn" type="submit">
