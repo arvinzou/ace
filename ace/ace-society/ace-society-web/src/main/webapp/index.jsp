@@ -419,14 +419,14 @@
                 userlist=result.data;
                 var convertor = new BMap.Convertor();
                 var pointArr = [];
-                for(var i=1;i<userlist.length+1;i++) {
+                for(var i=0;i<userlist.length;i++) {
                     var pt = new BMap.Point(userlist[i].longitude, userlist[i].latitude);
                     pointArr.push(pt);
-                    if(i%10==0){
+                    if(i!=0&&i%10==0){
                         convertor.translate(pointArr, 3, 5, translateCallback);
                         pointArr = [];
                     };
-                    if(i==userlist.length){
+                    if(i+1==userlist.length){
                         for(var i = 0; i < userJW.length; i++) {
                             var img=userlist[i].avatarUrl;
                             if(!img){
