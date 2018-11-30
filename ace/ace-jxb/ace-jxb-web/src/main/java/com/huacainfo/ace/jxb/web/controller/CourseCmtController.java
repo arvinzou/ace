@@ -48,6 +48,9 @@ public class CourseCmtController extends JxbBaseController {
     @RequestMapping(value = "/findCourseCmtList")
     @ResponseBody
     public PageResult<CourseCmtVo> findCourseCmtList(CourseCmtQVo condition, PageParamNoChangeSord page) throws Exception {
+        if(!"1522029730650".equals(this.getCurUserProp().getUserId())){
+            condition.setCounselorId(this.getCurUserProp().getUserId());
+        }
         PageResult<CourseCmtVo> rst = this.courseCmtService
                 .findCourseCmtList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

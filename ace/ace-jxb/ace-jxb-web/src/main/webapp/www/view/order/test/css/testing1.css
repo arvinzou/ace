@@ -105,19 +105,19 @@ input {
 
 input.start {
     background-color: #50D2C7;
-    box-shadow: 0 0px 20px 0px #50D2C7;
+    box-shadow: 0 0px 14px 0px #50D2C7;
     color: #fff;
 }
 
 input.pay {
     background-color: #FF811B;
-    box-shadow: 0 0px 20px 0px #FF811B;
+    box-shadow: 0 0px 14px 0px #FF811B;
     color: #fff;
 }
 
 input.result {
     background-color: #fff;
-    box-shadow: 0 0px 20px 0px #50D2C7;
+    box-shadow: 0 0px 14px 0px #50D2C7;
     color: #50D2C7;
 }
 
