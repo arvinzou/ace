@@ -49,9 +49,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<packagingExcludes>
-						WEB-INF/lib/ace-operana-service-*.jar,
-						WEB-INF/lib/ace-portal-service-*.jar,
-						WEB-INF/lib/ace-common-dao-*.jar 
+
 					</packagingExcludes>
 					<webResources>
 						<resource>

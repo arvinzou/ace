@@ -58,6 +58,257 @@
     </div>
 </div>
 
+<script id="tpl-detail" type="text/template">
+    <div class="form-body">
+        <div class="form-group">
+            <label class="col-md-2 view-label">发起人ID</label>
+            <div class="col-md-10">
+                \${data.relationId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">标题</label>
+            <div class="col-md-10">
+                \${data.title}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">内容</label>
+            <div class="col-md-10">
+                \$\${data.content}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">来源ID</label>
+            <div class="col-md-10">
+                \${data.sourceId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">来源类型</label>
+            <div class="col-md-10">
+                \${data.sourceType}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">子类型</label>
+            <div class="col-md-10">
+                \${data.subType}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">父节点ID</label>
+            <div class="col-md-10">
+                \${data.parentId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">发布时间</label>
+            <div class="col-md-10">
+                \${data.releaseDate}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">回复内容</label>
+            <div class="col-md-10">
+                \${data.reply}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">回复人</label>
+            <div class="col-md-10">
+                \${data.displayName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">所含关键字</label>
+            <div class="col-md-10">
+                \${data.keyWord}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">累计提问次数</label>
+            <div class="col-md-10">
+                \${data.accCount}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">备注</label>
+            <div class="col-md-10">
+                \${data.remark}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">状态</label>
+            <div class="col-md-10">
+                \${data.status}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人编号</label>
+            <div class="col-md-10">
+                \${data.createUserId}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">创建人姓名</label>
+            <div class="col-md-10">
+                \${data.createUserName}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">入库日期</label>
+            <div class="col-md-10">
+                \${data.createDate}
+            </div>
+        </div>
+         <div class="form-group">
+             <label class="col-md-2 view-label">最后更新人编号</label>
+             <div class="col-md-10">
+                 \${data.lastModifyUserId}
+             </div>
+         </div>
+        </div>
+         <div class="form-group">
+             <label class="col-md-2 view-label">最后更新人姓名</label>
+             <div class="col-md-10">
+                 \${data.lastModifyUserName}
+             </div>
+         </div>
+        </div>
+         <div class="form-group">
+             <label class="col-md-2 view-label">最后更新时间</label>
+             <div class="col-md-10">
+                 \${data.lastModifyDate}
+             </div>
+         </div>
+    </div>
+</script>
+
+
+
+<div class="modal fade" role="dialog" id="modal-detail">
+    <div class="modal-dialog" role="document" style="width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详情</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-horizontal"  id="fm-detail" role="form">
+                    <div class="form-body">
+                          <h5 class="header-title">发起人ID</h5>
+                          <div class="row" style="padding:10px" id="question">
+                          </div>
+                          <h5 class="header-title">标题</h5>
+                          <div class="row" style="padding:10px" id="answer">
+                          </div>
+                          <h5 class="header-title">内容</h5>
+                          <div class="row" style="padding:10px" id="content">
+                          </div>
+                          <h5 class="header-title">来源ID</h5>
+                          <div class="row" style="padding:10px" id="sourceId">
+                          </div>
+                          <h5 class="header-title">来源类型</h5>
+                          <div class="row" style="padding:10px" id="sourceType">
+                          </div>
+                          <h5 class="header-title">子类型</h5>
+                          <div class="row" style="padding:10px" id="subType">
+                          </div>
+                          <h5 class="header-title">父节点ID</h5>
+                          <div class="row" style="padding:10px" id="parentId">
+                          </div>
+                          <h5 class="header-title">发布时间</h5>
+                          <div class="row" style="padding:10px" id="releaseDate">
+                          </div>
+                          <h5 class="header-title">回复内容</h5>
+                          <div class="row" style="padding:10px" id="reply">
+                          </div>
+                          <h5 class="header-title">回复人</h5>
+                          <div class="row" style="padding:10px" id="displayName">
+                          </div>
+                          <h5 class="header-title">基本信息</h5>
+                          <div class="row" style="padding:10px">
+                              <div class="labelItem"><span class="labelItemHeader">
+                      所含关键字</span>
+                                  <br>
+                                  <span id="keyWord">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      累计提问次数</span>
+                                  <br>
+                                  <span id="accCount">
+                      </span>
+                              </div>
+                                   <br>
+                              <div class="labelItem">
+                                  <span class="labelItemHeader">备注</span>
+                                  <br>
+                                  <span id="remark"></span>
+                              </div>
+                                  <br>
+                              <div class="labelItem hide">
+                                  <span class="labelItemHeader">状态</span>
+                                  <br>
+                                  <span id="status"></span>
+                              </div>
+                                  <br>
+                          </div>
+                          <h5 class="header-title">操作信息</h5>
+                          <div class="row" style="padding:10px">
+                              <div class="labelItem"><span class="labelItemHeader">
+                      创建人编号</span>
+                                  <br>
+                                  <span id="createUserId">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      创建人姓名</span>
+                                  <br>
+                                  <span id="createUserName">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      入库日期</span>
+                                  <br>
+                                  <span id="createDate">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      最后更新人编号</span>
+                                  <br>
+                                  <span id="lastModifyUserId">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      最后更新人姓名</span>
+                                  <br>
+                                  <span id="lastModifyUserName">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      最后更新时间</span>
+                                  <br>
+                                  <span id="lastModifyDate">
+                      </span>
+                              </div>
+                                  <br>
+                          </div>
+                    </div>
+                </form>
+            </div>
+
 <div class="modal fade" role="dialog" id="modal-upload">
     <div class="modal-dialog" role="document" style="width: 830px;">
         <div class="modal-content">

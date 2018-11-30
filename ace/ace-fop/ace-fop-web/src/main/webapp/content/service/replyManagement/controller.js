@@ -102,34 +102,45 @@ function audit(params) {
         }
     });
 }
+  function preview(rowid) {
+      var url = contextPath + "/fopQuestion/selectFopQuestionByPrimaryKey";
+      $.getJSON(url, {id: rowid}, function (result) {
+          if (result.status == 0) {
+              var navitem = document.getElementById('tpl-detail').innerHTML;
+              var html = juicer(navitem, {data: result.value});
+              $("#fm-detail").html(html);
+              $("#modal-detail").modal("show");
 
-function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
-        modal: false,
-        width: 800,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-            , {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
-    $(dialog).parent().css("top", "1px");
-    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
-    loadView(id);
-}
+          }
+      })
+  }
+//function preview(id, title) {
+//    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
+//        modal: false,
+//        width: 800,
+//        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
+//        title_html: true,
+//        buttons: [
+//            {
+//                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
+//                "class": "btn btn-info btn-xs",
+//                click: function () {
+//                    $(this).dialog("close");
+//                }
+//            }
+//            , {
+//                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
+//                "class": "btn btn-xs",
+//                click: function () {
+//                    $(this).dialog("close");
+//                }
+//            }
+//        ]
+//    });
+//    $(dialog).parent().css("top", "1px");
+//    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
+//    loadView(id);
+//}
 
 function loadView(id) {
     $.ajax({
@@ -154,6 +165,42 @@ function loadView(id) {
                 }
                 $("#dialog-message-view").find('#' + key).html(value);
             });
+        },
+        error: function () {
+            alert("加载错误！");
+        }
+    });
+}
+
+function initSimditor(textarea, text) {
+    editor = new Simditor({
+        textarea: textarea,//jQuery对象，HTML元素或选择器字符串可以传递给这个选项
+        params: {},// 在textarea中插入隐藏的输入来存储参数（键值对）。
+        toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent'],
+        upload: {
+            url: portalPath + '/files/uploadImage.do', //文件上传的接口地址
+            params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
+            fileKey: 'file', //服务器端获取文件数据的参数名
+            connectionCount: 3,
+            leaveConfirm: '正在上传文件'
+        }
+    });
+    if (text) {
+        editor.setValue(text);
+    }
+}
+
+function loadText(id) {
+    $.ajax({
+        type: "post",
+        url: cfg.view_load_data_url,
+        data: {
+            id: id
+        },
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+            initSimditor($("textarea[name=description]"), rst.value.description);
         },
         error: function () {
             alert("加载错误！");

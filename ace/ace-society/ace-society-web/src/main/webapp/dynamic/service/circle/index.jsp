@@ -44,7 +44,7 @@
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('mediaType','');">全部</button>
                         <button type="button" class="btn btn-default" onclick="setParams('mediaType','2');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','3');">音频频</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('mediaType','3');">音频</button>
                         <button type="button" class="btn btn-default" onclick="setParams('mediaType','1');">视频</button>
                     </div>
                     <div class="input-group">
