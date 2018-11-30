@@ -1,14 +1,4 @@
 jQuery(function($) {
-	$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-		_title : function(title) {
-			var $title = this.options.title || '&nbsp;'
-			if (("title_html" in this.options)
-					&& this.options.title_html == true)
-				title.html($title);
-			else
-				title.text($title);
-		}
-	}));
 	$('#btn-search').on('click', function() {
 		$('#fm-search').ajaxForm({
 			beforeSubmit : function(formData, jqForm, options) {
@@ -44,83 +34,14 @@ jQuery(function($) {
 								form.closest('.ui-jqdialog').find(
 										'.ui-jqdialog-titlebar').wrapInner(
 										'<div class="widget-header" />')
-								style_edit_form(form);
 							}
 						})
 			});
-	$('#btn-view-edit').on(
-			'click',
-			function() {
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext)
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'editGridRow',
-						gr,
-						{
-							closeAfterAdd : true,
-							recreateForm : true,
-							viewPagerButtons : true,
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
-							}
-						})
-			});
-	$('#btn-view-del').on(
-			'click',
-			function() {
-
-				var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam',
-						'selrow');
-				if (!gr) {
-					$.jgrid.info_dialog($.jgrid.nav.alertcap,
-							$.jgrid.nav.alerttext);
-					return;
-				}
-				jQuery(cfg.grid_selector).jqGrid(
-						'delGridRow',
-						gr,
-						{
-							beforeShowForm : function(e) {
-								var form = $(e[0]);
-								form.closest('.ui-jqdialog').find(
-										'.ui-jqdialog-titlebar').wrapInner(
-										'<div class="widget-header" />')
-								style_edit_form(form);
-							}
-						})
-			});
-
 
 });
 
 function preview(id, title) {
-	var dialog = $("#dialog-message-view")
-			.removeClass('hide')
-			.dialog(
-					{
-						modal : false,
-						width : 800,
-						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
-								+ title + "</div></div>",
-						title_html : true,
-						buttons : [
-
-						{
-							html : "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 关闭",
-							"class" : "btn btn-info btn-xs",
-							click : function() {
-								$(this).dialog("close");
-							}
-						}]
-					});
+    $('#modal-norm').modal('show');
 	viewNorm(id);
 }
 function loadView(id) {
@@ -155,35 +76,7 @@ function loadView(id) {
 }
 
 function normCfg(id, title) {
-	var dialog = $("#dialog-message")
-			.removeClass('hide')
-			.dialog(
-					{
-						modal : false,
-						width : 800,
-						title : "<div class='widget-header widget-header-small'><div class='widget-header-pd'>"
-								+ title + "</div></div>",
-						title_html : true,
-						buttons : [
-
-								{
-									html : "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-									"class" : "btn btn-info btn-xs",
-									id : "btn-submit",
-									click : function() {
-										$('#fm-norm-cfg').submit();
-									}
-								},
-								{
-									html : "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-									"class" : "btn btn-xs",
-									click : function() {
-										$(this).dialog("close");
-									}
-								}]
-					});
-					$(dialog).parent().css("top","1px");
-					$(dialog).css("max-height",window.innerHeight-layoutTopHeight+50);
+$('#modal-norm-cfg').modal('show');
 	selectAllNorm(id);
 }
 
@@ -208,11 +101,11 @@ function selectAllNorm(id, name) {
 			html.push("搜索 <input type='text' id='_q' name='_q' value='"
 					+ defaultValue + "' />");
 			html.push("</div>");
-			html.push("<div class='panel panel-default'>");
-			html.push("<div class='panel-body'>");
+			html.push("<div>");
+			html.push("<div>");
 			html.push("<input type='hidden' name='topicId' value='" + id);
 			html.push("'/>");
-			html.push("<table class='table'>");
+			html.push("<table>");
 			$.each(rst, function(i, o) {
 				html.push("<tr><td>");
 				html.push("<input type='");
@@ -264,7 +157,7 @@ function selectAllNorm(id, name) {
 			});
 			html.push("</table>");
 			html.push("</div></div></form>");
-			$("#dialog-message").html(html.join(""));
+			$("#modal-norm-cfg .modal-body").html(html.join(""));
 			$('#_q').bind('keypress', function(event) {
             				if (event.keyCode == "13") {
             					//alert('你输入的内容为：' + $('#_q').val());
@@ -281,6 +174,12 @@ function selectAllNorm(id, name) {
 					return false;
 				}
 			});
+			$("#btn-norm-cfg-submit" ).on('click', function(e) {
+                e.preventDefault();
+                $('#fm-norm-cfg').submit();
+             });
+
+
 		},
 		error : function() {
 			alert("加载错误！");
@@ -380,21 +279,7 @@ function viewNorm(topicId) {
 
 }
 function sort(id,name){
-        var dialog = $( "#dialog-sort" ).removeClass('hide').dialog({
-            modal: false,
-            width:600,
-            title: "<div class='widget-header widget-header-small'><h4 class='smaller'>排序</h4></div>",
-            title_html: true,
-            buttons: [
-                {
-                    html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 关闭",
-                    "class" : "btn btn-xs",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                    }
-                }
-            ]
-        });
+       $('#modal-sort').modal('show');
         initSortList(id);
 }
 function initSortList(id){
@@ -409,24 +294,38 @@ function initSortList(id){
 		success : function(rst, textStatus) {
 		    var html=[];
 		    $(rst.data).each(function(i,o){
-		         html.push('<li class="dd-handle"  id="'+o.id+'">'+o.name+'</li>');
+		         html.push('<li draggable="false"  data-id="'+o.id+'" data-name="'+o.name+'">'+o.name+'</li>');
 		    });
 		    $(".sortable").html(html.join(""));
+
+		     var el = document.getElementById('sortable');
+                    var sortable = Sortable.create(el, {
+                        group: "words",
+                        animation: 150,
+                        onAdd: function (evt) {
+                            console.log('onAdd.bar:', evt.item);
+                        },
+                        onUpdate: function (evt) {
+                            console.log('onUpdate.bar:', evt.item);
+                        },
+                        onRemove: function (evt) {
+                            console.log('onRemove.bar:', evt.item);
+                        },
+                        onStart: function (evt) {
+                            console.log('onStart.foo:', evt.item);
+                        },
+                        onEnd: function (evt) {
+                            console.log('onEnd.foo:', evt.item);
+                            console.log(sortable.toArray());
+                            updateSort(sortable.toArray());
+                        }
+                    });
 
 		},
 		error : function() {
 			alert("加载错误！");
 		}
 	});
-    $( ".sortable" ).sortable({
-          cursor: "move",
-          items :"li",                        //只是li可以拖动
-          opacity: 0.6,                       //拖动时，透明度为0.6
-          revert: true,                       //释放时，增加动画
-          stop : function(event, ui){       //更新排序之后
-              updateSort($(this).sortable("toArray"));
-          }
-    });
 }
 function updateSort(arr){
     var data=[];
@@ -458,4 +357,38 @@ function updateSort(arr){
             }
         }
     });
+}
+
+
+function edit(rowid) {
+	console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+		'editGridRow',
+		rowid, {
+			closeAfterAdd: true,
+			recreateForm: true,
+			viewPagerButtons: true,
+			beforeShowForm: function(e) {
+				var form = $(e[0]);
+				form.closest('.ui-jqdialog').find(
+					'.ui-jqdialog-titlebar').wrapInner(
+					'<div class="widget-header" />')
+
+			}
+		});
+}
+var show = false;
+function del(rowid) {
+	console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid(
+		'delGridRow',
+		rowid, {
+			beforeShowForm: function(e) {
+				var form = $(e[0]);
+				if (!show) {
+					form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+				}
+				show = true;
+			}
+		});
 }
