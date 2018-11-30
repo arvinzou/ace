@@ -1,5 +1,6 @@
 package com.huacainfo.ace.jxb.vo;
 
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.jxb.model.Counselor;
 
 import java.math.BigDecimal;
@@ -57,6 +58,18 @@ public class CounselorVo extends Counselor {
      * 咨询-擅长领域
      */
     private String consultField;
+    /**
+     * 工作室创建者标识 0-否 1-是
+     */
+    private String studioCreator;
+
+    public String getStudioCreator() {
+        return StringUtil.isEmpty(studioCreator) ? "0" : studioCreator;
+    }
+
+    public void setStudioCreator(String studioCreator) {
+        this.studioCreator = studioCreator;
+    }
 
     public String getConsultField() {
         return consultField;

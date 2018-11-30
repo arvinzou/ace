@@ -401,6 +401,13 @@ public class StudioServiceImpl implements StudioService {
         CounselorQVo condition = new CounselorQVo();//, int start, int limit, String orderBy
         condition.setStudioId(studioId);
         List<CounselorVo> memberList = counselorService.findCounselorList(condition, 0, 0 + 1000, "").getRows();
+        //负责人本人
+        CounselorVo main = counselorService.selectCounselorByPrimaryKey(studioVo.getCounselorId()).getValue();
+        if (main != null) {
+            main.setStudioCreator("1");
+            memberList.add(main);
+        }
+
 
         studioVo.setMemberList(memberList);
 
