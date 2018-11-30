@@ -16,7 +16,7 @@
 
 <body>
 <div class="box">
-    <div class="row">
+    <div class="row" style="position: relative">
         <div class="slide_banner" id="bannerslide">
 
         </div>
