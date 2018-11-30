@@ -24,7 +24,7 @@
 
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top: 1.5rem;">
         <div class="content" id="roomContent">
 
         </div>
