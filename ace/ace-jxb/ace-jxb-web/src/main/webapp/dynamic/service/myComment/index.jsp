@@ -82,7 +82,13 @@
 
         <td>
             <div class="header-box">
-                <div class="header-img"><img src="\${item.headimgurl}" class="headimg"></div>
+                <div class="header-img">
+                    {@if item.headimgurl!=undefined && item.headimgurl.length>3}
+                    <img src="\${item.headimgurl}" class="headimg" />
+                    {@else}
+                    <img src="../../common/img/default_header.png" class="headimg" />
+                    {@/if}
+                </div>
                 <div class="header--nickname">\${item.nickname} </div>
             </div>
         </td>
