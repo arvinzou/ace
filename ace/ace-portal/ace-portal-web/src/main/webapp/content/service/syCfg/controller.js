@@ -38,6 +38,8 @@ jQuery(function($) {
 				})
 		});
 });
+
+
 function edit(rowid) {
 	console.log(rowid);
 	jQuery(cfg.grid_selector).jqGrid(
