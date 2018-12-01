@@ -199,7 +199,7 @@ function edit(rowid) {
             },
             beforeShowForm: function (e) {
                 loadText(rowid);
-                appendUploadBtn("fileUrl");
+//                appendUploadBtn("fileUrl");
             }
         });
 }

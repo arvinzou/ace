@@ -170,8 +170,7 @@
         src="${pageContext.request.contextPath}/content/service/fopGeHelp/controller.js?version=${cfg.version}"></script>
 <script
         src="${pageContext.request.contextPath}/content/service/fopGeHelp/view.js?version=${cfg.version}"></script>
-<script
-        src="${pageContext.request.contextPath}/content/service/fopGeHelp/upload.js?version=${cfg.version}"></script>
+
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
 
