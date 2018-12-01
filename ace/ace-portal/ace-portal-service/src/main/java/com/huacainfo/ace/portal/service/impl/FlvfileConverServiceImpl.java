@@ -28,6 +28,7 @@ public class FlvfileConverServiceImpl implements BackendService{
     @Override
     public MessageResponse service(Map<String, Object> data){
         logger.info("FlvfileConverServiceImpl ===============>{}",data);
+        String fastdfs_server=(String) data.get("fastdfs_server");
         FileRecord o=new FileRecord();
         CommonBeanUtils.copyMap2Bean(o,data);
         o.setCreateTime(new java.util.Date());
@@ -39,7 +40,7 @@ public class FlvfileConverServiceImpl implements BackendService{
             o.setMp4(targetPath);
             try{
                 String fileName=fileSaver.saveFile(file,file.getName());
-                o.setUrl(fileName);
+                o.setUrl(fastdfs_server+fileName);
                 file.deleteOnExit();
                 java.io.File t =new java.io.File(o.getPath());
                 t.deleteOnExit();
