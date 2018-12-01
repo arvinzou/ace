@@ -34,7 +34,7 @@ public class FlvfileConverServiceImpl implements BackendService{
         o.setCreateTime(new java.util.Date());
         o.setStatus("1");
         String targetPath=o.getPath()+".mp4";
-        WebUtils.changeToMp4(o.getPath(),targetPath);
+        //WebUtils.changeToMp4(o.getPath(),targetPath);
         java.io.File file =new java.io.File(targetPath);
         if(file.exists()){
             o.setMp4(targetPath);
