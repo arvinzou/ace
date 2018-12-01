@@ -44,7 +44,7 @@
         t.id,    t.name,   t.category,t.deptId,  t.endTime,  t.startTime,t.remark,   t.nop,   t.pop,t.rtmpUrl,
         t.imageSrc, t.status,t.createUserName, t.createDate,t.auditStatus,t.content,
         a.url as mp4Url
-        from live t inner join portal.file_record a on t.id=a.id
+        from live t left join portal.file_record a on t.id=a.id
 
         where t.id = #{id,jdbcType=VARCHAR}
     </select>

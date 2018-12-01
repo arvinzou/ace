@@ -1,11 +1,13 @@
 <view class='{{scoll}}'>
-  <image wx:if="{{live.category==1||live.status!=2}}" src='{{live.imageSrc}}' style="width:100%; height:{{pusherSizeH}}vh;flex:1;"></image>
-  <video hidden='{{!maskFlag}}' wx:if="{{live.category==2&&live.status==2}}" src="{{live.status==2?live.rtmpUrl:live.mp4Url}}" poster="{{live.imageSrc}}" style="width:100%; height:{{pusherSizeH}}vh;flex:1;" object-fit="fill">
+  <image wx:if="{{live.category==1||live.status==1}}" src='{{live.imageSrc}}' style="width:100%; height:{{pusherSizeH}}vh;flex:1;"></image>
+
+  <video wx:if="{{live.category==2&&live.status!=1}}" src="{{live.status==2?live.rtmpUrl:live.mp4Url}}" poster="{{live.imageSrc}}" style="width:100%; height:{{pusherSizeH}}vh;flex:1;" object-fit="fill">
   </video>
   <view wx:if="{{nameDisplay}}" class='live-top-box-right' style='height:{{pusherSizeH}}vh;'>
     <view class='live-top-box-right-text'>{{live.name}}</view>
   </view>
 </view>
+
 
 
 <!--导航条-->
