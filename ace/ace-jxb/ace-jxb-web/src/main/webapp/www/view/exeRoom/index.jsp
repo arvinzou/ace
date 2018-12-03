@@ -24,8 +24,8 @@
 
         </div>
     </div>
-    <div class="row" style="margin-top: 1.5rem;">
-        <div class="content" id="roomContent">
+    <div class="row" style="margin-top: 1.2rem;">
+        <div class="content remark" id="roomContent" onclick="showRoomDetail();">
 
         </div>
     </div>
@@ -173,4 +173,24 @@
     </div>
 </script>
 </body>
+
+<!--工作室详情-->
+<div class="modal fade bs-example-modal-lg" id="modal-content">
+    <div class="modal-dialog" role="document" style="position: absolute;bottom: 0;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">工作室简介</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="fm-status" role="form">
+                    <div class="form-body" id="allContent">
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

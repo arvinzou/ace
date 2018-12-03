@@ -48,6 +48,7 @@ function initData(id){
                     detail: result.data.introduce
                 });
                 $("#workroomDetail").append(detailHtml);
+                $("#allContent").append(detailHtml);
             }else {
                 alert(result.info);
                 return;
@@ -115,6 +116,11 @@ function initFineCourse(id){
         }
     });
 }
+
+function showRoomDetail(){
+    $('#modal-content').modal();
+}
+
 function showMember(id){
     window.location.href = contextPath + '/www/view/workmember/index.jsp?id='+id;
 }
