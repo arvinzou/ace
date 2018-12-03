@@ -38,6 +38,7 @@
                                                                             <input type="radio" name="type" value="2" checked><span style="padding:10px">系列课程</span>
 
                                                                         </label>
+                                                                        <span class="help-block"></span>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-body">
@@ -177,7 +178,7 @@
         {@each data as item, index}
             {@if item.CODE!=''}
             <label class="mt-radio mt-radio-outline">
-                <input type="radio" name="objects" value="\${item.CODE}">\${item.NAME}
+                <input type="radio" name="objects" value="\${item.CODE}" >\${item.NAME}
                 <span></span>
             </label>
             {@/if}
@@ -185,12 +186,14 @@
     </script>
 
     <script id="tpl-dict-150" type="text/template">
-        {@each data as item, index} {@if item.CODE!=''}
+        {@each data as item, index}
+        {@if item.CODE!=''}
         <label class="mt-radio mt-radio-outline">
             <input type="radio" name="purport" value="\${item.CODE}">\${item.NAME}
             <span></span>
         </label>
-        {@/if} {@/each}
+        {@/if}
+        {@/each}
     </script>
 
     </html>

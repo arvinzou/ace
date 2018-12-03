@@ -104,6 +104,26 @@ function initPage() {
             $.extend(params, {
                 time: new Date()
             });
+            var coverUrl = $("#courseCover").attr('src');
+            if(coverUrl=="" || coverUrl==undefined || coverUrl.indexOf("no-img")>=0){
+                alert("请上传课程封面!");
+                return;
+            }
+            if(params['costType'] == "1"){
+                var cost = params['cost'];
+                if(cost == "" || cost== undefined || cost ==0){
+                    alert("请输入课程售价!");
+                    return;
+                }
+            }
+            if(params['objects'] == "" || params['objects'] == undefined){
+                alert("请选择课程对象!");
+                return;
+            }
+            if(params['purport'] == "" || params['purport'] == undefined){
+                alert("请选择针对能力!");
+                return;
+            }
             console.log(params);
             save(params);
             return false;

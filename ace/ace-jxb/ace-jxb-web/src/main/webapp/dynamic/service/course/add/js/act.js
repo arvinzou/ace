@@ -103,7 +103,8 @@ function initPage() {
 					minlength: 4,
 					maxlength:28
 				},
-				introduce: {required: true}
+				introduce: {required: true},
+                type: {required: true}
 			},
 			messages: {
 				introduce:{
@@ -113,7 +114,10 @@ function initPage() {
 					required: "请输入课程名称",
 					minlength:"课程名称至少四个字符",
 					maxlength:"课程名称长度不能超过28"
-				}
+				},
+                type: {
+                    required: "请选择课程类别"
+                }
 			}
 		});
 
@@ -126,6 +130,26 @@ function initPage() {
             $.extend(params, {
                 time: new Date()
             });
+            var coverUrl = $("#courseCover").attr('src');
+            if(coverUrl=="" || coverUrl==undefined || coverUrl.indexOf("no-img")>=0){
+                alert("请上传课程封面!");
+                return;
+            }
+            if(params['costType'] == "1"){
+                var cost = params['cost'];
+                if(cost == "" || cost== undefined || cost ==0){
+                    alert("请输入课程售价!");
+                    return;
+                }
+            }
+            if(params['objects'] == "" || params['objects'] == undefined){
+                alert("请选择课程对象!");
+                return;
+            }
+            if(params['purport'] == "" || params['purport'] == undefined){
+                alert("请选择针对能力!");
+                return;
+            }
             console.log(params);
             save(params);
             return false;
