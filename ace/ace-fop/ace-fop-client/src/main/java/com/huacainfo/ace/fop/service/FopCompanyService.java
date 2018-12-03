@@ -128,4 +128,12 @@ public interface FopCompanyService {
     ResultResponse uploadAnnex(String url, String category, String companyId);
 
     SingleResult<FopCompanyVo> findByPK(String id);
+
+    /**
+     * 删除电子附件
+     *
+     * @param id 主键ID
+     * @return MessageResponse
+     */
+    MessageResponse delAnnex(String id);
 }
