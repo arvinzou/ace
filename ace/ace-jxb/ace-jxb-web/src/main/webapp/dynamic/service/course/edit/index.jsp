@@ -159,6 +159,7 @@
                     {@/if}
                     {@/each}
                 </div>
+                <span class="help-block"></span>
             </div>
         </div>
 
@@ -175,6 +176,7 @@
                     </label>
                     {@/if} {@/each}
                 </div>
+                <span class="help-block"></span>
             </div>
         </div>
         <div class="form-group">
