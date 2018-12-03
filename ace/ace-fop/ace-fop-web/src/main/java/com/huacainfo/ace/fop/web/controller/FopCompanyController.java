@@ -196,4 +196,17 @@ public class FopCompanyController extends FopBaseController {
 
         return fopCompanyService.reJoin(id, this.getCurUserProp());
     }
+
+    /**
+     * 删除电子附件
+     *
+     * @param id 主键ID
+     * @return MessageResponse
+     */
+    @RequestMapping(value = "/delAnnex")
+    @ResponseBody
+    public MessageResponse delAnnex(String id)
+            throws Exception {
+        return this.fopCompanyService.delAnnex(id);
+    }
 }

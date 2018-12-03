@@ -603,13 +603,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         FopCompanyVo vo = this.fopCompanyDao.selectVoByPrimaryKey(id);
         //api 接口信息查询
         try {
-            vo = invokeApi(vo);
+            //vo = invokeApi(vo);
         } catch (Exception e) {
             logger.error("fop_company[" + id + "]接口查询异常：{}", e);
         }
         //附录查询
         setAnnexAttr(vo);
-
         rst.setValue(vo);
         return rst;
     }
@@ -852,6 +851,21 @@ public class FopCompanyServiceImpl implements FopCompanyService {
         setAnnexAttr(vo);
         rst.setValue(vo);
         return rst;
+    }
+
+    /**
+     * 删除电子附件
+     *
+     * @param id 主键ID
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse delAnnex(String id) {
+        int i = fopCompanyAnnexDao.deleteByPrimaryKey(id);
+        if (i != 1) {
+            return new MessageResponse(ResultCode.FAIL, "删除失败");
+        }
+        return new MessageResponse(ResultCode.SUCCESS, "删除成功");
     }
 
     @Override

@@ -6,14 +6,13 @@ function loadView(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
-            console.log(JSON.stringify(rst));
             //动态渲染
             var tpl = document.getElementById('tpl-view-page').innerHTML;//'tpl-company'
             var renderHtml = juicer(tpl, rst.value);
             $('.main_box').html(renderHtml);
-
+            //
             initGrid();
-
+            //
             $.each(rst.value, function (key, value) {
                 if (key == "thirdLaborRelation") {
                     var rst = "";
@@ -90,16 +89,42 @@ function loadView(id) {
                 // console.log("key=" + key + ",value=" + value);
                 $(".form_info").find('span[name=' + key + ']').html(value);
             });
-
             //
             initPhotoPreview(".my-gallery img");
+            //event
+            $(".image-box .delete").click(function () {
+                var annexId = $(this).parent().attr("name");
+                console.log("annexId=" + annexId);
+                delAnnex(annexId, $(this).parent());
+            });
         },
         error: function () {
             alert("加载错误！");
         }
     });
 
+    //initEvent
+}
 
+function delAnnex(annexId, divObj) {
+    $.ajax({
+        type: "post",
+        url: contextPath + '/fopCompany/delAnnex',
+        data: {id: annexId},
+        beforeSend: function (XMLHttpRequest) {
+        },
+        success: function (rst, textStatus) {
+
+            alert(rst.errorMessage);
+            if (rst.state) {
+                //
+                divObj.remove();
+            }
+        },
+        error: function () {
+            alert("网络错误！");
+        }
+    });
 }
 
 function loadEditView(id) {
