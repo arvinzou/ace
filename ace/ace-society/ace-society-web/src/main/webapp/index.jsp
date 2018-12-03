@@ -35,7 +35,6 @@
 </div>
 
 
-
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
 <script id="tpl-portal-1" type="text/template">
@@ -203,13 +202,10 @@
     //提示：下面的代码用jquery，所以如果有不能运行的情况请引用后尝试
     //百度地图api container对应前端div名称 前端要引用2.0版本的百度地图api
     //需引用api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js
-
-    var userlist = [];
-
     var map = new BMap.Map("container", {
         enableMapClick: false,
-//        minZoom: 9,
-//        maxZoom: 12,
+        minZoom: 9,
+        maxZoom: 12,
     }); // 创建地图实例，禁止点击地图底图
     //设置样式
     map.setMapStyle({
@@ -223,23 +219,23 @@
         }]
     });
 
-//    map.enableDragging(); //禁止拖动
+    //    map.enableDragging(); //禁止拖动
     map.disableDoubleClickZoom(); //禁止双击缩放
     map.enableScrollWheelZoom(true);
     var blist = [];
-    var headimg="data:image/png;base64,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"
+    var headimg = "data:image/png;base64,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"
     var districtLoading = 0;
 
     function getBoundary() {
-        addDistrict("常德临澧县", "#f5f7f9","#efeffe");
-        addDistrict("常德武陵区", "#f5f7f9","#cceaff");
-        addDistrict("常德鼎城区", "#f5f7f9","#edffee");
-        addDistrict("常德安乡县", "#f5f7f9","#e9faf3");
-        addDistrict("常德澧县", "#f5f7f9","#ffffd9");
-        addDistrict("常德汉寿县", "#f5f7f9","#d7e7ff");
-        addDistrict("常德桃源县", "#f5f7f9","#ffe8e8");
-        addDistrict("常德津市", "#f5f7f9","#fffbed");
-        addDistrict("常德石门县", "#f5f7f9","#dcfdfe");
+        addDistrict("常德临澧县", "#f5f7f9", "#efeffe");
+        addDistrict("常德武陵区", "#f5f7f9", "#cceaff");
+        addDistrict("常德鼎城区", "#f5f7f9", "#edffee");
+        addDistrict("常德安乡县", "#f5f7f9", "#e9faf3");
+        addDistrict("常德澧县", "#f5f7f9", "#ffffd9");
+        addDistrict("常德汉寿县", "#f5f7f9", "#d7e7ff");
+        addDistrict("常德桃源县", "#f5f7f9", "#ffe8e8");
+        addDistrict("常德津市", "#f5f7f9", "#fffbed");
+        addDistrict("常德石门县", "#f5f7f9", "#dcfdfe");
     }
 
     /**
@@ -247,31 +243,32 @@
      * @param {} districtName 行政区划名
      * @returns  无返回值
      */
-    function addDistrict(districtName, fillColor,bgColot) {
+    function addDistrict(districtName, fillColor, bgColot) {
         //使用计数器来控制加载过程
         districtLoading++;
         /*创建行政区域搜索的对象实例*/
         var bdary = new BMap.Boundary();
         /*prop1:查询省,prop2:callback*/
-        bdary.get(districtName, function(rs) { //获取行政区域
+        bdary.get(districtName, function (rs) { //获取行政区域
             /*count:搜索到几个行政区划。*/
             var count = rs.boundaries.length; //行政区域的点有多少个
-            if(count === 0) {
+            if (count === 0) {
                 alert('未能获取当前输入行政区域');
                 return;
             }
-            for(var i = 0; i < count; i++) {
+            for (var i = 0; i < count; i++) {
 
                 blist.push({
                     points: rs.boundaries[i],
                     name: districtName,
                     color: fillColor,
-                    bgColor:bgColot,
+                    bgColor: bgColot,
                 });
-            };
+            }
+            ;
             //加载完成区域点后计数器-1
             districtLoading--;
-            if(districtLoading == 0) {
+            if (districtLoading == 0) {
                 //全加载完成后画端点
                 drawBoundary();
             }
@@ -335,7 +332,7 @@
         pArray.push(pNE);
         pArray.push(pNW);
         //循环添加各闭合区域
-        for(var i = 0; i < blist.length; i++) {
+        for (var i = 0; i < blist.length; i++) {
             //此类表示地图上的文本标注。
             //添加选中行政区划的文本标签的用途
             /*		var label = new BMap.Label(blist[i].name, {
@@ -408,64 +405,150 @@
         }); //建立多边形覆盖物
         map.addOverlay(plyall);
     }
-    var userTemp;
 
     function getUserInfo() {
-
-        var url = portalPath+"/wxUser/getSysWxUsers.do"
+        var url = portalPath + "/wxUser/getSysWxUsers.do"
         $.getJSON(url, null, function (result) {
-
-            if(result.status==0){
-                userlist=result.data;
-                var convertor = new BMap.Convertor();
-                var pointArr = [];
-                for(var i=0;i<userlist.length;i++) {
-                    var pt = new BMap.Point(userlist[i].longitude, userlist[i].latitude);
-                    pointArr.push(pt);
-                    if(i!=0&&i%10==0){
-                        userTemp=userlist.slice(i-10,i+1);
-                        convertor.translate(pointArr, 3, 5, translateCallback)
-                        pointArr=[];
-                    }
-                    if(i+1==userlist.length){
-                        userTemp=userlist.slice(i-i%10,i+1);
-                        convertor.translate(pointArr, 3, 5, translateCallback)
-                        pointArr=[];
-                    }
-                }
+            if (result.status == 0) {
+                targetData = result.data;
+                TransGps();
             }
         })
     }
 
-    translateCallback = function(data) {
-        if(data.status === 0) {
-            for(var i = 0; i < data.points.length; i++) {
-                var img=userTemp[i].avatarUrl;
-                if(!img){
-                  img=headimg;
-                }
-                var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
-                map.addOverlay(new BMap.Marker(data.points[i],{ icon: myIcon }));
-            }
+
+    loadMarkers = function (targetData) {
+        for (var i = 0; i < targetData.length; i++) {
+            var img = targetData[i].avatarUrl;
+            img = img ? img : headimg;
+            var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
+            map.addOverlay(new BMap.Marker(new BMap.Point(targetData[i].longitude,targetData[i].latitude), {icon: myIcon}));
         }
     }
 
 
-    setTimeout(function() {
+    setTimeout(function () {
         getBoundary();
         getUserInfo();
     }, 100);
+
+
+    var targetData = [];
+    var pointsArray = new Array();
+    var posIndex = 0;
+    var maxCnt = 100;
+    TransGps();
+
+    function TransGps() {
+        var gpsPoints = getPoints(targetData);
+        pointsArray = wareGpsPointsBeforeSend(gpsPoints);
+        myTransMore(pointsArray[posIndex], 0, 'callback1');
+    }
+
+    /*自定以100组经纬度坐标的转换*/
+    function myTransMore(points, type, callBackName) {
+        var xyUrl = "https://api.map.baidu.com/geoconv/v1/?coords=";
+        var coordsStr = "";
+        var maxCnt = 100;
+        var send = function () {
+            var positionUrl = xyUrl + coordsStr + "&from=3&to=5&ak=YZjRB8FYnf7SdG7BfOGQQIGseKlMmTgF" + "&callback=" + callBackName;
+            var script = document.createElement('script');
+            script.src = positionUrl;
+            document.getElementsByTagName('head')[0].appendChild(script);
+            coordsStr = "";
+        }
+        for (var index in points) {
+            if (index % maxCnt == 0 && index != 0) {
+                send();
+            }
+            coordsStr = coordsStr + points[index].lng + ',' + points[index].lat;
+            if (index < points.length - 1) {
+                coordsStr = coordsStr + ';';
+            }
+            if (index == points.length - 1) {
+                send();
+            }
+        }
+    }
+
+    function callback1(data) {
+        if (data.status != 0) {
+            alert("地图坐标转换出错");
+            return;
+        }
+        console.log(data);
+        var points = data.result;
+        var TransResult = null;
+        for (var index=0;index<points.length;index++) {
+            TransResult = points[index];
+            var point = new BMap.Point(TransResult.x, TransResult.y);
+            index1 = eval(Math.floor(posIndex * maxCnt) + Math.floor(index));
+            if (targetData[index1]['longitude'] != null &&
+                targetData[index1]['longitude'] != 0 &&
+                targetData[index1]['latitude'] != null &&
+                targetData[index1]['latitude'] != 0) {
+                targetData[index1]['longitude'] = point.lng;
+                targetData[index1]['latitude'] = point.lat;
+            }
+        }
+        posIndex++;
+        if (posIndex < pointsArray.length) {
+            myTransMore(pointsArray[posIndex], 0, 'callback1');
+        }
+        if (posIndex == pointsArray.length) {
+            loadMarkers(targetData);
+        }
+    }
+
+    function getPoints(targetData) {
+        var points = [];
+        for (var i = 0; i < targetData.length; i++) {
+            if (targetData[i]['longitude'] != null &&
+                targetData[i]['longitude'] != 0 &&
+                targetData[i]['latitude'] != null &&
+                targetData[i]['latitude'] != 0) {
+                var pt = new BMap.Point(targetData[i]['longitude'], targetData[i]['latitude']);
+                points.push(pt)
+            }
+        }
+        return points;
+    }
+
+    function wareGpsPointsBeforeSend(gpsPoints) {
+        var pointsArray = new Array();
+        var times = Math.floor(gpsPoints.length / maxCnt);
+        var k = 0;
+        for (var i = 0; i < times; i++) {
+            pointsArray[i] = new Array();
+            for (var j = 0; j < maxCnt; j++, k++) {
+                pointsArray[i][j] = gpsPoints[k];
+            }
+
+        }
+        console.log(k);
+        console.log(gpsPoints.length);
+        if (k < gpsPoints.length) {
+            var j = 0;
+            var i = times;
+            pointsArray[i] = new Array();
+            while (k < gpsPoints.length) {
+                pointsArray[i][j] = gpsPoints[k];
+                k++;
+                j++;
+            }
+        }
+        return pointsArray;
+    }
+
+
 </script>
 
 
-
-
-
 <style type="text/css">
-    .BMap_Marker>div {
+    .BMap_Marker > div {
         border-radius: 50% !important;
-        border:4px solid rgba(255, 255, 255, 1);
-        box-shadow:0px 3px 4px 2px rgba(24,144,255,0.1);
+        border: 4px solid rgba(255, 255, 255, 1);
+        box-shadow: 0px 3px 4px 2px rgba(24, 144, 255, 0.1);
     }
 
     .BMap_Marker img {
@@ -473,7 +556,8 @@
         height: 100%;
         object-position: 50% 50%;
     }
-    .anchorBL{
+
+    .anchorBL {
         display: none;
     }
 </style>
