@@ -20,6 +20,7 @@ public interface ConsultProductDao {
     int insertSelective(ConsultProduct record);
 
     int updateByPrimaryKey(ConsultProduct record);
+    int updateByType(ConsultProduct record);
 
     int updateByPrimaryKeySelective(ConsultProduct record);
 
