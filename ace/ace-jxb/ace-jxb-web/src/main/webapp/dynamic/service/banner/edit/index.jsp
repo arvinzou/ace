@@ -63,8 +63,8 @@
             </label>
             <div class="col-md-10">
                 <input type="hidden" name="imgUrl" value="\${data.o.imgUrl}">
-                <div style="padding: 10px;">建议图片大小为480*270</div>
-                <img style="max-width:480px;cursor:pointer;" id="imgUrl" data-toggle="modal" data-xsize="480" data-ysize="270" data-cover="imgUrl"
+                <div style="padding: 10px;">建议图片大小为690*240</div>
+                <img style="max-width:480px;cursor:pointer;" id="imgUrl" data-toggle="modal" data-xsize="690" data-ysize="240" data-cover="imgUrl"
                      data-target="#img-uploader" src="\${data.o.imgUrl}">
 
             </div>
