@@ -207,11 +207,11 @@ public class WWWController extends PortalBaseController {
     @RequestMapping(value = "/record_done.do")
     @ResponseBody
     public ResponseEntity record_done() throws Exception {
-        String fastdfs_server = ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
+        String hls_server = ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("hls_server").toString();
         Map<String, Object> p = this.getParams();
         this.logger.info("record_done->{}", p);
         p.put("service", "flvfileConverService");
-        p.put("fastdfs_server",fastdfs_server);
+        p.put("hls_server",hls_server);
         Object id = this.redisTemplate.opsForValue().get((String) p.get("name"));
         if (CommonUtils.isNotEmpty(id)) {
             p.put("id", id);

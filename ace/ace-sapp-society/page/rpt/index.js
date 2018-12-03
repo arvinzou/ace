@@ -8,7 +8,6 @@ Array.prototype.indexOf = function (val) {
   }
   return -1;
 };
-
 Array.prototype.remove = function (val) {
   var index = this.indexOf(val);
   if (index > -1) {

@@ -62,4 +62,15 @@
   <select id="isExit" resultType="int">
     select count(*) from file_record where id=#{id}
   </select>
+
+  <update id="updateUrl">
+    update file_record
+    set
+    url = #{url,jdbcType=VARCHAR},
+    status = '2'
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectWaitList" resultType="map">
+    select  id, name, path, mp4, url from file_record where status='1'
+  </select>
 </mapper>
