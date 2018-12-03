@@ -283,7 +283,7 @@ public class AuthorityServiceImpl implements AuthorityService {
 	 */
 	@Override
 	public  MessageResponse authority(Map<String,Object> p) throws Exception{
-		int t=this.wxUserDao.isExitByMobile((String) p.get("name"));
+		int t=this.wxUserDao.isExitByMobile((String) p.get("user"));
 		if(t==0){
 			return new MessageResponse(1,"没有找到对应的用户");
 		}

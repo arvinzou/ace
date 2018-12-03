@@ -152,7 +152,7 @@ Page({
     var pusherStatus = that.data.pusherStatus;
     var userinfo = wx.getStorageSync('userinfo');
     that.setData({
-      rtmpurl: cfg.rtmpserver + userinfo.userProp.mobile + "?id=" + that.data.id + "&appid=" + cfg.appid
+      rtmpurl: cfg.rtmpserver + that.data.id + "?id=" + that.data.id + "&appid=" + cfg.appid + "&user=" + userinfo.userProp.mobile
     });
     
     if (pusherStatus == 'stop') {
