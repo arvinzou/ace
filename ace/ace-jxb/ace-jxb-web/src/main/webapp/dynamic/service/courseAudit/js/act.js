@@ -1,4 +1,5 @@
 var loading = {};
+var currentPageIndex = 1;
 function loadlocal() {
     var urls = [];
     urls.push({path: contextPath, url: '/content/common/js/jqPaginator.js', type: 'js'});
@@ -9,7 +10,7 @@ function loadlocal() {
 
 function App() {
     console.log("=============================App Start==============================");
-    //loadlocal();
+
      $(".btn-group .btn").bind('click',function(event){
             $(event.target).siblings().removeClass("active");
             console.log(event);
@@ -22,6 +23,20 @@ function setParams(key, value) {
     getPageList();
 }
 window.onload = function (){
+
+    var locaUrl = window.location.href;
+    var url = window.location.href.substring(locaUrl.indexOf("?")+1);
+    var paramArr = url.split("&");
+    for(var i=0;i < paramArr.length;i++){
+        num=paramArr[i].indexOf("=");
+        if(num>0){
+            name=paramArr[i].substring(0,num);
+            value=paramArr[i].substr(num+1);
+            if(name == "currentPageIndex"){
+                currentPageIndex = value;
+            }
+        }
+    }
     initPage();    //初始化显示单品课程
 
     $('#modal-status').on('show.bs.modal', function (event) {
@@ -65,7 +80,7 @@ function initPage() {
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            params['start']=(num-1)*params.limit;
+            params['start']=(currentPageIndex-1)*params.limit;
             params['initType']=type;
             getPageList();
         }
@@ -112,7 +127,7 @@ function changeCourseType(type){
     initPage();
 }
 function edit(id){
-     window.location.href = contextPath + '/dynamic/service/courseAudit/edit/index.jsp?id='+urlParams.id+'&type='+params.type+'&did='+id;
+     window.location.href = contextPath + '/dynamic/service/courseAudit/edit/index.jsp?id='+urlParams.id+'&type='+params.type+'&did='+id+'&currentPageIndex='+currentPageIndex;
 }
 
 function changeType(status){

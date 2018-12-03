@@ -1,5 +1,6 @@
 var loading = {};
 var payType = "0";
+var currentPageIndex = 1;
 
 function App() {
     console.log("=============================App Start==============================");
@@ -73,7 +74,7 @@ function save(params) {
             stopLoad();
             alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = contextPath + '/dynamic/service/courseAudit/index.jsp?id='+urlParams.id;
+                window.location.href = contextPath + '/dynamic/service/courseAudit/index.jsp?id='+urlParams.id+'&currentPageIndex='+currentPageIndex;
             }
         },
         error: function () {
@@ -172,6 +173,19 @@ function initForm(){
     });
 }
 window.onload=function(){
+    var locaUrl = window.location.href;
+    var url = window.location.href.substring(locaUrl.indexOf("?")+1);
+    var paramArr = url.split("&");
+    for(var i=0;i < paramArr.length;i++){
+        num=paramArr[i].indexOf("=");
+        if(num>0){
+            name=paramArr[i].substring(0,num);
+            value=paramArr[i].substr(num+1);
+            if(name == "currentPageIndex"){
+                currentPageIndex = value;
+            }
+        }
+    }
     jQuery(function ($) {
         initPage();
         $(".breadcrumb").append("<li><span>课程编辑</span></li>");
