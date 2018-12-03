@@ -120,7 +120,7 @@ Page({
     var pusherStatus = that.data.pusherStatus;
     var userinfo = wx.getStorageSync('userinfo');
     that.setData({
-      rtmpurl: cfg.rtmpserver + userinfo.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
+      rtmpurl: cfg.rtmpserver + userinfo.mobile + "?id=" + that.data.id + "&appid=" + cfg.appid
     });
     if (pusherStatus == 'stop') {
       wx.showModal({

@@ -3,7 +3,7 @@
 <mapper namespace="com.huacainfo.ace.operana.dao.report.Task">
   <select id="query" resultType="map">
     SELECT
-    a.department_name 'name',
+    ifnull(a.department_name,'其他') 'name',
     t.closed 'value1',
     t.total  'value2'
     FROM

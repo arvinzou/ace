@@ -83,7 +83,7 @@
         <td>
             <div class="header-box">
                 <div class="header-img">
-                    {@if item.headimgurl!=undefined && item.headimgurl!='' && item.headimgurl!=null}
+                    {@if item.headimgurl!=undefined && item.headimgurl!='' && item.headimgurl!=null && item.headimgurl.length>3}
                     <img src="\${item.headimgurl}" class="headimg">
                     {@else}
                     <img src="../../common/img/default_header.png" class="headimg">

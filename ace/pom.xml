@@ -76,8 +76,9 @@
         <!---->
         <!--<module>ace-iop</module>-->
         <!--
-        <module>ace-operana</module>
+
         -->
+        <module>ace-operana</module>
         <!--<module>ace-woc</module>-->
         <!---->
        <!--<module>ace-face</module>-->
@@ -90,7 +91,7 @@
         <!--<module>ace-gesp</module>-->
         <!--<module>ace-weui</module>-->
         <!--<module>activiti-root</module>-->
-       <!--<module>ace-CodeGenerator</module>-->
+        <module>ace-CodeGenerator</module>
     </modules>
     <dependencies>
         <dependency>

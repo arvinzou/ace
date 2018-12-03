@@ -207,15 +207,18 @@ public class WWWController extends PortalBaseController {
     @RequestMapping(value = "/record_done.do")
     @ResponseBody
     public ResponseEntity record_done() throws Exception {
+        String hls_server = ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("hls_server").toString();
         Map<String, Object> p = this.getParams();
+        this.logger.info("record_done->{}", p);
         p.put("service", "flvfileConverService");
+        p.put("hls_server",hls_server);
         Object id = this.redisTemplate.opsForValue().get((String) p.get("name"));
         if (CommonUtils.isNotEmpty(id)) {
             p.put("id", id);
         }
-        this.logger.info("record_done->{}", p);
+        this.logger.info("record_done_aftersetparam->{}", p);
         /**为了防止磁盘空间不足停止系统进行录制文件的转换存储，需要时再打开*/
-        //this.kafkaProducerService.sendMsg("topic.sys.msg", p);
+        this.kafkaProducerService.sendMsg("topic.sys.msg", p);
         return new ResponseEntity<>(p, HttpStatus.OK);
     }
 
