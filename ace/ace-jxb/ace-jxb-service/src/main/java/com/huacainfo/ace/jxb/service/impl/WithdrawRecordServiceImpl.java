@@ -2,6 +2,7 @@ package com.huacainfo.ace.jxb.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.api.WeChatPayApi;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
@@ -15,6 +16,7 @@ import com.huacainfo.ace.jxb.constant.RegType;
 import com.huacainfo.ace.jxb.dao.CounselorDao;
 import com.huacainfo.ace.jxb.dao.WithdrawRecordDao;
 import com.huacainfo.ace.jxb.dao.WithdrawWxLogDao;
+import com.huacainfo.ace.jxb.model.Counselor;
 import com.huacainfo.ace.jxb.model.WithdrawRecord;
 import com.huacainfo.ace.jxb.model.WithdrawWxLog;
 import com.huacainfo.ace.jxb.service.AccountFlowRecordService;
@@ -226,29 +228,80 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
         record.setAuditRemark(remark);
         record.setUpdateDate(DateUtil.getNowDate());
         withdrawRecordDao.updateByPrimaryKey(record);
-        //调用微信企业支付接口
+        //审核通过
         if (rst.equals(AuditConstant.PASS) && "1".equals(record.getWithdrawType())) {
-            Map<String, Object> apiRst;
-            try {
-                apiRst = callMchPay(record);
-            } catch (Exception e) {
-                logger.error("[" + id + "]企业付款调用异常：{}", e);
-                apiRst = new HashMap<>();
-                apiRst.put("err_code", "-1");
-                apiRst.put("err_msg", e.getMessage());
+            //调用微信企业支付接口
+            withdrawApiAction(record);
+        } else if (rst.equals(AuditConstant.REJECT)) { //审核驳回
+            //退回已扣除申请金额
+            MessageResponse ms = withdrawRejectAction(record);
+            if (ms.getStatus() == ResultCode.FAIL) {
+                throw new CustomException(ms.getErrorMessage());
             }
-            //接口日志记录
-            WithdrawWxLog log = new WithdrawWxLog();
-            log.setId(GUIDUtil.getGUID());
-            log.setRecordId(record.getId());
-            log.setLogTxt(JsonUtil.toJson(apiRst));
-            log.setStatus("1");
-            log.setCreateDate(DateUtil.getNowDate());
-            withdrawWxLogDao.insert(log);
         }
 
         dataBaseLogService.log("审核提现申请记录", "提现申请记录", id, id, "提现申请记录", userProp);
-        return new MessageResponse(ResultCode.SUCCESS, "提现申请记录审核完成！");
+        return new MessageResponse(ResultCode.SUCCESS, "审核完成！");
+    }
+
+    /**
+     * 提现审核拒绝，退回申请金额到用户可用余额
+     *
+     * @param record 申请记录
+     * @return MessageResponse
+     */
+    private MessageResponse withdrawRejectAction(WithdrawRecord record) throws Exception {
+        String bisId = record.getId();
+        BigDecimal amount = null == record.getApplyAmount() ? BigDecimal.ZERO : record.getApplyAmount().abs();
+        if (amount.compareTo(BigDecimal.ZERO) == 0) {
+            return new MessageResponse(ResultCode.FAIL, "申请提现金额非法");
+        }
+        //咨询师资料
+        Counselor c = counselorDao.selectByPrimaryKey(record.getCounselorId());
+        if (c == null) {
+            return new MessageResponse(ResultCode.FAIL, "咨询师信息丢失");
+        }
+        String cId = record.getCounselorId();
+        BigDecimal cBalance = null == c.getAccount() ? amount : c.getAccount().add(amount);
+        //
+        int i = counselorDao.updAccount(cId, cBalance);
+        if (i == 1) {
+            //流水记录
+            accountFlowRecordService.insertRecord(cId, RegType.TEACHER, "app-withdraw-reject",
+                    amount, bisId, "withdraw");
+            return new MessageResponse(ResultCode.SUCCESS, "处理完成");
+        }
+
+        return new MessageResponse(ResultCode.FAIL, "余额回退失败");
+    }
+
+    /**
+     * 微信企业支付接口提现 -- 打款到用户微信钱包
+     *
+     * @param record 申请记录
+     * @return MessageResponse
+     */
+    private MessageResponse withdrawApiAction(WithdrawRecord record) {
+        Map<String, Object> apiRst;
+        try {
+            apiRst = callMchPay(record);
+            logger.debug("微信提现结果反馈： {}", apiRst != null ? apiRst.toString() : "返回为空");
+        } catch (Exception e) {
+            logger.error("[" + record.getId() + "]企业付款调用异常：{}", e);
+            apiRst = new HashMap<>();
+            apiRst.put("err_code", "-1");
+            apiRst.put("err_msg", e.getMessage());
+        }
+        //接口日志记录
+        WithdrawWxLog log = new WithdrawWxLog();
+        log.setId(GUIDUtil.getGUID());
+        log.setRecordId(record.getId());
+        log.setLogTxt(JsonUtil.toJson(apiRst));
+        log.setStatus("1");
+        log.setCreateDate(DateUtil.getNowDate());
+        withdrawWxLogDao.insert(log);
+
+        return new MessageResponse(ResultCode.SUCCESS, "处理完成");
     }
 
     /**
@@ -295,8 +348,9 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
         }
         //入账流水
         if (rs.getStatus() == ResultCode.SUCCESS) {
+            //流水存储负值
             accountFlowRecordService.insertRecord(params.getCounselorId(), RegType.TEACHER,
-                    "app-withdraw", params.getApplyAmount(), params.getId(), "withdraw");
+                    "app-withdraw", params.getApplyAmount().negate(), params.getId(), "withdraw");
         }
 
         return rs;

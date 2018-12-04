@@ -98,23 +98,23 @@ function initpage() {
             getOrderList(num, type);
         }
     });
-     $(".btn-group .btn").bind('click',function(event){
-            $(event.target).siblings().removeClass("active");
-            console.log(event);
-            $(event.target).addClass("active");
-        });
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
 }
 
 
 function getOrderList(num, type) {
-    var url = contextPath+"/baseOrder/findMyOrderList";
-    var keyword=$("input[name=keyword]").val();
+    var url = contextPath + "/baseOrder/findMyOrderList";
+    var keyword = $("input[name=keyword]").val();
     var data = {
         category: category,
         page: num,
         limit: 10
     }
-    data.id=keyword;
+    data.id = keyword;
     startLoad();
     $.getJSON(url, data, function (result) {
         stopLoad();
