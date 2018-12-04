@@ -60,9 +60,5 @@ function findOrderByCommodityid(courseId){
 }
 
 function playCourse(courseId, sourceId, free){
-    if(findOrderByCommodityid(courseId) != false || free == '0'){
-        window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+courseId+'&sourceId='+sourceId;
-    }else{
-        alert("盖课程为非免费课程，请购买再收听！");
-    }
+    window.location.href = contextPath + '/www/view/play/index.jsp?courseId='+courseId+'&sourceId='+sourceId;
 }
