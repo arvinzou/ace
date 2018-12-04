@@ -148,6 +148,26 @@ function edit(id){
         });
     }
 }
+
+
+function members(id){
+    $('#memberList').modal('show');
+    if (id) {
+        var url = "/jxb/counselor/findCounselorList";
+        var data = {
+            studioId: id
+        }
+        $.getJSON(url, data, function (result) {
+            console.log(result);
+            var navitem = document.getElementById('temp_memberList').innerHTML;
+            var html = juicer(navitem, {
+                data: result.rows
+            });
+            $("#memberListContent").html(html);
+        });
+    }
+}
+
 function setval(id, status){
     $("#auditId").val(id);
     studioStatus = status;
