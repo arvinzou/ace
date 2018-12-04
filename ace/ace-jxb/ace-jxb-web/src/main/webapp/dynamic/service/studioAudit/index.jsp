@@ -93,6 +93,8 @@
                onclick="setval('\${item.id}','\${item.status}');">审核</a>
             <a href="#" class="operation" data-target="#myModal" data-toggle="modal"
                onclick="edit('\${item.id}');">查看 </a>
+            <a href="#" class="operation" data-target="#myModal" data-toggle="modal"
+               onclick="members('\${item.id}');">成员 </a>
         </td>
     </tr>
     {@/each}
@@ -152,6 +154,71 @@
         </div>
     </div>
 </script>
+
+
+<%--成员列表--%>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="memberList" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width: 1000px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">成员列表</h4>
+            </div>
+            <div class="modal-body" id="memberListContent">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script id="temp_memberList" type="text/template">
+    <table width="100%">
+        <thead>
+            <tr>
+                <th width="25%">
+                    头像
+                </th>
+                <th width="25%">
+                    名字
+                </th>
+                <th width="25%">
+                    手机号码
+                </th>
+                <th width="25%">
+                    加入时间
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {@each data as item}
+        <tr style="margin-bottom: 20px">
+            <td>
+                <div style="width: 40px;height: 40px;">
+                    <img src="\${item.imagePhotoUrl}" style="width: 100%;height: 100%;object-fit: cover" alt="">
+                </div>
+            </td>
+            <td>
+                \${item.name}
+            </td>
+            <td>
+                \${item.mobile}
+            </td>
+            <td>
+                \${item.createDate}
+            </td>
+        </tr>
+        {@/each}
+        </tbody>
+    </table>
+</script>
+<%--成员列表end--%>
+
 
 <!--审核弹框-->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="opt"
