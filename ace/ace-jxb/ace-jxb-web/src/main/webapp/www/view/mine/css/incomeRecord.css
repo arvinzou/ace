@@ -1,6 +1,8 @@
 .month{
     margin:0.266666rem auto 0;
     width:9.2rem;
+    height: 1rem;
+    display: flex;
 }
 
 .month input{
@@ -8,5 +10,4 @@
     height: 1rem;
     width: 2.2rem;
     background:rgba(247,249,252,1);
-    pointer-events: none;
 }

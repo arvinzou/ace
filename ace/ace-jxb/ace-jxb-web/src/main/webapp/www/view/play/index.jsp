@@ -6,6 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" /><meta http-equiv="Pragma" content="no-cache" /><meta httpwebapp-equiv="Expires" content="0" />
 		<title>课程详情</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
@@ -14,10 +15,8 @@
 			  crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
-		<script type="text/javascript" src="js/act.js"></script>
+		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
-
-
 	<body>
 		<div class="container">
 			<div class="course_basic">
@@ -69,6 +68,7 @@
 
 
 	</body>
+	<script type="text/javascript" src="js/act.js"></script>
 
 	<script id="bannerTemp" type="text/template">
 		<img src="\${data.cover}" />
