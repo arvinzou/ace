@@ -54,9 +54,17 @@ body{
 .content{
 	width: 90%;
 	margin: 0.2rem auto;
-	background: #ffffff;
 }
-
+.remark{
+	height: 1.6rem;
+	background: #ffffff;
+	text-overflow: -o-ellipsis-lastline;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
 #memberList{
 	border-top: 1px solid rgba(247,249,252,1);
 	padding-top: 0.4rem;

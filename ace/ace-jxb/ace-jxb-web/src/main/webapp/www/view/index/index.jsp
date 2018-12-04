@@ -203,7 +203,7 @@
             <div class="swiper-slide" onclick="loadCounselor('\${item.id}');">
                 <div class="teacher-box">
                     <div class="teacher-cover">
-                        <img src="\${item.headimgurl}" class="cover-img" />
+                        <img src="\${item.imagePhotoUrl}" class="cover-img" />
                     </div>
                     <div class="teacher-info"><span class="teacher-name">\${item.name}</span></div>
                     <div class="teacher-info"><span class="teacher-certification">\${item.certification}</span></div>
