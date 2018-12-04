@@ -472,4 +472,11 @@
         DELETE from portal.users
         where user_id =  #{userId,jdbcType=VARCHAR}
     </delete>
+
+
+    <update id="updAccount">
+        update counselor
+        set account = #{account,jdbcType=DECIMAL}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
 </mapper>
