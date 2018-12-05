@@ -954,6 +954,17 @@ public class FopCompanyServiceImpl implements FopCompanyService {
                 return new MessageResponse(ResultCode.FAIL, "当年纳税(万元) 精确到小数点后两位");
             }
         }
+        if (!CommonUtils.isBlank(o.getPartyPhone())) {
+            if (!ValidateUtils.Tel(o.getPartyPhone()) || !ValidateUtils.Mobile(o.getPartyPhone())) {
+                return new MessageResponse(ResultCode.FAIL, "联系电话格式不对");
+            }
+        }
+        if (!CommonUtils.isBlank(o.getUnionPhone())) {
+            if (!ValidateUtils.Tel(o.getUnionPhone()) || !ValidateUtils.Mobile(o.getUnionPhone())) {
+                return new MessageResponse(ResultCode.FAIL, "联系电话格式不对");
+            }
+        }
+
         return new MessageResponse(ResultCode.SUCCESS, "数据格式正确");
     }
 

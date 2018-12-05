@@ -13,6 +13,18 @@ public class PersonInfoVo extends PersonInfo {
      * 微信头像
      */
     private String headimgurl;
+    /**
+     * 所属组织名称
+     */
+    private String orgName;
+
+    public String getOrgName() {
+        return orgName;
+    }
+
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
+    }
 
     public String getNickname() {
         return nickname;
