@@ -127,6 +127,7 @@ public interface FopCompanyService {
      */
     ResultResponse uploadAnnex(String url, String category, String companyId);
 
+
     SingleResult<FopCompanyVo> findByPK(String id);
 
     /**

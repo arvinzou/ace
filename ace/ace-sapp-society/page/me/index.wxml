@@ -140,8 +140,7 @@
         <view class='inner-model' catchtap='hiddenComment'></view>
         <view class='box whiteBg'>
             <form bindsubmit="formSubmit" bindreset="formReset">
-                <input type='text' auto-focus='true' focus="true" name='title' placeholder='请输入标题' maxlength='20' cursor-spacing='160' confirm-type='next'></input>
-                <textarea bindinput='getValue' placeholder='请输入内容' name='content'  cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar=''></textarea>
+                <textarea bindinput='getValue' placeholder='请把信息发送给我们。' name='content' auto-focus='true' focus="true" cursor-spacing='80' auto-height='true' adjust-position='false' show-confirm-bar=''></textarea>
                 <button class='submit' formType="submit">提交</button>
             </form>
         </view>

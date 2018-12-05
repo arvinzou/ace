@@ -85,7 +85,7 @@ public class FopCompanyController extends FopBaseController {
         } catch (CustomException e) {
             return new MessageResponse(ResultCode.FAIL, e.getMsg());
         } catch (Exception e) {
-            return new MessageResponse(ResultCode.FAIL, "内部错误", CommonUtils.getExceptionStack(e));
+            return new MessageResponse(ResultCode.FAIL, "添加失败", CommonUtils.getExceptionStack(e));
         }
     }
 

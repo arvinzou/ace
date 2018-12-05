@@ -2,15 +2,15 @@ const openIdUrl = require('./config').openIdUrl;
 // var util = require("../../util/util.js");
 App({
     onLaunch: function () {
-        wx.checkSession({
-            success: function (res) {
-                console.log("处于登录态");
-            },
-            fail: function (res) {
-                console.log("需要重新登陆");
-                wx.clearStorage();
-            }
-        })
+        // wx.checkSession({
+        //     success: function (res) {
+        //         console.log("处于登录态");
+        //     },
+        //     fail: function (res) {
+        //         console.log("需要重新登陆");
+        //         wx.clearStorage();
+        //     }
+        // })
     },
     onShow: function () {
         console.log('App Show')
