@@ -57,7 +57,7 @@ body{
 	background: #ffffff;
 }
 .remark{
-	height: 1.6rem;
+	height: 2.0rem;
 	text-overflow: -o-ellipsis-lastline;
 	overflow: hidden;
 	text-overflow: ellipsis;

@@ -54,11 +54,11 @@ body{
 
 .content{
 	width: 90%;
-	height: 1.6rem;
 	margin: 0.2rem auto;
 	background: #ffffff;
 }
 .remark{
+	height: 2.0rem;
 	text-overflow: -o-ellipsis-lastline;
 	overflow: hidden;
 	text-overflow: ellipsis;
