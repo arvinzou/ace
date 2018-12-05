@@ -129,7 +129,8 @@
 
     <sql id="Vo_Column_List">
         c.`name` as counselorName,
-        r.checkYear,r.checkMonth, r.checkDay, r.checkQuarter, r.counselorNum, r.turnover,
+        r.checkYear,r.checkMonth, r.checkDay, r.checkQuarter,
+        ifnull(r.counselorNum, 0) as counselorNum, ifnull(r.turnover, 0) as turnover,
         p.postName,p.ratio,
         t.id, t.counselorId, t.postId, t.remark, t.status, t.createDate, t.updateDate
     </sql>
@@ -139,6 +140,9 @@
         <include refid="Vo_Column_List"/>
         <include refid="fromStatement"/>
         where t.counselorId = #{counselorId,jdbcType=VARCHAR}
+        order by t.createDate desc
+        limit 1
+
     </select>
 
     <sql id="fromStatement">
@@ -150,6 +154,15 @@
 
     <sql id="whereCondition">
       where 1=1
+        <if test="condition.teacherName !=null and condition.teacherName !=&quot;&quot;">
+            and c.name like concat('%',#{condition.teacherName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.quarter !=null and condition.quarter !=&quot;&quot;">
+            and r.checkQuarter = #{condition.quarter,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.year !=null and condition.year !=&quot;&quot;">
+            and r.checkYear = #{condition.year,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

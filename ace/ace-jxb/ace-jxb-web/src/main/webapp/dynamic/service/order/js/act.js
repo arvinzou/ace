@@ -29,6 +29,8 @@ function formatCategory(type) {
             return "课程订单";
         case "3":
             return "评测订单";
+        case "4":
+            return "打赏订单";
             break;
     }
 }
@@ -98,23 +100,23 @@ function initpage() {
             getOrderList(num, type);
         }
     });
-     $(".btn-group .btn").bind('click',function(event){
-            $(event.target).siblings().removeClass("active");
-            console.log(event);
-            $(event.target).addClass("active");
-        });
+    $(".btn-group .btn").bind('click', function (event) {
+        $(event.target).siblings().removeClass("active");
+        console.log(event);
+        $(event.target).addClass("active");
+    });
 }
 
 
 function getOrderList(num, type) {
     var url = "/jxb/baseOrder/findBaseOrderListSecond";
-    var keyword=$("input[name=keyword]").val();
+    var keyword = $("input[name=keyword]").val();
     var data = {
         category: category,
         page: num,
         limit: 10
     }
-    data.id=keyword;
+    data.id = keyword;
     startLoad();
     $.getJSON(url, data, function (result) {
         stopLoad();

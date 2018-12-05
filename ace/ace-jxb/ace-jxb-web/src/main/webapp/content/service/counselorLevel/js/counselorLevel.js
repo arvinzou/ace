@@ -4,6 +4,8 @@ window.onload = function () {
     $('.calculation_btn').on('click', activeCalculation);
 };
 
+var params = {limit: 20, type: '1'};
+
 /*确定计算岗位*/
 function activeCalculation() {
     var quarter = $('input[name="quarter"]:checked').val();
@@ -18,6 +20,9 @@ function activeCalculation() {
             alert(result.errorMessage);
         }
         $('#calculationLevel').modal('hide');
+
+        //
+        initPage();
     })
 }
 
@@ -25,31 +30,29 @@ function activeCalculation() {
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,
-        pageSize: 10,
+        pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,
         prev: '<li class="prev"><a href="javascript:;">上一页</a></li>',
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            getDataList(num, type);
+            params['start'] = (num - 1) * params.limit;
+            params['initType'] = type;
+            getDataList();
         }
     });
 }
 
-function getDataList(num, type) {
+function getDataList() {
     var url = "/jxb/postLevel/findCounselorLevelList";
-    var data = {
-        page: num,
-        limit: 10
-    }
+    params['teacherName'] = $("input[name=keyword]").val();
     startLoad();
-    $.getJSON(url, data, function (result) {
+    $.getJSON(url, params, function (result) {
         stopLoad();
-        console.log("tatol:" + result.total);
-        console.log(JSON.stringify(result));
+
         if (result.status == 0) {
-            if (type == "init") {
+            if (params.type == "init") {
                 $('#pagination1').jqPaginator('option', {
                     totalCounts: result.total,
                 });
@@ -58,9 +61,8 @@ function getDataList(num, type) {
             var html = juicer(navitem, {
                 data: result.rows,
             });
-            console.log(html);
-            $("#data-list").html(html);
 
+            $("#data-list").html(html);
         }
     })
 }
@@ -83,6 +85,9 @@ function modifyLevel(counselorId, postId) {
             $("#levelList").data('postId', postId);
             $('#postId').val(postId)
             $('#counselorLevelModal').modal('show');
+
+            //
+            initPage();
         }
     });
 }
@@ -112,4 +117,15 @@ function activeModify() {
             $('#counselorLevelModal').modal('hide');
         })
     }
+}
+
+
+function t_query() {
+    initPage();
+    return false;
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    getDataList();
 }

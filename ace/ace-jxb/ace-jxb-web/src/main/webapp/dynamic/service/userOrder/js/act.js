@@ -29,6 +29,8 @@ function formatCategory(type) {
             return "课程订单";
         case "3":
             return "评测订单";
+        case "4":
+            return "打赏订单";
             break;
     }
 }
