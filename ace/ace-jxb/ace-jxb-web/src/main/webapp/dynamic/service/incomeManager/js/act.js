@@ -31,7 +31,7 @@ var params = {
 
 function initPage() {
     $.jqPaginator('#pagination1', {
-        totalCounts: 20,
+        totalCounts: 1,
         pageSize: params.limit,
         visiblePages: 10,
         currentPage: 1,

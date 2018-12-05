@@ -6,21 +6,15 @@ function App() {
         url: '/www/view/common/js/star-rating.js',
         type: 'js',
         callback: function () {
-            jQuery(document).ready(function() {
-                var $inp = $('#rating-input');
-                $inp.rating({
-                    min: 0,
-                    max: 5,
-                    step: 1,
-                    size: 'xs',
-                    theme: 'krajee-fa',
-                    showClear: false,
-                    starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
-                    captionElement: "#kv-caption",
-                    filledStar: '<i class="fas fa-star"></i>',
-                    emptyStar: '<i class="fas fa-star"></i>',
-                });
-            });
+
+        }
+    });
+    loader({
+        path: contextPath,
+        url: '/www/common/js/jweixin-1.2.0.js',
+        type: 'js',
+        callback: function () {
+
         }
     });
 
@@ -28,6 +22,18 @@ function App() {
 }
 window.onload = function(){
     console.log(window.location.href);
+    $('#rating-input').rating({
+        min: 0,
+        max: 5,
+        step: 1,
+        size: 'xs',
+        theme: 'krajee-fa',
+        showClear: false,
+        starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
+        captionElement: "#kv-caption",
+        filledStar: '<i class="fas fa-star"></i>',
+        emptyStar: '<i class="fas fa-star"></i>',
+    });
     var url =   window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length+1);
     var paramArr = url.split("&");
     for(var i=0;i < paramArr.length;i++){
@@ -64,6 +70,9 @@ function initCourseInfo(courseId){
                     //单节课程
                     viewHtml('sourceTitle', result.data.courseSource, 'sourceNameTemp');
                     viewHtml('courseAudio', result.data.courseSource, 'audioTemp');
+                    document.addEventListener("WeixinJSBridgeReady", function () {
+                        document.getElementById('audio').load();//load重新加载音频，实现苹果预加载
+                    }, false);
                 }else if(type == '2'){
                     //系列课程
                     findSourceInfo(sourceId);

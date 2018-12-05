@@ -36,6 +36,8 @@ jQuery(function ($) {
 
                     $("#sData").click(function () {
                         checkCard();
+                        checkCrewSize();
+                        checkPartyPeoples();
                     });
                 }
             })
@@ -51,6 +53,30 @@ function checkCard() {
     }
     else if (reg.test(card) === false) {
         alert("身份证输入不合法");
+        return false;
+    }
+}
+
+function checkCrewSize() {
+    var crewSize = $("#crewSize").val();
+    var reg = /(^[1-9]\\d*$)/;
+    if (crewSize == '') {
+        $("#crewSize").val("");
+    }
+    else if (reg.test(crewSize) === false) {
+        alert("人数输入不合法");
+        return false;
+    }
+}
+
+function checkPartyPeoples() {
+    var crewSize = $("#partyPeoples").val();
+    var reg = /(^[1-9]\\d*$)/;
+    if (partyPeoples == '') {
+        $("#partyPeoples").val("");
+    }
+    else if (reg.test(partyPeoples) === false) {
+        alert("人数输入不合法");
         return false;
     }
 }

@@ -9,16 +9,40 @@
     <title>提现记录</title>
     <link rel="stylesheet" type="text/css" href="css/incomeRecord.css"/>
     <link rel="stylesheet" type="text/css" href="css/earnings.css"/>
-    <link rel="stylesheet" type="text/css" href="css/Mdate.css"/>
-    <jsp:include page="../../../dynamic/common/base.jsp"/>
-    <script type="text/javascript" src="../../common/js/loader.js"></script>
+    <script>
+        !function () {
+            function n() {
+                var n = screen.width > 0 && (window.innerWidth >= screen.width || 0 == window.innerWidth) ? screen.width : window.innerWidth,
+                    i = screen.height > 0 && (window.innerHeight >= screen.height || 0 == window.innerHeight) ? screen.height : window.innerHeight;
+                return {w: n, h: i}
+            }
+
+            function i() {
+                return 0 == window.orientation || 180 == window.orientation
+            }
+
+            function e() {
+                t = n(), t.w <= 750 ? w.style["font-size"] = t.w / 10 + "px" : w.style["font-size"] = "48px"
+            }
+
+            var t = n(), o = "onorientationchange" in window ? "orientationchange" : "resize",
+                w = document.documentElement;
+            void 0 != window.orientation ? (i() ? e() : w.style["font-size"] = "37.5px", window.addEventListener(o, function () {
+                setTimeout(function () {
+                    var e = n();
+                    i() ? w.style["font-size"] = e.w / 10 + "px" : w.style["font-size"] = "37.5px"
+                }, 100)
+            }, !1)) : e()
+        }();
+    </script>
+    <script src="../common/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/iScroll.js"></script>
     <script type="text/javascript" src="js/Mdate.js"></script>
     <script type="text/javascript" src="js/incomeRecord.js"></script>
 </head>
 <body>
 <div class="month">
-    <input type="text" id="dateSelectorOne" placeholder="选择年月" value="2015-12-21" data-year="2015" data-month="12">
+    <input type="text" id="dateSelectorOne" placeholder="选择年月" value="2018-12-21" data-year="1991" data-month="8">
 </div>
 <div class="list">
     <div class="top">

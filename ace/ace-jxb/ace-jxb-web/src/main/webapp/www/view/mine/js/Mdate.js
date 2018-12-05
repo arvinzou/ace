@@ -7,7 +7,7 @@
         link.href = url;
         d.getElementsByTagName("head")[0].appendChild(link)
     };
-    includeCss("Mdate/needcss/Mdate.css");
+    includeCss("../mine/css/Mdate.css");
     var dateopts = {
         beginYear: 2000,
         beginMonth: 1,
