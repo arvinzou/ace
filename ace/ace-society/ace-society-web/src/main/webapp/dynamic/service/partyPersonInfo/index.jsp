@@ -27,18 +27,21 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-sm-5">
+            <div class="col-sm-3">
 
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-9">
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <%--<button type="button" class="btn btn-default"  onclick="setParams('status','0');">已删除</button>--%>
                         <button type="button" class="btn btn-default" onclick="setParams('status','1');">暂存</button>
                         <button type="button" class="btn btn-default" onclick="setParams('status','2');">待审核</button>
                         <button type="button" class="btn btn-default" onclick="setParams('status','3');">已通过</button>
                         <button type="button" class="btn btn-default" onclick="setParams('status','4');">被驳回</button>
+                    </div>
+                    <div class="btn-group" role="group" style="float:left;padding:0px 5px 0px 5px">
+                        <input type="text" name="orgName" class="form-control " style="width:280px;height:30px;"
+                               placeholder="请输入所属组织名称">
                     </div>
                     <div class="input-group">
                         <input type="text" name="keyword" class="form-control " placeholder="请输入姓名">
@@ -59,6 +62,8 @@
                     <th width="10%">真实姓名</th>
                     <th width="15%">手机号码</th>
                     <th width="10%">政治面貌</th>
+                    <th width="10%">所属组织</th>
+
                     <th width="10%">累计获得爱心币</th>
                     <th width="10%">有效爱心币</th>
                     <th width="10%">注册状态</th>
@@ -88,7 +93,8 @@
         <td>
             <div class="row">
                 <div class="col-md-12">
-                    {@if item.headimgurl!='' && item.headimgurl!=null && item.headimgurl!=undefined && item.headimgurl.length>3}
+                    {@if item.headimgurl!='' && item.headimgurl!=null && item.headimgurl!=undefined &&
+                    item.headimgurl.length>3}
                     <img src="\${item.headimgurl}" class="cover"/>
                     {@else}
                     <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
@@ -101,11 +107,12 @@
         <td>\${item.mobilePhone}</td>
         <td>
             {@if item.politicalStatus == "1"}
-                个人
+            个人
             {@else if item.politicalStatus == "2"}
-                党员
+            党员
             {@/if}
         </td>
+        <td>\${item.orgName}</td>
         <td>\${item.accPoints}</td>
         <td>\${item.validPoints}</td>
         <td>
@@ -202,7 +209,6 @@
                 \${data.nickname}
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-md-2 view-label">真实姓名</label>
             <div class="col-md-10">
@@ -223,6 +229,12 @@
                 {@else if data.politicalStatus == "2"}
                 党员
                 {@/if}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">所属组织</label>
+            <div class="col-md-10">
+                \${data.orgName}
             </div>
         </div>
         <div class="form-group">
@@ -278,7 +290,6 @@
                 \${data.nickname}
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-md-2 view-label">真实姓名</label>
             <div class="col-md-10">
@@ -299,6 +310,12 @@
                 {@else if data.politicalStatus == "2"}
                 党员
                 {@/if}
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 view-label">所属组织</label>
+            <div class="col-md-10">
+                \${data.orgName}
             </div>
         </div>
         <div class="form-group">
