@@ -7,7 +7,9 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.jxb.dao.CourseDao;
 import com.huacainfo.ace.jxb.dao.CourseSourceDao;
+import com.huacainfo.ace.jxb.model.Course;
 import com.huacainfo.ace.jxb.model.CourseSource;
 import com.huacainfo.ace.jxb.service.CourseSourceService;
 import com.huacainfo.ace.jxb.vo.CourseSourceQVo;
@@ -33,6 +35,10 @@ public class CourseSourceServiceImpl implements CourseSourceService {
     private CourseSourceDao courseSourceDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+
+
+    @Autowired
+    private CourseDao courseDao;
 
     /**
      * @throws
@@ -89,6 +95,15 @@ public class CourseSourceServiceImpl implements CourseSourceService {
         }
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
+
+        Course course=courseDao.selectByPrimaryKey(o.getCourseId());
+        /**单节课程不能增加多个课程资源***/
+        if(course.getType().equals("1")){
+            int t=this.courseSourceDao.isExit(o);
+            if(t>1){
+                return new MessageResponse(1, "当前是单节课程，只能添加一个课程资源！");
+            }
+        }
         this.courseSourceDao.insertSelective(o);
         this.dataBaseLogService.log("添加课程资源", "课程资源", "",
                 o.getId(), o.getId(), userProp);
