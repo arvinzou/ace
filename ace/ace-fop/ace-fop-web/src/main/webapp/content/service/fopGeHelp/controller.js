@@ -242,7 +242,7 @@ function audit(params) {
             $("#modal-audit").modal('hide');
             alert(rst.errorMessage);
             if (rst.status == 0) {
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
             }
         },
         complete: function (XMLHttpRequest, textStatus) {

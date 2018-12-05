@@ -128,6 +128,7 @@ public class CourseServiceImpl implements CourseService {
             return new MessageResponse(1, "课程名称重复！");
         }
 
+
         String courseId = GUIDUtil.getGUID();
         //单课程，直接增加课程资源
         /*if (CourseConstant.COURSE_TYPE_SINGLE.equals(o.getType())) {

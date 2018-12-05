@@ -201,9 +201,10 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.society.vo.PersonInfoVo">
         <result column="nickName" jdbcType="VARCHAR" property="nickname"/>
         <result column="avatarUrl" jdbcType="VARCHAR" property="headimgurl"/>
-
+        <result column="orgName" jdbcType="VARCHAR" property="orgName"/>
     </resultMap>
     <sql id="Vo_Column_List">
+        r.orgName as orgName,
         wx.nickName, wx.avatarUrl,
         t.id, t.realName, t.mobilePhone, t.politicalStatus, t.accPoints, t.validPoints, t.remark, t.status,
         t.createUserId, t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
@@ -228,6 +229,12 @@
     <sql id="From_Statement">
         from person_info t
         left join portal.wx_user wx on t.id = wx.unionId
+        left join (
+        select
+        s.orgName, r.personId
+        from society_org_info s,person_org_relation r
+        where s.id = r.orgId
+        )r on t.id = personId
     </sql>
 
     <sql id="Where_Condition">
@@ -240,6 +247,9 @@
         </if>
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.orgName !=null and condition.orgName !=&quot;&quot;">
+            and r.orgName like concat('%',#{condition.orgName,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 

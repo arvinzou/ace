@@ -47,6 +47,7 @@ function t_query() {
 function getPageList() {
     var url = contextPath + "/personInfo/findPersonInfoList";
     params['realName'] = $("input[name=keyword]").val();
+    params['orgName'] = $("input[name=orgName]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

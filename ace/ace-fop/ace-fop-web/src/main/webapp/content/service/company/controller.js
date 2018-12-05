@@ -35,24 +35,23 @@ jQuery(function ($) {
                     appendButtons();
 
                     $("#sData").click(function () {
-                        checkCard();
+                        checkNum();
                     });
                 }
             })
     });
 });
 
-
-function checkCard() {
-    var card = $("#lpIdentityCard").val();
-    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-    if (card == '') {
-        $("#lpIdentityCard").val("");
-    }
-    else if (reg.test(card) === false) {
-        alert("身份证输入不合法");
-        return false;
-    }
+function checkNum(){
+    var num1 = $("#crewSize").val();
+    var num2 = $("#partyPeoples").val();
+    var num3 = $("#laborContractNum").val();
+    var reg=/^\d*$/;
+    if(reg.test(num1)===false || reg.test(num2)===false || reg.test(num3)===false )
+    {
+     alert("人数输入不合法");
+     return false;
+     }
 }
 
 
