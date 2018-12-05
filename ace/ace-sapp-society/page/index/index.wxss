@@ -94,12 +94,13 @@
 }
 .title01{
     width: 100%;
-    height: 60rpx;
+    height: 90rpx;
     padding-top: 30rpx;
     border-bottom: 0.5px solid #efefef;
     color: #222222;
     font-size: 32rpx;
     font-weight: bold;
+    padding-bottom: 30rpx;
 }
 .activity-item-left{
     width: 70%;
