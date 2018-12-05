@@ -18,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/postLevel")
 /**
@@ -135,7 +137,19 @@ public class PostLevelController extends JxbBaseController {
      */
     @RequestMapping(value = "/findCounselorLevelList")
     @ResponseBody
-    public PageResult<CounselorPostLevelVo> findCounselorLevelList(CounselorPostLevelQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult<CounselorPostLevelVo> findCounselorLevelList(CounselorPostLevelQVo condition,
+                                                                   PageParamNoChangeSord page) throws Exception {
+        String nowDateTime = DateUtil.getNow();
+        String year = nowDateTime.substring(0, 4);
+        String quarter = getQuarter(DateUtil.getNowDate());
+
+        if (StringUtil.isEmpty(condition.getYear())) {
+            condition.setYear(year);
+        }
+        if (StringUtil.isEmpty(condition.getQuarter())) {
+            condition.setQuarter(quarter);
+        }
+
         PageResult<CounselorPostLevelVo> rst =
                 postLevelService.findCounselorLevelList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
@@ -143,6 +157,24 @@ public class PostLevelController extends JxbBaseController {
         }
 
         return rst;
+    }
+
+    private String getQuarter(Date dt) {
+        int myMonth = dt.getMonth() + 1;
+        System.out.println(myMonth);
+        if (myMonth >= 1 && myMonth <= 3) {
+            return "第一季度";//return 1;
+        }
+        if (myMonth >= 4 && myMonth <= 6) {
+            return "第二季度";// return 2;
+        }
+        if (myMonth >= 7 && myMonth <= 9) {
+            return "第三季度";//return 3;
+        }
+        if (myMonth >= 10 && myMonth <= 12) {
+            return "第四季度";//return 4;
+        }
+        return "第一季度";
     }
 
 

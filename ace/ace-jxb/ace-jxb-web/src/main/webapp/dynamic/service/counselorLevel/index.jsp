@@ -22,52 +22,63 @@
 </head>
 
 <body>
-<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
-                                        <div class="portlet light ">
-                                                <div class="portlet-body">
-                                                    <div class="row custom-toolbar">
-                                                        <div class="col-md-1">
-                                                            <a onclick="javascript:calculationLevel()"
-                                                               class="btn  green">
-                                                                计算岗位
-                                                            </a>
-                                                        </div>
-                                                        <div class="col-md-7">
+<div class="portlet light ">
+    <div class="portlet-body">
+        <div class="row custom-toolbar">
+            <div class="col-md-4">
+                <a onclick="javascript:calculationLevel()"
+                   class="btn  green">
+                    计算岗位
+                </a>
+            </div>
 
-                                                        </div>
-                                                        <div class="col-md-4" >
+            <div class="col-md-8">
+                <form onsubmit="return t_query()">
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <input type="text" name="year" style="height: 30px" class="form-control " placeholder="请输入年份">
+                    </div>
+                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
+                        <button type="button" class="btn btn-default" onclick="setParams('quarter','');">全部</button>
+                        <button type="button" class="btn btn-default" onclick="setParams('quarter','第一季度');">第一季度
+                        </button>
+                        <button type="button" class="btn btn-default" onclick="setParams('quarter','第二季度');">第二季度
+                        </button>
+                        <button type="button" class="btn btn-default" onclick="setParams('quarter','第三季度');">第三季度
+                        </button>
+                        <button type="button" class="btn btn-default" onclick="setParams('quarter','第四季度');">第四季度
+                        </button>
+                    </div>
 
-                                                            <div class="input-group">
-                                                                <input type="text"
-                                                                       class="form-control "
-                                                                       placeholder="咨询师名称">
-                                                                <span class="input-group-btn">
-                                                                <button class="btn  btn-default search_btn"
-                                                                        type="submit">
-                                                                        搜索
-                                                                </button>
-                                                            </span>
-                                                            </div>
-                                                        </div>
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control " placeholder="咨询师名称"> <span
+                            class="input-group-btn">
+                            <button class="btn  btn-default search_btn"
+                                    type="submit">
+                                    搜索
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
 
-                                                    </div>
-                                                    <div class="table-scrollable"
-                                                         id="data-list">
-
+        </div>
+        <div class="table-scrollable"
+             id="data-list">
 
 
-                                                    </div>
+        </div>
 
-                                                    <div class="paginationbar">
-                                                        <ul class="pagination"
-                                                            id="pagination1"></ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+        <div class="paginationbar">
+            <ul class="pagination"
+                id="pagination1"></ul>
+        </div>
+    </div>
+</div>
+</div>
 
-<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
 
 <div class="modal fade" id="counselorLevelModal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -228,6 +239,6 @@
         color: #333;
     }
 </style>
-<jsp:include page="/dynamic/common/footer.jsp" />
+<jsp:include page="/dynamic/common/footer.jsp"/>
 </html>
 
