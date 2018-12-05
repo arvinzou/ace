@@ -35,6 +35,14 @@
             }, !1)) : e()
         }();
     </script>
+    <script type="text/javascript">
+        var contextPath = '${pageContext.request.contextPath}';
+        var portalPath = '${portalPath}';
+        var version = '${cfg.version}';
+        var fastdfs_server = '${cfg.fastdfs_server}';
+        var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
+        var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
+    </script>
     <script src="../common/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/iScroll.js"></script>
     <script type="text/javascript" src="js/Mdate.js"></script>
