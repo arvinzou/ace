@@ -125,7 +125,7 @@ public class WeChatServiceImpl implements WeChatService {
         params.put("tmplCode", tmplCode);
         //发送消息内容
         params.put("openid", openid);
-        params.put("url", "www.baidu.com");
+//        params.put("url", "www.baidu.com");
 //        params.put("first", "哈哈哈哈哈");
         //data
         params.put("appealContent", userInput);

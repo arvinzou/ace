@@ -87,7 +87,7 @@
 				<%--</div>--%>
 				<div class="col-xs-4 sol-sm-4">
 					<div class="row statics_num">\${data.statistic.parentCount}</div>
-					<div class="row statics_title">会员</div>
+					<div class="row statics_title">老师</div>
 				</div>
 			</div>
 		</script>

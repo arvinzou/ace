@@ -201,7 +201,7 @@
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.jxb.model.CourseSource">
         select count(1)
         from course_source
-        where id = #{id,jdbcType=VARCHAR}
+        where courseId = #{courseId,jdbcType=VARCHAR}
     </select>
 
 

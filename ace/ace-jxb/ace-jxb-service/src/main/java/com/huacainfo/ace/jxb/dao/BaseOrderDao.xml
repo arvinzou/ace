@@ -341,6 +341,10 @@
         <if test="condition.category !=null and condition.category !=&quot;&quot;">
             and t.category = #{condition.category,jdbcType=VARCHAR}
         </if>
+        <if test="condition.year !=null and condition.year !=&quot;&quot;">
+            AND MONTH(t.createDate) =#{condition.month,jdbcType=VARCHAR}
+            AND YEAR(t.createDate) =#{condition.year,jdbcType=VARCHAR}
+        </if>
         <if test="condition.statusArray !=null">
             and t.payStatus in
             <foreach collection="condition.statusArray" item="item" separator="," open="(" close=")">

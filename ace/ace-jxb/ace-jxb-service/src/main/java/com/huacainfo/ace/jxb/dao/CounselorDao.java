@@ -5,6 +5,7 @@ import com.huacainfo.ace.jxb.vo.CounselorQVo;
 import com.huacainfo.ace.jxb.vo.CounselorVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface CounselorDao {
@@ -42,4 +43,7 @@ public interface CounselorDao {
     int deleteUserCfg(String userId);
 
     int deleteUsers(String userId);
+
+    int updAccount(@Param("id") String id,
+                   @Param("account") BigDecimal account);
 }

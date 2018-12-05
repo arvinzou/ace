@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service.impl;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.jxb.constant.OrderCategory;
 import com.huacainfo.ace.jxb.dao.*;
 import com.huacainfo.ace.jxb.model.BaseOrder;
 import com.huacainfo.ace.jxb.model.Counselor;
@@ -93,68 +94,84 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
             BaseOrder order = baseOrderDao.selectByPrimaryKey(record.getOrderId());
             if (null == order) {
                 record.setRemark("订单计算 - 订单数据异常");
-                record.setCpuTag("1");
-                record.setGrantTag("1");
-                record.setUpdateDate(DateUtil.getNowDate());
-                orderCalculationDao.updateByPrimaryKeySelective(record);
+                markOrderErr(record);
                 return;
             }
             CounselorPostLevelVo cplVo = counselorPostLevelDao.findByCounselorId(record.getCounselorId());
             if (null == cplVo) {
                 record.setRemark("订单计算 - 咨询师岗位数据异常");
-                record.setCpuTag("1");
-                record.setGrantTag("1");
-                record.setUpdateDate(DateUtil.getNowDate());
-                orderCalculationDao.updateByPrimaryKeySelective(record);
+                markOrderErr(record);
                 return;
             }
             Counselor counselor = counselorDao.selectByPrimaryKey(record.getCounselorId());
             if (null == counselor) {
                 record.setRemark("订单计算 - 咨询师数据异常");
-                record.setCpuTag("1");
-                record.setGrantTag("1");
-                record.setUpdateDate(DateUtil.getNowDate());
-                orderCalculationDao.updateByPrimaryKeySelective(record);
+                markOrderErr(record);
                 return;
             }
             //订单支付金额
             BigDecimal payMoney = order.getPayMoney();
-            //分成算法规则 ： 工作室先抽水；平台与卖家（咨询师），按咨询师分成比例，分配剩余金额
-            //工作室抽成比例：目前固定 10%
-            BigDecimal studioRatio = BigDecimal.ZERO;
-            //工作室获得金额
-            BigDecimal studioAmount = BigDecimal.ZERO;
-            if (StringUtil.isNotEmpty(counselor.getStudioId())) {
-                studioRatio = new BigDecimal(0.1);
-                studioAmount = payMoney.multiply(studioRatio);
+            //打赏订单不参与分销计算
+            if (OrderCategory.CATEGORY_REWARD.equals(order.getCategory())) {
+                record.setStudioRatio(BigDecimal.ZERO);//工作室收益-比例
+                record.setStudioAmount(BigDecimal.ZERO);//工作室收益-金额
+                record.setRatio(BigDecimal.ZERO);//卖家收益-比例
+                record.setAmount(payMoney);//卖家收益-金额
+                record.setPlatformAmount(BigDecimal.ZERO);//平台收益-金额
+                //标记数据
+                markOrderOk(record);
+            } else {
+                //分成算法规则 ： 工作室先抽水；平台与卖家（咨询师），按咨询师分成比例，分配剩余金额
+                //工作室抽成比例：目前固定 10%
+                BigDecimal studioRatio = BigDecimal.ZERO;
+                //工作室获得金额
+                BigDecimal studioAmount = BigDecimal.ZERO;
+                if (StringUtil.isNotEmpty(counselor.getStudioId())) {
+                    studioRatio = new BigDecimal(0.1);
+                    studioAmount = payMoney.multiply(studioRatio);
+                }
+                //抽水后，剩余金额
+                BigDecimal balanceAmount = payMoney.subtract(studioAmount);
+                //卖家分成比例
+                BigDecimal ratio = cplVo.getRatio();
+                //卖家获得金额
+                BigDecimal amount = balanceAmount.multiply(ratio);
+                //平台获得金额
+                BigDecimal platformAmount = balanceAmount.subtract(amount);
+                //单据数据留存
+                record.setStudioRatio(studioRatio);//工作室收益-比例
+                record.setStudioAmount(studioAmount);//工作室收益-金额
+                record.setRatio(ratio);//卖家收益-比例
+                record.setAmount(amount);//卖家收益-金额
+                record.setPlatformAmount(platformAmount);//平台收益-金额
+                //标记数据
+                markOrderOk(record);
+                //工作室将获得收益 -- 消息通知
+                if (studioAmount.compareTo(BigDecimal.ZERO) > 0) {
+                    // TODO: 2018/8/14 工作室将获得收益 -- 消息通知
+                }
             }
-            //抽水后，剩余金额
-            BigDecimal balanceAmount = payMoney.subtract(studioAmount);
-            //卖家分成比例
-            BigDecimal ratio = cplVo.getRatio();
-            //卖家获得金额
-            BigDecimal amount = balanceAmount.multiply(ratio);
-            //平台获得金额
-            BigDecimal platformAmount = balanceAmount.subtract(amount);
-            //工作室收益
-            record.setStudioRatio(studioRatio);
-            record.setStudioAmount(studioAmount);
-            //卖家收益
-            record.setRatio(ratio);
-            record.setAmount(amount);
-            //平台收益
-            record.setPlatformAmount(platformAmount);
-            //标记数据
-            record.setCpuTag("1");
-            record.setRemark("订单计算完成");
-            record.setUpdateDate(DateUtil.getNowDate());
-            orderCalculationDao.updateByPrimaryKeySelective(record);
             // TODO: 2018/8/7 卖家将获得收益 -- 消息通知
-            //工作室将获得收益 -- 消息通知
-            if (studioAmount.compareTo(BigDecimal.ZERO) > 0) {
-                // TODO: 2018/8/14 工作室将获得收益 -- 消息通知
-            }
         }
+    }
+
+    private int markOrderOk(OrderCalculation record) {
+        record.setCpuTag("1");
+        record.setRemark("订单计算完成");
+        record.setUpdateDate(DateUtil.getNowDate());
+        return orderCalculationDao.updateByPrimaryKeySelective(record);
+    }
+
+    /**
+     * 标记单据异常
+     *
+     * @param record record
+     */
+    private int markOrderErr(OrderCalculation record) {
+        record.setCpuTag("1");
+        record.setGrantTag("1");
+        record.setUpdateDate(DateUtil.getNowDate());
+        return orderCalculationDao.updateByPrimaryKeySelective(record);
     }
 
     @Override

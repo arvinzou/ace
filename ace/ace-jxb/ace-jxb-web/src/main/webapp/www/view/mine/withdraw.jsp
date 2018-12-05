@@ -49,7 +49,7 @@
 </div>
 
 
-<div class="rst_model">
+<div class="rst_model rst_model2">
     <div class="result_box">
         <p class="text1">提现申请提交成功~ </p>
         <p class="text2">工作人员会在三天内进行审核，请耐心等待~ </p>

@@ -52,6 +52,7 @@ function initData(id){
                     detail: result.data.introduce
                 });
                 $("#workroomDetail").append(detailHtml);
+                $("#allContent").append(detailHtml);
             }else {
                 alert(result.info);
                 return;
@@ -88,6 +89,10 @@ function initStudioReport(id){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function showRoomDetail(){
+    $('#modal-content').modal();
 }
 
 function showMember(id){

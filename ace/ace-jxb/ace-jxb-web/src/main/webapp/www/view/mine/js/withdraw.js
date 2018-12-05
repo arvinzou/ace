@@ -49,11 +49,12 @@ function  backWeb() {
 
 /*初始化信息*/
 function initInfo() {
-    // var day=new Date().getDay();
-    // if(day>7){
-    //     $('.rst_model1').show();
-    //     return;
-    // }
+    var day=new Date().getDay();
+    if(day>7){
+        alert('每月1日-7日才能申请提现');
+        backWeb();
+        return;
+    }
     //当月有没有提现
     // $.getJSON();
     var url=contextPath+"/www/reg/findInfo";
@@ -61,11 +62,13 @@ function initInfo() {
     $.getJSON(url,data,function (rst) {
         if(rst.status == 0 && rst.data.memberType == '1'){
             amount=rst.data.counselor.account;
+            if(amount<50){
+                alert('您的可提现金额不足50元');
+                backWeb();
+                return;
+            }
             amount=amount?amount:0.00;
             $('.money_card .info.stutas').html("可提现金额"+amount+"元");
-            // if(amount<50){
-            //     $('.rst_model1').show();
-            // }
         }
     })
 }
@@ -131,7 +134,7 @@ function actionMoney() {
     var data={applyAmount:applyAmount,realName:realName,withdrawType:1};
     $.post(url,data,function (rst) {
         if(rst.status==0){
-            $('.rst_model').show();
+            $('.rst_model2').show();
             return;
         }
         alert(rst.info);

@@ -157,12 +157,10 @@ public class ConsultServiceImpl implements ConsultService {
             if (CommonUtils.isBlank(consultQVo.getTelephoneCon()) || CommonUtils.isBlank(consultQVo.getWecharCon()) || CommonUtils.isBlank(consultQVo.getFacetofaceCon())) {
                 return new MessageResponse(1, "咨询方式必须填写一项！");
             }
-
             insertconsultProductList(consultQVo);
         } else {
             this.consultDao.updateByPrimaryKeySelective(consultQVo);
-            this.consultProductDao.deleteByCounselorId(consultQVo.getId());
-            insertconsultProductList(consultQVo);
+            updataconsultProductList(consultQVo);
 
         }
         this.dataBaseLogService.log("添加咨询师-咨询预约介绍", "咨询师-咨询预约介绍", "",
@@ -196,6 +194,26 @@ public class ConsultServiceImpl implements ConsultService {
             consultProduct.setPrice(consultQVo.getFacetofaceCon());
             consultProduct.setId(GUIDUtil.getGUID());
             this.consultProductDao.insertSelective(consultProduct);
+        }
+    }
+
+    private void updataconsultProductList(ConsultQVo consultQVo) throws Exception {
+        ConsultProduct consultProduct = new ConsultProduct();
+        consultProduct.setCounselorId(consultQVo.getId());
+        if (!CommonUtils.isBlank(consultQVo.getTelephoneCon())) {
+            consultProduct.setType("1");
+            consultProduct.setPrice(consultQVo.getTelephoneCon());
+            this.consultProductDao.updateByType(consultProduct);
+        }
+        if (!CommonUtils.isBlank(consultQVo.getWecharCon())) {
+            consultProduct.setType("2");
+            consultProduct.setPrice(consultQVo.getWecharCon());
+            this.consultProductDao.updateByType(consultProduct);
+        }
+        if (!CommonUtils.isBlank(consultQVo.getFacetofaceCon())) {
+            consultProduct.setType("3");
+            consultProduct.setPrice(consultQVo.getFacetofaceCon());
+            this.consultProductDao.updateByType(consultProduct);
         }
     }
 
