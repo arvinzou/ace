@@ -29,25 +29,25 @@
         <div class="box">
             <div class="row menu">
                 <div class="col-xs-7 col-sm-7"><p class="menu_title">咨询收益</p></div>
-            <div class="col-xs-5 col-sm-5 income_list" style="text-align: right;">
+            <div class="col-xs-5 col-sm-5 income_list" data-id="1" style="text-align: right;">
                 <span class="income">\${data.consultIncome}</span><img class="next" src="img/next.png"/>
             </div>
             </div>
             <div class="row menu">
                 <div class="col-xs-7 col-sm-7"><p class="menu_title">课程收益</p></div>
-            <div class="col-xs-5 col-sm-5 income_list" style="text-align: right;">
+            <div class="col-xs-5 col-sm-5 income_list" data-id="2" style="text-align: right;">
                 <span class="income">\${data.courseIncome}</span><img class="next" src="img/next.png"/>
             </div>
             </div>
             <div class="row menu">
                 <div class="col-xs-7 col-sm-7"><p class="menu_title">分销收益</p></div>
-            <div class="col-xs-5 col-sm-5 income_list" style="text-align: right;">
+            <div class="col-xs-5 col-sm-5 income_list" data-id="3" style="text-align: right;">
                 <span class="income">\${data.studioIncome}</span><img class="next" src="img/next.png"/>
             </div>
             </div>
             <div class="row menu">
                 <div class="col-xs-7 col-sm-7"><p class="menu_title">打赏收益</p></div>
-            <div class="col-xs-5 col-sm-5 income_list" style="text-align: right;">
+            <div class="col-xs-5 col-sm-5 income_list" data-id="4" style="text-align: right;">
                 <span class="income">\${data.rewardIncome}</span><img class="next" src="img/next.png"/>
             </div>
             </div>

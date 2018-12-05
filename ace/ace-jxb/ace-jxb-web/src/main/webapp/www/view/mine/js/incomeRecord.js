@@ -1,18 +1,16 @@
 window.onload = function () {
     new Mdate("dateSelectorOne");
     var date = new Date();
-    $('.month').on('change', 'input', getList);
     $('#dateSelectorOne').val(date.getFullYear() + "年" + (date.getMonth() + 1) + '月').attr('data-year', date.getFullYear()).attr("data-month", date.getMonth() + 1);
     $('.month').on('change', 'input', getList);
-    getOrderList();
+    getList();
 }
 
 function getList() {
-    console.log(this.val());
+    getOrderList($('.month input').val());
 }
 
 function getOrderList(date) {
-    var date = '2018年8月';
     var year = date.substring(0, 4);
     var momth = date.substring(date.indexOf('年') + 1, date.indexOf('月'));
     console.log(year + momth);
@@ -20,7 +18,7 @@ function getOrderList(date) {
     var data = {
         findType: '2',
         year: year,
-        momth: momth,
+        month: momth,
         statusArray:'2,6,7'
     };
     $.getJSON(url, data, function (rst) {
