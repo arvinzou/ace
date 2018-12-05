@@ -37,10 +37,11 @@
 
     union all
     SELECT
-    'counselor' id,
-    count(DISTINCT counselorId) value
-    FROM
-    teacher_audit   where rst ='1'
+      'counselor' id,
+      count(DISTINCT c.id) as VALUE
+      FROM counselor c, teacher_audit t
+      WHERE c.id = t.counselorId
+      and t.rst = '1'
     union all
     SELECT
     'studio' id,

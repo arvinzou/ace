@@ -56,7 +56,7 @@ body{
 	margin: 0.2rem auto;
 }
 .remark{
-	height: 1.6rem;
+	height: 2.0rem;
 	background: #ffffff;
 	text-overflow: -o-ellipsis-lastline;
 	overflow: hidden;
@@ -64,6 +64,7 @@ body{
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
+	line-height: 0.6rem;
 }
 #memberList{
 	border-top: 1px solid rgba(247,249,252,1);

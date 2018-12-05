@@ -611,12 +611,7 @@
         </div>
         <div class="row" style="margin: 0 !important;">
             {@each esAnnex as item, idx}
-            <div class="image-box" name="\${item.id}">
-                <div class="my-gallery" style="float:left;padding:5px">
-                    <img src="\${item.fileUrl}" class="cover"/>
-                </div>
-                <img src="/portal/content/common/image/remove.png" style="cursor:pointer;" class="delete">
-            </div>
+                <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/>
             {@/each}
         </div>
     </div>
@@ -627,9 +622,7 @@
         </div>
         <div class="row" style="margin: 0 !important;">
             {@each csAnnex as item, idx}
-            <div class="image-box" name="\${item.id}">
                 <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/></div>
-                <img src="/portal/content/common/image/remove.png" style="cursor:pointer;" class="delete">
             </div>
             {@/each}
         </div>
@@ -641,9 +634,7 @@
         </div>
         <div class="row" style="margin: 0 !important;">
             {@each paAnnex as item, idx}
-            <div class="image-box" name="\${item.id}">
                 <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/></div>
-                <img src="/portal/content/common/image/remove.png" style="cursor:pointer;" class="delete">
             </div>
             {@/each}
         </div>
@@ -655,9 +646,7 @@
         </div>
         <div class="row" style="margin: 0 !important;">
             {@each epbAnnex as item, idx}
-            <div class="image-box" name="\${item.id}">
                 <div class="my-gallery" style="float:left;padding:5px"><img src="\${item.fileUrl}" class="cover"/></div>
-                <img src="/portal/content/common/image/remove.png" style="cursor:pointer;" class="delete">
             </div>
             {@/each}
         </div>

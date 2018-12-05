@@ -54,17 +54,18 @@ body{
 
 .content{
 	width: 90%;
-	height: 1.6rem;
 	margin: 0.2rem auto;
 	background: #ffffff;
 }
 .remark{
+	height: 2.0rem;
 	text-overflow: -o-ellipsis-lastline;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
+	line-height: 0.6rem;
 }
 .content p{
 	color: #5C6681;
