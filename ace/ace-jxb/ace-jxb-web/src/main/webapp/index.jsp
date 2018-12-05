@@ -1,5 +1,5 @@
 <%@page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8" %>
+        pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,19 +13,19 @@ pageEncoding="utf-8" %>
 </head>
 
 
-<jsp:include page="/dynamic/common/header.jsp" />
+<jsp:include page="/dynamic/common/header.jsp"/>
 <body>
-<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
 <div class="page-content-inner">
 
 </div>
 
-<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
+<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
 <script id="tpl-portal-1" type="text/template">
 
-        <!-- PAGE CONTENT BEGINS -->
+    <!-- PAGE CONTENT BEGINS -->
     <!-- Row starts -->
     <div class="row widget-row">
         <div class="col-md-3">
@@ -109,7 +109,8 @@ pageEncoding="utf-8" %>
                     <i class="widget-thumb-icon bg-red  icon-basket-loaded"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计有效</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.counselorOrder}">\${data.counselorOrder}</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup"
+                              data-value="\${data.counselorOrder}">\${data.counselorOrder}</span>
                     </div>
                 </div>
             </div>
@@ -137,7 +138,8 @@ pageEncoding="utf-8" %>
                     <i class="widget-thumb-icon bg-blue icon-basket-loaded"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计有效</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.evaluatOrder}">\${data.evaluatOrder}</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup"
+                              data-value="\${data.evaluatOrder}">\${data.evaluatOrder}</span>
                     </div>
                 </div>
             </div>
@@ -146,7 +148,7 @@ pageEncoding="utf-8" %>
     </div>
 
 
-</div>
+    </div>
 </script>
 
 <script id="tpl-portal-2" type="text/template">
@@ -173,12 +175,12 @@ pageEncoding="utf-8" %>
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">评论</h4>
+                <h4 class="widget-thumb-heading">直播</h4>
                 <div class="widget-thumb-wrap">
                     <i class="widget-thumb-icon bg-green icon-note"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.courseCmt}">\${data.courseCmt}</span>
+                        <span class="widget-thumb-subtitle">累计已审核</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.live}">\${data.live}</span>
                     </div>
                 </div>
             </div>
@@ -192,7 +194,8 @@ pageEncoding="utf-8" %>
                     <i class="widget-thumb-icon bg-red  icon-basket-loaded"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计有效</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.counselorOrder}">\${data.counselorOrder}</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup"
+                              data-value="\${data.counselorOrder}">\${data.counselorOrder}</span>
                     </div>
                 </div>
             </div>
@@ -216,14 +219,12 @@ pageEncoding="utf-8" %>
     </div>
 
 
-
-
     </div>
 
 
 </script>
 
-<jsp:include page="/dynamic/common/footer.jsp" />
+<jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/index/act.js?version=${cfg.version}"></script>
 </body>

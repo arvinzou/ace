@@ -3,37 +3,36 @@
 <mapper namespace="com.huacainfo.ace.jxb.dao.report.PortalMe">
   <select id="query" resultType="map">
     SELECT
-    'course' id,
-    count(1) value
-    FROM
-    course t inner join course_audit a on t.id=a.courseId
-    WHERE
-    t.createUserId =#{userId} and a.rst='1'
+      'course' as id, count(1) as value
+      FROM course t
+      inner join course_audit a on t.id=a.courseId
+      WHERE t.createUserId =#{userId}
+      and a.rst='1'
     union all
     SELECT
-    'courseOrder' id,
-    count(1) value
-    FROM
-    base_order
-    WHERE
-    consumerId =#{userId}
-    and category='2' and payStatus in('2','6','7')
+      'courseOrder' as id, count(1) as value
+      FROM base_order
+      WHERE businessId =#{userId}
+      and category='2'
+      and payStatus in('2','6','7')
     union all
     SELECT
-    'counselorOrder' id,
-    count(1) value
-    FROM
-    base_order
-    WHERE
-    consumerId =#{userId}
-    and category='1' and payStatus in('2','6','7')
+      'counselorOrder' as id, count(1) as value
+      FROM base_order
+      WHERE businessId = #{userId}
+      and category='1'
+      and payStatus in('2','6','7')
     union all
     SELECT
-    'courseCmt' id,
-    count(1) value
-    FROM
-    course_cmt t INNER join course a on t.courseId=a.id
-    WHERE
-    a.createUserId =#{userId}
+      'courseCmt' as id, count(1) as value
+      FROM course_cmt t
+      INNER join course a on t.courseId=a.id
+      WHERE a.createUserId = #{userId}
+      union all
+      SELECT
+      'live' id, count(1) value
+      FROM live.live t
+      WHERE t.createUserId = #{userId}
+      and t.auditStatus = '2'
   </select>
 </mapper>
