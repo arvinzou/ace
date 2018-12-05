@@ -45,7 +45,7 @@ function checkNum(){
     var reg=(/^\d*$/);
     if(reg.test(num1)===false || reg.test(num2)===false  )
     {
-     alert("人数只能为数字");
+     alert("人数输入不合法");
      return false;
      }
 }

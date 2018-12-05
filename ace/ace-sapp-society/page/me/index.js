@@ -71,6 +71,12 @@ Page({
      */
     onShow: function() {
         var that = this;
+        if (!util.is_login()) {
+            wx.navigateTo({
+                url: "../userinfo/index?url=../index/index&type=switchTab"
+            });
+            return;
+        }
         that.initUserAdmin();
         // 判断有没有注册
         that.initUserData();

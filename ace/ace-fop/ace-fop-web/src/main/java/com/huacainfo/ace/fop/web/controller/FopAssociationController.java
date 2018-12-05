@@ -2,10 +2,13 @@ package com.huacainfo.ace.fop.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.fop.model.FopAssociation;
 import com.huacainfo.ace.fop.service.FopAssociationService;
 import com.huacainfo.ace.fop.vo.FopAssociationQVo;
@@ -71,9 +74,16 @@ public class FopAssociationController extends FopBaseController {
     @RequestMapping(value = "/insertFopAssociation")
     @ResponseBody
     public MessageResponse insertFopAssociation(String jsons) throws Exception {
-        FopAssociation obj = JSON.parseObject(jsons, FopAssociation.class);
-        return this.fopAssociationService
-                .insertFopAssociation(obj, this.getCurUserProp());
+        try {
+            FopAssociation obj = JSON.parseObject(jsons, FopAssociation.class);
+            return this.fopAssociationService
+                    .insertFopAssociation(obj, this.getCurUserProp());
+        } catch (
+                CustomException e) {
+            return new MessageResponse(ResultCode.FAIL, e.getMsg());
+        } catch (Exception e) {
+            return new MessageResponse(ResultCode.FAIL, "添加失败", CommonUtils.getExceptionStack(e));
+        }
     }
 
     /**
