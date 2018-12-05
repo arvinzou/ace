@@ -8,115 +8,38 @@
 		<link href="../../css/comon0.css" rel="stylesheet" type="text/css" />
 		<link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
 		<link href="css/publicity.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" href="filter/Fliter.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
 		<SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
-		<script type="text/javascript" src="/portal/system/getUserProp.do"></script>
-		<script type="text/javascript" src="../../js/user.js"></script>
-		<script type="text/javascript" src="../../js/common.js"></script>
-		<script type="text/javascript" src="filter/Filter.js"></script>
 		<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="../../js/angular/angular.min.js"></script>
 		<script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
 		<script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
-		<script type="text/javascript" src="js/Popt.js"></script>
-		<script type="text/javascript" src="js/city.json.js"></script>
+		<script type="text/javascript" src="../../js/common.js"></script>
 		<script type="text/javascript" src="js/publicity.js"></script>
 		<link rel="shortcut icon" href="../../images/favicon.ico">
-		<style>
-			li {
-				cursor: pointer;
-			}
-
-			table {
-				table-layout: fixed;
-			}
-
-			td {
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-			}
-
-			ul, li {
-				text-decoration: none;
-			}
-		</style>
 	</head>
-
-
 	<body>
 	<div id="loadBefore" hidden="hidden">
-
 		<div class="index">
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane fade in active" id="finance">
-					<div class="search">
-						<div class="finance_list_title">
-                            会员信息筛选
-						</div>
-						<div class="search_combox">
-							<div class="search_box">
-								<div style="width: 100px;float: left;">精准搜索：</div>
-								<div style="width: 400px;float: left;height: 35px;line-height: 35px;padding-top: 12px"><input type="text" id="key_word" placeholder="请输入关键字搜索" /><button class="searchButton" ng-click="search();">搜索</button></div>
-							</div>
-							<div style="clear: both;"></div>
-							<div class="search_filter2">
-								<div class="filter_title2">企业性质：</div>
-								<div id="demo2" ng-click="search();"></div>
-							</div>
-							<div style="clear: both;"></div>
-							<div class="search_filter1">
-								<div style="width: 100px;float: left;">会员类型：</div>
-								<div style="width: 400px;float: left;height: 30px;">
-									<select id="memberType" ng-click="search();">
-										<option value="1" selected>企业会员</option>
-										<option value="2">团体会员</option>
-										<option value="4">个人会员</option>
-									</select>
-								</div>
-							</div>
-                            <div style="clear: both;"></div>
-                            <div class="search_filter1">
-								<div style="width: 100px;float: left;">所属区域：</div>
-								<div class="wrap"><input class="input" name="" id="city" type="text" placeholder="请选择"
-														 autocomplete="off"  onchange="search();"/></div>
-                            </div>
-							<div style="clear: both;"></div>
-							<div class="search_filter1">
-								<div style="width: 100px;float: left;">所属工商联：</div>
-								<div style="width: 400px;float: left;height: 30px;">
-									<select id="belongTo" ng-click="search();">
-										<option value="" selected>请选择</option>
-										<option value="常德市工商联">常德市工商联</option>
-										<option value="武陵区工商联">武陵区工商联</option>
-										<option value="鼎城区工商联">鼎城区工商联</option>
-										<option value="汉寿县工商联">汉寿县工商联</option>
-										<option value="桃源县工商联">桃源县工商联</option>
-										<option value="临澧县工商联">临澧县工商联</option>
-										<option value="澧县工商联">澧县工商联</option>
-										<option value="津市市工商联">津市市工商联</option>
-										<option value="石门县工商联">石门县工商联</option>
-										<option value="安乡县工商联">安乡县工商联</option>
-									</select>
-								</div>
-							</div>
+					<div class="finance_list_title">
+						<div class="search">
+							<input type="text" id="key_word" placeholder="请输入关键字搜索"  class="search-input"/>
+							<img src="img/search.png" class="search-img" ng-click="search();"/>
 						</div>
 					</div>
 					<div class="search_list">
-						<div class="finance_list_title">
-                            共{{totalCount}}条会员信息
-						</div>
 						<div class="project_list">
 							<div class="table_div">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									<tr style="font-weight: bolder;">
-                                        <td width="20%" align="left">企业名称</td>
-                                        <td width="10%" align="left">企业法人</td>
-										<td width="15%" align="left">企业性质</td>
-                                        <td width="10%" align="left">所属区域</td>
-										<td width="15%" align="left">所属工商联</td>
-                                        <td width="30%" align="left">企业地址</td>
+									<tr>
+                                        <th width="20%" align="left" class="table_title">企业名称</th>
+                                        <th width="10%" align="left" class="table_title">企业法人</th>
+										<th width="15%" align="left" class="table_title">企业性质</th>
+                                        <th width="10%" align="left" class="table_title">所属区域</th>
+										<th width="15%" align="left" class="table_title">所属工商联</th>
+                                        <th width="30%" align="left" class="table_title">企业地址</th>
 									</tr>
 									<tr ng-repeat="item in items">
                                         <td width="35%" ng-bind="item.fullName"></td>
