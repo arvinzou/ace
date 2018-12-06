@@ -28,6 +28,11 @@ public interface BaseOrderDao {
                                @Param("limit") int limit,
                                @Param("orderBy") String orderBy);
 
+    List<BaseOrderVo> profitFindList(@Param("condition") BaseOrderQVo condition,
+                               @Param("start") int start,
+                               @Param("limit") int limit,
+                               @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") BaseOrderQVo condition);
 
     int orderStatistics(@Param("condition") BaseOrder condition);

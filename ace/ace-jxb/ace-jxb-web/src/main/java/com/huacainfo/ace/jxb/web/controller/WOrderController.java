@@ -113,6 +113,36 @@ public class WOrderController extends JxbBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", pageResult);
     }
 
+
+    /**
+     * 查询订单
+     *
+     * @param findType  查询类型 1-“我”的订单，2-属于“我”的订单
+     * @param condition 查询条件
+     * @param page      分页查询条件
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/profitFindList")
+    public ResultResponse profitFindList(String findType, BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
+        if (StringUtil.isEmpty(findType)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        String consumerId = condition.getConsumerId();
+        String bisId = condition.getBusinessId();
+        //属于“我”的订单
+        Userinfo userinfo = getCurUserinfo();
+        if (null == userinfo || StringUtil.isEmpty(userinfo.getUnionid())) {
+            return new ResultResponse(ResultCode.FAIL, "缺少商家主键");
+        }
+        condition.setBusinessId(userinfo.getUnionid());
+
+        PageResult<BaseOrderVo> pageResult = baseOrderService.
+                profitFindList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+
+        return new ResultResponse(ResultCode.SUCCESS, "查询成功", pageResult);
+    }
+
     /**
      * 查询订单 详情
      *

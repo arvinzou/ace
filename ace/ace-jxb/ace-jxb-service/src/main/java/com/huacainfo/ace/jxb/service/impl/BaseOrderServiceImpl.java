@@ -132,6 +132,48 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         }
         return rst;
     }
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(分成订单查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult
+     * <BaseOrderVo>
+     * @author: Arvin
+     * @version: 2018-07-25
+     */
+    @Override
+
+    public PageResult<BaseOrderVo> profitFindList(BaseOrderQVo condition, int start, int limit, String orderBy) throws Exception {
+        //sql
+        SqlSession session = getSqlSession();
+        BaseOrderDao dao = session.getMapper(BaseOrderDao.class);
+        //query
+        PageResult<BaseOrderVo> rst = new PageResult<>();
+        try {
+            List<BaseOrderVo> list = dao.profitFindList(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = baseOrderDao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+            return rst;
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return rst;
+    }
 
     @Override
     public ResultResponse findBaseOrderListSencond(BaseOrderQVo condition, int page, int limit, String orderBy) throws Exception {
