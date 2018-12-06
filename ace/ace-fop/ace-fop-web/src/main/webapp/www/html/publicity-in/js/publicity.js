@@ -138,4 +138,8 @@ app.controller(ngControllerName,function($scope){
             }
         });
     }
+
+    $scope.preview = function(id){
+        window.location.href='company.html?id='+id;
+    }
 });
