@@ -7,7 +7,6 @@
     <title>招商信息</title>
     <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
     <link rel="stylesheet" type="text/css" href="css/investment.css"/>
     <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
     <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
@@ -28,24 +27,25 @@
                     <input type="text" id="key_word" placeholder="请输入关键字搜索"  class="search-input"/>
                     <img src="img/search.png" class="search-img" ng-click="search();"/>
                 </div>
-            <div>
+            </div>
             <div class="searchTable">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tbody>
-                    <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items"
+                    <tr class="table-th">
+                        <th width="60%">标题</th>
+                        <th width="20%">发布企业</th>
+                        <th width="20%">发布时间</th>
+                    </tr>
+                    <tr class="tr_bottom" ng-repeat="item in items"
                         ng-click="showInfo($index);">
-                        <td align="center" width="15px">
-                            <div class="dot"></div>
-                        </td>
-                        <td ng-bind="item.title"></td>
+                        <td ng-bind="item.title" class="ititle"></td>
                         <td width="20%" ng-bind="item.companyName"></td>
-                        <td class="time" width="20%" ng-bind="item.releaseDate | formatDate"></td>
+                        <td  width="20%" ng-bind="item.releaseDate | formatDate"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div id="paganation"></div>
-        </div>
         </div>
 </div>
 </div>
