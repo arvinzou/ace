@@ -1,6 +1,6 @@
 window.onload = function () {
     var url =   window.location.href.substring(1);
-    category = url.substring(url.indexOf('=')+1);
+    category = getParam('id');
     console.log(category);
     new Mdate("dateSelectorOne");
     var date = new Date();
@@ -38,3 +38,23 @@ function getOrderList(date) {
         $("#orderList").append(html);
     })
 }
+
+var getParam = function (name) {
+    var search = document.location.search;
+    //alert(search);
+    var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
+    var matcher = pattern.exec(search);
+    var items = null;
+    if (null != matcher) {
+        try {
+            items = decodeURIComponent(decodeURIComponent(matcher[1]));
+        } catch (e) {
+            try {
+                items = decodeURIComponent(matcher[1]);
+            } catch (e) {
+                items = matcher[1];
+            }
+        }
+    }
+    return items;
+};
