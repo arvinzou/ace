@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>招商信息</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/lawer/lawer_gov.css"/>
+    <link rel="stylesheet" type="text/css" href="css/investment.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/investment.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+</head>
+
+<body>
+<div id="loadBefore" hidden="hidden">
+<div class="index">
+            <div class="main">
+                <div class="search">
+                    <input type="text" id="key_word" placeholder="请输入关键字搜索"  class="search-input"/>
+                    <img src="img/search.png" class="search-img" ng-click="search();"/>
+                </div>
+            <div>
+            <div class="searchTable">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tbody>
+                    <tr class="tr_bottom" style="line-height: 15px" ng-repeat="item in items"
+                        ng-click="showInfo($index);">
+                        <td align="center" width="15px">
+                            <div class="dot"></div>
+                        </td>
+                        <td ng-bind="item.title"></td>
+                        <td width="20%" ng-bind="item.companyName"></td>
+                        <td class="time" width="20%" ng-bind="item.releaseDate | formatDate"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="paganation"></div>
+        </div>
+        </div>
+</div>
+</div>
+
+<div id="loading" class="loading">
+    加载中...
+</div>
+</body>
+</html>
