@@ -400,6 +400,26 @@
         </div>
 
         <div class="form-group">
+            <label class="col-md-2 view-label">组织者签到</label>
+            <div class="col-md-10 flexBox">
+                <div class="sign-content">
+                    <div class="imgBox my-gallery">
+                        <img src="\${data.startSignImgUrl}"
+                             style="width: 150px;max-width: 480px;height: 150px;max-height: 150px" alt="">
+                    </div>
+                    <text>\${data.startDate}</text>
+                </div>
+
+                <div class="sign-content">
+                    <div class="imgBox my-gallery">
+                        <img src="\${data.endSignImgUrl}"
+                             style="width: 150px;max-width: 480px;height: 150px;max-height: 150px" alt="">
+                    </div>
+                    <text>\${data.endDate}</text>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 view-label">参与者签到列表</label>
             <div class="col-md-10">
             </div>
@@ -410,10 +430,11 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th width="30%">微信昵称</th>
+                        <th width="20%">微信昵称</th>
                         <th width="20%">真实姓名</th>
-                        <th width="25%">手机号码</th>
-                        <th width="25%">签到时间</th>
+                        <th width="20%">手机号码</th>
+                        <th width="20%">签到时间</th>
+                        <th width="20%">签到图片</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -435,6 +456,11 @@
                         <td>\${item.name}</td>
                         <td>\${item.mobile}</td>
                         <td>\${item.signInDate}</td>
+                        <td>
+                            <div class="my-gallery">
+                                <img src="\${item.signImgUrl}" class="cover" alt="">
+                            </div>
+                        </td>
                     </tr>
                     {@/each}
                     </tbody>

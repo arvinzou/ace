@@ -47,11 +47,11 @@
                                    class="form-control input-left"
                                    placeholder="请输入名称">
                             <span class="input-group-btn">
-                                                        <button class="btn btn-right btn-default search_btn"
-                                                                type="submit">
-                                                                搜索
-                                                        </button>
-                                                    </span>
+                                <button class="btn btn-right btn-default search_btn"
+                                        type="submit">
+                                        搜索
+                                </button>
+                            </span>
                         </div>
                     </form>
                 </div>
@@ -154,7 +154,6 @@
 </div>
 
 
-
 <div id="j-pswp" class="pswp" role="dialog" aria-hidden="true">
     <div class="pswp__bg"></div>
     <div class="pswp__scroll-wrap">
@@ -210,7 +209,6 @@
                 </div>
                 <text>\${data.endDate}</text>
             </div>
-
         </div>
 
         <label class="col-md-2 view-label">参与者签到</label>
@@ -352,7 +350,7 @@
         <div class="form-group">
             <label class="col-md-2 view-label">活动封面</label>
             <div class="my-gallery col-md-10">
-                <img src="\${data.coverUrl}" style="max-width:480px;max-height: 480px"/>
+                <img src="\${data.coverUrl}"/>
             </div>
         </div>
 
@@ -400,6 +398,26 @@
         </div>
 
         <div class="form-group">
+            <label class="col-md-2 view-label">组织者签到</label>
+            <div class="col-md-10 flexBox">
+                <div class="sign-content">
+                    <div class="imgBox my-gallery">
+                        <img src="\${data.startSignImgUrl}"
+                             style="width: 150px;max-width: 480px;height: 150px;max-height: 150px" alt="">
+                    </div>
+                    <text>\${data.startDate}</text>
+                </div>
+
+                <div class="sign-content">
+                    <div class="imgBox my-gallery">
+                        <img src="\${data.endSignImgUrl}"
+                             style="width: 150px;max-width: 480px;height: 150px;max-height: 150px" alt="">
+                    </div>
+                    <text>\${data.endDate}</text>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 view-label">参与者签到列表</label>
             <div class="col-md-10">
             </div>
@@ -410,10 +428,11 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th width="30%">微信昵称</th>
+                        <th width="20%">微信昵称</th>
                         <th width="20%">真实姓名</th>
-                        <th width="25%">手机号码</th>
-                        <th width="25%">签到时间</th>
+                        <th width="20%">手机号码</th>
+                        <th width="20%">签到时间</th>
+                        <th width="20%">签到图片</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -435,6 +454,11 @@
                         <td>\${item.name}</td>
                         <td>\${item.mobile}</td>
                         <td>\${item.signInDate}</td>
+                        <td>
+                            <div class="my-gallery">
+                                <img src="\${item.signImgUrl}" class="cover" alt="">
+                            </div>
+                        </td>
                     </tr>
                     {@/each}
                     </tbody>
@@ -500,5 +524,12 @@
 <script src="${portalPath}/content/common/photoview/photoswipe.js"></script>
 <script src="${portalPath}/content/common/photoview/photoswipe-ui-default.min.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
-
+<style>
+    .img-cover {
+        width: 150px;
+        height: 150px;
+        max-width: 480px;
+        max-height: 480px
+    }
+</style>
 </html>

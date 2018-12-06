@@ -5,7 +5,7 @@ window.onload = function () {
     initpage();
     $('#add-gauge').click(addGange);
     $('.gauge-list').on('click', '.delectBtn', delectTr)
-    $('.textareaHeight').on('input', function () {
+    $('.step_three').on('input',' .textareaHeight', function () {
         this.style.height = 'auto';
         this.style.height = this.scrollHeight + "px";
     });

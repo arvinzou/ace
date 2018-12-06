@@ -114,8 +114,7 @@
                                         <th class=" primary-link" width="20%"></th>
                                     </tr>
                                     <tr>
-                                        <th width="50%"><textarea rows="1"
-                                                                  class="textareaHeight  form_name"></textarea></th>
+                                        <th width="50%"><textarea rows="1" class="textareaHeight  form_name"></textarea></th>
                                         <th width="30%"><input class="form_optionScore" type="text">分</th>
                                         <th class=" primary-link" width="20%"></th>
                                     </tr>
@@ -136,7 +135,7 @@
             </div>
             <div class="modal-footer">
 
-                <button type="button" class="btn btn-default">取消</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 
                 <button type="button" class="btn btn-info submit_btn" flag="true">提交
                 </button>
