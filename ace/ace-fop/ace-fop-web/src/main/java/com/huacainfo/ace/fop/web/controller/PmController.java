@@ -56,6 +56,30 @@ public class PmController extends FopBaseController {
         return rst;
     }
 
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(党员信息分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <PmVo>
+     * @author: 陈晓克
+     * @version: 2018-11-05
+     */
+    @RequestMapping(value = "/www/findPmList")
+    @ResponseBody
+    public PageResult<PmVo> findwwwPmList(PmQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<PmVo> rst = this.pmService.findPmList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
+    }
+
     /**
      * @throws
      * @Title:insertPm
