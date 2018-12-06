@@ -1,5 +1,4 @@
 window.onload = function() {
-
     console.log(window.location.href);
     var url =   window.location.href.substring(1);
     var primaryId = url.substring(url.indexOf('=')+1);
@@ -11,7 +10,11 @@ window.onload = function() {
 /**
  * 取款记录*/
 function incomeListHistroy() {
-    window.location.href = contextPath + '/www/view/mine/incomeRecord.jsp';
+    console.log(this);
+    console.log($(this));
+    console.log($(this).html());
+    var id=$(this).data('id');
+    window.location.href = contextPath + '/www/view/mine/incomeRecord.jsp?id='+id;
 }
 
 

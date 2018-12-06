@@ -35,6 +35,7 @@ public interface BaseOrderService {
 
 
     PageResult<BaseOrderVo> findBaseOrderList(BaseOrderQVo condition, int start, int limit, String orderBy) throws Exception;
+    PageResult<BaseOrderVo> profitFindList(BaseOrderQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
