@@ -52,11 +52,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 微信昵称</th>
-                    <th width="30%"> 标题</th>
-                    <th width="30%"> 描述</th>
+                    <th width="20%"> 微信昵称</th>
+                    <%--<th width="30%"> 标题</th>--%>
+                    <th width="40%"> 描述</th>
                     <th width="20%"> 提交日期</th>
-                    <th width="10%">操作</th>
+                    <th width="20%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -96,7 +96,7 @@
             </div>
 
         </td>
-        <td> \${item.title}</td>
+        <%--<td> \${item.title}</td>--%>
         <td> \${item.content}</td>
         <td> \${item.createDate}</td>
         <td>
@@ -200,12 +200,12 @@
 
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">标题</label>
-        <div class="col-md-10">
-            \${data.o.title}
-        </div>
-    </div>
+    <%--<div class="form-group">--%>
+    <%--<label class="col-md-2 view-label">标题</label>--%>
+    <%--<div class="col-md-10">--%>
+    <%--\${data.o.title}--%>
+    <%--</div>--%>
+    <%--</div>--%>
     <div class="form-group">
         <label class="col-md-2 view-label">描述</label>
         <div class="col-md-10">
