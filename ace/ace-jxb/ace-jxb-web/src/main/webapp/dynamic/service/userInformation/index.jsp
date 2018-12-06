@@ -370,7 +370,6 @@
                 <div class="headimgbox"  id="headimg">
                     <img style="max-width:400px;cursor:pointer;background-color: "
                          id="imagePhotoUrl"
-                         data-toggle="\${data.regAuditRst==1?'':'modal'}"
                          data-xsize="400" data-ysize="400"
                          data-cover="imagePhotoUrl"
                          data-target="#img-uploader"
@@ -501,9 +500,10 @@
                     <input name="certificateImgUrl" type="hidden" value="\${data.certificateImgUrl}">
                     <img style="max-height:400px;cursor:pointer"
                          id="certificateImgUrl"
+                         data-toggle="\${data.regAuditRst==1?'':'modal'}"
                          data-cover="certificateImgUrl"
                          data-xsize="400" data-ysize="300"
-                         data-toggle=modal data-target="#img-uploader"
+                         data-target="#img-uploader"
                          src="{@if data.certificateImgUrl!=''} \${data.certificateImgUrl} {@else}${pageContext.request.contextPath}/content/service/information/img/certificateimg.png?v=${cfg.version}{@/if}">
                 </div>
                 <p>从业资格证书</p>
