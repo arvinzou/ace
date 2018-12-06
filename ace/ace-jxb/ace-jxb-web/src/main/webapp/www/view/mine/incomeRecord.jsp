@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
-    <title>提现记录</title>
+    <title>收益记录</title>
     <link rel="stylesheet" type="text/css" href="css/incomeRecord.css"/>
     <link rel="stylesheet" type="text/css" href="css/earnings.css"/>
     <script>
@@ -51,7 +51,7 @@
 </head>
 <body>
 <div class="month">
-    <input type="text" id="dateSelectorOne" placeholder="选择年月" value="2018-12-21" data-year="1991" data-month="8">
+    <input type="text" readonly id="dateSelectorOne" placeholder="选择年月" value="2018-12-21" data-year="1991" data-month="8">
 </div>
 <div id="orderList">
 
