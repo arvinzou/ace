@@ -33,7 +33,7 @@
             </div>
             <div class="col-md-3">
                 <div class="input-group">
-                    <input type="text"
+                    <input name="name" type="text"
                            class="form-control"
                            placeholder="请输入工作室名称">
                     <span class="input-group-btn">

@@ -14,7 +14,6 @@
     <SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
     <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
     <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
-    <script type="text/javascript" src="/portal/system/getUserProp.do"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="js/policy_info.js"></script>
     <link rel="shortcut icon" href="../../images/favicon.ico">
@@ -24,20 +23,14 @@
         }
 
         .appeal_index {
-            width: 1100px;
+            width: 100%;
             background-color: #fff;
             margin: auto;
             height: auto;
             padding-bottom: 30px;
             margin-bottom: 62px;
-        }
-
-        .current_site {
-            width: 1100px;
-            background-color: #F4F4F4;
-            margin: auto;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            padding-left: 30px;
+            padding-right: 30px;
         }
 
         .appeal_title {
@@ -173,8 +166,6 @@
 
 <body>
 <div id="loadBefore" hidden="hidden">
-<div id="header"></div>
-<div class="current_site" ng-cloak>当前位置：政策信息详情  >> {{info.title}}</div>
 <div class="appeal_index">
     <div class="appeal_doc">
         <div class="appeal_title">
@@ -183,9 +174,6 @@
         </div>
     </div>
     <div class="finance_content">
-        <!--<div>
-            <span class="title_lager">内容</span><span class="title_small">/&nbsp;Content</span>
-        </div>-->
         <div class="content_info">
         </div>
     </div>

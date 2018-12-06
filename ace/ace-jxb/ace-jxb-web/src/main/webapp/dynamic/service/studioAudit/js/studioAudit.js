@@ -1,8 +1,15 @@
 var mySwiper;
 var studioStatus = null;
-
+var urlData = {
+    limit: 10
+};
 window.onload = function (){
+    $('.search_btn').click(searchName);
+    initpage();
+}
 
+function searchName() {
+    urlData.name=$('input[name=name]').val();
     initpage();
 }
 
@@ -46,12 +53,9 @@ function initpage() {
 }
 
 function getStudioList(num, type) {
+    urlData.page=num;
     var url = contextPath+ "/studio/findStudioList";
-    var data = {
-        page: num,
-        limit: 10,
-    };
-    $.getJSON(url, data, function (result) {
+    $.getJSON(url, urlData, function (result) {
         if (result.status == 0) {
             if (type == "init") {
                 $('#pagination1').jqPaginator('option', {
