@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.society.constant.AuditState;
 import com.huacainfo.ace.society.service.AdmireRecordService;
 import com.huacainfo.ace.society.service.CommentRecordService;
 import com.huacainfo.ace.society.vo.AdmireRecordQVo;
@@ -40,6 +41,7 @@ public class WCommentController extends SocietyBaseController {
     @RequestMapping("/findList")
     public ResultResponse findList(CommentRecordQVo condition, PageParamNoChangeSord page) throws Exception {
 
+        condition.setStatus(AuditState.PASS);
         PageResult<CommentRecordVo> rst = commentRecordService.findCommentRecordList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         return new ResultResponse(ResultCode.SUCCESS, "查询成功", rst);
     }

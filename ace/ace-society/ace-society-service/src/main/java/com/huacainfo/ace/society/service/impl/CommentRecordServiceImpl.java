@@ -66,7 +66,7 @@ public class CommentRecordServiceImpl implements CommentRecordService {
             int allRows = this.commentRecordDao.findCount(condition);
             rst.setTotal(allRows);
         }
-        System.out.println("输出结果 " + rst.getTotal());
+
         return rst;
     }
 
@@ -223,7 +223,7 @@ public class CommentRecordServiceImpl implements CommentRecordService {
     public ResultResponse submit(CommentRecordVo params) {
 
         params.setId(GUIDUtil.getGUID());
-        params.setStatus("1");
+        params.setStatus("3");
         params.setCreateUserId("system");
         params.setCreateUserName("system");
         params.setCreateDate(new Date());
