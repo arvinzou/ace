@@ -42,7 +42,7 @@
                                         <th width="30%" align="left" class="table_title">企业地址</th>
 									</tr>
 									<tr ng-repeat="item in items">
-                                        <td width="35%" ng-bind="item.fullName"></td>
+                                        <td width="35%" ng-bind="item.fullName" ng-click="preview(item.id);"></td>
                                         <td width="10%" ng-bind="item.realName"></td>
 										<td width="15%" ng-bind="item.companyPropertyName"></td>
                                         <td width="10%" ng-bind="item.areaCodeName"></td>
