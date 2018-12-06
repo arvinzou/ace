@@ -24,7 +24,6 @@
     object-fit: cover;
 }
 .commodity-title{
-    width: 100%;
     height: 80rpx;
     line-height: 80rpx;
     color: #222222;
