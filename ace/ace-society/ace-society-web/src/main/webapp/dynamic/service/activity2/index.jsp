@@ -220,7 +220,7 @@
             <div class="sign-content">
                 <div class="imgBox">
                     <img src="\${item.signImgUrl}" alt="">
-                    <input name="list" value="\${item.userId}" class="check" type="checkbox">
+                    <input name="list" value="\${item.userId}" checked class="check" type="checkbox">
                 </div>
                 <text>\${item.name}</text>
             </div>
