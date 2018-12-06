@@ -7,14 +7,13 @@ var app =angular.module(ngAppName, []);
 
 app.controller(ngControllerName,function($scope){
     $.ajax({
-        url: "/fop/www/findCompanyList",
+        url: "/fop/www/findInformationServiceListDo",
         type:"post",
         async:false,
-        data:{page:currentPage, limit: pageSize, isCompany: "1"},
+        data: {limit: pageSize, page: currentPage, modules: "5", status: "1"},  //5代表政策文件
         success:function(result){
             if(result.status == 0) {
                 $scope.items = result.data.list;
-                $scope.totalCount = result.data.total;
                 if (!$scope.$$phase) {
                     $scope.$apply();
                 }
@@ -29,10 +28,9 @@ app.controller(ngControllerName,function($scope){
                     cont: $("#paganation"),   //容器名
                     pages: totalPage,           //总页数
                     curr: currentPage,         //当前页
-                   // skip: true,
+                    //skip: true,
                     skin: '#f44336',
                     groups: 5,                  //连续显示分页数
-                    layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
                     jump: function(obj, first){ //触发分页后的回调
                         if(!first){
                             currentPage = obj.curr;
@@ -57,12 +55,11 @@ app.controller(ngControllerName,function($scope){
     });
 
     $scope.searchList = function(currentPage, pageSize){
-        var key_word = $("#key_word").val();
         $.ajax({
-            url: "/fop/www/findCompanyList",
+            url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, fullName: key_word , isCompany: "1"},
+            data: {limit: pageSize, page: currentPage, modules: "5", status: "1"},
             success:$scope.responseHandle,
             error:function(){
                 layer.alert("系统内部服务异常！", {
@@ -73,31 +70,16 @@ app.controller(ngControllerName,function($scope){
         });
     }
 
-    $scope.responseHandle = function(result){
-        if(result.status == 0) {
-            $scope.items = result.data.list;
-            if (!$scope.$$phase) {
-                $scope.$apply();
-            }
-        }else {
-            layer.alert(result.errorMessage, {
-                icon: 5,
-                skin: 'myskin'
-            });
-        }
-    }
-
     $scope.search = function(){
-        var key_word = $("#key_word").val();
+        var keyword = $("#key_word").val();
         $.ajax({
-            url: "/fop/www/findCompanyList",
+            url: "/fop/www/findInformationServiceListDo",
             type:"post",
             async:false,
-            data:{page:currentPage, limit: pageSize, isCompany: "1", fullName: key_word},
+            data: {limit: pageSize, page: currentPage, modules: "5", status: "1", title: keyword},  //5代表政策文件
             success:function(result){
                 if(result.status == 0) {
                     $scope.items = result.data.list;
-                    $scope.totalCount = result.data.total;
                     if (!$scope.$$phase) {
                         $scope.$apply();
                     }
@@ -112,7 +94,7 @@ app.controller(ngControllerName,function($scope){
                         cont: $("#paganation"),   //容器名
                         pages: totalPage,           //总页数
                         curr: currentPage,         //当前页
-                        // skip: true,
+                        //skip: true,
                         skin: '#f44336',
                         groups: 5,                  //连续显示分页数
                         jump: function(obj, first){ //触发分页后的回调
@@ -137,5 +119,55 @@ app.controller(ngControllerName,function($scope){
                 });
             }
         });
+    }
+    $scope.responseHandle = function(result){
+        if(result.status == 0) {
+            $scope.items = result.data.list;
+            if (!$scope.$$phase) {
+                $scope.$apply();
+            }
+        }else {
+            layer.alert(result.errorMessage, {
+                icon: 5,
+                skin: 'myskin'
+            });
+        }
+    }
+
+    /**
+     * 查看政策文件详情
+     * @param index
+     */
+    $scope.showInfo = function(index){
+        var primaryId = $scope.items[index].id;
+        console.log(primaryId);
+        window.open('policy_info.html?id='+primaryId);
+    }
+
+    /**
+     * 政策文件下载
+     */
+    $scope.download = function($event, file, title){
+        if(file != '' && file != null){
+            var downTitle = file.substring(file.indexOf("filename=")+9,file.length);
+            $event.target.download = downTitle;
+            $event.target.href = file;
+        }else{
+            layer.alert("对不起，该政策没有可下载的附件！", {
+                icon: 5,
+                skin: 'myskin'
+            });
+            return;
+        }
+    }
+});
+
+app.filter('formatDate', function() { //可以注入依赖
+    return function(text) {
+        if(text.length > 10){
+            return text.substring(0,10);
+        }else {
+            return text;
+        }
     }
 });

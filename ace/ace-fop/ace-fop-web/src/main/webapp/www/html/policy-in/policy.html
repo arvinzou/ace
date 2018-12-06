@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11">
+    <title>政策信息</title>
+    <link href="../../css/comon0.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/policy.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/laypage-v1.3/laypage/laypage.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <SCRIPT language=JavaScript src="../../js/bootstrap.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/policy.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+</head>
+
+<body>
+<div id="loadBefore" hidden="hidden">
+<div class="index">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="main_box" valign="top">
+                    <div class="main">
+                        <div class="table-header">
+                            <div class="search">
+                                <input type="text" id="key_word" placeholder="请输入关键字搜索"  class="search-input"/>
+                                <img src="img/search.png" class="search-img" ng-click="search();"/>
+                            </div>
+                        </div>
+                        <div class="searchTable">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr class="table-th">
+                                    <th width="65%">标题</th>
+                                    <th width="15%">文件</th>
+                                    <th width="20%">发布时间</th>
+                                </tr>
+                                <tr class="tr_bottom" ng-repeat="item in items" >
+                                    <td width="65%">
+                                        <a class="show_info" href="javascript:void(0);" ng-click="showInfo($index);">{{item.title}}</a>
+                                    </td>
+                                    <td width="15%"><a  href="#" ng-click="download($event,item.fileUrl, item.title);"  style="color: #1A56A8;">下载</a> </td>
+                                    <td  width="20%" ng-bind="item.releaseDate | formatDate"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <div id="paganation"></div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+</div>
+</div>
+
+<div id="loading" class="loading">
+    加载中...
+</div>
+</body>
+
+</html>
