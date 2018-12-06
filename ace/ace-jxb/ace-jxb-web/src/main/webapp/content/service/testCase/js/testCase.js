@@ -2,7 +2,7 @@ window.onload = function () {
     initpage();
     $('#add-caseSub').click(addCaseSub);
     $('.case-list').on('click', '.delectBtn', delectTr)
-    $('.textareaHeight').on('input', function () {
+    $('.case-list').on('input', '.textareaHeight',function () {
         this.style.height = 'auto';
         this.style.height = this.scrollHeight + "px";
     });
