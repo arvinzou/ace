@@ -1,29 +1,60 @@
 window.onload = function () {
+    var url =   window.location.href.substring(1);
+    category = getParam('id');
+    console.log(category);
     new Mdate("dateSelectorOne");
     var date = new Date();
-    $('.month').on('change', 'input', getList);
     $('#dateSelectorOne').val(date.getFullYear() + "年" + (date.getMonth() + 1) + '月').attr('data-year', date.getFullYear()).attr("data-month", date.getMonth() + 1);
     $('.month').on('change', 'input', getList);
-    getOrderList();
+    getList();
 }
 
+var category;
+
 function getList() {
-    console.log(this.val());
+    getOrderList($('.month input').val());
 }
 
 function getOrderList(date) {
-    var date = '2018年8月';
     var year = date.substring(0, 4);
     var momth = date.substring(date.indexOf('年') + 1, date.indexOf('月'));
     console.log(year + momth);
     var url = contextPath + "/www/order/findList";
+    if(category==3){
+        var url = contextPath + "/www/order/profitFindList";
+    }
     var data = {
         findType: '2',
         year: year,
-        momth: momth,
-        statusArray:'2,6,7'
+        month: momth,
+        category:category,
+        statusArray:'2,6,7',
     };
     $.getJSON(url, data, function (rst) {
-        console.log(rst);
+        var mylist = document.getElementById('tmp-list').innerHTML;
+        var html = juicer(mylist, {
+            data: rst.data.rows
+        });
+        $("#orderList").append(html);
     })
 }
+
+var getParam = function (name) {
+    var search = document.location.search;
+    //alert(search);
+    var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
+    var matcher = pattern.exec(search);
+    var items = null;
+    if (null != matcher) {
+        try {
+            items = decodeURIComponent(decodeURIComponent(matcher[1]));
+        } catch (e) {
+            try {
+                items = decodeURIComponent(matcher[1]);
+            } catch (e) {
+                items = matcher[1];
+            }
+        }
+    }
+    return items;
+};

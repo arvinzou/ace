@@ -197,9 +197,11 @@
                 that.acceptId.setAttribute("data-month", monthTag);
                 that.acceptId.setAttribute("data-day", dayTag);
                 that.dateCancel()
+                $("input").change();
             };
             cancelBtn.onclick = function () {
                 that.dateCancel()
+
             }
         }, dateForTen: function (n) {
             if (n < 10) {

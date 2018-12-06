@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta name="format-detection" content="telephone=no"/>
-    <title>提现记录</title>
+    <title>收益记录</title>
     <link rel="stylesheet" type="text/css" href="css/incomeRecord.css"/>
     <link rel="stylesheet" type="text/css" href="css/earnings.css"/>
     <script>
@@ -35,47 +35,45 @@
             }, !1)) : e()
         }();
     </script>
+    <script type="text/javascript">
+        var contextPath = '${pageContext.request.contextPath}';
+        var portalPath = '${portalPath}';
+        var version = '${cfg.version}';
+        var fastdfs_server = '${cfg.fastdfs_server}';
+        var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
+        var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
+    </script>
     <script src="../common/js/jquery-3.2.1.min.js"></script>
+    <script src="${portalPath}/content/common/juicer/juicer-min.js"></script>
     <script type="text/javascript" src="js/iScroll.js"></script>
     <script type="text/javascript" src="js/Mdate.js"></script>
     <script type="text/javascript" src="js/incomeRecord.js"></script>
 </head>
 <body>
 <div class="month">
-    <input type="text" id="dateSelectorOne" placeholder="选择年月" value="2018-12-21" data-year="1991" data-month="8">
+    <input type="text" readonly id="dateSelectorOne" placeholder="选择年月" value="2018-12-21" data-year="1991" data-month="8">
 </div>
-<div class="list">
-    <div class="top">
-        <span class="name">公益微课之如何让宝宝爱上学习 系列课程</span>
-        <span class="money_style">+<span>200.00 </span></span>
-    </div>
-    <div class="info">
-        <span class="time">2018-04-07  17:30:15 </span>
-        <span class="stutas">我是一条鱼购买 </span>
-    </div>
+<div id="orderList">
+
 </div>
 
-<div class="list">
-    <div class="top">
-        <span class="name">咨询收益—电话咨询 </span>
-        <span class="money_style">+<span>200.00 </span></span>
-    </div>
-    <div class="info">
-        <span class="time">2018-04-07  17:30:15 </span>
-        <span class="stutas">半分购买 </span>
-    </div>
-</div>
 
-<div class="list">
-    <div class="top">
-        <span class="name">肖海平老师—为什么孩子总不听 你的系列课程 </span>
-        <span class="money_style">+<span>200.00 </span></span>
-    </div>
-    <div class="info">
-        <span class="time">2018-04-07  17:30:15 </span>
-        <span class="stutas">傻不拉几购买 </span>
-    </div>
-</div>
 
 </body>
+<script id="tmp-list" type="text/template">
+    {@each data as item}
+    <div class="list">
+        <div class="top">
+            <span class="name">\${item.commodityName}</span>
+            <span class="money_style">+<span>\${item.price}</span></span>
+        </div>
+        <div class="info">
+            <span class="time">\${item.createDate} </span>
+            <span class="stutas">\${item.consumerName}</span>
+        </div>
+    </div>
+    {@/each}
+</script>
+
+
 </html>

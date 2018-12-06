@@ -1,5 +1,5 @@
 body {
-    background-color: #fff;
+    background-color: #fafbfc;
     min-width: 900px;
 }
 .index {
@@ -11,7 +11,7 @@ body {
 }
 
 .project_list {
-    color: #657180;
+    color: #373a3c;
 }
 
 .project_title {
@@ -34,13 +34,14 @@ body {
 }
 
 .table_div tr {
+    height: 42px;
+    line-height: 42px;
+    border-bottom: 1px solid #eceeef;
+}
+.table_div th {
     height: 45px;
     line-height: 45px;
-    border-bottom: 1px dashed #E1E5ED;
-}
-
-.search {
-    margin-top: 30px;
+    border-bottom: 1px solid #eceeef;
 }
 
 .search_list {
@@ -158,18 +159,13 @@ textarea {
     border-radius: 5px;
 }
 .finance_list_title{
-    height: 62px;
-    line-height: 62px;
-    border-bottom: 1px solid #E1E5ED;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #cfdbe2;
+    background-color: #fafbfc;
+    border-radius: 0;
 }
 
-#key_word{
-    width: 200px;
-    height: 35px;
-    float: left;
-    padding-left: 10px;
-    background-color: #fff;
-}
 .searchButton{
     padding-top: 0;
     width:50px;
@@ -196,3 +192,43 @@ html, body {height:100%;width:100%; }
 ._citys1 a { width: 83px; height: 35px; display: inline-block; background-color: #f5f5f5; color: #666; margin-left: 6px; margin-top: 3px; line-height: 35px; text-align: center; cursor: pointer; font-size: 12px; border-radius: 5px; overflow: hidden; }
 ._citys1 a:hover { color: #fff; background-color: red; }
 .AreaS { background-color: #05920a !important; color: #fff !important; }
+
+.table_title{
+    color: #373a3c;
+    font-weight: bold;
+    border-bottom: 2px solid #eceeef;
+}
+.search{
+    width: 210px;
+    height: 30px;
+    margin-top: 10px;
+    float: right;
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+.search:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.search-input{
+    width: 180px;
+    height: 30px;
+    border: none;
+    outline: none;
+    float: left;
+    background: none;
+}
+.search-img{
+    width: 15px;
+    height: 15px;
+    float: left;
+    margin-top: 7.5px;
+}
+.finance_list_title:after{
+    content: '';
+    clear: both;
+    display: block;
+}
+#paganation{
+    text-align: right;
+}

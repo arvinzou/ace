@@ -6,7 +6,7 @@
                 <view class='scroll-view-x'>
                     <block wx:for="{{ sitelist }}">
                         <view class='image-box' bindtap='siteDetail' data-id='{{ item.id }}'>
-                            <image src='{{ item.commodityCover}}'></image>
+                            <image mode='aspectFill' src='{{ item.commodityCover}}'></image>
                             <view class='coin-num'>{{ item.costPoints }}爱心币</view>
                             <view class='site-name'>{{ item.commodityName }}</view>
                         </view>
@@ -22,7 +22,7 @@
             <view class='commodity'>
             <block wx:for="{{ commoditylist }}">
                 <view class='commodity-item evenDiv' bindtap='commodityDetal' data-id='{{ item.id }}'  wx:if="{{ index % 2 == 0}}">
-                    <view class='cover'><image src='{{ item.commodityCover }}'></image></view>
+                    <view class='cover'><image mode='aspectFill' src='{{ item.commodityCover }}'></image></view>
                     <view class='commodity-title'>
                         <text>{{ item.commodityName }}</text>
                     </view>
@@ -37,7 +37,7 @@
                     </view>
                 </view>
                 <view class='commodity-item' bindtap='commodityDetal' data-id='{{ item.id }}' wx:if="{{ index % 2 != 0}}">
-                    <view class='cover'><image src='{{ item.commodityCover }}'></image></view>
+                    <view class='cover'><image mode='aspectFill' src='{{ item.commodityCover }}'></image></view>
                     <view class='commodity-title'>
                         <text>{{ index }}{{ item.commodityName }}</text>
                     </view>

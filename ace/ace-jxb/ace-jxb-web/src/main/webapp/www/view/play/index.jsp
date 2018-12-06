@@ -15,7 +15,6 @@
 			  crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
-		<script type="text/javascript" src="../../common/js/loader.js"></script>
 	</head>
 	<body>
 		<div class="container">
