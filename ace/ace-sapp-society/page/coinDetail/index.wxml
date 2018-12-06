@@ -2,12 +2,12 @@
   <view class='table'>
     <view class="tr bg-w">
          <view class="th" style='width:40%'>类型</view>
-         <view class="th" style='width:45%'>时间</view>
-         <view class="th" style='width:15%'>爱心币</view>
+         <view class="th" style='width:40%'>时间</view>
+         <view class="th" style='width:20%'>爱心币</view>
     </view>
     <block wx:for='{{detailInfo}}'>
     <view class='tr bg-g'>
-        <view class="td" style='width:35%'>
+        <view class="td" style='width:40%'>
             <block wx:if='{{item.bisType == "ORDER-CONSUME"}}'>
                 订单消费
             </block>
@@ -60,12 +60,12 @@
                 邻里圈子 - 发行
             </block>
         </view>
-        <view class="td" style='width:35%'>{{item.createDate}} </view>
+        <view class="td" style='width:40%;textalign:center;'>{{item.createDate}} </view>
         <block wx:if='{{item.bisType == "ADD"}}'>
-        <view class="td increase" style='width:15%'>+{{item.points}}</view>
+        <view class="td increase" style='width:20%;textalign:center;'>+{{item.points}}</view>
         </block>
         <block wx:else>
-        <view class="td reduce" style='width:15%'>{{item.points}}</view>
+        <view class="td reduce" style='width:20%;textalign:center;'>{{item.points}}</view>
         </block>
     </view>
     </block>
