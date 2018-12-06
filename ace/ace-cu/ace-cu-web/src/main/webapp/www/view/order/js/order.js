@@ -110,10 +110,6 @@ function donateMoney1 (){
             alert("捐款人姓名不能为空！");
             return;
         }
-        if(phoneNum == null || phoneNum == undefined || phoneNum ==''){
-            alert("联系电话不能为空！");
-            return;
-        }
     }
     if(isCustom){
         donateMoney = $("#amountMoney").val();
