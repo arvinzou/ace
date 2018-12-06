@@ -287,7 +287,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="portlet-body">
-                                <h3>量表分数从高到底排列</h3>
+                                <h4>量表分数从高到底排列</h4>
                                 <div class="table-scrollable">
                                     <table class="table table-striped table-hover">
                                         <thead>
