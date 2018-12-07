@@ -94,7 +94,7 @@
             <a href="#" class="operation" data-target="#myModal" data-toggle="modal"
                onclick="edit('\${item.id}');">查看 </a>
             <a href="#" class="operation" data-target="#myModal" data-toggle="modal"
-               onclick="members('\${item.id}');">成员 </a>
+               onclick="members('\${item.id}','\${item.counselorId}');">成员 </a>
         </td>
     </tr>
     {@/each}
