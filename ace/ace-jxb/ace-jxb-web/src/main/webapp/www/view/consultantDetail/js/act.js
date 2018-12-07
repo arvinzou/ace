@@ -1,8 +1,20 @@
 window.onload = function() {
     console.log(window.location.href);
-    var url =   window.location.href.substring(1);
-    var primaryId = url.substring(url.indexOf('=')+1);
-    console.log(primaryId);
+
+    var primaryId = null;
+    var locaUrl = window.location.href;
+    var url = window.location.href.substring(locaUrl.indexOf("?")+1);
+    var paramArr = url.split("&");
+    for(var i=0;i < paramArr.length;i++){
+        num=paramArr[i].indexOf("=");
+        if(num>0){
+            name=paramArr[i].substring(0,num);
+            value=paramArr[i].substr(num+1);
+            if(name == "id"){
+                primaryId = value;
+            }
+        }
+    }
     findDetail(primaryId);
 }
 

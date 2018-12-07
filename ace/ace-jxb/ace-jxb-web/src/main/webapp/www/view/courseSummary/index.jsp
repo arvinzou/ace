@@ -8,12 +8,12 @@
 		<meta name="format-detection" content="telephone=no" />
 		<title>课程列表</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 			  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
 			  crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/star-rating.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
 		<script src="${portalPath}/content/common/js/dict_jxb.js?version=${version}"></script>
 		<script type="text/javascript" src="js/act.js"></script>
@@ -269,7 +269,7 @@
 				<span class="span_01"><%--试听--%></span>
 				<span class="span_02" style="display: none;">共计</span>
 				<span class="span_03" id="totalCost" style="display: none;"></span>
-				<button class="buy" onclick="buy();" style="margin-left: 2.5rem;">立即购买</button>
+				<button class="buy" onclick="buy();" style="margin-left: 2.5rem;" id="buy">立即购买</button>
 			</div>
 			{@/if}
 		</script>
