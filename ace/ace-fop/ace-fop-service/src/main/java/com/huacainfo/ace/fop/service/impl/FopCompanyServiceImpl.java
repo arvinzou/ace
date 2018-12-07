@@ -141,6 +141,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             f.setAreaCodeName(item.getAreaCodeName());
             f.setAddress(item.getAddress());
             f.setCompanyProperty("-");
+            f.setId(item.getId());
             clist.add(f);
         }
         map.put("list", clist);
