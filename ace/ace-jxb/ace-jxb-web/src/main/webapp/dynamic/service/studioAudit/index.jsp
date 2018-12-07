@@ -197,7 +197,7 @@
         </thead>
         <tbody>
         {@each data as item}
-        <tr style="margin-bottom: 20px">
+        <tr style="height: 60px;">
             <td>
                 <div style="width: 40px;height: 40px;">
                     <img src="\${item.imagePhotoUrl}" style="width: 100%;height: 100%;object-fit: cover" alt="">
