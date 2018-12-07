@@ -4,7 +4,6 @@ var urlData = {
     limit: 10
 };
 window.onload = function () {
-    $('.search_btn').click(searchName);
     initpage();
 }
 
