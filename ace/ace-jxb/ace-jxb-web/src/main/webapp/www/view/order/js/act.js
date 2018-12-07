@@ -92,7 +92,9 @@ function validateNum() {
         return;
     }
     $that.addClass('formInput');
-
+    alert("年龄输入非法!");
+    $that.val("");
+    return;
 }
 
 

@@ -370,6 +370,7 @@
                 <div class="headimgbox"  id="headimg">
                     <img style="max-width:400px;cursor:pointer;background-color: "
                          id="imagePhotoUrl"
+                         data-toggle="modal"
                          data-xsize="400" data-ysize="400"
                          data-cover="imagePhotoUrl"
                          data-target="#img-uploader"
@@ -449,7 +450,7 @@
         <div class="col-md-10">
             <div class="row">
                 <div  style="float:left;width:130px;padding:2px">
-                    <input type="radio" id="radios_1" \${data.regAuditRst==1?'readonly':''} name="certification"
+                    <input type="radio" id="radios_1" \${data.regAuditRst==1?'disabled':''} name="certification"
                            value="国家二级咨询师"  \${data.certification=='国家二级咨询师'?'checked':''}>
                     <label
                             for="radios_1"><span class="inc"></span>
@@ -459,7 +460,7 @@
 
                 <div  style="float:left;width:130px;padding:2px">
 
-                    <input type="radio" id="radios_2" \${data.regAuditRst==1?'readonly':''}
+                    <input type="radio" id="radios_2" \${data.regAuditRst==1?'disabled':''}
                                              name="certification"
                                              value="国家三级咨询师"
                                               \${data.certification=='国家三级咨询师'?'checked':''}>
@@ -552,7 +553,7 @@
     </div>
     <div class="form-group ">
         <div class="col-md-10 col-md-offset-3">
-            <input class="protocol" type="checkbox"/>
+            <input class="protocol"  \${data.regAuditRst==1?'checked':''} type="checkbox"/>
             <span>
         同意
         <span class="primary-link"
