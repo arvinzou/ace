@@ -106,9 +106,9 @@
         <td> \${item.createDate}</td>
 
         <td>
-            {@if item.status==1}
+            {@if item.status==2}
             <span class="label label-lg label-info">待审</span>
-            {@else if item.status==2}
+            {@else if item.status==3}
             <span class="label label-lg label-success">通过</span>
             {@else}
             <span class="label label-lg label-danger">屏蔽</span>
@@ -117,10 +117,10 @@
 
           <td>
 
-                     <a href="javascript:audit('\${item.id}','3');">屏蔽</a>
-                     <a href="javascript:audit('\${item.id}','2');">通过</a>
+              <a href="javascript:audit('\${item.id}','4');">屏蔽</a>
+              <a href="javascript:audit('\${item.id}','3');">通过</a>
 
-                </td>
+          </td>
 
     </tr>
     {@/each}

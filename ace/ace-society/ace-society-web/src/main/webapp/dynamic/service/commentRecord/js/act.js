@@ -65,12 +65,11 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
-    ﻿
      $(".btn-group .btn").bind('click', function (event) {
-            $(event.target).siblings().removeClass("active");
-            console.log(event);
-            $(event.target).addClass("active");
-        });
+         $(event.target).siblings().removeClass("active");
+         console.log(event);
+         $(event.target).addClass("active");
+     });
  }
 
 
