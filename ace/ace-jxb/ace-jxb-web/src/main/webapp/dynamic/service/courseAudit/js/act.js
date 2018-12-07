@@ -80,7 +80,7 @@ function initPage() {
         next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (num, type) {
-            params['start']=(currentPageIndex-1)*params.limit;
+            params['start']=(num-1)*params.limit;
             params['initType']=type;
             getPageList();
         }
