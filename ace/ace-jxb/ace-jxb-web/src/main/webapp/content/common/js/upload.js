@@ -61,7 +61,6 @@ jQuery(function ($) {
     ysize = 300;
     $("#Preview").hide();
     $("#target").hide();
-    //preImg(portalPath+'/content/common/image/upload-default.jpg');
 });
 
 //3、将本地图片 显示到浏览器上
@@ -194,7 +193,7 @@ function initUploadEvents() {
          $("#Preview").hide();
          $("#target").hide();
         if(url.indexOf("http")==-1){
-
+            preImg(contextPath+'/content/common/img/bg.jpg');
         }else{
             preImg(url);
         }
@@ -229,7 +228,6 @@ function initUpload() {
         for (var i = 0, len = files.length; i < len; i++) {
             !function (i) {
                 previewImage(files[i], function (imgsrc) {
-                    //console.log(imgsrc);
                     preImg(imgsrc);
                 })
             }(i);
