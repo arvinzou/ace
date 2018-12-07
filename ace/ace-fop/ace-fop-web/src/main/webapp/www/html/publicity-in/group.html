@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html ng-app="angularjsApp" ng-controller="angularjsCtrl">
+<head>
+    <meta charset="UTF-8">
+    <title>团体信息</title>
+    <link rel="stylesheet" type="text/css" href="css/pinformation.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/comon0.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/common_index.css"/>
+    <SCRIPT language=JavaScript src="../../js/jquery-3.2.1.min.js"></SCRIPT>
+    <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="../../js/layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="js/group.js"></script>
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+</head>
+<body>
+<div id="loadBefore" hidden="hidden">
+<div class="main_box">
+    <div class="title_box">
+        <div class="col-lg-12 col-md-12 col-xs-12" style="text-align: center">
+            <span class="title_box_title">团体信息</span>
+        </div>
+    </div>
+    <div class="form_box">
+        <!--基本信息-->
+        <div class="info">
+            <div class="info_title"><span class="info_title_01">基本信息</span></div>
+            <div class="info_box">
+                <table  class="form_info" cellspacing="0" cellpadding="0" border="1">
+                    <tr>
+                        <td align="right" class="tdbg">团体名称</td>
+                        <td><input type="text" name="fullName" readonly ng-model="groupData.fullName"/></td>
+                        <td align="right" class="tdbg">创建时间</td>
+                        <td><input type="text" name="establishDate" readonly ng-model="groupData.establishDate"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right" class="tdbg">办公电话</td>
+                        <td><input type="text" name="phoneNumber" readonly ng-model="groupData.phoneNumber"/></td>
+                        <td align="right" class="tdbg">地址</td>
+                        <td>
+                            <input type="text" id="address" name="address" readonly ng-model="groupData.address"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" class="tdbg">所属工商联</td>
+                        <td>
+                            <select id="belongTo" disabled ng-model="groupData.belongTo">
+                                <option value="">请选择</option>
+                                <option value="常德市工商联">常德市工商联</option>
+                                <option value="武陵区工商联">武陵区工商联</option>
+                                <option value="鼎城区工商联">鼎城区工商联</option>
+                                <option value="汉寿县工商联">汉寿县工商联</option>
+                                <option value="桃源县工商联">桃源县工商联</option>
+                                <option value="临澧县工商联">临澧县工商联</option>
+                                <option value="澧县工商联">澧县工商联</option>
+                                <option value="津市市工商联">津市市工商联</option>
+                                <option value="石门县工商联">石门县工商联</option>
+                                <option value="安乡县工商联">安乡县工商联</option>
+                            </select>
+                        </td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--商协会领导班子情况-->
+        <div class="info">
+            <div class="info_title"><span class="info_title_01">商协会领导班子情况</span></div>
+            <div class="info_box">
+                <table  class="form_info" cellpadding="0" cellspacing="0" border="1">
+                    <tr>
+                        <td align="right" class="tdbg">理事数量</td>
+                        <td><input type="text" name="directorNum" readonly ng-model="groupData.directorNum"/></td>
+                        <td align="right" class="tdbg">副会长数量</td>
+                        <td><input type="text" name="viceNum" readonly ng-model="groupData.viceNum"/></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--党员情况-->
+        <!--党员信息-->
+        <div class="info">
+            <div class="info_title">
+                <span class="info_title_01">党员信息</span>
+            </div>
+            <div>
+                <table class="form_info" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="20%" align="center" class="tdbg">姓名</td>
+                        <td width="20%" align="center" class="tdbg">性别</td>
+                        <td width="20%" align="center" class="tdbg">出生日期</td>
+                        <td width="20%" align="center" class="tdbg">手机</td>
+                        <td width="20%" align="center" class="tdbg">入党日期</td>
+                    </tr>
+                    <tr ng-repeat="item in partyMember">
+                        <td width="20%" align="center" ng-bind="item.name"></td>
+                        <td width="20%" align="center" >
+                            <span ng-if="item.sex=='2'">女</span>
+                            <span ng-if="item.sex=='1'">男</span>
+                        </td>
+                        <td width="20%" align="center" ng-bind="item.birthday"></td>
+                        <td width="20%" align="center" ng-bind="item.mobile"></td>
+                        <td width="20%" align="center" ng-bind="item.inPmDate"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="loading" class="loading">
+    加载中...
+</div>
+</body>
+</html>

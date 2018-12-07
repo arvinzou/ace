@@ -210,13 +210,13 @@
     select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
     where n.unionId not in(select unionid from portal.userinfo)) d ON c.uid = d.unionid
     left join circle_log e on t.lastAuditLogId=e.id
-    WHERE
-    0=0
+      WHERE 0=0
+      and c.status in ('1', '2')
     <if test='uid!=null'>
       and t.uid =#{uid,jdbcType=VARCHAR}
     </if>
     <if test='status!=null'>
-      and t.status =#{status,jdbcType=VARCHAR}
+        and t.status = #{status,jdbcType=VARCHAR}
     </if>
     ORDER BY
     t.createTime desc,c.createTime desc

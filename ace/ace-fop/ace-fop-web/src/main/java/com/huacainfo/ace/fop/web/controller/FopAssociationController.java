@@ -123,6 +123,23 @@ public class FopAssociationController extends FopBaseController {
 
     /**
      * @throws
+     * @Title:selectFopAssociationByPrimaryKey
+     * @Description: TODO(获取企业管理)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<FopAssociation>
+     * @author: Arvin
+     * @version: 2018-05-02
+     */
+    @RequestMapping(value = "/www/selectFopAssociationByPrimaryKey")
+    @ResponseBody
+    public SingleResult<FopAssociationVo> selectWWWFopAssociationByPrimaryKey(String id)
+            throws Exception {
+        return this.fopAssociationService.selectFopAssociationByPrimaryKey(id);
+    }
+
+    /**
+     * @throws
      * @Title:deleteFopAssociationByFopAssociationId
      * @Description: TODO(删除企业管理)
      * @param: @param jsons

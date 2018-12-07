@@ -24,6 +24,11 @@
 			<div id="myTabContent" class="tab-content">
 				<div class="tab-pane fade in active" id="finance">
 					<div class="finance_list_title">
+						<div class="memberType">
+							<span id="company" class="type-opt typeActive" ng-click="changeMember('1','company');" >企业会员</span>
+							<span id="person" class="type-opt" ng-click="changeMember('4','person');">个人会员</span>
+							<span id="group" class="type-opt" ng-click="changeMember('2','group');">团体会员</span>
+						</div>
 						<div class="search">
 							<input type="text" id="key_word" placeholder="请输入关键字搜索"  class="search-input"/>
 							<img src="img/search.png" class="search-img" ng-click="search();"/>
@@ -34,20 +39,14 @@
 							<div class="table_div">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
-                                        <th width="20%" align="left" class="table_title">企业名称</th>
-                                        <th width="10%" align="left" class="table_title">企业法人</th>
-										<th width="15%" align="left" class="table_title">企业性质</th>
-                                        <th width="10%" align="left" class="table_title">所属区域</th>
-										<th width="15%" align="left" class="table_title">所属工商联</th>
-                                        <th width="30%" align="left" class="table_title">企业地址</th>
+                                        <th width="60%" align="left" class="table_title">企业名称</th>
+                                        <th width="20%" align="left" class="table_title">企业法人</th>
+                                        <th width="20%" align="left" class="table_title">所属区域</th>
 									</tr>
-									<tr ng-repeat="item in items">
-                                        <td width="35%" ng-bind="item.fullName" ng-click="preview(item.id);"></td>
-                                        <td width="10%" ng-bind="item.realName"></td>
-										<td width="15%" ng-bind="item.companyPropertyName"></td>
-                                        <td width="10%" ng-bind="item.areaCodeName"></td>
-										<td width="15%" ng-bind="item.belongTo"></td>
-                                        <td width="30%" ng-bind="item.address"></td>
+									<tr ng-repeat="item in items" ng-click="preview(item.id);" class="itemTr">
+                                        <td width="60%" ng-bind="item.fullName"></td>
+                                        <td width="20%" ng-bind="item.realName"></td>
+                                        <td width="20%" ng-bind="item.areaCodeName"></td>
 									</tr>
 								</table>
 							</div>
