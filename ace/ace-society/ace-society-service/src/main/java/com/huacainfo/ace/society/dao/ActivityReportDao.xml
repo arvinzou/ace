@@ -32,8 +32,8 @@
     t.id, t.activityId, t.title, t.subTitle,t.content,t.coverUrl,t.remark, t.status, t.top, t.createUserId, t.createUserName, t.createDate,
     t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,a.title AS  activityTitel, a.category as category,
     (SELECT COUNT(*)
-      FROM society.comment_record
-      WHERE bisType like concat('reportComment','%') AND bisId=t.id
+      FROM society.comment_record scr
+      WHERE scr.bisType like concat('reportComment','%') AND scr.bisId=t.id AND scr.status='3'
     ) as commentTotal
   </sql>
   <sql id="Blob_Column_List">
