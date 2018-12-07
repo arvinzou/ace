@@ -39,7 +39,7 @@
     <insert id="insertSelective" parameterType="com.huacainfo.ace.jxb.model.Studio">
         insert into studio
         <trim prefix="(" suffix=")" suffixOverrides=",">
-        <if test="id != null">
+            <if test="id != null">
                 id,
             </if>
             <if test="name != null">
@@ -267,12 +267,12 @@
             select
             -- 工作室成员数量
             (
-                    select
-                        count(1)
-                    from jxb.counselor c
-                    left join jxb.teacher_audit ta on  c.id=ta.id
-                    where ta.rst = '1'
-                    and c.studioId = studio.id
+        select
+        IFNULL(count(1), 0) + 1
+        from jxb.counselor c, jxb.teacher_audit ta
+        WHERE c.id = ta.counselorId
+        and ta.rst = '1'
+        and c.studioId = studio.id
             ) as memberCount,
             -- 工作室主人课程数 - 1
             (
@@ -294,7 +294,7 @@
                     select s.id
                     from jxb.counselor c
                     left join jxb.teacher_audit ta on  c.id=ta.id
-                    left join jxb.studio s  on c.studioId =  s.id
+        left join jxb.studio s on c.studioId = s.id
                     where ta.rst ='1'
                 )
             ) as courseCount2,

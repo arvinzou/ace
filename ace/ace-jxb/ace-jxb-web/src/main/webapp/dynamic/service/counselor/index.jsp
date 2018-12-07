@@ -102,7 +102,7 @@
         <td>
             <div class="row">
                 <div class="col-md-2">
-                    <img src="\${item.imagePhotoUrl}" class="cover"/>
+                    <img  src="\${item.imagePhotoUrl?item.imagePhotoUrl:'../../common/img/default_header.png'}" class="cover"/>
                 </div>
                 <div class="col-md-10">
                     <div class="describtion">\${item.name}</div>
@@ -214,7 +214,7 @@
 
                     </label>
                     <div class="col-md-9">
-                        <img class="headimg" src="\${data.imagePhotoUrl}" alt="">
+                        <img class="headimg" src="\${item.imagePhotoUrl?item.imagePhotoUrl:'../../common/img/default_header.png'}" alt="">
                     </div>
                 </div>
                 <div class="form-group ">

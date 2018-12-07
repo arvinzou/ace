@@ -32,6 +32,18 @@ public class CounselorQVo extends Counselor {
      * 咨询师 -- 擅长领域，字符串
      */
     private String consultField;
+    /**
+     * 工作室责任人ID
+     */
+    private String dutyId;
+
+    public String getDutyId() {
+        return dutyId;
+    }
+
+    public void setDutyId(String dutyId) {
+        this.dutyId = dutyId;
+    }
 
     public String[] getConsultFieldArray() {
         return consultFieldArray;

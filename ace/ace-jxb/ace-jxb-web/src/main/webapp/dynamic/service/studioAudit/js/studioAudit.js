@@ -3,13 +3,13 @@ var studioStatus = null;
 var urlData = {
     limit: 10
 };
-window.onload = function (){
+window.onload = function () {
     $('.search_btn').click(searchName);
     initpage();
 }
 
 function searchName() {
-    urlData.name=$('input[name=name]').val();
+    urlData.name = $('input[name=name]').val();
     initpage();
 }
 
@@ -53,8 +53,8 @@ function initpage() {
 }
 
 function getStudioList(num, type) {
-    urlData.page=num;
-    var url = contextPath+ "/studio/findStudioList";
+    urlData.page = num;
+    var url = contextPath + "/studio/findStudioList";
     $.getJSON(url, urlData, function (result) {
         if (result.status == 0) {
             if (type == "init") {
@@ -75,31 +75,31 @@ function viewHtml(IDom, data) {
     $("#" + IDom).html(html);
 }
 
-function audit(){
+function audit() {
     var auditId = $("#auditId").val();
     var auditRs = $("input[name='radio']:checked").val();
-    if(auditRs == '' || auditRs == undefined){
+    if (auditRs == '' || auditRs == undefined) {
         alert("请选择审核状态！");
         return;
     }
-    if(auditRs == studioStatus){
+    if (auditRs == studioStatus) {
         alert("该工作室已经审核，不需要重复审核！");
         return;
     }
     $.ajax({
-        url: contextPath +"/studio/audit",
-        type:"post",
-        async:false,
-        data:{studioId: auditId, auditRs: auditRs},
-        success:function(result){
-            if(result.status == 0) {
+        url: contextPath + "/studio/audit",
+        type: "post",
+        async: false,
+        data: {studioId: auditId, auditRs: auditRs},
+        success: function (result) {
+            if (result.status == 0) {
                 alert("审核成功！");
                 window.location.reload();
-            }else {
+            } else {
                 alert(result.errorMessage);
             }
         },
-        error:function(){
+        error: function () {
             alert("系统服务内部异常！");
         }
     });
@@ -130,7 +130,7 @@ function audit(){
 //         }
 //     });
 // }
-function edit(id){
+function edit(id) {
     if (mySwiper) {
         mySwiper.destroy;
     }
@@ -154,12 +154,13 @@ function edit(id){
 }
 
 
-function members(id){
+function members(id, dutyId) {
     $('#memberList').modal('show');
     if (id) {
         var url = "/jxb/counselor/findCounselorList";
         var data = {
-            studioId: id
+            studioId: id,
+            dutyId: dutyId
         }
         $.getJSON(url, data, function (result) {
             console.log(result);
@@ -172,7 +173,7 @@ function members(id){
     }
 }
 
-function setval(id, status){
+function setval(id, status) {
     $("#auditId").val(id);
     studioStatus = status;
 }
