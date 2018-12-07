@@ -269,7 +269,7 @@
 				<span class="span_01"><%--试听--%></span>
 				<span class="span_02" style="display: none;">共计</span>
 				<span class="span_03" id="totalCost" style="display: none;"></span>
-				<button class="buy" onclick="buy();" style="margin-left: 2.5rem;">立即购买</button>
+				<button class="buy" onclick="buy();" style="margin-left: 2.5rem;" id="buy">立即购买</button>
 			</div>
 			{@/if}
 		</script>

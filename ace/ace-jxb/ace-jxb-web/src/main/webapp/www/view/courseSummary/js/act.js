@@ -101,6 +101,7 @@ function initData(primaryId){
                 }
                 viewHtml('footerBox', result.data, 'footerTemp');
                 initCommentsList();
+                findOrderByCommodityid();
                 stopLoad();
             }else {
                 if(result.info){
@@ -354,6 +355,9 @@ function findOrderByCommodityid(){
         success:function(result){
             if(result.status == 0) {
                 isBuy = result.data;
+                if(isBuy){
+                    $("#buy").text("去听课");
+                }
             }else {
                 alert(result.info);
                 return;
