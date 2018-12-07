@@ -251,7 +251,7 @@
             <div class="info_title">
                 <span class="info_title_01">党员信息</span>
             </div>
-            <div id="group">
+            <div>
                 <table class="form_info" cellpadding="0" cellspacing="0">
                     <tr>
                         <td width="20%" align="center" class="tdbg">姓名</td>
@@ -266,9 +266,9 @@
                             <span ng-if="item.sex=='2'">女</span>
                             <span ng-if="item.sex=='1'">男</span>
                         </td>
-                        <td width="20%" align="center" ></td>
-                        <td width="20%" align="center"></td>
-                        <td width="20%" align="center" ></td>
+                        <td width="20%" align="center" ng-bind="item.birthday"></td>
+                        <td width="20%" align="center" ng-bind="item.mobile"></td>
+                        <td width="20%" align="center" ng-bind="item.inPmDate"></td>
                     </tr>
                 </table>
             </div>
@@ -279,7 +279,7 @@
             <div class="info_title">
                 <span class="info_title_01">党组织建立情况</span>
             </div>
-            <div id="group">
+            <div>
                 <table class="form_info" cellpadding="0" cellspacing="0">
                     <tr>
                         <td width="15%" align="right" class="tdbg">党组织类型</td>
