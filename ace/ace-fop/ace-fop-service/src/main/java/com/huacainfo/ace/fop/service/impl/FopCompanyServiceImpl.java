@@ -368,14 +368,14 @@ public class FopCompanyServiceImpl implements FopCompanyService {
     }
 
     @Override
-    public MessageResponse insertCompany(String fullName, String lpMobile) throws Exception {
+    public MessageResponse insertCompany(String fullName, String isCompany, String lpMobile) throws Exception {
         if (!CommonUtils.isValidMobile(lpMobile)) {
             return new MessageResponse(ResultCode.FAIL, "不是手机号码");
         }
         FopCompanyVo o = new FopCompanyVo();
         o.setFullName(fullName);
         o.setLpMobile(lpMobile);
-        o.setCompanyType(FopConstant.COMPANY);
+        o.setCompanyType(isCompany);
         UserProp userProp = new UserProp();
         o.setLpSex("1");
         userProp.setActiveSyId("fop");
@@ -411,7 +411,7 @@ public class FopCompanyServiceImpl implements FopCompanyService {
 
         Department department = (Department) rs1.getData();
         o.setDepartmentId(department.getDepartmentId());
-//        o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
+        //o.setCompanyType(CommonUtils.isBlank(o.getCompanyType()) ? "0" : o.getCompanyType());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setStatus("1");
@@ -956,12 +956,12 @@ public class FopCompanyServiceImpl implements FopCompanyService {
             }
         }
         if (!CommonUtils.isBlank(o.getPartyPhone())) {
-            if (!ValidateUtils.Tel(o.getPartyPhone()) || !ValidateUtils.Mobile(o.getPartyPhone())) {
+            if (!ValidateUtils.Mobile(o.getPartyPhone())) {
                 return new MessageResponse(ResultCode.FAIL, "联系电话格式不对");
             }
         }
         if (!CommonUtils.isBlank(o.getUnionPhone())) {
-            if (!ValidateUtils.Tel(o.getUnionPhone()) || !ValidateUtils.Mobile(o.getUnionPhone())) {
+            if (!ValidateUtils.Mobile(o.getUnionPhone())) {
                 return new MessageResponse(ResultCode.FAIL, "联系电话格式不对");
             }
         }
