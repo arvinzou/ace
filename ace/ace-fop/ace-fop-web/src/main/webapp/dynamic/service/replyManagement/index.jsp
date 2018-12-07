@@ -45,7 +45,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
 
         <table id="grid-table">
@@ -57,6 +56,135 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" role="dialog" id="modal-detail">
+    <div class="modal-dialog" role="document" style="width: 50%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详情</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-horizontal"  id="fm-detail" role="form">
+                    <div class="form-body">
+                          <h5 class="header-title">发起人ID</h5>
+                          <div class="row" style="padding:10px" id="question">
+                          </div>
+                          <h5 class="header-title">标题</h5>
+                          <div class="row" style="padding:10px" id="answer">
+                          </div>
+                          <h5 class="header-title">内容</h5>
+                          <div class="row" style="padding:10px" id="content">
+                          </div>
+                          <h5 class="header-title">来源ID</h5>
+                          <div class="row" style="padding:10px" id="sourceId">
+                          </div>
+                          <h5 class="header-title">来源类型</h5>
+                          <div class="row" style="padding:10px" id="sourceType">
+                          </div>
+                          <h5 class="header-title">子类型</h5>
+                          <div class="row" style="padding:10px" id="subType">
+                          </div>
+                          <h5 class="header-title">父节点ID</h5>
+                          <div class="row" style="padding:10px" id="parentId">
+                          </div>
+                          <h5 class="header-title">发布时间</h5>
+                          <div class="row" style="padding:10px" id="releaseDate">
+                          </div>
+                          <h5 class="header-title">回复内容</h5>
+                          <div class="row" style="padding:10px" id="reply">
+                          </div>
+                          <h5 class="header-title">回复人</h5>
+                          <div class="row" style="padding:10px" id="displayName">
+                          </div>
+                          <h5 class="header-title">基本信息</h5>
+                          <div class="row" style="padding:10px">
+                              <div class="labelItem"><span class="labelItemHeader">
+                      所含关键字</span>
+                                  <br>
+                                  <span id="keyWord">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      累计提问次数</span>
+                                  <br>
+                                  <span id="accCount">
+                      </span>
+                              </div>
+                                   <br>
+                              <div class="labelItem">
+                                  <span class="labelItemHeader">备注</span>
+                                  <br>
+                                  <span id="remark"></span>
+                              </div>
+                                  <br>
+                              <div class="labelItem hide">
+                                  <span class="labelItemHeader">状态</span>
+                                  <br>
+                                  <span id="status"></span>
+                              </div>
+                                  <br>
+                          </div>
+                          <h5 class="header-title">操作信息</h5>
+                          <div class="row" style="padding:10px">
+                              <div class="labelItem"><span class="labelItemHeader">
+                      创建人编号</span>
+                                  <br>
+                                  <span id="createUserId">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      创建人姓名</span>
+                                  <br>
+                                  <span id="createUserName">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      入库日期</span>
+                                  <br>
+                                  <span id="createDate">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      最后更新人编号</span>
+                                  <br>
+                                  <span id="lastModifyUserId">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      最后更新人姓名</span>
+                                  <br>
+                                  <span id="lastModifyUserName">
+                      </span>
+                              </div>
+                                  <br>
+                              <div class="labelItem"><span class="labelItemHeader">
+                      最后更新时间</span>
+                                  <br>
+                                  <span id="lastModifyDate">
+                      </span>
+                              </div>
+                                  <br>
+                          </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script id="tpl-detail" type="text/template">
     <div class="form-body">
@@ -186,150 +314,6 @@
 </script>
 
 
-
-<div class="modal fade" role="dialog" id="modal-detail">
-    <div class="modal-dialog" role="document" style="width: 50%">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">详情</h4>
-            </div>
-
-            <div class="modal-body">
-
-                <form class="form-horizontal"  id="fm-detail" role="form">
-                    <div class="form-body">
-                          <h5 class="header-title">发起人ID</h5>
-                          <div class="row" style="padding:10px" id="question">
-                          </div>
-                          <h5 class="header-title">标题</h5>
-                          <div class="row" style="padding:10px" id="answer">
-                          </div>
-                          <h5 class="header-title">内容</h5>
-                          <div class="row" style="padding:10px" id="content">
-                          </div>
-                          <h5 class="header-title">来源ID</h5>
-                          <div class="row" style="padding:10px" id="sourceId">
-                          </div>
-                          <h5 class="header-title">来源类型</h5>
-                          <div class="row" style="padding:10px" id="sourceType">
-                          </div>
-                          <h5 class="header-title">子类型</h5>
-                          <div class="row" style="padding:10px" id="subType">
-                          </div>
-                          <h5 class="header-title">父节点ID</h5>
-                          <div class="row" style="padding:10px" id="parentId">
-                          </div>
-                          <h5 class="header-title">发布时间</h5>
-                          <div class="row" style="padding:10px" id="releaseDate">
-                          </div>
-                          <h5 class="header-title">回复内容</h5>
-                          <div class="row" style="padding:10px" id="reply">
-                          </div>
-                          <h5 class="header-title">回复人</h5>
-                          <div class="row" style="padding:10px" id="displayName">
-                          </div>
-                          <h5 class="header-title">基本信息</h5>
-                          <div class="row" style="padding:10px">
-                              <div class="labelItem"><span class="labelItemHeader">
-                      所含关键字</span>
-                                  <br>
-                                  <span id="keyWord">
-                      </span>
-                              </div>
-                                  <br>
-                              <div class="labelItem"><span class="labelItemHeader">
-                      累计提问次数</span>
-                                  <br>
-                                  <span id="accCount">
-                      </span>
-                              </div>
-                                   <br>
-                              <div class="labelItem">
-                                  <span class="labelItemHeader">备注</span>
-                                  <br>
-                                  <span id="remark"></span>
-                              </div>
-                                  <br>
-                              <div class="labelItem hide">
-                                  <span class="labelItemHeader">状态</span>
-                                  <br>
-                                  <span id="status"></span>
-                              </div>
-                                  <br>
-                          </div>
-                          <h5 class="header-title">操作信息</h5>
-                          <div class="row" style="padding:10px">
-                              <div class="labelItem"><span class="labelItemHeader">
-                      创建人编号</span>
-                                  <br>
-                                  <span id="createUserId">
-                      </span>
-                              </div>
-                                  <br>
-                              <div class="labelItem"><span class="labelItemHeader">
-                      创建人姓名</span>
-                                  <br>
-                                  <span id="createUserName">
-                      </span>
-                              </div>
-                                  <br>
-                              <div class="labelItem"><span class="labelItemHeader">
-                      入库日期</span>
-                                  <br>
-                                  <span id="createDate">
-                      </span>
-                              </div>
-                                  <br>
-                              <div class="labelItem"><span class="labelItemHeader">
-                      最后更新人编号</span>
-                                  <br>
-                                  <span id="lastModifyUserId">
-                      </span>
-                              </div>
-                                  <br>
-                              <div class="labelItem"><span class="labelItemHeader">
-                      最后更新人姓名</span>
-                                  <br>
-                                  <span id="lastModifyUserName">
-                      </span>
-                              </div>
-                                  <br>
-                              <div class="labelItem"><span class="labelItemHeader">
-                      最后更新时间</span>
-                                  <br>
-                                  <span id="lastModifyDate">
-                      </span>
-                              </div>
-                                  <br>
-                          </div>
-                    </div>
-                </form>
-            </div>
-
-<div class="modal fade" role="dialog" id="modal-upload">
-    <div class="modal-dialog" role="document" style="width: 830px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">图片上传</h4>
-            </div>
-            <div class="modal-body">
-                <div id="uploader">
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" role="dialog" id="modal-audit">
     <div class="modal-dialog" role="document" style="width: 50%">
         <div class="modal-content">
@@ -375,6 +359,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
