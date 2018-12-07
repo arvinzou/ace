@@ -78,7 +78,7 @@
             </div>
         </td>
         <td> \${item.dutyName}</td>
-        <td> \${item.subNum}</td>
+        <td> \${item.subNum+1}</td>
         <td>
             {@if item.status==0}
             <span class="label label-lg label-info"> 待审核 </span>
