@@ -17,7 +17,6 @@
     <meta content="${cfg.sys_name}" name="description"/>
 
     <jsp:include page="../../common/header.jsp"/>
-    <script src="s/act.js?v=${cfg.version}"></script>
 </head>
 
 <body>
