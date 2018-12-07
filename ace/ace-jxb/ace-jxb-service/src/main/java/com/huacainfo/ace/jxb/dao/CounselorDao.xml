@@ -404,7 +404,10 @@
         left join consult c on t.id = c.id
         where 1=1
         <if test="condition.studioId !=null and condition.studioId !=&quot;&quot;">
-            and t.studioId = #{condition.studioId,jdbcType=VARCHAR}
+            and (
+            t.studioId = #{condition.studioId,jdbcType=VARCHAR}
+            or t.id = #{condition.dutyId,jdbcType=VARCHAR}
+            )
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')

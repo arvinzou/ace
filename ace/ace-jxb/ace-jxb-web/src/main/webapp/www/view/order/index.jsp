@@ -48,7 +48,7 @@
 						<span class="form_title">年龄</span>
 					</div>
 					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
-						<input class="form_input" name="age" type="text" placeholder="请输入您孩子的年龄" onblur="this.placeholder='请输入您孩子的年龄'" onfocus="this.placeholder=''" />
+						<input class="form_input" name="age" type="number" placeholder="请输入您孩子的年龄" onblur="this.placeholder='请输入您孩子的年龄'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 				<div class="row form">
