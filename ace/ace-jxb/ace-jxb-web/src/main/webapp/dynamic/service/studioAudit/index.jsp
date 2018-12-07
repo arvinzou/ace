@@ -37,7 +37,7 @@
                            class="form-control"
                            placeholder="请输入工作室名称">
                     <span class="input-group-btn">
-                        <button class="btn  btn-default search_btn" type="submit"> 搜索 </button>
+                        <button class="btn  btn-default search_btn" type="submit" onclick="searchName();"> 搜索 </button>
                     </span>
                 </div>
 

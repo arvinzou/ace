@@ -129,8 +129,6 @@ public class StudioServiceImpl implements StudioService {
         } else if (temp.size() > 1) {
             return new MessageResponse(1, "工作室名字重复！");
         }
-
-
         this.dataBaseLogService.log("添加工作室", "工作室", "",
                 o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "添加工作室完成！");
@@ -190,6 +188,10 @@ public class StudioServiceImpl implements StudioService {
         if (CommonUtils.isBlank(o.getIntroduce())) {
             return new MessageResponse(1, "介绍不能为空！");
         }
+        List<Studio> temp = this.studioDao.isExit(o);
+        if(temp.size()>0){
+            return new MessageResponse(1, "工作室名字重复！");
+        }
         String studioId = GUIDUtil.getGUID();
         o.setId(studioId);
         o.setCounselorId(userProp.getUserId());
@@ -204,8 +206,8 @@ public class StudioServiceImpl implements StudioService {
             si.setImgUrl(item);
             this.studioImgDao.insert(si);
         }
-//        this.dataBaseLogService.log("添加工作室", "工作室", "",
-//                o.getId(), o.getId(), userProp);
+        this.dataBaseLogService.log("添加工作室", "工作室", "",
+                o.getId(), o.getId(), userProp);
         return new MessageResponse(0, "添加工作室完成！");
     }
 

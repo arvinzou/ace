@@ -313,57 +313,6 @@
     </select>
 
 
-    <select id="profitFindList" parameterType="java.lang.String" resultMap="VoResultMap">
-        select
-        <include refid="Vo_Column_List"/>
-        FROM jxb.base_order b
-        LEFT JOIN jxb.order_calculation oc ON oc.orderId=b.id
-        LEFT JOIN jxb.counselor c ON c.id=oc.counselorId
-        LEFT join jxb.studio s ON c.studioId=s.id
-        where 1=1
-        <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
-            and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.id !=null and condition.id !=&quot;&quot;">
-            and t.id = #{condition.id,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.commodityId !=null and condition.commodityId !=&quot;&quot;">
-            and t.commodityId = #{condition.commodityId,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.consumerId !=null and condition.consumerId !=&quot;&quot;">
-            and t.consumerId = #{condition.consumerId,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
-            and s.counselorId = #{condition.businessId,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
-            and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.category !=null and condition.category !=&quot;&quot;">
-            and t.category = #{condition.category,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.year !=null and condition.year !=&quot;&quot;">
-            AND MONTH(t.createDate) =#{condition.month,jdbcType=VARCHAR}
-            AND YEAR(t.createDate) =#{condition.year,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.statusArray !=null">
-            and t.payStatus in
-            <foreach collection="condition.statusArray" item="item" separator="," open="(" close=")">
-                ${item}
-            </foreach>
-        </if>
-        <choose>
-            <when test="orderBy!=null and orderBy!=&quot;&quot;">
-                ORDER BY ${orderBy}
-            </when>
-            <otherwise>
-                ORDER BY t.createDate desc
-            </otherwise>
-        </choose>
-        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
-    </select>
-
-
     <sql id="whereCondition">
         from base_order t
         left join jxb.counselor c on t.businessId = c.id
@@ -438,6 +387,57 @@
         <if test="condition.category !=null and condition.category !=&quot;&quot;">
             and category = #{condition.category,jdbcType=VARCHAR}
         </if>
+    </select>
+
+
+    <select id="profitFindList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        FROM jxb.base_order b
+        LEFT JOIN jxb.order_calculation oc ON oc.orderId=b.id
+        LEFT JOIN jxb.counselor c ON c.id=oc.counselorId
+        LEFT join jxb.studio s ON c.studioId=s.id
+        where 1=1
+        <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
+            and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            and t.id = #{condition.id,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.commodityId !=null and condition.commodityId !=&quot;&quot;">
+            and t.commodityId = #{condition.commodityId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.consumerId !=null and condition.consumerId !=&quot;&quot;">
+            and t.consumerId = #{condition.consumerId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
+            and s.counselorId = #{condition.businessId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
+            and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and t.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.year !=null and condition.year !=&quot;&quot;">
+            AND MONTH(t.createDate) =#{condition.month,jdbcType=VARCHAR}
+            AND YEAR(t.createDate) =#{condition.year,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.statusArray !=null">
+            and t.payStatus in
+            <foreach collection="condition.statusArray" item="item" separator="," open="(" close=")">
+                ${item}
+            </foreach>
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
 </mapper>
