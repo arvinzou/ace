@@ -127,7 +127,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row" style="margin: 0px">
-                            <img class="cover" src="\${item.consumerImgUrl}">
+                            <img class="cover" src="\${item.consumerImgUrl?item.consumerImgUrl:'../../common/img/default_header.png'}">
                         </div>
                         <div class="row" style="margin: 6px 0px 0px;">
                             \${item.consumerName}
