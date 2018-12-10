@@ -56,6 +56,7 @@ function initEvents(){
      /*监听表单提交*/
     $('#fm-edit').ajaxForm({
         beforeSubmit: function (formData, jqForm, options) {
+            console.log(formData);
             var params = {};
             var objects=[];
             var field=[];
@@ -77,6 +78,7 @@ function initEvents(){
             $.extend(params, {
                 field: field.join(',')
             });
+            params.status=params.status?'1':'0';
             console.log(params);
             save(params);
             return false;
