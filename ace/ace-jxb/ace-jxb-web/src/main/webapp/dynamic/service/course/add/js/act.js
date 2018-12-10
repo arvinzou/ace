@@ -57,7 +57,6 @@ function save(params) {
         category: '0',
         mediType: '1',
         cover: $("#courseCover").attr('src'),
-        demandNum: 0,
         likeNum: 0
     });
     startLoad();

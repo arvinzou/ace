@@ -190,6 +190,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-md-2 control-label">推荐人数</label>
+            <div class="col-md-6">
+                <input type="number" class="form-control" value="\${data.o.demandNum}"  name="demandNum" placeholder="为使课程更具吸引力，请输入推荐人数">
+            </div>
+            <div class="col-md-4">
+
+            </div>
+        </div>
+
 
     </div>
     <div class="form-actions">
