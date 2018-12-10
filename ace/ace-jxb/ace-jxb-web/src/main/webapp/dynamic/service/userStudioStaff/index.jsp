@@ -39,7 +39,7 @@
                                                                             <th>姓名</th>
                                                                             <th> 职业名称</th>
                                                                             <th> 加入时间</th>
-                                                                            
+                                                                            <th>状态</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="studioCounselorList">
@@ -95,7 +95,17 @@
             </td>
             <td>\${item.certification}</td>
             <td>\${item.createDate}</td>
-            
+            <td>
+                {@if item.regAuditRst==0}
+                <span class="label label-lg label-info">待审核</span>
+                {@else if item.regAuditRst==1}
+                <span class="label label-lg label-success">审核通过</span>
+                <div style="padding-top:10px">\${item.auditRemark}</div>
+                {@else}
+                <span class="label label-lg label-danger">审核不通过</span>
+                <div style="padding-top:10px">\${item.auditRemark}</div>
+                {@/if}
+            </td>
         </tr>
         {@/each}
     </script>
