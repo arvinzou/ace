@@ -446,13 +446,14 @@
     </select>
 
     <select id="statisticalMember" resultType="int">
-        select count(1)
-        from counselor
-        where studioId
-        in(
-        select id
-        from studio
-        where counselorId = #{counselorId,jdbcType=VARCHAR}
+        SELECT
+        count(1)
+        FROM counselor t,teacher_audit a
+        WHERE t.id=a.counselorId
+        and a.rst='1'
+        and studioId IN (
+        SELECT id FROM studio
+        WHERE counselorId = #{counselorId,jdbcType=VARCHAR}
         )
     </select>
 
