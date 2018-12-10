@@ -368,6 +368,7 @@
     <sql id="whereCondition">
         from base_order t
         left join jxb.counselor c on t.businessId = c.id
+        LEFT JOIN jxb.order_calculation oc ON oc.orderId=t.id
         left join jxb.consult_product cp on cp.id = t.commodityId
         left join jxb.consult_order co on co.id = t.id
         left join jxb.course cr on cr.id = t.commodityId
@@ -393,6 +394,13 @@
         </if>
         <if test="condition.category !=null and condition.category !=&quot;&quot;">
             and t.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.year !=null and condition.year !=&quot;&quot;">
+            AND MONTH(t.createDate) =#{condition.month,jdbcType=VARCHAR}
+            AND YEAR(t.createDate) =#{condition.year,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.cpuTag !=null and condition.cpuTag !=&quot;&quot;">
+            and oc.cpuTag = #{condition.cpuTag,jdbcType=VARCHAR}
         </if>
         <if test="condition.statusArray !=null">
             and t.payStatus in
@@ -438,47 +446,65 @@
     </select>
 
 
-    <select id="profitFindList" parameterType="java.lang.String" resultMap="VoResultMap">
+    <resultMap id="Vo_ResultMap" extends="BaseResultMap" type="com.huacainfo.ace.jxb.vo.BaseOrderVo">
+            <result column="consumerName" jdbcType="VARCHAR" property="consumerName"/>
+            <result column="consumerImgUrl" jdbcType="VARCHAR" property="consumerImgUrl"/>
+            <association property="counselor" column="businessId" javaType="com.huacainfo.ace.jxb.model.Counselor">
+                <id property="id" column="businessId"/>
+                <result property="name" column="tName"/>
+                <result property="certification" column="certification"/>
+                <result property="imagePhotoUrl" column="imagePhotoUrl"/>
+                <result property="level" column="tLevel"/>
+            </association>
+            <association property="consultProduct" column="commodityId"
+                         javaType="com.huacainfo.ace.jxb.model.ConsultProduct">
+                <id property="id" column="commodityId"/>
+                <result property="type" column="cpType"/>
+            </association>
+            <association property="orderCalculation" column="ocId" javaType="com.huacainfo.ace.jxb.model.OrderCalculation">
+                <id column="ocId"  property="id"/>
+                <result column="ocOrderId"  property="orderId"/>
+                <result column="ocCounselorId"  property="counselorId"/>
+                <result column="ocRatio"  property="ratio"/>
+                <result column="ocAmount"  property="amount"/>
+                <result column="ocPlatformAmount"  property="platformAmount"/>
+                <result column="ocStudioRatio" property="studioRatio"/>
+                <result column="ocStudioAmount"  property="studioAmount"/>
+                <result column="ocCpuTag"  property="cpuTag"/>
+                <result column="ocGrantTag"  property="grantTag"/>
+                <result column="ocRemark"  property="remark"/>
+                <result column="ocStatus"  property="status"/>
+            </association>
+    </resultMap>
+
+
+    <select id="profitFindList" parameterType="java.lang.String" resultMap="Vo_ResultMap">
         select
-        <include refid="Vo_Column_List"/>
-        FROM jxb.base_order t
-        LEFT JOIN jxb.order_calculation oc ON oc.orderId=t.id
-        left join jxb.counselor c on t.businessId = c.id
-        left join jxb.consult_product cp on cp.id = t.commodityId
-        left join jxb.consult_order co on co.id = t.id
-        left join jxb.course cr on cr.id = t.commodityId
-        left join portal.userinfo ui on t.consumerId = ui.unionid
+        c.name as tName,c.certification ,c.imagePhotoUrl,c.level as tLevel,
+
+        t.id, t.consumerId, t.commodityId, t.category, t.businessId, t.commodityName, t.businessName, t.amount,
+        t.price, t.payMoney, t.payStatus, t.payTime, t.createDate,
+        cp.type as cpType,
+
+        oc.id as ocId, oc.orderId, oc.counselorId as ocCounselorId, oc.ratio as ocRatio,
+        oc.amount as ocAmount, oc.platformAmount as ocPlatformAmount,
+        oc.studioRatio as ocStudioRatio, oc.studioAmount as ocStudioAmount,
+        oc.cpuTag as ocCpuTag, oc.grantTag as ocGrantTag,
+        oc.remark as ocRemark, oc.status as ocStatus
+        FROM jxb.order_calculation oc
+        LEFT JOIN jxb.base_order t ON oc.orderId=t.id
+        LEFT JOIN jxb.counselor c ON c.id=oc.counselorId
+        LEFT JOIN jxb.consult_product cp on cp.id = t.commodityId
         where 1=1
-        <if test="condition.payStatus !=null and condition.payStatus !=&quot;&quot;">
-            and t.payStatus = #{condition.payStatus,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.id !=null and condition.id !=&quot;&quot;">
-            and t.id = #{condition.id,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.commodityId !=null and condition.commodityId !=&quot;&quot;">
-            and t.commodityId = #{condition.commodityId,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.consumerId !=null and condition.consumerId !=&quot;&quot;">
-            and t.consumerId = #{condition.consumerId,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.commodityName !=null and condition.commodityName !=&quot;&quot;">
-            and t.commodityName like concat('%',#{condition.commodityName,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="condition.category !=null and condition.category !=&quot;&quot;">
-            and t.category = #{condition.category,jdbcType=VARCHAR}
-        </if>
         <if test="condition.cpuTag !=null and condition.cpuTag !=&quot;&quot;">
             and oc.cpuTag = #{condition.cpuTag,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and c.studioId IN (SELECT s.id FROM jxb.studio s WHERE s.counselorId= #{condition.businessId,jdbcType=VARCHAR})
         </if>
         <if test="condition.year !=null and condition.year !=&quot;&quot;">
             AND MONTH(t.createDate) =#{condition.month,jdbcType=VARCHAR}
             AND YEAR(t.createDate) =#{condition.year,jdbcType=VARCHAR}
-        </if>
-        <if test="condition.statusArray !=null">
-            and t.payStatus in
-            <foreach collection="condition.statusArray" item="item" separator="," open="(" close=")">
-                ${item}
-            </foreach>
         </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">

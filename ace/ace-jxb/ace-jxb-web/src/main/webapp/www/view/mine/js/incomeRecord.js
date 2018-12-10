@@ -25,9 +25,10 @@ function getOrderList(date) {
     }
     var data = {
         findType: '2',
-        year: year,
-        month: momth,
-        category:category,
+        cpuTag:'1',
+        // year: year,
+        // month: momth,
+        category:category==3?'':category,
         statusArray:'2,6,7',
     };
     $.getJSON(url, data, function (rst) {

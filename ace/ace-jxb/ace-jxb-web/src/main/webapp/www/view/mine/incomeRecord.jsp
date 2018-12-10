@@ -65,7 +65,7 @@
     <div class="list">
         <div class="top">
             <span class="name">\${item.commodityName}</span>
-            <span class="money_style">+<span>\${item.price}</span></span>
+            <span class="money_style">+<span>\${item.orderCalculation.amount}</span></span>
         </div>
         <div class="info">
             <span class="time">\${item.createDate} </span>

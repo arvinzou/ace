@@ -117,7 +117,6 @@ public class WOrderController extends JxbBaseController {
     /**
      * 查询订单
      *
-     * @param findType  查询类型 1-“我”的订单，2-属于“我”的订单
      * @param condition 查询条件
      * @param page      分页查询条件
      * @return
@@ -131,7 +130,6 @@ public class WOrderController extends JxbBaseController {
             return new ResultResponse(ResultCode.FAIL, "缺少商家主键");
         }
         condition.setBusinessId(userinfo.getUnionid());
-
         PageResult<BaseOrderVo> pageResult = baseOrderService.
                 profitFindList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
 
