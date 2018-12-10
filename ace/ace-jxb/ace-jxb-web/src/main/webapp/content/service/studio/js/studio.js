@@ -81,7 +81,7 @@ function createMyStudio() {
             getMyStudioList();
             return;
         }
-        alert("信息更新失败,请稍后再试！");
+        alert(result.errMsg);
 
     })
 }
