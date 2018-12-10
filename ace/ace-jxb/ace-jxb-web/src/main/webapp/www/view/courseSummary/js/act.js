@@ -38,12 +38,25 @@ function App() {
 }
 
 window.onload = function(){
-    var url =   window.location.search.substring(1);
-    primaryId = url.substring(url.indexOf('=')+1);
-    juicer.register('getObjectName', getObjectName);
-    juicer.register('getPurportName', getPurportName);
-    initData(primaryId);
-    $('.myComment').click(commentModal);
+    console.log(window.location.href);
+    var url =   window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length+1);
+    var paramArr = url.split("&");
+    for(var i=0;i < paramArr.length;i++){
+        num=paramArr[i].indexOf("=");
+        if(num>0){
+            name=paramArr[i].substring(0,num);
+            value=paramArr[i].substr(num+1);
+            if(name == "id"){
+                primaryId = value;
+            }
+        }
+    }
+    if(primaryId!=null){
+        juicer.register('getObjectName', getObjectName);
+        juicer.register('getPurportName', getPurportName);
+        initData(primaryId);
+        $('.myComment').click(commentModal);
+    }
 }
 
 
