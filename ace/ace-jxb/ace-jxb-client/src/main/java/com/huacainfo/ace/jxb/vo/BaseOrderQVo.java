@@ -18,6 +18,17 @@ public class BaseOrderQVo extends BaseOrder{
 
     private String year;
 
+    private String cpuTag;
+
+
+    public String getCpuTag() {
+        return cpuTag;
+    }
+
+    public void setCpuTag(String cpuTag) {
+        this.cpuTag = cpuTag;
+    }
+
     public String getMonth() {
         return month;
     }

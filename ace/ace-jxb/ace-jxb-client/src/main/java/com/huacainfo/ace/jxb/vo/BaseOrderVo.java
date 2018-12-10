@@ -18,6 +18,8 @@ public class BaseOrderVo extends BaseOrder {
     private ConsultOrder consultOrder;
     private ConsultProduct consultProduct;
 
+    private OrderCalculation orderCalculation;
+
 
     /**
      * 课程订单相关内容
@@ -27,6 +29,16 @@ public class BaseOrderVo extends BaseOrder {
      * 咨询订单提醒标记：发送成功标记 0-发送失败 1-发送成功
      */
     private String remindTag;
+
+
+    public OrderCalculation getOrderCalculation() {
+        return orderCalculation;
+    }
+
+    public void setOrderCalculation(OrderCalculation orderCalculation) {
+        this.orderCalculation = orderCalculation;
+    }
+
 
     public String getRemindTag() {
         return remindTag;

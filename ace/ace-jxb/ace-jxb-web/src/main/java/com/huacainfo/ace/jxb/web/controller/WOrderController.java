@@ -124,12 +124,7 @@ public class WOrderController extends JxbBaseController {
      * @throws Exception
      */
     @RequestMapping("/profitFindList")
-    public ResultResponse profitFindList(String findType, BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
-        if (StringUtil.isEmpty(findType)) {
-            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
-        }
-        String consumerId = condition.getConsumerId();
-        String bisId = condition.getBusinessId();
+    public ResultResponse profitFindList(BaseOrderQVo condition, PageParamNoChangeSord page) throws Exception {
         //属于“我”的订单
         Userinfo userinfo = getCurUserinfo();
         if (null == userinfo || StringUtil.isEmpty(userinfo.getUnionid())) {
