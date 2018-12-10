@@ -47,5 +47,7 @@ function viewHtml(IDom, data, tempId) {
 }
 
 function showOrderDetail(orderId){
-    window.location.href = contextPath + '/www/view/courseOrderDetail/index.jsp?orderId='+orderId;
+    if (orderId) {
+        window.location.href = '../order/testing1.html?id=' + orderId;
+    }
 }

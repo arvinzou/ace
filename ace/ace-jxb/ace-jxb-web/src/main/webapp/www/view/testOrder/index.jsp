@@ -34,7 +34,7 @@
 
 	<script id="orderListTemp" type="text/template">
 		{@each data as item, index}
-        <div class="row itemlist" onclick="showOrderDetail('\${item.id}');">
+        <div class="row itemlist" onclick="showOrderDetail('\${item.commodityId}');">
             <div class="row item">
             <div class="col-xs-12 col-md-12">
             <div class="row">
