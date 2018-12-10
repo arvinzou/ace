@@ -499,7 +499,7 @@
         <if test="condition.cpuTag !=null and condition.cpuTag !=&quot;&quot;">
             and oc.cpuTag = #{condition.cpuTag,jdbcType=VARCHAR}
         </if>
-        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+        <if test="condition.businessId !=null and condition.businessId !=&quot;&quot;">
             and c.studioId IN (SELECT s.id FROM jxb.studio s WHERE s.counselorId= #{condition.businessId,jdbcType=VARCHAR})
         </if>
         <if test="condition.year !=null and condition.year !=&quot;&quot;">
