@@ -1,7 +1,6 @@
 window.onload = function () {
     var url =   window.location.href.substring(1);
     category = getParam('id');
-    console.log(category);
     new Mdate("dateSelectorOne");
     var date = new Date();
     $('#dateSelectorOne').val(date.getFullYear() + "年" + (date.getMonth() + 1) + '月').attr('data-year', date.getFullYear()).attr("data-month", date.getMonth() + 1);
@@ -18,7 +17,6 @@ function getList() {
 function getOrderList(date) {
     var year = date.substring(0, 4);
     var momth = date.substring(date.indexOf('年') + 1, date.indexOf('月'));
-    console.log(year + momth);
     var url = contextPath + "/www/order/findList";
     if(category==3){
         var url = contextPath + "/www/order/profitFindList";
@@ -32,7 +30,11 @@ function getOrderList(date) {
         statusArray:'2,6,7',
     };
     $.getJSON(url, data, function (rst) {
-        var mylist = document.getElementById('tmp-list').innerHTML;
+        if(category==3){
+            var mylist = document.getElementById('tmp-list_3').innerHTML;
+        }else{
+            var mylist = document.getElementById('tmp-list').innerHTML;
+        }
         var html = juicer(mylist, {
             data: rst.data.rows
         });

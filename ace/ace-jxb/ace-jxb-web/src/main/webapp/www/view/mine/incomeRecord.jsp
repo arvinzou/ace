@@ -75,5 +75,20 @@
     {@/each}
 </script>
 
+<script id="tmp-list_3" type="text/template">
+    {@each data as item}
+    <div class="list">
+        <div class="top">
+            <span class="name">\${item.commodityName}</span>
+            <span class="money_style">+<span>\${item.orderCalculation.studioAmount}</span></span>
+        </div>
+        <div class="info">
+            <span class="time">\${item.createDate} </span>
+            <span class="stutas">\${item.consumerName}</span>
+        </div>
+    </div>
+    {@/each}
+</script>
+
 
 </html>
