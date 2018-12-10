@@ -405,14 +405,6 @@ public class StudioServiceImpl implements StudioService {
         condition.setDutyId(studioVo.getCounselorId());//负责人也算作工作室成员
         condition.setRegAuditRst("1");//审核通过的才算
         List<CounselorVo> memberList = counselorService.findCounselorList(condition, 0, 0 + 1000, "").getRows();
-        //负责人本人
-        CounselorVo main = counselorService.selectCounselorByPrimaryKey(studioVo.getCounselorId()).getValue();
-        if (main != null) {
-            main.setStudioCreator("1");
-            memberList.add(main);
-        }
-
-
         studioVo.setMemberList(memberList);
 
         return studioVo;

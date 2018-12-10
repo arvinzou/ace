@@ -302,7 +302,7 @@ public class CounselorServiceImpl implements CounselorService {
 //        rtnMap.put("liveCount", 0);
 //        rtnMap.put("teacherCount", 0);
         int parentCount = counselorDao.statisticalMember(counselorId);
-        rtnMap.put("parentCount", parentCount);
+        rtnMap.put("parentCount", parentCount);//发展咨询师(下线)数量，不包含自身
         return rtnMap;
     }
 

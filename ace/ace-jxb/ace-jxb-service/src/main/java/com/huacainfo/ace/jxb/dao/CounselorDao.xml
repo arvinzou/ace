@@ -447,7 +447,7 @@
 
     <select id="statisticalMember" resultType="int">
         SELECT
-        count(1) +1
+        count(1)
         FROM counselor t,teacher_audit a
         WHERE t.id=a.counselorId
         and a.rst='1'
