@@ -377,15 +377,16 @@ function onBridgeReady(obj, orderId){
                     });*/
 
                 } else {
-                    WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+                    /*WeixinJSBridge.invoke('closeWindow', {}, function (res) {
                         if (res.err_msg =="get_brand_wcpay_request:ok")
                         {
                             //  alert("支付成功err_code=" + res.err_code + ",err_desc=" + res.err_desc + ",err_msg=" + res.err_msg);
-                             WeixinJSBridge.invoke('closeWindow', {}, function (res) {
-                            });
+                             //WeixinJSBridge.invoke('closeWindow', {}, function (res) {
+                            //});
 
                          }
-                    });
+                    });*/
+                    alert("支付失败！");
                 }
             }
         });
