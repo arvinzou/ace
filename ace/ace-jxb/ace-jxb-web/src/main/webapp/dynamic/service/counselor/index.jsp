@@ -214,7 +214,7 @@
 
                     </label>
                     <div class="col-md-9">
-                        <img class="headimg" src="\${item.imagePhotoUrl?item.imagePhotoUrl:'../../common/img/default_header.png'}" alt="">
+                        <img class="headimg" src="\${data.imagePhotoUrl?data.imagePhotoUrl:'../../common/img/default_header.png'}">
                     </div>
                 </div>
                 <div class="form-group ">
