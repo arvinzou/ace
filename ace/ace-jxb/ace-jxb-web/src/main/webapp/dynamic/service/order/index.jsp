@@ -145,7 +145,7 @@
             {@else if orderCategory == 3}
             <td>\${item.commodityName}</td>
             {@/if}
-            <td>￥\${item.payMoney}</td>
+            <td>￥\${formatMoney(item.payMoney)}</td>
             <td>\${item.createDate}</td>
             <td>\${item.id}</td>
             <td>
