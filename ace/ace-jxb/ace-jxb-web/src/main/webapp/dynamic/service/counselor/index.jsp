@@ -158,7 +158,7 @@
             <div class="form-body" style="padding: 30px;">
                 <div class="form-group">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>
+
                         姓名
                     </label>
                     <div class="col-md-9">
@@ -169,7 +169,7 @@
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>
+
                         性别
                     </label>
                     <div class="col-md-9">
@@ -180,7 +180,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>所在城市
+                         所在城市
                     </label>
                     <div class="col-md-9">
                         <label class="control-label">\${data.cityCode}</label>
@@ -189,7 +189,7 @@
 
                 <div class="form-group">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>个人简介
+                         个人简介
                     </label>
                     <div class="col-md-9">
                         \$\${data.profile}
@@ -199,7 +199,7 @@
 
                 <div class="form-group ">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>手机号码
+                         手机号码
 
                     </label>
                     <div class="col-md-9">
@@ -210,16 +210,16 @@
 
                 <div class="form-group ">
                     <label class="control-label col-md-2">
-                        <span class="required" aria-required="true">*</span>形象照
+                         形象照
 
                     </label>
                     <div class="col-md-9">
-                        <img class="headimg" src="\${item.imagePhotoUrl?item.imagePhotoUrl:'../../common/img/default_header.png'}" alt="">
+                        <img class="headimg" src="\${data.imagePhotoUrl?data.imagePhotoUrl:'../../common/img/default_header.png'}">
                     </div>
                 </div>
                 <div class="form-group ">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>身份证号码
+                         身份证号码
 
                     </label>
                     <div class="col-md-9">
@@ -228,7 +228,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2">
-                        <span class="required" aria-required="true">*</span>身份证
+                         身份证
                     </label>
                     <div class="col-md-9 ">
                         {@if data.evidenceImgUrl}<img src="\${data.evidenceImgUrl}" alt=""/>{@/if}
@@ -242,7 +242,7 @@
 
                 <div class="form-group ">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>职业名称
+                         职业名称
                     </label>
                     <div class="col-md-9">
                         <label class="control-label">\${data.certification}</label>
@@ -252,7 +252,7 @@
 
                 <div class="form-group ">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>从业资格证证号
+                         从业资格证证号
                     </label>
                     <div class="col-md-9">
                         <label class="control-label">\${data.certificateNo}</label>
@@ -262,7 +262,7 @@
 
                 <div class="form-group ">
                     <label class="control-label col-md-2">
-                        <span class="required" aria-required="true">*</span>从业资格证书
+                         从业资格证书
 
                     </label>
                     <div class="col-md-9">
@@ -272,7 +272,7 @@
 
                 <div class="form-group ">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>个案时长
+                         个案时长
                     </label>
                     <div class="col-md-9">
                         <label class="control-label">\${data.duration}</label>
@@ -280,7 +280,7 @@
                 </div>
                 <div class="form-group ">
                     <label class="col-md-2 control-label">
-                        <span class="required" aria-required="true">*</span>个案人数
+                         个案人数
 
                     </label>
                     <div class="col-md-9">

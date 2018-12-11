@@ -2,6 +2,7 @@ window.onload = function () {
     juicer.register('formatCategory', formatCategory);
     juicer.register('formatPayStatus', formatPayStatus);
     juicer.register('formatCPntType', formatCPntType);
+    juicer.register('formatMoney', formatMoney);
     initpage();
 }
 var category = 1, orderId = '';
@@ -18,6 +19,32 @@ function formatCPntType(type) {
             return "面对面咨询";
             break;
     }
+}
+
+function formatMoney(number) {
+    number = (number + '').replace(/[^0-9+-Ee.]/g, '');
+    var n = !isFinite(+number) ? 0 : +number,
+
+        prec = !isFinite(+2) ? 0 : Math.abs(2),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function (n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.floor(n * k) / k;
+        };
+    s = (prec ? toFixedFix(n, prec) : '' + Math.floor(n)).split('.');
+    var re = /(-?\d+)(\d{3})/;
+    console.log(s)
+    while (re.test(s[0])) {
+        s[0] = s[0].replace(re, "$1" + sep + "$2");
+    }
+
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
 }
 
 function formatCategory(type) {
@@ -87,6 +114,7 @@ function t_query() {
     initpage();
     return false;
 }
+
 function initpage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,

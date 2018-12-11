@@ -4,7 +4,7 @@
 	margin: 0 auto;
 }
 .news-title {
-	padding-top: 0.2rem;
+	height: 1.4rem;
 	position: relative;
 	/*border: 1px solid #000000;*/
 }
@@ -12,7 +12,7 @@
 	float: left;
 	text-align: center;
 	font-size: 0.346666rem;
-	line-height: 1rem;
+	line-height: 1.4rem;
 	color: #5C6681;
 	font-weight: bold;
 	background-color: #FFFFFF;
@@ -24,7 +24,7 @@
 	width: 0.6rem;
 	transition: 0.5s;
 	position: absolute;
-	bottom: -1rem;
+	bottom: 0.04rem;
 	left: 0rem;
 	border-radius: 0.3rem;
 }

@@ -110,8 +110,8 @@
             {@/if}
             <th width="5%">付款金额</th>
             <th width="15%">下单时间</th>
-            <th width="10%">订单状态</th>
-            <th width="15%">订单号</th>
+            <th width="10%">订单号</th>
+            <th width="15%">订单状态</th>
             <th width="15%">操作</th>
         </tr>
         </thead>
