@@ -53,11 +53,38 @@ body{
 	display: block;
 	text-align: center;
 	border-radius: 0.36rem;
+	color: #A0A7B6;
+	border: none;
+	outline: none;
+	background: #F7F9FC;
+}
+.toPay{
+	width: 1.933333rem;
+	height: 0.72rem;
+	line-height: 0.72rem;
+	display: block;
+	text-align: center;
+	border-radius: 0.36rem;
+	color: #FF7C12;
+	border: 1px solid #FF7C12;
+	outline: none;
+	background: #ffffff;
+	float: right;
+	margin-top: 0.2rem;
+}
+.confirm{
+	width: 1.933333rem;
+	height: 0.72rem;
+	line-height: 0.72rem;
+	display: block;
+	text-align: center;
+	border-radius: 0.36rem;
 	color: #ffffff;
 	border: none;
 	outline: none;
-	margin-top: 0.45rem;
-	background: #FF7C12;
+	background: #50D2C7;
+	float: right;
+	margin-top: 0.2rem;
 }
 .dorder{
 	height: 1rem;
