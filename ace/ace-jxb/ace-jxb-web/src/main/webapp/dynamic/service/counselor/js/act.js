@@ -47,10 +47,12 @@ function initPage() {
 }
 function changeType(status){
   params['regAuditRst'] = status;
+  params['initType']='init';
   getPageList();
 }
 function changeConsultState(status){
   params['consultState'] = status;
+  params['initType']='init';
   getPageList();
 }
 
