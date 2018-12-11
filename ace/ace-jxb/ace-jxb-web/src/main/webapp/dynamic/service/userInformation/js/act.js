@@ -104,6 +104,7 @@ function initEvents() {
                 time: new Date()
             });
             console.log(params);
+            params.cityCode=cityCode;
             save(params);
             return false;
         }
