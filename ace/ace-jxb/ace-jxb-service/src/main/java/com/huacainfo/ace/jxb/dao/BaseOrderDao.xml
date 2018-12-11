@@ -32,6 +32,7 @@
         <include refid="Vo_Column_List"/>
         from base_order t
         left join jxb.counselor c on t.businessId = c.id
+        LEFT JOIN jxb.order_calculation oc ON oc.orderId=t.id
         left join jxb.consult_product cp on cp.id = t.commodityId
         left join jxb.consult_order co on co.id = t.id
         left join jxb.course cr on cr.id = t.commodityId
