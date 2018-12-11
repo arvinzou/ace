@@ -8,9 +8,10 @@
     <meta name="format-detection" content="telephone=no"/>
     <title>我的咨询</title>
     <link rel="stylesheet" type="text/css" href="../common/css/nav.css"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="history/css/style.css"/>
     <jsp:include page="../../../dynamic/common/base.jsp"/>
-    <script type="text/javascript" src="js/act.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="history/js/act.js"></script>
     <script type="text/javascript" src="../../common/js/loader.js"></script>
 </head>
 <body>
@@ -68,14 +69,14 @@
                         class="dorder_num">\${item.payMoney}</span></div>
                 <div class="col-xs-2 col-sm-2"></div>
             </div>
-            <div class="row dorder" style="border: none;" onclick="showDetail('\${item.id}');">
+            <div class="row dorder" style="border: none;">
                 <div class="col-xs-8 col-sm-8" style="overflow: hidden;"><p class="order_num">
                     预约时间：\${item.consultOrder.reserveDate}</p></div>
                 <div class="col-xs-4 col-sm-4" style="text-align: right;">
                     {@if item.payStatus == '1'}
-                    <p class="unfinished">待支付</p>
+                    <p class="unfinished"><span class="toPay" onclick="pay('\${item.id}','\${item.payMoney}')">去支付</span></p>
                     {@else if item.payStatus == '2'}
-                    <p class="unfinished">已付款</p>
+                    <p class="unfinished"><span class="confirm" onclick="finishOrder('\${item.id}');">确认完成</span></p>
                     {@else if item.payStatus == '3'}
                     <p class="unfinished">申请退款</p>
                     {@else if item.payStatus == '4'}
@@ -83,7 +84,7 @@
                     {@else if item.payStatus == '6'}
                     <p class="unfinished">结束/待评价</p>
                     {@else if item.payStatus == '7'}
-                    <p class="finished">已完结</p>
+                    <p class="finished">订单关闭/已完成</p>
                     {@else}
                     <p class="finished">自动关闭</p>
                     {@/if}

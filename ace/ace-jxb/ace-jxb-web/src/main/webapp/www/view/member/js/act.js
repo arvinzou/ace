@@ -26,7 +26,7 @@ function viewHtml(IDom, data, tempId) {
 }
 
 function showConsultOrder(){
-    window.location.href = contextPath + '/www/view/history/index.jsp';
+    window.location.href = contextPath + '/www/view/order/history.jsp';
 }
 
 function showCourseOrder(){
