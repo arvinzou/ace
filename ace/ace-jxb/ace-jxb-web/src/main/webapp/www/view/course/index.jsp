@@ -15,7 +15,6 @@
     <jsp:include page="../../../dynamic/common/base.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="../common/css/nav.css"/>
     <script type="text/javascript" src="../../common/js/loader.js"></script>
     <script type="text/javascript" src="js/swiper.min.js"></script>
     <script src="${portalPath}/content/common/js/dict_jxb.js?version=${version}"></script>
@@ -91,7 +90,6 @@
         <span class="swiper-slide" onclick="courseList('\${item.CODE}');">\${item.NAME}</span>
         {@/if}
         {@/each}
-    <div class="news-slider"></div>
 </script>
 <script id="courseTemp" type="text/template">
     {@each data as item}
