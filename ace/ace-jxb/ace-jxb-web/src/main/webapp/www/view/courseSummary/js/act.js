@@ -181,27 +181,29 @@ function playSource(sourceId, free){
 }
 
 function initCommentsList(){
-    $.ajax({
-        url: contextPath+ "/www/course/cmt/findCmtList",
-        type:"post",
-        async:false,
-        data:{
-            courseId: primaryId,
-            start: 0,
-            limit: 9999
-        },
-        success:function(result){
-            if(result.status == 0) {
-                viewHtml('commentList', result.data.rows, 'commentsListTemp');
-            }else {
-                alert(result.info);
-                return;
+    if(primaryId){
+        $.ajax({
+            url: contextPath+ "/www/course/cmt/findCmtList",
+            type:"post",
+            async:false,
+            data:{
+                courseId: primaryId,
+                start: 0,
+                limit: 9999
+            },
+            success:function(result){
+                if(result.status == 0) {
+                    viewHtml('commentList', result.data.rows, 'commentsListTemp');
+                }else {
+                    alert(result.info);
+                    return;
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }
 }
 
 function buy(){
@@ -357,28 +359,30 @@ function commitComments(){
 
 function findOrderByCommodityid(){
     var isBuy = null;
-    $.ajax({
-        url: contextPath+ "/www/order/paidQuery",
-        type:"post",
-        async:false,
-        data:{
-            commodityId: primaryId
-        },
-        success:function(result){
-            if(result.status == 0) {
-                isBuy = result.data;
-                if(isBuy){
-                    $("#buy").text("去听课");
+    if(primaryId){
+        $.ajax({
+            url: contextPath+ "/www/order/paidQuery",
+            type:"post",
+            async:false,
+            data:{
+                commodityId: primaryId
+            },
+            success:function(result){
+                if(result.status == 0) {
+                    isBuy = result.data;
+                    if(isBuy){
+                        $("#buy").text("去听课");
+                    }
+                }else {
+                    alert(result.info);
+                    return;
                 }
-            }else {
-                alert(result.info);
-                return;
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }
     return isBuy;
 }
 
