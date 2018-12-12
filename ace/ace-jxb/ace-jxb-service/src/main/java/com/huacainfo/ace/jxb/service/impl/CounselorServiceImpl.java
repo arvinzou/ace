@@ -297,6 +297,7 @@ public class CounselorServiceImpl implements CounselorService {
         rtnMap.put("consultCount", consultCount);
         CourseQVo courseQVo = new CourseQVo();
         courseQVo.setCreateUserId(counselorId);
+        courseQVo.setLineState("1");
         int courseCount = courseDao.findCount(courseQVo);
         rtnMap.put("courseCount", courseCount);
 //        rtnMap.put("liveCount", 0);

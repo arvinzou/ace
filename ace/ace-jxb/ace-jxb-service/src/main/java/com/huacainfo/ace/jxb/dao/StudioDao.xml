@@ -259,10 +259,10 @@
     <select id="studioReport" parameterType="java.lang.String" resultType="map">
         select
             rst.studioId,
-            rst.memberCount,
-            (rst.courseCount1 + rst.courseCount2) as courseCount,
-            rst.consultCount,
-            rst.liveCount
+        IFNULL(rst.memberCount,0) as memberCount,
+        IFNULL(rst.courseCount1,0) + IFNULL(rst.courseCount2,0) as courseCount,
+        IFNULL(rst.consultCount1,0) + IFNULL(rst.consultCount2,0) as consultCount,
+        IFNULL(rst.liveCount,0) liveCount
         from (
             select
             -- 工作室成员数量
@@ -298,7 +298,16 @@
                     where ta.rst ='1'
                 )
             ) as courseCount2,
-            --  工作室咨询数
+        -- 工作室咨询数 -- 负责人
+        (
+        select count(1)
+        from jxb.base_order t
+        left join jxb.studio s on s.counselorId = t.businessId
+        where t.category = '1'
+        and t.payStatus in ( '2', '6', '7')
+        and s.id = studio.id
+        ) as consultCount1,
+        -- 工作室咨询数 -- 成员
             (
                 select count(1)
                 from jxb.base_order t
@@ -306,7 +315,7 @@
                 where t.category = '1'
                 and t.payStatus in ( '2', '6', '7')
                 and c.studioId = studio.id
-            ) as consultCount,
+        ) as consultCount2,
             -- 直播数
             0 as liveCount,
             studio.id as studioId
