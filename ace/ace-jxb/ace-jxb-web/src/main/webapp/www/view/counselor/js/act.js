@@ -3,8 +3,10 @@ window.onload = function() {
     console.log(window.location.href);
     var url =   window.location.search.substring(1);
     var primaryId = url.substring(url.indexOf('=')+1);
-    console.log(primaryId);
-    findDetail(primaryId);
+
+    if(primaryId){
+        findDetail(primaryId);
+    }
 }
 
 function findDetail(id){

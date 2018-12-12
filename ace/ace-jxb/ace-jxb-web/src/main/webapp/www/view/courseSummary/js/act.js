@@ -16,22 +16,6 @@ function App() {
         url: '/www/view/common/js/star-rating.js',
         type: 'js',
         callback: function () {
-            jQuery(document).ready(function() {
-                var $inp = $('#rating-input');
-                $inp.rating({
-                    min: 0,
-                    max: 5,
-                    step: 1,
-                    size: 'xs',
-                    theme: 'krajee-fa',
-                    showClear: false,
-                    starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
-                    captionElement: "#kv-caption",
-                    filledStar: '<i class="fas fa-star"></i>',
-                    emptyStar: '<i class="fas fa-star"></i>',
-
-                })
-            });
         }
     });
 
@@ -158,6 +142,21 @@ function findPartInfo(primaryId){
 function hoverLi(domId){
     $("#"+domId).removeClass('menuHide').addClass('menuShow');
     $("#"+domId).siblings().removeClass('menuShow').addClass('menuHide');
+    var $inp = $('#rating-input');
+    $inp.rating({
+        min: 0,
+        max: 5,
+        step: 1,
+        size: 'xs',
+        theme: 'krajee-fa',
+        showClear: false,
+        starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
+        captionElement: "#kv-caption",
+        filledStar: '<i class="fas fa-star"></i>',
+        emptyStar: '<i class="fas fa-star"></i>',
+
+    });
+
 }
 
 function viewHtml(IDom, data, tempId) {
@@ -182,27 +181,29 @@ function playSource(sourceId, free){
 }
 
 function initCommentsList(){
-    $.ajax({
-        url: contextPath+ "/www/course/cmt/findCmtList",
-        type:"post",
-        async:false,
-        data:{
-            courseId: primaryId,
-            start: 0,
-            limit: 9999
-        },
-        success:function(result){
-            if(result.status == 0) {
-                viewHtml('commentList', result.data.rows, 'commentsListTemp');
-            }else {
-                alert(result.info);
-                return;
+    if(primaryId){
+        $.ajax({
+            url: contextPath+ "/www/course/cmt/findCmtList",
+            type:"post",
+            async:false,
+            data:{
+                courseId: primaryId,
+                start: 0,
+                limit: 9999
+            },
+            success:function(result){
+                if(result.status == 0) {
+                    viewHtml('commentList', result.data.rows, 'commentsListTemp');
+                }else {
+                    alert(result.info);
+                    return;
+                }
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }
 }
 
 function buy(){
@@ -358,28 +359,30 @@ function commitComments(){
 
 function findOrderByCommodityid(){
     var isBuy = null;
-    $.ajax({
-        url: contextPath+ "/www/order/paidQuery",
-        type:"post",
-        async:false,
-        data:{
-            commodityId: primaryId
-        },
-        success:function(result){
-            if(result.status == 0) {
-                isBuy = result.data;
-                if(isBuy){
-                    $("#buy").text("去听课");
+    if(primaryId){
+        $.ajax({
+            url: contextPath+ "/www/order/paidQuery",
+            type:"post",
+            async:false,
+            data:{
+                commodityId: primaryId
+            },
+            success:function(result){
+                if(result.status == 0) {
+                    isBuy = result.data;
+                    if(isBuy){
+                        $("#buy").text("去听课");
+                    }
+                }else {
+                    alert(result.info);
+                    return;
                 }
-            }else {
-                alert(result.info);
-                return;
+            },
+            error:function(){
+                alert("系统服务内部异常！");
             }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+        });
+    }
     return isBuy;
 }
 

@@ -11,8 +11,11 @@ function App() {
     console.log(window.location.href);
     var url =   window.location.search.substring(1);
     primaryId = url.substring(url.indexOf('=')+1);
-    console.log(primaryId);
-    initData(primaryId);
+
+    if(primaryId){
+        initData(primaryId);
+    }
+
     loader({
         path: contextPath,
         url: '/www/common/js/layer.mobile-v2.0/layer_mobile/need/layer.css',

@@ -15,7 +15,9 @@ window.onload = function() {
             }
         }
     }
-    findDetail(primaryId);
+    if(primaryId){
+        findDetail(primaryId);
+    }
 }
 
 function findDetail(id){
