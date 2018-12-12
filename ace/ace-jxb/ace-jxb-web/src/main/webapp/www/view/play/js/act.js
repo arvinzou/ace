@@ -6,21 +6,6 @@ function App() {
         url: '/www/view/common/js/star-rating.js',
         type: 'js',
         callback: function () {
-            jQuery(document).ready(function() {
-                var $inp = $('#rating-input');
-                $inp.rating({
-                    min: 0,
-                    max: 5,
-                    step: 1,
-                    size: 'xs',
-                    theme: 'krajee-fa',
-                    showClear: false,
-                    starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
-                    captionElement: "#kv-caption",
-                    filledStar: '<i class="fas fa-star"></i>',
-                    emptyStar: '<i class="fas fa-star"></i>',
-                });
-            });
         }
     });
 }
@@ -43,6 +28,21 @@ window.onload = function(){
     }
     console.log("courseId:"+courseId+"\n"+"sourceId:"+sourceId+"\n");
     initCourseInfo(courseId);
+
+
+    var $inp = $('#rating-input');
+    $inp.rating({
+        min: 0,
+        max: 5,
+        step: 1,
+        size: 'xs',
+        theme: 'krajee-fa',
+        showClear: false,
+        starCaptions: {1: '极差', 2: '差', 3: '一般', 4: '良好', 5: '推荐'},
+        captionElement: "#kv-caption",
+        filledStar: '<i class="fas fa-star"></i>',
+        emptyStar: '<i class="fas fa-star"></i>',
+    });
 }
 function initCourseInfo(courseId){
     // startLoad();
