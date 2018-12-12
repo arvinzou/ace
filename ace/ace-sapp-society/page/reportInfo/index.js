@@ -21,6 +21,9 @@ Page({
         start: 0,
         limit: 10,
     },
+    store:{
+       images:[], 
+    },
 
     /**
      * 生命周期函数--监听页面加载
@@ -106,6 +109,13 @@ Page({
             function(rst) {
                 let temp = rst.data;
                 temp.content=JSON.parse(temp.content);
+                var target=temp.content;
+                for(var item in target){
+                    console.log(target[item].content);
+                    if (target[item].type=='2'){
+                        that.store.images.push(target[item].content);
+                    }
+                }
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.setData({
@@ -270,5 +280,13 @@ Page({
             like: iLike,
             likeUrl:url,
         });
+    },
+    previewImage: function (e) {
+        let that=this;
+        var url = e.currentTarget.dataset.url;
+        wx.previewImage({
+            current: url, // 当前显示图片的http链接
+            urls: that.store.images // 需要预览的图片http链接列表
+        })
     }
 })
