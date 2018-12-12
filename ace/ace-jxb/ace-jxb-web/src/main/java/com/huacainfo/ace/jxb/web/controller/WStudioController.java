@@ -145,6 +145,7 @@ public class WStudioController extends JxbBaseController {
 
         CourseQVo condition = new CourseQVo();
         condition.setStudioId(studioId);
+        condition.setLineState("1");
         PageResult<CourseVo> rst =
                 courseService.findCourseList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
