@@ -22,7 +22,7 @@ window.onload = function(){
                             me.resetload();
                         }else{
                             page++;
-                            counter = page * num;
+                            counter = page * num+1;
                             var temp = result.data;
                         for(var i=0; i<temp.length; i++){
                             datas.push(temp[i]);
