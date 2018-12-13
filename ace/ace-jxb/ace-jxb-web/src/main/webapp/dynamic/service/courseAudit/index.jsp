@@ -60,6 +60,7 @@
                                                             </div>
 
                                                             <div class="btn-group" role="group"  style="float:left;padding-right:5px">
+                                                                <button type="button" class="btn btn-default"  onclick="changeCourseType('');">全部</button>
                                                                 <button type="button" class="btn btn-default"  onclick="changeCourseType('1');">单节</button>
                                                                 <button type="button" class="btn btn-default" onclick="changeCourseType('2');">系列</button>
                                                             </div>
