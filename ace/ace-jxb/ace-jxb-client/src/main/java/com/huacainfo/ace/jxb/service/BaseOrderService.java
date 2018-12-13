@@ -170,4 +170,13 @@ public interface BaseOrderService {
      * @throws Exception
      */
     ResultResponse createTipOrder(String unionid, String data) throws Exception;
+
+    /**
+     * 订单确认
+     *
+     * @param orderId 订单ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    ResultResponse confirm(String orderId);
 }

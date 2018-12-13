@@ -132,6 +132,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         }
         return rst;
     }
+
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -569,8 +570,14 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         } else if (OrderPayType.OFF_LINE == payType) {
 
         }
+
         //完成支付
-        order.setPayStatus(OrderPayStatus.PAID);
+        /**
+         * 咨询订单走 确认订单流程； 其他订单付完款完成后，默认自动确认订单
+         */
+        String payStatus = OrderCategory.CATEGORY_CONSULT.equals(order.getCategory())
+                ? OrderPayStatus.PAID : OrderPayStatus.FINISHED;
+        order.setPayStatus(payStatus);
         order.setPayTime(DateUtil.getNowDate());
         baseOrderDao.updateByPrimaryKeySelective(order);
         //插入运算记录
@@ -710,6 +717,29 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         rtnMap.put("orderId", orderId);
         rtnMap.put("payMoney", payMoney);
         return new ResultResponse(ResultCode.SUCCESS, "订单创建成功", rtnMap);
+    }
+
+    /**
+     * 订单确认
+     *
+     * @param orderId 订单ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse confirm(String orderId) {
+        BaseOrderVo order = baseOrderDao.selectVoByPrimaryKey(orderId);
+        if (order == null) {
+            return new ResultResponse(ResultCode.FAIL, "订单数据丢失");
+        }
+        if (OrderPayStatus.PAID.equals(order.getPayStatus())) {
+            return new ResultResponse(ResultCode.FAIL, "订单状态不合法");
+        }
+
+        order.setPayStatus(OrderPayStatus.FINISHED);
+        baseOrderDao.updateByPrimaryKey(order);
+
+        return new ResultResponse(ResultCode.SUCCESS, "订单确认完成");
     }
 
 

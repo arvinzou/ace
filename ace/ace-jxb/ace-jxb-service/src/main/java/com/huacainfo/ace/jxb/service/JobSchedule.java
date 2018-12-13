@@ -50,14 +50,12 @@ public class JobSchedule {
     }
 
     /**
-     * 每30分钟 计算一批订单
+     * 每5分钟 计算一批订单
      */
-    @Scheduled(cron = "0 */30 * * * ?")
+    @Scheduled(cron = "0 */5 * * * ?")
     public void computeSchedule() {
-        OrderCalculationQVo condition = new OrderCalculationQVo();
-        condition.setCpuTag("0");
-
-        List<OrderCalculation> dataList = orderCalculationService.findList(condition, 0, 500, "");
+        //待发放列表 -- 订单已确认&已计算完成&未发放单据
+        List<OrderCalculation> dataList = orderCalculationService.findGrantList(0, 500);
         for (OrderCalculation data : dataList) {
             try {
                 orderCalculationService.compute(data);
@@ -72,12 +70,14 @@ public class JobSchedule {
     /**
      * 每10分钟 发放一批奖励
      */
-//    @Scheduled(cron = " 0 0/10 * * * ?")
+    @Scheduled(cron = " 0 */10 * * * ?")
     public void grantSchedule() {
+        //发放已确认订单&已计算完成的订单
         OrderCalculationQVo condition = new OrderCalculationQVo();
         condition.setGrantTag("0");
-
-        List<OrderCalculation> dataList = orderCalculationService.findList(condition, 0, 500, "");
+        //todo 调整取数逻辑
+        //
+        List<OrderCalculation> dataList = orderCalculationService.findGrantList(0, 500);
         for (OrderCalculation data : dataList) {
             try {
                 orderCalculationService.grant(data);

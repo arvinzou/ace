@@ -309,4 +309,17 @@
         )vvv
         where vvv.tId = #{id,jdbcType=VARCHAR}
     </select>
+
+
+    <select id="findGrantList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order_calculation t,base_order o
+        where t.orderId = o.id
+        and t.cpuTag='1'
+        and t.grantTag = '0'
+        and o.payStatus = '7'
+        ORDER BY t.createDate desc
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 </mapper>

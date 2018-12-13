@@ -26,4 +26,8 @@ public interface OrderCalculationDao {
                                     @Param("orderBy") String orderBy);
 
     Map<String, Object> incomeReport(String counselorId);
+
+
+    List<OrderCalculation> findGrantList(@Param("start") int start,
+                                         @Param("limit") int limit);
 }

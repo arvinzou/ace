@@ -234,4 +234,25 @@ public class WOrderController extends JxbBaseController {
             return new ResultResponse(ResultCode.FAIL, e.getMsg());
         }
     }
+
+    /**
+     * 订单确认
+     *
+     * @param orderId 订单ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/confirm")
+    public ResultResponse confirm(String orderId) throws Exception {
+        if (StringUtil.isEmpty(orderId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+
+        }
+
+        try {
+            return baseOrderService.confirm(orderId);
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
+    }
 }

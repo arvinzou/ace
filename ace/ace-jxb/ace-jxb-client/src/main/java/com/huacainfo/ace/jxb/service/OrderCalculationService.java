@@ -22,4 +22,6 @@ public interface OrderCalculationService {
     void compute(OrderCalculation data);
 
     int updateByPrimaryKeySelective(OrderCalculation data);
+
+    List<OrderCalculation> findGrantList(int start, int limit);
 }

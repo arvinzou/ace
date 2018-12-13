@@ -13,6 +13,7 @@ import com.huacainfo.ace.jxb.service.AccountFlowRecordService;
 import com.huacainfo.ace.jxb.service.OrderCalculationService;
 import com.huacainfo.ace.jxb.vo.CounselorPostLevelVo;
 import com.huacainfo.ace.jxb.vo.OrderCalculationQVo;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -177,6 +178,11 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
     @Override
     public int updateByPrimaryKeySelective(OrderCalculation data) {
         return orderCalculationDao.updateByPrimaryKeySelective(data);
+    }
+
+    @Override
+    public List<OrderCalculation> findGrantList(int start, int limit) {
+        return orderCalculationDao.findGrantList(start, limit);
     }
 
     /**
