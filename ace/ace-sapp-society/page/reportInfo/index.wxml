@@ -21,7 +21,7 @@
                     <view>{{item.content}}</view>
                 </block>
                 <block wx:else>
-                    <image lazy-load="true" mode="widthFix" src='{{item.content}}' />
+                    <image lazy-load="true" bindtap='previewImage' data-url='{{item.content}}' mode="widthFix" src='{{item.content}}' />
                 </block>
             </block>
         </view>
