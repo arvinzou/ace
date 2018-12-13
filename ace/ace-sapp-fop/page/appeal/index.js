@@ -32,7 +32,7 @@ Page({
     displayAudio: 'hide',
     playimg: "../../image/record_on.png",
     recorderStatus: false,
-    categorys: ["政策","资金", "法律", "其他"],
+      categorys: ["政企诉求", "银企诉求", "法律诉求", "其它"],
     categoryIndex: 0,
     chooseVideoShow: true
   },
