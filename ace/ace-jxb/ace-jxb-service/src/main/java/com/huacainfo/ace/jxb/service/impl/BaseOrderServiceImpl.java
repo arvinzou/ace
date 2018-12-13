@@ -732,7 +732,7 @@ public class BaseOrderServiceImpl implements BaseOrderService {
         if (order == null) {
             return new ResultResponse(ResultCode.FAIL, "订单数据丢失");
         }
-        if (OrderPayStatus.PAID.equals(order.getPayStatus())) {
+        if (!OrderPayStatus.PAID.equals(order.getPayStatus())) {
             return new ResultResponse(ResultCode.FAIL, "订单状态不合法");
         }
 
