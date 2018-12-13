@@ -128,7 +128,31 @@ function commit(){
  * 完成订单
  */
 function finishOrder(orderId){
-    alert("功能建设中！");
+    $.ajax({
+        url: contextPath+ "/www/order/confirm",
+        type:"post",
+        async:false,
+        data:{
+            orderId: orderId
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert(result.info);
+                initData();
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else if(result.errorMessage){
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+            return;
+        }
+    });
 }
 
 /**

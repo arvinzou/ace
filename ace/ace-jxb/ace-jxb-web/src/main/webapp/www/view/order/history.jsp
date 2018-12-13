@@ -37,10 +37,10 @@
         {@each data.rows as item,index}
         <div class="row box">
             <div class="row">
-                <div class="col-xs-3 col-sm-2 row_01" onclick="showDetail('\${item.id}');">
+                <div class="col-xs-3 col-sm-2 row_01" style="padding-right: 0!important;" onclick="showDetail('\${item.id}');">
                     <img class="head_img" src="\${item.counselor.imagePhotoUrl}"/>
                 </div>
-                <div class="col-xs-6 col-sm-8 row_01" onclick="showDetail('\${item.id}');">
+                <div class="col-xs-6 col-sm-8 row_01" style="padding-left: 0!important;" onclick="showDetail('\${item.id}');">
                     <div class="row consotor">
                         <div class="col-xs-6 col-xs-6 consotor_01">\${item.counselor.name}</div>
                         <div class="col-xs-6 col-xs-6 consotor_02"></div>
@@ -70,9 +70,9 @@
                 <div class="col-xs-2 col-sm-2"></div>
             </div>
             <div class="row dorder" style="border: none;">
-                <div class="col-xs-8 col-sm-8" style="overflow: hidden;"><p class="order_num">
+                <div class="col-xs-7 col-sm-7" style="overflow: hidden;"><p class="order_num">
                     预约时间：\${item.consultOrder.reserveDate}</p></div>
-                <div class="col-xs-4 col-sm-4" style="text-align: right;">
+                <div class="col-xs-5 col-sm-5" style="text-align: right;">
                     {@if item.payStatus == '1'}
                     <p class="unfinished"><span class="toPay" onclick="pay('\${item.id}','\${item.payMoney}')">去支付</span></p>
                     {@else if item.payStatus == '2'}
