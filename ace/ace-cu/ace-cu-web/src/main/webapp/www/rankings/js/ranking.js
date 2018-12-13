@@ -2,7 +2,7 @@ window.onload = function(){
 
     var counter = 0;
     // 每页展示4个
-    var num = 20;
+    var num = 999;
     var page = 0;
 
     // dropload
