@@ -19,7 +19,8 @@ function courseList(id){
         data:{
             "start": 0,
             "limit": 999,
-            "studioId": id
+            "studioId": id,
+            "lineState":"1"
         },
         success:function(result){
             if(result.status == 0) {
