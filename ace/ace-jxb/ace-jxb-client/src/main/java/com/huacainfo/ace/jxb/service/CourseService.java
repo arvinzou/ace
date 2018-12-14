@@ -3,6 +3,7 @@ package com.huacainfo.ace.jxb.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.jxb.model.CourseAudit;
 import com.huacainfo.ace.jxb.vo.CoursePartVo;
@@ -118,4 +119,13 @@ public interface CourseService {
      * @return MessageResponse
      */
     MessageResponse updateFine(String id,String fine, UserProp userProp);
+
+    /**
+     * 增加课程点播数量，每调用一次+1
+     *
+     * @param courseId 课程ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    ResultResponse addDemandNum(String courseId);
 }

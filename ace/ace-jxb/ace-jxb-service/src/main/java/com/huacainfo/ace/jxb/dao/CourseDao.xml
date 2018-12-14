@@ -420,4 +420,10 @@
     <update id="updateFine">
         update course set fine = #{fine,jdbcType=VARCHAR} where id=#{id}
     </update>
+
+    <update id="updateDemandNum">
+        update course
+        set demandNum = ifnull(demandNum,0) + 1
+        where id= #{courseId,jdbcType=VARCHAR}
+    </update>
 </mapper>
