@@ -142,7 +142,7 @@
             {@else if orderCategory == 3}
             <td>\${item.commodityName}</td>
             {@/if}
-            <td>￥\${item.payMoney}</td>
+            <td>￥\${formatMoney(item.payMoney)}</td>
             <td>\${item.createDate}</td>
             <td>\${item.id}</td>
             <td>
@@ -197,7 +197,7 @@
     <div class="form-group">
         <label class="col-md-4 control-label"> 支付金额</label>
         <div class="col-md-8">
-            <label class="control-label">\${data.payMoney}</label>
+            <label class="control-label">\${formatMoney(data.payMoney)}</label>
         </div>
     </div>
     <div class="form-group">
