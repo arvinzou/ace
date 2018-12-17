@@ -10,8 +10,7 @@ Page({
     items: [],
     listLive:[],
     startX: 0, //开始坐标
-    startY: 0,
-    sysUserInfo: wx.getStorageSync("sysUserInfo")
+    startY: 0
   },
   onReady: function (res) {
     var that = this;
@@ -22,14 +21,14 @@ Page({
       that.initData();
   },
   onLoad: function () {
-    var that = this;
-    if (!util.isLogin()) {
-      wx.navigateTo({ url: "../userinfo/index?url=../myLive/index" });
-    }else{
-      that.setData({
-        userinfo: wx.getStorageSync('userinfo')
-      });
-    }
+      var that = this;
+      if (!util.isLogin()) {
+          wx.navigateTo({ url: "../userinfo/index?url=../myLive/index" });
+      } else {
+          that.setData({
+              userinfo: wx.getStorageSync('userinfo')
+          });
+      }
   },
   onPullDownRefresh: function () {
     let that = this;
@@ -48,10 +47,12 @@ Page({
     util.request(cfg.findLiveList, {start:0,limit:9999 },
       function (data) {
         console.log(data);
-        data.rows.forEach(function (o, i) {
-          o.isTouchMove = false;
-          //that.data.listLive.push(o);
-        });
+        if(data){
+            data.rows.forEach(function (o, i) {
+                o.isTouchMove = false;
+                //that.data.listLive.push(o);
+            });
+        }
         that.setData({
           listLive: data.rows
         });
@@ -64,10 +65,12 @@ Page({
   touchstart: function (e) {
     //开始触摸时 重置所有删除
     var that=this;
-    that.data.listLive.forEach(function (v, i) {
-      if (v.isTouchMove)//只操作为true的
-        v.isTouchMove = false;
-    })
+    if (that.data.listLive){
+        that.data.listLive.forEach(function (v, i) {
+            if (v.isTouchMove)//只操作为true的
+                v.isTouchMove = false;
+        })
+    }
     that.setData({
       startX: e.changedTouches[0].clientX,
       startY: e.changedTouches[0].clientY,

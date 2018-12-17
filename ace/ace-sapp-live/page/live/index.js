@@ -50,7 +50,7 @@ Page({
     pusherStatus: 'stop',
     playimg: "../../image/play_on.png",
     cameraimg: "../../image/camera_on.png",
-    mutedimg: "../../image/muted_on.png",
+    mutedimg: "../../image/record_on.png",
     rtmpurl: cfg.rtmpserver + "13922861673?id=249134995",
     orientation: "horizontal",
     orientationimg: "../../image/screen_horizontal.png",
@@ -69,7 +69,11 @@ Page({
     sort: '0',
     screenopt:'../../image/fillwin.png',
     devicePosition:"front",
-    frontimg: '../../image/front.png'
+    frontimg: '../../image/front.png',
+    hiddenBtn: true,
+    showBtn: false,
+    maskFlag: true,
+    videoUrl: null
   },
   onReady: function (res) {
     var that = this;
@@ -152,9 +156,9 @@ Page({
     var pusherStatus = that.data.pusherStatus;
     var userinfo = wx.getStorageSync('userinfo');
     that.setData({
-      rtmpurl: cfg.rtmpserver + that.data.id + "?id=" + that.data.id + "&appid=" + cfg.appid + "&user=" + userinfo.userProp.mobile
+      rtmpurl: cfg.rtmpserver +that.data.id+ "?id=" + that.data.id + "&appid=" + cfg.appid + "&user=" + userinfo.userProp.mobile
     });
-    
+
     if (pusherStatus == 'stop') {
       wx.showModal({
         title: '系统提示',
@@ -223,7 +227,7 @@ Page({
     } else {
       that.setData({
         muted: !muted,
-        mutedimg: "../../image/muted_on.png",
+        mutedimg: "../../image/record_on.png",
       });
     }
   },
@@ -303,8 +307,6 @@ Page({
   },
   onPageScroll: function (res) {
     
-
-    
   },
   onReachBottom: function () {
     console.log("onReachBottom");
@@ -370,7 +372,7 @@ Page({
     that.loadLive(id);
     that.loadTotalNumAndOrgInfo(id);
   },
-  
+
   loadLive: function (id) {
     var that = this;
     util.request(cfg.loadLive, { id: id },
@@ -454,11 +456,11 @@ Page({
     var message = {};
     message.header = {
       cmd: 'content',
-      rid:that.data.id,
+      rid: that.data.id,
       wxuser: {
         headimgurl: that.data.userinfo.avatarUrl,
         nickname: that.data.userinfo.nickName,
-        openid: that.data.userinfo.openId,
+        openid: that.date.userinfo.openId,
         unionid: that.data.userinfo.unionId
       }
     };
@@ -513,8 +515,26 @@ Page({
         console.log(e);
       }
     });
-  }
-  ,
+  },
+  viewVideo: function (e) {
+    console.log("查看视频地址=====================================" + e.currentTarget.id);
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    that.setData({
+        videoUrl: e.currentTarget.id,
+        maskFlag: false
+    });
+ },
+ exitVideo: function (e) {
+    console.log("==================================退出视频观看");
+    var that = this;
+    var videoContent = wx.createVideoContext("video");
+    videoContent.pause();
+    that.setData({
+        maskFlag: true,
+        videoUrl: null
+    });
+},
   /**
   * 生命周期函数--监听页面卸载
   */

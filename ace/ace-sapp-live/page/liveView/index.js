@@ -19,7 +19,7 @@ Page({
     pusherStatus: 'stop',
     playimg: "../../image/play_on.png",
     cameraimg: "../../image/camera_on.png",
-    mutedimg: "../../image/muted_on.png",
+    mutedimg: "../../image/record_on.png",
     rtmpurl: cfg.rtmpserver + "13922861673?id=249134995",
     orientation: "horizontal",
     orientationimg: "../../image/screen_horizontal.png",
@@ -39,7 +39,9 @@ Page({
     paddingtop: 0,
     nameDisplay:false,
     scoll:'live-top-box-noscoll',
-    sort:'0'
+    sort:'0',
+    maskFlag: true,
+    videoUrl: null
   },
   onReady: function (res) {
     var that = this;
@@ -120,7 +122,7 @@ Page({
     var pusherStatus = that.data.pusherStatus;
     var userinfo = wx.getStorageSync('userinfo');
     that.setData({
-      rtmpurl: cfg.rtmpserver + userinfo.mobile + "?id=" + that.data.id + "&appid=" + cfg.appid
+      rtmpurl: cfg.rtmpserver + userinfo.mobile + "?id=" + util.uuid() + "&appid=" + cfg.appid
     });
     if (pusherStatus == 'stop') {
       wx.showModal({
@@ -190,7 +192,7 @@ Page({
     } else {
       that.setData({
         muted: !muted,
-        mutedimg: "../../image/muted_on.png",
+        mutedimg: "../../image/record_on.png",
       });
     }
   },
@@ -359,6 +361,7 @@ Page({
     that.loadRpt();
     that.loadLive(id);
     that.loadTotalNumAndOrgInfo(id);
+    that.visit(id);
   },
 
   loadLive: function (id) {
@@ -458,11 +461,37 @@ Page({
       data: JSON.stringify(message),
     });
     console.log(message);
-  }
-  ,
-  /**
-  * 生命周期函数--监听页面卸载
-  */
+  },
+  viewVideo: function (e) {
+        console.log("查看视频地址=====================================" + e.currentTarget.id);
+        var that = this;
+        var index = e.currentTarget.dataset.index;
+        that.setData({
+            videoUrl: e.currentTarget.id,
+            maskFlag: false
+        });
+  },
+  exitVideo: function (e) {
+        console.log("==================================退出视频观看");
+        var that = this;
+        var videoContent = wx.createVideoContext("video");
+        videoContent.pause();
+        that.setData({
+            maskFlag: true,
+            videoUrl: null
+        });
+  },
+  visit:function(id){
+    var that = this;
+    util.request(cfg.server + "/live/www/live/visit", { id: id},
+      function (data) {
+        console.log(data);
+      }
+    );
+  },
+   /**
+   * 生命周期函数--监听页面卸载
+   */
   onUnload: function () {
     clearInterval(interval);
     console.log("======生命周期函数--监听页面卸载=========");
@@ -474,7 +503,7 @@ Page({
         console.log("手动关闭socket失败");
       },
       complete: function () {
-        
+
       }
     })
   }
