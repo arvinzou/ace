@@ -5,6 +5,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.DateUtil;
@@ -399,6 +400,21 @@ public class CourseServiceImpl implements CourseService {
         this.courseDao.updateFine(id,fine);
         dataBaseLogService.log("设置精品课程", "课程", "", id, id, userProp);
         return new MessageResponse(ResultCode.SUCCESS, "成功！");
+    }
+
+    /**
+     * 增加课程点播数量，每调用一次+1
+     *
+     * @param courseId 课程ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @Override
+    public ResultResponse addDemandNum(String courseId) {
+
+        int i = courseDao.updateDemandNum(courseId);
+
+        return new ResultResponse(ResultCode.SUCCESS, "添加成功");
     }
 
 

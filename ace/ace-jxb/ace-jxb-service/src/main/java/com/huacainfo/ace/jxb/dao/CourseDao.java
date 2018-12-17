@@ -34,4 +34,6 @@ public interface CourseDao {
 
     int updateFine(@Param("id") String id,@Param("fine") String fine);
 
+    int updateDemandNum(String courseId);
+
 }

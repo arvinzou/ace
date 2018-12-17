@@ -137,4 +137,19 @@ public class WCourseController extends JxbBaseController {
     }
 
 
+    /**
+     * 增加课程点播数量，每调用一次+1
+     *
+     * @param courseId 课程ID
+     * @return ResultResponse
+     * @throws Exception
+     */
+    @RequestMapping("/addDemandNum")
+    public ResultResponse addDemandNum(String courseId) throws Exception {
+        if (StringUtil.isEmpty(courseId)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return courseService.addDemandNum(courseId);
+    }
 }

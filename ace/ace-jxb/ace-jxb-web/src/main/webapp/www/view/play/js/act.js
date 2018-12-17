@@ -230,7 +230,7 @@ function palyer() {
         $('#playPause').prop('src', 'img/play.png');
         player.currentTime = 0;
     });
-
+       
     $('.slider').click(rewind);
     // sliders.forEach(function (slider) {
     //     console.log(slider);
@@ -328,8 +328,12 @@ function palyer() {
         var sec = Math.floor(time % 60);
         return min + ':' + (sec < 10 ? '0' + sec : sec);
     }
-
+    var playNum = 0;
     function togglePlay() {
+        if(playNum<1){
+            addPlayNums(courseId);
+        }
+        playNum++;
         if (player.paused) {
             $('#playPause').prop('src', 'img/stop.png');
             player.play();
@@ -348,4 +352,30 @@ function palyer() {
         playpauseBtn.style.display = 'block';
         loading.style.display = 'none';
     }
+}
+
+/**
+ * 增加点播量
+ * @param courseId
+ */
+function addPlayNums(courseId){
+    $.ajax({
+        url: contextPath+ "/www/course/addDemandNum",
+        type:"post",
+        async:false,
+        data:{
+            courseId: courseId
+        },
+        success:function(result){
+            if(result.status == 0) {
+
+            }else {
+                alert(result.info);
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
 }
