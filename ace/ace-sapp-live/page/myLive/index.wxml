@@ -19,7 +19,7 @@
             {{item.name}}
           </view>
      <view class='time-box' wx:if="{{item.status==1}}">{{item.startTime}}</view>
-           <text wx:if="{{item.status!=1}}" class='nop-pop'>参与人数 {{item.nop}}  访问次数 {{item.pop}}</text>
+           <text wx:if="{{item.status!=1}}" class='nop-pop'> {{item.nop}}/{{item.pop}}</text>
                 <text class="audit-status {{item.auditStatus=='3'?'bg-danger':''}}{{item.auditStatus=='2'?'bg-success':''}} {{item.auditStatus=='1'?'bg-info':''}}{{item.auditStatus=='0'?'bg-info':''}}">{{item.auditStatus=='1' ?'待审':''}}{{item.auditStatus=='0'?'暂存':''}}{{item.auditStatus=='2'?'通过':''}}{{item.auditStatus=='3'?'驳回':''}}</text>
 
         </view>
@@ -38,8 +38,9 @@
 </view>
 
 
+<block wx:if='{{sysUserInfo.regType == "2"}}'>
   <cover-view class="btn-add" bindtap="add">
     <cover-image class="btn-img" src="../../image/添加.png" />
   </cover-view>
-
+</block>
 
