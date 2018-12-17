@@ -230,7 +230,7 @@ function palyer() {
         $('#playPause').prop('src', 'img/play.png');
         player.currentTime = 0;
     });
-
+       
     $('.slider').click(rewind);
     // sliders.forEach(function (slider) {
     //     console.log(slider);
