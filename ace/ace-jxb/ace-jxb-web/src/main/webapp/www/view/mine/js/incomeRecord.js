@@ -24,8 +24,8 @@ function getOrderList(date) {
     var data = {
         findType: '2',
         cpuTag:'1',
-        // year: year,
-        // month: momth,
+        year: year,
+        month: momth,
         category:category==3?'':category,
         statusArray:'2,6,7',
     };
