@@ -200,7 +200,7 @@
     <div class="form-group">
         <label class="col-md-4 control-label"> 支付金额</label>
         <div class="col-md-8">
-            <label class="control-label">\${data.payMoney}</label>
+            <label class="control-label">\${formatMoney(data.payMoney)}</label>
         </div>
     </div>
     <div class="form-group">
