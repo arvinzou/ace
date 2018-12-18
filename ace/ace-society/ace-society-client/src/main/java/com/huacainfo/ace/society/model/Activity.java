@@ -36,6 +36,10 @@ public class Activity extends BaseModel {
 
     private Date endDate;
 
+    private Date realStartDate;
+
+    private Date realEndDate;
+
     private Integer volunteerNum;
 
     private Integer clazz;
@@ -77,6 +81,22 @@ public class Activity extends BaseModel {
 
     private String coinconfigId;
 
+
+    public Date getRealStartDate() {
+        return realStartDate;
+    }
+
+    public void setRealStartDate(Date realStartDate) {
+        this.realStartDate = realStartDate;
+    }
+
+    public Date getRealEndDate() {
+        return realEndDate;
+    }
+
+    public void setRealEndDate(Date realEndDate) {
+        this.realEndDate = realEndDate;
+    }
 
     public Integer getClazz() {
         return clazz;

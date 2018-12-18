@@ -302,11 +302,13 @@ public class ActivityServiceImpl implements ActivityService {
         }
         if("activityStart".equals(type)){
             activity.setStartSignImgUrl(filePath);
+            activity.setRealStartDate(new Date());
             activity.setStatus("31");
         }
         else if("activityEnd".equals(type)){
             activity.setEndSignImgUrl(filePath);
             activity.setStatus("32");
+            activity.setRealEndDate(new Date());
         }
         else if("selfSign".equals(type)){
             ActivityDetail activityDetail=activityDetailDao.selectPersonaldetails(id,wxUser.getUnionId());

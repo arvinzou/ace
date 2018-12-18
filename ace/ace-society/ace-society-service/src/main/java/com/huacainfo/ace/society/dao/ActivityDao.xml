@@ -15,6 +15,8 @@
         <result column="dendline" jdbcType="TIMESTAMP" property="dendline"/>
         <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
         <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="realStartDate" jdbcType="TIMESTAMP" property="realStartDate"/>
+        <result column="realEndDate" jdbcType="TIMESTAMP" property="realEndDate"/>
         <result column="volunteerNum" jdbcType="INTEGER" property="volunteerNum"/>
         <result column="clazz" jdbcType="INTEGER" property="clazz"/>
         <result column="volunteerPoints" jdbcType="INTEGER" property="volunteerPoints"/>
@@ -36,7 +38,7 @@
     <resultMap extends="ResultMapWithBLOBs" id="VoResultMap" type="com.huacainfo.ace.society.vo.ActivityVo"></resultMap>
 
     <sql id="Base_Column_List">
-    t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,
+    t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,t.realStartDate,t.realEndDate,
     t.volunteerNum,  t.clazz, t.volunteerPoints, t.parterNum, t.parterPoints, t.remark, t.coinconfigId, t.status, t.createUserId,
     t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,ar.status as arStatus,s.orgName, s.orgCover,cc.host,cc.participant
   </sql>
@@ -47,7 +49,7 @@
 
 
     <sql id="Vo_Column_List">
-        t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,
+        t.id, t.initiatorId, t.title, t.category, t.mode,t.purpose, t.location, t.coverUrl,t.startSignImgUrl, t.endSignImgUrl, t.dendline, t.startDate, t.endDate,t.realStartDate,t.realEndDate,
         t.volunteerNum,  t.clazz, t.volunteerPoints, t.parterNum, t.parterPoints, t.remark, t.coinconfigId, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
@@ -65,7 +67,7 @@
     </select>
     <select id="selectVoByPrimaryKeyVo" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        a.id, a.initiatorId, a.title, a.category, a.mode,a.purpose, a.location, a.coverUrl, a.startSignImgUrl, a.endSignImgUrl, a.dendline, a.startDate, a.endDate,
+        a.id, a.initiatorId, a.title, a.category, a.mode,a.purpose, a.location, a.coverUrl, a.startSignImgUrl, a.endSignImgUrl, a.dendline, a.startDate, a.endDate,a.realStartDate,a.realEndDate,
         a.volunteerNum, a.clazz, a.volunteerPoints, a.parterNum, a.parterPoints, a.remark, a.coinconfigId, a.status, a.createUserId,
         a.createUserName, a.createDate, a.lastModifyUserId, a.lastModifyUserName, a.lastModifyDate, a.content, i.avatarUrl as headimgurl,s.orgName,s.orgCover,c.host,c.participant
         from activity a
@@ -93,7 +95,7 @@
     <insert id="insert" parameterType="com.huacainfo.ace.society.model.Activity">
     insert into activity (id, initiatorId, title, 
       category, mode, purpose, location, coverUrl, startSignImgUrl,endSignImgUrl,
-      dendline, startDate, endDate, 
+      dendline, startDate, endDate, realStartDate,realEndDate,
       volunteerNum, clazz, volunteerPoints, parterNum,
       parterPoints, remark, coinconfigId, status,
       createUserId, createUserName, createDate, 
@@ -101,7 +103,7 @@
       content)
     values (#{id,jdbcType=VARCHAR}, #{initiatorId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{category,jdbcType=CHAR}, #{mode,jdbcType=VARCHAR}, #{purpose,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, #{coverUrl,jdbcType=VARCHAR}, #{startSignImgUrl,jdbcType=VARCHAR},#{endSignImgUrl,jdbcType=VARCHAR},
-      #{dendline,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP}, 
+      #{dendline,jdbcType=TIMESTAMP}, #{startDate,jdbcType=TIMESTAMP}, #{endDate,jdbcType=TIMESTAMP},#{realStartDate,jdbcType=TIMESTAMP},#{realEndDate,jdbcType=TIMESTAMP},
       #{volunteerNum,jdbcType=INTEGER}, #{clazz,jdbcType=INTEGER}, #{volunteerPoints,jdbcType=INTEGER}, #{parterNum,jdbcType=INTEGER},
       #{parterPoints,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},#{coinconfigId,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
       #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
@@ -149,6 +151,12 @@
             </if>
             <if test="endDate != null">
                 endDate,
+            </if>
+            <if test="realStartDate != null">
+                realStartDate,
+            </if>
+            <if test="realEndDate != null">
+                realEndDate,
             </if>
             <if test="volunteerNum != null">
                 volunteerNum,
@@ -236,6 +244,12 @@
             <if test="endDate != null">
                 #{endDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="realStartDate != null">
+                #{realStartDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="realEndDate != null">
+                #{realEndDate,jdbcType=TIMESTAMP},
+            </if>
             <if test="volunteerNum != null">
                 #{volunteerNum,jdbcType=INTEGER},
             </if>
@@ -322,6 +336,12 @@
             <if test="endDate != null">
                 endDate = #{endDate,jdbcType=TIMESTAMP},
             </if>
+            <if test="realStartDate != null">
+                realStartDate = #{realStartDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="realEndDate != null">
+                realEndDate = #{realEndDate,jdbcType=TIMESTAMP},
+            </if>
             <if test="volunteerNum != null">
                 volunteerNum = #{volunteerNum,jdbcType=INTEGER},
             </if>
@@ -384,6 +404,8 @@
       dendline = #{dendline,jdbcType=TIMESTAMP},
       startDate = #{startDate,jdbcType=TIMESTAMP},
       endDate = #{endDate,jdbcType=TIMESTAMP},
+      realStartDate = #{realStartDate,jdbcType=TIMESTAMP},
+      realEndDate = #{realEndDate,jdbcType=TIMESTAMP},
       volunteerNum = #{volunteerNum,jdbcType=INTEGER},
       clazz = #{clazz,jdbcType=INTEGER},
       volunteerPoints = #{volunteerPoints,jdbcType=INTEGER},
@@ -415,6 +437,8 @@
       dendline = #{dendline,jdbcType=TIMESTAMP},
       startDate = #{startDate,jdbcType=TIMESTAMP},
       endDate = #{endDate,jdbcType=TIMESTAMP},
+      realStartDate = #{realStartDate,jdbcType=TIMESTAMP},
+      realEndDate = #{realEndDate,jdbcType=TIMESTAMP},
       volunteerNum = #{volunteerNum,jdbcType=INTEGER},
       clazz = #{clazz,jdbcType=INTEGER},
       volunteerPoints = #{volunteerPoints,jdbcType=INTEGER},

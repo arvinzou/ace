@@ -200,14 +200,14 @@
                 <div class="imgBox">
                     <img src="\${data.startSignImgUrl}" alt="">
                 </div>
-                <text>\${data.startDate}</text>
+                <text>\${data.realStartDate}</text>
             </div>
 
             <div class="sign-content">
                 <div class="imgBox">
                     <img src="\${data.endSignImgUrl}" alt="">
                 </div>
-                <text>\${data.endDate}</text>
+                <text>\${data.realEndDate}</text>
             </div>
         </div>
 
@@ -405,7 +405,7 @@
                         <img src="\${data.startSignImgUrl}"
                              style="width: 150px;max-width: 480px;height: 150px;max-height: 150px" alt="">
                     </div>
-                    <text>\${data.startDate}</text>
+                    <text>\${data.realStartDate}</text>
                 </div>
 
                 <div class="sign-content">
@@ -413,7 +413,7 @@
                         <img src="\${data.endSignImgUrl}"
                              style="width: 150px;max-width: 480px;height: 150px;max-height: 150px" alt="">
                     </div>
-                    <text>\${data.endDate}</text>
+                    <text>\${data.realEndDate}</text>
                 </div>
             </div>
         </div>
