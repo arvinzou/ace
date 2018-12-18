@@ -19,7 +19,7 @@ function getOrderList(date) {
     var momth = date.substring(date.indexOf('年') + 1, date.indexOf('月'));
     var url = contextPath + "/www/order/findList";
     if(category==3){
-        var url = contextPath + "/www/order/profitFindList";
+        url = contextPath + "/www/order/profitFindList";
     }
     var data = {
         findType: '2',
@@ -30,15 +30,14 @@ function getOrderList(date) {
         statusArray:'2,6,7',
     };
     $.getJSON(url, data, function (rst) {
+        var mylist = document.getElementById('tmp-list').innerHTML;
         if(category==3){
-            var mylist = document.getElementById('tmp-list_3').innerHTML;
-        }else{
-            var mylist = document.getElementById('tmp-list').innerHTML;
+            mylist = document.getElementById('tmp-list_3').innerHTML;
         }
         var html = juicer(mylist, {
             data: rst.data.rows
         });
-        $("#orderList").append(html);
+        $("#orderList").html(html);
     })
 }
 
