@@ -13,7 +13,7 @@
         </view>
         <view class='live-item-bar'>
           <view class='time-box' wx:if="{{item.state==1}}">{{item.startTime}}</view>
-          <text  wx:if="{{item.state!=1}}" class='nop-pop'> {{item.numOfPartakeString}}</text>
+          <text  wx:if="{{item.state!=1}}" class='nop-pop'>参与人数 {{item.numOfPartakeString}}</text>
            <view class="status-box">
             <view class="status-icon-text">
               {{item.state=='1'?'预播':''}}{{item.state=='2'?'直播':''}}{{item.state=='3'?'历史':''}}
@@ -31,7 +31,9 @@
 </view>
 
 <block wx:if='{{sysUserInfo.regType == "2"}}'>
+<block wx:if='{{sysUserInfo.societyOrg.status =="3"}}'>
  <cover-view class="btn-add" bindtap="add" id='{{sysUserInfo.regType}}'>
     <cover-image class="btn-img" src="../../image/添加.png" />
   </cover-view>
+</block>
 </block>

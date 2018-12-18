@@ -1,6 +1,5 @@
 function loadlocal() {
     var urls = [];
-    urls.push({path: contextPath, url: '/www/view/common/js/nav.js', type: 'js'});
     urls.push({path: contextPath, url: '/www/common/js/jweixin-1.2.0.js', type: 'js'});
     for (var i = 0; i < urls.length; i++) {
         loader(urls[i]);
@@ -14,6 +13,13 @@ function App() {
     loader({
         path: contextPath,
         url: '/www/view/common/js/star-rating.js',
+        type: 'js',
+        callback: function () {
+        }
+    });
+    loader({
+        path: contextPath,
+        url: '/www/view/common/js/nav.js',
         type: 'js',
         callback: function () {
         }

@@ -1,15 +1,15 @@
 var util = require("../../util/util.js");
 let openSocket = require('../../util/socket.js');
 var cfg = require("../../config.js");
-Date.prototype.Format = function (fmt) { //author: meizz
+Date.prototype.Format = function (fmt) { //author: meizz  
   var o = {
-    "M+": this.getMonth() + 1,         //月份
-    "d+": this.getDate(),          //日
-    "h+": this.getHours(),          //小时
-    "m+": this.getMinutes(),         //分
-    "s+": this.getSeconds(),         //秒
-    "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-    "S": this.getMilliseconds()       //毫秒
+    "M+": this.getMonth() + 1,         //月份  
+    "d+": this.getDate(),          //日  
+    "h+": this.getHours(),          //小时  
+    "m+": this.getMinutes(),         //分  
+    "s+": this.getSeconds(),         //秒  
+    "q+": Math.floor((this.getMonth() + 3) / 3), //季度  
+    "S": this.getMilliseconds()       //毫秒  
   };
   if (/(y+)/.test(fmt))
     fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
@@ -27,8 +27,7 @@ Page({
     listLive: [],
     startX: 0, //开始坐标
     startY: 0,
-    nameDisplay:'none',
-    sysUserInfo: wx.getStorageSync("sysUserInfo")
+    nameDisplay:'none'
   },
 
   onLoad: function () {
@@ -36,19 +35,30 @@ Page({
     page = 1;
     that.initData();
     that.setData({
+        sysUserInfo: wx.getStorageSync("sysUserInfo"),
         userinfo: wx.getStorageSync('userinfo')
     });
-
+   
   },
   onShow:function(){
-    page = 0;
+    page = 1;
     console.log("onShow");
   },
   onPullDownRefresh: function () {
     let that = this;
-    page += 1;
+    page=1;
+     that.data.listLive=[];
     that.initData();
   },
+
+    // // 上拉加载
+    onReachBottom: function () {
+        var that = this;
+        console.log('-------------上拉加载-------------');
+        page += 1;
+        that.initData();
+    },
+
   initData: function () {
     var that = this;
       util.request(cfg.server + "/live/www/live/getListByCompany", { page: page, companyId: cfg.companyId, auditStatus: "3" },
@@ -58,8 +68,8 @@ Page({
           o.startTime = new Date(o.startTime).Format('yyyy-MM-dd hh:mm');
           that.data.listLive.push(o);
         });
-
-
+  
+       
         that.setData({
           listLive: that.data.listLive
         });
@@ -67,7 +77,7 @@ Page({
       }
     );
   },
-
+   
 
     add: function () {
         let that = this;
