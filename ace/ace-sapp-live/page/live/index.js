@@ -102,6 +102,7 @@ Page({
       return;
     }
     if (data.header.cmd == 'reload.msg') {
+        
       message = [];
       that.loadMsg();
       return;
@@ -460,7 +461,7 @@ Page({
       wxuser: {
         headimgurl: that.data.userinfo.avatarUrl,
         nickname: that.data.userinfo.nickName,
-        openid: that.date.userinfo.openId,
+        openid: that.data.userinfo.openId,
         unionid: that.data.userinfo.unionId
       }
     };
