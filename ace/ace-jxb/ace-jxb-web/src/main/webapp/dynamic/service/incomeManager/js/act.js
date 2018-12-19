@@ -55,7 +55,8 @@ function changeConsultState(status) {
 }
 
 function t_query() {
-    params.initType == "init";
+    params['initType'] = 'init';
+    params['start']=0;
     getPageList();
     return false;
 }
@@ -66,12 +67,12 @@ function getPageList() {
     startLoad();
     $.getJSON(url, params, function (result) {
         stopLoad();
-        console.log("====================================");
-        console.log(JSON.stringify(result));
+        console.log(result);
         if (result.status == 0) {
             if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: result.total
+                    totalCounts: result.total==0?1:result.total,
+                    currentPage: 1
                 });
             }
             renderPage("counselorList", result.rows, "list");
