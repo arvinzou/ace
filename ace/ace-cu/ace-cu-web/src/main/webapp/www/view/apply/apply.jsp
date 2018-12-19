@@ -104,8 +104,7 @@
             <div class="form">
                 <p>
                     <span class="form_title">筹款标题</span>
-                    <input class="form_text" maxlength="9" name="raiseTitle" type="text" placeholder="9个字以内"
-                           onfocus="this.placeholder=''" onblur="this.placeholder='9个字以内'"/>
+                    <input class="form_text" maxlength="50" name="raiseTitle" type="text" />
                 </p>
             </div>
             <div class="form_cmt">
