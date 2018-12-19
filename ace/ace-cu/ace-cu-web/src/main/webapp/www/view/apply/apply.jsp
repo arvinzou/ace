@@ -104,8 +104,7 @@
             <div class="form">
                 <p>
                     <span class="form_title">筹款标题</span>
-                    <input class="form_text" maxlength="9" name="raiseTitle" type="text" placeholder="9个字以内"
-                           onfocus="this.placeholder=''" onblur="this.placeholder='9个字以内'"/>
+                    <input class="form_text" maxlength="50" name="raiseTitle" type="text" />
                 </p>
             </div>
             <div class="form_cmt">
@@ -113,7 +112,7 @@
                     <span class="form_title">筹款说明</span>
                 </p>
                 <p>
-                    <textarea class="project_cmt" minlength="10" maxlength="200" name="raiseDes" type="text"
+                    <textarea class="project_cmt" minlength="10"  name="raiseDes" type="text"
                               placeholder="请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）" onfocus="this.placeholder=''"
                               onblur="this.placeholder='请详细填写筹款原因、筹款目的、自身状况和善款用途等信息（10个字以上）'"
                               onchange="if((this.value).length<10){alert('筹款说明需在10字以上！');this.value='';}"></textarea></textarea>

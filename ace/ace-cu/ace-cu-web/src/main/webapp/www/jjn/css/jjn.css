@@ -68,6 +68,9 @@
 	padding-left: 0.5rem;
 	color: #999999;
 	margin-bottom: 0.45rem;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .raise_item_detail{
 	width: 100%;
