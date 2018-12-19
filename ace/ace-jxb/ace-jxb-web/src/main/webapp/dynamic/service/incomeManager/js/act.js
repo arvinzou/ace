@@ -55,6 +55,7 @@ function changeConsultState(status) {
 }
 
 function t_query() {
+    params.initType == "init";
     getPageList();
     return false;
 }
