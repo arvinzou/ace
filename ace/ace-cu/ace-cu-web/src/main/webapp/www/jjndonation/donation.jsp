@@ -158,6 +158,7 @@
 <script type="text/javascript" src="/cu/www/common/js/jquery-3.2.1.min.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/nav.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/init-rem.js?v=<%=System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="js/jweixin-1.4.0.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/juicer/juicer-min.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="js/donation.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
