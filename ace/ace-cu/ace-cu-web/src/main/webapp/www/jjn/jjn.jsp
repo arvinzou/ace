@@ -36,7 +36,7 @@
             <div class="raise_item_title">\${item.projectName}</div>
             <div class="raise_item_info">\${item.title}</div>
             <div class="raise_item_detail">
-                <div class="detail01">已募集<span>\${item.collectAmount}</span>元</div>
+                <%--<div class="detail01">已募集<span>\${item.collectAmount}</span>元</div>--%>
                 {@if item.balanceDays != '0'&&item.status=='2'}
                 <div class="detail02">剩余<span>\${item.balanceDays}</span>天</div>
                 {@else if item.balanceDays == '0'&&item.status=='2'}

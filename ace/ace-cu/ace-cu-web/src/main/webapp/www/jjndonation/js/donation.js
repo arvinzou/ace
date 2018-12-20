@@ -33,6 +33,7 @@ window.onload = function(){
             if(result.status == 0) {
                 status = result.data.status;
                 projectTitle = result.data.projectName;
+                result.data.endDate = result.data.endDate.substring(0,10);
                 renderPage('projectInfo', result.data, 'project-tpl');
                 renderPage('projectDetail', result.data, 'detail-tpl');
             }else {
