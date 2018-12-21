@@ -3,6 +3,8 @@ var type = "";
 var status = null;
 var primaryId = null;
 var projectTitle = "";
+var coverUrl = "https://cswx.changde.gov.cn/cu/www/share/img/logo.png";
+var content = "";
 window.onload = function(){
 	var locaUrl = window.location.href;
     var url = window.location.href.substring(locaUrl.indexOf("?")+1);
@@ -33,6 +35,9 @@ window.onload = function(){
             if(result.status == 0) {
                 status = result.data.status;
                 projectTitle = result.data.projectName;
+                coverUrl = result.data.coverUrl;
+                content = result.data.title;
+                console.log("======================================================"+coverUrl);
                 result.data.endDate = result.data.endDate.substring(0,10);
                 renderPage('projectInfo', result.data, 'project-tpl');
                 renderPage('projectDetail', result.data, 'detail-tpl');
@@ -88,7 +93,7 @@ window.onload = function(){
         }
     });
 
-    getConfig();
+    getConfig(projectTitle, coverUrl, content);
 };
 
 function donate(){
@@ -119,7 +124,7 @@ function renderPage(IDom, data, tempId) {
     $("#" + IDom).html(html);
 }
 
-function getConfig(){
+function getConfig(projectTitle, coverUrl, content){
     $.ajax({
         url: "/portal/www/wx/jsapi/getConfig",
         type:"post",
@@ -128,7 +133,7 @@ function getConfig(){
         success:function(result){
             if(result.status == 0) {
                 console.log("**************************"+result);
-                zdyShare(result.data);
+                zdyShare(result.data, projectTitle, coverUrl, content);
             }else {
                 alert(result.info);
             }
@@ -139,7 +144,7 @@ function getConfig(){
     });
 }
 
-function zdyShare(data){
+function zdyShare(data,projectTitle, coverUrl, content){
     wx.config({
         debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: data.appId, // 必填，
@@ -153,9 +158,10 @@ function zdyShare(data){
         wx.onMenuShareTimeline({
             title: projectTitle, // 分享标题
             link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: 'https://cswx.changde.gov.cn/cu/www/share/img/logo.png', // 分享图标
+            imgUrl: coverUrl, // 分享图标
             success: function () {
                 // 用户点击了分享后执行的回调函数
+                alert("分享成功！");
             }
         });
     });
@@ -163,13 +169,14 @@ function zdyShare(data){
     wx.ready(function () {
         wx.onMenuShareAppMessage({
             title: projectTitle, // 分享标题
-            desc: '涓涓细流成海洋，颗颗爱心燃希望！让我们共同携手，撑起慈善关爱的蓝天......', // 分享描述
+            desc: content, // 分享描述
             link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: 'https://cswx.changde.gov.cn/cu/www/share/img/logo.png', // 分享图标
+            imgUrl: coverUrl, // 分享图标
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success: function () {
                 // 用户点击了分享后执行的回调函数
+                alert("分享成功！");
             }
         });
     });
@@ -177,9 +184,9 @@ function zdyShare(data){
     wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
         wx.updateAppMessageShareData({
             title: projectTitle, // 分享标题
-            desc: '涓涓细流成海洋，颗颗爱心燃希望！让我们共同携手，撑起慈善关爱的蓝天......', // 分享描述
+            desc: content, // 分享描述
             link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: 'https://cswx.changde.gov.cn/cu/www/share/img/logo.png' // 分享图标
+            imgUrl: coverUrl // 分享图标
         }, function(res) {
             //这里是回调函数
             alert("分享成功！");
@@ -189,9 +196,9 @@ function zdyShare(data){
     wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
         wx.updateTimelineShareData({
             title: projectTitle, // 分享标题
-            desc: '涓涓细流成海洋，颗颗爱心燃希望！让我们共同携手，撑起慈善关爱的蓝天......', // 分享描述
+            desc: content, // 分享描述
             link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-            imgUrl: 'https://cswx.changde.gov.cn/cu/www/share/img/logo.png' // 分享图标
+            imgUrl: coverUrl // 分享图标
         }, function(res) {
             //这里是回调函数
             alert("分享成功！");
