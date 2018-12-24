@@ -73,7 +73,7 @@ window.onload = function(){
     });
 
 
-   /**
+   /**       
      * 捐赠列表
      */
     $.ajax({
