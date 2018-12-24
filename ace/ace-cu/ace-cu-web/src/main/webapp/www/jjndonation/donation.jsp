@@ -73,33 +73,18 @@
         <p style="padding-bottom: 0.5rem;" class="name_02">\${data.title}</p>
         {@/if}
     </div>
-    <div class="project_item_raise" style="display: none;">
+    <div class="project_item_raise">
         <div class="raise_01">
-            {@if data.type != 2}
-            <p class="raise_money">\${data.collectAmount}</p>
-            <p class="raise_price">已募集(元)</p>
-            {@else}
             <p class="raise_money">\${data.targetAmount}</p>
             <p class="raise_price">目标金额(元)</p>
-            {@/if}
         </div>
         <div class="raise_01">
-            {@if data.type != 2}
-            <p class="raise_money">\${data.payoutAmount}</p>
-            <p class="raise_price">已支出(元)</p>
-            {@else}
             <p class="raise_money">\${data.collectAmount}</p>
             <p class="raise_price">已筹集(元)</p>
-            {@/if}
         </div>
         <div class="raise_01">
-            {@if data.type != 2}
-            <p class="raise_money">\${data.balanceAmount}</p>
-            <p class="raise_price">结余(元)</p>
-            {@else}
             <p class="raise_money"> \${data.endDate}</p>
             <p class="raise_price">截止时间</p>
-            {@/if}
         </div>
         <div style="clear: both;"></div>
     </div>
@@ -158,6 +143,7 @@
 <script type="text/javascript" src="/cu/www/common/js/jquery-3.2.1.min.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/nav.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/init-rem.js?v=<%=System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="js/jweixin-1.4.0.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/juicer/juicer-min.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="js/donation.js?v=<%=System.currentTimeMillis() %>"></script>
 </body>
