@@ -84,6 +84,7 @@ window.onload = function(){
         success:function(result){
             if(result.status == 0) {
                 renderPage('donateList', result.data.rows, 'donate-tpl');
+                renderPage('donateRoll', result.data.rows, 'roll-tpl');
             }else {
                 alert(result.info);
             }

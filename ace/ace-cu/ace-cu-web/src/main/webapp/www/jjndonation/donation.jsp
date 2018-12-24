@@ -56,6 +56,23 @@
     <img src="img/donation_btn.png" width="100%" height="100%"/>
 </div>
 
+<!--捐赠列表滚动-->
+<div class="donateRoll" id="donateRoll">
+
+</div>
+
+<script id="roll-tpl" type="text/template">
+    <marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 4rem;overflow: hidden;">
+        {@each data as item,index}
+        <div class="rollItem">
+            <div class="roll-img"><img src="\${item.headimgurl}"/></div>
+            <div class="nickname">\${item.nickname}</div>
+            <div class="roll-amount">捐款了\${item.donateAmount}元</div>
+        </div>
+        {@/each}
+    </marquee>
+</script>
+
 <script id="detail-tpl" type="text/template">
     \$\${data.description}
 </script>
@@ -140,6 +157,7 @@
     </div>
     {@/each}
 </script>
+
 <script type="text/javascript" src="/cu/www/common/js/jquery-3.2.1.min.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/nav.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/init-rem.js?v=<%=System.currentTimeMillis() %>"></script>
