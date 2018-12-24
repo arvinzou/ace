@@ -236,8 +236,8 @@ ul,li{
 .donateRoll{
 	width: 4.2rem;
 	height: 3.6rem;
-	position: absolute;
-	top: 12rem;
+	position: fixed;
+	bottom: 0.5rem;
 }
 .rollItem{
 	width: 4.3rem;
