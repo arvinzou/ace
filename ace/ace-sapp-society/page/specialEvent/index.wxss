@@ -1,0 +1,10 @@
+/* page/specialEvent/index.wxss */
+
+.index{
+    width: 100%;
+    height: 100%;
+    background-color: #3D1274
+}
+.index image{
+    width: 100%;
+}

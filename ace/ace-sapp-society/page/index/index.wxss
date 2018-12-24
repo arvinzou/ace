@@ -359,3 +359,61 @@
     border-left: 8rpx solid #FFAB32;
     padding-left: 15rpx;
 }
+
+
+.activityModal{
+    position: absolute;
+    top:0;
+    width: 100%;
+    height:100%;
+    background:rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+.activityModal .activeinfo{
+    position: relative;
+    width: 500rpx;
+    height: 800rpx;
+}
+.activeinfoSecond{
+    transform:scale(0.1);
+ animation:start 2s;
+ animation-fill-mode: forwards;
+ animation-timing-function: cubic-bezier(0.49, 0.94, 0.4, 0.38);
+}
+
+@keyframes start
+{
+0% {transform:scale(0.1);}
+35% {transform:scale(1.2);}
+40% {transform:scale(1);}
+50% {transform:rotate(30deg);}
+60% {transform:rotate(-30deg);}
+70% {transform:rotate(30deg);}
+80% {transform:rotate(-30deg);}
+90% {transform:rotate(30deg);}
+100% {transform:rotate(0deg);}
+}
+
+
+
+.activityModal .activeinfo image{
+    width: 500rpx;
+}
+.activityModal .activeinfo .start{
+    position: absolute;
+    width: 140rpx;
+    height: 140rpx;
+    border-radius: 50%;
+    top:358rpx;
+    right:184rpx;
+}
+.activityModal .activeinfo .centel{
+    position: absolute;
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    top:11rpx;
+    right:43rpx;
+}

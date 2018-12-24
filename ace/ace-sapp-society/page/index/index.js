@@ -12,6 +12,7 @@ Page({
         autoplay: true,
         interval: 5000,
         duration: 500,
+        showActivityModal:false,
         timer: {
             0: {
                 hour: "00",
@@ -56,7 +57,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-       
+        var that=this;
     },
 
     /**
@@ -233,6 +234,13 @@ Page({
         if (!util.getSysUser()) {
             that.initUserData();
         }
+        // var timer = setTimeout(function () {
+        //     that.setData({
+        //         showActivityModal: true,
+        //     });
+        //         that.beforeShowModel();
+        //     clearTimeout(timer);
+        // }, 1000);
         that.activityIng(5);
         that.initReport();
     },
@@ -274,5 +282,41 @@ Page({
      */
     onShareAppMessage: function () {
 
+    },
+    interEnevt:function(){
+        util.getSysUser()
+        if (true){
+            wx.previewImage({
+                current: 'http://zx.huacainfo.com/group1/M00/00/49/i-AA41wcSYOAXdxiAAPbIscZUqU165.png?filename=二维码.png', // 当前显示图片的http链接
+                urls: ['http://zx.huacainfo.com/group1/M00/00/49/i-AA41wcSYOAXdxiAAPbIscZUqU165.png?filename=二维码.png'] // 需要预览的图片http链接列表
+            })
+        }else{
+            wx.navigateTo({
+                url: "../regist/index"
+            });
+            return;
+        }
+    },
+    centelEnevt:function(){
+        var that=this;
+        that.setData({
+            showActivityModal: false,
+        });
+        that.afterHideModel();
+    },
+    beforeShowModel:function(){
+        wx.hideTabBar({ 
+        })
+        wx.setNavigationBarColor({
+            frontColor: '#000000',
+            backgroundColor: '#4c4c4c',
+        })
+    },
+    afterHideModel:function(){
+        wx.showTabBar({});
+        wx.setNavigationBarColor({
+            frontColor: '#000000',
+            backgroundColor: '#ffffff',
+        })
     }
 });
