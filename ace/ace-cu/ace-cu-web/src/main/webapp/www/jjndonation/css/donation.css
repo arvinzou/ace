@@ -238,6 +238,7 @@ ul,li{
 	height: 3.6rem;
 	position: fixed;
 	bottom: 0.5rem;
+	z-index: 999;
 }
 .rollItem{
 	width: 4.3rem;
