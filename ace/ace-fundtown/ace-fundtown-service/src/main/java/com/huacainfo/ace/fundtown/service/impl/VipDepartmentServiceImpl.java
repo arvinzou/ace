@@ -376,4 +376,13 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
 
         return new MessageResponse(ResultCode.SUCCESS, "撤销成功");
     }
+
+    @Override
+    public PageResult<VipDepartmentVo> findDepartment(VipDepartmentQVo condition,
+                                                      String orderBy) throws Exception {
+        PageResult<VipDepartmentVo> rst = new PageResult<>();
+        List<VipDepartmentVo> list = vipDepartmentDao.findDepartment(condition, orderBy);
+        rst.setRows(list);
+        return rst;
+    }
 }

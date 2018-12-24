@@ -159,4 +159,6 @@ public interface VipDepartmentService {
                           String auditResult, String auditOpinion, UserProp curUserProp);
 
     MessageResponse repealPublicity(String deptId, UserProp curUserProp);
+
+    PageResult<VipDepartmentVo> findDepartment(VipDepartmentQVo condition, String orderBy) throws Exception;
 }
