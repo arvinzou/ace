@@ -19,6 +19,17 @@
     <div class="project_item" id="projectInfo">
 
     </div>
+    <div class="confirm">
+        <div class="confirm-box">
+            <div class="logo">
+                <img src="img/logo.png" style="width: 100%;height: 100%;"/>
+            </div>
+            <div class="confirm-info">
+                <div class="confirm-title">常德市慈善总会公益平台</div>
+                <div class="confirm-content">患者信息经常德市慈善总会证实</div>
+            </div>
+        </div>
+    </div>
     <div class="project_nav">
         <!--导航栏-->
         <div class="navigation">
@@ -32,6 +43,7 @@
             </div>
         </div>
     </div>
+
     <div class="nav_info">
         <div id="nav_info01" class="nav_info_content dis">
             <p id="projectDetail"></p>
@@ -62,7 +74,7 @@
 </div>
 
 <script id="roll-tpl" type="text/template">
-    <marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 4rem;overflow: hidden;">
+    <marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 3rem;overflow: hidden;">
         {@each data as item,index}
         <div class="rollItem">
             <div class="roll-img"><img src="\${item.headimgurl}"/></div>
