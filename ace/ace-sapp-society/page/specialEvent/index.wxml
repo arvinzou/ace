@@ -1,4 +1,0 @@
-<!--page/specialEvent/index.wxml-->
-<view class='index'>
-<image bindtap='previewImage' data-url='http://zx.huacainfo.com/group1/M00/00/49/i-AA41wcSYOAXdxiAAPbIscZUqU165.png?filename=二维码.png' mode='widthFix' src='http://zx.huacainfo.com/group1/M00/00/49/i-AA41wcSYOAXdxiAAPbIscZUqU165.png?filename=二维码.png'></image>
-</view>

@@ -234,13 +234,13 @@ Page({
         if (!util.getSysUser()) {
             that.initUserData();
         }
-        // var timer = setTimeout(function () {
-        //     that.setData({
-        //         showActivityModal: true,
-        //     });
-        //         that.beforeShowModel();
-        //     clearTimeout(timer);
-        // }, 1000);
+        var timer = setTimeout(function () {
+            that.setData({
+                showActivityModal: true,
+            });
+                that.beforeShowModel();
+            clearTimeout(timer);
+        }, 1000);
         that.activityIng(5);
         that.initReport();
     },
