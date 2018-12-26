@@ -34,5 +34,5 @@ function showCourseOrder(){
 }
 
 function showTestOrder(){
-    window.location.href = contextPath + '/www/view/testOrder/index.jsp';
+    window.location.href = contextPath + '/www/view/order/testOrder.jsp';
 }
