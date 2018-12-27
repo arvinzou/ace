@@ -76,7 +76,7 @@ pageEncoding="utf-8"%>
         <div class="form-group">
             <label class="col-md-2 view-label">企业类型</label>
             <div class="col-md-10">
-                \${data.type}
+                \${parseType(data.type)}
             </div>
         </div>
         <div class="form-group">
@@ -112,7 +112,7 @@ pageEncoding="utf-8"%>
          <div class="form-group">
              <label class="col-md-2 view-label">入驻状态</label>
              <div class="col-md-10">
-                 \${data.status}
+                 \${parseStatus(data.status)}
              </div>
          </div>
          <div class="form-group">
@@ -131,34 +131,15 @@ pageEncoding="utf-8"%>
          <div class="form-group">
              <label class="col-md-2 view-label">附件资源</label>
              <div class="col-md-10">
-                 \${data.attachment-list}
+                 <div id="attachment-list" class="row" style="padding:10px">
+                     <div id='filelist-history'></div>
+                     <div id='filelist'></div>
+                     <div id='container'>
+                         附件：<a id='pickfiles' href='javascript:;'>[添加附件]</a>
+                         <a id='uploadfiles' href='javascript:;'>[上传]</a>
+                     </div>
              </div>
          </div>
-         <div class="form-group">
-             <label class="col-md-2 view-label">创建的用户名</label>
-             <div class="col-md-10">
-                 \${data.createUserName}
-             </div>
-         </div>
-         <div class="form-group">
-             <label class="col-md-2 view-label">最后修改时间</label>
-             <div class="col-md-10">
-                 \${data.lastModifyTime}
-             </div>
-         </div>
-         <div class="form-group">
-             <label class="col-md-2 view-label">最后修改用户ID</label>
-             <div class="col-md-10">
-                 \${data.lastModifyUserId}
-             </div>
-         </div>
-         <div class="form-group">
-             <label class="col-md-2 view-label">最后修改用户名</label>
-             <div class="col-md-10">
-                 \${data.lastModifyUserName}
-             </div>
-         </div>
-    </div>
 </script>
 
 
