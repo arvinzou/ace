@@ -45,8 +45,7 @@
         "page/datas/index",
         "page/liveStatus/index",
         "page/orgApply/index",
-        "page/myOrg/index",
-        "page/specialEvent/index"
+        "page/myOrg/index"
     ],
     "window": {
         "navigationBarTextStyle": "black",

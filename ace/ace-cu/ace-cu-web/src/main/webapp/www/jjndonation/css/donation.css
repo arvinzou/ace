@@ -13,6 +13,7 @@ ul,li{
 }
 .projectbox{
 	width: 100%;
+	position: relative;
 }
 .project_item{
 	width: 100%;
@@ -229,4 +230,100 @@ ul,li{
 .love_cmt_01{
 	color: #666666;
 	font-size: 0.35rem;
+}
+
+/**  爱心播报**/
+.donateRoll{
+	width: 5.2rem;
+	height: 3.6rem;
+	position: fixed;
+	bottom: 0.1rem;
+	z-index: 999;
+	left: 0.626666rem;
+}
+.rollItem{
+	width: 4.3rem;
+	height: 0.8rem;
+	border-radius: 0.4rem;
+	margin-bottom: 0.2rem;
+	background: #FBDAD7;
+}
+.rollItem:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.roll-img{
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 50%;
+	float: left;
+	margin-right: 0.1rem;
+}
+.roll-img img{
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+.nickname{
+	width: 1.2rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	float: left;
+	font-size: 0.35rem;
+	overflow: hidden;  /*溢出隐藏*/
+	text-overflow: ellipsis; /*以省略号...显示*/
+	white-space: nowrap;  /*强制不换行*/
+	color: #EA4436;
+}
+.roll-amount{
+	width: 2.2rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	float: left;
+	font-size: 0.35rem;
+	overflow: hidden;  /*溢出隐藏*/
+	text-overflow: ellipsis; /*以省略号...显示*/
+	white-space: nowrap;  /*强制不换行*/
+	color: #EA4436;
+}
+
+.confirm{
+	width: 100%;
+	padding-top: 0.4rem;
+	padding-bottom: 0.4rem;
+	background: #ffffff;
+	margin-bottom: 0.266666rem;
+}
+.confirm-box{
+	width: 100%;
+	height: 1rem;
+}
+.logo{
+	width: 1rem;
+	height: 1rem;
+	float: left;
+	margin-right: 0.306666rem;
+	margin-left: 0.626666rem;
+
+}
+.confirm-info{
+	width: auto;
+	height: 1rem;
+	float: left;
+}
+.confirm-box:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.confirm-title{
+	color: #333333;
+	font-size: 0.426666rem;
+	font-weight: bold;
+}
+.confirm-content{
+	color: #999999;
+	font-size: 0.32rem;
+	padding-bottom: 0.05rem;
 }

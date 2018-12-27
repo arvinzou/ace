@@ -65,7 +65,7 @@
 						<span class="form_title">联系方式</span>
 					</div>
 					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
-						<input class="form_input" name="phoneNum"  type="tel" placeholder="请输入联系方式" onblur="this.placeholder='请输入联系方式'" onfocus="this.placeholder=''" />
+						<input class="form_input" name="phoneNum"  type="text" placeholder="请输入联系方式" onblur="this.placeholder='请输入联系方式'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 			</div>
@@ -118,7 +118,7 @@
 						<span class="form_title">联系方式</span>
 					</div>
 					<div class="col-xs-7 col-sm-7" style="padding-left: 0;">
-						<input class="form_input" name="contact_phone" type="tel" placeholder="该联系方式用于紧急情况" onblur="this.placeholder='该联系方式用于紧急情况'" onfocus="this.placeholder=''" />
+						<input class="form_input" name="contact_phone" type="text" placeholder="该联系方式用于紧急情况" onblur="this.placeholder='该联系方式用于紧急情况'" onfocus="this.placeholder=''" />
 					</div>
 				</div>
 			</div>

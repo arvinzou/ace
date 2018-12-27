@@ -19,6 +19,17 @@
     <div class="project_item" id="projectInfo">
 
     </div>
+    <div class="confirm">
+        <div class="confirm-box">
+            <div class="logo">
+                <img src="img/logo.png" style="width: 100%;height: 100%;"/>
+            </div>
+            <div class="confirm-info">
+                <div class="confirm-title">常德市慈善总会公益平台</div>
+                <div class="confirm-content">患者信息经常德市慈善总会证实</div>
+            </div>
+        </div>
+    </div>
     <div class="project_nav">
         <!--导航栏-->
         <div class="navigation">
@@ -32,6 +43,7 @@
             </div>
         </div>
     </div>
+
     <div class="nav_info">
         <div id="nav_info01" class="nav_info_content dis">
             <p id="projectDetail"></p>
@@ -55,6 +67,23 @@
 <div class="donation_btn" onclick="donate();">
     <img src="img/donation_btn.png" width="100%" height="100%"/>
 </div>
+
+<!--捐赠列表滚动-->
+<div class="donateRoll" id="donateRoll">
+
+</div>
+
+<script id="roll-tpl" type="text/template">
+    <marquee scrollamount="2" direction="up" behaviour="scroll" style="height: 3rem;overflow: hidden;">
+        {@each data as item,index}
+        <div class="rollItem">
+            <div class="roll-img"><img src="\${item.headimgurl}"/></div>
+            <div class="nickname">\${item.nickname}</div>
+            <div class="roll-amount">捐款了\${item.donateAmount}元</div>
+        </div>
+        {@/each}
+    </marquee>
+</script>
 
 <script id="detail-tpl" type="text/template">
     \$\${data.description}
@@ -140,6 +169,7 @@
     </div>
     {@/each}
 </script>
+
 <script type="text/javascript" src="/cu/www/common/js/jquery-3.2.1.min.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/nav.js?v=<%=System.currentTimeMillis() %>"></script>
 <script type="text/javascript" src="/cu/www/common/js/init-rem.js?v=<%=System.currentTimeMillis() %>"></script>

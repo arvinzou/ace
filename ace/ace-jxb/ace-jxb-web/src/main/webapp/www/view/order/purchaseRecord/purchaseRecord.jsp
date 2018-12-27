@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 		<meta name="format-detection" content="telephone=no" />
-		<title>测试订单</title>
+		<title>购买记录</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />
@@ -34,15 +34,32 @@
 
 	<script id="orderListTemp" type="text/template">
 		{@each data as item, index}
-        <div class="row itemlist" onclick="showOrderDetail('\${item.commodityId}');">
+        <div class="row itemlist" onclick="showOrderDetail('\${item.id}');">
             <div class="row item">
-            <div class="col-xs-12 col-md-12">
+            <div class="col-xs-4 col-md-4">
+				{@if item.category == '2' && item.course != undefined}
+            	<img src="\${item.course.cover}" class="cover" />
+				{@else if item.category == '1'}
+				<img src="\${item.counselor.imagePhotoUrl}" class="cover" />
+				{@/if}
+            </div>
+            <div class="col-xs-8 col-md-8" style="padding-left: 0 !important;">
             <div class="row">
             <p class="title">\${item.commodityName}</p>
             </div>
             <div class="row">
 				{@if item.category == '2' && item.course != undefined}
-            	<p class="detail">\${item.course.objects}</p>
+            	<p class="detail">
+					{@if item.course.objects == '00'}
+					<span>幼儿</span>
+					{@else if item.course.objects == '01'}
+					<span>小学</span>
+					{@else if item.course.objects == '02'}
+					<span>初中</span>
+					{@else if item.course.objects == '03'}
+					<span>高中</span>
+					{@/if}
+				</p>
 				{@else if item.category == '1'}
 				<p class="detail"></p>
 				{@/if}
@@ -55,7 +72,7 @@
         </div>
         </div>
         <div class="row order">
-            <div class="col-xs-9 col-md-9"><span class="order_num">订单号：\${item.id}</span></div>
+            <div class="col-xs-9 col-md-9"><span class="order_num">下单时间：\${item.createDate}</span></div>
         <div class="col-xs-3 col-md-3">
 			{@if item.payStatus == '1'}
 			<span class="order_state">待支付</span>

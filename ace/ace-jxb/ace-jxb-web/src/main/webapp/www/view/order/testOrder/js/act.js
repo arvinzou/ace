@@ -51,3 +51,37 @@ function showOrderDetail(orderId){
         window.location.href = '../order/testing1.html?id=' + orderId;
     }
 }
+
+/**
+ * 未支付的订单再支付
+ */
+function pay(orderId, payMoney){
+    $.ajax({
+        url: contextPath+ "/www/wxpay/unifiedorder",
+        type:"post",
+        async:false,
+        data:{
+            fee: payMoney,
+            body: '测试产品',
+            attach: orderId
+        },
+        success:function(result){
+            if(result.status == 0) {
+                var payData = result.data;
+                onBridgeReady(payData, orderId);
+                console.log(result);
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else if(result.errorMessage){
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+            return;
+        }
+    });
+}
