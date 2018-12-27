@@ -5,7 +5,7 @@ jQuery(function ($) {
         var type=$('select[name=type]').val();
         if(type==1){
              $('input[name=parentDepartmentId]').val('');
-             $('input[name=parentDepartmentId]').siblings().first().attr('readonly',false);
+             $('input[name=parentDepartmentId]').siblings().first().attr('readonly',true);
              $('input[name=parentDepartmentId]').siblings().first().val('');
         }else{
             $('input[name=parentDepartmentId]').val('0');
@@ -57,6 +57,7 @@ jQuery(function ($) {
             })
     });
     initEvents();
+    initJuicerMethod();
 });
 
     function initEvents() {
@@ -217,13 +218,13 @@ function loadView(id) {
                     key.indexOf('time') != -1 ||
                     key.indexOf('Time') != -1 ||
                     key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
+//                    value = Common.DateFormatter(value);
                 }
                 if (key == 'type') {
                     value = rsd(value, '147');
                 }
 
-                $("#dialog-message-view").find('#' + key).html(value);
+                $("#fm-detail").find('#' + key).html(value);
             });
         },
         error: function () {
@@ -316,7 +317,7 @@ function loadText(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
-//            $("#TblGrid_grid-table").find("input[name=parentDepartmentId]").val(rst.value.parentDepartmentName);
+//           $("#TblGrid_grid-table").find("input[name=parentDepartmentId]").val(rst.value.parentDepartmentName);
         },
         error: function () {
             alert("加载错误！");
@@ -336,7 +337,7 @@ function repealPublicity(deptId) {
               stopLoad();
               alert(rst.errorMessage);
               if (rst.status == 0) {
-                  jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: deptId}).trigger("reloadGrid");
+                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
                }
             },
         complete: function (XMLHttpRequest, textStatus) {
@@ -360,7 +361,7 @@ function repealPublicity(deptId) {
               stopLoad();
               alert(rst.errorMessage);
               if (rst.status == 0) {
-                  jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: deptId}).trigger("reloadGrid");
+                  jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
                }
             },
             complete: function (XMLHttpRequest, textStatus) {
@@ -372,8 +373,6 @@ function repealPublicity(deptId) {
     }
 
 
-
-
  function preview(rowid) {
       var url = contextPath + "/vipDepartment/selectVipDepartmentByPrimaryKey";
       $.getJSON(url, {id: rowid}, function (result) {
@@ -383,7 +382,38 @@ function repealPublicity(deptId) {
               $("#fm-detail").html(html);
               $("#modal-detail").modal("show");
           }
+           loadView(rowid);
+           //加载附件信息
+           loadAttach(rowid);
+           //初始化上传按钮事件
+           initUploader("pickfiles", rowid);
       })
   }
+
+function initJuicerMethod() {
+    juicer.register('parseStatus', parseStatus);
+    juicer.register('parseType', parseType);
+}
+function parseStatus(val) {
+    switch (val) {
+        case '0':
+            return "已删除";
+        case '1':
+            return "入驻中";
+        case '2':
+            return "注册成功";
+        case '3':
+            return "已公示";
+    }
+}
+
+function parseType(val) {
+    switch (val) {
+        case '0':
+            return "基金管理机构";
+        case '1':
+            return "基金";
+    }
+}
 
 
