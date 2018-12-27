@@ -107,6 +107,7 @@
         and (TIMESTAMPDIFF(Hour,NOW(), co.reserveDate) &lt;= 1
              and TIMESTAMPDIFF(Hour,NOW(), co.reserveDate) >= 0 )
         and IFNULL(log.tag,'0') = '0'
+        and t.payStatus = '2'
     </select>
 
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.jxb.model.ConsultOrderRemindLog">

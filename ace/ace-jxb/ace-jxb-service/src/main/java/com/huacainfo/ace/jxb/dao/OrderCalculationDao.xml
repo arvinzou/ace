@@ -313,7 +313,9 @@
 
     <select id="findGrantList" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        t.id, t.orderId, t.counselorId, t.ratio, t.amount, t.platformAmount,
+        t.studioRatio, t.studioAmount, t.cpuTag, t.grantTag,
+        t.remark, t.status, t.createDate, t.updateDate
         from order_calculation t,base_order o
         where t.orderId = o.id
         and t.cpuTag='1'

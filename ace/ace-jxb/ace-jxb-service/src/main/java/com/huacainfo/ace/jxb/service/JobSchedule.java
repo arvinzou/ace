@@ -7,7 +7,6 @@ import com.huacainfo.ace.jxb.dao.ConsultOrderRemindLogDao;
 import com.huacainfo.ace.jxb.model.ConsultOrderRemindLog;
 import com.huacainfo.ace.jxb.model.OrderCalculation;
 import com.huacainfo.ace.jxb.vo.BaseOrderVo;
-import com.huacainfo.ace.jxb.vo.OrderCalculationQVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -72,11 +71,9 @@ public class JobSchedule {
      */
     @Scheduled(cron = " 0 */10 * * * ?")
     public void grantSchedule() {
+        logger.debug("==============[{}]订单发放逻辑==============", DateUtil.getNow());
+
         //发放已确认订单&已计算完成的订单
-        OrderCalculationQVo condition = new OrderCalculationQVo();
-        condition.setGrantTag("0");
-        //todo 调整取数逻辑
-        //
         List<OrderCalculation> dataList = orderCalculationService.findGrantList(0, 500);
         for (OrderCalculation data : dataList) {
             try {
