@@ -28,6 +28,9 @@ public interface OrderCalculationDao {
     Map<String, Object> incomeReport(String counselorId);
 
 
+    List<OrderCalculation> findCpuList(@Param("start") int start,
+                                       @Param("limit") int limit);
+
     List<OrderCalculation> findGrantList(@Param("start") int start,
                                          @Param("limit") int limit);
 }
