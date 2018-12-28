@@ -122,7 +122,7 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     @Override
     public MessageResponse updateDepartment(VipDepartment o, UserProp userProp)
             throws Exception {
-
+        o.setDepartmentId(o.getId());
         if (CommonUtils.isBlank(o.getDepartmentId())) {
             return new MessageResponse(1, "机构编号不能为空！");
         }
