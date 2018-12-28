@@ -1,6 +1,7 @@
 package com.huacainfo.ace.fundtown.web.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.fastdfs.IFile;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -9,6 +10,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.web.controller.BaseController;
 import com.huacainfo.ace.fundtown.model.VipDepartment;
 import com.huacainfo.ace.fundtown.model.VipMemberRes;
@@ -61,8 +63,7 @@ public class VipDepartmentController extends BaseController {
      */
     @RequestMapping(value = "/findVipDepartmentList")
     @ResponseBody
-    public PageResult<VipDepartmentVo> findVipDepartmentList(VipDepartmentQVo condition,
-                                                             PageParamNoChangeSord page) throws Exception {
+    public PageResult<VipDepartmentVo> findVipDepartmentList(VipDepartmentQVo condition, PageParamNoChangeSord page) throws Exception {
         condition.setSyid(getCurUserProp().getActiveSyId());
         PageResult<VipDepartmentVo> rst =
                 vipDepartmentService.findDepartmentList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
@@ -133,10 +134,12 @@ public class VipDepartmentController extends BaseController {
      * @author: Arvin
      * @version: 2018-07-04
      */
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/deleteVipDepartmentByVipDepartmentId")
     @ResponseBody
-    public MessageResponse deleteVipDepartmentByVipDepartmentId(String departmentId) throws Exception {
-        return vipDepartmentService.delDepartmentByPrimaryKey(departmentId, getCurUserProp());
+    public MessageResponse deleteVipDepartmentByVipDepartmentId(String jsons) throws Exception {
+        JSONObject json = JSON.parseObject(jsons);
+        String id = json.getString("id");
+        return vipDepartmentService.delDepartmentByPrimaryKey(id, getCurUserProp());
     }
 
     /**
@@ -251,5 +254,19 @@ public class VipDepartmentController extends BaseController {
         }
 
         return vipDepartmentService.repealPublicity(deptId, getCurUserProp());
+    }
+
+    @RequestMapping(value = "/findVipDepartment")
+    @ResponseBody
+    public PageResult<VipDepartmentVo> findVipDepartment(VipDepartmentQVo condition, PageParamNoChangeSord page, String q) throws Exception {
+        condition.setSyid(getCurUserProp().getActiveSyId());
+        condition.setDepartmentName(CommonUtils.isBlank(q) ? condition.getDepartmentName() : q);
+        PageResult<VipDepartmentVo> rst =
+                vipDepartmentService.findDepartment(condition, page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
     }
 }

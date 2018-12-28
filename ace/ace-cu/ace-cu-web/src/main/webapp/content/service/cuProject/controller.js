@@ -174,7 +174,7 @@ function loadText(id) {
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
-            initSimditor($("textarea[name=description]"), rst.value.content);
+            initSimditor($("textarea[name=description]"), rst.value.description);
         },
         error: function () {
             alert("加载错误！");

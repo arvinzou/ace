@@ -1,4 +1,4 @@
-<%@page import="com.huacainfo.ace.common.tools.CommonUtils" %>
+<%@page import="com.huacainfo.ace.common.tools.CommonUtils"%>
 <%@page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>

@@ -74,29 +74,29 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     @Override
     public MessageResponse insertDepartment(VipDepartment o, UserProp userProp) throws Exception {
         //父类先入驻
-        String parentId = GUIDUtil.getGUID();
-        if (o.getParent() != null) {
-            VipDepartment parent = o.getParent();
-            parent.setType("0");
-            parent.setDepartmentId(parentId);
-            int t = vipDepartmentDao.isExit(parent);
-            if (t > 0) {
-                return new MessageResponse(1, "已存在的部门名称！");
-            }
-            MessageResponse rs = insertDepartment(parent, userProp);
-            if (rs.getStatus() == ResultCode.FAIL) {
-                return rs;
-            }
-        }
+        //String parentId = GUIDUtil.getGUID();
+        //if (o.getParent() != null) {
+        //    VipDepartment parent = o.getParent();
+        //    parent.setType("0");
+        //    parent.setDepartmentId(parentId);
+        //    int t = vipDepartmentDao.isExit(parent);
+        //    if (t > 0) {
+        //        return new MessageResponse(1, "已存在的部门名称！");
+        //    }
+        //    MessageResponse rs = insertDepartment(parent, userProp);
+        //    if (rs.getStatus() == ResultCode.FAIL) {
+        //        return rs;
+        //    }
+        //}
 
 
-        if ("0".equals(o.getType())) {
-            parentId = "0";
-        }
-        o.setParentDepartmentId(parentId);
+        //if ("0".equals(o.getType())) {
+        //    parentId = "0";
+        //}
+        o.setParentDepartmentId(o.getParentDepartmentId());
         o.setDepartmentId(StringUtil.isEmpty(o.getDepartmentId()) ? GUIDUtil.getGUID() : o.getDepartmentId());
         o.setSyid(userProp.getActiveSyId());
-        o.setRegDate(new Date());
+        //o.setRegDate(new Date());
         o.setCreateTime(new Date());
         o.setStatus("2");
         if (CommonUtils.isBlank(o.getParentDepartmentId())) {
@@ -122,7 +122,7 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
     @Override
     public MessageResponse updateDepartment(VipDepartment o, UserProp userProp)
             throws Exception {
-
+        o.setDepartmentId(o.getId());
         if (CommonUtils.isBlank(o.getDepartmentId())) {
             return new MessageResponse(1, "机构编号不能为空！");
         }
@@ -375,5 +375,14 @@ public class VipDepartmentServiceImpl implements VipDepartmentService {
         int a = vipPublicityService.deleteByDeptId(deptId);
 
         return new MessageResponse(ResultCode.SUCCESS, "撤销成功");
+    }
+
+    @Override
+    public PageResult<VipDepartmentVo> findDepartment(VipDepartmentQVo condition,
+                                                      String orderBy) throws Exception {
+        PageResult<VipDepartmentVo> rst = new PageResult<>();
+        List<VipDepartmentVo> list = vipDepartmentDao.findDepartment(condition, orderBy);
+        rst.setRows(list);
+        return rst;
     }
 }

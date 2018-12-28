@@ -8,10 +8,10 @@
 		<meta name="format-detection" content="telephone=no" />
 		<title>测试订单</title>
 		<jsp:include page="../../../dynamic/common/base.jsp" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="testOrder/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../common/css/nav.css" />
 		<script type="text/javascript" src="../../common/js/loader.js"></script>
-        <script type="text/javascript" src="js/act.js"></script>
+        <script type="text/javascript" src="testOrder/js/act.js"></script>
 	</head>
 
 	<body>
@@ -58,7 +58,7 @@
             <div class="col-xs-9 col-md-9"><span class="order_num">订单号：\${item.id}</span></div>
         <div class="col-xs-3 col-md-3">
 			{@if item.payStatus == '1'}
-			<span class="order_state">待支付</span>
+			<span class="order_state" onclick="pay('\${item.id}','\${item.payMoney}')">去支付</span>
 			{@else if item.payStatus=='2'}
 			<span class="order_state">已付款</span>
 			{@else if item.payStatus=='3'}

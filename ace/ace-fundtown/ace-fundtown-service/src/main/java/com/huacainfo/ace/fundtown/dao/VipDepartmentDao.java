@@ -31,6 +31,8 @@ public interface VipDepartmentDao {
 
     int isExitBussLicenseNo(Department record);
 
-
     VipDepartmentVo findByMobile(String mobile);
+
+    List<VipDepartmentVo> findDepartment(@Param("condition") VipDepartmentQVo condition,
+                                         @Param("orderBy") String orderBy);
 }
