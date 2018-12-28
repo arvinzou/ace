@@ -82,7 +82,10 @@ function formatPayStatus(type) {
             return "已完结";
             break;
         case "7":
-            return "自动关闭";
+            return "已确认";
+            break;
+        default:
+            return "待支付";
             break;
     }
 }

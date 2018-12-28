@@ -49,12 +49,12 @@ public class JobSchedule {
     }
 
     /**
-     * 每5分钟 计算一批订单
+     * 每3分钟 计算一批订单
      */
-    @Scheduled(cron = "0 */5 * * * ?")
+    @Scheduled(cron = "0 */3 * * * ?")
     public void computeSchedule() {
         //待发放列表 -- 订单已确认&已计算完成&未发放单据
-        List<OrderCalculation> dataList = orderCalculationService.findGrantList(0, 500);
+        List<OrderCalculation> dataList = orderCalculationService.findCpuList(0, 500);
         for (OrderCalculation data : dataList) {
             try {
                 orderCalculationService.compute(data);
@@ -67,9 +67,9 @@ public class JobSchedule {
     }
 
     /**
-     * 每10分钟 发放一批奖励
+     * 每5分钟 发放一批奖励
      */
-    @Scheduled(cron = " 0 */10 * * * ?")
+    @Scheduled(cron = " 0 */5 * * * ?")
     public void grantSchedule() {
         logger.debug("==============[{}]订单发放逻辑==============", DateUtil.getNow());
 

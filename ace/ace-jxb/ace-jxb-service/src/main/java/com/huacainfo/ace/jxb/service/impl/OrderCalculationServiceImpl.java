@@ -185,6 +185,11 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
         return orderCalculationDao.findGrantList(start, limit);
     }
 
+    @Override
+    public List<OrderCalculation> findCpuList(int start, int limit) {
+        return orderCalculationDao.findCpuList(start, limit);
+    }
+
     /**
      * 发放分成金额
      *
