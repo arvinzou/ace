@@ -1,16 +1,18 @@
 jQuery(function ($) {
-    $.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
-        _title: function (title) {
-            var $title =
-                this.options.title || '&nbsp;'
-            if (("title_html" in this.options)
-                && this.options.title_html == true)
-                title.html($title);
-            else
-                title.text($title);
-        }
-    }));
     //查询
+
+   $('body').on('change','select[name=type]',function(){
+        var type=$('select[name=type]').val();
+        if(type==1){
+             $('input[name=parentDepartmentId]').val('');
+             $('input[name=parentDepartmentId]').siblings().first().attr('readonly',true);
+             $('input[name=parentDepartmentId]').siblings().first().val('');
+        }else{
+            $('input[name=parentDepartmentId]').val('0');
+            $('input[name=parentDepartmentId]').siblings().first().attr('readonly',true);
+            $('input[name=parentDepartmentId]').siblings().first().val('无所属机构');
+        }
+   });
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -47,243 +49,133 @@ jQuery(function ($) {
                         && postdata.parentDepartmentId != '') {
                         postdata.parent = {departmentName: postdata.parentDepartmentId};
                     }
-
                     return [true, "", ""];
                 },
                 beforeShowForm: function (e) {
-                    var form = $(e[0]);
-                    form.closest('.ui-jqdialog').find(
-                        '.ui-jqdialog-titlebar').wrapInner(
-                        '<div class="widget-header" />')
-                    style_edit_form(form);
-                    //默认注册地址
                     $('#regAddr').val(regAddr);
                 }
             })
     });
-// 编辑
-    $('#btn-view-edit').on('click', function () {
-        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-        if (!gr) {
-            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext)
-        }
-        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-        var regAddr = rowData.regAddr;
-        if (regAddr == '' || null == regAddr || regAddr == undefined) {
-            regAddr = "常德市柳叶湖旅游度假区七里桥街道戴家岗社区清科基金小镇";
-        }
-        jQuery(cfg.grid_selector).jqGrid('editGridRow', gr, {
-            closeAfterAdd: true,
-            recreateForm: true,
-            viewPagerButtons: true,
-            beforeSubmit: function (postdata) {
-                postdata.departmentId = rowData.departmentId;
-                return [true, "", ""];
-            },
-            beforeShowForm: function (e) {
-                var form = $(e[0]);
-                form.closest('.ui-jqdialog').find(
-                    '.ui-jqdialog-titlebar').wrapInner(
-                    '<div class="widget-header" />')
-                style_edit_form(form);
-                //默认注册地址
-                $('#regAddr').val(regAddr);
-                //loadText
-                loadText(rowData.departmentId);
-            }
-        })
-    });
-    //删除
-    $('#btn-view-del').on('click', function () {
-        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-        if (!gr) {
-            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
-            return;
-        }
-        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-        $.ajax({
-            type: "post",
-            url: contextPath + "/vipDepartment/delete",
-            data: {departmentId: rowData.departmentId},
-            beforeSend: function (XMLHttpRequest) {
-                style_ajax_button('ajax_button_audit', true);
-            },
-            success: function (rst, textStatus) {
-                style_ajax_button('ajax_button_audit', false);
-                if (rst) {
-                    bootbox.dialog({
-                        title: '系统提示',
-                        message: rst.errorMessage,
-                        buttons: {
-                            "success": {
-                                "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                "className": "btn-sm btn-success",
-                                "callback": function () {
-                                    //重载数据
-                                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                        page: 1
-                                    }).trigger("reloadGrid");
-                                }
-                            }
-                        }
-                    });
-                }
-            },
-            complete: function (XMLHttpRequest, textStatus) {
-                style_ajax_button('ajax_button_audit', false);
-            },
-            error: function () {
-                style_ajax_button('ajax_button_audit', true);
-            }
-        });
-    });
-
-    //入驻审核
-    $('#btn-view-audit').on('click', function (e) {
-        e.preventDefault();
-        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-        if (!gr) {
-            $.jgrid.info_dialog($.jgrid.nav.alertcap,
-                $.jgrid.nav.alerttext);
-            return;
-        }
-        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-        // return;
-        //show dialog=============
-        var dialog = $("#dialog-message-audit").removeClass('hide').dialog({
-            modal: true,
-            width: 420,
-            title: "<div class='widget-header widget-header-small'><h4 class='smaller'>" +
-            "<i class='ace-icon fa fa-cog'></i> " + rowData.departmentName + "</h4>" +
-            "</div>",
-            title_html: true,
-            buttons: [
-                {
-                    html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                    "class": "btn btn-info btn-xs",
-                    id: 'ajax_button_audit',
-                    click: function () {
-                        var auditResult = $('input[name="auditResult"]:checked').val();
-                        var auditOpinion = $('#auditOpinion').val();
-                        var nodeId = $('#fm-audit').find('input[name="node-list"]').val();
-                        console.log("nodid:" + nodeId);
-                        if (nodeId == undefined || nodeId == '' || nodeId == null) {
-                            alert("请选择入驻节点!");
-                            return;
-                        }
-                        if (auditResult == undefined || auditResult == '' || auditResult == null) {
-                            alert("请选择审核结果!");
-                            return;
-                        }
-                        $(this).dialog("close");
-                        //ajax 调用
-                        $.ajax({
-                            type: "post",
-                            url: contextPath + "/vipDepartment/audit",
-                            data: {
-                                deptId: rowData.departmentId,
-                                nodeId: nodeId,
-                                auditResult: auditResult,
-                                auditOpinion: auditOpinion
-                            },
-                            beforeSend: function (XMLHttpRequest) {
-                                style_ajax_button('ajax_button_audit', true);
-                            },
-                            success: function (rst, textStatus) {
-                                style_ajax_button('ajax_button_audit', false);
-                                if (rst) {
-                                    bootbox.dialog({
-                                        title: '系统提示',
-                                        message: rst.errorMessage,
-                                        buttons: {
-                                            "success": {
-                                                "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                                "className": "btn-sm btn-success",
-                                                "callback": function () {
-                                                    //重载数据
-                                                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                                        page: 1
-                                                    }).trigger("reloadGrid");
-                                                }
-                                            }
-                                        }
-                                    });
-                                }
-                            },
-                            complete: function (XMLHttpRequest, textStatus) {
-                                style_ajax_button('ajax_button_audit', false);
-                            },
-                            error: function () {
-                                style_ajax_button('ajax_button_audit', true);
-                            }
-                        });
-                    }
-                },
-                {
-                    html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                    "class": "btn btn-xs",
-                    click: function () {
-                        $(this).dialog("close");
-                    }
-                }
-            ]
-        });
-
-    });
-
-    //信息公示
-    $('#btn-view-publicity').on('click', function (e) {
-        e.preventDefault();
-        var gr = jQuery(cfg.grid_selector).jqGrid('getGridParam', 'selrow');
-        if (!gr) {
-            $.jgrid.info_dialog($.jgrid.nav.alertcap, $.jgrid.nav.alerttext);
-            return;
-        }
-        var rowData = jQuery(cfg.grid_selector).jqGrid('getRowData', gr);
-        // if (rowData.started == "1") {
-        //     alert("项目已上线，请勿重复操作")
-        //     return;
-        // }
-
-        $.ajax({
-            type: "post",
-            url: contextPath + "/vipDepartment/publicity",
-            data: {deptId: rowData.departmentId},
-            beforeSend: function (XMLHttpRequest) {
-                style_ajax_button('ajax_button_audit', true);
-            },
-            success: function (rst, textStatus) {
-                style_ajax_button('ajax_button_audit', false);
-                if (rst) {
-                    bootbox.dialog({
-                        title: '系统提示',
-                        message: rst.errorMessage,
-                        buttons: {
-                            "success": {
-                                "label": "<i class='ace-icon fa fa-check'></i>确定",
-                                "className": "btn-sm btn-success",
-                                "callback": function () {
-                                    //重载数据
-                                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                        page: 1
-                                    }).trigger("reloadGrid");
-                                }
-                            }
-                        }
-                    });
-                }
-            },
-            complete: function (XMLHttpRequest, textStatus) {
-                style_ajax_button('ajax_button_audit', false);
-            },
-            error: function () {
-                style_ajax_button('ajax_button_audit', true);
-            }
-        });
-
-    });
+    initEvents();
+    initJuicerMethod();
 });
 
+    function initEvents() {
+        //审核模态框
+        $('#modal-audit').on('shown.bs.modal', function (event) {
+            var relatedTarget = $(event.relatedTarget);
+            var id = relatedTarget.data('id');
+            console.log(id);
+            var modal = $(this);
+            modal.find('.modal-body input[name=id]').val(id);
+        });
+        //审核框 确定按钮
+        $('#modal-audit .btn-primary').on('click', function () {
+            $('#modal-audit form').submit();
+        });
+        //审核框 提交事件
+        $('#modal-audit form').ajaxForm({
+            beforeSubmit: function (formData, jqForm, options) {
+                var rstVal = $('input[name="rst"]:checked').val();
+                var nodeIdVal = $('#fm-audit').find('input[name="nodeId"]').val();
+                if (nodeIdVal == undefined || nodeIdVal == '' || nodeIdVal == null) {
+                    alert("请选择入驻节点!");
+                    return;
+                }
+                if (rstVal == undefined) {
+                    alert("请选择审核结果!");
+                    return;
+                }
+                var params = {};
+                $.each(formData, function (n, obj) {
+                    params[obj.name] = obj.value;
+                });
+                $.extend(params, {
+                    time: new Date()
+                });
+                console.log(params);
+                audit(params);
+                return false;
+            }
+        });
+         $(".btn-group .btn").bind('click', function (event) {
+                $(event.target).siblings().removeClass("active");
+                console.log(event);
+                $(event.target).addClass("active");
+            });
+    }
+
+ function audit(params) {
+        console.log(params);
+        startLoad();
+        $.ajax({
+            type: "post",
+            url: contextPath + "/vipDepartment/audit",
+            data: {
+                deptId: params.id,
+                nodeId: params.nodeId,
+                auditResult: params.rst,
+                auditOpinion: params.message
+            },
+            beforeSend: function (XMLHttpRequest) {
+            },
+            success: function (rst, textStatus) {
+                stopLoad();
+                $("#modal-audit").modal('hide');
+                alert(rst.errorMessage);
+                if (rst.status == 0) {
+                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+                }
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+            },
+            error: function () {
+            }
+        });
+    }
+
+function edit(rowid) {
+      console.log(rowid);
+     jQuery(cfg.grid_selector).jqGrid(
+               'editGridRow',
+               rowid,
+               {
+                   closeAfterAdd: true,
+                   recreateForm: true,
+                   viewPagerButtons: true,
+                   beforeSubmit: function (postdata) {
+                       postdata.content = editor.getValue();
+                       return [true, "", ""];
+                   },
+                   beforeShowForm: function (e) {
+
+                   }
+               });
+  }
+
+
+var show=false;
+function del(rowid){
+    console.log(rowid);
+	jQuery(cfg.grid_selector).jqGrid('delGridRow',
+    rowid,
+    {
+        beforeShowForm : function(e) {
+            var form = $(e[0]);
+            if(!show){
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+            }
+
+            show=true;
+
+        }
+    });
+}
+
+function setParams(key, value) {
+    params[key] = value;
+    jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");
+}
 //字符串判空
 function strIsEmpty(obj) {
     if (typeof obj == "undefined" || obj == null || obj == "") {
@@ -292,39 +184,7 @@ function strIsEmpty(obj) {
         return false;
     }
 }
-function preview(id, title) {
-    var dialog = $("#dialog-message-view").removeClass('hide').dialog({
-        modal: false,
-        width: 800,
-        title: "<div class='widget-header widget-header-small'><div class='widget-header-pd'>" + title + "</div></div>",
-        title_html: true,
-        buttons: [
 
-            {
-                html: "<i class='ace-icon fa fa-check bigger-110'></i>&nbsp; 确定",
-                "class": "btn btn-info btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            },
-            {
-                html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; 取消",
-                "class": "btn btn-xs",
-                click: function () {
-                    $(this).dialog("close");
-                }
-            }
-        ]
-    });
-    $(dialog).parent().css("top", "1px");
-    $(dialog).css("max-height", window.innerHeight - layoutTopHeight + 50);
-    loadView(id);
-    //加载附件信息
-    loadAttach(id);
-    //初始化上传按钮事件
-    initUploader("pickfiles", id);
-
-}
 function loadView(id) {
     $.ajax({
         type: "post",
@@ -358,13 +218,13 @@ function loadView(id) {
                     key.indexOf('time') != -1 ||
                     key.indexOf('Time') != -1 ||
                     key.indexOf('birthday') != -1) {
-                    value = Common.DateFormatter(value);
+//                    value = Common.DateFormatter(value);
                 }
                 if (key == 'type') {
                     value = rsd(value, '147');
                 }
 
-                $("#dialog-message-view").find('#' + key).html(value);
+                $("#fm-detail").find('#' + key).html(value);
             });
         },
         error: function () {
@@ -452,12 +312,12 @@ function loadText(id) {
         type: "post",
         url: cfg.view_load_data_url,
         data: {
-            id: id
+            id: rowid
         },
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
-            $("#TblGrid_grid-table").find("input[name=parentDepartmentId]").val(rst.value.parentDepartmentName);
+//           $("#TblGrid_grid-table").find("input[name=parentDepartmentId]").val(rst.value.parentDepartmentName);
         },
         error: function () {
             alert("加载错误！");
@@ -472,36 +332,88 @@ function repealPublicity(deptId) {
         url: contextPath + "/vipDepartment/repealPublicity",
         data: {deptId: deptId},
         beforeSend: function (XMLHttpRequest) {
-            style_ajax_button('ajax_button_audit', true);
         },
         success: function (rst, textStatus) {
-            style_ajax_button('ajax_button_audit', false);
-            if (rst) {
-                bootbox.dialog({
-                    title: '系统提示',
-                    message: rst.errorMessage,
-                    buttons: {
-                        "success": {
-                            "label": "<i class='ace-icon fa fa-check'></i>确定",
-                            "className": "btn-sm btn-success",
-                            "callback": function () {
-                                //重载数据
-                                jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-                                    page: 1
-                                }).trigger("reloadGrid");
-                            }
-                        }
-                    }
-                });
-            }
-        },
+              stopLoad();
+              alert(rst.errorMessage);
+              if (rst.status == 0) {
+                 jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+               }
+            },
         complete: function (XMLHttpRequest, textStatus) {
-            style_ajax_button('ajax_button_audit', false);
         },
         error: function () {
-            style_ajax_button('ajax_button_audit', true);
         }
     });
+}
+
+    //信息公示
+    function publicity(deptId) {
+        startLoad();
+        console.log("--sss--"+deptId)
+        $.ajax({
+            type: "post",
+            url: contextPath + "/vipDepartment/publicity",
+            data: {deptId:deptId },
+            beforeSend: function (XMLHttpRequest) {
+            },
+            success: function (rst, textStatus) {
+              stopLoad();
+              alert(rst.errorMessage);
+              if (rst.status == 0) {
+                  jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+               }
+            },
+            complete: function (XMLHttpRequest, textStatus) {
+            },
+            error: function () {
+            }
+        });
+
+    }
+
+
+ function preview(rowid) {
+      var url = contextPath + "/vipDepartment/selectVipDepartmentByPrimaryKey";
+      $.getJSON(url, {id: rowid}, function (result) {
+          if (result.status == 0) {
+              var navitem = document.getElementById('tpl-detail').innerHTML;
+              var html = juicer(navitem, {data: result.value});
+              $("#fm-detail").html(html);
+              $("#modal-detail").modal("show");
+          }
+           loadView(rowid);
+           //加载附件信息
+           loadAttach(rowid);
+           //初始化上传按钮事件
+           initUploader("pickfiles", rowid);
+      })
+  }
+
+function initJuicerMethod() {
+    juicer.register('parseStatus', parseStatus);
+    juicer.register('parseType', parseType);
+}
+function parseStatus(val) {
+    switch (val) {
+        case '0':
+            return "已删除";
+        case '1':
+            return "入驻中";
+        case '2':
+            return "注册成功";
+        case '3':
+            return "已公示";
+    }
+}
+
+function parseType(val) {
+    switch (val) {
+        case '0':
+            return "基金管理机构";
+        case '1':
+            return "基金";
+    }
 }
 
 

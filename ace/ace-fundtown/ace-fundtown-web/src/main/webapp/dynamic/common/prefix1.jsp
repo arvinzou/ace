@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <script id="tpl-menu-base" type="text/template">
-    <li class="nav-item start" id="menu999999">
-        <a href="${pageContext.request.contextPath}/index.jsp" url="${pageContext.request.contextPath}/index.jsp"
-           class="nav-link nav-toggle">
-            <i class="icon-home"></i>
-            <span class="title">仪表盘</span>
+<li class="nav-item start" id="menu999999">
+    <a href="${pageContext.request.contextPath}/index.jsp" url="${pageContext.request.contextPath}/index.jsp" class="nav-link nav-toggle">
+        <i class="icon-home"></i>
+        <span class="title">仪表盘</span>
 
-        </a>
-    </li>
+    </a>
+</li>
 </script>
 <div class="page-wrapper">
     <div class="page-header navbar navbar-fixed-top">

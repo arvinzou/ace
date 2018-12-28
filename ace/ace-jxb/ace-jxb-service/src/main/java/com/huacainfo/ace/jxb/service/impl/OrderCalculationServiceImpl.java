@@ -185,6 +185,11 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
         return orderCalculationDao.findGrantList(start, limit);
     }
 
+    @Override
+    public List<OrderCalculation> findCpuList(int start, int limit) {
+        return orderCalculationDao.findCpuList(start, limit);
+    }
+
     /**
      * 发放分成金额
      *
@@ -244,14 +249,18 @@ public class OrderCalculationServiceImpl implements OrderCalculationService {
                 //工作室责任人 -- 账户流水记录
                 accountFlowRecordService.insertRecord(studioC.getId(), "1", "1",
                         studioAmount, record.getOrderId(), "1");
-                // TODO: 2018/8/7 工作室责任人到账消息通知
             }
             //卖家数据更新
             counselorDao.updateByPrimaryKeySelective(counselor);
             //卖家账户流水记录
             accountFlowRecordService.insertRecord(counselor.getId(), "1", "1",
                     amount, record.getOrderId(), "1");
-            // TODO: 2018/8/7 卖家到账消息通知
+
+            //订单成功标记
+            record.setRemark("订单发放成功");
+            record.setGrantTag("1");
+            record.setUpdateDate(DateUtil.getNowDate());
+            orderCalculationDao.updateByPrimaryKeySelective(record);
         }
     }
 

@@ -310,13 +310,28 @@
         where vvv.tId = #{id,jdbcType=VARCHAR}
     </select>
 
+    <select id="findCpuList" resultMap="BaseResultMap">
+        select
+        t.id, t.orderId, t.counselorId, t.ratio, t.amount, t.platformAmount,
+        t.studioRatio, t.studioAmount, t.cpuTag, t.grantTag,
+        t.remark, t.status, t.createDate, t.updateDate
+        from order_calculation t,base_order o
+        where t.orderId = o.id
+        and t.cpuTag = '0'
+        and t.grantTag = '0'
+        and o.payStatus in ('2', '7')
+        ORDER BY t.createDate desc
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 
     <select id="findGrantList" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        t.id, t.orderId, t.counselorId, t.ratio, t.amount, t.platformAmount,
+        t.studioRatio, t.studioAmount, t.cpuTag, t.grantTag,
+        t.remark, t.status, t.createDate, t.updateDate
         from order_calculation t,base_order o
         where t.orderId = o.id
-        and t.cpuTag='1'
+        and t.cpuTag = '1'
         and t.grantTag = '0'
         and o.payStatus = '7'
         ORDER BY t.createDate desc
