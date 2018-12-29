@@ -1,12 +1,12 @@
-package com.huacainfo.ace.generator.society;
+package com.huacainfo.ace.generator.partyschool;
 
 import com.huacainfo.ace.generator.base.CodeGenerator;
 
 public class Generator {
 
     public static void main(String[] args) throws Exception {
-        CodeGenerator codeGenerator = new CodeGenerator("society", "问题反馈", "Arvin");
-        Class<?> c = null;//com.huacainfo.ace.society.model.FeedBack.class;
+        CodeGenerator codeGenerator = new CodeGenerator("partyschool", "学员管理", "Arvin");
+        Class<?> c = com.huacainfo.ace.partyschool.model.Student.class;
 
         //*******************************************
         codeGenerator.init(c);

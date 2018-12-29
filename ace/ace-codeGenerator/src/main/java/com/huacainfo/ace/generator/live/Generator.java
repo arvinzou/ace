@@ -6,7 +6,7 @@ public class Generator {
 
     public static void main(String[] args) throws Exception {
         CodeGenerator codeGenerator = new CodeGenerator("live", "互动", "陈晓克");
-        Class<?> c = null;
+        Class<?> c = null;//com.huacainfo.ace.live.model.LiveMsg.class;
 //        Class<?> c = null;//com.huacainfo.ace.society.model.PersonInfo.class;
 
         //*******************************************
