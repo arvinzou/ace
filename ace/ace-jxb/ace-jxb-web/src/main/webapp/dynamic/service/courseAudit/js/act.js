@@ -69,7 +69,7 @@ window.onload = function (){
 }
 var payType = "";
 var videoUrl = "";
-var params={limit:10,type:'1'};
+var params={limit:10};
 function initPage() {
     $.jqPaginator('#pagination1', {
         totalCounts: 1,

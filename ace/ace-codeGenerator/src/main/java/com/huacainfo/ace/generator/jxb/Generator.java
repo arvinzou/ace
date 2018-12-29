@@ -6,7 +6,7 @@ public class Generator {
 
     public static void main(String[] args) throws Exception {
         CodeGenerator codeGenerator = new CodeGenerator("jxb", "轮播图", "陈晓克");
-        Class<?> c =com.huacainfo.ace.jxb.model.Banner.class;
+        Class<?> c = null;//com.huacainfo.ace.jxb.model.Banner.class;
 
         //*******************************************
         codeGenerator.init(c);

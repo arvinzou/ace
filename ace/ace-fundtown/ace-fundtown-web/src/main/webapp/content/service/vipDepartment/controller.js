@@ -144,13 +144,13 @@ function edit(rowid) {
                    recreateForm: true,
                    viewPagerButtons: true,
                    beforeSubmit: function (postdata) {
-                       postdata.content = editor.getValue();
-                       return [true, "", ""];
+////                       postdata.departmentId = editor.getValue();
+                     return [true, "", ""];
                    },
                    beforeShowForm: function (e) {
-
                    }
                });
+               loadText(rowid);
   }
 
 
@@ -312,12 +312,19 @@ function loadText(id) {
         type: "post",
         url: cfg.view_load_data_url,
         data: {
-            id: rowid
+            id: id
         },
         beforeSend: function (XMLHttpRequest) {
         },
         success: function (rst, textStatus) {
-//           $("#TblGrid_grid-table").find("input[name=parentDepartmentId]").val(rst.value.parentDepartmentName);
+          var type=$('select[name=type]').val();
+          if(type==1){
+           $("#TblGrid_grid-table").find("input[name=parentDepartmentId]").val(rst.value.parentDepartmentName);
+           }
+           if(type==0)
+           {
+           $("#TblGrid_grid-table").find("input[name=parentDepartmentId]").val("无所属机构");
+           }
         },
         error: function () {
             alert("加载错误！");

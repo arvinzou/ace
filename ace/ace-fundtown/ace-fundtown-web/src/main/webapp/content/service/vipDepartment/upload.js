@@ -68,7 +68,7 @@ function initUploader(browseBtn, id) {
             var html = [];
             $.each(rst.value, function (n, obj) {
                 html.push('<div id="' + obj.id + '"> ' +
-                    '<a href="' + obj.mediUrl + '" target="_blank">' + obj.resName
+                    '<a href="' + obj.resUrl + '" target="_blank">' + obj.resName
                     + '</a> (' + parseInt(file.size / 1024) + 'kb)' +
                     ' <a class=\'ace-icon glyphicon glyphicon-remove bigger-110\' ' +
                     ' href="javascript:deleteAttach(\'' + obj.id + '\',\'' + obj.deptId + '\')"></a><b></b></div>');
