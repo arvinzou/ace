@@ -27,7 +27,7 @@ function getOrderList(date) {
         year: year,
         month: momth,
         category:category==3?'':category,
-        statusArray:'2,6,7',
+        statusArray:'7',
     };
     $.getJSON(url, data, function (rst) {
         var mylist = document.getElementById('tmp-list').innerHTML;
