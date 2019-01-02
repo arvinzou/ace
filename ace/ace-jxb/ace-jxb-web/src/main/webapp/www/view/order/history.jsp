@@ -23,7 +23,7 @@
                     <li class="active" onclick="orderList();">全部</li>
                     <li onclick="orderList('1');">待支付</li>
                     <li onclick="orderList('2','3','6');">待完成</li>
-                    <li onclick="orderList('4','7');">已完成</li>
+                    <li onclick="orderList('7');">已完成</li>
                 </ul>
                 <div class="news-slider"></div>
             </div>
