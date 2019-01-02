@@ -10,7 +10,10 @@
     var fastdfs_server = '${cfg.fastdfs_server}';
     var activeSyId = '${SESSION_USERPROP_KEY.activeSyId}';
     var portalType = '${SESSION_USERPROP_KEY.cfg.portalType}';
+    var default_page_list = [${cfg.default_page_list}];
 </script>
+<script type="text/javascript" src="${portalPath}/system/getUserProp.do"></script>
+<script type="text/javascript" src="${portalPath}/system/getButtonAuthority.do?id=${param.id}"></script>
 <link rel="stylesheet"
       href="${portalPath}/content/common/assets/global/plugins/bootstrap/css/bootstrap.min.css?v=${cfg.version}"/>
 <link rel="stylesheet" type="text/css"
