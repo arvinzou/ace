@@ -1,0 +1,35 @@
+package com.huacainfo.ace.partyschool.dao;
+
+import com.huacainfo.ace.partyschool.model.Student;
+import com.huacainfo.ace.partyschool.vo.StudentQVo;
+import com.huacainfo.ace.partyschool.vo.StudentVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+public interface StudentDao {
+
+    Student selectByPrimaryKey(String id);
+
+    int deleteByPrimaryKey(String id);
+
+    int insert(Student record);
+
+    int updateByPrimaryKey(Student record);
+
+
+    StudentVo selectVoByPrimaryKey(String id);
+
+    List<StudentVo> findList(@Param("condition") StudentQVo condition,
+                             @Param("start") int start,
+                             @Param("limit") int limit,
+                             @Param("orderBy") String orderBy);
+
+    int findCount(@Param("condition") StudentQVo condition);
+
+    int isExist(Student record);
+
+    int updateStatus(@Param("id") String id,
+                     @Param("status") String status);
+
+}
