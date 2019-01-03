@@ -9,7 +9,9 @@ public class Course implements Serializable {
     private String id;
 
     private String name;
-
+/**
+ * 1、‘现场教学
+ * 2、室内教学*/
     private String category;
 
     private String teacherId;
@@ -27,6 +29,16 @@ public class Course implements Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getId() {
         return id;
