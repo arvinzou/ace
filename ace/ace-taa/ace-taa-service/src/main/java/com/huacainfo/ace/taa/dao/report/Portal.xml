@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.report.Portal">
+    <select id="query" resultType="map">
+        SELECT
+        'person' id,
+        count(1) value
+        FROM
+        portal.users t
+        WHERE
+        t.user_level='1' and t.stauts='1' and t.cur_syid ='society'
+        union all
+        SELECT
+        'org' id,
+        count(1) value
+        FROM
+        society_org_info t
+        WHERE
+        t.status='3'
+        union all
+        SELECT
+        'activityAll' id,
+        count(1) value
+        FROM
+        activity t
+        WHERE
+        t.status='3'
+        union all
+        SELECT
+        'activityAudit' id,
+        count(1) value
+        FROM
+        activity t
+        WHERE
+        t.status='2'
+        union all
+        SELECT
+        'behavior' id,
+        count(1) value
+        FROM
+        behavior t
+        WHERE
+        t.status='3'
+        union all
+        SELECT
+        'subjectIdea' id,
+        count(1) value
+        FROM
+        subject_idea t
+        WHERE
+        t.status='3'
+        union all
+        SELECT
+        'live' id,
+        count(1) value
+        FROM
+        live.live t
+        WHERE
+        t.status='2'
+        union all
+        SELECT
+        'circle' id,
+        count(1) value
+        FROM
+        circle t
+        WHERE
+        t.status='2'
+    </select>
+</mapper>

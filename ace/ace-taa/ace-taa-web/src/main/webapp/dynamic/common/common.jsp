@@ -10,7 +10,7 @@
 
 %>
 <script type="text/javascript">
-    var contextPath = '${pageContext.request.contextPath}';
+    var contextPath = '${portalPath}';
     var portalPath = '${portalPath}';
     var layoutTopHeight = 280;
     var fastdfs_server = '${cfg.fastdfs_server}';
