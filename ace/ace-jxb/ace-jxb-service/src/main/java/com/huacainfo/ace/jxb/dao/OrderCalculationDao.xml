@@ -251,7 +251,7 @@
                         left join counselor c on  c.id = t.businessId
                         left join studio s on c.studioId =s.id
                         where 1=1
-                            and t.payStatus in ('2','6','7')
+        and t.payStatus = '7'
                             and t.category in ('1','2','4')
                             and s.counselorId is not null
                     )v
@@ -268,7 +268,7 @@
                             oc.ratio, oc.amount, oc.platformAmount, oc.studioRatio, oc.studioAmount
                         from base_order t, order_calculation oc
                         where t.id = oc.orderId
-                            and t.payStatus in ('2','6','7')
+        and t.payStatus = '7'
                             and t.category = '1'
                     )v
                     GROUP BY v.businessId
@@ -284,7 +284,7 @@
                             oc.ratio, oc.amount, oc.platformAmount, oc.studioRatio, oc.studioAmount
                         from base_order t, order_calculation oc
                         where t.id = oc.orderId
-                            and t.payStatus in ('2','6','7')
+        and t.payStatus = '7'
                             and t.category = '2'
                     )v
                     GROUP BY v.businessId
@@ -300,7 +300,7 @@
                             oc.ratio, oc.amount, oc.platformAmount, oc.studioRatio, oc.studioAmount
                         from base_order t, order_calculation oc
                         where t.id = oc.orderId
-                            and t.payStatus in ('2','6','7')
+        and t.payStatus in ('2','7')
                             and t.category = '4'
                     )v
                     GROUP BY v.businessId

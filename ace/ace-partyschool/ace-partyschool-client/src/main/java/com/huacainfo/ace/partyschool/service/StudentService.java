@@ -81,4 +81,12 @@ public interface StudentService {
      * @version: 2018-12-29
      */
     MessageResponse deleteStudentByStudentId(String id, UserProp userProp) throws Exception;
+
+    /**
+     * 判断身份证是否已存在
+     *
+     * @param idCard 身份证号码
+     * @return boolean
+     */
+    boolean isExistByIdCard(String idCard);
 }
