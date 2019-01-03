@@ -49,7 +49,7 @@
                                             </label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" name="name"
-                               value="\{data.o.name}" maxlength="50"
+                               value="\${data.o.name}" maxlength="50"
                                placeholder="请输入名称（建议字数在14个字以内，不超过50个字)">
                         <span class="help-block"></span>
                     </div>
@@ -61,7 +61,7 @@
                                             </label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" name="introduce"
-                               value="\{data.o.introduce}" maxlength="2147483647"
+                               value="\${data.o.introduce}" maxlength="2147483647"
                                placeholder="请输入介绍（建议字数在14个字以内，不超过2147483647个字)">
                         <span class="help-block"></span>
                     </div>
@@ -74,7 +74,7 @@
                                             </label>
                     <div class="col-md-10">
                         <input type="text" class="form-control" name="timeout"
-                               value="\{data.o.timeout}" maxlength="10"
+                               value="\${data.o.timeout}" maxlength="10"
                                placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">
                         <span class="help-block"></span>
                     </div>
