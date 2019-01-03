@@ -2,6 +2,7 @@ package com.huacainfo.ace.partyschool.service.impl;
 
 
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -74,13 +75,6 @@ public class TeacherServiceImpl implements TeacherService {
      */
     @Override
     public MessageResponse insertTeacher(Teacher o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getCategory())) {
-            return new MessageResponse(1, "类别不能为空！");
-        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
@@ -90,17 +84,14 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getIdCard())) {
             return new MessageResponse(1, "身份证不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态不能为空！");
-        }
-
 
         int temp = this.teacherDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(1, "教职工名称重复！");
+            return new MessageResponse(1, "教职工身份证号码重复");
         }
 
-        o.setId(GUIDUtil.getGUID());
+        String tid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
+        o.setId(tid);
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -190,6 +181,19 @@ public class TeacherServiceImpl implements TeacherService {
         this.dataBaseLogService.log("删除教职工管理", "教职工管理", id, id,
                 "教职工管理", userProp);
         return new MessageResponse(0, "教职工删除完成！");
+    }
+
+    /**
+     * 判断身份证是否已存在
+     *
+     * @param idCard 身份证号码
+     * @return boolean
+     */
+    @Override
+    public boolean isExistByIdCard(String idCard) {
+        int i = teacherDao.isExistByIdCard(idCard);
+
+        return i > 0;
     }
 
 

@@ -3,11 +3,11 @@ package com.huacainfo.ace.partyschool.service.impl;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.StudentDao;
 import com.huacainfo.ace.partyschool.model.Student;
@@ -78,12 +78,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public MessageResponse insertStudent(Student o, UserProp userProp) throws Exception {
 
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getPid())) {
-            return new MessageResponse(1, "父ID不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
@@ -96,17 +91,16 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getClassId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
 
 
         int temp = this.studentDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(1, "学员管理名称重复！");
+            return new MessageResponse(ResultCode.FAIL, "学员身份证号码重复");
         }
 
-        o.setId(GUIDUtil.getGUID());
+        String sid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
+        o.setId(sid);
+        o.setPid("0");
         o.setCreateDate(new Date());
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
@@ -199,7 +193,18 @@ public class StudentServiceImpl implements StudentService {
         return new MessageResponse(0, "学员管理删除完成！");
     }
 
+    /**
+     * 判断身份证是否已存在
+     *
+     * @param idCard 身份证号码
+     * @return boolean
+     */
+    @Override
+    public boolean isExistByIdCard(String idCard) {
+        int i = studentDao.isExistByIdCard(idCard);
 
+        return i > 0;
+    }
 
 
 }

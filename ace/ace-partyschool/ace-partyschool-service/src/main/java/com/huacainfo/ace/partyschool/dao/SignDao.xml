@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.SignDao">
+
+    <insert id="insertReg">
+        insert into portal.users (user_id, account, password,
+        sex, id_card, name,
+        department_id, area_code, birthday,
+        stauts, last_login_time, mobile,
+        email, seat, user_level,
+        create_time, fax, telphone,
+        qq, openId, cur_syid,
+        appOpenId)
+        values (
+        #{user.userId,jdbcType=VARCHAR}, #{user.account,jdbcType=VARCHAR}, #{user.password,jdbcType=VARCHAR},
+        #{user.sex,jdbcType=VARCHAR}, #{user.idCard,jdbcType=VARCHAR}, #{user.name,jdbcType=VARCHAR},
+        #{user.departmentId,jdbcType=VARCHAR}, #{user.areaCode,jdbcType=VARCHAR}, #{user.birthday,jdbcType=DATE},
+        #{user.stauts,jdbcType=VARCHAR}, #{user.lastLoginTime,jdbcType=TIMESTAMP}, #{user.mobile,jdbcType=VARCHAR},
+        #{user.email,jdbcType=VARCHAR}, #{user.seat,jdbcType=VARCHAR}, #{user.userLevel,jdbcType=VARCHAR},
+        #{user.createTime,jdbcType=TIMESTAMP}, #{user.fax,jdbcType=VARCHAR}, #{user.telphone,jdbcType=VARCHAR},
+        #{user.qq,jdbcType=VARCHAR}, #{user.openId,jdbcType=VARCHAR}, #{user.curSyid,jdbcType=VARCHAR},
+        #{user.appOpenId,jdbcType=VARCHAR})
+        ;
+        insert into portal.users_role
+        (user_id, role_id, create_time)
+        values(#{user.userId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, now())
+        ;
+        insert into portal.user_cfg (id, userId, cfgKey,cfgValue)
+        values (#{user.userId,jdbcType=VARCHAR}, #{user.userId,jdbcType=VARCHAR}, 'portalType','1');
+    </insert>
+
+    <select id="isExistByMobile" resultType="int">
+        select count(*)
+        from portal.users
+        where mobile = #{tel}
+        or account = #{tel}
+    </select>
+
+</mapper>
