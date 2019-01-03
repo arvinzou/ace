@@ -101,7 +101,7 @@ public class StudentServiceImpl implements StudentService {
         }
 
 
-        int temp = this.studentDao.isExit(o);
+        int temp = this.studentDao.isExist(o);
         if (temp > 0) {
             return new MessageResponse(1, "学员管理名称重复！");
         }
@@ -200,36 +200,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
 
-    /**
-     * @throws
-     * @Title:audit
-     * @Description: TODO(审核学员管理)
-     * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param remark 审核备注
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2018-12-29
-     */
-    @Override
-    public MessageResponse audit(String id, String rst, String remark,
-                                 UserProp userProp) throws Exception {
 
-        Student obj = studentDao.selectByPrimaryKey(id);
-        if (obj == null) {
-            return new MessageResponse(ResultCode.FAIL, "学员管理数据丢失");
-        }
-
-        obj.setStatus(rst);
-        obj.setLastModifyDate(DateUtil.getNowDate());
-        obj.setLastModifyUserId(userProp.getUserId());
-        obj.setLastModifyUserName(userProp.getName());
-        studentDao.updateStatus(obj);
-
-
-        dataBaseLogService.log("审核学员管理", "学员管理", id, id, "学员管理", userProp);
-        return new MessageResponse(0, "学员管理审核完成！");
-    }
 
 }

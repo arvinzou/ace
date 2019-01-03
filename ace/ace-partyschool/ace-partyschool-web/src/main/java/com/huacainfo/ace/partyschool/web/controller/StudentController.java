@@ -127,22 +127,4 @@ public class StudentController extends BisBaseController {
         return this.studentService.deleteStudentByStudentId(id, this.getCurUserProp());
     }
 
-    /**
-     * @throws
-     * @Title:audit
-     * @Description: TODO(审核学员管理)
-     * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param message 审核说明
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2018-12-29
-     */
-    @RequestMapping(value = "/audit")
-    @ResponseBody
-    public MessageResponse audit(String id, String rst, String message) throws Exception {
-
-        return this.studentService.audit(id, rst, message, this.getCurUserProp());
-    }
 }

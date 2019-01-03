@@ -32,12 +32,19 @@ autoclose: true
 }, 0);
 }
 function renderBtn(cur) {
-var id = $.jgrid.getAccessor(cur, 'id');
+var rowid = $.jgrid.getAccessor(cur, 'id');
 var title = $.jgrid.getAccessor(cur, 'name');
-var html = [];
-html.push('<a target="_blank" href="');
-    html.push('javascript:preview(\'' + id + '\',\'' + title + '\')');
-    html.push('"');
-html.push('><span class="badge badge-info">查看</span></a>');
-return html.join(' ');
+
+var opt = [];
+if (authorConfig.hasOwnProperty(cfg.grid_edit_data_url)) {
+opt.push('<a href="javascript:edit(\'' + rowid + '\')">编辑</a> ');
+}
+if (authorConfig.hasOwnProperty(cfg.grid_delete_data_url)) {
+opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
+}
+
+opt.push('<a href="#" data-toggle="modal" data-id="' + rowid + '" data-title="' + title + '" ' +
+'data-target="#modal-preview">查看</a>');
+
+return opt.join(' ');
 }

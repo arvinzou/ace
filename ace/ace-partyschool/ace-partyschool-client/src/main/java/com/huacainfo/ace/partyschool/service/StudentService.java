@@ -81,18 +81,4 @@ public interface StudentService {
      * @version: 2018-12-29
      */
     MessageResponse deleteStudentByStudentId(String id, UserProp userProp) throws Exception;
-
-    /**
-     * @throws
-     * @Title:audit
-     * @Description: TODO(审核学员管理)
-     * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param remark 审核备注
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: Arvin
-     * @version: 2018-12-29
-     */
-    MessageResponse audit(String id, String rst, String remark, UserProp userProp) throws Exception;
 }
