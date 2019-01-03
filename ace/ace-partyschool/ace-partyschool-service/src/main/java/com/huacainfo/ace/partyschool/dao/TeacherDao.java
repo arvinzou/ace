@@ -33,4 +33,5 @@ public interface TeacherDao {
     int updateStatus(@Param("id") String id,
                      @Param("status") String status);
 
+    int isExistByIdCard(String idCard);
 }

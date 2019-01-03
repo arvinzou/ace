@@ -17,6 +17,25 @@ public class BisBaseController extends BaseController implements Serializable {
     @Autowired
     private RedisOperations<String, Object> redisClient;
 
+    /**
+     * 设置redis的值
+     *
+     * @param key key
+     */
+    public Object sessionGet(String key) {
+        return getRequest().getSession().getAttribute(key);
+    }
+
+    /**
+     * 设置redis的值
+     *
+     * @param key   key
+     * @param value value
+     */
+    public void sessionSet(String key, Object value) {
+        getRequest().getSession().setAttribute(key, value);
+    }
+
 
     /**
      * 设置redis的值
