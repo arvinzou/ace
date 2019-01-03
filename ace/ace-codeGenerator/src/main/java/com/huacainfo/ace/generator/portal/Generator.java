@@ -1,12 +1,12 @@
-package com.huacainfo.ace.generator.society;
+package com.huacainfo.ace.generator.portal;
 
 import com.huacainfo.ace.generator.base.CodeGenerator;
 
 public class Generator {
 
     public static void main(String[] args) throws Exception {
-        CodeGenerator codeGenerator = new CodeGenerator("society", "个人爱心币排行", "彭飞");
-        Class<?> c =null;
+        CodeGenerator codeGenerator = new CodeGenerator("portal", "管理员列表", "陈晓克");
+        Class<?> c =com.huacainfo.ace.portal.model.WxAdmin.class;
 
         //*******************************************
         codeGenerator.init(c);

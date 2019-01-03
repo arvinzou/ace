@@ -1,23 +1,20 @@
-package com.huacainfo.ace.generator.society;
+package com.huacainfo.ace.generator.taa;
 
 import com.huacainfo.ace.generator.base.CodeGenerator;
 
 public class Generator {
 
     public static void main(String[] args) throws Exception {
-        CodeGenerator codeGenerator = new CodeGenerator("society", "个人爱心币排行", "彭飞");
-        Class<?> c =null;
-
+        CodeGenerator codeGenerator = new CodeGenerator("taa", "道路", "陈晓克");
+        Class<?> c = com.huacainfo.ace.taa.model.Road.class;
         //*******************************************
         codeGenerator.init(c);
+        //java
         codeGenerator.generatorJavaManager(c);
         //web形式-适用于新互联网架构
-        codeGenerator.generatorWebClient1(c);
-
-
+//        codeGenerator.generatorWebClient1(c);
         // web形式-适用于多表格，多数据的表单结构
-//        codeGenerator.generatorWebClient2(c);
-
+        codeGenerator.generatorWebClient2(c);
     }
 
 }
