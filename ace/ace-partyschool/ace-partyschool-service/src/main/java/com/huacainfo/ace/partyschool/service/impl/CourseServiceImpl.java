@@ -81,7 +81,7 @@ public class CourseServiceImpl implements CourseService {
      */
     @Override
     public MessageResponse insertCourse(Course o, UserProp userProp) throws Exception {
-
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -94,14 +94,11 @@ public class CourseServiceImpl implements CourseService {
         if (CommonUtils.isBlank(o.getTeacherId())) {
             return new MessageResponse(1, "老师ID不能为空！");
         }
-
-
         int temp = this.courseDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "课程管理名称重复！");
         }
-
-        o.setId(GUIDUtil.getGUID());
+        o.setStatus("1");
         o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
@@ -125,8 +122,9 @@ public class CourseServiceImpl implements CourseService {
      */
     @Override
     public MessageResponse updateCourse(Course o, UserProp userProp) throws Exception {
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
+        Course course = this.courseDao.selectByPrimaryKey(o.getId());
+        if (course==null) {
+            return new MessageResponse(1, "课程管理数据丢失！");
         }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
@@ -137,15 +135,16 @@ public class CourseServiceImpl implements CourseService {
         if (CommonUtils.isBlank(o.getTeacherId())) {
             return new MessageResponse(1, "老师ID不能为空！");
         }
-
-
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
-        this.courseDao.updateByPrimaryKey(o);
+        course.setLastModifyDate(new Date());
+        course.setLastModifyUserName(userProp.getName());
+        course.setLastModifyUserId(userProp.getUserId());
+        course.setName(o.getName());
+        course.setName(o.getCategory());
+        course.setEvaluatingId(o.getEvaluatingId());
+        course.setTeacherId(o.getTeacherId());
+        this.courseDao.updateByPrimaryKey(course);
         this.dataBaseLogService.log("变更课程管理", "课程管理", "",
                 o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "变更课程管理完成！");
     }
 
@@ -189,44 +188,21 @@ public class CourseServiceImpl implements CourseService {
     }
 
 
-    /**
-     * @throws
-     * @Title:audit
-     * @Description: TODO(审核课程管理)
-     * @param: @param id bean.id
-     * @param: @param rst 审核结果 3-通过 4-拒绝
-     * @param: @param remark 审核备注
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: 王恩
-     * @version: 2019-01-02
-     */
-/*    @Override
-    public MessageResponse audit(String id, String rst, String remark,
-                                 UserProp userProp) throws Exception {
+    @Override
+    public MessageResponse softdel(String id,UserProp userProp) throws Exception {
 
         Course obj = courseDao.selectByPrimaryKey(id);
         if (obj == null) {
             return new MessageResponse(ResultCode.FAIL, "课程管理数据丢失");
         }
-
-        //更改审核记录
-        MessageResponse auditRs =
-                auditRecordService.audit(BisType.partyschool_ORG_INFO, obj.getId(), obj.getId(), rst, remark,
-                        userProp);
-        if (ResultCode.FAIL == auditRs.getStatus()) {
-            return auditRs;
-        }
-
+        obj.setStatus("0");
         obj.setLastModifyDate(DateUtil.getNowDate());
         obj.setLastModifyUserId(userProp.getUserId());
         obj.setLastModifyUserName(userProp.getName());
-        courseDao.updateStatus(obj);
-
-
+        courseDao.updateByPrimaryKey(obj);
         dataBaseLogService.log("审核课程管理", "课程管理", id, id,
                 "课程管理", userProp);
-        return new MessageResponse(0, "课程管理审核完成！");
-    }*/
+        return new MessageResponse(0, "删除成功！");
+    }
 
 }

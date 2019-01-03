@@ -73,6 +73,16 @@ function edit(did) {
     window.location.href = 'edit/index.jsp?id=' + urlParams.id + '&did=' + did;
 }
 
+/*课程管理编辑*/
+function del(id) {
+    var url = contextPath + "/course/softdel";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+
+        }
+    })
+}
+
 /*查看详情*/
 function detail(id) {
     var url = contextPath + "/course/selectCourseByPrimaryKey";
@@ -93,13 +103,6 @@ function initEvents() {
         var title = relatedTarget.data('title');
         var modal = $(this);
         initPreview(id);
-    })
-    $('#modal-audit').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        initForm(id);
     })
     $('#modal-audit .audit').on('click', function () {
         $('#modal-audit form').submit();
@@ -123,6 +126,7 @@ function initEvents() {
     });
 
 }
+
 /*课程管理审核*/
 function audit(params) {
     startLoad();
@@ -145,7 +149,6 @@ function audit(params) {
         }
     });
 }
-
 
 
 //juicer自定义函数
@@ -191,7 +194,7 @@ function initPreview(id) {
             stopLoad();
             if (result.status == 0) {
                 var data = {};
-                data['o'] = result.value;
+                data = result.value;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);

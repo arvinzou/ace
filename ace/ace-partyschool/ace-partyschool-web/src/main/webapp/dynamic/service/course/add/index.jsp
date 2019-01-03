@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="css/style.css">
     <%--<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>--%>
     <%--<link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">--%>
-    <link rel="stylesheet"
-          href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 </head>
 
@@ -71,7 +70,7 @@
                             ﻿
                         </label>
                         <div class="col-md-10">
-                            <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single2" name="teacherId">
+                            <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single2" name="teacherId"></select>
                         </div>
                     </div>
 

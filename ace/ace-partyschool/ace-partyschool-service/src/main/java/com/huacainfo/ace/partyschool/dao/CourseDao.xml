@@ -6,6 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="category" jdbcType="VARCHAR" property="category" />
     <result column="teacherId" jdbcType="VARCHAR" property="teacherId" />
+    <result column="status" jdbcType="CHAR" property="status" />
     <result column="evaluatingId" jdbcType="VARCHAR" property="evaluatingId" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
@@ -15,7 +16,7 @@
     <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, category, teacherId, evaluatingId, createUserId, createUserName, createDate, 
+    id, name, category, teacherId, status, evaluatingId, createUserId, createUserName, createDate,
     lastModifyUserId, lastModifyUserName, lastModifyDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -30,11 +31,11 @@
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Course">
     insert into course (id, name, category, 
-      teacherId, evaluatingId, createUserId, 
+      teacherId, status, evaluatingId, createUserId,
       createUserName, createDate, lastModifyUserId, 
       lastModifyUserName, lastModifyDate)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, 
-      #{teacherId,jdbcType=VARCHAR}, #{evaluatingId,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{teacherId,jdbcType=VARCHAR},#{status,jdbcType=CHAR}, #{evaluatingId,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR},
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
@@ -52,6 +53,8 @@
       </if>
       <if test="teacherId != null">
         teacherId,
+      </if><if test="status != null">
+      status,
       </if>
       <if test="evaluatingId != null">
         evaluatingId,
@@ -88,6 +91,9 @@
       <if test="teacherId != null">
         #{teacherId,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
       <if test="evaluatingId != null">
         #{evaluatingId,jdbcType=VARCHAR},
       </if>
@@ -123,6 +129,9 @@
       <if test="teacherId != null">
         teacherId = #{teacherId,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
       <if test="evaluatingId != null">
         evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
       </if>
@@ -152,6 +161,7 @@
     set name = #{name,jdbcType=VARCHAR},
       category = #{category,jdbcType=VARCHAR},
       teacherId = #{teacherId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
       evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
       createUserId = #{createUserId,jdbcType=VARCHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
@@ -166,21 +176,25 @@
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.CourseVo"></resultMap>
 
   <sql id="Vo_Column_List">
-    c.id, c.name, c.category, c.teacherId, c.evaluatingId, c.createUserId, c.createUserName, c.createDate,
-    c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,t.name as teacherName,e.name as evaluatingName
+    c.id, c.name, c.category, c.teacherId, c.status, c.evaluatingId, c.createUserId, c.createUserName, c.createDate,
+    c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,t.name as teacherName,e.name as evaluatingName ,s.name as codeName
   </sql>
 
   <sql id="Where_Condition">
-    where 1 = 1
+    where c.status <![CDATA[ <> ]]> 0
     <if test="condition.name !=null and condition.name !=&quot;&quot;">
-      and c.name = #{condition.name,jdbcType=VARCHAR}
+      and c.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
     </if>
+    <if test="condition.category !=null and condition.category !=&quot;&quot;">
+    and c.category = #{condition.category,jdbcType=VARCHAR}
+  </if>
   </sql>
 
   <sql id="From_Statement">
     FROM course c
     LEFT JOIN teacher t ON  c.teacherId=t.id
     LEFT JOIN evaluating e ON  e.id=c.evaluatingId
+    LEFT JOIN (SELECT code,name FROM portal.dict WHERE category_id='154') s ON c.category=s.code
   </sql>
 
   <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -208,7 +222,7 @@
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
     select count(1)
     from course c
-    where 1=1
+    where c.status <![CDATA[ <> ]]> 0
     and c.name = #{condition.name,jdbcType=VARCHAR}
     and c.teacherId= #{condition.teacherId,jdbcType=VARCHAR}
   </select>

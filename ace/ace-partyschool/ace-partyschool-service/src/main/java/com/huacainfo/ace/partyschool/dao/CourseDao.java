@@ -28,7 +28,7 @@ public interface CourseDao {
 
     int findCount(@Param("condition") CourseQVo condition);
 
-    int isExit(Course record);
+    int isExit(@Param("condition") Course record);
 
     int updateStatus(Course record);
 

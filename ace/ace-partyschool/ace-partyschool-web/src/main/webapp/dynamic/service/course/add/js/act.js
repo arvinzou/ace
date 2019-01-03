@@ -87,7 +87,7 @@ function initSelect() {
 
     $(".js-example-basic-single2").select2({
         ajax: {
-            url: contextPath + "/evaluating/findEvaluatingList",
+            url: contextPath + '/teacher/findTeacherList',
             dataType: 'json',
             delay: 250,
             data: function (params) {
@@ -118,12 +118,23 @@ function initSelect() {
             },
             cache: true
         },
-        placeholder: '选择评测模板',
+        placeholder: '选择授课老师',
         escapeMarkup: function (markup) {
             return markup;
         }, // let our custom formatter work
+        templateResult: formatState
     });
 }
+
+function formatState (state) {
+    if (!state.id) {
+        return state.text;
+    }
+    var $state = $(
+        '<div style="height: 50px; margin-bottom: 5px;"><img style="height: 50px;width: 50px;object-fit: cover; overflow: hidden;margin-right: 10px" src="'+state.photoUrl+'" class="img-flag" /> ' + state.text + '</div>'
+    );
+    return $state;
+};
 
 
 /*页面渲染*/
