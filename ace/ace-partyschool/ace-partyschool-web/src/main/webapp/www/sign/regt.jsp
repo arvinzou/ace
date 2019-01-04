@@ -22,7 +22,10 @@
 					<label class="form-label">身份证号</label>
 					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入18位身份证号"/>
 				</div>
-				<img src="img/camera.png" class="camera"/>
+				<div class="camera-box">
+					<label for="file"><img src="img/camera.png" class="camera"/></label>
+					<input type="file" id="file" name="file" onchange="imgChange();" style="display: none;width: 100%;height: 100%;"/>
+				</div>
 			</div>
 			
 			<div class="form-box">
@@ -74,11 +77,22 @@
 				<img src="img/regist.png" onclick="regist();"/>
 			</div>
 		</div>
+
+		<!--绑定微信栏目-->
+		<div class="modal"id="bindModal" style="display: none;">
+			<div class="modal-main">
+				<div class="modal-title">是否绑定微信</div>
+				<div class="modal-sectitle">绑定微信快速登录</div>
+				<div class="modal-opt">
+					<div class="cancel"><span onclick="cancel();">取消</span></div>
+					<div class="bind"><span>立即绑定</span></div>
+				</div>
+			</div>
+		</div>
 	</body>
 
 	<script type="text/javascript" src="../common/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="../common/js/init-rem.js"></script>
-	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 	<script type="text/javascript" src="../common/js/mobileSelect.min.js"></script>
 	<script type="text/javascript" src="js/teacher.js"></script>
 </html>

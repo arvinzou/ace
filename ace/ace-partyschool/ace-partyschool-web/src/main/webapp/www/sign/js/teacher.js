@@ -76,6 +76,8 @@ function regist(){
         success:function(result){
             if(result.status == 0) {
                 alert(result.info);
+                $("#bindModal").show();
+                $("body").addClass("modalhide");
             }else {
                 if(result.info){
                     alert(result.info);
@@ -98,4 +100,56 @@ function isEmpty(str){
     }else{
         return true;
     }
+}
+
+function base64(file, callback) {
+    var coolFile = {};
+
+    function readerOnload(e) {
+        var base64 = btoa(e.target.result);
+        coolFile.base64 = base64;
+        callback(coolFile)
+    };
+    var reader = new FileReader();
+    reader.onload = readerOnload;
+
+    var file = file[0].files[0];
+    if(file){
+        coolFile.filetype = file.type;
+        coolFile.size = file.size;
+        coolFile.filename = file.name;
+        reader.readAsBinaryString(file);
+    }
+}
+
+function imgChange() {
+    var idCardData = "";
+    base64($('input[type="file"]'), function(data) {
+        idCardData = data.base64;
+        console.log("idCardData=================================="+idCardData);
+        $.ajax({
+            url: "https://api-cn.faceplusplus.com/cardpp/v1/ocridcard",
+            type: "post",
+            async: false,
+            data: {
+                "api_key": "-5Wf1CueJ8FffHLeEap4RtVOE77P6IQT",
+                "api_secret": "dxWQqNdaXugnohd021ba1Cu_g4tfLmW3",
+                "image_base64": idCardData
+            },
+            success: function(result) {
+                console.log("====================" + result);
+                $("input[name='name']").val(result.cards[0].name);
+                $("input[name='idCard']").val(result.cards[0].id_card_number);
+            },
+            error: function() {
+                console.log("出错了！");
+                alert("出错了！");
+            }
+        });
+    });
+}
+
+function cancel(){
+    $("#bindModal").hide();
+    $("body").removeClass("modalhide");
 }

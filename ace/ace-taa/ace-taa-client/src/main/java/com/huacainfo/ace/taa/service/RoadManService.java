@@ -4,101 +4,101 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.taa.model.$!{bean.name};
-import com.huacainfo.ace.taa.vo.$!{bean.name}Vo;
-import com.huacainfo.ace.taa.vo.$!{bean.name}QVo;
+import com.huacainfo.ace.taa.model.RoadMan;
+import com.huacainfo.ace.taa.vo.RoadManVo;
+import com.huacainfo.ace.taa.vo.RoadManQVo;
 import java.util.Map;
 import java.util.List;
 /**
-* @author: $!{annotation.authorName}
-* @version: $!{annotation.version}
-* @Description:  TODO($!{bean.tableChineseName})
+* @author: 陈晓克
+* @version: 2019-01-04
+* @Description:  TODO(路长)
 */
-public interface $!{bean.name}Service {
+public interface RoadManService {
 /**
 *
 * @Title:find!{bean.name}List
-* @Description:  TODO($!{bean.tableChineseName}分页查询)
+* @Description:  TODO(路长分页查询)
 * @param:        @param condition
 * @param:        @param start
 * @param:        @param limit
 * @param:        @param orderBy
 * @param:        @throws Exception
 * @return:       PageResult
-<$!{bean.name}Vo>
+<RoadManVo>
     * @throws
-    * @author: $!{annotation.authorName}
-    * @version: $!{annotation.version}
+    * @author: 陈晓克
+    * @version: 2019-01-04
     */
-    PageResult<$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,int start, int limit, String orderBy) throws Exception;
+    PageResult<RoadManVo> findRoadManList(RoadManQVo condition,int start, int limit, String orderBy) throws Exception;
 
         /**
         *
-        * @Title:insert$!{bean.name}
-        * @Description: TODO(添加$!{bean.tableChineseName})
+        * @Title:insertRoadMan
+        * @Description: TODO(添加路长)
         * @param: @param obj
         * @param: @param userProp
         * @param: @throws Exception
         * @return: MessageResponse
         * @throws
-        * @author: $!{annotation.authorName}
-        * @version: $!{annotation.version}
+        * @author: 陈晓克
+        * @version: 2019-01-04
         */
-        MessageResponse insert$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
+        MessageResponse insertRoadMan(RoadMan obj,UserProp userProp) throws Exception;
 
         /**
         *
-        * @Title:update$!{bean.name}
-        * @Description: TODO(更新$!{bean.tableChineseName})
+        * @Title:updateRoadMan
+        * @Description: TODO(更新路长)
         * @param: @param obj
         * @param: @param userProp
         * @param: @throws Exception
         * @return: MessageResponse
         * @throws
-        * @author: $!{annotation.authorName}
-        * @version: $!{annotation.version}
+        * @author: 陈晓克
+        * @version: 2019-01-04
         */
-        MessageResponse update$!{bean.name}($!{bean.name} obj,UserProp userProp) throws Exception;
+        MessageResponse updateRoadMan(RoadMan obj,UserProp userProp) throws Exception;
 
         /**
         *
-        * @Title:select$!{bean.name}ByPrimaryKey
-        * @Description: TODO(获取$!{bean.tableChineseName})
+        * @Title:selectRoadManByPrimaryKey
+        * @Description: TODO(获取路长)
         * @param: @param id
         * @param: @throws Exception
-        * @return: SingleResult<$!{bean.name}>
+        * @return: SingleResult<RoadMan>
         * @throws
-        * @author: $!{annotation.authorName}
-        * @version: $!{annotation.version}
+        * @author: 陈晓克
+        * @version: 2019-01-04
         */
-        SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception;
+        SingleResult<RoadManVo> selectRoadManByPrimaryKey(String id) throws Exception;
 
             /**
             *
-            * @Title:delete$!{bean.name}By$!{bean.name}Id
-            * @Description: TODO(删除$!{bean.tableChineseName})
+            * @Title:deleteRoadManByRoadManId
+            * @Description: TODO(删除路长)
             * @param: @param id
             * @param: @param userProp
             * @param: @throws Exception
             * @return: MessageResponse
             * @throws
-            * @author: $!{annotation.authorName}
-            * @version: $!{annotation.version}
+            * @author: 陈晓克
+            * @version: 2019-01-04
             */
-            MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id,UserProp userProp) throws Exception;
+            MessageResponse deleteRoadManByRoadManId(String id,UserProp userProp) throws Exception;
 
             /**
             *
             * @Title:audit
-            * @Description: TODO(审核$!{bean.tableChineseName})
+            * @Description: TODO(审核路长)
             * @param: @param id bean.id
             * @param: @param rst 审核结果 3-通过 4-拒绝
             * @param: @param remark 审核备注
             * @param: @throws Exception
             * @return: MessageResponse
             * @throws
-            * @author: $!{annotation.authorName}
-            * @version: $!{annotation.version}
+            * @author: 陈晓克
+            * @version: 2019-01-04
             */
             MessageResponse audit(String id,String rst, String remark, UserProp userProp) throws Exception;
 
@@ -113,8 +113,8 @@ public interface $!{bean.name}Service {
             	 		* @param:        @throws Exception
             	 		* @return:       MessageResponse
             	 		* @throws
-            	    * @author: $!{annotation.authorName}
-            	    * @version: $!{annotation.version}
+            	    * @author: 陈晓克
+            	    * @version: 2019-01-04
             	 */
             	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp)throws Exception;
 
@@ -128,8 +128,8 @@ public interface $!{bean.name}Service {
             	 		* @param:        @throws Exception
             	 		* @return:       ListResult<Map<String,Object>>
             	 		* @throws
-            	    * @author: $!{annotation.authorName}
-            	    * @version: $!{annotation.version}
+            	    * @author: 陈晓克
+            	    * @version: 2019-01-04
             	 */
             	public ListResult<Map<String,Object>> getList(Map<String, Object> p) throws Exception;
  }
