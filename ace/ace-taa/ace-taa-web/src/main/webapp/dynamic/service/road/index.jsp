@@ -84,32 +84,16 @@ pageEncoding="utf-8"%>
 <%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
-        <label class="col-md-2 view-label">姓名</label>
+        <label class="col-md-2 view-label">名称</label>
         <div class="col-md-10">
-            {@if data.o.headimgurl!='' && data.o.headimgurl!=null && data.o.headimgurl!=undefined}
-            <img src="\${data.o.photoUrl}" class="cover"/>
-            {@else}
-            <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
-            {@/if}
-            <a>\${data.o.name}</a>
+            \${data.o.name}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">手机号码</label>
-        <div class="col-md-10">
-            \${data.o.mobile}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">身份证号码</label>
-        <div class="col-md-10">
-            \${data.o.idCard}
-        </div>
-    </div>
+    
     <div class="form-group">
         <label class="col-md-2 view-label">介绍</label>
         <div class="col-md-10">
-            \${data.o.introduce}
+            \${data.o.intro}
         </div>
     </div>
 </script>
