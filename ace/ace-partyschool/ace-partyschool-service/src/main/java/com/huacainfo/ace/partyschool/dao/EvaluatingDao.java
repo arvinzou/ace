@@ -29,7 +29,7 @@ public interface EvaluatingDao {
 
     int findCount(@Param("condition") EvaluatingQVo condition);
 
-    int isExit(Evaluating record);
+    int isExit(@Param("condition")Evaluating record);
 
 
 }

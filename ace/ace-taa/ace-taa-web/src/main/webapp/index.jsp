@@ -19,18 +19,8 @@
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
-<div class="">
 
-    <div class="row widget-row">
-        <div class="col-md-6">
-            <div id="container" style="height: 612px">
-
-            </div>
-        </div>
-        <div class="col-md-6 page-content-inner">
-
-        </div>
-    </div>
+<div class="page-content-inner">
 
 </div>
 
@@ -39,113 +29,86 @@
 
 <script id="tpl-portal-1" type="text/template">
 
-
     <div class="row widget-row">
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">会员个人</h4>
+                <h4 class="widget-thumb-heading">系统用户</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green icon-user"></i>
+                    <i class="widget-thumb-icon bg-purple icon-user"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.person}">\${data.person}</span>
                     </div>
                 </div>
             </div>
+            <!-- END WIDGET THUMB -->
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">会员组织</h4>
+                <h4 class="widget-thumb-heading">管辖道路</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red   fa fa-users"></i>
+                    <i class="widget-thumb-icon bg-green fa fa-road"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.org}">\${data.org}</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.road}">\${data.road}</span>
                     </div>
                 </div>
             </div>
+            <!-- END WIDGET THUMB -->
         </div>
-    </div>
-    <div class="row widget-row">
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">线下活动</h4>
+                <h4 class="widget-thumb-heading">管辖路段</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-heart"></i>
+                    <i class="widget-thumb-icon bg-red  fa fa-map-signs"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">已审</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.activityAll}">\${data.activityAll}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">线下活动</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green  fa fa-heart"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">待审</span>
+                        <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup"
-                              data-value="\${data.activityAudit}">\${data.activityAudit}</span>
+                              data-value="\${data.roadSection}">\${data.roadSection}</span>
                     </div>
                 </div>
             </div>
+            <!-- END WIDGET THUMB -->
         </div>
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
+            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
+                <h4 class="widget-thumb-heading">路长</h4>
+                <div class="widget-thumb-wrap">
+                    <i class="widget-thumb-icon bg-purple fa fa-male"></i>
+                    <div class="widget-thumb-body">
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.roadMan}">\${data.roadMan}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- END WIDGET THUMB -->
+        </div>
+
     </div>
 
+    </div>
 
     <div class="row widget-row">
-        <div class="col-md-6">
+        <div class="col-md-3">
+            <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">文明随手拍</h4>
+                <h4 class="widget-thumb-heading">登记事故</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green fa fa-camera"></i>
+                    <i class="widget-thumb-icon bg-purple fa fa-location-arrow"></i>
                     <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">已审</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.behavior}">\${data.behavior}</span>
+                        <span class="widget-thumb-subtitle">累计</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.traAcc}">\${data.traAcc}</span>
                     </div>
                 </div>
             </div>
+            <!-- END WIDGET THUMB -->
         </div>
-        <div class="col-md-6">
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">我有点子</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-red fa fa-envelope"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">已审</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.subjectIdea}">\${data.subjectIdea}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row widget-row">
-        <div class="col-md-6">
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">秀我直播</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-microphone"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">已审</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.live}">\${data.live}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">朋友圈</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-blue  fa fa-photo"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">已审</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.circle}">\${data.circle}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
     </div>
 </script>
 
@@ -196,372 +159,6 @@
 
 </script>
 
-<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=YZjRB8FYnf7SdG7BfOGQQIGseKlMmTgF"></script>
-<script type="text/javascript"
-        src="https://api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script>
-<script type='text/javascript'>
-    //提示：下面的代码用jquery，所以如果有不能运行的情况请引用后尝试
-    //百度地图api container对应前端div名称 前端要引用2.0版本的百度地图api
-    //需引用api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js
-    var map = new BMap.Map("container", {
-        enableMapClick: false,
-        minZoom: 9,
-        maxZoom: 12,
-    }); // 创建地图实例，禁止点击地图底图
-    //设置样式
-    map.setMapStyle({
-        styleJson: [{ //不显示点信息
-            "featureType": "poi",
-            "elementType": "all",
-            "stylers": {
-                "color": "#ffffff",
-                "visibility": "off"
-            }
-        }]
-    });
-
-    //    map.enableDragging(); //禁止拖动
-    map.disableDoubleClickZoom(); //禁止双击缩放
-    map.enableScrollWheelZoom(true);
-    var blist = [];
-    var headimg = "data:image/png;base64,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"
-    var districtLoading = 0;
-
-    function getBoundary() {
-        addDistrict("常德临澧县", "#f5f7f9", "#efeffe");
-        addDistrict("常德武陵区", "#f5f7f9", "#cceaff");
-        addDistrict("常德鼎城区", "#f5f7f9", "#edffee");
-        addDistrict("常德安乡县", "#f5f7f9", "#e9faf3");
-        addDistrict("常德澧县", "#f5f7f9", "#ffffd9");
-        addDistrict("常德汉寿县", "#f5f7f9", "#d7e7ff");
-        addDistrict("常德桃源县", "#f5f7f9", "#ffe8e8");
-        addDistrict("常德津市", "#f5f7f9", "#fffbed");
-        addDistrict("常德石门县", "#f5f7f9", "#dcfdfe");
-    }
-
-    /**
-     * 添加行政区划
-     * @param {} districtName 行政区划名
-     * @returns  无返回值
-     */
-    function addDistrict(districtName, fillColor, bgColot) {
-        //使用计数器来控制加载过程
-        districtLoading++;
-        /*创建行政区域搜索的对象实例*/
-        var bdary = new BMap.Boundary();
-        /*prop1:查询省,prop2:callback*/
-        bdary.get(districtName, function (rs) { //获取行政区域
-            /*count:搜索到几个行政区划。*/
-            var count = rs.boundaries.length; //行政区域的点有多少个
-            if (count === 0) {
-                alert('未能获取当前输入行政区域');
-                return;
-            }
-            for (var i = 0; i < count; i++) {
-
-                blist.push({
-                    points: rs.boundaries[i],
-                    name: districtName,
-                    color: fillColor,
-                    bgColor: bgColot,
-                });
-            }
-            ;
-            //加载完成区域点后计数器-1
-            districtLoading--;
-            if (districtLoading == 0) {
-                //全加载完成后画端点
-                drawBoundary();
-            }
-        });
-    }
-
-
-    /**
-     * 各种鼠标事件绑定
-     */
-    function click(evt) {
-//				alert(evt.target.name);
-    }
-
-    function mouseover(evt) {
-        evt.target.setFillColor(evt.target.bgColor);
-        //				evt.target.label.setZIndex(99);
-        //				evt.target.label.setPosition(evt.point);
-        //				evt.target.label.show();
-    }
-
-    function mousemove(evt) {
-
-        //				evt.target.label.setPosition(evt.point);
-    }
-
-    function mouseout(evt) {
-        evt.target.setFillColor("#f5f7f9");
-        //				evt.target.label.hide();
-    }
-
-    function drawBoundary() {
-        //包含所有区域的点数组
-        var pointArray = [];
-
-        /*画遮蔽层的相关方法
-         *思路: 首先在中国地图最外画一圈，圈住理论上所有的中国领土，然后再将每个闭合区域合并进来，并全部连到西北角。
-         *      这样就做出了一个经过多次西北角的闭合多边形*/
-        //定义中国东南西北端点，作为第一层
-        var pNW = {
-            lat: 59.0,
-            lng: 73.0
-        }
-        var pNE = {
-            lat: 59.0,
-            lng: 136.0
-        }
-        var pSE = {
-            lat: 3.0,
-            lng: 136.0
-        }
-        var pSW = {
-            lat: 3.0,
-            lng: 73.0
-        }
-        //向数组中添加一次闭合多边形，并将西北角再加一次作为之后画闭合区域的起点
-        var pArray = [];
-        pArray.push(pNW);
-        pArray.push(pSW);
-        pArray.push(pSE);
-        pArray.push(pNE);
-        pArray.push(pNW);
-        //循环添加各闭合区域
-        for (var i = 0; i < blist.length; i++) {
-            //此类表示地图上的文本标注。
-            //添加选中行政区划的文本标签的用途
-            /*		var label = new BMap.Label(blist[i].name, {
-             offset: new BMap.Size(20, -10)
-             });
-             label.setStyle({
-             color:"#ffffff",
-             borderWidth:"0px",
-             backgroundColor:"transparent"
-             })
-             label.hide();*/
-            /*在地图添加此覆盖物*/
-            /*map.addOverlay(label);*/
-
-            //添加多边形层并显示
-            //此类表示一个多边形覆盖物。
-            var ply = new BMap.Polygon(blist[i].points, {
-                strokeWeight: 2,
-                strokeColor: "#ffffff",
-                fillOpacity: 1,
-//						strokeStyle:"dashed",
-                fillColor: blist[i].color
-            }); //建立多边形覆盖物
-            /*覆盖物添加名称*/
-            //					ply.name = blist[i].name;
-            /*添加标签*/
-            //					ply.label = label;
-            /*添加事件*/
-            ply.bgColor = blist[i].bgColor;
-            ply.addEventListener("click", click);
-            ply.addEventListener("mouseover", mouseover);
-            ply.addEventListener("mouseout", mouseout);
-            ply.addEventListener("mousemove", mousemove);
-            /*地图添加这个覆盖物*/
-            map.addOverlay(ply);
-
-            //添加名称标签层
-            var centerlabel = new BMap.Label(blist[i].name.substring(2), {
-                offset: new BMap.Size(0, 0)
-            });
-            centerlabel.setStyle({
-                color: "#3064ae",
-                fontSize: "14px",
-                borderWidth: "0px",
-                backgroundColor: "transparent"
-            })
-            centerlabel.setPosition(ply.getBounds().getCenter());
-            map.addOverlay(centerlabel);
-
-            //将点增加到视野范围内
-            var path = ply.getPath();
-            pointArray = pointArray.concat(path);
-            //将闭合区域加到遮蔽层上，每次添加完后要再加一次西北角作为下次添加的起点和最后一次的终点
-            pArray = pArray.concat(path);
-            pArray.push(pArray[0]);
-        }
-
-        //限定显示区域，需要引用api库
-        var boundply = new BMap.Polygon(pointArray);
-        BMapLib.AreaRestriction.setBounds(map, boundply.getBounds());
-        map.setViewport(pointArray); //调整视野
-
-        //添加遮蔽层
-        var plyall = new BMap.Polygon(pArray, {
-            strokeOpacity: 0.0000001,
-            strokeColor: "#000000",
-            strokeWeight: 0.00001,
-            fillColor: "#ffffff",
-            fillOpacity: 1
-        }); //建立多边形覆盖物
-        map.addOverlay(plyall);
-    }
-
-    function getUserInfo() {
-        var url = portalPath + "/wxUser/getSysWxUsers.do"
-        $.getJSON(url, null, function (result) {
-            if (result.status == 0) {
-                targetData = result.data;
-                TransGps();
-            }
-        })
-    }
-
-
-    loadMarkers = function (targetData) {
-        for (var i = 0; i < targetData.length; i++) {
-            var img = targetData[i].avatarUrl;
-            img = img ? img : headimg;
-            var myIcon = new BMap.Icon(img, new BMap.Size(30, 30));
-            map.addOverlay(new BMap.Marker(new BMap.Point(targetData[i].longitude, targetData[i].latitude), {icon: myIcon}));
-        }
-    }
-
-
-    setTimeout(function () {
-        getBoundary();
-        getUserInfo();
-    }, 100);
-
-
-    var targetData = [];
-    var pointsArray = new Array();
-    var posIndex = 0;
-    var maxCnt = 100;
-    TransGps();
-
-    function TransGps() {
-        var gpsPoints = getPoints(targetData);
-        pointsArray = wareGpsPointsBeforeSend(gpsPoints);
-        myTransMore(pointsArray[posIndex], 0, 'callback1');
-    }
-
-    /*自定以100组经纬度坐标的转换*/
-    function myTransMore(points, type, callBackName) {
-        var xyUrl = "https://api.map.baidu.com/geoconv/v1/?coords=";
-        var coordsStr = "";
-        var maxCnt = 100;
-        var send = function () {
-            var positionUrl = xyUrl + coordsStr + "&from=3&to=5&ak=YZjRB8FYnf7SdG7BfOGQQIGseKlMmTgF" + "&callback=" + callBackName;
-            var script = document.createElement('script');
-            script.src = positionUrl;
-            document.getElementsByTagName('head')[0].appendChild(script);
-            coordsStr = "";
-        }
-        for (var index in points) {
-            if (index % maxCnt == 0 && index != 0) {
-                send();
-            }
-            coordsStr = coordsStr + points[index].lng + ',' + points[index].lat;
-            if (index < points.length - 1) {
-                coordsStr = coordsStr + ';';
-            }
-            if (index == points.length - 1) {
-                send();
-            }
-        }
-    }
-
-    function callback1(data) {
-        if (data.status != 0) {
-            alert("地图坐标转换出错");
-            return;
-        }
-        console.log(data);
-        var points = data.result;
-        var TransResult = null;
-        for (var index = 0; index < points.length; index++) {
-            TransResult = points[index];
-            var point = new BMap.Point(TransResult.x, TransResult.y);
-            index1 = eval(Math.floor(posIndex * maxCnt) + Math.floor(index));
-            if (targetData[index1]['longitude'] != null &&
-                targetData[index1]['longitude'] != 0 &&
-                targetData[index1]['latitude'] != null &&
-                targetData[index1]['latitude'] != 0) {
-                targetData[index1]['longitude'] = point.lng;
-                targetData[index1]['latitude'] = point.lat;
-            }
-        }
-        posIndex++;
-        if (posIndex < pointsArray.length) {
-            myTransMore(pointsArray[posIndex], 0, 'callback1');
-        }
-        if (posIndex == pointsArray.length) {
-            loadMarkers(targetData);
-        }
-    }
-
-    function getPoints(targetData) {
-        var points = [];
-        for (var i = 0; i < targetData.length; i++) {
-            if (targetData[i]['longitude'] != null &&
-                targetData[i]['longitude'] != 0 &&
-                targetData[i]['latitude'] != null &&
-                targetData[i]['latitude'] != 0) {
-                var pt = new BMap.Point(targetData[i]['longitude'], targetData[i]['latitude']);
-                points.push(pt)
-            }
-        }
-        return points;
-    }
-
-    function wareGpsPointsBeforeSend(gpsPoints) {
-        var pointsArray = new Array();
-        var times = Math.floor(gpsPoints.length / maxCnt);
-        var k = 0;
-        for (var i = 0; i < times; i++) {
-            pointsArray[i] = new Array();
-            for (var j = 0; j < maxCnt; j++, k++) {
-                pointsArray[i][j] = gpsPoints[k];
-            }
-
-        }
-        console.log(k);
-        console.log(gpsPoints.length);
-        if (k < gpsPoints.length) {
-            var j = 0;
-            var i = times;
-            pointsArray[i] = new Array();
-            while (k < gpsPoints.length) {
-                pointsArray[i][j] = gpsPoints[k];
-                k++;
-                j++;
-            }
-        }
-        return pointsArray;
-    }
-
-
-</script>
-
-
-<style type="text/css">
-    .BMap_Marker > div {
-        border-radius: 50% !important;
-        border: 4px solid rgba(255, 255, 255, 1);
-        box-shadow: 0px 3px 4px 2px rgba(24, 144, 255, 0.1);
-    }
-
-    .BMap_Marker img {
-        width: 100%;
-        height: 100%;
-        object-position: 50% 50%;
-    }
-
-    .anchorBL {
-        display: none;
-    }
-</style>
 
 </body>
 </html>

@@ -30,37 +30,16 @@
             <div class="col-md-9">
 
                 <form onsubmit="return t_query()">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="keyword"
                                class="form-control"
                                placeholder="请输入直播名称">
                         <span class="input-group-btn">
-                                                                        <button class="btn  btn-default search_btn"
-                                                                                type="submit">
-                                                                                搜索
-                                                                        </button>
-                                                                    </span>
+                            <button class="btn  btn-default search_btn" type="submit">
+                                搜索
+                            </button>
+                        </span>
                     </div>
                 </form>
             </div>
@@ -72,17 +51,11 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                                                                        <th width="10%"> 主键</th>
-                                                    <th width="10%"> 名称</th>
-                                                    <th width="10%"> 介绍</th>
-                                                    <th width="10%"> 超时设定</th>
-                                                    <th width="10%"> 创建人编号</th>
-                                                    <th width="10%"> 创建人姓名</th>
-                                                    <th width="10%"> 创建日期</th>
-                                                    <th width="10%"> 更新人编号</th>
-                                                    <th width="10%"> 更新人名称</th>
-                                                    <th width="10%"> 更新日期</th>
-                                                                <th width="15%">操作</th>
+                    <th width="10%"> 名称</th>
+                    <th width="10%"> 介绍</th>
+                    <th width="10%"> 超时设定</th>
+                    <th width="10%"> 创建日期</th>
+                    <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -108,43 +81,15 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-                                    <td> \&{item.id}</td>
-                            <td> \&{item.name}</td>
-                            <td> \&{item.introduce}</td>
-                            <td> \&{item.timeout}</td>
-                            <td> \&{item.createUserId}</td>
-                            <td> \&{item.createUserName}</td>
-                            <td> \&{item.createDate}</td>
-                            <td> \&{item.lastModifyUserId}</td>
-                            <td> \&{item.lastModifyUserName}</td>
-                            <td> \&{item.lastModifyDate}</td>
-                            <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
+        <td> \${item.name}</td>
+        <td> \${item.introduce}</td>
+        <td> \${item.timeout}</td>
+        <td> \${item.createDate}</td>
         <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
-
+            ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+            ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
+            <a href="#"  data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
             <a href="javascript:del('\${item.id}');">删除</a>
 
         </td>
@@ -241,177 +186,58 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-                                    <div class="form-group">
-                    <label class="col-md-2 view-label">主键</label>
-                    <div class="col-md-10">
-                        \${id}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">名称</label>
-                    <div class="col-md-10">
-                        \${name}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">介绍</label>
-                    <div class="col-md-10">
-                        \${introduce}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">超时设定</label>
-                    <div class="col-md-10">
-                        \${timeout}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">创建人编号</label>
-                    <div class="col-md-10">
-                        \${createUserId}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">创建人姓名</label>
-                    <div class="col-md-10">
-                        \${createUserName}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">创建日期</label>
-                    <div class="col-md-10">
-                        \${createDate}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">更新人编号</label>
-                    <div class="col-md-10">
-                        \${lastModifyUserId}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">更新人名称</label>
-                    <div class="col-md-10">
-                        \${lastModifyUserName}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">更新日期</label>
-                    <div class="col-md-10">
-                        \${lastModifyDate}
-                    </div>
-                </div>
-                    
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
-                                <div class="form-group">
-                <label class="col-md-2 view-label">主键</label>
-                <div class="col-md-10">
-                    \${id}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">名称</label>
-                <div class="col-md-10">
-                    \${name}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">介绍</label>
-                <div class="col-md-10">
-                    \${introduce}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">超时设定</label>
-                <div class="col-md-10">
-                    \${timeout}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">创建人编号</label>
-                <div class="col-md-10">
-                    \${createUserId}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">创建人姓名</label>
-                <div class="col-md-10">
-                    \${createUserName}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">创建日期</label>
-                <div class="col-md-10">
-                    \${createDate}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">更新人编号</label>
-                <div class="col-md-10">
-                    \${lastModifyUserId}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">更新人名称</label>
-                <div class="col-md-10">
-                    \${lastModifyUserName}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">更新日期</label>
-                <div class="col-md-10">
-                    \${lastModifyDate}
-                </div>
-            </div>
-                    </script>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
+    <div class="form-group">
+        <label class="col-md-2 view-label">主键</label>
+        <div class="col-md-10">
+            \${id}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">名称</label>
+        <div class="col-md-10">
+            \${name}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">介绍</label>
+        <div class="col-md-10">
+            \${introduce}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">超时设定</label>
+        <div class="col-md-10">
+            \${timeout}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建人姓名</label>
+        <div class="col-md-10">
+            \${createUserName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">创建日期</label>
+        <div class="col-md-10">
+            \${createDate}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">更新人名称</label>
+        <div class="col-md-10">
+            \${lastModifyUserName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">更新日期</label>
+        <div class="col-md-10">
+            \${lastModifyDate}
+        </div>
+    </div>
+</script>
 
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>

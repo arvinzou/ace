@@ -8,62 +8,36 @@
         FROM
         portal.users t
         WHERE
-        t.user_level='1' and t.stauts='1' and t.cur_syid ='society'
+        t.stauts='1' and t.cur_syid ='taa'
         union all
-        SELECT
-        'org' id,
+        select 'road' id,
         count(1) value
         FROM
-        society_org_info t
+        road t
         WHERE
-        t.status='3'
+        t.status='1'
         union all
-        SELECT
-        'activityAll' id,
+        select 'roadSection' id,
         count(1) value
         FROM
-        activity t
+        road_section t
         WHERE
-        t.status='3'
+        t.status='1'
+
         union all
-        SELECT
-        'activityAudit' id,
+        select 'roadMan' id,
         count(1) value
         FROM
-        activity t
+        road_man t
         WHERE
-        t.status='2'
+        t.status='1'
+
         union all
-        SELECT
-        'behavior' id,
+        select 'traAcc' id,
         count(1) value
         FROM
-        behavior t
+        tra_acc t
         WHERE
-        t.status='3'
-        union all
-        SELECT
-        'subjectIdea' id,
-        count(1) value
-        FROM
-        subject_idea t
-        WHERE
-        t.status='3'
-        union all
-        SELECT
-        'live' id,
-        count(1) value
-        FROM
-        live.live t
-        WHERE
-        t.status='2'
-        union all
-        SELECT
-        'circle' id,
-        count(1) value
-        FROM
-        circle t
-        WHERE
-        t.status='2'
+        t.status='1'
     </select>
 </mapper>

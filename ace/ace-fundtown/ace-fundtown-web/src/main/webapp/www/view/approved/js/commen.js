@@ -18,6 +18,7 @@ function downloadFile() {
     console.log(resId);
     if (!resId) {
         alert("审核通过才能下载。");
+        return;
     }
     var url = "../../download.html?id=" + resId;
     window.location.href = url;
