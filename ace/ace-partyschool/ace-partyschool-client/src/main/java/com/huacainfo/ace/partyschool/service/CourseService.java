@@ -87,20 +87,5 @@ public interface CourseService {
             */
             MessageResponse deleteCourseByCourseId(String id,UserProp userProp) throws Exception;
 
-            /**
-            *
-            * @Title:audit
-            * @Description: TODO(审核课程管理)
-            * @param: @param id bean.id
-            * @param: @param rst 审核结果 3-通过 4-拒绝
-            * @param: @param remark 审核备注
-            * @param: @throws Exception
-            * @return: MessageResponse
-            * @throws
-            * @author: 王恩
-            * @version: 2019-01-02
-            */
-//            MessageResponse audit(String id,String rst, String remark, UserProp userProp) throws Exception;
-//            }
-
+            MessageResponse softdel(String id,UserProp userProp) throws Exception;
 }

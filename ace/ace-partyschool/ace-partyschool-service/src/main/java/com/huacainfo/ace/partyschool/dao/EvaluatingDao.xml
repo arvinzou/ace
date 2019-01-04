@@ -214,7 +214,7 @@
 
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
     select count(1)
-    from evaluating 4
+    from evaluating e
     where 1=1
     and e.name = #{condition.name,jdbcType=VARCHAR}
   </select>

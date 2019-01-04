@@ -145,4 +145,10 @@ public class CourseController extends BisBaseController {
 //
 //        return this.courseService.audit(id, rst, message, this.getCurUserProp());
 //    }
+//
+   @RequestMapping(value = "/softdel")
+    @ResponseBody
+    public MessageResponse softdel(String id) throws Exception {
+        return this.courseService.softdel(id, this.getCurUserProp());
+    }
 }
