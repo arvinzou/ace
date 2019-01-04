@@ -14,10 +14,10 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.taa.model.$!{bean.name};
-import com.huacainfo.ace.taa.service.$!{bean.name}Service;
-import com.huacainfo.ace.taa.vo.$!{bean.name}Vo;
-import com.huacainfo.ace.taa.vo.$!{bean.name}QVo;
+import com.huacainfo.ace.taa.model.RoadMan;
+import com.huacainfo.ace.taa.service.RoadManService;
+import com.huacainfo.ace.taa.vo.RoadManVo;
+import com.huacainfo.ace.taa.vo.RoadManQVo;
 import org.springframework.web.multipart.MultipartFile;
 import com.huacainfo.ace.portal.vo.MongoFile;
 
@@ -25,39 +25,39 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 @Controller
-@RequestMapping("/$!{bean.lowerName}")
+@RequestMapping("/roadMan")
 /**
-* @author: $!{annotation.authorName}
-* @version: $!{annotation.version}
-* @Description:  TODO($!{bean.tableChineseName})
+* @author: 陈晓克
+* @version: 2019-01-04
+* @Description:  TODO(路长)
 */
-public class $!{bean.name}Controller extends TaaBaseController {
+public class RoadManController extends TaaBaseController {
 
 
 private static final long serialVersionUID = 1L;
 Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
-private $!{bean.name}Service $!{bean.lowerName}Service;
+private RoadManService roadManService;
 
 /**
 *
 * @Title:find!{bean.name}List
-* @Description:  TODO($!{bean.tableChineseName}分页查询)
+* @Description:  TODO(路长分页查询)
 * @param:        @param condition
 * @param:        @param page
 * @param:        @return
 * @param:        @throws Exception
 * @return:       PageResult
-<$!{bean.name}Vo>
+<RoadManVo>
     * @throws
-    * @author: $!{annotation.authorName}
-    * @version: $!{annotation.version}
+    * @author: 陈晓克
+    * @version: 2019-01-04
     */
-    @RequestMapping(value = "/find$!{bean.name}List")
+    @RequestMapping(value = "/findRoadManList")
     @ResponseBody
-    public PageResult <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition,PageParamNoChangeSord page) throws Exception {
+    public PageResult <RoadManVo> findRoadManList(RoadManQVo condition,PageParamNoChangeSord page) throws Exception {
 
-        PageResult<$!{bean.name}Vo> rst = this.$!{bean.lowerName}Service.find$!{bean.name}List(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<RoadManVo> rst = this.roadManService.findRoadManList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
             if (rst.getTotal() == 0) {
                 rst.setTotal(page.getTotalRecord());
             }
@@ -67,94 +67,94 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
 
             /**
             *
-            * @Title:insert$!{bean.name}
-            * @Description: TODO(添加$!{bean.tableChineseName})
+            * @Title:insertRoadMan
+            * @Description: TODO(添加路长)
             * @param: @param jsons
             * @param: @throws Exception
             * @return: MessageResponse
             * @throws
-            * @author: $!{annotation.authorName}
-            * @version: $!{annotation.version}
+            * @author: 陈晓克
+            * @version: 2019-01-04
             */
-            @RequestMapping(value = "/insert$!{bean.name}")
+            @RequestMapping(value = "/insertRoadMan")
             @ResponseBody
-            public MessageResponse insert$!{bean.name}(String jsons) throws Exception {
-            $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service.insert$!{bean.name}(obj, this.getCurUserProp());
+            public MessageResponse insertRoadMan(String jsons) throws Exception {
+            RoadMan obj = JSON.parseObject(jsons, RoadMan.class);
+            return this.roadManService.insertRoadMan(obj, this.getCurUserProp());
             }
 
             /**
             *
-            * @Title:update$!{bean.name}
-            * @Description: TODO(更新$!{bean.tableChineseName})
+            * @Title:updateRoadMan
+            * @Description: TODO(更新路长)
             * @param: @param jsons
             * @param: @throws Exception
             * @return: MessageResponse
             * @throws
-            * @author: $!{annotation.authorName}
-            * @version: $!{annotation.version}
+            * @author: 陈晓克
+            * @version: 2019-01-04
             */
-            @RequestMapping(value = "/update$!{bean.name}")
+            @RequestMapping(value = "/updateRoadMan")
             @ResponseBody
-            public MessageResponse update$!{bean.name}(String jsons) throws Exception {
-            $!{bean.name} obj = JSON.parseObject(jsons, $!{bean.name}.class);
-            return this.$!{bean.lowerName}Service.update$!{bean.name}(obj, this.getCurUserProp());
+            public MessageResponse updateRoadMan(String jsons) throws Exception {
+            RoadMan obj = JSON.parseObject(jsons, RoadMan.class);
+            return this.roadManService.updateRoadMan(obj, this.getCurUserProp());
             }
 
             /**
             *
-            * @Title:select$!{bean.name}ByPrimaryKey
-            * @Description: TODO(获取$!{bean.tableChineseName})
+            * @Title:selectRoadManByPrimaryKey
+            * @Description: TODO(获取路长)
             * @param: @param id
             * @param: @throws Exception
-            * @return: SingleResult<$!{bean.name}>
+            * @return: SingleResult<RoadMan>
             * @throws
-            * @author: $!{annotation.authorName}
-            * @version: $!{annotation.version}
+            * @author: 陈晓克
+            * @version: 2019-01-04
             */
-            @RequestMapping(value = "/select$!{bean.name}ByPrimaryKey")
+            @RequestMapping(value = "/selectRoadManByPrimaryKey")
             @ResponseBody
-            public SingleResult <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id)throws Exception {
-                return this.$!{bean.lowerName}Service.select$!{bean.name}ByPrimaryKey(id);
+            public SingleResult <RoadManVo> selectRoadManByPrimaryKey(String id)throws Exception {
+                return this.roadManService.selectRoadManByPrimaryKey(id);
                 }
 
                 /**
                 *
-                * @Title:delete$!{bean.name}By$!{bean.name}Id
-                * @Description: TODO(删除$!{bean.tableChineseName})
+                * @Title:deleteRoadManByRoadManId
+                * @Description: TODO(删除路长)
                 * @param: @param jsons
                 * @param: @throws Exception
                 * @return: MessageResponse
                 * @throws
-                * @author: $!{annotation.authorName}
-                * @version: $!{annotation.version}
+                * @author: 陈晓克
+                * @version: 2019-01-04
                 */
-                @RequestMapping(value = "/delete$!{bean.name}By$!{bean.name}Id")
+                @RequestMapping(value = "/deleteRoadManByRoadManId")
                 @ResponseBody
-                public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String jsons) throws Exception {
+                public MessageResponse deleteRoadManByRoadManId(String jsons) throws Exception {
                 JSONObject json = JSON.parseObject(jsons);
                 String id = json.getString("id");
-                return this.$!{bean.lowerName}Service.delete$!{bean.name}By$!{bean.name}Id(id, this.getCurUserProp());
+                return this.roadManService.deleteRoadManByRoadManId(id, this.getCurUserProp());
                 }
 
                 /**
                 *
                 * @Title:audit
-                * @Description: TODO(审核$!{bean.tableChineseName})
+                * @Description: TODO(审核路长)
                 * @param: @param id bean.id
                 * @param: @param rst 审核结果 3-通过 4-拒绝
                 * @param: @param message 审核说明
                 * @param: @throws Exception
                 * @return: MessageResponse
                 * @throws
-                * @author: $!{annotation.authorName}
-                * @version: $!{annotation.version}
+                * @author: 陈晓克
+                * @version: 2019-01-04
                 */
                 @RequestMapping(value = "/audit")
                 @ResponseBody
                 public MessageResponse audit(String id,String rst, String message) throws Exception {
 
-                return this.$!{bean.lowerName}Service.audit(id, rst, message, this.getCurUserProp());
+                return this.roadManService.audit(id, rst, message, this.getCurUserProp());
                 }
 
 
@@ -168,8 +168,8 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 	 		* @param:        @throws Exception
                 	 		* @return:       MessageResponse
                 	 		* @throws
-                	    * @author: $!{annotation.authorName}
-                	    * @version:$!{annotation.version}
+                	    * @author: 陈晓克
+                	    * @version:2019-01-04
                 	 */
                 	@RequestMapping(value = "/importXls")
                 	@ResponseBody
@@ -200,23 +200,6 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                 				list = utils.readExcelByPOI(obj.getInputStream(), 2);
                 			}
                 		}
-                		return this.$!{bean.lowerName}Service.importXls(list, this.getCurUserProp());
+                		return this.roadManService.importXls(list, this.getCurUserProp());
                 	}
-
-
-                	/**
-                         * @throws
-                         * @Title:audit
-                         * @Description: TODO(条件查询)
-                         * @param: @param p
-                         * @param: @throws Exception
-                         * @return: ListResult
-                         * @author: $!{annotation.authorName}
-                         * @version:$!{annotation.version}
-                         */
-                        @RequestMapping(value = "/getList")
-                        @ResponseBody
-                        public ListResult<Map<String,Object>> getList() throws Exception {
-                            return this.$!{bean.lowerName}Service.getList(this.getParams());
-                        }
 }

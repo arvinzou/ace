@@ -15,22 +15,22 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.taa.dao.$!{bean.name}Dao;
-import com.huacainfo.ace.taa.model.$!{bean.name};
+import com.huacainfo.ace.taa.dao.RoadManDao;
+import com.huacainfo.ace.taa.model.RoadMan;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.taa.service.$!{bean.name}Service;
-import com.huacainfo.ace.taa.vo.$!{bean.name}Vo;
-import com.huacainfo.ace.taa.vo.$!{bean.name}QVo;
-@Service("$!{bean.lowerName}Service")
+import com.huacainfo.ace.taa.service.RoadManService;
+import com.huacainfo.ace.taa.vo.RoadManVo;
+import com.huacainfo.ace.taa.vo.RoadManQVo;
+@Service("roadManService")
 /**
-* @author: $!{annotation.authorName}
-* @version: $!{annotation.version}
-* @Description:  TODO($!{bean.tableChineseName})
+* @author: 陈晓克
+* @version: 2019-01-04
+* @Description:  TODO(路长)
 */
-public class $!{bean.name}ServiceImpl implements $!{bean.name}Service {
+public class RoadManServiceImpl implements RoadManService {
 Logger logger = LoggerFactory.getLogger(this.getClass());
 @Autowired
-private $!{bean.name}Dao $!{bean.lowerName}Dao;
+private RoadManDao roadManDao;
 @Autowired
 private DataBaseLogService dataBaseLogService;
 
@@ -38,27 +38,27 @@ private DataBaseLogService dataBaseLogService;
 /**
 *
 * @Title:find!{bean.name}List
-* @Description:  TODO($!{bean.tableChineseName}分页查询)
+* @Description:  TODO(路长分页查询)
 * @param:        @param condition
 * @param:        @param start
 * @param:        @param limit
 * @param:        @param orderBy
 * @param:        @throws Exception
 * @return:       PageResult
-<$!{bean.name}Vo>
+<RoadManVo>
     * @throws
-    * @author: $!{annotation.authorName}
-    * @version: $!{annotation.version}
+    * @author: 陈晓克
+    * @version: 2019-01-04
     */
     @Override
     public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,int limit, String orderBy) throws Exception {
-        PageResult<$!{bean.name}Vo> rst = new PageResult<>();
-            List<$!{bean.name}Vo> list = this.$!{bean.lowerName}Dao.findList(condition,
+    <RoadManVo> findRoadManList(RoadManQVo condition, int start,int limit, String orderBy) throws Exception {
+        PageResult<RoadManVo> rst = new PageResult<>();
+            List<RoadManVo> list = this.roadManDao.findList(condition,
                 start, limit, orderBy);
                 rst.setRows(list);
                 if (start <= 1) {
-                int allRows = this.$!{bean.lowerName}Dao.findCount(condition);
+                int allRows = this.roadManDao.findCount(condition);
                 rst.setTotal(allRows);
                 }
                 return rst;
@@ -66,24 +66,24 @@ private DataBaseLogService dataBaseLogService;
 
                 /**
                 *
-                * @Title:insert$!{bean.name}
-                * @Description: TODO(添加$!{bean.tableChineseName})
+                * @Title:insertRoadMan
+                * @Description: TODO(添加路长)
                 * @param: @param o
                 * @param: @param userProp
                 * @param: @throws Exception
                 * @return: MessageResponse
                 * @throws
-                * @author: $!{annotation.authorName}
-                * @version: $!{annotation.version}
+                * @author: 陈晓克
+                * @version: 2019-01-04
                 */
                 @Override
-                public MessageResponse insert$!{bean.name}($!{bean.name} o, UserProp userProp) throws Exception {
+                public MessageResponse insertRoadMan(RoadMan o, UserProp userProp) throws Exception {
 
-                $!{bean.validate}
+                if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getAreaCode())) {return new MessageResponse(1, "行政区划不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "姓名不能为空！");}if (CommonUtils.isBlank(o.getMobile())) {return new MessageResponse(1, "手机号不能为空！");}if (CommonUtils.isBlank(o.getStartName())) {return new MessageResponse(1, "管辖路段开始不能为空！");}if (CommonUtils.isBlank(o.getEndName())) {return new MessageResponse(1, "管辖路段截止不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态 不能为空！");}
 
-                int temp = this.$!{bean.lowerName}Dao.isExit(o);
+                int temp = this.roadManDao.isExit(o);
                 if (temp > 0) {
-                return new MessageResponse(1, "$!{bean.tableChineseName}名称重复！");
+                return new MessageResponse(1, "路长名称重复！");
                 }
 
                 o.setId(GUIDUtil.getGUID());
@@ -91,92 +91,92 @@ private DataBaseLogService dataBaseLogService;
                 o.setStatus("1");
                 o.setCreateUserName(userProp.getName());
                 o.setCreateUserId(userProp.getUserId());
-                this.$!{bean.lowerName}Dao.insert(o);
-                this.dataBaseLogService.log("添加$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
+                this.roadManDao.insert(o);
+                this.dataBaseLogService.log("添加路长", "路长", "",
                 o.getId(),o.getId(), userProp);
 
-                return new MessageResponse(0, "添加$!{bean.tableChineseName}完成！");
+                return new MessageResponse(0, "添加路长完成！");
                 }
 
                 /**
                 *
-                * @Title:update$!{bean.name}
-                * @Description: TODO(更新$!{bean.tableChineseName})
+                * @Title:updateRoadMan
+                * @Description: TODO(更新路长)
                 * @param: @param o
                 * @param: @param userProp
                 * @param: @throws Exception
                 * @return: MessageResponse
                 * @throws
-                * @author: $!{annotation.authorName}
-                * @version: $!{annotation.version}
+                * @author: 陈晓克
+                * @version: 2019-01-04
                 */
                 @Override
-                public MessageResponse update$!{bean.name}($!{bean.name} o, UserProp userProp) throws Exception {
-                $!{bean.validate}
+                public MessageResponse updateRoadMan(RoadMan o, UserProp userProp) throws Exception {
+                if (CommonUtils.isBlank(o.getId())) {return new MessageResponse(1, "主键不能为空！");}if (CommonUtils.isBlank(o.getAreaCode())) {return new MessageResponse(1, "行政区划不能为空！");}if (CommonUtils.isBlank(o.getName())) {return new MessageResponse(1, "姓名不能为空！");}if (CommonUtils.isBlank(o.getMobile())) {return new MessageResponse(1, "手机号不能为空！");}if (CommonUtils.isBlank(o.getStartName())) {return new MessageResponse(1, "管辖路段开始不能为空！");}if (CommonUtils.isBlank(o.getEndName())) {return new MessageResponse(1, "管辖路段截止不能为空！");}if (CommonUtils.isBlank(o.getStatus())) {return new MessageResponse(1, "状态 不能为空！");}
 
                 o.setLastModifyDate(new Date());
                 o.setLastModifyUserName(userProp.getName());
                 o.setLastModifyUserId(userProp.getUserId());
-                this.$!{bean.lowerName}Dao.updateByPrimaryKey(o);
-                this.dataBaseLogService.log("变更$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
+                this.roadManDao.updateByPrimaryKey(o);
+                this.dataBaseLogService.log("变更路长", "路长", "",
                 o.getId(), o.getId(), userProp);
 
-                return new MessageResponse(0, "变更$!{bean.tableChineseName}完成！");
+                return new MessageResponse(0, "变更路长完成！");
                 }
 
                 /**
                 *
-                * @Title:select$!{bean.name}ByPrimaryKey
-                * @Description: TODO(获取$!{bean.tableChineseName})
+                * @Title:selectRoadManByPrimaryKey
+                * @Description: TODO(获取路长)
                 * @param: @param id
                 * @param: @throws Exception
-                * @return: SingleResult<$!{bean.name}>
+                * @return: SingleResult<RoadMan>
                 * @throws
-                * @author: $!{annotation.authorName}
-                * @version: $!{annotation.version}
+                * @author: 陈晓克
+                * @version: 2019-01-04
                 */
                 @Override
                 public SingleResult
-                <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception {
-                    SingleResult<$!{bean.name}Vo> rst = new SingleResult<>();
-                        rst.setValue(this.$!{bean.lowerName}Dao.selectVoByPrimaryKey(id));
+                <RoadManVo> selectRoadManByPrimaryKey(String id) throws Exception {
+                    SingleResult<RoadManVo> rst = new SingleResult<>();
+                        rst.setValue(this.roadManDao.selectVoByPrimaryKey(id));
                         return rst;
                         }
 
                         /**
                         *
-                        * @Title:delete$!{bean.name}By$!{bean.name}Id
-                        * @Description: TODO(删除$!{bean.tableChineseName})
+                        * @Title:deleteRoadManByRoadManId
+                        * @Description: TODO(删除路长)
                         * @param: @param id
                         * @param: @param userProp
                         * @param: @throws Exception
                         * @return: MessageResponse
                         * @throws
-                        * @author: $!{annotation.authorName}
-                        * @version: $!{annotation.version}
+                        * @author: 陈晓克
+                        * @version: 2019-01-04
                         */
                         @Override
-                        public MessageResponse delete$!{bean.name}By$!{bean.name}Id(String id, UserProp userProp) throws
+                        public MessageResponse deleteRoadManByRoadManId(String id, UserProp userProp) throws
                         Exception {
-                        this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);
-                        this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
-                        "$!{bean.tableChineseName}", userProp);
-                        return new MessageResponse(0, "$!{bean.tableChineseName}删除完成！");
+                        this.roadManDao.deleteByPrimaryKey(id);
+                        this.dataBaseLogService.log("删除路长", "路长", id, id,
+                        "路长", userProp);
+                        return new MessageResponse(0, "路长删除完成！");
                         }
 
 
                         /**
                         *
                         * @Title:audit
-                        * @Description: TODO(审核$!{bean.tableChineseName})
+                        * @Description: TODO(审核路长)
                         * @param: @param id bean.id
                         * @param: @param rst 审核结果 3-通过 4-拒绝
                         * @param: @param remark 审核备注
                         * @param: @throws Exception
                         * @return: MessageResponse
                         * @throws
-                        * @author: $!{annotation.authorName}
-                        * @version: $!{annotation.version}
+                        * @author: 陈晓克
+                        * @version: 2019-01-04
                         */
                         @Override
                         public MessageResponse audit(String id,String rst, String remark,
@@ -184,9 +184,9 @@ private DataBaseLogService dataBaseLogService;
 
 
 
-                        dataBaseLogService.log("审核$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
-                        "$!{bean.tableChineseName}", userProp);
-                        return new MessageResponse(0, "$!{bean.tableChineseName}审核完成！");
+                        dataBaseLogService.log("审核路长", "路长", id, id,
+                        "路长", userProp);
+                        return new MessageResponse(0, "路长审核完成！");
                         }
 
 
@@ -200,15 +200,15 @@ private DataBaseLogService dataBaseLogService;
                                     	 		* @param:        @throws Exception
                                     	 		* @return:       MessageResponse
                                     	 		* @throws
-                                    	    * @author: $!{annotation.authorName}
-                                    	    * @version: $!{annotation.version}
+                                    	    * @author: 陈晓克
+                                    	    * @version: 2019-01-04
                                     	 */
 
                         @Override
                         public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
                         		int i = 1;
                         		for (Map<String, Object> row : list) {
-                        			$!{bean.name} o = new $!{bean.name}();
+                        			RoadMan o = new RoadMan();
                         			CommonBeanUtils.copyMap2Bean(o,row);
                         			o.setCreateTime(new Date());
                         			o.setCreateUserId(userProp.getUserId());
@@ -219,16 +219,16 @@ private DataBaseLogService dataBaseLogService;
                         				return new MessageResponse(1,"行"+i+ ",编号不能为空！");
                         			}
 
-                        			int t = this.$!{bean.lowerName}Dao.isExit(o);
+                        			int t = this.roadManDao.isExit(o);
                         			if (t > 0) {
-                        				this.$!{bean.lowerName}Dao.updateByPrimaryKey(o);
+                        				this.roadManDao.updateByPrimaryKey(o);
 
                         			} else {
-                        				this.$!{bean.lowerName}Dao.insert(o);
+                        				this.roadManDao.insert(o);
                         			}
                         			i++;
                         		}
-                        		this.dataBaseLogService.log("$!{bean.tableChineseName}导入", "$!{bean.tableChineseName}", "", "rs.xls","rs.xls", userProp);
+                        		this.dataBaseLogService.log("路长导入", "路长", "", "rs.xls","rs.xls", userProp);
                         		return new MessageResponse(0, "导入完成！");
                         	}
 
@@ -242,13 +242,13 @@ private DataBaseLogService dataBaseLogService;
                                         * @param:        @throws Exception
                                         * @return:       ListResult<Map<String,Object>>
                                         * @throws
-                                    * @author: $!{annotation.authorName}
-                                    * @version: $!{annotation.version}
+                                    * @author: 陈晓克
+                                    * @version: 2019-01-04
                                  */
                                    @Override
                                 public ListResult<Map<String,Object>> getList(Map<String, Object> p) throws Exception{
                                  ListResult<Map<String,Object>> rst = new ListResult<>();
-                                 rst.setValue(this.$!{bean.lowerName}Dao.getList(p));
+                                 rst.setValue(this.roadManDao.getList(p));
 
                                  return rst;
 

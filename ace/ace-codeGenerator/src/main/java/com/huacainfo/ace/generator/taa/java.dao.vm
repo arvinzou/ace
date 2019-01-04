@@ -1,6 +1,7 @@
 package com.huacainfo.ace.taa.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.taa.model.$!{bean.name};
 import com.huacainfo.ace.taa.vo.$!{bean.name}QVo;
@@ -30,5 +31,8 @@ List<$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
     int isExit($!{bean.name} record);
 
     int updateStatus($!{bean.name} record);
+
+
+    List<Map<String,Object>> getList(@Param("p")Map<String,Object> p);
 
     }
