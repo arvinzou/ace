@@ -14,32 +14,28 @@ public class MenuCreate {
 
 
     public static void main(String[] args) {
-        Menu m = hcwyMenu();
-        String accessToken = "14_TSRjJVLQ_Ai2FB2bE8UfE5pyDCNk7iqBdeFRQ-Kf5Ju7fFXqIoHpozoDEAsODUPbU971JFdR-TcuKiNkEzQ796gj_zeAYkBnd1S1WQrqZ-F8kCBAqZkL0IJSj0YZESaABAOTH";
+        Menu m = jxbMenu();
+        String accessToken = "17_MsfCwNkgdIxbhPkW_YMjNyvbkWMXRvuk4Xk811MxQjHH7Ob5RSzl2K0M5WDtvN3fFWGGXXgvxLHJ9St7ZTHen49DZt_V-6Q-cs255rpBZ_YASYoyz423QHjngQzESWgiQpWOH9hR8lI3LzJDDRTcAIAZNP";
 //        String accessToken = getAccessToken("wxfdb1e4819dee7b62", "dc51907c900e5bcb9527daec79d05e61");
         System.out.println(createMenu(accessToken, m));
     }
 
     public static Menu jxbMenu() {
-        //==========顾问在线==========顾问在线、心理评测
-        Button btn1_Sub_a = new Button(MenuButtonType.VIEW, "顾问在线",
-                "http://zx.huacainfo.com/jxb/www/view/consultant/index.jsp");
-        Button btn2_Sub_b = new Button(MenuButtonType.VIEW, "心理评测",
-                "http://zx.huacainfo.com/jxb/www/view/order/test/testindex.html");
-        Button[] btn1_sub = new Button[]{btn1_Sub_a, btn2_Sub_b};
-        Button btn1 = new Button("顾问在线", btn1_sub);
+        //==========心阳光首页==========
+        Button btn1 = new Button(MenuButtonType.VIEW, "心阳光首页",
+                "https://zx.huacainfo.com/jxb/www/view/index/index.jsp");
 
-        //==========心理课程==========
-        Button btn2 = new Button(MenuButtonType.VIEW, "心理课程",
-                "http://zx.huacainfo.com/jxb/www/view/course/index.jsp");
+        //==========精品课程==========
+        Button btn2 = new Button(MenuButtonType.VIEW, "精品课程",
+                "https://zx.huacainfo.com/jxb/www/view/course/index.jsp");
 
         //==========入驻指南==========我是家长、我是咨询师、个人中心
         Button btn3_Sub_b = new Button(MenuButtonType.VIEW, "我是家长",
-                "http://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
+                "https://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
         Button btn3_Sub_c = new Button(MenuButtonType.VIEW, "我是咨询师",
-                "http://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
+                "https://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
         Button btn3_Sub_d = new Button(MenuButtonType.VIEW, "个人中心",
-                "http://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
+                "https://zx.huacainfo.com/jxb/www/view/mine/mine.jsp");
 
         Button[] btn3_sub = new Button[]{btn3_Sub_b, btn3_Sub_c, btn3_Sub_d};
         Button btn3 = new Button("入驻指南", btn3_sub);

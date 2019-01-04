@@ -54,4 +54,21 @@ public interface SignService {
      * @return ResultResponse
      */
     ResultResponse isExistByIdCard(String idCard, String type);
+
+    /**
+     * 账户密码登录
+     *
+     * @param acct 账户
+     * @param pwd  密码
+     * @return ResultResponse
+     */
+    ResultResponse acctLogin(String acct, String pwd);
+
+    /**
+     * 获取账户信息
+     *
+     * @param acct 登录账号
+     * @return ResultResponse
+     */
+    ResultResponse getAcctInfo(String acct);
 }

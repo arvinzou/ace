@@ -5,13 +5,16 @@ import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.security.spring.BasicUsers;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.constant.CommConstant;
 import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
 import com.huacainfo.ace.partyschool.vo.TeacherVo;
 import com.huacainfo.ace.portal.model.TaskCmcc;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +32,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/www/sign")
-public class SignController extends BisBaseController {
+public class WSignController extends BisBaseController {
 
     @Autowired
     private SignService signService;
@@ -37,6 +40,43 @@ public class SignController extends BisBaseController {
     @Autowired
     private TaskCmccService taskCmccService;
 
+    /**
+     * 功能描述: 发送短信验证验证码
+     *
+     * @param: mobile 手机号码
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2019/1/3 9:34
+     */
+    @RequestMapping("/sendMsgByMobile")
+    public ResultResponse sendMsgByMobile(String mobile, String length) throws Exception {
+        //账号重复验证
+        if (signService.isExistByMobile(mobile)) {
+            return new ResultResponse(ResultCode.FAIL, "该手机号码已被注册");
+        }
+        //四位随机码
+        length = StringUtil.isEmpty(length) ? "4" : length;
+        String randCode = CommonUtils.getIdentifyCode(Integer.valueOf(length), 0);
+        // 保存进session
+        sessionSet("j_captcha_cmcc_" + mobile, randCode);
+
+        TaskCmcc o = new TaskCmcc();
+        if (CommonUtils.isBlank(mobile)) {
+            return new ResultResponse(ResultCode.FAIL, "手机号不能为空");
+        }
+        if (!CommonUtils.isValidMobile(mobile)) {
+            return new ResultResponse(ResultCode.FAIL, "手机号格式错误");
+        }
+
+        Map<String, Object> msg = new HashMap<>();
+        msg.put("taskName", "验证码" + mobile);
+        msg.put("msg", "本次提交验证码为" + randCode + "，请及时输入。" + CommConstant.SMS_SIGN_STR);
+        msg.put("tel", mobile + "," + mobile + ";");
+        CommonBeanUtils.copyMap2Bean(o, msg);
+        logger.debug(mobile + "=>j_captcha_cmcc:{}", sessionGet("j_captcha_cmcc_" + mobile));
+
+        return new ResultResponse(taskCmccService.insertTaskCmcc(o));
+    }
 
     private boolean codeCheck(String mobile, String code) {
         //验证码校验
@@ -166,43 +206,64 @@ public class SignController extends BisBaseController {
         return signService.isExistByIdCard(idCard, type);
     }
 
+    /**
+     * 账户密码登录
+     *
+     * @param acct 账户
+     * @param pwd  密码
+     * @return ResultResponse
+     */
+    @RequestMapping("/acctLogin")
+    public ResultResponse acctLogin(String acct, String pwd) {
+        if (!StringUtil.areNotEmpty(acct, pwd)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        //登录逻辑
+        ResultResponse loginRs = signService.acctLogin(acct, pwd);
+        if (ResultCode.FAIL == loginRs.getStatus()) {
+            return loginRs;
+        }
+        //session登录成功
+        Users syUser = (Users) loginRs.getData();
+        BasicUsers o = new BasicUsers(syUser.getUserId(),
+                syUser.getPassword(), syUser.getAccount(),
+                syUser.getName(), syUser.getName(),
+                syUser.getDepartmentId(), syUser.getCorpName(),
+                syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
+                true, true, null, null, syUser.getParentCorpId(),
+                syUser.getEmail(), syUser.getAccount(), null, null, syUser.getCurSyid(),
+                null, syUser.getOpenId(), syUser.getAppOpenId());
+        sessionSet(CommonKeys.SESSION_USERPROP_KEY, o);
+
+        return loginRs;
+    }
 
     /**
-     * 功能描述: 发送短信验证验证码
+     * 获取账户信息
      *
-     * @param: mobile 手机号码
-     * @return: ResultResponse
-     * @auther: Arvin Zou
-     * @date: 2019/1/3 9:34
+     * @param acct 登录账号
+     * @return ResultResponse
      */
-    @RequestMapping("/sendMsgByMobile")
-    public ResultResponse sendMsgByMobile(String mobile, String length) throws Exception {
-        //账号重复验证
-        if (signService.isExistByMobile(mobile)) {
-            return new ResultResponse(ResultCode.FAIL, "该手机号码已被注册");
-        }
-        //四位随机码
-        length = StringUtil.isEmpty(length) ? "4" : length;
-        String randCode = CommonUtils.getIdentifyCode(Integer.valueOf(length), 0);
-        // 保存进session
-        sessionSet("j_captcha_cmcc_" + mobile, randCode);
-
-        TaskCmcc o = new TaskCmcc();
-        if (CommonUtils.isBlank(mobile)) {
-            return new ResultResponse(ResultCode.FAIL, "手机号不能为空");
-        }
-        if (!CommonUtils.isValidMobile(mobile)) {
-            return new ResultResponse(ResultCode.FAIL, "手机号格式错误");
+    @RequestMapping("/getAcctInfo")
+    public ResultResponse getAcctInfo(String acct) {
+        if (StringUtil.isEmpty(acct)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
 
-        Map<String, Object> msg = new HashMap<>();
-        msg.put("taskName", "验证码" + mobile);
-        msg.put("msg", "本次提交验证码为" + randCode + "，请及时输入。" + CommConstant.SMS_SIGN_STR);
-        msg.put("tel", mobile + "," + mobile + ";");
-        CommonBeanUtils.copyMap2Bean(o, msg);
-        logger.debug(mobile + "=>j_captcha_cmcc:{}", sessionGet("j_captcha_cmcc_" + mobile));
+        return signService.getAcctInfo(acct);
+    }
 
-        return new ResultResponse(taskCmccService.insertTaskCmcc(o));
+
+    /**
+     * 微信授权登录
+     *
+     * @return ResultResponse
+     */
+    @RequestMapping("/wxOauthLogin")
+    public ResultResponse wxOauthLogin() {
+
+
+        return null;//signService.acctLogin(acct, pwd);
     }
 
 }

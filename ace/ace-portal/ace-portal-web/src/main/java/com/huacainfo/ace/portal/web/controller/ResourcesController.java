@@ -1,23 +1,8 @@
 package com.huacainfo.ace.portal.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -28,6 +13,19 @@ import com.huacainfo.ace.portal.model.Resources;
 import com.huacainfo.ace.portal.service.ResourcesService;
 import com.huacainfo.ace.portal.vo.MongoFile;
 import com.huacainfo.ace.portal.vo.ResourcesVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/resources")

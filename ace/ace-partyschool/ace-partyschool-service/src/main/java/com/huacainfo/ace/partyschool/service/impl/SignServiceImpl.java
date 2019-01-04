@@ -14,10 +14,12 @@ import com.huacainfo.ace.partyschool.dao.SignDao;
 import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.service.StudentService;
 import com.huacainfo.ace.partyschool.service.TeacherService;
+import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
 import com.huacainfo.ace.partyschool.vo.TeacherVo;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.portal.service.SystemService;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +46,8 @@ public class SignServiceImpl implements SignService {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private SystemService systemService;
 
     /**
      * 校验手机号码是否已注册过
@@ -173,6 +177,43 @@ public class SignServiceImpl implements SignService {
             default:
                 return new ResultResponse(ResultCode.FAIL, "未知身份类型");
         }
+    }
+
+    /**
+     * 账户密码登录
+     *
+     * @param acct 账户
+     * @param pwd  密码
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse acctLogin(String acct, String pwd) {
+        Users syUser = systemService.selectUsersByAccount(acct);
+        if (null == syUser) {
+            return new ResultResponse(ResultCode.FAIL, "账户不存在");
+        }
+        if (!CommonUtils.getMd5(pwd).equals(syUser.getPassword())) {
+            return new ResultResponse(ResultCode.FAIL, "密码不正确");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "登录成功", syUser);
+    }
+
+    /**
+     * 获取账户信息
+     *
+     * @param acct 登录账号
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse getAcctInfo(String acct) {
+        AccountVo accountVo = signDao.findByAcct(acct);
+
+        if (accountVo == null) {
+            return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "success", accountVo);
     }
 
 

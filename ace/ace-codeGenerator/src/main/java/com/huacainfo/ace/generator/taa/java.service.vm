@@ -3,9 +3,12 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.taa.model.$!{bean.name};
 import com.huacainfo.ace.taa.vo.$!{bean.name}Vo;
 import com.huacainfo.ace.taa.vo.$!{bean.name}QVo;
+import java.util.Map;
+import java.util.List;
 /**
 * @author: $!{annotation.authorName}
 * @version: $!{annotation.version}
@@ -98,4 +101,35 @@ public interface $!{bean.name}Service {
             * @version: $!{annotation.version}
             */
             MessageResponse audit(String id,String rst, String remark, UserProp userProp) throws Exception;
-            }
+
+
+            /**
+            	 *
+            	    * @Title:importXls
+            	    * @Description:  TODO(Excel导入资源数据)
+            	 		* @param:        @param list
+            	 		* @param:        @param userProp
+            	 		* @param:        @return
+            	 		* @param:        @throws Exception
+            	 		* @return:       MessageResponse
+            	 		* @throws
+            	    * @author: $!{annotation.authorName}
+            	    * @version: $!{annotation.version}
+            	 */
+            	public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp)throws Exception;
+
+
+ /**
+            	 *
+            	    * @Title:getList
+            	    * @Description:  TODO(条件查询数据)
+            	 		* @param:        @param p
+            	 		* @param:        @return
+            	 		* @param:        @throws Exception
+            	 		* @return:       ListResult<Map<String,Object>>
+            	 		* @throws
+            	    * @author: $!{annotation.authorName}
+            	    * @version: $!{annotation.version}
+            	 */
+            	public ListResult<Map<String,Object>> getList(Map<String, Object> p) throws Exception;
+ }

@@ -2,6 +2,7 @@ package com.huacainfo.ace.taa.service.impl;
 
 
 import java.util.Date;
+import java.util.Map;
 import java.util.List;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
@@ -188,4 +189,69 @@ private DataBaseLogService dataBaseLogService;
                         return new MessageResponse(0, "$!{bean.tableChineseName}审核完成！");
                         }
 
-                        }
+
+                         /**
+                                    	 *
+                                    	    * @Title:importXls
+                                    	    * @Description:  TODO(Excel导入资源数据)
+                                    	 		* @param:        @param list
+                                    	 		* @param:        @param userProp
+                                    	 		* @param:        @return
+                                    	 		* @param:        @throws Exception
+                                    	 		* @return:       MessageResponse
+                                    	 		* @throws
+                                    	    * @author: $!{annotation.authorName}
+                                    	    * @version: $!{annotation.version}
+                                    	 */
+
+                        @Override
+                        public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
+                        		int i = 1;
+                        		for (Map<String, Object> row : list) {
+                        			$!{bean.name} o = new $!{bean.name}();
+                        			CommonBeanUtils.copyMap2Bean(o,row);
+                        			o.setCreateTime(new Date());
+                        			o.setCreateUserId(userProp.getUserId());
+                        			o.setStauts("1");
+
+                        			this.logger.info(o.toString());
+                        			if (CommonUtils.isBlank(o.getResourcesId())) {
+                        				return new MessageResponse(1,"行"+i+ ",编号不能为空！");
+                        			}
+
+                        			int t = this.$!{bean.lowerName}Dao.isExit(o);
+                        			if (t > 0) {
+                        				this.$!{bean.lowerName}Dao.updateByPrimaryKey(o);
+
+                        			} else {
+                        				this.$!{bean.lowerName}Dao.insert(o);
+                        			}
+                        			i++;
+                        		}
+                        		this.dataBaseLogService.log("$!{bean.tableChineseName}导入", "$!{bean.tableChineseName}", "", "rs.xls","rs.xls", userProp);
+                        		return new MessageResponse(0, "导入完成！");
+                        	}
+
+
+                        	 /**
+                                 *
+                                    * @Title:getList
+                                    * @Description:  TODO(条件查询数据)
+                                        * @param:        @param p
+                                        * @param:        @return
+                                        * @param:        @throws Exception
+                                        * @return:       ListResult<Map<String,Object>>
+                                        * @throws
+                                    * @author: $!{annotation.authorName}
+                                    * @version: $!{annotation.version}
+                                 */
+                                   @Override
+                                public ListResult<Map<String,Object>> getList(Map<String, Object> p) throws Exception{
+                                 ListResult<Map<String,Object>> rst = new ListResult<>();
+                                 rst.setValue(this.$!{bean.lowerName}Dao.getList(p));
+
+                                 return rst;
+
+                                }
+
+ }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.ApiDao">
+
+    <select id="findCustomerList" resultType="map">
+        SELECT
+          rownum,
+          H.CARD_NO,t.customerid,t.customername
+        FROM  YQSH_1.TB_CUSTOMER_INFO T
+        LEFT JOIN YQSH_1.TB_CARD_HISTORY_INFO H ON T.CUSTOMERID = H.CUSTOM_ID
+        WHERE 1=1
+        and rownum = 1
+    </select>
+
+</mapper>
