@@ -25,7 +25,7 @@
                     <port>6012</port>
                     <path>/partyschool</path>
                     <uriEncoding>UTF-8</uriEncoding>
-                    <finalName>society</finalName>
+                    <finalName>partyschool</finalName>
                     <server>tomcat7</server>
                 </configuration>
             </plugin>

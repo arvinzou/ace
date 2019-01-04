@@ -13,9 +13,22 @@
     <artifactId>ace-partyschool-rest</artifactId>
     <packaging>war</packaging>
     <dependencies>
+
+        <!--oracle驱动包-->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.4.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.huacainfo</groupId>
-            <artifactId>ace-partyschool-service</artifactId>
+            <artifactId>ace-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.huacainfo</groupId>
+            <artifactId>ace-common-dao</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -49,12 +62,23 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <packagingExcludes>
-                        WEB-INF/lib/ace-cu-service-*.jar,
                         WEB-INF/lib/ace-common-dao-*.jar
                     </packagingExcludes>
                     <webResources>
@@ -73,6 +97,19 @@
                             </includes>
                         </resource>
                     </webResources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>6000</port>
+                    <path>/api</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <finalName>api</finalName>
+                    <server>tomcat7</server>
                 </configuration>
             </plugin>
         </plugins>
