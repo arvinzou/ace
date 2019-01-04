@@ -17,6 +17,18 @@ public class StudentVo extends Student {
      * 注册密码
      */
     private String singPwd;
+    /**
+     * 班级名称
+     */
+    private String clsName;
+
+    public String getClsName() {
+        return clsName;
+    }
+
+    public void setClsName(String clsName) {
+        this.clsName = clsName;
+    }
 
     public String getSignAcct() {
         return signAcct;

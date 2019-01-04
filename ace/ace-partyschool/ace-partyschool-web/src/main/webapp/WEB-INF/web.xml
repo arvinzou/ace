@@ -65,6 +65,15 @@
         <filter-name>webAccessDecisionSecurityFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--需要登录成功后才能显示的内容过滤-->
+    <filter>
+        <filter-name>webLoginSecurityFilter</filter-name>
+        <filter-class>com.huacainfo.ace.partyschool.web.filter.WebLoginSecurityFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>webLoginSecurityFilter</filter-name>
+        <url-pattern>/www/registered/*</url-pattern>
+    </filter-mapping>
     <!-- 权限过滤结束-->
 
     <servlet>

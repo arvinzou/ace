@@ -36,4 +36,50 @@
         or account = #{tel}
     </select>
 
+
+    <resultMap id="AcctResultMap" type="com.huacainfo.ace.partyschool.vo.AccountVo">
+        <result column="regType" jdbcType="VARCHAR" property="regType"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <association property="student" column="sid" javaType="com.huacainfo.ace.partyschool.vo.StudentVo">
+            <id column="sid" jdbcType="VARCHAR" property="id"/>
+            <result column="sPid" jdbcType="VARCHAR" property="pid"/>
+            <result column="sName" jdbcType="VARCHAR" property="name"/>
+            <result column="sMobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="sIdCard" jdbcType="CHAR" property="idCard"/>
+            <result column="sPolitical" jdbcType="VARCHAR" property="political"/>
+            <result column="sWUName" jdbcType="VARCHAR" property="workUnitName"/>
+            <result column="sPostName" jdbcType="VARCHAR" property="postName"/>
+            <result column="sClsId" jdbcType="VARCHAR" property="classId"/>
+            <result column="sClsName" jdbcType="VARCHAR" property="clsName"/>
+        </association>
+        <association property="teacher" column="tid" javaType="com.huacainfo.ace.partyschool.vo.TeacherVo">
+            <id property="id" jdbcType="VARCHAR" column="tid"/>
+            <result column="tType" jdbcType="CHAR" property="category"/>
+            <result column="tName" jdbcType="VARCHAR" property="name"/>
+            <result column="tMobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="tIdCard" jdbcType="CHAR" property="idCard"/>
+            <result column="tPhotoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+        </association>
+    </resultMap>
+
+    <select id="findByAcct" parameterType="java.lang.String" resultMap="AcctResultMap">
+        select
+        ui.nickname, ui.headimgurl,
+        u.sex,
+
+        s.id as sid,
+        s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,
+        s.political as sPolitical, s.workUnitName as sWUName, s.postName as sPostName,
+        s.classId as sClsId, '' as sClsName,
+
+        t.id as tid,
+        t.category as tType, t.name as tName,
+        t.mobile as tMobile, t.idCard as tIdCard, t.photoUrl as tPhotoUrl
+        from portal.users u
+        left join portal.userinfo ui on u.openId = ui.unionid
+        left join partyschool.student s on u.user_id = s.id
+        left join partyschool.teacher t on u.user_id = t.id
+        where u.account = #{acct,jdbcType=VARCHAR}
+    </select>
 </mapper>
