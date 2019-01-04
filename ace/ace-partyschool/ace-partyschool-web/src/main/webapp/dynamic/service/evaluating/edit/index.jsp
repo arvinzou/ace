@@ -11,9 +11,6 @@
     <meta content="${cfg.sys_name}" name="${cfg.sys_name}"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
-
-    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
 </head>
 
 <body>
@@ -41,45 +38,67 @@
 </body>
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
-                                    <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        名称
-                                                    <span class="required" aria-required="true"> * </span>
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="name"
-                               value="\${data.o.name}" maxlength="50"
-                               placeholder="请输入名称（建议字数在14个字以内，不超过50个字)">
-                        <span class="help-block"></span>
-                    </div>
+        <h4>评测内容</h4>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                名称
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" value="\${data.name}" name="name" maxlength="50"
+                       placeholder="请输入名称（建议字数在14个字以内，不超过50个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                介绍
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" value="\${data.naintroduceme}" name="introduce"
+                       maxlength="2147483647"
+                       placeholder="请输入介绍（建议字数在14个字以内，不超过2147483647个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                超时设定
+                <span class="required" aria-required="true"> * </span>
+            </label>
+            <div class="col-md-10">
+                <input type="text" value="\${data.timeout}" class="form-control" name="timeout" maxlength="10"
+                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <h4>评测选项内容</h4>
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-1">
+                <button type="button" class="btn btn-success addOption">添加</button>
+            </div>
+        </div>
+        <div id="evaluatingRst">
+            <div class="form-group">
+                <label class="col-md-2 control-label">
+                    内容<span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="evaluationIndex[0].name" maxlength="10"
+                           placeholder="">
+                    <span class="help-block"></span>
                 </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        介绍
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="introduce"
-                               value="\${data.o.introduce}" maxlength="2147483647"
-                               placeholder="请输入介绍（建议字数在14个字以内，不超过2147483647个字)">
-                        <span class="help-block"></span>
-                    </div>
+                <label class="col-md-2 control-label">
+                    分值<span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" name="evaluationIndex[0].score" maxlength="10"
+                           placeholder="">
+                    <span class="help-block"></span>
                 </div>
-                            <div class="form-group">
-                    <label class="col-md-2 control-label">
-
-                        超时设定
-                                                    <span class="required" aria-required="true"> * </span>
-                                            </label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" name="timeout"
-                               value="\${data.o.timeout}" maxlength="10"
-                               placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">
-                        <span class="help-block"></span>
-                    </div>
-                </div>
-                        </div>
+            </div>
+        </div>
+    </div>
     <div class="form-actions">
         <div class="row">
             <div class="col-md-offset-3 col-md-7">
@@ -94,13 +113,5 @@
 
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/common/js/cropUpload.js?version=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>
