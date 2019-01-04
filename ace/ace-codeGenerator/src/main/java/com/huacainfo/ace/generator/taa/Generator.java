@@ -10,7 +10,7 @@ public class Generator {
         //*******************************************
         codeGenerator.init(c);
         //java
-        codeGenerator.generatorJavaManager(c);
+        //codeGenerator.generatorJavaManager(c);
         //web形式-适用于新互联网架构
 //        codeGenerator.generatorWebClient1(c);
         // web形式-适用于多表格，多数据的表单结构

@@ -388,19 +388,19 @@ public class CodeGenerator {
                 _colModel.append("},\r");
                 _colModel.append("cellattr : function(rowId, val, rawObject, cm, rdata) {\r");
                 _colModel.append("if (rawObject.status == '0') {\r");
-                _colModel.append("return \"style='background:red;color:#fff'\";\r");
+                _colModel.append("return \"style='color:red;'\";\r");
                 _colModel.append("}\r");
                 _colModel.append("if (rawObject.status == '1') {\r");
-                _colModel.append("return \"style='background:#FF9224;color:#000000'\";\r");
+                _colModel.append("return \"style='color:#FF9224;'\";\r");
                 _colModel.append("}\r");
                 _colModel.append("if (rawObject.status == '2') {\r");
-                _colModel.append("return \"style='background:green;color:#fff'\";\r");
+                _colModel.append("return \"style='color:green;'\";\r");
                 _colModel.append("}\r");
                 _colModel.append("if (rawObject.status == '3') {\r");
-                _colModel.append("return \"style='background:#F9F900;color:#000000'\";\r");
+                _colModel.append("return \"style='color:#F9F900;'\";\r");
                 _colModel.append("}\r");
                 _colModel.append("if (rawObject.status == '4') {\r");
-                _colModel.append("return \"style='background:#FF9224;color:#000000'\";\r");
+                _colModel.append("return \"style='color:#FF9224;'\";\r");
                 _colModel.append("}\r");
                 _colModel.append("},\r");
                 _colModel.append("unformat : aceSwitch,\r");
@@ -432,7 +432,7 @@ public class CodeGenerator {
                 _colModel.append("\rformoptions : {\r");
                 _colModel.append("elmprefix : \"\",\r");
                 _colModel
-                        .append("elmsuffix : \"<span style='color:red;font-size:16px;font-weight:800\'>*</span>\"\r");
+                        .append("elmsuffix : \"<span style='color:red;\'>*</span>\"\r");
                 _colModel.append("},");
                 _colModel.append("editrules : {\r");
                 _colModel.append("required : true\r");
