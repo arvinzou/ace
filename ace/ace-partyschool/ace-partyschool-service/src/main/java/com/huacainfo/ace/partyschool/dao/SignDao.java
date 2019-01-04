@@ -1,5 +1,6 @@
 package com.huacainfo.ace.partyschool.dao;
 
+import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.portal.model.Users;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,4 +15,6 @@ public interface SignDao {
 
     int insertReg(@Param("user") Users o,
                   @Param("roleId") String roleId);
+
+    AccountVo findByAcct(String acct);
 }
