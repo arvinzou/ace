@@ -2,6 +2,12 @@
 	padding: 0;
 	margin: 0;
 }
+body{
+	height: 100%;
+}
+.modalhide{
+	overflow: hidden;
+}
 input::-webkit-input-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;
@@ -171,4 +177,66 @@ input:-ms-input-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;
 	line-height: 1.466666rem;
+}
+
+
+/** 遮罩绑定微信*/
+.modal{
+	width: 100%;
+	height: 100%;
+	background:rgba(0,0,0,0.7);
+	z-index: 500;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+.modal-main{
+	width: 80%;
+	height: 9.333333rem;
+	border-radius: 0.133333rem;
+	margin: 2rem auto;
+	background: #FFFFFF;
+}
+.modal-title{
+	width: 100%;
+	text-align: center;
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+	padding-top: 3.906666rem;
+}
+.modal-sectitle{
+	width: 100%;
+	text-align: center;
+	color: #ABAEB9;
+	font-size: 0.453333rem;
+	padding-top: 1.306666rem;
+	padding-bottom: 1.6rem;
+}
+.modal-opt{
+	width: 100%;
+	height: 1.333333rem;
+}
+.modal-opt:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.cancel{
+	width: 50%;
+	height: 1.333333rem;
+	line-height: 1.333333rem;
+	text-align: center;
+	float: left;
+	font-size: 0.453333rem;
+	color: #ABAEB9;
+}
+.bind{
+	width: 50%;
+	height: 1.333333rem;
+	line-height: 1.333333rem;
+	text-align: center;
+	float: left;
+	font-size: 0.453333rem;
+	color: #F95C57;
 }

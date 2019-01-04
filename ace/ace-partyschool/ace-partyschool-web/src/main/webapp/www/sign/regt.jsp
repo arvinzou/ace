@@ -77,6 +77,18 @@
 				<img src="img/regist.png" onclick="regist();"/>
 			</div>
 		</div>
+
+		<!--绑定微信栏目-->
+		<div class="modal"id="bindModal" style="display: none;">
+			<div class="modal-main">
+				<div class="modal-title">是否绑定微信</div>
+				<div class="modal-sectitle">绑定微信快速登录</div>
+				<div class="modal-opt">
+					<div class="cancel"><span onclick="cancel();">取消</span></div>
+					<div class="bind"><span>立即绑定</span></div>
+				</div>
+			</div>
+		</div>
 	</body>
 
 	<script type="text/javascript" src="../common/js/jquery-3.2.1.min.js"></script>

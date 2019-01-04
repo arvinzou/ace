@@ -97,6 +97,8 @@ function regist(){
         success:function(result){
             if(result.status == 0) {
                 alert(result.info);
+                $("#bindModal").show();
+                $("body").addClass("modalhide");
             }else {
                 if(result.info){
                     alert(result.info);
@@ -133,10 +135,12 @@ function base64(file, callback) {
     reader.onload = readerOnload;
 
     var file = file[0].files[0];
-    coolFile.filetype = file.type;
-    coolFile.size = file.size;
-    coolFile.filename = file.name;
-    reader.readAsBinaryString(file);
+    if(file){
+        coolFile.filetype = file.type;
+        coolFile.size = file.size;
+        coolFile.filename = file.name;
+        reader.readAsBinaryString(file);
+    }
 }
 
 function imgChange() {
@@ -164,4 +168,9 @@ function imgChange() {
             }
         });
     });
+}
+
+function cancel(){
+    $("#bindModal").hide();
+    $("body").removeClass("modalhide");
 }
