@@ -8250,7 +8250,7 @@ $.jgrid.extend({
 						}
 						trdata = $(tb).find("tr[rowpos="+rp+"]");
 						var scl=true;
-						if(obj.p.colModel.length>9){
+						if(obj.p.colModel.length>15){
 							scl=(t%2==0);
 							if(opt.colspan){
                                 scl=true;
