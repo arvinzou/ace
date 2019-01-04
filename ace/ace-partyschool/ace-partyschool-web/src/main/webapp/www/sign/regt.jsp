@@ -22,7 +22,10 @@
 					<label class="form-label">身份证号</label>
 					<input class="form-input" maxlength="18" type="text" name="idCard" placeholder="识别/输入18位身份证号"/>
 				</div>
-				<img src="img/camera.png" class="camera"/>
+				<div class="camera-box">
+					<label for="file"><img src="img/camera.png" class="camera"/></label>
+					<input type="file" id="file" name="file" onchange="imgChange();" style="display: none;width: 100%;height: 100%;"/>
+				</div>
 			</div>
 			
 			<div class="form-box">
