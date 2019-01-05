@@ -13,6 +13,11 @@ pageEncoding="utf-8"%>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 
 <link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+
+<link href="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="${portalPath}/content/common/assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+
 <style type="text/css">
 		.excel{ background-color:#999; font-size:13px;}
 		.excel td{ background-color:#fff; white-space:nowrap;}
@@ -71,7 +76,7 @@ pageEncoding="utf-8"%>
 
 <%--查看详情--%>
 <div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 75%;">
+    <div class="modal-dialog" role="document" style="width: 100%;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
@@ -79,12 +84,8 @@ pageEncoding="utf-8"%>
                 </button>
                 <h4 class="modal-title">详细</h4>
             </div>
-            <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
+            <div class="modal-body" id="fm-preview">
 
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
@@ -94,19 +95,81 @@ pageEncoding="utf-8"%>
 </div>
 <%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">名称</label>
-        <div class="col-md-10">
-            \${data.o.name}
+
+
+
+        <div class="portlet light ">
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button id="btn-add" class="btn sbold green" onclick="importXls('\${data.o.id}')">添加
+
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="btn-group pull-right">
+                                <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">操作
+                                    <i class="fa fa-angle-down"></i>
+                                </button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="javascript:delTable('\${data.o.id}');">
+                                            <i class="fa fa-del"></i> 删除 </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="list1">
+            <thead>
+            <tr>
+                <th width="5%">
+                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                        <input type="checkbox" class="group-checkable" data-set="#list1 .checkboxes" />
+                        <span></span>
+                    </label>
+                </th>
+                <th width="25%">路段名称</th>
+                <th width="10%">县区</th>
+                <th width="10%">路段开始</th>
+                <th width="10%">路段截止</th>
+                <th width="10%">标号开始</th>
+                <th width="10%">标号截止</th>
+                <th width="10%">路长</th>
+                <th width="10%">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {@each data.o.list as item, index}
+                <tr>
+                    <td>
+                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                            <input type="checkbox" class="checkboxes" value="\${item.id}" />
+                            <span></span>
+                        </label>
+                    </td>
+                    <td>\${item.name}</td>
+                    <td>\${item.areaName}</td>
+                    <td>\${item.startName}</td>
+                    <td>\${item.endName}</td>
+                    <td>\${item.startNo}</td>
+                    <td>\${item.endNo}</td>
+                    <td>\${item.roadManName}</td>
+                    <td>GPS</td>
+                </tr>
+            {@/each}
+
+            </tbody>
+        </table>
         </div>
     </div>
-    
-    <div class="form-group">
-        <label class="col-md-2 view-label">介绍</label>
-        <div class="col-md-10">
-            \${data.o.intro}
-        </div>
-    </div>
+
+
 </script>
 
 
@@ -144,7 +207,9 @@ pageEncoding="utf-8"%>
         </div>
     </div>
 </div>
-
+<script src="${portalPath}/content/common/assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
 <%--easyui--%>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
@@ -177,7 +242,5 @@ pageEncoding="utf-8"%>
 
 <script src="${pageContext.request.contextPath}/content/service/road/upload.js?version=${cfg.version}"></script>
 </body>
-<style>
-    /* css code area*/
-</style>
+
 </html>

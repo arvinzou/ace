@@ -45,4 +45,7 @@ public interface RoadSectionDao {
 
     int updateByName(RoadSection record);
 
+
+    int deleteByPrimaryKeys(@Param("ids") String[] ids);
+
 }

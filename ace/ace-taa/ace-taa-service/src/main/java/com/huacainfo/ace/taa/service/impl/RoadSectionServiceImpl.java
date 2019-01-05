@@ -290,4 +290,24 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         return rst;
     }
 
+
+    /**
+     * @throws
+     * @Title:deleteRoadSectionByRoadSectionId
+     * @Description: TODO(删除路段)
+     * @param: @param id
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-04
+     */
+    @Override
+    public MessageResponse deleteRoadSectionByRoadSectionIds(String[] id, UserProp userProp) throws
+            Exception {
+        this.roadSectionDao.deleteByPrimaryKeys(id);
+        this.dataBaseLogService.log("批量删除路段", "路段", id[0], id[0], "路段", userProp);
+        return new MessageResponse(0, "删除成功！");
+    }
+
 }
