@@ -1,3 +1,4 @@
+var params={};
 jQuery(function($) {
 			//查询
 			$('#btn-search').on('click', function() {
@@ -45,7 +46,7 @@ jQuery(function($) {
 			var html = juicer(tpl, {
 				data: data,
 			});
-
+            console.log(html);
 			$(obj).html(html);
 		}
 
@@ -58,6 +59,10 @@ jQuery(function($) {
 				console.log(relatedTarget);
 				initPreview(id);
 			})
+			var data={};
+			data.key='category';
+			data.list=staticDictObject['170'];
+			render($("#check-group-category"), data, "tpl-check-group");
 		}
 
 		function initPreview(id) {

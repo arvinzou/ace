@@ -19,14 +19,18 @@ pageEncoding="utf-8"%>
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+                <div class="col-md-6 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/road/insertRoad">添加
                     </button>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
+
+                    <div class="btn-group"   id="check-group-category" role="group"  style="float:left;padding-right:5px">
+
+                    </div>
 
 
                     <div class="input-group">
@@ -96,6 +100,20 @@ pageEncoding="utf-8"%>
             \${data.o.intro}
         </div>
     </div>
+</script>
+
+
+<script id="tpl-check-group" type="text/template">
+
+    {@each data.list as item, index}
+        {@if item.CODE}
+            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}</button>
+        {@else}
+            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','');">全部</button>
+        {@/if}
+
+    {@/each}
+
 </script>
 
 <%--easyui--%>

@@ -33,10 +33,10 @@ var _colModel = function() {
 			width: 50,
 			edittype: "select",
 			renderer: function(value) {
-				return rsd(value, "01");
+				return rsd(value, "170");
 			},
 			editoptions: {
-				value: odparse("01"),
+				value: odparse("170"),
 				style:'width:95%'
 			},
 
@@ -83,10 +83,10 @@ var _colModel = function() {
 
 			formoptions: {
 				elmprefix: "",
-				elmsuffix: "<span style='color:red;'>*</span>"
+				elmsuffix: ""
 			},
 			editrules: {
-				required: true
+				required: false
 			}
 		}, {
 			name: 'createUserId',

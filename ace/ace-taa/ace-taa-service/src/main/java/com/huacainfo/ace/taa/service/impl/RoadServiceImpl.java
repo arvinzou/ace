@@ -84,10 +84,6 @@ public class RoadServiceImpl implements RoadService {
         if (CommonUtils.isBlank(o.getCategory())) {
             return new MessageResponse(1, "级别不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
-
         int temp = this.roadDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "道路名称重复！");
