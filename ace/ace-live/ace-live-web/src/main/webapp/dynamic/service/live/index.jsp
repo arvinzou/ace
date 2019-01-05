@@ -26,7 +26,6 @@
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 
                                         <div class="portlet light ">
-
                                             <div class="portlet-body">
 
                                                 <div class="row custom-toolbar">
