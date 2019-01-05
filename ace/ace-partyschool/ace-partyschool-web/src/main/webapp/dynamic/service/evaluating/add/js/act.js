@@ -4,8 +4,50 @@ window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append(" <li><span>创建评测管理</span></li>");
         initEvents();
+        $('.addOption').on('click','',addOption);
+        $('#evaluatingRst ').on('click','.removeOption',removeOption);
     });
 }
+
+function removeOption() {
+    $(this).parent().remove();
+}
+
+function addOption() {
+    var index=$('#evaluatingRst .form-group').length;
+    var temp=optionTemp;
+    temp = temp.replace('#index#',index);
+    temp = temp.replace('#index#',index);
+    var $p = $(temp);
+    $('#evaluatingRst').append($p);
+
+}
+
+
+var optionTemp='<div class="form-group">\n' +
+    '                            <label class="col-md-2 control-label">\n' +
+    '                                内容\n' +
+    '                                <span class="required" aria-required="true"> * </span>\n' +
+    '                            </label>\n' +
+    '                            <div class="col-md-10">\n' +
+    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
+    '                                       maxlength="10"\n' +
+    '                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">\n' +
+    '                                <span class="help-block"></span>\n' +
+    '                            </div>\n' +
+    '                            <label class="col-md-2 control-label">\n' +
+    '                                分值\n' +
+    '                                <span class="required" aria-required="true"> * </span>\n' +
+    '                            </label>\n' +
+    '                            <div class="col-md-6">\n' +
+    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].score"\n' +
+    '                                       maxlength="10"\n' +
+    '                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">\n' +
+    '                                <span class="help-block"></span>\n' +
+    '                            </div>\n' +
+    '                            <button type="button" class="btn btn-success removeOption col-md-1">删除</button>'+
+    '                        </div>';
+
 
 
 /*页面渲染*/
@@ -56,14 +98,28 @@ function initEvents() {
 /*保存表单**/
 function save(params) {
     $.extend(params, {});
+    evaluating={};
+    evaluating.name=params.name;
+    evaluating.timeout=params.timeout;
+    evaluating.introduce=params.introduce;
+    evaluationIndex=[];
+    var index=0;
+    while(params['evaluationIndex['+index+'].name']){
+        evaluationIndex.push({
+            name:params['evaluationIndex['+index+'].name'],
+            score:params['evaluationIndex['+index+'].score']
+        })
+        index++;
+    }
+    params.evaluating=evaluating;
+    params.evaluationIndex=evaluationIndex;
+    console.log(params);
     startLoad();
     $.ajax({
         url: contextPath + "/evaluating/insertEvaluating",
         type: "post",
         async: false,
-        data: {
-            jsons: JSON.stringify(params)
-        },
+        data:  {jsons:JSON.stringify(params)},
         success: function (result) {
             stopLoad();
             alert(result.errorMessage);

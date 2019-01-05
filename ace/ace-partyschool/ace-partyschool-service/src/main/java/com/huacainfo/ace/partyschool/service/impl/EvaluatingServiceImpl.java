@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.EvaluationIndexDao;
+import com.huacainfo.ace.partyschool.model.EvaluationIndex;
+import com.huacainfo.ace.partyschool.service.EvaluationIndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,10 @@ public class EvaluatingServiceImpl implements EvaluatingService {
     private EvaluatingDao evaluatingDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private EvaluationIndexService evaluationIndexService;
+    @Autowired
+    private EvaluationIndexDao evaluationIndexDao;
 
     /**
      * @throws
@@ -50,9 +57,7 @@ public class EvaluatingServiceImpl implements EvaluatingService {
      * @version: 2019-01-03
      */
     @Override
-    public PageResult
-            <EvaluatingVo> findEvaluatingList(EvaluatingQVo condition, int start,
-                                              int limit, String orderBy) throws Exception {
+    public PageResult<EvaluatingVo> findEvaluatingList(EvaluatingQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult
                 <EvaluatingVo> rst = new PageResult<>();
         List
@@ -79,7 +84,7 @@ public class EvaluatingServiceImpl implements EvaluatingService {
      */
     @Override
     public MessageResponse insertEvaluating(Evaluating o, UserProp userProp) throws Exception {
-
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -89,23 +94,36 @@ public class EvaluatingServiceImpl implements EvaluatingService {
         if (CommonUtils.isBlank(o.getTimeout())) {
             return new MessageResponse(1, "超时设定不能为空！");
         }
-
-
         int temp = this.evaluatingDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "评测管理名称重复！");
         }
-
-        o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.evaluatingDao.insert(o);
+        MessageResponse messageResponse=insetevaluationIndexServices(o.getEvaluationIndexList(), o.getId(), userProp);
+        if(messageResponse!=null){
+            throw new Exception();
+        }
         this.dataBaseLogService.log("添加评测管理", "评测管理", "",
                 o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "添加评测管理完成！");
     }
+
+
+    private MessageResponse insetevaluationIndexServices(List<EvaluationIndex> evaluationIndexService, String id, UserProp userProp) throws Exception {
+        for (EvaluationIndex item : evaluationIndexService) {
+            item.setEvaluatingId(id);
+            MessageResponse messageResponse=this.evaluationIndexService.insertEvaluationIndex(item, userProp);
+            if(messageResponse.getStatus()!=0){
+                return messageResponse;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * @throws
@@ -123,18 +141,23 @@ public class EvaluatingServiceImpl implements EvaluatingService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
+        Evaluating evaluating = this.evaluatingDao.selectByPrimaryKey(o.getId());
+        if (evaluating == null) {
+            return new MessageResponse(1, "评测数据丢失！");
+        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getTimeout())) {
             return new MessageResponse(1, "超时设定不能为空！");
         }
-
-
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
-        this.evaluatingDao.updateByPrimaryKey(o);
+        evaluating.setLastModifyDate(new Date());
+        evaluating.setLastModifyUserName(userProp.getName());
+        evaluating.setLastModifyUserId(userProp.getUserId());
+        evaluating.setIntroduce(o.getIntroduce());
+        evaluating.setName(o.getName());
+        evaluating.setTimeout(o.getTimeout());
+        this.evaluatingDao.updateByPrimaryKey(evaluating);
         this.dataBaseLogService.log("变更评测管理", "评测管理", "",
                 o.getId(), o.getId(), userProp);
 
@@ -152,11 +175,11 @@ public class EvaluatingServiceImpl implements EvaluatingService {
      * @version: 2019-01-03
      */
     @Override
-    public SingleResult
-            <EvaluatingVo> selectEvaluatingByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <EvaluatingVo> rst = new SingleResult<>();
-        rst.setValue(this.evaluatingDao.selectVoByPrimaryKey(id));
+    public SingleResult<EvaluatingVo> selectEvaluatingByPrimaryKey(String id) throws Exception {
+        SingleResult<EvaluatingVo> rst = new SingleResult<>();
+        EvaluatingVo evaluatingVo=this.evaluatingDao.selectVoByPrimaryKey(id);
+        evaluatingVo.setEvaluationIndexList(this.evaluationIndexDao.selectByEvaluatingId(id));
+        rst.setValue(evaluatingVo);
         return rst;
     }
 

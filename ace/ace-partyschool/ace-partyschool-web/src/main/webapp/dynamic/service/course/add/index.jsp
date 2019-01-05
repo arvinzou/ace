@@ -37,7 +37,7 @@
                             <span class="required" aria-required="true"> * </span>
                             ﻿
                         </label>
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <input type="text" class="form-control" name="name"
                                    maxlength="50"
                                    placeholder="请输入名称（建议字数在14个字以内，不超过50个字)">
@@ -48,7 +48,7 @@
                         <label class="col-md-2 control-label">
                             类别<span class="required" aria-required="true"> * </span>﻿
                         </label>
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <select style="width: 100%;height: 34px" class="js-example-basic-single" name="category"></select>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             评测方案
                             ﻿
                         </label>
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single1" name="evaluatingId">
                             </select>
                         </div>
@@ -69,7 +69,7 @@
                             老师
                             ﻿
                         </label>
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <select style="width: 100%;height: 34px" class="js-example-basic-single js-example-basic-single2" name="teacherId"></select>
                         </div>
                     </div>

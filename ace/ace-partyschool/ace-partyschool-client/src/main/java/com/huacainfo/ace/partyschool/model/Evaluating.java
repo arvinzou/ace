@@ -1,8 +1,11 @@
 package com.huacainfo.ace.partyschool.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
-public class Evaluating {
+public class Evaluating implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String id;
 
     private String name;
@@ -22,6 +25,17 @@ public class Evaluating {
     private Date lastModifyDate;
 
     private String introduce;
+
+    private List<EvaluationIndex> evaluationIndexList;
+
+
+    public List<EvaluationIndex> getEvaluationIndexList() {
+        return evaluationIndexList;
+    }
+
+    public void setEvaluationIndexList(List<EvaluationIndex> evaluationIndexList) {
+        this.evaluationIndexList = evaluationIndexList;
+    }
 
     public String getId() {
         return id;
