@@ -95,7 +95,7 @@ private DataBaseLogService dataBaseLogService;
                 this.dataBaseLogService.log("添加$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
                 o.getId(),o.getId(), userProp);
 
-                return new MessageResponse(0, "添加$!{bean.tableChineseName}完成！");
+                return new MessageResponse(0, "保存成功！");
                 }
 
                 /**
@@ -121,7 +121,7 @@ private DataBaseLogService dataBaseLogService;
                 this.dataBaseLogService.log("变更$!{bean.tableChineseName}", "$!{bean.tableChineseName}", "",
                 o.getId(), o.getId(), userProp);
 
-                return new MessageResponse(0, "变更$!{bean.tableChineseName}完成！");
+                return new MessageResponse(0, "保存成功！");
                 }
 
                 /**
@@ -161,7 +161,7 @@ private DataBaseLogService dataBaseLogService;
                         this.$!{bean.lowerName}Dao.deleteByPrimaryKey(id);
                         this.dataBaseLogService.log("删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
                         "$!{bean.tableChineseName}", userProp);
-                        return new MessageResponse(0, "$!{bean.tableChineseName}删除完成！");
+                        return new MessageResponse(0, "删除成功！");
                         }
 
 
@@ -186,7 +186,7 @@ private DataBaseLogService dataBaseLogService;
 
                         dataBaseLogService.log("审核$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id, id,
                         "$!{bean.tableChineseName}", userProp);
-                        return new MessageResponse(0, "$!{bean.tableChineseName}审核完成！");
+                        return new MessageResponse(0, "审核成功！");
                         }
 
 
@@ -210,15 +210,15 @@ private DataBaseLogService dataBaseLogService;
                         		for (Map<String, Object> row : list) {
                         			$!{bean.name} o = new $!{bean.name}();
                         			CommonBeanUtils.copyMap2Bean(o,row);
-                        			o.setCreateTime(new Date());
-                        			o.setCreateUserId(userProp.getUserId());
-                        			o.setStauts("1");
+                        			o.setCreateDate(new Date());
+                                    o.setCreateUserId(userProp.getUserId());
+                                    o.setStatus("1");
 
                         			this.logger.info(o.toString());
-                        			if (CommonUtils.isBlank(o.getResourcesId())) {
+                        			if (true) {
                         				return new MessageResponse(1,"行"+i+ ",编号不能为空！");
                         			}
-
+                                    $!{bean.validate}
                         			int t = this.$!{bean.lowerName}Dao.isExit(o);
                         			if (t > 0) {
                         				this.$!{bean.lowerName}Dao.updateByPrimaryKey(o);
@@ -229,7 +229,7 @@ private DataBaseLogService dataBaseLogService;
                         			i++;
                         		}
                         		this.dataBaseLogService.log("$!{bean.tableChineseName}导入", "$!{bean.tableChineseName}", "", "rs.xls","rs.xls", userProp);
-                        		return new MessageResponse(0, "导入完成！");
+                        		return new MessageResponse(0, "导入成功！");
                         	}
 
 
