@@ -1,5 +1,6 @@
 package com.huacainfo.ace.taa.service.impl;
 
+import java.util.*;
 
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -9,6 +10,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.taa.dao.RoadDao;
+import com.huacainfo.ace.taa.dao.RoadSectionDao;
 import com.huacainfo.ace.taa.model.Road;
 import com.huacainfo.ace.taa.service.RoadService;
 import com.huacainfo.ace.taa.vo.RoadQVo;
@@ -18,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service("roadService")
@@ -31,6 +32,10 @@ public class RoadServiceImpl implements RoadService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private RoadDao roadDao;
+
+    @Autowired
+    private RoadSectionDao roadSectionDao;
+
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -151,7 +156,12 @@ public class RoadServiceImpl implements RoadService {
     public SingleResult
             <RoadVo> selectRoadByPrimaryKey(String id) throws Exception {
         SingleResult<RoadVo> rst = new SingleResult<>();
-        rst.setValue(this.roadDao.selectVoByPrimaryKey(id));
+        Map<String,Object> p=new HashMap<>();
+        p.put("id",id);
+        List<Map<String,Object>> list=this.roadSectionDao.getList(p);
+        RoadVo o=this.roadDao.selectVoByPrimaryKey(id);
+        o.setList(list);
+        rst.setValue(o);
         return rst;
     }
 

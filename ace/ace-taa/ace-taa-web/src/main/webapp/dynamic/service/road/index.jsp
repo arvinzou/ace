@@ -12,6 +12,13 @@ pageEncoding="utf-8"%>
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 
+<link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
+<style type="text/css">
+		.excel{ background-color:#999; font-size:13px;}
+		.excel td{ background-color:#fff; white-space:nowrap;}
+		.excel th{ background-color:#E7E7E7; font-weight:normal;}
+</style>
+
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -116,6 +123,28 @@ pageEncoding="utf-8"%>
 
 </script>
 
+<div class="modal fade"  role="dialog" id="modal-upload">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  authority="false" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Excel导入</h4>
+            </div>
+            <div class="modal-body">
+                <div id="uploader">
+                </div>
+                <div style="margin:5px">
+                    <a href="roadSection.xls" style="color:red">下载模板</a>.<br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--easyui--%>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
@@ -133,6 +162,9 @@ pageEncoding="utf-8"%>
 <script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 
 <script src="${pageContext.request.contextPath}/content/service/road/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/road/model.js?version=${cfg.version}"></script>
@@ -142,6 +174,8 @@ pageEncoding="utf-8"%>
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
+
+<script src="${pageContext.request.contextPath}/content/service/road/upload.js?version=${cfg.version}"></script>
 </body>
 <style>
     /* css code area*/

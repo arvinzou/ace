@@ -71,7 +71,7 @@
     select
     <include refid="Base_Column_List" />
     from road_man
-    where mobile = #{mobile,jdbcType=VARCHAR} limit 0,1
+    where name = #{name,jdbcType=VARCHAR} limit 0,1
   </select>
 
 

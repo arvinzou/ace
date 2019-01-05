@@ -74,6 +74,24 @@
   </update>
 
 
+  <update id="updateByName" parameterType="com.huacainfo.ace.taa.model.RoadSection">
+    update road_section
+    set roadId = #{roadId,jdbcType=VARCHAR},
+    areaCode = #{areaCode,jdbcType=VARCHAR},
+    roadMan = #{roadMan,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    startName = #{startName,jdbcType=VARCHAR},
+    endName = #{endName,jdbcType=VARCHAR},
+    startNo = #{startNo,jdbcType=VARCHAR},
+    endNo = #{endNo,jdbcType=VARCHAR},
+    intro = #{intro,jdbcType=VARCHAR},
+    lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+    lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+    lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where name = #{name,jdbcType=VARCHAR}
+  </update>
+
+
 
   <sql id="whereCondition">
     from road_section t
@@ -117,7 +135,7 @@ select * from (
     select count(*)
     from
     road_section where
-    name=#{name}
+    name=#{name} and roadId = #{roadId,jdbcType=VARCHAR}
   </select>
 
 
@@ -129,4 +147,14 @@ select * from (
     left join portal.province b on t.areaCode=b.code
     where roadId=#{p.id}
   </select>
+
+  <select id="selectSectionCount" resultType="int">
+    select count(*)
+    from
+    road_section where
+    roadId=#{id}
+  </select>
+  <update id="updateSectionCount">
+    update road set sectionCount=#{num}  where id=#{id}
+  </update>
 </mapper>

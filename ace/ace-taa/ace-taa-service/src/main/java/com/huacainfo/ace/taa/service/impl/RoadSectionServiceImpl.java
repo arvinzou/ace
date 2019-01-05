@@ -238,7 +238,9 @@ public class RoadSectionServiceImpl implements RoadSectionService {
             o.setRoadId(roadId);
             o.setCreateDate(new Date());
             o.setCreateUserId(userProp.getUserId());
+            o.setCreateUserName(userProp.getName());
             o.setId(GUIDUtil.getGUID());
+            o.setStatus("1");
             this.logger.info(o.toString());
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "行" + i + ",名称不能为空！");
@@ -256,13 +258,15 @@ public class RoadSectionServiceImpl implements RoadSectionService {
             }
             int t = this.roadSectionDao.isExit(o);
             if (t > 0) {
-                this.roadSectionDao.updateByPrimaryKey(o);
+                this.roadSectionDao.updateByName(o);
 
             } else {
                 this.roadSectionDao.insert(o);
             }
             i++;
         }
+        int num=this.roadSectionDao.selectSectionCount(roadId);
+        this.roadSectionDao.updateSectionCount(roadId,num);
         this.dataBaseLogService.log("路段导入", "路段", "", "rs.xls", "rs.xls", userProp);
         return new MessageResponse(0, "导入成功！");
     }

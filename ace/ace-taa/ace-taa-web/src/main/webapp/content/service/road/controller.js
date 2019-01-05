@@ -129,3 +129,9 @@ jQuery(function($) {
 						postData: params
 					}).trigger("reloadGrid");
 				}
+
+				function importXls(id){
+				        reset_uploader({roadId:id});
+                		$('#modal-upload').modal('show');
+
+				}

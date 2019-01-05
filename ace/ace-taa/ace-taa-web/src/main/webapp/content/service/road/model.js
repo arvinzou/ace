@@ -1,4 +1,4 @@
-var _colNames = ['主键', '名称', '级别', '简介', '状态 ', '创建人编号', '创建人姓名', '创建日期', '更新人编号', '更新人名称', '更新日期', '操作'];
+var _colNames = ['主键', '名称', '级别','包含路段数', '简介', '状态 ', '创建人编号', '创建人姓名', '创建日期', '更新人编号', '更新人名称', '更新日期', '操作'];
 var _colModel = function() {
 	return [{
 			name: 'id',
@@ -48,6 +48,11 @@ var _colModel = function() {
 				required: true
 			}
 		}, {
+         			name: 'sectionCount',
+         			hidden:false,
+         			editable: false,
+         			width: 60
+         		}, {
 			name: 'intro',
 			hidden:true,
 			editable: true,
@@ -56,7 +61,7 @@ var _colModel = function() {
 			editoptions: {
 				rows: "8",
 				style:'width:95%'
-			},
+			}
 		}, {
 			name: 'status',
 			editable: true,
@@ -163,7 +168,10 @@ function renderBtn(cur) {
 	}
 
 	opt.push('<a href="#" data-toggle="modal" data-id="' + rowid + '" data-title="' + title + '" ' +
-		'data-target="#modal-preview">查看</a>');
+		'data-target="#modal-preview">查看</a> ');
+
+
+		opt.push('<a href="javascript:importXls(\'' + rowid + '\')">路段导入</a>  ');
 
 	return opt.join(' ');
 }

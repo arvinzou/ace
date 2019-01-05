@@ -212,6 +212,7 @@ private DataBaseLogService dataBaseLogService;
                         			CommonBeanUtils.copyMap2Bean(o,row);
                         			o.setCreateDate(new Date());
                                     o.setCreateUserId(userProp.getUserId());
+                                    o.setCreateUserName(userProp.getName());
                                     o.setStatus("1");
 
                         			this.logger.info(o.toString());

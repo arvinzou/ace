@@ -36,4 +36,13 @@ public interface RoadSectionDao {
 
     List<Map<String, Object>> getList(@Param("p") Map<String, Object> p);
 
+
+    int selectSectionCount(String id);
+
+
+    int updateSectionCount( @Param("id") String id, @Param("num") int num);
+
+
+    int updateByName(RoadSection record);
+
 }
