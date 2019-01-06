@@ -255,4 +255,24 @@ private DataBaseLogService dataBaseLogService;
 
                                 }
 
+
+                                /**
+                                     * @throws
+                                     * @Title:getListByCondition
+                                     * @Description: TODO(用于控件数据获取)
+                                     * @param: @param params
+                                     * @param: @return
+                                     * @return: Map<String,Object>
+                                     * @author: $!{annotation.authorName}
+                                     * @version: $!{annotation.version}
+                                     */
+                                    @Override
+                                    public Map<String, Object> getListByCondition(Map<String, Object> params){
+                                        Map<String, Object> rst = new HashMap<String, Object>();
+                                        List<Map<String, Object>> list = this.$!{bean.lowerName}Dao.getListByCondition(params);
+                                        rst.put("total", list.size());
+                                        rst.put("rows", list);
+                                        return rst;
+                                    }
+
  }

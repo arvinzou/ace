@@ -304,6 +304,16 @@
   height: 34px;
   font-size: 14px;
   line-height: 1.42857;
+
+
+      width: 85%;
+      background-color: #fff;
+      outline: 0!important;
+      box-shadow: none!important;
+      height: 34px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1.42857;
 }
 .combo-arrow {
   width: 18px;
@@ -330,7 +340,7 @@
   background-color: #fff;
 }
 .combo {
-  border-color: #ddd;
+  border-color: #ebedf2;
   background-color: #fff;
 }
 .combo-arrow {
