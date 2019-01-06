@@ -28,7 +28,7 @@ pageEncoding="utf-8"%>
                 </div>
                 <div class="col-md-6">
                     <div class="input-group" style="float:left;padding-right:10px">
-                        行政区划 <input class="easyui-combotree" data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'" style="width:200px;﻿line-height: 30px;height: 30px;">
+                        行政区划 <input class="easyui-combotree" name="areaCode" data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'" style="width:200px;﻿line-height: 30px;height: 30px;">
                     </div>
 
 
