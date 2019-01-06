@@ -1,5 +1,7 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.huacainfo.ace.partyschool.model.EvaluationIndex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ import com.huacainfo.ace.partyschool.model.Evaluating;
 import com.huacainfo.ace.partyschool.service.EvaluatingService;
 import com.huacainfo.ace.partyschool.vo.EvaluatingVo;
 import com.huacainfo.ace.partyschool.vo.EvaluatingQVo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/evaluating")
@@ -75,8 +80,11 @@ public class EvaluatingController extends BisBaseController {
     @RequestMapping(value = "/insertEvaluating")
     @ResponseBody
     public MessageResponse insertEvaluating(String jsons) throws Exception {
-        Evaluating obj = JSON.parseObject(jsons, Evaluating.class);
-        return this.evaluatingService.insertEvaluating(obj, this.getCurUserProp());
+        JSONObject jsonObj = JSON.parseObject(jsons);
+        Evaluating evaluating = JSON.parseObject(jsonObj.getString("evaluating"), Evaluating.class);
+        List<EvaluationIndex> list=new ArrayList<EvaluationIndex>(JSONArray.parseArray(jsonObj.getString("evaluationIndex"),EvaluationIndex.class));
+        evaluating.setEvaluationIndexList(list);
+        return this.evaluatingService.insertEvaluating(evaluating, this.getCurUserProp());
     }
 
     /**

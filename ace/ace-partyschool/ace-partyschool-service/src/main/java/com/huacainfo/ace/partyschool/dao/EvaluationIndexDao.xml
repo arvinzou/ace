@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.EvaluationIndexDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.EvaluationIndex">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="evaluatingId" jdbcType="VARCHAR" property="evaluatingId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+               type="com.huacainfo.ace.partyschool.model.EvaluationIndex">
+        <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, evaluatingId, name, score
+  </sql>
+    <sql id="Blob_Column_List">
+    introduce
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from evaluation_index
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByEvaluatingId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from evaluation_index
+        where evaluatingId = #{id,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluation_index
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
+    insert into evaluation_index (id, evaluatingId, name, 
+      score, introduce)
+    values (#{id,jdbcType=VARCHAR}, #{evaluatingId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{introduce,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
+        insert into evaluation_index
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="evaluatingId != null">
+                evaluatingId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="introduce != null">
+                introduce,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="evaluatingId != null">
+                #{evaluatingId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="introduce != null">
+                #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
+        update evaluation_index
+        <set>
+            <if test="evaluatingId != null">
+                evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
+    update evaluation_index
+    set evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      introduce = #{introduce,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
+    update evaluation_index
+    set evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -212,4 +212,22 @@ public class RoadSectionController extends TaaBaseController {
     public ListResult<Map<String,Object>> getList() throws Exception {
         return this.roadSectionService.getList(this.getParams());
     }
+
+
+    /**
+     * @throws
+     * @Title:deleteRoadSectionByRoadSectionId
+     * @Description: TODO(删除路段)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-04
+     */
+    @RequestMapping(value = "/deleteRoadSectionByRoadSectionIds")
+    @ResponseBody
+    public MessageResponse deleteRoadSectionByRoadSectionIds(String ids) throws Exception {
+        String [] id=ids.split(",");
+        return this.roadSectionService.deleteRoadSectionByRoadSectionIds(id, this.getCurUserProp());
+    }
 }

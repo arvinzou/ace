@@ -1,7 +1,8 @@
 package com.huacainfo.ace.taa.model;
 
 import java.util.Date;
-
+import java.util.Map;
+import java.util.List;
 public class Road implements java.io.Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -12,6 +13,8 @@ public class Road implements java.io.Serializable {
     private String category;
 
     private String intro;
+
+    private int sectionCount;
 
     private String status;
 
@@ -26,6 +29,8 @@ public class Road implements java.io.Serializable {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    private List<Map<String,Object>> list;
 
     public String getId() {
         return id;
@@ -113,5 +118,22 @@ public class Road implements java.io.Serializable {
 
     public void setLastModifyDate(Date lastModifyDate) {
         this.lastModifyDate = lastModifyDate;
+    }
+
+
+    public int getSectionCount() {
+        return sectionCount;
+    }
+
+    public void setSectionCount(int sectionCount) {
+        this.sectionCount = sectionCount;
+    }
+
+    public List<Map<String, Object>> getList() {
+        return list;
+    }
+
+    public void setList(List<Map<String, Object>> list) {
+        this.list = list;
     }
 }

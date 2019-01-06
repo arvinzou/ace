@@ -8243,7 +8243,11 @@ $.jgrid.extend({
 						if($t.p.autoencode) {tmp = $.jgrid.htmlDecode(tmp);}
 						elc = $.jgrid.createEl.call($t,this.edittype,opt,tmp,false,$.extend({},$.jgrid.ajaxOptions,obj.p.ajaxSelectOptions || {}));
 						if(rp_ge[$t.p.id].checkOnSubmit || rp_ge[$t.p.id].checkOnUpdate) {rp_ge[$t.p.id]._savedData[nm] = tmp;}
-						$(elc).addClass("FormElement");
+                        $(elc).addClass("FormElement");
+						if(this.edittype == "checkbox"){
+						    $(elc).css("width","40px");
+						    $(elc).css("height","25px");
+						}
 						if( $.inArray(this.edittype, ['text','textarea','password','select']) > -1) {
 							$(elc).addClass("ui-widget-content ui-corner-all");
 
