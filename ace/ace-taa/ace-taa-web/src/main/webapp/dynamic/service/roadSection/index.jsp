@@ -19,14 +19,17 @@ pageEncoding="utf-8"%>
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+                <div class="col-md-6 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/roadSection/insertRoadSection">添加
                     </button>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
+                    <div class="input-group" style="float:left;padding-right:10px">
+                        行政区划 <input class="easyui-combotree" data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'" style="width:200px;﻿line-height: 30px;height: 30px;">
+                    </div>
 
 
                     <div class="input-group">

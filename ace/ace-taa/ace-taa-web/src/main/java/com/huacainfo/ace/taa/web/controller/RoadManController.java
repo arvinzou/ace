@@ -1,5 +1,6 @@
 package com.huacainfo.ace.taa.web.controller;
 
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,9 @@ public class RoadManController extends TaaBaseController {
     @RequestMapping(value = "/findRoadManList")
     @ResponseBody
     public PageResult<RoadManVo> findRoadManList(RoadManQVo condition, PageParamNoChangeSord page) throws Exception {
-
+        if(CommonUtils.isBlank(condition.getAreaCode())){
+            condition.setAreaCode(this.getCurUserProp().getAreaCode());
+        }
         PageResult<RoadManVo> rst = this.roadManService.findRoadManList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
