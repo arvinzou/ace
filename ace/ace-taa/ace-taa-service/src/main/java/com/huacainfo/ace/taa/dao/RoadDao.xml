@@ -96,4 +96,16 @@
     road where
     name=#{name}
   </select>
+
+  <select id="getListByCondition" resultType="map">
+    select
+    t.id,t.name
+    from road t
+    <if test='params.q !=null and params.q!=""'>
+      and (t.id=#{params.q} or t.name like
+      concat('%',#{params.q},'%'))
+    </if>
+    order by t.createDate
+    limit 0,20
+  </select>
 </mapper>

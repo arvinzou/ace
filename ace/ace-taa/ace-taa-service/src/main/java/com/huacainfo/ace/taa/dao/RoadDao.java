@@ -1,7 +1,7 @@
 package com.huacainfo.ace.taa.dao;
 
 import java.util.List;
-
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.taa.model.Road;
 import com.huacainfo.ace.taa.vo.RoadQVo;
@@ -30,5 +30,5 @@ public interface RoadDao {
 
     int isExit(Road record);
 
-
+    List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
 }

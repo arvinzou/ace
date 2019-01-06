@@ -184,8 +184,24 @@ public class RoadServiceImpl implements RoadService {
                 "道路", userProp);
         return new MessageResponse(0, "道路删除完成！");
     }
-
-
+    /**
+     * @throws
+     * @Title:getListByCondition
+     * @Description: TODO(路长查询，用于控件数据获取)
+     * @param: @param params
+     * @param: @return
+     * @return: Map<String,Object>
+     * @author: chenxiaoke
+     * @version: 2019年1月04日 下午1:24:14
+     */
+    @Override
+    public Map<String, Object> getListByCondition(Map<String, Object> params){
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, Object>> list = this.roadDao.getListByCondition(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
+    }
 
 
 }

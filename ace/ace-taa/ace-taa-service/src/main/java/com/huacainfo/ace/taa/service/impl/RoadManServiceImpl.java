@@ -1,30 +1,29 @@
 package com.huacainfo.ace.taa.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.List;
-
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.taa.dao.RoadManDao;
+import com.huacainfo.ace.taa.model.RoadMan;
+import com.huacainfo.ace.taa.service.RoadManService;
+import com.huacainfo.ace.taa.vo.RoadManQVo;
+import com.huacainfo.ace.taa.vo.RoadManVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.taa.dao.RoadManDao;
-import com.huacainfo.ace.taa.model.RoadMan;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.taa.service.RoadManService;
-import com.huacainfo.ace.taa.vo.RoadManVo;
-import com.huacainfo.ace.taa.vo.RoadManQVo;
-
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 @Service("roadManService")
 /**
  * @author: 陈晓克
@@ -291,6 +290,25 @@ public class RoadManServiceImpl implements RoadManService {
     public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception {
         ListResult<Map<String, Object>> rst = new ListResult<>();
         rst.setValue(this.roadManDao.getList(p));
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:getListByCondition
+     * @Description: TODO(路长查询，用于控件数据获取)
+     * @param: @param params
+     * @param: @return
+     * @return: Map<String,Object>
+     * @author: chenxiaoke
+     * @version: 2019年1月04日 下午1:24:14
+     */
+    @Override
+    public Map<String, Object> getListByCondition(Map<String, Object> params){
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, Object>> list = this.roadManDao.getListByCondition(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
         return rst;
     }
 

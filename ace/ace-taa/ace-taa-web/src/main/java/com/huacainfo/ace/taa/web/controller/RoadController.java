@@ -18,6 +18,8 @@ import com.huacainfo.ace.taa.service.RoadService;
 import com.huacainfo.ace.taa.vo.RoadVo;
 import com.huacainfo.ace.taa.vo.RoadQVo;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/road")
 /**
@@ -126,5 +128,20 @@ public class RoadController extends TaaBaseController {
         return this.roadService.deleteRoadByRoadId(id, this.getCurUserProp());
     }
 
+    /**
+     * @throws
+     * @Title:getListByCondition
+     * @Description: TODO(路长查询，用于控件数据获取)
+     * @param: @param params
+     * @param: @return
+     * @return: Map<String,Object>
+     * @author: chenxiaoke
+     * @version: 2019年1月04日 下午1:24:14
+     */
+    @RequestMapping(value = "/getListByCondition")
+    @ResponseBody
+    public Map<String, Object> getListByCondition() {
+        return this.roadService.getListByCondition(this.getParams());
+    }
 
 }
