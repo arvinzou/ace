@@ -149,7 +149,14 @@ select * from (
     from road_section t
     left join road_man a on t.roadMan=a.id
     left join portal.province b on t.areaCode=b.code
-    where roadId=#{p.id} order by t.startNo
+    where 0=0
+    <if test='p.id!=null and p.id!=""'>
+      and t.roadId=#{p.id}
+    </if>
+    <if test='p.roadMan!=null and p.roadMan!=""'>
+      and t.roadMan=#{p.roadMan}
+    </if>
+    order by t.startNo
   </select>
 
   <select id="selectSectionCount" resultType="int">
