@@ -2,7 +2,10 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.security.spring.BasicUsers;
+import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.web.controller.BaseController;
+import com.huacainfo.ace.portal.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,18 @@ public class BisBaseController extends BaseController implements Serializable {
 
     @Autowired
     private RedisOperations<String, Object> redisClient;
+
+    public void registerSession(Users syUser) {
+        BasicUsers o = new BasicUsers(syUser.getUserId(),
+                syUser.getPassword(), syUser.getAccount(),
+                syUser.getName(), syUser.getName(),
+                syUser.getDepartmentId(), syUser.getCorpName(),
+                syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
+                true, true, null, null, syUser.getParentCorpId(),
+                syUser.getEmail(), syUser.getAccount(), null, null, syUser.getCurSyid(),
+                null, syUser.getOpenId(), syUser.getAppOpenId());
+        sessionSet(CommonKeys.SESSION_USERPROP_KEY, o);
+    }
 
     /**
      * 设置redis的值

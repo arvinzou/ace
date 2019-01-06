@@ -4,6 +4,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
@@ -247,6 +248,45 @@ public class SignServiceImpl implements SignService {
         }
 
         return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
+    }
+
+    /**
+     * 微信登录
+     *
+     * @param uid 微信 unionid
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse wxLogin(String uid) {
+        Users users = signDao.findByOpenId(uid, "partyschool");
+        if (users == null) {
+            return new ResultResponse(ResultCode.FAIL, "该微信尚未绑定对应账户");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", users);
+    }
+
+    /***
+     * 绑定微信账户
+     * @param account 账户ID
+     * @param unionid 微信 unionid
+     * @return
+     */
+    @Override
+    public ResultResponse wxBind(String account, String unionid) {
+        Users users = systemService.selectUsersByAccount(account);
+        if (users == null) {
+            return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
+        }
+        if (StringUtil.isNotEmpty(users.getOpenId())) {
+            return new ResultResponse(ResultCode.FAIL, "该账户已绑定过其他微信号");
+        }
+
+        users.setOpenId(unionid);
+        users.setAppOpenId(unionid);
+        int i = signDao.bindUserWx(account, unionid, "partyschool");
+
+        return new ResultResponse(ResultCode.SUCCESS, "绑定成功");
     }
 
 
