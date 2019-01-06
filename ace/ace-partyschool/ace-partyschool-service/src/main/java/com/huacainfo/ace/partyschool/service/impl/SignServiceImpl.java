@@ -21,6 +21,12 @@ import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.SystemService;
 import com.huacainfo.ace.portal.service.TaskCmccService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +42,8 @@ import java.util.Map;
  */
 @Service("signService")
 public class SignServiceImpl implements SignService {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @Autowired
     private SignDao signDao;
@@ -48,6 +56,17 @@ public class SignServiceImpl implements SignService {
     private TeacherService teacherService;
     @Autowired
     private SystemService systemService;
+
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    private SqlSession getSqlSession() {
+        SqlSession session = sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+
+        return session;
+    }
 
     /**
      * 校验手机号码是否已注册过
@@ -207,13 +226,27 @@ public class SignServiceImpl implements SignService {
      */
     @Override
     public ResultResponse getAcctInfo(String acct) {
-        AccountVo accountVo = signDao.findByAcct(acct);
+        SqlSession session = getSqlSession();
+        SignDao dao = session.getMapper(SignDao.class);
 
-        if (accountVo == null) {
-            return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
+        try {
+            //用户资料
+            AccountVo accountVo = signDao.findByAcct(acct);
+            if (accountVo != null) {
+                return new ResultResponse(ResultCode.SUCCESS, "success", accountVo);
+            }
+        } catch (Exception e) {
+            logger.error("{}", e);
+            if (session != null) {
+                session.close();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
         }
 
-        return new ResultResponse(ResultCode.SUCCESS, "success", accountVo);
+        return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
     }
 
 
@@ -295,9 +328,9 @@ public class SignServiceImpl implements SignService {
         // String day=CardCode.substring(12).substring(0,2);//得到日
         String sex;
         if (Integer.parseInt(CardCode.substring(16).substring(0, 1)) % 2 == 0) {// 判断性别
-            sex = "2";
+            sex = "2";//"女"
         } else {
-            sex = "1";
+            sex = "1";//"男"
         }
         Date date = new Date();// 得到当前的系统时间
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

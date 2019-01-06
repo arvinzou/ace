@@ -2,6 +2,7 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
@@ -241,16 +242,17 @@ public class WSignController extends BisBaseController {
     /**
      * 获取账户信息
      *
-     * @param acct 登录账号
      * @return ResultResponse
      */
     @RequestMapping("/getAcctInfo")
-    public ResultResponse getAcctInfo(String acct) {
-        if (StringUtil.isEmpty(acct)) {
-            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+    public ResultResponse getAcctInfo() {
+
+        UserProp u = (UserProp) sessionGet(CommonKeys.SESSION_USERPROP_KEY);
+        if (u == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
 
-        return signService.getAcctInfo(acct);
+        return signService.getAcctInfo(u.getAccount());
     }
 
 
@@ -264,6 +266,22 @@ public class WSignController extends BisBaseController {
 
 
         return null;//signService.acctLogin(acct, pwd);
+    }
+
+
+    /**
+     * 获取账户信息
+     *
+     * @param acct 登录账号
+     * @return ResultResponse
+     */
+    @RequestMapping("/bindWxInfo")
+    public ResultResponse bindWxInfo(String acct) {
+        if (StringUtil.isEmpty(acct)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        return signService.getAcctInfo(acct);
     }
 
 }
