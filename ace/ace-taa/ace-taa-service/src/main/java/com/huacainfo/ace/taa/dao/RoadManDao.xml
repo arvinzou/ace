@@ -71,7 +71,7 @@
     select
     <include refid="Base_Column_List" />
     from road_man
-    where mobile = #{mobile,jdbcType=VARCHAR} limit 0,1
+    where name = #{name,jdbcType=VARCHAR} limit 0,1
   </select>
 
 
@@ -89,10 +89,10 @@
     SELECT COUNT(*)
     <include refid="whereCondition" />
   </select>
-  <select id="findList" resultMap="BaseResultMap">
+  <select id="findList" resultMap="BaseResultMapVo">
     select * from (
     select
-    t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
+    t.id,t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
     <include refid="whereCondition" />
     )m
     <choose>
@@ -118,9 +118,22 @@
 
   <select id="getList" resultType="map">
     select
-    t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
+    t.id,t.areaCode, t.name, t.mobile, t.orgName, t.startName, t.endName, t.status,b.name areaName,t.createDate
     from road_man t
     left join portal.province b on t.areaCode=b.code
     where t.areaCode like  concat(#{p.areaCode,jdbcType=VARCHAR},'%')
+  </select>
+
+  <select id="getListByCondition" resultType="map">
+    select
+    t.id,t.name, t.mobile, t.orgName,t.status,b.name areaName
+    from road_man t
+    left join portal.province b on t.areaCode=b.code
+    <if test='params.q !=null and params.q!=""'>
+      and (t.id=#{params.q} or t.name like
+      concat('%',#{params.q},'%'))
+    </if>
+    order by t.createDate
+    limit 0,20
   </select>
 </mapper>

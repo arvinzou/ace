@@ -8,6 +8,8 @@ import com.huacainfo.ace.taa.model.Road;
 import com.huacainfo.ace.taa.vo.RoadVo;
 import com.huacainfo.ace.taa.vo.RoadQVo;
 
+import java.util.Map;
+
 /**
  * @author: 陈晓克
  * @version: 2019-01-03
@@ -80,6 +82,19 @@ public interface RoadService {
      * @version: 2019-01-03
      */
     MessageResponse deleteRoadByRoadId(String id, UserProp userProp) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:getListByCondition
+     * @Description: TODO(用于控件数据获取)
+     * @param: @param params
+     * @param: @return
+     * @return: Map<String,Object>
+     * @author: chenxiaoke
+     * @version: 2019年1月04日 下午1:24:14
+     */
+    public Map<String, Object> getListByCondition(Map<String, Object> params);
 
 
 }

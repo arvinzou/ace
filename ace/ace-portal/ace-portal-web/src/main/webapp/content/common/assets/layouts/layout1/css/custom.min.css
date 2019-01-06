@@ -245,3 +245,7 @@ body{
     font-size: 14px;
     line-height: 1.42857;
 }
+
+table.dataTable.no-footer {
+    border: 1px solid #e7ecf1;
+}

@@ -42,6 +42,7 @@ addurl : cfg.grid_add_data_url,
 deleteurl : cfg.grid_delete_data_url,
 caption : cfg.caption
 });
+﻿resizeJqGrid();
 });
 
 function resizeJqGrid(){

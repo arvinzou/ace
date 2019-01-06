@@ -126,4 +126,19 @@ public interface RoadSectionService {
      * @version: 2019-01-04
      */
     public ListResult<Map<String, Object>> getList(Map<String, Object> p) throws Exception;
+
+
+
+    /**
+     * @throws
+     * @Title:deleteRoadSectionByRoadSectionIds
+     * @Description: TODO(删除路段)
+     * @param: @param id
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-04
+     */
+    MessageResponse deleteRoadSectionByRoadSectionIds(String [] id, UserProp userProp) throws Exception;
 }

@@ -104,10 +104,6 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         if (CommonUtils.isBlank(o.getEndName())) {
             return new MessageResponse(1, "路段截止不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
-
         int temp = this.roadSectionDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "路段名称重复！");
@@ -122,7 +118,7 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         this.dataBaseLogService.log("添加路段", "路段", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "添加路段完成！");
+        return new MessageResponse(0, "保存成功！");
     }
 
     /**
@@ -170,7 +166,7 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         this.dataBaseLogService.log("变更路段", "路段", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "变更路段完成！");
+        return new MessageResponse(0, "保存成功！");
     }
 
     /**
@@ -184,8 +180,7 @@ public class RoadSectionServiceImpl implements RoadSectionService {
      * @version: 2019-01-04
      */
     @Override
-    public SingleResult
-            <RoadSectionVo> selectRoadSectionByPrimaryKey(String id) throws Exception {
+    public SingleResult<RoadSectionVo> selectRoadSectionByPrimaryKey(String id) throws Exception {
         SingleResult<RoadSectionVo> rst = new SingleResult<>();
         rst.setValue(this.roadSectionDao.selectVoByPrimaryKey(id));
         return rst;
@@ -235,7 +230,7 @@ public class RoadSectionServiceImpl implements RoadSectionService {
     }
 
     @Override
-    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp,String roadId) throws Exception {
+    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp, String roadId) throws Exception {
         int i = 1;
         for (Map<String, Object> row : list) {
             RoadSection o = new RoadSection();
@@ -243,7 +238,9 @@ public class RoadSectionServiceImpl implements RoadSectionService {
             o.setRoadId(roadId);
             o.setCreateDate(new Date());
             o.setCreateUserId(userProp.getUserId());
+            o.setCreateUserName(userProp.getName());
             o.setId(GUIDUtil.getGUID());
+            o.setStatus("1");
             this.logger.info(o.toString());
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "行" + i + ",名称不能为空！");
@@ -254,22 +251,24 @@ public class RoadSectionServiceImpl implements RoadSectionService {
             if (CommonUtils.isBlank(o.getEndName())) {
                 return new MessageResponse(1, "行" + i + ",路段截止名称不能为空！");
             }
-            RoadMan man= this.roadManDao.selectByName((String) row.get("roadManName"));
-            if(CommonUtils.isNotEmpty(man)){
+            RoadMan man = this.roadManDao.selectByName((String) row.get("roadManName"));
+            if (CommonUtils.isNotEmpty(man)) {
                 o.setAreaCode(man.getAreaCode());
                 o.setRoadMan(man.getId());
             }
             int t = this.roadSectionDao.isExit(o);
             if (t > 0) {
-                this.roadSectionDao.updateByPrimaryKey(o);
+                this.roadSectionDao.updateByName(o);
 
             } else {
                 this.roadSectionDao.insert(o);
             }
             i++;
         }
+        int num=this.roadSectionDao.selectSectionCount(roadId);
+        this.roadSectionDao.updateSectionCount(roadId,num);
         this.dataBaseLogService.log("路段导入", "路段", "", "rs.xls", "rs.xls", userProp);
-        return new MessageResponse(0, "导入完成！");
+        return new MessageResponse(0, "导入成功！");
     }
 
 
@@ -289,6 +288,26 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         ListResult<Map<String, Object>> rst = new ListResult<>();
         rst.setValue(this.roadSectionDao.getList(p));
         return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:deleteRoadSectionByRoadSectionId
+     * @Description: TODO(删除路段)
+     * @param: @param id
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-04
+     */
+    @Override
+    public MessageResponse deleteRoadSectionByRoadSectionIds(String[] id, UserProp userProp) throws
+            Exception {
+        this.roadSectionDao.deleteByPrimaryKeys(id);
+        this.dataBaseLogService.log("批量删除路段", "路段", id[0], id[0], "路段", userProp);
+        return new MessageResponse(0, "删除成功！");
     }
 
 }
