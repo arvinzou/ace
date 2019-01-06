@@ -7,6 +7,7 @@ import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.portal.vo.MongoFile;
 import com.huacainfo.ace.taa.model.RoadSection;
@@ -56,6 +57,9 @@ public class RoadSectionController extends TaaBaseController {
     @RequestMapping(value = "/findRoadSectionList")
     @ResponseBody
     public PageResult<RoadSectionVo> findRoadSectionList(RoadSectionQVo condition, PageParamNoChangeSord page) throws Exception {
+        if(CommonUtils.isBlank(condition.getAreaCode())){
+            condition.setAreaCode(this.getCurUserProp().getAreaCode());
+        }
 
         PageResult<RoadSectionVo> rst = this.roadSectionService.findRoadSectionList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

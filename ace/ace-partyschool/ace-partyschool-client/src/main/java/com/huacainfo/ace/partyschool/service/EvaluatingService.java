@@ -83,5 +83,6 @@ public interface EvaluatingService {
      */
     MessageResponse deleteEvaluatingByEvaluatingId(String id, UserProp userProp) throws Exception;
 
+    MessageResponse softdel(String id,UserProp userProp) throws Exception;
 
 }

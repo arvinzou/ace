@@ -220,7 +220,7 @@ function initPreview(id) {
             stopLoad();
             if (result.status == 0) {
                 var data = {};
-                data['o'] = result.value;
+                data = result.value;
                 render('#fm-preview', data, 'tpl-preview');
             } else {
                 alert(result.errorMessage);
@@ -257,4 +257,13 @@ function initForm(id) {
             alert("对不起出错了！");
         }
     });
+}
+
+function  del(id) {
+    var url = contextPath + "/evaluating/softdel";
+    $.getJSON(url, {id: id}, function (result) {
+        if (result.status == 0) {
+            getPageList();
+        }
+    })
 }

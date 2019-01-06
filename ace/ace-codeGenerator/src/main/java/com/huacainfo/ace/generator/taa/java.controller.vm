@@ -219,4 +219,22 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
                         public ListResult<Map<String,Object>> getList() throws Exception {
                             return this.$!{bean.lowerName}Service.getList(this.getParams());
                         }
+
+
+
+    /**
+     * @throws
+     * @Title:getListByCondition
+     * @Description: TODO(用于控件数据获取)
+     * @param: @param params
+     * @param: @return
+     * @return: Map<String,Object>
+     * @author: $!{annotation.authorName}
+     * @version:$!{annotation.version}
+     */
+    @RequestMapping(value = "/getListByCondition")
+    @ResponseBody
+    public Map<String, Object> getListByCondition() {
+        return this.$!{bean.lowerName}.getListByCondition(this.getParams());
+    }
 }

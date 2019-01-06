@@ -21,15 +21,14 @@ public interface EvaluatingDao {
 
     EvaluatingVo selectVoByPrimaryKey(String id);
 
-    List
-            <EvaluatingVo> findList(@Param("condition") EvaluatingQVo condition,
+    List<EvaluatingVo> findList(@Param("condition") EvaluatingQVo condition,
                                     @Param("start") int start,
                                     @Param("limit") int limit,
                                     @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") EvaluatingQVo condition);
 
-    int isExit(@Param("condition")Evaluating record);
+    int isExit(@Param("condition") Evaluating record);
 
 
 }

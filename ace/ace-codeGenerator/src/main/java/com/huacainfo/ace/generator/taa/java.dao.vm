@@ -34,5 +34,6 @@ List<$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
 
 
     List<Map<String,Object>> getList(@Param("p")Map<String,Object> p);
+     List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
 
     }

@@ -5,8 +5,53 @@ window.onload = function () {
         $(".breadcrumb").append(" <li><span>编辑评测管理</span></li>");
         initForm();
         initEvents();
+        $('.addOption').on('click', '', addOption);
+        $('#evaluatingRst ').on('click', '.removeOption', removeOption);
     });
 }
+
+
+function removeOption() {
+    var index = $('#evaluatingRst .form-group').length;
+    $('#evaluatingRst .removeOption'+(index-2)).show();
+    $(this).parent().remove();
+}
+
+function addOption() {
+    var index = $('#evaluatingRst .form-group').length;
+    $('#evaluatingRst .removeOption').hide();
+    var temp = optionTemp;
+    temp = temp.replace('#index#', index);
+    temp = temp.replace('#index#', index);
+    temp = temp.replace('#index#', index);
+    var $p = $(temp);
+    $('#evaluatingRst').append($p);
+}
+
+
+var optionTemp = '<div class="form-group">\n' +
+    '                            <label class="col-md-2 control-label">\n' +
+    '                                内容\n' +
+    '                                <span class="required" aria-required="true"> * </span>\n' +
+    '                            </label>\n' +
+    '                            <div class="col-md-10">\n' +
+    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
+    '                                       maxlength="10"\n' +
+    '                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">\n' +
+    '                                <span class="help-block"></span>\n' +
+    '                            </div>\n' +
+    '                            <label class="col-md-2 control-label">\n' +
+    '                                分值\n' +
+    '                                <span class="required" aria-required="true"> * </span>\n' +
+    '                            </label>\n' +
+    '                            <div class="col-md-6">\n' +
+    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].score"\n' +
+    '                                       maxlength="10"\n' +
+    '                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">\n' +
+    '                                <span class="help-block"></span>\n' +
+    '                            </div>\n' +
+    '                            <button type="button" class="btn btn-success removeOption removeOption#index# col-md-1">删除</button>' +
+    '                        </div>';
 
 
 /*页面渲染*/
@@ -16,6 +61,8 @@ function render(obj, data, tplId) {
         data: data,
     });
     $(obj).html(html);
+    $('#evaluatingRst .removeOption').hide();
+    $('#evaluatingRst .form-group').last().find('.removeOption').show();
 }
 
 function initEvents() {
@@ -54,6 +101,25 @@ function initEvents() {
 /*保存表单**/
 function save(params) {
     $.extend(params, {});
+
+    evaluating = {};
+    evaluating.name = params.name;
+    evaluating.timeout = params.timeout;
+    evaluating.introduce = params.introduce;
+    evaluating.id = params.id;
+    evaluationIndex = [];
+    var index = 0;
+    while (params['evaluationIndex[' + index + '].name']) {
+        evaluationIndex.push({
+            name: params['evaluationIndex[' + index + '].name'],
+            score: params['evaluationIndex[' + index + '].score'],
+            id: params['evaluationIndex[' + index + '].id']
+        })
+        index++;
+    }
+    params.evaluating = evaluating;
+    params.evaluationIndex = evaluationIndex;
+
     startLoad();
     $.ajax({
         url: contextPath + "/evaluating/updateEvaluating",
@@ -87,7 +153,7 @@ function initForm() {
             stopLoad();
             if (result.status == 0) {
                 var data = {};
-                data['o'] = result.value;
+                data = result.value;
                 render('#fm-edit', data, 'tpl-fm');
 //富文本填值
 //editor.setValue(data['o'].summary);

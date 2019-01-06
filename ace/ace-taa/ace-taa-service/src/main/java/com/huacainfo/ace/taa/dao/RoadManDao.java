@@ -38,4 +38,6 @@ public interface RoadManDao {
 
     RoadMan selectByName(@Param("name") String name);
 
+    List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
+
 }

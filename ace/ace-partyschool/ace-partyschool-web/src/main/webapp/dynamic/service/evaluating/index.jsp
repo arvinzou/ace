@@ -87,11 +87,9 @@
         <td> \${item.createDate}</td>
         <td>
             ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#"  data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
+            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
+               data-target="#modal-preview">查看</a>
             <a href="javascript:del('\${item.id}');">删除</a>
-
         </td>
     </tr>
     {@/each}
@@ -188,52 +186,69 @@
 </div>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
+    <h4>评测内容</h4>
     <div class="form-group">
         <label class="col-md-2 view-label">名称</label>
         <div class="col-md-10">
-            \${name}
+            \${data.name}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">介绍</label>
         <div class="col-md-10">
-            \${introduce}
+            \${data.introduce}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">超时设定</label>
         <div class="col-md-10">
-            \${timeout}
+            \${data.timeout}
         </div>
     </div>
+    <h4>评测选项内容</h4>
+    {@each data.evaluationIndexList as item, index}
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-2 view-label">
+                内容
+            </div>
+            <div class="col-md-10">
+                \${item.name}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2 view-label">
+                分值
+            </div>
+            <div class="col-md-10">
+                \${item.score}
+            </div>
+        </div>
+    </div>
+    {@/each}
+    <h4>评测其他信息</h4>
     <div class="form-group">
         <label class="col-md-2 view-label">创建人姓名</label>
         <div class="col-md-10">
-            \${createUserName}
+            \${data.createUserName}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">创建日期</label>
         <div class="col-md-10">
-            \${createDate}
+            \${data.createDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">更新人名称</label>
         <div class="col-md-10">
-            \${lastModifyUserName}
+            \${data.lastModifyUserName}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">更新日期</label>
         <div class="col-md-10">
-            \${lastModifyDate}
+            \${data.lastModifyDate}
         </div>
     </div>
 </script>

@@ -4,8 +4,11 @@ package com.huacainfo.ace.partyschool.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.EvaluationIndexDao;
+import com.huacainfo.ace.partyschool.model.Course;
 import com.huacainfo.ace.partyschool.model.EvaluationIndex;
 import com.huacainfo.ace.partyschool.service.EvaluationIndexService;
 import org.slf4j.Logger;
@@ -98,6 +101,7 @@ public class EvaluatingServiceImpl implements EvaluatingService {
         if (temp > 0) {
             return new MessageResponse(1, "评测管理名称重复！");
         }
+        o.setStatus("1");
         o.setCreateDate(new Date());
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
@@ -158,9 +162,18 @@ public class EvaluatingServiceImpl implements EvaluatingService {
         evaluating.setName(o.getName());
         evaluating.setTimeout(o.getTimeout());
         this.evaluatingDao.updateByPrimaryKey(evaluating);
+        this.evaluationIndexDao.deleteByEvaluatingId(o.getId());
+        for(EvaluationIndex item : o.getEvaluationIndexList()){
+            if(CommonUtils.isBlank(item.getId())){
+                item.setEvaluatingId(o.getId());
+                this.evaluationIndexService.insertEvaluationIndex(item, userProp);
+            }else{
+                item.setEvaluatingId(o.getId());
+                this.evaluationIndexDao.insert(item);
+            }
+        }
         this.dataBaseLogService.log("变更评测管理", "评测管理", "",
                 o.getId(), o.getId(), userProp);
-
         return new MessageResponse(0, "变更评测管理完成！");
     }
 
@@ -201,5 +214,22 @@ public class EvaluatingServiceImpl implements EvaluatingService {
         this.dataBaseLogService.log("删除评测管理", "评测管理", id, id,
                 "评测管理", userProp);
         return new MessageResponse(0, "评测管理删除完成！");
+    }
+
+    @Override
+    public MessageResponse softdel(String id,UserProp userProp) throws Exception {
+
+        Evaluating obj = evaluatingDao.selectByPrimaryKey(id);
+        if (obj == null) {
+            return new MessageResponse(ResultCode.FAIL, "评测数据丢失");
+        }
+        obj.setStatus("0");
+        obj.setLastModifyDate(DateUtil.getNowDate());
+        obj.setLastModifyUserId(userProp.getUserId());
+        obj.setLastModifyUserName(userProp.getName());
+        evaluatingDao.updateByPrimaryKey(obj);
+        dataBaseLogService.log("软删除评测管理", "评测管理", id, id,
+                "评测管理", userProp);
+        return new MessageResponse(0, "删除成功！");
     }
 }
