@@ -55,7 +55,7 @@
                 介绍
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" value="\${data.naintroduceme}" name="introduce"
+                <input type="text" class="form-control" value="\${data.introduce}" name="introduce"
                        maxlength="2147483647"
                        placeholder="请输入介绍（建议字数在14个字以内，不超过2147483647个字)">
                 <span class="help-block"></span>
@@ -79,24 +79,29 @@
             </div>
         </div>
         <div id="evaluatingRst">
+            {@each data.evaluationIndexList as item, index}
             <div class="form-group">
+                <input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">
                 <label class="col-md-2 control-label">
                     内容<span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" name="evaluationIndex[0].name" maxlength="10"
+                    <input type="text" class="form-control" value="\${item.name}" name="evaluationIndex[\${index}].name" maxlength="10"
                            placeholder="">
                     <span class="help-block"></span>
                 </div>
                 <label class="col-md-2 control-label">
                     分值<span class="required" aria-required="true"> * </span>
                 </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" name="evaluationIndex[0].score" maxlength="10"
-                           placeholder="">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" value="\${item.score}" name="evaluationIndex[\${index}].score" maxlength="10" placeholder="">
                     <span class="help-block"></span>
                 </div>
+                {@if index!=0}
+                <button type="button" class="btn btn-success removeOption removeOption\${index} col-md-1">删除</button>
+                {@/if}
             </div>
+            {@/each}
         </div>
     </div>
     <div class="form-actions">
