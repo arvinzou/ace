@@ -13,6 +13,8 @@ public interface EvaluationIndexDao {
 
     int deleteByPrimaryKey(String id);
 
+    int deleteByEvaluatingId(String evaluatingId);
+
     int insert(EvaluationIndex record);
 
     int updateByPrimaryKey(EvaluationIndex record);

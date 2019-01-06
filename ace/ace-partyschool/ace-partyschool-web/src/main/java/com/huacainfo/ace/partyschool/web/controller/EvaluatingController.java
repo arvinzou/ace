@@ -100,8 +100,11 @@ public class EvaluatingController extends BisBaseController {
     @RequestMapping(value = "/updateEvaluating")
     @ResponseBody
     public MessageResponse updateEvaluating(String jsons) throws Exception {
-        Evaluating obj = JSON.parseObject(jsons, Evaluating.class);
-        return this.evaluatingService.updateEvaluating(obj, this.getCurUserProp());
+        JSONObject jsonObj = JSON.parseObject(jsons);
+        Evaluating evaluating = JSON.parseObject(jsonObj.getString("evaluating"), Evaluating.class);
+        List<EvaluationIndex> list=new ArrayList<EvaluationIndex>(JSONArray.parseArray(jsonObj.getString("evaluationIndex"),EvaluationIndex.class));
+        evaluating.setEvaluationIndexList(list);
+        return this.evaluatingService.updateEvaluating(evaluating, this.getCurUserProp());
     }
 
     /**
@@ -137,5 +140,11 @@ public class EvaluatingController extends BisBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.evaluatingService.deleteEvaluatingByEvaluatingId(id, this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/softdel")
+    @ResponseBody
+    public MessageResponse softdel(String id) throws Exception {
+        return this.evaluatingService.softdel(id, this.getCurUserProp());
     }
 }

@@ -6,6 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="timeout" jdbcType="INTEGER" property="timeout" />
     <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
     <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
     <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
@@ -16,7 +17,7 @@
     <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, timeout, createUserId, createUserName, createDate, lastModifyUserId, lastModifyUserName, 
+    id, name, timeout, createUserId, status, createUserName, createDate, lastModifyUserId, lastModifyUserName,
     lastModifyDate
   </sql>
   <sql id="Blob_Column_List">
@@ -36,11 +37,11 @@
   </delete>
   <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Evaluating">
     insert into evaluating (id, name, timeout, 
-      createUserId, createUserName, createDate, 
+      createUserId, status, createUserName, createDate,
       lastModifyUserId, lastModifyUserName, lastModifyDate, 
       introduce)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{timeout,jdbcType=INTEGER}, 
-      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=VARCHAR},#{status,jdbcType=CHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
       #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, 
       #{introduce,jdbcType=LONGVARCHAR})
   </insert>
@@ -58,6 +59,9 @@
       </if>
       <if test="createUserId != null">
         createUserId,
+      </if>
+      <if test="status != null">
+        status,
       </if>
       <if test="createUserName != null">
         createUserName,
@@ -91,6 +95,9 @@
       <if test="createUserId != null">
         #{createUserId,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
       <if test="createUserName != null">
         #{createUserName,jdbcType=VARCHAR},
       </if>
@@ -123,6 +130,9 @@
       <if test="createUserId != null">
         createUserId = #{createUserId,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
       <if test="createUserName != null">
         createUserName = #{createUserName,jdbcType=VARCHAR},
       </if>
@@ -149,6 +159,7 @@
     set name = #{name,jdbcType=VARCHAR},
       timeout = #{timeout,jdbcType=INTEGER},
       createUserId = #{createUserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
@@ -162,6 +173,7 @@
     set name = #{name,jdbcType=VARCHAR},
       timeout = #{timeout,jdbcType=INTEGER},
       createUserId = #{createUserId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
@@ -175,12 +187,12 @@
   <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.EvaluatingVo"></resultMap>
 
   <sql id="Vo_Column_List">
-    e.id, e.name, e.timeout, e.createUserId, e.createUserName, e.createDate, e.lastModifyUserId, e.lastModifyUserName,
+    e.id, e.name, e.timeout, e.createUserId,e.status, e.createUserName, e.createDate, e.lastModifyUserId, e.lastModifyUserName,
     e.lastModifyDate,e.introduce
   </sql>
 
   <sql id="Where_Condition">
-    where 1 = 1
+    where e.status <![CDATA[ <> ]]> 0
     <if test="condition.name !=null and condition.name !=&quot;&quot;">
       AND e.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
     </if>
@@ -215,7 +227,7 @@
   <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
     select count(1)
     from evaluating e
-    where 1=1
+    where e.status <![CDATA[ <> ]]> 0
     and e.name = #{condition.name,jdbcType=VARCHAR}
   </select>
 

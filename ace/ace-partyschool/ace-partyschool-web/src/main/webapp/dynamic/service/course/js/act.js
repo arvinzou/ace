@@ -78,7 +78,7 @@ function del(id) {
     var url = contextPath + "/course/softdel";
     $.getJSON(url, {id: id}, function (result) {
         if (result.status == 0) {
-
+            getPageList();
         }
     })
 }

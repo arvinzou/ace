@@ -37,6 +37,11 @@
     delete from evaluation_index
     where id = #{id,jdbcType=VARCHAR}
   </delete>
+
+    <delete id="deleteByEvaluatingId" parameterType="java.lang.String">
+    delete from evaluation_index
+    where evaluatingId = #{evaluatingId,jdbcType=VARCHAR}
+  </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.EvaluationIndex">
     insert into evaluation_index (id, evaluatingId, name, 
       score, introduce)
