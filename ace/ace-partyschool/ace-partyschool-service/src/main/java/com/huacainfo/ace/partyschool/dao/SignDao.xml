@@ -38,6 +38,7 @@
 
 
     <resultMap id="AcctResultMap" type="com.huacainfo.ace.partyschool.vo.AccountVo">
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
         <result column="headimgurl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
@@ -66,7 +67,7 @@
     <select id="findByAcct" parameterType="java.lang.String" resultMap="AcctResultMap">
         select
         ui.nickname, ui.headimgurl,
-        u.sex,
+        u.sex, u.user_level as regType,
 
         s.id as sid,
         s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,

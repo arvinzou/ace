@@ -1,8 +1,6 @@
 package com.huacainfo.ace.partyschool.vo;
 
 import com.huacainfo.ace.common.model.BaseModel;
-import com.huacainfo.ace.partyschool.model.Student;
-import com.huacainfo.ace.partyschool.model.Teacher;
 
 /**
  * @Auther: Arvin
@@ -30,6 +28,19 @@ public class AccountVo extends BaseModel {
      * 教职工信息
      */
     private TeacherVo teacher;
+
+    /**
+     * 性别 1-男，2-女
+     */
+    private String sex;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public StudentVo getStudent() {
         return student;
