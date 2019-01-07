@@ -14,11 +14,11 @@
 		<div class="title">请选择您的身份</div>
 		<div class="identity" onclick="changeIdentity('student');">
 			<img src="img/student.png" id="student"/>
-			<span class="identity-title">我是学员</span>
+			<span class="unactive">我是学员</span>
 		</div>
 		<div class="identity" onclick="changeIdentity('teacher');">
 			<img src="img/teacher.png" id="teacher" />
-			<span class="identity-title">我是教职工</span>
+			<span class="unactive">我是教职工</span>
 		</div>
 	</div>
 	</body>

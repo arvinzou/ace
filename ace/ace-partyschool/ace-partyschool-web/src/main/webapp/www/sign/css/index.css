@@ -36,12 +36,13 @@ body{
 	display: block;
 	text-align: center;
 	line-height: 0.8rem;
-	color: #ABAEB9;
 	font-size: 0.48rem;
+}
+.unactive{
+	color: #ABAEB9;
 }
 .active{
 	color: #373F53;
-	font-size: 0.48rem;
 }
 .footer{
 	width: 100%;
