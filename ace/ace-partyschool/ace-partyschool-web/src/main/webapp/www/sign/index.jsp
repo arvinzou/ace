@@ -12,15 +12,13 @@
 	<body>
 	<div class="index">
 		<div class="title">请选择您的身份</div>
-		<div class="identity">
-			<img src="img/student.png" id="student" onclick="changeIdentity('student');"/>
+		<div class="identity" onclick="changeIdentity('student');">
+			<img src="img/student.png" id="student"/>
+			<span class="identity-title">我是学员</span>
 		</div>
-		<div class="identity">
-			<img src="img/teacher.png" id="teacher" onclick="changeIdentity('teacher');"/>
-		</div>
-		<div class="footer" id="nextStep">
-			<img src="img/next.png" id="unactive"/>
-			<img src="img/next-active.png" onclick="nextStep();" style="display: none;" id="active"/>
+		<div class="identity" onclick="changeIdentity('teacher');">
+			<img src="img/teacher.png" id="teacher" />
+			<span class="identity-title">我是教职工</span>
 		</div>
 	</div>
 	</body>
