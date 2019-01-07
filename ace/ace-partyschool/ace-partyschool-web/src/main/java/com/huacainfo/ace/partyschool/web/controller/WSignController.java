@@ -34,6 +34,7 @@ import java.util.Map;
 @RequestMapping("/www/sign")
 public class WSignController extends BisBaseController {
 
+
     @Autowired
     private SignService signService;
 
@@ -58,7 +59,7 @@ public class WSignController extends BisBaseController {
         length = StringUtil.isEmpty(length) ? "4" : length;
         String randCode = CommonUtils.getIdentifyCode(Integer.valueOf(length), 0);
         // 保存进session
-        sessionSet("j_captcha_cmcc_" + mobile, randCode);
+        setSessionAttr("j_captcha_cmcc_" + mobile, randCode);
 
         TaskCmcc o = new TaskCmcc();
         if (CommonUtils.isBlank(mobile)) {
@@ -73,14 +74,14 @@ public class WSignController extends BisBaseController {
         msg.put("msg", "本次提交验证码为" + randCode + "，请及时输入。" + CommConstant.SMS_SIGN_STR);
         msg.put("tel", mobile + "," + mobile + ";");
         CommonBeanUtils.copyMap2Bean(o, msg);
-        logger.debug(mobile + "=>j_captcha_cmcc:{}", sessionGet("j_captcha_cmcc_" + mobile));
+        logger.debug(mobile + "=>j_captcha_cmcc:{}", getSession("j_captcha_cmcc_" + mobile));
 
         return new ResultResponse(taskCmccService.insertTaskCmcc(o));
     }
 
     private boolean codeCheck(String mobile, String code) {
         //验证码校验
-        String sessionCode = String.valueOf(sessionGet("j_captcha_cmcc_" + mobile));
+        String sessionCode = String.valueOf(getSession("j_captcha_cmcc_" + mobile));
 
         logger.debug("[partyschool]SignController.codeCheck=>mobile:{},code:{}", mobile, code);
 
@@ -238,7 +239,7 @@ public class WSignController extends BisBaseController {
     @RequestMapping("/getAcctInfo")
     public ResultResponse getAcctInfo() {
 
-        UserProp u = (UserProp) sessionGet(CommonKeys.SESSION_USERPROP_KEY);
+        UserProp u = (UserProp) getSession(CommonKeys.SESSION_USERPROP_KEY);
         if (u == null) {
             return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
@@ -248,31 +249,40 @@ public class WSignController extends BisBaseController {
 
 
     /**
-     * 微信授权登录
+     * 修改密码
      *
+     * @param mobile  手机号码
+     * @param account 账户
+     * @param code    手机验证码
+     * @param newPwd  新密码
      * @return ResultResponse
      */
-    @RequestMapping("/wxOauthLogin")
-    public ResultResponse wxOauthLogin() {
+    @RequestMapping("/updatePwd")
+    public ResultResponse updatePwd(String mobile, String account, String code, String newPwd) {
 
+        if (!StringUtil.areNotEmpty(mobile, newPwd, code)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        //验证码校验
+        if (!codeCheck(mobile, code)) {
+            return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
+        }
+        account = StringUtil.isEmpty(account) ? mobile : account;
 
-        return null;//signService.acctLogin(acct, pwd);
+        return signService.updatePwd(account, newPwd);
     }
 
 
     /**
-     * 获取账户信息
+     * 账户登出
      *
-     * @param acct 登录账号
      * @return ResultResponse
      */
-    @RequestMapping("/bindWxInfo")
-    public ResultResponse bindWxInfo(String acct) {
-        if (StringUtil.isEmpty(acct)) {
-            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
-        }
+    @RequestMapping("/logout")
+    public ResultResponse logout() {
+        delSessionAttr(CommonKeys.SESSION_USERPROP_KEY);
 
-        return signService.getAcctInfo(acct);
+        return new ResultResponse(ResultCode.SUCCESS, "登出成功");
     }
 
 }

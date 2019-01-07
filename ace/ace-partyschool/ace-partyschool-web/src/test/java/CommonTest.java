@@ -1,6 +1,8 @@
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,6 +21,11 @@ public class CommonTest {
 
 //        System.out.println(DateUtil.getNow().substring(0, 10));
 //        generatorGUID(1);
+        try {
+            System.out.println(URLEncoder.encode("/partyschool/www/login/index.jsp", "utf-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
 

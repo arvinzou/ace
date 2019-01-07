@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.FilesDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.Files">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
+        <result column="classesId" jdbcType="VARCHAR" property="classesId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="pushDate" jdbcType="TIMESTAMP" property="pushDate"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, category, classesId, title, url, pushDate, publisher, status
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from files
+        where title = #{title,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from files
+        where id = #{id,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Files">
+        insert into files (id, category, classesId,
+        title, url, pushDate,
+        publisher, status)
+        values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{classesId,jdbcType=VARCHAR},
+        #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{pushDate,jdbcType=TIMESTAMP},
+        #{publisher,jdbcType=VARCHAR}, #{status,jdbcType=CHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.Files">
+        update files
+        set category = #{category,jdbcType=CHAR},
+        classesId = #{classesId,jdbcType=VARCHAR},
+        title = #{title,jdbcType=VARCHAR},
+        url = #{url,jdbcType=VARCHAR},
+        pushDate = #{pushDate,jdbcType=TIMESTAMP},
+        publisher = #{publisher,jdbcType=VARCHAR},
+        status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.FilesVo">
+
+    </resultMap>
+
+    <sql id="Vo_Column_List">
+        id, category, classesId, title, url, pushDate, publisher, status
+    </sql>
+    <sql id="From_Statement">
+        FROM files t
+    </sql>
+    <sql id="Where_Condition">
+        where 1 = 1
+        <if test="condition.title !=null and condition.title !=&quot;&quot;">
+            and t.title = #{condition.title,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        t.id,
+        t.category,
+        c.name as classesId,
+        t.title,
+        t.url,
+        t.pushDate,
+        t.publisher,
+        t.STATUS
+        from files t
+        LEFT JOIN classes c on c.id=t.classesId
+        where t.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        t.id,
+        t.category,
+        c.name as classesId,
+        t.title,
+        t.url,
+        t.pushDate,
+        t.publisher,
+        t.STATUS
+        <include refid="From_Statement"/>
+        LEFT JOIN classes c on c.id=t.classesId
+        <include refid="Where_Condition"/>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        <include refid="Where_Condition"/>
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Files">
+        select count(*)
+        from files
+        where
+        title=#{title}
+    </select>
+
+    <update id="updateStatus" parameterType="java.lang.String">
+        update files
+        set status = #{status,jdbcType=CHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

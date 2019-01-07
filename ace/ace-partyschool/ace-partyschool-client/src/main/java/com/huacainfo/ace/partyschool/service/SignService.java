@@ -87,4 +87,13 @@ public interface SignService {
      * @return
      */
     ResultResponse wxBind(String account, String unionid);
+
+    /**
+     * 修改密码
+     *
+     * @param account 账户
+     * @param newPwd  新密码
+     * @return ResultResponse
+     */
+    ResultResponse updatePwd(String account, String newPwd);
 }

@@ -29,25 +29,25 @@ public class BisBaseController extends BaseController implements Serializable {
                 true, true, null, null, syUser.getParentCorpId(),
                 syUser.getEmail(), syUser.getAccount(), null, null, syUser.getCurSyid(),
                 null, syUser.getOpenId(), syUser.getAppOpenId());
-        sessionSet(CommonKeys.SESSION_USERPROP_KEY, o);
+        setSessionAttr(CommonKeys.SESSION_USERPROP_KEY, o);
     }
 
     /**
-     * 设置redis的值
+     * 移除session的值
      *
      * @param key key
      */
-    public Object sessionGet(String key) {
-        return getRequest().getSession().getAttribute(key);
+    public void delSessionAttr(String key) {
+        getRequest().getSession().removeAttribute(key);
     }
 
     /**
-     * 设置redis的值
+     * 设置session的值
      *
      * @param key   key
      * @param value value
      */
-    public void sessionSet(String key, Object value) {
+    public void setSessionAttr(String key, Object value) {
         getRequest().getSession().setAttribute(key, value);
     }
 
