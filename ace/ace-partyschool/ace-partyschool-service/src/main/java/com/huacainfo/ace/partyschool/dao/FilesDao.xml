@@ -118,4 +118,40 @@
         set status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="findStudentFileList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select *
+        FROM partyschool.files f
+        where
+        f.classesId=(
+        SELECT s.classId FROM partyschool.student s WHERE s.id=#{condition.id,jdbcType=VARCHAR}
+        )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findTeacherFileList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select *
+        FROM partyschool.files f
+        where
+        f.classesId in(
+        SELECT s.clsId FROM partyschool.teacher_cls_ship s WHERE s.teacherId=#{condition.teacherId,jdbcType=VARCHAR}
+        )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 </mapper>
