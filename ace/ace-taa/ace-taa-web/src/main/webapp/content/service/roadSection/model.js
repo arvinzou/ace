@@ -25,7 +25,7 @@ var _colModel = function() {
 		width: 100,
 		edittype: "combogrid",
 		dataoptions: {
-			panelWidth: 600,
+			panelWidth: 500,
 			idField: 'id',
 			textField: 'name',
 			url: contextPath + '/road/getListByCondition',
@@ -33,11 +33,7 @@ var _colModel = function() {
 			fitColumns: true,
 			method: 'get',
 			columns: [
-				[{
-					field: 'id',
-					title: 'ID',
-					width: 200
-				}, {
+				[ {
 					field: 'name',
 					title: '名称',
 					width: 300
@@ -87,7 +83,7 @@ var _colModel = function() {
 		width: 60,
 		edittype: "combogrid",
 		dataoptions: {
-			panelWidth: 600,
+			panelWidth: 500,
 			idField: 'id',
 			textField: 'name',
 			url: contextPath + '/roadMan/getListByCondition',
@@ -95,11 +91,7 @@ var _colModel = function() {
 			fitColumns: true,
 			method: 'get',
 			columns: [
-				[{
-					field: 'id',
-					title: 'ID',
-					width: 200
-				}, {
+				[ {
 					field: 'name',
 					title: '姓名',
 					width: 100
