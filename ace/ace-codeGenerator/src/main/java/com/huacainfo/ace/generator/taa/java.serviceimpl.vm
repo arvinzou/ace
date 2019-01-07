@@ -275,4 +275,23 @@ private DataBaseLogService dataBaseLogService;
                                         return rst;
                                     }
 
+                                    /**
+                                     * @throws
+                                     * @Title:deleteRoadSectionByRoadSectionIds
+                                     * @Description: TODO(批量删除$!{bean.tableChineseName}
+                                     * @param: @param ids
+                                     * @param: @param userProp
+                                     * @param: @throws Exception
+                                     * @return: MessageResponse
+                                     * @author: $!{annotation.authorName}
+                                     * @version: $!{annotation.version}
+                                     */
+                                    MessageResponse delete$!{bean.name}By$!{bean.name}s(String [] id, UserProp userProp) throws Exception{
+
+                                            this.$!{bean.lowerName}Dao.deleteByPrimaryKeys(id);
+                                            this.dataBaseLogService.log("批量删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id[0], id[0], "$!{bean.tableChineseName}", userProp);
+                                            return new MessageResponse(0, "删除成功！");
+
+                                    }
+
  }

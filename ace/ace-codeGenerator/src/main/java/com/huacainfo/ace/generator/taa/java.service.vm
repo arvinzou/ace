@@ -145,4 +145,19 @@ public interface $!{bean.name}Service {
                      * @version: $!{annotation.version}
                      */
                     public Map<String, Object> getListByCondition(Map<String, Object> params);
+
+
+
+                    /**
+                         * @throws
+                         * @Title:deleteRoadSectionByRoadSectionIds
+                         * @Description: TODO(批量删除$!{bean.tableChineseName}
+                         * @param: @param ids
+                         * @param: @param userProp
+                         * @param: @throws Exception
+                         * @return: MessageResponse
+                         * @author: $!{annotation.authorName}
+                         * @version: $!{annotation.version}
+                         */
+                        MessageResponse delete$!{bean.name}By$!{bean.name}s(String [] id, UserProp userProp) throws Exception;
  }
