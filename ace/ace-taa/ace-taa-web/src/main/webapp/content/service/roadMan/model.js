@@ -112,7 +112,7 @@ var _colModel = function() {
 		}, {
 			name: 'intro',
 			hidden:true,
-			editable: true,
+			editable: false,
 			width: 100,
 			editoptions: {
 				size: "20",
