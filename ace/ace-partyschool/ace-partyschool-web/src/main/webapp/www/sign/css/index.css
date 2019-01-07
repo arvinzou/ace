@@ -20,22 +20,22 @@ body{
 }
 .identity{
 	width: 4.133333rem;
-	height: 4.933333rem;
+	height: 4.8rem;
 	padding-left: 0.72rem;
 	padding-right: 0.72rem;
-	margin: 1.066666rem auto;
+	margin: 0.9rem auto;
 	text-align: center;
 }
 .identity img{
-	width: 4.133333rem;
-	height: 4.133333rem;
+	width: 4rem;
+	height: 4rem;
 }
 .identity span{
 	width: 100%;
-	height: 0.8rem;
+	height: 0.6rem;
 	display: block;
 	text-align: center;
-	line-height: 0.8rem;
+	line-height: 0.6rem;
 	font-size: 0.48rem;
 }
 .unactive{
@@ -48,10 +48,10 @@ body{
 	width: 100%;
 	height: auto;
 	position: fixed;
-	bottom: 1.56rem;
+	bottom: 0;
 }
 .footer img{
-	width: 4.266666rem;
-	height: 1.76rem;
-	margin-left: 2.9rem;
+	width: 98%;
+	margin-left: 1%;
+	height: 2.08rem;
 }

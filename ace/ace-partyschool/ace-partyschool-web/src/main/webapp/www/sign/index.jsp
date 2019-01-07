@@ -20,6 +20,9 @@
 			<img src="img/teacher.png" id="teacher" />
 			<span class="unactive">我是教职工</span>
 		</div>
+		<div class="footer" id="nextStep">
+			<img src="img/next.png" onclick="nextStep();" style="display: none;" id="next"/>
+		</div>
 	</div>
 	</body>
 
