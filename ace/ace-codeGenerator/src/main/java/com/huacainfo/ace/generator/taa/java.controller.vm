@@ -235,6 +235,24 @@ private $!{bean.name}Service $!{bean.lowerName}Service;
     @RequestMapping(value = "/getListByCondition")
     @ResponseBody
     public Map<String, Object> getListByCondition() {
-        return this.$!{bean.lowerName}.getListByCondition(this.getParams());
+        return this.$!{bean.lowerName}Service.getListByCondition(this.getParams());
     }
+
+
+     /**
+         * @throws
+         * @Title:delete$!{bean.name}By$!{bean.name}Ids
+         * @Description: TODO(批量删除$!{bean.tableChineseName})
+         * @param: @param ids
+         * @param: @throws Exception
+         * @return: MessageResponse
+         * @author: $!{annotation.authorName}
+         * @version:$!{annotation.version}
+         */
+        @RequestMapping(value = "/delete$!{bean.name}By$!{bean.name}Ids")
+        @ResponseBody
+        public MessageResponse delete$!{bean.name}By$!{bean.name}Ids(String ids) throws Exception {
+            String [] id=ids.split(",");
+            return this.$!{bean.lowerName}Service.delete$!{bean.name}By$!{bean.name}Ids(id, this.getCurUserProp());
+        }
 }

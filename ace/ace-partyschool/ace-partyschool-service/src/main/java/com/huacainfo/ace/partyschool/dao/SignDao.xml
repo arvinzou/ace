@@ -83,4 +83,57 @@
         left join partyschool.teacher t on u.user_id = t.id
         where u.account = #{acct,jdbcType=VARCHAR}
     </select>
+
+
+    <resultMap id="usersVo" type="com.huacainfo.ace.portal.vo.UsersVo">
+        <id column="USER_ID" property="userId" jdbcType="VARCHAR"/>
+        <result column="ACCOUNT" property="account" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="SEX" property="sex" jdbcType="CHAR"/>
+        <result column="ID_CARD" property="idCard" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="DEPARTMENT_ID" property="departmentId" jdbcType="VARCHAR"/>
+        <result column="DEPARTMENT_NAME" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR"/>
+        <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR"/>
+        <result column="BIRTHDAY" property="birthday" jdbcType="TIMESTAMP"/>
+        <result column="STAUTS" property="stauts" jdbcType="CHAR"/>
+        <result column="LAST_LOGIN_TIME" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="MOBILE" property="mobile" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="TELPHONE" property="telphone" jdbcType="VARCHAR"/>
+        <result column="FAX" property="fax" jdbcType="VARCHAR"/>
+        <result column="QQ" property="qq" jdbcType="VARCHAR"/>
+        <result column="SEAT" property="seat" jdbcType="VARCHAR"/>
+        <result column="USER_LEVEL" property="userLevel" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="DEPARTMENT_NAME" property="departmentName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findByOpenId" parameterType="java.lang.String" resultMap="usersVo">
+        select
+
+        t.user_id, t.account, t.sex, t.openId, t.appOpenId,
+        t.id_card, t.name, t.department_id, s.department_name,
+        t.area_code, s2.name area_name,
+        t.birthday, t.stauts, t.last_login_time, t.mobile, t.email,
+        t.telphone, t.qq, t.fax, t.seat, t.user_level,
+        t.create_time, s3.nickname, s3.headimgurl,s4.nickName, s4.avatarUrl
+
+        from portal.users t
+        left join portal.department s on t.department_id=s.department_id
+        left join portal.province s2 on t.area_code=s2.code
+        left join portal.userinfo s3 on t.openId=s3.unionid
+        left join portal.wx_user s4 on t.appOpenId=s4.unionId
+        where t.openId = #{uid,jdbcType=VARCHAR}
+        and t.cur_syid= #{sysId,jdbcType=VARCHAR}
+    </select>
+
+    <update id="bindUserWx" parameterType="java.lang.String">
+        update portal.users
+        set openId = #{unionid,jdbcType=CHAR},
+        appOpenId = #{unionid,jdbcType=CHAR}
+        where cur_syid = #{sysId,jdbcType=VARCHAR}
+        and account = #{account,jdbcType=VARCHAR}
+    </update>
 </mapper>

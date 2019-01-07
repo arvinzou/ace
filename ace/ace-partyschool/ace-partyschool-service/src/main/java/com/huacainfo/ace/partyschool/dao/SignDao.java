@@ -17,4 +17,11 @@ public interface SignDao {
                   @Param("roleId") String roleId);
 
     AccountVo findByAcct(String acct);
+
+    Users findByOpenId(@Param("uid") String uid,
+                       @Param("sysId") String sysId);
+
+    int bindUserWx(@Param("account") String account,
+                   @Param("unionid") String unionid,
+                   @Param("sysId") String sysId);
 }

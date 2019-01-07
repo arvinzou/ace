@@ -71,4 +71,20 @@ public interface SignService {
      * @return ResultResponse
      */
     ResultResponse getAcctInfo(String acct);
+
+    /**
+     * 微信登录
+     *
+     * @param uid 微信 unionid
+     * @return ResultResponse
+     */
+    ResultResponse wxLogin(String uid);
+
+    /***
+     * 绑定微信账户
+     * @param account 账户ID
+     * @param unionid 微信 unionid
+     * @return
+     */
+    ResultResponse wxBind(String account, String unionid);
 }

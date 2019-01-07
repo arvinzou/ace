@@ -6,7 +6,6 @@ import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.security.spring.BasicUsers;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
@@ -226,15 +225,7 @@ public class WSignController extends BisBaseController {
         }
         //session登录成功
         Users syUser = (Users) loginRs.getData();
-        BasicUsers o = new BasicUsers(syUser.getUserId(),
-                syUser.getPassword(), syUser.getAccount(),
-                syUser.getName(), syUser.getName(),
-                syUser.getDepartmentId(), syUser.getCorpName(),
-                syUser.getAreaCode(), syUser.getStauts().equals("1"), true,
-                true, true, null, null, syUser.getParentCorpId(),
-                syUser.getEmail(), syUser.getAccount(), null, null, syUser.getCurSyid(),
-                null, syUser.getOpenId(), syUser.getAppOpenId());
-        sessionSet(CommonKeys.SESSION_USERPROP_KEY, o);
+        registerSession(syUser);
 
         return loginRs;
     }
