@@ -133,6 +133,7 @@
     t.id,t.name, t.mobile, t.orgName,t.status,b.name areaName
     from road_man t
     left join portal.province b on t.areaCode=b.code
+    where 0=0
     <if test='params.q !=null and params.q!=""'>
       and (t.id=#{params.q} or t.name like
       concat('%',#{params.q},'%'))
