@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,7 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/www/oauth2")
 /**
  * @author: 陈晓克
@@ -87,7 +88,7 @@ public class OAuth2Controller extends BisBaseController {
     public ResultResponse auth(String action, String respUri, String jsonData,
                                HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        if (StringUtil.isEmpty(respUri)) {
+        if (!StringUtil.areNotEmpty(action, respUri)) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
         //
@@ -103,6 +104,11 @@ public class OAuth2Controller extends BisBaseController {
     @RequestMapping("/auth2")
     public ResultResponse auth2(String code, String state,
                                 HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        if (!StringUtil.areNotEmpty(code, state)) {
+            return new ResultResponse(ResultCode.FAIL, "授权code获取失败");
+        }
+
         this.logger.info("【市委党校】code->{} state -> {}", code, state);
         SingleResult<Userinfo> rst = this.oAuth2Service.saveOrUpdateUserinfo(appid, secret, code, state);
         if (rst.getState()) {
