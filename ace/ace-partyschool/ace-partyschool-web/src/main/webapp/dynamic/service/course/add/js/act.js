@@ -130,6 +130,9 @@ function formatState (state) {
     if (!state.id) {
         return state.text;
     }
+    if(!state.photoUrl){
+        state.photoUrl=contextPath+'/content/common/img/default_header.png';
+    }
     var $state = $(
         '<div style="height: 50px; margin-bottom: 5px;"><img style="height: 50px;width: 50px;object-fit: cover; overflow: hidden;margin-right: 10px" src="'+state.photoUrl+'" class="img-flag" /> ' + state.text + '</div>'
     );
