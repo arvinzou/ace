@@ -81,6 +81,7 @@
 		<!--绑定微信栏目-->
 		<div class="modal"id="bindModal" style="display: none;">
 			<div class="modal-main">
+				<div class="modal-banner"><img src="img/bind.png" class='banner'/></div>
 				<div class="modal-title">是否绑定微信</div>
 				<div class="modal-sectitle">绑定微信快速登录</div>
 				<div class="modal-opt">

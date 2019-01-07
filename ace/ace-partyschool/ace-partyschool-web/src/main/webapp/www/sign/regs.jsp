@@ -85,15 +85,23 @@
 
 
 		<!--绑定微信栏目-->
-		<div class="modal"id="bindModal" style="display: none;">
-			<div class="modal-main">
-				<div class="modal-title">是否绑定微信</div>
-				<div class="modal-sectitle">绑定微信快速登录</div>
-				<div class="modal-opt">
-					<div class="cancel"><span onclick="cancel();">取消</span></div>
-					<div class="bind"><span>立即绑定</span></div>
-				</div>
-			</div>
+		<div class="modal"id="bindModal">
+            <form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="bindWx();">
+                <input type="hidden" name="jsonData"/>
+                <input type="hidden" value="WX_BIND"  name="action"/>
+                <input type="hidden" value="/partyschool/www/login/index.jsp" id="respUri" name="respUri"/>
+
+
+                <div class="modal-main">
+                    <div class="modal-banner"><img src="img/bind.png" class='banner'/></div>
+                    <div class="modal-title">是否绑定微信</div>
+                    <div class="modal-sectitle">绑定微信快速登录</div>
+                    <div class="modal-opt">
+                        <div class="cancel"><span onclick="cancel();">取消</span></div>
+                        <div class="bind" ><button type="submit" class="submit">立即绑定</button></div>
+                    </div>
+                </div>
+            </form>
 		</div>
 	</body>
 

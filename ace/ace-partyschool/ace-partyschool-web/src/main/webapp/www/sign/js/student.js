@@ -1,5 +1,6 @@
 var political = null;
 var clazz = null;
+var account = null;
 $(function(){
 	var politicalArr = [{"id":"normal","value":"普通学员"},{"id":"party","value":"党员"}];
 	var classesArr = [{"id":"1","value":"2018届党校1班"},{"id":"2","value":"2018届党校2班"}];
@@ -97,6 +98,7 @@ function regist(){
         success:function(result){
             if(result.status == 0) {
                 alert(result.info);
+                account = signAcct;
                 $("#bindModal").show();
                 $("body").addClass("modalhide");
             }else {
@@ -173,4 +175,11 @@ function imgChange() {
 function cancel(){
     $("#bindModal").hide();
     $("body").removeClass("modalhide");
+}
+
+function bindWx(){
+    var o={};
+    o.account=account;
+    $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
+    $("#bindForm").submit();
 }

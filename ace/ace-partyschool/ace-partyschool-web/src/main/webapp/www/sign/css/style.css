@@ -204,7 +204,6 @@ input:-ms-input-placeholder{
 	color: #373F53;
 	font-size: 0.453333rem;
 	font-weight: bold;
-	padding-top: 3.906666rem;
 }
 .modal-sectitle{
 	width: 100%;
@@ -240,4 +239,19 @@ input:-ms-input-placeholder{
 	float: left;
 	font-size: 0.453333rem;
 	color: #F95C57;
+}
+.modal-banner{
+	width: 100%;
+	height: 2.813333rem;
+	text-align: center;
+}
+.banner{
+	width: 5.386666rem;
+	height: 2.813333rem;
+}
+.submit{
+	font-size: 0.453333rem;
+	color: #F95C57;
+	background: none;
+	border: none;
 }

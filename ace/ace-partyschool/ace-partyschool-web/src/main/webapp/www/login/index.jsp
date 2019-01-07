@@ -11,6 +11,7 @@
 <body>
 <label>用户名:</label><input type="text" name="username" placeholder="请输入用户名"/><br/>
 <label>密 码</label><input type="password" name="password" placeholder="请输入密码"/><br/>
-<button onclick="login();">登录</button>
+<button onclick="login();">口令登录</button>
+<button onclick="wxLogin();">微信授权登录</button>
 </body>
 </html>
