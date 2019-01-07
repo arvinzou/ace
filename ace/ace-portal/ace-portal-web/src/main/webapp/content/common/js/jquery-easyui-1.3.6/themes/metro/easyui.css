@@ -1059,12 +1059,12 @@
 }
 .datagrid-header-row,
 .datagrid-row {
-  height: 25px;
+  height: 34px;
 }
 .datagrid-header td,
 .datagrid-body td,
 .datagrid-footer td {
-  border-width: 0 1px 1px 0;
+  border-width: 0 0px 0px 0;
   border-style: dotted;
   margin: 0;
   padding: 0;
