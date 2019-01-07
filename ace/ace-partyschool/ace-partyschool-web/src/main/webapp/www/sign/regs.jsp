@@ -85,7 +85,7 @@
 
 
 		<!--绑定微信栏目-->
-		<div class="modal"id="bindModal">
+		<div class="modal"id="bindModal" style="display: none;">
             <form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="bindWx();">
                 <input type="hidden" name="jsonData"/>
                 <input type="hidden" value="WX_BIND"  name="action"/>
