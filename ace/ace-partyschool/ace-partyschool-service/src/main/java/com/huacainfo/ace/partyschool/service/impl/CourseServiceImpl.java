@@ -139,7 +139,7 @@ public class CourseServiceImpl implements CourseService {
         course.setLastModifyUserName(userProp.getName());
         course.setLastModifyUserId(userProp.getUserId());
         course.setName(o.getName());
-        course.setName(o.getCategory());
+        course.setCategory(o.getCategory());
         course.setEvaluatingId(o.getEvaluatingId());
         course.setTeacherId(o.getTeacherId());
         this.courseDao.updateByPrimaryKey(course);
