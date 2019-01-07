@@ -2,11 +2,16 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.partyschool.model.Files;
+import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.service.clsFilesService;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
 import com.huacainfo.ace.partyschool.vo.FilesVo;
@@ -31,6 +36,8 @@ public class WFilesController extends BisBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private clsFilesService clsFilesService;
+    @Autowired
+    private SignService signService;
 
     /**
      * @throws
@@ -47,12 +54,15 @@ public class WFilesController extends BisBaseController {
      */
     @RequestMapping(value = "/findFilesList")
     @ResponseBody
-    public PageResult<FilesVo> findFilesList(FilesQVo condition, PageParamNoChangeSord page) throws Exception {
-        PageResult<FilesVo> rst = this.clsFilesService.findFilesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
+    public ResultResponse findFilesList(FilesQVo condition, PageParamNoChangeSord page) throws Exception {
+
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
-        return rst;
+        return this.clsFilesService.findFilesListVo(condition, page.getStart(), page.getLimit(), page.getOrderBy(), userProp);
+
+
     }
 
 }

@@ -21,7 +21,7 @@ public interface FilesDao {
 
     FilesVo selectVoByPrimaryKey(String id);
 
-    List<FilesVo> findList(@Param("condition") FilesQVo condition,
+    List<FilesVo> findStudentFileList(@Param("condition") FilesQVo condition,
                            @Param("start") int start,
                            @Param("limit") int limit,
                            @Param("orderBy") String orderBy);
@@ -32,4 +32,13 @@ public interface FilesDao {
 
     int updateStatus(Files record);
 
+    List<FilesVo> findTeacherFileList(@Param("condition") FilesQVo condition,
+                                  @Param("start") int start,
+                                  @Param("limit") int limit,
+                                  @Param("orderBy") String orderBy);
+
+    List<FilesVo> findList(@Param("condition") FilesQVo condition,
+                                   @Param("start") int start,
+                                   @Param("limit") int limit,
+                                   @Param("orderBy") String orderBy);
 }
