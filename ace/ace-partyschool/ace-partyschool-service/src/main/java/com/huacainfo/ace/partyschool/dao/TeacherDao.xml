@@ -8,6 +8,8 @@
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="idCard" jdbcType="CHAR" property="idCard"/>
         <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+        <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+        <result column="postName" jdbcType="VARCHAR" property="postName"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="status" jdbcType="CHAR" property="status"/>
         <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
@@ -22,7 +24,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         id, category, name, mobile, idCard, photoUrl, remark, status, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, introduce
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, introduce, workUnitName, postName
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
@@ -42,13 +44,15 @@
         mobile, idCard, photoUrl,
         remark, status, createUserId,
         createUserName, createDate, lastModifyUserId,
-        lastModifyUserName, lastModifyDate, introduce
+        lastModifyUserName, lastModifyDate, introduce,
+        workUnitName, postName
         )
         values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{name,jdbcType=VARCHAR},
         #{mobile,jdbcType=VARCHAR}, #{idCard,jdbcType=CHAR}, #{photoUrl,jdbcType=VARCHAR},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
-        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR}
+        #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP}, #{introduce,jdbcType=LONGVARCHAR},
+        #{workUnitName,jdbcType=VARCHAR},#{postName,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -60,6 +64,8 @@
         mobile = #{mobile,jdbcType=VARCHAR},
         idCard = #{idCard,jdbcType=CHAR},
         photoUrl = #{photoUrl,jdbcType=VARCHAR},
+        workUnitName = #{workUnitName,jdbcType=VARCHAR},
+        postName = #{postName,jdbcType=VARCHAR},
         remark = #{remark,jdbcType=VARCHAR},
         status = #{status,jdbcType=CHAR},
         createUserId = #{createUserId,jdbcType=VARCHAR},
@@ -77,7 +83,7 @@
 
     <sql id="Vo_Column_List">
         id, category, name, mobile, idCard, photoUrl, remark, status, createUserId, createUserName,
-        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, introduce
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, introduce, workUnitName, postName
     </sql>
     <sql id="From_Statement">
         FROM teacher t
