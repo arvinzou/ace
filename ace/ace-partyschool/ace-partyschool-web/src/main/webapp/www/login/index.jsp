@@ -12,6 +12,11 @@
 <label>用户名:</label><input type="text" name="username" placeholder="请输入用户名"/><br/>
 <label>密 码</label><input type="password" name="password" placeholder="请输入密码"/><br/>
 <button onclick="login();">口令登录</button>
-<button onclick="wxLogin();">微信授权登录</button>
+
+<form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="wxLogin();">
+    <input type="hidden" value="WX_LOGIN"  name="action"/>
+    <input type="hidden" value="/partyschool/www/registered/person/info.jsp" id="respUri" name="respUri"/>
+    <button type="submit">微信授权登录</button>
+</form>
 </body>
 </html>

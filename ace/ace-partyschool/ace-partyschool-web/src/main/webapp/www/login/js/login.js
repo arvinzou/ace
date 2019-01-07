@@ -36,3 +36,7 @@ function login(){
     });
 
 }
+
+function wxLogin(){
+    $("#bindForm").submit();
+}
