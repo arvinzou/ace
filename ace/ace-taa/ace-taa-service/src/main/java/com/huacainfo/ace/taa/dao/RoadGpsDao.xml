@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.RoadGpsDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.RoadGps">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <insert id="insert" parameterType="com.huacainfo.ace.taa.model.RoadGps">
+    insert into road_gps (id, roadSectionId, latitude, 
+      longitude, createUserId, createUserName, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{roadSectionId,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
+      #{longitude,jdbcType=DECIMAL}, #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="getList" resultType="map">
+    select   id, roadSectionId, latitude, longitude, createUserId, createUserName, createDate
+    from road_gps
+    where roadSectionId=#{p.id} order by createDate
+  </select>
+  <delete id="deleteByPrimaryKeys">
+    delete from road_gps
+    where id in
+    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+</mapper>
