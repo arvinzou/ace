@@ -6,6 +6,7 @@ import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ClassesDao {
 
@@ -32,4 +33,5 @@ public interface ClassesDao {
 
     int updateStatus(Classes record);
 
+    List<Map<String, String>> findByQ(@Param("params") Map<String, Object> params);
 }

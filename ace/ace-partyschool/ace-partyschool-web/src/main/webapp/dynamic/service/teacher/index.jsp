@@ -11,6 +11,9 @@
 </head>
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
 
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -18,14 +21,24 @@
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+                <div class="col-md-5 toolbar">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-3">
-
-
+                <div class="col-md-7">
+                    <div class="input-group" style="float: left;margin-right: 5px;width: 175px">
+                        <input type="text"
+                               name="mobile"
+                               class="form-control"
+                               placeholder="请输入手机号码">
+                    </div>
+                    <div class="input-group" style="float: left;margin-right: 5px;width: 225px">
+                        <input type="text"
+                               name="idCard"
+                               class="form-control"
+                               placeholder="请输入身份证号码">
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="name"
@@ -55,6 +68,49 @@
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
+<div class="modal fade" role="dialog" id="modal-upload">
+    <div class="modal-dialog" role="document" style="width: 830px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">图片上传</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="uploader">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" role="dialog" id="modal-file">
+    <div class="modal-dialog" role="document" style="width: 830px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" authority="false" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">图片</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="load" class="loading"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--查看详情--%>
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 75%;">
@@ -83,12 +139,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">姓名</label>
         <div class="col-md-10">
-            {@if data.o.headimgurl!='' && data.o.headimgurl!=null && data.o.headimgurl!=undefined}
-            <img src="\${data.o.photoUrl}" class="cover"/>
-            {@else}
-            <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
-            {@/if}
-            <a>\${data.o.name}</a>
+            \${data.o.name}
         </div>
     </div>
     <div class="form-group">
@@ -104,9 +155,39 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 view-label">单位</label>
+        <div class="col-md-10">
+            \${data.o.workUnitName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">职位</label>
+        <div class="col-md-10">
+            \${data.o.postName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">工作照</label>
+        <div class="col-md-10">
+            <img src="\${data.o.photoUrl}" class="cover"/>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 view-label">介绍</label>
         <div class="col-md-10">
             \${data.o.introduce}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">备注</label>
+        <div class="col-md-10">
+            \${data.o.remark}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">状态</label>
+        <div class="col-md-10">
+            \${parseStatus(data.o.status)}
         </div>
     </div>
 </script>
@@ -130,17 +211,26 @@
 <script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
 <script src="${pageContext.request.contextPath}/content/service/teacher/config.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/teacher/model.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/teacher/controller.js?version=${cfg.version}"></script>
 <script src="${pageContext.request.contextPath}/content/service/teacher/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/teacher/upload.js?version=${cfg.version}"></script>
+
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 </body>
 <style>
     .cover {
-        width: 70px;
-        height: 70px;
+        max-width: 150px;
+        max-height: 150px;
         object-fit: cover;
     }
 </style>

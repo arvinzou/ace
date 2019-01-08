@@ -93,6 +93,15 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and t.status = #{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.mobile !=null and condition.mobile !=&quot;&quot;">
+            and t.mobile like concat(#{condition.mobile,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.idCard !=null and condition.idCard !=&quot;&quot;">
+            and t.idCard like concat(#{condition.idCard,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -140,5 +149,12 @@
         select count(1)
         from teacher
         where idCard = #{idCard,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExistOtherIdCard" resultType="int">
+        select count(1)
+        from teacher
+        where id != #{id,jdbcType=VARCHAR}
+        and idCard = #{idCard,jdbcType=VARCHAR}
     </select>
 </mapper>

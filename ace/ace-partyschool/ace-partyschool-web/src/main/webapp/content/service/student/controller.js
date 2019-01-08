@@ -1,4 +1,8 @@
 jQuery(function ($) {
+    //清空查询条件
+    $('#btn-clear').on('click', function () {
+        $('.form-control').val('');
+    });
     //查询
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
@@ -28,15 +32,20 @@ jQuery(function ($) {
                 var form = $(e[0]);
                 form.closest('.ui-jqdialog')
                     .find('.ui-jqdialog-titlebar')
-                    .wrapInner('<div class = "widget-header" / > ');
-                //ll
-                appendUploadBtn("photoUrl");
+                    .wrapInner('<div class="widget-header" />');
+
             }
         })
     });
+    //批量导入
+    $('#btn-view-import').on('click', function () {
+        //加载导入
+        importXls("123");
+    });
 
-    //初始化事件
+//初始化事件
     initEvents();
+    initJuicerMethod();
 });
 
 /*页面渲染*/
@@ -50,6 +59,11 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
+    $('#modal-import').on('shown.bs.modal', function (event) {
+        //
+        selectClasses(true);
+    });
+
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -57,7 +71,38 @@ function initEvents() {
         var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
-    })
+    });
+
+    //班级数筛选列表
+    $('#combogrid-cls-list').combogrid({
+        panelWidth: 460,
+        idField: 'id',
+        textField: 'name',
+        url: contextPath + '/classes/findClassesList',
+        mode: 'remote',
+        fitColumns: false,
+        method: 'get', columns: [[
+            {field: 'name', title: '班级名称', width: 150, align: 'right'},
+            {field: 'headermasterName', title: '班主任', width: 150, align: 'right'}
+        ]],
+        keyHandler: {
+            up: function () {
+            },
+
+            down: function () {
+            },
+
+            enter: function () {
+            },
+            query: function (q) {
+                $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
+                $('#combogrid-cls-list').combogrid("setValue", q);
+            }
+        },
+        onSelect: function (index, row) {
+            selectClasses(false);
+        }
+    });
 }
 
 function initPreview(id) {
@@ -86,7 +131,6 @@ function initPreview(id) {
     });
 }
 
-
 function edit(rowid) {
     console.log(rowid);
     jQuery(cfg.grid_selector).jqGrid('editGridRow', rowid, {
@@ -98,8 +142,6 @@ function edit(rowid) {
             form.closest('.ui-jqdialog')
                 .find('.ui-jqdialog-titlebar')
                 .wrapInner('<div class="widget-header" />');
-
-            appendUploadBtn("photoUrl");
 
             //readOnly: true,
             $("#mobile").attr("readOnly", true);
@@ -114,7 +156,9 @@ function del(rowid) {
         beforeShowForm: function (e) {
             var form = $(e[0]);
             if (!show) {
-                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+                form.closest('.ui-jqdialog')
+                    .find('.ui-jqdialog-titlebar')
+                    .wrapInner('<div class = "widget-header" / > ');
             }
             show = true;
         }
@@ -125,6 +169,64 @@ function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }
+
+function importXls() {
+    $('#modal-import').modal('show');
+}
+
+function selectClasses(isFirst) {
+    if (isFirst) {
+        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
+    }
+    else {
+        var g = $('#combogrid-cls-list').combogrid('grid'); // get datagrid object
+        var r = g.datagrid('getSelected'); // get the selected row
+        if (r && r.id) {
+            reset_uploader({clsId: r.id});
+        } else {
+            alert("请选择班级信息！");
+        }
+    }
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+    juicer.register('parseStatus', parseStatus);
+    juicer.register('parsePolitical', parsePolitical);
+}
+
+/**
+ * 政治面貌
+ * party-党员
+ * normal-非党员
+ */
+function parsePolitical(val) {
+    switch (val) {
+        case 'party':
+            return "党员";
+        case 'normal':
+            return "非党员";
+        default:
+            return "非党员";
+    }
+}
+
+/**
+ * 状态
+ * 0-已注销
+ * 1-有效
+ */
+function parseStatus(status) {
+    switch (status) {
+        case '0':
+            return "已注销";
+        case '1':
+            return "有效";
+        default:
+            return "有效";
+    }
+}
+
 
 function recover(rowid) {
     if (confirm("确认恢复么？")) {

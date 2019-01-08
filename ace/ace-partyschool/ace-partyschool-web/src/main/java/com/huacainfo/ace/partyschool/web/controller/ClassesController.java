@@ -1,5 +1,16 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.partyschool.model.Classes;
+import com.huacainfo.ace.partyschool.service.ClassesService;
+import com.huacainfo.ace.partyschool.vo.ClassesQVo;
+import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,16 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.partyschool.model.Classes;
-import com.huacainfo.ace.partyschool.service.ClassesService;
-import com.huacainfo.ace.partyschool.vo.ClassesVo;
-import com.huacainfo.ace.partyschool.vo.ClassesQVo;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/classes")
@@ -127,5 +130,18 @@ public class ClassesController extends BisBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.classesService.deleteClassesByClassesId(id, this.getCurUserProp());
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/findByQ")
+    public Map<String, Object> findByQ(String q, String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("q", id);
+        if (!CommonUtils.isBlank(q)) {
+            params.put("q", q);
+        }
+
+        return classesService.findByQ(params);
     }
 }

@@ -1,170 +1,126 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <!DOCTYPE html>
-<!--[if IE 8]>
-<html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]>
-<html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en">
-<!--<![endif]-->
+<html lang="cn">
 <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
     <title>学员管理</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta content="width=device-width, initial-scale=1" name="viewport"/>
-    <meta content="${cfg.sys_name}" name="description"/>
-    <jsp:include page="/dynamic/common/header.jsp"/>
-    <link rel="stylesheet" href="css/style.css">
 </head>
+<jsp:include page="/dynamic/common/header.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
+<link rel="stylesheet"
+      href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css"
+      type="text/css" media="screen"/>
+<link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
+<link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 <body>
+
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light">
-
+<div class="portlet light ">
     <div class="portlet-body">
-
         <div class="row custom-toolbar">
-            <div class="col-md-9">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">添加</a>
-            </div>
-
-            <div class="col-md-3">
-
-                <form onsubmit="return t_query()">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-
+            <form action="#" id="fm-search">
+                <div class="col-md-3 toolbar">
+                    <%--${pageContext.request.contextPath}/student/insertStudent--%>
+                    <button type="button" class="btn  green" id="btn-view-add"
+                            authority="false">添加
+                    </button>
+                    <button type="button" class="btn  green" id="btn-view-import"
+                            authority="false">批量导入
+                    </button>
+                </div>
+                <div class="col-md-9">
+                    <div class="input-group" style="float: left;margin-right: 5px;width: 175px">
+                        <input type="text"
+                               name="clsName"
+                               class="form-control"
+                               placeholder="请输入班级名称">
                     </div>
-
+                    <div class="input-group" style="float: left;margin-right: 5px;width: 175px">
+                        <input type="text"
+                               name="mobile"
+                               class="form-control"
+                               placeholder="请输入手机号码">
+                    </div>
+                    <div class="input-group" style="float: left;margin-right: 5px;width: 225px">
+                        <input type="text"
+                               name="idCard"
+                               class="form-control"
+                               placeholder="请输入身份证号码">
+                    </div>
                     <div class="input-group">
                         <input type="text"
-                               name="keyword"
+                               name="name"
                                class="form-control"
-                               placeholder="学员姓名">
+                               placeholder="请输入姓名">
                         <span class="input-group-btn">
-                            <button class="btn  btn-default search_btn" type="submit">搜索 </button>
-                        </span>
+                            <%--${pageContext.request.contextPath}/student/findStudentList--%>
+							<button class="btn  btn-default search_btn" id="btn-search" authority="false">搜索</button>
+						</span>
+                        <span class="input-group-btn">
+                            <button class="btn  btn-default search_btn" id="btn-clear" authority="false">重置</button>
+						</span>
                     </div>
-                </form>
-            </div>
 
+                </div>
+
+            </form>
         </div>
 
+        <table id="grid-table"></table>
 
-        <div class="table-scrollable">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th width="10%"> 姓名</th>
-                    <th width="10%"> 手机号</th>
-                    <th width="10%"> 身份证</th>
-                    <th width="10%"> 政治面貌</th>
-                    <th width="10%"> 单位</th>
-                    <th width="10%"> 职务</th>
-                    <th width="10%"> 班级</th>
-                    <th width="10%"> 状态</th>
-                    <th width="15%">操作</th>
-                </tr>
-                </thead>
-                <tbody id="page-list">
-
-                </tbody>
-            </table>
-        </div>
         <div class="paginationbar">
-            <ul class="pagination" id="pagination1"></ul>
+            <ul id="grid-pager" class="pagination"></ul>
         </div>
-
     </div>
-
 </div>
 
-
-<%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<%--==============common jsp-suffix==============--%>
-</body>
+<jsp:include page="/dynamic/common/footer.jsp"/>
 
-<%--列表juicer模板--%>
-<script id="tpl-list" type="text/template">
-    {@each data as item, index}
-    <tr>
-        <td> \${item.name}</td>
-        <td> \${item.mobile}</td>
-        <td> \${item.idCard}</td>
-        <td> \${item.political}</td>
-        <td> \${item.workUnitName}</td>
-        <td> \${item.postName}</td>
-        <td> \${item.classId}</td>
-        <td>
-            {@if item.status==1}
-            <span class="label label-lg label-info">正常</span>
-            {@else}
-            <span class="label label-lg label-danger">注销</span>
-            {@/if}
-        </td>
-        <td>
-            ﻿<a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <%--<a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"--%>
-            <%--data-target="#modal-status">设置状态</a>--%>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
-            <a href="javascript:del('\${item.id}');">删除</a>
-
-        </td>
-    </tr>
-    {@/each}
-</script>
-﻿
-<div class="modal fade " id="modal-status">
-    <div class="modal-dialog" role="document">
+<%--学员导入--%>
+<div class="modal fade" role="dialog" id="modal-import">
+    <div class="modal-dialog" role="document" style="width: 75%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" authority="false" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">设置状态</h4>
+                <h4 class="modal-title">批量导入</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        导入到目标班级<span style='color:red;'>*</span>
+                    </label>
+                    <div class="col-md-6">
+                        <select class="easyui-combogrid" style="width:460px; height: 25px; line-height: 25px;"
+                                id="combogrid-cls-list"></select>
                     </div>
-                </form>
+                </div>
+                <div id="uploader">
+                </div>
+                <div style="margin:5px">
+                    <a href="importTmpl.xls" style="color:red">下载模板</a>.<br>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
             </div>
         </div>
     </div>
 </div>
-<%--详情框--%>
+
+<%--查看详情--%>
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 75%;">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">详细</h4>
             </div>
@@ -176,27 +132,32 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
             </div>
         </div>
     </div>
 </div>
-
+<%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
         <label class="col-md-2 view-label">姓名</label>
         <div class="col-md-10">
-            \${data.o.name}
+            {@if data.o.headimgurl!='' && data.o.headimgurl!=null && data.o.headimgurl!=undefined}
+            <img src="\${data.o.photoUrl}" class="cover"/>
+            {@else}
+            <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
+            {@/if}
+            <a>\${data.o.name}</a>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">手机号</label>
+        <label class="col-md-2 view-label">手机号码</label>
         <div class="col-md-10">
             \${data.o.mobile}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">身份证</label>
+        <label class="col-md-2 view-label">身份证号码</label>
         <div class="col-md-10">
             \${data.o.idCard}
         </div>
@@ -204,7 +165,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">政治面貌</label>
         <div class="col-md-10">
-            \${data.o.political}
+            \${parsePolitical(data.o.political)}
         </div>
     </div>
     <div class="form-group">
@@ -214,7 +175,7 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">职务</label>
+        <label class="col-md-2 view-label">职位</label>
         <div class="col-md-10">
             \${data.o.postName}
         </div>
@@ -222,7 +183,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">班级</label>
         <div class="col-md-10">
-            \${data.o.classId}
+            \${data.o.clsName}
         </div>
     </div>
     <div class="form-group">
@@ -232,39 +193,53 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">状态 </label>
+        <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${data.o.status}
+            \${parseStatus(data.o.status)}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">注册日期</label>
-        <div class="col-md-10">
-            \${data.o.createDate}
-        </div>
-    </div>
+
 </script>
+
+<%--easyui--%>
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
+<%--导出--%>
+<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
+
+
+<script src="${pageContext.request.contextPath}/content/service/student/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/student/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/student/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/student/view.js?version=${cfg.version}"></script>
+
+<%--权限管理--%>
+<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+<%--导入控件--%>
+<script src="${pageContext.request.contextPath}/content/service/student/upload.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/select2/js/select2.js"></script>
+
+</body>
 <style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
+    /* css code area*/
 </style>
-<jsp:include page="/dynamic/common/footer.jsp"/>
-<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
-<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
-<script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
-<script src="js/act.js?v=${cfg.version}"></script>
 </html>

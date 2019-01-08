@@ -8,6 +8,9 @@ import com.huacainfo.ace.partyschool.model.Student;
 import com.huacainfo.ace.partyschool.vo.StudentQVo;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author: Arvin
  * @version: 2018-12-29
@@ -89,4 +92,31 @@ public interface StudentService {
      * @return boolean
      */
     boolean isExistByIdCard(String idCard);
+
+    /**
+     * 添加学员
+     *
+     * @param obj         params
+     * @param curUserProp operator
+     * @return MessageResponse
+     */
+    MessageResponse addStudent(Student obj, UserProp curUserProp) throws Exception;
+
+    /**
+     * 批量导入学员
+     *
+     * @param list  导入数据
+     * @param clsId 班级ID
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse insertImportXls(List<Map<String, Object>> list, UserProp userProp, String clsId) throws Exception;
+
+    /**
+     * 账户恢复
+     *
+     * @param id did
+     * @return MessageResponse
+     */
+    MessageResponse recover(String id, UserProp curUserProp) throws Exception;
 }
