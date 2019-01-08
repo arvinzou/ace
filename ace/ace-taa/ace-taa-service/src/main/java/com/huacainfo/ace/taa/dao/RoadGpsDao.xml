@@ -19,7 +19,7 @@
       #{createDate,jdbcType=TIMESTAMP})
   </insert>
   <select id="getList" resultType="map">
-    select   id, roadSectionId, latitude, longitude, createUserId, createUserName, createDate
+    select   id, roadSectionId, latitude, longitude, createUserId, createUserName,  DATE_FORMAT(createDate,"%Y-%m-%d %T") createDate
     from road_gps
     where roadSectionId=#{p.id} order by createDate
   </select>
