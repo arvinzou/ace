@@ -43,7 +43,7 @@ public class RoadGpsController extends TaaBaseController {
     @RequestMapping(value = "/insertRoadGps")
     @ResponseBody
     public MessageResponse insertRoadGps(String jsons) throws Exception {
-        RoadGps obj = JSON.parseObject(jsons, RoadGps.class);
+        java.util.List<RoadGps> obj = JSON.parseArray(jsons, RoadGps.class);
         return this.roadGpsService.insertRoadGps(obj, this.getCurUserProp());
     }
 
