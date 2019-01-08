@@ -1,4 +1,5 @@
 var political = null;
+var account = null;
 $(function(){
     var politicalArr = [{"id":"normal","value":"普通学员"},{"id":"party","value":"党员"}];
 	
@@ -76,6 +77,7 @@ function regist(){
         success:function(result){
             if(result.status == 0) {
                 alert(result.info);
+                account = signAcct;
                 $("#bindModal").show();
                 $("body").addClass("modalhide");
             }else {
@@ -152,4 +154,11 @@ function imgChange() {
 function cancel(){
     $("#bindModal").hide();
     $("body").removeClass("modalhide");
+}
+
+function bindWx(){
+    var o={};
+    o.account=account;
+    $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
+    $("#bindForm").submit();
 }

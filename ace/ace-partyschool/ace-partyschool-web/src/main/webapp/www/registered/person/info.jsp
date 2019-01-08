@@ -92,7 +92,7 @@
 				{@if data.regType == "student"}
 				\${data.student.workUnitName}
 				{@else}
-
+				\${data.teacher.workUnitName}
 				{@/if}
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 				{@if data.regType == "student"}
 				\${data.student.postName}
 				{@else}
-
+				\${data.teacher.postName}
 				{@/if}
 			</div>
 		</div>

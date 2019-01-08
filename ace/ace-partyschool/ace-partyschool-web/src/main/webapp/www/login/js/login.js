@@ -36,3 +36,25 @@ function login(){
     });
 
 }
+
+function wxLogin(){
+    $("#bindForm").submit();
+}
+
+function checkLogin(){
+    var acct = $("input[name='username']").val();
+    var pwd = $("input[name='password']").val();
+
+    if(acct != undefined && acct!="" && pwd!=undefined && pwd != ""){
+        $("#loginActive").show();
+        $("#login").hide();
+        $("#loginActive").click(login);
+    }else{
+        $("#loginActive").hide();
+        $("#login").show();
+    }
+}
+
+function resetPwd(){
+    window.location.href = contextPath + "/www/reset/index.jsp";
+}
