@@ -43,9 +43,9 @@ import java.util.Map;
  */
 @Service("signService")
 public class SignServiceImpl implements SignService {
+    public static final String ACCOUNT_VALID = "1";//portal.users 账户可登陆
+    public static final String ACCOUNT_INVALID = "0";//portal.users 账户不可登陆
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
     @Autowired
     private SignDao signDao;
 
@@ -113,7 +113,8 @@ public class SignServiceImpl implements SignService {
         String sysId = "partyschool";
         String deptId = "0004";
         String roleId = "ede24712-e13c-47d5-8cab-fd54589e3fe1";//select * from portal.role t where t.syid='partyschool'
-        MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd, mobile, sex, sysId, deptId, roleId);
+        MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd,
+                mobile, sex, sysId, deptId, roleId, ACCOUNT_VALID);
         if (ResultCode.FAIL == ms2.getStatus()) {
             return new ResultResponse(ms2);
         }
@@ -154,7 +155,8 @@ public class SignServiceImpl implements SignService {
         String sysId = "partyschool";
         String deptId = "0004";
         String roleId = "9f8f9043-73e1-4438-bf8a-ef681431df74";//select * from portal.role t where t.syid='partyschool'
-        MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd, mobile, sex, sysId, deptId, roleId);
+        MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd,
+                mobile, sex, sysId, deptId, roleId, ACCOUNT_INVALID);
         if (ResultCode.FAIL == ms2.getStatus()) {
             return new ResultResponse(ms2);
         }
@@ -215,6 +217,10 @@ public class SignServiceImpl implements SignService {
         if (!CommonUtils.getMd5(pwd).equals(syUser.getPassword())) {
             return new ResultResponse(ResultCode.FAIL, "密码不正确");
         }
+        if (syUser.getStauts().equals(ACCOUNT_INVALID)) {
+            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");
+        }
+
 
         return new ResultResponse(ResultCode.SUCCESS, "登录成功", syUser);
     }
@@ -262,6 +268,9 @@ public class SignServiceImpl implements SignService {
         if (users == null) {
             return new ResultResponse(ResultCode.FAIL, "该微信尚未绑定对应账户");
         }
+        if (users.getStauts().equals(ACCOUNT_INVALID)) {
+            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");
+        }
 
         return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", users);
     }
@@ -281,6 +290,10 @@ public class SignServiceImpl implements SignService {
         if (StringUtil.isNotEmpty(users.getOpenId())) {
             return new ResultResponse(ResultCode.FAIL, "该账户已绑定过其他微信号");
         }
+        if (users.getStauts().equals(ACCOUNT_INVALID)) {
+            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");
+        }
+
 
         users.setOpenId(unionid);
         users.setAppOpenId(unionid);
@@ -289,34 +302,58 @@ public class SignServiceImpl implements SignService {
         return new ResultResponse(ResultCode.SUCCESS, "绑定成功");
     }
 
+    /**
+     * 修改密码
+     *
+     * @param account 账户
+     * @param newPwd  新密码
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse updatePwd(String account, String newPwd) {
+        Users users = systemService.selectUsersByAccount(account);
+        if (users == null) {
+            return new ResultResponse(ResultCode.FAIL, "账户信息不存在");
+        }
+        //MD5加密
+        newPwd = CommonUtils.getMd5(newPwd);
+        //数据更新
+        int i = signDao.updatePwd(account, newPwd);
+
+        return new ResultResponse(ResultCode.SUCCESS, "密码变更成功");
+    }
+
 
     /**
      * 注册portal用户
      *
-     * @param regType 注册类别
-     * @param uid     uid
-     * @param openId  openid
-     * @param name    昵称
-     * @param account 账号
-     * @param mobile  手机号码
-     * @param sex     性别
-     * @param sysId   系统id
-     * @param deptId  部门ID
-     * @param roleId  角色ID
+     * @param regType    注册类别
+     * @param uid        uid
+     * @param openId     openid
+     * @param name       昵称
+     * @param account    账号
+     * @param mobile     手机号码
+     * @param sex        性别
+     * @param sysId      系统id
+     * @param deptId     部门ID
+     * @param roleId     角色ID
+     * @param acctStatus 账户是否可登陆
      * @return MessageResponse
      * @throws Exception
      */
-    private MessageResponse insertUsers(String regType,
-                                        String uid,
-                                        String openId,
-                                        String name,
-                                        String account,
-                                        String pwd,
-                                        String mobile,
-                                        String sex,
-                                        String sysId,
-                                        String deptId,
-                                        String roleId) throws Exception {
+    @Override
+    public MessageResponse insertUsers(String regType,
+                                       String uid,
+                                       String openId,
+                                       String name,
+                                       String account,
+                                       String pwd,
+                                       String mobile,
+                                       String sex,
+                                       String sysId,
+                                       String deptId,
+                                       String roleId,
+                                       String acctStatus) throws Exception {
         if (CommonUtils.isBlank(name)) {
             return new MessageResponse(ResultCode.FAIL, "名称不能为空！");
         }
@@ -339,7 +376,7 @@ public class SignServiceImpl implements SignService {
         o.setAppOpenId(openId);
         o.setDepartmentId(deptId);//"0004"
         o.setCurSyid(sysId);//"partyschool"
-        o.setStauts("1");
+        o.setStauts(acctStatus);/**状态（0停用正常1）*/
         o.setCreateTime(new java.util.Date());
         signDao.insertReg(o, roleId);
 
@@ -347,6 +384,18 @@ public class SignServiceImpl implements SignService {
         //sendRegSmsNotice(o, name, mobile, pwd);
         //******************
         return new MessageResponse(0, "注册成功");
+    }
+
+    /**
+     * 修改账户状态
+     *
+     * @param userId userId
+     * @param status 状态值
+     * @return int
+     */
+    @Override
+    public int updateUsersStatus(String userId, String status) {
+        return signDao.updateUsersStatus(userId, status);
     }
 
     private void sendRegSmsNotice(Users o, String nickname, String mobile, String pwd) throws Exception {
@@ -360,14 +409,14 @@ public class SignServiceImpl implements SignService {
         this.taskCmccService.insertTaskCmcc(obj);
     }
 
-    public Map<String, Object> getCarInfo(String CardCode)
-            throws Exception {
+    @Override
+    public Map<String, Object> getCarInfo(String cardCode) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
-        String year = CardCode.substring(6).substring(0, 4);// 得到年份
-        String yue = CardCode.substring(10).substring(0, 2);// 得到月份
+        String year = cardCode.substring(6).substring(0, 4);// 得到年份
+        String yue = cardCode.substring(10).substring(0, 2);// 得到月份
         // String day=CardCode.substring(12).substring(0,2);//得到日
         String sex;
-        if (Integer.parseInt(CardCode.substring(16).substring(0, 1)) % 2 == 0) {// 判断性别
+        if (Integer.parseInt(cardCode.substring(16).substring(0, 1)) % 2 == 0) {// 判断性别
             sex = "2";//"女"
         } else {
             sex = "1";//"男"

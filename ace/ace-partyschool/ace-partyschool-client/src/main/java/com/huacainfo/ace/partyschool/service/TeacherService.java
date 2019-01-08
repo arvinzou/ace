@@ -89,4 +89,22 @@ public interface TeacherService {
      * @return boolean
      */
     boolean isExistByIdCard(String idCard);
+
+    /**
+     * 新增教职工
+     *
+     * @param obj      Teacher
+     * @param userProp recover
+     * @return MessageResponse
+     */
+    MessageResponse addTeacher(Teacher obj, UserProp userProp) throws Exception;
+
+    /**
+     * 账户恢复
+     *
+     * @param id       did
+     * @param userProp userProp
+     * @return MessageResponse
+     */
+    MessageResponse recover(String id, UserProp userProp) throws Exception;
 }

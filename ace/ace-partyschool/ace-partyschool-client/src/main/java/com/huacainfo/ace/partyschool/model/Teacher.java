@@ -17,6 +17,10 @@ public class Teacher extends BaseModel {
 
     private String photoUrl;
 
+    private String workUnitName;
+
+    private String postName;
+
     private String remark;
 
     private String status;
@@ -34,6 +38,22 @@ public class Teacher extends BaseModel {
     private Date lastModifyDate;
 
     private String introduce;
+
+    public String getWorkUnitName() {
+        return workUnitName;
+    }
+
+    public void setWorkUnitName(String workUnitName) {
+        this.workUnitName = workUnitName;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
+    }
 
     public String getId() {
         return id;

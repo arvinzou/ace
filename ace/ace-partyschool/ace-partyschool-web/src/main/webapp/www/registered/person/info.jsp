@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="box">
-				<div class="exit">
+				<div class="exit" onclick="exit();">
 					<span>退出登录</span>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 				{@if data.regType == "student"}
 				\${data.student.workUnitName}
 				{@else}
-
+				\${data.teacher.workUnitName}
 				{@/if}
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 				{@if data.regType == "student"}
 				\${data.student.postName}
 				{@else}
-
+				\${data.teacher.postName}
 				{@/if}
 			</div>
 		</div>

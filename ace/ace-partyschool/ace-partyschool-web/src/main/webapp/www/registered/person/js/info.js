@@ -32,3 +32,28 @@ function renderPage(IDom, data, tempId) {
     });
     $("#" + IDom).html(html);
 }
+
+function exit(){
+    $.ajax({
+        url: contextPath+ "/www/sign/logout",
+        type:"post",
+        async:false,
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0) {
+               window.location.href = contextPath + '/www/login/index.jsp';
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}

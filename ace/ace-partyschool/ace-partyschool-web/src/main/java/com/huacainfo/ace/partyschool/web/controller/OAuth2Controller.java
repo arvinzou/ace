@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -65,7 +64,7 @@ public class OAuth2Controller extends BisBaseController {
         if (rst.getState()) {
             this.logger.info("==================={}  in session ======================", rst.getValue().getNickname());
 //        USERINFO   session setAttribute
-            sessionSet(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
+            setSessionAttr(CommonKeys.SESSION_USERINFO_KEY, rst.getValue());
 
             logger.debug("========================referer[state]: {}", state + "&sysId=partyschool");
             response.sendRedirect(state + "&sysId=partyschool");

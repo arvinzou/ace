@@ -136,4 +136,16 @@
         where cur_syid = #{sysId,jdbcType=VARCHAR}
         and account = #{account,jdbcType=VARCHAR}
     </update>
+
+    <update id="updatePwd" parameterType="java.lang.String">
+        update portal.users
+        set `password` = #{newPwd,jdbcType=CHAR}
+        where account = #{account,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateUsersStatus" parameterType="java.lang.String">
+        update portal.users
+        set stauts = #{status,jdbcType=CHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
 </mapper>

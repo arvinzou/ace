@@ -24,4 +24,10 @@ public interface SignDao {
     int bindUserWx(@Param("account") String account,
                    @Param("unionid") String unionid,
                    @Param("sysId") String sysId);
+
+    int updatePwd(@Param("account") String account,
+                  @Param("newPwd") String newPwd);
+
+    int updateUsersStatus(@Param("userId") String userId,
+                          @Param("status") String status);
 }

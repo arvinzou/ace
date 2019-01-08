@@ -12,21 +12,22 @@
 	<body>
 	<div class="index">
 		<div class="title">请选择您的身份</div>
-		<div class="identity">
-			<img src="img/student.png" id="student" onclick="changeIdentity('student');"/>
+		<div class="identity" onclick="changeIdentity('student');">
+			<img src="img/student.png" id="student"/>
+			<span class="unactive">我是学员</span>
 		</div>
-		<div class="identity">
-			<img src="img/teacher.png" id="teacher" onclick="changeIdentity('teacher');"/>
+		<div class="identity" onclick="changeIdentity('teacher');">
+			<img src="img/teacher.png" id="teacher" />
+			<span class="unactive">我是教职工</span>
 		</div>
 		<div class="footer" id="nextStep">
-			<img src="img/next.png" id="unactive"/>
-			<img src="img/next-active.png" onclick="nextStep();" style="display: none;" id="active"/>
+			<img src="img/next.png" onclick="nextStep();" style="display: none;" id="next"/>
 		</div>
 	</div>
 	</body>
 
-	<script type="text/javascript" src="../common/js/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="../common/js/init-rem.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
 </html>
