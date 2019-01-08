@@ -51,10 +51,6 @@ public class WSignController extends BisBaseController {
      */
     @RequestMapping("/sendMsgByMobile")
     public ResultResponse sendMsgByMobile(String mobile, String length) throws Exception {
-        //账号重复验证
-        if (signService.isExistByMobile(mobile)) {
-            return new ResultResponse(ResultCode.FAIL, "该手机号码已被注册");
-        }
         //四位随机码
         length = StringUtil.isEmpty(length) ? "4" : length;
         String randCode = CommonUtils.getIdentifyCode(Integer.valueOf(length), 0);
@@ -158,7 +154,6 @@ public class WSignController extends BisBaseController {
             userinfo = getUserInfo(uid);
         }
 
-        data.setCategory(StringUtil.isEmpty(data.getCategory()) ? "0" : data.getCategory());//默认值
         try {
             ResultResponse rs = signService.addNewTeacher(data, userinfo);
             return rs;

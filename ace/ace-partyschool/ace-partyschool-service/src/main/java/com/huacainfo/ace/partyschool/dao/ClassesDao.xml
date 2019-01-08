@@ -104,7 +104,8 @@
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        t.id, t.name, t.startDate, t.endDate, t.photoUrl, cr.name as classroom, c.name as headmaster, t.remark, t.status, t.createUserId,
+        t.id, t.name, t.startDate, t.endDate, t.photoUrl, cr.name as classroom, c.name as headmaster, t.remark,
+        t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         <include refid="From_Statement"/>
         LEFT JOIN classroom cr ON cr.id = t.classroom
@@ -139,4 +140,21 @@
         set status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+    <select id="findByQ" resultType="map">
+        SELECT
+        t.id ,
+        t.`name`,
+        ta.`name` as headmasterName
+        FROM classes t
+        left join teacher ta on t.headmaster = ta.id
+        WHERE 1=1
+        <if test="params.q !=null and params.q !=&quot;&quot;">
+            AND ( t.id = #{params.q,jdbcType=VARCHAR}
+            or t.`name` LIKE concat('%',#{params.q,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        ORDER BY t.createDate desc
+        limit 0, 10
+    </select>
 </mapper>

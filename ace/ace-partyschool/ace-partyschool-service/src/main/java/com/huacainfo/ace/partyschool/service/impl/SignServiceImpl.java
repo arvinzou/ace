@@ -217,6 +217,10 @@ public class SignServiceImpl implements SignService {
         if (!CommonUtils.getMd5(pwd).equals(syUser.getPassword())) {
             return new ResultResponse(ResultCode.FAIL, "密码不正确");
         }
+        if (syUser.getStauts().equals(ACCOUNT_INVALID)) {
+            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");
+        }
+
 
         return new ResultResponse(ResultCode.SUCCESS, "登录成功", syUser);
     }
@@ -264,6 +268,9 @@ public class SignServiceImpl implements SignService {
         if (users == null) {
             return new ResultResponse(ResultCode.FAIL, "该微信尚未绑定对应账户");
         }
+        if (users.getStauts().equals(ACCOUNT_INVALID)) {
+            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");
+        }
 
         return new ResultResponse(ResultCode.SUCCESS, "SUCCESS", users);
     }
@@ -283,6 +290,10 @@ public class SignServiceImpl implements SignService {
         if (StringUtil.isNotEmpty(users.getOpenId())) {
             return new ResultResponse(ResultCode.FAIL, "该账户已绑定过其他微信号");
         }
+        if (users.getStauts().equals(ACCOUNT_INVALID)) {
+            return new ResultResponse(ResultCode.FAIL, "账户已注销，请联系管理员");
+        }
+
 
         users.setOpenId(unionid);
         users.setAppOpenId(unionid);
@@ -330,18 +341,19 @@ public class SignServiceImpl implements SignService {
      * @return MessageResponse
      * @throws Exception
      */
-    private MessageResponse insertUsers(String regType,
-                                        String uid,
-                                        String openId,
-                                        String name,
-                                        String account,
-                                        String pwd,
-                                        String mobile,
-                                        String sex,
-                                        String sysId,
-                                        String deptId,
-                                        String roleId,
-                                        String acctStatus) throws Exception {
+    @Override
+    public MessageResponse insertUsers(String regType,
+                                       String uid,
+                                       String openId,
+                                       String name,
+                                       String account,
+                                       String pwd,
+                                       String mobile,
+                                       String sex,
+                                       String sysId,
+                                       String deptId,
+                                       String roleId,
+                                       String acctStatus) throws Exception {
         if (CommonUtils.isBlank(name)) {
             return new MessageResponse(ResultCode.FAIL, "名称不能为空！");
         }
@@ -374,6 +386,18 @@ public class SignServiceImpl implements SignService {
         return new MessageResponse(0, "注册成功");
     }
 
+    /**
+     * 修改账户状态
+     *
+     * @param userId userId
+     * @param status 状态值
+     * @return int
+     */
+    @Override
+    public int updateUsersStatus(String userId, String status) {
+        return signDao.updateUsersStatus(userId, status);
+    }
+
     private void sendRegSmsNotice(Users o, String nickname, String mobile, String pwd) throws Exception {
         TaskCmcc obj = new TaskCmcc();
         Map<String, Object> msg = new HashMap<>();
@@ -385,14 +409,14 @@ public class SignServiceImpl implements SignService {
         this.taskCmccService.insertTaskCmcc(obj);
     }
 
-    public Map<String, Object> getCarInfo(String CardCode)
-            throws Exception {
+    @Override
+    public Map<String, Object> getCarInfo(String cardCode) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
-        String year = CardCode.substring(6).substring(0, 4);// 得到年份
-        String yue = CardCode.substring(10).substring(0, 2);// 得到月份
+        String year = cardCode.substring(6).substring(0, 4);// 得到年份
+        String yue = cardCode.substring(10).substring(0, 2);// 得到月份
         // String day=CardCode.substring(12).substring(0,2);//得到日
         String sex;
-        if (Integer.parseInt(CardCode.substring(16).substring(0, 1)) % 2 == 0) {// 判断性别
+        if (Integer.parseInt(cardCode.substring(16).substring(0, 1)) % 2 == 0) {// 判断性别
             sex = "2";//"女"
         } else {
             sex = "1";//"男"

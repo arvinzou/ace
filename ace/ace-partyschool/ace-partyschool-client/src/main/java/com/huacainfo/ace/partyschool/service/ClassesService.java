@@ -5,8 +5,10 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Classes;
-import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
+import com.huacainfo.ace.partyschool.vo.ClassesVo;
+
+import java.util.Map;
 
 /**
  * @author: Arvin
@@ -84,4 +86,11 @@ public interface ClassesService {
      */
     MessageResponse deleteClassesByClassesId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 根据指定条件查询班级信息
+     *
+     * @param params params
+     * @return Map
+     */
+    Map<String, Object> findByQ(Map<String, Object> params);
 }

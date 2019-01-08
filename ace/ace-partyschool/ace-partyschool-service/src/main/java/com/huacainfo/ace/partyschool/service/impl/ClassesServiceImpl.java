@@ -19,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("classesService")
 /**
@@ -190,6 +192,22 @@ public class ClassesServiceImpl implements ClassesService {
         this.dataBaseLogService.log("删除班级管理", "班级管理", id, id,
                 "班级管理", userProp);
         return new MessageResponse(0, "班级管理删除完成！");
+    }
+
+    /**
+     * 根据指定条件查询班级信息
+     *
+     * @param params params
+     * @return Map
+     */
+    @Override
+    public Map<String, Object> findByQ(Map<String, Object> params) {
+        Map<String, Object> rst = new HashMap<>();
+        List<Map<String, String>> list = classesDao.findByQ(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+
+        return rst;
     }
 
 }
