@@ -3,7 +3,7 @@ jQuery(function ($) {
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
-                var params = {};
+                // var params = {};
                 $.each(formData, function (n, obj) {
                     params[obj.name] = obj.value;
                 });
@@ -29,8 +29,8 @@ jQuery(function ($) {
                 form.closest('.ui-jqdialog')
                     .find('.ui-jqdialog-titlebar')
                     .wrapInner('<div class = "widget-header" / > ');
-
-                style_edit_form(form);
+                //ll
+                appendUploadBtn("photoUrl");
             }
         })
     });
@@ -99,6 +99,10 @@ function edit(rowid) {
                 .find('.ui-jqdialog-titlebar')
                 .wrapInner('<div class="widget-header" />');
 
+            appendUploadBtn("photoUrl");
+
+            //readOnly: true,
+            $("#mobile").attr("readOnly", true);
         }
     });
 }
@@ -116,8 +120,31 @@ function del(rowid) {
         }
     });
 }
-
+var params = {};
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+}
+
+function recover(rowid) {
+    if (confirm("确认恢复么？")) {
+        startLoad();
+        $.ajax({
+            url: cfg.grid_recover_url,
+            type: "post",
+            async: false,
+            data: {
+                id: rowid
+            },
+            success: function (result) {
+                stopLoad();
+                alert(result.errorMessage);
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
 }

@@ -1,6 +1,8 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -8,12 +10,16 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.constant.CommConstant;
 import com.huacainfo.ace.partyschool.dao.TeacherDao;
 import com.huacainfo.ace.partyschool.model.Teacher;
+import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.service.TeacherService;
 import com.huacainfo.ace.partyschool.vo.TeacherQVo;
 import com.huacainfo.ace.partyschool.vo.TeacherVo;
+import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.portal.service.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +40,10 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherDao teacherDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SignService signService;
+    @Autowired
+    private UsersService usersService;
 
     /**
      * @throws
@@ -90,6 +100,8 @@ public class TeacherServiceImpl implements TeacherService {
             return new MessageResponse(1, "教职工身份证号码重复");
         }
 
+        o.setCategory(StringUtil.isEmpty(o.getCategory()) ? "1" : o.getCategory());//默认值
+
         String tid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(tid);
         o.setCreateDate(new Date());
@@ -119,9 +131,6 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
-        if (CommonUtils.isBlank(o.getCategory())) {
-            return new MessageResponse(1, "类别不能为空！");
-        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "姓名不能为空！");
         }
@@ -131,17 +140,28 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getIdCard())) {
             return new MessageResponse(1, "身份证不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
+        int i = teacherDao.isExistOtherIdCard(o.getId(), o.getIdCard());
+        if (i > 0) {
+            return new MessageResponse(1, "身份证号不能重复！");
         }
 
-
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
-        this.teacherDao.updateByPrimaryKey(o);
-        this.dataBaseLogService.log("变更教职工管理", "教职工管理", "",
-                o.getId(), o.getId(), userProp);
+        //
+        Teacher oldData = teacherDao.selectByPrimaryKey(o.getId());
+        if (oldData == null) {
+            return new MessageResponse(1, "数据丢失！");
+        }
+        oldData.setName(o.getName());
+        oldData.setIdCard(o.getIdCard());
+        oldData.setWorkUnitName(o.getWorkUnitName());
+        oldData.setPostName(o.getPostName());
+        oldData.setIntroduce(o.getIntroduce());
+        oldData.setPhotoUrl(o.getPhotoUrl());
+        oldData.setRemark(o.getRemark());
+        oldData.setLastModifyDate(new Date());
+        oldData.setLastModifyUserName(userProp.getName());
+        oldData.setLastModifyUserId(userProp.getUserId());
+        teacherDao.updateByPrimaryKey(oldData);
+        this.dataBaseLogService.log("变更教职工管理", "教职工管理", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更成功！");
     }
@@ -175,12 +195,20 @@ public class TeacherServiceImpl implements TeacherService {
      * @version: 2019-01-02
      */
     @Override
-    public MessageResponse deleteTeacherByTeacherId(String id, UserProp userProp) throws
-            Exception {
-        this.teacherDao.deleteByPrimaryKey(id);
-        this.dataBaseLogService.log("删除教职工管理", "教职工管理", id, id,
-                "教职工管理", userProp);
-        return new MessageResponse(0, "教职工删除完成！");
+    public MessageResponse deleteTeacherByTeacherId(String id, UserProp userProp) throws Exception {
+
+        Teacher obj = teacherDao.selectByPrimaryKey(id);
+        Users users = usersService.selectUsersByPrimaryKey(id).getValue();
+        if (null == obj || null == users) {
+            return new MessageResponse(ResultCode.FAIL, "数据丢失！");
+        }
+        //注销账户
+        users.setStauts(SignServiceImpl.ACCOUNT_INVALID);
+        int i = signService.updateUsersStatus(id, SignServiceImpl.ACCOUNT_INVALID);
+        //注销学员信息
+        teacherDao.updateStatus(id, "0");//已注销
+        dataBaseLogService.log("注销教职工", "注销教职工", id, id, "教职工管理", userProp);
+        return new MessageResponse(0, "注销成功！");
     }
 
     /**
@@ -194,6 +222,67 @@ public class TeacherServiceImpl implements TeacherService {
         int i = teacherDao.isExistByIdCard(idCard);
 
         return i > 0;
+    }
+
+    /**
+     * 新增教职工
+     *
+     * @param data     Teacher
+     * @param userProp userProp
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse addTeacher(Teacher data, UserProp userProp) throws Exception {
+        String uid = GUIDUtil.getGUID();
+        //主键
+        data.setId(uid);
+
+        //注册portal.users
+        String regType = CommConstant.STUDENT;
+        String openId = "";
+        String name = data.getName();
+        String account = data.getMobile();
+        String pwd = "123456";
+        String mobile = data.getMobile();
+        String sex = String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
+        String sysId = "partyschool";
+        String deptId = "0004";
+        String roleId = "9f8f9043-73e1-4438-bf8a-ef681431df74";
+        ;//select * from portal.role t where t.syid='partyschool'
+        MessageResponse ms2 = signService.insertUsers(regType, uid, openId, name, account, pwd,
+                mobile, sex, sysId, deptId, roleId, SignServiceImpl.ACCOUNT_VALID);
+        if (ResultCode.FAIL == ms2.getStatus()) {
+            return ms2;
+        }
+
+        MessageResponse ms = insertTeacher(data, userProp);
+        if (ResultCode.FAIL == ms.getStatus()) {
+            throw new CustomException(ms.getErrorMessage());
+        }
+
+        return ms;
+    }
+
+    /**
+     * 账户恢复
+     *
+     * @param id       did
+     * @param userProp userProp
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse recover(String id, UserProp userProp) throws Exception {
+        Teacher obj = teacherDao.selectByPrimaryKey(id);
+        Users users = usersService.selectUsersByPrimaryKey(id).getValue();
+        if (null == obj || null == users) {
+            return new MessageResponse(ResultCode.FAIL, "数据丢失！");
+        }
+        //注销账户
+        int i = signService.updateUsersStatus(id, SignServiceImpl.ACCOUNT_VALID);
+        //注销学员信息
+        teacherDao.updateStatus(id, SignServiceImpl.ACCOUNT_VALID);//已注销
+
+        return new MessageResponse(0, "账户恢复成功！");
     }
 
 

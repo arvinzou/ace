@@ -27,4 +27,7 @@ public interface SignDao {
 
     int updatePwd(@Param("account") String account,
                   @Param("newPwd") String newPwd);
+
+    int updateUsersStatus(@Param("userId") String userId,
+                          @Param("status") String status);
 }

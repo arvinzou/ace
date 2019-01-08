@@ -2,6 +2,8 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
@@ -72,7 +74,12 @@ public class TeacherController extends BisBaseController {
     @ResponseBody
     public MessageResponse insertTeacher(String jsons) throws Exception {
         Teacher obj = JSON.parseObject(jsons, Teacher.class);
-        return this.teacherService.insertTeacher(obj, this.getCurUserProp());
+
+        try {
+            return teacherService.addTeacher(obj, this.getCurUserProp());
+        } catch (CustomException e) {
+            return new MessageResponse(ResultCode.FAIL, e.getMsg());
+        }
     }
 
     /**
@@ -126,5 +133,17 @@ public class TeacherController extends BisBaseController {
         return this.teacherService.deleteTeacherByTeacherId(id, this.getCurUserProp());
     }
 
+    /**
+     * 账户恢复
+     *
+     * @param id did
+     * @return MessageResponse
+     */
+    @RequestMapping(value = "/recover")
+    @ResponseBody
+    public MessageResponse recover(String id) throws Exception {
+
+        return this.teacherService.recover(id, this.getCurUserProp());
+    }
 
 }

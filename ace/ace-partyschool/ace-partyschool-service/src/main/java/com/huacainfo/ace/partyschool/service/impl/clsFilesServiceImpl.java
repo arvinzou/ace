@@ -4,11 +4,14 @@ package com.huacainfo.ace.partyschool.service.impl;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.FilesDao;
+import com.huacainfo.ace.partyschool.dao.SignDao;
 import com.huacainfo.ace.partyschool.model.Files;
 import com.huacainfo.ace.partyschool.service.clsFilesService;
+import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
 import com.huacainfo.ace.partyschool.vo.FilesVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -31,6 +34,8 @@ public class clsFilesServiceImpl implements clsFilesService {
     private FilesDao filesDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SignDao signDao;
 
     /**
      * @throws
@@ -47,14 +52,10 @@ public class clsFilesServiceImpl implements clsFilesService {
      * @version: 2019-01-04
      */
     @Override
-    public PageResult
-            <FilesVo> findFilesList(FilesQVo condition, int start,
-                                    int limit, String orderBy) throws Exception {
-        PageResult
-                <FilesVo> rst = new PageResult<>();
-        List
-                <FilesVo> list = this.filesDao.findList(condition,
-                start, limit, orderBy);
+    public PageResult<FilesVo> findFilesList(FilesQVo condition, int start,
+                                             int limit, String orderBy) throws Exception {
+        PageResult<FilesVo> rst = new PageResult<>();
+        List<FilesVo> list = this.filesDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.filesDao.findCount(condition);
@@ -63,6 +64,19 @@ public class clsFilesServiceImpl implements clsFilesService {
         return rst;
     }
 
+    @Override
+    public ResultResponse findFilesListVo(FilesQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception {
+        PageResult<FilesVo> rst = new PageResult<>();
+        AccountVo accountVo = signDao.findByAcct(userProp.getUserId());
+        if ("teacher".equals(accountVo.getRegType())) {
+            List<FilesVo> list = this.filesDao.findTeacherFileList(condition, start, limit, orderBy);
+        } else if ("student".equals(accountVo.getRegType())) {
+            List<FilesVo> list = this.filesDao.findStudentFileList(condition, start, limit, orderBy);
+        } else {
+            return new ResultResponse();
+        }
+        return new ResultResponse();
+    }
     /**
      * @throws
      * @Title:insertFiles
@@ -83,6 +97,7 @@ public class clsFilesServiceImpl implements clsFilesService {
             return new MessageResponse(1, "班级文件名称重复！");
         }
 
+        o.setPublisher(userProp.getName());
         o.setId(GUIDUtil.getGUID());
         o.setStatus("1");
         this.filesDao.insert(o);

@@ -20,7 +20,9 @@ public class Student extends BaseModel {
     private String mobile;
 
     private String idCard;
-
+    /**
+     * normal-普通学员 party -党员
+     */
     private String political;
 
     private String workUnitName;

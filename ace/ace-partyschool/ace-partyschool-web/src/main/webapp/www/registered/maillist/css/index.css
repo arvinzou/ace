@@ -1,0 +1,151 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: #F8F9F9;
+}
+ul,li{
+	list-style: none;
+}
+.index{
+	width: 100%;
+	height: 100%;
+}
+.search{
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+	height: 1.88rem;
+}
+.serach-input{
+	width: 100%;
+	height: 1.066666rem;
+	border-radius: 0.133333rem;
+	border: none;
+	outline: none;
+	background: #F5F6F7;
+	position: relative;
+}
+.icon-search{
+	width: 0.4rem;
+	height: 0.4rem;
+	position: relative;
+    bottom: 1.3rem;
+    left: 4rem;
+}
+.search-title{
+	font-size: 0.346666rem;
+	color: #ABAEB9;
+	padding-left: 0.266666rem;
+	position: relative;
+    bottom: 1.4rem;
+    left: 3.6rem;
+}
+.box{
+	width: 100%;
+	height: auto;
+	background: #FFFFFF;
+	margin-bottom: 0.266666rem;	
+}
+.list{
+	width: 100%;
+	height: auto;
+}
+.row{
+	width: auto;
+	height: 1.6rem;
+}
+.row{
+	content: '';
+	clear: both;
+	display: block;
+}
+.rb{
+	border: 1px solid #F8F9F9;
+}
+.title01{
+	width: 82%;
+	height: 100%;
+	line-height: 1.6rem;
+	float: left;
+	font-size: 0.506666rem;
+	font-weight: bold;
+	color: #373F53;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	padding-left: 4%;
+	padding-right: 4%;
+}
+.title02{
+	width: 82%;
+	height: 100%;
+	line-height: 1.6rem;
+	float: left;
+	font-size: 0.453333rem;
+	color: #373F53;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	padding-left: 4%;
+	padding-right: 4%;
+}
+.option{
+	width: 4%;
+	height: 100%;
+	float: left;
+	text-align: right;
+	padding-right: 4%;
+}
+.icon-down{
+	width: 0.346666rem;
+	height: 0.2rem;
+}
+.icon-up{
+	width: 0.2rem;
+	height: 0.346666rem;
+}
+.header{
+	width: 1.066666rem;
+	height: 1.066666rem;
+	border-radius: 0.533333rem;
+	float: left;
+	margin-top: 0.266666rem;
+	margin-right: 0.266666rem;
+}
+.username{
+	width: auto;
+	height: auto;
+	display: block;
+	line-height: 1.6rem;
+	float: left;
+	font-size: 0.453333rem;
+	color: #373F53;
+}
+.mobile{
+	font-size: 0.453333rem;
+	color: #ABAEB9;
+	float: right;
+}
+.item-left{
+	width: 56%;
+	height: 100%;
+	padding-left: 4%;
+	float: left;
+	text-align: left;
+}
+.item-right{
+	width: 36%;
+	height: 100%;
+	line-height: 1.6rem;
+	text-align: right;
+	padding-right: 4%;
+	float: left;
+}
+.title{
+	height: 1.213333rem;
+	line-height: 1.213333rem;
+	padding-left: 4%;
+	color: #ABAEB9;
+	font-size: 0.4rem;
+}
