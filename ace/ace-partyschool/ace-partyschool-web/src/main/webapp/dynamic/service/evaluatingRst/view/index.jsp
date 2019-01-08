@@ -15,8 +15,6 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
-    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -30,7 +28,9 @@
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
+                        <select style="width: 200px"
+                                class="form-control js-example-basic-single js-example-basic-single2"
+                                name="teacherId"></select>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
                         <input type="text"
@@ -52,13 +52,18 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12" id="echartMain" style="height:300px;">
+
+            </div>
+        </div>
         <div class="table-scrollable">
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th width="10%"> 课程</th>
-                    <th width="10%"> 班级</th>
-                    <th width="10%"> 老师</th>
+                    <th width="10%"> 评价</th>
+                    <th width="10%"> 学生</th>
                     <th width="10%"> 日期</th>
                     <th width="15%">操作</th>
                 </tr>
@@ -87,9 +92,9 @@
     {@each data as item, index}
     <tr>
         <td> \${item.course.name}</td>
-        <td> \${item.classesId}</td>
-        <td> \${item.teacher.name}</td>
-        <td> \${item.courseDate}</td>
+        <td> \${item.evaluationRstContent.content}</td>
+        <td> \${item.student.name}</td>
+        <td> \${item.createDate}</td>
         <td>
             <a href="javascript:view('\${item.id}');">查看</a>
         </td>
@@ -97,7 +102,6 @@
     {@/each}
 </script>
 ﻿
-
 
 
 <!--审核弹框-->
@@ -251,6 +255,6 @@
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/common/js/echarts.min.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/select2/js/select2.js"></script>
 </html>

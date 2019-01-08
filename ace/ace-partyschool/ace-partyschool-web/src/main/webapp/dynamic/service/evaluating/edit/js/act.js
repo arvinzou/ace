@@ -24,6 +24,7 @@ function addOption() {
     temp = temp.replace('#index#', index);
     temp = temp.replace('#index#', index);
     temp = temp.replace('#index#', index);
+    temp = temp.replace('#index#', index);
     var $p = $(temp);
     $('#evaluatingRst').append($p);
 }
@@ -31,23 +32,33 @@ function addOption() {
 
 var optionTemp = '<div class="form-group">\n' +
     '                            <label class="col-md-2 control-label">\n' +
-    '                                内容\n' +
+    '                                评测指标\n' +
     '                                <span class="required" aria-required="true"> * </span>\n' +
     '                            </label>\n' +
     '                            <div class="col-md-10">\n' +
     '                                <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
     '                                       maxlength="10"\n' +
-    '                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">\n' +
+    '                                       placeholder="请输入评测指标（建议字数在6个字以内)">\n' +
     '                                <span class="help-block"></span>\n' +
     '                            </div>\n' +
     '                            <label class="col-md-2 control-label">\n' +
-    '                                分值\n' +
+    '                                指标内容\n' +
+    '                                <span class="required" aria-required="true"> * </span>\n' +
+    '                            </label>\n' +
+    '                            <div class="col-md-10">\n' +
+    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].introduce"\n' +
+    '                                       maxlength="10"\n' +
+    '                                       placeholder="请输入评测内容（建议字数在30个字以内)">\n' +
+    '                                <span class="help-block"></span>\n' +
+    '                            </div>\n' +
+    '                            <label class="col-md-2 control-label">\n' +
+    '                                指标分值\n' +
     '                                <span class="required" aria-required="true"> * </span>\n' +
     '                            </label>\n' +
     '                            <div class="col-md-6">\n' +
     '                                <input type="text" class="form-control" name="evaluationIndex[#index#].score"\n' +
     '                                       maxlength="10"\n' +
-    '                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">\n' +
+    '                                       placeholder="请输入评测分值(填写数字)">\n' +
     '                                <span class="help-block"></span>\n' +
     '                            </div>\n' +
     '                            <button type="button" class="btn btn-success removeOption removeOption#index# col-md-1">删除</button>' +
