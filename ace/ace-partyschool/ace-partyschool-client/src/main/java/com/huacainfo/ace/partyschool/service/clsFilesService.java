@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Files;
 import com.huacainfo.ace.partyschool.vo.FilesVo;
@@ -28,9 +29,10 @@ public interface clsFilesService {
      * @author: Arvin
      * @version: 2019-01-04
      */
-    PageResult
-            <FilesVo> findFilesList(FilesQVo condition,
-                                    int start, int limit, String orderBy) throws Exception;
+    PageResult<FilesVo> findFilesList(FilesQVo condition, int start, int limit, String orderBy) throws Exception;
+
+    ResultResponse findFilesListVo(FilesQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception;
+
 
     /**
      * @throws
