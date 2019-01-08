@@ -106,3 +106,13 @@ input:-ms-input-placeholder{
 	height: 1.173333rem;
 	margin: 0 auto;
 }
+.pwd{
+	position: relative;
+}
+.forget{
+	width: 0.453333rem;
+	height: 0.453333rem;
+	position: absolute;
+	top: 0.8rem;
+	right: 0.226rem;
+}

@@ -53,3 +53,7 @@ function checkLogin(){
         $("#login").show();
     }
 }
+
+function resetPwd(){
+    window.location.href = contextPath + "/www/reset/index.jsp";
+}

@@ -20,8 +20,9 @@
 				<div class="form-row">
 					<input class="login-input" name="username" type="text" placeholder="请输入手机号码" onblur="checkLogin();"/>
 				</div>
-				<div class="form-row">
-					<input class="login-input" name="password" type="password" placeholder="请输入密码" onblur="checkLogin();"/>
+				<div class="form-row pwd">
+					<input  class="login-input" name="password" type="password" placeholder="请输入密码" onblur="checkLogin();"/>
+					<img src="img/fpwd.png" class="forget" onclick="resetPwd();">
 				</div>
 			</div>
 			<div class="login-btn">
