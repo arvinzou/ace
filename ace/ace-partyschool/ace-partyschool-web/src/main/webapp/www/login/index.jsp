@@ -27,7 +27,7 @@
 			</div>
 			<div class="login-btn">
 				<img src="img/login.png" class="login-image" id="login"/>
-                <img src="img/login-active.png" class="login-image" onclick="login();" style="display: none;" id="loginActive"/>
+                <img src="img/login-active.png"  class="login-image"  style="display: none;" id="loginActive"/>
 			</div>
 			<div class="regist-box"><a href="${pageContext.request.contextPath}/www/sign/index.jsp" class="regist">立即注册</a></div>
 		</div>

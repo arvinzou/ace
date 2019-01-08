@@ -48,6 +48,7 @@ function checkLogin(){
     if(acct != undefined && acct!="" && pwd!=undefined && pwd != ""){
         $("#loginActive").show();
         $("#login").hide();
+        $("#loginActive").click(login);
     }else{
         $("#loginActive").hide();
         $("#login").show();
