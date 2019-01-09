@@ -114,7 +114,7 @@ public class SignServiceImpl implements SignService {
         String deptId = "0004";
         String roleId = "ede24712-e13c-47d5-8cab-fd54589e3fe1";//select * from portal.role t where t.syid='partyschool'
         MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd,
-                mobile, sex, sysId, deptId, roleId, ACCOUNT_VALID);
+                mobile, sex, sysId, deptId, roleId, ACCOUNT_INVALID);
         if (ResultCode.FAIL == ms2.getStatus()) {
             return new ResultResponse(ms2);
         }

@@ -1,5 +1,14 @@
 jQuery(function ($) {
-    //查询
+
+    //批量导入
+    $('#btn-view-import').on('click', function () {
+        //重设上传组件
+        reset_uploader({id: "123"});
+        //加载导入
+        $('#modal-import').modal('show');
+    });
+
+//查询
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
@@ -18,7 +27,7 @@ jQuery(function ($) {
             }
         });
     });
-    //添加
+//添加
     $('#btn-view-add').on('click', function () {
         jQuery(cfg.grid_selector).jqGrid('editGridRow', 'new', {
             closeAfterAdd: true,
@@ -28,14 +37,14 @@ jQuery(function ($) {
                 var form = $(e[0]);
                 form.closest('.ui-jqdialog')
                     .find('.ui-jqdialog-titlebar')
-                    .wrapInner('<div class = "widget-header" / > ');
-                //ll
-                appendUploadBtn("photoUrl");
+                    .wrapInner('<div  class = "widget-header" / > ');
+
+                //
             }
         })
     });
 
-    //初始化事件
+//初始化事件
     initEvents();
     //
     initJuicerMethod();
@@ -99,82 +108,37 @@ function edit(rowid) {
             var form = $(e[0]);
             form.closest('.ui-jqdialog')
                 .find('.ui-jqdialog-titlebar')
-                .wrapInner('<div class="widget-header" />');
+                .wrapInner('<div class = "widget-header" / > ');
 
-            appendUploadBtn("photoUrl");
-
-            //readOnly: true,
-            $("#mobile").attr("readOnly", true);
         }
     });
 }
 
 var show = false;
 function del(rowid) {
-    // jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
-    //     beforeShowForm: function (e) {
-    //         var form = $(e[0]);
-    //         if (!show) {
-    //             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
-    //         }
-    //         show = true;
-    //     }
-    // });
-
-    if (confirm("确认注销么？")) {
-        var jsons = {id: rowid};
-        startLoad();
-        $.ajax({
-            url: cfg.grid_delete_data_url,
-            type: "post",
-            async: false,
-            data: {
-                jsons: JSON.stringify(jsons),
-            },
-            success: function (result) {
-                stopLoad();
-                alert(result.errorMessage);
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起出错了！");
+    console.log(rowid);
+    jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
+        beforeShowForm: function (e) {
+            var form = $(e[0]);
+            if (!show) {
+                form.closest('.ui-jqdialog')
+                    .find('.ui-jqdialog-titlebar')
+                    .wrapInner('<div class = "widget-header" / > ');
             }
-        });
-    }
+            show = true;
+        }
+    });
 }
+
 var params = {};
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }
 
-function recover(rowid) {
-    if (confirm("确认恢复么？")) {
-        startLoad();
-        $.ajax({
-            url: cfg.grid_recover_url,
-            type: "post",
-            async: false,
-            data: {
-                id: rowid
-            },
-            success: function (result) {
-                stopLoad();
-                alert(result.errorMessage);
-                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
-            },
-            error: function () {
-                stopLoad();
-                alert("对不起出错了！");
-            }
-        });
-    }
-}
-
 //juicer自定义函数
 function initJuicerMethod() {
-    juicer.register('parseStatus', parseStatus);
+    juicer.register('parseRegType', parseRegType);
 }
 
 /**
@@ -182,13 +146,13 @@ function initJuicerMethod() {
  * 0-已注销
  * 1-有效
  */
-function parseStatus(status) {
-    switch (status) {
-        case '0':
-            return "已注销";
-        case '1':
-            return "有效";
+function parseRegType(val) {
+    switch (val) {
+        case 'student':
+            return "学员";
+        case 'teacher':
+            return "教职工";
         default:
-            return "有效";
+            return "学员";
     }
 }
