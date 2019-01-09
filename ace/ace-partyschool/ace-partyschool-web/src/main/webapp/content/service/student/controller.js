@@ -2,6 +2,7 @@ jQuery(function ($) {
     //清空查询条件
     $('#btn-clear').on('click', function () {
         $('.form-control').val('');
+        $('.combo-value').val('');
     });
     //查询
     $('#btn-search').on('click', function () {
@@ -72,18 +73,17 @@ function initEvents() {
         console.log(relatedTarget);
         initPreview(id);
     });
-
-    //班级数筛选列表
-    $('#combogrid-cls-list').combogrid({
-        panelWidth: 460,
+    //查询筛选列表
+    $('#cls-condition').combogrid({
+        panelWidth: 300,
         idField: 'id',
         textField: 'name',
         url: contextPath + '/classes/findClassesList',
         mode: 'remote',
         fitColumns: false,
         method: 'get', columns: [[
-            {field: 'name', title: '班级名称', width: 150, align: 'right'},
-            {field: 'headermasterName', title: '班主任', width: 150, align: 'right'}
+            {field: 'name', title: '班级名称', width: 100, align: 'right'},
+            {field: 'headmasterName', title: '班主任', width: 100, align: 'right'}
         ]],
         keyHandler: {
             up: function () {
@@ -100,7 +100,38 @@ function initEvents() {
             }
         },
         onSelect: function (index, row) {
-            selectClasses(false);
+        }
+    });
+
+    //班级数筛选列表
+    // $('.easyui-combogrid').combogrid({
+    $('#combogrid-cls-list').combogrid({
+        panelWidth: 460,
+        idField: 'id',
+        textField: 'name',
+        url: contextPath + '/classes/findClassesList',
+        mode: 'remote',
+        fitColumns: false,
+        method: 'get', columns: [[
+            {field: 'name', title: '班级名称', width: 150, align: 'right'},
+            {field: 'headmasterName', title: '班主任', width: 150, align: 'right'}
+        ]],
+        keyHandler: {
+            up: function () {
+            },
+
+            down: function () {
+            },
+
+            enter: function () {
+            },
+            query: function (q) {
+                $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
+                $('#combogrid-cls-list').combogrid("setValue", q);
+            }
+        },
+        onSelect: function (index, row) {
+
         }
     });
 }
@@ -151,18 +182,39 @@ function edit(rowid) {
 
 var show = false;
 function del(rowid) {
-    console.log(rowid);
-    jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
-        beforeShowForm: function (e) {
-            var form = $(e[0]);
-            if (!show) {
-                form.closest('.ui-jqdialog')
-                    .find('.ui-jqdialog-titlebar')
-                    .wrapInner('<div class = "widget-header" / > ');
+    // jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
+    //     beforeShowForm: function (e) {
+    //         var form = $(e[0]);
+    //         if (!show) {
+    //             form.closest('.ui-jqdialog')
+    //                 .find('.ui-jqdialog-titlebar')
+    //                 .wrapInner('<div class = "widget-header" / > ');
+    //         }
+    //         show = true;
+    //     }
+    // });
+
+    if (confirm("确认注销么？")) {
+        var jsons = {id: rowid};
+        startLoad();
+        $.ajax({
+            url: cfg.grid_delete_data_url,
+            type: "post",
+            async: false,
+            data: {
+                jsons: JSON.stringify(jsons),
+            },
+            success: function (result) {
+                stopLoad();
+                alert(result.errorMessage);
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
             }
-            show = true;
-        }
-    });
+        });
+    }
 }
 var params = {};
 function setParams(key, value) {
