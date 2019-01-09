@@ -93,59 +93,79 @@ pageEncoding="utf-8"%>
         </div>
     </div>
 </div>
+
+<div class="modal fade" role="dialog" id="modal-preview-gps">
+    <div class="modal-dialog" role="document" style="width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body" id="fm-preview-gps">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
 
 
 
-        <div class="portlet light ">
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="btn-group">
-                                <button id="btn-add" class="btn sbold green" onclick="importXls('\${data.o.id}')">添加
+    <div class="portlet light ">
+        <div class="portlet-body">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+                            <button id="btn-add" class="btn sbold green" onclick="importXls('\${data.o.id}')">添加
 
-                                </button>
-                            </div>
+                            </button>
                         </div>
-                        <div class="col-md-6">
-                            <div class="btn-group pull-right">
-                                <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">操作
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="javascript:delTable('\${data.o.id}');">
-                                            <i class="fa fa-del"></i> 删除 </a>
-                                    </li>
-                                </ul>
-                            </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="btn-group pull-right">
+                            <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">操作
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:delTable('\${data.o.id}');">
+                                        <i class="fa fa-del"></i> 删除 </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
-        <table class="table table-striped table-bordered table-hover table-checkable order-column" id="list1">
-            <thead>
-            <tr>
-                <th width="5%">
-                    <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                        <input type="checkbox" class="group-checkable" data-set="#list1 .checkboxes" />
-                        <span></span>
-                    </label>
-                </th>
-                <th width="25%">路段名称</th>
-                <th width="10%">县区</th>
-                <th width="10%">路段开始</th>
-                <th width="10%">路段截止</th>
-                <th width="10%">标号开始</th>
-                <th width="10%">标号截止</th>
-                <th width="10%">路长</th>
-                <th width="10%">操作</th>
-            </tr>
-            </thead>
-            <tbody>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="list1">
+                <thead>
+                <tr>
+                    <th width="5%">
+                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                            <input type="checkbox" class="group-checkable" data-set="#list1 .checkboxes" />
+                            <span></span>
+                        </label>
+                    </th>
+                    <th width="25%">路段名称</th>
+                    <th width="10%">县区</th>
+                    <th width="10%">路段开始</th>
+                    <th width="10%">路段截止</th>
+                    <th width="10%">标号开始</th>
+                    <th width="10%">标号截止</th>
+                    <th width="10%">路长</th>
+                    <th width="10%">操作</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            {@each data.o.list as item, index}
+                {@each data.o.list as item, index}
                 <tr>
                     <td>
                         <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
@@ -160,18 +180,88 @@ pageEncoding="utf-8"%>
                     <td>\${item.startNo}</td>
                     <td>\${item.endNo}</td>
                     <td>\${item.roadManName}</td>
-                    <td>GPS</td>
+                    <td><a href="javascript:previewGPS('\${item.id}')">GPS</a></td>
                 </tr>
-            {@/each}
+                {@/each}
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
         </div>
     </div>
 
 
 </script>
 
+<script id="tpl-preview-gps" type="text/template">
+
+
+
+    <div class="portlet light ">
+        <div class="portlet-body">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="btn-group">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="btn-group pull-right">
+                            <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">操作
+                                <i class="fa fa-angle-down"></i>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:delTableGps('\${data.id}');">
+                                        <i class="fa fa-del"></i> 删除 </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-checkable order-column" id="list2">
+                <thead>
+                <tr>
+                    <th width="5%">
+                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                            <input type="checkbox" class="group-checkable" data-set="#list2 .checkboxes" />
+                            <span></span>
+                        </label>
+                    </th>
+                    <th width="25%">纬度</th>
+                    <th width="25%">经度</th>
+                    <th width="25%">采集人</th>
+                    <th width="25%">采集时间</th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {@each data.o as item, index}
+                <tr>
+                    <td>
+                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                            <input type="checkbox" class="checkboxes" value="\${item.id}" />
+                            <span></span>
+                        </label>
+                    </td>
+                    <td>\${item.latitude}</td>
+                    <td>\${item.longitude}</td>
+                    <td>\${item.createUserName}</td>
+                    <td>\${item.createDate}</td>
+
+
+                </tr>
+                {@/each}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</script>
 
 <script id="tpl-check-group" type="text/template">
 

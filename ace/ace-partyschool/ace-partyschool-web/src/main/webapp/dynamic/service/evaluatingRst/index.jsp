@@ -15,6 +15,8 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -23,32 +25,18 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
-            </div>
-
+            <div class="col-md-3"></div>
             <div class="col-md-9">
 
                 <form onsubmit="return t_query()">
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
+                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
+                        <input type="text"
+                               name="keyword"
+                               class="form-control"
+                               placeholder="请输入直播名称">
                     </div>
                     <div class="input-group">
                         <input type="text"
@@ -63,20 +51,15 @@
                     </div>
                 </form>
             </div>
-
         </div>
-
-
         <div class="table-scrollable">
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th width="10%"> 主键</th>
-                    <th width="10%"> 班级</th>
-                    <th width="10%"> 日期</th>
-                    <th width="10%"> 课节am:上午 pm:下午</th>
-                    <th width="10%"> 老师</th>
                     <th width="10%"> 课程</th>
+                    <th width="10%"> 班级</th>
+                    <th width="10%"> 老师</th>
+                    <th width="10%"> 日期</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
@@ -103,91 +86,18 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-        <td> \&{item.id}</td>
-        <td> \&{item.classesId}</td>
-        <td> \&{item.courseDate}</td>
-        <td> \&{item.courseIndex}</td>
-        <td> \&{item.teacherId}</td>
-        <td> \&{item.courseId}</td>
+        <td> \${item.course.name}</td>
+        <td> \${item.classesId}</td>
+        <td> \${item.teacher.name}</td>
+        <td> \${item.courseDate}</td>
         <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
-
-            <a href="javascript:del('\${item.id}');">删除</a>
-
+            <a href="javascript:view('\${item.id}');">查看</a>
         </td>
     </tr>
     {@/each}
 </script>
 ﻿
-<div class="modal fade " id="modal-status">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">设置状态</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
 
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <!--审核弹框-->
@@ -337,27 +247,10 @@
         </div>
     </div>
 </script>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 <script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/select2/js/select2.js"></script>
 </html>

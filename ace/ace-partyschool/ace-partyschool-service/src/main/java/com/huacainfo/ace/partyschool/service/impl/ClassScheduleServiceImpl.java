@@ -5,6 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +26,8 @@ import com.huacainfo.ace.partyschool.service.ClassScheduleService;
 import com.huacainfo.ace.partyschool.vo.ClassScheduleVo;
 import com.huacainfo.ace.partyschool.vo.ClassScheduleQVo;
 
+import javax.xml.crypto.Data;
+
 @Service("classScheduleService")
 /**
  * @author: 王恩
@@ -34,6 +40,8 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
     private ClassScheduleDao classScheduleDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
     /**
      * @throws
@@ -50,18 +58,55 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
      * @version: 2019-01-06
      */
     @Override
-    public PageResult
-            <ClassScheduleVo> findClassScheduleList(ClassScheduleQVo condition, int start,
-                                                    int limit, String orderBy) throws Exception {
-        PageResult
-                <ClassScheduleVo> rst = new PageResult<>();
-        List
-                <ClassScheduleVo> list = this.classScheduleDao.findList(condition,
-                start, limit, orderBy);
+    public PageResult<ClassScheduleVo> findClassScheduleList(ClassScheduleQVo condition, int start,
+                                                             int limit, String orderBy) throws Exception {
+        PageResult<ClassScheduleVo> rst = new PageResult<>();
+        if (CommonUtils.isBlank(condition.getTimePoint())) {
+            condition.setTimePoint(new Date());
+        }
+        List<ClassScheduleVo> list = this.classScheduleDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.classScheduleDao.findCount(condition);
             rst.setTotal(allRows);
+        }
+        return rst;
+    }
+
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(课程表管理分页查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult
+     * <ClassScheduleVo>
+     * @author: 王恩
+     * @version: 2019-01-06
+     */
+    @Override
+    public PageResult<ClassScheduleVo> LearnedCourses(ClassScheduleQVo condition, int start, int limit, String orderBy) throws Exception {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        ClassScheduleDao dao = session.getMapper(ClassScheduleDao.class);
+        condition.setLearned("learned");
+        PageResult<ClassScheduleVo> rst = new PageResult<>();
+        try {
+            List<ClassScheduleVo> list = dao.LearnedCourses(condition, start, limit, orderBy);
+            rst.setRows(list);
+            if (start <= 1) {
+                int allRows = dao.findCount(condition);
+                rst.setTotal(allRows);
+            }
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
         }
         return rst;
     }

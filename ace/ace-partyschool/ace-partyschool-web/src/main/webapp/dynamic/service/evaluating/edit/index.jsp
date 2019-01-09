@@ -73,28 +73,36 @@
             </div>
         </div>
         <h4>评测选项内容</h4>
-        <div class="form-group">
-            <div class="col-md-3 col-md-offset-1">
-                <button type="button" class="btn btn-success addOption">添加</button>
-            </div>
-        </div>
         <div id="evaluatingRst">
             {@each data.evaluationIndexList as item, index}
             <div class="form-group">
                 <input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">
                 <label class="col-md-2 control-label">
-                    内容<span class="required" aria-required="true"> * </span>
+                    评测指标<span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" value="\${item.name}" name="evaluationIndex[\${index}].name" maxlength="10"
+                    <input type="text" class="form-control" value="\${item.name}" name="evaluationIndex[\${index}].name"
+                           maxlength="10"
                            placeholder="">
                     <span class="help-block"></span>
                 </div>
+
                 <label class="col-md-2 control-label">
-                    分值<span class="required" aria-required="true"> * </span>
+                    指标内容
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-10">
+                    <input type="text" value="\${item.introduce}" class="form-control"
+                           name="evaluationIndex[\${index}].introduce"
+                           maxlength="40">
+                    <span class="help-block"></span>
+                </div>
+                <label class="col-md-2 control-label">
+                    指标分值<span class="required" aria-required="true"> * </span>
                 </label>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" value="\${item.score}" name="evaluationIndex[\${index}].score" maxlength="10" placeholder="">
+                    <input type="text" class="form-control" value="\${item.score}"
+                           name="evaluationIndex[\${index}].score" maxlength="10" placeholder="">
                     <span class="help-block"></span>
                 </div>
                 {@if index!=0}
@@ -102,6 +110,11 @@
                 {@/if}
             </div>
             {@/each}
+        </div>
+        <div class="form-group">
+            <div class="col-md-3 col-md-offset-1">
+                <button type="button" class="btn btn-success addOption">添加</button>
+            </div>
         </div>
     </div>
     <div class="form-actions">
