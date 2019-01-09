@@ -1,6 +1,5 @@
 $(function(){
     fileList();
-    $('#search').change(activeSearch);
 });
 
 function focusInput(){

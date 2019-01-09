@@ -12,7 +12,7 @@
 	<body>
 		<div class="index">
 			<div class="search">
-				<input class="serach-input" type="text" id="search" name="keyWord" onfocus="focusInput();" onblur="blurInput();"/>
+				<input class="serach-input" type="text" id="search" name="keyWord" onfocus="focusInput();" onblur="blurInput();" oninput="activeSearch();"/>
 				<img id="search-icon" src="img/icon_search.png" class="icon-search" onclick="searchIconClick();"/>
 				<span id="search-title" class="search-title" onclick="searchIconClick();">搜索</span>
 			</div>
