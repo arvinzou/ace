@@ -10,6 +10,7 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.FilesDao;
 import com.huacainfo.ace.partyschool.dao.SignDao;
 import com.huacainfo.ace.partyschool.model.Files;
+import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.service.clsFilesService;
 import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
@@ -20,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service("clsFilesService")
@@ -35,7 +38,7 @@ public class clsFilesServiceImpl implements clsFilesService {
     @Autowired
     private DataBaseLogService dataBaseLogService;
     @Autowired
-    private SignDao signDao;
+    private SignService signService;
 
     /**
      * @throws
@@ -66,16 +69,16 @@ public class clsFilesServiceImpl implements clsFilesService {
 
     @Override
     public ResultResponse findFilesListVo(FilesQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception {
-        PageResult<FilesVo> rst = new PageResult<>();
-        AccountVo accountVo = signDao.findByAcct(userProp.getUserId());
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        List<FilesVo> list;
         if ("teacher".equals(accountVo.getRegType())) {
-            List<FilesVo> list = this.filesDao.findTeacherFileList(condition, start, limit, orderBy);
+            list = this.filesDao.findTeacherFileList(condition, start, limit, orderBy);
         } else if ("student".equals(accountVo.getRegType())) {
-            List<FilesVo> list = this.filesDao.findStudentFileList(condition, start, limit, orderBy);
+            list = this.filesDao.findStudentFileList(condition, start, limit, orderBy);
         } else {
             return new ResultResponse();
         }
-        return new ResultResponse();
+        return new ResultResponse(0, "文件获取成功", list);
     }
     /**
      * @throws
@@ -97,6 +100,7 @@ public class clsFilesServiceImpl implements clsFilesService {
             return new MessageResponse(1, "班级文件名称重复！");
         }
 
+        o.setPushDate(new Date());
         o.setPublisher(userProp.getName());
         o.setId(GUIDUtil.getGUID());
         o.setStatus("1");
