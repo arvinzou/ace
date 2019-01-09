@@ -159,5 +159,5 @@ public interface $!{bean.name}Service {
                          * @author: $!{annotation.authorName}
                          * @version: $!{annotation.version}
                          */
-                        MessageResponse delete$!{bean.name}By$!{bean.name}s(String [] id, UserProp userProp) throws Exception;
+                       public MessageResponse delete$!{bean.name}By$!{bean.name}Ids(String [] id, UserProp userProp) throws Exception;
  }

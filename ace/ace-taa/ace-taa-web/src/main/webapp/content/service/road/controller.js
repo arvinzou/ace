@@ -80,7 +80,7 @@ jQuery(function($) {
 						var data = {};
 						data['o'] = result.value;
 						render('#fm-preview', data, 'tpl-preview');
-						initTable();
+						initTable($('#list1'));
 					} else {
 						alert(result.errorMessage);
 					}
@@ -139,8 +139,8 @@ jQuery(function($) {
 
 
 
-function initTable(){
-        var table = $('#list1');
+function initTable(table){
+
 
         // begin first table
         table.dataTable({
@@ -257,3 +257,69 @@ function delByIds(ids,id) {
             }
         });
     }
+
+
+    function previewGPS(id){
+        $("#modal-preview-gps").modal("show");
+        initPreviewPGS(id);
+    }
+
+    function initPreviewPGS(id) {
+    	startLoad();
+        $.ajax({
+            url: contextPath+"/roadGps/getList",
+            type: "post",
+            async: false,
+            data: {
+                id: id
+            },
+            success: function(result) {
+                stopLoad();
+                if (result.status == 0) {
+                    var data = {};
+                    data['o'] = result.value;
+                    data['id']=id;
+                    render('#fm-preview-gps', data, 'tpl-preview-gps');
+                    initTable($('#list2'));
+                } else {
+                    alert(result.errorMessage);
+                }
+            },
+            error: function() {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
+    function delTableGps(id){
+     var ids=[];
+        $.each($('input:checkbox'),function(){
+            if(this.checked){
+                console.log($(this).val());
+                ids.push($(this).val());
+            }
+        });
+        delGpsByIds(ids.join(","),id);
+
+    }
+
+    function delGpsByIds(ids,id) {
+            startLoad();
+            $.ajax({
+                url: contextPath + "/roadGps/deleteRoadGpsByRoadGpsIds",
+                type: "post",
+                async: false,
+                data: {ids:ids},
+                success: function (rst) {
+                    stopLoad();
+                    alert(rst.errorMessage);
+                    if (rst.status == 0) {
+                       initPreviewPGS(id);
+                    }
+                },
+                error: function () {
+                    stopLoad();
+                    alert("对不起出错了！");
+                }
+            });
+        }

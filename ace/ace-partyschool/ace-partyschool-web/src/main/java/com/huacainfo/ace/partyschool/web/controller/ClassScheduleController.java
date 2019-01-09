@@ -48,12 +48,9 @@ public class ClassScheduleController extends BisBaseController {
      */
     @RequestMapping(value = "/findClassScheduleList")
     @ResponseBody
-    public PageResult
-            <ClassScheduleVo> findClassScheduleList(ClassScheduleQVo condition,
-                                                    PageParamNoChangeSord page) throws Exception {
-
-        PageResult
-                <ClassScheduleVo> rst = this.classScheduleService
+    public PageResult<ClassScheduleVo> findClassScheduleList(ClassScheduleQVo condition,
+                                                             PageParamNoChangeSord page) throws Exception {
+        PageResult<ClassScheduleVo> rst = this.classScheduleService
                 .findClassScheduleList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
@@ -132,19 +129,10 @@ public class ClassScheduleController extends BisBaseController {
     }
 
 
-    /**
-     * @throws
-     * @Title:deleteClassScheduleByClassScheduleId
-     * @Description: TODO(删除课程表管理)
-     * @param: @param jsons
-     * @param: @throws Exception
-     * @return: MessageResponse
-     * @author: 王恩
-     * @version: 2019-01-06
-     */
-//    @RequestMapping(value = "/LearnedCourses")
-//    @ResponseBody
-//    public MessageResponse LearnedCourses() throws Exception {
-//        return this.classScheduleService.LearnedCourses();
-//    }
+    @RequestMapping(value = "/LearnedCourses")
+    @ResponseBody
+    public MessageResponse LearnedCourses(ClassScheduleQVo condition,
+                                          PageParamNoChangeSord page) throws Exception {
+        return this.classScheduleService.LearnedCourses(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    }
 }

@@ -11,8 +11,6 @@
     <meta content="${cfg.sys_name}" name="${cfg.sys_name}"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="${portalPath}/content/common/simditor/styles/simditor.css"/>
-    <link rel="stylesheet" href="${portalPath}/content/common/jcrop/jquery.Jcrop.css">
 </head>
 
 <body>
@@ -35,8 +33,8 @@
                             <span class="required" aria-required="true"> * </span>
                         </label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" maxlength="50"
-                                   placeholder="请输入名称（建议字数在14个字以内，不超过50个字)">
+                            <input type="text" class="form-control" name="name" maxlength="30"
+                                   placeholder="请输入名称（建议字数在20个字以内,不要超过30个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -47,7 +45,7 @@
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="introduce"
                                    maxlength="2147483647"
-                                   placeholder="请输入介绍（建议字数在14个字以内，不超过2147483647个字)">
+                                   placeholder="请输入介绍（建议字数在100个字以内，不超过200个字)">
                             <span class="help-block"></span>
                         </div>
                     </div>
@@ -59,38 +57,50 @@
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="timeout"
                                    maxlength="10"
-                                   placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">
+                                   placeholder="请输入超时设定（填写数字，单位：分钟)">
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <h4>评测选项内容</h4>
-                    <div class="form-group">
-                        <div class="col-md-3 col-md-offset-1">
-                            <button type="button" class="btn btn-success addOption">添加</button>
-                        </div>
-                    </div>
                     <div id="evaluatingRst">
                         <div class="form-group">
                             <label class="col-md-2 control-label">
-                                内容
+                                评测指标
                                 <span class="required" aria-required="true"> * </span>
                             </label>
                             <div class="col-md-10">
                                 <input type="text" class="form-control" name="evaluationIndex[0].name"
-                                       maxlength="10"
-                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">
+                                       maxlength="6"
+                                       placeholder="请输入评测指标（建议字数在6个字以内)">
                                 <span class="help-block"></span>
                             </div>
+
                             <label class="col-md-2 control-label">
-                                分值
+                                指标内容
+                                <span class="required" aria-required="true"> * </span>
+                            </label>
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" name="evaluationIndex[0].introduce"
+                                       maxlength="40"
+                                       placeholder="请输入评测内容（建议字数在30个字以内)">
+                                <span class="help-block"></span>
+                            </div>
+
+                            <label class="col-md-2 control-label">
+                                指标分值
                                 <span class="required" aria-required="true"> * </span>
                             </label>
                             <div class="col-md-10">
                                 <input type="text" class="form-control" name="evaluationIndex[0].score"
                                        maxlength="10"
-                                       placeholder="请输入超时设定（建议字数在14个字以内，不超过10个字)">
+                                       placeholder="请输入评测分值(填写数字)">
                                 <span class="help-block"></span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3 col-md-offset-1">
+                            <button type="button" class="btn btn-success addOption">添加</button>
                         </div>
                     </div>
                 </div>
@@ -113,12 +123,5 @@
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js"></script>
-<script src="${portalPath}/content/common/jcrop/jquery.Jcrop.min.js?v=${cfg.version}"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/module.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/hotkeys.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/uploader.js"></script>
-<script type="text/javascript" src="${portalPath}/content/common/simditor/scripts/simditor.js"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>

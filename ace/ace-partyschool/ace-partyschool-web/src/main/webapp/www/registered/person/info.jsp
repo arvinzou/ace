@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="box">
-				<div class="exit">
+				<div class="exit" onclick="exit();">
 					<span>退出登录</span>
 				</div>
 			</div>

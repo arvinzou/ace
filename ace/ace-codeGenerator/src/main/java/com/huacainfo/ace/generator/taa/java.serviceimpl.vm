@@ -3,6 +3,7 @@ package com.huacainfo.ace.taa.service.impl;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
@@ -286,7 +287,8 @@ private DataBaseLogService dataBaseLogService;
                                      * @author: $!{annotation.authorName}
                                      * @version: $!{annotation.version}
                                      */
-                                    MessageResponse delete$!{bean.name}By$!{bean.name}s(String [] id, UserProp userProp) throws Exception{
+                                     @Override
+                                    public MessageResponse delete$!{bean.name}By$!{bean.name}Ids(String [] id, UserProp userProp) throws Exception{
 
                                             this.$!{bean.lowerName}Dao.deleteByPrimaryKeys(id);
                                             this.dataBaseLogService.log("批量删除$!{bean.tableChineseName}", "$!{bean.tableChineseName}", id[0], id[0], "$!{bean.tableChineseName}", userProp);
