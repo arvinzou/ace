@@ -124,7 +124,7 @@
         FROM files f
         where
         f.classesId=(
-        SELECT s.classId FROM student s WHERE s.mobile=#{condition.account,jdbcType=VARCHAR}
+        SELECT s.classId FROM student s WHERE s.mobile=#{condition.mobile,jdbcType=VARCHAR}
         )
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -142,7 +142,7 @@
         FROM files f
         where
         f.classesId in(
-        SELECT s.clsId FROM teacher_cls_ship s WHERE s.mobile=#{condition.account,jdbcType=VARCHAR}
+        SELECT s.clsId FROM teacher_cls_ship s WHERE s.mobile=#{condition.mobile,jdbcType=VARCHAR}
         )
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
