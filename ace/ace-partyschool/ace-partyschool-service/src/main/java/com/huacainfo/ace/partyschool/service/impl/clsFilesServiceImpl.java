@@ -71,6 +71,7 @@ public class clsFilesServiceImpl implements clsFilesService {
     public ResultResponse findFilesListVo(FilesQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception {
         AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
         List<FilesVo> list;
+        condition.setMobile(userProp.getAccount());
         if ("teacher".equals(accountVo.getRegType())) {
             list = this.filesDao.findTeacherFileList(condition, start, limit, orderBy);
         } else if ("student".equals(accountVo.getRegType())) {
