@@ -12,7 +12,7 @@
 	<body>
 		<div class="index">
 			<div class="search">
-				<input class="serach-input" type="text" id="search" onfocus="focusInput();" onblur="blurInput();"/>
+				<input class="serach-input" type="text" id="search" name="keyWord" onfocus="focusInput();" onblur="blurInput();"/>
 				<img id="search-icon" src="img/icon_search.png" class="icon-search" onclick="searchIconClick();"/>
 				<span id="search-title" class="search-title" onclick="searchIconClick();">搜索</span>
 			</div>
@@ -23,6 +23,15 @@
 		
 		<img src="img/icon-upload.png" class="upload"/>
 
+
+        <!--搜索结果层-->
+      <%--  <div class="modal" id="modalList" style="display: none;">
+            <div class="modal-index">
+                <div class="list" id="fileParamList">
+
+                </div>
+            </div>
+        </div>--%>
 
 		<script id="list-tpl" type="text/template">
 			{@each data as item,index}

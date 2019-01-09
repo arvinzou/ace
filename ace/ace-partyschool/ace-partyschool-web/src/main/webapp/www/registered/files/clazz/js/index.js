@@ -1,29 +1,6 @@
 $(function(){
-    $.ajax({
-        url: contextPath+ "/www/files/findFilesList",
-        type:"post",
-        async:false,
-        data:{
-
-        },
-        success:function(result){
-            if(result.status == 0) {
-               console.log(result);
-                juicer.register('fileType', fileTypes);
-                renderPage('fileList', result.data, 'list-tpl');
-            }else {
-                if(result.info){
-                    alert(result.info);
-                }else{
-                    alert(result.errorMessage);
-                }
-                return;
-            }
-        },
-        error:function(){
-            alert("系统服务内部异常！");
-        }
-    });
+    fileList();
+    $('#search').change(activeSearch);
 });
 
 function focusInput(){
@@ -72,4 +49,38 @@ function fileTypes(fileName){
         fileType == "text";
     }
     return fileType;
+}
+
+function fileList(){
+    var keyWord = $("input[name='keyWord']").val();
+    $.ajax({
+        url: contextPath+ "/www/files/findFilesList",
+        type:"post",
+        async:false,
+        data:{
+            title: keyWord
+        },
+        success:function(result){
+            if(result.status == 0) {
+                console.log(result);
+                juicer.register('fileType', fileTypes);
+                renderPage('fileList', result.data, 'list-tpl');
+                renderPage('fileParamList', result.data, 'list-tpl');
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function activeSearch() {
+    fileList();
 }
