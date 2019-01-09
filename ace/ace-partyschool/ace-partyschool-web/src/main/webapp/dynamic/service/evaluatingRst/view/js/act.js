@@ -1,8 +1,9 @@
 var loading = {};
 var editor;
-var params={
-    limit:15,
-    classScheduleId:urlParams.id,
+var myChart;
+var params = {
+    limit: 15,
+    classScheduleId: urlParams.id,
 };
 window.onload = function () {
     jQuery(function ($) {
@@ -10,6 +11,29 @@ window.onload = function () {
         initPage();
         initEchart();
     });
+}
+
+
+function view(evaluatingId, userId) {
+    var url = contextPath + "/evaluationRst/findEvaluationRstList";
+    var params = {
+        evaluatingId: evaluatingId,
+        userId: userId,
+        start: 0,
+        limit: 100,
+    }
+    startLoad();
+    $.getJSON(url, params, function (rst) {
+        console.log();
+        stopLoad();
+        if (rst.status == 0) {
+            $('#modal-preview').modal('show');
+            data = rst.rows;
+            render('#pageLists', data, 'tpl-preview');
+        } else {
+            alert(result.errorMessage);
+        }
+    })
 }
 
 
@@ -48,8 +72,33 @@ function getPageList() {
             render($("#page-list"), rst.rows, "tpl-list");
         }
     })
+    url = contextPath + "/evaluationRst/statistics";
+    $.getJSON(url, params, function (rst) {
+        stopLoad();
+        if (rst.status == 0) {
+            formateEchartData(rst.data);
+        }
+    })
 }
 
+
+/*整理数据成Echart支持的格式*/
+function formateEchartData(data) {
+    var xData = [];
+    var yData = [];
+    for (obj in data) {
+        xData.push(data[obj].NAME);
+        yData.push(data[obj].number);
+    }
+    resetEchartData(xData, yData);
+}
+
+
+function resetEchartData(xData, yDate) {
+    option.xAxis.data = xData;
+    option.series[0].data = yDate;
+    myChart.setOption(option);
+}
 
 
 /*页面渲染*/
@@ -61,23 +110,22 @@ function render(obj, data, tplId) {
     $(obj).html(html);
 }
 
-function initEchart() {
-    var myChart = echarts.init(document.getElementById('echartMain'));
-    // 指定图表的配置项和数据
-    var option = {
-        xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        },
-        yAxis:{
+var option = {
+    xAxis: {
+        data: []
+    },
+    yAxis: {},
+    // yAxis: {data:['不好','一般','可以','满意']},
+    series: [{
+        type: 'bar',
+        data: []
+    }]
+};
 
-        },
-        // yAxis: {data:['不好','一般','可以','满意']},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
+function initEchart() {
+    myChart = echarts.init(document.getElementById('echartMain'));
+    // 指定图表的配置项和数据
+
     myChart.setOption(option);
 }
 

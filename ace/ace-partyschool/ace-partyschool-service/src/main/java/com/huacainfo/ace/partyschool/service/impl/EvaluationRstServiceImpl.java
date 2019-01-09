@@ -65,10 +65,6 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
         PageResult<EvaluationRstVo> rst = new PageResult<>();
         List<EvaluationRstVo> list = this.evaluationRstDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
-        if (start <= 1) {
-            int allRows = this.evaluationRstDao.findCount(condition);
-            rst.setTotal(allRows);
-        }
         return rst;
     }
 

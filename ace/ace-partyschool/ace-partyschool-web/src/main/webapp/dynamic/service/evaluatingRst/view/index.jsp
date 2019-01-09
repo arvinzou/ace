@@ -65,7 +65,7 @@
                     <th width="10%"> 评价</th>
                     <th width="10%"> 学生</th>
                     <th width="10%"> 日期</th>
-                    <th width="15%">操作</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -96,35 +96,12 @@
         <td> \${item.student.name}</td>
         <td> \${item.createDate}</td>
         <td>
-            <a href="javascript:view('\${item.id}');">查看</a>
+            <a href="javascript:view('\${item.evaluatingId}','\${item.userId}');">查看</a>
         </td>
     </tr>
     {@/each}
 </script>
 ﻿
-
-
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade" role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
@@ -134,10 +111,18 @@
                 <h4 class="modal-title">详细</h4>
             </div>
             <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
+                <div class="table-scrollable">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th width="10%"> 题目</th>
+                            <th width="10%"> 打分</th>
+                        </tr>
+                        </thead>
+                        <tbody id="pageLists">
 
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">
@@ -146,110 +131,14 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-        <div class="form-group">
-            <label class="col-md-2 view-label">主键</label>
-            <div class="col-md-10">
-                \${id}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">班级</label>
-            <div class="col-md-10">
-                \${classesId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">日期</label>
-            <div class="col-md-10">
-                \${courseDate}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">课节am:上午 pm:下午</label>
-            <div class="col-md-10">
-                \${courseIndex}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">老师</label>
-            <div class="col-md-10">
-                \${teacherId}
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 view-label">课程</label>
-            <div class="col-md-10">
-                \${courseId}
-            </div>
-        </div>
-
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">主键</label>
-        <div class="col-md-10">
-            \${id}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">班级</label>
-        <div class="col-md-10">
-            \${classesId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">日期</label>
-        <div class="col-md-10">
-            \${courseDate}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">课节am:上午 pm:下午</label>
-        <div class="col-md-10">
-            \${courseIndex}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">老师</label>
-        <div class="col-md-10">
-            \${teacherId}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">课程</label>
-        <div class="col-md-10">
-            \${courseId}
-        </div>
-    </div>
+    {@each data as item, index}
+    <tr>
+        <td> \${item.name}：\${item.introduce}</td>
+        <td> \${item.score}</td>
+    </tr>
+    {@/each}
 </script>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
