@@ -78,7 +78,8 @@
 
     <sql id="Vo_Column_List">
         c.`name` as clsName,
-        t.id, t.pid, t.name, t.mobile, t.idCard, t.political, t.workUnitName, t.postName, t.classId, t.remark,
+        t.id, t.pid, t.name, t.mobile, t.idCard, t.political,
+        t.workUnitName, t.postName, t.classId, t.remark,
         t.status, t.createUserId, t.createUserName, t.createDate,
         t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
     </sql>
@@ -102,6 +103,9 @@
         </if>
         <if test="condition.clsName !=null and condition.clsName !=&quot;&quot;">
             and c.`name` like concat('%',#{condition.clsName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.classId !=null and condition.classId !=&quot;&quot;">
+            and t.classId = #{condition.classId,jdbcType=VARCHAR}
         </if>
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
@@ -140,7 +144,7 @@
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
         select count(1)
         from student
-        where idCard = #{idCard,jdbcType=VARCHAR}
+        where mobile = #{mobile,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">
@@ -160,5 +164,12 @@
         from student
         where id != #{id,jdbcType=VARCHAR}
          and idCard = #{idCard,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExistOtherMobile" resultType="int">
+        select count(1)
+        from student
+        where id != #{id,jdbcType=VARCHAR}
+        and mobile = #{mobile,jdbcType=VARCHAR}
     </select>
 </mapper>

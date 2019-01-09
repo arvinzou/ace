@@ -86,6 +86,9 @@ public class EvaluationIndexServiceImpl implements EvaluationIndexService {
         if (CommonUtils.isBlank(o.getEvaluatingId())) {
             return new MessageResponse(1, "所属评测方案不能为空！");
         }
+        if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "所属指标内容不能为空！");
+        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "指标名称不能为空！");
         }
@@ -123,7 +126,9 @@ public class EvaluationIndexServiceImpl implements EvaluationIndexService {
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "分值不能为空！");
         }
-
+        if (CommonUtils.isBlank(o.getIntroduce())) {
+            return new MessageResponse(1, "所属指标内容不能为空！");
+        }
         this.evaluationIndexDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更评测选项", "评测选项", "",
                 o.getId(), o.getId(), userProp);

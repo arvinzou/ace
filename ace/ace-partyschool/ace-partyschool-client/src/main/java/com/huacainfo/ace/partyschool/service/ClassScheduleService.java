@@ -31,6 +31,9 @@ public interface ClassScheduleService {
     PageResult<ClassScheduleVo> findClassScheduleList(ClassScheduleQVo condition,
                                                       int start, int limit, String orderBy) throws Exception;
 
+    PageResult<ClassScheduleVo> LearnedCourses(ClassScheduleQVo condition,
+                                                      int start, int limit, String orderBy) throws Exception;
+
     /**
      * @throws
      * @Title:insertClassSchedule

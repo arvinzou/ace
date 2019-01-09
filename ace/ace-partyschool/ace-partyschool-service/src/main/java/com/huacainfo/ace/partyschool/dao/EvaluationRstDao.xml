@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.EvaluationRstDao">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.EvaluationRst">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="evaluatingId" jdbcType="VARCHAR" property="evaluatingId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="classScheduleId" jdbcType="VARCHAR" property="classScheduleId"/>
+        <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+        <result column="userId" jdbcType="VARCHAR" property="userId"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, evaluatingId, name, classScheduleId, introduce, score, userId, createDate
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from evaluation_rst
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="statistics" parameterType="java.lang.String" resultType="java.util.Map">
+    SELECT  t.NAME,t.number
+FROM (SELECT e.classScheduleId AS classScheduleId, e.NAME AS name, sum(e.score)/COUNT(e.NAME) AS number
+FROM partyschool.evaluation_rst e
+GROUP BY e.NAME) t
+WHERE t.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from evaluation_rst
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.EvaluationRst">
+    insert into evaluation_rst (id, evaluatingId, name, 
+      classScheduleId, introduce, score, 
+      userId, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{evaluatingId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{classScheduleId,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{userId,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.huacainfo.ace.partyschool.model.EvaluationRst">
+        insert into evaluation_rst
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="evaluatingId != null">
+                evaluatingId,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="classScheduleId != null">
+                classScheduleId,
+            </if>
+            <if test="introduce != null">
+                introduce,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="createDate != null">
+                createDate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="evaluatingId != null">
+                #{evaluatingId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="classScheduleId != null">
+                #{classScheduleId,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null">
+                #{introduce,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.partyschool.model.EvaluationRst">
+        update evaluation_rst
+        <set>
+            <if test="evaluatingId != null">
+                evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="classScheduleId != null">
+                classScheduleId = #{classScheduleId,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                userId = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.EvaluationRst">
+    update evaluation_rst
+    set evaluatingId = #{evaluatingId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      classScheduleId = #{classScheduleId,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      userId = #{userId,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+    <!--#################################################################################################################################################-->
+
+    <resultMap extends="BaseResultMap" id="BaseResultMapVo" type="com.huacainfo.ace.partyschool.vo.EvaluationRstVo">
+        <!--<association property="rpt" column="uid" javaType="com.huacainfo.ace.partyschool.model.Classes">-->
+        <!--<id property="openid" column="openid"/>-->
+        <!--<result property="headimgurl" column="headimgurl"/>-->
+        <!--<result property="nickname" column="nickname"/>-->
+        <!--</association>-->
+        <collection property="course" ofType="com.huacainfo.ace.partyschool.model.Course">
+            <id property="id" column="cId"/>
+            <result column="cName" property="name"/>
+        </collection>
+        <collection property="evaluationRstContent" ofType="com.huacainfo.ace.partyschool.model.EvaluationRstContent">
+            <id property="id" column="ercId"/>
+            <result column="ercContent" property="content"/>
+        </collection>
+        <collection property="student" ofType="com.huacainfo.ace.partyschool.model.Student">
+            <id property="id" column="sId"/>
+            <result column="sName" property="name"/>
+        </collection>
+    </resultMap>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.EvaluationRstVo"></resultMap>
+
+    <sql id="Vo_Column_List">
+    er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score, er.userId, er.createDate,
+    c.id as cId,c.name as cName,
+    erc.id as ercId,erc.content as ercContent,
+    s.id as sId,s.name as sName
+
+  </sql>
+
+    <sql id="Where_Condition">
+        where c.status <![CDATA[ <> ]]> 0
+        <if test="condition.evaluatingId !=null and condition.evaluatingId !=&quot;&quot;">
+            and er.name LIKE concat('%',#{condition.evaluatingId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and er.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <sql id="From_Statement">
+    FROM evaluation_rst er
+    LEFT JOIN partyschool.class_schedule cs ON cs.id=er.classScheduleId
+    LEFT JOIN (SELECT * FROM partyschool.evaluation_rst_content WHERE classScheduleId=#{condition.classScheduleId,jdbcType=VARCHAR}) erc ON er.userId=erc.userId
+    LEFT JOIN partyschool.course c ON cs.courseId =c.id
+    LEFT JOIN student s on s.id=er.userId
+  </sql>
+
+    <select id="findListVo" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        GROUP BY er.userId
+        HAVING 1=1
+        <if test="condition.classScheduleId !=null and condition.classScheduleId !=&quot;&quot;">
+            and er.classScheduleId=#{condition.classScheduleId,jdbcType=VARCHAR}
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY cs.courseDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        er.id, er.evaluatingId, er.name, er.classScheduleId, er.introduce, er.score, er.userId, er.createDate
+        FROM evaluation_rst er
+        where 1=1
+        <if test="condition.evaluatingId !=null and condition.evaluatingId !=&quot;&quot;">
+            and er.evaluatingId LIKE concat('%',#{condition.evaluatingId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and er.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY er.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        GROUP BY er.userId
+        HAVING 1=1
+        <if test="condition.classScheduleId !=null and condition.classScheduleId !=&quot;&quot;">
+            and er.classScheduleId=#{condition.classScheduleId,jdbcType=VARCHAR}F
+        </if>
+    </select>
+
+
+    <select id="findCountVo" resultType="int">
+        SELECT COUNT(*)
+        FROM (
+        SELECT *
+        FROM evaluation_rst er
+        GROUP BY er.userId
+        HAVING 1=1
+        <if test="condition.classScheduleId !=null and condition.classScheduleId !=&quot;&quot;">
+            and er.classScheduleId=#{condition.classScheduleId,jdbcType=VARCHAR}
+        </if>
+        ) as t
+    </select>
+
+    <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
+    select count(1)
+    from course c
+    where c.status <![CDATA[ <> ]]> 0
+    and c.name = #{condition.name,jdbcType=VARCHAR}
+    and c.teacherId= #{condition.teacherId,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        where c.id = #{id,jdbcType=VARCHAR}
+    </select>
+
+
+</mapper>
