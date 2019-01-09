@@ -195,7 +195,7 @@
         LEFT JOIN teacher t ON t.id=s.teacherId
         where
         f.classesId in(
-        SELECT s.clsId FROM teacher_cls_ship s WHERE s.id=#{condition.userId,jdbcType=VARCHAR}
+        SELECT s.clsId FROM teacher_cls_ship s WHERE s.teacherId=#{condition.userId,jdbcType=VARCHAR}
         )
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
