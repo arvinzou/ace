@@ -38,5 +38,5 @@ public interface StudentDao {
                            @Param("idCard") String idCard);
 
     int isExistOtherMobile(@Param("id") String id,
-                           @Param("idCard") String mobile);
+                           @Param("mobile") String mobile);
 }

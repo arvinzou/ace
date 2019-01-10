@@ -38,5 +38,6 @@ public interface TeacherDao {
     int isExistOtherIdCard(@Param("id") String id,
                            @Param("idCard") String idCard);
 
-    int isExistOtherMobile(String id, String mobile);
+    int isExistOtherMobile(@Param("id") String id,
+                           @Param("mobile") String mobile);
 }

@@ -91,9 +91,6 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-//        if (CommonUtils.isBlank(o.getIdCard())) {
-//            return new MessageResponse(1, "身份证不能为空！");
-//        }
 
         int temp = this.teacherDao.isExist(o);
         if (temp > 0) {
