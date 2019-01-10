@@ -1,0 +1,124 @@
+package com.huacainfo.ace.taa.web.controller;
+
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.taa.service.RegisterService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * @Auther: Arvin
+ * @Date: 2019/1/9 17:57
+ * @Description:
+ */
+@RestController
+@RequestMapping("/www/register")
+public class WRegisterController extends TaaBaseController {
+
+    @Autowired
+    private RegisterService registerService;
+
+    /**
+     * 功能描述: 手机号码是否重复注册
+     *
+     * @param: mobile 手机号码
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2019/1/3 9:34
+     */
+    @RequestMapping("/isExistByMobile")
+    public ResultResponse isExistByMobile(String mobile) throws Exception {
+        boolean b = registerService.isExistByMobile(mobile);
+        if (b) {
+            return new ResultResponse(ResultCode.FAIL, "该手机已被注册");
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "success");
+    }
+
+
+    /**
+     * 功能描述: 发送短信验证验证码
+     *
+     * @param: mobile 手机号码
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2019/1/3 9:34
+     */
+    @RequestMapping("/sendSmsCode")
+    public ResultResponse sendSmsCode(String mobile, String length) throws Exception {
+        //参数验证
+        if (CommonUtils.isBlank(mobile)) {
+            return new ResultResponse(ResultCode.FAIL, "手机号不能为空");
+        }
+        if (!CommonUtils.isValidMobile(mobile)) {
+            return new ResultResponse(ResultCode.FAIL, "手机号格式错误");
+        }
+        //四位随机码
+        length = StringUtil.isEmpty(length) ? "4" : length;
+        String randCode = CommonUtils.getIdentifyCode(Integer.valueOf(length), 0);
+        // 保存进session
+        getRequest().getSession().setAttribute("j_captcha_cmcc_" + mobile, randCode);
+        //发送内容
+        String content = "本次提交验证码为" + randCode + "，请及时输入。";
+        logger.debug(mobile + "=>j_captcha_cmcc:{}", getSession("j_captcha_cmcc_" + mobile));
+
+        return registerService.sendSms(mobile, content);
+    }
+
+    /**
+     * 短信验证
+     *
+     * @param mobile 手机号码
+     * @param code   验证码
+     * @return boolean
+     */
+    private boolean codeCheck(String mobile, String code) {
+        //验证码校验
+        String sessionCode = String.valueOf(getSession("j_captcha_cmcc_" + mobile));
+
+        logger.debug("[taa]SignController.codeCheck=>mobile:{},code:{}", mobile, code);
+
+        return code.equals(sessionCode);
+    }
+
+    /**
+     * register
+     *
+     * @param name   姓名
+     * @param mobile 手机
+     * @param copNo  警号
+     * @param deptId 所属单位
+     * @param code   短信验证码
+     * @return
+     */
+    @RequestMapping("/register")
+    public ResultResponse register(String uid, String name, String mobile,
+                                   String copNo, String deptId, String code) throws Exception {
+        if (!StringUtil.areNotEmpty(name, mobile, copNo, deptId, code)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+//        验证码校验
+        if (!codeCheck(mobile, code)) {
+            return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
+        }
+        //微信鉴权信息 --小程序
+        WxUser user = getCurWxUser();
+        if (StringUtil.isNotEmpty(uid)) {
+            user = new WxUser();
+            user.setUnionId(uid);
+            user.setNickName("test");
+        }
+        //注册流程
+        try {
+            ResultResponse rs = registerService.register(user, name, mobile, copNo, deptId);
+            return rs;
+        } catch (CustomException e) {
+            return new ResultResponse(ResultCode.FAIL, e.getMsg());
+        }
+    }
+}
