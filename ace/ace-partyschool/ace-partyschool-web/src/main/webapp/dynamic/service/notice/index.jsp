@@ -7,14 +7,13 @@ pageEncoding="utf-8"%>
     <meta charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-    <title>班级文件</title>
+    <title>通知公告</title>
 </head>
 <link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
 <jsp:include page="/dynamic/common/header.jsp"/>
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 
 <body>
-
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <div class="portlet light ">
     <div class="portlet-body">
@@ -83,13 +82,19 @@ pageEncoding="utf-8"%>
 <%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
+        <label class="col-md-2 view-label">类型</label>
+        <div class="col-md-10">
+            \${data.o.category}
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 view-label">班级</label>
         <div class="col-md-10">
             \${data.o.classesId}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">文件名称</label>
+        <label class="col-md-2 view-label">标题</label>
         <div class="col-md-10">
             \${data.o.title}
         </div>
@@ -97,7 +102,13 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">文件地址</label>
         <div class="col-md-10">
-         <a>\${data.o.url}</a>
+           \${data.o.fileUrl}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">内容</label>
+        <div class="col-md-10">
+            \${data.o.content}
         </div>
     </div>
     <div class="form-group">
@@ -115,7 +126,7 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${parseStatus(data.o.status)}
+            \${data.o.status}
         </div>
     </div>
 </script>
@@ -185,11 +196,11 @@ pageEncoding="utf-8"%>
 <script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 
 
-<script src="${pageContext.request.contextPath}/content/service/files/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/files/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/files/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/files/view.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/files/upload.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/notice/config.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/notice/model.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/notice/controller.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/notice/view.js?version=${cfg.version}"></script>
+<script src="${pageContext.request.contextPath}/content/service/notice/upload.js?version=${cfg.version}"></script>
 
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>

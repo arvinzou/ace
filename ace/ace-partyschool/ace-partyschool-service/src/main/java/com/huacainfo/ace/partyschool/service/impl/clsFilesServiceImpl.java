@@ -101,6 +101,7 @@ public class clsFilesServiceImpl implements clsFilesService {
             return new MessageResponse(1, "班级文件名称重复！");
         }
 
+        o.setCategory("1");
         o.setPushDate(new Date());
         o.setPublisher(userProp.getName());
         o.setId(GUIDUtil.getGUID());
@@ -112,6 +113,31 @@ public class clsFilesServiceImpl implements clsFilesService {
         return new MessageResponse(0, "添加班级文件完成！");
     }
 
+    @Override
+    public ResultResponse insertFilesVo(Files obj, UserProp userProp) throws Exception {
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        obj.setClassesId(accountVo.getRegType());
+        if ("student".equals(accountVo.getRegType())) {
+            int temp = this.filesDao.isExit(obj);
+            if (temp > 0) {
+                return new ResultResponse(1, "班级文件名称重复！");
+            }
+
+            obj.setCategory("1");
+            obj.setPushDate(new Date());
+            obj.setPublisher(userProp.getName());
+            obj.setId(GUIDUtil.getGUID());
+            obj.setStatus("1");
+            this.filesDao.insert(obj);
+            this.dataBaseLogService.log("添加班级文件", "班级文件", "",
+                    obj.getId(), obj.getId(), userProp);
+
+            return new ResultResponse(0, "添加班级文件完成！");
+        } else {
+
+        }
+        return new ResultResponse(0, "添加班级文件完成！");
+    }
     /**
      * @throws
      * @Title:updateFiles
@@ -144,8 +170,7 @@ public class clsFilesServiceImpl implements clsFilesService {
      * @version: 2019-01-04
      */
     @Override
-    public SingleResult
-            <FilesVo> selectFilesByPrimaryKey(String id) throws Exception {
+    public SingleResult<FilesVo> selectFilesByPrimaryKey(String id) throws Exception {
         SingleResult
                 <FilesVo> rst = new SingleResult<>();
         rst.setValue(this.filesDao.selectVoByPrimaryKey(id));

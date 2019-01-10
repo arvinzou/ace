@@ -25,14 +25,13 @@ jQuery(function ($) {
             recreateForm: true,
             viewPagerButtons: false,
             beforeShowForm: function (e) {
-                appendUploadBtn("photoUrl");
+               appendUploadBtn("fileUrl");
             }
         })
     });
 
     //初始化事件
     initEvents();
-    initJuicerMethod();
 });
 
 /*页面渲染*/
@@ -54,23 +53,6 @@ function initEvents() {
         console.log(relatedTarget);
         initPreview(id);
     })
-}
-
-function loadText(id) {
-    $.ajax({
-        type: "post",
-        url: cfg.view_load_data_url,
-        data: {
-            id: id
-        },
-        beforeSend: function (XMLHttpRequest) {
-        },
-        success: function (rst, textStatus) {
-        },
-        error: function () {
-            alert("加载错误！");
-        }
-    });
 }
 
 function initPreview(id) {
@@ -111,8 +93,7 @@ function edit(rowid) {
             form.closest('.ui-jqdialog')
                 .find('.ui-jqdialog-titlebar')
                 .wrapInner('<div class="widget-header" />');
-                appendUploadBtn("photoUrl");
-
+                appendUploadBtn("fileUrl");
         }
     });
 }
@@ -134,16 +115,4 @@ function del(rowid) {
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
-}
-
-function initJuicerMethod() {
-    juicer.register('parseStatus', parseStatus);
-}
-function parseStatus(val) {
-    switch (val) {
-        case '0':
-            return "注销";
-        case '1':
-            return "正常";
-    }
 }

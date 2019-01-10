@@ -1,4 +1,4 @@
-var _colNames =['主键','类型','班级','文件名称','文件地址','发布时间 ','发布人','状态','操作'];
+var _colNames =['主键','类型','班级','标题','文件地址','内容','发布时间 ','发布人','状态','操作'];
 var _colModel = function () {
 return [
 {
@@ -12,22 +12,21 @@ maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
 },{
 name : 'category',
-editable : false,
-width : 100,
-hidden:true,
+editable : true,
+width : 50,
 editoptions : {
 size : "20",
 maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
@@ -35,30 +34,30 @@ required : true
 name : 'classesId',
 editable : true,
 edittype: "combogrid",
-width : 150,
+width : 50,
 editoptions : {
-style: 'height: 35px;',
+style: "width:847px",
 size : "20",
 maxlength : "50"
 },
 dataoptions: {
-panelWidth: 300,
-idField: 'id',
-textField: 'name',
-url: contextPath + '/classes/findClassesList',
-mode: 'remote',
-fitColumns: true,
-method: 'get',
-pageSize:100,
-columns: [[{
-field: 'name',
-title: "--请搜索班级--",
-width: 50
-}]]
+                panelWidth: 300,
+                idField: 'id',
+                textField: 'name',
+                url: contextPath + '/classes/findClassesList',
+                mode: 'remote',
+                fitColumns: true,
+                method: 'get',
+                pageSize:100,
+                columns: [[{
+                    field: 'name',
+                    title: "--请搜索班级--",
+                    width: 50
+                }]]
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
@@ -72,29 +71,44 @@ maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
 },{
-name : 'url',
+name : 'fileUrl',
 editable : true,
 width : 100,
 hidden:true,
 editoptions : {
-readonly:true,
 size : "20",
 maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
 },{
+            name: 'content',
+            editable: true,
+            hidden: true,
+            width: 100,
+            edittype: "textarea",
+            editoptions: {
+                colspan: true,
+                style: 'width:750px;line-height: 25px;height: 100px;'
+            },
+            formoptions: {
+                elmprefix: "",
+                elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+            }, editrules: {
+                required: true
+            }
+        },{
 name : 'pushDate',
-editable : false,
+editable : true,
 width : 100,
 hidden:true,
 edittype : "datebox",
@@ -126,14 +140,14 @@ maxlength : "50",
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
 
 },{
 name : 'publisher',
-editable : false,
+editable : true,
 width : 100,
 hidden:true,
 editoptions : {
@@ -142,13 +156,13 @@ maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
 },{
 name : 'status',
-editable : false,
+editable : true,
 width : 50,
 edittype : "checkbox",
 editoptions : {
@@ -178,13 +192,13 @@ return rst;
 
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;'>*</span>"
+elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
 },editrules : {
 required : true
 }
 },{
 name: 'opt',
-width: 100,
+width: 50,
 hidden: false,
 editable: false,
 sortable: false,

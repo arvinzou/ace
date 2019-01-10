@@ -48,9 +48,8 @@ public class ClassroomController extends BisBaseController {
      */
     @RequestMapping(value = "/findClassroomList")
     @ResponseBody
-    public PageResult
-            <ClassroomVo> findClassroomList(ClassroomQVo condition,
-                                            PageParamNoChangeSord page) throws Exception {
+    public PageResult<ClassroomVo> findClassroomList(ClassroomQVo condition,
+                                                     PageParamNoChangeSord page) throws Exception {
 
         PageResult
                 <ClassroomVo> rst = this.classroomService
@@ -108,8 +107,7 @@ public class ClassroomController extends BisBaseController {
      */
     @RequestMapping(value = "/selectClassroomByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <ClassroomVo> selectClassroomByPrimaryKey(String id) throws Exception {
+    public SingleResult<ClassroomVo> selectClassroomByPrimaryKey(String id) throws Exception {
         return this.classroomService.selectClassroomByPrimaryKey(id);
     }
 

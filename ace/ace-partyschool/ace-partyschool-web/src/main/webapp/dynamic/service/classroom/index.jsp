@@ -103,7 +103,7 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${data.o.status}
+            \${parseStatus(data.o.status)}
         </div>
     </div>
 </script>

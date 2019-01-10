@@ -1,6 +1,6 @@
 jQuery(function($) {
 	init_uploader({
-		extensions: "doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp,xlsx,xls",
+		extensions: ",doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp",
 		url: portalPath + '/files/uploadImage.do',
 		target: "url",
 		multipart_params: {}
@@ -55,13 +55,13 @@ function reset_uploader(config) {
 function appendUploadBtn(id) {
 	var html = new Array();
 	html.push("<a id='btn-upload-add" + id +"' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
-//	html.push("<a id='btn-upload-view" + id + "' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
+	html.push("<a id='btn-upload-view" + id + "' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
 	$("#" + id).after(html.join(''));
 	$("#btn-upload-add" + id).on('click',
 			function(e) {
 				e.preventDefault();
 				var config = {
-					extensions: "doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp,xlsx,xls",
+					extensions: "doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp",
 					url: portalPath + '/files/uploadImage.do',
 					target: id,
 					multipart_params: {}
