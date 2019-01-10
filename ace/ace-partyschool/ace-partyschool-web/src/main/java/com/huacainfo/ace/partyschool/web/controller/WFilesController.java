@@ -11,6 +11,7 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.partyschool.model.Files;
+import com.huacainfo.ace.partyschool.service.ClassesService;
 import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.service.clsFilesService;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
@@ -36,6 +37,8 @@ public class WFilesController extends BisBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private clsFilesService clsFilesService;
+    @Autowired
+    private ClassesService classesService;
     @Autowired
     private SignService signService;
 
@@ -63,6 +66,34 @@ public class WFilesController extends BisBaseController {
         return this.clsFilesService.findFilesListVo(condition, page.getStart(), page.getLimit(), page.getOrderBy(), userProp);
 
 
+    }
+
+    @RequestMapping(value = "/getMyClasses")
+    @ResponseBody
+    public ResultResponse getMyClasses() throws Exception {
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.classesService.getMyClasses(this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertFiles
+     * @Description: TODO(添加班级文件)
+     * @param: @throws Exception
+     * @return: ResultResponse
+     * @author: Arvin
+     * @version: 2019-01-04
+     * Student:url
+     * teacher:url: & classesId: eg:classId1,classId2
+     */
+    @RequestMapping(value = "/insertFiles")
+    @ResponseBody
+    public ResultResponse insertFiles(Files obj) throws Exception {
+        return this.clsFilesService.insertFilesVo(obj, this.getCurUserProp());
     }
 
 }

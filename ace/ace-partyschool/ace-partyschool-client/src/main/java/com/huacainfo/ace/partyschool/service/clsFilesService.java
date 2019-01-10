@@ -47,6 +47,8 @@ public interface clsFilesService {
      */
     MessageResponse insertFiles(Files obj, UserProp userProp) throws Exception;
 
+    ResultResponse insertFilesVo(Files obj, UserProp userProp) throws Exception;
+
     /**
      * @throws
      * @Title:updateFiles

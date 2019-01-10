@@ -1,11 +1,13 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.FilesDao;
 import com.huacainfo.ace.partyschool.dao.SignDao;
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -101,6 +104,7 @@ public class clsFilesServiceImpl implements clsFilesService {
             return new MessageResponse(1, "班级文件名称重复！");
         }
 
+        o.setCategory("1");
         o.setPushDate(new Date());
         o.setPublisher(userProp.getName());
         o.setId(GUIDUtil.getGUID());
@@ -112,6 +116,43 @@ public class clsFilesServiceImpl implements clsFilesService {
         return new MessageResponse(0, "添加班级文件完成！");
     }
 
+    @Override
+    public ResultResponse insertFilesVo(Files obj, UserProp userProp) throws Exception {
+
+        if (CommonUtils.isBlank(obj.getUrl())) {
+            return new ResultResponse(ResultCode.FAIL, "没有文件路径");
+        }
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        List<String> classes = new ArrayList<String>();
+        if ("student".equals(accountVo.getRegType())) {
+            classes.add(accountVo.getStudent().getClassId());
+        } else if ("teacher".equals(accountVo.getRegType())) {
+            if (CommonUtils.isBlank(obj.getClassesId())) {
+                return new ResultResponse(ResultCode.FAIL, "没有指定班级");
+            }
+            String[] strs = obj.getClassesId().split(",");
+            //将字符串数组转换成集合list
+            classes = Arrays.asList(strs);
+        }
+        String strs = obj.getUrl();
+        int start = strs.indexOf("=");
+        int ends = strs.lastIndexOf(".");
+        String strs1 = obj.getUrl().substring(start + 1, ends);
+
+        obj.setTitle(strs1);
+        obj.setCategory("1");
+        obj.setPushDate(new Date());
+        obj.setPublisher(userProp.getName());
+        obj.setStatus("1");
+        for (String item : classes) {
+            obj.setId(GUIDUtil.getGUID());
+            obj.setClassesId(item);
+            this.filesDao.insert(obj);
+        }
+        this.dataBaseLogService.log("添加班级文件", "班级文件", "",
+                obj.getId(), obj.getId(), userProp);
+        return new ResultResponse(0, "添加班级文件完成！");
+    }
     /**
      * @throws
      * @Title:updateFiles
@@ -144,8 +185,7 @@ public class clsFilesServiceImpl implements clsFilesService {
      * @version: 2019-01-04
      */
     @Override
-    public SingleResult
-            <FilesVo> selectFilesByPrimaryKey(String id) throws Exception {
+    public SingleResult<FilesVo> selectFilesByPrimaryKey(String id) throws Exception {
         SingleResult
                 <FilesVo> rst = new SingleResult<>();
         rst.setValue(this.filesDao.selectVoByPrimaryKey(id));

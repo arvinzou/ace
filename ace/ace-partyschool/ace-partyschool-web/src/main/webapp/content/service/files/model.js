@@ -12,21 +12,22 @@ maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }
 },{
 name : 'category',
-editable : true,
+editable : false,
 width : 100,
+hidden:true,
 editoptions : {
 size : "20",
 maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }
@@ -34,44 +35,44 @@ required : true
 name : 'classesId',
 editable : true,
 edittype: "combogrid",
-width : 100,
+width : 150,
 editoptions : {
-style: "width:847px",
+style: 'height: 35px;',
 size : "20",
 maxlength : "50"
 },
 dataoptions: {
-                panelWidth: 300,
-                idField: 'id',
-                textField: 'name',
-                url: contextPath + '/classes/findClassesList',
-                mode: 'remote',
-                fitColumns: true,
-                method: 'get',
-                pageSize:100,
-                columns: [[{
-                    field: 'name',
-                    title: "--请搜索班级--",
-                    width: 50
-                }]]
+panelWidth: 300,
+idField: 'id',
+textField: 'name',
+url: contextPath + '/classes/findClassesList',
+mode: 'remote',
+fitColumns: true,
+method: 'get',
+pageSize:100,
+columns: [[{
+field: 'name',
+title: "--请搜索班级--",
+width: 50
+}]]
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }
 },{
 name : 'title',
 editable : true,
-width : 100,
+width : 150,
 editoptions : {
 size : "20",
 maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }
@@ -81,18 +82,19 @@ editable : true,
 width : 100,
 hidden:true,
 editoptions : {
+readonly:true,
 size : "20",
 maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }
 },{
 name : 'pushDate',
-editable : true,
+editable : false,
 width : 100,
 hidden:true,
 edittype : "datebox",
@@ -124,14 +126,14 @@ maxlength : "50",
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }
 
 },{
 name : 'publisher',
-editable : true,
+editable : false,
 width : 100,
 hidden:true,
 editoptions : {
@@ -140,13 +142,13 @@ maxlength : "50"
 },
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }
 },{
 name : 'status',
-editable : true,
+editable : false,
 width : 50,
 edittype : "checkbox",
 editoptions : {
@@ -176,7 +178,7 @@ return rst;
 
 formoptions : {
 elmprefix : "",
-elmsuffix : "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
+elmsuffix : "<span style='color:red;'>*</span>"
 },editrules : {
 required : true
 }

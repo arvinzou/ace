@@ -8,6 +8,7 @@
 		<title>班级文件</title>
 		<jsp:include page="../../../common/common.jsp"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/www/common/css/mobileSelect.css"/>
 	</head>
 	<body>
 		<div class="index">
@@ -21,17 +22,26 @@
 			</div>
 		</div>
 		
-		<img src="img/icon-upload.png" class="upload"/>
+		<img src="img/icon_upload.png" class="upload" onclick="startUpload();"/>
 
-
-        <!--搜索结果层-->
-      <%--  <div class="modal" id="modalList" style="display: none;">
-            <div class="modal-index">
-                <div class="list" id="fileParamList">
-
+		<!--老师上传文件模态框层-->
+		<div class="modal" id="uploadModal" style="display: none;">
+			<div class="modal-index">
+				<div class="modal-title01 title01 mbr">上传班级文件</div>
+				<div class="modal-clazz mbr">
+					<div class="clazz title02" id="clazz">请选择班级</div>
+					<div class="select-box"><img src="img/icon_select.png"/></div>
+				</div>
+                <div class="modal-title02 title02 mbr">上传班级文件</div>
+                <div class="opt mbr" id="fileBox">
+                    <img src="img/icon_confirm_add.png" class="option-add" id="upload"/>
                 </div>
-            </div>
-        </div>--%>
+                <div class="opt">
+                    <img src="img/icon_confirm_upload.png" class="option-upload" onclick="addFiles();"/>
+                </div>
+				<img src="img/del-red.png" class="close" onclick="closeModal();"/>
+			</div>
+		</div>
 
 		<script id="list-tpl" type="text/template">
 			{@each data as item,index}
@@ -69,6 +79,8 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 </html>

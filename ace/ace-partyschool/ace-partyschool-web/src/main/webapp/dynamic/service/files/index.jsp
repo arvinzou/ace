@@ -83,12 +83,6 @@ pageEncoding="utf-8"%>
 <%--详情juicer模板--%>
 <script id="tpl-preview" type="text/template">
     <div class="form-group">
-        <label class="col-md-2 view-label">类型</label>
-        <div class="col-md-10">
-            \${data.o.category}
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 view-label">班级</label>
         <div class="col-md-10">
             \${data.o.classesId}
@@ -103,7 +97,7 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">文件地址</label>
         <div class="col-md-10">
-
+         <a>\${data.o.url}</a>
         </div>
     </div>
     <div class="form-group">
@@ -121,7 +115,7 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">状态</label>
         <div class="col-md-10">
-            \${data.o.status}
+            \${parseStatus(data.o.status)}
         </div>
     </div>
 </script>

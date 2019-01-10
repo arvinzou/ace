@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
@@ -93,4 +94,6 @@ public interface ClassesService {
      * @return Map
      */
     Map<String, Object> findByQ(Map<String, Object> params);
+
+    ResultResponse getMyClasses(UserProp userProp) throws Exception;
 }
