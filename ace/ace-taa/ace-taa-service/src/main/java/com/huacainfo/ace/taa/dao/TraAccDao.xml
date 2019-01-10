@@ -85,12 +85,12 @@
 
 
   <sql id="whereCondition">
-    from tra_acc t where 0=0
+    from tra_acc t
     inner join road_man a on t.roadManId=a.id
     inner join road_section b on t.roadSectionId=b.id
     inner join portal.province c on t.areaCode=c.code
     inner join road d on b.roadId=d.id
-
+    where 0=0
     <if test='condition.roadManName!=null and condition.roadManName!=""'>
       and a.name like
       concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
