@@ -152,6 +152,9 @@
         f.classesId=(
         SELECT s.classId FROM student s WHERE s.id=#{condition.userId,jdbcType=VARCHAR}
         )
+        <if test="condition.title !=null and condition.title !=&quot;&quot;">
+            and f.`title` like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
@@ -195,8 +198,11 @@
         LEFT JOIN teacher t ON t.id=s.teacherId
         where
         f.classesId in(
-        SELECT s.clsId FROM teacher_cls_ship s WHERE s.id=#{condition.userId,jdbcType=VARCHAR}
+        SELECT s.clsId FROM teacher_cls_ship s WHERE s.teacherId=#{condition.userId,jdbcType=VARCHAR}
         )
+        <if test="condition.title !=null and condition.title !=&quot;&quot;">
+            and f.`title` like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}

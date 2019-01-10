@@ -244,3 +244,6 @@ function delByIds(ids,id) {
             }
         });
     }
+    function preview(id){
+        window.open("map.jsp?id="+id);
+    }
