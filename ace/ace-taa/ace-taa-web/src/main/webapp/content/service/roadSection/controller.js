@@ -244,6 +244,6 @@ function delByIds(ids,id) {
             }
         });
     }
-    function preview(id){
-        window.open("map.jsp?id="+id);
+    function previewMap(id){
+        window.open(contextPath+"/dynamic/service/roadSection/map.jsp?id="+id);
     }
