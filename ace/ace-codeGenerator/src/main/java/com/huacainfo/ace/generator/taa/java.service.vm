@@ -151,7 +151,7 @@ public interface $!{bean.name}Service {
                     /**
                          * @throws
                          * @Title:deleteRoadSectionByRoadSectionIds
-                         * @Description: TODO(批量删除$!{bean.tableChineseName}
+                         * @Description: TODO(批量删除$!{bean.tableChineseName}）
                          * @param: @param ids
                          * @param: @param userProp
                          * @param: @throws Exception

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.taa.dao.TraAccDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.TraAcc">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
+    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
+    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
+    <result column="weather" jdbcType="VARCHAR" property="weather" />
+    <result column="vehicleType" jdbcType="VARCHAR" property="vehicleType" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="accidentTime" jdbcType="TIMESTAMP" property="accidentTime" />
+    <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId" />
+    <result column="roadManId" jdbcType="VARCHAR" property="roadManId" />
+    <result column="deadthToll" jdbcType="INTEGER" property="deadthToll" />
+    <result column="injuries" jdbcType="INTEGER" property="injuries" />
+    <result column="cause" jdbcType="VARCHAR" property="cause" />
+    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
+    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
+    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
+    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
+  </resultMap>
+  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.TraAccVo"
+             extends="BaseResultMap">
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, address, latitude, longitude, areaCode, weather, vehicleType, status, accidentTime, 
+    roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName, 
+    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,d.category
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    select
+    t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
+    t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+    t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
+    from tra_acc t
+    inner join road_man a on t.roadManId=a.id
+    inner join road_section b on t.roadSectionId=b.id
+    inner join portal.province c on t.areaCode=c.code
+    inner join road d on b.roadId=d.id
+    where t.id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tra_acc
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.taa.model.TraAcc">
+    insert into tra_acc (id, address, latitude, 
+      longitude, areaCode, weather, 
+      vehicleType, status, accidentTime, 
+      roadSectionId, roadManId, deadthToll, 
+      injuries, cause, createUserId, 
+      createUserName, createDate, lastModifyUserId, 
+      lastModifyUserName, lastModifyDate)
+    values (#{id,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=DECIMAL}, 
+      #{longitude,jdbcType=DECIMAL}, #{areaCode,jdbcType=VARCHAR}, #{weather,jdbcType=VARCHAR}, 
+      #{vehicleType,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{accidentTime,jdbcType=TIMESTAMP}, 
+      #{roadSectionId,jdbcType=VARCHAR}, #{roadManId,jdbcType=VARCHAR}, #{deadthToll,jdbcType=INTEGER}, 
+      #{injuries,jdbcType=INTEGER}, #{cause,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
+      #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.TraAcc">
+    update tra_acc
+    set address = #{address,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=DECIMAL},
+      longitude = #{longitude,jdbcType=DECIMAL},
+      areaCode = #{areaCode,jdbcType=VARCHAR},
+      weather = #{weather,jdbcType=VARCHAR},
+      vehicleType = #{vehicleType,jdbcType=VARCHAR},
+      accidentTime = #{accidentTime,jdbcType=TIMESTAMP},
+      roadSectionId = #{roadSectionId,jdbcType=VARCHAR},
+      roadManId = #{roadManId,jdbcType=VARCHAR},
+      deadthToll = #{deadthToll,jdbcType=INTEGER},
+      injuries = #{injuries,jdbcType=INTEGER},
+      cause = #{cause,jdbcType=VARCHAR},
+      lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
+      lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
+      lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <sql id="whereCondition">
+    from tra_acc t where 0=0
+    inner join road_man a on t.roadManId=a.id
+    inner join road_section b on t.roadSectionId=b.id
+    inner join portal.province c on t.areaCode=c.code
+    inner join road d on b.roadId=d.id
+
+    <if test='condition.roadManName!=null and condition.roadManName!=""'>
+      and a.name like
+      concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
+    </if>
+
+    <if test='condition.roadManId!=null and condition.roadManId!=""'>
+      and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
+    </if>
+    <if test='condition.startDate!=null and condition.startDate!=""'>
+      <![CDATA[
+			and t.accidentTime>=str_to_date(#{condition.startDate},'%Y-%m-%d')
+	  ]]>
+    </if>
+    <if test='condition.endDate!=null and condition.endDate!=""'>
+      <![CDATA[
+			and t.accidentTime<=str_to_date(#{condition.endDate},'%Y-%m-%d')
+	]]>
+    </if>
+  </sql>
+  <select id="findCount" resultType="int">
+    SELECT COUNT(*)
+    <include refid="whereCondition" />
+  </select>
+  <select id="findList" resultMap="BaseResultMap">
+select * from (
+    select
+    t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
+    t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+    t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName,d.category
+    <include refid="whereCondition" />)m
+    <choose>
+      <when test='orderBy!=null and orderBy!=""'>
+        ORDER BY m.${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY m.createDate desc
+      </otherwise>
+    </choose>
+
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+
+  </select>
+
+  <select id="isExit" resultType="int">
+    select count(*)
+    from
+    tra_acc where
+    id=#{id}
+  </select>
+
+  <select id="getListByCondition" resultType="map">
+    select
+    t.id,t.address
+    from tra_acc t where 0=0
+    <if test='params.q !=null and params.q!=""'>
+      and (t.id=#{params.q} or t.name like
+      concat('%',#{params.q},'%'))
+    </if>
+    order by t.createDate
+    limit 0,20
+  </select>
+</mapper>

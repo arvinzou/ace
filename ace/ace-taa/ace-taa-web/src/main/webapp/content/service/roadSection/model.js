@@ -1,4 +1,4 @@
-var _colNames = ['主键', '所属道路', '行政区划', '归属路长', '名称', '路段开始', '路段截止', '标号开始', '标号截止', '简介', '状态 ', '创建人编号', '创建人姓名',
+var _colNames = ['主键', '所属道路',  '名称', '归属路长', '行政区划','路段开始', '路段截止', '标号开始', '标号截止', '简介', '状态 ', '创建人编号', '创建人姓名',
 	'创建日期', '更新人编号', '更新人名称', '更新日期', '操作'
 ];
 var _colModel = function() {
@@ -55,71 +55,6 @@ var _colModel = function() {
 		}
 
 	}, {
-		name: 'areaCode',
-		editable: true,
-		hidden: false,
-		width: 60,
-		edittype: "combotree",
-		editoptions: {
-			style: 'width:435px;line-height: 1.42857;height: 34px;'
-		},
-		dataoptions: {
-			url: portalPath + '/system/selectProvinceTreeList.do',
-			required: false
-		},
-		renderer: function(value, cur) {
-			return $.jgrid.getAccessor(cur, 'areaName');
-		},
-		formoptions: {
-			elmprefix: "",
-			elmsuffix: "<span style='color:red;'>*</span>"
-		},
-		editrules: {
-			required: true
-		}
-	}, {
-		name: 'roadMan',
-		editable: true,
-		width: 60,
-		edittype: "combogrid",
-		dataoptions: {
-			panelWidth: 500,
-			idField: 'id',
-			textField: 'name',
-			url: contextPath + '/roadMan/getListByCondition',
-			mode: 'remote',
-			fitColumns: true,
-			method: 'get',
-			columns: [
-				[ {
-					field: 'name',
-					title: '姓名',
-					width: 100
-				}, {
-					field: 'orgName',
-					title: '单位',
-					width: 100
-				}, {
-					field: 'areaName',
-					title: '县区',
-					width: 100
-				}]
-			]
-		},
-		editoptions: {
-			style: 'height:34px;width:435px'
-		},
-		renderer: function(value, cur) {
-			return $.jgrid.getAccessor(cur, 'roadManName');
-		},
-		formoptions: {
-			elmprefix: "",
-			elmsuffix: "<span style='color:red;'>*</span>"
-		},
-		editrules: {
-			required: true
-		}
-	}, {
 		name: 'name',
 		editable: true,
 		width: 100,
@@ -135,6 +70,71 @@ var _colModel = function() {
 			required: true
 		}
 	}, {
+       		name: 'roadMan',
+       		editable: true,
+       		width: 60,
+       		edittype: "combogrid",
+       		dataoptions: {
+       			panelWidth: 500,
+       			idField: 'id',
+       			textField: 'name',
+       			url: contextPath + '/roadMan/getListByCondition',
+       			mode: 'remote',
+       			fitColumns: true,
+       			method: 'get',
+       			columns: [
+       				[ {
+       					field: 'name',
+       					title: '姓名',
+       					width: 100
+       				}, {
+       					field: 'orgName',
+       					title: '单位',
+       					width: 100
+       				}, {
+       					field: 'areaName',
+       					title: '县区',
+       					width: 100
+       				}]
+       			]
+       		},
+       		editoptions: {
+       			style: 'height:34px;width:435px'
+       		},
+       		renderer: function(value, cur) {
+       			return $.jgrid.getAccessor(cur, 'roadManName');
+       		},
+       		formoptions: {
+       			elmprefix: "",
+       			elmsuffix: "<span style='color:red;'>*</span>"
+       		},
+       		editrules: {
+       			required: true
+       		}
+       	},{
+     		name: 'areaCode',
+     		editable: true,
+     		hidden: false,
+     		width: 60,
+     		edittype: "combotree",
+     		editoptions: {
+     			style: 'width:435px;line-height: 1.42857;height: 34px;'
+     		},
+     		dataoptions: {
+     			url: portalPath + '/system/selectProvinceTreeList.do',
+     			required: false
+     		},
+     		renderer: function(value, cur) {
+     			return $.jgrid.getAccessor(cur, 'areaName');
+     		},
+     		formoptions: {
+     			elmprefix: "",
+     			elmsuffix: "<span style='color:red;'>*</span>"
+     		},
+     		editrules: {
+     			required: true
+     		}
+     	}, {
 		name: 'startName',
 		editable: true,
 		width: 80,
@@ -198,21 +198,7 @@ var _colModel = function() {
 			value: "1:0"
 		},
 		cellattr: function(rowId, val, rawObject, cm, rdata) {
-			if (rawObject.status == '0') {
-				return "style='color:red;'";
-			}
-			if (rawObject.status == '1') {
-				return "style='color:#FF9224;'";
-			}
-			if (rawObject.status == '2') {
-				return "style='color:green;'";
-			}
-			if (rawObject.status == '3') {
-				return "style='color:#F9F900;'";
-			}
-			if (rawObject.status == '4') {
-				return "style='color:#FF9224;'";
-			}
+
 		},
 		unformat: aceSwitch,
 		renderer: function(value) {
@@ -309,7 +295,7 @@ function renderBtn(cur) {
 		opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
 	}
 
-	opt.push('<a href="javascript:preview(\'' + rowid + '\')">查看</a>  ');
+	opt.push('<a href="javascript:previewMap(\'' + rowid + '\')">查看</a>  ');
 
 	return opt.join(' ');
 }
