@@ -21,17 +21,25 @@
 			</div>
 		</div>
 		
-		<img src="img/icon-upload.png" class="upload"/>
+		<img src="img/icon_upload.png" class="upload"/>
 
-
-        <!--搜索结果层-->
-      <%--  <div class="modal" id="modalList" style="display: none;">
-            <div class="modal-index">
-                <div class="list" id="fileParamList">
-
+		<!--老师上传文件模态框层-->
+		<div class="modal" id="uploadModal">
+			<div class="modal-index">
+				<div class="modal-title01 title01 mbr">上传班级文件</div>
+				<div class="modal-clazz mbr">
+					<div class="clazz title02">请选择班级文件</div>
+					<div class="select-box"><img src="img/icon_select.png"/></div>
+				</div>
+                <div class="modal-title02 title02 mbr">上传班级文件</div>
+                <div class="opt mbr">
+                    <img src="img/icon_confirm_add.png" class="option-add"/>
                 </div>
-            </div>
-        </div>--%>
+                <div class="opt">
+                    <img src="img/icon_confirm_upload.png" class="option-upload"/>
+                </div>
+			</div>
+		</div>
 
 		<script id="list-tpl" type="text/template">
 			{@each data as item,index}
