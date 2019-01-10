@@ -33,12 +33,13 @@
 					<div class="select-box"><img src="img/icon_select.png"/></div>
 				</div>
                 <div class="modal-title02 title02 mbr">上传班级文件</div>
-                <div class="opt mbr">
+                <div class="opt mbr" id="fileBox">
                     <img src="img/icon_confirm_add.png" class="option-add" id="upload"/>
                 </div>
                 <div class="opt">
                     <img src="img/icon_confirm_upload.png" class="option-upload" onclick="addFiles();"/>
                 </div>
+				<img src="img/del-red.png" class="close" onclick="closeModal();"/>
 			</div>
 		</div>
 

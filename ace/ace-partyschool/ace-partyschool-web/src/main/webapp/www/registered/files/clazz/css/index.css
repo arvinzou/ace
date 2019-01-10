@@ -116,6 +116,14 @@
 	border-radius: 0.133333rem;
 	background: #ffffff;
 	margin: 2rem auto;
+	position: relative;
+}
+.close{
+	width: 0.56rem;
+	height: 0.56rem;
+	position: absolute;
+	right: -0.1rem;
+	top: -0.1rem;
 }
 .mbr{
 	border-bottom: 1px solid #F0EFF6;
@@ -183,4 +191,10 @@
 	height: auto;
 	padding-top: 0.4rem;
 	text-align: center;
+}
+#fileBox{
+	height: 1.893333rem;
+	color: #373F53;
+	font-weight: bold;
+	font-size: 0.453333rem;
 }

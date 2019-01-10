@@ -135,6 +135,10 @@ function initClasses(){
     });
 }
 
+function closeModal(){
+    $("#uploadModal").hide();
+}
+
 function startUpload(){
     $("#uploadModal").show();
     upload();
@@ -163,15 +167,14 @@ function upload(){
     });
     uploader.init();
     uploader.bind("FileFiltered",function(uploader,file){
-        var index = file.name.lastIndexOf(".");
-        title = file.name.substring(0,index);
-        console.log("name="+title);
+        title = file.name;
         uploader.start();
         return false;
     });
     uploader.bind("FileUploaded",function (uploader,file,responseObject) {
         var rst = JSON.parse(responseObject.response);
         fileUrl = rst.file_path;
+        $("#fileBox").html("<span>"+title+"</span>");
     });
 }
 
