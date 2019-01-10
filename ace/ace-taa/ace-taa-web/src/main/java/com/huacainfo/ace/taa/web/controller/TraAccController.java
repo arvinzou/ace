@@ -1,6 +1,7 @@
 package com.huacainfo.ace.taa.web.controller;
 
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,9 @@ public class TraAccController extends TaaBaseController {
     @RequestMapping(value = "/findTraAccList")
     @ResponseBody
     public PageResult<TraAccVo> findTraAccList(TraAccQVo condition, PageParamNoChangeSord page) throws Exception {
-
+        if(CommonUtils.isBlank(condition.getAreaCode())){
+            condition.setAreaCode(this.getCurUserProp().getAreaCode());
+        }
         PageResult<TraAccVo> rst = this.traAccService.findTraAccList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

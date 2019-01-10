@@ -69,27 +69,14 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                                                                        <th width="10%"> 主键</th>
-                                                    <th width="10%"> 事故发生地点</th>
-                                                    <th width="10%"> 纬度</th>
-                                                    <th width="10%"> 经度</th>
-                                                    <th width="10%"> 行政区划</th>
-                                                    <th width="10%"> 天气</th>
-                                                    <th width="10%"> 车型</th>
-                                                    <th width="10%"> 状态 </th>
-                                                    <th width="10%"> 事故时间</th>
-                                                    <th width="10%"> 所属路段</th>
-                                                    <th width="10%"> 所属路长</th>
-                                                    <th width="10%"> 死亡人数</th>
-                                                    <th width="10%"> 受伤人数</th>
-                                                    <th width="10%"> 事故原因</th>
-                                                    <th width="10%"> 快报人编号</th>
-                                                    <th width="10%"> 快报人姓名</th>
-                                                    <th width="10%"> 采集日期</th>
-                                                    <th width="10%"> 续保人编号</th>
-                                                    <th width="10%"> 续保人姓名</th>
-                                                    <th width="10%"> 续保日期</th>
-                                                                <th width="15%">操作</th>
+
+                                                    <th width="40%">事故发生地点</th>
+                                                    <th width="15%">事故时间</th>
+                                                    <th width="5%">死亡人数</th>
+
+                                                    <th width="10%">路长</th>
+                                                    <th width="15%">快报时间</th>
+                                                    <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -115,51 +102,15 @@
 <script id="tpl-list" type="text/template">
     {@each data as item, index}
     <tr>
-                                    <td> \&{item.id}</td>
-                            <td> \&{item.address}</td>
-                            <td> \&{item.latitude}</td>
-                            <td> \&{item.longitude}</td>
-                            <td> \&{item.areaCode}</td>
-                            <td> \&{item.weather}</td>
-                            <td> \&{item.vehicleType}</td>
-                            <td> \&{item.status}</td>
-                            <td> \&{item.accidentTime}</td>
-                            <td> \&{item.roadSectionId}</td>
-                            <td> \&{item.roadManId}</td>
-                            <td> \&{item.deadthToll}</td>
-                            <td> \&{item.injuries}</td>
-                            <td> \&{item.cause}</td>
-                            <td> \&{item.createUserId}</td>
-                            <td> \&{item.createUserName}</td>
-                            <td> \&{item.createDate}</td>
-                            <td> \&{item.lastModifyUserId}</td>
-                            <td> \&{item.lastModifyUserName}</td>
-                            <td> \&{item.lastModifyDate}</td>
-                            <td>
-             {@if item.status==0}
-                        <span class="label label-lg label-danger">删除</span>
-                        {@else if item.status==1}
-                        <span class="label label-lg label-info">暂存</span>
-                        {@else if item.status==2}
-                        <span class="label label-lg label-warning">待审</span>
-                        {@else if item.status==3}
-                        <span class="label label-lg label-info">通过</span>
-                        <div style="padding-top:10px">\${item.auditRemark}</div>
-                        {@else if item.status==4}
-                        <span class="label label-lg label-info">驳回</span>
-                        <div style="padding-top:10px">\${item.auditRemark}</div>
-                        {@else}
-                        <span class="label label-lg label-danger">暂存</span>
-                        {@/if}
-        </td>
+                                   
+                            <td> \${item.address}</td>
+                            <td> \${item.accidentTime}</td>
+                            <td> \${item.deadthToll}</td>
+                            <td> \${item.roadManName}</td>
+                            <td> \${item.createDate}</td>
         <td>
            ﻿ <a  href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-               <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-status">设置状态</a>
-               {@if item.auditStatus==1}
-               <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-               {@/if}
              <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-preview">查看</a>
-
              <a href="javascript:del('\${item.id}');">删除</a>
 
         </td>
@@ -213,27 +164,7 @@
 </div>
 
 
-<!--审核弹框-->
-<div class="modal fade"  role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
 
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="modal fade"  role="dialog" id="modal-preview">
     <div class="modal-dialog" role="document" style="width: 90%;">
         <div class="modal-content">
@@ -255,276 +186,119 @@
         </div>
     </div>
 </div>
-<script id="tpl-fm" type="text/template">
-	<div class="form-body">
 
-	                                                                                         <div class="form-group">
-                                    <label class="col-md-2 view-label">主键</label>
-                                    <div class="col-md-10">
-                                          \${id}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">事故发生地点</label>
-                                    <div class="col-md-10">
-                                          \${address}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">纬度</label>
-                                    <div class="col-md-10">
-                                          \${latitude}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">经度</label>
-                                    <div class="col-md-10">
-                                          \${longitude}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">行政区划</label>
-                                    <div class="col-md-10">
-                                          \${areaCode}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">天气</label>
-                                    <div class="col-md-10">
-                                          \${weather}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">车型</label>
-                                    <div class="col-md-10">
-                                          \${vehicleType}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">状态 </label>
-                                    <div class="col-md-10">
-                                          \${status}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">事故时间</label>
-                                    <div class="col-md-10">
-                                          \${accidentTime}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">所属路段</label>
-                                    <div class="col-md-10">
-                                          \${roadSectionId}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">所属路长</label>
-                                    <div class="col-md-10">
-                                          \${roadManId}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">死亡人数</label>
-                                    <div class="col-md-10">
-                                          \${deadthToll}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">受伤人数</label>
-                                    <div class="col-md-10">
-                                          \${injuries}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">事故原因</label>
-                                    <div class="col-md-10">
-                                          \${cause}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">快报人编号</label>
-                                    <div class="col-md-10">
-                                          \${createUserId}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">快报人姓名</label>
-                                    <div class="col-md-10">
-                                          \${createUserName}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">采集日期</label>
-                                    <div class="col-md-10">
-                                          \${createDate}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">续保人编号</label>
-                                    <div class="col-md-10">
-                                          \${lastModifyUserId}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">续保人姓名</label>
-                                    <div class="col-md-10">
-                                          \${lastModifyUserName}
-                                    </div>
-                                   </div>
-                                                                <div class="form-group">
-                                    <label class="col-md-2 view-label">续保日期</label>
-                                    <div class="col-md-10">
-                                          \${lastModifyDate}
-                                    </div>
-                                   </div>
-                                                           
-
-							  <h4>结果</h4>
-							  <hr>
-	                        <div class="form-group " id="operation">
-	                            <label class="col-md-2 control-label">结果</label>
-	                            <div class="col-md-10">
-	                                <div class="radio-group-container">
-	                                    <label>
-	                                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-	                                    </label>
-	                                    <label>
-	                                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-	                                    </label>
-	                                </div>
-	                            </div>
-	                        </div>
-	                        <div class="form-group">
-	                            <label class="col-md-2 control-label">说明</label>
-	                            <div class="col-md-10">
-	                                <input type="hidden" name="id" value="\${data.o.id}">
-	                                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-	                            </div>
-	                        </div>
-	                    </div>
-
-</script>
 
 <script id="tpl-preview" type="text/template">
                                                 <div class="form-group">
                      <label class="col-md-2 view-label">主键</label>
                      <div class="col-md-10">
-                           \${id}
+                           \${data.o.id}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">事故发生地点</label>
                      <div class="col-md-10">
-                           \${address}
+                           \${data.o.address}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">纬度</label>
                      <div class="col-md-10">
-                           \${latitude}
+                           \${data.o.latitude}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">经度</label>
                      <div class="col-md-10">
-                           \${longitude}
+                           \${data.o.longitude}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">行政区划</label>
                      <div class="col-md-10">
-                           \${areaCode}
+                           \${data.o.areaName}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">天气</label>
                      <div class="col-md-10">
-                           \${weather}
+                           \${data.o.weather}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">车型</label>
                      <div class="col-md-10">
-                           \${vehicleType}
+                           \${data.o.vehicleType}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">状态 </label>
                      <div class="col-md-10">
-                           \${status}
+                           \${data.o.status}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">事故时间</label>
                      <div class="col-md-10">
-                           \${accidentTime}
+                           \${data.o.accidentTime}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">所属路段</label>
                      <div class="col-md-10">
-                           \${roadSectionId}
+                           \${data.o.roadSectionName}
                      </div>
                     </div>
                                   <div class="form-group">
-                     <label class="col-md-2 view-label">所属路长</label>
+                     <label class="col-md-2 view-label">路长</label>
                      <div class="col-md-10">
-                           \${roadManId}
+                           \${data.o.roadManName}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">死亡人数</label>
                      <div class="col-md-10">
-                           \${deadthToll}
+                           \${data.o.deadthToll}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">受伤人数</label>
                      <div class="col-md-10">
-                           \${injuries}
+                           \${data.o.injuries}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">事故原因</label>
                      <div class="col-md-10">
-                           \${cause}
+                           \${data.o.cause}
                      </div>
                     </div>
-                                  <div class="form-group">
-                     <label class="col-md-2 view-label">快报人编号</label>
-                     <div class="col-md-10">
-                           \${createUserId}
-                     </div>
+
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">快报人姓名</label>
                      <div class="col-md-10">
-                           \${createUserName}
+                           \${data.o.createUserName}
                      </div>
                     </div>
                                   <div class="form-group">
                      <label class="col-md-2 view-label">采集日期</label>
                      <div class="col-md-10">
-                           \${createDate}
+                           \${data.o.createDate}
+                     </div>
+                    </div>
+
+                    </div>
+                                  <div class="form-group">
+                     <label class="col-md-2 view-label">续报人姓名</label>
+                     <div class="col-md-10">
+                           \${data.o.lastModifyUserName}
                      </div>
                     </div>
                                   <div class="form-group">
-                     <label class="col-md-2 view-label">续保人编号</label>
+                     <label class="col-md-2 view-label">续报日期</label>
                      <div class="col-md-10">
-                           \${lastModifyUserId}
-                     </div>
-                    </div>
-                                  <div class="form-group">
-                     <label class="col-md-2 view-label">续保人姓名</label>
-                     <div class="col-md-10">
-                           \${lastModifyUserName}
-                     </div>
-                    </div>
-                                  <div class="form-group">
-                     <label class="col-md-2 view-label">续保日期</label>
-                     <div class="col-md-10">
-                           \${lastModifyDate}
+                           \${data.o.lastModifyDate}
                      </div>
                     </div>
                              </script>

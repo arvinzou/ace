@@ -31,7 +31,7 @@
     roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName, 
     createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,d.category
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
     t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
     t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
@@ -109,12 +109,16 @@
 			and t.accidentTime<=str_to_date(#{condition.endDate},'%Y-%m-%d')
 	]]>
     </if>
+    <if test='condition.areaCode!=null and condition.areaCode!=""'>
+      and t.areaCode like
+      concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+    </if>
   </sql>
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
     <include refid="whereCondition" />
   </select>
-  <select id="findList" resultMap="BaseResultMap">
+  <select id="findList" resultMap="BaseResultMapVo">
 select * from (
     select
     t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
