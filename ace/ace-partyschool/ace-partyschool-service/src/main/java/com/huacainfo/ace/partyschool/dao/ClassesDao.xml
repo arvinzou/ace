@@ -61,6 +61,7 @@
         startDate = #{startDate,jdbcType=TIMESTAMP},
         endDate = #{endDate,jdbcType=TIMESTAMP},
         photoUrl = #{photoUrl,jdbcType=VARCHAR},
+        introduce = #{introduce,jdbcType=VARCHAR},
         classroom = #{classroom,jdbcType=VARCHAR},
         headmaster = #{headmaster,jdbcType=VARCHAR},
         remark = #{remark,jdbcType=VARCHAR},
@@ -79,7 +80,7 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
-        id, name, startDate, endDate, photoUrl, classroom, headmaster, remark, status, createUserId,
+        id, name, startDate, endDate,introduce, photoUrl, classroom, headmaster, remark, status, createUserId,
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
     <sql id="From_Statement">
@@ -94,7 +95,8 @@
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        t.id, t.name, t.startDate, t.endDate, t.photoUrl, cr.name as classroom, c.name as headmaster, t.remark, t.status, t.createUserId,
+        t.id, t.name, t.startDate, t.introduce,t.endDate, t.photoUrl, cr.name as classroom, c.name as headmaster,
+        t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         from classes t
         LEFT JOIN classroom cr ON cr.id = t.classroom
@@ -120,6 +122,15 @@
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findMyClassesList" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT
+        c.id, c.name, c.startDate, c.endDate, c.photoUrl, c.classroom, c.headmaster, c.remark, c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate, c.introduce
+        from teacher_cls_ship tcs
+        left join classes c on c.id=tcs.clsId
+        WHERE tcs.teacherId=#{teacherId,jdbcType=VARCHAR}
     </select>
 
     <select id="findCount" resultType="int">

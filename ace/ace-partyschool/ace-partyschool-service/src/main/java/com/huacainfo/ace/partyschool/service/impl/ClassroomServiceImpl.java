@@ -52,11 +52,8 @@ public class ClassroomServiceImpl implements ClassroomService {
     public PageResult
             <ClassroomVo> findClassroomList(ClassroomQVo condition, int start,
                                             int limit, String orderBy) throws Exception {
-        PageResult
-                <ClassroomVo> rst = new PageResult<>();
-        List
-                <ClassroomVo> list = this.classroomDao.findList(condition,
-                start, limit, orderBy);
+        PageResult<ClassroomVo> rst = new PageResult<>();
+        List<ClassroomVo> list = this.classroomDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.classroomDao.findCount(condition);
@@ -97,7 +94,6 @@ public class ClassroomServiceImpl implements ClassroomService {
         o.setCreateDate(new Date());
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.classroomDao.insert(o);
@@ -152,10 +148,8 @@ public class ClassroomServiceImpl implements ClassroomService {
      * @version: 2019-01-03
      */
     @Override
-    public SingleResult
-            <ClassroomVo> selectClassroomByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <ClassroomVo> rst = new SingleResult<>();
+    public SingleResult<ClassroomVo> selectClassroomByPrimaryKey(String id) throws Exception {
+        SingleResult<ClassroomVo> rst = new SingleResult<>();
         rst.setValue(this.classroomDao.selectVoByPrimaryKey(id));
         return rst;
     }

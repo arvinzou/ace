@@ -125,6 +125,18 @@ pageEncoding="utf-8"%>
         </div>
     </div>
      <div class="form-group">
+         <label class="col-md-2 view-label">跟班老师</label>
+         <div class="col-md-10">
+             \${data.o.tid1}
+         </div>
+     </div>
+     <div class="form-group">
+         <label class="col-md-2 view-label">跟班干部</label>
+         <div class="col-md-10">
+             \${data.o.tid2}
+         </div>
+     </div>
+     <div class="form-group">
          <label class="col-md-2 view-label">备注</label>
          <div class="col-md-10">
              \${data.o.remark}
@@ -133,7 +145,7 @@ pageEncoding="utf-8"%>
      <div class="form-group">
          <label class="col-md-2 view-label">状态</label>
          <div class="col-md-10">
-             \${data.o.status}
+             \${parseStatus(data.o.status)}
          </div>
      </div>
 </script>

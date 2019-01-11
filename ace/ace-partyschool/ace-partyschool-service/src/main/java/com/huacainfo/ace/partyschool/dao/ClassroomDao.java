@@ -21,11 +21,10 @@ public interface ClassroomDao {
 
     ClassroomVo selectVoByPrimaryKey(String id);
 
-    List
-            <ClassroomVo> findList(@Param("condition") ClassroomQVo condition,
-                                   @Param("start") int start,
-                                   @Param("limit") int limit,
-                                   @Param("orderBy") String orderBy);
+    List<ClassroomVo> findList(@Param("condition") ClassroomQVo condition,
+                               @Param("start") int start,
+                               @Param("limit") int limit,
+                               @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") ClassroomQVo condition);
 

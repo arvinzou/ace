@@ -68,8 +68,7 @@ public interface ClassroomService {
      * @author: Arvin
      * @version: 2019-01-03
      */
-    SingleResult
-            <ClassroomVo> selectClassroomByPrimaryKey(String id) throws Exception;
+    SingleResult<ClassroomVo> selectClassroomByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

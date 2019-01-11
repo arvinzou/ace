@@ -180,7 +180,10 @@ pageEncoding="utf-8"%>
                     <td>\${item.startNo}</td>
                     <td>\${item.endNo}</td>
                     <td>\${item.roadManName}</td>
-                    <td><a href="javascript:previewGPS('\${item.id}')">GPS</a></td>
+                    <td>
+                        <a href="javascript:previewGPS('\${item.id}')">GPS数据</a>  <a href="javascript:previewMap('\${item.id}')">地图</a>
+
+                    </td>
                 </tr>
                 {@/each}
 

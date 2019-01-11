@@ -44,9 +44,9 @@
 
 
 
-        <table tableName="road_gps"
-               domainObjectName="RoadGps"
-               mapperName="RoadGpsDao"
+        <table tableName="tra_acc"
+               domainObjectName="TraAcc"
+               mapperName="TraAccDao"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
