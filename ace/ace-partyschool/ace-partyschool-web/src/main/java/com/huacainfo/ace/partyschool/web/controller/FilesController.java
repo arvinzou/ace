@@ -48,9 +48,8 @@ public class FilesController extends BisBaseController {
      */
     @RequestMapping(value = "/findFilesList")
     @ResponseBody
-    public PageResult
-            <FilesVo> findFilesList(FilesQVo condition,
-                                    PageParamNoChangeSord page) throws Exception {
+    public PageResult<FilesVo> findFilesList(FilesQVo condition,
+                                             PageParamNoChangeSord page) throws Exception {
 
         PageResult
                 <FilesVo> rst = this.clsFilesService

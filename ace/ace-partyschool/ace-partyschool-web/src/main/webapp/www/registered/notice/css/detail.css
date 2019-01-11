@@ -1,0 +1,92 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.title{
+	padding-top: 0.44rem ;
+	padding-left: 0.453333rem;
+	padding-right:0.453333rem;
+	color: #373F53;
+	font-size: 0.506666rem;
+	font-weight: bold;
+}
+.status{
+	padding-left: 0.453333rem;
+	padding-right: 0.453333rem;
+	padding-bottom: 0.44rem;
+	border-bottom: 2px dotted rgba(215,217,223,1);
+}
+.publisher{
+	color: #54ADF2;
+	font-size: 0.346666rem;
+	padding-right: 0.333333rem;
+}
+.date{
+	color: #ABAEB9;
+	font-size: 0.346666rem;
+}
+.content{
+	padding:0.546666rem 0.453333rem;
+	color: #373F53;
+	font-size: 0.426666rem;
+	border-bottom: 2px dotted rgba(215,217,223,1);
+}
+.item{
+	width: 100%;
+	height: 2.293333rem;
+	background: url('../img/file-bg.png') no-repeat;
+	background-size: 100% 100%;
+}
+.item:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.file-type{
+	width: 20%;
+	height: 100%;
+	float: left;
+}
+.file-type-img{
+	width: 0.906666rem;
+	height: 0.906666rem;
+	margin:0.693333rem 0.8rem;
+}
+.file-detail{
+	width: 80%;
+	height: 100%;
+	float: left;
+}
+.file-title{
+	height: 0.986666rem;
+	color: #373F53;
+	font-size: 0.4rem;
+	font-weight: bold;
+	padding-right: 0.48rem;
+	/*text-overflow:ellipsis;
+	overflow: hidden;
+	white-space: nowrap;*/
+	padding-top: 0.373333rem;
+	
+	text-overflow: -o-ellipsis-lastline;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+.file-footer{
+	height: 0.6rem;
+	line-height: 0.6rem;
+	color: #ABAEB9;
+	font-size: 0.32rem;
+}
+.file-footer span{
+	padding-right: 0.266666rem;
+}
+.filelist-title{
+	padding: 0.52rem 0.453333rem;
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+}

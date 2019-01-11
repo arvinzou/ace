@@ -97,9 +97,9 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(1, "身份证不能为空！");
-        }
+//        if (CommonUtils.isBlank(o.getIdCard())) {
+//            return new MessageResponse(1, "身份证不能为空！");
+//        }
         if (CommonUtils.isBlank(o.getClassId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
@@ -107,7 +107,7 @@ public class StudentServiceImpl implements StudentService {
 
         int temp = this.studentDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(ResultCode.FAIL, "学员身份证号码重复");
+            return new MessageResponse(ResultCode.FAIL, "学员手机号码重复");
         }
 
         String sid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
@@ -146,15 +146,15 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(1, "身份证号不能为空！");
-        }
+//        if (CommonUtils.isBlank(o.getIdCard())) {
+//            return new MessageResponse(1, "身份证号不能为空！");
+//        }
         if (CommonUtils.isBlank(o.getClassId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
-        int i = studentDao.isExistOtherIdCard(o.getId(), o.getIdCard());
+        int i = studentDao.isExistOtherMobile(o.getId(), o.getMobile());
         if (i > 0) {
-            return new MessageResponse(1, "身份证号不能重复！");
+            return new MessageResponse(1, "手机号码不能重复！");
         }
         //
         Student oldData = studentDao.selectByPrimaryKey(o.getId());

@@ -18,16 +18,15 @@
 			</div>
 			<div class="login-form">
 				<div class="form-row">
-					<input class="login-input" name="username" type="text" placeholder="请输入手机号码" onblur="checkLogin();"/>
+					<input class="login-input" name="username" type="text" placeholder="请输入手机号码"/>
 				</div>
 				<div class="form-row pwd">
-					<input  class="login-input" name="password" type="password" placeholder="请输入密码" onblur="checkLogin();"/>
+					<input  class="login-input" name="password" type="password" placeholder="请输入密码"/>
 					<img src="img/fpwd.png" class="forget" onclick="resetPwd();">
 				</div>
 			</div>
 			<div class="login-btn">
-				<img src="img/login.png" class="login-image" id="login"/>
-                <img src="img/login-active.png"  class="login-image"  style="display: none;" id="loginActive"/>
+                <img src="img/login-active.png"  class="login-image"id="loginActive" onclick="login();"/>
 			</div>
 			<div class="regist-box"><a href="${pageContext.request.contextPath}/www/sign/index.jsp" class="regist">立即注册</a></div>
 		</div>

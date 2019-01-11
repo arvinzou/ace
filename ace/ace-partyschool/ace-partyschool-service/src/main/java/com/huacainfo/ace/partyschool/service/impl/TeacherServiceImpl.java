@@ -91,13 +91,10 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(1, "身份证不能为空！");
-        }
 
         int temp = this.teacherDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(1, "教职工身份证号码重复");
+            return new MessageResponse(1, "手机号重复");
         }
 
         o.setCategory(StringUtil.isEmpty(o.getCategory()) ? "1" : o.getCategory());//默认值
@@ -137,12 +134,10 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-        if (CommonUtils.isBlank(o.getIdCard())) {
-            return new MessageResponse(1, "身份证不能为空！");
-        }
-        int i = teacherDao.isExistOtherIdCard(o.getId(), o.getIdCard());
+
+        int i = teacherDao.isExistOtherMobile(o.getId(), o.getMobile());
         if (i > 0) {
-            return new MessageResponse(1, "身份证号不能重复！");
+            return new MessageResponse(1, "手机号不能重复！");
         }
 
         //

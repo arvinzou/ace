@@ -52,8 +52,7 @@ private DataBaseLogService dataBaseLogService;
     * @version: $!{annotation.version}
     */
     @Override
-    public PageResult
-    <$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,int limit, String orderBy) throws Exception {
+    public PageResult<$!{bean.name}Vo> find$!{bean.name}List($!{bean.name}QVo condition, int start,int limit, String orderBy) throws Exception {
         PageResult<$!{bean.name}Vo> rst = new PageResult<>();
             List<$!{bean.name}Vo> list = this.$!{bean.lowerName}Dao.findList(condition,
                 start, limit, orderBy);
@@ -137,8 +136,7 @@ private DataBaseLogService dataBaseLogService;
                 * @version: $!{annotation.version}
                 */
                 @Override
-                public SingleResult
-                <$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception {
+                public SingleResult<$!{bean.name}Vo> select$!{bean.name}ByPrimaryKey(String id) throws Exception {
                     SingleResult<$!{bean.name}Vo> rst = new SingleResult<>();
                         rst.setValue(this.$!{bean.lowerName}Dao.selectVoByPrimaryKey(id));
                         return rst;
@@ -279,7 +277,7 @@ private DataBaseLogService dataBaseLogService;
                                     /**
                                      * @throws
                                      * @Title:deleteRoadSectionByRoadSectionIds
-                                     * @Description: TODO(批量删除$!{bean.tableChineseName}
+                                     * @Description: TODO(批量删除$!{bean.tableChineseName}）
                                      * @param: @param ids
                                      * @param: @param userProp
                                      * @param: @throws Exception

@@ -1,9 +1,11 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
@@ -144,7 +146,7 @@ public class ClassesServiceImpl implements ClassesService {
             return new MessageResponse(1, "状态 不能为空！");
         }
 
-
+        o.setCreateDate(new Date());
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
         o.setLastModifyUserId(userProp.getUserId());
@@ -208,6 +210,11 @@ public class ClassesServiceImpl implements ClassesService {
         rst.put("rows", list);
 
         return rst;
+    }
+
+    @Override
+    public ResultResponse getMyClasses(UserProp userProp) throws Exception {
+        return new ResultResponse(ResultCode.SUCCESS, "成功", this.classesDao.findMyClassesList(userProp.getUserId()));
     }
 
 }

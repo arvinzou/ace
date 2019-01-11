@@ -48,6 +48,7 @@
 
     </resultMap>
 
+
     <sql id="Vo_Column_List">
         id, category, classesId, title, url, pushDate, publisher, status
     </sql>
@@ -119,15 +120,41 @@
         where id = #{id,jdbcType=VARCHAR}
     </update>
 
-    <select id="findStudentFileList" parameterType="java.lang.String" resultMap="VoResultMap">
-        select f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
-        s.mobile, s.idCard, s.name, s.pid, s.political, s.workUnitName, s.classId
+    <resultMap id="StudentFilesResultMap" type="com.huacainfo.ace.partyschool.vo.FilesVo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="pushDate" jdbcType="TIMESTAMP" property="pushDate"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="classesId" jdbcType="CHAR" property="classesId"/>
+        <association property="student" column="student" javaType="com.huacainfo.ace.partyschool.model.Student">
+            <id column="sId" jdbcType="VARCHAR" property="id"/>
+            <result column="pid" jdbcType="VARCHAR" property="pid"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="idCard" jdbcType="CHAR" property="idCard"/>
+            <result column="political" jdbcType="VARCHAR" property="political"/>
+            <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+            <result column="postName" jdbcType="VARCHAR" property="postName"/>
+            <result column="classId" jdbcType="VARCHAR" property="classId"/>
+        </association>
+    </resultMap>
+
+    <select id="findStudentFileList" parameterType="java.lang.String" resultMap="StudentFilesResultMap">
+        select
+        f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
+        s.id as sId ,s.mobile, s.idCard, s.name, s.pid, s.political, s.workUnitName, s.classId
         FROM files f
         LEFT JOIN student s on s.classId=f.classesId
         where
         f.classesId=(
         SELECT s.classId FROM student s WHERE s.id=#{condition.userId,jdbcType=VARCHAR}
         )
+        <if test="condition.title !=null and condition.title !=&quot;&quot;">
+            and f.`title` like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
@@ -139,17 +166,43 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
-    <select id="findTeacherFileList" parameterType="java.lang.String" resultMap="VoResultMap">
-        select f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
-        s.clsId, s.teacherId, t.idCard, t.mobile, t.introduce, t.name, t.workUnitName, t.category,
-        t.photoUrl, t.postName
+    <resultMap id="TeacherFilesResultMap" type="com.huacainfo.ace.partyschool.vo.FilesVo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="category" jdbcType="CHAR" property="category"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="pushDate" jdbcType="TIMESTAMP" property="pushDate"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="classesId" jdbcType="CHAR" property="classesId"/>
+        <association property="teacher" column="teacher" javaType="com.huacainfo.ace.partyschool.model.Teacher">
+            <id column="tId" jdbcType="VARCHAR" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+            <result column="idCard" jdbcType="CHAR" property="idCard"/>
+            <result column="workUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+            <result column="postName" jdbcType="VARCHAR" property="postName"/>
+            <result column="introduce" jdbcType="VARCHAR" property="introduce"/>
+            <result column="category" jdbcType="VARCHAR" property="category"/>
+            <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+        </association>
+
+    </resultMap>
+
+    <select id="findTeacherFileList" parameterType="java.lang.String" resultMap="TeacherFilesResultMap">
+        select
+        f.id, f.category, f.classesId, f.title, f.url, f.pushDate, f.publisher, f.status,
+        t.id as tId, t.idCard, t.mobile, t.introduce, t.name, t.workUnitName, t.category, t.photoUrl, t.postName
         FROM files f
         LEFT JOIN teacher_cls_ship s ON s.clsId=f.classesId
         LEFT JOIN teacher t ON t.id=s.teacherId
         where
         f.classesId in(
-        SELECT s.clsId FROM teacher_cls_ship s WHERE s.id=#{condition.userId,jdbcType=VARCHAR}
+        SELECT s.clsId FROM teacher_cls_ship s WHERE s.teacherId=#{condition.userId,jdbcType=VARCHAR}
         )
+        <if test="condition.title !=null and condition.title !=&quot;&quot;">
+            and f.`title` like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
+        </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}

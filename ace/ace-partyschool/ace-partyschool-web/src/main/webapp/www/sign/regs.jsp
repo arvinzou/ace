@@ -50,7 +50,7 @@
 					<input class="form-input" type="text" name="postName" placeholder="请输入所在单位职务"/>
 				</div>
 				<div class="form-content">
-					<label class="form-label">所属班级</label>
+					<label class="form-label">班次</label>
 					<div class="form-select" type="text"  id="classes"><span class="unselect">请选择党校所分配的班级</span></div>
 					<img src="img/icon_select.png" class="redirect" />
 				</div>

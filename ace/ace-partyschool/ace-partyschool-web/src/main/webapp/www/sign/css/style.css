@@ -11,6 +11,9 @@ body{
 .modalhide{
 	overflow: hidden;
 }
+input{
+	-webkit-appearance: none;
+}
 input::-webkit-input-placeholder{
 	font-size: 0.4rem;
 	color: #D7D9DF;

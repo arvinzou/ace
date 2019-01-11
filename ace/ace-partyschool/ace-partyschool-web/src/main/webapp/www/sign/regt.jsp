@@ -42,11 +42,12 @@
 					<img src="img/icon_select.png" class="redirect" />
 				</div>
 				<div class="form-content form-border">
-					<label class="form-label">单位名称</label>
-					<input class="form-input" type="text" name="workUnitName" placeholder="请输入单位名称"/>
+					<label class="form-label">处室</label>
+					<div class="form-select" type="text" name="workUnit" id="workUnit"><span class="unselect">请选择处室</span></div>
+					<img src="img/icon_select.png" class="redirect" />
 				</div>
 				<div class="form-content">
-					<label class="form-label">单位职务</label>
+					<label class="form-label">职务</label>
 					<input class="form-input" type="text" name="postName" placeholder="请输入所在单位职务"/>
 				</div>
 			</div>
@@ -100,5 +101,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
+	<script src="${portalPath}/content/common/js/dict_partyschool.js?version=${version}"></script>
 	<script type="text/javascript" src="js/teacher.js"></script>
 </html>

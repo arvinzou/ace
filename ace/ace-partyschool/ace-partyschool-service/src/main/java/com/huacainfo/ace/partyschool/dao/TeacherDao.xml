@@ -136,7 +136,7 @@
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Teacher">
         select count(1)
         from teacher
-        where idCard = #{idCard,jdbcType=VARCHAR}
+        where mobile = #{mobile,jdbcType=VARCHAR}
     </select>
 
     <update id="updateStatus" parameterType="java.lang.String">
@@ -156,5 +156,12 @@
         from teacher
         where id != #{id,jdbcType=VARCHAR}
         and idCard = #{idCard,jdbcType=VARCHAR}
+    </select>
+
+    <select id="isExistOtherMobile" resultType="int">
+        select count(1)
+        from teacher
+        where id != #{id,jdbcType=VARCHAR}
+        and mobile = #{mobile,jdbcType=VARCHAR}
     </select>
 </mapper>

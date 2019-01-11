@@ -166,19 +166,19 @@
             \${data.o.postName}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">工作照</label>
         <div class="col-md-10">
             <img src="\${data.o.photoUrl}" class="cover"/>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">介绍</label>
         <div class="col-md-10">
             \${data.o.introduce}
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group hide">
         <label class="col-md-2 view-label">备注</label>
         <div class="col-md-10">
             \${data.o.remark}

@@ -37,6 +37,8 @@ jQuery(function ($) {
 
     //初始化事件
     initEvents();
+    //
+    initJuicerMethod();
 });
 
 /*页面渲染*/
@@ -109,16 +111,37 @@ function edit(rowid) {
 
 var show = false;
 function del(rowid) {
-    console.log(rowid);
-    jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
-        beforeShowForm: function (e) {
-            var form = $(e[0]);
-            if (!show) {
-                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+    // jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
+    //     beforeShowForm: function (e) {
+    //         var form = $(e[0]);
+    //         if (!show) {
+    //             form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+    //         }
+    //         show = true;
+    //     }
+    // });
+
+    if (confirm("确认注销么？")) {
+        var jsons = {id: rowid};
+        startLoad();
+        $.ajax({
+            url: cfg.grid_delete_data_url,
+            type: "post",
+            async: false,
+            data: {
+                jsons: JSON.stringify(jsons),
+            },
+            success: function (result) {
+                stopLoad();
+                alert(result.errorMessage);
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
             }
-            show = true;
-        }
-    });
+        });
+    }
 }
 var params = {};
 function setParams(key, value) {
@@ -146,5 +169,26 @@ function recover(rowid) {
                 alert("对不起出错了！");
             }
         });
+    }
+}
+
+//juicer自定义函数
+function initJuicerMethod() {
+    juicer.register('parseStatus', parseStatus);
+}
+
+/**
+ * 状态
+ * 0-已注销
+ * 1-有效
+ */
+function parseStatus(status) {
+    switch (status) {
+        case '0':
+            return "已注销";
+        case '1':
+            return "有效";
+        default:
+            return "有效";
     }
 }

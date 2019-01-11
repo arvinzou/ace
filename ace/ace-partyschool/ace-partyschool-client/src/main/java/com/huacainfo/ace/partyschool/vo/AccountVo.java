@@ -34,6 +34,19 @@ public class AccountVo extends BaseModel {
      */
     private String sex;
 
+    /**
+     * 是否已绑定微信 0-否 1-是
+     */
+    private String isBindWx;
+
+    public String getIsBindWx() {
+        return isBindWx;
+    }
+
+    public void setIsBindWx(String isBindWx) {
+        this.isBindWx = isBindWx;
+    }
+
     public String getSex() {
         return sex;
     }

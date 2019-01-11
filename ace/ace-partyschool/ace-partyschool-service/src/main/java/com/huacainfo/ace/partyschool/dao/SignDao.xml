@@ -42,6 +42,7 @@
         <result column="regType" jdbcType="VARCHAR" property="regType"/>
         <result column="headimgurl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="isBindWx" jdbcType="VARCHAR" property="isBindWx"/>
         <association property="student" column="sid" javaType="com.huacainfo.ace.partyschool.vo.StudentVo">
             <id column="sid" jdbcType="VARCHAR" property="id"/>
             <result column="sPid" jdbcType="VARCHAR" property="pid"/>
@@ -67,7 +68,8 @@
     <select id="findByAcct" parameterType="java.lang.String" resultMap="AcctResultMap">
         select
         ui.nickname, ui.headimgurl,
-        u.sex, u.user_level as regType,
+        u.sex, u.user_level as regType, u.openId,
+        CASE when ISNULL(u.openId) || LENGTH(trim(u.openId)) &lt; 1 then '0' else '1' end as isBindWx,
 
         s.id as sid,
         s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,
