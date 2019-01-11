@@ -104,50 +104,6 @@
     {@/each}
 </script>
 	﻿
-	<div class="modal fade " id="modal-status">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title">设置状态</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" id="fm-status" role="form">
-						<div class="form-body">
-							<div class="form-group">
-								<label class="col-md-2 view-label">对象</label>
-								<div class="col-md-10 status-title">
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-2 control-label">状态</label>
-								<div class="col-md-10">
-									<div class="radio-group-container">
-										<input type="hidden" name="id">
-										<label>
-											<input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-										</label>
-										<label>
-											<input type="radio" name="status" value="2"><span style="padding:10px">直播中</span>
-										</label>
-										<label>
-											<input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-										</label>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn green status">确定</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
@@ -184,7 +140,7 @@
                                   <div class="form-group">
                      <label class="col-md-2 view-label">事故发生地点</label>
                      <div class="col-md-10">
-                           \${data.o.address}
+                           <a href="${pageContext.request.contextPath}/dynamic/service/roadSection/previewMap.jsp?latitude=\${data.o.latitude}&longitude=\${data.o.longitude}" target="_blank">\${data.o.address}</a>
                      </div>
                     </div>
                                   <div class="form-group">

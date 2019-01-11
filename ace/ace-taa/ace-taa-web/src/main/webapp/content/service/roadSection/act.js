@@ -14,7 +14,7 @@ function initPreview(id) {
                             var o=result.value[0];
                             var map = new qq.maps.Map(document.getElementById("container"), {
                                 center: new qq.maps.LatLng(o.latitude,o.longitude),
-                                zoom: 14
+                                zoom: 16
                             });
                             var path = [];
                             //new qq.maps.LatLng(39.930, 116.425)
