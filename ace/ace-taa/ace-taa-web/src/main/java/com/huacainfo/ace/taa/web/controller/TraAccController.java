@@ -253,4 +253,20 @@ public class TraAccController extends TaaBaseController {
         String[] id = ids.split(",");
         return this.traAccService.deleteTraAccByTraAccIds(id, this.getCurUserProp());
     }
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(更新状态)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-10
+     */
+    @RequestMapping(value = "/updateStatus")
+    @ResponseBody
+    public MessageResponse updateStatus(String id,String status) throws Exception {
+        return this.traAccService.updateStatus(id,status,this.getCurUserProp());
+    }
 }

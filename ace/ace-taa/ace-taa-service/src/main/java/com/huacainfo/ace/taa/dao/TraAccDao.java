@@ -30,7 +30,7 @@ List<TraAccVo> findList(@Param("condition") TraAccQVo condition,
 
     int isExit(TraAcc record);
 
-    int updateStatus(TraAcc record);
+    int updateStatus(@Param("id") String id,@Param("status") String status);
 
 
     List<Map<String,Object>> getList(@Param("p")Map<String,Object> p);

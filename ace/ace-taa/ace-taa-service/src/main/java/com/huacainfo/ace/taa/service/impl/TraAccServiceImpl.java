@@ -328,4 +328,22 @@ public class TraAccServiceImpl implements TraAccService {
 
     }
 
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(更新状态)
+     * @param: @param obj
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-10
+     */
+    @Override
+    public MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception{
+        this.traAccDao.updateStatus(id,status);
+        this.dataBaseLogService.log("跟新状态", "事故", id, id, "事故", userProp);
+        return new MessageResponse(0, "成功！");
+    }
+
 }
