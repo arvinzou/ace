@@ -2,7 +2,7 @@ var political = null;
 var clazz = null;
 var account = null;
 $(function(){
-	var politicalArr = [{"id":"normal","value":"普通学员"},{"id":"party","value":"党员"}];
+	var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
 	var classesArr = [{"id":"1","value":"2018届党校1班"},{"id":"2","value":"2018届党校2班"}];
 	
 	var politicalSelect= new MobileSelect({
