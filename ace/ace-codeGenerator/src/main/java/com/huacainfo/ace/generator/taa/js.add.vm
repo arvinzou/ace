@@ -34,8 +34,7 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    initEditor();
-//    initUpload();
+initForm();
 }
 function initEvents(){
     /*表单验证*/
@@ -100,4 +99,9 @@ function save(params) {
             alert("对不起出错了！");
         }
     });
+}
+
+function initForm(){
+       var data=staticDictObject;
+       render('#fm-add-panel',data,'tpl-fm-add');
 }

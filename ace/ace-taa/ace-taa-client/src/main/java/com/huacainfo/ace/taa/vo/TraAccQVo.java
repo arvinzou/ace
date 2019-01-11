@@ -17,6 +17,8 @@ public class TraAccQVo extends TraAcc {
 
     private Integer endDate;
 
+    private String keyword;
+
     public String getRoadManName() {
         return roadManName;
     }
@@ -55,5 +57,13 @@ public class TraAccQVo extends TraAcc {
 
     public void setEndDate(Integer endDate) {
         this.endDate = endDate;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }

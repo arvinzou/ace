@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 5};
+var params = {limit: 10};
 window.onload = function (){
     initPage();
     initEvents();
@@ -23,27 +23,35 @@ function initPage() {
             getPageList();
         }
     });
+
+    $('#fm-search').ajaxForm({
+        beforeSubmit: function(formData, jqForm, options) {
+        $.each(formData, function(n, obj) {
+            params[obj.name] = obj.value;
+        });
+        params['initType'] = 'init';
+        params['start']=0;
+        getPageList();
+        return false;
+    }
+});
 }
-/*事故条件查询*/
-function t_query(){
-    getPageList();
-    return false;
-}
+
 function setParams(key,value){
     params[key]=value;
-     getPageList();
+    getPageList();
 }
 /*事故加载表格数据*/
 function getPageList() {
     var url = contextPath+ "/traAcc/findTraAccList";
-    params['name']=$("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();
         if (rst.status == 0) {
             if (params.initType == "init") {
                 $('#pagination1').jqPaginator('option', {
-                    totalCounts: rst.total
+                    totalCounts: rst.total==0?1:rst.total,
+                    currentPage: 1
                 });
             }
             render($("#page-list"), rst.rows, "tpl-list");

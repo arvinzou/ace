@@ -96,6 +96,14 @@
       concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
     </if>
 
+
+    <if test='condition.keyword!=null and condition.keyword!=""'>
+      and (a.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like concat(#{condition.keyword,jdbcType=VARCHAR},'%'))
+    </if>
+
+
+
+
     <if test='condition.roadManId!=null and condition.roadManId!=""'>
       and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
     </if>

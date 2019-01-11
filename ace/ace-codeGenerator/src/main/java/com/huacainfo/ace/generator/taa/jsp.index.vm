@@ -29,7 +29,7 @@
 
                                                             <div class="col-md-9">
 
-                                                                <form onsubmit="return t_query()">
+                                                                <form id="fm-search">
                                                                     <div class="btn-group" role="group"  style="float:left;padding-right:5px">
                                                                         <button type="button" class="btn btn-default"  onclick="setParams('status','');">全部</button>
                                                                         <button type="button" class="btn btn-default"  onclick="setParams('status','1');">预播</button>

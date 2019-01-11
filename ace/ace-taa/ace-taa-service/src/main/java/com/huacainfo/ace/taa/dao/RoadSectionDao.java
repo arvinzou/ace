@@ -48,4 +48,7 @@ public interface RoadSectionDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+
+    List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
+
 }
