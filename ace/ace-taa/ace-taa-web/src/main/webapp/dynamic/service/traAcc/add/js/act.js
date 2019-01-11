@@ -105,7 +105,7 @@ function initForm() {
 	render('#fm-add-panel', data, 'tpl-fm-add');
 
 	$("input[name=accidentTime]").datetimepicker({
-		format: 'yyyy-mm-dd hh:ii',
+		format: 'yyyy-mm-dd hh:ii:ss',
 		language: 'zh-CN',
 		weekStart: 1,
 		todayBtn: 1, //显示‘今日’按钮
@@ -142,7 +142,13 @@ function initForm() {
 				title: '县区',
 				width: 100
 			}]
-		]
+			
+		],
+		
+		onSelect:function  (rowIndex, rowData) {
+			console.log(rowData);
+			$("input[name=areaCode]").val(rowData.areaCode);
+		}
 	});
 	
 	$('input[name=roadSectionId]').combogrid({
@@ -176,6 +182,7 @@ function initForm() {
 			console.log(rowData);
 			$("#roadManId").combogrid("grid").datagrid("loadData", [{id:rowData.roadManId,name:rowData.roadManName,orgName:rowData.orgName,areaName:rowData.areaName}]);
 			$('#roadManId').combogrid('setValue',rowData.roadManId);
+			$("input[name=areaCode]").val(rowData.areaCode);
 		}
 	});
 }
