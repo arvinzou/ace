@@ -294,4 +294,23 @@ private DataBaseLogService dataBaseLogService;
 
                                     }
 
+
+                                    /**
+                                         * @throws
+                                         * @Title:updateStatus
+                                         * @Description: TODO(更新状态)
+                                         * @param: @param obj
+                                         * @param: @param userProp
+                                         * @param: @throws Exception
+                                         * @return: MessageResponse
+                                     * @author: $!{annotation.authorName}
+                                     * @version: $!{annotation.version}
+                                         */
+                                        @Override
+                                        public MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception{
+                                            this.$!{bean.lowerName}Dao.updateStatus(id,status);
+                                            this.dataBaseLogService.log("跟新状态", "$!{bean.tableChineseName}", id, id, "$!{bean.tableChineseName}", userProp);
+                                            return new MessageResponse(0, "成功！");
+                                        }
+
  }

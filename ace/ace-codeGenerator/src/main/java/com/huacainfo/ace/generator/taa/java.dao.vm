@@ -30,7 +30,7 @@ List<$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
 
     int isExit($!{bean.name} record);
 
-    int updateStatus($!{bean.name} record);
+    int updateStatus(@Param("id") String id,@Param("status") String status);
 
 
     List<Map<String,Object>> getList(@Param("p")Map<String,Object> p);

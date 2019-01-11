@@ -154,4 +154,18 @@ public interface TraAccService {
      * @version: 2019-01-10
      */
     public MessageResponse deleteTraAccByTraAccIds(String[] id, UserProp userProp) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(更新状态)
+     * @param: @param obj
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-10
+     */
+    MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception;
 }
