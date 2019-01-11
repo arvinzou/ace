@@ -1,5 +1,6 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.result.ResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,12 @@ public class CourseController extends BisBaseController {
         return rst;
     }
 
+    @RequestMapping(value = "/findListClassifiedName")
+    @ResponseBody
+    public ResultResponse findListClassifiedName(CourseQVo condition, PageParamNoChangeSord page) throws Exception {
+        return this.courseService.findListClassifiedName(condition, 0, 100,"");
+    }
+
     /**
      * @throws
      * @Title:insertCourse
@@ -104,8 +111,7 @@ public class CourseController extends BisBaseController {
      */
     @RequestMapping(value = "/selectCourseByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <CourseVo> selectCourseByPrimaryKey(String id) throws Exception {
+    public SingleResult<CourseVo> selectCourseByPrimaryKey(String id) throws Exception {
         return this.courseService.selectCourseByPrimaryKey(id);
     }
 

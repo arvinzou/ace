@@ -1,8 +1,31 @@
 var political = null;
 var account = null;
+var workUnit = null;
 $(function(){
-    var politicalArr = [{"id":"normal","value":"普通学员"},{"id":"party","value":"党员"}];
-	
+    var unit = staticDictObject['156'];     //处室字典
+    var unitArr = [];
+    for(var i=0; i<unit.length; i++){
+        var o = {};
+        o.id = unit[i].CODE;
+        o.value = unit[i].NAME;
+        unitArr.push(o);
+    }
+    var unitSelect= new MobileSelect({
+        trigger: '#workUnit',
+        title: '处室选择',
+        wheels: [
+            {data: unitArr}
+        ],
+        position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+        transitionEnd:function(indexArr, data){
+            workUnit = data;
+        },
+        callback:function(indexArr, data){
+            workUnit = data;
+        }
+    });
+
+    var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
 	var politicalSelect= new MobileSelect({
 	    trigger: '#political',
 	    title: '政治面貌选择',
@@ -23,7 +46,6 @@ $(function(){
 function regist(){
     var name = $("input[name='name']").val();
     var idCard = $("input[name='idCard']").val();
-    var workUnitName = $("input[name='workUnitName']").val();     //单位名称
     var postName = $("input[name='postName']").val();              //单位职务
     var signAcct = $("input[name='mobile']").val();
     var pwd = $("input[name='pwd']").val();                        //第一次输入的密码
@@ -36,9 +58,15 @@ function regist(){
     if(!isEmpty(idCard)){
         alert("身份证号不能为空！");
         return;
+    }else{
+        isCardNo(idCard);
     }
     if(!isEmpty(political)){
         alert("政治面貌不能为空！");
+        return;
+    }
+    if(!isEmpty(workUnit)){
+        alert("处室不能为空！");
         return;
     }
     if(!isEmpty(signAcct)){
@@ -70,7 +98,7 @@ function regist(){
             mobile: signAcct,
             idCard: idCard,
             political: political[0].id,
-            workUnitName: workUnitName,
+            workUnitName: workUnit[0].id,
             postName: postName,
             uid: new Date().getTime()
         },
@@ -101,6 +129,17 @@ function isEmpty(str){
         return false;
     }else{
         return true;
+    }
+}
+
+function isCardNo(card)
+{
+// 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if(reg.test(card) === false)
+    {
+        alert("身份证输入不合法");
+        return;
     }
 }
 

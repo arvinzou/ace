@@ -1,10 +1,10 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import org.slf4j.Logger;
@@ -52,20 +52,33 @@ public class CourseServiceImpl implements CourseService {
      * @version: 2019-01-02
      */
     @Override
-    public PageResult
-            <CourseVo> findCourseList(CourseQVo condition, int start,
-                                      int limit, String orderBy) throws Exception {
-        PageResult
-                <CourseVo> rst = new PageResult<>();
-        List
-                <CourseVo> list = this.courseDao.findList(condition,
-                start, limit, orderBy);
+    public PageResult<CourseVo> findCourseList(CourseQVo condition, int start, int limit, String orderBy) throws Exception {
+        PageResult<CourseVo> rst = new PageResult<>();
+        List<CourseVo> list = this.courseDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.courseDao.findCount(condition);
             rst.setTotal(allRows);
         }
         return rst;
+    }
+
+
+    @Override
+    public ResultResponse findListClassifiedName(CourseQVo condition, int start, int limit, String orderBy) throws Exception {
+        Map<String,List<CourseVo>> map= new HashMap<String,List<CourseVo>>();
+        List<CourseVo> list = this.courseDao.findList(condition, start, limit, orderBy);
+        List<CourseVo> itemList;
+        for(CourseVo item:list){
+            String teacherName=item.getTeacherName();
+            itemList=map.get(teacherName);
+            if(CommonUtils.isBlank(itemList)){
+                itemList=new ArrayList<CourseVo>();
+            }
+            itemList.add(item);
+            map.put(teacherName,itemList);
+        }
+        return new ResultResponse(ResultCode.SUCCESS,"老师分组的课程列表",map);
     }
 
     /**
@@ -123,7 +136,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public MessageResponse updateCourse(Course o, UserProp userProp) throws Exception {
         Course course = this.courseDao.selectByPrimaryKey(o.getId());
-        if (course==null) {
+        if (course == null) {
             return new MessageResponse(1, "课程管理数据丢失！");
         }
         if (CommonUtils.isBlank(o.getName())) {
@@ -189,7 +202,7 @@ public class CourseServiceImpl implements CourseService {
 
 
     @Override
-    public MessageResponse softdel(String id,UserProp userProp) throws Exception {
+    public MessageResponse softdel(String id, UserProp userProp) throws Exception {
 
         Course obj = courseDao.selectByPrimaryKey(id);
         if (obj == null) {
