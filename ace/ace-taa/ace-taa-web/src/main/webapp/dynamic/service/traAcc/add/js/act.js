@@ -171,7 +171,12 @@ function initForm() {
 				title: '路段截止',
 				width: 100
 			}]
-		]
+		],
+		onSelect:function  (rowIndex, rowData) {
+			console.log(rowData);
+			$("#roadManId").combogrid("grid").datagrid("loadData", [{id:rowData.roadManId,name:rowData.roadManName,orgName:rowData.orgName,areaName:rowData.areaName}]);
+			$('#roadManId').combogrid('setValue',rowData.roadManId);
+		}
 	});
 }
 

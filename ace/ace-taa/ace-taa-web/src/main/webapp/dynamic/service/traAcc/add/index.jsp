@@ -115,7 +115,7 @@
 										所属路长
 									</label>
 									<div class="col-md-5">
-										<input type="text" class="form-control" style="width:450px" name="roadManId" maxlength="50" placeholder="请输入所属路长（建议字数在14个字以内，不超过50个字)">
+										<input type="text" id="roadManId" class="form-control" style="width:450px" name="roadManId" maxlength="50" placeholder="请输入所属路长（建议字数在14个字以内，不超过50个字)">
 										<span class="help-block"></span>
 									</div>
 								</div>
