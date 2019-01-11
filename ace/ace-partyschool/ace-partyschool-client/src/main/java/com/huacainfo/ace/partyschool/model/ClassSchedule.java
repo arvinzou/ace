@@ -1,5 +1,7 @@
 package com.huacainfo.ace.partyschool.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,6 +11,7 @@ public class ClassSchedule  implements Serializable {
 
     private String classesId;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date courseDate;
 
     private String courseIndex;

@@ -1,5 +1,5 @@
 var loading = {};
-var params = {limit: 15};
+var params = {limit: 15,learned:'learned'};
 window.onload = function () {
     initPage();
     initEvents();
@@ -10,81 +10,6 @@ window.onload = function () {
 
 
 function initSelect() {
-/*    $(".js-example-basic-single").select2({
-        ajax: {
-            url: portalPath + "/dict/findListByCategoryId.do?categoryId=154&selected=false",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-                var datas = $.map(data.slice(1), function (obj) {
-                    obj.text = obj.text || obj.name; // replace name with the property used for the text
-                    return obj;
-                });
-                datas = $.map(datas, function (obj) {
-                    obj.id = obj.code; // replace name with the property used for the text
-                    return obj;
-                });
-                return {
-                    results: datas,
-                    pagination: {
-                        more: (params.page * 30) < data.total_count
-                    }
-                };
-            },
-            cache: true
-        },
-        placeholder: '选择类型',
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-    });
-
-    $(".js-example-basic-single1").select2({
-        ajax: {
-            url: contextPath + "/evaluating/findEvaluatingList",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    name: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-                var datas = $.map(data.rows, function (obj) {
-                    obj.text = obj.text || obj.name; // replace name with the property used for the text
-                    return obj;
-                });
-                datas = $.map(datas, function (obj) {
-                    obj.id = obj.id; // replace name with the property used for the text
-                    return obj;
-                });
-                return {
-                    results: datas,
-                    pagination: {
-                        more: (params.page * 30) < data.total_count
-                    },
-                    paginate: {
-                        more: true
-                    }
-                };
-            },
-            cache: true
-        },
-        placeholder: '选择评测模板',
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-    });*/
-
     $(".js-example-basic-single2").select2({
         ajax: {
             url: contextPath + '/teacher/findTeacherList',

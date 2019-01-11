@@ -19,6 +19,8 @@
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 
     <!--引用js-->
     <script src="CommonUI/Scripts/jquery-1.10.2.min.js"></script>
@@ -44,48 +46,15 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
-            </div>
-
-            <div class="col-md-9">
-
+            <div class="col-md-12">
                 <form onsubmit="return t_query()">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
+                    <div class="btn-group" id="classList" role="group" style="float:left;padding-right:5px">
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
-                    <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入直播名称">
-                        <span class="input-group-btn">
-                            <button class="btn  btn-default search_btn"
-                                    type="submit">
-                                    搜索
-                            </button>
-                        </span>
+                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
                     </div>
                 </form>
             </div>
-
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -133,6 +102,13 @@
     {@/each}
 </script>
 
+
+<script id="tpl-classList" type="text/template">
+    {@each data as item, index}
+    <button type="button" class="btn btn-default" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@/each}
+</script>
+
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
@@ -144,4 +120,5 @@
 <script type="text/javascript" src="CommonUI/fullcalendar2.9/zh-cn.js"></script>
 <script type="text/javascript" src="CommonUI/fullcalendar2.9/jquery-ui.custom.min.js"></script>
 <script type="text/javascript" src="js/fc_schedule.plug_in.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/select2/js/select2.js"></script>
 </html>

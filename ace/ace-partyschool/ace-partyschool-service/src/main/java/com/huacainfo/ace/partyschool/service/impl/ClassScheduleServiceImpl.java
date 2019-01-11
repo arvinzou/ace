@@ -61,9 +61,6 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
     public PageResult<ClassScheduleVo> findClassScheduleList(ClassScheduleQVo condition, int start,
                                                              int limit, String orderBy) throws Exception {
         PageResult<ClassScheduleVo> rst = new PageResult<>();
-        if (CommonUtils.isBlank(condition.getTimePoint())) {
-            condition.setTimePoint(new Date());
-        }
         List<ClassScheduleVo> list = this.classScheduleDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -94,7 +91,6 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
         ClassScheduleDao dao = session.getMapper(ClassScheduleDao.class);
-        condition.setLearned("learned");
         PageResult<ClassScheduleVo> rst = new PageResult<>();
         try {
             List<ClassScheduleVo> list = dao.LearnedCourses(condition, start, limit, orderBy);
