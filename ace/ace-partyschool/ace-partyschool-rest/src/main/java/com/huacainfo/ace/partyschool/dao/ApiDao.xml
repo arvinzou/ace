@@ -12,4 +12,45 @@
         and rownum = 1
     </select>
 
+    <!--考勤数据VO-->
+    <resultMap id="AttResultVoMap" type="com.huacainfo.ace.partyschool.model.AttResultVo">
+        <id column="customername" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customerindustryno" jdbcType="VARCHAR" property="cardNo"/>
+        <result column="account_id" jdbcType="VARCHAR" property="accountId"/>
+        <result column="organize_name" jdbcType="VARCHAR" property="orgName"/>
+        <result column="term_serial_no" jdbcType="VARCHAR" property="termNo"/>
+        <result column="termname" jdbcType="VARCHAR" property="termName"/>
+        <result column="deal_time" jdbcType="VARCHAR" property="dealTime"/>
+    </resultMap>
+
+    <select id="findAttDataList" resultMap="AttResultVoMap">
+        select
+        c.customerindustryno,
+        c.customername,
+        t.account_id,
+        org.organize_name,
+        t.term_serial_no,
+        term.termname,
+        to_char(t.deal_time, 'yyyy-mm-dd HH24:mm:ss') as deal_time
+        from ${tableName} t
+        left join TB_CUSTOMER_INFO c on t.account_id = c.customerid
+        left join TB_TERM_BASE_PARAMETER term on t.term_serial_no = term.termserialno
+        left join ATT_BASE_ORGANIZE org on c.customerdept = org.organize_id
+        where 1=1
+        <if test="cardNo !=null and cardNo !=&quot;&quot;">
+            and c.customerindustryno = #{cardNo,jdbcType=VARCHAR}
+        </if>
+        <if test="params.yearStr !=null and params.yearStr !=&quot;&quot;">
+            and to_char(t.deal_time, 'yyyy-mm-dd HH24:mm:ss')
+            like CONCAT(#{params.yearStr,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.monthStr !=null and params.monthStr !=&quot;&quot;">
+            and to_char(t.deal_time, 'yyyy-mm-dd HH24:mm:ss')
+            like CONCAT(#{params.monthStr,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.dayStr !=null and params.dayStr !=&quot;&quot;">
+            and to_char(t.deal_time, 'yyyy-mm-dd') = #{params.dayStr,jdbcType=VARCHAR}
+        </if>
+        order by t.deal_time
+    </select>
 </mapper>
