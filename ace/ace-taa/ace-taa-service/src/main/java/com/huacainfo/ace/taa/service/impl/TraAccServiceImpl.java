@@ -85,9 +85,7 @@ public class TraAccServiceImpl implements TraAccService {
         if (CommonUtils.isBlank(o.getLongitude())) {
             return new MessageResponse(1, "经度不能为空！");
         }
-        if (CommonUtils.isBlank(o.getAreaCode())) {
-            return new MessageResponse(1, "行政区划不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
         }
@@ -99,6 +97,9 @@ public class TraAccServiceImpl implements TraAccService {
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
+        if(CommonUtils.isBlank(o.getAreaCode())){
+            o.setAreaCode(userProp.getAreaCode());
+        }
         this.traAccDao.insert(o);
         this.dataBaseLogService.log("添加事故", "事故", "",
                 o.getId(), o.getId(), userProp);
@@ -127,9 +128,6 @@ public class TraAccServiceImpl implements TraAccService {
         }
         if (CommonUtils.isBlank(o.getLongitude())) {
             return new MessageResponse(1, "经度不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getAreaCode())) {
-            return new MessageResponse(1, "行政区划不能为空！");
         }
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");

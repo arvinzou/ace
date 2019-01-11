@@ -77,13 +77,13 @@
 										车型
 										<span class="required" aria-required="true"> * </span>
 									</label>
-									<div class="col-md-5">
+									<div class="col-md-6">
 							
 										
 										<div class="radio-group-container">
 											{@each data['172'] as item, index}
 											{@if item.CODE!=''}
-											<label class="mt-radio mt-radio-outline">
+											<label class="mt-radio mt-radio-outline"  style="width: 150px;">
 												<input type="radio" name="vehicleType" value="\${item.CODE}" >\${item.NAME}
 												<span></span>
 											</label>
@@ -115,7 +115,7 @@
 										所属路长
 									</label>
 									<div class="col-md-5">
-										<input type="text" class="form-control" style="width:450px" name="roadManId" maxlength="50" placeholder="请输入所属路长（建议字数在14个字以内，不超过50个字)">
+										<input type="text" id="roadManId" class="form-control" style="width:450px" name="roadManId" maxlength="50" placeholder="请输入所属路长（建议字数在14个字以内，不超过50个字)">
 										<span class="help-block"></span>
 									</div>
 								</div>

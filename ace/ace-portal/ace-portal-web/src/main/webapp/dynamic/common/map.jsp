@@ -12,7 +12,7 @@ pageEncoding="utf-8"%>
 <script src="https://lbs.qq.com/tool/getpoint/jquery-1.9.1.min.js"></script>
 <link rel="stylesheet" href="https://lbs.qq.com/tool/getpoint/jquery-ui.min.css">
 <script src="https://lbs.qq.com/tool/getpoint/jquery-ui-1.10.4.min.js"></script>
-<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=ULWBZ-54PKS-HBMOL-6YWJF-KMKY6-2XBBB"></script>
 <script src="../../content/common/juicer/juicer-min.js"></script>
 <style type="text/css">
 * {
