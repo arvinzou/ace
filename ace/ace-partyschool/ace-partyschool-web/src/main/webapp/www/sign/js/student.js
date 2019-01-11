@@ -52,6 +52,8 @@ function regist(){
     if(!isEmpty(idCard)){
         alert("身份证号不能为空！");
         return;
+    }else{
+        isCardNo(idCard);
     }
     if(!isEmpty(political)){
         alert("政治面貌不能为空！");
@@ -122,6 +124,17 @@ function isEmpty(str){
         return false;
     }else{
         return true;
+    }
+}
+
+function isCardNo(card)
+{
+// 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
+    var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if(reg.test(card) === false)
+    {
+        alert("身份证输入不合法");
+        return;
     }
 }
 
