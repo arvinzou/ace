@@ -79,4 +79,23 @@
     FROM
     mail_list t
   </select>
+  <select id="getTeacherTreeList" resultType="map">
+    SELECT
+    t.ID,
+    '0' PID,
+    t.name AS TEXT,
+    t.mobile HREF,
+    0 CHILD_COUNT,
+    'closed' STATE,
+    b.headimgurl ICON
+    FROM
+    teacher t
+    LEFT JOIN portal.users a on t.id=a.user_id
+    left join portal.userinfo b on a.openId=b.unionid
+where 0=0
+    <if test='name!=null and name!=""'>
+      and t.name like
+      concat(#{name,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
 </mapper>

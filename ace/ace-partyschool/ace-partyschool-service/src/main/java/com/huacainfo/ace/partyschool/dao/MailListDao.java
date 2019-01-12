@@ -43,7 +43,7 @@ List<MailListVo> findList(@Param("condition") MailListQVo condition,
 
 
     List<Map<String,Object>> getClassTreeList(@Param("classId")String classId,@Param("name")String name);
-    List<Map<String,Object>> getTeacherTreeList();
+    List<Map<String,Object>> getTeacherTreeList(@Param("name")String name);
     List<Map<String,Object>> getTreeList();
 
  }
