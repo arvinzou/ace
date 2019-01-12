@@ -23,11 +23,11 @@
 			<div class="portlet-body">
 
 				<div class="row custom-toolbar">
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<a href="add/index.jsp?id=${param.id}" class="btn green">快报</a>
 					</div>
 
-					<div class="col-md-6">
+					<div class="col-md-7">
 
 						<form id="fm-search">
 

@@ -54,6 +54,7 @@
 												<input name="longitude" type="hidden" value="\${data.o.longitude}"/>
 		                                        <input name="areaCode" type="hidden" value="\${data.o.areaCode}"/>
 												<input name="id" type="hidden" value="\${data.o.id}"/>
+												<div class="error-address"></div>
 											</div>
 										</div>
 		
@@ -76,6 +77,7 @@
 		                                            {@/if}
 		                                            {@/each}
 		                                        </div>
+												<div class="error-weather"></div>
 											</div>
 										</div>
 										<div class="form-group">
@@ -96,6 +98,7 @@
 													{@/if}
 													{@/each}
 												</div>
+												<div class="error-vehicleType"></div>
 											</div>
 										</div>
 										<div class="form-group">

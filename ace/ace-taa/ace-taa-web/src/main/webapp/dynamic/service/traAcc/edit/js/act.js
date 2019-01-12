@@ -108,32 +108,31 @@ function initEvents() {
 		onfocusout: function(element) {
 			$(element).valid();
 		},
+		errorPlacement: function(error, element) {
+             $(element).closest( "form" ).find( ".error-" + element.attr( "name" )).append( error );
+        },
 		rules: {
-			areaCode: {
+			address: {
 				required: true,
 				maxlength: 50
 			},
 			weather: {
-				required: true,
-				maxlength: 50
+				required: true
 			},
 			vehicleType: {
-				required: true,
-				maxlength: 50
+				required: true
 			}
 		},
 		messages: {
-			areaCode: {
-				required: "请输入行政区划",
-				maxlength: "行政区划字符长度不能超过50"
+			address: {
+				required: "请选择事故发生地点",
+				maxlength: "事故发生地点字符长度不能超过50"
 			},
 			weather: {
-				required: "请输入天气",
-				maxlength: "天气字符长度不能超过50"
+				required: "请选择天气"
 			},
 			vehicleType: {
-				required: "请输入车型",
-				maxlength: "车型字符长度不能超过50"
+				required: "请选择车型"
 			}
 		}
 	});

@@ -10,6 +10,7 @@ pageEncoding="utf-8"%>
     <title>路长</title>
 </head>
 <jsp:include page="/dynamic/common/header.jsp"/>
+<link rel="stylesheet" href="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/css/jquery.plupload.queue.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="${portalPath}/content/common/jqGrid/jqGrid.css?v=${cfg.version}"/>
 <link href="${portalPath}/content/common/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
 <link href="${portalPath}/content/common/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
@@ -26,6 +27,9 @@ pageEncoding="utf-8"%>
                     <button type="button" class="btn  green" id="btn-view-add"
                             authority="${pageContext.request.contextPath}/roadMan/insertRoadMan">添加
                     </button>
+										<button type="button" class="btn  green" id="btn-view-importXls"
+														authority="false">Excel导入
+										</button>
 
                 </div>
                 <div class="col-md-6">
@@ -97,6 +101,29 @@ pageEncoding="utf-8"%>
             </div>
             <div class="modal-body" id="fm-preview-gps">
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade"  role="dialog" id="modal-upload">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  authority="false" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Excel导入</h4>
+            </div>
+            <div class="modal-body">
+                <div id="uploader">
+                </div>
+                <div style="margin:5px">
+                    <a href="roadMan.xls" style="color:red">下载模板</a>.<br>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
@@ -282,7 +309,11 @@ pageEncoding="utf-8"%>
 
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/plupload.full.min.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/i18n/zh_CN.js?version=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/plupload-2.1.2/js/jquery.plupload.queue/jquery.plupload.queue.js?version=${cfg.version}"></script>
 
+<script src="${pageContext.request.contextPath}/content/service/roadMan/upload.js?version=${cfg.version}"></script>
 </body>
 <style>
     /* css code area*/
