@@ -1,0 +1,103 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.index{
+	width: 100%;
+	height: 100%;
+}
+.banner{
+	width: 100%;
+	height: 4.106666rem;
+	background: url('../img/bg.png') no-repeat;
+	background-size: 100% 100%;
+}
+.cardNo{
+	width: auto;
+	padding-top: 1.04rem;
+	padding-left: 1.733333rem;
+	color: #FFFFFF;
+	font-size: 0.346666rem;
+}
+.balance{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 1.333333rem;
+	font-weight: bold;
+}
+.balance-title{
+	width: 100%;
+	height: auto;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 0.346666rem;
+}
+.title{
+	padding-left: 0.426666rem;
+	padding-top: 0.293333rem;
+	padding-bottom: 0.52rem;
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+}
+.list{
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+}
+.item{
+	width: 9.2rem;
+	height: 1.866666rem;
+	background:rgba(255,255,255,0.7);
+	box-shadow:0px 0px 12px 6px rgba(215,217,223,0.25);
+	margin-bottom: 0.386666rem;
+}
+.item:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.icon{
+	width: 1.2rem;
+	height: 100%;
+	float: left;
+}
+.record{
+	width: 8rem;
+	height: 1.866666rem;
+	line-height: 1.866666rem;
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+}
+.icon img{
+	width: 0.906666rem;
+	height: 0.906666rem;
+	margin: 0.48rem auto;
+}
+.content{
+	width: 6rem;
+	height: 1.866666rem;
+	float: left;
+}
+.amount{
+	width: 2rem;
+	height: 1.866666rem;
+	line-height: 1.866666rem;
+	float: left;
+	color: #373F53;
+	font-size: 0.533333rem;
+	font-weight: bold;
+}
+.type{
+	color: #373F53;
+	font-size: 0.426666rem;
+	font-weight: bold;
+	padding-top: 0.346666rem;
+}
+.date{
+	color: #ABAEB9;
+	font-size: 0.32rem;
+	padding-top: 0.266666rem;
+}
