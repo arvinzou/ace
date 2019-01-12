@@ -55,9 +55,6 @@
       and t.name like
       concat(#{name,jdbcType=VARCHAR},'%')
     </if>
-
-    order by t.name
-
     UNION ALL
     SELECT
     t.ID,
@@ -96,7 +93,6 @@ where 0=0
       and t.name like
       concat(#{name,jdbcType=VARCHAR},'%')
     </if>
-    order by t.name
   </select>
 
 
