@@ -1,10 +1,17 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.ClassesDao;
+import com.huacainfo.ace.partyschool.service.SignService;
+import com.huacainfo.ace.partyschool.vo.AccountVo;
+import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -42,6 +49,10 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private SqlSessionTemplate sqlSession;
+    @Autowired
+    private SignService signService;
+    @Autowired
+    private ClassesDao classesDao;
 
     /**
      * @throws
@@ -99,6 +110,45 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
                 int allRows = dao.findCount(condition);
                 rst.setTotal(allRows);
             }
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
+        }
+        return rst;
+    }
+//
+
+    @Override
+    public ResultResponse MyClassSchedule(ClassScheduleQVo condition, int start, int limit, String orderBy ,UserProp userProp) throws Exception {
+        if(userProp==null){
+            new ResultResponse(ResultCode.FAIL,"没有登陆");
+        }
+        if(CommonUtils.isBlank(condition.getCourseDateStr())&&CommonUtils.isBlank(condition.getWeekDate())){
+            new ResultResponse(ResultCode.FAIL,"没有传入时间");
+        }
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        List<String> classList=new ArrayList<>();
+        if ("teacher".equals(accountVo.getRegType())) {
+           List< ClassesVo> clist=this.classesDao.findMyClassesList(userProp.getUserId());
+           for(ClassesVo item:clist){
+               classList.add(item.getId());
+           }
+        } else if ("student".equals(accountVo.getRegType())) {
+            classList.add(accountVo.getStudent().getClassId());
+        } else {
+            return new ResultResponse(ResultCode.FAIL,"该身份没有课表");
+        }
+        condition.setClassList(classList);
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        ClassScheduleDao dao = session.getMapper(ClassScheduleDao.class);
+        ResultResponse rst = new ResultResponse();
+        try {
+            List<ClassScheduleVo> list = dao.LearnedCourses(condition, start, limit, orderBy);
+            rst.setStatus(ResultCode.SUCCESS);
+            rst.setData(list);
         }catch (Exception e){
             session.close();
         }finally {

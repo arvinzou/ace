@@ -162,6 +162,12 @@
         <if test="condition.learned !=null and condition.learned !=&quot;&quot;">
             AND cs.courseDate <![CDATA[ < ]]> CURDATE()
         </if>
+        <if test="condition.classList !=null and condition.classList.size > 0">
+            and cs.classesId in
+            <foreach collection="condition.classList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
     </sql>
 
     <sql id="From_Statement">

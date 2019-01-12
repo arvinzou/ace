@@ -235,11 +235,13 @@ Page({
             that.initUserData();
         }
         that.data.timeout = setTimeout(function () {
+            console.log(that.data.timeout);
             that.setData({
                 showActivityModal: true,
             });
-                that.beforeShowModel();
+            that.beforeShowModel();
             clearTimeout(that.data.timeout);
+            console.log(that.data.timeout);
         }, 1000);
         that.activityIng(5);
         that.initReport();
@@ -252,7 +254,7 @@ Page({
         var that=this;
         clearInterval(that.data.stopwatch);
         clearTimeout(that.data.timeout);
-        that.afterHideModel();
+        that.centelEnevt();
     },
 
     /**
@@ -286,8 +288,8 @@ Page({
 
     },
     interEnevt:function(){
-        util.getSysUser()
-        if (true){
+        
+        if (util.getSysUser()){
             wx.previewImage({
                 current: 'http://zx.huacainfo.com/group1/M00/00/49/i-AA41wcSYOAXdxiAAPbIscZUqU165.png?filename=二维码.png', // 当前显示图片的http链接
                 urls: ['http://zx.huacainfo.com/group1/M00/00/49/i-AA41wcSYOAXdxiAAPbIscZUqU165.png?filename=二维码.png'] // 需要预览的图片http链接列表

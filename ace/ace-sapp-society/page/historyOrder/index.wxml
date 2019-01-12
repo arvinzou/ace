@@ -9,7 +9,7 @@
                 </view>-->
                 <view class='order-content' style='padding-top:30rpx;'>
                     <view class='content-left'>
-                        <view class='image-box'><image src='{{orderItem.commodityCover}}'></image></view>
+                        <view class='image-box'><image mode='aspectFill' src='{{orderItem.commodityCover}}'></image></view>
                     </view>
                     <view class='content-right'>
                         <view class='order-title'>
