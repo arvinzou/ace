@@ -8,8 +8,7 @@
 		<title>学员须知</title>
 		<jsp:include page="../../common/common.jsp"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
+
 	</head>
 	<body>
 		<div class="index">
@@ -77,5 +76,10 @@
 				</div>
 			</div>
 		</div>
+
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 </html>
