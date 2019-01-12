@@ -58,6 +58,11 @@ var title = relatedTarget.data('title');
 var modal = $(this);
 console.log(relatedTarget);
 initPreview(id);
+var data={};
+			data.key='category';
+			data.list=staticDictObject['170'];
+			render($("#check-group-category"), data, "tpl-check-group");
+
 })
 }
 
@@ -124,3 +129,9 @@ function setParams(key, value) {
 params[key] = value;
 jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
 }
+
+function importXls(id){
+				        reset_uploader({roadId:id});
+                		$('#modal-upload').modal('show');
+
+				}

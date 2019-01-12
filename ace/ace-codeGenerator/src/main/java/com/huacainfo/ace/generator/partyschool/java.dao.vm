@@ -1,6 +1,7 @@
 package com.huacainfo.ace.partyschool.dao;
 
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.partyschool.model.$!{bean.name};
 import com.huacainfo.ace.partyschool.vo.$!{bean.name}QVo;
@@ -20,8 +21,7 @@ int updateByPrimaryKey($!{bean.name} record);
 
 $!{bean.name}Vo selectVoByPrimaryKey(String id);
 
-List
-<$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
+List<$!{bean.name}Vo> findList(@Param("condition") $!{bean.name}QVo condition,
     @Param("start") int start,
     @Param("limit") int limit,
     @Param("orderBy") String orderBy);
@@ -30,6 +30,15 @@ List
 
     int isExit($!{bean.name} record);
 
-    int updateStatus($!{bean.name} record);
+    int updateStatus(@Param("id") String id,@Param("status") String status);
 
-    }
+
+    List<Map<String,Object>> getList(@Param("p")Map<String,Object> p);
+
+
+    List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
+
+
+    int deleteByPrimaryKeys(@Param("ids") String[] ids);
+
+ }
