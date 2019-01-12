@@ -58,6 +58,12 @@ public class WRegisterController extends TaaBaseController {
         if (!CommonUtils.isValidMobile(mobile)) {
             return new ResultResponse(ResultCode.FAIL, "手机号格式错误");
         }
+        //重复注册验证
+        boolean b = registerService.isExistByMobile(mobile);
+        if (b) {
+            return new ResultResponse(ResultCode.FAIL, "该手机已被注册");
+        }
+
         //四位随机码
         length = StringUtil.isEmpty(length) ? "4" : length;
         String randCode = CommonUtils.getIdentifyCode(Integer.valueOf(length), 0);
@@ -112,6 +118,9 @@ public class WRegisterController extends TaaBaseController {
             user = new WxUser();
             user.setUnionId(uid);
             user.setNickName("test");
+        }
+        if (user == null) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
         }
         //注册流程
         try {
