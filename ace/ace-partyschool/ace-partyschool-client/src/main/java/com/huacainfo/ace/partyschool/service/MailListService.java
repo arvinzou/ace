@@ -6,6 +6,7 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.partyschool.model.MailList;
+import com.huacainfo.ace.partyschool.vo.MailListContent;
 import com.huacainfo.ace.partyschool.vo.MailListVo;
 import com.huacainfo.ace.partyschool.vo.MailListQVo;
 import com.huacainfo.ace.common.model.view.Tree;
@@ -180,5 +181,26 @@ public interface MailListService {
      * @author: chenxiaoke
      * @version: 2019-01-12
      */
-    List<Tree> getTreeList(String name,UserProp userProp);
+    ListResult<Tree> getTreeList(String name,UserProp userProp);
+
+    /**
+     * @throws
+     * @Title:getMailListContent
+     * @Description: TODO(加载班级分组列表)
+     * @param: @return
+     * @return: List<MailListContent>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    ListResult<MailListContent> getMailListContent(String classId);
+    /**
+     * @throws
+     * @Title:updateClassesByIds
+     * @Description: TODO(分组更)
+     * @param: @return
+     * @return: MessageResponse
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    MessageResponse updateClassesByIds(String classId,String[] ids);
 }

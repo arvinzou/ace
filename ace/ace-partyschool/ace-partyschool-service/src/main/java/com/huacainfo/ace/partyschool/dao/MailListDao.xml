@@ -113,10 +113,26 @@ where 0=0
   </resultMap>
 
   <select id="getMailListContent" resultMap="MailListContent">
-    select id, name from mail_list
-    left join sta
-    where pid=#{p.classId}
+    SELECT
+    t.id,
+    t.name,
+    s.id personId,
+    s.name personName,
+    s.mobile,
+    b.headimgurl
+    FROM mail_list t
+    left join student s on t.id=s.pid
+    LEFT JOIN portal.users a on s.id=a.user_id
+    left join portal.userinfo b on a.openId=b.unionid
+    where t.pid=#{p.classId}
   </select>
+  <update id="updateClassesByIds">
+    update student t set t.pid=#{classId} where t.id in
+    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </update>
 
 
 </mapper>
