@@ -105,7 +105,11 @@
 
 <script id="tpl-classList" type="text/template">
     {@each data as item, index}
-    <button type="button" class="btn btn-default" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@if index==0}
+        <button type="button" class="btn btn-primary" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@else}
+        <button type="button" class="btn btn-default" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@/if}
     {@/each}
 </script>
 

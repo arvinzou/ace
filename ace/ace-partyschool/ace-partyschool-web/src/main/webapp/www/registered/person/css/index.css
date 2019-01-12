@@ -1,0 +1,256 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: #F2F2F2;
+}
+.index{
+	width: auto;
+	height: 100%;
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+	background: #FFFFFF;
+	margin-bottom: 0.266666rem;
+}
+.box{
+	height: 1.6rem;
+}
+.br{
+	border-bottom: 1px solid #F0EFF6;
+}
+.box:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.username{
+	color: #373F53;
+	font-size: 0.48rem;
+	font-weight: bold;
+}
+.header{
+	width: auto;
+	height: 100%;
+	float: left;
+	text-align: right;
+}
+.header img{
+	width: 1.066666rem;
+	height: 1.066666rem;
+	border-radius: 50%;
+	margin-top: 0.266666rem;
+}
+.username{
+	width: auto;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	float: left;
+	padding-left: 0.333333rem;
+}
+.show-card{
+	width: auto;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	float: right;
+	color: #373F53;
+	font-size: 0.4rem;
+	font-weight: bold;
+}
+.show-card img{
+	width: 0.2rem;
+	height: 0.346666rem;
+	margin-left: 0.253333rem;
+}
+.today{
+	width: auto;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	float: left;
+	color: #373F53;
+	font-size: 0.533333rem;
+	font-weight: bold;
+}
+.calendar{
+	width: auto;
+	height: 1.6rem;
+	float: right;
+}
+.calendar:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.calendar span{
+	color: #373F53;
+	font-weight: bold;
+	font-size: 0.4rem;
+}
+.icon-calendar img{
+	width: 0.546666rem;
+	height: 0.533333rem;
+	margin-bottom: -0.1rem;
+}
+.icon-calendar{
+	width: 0.546666rem;
+	height: 0.533333rem;
+	float: left;
+}
+.calendar-title{
+	width: auto;
+	height: 1.6rem;
+	float: left;
+	padding-left: 0.16rem;
+}
+.course{
+	width: auto;
+	height: 2.666666rem;
+	border-radius: 0.266666rem;
+	color: #FFFFFF;
+	margin-bottom: 0.346666rem;
+}
+.course:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.morning{
+	background:rgba(254,76,70,0.94);
+	box-shadow:0px 0px 0.173333rem 0px rgba(253,33,61,0.25);
+}
+.afternoon{
+	background:rgba(84,173,242,0.9);
+	box-shadow:0px 0px 13px 0px rgba(81,189,254,0.25);
+}
+.course-left{
+	width: 1.8rem;
+	height: 2.666666rem;
+	line-height: 2.666666rem;
+	float: left;
+	color: #FFFFFF;
+	font-size: 0.64rem;
+	font-weight: bold;
+	text-align: center;
+}
+.course-right{
+	width: 7rem;
+	height: 2.666666rem;
+	float: left;
+	word-wrap:break-word; 
+	word-break:break-all;
+	color: #FFFFFF;
+	font-size: 0.453333rem;
+	font-weight: bold;
+	padding-right: 0.4rem;
+}
+.scheal{
+	width: 100%;
+	height: 1.666666rem;
+	line-height: 0.906666rem;
+	display: block;
+	margin: 0.5rem auto;
+}
+.notice{
+	width: auto;
+	height: 1.333333rem;
+}
+.notice:after{
+	content: '';
+	clear: both;
+	display: blcok;
+}
+.notice-icon{
+	width: 0.8rem;
+	height: 100%;
+	float: left;
+}
+.notice-icon img{
+	width: 0.693333rem;
+	height: 0.533333rem;
+	margin: 0.4rem auto;
+}
+.notice-title{
+	width: 7rem;
+	height: 1.333333rem;
+	float: left;
+	line-height: 1.333333rem;
+	color: #373F53;
+	font-size: 0.426666rem;
+	font-weight: bold;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.more{
+	width: 1.4rem;
+	height: 1.333333rem;
+	line-height: 1.333333rem;
+	float: left;
+	color: #373F53;
+	font-size: 0.4rem;
+	font-weight: bold;
+}
+.more img{
+	width: 0.146666rem;
+	height: 0.266666rem;
+	margin-left: 0.4rem;
+}
+.menu{
+	padding-left: 0.6rem;
+	padding-right: 0.6rem;
+	background: #FFFFFF;
+	padding-top: 0.64rem;
+	padding-bottom: 0.64rem;
+}
+.mr{
+	margin-right: 0.4rem;
+}
+.row{
+	width: 100%;
+	height: 1.826666rem;
+	margin-bottom: 0.426666rem;
+}
+.row:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.item{
+	width: 4.2rem;
+	height: 1.826666rem;
+	float: left;
+	background:rgba(255,255,255,1);
+	box-shadow:0rem 0rem 0.346666rem 0.186666rem rgba(215,217,223,0.25);
+	border-radius:0.133333rem;
+}
+.item:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.item-left{
+	width: 1.6rem;
+	height: 1.826666rem;
+	float: left;
+}
+.item-right{
+	width: 2.6rem;
+	height: 1.826666rem;
+	float: left;
+}
+.menu-icon{
+	width: 0.8rem;
+	height: 0.8rem;
+	margin-left: 0.4rem;
+	margin-top: 0.5rem;
+}
+.menu-title{
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+	padding-top: 0.35rem;
+}
+.menu-content{
+	color: #ABAEB9;
+	font-size: 0.32rem;
+}
