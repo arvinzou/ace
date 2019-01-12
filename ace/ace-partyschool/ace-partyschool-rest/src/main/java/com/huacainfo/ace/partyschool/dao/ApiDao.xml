@@ -4,9 +4,9 @@
 
     <select id="findCustomerList" resultType="map">
         SELECT
-          rownum,
+        rownum,
           H.CARD_NO,t.customerid,t.customername
-        FROM  YQSH_1.TB_CUSTOMER_INFO T
+        FROM YQSH_1.TB_CUSTOMER_INFO T
         LEFT JOIN YQSH_1.TB_CARD_HISTORY_INFO H ON T.CUSTOMERID = H.CUSTOM_ID
         WHERE 1=1
         and rownum = 1
@@ -14,8 +14,8 @@
 
     <!--考勤数据VO-->
     <resultMap id="AttResultVoMap" type="com.huacainfo.ace.partyschool.model.AttResultVo">
-        <id column="customername" jdbcType="VARCHAR" property="customerName"/>
-        <result column="customerindustryno" jdbcType="VARCHAR" property="cardNo"/>
+        <result column="customername" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customerindustryno" jdbcType="VARCHAR" property="lCardNo"/>
         <result column="account_id" jdbcType="VARCHAR" property="accountId"/>
         <result column="organize_name" jdbcType="VARCHAR" property="orgName"/>
         <result column="term_serial_no" jdbcType="VARCHAR" property="termNo"/>
@@ -37,8 +37,8 @@
         left join TB_TERM_BASE_PARAMETER term on t.term_serial_no = term.termserialno
         left join ATT_BASE_ORGANIZE org on c.customerdept = org.organize_id
         where 1=1
-        <if test="cardNo !=null and cardNo !=&quot;&quot;">
-            and c.customerindustryno = #{cardNo,jdbcType=VARCHAR}
+        <if test="lCardNo !=null and lCardNo !=&quot;&quot;">
+            and c.customerindustryno = #{lCardNo,jdbcType=VARCHAR}
         </if>
         <if test="params.yearStr !=null and params.yearStr !=&quot;&quot;">
             and to_char(t.deal_time, 'yyyy-mm-dd HH24:mm:ss')
@@ -52,5 +52,133 @@
             and to_char(t.deal_time, 'yyyy-mm-dd') = #{params.dayStr,jdbcType=VARCHAR}
         </if>
         order by t.deal_time
+    </select>
+
+
+    <!--考勤数据VO-->
+    <resultMap id="TeacherFinRsVoMap" type="com.huacainfo.ace.partyschool.model.TeacherFinRsVo">
+        <result column="deal_time" jdbcType="VARCHAR" property="dealTime"/>
+        <result column="receive_time" jdbcType="VARCHAR" property="receiveTime"/>
+        <result column="card_no" jdbcType="VARCHAR" property="cardNo"/>
+        <result column="customername" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customerindustryno" jdbcType="VARCHAR" property="lCardNo"/>
+        <result column="CUSTOMER_STATE" jdbcType="VARCHAR" property="customerState"/>
+        <result column="CUSTOMER_STATE_NAME" jdbcType="VARCHAR" property="customerStateName"/>
+        <result column="PARTITION_NAME" jdbcType="VARCHAR" property="partitionName"/>
+        <result column="CUSTOMERDEPT" jdbcType="VARCHAR" property="customerDept"/>
+        <result column="organize_name" jdbcType="VARCHAR" property="orgName"/>
+        <result column="cur_card_consumption" jdbcType="DECIMAL" property="consumption"/>
+        <result column="pre_card_balance" jdbcType="DECIMAL" property="preBalance"/>
+        <result column="cur_card_balance" jdbcType="DECIMAL" property="curBalance"/>
+        <result column="subject_name" jdbcType="VARCHAR" property="subjectName"/>
+        <result column="termname" jdbcType="VARCHAR" property="termName"/>
+        <result column="business_code_name" jdbcType="VARCHAR" property="bisCodeName"/>
+        <result column="appsysname" jdbcType="VARCHAR" property="appSysName"/>
+    </resultMap>
+
+    <select id="findTeacherFinDataList" resultMap="TeacherFinRsVoMap">
+        SELECT * FROM
+        (
+        SELECT A.*, ROWNUM RN
+        FROM (
+        select to_char(t.deal_time, 'yyyy-mm-dd HH24:mi:ss:ff') as DEAL_TIME,
+        to_char(t.receive_time, 'yyyy-mm-dd HH24:mi:ss:ff') as RECEIVE_TIME,
+        to_char(t.card_no) as CARD_NO,
+        c.customerindustryno,
+        c.customername,
+        c.CUSTOMER_STATE,
+        case when c.CUSTOMER_STATE = 0 then '离职/离校'
+        else '在职/在校' end as CUSTOMER_STATE_NAME,
+        '无分区' as PARTITION_NAME,
+        c.CUSTOMERDEPT,
+        org.organize_name,
+        t.cur_card_consumption,
+        t.pre_card_balance,
+        t.cur_card_balance,
+        sc.subject_name,
+        term.termname,
+        dc.business_code_name,
+        a.appsysname
+        from ${tableName} t
+        left join TB_CUSTOMER_INFO c on t.custom_id = c.customerid
+        left join fin_dealcode_cfg dc on t.deal_code = dc.business_code_id
+        left join TBAPPSYSINFO a on t.app_no = a.appsyscode and a.Appsysstat = '2'
+        left join TB_TERM_BASE_PARAMETER term on t.terminal_id = term.termserialno
+        left join FIN_SUBJECT_CFG sc on t.subject_id = sc.subject_id
+        left join tbbaseorganize org on c.customerdept = org.organize_id
+        where c.customerdept = '00010001'
+        and t.deal_code = '13' --只查询通用消费
+        <if test="lCardNo !=null and lCardNo !=&quot;&quot;">
+            and c.customerindustryno = #{lCardNo,jdbcType=VARCHAR}
+        </if>
+        <if test="params.yearStr !=null and params.yearStr !=&quot;&quot;">
+            and to_char(t.deal_time, 'yyyy-mm-dd HH24:mi:ss:ff')
+            like CONCAT(#{params.yearStr,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.monthStr !=null and params.monthStr !=&quot;&quot;">
+            and to_char(t.deal_time, 'yyyy-mm-dd HH24:mi:ss:ff')
+            like CONCAT(#{params.monthStr,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="params.dayStr !=null and params.dayStr !=&quot;&quot;">
+            and to_char(t.deal_time, 'yyyy-mm-dd') = #{params.dayStr,jdbcType=VARCHAR}
+        </if>
+        order by t.deal_time desc
+        ) A
+        WHERE ROWNUM &lt;= #{endNum,jdbcType=INTEGER}
+        )
+        WHERE RN >= #{startNum,jdbcType=INTEGER}
+    </select>
+
+    <select id="findTeacherBalance" resultMap="TeacherFinRsVoMap">
+        select ROWNUM, A.*
+          from (select to_char(t.deal_time, 'yyyy-mm-dd HH24:mi:ss:ff') as DEAL_TIME,
+                       to_char(t.receive_time, 'yyyy-mm-dd HH24:mi:ss:ff') as RECEIVE_TIME,
+                       to_char(t.card_no) as CARD_NO,
+                       c.customerindustryno,
+                       c.customername,
+                       t.cur_card_consumption,
+                       t.pre_card_balance,
+                       t.cur_card_balance
+                  from FIN_CUS_DEAL_HIS_2018_12 t
+                  left join TB_CUSTOMER_INFO c
+                    on t.custom_id = c.customerid
+                 where c.customerdept = '00010001'
+                   and c.customerindustryno = #{lCardNo,jdbcType=VARCHAR}
+                 order by t.deal_time desc) A
+         WHERE rownum = 1
+    </select>
+
+
+    <select id="findStudentFinCount" resultType="int">
+        ${sql}
+    </select>
+
+
+    <resultMap id="StudentFinVoMap" type="com.huacainfo.ace.partyschool.model.StudentFinVo">
+        <result column="customername" jdbcType="VARCHAR" property="customerName"/>
+        <result column="customerindustryno" jdbcType="VARCHAR" property="lCardNo"/>
+        <result column="deal_time" jdbcType="VARCHAR" property="dealTime"/>
+    </resultMap>
+
+    <select id="findStudentFinList" resultMap="StudentFinVoMap">
+    SELECT * FROM (
+      select ROWNUM as RN, A.* from (
+        select
+
+        c.customerindustryno,
+        c.customername,
+        c.customerdept,
+        to_char(t.deal_time, 'yyyy-mm-dd HH24:mi:ss') deal_time
+
+        from ${tableName} t
+        left join TB_CUSTOMER_INFO c on t.account_id = c.customerid
+        where 1 = 1
+        and c.customerdept = '00010003'
+        and c.customerindustryno = #{lCardNo,jdbcType=VARCHAR}
+        order by t.deal_time
+      ) A
+      WHERE ROWNUM &lt;= #{endNum,jdbcType=INTEGER}
+    )
+    WHERE RN >= #{startNum,jdbcType=INTEGER}
     </select>
 </mapper>

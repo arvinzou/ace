@@ -70,6 +70,7 @@
         ui.nickname, ui.headimgurl,
         u.sex, u.user_level as regType, u.openId,
         CASE when ISNULL(u.openId) || LENGTH(trim(u.openId)) &lt; 1 then '0' else '1' end as isBindWx,
+        cd.cardData as lCardNo,
 
         s.id as sid,
         s.pid as sPid, s.name as sName, s.mobile as sMobile, s.idCard as sIdCard,
@@ -83,6 +84,7 @@
         left join portal.userinfo ui on u.openId = ui.unionid
         left join partyschool.student s on u.user_id = s.id
         left join partyschool.teacher t on u.user_id = t.id
+        left join partyschool.card_data cd on u.user_id = cd.userId
         where u.account = #{acct,jdbcType=VARCHAR}
     </select>
 

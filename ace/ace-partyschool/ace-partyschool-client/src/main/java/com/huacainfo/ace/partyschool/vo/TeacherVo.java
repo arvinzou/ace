@@ -19,6 +19,18 @@ public class TeacherVo extends Teacher {
      * 注册密码
      */
     private String singPwd;
+    /**
+     * 借阅证号
+     */
+    private String lCardNo;
+
+    public String getlCardNo() {
+        return lCardNo;
+    }
+
+    public void setlCardNo(String lCardNo) {
+        this.lCardNo = lCardNo;
+    }
 
     public String getSignAcct() {
         return signAcct;

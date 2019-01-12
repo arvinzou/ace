@@ -243,6 +243,7 @@ public class RoadManServiceImpl implements RoadManService {
             o.setCreateDate(new Date());
             o.setCreateUserId(userProp.getUserId());
             o.setStatus("1");
+            o.setId(GUIDUtil.getGUID());
 
             this.logger.info(o.toString());
             if (CommonUtils.isBlank(o.getAreaCode())) {
