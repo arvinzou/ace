@@ -1,6 +1,8 @@
 package com.huacainfo.ace.partyschool.service;
 
 import com.huacainfo.ace.partyschool.model.AttResultVo;
+import com.huacainfo.ace.partyschool.model.StudentFinVo;
+import com.huacainfo.ace.partyschool.model.TeacherFinRsVo;
 
 import java.util.List;
 import java.util.Map;
@@ -28,9 +30,55 @@ public interface ApiService {
      *                    year - 年度数据查询
      *                    month - 月度数据查询
      *                    day  - 日期数据查询
-     * @param cardNo      卡号 Z0000187
+     * @param lCardNo     借阅证号 Z0000187
      * @param dateTimeStr 查询日期时间,包含年月（yyyy-mm-dd） demo: 2018-12-03
      * @return List<AttResultVo>
      */
-    List<AttResultVo> findAttDataList(String queryType, String cardNo, String dateTimeStr);
+    List<AttResultVo> findAttDataList(String queryType, String lCardNo, String dateTimeStr);
+
+    /**
+     * 查询教师消费记录
+     *
+     * @param dateTimeStr 日期时间，包含年月：yyyy-mm
+     * @param lCardNo     借阅证号
+     * @param startNum    分页开始
+     * @param endNum      分页结束
+     * @param startNum    分页开始位置
+     * @param endNum      分页结束位置
+     * @return List<TeacherFinRsVo>
+     */
+    List<TeacherFinRsVo> findTeacherFinDataList(String lCardNo,
+                                                String dateTimeStr,
+                                                int startNum,
+                                                int endNum);
+
+    /**
+     * 查询教职工余额
+     *
+     * @param lCardNo 借阅证号
+     * @return TeacherFinRsVo
+     */
+    TeacherFinRsVo findTeacherBalance(String lCardNo);
+
+    /**
+     * 查询 学员 消费打卡累计次数
+     *
+     * @param lCardNo 借阅证号
+     * @return ResultResponse
+     */
+    int findStudentFinCount(String lCardNo, String year);
+
+    /**
+     * 查询 学员 打卡记录
+     *
+     * @param lCardNo     借阅证号
+     * @param dateTimeStr 日期-年月
+     * @param startNum    分页开始位置
+     * @param endNum      分页结束位置
+     * @return List<StudentFinVo>
+     */
+    List<StudentFinVo> findStudentFinList(String lCardNo,
+                                          String dateTimeStr,
+                                          int startNum,
+                                          int endNum);
 }

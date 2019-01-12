@@ -1,7 +1,6 @@
 package com.huacainfo.ace.partyschool.model;
 
 import com.huacainfo.ace.common.model.BaseModel;
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 
 /**
  * @Auther: Arvin
@@ -14,9 +13,9 @@ public class AttResultVo extends BaseModel {
      */
     private String customerName;
     /**
-     * 卡号
+     * 借阅证号
      */
-    private String cardNo;
+    private String lCardNo;
     /**
      * 账户编码
      */
@@ -47,12 +46,12 @@ public class AttResultVo extends BaseModel {
         this.customerName = customerName;
     }
 
-    public String getCardNo() {
-        return cardNo;
+    public String getlCardNo() {
+        return lCardNo;
     }
 
-    public void setCardNo(String cardNo) {
-        this.cardNo = cardNo;
+    public void setlCardNo(String lCardNo) {
+        this.lCardNo = lCardNo;
     }
 
     public String getAccountId() {

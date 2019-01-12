@@ -22,6 +22,19 @@ public class StudentVo extends Student {
      */
     private String clsName;
 
+    /**
+     * 借阅证号
+     */
+    private String lCardNo;
+
+    public String getlCardNo() {
+        return lCardNo;
+    }
+
+    public void setlCardNo(String lCardNo) {
+        this.lCardNo = lCardNo;
+    }
+
     public String getClsName() {
         return clsName;
     }
