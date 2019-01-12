@@ -40,8 +40,9 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    initEditor();
-    initUpload();
+    initEvents();
+    // initEditor();
+    //initUpload();
 }
 function initEvents() {
     /*表单验证*/
@@ -71,6 +72,7 @@ function initEvents() {
             });
             console.log(params);
             save(params);
+
             return false;
         }
     });
@@ -90,7 +92,7 @@ function save(params) {
             stopLoad();
             alert(result.errorMessage);
             if (result.status == 0) {
-                window.location.href = '../index.jsp';
+                window.location.href = '../index.jsp?id=' + urlParams.id + '&did=' + params.id;
             }
         },
         error: function () {
@@ -111,7 +113,7 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                renderPage($("#fm-edit"), data, 'tpl-fm');
+                render($("#fm-edit"), data, 'tpl-fm');
                 initPage();
             } else {
                 alert(result.errorMessage);

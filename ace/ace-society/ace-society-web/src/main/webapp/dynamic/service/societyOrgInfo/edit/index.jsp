@@ -20,27 +20,27 @@
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-prefix==============--%>
 
-                                        <!-- BEGIN SAMPLE TABLE PORTLET-->
-                                        <div class="portlet light">
-                                            <div class="portlet-title">
-                                                <div class="caption">
-                                                    编辑社会组织信息
-                                                </div>
-                                                <div class="actions">
+<!-- BEGIN SAMPLE TABLE PORTLET-->
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            编辑社会组织信息
+        </div>
+        <div class="actions">
 
-                                                </div>
-                                            </div>
-                                            <div class="portlet-body" id="courseSource">
-                                                <div class="form-panel">
-                                                    <!--具体界面元素开始-->
-                                                    <form class="form-horizontal" id="fm-edit" role="form">
+        </div>
+    </div>
+    <div class="portlet-body" id="courseSource">
+        <div class="form-panel">
+            <!--具体界面元素开始-->
+            <form class="form-horizontal" id="fm-edit" role="form">
 
-                                                    </form>
-                                                </div>
-                                                <!--具体界面元素结束-->
-                                            </div>
-                                        </div>
-                                        <!-- END SAMPLE TABLE PORTLET-->
+            </form>
+        </div>
+        <!--具体界面元素结束-->
+    </div>
+</div>
+<!-- END SAMPLE TABLE PORTLET-->
 
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -50,13 +50,23 @@
 
 <script id="tpl-fm" type="text/template">
     <div class="form-body">
+        <div class="form-group hide">
+            <label class="col-md-2 control-label">
+                <span class="label-red">*</span>
+                主键
+            </label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="id" value="\${data.o.id}" maxlength="50">
+                <span class="help-block"></span>
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-md-2 control-label">
                 <span class="label-red">*</span>
                 组织名称
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="orgName" value="\{data.o.orgName}" maxlength="50"
+                <input type="text" class="form-control" name="orgName" value="\${data.o.orgName}" maxlength="50"
                        placeholder="请输入组织名称（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
@@ -66,7 +76,7 @@
                 组织地址
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="orgAddr" value="\{data.o.orgAddr}" maxlength="100"
+                <input type="text" class="form-control" name="orgAddr" value="\${data.o.orgAddr}" maxlength="100"
                        placeholder="请输入组织地址（建议字数在14个字以内，不超过100个字)">
                 <span class="help-block"></span>
             </div>
@@ -76,7 +86,7 @@
                 联系人姓名
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="contactPerson" value="\{data.o.contactPerson}"
+                <input type="text" class="form-control" name="contactPerson" value="\${data.o.contactPerson}"
                        maxlength="50" placeholder="请输入联系人姓名（建议字数在14个字以内，不超过50个字)">
                 <span class="help-block"></span>
             </div>
@@ -86,27 +96,27 @@
                 联系人手机号
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="contactPhone" value="\{data.o.contactPhone}"
+                <input type="text" class="form-control" name="contactPhone" value="\${data.o.contactPhone}"
                        maxlength="20" placeholder="请输入联系人手机号（建议字数在14个字以内，不超过20个字)">
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 累计获取积分
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="accPoints" value="\{data.o.accPoints}" maxlength="10"
+                <input type="text" class="form-control" name="accPoints" value="\${data.o.accPoints}" maxlength="10"
                        placeholder="请输入累计获取积分（建议字数在14个字以内，不超过10个字)">
                 <span class="help-block"></span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group hide">
             <label class="col-md-2 control-label">
                 可用积分
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="validPoints" value="\{data.o.validPoints}" maxlength="10"
+                <input type="text" class="form-control" name="validPoints" value="\${data.o.validPoints}" maxlength="10"
                        placeholder="请输入可用积分（建议字数在14个字以内，不超过10个字)">
                 <span class="help-block"></span>
             </div>
@@ -116,7 +126,7 @@
                 备注
             </label>
             <div class="col-md-10">
-                <input type="text" class="form-control" name="remark" value="\{data.o.remark}" maxlength="200"
+                <input type="text" class="form-control" name="remark" value="\${data.o.remark}" maxlength="200"
                        placeholder="请输入备注（建议字数在14个字以内，不超过200个字)">
                 <span class="help-block"></span>
             </div>
@@ -133,5 +143,8 @@
 <%--==============common footer==============--%>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 <script src="${pageContext.request.contextPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
+<script type="text/javascript" src="${portalPath}/content/common/js/jquery.form.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/jquery-validation/js/jquery.validate.min.js?v=${cfg.version}"></script>
+
 <script src="js/act.js?v=${cfg.version}"></script>
 </html>
