@@ -25,10 +25,10 @@ function dorpAndDown(obj, iDom){
 	var temp = $(obj).find("img").attr("name");
 	if(temp == "up"){
 		$(obj).html('<img src="img/icon_down.png" class="icon-down" name="down"/>');
-		$("#"+iDom).show();
+		$(obj).parent().siblings().show();
 	}else{
 		$(obj).html('<img src="img/icon_up.png" class="icon-up" name="up"/>');
-		$("#"+iDom).hide();
+        $(obj).parent().siblings().hide();
 	}
 }
 

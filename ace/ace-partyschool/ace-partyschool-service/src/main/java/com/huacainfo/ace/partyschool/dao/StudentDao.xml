@@ -180,4 +180,9 @@
         where id != #{id,jdbcType=VARCHAR}
         and mobile = #{mobile,jdbcType=VARCHAR}
     </select>
+    <select id="selectUserClassInfo" resultType="map">
+        select t.user_level role,a.classId from portal.users t
+        LEFT join student a on t.user_id=a.id
+        where t.user_id=#{id}
+    </select>
 </mapper>

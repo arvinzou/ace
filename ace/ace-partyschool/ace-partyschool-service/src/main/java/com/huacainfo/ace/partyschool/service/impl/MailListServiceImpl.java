@@ -11,6 +11,7 @@ import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.StudentDao;
 import com.huacainfo.ace.portal.tools.TreeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,8 @@ public class MailListServiceImpl implements MailListService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MailListDao mailListDao;
+    @Autowired
+    private StudentDao studentDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -83,24 +86,15 @@ public class MailListServiceImpl implements MailListService {
      */
     @Override
     public MessageResponse insertMailList(MailList o, UserProp userProp) throws Exception {
-
-        if (CommonUtils.isBlank(o.getId())) {
-            return new MessageResponse(1, "主键不能为空！");
-        }
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "小组名称不能为空！");
         }
         if (CommonUtils.isBlank(o.getPid())) {
-            return new MessageResponse(1, "上级编号不能为空！");
+            return new MessageResponse(1, "所属班级不能为空！");
         }
-
-        int temp = this.mailListDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "通讯录名称重复！");
-        }
-
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
+
 
         this.mailListDao.insert(o);
         this.dataBaseLogService.log("添加通讯录", "通讯录", "",
@@ -128,11 +122,6 @@ public class MailListServiceImpl implements MailListService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "小组名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getPid())) {
-            return new MessageResponse(1, "上级编号不能为空！");
-        }
-
-
         this.mailListDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更通讯录", "通讯录", "",
                 o.getId(), o.getId(), userProp);
@@ -222,18 +211,12 @@ public class MailListServiceImpl implements MailListService {
             CommonBeanUtils.copyMap2Bean(o, row);
             o.setCreateDate(new Date());
             this.logger.info(o.toString());
-            if (true) {
-                return new MessageResponse(1, "行" + i + ",编号不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getId())) {
-                return new MessageResponse(1, "主键不能为空！");
-            }
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "小组名称不能为空！");
             }
-            if (CommonUtils.isBlank(o.getPid())) {
-                return new MessageResponse(1, "上级编号不能为空！");
-            }
+            o.setId(GUIDUtil.getGUID());
+            o.setCreateDate(new Date());
+            o.setPid("0");
             int t = this.mailListDao.isExit(o);
             if (t > 0) {
                 this.mailListDao.updateByPrimaryKey(o);
@@ -337,8 +320,15 @@ public class MailListServiceImpl implements MailListService {
      * @version: 2019-01-12
      */
     @Override
-    public List<Tree> getTreeList(UserProp userProp){
-        List<Map<String,Object>> list=this.mailListDao.getClassTreeList("1");
+    public List<Tree> getTreeList(String name,UserProp userProp){
+        List<Map<String,Object>> list=null;
+        Map<String,String> o=studentDao.selectUserClassInfo(userProp.getUserId());
+        if(o.get("role").equals("student")){
+            list=this.mailListDao.getClassTreeList(o.get("classId"),name);
+        }else{
+
+            list=this.mailListDao.getTeacherTreeList(name);
+        }
         CommonTreeUtils treeUtils = new CommonTreeUtils(list);
         return treeUtils.getTreeList("0");
     }
