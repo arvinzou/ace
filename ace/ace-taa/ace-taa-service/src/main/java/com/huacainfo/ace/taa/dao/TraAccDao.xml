@@ -95,15 +95,9 @@
       and a.name like
       concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
     </if>
-
-
     <if test='condition.keyword!=null and condition.keyword!=""'>
       and (a.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like concat(#{condition.keyword,jdbcType=VARCHAR},'%'))
     </if>
-
-
-
-
     <if test='condition.roadManId!=null and condition.roadManId!=""'>
       and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
     </if>
@@ -121,6 +115,29 @@
       and t.areaCode like
       concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
     </if>
+
+      <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
+          <![CDATA[
+          and t.deadthToll <= #{condition.upDeathNum,jdbcType=INTEGER}
+          ]]>
+      </if>
+      <if test='condition.downDeathNum!=null and condition.downDeathNum!=""'>
+          and t.deadthToll >= #{condition.downDeathNum,jdbcType=INTEGER}
+      </if>
+      <if test='condition.upInjuriesNum!=null and condition.upInjuriesNum!=""'>
+          <![CDATA[
+          and t.injuries <= #{condition.upInjuriesNum,jdbcType=INTEGER}
+          ]]>
+      </if>
+      <if test='condition.downInjuriesNum!=null and condition.downInjuriesNum!=""'>
+          and t.injuries >= #{condition.downInjuriesNum,jdbcType=INTEGER}
+      </if>
+      <if test='condition.category!=null and condition.category!=""'>
+          and d.category >= #{condition.category,jdbcType=VARCHAR}
+      </if>
+      <if test='condition.roadId!=null and condition.roadId!=""'>
+          and d.id >= #{condition.roadId,jdbcType=VARCHAR}
+      </if>
   </sql>
   <select id="findCount" resultType="int">
     SELECT COUNT(*)
