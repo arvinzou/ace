@@ -93,7 +93,7 @@
         <h5 ><i class="fa fa-hand-o-right mr5"></i>\${index}<i class="fa fa-angle-double-down fr"></i></h5>
         <ul>
             {@each item as ite, ind}
-            <li class='fc-event event-item bg-crew-yingji' data-teacher="\${index}" data-class="fc-event bg-crew-yingji">
+            <li class='fc-event event-item bg-crew-yingji' data-teacherId="\${ite.teacherId}"  data-courseId="\${ite.id}" data-teacher="\${index}" data-class="fc-event bg-crew-yingji">
                 \${ite.name}
             </li>
             {@/each}
