@@ -1,30 +1,29 @@
 package com.huacainfo.ace.taa.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import com.huacainfo.ace.taa.dao.TraAccDao;
+import com.huacainfo.ace.taa.model.TraAcc;
+import com.huacainfo.ace.taa.service.TraAccService;
+import com.huacainfo.ace.taa.vo.TraAccQVo;
+import com.huacainfo.ace.taa.vo.TraAccVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.taa.dao.TraAccDao;
-import com.huacainfo.ace.taa.model.TraAcc;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.taa.service.TraAccService;
-import com.huacainfo.ace.taa.vo.TraAccVo;
-import com.huacainfo.ace.taa.vo.TraAccQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("traAccService")
 /**
@@ -97,7 +96,7 @@ public class TraAccServiceImpl implements TraAccService {
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
-        if(CommonUtils.isBlank(o.getAreaCode())){
+        if (CommonUtils.isBlank(o.getAreaCode())) {
             o.setAreaCode(userProp.getAreaCode());
         }
         this.traAccDao.insert(o);
@@ -340,10 +339,73 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-10
      */
     @Override
-    public MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception{
-        this.traAccDao.updateStatus(id,status);
+    public MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception {
+        this.traAccDao.updateStatus(id, status);
         this.dataBaseLogService.log("跟新状态", "事故", id, id, "事故", userProp);
         return new MessageResponse(0, "成功！");
     }
 
+    /**
+     * 功能描述: 事故快报
+     *
+     * @param user   上报用户
+     * @param params 上报参数
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2019/1/12 10:57
+     */
+    @Override
+    public ResultResponse flashReport(WxUser user, TraAccVo params) throws Exception {
+        //todo 根据经纬度自动获取所属：路段ID、路长ID
+
+        params.setAccidentTime(DateUtil.getNowDate());//事故发生时间 -- 默认为系统当前时间
+
+        MessageResponse ms = insertTraAcc(params, parseUser(user));
+        if (ms.getStatus() == ResultCode.FAIL) {
+            return new ResultResponse(ms);
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "上报成功");
+    }
+
+    /**
+     * 功能描述: 事故续报
+     *
+     * @param user   用户信息
+     * @param params 续报参数
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2019/1/12 11:15
+     */
+    @Override
+    public ResultResponse report(WxUser user, TraAccVo params) {
+        TraAccVo traAccVo = traAccDao.selectVoByPrimaryKey(params.getId());
+        if (traAccVo == null) {
+            return new ResultResponse(ResultCode.FAIL, "事故数据丢失");
+        }
+
+        //事故发生时间、归属路段、死亡人数、受伤人数、事故原因。
+        traAccVo.setAccidentTime(params.getAccidentTime());
+        traAccVo.setRoadSectionId(params.getRoadSectionId());
+        traAccVo.setDeadthToll(params.getDeadthToll());
+        traAccVo.setInjuries(params.getInjuries());
+        traAccVo.setCause(params.getCause());
+        traAccVo.setLastModifyUserId(user.getUnionId());
+        traAccVo.setLastModifyUserName(user.getNickName());
+        traAccVo.setLastModifyDate(DateUtil.getNowDate());
+        int i = traAccDao.updateByPrimaryKey(traAccVo);
+        if (i == 1) {
+            return new ResultResponse(ResultCode.SUCCESS, "续报提交成功");
+        }
+
+        return new ResultResponse(ResultCode.FAIL, "续报提交失败");
+    }
+
+    private UserProp parseUser(WxUser user) {
+        UserProp u = new UserProp();
+        u.setUserId(user.getUnionId());
+        u.setName(user.getNickName());
+
+        return u;
+    }
 }
