@@ -9,9 +9,6 @@
 		<title>通讯录</title>
 		<jsp:include page="../../common/common.jsp"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
 	</head>
 
 	<body>
@@ -24,97 +21,66 @@
 				</div>
 			</div>
 			<div class="box">
-				<li class="list">
-					<div class="row rb">
+				<li class="list" id="treeList">
+					<%--<div class="row rb">
 						<div class="title01">中共常德市委党校全体教职工</div>
 						<div class="option" onclick="dorpAndDown(this,'oneMenu')"><img src="img/icon_up.png" class="icon-up" name="up"/></div>
-					</div>
-					<ul id="oneMenu" style="display: none;">
-						<div class="row rb">
-							<div class="title02">第77期县级处干班第一小组(10)</div>
-							<div class="option" onclick="dorpAndDown(this,'secondMenu')"><img src="img/icon_up.png" class="icon-up" name="up"/></div>
-						</div>
-						<ul id="secondMenu" style="display: none;">
-							<div class="row rb">
-								<div class="item-left">
-									<img src="img/default_header.png" class="header" />
-									<span class="username">彭磊</span>
-								</div>
-								<div class="item-right">
-									<span class="mobile">17888888888</span>
-								</div>
-							</div>
-							<div class="row rb">
-								<div class="item-left">
-									<img src="img/default_header.png" class="header" />
-									<span class="username">张三</span>
-								</div>
-								<div class="item-right">
-									<span class="mobile">17888888888</span>
-								</div>
-							</div>
-							<div class="row rb">
-								<div class="item-left">
-									<img src="img/default_header.png" class="header" />
-									<span class="username">李四四</span>
-								</div>
-								<div class="item-right">
-									<span class="mobile">17888888888</span>
-								</div>
-							</div>
-							<div class="row rb">
-								<div class="item-left">
-									<img src="img/default_header.png" class="header" />
-									<span class="username">王武龙</span>
-								</div>
-								<div class="item-right">
-									<span class="mobile">17888888888</span>
-								</div>
-							</div>
-						</ul>
-					</ul>
+					</div>--%>
+
 				</li>
 			</div>
-			<div class="title">未分组(10)</div>
-			<div class="box">
-				<div class="row rb">
-					<div class="item-left">
-						<img src="img/default_header.png" class="header" />
-						<span class="username">彭磊</span>
-					</div>
-					<div class="item-right">
-						<span class="mobile">17888888888</span>
-					</div>
-				</div>
-				<div class="row rb">
-					<div class="item-left">
-						<img src="img/default_header.png" class="header" />
-						<span class="username">张三</span>
-					</div>
-					<div class="item-right">
-						<span class="mobile">17888888888</span>
-					</div>
-				</div>
-				<div class="row rb">
-					<div class="item-left">
-						<img src="img/default_header.png" class="header" />
-						<span class="username">李四四</span>
-					</div>
-					<div class="item-right">
-						<span class="mobile">17888888888</span>
-					</div>
-				</div>
-				<div class="row rb">
-					<div class="item-left">
-						<img src="img/default_header.png" class="header" />
-						<span class="username">王武龙</span>
-					</div>
-					<div class="item-right">
-						<span class="mobile">17888888888</span>
-					</div>
-				</div>
+			<div class="title">未分组</div>
+			<div class="box" id="otherList">
+
 			</div>
 		</div>
+
+		<script id="tree-tpl" type="text/template">
+			{@each data as item, index}
+			<ul id="oneMenu">
+				{@if item.children}
+				<div class="row rb">
+					<div class="title02">\${item.text}(\${item.children.length})</div>
+					<div class="option" onclick="dorpAndDown(this,'secondMenu')"><img src="img/icon_up.png" class="icon-up" name="up"/></div>
+				</div>
+				<ul id="secondMenu" style="display: none;">
+					{@each item.children as child, index01}
+					<div class="row rb">
+						<div class="item-left">
+							<img src="img/default_header.png" class="header" />
+							<span class="username">\${child.text}</span>
+						</div>
+						<div class="item-right">
+							<span class="mobile">\${child.href}</span>
+						</div>
+					</div>
+					{@/each}
+				</ul>
+				{@/if}
+			</ul>
+			{@/each}
+		</script>
+
+		<script id="other-tpl" type="text/template">
+			{@each data as item, index}
+			{@if item.leaf == true}
+			<div class="row rb">
+				<div class="item-left">
+					<img src="img/default_header.png" class="header" />
+					<span class="username">\${item.text}</span>
+				</div>
+				<div class="item-right">
+					<span class="mobile">\${item.href}</span>
+				</div>
+			</div>
+			{@/if}
+			{@/each}
+		</script>
+
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 
 </html>

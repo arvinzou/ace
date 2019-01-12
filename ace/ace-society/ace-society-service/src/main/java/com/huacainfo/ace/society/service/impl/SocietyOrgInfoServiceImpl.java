@@ -162,13 +162,18 @@ public class SocietyOrgInfoServiceImpl implements SocietyOrgInfoService {
             return new MessageResponse(1, "组织名称不能为空！");
         }
 
-
-        o.setLastModifyDate(new Date());
-        o.setLastModifyUserName(userProp.getName());
-        o.setLastModifyUserId(userProp.getUserId());
-        this.societyOrgInfoDao.updateByPrimaryKeySelective(o);
-        this.dataBaseLogService.log("变更社会组织信息", "社会组织信息", "",
-                o.getId(), o.getId(), userProp);
+        SocietyOrgInfo orgInfo = societyOrgInfoDao.selectByPrimaryKey(o.getId());
+        orgInfo.setOrgName(o.getOrgName());
+        orgInfo.setOrgAddr(o.getOrgAddr());
+        orgInfo.setContactPerson(o.getContactPerson());
+        orgInfo.setContactPhone(o.getContactPhone());
+        orgInfo.setRemark(o.getRemark());
+        orgInfo.setLastModifyDate(new Date());
+        orgInfo.setLastModifyUserName(userProp.getName());
+        orgInfo.setLastModifyUserId(userProp.getUserId());
+        this.societyOrgInfoDao.updateByPrimaryKey(orgInfo);
+        this.dataBaseLogService.log("变更社会组织信息",
+                "社会组织信息", "", o.getId(), o.getId(), userProp);
 
         return new MessageResponse(0, "变更社会组织信息完成！");
     }

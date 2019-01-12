@@ -144,6 +144,11 @@
         <include refid="Where_Condition"/>
     </select>
 
+    <select id="findStudentCount" resultType="int">
+        SELECT COUNT(*)
+        from student
+    </select>
+
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
         select count(1)
         from student
@@ -174,5 +179,10 @@
         from student
         where id != #{id,jdbcType=VARCHAR}
         and mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUserClassInfo" resultType="map">
+        select t.user_level role,a.classId from portal.users t
+        LEFT join student a on t.user_id=a.id
+        where t.user_id=#{id}
     </select>
 </mapper>

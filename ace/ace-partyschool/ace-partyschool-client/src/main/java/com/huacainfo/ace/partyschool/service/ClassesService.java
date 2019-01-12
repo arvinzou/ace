@@ -71,8 +71,9 @@ public interface ClassesService {
      * @author: Arvin
      * @version: 2019-01-03
      */
-    SingleResult
-            <ClassesVo> selectClassesByPrimaryKey(String id) throws Exception;
+    SingleResult<ClassesVo> selectClassesByPrimaryKey(String id) throws Exception;
+
+    ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp) throws Exception;
 
     /**
      * @throws
@@ -96,4 +97,6 @@ public interface ClassesService {
     Map<String, Object> findByQ(Map<String, Object> params);
 
     ResultResponse getMyClasses(UserProp userProp) throws Exception;
+
+    ResultResponse getAllClasses(UserProp userProp) throws Exception;
 }

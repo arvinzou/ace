@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.MailListDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.MailList">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pid" jdbcType="VARCHAR" property="pid" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, pid, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mail_list
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from mail_list
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.MailList">
+    insert into mail_list (id, name, pid, 
+      createDate)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.MailList">
+    update mail_list
+    set name = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="getClassTreeList" resultType="map">
+
+    SELECT
+    t.ID,
+    t.PID,
+    t.name AS TEXT,
+    t.mobile HREF,
+    0 CHILD_COUNT,
+    'closed' STATE,
+    b.headimgurl ICON
+    FROM
+    student t
+    LEFT JOIN portal.users a on t.id=a.user_id
+    left join portal.userinfo b on a.openId=b.unionid
+
+    WHERE
+    t.classId = #{classId}
+    <if test='name!=null and name!=""'>
+      and t.name like
+      concat(#{name,jdbcType=VARCHAR},'%')
+    </if>
+
+    UNION ALL
+    SELECT
+    t.ID,
+    '0' PID,
+    t.name AS TEXT,
+    NULL HREF,
+    (
+    SELECT
+    count(1)
+    FROM
+    student a
+    WHERE
+    a.classId = #{classId}
+    AND a.pid = t.id
+    ) CHILD_COUNT,
+    'closed' STATE,
+    null ICON
+    FROM
+    mail_list t where t.pid=#{classId}
+  </select>
+  <select id="getTeacherTreeList" resultType="map">
+    SELECT
+    t.ID,
+    '0' PID,
+    t.name AS TEXT,
+    t.mobile HREF,
+    0 CHILD_COUNT,
+    'closed' STATE,
+    b.headimgurl ICON
+    FROM
+    teacher t
+    LEFT JOIN portal.users a on t.id=a.user_id
+    left join portal.userinfo b on a.openId=b.unionid
+where 0=0
+    <if test='name!=null and name!=""'>
+      and t.name like
+      concat(#{name,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+
+
+  <select id="getList" resultType="map">
+    select id, name, pid, createDate from mail_list where pid=#{p.classId};
+  </select>
+
+  <resultMap  id="MailListContent" type="com.huacainfo.ace.partyschool.vo.MailListContent">
+    <id property="id" column="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <collection property="list" ofType="com.huacainfo.ace.partyschool.vo.Person">
+      <id property="id" column="personId"/>
+      <result property="name" column="personName"/>
+      <result property="mobile" column="mobile"/>
+      <result property="headimgurl" column="headimgurl"/>
+    </collection>
+  </resultMap>
+
+  <select id="getMailListContent" resultMap="MailListContent">
+    select id, name from mail_list
+    left join sta
+    where pid=#{p.classId}
+  </select>
+
+
+</mapper>

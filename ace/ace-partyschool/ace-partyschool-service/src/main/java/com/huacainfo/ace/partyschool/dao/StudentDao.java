@@ -4,6 +4,7 @@ import com.huacainfo.ace.partyschool.model.Student;
 import com.huacainfo.ace.partyschool.vo.StudentQVo;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
 import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
 import java.util.List;
 
@@ -27,6 +28,8 @@ public interface StudentDao {
 
     int findCount(@Param("condition") StudentQVo condition);
 
+    int findStudentCount();
+
     int isExist(Student record);
 
     int updateStatus(@Param("id") String id,
@@ -39,4 +42,6 @@ public interface StudentDao {
 
     int isExistOtherMobile(@Param("id") String id,
                            @Param("mobile") String mobile);
+
+    Map<String,String> selectUserClassInfo(String id);
 }

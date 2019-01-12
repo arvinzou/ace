@@ -1,16 +1,14 @@
 package com.huacainfo.ace.taa.service;
 
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.result.*;
 import com.huacainfo.ace.taa.model.TraAcc;
-import com.huacainfo.ace.taa.vo.TraAccVo;
 import com.huacainfo.ace.taa.vo.TraAccQVo;
+import com.huacainfo.ace.taa.vo.TraAccVo;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: 陈晓克
@@ -167,5 +165,26 @@ public interface TraAccService {
      * @author: 陈晓克
      * @version: 2019-01-10
      */
-    MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception;
+    MessageResponse updateStatus(String id, String status, UserProp userProp) throws Exception;
+
+    /**
+     * 功能描述: 事故快报
+     *
+     * @param: data 上报参数
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2019/1/12 10:57
+     */
+    ResultResponse flashReport(WxUser user, TraAccVo params) throws Exception;
+
+    /**
+     * 功能描述: 事故续报
+     *
+     * @param user   用户信息
+     * @param params 续报参数
+     * @return: ResultResponse
+     * @auther: Arvin Zou
+     * @date: 2019/1/12 11:15
+     */
+    ResultResponse report(WxUser user, TraAccVo params);
 }

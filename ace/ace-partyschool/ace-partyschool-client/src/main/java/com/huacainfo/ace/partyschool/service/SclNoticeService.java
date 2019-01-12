@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Notice;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
@@ -13,7 +14,7 @@ import com.huacainfo.ace.partyschool.vo.NoticeQVo;
  * @version: 2019-01-06
  * @Description: TODO(通知公告)
  */
-public interface sclNoticeService {
+public interface SclNoticeService {
     /**
      * @throws
      * @Title:find!{bean.name}List
@@ -28,10 +29,11 @@ public interface sclNoticeService {
      * @author: Arvin
      * @version: 2019-01-06
      */
-    PageResult
-            <NoticeVo> findNoticeList(NoticeQVo condition,
-                                      int start, int limit, String orderBy) throws Exception;
+    PageResult<NoticeVo> findNoticeList(NoticeQVo condition,
+                                        int start, int limit, String orderBy) throws Exception;
 
+    ResultResponse findNoticeLists(NoticeQVo condition,
+                                   int start, int limit, String orderBy) throws Exception;
     /**
      * @throws
      * @Title:insertNotice
@@ -68,8 +70,7 @@ public interface sclNoticeService {
      * @author: Arvin
      * @version: 2019-01-06
      */
-    SingleResult
-            <NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception;
+    SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception;
 
     /**
      * @throws

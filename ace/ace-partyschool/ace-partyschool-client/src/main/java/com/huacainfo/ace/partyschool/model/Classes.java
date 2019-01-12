@@ -18,7 +18,11 @@ public class Classes {
     private String headmaster;
 
     private String remark;
-
+    /**
+     * 2、毕业
+     * 1、授课中
+     * 0、删除
+     */
     private String status;
 
     private String createUserId;

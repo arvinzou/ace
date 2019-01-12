@@ -40,8 +40,9 @@ function render(obj, data, tplId) {
 }
 
 function initPage() {
-    initEditor();
-    initUpload();
+    initEvents();
+    // initEditor();
+    // initUpload();
 }
 function initEvents() {
     /*表单验证*/
@@ -111,7 +112,7 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
-                renderPage($("#fm-edit"), data, 'tpl-fm');
+                render($("#fm-edit"), data, 'tpl-fm');
                 initPage();
             } else {
                 alert(result.errorMessage);

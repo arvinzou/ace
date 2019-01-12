@@ -21,13 +21,15 @@ public interface NoticeDao {
 
     NoticeVo selectVoByPrimaryKey(String id);
 
-    List
-            <NoticeVo> findList(@Param("condition") NoticeQVo condition,
-                                @Param("start") int start,
-                                @Param("limit") int limit,
-                                @Param("orderBy") String orderBy);
+    List<NoticeVo> findList(@Param("condition") NoticeQVo condition,
+                            @Param("start") int start,
+                            @Param("limit") int limit,
+                            @Param("orderBy") String orderBy);
+
 
     int findCount(@Param("condition") NoticeQVo condition);
+
+    int findUnreadCount();
 
     int isExit(Notice record);
 

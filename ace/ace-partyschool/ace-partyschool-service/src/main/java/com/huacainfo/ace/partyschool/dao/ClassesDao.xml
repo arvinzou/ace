@@ -91,11 +91,48 @@
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
             and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
+        <if test="condition.status !=null and condition.status !=&quot;&quot;">
+            and t.status =#{condition.status,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        t.id, t.name, t.startDate, t.introduce,t.endDate, t.photoUrl, cr.name as classroom, c.name as headmaster,
+        t.id, t.name, t.startDate, t.introduce,t.endDate, t.photoUrl, t.fileUrl, t.tid1,
+        t.tid2, cr.name as classroom, c.name as headmaster,
+        t.remark, t.status, t.createUserId,
+        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        from classes t
+        LEFT JOIN classroom cr ON cr.id = t.classroom
+        LEFT JOIN teacher c ON c.id = t.headmaster
+        where t.id = #{t.id,jdbcType=VARCHAR}
+    </select>
+
+    <resultMap id="ClassesInfoResultMap" type="com.huacainfo.ace.partyschool.vo.ClassesVo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="startDate" jdbcType="TIMESTAMP" property="startDate"/>
+        <result column="endDate" jdbcType="TIMESTAMP" property="endDate"/>
+        <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+        <result column="classroom" jdbcType="VARCHAR" property="classroom"/>
+        <result column="headmaster" jdbcType="VARCHAR" property="headmaster"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+        <association property="classroom" column="classroom" javaType="com.huacainfo.ace.partyschool.model.Classroom">
+            <id column="introduce" jdbcType="VARCHAR" property="introduce"/>
+        </association>
+    </resultMap>
+    <select id="getClassesInfo" parameterType="java.lang.String" resultMap="ClassesInfoResultMap">
+        select
+        t.id, t.name, t.startDate, t.introduce,t.endDate, t.photoUrl, t.fileUrl, t.tid1,
+        t.tid2, cr.name as classroom, c.name as headmaster,
+        cr.introduce,
         t.remark, t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         from classes t
@@ -106,7 +143,8 @@
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        t.id, t.name, t.startDate, t.endDate, t.photoUrl, cr.name as classroom, c.name as headmaster, t.remark,
+        t.id, t.name, t.startDate, t.endDate, t.photoUrl, t.fileUrl, t.tid1,
+        t.tid2,cr.name as classroom, c.name as headmaster, t.remark,
         t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         <include refid="From_Statement"/>
@@ -131,6 +169,15 @@
         from teacher_cls_ship tcs
         left join classes c on c.id=tcs.clsId
         WHERE tcs.teacherId=#{teacherId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findAllClassesList" parameterType="java.lang.String" resultMap="VoResultMap">
+        SELECT
+        c.id, c.name, c.startDate, c.endDate, c.photoUrl, c.classroom, c.headmaster, c.remark, c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate, c.introduce
+        from teacher_cls_ship tcs
+        left join classes c on c.id=tcs.clsId
+        where 1=1
     </select>
 
     <select id="findCount" resultType="int">

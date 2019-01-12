@@ -13,7 +13,7 @@ import com.huacainfo.ace.partyschool.dao.FilesDao;
 import com.huacainfo.ace.partyschool.dao.SignDao;
 import com.huacainfo.ace.partyschool.model.Files;
 import com.huacainfo.ace.partyschool.service.SignService;
-import com.huacainfo.ace.partyschool.service.clsFilesService;
+import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
 import com.huacainfo.ace.partyschool.vo.FilesVo;
@@ -34,7 +34,7 @@ import java.util.List;
  * @version: 2019-01-04
  * @Description: TODO(班级文件)
  */
-public class clsFilesServiceImpl implements clsFilesService {
+public class ClsFilesServiceImpl implements ClsFilesService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private FilesDao filesDao;
