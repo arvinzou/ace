@@ -141,4 +141,17 @@ public interface RoadSectionService {
      * @version: 2019-01-04
      */
     MessageResponse deleteRoadSectionByRoadSectionIds(String [] id, UserProp userProp) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:getListByCondition
+     * @Description: TODO(用于控件数据获取)
+     * @param: @param params
+     * @param: @return
+     * @return: Map<String,Object>
+     * @author: chenxiaoke
+     * @version: 2019年1月04日 下午1:24:14
+     */
+    public Map<String, Object> getListByCondition(Map<String, Object> params);
 }

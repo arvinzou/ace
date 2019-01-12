@@ -90,11 +90,19 @@
     inner join road_section b on t.roadSectionId=b.id
     inner join portal.province c on t.areaCode=c.code
     inner join road d on b.roadId=d.id
-    where 0=0
+    where t.status='1'
     <if test='condition.roadManName!=null and condition.roadManName!=""'>
       and a.name like
       concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
     </if>
+
+
+    <if test='condition.keyword!=null and condition.keyword!=""'>
+      and (a.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like concat(#{condition.keyword,jdbcType=VARCHAR},'%'))
+    </if>
+
+
+
 
     <if test='condition.roadManId!=null and condition.roadManId!=""'>
       and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
@@ -156,4 +164,7 @@ select * from (
     order by t.createDate
     limit 0,20
   </select>
+  <update id="updateStatus">
+    update tra_acc set status=#{status} where id=#{id}
+  </update>
 </mapper>

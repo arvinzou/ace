@@ -177,4 +177,20 @@ select * from (
                    #{item}
            </foreach>
   </delete>
+
+
+  <select id="getListByCondition" resultType="map">
+    select
+    t.id,t.name,t.startName, t.endName,t.status,b.name areaName,c.name roadManName,c.id roadManId,c.orgName,t.areaCode
+    from road_section t
+    left join portal.province b on t.areaCode=b.code
+    left join road_man c on t.roadMan=c.id
+    where 0=0
+    <if test='params.q !=null and params.q!=""'>
+      and (t.id=#{params.q} or t.name like
+      concat('%',#{params.q},'%'))
+    </if>
+    order by t.createDate
+    limit 0,20
+  </select>
 </mapper>

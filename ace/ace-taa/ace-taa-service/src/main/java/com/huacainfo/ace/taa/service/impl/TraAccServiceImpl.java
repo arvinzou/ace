@@ -85,9 +85,7 @@ public class TraAccServiceImpl implements TraAccService {
         if (CommonUtils.isBlank(o.getLongitude())) {
             return new MessageResponse(1, "经度不能为空！");
         }
-        if (CommonUtils.isBlank(o.getAreaCode())) {
-            return new MessageResponse(1, "行政区划不能为空！");
-        }
+
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
         }
@@ -99,6 +97,9 @@ public class TraAccServiceImpl implements TraAccService {
         o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
+        if(CommonUtils.isBlank(o.getAreaCode())){
+            o.setAreaCode(userProp.getAreaCode());
+        }
         this.traAccDao.insert(o);
         this.dataBaseLogService.log("添加事故", "事故", "",
                 o.getId(), o.getId(), userProp);
@@ -127,9 +128,6 @@ public class TraAccServiceImpl implements TraAccService {
         }
         if (CommonUtils.isBlank(o.getLongitude())) {
             return new MessageResponse(1, "经度不能为空！");
-        }
-        if (CommonUtils.isBlank(o.getAreaCode())) {
-            return new MessageResponse(1, "行政区划不能为空！");
         }
         if (CommonUtils.isBlank(o.getWeather())) {
             return new MessageResponse(1, "天气不能为空！");
@@ -328,6 +326,24 @@ public class TraAccServiceImpl implements TraAccService {
         this.dataBaseLogService.log("批量删除事故", "事故", id[0], id[0], "事故", userProp);
         return new MessageResponse(0, "删除成功！");
 
+    }
+
+    /**
+     * @throws
+     * @Title:updateStatus
+     * @Description: TODO(更新状态)
+     * @param: @param obj
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-10
+     */
+    @Override
+    public MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception{
+        this.traAccDao.updateStatus(id,status);
+        this.dataBaseLogService.log("跟新状态", "事故", id, id, "事故", userProp);
+        return new MessageResponse(0, "成功！");
     }
 
 }

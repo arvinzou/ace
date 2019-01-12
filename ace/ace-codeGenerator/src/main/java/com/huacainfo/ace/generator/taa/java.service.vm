@@ -160,4 +160,18 @@ public interface $!{bean.name}Service {
                          * @version: $!{annotation.version}
                          */
                        public MessageResponse delete$!{bean.name}By$!{bean.name}Ids(String [] id, UserProp userProp) throws Exception;
+
+
+                        /**
+                            * @throws
+                            * @Title:updateStatus
+                            * @Description: TODO(更新状态)
+                            * @param: @param obj
+                            * @param: @param userProp
+                            * @param: @throws Exception
+                            * @return: MessageResponse
+                         * @author: $!{annotation.authorName}
+                         * @version: $!{annotation.version}
+                            */
+                           MessageResponse updateStatus(String id,String status, UserProp userProp) throws Exception;
  }

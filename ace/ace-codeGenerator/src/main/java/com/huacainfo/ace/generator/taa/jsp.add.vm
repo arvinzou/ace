@@ -23,10 +23,18 @@
                                                 <!-- BEGIN SAMPLE TABLE PORTLET-->
                                                 <div class="portlet light">
 
-                                                    <div class="portlet-body" id="courseSource">
-                                                        <div class="form-panel">
+                                                    <div class="portlet-body">
+                                                        <div class="form-panel" id="fm-add-panel">
                                                             <!--具体界面元素开始-->
-                                                            <form class="form-horizontal" id="fm-add" role="form">
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+<script id="tpl-fm-add" type="text/template">
+<form class="form-horizontal" id="fm-add" role="form">
                                                                 <div class="form-body">
                                                                     #if($!list)
                                                                      #foreach($item in $list)
@@ -55,11 +63,9 @@
                                                                     </div>
                                                                 </div>
                                                             </form>
-                                                        </div>
 
-                                                    </div>
-                                                </div>
 
+                                                            </script>
 
 
     <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>

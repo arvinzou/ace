@@ -6,6 +6,9 @@
 	width: 100%;
 	height: 100%;
 }
+input{
+	-webkit-appearance: none;
+}
 input::-webkit-input-placeholder{
 	font-size: 0.426666rem;
 	color: #ABAEB9;

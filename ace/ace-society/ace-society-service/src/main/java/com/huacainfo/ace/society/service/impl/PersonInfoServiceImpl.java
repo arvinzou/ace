@@ -69,7 +69,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
                                                        int limit, String orderBy) throws Exception {
         PageResult<PersonInfoVo> rst = new PageResult<>();
         List<PersonInfoVo> list = this.personInfoDao.findList(condition,
-                start, start + limit, orderBy);
+                start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
             int allRows = this.personInfoDao.findCount(condition);

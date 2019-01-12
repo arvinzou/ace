@@ -3,6 +3,7 @@ package com.huacainfo.ace.taa.service.impl;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 
 import com.huacainfo.ace.common.result.ListResult;
@@ -308,6 +309,26 @@ public class RoadSectionServiceImpl implements RoadSectionService {
         this.roadSectionDao.deleteByPrimaryKeys(id);
         this.dataBaseLogService.log("批量删除路段", "路段", id[0], id[0], "路段", userProp);
         return new MessageResponse(0, "删除成功！");
+    }
+
+
+    /**
+     * @throws
+     * @Title:getListByCondition
+     * @Description: TODO(路长查询，用于控件数据获取)
+     * @param: @param params
+     * @param: @return
+     * @return: Map<String,Object>
+     * @author: chenxiaoke
+     * @version: 2019年1月04日 下午1:24:14
+     */
+    @Override
+    public Map<String, Object> getListByCondition(Map<String, Object> params){
+        Map<String, Object> rst = new HashMap<String, Object>();
+        List<Map<String, Object>> list = this.roadSectionDao.getListByCondition(params);
+        rst.put("total", list.size());
+        rst.put("rows", list);
+        return rst;
     }
 
 }

@@ -38,6 +38,16 @@ private List<ActivityDetailVo>  activityDetailVoList;
 
     private String orgCover;
 
+    private String sId;
+
+    public String getsId() {
+        return sId;
+    }
+
+    public void setsId(String sId) {
+        this.sId = sId;
+    }
+
     public String getOrgCover() {
         return orgCover;
     }

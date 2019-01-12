@@ -14,7 +14,30 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common-base.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/font4.4/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/dataTables.bootstrap.min.css"/>
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
+    <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
+
+    <!--引用js-->
+    <script src="CommonUI/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="CommonUI/Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="CommonUI/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="CommonUI/Scripts/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="CommonUI/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="CommonUI/layer/layer.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="css/fc_schedule.plug_in.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="CommonUI/fullcalendar2.9/fullcalendar.min.css"/>
+    <script>
+
+    </script>
+
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -23,342 +46,79 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-3">
-                <a href="add/index.jsp?id=${param.id}" class="btn green">创建</a>
-            </div>
-
-            <div class="col-md-9">
-
+            <div class="col-md-12">
                 <form onsubmit="return t_query()">
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('status','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','1');">预播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','2');">直播</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('status','3');">历史</button>
+                    <div class="btn-group" id="classList" role="group" style="float:left;padding-right:5px">
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','1');">待审
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','2');">通过
-                        </button>
-                        <button type="button" class="btn btn-default" onclick="setParams('auditStatus','3');">驳回
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <button type="button" class="btn btn-default" onclick="setParams('category','');">全部</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','1');">图文</button>
-                        <button type="button" class="btn btn-default" onclick="setParams('category','2');">视频</button>
-                    </div>
-                    <div class="input-group">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入直播名称">
-                        <span class="input-group-btn">
-                                                                        <button class="btn  btn-default search_btn"
-                                                                                type="submit">
-                                                                                搜索
-                                                                        </button>
-                                                                    </span>
+                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
                     </div>
                 </form>
             </div>
-
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="b-container" id="b_container">
+                    <div class="col-sm-12 clearfix margin0 ">
+                        <!--<div id='selectdate'>-->
+                        <!--初始化年份工作日：<input id="initDateInput" type="text" class="t-input" value="2016-07-29">-->
+                        <!--<input id="initDateBtn" type="button" class="t-button ml10" value="初始化">-->
+                        <!--</div>-->
+                        <div class="col-sm-2 margin0 padding0">
+                            <div id='external-events' class="external-events" >
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="exampleInputName2" placeholder="按老师或课程名搜索">
+                                </div>
+                                <ul class="external-events-box" id="courseList">
 
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-8 margin0 padding0">
+                            <div id='calendar' class="ml5 padding5" ></div>
+                        </div>
+                        <div class="col-sm-2 margin0 padding0">
 
-        <div class="table-scrollable">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                                                                        <th width="10%"> 主键</th>
-                                                    <th width="10%"> 班级</th>
-                                                    <th width="10%"> 日期</th>
-                                                    <th width="10%"> 课节am:上午 pm:下午</th>
-                                                    <th width="10%"> 老师</th>
-                                                    <th width="10%"> 课程</th>
-                                                                <th width="15%">操作</th>
-                </tr>
-                </thead>
-                <tbody id="page-list">
+                        </div>
+                    </div>
 
-                </tbody>
-            </table>
+                </div>
+            </div>
         </div>
-        <div class="paginationbar">
-            <ul class="pagination" id="pagination1"></ul>
-        </div>
-
     </div>
-
 </div>
+<script id="tpl-courseList" type="text/template">
+    {@each data as item, index}
+    <li>
+        <h5 ><i class="fa fa-hand-o-right mr5"></i>\${index}<i class="fa fa-angle-double-down fr"></i></h5>
+        <ul>
+            {@each item as ite, ind}
+            <li class='fc-event event-item bg-crew-yingji' data-teacher="\${index}" data-class="fc-event bg-crew-yingji">
+                \${ite.name}
+            </li>
+            {@/each}
+        </ul>
+    </li>
+    {@/each}
+</script>
 
+
+<script id="tpl-classList" type="text/template">
+    {@each data as item, index}
+    <button type="button" class="btn btn-default" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@/each}
+</script>
 
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
 </body>
-
-<%--列表juicer模板--%>
-<script id="tpl-list" type="text/template">
-    {@each data as item, index}
-    <tr>
-                                    <td> \&{item.id}</td>
-                            <td> \&{item.classesId}</td>
-                            <td> \&{item.courseDate}</td>
-                            <td> \&{item.courseIndex}</td>
-                            <td> \&{item.teacherId}</td>
-                            <td> \&{item.courseId}</td>
-                            <td>
-            {@if item.status==0}
-            <span class="label label-lg label-danger">删除</span>
-            {@else if item.status==1}
-            <span class="label label-lg label-info">暂存</span>
-            {@else if item.status==2}
-            <span class="label label-lg label-warning">待审</span>
-            {@else if item.status==3}
-            <span class="label label-lg label-info">通过</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else if item.status==4}
-            <span class="label label-lg label-info">驳回</span>
-            <div style="padding-top:10px">\${item.auditRemark}</div>
-            {@else}
-            <span class="label label-lg label-danger">暂存</span>
-            {@/if}
-        </td>
-        <td>
-            ﻿ <a href="edit/index.jsp?id=${param.id}&did=\${item.id}">编辑</a>
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-status">设置状态</a>
-            {@if item.auditStatus==1}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}" data-target="#modal-audit">审核</a>
-            {@/if}
-            <a href="#" data-toggle="modal" data-id="\${item.id}" data-title="\${item.name}"
-               data-target="#modal-preview">查看</a>
-
-            <a href="javascript:del('\${item.id}');">删除</a>
-
-        </td>
-    </tr>
-    {@/each}
-</script>
-﻿
-<div class="modal fade " id="modal-status">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">设置状态</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-status" role="form">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label class="col-md-2 view-label">对象</label>
-                            <div class="col-md-10 status-title">
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">状态</label>
-                            <div class="col-md-10">
-                                <div class="radio-group-container">
-                                    <input type="hidden" name="id">
-                                    <label>
-                                        <input type="radio" name="status" value="1"><span style="padding:10px">预播</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="2"><span
-                                            style="padding:10px">直播中</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="status" value="3"><span style="padding:10px">历史</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green status">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!--审核弹框-->
-<div class="modal fade" role="dialog" id="modal-audit">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">审核</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" id="fm-audit" role="form">
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn green audit">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">详细</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
-
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-<script id="tpl-fm" type="text/template">
-    <div class="form-body">
-
-                                    <div class="form-group">
-                    <label class="col-md-2 view-label">主键</label>
-                    <div class="col-md-10">
-                        \${id}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">班级</label>
-                    <div class="col-md-10">
-                        \${classesId}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">日期</label>
-                    <div class="col-md-10">
-                        \${courseDate}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">课节am:上午 pm:下午</label>
-                    <div class="col-md-10">
-                        \${courseIndex}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">老师</label>
-                    <div class="col-md-10">
-                        \${teacherId}
-                    </div>
-                </div>
-                            <div class="form-group">
-                    <label class="col-md-2 view-label">课程</label>
-                    <div class="col-md-10">
-                        \${courseId}
-                    </div>
-                </div>
-                    
-
-        <h4>结果</h4>
-        <hr>
-        <div class="form-group " id="operation">
-            <label class="col-md-2 control-label">结果</label>
-            <div class="col-md-10">
-                <div class="radio-group-container">
-                    <label>
-                        <input type="radio" name="rst" value="2"><span style="padding:10px">通过</span>
-                    </label>
-                    <label>
-                        <input type="radio" name="rst" value="3"><span style="padding:10px">退回</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 control-label">说明</label>
-            <div class="col-md-10">
-                <input type="hidden" name="id" value="\${data.o.id}">
-                <textarea name="text" style="width: 100%;height: 100px;"></textarea>
-            </div>
-        </div>
-    </div>
-
-</script>
-
-<script id="tpl-preview" type="text/template">
-                                <div class="form-group">
-                <label class="col-md-2 view-label">主键</label>
-                <div class="col-md-10">
-                    \${id}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">班级</label>
-                <div class="col-md-10">
-                    \${classesId}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">日期</label>
-                <div class="col-md-10">
-                    \${courseDate}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">课节am:上午 pm:下午</label>
-                <div class="col-md-10">
-                    \${courseIndex}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">老师</label>
-                <div class="col-md-10">
-                    \${teacherId}
-                </div>
-            </div>
-                        <div class="form-group">
-                <label class="col-md-2 view-label">课程</label>
-                <div class="col-md-10">
-                    \${courseId}
-                </div>
-            </div>
-                    </script>
-<style>
-    .cover {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-    }
-
-    .describtion {
-        padding-left: 15px;
-        height: 50px;
-    }
-
-    .cost {
-        padding-top: 5px;
-        padding-left: 15px;
-        color: #FE6500;
-    }
-</style>
 <jsp:include page="/dynamic/common/footer.jsp"/>
-<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
-<script src="${portalPath}/content/common/js/jqPaginator.js?v=${cfg.version}"></script>
-<script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
-<script src="js/act.js?v=${cfg.version}"></script>
+
+<script src='CommonUI/fullcalendar2.9/moment.min.js'></script>
+<script type="text/javascript" src="CommonUI/fullcalendar2.9/fullcalendar.min.js"></script>
+<script type="text/javascript" src="CommonUI/fullcalendar2.9/zh-cn.js"></script>
+<script type="text/javascript" src="CommonUI/fullcalendar2.9/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="js/fc_schedule.plug_in.js"></script>
+<script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/select2/js/select2.js"></script>
 </html>
