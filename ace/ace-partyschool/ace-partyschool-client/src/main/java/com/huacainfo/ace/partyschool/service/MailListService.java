@@ -180,5 +180,5 @@ public interface MailListService {
      * @author: chenxiaoke
      * @version: 2019-01-12
      */
-    List<Tree> getTreeList(UserProp userProp);
+    List<Tree> getTreeList(String name,UserProp userProp);
 }

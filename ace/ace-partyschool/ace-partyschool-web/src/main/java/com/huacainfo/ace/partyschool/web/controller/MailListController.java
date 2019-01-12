@@ -279,7 +279,7 @@ public class MailListController extends BisBaseController {
      */
     @RequestMapping(value = "/www/getTreeList")
     @ResponseBody
-    public  List<Tree> getTreeList(){
-        return this.mailListService.getTreeList(this.getCurUserProp());
+    public  List<Tree> getTreeList(String name){
+        return this.mailListService.getTreeList(name,this.getCurUserProp());
     }
 }

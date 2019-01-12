@@ -337,8 +337,8 @@ public class MailListServiceImpl implements MailListService {
      * @version: 2019-01-12
      */
     @Override
-    public List<Tree> getTreeList(UserProp userProp){
-        List<Map<String,Object>> list=this.mailListDao.getClassTreeList("1");
+    public List<Tree> getTreeList(String name,UserProp userProp){
+        List<Map<String,Object>> list=this.mailListDao.getClassTreeList("1",name);
         CommonTreeUtils treeUtils = new CommonTreeUtils(list);
         return treeUtils.getTreeList("0");
     }
