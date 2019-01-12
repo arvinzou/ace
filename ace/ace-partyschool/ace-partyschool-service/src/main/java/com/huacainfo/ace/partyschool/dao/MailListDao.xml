@@ -101,7 +101,7 @@ where 0=0
 
 
   <select id="getList" resultType="map">
-    select id, name from student where pid=#{p.classId} order by name;
+    select id, name from student where classId=#{p.classId} order by name;
   </select>
 
   <resultMap  id="MailListContent" type="com.huacainfo.ace.partyschool.vo.MailListContent">
