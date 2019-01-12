@@ -4,6 +4,7 @@ import com.huacainfo.ace.partyschool.model.ClassSchedule;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 
 public class ClassScheduleQVo extends ClassSchedule {
@@ -15,12 +16,21 @@ public class ClassScheduleQVo extends ClassSchedule {
 
     private String courseDateStr;
 
-
+    private List<String> classList;
 
     /**
      * 判断用
      */
     private String learned;
+
+
+    public List<String> getClassList() {
+        return classList;
+    }
+
+    public void setClassList(List<String> classList) {
+        this.classList = classList;
+    }
 
     public String getCourseDateStr() {
         return courseDateStr;

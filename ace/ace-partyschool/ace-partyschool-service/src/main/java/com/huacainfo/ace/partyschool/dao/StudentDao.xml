@@ -74,9 +74,11 @@
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.StudentVo">
         <result column="clsName" jdbcType="VARCHAR" property="clsName"/>
+        <result column="lCardNo" jdbcType="VARCHAR" property="lCardNo"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
+        cd.cardData as lCardNo,
         c.`name` as clsName,
         t.id, t.pid, t.name, t.mobile, t.idCard, t.political,
         t.workUnitName, t.postName, t.classId, t.remark,
@@ -86,6 +88,7 @@
     <sql id="From_Statement">
         FROM student t
         left join classes c on t.classId = c.id
+        left join partyschool.card_data cd on t.id = cd.userId
     </sql>
     <sql id="Where_Condition">
         where 1 = 1

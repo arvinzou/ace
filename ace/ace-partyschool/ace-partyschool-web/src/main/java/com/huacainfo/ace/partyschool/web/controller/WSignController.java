@@ -108,10 +108,10 @@ public class WSignController extends BisBaseController {
                 data.getMobile())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
-        //验证码校验
-//        if (!codeCheck(data.getMobile(), code)) {
-//            return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
-//        }
+        //该手机号码已注册
+        if (signService.isExistByMobile(data.getMobile())) {
+            return new ResultResponse(ResultCode.FAIL, "该手机号码已注册");
+        }
         //微信鉴权信息
         Userinfo userinfo = getCurUserinfo();
         if (StringUtil.isNotEmpty(uid)) {
@@ -144,10 +144,10 @@ public class WSignController extends BisBaseController {
                 data.getMobile())) {
             return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
         }
-        //验证码校验
-//        if (!codeCheck(data.getMobile(), code)) {
-//            return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
-//        }
+        //该手机号码已注册
+        if (signService.isExistByMobile(data.getMobile())) {
+            return new ResultResponse(ResultCode.FAIL, "该手机号码已注册");
+        }
         //微信鉴权信息
         Userinfo userinfo = getCurUserinfo();
         if (StringUtil.isNotEmpty(uid)) {

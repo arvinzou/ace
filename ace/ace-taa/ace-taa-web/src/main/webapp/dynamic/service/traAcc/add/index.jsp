@@ -48,6 +48,7 @@
 										<input name="latitude" type="hidden" />
 										<input name="longitude" type="hidden" />
                                         <input name="areaCode" type="hidden" />
+										<div class="error-address"></div>
 									</div>
 								</div>
 
@@ -70,6 +71,7 @@
                                             {@/if}
                                             {@/each}
                                         </div>
+										<div class="error-weather"></div>
 									</div>
 								</div>
 								<div class="form-group">
@@ -90,6 +92,7 @@
 											{@/if}
 											{@/each}
 										</div>
+										<div class="error-vehicleType"></div>
 									</div>
 								</div>
 								<div class="form-group">

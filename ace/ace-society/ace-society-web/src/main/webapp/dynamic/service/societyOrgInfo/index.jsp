@@ -153,7 +153,7 @@
         </td>
         <td>
             <a class="operation" href="javascript:detail('\${item.id}');">查看</a>
-            <%--<a class="operation" href="javascript:edit('\${item.id}');">编辑</a>--%>
+            <a class="operation" href="javascript:edit('\${item.id}');">编辑</a>
             <%--<a class="operation" href="javascript:del('\${item.id}');">删除</a>--%>
             <a class="operation" href="#" data-toggle="modal" data-target="#modal-admin" data-id="\${item.id}">负责人</a>
             {@if item.status==2}

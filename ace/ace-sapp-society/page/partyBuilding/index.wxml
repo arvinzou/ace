@@ -6,7 +6,7 @@
 
     <view class='organization whiteBg separate'>
         <view class='tilte'>
-            <text class='iconfont icon-icon-test'></text>党小组
+            <text class='iconfont icon-icon-test'></text>党组织
         </view>
         <view class='swiper'>
             <swiper next-margin='176rpx'>

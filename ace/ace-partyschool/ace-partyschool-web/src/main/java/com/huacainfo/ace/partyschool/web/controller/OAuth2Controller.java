@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Map;
 
 @RestController
@@ -35,9 +36,8 @@ import java.util.Map;
 public class OAuth2Controller extends BisBaseController {
 
     private static final long serialVersionUID = 1L;
+    private final String LOGIN_PAGE = "/partyschool/www/login/index.jsp?";
     Logger logger = LoggerFactory.getLogger(this.getClass());
-
-
     @Value("#{config[appid]}")
     private String appid;
     @Value("#{config[secret]}")
@@ -48,7 +48,6 @@ public class OAuth2Controller extends BisBaseController {
     private String scope;
     @Value("#{config[state]}")
     private String state;
-
     @Autowired
     private OAuth2Service oAuth2Service;
     @Autowired
@@ -101,11 +100,13 @@ public class OAuth2Controller extends BisBaseController {
     }
 
     @RequestMapping("/auth2")
-    public ResultResponse auth2(String code, String state,
-                                HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+    public void auth2(String code, String state,
+                      HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String respUri;//跳转地址
         if (!StringUtil.areNotEmpty(code, state)) {
-            return new ResultResponse(ResultCode.FAIL, "授权code获取失败");
+            respUri = URLEncoder.encode(LOGIN_PAGE + "error=授权code获取失败", "UTF-8");
+            response.sendRedirect(respUri);
+            return;
         }
 
         this.logger.info("【市委党校】code->{} state -> {}", code, state);
@@ -114,7 +115,8 @@ public class OAuth2Controller extends BisBaseController {
             //doAction
             String[] stateData = state.split("\\|");
             String action = stateData[0];
-            String respUri = stateData[1];
+            respUri = stateData[1];
+            respUri = StringUtil.isNotEmpty(respUri) ? URLDecoder.decode(respUri, "utf-8") : "";
             String jsonData = stateData[2];
             Map<String, Object> pageParams = JsonUtil.toMap(jsonData);
             Userinfo userinfo = rst.getValue();//微信个人资料
@@ -123,30 +125,34 @@ public class OAuth2Controller extends BisBaseController {
                 case "WX_BIND"://绑定微信
                     rs = signService.wxBind((String) pageParams.get("account"), userinfo.getUnionid());
                     if (ResultCode.FAIL == rs.getStatus()) {
-                        return rs;
+                        respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
                     }
                     break;
                 case "WX_LOGIN"://微信登录
                     rs = signService.wxLogin(userinfo.getUnionid());
                     if (ResultCode.FAIL == rs.getStatus()) {
-                        return rs;
+                        respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
                     } else {
                         //登录session注册
                         registerSession((Users) rs.getData());
                     }
                     break;
                 default:
-                    return new ResultResponse(ResultCode.FAIL, "未知处理类型");
+                    respUri = LOGIN_PAGE + "error=" + URLEncoder.encode("未知处理类型", "UTF-8");//错误提醒
+                    break;
             }
-            //返回目标请求地址
-            if (StringUtil.isNotEmpty(respUri)) {
-                respUri = URLDecoder.decode(respUri, "UTF-8");
-                response.sendRedirect(respUri);
-            }
-            return new ResultResponse(ResultCode.SUCCESS, "success");
+
         } else {
             logger.error("存储微信个人资料失败");
-            return new ResultResponse(ResultCode.FAIL, "存储微信个人资料失败");
+            respUri = LOGIN_PAGE + "error=" + URLEncoder.encode("存储微信个人资料失败", "UTF-8");//错误提醒
+        }
+
+        //返回目标请求地址
+        if (StringUtil.isNotEmpty(respUri)) {
+            response.sendRedirect(respUri);
+        } else {
+            logger.info("无返回跳转地址");
         }
     }
+
 }
