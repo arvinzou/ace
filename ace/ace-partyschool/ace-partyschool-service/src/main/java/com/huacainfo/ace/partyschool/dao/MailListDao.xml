@@ -35,9 +35,6 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="getClassTreeList" resultType="map">
-    select ID,PID,name as TEXT,mobile HREF,0 CHILD_COUNT,'closed' STATE from student t where t.classId=#{classId}
-    UNION ALL
-    select t.ID,t.PID,t.name as TEXT,null HREF,(select count(1) from student a where a.classId=#{classId} and a.pid=t.id) CHILD_COUNT,'closed' STATE from mail_list t
 
     SELECT
     t.ID,
@@ -62,7 +59,7 @@
     UNION ALL
     SELECT
     t.ID,
-    t.PID,
+    '0' PID,
     t.name AS TEXT,
     NULL HREF,
     (
@@ -77,7 +74,7 @@
     'closed' STATE,
     null ICON
     FROM
-    mail_list t
+    mail_list t where t.pid=#{classId}
   </select>
   <select id="getTeacherTreeList" resultType="map">
     SELECT
@@ -98,4 +95,28 @@ where 0=0
       concat(#{name,jdbcType=VARCHAR},'%')
     </if>
   </select>
+
+
+  <select id="getList" resultType="map">
+    select id, name, pid, createDate from mail_list where pid=#{p.classId};
+  </select>
+
+  <resultMap  id="MailListContent" type="com.huacainfo.ace.partyschool.vo.MailListContent">
+    <id property="id" column="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <collection property="list" ofType="com.huacainfo.ace.partyschool.vo.Person">
+      <id property="id" column="personId"/>
+      <result property="name" column="personName"/>
+      <result property="mobile" column="mobile"/>
+      <result property="headimgurl" column="headimgurl"/>
+    </collection>
+  </resultMap>
+
+  <select id="getMailListContent" resultMap="MailListContent">
+    select id, name from mail_list
+    left join sta
+    where pid=#{p.classId}
+  </select>
+
+
 </mapper>

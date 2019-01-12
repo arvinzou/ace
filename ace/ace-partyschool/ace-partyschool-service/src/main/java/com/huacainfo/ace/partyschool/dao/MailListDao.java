@@ -2,6 +2,8 @@ package com.huacainfo.ace.partyschool.dao;
 
 import java.util.List;
 import java.util.Map;
+
+import com.huacainfo.ace.partyschool.vo.MailListContent;
 import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.partyschool.model.MailList;
 import com.huacainfo.ace.partyschool.vo.MailListQVo;
@@ -45,5 +47,9 @@ List<MailListVo> findList(@Param("condition") MailListQVo condition,
     List<Map<String,Object>> getClassTreeList(@Param("classId")String classId,@Param("name")String name);
     List<Map<String,Object>> getTeacherTreeList(@Param("name")String name);
     List<Map<String,Object>> getTreeList();
+
+    int updateClassesByIds(@Param("classId")String classId,@Param("ids")String[] ids);
+
+    List<MailListContent> getMailListContent(@Param("classId")String classId);
 
  }
