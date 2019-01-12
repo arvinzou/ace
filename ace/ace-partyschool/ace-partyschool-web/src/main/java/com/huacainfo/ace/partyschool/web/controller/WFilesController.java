@@ -1,21 +1,14 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.partyschool.model.Files;
 import com.huacainfo.ace.partyschool.service.ClassesService;
 import com.huacainfo.ace.partyschool.service.SignService;
-import com.huacainfo.ace.partyschool.service.clsFilesService;
+import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
-import com.huacainfo.ace.partyschool.vo.FilesVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +29,7 @@ public class WFilesController extends BisBaseController {
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private clsFilesService clsFilesService;
+    private ClsFilesService clsFilesService;
     @Autowired
     private ClassesService classesService;
     @Autowired
@@ -76,6 +69,16 @@ public class WFilesController extends BisBaseController {
             return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
         return this.classesService.getMyClasses(this.getCurUserProp());
+    }
+
+    @RequestMapping(value = "/getAllClasses")
+    @ResponseBody
+    public ResultResponse getAllClasses() throws Exception {
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.classesService.getAllClasses(this.getCurUserProp());
     }
 
 

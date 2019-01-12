@@ -14,7 +14,7 @@ import com.huacainfo.ace.partyschool.vo.FilesQVo;
  * @version: 2019-01-04
  * @Description: TODO(班级文件)
  */
-public interface clsFilesService {
+public interface ClsFilesService {
     /**
      * @throws
      * @Title:find!{bean.name}List

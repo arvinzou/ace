@@ -10,8 +10,11 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.ClassesDao;
+import com.huacainfo.ace.partyschool.dao.StudentDao;
 import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.service.ClassesService;
+import com.huacainfo.ace.partyschool.service.SignService;
+import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
 import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -36,7 +39,12 @@ public class ClassesServiceImpl implements ClassesService {
     @Autowired
     private ClassesDao classesDao;
     @Autowired
+    private StudentDao studentDao;
+    @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private SignService signService;
+
 
     /**
      * @throws
@@ -53,13 +61,10 @@ public class ClassesServiceImpl implements ClassesService {
      * @version: 2019-01-03
      */
     @Override
-    public PageResult
-            <ClassesVo> findClassesList(ClassesQVo condition, int start,
-                                        int limit, String orderBy) throws Exception {
-        PageResult
-                <ClassesVo> rst = new PageResult<>();
-        List
-                <ClassesVo> list = this.classesDao.findList(condition,
+    public PageResult<ClassesVo> findClassesList(ClassesQVo condition, int start,
+                                                 int limit, String orderBy) throws Exception {
+        PageResult<ClassesVo> rst = new PageResult<>();
+        List<ClassesVo> list = this.classesDao.findList(condition,
                 start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -168,12 +173,30 @@ public class ClassesServiceImpl implements ClassesService {
      * @version: 2019-01-03
      */
     @Override
-    public SingleResult
-            <ClassesVo> selectClassesByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <ClassesVo> rst = new SingleResult<>();
+    public SingleResult<ClassesVo> selectClassesByPrimaryKey(String id) throws Exception {
+        SingleResult<ClassesVo> rst = new SingleResult<>();
         rst.setValue(this.classesDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:selectClassesByPrimaryKeyV
+     * @Description: TODO(班级须知)
+     * @param: @param id
+     * @param: @throws Exceptiono
+     * @return: ResultResponse
+     * @author: Arvin
+     * @version: 2019-01-03
+     */
+    @Override
+    public ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp) throws Exception {
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        String id = accountVo.getStudent().getClassId();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.classesDao.getClassesInfo(id));
+        map.put("total", this.studentDao.findStudentCount());
+        return new ResultResponse(0, "班级须知获取完成！", map);
     }
 
     /**
@@ -216,5 +239,11 @@ public class ClassesServiceImpl implements ClassesService {
     public ResultResponse getMyClasses(UserProp userProp) throws Exception {
         return new ResultResponse(ResultCode.SUCCESS, "成功", this.classesDao.findMyClassesList(userProp.getUserId()));
     }
+
+    @Override
+    public ResultResponse getAllClasses(UserProp userProp) throws Exception {
+        return new ResultResponse(ResultCode.SUCCESS, "成功", this.classesDao.findAllClassesList());
+    }
+
 
 }
