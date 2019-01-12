@@ -1,17 +1,23 @@
 //create by cxy 2016-08
 window.onload = function () {
 
+    var parameter = {
+        weekDate:getdate(),
+        classesId:2
+    }
+
     $(function () {
         getCourseList();
-        initcurrentClass();
+        initFullCalendar(jsonStr);
+        // initcurrentClass();
         initSelect();
 
         // getEventData();
     })
 
-    var parameter = {
-        weekDate:getdate(),
-    }
+    // var parameter = {
+    //     weekDate:getdate(),
+    // }
 
     function formatDate(target) {
         var date = target.substring(0, target.indexOf(" – "));
@@ -42,6 +48,8 @@ window.onload = function () {
            event.id=item.id;
            event.title=item.course.name;
            event.teacher=item.teacher.name;
+           event.courseId=item.id;
+           event.teacherId=item.teacherId;
            var date=item.courseDate.substring(0,10);
            if(item.courseIndex='am'){
                event.start=date+' 01:00';
@@ -86,6 +94,8 @@ window.onload = function () {
             $(this).data('event', {
                 title: $.trim($(this).text()),
                 teacher: $(this).data('teacher'),
+                courseId: $(this).data('courseid'),
+                teacherId: $(this).data('teacherid'),
                 stick: false
             });
             $(this).draggable({
@@ -137,13 +147,7 @@ window.onload = function () {
             height: 600,
             editable: true,
             customButtons: {
-                //自定义 按钮可以添加多个，自己命名  在header 部分调用即可 比如这里的myCustomButton
-                myCustomButton: {
-                    text: '自定义按钮',
-                    click: function () {
-                        alert('点击自定义按钮!');
-                    }
-                },
+                //自定义 按钮可以添加多个，自己命名  在header 部分调用即可 比如这里的myCustomButto
                 prev: {
                     text: '上一周',
                     click: function () {
@@ -160,9 +164,8 @@ window.onload = function () {
                 }
             },
             header: {
-                left: 'prev,next today, myCustomButton',
+                left: 'prev,next,today',
                 center: 'title',
-                right: 'agendaWeek'
             },
             eventStartEditable: false,
             eventDurationEditable: false,
@@ -202,10 +205,28 @@ window.onload = function () {
             },
 
             droppable: true, //允许拖拽放置
-            eventReceive: function (event) {
-                //根据event.title内容，修改拖拽后的样式
-                console.log(1111111);
-                console.log(arguments);
+            eventReceive: function (data) {
+                console.log(data);
+                var insertDate={};
+                var dateTime = JSON.stringify(data.start);
+                var date=dateTime.substring(0,11);
+                var time=dateTime.substring(13,14);
+                if(time==1){
+                    insertDate.courseIndex='am';
+                }else if(time==2){
+                    insertDate.courseIndex='bm';
+                };
+                insertDate.classesId=parameter.classesId;
+                insertDate.courseDate=date+' 00:00:00';
+                insertDate.teacherId=data.teacherId;
+                insertDate.courseId=data.courseId;
+                var url=contextPath + "/classSchedule/insertClassSchedule"
+                var data={
+                    jsons:JSON.stringify(insertDate)
+                }
+                $.post(url,data,function (rst) {
+                    console.log(rst);
+                })
             },
             eventRender: function (event, element) {
                 element.find(".fc-title").html('《' + event.title + '》——' + event.teacher);//cxy修改后的，不确定会不会有其他问题
@@ -232,6 +253,10 @@ window.onload = function () {
             drop: function (date, allDay, jsEvent, ui) {
                 var dateTime = JSON.stringify(date);
                 console.log(dateTime);
+                console.log(allDay);
+                console.log(jsEvent);
+                console.log(ui);
+
             },
             //事件数据
             events: [],
