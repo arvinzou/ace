@@ -170,7 +170,7 @@ window.onload = function () {
             eventMouseout: function (event, jsEvent, view) {
             },
 
-            droppable: true, //允许拖拽放置
+            droppable: false, //允许拖拽放置
             eventReceive: function (event) {
                 //根据event.title内容，修改拖拽后的样式
                 console.log(1111111);
@@ -197,6 +197,10 @@ window.onload = function () {
             eventDragStart: function (event, jsEvent, ui, view) {
                 //alert(event.id);
                 // alert(234);
+            },
+            drop:function (date, allDay, jsEvent, ui) {
+                var dateTime = JSON.stringify(date);
+                console.log(dateTime);
             },
             //事件数据
             events: [],

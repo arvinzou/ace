@@ -3,6 +3,7 @@ package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.ClassSchedule;
 import com.huacainfo.ace.partyschool.vo.ClassScheduleVo;
@@ -33,6 +34,9 @@ public interface ClassScheduleService {
 
     PageResult<ClassScheduleVo> LearnedCourses(ClassScheduleQVo condition,
                                                       int start, int limit, String orderBy) throws Exception;
+
+    ResultResponse MyClassSchedule(ClassScheduleQVo condition,
+                                   int start, int limit, String orderBy, UserProp userProp) throws Exception;
 
     /**
      * @throws
