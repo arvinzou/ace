@@ -1,29 +1,65 @@
 //create by cxy 2016-08
 window.onload = function () {
 
+    var parameter = {
+        weekDate:getdate(),
+        classesId:2
+    }
+
     $(function () {
         getCourseList();
         initFullCalendar(jsonStr);
+        // initcurrentClass();
         initSelect();
-        initcurrentClass();
+
         // getEventData();
     })
 
-    var parameter={
-        classesId:2
-    }
+    // var parameter = {
+    //     weekDate:getdate(),
+    // }
+
     function formatDate(target) {
-        var date=target.substring(0,target.indexOf(" – "));
-        date=date.replace('年','-').replace('月','-');
-        parameter.weekDate=date+' 00:00:00';
+        var date = target.substring(0, target.indexOf(" – "));
+        date = date.replace('年', '-').replace('月', '-');
+        parameter.weekDate = date + ' 00:00:00';
         getEventData();
     }
-    
+
     function getEventData() {
-        var url=contextPath + "/classSchedule/LearnedCourses";
-        $.getJSON(url,parameter,function (rst) {
-            console.log(rst);
+        var url = contextPath + "/classSchedule/LearnedCourses";
+        $.getJSON(url, parameter, function (rst) {
+            if (rst.status == 0) {
+                formatEventData(rst.rows);
+                $('#calendar').fullCalendar('removeEvent');
+            }
         })
+    }
+
+    /*整理成event的数据格式*/
+    function formatEventData(data) {
+        $('#calendar').fullCalendar('removeEvents');
+       var event= {
+            color: '#efffe3',
+            textColor:'#444'
+        };
+       for(index in data){
+           var item=data[index];
+           event.id=item.id;
+           event.title=item.course.name;
+           event.teacher=item.teacher.name;
+           event.courseId=item.id;
+           event.teacherId=item.teacherId;
+           var date=item.courseDate.substring(0,10);
+           if(item.courseIndex='am'){
+               event.start=date+' 01:00';
+               event.end=date+' 02:00';
+           }else {
+               event.start=date+' 02:00';
+               event.end=date+' 03:00';
+           }
+           $('#calendar').fullCalendar('renderEvent',event,true);
+       }
     }
 
     function getCourseList() {
@@ -57,7 +93,9 @@ window.onload = function () {
         $('#external-events .fc-event').each(function () {
             $(this).data('event', {
                 title: $.trim($(this).text()),
-                t: $(this).data('teacher'),
+                teacher: $(this).data('teacher'),
+                courseId: $(this).data('courseid'),
+                teacherId: $(this).data('teacherid'),
                 stick: false
             });
             $(this).draggable({
@@ -109,13 +147,7 @@ window.onload = function () {
             height: 600,
             editable: true,
             customButtons: {
-                //自定义 按钮可以添加多个，自己命名  在header 部分调用即可 比如这里的myCustomButton
-                myCustomButton: {
-                    text: '自定义按钮',
-                    click: function () {
-                        alert('点击自定义按钮!');
-                    }
-                },
+                //自定义 按钮可以添加多个，自己命名  在header 部分调用即可 比如这里的myCustomButto
                 prev: {
                     text: '上一周',
                     click: function () {
@@ -127,15 +159,15 @@ window.onload = function () {
                     text: '下一周',
                     click: function () {
                         $('#calendar').fullCalendar('next');
+                        formatDate($('#calendar').fullCalendar('getView').title);
                     }
                 }
             },
             header: {
-                left: 'prev,next today, myCustomButton',
+                left: 'prev,next,today',
                 center: 'title',
-                right: 'agendaWeek'
             },
-            eventStartEditable: true,
+            eventStartEditable: false,
             eventDurationEditable: false,
             eventOverlap: false,
             allDaySlot: false,//是否显示全天
@@ -155,7 +187,9 @@ window.onload = function () {
                 day: '日'
             },
 
-
+            viewRender:function () {
+                getEventData();
+            },
             //点击一天时触发
             dayClick: function (date, allDay, jsEvent, view) {
             },
@@ -170,14 +204,32 @@ window.onload = function () {
             eventMouseout: function (event, jsEvent, view) {
             },
 
-            droppable: false, //允许拖拽放置
-            eventReceive: function (event) {
-                //根据event.title内容，修改拖拽后的样式
-                console.log(1111111);
-                console.log(arguments);
+            droppable: true, //允许拖拽放置
+            eventReceive: function (data) {
+                console.log(data);
+                var insertDate={};
+                var dateTime = JSON.stringify(data.start);
+                var date=dateTime.substring(0,11);
+                var time=dateTime.substring(13,14);
+                if(time==1){
+                    insertDate.courseIndex='am';
+                }else if(time==2){
+                    insertDate.courseIndex='bm';
+                };
+                insertDate.classesId=parameter.classesId;
+                insertDate.courseDate=date+' 00:00:00';
+                insertDate.teacherId=data.teacherId;
+                insertDate.courseId=data.courseId;
+                var url=contextPath + "/classSchedule/insertClassSchedule"
+                var data={
+                    jsons:JSON.stringify(insertDate)
+                }
+                $.post(url,data,function (rst) {
+                    console.log(rst);
+                })
             },
             eventRender: function (event, element) {
-                element.find(".fc-title").html('《' + event.title + '》——' + event.t);//cxy修改后的，不确定会不会有其他问题
+                element.find(".fc-title").html('《' + event.title + '》——' + event.teacher);//cxy修改后的，不确定会不会有其他问题
             },
             //浏览器大小改变是触发
             eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
@@ -198,9 +250,13 @@ window.onload = function () {
                 //alert(event.id);
                 // alert(234);
             },
-            drop:function (date, allDay, jsEvent, ui) {
+            drop: function (date, allDay, jsEvent, ui) {
                 var dateTime = JSON.stringify(date);
                 console.log(dateTime);
+                console.log(allDay);
+                console.log(jsEvent);
+                console.log(ui);
+
             },
             //事件数据
             events: [],
@@ -220,7 +276,6 @@ window.onload = function () {
 
                 }
                 $('#calendar').fullCalendar('unselect');
-
             }
         });
 
@@ -234,7 +289,7 @@ window.onload = function () {
                 delay: 250,
                 data: function (params) {
                     return {
-                        status:2,
+                        status: 2,
                         name: params.term, // search term
                         page: params.page
                     };
@@ -267,19 +322,22 @@ window.onload = function () {
             },
         });
     }
-    
+
     function initcurrentClass() {
-        var url=contextPath + '/classes/findClassesList';
-        var data={
-            status:1
+        var url = contextPath + '/classes/findClassesList';
+        var data = {
+            status: 1
         }
-        $.getJSON(url,data,function (rst) {
-            if(rst.status==0){
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
+                parameter.classesId=rst.rows[0].id;
+                parameter.weekDate=getdate();
+                initFullCalendar(jsonStr);
                 render('#classList', rst.rows, 'tpl-classList');
             }
         })
     }
-    
+
 }
 
 

@@ -11,31 +11,31 @@ import com.huacainfo.ace.partyschool.vo.MailListVo;
 
 public interface MailListDao {
 
-MailList selectByPrimaryKey(String id);
+    MailList selectByPrimaryKey(String id);
 
-int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(String id);
 
-int insert(MailList record);
-
-
-int updateByPrimaryKey(MailList record);
+    int insert(MailList record);
 
 
-MailListVo selectVoByPrimaryKey(String id);
+    int updateByPrimaryKey(MailList record);
 
-List<MailListVo> findList(@Param("condition") MailListQVo condition,
-    @Param("start") int start,
-    @Param("limit") int limit,
-    @Param("orderBy") String orderBy);
+
+    MailListVo selectVoByPrimaryKey(String id);
+
+    List<MailListVo> findList(@Param("condition") MailListQVo condition,
+                              @Param("start") int start,
+                              @Param("limit") int limit,
+                              @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") MailListQVo condition);
 
     int isExit(MailList record);
 
-    int updateStatus(@Param("id") String id,@Param("status") String status);
+    int updateStatus(@Param("id") String id, @Param("status") String status);
 
 
-    List<Map<String,Object>> getList(@Param("p")Map<String,Object> p);
+    List<Map<String, Object>> getList(@Param("p") Map<String, Object> p);
 
 
     List<Map<String, Object>> getListByCondition(@Param("params") Map<String, Object> params);
@@ -44,12 +44,17 @@ List<MailListVo> findList(@Param("condition") MailListQVo condition,
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
 
-    List<Map<String,Object>> getClassTreeList(@Param("classId")String classId,@Param("name")String name);
-    List<Map<String,Object>> getTeacherTreeList(@Param("name")String name);
-    List<Map<String,Object>> getTreeList();
+    List<Map<String, Object>> getClassTreeList(@Param("classId") String classId, @Param("name") String name);
 
-    int updateClassesByIds(@Param("classId")String classId,@Param("ids")String[] ids);
+    List<Map<String, Object>> getTeacherTreeList(@Param("name") String name);
 
-    List<MailListContent> getMailListContent(@Param("classId")String classId);
+    List<Map<String, Object>> getTreeList();
 
- }
+    int updateClassesByIds(@Param("classId") String classId, @Param("ids") String[] ids);
+
+    List<MailListContent> getMailListContent(@Param("classId") String classId);
+
+
+    List<Map<String, Object>> getClassList();
+
+}

@@ -1,7 +1,9 @@
 package com.huacainfo.ace.partyschool.web.controller;
+
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.web.controller.BaseController;
+import com.huacainfo.ace.partyschool.vo.MailListContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -279,7 +281,52 @@ public class MailListController extends BisBaseController {
      */
     @RequestMapping(value = "/www/getTreeList")
     @ResponseBody
-    public  List<Tree> getTreeList(String name){
-        return this.mailListService.getTreeList(name,this.getCurUserProp());
+    public ListResult<Tree> getTreeList(String name) {
+        return this.mailListService.getTreeList(name, this.getCurUserProp());
+    }
+
+    /**
+     * @throws
+     * @Title:getMailListContent
+     * @Description: TODO(加载班级分组列表)
+     * @param: @return
+     * @return: List<MailListContent>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @RequestMapping(value = "/getMailListContent")
+    @ResponseBody
+    public ListResult<MailListContent> getMailListContent(String classId) {
+        return this.mailListService.getMailListContent(classId);
+    }
+
+    /**
+     * @throws
+     * @Title:updateClassesByIds
+     * @Description: TODO(分组更)
+     * @param: @return
+     * @return: MessageResponse
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @RequestMapping(value = "/updateClassesByIds")
+    @ResponseBody
+    public MessageResponse updateClassesByIds(String classId, String[] ids) {
+        return this.mailListService.updateClassesByIds(classId, ids);
+    }
+
+    /**
+     * @throws
+     * @Title:getClassList
+     * @Description: TODO(加载当前班级列表)
+     * @param: @return
+     * @return: ListResult<Map<String, Object>>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @RequestMapping(value = "/getClassList")
+    @ResponseBody
+    public ListResult<Map<String, Object>> getClassList(){
+        return this.mailListService.getClassList();
     }
 }
