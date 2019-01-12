@@ -138,4 +138,9 @@ where 0=0
   </update>
 
 
+  <select id="getClassList" resultType="map">
+    select id, name from classes where status='1'
+  </select>
+
+
 </mapper>

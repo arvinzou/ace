@@ -314,4 +314,19 @@ public class MailListController extends BisBaseController {
     public MessageResponse updateClassesByIds(String classId, String[] ids) {
         return this.mailListService.updateClassesByIds(classId, ids);
     }
+
+    /**
+     * @throws
+     * @Title:getClassList
+     * @Description: TODO(加载当前班级列表)
+     * @param: @return
+     * @return: ListResult<Map<String, Object>>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @RequestMapping(value = "/getClassList")
+    @ResponseBody
+    public ListResult<Map<String, Object>> getClassList(){
+        return this.mailListService.getClassList();
+    }
 }

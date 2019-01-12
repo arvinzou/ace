@@ -366,5 +366,20 @@ public class MailListServiceImpl implements MailListService {
         this.mailListDao.updateClassesByIds(classId, ids);
         return new MessageResponse(0, "成功！");
     }
+    /**
+     * @throws
+     * @Title:getClassList
+     * @Description: TODO(加载当前班级列表)
+     * @param: @return
+     * @return: ListResult<Map<String, Object>>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @Override
+    public ListResult<Map<String, Object>> getClassList(){
+        ListResult<Map<String, Object>> rst=new ListResult<>();
+        rst.setValue(this.mailListDao.getClassList());
+        return rst;
+    }
 
 }

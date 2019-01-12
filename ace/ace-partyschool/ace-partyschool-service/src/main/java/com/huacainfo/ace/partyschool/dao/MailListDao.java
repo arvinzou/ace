@@ -54,4 +54,7 @@ public interface MailListDao {
 
     List<MailListContent> getMailListContent(@Param("classId") String classId);
 
+
+    List<Map<String, Object>> getClassList();
+
 }
