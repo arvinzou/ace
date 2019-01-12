@@ -11,6 +11,7 @@ import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.StudentDao;
 import com.huacainfo.ace.portal.tools.TreeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,8 @@ public class MailListServiceImpl implements MailListService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MailListDao mailListDao;
+    @Autowired
+    private StudentDao studentDao;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -337,8 +340,15 @@ public class MailListServiceImpl implements MailListService {
      * @version: 2019-01-12
      */
     @Override
-    public List<Tree> getTreeList(UserProp userProp){
-        List<Map<String,Object>> list=this.mailListDao.getClassTreeList("1");
+    public List<Tree> getTreeList(String name,UserProp userProp){
+        List<Map<String,Object>> list=null;
+        Map<String,String> o=studentDao.selectUserClassInfo(userProp.getUserId());
+        if(o.get("role").equals("student")){
+            list=this.mailListDao.getClassTreeList(o.get("classId"),name);
+        }else{
+
+            list=this.mailListDao.getTeacherTreeList(name);
+        }
         CommonTreeUtils treeUtils = new CommonTreeUtils(list);
         return treeUtils.getTreeList("0");
     }

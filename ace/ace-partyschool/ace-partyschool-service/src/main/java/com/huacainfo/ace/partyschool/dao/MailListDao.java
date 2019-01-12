@@ -42,8 +42,8 @@ List<MailListVo> findList(@Param("condition") MailListQVo condition,
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
 
-    List<Map<String,Object>> getClassTreeList(@Param("classId")String classId);
-    List<Map<String,Object>> getTeacherTreeList();
+    List<Map<String,Object>> getClassTreeList(@Param("classId")String classId,@Param("name")String name);
+    List<Map<String,Object>> getTeacherTreeList(@Param("name")String name);
     List<Map<String,Object>> getTreeList();
 
  }
