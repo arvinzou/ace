@@ -152,9 +152,12 @@
         <if test="condition.cTeacherId !=null and condition.cTeacherId !=&quot;&quot;">
             and c.teacherId = #{condition.cTeacherId,jdbcType=VARCHAR}
         </if>
-        <if test="condition.timePoint !=null and condition.timePoint !=&quot;&quot;">
-            AND WEEKOFYEAR(cs.courseDate) =WEEKOFYEAR(#{condition.week,jdbcType=VARCHAR})
-            AND YEAR(cs.courseDate) =YEAR(#{condition.year,jdbcType=VARCHAR})
+        <if test="condition.weekDate !=null and condition.weekDate !=&quot;&quot;">
+            AND WEEKOFYEAR(cs.courseDate) =WEEKOFYEAR(#{condition.weekDate,jdbcType=VARCHAR})
+            AND YEAR(cs.courseDate) =YEAR(#{condition.weekDate,jdbcType=VARCHAR})
+        </if>
+        <if test="condition.courseDateStr !=null and condition.courseDateStr !=&quot;&quot;">
+            and to_days(cs.courseDate) = TO_DAYS(#{condition.courseDateStr,jdbcType=VARCHAR})
         </if>
         <if test="condition.learned !=null and condition.learned !=&quot;&quot;">
             AND cs.courseDate <![CDATA[ < ]]> CURDATE()

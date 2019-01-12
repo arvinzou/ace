@@ -52,14 +52,11 @@ public class ClassesController extends BisBaseController {
     @RequestMapping(value = "/findClassesList")
     @ResponseBody
     public PageResult
-            <ClassesVo> findClassesList(ClassesQVo condition,
-                                        PageParamNoChangeSord page) throws Exception {
-
+            <ClassesVo> findClassesList(ClassesQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<ClassesVo> rst = this.classesService.findClassesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
@@ -141,7 +138,6 @@ public class ClassesController extends BisBaseController {
         if (!CommonUtils.isBlank(q)) {
             params.put("q", q);
         }
-
         return classesService.findByQ(params);
     }
 }

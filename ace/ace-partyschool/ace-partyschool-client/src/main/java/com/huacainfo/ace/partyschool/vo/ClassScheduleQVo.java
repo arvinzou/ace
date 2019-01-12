@@ -1,21 +1,42 @@
 package com.huacainfo.ace.partyschool.vo;
 
 import com.huacainfo.ace.partyschool.model.ClassSchedule;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 
 public class ClassScheduleQVo extends ClassSchedule {
     private static final long serialVersionUID = 1L;
-    private Date timePoint;
+    private String weekDate;
     private String cName;
 
-    private  String cTeacherId;
+    private String cTeacherId;
 
-    /**判断用*/
+    private String courseDateStr;
+
+
+
+    /**
+     * 判断用
+     */
     private String learned;
 
+    public String getCourseDateStr() {
+        return courseDateStr;
+    }
+
+    public void setCourseDateStr(String courseDateStr) {
+        this.courseDateStr = courseDateStr;
+    }
+
+    public String getWeekDate() {
+        return weekDate;
+    }
+
+    public void setWeekDate(String weekDate) {
+        this.weekDate = weekDate;
+    }
 
     public String getLearned() {
         return learned;
@@ -39,13 +60,5 @@ public class ClassScheduleQVo extends ClassSchedule {
 
     public void setcName(String cName) {
         this.cName = cName;
-    }
-
-    public Date getTimePoint() {
-        return timePoint;
-    }
-
-    public void setTimePoint(Date timePoint) {
-        this.timePoint = timePoint;
     }
 }

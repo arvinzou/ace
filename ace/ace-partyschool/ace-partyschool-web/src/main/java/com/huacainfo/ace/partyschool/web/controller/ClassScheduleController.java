@@ -131,8 +131,7 @@ public class ClassScheduleController extends BisBaseController {
 
     @RequestMapping(value = "/LearnedCourses")
     @ResponseBody
-    public MessageResponse LearnedCourses(ClassScheduleQVo condition,
-                                          PageParamNoChangeSord page) throws Exception {
+    public MessageResponse LearnedCourses(ClassScheduleQVo condition, PageParamNoChangeSord page) throws Exception {
         return this.classScheduleService.LearnedCourses(condition, page.getStart(), page.getLimit(), page.getOrderBy());
     }
 }
