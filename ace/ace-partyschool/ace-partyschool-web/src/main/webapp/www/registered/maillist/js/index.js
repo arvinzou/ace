@@ -1,3 +1,7 @@
+$(function(){
+    initMailList();
+});
+
 function focusInput(){
 	$("#search-icon").hide();
 	$("#search-title").hide();
@@ -26,5 +30,29 @@ function dorpAndDown(obj, iDom){
 		$(obj).html('<img src="img/icon_up.png" class="icon-up" name="up"/>');
 		$("#"+iDom).hide();
 	}
-	
+}
+
+function initMailList(){
+    $.ajax({
+        url: contextPath+ "/mailList/www/getTreeList",
+        type:"post",
+        async:false,
+        data:{
+        },
+        success:function(result){
+        	renderPage("treeList", result, 'tree-tpl');
+            renderPage("otherList", result, 'other-tpl');
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
 }
