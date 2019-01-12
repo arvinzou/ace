@@ -57,4 +57,9 @@ public interface MailListDao {
 
     List<Map<String, Object>> getClassList();
 
+    List<Map<String, Object>> getMeClassList(String id);
+
+
+
+
 }

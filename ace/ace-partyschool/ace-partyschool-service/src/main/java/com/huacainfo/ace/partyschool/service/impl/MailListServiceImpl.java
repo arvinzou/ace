@@ -376,9 +376,13 @@ public class MailListServiceImpl implements MailListService {
      * @version: 2019-01-12
      */
     @Override
-    public ListResult<Map<String, Object>> getClassList(){
+    public ListResult<Map<String, Object>> getClassList(UserProp userProp){
         ListResult<Map<String, Object>> rst=new ListResult<>();
-        rst.setValue(this.mailListDao.getClassList());
+        List<Map<String,Object>> list=this.mailListDao.getMeClassList(userProp.getUserId());
+        if(list==null||list.size()==0){
+            list=this.mailListDao.getClassList();
+        }
+        rst.setValue(list);
         return rst;
     }
 

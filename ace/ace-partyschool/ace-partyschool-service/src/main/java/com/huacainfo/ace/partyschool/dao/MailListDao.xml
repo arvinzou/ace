@@ -142,5 +142,10 @@ where 0=0
     select id, name from classes where status='1'
   </select>
 
+  <select id="getMeClassList" resultType="map">
+    select id,name from classes where headmaster=#{id} and status='1'
+  </select>
+
+
 
 </mapper>

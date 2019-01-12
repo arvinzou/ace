@@ -326,7 +326,7 @@ public class MailListController extends BisBaseController {
      */
     @RequestMapping(value = "/getClassList")
     @ResponseBody
-    public ListResult<Map<String, Object>> getClassList(){
-        return this.mailListService.getClassList();
+    public ListResult<Map<String, Object>> getClassList() {
+        return this.mailListService.getClassList(this.getCurUserProp());
     }
 }

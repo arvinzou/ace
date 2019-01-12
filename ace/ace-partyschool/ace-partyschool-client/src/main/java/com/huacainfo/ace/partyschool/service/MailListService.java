@@ -215,5 +215,5 @@ public interface MailListService {
      * @author: chenxiaoke
      * @version: 2019-01-12
      */
-    ListResult<Map<String, Object>> getClassList();
+    ListResult<Map<String, Object>> getClassList(UserProp userProp);
 }
