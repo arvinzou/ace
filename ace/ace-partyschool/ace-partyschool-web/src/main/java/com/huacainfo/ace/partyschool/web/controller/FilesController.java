@@ -14,7 +14,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Files;
-import com.huacainfo.ace.partyschool.service.clsFilesService;
+import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.vo.FilesVo;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
 
@@ -31,7 +31,7 @@ public class FilesController extends BisBaseController {
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private clsFilesService clsFilesService;
+    private ClsFilesService clsFilesService;
 
     /**
      * @throws
@@ -51,9 +51,7 @@ public class FilesController extends BisBaseController {
     public PageResult<FilesVo> findFilesList(FilesQVo condition,
                                              PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <FilesVo> rst = this.clsFilesService
-                .findFilesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        PageResult<FilesVo> rst = this.clsFilesService.findFilesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }

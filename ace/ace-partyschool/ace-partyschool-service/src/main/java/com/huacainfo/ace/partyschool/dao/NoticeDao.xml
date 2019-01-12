@@ -75,7 +75,7 @@
         select
         <include refid="Vo_Column_List"/>
         from notice t
-        where title = #{title,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -92,6 +92,13 @@
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+    <select id="findUnreadCount" resultType="int">
+        SELECT COUNT(*)
+        from notice n
+        LEFT JOIN notice_status ns ON n.id = ns.noticeId
+        WHERE ns.`status`=1
     </select>
 
     <select id="findCount" resultType="int">

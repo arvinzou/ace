@@ -23,6 +23,8 @@ public interface ClassesDao {
 
     ClassesVo selectVoByPrimaryKey(String id);
 
+    ClassesVo getClassesInfo(String id);
+
     List<ClassesVo> findList(@Param("condition") ClassesQVo condition,
                                  @Param("start") int start,
                                  @Param("limit") int limit,
@@ -30,6 +32,8 @@ public interface ClassesDao {
 
 
     List<ClassesVo> findMyClassesList(String teacherId);
+
+    List<ClassesVo> findAllClassesList();
 
     int findCount(@Param("condition") ClassesQVo condition);
 

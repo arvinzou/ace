@@ -27,6 +27,8 @@ public interface StudentDao {
 
     int findCount(@Param("condition") StudentQVo condition);
 
+    int findStudentCount();
+
     int isExist(Student record);
 
     int updateStatus(@Param("id") String id,

@@ -14,7 +14,7 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Notice;
-import com.huacainfo.ace.partyschool.service.sclNoticeService;
+import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 
@@ -31,7 +31,7 @@ public class NoticeController extends BisBaseController {
     private static final long serialVersionUID = 1L;
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
-    private sclNoticeService sclNoticeService;
+    private SclNoticeService sclNoticeService;
 
     /**
      * @throws
@@ -48,17 +48,11 @@ public class NoticeController extends BisBaseController {
      */
     @RequestMapping(value = "/findNoticeList")
     @ResponseBody
-    public PageResult
-            <NoticeVo> findNoticeList(NoticeQVo condition,
-                                      PageParamNoChangeSord page) throws Exception {
-
-        PageResult
-                <NoticeVo> rst = this.sclNoticeService
-                .findNoticeList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    public PageResult<NoticeVo> findNoticeList(NoticeQVo condition, PageParamNoChangeSord page) throws Exception {
+        PageResult<NoticeVo> rst = this.sclNoticeService.findNoticeList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }
-
         return rst;
     }
 
@@ -108,8 +102,7 @@ public class NoticeController extends BisBaseController {
      */
     @RequestMapping(value = "/selectNoticeByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
+    public SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
         return this.sclNoticeService.selectNoticeByPrimaryKey(id);
     }
 

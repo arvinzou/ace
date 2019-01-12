@@ -141,6 +141,11 @@
         <include refid="Where_Condition"/>
     </select>
 
+    <select id="findStudentCount" resultType="int">
+        SELECT COUNT(*)
+        from student
+    </select>
+
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
         select count(1)
         from student

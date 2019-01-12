@@ -4,11 +4,13 @@ package com.huacainfo.ace.partyschool.service.impl;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
 import com.huacainfo.ace.partyschool.model.Notice;
-import com.huacainfo.ace.partyschool.service.sclNoticeService;
+import com.huacainfo.ace.partyschool.service.SclNoticeService;
+import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
@@ -17,7 +19,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("sclNoticeService")
 /**
@@ -25,7 +29,7 @@ import java.util.List;
  * @version: 2019-01-06
  * @Description: TODO(通知公告)
  */
-public class sclNoticeServiceImpl implements sclNoticeService {
+public class SclNoticeServiceImpl implements SclNoticeService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private NoticeDao noticeDao;
@@ -47,13 +51,10 @@ public class sclNoticeServiceImpl implements sclNoticeService {
      * @version: 2019-01-06
      */
     @Override
-    public PageResult
-            <NoticeVo> findNoticeList(NoticeQVo condition, int start,
-                                      int limit, String orderBy) throws Exception {
-        PageResult
-                <NoticeVo> rst = new PageResult<>();
-        List
-                <NoticeVo> list = this.noticeDao.findList(condition,
+    public PageResult<NoticeVo> findNoticeList(NoticeQVo condition, int start,
+                                               int limit, String orderBy) throws Exception {
+        PageResult<NoticeVo> rst = new PageResult<>();
+        List<NoticeVo> list = this.noticeDao.findList(condition,
                 start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {
@@ -62,6 +63,17 @@ public class sclNoticeServiceImpl implements sclNoticeService {
         }
         return rst;
     }
+
+    @Override
+    public ResultResponse findNoticeLists(NoticeQVo condition, int start,
+                                          int limit, String orderBy) throws Exception {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("list", this.noticeDao.findList(condition,
+                start, limit, orderBy));
+        map.put("total", this.noticeDao.findUnreadCount());
+        return new ResultResponse(0, "班级须知获取完成！", map);
+    }
+
 
     /**
      * @throws
