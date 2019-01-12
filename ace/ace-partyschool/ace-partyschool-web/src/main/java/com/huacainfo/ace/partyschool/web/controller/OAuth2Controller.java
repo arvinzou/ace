@@ -104,8 +104,8 @@ public class OAuth2Controller extends BisBaseController {
                       HttpServletRequest request, HttpServletResponse response) throws Exception {
         String respUri;//跳转地址
         if (!StringUtil.areNotEmpty(code, state)) {
-            respUri = URLEncoder.encode(LOGIN_PAGE + "error=授权code获取失败", "utf-8");
-            sendRedirect(response, respUri);
+            respUri = URLEncoder.encode(LOGIN_PAGE + "error=授权code获取失败", "UTF-8");
+            response.sendRedirect(respUri);
             return;
         }
 
@@ -116,6 +116,7 @@ public class OAuth2Controller extends BisBaseController {
             String[] stateData = state.split("\\|");
             String action = stateData[0];
             respUri = stateData[1];
+            respUri = StringUtil.isNotEmpty(respUri) ? URLDecoder.decode(respUri, "utf-8") : "";
             String jsonData = stateData[2];
             Map<String, Object> pageParams = JsonUtil.toMap(jsonData);
             Userinfo userinfo = rst.getValue();//微信个人资料
@@ -124,34 +125,34 @@ public class OAuth2Controller extends BisBaseController {
                 case "WX_BIND"://绑定微信
                     rs = signService.wxBind((String) pageParams.get("account"), userinfo.getUnionid());
                     if (ResultCode.FAIL == rs.getStatus()) {
-                        respUri = LOGIN_PAGE + "error=" + rs.getInfo();//错误提醒
+                        respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
                     }
                     break;
                 case "WX_LOGIN"://微信登录
                     rs = signService.wxLogin(userinfo.getUnionid());
                     if (ResultCode.FAIL == rs.getStatus()) {
-                        respUri = LOGIN_PAGE + "error=" + rs.getInfo();//错误提醒
+                        respUri = LOGIN_PAGE + "error=" + URLEncoder.encode(rs.getInfo(), "UTF-8");//错误提醒
                     } else {
                         //登录session注册
                         registerSession((Users) rs.getData());
                     }
                     break;
                 default:
-                    respUri = LOGIN_PAGE + "error=" + "未知处理类型";//错误提醒
+                    respUri = LOGIN_PAGE + "error=" + URLEncoder.encode("未知处理类型", "UTF-8");//错误提醒
                     break;
             }
 
         } else {
             logger.error("存储微信个人资料失败");
-            respUri = LOGIN_PAGE + "error=" + "存储微信个人资料失败";//错误提醒
+            respUri = LOGIN_PAGE + "error=" + URLEncoder.encode("存储微信个人资料失败", "UTF-8");//错误提醒
         }
 
         //返回目标请求地址
-        sendRedirect(response, respUri);
+        if (StringUtil.isNotEmpty(respUri)) {
+            response.sendRedirect(respUri);
+        } else {
+            logger.info("无返回跳转地址");
+        }
     }
 
-    private void sendRedirect(HttpServletResponse response, String respUri) throws IOException {
-        respUri = URLDecoder.decode(respUri, "UTF-8");
-        response.sendRedirect(respUri);
-    }
 }

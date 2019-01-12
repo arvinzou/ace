@@ -30,12 +30,6 @@ public class WebLoginSecurityFilter implements Filter {
     private Long localClearInterval = 0l;
     private boolean cachable = true;
 
-    public static void main(String args[]) throws Exception {
-
-        String url = URLEncoder.encode("/live/www/view/live/index.jsp?companyId=00010001&id=90f5c89a-2af1-4485-96f1-2577ac3b8bee&attach=test", "utf-8");
-        System.out.println(url);
-
-    }
 
     @SuppressWarnings("unchecked")
     @Override
