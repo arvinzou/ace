@@ -57,7 +57,7 @@ Page({
         date: util.formatDate(new Date()),
         time: util.formatTime(new Date(), "h:m:s"),
         type: 0,
-        rtmpUrl: cfg.hlsserver + that.data.id+".m3u8"
+        rtmpUrl: cfg.hlsserver + id+".m3u8",
       },
       date: util.formatDate(new Date()),
       time: util.formatTime(new Date(), "h:m:s")

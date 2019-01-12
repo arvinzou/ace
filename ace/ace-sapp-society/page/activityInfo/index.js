@@ -96,8 +96,12 @@ Page({
         let data = e.currentTarget.dataset
         let that = this;
         let p = data.id;
-        let flag = that.data.activityInfo.createUserId == wx.getStorageSync('userinfo').unionId
-        console.log(flag);
+        let flag = false;
+        let sysUserInfo = util.getSysUser();
+        //如果没有注册，尝试重新申请获取一次。
+        if (sysUserInfo) {
+            flag = that.data.activityInfo.sId == sysUserInfo.societyOrg.id;
+        }
         wx.navigateTo({
             url: '../participants/index?id=' + p + "&flag=" + flag,
         })
