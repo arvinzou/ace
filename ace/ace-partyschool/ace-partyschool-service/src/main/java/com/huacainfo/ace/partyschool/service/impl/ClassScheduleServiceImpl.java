@@ -245,11 +245,20 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
      * @version: 2019-01-06
      */
     @Override
-    public SingleResult
-            <ClassScheduleVo> selectClassScheduleByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <ClassScheduleVo> rst = new SingleResult<>();
-        rst.setValue(this.classScheduleDao.selectVoByPrimaryKey(id));
+    public SingleResult<ClassScheduleVo> selectClassScheduleByPrimaryKey(String id) throws Exception {
+        SingleResult<ClassScheduleVo> rst = new SingleResult<>();
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        ClassScheduleDao dao = session.getMapper(ClassScheduleDao.class);
+        try {
+            ClassScheduleVo classScheduleVo = dao.selectVoByPrimaryKey(id);
+            rst.setValue(classScheduleVo);
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
+        }
         return rst;
     }
 
