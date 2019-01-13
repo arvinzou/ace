@@ -1,51 +1,38 @@
 var loading = {};
-var editor;
 window.onload = function () {
     jQuery(function ($) {
         $(".breadcrumb").append("<li> <span> 创建课程管理 </span></li> ");
         // initPage();
+        initcategory();
         initEvents();
         initSelect();
     });
 }
 
-function initSelect() {
-    $(".js-example-basic-single").select2({
-        ajax: {
-            url: portalPath + "/dict/findListByCategoryId.do?categoryId=154&selected=false",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-                var datas = $.map(data.slice(1), function (obj) {
-                    obj.text = obj.text || obj.name; // replace name with the property used for the text
-                    return obj;
-                });
-                datas = $.map(datas, function (obj) {
-                    obj.id = obj.code; // replace name with the property used for the text
-                    return obj;
-                });
-                return {
-                    results: datas,
-                    pagination: {
-                        more: (params.page * 30) < data.total_count
-                    }
-                };
-            },
-            cache: true
-        },
-        placeholder: '选择类型',
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-    });
+/**
+ * 初始化类型*/
+function initcategory() {
+    var url = portalPath + "/dict/findListByCategoryId.do";
+    var data = {
+        categoryId: 154,
+        selected: false
+    }
+    $.getJSON(url,data,function (rst) {
+        console.log(rst);
+        render($("#categorys"), rst.slice(1), "tpl-categorys");
+    })
+}
 
+/*页面渲染*/
+function render(obj, data, tplId) {
+    var tpl = document.getElementById(tplId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $(obj).html(html);
+}
+
+function initSelect() {
     $(".js-example-basic-single1").select2({
         ajax: {
             url: contextPath + "/evaluating/findEvaluatingList",
@@ -126,15 +113,15 @@ function initSelect() {
     });
 }
 
-function formatState (state) {
+function formatState(state) {
     if (!state.id) {
         return state.text;
     }
-    if(!state.photoUrl){
-        state.photoUrl=contextPath+'/content/common/img/default_header.png';
+    if (!state.photoUrl) {
+        state.photoUrl = contextPath + '/content/common/img/default_header.png';
     }
     var $state = $(
-        '<div style="height: 50px; margin-bottom: 5px;"><img style="height: 50px;width: 50px;object-fit: cover; overflow: hidden;margin-right: 10px" src="'+state.photoUrl+'" class="img-flag" /> ' + state.text + '</div>'
+        '<div style="height: 50px; margin-bottom: 5px;"><img style="height: 50px;width: 50px;object-fit: cover; overflow: hidden;margin-right: 10px" src="' + state.photoUrl + '" class="img-flag" /> ' + state.text + '</div>'
     );
     return $state;
 };
