@@ -103,9 +103,9 @@
 <script id="tpl-categorys" type="text/template">
     {@each data as item, index}
     <div style="float:left;padding:2px;width: 150px;">
-        <input type="radio" checked id="category\${index}"  name="category" value="\${item.code}">
+        <input type="radio" checked id="category\${index}"  name="category" value="\${item.CODE}">
         <label for="category\${index}">
-            \${item.name}
+            \${item.NAME}
         </label>
     </div>
     {@/each}

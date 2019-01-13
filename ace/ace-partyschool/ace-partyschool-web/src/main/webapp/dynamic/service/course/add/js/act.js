@@ -12,15 +12,8 @@ window.onload = function () {
 /**
  * 初始化类型*/
 function initcategory() {
-    var url = portalPath + "/dict/findListByCategoryId.do";
-    var data = {
-        categoryId: 154,
-        selected: false
-    }
-    $.getJSON(url,data,function (rst) {
-        console.log(rst);
-        render($("#categorys"), rst.slice(1), "tpl-categorys");
-    })
+    console.log(staticDictObject['154']);
+    render($("#categorys"), staticDictObject['154'].slice(1), "tpl-categorys");
 }
 
 /*页面渲染*/
