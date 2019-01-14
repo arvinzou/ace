@@ -40,7 +40,7 @@ function login(){
         },
         success:function(result){
             if(result.status == 0) {
-               window.location.href = contextPath + '/www/registered/person/info.jsp'
+               window.location.href = contextPath + '/www/registered/person/index.jsp'
             }else {
                 if(result.info){
                     alert(result.info);

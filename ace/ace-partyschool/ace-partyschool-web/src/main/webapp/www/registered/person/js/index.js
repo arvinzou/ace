@@ -39,3 +39,6 @@ function toConsumption(){
         window.location.href = contextPath + '/www/registered/consumption/teacher.jsp';
     }
 }
+function showPersonInfo(){
+    window.location.href = contextPath + '/www/registered/person/info.jsp';
+}
