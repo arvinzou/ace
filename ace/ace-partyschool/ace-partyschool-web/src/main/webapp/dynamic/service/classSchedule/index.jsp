@@ -78,10 +78,26 @@
                             <div id='calendar' class="ml5 padding5" ></div>
                         </div>
                         <div class="col-sm-2 margin0 padding0">
-
+                            <div col-sm-12>
+                                <h4>课程名称</h4>
+                            </div>
+                            <p col-sm-12>
+                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
+                            </p>
+                            <div col-sm-12>
+                                <h4>授课老师</h4>
+                            </div>
+                            <p col-sm-12>
+                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
+                            </p>
+                            <div col-sm-12>
+                                <h4>学习教室</h4>
+                            </div>
+                            <p col-sm-12>
+                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
+                            </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -93,7 +109,7 @@
         <h5 ><i class="fa fa-hand-o-right mr5"></i>\${index}<i class="fa fa-angle-double-down fr"></i></h5>
         <ul>
             {@each item as ite, ind}
-            <li class='fc-event event-item bg-crew-yingji' data-teacher="\${index}" data-class="fc-event bg-crew-yingji">
+            <li class='fc-event event-item bg-crew-yingji' data-teacherId="\${ite.teacherId}"  data-courseId="\${ite.id}" data-teacher="\${index}" data-class="fc-event bg-crew-yingji">
                 \${ite.name}
             </li>
             {@/each}
@@ -105,7 +121,11 @@
 
 <script id="tpl-classList" type="text/template">
     {@each data as item, index}
-    <button type="button" class="btn btn-default" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@if index==0}
+        <button type="button" class="btn btn-primary" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@else}
+        <button type="button" class="btn btn-default" onclick="setParams(\${item.id});">\${item.name}</button>
+    {@/if}
     {@/each}
 </script>
 

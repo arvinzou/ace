@@ -59,9 +59,17 @@
                 类别<span class="required" aria-required="true"> * </span>﻿
             </label>
             <div class="col-md-10">
-                <select style="width: 100%;height: 34px" class="js-example-basic-single" name="category">
-                    <option value="\${data.o.category}">\${data.o.codeName}</option>
-                </select>
+                {@each data.dict154 as item,index}
+                {@if item.CODE!=''}
+                <div style="float:left;padding:2px;width:150px">
+                    <input type="radio" id="d152\${index}" name="category" value="\${item.CODE}"
+                           \${data.o.category==item.CODE?'checked':''}>
+                    <label for="d152\${index}">
+                        \${item.NAME}
+                    </label>
+                </div>
+                {@/if}
+                {@/each}
             </div>
         </div>
         <div class="form-group">

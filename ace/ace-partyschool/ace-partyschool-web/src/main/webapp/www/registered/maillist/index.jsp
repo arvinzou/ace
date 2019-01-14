@@ -15,7 +15,7 @@
 		<div class="index">
 			<div class="box">
 				<div class="search">
-					<input class="serach-input" type="text" id="search" onfocus="focusInput();" onblur="blurInput();" />
+					<input class="serach-input" type="text" id="search" onfocus="focusInput();" onblur="blurInput();" oninput="initMailList();"/>
 					<img id="search-icon" src="img/icon_search.png" class="icon-search" onclick="searchIconClick();" />
 					<span id="search-title" class="search-title" onclick="searchIconClick();">搜索</span>
 				</div>
@@ -29,7 +29,6 @@
 
 				</li>
 			</div>
-			<div class="title">未分组</div>
 			<div class="box" id="otherList">
 
 			</div>
@@ -62,6 +61,7 @@
 		</script>
 
 		<script id="other-tpl" type="text/template">
+			<div class="title">未分组</div>
 			{@each data as item, index}
 			{@if item.leaf == true}
 			<div class="row rb">

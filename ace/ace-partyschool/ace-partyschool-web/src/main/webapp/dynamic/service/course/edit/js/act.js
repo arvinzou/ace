@@ -91,42 +91,6 @@ function save(params) {
 }
 
 function initSelect(data) {
-    var select1=$(".js-example-basic-single").select2({
-        ajax: {
-            url: portalPath + "/dict/findListByCategoryId.do?categoryId=154&selected=false",
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {
-                params.page = params.page || 1;
-                var datas = $.map(data.slice(1), function (obj) {
-                    obj.text = obj.text || obj.name; // replace name with the property used for the text
-                    return obj;
-                });
-                datas = $.map(datas, function (obj) {
-                    obj.id = obj.code; // replace name with the property used for the text
-                    return obj;
-                });
-                return {
-                    results: datas,
-                    pagination: {
-                        more: (params.page * 30) < data.total_count
-                    }
-                };
-            },
-            cache: true
-        },
-        placeholder: '选择类型',
-        escapeMarkup: function (markup) {
-            return markup;
-        }, // let our custom formatter work
-    });
-
     var select2=$(".js-example-basic-single1").select2({
         ajax: {
             url: contextPath + "/evaluating/findEvaluatingList",
@@ -219,6 +183,7 @@ function initForm() {
             if (result.status == 0) {
                 var data = {};
                 data['o'] = result.value;
+                data['dict154']=staticDictObject['154'];
                 render('#fm-edit', data, 'tpl-fm');
                 initSelect(data);
             } else {

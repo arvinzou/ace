@@ -18,13 +18,17 @@ ul,li{
 	height: 1.88rem;
 }
 .serach-input{
-	width: 100%;
+	width: 96%;
 	height: 1.066666rem;
 	border-radius: 0.133333rem;
 	border: none;
 	outline: none;
 	background: #F5F6F7;
 	position: relative;
+	color: #373F53;
+	font-size: 0.4rem;
+	padding-left: 2%;
+	padding-right: 2%;
 }
 .icon-search{
 	width: 0.4rem;

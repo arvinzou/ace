@@ -105,8 +105,7 @@ public class ClassScheduleController extends BisBaseController {
      */
     @RequestMapping(value = "/selectClassScheduleByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <ClassScheduleVo> selectClassScheduleByPrimaryKey(String id) throws Exception {
+    public SingleResult<ClassScheduleVo> selectClassScheduleByPrimaryKey(String id) throws Exception {
         return this.classScheduleService.selectClassScheduleByPrimaryKey(id);
     }
 

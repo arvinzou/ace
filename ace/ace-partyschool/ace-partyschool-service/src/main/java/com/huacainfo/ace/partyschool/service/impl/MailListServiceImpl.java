@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.StudentDao;
+import com.huacainfo.ace.partyschool.vo.MailListContent;
 import com.huacainfo.ace.portal.tools.TreeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -320,17 +321,69 @@ public class MailListServiceImpl implements MailListService {
      * @version: 2019-01-12
      */
     @Override
-    public List<Tree> getTreeList(String name,UserProp userProp){
-        List<Map<String,Object>> list=null;
-        Map<String,String> o=studentDao.selectUserClassInfo(userProp.getUserId());
-        if(o.get("role").equals("student")){
-            list=this.mailListDao.getClassTreeList(o.get("classId"),name);
-        }else{
+    public ListResult<Tree> getTreeList(String name, UserProp userProp) {
+        List<Map<String, Object>> list = null;
+        Map<String, String> o = studentDao.selectUserClassInfo(userProp.getUserId());
+        if (o.get("role").equals("student")) {
+            list = this.mailListDao.getClassTreeList(o.get("classId"), name);
+        } else {
 
-            list=this.mailListDao.getTeacherTreeList(name);
+            list = this.mailListDao.getTeacherTreeList(name);
         }
         CommonTreeUtils treeUtils = new CommonTreeUtils(list);
-        return treeUtils.getTreeList("0");
+        ListResult rst=new ListResult();
+        rst.setValue(treeUtils.getTreeList("0"));
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:getMailListContent
+     * @Description: TODO(加载班级分组列表)
+     * @param: @return
+     * @return: List<MailListContent>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @Override
+    public ListResult<MailListContent> getMailListContent(String classId) {
+        ListResult rst=new ListResult();
+        rst.setValue(this.mailListDao.getMailListContent(classId));
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:updateClassesByIds
+     * @Description: TODO(分组更)
+     * @param: @return
+     * @return: MessageResponse
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @Override
+    public MessageResponse updateClassesByIds(String classId, String[] ids) {
+        this.mailListDao.updateClassesByIds(classId, ids);
+        return new MessageResponse(0, "成功！");
+    }
+    /**
+     * @throws
+     * @Title:getClassList
+     * @Description: TODO(加载当前班级列表)
+     * @param: @return
+     * @return: ListResult<Map<String, Object>>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @Override
+    public ListResult<Map<String, Object>> getClassList(UserProp userProp){
+        ListResult<Map<String, Object>> rst=new ListResult<>();
+        List<Map<String,Object>> list=this.mailListDao.getMeClassList(userProp.getUserId());
+        if(list==null||list.size()==0){
+            list=this.mailListDao.getClassList();
+        }
+        rst.setValue(list);
+        return rst;
     }
 
 }

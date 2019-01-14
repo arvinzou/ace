@@ -170,7 +170,7 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
      */
     @Override
     public MessageResponse insertClassSchedule(ClassSchedule o, UserProp userProp) throws Exception {
-
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -189,14 +189,6 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         if (CommonUtils.isBlank(o.getCourseId())) {
             return new MessageResponse(1, "课程不能为空！");
         }
-
-
-        int temp = this.classScheduleDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "课程表管理名称重复！");
-        }
-
-        o.setId(GUIDUtil.getGUID());
         this.classScheduleDao.insert(o);
         this.dataBaseLogService.log("添加课程表管理", "课程表管理", "",
                 o.getId(), o.getId(), userProp);
@@ -253,11 +245,20 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
      * @version: 2019-01-06
      */
     @Override
-    public SingleResult
-            <ClassScheduleVo> selectClassScheduleByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <ClassScheduleVo> rst = new SingleResult<>();
-        rst.setValue(this.classScheduleDao.selectVoByPrimaryKey(id));
+    public SingleResult<ClassScheduleVo> selectClassScheduleByPrimaryKey(String id) throws Exception {
+        SingleResult<ClassScheduleVo> rst = new SingleResult<>();
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        ClassScheduleDao dao = session.getMapper(ClassScheduleDao.class);
+        try {
+            ClassScheduleVo classScheduleVo = dao.selectVoByPrimaryKey(id);
+            rst.setValue(classScheduleVo);
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
+        }
         return rst;
     }
 

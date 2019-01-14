@@ -13,7 +13,7 @@ public class Classes {
 
     private String photoUrl;
 
-    private String classroom;
+    private String classroomId;
 
     private String headmaster;
 
@@ -79,12 +79,13 @@ public class Classes {
         this.photoUrl = photoUrl == null ? null : photoUrl.trim();
     }
 
-    public String getClassroom() {
-        return classroom;
+
+    public String getClassroomId() {
+        return classroomId;
     }
 
-    public void setClassroom(String classroom) {
-        this.classroom = classroom == null ? null : classroom.trim();
+    public void setClassroomId(String classroomId) {
+        this.classroomId = classroomId;
     }
 
     public String getHeadmaster() {
