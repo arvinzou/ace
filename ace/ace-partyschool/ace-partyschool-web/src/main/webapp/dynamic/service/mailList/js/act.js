@@ -7,11 +7,13 @@ window.onload = function () {
 function initPage(){
     initClassList();
     $('#btn-view-add').on('click', function () {
+    bootbox.setDefaults("locale","zh_CN");
             bootbox.prompt("请输入组名称", function(o){
                if(o){
                    insertMailList({name:o,pid:$("#classId").val()})
                }
             });
+
         });
 }
 
@@ -135,26 +137,24 @@ function initGroup(classId){
                 ev.preventDefault(); //阻止默认行为
                 var data = ev.dataTransfer.getData("Text"); //将被拖动元素id取出
                 ev.target.appendChild(document.getElementById(data)); //将被拖动元素添加到接收元素尾部
+
                 var studentId=$("#"+data).data("studentid");
                 console.log("studentId>"+studentId);
                 var groupId=$(ev.target).data("groupid");
                 if(!groupId){
-                                    groupId='0';
-                                }
+                      groupId='0';
+                 }
                 console.log("groupId>"+groupId);
 
 
                 setTimeout(function(){
                     saveGroup(groupId,studentId);
-                });
+                },100);
 
             }
 
 
             function saveGroup(groupId,studentId){
-
-
-
                 startLoad();
                     $.ajax({
                         url: contextPath + "/mailList/updateClassesByIds",
@@ -223,3 +223,28 @@ function initGroup(classId){
                     }
                 });
             }
+            function remove(id){
+                    if(confirm("确定要删除？")){
+                    dodel(id);
+                    }
+            }
+            function dodel(id){
+                            startLoad();
+                            $.ajax({
+                                url: contextPath + "/mailList/deleteMailListByMailListId",
+                                type: "post",
+                                async: false,
+                                data: {
+                                    id:id
+                                },
+                                success: function (result) {
+                                    stopLoad();
+                                    initClasses($("#classId").val());
+                                    alert(result.errorMessage);
+                                },
+                                error: function () {
+                                    stopLoad();
+                                    alert("对不起出错了！");
+                                }
+                            });
+                        }
