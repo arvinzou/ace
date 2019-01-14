@@ -153,7 +153,7 @@
         t.status, t.createUserId,
         t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
         <include refid="From_Statement"/>
-        LEFT JOIN classroomId cr ON cr.id = t.classroomId
+        LEFT JOIN classroom cr ON cr.id = t.classroomId
         LEFT JOIN teacher c ON c.id = t.headmaster
         <include refid="Where_Condition"/>
         <choose>

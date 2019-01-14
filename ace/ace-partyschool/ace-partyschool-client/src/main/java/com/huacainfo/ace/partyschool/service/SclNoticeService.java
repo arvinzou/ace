@@ -33,7 +33,7 @@ public interface SclNoticeService {
                                         int start, int limit, String orderBy) throws Exception;
 
     ResultResponse findNoticeLists(NoticeQVo condition,
-                                   int start, int limit, String orderBy) throws Exception;
+                                   int start, int limit, String orderBy,UserProp userProp) throws Exception;
     /**
      * @throws
      * @Title:insertNotice
@@ -71,6 +71,8 @@ public interface SclNoticeService {
      * @version: 2019-01-06
      */
     SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception;
+
+    ResultResponse selectNoticeById(String id) throws Exception;
 
     /**
      * @throws

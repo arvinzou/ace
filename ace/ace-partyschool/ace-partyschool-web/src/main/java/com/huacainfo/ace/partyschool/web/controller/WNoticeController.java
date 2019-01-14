@@ -1,11 +1,14 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +59,11 @@ public class WNoticeController extends BisBaseController {
     @RequestMapping(value = "/findNoticeLists")
     @ResponseBody
     public ResultResponse findNoticeLists(NoticeQVo condition, PageParamNoChangeSord page) throws Exception {
-
-        return this.sclNoticeService.findNoticeLists(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.sclNoticeService.findNoticeLists(condition, page.getStart(), page.getLimit(), page.getOrderBy(),userProp);
     }
 
 
@@ -73,8 +79,12 @@ public class WNoticeController extends BisBaseController {
      */
     @RequestMapping(value = "/getDetails")
     @ResponseBody
-    public SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
-        return this.sclNoticeService.selectNoticeByPrimaryKey(id);
+    public ResultResponse selectNoticeByPrimaryKey(String id) throws Exception {
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.sclNoticeService.selectNoticeById(id);
     }
 
 }
