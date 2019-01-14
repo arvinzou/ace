@@ -38,6 +38,18 @@ public class AccountVo extends BaseModel {
      * 是否已绑定微信 0-否 1-是
      */
     private String isBindWx;
+    /**
+     * 借阅证号
+     */
+    private String lCardNo;
+
+    public String getlCardNo() {
+        return lCardNo;
+    }
+
+    public void setlCardNo(String lCardNo) {
+        this.lCardNo = lCardNo;
+    }
 
     public String getIsBindWx() {
         return isBindWx;
