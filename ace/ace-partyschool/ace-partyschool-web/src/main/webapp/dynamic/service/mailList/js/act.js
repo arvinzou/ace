@@ -135,19 +135,25 @@ function initGroup(classId){
                 ev.preventDefault(); //阻止默认行为
                 var data = ev.dataTransfer.getData("Text"); //将被拖动元素id取出
                 ev.target.appendChild(document.getElementById(data)); //将被拖动元素添加到接收元素尾部
+                var studentId=$("#"+data).data("studentid");
+                console.log("studentId>"+studentId);
+                var groupId=$(ev.target).data("groupid");
+                if(!groupId){
+                                    groupId='0';
+                                }
+                console.log("groupId>"+groupId);
+
+
                 setTimeout(function(){
-                    saveGroup(ev);
+                    saveGroup(groupId,studentId);
                 });
 
             }
 
 
-            function saveGroup(ev){
-                var data = ev.dataTransfer.getData("Text");
-                var studentId=data;
-                console.log("studentId>"+studentId);
-                var groupId=$(ev.target).data("groupid");
-                console.log("groupId>"+groupId);
+            function saveGroup(groupId,studentId){
+
+
 
                 startLoad();
                     $.ajax({

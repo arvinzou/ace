@@ -113,7 +113,7 @@ pageEncoding="utf-8"%>
 
 <script id="tpl-student" type="text/template">
         {@each data as item, index}
-        <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="\${item.id}" data-studentid="\${item.id}" draggable="true" ondragstart="drag(event)">\${item.name}</div>
+        <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="student\${item.id}" data-studentid="\${item.id}" draggable="true" ondragstart="drag(event)">\${item.name}</div>
         {@/each}
 
 </script>
@@ -125,7 +125,7 @@ pageEncoding="utf-8"%>
             <div class="portlet-body">
                 <div class="row content"  ondrop="drop(event)" ondragover="allowDrop(event)" data-groupid="\${item.id}">
                 {@each item.list as o, index}
-                    <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="\${o.id}" data-studentid="\${o.id}" draggable="true" ondragstart="drag(event)">\${o.name}</div>
+                    <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="student\${o.id}" data-studentid="\${o.id}" draggable="true" ondragstart="drag(event)">\${o.name}</div>
                 {@/each}
                 </div>
             </div>
