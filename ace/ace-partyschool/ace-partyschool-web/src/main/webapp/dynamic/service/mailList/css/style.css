@@ -1,1 +1,19 @@
-.move{cursor:move}
+.portlet.light>.portlet-title {
+     border-bottom: 1px solid #eef1f5;
+}
+
+.portlet.light>.portlet-title {
+    padding: 0;
+    min-height: 25px;
+}
+.portlet.light .portlet-body {
+    padding-top: 1px;
+
+}
+.student{
+    float:left;
+    margin:10px
+}
+.content{
+    min-height: 50px;
+}

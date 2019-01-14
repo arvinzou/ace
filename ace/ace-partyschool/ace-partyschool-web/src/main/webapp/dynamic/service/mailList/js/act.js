@@ -6,6 +6,13 @@ window.onload = function () {
 
 function initPage(){
     initClassList();
+    $('#btn-view-add').on('click', function () {
+            bootbox.prompt("请输入组名称", function(o){
+               if(o){
+                   insertMailList({name:o,pid:$("#classId").val()})
+               }
+            });
+        });
 }
 
 /*页面渲染*/
@@ -31,7 +38,7 @@ function initClassList() {
                 var data = {};
                 data = result.value;
                 render('#select1', data, 'tpl-select-list');
-                initClasses($("#classId").val())
+                initClasses($("#classId").val());
             } else {
                 alert(result.errorMessage);
             }
@@ -59,6 +66,7 @@ function initClasses(classId){
                 data = result.value;
                 render('#classStudent', data, 'tpl-student');
                 initGroup(classId);
+
             } else {
                 alert(result.errorMessage);
             }
@@ -71,7 +79,7 @@ function initClasses(classId){
 }
 
 function initGroup(classId){
- startLoad();
+    startLoad();
     $.ajax({
         url: contextPath + "/mailList/getMailListContent",
         type: "post",
@@ -85,6 +93,7 @@ function initGroup(classId){
                 var data = {};
                 data = result.value;
                 render('#groupStudent', data, 'tpl-group');
+                initTree(classId);
             } else {
                 alert(result.errorMessage);
             }
@@ -126,16 +135,19 @@ function initGroup(classId){
                 ev.preventDefault(); //阻止默认行为
                 var data = ev.dataTransfer.getData("Text"); //将被拖动元素id取出
                 ev.target.appendChild(document.getElementById(data)); //将被拖动元素添加到接收元素尾部
-                saveGroup(ev);
+                setTimeout(function(){
+                    saveGroup(ev);
+                });
+
             }
 
 
             function saveGroup(ev){
                 var data = ev.dataTransfer.getData("Text");
-                var studentId=$("#"+data).data("studentid");
-                console.log(studentId);
+                var studentId=data;
+                console.log("studentId>"+studentId);
                 var groupId=$(ev.target).data("groupid");
-                console.log(groupId);
+                console.log("groupId>"+groupId);
 
                 startLoad();
                     $.ajax({
@@ -168,4 +180,40 @@ function initGroup(classId){
             function delMove(o){
                 $(o).css("cursor","default");
                 $(o).css("font-weight","400");
+            }
+
+            function initTree(classId){
+                $('#tt').tree({
+                    url:contextPath+'/mailList/getTreeListByClassId?classId='+classId,
+                    method: 'get',
+                    animate: true,
+                    lines:false,
+                    onLoadSuccess:function()  {
+                        $("#tt").tree("expandAll");
+                    }
+                })
+
+
+            }
+
+
+            function insertMailList(data){
+                startLoad();
+                $.ajax({
+                    url: contextPath + "/mailList/insertMailList",
+                    type: "post",
+                    async: false,
+                    data: {
+                        jsons:JSON.stringify(data)
+                    },
+                    success: function (result) {
+                        stopLoad();
+                         initClasses($("#classId").val());
+                        alert(result.errorMessage);
+                    },
+                    error: function () {
+                        stopLoad();
+                        alert("对不起出错了！");
+                    }
+                });
             }
