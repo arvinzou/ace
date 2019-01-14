@@ -52,7 +52,6 @@
     width: 100%;
 }
 .calendar .view,
-.calendar-display,
 .calendar-arrow .prev,
 .calendar .date-items li {
     float: left;
@@ -62,10 +61,11 @@
     float: right;
 }
 .calendar-hd {
-	width: 100%;
+	width: 4.8rem;
    	text-align: center;
     height: 1.6rem;
     line-height: 1.6rem;
+    margin: 0 auto;
 }
 .calendar-display {
     font-size: 28px;
@@ -79,6 +79,9 @@
     color: #373F53;
     font-size: 0.453333rem;
     font-weight: bold;
+    padding-left: 0.306666rem;
+    padding-right: 0.306666rem;
+    float: left;
 }
 .calendar li[disabled] {
     color: #bbb;
@@ -93,7 +96,7 @@
 .calendar-views .days .new,
 .calendar-display:hover,
 .calendar-arrow span:hover {
-    color: #D7D9DF;
+    color: #373F53
 }
 
 .calendar-arrow span,
@@ -106,8 +109,9 @@
 }
 
 .calendar-arrow {
-    width: 50px;
-    margin-right: 10px;
+    width: 0.533333rem;
+    height: 1.6rem;
+    float: left;
 }
 .calendar-arrow span {
     font: 500 26px sans-serif;
@@ -121,14 +125,16 @@
 }
 .calendar .week li,
 .calendar .days li {
-    width: 1.3rem;
-    height: 1.3rem;
-    line-height: 1.3rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    margin: 0.2rem;
 }
 .calendar .month-items li {
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
+    width: 1rem;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0.6rem;
 }
 /*.calendar .days li[data-calendar-day]:hover,
 .calendar .view-month li[data-calendar-month]:hover {
