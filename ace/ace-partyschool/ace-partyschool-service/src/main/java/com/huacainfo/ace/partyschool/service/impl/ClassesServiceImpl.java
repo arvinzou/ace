@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.ClassScheduleDao;
 import com.huacainfo.ace.partyschool.dao.ClassesDao;
 import com.huacainfo.ace.partyschool.dao.StudentDao;
 import com.huacainfo.ace.partyschool.model.Classes;
@@ -18,10 +19,15 @@ import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
 import com.huacainfo.ace.partyschool.vo.ClassesVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.apache.ibatis.session.SqlSession;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -44,6 +50,8 @@ public class ClassesServiceImpl implements ClassesService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private SignService signService;
+    @Autowired
+    private SqlSessionTemplate sqlSession;
 
 
     /**
@@ -193,11 +201,22 @@ public class ClassesServiceImpl implements ClassesService {
     public ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp) throws Exception {
         AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
         String id = accountVo.getStudent().getClassId();
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        ClassesDao dao = session.getMapper(ClassesDao.class);
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("list", this.classesDao.getClassesInfo(id));
-        map.put("total", this.studentDao.findStudentCount());
-        return new ResultResponse(0, "班级须知获取完成！", map);
-    }
+        try {
+            map.put("list", dao.getClassesInfo(id));
+            map.put("total", this.studentDao.findStudentCount());
+            }
+        catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
+        }
+            return new ResultResponse(0, "班级须知获取完成！", map);
+        }
 
     /**
      * @throws

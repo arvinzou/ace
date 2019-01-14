@@ -51,8 +51,7 @@ public class ClassesController extends BisBaseController {
      */
     @RequestMapping(value = "/findClassesList")
     @ResponseBody
-    public PageResult
-            <ClassesVo> findClassesList(ClassesQVo condition, PageParamNoChangeSord page) throws Exception {
+    public PageResult<ClassesVo> findClassesList(ClassesQVo condition, PageParamNoChangeSord page) throws Exception {
         PageResult<ClassesVo> rst = this.classesService.findClassesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

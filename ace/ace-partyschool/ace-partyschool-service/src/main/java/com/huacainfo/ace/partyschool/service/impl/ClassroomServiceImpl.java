@@ -49,8 +49,7 @@ public class ClassroomServiceImpl implements ClassroomService {
      * @version: 2019-01-03
      */
     @Override
-    public PageResult
-            <ClassroomVo> findClassroomList(ClassroomQVo condition, int start,
+    public PageResult<ClassroomVo> findClassroomList(ClassroomQVo condition, int start,
                                             int limit, String orderBy) throws Exception {
         PageResult<ClassroomVo> rst = new PageResult<>();
         List<ClassroomVo> list = this.classroomDao.findList(condition, start, limit, orderBy);
