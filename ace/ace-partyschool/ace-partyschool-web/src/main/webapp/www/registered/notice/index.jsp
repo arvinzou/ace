@@ -8,11 +8,13 @@
 		<title>通知公告</title>
 		<jsp:include page="../../common/common.jsp"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 	</head>
 	<body>
 		<div class="index">
+
+		</div>
+
+		<script id="list-tpl" type="text/template">
 			<div class="title-box">
 				<span class="title">最新消息</span>
 				<span class="num">12</span>
@@ -55,7 +57,10 @@
 					<div class="item blank">暂无最新通知</div>
 				</div>
 			</div>
-			
-		</div>
+		</script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 </html>
