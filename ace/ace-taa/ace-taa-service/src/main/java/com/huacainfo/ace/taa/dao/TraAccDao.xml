@@ -33,6 +33,7 @@
   </sql>
   <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
+      d.name as roadName,
     t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
     t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
     t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
@@ -118,25 +119,32 @@
 
       <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
           <![CDATA[
-          and t.deadthToll <= #{condition.upDeathNum,jdbcType=INTEGER}
+          and IFNULL(t.deadthToll,0) <= #{condition.upDeathNum,jdbcType=INTEGER}
           ]]>
       </if>
       <if test='condition.downDeathNum!=null and condition.downDeathNum!=""'>
-          and t.deadthToll >= #{condition.downDeathNum,jdbcType=INTEGER}
+          and IFNULL(t.deadthToll,0) >= #{condition.downDeathNum,jdbcType=INTEGER}
       </if>
       <if test='condition.upInjuriesNum!=null and condition.upInjuriesNum!=""'>
           <![CDATA[
-          and t.injuries <= #{condition.upInjuriesNum,jdbcType=INTEGER}
+          and IFNULL(t.injuries,0) <= #{condition.upInjuriesNum,jdbcType=INTEGER}
           ]]>
       </if>
       <if test='condition.downInjuriesNum!=null and condition.downInjuriesNum!=""'>
-          and t.injuries >= #{condition.downInjuriesNum,jdbcType=INTEGER}
+          and IFNULL(t.injuries,0) >= #{condition.downInjuriesNum,jdbcType=INTEGER}
       </if>
       <if test='condition.category!=null and condition.category!=""'>
-          and d.category >= #{condition.category,jdbcType=VARCHAR}
+          and d.category = #{condition.category,jdbcType=VARCHAR}
       </if>
       <if test='condition.roadId!=null and condition.roadId!=""'>
           and d.id >= #{condition.roadId,jdbcType=VARCHAR}
+      </if>
+      <if test='condition.roadName!=null and condition.roadName!=""'>
+          and (
+          a.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+          or d.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+          or b.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+          )
       </if>
   </sql>
   <select id="findCount" resultType="int">
@@ -146,6 +154,7 @@
   <select id="findList" resultMap="BaseResultMapVo">
 select * from (
     select
+      d.name as roadName,
     t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
     t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
     t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName,d.category
