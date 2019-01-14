@@ -11,33 +11,39 @@
 	</head>
 	<body>
 		<div class="index">
-			<div class="banner">
-				<div class="cardNo">卡号:Z0000768</div>
-				<div class="balance">36</div>
-				<div class="balance-title">累计刷卡次数</div>
+			<div class="banner" id="count">
+
 			</div>
 			<div class="title">刷卡记录</div>
-			<div class="list">
-				<div class="item">
-					<div class="icon"><img src="img/icon_consume.png"/></div>
-					<div class="record">2018-11-20 15:30:02</div>
-				</div>
-				<div class="item">
-					<div class="icon"><img src="img/icon_consume.png"/></div>
-					<div class="record">2018-11-20 15:30:02</div>
-				</div>
-				<div class="item">
-					<div class="icon"><img src="img/icon_consume.png"/></div>
-					<div class="record">2018-11-20 15:30:02</div>
-				</div>
-				<div class="item">
-					<div class="icon"><img src="img/icon_consume.png"/></div>
-					<div class="record">2018-11-20 15:30:02</div>
-				</div>
+			<div class="list" id="list">
+
 			</div>
 		</div>
 
+        <script id="count-tpl" type="text/template">
+            <div class="cardNo">卡号: \${data.lCardNo}
+            </div>
+            <div class="balance">
+                {@if data.acctNum}
+                \${data.acctNum}
+                {@else}
+                0
+                {@/if}
+            </div>
+            <div class="balance-title">累计刷卡次数</div>
+        </script>
+
+        <script id="list-tpl" type="text/template">
+            {@each data as item, index}
+            <div class="item">
+                <div class="icon"><img src="img/icon_consume.png"/></div>
+                <div class="record">\${item.dealTime}</div>
+            </div>
+            {@/each}
+        </script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+		<script type="text/javascript" src="js/student.js"></script>
 	</body>
 </html>
