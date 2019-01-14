@@ -4,8 +4,8 @@
 	height: 11rem;
 }
 .attend{
-	padding-left: 0.4rem;
-	padding-right: 0.4rem;
+	padding-left: 0.65rem;
+	padding-right: 0.65rem;
 }
 .calendar{
 	margin: 0.4rem auto;
@@ -18,7 +18,7 @@ ul, ol, li {
 	padding: 0;
 	margin: 0;
 	color: #373F53;
-	font-size: 0.533333rem;
+	font-size: 0.426666rem;
 	font-weight: bold;
 }
 
@@ -50,4 +50,9 @@ p {
 	color: #373F53;
 	font-size: 0.453333rem;
 	font-weight: bold;
+}
+.opts{
+	width: 0.533333rem;
+	height: 0.533333rem;
+    margin-top: 0.53rem;
 }
