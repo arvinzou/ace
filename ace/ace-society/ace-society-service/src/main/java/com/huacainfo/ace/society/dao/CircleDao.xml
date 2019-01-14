@@ -205,13 +205,13 @@
     select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
     where n.unionId not in(select unionid from portal.userinfo)) a ON t.uid = a.unionid
     LEFT JOIN circle_img b ON t.id = b.circleId
-    LEFT JOIN circle_cmt c ON t.id = c.circleId
+    LEFT JOIN (select * from circle_cmt where status in ('1', '2')) c ON t.id = c.circleId
     LEFT JOIN (select m.unionid,m.unionid openid,m.headimgurl,m.nickname from portal.userinfo m union all
     select n.unionId unionid,n.unionId openid ,n.avatarUrl headimgurl,n.nickName nickname from portal.wx_user n
     where n.unionId not in(select unionid from portal.userinfo)) d ON c.uid = d.unionid
     left join circle_log e on t.lastAuditLogId=e.id
       WHERE 0=0
-      and c.status in ('1', '2')
+
     <if test='uid!=null'>
       and t.uid =#{uid,jdbcType=VARCHAR}
     </if>
