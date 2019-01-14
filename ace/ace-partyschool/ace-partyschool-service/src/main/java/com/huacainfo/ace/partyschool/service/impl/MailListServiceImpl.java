@@ -1,35 +1,37 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.util.Date;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonTreeUtils;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.partyschool.dao.MailListDao;
 import com.huacainfo.ace.partyschool.dao.StudentDao;
+import com.huacainfo.ace.partyschool.model.MailList;
+import com.huacainfo.ace.partyschool.service.MailListService;
 import com.huacainfo.ace.partyschool.vo.MailListContent;
-import com.huacainfo.ace.portal.tools.TreeUtils;
+import com.huacainfo.ace.partyschool.vo.MailListQVo;
+import com.huacainfo.ace.partyschool.vo.MailListVo;
+import com.huacainfo.ace.portal.service.DataBaseLogService;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.partyschool.dao.MailListDao;
-import com.huacainfo.ace.partyschool.model.MailList;
-import com.huacainfo.ace.portal.service.DataBaseLogService;
-import com.huacainfo.ace.partyschool.service.MailListService;
-import com.huacainfo.ace.partyschool.vo.MailListVo;
-import com.huacainfo.ace.partyschool.vo.MailListQVo;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("mailListService")
 /**
@@ -43,6 +45,9 @@ public class MailListServiceImpl implements MailListService {
     private MailListDao mailListDao;
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private SqlSessionTemplate sqlSession;
     @Autowired
     private DataBaseLogService dataBaseLogService;
 
@@ -266,7 +271,7 @@ public class MailListServiceImpl implements MailListService {
     @Override
     public Map<String, Object> getListByCondition(Map<String, Object> params) {
         Map<String, Object> rst = new HashMap<String, Object>();
-        List<Map<String, Object>> list = this.mailListDao.getListByCondition(params);
+        List<Map<String, Object>> list = mailListDao.getListByCondition(params);
         rst.put("total", list.size());
         rst.put("rows", list);
         return rst;
@@ -347,8 +352,20 @@ public class MailListServiceImpl implements MailListService {
      */
     @Override
     public ListResult<MailListContent> getMailListContent(String classId) {
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        MailListDao dao = session.getMapper(MailListDao.class);
         ListResult rst=new ListResult();
-        rst.setValue(this.mailListDao.getMailListContent(classId));
+        try {
+            this.logger.info("getMailListContent {}",classId);
+            rst.setValue(dao.getMailListContent(classId));
+        }catch (Exception e){
+            session.rollback();
+            this.logger.error("{}",e);
+        }finally {
+            session.close();
+        }
         return rst;
     }
 
@@ -362,7 +379,7 @@ public class MailListServiceImpl implements MailListService {
      * @version: 2019-01-12
      */
     @Override
-    public MessageResponse updateClassesByIds(String classId, String[] ids) {
+    public MessageResponse updateClassesByIds(String classId, String ids) {
         this.mailListDao.updateClassesByIds(classId, ids);
         return new MessageResponse(0, "成功！");
     }
@@ -384,6 +401,22 @@ public class MailListServiceImpl implements MailListService {
         }
         rst.setValue(list);
         return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:getTreeListByClassId
+     * @Description: TODO(根据班级主键加载通讯录)
+     * @param: @return
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @Override
+    public List<Tree> getTreeListByClassId(String classId) {
+        List<Map<String, Object>> list = list = this.mailListDao.getClassTreeList(classId, null);
+        CommonTreeUtils treeUtils = new CommonTreeUtils(list);
+        return treeUtils.getTreeList("0");
     }
 
 }

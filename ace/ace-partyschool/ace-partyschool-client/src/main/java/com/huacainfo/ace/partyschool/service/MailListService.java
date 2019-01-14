@@ -202,7 +202,7 @@ public interface MailListService {
      * @author: chenxiaoke
      * @version: 2019-01-12
      */
-    MessageResponse updateClassesByIds(String classId,String[] ids);
+    MessageResponse updateClassesByIds(String classId,String ids);
 
 
 
@@ -216,4 +216,15 @@ public interface MailListService {
      * @version: 2019-01-12
      */
     ListResult<Map<String, Object>> getClassList(UserProp userProp);
+
+    /**
+     * @throws
+     * @Title:getTreeListByClassId
+     * @Description: TODO(根据班级主键加载通讯录)
+     * @param: @return
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    List<Tree> getTreeListByClassId(String classId);
 }

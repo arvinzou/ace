@@ -10,7 +10,6 @@ import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
 import com.huacainfo.ace.partyschool.model.Notice;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
-import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;

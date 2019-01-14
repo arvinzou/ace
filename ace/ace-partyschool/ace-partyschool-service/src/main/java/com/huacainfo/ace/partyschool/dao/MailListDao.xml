@@ -101,7 +101,7 @@ where 0=0
 
 
   <select id="getList" resultType="map">
-    select id, name from student where classId=#{p.classId} order by name;
+    select id, name from student where classId=#{p.classId} and (pid is null or pid='0') order by name
   </select>
 
   <resultMap  id="MailListContent" type="com.huacainfo.ace.partyschool.vo.MailListContent">
@@ -127,13 +127,10 @@ where 0=0
     left join student s on t.id=s.pid
     LEFT JOIN portal.users a on s.id=a.user_id
     left join portal.userinfo b on a.openId=b.unionid
-    where t.pid=#{p.classId} order by s.name
+    where t.pid=#{classId} order by s.name
   </select>
   <update id="updateClassesByIds">
-    update student t set t.pid=#{classId} where t.id in
-    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
-      #{item}
-    </foreach>
+    update student t set t.pid=#{classId} where t.id =#{ids}
 
   </update>
 

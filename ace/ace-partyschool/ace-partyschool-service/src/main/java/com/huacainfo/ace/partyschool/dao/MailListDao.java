@@ -1,13 +1,13 @@
 package com.huacainfo.ace.partyschool.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import com.huacainfo.ace.partyschool.vo.MailListContent;
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.partyschool.model.MailList;
+import com.huacainfo.ace.partyschool.vo.MailListContent;
 import com.huacainfo.ace.partyschool.vo.MailListQVo;
 import com.huacainfo.ace.partyschool.vo.MailListVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface MailListDao {
 
@@ -50,7 +50,7 @@ public interface MailListDao {
 
     List<Map<String, Object>> getTreeList();
 
-    int updateClassesByIds(@Param("classId") String classId, @Param("ids") String[] ids);
+    int updateClassesByIds(@Param("classId") String classId, @Param("ids") String ids);
 
     List<MailListContent> getMailListContent(@Param("classId") String classId);
 
