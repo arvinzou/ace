@@ -33,15 +33,21 @@ function dorpAndDown(obj, iDom){
 }
 
 function initMailList(){
+    var name = $("#search").val();
     $.ajax({
         url: contextPath+ "/mailList/www/getTreeList",
         type:"post",
         async:false,
         data:{
+            name : name
         },
         success:function(result){
-        	renderPage("treeList", result, 'tree-tpl');
-            renderPage("otherList", result, 'other-tpl');
+            if(result.status == 0){
+                renderPage("treeList", result.value, 'tree-tpl');
+                renderPage("otherList", result.value, 'other-tpl');
+            }else{
+                alert(result.errorMessage);
+            }
         },
         error:function(){
             alert("系统服务内部异常！");

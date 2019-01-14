@@ -20,6 +20,8 @@ public class AnalysisController extends BisBaseController {
     @Autowired
     private AnalysisService analysisService;
 
+
+
     @RequestMapping(value = "/query")
     @ResponseBody
     public ListResult<Map<String, Object>> query(

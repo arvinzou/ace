@@ -78,10 +78,26 @@
                             <div id='calendar' class="ml5 padding5" ></div>
                         </div>
                         <div class="col-sm-2 margin0 padding0">
-
+                            <div col-sm-12>
+                                <h4>课程名称</h4>
+                            </div>
+                            <p col-sm-12>
+                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
+                            </p>
+                            <div col-sm-12>
+                                <h4>授课老师</h4>
+                            </div>
+                            <p col-sm-12>
+                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
+                            </p>
+                            <div col-sm-12>
+                                <h4>学习教室</h4>
+                            </div>
+                            <p col-sm-12>
+                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
+                            </p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

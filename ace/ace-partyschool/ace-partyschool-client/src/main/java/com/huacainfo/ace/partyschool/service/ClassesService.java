@@ -31,8 +31,7 @@ public interface ClassesService {
      * @author: Arvin
      * @version: 2019-01-03
      */
-    PageResult
-            <ClassesVo> findClassesList(ClassesQVo condition,
+    PageResult<ClassesVo> findClassesList(ClassesQVo condition,
                                         int start, int limit, String orderBy) throws Exception;
 
     /**

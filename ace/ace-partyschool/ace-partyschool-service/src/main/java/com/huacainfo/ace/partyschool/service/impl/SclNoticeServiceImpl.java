@@ -8,16 +8,23 @@ import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
+import com.huacainfo.ace.partyschool.dao.NoticeStatusDao;
 import com.huacainfo.ace.partyschool.model.Notice;
+import com.huacainfo.ace.partyschool.model.NoticeStatus;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
+import com.huacainfo.ace.partyschool.service.NoticeStatusService;
+import com.huacainfo.ace.partyschool.vo.AccountVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +40,11 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     @Autowired
     private NoticeDao noticeDao;
     @Autowired
+    private NoticeStatusDao noticeStatusDao;
+    @Autowired
     private DataBaseLogService dataBaseLogService;
+    @Autowired
+    private NoticeStatusService noticeStatusService;
 
     /**
      * @throws
@@ -64,15 +75,23 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findNoticeLists(NoticeQVo condition, int start,
-                                          int limit, String orderBy) throws Exception {
+    public ResultResponse findNoticeLists(NoticeQVo condition,int start,
+                                          int limit, String orderBy,UserProp userProp) throws Exception {
+        List<NoticeStatusVo> noticeStatusVo;
+        noticeStatusVo=this.noticeStatusDao.findMyNoticeList(userProp.getUserId());
+        List<NoticeVo> noticeVo=new ArrayList();
+        List list = new ArrayList();
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("list", this.noticeDao.findList(condition,
-                start, limit, orderBy));
+        for(NoticeStatusVo o :noticeStatusVo ) {
+            condition.setId(o.getNoticeId());
+            noticeVo=this.noticeDao.findList(condition,
+                    start, limit, orderBy);
+            list.add(noticeVo);
+        }
+        map.put("list",list);
         map.put("total", this.noticeDao.findUnreadCount());
         return new ResultResponse(0, "班级须知获取完成！", map);
     }
-
 
     /**
      * @throws
@@ -135,10 +154,19 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
-        SingleResult
-                <NoticeVo> rst = new SingleResult<>();
+        SingleResult<NoticeVo> rst = new SingleResult<>();
+        this.noticeDao.selectVoByPrimaryKey(id);
         rst.setValue(this.noticeDao.selectVoByPrimaryKey(id));
         return rst;
+    }
+    @Override
+    public ResultResponse selectNoticeById(String id) throws Exception{
+        NoticeVo noticeVo=this.noticeDao.selectVoByPrimaryKey(id);
+        String noticeId=noticeVo.getId();
+        if(noticeVo.getStatus()=="1"){
+            noticeStatusDao.updateStatus(noticeId);
+        }
+        return new ResultResponse(0, "公告详情获取完成！",noticeVo);
     }
 
     /**

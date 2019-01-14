@@ -15,7 +15,7 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, category, classesId, title, fileUrl, pushDate, publisher, status
+        id, category, classesId, title, fileUrl, pushDate, publisher, status,content
     </sql>
     <sql id="Blob_Column_List">
         content
@@ -59,23 +59,26 @@
     </resultMap>
 
     <sql id="Vo_Column_List">
-        id, category, classesId, title, fileUrl, content,pushDate, publisher, status
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
     </sql>
     <sql id="From_Statement">
-        FROM notice
+        FROM notice n
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
-            and status = #{condition.status,jdbcType=VARCHAR}
+            and n.status = #{condition.status,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.id !=null and condition.id !=&quot;&quot;">
+            and n.id = #{condition.id,jdbcType=VARCHAR}
         </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
-        from notice t
-        where id = #{id,jdbcType=VARCHAR}
+        from notice n
+        where n.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

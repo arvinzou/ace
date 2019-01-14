@@ -9,7 +9,7 @@ window.onload = function () {
     $(function () {
         getCourseList();
         initFullCalendar(jsonStr);
-        // initcurrentClass();
+        initcurrentClass();
         initSelect();
 
         // getEventData();
@@ -51,7 +51,7 @@ window.onload = function () {
            event.courseId=item.id;
            event.teacherId=item.teacherId;
            var date=item.courseDate.substring(0,10);
-           if(item.courseIndex='am'){
+           if(item.courseIndex=='am'){
                event.start=date+' 01:00';
                event.end=date+' 02:00';
            }else {
@@ -66,7 +66,6 @@ window.onload = function () {
         var url = contextPath + "/course/findListClassifiedName";
         var data = {};
         $.getJSON(url, data, function (rst) {
-            console.log(rst);
             render('#courseList', rst.data, 'tpl-courseList');
             initEvent();
         })
@@ -79,7 +78,6 @@ window.onload = function () {
         d = now.getDate();
         m = m < 10 ? "0" + m : m;
         d = d < 10 ? "0" + d : d;
-        console.log(y + "-" + m + "-" + d);
         return y + "-" + m + "-" + d;
     }
 
@@ -131,7 +129,6 @@ window.onload = function () {
         var crew_startDate = getdate();
         //获取课节
         $.each(jsonStr, function (key, value) {
-            console.log(jsonStr);
             crew_classTime_Arr = jsonStr["crew_classTime_Arr"];
             crew_startDate = jsonStr["crew_startDate"];
         });
@@ -166,6 +163,7 @@ window.onload = function () {
             header: {
                 left: 'prev,next,today',
                 center: 'title',
+                right:''
             },
             eventStartEditable: false,
             eventDurationEditable: false,
@@ -195,6 +193,15 @@ window.onload = function () {
             },
             // 当点击某一个事件时触发此操作
             eventClick: function (calEvent, jsEvent, view) {
+                var url=contextPath + "/classSchedule/selectClassScheduleByPrimaryKey"
+                var data={
+                    id:calEvent.id
+                }
+                $.getJSON(url,data,function (rst) {
+                    if(rst.status==0){
+                        console.log(rst);
+                    }
+                })
             },
             //当鼠标悬停在一个事件上触发此操作
             eventMouseover: function (calEvent, jsEvent, view) {
@@ -206,10 +213,9 @@ window.onload = function () {
 
             droppable: true, //允许拖拽放置
             eventReceive: function (data) {
-                console.log(data);
                 var insertDate={};
                 var dateTime = JSON.stringify(data.start);
-                var date=dateTime.substring(0,11);
+                var date=dateTime.substring(1,11);
                 var time=dateTime.substring(13,14);
                 if(time==1){
                     insertDate.courseIndex='am';
@@ -221,11 +227,13 @@ window.onload = function () {
                 insertDate.teacherId=data.teacherId;
                 insertDate.courseId=data.courseId;
                 var url=contextPath + "/classSchedule/insertClassSchedule"
-                var data={
+                var jdata={
                     jsons:JSON.stringify(insertDate)
                 }
-                $.post(url,data,function (rst) {
-                    console.log(rst);
+                $.post(url,jdata,function (rst) {
+                    if(rst.status!=0){
+                        alert("排课失败，请刷新后重试！");
+                    }
                 })
             },
             eventRender: function (event, element) {
@@ -250,12 +258,7 @@ window.onload = function () {
                 //alert(event.id);
                 // alert(234);
             },
-            drop: function (date, allDay, jsEvent, ui) {
-                var dateTime = JSON.stringify(date);
-                console.log(dateTime);
-                console.log(allDay);
-                console.log(jsEvent);
-                console.log(ui);
+            drop: function (datas, allDay, jsEvent, ui) {
 
             },
             //事件数据

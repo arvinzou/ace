@@ -14,7 +14,7 @@
 			<div class="box br">
 				<div class="header"><img src="img/default_header.png"/></div>
 				<div class="username"><span>许黎明</span></div>
-				<div class="show-card">
+				<div class="show-card" onclick="toConsumption();">
 					<span>查询一卡通</span>
 					<img src="img/icon_select.png" />
 				</div>
@@ -51,7 +51,7 @@
 						<div class="menu-content">共有4个待评</div>
 					</div>
 				</div>
-				<div class="item">
+				<div class="item" onclick="toMailList();">
 					<div class="item-left">
 						<img src="img/icon-mail.png" class="menu-icon"/>
 					</div>
@@ -71,7 +71,7 @@
 						<div class="menu-content">共10个记录</div>
 					</div>
 				</div>
-				<div class="item">
+				<div class="item" onclick="toClassFiles();">
 					<div class="item-left">
 						<img src="img/icon-files.png" class="menu-icon"/>
 					</div>
@@ -96,5 +96,7 @@
 
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 	</body>
 </html>
