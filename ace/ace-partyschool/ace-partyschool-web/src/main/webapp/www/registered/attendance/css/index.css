@@ -1,0 +1,53 @@
+
+.box{
+	width: 100%;
+	height: 11rem;
+}
+.attend{
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
+}
+.calendar{
+	margin: 0.4rem auto;
+}
+a {
+	text-decoration: none;
+}
+ul, ol, li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	color: #373F53;
+	font-size: 0.533333rem;
+	font-weight: bold;
+}
+
+p {
+	margin: 0;
+}
+.item{
+	width: 100%;
+	height: 1.6rem;
+}
+.item:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.item-left{
+	width: 30%;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	float: left;
+	color: #ABAEB9;
+	font-size: 0.533333rem;
+	font-weight: bold;
+}
+.item-right{
+	width: 70%;
+	height: 1.6rem;
+	float: left;
+	color: #373F53;
+	font-size: 0.453333rem;
+	font-weight: bold;
+}
