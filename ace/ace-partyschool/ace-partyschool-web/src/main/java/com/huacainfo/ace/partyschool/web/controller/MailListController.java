@@ -1,7 +1,6 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
@@ -130,9 +129,8 @@ public class MailListController extends BisBaseController {
      */
     @RequestMapping(value = "/deleteMailListByMailListId")
     @ResponseBody
-    public MessageResponse deleteMailListByMailListId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+    public MessageResponse deleteMailListByMailListId(String id) throws Exception {
+
         return this.mailListService.deleteMailListByMailListId(id, this.getCurUserProp());
     }
 

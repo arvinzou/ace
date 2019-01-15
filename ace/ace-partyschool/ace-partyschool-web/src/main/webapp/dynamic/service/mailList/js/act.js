@@ -7,11 +7,13 @@ window.onload = function () {
 function initPage(){
     initClassList();
     $('#btn-view-add').on('click', function () {
+    bootbox.setDefaults("locale","zh_CN");
             bootbox.prompt("请输入组名称", function(o){
                if(o){
                    insertMailList({name:o,pid:$("#classId").val()})
                }
             });
+
         });
 }
 
@@ -113,6 +115,7 @@ function initGroup(classId){
             function allowDrop(ev) {
                 ev.preventDefault(); //阻止默认行为
 
+
                 //ev.target.id
                 //此处ev.target是接收元素，通过事件被绑定在哪个元素即可区分
             }
@@ -124,6 +127,7 @@ function initGroup(classId){
                 //ev.dataTransfer.setData() 方法设置被拖数据的数据类型（Text）和值（被拖元素id），
                 //该方法将被拖动元素的id存储到事件的dataTransfer对象内，ev.dataTransfer.getData()可将该元素取出。
                 //此处ev.target是被拖动元素
+                console.log("drag"+ev.target.id);
                 ev.dataTransfer.setData("Text", ev.target.id);
             }
 
@@ -132,23 +136,30 @@ function initGroup(classId){
              * 松开鼠标时（即被拖元素放置在接收元素内时）会出发ondrop事件
              */
             function drop(ev) {
-                ev.preventDefault(); //阻止默认行为
+
+
+                console.log("drop");
                 var data = ev.dataTransfer.getData("Text"); //将被拖动元素id取出
                 ev.target.appendChild(document.getElementById(data)); //将被拖动元素添加到接收元素尾部
+
+                var studentId=$("#"+data).data("studentid");
+                console.log("studentId>"+studentId);
+                var groupId=$(ev.target).data("groupid");
+                if(!groupId){
+                      groupId='0';
+                 }
+                console.log("groupId>"+groupId);
+
+
                 setTimeout(function(){
-                    saveGroup(ev);
+                    saveGroup(groupId,studentId);
                 });
+                ev.preventDefault(); //阻止默认行为
 
             }
 
 
-            function saveGroup(ev){
-                var data = ev.dataTransfer.getData("Text");
-                var studentId=data;
-                console.log("studentId>"+studentId);
-                var groupId=$(ev.target).data("groupid");
-                console.log("groupId>"+groupId);
-
+            function saveGroup(groupId,studentId){
                 startLoad();
                     $.ajax({
                         url: contextPath + "/mailList/updateClassesByIds",
@@ -188,8 +199,13 @@ function initGroup(classId){
                     method: 'get',
                     animate: true,
                     lines:false,
+                    dnd:true,
                     onLoadSuccess:function()  {
                         $("#tt").tree("expandAll");
+                    },
+                    onDrop:function(target,source,point){
+                        console.log(source);
+                        console.log(target);
                     }
                 })
 
@@ -217,3 +233,28 @@ function initGroup(classId){
                     }
                 });
             }
+            function remove(id){
+                    if(confirm("确定要删除？")){
+                    dodel(id);
+                    }
+            }
+            function dodel(id){
+                            startLoad();
+                            $.ajax({
+                                url: contextPath + "/mailList/deleteMailListByMailListId",
+                                type: "post",
+                                async: false,
+                                data: {
+                                    id:id
+                                },
+                                success: function (result) {
+                                    stopLoad();
+                                    initClasses($("#classId").val());
+                                    alert(result.errorMessage);
+                                },
+                                error: function () {
+                                    stopLoad();
+                                    alert("对不起出错了！");
+                                }
+                            });
+                        }

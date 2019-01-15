@@ -17,6 +17,13 @@ public class Classes {
 
     private String headmaster;
 
+    private String tid1;
+
+    private  String tid2;
+
+    private  String fileUrl;
+
+
     private String remark;
     /**
      * 2、毕业
@@ -94,6 +101,30 @@ public class Classes {
 
     public void setHeadmaster(String headmaster) {
         this.headmaster = headmaster == null ? null : headmaster.trim();
+    }
+
+    public String getTid1() {
+        return tid1;
+    }
+
+    public void setTid1(String tid1) {
+        this.tid1 = tid1;
+    }
+
+    public String getTid2() {
+        return tid2;
+    }
+
+    public void setTid2(String tid2) {
+        this.tid2 = tid2;
+    }
+
+    public String getFileUrl() {
+        return fileUrl;
+    }
+
+    public void setFileUrl(String fileUrl) {
+        this.fileUrl = fileUrl;
     }
 
     public String getRemark() {

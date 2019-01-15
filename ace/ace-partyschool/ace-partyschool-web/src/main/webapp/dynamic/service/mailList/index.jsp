@@ -15,8 +15,8 @@ pageEncoding="utf-8"%>
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light" style="background:#eff3f8">
-    <div class="portlet-body">
+<div  style="background:#eff3f8">
+
 
 
         <div class="row">
@@ -64,7 +64,7 @@ pageEncoding="utf-8"%>
                     <div class="portlet light ">
                         <div class="portlet-title">未分组学员</div>
                         <div class="portlet-body">
-                            <div class="row content" id="classStudent" data-groupid="0" ondrop="drop(event)" ondragover="allowDrop(event)">
+                            <div class="row content" id="classStudent" data-groupid="0" ondrop="drop(event)"  ondragover="allowDrop(event)" ondragenter="allowDrop(event)">
 
 
                             </div>
@@ -91,7 +91,6 @@ pageEncoding="utf-8"%>
 
 
 
-    </div>
 </div>
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -113,7 +112,7 @@ pageEncoding="utf-8"%>
 
 <script id="tpl-student" type="text/template">
         {@each data as item, index}
-        <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="\${item.id}" data-studentid="\${item.id}" draggable="true" ondragstart="drag(event)">\${item.name}</div>
+        <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="student\${item.id}" data-studentid="\${item.id}" draggable="true" ondragstart="drag(event)">\${item.name}</div>
         {@/each}
 
 </script>
@@ -121,11 +120,13 @@ pageEncoding="utf-8"%>
 <script id="tpl-group" type="text/template">
     {@each data as item, index}
         <div class="portlet light" style="width:32.1%;float:Left;margin-right:10px;">
-            <div class="portlet-title tabbable-line">\${item.name}</div>
+            <div class="portlet-title tabbable-line">
+                \${item.name} {@if item.list.length==0}<a style="float:right" href="javascript:remove('\${item.id}');">删除</a>{@/if}
+            </div>
             <div class="portlet-body">
-                <div class="row content"  ondrop="drop(event)" ondragover="allowDrop(event)" data-groupid="\${item.id}">
+                <div class="row content"  ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="allowDrop(event)" data-groupid="\${item.id}">
                 {@each item.list as o, index}
-                    <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="\${o.id}" data-studentid="\${o.id}" draggable="true" ondragstart="drag(event)">\${o.name}</div>
+                    <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="student\${o.id}" data-studentid="\${o.id}" draggable="true" ondragstart="drag(event)">\${o.name}</div>
                 {@/each}
                 </div>
             </div>
