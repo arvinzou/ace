@@ -33,18 +33,15 @@
                         <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <input type="text"
-                               name="keyword"
-                               class="form-control"
-                               placeholder="请输入直播名称">
+                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single1" name="classesId"></select>
                     </div>
                     <div class="input-group">
-                        <input type="text"
+                        <input style="height: 35px;" type="text"
                                name="keyword"
                                class="form-control"
                                placeholder="请输入直播名称">
                         <span class="input-group-btn">
-                            <button class="btn  btn-default search_btn" type="submit">
+                            <button style="height: 35px;" class="btn  btn-default search_btn" type="submit">
                                     搜索
                             </button>
                         </span>
@@ -59,8 +56,10 @@
                     <th width="10%"> 课程</th>
                     <th width="10%"> 班级</th>
                     <th width="10%"> 老师</th>
+                    <th width="10%"> 平均分值</th>
+                    <th width="10%"> 未评测人数</th>
                     <th width="10%"> 日期</th>
-                    <th width="15%">操作</th>
+                    <th width="10%">操作</th>
                 </tr>
                 </thead>
                 <tbody id="page-list">
@@ -89,6 +88,8 @@
         <td> \${item.course.name}</td>
         <td> \${item.classesId}</td>
         <td> \${item.teacher.name}</td>
+        <td> \${item.averageScore}</td>
+        <td> \${item.studentNum-item.userNum}</td>
         <td> \${item.courseDate}</td>
         <td>
             <a href="javascript:view('\${item.id}');">查看</a>

@@ -1,4 +1,29 @@
 $(function(){
+
+    $.ajax({
+        url:  contextPath+ "/www/sign/getAcctInfo",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0) {
+                var lCardNo = result.data;
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+
     initList();
     initCount();
 });
@@ -41,13 +66,15 @@ function initList(){
 }
 
 function initCount(){
+    var year = new Date().getFullYear();
     $.ajax({
         url: "/api/www/api/findStudentFinCount",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
-            lCardNo: 'ZX111011'
+            lCardNo: 'ZX111011',
+            year: year
         },
         success:function(result){
             if(result.status == 0) {

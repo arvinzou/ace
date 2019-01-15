@@ -196,6 +196,9 @@ WHERE t.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
         <if test="condition.classScheduleId !=null and condition.classScheduleId !=&quot;&quot;">
             and er.classScheduleId=#{condition.classScheduleId,jdbcType=VARCHAR}
         </if>
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and er.userId=#{condition.userId,jdbcType=VARCHAR}
+        </if>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
@@ -215,6 +218,9 @@ WHERE t.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
         where 1=1
         <if test="condition.evaluatingId !=null and condition.evaluatingId !=&quot;&quot;">
             and er.evaluatingId LIKE concat('%',#{condition.evaluatingId,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="condition.classScheduleId !=null and condition.classScheduleId !=&quot;&quot;">
+            and er.classScheduleId =#{condition.classScheduleId,jdbcType=VARCHAR}
         </if>
         <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
             and er.userId = #{condition.userId,jdbcType=VARCHAR}
@@ -252,8 +258,24 @@ WHERE t.classScheduleId= #{classScheduleId,jdbcType=VARCHAR}
         <if test="condition.classScheduleId !=null and condition.classScheduleId !=&quot;&quot;">
             and er.classScheduleId=#{condition.classScheduleId,jdbcType=VARCHAR}
         </if>
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+            and er.userId=#{condition.userId,jdbcType=VARCHAR}
+        </if>
         ) as t
     </select>
+
+
+        <select id="getDoneSize" resultType="int">
+            select COUNT(*)
+            FROM (SELECT t.classScheduleId
+            FROM   (   SELECT er.classScheduleId
+            FROM evaluation_rst er
+            WHERE er.userId=#{condition.userId,jdbcType=VARCHAR}) t
+            GROUP BY t.classScheduleId) e
+
+        </select>
+
+
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
     select count(1)

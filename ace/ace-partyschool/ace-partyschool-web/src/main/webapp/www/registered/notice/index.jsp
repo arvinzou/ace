@@ -17,7 +17,9 @@
 		<script id="list-tpl" type="text/template">
 			<div class="title-box">
 				<span class="title">最新消息</span>
+				{@if data.newNotice.length > 0}
 				<span class="num">\${data.newNotice.length}</span>
+				{@/if}
 			</div>
 			<div class="box">
 				{@if data.newNotice.length > 0}

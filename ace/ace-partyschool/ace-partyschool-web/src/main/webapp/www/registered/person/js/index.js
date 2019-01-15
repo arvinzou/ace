@@ -101,3 +101,6 @@ function attendtion(){
 function moreNotice(){
     window.location.href = contextPath + '/www/registered/notice/index.jsp';
 }
+function toTest(){
+    window.location.href = contextPath + '/www/registered/test/index.jsp';
+}

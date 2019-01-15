@@ -37,6 +37,7 @@ public interface EvaluationRstDao {
 
     int findCount(@Param("condition") EvaluationRstQVo condition);
     int findCountVo(@Param("condition") EvaluationRstQVo condition);
+    int getDoneSize(@Param("condition") EvaluationRstQVo condition);
 
     int isExit(EvaluationRst record);
 

@@ -2,13 +2,19 @@ package com.huacainfo.ace.partyschool.service.impl;
 
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.pushmsg.CommonUtil;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.ClassScheduleDao;
+import com.huacainfo.ace.partyschool.model.EvaluationRstContent;
+import com.huacainfo.ace.partyschool.service.EvaluationRstContentService;
 import com.huacainfo.ace.partyschool.vo.ClassScheduleVo;
+import com.huacainfo.ace.partyschool.vo.EvaluationRstContentQVo;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -44,6 +50,8 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
     private DataBaseLogService dataBaseLogService;
     @Autowired
     private SqlSessionTemplate sqlSession;
+    @Autowired
+    private EvaluationRstContentService evaluationRstContentService;
 
     /**
      * @throws
@@ -60,13 +68,15 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
      * @version: 2019-01-08
      */
     @Override
-    public PageResult<EvaluationRstVo> findEvaluationRstList(EvaluationRstQVo condition, int start,
-                                                             int limit, String orderBy) throws Exception {
+    public PageResult<EvaluationRstVo> findEvaluationRstList(EvaluationRstQVo condition, int start, int limit, String orderBy) throws Exception {
         PageResult<EvaluationRstVo> rst = new PageResult<>();
         List<EvaluationRstVo> list = this.evaluationRstDao.findList(condition, start, limit, orderBy);
         rst.setRows(list);
         return rst;
     }
+
+
+
 
     @Override
     public PageResult<EvaluationRstVo> findEvaluationRstListVo(EvaluationRstQVo condition, int start,
@@ -91,6 +101,19 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
         return rst;
     }
 
+    @Override
+    public ResultResponse insertEvaluationRstList(List<EvaluationRst> list, EvaluationRstContent obj, UserProp userProp) throws Exception{
+            for(EvaluationRst item:list){
+                MessageResponse mr=insertEvaluationRst(item,userProp);
+                if(mr.getStatus()==1){
+                    new Exception();
+                }
+            }
+            if(!CommonUtils.isBlank(obj.getContent())){
+                evaluationRstContentService.insertEvaluationRstContent(obj,userProp);
+            }
+            return new ResultResponse(ResultCode.SUCCESS,"提交成功");
+    }
     /**
      * @throws
      * @Title:insertEvaluationRst
@@ -105,6 +128,7 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
     @Override
     public MessageResponse insertEvaluationRst(EvaluationRst o, UserProp userProp) throws Exception {
 
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -123,17 +147,7 @@ public class EvaluationRstServiceImpl implements EvaluationRstService {
         if (CommonUtils.isBlank(o.getScore())) {
             return new MessageResponse(1, "分值不能为空！");
         }
-        if (CommonUtils.isBlank(o.getUserId())) {
-            return new MessageResponse(1, "评测人不能为空！");
-        }
-
-
-        int temp = this.evaluationRstDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "测评结果管理名称重复！");
-        }
-
-        o.setId(GUIDUtil.getGUID());
+        o.setUserId(userProp.getUserId());
         o.setCreateDate(new Date());
         this.evaluationRstDao.insert(o);
         this.dataBaseLogService.log("添加测评结果管理", "测评结果管理", "",

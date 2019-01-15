@@ -71,6 +71,9 @@ public interface EvaluationRstContentService {
     SingleResult
             <EvaluationRstContentVo> selectEvaluationRstContentByPrimaryKey(String id) throws Exception;
 
+    SingleResult
+            <EvaluationRstContent> selectEvaluationRstContent(EvaluationRstContent obj) throws Exception;
+
     /**
      * @throws
      * @Title:deleteEvaluationRstContentByEvaluationRstContentId
