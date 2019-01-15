@@ -11,28 +11,18 @@
 	</head>
 	<body>
 		<div class="index">
-			<div class="box br">
-				<div class="header" onclick="showPersonInfo();"><img src="img/default_header.png"/></div>
-				<div class="username" onclick="showPersonInfo();"><span>许黎明</span></div>
-				<div class="show-card" onclick="toConsumption();">
-					<span>查询一卡通</span>
-					<img src="img/icon_select.png" />
-				</div>
+			<div class="box br" id="userInfo">
+
 			</div>
 			<div class="box">
 				<div class="today">今日课程</div>
-				<div class="calendar">
+				<div class="calendar" onclick="weekCourse();">
 					<div class="icon-calendar"><img src="img/icon-calendar.png" /></div>
 					<div class="calendar-title"><span>周课表</span></div>
 				</div>
 			</div>
-			<div class="course morning">
-				<div class="course-left">上午</div>
-				<div class="course-right"><span class="scheal">掌握唯物辩证法的思想武器(主讲:万传明）</span></div>
-			</div>
-			<div class="course afternoon">
-				<div class="course-left">下午</div>
-				<div class="course-right"><span class="scheal">勇于自我革命是中国共产党最鲜明的品格(主讲:万传明）</span></div>
+			<div id="todayCourse">
+
 			</div>
 			<div class="notice">
 				<div class="notice-icon"><img src="img/icon-message.png"/></div>
@@ -93,6 +83,37 @@
 				</div>
 			</div>
 		</div>
+
+		<script id="course-tpl" type="text/template">
+			{@each data as item, index}
+			{@if item.courseIndex == am}
+			<div class="course morning">
+				<div class="course-left">上午</div>
+				<div class="course-right"><span class="scheal">\${item.course.name}(主讲:\${item.teacher.name}）</span></div>
+			</div>
+			{@else}
+			<div class="course afternoon">
+				<div class="course-left">下午</div>
+				<div class="course-right"><span class="scheal">\${item.course.name}(主讲:\${item.teacher.name}）</span></div>
+			</div>
+			{@/if}
+			{@/each}
+		</script>
+
+		<script id="userinfo-tpl" type="text/template">
+			<div class="header" onclick="showPersonInfo();"><img src="img/default_header.png"/></div>
+			<div class="username" onclick="showPersonInfo();">
+				{@if data.regType == student}
+				<span>\${data.student.name}</span>
+                {@else}
+                <span>\${data.teacher.name}</span>
+                {@/if}
+			</div>
+			<div class="show-card" onclick="toConsumption();">
+				<span>查询一卡通</span>
+				<img src="img/icon_select.png" />
+			</div>
+		</script>
 
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
