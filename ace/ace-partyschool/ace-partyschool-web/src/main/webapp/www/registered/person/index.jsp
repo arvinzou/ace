@@ -89,12 +89,20 @@
 			{@if item.courseIndex == am}
 			<div class="course morning">
 				<div class="course-left">上午</div>
-				<div class="course-right"><span class="scheal">\${item.course.name}(主讲:\${item.teacher.name}）</span></div>
+				<div class="course-right">
+					<span>\${item.course.name}</span>
+					<span>(主讲:\${item.teacher.name}）</span>
+				</div>
 			</div>
 			{@else}
 			<div class="course afternoon">
 				<div class="course-left">下午</div>
-				<div class="course-right"><span class="scheal">\${item.course.name}(主讲:\${item.teacher.name}）</span></div>
+				<div class="course-right">
+					<div class="inner-middle">
+						<span>\${item.course.name}</span>
+						<span>(主讲:\${item.teacher.name}）</span>
+					</div>
+				</div>
 			</div>
 			{@/if}
 			{@/each}

@@ -142,6 +142,7 @@ body{
 	font-size: 0.453333rem;
 	font-weight: bold;
 	padding-right: 0.4rem;
+	display: table;
 }
 .scheal{
 	width: 100%;
@@ -253,4 +254,9 @@ body{
 .menu-content{
 	color: #ABAEB9;
 	font-size: 0.32rem;
+}
+.inner-middle{
+	display: table-cell;
+	vertical-align:middle;
+	padding-left: 0.4rem;
 }
