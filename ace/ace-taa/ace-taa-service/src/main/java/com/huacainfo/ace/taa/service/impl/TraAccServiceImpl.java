@@ -401,6 +401,24 @@ public class TraAccServiceImpl implements TraAccService {
         return new ResultResponse(ResultCode.FAIL, "续报提交失败");
     }
 
+    /**
+     * 交通事故倒序表
+     * <p>路段交通事故次数倒叙表</p>
+     * <p>路段交通死亡人数倒叙表</p>
+     *
+     * @param params  参数
+     * @param start   分页1
+     * @param limit   分页2
+     * @param orderBy 排序规则
+     *                ORDER BY v.occurTimes DESC
+     *                ORDER BY v.deathNum DESC
+     * @return List<Map<String, Object>>
+     */
+    @Override
+    public List<Map<String, Object>> reverseReport(Map<String, Object> params, int start, int limit, String orderBy) {
+        return traAccDao.reverseReport(params, start, limit, orderBy);
+    }
+
     private UserProp parseUser(WxUser user) {
         UserProp u = new UserProp();
         u.setUserId(user.getUnionId());
