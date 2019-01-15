@@ -30,9 +30,11 @@
 					上午
 				</div>
 				<div class="item-right">
-					{@each data.am as item_am, index01}
-					<div class="row">\${item_am.dealTime}</div>
-					{@/each}
+					<div class="inner">
+						{@each data.am as item_am, index01}
+						<p class="row">\${item_am.dealTime}</p>
+						{@/each}
+					</div>
 				</div>
 			</div>
 			<div class="item">
@@ -40,9 +42,11 @@
 					下午
 				</div>
 				<div class="item-right">
-					{@each data.pm as item_pm, index01}
-					<div class="row">\${item_am.dealTime}</div>
-					{@/each}
+					<div class="inner">
+						{@each data.pm as item_pm, index01}
+						<p class="row">\${item_am.dealTime}</p>
+						{@/each}
+					</div>
 				</div>
 			</div>
 			<div class="item">
@@ -50,9 +54,11 @@
 					晚上
 				</div>
 				<div class="item-right">
-					{@each data.night as item_night, index01}
-					<div class="row">\${item_night.dealTime}</div>
-					{@/each}
+					<div class="inner">
+						{@each data.night as item_night, index01}
+						<p class="row">\${item_night.dealTime}</p>
+						{@/each}
+					</div>
 				</div>
 			</div>
 
