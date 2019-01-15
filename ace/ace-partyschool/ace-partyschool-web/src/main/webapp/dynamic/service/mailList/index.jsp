@@ -121,7 +121,7 @@ pageEncoding="utf-8"%>
     {@each data as item, index}
         <div class="portlet light" style="width:32.1%;float:Left;margin-right:10px;">
             <div class="portlet-title tabbable-line">
-                \${item.name} <a style="float:right" href="javascript:remove('\${item.id}');">删除</a>
+                \${item.name} {@if item.list.length==0}<a style="float:right" href="javascript:remove('\${item.id}');">删除</a>{@/if}
             </div>
             <div class="portlet-body">
                 <div class="row content"  ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="allowDrop(event)" data-groupid="\${item.id}">
