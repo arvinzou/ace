@@ -27,7 +27,8 @@
 		<script id="list-tpl" type="text/template">
 			<div class="item">
 				<div class="item-left">
-					上午
+					<img src="img/circle.png" class="circle"/>
+					<span>上午</span>
 				</div>
 				<div class="item-right">
 					<div class="inner">
@@ -39,19 +40,21 @@
 			</div>
 			<div class="item">
 				<div class="item-left">
-					下午
+					<img src="img/circle.png" class="circle"/>
+					<span>下午</span>
 				</div>
 				<div class="item-right">
 					<div class="inner">
 						{@each data.pm as item_pm, index01}
-						<p class="row">\${item_am.dealTime}</p>
+						<p class="row">\${item_pm.dealTime}</p>
 						{@/each}
 					</div>
 				</div>
 			</div>
 			<div class="item">
 				<div class="item-left">
-					晚上
+					<img src="img/circle.png" class="circle"/>
+					<span>晚上</span>
 				</div>
 				<div class="item-right">
 					<div class="inner">

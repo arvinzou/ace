@@ -62,3 +62,7 @@ p {
 	display: table-cell;
 	vertical-align:middle;
 }
+.circle{
+	width: 0.46rem;
+	height: 0.46rem;
+}
