@@ -419,6 +419,57 @@ public class TraAccServiceImpl implements TraAccService {
         return traAccDao.reverseReport(params, start, limit, orderBy);
     }
 
+    /**
+     * 事故死亡人数同期对比 报表
+     *
+     * @return Map<String,Object>
+     */
+    @Override
+    public Map<String, Object> contrastiveReport() {
+        String nowDataTime = DateUtil.getNow();
+        String nowYear = nowDataTime.substring(0, 4);
+        Map<String, String> nowParams = getParams(Integer.parseInt(nowYear));
+        Map<String, String> pastParams = getParams(Integer.parseInt(nowYear) - 1);
+
+        Map<String, Object> now = traAccDao.contrastiveReport(nowParams);
+        Map<String, Object> past = traAccDao.contrastiveReport(pastParams);
+
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("now", now);
+        rst.put("past", past);
+        return rst;
+    }
+
+    private Map<String, String> getParams(int year) {
+        Map<String, String> params = new HashMap<>();
+        params.put("Jan_S", year + "-01-01 00:00:00");
+        params.put("Jan_E", year + "-01-31 23:59:59");
+        params.put("Feb_S", year + "-02-01 00:00:00");
+        params.put("Feb_E", year + "-02-29 23:59:59");
+        params.put("Mar_S", year + "-03-01 00:00:00");
+        params.put("Mar_E", year + "-03-31 23:59:59");
+        params.put("Apr_S", year + "-04-01 00:00:00");
+        params.put("Apr_E", year + "-04-30 23:59:59");
+        params.put("May_S", year + "-05-01 00:00:00");
+        params.put("May_E", year + "-05-31 23:59:59");
+        params.put("Jun_S", year + "-06-01 00:00:00");
+        params.put("Jun_E", year + "-06-30 23:59:59");
+        params.put("Jul_S", year + "-07-01 00:00:00");
+        params.put("Jul_E", year + "-07-31 23:59:59");
+        params.put("Aug_S", year + "-08-01 00:00:00");
+        params.put("Aug_E", year + "-08-31 23:59:59");
+        params.put("Sep_S", year + "-09-01 00:00:00");
+        params.put("Sep_E", year + "-09-30 23:59:59");
+        params.put("Oct_S", year + "-10-01 00:00:00");
+        params.put("Oct_E", year + "-10-31 23:59:59");
+        params.put("Nov_S", year + "-11-01 00:00:00");
+        params.put("Nov_E", year + "-11-30 23:59:59");
+        params.put("Dec_S", year + "-12-01 00:00:00");
+        params.put("Dec_E", year + "-12-31 23:59:59");
+
+        return params;
+    }
+
     private UserProp parseUser(WxUser user) {
         UserProp u = new UserProp();
         u.setUserId(user.getUnionId());

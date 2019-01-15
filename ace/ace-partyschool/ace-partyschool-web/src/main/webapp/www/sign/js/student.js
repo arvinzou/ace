@@ -1,10 +1,10 @@
 var political = null;
 var clazz = null;
 var account = null;
+var classesArr = [];
 $(function(){
 	var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
-	var classesArr = [{"id":"1","value":"2018届党校1班"},{"id":"2","value":"2018届党校2班"}];
-	
+    initClassList();
 	var politicalSelect= new MobileSelect({
 	    trigger: '#political',
 	    title: '政治面貌选择',
@@ -19,7 +19,6 @@ $(function(){
             political = data;
 	    }
 	});
-	
 	var classesSelect= new MobileSelect({
 	    trigger: '#classes',
 	    title: '党校班级选择',
@@ -34,6 +33,8 @@ $(function(){
             clazz = data;
 	    }
 	});
+
+    initClassList();
 });
 
 function regist(){
@@ -195,4 +196,33 @@ function bindWx(){
     o.account=account;
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
     $("#bindForm").submit();
+}
+
+function initClassList(){
+    $.ajax({
+        url: contextPath + "/www/classes/findClassList",
+        type: "post",
+        async: false,
+        data: {
+            status: "1",
+            start: 0,
+            limit: 999
+        },
+        success: function(result) {
+           if(result.status == 0){
+                var classList = result.rows;
+                for(var i=0; i<classList.length; i++){
+                    var obj = {};
+                    obj.id = classList[i].id;
+                    obj.value = classList[i].name;
+                    classesArr.push(obj);
+                }
+           }else{
+               alert(result.info);
+           }
+        },
+        error: function() {
+            alert("出错了！");
+        }
+    });
 }
