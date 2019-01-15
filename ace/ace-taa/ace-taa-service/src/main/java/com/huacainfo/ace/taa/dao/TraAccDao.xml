@@ -193,4 +193,53 @@ select * from (
   <update id="updateStatus">
     update tra_acc set status=#{status} where id=#{id}
   </update>
+
+
+    <select id="reverseReport" resultType="map">
+        select
+        p.`name` as areaCodeName,
+        rm.`name` as roadManName,
+        rs.`name` as roadSectionName,
+        v.occurTimes, v.deathNum
+        from (
+        select
+        A.areaCode, A.roadManId, A.roadSectionId,
+        count(1) AS occurTimes ,sum(A.deadthToll) as deathNum
+        from (
+        select t.roadSectionId, t.roadManId, t.areaCode, t.deadthToll
+        from tra_acc t
+        where t.`status` = '1'
+        <if test='params.startDate!=null and params.startDate!=""'>
+            <![CDATA[
+                and t.accidentTime >= str_to_date(#{condition.startDate},'%Y-%m-%d')
+            ]]>
+        </if>
+        <if test='params.endDate!=null and params.endDate!=""'>
+            <![CDATA[
+                and t.accidentTime <= str_to_date(#{condition.endDate},'%Y-%m-%d')
+            ]]>
+        </if>
+        )A
+        GROUP BY A.areaCode, A.roadManId, A.roadSectionId
+        )V
+        left join road_section rs on v.roadSectionId = rs.id
+        left join road_man rm on v.roadManId = rm.id
+        left join portal.province p on v.areaCode = p.`code`
+        where 1=1
+        <if test='params.roadManName!=null and params.roadManName!=""'>
+            and rm.name like concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='params.areaCode!=null and params.areaCode!=""'>
+            and V.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY v.occurTimes DESC
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
 </mapper>
