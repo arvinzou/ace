@@ -27,7 +27,7 @@ pageEncoding="utf-8" %>
 <div class="row">
     <div class="col-xs-12 col-sm-6">
         <div class="portlet light">
-            <div class="portlet-title">发布通知</div>
+            <div class="portlet-title">系统通知</div>
             <div class="portlet-body">
                 <div class="row" style="padding:15px">
                     <table width="100%;">
@@ -44,7 +44,7 @@ pageEncoding="utf-8" %>
 
     <div class="col-xs-12 col-sm-6">
         <div class="portlet light">
-            <div class="portlet-title">学校公告</div>
+            <div class="portlet-title">内部公告</div>
             <div class="portlet-body">
                 <div class="row" style="padding:15px">
                     <table width="100%;">
