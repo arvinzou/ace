@@ -20,7 +20,7 @@ Page({
   },
   goback: function (e) {
     var that = this;
-    console.log('============>goback');
+    console.log('============>goback'+that.data.url);
     //wx.navigateTo({ url: that.data.url });
     if (that.data.type == 'navigateTo'){
         wx.navigateTo({ url: that.data.url });

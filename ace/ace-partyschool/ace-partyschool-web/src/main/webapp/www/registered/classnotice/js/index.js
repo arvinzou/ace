@@ -12,6 +12,7 @@ function initData(){
         success:function(result){
             if(result.status == 0) {
                 console.log(result);
+                renderPage('classNotice', result.data, 'class-tpl');
             }else {
                 if(result.info){
                     alert(result.info);
@@ -33,4 +34,8 @@ function renderPage(IDom, data, tempId) {
         data: data,
     });
     $("#" + IDom).html(html);
+}
+
+function toMailList(){
+    window.location.href = contextPath + '/www/registered/maillist/index.jsp';
 }

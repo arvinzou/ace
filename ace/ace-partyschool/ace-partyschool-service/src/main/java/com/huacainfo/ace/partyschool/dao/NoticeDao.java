@@ -26,10 +26,11 @@ public interface NoticeDao {
                             @Param("limit") int limit,
                             @Param("orderBy") String orderBy);
 
+    List<NoticeVo> findMyNoticeList(String id);
 
     int findCount(@Param("condition") NoticeQVo condition);
 
-    int findUnreadCount();
+    int findUnreadCount(String id);
 
     int isExit(Notice record);
 
