@@ -27,7 +27,7 @@
 			<div class="notice">
 				<div class="notice-icon"><img src="img/icon-message.png"/></div>
 				<div class="notice-title">2019年党校第一批开课时间已确定，请大家安排好自己的时间</div>
-				<div class="more"><span>全部</span><img src="img/icon_select.png"/></div>
+				<div class="more" onclick="moreNotice();"><span>全部</span><img src="img/icon_select.png"/></div>
 			</div>
 		</div>
 		<div class="menu">

@@ -14,11 +14,8 @@
 			<div class="box" id="userInfo">
 
 			</div>
-			<div class="box">
-				<div class="info">
-					<div class="title">密码设置</div>
-					<div class="content"><span>修改密码</span><img src="img/icon_select.png"/></div>
-				</div>
+			<div class="box" id="option">
+
 			</div>
 			<div class="box">
 				<div class="exit" onclick="exit();">
@@ -105,6 +102,28 @@
 				\${data.teacher.postName}
 				{@/if}
 			</div>
+		</div>
+	</script>
+
+	<script id="option-tpl" type="text/template">
+		<div class="info">
+			<div class="title">微信绑定</div>
+			<div class="content" id="bindWx">
+				{@if data.isBindWx == 0}
+				<form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="bindWx();">
+					<input type="hidden" name="jsonData"/>
+					<input type="hidden" value="WX_BIND"  name="action"/>
+					<input type="hidden" value="/partyschool/www/registered/person/info.jsp" id="respUri" name="respUri"/>
+					<button type="submit">绑定微信</button><img src="img/icon_select.png"/>
+				</form>
+				{@else}
+				<span class="bind">已绑定</span>
+			</div>
+			</form>
+		</div>
+		<div class="info">
+			<div class="title">密码设置</div>
+			<div class="content" onclick="editPassword();"><span>修改密码</span><img src="img/icon_select.png"/></div>
 		</div>
 	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
