@@ -103,7 +103,7 @@
 		<script id="userinfo-tpl" type="text/template">
 			<div class="header" onclick="showPersonInfo();"><img src="img/default_header.png"/></div>
 			<div class="username" onclick="showPersonInfo();">
-				{@if data.regType == student}
+				{@if data.regType == 'student'}
 				<span>\${data.student.name}</span>
                 {@else}
                 <span>\${data.teacher.name}</span>
