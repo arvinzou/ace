@@ -94,5 +94,20 @@ public class WReportController {
         }
         return rst;
     }
+
+
+    /**
+     * 事故死亡人数同期对比 报表
+     *
+     * @return Map<String,Object>
+     */
+    @RequestMapping(value = "/contrastiveReport")
+    public SingleResult<Map<String, Object>> contrastiveReport() throws Exception {
+
+        Map<String, Object> data = traAccService.contrastiveReport();
+        SingleResult<Map<String, Object>> rst = new SingleResult<>();
+        rst.setValue(data);
+        return rst;
+    }
 }
 
