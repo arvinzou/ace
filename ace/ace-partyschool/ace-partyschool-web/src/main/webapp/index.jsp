@@ -114,7 +114,7 @@ pageEncoding="utf-8" %>
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
                 <h4 class="widget-thumb-heading">通知</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-male"></i>
+                    <i class="widget-thumb-icon bg-purple icon-bubbles"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
                         <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.notice}">\${data.notice}</span>
