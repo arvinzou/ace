@@ -96,5 +96,8 @@ function classNotice(){
     window.location.href = contextPath + '/www/registered/classnotice/index.jsp';
 }
 function attendtion(){
-    window.location.href = contextPath + '/www/registered/attendance/index.jsp'
+    window.location.href = contextPath + '/www/registered/attendance/index.jsp';
+}
+function moreNotice(){
+    window.location.href = contextPath + '/www/registered/notice/index.jsp';
 }

@@ -1,3 +1,4 @@
+var account = 0;
 $(function(){
     $.ajax({
         url: contextPath+ "/www/sign/getAcctInfo",
@@ -10,6 +11,12 @@ $(function(){
             if(result.status == 0) {
                 console.log("===================================="+result);
                 renderPage('userInfo', result.data, 'info-tpl');
+                renderPage('option', result.data, 'option-tpl');
+                if(result.data.regType == 'student'){
+                    account = result.data.student.mobile;
+                }else{
+                    account = result.data.teacher.mobile;
+                }
             }else {
                 if(result.info){
                     alert(result.info);
@@ -56,4 +63,15 @@ function exit(){
             alert("系统服务内部异常！");
         }
     });
+}
+
+function editPassword(){
+    window.location.href = contextPath + '/www/reset/index.jsp';
+}
+
+function bindWx(){
+    var o={};
+    o.account=account;
+    $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
+    $("#bindForm").submit();
 }
