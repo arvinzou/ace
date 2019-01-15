@@ -52,7 +52,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="item mr">
+				<div class="item mr" onclick="attendtion();">
 					<div class="item-left">
 						<img src="img/icon-appear.png" class="menu-icon"/>
 					</div>
@@ -72,7 +72,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="item mr">
+				<div class="item mr" onclick="classNotice();">
 					<div class="item-left">
 						<img src="img/icon-notice.png" class="menu-icon"/>
 					</div>

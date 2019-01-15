@@ -92,3 +92,9 @@ function toConsumption(){
 function showPersonInfo(){
     window.location.href = contextPath + '/www/registered/person/info.jsp';
 }
+function classNotice(){
+    window.location.href = contextPath + '/www/registered/classnotice/index.jsp';
+}
+function attendtion(){
+    window.location.href = contextPath + '/www/registered/attendance/index.jsp'
+}
