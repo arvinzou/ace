@@ -14,6 +14,18 @@ public class TraAccVo extends TraAcc {
     private String areaName;
 
     private String category;
+    /**
+     * 道路名称
+     */
+    private String roadName;
+
+    public String getRoadName() {
+        return roadName;
+    }
+
+    public void setRoadName(String roadName) {
+        this.roadName = roadName;
+    }
 
     public String getRoadManName() {
         return roadManName;

@@ -9,6 +9,15 @@ body{
 	width: 100%;
 	height: 100%;
 }
+input{
+	width: 100%;
+	height: 100%;
+	text-align: right;
+	color: #ABAEB9;
+	font-size: 0.4rem;
+	outline: none;
+	border: none;
+}
 .box{
 	width: 90%;
 	height: auto;
@@ -47,12 +56,12 @@ body{
 	white-space: nowrap;
 }
 
-.content img{
+.redirect{
 	width: 0.2rem;
 	height: 0.346666rem;
 	margin-left: 0.306666rem;
 }
-.content span{
+.bindLink{
 	font-size: 0.4rem;
 	color: #54ADF2;
 }
@@ -64,4 +73,39 @@ body{
 	font-size: 0.426666rem;
 	color: #373F53;
 	font-weight: bold;
+}
+.bind{
+	color: #ADB0BB;
+}
+.bind-btn{
+	border: none;
+	background: none;
+	color: #54ADF2;
+	font-size: 0.4rem;
+}
+.content:after{
+	content: '';
+	clear: both;
+	display: block;
+}
+.sex-left{
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+.sex-right{
+	width: 50%;
+	height: 100%;
+	float: left;
+	display: table;
+}
+.inner{
+	display: table-cell;
+	vertical-align:middle;
+	text-align: center;
+}
+.icon-sex{
+	width: 0.4rem;
+	height: 0.4rem;
+	margin-right: 0.4rem;
 }

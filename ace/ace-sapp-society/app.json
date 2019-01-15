@@ -47,6 +47,11 @@
         "page/orgApply/index",
         "page/myOrg/index"
     ],
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于小程序位置接口的效果展示"
+        }
+    },
     "window": {
         "navigationBarTextStyle": "black",
         "navigationBarTitleText": "芙蓉街道",

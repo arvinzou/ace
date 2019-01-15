@@ -187,4 +187,29 @@ public interface TraAccService {
      * @date: 2019/1/12 11:15
      */
     ResultResponse report(WxUser user, TraAccVo params);
+
+    /**
+     * 交通事故倒序表
+     * <p>路段交通事故次数倒叙表</p>
+     * <p>路段交通死亡人数倒叙表</p>
+     *
+     * @param params  参数
+     * @param start   分页1
+     * @param limit   分页2
+     * @param orderBy 排序规则
+     *                ORDER BY v.occurTimes DESC
+     *                ORDER BY v.deathNum DESC
+     * @return List<Map<String, Object>>
+     */
+    List<Map<String, Object>> reverseReport(Map<String, Object> params,
+                                            int start,
+                                            int limit,
+                                            String orderBy);
+
+    /**
+     * 事故死亡人数同期对比 报表
+     *
+     * @return Map<String,Object>
+     */
+    Map<String, Object> contrastiveReport();
 }

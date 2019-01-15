@@ -1,11 +1,14 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,29 +45,23 @@ public class WNoticeController extends BisBaseController {
      * @author: Arvin
      * @version: 2019-01-06
      */
-    @RequestMapping(value = "/findNoticeList")
-    @ResponseBody
-    public PageResult<NoticeVo> findNoticeList(NoticeQVo condition, PageParamNoChangeSord page) throws Exception {
 
-        PageResult<NoticeVo> rst = this.sclNoticeService.findNoticeList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
-        if (rst.getTotal() == 0) {
-            rst.setTotal(page.getTotalRecord());
-        }
-        return rst;
-    }
 
     @RequestMapping(value = "/findNoticeLists")
     @ResponseBody
-    public ResultResponse findNoticeLists(NoticeQVo condition, PageParamNoChangeSord page) throws Exception {
-
-        return this.sclNoticeService.findNoticeLists(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    public ResultResponse findNoticeLists() throws Exception {
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.sclNoticeService.findNoticeLists(userProp);
     }
 
 
     /**
      * @throws
-     * @Title:selectNoticeByPrimaryKey
-     * @Description: TODO(获取通知公告)
+     * @Title:selectNoticeById
+     * @Description: TODO(获取通知公告详情)
      * @param: @param id
      * @param: @throws Exception
      * @return: SingleResult<Notice>
@@ -73,8 +70,12 @@ public class WNoticeController extends BisBaseController {
      */
     @RequestMapping(value = "/getDetails")
     @ResponseBody
-    public SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
-        return this.sclNoticeService.selectNoticeByPrimaryKey(id);
+    public ResultResponse selectNoticeByPrimaryKey(String id) throws Exception {
+        UserProp userProp = this.getCurUserProp();
+        if (userProp == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
+        return this.sclNoticeService.selectNoticeById(id);
     }
 
 }

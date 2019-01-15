@@ -35,7 +35,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="getClassTreeList" resultType="map">
-
+    select m.* from (
     SELECT
     t.ID,
     t.PID,
@@ -50,7 +50,7 @@
     left join portal.userinfo b on a.openId=b.unionid
 
     WHERE
-    t.classId = #{classId}
+    t.classId = #{classId} and t.status='1'
     <if test='name!=null and name!=""'>
       and t.name like
       concat(#{name,jdbcType=VARCHAR},'%')
@@ -67,13 +67,13 @@
     FROM
     student a
     WHERE
-    a.classId = #{classId}
+    a.classId = #{classId} and a.status='1'
     AND a.pid = t.id
     ) CHILD_COUNT,
     'closed' STATE,
     null ICON
     FROM
-    mail_list t where t.pid=#{classId}
+    mail_list t where t.pid=#{classId} )m order by m.text
   </select>
   <select id="getTeacherTreeList" resultType="map">
     SELECT
@@ -88,16 +88,17 @@
     teacher t
     LEFT JOIN portal.users a on t.id=a.user_id
     left join portal.userinfo b on a.openId=b.unionid
-where 0=0
+where t.status='1'
     <if test='name!=null and name!=""'>
       and t.name like
       concat(#{name,jdbcType=VARCHAR},'%')
     </if>
+
   </select>
 
 
   <select id="getList" resultType="map">
-    select id, name from student where classId=#{p.classId} order by name;
+    select id, name from student where classId=#{p.classId} and (pid is null or pid='0') order by name
   </select>
 
   <resultMap  id="MailListContent" type="com.huacainfo.ace.partyschool.vo.MailListContent">
@@ -120,16 +121,13 @@ where 0=0
     s.mobile,
     b.headimgurl
     FROM mail_list t
-    left join student s on t.id=s.pid
+    left join (select id,pid,name,mobile from student where status='1') s on t.id=s.pid
     LEFT JOIN portal.users a on s.id=a.user_id
     left join portal.userinfo b on a.openId=b.unionid
-    where t.pid=#{p.classId} order by s.name
+    where t.pid=#{classId} order by t.name ,s.name
   </select>
   <update id="updateClassesByIds">
-    update student t set t.pid=#{classId} where t.id in
-    <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
-      #{item}
-    </foreach>
+    update student t set t.pid=#{classId} where t.id =#{ids}
 
   </update>
 

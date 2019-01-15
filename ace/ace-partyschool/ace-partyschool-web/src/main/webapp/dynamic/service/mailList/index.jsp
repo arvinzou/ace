@@ -15,142 +15,125 @@ pageEncoding="utf-8"%>
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light ">
-    <div class="portlet-body">
-        <div class="row custom-toolbar">
-            <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+<div  style="background:#eff3f8">
 
-                    <button type="button" class="btn  green" id="btn-view-add"
-                            authority="${pageContext.request.contextPath}/mailList/insertMailList">添加
-                    </button>
 
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="portlet light">
+                    <div class="portlet-body">
+                    <div class="row">
+
+
+                        <div style="float:left" id="select1">
+
+
+
+
+                        </div>
+                        <div style="float:right">
+
+                            <button type="button" class="btn  green" id="btn-view-add" authority="false">添加
+                            </button>
+
+                        </div>
+                    </div>
+                    </div>
                 </div>
-                <div class="col-md-3">
 
 
-                    <div class="input-group">
-                        <input type="text"
-                               name="name"
-                               class="form-control"
-                               placeholder="请输入名称">
-                        <span class="input-group-btn">
-							<button class="btn  btn-default search_btn" id="btn-search"
-                                    authority="${pageContext.request.contextPath}/mailList/findMailListList">
-									搜索
-							</button>
-						</span>
+
+                <div class="portlet light">
+                    <div class="portlet-title">班级分组</div>
+                    <div class="portlet-body">
+
+                        <div class="row">
+
+
+                            <ul id="tt"></ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-9">
+
+
+                    <div class="portlet light ">
+                        <div class="portlet-title">未分组学员</div>
+                        <div class="portlet-body">
+                            <div class="row content" id="classStudent" data-groupid="0" ondrop="drop(event)"  ondragover="allowDrop(event)" ondragenter="allowDrop(event)">
+
+
+                            </div>
+
+                        </div>
                     </div>
 
+
+
+                <div  id="groupStudent">
+
+
+
+
                 </div>
 
-            </form>
+            </div>
+
         </div>
 
-        <table id="grid-table"></table>
 
-        <div class="paginationbar">
-            <ul id="grid-pager" class="pagination"></ul>
-        </div>
-    </div>
+
+
+
+
+
 </div>
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
-<%--查看详情--%>
-<div class="modal fade" role="dialog" id="modal-preview">
-    <div class="modal-dialog" role="document" style="width: 75%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">详细</h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-horizontal" role="form">
-                    <div class="form-body" id="fm-preview">
 
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-<%--详情juicer模板--%>
-<script id="tpl-preview" type="text/template">
-    <div class="form-group">
-        <label class="col-md-2 view-label">姓名</label>
-        <div class="col-md-10">
-            {@if data.o.headimgurl!='' && data.o.headimgurl!=null && data.o.headimgurl!=undefined}
-            <img src="\${data.o.photoUrl}" class="cover"/>
-            {@else}
-            <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
-            {@/if}
-            <a>\${data.o.name}</a>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">手机号码</label>
-        <div class="col-md-10">
-            \${data.o.mobile}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">身份证号码</label>
-        <div class="col-md-10">
-            \${data.o.idCard}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">介绍</label>
-        <div class="col-md-10">
-            \${data.o.introduce}
-        </div>
-    </div>
+
+
+
+
+<script id="tpl-select-list" type="text/template">
+
+    <select name="classId" id="classId" style="float:right" onchange="initClasses(this.value)" class="form-control">
+    {@each data as item, index}
+           <option value="\${item.id}">\${item.name}</option>
+    {@/each}
+    </select>
 </script>
 
+<script id="tpl-student" type="text/template">
+        {@each data as item, index}
+        <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="student\${item.id}" data-studentid="\${item.id}" draggable="true" ondragstart="drag(event)">\${item.name}</div>
+        {@/each}
 
+</script>
 
-<script id="tpl-check-group" type="text/template">
-
-    {@each data.list as item, index}
-        {@if item.CODE}
-            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}</button>
-        {@else}
-            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','');">全部</button>
-        {@/if}
-
+<script id="tpl-group" type="text/template">
+    {@each data as item, index}
+        <div class="portlet light" style="width:32.1%;float:Left;margin-right:10px;">
+            <div class="portlet-title tabbable-line">
+                \${item.name} {@if item.list.length==0}<a style="float:right" href="javascript:remove('\${item.id}');">删除</a>{@/if}
+            </div>
+            <div class="portlet-body">
+                <div class="row content"  ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="allowDrop(event)" data-groupid="\${item.id}">
+                {@each item.list as o, index}
+                    <div class="badge badge-pill badge-success student" onmousemove="addMove(this)" onmouseout="delMove(this)"  id="student\${o.id}" data-studentid="\${o.id}" draggable="true" ondragstart="drag(event)">\${o.name}</div>
+                {@/each}
+                </div>
+            </div>
+        </div>
     {@/each}
 
 </script>
-
-<div class="modal fade"  role="dialog" id="modal-upload">
-    <div class="modal-dialog" role="document" style="width: 90%;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close"  authority="false" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                </button>
-                <h4 class="modal-title">Excel导入</h4>
-            </div>
-            <div class="modal-body">
-                <div id="uploader">
-                </div>
-                <div style="margin:5px">
-                    <a href="roadSection.xls" style="color:red">下载模板</a>.<br>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <%--easyui--%>
 <link rel="stylesheet" type="text/css"
@@ -161,25 +144,10 @@ pageEncoding="utf-8"%>
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
 <script type="text/javascript"
         src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
-<%--导出--%>
-<script src="${portalPath}/content/common/tableExport/js-xlsx/xlsx.core.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/FileSaver/FileSaver.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/html2canvas/html2canvas.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/tableExport.min.js?version=${cfg.version}"></script>
-<script src="${portalPath}/content/common/tableExport/export.js?version=${cfg.version}"></script>
 
-<script src="${pageContext.request.contextPath}/content/service/mailList/config.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/mailList/model.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/mailList/controller.js?version=${cfg.version}"></script>
-<script src="${pageContext.request.contextPath}/content/service/mailList/view.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/assets/global/plugins/bootbox/bootbox.min.js" type="text/javascript"></script>
 
-<%--权限管理--%>
-<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
-
+<script type="text/javascript" src="js/act.js"></script>
 </body>
-<style>
-    /* css code area*/
-</style>
+<link rel="stylesheet" type="text/css" href="css/style.css?version=${cfg.version}">
 </html>

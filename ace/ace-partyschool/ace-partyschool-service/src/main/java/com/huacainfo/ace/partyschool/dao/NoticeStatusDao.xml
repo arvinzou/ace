@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.NoticeStatusDao">
+  <resultMap id="BaseResultMap" type="com.huacainfo.ace.partyschool.model.NoticeStatus">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="noticeId" jdbcType="VARCHAR" property="noticeId" />
+    <result column="userId" jdbcType="VARCHAR" property="userId" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, noticeId, userId, status, createDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notice_status
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from notice_status
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.NoticeStatus">
+    insert into notice_status (id, noticeId, userId, 
+      status, createDate)
+    values (#{id,jdbcType=VARCHAR}, #{noticeId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huacainfo.ace.partyschool.model.NoticeStatus">
+    insert into notice_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="noticeId != null">
+        noticeId,
+      </if>
+      <if test="userId != null">
+        userId,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createDate != null">
+        createDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeId != null">
+        #{noticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huacainfo.ace.partyschool.model.NoticeStatus">
+    update notice_status
+    <set>
+      <if test="noticeId != null">
+        noticeId = #{noticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        userId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    from notice_status ns
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.partyschool.model.NoticeStatus">
+    update notice_status
+    set noticeId = #{noticeId,jdbcType=VARCHAR},
+      userId = #{userId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR},
+      createDate = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <sql id="Vo_Column_List">
+    id, noticeId, userId, status, createDate
+  </sql>
+  <sql id="From_Statement">
+    FROM notice_status
+  </sql>
+  <sql id="Where_Condition">
+    where 1 = 1
+    <if test="condition.status !=null and condition.status !=&quot;&quot;">
+      and status = #{condition.status,jdbcType=VARCHAR}
+    </if>
+    <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+      and userId = #{condition.userId,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.NoticeStatusVo">
+
+  </resultMap>
+
+  <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
+    select
+    <include refid="Vo_Column_List"/>
+    <include refid="From_Statement"/>
+    left join
+    <include refid="Where_Condition"/>
+    <choose>
+      <when test="orderBy!=null and orderBy!=&quot;&quot;">
+        ORDER BY ${orderBy}
+      </when>
+      <otherwise>
+        ORDER BY pushDate desc
+      </otherwise>
+    </choose>
+    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+  </select>
+
+  <select id="findMyNoticeList" parameterType="java.lang.String" resultMap="VoResultMap">
+    SELECT
+    id, noticeId, userId, status, createDate
+    FROM notice_status ns
+    WHERE ns.userId=#{userId,jdbcType=VARCHAR}
+      and ns.status='1'
+  </select>
+
+  <update id="updateStatus" parameterType="com.huacainfo.ace.partyschool.model.NoticeStatus">
+    update notice_status
+    set status = '2'
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

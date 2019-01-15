@@ -1,9 +1,19 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.view.Tree;
 import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.web.controller.BaseController;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.partyschool.model.MailList;
+import com.huacainfo.ace.partyschool.service.MailListService;
 import com.huacainfo.ace.partyschool.vo.MailListContent;
+import com.huacainfo.ace.partyschool.vo.MailListQVo;
+import com.huacainfo.ace.partyschool.vo.MailListVo;
+import com.huacainfo.ace.portal.vo.MongoFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +21,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.partyschool.model.MailList;
-import com.huacainfo.ace.partyschool.service.MailListService;
-import com.huacainfo.ace.partyschool.vo.MailListVo;
-import com.huacainfo.ace.partyschool.vo.MailListQVo;
 import org.springframework.web.multipart.MultipartFile;
-import com.huacainfo.ace.portal.vo.MongoFile;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/mailList")
@@ -132,9 +129,8 @@ public class MailListController extends BisBaseController {
      */
     @RequestMapping(value = "/deleteMailListByMailListId")
     @ResponseBody
-    public MessageResponse deleteMailListByMailListId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+    public MessageResponse deleteMailListByMailListId(String id) throws Exception {
+
         return this.mailListService.deleteMailListByMailListId(id, this.getCurUserProp());
     }
 
@@ -311,7 +307,7 @@ public class MailListController extends BisBaseController {
      */
     @RequestMapping(value = "/updateClassesByIds")
     @ResponseBody
-    public MessageResponse updateClassesByIds(String classId, String[] ids) {
+    public MessageResponse updateClassesByIds(String classId, String ids) {
         return this.mailListService.updateClassesByIds(classId, ids);
     }
 
@@ -328,5 +324,19 @@ public class MailListController extends BisBaseController {
     @ResponseBody
     public ListResult<Map<String, Object>> getClassList() {
         return this.mailListService.getClassList(this.getCurUserProp());
+    }
+    /**
+     * @throws
+     * @Title:getTreeListByClassId
+     * @Description: TODO(根据班级主键加载通讯录)
+     * @param: @return
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2019-01-12
+     */
+    @RequestMapping(value = "/getTreeListByClassId")
+    @ResponseBody
+    public List<Tree> getTreeListByClassId(String classId){
+        return this.mailListService.getTreeListByClassId(classId);
     }
 }

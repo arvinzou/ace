@@ -1,6 +1,5 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.partyschool.dao.ApiDao;
 import com.huacainfo.ace.partyschool.model.AttResultVo;
@@ -89,29 +88,25 @@ public class ApiServiceImpl implements ApiService {
      */
     @Override
     public int findStudentFinCount(String lCardNo, String year) {
+        String nowDateTime = DateUtil.getNow();
+        String nowYear = nowDateTime.substring(0, 4);
+        String month = nowDateTime.substring(5, 7);
+        month = year.equals(nowYear) ? month : "12";
+        int iMonth = Integer.parseInt(month);
         String tbNameTmpl = "ATT_WATER_INFO_";
-        String iMonth;
-        if (StringUtil.isEmpty(year)) {
-            String nowDateTime = DateUtil.getNow();
-            year = nowDateTime.substring(0, 4);
-            iMonth = nowDateTime.substring(5, 7);
-        } else {
-            iMonth = "12";
-        }
-        String tbName;
+        String firstTbName = tbNameTmpl + year + "_" + month;
         //执行语句
         StringBuilder sql = new StringBuilder();
         sql.append("select \n" +
                 "sum(A.iCount) accCount\n" +
                 "from (")
                 .append("  select count(1) as iCount\n" +
-                        "  from ATT_WATER_INFO_2018_12 t\n" +
-                        "  left join TB_CUSTOMER_INFO c\n" +
-                        "  on t.account_id = c.customerid\n" +
+                        "  from " + firstTbName + " t\n" +
+                        "  left join TB_CUSTOMER_INFO c on t.account_id = c.customerid\n" +
                         "  where c.customerdept = '00010003'\n" +
                         "  and c.customerindustryno = '" + lCardNo + "'");
-
-        for (int i = 1; i < Integer.parseInt(iMonth); i++) {
+        String tbName;
+        for (int i = 1; i < iMonth; i++) {
             if (i < 10) {
                 tbName = tbNameTmpl + year + "_0" + i;
             } else {
