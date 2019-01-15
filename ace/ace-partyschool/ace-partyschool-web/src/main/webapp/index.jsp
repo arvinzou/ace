@@ -26,69 +26,38 @@ pageEncoding="utf-8" %>
 
 <div class="row">
     <div class="col-xs-12 col-sm-6">
-        <!-- #section:custom/widget-box -->
-        <div class="widget-box transparent background-white padding1">
-            <div class="widget-header">
-                <h4 class="widget-title lighter smaller">
-                    <i class="ace-icon glyphicon glyphicon-th-large green"></i>系统公告
-                </h4>
-
-                <div class="widget-toolbar no-border">
-
-                </div>
-            </div>
-
-            <div class="widget-body" style="min-height:250px">
-                <div class="widget-main padding-4">
-                    <table width="100%">
-
-
+        <div class="portlet light">
+            <div class="portlet-title">发布通知</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px">
+                    <table width="100%;">
                         <tbody id="notice-list-grid">
 
                         </tbody>
                     </table>
-                </div>
-                <!-- /.widget-main -->
-            </div>
-            <!-- /.widget-body -->
-        </div>
-        <!-- /.widget-box -->
 
-        <!-- /section:custom/widget-box -->
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <div class="col-xs-12 col-sm-6">
-        <!-- #section:custom/widget-box -->
-        <div class="widget-box transparent background-white padding1">
-            <div class="widget-header">
-                <h4 class="widget-title lighter smaller">
-                    <i class="ace-icon glyphicon glyphicon-th-large green"></i>业务公告
-                </h4>
-
-                <div class="widget-toolbar no-border">
-
-                </div>
-            </div>
-
-            <div class="widget-body" style="min-height:250px">
-                <div class="widget-main padding-4">
+        <div class="portlet light">
+            <div class="portlet-title">学校公告</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px">
                     <table width="100%;">
-
-
                         <tbody id="notice-list-grid-area">
 
                         </tbody>
                     </table>
-                </div>
-                <!-- /.widget-main -->
-            </div>
-            <!-- /.widget-body -->
-        </div>
-        <!-- /.widget-box -->
 
-        <!-- /section:custom/widget-box -->
+                </div>
+
+            </div>
+        </div>
     </div>
-    <!-- /.span -->
 </div>
 
 
@@ -326,7 +295,21 @@ function initNoticeTopList2() {
 			});
 }
 </script>
+<style>
+    .portlet.light>.portlet-title {
+     border-bottom: 1px solid #eef1f5;
+}
 
+.portlet.light>.portlet-title {
+    padding: 0;
+    min-height: 25px;
+}
+.portlet.light .portlet-body {
+    padding-top: 1px;
+
+ min-height: 250px;
+}
+</style>
 
 </body>
 </html>
