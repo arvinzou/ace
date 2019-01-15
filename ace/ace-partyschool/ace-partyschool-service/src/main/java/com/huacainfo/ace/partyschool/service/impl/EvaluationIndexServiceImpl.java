@@ -50,13 +50,10 @@ public class EvaluationIndexServiceImpl implements EvaluationIndexService {
      * @version: 2019-01-04
      */
     @Override
-    public PageResult
-            <EvaluationIndexVo> findEvaluationIndexList(EvaluationIndexQVo condition, int start,
+    public PageResult<EvaluationIndexVo> findEvaluationIndexList(EvaluationIndexQVo condition, int start,
                                                         int limit, String orderBy) throws Exception {
-        PageResult
-                <EvaluationIndexVo> rst = new PageResult<>();
-        List
-                <EvaluationIndexVo> list = this.evaluationIndexDao.findList(condition,
+        PageResult<EvaluationIndexVo> rst = new PageResult<>();
+        List<EvaluationIndexVo> list = this.evaluationIndexDao.findList(condition,
                 start, limit, orderBy);
         rst.setRows(list);
         if (start <= 1) {

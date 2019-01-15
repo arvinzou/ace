@@ -1,12 +1,5 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
@@ -15,17 +8,23 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.EvaluationIndex;
 import com.huacainfo.ace.partyschool.service.EvaluationIndexService;
-import com.huacainfo.ace.partyschool.vo.EvaluationIndexVo;
 import com.huacainfo.ace.partyschool.vo.EvaluationIndexQVo;
+import com.huacainfo.ace.partyschool.vo.EvaluationIndexVo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/evaluationIndex")
+@RequestMapping("www/evaluationIndex")
 /**
  * @author: 王恩
  * @version: 2019-01-04
  * @Description: TODO(评测选项)
  */
-public class EvaluationIndexController extends BisBaseController {
+public class WEvaluationIndexController extends BisBaseController {
 
 
     private static final long serialVersionUID = 1L;
@@ -48,8 +47,7 @@ public class EvaluationIndexController extends BisBaseController {
      */
     @RequestMapping(value = "/findEvaluationIndexList")
     @ResponseBody
-    public PageResult
-            <EvaluationIndexVo> findEvaluationIndexList(EvaluationIndexQVo condition,
+    public PageResult<EvaluationIndexVo> findEvaluationIndexList(EvaluationIndexQVo condition,
                                                         PageParamNoChangeSord page) throws Exception {
 
         PageResult<EvaluationIndexVo> rst = this.evaluationIndexService

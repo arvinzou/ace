@@ -18,11 +18,20 @@ public class ClassScheduleQVo extends ClassSchedule {
 
     private List<String> classList;
 
+    private String erUserId;
+
     /**
      * 判断用
      */
     private String learned;
 
+    public String getErUserId() {
+        return erUserId;
+    }
+
+    public void setErUserId(String erUserId) {
+        this.erUserId = erUserId;
+    }
 
     public List<String> getClassList() {
         return classList;

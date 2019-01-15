@@ -4,17 +4,65 @@ window.onload = function () {
     initPage();
     initEvents();
     initSelect();
+    $(".js-example-basic-single2").on('change',teacherSearch);
+}
+
+
+function teacherSearch() {
+    params['cTeacherId'] = $("select[name=teacherId]").val();
+    getPageList();
 }
 
 
 
 
 function initSelect() {
+    $(".js-example-basic-single1").select2({
+        ajax: {
+            url: contextPath + '/classes/findClassesList',
+            dataType: 'json',
+            delay: 250,
+            language: "zh-CN",
+            data: function (params) {
+                return {
+                    name: params.term, // search term
+                    page: params.page
+                };
+            },
+            processResults: function (data, params) {
+                params.page = params.page || 1;
+                var datas = $.map(data.rows, function (obj) {
+                    obj.text = obj.text || obj.name; // replace name with the property used for the text
+                    return obj;
+                });
+                datas = $.map(datas, function (obj) {
+                    obj.id = obj.id; // replace name with the property used for the text
+                    return obj;
+                });
+                return {
+                    results: datas,
+                    pagination: {
+                        more: (params.page * 30) < data.total_count
+                    },
+                    paginate: {
+                        more: true
+                    }
+                };
+            },
+            cache: true
+        },
+        placeholder: '选择班级',
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+    });
+
     $(".js-example-basic-single2").select2({
         ajax: {
             url: contextPath + '/teacher/findTeacherList',
             dataType: 'json',
             delay: 250,
+            language: "zh-CN",
             data: function (params) {
                 return {
                     name: params.term, // search term
@@ -101,7 +149,7 @@ function setParams(key, value) {
 /*课程表管理加载表格数据*/
 function getPageList() {
     var url = contextPath + "/classSchedule/LearnedCourses";
-    params['name'] = $("input[name=keyword]").val();
+    params['cName'] = $("input[name=keyword]").val();
     startLoad();
     $.getJSON(url, params, function (rst) {
         stopLoad();

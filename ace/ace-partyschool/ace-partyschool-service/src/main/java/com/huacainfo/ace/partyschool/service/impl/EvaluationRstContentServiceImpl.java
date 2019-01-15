@@ -80,6 +80,7 @@ public class EvaluationRstContentServiceImpl implements EvaluationRstContentServ
     @Override
     public MessageResponse insertEvaluationRstContent(EvaluationRstContent o, UserProp userProp) throws Exception {
 
+        o.setId(GUIDUtil.getGUID());
         if (CommonUtils.isBlank(o.getId())) {
             return new MessageResponse(1, "主键不能为空！");
         }
@@ -89,17 +90,7 @@ public class EvaluationRstContentServiceImpl implements EvaluationRstContentServ
         if (CommonUtils.isBlank(o.getContent())) {
             return new MessageResponse(1, "建议内容不能为空！");
         }
-        if (CommonUtils.isBlank(o.getUserId())) {
-            return new MessageResponse(1, "评测人不能为空！");
-        }
-
-
-        int temp = this.evaluationRstContentDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "测评结果管理名称重复！");
-        }
-
-        o.setId(GUIDUtil.getGUID());
+        o.setUserId(userProp.getUserId());
         o.setCreateDate(new Date());
         this.evaluationRstContentDao.insert(o);
         this.dataBaseLogService.log("添加测评结果管理", "测评结果管理", "",
@@ -156,6 +147,12 @@ public class EvaluationRstContentServiceImpl implements EvaluationRstContentServ
         SingleResult
                 <EvaluationRstContentVo> rst = new SingleResult<>();
         rst.setValue(this.evaluationRstContentDao.selectVoByPrimaryKey(id));
+        return rst;
+    }
+    @Override
+    public SingleResult<EvaluationRstContent> selectEvaluationRstContent(EvaluationRstContent o) throws Exception {
+        SingleResult<EvaluationRstContent> rst = new SingleResult<>();
+        rst.setValue(this.evaluationRstContentDao.selectEvaluationRstContent(o));
         return rst;
     }
 

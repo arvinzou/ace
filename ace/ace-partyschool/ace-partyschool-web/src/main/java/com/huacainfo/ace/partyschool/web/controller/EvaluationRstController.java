@@ -52,8 +52,7 @@ public class EvaluationRstController extends BisBaseController {
      */
     @RequestMapping(value = "/findEvaluationRstList")
     @ResponseBody
-    public PageResult<EvaluationRstVo> findEvaluationRstList(EvaluationRstQVo condition,
-                                                             PageParamNoChangeSord page) throws Exception {
+    public PageResult<EvaluationRstVo> findEvaluationRstList(EvaluationRstQVo condition, PageParamNoChangeSord page) throws Exception {
 
         PageResult<EvaluationRstVo> rst = this.evaluationRstService
                 .findEvaluationRstList(condition, page.getStart(), page.getLimit(), page.getOrderBy());

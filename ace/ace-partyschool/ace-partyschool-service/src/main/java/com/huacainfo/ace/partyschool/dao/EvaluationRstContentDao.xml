@@ -24,6 +24,16 @@
     from evaluation_rst_content
     where id = #{id,jdbcType=VARCHAR}
   </select>
+
+  <select id="selectEvaluationRstContent" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from evaluation_rst_content
+    where userId =  #{condition.userId,jdbcType=VARCHAR}
+    and classScheduleId = #{condition.classScheduleId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from evaluation_rst_content
     where id = #{id,jdbcType=VARCHAR}

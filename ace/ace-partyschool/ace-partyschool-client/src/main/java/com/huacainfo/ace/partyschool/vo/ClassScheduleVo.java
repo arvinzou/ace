@@ -12,6 +12,35 @@ public class ClassScheduleVo extends ClassSchedule {
 
     private Teacher teacher;
 
+    private int userNum;
+
+    public int getStudentNum() {
+        return studentNum;
+    }
+
+    public void setStudentNum(int studentNum) {
+        this.studentNum = studentNum;
+    }
+
+    private int studentNum;
+
+    private int averageScore;
+
+    public int getUserNum() {
+        return userNum;
+    }
+
+    public void setUserNum(int userNum) {
+        this.userNum = userNum;
+    }
+
+    public int getAverageScore() {
+        return averageScore;
+    }
+
+    public void setAverageScore(int averageScore) {
+        this.averageScore = averageScore;
+    }
 
     public Teacher getTeacher() {
         return teacher;

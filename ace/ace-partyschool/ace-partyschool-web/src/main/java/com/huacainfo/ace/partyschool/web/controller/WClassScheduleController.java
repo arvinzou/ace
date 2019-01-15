@@ -11,6 +11,8 @@ import com.huacainfo.ace.partyschool.model.ClassSchedule;
 import com.huacainfo.ace.partyschool.service.ClassScheduleService;
 import com.huacainfo.ace.partyschool.vo.ClassScheduleQVo;
 import com.huacainfo.ace.partyschool.vo.ClassScheduleVo;
+import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
+import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +54,37 @@ public class WClassScheduleController extends BisBaseController {
                                                 PageParamNoChangeSord page) throws Exception {
         return this.classScheduleService
                 .MyClassSchedule(condition, page.getStart(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
+    }
+
+
+    @RequestMapping(value = "/notDoneTestList")
+    @ResponseBody
+    public ResultResponse notDoneTestList(ClassScheduleQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.classScheduleService.notDoneTestList(condition, page.getStart(), page.getLimit(), page.getOrderBy(), this.getCurUserProp());
+        return rst;
+    }
+
+
+    @RequestMapping(value = "/DoneTestList")
+    @ResponseBody
+    public ResultResponse doneTestList(ClassScheduleQVo condition, PageParamNoChangeSord page) throws Exception {
+        ResultResponse rst = this.classScheduleService.doneTestList(condition, page.getStart(), page.getLimit(), page.getOrderBy(),this.getCurUserProp());
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:selectClassScheduleByPrimaryKey
+     * @Description: TODO(获取课程表管理)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: SingleResult<ClassSchedule>
+     * @author: 王恩
+     * @version: 2019-01-06
+     */
+    @RequestMapping(value = "/selectClassScheduleByPrimaryKey")
+    @ResponseBody
+    public SingleResult<ClassScheduleVo> selectClassScheduleByPrimaryKey(String id) throws Exception {
+        return this.classScheduleService.selectClassScheduleByPrimaryKey(id);
     }
 }

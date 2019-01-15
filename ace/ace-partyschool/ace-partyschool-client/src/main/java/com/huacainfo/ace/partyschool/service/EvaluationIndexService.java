@@ -28,8 +28,7 @@ public interface EvaluationIndexService {
      * @author: 王恩
      * @version: 2019-01-04
      */
-    PageResult
-            <EvaluationIndexVo> findEvaluationIndexList(EvaluationIndexQVo condition,
+    PageResult<EvaluationIndexVo> findEvaluationIndexList(EvaluationIndexQVo condition,
                                                         int start, int limit, String orderBy) throws Exception;
 
     /**

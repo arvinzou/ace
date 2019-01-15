@@ -6,9 +6,11 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.EvaluationRst;
+import com.huacainfo.ace.partyschool.model.EvaluationRstContent;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstVo;
 import com.huacainfo.ace.partyschool.vo.EvaluationRstQVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,8 +36,7 @@ public interface EvaluationRstService {
     PageResult<EvaluationRstVo> findEvaluationRstList(EvaluationRstQVo condition,
                                                       int start, int limit, String orderBy) throws Exception;
 
-    PageResult<EvaluationRstVo> findEvaluationRstListVo(EvaluationRstQVo condition,
-                                                      int start, int limit, String orderBy) throws Exception;
+    PageResult<EvaluationRstVo> findEvaluationRstListVo(EvaluationRstQVo condition, int start, int limit, String orderBy) throws Exception;
 
     /**
      * @throws
@@ -49,6 +50,8 @@ public interface EvaluationRstService {
      * @version: 2019-01-08
      */
     MessageResponse insertEvaluationRst(EvaluationRst obj, UserProp userProp) throws Exception;
+
+    ResultResponse insertEvaluationRstList(List<EvaluationRst> list, EvaluationRstContent obj, UserProp userProp) throws Exception;
 
     /**
      * @throws
