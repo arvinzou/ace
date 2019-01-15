@@ -8,14 +8,14 @@ public class TraAccQVo extends TraAcc {
 
     private String roadManName;
 
-    private String startNum;
+    private Integer startNum;
 
-    private String endNum;
+    private Integer endNum;
 
 
-    private Integer startDate;
+    private String startDate;
 
-    private Integer endDate;
+    private String endDate;
 
     private String keyword;
 
@@ -38,6 +38,18 @@ public class TraAccQVo extends TraAcc {
      */
     private int upInjuriesNum;//受伤人数区间开始
     private int downInjuriesNum;//受伤人数区间结束
+    /**
+     * 道路/路长/路段名称
+     */
+    private String roadName;
+
+    public String getRoadName() {
+        return roadName;
+    }
+
+    public void setRoadName(String roadName) {
+        this.roadName = roadName;
+    }
 
     public int getUpDeathNum() {
         return upDeathNum;
@@ -95,35 +107,35 @@ public class TraAccQVo extends TraAcc {
         this.roadManName = roadManName;
     }
 
-    public String getStartNum() {
+    public Integer getStartNum() {
         return startNum;
     }
 
-    public void setStartNum(String startNum) {
+    public void setStartNum(Integer startNum) {
         this.startNum = startNum;
     }
 
-    public String getEndNum() {
+    public Integer getEndNum() {
         return endNum;
     }
 
-    public void setEndNum(String endNum) {
+    public void setEndNum(Integer endNum) {
         this.endNum = endNum;
     }
 
-    public Integer getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Integer startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public Integer getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Integer endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

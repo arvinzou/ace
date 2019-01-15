@@ -249,3 +249,20 @@ body{
 table.dataTable.no-footer {
     border: 1px solid #e7ecf1;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+}
+
+.btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus, .open > .btn-primary.dropdown-toggle:hover, .open > .btn-primary.dropdown-toggle:focus, .open > .btn-primary.dropdown-toggle.focus {
+    color: #fff;
+    background-color: blue;
+    border-color: blue;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: blue;
+    border-color: blue;
+}

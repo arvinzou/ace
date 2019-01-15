@@ -12,8 +12,8 @@
 	<body>
 		<div class="index">
 			<div class="box br">
-				<div class="header"><img src="img/default_header.png"/></div>
-				<div class="username"><span>许黎明</span></div>
+				<div class="header" onclick="showPersonInfo();"><img src="img/default_header.png"/></div>
+				<div class="username" onclick="showPersonInfo();"><span>许黎明</span></div>
 				<div class="show-card" onclick="toConsumption();">
 					<span>查询一卡通</span>
 					<img src="img/icon_select.png" />

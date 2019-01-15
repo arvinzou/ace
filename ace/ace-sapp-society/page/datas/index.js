@@ -47,6 +47,14 @@ Page({
       var year = nowDate.getFullYear();
       var month = nowDate.getMonth();
       var lastDay = null;
+        if (month < 10) {
+            if (month == 0) {
+                month = 12;
+                year = year - 1;
+            }else{
+                month = "0" + month;
+            }
+        }
       switch(month){
           case 1: lastDay = 31; break;
           case 2: lastDay = 28; break;
@@ -60,9 +68,6 @@ Page({
           case 10: lastDay = 31; break;
           case 11: lastDay = 30; break;
           case 12: lastDay = 31; break;
-      }
-      if(month < 10){
-          month = "0"+month;
       }
     
       var begin_date = year+""+month+"01";
