@@ -68,3 +68,9 @@ body{
 .bind{
 	color: #ADB0BB;
 }
+.bind-btn{
+	border: none;
+	background: none;
+	color: #54ADF2;
+	font-size: 0.4rem;
+}
