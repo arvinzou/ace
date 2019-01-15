@@ -141,11 +141,12 @@
     id, noticeId, userId, status, createDate
     FROM notice_status ns
     WHERE ns.userId=#{userId,jdbcType=VARCHAR}
+      and ns.status='1'
   </select>
 
   <update id="updateStatus" parameterType="com.huacainfo.ace.partyschool.model.NoticeStatus">
     update notice_status
-    set status = "2"
+    set status = '2'
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
