@@ -24,6 +24,41 @@
 
 </div>
 
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <div class="portlet light">
+            <div class="portlet-title">发布通知</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px">
+                    <table width="100%;">
+                        <tbody id="notice-list-grid">
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+        <div class="portlet light">
+            <div class="portlet-title">内部公告</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px">
+                    <table width="100%;">
+                        <tbody id="notice-list-grid-area">
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 
@@ -47,12 +82,12 @@
         <div class="col-md-3">
             <!-- BEGIN WIDGET THUMB -->
             <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">管辖道路</h4>
+                <h4 class="widget-thumb-heading">登记事故</h4>
                 <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-green fa fa-road"></i>
+                    <i class="widget-thumb-icon bg-purple fa fa-location-arrow"></i>
                     <div class="widget-thumb-body">
                         <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.road}">\${data.road}</span>
+                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.traAcc}">\${data.traAcc}</span>
                     </div>
                 </div>
             </div>
@@ -92,24 +127,7 @@
 
     </div>
 
-    <div class="row widget-row">
-        <div class="col-md-3">
-            <!-- BEGIN WIDGET THUMB -->
-            <div class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20 ">
-                <h4 class="widget-thumb-heading">登记事故</h4>
-                <div class="widget-thumb-wrap">
-                    <i class="widget-thumb-icon bg-purple fa fa-location-arrow"></i>
-                    <div class="widget-thumb-body">
-                        <span class="widget-thumb-subtitle">累计</span>
-                        <span class="widget-thumb-body-stat" data-counter="counterup" data-value="\${data.traAcc}">\${data.traAcc}</span>
-                    </div>
-                </div>
-            </div>
-            <!-- END WIDGET THUMB -->
-        </div>
 
-
-    </div>
 </script>
 
 
@@ -155,10 +173,142 @@
                 render($(".page-content-inner"), data, tplId)
             }
         });
+        initNoticeTopList1();
+        initNoticeTopList2();
     }
 
-</script>
+function initNoticeTopList1() {
 
+			$.ajax({
+						type : "post",
+						url : portalPath+"/notice/findListTop.do?category=1",
+						data : {},
+						beforeSend : function(XMLHttpRequest) {
+						},
+						success : function(rst, textStatus) {
+
+							if (rst) {
+								var html = new Array();
+								var k=0;
+								$(rst.value).each(function(i,o){
+									o.url=portalPath+"/dynamic/portal/notice/preview.jsp?noticeId="+o.noticeId+"&taskId=0"
+									k++;
+									html.push('<tr>');
+									html.push('<td>');
+									html.push('<span">■</span> ');
+
+									html.push('</td>');
+									html.push('<td align="left">');
+
+
+
+
+									html.push('<a href="'+o.url+'" target="_blank">');
+
+									html.push(o.title);
+
+
+									html.push('</a>');
+
+									if(o.top=='1'){
+										html.push('  <span class="badge badge-yellow">置顶</span> ');
+
+									}
+									html.push('</td>');
+									html.push('<td width="150px" align="right">');
+									html.push(o.createTime);
+									html.push('</td>');
+
+
+									html.push('</tr>');
+
+									//console.log(rst.list[i]);
+								});
+								$('#notice-list-grid').html(html.join(''));
+							}
+						},
+						complete : function(XMLHttpRequest, textStatus) {
+
+						},
+						error : function() {
+
+						}
+					});
+		}
+function initNoticeTopList2() {
+
+	$.ajax({
+				type : "post",
+				url : portalPath+"/notice/findListTop.do?category=2",
+				data : {},
+				beforeSend : function(XMLHttpRequest) {
+				},
+				success : function(rst, textStatus) {
+
+					if (rst) {
+						var html = new Array();
+						var k=0;
+						$(rst.value).each(function(i,o){
+                        									o.url=portalPath+"/dynamic/portal/notice/preview.jsp?noticeId="+o.noticeId+"&taskId=0"
+                        									k++;
+                        									html.push('<tr>');
+                        									html.push('<td>');
+                        									html.push('<span">■</span> ');
+
+                        									html.push('</td>');
+                        									html.push('<td align="left">');
+
+
+
+
+                        									html.push('<a href="'+o.url+'" target="_blank">');
+
+                        									html.push(o.title);
+
+
+                        									html.push('</a>');
+
+                        									if(o.top=='1'){
+                        										html.push('  <span class="badge badge-yellow">置顶</span> ');
+
+                        									}
+                        									html.push('</td>');
+                        									html.push('<td width="150px" align="right">');
+                        									html.push(o.createTime);
+                        									html.push('</td>');
+
+
+                        									html.push('</tr>');
+
+                        									//console.log(rst.list[i]);
+                        								});
+						$('#notice-list-grid-area').html(html.join(''));
+					}
+				},
+				complete : function(XMLHttpRequest, textStatus) {
+
+				},
+				error : function() {
+
+				}
+			});
+}
+</script>
+<style>
+    .portlet.light>.portlet-title {
+     border-bottom: 1px solid #eef1f5;
+}
+
+.portlet.light>.portlet-title {
+    padding: 0;
+    min-height: 25px;
+}
+.portlet.light .portlet-body {
+    padding-top: 1px;
+
+ min-height: 250px;
+}
+</style>
 
 </body>
 </html>

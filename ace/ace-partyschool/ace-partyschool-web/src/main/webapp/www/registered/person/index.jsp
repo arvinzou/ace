@@ -32,7 +32,7 @@
 		</div>
 		<div class="menu">
 			<div class="row">
-				<div class="item mr">
+				<div class="item mr" onclick="toTest();">
 					<div class="item-left">
 						<img src="img/icon-test.png" class="menu-icon"/>
 					</div>
