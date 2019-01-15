@@ -15,8 +15,8 @@ pageEncoding="utf-8"%>
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light" style="background:#eff3f8">
-    <div class="portlet-body">
+<div  style="background:#eff3f8">
+
 
 
         <div class="row">
@@ -91,7 +91,6 @@ pageEncoding="utf-8"%>
 
 
 
-    </div>
 </div>
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
@@ -122,7 +121,7 @@ pageEncoding="utf-8"%>
     {@each data as item, index}
         <div class="portlet light" style="width:32.1%;float:Left;margin-right:10px;">
             <div class="portlet-title tabbable-line">
-                \${item.name} <a style="float:right" href="javascript:remove('\${item.id}');">删除</a>
+                \${item.name} {@if item.list.length==0}<a style="float:right" href="javascript:remove('\${item.id}');">删除</a>{@/if}
             </div>
             <div class="portlet-body">
                 <div class="row content"  ondrop="drop(event)" ondragover="allowDrop(event)" ondragenter="allowDrop(event)" data-groupid="\${item.id}">
