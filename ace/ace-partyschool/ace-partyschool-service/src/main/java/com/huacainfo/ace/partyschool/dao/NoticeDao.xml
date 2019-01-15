@@ -81,6 +81,19 @@
         where n.id = #{id,jdbcType=VARCHAR}
     </select>
 
+    <select id="findMyNoticeList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        <include refid="Vo_Column_List"/>
+        from notice n
+        where n.id in
+        (select
+        noticeId
+        from notice_status ns
+        where
+        userId=#{userId,jdbcType=VARCHAR}
+        )
+    </select>
+
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
@@ -102,6 +115,7 @@
         from notice n
         LEFT JOIN notice_status ns ON n.id = ns.noticeId
         WHERE ns.`status`=1
+        and ns.userId=#{userId,jdbcType=VARCHAR}
     </select>
 
     <select id="findCount" resultType="int">

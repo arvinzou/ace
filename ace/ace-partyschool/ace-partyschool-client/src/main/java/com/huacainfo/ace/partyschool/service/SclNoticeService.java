@@ -32,8 +32,7 @@ public interface SclNoticeService {
     PageResult<NoticeVo> findNoticeList(NoticeQVo condition,
                                         int start, int limit, String orderBy) throws Exception;
 
-    ResultResponse findNoticeLists(NoticeQVo condition,
-                                   int start, int limit, String orderBy,UserProp userProp) throws Exception;
+    ResultResponse findNoticeLists(UserProp userProp) throws Exception;
     /**
      * @throws
      * @Title:insertNotice

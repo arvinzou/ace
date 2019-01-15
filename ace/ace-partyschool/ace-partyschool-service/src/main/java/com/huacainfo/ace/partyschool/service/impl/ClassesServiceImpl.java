@@ -208,7 +208,7 @@ public class ClassesServiceImpl implements ClassesService {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             map.put("list", dao.getClassesInfo(id));
-            map.put("total", this.studentDao.findStudentCount());
+            map.put("count", this.studentDao.findStudentCount());
             }
         catch (Exception e){
             session.close();

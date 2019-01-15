@@ -62,7 +62,7 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public PageResult<NoticeVo> findNoticeList(NoticeQVo condition, int start,
-                                               int limit, String orderBy) throws Exception {
+                                                 int limit, String orderBy) throws Exception {
         PageResult<NoticeVo> rst = new PageResult<>();
         List<NoticeVo> list = this.noticeDao.findList(condition,
                 start, limit, orderBy);
@@ -75,22 +75,13 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findNoticeLists(NoticeQVo condition,int start,
-                                          int limit, String orderBy,UserProp userProp) throws Exception {
-        List<NoticeStatusVo> noticeStatusVo;
-        noticeStatusVo=this.noticeStatusDao.findMyNoticeList(userProp.getUserId());
-        List<NoticeVo> noticeVo=new ArrayList();
-        List list = new ArrayList();
+    public ResultResponse findNoticeLists(UserProp userProp) throws Exception {
+        List<NoticeVo> noticeVo=new ArrayList<>();
         Map<String, Object> map = new HashMap<String, Object>();
-        for(NoticeStatusVo o :noticeStatusVo ) {
-            condition.setId(o.getNoticeId());
-            noticeVo=this.noticeDao.findList(condition,
-                    start, limit, orderBy);
-            list.add(noticeVo);
-        }
-        map.put("list",list);
-        map.put("total", this.noticeDao.findUnreadCount());
-        return new ResultResponse(0, "班级须知获取完成！", map);
+        noticeVo=this.noticeDao.findMyNoticeList(userProp.getUserId());
+            map.put("list", noticeVo);
+            map.put("count", this.noticeDao.findUnreadCount(userProp.getUserId()));
+        return new ResultResponse(0, "通知公告获取完成！", map);
     }
 
     /**
