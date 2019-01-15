@@ -1,8 +1,8 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
 import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.service.AnalysisService;
+import com.huacainfo.ace.partyschool.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,10 @@ public class AnalysisController extends BisBaseController {
     private AnalysisService analysisService;
 
 
+    @Autowired
+    private StudentService studentService;
+
+
 
     @RequestMapping(value = "/query")
     @ResponseBody
@@ -28,9 +32,8 @@ public class AnalysisController extends BisBaseController {
             String reportId)
             throws Exception {
         Map<String, Object> condition = this.getParams();
-        if (CommonUtils.isBlank(condition.get("deptId"))) {
-            condition.put("deptId", this.getCurUserProp().getCorpId());
-        }
+        String classId=studentService.getClassId(this.getCurUserProp()).getValue();
+        condition.put("classId", classId);
         this.logger.info("condition ->{}", condition);
         return analysisService.query(condition, reportId);
     }

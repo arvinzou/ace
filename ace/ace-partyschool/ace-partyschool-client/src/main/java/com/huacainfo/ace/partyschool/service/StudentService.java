@@ -119,4 +119,11 @@ public interface StudentService {
      * @return MessageResponse
      */
     MessageResponse recover(String id, UserProp curUserProp) throws Exception;
+    /**
+     *
+     *
+     * @param userProp
+     * @return SingleResult<String>
+     */
+    SingleResult<String> getClassId(UserProp userProp);
 }

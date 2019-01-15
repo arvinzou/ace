@@ -3,67 +3,46 @@
 <mapper namespace="com.huacainfo.ace.partyschool.dao.report.Portal">
     <select id="query" resultType="map">
         SELECT
-        'person' id,
-        count(1) value
+        'eva' id,
+        count(DISTINCT(t.classScheduleId))
+        VALUE
         FROM
-        portal.users t
-        WHERE
-        t.user_level='1' and t.stauts='1' and t.cur_syid ='society'
-        union all
+        evaluation_rst_content t
+        <if test='classId !=null'>
+            inner join student a on t.userId=a.id
+            WHERE
+            a.classId=#{classId}
+        </if>
+
+        UNION ALL
         SELECT
-        'org' id,
-        count(1) value
+        'teacher' id,
+        count(1)
+        VALUE
         FROM
-        society_org_info t
+        teacher t
         WHERE
-        t.status='3'
-        union all
+        t. STATUS = '1'
+        UNION ALL
         SELECT
-        'activityAll' id,
-        count(1) value
+        'student' id,
+        count(1)
+        VALUE
         FROM
-        activity t
-        WHERE
-        t.status='3'
-        union all
+        student t  WHERE t.STATUS = '1'
+        <if test='classId !=null'>
+            and t.classId=#{classId}
+        </if>
+        UNION ALL
         SELECT
-        'activityAudit' id,
-        count(1) value
+        'notice' id,
+        count(1)
+        VALUE
         FROM
-        activity t
-        WHERE
-        t.status='2'
-        union all
-        SELECT
-        'behavior' id,
-        count(1) value
-        FROM
-        behavior t
-        WHERE
-        t.status='3'
-        union all
-        SELECT
-        'subjectIdea' id,
-        count(1) value
-        FROM
-        subject_idea t
-        WHERE
-        t.status='3'
-        union all
-        SELECT
-        'live' id,
-        count(1) value
-        FROM
-        live.live t
-        WHERE
-        t.status='2'
-        union all
-        SELECT
-        'circle' id,
-        count(1) value
-        FROM
-        circle t
-        WHERE
-        t.status='2'
+        notice t
+        WHERE t.STATUS = '1'
+        <if test='classId !=null'>
+            and t.classesId=#{classId}
+        </if>
     </select>
 </mapper>
