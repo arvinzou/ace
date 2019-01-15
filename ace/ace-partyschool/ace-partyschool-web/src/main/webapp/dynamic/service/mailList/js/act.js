@@ -10,7 +10,12 @@ function initPage(){
     bootbox.setDefaults("locale","zh_CN");
             bootbox.prompt("请输入组名称", function(o){
                if(o){
-                   insertMailList({name:o,pid:$("#classId").val()})
+                    if(o.length<=10){
+                        insertMailList({name:o,pid:$("#classId").val()})
+                    }else{
+                        alert("分组名称长度必须10字符之内。");
+                    }
+
                }
             });
 
