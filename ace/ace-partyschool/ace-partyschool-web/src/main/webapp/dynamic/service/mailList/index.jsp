@@ -15,8 +15,8 @@ pageEncoding="utf-8"%>
 <body>
 
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
-<div class="portlet light" style="background:#eff3f8">
-    <div class="portlet-body">
+<div  style="background:#eff3f8">
+
 
 
         <div class="row">
@@ -91,7 +91,6 @@ pageEncoding="utf-8"%>
 
 
 
-    </div>
 </div>
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
