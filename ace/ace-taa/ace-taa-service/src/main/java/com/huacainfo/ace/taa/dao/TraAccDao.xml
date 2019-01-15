@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huacainfo.ace.taa.dao.TraAccDao">
-  <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.TraAcc">
-    <id column="id" jdbcType="VARCHAR" property="id" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="latitude" jdbcType="DECIMAL" property="latitude" />
-    <result column="longitude" jdbcType="DECIMAL" property="longitude" />
-    <result column="areaCode" jdbcType="VARCHAR" property="areaCode" />
-    <result column="weather" jdbcType="VARCHAR" property="weather" />
-    <result column="vehicleType" jdbcType="VARCHAR" property="vehicleType" />
-    <result column="status" jdbcType="CHAR" property="status" />
-    <result column="accidentTime" jdbcType="TIMESTAMP" property="accidentTime" />
-    <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId" />
-    <result column="roadManId" jdbcType="VARCHAR" property="roadManId" />
-    <result column="deadthToll" jdbcType="INTEGER" property="deadthToll" />
-    <result column="injuries" jdbcType="INTEGER" property="injuries" />
-    <result column="cause" jdbcType="VARCHAR" property="cause" />
-    <result column="createUserId" jdbcType="VARCHAR" property="createUserId" />
-    <result column="createUserName" jdbcType="VARCHAR" property="createUserName" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId" />
-    <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName" />
-    <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate" />
-  </resultMap>
-  <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.TraAccVo"
-             extends="BaseResultMap">
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, address, latitude, longitude, areaCode, weather, vehicleType, status, accidentTime, 
-    roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName, 
-    createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,d.category
-  </sql>
-  <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+    <resultMap id="BaseResultMap" type="com.huacainfo.ace.taa.model.TraAcc">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="latitude" jdbcType="DECIMAL" property="latitude"/>
+        <result column="longitude" jdbcType="DECIMAL" property="longitude"/>
+        <result column="areaCode" jdbcType="VARCHAR" property="areaCode"/>
+        <result column="weather" jdbcType="VARCHAR" property="weather"/>
+        <result column="vehicleType" jdbcType="VARCHAR" property="vehicleType"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="accidentTime" jdbcType="TIMESTAMP" property="accidentTime"/>
+        <result column="roadSectionId" jdbcType="VARCHAR" property="roadSectionId"/>
+        <result column="roadManId" jdbcType="VARCHAR" property="roadManId"/>
+        <result column="deadthToll" jdbcType="INTEGER" property="deadthToll"/>
+        <result column="injuries" jdbcType="INTEGER" property="injuries"/>
+        <result column="cause" jdbcType="VARCHAR" property="cause"/>
+        <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+        <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+        <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
+    </resultMap>
+    <resultMap id="BaseResultMapVo" type="com.huacainfo.ace.taa.vo.TraAccVo"
+               extends="BaseResultMap">
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, address, latitude, longitude, areaCode, weather, vehicleType, status, accidentTime,
+    roadSectionId, roadManId, deadthToll, injuries, cause, createUserId, createUserName,
+        createDate, lastModifyUserId, lastModifyUserName, lastModifyDate,d.category
+    </sql>
+    <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMapVo">
     select
-      d.name as roadName,
-    t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
+        d.name as roadName,
+        t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
     t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
     t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName
     from tra_acc t
@@ -44,11 +44,11 @@
     inner join road d on b.roadId=d.id
     where t.id = #{id,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from tra_acc
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.huacainfo.ace.taa.model.TraAcc">
+    <insert id="insert" parameterType="com.huacainfo.ace.taa.model.TraAcc">
     insert into tra_acc (id, address, latitude, 
       longitude, areaCode, weather, 
       vehicleType, status, accidentTime, 
@@ -64,7 +64,7 @@
       #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR}, 
       #{lastModifyUserName,jdbcType=VARCHAR}, #{lastModifyDate,jdbcType=TIMESTAMP})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.TraAcc">
+    <update id="updateByPrimaryKey" parameterType="com.huacainfo.ace.taa.model.TraAcc">
     update tra_acc
     set address = #{address,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=DECIMAL},
@@ -85,112 +85,113 @@
   </update>
 
 
-  <sql id="whereCondition">
-    from tra_acc t
-    inner join road_man a on t.roadManId=a.id
-    inner join road_section b on t.roadSectionId=b.id
-    inner join portal.province c on t.areaCode=c.code
-    inner join road d on b.roadId=d.id
-    where t.status='1'
-    <if test='condition.roadManName!=null and condition.roadManName!=""'>
-      and a.name like
-      concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
-    </if>
-    <if test='condition.keyword!=null and condition.keyword!=""'>
-      and (a.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like concat(#{condition.keyword,jdbcType=VARCHAR},'%'))
-    </if>
-    <if test='condition.roadManId!=null and condition.roadManId!=""'>
-      and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
-    </if>
-    <if test='condition.startDate!=null and condition.startDate!=""'>
-      <![CDATA[
+    <sql id="whereCondition">
+        from tra_acc t
+        inner join road_man a on t.roadManId=a.id
+        inner join road_section b on t.roadSectionId=b.id
+        inner join portal.province c on t.areaCode=c.code
+        inner join road d on b.roadId=d.id
+        where t.status='1'
+        <if test='condition.roadManName!=null and condition.roadManName!=""'>
+            and a.name like
+            concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test='condition.keyword!=null and condition.keyword!=""'>
+            and (a.name like concat(#{condition.keyword,jdbcType=VARCHAR},'%') or t.address like
+            concat(#{condition.keyword,jdbcType=VARCHAR},'%'))
+        </if>
+        <if test='condition.roadManId!=null and condition.roadManId!=""'>
+            and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.startDate!=null and condition.startDate!=""'>
+            <![CDATA[
 			and t.accidentTime>=str_to_date(#{condition.startDate},'%Y-%m-%d')
 	  ]]>
-    </if>
-    <if test='condition.endDate!=null and condition.endDate!=""'>
-      <![CDATA[
+        </if>
+        <if test='condition.endDate!=null and condition.endDate!=""'>
+            <![CDATA[
 			and t.accidentTime<=str_to_date(#{condition.endDate},'%Y-%m-%d')
 	]]>
-    </if>
-    <if test='condition.areaCode!=null and condition.areaCode!=""'>
-      and t.areaCode like
-      concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
-    </if>
+        </if>
+        <if test='condition.areaCode!=null and condition.areaCode!=""'>
+            and t.areaCode like
+            concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+        </if>
 
-      <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
-          <![CDATA[
+        <if test='condition.upDeathNum!=null and condition.upDeathNum!=""'>
+            <![CDATA[
           and IFNULL(t.deadthToll,0) <= #{condition.upDeathNum,jdbcType=INTEGER}
           ]]>
-      </if>
-      <if test='condition.downDeathNum!=null and condition.downDeathNum!=""'>
-          and IFNULL(t.deadthToll,0) >= #{condition.downDeathNum,jdbcType=INTEGER}
-      </if>
-      <if test='condition.upInjuriesNum!=null and condition.upInjuriesNum!=""'>
-          <![CDATA[
+        </if>
+        <if test='condition.downDeathNum!=null and condition.downDeathNum!=""'>
+            and IFNULL(t.deadthToll,0) >= #{condition.downDeathNum,jdbcType=INTEGER}
+        </if>
+        <if test='condition.upInjuriesNum!=null and condition.upInjuriesNum!=""'>
+            <![CDATA[
           and IFNULL(t.injuries,0) <= #{condition.upInjuriesNum,jdbcType=INTEGER}
           ]]>
-      </if>
-      <if test='condition.downInjuriesNum!=null and condition.downInjuriesNum!=""'>
-          and IFNULL(t.injuries,0) >= #{condition.downInjuriesNum,jdbcType=INTEGER}
-      </if>
-      <if test='condition.category!=null and condition.category!=""'>
-          and d.category = #{condition.category,jdbcType=VARCHAR}
-      </if>
-      <if test='condition.roadId!=null and condition.roadId!=""'>
-          and d.id >= #{condition.roadId,jdbcType=VARCHAR}
-      </if>
-      <if test='condition.roadName!=null and condition.roadName!=""'>
-          and (
-          a.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
-          or d.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
-          or b.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
-          )
-      </if>
-  </sql>
-  <select id="findCount" resultType="int">
-    SELECT COUNT(*)
-    <include refid="whereCondition" />
-  </select>
-  <select id="findList" resultMap="BaseResultMapVo">
-select * from (
-    select
-      d.name as roadName,
-    t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
-    t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
-    t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName,d.category
-    <include refid="whereCondition" />)m
-    <choose>
-      <when test='orderBy!=null and orderBy!=""'>
-        ORDER BY m.${orderBy}
-      </when>
-      <otherwise>
-        ORDER BY m.createDate desc
-      </otherwise>
-    </choose>
+        </if>
+        <if test='condition.downInjuriesNum!=null and condition.downInjuriesNum!=""'>
+            and IFNULL(t.injuries,0) >= #{condition.downInjuriesNum,jdbcType=INTEGER}
+        </if>
+        <if test='condition.category!=null and condition.category!=""'>
+            and d.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.roadId!=null and condition.roadId!=""'>
+            and d.id >= #{condition.roadId,jdbcType=VARCHAR}
+        </if>
+        <if test='condition.roadName!=null and condition.roadName!=""'>
+            and (
+            a.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+            or d.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+            or b.name like concat(#{condition.roadName,jdbcType=VARCHAR},'%')
+            )
+        </if>
+    </sql>
+    <select id="findCount" resultType="int">
+        SELECT COUNT(*)
+        <include refid="whereCondition"/>
+    </select>
+    <select id="findList" resultMap="BaseResultMapVo">
+        select * from (
+        select
+        d.name as roadName,
+        t.id, t.address, t.latitude, t.longitude, t.areaCode, t.weather, t.vehicleType, t.status, t.accidentTime,
+        t.roadSectionId, t.roadManId, t.deadthToll, t.injuries, t.cause, t.createUserName,t.lastModifyUserName,
+        t.createDate,t.lastModifyDate ,a.name roadManName,b.name roadSectionName,c.name areaName,d.category
+        <include refid="whereCondition"/>)m
+        <choose>
+            <when test='orderBy!=null and orderBy!=""'>
+                ORDER BY m.${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY m.createDate desc
+            </otherwise>
+        </choose>
 
-    limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
 
-  </select>
+    </select>
 
-  <select id="isExit" resultType="int">
+    <select id="isExit" resultType="int">
     select count(*)
     from
     tra_acc where
     id=#{id}
   </select>
 
-  <select id="getListByCondition" resultType="map">
-    select
-    t.id,t.address
-    from tra_acc t where 0=0
-    <if test='params.q !=null and params.q!=""'>
-      and (t.id=#{params.q} or t.name like
-      concat('%',#{params.q},'%'))
-    </if>
-    order by t.createDate
-    limit 0,20
-  </select>
-  <update id="updateStatus">
+    <select id="getListByCondition" resultType="map">
+        select
+        t.id,t.address
+        from tra_acc t where 0=0
+        <if test='params.q !=null and params.q!=""'>
+            and (t.id=#{params.q} or t.name like
+            concat('%',#{params.q},'%'))
+        </if>
+        order by t.createDate
+        limit 0,20
+    </select>
+    <update id="updateStatus">
     update tra_acc set status=#{status} where id=#{id}
   </update>
 
@@ -241,5 +242,72 @@ select * from (
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="contrastiveReport" resultType="map">
+        SELECT
+        CASE
+        WHEN t.accidentTime >= #{Jan_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Jan_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS January,
+        CASE
+        WHEN t.accidentTime >= #{Feb_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Feb_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS February,
+        CASE
+        WHEN t.accidentTime >= #{Mar_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Mar_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS March,
+        CASE
+        WHEN t.accidentTime >= #{Apr_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Apr_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS April,
+        CASE
+        WHEN t.accidentTime >= #{May_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{May_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS May,
+        CASE
+        WHEN t.accidentTime >= #{Jun_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Jun_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS June,
+        CASE
+        WHEN t.accidentTime >= #{Jul_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Jul_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS July,
+        CASE
+        WHEN t.accidentTime >= #{Aug_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Aug_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS August,
+        CASE
+        WHEN t.accidentTime >= #{Sep_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Sep_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS September,
+        CASE
+        WHEN t.accidentTime >= #{Oct_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Oct_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS October,
+        CASE
+        WHEN t.accidentTime >= #{Nov_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Nov_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS November,
+        CASE
+        WHEN t.accidentTime >= #{Dec_S,jdbcType=VARCHAR}
+        AND t.accidentTime &lt;= #{Dec_E,jdbcType=VARCHAR} THEN
+        IFNULL(SUM(t.deadthToll), 0)
+        ELSE 0 END AS December
+        FROM tra_acc t
+        WHERE t.`status` = '1'
     </select>
 </mapper>

@@ -205,4 +205,11 @@ public interface TraAccService {
                                             int start,
                                             int limit,
                                             String orderBy);
+
+    /**
+     * 事故死亡人数同期对比 报表
+     *
+     * @return Map<String,Object>
+     */
+    Map<String, Object> contrastiveReport();
 }

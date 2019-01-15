@@ -60,4 +60,12 @@ public interface TraAccDao {
                                             @Param("start") int start,
                                             @Param("limit") int limit,
                                             @Param("orderBy") String orderBy);
+
+    /**
+     * 事故死亡人数同期对比 报表
+     *
+     * @param params 参数
+     * @return Map<String,Object>
+     */
+    Map<String, Object> contrastiveReport(Map<String, String> params);
 }
