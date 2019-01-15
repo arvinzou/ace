@@ -59,4 +59,11 @@ public class WClassesController extends BisBaseController {
         return this.classesService.selectClassesByPrimaryKeyVo(userProp);
     }
 
+    @RequestMapping(value = "/findClassList")
+    @ResponseBody
+    public PageResult<ClassesVo> findFilesList(ClassesQVo condition,PageParamNoChangeSord page) throws Exception {
+
+        return this.classesService.findClassesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+
+    }
 }

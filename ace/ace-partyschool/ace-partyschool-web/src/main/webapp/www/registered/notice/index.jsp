@@ -10,52 +10,65 @@
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
 	</head>
 	<body>
-		<div class="index">
+		<div class="index" id="list">
 
 		</div>
 
 		<script id="list-tpl" type="text/template">
 			<div class="title-box">
 				<span class="title">最新消息</span>
-				<span class="num">12</span>
+				<span class="num">\${data.newNotice.length}</span>
 			</div>
 			<div class="box">
+				{@if data.newNotice.length > 0}
+				{@each data.newNotice as item01, index01}
 				<div class="content">
 					<div class="item">
 						<div class="item-left">
 							<img src="img/icon_message.png" class="message-img" />
 						</div>
 						<div class="item-right">
-							<div class="notice-title">新书推荐（2018年11月下）</div>
+							<div class="notice-title">\${item01.title}</div>
 							<div class="notice-detail">
 								<span class="time">2018-11-20 13:20:15</span>
-								<span class="detail">查看详情</span>
+								<span class="detail" onclick="findDetail('\${item01.id}');">查看详情</span>
 							</div>
 						</div>
 					</div>
 				</div>
+				{@/each}
+				{@else}
 				<div class="content">
-					<div class="item">
-						<div class="item-left">
-							<img src="img/icon_message.png" class="message-img" />
-						</div>
-						<div class="item-right">
-							<div class="notice-title">2018年度整体支出绩效评哈哈哈哈哈哈哈哈哈哈</div>
-							<div class="notice-detail">
-								<span class="time">2018-11-20 13:20:15</span>
-								<span class="detail">查看详情</span>
-							</div>
-						</div>
-					</div>
+					<div class="item blank">暂无最新通知</div>
 				</div>
+				{@/if}
 			</div>
 			<div class="title-box">
 				<span class="title">历史消息</span>
 			</div>
 			<div class="box">
+				{@if data.oldNotice.length > 0}
+				{@each data.oldNotice as item02, index02}
+				<div class="content">
+					<div class="item">
+						<div class="item-left">
+							<img src="img/icon_message.png" class="message-img" />
+						</div>
+						<div class="item-right">
+							<div class="notice-title">\${item02.title}</div>
+							<div class="notice-detail">
+								<span class="time">2018-11-20 13:20:15</span>
+								<span class="detail" onclick="findDetail('\${item01.id}');">查看详情</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				{@/each}
+				{@else}
 				<div class="content">
 					<div class="item blank">暂无最新通知</div>
 				</div>
+				{@/if}
 			</div>
 		</script>
 		<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>

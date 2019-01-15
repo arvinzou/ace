@@ -10,7 +10,7 @@ body{
 	height: 100%;
 }
 .title{
-	width: 100%;
+	width: auto;
 	padding-left: 0.72rem;
 	padding-right: 0.72rem;
 	font-size: 0.666666rem;

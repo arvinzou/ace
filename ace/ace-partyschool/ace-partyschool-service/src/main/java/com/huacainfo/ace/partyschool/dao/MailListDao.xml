@@ -50,7 +50,7 @@
     left join portal.userinfo b on a.openId=b.unionid
 
     WHERE
-    t.classId = #{classId}
+    t.classId = #{classId} and t.status='1'
     <if test='name!=null and name!=""'>
       and t.name like
       concat(#{name,jdbcType=VARCHAR},'%')
@@ -67,7 +67,7 @@
     FROM
     student a
     WHERE
-    a.classId = #{classId}
+    a.classId = #{classId} and a.status='1'
     AND a.pid = t.id
     ) CHILD_COUNT,
     'closed' STATE,
@@ -88,7 +88,7 @@
     teacher t
     LEFT JOIN portal.users a on t.id=a.user_id
     left join portal.userinfo b on a.openId=b.unionid
-where 0=0
+where t.status='1'
     <if test='name!=null and name!=""'>
       and t.name like
       concat(#{name,jdbcType=VARCHAR},'%')
@@ -121,7 +121,7 @@ where 0=0
     s.mobile,
     b.headimgurl
     FROM mail_list t
-    left join student s on t.id=s.pid
+    left join (select id,pid,name,mobile from student where status='1') s on t.id=s.pid
     LEFT JOIN portal.users a on s.id=a.user_id
     left join portal.userinfo b on a.openId=b.unionid
     where t.pid=#{classId} order by t.name ,s.name

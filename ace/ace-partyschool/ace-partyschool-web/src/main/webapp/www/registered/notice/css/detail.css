@@ -90,3 +90,18 @@
 	font-size: 0.453333rem;
 	font-weight: bold;
 }
+.download{
+	color: #54ADF2;
+	font-size: 0.32rem;
+	text-decoration: none;
+}
+.download:visited{
+	color: #54ADF2;
+	font-size: 0.32rem;
+	text-decoration: none;
+}
+.download:link{
+	color: #54ADF2;
+	font-size: 0.32rem;
+	text-decoration: none;
+}

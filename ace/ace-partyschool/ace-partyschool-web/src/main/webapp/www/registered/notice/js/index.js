@@ -14,7 +14,20 @@ function initList(){
         },
         success:function(result){
             if(result.status == 0) {
-                //renderPage('list', result.data, 'list-tpl');
+                var data = result.data.list;
+                var dataList = {};
+                var newNotice = [];
+                var oldNotice = [];
+                for(var i=0; i<data.length; i++){
+                    if(data[i].status == "1"){//状态为1 为未读
+                        newNotice.push(data[i]);
+                    }else{
+                        oldNotice.push(data[i]);
+                    }
+                }
+                dataList.newNotice = newNotice;
+                dataList.oldNotice = oldNotice;
+                renderPage('list', dataList, 'list-tpl');
             }else {
                 if(result.info){
                     alert(result.info);
@@ -36,4 +49,8 @@ function renderPage(IDom, data, tempId) {
         data: data,
     });
     $("#" + IDom).html(html);
+}
+
+function findDetail(noticeId){
+    window.location.href = contextPath + '/www/registered/notice/detail.jsp?noticeId='+noticeId;
 }
