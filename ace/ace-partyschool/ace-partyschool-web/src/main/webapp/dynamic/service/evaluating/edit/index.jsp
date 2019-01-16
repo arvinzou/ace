@@ -75,40 +75,83 @@
         <h4>评测选项内容</h4>
         <div id="evaluatingRst">
             {@each data.evaluationIndexList as item, index}
+            <%--<div class="form-group">--%>
+                <%--<input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">--%>
+                <%--<label class="col-md-2 control-label">--%>
+                    <%--评测指标<span class="required" aria-required="true"> * </span>--%>
+                <%--</label>--%>
+                <%--<div class="col-md-10">--%>
+                    <%--<input type="text" class="form-control" value="\${item.name}" name="evaluationIndex[\${index}].name"--%>
+                           <%--maxlength="10"--%>
+                           <%--placeholder="">--%>
+                    <%--<span class="help-block"></span>--%>
+                <%--</div>--%>
+
+                <%--<label class="col-md-2 control-label">--%>
+                    <%--指标内容--%>
+                    <%--<span class="required" aria-required="true"> * </span>--%>
+                <%--</label>--%>
+                <%--<div class="col-md-10">--%>
+                    <%--<input type="text" value="\${item.introduce}" class="form-control"--%>
+                           <%--name="evaluationIndex[\${index}].introduce"--%>
+                           <%--maxlength="40">--%>
+                    <%--<span class="help-block"></span>--%>
+                <%--</div>--%>
+                <%--<label class="col-md-2 control-label">--%>
+                    <%--指标分值<span class="required" aria-required="true"> * </span>--%>
+                <%--</label>--%>
+                <%--<div class="col-md-6">--%>
+                    <%--<input type="text" class="form-control" value="\${item.score}"--%>
+                           <%--name="evaluationIndex[\${index}].score" maxlength="10" placeholder="">--%>
+                    <%--<span class="help-block"></span>--%>
+                <%--</div>--%>
+                <%--{@if index!=0}--%>
+                <%--<button type="button" class="btn btn-success removeOption removeOption\${index} col-md-1">删除</button>--%>
+                <%--{@/if}--%>
+            <%--</div>--%>
+
+
             <div class="form-group">
                 <input type="text" class="hide" name="evaluationIndex[\${index}].id" value="\${item.id}">
-                <label class="col-md-2 control-label">
-                    评测指标<span class="required" aria-required="true"> * </span>
-                </label>
-                <div class="col-md-10">
-                    <input type="text" class="form-control" value="\${item.name}" name="evaluationIndex[\${index}].name"
-                           maxlength="10"
-                           placeholder="">
-                    <span class="help-block"></span>
-                </div>
+                <div class="row">
+                    <label class="col-md-2 control-label">
+                        指标名称
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" value="\${item.name}"
+                               name="evaluationIndex[\${index}].name"
+                               maxlength="6"
+                               placeholder="请输入评测指标（建议字数在6个字以内)">
+                        <span class="help-block"></span>
+                    </div>
 
-                <label class="col-md-2 control-label">
-                    指标内容
-                    <span class="required" aria-required="true"> * </span>
-                </label>
-                <div class="col-md-10">
-                    <input type="text" value="\${item.introduce}" class="form-control"
-                           name="evaluationIndex[\${index}].introduce"
-                           maxlength="40">
-                    <span class="help-block"></span>
+
+                    <label class="col-md-1 control-label">
+                        指标分值
+                    </label>
+                    <div class="col-md-1">
+                        <input type="text" class="form-control scores" name="evaluationIndex[\${index}].score"
+                               value="\${item.score}"
+                               maxlength="10"
+                               placeholder="分值">
+                        <span class="help-block"></span>
+                    </div>
                 </div>
-                <label class="col-md-2 control-label">
-                    指标分值<span class="required" aria-required="true"> * </span>
-                </label>
-                <div class="col-md-6">
-                    <input type="text" class="form-control" value="\${item.score}"
-                           name="evaluationIndex[\${index}].score" maxlength="10" placeholder="">
-                    <span class="help-block"></span>
+                <div class="row">
+                    <label class="col-md-2 control-label">
+                        指标内容
+                    </label>
+                    <div class="col-md-6">
+                        <textarea value="\${item.introduce}" name="evaluationIndex[\${index}].introduce" id="" cols="30"
+                                  rows="3">\${item.introduce}</textarea>
+                        <span class="help-block"></span>
+                    </div>
+                    {@if index!=0}
+                    <div class="col-md-1" style="text-align: center;"><span type="button" class=" removeOption removeOption#index#">删除</span></div>
+                    {@/if}
                 </div>
-                {@if index!=0}
-                <button type="button" class="btn btn-success removeOption removeOption\${index} col-md-1">删除</button>
-                {@/if}
             </div>
+
             {@/each}
         </div>
         <div class="form-group">

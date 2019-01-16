@@ -1,18 +1,24 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.constant.CommConstant;
+import com.huacainfo.ace.partyschool.model.Student;
+import com.huacainfo.ace.partyschool.model.Teacher;
 import com.huacainfo.ace.partyschool.service.EnrollRosterService;
 import com.huacainfo.ace.partyschool.service.SignService;
+import com.huacainfo.ace.partyschool.service.StudentService;
+import com.huacainfo.ace.partyschool.service.TeacherService;
 import com.huacainfo.ace.partyschool.vo.EnrollRosterQVo;
 import com.huacainfo.ace.partyschool.vo.EnrollRosterVo;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
@@ -48,6 +54,10 @@ public class WSignController extends BisBaseController {
     private TaskCmccService taskCmccService;
     @Autowired
     private EnrollRosterService enrollRosterService;
+    @Autowired
+    private StudentService studentService;
+    @Autowired
+    private TeacherService teacherService;
 
     /**
      * 功能描述: 发送短信验证验证码
@@ -314,4 +324,30 @@ public class WSignController extends BisBaseController {
         return new ResultResponse(ResultCode.SUCCESS, "success", list);
     }
 
+
+    /**
+     * 学员信息修改
+     *
+     * @return ResultResponse
+     */
+    @RequestMapping("/student/update")
+    public ResultResponse updateStudent(String jsons) throws Exception {
+        Student obj = JSON.parseObject(jsons, Student.class);
+        MessageResponse ms = studentService.updateStudent(obj, this.getCurUserProp());
+
+        return new ResultResponse(ms);
+    }
+
+    /**
+     * 教职工信息修改
+     *
+     * @return ResultResponse
+     */
+    @RequestMapping("/teacher/update")
+    public ResultResponse updateTeacher(String jsons) throws Exception {
+        Teacher obj = JSON.parseObject(jsons, Teacher.class);
+        MessageResponse ms = teacherService.updateTeacher(obj, this.getCurUserProp());
+
+        return new ResultResponse(ms);
+    }
 }

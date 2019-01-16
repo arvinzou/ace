@@ -97,7 +97,7 @@
                                     指标内容
                                 </label>
                                 <div class="col-md-6">
-                                    <textarea name="" id="" cols="30" rows="3"></textarea>
+                                    <textarea name="evaluationIndex[0].introduce" id="" cols="30" rows="3"></textarea>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
