@@ -9,11 +9,15 @@ import com.huacainfo.ace.partyschool.model.Student;
 public class ClassesVo extends Classes {
     private static final long serialVersionUID = 1L;
     private Classroom classroom;
-
     /**
      班主任信息
      */
     private Teacher teacher;
+
+    /**
+     跟班老师信息
+     */
+    private  Teacher clsTeacher;
 
     /**
      跟班干部信息
@@ -21,31 +25,13 @@ public class ClassesVo extends Classes {
     private Student student;
 
 
-    /**
-     跟班老师姓名
-     */
-    private  String tName1;
-
-    public String gettName1() {
-        return tName1;
+    public Teacher getClsteacher() {
+        return clsTeacher;
     }
 
-    public void settName1(String tName1) {
-        this.tName1 = tName1;
+    public void setClsteacher(Teacher clsTeacher) {
+        this.clsTeacher = clsTeacher;
     }
-
-    public String gettMobile1() {
-        return tMobile1;
-    }
-
-    public void settMobile1(String tMobile1) {
-        this.tMobile1 = tMobile1;
-    }
-
-    /**
-     跟班老师电话
-     */
-    private  String tMobile1;
 
 
     public Student getStudent() {

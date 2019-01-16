@@ -28,79 +28,84 @@
                 <div class="form-body">
                     <h4>评测内容</h4>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            名称
-                            <span class="required" aria-required="true"> * </span>
-                        </label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" maxlength="30"
-                                   placeholder="请输入名称（建议字数在20个字以内,不要超过30个字)">
-                            <span class="help-block"></span>
+                        <div class="row">
+                            <label class="col-md-2 control-label">
+                                名称
+                                <span class="required" aria-required="true"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="name" maxlength="30"
+                                       placeholder="请输入名称（建议字数在20个字以内,不要超过30个字)">
+                                <span class="help-block"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
+                        <div class="row">
                         <label class="col-md-2 control-label">
                             介绍
                         </label>
-                        <div class="col-md-10">
+                        <div class="col-md-6">
                             <input type="text" class="form-control" name="introduce"
                                    maxlength="2147483647"
                                    placeholder="请输入介绍（建议字数在100个字以内，不超过200个字)">
                             <span class="help-block"></span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">
-                            超时设定
-                            <span class="required" aria-required="true"> * </span>
-                        </label>
-                        <div class="col-md-10">
-                            <input type="text" class="form-control" name="timeout"
-                                   maxlength="10"
-                                   placeholder="请输入超时设定（填写数字，单位：分钟)">
-                            <span class="help-block"></span>
                         </div>
                     </div>
-                    <h4>评测选项内容</h4>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-2 control-label">
+                                超时设定
+                                <span class="required" aria-required="true"> * </span>
+                            </label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="timeout"
+                                       maxlength="10"
+                                       placeholder="请输入超时设定（填写数字，单位：分钟)">
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>评测指标 <span id="totlascore"></span></h4>
                     <div id="evaluatingRst">
                         <div class="form-group">
-                            <label class="col-md-2 control-label">
-                                评测指标
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" name="evaluationIndex[0].name"
-                                       maxlength="6"
-                                       placeholder="请输入评测指标（建议字数在6个字以内)">
-                                <span class="help-block"></span>
-                            </div>
+                            <div class="row">
+                                <label class="col-md-2 control-label">
+                                    指标名称
+                                </label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="evaluationIndex[0].name"
+                                           maxlength="6"
+                                           placeholder="请输入评测指标（建议字数在6个字以内)">
+                                    <span class="help-block"></span>
+                                </div>
 
-                            <label class="col-md-2 control-label">
-                                指标内容
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" name="evaluationIndex[0].introduce"
-                                       maxlength="40"
-                                       placeholder="请输入评测内容（建议字数在30个字以内)">
-                                <span class="help-block"></span>
-                            </div>
 
-                            <label class="col-md-2 control-label">
-                                指标分值
-                                <span class="required" aria-required="true"> * </span>
-                            </label>
-                            <div class="col-md-10">
-                                <input type="text" class="form-control" name="evaluationIndex[0].score"
-                                       maxlength="10"
-                                       placeholder="请输入评测分值(填写数字)">
-                                <span class="help-block"></span>
+                                <label class="col-md-1 control-label">
+                                    指标分值
+                                </label>
+                                <div class="col-md-1">
+                                    <input type="text" class="form-control scores" name="evaluationIndex[0].score"
+                                           maxlength="10"
+                                           placeholder="分值">
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label class="col-md-2 control-label">
+                                    指标内容
+                                </label>
+                                <div class="col-md-6">
+                                    <textarea name="" id="" cols="30" rows="3"></textarea>
+                                    <span class="help-block"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-3 col-md-offset-1">
-                            <button type="button" class="btn btn-success addOption">添加</button>
+                            <button type="button" class="btn green addOption">添加</button>
                         </div>
                     </div>
                 </div>

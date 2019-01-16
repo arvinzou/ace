@@ -133,7 +133,7 @@
 
     <update id="updateStatus" parameterType="java.lang.String">
         update notice
-        set status = #{status,jdbcType=CHAR}
+        set status = '2'
         where id = #{id,jdbcType=VARCHAR}
     </update>
 </mapper>
