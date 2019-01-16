@@ -258,3 +258,41 @@ input:-ms-input-placeholder{
 	background: none;
 	border: none;
 }
+.close{
+	font-size: 0.453333rem;
+	color: #ABAEB9;
+	background: none;
+	border: none;
+}
+.user-main{
+	position: relative;
+}
+.user-opt{
+	position: absolute;
+	bottom: 0.3rem;
+}
+.user-item{
+	width: 76%;
+	height: 2.1rem;
+	margin: 0.2rem auto;
+	border-radius: 0.2rem;
+	color: #ABAEB9;
+	font-size: 0.3rem;
+	padding-left: 2%;
+	padding-right: 2%;
+}
+.user-unactive{
+	border: 1px solid #ABAEB9;
+}
+.user-active{
+	border: 1px solid #F96557;
+}
+.user-item table{
+	width: 100%;
+	height: 100%;
+}
+.user-item tr{
+	width: 100%;
+	height: 0.7rem;
+	line-height: 0.7rem;
+}

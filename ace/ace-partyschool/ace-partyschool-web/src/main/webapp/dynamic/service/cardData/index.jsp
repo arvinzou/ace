@@ -33,7 +33,7 @@
                         <input type="text"
                                name="name"
                                class="form-control"
-                               placeholder="请输入名称">
+                               placeholder="请输入用户名称/卡号">
                         <span class="input-group-btn">
                             <%--${pageContext.request.contextPath}/cardData/findCardDataList--%>
 							<button class="btn  btn-default search_btn" id="btn-search" authority="false"> 搜索 </button>

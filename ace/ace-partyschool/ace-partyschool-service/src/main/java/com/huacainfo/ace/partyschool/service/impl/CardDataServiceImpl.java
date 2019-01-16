@@ -90,11 +90,9 @@ public class CardDataServiceImpl implements CardDataService {
         if (CommonUtils.isBlank(o.getUserId())) {
             return new MessageResponse(1, "用户Id不能为空！");
         }
-
-
         int temp = this.cardDataDao.isExist(o);
         if (temp > 0) {
-            return new MessageResponse(1, "该用户已存在对应绑定关系！");
+            return new MessageResponse(1, "绑定关系重复,请核对！");
         }
 
         o.setId(GUIDUtil.getGUID());

@@ -175,7 +175,7 @@ function edit(rowid) {
                 .wrapInner('<div class="widget-header" />');
 
             //readOnly: true,
-            $("#mobile").attr("readOnly", true);
+            //$("#mobile").attr("readOnly", true);
         }
     });
 }

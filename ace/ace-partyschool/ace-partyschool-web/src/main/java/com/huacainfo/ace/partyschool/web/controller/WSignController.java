@@ -332,7 +332,12 @@ public class WSignController extends BisBaseController {
      */
     @RequestMapping("/student/update")
     public ResultResponse updateStudent(String jsons) throws Exception {
+        UserProp u = (UserProp) getSession(CommonKeys.SESSION_USERPROP_KEY);
+        if (u == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
         Student obj = JSON.parseObject(jsons, Student.class);
+        obj.setId(u.getUserId());
         MessageResponse ms = studentService.updateStudent(obj, this.getCurUserProp());
 
         return new ResultResponse(ms);
@@ -345,7 +350,12 @@ public class WSignController extends BisBaseController {
      */
     @RequestMapping("/teacher/update")
     public ResultResponse updateTeacher(String jsons) throws Exception {
+        UserProp u = (UserProp) getSession(CommonKeys.SESSION_USERPROP_KEY);
+        if (u == null) {
+            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+        }
         Teacher obj = JSON.parseObject(jsons, Teacher.class);
+        obj.setId(u.getUserId());
         MessageResponse ms = teacherService.updateTeacher(obj, this.getCurUserProp());
 
         return new ResultResponse(ms);

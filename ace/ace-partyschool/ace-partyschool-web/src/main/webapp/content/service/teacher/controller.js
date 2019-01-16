@@ -29,7 +29,7 @@ jQuery(function ($) {
                 form.closest('.ui-jqdialog')
                     .find('.ui-jqdialog-titlebar')
                     .wrapInner('<div class = "widget-header" / > ');
-                //ll
+                //
                 appendUploadBtn("photoUrl");
             }
         })
@@ -104,7 +104,7 @@ function edit(rowid) {
             appendUploadBtn("photoUrl");
 
             //readOnly: true,
-            $("#mobile").attr("readOnly", true);
+            // $("#mobile").attr("readOnly", true);
         }
     });
 }
@@ -150,7 +150,7 @@ function setParams(key, value) {
 }
 
 function recover(rowid) {
-    if (confirm("确认恢复么？")) {
+    if (confirm("确认审核通过么？")) {
         startLoad();
         $.ajax({
             url: cfg.grid_recover_url,
