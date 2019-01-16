@@ -227,4 +227,16 @@ public interface MailListService {
      * @version: 2019-01-12
      */
     List<Tree> getTreeListByClassId(String classId);
+
+
+    /**
+     * @throws
+     * @Title:getTreeList
+     * @Description: TODO(加载全校通讯录)
+     * @param: @return
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2019-01-16
+     */
+    List<Tree> getTreeList();
 }

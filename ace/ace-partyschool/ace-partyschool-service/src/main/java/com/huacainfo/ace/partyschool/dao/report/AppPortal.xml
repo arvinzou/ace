@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huacainfo.ace.partyschool.dao.report.AppPortal">
+    <select id="query" resultType="map">
+
+
+        SELECT
+        'eva' id,
+        count(1) as VALUE
+        FROM
+        class_schedule a
+        WHERE
+        a.classesId = #{classId}
+        <![CDATA[
+        AND a.courseDate <= now()
+         ]]>
+        AND a.id NOT IN (
+        SELECT DISTINCT
+        (t.classScheduleId)
+        FROM
+        evaluation_rst_content t
+        WHERE
+        t.userId = #{userId}
+        )
+        UNION ALL
+        SELECT
+        'teacher' id,
+        count(1)
+        VALUE
+        FROM
+        teacher t
+        WHERE
+        t. STATUS = '1'
+        UNION ALL
+        SELECT
+        'student' id,
+        count(1)
+        VALUE
+        FROM
+        student t  WHERE t.STATUS = '1'
+        and t.classId=#{classId}
+        UNION ALL
+        SELECT
+        'file' id,
+        count(1)
+        VALUE
+        FROM
+         files t
+        WHERE t.STATUS = '1'
+
+         <if test='role="student"'>
+            and t.classesId=#{classId}
+        </if>
+         <if test='list!=null'>
+           and  t.classesId in <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+                 #{item.classId}
+             </foreach>
+        </if>
+
+
+    </select>
+</mapper>

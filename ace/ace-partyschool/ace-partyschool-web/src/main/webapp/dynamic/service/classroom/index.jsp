@@ -20,7 +20,7 @@ pageEncoding="utf-8"%>
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+                <div class="col-md-9 ">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 

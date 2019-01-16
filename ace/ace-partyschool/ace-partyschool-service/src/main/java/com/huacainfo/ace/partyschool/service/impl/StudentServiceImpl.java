@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -146,14 +147,11 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-//        if (CommonUtils.isBlank(o.getIdCard())) {
-//            return new MessageResponse(1, "身份证号不能为空！");
-//        }
         if (CommonUtils.isBlank(o.getClassId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
-        int i = studentDao.isExistOtherMobile(o.getId(), o.getMobile());
-        if (i > 0) {
+        boolean b = signService.isExistByMobile(o.getMobile());
+        if (b) {
             return new MessageResponse(1, "手机号码不能重复！");
         }
         //
@@ -161,7 +159,9 @@ public class StudentServiceImpl implements StudentService {
         if (oldData == null) {
             return new MessageResponse(1, "数据丢失！");
         }
+        oldData.setMobile(o.getMobile());
         oldData.setName(o.getName());
+        oldData.setSex(o.getSex());
         oldData.setIdCard(o.getIdCard());
         oldData.setPolitical(o.getPolitical());
         oldData.setWorkUnitName(o.getWorkUnitName());
@@ -254,7 +254,7 @@ public class StudentServiceImpl implements StudentService {
         String account = data.getMobile();
         String pwd = "123456";
         String mobile = data.getMobile();
-        String sex = String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
+        String sex = data.getSex();//String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
         String deptId = "0004";
         String roleId = "ede24712-e13c-47d5-8cab-fd54589e3fe1";//select * from portal.role t where t.syid='partyschool'
@@ -354,14 +354,21 @@ public class StudentServiceImpl implements StudentService {
      * @return SingleResult<String>
      */
     @Override
-    public SingleResult<String> getClassId(UserProp userProp){
-        SingleResult<String> rst=new SingleResult<String>();
+    public SingleResult<Map<String, Object>> getRoleClassId(UserProp userProp){
+        SingleResult<Map<String, Object>> rst=new SingleResult();
+        Map<String, Object> e=new HashMap<>();
         Map<String, String> o=this.studentDao.selectUserClassInfo(userProp.getUserId());
         if (o.get("role").equals("student")) {
-            rst.setValue(o.get("classId"));
+            e.put("classId",o.get("classId"));
+            e.put("role",o.get("role"));
+            rst.setValue(e);
         } else {
             String classId=this.studentDao.selectTeacherClassInfoById(userProp.getUserId());
-            rst.setValue(classId);
+            e.put("classId",classId);
+            e.put("role","teacher");
+            List<Map<String,String>> list=this.studentDao.selectTeacherClasses(userProp.getUserId());
+            e.put("list",list);
+            rst.setValue(e);
         }
         return rst;
     }

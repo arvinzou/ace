@@ -175,6 +175,7 @@ function recover(rowid) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
+    juicer.register('rsd', rsd);
 }
 
 /**

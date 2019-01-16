@@ -123,7 +123,7 @@ public interface StudentService {
      *
      *
      * @param userProp
-     * @return SingleResult<String>
+     * @return SingleResult<Map<String, String>>
      */
-    SingleResult<String> getClassId(UserProp userProp);
+    SingleResult<Map<String, Object>> getRoleClassId(UserProp userProp);
 }

@@ -62,9 +62,6 @@
                             <%--${pageContext.request.contextPath}/student/findStudentList--%>
 							<button class="btn  btn-default search_btn" id="btn-search" authority="false">搜索</button>
 						</span>
-                        <%--<span class="input-group-btn">--%>
-                        <%--<button class="btn  btn-default search_btn" id="btn-clear" authority="false">重置</button>--%>
-                        <%--</span>--%>
                     </div>
 
                 </div>
@@ -144,24 +141,25 @@
     <div class="form-group">
         <label class="col-md-2 view-label">姓名</label>
         <div class="col-md-10">
-            {@if data.o.headimgurl!='' && data.o.headimgurl!=null && data.o.headimgurl!=undefined}
-            <img src="\${data.o.photoUrl}" class="cover"/>
-            {@else}
-            <img src="${pageContext.request.contextPath}/content/common/img/default_header.png" class="cover"/>
-            {@/if}
-            <a>\${data.o.name}</a>
+            \${data.o.name}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">手机号码</label>
+        <label class="col-md-2 view-label">性别</label>
         <div class="col-md-10">
-            \${data.o.mobile}
+            \${rsd(data.o.sex,'01')}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">身份证号码</label>
+        <label class="col-md-2 view-label">单位全称</label>
         <div class="col-md-10">
-            \${data.o.idCard}
+            \${data.o.workUnitName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">职务全称</label>
+        <div class="col-md-10">
+            \${data.o.postName}
         </div>
     </div>
     <div class="form-group">
@@ -171,15 +169,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">单位</label>
+        <label class="col-md-2 view-label">手机号码</label>
         <div class="col-md-10">
-            \${data.o.workUnitName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">职位</label>
-        <div class="col-md-10">
-            \${data.o.postName}
+            \${data.o.mobile}
         </div>
     </div>
     <div class="form-group">
@@ -189,9 +181,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">备注</label>
+        <label class="col-md-2 view-label">身份证号码</label>
         <div class="col-md-10">
-            \${data.o.remark}
+            \${data.o.idCard}
         </div>
     </div>
     <div class="form-group">
@@ -200,7 +192,6 @@
             \${parseStatus(data.o.status)}
         </div>
     </div>
-
 </script>
 
 <%--easyui--%>

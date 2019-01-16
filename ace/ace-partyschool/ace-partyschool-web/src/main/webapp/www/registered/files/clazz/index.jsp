@@ -28,7 +28,7 @@
 		<div class="modal" id="uploadModal" style="display: none;">
 			<div class="modal-index">
 				<div class="modal-title01 title01 mbr">上传班级文件</div>
-				<div class="modal-clazz mbr">
+				<div class="modal-clazz mbr" id="classBox">
 					<div class="clazz title02" id="clazz">请选择班级</div>
 					<div class="select-box"><img src="img/icon_select.png"/></div>
 				</div>

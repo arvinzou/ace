@@ -11,6 +11,8 @@ public class Teacher extends BaseModel {
 
     private String name;
 
+    private String sex;
+
     private String mobile;
 
     private String idCard;
@@ -38,6 +40,24 @@ public class Teacher extends BaseModel {
     private Date lastModifyDate;
 
     private String introduce;
+
+    private String political;
+
+    public String getPolitical() {
+        return political;
+    }
+
+    public void setPolitical(String political) {
+        this.political = political;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public String getWorkUnitName() {
         return workUnitName;

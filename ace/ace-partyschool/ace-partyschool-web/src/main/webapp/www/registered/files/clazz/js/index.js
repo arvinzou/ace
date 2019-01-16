@@ -1,7 +1,31 @@
 var fileUrl = null;
 var title = "";
 var clazz = null;
+var regType = null;
 $(function(){
+    $.ajax({
+        url: contextPath+ "/www/sign/getAcctInfo",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+        },
+        success:function(result){
+            if(result.status == 0) {
+                regType = result.data.regType;
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
     fileList();
 });
 
@@ -37,18 +61,18 @@ function fileTypes(fileName){
     var fileIndex = fileName.lastIndexOf(".");
     var fileLen = fileName.length;
     var type = fileName.substring(fileIndex+1, fileLen);
-    if(type == "xls" || type == "xlsx"){
+    if(type.toLowerCase() == "xls" || type.toLowerCase() == "xlsx"){
         fileType = "excel";
-    }else if(type == "doc" || type == "docx"){
+    }else if(type.toLowerCase() == "doc" || type.toLowerCase() == "docx"){
         fileType = "word";
-    }else if(type == "ppt" || type == "pptx"){
+    }else if(type.toLowerCase() == "ppt" || type.toLowerCase() == "pptx"){
         fileType = "ppt";
-    }else if(type == "png" || type == "jpg" || type == "psd"){
+    }else if(type.toLowerCase() == "png" || type.toLowerCase() == "jpg" || type.toLowerCase() == "psd"){
         fileType = "img";
-    }else if(type == "pdf"){
-        fileType == "pdf";
-    }else if(type == "txt"){
-        fileType == "text";
+    }else if(type.toLowerCase() == "pdf"){
+        fileType = "pdf";
+    }else if(type.toLowerCase() == "txt"){
+        fileType = "text";
     }
     return fileType;
 }
@@ -97,29 +121,36 @@ function initClasses(){
         },
         success:function(result){
             if(result.status == 0) {
-               console.log(result);
-               var data = result.data;
-               var classesArr = [];
-               for(var i=0; i<data.length; i++){
-                    var o = {};
-                    o.id = data[i].id;
-                    o.value = data[i].name;
-                   classesArr.push(o);
-               }
-                var classesSelect= new MobileSelect({
-                    trigger: '#clazz',
-                    title: '党校班级选择',
-                    wheels: [
-                        {data: classesArr}
-                    ],
-                    position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-                    transitionEnd:function(indexArr, data){
-                        clazz = data;
-                    },
-                    callback:function(indexArr, data){
-                        clazz = data;
-                    }
-                });
+              if(result.data.length <1 && regType == 'teacher'){
+                  alert("对不起！您没有班级文件上传权限。");
+                  return;
+              }else{
+                  if(regType == 'student'){
+                      $("#classBox").hide();
+                  }
+                  var data = result.data;
+                  var classesArr = [];
+                  for(var i=0; i<data.length; i++){
+                      var o = {};
+                      o.id = data[i].id;
+                      o.value = data[i].name;
+                      classesArr.push(o);
+                  }
+                  var classesSelect= new MobileSelect({
+                      trigger: '#clazz',
+                      title: '党校班级选择',
+                      wheels: [
+                          {data: classesArr}
+                      ],
+                      position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                      transitionEnd:function(indexArr, data){
+                          clazz = data;
+                      },
+                      callback:function(indexArr, data){
+                          clazz = data;
+                      }
+                  });
+              }
             }else {
                 if(result.info){
                     alert(result.info);
@@ -179,7 +210,7 @@ function upload(){
 }
 
 function addFiles(){
-    if(clazz == null || clazz == undefined){
+    if((clazz == null || clazz == undefined) && regType == 'teacher'){
         alert("请选择班级！");
         return;
     }
@@ -187,12 +218,13 @@ function addFiles(){
         alert("请选择上传的文件！");
         return;
     }
+    var classesId = clazz == null?null: clazz[0].id;
     $.ajax({
         url: contextPath+ "/www/files/insertFiles",
         type:"post",
         async:false,
         data:{
-            classesId: clazz[0].id,
+            classesId: classesId,
             url: fileUrl
         },
         success:function(result){

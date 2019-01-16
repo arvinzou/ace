@@ -1,10 +1,17 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.fastdfs.IFile;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.common.tools.PropertyUtil;
+import com.huacainfo.ace.portal.vo.MongoFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -17,6 +24,12 @@ import com.huacainfo.ace.partyschool.model.Files;
 import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.vo.FilesVo;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/files")
@@ -32,6 +45,13 @@ public class FilesController extends BisBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ClsFilesService clsFilesService;
+    @Autowired
+    private IFile fileSaver;
+
+    private String getServerHttp() {
+        return ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
+    }
+
 
     /**
      * @throws
@@ -69,11 +89,45 @@ public class FilesController extends BisBaseController {
      * @author: Arvin
      * @version: 2019-01-04
      */
-    @RequestMapping(value = "/insertFiles")
+    //@RequestMapping(value = "/insertFiles")
+    //@ResponseBody
+    //public MessageResponse insertFiles(String jsons) throws Exception {
+    //    Files obj = JSON.parseObject(jsons, Files.class);
+    //    return this.clsFilesService.insertFiles(o, this.getCurUserProp());
+    //}
+
+    /**
+     * 批量导入文件
+     *
+     * @param file  上载文件
+     * @param clsId 班级ID
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/uploadFile.do")
     @ResponseBody
-    public MessageResponse insertFiles(String jsons) throws Exception {
-        Files obj = JSON.parseObject(jsons, Files.class);
-        return this.clsFilesService.insertFiles(obj, this.getCurUserProp());
+    public SingleResult<String[]> uploadFile(@RequestParam MultipartFile[] file, String clsId) throws Exception {
+
+        String[] fileNames = new String[file.length];
+        String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
+        File tmp = new File(dir);
+        if (!tmp.exists()) {
+            tmp.mkdirs();
+        }
+        int i = 0;
+        for (MultipartFile o : file) {
+            File dest = new File(dir + File.separator + o.getName());
+            o.transferTo(dest);
+            fileNames[i] = PropertyUtil.getProperty("fastdfs_server") + this.fileSaver.saveFile(dest, o.getOriginalFilename());
+            dest.delete();
+            clsFilesService.insertFiles(fileNames[i] ,clsId ,this.getCurUserProp());
+            i++;
+        }
+
+        SingleResult<String[]> rst = new SingleResult<String[]>(0, "上传成功！");
+        rst.setValue(fileNames);
+        return rst;
+
     }
 
     /**

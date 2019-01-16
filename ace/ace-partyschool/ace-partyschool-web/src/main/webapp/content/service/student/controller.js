@@ -182,17 +182,6 @@ function edit(rowid) {
 
 var show = false;
 function del(rowid) {
-    // jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
-    //     beforeShowForm: function (e) {
-    //         var form = $(e[0]);
-    //         if (!show) {
-    //             form.closest('.ui-jqdialog')
-    //                 .find('.ui-jqdialog-titlebar')
-    //                 .wrapInner('<div class = "widget-header" / > ');
-    //         }
-    //         show = true;
-    //     }
-    // });
 
     if (confirm("确认注销么？")) {
         var jsons = {id: rowid};
@@ -245,6 +234,7 @@ function selectClasses(isFirst) {
 function initJuicerMethod() {
     juicer.register('parseStatus', parseStatus);
     juicer.register('parsePolitical', parsePolitical);
+    juicer.register('rsd', rsd);
 }
 
 /**
