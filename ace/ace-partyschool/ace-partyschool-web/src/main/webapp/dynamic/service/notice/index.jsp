@@ -25,13 +25,13 @@ pageEncoding="utf-8"%>
 
 						</div>
 						<div class="col-md-9">
-							
-							<div class="btn-group"   id="check-group-category" role="group"  style="float:left;padding-right:5px">
-							
+
+							<div class="btn-group" id="check-group-category" role="group" style="float:left;padding-right:5px">
+
 							</div>
-							
-							<div class="btn-group"    id="select1" role="group"  style="float:left;padding-right:5px">
-							
+
+							<div class="btn-group" id="select1" role="group" style="float:left;padding-right:5px">
+
 							</div>
 
 
@@ -60,9 +60,9 @@ pageEncoding="utf-8"%>
 		<jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp" />
 		<jsp:include page="/dynamic/common/footer.jsp" />
 
-		<%--查看详情--%>
+
 		<div class="modal fade" role="dialog" id="modal-preview">
-			<div class="modal-dialog" role="document" style="width: 75%;">
+			<div class="modal-dialog" role="document" style="width: 100%;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
@@ -83,36 +83,40 @@ pageEncoding="utf-8"%>
 				</div>
 			</div>
 		</div>
-		<%--详情juicer模板--%>
+<div class="modal fade" role="dialog" id="modal-push">
+			<div class="modal-dialog" role="document" style="width: 100%;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">发布</h4>
+					</div>
+					<div class="modal-body" id="tt">
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+						<button type="button" class="btn green" authority="false" id="btn-view-save">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script id="tpl-preview" type="text/template">
+
+
 			<div class="form-group">
-        <label class="col-md-2 view-label">类型</label>
-        <div class="col-md-10">
-            \${data.o.category}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">班级</label>
-        <div class="col-md-10">
-            \${data.o.classesId}
-        </div>
-    </div>
-    <div class="form-group">
         <label class="col-md-2 view-label">标题</label>
         <div class="col-md-10">
             \${data.o.title}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">文件地址</label>
-        <div class="col-md-10">
-           \${data.o.fileUrl}
-        </div>
-    </div>
+    
     <div class="form-group">
         <label class="col-md-2 view-label">内容</label>
         <div class="col-md-10">
-            \${data.o.content}
+            <div class="row">\$\${data.o.content}</div>
+			<div class="row" id="filelist-history"></div>
         </div>
     </div>
     <div class="form-group">
@@ -127,20 +131,15 @@ pageEncoding="utf-8"%>
             \${data.o.publisher}
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">状态</label>
-        <div class="col-md-10">
-            \${data.o.status}
-        </div>
-    </div>
+   
 </script>
 
-		
+
 
 
 		<script id="tpl-check-group" type="text/template">
-		
-		    {@each data.list as item, index}
+
+			{@each data.list as item, index}
 		        {@if item.CODE}
 		            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}</button>
 		        {@else}
@@ -150,10 +149,10 @@ pageEncoding="utf-8"%>
 		    {@/each}
 		
 		</script>
-		
+
 		<script id="tpl-select-list" type="text/template">
-		
-		    <select name="classesId" id="classesId" class="form-control" style="height: 30px;">
+
+			<select name="classesId" id="classesId" class="form-control" style="height: 30px;">
 		    {@each data as item, index}
 		           <option value="\${item.id}">\${item.name}</option>
 		    {@/each}
@@ -163,16 +162,23 @@ pageEncoding="utf-8"%>
 
 		<script src="${portalPath}/content/common/jqGrid/jquery.jqGrid.new.js?version=${cfg.version}"></script>
 		<script src="${portalPath}/content/common/assets/js/jqGrid/i18n/grid.locale-cn.js?version=${cfg.version}"></script>
-		
-		
 
+
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
 		<script src="${pageContext.request.contextPath}/content/service/notice/config.js?version=${cfg.version}"></script>
 		<script src="${pageContext.request.contextPath}/content/service/notice/model.js?version=${cfg.version}"></script>
 		<script src="${pageContext.request.contextPath}/content/service/notice/controller.js?version=${cfg.version}"></script>
 		<script src="${pageContext.request.contextPath}/content/service/notice/view.js?version=${cfg.version}"></script>
 
 
-		
+
 		<script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
 
 	</body>

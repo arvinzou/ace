@@ -245,9 +245,9 @@ function renderBtn(cur) {
 
 	var opt = [];
 	opt.push('<a href="javascript:edit(\'' + rowid + '\')">编辑</a> ');
+	opt.push('<a href="javascript:push(\'' + rowid + '\')">发布</a> ');
 	opt.push('<a href="javascript:del(\'' + rowid + '\')">删除</a>  ');
-	opt.push('<a href="#" data-toggle="modal" data-id="' + rowid + '" data-title="' + title + '" ' +
-		'data-target="#modal-preview">查看</a>');
+	opt.push('<a href="#" data-toggle="modal" data-id="' + rowid + '" data-title="' + title + '" ' +'data-target="#modal-preview">查看</a>');
 
 	return opt.join(' ');
 }

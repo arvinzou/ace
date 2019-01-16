@@ -1,14 +1,8 @@
 package com.huacainfo.ace.partyschool.service;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.partyschool.model.NoticeStatus;
-import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
-import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
+import com.huacainfo.ace.common.result.MessageResponse;
 import java.util.Map;
-import java.util.List;
 /**
 * @author: 陈晓克
 * @version: 2019-01-12
@@ -28,4 +22,30 @@ public interface NoticeStatusService {
      * @version: 2019-01-12
      */
     MessageResponse updateStatus(String id, UserProp userProp) throws Exception;
+
+
+    /**
+     * @throws
+     * @Title:insertNoticeStatus
+     * @Description: TODO(批量插入)
+     * @param: @param id
+     * @param: @param userIds
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-16
+     */
+    MessageResponse insertNoticeStatus(String id, String userIds,UserProp userProp) throws Exception;
+    /**
+     * @throws
+     * @Title:getPushUsersList
+     * @Description: TODO(获取已经发送人员列表)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: ListResult<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2019-01-16
+     */
+    ListResult<Map<String,Object>> getPushUsersList(String id)throws Exception;
 }

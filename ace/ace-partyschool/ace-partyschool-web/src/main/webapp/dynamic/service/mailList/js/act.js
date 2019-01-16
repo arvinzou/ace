@@ -213,8 +213,6 @@ function initGroup(classId){
                         console.log(target);
                     }
                 })
-
-
             }
 
 
