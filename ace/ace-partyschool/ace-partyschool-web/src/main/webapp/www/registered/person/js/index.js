@@ -28,6 +28,7 @@ $(function(){
 
     initTodayCourse();
     initNoticeTop1();
+    initAnalysis();
 });
 
 function initTodayCourse() {
@@ -121,6 +122,47 @@ function initNoticeTop1(){
                 if(result.data.list.length>0){
                     renderPage('noticeTop', result.data.list[0], 'noticeTop-tpl');
                 }
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function initAnalysis(){
+    $.ajax({
+        url: contextPath + '/anslysis/query',
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+            reportId: "appPortal"
+        },
+        success:function(result){
+            if(result.status == 0) {
+                var data = {};
+                var temp = result.value;
+                for(var i=0; i<temp.length; i++){
+                    if(temp[i].id == 'eva'){
+                        data.eva = temp[i].VALUE;
+                    }else if(temp[i].id == 'teacher'){
+                        data.teacher = temp[i].VALUE;
+                    }else if(temp[i].id == 'student'){
+                        data.student = temp[i].VALUE;
+                    }else if(temp[i].id == 'file'){
+                        data.file = temp[i].VALUE;
+                    }
+                    data.regType = regType;
+                }
+                renderPage('menu', data, 'menu-tpl');
             }else {
                 if(result.info){
                     alert(result.info);
