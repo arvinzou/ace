@@ -16,7 +16,7 @@
 			<div class="form-box basicinfo">
 				<div class="form-content form-border">
 					<label class="form-label">姓名</label>
-					<input class="form-input" type="text" name="name" placeholder="识别/输入真实姓名"/>
+					<input class="form-input" type="text" name="name" placeholder="识别/输入真实姓名" onblur="searchByName();"/>
 				</div>
 				<div class="form-content">
 					<label class="form-label">身份证号</label>
@@ -29,13 +29,13 @@
 			</div>
 			
 			<div class="form-box">
-				<%--<div class="form-content form-border">
+				<div class="form-content form-border">
 					<label class="form-label">性别</label>
 					<div class="radio-box">
-						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio"/><span class="radio-title">男生</span></div>
-						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio"/><span class="radio-title">女生</span></div>
+						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'1');"/><span class="radio-title">男生</span></div>
+						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'2');"/><span class="radio-title">女生</span></div>
 					</div>
-				</div>--%>
+				</div>
 				<div class="form-content form-border">
 					<label class="form-label">政治面貌</label>
 					<div class="form-select" type="text" name="political" id="political"><span class="unselect">请选择政治面貌</span></div>
@@ -103,11 +103,48 @@
                 </div>
             </form>
 		</div>
+
+
+		<!--报名学员选择栏目-->
+		<div class="modal"id="nameModal"  style="display: none;">
+				<div class="modal-main user-main">
+					<div class="modal-title" style="padding-top: 0.4rem;">选择报名信息</div>
+					<div class="modal-content" id="userInfo">
+
+					</div>
+					<div class="modal-opt user-opt">
+						<div class="cancel"><button class="close" id="close">取消</button></div>
+						<div class="bind"><button  class="submit" onclick="confirm();">确定</button></div>
+					</div>
+				</div>
+			</form>
+		</div>
 	</body>
 
+	<script id="user-tpl" type="text/template">
+		{@each data as item, index}
+		<div class="user-item user-unactive" onclick="select(this,'\${item.name}','\${item.workUnitName}','\${item.postName}');">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="25%">姓名：</td>
+					<td width="75%">\${item.name}</td>
+				</tr>
+				<tr>
+					<td width="25%">单位：</td>
+					<td width="75%">\${item.workUnitName}</td>
+				</tr>
+				<tr>
+					<td width="25%">职务：</td>
+					<td width="75%">\${item.postName}</td>
+				</tr>
+			</table>
+		</div>
+		{@/each}
+	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery.base64.js"></script>
+	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 	<script type="text/javascript" src="js/student.js"></script>
 </html>
