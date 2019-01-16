@@ -60,8 +60,9 @@ function regist(){
         alert("姓名不能为空！");
         return;
     }
-
-    isCardNo(idCard);
+    if(isEmpty(idCard)){
+        isCardNo(idCard);
+    }
     if(!isEmpty(sex)){
         alert("性别不能为空！");
         return;
