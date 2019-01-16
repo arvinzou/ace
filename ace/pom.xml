@@ -41,6 +41,7 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
+
         <repository>
             <id>nexus</id>
             <name>Team Nexus Repository</name>
@@ -64,6 +65,7 @@
         <module>ace-portal</module>
 
         <module>ace-taa</module>
+        <module>ace-partyschool</module>
 
         <!--<module>ace-live</module>-->
 

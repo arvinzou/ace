@@ -34,6 +34,7 @@ public class AnalysisController extends BisBaseController {
         Map<String, Object> condition = this.getParams();
         String classId=studentService.getClassId(this.getCurUserProp()).getValue();
         condition.put("classId", classId);
+        condition.put("userId", this.getCurUserProp().getUserId());
         this.logger.info("condition ->{}", condition);
         return analysisService.query(condition, reportId);
     }
