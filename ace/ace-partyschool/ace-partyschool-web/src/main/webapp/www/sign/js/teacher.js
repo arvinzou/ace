@@ -1,6 +1,7 @@
 var political = null;
 var account = null;
 var workUnit = null;
+var sex = null;
 $(function(){
     var unit = staticDictObject['156'];     //处室字典
     var unitArr = [];
@@ -42,7 +43,11 @@ $(function(){
 	});
 
 });
-
+function selectSex(obj,value){
+    $(obj).attr("src",'img/icon-sex.png');
+    $(obj).parent().siblings().find("img").attr("src",'img/sex_unselect.png');
+    sex = value;
+}
 function regist(){
     var name = $("input[name='name']").val();
     var idCard = $("input[name='idCard']").val();
@@ -55,11 +60,11 @@ function regist(){
         alert("姓名不能为空！");
         return;
     }
-    if(!isEmpty(idCard)){
-        alert("身份证号不能为空！");
+
+    isCardNo(idCard);
+    if(!isEmpty(sex)){
+        alert("性别不能为空！");
         return;
-    }else{
-        isCardNo(idCard);
     }
     if(!isEmpty(political)){
         alert("政治面貌不能为空！");
@@ -100,7 +105,8 @@ function regist(){
             political: political[0].id,
             workUnitName: workUnit[0].id,
             postName: postName,
-            uid: new Date().getTime()
+            uid: new Date().getTime(),
+            sex: sex
         },
         success:function(result){
             if(result.status == 0) {
