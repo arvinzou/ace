@@ -367,7 +367,7 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         condition.setStatus("1");
         int i = enrollRosterDao.findCount(condition);
 
-        if (i > 0) {
+        if (i <= 0) {
             return false;
         } else {
             return true;
