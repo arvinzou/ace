@@ -3,6 +3,7 @@
 <mapper namespace="com.huacainfo.ace.partyschool.dao.report.AppPortal">
     <select id="query" resultType="map">
 
+
         SELECT
         'eva' id,
         count(1) as VALUE
