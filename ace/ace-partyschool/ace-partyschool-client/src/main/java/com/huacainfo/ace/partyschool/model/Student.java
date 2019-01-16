@@ -17,6 +17,8 @@ public class Student extends BaseModel {
 
     private String name;
 
+    private String sex;
+
     private String mobile;
 
     private String idCard;
@@ -48,6 +50,14 @@ public class Student extends BaseModel {
     private String lastModifyUserName;
 
     private Date lastModifyDate;
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
 
     public String getId() {
         return id;

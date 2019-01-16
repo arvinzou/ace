@@ -5,24 +5,30 @@ import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.Userinfo;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonKeys;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.constant.CommConstant;
+import com.huacainfo.ace.partyschool.service.EnrollRosterService;
 import com.huacainfo.ace.partyschool.service.SignService;
+import com.huacainfo.ace.partyschool.vo.EnrollRosterQVo;
+import com.huacainfo.ace.partyschool.vo.EnrollRosterVo;
 import com.huacainfo.ace.partyschool.vo.StudentVo;
 import com.huacainfo.ace.partyschool.vo.TeacherVo;
 import com.huacainfo.ace.portal.model.TaskCmcc;
 import com.huacainfo.ace.portal.model.Users;
 import com.huacainfo.ace.portal.service.TaskCmccService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,6 +46,8 @@ public class WSignController extends BisBaseController {
 
     @Autowired
     private TaskCmccService taskCmccService;
+    @Autowired
+    private EnrollRosterService enrollRosterService;
 
     /**
      * 功能描述: 发送短信验证验证码
@@ -278,6 +286,32 @@ public class WSignController extends BisBaseController {
         delSessionAttr(CommonKeys.SESSION_USERPROP_KEY);
 
         return new ResultResponse(ResultCode.SUCCESS, "登出成功");
+    }
+
+
+    /**
+     * 根据姓名检索是否可以准许报名注册
+     *
+     * @param name 姓名
+     * @return ResultResponse
+     */
+    @RequestMapping("/searchByName")
+    public ResultResponse searchByName(String name) throws Exception {
+        if (CommonUtils.isBlank(name)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+
+        EnrollRosterQVo condition = new EnrollRosterQVo();
+        condition.setName(name);
+        condition.setStatus("1");
+        PageResult<EnrollRosterVo> data =
+                enrollRosterService.findEnrollRosterList(condition, 0, 100, "");
+        List<EnrollRosterVo> list = data.getRows();
+        if (CollectionUtils.isEmpty(list)) {
+            return new ResultResponse(ResultCode.FAIL, "您不在注册期，请联系管理员");
+        }
+
+        return new ResultResponse(ResultCode.SUCCESS, "success", list);
     }
 
 }

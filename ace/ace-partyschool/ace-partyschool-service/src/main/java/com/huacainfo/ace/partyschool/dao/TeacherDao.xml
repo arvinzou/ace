@@ -5,6 +5,8 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="category" jdbcType="CHAR" property="category"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="political" jdbcType="VARCHAR" property="political"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="idCard" jdbcType="CHAR" property="idCard"/>
         <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
@@ -23,7 +25,7 @@
         <result column="introduce" jdbcType="LONGVARCHAR" property="introduce"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, category, name, mobile, idCard, photoUrl, remark, status, createUserId, createUserName,
+        id, category, name, sex, political, mobile, idCard, photoUrl, remark, status, createUserId, createUserName,
         createDate, lastModifyUserId, lastModifyUserName, lastModifyDate, introduce, workUnitName, postName
     </sql>
 
@@ -40,7 +42,7 @@
     </delete>
 
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Teacher">
-        insert into teacher (id, category, name,
+        insert into teacher (id, category, name, sex, political,
         mobile, idCard, photoUrl,
         remark, status, createUserId,
         createUserName, createDate, lastModifyUserId,
@@ -48,6 +50,7 @@
         workUnitName, postName
         )
         values (#{id,jdbcType=VARCHAR}, #{category,jdbcType=CHAR}, #{name,jdbcType=VARCHAR},
+        #{sex,jdbcType=VARCHAR}, #{political,jdbcType=VARCHAR},
         #{mobile,jdbcType=VARCHAR}, #{idCard,jdbcType=CHAR}, #{photoUrl,jdbcType=VARCHAR},
         #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{createUserId,jdbcType=VARCHAR},
         #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastModifyUserId,jdbcType=VARCHAR},
@@ -60,6 +63,8 @@
         update teacher
         set category = #{category,jdbcType=CHAR},
         name = #{name,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=VARCHAR},
+        political = #{political,jdbcType=VARCHAR},
         introduce = #{introduce,jdbcType=LONGVARCHAR},
         mobile = #{mobile,jdbcType=VARCHAR},
         idCard = #{idCard,jdbcType=CHAR},
@@ -83,9 +88,10 @@
 
     <sql id="Vo_Column_List">
         cd.cardData as lCardNo,
-        t.id, t.category, t.name, t.mobile, t.idCard, t.photoUrl, t.remark, t.status, t.createUserId, t.createUserName,
-        t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate, t.introduce, t.workUnitName,
-        t.postName
+        t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
+        t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        t.introduce, t.workUnitName, t.postName
     </sql>
     <sql id="From_Statement">
         FROM teacher t
@@ -110,8 +116,8 @@
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         <include refid="Vo_Column_List"/>
-        from teacher
-        where id = #{id,jdbcType=VARCHAR}
+        <include refid="From_Statement"/>
+        where t.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
@@ -124,7 +130,7 @@
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY t.createDate desc
+                ORDER BY t.createDate desc, t.`name`
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
