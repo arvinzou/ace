@@ -6,18 +6,14 @@ import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.dao.NoticeDao;
 import com.huacainfo.ace.partyschool.dao.NoticeStatusDao;
 import com.huacainfo.ace.partyschool.model.Notice;
-import com.huacainfo.ace.partyschool.model.NoticeStatus;
-import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.service.NoticeStatusService;
-import com.huacainfo.ace.partyschool.vo.AccountVo;
+import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
-import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
-import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,15 +93,25 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public MessageResponse insertNotice(Notice o, UserProp userProp) throws Exception {
-
-
+        if(CommonUtils.isBlank(o.getId())){
+            return new MessageResponse(1,"序号不能为空!");
+        }
+        if(CommonUtils.isBlank(o.getTitle())){
+            return new MessageResponse(1,"标题不能为空!");
+        }
+        if(CommonUtils.isBlank(o.getCategory())){
+            return new MessageResponse(1,"类别不能为空!");
+        }
+        if(CommonUtils.isBlank(o.getContent())){
+            return new MessageResponse(1,"内容不能为空!");
+        }
         int temp = this.noticeDao.isExit(o);
         if (temp > 0) {
             return new MessageResponse(1, "通知公告名称重复！");
         }
-
-        o.setId(GUIDUtil.getGUID());
         o.setStatus("1");
+        o.setPublisher(userProp.getName());
+        o.setPushDate(new java.util.Date());
         this.noticeDao.insert(o);
         this.dataBaseLogService.log("添加通知公告", "通知公告", "",
                 o.getId(), o.getId(), userProp);
@@ -126,6 +132,18 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      */
     @Override
     public MessageResponse updateNotice(Notice o, UserProp userProp) throws Exception {
+        if(CommonUtils.isBlank(o.getId())){
+            return new MessageResponse(1,"序号不能为空!");
+        }
+        if(CommonUtils.isBlank(o.getTitle())){
+            return new MessageResponse(1,"标题不能为空!");
+        }
+        if(CommonUtils.isBlank(o.getCategory())){
+            return new MessageResponse(1,"类别不能为空!");
+        }
+        if(CommonUtils.isBlank(o.getContent())){
+            return new MessageResponse(1,"内容不能为空!");
+        }
         this.noticeDao.updateByPrimaryKey(o);
         this.dataBaseLogService.log("变更通知公告", "通知公告", "",
                 o.getId(), o.getId(), userProp);
