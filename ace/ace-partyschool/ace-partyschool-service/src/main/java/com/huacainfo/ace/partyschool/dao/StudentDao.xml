@@ -189,5 +189,8 @@
     <select id="selectTeacherClassInfoById" resultType="string">
         select t.id as classId from classes t where t.headmaster=#{id}
     </select>
+    <select id="selectTeacherClasses" resultType="map">
+        select t.clsId as classId from teacher_cls_ship t where t.teacherId=#{id}
+    </select>
 
 </mapper>

@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -354,14 +355,21 @@ public class StudentServiceImpl implements StudentService {
      * @return SingleResult<String>
      */
     @Override
-    public SingleResult<String> getClassId(UserProp userProp){
-        SingleResult<String> rst=new SingleResult<String>();
+    public SingleResult<Map<String, Object>> getRoleClassId(UserProp userProp){
+        SingleResult<Map<String, Object>> rst=new SingleResult();
+        Map<String, Object> e=new HashMap<>();
         Map<String, String> o=this.studentDao.selectUserClassInfo(userProp.getUserId());
         if (o.get("role").equals("student")) {
-            rst.setValue(o.get("classId"));
+            e.put("classId",o.get("classId"));
+            e.put("role",o.get("role"));
+            rst.setValue(e);
         } else {
             String classId=this.studentDao.selectTeacherClassInfoById(userProp.getUserId());
-            rst.setValue(classId);
+            e.put("classId",classId);
+            e.put("role","teacher");
+            List<Map<String,String>> list=this.studentDao.selectTeacherClasses(userProp.getUserId());
+            e.put("list",list);
+            rst.setValue(e);
         }
         return rst;
     }
