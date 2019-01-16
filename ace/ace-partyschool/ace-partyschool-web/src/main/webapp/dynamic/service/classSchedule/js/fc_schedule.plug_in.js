@@ -2,8 +2,8 @@
 window.onload = function () {
 
     var parameter = {
-        weekDate:getdate(),
-        classesId:2
+        weekDate: getdate(),
+        classesId: 2
     }
 
     $(function () {
@@ -11,13 +11,44 @@ window.onload = function () {
         initFullCalendar(jsonStr);
         initcurrentClass();
         initSelect();
+        $('#b_container').on('click', '.searchCourse', searchCourse);
+        $('#classList').on('click', '.btn-default', setParams);
+        $(".js-example-basic-single2").on('change',classSearch2);
 
         // getEventData();
     })
 
+    function classSearch2() {
+        parameter['classesId'] = $("select[name=classId]").val();
+        $('#classList .btn-default').removeClass('btn-primary');
+        getEventData();
+    }
+
+
+
+    function setParams() {
+        var that =$(this);
+        parameter.classesId = that.data('id');
+        that.siblings().removeClass('btn-primary');
+        that.addClass('btn-primary');
+        getEventData();
+    }
+
     // var parameter = {
     //     weekDate:getdate(),
     // }
+
+    function searchCourse() {
+        var val = $('#b_container .courseNameTeacher').val();
+        var data={
+            name:val,
+            tName:val
+        }
+        getCourseList(data)
+    }
+    /** */
+
+    
 
     function formatDate(target) {
         var date = target.substring(0, target.indexOf(" – "));
@@ -39,32 +70,31 @@ window.onload = function () {
     /*整理成event的数据格式*/
     function formatEventData(data) {
         $('#calendar').fullCalendar('removeEvents');
-       var event= {
+        var event = {
             color: '#efffe3',
-            textColor:'#444'
+            textColor: '#444'
         };
-       for(index in data){
-           var item=data[index];
-           event.id=item.id;
-           event.title=item.course.name;
-           event.teacher=item.teacher.name;
-           event.courseId=item.id;
-           event.teacherId=item.teacherId;
-           var date=item.courseDate.substring(0,10);
-           if(item.courseIndex=='am'){
-               event.start=date+' 01:00';
-               event.end=date+' 02:00';
-           }else {
-               event.start=date+' 02:00';
-               event.end=date+' 03:00';
-           }
-           $('#calendar').fullCalendar('renderEvent',event,true);
-       }
+        for (index in data) {
+            var item = data[index];
+            event.id = item.id;
+            event.title = item.course.name;
+            event.teacher = item.teacher.name;
+            event.courseId = item.id;
+            event.teacherId = item.teacherId;
+            var date = item.courseDate.substring(0, 10);
+            if (item.courseIndex == 'am') {
+                event.start = date + ' 01:00';
+                event.end = date + ' 02:00';
+            } else {
+                event.start = date + ' 02:00';
+                event.end = date + ' 03:00';
+            }
+            $('#calendar').fullCalendar('renderEvent', event, true);
+        }
     }
 
-    function getCourseList() {
+    function getCourseList(data) {
         var url = contextPath + "/course/findListClassifiedName";
-        var data = {};
         $.getJSON(url, data, function (rst) {
             render('#courseList', rst.data, 'tpl-courseList');
             initEvent();
@@ -163,7 +193,7 @@ window.onload = function () {
             header: {
                 left: 'prev,next,today',
                 center: 'title',
-                right:''
+                right: ''
             },
             eventStartEditable: false,
             eventDurationEditable: false,
@@ -185,7 +215,7 @@ window.onload = function () {
                 day: '日'
             },
 
-            viewRender:function () {
+            viewRender: function () {
                 getEventData();
             },
             //点击一天时触发
@@ -193,12 +223,12 @@ window.onload = function () {
             },
             // 当点击某一个事件时触发此操作
             eventClick: function (calEvent, jsEvent, view) {
-                var url=contextPath + "/classSchedule/selectClassScheduleByPrimaryKey"
-                var data={
-                    id:calEvent.id
+                var url = contextPath + "/classSchedule/selectClassScheduleByPrimaryKey"
+                var data = {
+                    id: calEvent.id
                 }
-                $.getJSON(url,data,function (rst) {
-                    if(rst.status==0){
+                $.getJSON(url, data, function (rst) {
+                    if (rst.status == 0) {
                         console.log(rst);
                     }
                 })
@@ -213,25 +243,26 @@ window.onload = function () {
 
             droppable: true, //允许拖拽放置
             eventReceive: function (data) {
-                var insertDate={};
+                var insertDate = {};
                 var dateTime = JSON.stringify(data.start);
-                var date=dateTime.substring(1,11);
-                var time=dateTime.substring(13,14);
-                if(time==1){
-                    insertDate.courseIndex='am';
-                }else if(time==2){
-                    insertDate.courseIndex='bm';
-                };
-                insertDate.classesId=parameter.classesId;
-                insertDate.courseDate=date+' 00:00:00';
-                insertDate.teacherId=data.teacherId;
-                insertDate.courseId=data.courseId;
-                var url=contextPath + "/classSchedule/insertClassSchedule"
-                var jdata={
-                    jsons:JSON.stringify(insertDate)
+                var date = dateTime.substring(1, 11);
+                var time = dateTime.substring(13, 14);
+                if (time == 1) {
+                    insertDate.courseIndex = 'am';
+                } else if (time == 2) {
+                    insertDate.courseIndex = 'bm';
                 }
-                $.post(url,jdata,function (rst) {
-                    if(rst.status!=0){
+                ;
+                insertDate.classesId = parameter.classesId;
+                insertDate.courseDate = date + ' 00:00:00';
+                insertDate.teacherId = data.teacherId;
+                insertDate.courseId = data.courseId;
+                var url = contextPath + "/classSchedule/insertClassSchedule"
+                var jdata = {
+                    jsons: JSON.stringify(insertDate)
+                }
+                $.post(url, jdata, function (rst) {
+                    if (rst.status != 0) {
                         alert("排课失败，请刷新后重试！");
                     }
                 })
@@ -333,8 +364,8 @@ window.onload = function () {
         }
         $.getJSON(url, data, function (rst) {
             if (rst.status == 0) {
-                parameter.classesId=rst.rows[0].id;
-                parameter.weekDate=getdate();
+                parameter.classesId = rst.rows[0].id;
+                parameter.weekDate = getdate();
                 initFullCalendar(jsonStr);
                 render('#classList', rst.rows, 'tpl-classList');
             }

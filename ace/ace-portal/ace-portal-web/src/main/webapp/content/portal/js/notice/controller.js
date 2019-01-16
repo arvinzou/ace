@@ -1,8 +1,8 @@
+var params={};
 jQuery(function($) {
 $('#btn-search').on('click', function() {
 		$('#fm-search').ajaxForm({
 			beforeSubmit : function(formData, jqForm, options) {
-				var params = {};
 				$.each(formData, function(n, obj) {
 					params[obj.name] = obj.value;
 				});
@@ -55,7 +55,7 @@ function del(rowid){
         }
     });
 }
-var params={};
+
 function setParams(key, value) {
     params[key] = value;
     jQuery(cfg.grid_selector).jqGrid('setGridParam',{postData : params}).trigger("reloadGrid");

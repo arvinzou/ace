@@ -2,6 +2,8 @@ var account = 0;
 var regType = null;
 var userInfo = {};
 var political = null;
+var workUnit = null;
+var sex = null;
 $(function(){
     initUserinfo();
 });
@@ -18,8 +20,12 @@ function initUserinfo(){
                 userInfo = result.data;
                 renderPage('userInfo', result.data, 'info-tpl');
                 renderPage('option', result.data, 'option-tpl');
-                initPolitical();
                 regType = result.data.regType;
+                initPolitical();
+                if(regType == 'teacher'){
+                    initWorkUnit();
+                }
+                sex = result.data.sex;
                 if(result.data.regType == 'student'){
                     account = result.data.student.mobile;
                 }else{
@@ -101,12 +107,43 @@ function initPolitical(){
     });
 }
 
+function initWorkUnit(){
+    var unit = staticDictObject['156'];     //处室字典
+    var unitArr = [];
+    for(var i=0; i<unit.length; i++){
+        var o = {};
+        o.id = unit[i].CODE;
+        o.value = unit[i].NAME;
+        unitArr.push(o);
+    }
+    var unitSelect= new MobileSelect({
+        trigger: '#workUnit',
+        title: '处室选择',
+        wheels: [
+            {data: unitArr}
+        ],
+        position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+        transitionEnd:function(indexArr, data){
+            workUnit = data;
+        },
+        callback:function(indexArr, data){
+            workUnit = data;
+        }
+    });
+}
+
 function save(){
     if(regType == 'student'){
         editStudent();
     }else{
         editTeacher();
     }
+}
+
+function selectSex(obj,value){
+    $(obj).attr("src",'img/icon-sex.png');
+    $(obj).parent().siblings().find("img").attr("src",'img/sex_unselect.png');
+    sex = value;
 }
 
 function editStudent(){
@@ -123,7 +160,7 @@ function editStudent(){
         data:{
          jsons:  JSON.stringify({
                 name: userInfo.student.name,
-                sex: "1",
+                sex: sex,
                 mobile: mobile,
                 idCard: idCard,
                 political:political == null? politicalName: political[0].id,
@@ -131,6 +168,47 @@ function editStudent(){
                 postName: postName,
                 classId: userInfo.student.classId
         })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert(result.info);
+                initUserinfo();
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
+}
+
+function editTeacher(){
+    var idCard = $("input[name='idCard']").val();
+    var mobile = $("input[name='mobile']").val();
+    var workUnitName = userInfo.teacher.workUnitName;
+    var postName = $("input[name='postName']").val();
+    var politicalName = userInfo.teacher.political;
+    $.ajax({
+        url: contextPath+ "/www/sign/teacher/update",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+            jsons:  JSON.stringify({
+                name: userInfo.teacher.name,
+                sex: sex,
+                mobile: mobile,
+                idCard: idCard,
+                political:political == null? politicalName: political[0].id,
+                workUnitName: workUnit == null?workUnitName: workUnit[0].id ,
+                postName: postName
+            })
         },
         success:function(result){
             if(result.status == 0) {

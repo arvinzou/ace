@@ -1,3 +1,32 @@
 .fc-time-grid .fc-slats td {
      height: 10.5em !important;
  }
+
+#b_container .search{
+    width: 100%;
+    display: flex;
+
+}
+
+#b_container .search input{
+    width: 70%;
+    flex-grow: 1;
+    height: 36px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#b_container .search button{
+    width: 40px;
+    height: 36px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/*#b_container .search .searchIcon:after{*/
+    /*display: block;*/
+    /*content: '';*/
+    /*width: 15px;*/
+    /*height: 15px;*/
+    /*border: 4px solid blue;*/
+/*}*/
