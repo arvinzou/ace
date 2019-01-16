@@ -150,12 +150,14 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         rst.setValue(this.noticeDao.selectVoByPrimaryKey(id));
         return rst;
     }
+
+
     @Override
     public ResultResponse selectNoticeById(String id) throws Exception{
         NoticeVo noticeVo=this.noticeDao.selectVoByPrimaryKey(id);
-        String noticeId=noticeVo.getId();
-        if(noticeVo.getStatus()=="1"){
-            noticeStatusDao.updateStatus(noticeId);
+        if("1".equals(noticeVo.getStatus())){
+            noticeVo.setStatus("2");
+            this.noticeDao.updateByPrimaryKey(noticeVo);
         }
         return new ResultResponse(0, "公告详情获取完成！",noticeVo);
     }

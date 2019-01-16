@@ -123,15 +123,28 @@
         <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
         <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
         <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
-        <result column="tName1" jdbcType="VARCHAR" property="tName1"/>
-        <result column="tMobile1" jdbcType="VARCHAR" property="tMobile1"/>
         <association property="classroom" column="classroomId" javaType="com.huacainfo.ace.partyschool.model.Classroom">
+            <id column="id" jdbcType="VARCHAR" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+            <result column="photoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+            <result column="remark" jdbcType="VARCHAR" property="remark"/>
+            <result column="status" jdbcType="CHAR" property="status"/>
+            <result column="createUserId" jdbcType="VARCHAR" property="createUserId"/>
+            <result column="createUserName" jdbcType="VARCHAR" property="createUserName"/>
+            <result column="createDate" jdbcType="TIMESTAMP" property="createDate"/>
+            <result column="lastModifyUserId" jdbcType="VARCHAR" property="lastModifyUserId"/>
+            <result column="lastModifyUserName" jdbcType="VARCHAR" property="lastModifyUserName"/>
+            <result column="lastModifyDate" jdbcType="TIMESTAMP" property="lastModifyDate"/>
             <result column="crIntroduce" jdbcType="VARCHAR" property="introduce"/>
             <result column="crName" jdbcType="VARCHAR" property="name"/>
         </association>
         <association property="teacher" column="headmaster" javaType="com.huacainfo.ace.partyschool.model.Teacher">
             <result column="tName" jdbcType="VARCHAR" property="name"/>
             <result column="tMobile" jdbcType="VARCHAR" property="mobile"/>
+        </association>
+        <association property="clsTeacher" column="tid1" javaType="com.huacainfo.ace.partyschool.model.Teacher">
+            <result column="tName1" jdbcType="VARCHAR" property="name"/>
+            <result column="tMobile1" jdbcType="VARCHAR" property="mobile"/>
         </association>
         <association property="student" column="tid2" javaType="com.huacainfo.ace.partyschool.model.Student">
             <result column="sName" jdbcType="VARCHAR" property="name"/>

@@ -60,6 +60,9 @@
         <if test="condition.title !=null and condition.title !=&quot;&quot;">
             and f.title = #{condition.title,jdbcType=VARCHAR}
         </if>
+        <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
+            and f.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
