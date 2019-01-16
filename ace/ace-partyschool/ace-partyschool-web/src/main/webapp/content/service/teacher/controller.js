@@ -29,7 +29,7 @@ jQuery(function ($) {
                 form.closest('.ui-jqdialog')
                     .find('.ui-jqdialog-titlebar')
                     .wrapInner('<div class = "widget-header" / > ');
-                //ll
+                //
                 appendUploadBtn("photoUrl");
             }
         })
@@ -104,7 +104,7 @@ function edit(rowid) {
             appendUploadBtn("photoUrl");
 
             //readOnly: true,
-            $("#mobile").attr("readOnly", true);
+            // $("#mobile").attr("readOnly", true);
         }
     });
 }

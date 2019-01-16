@@ -147,4 +147,13 @@ public interface SignService {
      * @return int
      */
     int updateUsersStatus(String userId, String status);
+
+    /**
+     * 更换账号
+     *
+     * @param userId     用户ID
+     * @param newAccount 新账号
+     * @return int
+     */
+    MessageResponse updateAccount(String userId, String newAccount);
 }

@@ -30,4 +30,7 @@ public interface SignDao {
 
     int updateUsersStatus(@Param("userId") String userId,
                           @Param("status") String status);
+
+    int updateAccount(@Param("userId") String userId,
+                      @Param("newAccount") String newAccount);
 }

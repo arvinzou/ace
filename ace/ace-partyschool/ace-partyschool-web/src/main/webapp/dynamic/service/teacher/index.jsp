@@ -151,7 +151,7 @@
     <div class="form-group">
         <label class="col-md-2 view-label">处室</label>
         <div class="col-md-10">
-            \${data.o.workUnitName}
+            \${rsd(data.o.workUnitName,'156')}
         </div>
     </div>
     <div class="form-group">

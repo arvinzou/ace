@@ -134,14 +134,17 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-        boolean b = signService.isExistByMobile(o.getMobile());
-        if (b) {
-            return new MessageResponse(1, "手机号码不能重复！");
-        }
         //
         Teacher oldData = teacherDao.selectByPrimaryKey(o.getId());
         if (oldData == null) {
             return new MessageResponse(1, "数据丢失！");
+        }
+        //号码有变动时，进行校验
+        if (!oldData.getMobile().equals(o.getMobile())) {
+            MessageResponse m = signService.updateAccount(o.getId(), o.getMobile());
+            if (m.getStatus() == ResultCode.FAIL) {
+                return m;
+            }
         }
         oldData.setMobile(o.getMobile());
         oldData.setName(o.getName());
