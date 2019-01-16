@@ -1,4 +1,5 @@
-var params={};
+var params = {};
+var id;
 jQuery(function($) {
 	//查询
 	$('#btn-search').on('click', function() {
@@ -18,10 +19,7 @@ jQuery(function($) {
 			}
 		});
 	});
-	//添加
-	$('#btn-view-add').on('click', function() {
-	
-	});
+
 
 	//初始化事件
 	initEvents();
@@ -47,18 +45,21 @@ function initEvents() {
 		console.log(relatedTarget);
 		initPreview(id);
 	})
-	var data={};
-	data.key='category';
-	data.list=staticDictObject['174'];
+	var data = {};
+	data.key = 'category';
+	data.list = staticDictObject['174'];
 	render($("#check-group-category"), data, "tpl-check-group");
-	$(".btn-group .btn").bind('click', function (event) {
-            $(event.target).siblings().removeClass("active");
-            console.log(event);
-            $(event.target).addClass("active");
-    });
-    $("#btn-view-add").bind('click', function (event) {
-        location.href="add/index.jsp?id="+urlParams.id;
-    });
+	$(".btn-group .btn").bind('click', function(event) {
+		$(event.target).siblings().removeClass("active");
+		console.log(event);
+		$(event.target).addClass("active");
+	});
+	$("#btn-view-add").bind('click', function(event) {
+		location.href = "add/index.jsp?id=" + urlParams.id;
+	});
+	$("#btn-view-save").bind('click', function(event) {
+		save();
+	});
 }
 
 function initPreview(id) {
@@ -76,6 +77,7 @@ function initPreview(id) {
 				var data = {};
 				data['o'] = result.value;
 				render('#fm-preview', data, 'tpl-preview');
+				loadAttach(id);
 			} else {
 				alert(result.errorMessage);
 			}
@@ -88,8 +90,8 @@ function initPreview(id) {
 }
 
 
-function edit(rowid){
-   location.href="edit/index.jsp?id="+urlParams.id+"&did="+rowid;
+function edit(rowid) {
+	location.href = "edit/index.jsp?id=" + urlParams.id + "&did=" + rowid;
 }
 
 var show = false;
@@ -113,28 +115,99 @@ function setParams(key, value) {
 		postData: params
 	}).trigger("reloadGrid");
 }
+
 function initClassList() {
-    startLoad();
-    $.ajax({
-        url: contextPath + "/mailList/getClassList",
-        type: "post",
-        async: false,
-        data: {
-        },
-        success: function (result) {
-            stopLoad();
-            if (result.status == 0) {
-                var data = {};
-                data = result.value;
-                render('#select1', data, 'tpl-select-list');
+	startLoad();
+	$.ajax({
+		url: contextPath + "/mailList/getClassList",
+		type: "post",
+		async: false,
+		data: {},
+		success: function(result) {
+			stopLoad();
+			if (result.status == 0) {
+				var data = {};
+				data = result.value;
+				render('#select1', data, 'tpl-select-list');
 				initGrid();
-            } else {
-                alert(result.errorMessage);
-            }
-        },
-        error: function () {
-            stopLoad();
-            alert("对不起出错了！");
+			} else {
+				alert(result.errorMessage);
+			}
+		},
+		error: function() {
+			stopLoad();
+			alert("对不起出错了！");
+		}
+	});
+}
+
+function loadAttach(noticeId) {
+	$.ajax({
+		type: "get",
+		url: portalPath + "/attach/findAttachList.do",
+		data: {
+			noticeId: noticeId
+		},
+		success: function(rst, textStatus) {
+			if (rst && rst.state) {
+				var html = [];
+				$.each(rst.value, function(n, file) {
+					html.push('<div style="padding:10px" id="' + file.fileUrl + '"><a href="' + fastdfs_server + file.fileUrl +
+						'" target="_blank">' + file.fileName + '</a> (' + parseInt(file.fileSize / 1024) + 'kb)</div>');
+				});
+				$('#filelist-history').html(html.join(''));
+			} else {
+				alert(rst.errorMessage);
+			}
+		}
+	});
+}
+
+function push(rowid) {
+	$("#modal-push").modal("show");
+	id=rowid;
+	initTree();
+}
+
+function initTree() {
+	$('#tt').tree({
+		url: contextPath + '/mailList/getTree',
+		method: 'get',
+		animate: true,
+		lines: false,
+		checkbox:true,
+		onLoadSuccess: function() {
+			//$("#tt").tree("expandAll");
+		}
+	})
+}
+function save() {
+	var nodes = $('#tt').tree('getChecked', ['checked','indeterminate']);
+        var s = '';
+        for(var i=0; i<nodes.length; i++){
+            if (s != '') s += ',';
+            s += nodes[i].id;
         }
-    });
+        console.log(s);
+		return;
+        $.ajax({
+            type : "post",
+            url : contextPath + "/role/insertRoleResources.do",
+            data:{id:id,userIds:s},
+            beforeSend : function(XMLHttpRequest) {
+                startLoad();
+            },
+            success : function(rst, textStatus) {
+                if (rst) {
+                    $('#modal-push').modal('hide');
+                    alert(rst.errorMessage);
+                }
+            },
+            complete : function(XMLHttpRequest, textStatus) {
+                stopLoad();
+            },
+            error : function() {
+                stopLoad();
+            }
+        });
 }

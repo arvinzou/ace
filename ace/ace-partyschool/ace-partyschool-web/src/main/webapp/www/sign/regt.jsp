@@ -29,13 +29,13 @@
 			</div>
 			
 			<div class="form-box">
-				<%--<div class="form-content form-border">
+				<div class="form-content form-border">
 					<label class="form-label">性别</label>
 					<div class="radio-box">
-						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio"/><span class="radio-title">男生</span></div>
-						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio"/><span class="radio-title">女生</span></div>
+						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'1');"/><span class="radio-title">男生</span></div>
+						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'2');"/><span class="radio-title">女生</span></div>
 					</div>
-				</div>--%>
+				</div>
 				<div class="form-content form-border">
 					<label class="form-label">政治面貌</label>
 					<div class="form-select" type="text" name="political" id="political"><span class="unselect">请选择政治面貌</span></div>
