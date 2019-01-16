@@ -27,6 +27,7 @@ $(function(){
     });
 
     initTodayCourse();
+    initNoticeTop1();
 });
 
 function initTodayCourse() {
@@ -103,4 +104,34 @@ function moreNotice(){
 }
 function toTest(){
     window.location.href = contextPath + '/www/registered/test/index.jsp';
+}
+
+function initNoticeTop1(){
+    $.ajax({
+        url: contextPath + "/www/notice/findNoticeLists",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+            start: 0,
+            limit: 1
+        },
+        success:function(result){
+            if(result.status == 0) {
+                if(result.data.list.length>0){
+                    renderPage('noticeTop', result.data.list[0], 'noticeTop-tpl');
+                }
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
 }
