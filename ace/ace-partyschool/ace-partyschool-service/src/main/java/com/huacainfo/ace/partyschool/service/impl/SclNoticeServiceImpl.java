@@ -116,7 +116,7 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         this.dataBaseLogService.log("添加通知公告", "通知公告", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "添加通知公告完成！");
+        return new MessageResponse(0, "保存成功！");
     }
 
     /**
@@ -148,7 +148,7 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         this.dataBaseLogService.log("变更通知公告", "通知公告", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "变更通知公告完成！");
+        return new MessageResponse(0, "保存成功！");
     }
 
     /**
