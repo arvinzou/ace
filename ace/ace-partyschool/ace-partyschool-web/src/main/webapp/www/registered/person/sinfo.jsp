@@ -50,21 +50,17 @@
 			<div class="icontent br">
 				{@if data.sex == '1'}
 				<div class="sex-left">
-                    <img src="img/icon-sex.png" class="icon-sex"/><span>男</span>
+                    <img src="img/icon-sex.png" class="icon-sex" onclick="selectSex(this,'1')"/><span>男</span>
 				</div>
 				<div class="sex-right">
-                    <img src="img/icon-unsex.png" class="icon-sex"/><span>女</span>
+                    <img src="img/icon-unsex.png" class="icon-sex" onclick="selectSex(this,'2')"/><span>女</span>
 				</div>
 				{@else}
 				<div class="sex-left">
-					<div class="inner">
-						<img src="img/icon-unsex.png" class="icon-sex"/><span>男</span>
-					</div>
+					<img src="img/icon-unsex.png" class="icon-sex" onclick="selectSex(this,'1')"/><span>男</span>
 				</div>
 				<div class="sex-right">
-					<div class="inner">
-						<img src="img/icon-sex.png" class="icon-sex"/><span>女</span>
-					</div>
+					<img src="img/icon-sex.png" class="icon-sex" onclick="selectSex(this,'2')"/><span>女</span>
 				</div>
 				{@/if}
 			</div>
@@ -119,5 +115,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
+    <script src="${portalPath}/content/common/js/dict_partyschool.js?version=${version}"></script>
 	<script type="text/javascript" src="js/info.js"></script>
 </html>

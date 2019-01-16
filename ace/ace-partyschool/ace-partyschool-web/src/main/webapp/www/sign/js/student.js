@@ -64,7 +64,9 @@ function regist(){
         alert("性别不能为空！");
         return;
     }
-    isCardNo(idCard);
+    if(isEmpty(idCard)){
+        isCardNo(idCard);
+    }
     if(!isEmpty(political)){
         alert("政治面貌不能为空！");
         return;

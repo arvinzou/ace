@@ -51,7 +51,7 @@
                     <div class="btn-group" id="classList" role="group" style="float:left;padding-right:5px">
                     </div>
                     <div class="btn-group" role="group" style="float:left;padding-right:5px">
-                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="teacherId"></select>
+                        <select style="width: 200px" class="form-control js-example-basic-single js-example-basic-single2" name="classId"></select>
                     </div>
                 </form>
             </div>
@@ -66,8 +66,8 @@
                         <!--</div>-->
                         <div class="col-sm-2 margin0 padding0">
                             <div id='external-events' class="external-events" >
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="exampleInputName2" placeholder="按老师或课程名搜索">
+                                <div class="search">
+                                    <input class="courseNameTeacher" type="text"><button class="searchCourse"><span class="searchIcon"></span></button>
                                 </div>
                                 <ul class="external-events-box" id="courseList">
 
@@ -122,9 +122,9 @@
 <script id="tpl-classList" type="text/template">
     {@each data as item, index}
     {@if index==0}
-        <button type="button" class="btn btn-primary" onclick="setParams(\${item.id});">\${item.name}</button>
+        <button type="button" data-id="\${item.id}" class="btn btn-default btn-primary">\${item.name}</button>
     {@else}
-        <button type="button" class="btn btn-default" onclick="setParams(\${item.id});">\${item.name}</button>
+        <button type="button" data-id="\${item.id}" class="btn btn-default">\${item.name}</button>
     {@/if}
     {@/each}
 </script>

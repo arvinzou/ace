@@ -188,6 +188,9 @@
     <if test="condition.category !=null and condition.category !=&quot;&quot;">
     and c.category = #{condition.category,jdbcType=VARCHAR}
   </if>
+    <if test="condition.tName !=null and condition.tName !=&quot;&quot;">
+      or t.name LIKE concat('%',#{condition.tName,jdbcType=VARCHAR},'%')
+    </if>
   </sql>
 
   <sql id="From_Statement">

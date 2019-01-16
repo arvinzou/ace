@@ -107,6 +107,7 @@ input:-ms-input-placeholder{
 	width: 0.413333rem;
 	height: 0.413333rem;
 	margin:0  0.226666rem;
+	vertical-align: middle;
 }
 .tips{
 	width: 90%;
