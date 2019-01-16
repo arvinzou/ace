@@ -51,7 +51,7 @@
          <if test='role="student"'>
             and t.classesId=#{classId}
         </if>
-         <if test='role="teacher"'>
+         <if test='role="teacher" and list!=null'>
            and  t.classesId in <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
                  #{item.classId}
              </foreach>
