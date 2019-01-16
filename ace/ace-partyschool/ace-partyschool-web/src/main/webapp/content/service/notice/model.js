@@ -70,7 +70,7 @@ var _colModel = function() {
 	}, {
 		name: 'title',
 		editable: true,
-		width: 150,
+		width: 250,
 		editoptions: {
 			size: "20",
 			maxlength: "50"
@@ -174,6 +174,7 @@ var _colModel = function() {
 	}, {
 		name: 'status',
 		editable: true,
+		hidden: true,
 		width: 50,
 		edittype: "checkbox",
 		editoptions: {
