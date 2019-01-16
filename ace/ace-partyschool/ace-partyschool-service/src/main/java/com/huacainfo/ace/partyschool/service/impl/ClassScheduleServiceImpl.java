@@ -1,17 +1,15 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.ClassesDao;
+import com.huacainfo.ace.partyschool.dao.EvaluationRstDao;
 import com.huacainfo.ace.partyschool.service.SignService;
-import com.huacainfo.ace.partyschool.vo.AccountVo;
-import com.huacainfo.ace.partyschool.vo.ClassesVo;
+import com.huacainfo.ace.partyschool.vo.*;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
@@ -30,8 +28,6 @@ import com.huacainfo.ace.partyschool.dao.ClassScheduleDao;
 import com.huacainfo.ace.partyschool.model.ClassSchedule;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.partyschool.service.ClassScheduleService;
-import com.huacainfo.ace.partyschool.vo.ClassScheduleVo;
-import com.huacainfo.ace.partyschool.vo.ClassScheduleQVo;
 
 import javax.xml.crypto.Data;
 
@@ -53,6 +49,8 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
     private SignService signService;
     @Autowired
     private ClassesDao classesDao;
+    @Autowired
+    private EvaluationRstDao evaluationRstDao;
 
     /**
      * @throws
@@ -155,6 +153,76 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
             session.close();
         }
         return rst;
+    }
+   @Override
+    public ResultResponse notDoneTestList(ClassScheduleQVo condition, int start, int limit, String orderBy ,UserProp userProp) throws Exception {
+        if(userProp==null){
+            new ResultResponse(ResultCode.FAIL,"没有登陆");
+        }
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        if ("teacher".equals(accountVo.getRegType())) {
+            return new ResultResponse(ResultCode.FAIL,"该身份没有评测");
+        } else if ("student".equals(accountVo.getRegType())) {
+            condition.setClassesId(accountVo.getStudent().getClassId());
+            condition.setErUserId(userProp.getUserId());
+        } else {
+            return new ResultResponse(ResultCode.FAIL,"该身份没有评测");
+        }
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        ClassScheduleDao dao = session.getMapper(ClassScheduleDao.class);
+        ResultResponse rst = new ResultResponse();
+       Map<String,Object> map=new HashMap<>();
+        try {
+            List<ClassScheduleVo> list = dao.notDoneTestList(condition, start, limit, orderBy);
+            if(start<1){
+                int notDoneSize=this.classScheduleDao.notDoneTestSize(condition);
+                EvaluationRstQVo evaluationRstQVo=new EvaluationRstQVo();
+                evaluationRstQVo.setUserId(userProp.getUserId());
+                int doneSize=this.evaluationRstDao.getDoneSize(evaluationRstQVo);
+                map.put("notDoneSize",notDoneSize);
+                map.put("doneSize",doneSize);
+            }
+            map.put("list",list);
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
+        }
+        return new ResultResponse(ResultCode.SUCCESS,"获取成功",map);
+    }
+
+
+    @Override
+    public ResultResponse doneTestList(ClassScheduleQVo condition, int start, int limit, String orderBy ,UserProp userProp) throws Exception {
+        if(userProp==null){
+            new ResultResponse(ResultCode.FAIL,"没有登陆");
+        }
+        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+        if ("teacher".equals(accountVo.getRegType())) {
+            return new ResultResponse(ResultCode.FAIL,"该身份没有评测");
+        } else if ("student".equals(accountVo.getRegType())) {
+            condition.setClassesId(accountVo.getStudent().getClassId());
+            condition.setErUserId(userProp.getUserId());
+        } else {
+            return new ResultResponse(ResultCode.FAIL,"该身份没有评测");
+        }
+        SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
+        Configuration configuration = session.getConfiguration();
+        configuration.setSafeResultHandlerEnabled(false);
+        ClassScheduleDao dao = session.getMapper(ClassScheduleDao.class);
+        ResultResponse rst = new ResultResponse();
+        Map<String,Object> map=new HashMap<>();
+        try {
+            List<ClassScheduleVo> list = dao.doneTestList(condition, start, limit, orderBy);
+            map.put("list",list);
+        }catch (Exception e){
+            session.close();
+        }finally {
+            session.close();
+        }
+        return new ResultResponse(ResultCode.SUCCESS,"获取成功",map);
     }
 
     /**

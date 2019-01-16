@@ -188,4 +188,9 @@
         LEFT join student a on t.user_id=a.id
         where t.user_id=#{id}
     </select>
+
+    <select id="selectTeacherClassInfoById" resultType="string">
+        select t.id as classId from classes t where t.headmaster=#{id}
+    </select>
+
 </mapper>

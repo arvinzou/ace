@@ -52,8 +52,7 @@ public class EvaluationIndexController extends BisBaseController {
             <EvaluationIndexVo> findEvaluationIndexList(EvaluationIndexQVo condition,
                                                         PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <EvaluationIndexVo> rst = this.evaluationIndexService
+        PageResult<EvaluationIndexVo> rst = this.evaluationIndexService
                 .findEvaluationIndexList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

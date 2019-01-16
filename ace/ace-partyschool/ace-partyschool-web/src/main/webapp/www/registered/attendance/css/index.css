@@ -35,13 +35,14 @@ p {
 	display: block;
 }
 .item-left{
-	width: 30%;
+	width: 26%;
 	height: 1.6rem;
 	line-height: 1.6rem;
 	float: left;
 	color: #ABAEB9;
 	font-size: 0.533333rem;
 	font-weight: bold;
+	padding-left: 4%;
 }
 .item-right{
 	width: 70%;
@@ -50,9 +51,18 @@ p {
 	color: #373F53;
 	font-size: 0.453333rem;
 	font-weight: bold;
+	display: table;
 }
 .opts{
 	width: 0.533333rem;
 	height: 0.533333rem;
     margin-top: 0.53rem;
+}
+.inner{
+	display: table-cell;
+	vertical-align:middle;
+}
+.circle{
+	width: 0.46rem;
+	height: 0.46rem;
 }

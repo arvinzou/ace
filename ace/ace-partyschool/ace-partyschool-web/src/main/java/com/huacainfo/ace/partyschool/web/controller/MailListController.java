@@ -339,4 +339,21 @@ public class MailListController extends BisBaseController {
     public List<Tree> getTreeListByClassId(String classId){
         return this.mailListService.getTreeListByClassId(classId);
     }
+
+    /**
+     * @throws
+     * @Title:getTreeList
+     * @Description: TODO(加载全校通讯录)
+     * @param: @return
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2019-01-16
+     */
+    @RequestMapping(value = "/getTree")
+    @ResponseBody
+    public List<Tree> getTree() {
+        return this.mailListService.getTreeList();
+    }
+
+
 }

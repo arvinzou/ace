@@ -61,7 +61,7 @@ pageEncoding="utf-8"%>
             <div class="col-md-9">
 
 
-                    <div class="portlet light ">
+                    <div class="portlet light">
                         <div class="portlet-title">未分组学员</div>
                         <div class="portlet-body">
                             <div class="row content" id="classStudent" data-groupid="0" ondrop="drop(event)"  ondragover="allowDrop(event)" ondragenter="allowDrop(event)">

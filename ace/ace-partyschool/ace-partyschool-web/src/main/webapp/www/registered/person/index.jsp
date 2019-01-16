@@ -24,15 +24,13 @@
 			<div id="todayCourse">
 
 			</div>
-			<div class="notice">
-				<div class="notice-icon"><img src="img/icon-message.png"/></div>
-				<div class="notice-title">2019年党校第一批开课时间已确定，请大家安排好自己的时间</div>
-				<div class="more" onclick="moreNotice();"><span>全部</span><img src="img/icon_select.png"/></div>
+			<div  id="noticeTop">
+
 			</div>
 		</div>
 		<div class="menu">
 			<div class="row">
-				<div class="item mr">
+				<div class="item mr" onclick="toTest();">
 					<div class="item-left">
 						<img src="img/icon-test.png" class="menu-icon"/>
 					</div>
@@ -120,6 +118,14 @@
 			<div class="show-card" onclick="toConsumption();">
 				<span>查询一卡通</span>
 				<img src="img/icon_select.png" />
+			</div>
+		</script>
+
+		<script id="noticeTop-tpl" type="text/template">
+			<div class="notice">
+				<div class="notice-icon"><img src="img/icon-message.png"/></div>
+				<div class="notice-title">\${data.title}</div>
+				<div class="more" onclick="moreNotice();"><span>全部</span><img src="img/icon_select.png"/></div>
 			</div>
 		</script>
 

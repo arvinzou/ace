@@ -9,6 +9,7 @@ import com.huacainfo.ace.partyschool.vo.EvaluationRstContentVo;
 public interface EvaluationRstContentDao {
 
 EvaluationRstContent selectByPrimaryKey(String id);
+EvaluationRstContent selectEvaluationRstContent(@Param("condition") EvaluationRstContent condition);
 
 int deleteByPrimaryKey(String id);
 

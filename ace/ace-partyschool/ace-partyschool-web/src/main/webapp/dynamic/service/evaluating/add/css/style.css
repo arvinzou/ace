@@ -1,0 +1,9 @@
+.removeOption{
+    color: #0000f1;
+    line-height: 1.2rem
+}
+
+textarea{
+    width: 100%;
+    resize: none;
+}

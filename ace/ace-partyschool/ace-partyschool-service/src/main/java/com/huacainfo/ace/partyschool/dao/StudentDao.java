@@ -44,4 +44,6 @@ public interface StudentDao {
                            @Param("mobile") String mobile);
 
     Map<String,String> selectUserClassInfo(String id);
+
+    String selectTeacherClassInfoById(String id);
 }

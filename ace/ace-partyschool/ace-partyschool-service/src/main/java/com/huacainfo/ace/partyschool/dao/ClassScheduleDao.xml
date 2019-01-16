@@ -116,6 +116,9 @@
         <!--<result property="headimgurl" column="headimgurl"/>-->
         <!--<result property="nickname" column="nickname"/>-->
         <!--</association>-->
+        <result column="userNum" jdbcType="DECIMAL" property="userNum"/>
+        <result column="studentNum" jdbcType="DECIMAL" property="studentNum"/>
+        <result column="averageScore" jdbcType="DECIMAL" property="averageScore"/>
         <collection property="course" ofType="com.huacainfo.ace.partyschool.model.Course">
             <id property="id" column="cId"/>
             <result column="cName" property="name"/>
@@ -128,13 +131,31 @@
             <result column="tName" property="name"/>
         </collection>
         <!--<collection property="classes" ofType="com.huacainfo.ace.partyschool.model.Classes">-->
-            <!--<id property="id" column="classId"/>-->
-            <!--<result column="claName" property="name"/>-->
+        <!--<id property="id" column="classId"/>-->
+        <!--<result column="claName" property="name"/>-->
         <!--</collection>-->
     </resultMap>
 
 
     <sql id="Vo_Column_List">
+     (
+SELECT COUNT(*)
+FROM (
+SELECT COUNT(*),er.classScheduleId
+FROM partyschool.evaluation_rst er
+GROUP BY er.userId) tt
+WHERE tt.classScheduleId=cs.id
+		) AS userNum,
+		 (
+SELECT COUNT(*)
+FROM partyschool.student st
+WHERE st.classId=cs.classesId) AS studentNum,
+
+(
+	SELECT (SELECT SUM(er.score)
+	FROM partyschool.evaluation_rst er
+	WHERE er.classScheduleId=cs.id)/userNum
+) AS averageScore,
     cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,
     c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
     t.id as tId ,t.name as tName,
@@ -144,7 +165,7 @@
     <sql id="Where_Condition">
         where 1=1
         <if test="condition.cName !=null and condition.cName !=&quot;&quot;">
-            and c.name LIKE concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+            and c.name LIKE concat('%',#{condition.cName,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
             and cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
@@ -193,11 +214,81 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+
+    <select id="notDoneTestList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
+        AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        AND cs.id NOT IN
+        (
+        SELECT t.classScheduleId
+        FROM (SELECT classScheduleId, userId
+        FROM partyschool.evaluation_rst er
+        WHERE er.userId = #{condition.erUserId,jdbcType=VARCHAR}) t
+        GROUP BY t.classScheduleId
+        )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY cs.courseDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
+    <select id="doneTestList" parameterType="java.lang.String" resultMap="BaseResultMapVo">
+        select
+        <include refid="Vo_Column_List"/>
+        <include refid="From_Statement"/>
+        WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
+        AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        AND cs.id IN
+        (
+        SELECT t.classScheduleId
+        FROM (SELECT classScheduleId, userId
+        FROM partyschool.evaluation_rst er
+        WHERE er.userId = #{condition.erUserId,jdbcType=VARCHAR}) t
+        GROUP BY t.classScheduleId
+        )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY cs.courseDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
+
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="From_Statement"/>
         <include refid="Where_Condition"/>
     </select>
+
+
+    <select id="notDoneTestSize" resultType="int">
+        SELECT COUNT(*)
+        <include refid="From_Statement"/>
+        WHERE cs.courseDate <![CDATA[ < ]]> CURDATE()
+        AND cs.classesId = #{condition.classesId,jdbcType=VARCHAR}
+        AND cs.id NOT IN
+        (
+        SELECT t.classScheduleId
+        FROM (SELECT classScheduleId, userId
+        FROM partyschool.evaluation_rst er
+        WHERE er.userId = #{condition.erUserId,jdbcType=VARCHAR}) t
+        GROUP BY t.classScheduleId
+        )
+    </select>
+
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">
     select count(1)

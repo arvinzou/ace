@@ -35,8 +35,10 @@ public interface ClassScheduleService {
     PageResult<ClassScheduleVo> LearnedCourses(ClassScheduleQVo condition,
                                                       int start, int limit, String orderBy) throws Exception;
 
-    ResultResponse MyClassSchedule(ClassScheduleQVo condition,
-                                   int start, int limit, String orderBy, UserProp userProp) throws Exception;
+    ResultResponse MyClassSchedule(ClassScheduleQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception;
+
+    ResultResponse notDoneTestList(ClassScheduleQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception;
+    ResultResponse doneTestList(ClassScheduleQVo condition, int start, int limit, String orderBy, UserProp userProp) throws Exception;
 
     /**
      * @throws

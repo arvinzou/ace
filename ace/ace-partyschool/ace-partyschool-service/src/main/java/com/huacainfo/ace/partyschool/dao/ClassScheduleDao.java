@@ -31,7 +31,19 @@ public interface ClassScheduleDao {
                                          @Param("limit") int limit,
                                          @Param("orderBy") String orderBy);
 
+    List<ClassScheduleVo> notDoneTestList(@Param("condition") ClassScheduleQVo condition,
+                                         @Param("start") int start,
+                                         @Param("limit") int limit,
+                                         @Param("orderBy") String orderBy);
+
+    List<ClassScheduleVo> doneTestList(@Param("condition") ClassScheduleQVo condition,
+                                          @Param("start") int start,
+                                          @Param("limit") int limit,
+                                          @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") ClassScheduleQVo condition);
+
+    int notDoneTestSize(@Param("condition") ClassScheduleQVo condition);
 
     int isExit(ClassSchedule record);
 

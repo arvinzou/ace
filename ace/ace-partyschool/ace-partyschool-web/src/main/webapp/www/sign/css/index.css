@@ -47,8 +47,6 @@ body{
 .footer{
 	width: 100%;
 	height: auto;
-	position: fixed;
-	bottom: 0;
 }
 .footer img{
 	width: 98%;

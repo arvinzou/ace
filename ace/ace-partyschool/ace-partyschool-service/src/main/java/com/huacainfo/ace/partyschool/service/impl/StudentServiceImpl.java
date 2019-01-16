@@ -346,6 +346,23 @@ public class StudentServiceImpl implements StudentService {
 
         return new MessageResponse(0, "账户恢复成功！");
     }
-
+    /**
+     *
+     *
+     * @param userProp
+     * @return SingleResult<String>
+     */
+    @Override
+    public SingleResult<String> getClassId(UserProp userProp){
+        SingleResult<String> rst=new SingleResult<String>();
+        Map<String, String> o=this.studentDao.selectUserClassInfo(userProp.getUserId());
+        if (o.get("role").equals("student")) {
+            rst.setValue(o.get("classId"));
+        } else {
+            String classId=this.studentDao.selectTeacherClassInfoById(userProp.getUserId());
+            rst.setValue(classId);
+        }
+        return rst;
+    }
 
 }
