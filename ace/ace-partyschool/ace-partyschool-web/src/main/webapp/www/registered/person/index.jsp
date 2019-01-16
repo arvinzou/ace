@@ -28,58 +28,8 @@
 
 			</div>
 		</div>
-		<div class="menu">
-			<div class="row">
-				<div class="item mr" onclick="toTest();">
-					<div class="item-left">
-						<img src="img/icon-test.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">教学评测</div>
-						<div class="menu-content">共有4个待评</div>
-					</div>
-				</div>
-				<div class="item" onclick="toMailList();">
-					<div class="item-left">
-						<img src="img/icon-mail.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">通讯录</div>
-						<div class="menu-content">共30人</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="item mr" onclick="attendtion();">
-					<div class="item-left">
-						<img src="img/icon-appear.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">考勤信息</div>
-						<div class="menu-content">共10个记录</div>
-					</div>
-				</div>
-				<div class="item" onclick="toClassFiles();">
-					<div class="item-left">
-						<img src="img/icon-files.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">班级文件</div>
-						<div class="menu-content">共6个文件</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="item mr" onclick="classNotice();">
-					<div class="item-left">
-						<img src="img/icon-notice.png" class="menu-icon"/>
-					</div>
-					<div class="item-right">
-						<div class="menu-title">学员须知</div>
-						<div class="menu-content">已绑定班级</div>
-					</div>
-				</div>
-			</div>
+		<div class="menu" id="menu">
+
 		</div>
 
 		<script id="course-tpl" type="text/template">
@@ -126,6 +76,70 @@
 				<div class="notice-icon"><img src="img/icon-message.png"/></div>
 				<div class="notice-title">\${data.title}</div>
 				<div class="more" onclick="moreNotice();"><span>全部</span><img src="img/icon_select.png"/></div>
+			</div>
+		</script>
+
+		<script id="menu-tpl" type="text/template">
+			<div class="row">
+				<div class="item mr" onclick="attendtion();">
+					<div class="item-left">
+						<img src="img/icon-appear.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">考勤信息</div>
+						<div class="menu-content">查看考勤记录</div>
+					</div>
+				</div>
+				<div class="item" onclick="toMailList();">
+					<div class="item-left">
+						<img src="img/icon-mail.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">通讯录</div>
+						<div class="menu-content">共
+							{@if data.regType == 'student'}
+								\${data.student}
+							{@else}
+								\${data.teacher}
+							{@/if}
+							人</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="item mr" onclick="toClassFiles();">
+					<div class="item-left">
+						<img src="img/icon-files.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">班级文件</div>
+						<div class="menu-content">共\${data.file}个文件</div>
+					</div>
+				</div>
+				{@if data.regType == 'student'}
+				<div class="item" onclick="toTest();">
+					<div class="item-left">
+						<img src="img/icon-test.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">教学评测</div>
+						<div class="menu-content">共有4个待评</div>
+					</div>
+				</div>
+				{@/if}
+			</div>
+			<div class="row">
+				{@if data.regType == 'student'}
+				<div class="item mr" onclick="classNotice();">
+					<div class="item-left">
+						<img src="img/icon-notice.png" class="menu-icon"/>
+					</div>
+					<div class="item-right">
+						<div class="menu-title">学员须知</div>
+						<div class="menu-content">已绑定班级</div>
+					</div>
+				</div>
+				{@/if}
 			</div>
 		</script>
 
