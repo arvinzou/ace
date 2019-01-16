@@ -354,4 +354,6 @@ public class MailListController extends BisBaseController {
     public List<Tree> getTree() {
         return this.mailListService.getTreeList();
     }
+
+
 }
