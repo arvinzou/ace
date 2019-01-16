@@ -12,6 +12,7 @@ import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.constant.CommConstant;
 import com.huacainfo.ace.partyschool.dao.SignDao;
+import com.huacainfo.ace.partyschool.service.EnrollRosterService;
 import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.service.StudentService;
 import com.huacainfo.ace.partyschool.service.TeacherService;
@@ -57,6 +58,8 @@ public class SignServiceImpl implements SignService {
     private TeacherService teacherService;
     @Autowired
     private SystemService systemService;
+    @Autowired
+    private EnrollRosterService enrollRosterService;
 
     @Autowired
     private SqlSessionTemplate sqlSession;
@@ -98,6 +101,12 @@ public class SignServiceImpl implements SignService {
      */
     @Override
     public ResultResponse addNewStudent(StudentVo data, Userinfo userinfo) throws Exception {
+        //预先报名条件限制
+        boolean isAllowed = enrollRosterService.isAllowed(data.getName());
+        if (!isAllowed) {
+            return new ResultResponse(ResultCode.FAIL, "您不在注册期，请联系管理员");
+        }
+
         boolean isBindWx = "1".equals(data.getIsBindWx());
         String uid = isBindWx ? userinfo.getUnionid() : GUIDUtil.getGUID();
         data.setId(uid);
@@ -109,12 +118,12 @@ public class SignServiceImpl implements SignService {
         String account = data.getSignAcct();
         String pwd = data.getSingPwd();
         String mobile = data.getMobile();
-        String sex = String.valueOf(getCarInfo(data.getIdCard()).get("sex"));
+        String sex = data.getSex();//String.valueOf(getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
         String deptId = "0004";
         String roleId = "ede24712-e13c-47d5-8cab-fd54589e3fe1";//select * from portal.role t where t.syid='partyschool'
         MessageResponse ms2 = insertUsers(regType, uid, openId, name, account, pwd,
-                mobile, sex, sysId, deptId, roleId, ACCOUNT_INVALID);
+                mobile, sex, sysId, deptId, roleId, ACCOUNT_VALID);
         if (ResultCode.FAIL == ms2.getStatus()) {
             return new ResultResponse(ms2);
         }
@@ -151,7 +160,7 @@ public class SignServiceImpl implements SignService {
         String account = data.getSignAcct();
         String pwd = data.getSingPwd();
         String mobile = data.getMobile();
-        String sex = String.valueOf(getCarInfo(data.getIdCard()).get("sex"));
+        String sex = data.getSex();//String.valueOf(getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
         String deptId = "0004";
         String roleId = "9f8f9043-73e1-4438-bf8a-ef681431df74";//select * from portal.role t where t.syid='partyschool'

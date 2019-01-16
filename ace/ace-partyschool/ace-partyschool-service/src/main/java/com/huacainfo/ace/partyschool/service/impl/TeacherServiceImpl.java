@@ -134,19 +134,20 @@ public class TeacherServiceImpl implements TeacherService {
         if (CommonUtils.isBlank(o.getMobile())) {
             return new MessageResponse(1, "手机号不能为空！");
         }
-
-        int i = teacherDao.isExistOtherMobile(o.getId(), o.getMobile());
-        if (i > 0) {
-            return new MessageResponse(1, "手机号不能重复！");
+        boolean b = signService.isExistByMobile(o.getMobile());
+        if (b) {
+            return new MessageResponse(1, "手机号码不能重复！");
         }
-
         //
         Teacher oldData = teacherDao.selectByPrimaryKey(o.getId());
         if (oldData == null) {
             return new MessageResponse(1, "数据丢失！");
         }
+        oldData.setMobile(o.getMobile());
         oldData.setName(o.getName());
+        oldData.setSex(o.getSex());
         oldData.setIdCard(o.getIdCard());
+        oldData.setPolitical(o.getPolitical());
         oldData.setWorkUnitName(o.getWorkUnitName());
         oldData.setPostName(o.getPostName());
         oldData.setIntroduce(o.getIntroduce());
@@ -239,7 +240,7 @@ public class TeacherServiceImpl implements TeacherService {
         String account = data.getMobile();
         String pwd = "123456";
         String mobile = data.getMobile();
-        String sex = String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
+        String sex = data.getSex();//String.valueOf(signService.getCarInfo(data.getIdCard()).get("sex"));
         String sysId = "partyschool";
         String deptId = "0004";
         String roleId = "9f8f9043-73e1-4438-bf8a-ef681431df74";

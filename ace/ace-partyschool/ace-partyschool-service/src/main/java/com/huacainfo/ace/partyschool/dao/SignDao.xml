@@ -68,7 +68,8 @@
     <select id="findByAcct" parameterType="java.lang.String" resultMap="AcctResultMap">
         select
         ui.nickname, ui.headimgurl,
-        u.sex, u.user_level as regType, u.openId,
+        ifnull(s.sex, t.sex) as sex,
+        u.user_level as regType, u.openId,
         CASE when ISNULL(u.openId) || LENGTH(trim(u.openId)) &lt; 1 then '0' else '1' end as isBindWx,
         cd.cardData as lCardNo,
 

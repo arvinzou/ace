@@ -143,6 +143,30 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="col-md-2 view-label">性别</label>
+        <div class="col-md-10">
+            \${rsd(data.o.sex,'01')}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">处室</label>
+        <div class="col-md-10">
+            \${data.o.workUnitName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">职务职称</label>
+        <div class="col-md-10">
+            \${data.o.postName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">政治面貌</label>
+        <div class="col-md-10">
+            \${rsd(data.o.political,'155')}
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-md-2 view-label">手机号码</label>
         <div class="col-md-10">
             \${data.o.mobile}
@@ -152,36 +176,6 @@
         <label class="col-md-2 view-label">身份证号码</label>
         <div class="col-md-10">
             \${data.o.idCard}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">单位</label>
-        <div class="col-md-10">
-            \${data.o.workUnitName}
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 view-label">职位</label>
-        <div class="col-md-10">
-            \${data.o.postName}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">工作照</label>
-        <div class="col-md-10">
-            <img src="\${data.o.photoUrl}" class="cover"/>
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">介绍</label>
-        <div class="col-md-10">
-            \${data.o.introduce}
-        </div>
-    </div>
-    <div class="form-group hide">
-        <label class="col-md-2 view-label">备注</label>
-        <div class="col-md-10">
-            \${data.o.remark}
         </div>
     </div>
     <div class="form-group">
