@@ -34,6 +34,6 @@ public interface NoticeDao {
 
     int isExit(Notice record);
 
-    int updateStatus(Notice record);
+    int updateStatus(String id);
 
 }
