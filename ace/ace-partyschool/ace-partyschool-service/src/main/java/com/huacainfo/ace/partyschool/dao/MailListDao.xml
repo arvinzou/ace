@@ -140,6 +140,52 @@ where t.status='1'
     select id,name from classes where headmaster=#{id} and status='1'
   </select>
 
+  <select id="getTreeList" resultType="map">
+    SELECT
+    '9999' ID,
+    '0' PID,
+    '教职工' TEXT,
+    1 CHILD_COUNT,
+    NULL HREF
+    FROM
+    teacher t
+    LIMIT 0,
+    1
+    UNION ALL
+    SELECT
+    t.ID,
+    '0' PID,
+    t.`name` AS TEXT,
+    1 CHILD_COUNT,
+    NULL HREF
+    FROM
+    classes t
+    WHERE
+    t.`status` = '1'
+    UNION ALL
+    SELECT
+    t.ID,
+    t.classId PID,
+    t.`name` AS TEXT,
+    0 CHILD_COUNT,
+    t.mobile HREF
+    FROM
+    student t
+    WHERE
+    t.`status` = '1'
+    UNION ALL
+    SELECT
+    t.ID,
+    '9999' PID,
+    t.`name` AS TEXT,
+    0 CHILD_COUNT,
+    t.mobile HREF
+    FROM
+    teacher t
+    WHERE
+    t.`status` = '1'
+  </select>
+
 
 
 </mapper>

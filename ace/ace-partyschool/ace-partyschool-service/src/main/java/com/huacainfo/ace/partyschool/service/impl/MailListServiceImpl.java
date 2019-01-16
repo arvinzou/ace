@@ -419,4 +419,20 @@ public class MailListServiceImpl implements MailListService {
         return treeUtils.getTreeList("0");
     }
 
+    /**
+     * @throws
+     * @Title:getTreeList
+     * @Description: TODO(加载全校通讯录)
+     * @param: @return
+     * @return: List<Tree>
+     * @author: chenxiaoke
+     * @version: 2019-01-16
+     */
+    @Override
+    public List<Tree> getTreeList(){
+        List<Map<String, Object>> list = list = this.mailListDao.getTreeList();
+        CommonTreeUtils treeUtils = new CommonTreeUtils(list);
+        return treeUtils.getTreeList("0");
+    }
+
 }
