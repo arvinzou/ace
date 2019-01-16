@@ -8,6 +8,7 @@
 		<title>个人信息</title>
 		<jsp:include page="../../common/common.jsp"/>
 		<link rel="stylesheet" type="text/css" href="css/info.css"/>
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/www/common/css/mobileSelect.css"/>
 	</head>
 	<body>
 		<div class="index">
@@ -18,9 +19,9 @@
 
 			</div>
 			<div class="box">
-				<div class="exit" onclick="exit();">
-                    <span class="sbr">保存修改</span>
-					<span>退出登录</span>
+				<div class="exit">
+                    <span class="sbr" onclick="save();">保存修改</span>
+					<span onclick="exit();">退出登录</span>
 				</div>
 			</div>
 		</div>
@@ -29,31 +30,19 @@
 		<div class="info">
 			<div class="ititle br">姓名</div>
 			<div class="icontent br">
-				{@if data.regType == "student"}
-					\${data.student.name}
-				{@else}
-				    \${data.teacher.name}
-				{@/if}
+				\${data.teacher.name}
 			</div>
 		</div>
 		<div class="info">
 			<div class="ititle br">身份证号</div>
 			<div class="icontent br">
-				{@if data.regType == "student"}
-				<input type="text" name="idCard"  value="\${data.student.idCard}"/>
-				{@else}
 				<input type="text" name="idCard"  value="\${data.teacher.idCard}"/>
-				{@/if}
 			</div>
 		</div>
 		<div class="info">
 			<div class="ititle br">手机号</div>
 			<div class="icontent br">
-				{@if data.regType == "student"}
-				<input type="text" name="mobile"  value="\${data.student.mobile}"/>
-				{@else}
 				<input type="text" name="mobile"  value="\${data.teacher.mobile}"/>
-				{@/if}
 			</div>
 		</div>
 		<div class="info">
@@ -61,20 +50,20 @@
 			<div class="icontent br">
 				{@if data.sex == '1'}
 				<div class="sex-left">
-                    <img src="img/icon-sex.png" class="icon-sex"/><span>男</span>
+                    <img src="img/icon-sex.png" class="icon-sex" onclick="selectSex(this,'1')"/><span>男</span>
 				</div>
 				<div class="sex-right">
-                    <img src="img/icon-unsex.png" class="icon-sex"/><span>女</span>
+                    <img src="img/icon-unsex.png" class="icon-sex" onclick="selectSex(this,'2')"/><span>女</span>
 				</div>
 				{@else}
 				<div class="sex-left">
 					<div class="inner">
-						<img src="img/icon-unsex.png" class="icon-sex"/><span>男</span>
+						<img src="img/icon-unsex.png" class="icon-sex" onclick="selectSex(this,'1')"/><span>男</span>
 					</div>
 				</div>
 				<div class="sex-right">
 					<div class="inner">
-						<img src="img/icon-sex.png" class="icon-sex"/><span>女</span>
+						<img src="img/icon-sex.png" class="icon-sex" onclick="selectSex(this,'2')"/><span>女</span>
 					</div>
 				</div>
 				{@/if}
@@ -82,40 +71,24 @@
 		</div>
 		<div class="info">
 			<div class="ititle br">政治面貌</div>
-			<div class="icontent br">
-				{@if data.regType == "student"}
-					{@if data.student.political == 'party'}
-						党员
-					{@else}
-						普通学员
-					{@/if}
+			<div class="icontent br"  name="political" id="political">
+				{@if data.teacher.political == 'party'}
+				<span class="unselect">党员</span>
 				{@else}
-					{@if data.teacher.political == 'party'}
-					党员
-					{@else}
-					普通学员
-					{@/if}
+				<span class="unselect">非党员</span>
 				{@/if}
 			</div>
 		</div>
 		<div class="info">
-			<div class="ititle br">单位名称</div>
-			<div class="icontent br">
-				{@if data.regType == "student"}
-				\${data.student.workUnitName}
-				{@else}
-				\${data.teacher.workUnitName}
-				{@/if}
+			<div class="ititle br">处室</div>
+			<div class="icontent br" name="workUnit" id="workUnit">
+				<span class="unselect">\${data.teacher.workUnitName}</span>
 			</div>
 		</div>
 		<div class="info">
 			<div class="ititle br">单位职务</div>
 			<div class="icontent br">
-				{@if data.regType == "student"}
-				<input type="text" name="postName"  value="\${data.student.postName}"/>
-				{@else}
-				<input type="text" name="postName"  value="\${data.teacher.postName}"/>
-				{@/if}
+				<input class="form-input" type="text" name="postName" value="\${data.teacher.postName}"/>
 			</div>
 		</div>
 	</script>
@@ -145,5 +118,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/init-rem.js"></script>
 	<script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/mobileSelect.min.js"></script>
+	<script src="${portalPath}/content/common/js/dict_partyschool.js?version=${version}"></script>
 	<script type="text/javascript" src="js/info.js"></script>
 </html>
