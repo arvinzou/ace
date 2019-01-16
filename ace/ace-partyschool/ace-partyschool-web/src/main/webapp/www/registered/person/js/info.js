@@ -1,5 +1,11 @@
 var account = 0;
+var regType = null;
+var userInfo = {};
+var political = null;
 $(function(){
+    initUserinfo();
+});
+function initUserinfo(){
     $.ajax({
         url: contextPath+ "/www/sign/getAcctInfo",
         type:"post",
@@ -9,9 +15,11 @@ $(function(){
         },
         success:function(result){
             if(result.status == 0) {
-                console.log("===================================="+result);
+                userInfo = result.data;
                 renderPage('userInfo', result.data, 'info-tpl');
                 renderPage('option', result.data, 'option-tpl');
+                initPolitical();
+                regType = result.data.regType;
                 if(result.data.regType == 'student'){
                     account = result.data.student.mobile;
                 }else{
@@ -30,8 +38,7 @@ $(function(){
             alert("系统服务内部异常！");
         }
     });
-});
-
+}
 function renderPage(IDom, data, tempId) {
     var tpl = document.getElementById(tempId).innerHTML;
     var html = juicer(tpl, {
@@ -74,4 +81,72 @@ function bindWx(){
     o.account=account;
     $("#bindForm input[name='jsonData']").val(JSON.stringify(o));
     $("#bindForm").submit();
+}
+
+function initPolitical(){
+    var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
+    var politicalSelect= new MobileSelect({
+        trigger: '#political',
+        title: '政治面貌选择',
+        wheels: [
+            {data: politicalArr}
+        ],
+        position:[1], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+        transitionEnd:function(indexArr, data){
+            political = data;
+        },
+        callback:function(indexArr, data){
+            political = data;
+        }
+    });
+}
+
+function save(){
+    if(regType == 'student'){
+        editStudent();
+    }else{
+        editTeacher();
+    }
+}
+
+function editStudent(){
+    var idCard = $("input[name='idCard']").val();
+    var mobile = $("input[name='mobile']").val();
+    var workUnitName = $("input[name='workUnitName']").val();
+    var postName = $("input[name='postName']").val();
+    var politicalName = userInfo.student.political;
+    $.ajax({
+        url: contextPath+ "/www/sign/student/update",
+        type:"post",
+        async:false,
+        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        data:{
+         jsons:  JSON.stringify({
+                name: userInfo.student.name,
+                sex: "1",
+                mobile: mobile,
+                idCard: idCard,
+                political:political == null? politicalName: political[0].id,
+                workUnitName: workUnitName,
+                postName: postName,
+                classId: userInfo.student.classId
+        })
+        },
+        success:function(result){
+            if(result.status == 0) {
+                alert(result.info);
+                initUserinfo();
+            }else {
+                if(result.info){
+                    alert(result.info);
+                }else{
+                    alert(result.errorMessage);
+                }
+                return;
+            }
+        },
+        error:function(){
+            alert("系统服务内部异常！");
+        }
+    });
 }
