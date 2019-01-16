@@ -102,7 +102,7 @@ function initEvents() {
             timeout: {required: true, digits:true},
             'evaluationIndex[0].name': {required: true, maxlength: 6},
             'evaluationIndex[0].introduce': {required: true, maxlength: 40},
-            'evaluationIndex[0].introduce': {required: true, digits:true}
+            'evaluationIndex[0].score': {required: true, digits:true}
         },
         messages: {
             name: {
@@ -161,6 +161,7 @@ function save(params) {
     while (params['evaluationIndex[' + index + '].name']) {
         evaluationIndex.push({
             name: params['evaluationIndex[' + index + '].name'],
+            introduce: params['evaluationIndex[' + index + '].introduce'],
             score: params['evaluationIndex[' + index + '].score']
         })
         index++;

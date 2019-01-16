@@ -176,6 +176,7 @@
       status = #{status,jdbcType=CHAR},
       createUserName = #{createUserName,jdbcType=VARCHAR},
       createDate = #{createDate,jdbcType=TIMESTAMP},
+      introduce = #{introduce,jdbcType=LONGVARCHAR},
       lastModifyUserId = #{lastModifyUserId,jdbcType=VARCHAR},
       lastModifyUserName = #{lastModifyUserName,jdbcType=VARCHAR},
       lastModifyDate = #{lastModifyDate,jdbcType=TIMESTAMP}

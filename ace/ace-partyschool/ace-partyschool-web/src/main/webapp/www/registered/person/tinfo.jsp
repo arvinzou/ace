@@ -19,6 +19,7 @@
 			</div>
 			<div class="box">
 				<div class="exit" onclick="exit();">
+                    <span class="sbr">保存修改</span>
 					<span>退出登录</span>
 				</div>
 			</div>
@@ -26,8 +27,8 @@
 	</body>
 	<script id="info-tpl" type="text/template">
 		<div class="info">
-			<div class="title">姓名</div>
-			<div class="content">
+			<div class="ititle br">姓名</div>
+			<div class="icontent br">
 				{@if data.regType == "student"}
 					\${data.student.name}
 				{@else}
@@ -36,8 +37,8 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="title">身份证号</div>
-			<div class="content">
+			<div class="ititle br">身份证号</div>
+			<div class="icontent br">
 				{@if data.regType == "student"}
 				<input type="text" name="idCard"  value="\${data.student.idCard}"/>
 				{@else}
@@ -46,8 +47,8 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="title">手机号</div>
-			<div class="content">
+			<div class="ititle br">手机号</div>
+			<div class="icontent br">
 				{@if data.regType == "student"}
 				<input type="text" name="mobile"  value="\${data.student.mobile}"/>
 				{@else}
@@ -56,18 +57,14 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="title">性别</div>
-			<div class="content">
+			<div class="ititle br">性别</div>
+			<div class="icontent br">
 				{@if data.sex == '1'}
 				<div class="sex-left">
-					<div class="inner">
-						<img src="img/icon-sex.png" class="icon-sex"/><span>男</span>
-					</div>
+                    <img src="img/icon-sex.png" class="icon-sex"/><span>男</span>
 				</div>
 				<div class="sex-right">
-					<div class="inner">
-						<img src="img/icon-unsex.png" class="icon-sex"/><span>女</span>
-					</div>
+                    <img src="img/icon-unsex.png" class="icon-sex"/><span>女</span>
 				</div>
 				{@else}
 				<div class="sex-left">
@@ -84,8 +81,8 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="title">政治面貌</div>
-			<div class="content">
+			<div class="ititle br">政治面貌</div>
+			<div class="icontent br">
 				{@if data.regType == "student"}
 					{@if data.student.political == 'party'}
 						党员
@@ -102,8 +99,8 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="title">单位名称</div>
-			<div class="content">
+			<div class="ititle br">单位名称</div>
+			<div class="icontent br">
 				{@if data.regType == "student"}
 				\${data.student.workUnitName}
 				{@else}
@@ -112,8 +109,8 @@
 			</div>
 		</div>
 		<div class="info">
-			<div class="title">单位职务</div>
-			<div class="content">
+			<div class="ititle br">单位职务</div>
+			<div class="icontent br">
 				{@if data.regType == "student"}
 				<input type="text" name="postName"  value="\${data.student.postName}"/>
 				{@else}
@@ -125,8 +122,8 @@
 
 	<script id="option-tpl" type="text/template">
 		<div class="info">
-			<div class="title">微信绑定</div>
-			<div class="content" id="bindWx">
+			<div class="ititle">微信绑定</div>
+			<div class="icontent" id="bindWx">
 				{@if data.isBindWx == 0}
 				<form action="${pageContext.request.contextPath}/www/oauth2/auth" id="bindForm" method="post" onsubmit="bindWx();">
 					<input type="hidden" name="jsonData"/>
@@ -141,8 +138,8 @@
 			</form>
 		</div>
 		<div class="info">
-			<div class="title">密码设置</div>
-			<div class="content" onclick="editPassword();"><span class="bindLink">修改密码</span><img class="redirect" src="img/icon_select.png"/></div>
+			<div class="ititle">密码设置</div>
+			<div class="icontent" onclick="editPassword();"><span class="bindLink">修改密码</span><img class="redirect" src="img/icon_select.png"/></div>
 		</div>
 	</script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>

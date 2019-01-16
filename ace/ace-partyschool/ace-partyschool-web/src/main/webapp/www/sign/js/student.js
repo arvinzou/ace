@@ -2,6 +2,8 @@ var political = null;
 var clazz = null;
 var account = null;
 var classesArr = [];
+var userInfo = {};
+var sex = null;
 $(function(){
 	var politicalArr = [{"id":"normal","value":"非党员"},{"id":"party","value":"党员"}];
     initClassList();
@@ -34,9 +36,17 @@ $(function(){
 	    }
 	});
 
+	$("#close").click(function(){
+        $("#nameModal").hide();
+        $("body").removeClass("modalhide");
+    });
     initClassList();
 });
-
+function selectSex(obj,value){
+    $(obj).attr("src",'img/icon-sex.png');
+    $(obj).parent().siblings().find("img").attr("src",'img/sex_unselect.png');
+    sex = value;
+}
 function regist(){
     var name = $("input[name='name']").val();
     var idCard = $("input[name='idCard']").val();
@@ -50,14 +60,21 @@ function regist(){
         alert("姓名不能为空！");
         return;
     }
-    if(!isEmpty(idCard)){
-        alert("身份证号不能为空！");
+    if(!isEmpty(sex)){
+        alert("性别不能为空！");
         return;
-    }else{
-        isCardNo(idCard);
     }
+    isCardNo(idCard);
     if(!isEmpty(political)){
         alert("政治面貌不能为空！");
+        return;
+    }
+    if(!isEmpty(workUnitName)){
+        alert("单位名称不能为空！");
+        return;
+    }
+    if(!isEmpty(postName)){
+        alert("单位职务不能为空！");
         return;
     }
     if(!isEmpty(clazz)){
@@ -96,7 +113,8 @@ function regist(){
             workUnitName: workUnitName,
             postName: postName,
             classId: clazz[0].id,
-            uid: new Date().getTime()
+            uid: new Date().getTime(),
+            sex: sex
         },
         success:function(result){
             if(result.status == 0) {
@@ -190,7 +208,6 @@ function cancel(){
     $("#bindModal").hide();
     $("body").removeClass("modalhide");
 }
-
 function bindWx(){
     var o={};
     o.account=account;
@@ -225,4 +242,51 @@ function initClassList(){
             alert("出错了！");
         }
     });
+}
+
+function searchByName(){
+    var name = $("input[name='name']").val();
+    $.ajax({
+        url: contextPath + "/www/sign/searchByName",
+        type: "post",
+        async: false,
+        data: {
+            name: name
+        },
+        success: function(result) {
+            if(result.status == 0){
+                $("#nameModal").show();
+                $("body").addClass("modalhide");
+                renderPage('userInfo', result.data, 'user-tpl');
+            }else{
+                alert(result.info);
+            }
+        },
+        error: function() {
+            alert("出错了！");
+        }
+    });
+}
+
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
+}
+
+function select(obj, name, workUnitName, postName){
+    $(obj).removeClass('user-unactive').addClass('user-active');
+    $(obj).siblings().removeClass('user-active').addClass('user-unactive');
+    userInfo.name = name;
+    userInfo.workUnitName = workUnitName;
+    userInfo.postName = postName;
+}
+function confirm(){
+    $("input[name='name']").val(userInfo.name);
+    $("input[name='workUnitName']").val(userInfo.workUnitName);
+    $("input[name='postName']").val(userInfo.postName);
+    $("#nameModal").hide();
+    $("body").removeClass("modalhide");
 }

@@ -62,7 +62,9 @@
             <result column="tName" jdbcType="VARCHAR" property="name"/>
             <result column="tMobile" jdbcType="VARCHAR" property="mobile"/>
             <result column="tIdCard" jdbcType="CHAR" property="idCard"/>
-            <result column="tPhotoUrl" jdbcType="VARCHAR" property="photoUrl"/>
+            <result column="tPolitical" jdbcType="VARCHAR" property="political"/>
+            <result column="tWorkUnitName" jdbcType="VARCHAR" property="workUnitName"/>
+            <result column="tPostName" jdbcType="VARCHAR" property="postName"/>
         </association>
     </resultMap>
 
@@ -81,12 +83,14 @@
 
         t.id as tid,
         t.category as tType, t.name as tName,
-        t.mobile as tMobile, t.idCard as tIdCard, t.photoUrl as tPhotoUrl
+        t.mobile as tMobile, t.idCard as tIdCard,
+        t.political as tPolitical, d.name as tWorkUnitName, t.postName as tPostName
         from portal.users u
         left join portal.userinfo ui on u.openId = ui.unionid
         left join partyschool.student s on u.user_id = s.id
         left join partyschool.teacher t on u.user_id = t.id
         left join partyschool.card_data cd on u.user_id = cd.userId
+        LEFT JOIN portal.dict d on d.category_id ='156' and t.workUnitName = d.code
         where u.account = #{acct,jdbcType=VARCHAR}
     </select>
 
@@ -152,6 +156,13 @@
     <update id="updateUsersStatus" parameterType="java.lang.String">
         update portal.users
         set stauts = #{status,jdbcType=CHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateAccount" parameterType="java.lang.String">
+        update portal.users
+        set account = #{newAccount,jdbcType=CHAR},
+        mobile = #{newAccount,jdbcType=CHAR}
         where user_id = #{userId,jdbcType=VARCHAR}
     </update>
 </mapper>

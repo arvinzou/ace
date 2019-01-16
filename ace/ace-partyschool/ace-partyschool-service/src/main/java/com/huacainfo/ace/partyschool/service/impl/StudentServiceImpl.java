@@ -150,14 +150,17 @@ public class StudentServiceImpl implements StudentService {
         if (CommonUtils.isBlank(o.getClassId())) {
             return new MessageResponse(1, "班级不能为空！");
         }
-        boolean b = signService.isExistByMobile(o.getMobile());
-        if (b) {
-            return new MessageResponse(1, "手机号码不能重复！");
-        }
         //
         Student oldData = studentDao.selectByPrimaryKey(o.getId());
         if (oldData == null) {
             return new MessageResponse(1, "数据丢失！");
+        }
+        //号码有变动时，进行校验
+        if (!oldData.getMobile().equals(o.getMobile())) {
+            MessageResponse m = signService.updateAccount(o.getId(), o.getMobile());
+            if (m.getStatus() == ResultCode.FAIL) {
+                return m;
+            }
         }
         oldData.setMobile(o.getMobile());
         oldData.setName(o.getName());
@@ -295,11 +298,23 @@ public class StudentServiceImpl implements StudentService {
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "行" + i + ",名称不能为空！");
             }
+            if (CommonUtils.isBlank(o.getSex())) {
+                return new MessageResponse(1, "行" + i + ",性别不能为空！");
+            }
             if (CommonUtils.isBlank(o.getMobile())) {
                 return new MessageResponse(1, "行" + i + ",手机号码不能为空！");
             }
             if (CommonUtils.isBlank(o.getIdCard())) {
-                return new MessageResponse(1, "行" + i + ",身份证号码不能为空！");
+                return new MessageResponse(1, "行" + i + ",政治面貌不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getIdCard())) {
+                return new MessageResponse(1, "行" + i + ",职务全称不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getIdCard())) {
+                return new MessageResponse(1, "行" + i + ",单位全称不能为空！");
+            }
+            if (StringUtil.isNotEmpty(o.getSex())) {
+                o.setPolitical("男".equals(o.getPolitical().trim()) ? "1" : "2");
             }
             if (StringUtil.isNotEmpty(o.getPolitical())) {
                 o.setPolitical("党员".equals(o.getPolitical().trim()) ? "party" : "normal");
@@ -347,27 +362,26 @@ public class StudentServiceImpl implements StudentService {
 
         return new MessageResponse(0, "账户恢复成功！");
     }
+
     /**
-     *
-     *
      * @param userProp
      * @return SingleResult<String>
      */
     @Override
-    public SingleResult<Map<String, Object>> getRoleClassId(UserProp userProp){
-        SingleResult<Map<String, Object>> rst=new SingleResult();
-        Map<String, Object> e=new HashMap<>();
-        Map<String, String> o=this.studentDao.selectUserClassInfo(userProp.getUserId());
+    public SingleResult<Map<String, Object>> getRoleClassId(UserProp userProp) {
+        SingleResult<Map<String, Object>> rst = new SingleResult();
+        Map<String, Object> e = new HashMap<>();
+        Map<String, String> o = this.studentDao.selectUserClassInfo(userProp.getUserId());
         if (o.get("role").equals("student")) {
-            e.put("classId",o.get("classId"));
-            e.put("role",o.get("role"));
+            e.put("classId", o.get("classId"));
+            e.put("role", o.get("role"));
             rst.setValue(e);
         } else {
-            String classId=this.studentDao.selectTeacherClassInfoById(userProp.getUserId());
-            e.put("classId",classId);
-            e.put("role","teacher");
-            List<Map<String,String>> list=this.studentDao.selectTeacherClasses(userProp.getUserId());
-            e.put("list",list);
+            String classId = this.studentDao.selectTeacherClassInfoById(userProp.getUserId());
+            e.put("classId", classId);
+            e.put("role", "teacher");
+            List<Map<String, String>> list = this.studentDao.selectTeacherClasses(userProp.getUserId());
+            e.put("list", list);
             rst.setValue(e);
         }
         return rst;

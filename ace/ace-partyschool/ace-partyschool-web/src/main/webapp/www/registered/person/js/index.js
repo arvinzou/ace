@@ -92,7 +92,11 @@ function toConsumption(){
     }
 }
 function showPersonInfo(){
-    window.location.href = contextPath + '/www/registered/person/info.jsp';
+    if(regType == 'student'){
+        window.location.href = contextPath + '/www/registered/person/sinfo.jsp';
+    }else{
+        window.location.href = contextPath + '/www/registered/person/tinfo.jsp';
+    }
 }
 function classNotice(){
     window.location.href = contextPath + '/www/registered/classnotice/index.jsp';

@@ -1,3 +1,4 @@
+var lCardNo = null;
 $(function(){
 
     $.ajax({
@@ -9,7 +10,7 @@ $(function(){
         },
         success:function(result){
             if(result.status == 0) {
-                var lCardNo = result.data;
+                lCardNo = result.data.lCardNo;
             }else {
                 if(result.info){
                     alert(result.info);
@@ -24,11 +25,13 @@ $(function(){
         }
     });
 
-    initList();
-    initCount();
+    if(lCardNo){
+        initList(lCardNo);
+        initCount(lCardNo);
+    }
 });
 
-function initList(){
+function initList(lCardNo){
     var nowDate = new Date();
     var year = nowDate.getFullYear();
     var month = nowDate.getMonth() + 1;
@@ -42,7 +45,7 @@ function initList(){
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
-            lCardNo: 'ZX111011',
+            lCardNo: lCardNo,
             dateTimeStr: dateTimeStr,
             startNum: 0,
             endNum: 999
@@ -65,7 +68,7 @@ function initList(){
     });
 }
 
-function initCount(){
+function initCount(lCardNo){
     var year = new Date().getFullYear();
     $.ajax({
         url: "/api/www/api/findStudentFinCount",
@@ -73,7 +76,7 @@ function initCount(){
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
         data:{
-            lCardNo: 'ZX111011',
+            lCardNo: lCardNo,
             year: year
         },
         success:function(result){

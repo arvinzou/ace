@@ -407,6 +407,31 @@ public class SignServiceImpl implements SignService {
         return signDao.updateUsersStatus(userId, status);
     }
 
+    /**
+     * 更换账号
+     *
+     * @param userId     用户ID
+     * @param newAccount 新账号
+     * @return int
+     */
+    @Override
+    public MessageResponse updateAccount(String userId, String newAccount) {
+        if (!CommonUtils.isValidMobile(newAccount)) {
+            return new MessageResponse(ResultCode.FAIL, "手机号格式不正确！");
+        }
+        //验证账号是否重复
+        if (isExistByMobile(newAccount)) {
+            return new MessageResponse(ResultCode.FAIL, "该手机号已重复！");
+        }
+
+        int i = signDao.updateAccount(userId, newAccount);
+        if (i != 1) {
+            return new MessageResponse(ResultCode.FAIL, "手机号更换失败！");
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "手机号更换成功！");
+    }
+
     private void sendRegSmsNotice(Users o, String nickname, String mobile, String pwd) throws Exception {
         TaskCmcc obj = new TaskCmcc();
         Map<String, Object> msg = new HashMap<>();
