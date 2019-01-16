@@ -43,6 +43,7 @@
         <result column="headimgurl" jdbcType="VARCHAR" property="avatarUrl"/>
         <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
         <result column="isBindWx" jdbcType="VARCHAR" property="isBindWx"/>
+        <result column="lCardNo" jdbcType="VARCHAR" property="lCardNo"/>
         <association property="student" column="sid" javaType="com.huacainfo.ace.partyschool.vo.StudentVo">
             <id column="sid" jdbcType="VARCHAR" property="id"/>
             <result column="sPid" jdbcType="VARCHAR" property="pid"/>
