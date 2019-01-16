@@ -167,13 +167,13 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">手机号码</label>
+        <label class="col-md-2 view-label">手机号</label>
         <div class="col-md-10">
             \${data.o.mobile}
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-2 view-label">身份证号码</label>
+        <label class="col-md-2 view-label">身份证号</label>
         <div class="col-md-10">
             \${data.o.idCard}
         </div>

@@ -298,11 +298,23 @@ public class StudentServiceImpl implements StudentService {
             if (CommonUtils.isBlank(o.getName())) {
                 return new MessageResponse(1, "行" + i + ",名称不能为空！");
             }
+            if (CommonUtils.isBlank(o.getSex())) {
+                return new MessageResponse(1, "行" + i + ",性别不能为空！");
+            }
             if (CommonUtils.isBlank(o.getMobile())) {
                 return new MessageResponse(1, "行" + i + ",手机号码不能为空！");
             }
             if (CommonUtils.isBlank(o.getIdCard())) {
-                return new MessageResponse(1, "行" + i + ",身份证号码不能为空！");
+                return new MessageResponse(1, "行" + i + ",政治面貌不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getIdCard())) {
+                return new MessageResponse(1, "行" + i + ",职务全称不能为空！");
+            }
+            if (CommonUtils.isBlank(o.getIdCard())) {
+                return new MessageResponse(1, "行" + i + ",单位全称不能为空！");
+            }
+            if (StringUtil.isNotEmpty(o.getSex())) {
+                o.setPolitical("男".equals(o.getPolitical().trim()) ? "1" : "2");
             }
             if (StringUtil.isNotEmpty(o.getPolitical())) {
                 o.setPolitical("党员".equals(o.getPolitical().trim()) ? "party" : "normal");
