@@ -14,7 +14,7 @@ window.onload = function () {
 function removeOption() {
     var index = $('#evaluatingRst .form-group').length;
     $('#evaluatingRst .removeOption'+(index-2)).show();
-    $(this).parent().remove();
+    $(this).parent().parent().parent().remove();
 }
 
 function addOption() {
@@ -30,40 +30,38 @@ function addOption() {
 }
 
 
-var optionTemp = '<div class="form-group">\n' +
-    '                            <label class="col-md-2 control-label">\n' +
-    '                                评测指标\n' +
-    '                                <span class="required" aria-required="true"> * </span>\n' +
-    '                            </label>\n' +
-    '                            <div class="col-md-10">\n' +
-    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
-    '                                       maxlength="10"\n' +
-    '                                       placeholder="请输入评测指标（建议字数在6个字以内)">\n' +
-    '                                <span class="help-block"></span>\n' +
+var optionTemp= '                        <div class="form-group">\n' +
+    '                            <div class="row">\n' +
+    '                                <label class="col-md-2 control-label">\n' +
+    '                                    指标名称\n' +
+    '                                </label>\n' +
+    '                                <div class="col-md-4">\n' +
+    '                                    <input type="text" class="form-control" name="evaluationIndex[#index#].name"\n' +
+    '                                           maxlength="4"\n' +
+    '                                           placeholder="请输入评测指标（建议字数在6个字以内)">\n' +
+    '                                    <span class="help-block"></span>\n' +
+    '                                </div>\n' +
+    '                                <label class="col-md-1 control-label">\n' +
+    '                                    指标分值\n' +
+    '                                </label>\n' +
+    '                                <div class="col-md-1">\n' +
+    '                                    <input type="text" class="form-control scores" name="evaluationIndex[#index#].score"\n' +
+    '                                           maxlength="10"\n' +
+    '                                           placeholder="分值">\n' +
+    '                                    <span class="help-block"></span>\n' +
+    '                                </div>\n' +
     '                            </div>\n' +
-    '                            <label class="col-md-2 control-label">\n' +
-    '                                指标内容\n' +
-    '                                <span class="required" aria-required="true"> * </span>\n' +
-    '                            </label>\n' +
-    '                            <div class="col-md-10">\n' +
-    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].introduce"\n' +
-    '                                       maxlength="10"\n' +
-    '                                       placeholder="请输入评测内容（建议字数在30个字以内)">\n' +
-    '                                <span class="help-block"></span>\n' +
+    '                            <div class="row">\n' +
+    '                                <label class="col-md-2 control-label">\n' +
+    '                                    指标内容\n' +
+    '                                </label>\n' +
+    '                                <div class="col-md-6">\n' +
+    ' <textarea name="evaluationIndex[#index#].introduce" id="" rows="3"></textarea>'+
+    '                                    <span class="help-block"></span>\n' +
+    '                                </div>\n' +
+    '                           <div class="col-md-1" style="text-align: center;"><span type="button" class=" removeOption removeOption#index#">删除</span></div> ' +
     '                            </div>\n' +
-    '                            <label class="col-md-2 control-label">\n' +
-    '                                指标分值\n' +
-    '                                <span class="required" aria-required="true"> * </span>\n' +
-    '                            </label>\n' +
-    '                            <div class="col-md-6">\n' +
-    '                                <input type="text" class="form-control" name="evaluationIndex[#index#].score"\n' +
-    '                                       maxlength="10"\n' +
-    '                                       placeholder="请输入评测分值(填写数字)">\n' +
-    '                                <span class="help-block"></span>\n' +
-    '                            </div>\n' +
-    '                            <button type="button" class="btn btn-success removeOption removeOption#index# col-md-1">删除</button>' +
     '                        </div>';
-
 
 /*页面渲染*/
 function render(obj, data, tplId) {
@@ -124,6 +122,7 @@ function save(params) {
         evaluationIndex.push({
             name: params['evaluationIndex[' + index + '].name'],
             score: params['evaluationIndex[' + index + '].score'],
+            introduce: params['evaluationIndex[' + index + '].introduce'],
             id: params['evaluationIndex[' + index + '].id']
         })
         index++;
