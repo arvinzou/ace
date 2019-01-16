@@ -57,14 +57,10 @@
 				</div>
 				{@else}
 				<div class="sex-left">
-					<div class="inner">
-						<img src="img/icon-unsex.png" class="icon-sex" onclick="selectSex(this,'1')"/><span>男</span>
-					</div>
+					<img src="img/icon-unsex.png" class="icon-sex" onclick="selectSex(this,'1')"/><span>男</span>
 				</div>
 				<div class="sex-right">
-					<div class="inner">
-						<img src="img/icon-sex.png" class="icon-sex" onclick="selectSex(this,'2')"/><span>女</span>
-					</div>
+					<img src="img/icon-sex.png" class="icon-sex" onclick="selectSex(this,'2')"/><span>女</span>
 				</div>
 				{@/if}
 			</div>
