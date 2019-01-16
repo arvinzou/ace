@@ -32,9 +32,11 @@ public class AnalysisController extends BisBaseController {
             String reportId)
             throws Exception {
         Map<String, Object> condition = this.getParams();
-        String classId=studentService.getClassId(this.getCurUserProp()).getValue();
-        condition.put("classId", classId);
+        Map<String,Object> rs=studentService.getRoleClassId(this.getCurUserProp()).getValue();
+        condition.put("classId", rs.get("classId"));
         condition.put("userId", this.getCurUserProp().getUserId());
+        condition.put("role", rs.get("role"));
+        condition.put("list", rs.get("list"));
         this.logger.info("condition ->{}", condition);
         return analysisService.query(condition, reportId);
     }
