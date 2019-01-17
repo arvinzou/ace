@@ -1,5 +1,7 @@
 {
     "pages": [
+        "page/index/index",
+        "page/me/index"
     ],
     "permission": {
         "scope.userLocation": {
@@ -19,6 +21,14 @@
         "borderStyle": "#000000",
         "backgroundColor": "#fff",
         "list": [
+            {
+                "pagePath": "page/index/index",
+                "text": "首页"
+            },
+            {
+                "pagePath": "page/me/index",
+                "text": "个人中心"
+            }
         ]
     },
     "networkTimeout": {

@@ -176,14 +176,14 @@ window.onload = function () {
             customButtons: {
                 //自定义 按钮可以添加多个，自己命名  在header 部分调用即可 比如这里的myCustomButto
                 prev: {
-                    text: '上一周',
+                    text: '〈',
                     click: function () {
                         $('#calendar').fullCalendar('prev');
                         formatDate($('#calendar').fullCalendar('getView').title);
                     }
                 },
                 next: {
-                    text: '下一周',
+                    text: '〉',
                     click: function () {
                         $('#calendar').fullCalendar('next');
                         formatDate($('#calendar').fullCalendar('getView').title);
@@ -191,8 +191,8 @@ window.onload = function () {
                 }
             },
             header: {
-                left: 'prev,next,today',
-                center: 'title',
+                left: 'today',
+                center: 'prev,title,next',
                 right: ''
             },
             eventStartEditable: false,

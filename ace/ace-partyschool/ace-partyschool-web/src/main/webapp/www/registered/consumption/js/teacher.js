@@ -1,4 +1,5 @@
 var lCardNo = null;
+var server = "http://f63981bf.ngrok.io";
 $(function(){
 
     $.ajax({
@@ -40,7 +41,7 @@ function initList(lCardNo){
     }
     var dateTimeStr = year+"-"+month;
     $.ajax({
-        url:  "/api/www/api/findTeacherFinDataList",
+        url:  server+"/api/www/api/findTeacherFinDataList",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -70,7 +71,7 @@ function initList(lCardNo){
 
 function initCount(lCardNo){
     $.ajax({
-        url: "/api/www/api/findTeacherBalance",
+        url: server+"/api/www/api/findTeacherBalance",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
