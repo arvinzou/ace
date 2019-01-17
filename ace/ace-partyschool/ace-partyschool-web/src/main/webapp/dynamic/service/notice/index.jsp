@@ -138,10 +138,10 @@ pageEncoding="utf-8"%>
     </div>
 	{@if data.o.users}
 	<div class="form-group">
-	    <label class="col-md-2 view-label">发布对象</label>
+	    <label class="col-md-2 view-label">接收人</label>
 	    <div class="col-md-10">
 			{@each data.o.users as item, index}
-	        <div class="badge badge-pill badge-success" style="float:left;margin: 10px;">\${item.name}</div>
+	        <div class="badge badge-pill {@if item.status==2}badge-success{@else}badge-danger{@/if}" style="float:left;margin: 10px;">\${item.name}</div>
 			{@/each}
 	    </div>
 	</div>

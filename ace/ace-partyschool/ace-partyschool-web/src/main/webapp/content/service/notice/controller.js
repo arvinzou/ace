@@ -201,6 +201,9 @@ function save() {
                 if (rst) {
                     $('#modal-push').modal('hide');
                     alert(rst.errorMessage);
+					jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+						postData: params
+					}).trigger("reloadGrid");
                 }
             },
             complete : function(XMLHttpRequest, textStatus) {

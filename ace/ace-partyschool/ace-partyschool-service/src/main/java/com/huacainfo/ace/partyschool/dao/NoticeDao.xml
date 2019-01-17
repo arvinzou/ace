@@ -144,7 +144,7 @@
         select t.file_name fileName,concat(#{server},t.file_url) fileUrl,t.file_size fileSize from portal.attach t where t.notice_id= #{id,jdbcType=VARCHAR}
     </select>
     <select id="selectUsersById" resultType="map">
-        select a.id userId,a.name from notice_status t left join (select name,id from student where status='1' union all select name,id from teacher where status='1') a on t.userId=a.id
+        select a.id userId,a.name,t.status from notice_status t left join (select name,id from student where status='1' union all select name,id from teacher where status='1') a on t.userId=a.id
         where t.noticeId=#{id}
     </select>
 </mapper>

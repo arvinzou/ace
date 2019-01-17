@@ -150,7 +150,7 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <select id="getPushUsersList" resultType="map">
-    select a.id userId,a.name from notice_status t left join (select name,id from student where status='1' union all select name,id from teacher where status='1') a on t.userId=a.id
+    select a.id userId,a.name,t.status from notice_status t left join (select name,id from student where status='1' union all select name,id from teacher where status='1') a on t.userId=a.id
     where t.noticeId=#{id}
   </select>
 </mapper>
