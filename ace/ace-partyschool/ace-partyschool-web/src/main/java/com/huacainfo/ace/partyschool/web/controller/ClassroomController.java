@@ -51,8 +51,7 @@ public class ClassroomController extends BisBaseController {
     public PageResult<ClassroomVo> findClassroomList(ClassroomQVo condition,
                                                      PageParamNoChangeSord page) throws Exception {
 
-        PageResult
-                <ClassroomVo> rst = this.classroomService
+        PageResult<ClassroomVo> rst = this.classroomService
                 .findClassroomList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());

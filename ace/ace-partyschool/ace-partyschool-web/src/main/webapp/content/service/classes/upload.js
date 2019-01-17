@@ -1,6 +1,6 @@
 jQuery(function($) {
 	init_uploader({
-		extensions: ",doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp",
+		extensions: "doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp",
 		url: portalPath + '/files/uploadImage.do',
 		target: "url",
 		multipart_params: {}

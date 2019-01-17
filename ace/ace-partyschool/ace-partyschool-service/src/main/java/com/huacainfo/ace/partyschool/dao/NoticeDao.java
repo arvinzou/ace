@@ -1,7 +1,9 @@
 package com.huacainfo.ace.partyschool.dao;
 
 import com.huacainfo.ace.partyschool.model.Notice;
+import com.huacainfo.ace.partyschool.model.NoticeStatus;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +28,10 @@ public interface NoticeDao {
                             @Param("limit") int limit,
                             @Param("orderBy") String orderBy);
 
-    List<NoticeVo> findMyNoticeList(String id);
+    List<NoticeVo> findMyNoticeList(@Param("condition") NoticeStatusQVo condition,
+                                    @Param("start") int start,
+                                    @Param("limit") int limit,
+                                    @Param("orderBy") String orderBy);
 
     int findCount(@Param("condition") NoticeQVo condition);
 
