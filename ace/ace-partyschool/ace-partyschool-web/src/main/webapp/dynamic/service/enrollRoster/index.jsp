@@ -165,7 +165,7 @@
                 <div id="uploader">
                 </div>
                 <div style="margin:5px">
-                    <a href="importTmpl.xls" style="color:red">下载模板</a>.<br>
+                    <a href="roster_template.xls" style="color:red">下载模板</a>.<br>
                 </div>
             </div>
             <div class="modal-footer">
