@@ -9,6 +9,8 @@ public class NoticeVo extends Notice {
 
     private Integer pushed;
 
+    private Integer viewed;
+
     private List<Map<String,Object>> users;
 
     private List<Map<String,Object>> files;
@@ -19,6 +21,14 @@ public class NoticeVo extends Notice {
 
     public void setPushed(Integer pushed) {
         this.pushed = pushed;
+    }
+
+    public Integer getViewed() {
+        return viewed;
+    }
+
+    public void setViewed(Integer viewed) {
+        this.viewed = viewed;
     }
 
     public List<Map<String, Object>> getUsers() {

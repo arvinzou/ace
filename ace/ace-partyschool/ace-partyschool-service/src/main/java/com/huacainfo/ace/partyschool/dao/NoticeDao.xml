@@ -100,7 +100,7 @@
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
         n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content,(select count(1) from notice_status a where n.id=a.noticeId)
-        pushed
+        pushed,(select count(1) from notice_status a where n.id=a.noticeId and a.status='2')viewed
         <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">

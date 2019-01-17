@@ -1,4 +1,4 @@
-var _colNames = ['主键', '类型', '班级', '标题', '文件地址', '内容', '发布时间 ', '发布人', '发布人次', '操作'];
+var _colNames = ['主键', '类型', '班级', '标题', '文件地址', '内容', '发布时间 ', '发布人', '发布/已阅', '操作'];
 var _colModel = function() {
 	return [{
 		name: 'id',
@@ -127,7 +127,10 @@ var _colModel = function() {
 	}, {
 		name: 'pushed',
 		editable: false,
-		width: 50
+		width: 50,
+		renderer: function(value, cur) {
+			return value+"/<span style='color:blue'>"+$.jgrid.getAccessor(cur, 'viewed')+"</span>";
+		}
 	}, {
 		name: 'opt',
 		width: 80,
