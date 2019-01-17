@@ -2,12 +2,16 @@ package com.huacainfo.ace.partyschool.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.common.tools.JsonUtil;
 import com.huacainfo.ace.partyschool.model.EnrollRoster;
 import com.huacainfo.ace.partyschool.service.EnrollRosterService;
 import com.huacainfo.ace.partyschool.vo.EnrollRosterQVo;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -170,6 +175,13 @@ public class EnrollRosterController extends BisBaseController {
     @ResponseBody
     public MessageResponse importXls(@RequestParam MultipartFile[] file,
                                      String jsons) throws Exception {
+        Map<String, Object> params = JsonUtil.toMap(jsons);
+        String clsId = String.valueOf(params.get("clsId"));
+        if (CommonUtils.isBlank(clsId)) {
+            return new MessageResponse(ResultCode.FAIL, "请选择班次信息");
+        }
+
+
         ExcelUtils utils = new ExcelUtils();
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         MongoFile[] files = new MongoFile[file.length];
@@ -181,12 +193,9 @@ public class EnrollRosterController extends BisBaseController {
             obj.setLength(o.getSize());
             files[i] = obj;
             i++;
-            String ext = obj
-                    .getFilename()
+            String ext = obj.getFilename()
                     .toLowerCase()
-                    .substring(
-                            obj.getFilename().toLowerCase()
-                                    .lastIndexOf("."));
+                    .substring(obj.getFilename().toLowerCase().lastIndexOf("."));
             this.logger.info(ext);
             if (ext.equals(".xls")) {
                 list = utils.readExcelByJXL(obj.getInputStream(), 2);
@@ -195,7 +204,7 @@ public class EnrollRosterController extends BisBaseController {
                 list = utils.readExcelByPOI(obj.getInputStream(), 2);
             }
         }
-        return this.enrollRosterService.importXls(list, this.getCurUserProp());
+        return this.enrollRosterService.importXls(clsId, list, this.getCurUserProp());
     }
 
 
@@ -228,8 +237,13 @@ public class EnrollRosterController extends BisBaseController {
      */
     @RequestMapping(value = "/getListByCondition")
     @ResponseBody
-    public Map<String, Object> getListByCondition() {
-        return this.enrollRosterService.getListByCondition(this.getParams());
+    public Map<String, Object> getListByCondition(String q, String id) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("q", id);
+        if (!CommonUtils.isBlank(q)) {
+            params.put("q", q);
+        }
+        return this.enrollRosterService.getListByCondition(params);
     }
 
 
@@ -264,5 +278,22 @@ public class EnrollRosterController extends BisBaseController {
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.enrollRosterService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    /**
+     * 批量开启/关闭报名
+     *
+     * @param clsId  班级ID
+     * @param status 开启/关闭  1-开，0-关
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateStatusByClsId")
+    public MessageResponse updateStatusByClsId(String clsId, String status) throws Exception {
+        if (!StringUtil.areNotEmpty(clsId, status)) {
+            return new MessageResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        return this.enrollRosterService.updateStatusByClsId(clsId, status, this.getCurUserProp());
     }
 }

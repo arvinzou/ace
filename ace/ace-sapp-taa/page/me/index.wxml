@@ -1,3 +1,37 @@
-<view>
-    
+<view class='index'>
+    <view class='banner'>
+        <view class='header-box'><image class='header' src='../../image/default_header.png'></image></view>
+        <view class='info-box'>
+            <text class='name'>陈思佳</text>
+            <image class='icon-edit' src='../../image/icon-edit.png' bindtap='edit'></image>
+        </view>
+        <view class='info-box'>
+            <text class='cardNo'>警号:436445</text>
+        </view>
+    </view>
+    <view class='menu'>
+        <view class='menu-item'>
+            <view class='menu-icon'><image src='../../image/icon-add.png'></image></view>
+            <view class='menu-left'>
+                 <text class='menu-title'>事故列表</text>
+            </view>
+            <view class='menu-right'>
+                <text class='number'>12</text>
+                <image src='../../image/icon_rediret.png' class='icon-redirect'></image>
+            </view>
+        </view>
+        <view class='menu-item'>
+            <view class='menu-left'>
+                 <image src='../../image/icon-list.png' class='menu-icon'></image>
+                 <text class='menu-title'>路段采集</text>
+            </view>
+            <view class='menu-right'>
+                <text class='number'>34</text>
+                <image src='../../image/icon_rediret.png' class='icon-redirect'></image>
+            </view>
+        </view>
+    </view>
+    <view class='footer'>
+        <button>退出登录</button>
+    </view>
 </view>

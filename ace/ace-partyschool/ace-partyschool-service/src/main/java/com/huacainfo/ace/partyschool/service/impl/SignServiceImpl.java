@@ -152,6 +152,7 @@ public class SignServiceImpl implements SignService {
         boolean isBindWx = "1".equals(data.getIsBindWx());
         String uid = isBindWx ? userinfo.getUnionid() : GUIDUtil.getGUID();
         data.setId(uid);
+        data.setStatus("0");//默认已注销
 
         //注册portal.users
         String regType = CommConstant.TEACHER;
