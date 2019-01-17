@@ -111,9 +111,13 @@ public class FilesController extends BisBaseController {
         for (MultipartFile o : file) {
             File dest = new File(dir + File.separator + o.getName());
             o.transferTo(dest);
+            String fileName=o.getOriginalFilename();
+            if(fileName.indexOf(".")>0){
+                fileName=fileName.substring(0,fileName.indexOf("."));
+            }
             fileNames[i] = PropertyUtil.getProperty("fastdfs_server") + this.fileSaver.saveFile(dest, o.getOriginalFilename());
             dest.delete();
-            clsFilesService.insertFiles(fileNames[i] ,classesId ,category,this.getCurUserProp());
+            clsFilesService.insertFiles(fileName,fileNames[i] ,classesId ,category,this.getCurUserProp());
             i++;
         }
 

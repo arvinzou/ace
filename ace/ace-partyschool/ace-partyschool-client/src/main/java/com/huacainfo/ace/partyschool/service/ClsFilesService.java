@@ -45,7 +45,7 @@ public interface ClsFilesService {
      * @author: Arvin
      * @version: 2019-01-04
      */
-    MessageResponse insertFiles(String filePath ,String  clsId ,String category,UserProp userProp) throws Exception;
+    MessageResponse insertFiles(String fileName,String filePath ,String  clsId ,String category,UserProp userProp) throws Exception;
 
     ResultResponse insertFilesVo(Files obj, UserProp userProp) throws Exception;
 
