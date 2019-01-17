@@ -1,0 +1,26 @@
+<view class='index'>
+    <view class='form'>
+        <view class='header-box br'>
+            <view class='header'><image src='../../image/default_header.png'></image></view>
+            <view class='opt-title'>修改头像</view>
+            <view class='opt'><image src='../../image/icon_rediret.png'></image></view>
+        </view>
+        <view class='row br'>
+            <view class='form-title'>姓名</view>
+            <view class='form-input'><input type='text' value='陈思佳'></input></view>
+        </view>
+        <view class='row br'>
+            <view class='form-title'>手机号</view>
+            <view class='form-input'><input type='text' value='15888888888'></input></view>
+        </view>
+        <view class='row br'>
+            <view class='form-title'>警号</view>
+            <view class='form-input'><input type='text' value='436445'></input></view>
+        </view>
+         <view class='row'>
+            <view class='form-title'>所属单位</view>
+            <view class='form-input'><input type='text' value='常德市公安局交警支队'></input></view>
+        </view>
+    </view>
+    <view class='save'>保存修改</view>
+</view>
