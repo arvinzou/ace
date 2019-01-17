@@ -1,14 +1,10 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
-import com.huacainfo.ace.partyschool.vo.NoticeQVo;
-import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/www/notice")
@@ -75,7 +73,12 @@ public class WNoticeController extends BisBaseController {
         if (userProp == null) {
             return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
-        return this.sclNoticeService.selectNoticeById(id);
+        SingleResult<NoticeVo> o=this.sclNoticeService.updateAndSelectNoticeVoById(id,getServerHttp(),this.getCurUserProp());
+        return new ResultResponse(0,"OK",o.getValue());
+    }
+
+    private String getServerHttp() {
+        return ((Map) this.getRequest().getSession().getAttribute("cfg")).get("fastdfs_server").toString();
     }
 
 }

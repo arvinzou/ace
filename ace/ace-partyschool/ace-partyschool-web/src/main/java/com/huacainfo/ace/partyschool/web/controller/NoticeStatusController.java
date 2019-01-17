@@ -1,5 +1,10 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.partyschool.service.NoticeStatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,23 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.ExcelUtils;
-import com.huacainfo.ace.partyschool.model.NoticeStatus;
-import com.huacainfo.ace.partyschool.service.NoticeStatusService;
-import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
-import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
-import org.springframework.web.multipart.MultipartFile;
-import com.huacainfo.ace.portal.vo.MongoFile;
-
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.List;
 @Controller
 @RequestMapping("/noticeStatus")
 /**
@@ -53,5 +42,42 @@ private NoticeStatusService noticeStatusService;
     @ResponseBody
     public MessageResponse updateStatus(String id, String status) throws Exception {
         return this.noticeStatusService.updateStatus(id, this.getCurUserProp());
+    }
+
+
+    /**
+     * @throws
+     * @Title:insertNoticeStatus
+     * @Description: TODO(批量插入)
+     * @param: @param id
+     * @param: @param userIds
+     * @param: @param userProp
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 陈晓克
+     * @version: 2019-01-16
+     */
+    @RequestMapping(value = "/insertNoticeStatus")
+    @ResponseBody
+    public MessageResponse insertNoticeStatus(String id,String  userIds,UserProp userProp) throws Exception{
+        if(CommonUtils.isBlank(userIds)){
+            return new MessageResponse(1,"请选择发布对象！");
+        }
+        return this.noticeStatusService.insertNoticeStatus(id,userIds.split(","),this.getCurUserProp());
+    }
+    /**
+     * @throws
+     * @Title:getPushUsersList
+     * @Description: TODO(获取已经发送人员列表)
+     * @param: @param id
+     * @param: @throws Exception
+     * @return: ListResult<Map<String,Object>>
+     * @author: 陈晓克
+     * @version: 2019-01-16
+     */
+    @RequestMapping(value = "/getPushUsersList")
+    @ResponseBody
+    public ListResult<Map<String,Object>> getPushUsersList(String id)throws Exception{
+       return this.noticeStatusService.getPushUsersList(id);
     }
 }

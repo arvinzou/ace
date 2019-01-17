@@ -84,7 +84,7 @@ pageEncoding="utf-8"%>
 			</div>
 		</div>
 <div class="modal fade" role="dialog" id="modal-push">
-			<div class="modal-dialog" role="document" style="width: 100%;">
+			<div class="modal-dialog" role="document" style="width: 70%;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">
@@ -116,7 +116,12 @@ pageEncoding="utf-8"%>
         <label class="col-md-2 view-label">内容</label>
         <div class="col-md-10">
             <div class="row">\$\${data.o.content}</div>
-			<div class="row" id="filelist-history"></div>
+			<div class="row" id="filelist-history">
+				
+				{@each data.o.files as item, index}
+				<a href="\${item.fileUrl}" target="_blank">\${item.fileName}</a><br>
+				{@/each}
+			</div>
         </div>
     </div>
     <div class="form-group">
@@ -131,6 +136,16 @@ pageEncoding="utf-8"%>
             \${data.o.publisher}
         </div>
     </div>
+	{@if data.o.users}
+	<div class="form-group">
+	    <label class="col-md-2 view-label">接收人</label>
+	    <div class="col-md-10">
+			{@each data.o.users as item, index}
+	        <div class="badge badge-pill {@if item.status==2}badge-success{@else}badge-danger{@/if}" style="float:left;margin: 10px;">\${item.name}</div>
+			{@/each}
+	    </div>
+	</div>
+	{@/if}
    
 </script>
 
