@@ -1,4 +1,4 @@
-var params = {};
+var params = {category:'2'};
 var id;
 jQuery(function($) {
 	//查询
@@ -129,6 +129,7 @@ function initClassList() {
 				var data = {};
 				data = result.value;
 				render('#select1', data, 'tpl-select-list');
+				params.category='2';
 				initGrid();
 			} else {
 				alert(result.errorMessage);
