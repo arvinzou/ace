@@ -69,9 +69,9 @@ public interface SclNoticeService {
      * @author: Arvin
      * @version: 2019-01-06
      */
-    SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception;
+    SingleResult<NoticeVo> updateAndSelectNoticeVoById(String id,String server,UserProp userProp) throws Exception;
 
-    ResultResponse selectNoticeById(String id) throws Exception;
+
 
     /**
      * @throws

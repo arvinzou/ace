@@ -15,7 +15,7 @@
     <meta content="${cfg.sys_name}" name="description"/>
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common-base.css"/>
-    <link rel="stylesheet" type="text/css" href="CommonUI/font4.4/css/font-awesome.min.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="CommonUI/font4.4/css/font-awesome.min.css"/>--%>
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/dataTables.bootstrap.min.css"/>
@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="col-sm-8 margin0 padding0">
-                            <div id='calendar' class="ml5 padding5" ></div>
+                            <div id='calendar' ></div>
                         </div>
                         <div class="col-sm-2 margin0 padding0">
                             <div col-sm-12>
@@ -106,7 +106,7 @@
 <script id="tpl-courseList" type="text/template">
     {@each data as item, index}
     <li>
-        <h5 ><i class="fa fa-hand-o-right mr5"></i>\${index}<i class="fa fa-angle-double-down fr"></i></h5>
+        <h5 class="teacherNameList"><i class="fa fa-user" aria-hidden="true"></i>\${index}<i class="fa fa-angle-double-down fr"></i></h5>
         <ul>
             {@each item as ite, ind}
             <li class='fc-event event-item bg-crew-yingji' data-teacherId="\${ite.teacherId}"  data-courseId="\${ite.id}" data-teacher="\${index}" data-class="fc-event bg-crew-yingji">

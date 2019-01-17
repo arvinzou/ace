@@ -1,8 +1,13 @@
 package com.huacainfo.ace.portal.web.controller;
 
-import java.io.File;
-import java.util.Date;
-
+import com.huacainfo.ace.common.fastdfs.IFile;
+import com.huacainfo.ace.common.result.ListResult;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.portal.model.Attach;
+import com.huacainfo.ace.portal.service.AttachService;
+import com.huacainfo.ace.portal.service.FilesService;
+import com.huacainfo.ace.portal.vo.AttachQVo;
+import com.huacainfo.ace.portal.vo.AttachVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.huacainfo.ace.common.fastdfs.IFile;
-import com.huacainfo.ace.common.result.ListResult;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.portal.model.Attach;
-import com.huacainfo.ace.portal.service.AttachService;
-import com.huacainfo.ace.portal.service.FilesService;
-import com.huacainfo.ace.portal.vo.AttachQVo;
-import com.huacainfo.ace.portal.vo.AttachVo;
+import java.io.File;
+import java.util.Date;
 @Controller
 @RequestMapping("/attach")
 public class AttachController extends PortalBaseController{
@@ -108,8 +107,7 @@ public class AttachController extends PortalBaseController{
 	        files[i]=obj;
 			i++;
 		}
-		//return this.attachService.upload(files,noticeId, this.getCurUserProp());
-		return null;
+		return this.attachService.upload(files,noticeId, this.getCurUserProp());
 	}
 	
 	

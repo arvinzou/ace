@@ -116,7 +116,7 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         this.dataBaseLogService.log("添加通知公告", "通知公告", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "添加通知公告完成！");
+        return new MessageResponse(0, "保存成功！");
     }
 
     /**
@@ -148,7 +148,7 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         this.dataBaseLogService.log("变更通知公告", "通知公告", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "变更通知公告完成！");
+        return new MessageResponse(0, "保存成功！");
     }
 
     /**
@@ -162,23 +162,18 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      * @version: 2019-01-06
      */
     @Override
-    public SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
+    public SingleResult<NoticeVo> updateAndSelectNoticeVoById(String id,String server,UserProp userProp) throws Exception {
         SingleResult<NoticeVo> rst = new SingleResult<>();
-        this.noticeDao.selectVoByPrimaryKey(id);
-        rst.setValue(this.noticeDao.selectVoByPrimaryKey(id));
+        NoticeVo o=this.noticeDao.selectVoByPrimaryKey(id);
+        o.setFiles(this.noticeDao.selectFilesById(id,server));
+        o.setUsers(this.noticeDao.selectUsersById(id));
+        rst.setValue(o);
+        this.noticeDao.updateStatus(id,userProp.getUserId());
         return rst;
     }
 
 
-    @Override
-    public ResultResponse selectNoticeById(String id) throws Exception{
-        NoticeVo noticeVo=this.noticeDao.selectVoByPrimaryKey(id);
-        if("1".equals(noticeVo.getStatus())){
-            noticeVo.setStatus("2");
-            this.noticeDao.updateByPrimaryKey(noticeVo);
-        }
-        return new ResultResponse(0, "公告详情获取完成！",noticeVo);
-    }
+
 
     /**
      * @throws

@@ -6,7 +6,7 @@ import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
+import java.util.Map;
 public interface NoticeDao {
 
     Notice selectByPrimaryKey(String id);
@@ -34,6 +34,11 @@ public interface NoticeDao {
 
     int isExit(Notice record);
 
-    int updateStatus(String id);
+    int updateStatus(@Param("noticeId") String noticeId, @Param("userId") String userId);
+
+    List<Map<String,Object>> selectFilesById(@Param("id") String id, @Param("server") String server);
+
+
+    List<Map<String,Object>> selectUsersById(@Param("id") String id);
 
 }

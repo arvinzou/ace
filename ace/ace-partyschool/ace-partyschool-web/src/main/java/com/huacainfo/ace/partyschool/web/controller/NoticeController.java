@@ -18,6 +18,8 @@ import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/notice")
 /**
@@ -103,7 +105,7 @@ public class NoticeController extends BisBaseController {
     @RequestMapping(value = "/selectNoticeByPrimaryKey")
     @ResponseBody
     public SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
-        return this.sclNoticeService.selectNoticeByPrimaryKey(id);
+        return this.sclNoticeService.updateAndSelectNoticeVoById(id,getServerHttp(),this.getCurUserProp());
     }
 
     /**
@@ -122,5 +124,9 @@ public class NoticeController extends BisBaseController {
         JSONObject json = JSON.parseObject(jsons);
         String id = json.getString("id");
         return this.sclNoticeService.deleteNoticeByNoticeId(id, this.getCurUserProp());
+    }
+
+    private String getServerHttp() {
+        return ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
     }
 }

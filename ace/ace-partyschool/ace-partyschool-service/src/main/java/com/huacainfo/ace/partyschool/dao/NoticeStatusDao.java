@@ -1,13 +1,12 @@
 package com.huacainfo.ace.partyschool.dao;
 
-import java.util.List;
-import java.util.Map;
-
-import com.huacainfo.ace.partyschool.vo.ClassesVo;
-import org.apache.ibatis.annotations.Param;
 import com.huacainfo.ace.partyschool.model.NoticeStatus;
 import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeStatusVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 public interface NoticeStatusDao {
 
@@ -32,5 +31,8 @@ public interface NoticeStatusDao {
 
 
     int updateStatus(@Param("id") String id);
+
+
+    public List<Map<String, Object>> getPushUsersList(String id);
 
  }
