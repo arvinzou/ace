@@ -2,7 +2,10 @@ package com.huacainfo.ace.jxb.web.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
@@ -130,7 +133,13 @@ public class WithdrawRecordController extends JxbBaseController {
     @RequestMapping(value = "/audit")
     @ResponseBody
     public MessageResponse audit(String id, String rst, String message) throws Exception {
+        if (StringUtil.areNotEmpty(id, rst)) {
 
-        return this.withdrawRecordService.audit(id, rst, message, this.getCurUserProp());
+        }
+        try {
+            return withdrawRecordService.updateAudit(id, rst, message, this.getCurUserProp());
+        } catch (CustomException e) {
+            return new MessageResponse(ResultCode.FAIL, e.getMsg());
+        }
     }
 }
