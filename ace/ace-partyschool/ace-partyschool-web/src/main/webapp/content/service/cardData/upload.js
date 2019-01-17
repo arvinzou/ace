@@ -28,7 +28,7 @@ function init_uploader(p) {
             alert(rst.errorMessage);
         } else {
             alert(rst.errorMessage);
-            $('#modal-upload').modal('hide');
+            $('#modal-import').modal('hide');
             jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
             initPreview(p.id);
         }

@@ -28,8 +28,7 @@ public interface ClassroomService {
      * @author: Arvin
      * @version: 2019-01-03
      */
-    PageResult
-            <ClassroomVo> findClassroomList(ClassroomQVo condition,
+    PageResult<ClassroomVo> findClassroomList(ClassroomQVo condition,
                                             int start, int limit, String orderBy) throws Exception;
 
     /**

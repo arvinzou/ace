@@ -1,4 +1,4 @@
-var params = {};
+var params = {category:'2'};
 var id;
 jQuery(function($) {
 	//查询
@@ -77,7 +77,7 @@ function initPreview(id) {
 				var data = {};
 				data['o'] = result.value;
 				render('#fm-preview', data, 'tpl-preview');
-				loadAttach(id);
+				//loadAttach(id);
 			} else {
 				alert(result.errorMessage);
 			}
@@ -129,6 +129,7 @@ function initClassList() {
 				var data = {};
 				data = result.value;
 				render('#select1', data, 'tpl-select-list');
+				params.category='2';
 				initGrid();
 			} else {
 				alert(result.errorMessage);
@@ -189,10 +190,10 @@ function save() {
             s += nodes[i].id;
         }
         console.log(s);
-		return;
+		
         $.ajax({
             type : "post",
-            url : contextPath + "/role/insertRoleResources.do",
+            url : contextPath + "/noticeStatus/insertNoticeStatus",
             data:{id:id,userIds:s},
             beforeSend : function(XMLHttpRequest) {
                 startLoad();
@@ -201,6 +202,9 @@ function save() {
                 if (rst) {
                     $('#modal-push').modal('hide');
                     alert(rst.errorMessage);
+					jQuery(cfg.grid_selector).jqGrid('setGridParam', {
+						postData: params
+					}).trigger("reloadGrid");
                 }
             },
             complete : function(XMLHttpRequest, textStatus) {

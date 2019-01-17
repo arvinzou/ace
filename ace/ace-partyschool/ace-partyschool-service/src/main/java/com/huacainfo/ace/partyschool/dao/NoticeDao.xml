@@ -46,6 +46,7 @@
         update notice
         set
         title = #{title,jdbcType=VARCHAR},
+        status =#{status,jdbcType=VARCHAR},
         content=#{content,jdbcType=VARCHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -54,14 +55,10 @@
 
     </resultMap>
 
-    <sql id="Vo_Column_List">
-        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
-    </sql>
-    <sql id="From_Statement">
-        FROM notice n
-    </sql>
-    <sql id="Where_Condition">
-        where 1 = 1
+
+
+    <sql id="whereCondition">
+        FROM notice n where 1 = 1
         <if test='condition.title !=null and condition.title !=""'>
             and n.title like concat('%',#{condition.title,jdbcType=VARCHAR},'%')
         </if>
@@ -83,29 +80,40 @@
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
         from notice n
         where n.id = #{id,jdbcType=VARCHAR}
     </select>
 
     <select id="findMyNoticeList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content
         from notice n
         where n.id in
         (select
         noticeId
         from notice_status ns
         where
-        userId=#{userId,jdbcType=VARCHAR}
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+             ns.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
         )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        <include refid="Vo_Column_List"/>
-        <include refid="From_Statement"/>
-        <include refid="Where_Condition"/>
+        n.id, n.category, n.classesId, n.title, n.fileUrl, n.content,n.pushDate, n.publisher, n.status,n.content,(select count(1) from notice_status a where n.id=a.noticeId)
+        pushed,(select count(1) from notice_status a where n.id=a.noticeId and a.status='2')viewed
+        <include refid="whereCondition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
                 ORDER BY ${orderBy}
@@ -127,8 +135,7 @@
 
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
-        <include refid="From_Statement"/>
-        <include refid="Where_Condition"/>
+        <include refid="whereCondition"/>
     </select>
 
     <select id="isExit" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Classroom">
@@ -138,9 +145,18 @@
         title=#{title}
     </select>
 
-    <update id="updateStatus" parameterType="java.lang.String">
-        update notice
+    <update id="updateStatus">
+        update notice_status
         set status = '2'
-        where id = #{id,jdbcType=VARCHAR}
+        where noticeId = #{noticeId,jdbcType=VARCHAR}
+        and
+        userId = #{userId,jdbcType=VARCHAR}
     </update>
+    <select id="selectFilesById" resultType="map">
+        select t.file_name fileName,concat(#{server},t.file_url) fileUrl,t.file_size fileSize from portal.attach t where t.notice_id= #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectUsersById" resultType="map">
+        select a.id userId,a.name,t.status from notice_status t left join (select name,id from student where status='1' union all select name,id from teacher where status='1') a on t.userId=a.id
+        where t.noticeId=#{id}
+    </select>
 </mapper>

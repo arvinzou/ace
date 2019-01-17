@@ -105,8 +105,7 @@ public class ClassesController extends BisBaseController {
      */
     @RequestMapping(value = "/selectClassesByPrimaryKey")
     @ResponseBody
-    public SingleResult
-            <ClassesVo> selectClassesByPrimaryKey(String id) throws Exception {
+    public SingleResult<ClassesVo> selectClassesByPrimaryKey(String id) throws Exception {
         return this.classesService.selectClassesByPrimaryKey(id);
     }
 

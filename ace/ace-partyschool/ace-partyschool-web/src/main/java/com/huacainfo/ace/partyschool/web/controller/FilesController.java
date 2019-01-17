@@ -1,11 +1,17 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
-import com.huacainfo.ace.common.constant.ResultCode;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.huacainfo.ace.common.fastdfs.IFile;
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
-import com.huacainfo.ace.common.tools.ExcelUtils;
+import com.huacainfo.ace.common.model.PageParamNoChangeSord;
+import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.PageResult;
+import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.PropertyUtil;
-import com.huacainfo.ace.portal.vo.MongoFile;
+import com.huacainfo.ace.partyschool.model.Files;
+import com.huacainfo.ace.partyschool.service.ClsFilesService;
+import com.huacainfo.ace.partyschool.vo.FilesQVo;
+import com.huacainfo.ace.partyschool.vo.FilesVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,22 +19,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.huacainfo.ace.common.model.PageParamNoChangeSord;
-import com.huacainfo.ace.common.result.MessageResponse;
-import com.huacainfo.ace.common.result.PageResult;
-import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.partyschool.model.Files;
-import com.huacainfo.ace.partyschool.service.ClsFilesService;
-import com.huacainfo.ace.partyschool.vo.FilesVo;
-import com.huacainfo.ace.partyschool.vo.FilesQVo;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -100,13 +93,13 @@ public class FilesController extends BisBaseController {
      * 批量导入文件
      *
      * @param file  上载文件
-     * @param clsId 班级ID
+     * @param classesId 班级ID
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/uploadFile.do")
+    @RequestMapping(value = "/uploadFile")
     @ResponseBody
-    public SingleResult<String[]> uploadFile(@RequestParam MultipartFile[] file, String clsId) throws Exception {
+    public SingleResult<String[]> uploadFile(@RequestParam MultipartFile[] file, String classesId, String category) throws Exception {
 
         String[] fileNames = new String[file.length];
         String dir = this.getRequest().getSession().getServletContext().getRealPath(File.separator) + "tmp";
@@ -118,9 +111,13 @@ public class FilesController extends BisBaseController {
         for (MultipartFile o : file) {
             File dest = new File(dir + File.separator + o.getName());
             o.transferTo(dest);
+            String fileName=o.getOriginalFilename();
+            if(fileName.indexOf(".")>0){
+                fileName=fileName.substring(0,fileName.indexOf("."));
+            }
             fileNames[i] = PropertyUtil.getProperty("fastdfs_server") + this.fileSaver.saveFile(dest, o.getOriginalFilename());
             dest.delete();
-            clsFilesService.insertFiles(fileNames[i] ,clsId ,this.getCurUserProp());
+            clsFilesService.insertFiles(fileName,fileNames[i] ,classesId ,category,this.getCurUserProp());
             i++;
         }
 

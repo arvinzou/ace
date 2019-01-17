@@ -42,13 +42,14 @@
     </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.Classes">
         insert into classes (id, name, startDate,
-        endDate, photoUrl, classroomId,
+        endDate, photoUrl, classroomId,tid1,tid2,
         headmaster, remark, status,
         createUserId, createUserName, createDate,
         lastModifyUserId, lastModifyUserName, lastModifyDate,
         introduce)
         values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
-        #{endDate,jdbcType=TIMESTAMP}, #{photoUrl,jdbcType=VARCHAR}, #{classroomId,jdbcType=VARCHAR},
+        #{endDate,jdbcType=TIMESTAMP}, #{photoUrl,jdbcType=VARCHAR},
+        #{tid1,jdbcType=TIMESTAMP}, #{tid2,jdbcType=VARCHAR}, #{classroomId,jdbcType=VARCHAR},
         #{headmaster,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
         #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
@@ -61,6 +62,8 @@
         startDate = #{startDate,jdbcType=TIMESTAMP},
         endDate = #{endDate,jdbcType=TIMESTAMP},
         photoUrl = #{photoUrl,jdbcType=VARCHAR},
+        tid1 = #{tid1,jdbcType=VARCHAR},
+        tid2 = #{tid2,jdbcType=VARCHAR},
         introduce = #{introduce,jdbcType=VARCHAR},
         classroomId = #{classroomId,jdbcType=VARCHAR},
         headmaster = #{headmaster,jdbcType=VARCHAR},
@@ -76,7 +79,8 @@
     </update>
 
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.ClassesVo">
-
+        <result column="crName" jdbcType="VARCHAR" property="crName"/>
+        <result column="tName" jdbcType="VARCHAR" property="tName"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
@@ -84,28 +88,30 @@
         createUserName, createDate, lastModifyUserId, lastModifyUserName, lastModifyDate
     </sql>
     <sql id="From_Statement">
-        FROM classes t
+        FROM classes c
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
         <if test="condition.name !=null and condition.name !=&quot;&quot;">
-            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+            and c.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
         </if>
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
-            and t.status =#{condition.status,jdbcType=VARCHAR}
+            and c.status =#{condition.status,jdbcType=VARCHAR}
         </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        t.id, t.name, t.startDate, t.introduce,t.endDate, t.photoUrl, t.fileUrl, t.tid1,
-        t.tid2, cr.name as classroomId, c.name as headmaster,
-        t.remark, t.status, t.createUserId,
-        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
-        from classes t
-        LEFT JOIN classroomId cr ON cr.id = t.classroomId
-        LEFT JOIN teacher c ON c.id = t.headmaster
-        where t.id = #{t.id,jdbcType=VARCHAR}
+        c.id, c.name, c.startDate, c.introduce,c.endDate, c.photoUrl, c.fileUrl, t1.name as tid1,
+        s.name as tid2,  cr.name as classroomId, t.name as headmaster,
+        c.remark, c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate
+        from classes c
+        LEFT JOIN classroom cr ON cr.id = c.classroomId
+        LEFT JOIN teacher t ON t.id = c.headmaster
+        LEFT JOIN teacher t1 ON t1.id = c.tid1
+        LEFT JOIN student s ON s.id = c.tid2
+        where c.id = #{c.id,jdbcType=VARCHAR}
     </select>
 
     <resultMap id="ClassesInfoResultMap" type="com.huacainfo.ace.partyschool.vo.ClassesVo">
@@ -174,13 +180,15 @@
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        t.id, t.name, t.startDate, t.endDate, t.photoUrl, t.fileUrl, t.tid1,
-        t.tid2,cr.name as classroomId, c.name as headmaster, t.remark,
-        t.status, t.createUserId,
-        t.createUserName, t.createDate, t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate
+        c.id, c.name, c.startDate, c.endDate, c.introduce,c.photoUrl, c.fileUrl, c.tid1,
+        c.tid2, c.classroomId,  c.headmaster, c.remark,
+        c.status, c.createUserId,
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
+        cr.name as crName,
+        t.name as tName
         <include refid="From_Statement"/>
-        LEFT JOIN classroom cr ON cr.id = t.classroomId
-        LEFT JOIN teacher c ON c.id = t.headmaster
+        LEFT JOIN classroom cr ON cr.id = c.classroomId
+        LEFT JOIN teacher t ON t.id = c.headmaster
         <include refid="Where_Condition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">

@@ -6,11 +6,8 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Files;
-import com.huacainfo.ace.partyschool.vo.FilesVo;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
-
-import java.util.List;
-import java.util.Map;
+import com.huacainfo.ace.partyschool.vo.FilesVo;
 
 /**
  * @author: Arvin
@@ -48,7 +45,7 @@ public interface ClsFilesService {
      * @author: Arvin
      * @version: 2019-01-04
      */
-    MessageResponse insertFiles(String filePath ,String  clsId ,UserProp userProp) throws Exception;
+    MessageResponse insertFiles(String fileName,String filePath ,String  clsId ,String category,UserProp userProp) throws Exception;
 
     ResultResponse insertFilesVo(Files obj, UserProp userProp) throws Exception;
 

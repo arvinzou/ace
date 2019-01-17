@@ -1,3 +1,4 @@
+var server = "http://f63981bf.ngrok.io";
 $(function(){
 	$('#calendar').calendar({
         data: [
@@ -15,7 +16,7 @@ $(function(){
 
 function  findAttDataByDay(date) {
     $.ajax({
-        url: "/api/www/api/findAttDataByDay",
+        url: server+"/api/www/api/findAttDataByDay",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",

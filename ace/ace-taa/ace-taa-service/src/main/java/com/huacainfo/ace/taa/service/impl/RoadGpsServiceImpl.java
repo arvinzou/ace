@@ -68,6 +68,7 @@ public class RoadGpsServiceImpl implements RoadGpsService {
             session.rollback();
         } finally {
             session.clearCache();
+            session.close();
         }
         return new MessageResponse(0, "保存成功！");
     }

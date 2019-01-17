@@ -74,6 +74,29 @@ public class TeacherServiceImpl implements TeacherService {
 
     /**
      * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(班主任查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult
+     * <TeacherVo>
+     * @author: Arvin
+     * @version: 2019-01-02
+     */
+    @Override
+    public PageResult<TeacherVo> findHeadmasterList(TeacherQVo condition, int start,
+                                                 int limit, String orderBy) throws Exception {
+        PageResult<TeacherVo> rst = new PageResult<>();
+        List<TeacherVo> list = this.teacherDao.findHeadmasterList(condition, start, limit, orderBy);
+        rst.setRows(list);
+        return rst;
+    }
+
+    /**
+     * @throws
      * @Title:insertTeacher
      * @Description: TODO(添加教职工管理)
      * @param: @param o
@@ -97,12 +120,12 @@ public class TeacherServiceImpl implements TeacherService {
             return new MessageResponse(1, "手机号重复");
         }
 
-        o.setCategory(StringUtil.isEmpty(o.getCategory()) ? "1" : o.getCategory());//默认值
 
         String tid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(tid);
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setCategory(StringUtil.isEmpty(o.getCategory()) ? "1" : o.getCategory());//默认值
+        o.setStatus(StringUtil.isEmpty(o.getStatus()) ? "1" : o.getStatus());//默认值
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.teacherDao.insert(o);

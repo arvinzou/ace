@@ -20,14 +20,18 @@ pageEncoding="utf-8"%>
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 ">
+                <div class="col-md-8 ">
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-3">
-
-
+                <div class="col-md-4">
+                    <div class="input-group" style="float: left;margin-right: 5px;width: 250px">
+                        <input type="text"
+                               name="classroomId"
+                               class="form-control"
+                               placeholder="请输入教室名称">
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="name"
@@ -115,7 +119,7 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">使用教室</label>
         <div class="col-md-10">
-            \${data.o.classroom}
+            \${data.o.classroomId}
         </div>
     </div>
     <div class="form-group">

@@ -1,5 +1,11 @@
 {
     "pages": [
+        "page/index/index",
+        "page/me/index",
+        "page/roadlist/index",
+        "page/info/index",
+        "page/regist/index",
+        "page/datas/index"
     ],
     "permission": {
         "scope.userLocation": {
@@ -19,6 +25,14 @@
         "borderStyle": "#000000",
         "backgroundColor": "#fff",
         "list": [
+            {
+                "pagePath": "page/index/index",
+                "text": "首页"
+            },
+            {
+                "pagePath": "page/datas/index",
+                "text": "掌上驾驶舱"
+            }
         ]
     },
     "networkTimeout": {

@@ -2,21 +2,15 @@ package com.huacainfo.ace.partyschool.service.impl;
 
 
 import com.huacainfo.ace.common.constant.ResultCode;
-import com.huacainfo.ace.common.exception.CustomException;
 import com.huacainfo.ace.common.model.UserProp;
-import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
 import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.partyschool.constant.CommConstant;
 import com.huacainfo.ace.partyschool.dao.FilesDao;
 import com.huacainfo.ace.partyschool.model.Files;
-import com.huacainfo.ace.partyschool.model.Student;
 import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.vo.AccountVo;
@@ -29,7 +23,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 @Service("clsFilesService")
 /**
@@ -104,22 +101,13 @@ public class ClsFilesServiceImpl implements ClsFilesService {
      * @version: 2019-01-04
      */
     @Override
-    public MessageResponse insertFiles(String filePath ,String  clsId ,UserProp userProp) throws Exception {
+    public MessageResponse insertFiles(String fileName,String filePath ,String  clsId ,String category,UserProp userProp) throws Exception {
         Files o=new Files();
 
-        int start = filePath.indexOf("=");
-        int ends = filePath.lastIndexOf(".");
-        String strs = filePath.substring(start + 1, ends);
-
-        int temp = this.filesDao.isExit(o);
-        if (temp > 0) {
-            return new MessageResponse(1, "班级文件名称重复！");
-        }
-
-        o.setTitle(strs);
+        o.setTitle(fileName);
         o.setUrl(filePath);
         o.setClassesId(clsId);
-        o.setCategory("1");
+        o.setCategory(category);
         o.setPushDate(new Date());
         o.setPublisher(userProp.getName());
         o.setId(GUIDUtil.getGUID());
@@ -128,7 +116,7 @@ public class ClsFilesServiceImpl implements ClsFilesService {
         this.dataBaseLogService.log("添加班级文件", "班级文件", "",
                 o.getId(), o.getId(), userProp);
 
-        return new MessageResponse(0, "添加班级文件完成！");
+        return new MessageResponse(0, "OK！");
     }
 
     @Override

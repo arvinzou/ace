@@ -14,6 +14,7 @@ import com.huacainfo.ace.partyschool.service.NoticeStatusService;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,10 +72,11 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findNoticeLists(UserProp userProp) throws Exception {
+    public ResultResponse findNoticeLists(NoticeStatusQVo condition,int start, int limit, String orderBy,UserProp userProp) throws Exception {
+        condition.setUserId(userProp.getUserId());
         List<NoticeVo> noticeVo=new ArrayList<>();
         Map<String, Object> map = new HashMap<String, Object>();
-        noticeVo=this.noticeDao.findMyNoticeList(userProp.getUserId());
+        noticeVo=this.noticeDao.findMyNoticeList(condition,start,limit,orderBy);
             map.put("list", noticeVo);
             map.put("count", this.noticeDao.findUnreadCount(userProp.getUserId()));
         return new ResultResponse(0, "通知公告获取完成！", map);
@@ -162,23 +164,18 @@ public class SclNoticeServiceImpl implements SclNoticeService {
      * @version: 2019-01-06
      */
     @Override
-    public SingleResult<NoticeVo> selectNoticeByPrimaryKey(String id) throws Exception {
+    public SingleResult<NoticeVo> updateAndSelectNoticeVoById(String id,String server,UserProp userProp) throws Exception {
         SingleResult<NoticeVo> rst = new SingleResult<>();
-        this.noticeDao.selectVoByPrimaryKey(id);
-        rst.setValue(this.noticeDao.selectVoByPrimaryKey(id));
+        NoticeVo o=this.noticeDao.selectVoByPrimaryKey(id);
+        o.setFiles(this.noticeDao.selectFilesById(id,server));
+        o.setUsers(this.noticeDao.selectUsersById(id));
+        rst.setValue(o);
+        this.noticeDao.updateStatus(id,userProp.getUserId());
         return rst;
     }
 
 
-    @Override
-    public ResultResponse selectNoticeById(String id) throws Exception{
-        NoticeVo noticeVo=this.noticeDao.selectVoByPrimaryKey(id);
-        if("1".equals(noticeVo.getStatus())){
-            noticeVo.setStatus("2");
-            this.noticeDao.updateByPrimaryKey(noticeVo);
-        }
-        return new ResultResponse(0, "公告详情获取完成！",noticeVo);
-    }
+
 
     /**
      * @throws
