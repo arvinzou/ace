@@ -211,8 +211,8 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
      * @version: 2018-11-14
      */
     @Override
-    public MessageResponse audit(String id, String rst, String remark,
-                                 UserProp userProp) throws Exception {
+    public MessageResponse updateAudit(String id, String rst, String remark,
+                                       UserProp userProp) throws Exception {
         WithdrawRecord record = withdrawRecordDao.selectByPrimaryKey(id);
         if (record == null) {
             return new MessageResponse(ResultCode.FAIL, "记录丢失");
@@ -228,20 +228,24 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
         record.setAuditRemark(remark);
         record.setUpdateDate(DateUtil.getNowDate());
         withdrawRecordDao.updateByPrimaryKey(record);
+        dataBaseLogService.log("审核提现申请记录", "提现申请记录", id, id, "提现申请记录", userProp);
+
         //审核通过
         if (rst.equals(AuditConstant.PASS) && "1".equals(record.getWithdrawType())) {
             //调用微信企业支付接口
-            withdrawApiAction(record);
-        } else if (rst.equals(AuditConstant.REJECT)) { //审核驳回
-            //退回已扣除申请金额
-            MessageResponse ms = withdrawRejectAction(record);
+            MessageResponse ms = saveWithdrawApiAction(record);
             if (ms.getStatus() == ResultCode.FAIL) {
                 throw new CustomException(ms.getErrorMessage());
             }
+            return ms;
         }
-
-        dataBaseLogService.log("审核提现申请记录", "提现申请记录", id, id, "提现申请记录", userProp);
-        return new MessageResponse(ResultCode.SUCCESS, "审核完成！");
+        //审核驳回
+        else if (rst.equals(AuditConstant.REJECT)) {
+            //退回已扣除申请金额
+            return withdrawRejectAction(record);
+        } else {
+            return new MessageResponse(ResultCode.SUCCESS, "未知审核类型");
+        }
     }
 
     /**
@@ -281,7 +285,7 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
      * @param record 申请记录
      * @return MessageResponse
      */
-    private MessageResponse withdrawApiAction(WithdrawRecord record) {
+    private MessageResponse saveWithdrawApiAction(WithdrawRecord record) {
         Map<String, Object> apiRst;
         try {
             apiRst = callMchPay(record);
@@ -289,19 +293,29 @@ public class WithdrawRecordServiceImpl implements WithdrawRecordService {
         } catch (Exception e) {
             logger.error("[" + record.getId() + "]企业付款调用异常：{}", e);
             apiRst = new HashMap<>();
+            apiRst.put("result_code", "FAILED");
             apiRst.put("err_code", "-1");
-            apiRst.put("err_msg", e.getMessage());
+            apiRst.put("err_code_des", "微信处理异常");
         }
-        //接口日志记录
-        WithdrawWxLog log = new WithdrawWxLog();
-        log.setId(GUIDUtil.getGUID());
-        log.setRecordId(record.getId());
-        log.setLogTxt(JsonUtil.toJson(apiRst));
-        log.setStatus("1");
-        log.setCreateDate(DateUtil.getNowDate());
-        withdrawWxLogDao.insert(log);
+        try {
+            //接口日志记录
+            WithdrawWxLog log = new WithdrawWxLog();
+            log.setId(GUIDUtil.getGUID());
+            log.setRecordId(record.getId());
+            log.setLogTxt(JsonUtil.toJson(apiRst));
+            log.setStatus("1");
+            log.setCreateDate(DateUtil.getNowDate());
+            withdrawWxLogDao.insert(log);
+        } catch (Exception e) {
+            logger.error("[" + record.getId() + "]企业付款日志记录异常：{}", e);
+        }
 
-        return new MessageResponse(ResultCode.SUCCESS, "处理完成");
+        if (CommonUtils.isBlank(apiRst.get("result_code"))
+                || !"SUCCESS".equals(String.valueOf(apiRst.get("result_code")))) {
+            return new MessageResponse(ResultCode.FAIL, String.valueOf(apiRst.get("err_code_des")));
+        }
+
+        return new MessageResponse(ResultCode.SUCCESS, "提现成功");
     }
 
     /**
