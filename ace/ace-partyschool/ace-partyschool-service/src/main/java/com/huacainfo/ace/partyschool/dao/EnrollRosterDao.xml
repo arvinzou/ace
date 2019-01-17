@@ -125,4 +125,29 @@
         set status = #{status,jdbcType=CHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
+
+
+    <select id="getListByCondition" resultType="map">
+        select
+        DISTINCT t.clsId ,
+        c.`name` as clsViewName,
+        ta.`name` as headmasterName
+        from enroll_roster t
+        left join classes c on t.clsId = c.id
+        left join teacher ta on c.headmaster = ta.id
+        WHERE 1=1
+        <if test="params.q !=null and params.q !=&quot;&quot;">
+            AND ( t.clsId = #{params.q,jdbcType=VARCHAR}
+            or c.`name` LIKE concat('%',#{params.q,jdbcType=VARCHAR},'%')
+            )
+        </if>
+        ORDER BY t.createDate desc
+        limit 0, 10
+    </select>
+
+    <update id="updateStatusByClsId" parameterType="java.lang.String">
+        update enroll_roster
+        set status = #{status,jdbcType=CHAR}
+        where clsId = #{clsId,jdbcType=VARCHAR}
+    </update>
 </mapper>

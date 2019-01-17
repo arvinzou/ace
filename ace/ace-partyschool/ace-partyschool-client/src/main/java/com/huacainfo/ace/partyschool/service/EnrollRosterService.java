@@ -112,7 +112,7 @@ public interface EnrollRosterService {
      * @author: Arvin
      * @version: 2019-01-16
      */
-    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception;
+    public MessageResponse importXls(String clsId, List<Map<String, Object>> list, UserProp userProp) throws Exception;
 
 
     /**
@@ -176,4 +176,14 @@ public interface EnrollRosterService {
      * @return t/f
      */
     boolean isAllowed(String name);
+
+    /**
+     * 批量开启/关闭报名
+     *
+     * @param clsId  班级ID
+     * @param status 开启/关闭  1-开，0-关
+     * @return MessageResponse
+     * @throws Exception
+     */
+    MessageResponse updateStatusByClsId(String clsId, String status, UserProp curUserProp);
 }

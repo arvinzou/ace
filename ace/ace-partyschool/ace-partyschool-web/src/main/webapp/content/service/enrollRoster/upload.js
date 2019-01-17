@@ -3,11 +3,12 @@ jQuery(function ($) {
 });
 
 function init_uploader(p) {
+    var params = {jsons: JSON.stringify(p)};
     $("#uploader").pluploadQueue({
         runtimes: 'html5,flash,silverlight,html4',
         chunk_size: '1mb',
         unique_names: true,
-        multipart_params: p,
+        multipart_params: params,
         filters: {
             max_file_size: '10mb',
             mime_types: [
@@ -15,7 +16,7 @@ function init_uploader(p) {
             ]
         },
         resize: {width: 320, height: 240, quality: 90},
-        url: contextPath + '/cardData/importXls'
+        url: contextPath + '/enrollRoster/importXls'
     });
     var uploader = $('#uploader').pluploadQueue();
     uploader.bind("UploadComplete", function () {

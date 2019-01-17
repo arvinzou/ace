@@ -35,12 +35,36 @@ jQuery(function ($) {
         })
     });
 
+    //批量导入
+    $('#btn-view-import').on('click', function () {
+        //加载导入
+        $('#modal-import').modal('show');
+    });
+    $('#btn-view-onoff').on('click', function () {
+        //show modal
+        $('#modal-onoff').modal('show');
+    });
 //初始化事件
     initEvents();
     initJuicerMethod();
-
     initClassList();
 });
+
+
+function selectClasses(isFirst) {
+    if (isFirst) {
+        alert("温馨提醒：在导入前，请先下载导入模板,并选择导入班级！");
+    }
+    else {
+        var g = $('#combogrid-cls-list').combogrid('grid'); // get datagrid object
+        var r = g.datagrid('getSelected'); // get the selected row
+        if (r && r.id) {
+            reset_uploader({clsId: r.id});
+        } else {
+            alert("请选择班级信息！");
+        }
+    }
+}
 
 function initClassList() {
     startLoad();
@@ -100,6 +124,7 @@ function render(obj, data, tplId) {
 }
 
 function initEvents() {
+    //查看框
     $('#modal-preview').on('show.bs.modal', function (event) {
         var relatedTarget = $(event.relatedTarget);
         var id = relatedTarget.data('id');
@@ -107,9 +132,128 @@ function initEvents() {
         var modal = $(this);
         console.log(relatedTarget);
         initPreview(id);
-    })
+    });
+
+    //导入功能
+    $('#modal-import').on('shown.bs.modal', function (event) {
+        //班次列表
+        $('#combogrid-cls-list').combogrid({
+            panelWidth: 460,
+            idField: 'id',
+            textField: 'name',
+            url: contextPath + '/classes/findByQ',
+            mode: 'remote',
+            fitColumns: false,
+            method: 'get', columns: [[
+                {field: 'name', title: '班级名称', width: 150, align: 'right'},
+                {field: 'headmasterName', title: '班主任', width: 150, align: 'right'}
+            ]],
+            keyHandler: {
+                up: function () {
+                },
+
+                down: function () {
+                },
+
+                enter: function () {
+                },
+                query: function (q) {
+                    $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
+                    $('#combogrid-cls-list').combogrid("setValue", q);
+                }
+            },
+            onSelect: function (index, row) {
+                selectClasses(false);
+            }
+        });
+        //
+        selectClasses(true);
+
+    });
+
+    //批量开启/关闭功能
+    $('#modal-onoff').on('shown.bs.modal', function (event) {
+        // 报名花名册中，所含班级
+        $('#cls-list').combogrid({
+            panelWidth: 460,
+            idField: 'clsId',
+            textField: 'clsViewName',
+            url: contextPath + '/enrollRoster/getListByCondition',
+            mode: 'remote',
+            fitColumns: false,
+            method: 'get', columns: [[
+                {field: 'clsViewName', title: '班次名称', width: 150, align: 'right'},
+                {field: 'headmasterName', title: '班主任姓名', width: 150, align: 'right'}
+            ]],
+            keyHandler: {
+                up: function () {
+                },
+
+                down: function () {
+                },
+
+                enter: function () {
+                },
+                query: function (q) {
+                    $('#cls-list').combogrid("grid").datagrid("reload", {'q': q});
+                    $('#cls-list').combogrid("setValue", q);
+                }
+            },
+            onSelect: function (index, row) {
+            }
+        });
+    });
+    //确认按钮提交事件
+    $('#modal-onoff .btn-primary').on('click', function () {
+        $('#modal-onoff form').submit();
+    });
+    /*监听表单提交*/
+    $('#modal-onoff form').ajaxForm({
+        beforeSubmit: function (formData, jqForm, options) {
+            console.log("12222222222");
+
+            var clsId = $('input[name="status"]:checked').val();
+            var rstVal = $('#modal-onoff form input[name="status"]:checked').val();
+            if (rstVal == undefined) {
+                alert("请选择操作方式!");
+                return;
+            }
+            var params = {};
+            $.each(formData, function (n, obj) {
+                params[obj.name] = obj.value;
+            });
+            $.extend(params, {
+                time: new Date()
+            });
+            console.log(params);
+            onoff(params);
+            return false;
+        }
+    });
+}
 
 
+/*批量开启/关闭报名*/
+function onoff(p) {
+    startLoad();
+    $.ajax({
+        url: contextPath + "/enrollRoster/updateStatusByClsId",
+        type: "post",
+        async: false,
+        data: p,
+        success: function (rst) {
+            stopLoad();
+            $("#modal-onoff").modal('hide');
+            alert(rst.errorMessage);
+            if (rst.status == 0) {
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+            }
+        },
+        error: function () {
+            stopLoad();
+            alert("对不起出错了！");
+        }
+    });
 }
 
 function initPreview(id) {
@@ -141,6 +285,9 @@ function initPreview(id) {
 
 function edit(rowid) {
     console.log(rowid);
+    //
+    jQuery(cfg.grid_selector).jqGrid('setSelection', rowid);
+    //
     jQuery(cfg.grid_selector).jqGrid('editGridRow', rowid, {
         closeAfterAdd: true,
         recreateForm: true,
@@ -153,6 +300,36 @@ function edit(rowid) {
 
         }
     });
+}
+
+/**
+ * 关闭报名
+ * @param rowid 行ID
+ */
+function offline(rowid) {
+    if (confirm("确认关闭其报名权限么？")) {
+        startLoad();
+        $.ajax({
+            url: contextPath + '/enrollRoster/updateStatus',
+            type: "post",
+            async: false,
+            data: {
+                id: rowid,
+                status: '0'
+            },
+            success: function (result) {
+                stopLoad();
+                alert(result.errorMessage);
+                if (rst.status == 0) {
+                    jQuery(cfg.grid_selector).jqGrid('setGridParam', {postData: params}).trigger("reloadGrid");
+                }
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
+    }
 }
 
 var show = false;

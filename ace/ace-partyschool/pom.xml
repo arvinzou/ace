@@ -12,9 +12,7 @@
         <module>ace-partyschool-client</module>
         <module>ace-partyschool-service</module>
         <module>ace-partyschool-web</module>
-        <!--<module>ace-partyschool-rest</module>-->
-
-
+        <module>ace-partyschool-rest</module>
     </modules>
     <build>
         <plugins>

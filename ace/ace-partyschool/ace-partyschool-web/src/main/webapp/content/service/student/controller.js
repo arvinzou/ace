@@ -41,7 +41,7 @@ jQuery(function ($) {
     //批量导入
     $('#btn-view-import').on('click', function () {
         //加载导入
-        importXls("123");
+        importXls();
     });
 
 //初始化事件
@@ -78,7 +78,7 @@ function initEvents() {
         panelWidth: 300,
         idField: 'id',
         textField: 'name',
-        url: contextPath + '/classes/findClassesList',
+        url: contextPath + '/classes/findByQ',
         mode: 'remote',
         fitColumns: false,
         method: 'get', columns: [[
@@ -104,12 +104,11 @@ function initEvents() {
     });
 
     //班级数筛选列表
-    // $('.easyui-combogrid').combogrid({
     $('#combogrid-cls-list').combogrid({
         panelWidth: 460,
         idField: 'id',
         textField: 'name',
-        url: contextPath + '/classes/findClassesList',
+        url: contextPath + '/classes/findByQ',
         mode: 'remote',
         fitColumns: false,
         method: 'get', columns: [[
@@ -131,7 +130,7 @@ function initEvents() {
             }
         },
         onSelect: function (index, row) {
-
+            selectClasses(false);
         }
     });
 }
@@ -164,6 +163,8 @@ function initPreview(id) {
 
 function edit(rowid) {
     console.log(rowid);
+    jQuery(cfg.grid_selector).jqGrid('setSelection', rowid);
+
     jQuery(cfg.grid_selector).jqGrid('editGridRow', rowid, {
         closeAfterAdd: true,
         recreateForm: true,

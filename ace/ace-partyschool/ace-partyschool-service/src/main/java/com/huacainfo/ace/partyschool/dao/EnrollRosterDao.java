@@ -42,4 +42,12 @@ public interface EnrollRosterDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    /**
+     * * 批量开启/关闭报名
+     *
+     * @param clsId  班级ID
+     * @param status 开启/关闭  1-开，0-关
+     */
+    int updateStatusByClsId(@Param("clsId") String clsId,
+                            @Param("status") String status);
 }
