@@ -19,10 +19,10 @@
 }
 
 .external-events {
-    padding: 8px;
-    border: 1px solid #ccc;
-    background: #eee;
+    border: 0px solid #ccc;
+    background: #fff;
     text-align: left;
+    padding-right: 5px;
 }
 
 .external-events h4 {
@@ -48,10 +48,11 @@
 /*}*/
 
 .external-events-box{
+    margin-top: 30px;
 }
 .external-events-box>li>h5{
-    background: #f8f8f8;
-    border: 1px solid #d5d5d5;
+    background: #fff;
+    border-bottom: 1px solid rgba(239,243,248,1);;
     /*border-radius:5px ;*/
     padding: 6px;
     cursor: pointer;
