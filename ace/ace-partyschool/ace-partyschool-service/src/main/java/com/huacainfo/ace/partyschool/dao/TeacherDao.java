@@ -26,6 +26,11 @@ public interface TeacherDao {
                              @Param("limit") int limit,
                              @Param("orderBy") String orderBy);
 
+    List<TeacherVo> findHeadmasterList(@Param("condition") TeacherQVo condition,
+                             @Param("start") int start,
+                             @Param("limit") int limit,
+                             @Param("orderBy") String orderBy);
+
     int findCount(@Param("condition") TeacherQVo condition);
 
     int isExist(Teacher record);

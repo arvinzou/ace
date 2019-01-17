@@ -8,6 +8,7 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.model.Teacher;
 import com.huacainfo.ace.partyschool.service.TeacherService;
 import com.huacainfo.ace.partyschool.vo.TeacherQVo;
@@ -50,9 +51,37 @@ public class TeacherController extends BisBaseController {
     @RequestMapping(value = "/findTeacherList")
     @ResponseBody
     public PageResult<TeacherVo> findTeacherList(TeacherQVo condition,
-                                                 PageParamNoChangeSord page) throws Exception {
+                                                 PageParamNoChangeSord page,String q) throws Exception {
+        condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
         PageResult<TeacherVo> rst = this.teacherService
                 .findTeacherList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(班主任查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <TeacherVo>
+     * @author: Arvin
+     * @version: 2019-01-02
+     */
+    @RequestMapping(value = "/findHeadmasterList")
+    @ResponseBody
+    public PageResult<TeacherVo> findHeadmasterList(TeacherQVo condition,
+                                                 PageParamNoChangeSord page,String q) throws Exception {
+        condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
+        PageResult<TeacherVo> rst = this.teacherService
+                .findHeadmasterList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {
             rst.setTotal(page.getTotalRecord());
         }

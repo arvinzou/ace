@@ -10,7 +10,7 @@ function initGrid() {
 			rows: "limit"
 		},
 		datatype: "json",
-		postData: {},
+		postData: {classesId:$("#classesId").val(),category:'2'},
 		formData: {},
 		url: cfg.grid_load_data_url,
 		jsonReader: {
@@ -41,9 +41,6 @@ function initGrid() {
 		deleteurl: cfg.grid_delete_data_url,
 		caption: cfg.caption
 	});
-	jQuery(cfg.grid_selector).jqGrid('setGridParam', {
-		postData: {classesId:$("#classesId").val()}
-	}).trigger("reloadGrid");
 	resizeJqGrid();
 }
 

@@ -156,7 +156,7 @@ pageEncoding="utf-8"%>
 
 			{@each data.list as item, index}
 		        {@if item.CODE}
-		            <button type="button" authority="false" class="btn btn-default"  onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}</button>
+		            <button type="button" authority="false" class="btn btn-default {@if item.CODE==2}active{@/if}"  onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}</button>
 		        {@else}
 		            
 		        {@/if}

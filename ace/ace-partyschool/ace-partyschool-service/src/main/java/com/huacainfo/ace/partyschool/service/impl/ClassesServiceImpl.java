@@ -108,9 +108,9 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+        //if (CommonUtils.isBlank(o.getStatus())) {
+        //    return new MessageResponse(1, "状态 不能为空！");
+        //}
 
 
         int temp = this.classesDao.isExit(o);
@@ -120,7 +120,7 @@ public class ClassesServiceImpl implements ClassesService {
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        //o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.classesDao.insert(o);

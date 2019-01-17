@@ -33,6 +33,23 @@ public interface TeacherService {
 
     /**
      * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(班主任查询)
+     * @param: @param condition
+     * @param: @param start
+     * @param: @param limit
+     * @param: @param orderBy
+     * @param: @throws Exception
+     * @return: PageResult
+     * <TeacherVo>
+     * @author: Arvin
+     * @version: 2019-01-02
+     */
+    PageResult<TeacherVo> findHeadmasterList(TeacherQVo condition,
+                                          int start, int limit, String orderBy) throws Exception;
+
+    /**
+     * @throws
      * @Title:insertTeacher
      * @Description: TODO(添加教职工管理)
      * @param: @param obj
