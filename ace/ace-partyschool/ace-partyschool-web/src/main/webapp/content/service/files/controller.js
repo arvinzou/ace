@@ -1,9 +1,10 @@
+ var params = {category:'1'};
 jQuery(function ($) {
     //查询
     $('#btn-search').on('click', function () {
         $('#fm-search').ajaxForm({
             beforeSubmit: function (formData, jqForm, options) {
-                var params = {};
+               
                 $.each(formData, function (n, obj) {
                     params[obj.name] = obj.value;
                 });
@@ -21,13 +22,11 @@ jQuery(function ($) {
     //添加
     $('#btn-view-add').on('click', function () {
          //加载导入
-         importXls("123");
+         importXls("");
     });
-
-
     //初始化事件
     initEvents();
-    initJuicerMethod();
+    initClassList();
 });
 
 /*页面渲染*/
@@ -42,80 +41,34 @@ function render(obj, data, tplId) {
 
 function initEvents() {
     $('#modal-import').on('shown.bs.modal', function (event) {
-        //
-        selectClasses(true);
-    });
-
-    $('#modal-preview').on('show.bs.modal', function (event) {
-        var relatedTarget = $(event.relatedTarget);
-        var id = relatedTarget.data('id');
-        var title = relatedTarget.data('title');
-        var modal = $(this);
-        console.log(relatedTarget);
-        initPreview(id);
-    });
-    //查询筛选列表
-    $('#cls-condition').combogrid({
-        panelWidth: 300,
-        idField: 'id',
-        textField: 'name',
-        url: contextPath + '/classes/findClassesList',
-        mode: 'remote',
-        fitColumns: false,
-        method: 'get', columns: [[
-            {field: 'name', title: '班级名称', width: 100, align: 'right'},
-            {field: 'headmaster', title: '班主任', width: 100, align: 'right'}
-        ]],
-        keyHandler: {
-            up: function () {
-            },
-
-            down: function () {
-            },
-
-            enter: function () {
-            },
-            query: function (q) {
-                $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
-                $('#combogrid-cls-list').combogrid("setValue", q);
-            }
+		var category=params.category;
+		var extensions=null;
+		if(category=='1'){
+			extensions="xls,xlsx,doc,docx,ppt,pptx,pdf";
+		}else{
+			extensions="jpg,gif,png,bmp";
+		}
+		var p={
+        runtimes: 'html5,flash,silverlight,html4',
+        chunk_size: '1mb',
+        unique_names: true,
+        multipart_params: {classesId:$("#classesId").val(),category:category},
+        filters: {
+            max_file_size: '10mb',
+            mime_types: [
+                { extensions: extensions}
+            ]
         },
-        onSelect: function (index, row) {
-
-        }
+        resize: {width: 1024, height: 1024, quality: 90},
+        url: contextPath + '/files/uploadFile'
+    };
+		init_uploader(p)
     });
-
-    //班级数筛选列表
-    // $('.easyui-combogrid').combogrid({
-    $('#combogrid-cls-list').combogrid({
-        panelWidth: 460,
-        idField: 'id',
-        textField: 'name',
-        url: contextPath + '/classes/findClassesList',
-        mode: 'remote',
-        fitColumns: false,
-        method: 'get', columns: [[
-            {field: 'name', title: '班级名称', width: 150, align: 'right'},
-            {field: 'headmaster', title: '班主任', width: 150, align: 'right'}
-        ]],
-        keyHandler: {
-            up: function () {
-            },
-
-            down: function () {
-            },
-
-            enter: function () {
-            },
-            query: function (q) {
-                $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
-                $('#combogrid-cls-list').combogrid("setValue", q);
-            }
-        },
-        onSelect: function (index, row) {
-            selectClasses(false);
-        }
-    });
+	$(".btn-group .btn").bind('click', function(event) {
+		$(event.target).siblings().removeClass("active");
+		console.log(event);
+		$(event.target).addClass("active");
+	});
 }
 
 function initPreview(id) {
@@ -184,29 +137,29 @@ function importXls() {
     $('#modal-import').modal('show');
 }
 
-function selectClasses(isFirst) {
-    if (isFirst) {
-        alert("请选择导入班级！");
-    }
-    else {
-        var g = $('#combogrid-cls-list').combogrid('grid'); // get datagrid object
-        var r = g.datagrid('getSelected'); // get the selected row
-        if (r && r.id) {
-            reset_uploader({clsId: r.id});
-        } else {
-            alert("请选择班级信息！");
-        }
-    }
-}
 
-function initJuicerMethod() {
-    juicer.register('parseStatus', parseStatus);
-}
-function parseStatus(val) {
-    switch (val) {
-        case '0':
-            return "注销";
-        case '1':
-            return "正常";
-    }
+
+function initClassList() {
+	startLoad();
+	$.ajax({
+		url: contextPath + "/mailList/getClassList",
+		type: "post",
+		async: false,
+		data: {},
+		success: function(result) {
+			stopLoad();
+			if (result.status == 0) {
+				var data = {};
+				data = result.value;
+				render('#select1', data, 'tpl-select-list');
+				initGrid();
+			} else {
+				alert(result.errorMessage);
+			}
+		},
+		error: function() {
+			stopLoad();
+			alert("对不起出错了！");
+		}
+	});
 }

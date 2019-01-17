@@ -3,7 +3,8 @@
         "page/index/index",
         "page/me/index",
         "page/roadlist/index",
-        "page/info/index"
+        "page/info/index",
+        "page/regist/index"
     ],
     "permission": {
         "scope.userLocation": {
@@ -28,8 +29,8 @@
                 "text": "首页"
             },
             {
-                "pagePath": "page/me/index",
-                "text": "个人中心"
+                "pagePath": "page/regist/index",
+                "text": "注册"
             }
         ]
     },

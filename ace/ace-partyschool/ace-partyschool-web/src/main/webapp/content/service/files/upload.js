@@ -3,20 +3,7 @@ jQuery(function ($) {
 });
 
 function init_uploader(p) {
-    $("#uploader").pluploadQueue({
-        runtimes: 'html5,flash,silverlight,html4',
-        chunk_size: '1mb',
-        unique_names: true,
-        multipart_params: p,
-        filters: {
-            max_file_size: '10mb',
-            mime_types: [
-                { extensions: "xls,xlsx,doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp"}
-            ]
-        },
-        resize: {width: 320, height: 240, quality: 90},
-        url: contextPath + '/files/uploadFile.do'
-    });
+    $("#uploader").pluploadQueue(p);
     var uploader = $('#uploader').pluploadQueue();
     uploader.bind("UploadComplete", function () {
 
@@ -30,7 +17,7 @@ function init_uploader(p) {
             alert(rst.errorMessage);
             $('#modal-upload').modal('hide');
             jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
-            initPreview(p.id);
+    
         }
     });
 }

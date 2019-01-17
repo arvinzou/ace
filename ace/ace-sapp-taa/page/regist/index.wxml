@@ -1,0 +1,30 @@
+<view class='index'>
+    <view class='banner'>
+        <view class='logo'><image src='../../image/logo.png'></image></view>
+        <view class='title'><text>常德市交警事故采集分析平台</text></view>
+    </view>
+    <view class='form'>
+        <view class='row br'>
+            <view class='form-title'>姓名</view>
+            <view class='form-input'><input type='text' placeholder='请输入姓名' placeholder-class='place-holoder-text'></input></view>
+        </view>
+         <view class='row br'>
+            <view class='form-title'>手机号</view>
+            <view class='form-input'><input type='number' placeholder='请输入手机号码' placeholder-class='place-holoder-text'></input></view>
+        </view>
+         <view class='row br'>
+            <view class='form-title'>警号</view>
+            <view class='form-input'><input type='number' placeholder='请输入警号' placeholder-class='place-holoder-text'></input></view>
+        </view>
+        <view class='row'>
+            <view class='form-title'>所属单位</view>
+            <view class='form-input'>
+                 <picker  bindchange="bindPickerChange" value="{{objectArray[index].id}}" range="{{array}}">
+                    <view class="picker">{{objectArray[index].name}}</view>
+                 </picker>
+                 <image src='../../image/icon_rediret.png' class='select'></image>
+            </view>
+        </view>
+    </view>
+    <view class='regist default'>立即注册</view>
+</view>
