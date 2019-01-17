@@ -1,0 +1,115 @@
+.index{
+    width: 100%;
+    height: 100%;
+}
+.banner{
+    width: 100%;
+    height: 330rpx;
+    background:rgba(41,50,189,1);
+    color: #FFFFFF;
+}
+.logo{
+    width: 125rpx;
+    height: 193rpx;
+    margin: 0 auto;
+}
+.logo image{
+    width: 125rpx;
+    height: 135rpx;
+    margin-top: 38rpx;
+    margin-bottom: 20rpx;
+}
+.title{
+    text-align: center;
+    font-size: 36rpx;
+    font-weight:bold;
+}
+.form{
+    width: 82%;
+    height: auto;
+    padding-left: 4%;
+    padding-right: 4%;
+    margin:0 auto;
+}
+.row{
+    width: 100%;
+    height: 110rpx;
+}
+.row::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.form-title{
+    width: 25%;
+    height: 110rpx;
+    line-height: 110rpx;
+    float: left;
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: 500;
+}
+.form-input{
+    width: 75%;
+    height: 110rpx;
+    float: left;
+}
+.form-input input{
+    width: 100%;
+    height: 100%;
+    color: #373F53;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.place-holoder-text{
+    color: #ABAEB9;
+    font-size: 30rpx;
+    font-weight: 500;
+}
+.regist{
+    width: 80%;
+    height: 110rpx;
+    border-radius: 55rpx;
+    line-height: 110rpx;
+    text-align: center;
+    position: fixed;
+    left: 10%;
+    bottom: 60rpx;
+    font-size: 36rpx;
+    color: #FFFFFF;
+}
+.br{
+    border-bottom: 1px solid #F0EFF6;
+}
+
+.default{ 
+    background: #D7D9DF;
+}
+.active{
+    background: #4350FC;
+}
+.form-input picker{
+    width: 90%;
+    height: 100%;
+    line-height: 110rpx;
+    color: #373F53;
+    font-size: 34rpx;
+    font-weight: bold;
+    float: left;
+}
+.form-input::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.unselect{
+    color: #ABAEB9;
+    font-weight: 500;
+    font-size: 30rpx;
+}
+.select{
+    width: 15rpx;
+    height: 26rpx;
+    float: right;
+    margin-top: 42rpx;
+}
