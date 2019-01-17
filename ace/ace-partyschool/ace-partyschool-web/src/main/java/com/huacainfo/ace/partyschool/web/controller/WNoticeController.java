@@ -5,10 +5,9 @@ import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
-import com.huacainfo.ace.partyschool.model.NoticeStatus;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
-import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
+import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,60 +27,61 @@ import java.util.Map;
 public class WNoticeController extends BisBaseController {
 
 
-    private static final long serialVersionUID = 1L;
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-    @Autowired
-    private SclNoticeService sclNoticeService;
+  private static final long serialVersionUID = 1L;
+  Logger logger = LoggerFactory.getLogger(this.getClass());
+  @Autowired
+  private SclNoticeService sclNoticeService;
 
-    /**
-     * @throws
-     * @Title:find!{bean.name}List
-     * @Description: TODO(通知公告分页查询)
-     * @param: @param condition
-     * @param: @param page
-     * @param: @return
-     * @param: @throws Exception
-     * @return: PageResult
-     * <NoticeVo>
-     * @author: Arvin
-     * @version: 2019-01-06
-     */
+  /**
+   * @throws @Title:find!{bean.name}List
+   * @Description: TODO(通知公告分页查询)
+   * @param: @param condition
+   * @param: @param page
+   * @param: @return
+   * @param: @throws Exception
+   * @return: PageResult <NoticeVo>
+   * @author: Arvin
+   * @version: 2019-01-06
+   */
 
 
-    @RequestMapping(value = "/findNoticeLists")
-    @ResponseBody
-    public ResultResponse findNoticeLists(NoticeStatusQVo condition, PageParamNoChangeSord page) throws Exception {
-        UserProp userProp = this.getCurUserProp();
-        if (userProp == null) {
-            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
-        }
-        return this.sclNoticeService.findNoticeLists(condition,page.getStart(),page.getLimit(),page.getOrderBy(),userProp);
+  @RequestMapping(value = "/findNoticeLists")
+  @ResponseBody
+  public ResultResponse findNoticeLists(NoticeStatusQVo condition, PageParamNoChangeSord page)
+      throws Exception {
+    UserProp userProp = this.getCurUserProp();
+    if (userProp == null) {
+      return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
     }
+    return this.sclNoticeService.findNoticeLists(condition, page.getStart(), page.getLimit(),
+        page.getOrderBy(), userProp);
+  }
 
 
-    /**
-     * @throws
-     * @Title:selectNoticeById
-     * @Description: TODO(获取通知公告详情)
-     * @param: @param id
-     * @param: @throws Exception
-     * @return: SingleResult<Notice>
-     * @author: Arvin
-     * @version: 2019-01-06
-     */
-    @RequestMapping(value = "/getDetails")
-    @ResponseBody
-    public ResultResponse selectNoticeByPrimaryKey(String id) throws Exception {
-        UserProp userProp = this.getCurUserProp();
-        if (userProp == null) {
-            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
-        }
-        SingleResult<NoticeVo> o=this.sclNoticeService.updateAndSelectNoticeVoById(id,getServerHttp(),this.getCurUserProp());
-        return new ResultResponse(0,"OK",o.getValue());
+  /**
+   * @throws @Title:selectNoticeById
+   * @Description: TODO(获取通知公告详情)
+   * @param: @param id
+   * @param: @throws Exception
+   * @return: SingleResult<Notice>
+   * @author: Arvin
+   * @version: 2019-01-06
+   */
+  @RequestMapping(value = "/getDetails")
+  @ResponseBody
+  public ResultResponse selectNoticeByPrimaryKey(String id) throws Exception {
+    UserProp userProp = this.getCurUserProp();
+    if (userProp == null) {
+      return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
     }
+    SingleResult<NoticeVo> o = this.sclNoticeService.updateAndSelectNoticeVoById(id,
+        getServerHttp(), this.getCurUserProp());
+    return new ResultResponse(0, "OK", o.getValue());
+  }
 
-    private String getServerHttp() {
-        return ((Map) this.getRequest().getSession().getAttribute("cfg")).get("fastdfs_server").toString();
-    }
+  private String getServerHttp() {
+    return ((Map) this.getRequest().getSession().getAttribute("cfg")).get("fastdfs_server")
+        .toString();
+  }
 
 }
