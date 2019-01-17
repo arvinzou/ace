@@ -1,4 +1,5 @@
 var lCardNo = null;
+var server = "http://127.0.0.1";
 $(function(){
 
     $.ajax({
@@ -40,7 +41,7 @@ function initList(lCardNo){
     }
     var dateTimeStr = year+"-"+month;
     $.ajax({
-        url:  "/api/www/api/findStudentFinList",
+        url: server+ "/api/www/api/findStudentFinList",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
@@ -71,7 +72,7 @@ function initList(lCardNo){
 function initCount(lCardNo){
     var year = new Date().getFullYear();
     $.ajax({
-        url: "/api/www/api/findStudentFinCount",
+        url: server+"/api/www/api/findStudentFinCount",
         type:"post",
         async:false,
         contentType: "application/x-www-form-urlencoded; charset=utf-8",
