@@ -149,8 +149,7 @@ where t.status='1'
     NULL HREF
     FROM
     teacher t
-    LIMIT 0,
-    1
+    LIMIT 1
     UNION ALL
     SELECT
     t.ID,

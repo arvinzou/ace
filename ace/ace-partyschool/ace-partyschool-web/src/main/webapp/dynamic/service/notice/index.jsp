@@ -114,7 +114,7 @@ pageEncoding="utf-8"%>
     
     <div class="form-group">
         <label class="col-md-2 view-label">内容</label>
-        <div class="col-md-10">
+        <div class="col-md-8">
             <div class="row">\$\${data.o.content}</div>
 			<div class="row" id="filelist-history">
 				
@@ -126,20 +126,20 @@ pageEncoding="utf-8"%>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">发布日期</label>
-        <div class="col-md-10">
+        <div class="col-md-8">
             \${data.o.pushDate}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">发布人</label>
-        <div class="col-md-10">
+        <div class="col-md-8">
             \${data.o.publisher}
         </div>
     </div>
 	{@if data.o.users}
 	<div class="form-group">
 	    <label class="col-md-2 view-label">接收人</label>
-	    <div class="col-md-10">
+	    <div class="col-md-8">
 			{@each data.o.users as item, index}
 	        <div class="badge badge-pill {@if item.status==2}badge-success{@else}badge-danger{@/if}" style="float:left;margin: 10px;">\${item.name}</div>
 			{@/each}
