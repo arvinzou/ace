@@ -20,14 +20,20 @@ pageEncoding="utf-8"%>
     <div class="portlet-body">
         <div class="row custom-toolbar">
             <form action="#" id="fm-search">
-                <div class="col-md-9 toolbar">
+                <div class="col-md-7 toolbar">
+
 
                     <button type="button" class="btn  green" id="btn-view-add" authority="false">添加</button>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-5">
 
+                    <div class="input-group" style="float: left;margin-top: 5px;margin-right: 5px;">
+                        <label>班次 </label>
+                    </div>
+                    <div class="input-group" style="float: left;margin-right: 5px;width: 175px" id="select1">
 
+                    </div>
                     <div class="input-group">
                         <input type="text"
                                name="title"
@@ -56,6 +62,52 @@ pageEncoding="utf-8"%>
 
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <jsp:include page="/dynamic/common/footer.jsp"/>
+
+<script id="tpl-select-list" type="text/template">
+
+    <select name="classesId" id="classesId" style="float:right;height:34px" onchange="initClasses(this.value)" class="form-control">
+    {@each data as item, index}
+           <option value="\${item.id}">\${item.name}</option>
+    {@/each}
+    </select>
+</script>
+
+
+<%--学员导入--%>
+<div class="modal fade" role="dialog" id="modal-import">
+    <div class="modal-dialog" role="document" style="width: 75%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" authority="false" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">批量导入</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-md-2 control-label">
+                        导入到目标班次<span style='color:red;'>*</span>
+                    </label>
+                    <div class="col-md-6">
+                        <select class="easyui-combogrid" style="width:350px; height: 25px; line-height: 25px;"
+                                id="combogrid-cls-list"></select>
+                    </div>
+                    <label>
+                        <input type="radio" name="category" value="1"><span style="padding:10px">班级文件</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="category" value="2"><span style="padding:10px">班级照片</span>
+                    </label>
+                </div>
+                <div id="uploader">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" authority="false">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%--查看详情--%>
 <div class="modal fade" role="dialog" id="modal-preview">
@@ -97,7 +149,7 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">文件地址</label>
         <div class="col-md-10">
-         <a>\${data.o.url}</a>
+         <a href="\${data.o.url}">\${data.o.url}</a>
         </div>
     </div>
     <div class="form-group">
@@ -193,6 +245,9 @@ pageEncoding="utf-8"%>
 
 <%--权限管理--%>
 <script src="${portalPath}/content/common/js/authority.js?version=${cfg.version}"></script>
+
+<script type="text/javascript" src="js/act.js"></script>
+
 
 </body>
 <style>

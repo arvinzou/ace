@@ -102,6 +102,7 @@ function loadText(id) {
 
 function edit(rowid) {
     console.log(rowid);
+    jQuery(cfg.grid_selector).jqGrid('setSelection',rowid);
     jQuery(cfg.grid_selector).jqGrid('editGridRow', rowid, {
         closeAfterAdd: true,
         recreateForm: true,
@@ -141,9 +142,9 @@ function initJuicerMethod() {
 }
 function parseStatus(val) {
     switch (val) {
-        case '0':
-            return "注销";
         case '1':
-            return "正常";
+            return "授课中";
+        case '2':
+            return "毕业";
     }
 }

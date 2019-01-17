@@ -136,6 +136,43 @@
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
+    <select id="findHeadmasterList" parameterType="java.lang.String" resultMap="VoResultMap">
+        select
+        t.id, t.category, t.name, t.sex, t.political, t.mobile, t.idCard, t.photoUrl, t.remark,
+        t.status, t.createUserId, t.createUserName, t.createDate,
+        t.lastModifyUserId, t.lastModifyUserName, t.lastModifyDate,
+        t.introduce, t.workUnitName, t.postName
+        from teacher t
+        where
+        <choose>
+            <when test="condition.id!=null and condition.id!=&quot;&quot;">
+                 t.id = #{condition.id,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                t.id NOT in (
+                SELECT
+                c.headmaster
+                FROM
+                classes c
+                WHERE c.status =1
+                )
+            </otherwise>
+        </choose>
+
+        <if test="condition.name !=null and condition.name !=&quot;&quot;">
+            and t.name like concat('%',#{condition.name,jdbcType=VARCHAR},'%')
+        </if>
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY t.createDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
+    </select>
+
     <select id="findCount" resultType="int">
         SELECT COUNT(*)
         <include refid="From_Statement"/>

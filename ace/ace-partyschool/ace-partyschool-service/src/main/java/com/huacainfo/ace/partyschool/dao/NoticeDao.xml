@@ -46,6 +46,7 @@
         update notice
         set
         title = #{title,jdbcType=VARCHAR},
+        status =#{status,jdbcType=VARCHAR},
         content=#{content,jdbcType=VARCHAR}
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -93,8 +94,19 @@
         noticeId
         from notice_status ns
         where
-        userId=#{userId,jdbcType=VARCHAR}
+        <if test="condition.userId !=null and condition.userId !=&quot;&quot;">
+             ns.userId = #{condition.userId,jdbcType=VARCHAR}
+        </if>
         )
+        <choose>
+            <when test="orderBy!=null and orderBy!=&quot;&quot;">
+                ORDER BY ${orderBy}
+            </when>
+            <otherwise>
+                ORDER BY pushDate desc
+            </otherwise>
+        </choose>
+        limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}
     </select>
 
     <select id="findList" parameterType="java.lang.String" resultMap="VoResultMap">

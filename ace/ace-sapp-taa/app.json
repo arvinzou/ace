@@ -1,7 +1,8 @@
 {
     "pages": [
         "page/index/index",
-        "page/me/index"
+        "page/me/index",
+        "page/roadlist/index"
     ],
     "permission": {
         "scope.userLocation": {
@@ -26,8 +27,8 @@
                 "text": "首页"
             },
             {
-                "pagePath": "page/me/index",
-                "text": "个人中心"
+                "pagePath": "page/roadlist/index",
+                "text": "路长列表"
             }
         ]
     },

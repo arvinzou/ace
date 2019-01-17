@@ -9,6 +9,7 @@ import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.common.tools.ExcelUtils;
 import com.huacainfo.ace.partyschool.model.Student;
 import com.huacainfo.ace.partyschool.service.StudentService;
@@ -59,8 +60,8 @@ public class StudentController extends BisBaseController {
     @RequestMapping(value = "/findStudentList")
     @ResponseBody
     public PageResult<StudentVo> findStudentList(StudentQVo condition,
-                                                 PageParamNoChangeSord page) throws Exception {
-
+                                                 PageParamNoChangeSord page, String q) throws Exception {
+        condition.setName(CommonUtils.isBlank(q) ? condition.getName() : q);
         PageResult<StudentVo> rst =
                 this.studentService.findStudentList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
         if (rst.getTotal() == 0) {

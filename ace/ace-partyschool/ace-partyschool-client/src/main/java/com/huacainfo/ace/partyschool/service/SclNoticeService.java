@@ -6,6 +6,8 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.partyschool.model.Notice;
+import com.huacainfo.ace.partyschool.model.NoticeStatus;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 
@@ -32,7 +34,7 @@ public interface SclNoticeService {
     PageResult<NoticeVo> findNoticeList(NoticeQVo condition,
                                         int start, int limit, String orderBy) throws Exception;
 
-    ResultResponse findNoticeLists(UserProp userProp) throws Exception;
+    ResultResponse findNoticeLists(NoticeStatusQVo condition, int start, int Limit, String orderBy, UserProp userProp) throws Exception;
     /**
      * @throws
      * @Title:insertNotice
@@ -70,7 +72,6 @@ public interface SclNoticeService {
      * @version: 2019-01-06
      */
     SingleResult<NoticeVo> updateAndSelectNoticeVoById(String id,String server,UserProp userProp) throws Exception;
-
 
 
     /**

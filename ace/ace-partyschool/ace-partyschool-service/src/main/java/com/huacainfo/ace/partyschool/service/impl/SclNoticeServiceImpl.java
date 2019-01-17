@@ -14,6 +14,7 @@ import com.huacainfo.ace.partyschool.service.NoticeStatusService;
 import com.huacainfo.ace.partyschool.service.SclNoticeService;
 import com.huacainfo.ace.partyschool.vo.NoticeQVo;
 import com.huacainfo.ace.partyschool.vo.NoticeVo;
+import com.huacainfo.ace.partyschool.vo.NoticeStatusQVo;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,10 +72,11 @@ public class SclNoticeServiceImpl implements SclNoticeService {
     }
 
     @Override
-    public ResultResponse findNoticeLists(UserProp userProp) throws Exception {
+    public ResultResponse findNoticeLists(NoticeStatusQVo condition,int start, int limit, String orderBy,UserProp userProp) throws Exception {
+        condition.setUserId(userProp.getUserId());
         List<NoticeVo> noticeVo=new ArrayList<>();
         Map<String, Object> map = new HashMap<String, Object>();
-        noticeVo=this.noticeDao.findMyNoticeList(userProp.getUserId());
+        noticeVo=this.noticeDao.findMyNoticeList(condition,start,limit,orderBy);
             map.put("list", noticeVo);
             map.put("count", this.noticeDao.findUnreadCount(userProp.getUserId()));
         return new ResultResponse(0, "通知公告获取完成！", map);

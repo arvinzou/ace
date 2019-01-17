@@ -24,6 +24,25 @@ public class ClassesVo extends Classes {
      */
     private Student student;
 
+    private String crName;
+
+    private String tName;
+
+    public String getCrName() {
+        return crName;
+    }
+
+    public void setCrName(String crName) {
+        this.crName = crName;
+    }
+
+    public String gettName() {
+        return tName;
+    }
+
+    public void settName(String tName) {
+        this.tName = tName;
+    }
 
     public Teacher getClsteacher() {
         return clsTeacher;
