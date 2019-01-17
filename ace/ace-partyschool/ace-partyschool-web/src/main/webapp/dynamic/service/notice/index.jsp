@@ -84,7 +84,7 @@ pageEncoding="utf-8"%>
 			</div>
 		</div>
 <div class="modal fade" role="dialog" id="modal-push">
-			<div class="modal-dialog" role="document" style="width: 100%;">
+			<div class="modal-dialog" role="document" style="width: 70%;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close" authority="false">

@@ -1,4 +1,4 @@
-var _colNames = ['主键', '类型', '班级', '标题', '文件地址', '内容', '发布时间 ', '发布人', '状态', '操作'];
+var _colNames = ['主键', '类型', '班级', '标题', '文件地址', '内容', '发布时间 ', '发布人', '发布人次', '操作'];
 var _colModel = function() {
 	return [{
 		name: 'id',
@@ -117,101 +117,20 @@ var _colModel = function() {
 		}
 	}, {
 		name: 'pushDate',
-		editable: true,
-		width: 100,
-		hidden: true,
-		edittype: "datebox",
-		dataoptions: {
-			formatter: function(date) {
-				var y = date.getFullYear();
-				var m = date.getMonth() + 1;
-				var d = date.getDate();
-				return y + '-' + (m < 10 ? ('0' + m) : m) + '-' +
-					(d < 10 ? ('0' + d) : d);
-			},
-			parser: function(s) {
-				if (!s)
-					return new Date();
-				var ss = (s.split('-'));
-				var y = parseInt(ss[0], 10);
-				var m = parseInt(ss[1], 10);
-				var d = parseInt(ss[2], 10);
-				if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
-					return new Date(y, m - 1, d);
-				} else {
-					return new Date();
-				}
-			}
-		},
-		editoptions: {
-			size: "20",
-			maxlength: "50",
-		},
-		formoptions: {
-			elmprefix: "",
-			elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-		},
-		editrules: {
-			required: true
-		}
+		editable: false,
+		width: 100
 
 	}, {
 		name: 'publisher',
 		editable: true,
-		width: 100,
-		hidden: true,
-		editoptions: {
-			size: "20",
-			maxlength: "50"
-		},
-		formoptions: {
-			elmprefix: "",
-			elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-		},
-		editrules: {
-			required: true
-		}
+		width: 60
 	}, {
-		name: 'status',
-		editable: true,
-		hidden: true,
-		width: 50,
-		edittype: "checkbox",
-		editoptions: {
-			value: "1:0"
-		},
-		cellattr: function(rowId, val, rawObject, cm, rdata) {
-			if (rawObject.status == '0') {
-				return "style='color:red;'";
-			}
-			if (rawObject.status == '1') {
-				return "style='color:green;'";
-			}
-		},
-		unformat: aceSwitch,
-		renderer: function(value) {
-			var rst = "";
-			switch (value) {
-				case '1':
-					rst = "正常";
-					break;
-				case '0':
-					rst = "注销";
-					break;
-			}
-			return rst;
-		},
-
-		formoptions: {
-			elmprefix: "",
-			elmsuffix: "<span style='color:red;font-size:16px;font-weight:800'>*</span>"
-		},
-		editrules: {
-			required: true
-		}
+		name: 'pushed',
+		editable: false,
+		width: 50
 	}, {
 		name: 'opt',
-		width: 50,
+		width: 80,
 		hidden: false,
 		editable: false,
 		sortable: false,

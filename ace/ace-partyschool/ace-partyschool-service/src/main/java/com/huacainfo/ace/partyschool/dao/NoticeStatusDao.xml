@@ -149,4 +149,8 @@
     set status = '2'
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="getPushUsersList" resultType="map">
+    select a.user_id userId,a.name from notice_status t left join portal.users a on t.userId=a.user_id
+    where t.noticeId=#{id}
+  </select>
 </mapper>

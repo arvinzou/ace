@@ -189,10 +189,10 @@ function save() {
             s += nodes[i].id;
         }
         console.log(s);
-		return;
+		
         $.ajax({
             type : "post",
-            url : contextPath + "/role/insertRoleResources.do",
+            url : contextPath + "/noticeStatus/insertNoticeStatus",
             data:{id:id,userIds:s},
             beforeSend : function(XMLHttpRequest) {
                 startLoad();

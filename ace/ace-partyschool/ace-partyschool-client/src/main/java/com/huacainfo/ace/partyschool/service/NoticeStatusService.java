@@ -36,7 +36,7 @@ public interface NoticeStatusService {
      * @author: 陈晓克
      * @version: 2019-01-16
      */
-    MessageResponse insertNoticeStatus(String id, String userIds,UserProp userProp) throws Exception;
+    MessageResponse insertNoticeStatus(String id, String[] userIds,UserProp userProp) throws Exception;
     /**
      * @throws
      * @Title:getPushUsersList
