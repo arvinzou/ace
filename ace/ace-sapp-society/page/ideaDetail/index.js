@@ -161,6 +161,7 @@ Page({
         that.initData();
         that.getLikeNum();
         that.getCommentList();
+        wx.stopPullDownRefresh();
     },
     formSubmit: function(e) {
         let that = this;
