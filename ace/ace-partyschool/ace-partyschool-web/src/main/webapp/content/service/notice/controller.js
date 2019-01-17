@@ -77,7 +77,7 @@ function initPreview(id) {
 				var data = {};
 				data['o'] = result.value;
 				render('#fm-preview', data, 'tpl-preview');
-				loadAttach(id);
+				//loadAttach(id);
 			} else {
 				alert(result.errorMessage);
 			}

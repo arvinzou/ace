@@ -116,7 +116,12 @@ pageEncoding="utf-8"%>
         <label class="col-md-2 view-label">内容</label>
         <div class="col-md-10">
             <div class="row">\$\${data.o.content}</div>
-			<div class="row" id="filelist-history"></div>
+			<div class="row" id="filelist-history">
+				
+				{@each data.o.files as item, index}
+				<a href="\${item.fileUrl}" target="_blank">\${item.fileName}</a><br>
+				{@/each}
+			</div>
         </div>
     </div>
     <div class="form-group">
@@ -131,6 +136,16 @@ pageEncoding="utf-8"%>
             \${data.o.publisher}
         </div>
     </div>
+	{@if data.o.users}
+	<div class="form-group">
+	    <label class="col-md-2 view-label">发布对象</label>
+	    <div class="col-md-10">
+			{@each data.o.users as item, index}
+	        <div class="badge badge-pill badge-success" style="float:left;margin: 10px;">\${item.name}</div>
+			{@/each}
+	    </div>
+	</div>
+	{@/if}
    
 </script>
 

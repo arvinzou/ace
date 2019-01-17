@@ -127,6 +127,6 @@ public class NoticeController extends BisBaseController {
     }
 
     private String getServerHttp() {
-        return ((Map) this.getRequest().getSession().getServletContext().getAttribute("cfg")).get("fastdfs_server").toString();
+        return ((Map) this.getRequest().getSession().getAttribute("cfg")).get("fastdfs_server").toString();
     }
 }
