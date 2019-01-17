@@ -1,8 +1,9 @@
 jQuery(function($) {
-    $(window).on('resize.jqGrid',
+$(window).on('resize.jqGrid',
     function() {
         resizeJqGrid();
-    }) jQuery(cfg.grid_selector).jqGrid({
+    });
+jQuery(cfg.grid_selector).jqGrid({
         prmNames: {
             totalRecord: "totalRecord",
             start: "start",
