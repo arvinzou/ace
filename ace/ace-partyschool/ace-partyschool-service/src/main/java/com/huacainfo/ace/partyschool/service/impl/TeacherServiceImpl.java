@@ -120,12 +120,12 @@ public class TeacherServiceImpl implements TeacherService {
             return new MessageResponse(1, "手机号重复");
         }
 
-        o.setCategory(StringUtil.isEmpty(o.getCategory()) ? "1" : o.getCategory());//默认值
 
         String tid = StringUtil.isEmpty(o.getId()) ? GUIDUtil.getGUID() : o.getId();
         o.setId(tid);
         o.setCreateDate(new Date());
-        o.setStatus("1");
+        o.setCategory(StringUtil.isEmpty(o.getCategory()) ? "1" : o.getCategory());//默认值
+        o.setStatus(StringUtil.isEmpty(o.getStatus()) ? "1" : o.getStatus());//默认值
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.teacherDao.insert(o);

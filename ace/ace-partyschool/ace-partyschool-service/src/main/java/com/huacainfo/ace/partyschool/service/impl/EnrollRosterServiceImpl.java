@@ -1,6 +1,7 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
@@ -229,36 +230,26 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
      */
 
     @Override
-    public MessageResponse importXls(List<Map<String, Object>> list, UserProp userProp) throws Exception {
+    public MessageResponse importXls(String clsId, List<Map<String, Object>> list, UserProp userProp) throws Exception {
         int i = 1;
         int t;
         for (Map<String, Object> row : list) {
             EnrollRoster o = new EnrollRoster();
             CommonBeanUtils.copyMap2Bean(o, row);
-            o.setCreateDate(new Date());
+            o.setClsId(clsId);
             o.setStatus("1");
+            o.setId(GUIDUtil.getGUID());
+            o.setCreateDate(new Date());
 
             this.logger.info(o.toString());
-            if (true) {
-                return new MessageResponse(1, "行" + i + ",编号不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getId())) {
-                return new MessageResponse(1, "主键不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getClsName())) {
-                return new MessageResponse(1, "报名期数不能为空！");
-            }
             if (CommonUtils.isBlank(o.getName())) {
-                return new MessageResponse(1, "学员姓名不能为空！");
+                return new MessageResponse(1, "第" + i + "行，" + "学员姓名不能为空！");
             }
             if (CommonUtils.isBlank(o.getWorkUnitName())) {
-                return new MessageResponse(1, "单位全称不能为空！");
+                return new MessageResponse(1, "第" + i + "行，" + "单位全称不能为空！");
             }
             if (CommonUtils.isBlank(o.getPostName())) {
-                return new MessageResponse(1, "职务全称不能为空！");
-            }
-            if (CommonUtils.isBlank(o.getStatus())) {
-                return new MessageResponse(1, "状态不能为空！");
+                return new MessageResponse(1, "第" + i + "行，" + "职务全称不能为空！");
             }
 
             t = enrollRosterDao.isExist(o);
@@ -372,6 +363,22 @@ public class EnrollRosterServiceImpl implements EnrollRosterService {
         } else {
             return true;
         }
+    }
+
+    /**
+     * 批量开启/关闭报名
+     *
+     * @param clsId       班级ID
+     * @param status      开启/关闭  1-开，0-关
+     * @param curUserProp
+     * @return MessageResponse
+     * @throws Exception
+     */
+    @Override
+    public MessageResponse updateStatusByClsId(String clsId, String status, UserProp curUserProp) {
+        int i = enrollRosterDao.updateStatusByClsId(clsId, status);
+        logger.info("已更新[" + i + "]条数据");
+        return new MessageResponse(ResultCode.SUCCESS, "操作成功");
     }
 
 }

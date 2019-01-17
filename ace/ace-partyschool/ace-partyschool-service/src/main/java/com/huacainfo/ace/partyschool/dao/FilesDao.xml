@@ -63,6 +63,9 @@
         <if test="condition.classesId !=null and condition.classesId !=&quot;&quot;">
             and f.classesId = #{condition.classesId,jdbcType=VARCHAR}
         </if>
+        <if test="condition.category !=null and condition.category !=&quot;&quot;">
+            and f.category = #{condition.category,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">

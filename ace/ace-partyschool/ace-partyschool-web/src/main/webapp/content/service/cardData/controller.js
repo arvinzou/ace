@@ -100,6 +100,8 @@ function initPreview(id) {
 
 function edit(rowid) {
     console.log(rowid);
+    jQuery(cfg.grid_selector).jqGrid('setSelection', rowid);
+
     jQuery(cfg.grid_selector).jqGrid('editGridRow', rowid, {
         closeAfterAdd: true,
         recreateForm: true,
