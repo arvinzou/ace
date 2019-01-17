@@ -141,7 +141,7 @@ where t.status='1'
   </select>
 
   <select id="getTreeList" resultType="map">
-    SELECT
+    (SELECT
     '9999' ID,
     '0' PID,
     '教职工' TEXT,
@@ -149,8 +149,7 @@ where t.status='1'
     NULL HREF
     FROM
     teacher t
-    LIMIT 0,
-    1
+    LIMIT 1)
     UNION ALL
     SELECT
     t.ID,
