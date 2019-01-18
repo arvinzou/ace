@@ -1,5 +1,5 @@
 .fc-time-grid .fc-slats td {
-     height: 10.5em !important;
+     height:225px !important;
  }
 
 #b_container .search{
@@ -102,4 +102,58 @@ padding: 0px 0px 0px 8px !important;
 .fc-prev-button{
 padding: 0px 8px 0px 0px !important;
     margin-right: 20px !important;
+}
+
+.fc-today-button{
+    width:60px;
+    height:36px !important;
+    background:rgba(24,144,255,1) !important;
+    border-radius:18px 17px 17px 18px !important;
+    border-width: 0px;
+    opacity: 1 !important;
+    font-size:16px;
+    font-family:MicrosoftYaHei;
+    font-weight:400;
+    color:rgba(255,255,255,1)!important;
+    margin-left: 20px;
+}
+
+.bg-crew-good{
+    background:rgba(254,76,70,1) !important;
+    font-size:18px !important;
+    font-weight:400;
+    color:rgba(255,255,255,1) !important;
+    padding: 6px;
+    margin: 0;
+    border-width: 0px !important;
+
+}
+.classinfo{
+    margin: 40px 0 0 10px ;
+    background:rgba(255,255,255,1);
+    box-shadow:0px 0px 12px 1px rgba(239,243,248,0.51);
+    border-radius:4px;
+    overflow: hidden;
+
+}
+
+.classinfo .body{
+    padding: 0px 17px 20px;
+}
+
+.classinfo .head{
+    height:54px;
+    background:rgba(247,249,252,1);
+    font-size:22px;
+    font-weight:bold;
+    color:rgba(24,144,255,1);
+    text-align: center;
+    line-height: 54px;
+}
+
+.classinfo .title{
+    font-size:20px;
+    font-weight:bold;
+    margin-top: 28px !important;
+    color:rgba(55,63,83,1);
 }

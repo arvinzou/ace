@@ -101,12 +101,10 @@ public class ClsFilesServiceImpl implements ClsFilesService {
      * @version: 2019-01-04
      */
     @Override
-    public MessageResponse insertFiles(String filePath ,String  clsId ,String category,UserProp userProp) throws Exception {
+    public MessageResponse insertFiles(String fileName,String filePath ,String  clsId ,String category,UserProp userProp) throws Exception {
         Files o=new Files();
-        int start = filePath.indexOf("=");
-        int ends = filePath.lastIndexOf(".");
-        String strs = filePath.substring(start + 1, ends);
-        o.setTitle(strs);
+
+        o.setTitle(fileName);
         o.setUrl(filePath);
         o.setClassesId(clsId);
         o.setCategory(category);

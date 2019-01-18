@@ -78,24 +78,18 @@
                             <div id='calendar' ></div>
                         </div>
                         <div class="col-sm-2 margin0 padding0">
-                            <div col-sm-12>
-                                <h4>课程名称</h4>
+                            <div class="classinfo">
+                                <div class="head">课程详情</div>
+                                <div class="body">
+                                    <p class="title">课程名称</p>
+                                    <p class="text">党校课程勇于自我革命是中国共产党最鲜明的品格</p>
+                                    <p class="title">讲师</p>
+                                    <p class="text">李老师</p>
+                                    <p class="title">班级</p>
+                                    <p class="text">一教室</p>
+                                </div>
+
                             </div>
-                            <p col-sm-12>
-                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
-                            </p>
-                            <div col-sm-12>
-                                <h4>授课老师</h4>
-                            </div>
-                            <p col-sm-12>
-                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
-                            </p>
-                            <div col-sm-12>
-                                <h4>学习教室</h4>
-                            </div>
-                            <p col-sm-12>
-                                <h5>学习习总书记的党的领导学习习总书记的党的领导</h5>
-                            </p>
                         </div>
                     </div>
                 </div>
