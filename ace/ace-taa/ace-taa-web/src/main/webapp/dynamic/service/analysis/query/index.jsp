@@ -49,7 +49,7 @@
                             <td>
                                 <%--时间范围--%>
                                 <div class="input-group" role="group" style="float:left;padding-right:5px">
-                                    <div style="width:auto;float:left;line-height:30px"> 事故发生时间:</div>
+                                    <div style="width:auto;float:left;line-height:30px"> 事故时间 </div>
                                     <div class="date form_datetime"
                                          style="width:auto;float:left;border: 1px solid #efefef;">
                                         <input type="text" size="16" name="startDate" readonly="" class="form-control">
@@ -73,7 +73,7 @@
                             <td>
                                 <%--死亡人数区间--%>
                                 <div class="input-group" style="float: left">
-                                    <div style="width:auto;float:left;line-height:30px;padding-right:5px"> 死亡人数区间</div>
+                                    <div style="width:auto;float:left;line-height:30px;padding-right:5px"> 死亡人数</div>
                                     <input type="text" size="16" name="downDeathNum" class="form-control"
                                            style="float:left;width:88px;padding-right:5px"
                                            oninput="value=value.replace(/[^\d]/g,'')">
@@ -90,7 +90,7 @@
                             <td>
                                 <%--受伤人数区间--%>
                                 <div class="input-group" style="float: left">
-                                    <div style="width:auto;float:left;line-height:30px;padding-right:5px"> 受伤人数区间</div>
+                                    <div style="width:auto;float:left;line-height:30px;padding-right:5px"> 受伤人数</div>
                                     <input type="text" size="16" name="downInjuriesNum" class="form-control"
                                            style="float:left;width:88px;padding-right:5px"
                                            oninput="value=value.replace(/[^\d]/g,'')">
