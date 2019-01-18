@@ -422,14 +422,17 @@ public class TraAccServiceImpl implements TraAccService {
     /**
      * 事故死亡人数同期对比 报表
      *
+     * @param params
      * @return Map<String,Object>
      */
     @Override
-    public Map<String, Object> contrastiveReport() {
+    public Map<String, Object> contrastiveReport(Map<String, String> params) {
         String nowDataTime = DateUtil.getNow();
         String nowYear = nowDataTime.substring(0, 4);
         Map<String, String> nowParams = getParams(Integer.parseInt(nowYear));
+        nowParams.putAll(params);
         Map<String, String> pastParams = getParams(Integer.parseInt(nowYear) - 1);
+        pastParams.putAll(params);
 
         Map<String, Object> now = traAccDao.contrastiveReport(nowParams);
         Map<String, Object> past = traAccDao.contrastiveReport(pastParams);

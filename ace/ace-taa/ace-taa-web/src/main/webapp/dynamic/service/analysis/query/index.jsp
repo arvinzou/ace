@@ -25,9 +25,6 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-0">
-            </div>
-
             <div class="col-md-12">
                 <%--search form--%>
                 <form id="fm-search">

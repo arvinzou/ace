@@ -210,6 +210,7 @@ public interface TraAccService {
      * 事故死亡人数同期对比 报表
      *
      * @return Map<String,Object>
+     * @param params params
      */
-    Map<String, Object> contrastiveReport();
+    Map<String, Object> contrastiveReport(Map<String, String> params);
 }

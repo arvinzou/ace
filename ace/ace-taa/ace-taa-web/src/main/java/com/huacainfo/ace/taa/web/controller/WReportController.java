@@ -102,9 +102,12 @@ public class WReportController {
      * @return Map<String,Object>
      */
     @RequestMapping(value = "/contrastiveReport")
-    public SingleResult<Map<String, Object>> contrastiveReport() throws Exception {
+    public SingleResult<Map<String, Object>> contrastiveReport(String areaCode) throws Exception {
 
-        Map<String, Object> data = traAccService.contrastiveReport();
+        Map<String, String> params = new HashMap<>();
+        params.put("areaCode", areaCode);
+
+        Map<String, Object> data = traAccService.contrastiveReport(params);
         SingleResult<Map<String, Object>> rst = new SingleResult<>();
         rst.setValue(data);
         return rst;

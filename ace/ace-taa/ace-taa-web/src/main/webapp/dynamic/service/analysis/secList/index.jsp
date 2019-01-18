@@ -25,10 +25,10 @@
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
-            <div class="col-md-4">
+            <div class="col-md-2">
             </div>
 
-            <div class="col-md-8">
+            <div class="col-md-10">
 
                 <%--search form--%>
                 <form id="fm-search">
@@ -41,6 +41,13 @@
                                 onclick="setParams('category','deathNum');">死亡人数倒叙表
                         </button>
                     </div>
+                    <%--行政区划--%>
+                    <div class="input-group" style="float:left;padding-right:10px">
+                        行政区划 <input class="easyui-combotree" name="areaCode"
+                                    data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
+                                    style="width:220px;﻿line-height: 30px;height: 30px;">
+                    </div>
+
                     <%--时间范围--%>
                     <div class="input-group" role="group" style="float:left;padding-right:5px">
                         <div style="width:auto;float:left;line-height:30px"> 时间段:</div>
@@ -56,12 +63,6 @@
                         <div class="date form_datetime" style="width:auto;float:left;border: 1px solid #efefef;">
                             <input type="text" size="16" name="endDate" readonly="" class="form-control">
                         </div>
-                    </div>
-                    <%--行政区划--%>
-                    <div class="input-group" style="float:left;padding-right:10px">
-                        行政区划 <input class="easyui-combotree" name="areaCode"
-                                    data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
-                                    style="width:220px;﻿line-height: 30px;height: 30px;">
                     </div>
 
                     <div class="input-group">
