@@ -72,10 +72,12 @@ window.onload = function () {
         $('#calendar').fullCalendar('removeEvents');
         var event = {
             color: '#efffe3',
-            textColor: '#444'
+            textColor: '#444',
+            className:[]
         };
         for (index in data) {
             var item = data[index];
+            event.className.push("bg-crew-good");
             event.id = item.id;
             event.title = item.course.name;
             event.teacher = item.teacher.name;
