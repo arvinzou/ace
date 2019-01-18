@@ -212,12 +212,12 @@
         where t.`status` = '1'
         <if test='params.startDate!=null and params.startDate!=""'>
             <![CDATA[
-                and t.accidentTime >= str_to_date(#{condition.startDate},'%Y-%m-%d')
+                and t.accidentTime >= str_to_date(#{params.startDate},'%Y-%m-%d')
             ]]>
         </if>
         <if test='params.endDate!=null and params.endDate!=""'>
             <![CDATA[
-                and t.accidentTime <= str_to_date(#{condition.endDate},'%Y-%m-%d')
+                and t.accidentTime <= str_to_date(#{params.endDate},'%Y-%m-%d')
             ]]>
         </if>
         )A
@@ -231,7 +231,7 @@
             and rm.name like concat(#{condition.roadManName,jdbcType=VARCHAR},'%')
         </if>
         <if test='params.areaCode!=null and params.areaCode!=""'>
-            and V.areaCode like concat(#{condition.areaCode,jdbcType=VARCHAR},'%')
+            and V.areaCode like concat(#{params.areaCode,jdbcType=VARCHAR},'%')
         </if>
         <choose>
             <when test='orderBy!=null and orderBy!=""'>
@@ -309,5 +309,8 @@
         ELSE 0 END AS December
         FROM tra_acc t
         WHERE t.`status` = '1'
+        <if test='areaCode!=null and areaCode!=""'>
+            and t.areaCode = #{areaCode,jdbcType=VARCHAR}
+        </if>
     </select>
 </mapper>

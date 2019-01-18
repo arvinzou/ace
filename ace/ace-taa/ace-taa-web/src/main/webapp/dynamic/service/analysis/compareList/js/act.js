@@ -1,11 +1,21 @@
 var colors = ['#5793f3', '#d14a61'];
+var params = {};
 window.onload = function () {
-    initPage();
+    //
+    initChart(params);
+
+    //选值后自动查询
+    $(".easyui-combotree").combotree({
+        onChange: function (newValue, oldValue) {
+            // alert("文本已被修改:" + newValue);
+            params = {'areaCode': newValue};
+            initChart(params);
+        }
+    });
 }
 
 
-/*事故初始化分页*/
-function initPage() {
+function initChart(p) {
     var nowData = [];
     var pastData = [];
 
@@ -14,7 +24,7 @@ function initPage() {
         url: contextPath + "/www/report/contrastiveReport",
         type: "post",
         async: false,
-        data: {},
+        data: p,
         success: function (rst) {
             stopLoad();
             if (rst.status == 0) {
@@ -120,7 +130,7 @@ function initPage() {
     };
 
     if (option && typeof option === "object") {
-        myChart.setOption(option, false);
+        myChart.setOption(option, true);
     }
 }
 

@@ -20,24 +20,27 @@
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
+
 <div class="portlet light">
 
     <div class="portlet-body">
 
         <div class="row custom-toolbar">
             <div class="col-md-4">
-
+                <%--行政区划--%>
+                <div class="input-group" style="float:left;padding-right:10px">
+                    行政区划 <input class="easyui-combotree" name="areaCode"
+                                data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
+                                style="width:220px;﻿line-height: 30px;height: 30px;">
+                </div>
             </div>
 
             <div class="col-md-8">
-                <%--search form--%>
-                <form id="fm-search">
-                    <div class="input-group hide">
-                        <span class="input-group-btn" style="padding-right: 5px">
-                            <button class="btn  btn-default search_btn" type="submit"> 搜索</button>
-                        </span>
-                    </div>
-                </form>
+                <div class="input-group hide">
+                    <span class="input-group-btn" style="padding-right: 5px">
+                        <button id="btn-render" class="btn  btn-default search_btn" type="submit"> 搜索</button>
+                    </span>
+                </div>
             </div>
 
         </div>
@@ -56,20 +59,26 @@
 
 </div>
 
-
 <%--=============common jsp-suffix===============--%>
 <jsp:include page="/dynamic/common/suffix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>
 <%--==============common jsp-suffix==============--%>
 </body>
 
-<style>
-
-</style>
-
 <jsp:include page="/dynamic/common/footer.jsp"/>
 
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+<link rel="stylesheet" type="text/css"
+      href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+<script type="text/javascript"
+        src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
+
+
 <script src="${portalPath}/system/getUserProp.do?version=${cfg.version}"></script>
-<script src="js/echarts.js?v=${cfg.version}"></script>
 <script src="js/act.js?v=${cfg.version}"></script>
+<script src="js/echarts.js?v=${cfg.version}"></script>
 
 </html>

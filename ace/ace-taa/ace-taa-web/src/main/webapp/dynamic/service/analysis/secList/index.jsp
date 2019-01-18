@@ -24,23 +24,34 @@
 
     <div class="portlet-body">
 
-        <div class="row custom-toolbar">
-            <div class="col-md-4">
-            </div>
+        <div class="row custom-toolbar" >
 
-            <div class="col-md-8">
+
+
 
                 <%--search form--%>
-                <form id="fm-search">
-                    <div class="btn-group" id="check-group-category" role="group"
-                         style="float:left;padding-right:5px">
-                        <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('category','occurTimes');">事故次数倒叙表
-                        </button>
-                        <button type="button" authority="false" class="btn btn-default"
-                                onclick="setParams('category','deathNum');">死亡人数倒叙表
-                        </button>
+                <form id="fm-search" style="padding:15px">
+
+
+
+                            <div class="btn-group" id="check-group-category" role="group"
+                                 style="float:left;padding-right:5px">
+                                <button type="button" authority="false" class="btn btn-default"
+                                        onclick="setParams('category','occurTimes');">事故次数倒叙表
+                                </button>
+                                <button type="button" authority="false" class="btn btn-default"
+                                        onclick="setParams('category','deathNum');">死亡人数倒叙表
+                                </button>
+                            </div>
+
+
+                    <%--行政区划--%>
+                    <div class="input-group" style="float:left;padding-right:10px">
+                        行政区划 <input class="easyui-combotree" name="areaCode"
+                                    data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
+                                    style="width:220px;﻿line-height: 30px;height: 30px;">
                     </div>
+
                     <%--时间范围--%>
                     <div class="input-group" role="group" style="float:left;padding-right:5px">
                         <div style="width:auto;float:left;line-height:30px"> 时间段:</div>
@@ -57,20 +68,15 @@
                             <input type="text" size="16" name="endDate" readonly="" class="form-control">
                         </div>
                     </div>
-                    <%--行政区划--%>
-                    <div class="input-group" style="float:left;padding-right:10px">
-                        行政区划 <input class="easyui-combotree" name="areaCode"
-                                    data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
-                                    style="width:220px;﻿line-height: 30px;height: 30px;">
-                    </div>
 
                     <div class="input-group">
-                        <span class="input-group-btn" style="padding-right: 5px">
+                        <span class="input-group-btn" >
                             <button class="btn  btn-default search_btn" type="submit"> 搜索</button>
                         </span>
                     </div>
+
                 </form>
-            </div>
+
 
         </div>
 
