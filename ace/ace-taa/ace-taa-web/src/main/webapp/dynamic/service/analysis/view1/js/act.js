@@ -62,23 +62,20 @@ function initPreview(params) {
 }
 
 jQuery(function($) {
+	$(".RightDiv").css("height",(window.innerHeight-40)+"px");
 	initPreview({});
 
 	$("#FullScreen").click(function(){
-           var hide= $("#toolBar").hasClass("in");
-           if(!hide){
-                 $("#map").removeClass("col-md-12");
-                 $("#map").addClass("col-md-9");
+           var ml= $("#TextViewPanel").css("margin-left");
+           if(ml=='0px'){
+                 $("#TextViewPanel").css("margin-left","-380px");
                  $("#FullScreen").css('background-position','-22px 0px');
-
-
+				 $("#FullScreen").css('left','-1px');
            }else{
-                $("#map").removeClass("col-md-9");
-                $("#map").addClass("col-md-12");
+			    $("#TextViewPanel").css("margin-left","0px");
                 $("#FullScreen").css('background-position','-44px 0px');
+				$("#FullScreen").css('left','299px');
            }
-
-
     })
 });
 

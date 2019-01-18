@@ -46,12 +46,12 @@
             background:#fff;
         }
         #container {
-            height: 600px;
+            height: 100%;
         }
 #FullScreen {
     position: absolute;
     top: 50%;
-    left: -10pxpx;
+    left: -1px;
     margin-top: -40px;
     z-index: 201;
     width: 21px;
@@ -69,18 +69,97 @@
     *display: inline;
     _display: inline;
 }
-    </style>
+
+    .portlet.light>.portlet-title {
+     border-bottom: 0px solid #eef1f5;
+}
+
+.portlet.light>.portlet-title {
+    padding: 0;
+    min-height: 25px;
+    font-weight:800;
+}
+.portlet.light .portlet-body {
+    padding-top: 1px;
+
+ min-height: 40px;
+}
+#Main {
+    border-top: 1px solid #e6e6e6;
+    overflow: hidden;
+}
+#TextViewPanel {
+    position: relative;
+    float: left;
+    width: 300px;
+    margin-left: 0;
+    _margin-right: -3px;
+    border-right: 1px solid #cad3e0;
+    overflow: hidden;
+}
+#Main.RightDiv {
+    position: relative;
+    background-color: #eee;
+    overflow: hidden;
+}
+#Header {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    z-index: 1000;
+}
+</style>
+<div id="Header">
+常德市交通事故分析
+</div>
+
+<div  id="Main">
+    <div id="TextViewPanel" style="margin-left: -380px;">
+        <div class="portlet light">
+            <div class="portlet-title">精准搜索</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px;">
 
 
+                </div>
 
-<div class="row" style="height: 100%;">
-    <div class="col-md-3 collapse" id="toolBar">
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title">时间范围</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px;">
 
+
+                </div>
+
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title">死亡人数</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px;">
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="portlet light">
+            <div class="portlet-title">受伤人数</div>
+            <div class="portlet-body">
+                <div class="row" style="padding:15px;">
+
+
+                </div>
+
+            </div>
+        </div>
     </div>
-    <div class="col-md-12" id="map">
-        <a id="FullScreen" href="#toolBar" data-toggle="collapse" title="收起左栏"
+    <div class="RightDiv">
+        <div id="FullScreen"   title="收起左栏"
            class="InlineBlock" pgv="86"
-           style="background-image: url(https://3gimg.qq.com/webmap_pc/v/themes/default/img/arrow.png?v=v5.1.132); background-position: -44px 0px;"></a>
+           style="background-image: url(https://3gimg.qq.com/webmap_pc/v/themes/default/img/arrow.png?v=v5.1.132); background-position: -44px 0px;"></div>
         <div id="container"></div>
     </div>
 </div>
