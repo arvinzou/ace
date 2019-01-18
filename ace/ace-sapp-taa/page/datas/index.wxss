@@ -54,6 +54,7 @@
     background: #FFFFFF;
     margin-bottom: 20rpx;
 }
+
 .title-box{
     width: 100%;
     height: 100rpx;
@@ -193,12 +194,12 @@
     float: left;
 }
 .tab-right{
-     width:149rpx;
+    width:149rpx;
     height:60rpx;
     line-height: 60rpx;
     text-align: center;
     float: left;
-    border-radius:0rpx 10rpx 10rpx 0prx;
+    border-radius:0rpx 10rpx 10rpx 0rpx;
 }
 .tab-active{
     background:rgba(67,80,252,1);
@@ -207,4 +208,53 @@
 .tab-default{
     background:rgba(228,230,233,0.1);
     color: #ABAEB9;
+}
+.hidden{
+    display: none;
+}
+.select-road{
+    width: auto;
+    height: 50rpx;
+    border:1px solid rgba(228,230,233,1);
+    border-radius:10rpx;
+    float: right;
+    margin-top: 38rpx;
+    margin-bottom: 38rpx;
+    margin-right: 37rpx;
+}
+.roadPicker{
+    width: auto;
+    height: 50rpx;
+    line-height: 50rpx;
+    float: left;
+    color: #373F53;
+    font-size: 26rpx;
+    padding-left: 10rpx;
+    padding-right: 10rpx;
+}
+.select-road::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.road-box{
+    width:100%;
+    height:100rpx;
+}
+.road-box::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.drop{
+    width: 14rpx;
+    height: 8rpx;
+    float: right;
+    margin-right: 11rpx;
+    margin-bottom: 31rpx;
+}
+.drop image{
+    width: 14rpx;
+    height: 8rpx;
+    padding-bottom: 10rpx;
 }

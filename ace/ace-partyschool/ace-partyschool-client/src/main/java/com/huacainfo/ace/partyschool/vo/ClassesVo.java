@@ -28,6 +28,26 @@ public class ClassesVo extends Classes {
 
     private String tName;
 
+    private String t1Name;
+
+    private String sName;
+
+    public String getT1Name() {
+        return t1Name;
+    }
+
+    public void setT1Name(String t1Name) {
+        this.t1Name = t1Name;
+    }
+
+    public String getsName() {
+        return sName;
+    }
+
+    public void setsName(String sName) {
+        this.sName = sName;
+    }
+
     public String getCrName() {
         return crName;
     }

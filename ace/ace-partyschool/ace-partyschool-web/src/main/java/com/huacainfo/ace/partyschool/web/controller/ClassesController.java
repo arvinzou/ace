@@ -138,4 +138,18 @@ public class ClassesController extends BisBaseController {
         }
         return classesService.findByQ(params);
     }
+
+    /**
+     * 恢复班级状态
+     *
+     * @param id did
+     * @return MessageResponse
+     */
+    @RequestMapping(value = "/recover")
+    @ResponseBody
+    public MessageResponse recover(String id) throws Exception {
+
+        return classesService.recover(id, this.getCurUserProp());
+    }
 }
+

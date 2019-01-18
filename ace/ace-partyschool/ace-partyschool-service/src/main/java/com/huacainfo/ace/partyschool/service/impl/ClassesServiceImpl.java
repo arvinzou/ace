@@ -8,8 +8,8 @@ import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
-import com.huacainfo.ace.partyschool.dao.ClassScheduleDao;
 import com.huacainfo.ace.partyschool.dao.ClassesDao;
 import com.huacainfo.ace.partyschool.dao.StudentDao;
 import com.huacainfo.ace.partyschool.model.Classes;
@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.apache.ibatis.session.SqlSession;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -120,7 +119,7 @@ public class ClassesServiceImpl implements ClassesService {
 
         o.setId(GUIDUtil.getGUID());
         o.setCreateDate(new Date());
-        //o.setStatus("1");
+        o.setStatus("1");
         o.setCreateUserName(userProp.getName());
         o.setCreateUserId(userProp.getUserId());
         this.classesDao.insert(o);
@@ -155,10 +154,11 @@ public class ClassesServiceImpl implements ClassesService {
         if (CommonUtils.isBlank(o.getEndDate())) {
             return new MessageResponse(1, "结束日期不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+        //if (CommonUtils.isBlank(o.getStatus())) {
+        //    return new MessageResponse(1, "状态 不能为空！");
+        //}
 
+        o.setStatus("1");
         o.setCreateDate(new Date());
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -232,10 +232,22 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     public MessageResponse deleteClassesByClassesId(String id, UserProp userProp) throws
             Exception {
-        this.classesDao.deleteByPrimaryKey(id);
+        Classes classes =classesDao.selectVoByPrimaryKey(id);
+        if (null == classes) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        classes.setStatus("2");
+        classes.setClassroomId(classes.getClassroomId());
+        classes.setHeadmaster(classes.getHeadmaster());
+        classes.setTid1(classes.getTid2());
+        classes.setTid2(classes.getTid2());
+        classes.setLastModifyUserId(userProp.getUserId());
+        classes.setLastModifyUserName(userProp.getName());
+        classes.setLastModifyDate(DateUtil.getNowDate());
+        this.classesDao.updateByPrimaryKey(classes);
         this.dataBaseLogService.log("删除班级管理", "班级管理", id, id,
                 "班级管理", userProp);
-        return new MessageResponse(0, "班级管理删除完成！");
+        return new MessageResponse(0, "班级注销完成！");
     }
 
     /**
@@ -252,6 +264,33 @@ public class ClassesServiceImpl implements ClassesService {
         rst.put("rows", list);
 
         return rst;
+    }
+
+    /**
+     * 恢复班级
+     *
+     * @param id          did
+     * @param curUserProp
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse recover(String id, UserProp curUserProp) throws Exception {
+        Classes classes =classesDao.selectVoByPrimaryKey(id);
+        if (null == classes) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        classes.setStatus("1");
+        classes.setClassroomId(classes.getClassroomId());
+        classes.setHeadmaster(classes.getHeadmaster());
+        classes.setTid1(classes.getTid2());
+        classes.setTid2(classes.getTid2());
+        classes.setLastModifyUserId(curUserProp.getUserId());
+        classes.setLastModifyUserName(curUserProp.getName());
+        classes.setLastModifyDate(DateUtil.getNowDate());
+        this.classesDao.updateByPrimaryKey(classes);
+        this.dataBaseLogService.log("恢复班级管理", "班级管理", id, id,
+                "班级管理", curUserProp);
+        return new MessageResponse(0, "班级恢复完成！");
     }
 
     @Override

@@ -1,0 +1,124 @@
+.index{
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+}
+.search{
+   width: auto;
+   height: auto;
+   padding: 8rpx 30rpx;
+}
+.search-input{
+    width: 92%;
+    height: 80rpx;
+    line-height: 80rpx;
+    border-radius: 5rpx;
+    padding-left: 4%;
+    padding-right: 4%;
+    background: rgba(245,246,247,0.8);
+    color: #ABAEB9;
+    font-size: 26rpx;
+}
+.tab{
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    font-size: 32rpx;
+    font-weight: bold;
+    color: #ABAEB9;
+    margin-bottom: 20rpx;
+}
+.tab::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.tab01{
+    width: 50%;
+    height: 80rpx;
+    text-align: center;
+    float: left;
+}
+.tab02{
+    width: 50%;
+    height: 80rpx;
+    text-align: center;
+    float: left;
+}
+.active{
+    color: #373F53;
+    position: relative;
+}
+.active:after{
+    content:'';
+    display: block;
+    width:10%;
+    height:6rpx;
+    background:rgba(67,80,252,1);
+    position: absolute;
+    bottom: 0;
+    left: 45%;
+}
+.hidden{
+    display: none;
+}
+.tab01-content, tab01-content{
+    width: 100%;
+    height: 100%;
+}
+.item{
+    width: 90%;
+    height: 166rpx;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 20rpx;
+    background:rgba(247,248,249,1);
+    border-radius:5rpx;
+    padding-top: 42rpx;
+} 
+.item::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.item-left{
+    width: 66%;
+    height: 166rpx;
+    float: left;
+    padding-left: 4%;
+}
+.item-right{
+    width: 26%;
+    height: 166rpx;
+    float: left;
+    text-align: right;
+    padding-right: 4%;
+}
+.road-section{
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.road-sign{
+    color: #ABAEB9;
+    font-size: 24rpx;
+     text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-top: 12rpx;
+}
+.status{
+    color: #2430E3;
+    font-size: 24rpx;
+}
+.status image{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 10rpx;
+}
+.reset{
+    color: #24C789;
+}

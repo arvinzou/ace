@@ -1,0 +1,63 @@
+<view class='index'>
+    <view class='search'><input class='search-input' placeholder='道路名称/路段名称/路长'></input></view>
+    <view class='tab'>
+        <view class='tab01 {{tab==0 ?"active":""}}' bindtap='changeTab' data-index="0">待采集（10）</view>
+        <view class='tab02 {{tab==1 ?"active":""}}' bindtap='changeTab' data-index="1">已采集（5）</view>
+    </view>
+    <view class='tab01-content {{tab==0?"":"hidden"}}'>
+        <view class='item'>
+            <view class='item-left'>
+                <view class='road-section'>新外滩-天源邻里坊</view>
+                <view class='road-sign'>路段:S205-汉寿沅水大桥</view>
+            </view>
+            <view class='item-right'>
+                <view class='status'>
+                    <image src='../../image/icon-uncollection.png'></image>
+                    <text>待采集</text>
+                </view>
+                <view class='road-sign'>路长:万传明</view>
+            </view>
+        </view>
+        <view class='item'>
+            <view class='item-left'>
+                <view class='road-section'>天源邻里坊-红花园生态农庄羽毛球馆</view>
+                <view class='road-sign'>路段:S205-汉寿沅水大桥</view>
+            </view>
+            <view class='item-right'>
+                <view class='status'>
+                    <image src='../../image/icon-uncollection.png'></image>
+                    <text>待采集</text>
+                </view>
+                <view class='road-sign'>路长:万传明</view>
+            </view>
+        </view>
+    </view>
+    <view class='tab02-content {{tab==1?"":"hidden"}}'>
+         <view class='item'>
+            <view class='item-left'>
+                <view class='road-section'>新外滩-天源邻里坊</view>
+                <view class='road-sign'>路段:S205-汉寿沅水大桥</view>
+            </view>
+            <view class='item-right'>
+                <view class='status'>
+                    <image src='../../image/icon-reset.png'></image>
+                    <text class='reset'>重置</text>
+                </view>
+                <view class='road-sign'>路长:万传明</view>
+            </view>
+        </view>
+        <view class='item'>
+            <view class='item-left'>
+                <view class='road-section'>天源邻里坊-红花园生态农庄羽毛球馆</view>
+                <view class='road-sign'>路段:S205-汉寿沅水大桥</view>
+            </view>
+            <view class='item-right'>
+                <view class='status'>
+                    <image src='../../image/icon-reset.png'></image>
+                    <text class='reset'>重置</text>
+                </view>
+                <view class='road-sign'>路长:万传明</view>
+            </view>
+        </view>
+    </view>
+</view>

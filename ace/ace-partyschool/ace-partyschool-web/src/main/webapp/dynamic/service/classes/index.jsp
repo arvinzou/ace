@@ -119,25 +119,25 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">使用教室</label>
         <div class="col-md-10">
-            \${data.o.classroomId}
+            \${data.o.crName}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">班主任</label>
         <div class="col-md-10">
-            \${data.o.headmaster}
+            \${data.o.tName}
         </div>
     </div>
      <div class="form-group">
          <label class="col-md-2 view-label">跟班老师</label>
          <div class="col-md-10">
-             \${data.o.tid1}
+             \${data.o.t1Name}
          </div>
      </div>
      <div class="form-group">
          <label class="col-md-2 view-label">跟班干部</label>
          <div class="col-md-10">
-             \${data.o.tid2}
+             \${data.o.sName}
          </div>
      </div>
      <div class="form-group">
@@ -195,9 +195,6 @@ pageEncoding="utf-8"%>
         </div>
     </div>
 </div>
-
-<jsp:include page="/dynamic/common/footer.jsp" />
-
 
 <%--easyui--%>
 <link rel="stylesheet" type="text/css"

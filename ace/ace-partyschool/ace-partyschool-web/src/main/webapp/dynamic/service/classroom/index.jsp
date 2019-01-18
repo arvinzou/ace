@@ -150,8 +150,6 @@ pageEncoding="utf-8"%>
     </div>
 </div>
 
-<jsp:include page="/dynamic/common/footer.jsp" />
-
 <%--easyui--%>
 <link rel="stylesheet" type="text/css"
       href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">

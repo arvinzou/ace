@@ -49,7 +49,8 @@
         introduce)
         values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{startDate,jdbcType=TIMESTAMP},
         #{endDate,jdbcType=TIMESTAMP}, #{photoUrl,jdbcType=VARCHAR},
-        #{tid1,jdbcType=TIMESTAMP}, #{tid2,jdbcType=VARCHAR}, #{classroomId,jdbcType=VARCHAR},
+        #{classroomId,jdbcType=VARCHAR},
+        #{tid1,jdbcType=TIMESTAMP}, #{tid2,jdbcType=VARCHAR},
         #{headmaster,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=CHAR},
         #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
         #{lastModifyUserId,jdbcType=VARCHAR}, #{lastModifyUserName,jdbcType=VARCHAR},
@@ -81,6 +82,8 @@
     <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.partyschool.vo.ClassesVo">
         <result column="crName" jdbcType="VARCHAR" property="crName"/>
         <result column="tName" jdbcType="VARCHAR" property="tName"/>
+        <result column="t1Name" jdbcType="VARCHAR" property="t1Name"/>
+        <result column="sName" jdbcType="VARCHAR" property="sName"/>
     </resultMap>
 
     <sql id="Vo_Column_List">
@@ -98,14 +101,21 @@
         <if test="condition.status !=null and condition.status !=&quot;&quot;">
             and c.status =#{condition.status,jdbcType=VARCHAR}
         </if>
+        <if test="condition.classroomId !=null and condition.classroomId !=&quot;&quot;">
+            and c.classroomId =#{condition.classroomId,jdbcType=VARCHAR}
+        </if>
     </sql>
 
     <select id="selectVoByPrimaryKey" parameterType="java.lang.String" resultMap="VoResultMap">
         select
-        c.id, c.name, c.startDate, c.introduce,c.endDate, c.photoUrl, c.fileUrl, t1.name as tid1,
-        s.name as tid2,  cr.name as classroomId, t.name as headmaster,
+        c.id, c.name, c.startDate, c.introduce,c.endDate, c.photoUrl, c.fileUrl, c.tid1,
+        c.tid2, classroomId, c.headmaster,
         c.remark, c.status, c.createUserId,
-        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate
+        c.createUserName, c.createDate, c.lastModifyUserId, c.lastModifyUserName, c.lastModifyDate,
+        cr.name as crName,
+        t.name as tName,
+        t1.name as t1Name,
+        s.name as sName
         from classes c
         LEFT JOIN classroom cr ON cr.id = c.classroomId
         LEFT JOIN teacher t ON t.id = c.headmaster

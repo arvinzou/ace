@@ -69,13 +69,37 @@
         </view>
     </view>
     <view class='box'>
-         <view class='title-box'>
+        <view class='title-box'>
             <view class='title-icon'></view>
             <view class='title'>事故柱形图</view>
         </view>
         <view class='tab'>
-            <view class='tab-left tab-active'>事故次数</view>
-            <view class='tab-right tab-default'>死亡人数</view>
+            <view class='tab-left {{type == 0? "tab-active":"tab-default"}}' bindtap='changeChartType' data-id='0'>事故次数</view>
+            <view class='tab-right {{type == 1? "tab-active":"tab-default"}}' bindtap='changeChartType' data-id='1'>死亡人数</view>
+        </view>
+        <view class='tab01 {{type == 0?"":"hidden"}}'>
+            <canvas canvas-id="accidentColumn" style='width:350px;height:300px;margin:0 auto;'></canvas>
+        </view>
+        <view class='tab02 {{type == 1?"":"hidden"}}'>
+            <canvas canvas-id="diedNumColumn" style='width:350px;height:300px;margin:0 auto;'></canvas>
+        </view>
+    </view>
+
+    <view class='box'>
+        <view class='title-box'>
+            <view class='title-icon'></view>
+            <view class='title'>路长同期对比图</view>
+        </view>
+        <view class='road-box'>
+            <view class='select-road'>
+                <picker bindchange="bindRoadChange" value="{{index}}" range='{{array}}'>
+                    <view class="picker roadPicker">{{array[index]}}</view>
+                    <view class='drop'><image src='../../image/icon-drop-down.png'></image></view>
+                </picker>
+            </view>
+        </view>
+        <view class='trend'>
+            <canvas canvas-id="trendLine" style='width:350px;height:300px;margin:0 auto;'></canvas>
         </view>
     </view>
 </view>
