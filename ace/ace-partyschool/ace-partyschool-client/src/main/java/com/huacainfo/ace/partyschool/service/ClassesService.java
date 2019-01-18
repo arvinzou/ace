@@ -95,6 +95,14 @@ public interface ClassesService {
      */
     Map<String, Object> findByQ(Map<String, Object> params);
 
+    /**
+     * 恢复班级信息
+     *
+     * @param id did
+     * @return MessageResponse
+     */
+    MessageResponse recover(String id, UserProp curUserProp) throws Exception;
+
     ResultResponse getMyClasses(UserProp userProp) throws Exception;
 
     ResultResponse getAllClasses(UserProp userProp) throws Exception;

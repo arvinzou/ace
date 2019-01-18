@@ -13,6 +13,10 @@ public class Classroom  implements Serializable {
 
     private String remark;
 
+    /**
+     * 1.正常
+     * 2.注销
+     */
     private String status;
 
     private String createUserId;
