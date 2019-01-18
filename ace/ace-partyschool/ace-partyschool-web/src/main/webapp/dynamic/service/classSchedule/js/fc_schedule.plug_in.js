@@ -252,7 +252,7 @@ window.onload = function () {
                 if (time == 1) {
                     insertDate.courseIndex = 'am';
                 } else if (time == 2) {
-                    insertDate.courseIndex = 'bm';
+                    insertDate.courseIndex = 'pm';
                 }
                 ;
                 insertDate.classesId = parameter.classesId;
