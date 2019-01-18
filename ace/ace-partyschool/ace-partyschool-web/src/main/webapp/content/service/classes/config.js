@@ -4,6 +4,7 @@ cfg.grid_load_data_url = contextPath + '/classes/findClassesList';
 cfg.grid_add_data_url = contextPath + '/classes/insertClasses';
 cfg.grid_edit_data_url = contextPath + '/classes/updateClasses';
 cfg.grid_delete_data_url = contextPath + '/classes/deleteClassesByClassesId';
+cfg.grid_recover_url = contextPath + '/classes/recover';
 cfg.grid_selector = "#grid-table";
 cfg.pager_selector = "#grid-pager";
 //cfg.caption= "参数";

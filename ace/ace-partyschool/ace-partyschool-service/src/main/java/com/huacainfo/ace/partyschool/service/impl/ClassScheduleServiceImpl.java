@@ -119,25 +119,28 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
 
     @Override
     public ResultResponse MyClassSchedule(ClassScheduleQVo condition, int start, int limit, String orderBy ,UserProp userProp) throws Exception {
-        if(userProp==null){
-            new ResultResponse(ResultCode.FAIL,"没有登陆");
-        }
         if(CommonUtils.isBlank(condition.getCourseDateStr())&&CommonUtils.isBlank(condition.getWeekDate())){
             new ResultResponse(ResultCode.FAIL,"没有传入时间");
         }
-        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
-        List<String> classList=new ArrayList<>();
-        if ("teacher".equals(accountVo.getRegType())) {
-           List< ClassesVo> clist=this.classesDao.findMyClassesList(userProp.getUserId());
-           for(ClassesVo item:clist){
-               classList.add(item.getId());
-           }
-        } else if ("student".equals(accountVo.getRegType())) {
-            classList.add(accountVo.getStudent().getClassId());
-        } else {
-            return new ResultResponse(ResultCode.FAIL,"该身份没有课表");
+        if(condition.getClassList().size()==0){
+            if(userProp==null){
+                new ResultResponse(ResultCode.FAIL,"没有登陆");
+            }
+            AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+            List<String> classList=new ArrayList<>();
+            if ("teacher".equals(accountVo.getRegType())) {
+               List< ClassesVo> clist=this.classesDao.findMyClassesList(userProp.getUserId());
+               for(ClassesVo item:clist){
+                   classList.add(item.getId());
+               }
+            } else if ("student".equals(accountVo.getRegType())) {
+                classList.add(accountVo.getStudent().getClassId());
+            } else {
+                return new ResultResponse(ResultCode.FAIL,"该身份没有课表");
+            }
+            condition.setClassList(classList);
         }
-        condition.setClassList(classList);
+
         SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
@@ -257,6 +260,7 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         if (CommonUtils.isBlank(o.getCourseId())) {
             return new MessageResponse(1, "课程不能为空！");
         }
+        o.setIfTest("1");
         this.classScheduleDao.insert(o);
         this.dataBaseLogService.log("添加课程表管理", "课程表管理", "",
                 o.getId(), o.getId(), userProp);

@@ -1,11 +1,13 @@
 package com.huacainfo.ace.partyschool.service.impl;
 
 
+import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.common.tools.DateUtil;
 import com.huacainfo.ace.common.tools.GUIDUtil;
 import com.huacainfo.ace.partyschool.dao.ClassroomDao;
 import com.huacainfo.ace.partyschool.model.Classroom;
@@ -121,10 +123,11 @@ public class ClassroomServiceImpl implements ClassroomService {
         if (CommonUtils.isBlank(o.getName())) {
             return new MessageResponse(1, "名称不能为空！");
         }
-        if (CommonUtils.isBlank(o.getStatus())) {
-            return new MessageResponse(1, "状态 不能为空！");
-        }
+        //if (CommonUtils.isBlank(o.getStatus())) {
+        //    return new MessageResponse(1, "状态 不能为空！");
+        //}
 
+        o.setStatus("1");
         o.setCreateDate(new Date());
         o.setLastModifyDate(new Date());
         o.setLastModifyUserName(userProp.getName());
@@ -167,10 +170,41 @@ public class ClassroomServiceImpl implements ClassroomService {
     @Override
     public MessageResponse deleteClassroomByClassroomId(String id, UserProp userProp) throws
             Exception {
-        this.classroomDao.deleteByPrimaryKey(id);
+        Classroom classroom =classroomDao.selectVoByPrimaryKey(id);
+        if (null == classroom) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        classroom.setStatus("2");
+        classroom.setLastModifyUserId(userProp.getUserId());
+        classroom.setLastModifyUserName(userProp.getName());
+        classroom.setLastModifyDate(DateUtil.getNowDate());
+        this.classroomDao.updateByPrimaryKey(classroom);
         this.dataBaseLogService.log("删除教室管理", "教室管理", id, id,
                 "教室管理", userProp);
-        return new MessageResponse(0, "教室管理删除完成！");
+        return new MessageResponse(0, "教室注销完成！");
+    }
+
+        /**
+     * 恢复班级
+     *
+     * @param id          did
+     * @param curUserProp
+     * @return MessageResponse
+     */
+    @Override
+    public MessageResponse recover(String id, UserProp curUserProp) throws Exception {
+        Classroom classroom =classroomDao.selectVoByPrimaryKey(id);
+        if (null == classroom) {
+            return new MessageResponse(ResultCode.FAIL, "记录数据丢失！");
+        }
+        classroom.setStatus("1");
+        classroom.setLastModifyUserId(curUserProp.getUserId());
+        classroom.setLastModifyUserName(curUserProp.getName());
+        classroom.setLastModifyDate(DateUtil.getNowDate());
+        this.classroomDao.updateByPrimaryKey(classroom);
+        this.dataBaseLogService.log("恢复教室管理", "教室管理", id, id,
+                "教室管理", curUserProp);
+        return new MessageResponse(0, "教室恢复完成！");
     }
 
 }

@@ -8,9 +8,10 @@
         <result column="courseIndex" jdbcType="VARCHAR" property="courseIndex"/>
         <result column="teacherId" jdbcType="VARCHAR" property="teacherId"/>
         <result column="courseId" jdbcType="VARCHAR" property="courseId"/>
+        <result column="ifTest" jdbcType="VARCHAR" property="ifTest"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, classesId, courseDate, courseIndex, teacherId, courseId
+    id, classesId, courseDate, courseIndex, teacherId, courseId,ifTest
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
@@ -24,10 +25,10 @@
   </delete>
     <insert id="insert" parameterType="com.huacainfo.ace.partyschool.model.ClassSchedule">
     insert into class_schedule (id, classesId, courseDate, 
-      courseIndex, teacherId, courseId
+      courseIndex, teacherId, courseId,ifTest
       )
     values (#{id,jdbcType=VARCHAR}, #{classesId,jdbcType=VARCHAR}, #{courseDate,jdbcType=TIMESTAMP}, 
-      #{courseIndex,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR}
+      #{courseIndex,jdbcType=VARCHAR}, #{teacherId,jdbcType=VARCHAR}, #{courseId,jdbcType=VARCHAR},#{ifTest,jdbcType=VARCHAR}
       )
   </insert>
     <insert id="insertSelective" parameterType="com.huacainfo.ace.partyschool.model.ClassSchedule">
@@ -51,6 +52,9 @@
             <if test="courseId != null">
                 courseId,
             </if>
+            <if test="ifTest != null">
+                ifTest,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -70,6 +74,9 @@
             </if>
             <if test="courseId != null">
                 #{courseId,jdbcType=VARCHAR},
+            </if>
+            <if test="ifTest != null">
+                #{ifTest,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -91,6 +98,9 @@
             <if test="courseId != null">
                 courseId = #{courseId,jdbcType=VARCHAR},
             </if>
+            <if test="ifTest != null">
+                ifTest = #{ifTest,jdbcType=VARCHAR},
+            </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}
     </update>
@@ -101,6 +111,7 @@
       courseIndex = #{courseIndex,jdbcType=VARCHAR},
       teacherId = #{teacherId,jdbcType=VARCHAR},
       courseId = #{courseId,jdbcType=VARCHAR}
+      ifTest = #{ifTest,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
@@ -156,7 +167,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
 	FROM partyschool.evaluation_rst er
 	WHERE er.classScheduleId=cs.id)/userNum
 ) AS averageScore,
-    cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,
+    cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
     c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
     t.id as tId ,t.name as tName,
     t.id as claId ,t.name as claName

@@ -20,6 +20,16 @@ public class ClassSchedule  implements Serializable {
 
     private String courseId;
 
+    private String ifTest;
+
+    public String getIfTest() {
+        return ifTest;
+    }
+
+    public void setIfTest(String ifTest) {
+        this.ifTest = ifTest;
+    }
+
     public String getId() {
         return id;
     }

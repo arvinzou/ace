@@ -128,4 +128,17 @@ public class ClassroomController extends BisBaseController {
         return this.classroomService.deleteClassroomByClassroomId(id, this.getCurUserProp());
     }
 
+    /**
+     * 恢复班级状态
+     *
+     * @param id did
+     * @return MessageResponse
+     */
+    @RequestMapping(value = "/recover")
+    @ResponseBody
+    public MessageResponse recover(String id) throws Exception {
+
+        return classroomService.recover(id, this.getCurUserProp());
+    }
+
 }

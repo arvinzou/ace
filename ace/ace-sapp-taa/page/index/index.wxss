@@ -1,0 +1,218 @@
+.index{
+    width: 100%;
+    height: 100%;
+}
+.tab{
+    width: 100%;
+    height: 80rpx;
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.header{
+    width: 15%;
+    height: 100%;
+    float: left;
+}
+.tab01{
+    width: 35%;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    float: left;
+}
+
+.tab02{
+    width: 35%;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    float: left;
+}
+.column{
+    width: 15%;
+    height: 100%;
+    float: left;
+    text-align: right;
+}
+.header image{
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    margin-left: 17rpx;
+    margin-bottom: 8rpx;
+}
+.column image{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 25rpx;
+}
+.hidden{
+    display: none;
+}
+.tab02-content{
+    width: 100%;
+    height: 100%;
+}
+.tab01-content{
+    width: 100%;
+    height: 100%;
+}
+.form{
+    width: 90%;
+    height: 100rpx;
+    background: #FFFFFF;
+    position: fixed;
+    top: 100rpx;
+    left: 5%;
+    border-radius: 10rpx;
+    z-index: 500;
+}
+.form::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.form-left{
+    width: 76%;
+    height: 100rpx;
+    line-height: 100rpx;
+    float: left;
+    color: #373F53;
+    font-size: 34rpx;
+    padding-left: 4%;
+    font-weight: bold;
+}
+.form-right{
+    width: 16%;
+    height: 100rpx;
+    float: left;
+    text-align: right;
+    padding-right: 4%;
+    color: #373F53;
+    font-size: 34rpx;
+    font-weight: 500;
+}
+.stext{
+    width:65rpx;
+    height:100%;
+    float:left;
+    line-height: 100rpx;
+}
+.form-right cover-image{
+    width: 11rpx;
+    height: 20rpx;
+    float: left;
+    margin-left: 27rpx;
+    margin-top: 40rpx;
+}
+.active{
+    position: relative;
+    color:rgba(36,48,227,1);
+}
+
+.active:after{
+    content:'';
+    display: block;
+    width:40rpx;
+    height:6rpx;
+    background:rgba(67,80,252,1);
+    position: absolute;
+    bottom: 0;
+    left: 110rpx
+}
+.addForm{
+    width: 92%;
+    height: auto;
+    background: #FFFFFF;
+    position: fixed;
+    bottom: 0;
+    padding-top: 11rpx;
+    padding-bottom: 25rpx;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+.close-open{
+    width: 30rpx;
+    height: 16rpx;
+    margin: 0 auto;
+}
+.locate-name{
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    color: #373F53;
+    font-size: 36rpx;
+    font-weight: bold;
+}
+.locate-road{
+    padding-bottom: 36rpx;
+    color: #ABAEB9;
+    font-size: 28rpx;
+}
+
+.row{
+    width: 100%;
+    height: 110rpx;
+    line-height: 110rpx;
+}
+.row-left{
+    width: 40%;
+    height: 110rpx;
+    line-height: 110rpx;
+    float: left;
+    color: #373F53;
+    font-size: 32rpx;
+}
+.row-right{
+    width: 60%;
+    height: 110rpx;
+    float: left;
+    text-align: right;
+}
+.time{
+    line-height: 110rpx;
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.row::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.sendbtn{
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 50rpx;
+    color: #FFFFFF;
+    font-size: 40rpx;
+    font-weight: bold;
+}
+.default-btn{
+    background:rgba(215,217,223,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(215, 223, 217, 0.35); 
+}
+.active-btn{
+    background:rgba(67,80,252,1);
+    box-shadow:0rpx 0rpx 10rpx 0rpx rgba(67, 252, 80, 0.35);
+}
+.form-default{
+    color: #ABAEB9;
+    font-size: 32rpx;
+}
+.form-input{
+    width: 85%;
+    height: 110rpx;
+    line-height: 110rpx;
+    float: left;
+    text-align: right;
+}
+.select-arrow{
+    width: 11rpx;
+    height: 20rpx;
+    float: right;
+    margin-top: 45rpx;
+}

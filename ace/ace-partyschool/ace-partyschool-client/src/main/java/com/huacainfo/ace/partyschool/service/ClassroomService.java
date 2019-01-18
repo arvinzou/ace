@@ -82,4 +82,13 @@ public interface ClassroomService {
      */
     MessageResponse deleteClassroomByClassroomId(String id, UserProp userProp) throws Exception;
 
+    /**
+     * 恢复教室
+     *
+     * @param id          did
+     * @param curUserProp
+     * @return MessageResponse
+     */
+    MessageResponse recover(String id, UserProp curUserProp) throws Exception;
+
 }
