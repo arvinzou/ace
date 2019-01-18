@@ -1,0 +1,101 @@
+.index{
+    width: 100%;
+    height: 100%;
+}
+.tab{
+    width: 100%;
+    height: 80rpx;
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+}
+.header{
+    width: 15%;
+    height: 100%;
+    float: left;
+}
+.tab01{
+    width: 35%;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    float: left;
+}
+
+.tab02{
+    width: 35%;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    float: left;
+}
+.column{
+    width: 15%;
+    height: 100%;
+    float: left;
+    text-align: right;
+}
+.header image{
+    width: 64rpx;
+    height: 64rpx;
+    border-radius: 50%;
+    margin-left: 17rpx;
+    margin-bottom: 8rpx;
+}
+.column image{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 30rpx;
+    margin-top: 25rpx;
+}
+.hidden{
+    display: none;
+}
+.tab02-content{
+    width: 100%;
+    height: 100%;
+}
+.tab01-content{
+    width: 100%;
+    height: 100%;
+}
+.form{
+    width: 90%;
+    height: 100rpx;
+    background: #FFFFFF;
+    position: fixed;
+    top: 100rpx;
+    left: 5%;
+    border-radius: 10rpx;
+}
+.form::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.form-left{
+    width: 56%;
+    height: 100rpx;
+    line-height: 100rpx;
+    float: left;
+    color: #373F53;
+    font-size: 34rpx;
+    padding-left: 4%;
+    font-weight: bold;
+}
+.form-right{
+    width: 36%;
+    height: 100rpx;
+    float: left;
+    line-height: 100rpx;
+    text-align: right;
+    padding-right: 4%;
+    color: #373F53;
+    font-size: 34rpx;
+    font-weight: 500;
+}
+.form-right image{
+    width: 11rpx;
+    height: 20rpx;
+    margin-left: 27rpx;
+}
