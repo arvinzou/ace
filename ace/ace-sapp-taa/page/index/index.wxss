@@ -67,6 +67,7 @@
     top: 100rpx;
     left: 5%;
     border-radius: 10rpx;
+    z-index: 500;
 }
 .form::after{
     content: '';
@@ -74,7 +75,7 @@
     display: block;
 }
 .form-left{
-    width: 56%;
+    width: 76%;
     height: 100rpx;
     line-height: 100rpx;
     float: left;
@@ -84,18 +85,40 @@
     font-weight: bold;
 }
 .form-right{
-    width: 36%;
+    width: 16%;
     height: 100rpx;
     float: left;
-    line-height: 100rpx;
     text-align: right;
     padding-right: 4%;
     color: #373F53;
     font-size: 34rpx;
     font-weight: 500;
 }
-.form-right image{
+.stext{
+    width:65rpx;
+    height:100%;
+    float:left;
+    line-height: 100rpx;
+}
+.form-right cover-image{
     width: 11rpx;
     height: 20rpx;
+    float: left;
     margin-left: 27rpx;
+    margin-top: 40rpx;
+}
+.active{
+    position: relative;
+    color:rgba(36,48,227,1);
+}
+
+.active:after{
+    content:'';
+    display: block;
+    width:40rpx;
+    height:6rpx;
+    background:rgba(67,80,252,1);
+    position: absolute;
+    bottom: 0;
+    left: 110rpx
 }

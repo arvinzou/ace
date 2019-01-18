@@ -1,19 +1,19 @@
 <view class='index'>
     <view class='tab'>
         <view class='header'><image src='../../image/default_header.png'></image></view>
-        <view class='tab01'>事故快报</view>
-        <view class='tab02'>路段采集</view>
+        <view class='tab01 {{tab == 0? "active": ""}}' bindtap='changeTab' data-index="0">事故快报</view>
+        <view class='tab02 {{tab == 1? "active": ""}}' bindtap='changeTab' data-index="1">路段采集</view>
         <view class='column'><image src='../../image/icon-column.png'></image></view>
     </view>
     <view class='tab01-content {{tab == 0? "":"hidden"}}'></view>
     <view class='tab02-content {{tab == 1? "":"hidden"}}'>
-       <map id="myMap" show-location longitude='{{longitude}}' latitude='{{latitude}}' markers="{{markers}}" polyline="{{polyline}}" style='width:100%; height:100%'/>
-    </view>
-    <view class='form'>
-        <view class='form-left'>请选择采集路段</view>
-        <view class='form-right'>
-            <text>选择</text>
-            <image src='../../image/icon_rediret.png'></image>
-        </view>
+       <map id="myMap" show-location longitude='{{longitude}}' style='z-index:-1;' latitude='{{latitude}}' markers="{{markers}}" polyline="{{polyline}}" style='width:100%; height:100%'/>
+       <cover-view class='form'>
+            <cover-view class='form-left'>请选择采集路段</cover-view>
+            <cover-view class='form-right' bindtap='selectRoad'>
+                <cover-view class='stext'>选择</cover-view>
+                <cover-image src='../../image/icon_rediret.png'></cover-image>
+            </cover-view>
+        </cover-view>
     </view>
 </view>

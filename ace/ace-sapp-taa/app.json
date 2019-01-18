@@ -5,7 +5,8 @@
         "page/roadlist/index",
         "page/info/index",
         "page/regist/index",
-        "page/datas/index"
+        "page/datas/index",
+        "page/collection/index"
     ],
     "permission": {
         "scope.userLocation": {

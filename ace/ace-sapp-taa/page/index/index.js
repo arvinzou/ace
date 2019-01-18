@@ -47,6 +47,17 @@ Page({
   onLoad: function (options) {
     
   },
+  selectRoad: function(){
+      wx.navigateTo({
+          url: '../collection/index',
+      });
+  },
+  changeTab: function(e){
+     var that = this;
+     that.setData({
+         tab: e.target.dataset.index
+     });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
