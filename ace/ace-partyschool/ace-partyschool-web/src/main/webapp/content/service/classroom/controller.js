@@ -119,17 +119,30 @@ function edit(rowid) {
 
 var show = false;
 function del(rowid) {
-    console.log(rowid);
-    jQuery(cfg.grid_selector).jqGrid('delGridRow', rowid, {
-        beforeShowForm: function (e) {
-            var form = $(e[0]);
-            if (!show) {
-                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+
+    if (confirm("确认注销么？")) {
+        var jsons = {id: rowid};
+        startLoad();
+        $.ajax({
+            url: cfg.grid_delete_data_url,
+            type: "post",
+            async: false,
+            data: {
+                jsons: JSON.stringify(jsons),
+            },
+            success: function (result) {
+                stopLoad();
+                alert(result.errorMessage);
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
             }
-            show = true;
-        }
-    });
+        });
+    }
 }
+
 
 function setParams(key, value) {
     params[key] = value;
@@ -145,5 +158,28 @@ function parseStatus(val) {
             return "注销";
         case '1':
             return "正常";
+    }
+}
+
+function recover(rowid) {
+    if (confirm("确认恢复么？")) {
+        startLoad();
+        $.ajax({
+            url: cfg.grid_recover_url,
+            type: "post",
+            async: false,
+            data: {
+                id: rowid
+            },
+            success: function (result) {
+                stopLoad();
+                alert(result.errorMessage);
+                jQuery(cfg.grid_selector).jqGrid('setGridParam', {}).trigger("reloadGrid");
+            },
+            error: function () {
+                stopLoad();
+                alert("对不起出错了！");
+            }
+        });
     }
 }
