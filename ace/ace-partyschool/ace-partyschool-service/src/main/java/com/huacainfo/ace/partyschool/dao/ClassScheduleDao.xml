@@ -219,7 +219,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
                 ORDER BY ${orderBy}
             </when>
             <otherwise>
-                ORDER BY cs.courseDate desc
+                ORDER BY cs.courseDate ASC ,cs.courseIndex ASC
             </otherwise>
         </choose>
         limit #{start,jdbcType=DECIMAL}, #{limit,jdbcType=DECIMAL}

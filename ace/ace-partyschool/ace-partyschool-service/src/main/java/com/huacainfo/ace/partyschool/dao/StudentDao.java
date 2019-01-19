@@ -28,7 +28,7 @@ public interface StudentDao {
 
     int findCount(@Param("condition") StudentQVo condition);
 
-    int findStudentCount();
+    int findStudentCount(String classId);
 
     int isExist(Student record);
 

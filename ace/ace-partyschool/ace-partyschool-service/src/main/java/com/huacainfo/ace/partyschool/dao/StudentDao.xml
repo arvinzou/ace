@@ -150,6 +150,7 @@
     <select id="findStudentCount" resultType="int">
         SELECT COUNT(*)
         from student
+        WHERE classId = #{classId,jdbcType=VARCHAR}
     </select>
 
     <select id="isExist" resultType="int" parameterType="com.huacainfo.ace.partyschool.model.Student">

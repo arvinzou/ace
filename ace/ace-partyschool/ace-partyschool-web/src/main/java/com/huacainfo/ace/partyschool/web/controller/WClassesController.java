@@ -51,12 +51,12 @@ public class WClassesController extends BisBaseController {
      */
     @RequestMapping(value = "/getClassesInfo")
     @ResponseBody
-    public ResultResponse selectClassesByPrimaryKey() throws Exception {
+    public ResultResponse selectClassesByPrimaryKey(String classId) throws Exception {
         UserProp userProp = this.getCurUserProp();
         if (userProp == null) {
             return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
-        return this.classesService.selectClassesByPrimaryKeyVo(userProp);
+        return this.classesService.selectClassesByPrimaryKeyVo(userProp,classId);
     }
 
     @RequestMapping(value = "/findClassList")
