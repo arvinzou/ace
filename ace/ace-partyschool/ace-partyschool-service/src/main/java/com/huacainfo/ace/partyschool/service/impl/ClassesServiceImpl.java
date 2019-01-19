@@ -200,6 +200,9 @@ public class ClassesServiceImpl implements ClassesService {
     @Override
     public ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp,String classId) throws Exception {
         if(CommonUtils.isBlank(classId)) {
+            if (userProp == null) {
+                return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+            }
             AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
             classId = accountVo.getStudent().getClassId();
         }

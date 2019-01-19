@@ -5,17 +5,69 @@ var weekStr=['周日','周一','周二','周三','周四','周五','周六']
 
 $(function () {
     dateData=new Date();
+    initClassRoom();
+    initSwriper();
     clock_12h();
-    initData();
-    initpdf();
+    // initpdf();
     initClock();
+    initClassRoom();
     $('.info_box').on('click','.active_course',viewCourse);
     $('.info_box').on('click','.active_classInfo',viewClassInfo);
     $('.weeekClass').on('click','.nextWeek',nextWeek);
     $('.weeekClass').on('click','.prevWeek',prevWeek);
     $('.modal').on('click','.hideModal',hideModal);
     $('.classInfo').on('click','.active_photos',viewPhotos);
+    $('.content').on('click','.active_changeRoom',changeRoom);
+    $('.classRoom').on('click','.roomItem',chooesRoom);
 })
+
+function initSwriper() {
+    var swiper = new Swiper('.swiper-container', {
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+}
+
+
+
+function initClassRoom(){
+    classId=localStorage.getItem("classId");
+    if(!classId){
+        changeRoom();
+        return;
+    }
+    initData();
+}
+
+function chooesRoom() {
+    classId=$(this).data('id');
+    if(!classId){
+        alert("刷新重试");
+        return;
+    }
+    localStorage.setItem("classId",classId);
+    initData();
+    $('.modal5').hide();
+}
+
+
+
+function changeRoom(){
+    var url = contextPath + "/www/classes/findClassList";
+    var data = {
+        status:1,
+        start:0,
+        limit:50
+    }
+    $.getJSON(url, data, function (rst) {
+        if(rst.status==0){
+            renderPage('roomTemp',rst.rows,'tpl-roomTemp');
+            $('.modal5').show();
+        }
+    });
+}
 
 
 function viewPhotos() {
@@ -138,7 +190,7 @@ var dayCourse='     <div class="dayClass">\n' +
     '         <td class=" #dateString#amTeacher style7">- -</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
-    '         <td class="style6">上午</td>\n' +
+    '         <td class="style6">下午</td>\n' +
     '         <td class=" #dateString#pmCourse">自习</td>\n' +
     '         <td class="style6">主讲</td>\n' +
     '         <td class=" #dateString#pmTeacher  style7">- -</td>\n' +
@@ -161,7 +213,7 @@ var dayCourseE='     <div class="dayClass">\n' +
     '         <td class=" #dateString#amTeacher style7">- -</td>\n' +
     '        </tr>\n' +
     '        <tr>\n' +
-    '         <td class="style6">上午</td>\n' +
+    '         <td class="style6">下午</td>\n' +
     '         <td class=" #dateString#pmCourse">休息</td>\n' +
     '         <td class="style6">主讲</td>\n' +
     '         <td class=" #dateString#pmTeacher  style7">- -</td>\n' +
@@ -225,6 +277,7 @@ function getCourseList() {
     $.getJSON(url, data, function (rst) {
         if(rst.status==0){
             var datas=rst.data;
+            revertClass();
             for(var i=0;i<datas.length;i++){
                 var icon=datas[i].courseIndex;
                 $('.'+icon+'Class').text(datas[i].course.name);
@@ -232,6 +285,14 @@ function getCourseList() {
             }
         }
     });
+}
+
+
+function revertClass() {
+    $('.amClass').text('自习');
+    $('.amClassTeacher').text("- -");
+    $('.pmClass').text('自习');
+    $('.pmClassTeacher').text("- -");
 }
 
 

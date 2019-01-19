@@ -7,13 +7,14 @@
     <title>班牌</title>
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
 <div class="content">
     <div class="head">
-        <div class="room_name">一教室</div>
+        <div class="room_name active_changeRoom">一教室</div>
         <img src="img/logo.png"/>
         <div class="dateTime" id="clock">
             <p>1921年7月1日 </p>
@@ -26,7 +27,7 @@
                 <tr>
                     <th class="style1">班次</th>
                     <th class="style2 class_name">第78期县处级干部进修班</th>
-                    <th class="style1">应道人数</th>
+                    <th class="style1">应到人数</th>
                     <th class="style2 class_people">48人</th>
                     <th class="style4"><span class="active_classInfo">详情</span></th>
                 </tr>
@@ -50,8 +51,15 @@
 								通知公告
 							</span>
                 </div>
-                <div class="fileMessage" id="fileMessage">
-
+                <div class="fileMessage swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">Slide 1</div>
+                        <div class="swiper-slide">Slide 2</div>
+                        <div class="swiper-slide">Slide 3</div>
+                    </div>
+                    <!-- 如果需要导航按钮 -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
         </div>
@@ -106,6 +114,24 @@
         </div>
     </div>
 </div>
+
+
+<div class="hide modal5 modal">
+    <div class="modal_content classRoom">
+        <div class=" modal_head">
+            <span>选择班级</span> <span class="hideModal">×</span>
+        </div>
+        <div class="modal_body">
+            <div class="classRoomList" id="roomTemp">
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 
 </body>
 
@@ -168,8 +194,13 @@
     {@/each}
 </script>
 
+<script id="tpl-roomTemp" type="text/template">
+    {@each data as item}
+    <div class="roomItem" data-id="\${item.id}">\${item.name}</div>
+    {@/each}
+</script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>
