@@ -95,8 +95,8 @@ function initEvents() {
             enter: function () {
             },
             query: function (q) {
-                $('#combogrid-cls-list').combogrid("grid").datagrid("reload", {'q': q});
-                $('#combogrid-cls-list').combogrid("setValue", q);
+                $('#cls-condition').combogrid("grid").datagrid("reload", {'q': q});
+                $('#cls-condition').combogrid("setValue", q);
             }
         },
         onSelect: function (index, row) {

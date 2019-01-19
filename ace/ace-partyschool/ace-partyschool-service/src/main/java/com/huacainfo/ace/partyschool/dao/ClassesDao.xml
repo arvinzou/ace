@@ -92,6 +92,8 @@
     </sql>
     <sql id="From_Statement">
         FROM classes c
+        LEFT JOIN classroom cr ON cr.id = c.classroomId
+        LEFT JOIN teacher t ON t.id = c.headmaster
     </sql>
     <sql id="Where_Condition">
         where 1 = 1
@@ -103,6 +105,9 @@
         </if>
         <if test="condition.classroomId !=null and condition.classroomId !=&quot;&quot;">
             and c.classroomId =#{condition.classroomId,jdbcType=VARCHAR}
+        </if>
+        <if test="condition.crName !=null and condition.crName !=&quot;&quot;">
+            and cr.name like concat(#{condition.crName,jdbcType=VARCHAR},'%')
         </if>
     </sql>
 
@@ -197,8 +202,6 @@
         cr.name as crName,
         t.name as tName
         <include refid="From_Statement"/>
-        LEFT JOIN classroom cr ON cr.id = c.classroomId
-        LEFT JOIN teacher t ON t.id = c.headmaster
         <include refid="Where_Condition"/>
         <choose>
             <when test="orderBy!=null and orderBy!=&quot;&quot;">
@@ -258,6 +261,7 @@
         FROM classes t
         left join teacher ta on t.headmaster = ta.id
         WHERE 1=1
+        and t.status = '1'
         <if test="params.q !=null and params.q !=&quot;&quot;">
             AND ( t.id = #{params.q,jdbcType=VARCHAR}
             or t.`name` LIKE concat('%',#{params.q,jdbcType=VARCHAR},'%')
