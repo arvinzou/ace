@@ -1,6 +1,7 @@
 package com.huacainfo.ace.taa.dao;
 
 import com.huacainfo.ace.taa.model.RoadGps;
+import com.huacainfo.ace.taa.vo.RoadGpsVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface RoadGpsDao {
 
     int deleteByPrimaryKeys(@Param("ids") String[] ids);
 
+    List<RoadGpsVo> getAroundList(Map<String, Object> p);
 }

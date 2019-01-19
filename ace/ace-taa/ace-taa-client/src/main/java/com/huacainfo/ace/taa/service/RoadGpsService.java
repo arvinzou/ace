@@ -3,6 +3,7 @@ package com.huacainfo.ace.taa.service;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.result.MessageResponse;
+import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.taa.model.RoadGps;
 
 import java.util.Map;
@@ -55,4 +56,15 @@ public interface RoadGpsService {
      * @version: 2019-01-08
      */
     public MessageResponse deleteRoadGpsByRoadGpsIds(String[] id, UserProp userProp) throws Exception;
+
+    /**
+     * 获取最近路段信息
+     *
+     * @param lat    纬度坐标
+     * @param lon    经度坐标
+     * @param radius 扫描半径距离，单位：米
+     * @return ResultResponse
+     * @throws Exception
+     */
+    ResultResponse getCloseRoadSection(double lat, double lon, int radius);
 }
