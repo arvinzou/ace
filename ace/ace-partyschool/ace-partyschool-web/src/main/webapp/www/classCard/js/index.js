@@ -1,12 +1,176 @@
 var classId = '1';
 var nowDate;
+var dateData;
+var weekStr=['周日','周一','周二','周三','周四','周五','周六']
 
 $(function () {
+    dateData=new Date();
     clock_12h();
     initData();
     initpdf();
     initClock();
+    $('.info_box').on('click','.active_course',viewCourse);
+    $('.info_box').on('click','.active_classInfo',viewClassInfo);
+    $('.weeekClass').on('click','.nextWeek',nextWeek);
+    $('.weeekClass').on('click','.prevWeek',prevWeek);
+    $('.modal').on('click','.hideModal',hideModal);
+    $('.classInfo').on('click','.active_photos',viewPhotos);
 })
+
+
+function viewPhotos() {
+    var url = contextPath + "/www/files/findFilesListVo";
+    var data = {
+        category:2,
+        classesId: classId,
+        start:0,
+        limit:50
+    }
+    $.getJSON(url, data, function (rst) {
+        if(rst.status==0){
+            renderPage('imgTemp',rst.rows,'tpl-imgTemp');
+            $('.modal3').show();
+        }
+    });
+}
+
+
+
+function viewClassInfo() {
+    getClassinfo();
+    $('.modal1').show();
+}
+
+
+
+function hideModal() {
+    $(this).closest('.modal').hide();
+}
+
+function nextWeek() {
+    dateData=addDate(dateData,7);
+    viewCourse();
+}
+
+function prevWeek() {
+    dateData=addDate(dateData,-7);
+    viewCourse();
+}
+
+
+function viewCourse(){
+    var url = contextPath + "/www/classSchedule/findMyClassSchedule";
+    var data = {
+        weekDate: getDateTimeStr(dateData),
+        classList: classId
+    }
+    $.getJSON(url, data, function (rst) {
+        if(rst.status==0){
+            $('#weeekCourseList').empty();
+            viewCourseTable();
+            var datas=rst.data;
+            var len=datas.length;
+            for(var i=0;i<len;i++){
+                var item=datas[i];
+                var f=item.courseDate.substring(6,10);
+                $('.'+f+item.courseIndex+'Teacher').text(item.teacher.name);
+                $('.'+f+item.courseIndex+'Course').text(item.course.name);
+            }
+        }
+    });
+    $('.modal2').show();
+}
+
+
+function viewCourseTable() {
+    var fristDayDate=GetMonday(dateData);
+    for(var i=0;i<7;i++){
+        var dayDateString=getDateTimeStr(fristDayDate);
+        var dayStyle1=dayDateString.substring(6,10);
+        var dayStyle2=dayStyle1.replace('-','.');
+        var weekString=weekStr[fristDayDate.getDay()];
+        var temp=dayCourse;
+        if(i>4){
+            temp=dayCourseE
+        }
+        temp=temp.replace(' #dateString#',dayStyle2);
+        temp=temp.replace('[weekString]',weekString);
+        temp = temp.replace( /#dateString#/g , dayStyle1 );
+        $('#weeekCourseList').append($(temp));
+        fristDayDate=addDate(fristDayDate,1);
+    }
+}
+
+
+function getDateTimeStr(dateData) {
+    var year = dateData.getFullYear();
+    var month = dateData.getMonth() + 1;
+    var date = dateData.getDate();
+    month=month>9?month:'0'+month;
+    date=date>9?date:'0'+date;
+    return year + '-' + month + '-' + date + ' 00:00:00';
+}
+
+
+
+function GetMonday(dd) {
+    var week = dd.getDay(); //获取时间的星期数
+    var minus = week ? week - 1 : 6;
+    dd.setDate(dd.getDate() - minus); //获取minus天前的日期
+    var y = dd.getFullYear();
+    var m = dd.getMonth(); //获取月份
+    var d = dd.getDate();
+    return new Date(y,m,d);
+}
+
+
+var dayCourse='     <div class="dayClass">\n' +
+    '      <div class="left">\n' +
+    '       <p> #dateString#</p>\n' +
+    '       <p>[weekString]</p>\n' +
+    '      </div>\n' +
+    '      <div class="right">\n' +
+    '       <table>\n' +
+    '        <tr>\n' +
+    '         <td class="style6">上午</td>\n' +
+    '         <td class=" #dateString#amCourse">自习</td>\n' +
+    '         <td class="style6">主讲</td>\n' +
+    '         <td class=" #dateString#amTeacher style7">- -</td>\n' +
+    '        </tr>\n' +
+    '        <tr>\n' +
+    '         <td class="style6">上午</td>\n' +
+    '         <td class=" #dateString#pmCourse">自习</td>\n' +
+    '         <td class="style6">主讲</td>\n' +
+    '         <td class=" #dateString#pmTeacher  style7">- -</td>\n' +
+    '        </tr>\n' +
+    '       </table>\n' +
+    '      </div>\n' +
+    '     </div>';
+
+var dayCourseE='     <div class="dayClass">\n' +
+    '      <div class="left">\n' +
+    '       <p> #dateString#</p>\n' +
+    '       <p>[weekString]</p>\n' +
+    '      </div>\n' +
+    '      <div class="right">\n' +
+    '       <table>\n' +
+    '        <tr>\n' +
+    '         <td class="style6">上午</td>\n' +
+    '         <td class=" #dateString#amCourse">休息</td>\n' +
+    '         <td class="style6">主讲</td>\n' +
+    '         <td class=" #dateString#amTeacher style7">- -</td>\n' +
+    '        </tr>\n' +
+    '        <tr>\n' +
+    '         <td class="style6">上午</td>\n' +
+    '         <td class=" #dateString#pmCourse">休息</td>\n' +
+    '         <td class="style6">主讲</td>\n' +
+    '         <td class=" #dateString#pmTeacher  style7">- -</td>\n' +
+    '        </tr>\n' +
+    '       </table>\n' +
+    '      </div>\n' +
+    '     </div>';
+
+
 
 /*初始化信息*/
 function initData() {
@@ -15,8 +179,42 @@ function initData() {
 }
 
 function getClassinfo() {
-
+    var url = contextPath+ "/www/classes/getClassesInfo";
+    var data = {
+        classId: classId
+    }
+    $.getJSON(url, data, function (rst) {
+        if(rst.status==0){
+            var datas=rst.data;
+            $('.class_name').text(datas.list.name);
+            $('.class_people').text(datas.count);
+            $('.room_name').text(datas.list.classroom.name);
+            renderPage('classTemp',datas,'tpl-classTemp');
+        }
+    });
 }
+
+
+function renderPage(IDom, data, tempId) {
+    var tpl = document.getElementById(tempId).innerHTML;
+    var html = juicer(tpl, {
+        data: data,
+    });
+    $("#" + IDom).html(html);
+}
+
+
+
+function addDate(dateData,day){
+    dateData.setDate(dateData.getDate()+day);
+    var m=dateData.getMonth();
+    return new Date(dateData.getFullYear(),m,dateData.getDate());
+}
+
+
+
+
+
 
 function getCourseList() {
     var url = contextPath + "/www/classSchedule/findMyClassSchedule";
@@ -188,7 +386,7 @@ var PDFObject = function (y) {
 };
 
 function clock_12h() {
-    var today = new Date(); //获得当前时间
+    var today = new Date();//获得当前时间
     //获得年、月、日，Date()函数中的月份是从0－11计算
     var year = today.getFullYear();
     var month = today.getMonth() + 1;

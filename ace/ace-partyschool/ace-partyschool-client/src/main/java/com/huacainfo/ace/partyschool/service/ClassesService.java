@@ -72,7 +72,7 @@ public interface ClassesService {
      */
     SingleResult<ClassesVo> selectClassesByPrimaryKey(String id) throws Exception;
 
-    ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp) throws Exception;
+    ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp,String classId) throws Exception;
 
     /**
      * @throws
