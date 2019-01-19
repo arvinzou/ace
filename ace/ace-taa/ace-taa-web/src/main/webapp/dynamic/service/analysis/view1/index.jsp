@@ -32,7 +32,7 @@
 	 rel="stylesheet" type="text/css" />
 
 	<div id="Header">
-		常德市交通事故分析
+		常德市交通事故分析系统
 	</div>
 
 	<div id="Main">
@@ -107,7 +107,7 @@
 
 </script>
 
-	<div class="portlet light info">
+	<div class="portlet light info" style="display: none;">
 
 		<div class="portlet-title">
 			

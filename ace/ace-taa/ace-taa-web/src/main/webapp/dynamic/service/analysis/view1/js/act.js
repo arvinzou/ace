@@ -143,7 +143,7 @@ function getLatLongByAreaCode(data) {
 
 jQuery(function($) {
 	$(".info").hide();
-	$(".RightDiv").css("height", (window.innerHeight - 40) + "px");
+	$(".RightDiv").css("height", (window.innerHeight - 45) + "px");
 	$("#FullScreen").click(function() {
 		var ml = $("#TextViewPanel").css("margin-left");
 		if (ml == '0px') {
