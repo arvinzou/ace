@@ -213,6 +213,121 @@
     {@/each}
 
 </script>
+
+<div class="modal fade" role="dialog" id="modal-preview">
+    <div class="modal-dialog" role="document" style="width: 90%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">详细</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal" role="form">
+                    <div class="form-body" id="fm-preview">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script id="tpl-preview" type="text/template">
+    <div class="form-group">
+        <label class="col-md-2 view-label">事故时间</label>
+        <div class="col-md-10">
+            \${data.o.accidentTime}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">事故发生地点</label>
+        <div class="col-md-10">
+            <a href="${pageContext.request.contextPath}/dynamic/service/roadSection/previewMap.jsp?latitude=\${data.o.latitude}&longitude=\${data.o.longitude}"
+               target="_blank">\${data.o.address}</a>
+        </div>
+    </div>
+   <div class="form-group">
+       <label class="col-md-2 view-label">所属路段</label>
+       <div class="col-md-10">
+           \${data.o.roadSectionName}
+       </div>
+   </div>
+   <div class="form-group">
+       <label class="col-md-2 view-label">路长</label>
+       <div class="col-md-10">
+           \${data.o.roadManName}
+       </div>
+   </div>
+   
+    <div class="form-group">
+        <label class="col-md-2 view-label">天气</label>
+        <div class="col-md-10">
+            \${rsd(data.o.weather,'171')}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">车型</label>
+        <div class="col-md-10">
+
+            \${rsd(data.o.vehicleType,'172')}
+        </div>
+    </div>
+
+    
+    
+    <div class="form-group">
+        <label class="col-md-2 view-label">死亡人数</label>
+        <div class="col-md-10">
+            \${data.o.deadthToll}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">受伤人数</label>
+        <div class="col-md-10">
+            \${data.o.injuries}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">事故原因</label>
+        <div class="col-md-10">
+
+            \${rsd(data.o.cause,'173')}
+        </div>
+    </div>
+
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">快报人姓名</label>
+        <div class="col-md-10">
+            \${data.o.createUserName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">采集日期</label>
+        <div class="col-md-10">
+            \${data.o.createDate}
+        </div>
+    </div>
+
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">续报人姓名</label>
+        <div class="col-md-10">
+            \${data.o.lastModifyUserName}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">续报日期</label>
+        <div class="col-md-10">
+            \${data.o.lastModifyDate}
+        </div>
+    </div>
+</script>
 		<!--[if lt IE 9]>
 <script src="${portalPath}/content/common/assets/global/plugins/respond.min.js"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
