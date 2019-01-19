@@ -13,7 +13,7 @@
 <body>
 <div class="content">
     <div class="head">
-        <div class="room_name">一教室</div>
+        <div class="room_name active_changeRoom">一教室</div>
         <img src="img/logo.png"/>
         <div class="dateTime" id="clock">
             <p>1921年7月1日 </p>
@@ -46,9 +46,7 @@
             </table>
             <div class="message">
                 <div class="title">
-							<span>
-								通知公告
-							</span>
+                    <span>通知公告</span>
                 </div>
                 <div class="fileMessage" id="fileMessage">
 
@@ -106,6 +104,23 @@
         </div>
     </div>
 </div>
+
+
+<div class="hide  modal modal5">
+    <div class="modal_content classRoom">
+        <div class=" modal_head">
+            <span>选择班级</span> <span class="hideModal">×</span>
+        </div>
+        <div class="modal_body">
+            <div class="classRoomList" id="roomTemp">
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 </body>
 
@@ -168,6 +183,11 @@
     {@/each}
 </script>
 
+<script id="tpl-roomTemp" type="text/template">
+    {@each data as item}
+    <div class="roomItem" data-id="\${item.id}">\${item.name}</div>
+    {@/each}
+</script>
 
 
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>

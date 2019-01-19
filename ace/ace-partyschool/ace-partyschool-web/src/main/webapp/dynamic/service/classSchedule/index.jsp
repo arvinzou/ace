@@ -16,28 +16,19 @@
     <jsp:include page="/dynamic/common/header.jsp"/>
     <link rel="stylesheet" type="text/css" href="CommonUI/Content/common-base.css"/>
     <%--<link rel="stylesheet" type="text/css" href="CommonUI/font4.4/css/font-awesome.min.css"/>--%>
-    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/bootstrap-datetimepicker.min.css"/>
-    <link rel="stylesheet" type="text/css" href="CommonUI/Content/common/dataTables.bootstrap.min.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="CommonUI/Content/common/dataTables.bootstrap.min.css"/>--%>
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2-bootstrap.min.css">
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 
     <!--引用js-->
     <script src="CommonUI/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="CommonUI/Scripts/jquery-ui.js"></script>
-    <script type="text/javascript" src="CommonUI/Scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="CommonUI/Scripts/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript" src="CommonUI/Scripts/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="CommonUI/layer/layer.js"></script>
 
 
     <link rel="stylesheet" type="text/css" href="css/fc_schedule.plug_in.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="CommonUI/fullcalendar2.9/fullcalendar.min.css"/>
-    <script>
-
-    </script>
-
 </head>
 <body>
 <jsp:include page="/dynamic/common/prefix${SESSION_USERPROP_KEY.cfg.portalType}.jsp"/>

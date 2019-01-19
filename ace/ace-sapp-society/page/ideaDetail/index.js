@@ -158,10 +158,11 @@ Page({
      */
     onPullDownRefresh: function() {
         var that = this;
+        wx.stopPullDownRefresh();
         that.initData();
         that.getLikeNum();
         that.getCommentList();
-        wx.stopPullDownRefresh();
+        
     },
     formSubmit: function(e) {
         let that = this;
