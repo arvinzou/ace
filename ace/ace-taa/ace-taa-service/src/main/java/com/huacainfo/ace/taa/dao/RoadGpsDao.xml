@@ -30,4 +30,29 @@
       #{item}
     </foreach>
   </delete>
+
+
+    <resultMap id="VoResultMap" extends="BaseResultMap" type="com.huacainfo.ace.taa.vo.RoadGpsVo">
+        <result column="manName" jdbcType="VARCHAR" property="manName"/>
+        <result column="roadName" jdbcType="DECIMAL" property="roadName"/>
+        <result column="sectionName" jdbcType="DECIMAL" property="sectionName"/>
+    </resultMap>
+
+    <select id="getAroundList" resultMap="VoResultMap">
+        SELECT
+        rm.`name` AS manName,
+        r.`name` AS roadName,
+        rs.`name` AS sectionName,
+        t.latitude,
+        t.longitude
+        FROM
+        `road_gps` t
+        LEFT JOIN road_section rs ON t.roadSectionId = rs.id
+        LEFT JOIN road_man rm ON rs.roadMan = rm.id
+        LEFT JOIN road r ON rs.roadId = r.id
+        WHERE t.latitude >= #{minLat,jdbcType=DECIMAL}
+          AND t.latitude &lt;= #{maxLat,jdbcType=DECIMAL}
+          AND t.longitude >= #{minLng,jdbcType=DECIMAL}
+          AND t.longitude &lt;= #{maxLng,jdbcType=DECIMAL}
+    </select>
 </mapper>
