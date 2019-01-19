@@ -1,4 +1,5 @@
-var map=null;
+var map = null;
+
 function initPreview(params) {
 	$.ajax({
 		url: contextPath + '/traAcc/findTraAccList',
@@ -10,39 +11,60 @@ function initPreview(params) {
 			if (result.status == 0) {
 				if (result.rows) {
 					var o = result.rows[0];
-					map = new qq.maps.Map(document.getElementById("container"), {
+					map = new qq.maps.Map(document.getElementById("Map"), {
 						center: new qq.maps.LatLng(o.latitude, o.longitude),
-						zoom: 11
+						zoom: 11,
+						//mapTypeId: "coordinate",
+						resizeKeepCenter: true,
+						mapTypeControl: true,
+						panControl: true,
+						zoomControl: true,
+						scaleControl: true,
+						minZoom: 4,
+						maxZoom: 18,
+						//设置平移控件的位置
+						panControlOptions: {
+							//设置平移控件的位置为相对右方中间位置对齐.
+							position: qq.maps.ControlPosition.RIGHT_CENTER
+
+						},
+						zoomControlOptions: {
+							//设置缩放控件的位置为相对左方中间位置对齐.
+							position: qq.maps.ControlPosition.RIGHT_CENTER,
+							//设置缩放控件样式为仅包含放大缩小两个按钮
+							style: qq.maps.ZoomControlStyle.SMALL
+						}
 					});
 
 					for (var i in result.rows) {
 						o = result.rows[i];
 						new qq.maps.Marker({
-                            //设置Marker的位置坐标
-                            position: new qq.maps.LatLng(o.latitude, o.longitude),
-                            //设置Marker被添加到Map上时的动画效果为落下
-                            animation: qq.maps.MarkerAnimation.DOWN,
-                            //设置Marker被添加到Map上时的动画效果为反复弹跳
-                            //animation:qq.maps.MarkerAnimation.BOUNCE
-                            //设置Marker被添加到Map上时的动画效果为从天而降
-                            animation: qq.maps.MarkerAnimation.DROP,
-                            //设置Marker被添加到Map上时的动画效果为升起
-                            //animation:qq.maps.MarkerAnimation.UP
-                            //设置显示Marker的地图
-                            map: map,
-                            //设置Marker可拖动
-                            draggable: true,
-                            //Marker的覆盖内容
-                            decoration: new qq.maps.MarkerDecoration("<font style='color:#fff;font-size:10px'>"+o.roadManName+"</font>"),
-                            //自定义Marker图标为大头针样式
-                            icon: new qq.maps.MarkerImage("http://3gimg.qq.com/tencentMapTouch/lbs/img/nilt.png"),
-                            //自定义Marker图标的阴影
-                            // shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
-                            //设置Marker标题，鼠标划过Marker时显示
-                            title: o.roadManName,
-                            //设置Marker的可见性，为true时可见,false时不可见
-                            visible: true
-                        });
+							//设置Marker的位置坐标
+							position: new qq.maps.LatLng(o.latitude, o.longitude),
+							//设置Marker被添加到Map上时的动画效果为落下
+							animation: qq.maps.MarkerAnimation.DOWN,
+							//设置Marker被添加到Map上时的动画效果为反复弹跳
+							//animation:qq.maps.MarkerAnimation.BOUNCE
+							//设置Marker被添加到Map上时的动画效果为从天而降
+							animation: qq.maps.MarkerAnimation.DROP,
+							//设置Marker被添加到Map上时的动画效果为升起
+							//animation:qq.maps.MarkerAnimation.UP
+							//设置显示Marker的地图
+							map: map,
+							//设置Marker可拖动
+							draggable: true,
+							//Marker的覆盖内容
+							decoration: new qq.maps.MarkerDecoration("<font style='color:#fff;font-size:10px'>" + o.roadManName +
+								"</font>"),
+							//自定义Marker图标为大头针样式
+							icon: new qq.maps.MarkerImage("http://3gimg.qq.com/tencentMapTouch/lbs/img/nilt.png"),
+							//自定义Marker图标的阴影
+							// shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
+							//设置Marker标题，鼠标划过Marker时显示
+							title: o.roadManName,
+							//设置Marker的可见性，为true时可见,false时不可见
+							visible: true
+						});
 					}
 
 
@@ -62,21 +84,19 @@ function initPreview(params) {
 }
 
 jQuery(function($) {
-	$(".RightDiv").css("height",(window.innerHeight-40)+"px");
+	$(".RightDiv").css("height", (window.innerHeight - 40) + "px");
 	initPreview({});
 
-	$("#FullScreen").click(function(){
-           var ml= $("#TextViewPanel").css("margin-left");
-           if(ml=='0px'){
-                 $("#TextViewPanel").css("margin-left","-380px");
-                 $("#FullScreen").css('background-position','-22px 0px');
-				 $("#FullScreen").css('left','-1px');
-           }else{
-			    $("#TextViewPanel").css("margin-left","0px");
-                $("#FullScreen").css('background-position','-44px 0px');
-				$("#FullScreen").css('left','299px');
-           }
-    })
+	$("#FullScreen").click(function() {
+		var ml = $("#TextViewPanel").css("margin-left");
+		if (ml == '0px') {
+			$("#TextViewPanel").css("margin-left", "-380px");
+			$("#FullScreen").css('background-position', '-22px 0px');
+			$("#FullScreen").css('left', '-1px');
+		} else {
+			$("#TextViewPanel").css("margin-left", "0px");
+			$("#FullScreen").css('background-position', '-44px 0px');
+			$("#FullScreen").css('left', '299px');
+		}
+	})
 });
-
-
