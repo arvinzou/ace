@@ -27,7 +27,8 @@
 	<script>
 		var id='${param.id}';
 </script>
-
+	<link href="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"
+	 rel="stylesheet" type="text/css" />
 	<body>
 		<style type="text/css">
 			html,
@@ -72,14 +73,18 @@
 
 			.portlet.light>.portlet-title {
 				padding: 0;
-				min-height: 25px;
+				min-height: 20px;
 				font-weight: 800;
+				padding-top:15px;
 			}
 
 			.portlet.light .portlet-body {
 				padding-top: 1px;
+			}
 
-				min-height: 40px;
+			.portlet.light {
+				padding: 12px 12px 15px;
+				background-color: #fff;
 			}
 
 			#Main {
@@ -114,8 +119,8 @@
 				background: #f5f5f5;
 				border-bottom: 1px solid #dcdcdc;
 				height: 34px;
-			   line-height: 36px;
-			   width: 100%;
+				line-height: 36px;
+				width: 100%;
 			}
 
 			.MapTools {
@@ -128,9 +133,9 @@
 				color: #406593;
 			}
 
-			
-
-
+			.formField {
+				padding-bottom: 15px;
+			}
 		</style>
 		<div id="Header">
 			常德市交通事故分析
@@ -138,54 +143,55 @@
 
 		<div id="Main">
 			<div id="TextViewPanel" style="margin-left: -380px;">
-				<div class="portlet light">
-					<div class="portlet-title">精准搜索</div>
-					<div class="portlet-body">
-						<div class="row" style="padding:15px;">
-
-
+				<form id="fm">
+					<div class="portlet light">
+						<div class="portlet-title">精准搜索</div>
+						<div class="portlet-body">
+							<div class="row" style="padding-left:25px;padding-right:25px;">
+								
+									<input class="easyui-combotree" style="width:255px;height: 34px;" name="areaCode" data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
+									 style="width:200px;﻿line-height: 30px;height: 30px;">
+								
+								<input type="text" name="roadManName" class="form-control" placeholder="路长姓名">
+							</div>
 						</div>
-
-					</div>
-				</div>
-				<div class="portlet light">
-					<div class="portlet-title">时间范围</div>
-					<div class="portlet-body">
-						<div class="row" style="padding:15px;">
-
-
+						<div class="portlet-title">事故时间</div>
+						<div class="portlet-body">
+							<div class="row" style="padding-left:25px;padding-right:25px;">
+								<input style="border: 1px solid #efefef;" type="text" size="16" name="startDate" readonly="" class="form-control">
+								<input style="border: 1px solid #efefef;" type="text" size="16" name="endDate" readonly="" class="form-control">
+							</div>
 						</div>
-
-					</div>
-				</div>
-				<div class="portlet light">
-					<div class="portlet-title">死亡人数</div>
-					<div class="portlet-body">
-						<div class="row" style="padding:15px;">
-
-
+						<div class="portlet-title">道理级别</div>
+						<div class="portlet-body">
+							<div class="row" style="padding-left:25px;padding-right:25px;">
+								<div class="btn-group" id="check-group-category" role="group" style="float:left;padding-right:5px">
+								</div>
+							</div>
 						</div>
-
-					</div>
-				</div>
-				<div class="portlet light">
-					<div class="portlet-title">受伤人数</div>
-					<div class="portlet-body">
-						<div class="row" style="padding:15px;">
-
-
+						
+						
+						
+						<div class="portlet-title">死亡人数</div>
+						<div class="portlet-body">
+							<div class="row" style="padding-left:25px;padding-right:25px;">
+								<input type="text" size="16" name="downDeathNum" class="form-control" style="border: 1px solid #efefef;"
+								 oninput="value=value.replace(/[^\d]/g,'')">
+								<input type="text" size="16" name="upDeathNum" class="form-control" style="border: 1px solid #efefef;" oninput="value=value.replace(/[^\d]/g,'')">
+							</div>
+						
 						</div>
-
+						<div class="portlet-body">
+							<div class="row" style="padding:15px;">
+								<button class="btn   green" type="submit" style="width:255px">确定</button>
+							</div>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 			<div class="RightDiv">
-
-
 				<div id="FullScreen" title="收起左栏" class="InlineBlock" pgv="86" style="background-image: url(https://3gimg.qq.com/webmap_pc/v/themes/default/img/arrow.png?v=v5.1.132); background-position: -44px 0px;"></div>
-				<div class="Toolbar">
-					工具栏
-				</div>
+				
 				<div id="Map">
 
 				</div>
@@ -193,7 +199,20 @@
 			</div>
 
 		</div>
+		<script id="tpl-check-group" type="text/template">
 
+			{@each data.list as item, index}
+    {@if item.CODE}
+    <button type="button" authority="false" class="btn btn-default"
+            onclick="setParams('\${data.key}','\${item.CODE}');">\${item.NAME}
+    </button>
+    {@else}
+    <button type="button" authority="false" class="btn btn-default" onclick="setParams('\${data.key}','');">全部</button>
+    {@/if}
+
+    {@/each}
+
+</script>
 		<!--[if lt IE 9]>
 <script src="${portalPath}/content/common/assets/global/plugins/respond.min.js"></script>
 <script src="${portalPath}/content/common/assets/global/plugins/excanvas.min.js"></script>
@@ -207,6 +226,14 @@
 		<script src="${portalPath}/content/common/juicer/juicer-min.js?v=${cfg.version}" type="text/javascript"></script>
 		<script src="${portalPath}/content/common/js/jquery.form.js?v=${cfg.version}"></script>
 		<script src="${portalPath}/content/common/js/dict_${SESSION_USERPROP_KEY.activeSyId}.js?version=${cfg.version}"></script>
+
+		<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/metro/easyui.css?version=${cfg.version}">
+		<link rel="stylesheet" type="text/css" href="${portalPath}/content/common/js/jquery-easyui-1.3.6/themes/icon.css?version=${cfg.version}">
+		<script type="text/javascript" src="${portalPath}/content/common/js/jquery-easyui-1.3.6/gz/jquery.easyui.min.js?version=${cfg.version}"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/js/jquery-easyui-1.3.6/locale/easyui-lang-zh_CN.js?version=${cfg.version}"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+		<script type="text/javascript" src="${portalPath}/content/common/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js?v=${cfg.version}"></script>
+
 		<script src="js/act.js?version=${cfg.version}"></script>
 	</body>
 </html>

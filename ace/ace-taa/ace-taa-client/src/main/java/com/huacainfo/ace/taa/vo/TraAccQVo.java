@@ -31,13 +31,13 @@ public class TraAccQVo extends TraAcc {
     /**
      * 死亡人数区间
      */
-    private int upDeathNum;//死亡区间开始
-    private int downDeathNum;//死亡区间结束
+    private Integer upDeathNum;//死亡区间开始
+    private Integer downDeathNum;//死亡区间结束
     /**
      * 受伤人数区间
      */
-    private int upInjuriesNum;//受伤人数区间开始
-    private int downInjuriesNum;//受伤人数区间结束
+    private Integer upInjuriesNum;//受伤人数区间开始
+    private Integer downInjuriesNum;//受伤人数区间结束
     /**
      * 道路/路长/路段名称
      */
@@ -51,35 +51,35 @@ public class TraAccQVo extends TraAcc {
         this.roadName = roadName;
     }
 
-    public int getUpDeathNum() {
+    public Integer getUpDeathNum() {
         return upDeathNum;
     }
 
-    public void setUpDeathNum(int upDeathNum) {
+    public void setUpDeathNum(Integer upDeathNum) {
         this.upDeathNum = upDeathNum;
     }
 
-    public int getDownDeathNum() {
+    public Integer getDownDeathNum() {
         return downDeathNum;
     }
 
-    public void setDownDeathNum(int downDeathNum) {
+    public void setDownDeathNum(Integer downDeathNum) {
         this.downDeathNum = downDeathNum;
     }
 
-    public int getUpInjuriesNum() {
+    public Integer getUpInjuriesNum() {
         return upInjuriesNum;
     }
 
-    public void setUpInjuriesNum(int upInjuriesNum) {
+    public void setUpInjuriesNum(Integer upInjuriesNum) {
         this.upInjuriesNum = upInjuriesNum;
     }
 
-    public int getDownInjuriesNum() {
+    public Integer getDownInjuriesNum() {
         return downInjuriesNum;
     }
 
-    public void setDownInjuriesNum(int downInjuriesNum) {
+    public void setDownInjuriesNum(Integer downInjuriesNum) {
         this.downInjuriesNum = downInjuriesNum;
     }
 

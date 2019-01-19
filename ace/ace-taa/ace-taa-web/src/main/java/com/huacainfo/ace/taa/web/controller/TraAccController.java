@@ -59,7 +59,7 @@ public class TraAccController extends TaaBaseController {
     @RequestMapping(value = "/findTraAccList")
     @ResponseBody
     public PageResult<TraAccVo> findTraAccList(TraAccQVo condition, PageParamNoChangeSord page) throws Exception {
-        if(CommonUtils.isBlank(condition.getAreaCode())){
+        if (CommonUtils.isBlank(condition.getAreaCode())) {
             condition.setAreaCode(this.getCurUserProp().getAreaCode());
         }
         PageResult<TraAccVo> rst = this.traAccService.findTraAccList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
@@ -266,7 +266,23 @@ public class TraAccController extends TaaBaseController {
      */
     @RequestMapping(value = "/updateStatus")
     @ResponseBody
-    public MessageResponse updateStatus(String id,String status) throws Exception {
-        return this.traAccService.updateStatus(id,status,this.getCurUserProp());
+    public MessageResponse updateStatus(String id, String status) throws Exception {
+        return this.traAccService.updateStatus(id, status, this.getCurUserProp());
+    }
+
+    /**
+     * @throws
+     * @Title:getLatLongByAreaCode
+     * @Description: TODO(获取行政区划中心坐标)
+     * @param: @param areaCode 行政区划编码
+     * @param: @throws Exception
+     * @return: SingleResult
+     * @author: 陈晓克
+     * @version: 2019-01-19
+     */
+    @RequestMapping(value = "/getLatLongByAreaCode")
+    @ResponseBody
+    public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception {
+        return this.traAccService.getLatLongByAreaCode(areaCode);
     }
 }
