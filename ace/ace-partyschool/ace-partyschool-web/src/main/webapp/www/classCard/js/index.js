@@ -6,9 +6,8 @@ var weekStr=['周日','周一','周二','周三','周四','周五','周六']
 $(function () {
     dateData=new Date();
     initClassRoom();
-    initSwriper();
     clock_12h();
-    // initpdf();
+     initpdf();
     initClock();
     initClassRoom();
     $('.info_box').on('click','.active_course',viewCourse);
@@ -20,15 +19,6 @@ $(function () {
     $('.content').on('click','.active_changeRoom',changeRoom);
     $('.classRoom').on('click','.roomItem',chooesRoom);
 })
-
-function initSwriper() {
-    var swiper = new Swiper('.swiper-container', {
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-}
 
 
 

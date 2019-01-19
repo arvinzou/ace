@@ -199,9 +199,8 @@ Page({
         console.log(e);
         let data = e.currentTarget.dataset
         let p = data.id;
-        let title = data.title;
         wx.navigateTo({
-            url: '../activityInfo/index?id=' + p + "&title=" + title
+            url: '../activityInfo/index?id=' + p
         })
     },
     createActivity: function(e) {

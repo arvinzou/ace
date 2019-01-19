@@ -7,7 +7,6 @@
     <title>班牌</title>
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 </head>
 
@@ -27,7 +26,7 @@
                 <tr>
                     <th class="style1">班次</th>
                     <th class="style2 class_name">第78期县处级干部进修班</th>
-                    <th class="style1">应到人数</th>
+                    <th class="style1">应道人数</th>
                     <th class="style2 class_people">48人</th>
                     <th class="style4"><span class="active_classInfo">详情</span></th>
                 </tr>
@@ -47,19 +46,10 @@
             </table>
             <div class="message">
                 <div class="title">
-							<span>
-								通知公告
-							</span>
+                    <span>通知公告</span>
                 </div>
-                <div class="fileMessage swiper-container">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">Slide 1</div>
-                        <div class="swiper-slide">Slide 2</div>
-                        <div class="swiper-slide">Slide 3</div>
-                    </div>
-                    <!-- 如果需要导航按钮 -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                <div class="fileMessage" id="fileMessage">
+
                 </div>
             </div>
         </div>
@@ -116,7 +106,7 @@
 </div>
 
 
-<div class="hide modal5 modal">
+<div class="hide  modal modal5">
     <div class="modal_content classRoom">
         <div class=" modal_head">
             <span>选择班级</span> <span class="hideModal">×</span>
@@ -126,7 +116,6 @@
 
 
             </div>
-
         </div>
 
     </div>
@@ -200,7 +189,7 @@
     {@/each}
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.js"></script>
+
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>
