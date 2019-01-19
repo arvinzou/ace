@@ -19,7 +19,7 @@ $(function () {
 
 
 function viewPhotos() {
-    var url = contextPath + "/www/files/findFilesList";
+    var url = contextPath + "/www/files/findFilesListVo";
     var data = {
         category:2,
         classesId: classId,
@@ -28,7 +28,8 @@ function viewPhotos() {
     }
     $.getJSON(url, data, function (rst) {
         if(rst.status==0){
-           console.log(rst);
+            renderPage('imgTemp',rst.rows,'tpl-imgTemp');
+            $('.modal3').show();
         }
     });
 }
@@ -43,7 +44,7 @@ function viewClassInfo() {
 
 
 function hideModal() {
-    $(this).parents().find('.modal').hide();
+    $(this).closest('.modal').hide();
 }
 
 function nextWeek() {
