@@ -480,4 +480,22 @@ public class TraAccServiceImpl implements TraAccService {
 
         return u;
     }
+
+    /**
+     * @throws
+     * @Title:getLatLongByAreaCode
+     * @Description: TODO(获取行政区划中心坐标)
+     * @param: @param areaCode 行政区划编码
+     * @param: @throws Exception
+     * @return: SingleResult
+     * @author: 陈晓克
+     * @version: 2019-01-19
+     */
+    @Override
+   public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception{
+        SingleResult<Map<String, Object>> rst=new SingleResult();
+        String areaCode6=CommonUtils.rightPad(areaCode,6,"0");
+        rst.setValue(this.traAccDao.getLatLongByAreaCode(areaCode6));
+       return rst;
+   }
 }

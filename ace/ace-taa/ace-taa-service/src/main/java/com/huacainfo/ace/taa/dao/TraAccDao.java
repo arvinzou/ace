@@ -68,4 +68,13 @@ public interface TraAccDao {
      * @return Map<String,Object>
      */
     Map<String, Object> contrastiveReport(Map<String, String> params);
+
+
+    /**
+     * 获取行政区划中心坐标
+     *
+     * @param areaCode 行政区划编码
+     * @return Map<String,Object>
+     */
+    Map<String, Object> getLatLongByAreaCode(String areaCode);
 }
