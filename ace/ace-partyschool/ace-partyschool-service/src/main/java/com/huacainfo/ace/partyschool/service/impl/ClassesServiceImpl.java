@@ -198,17 +198,22 @@ public class ClassesServiceImpl implements ClassesService {
      * @version: 2019-01-03
      */
     @Override
-    public ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp) throws Exception {
-        AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
-        String id = accountVo.getStudent().getClassId();
+    public ResultResponse selectClassesByPrimaryKeyVo(UserProp userProp,String classId) throws Exception {
+        if(CommonUtils.isBlank(classId)) {
+            if (userProp == null) {
+                return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
+            }
+            AccountVo accountVo = (AccountVo) signService.getAcctInfo(userProp.getAccount()).getData();
+            classId = accountVo.getStudent().getClassId();
+        }
         SqlSession session = this.sqlSession.getSqlSessionFactory().openSession(ExecutorType.REUSE);
         Configuration configuration = session.getConfiguration();
         configuration.setSafeResultHandlerEnabled(false);
         ClassesDao dao = session.getMapper(ClassesDao.class);
         Map<String, Object> map = new HashMap<String, Object>();
         try {
-            map.put("list", dao.getClassesInfo(id));
-            map.put("count", this.studentDao.findStudentCount());
+            map.put("list", dao.getClassesInfo(classId));
+            map.put("count", this.studentDao.findStudentCount(classId));
             }
         catch (Exception e){
             session.close();

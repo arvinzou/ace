@@ -3,12 +3,14 @@ package com.huacainfo.ace.partyschool.web.controller;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.PageParamNoChangeSord;
 import com.huacainfo.ace.common.model.UserProp;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.partyschool.model.Files;
 import com.huacainfo.ace.partyschool.service.ClassesService;
 import com.huacainfo.ace.partyschool.service.SignService;
 import com.huacainfo.ace.partyschool.service.ClsFilesService;
 import com.huacainfo.ace.partyschool.vo.FilesQVo;
+import com.huacainfo.ace.partyschool.vo.FilesVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,17 +50,22 @@ public class WFilesController extends BisBaseController {
      * @author: Arvin
      * @version: 2019-01-04
      */
+    @RequestMapping(value = "/findFilesListVo")
+    @ResponseBody
+    public PageResult<FilesVo> findFilesList(FilesQVo condition, PageParamNoChangeSord page) throws Exception {
+        return this.clsFilesService.findFilesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    }
+
+
     @RequestMapping(value = "/findFilesList")
     @ResponseBody
-    public ResultResponse findFilesList(FilesQVo condition, PageParamNoChangeSord page) throws Exception {
+    public ResultResponse findFilesListVo(FilesQVo condition, PageParamNoChangeSord page) throws Exception {
 
         UserProp userProp = this.getCurUserProp();
         if (userProp == null) {
             return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
         }
         return this.clsFilesService.findFilesListVo(condition, page.getStart(), page.getLimit(), page.getOrderBy(), userProp);
-
-
     }
 
     @RequestMapping(value = "/getMyClasses")

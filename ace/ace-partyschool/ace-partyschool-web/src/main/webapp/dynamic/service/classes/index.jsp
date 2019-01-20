@@ -28,7 +28,7 @@ pageEncoding="utf-8"%>
                 <div class="col-md-4">
                     <div class="input-group" style="float: left;margin-right: 5px;width: 250px">
                         <input type="text"
-                               name="classroomId"
+                               name="crName"
                                class="form-control"
                                placeholder="请输入教室名称">
                     </div>

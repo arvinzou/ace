@@ -39,7 +39,7 @@ body {
 	height: 170px;
 }
 
-.content .head .class_name {
+.content .head .room_name {
 	font-size: 100px;
 	font-family: MicrosoftYaHei-Bold;
 	font-weight: bold;
@@ -267,6 +267,11 @@ body {
 	width: 1000px;
 }
 
+.weeekClass .modal_body{
+  position: relative;
+}
+
+
 .weeekClass .dayClass {
 	display: flex;
 	justify-content: space-between;
@@ -355,6 +360,12 @@ body {
 	overflow: auto;
 }
 
+#weeekCourseList{
+	max-height: 666px;
+	overflow: auto;
+}
+
+
 .photoWall .img img {
 	width: 100%;
 	object-fit: cover;
@@ -367,4 +378,38 @@ body {
 
 .modal .photoWall {
 	width: 1034px;
+}
+
+.weeekClass .prevWeek,.weeekClass .nextWeek{
+	border-top: 3px solid #4f4f4f;
+	border-left: 3px solid #4f4f4f;
+	position: absolute;
+	width: 50px;
+	height: 50px;
+}
+.weeekClass .prevWeek{
+	transform: rotate(-45deg);
+	top: 44%;
+	left: 20px;
+}
+
+.weeekClass .nextWeek{
+	transform: rotate(135deg);
+	top: 44%;
+	right: 20px;
+}
+
+.modal .classRoom{
+	width: 700px;
+}
+
+.modal .classRoom .roomItem{
+	padding: 30px 20px;
+	background: #006BCF;
+	border-radius: 10px;
+	color: #fff;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px;
 }

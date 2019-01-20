@@ -145,8 +145,7 @@ Page({
         console.log(e);
         let data = e.currentTarget.dataset
         let p = data.id;
-        let title = data.title;
-        wx.navigateTo({ url: '../activityInfo/index?id=' + p + "&title=" + title})
+        wx.navigateTo({ url: '../activityInfo/index?id=' + p})
     },
 
     createActivity: function () {
@@ -181,5 +180,20 @@ Page({
             scrollTop: e.scrollTop
         })
     },
-    
+    onShareAppMessage: function (res) {
+        let that = this;
+        if (res.from === 'button') {
+            // 来自页面内转发按钮
+            console.log(res.target)
+        }
+        return {
+            path: '/page/activityList/index?category=' + that.store.category,
+            success: function (res) {
+                // 转发成功
+            },
+            fail: function (res) {
+                // 转发失败
+            }
+        }
+    }
 })

@@ -213,4 +213,18 @@ public interface TraAccService {
      * @param params params
      */
     Map<String, Object> contrastiveReport(Map<String, String> params);
+
+
+
+    /**
+     * @throws
+     * @Title:getLatLongByAreaCode
+     * @Description: TODO(获取行政区划中心坐标)
+     * @param: @param areaCode 行政区划编码
+     * @param: @throws Exception
+     * @return: SingleResult
+     * @author: 陈晓克
+     * @version: 2019-01-19
+     */
+    SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception;
 }
