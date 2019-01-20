@@ -131,6 +131,7 @@ function getLatLongByAreaCode(data) {
 			if (result.status == 0) {
 				console.log(result);
 				map.panTo(new qq.maps.LatLng(result.value.latitude, result.value.longitude));
+				$("input[name=areaCode]").val(result.value.areaName);
 			} else {
 				alert(result.errorMessage);
 			}
@@ -148,11 +149,11 @@ jQuery(function($) {
 		var ml = $("#TextViewPanel").css("margin-left");
 		if (ml == '0px') {
 			$("#TextViewPanel").css("margin-left", "-380px");
-			$("#FullScreen").css('background-position', '-22px 0px');
+			$("#FullScreen").css('background-position', '-44px 0px');
 			$("#FullScreen").css('left', '-1px');
 		} else {
 			$("#TextViewPanel").css("margin-left", "0px");
-			$("#FullScreen").css('background-position', '-44px 0px');
+			$("#FullScreen").css('background-position', '-22px 0px');
 			$("#FullScreen").css('left', '299px');
 		}
 	})
@@ -266,6 +267,37 @@ function initEvents() {
 	$('input[name=endDate]').focus(function() {
 		$(this).blur(); //不可输入状态
 	})
+$('input[name=roadSectionId]').combogrid({
+		panelWidth: 500,
+		idField: 'id',
+		textField: 'name',
+		url: contextPath + '/roadSection/getListByCondition',
+		mode: 'remote',
+		fitColumns: true,
+		method: 'get',
+		columns: [
+			[{
+				field: 'name',
+				title: '路段名称',
+				width: 100
+			}, {
+				field: 'roadManName',
+				title: '路长',
+				width: 100
+			}, {
+				field: 'startName',
+				title: '路段起始',
+				width: 100
+			}, {
+				field: 'endName',
+				title: '路段截止',
+				width: 100
+			}]
+		],
+		onSelect:function  (rowIndex, rowData) {
+
+		}
+	});
 
 }
 
@@ -302,4 +334,7 @@ function initJuicerMethod() {
 }
 function infoClose(){
 	$(".info").hide();
+}
+function areaCode(o){
+    console.log(o);
 }

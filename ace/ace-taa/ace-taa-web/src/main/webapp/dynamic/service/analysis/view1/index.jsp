@@ -43,10 +43,10 @@
 					<div class="portlet-body">
 						<div class="row" style="padding-left:25px;padding-right:25px;">
 
-							<input class="easyui-combotree" style="width:255px;height: 34px;" name="areaCode" data-options="url:﻿'${portalPath}/system/selectProvinceTreeList.do',method:'get',label:'',labelPosition:'top'"
-							 style="width:200px;﻿line-height: 30px;height: 30px;">
+
 
 							<input type="text" name="roadManName" class="form-control" placeholder="路长姓名">
+							<input type="text" class="form-control" style="width:255px" name="roadSectionId" maxlength="50">
 						</div>
 					</div>
 					<div class="portlet-title">事故时间</div>
@@ -56,13 +56,7 @@
 							<input style="border: 1px solid #efefef;" type="text" size="16" name="endDate" readonly="" class="form-control">
 						</div>
 					</div>
-					<div class="portlet-title">道理级别</div>
-					<div class="portlet-body">
-						<div class="row" style="padding-left:25px;padding-right:25px;">
-							<div class="btn-group" id="check-group-category" role="group" style="float:left;padding-right:5px">
-							</div>
-						</div>
-					</div>
+
 
 
 
@@ -83,8 +77,24 @@
 			</form>
 		</div>
 		<div class="RightDiv">
+
 			<div id="FullScreen" title="收起左栏" class="InlineBlock" pgv="86" style="background-image: url(https://3gimg.qq.com/webmap_pc/v/themes/default/img/arrow.png?v=v5.1.132); background-position: -44px 0px;"></div>
 
+			<div id="Toolbar" class="Toolbar" style="padding:5px">
+				<div class="input-group" style="float:left;padding-right:10px;padding-left:5px">
+					地区 <input class="easyui-combotree" name="areaCode" data-options="url:'${portalPath}/system/selectProvinceTreeList.do',
+					method:'get',
+					label:'',
+					labelPosition:'top',
+					onSelect:function  (node) {
+						console.log(node);
+						 setParams('areaCode', node.id);
+					}"
+								style="width:200px;﻿line-height: 30px;height: 30px;">
+				</div>
+				<div class="btn-group" id="check-group-category" style="padding-left:5px">
+				</div>
+			</div>
 			<div id="Map">
 
 			</div>
