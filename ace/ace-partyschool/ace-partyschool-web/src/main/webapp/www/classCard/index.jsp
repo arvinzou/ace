@@ -26,7 +26,7 @@
                 <tr>
                     <th class="style1">班次</th>
                     <th class="style2 class_name">第78期县处级干部进修班</th>
-                    <th class="style1">应道人数</th>
+                    <th class="style1">应到人数</th>
                     <th class="style2 class_people">48人</th>
                     <th class="style4"><span class="active_classInfo">详情</span></th>
                 </tr>

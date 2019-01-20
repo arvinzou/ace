@@ -1,5 +1,7 @@
 package com.huacainfo.ace.partyschool.web.controller;
 
+import com.huacainfo.ace.common.constant.ResultCode;
+import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,9 +123,7 @@ public class ClassScheduleController extends BisBaseController {
      */
     @RequestMapping(value = "/deleteClassScheduleByClassScheduleId")
     @ResponseBody
-    public MessageResponse deleteClassScheduleByClassScheduleId(String jsons) throws Exception {
-        JSONObject json = JSON.parseObject(jsons);
-        String id = json.getString("id");
+    public MessageResponse deleteClassScheduleByClassScheduleId(String id) throws Exception {
         return this.classScheduleService.deleteClassScheduleByClassScheduleId(id, this.getCurUserProp());
     }
 
@@ -132,5 +132,28 @@ public class ClassScheduleController extends BisBaseController {
     @ResponseBody
     public MessageResponse LearnedCourses(ClassScheduleQVo condition, PageParamNoChangeSord page) throws Exception {
         return this.classScheduleService.LearnedCourses(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+    }
+
+
+    /**
+     * @throws
+     * @Title:updateClassSchedule
+     * @Description: TODO(更新课程表管理)
+     * @param: @param jsons
+     * @param: @throws Exception
+     * @return: MessageResponse
+     * @author: 王恩
+     * @version: 2019-01-06
+     */
+    @RequestMapping(value = "/updateIfTest")
+    @ResponseBody
+    public MessageResponse updateIfTest(String id) throws Exception {
+        ClassSchedule obj = this.classScheduleService.selectClassScheduleByPrimaryKey(id).getValue();
+        if(CommonUtils.isBlank(obj)){
+            new MessageResponse(ResultCode.FAIL,"数据丢失");
+        }
+        String i=obj.getIfTest();
+        obj.setIfTest(i.equals("1")?"0":"1");
+        return this.classScheduleService.updateClassSchedule(obj, this.getCurUserProp());
     }
 }
