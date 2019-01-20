@@ -61,11 +61,11 @@
 				</div>
 				<div class="form-content form-border">
 					<label class="form-label">设置密码</label>
-					<input class="form-input" minlength="6" type="password" name="pwd" placeholder="请设置登录密码（6位以上)"/>
+					<input class="form-input" minlength="4" type="password" name="pwd" placeholder="请设置登录密码（4位以上)"/>
 				</div>
 				<div class="form-content">
 					<label class="form-label">确认密码</label>
-					<input class="form-input" minlength="6" type="password" name="password" placeholder="请再次输入登录密码"/>
+					<input class="form-input" minlength="4" type="password" name="password" placeholder="请再次输入登录密码"/>
 				</div>
 			</div>
 			
