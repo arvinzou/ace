@@ -8,43 +8,43 @@
     <!--事故快报-->
     <view class='tab01-content {{tab == 0? "":"hidden"}}'>
         <map id="myMap" show-location longitude='{{longitude}}'  latitude='{{latitude}}' scale='18' markers="{{current}}" style='width:100%; height:100%'/>
-        <cover-view class='addForm'>
-           <cover-image src='../../image/icon-open-close.png' class='close-open'></cover-image>
-           <cover-view class='locate-name'>常德市武陵区武陵阁</cover-view>
-           <cover-view class='locate-road'>沅安路-临江公园西至武陵阁</cover-view>
-           <cover-view class='opt-form'>
-                <cover-view class='row'>
-                    <cover-view class='row-left'>所属路长</cover-view>
-                    <cover-view class='row-right'>
-                        <cover-view  class='form-input {{isNull == 0?"form-default":"form-active"}}'>请选择路长</cover-view>
-                        <cover-image class='select-arrow' src='../../image/icon_rediret.png'></cover-image>
-                    </cover-view>
-                </cover-view>
-                <cover-view class='row'>
-                    <cover-view class='row-left'>快报时间</cover-view>
-                    <cover-view class='row-right time'>2019-01-18</cover-view>
-                </cover-view>
-                 <cover-view class='row'>
-                    <cover-view class='row-left'>天气情况</cover-view>
-                    <cover-view class='row-right'>
+        <view class='addForm'>
+           <image src='../../image/icon-open-close.png' class='close-open'></image>
+           <view class='locate-name'>常德市武陵区武陵阁</view>
+           <view class='locate-road'>沅安路-临江公园西至武陵阁</view>
+           <view class='opt-form'>
+                <view class='row'>
+                    <view lass='row-left'>所属路长</view>
+                    <view class='row-right'>
+                        <view  class='form-input {{isNull == 0?"form-default":"form-active"}}'>请选择路长</view>
+                        <image class='select-arrow' src='../../image/icon_rediret.png'></image>
+                    </view>
+                </view>
+                <view class='row'>
+                    <view class='row-left'>快报时间</view>
+                    <view class='row-right time'>2019-01-18</view>
+                </view>
+                 <view class='row'>
+                    <view class='row-left'>天气情况</view>
+                    <view class='row-right'>
                         <picker bindchange="bindWeatherChange" value="{{wIndex}}" range="{{weather}}">
-                            <cover-view  class='form-input form-active'>{{weather[wIndex]}}</cover-view>
-                            <cover-image class='select-arrow' src='../../image/icon_rediret.png'></cover-image>
+                            <view  class='form-input form-active'>{{weather[wIndex]}}</view>
+                            <image class='select-arrow' src='../../image/icon_rediret.png'></image>
                         </picker>
-                    </cover-view>
-                </cover-view>
-                <cover-view class='row'>
-                    <cover-view class='row-left'>车型</cover-view>
-                    <cover-view class='row-right'>
+                    </view>
+                </view>
+                <view class='row'>
+                    <view class='row-left'>车型</view>
+                    <view class='row-right'>
                         <picker bindchange="bindCarChange" value="{{cIndex}}" range="{{carType}}">
-                            <cover-view  class='form-input form-active'>{{carType[cIndex]}}</cover-view>
-                            <cover-image class='select-arrow' src='../../image/icon_rediret.png'></cover-image>
+                            <view  class='form-input form-active'>{{carType[cIndex]}}</view>
+                            <image class='select-arrow' src='../../image/icon_rediret.png'></image>
                         </picker>
-                    </cover-view>
-                </cover-view>
-                <cover-view class='sendbtn default-btn'>确定报送</cover-view>
-           </cover-view>
-        </cover-view>
+                    </view>
+                </view>
+                <view class='sendbtn default-btn'>确定报送</view>
+           </view>
+        </view>
     </view>
     <!--路段采集-->
     <view class='tab02-content {{tab == 1? "":"hidden"}}'>

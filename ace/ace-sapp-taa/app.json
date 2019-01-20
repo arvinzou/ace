@@ -6,7 +6,8 @@
         "page/info/index",
         "page/regist/index",
         "page/datas/index",
-        "page/collection/index"
+        "page/collection/index",
+        "page/accidentList/index"
     ],
     "permission": {
         "scope.userLocation": {
@@ -31,8 +32,8 @@
                 "text": "首页"
             },
             {
-                "pagePath": "page/datas/index",
-                "text": "掌上驾驶舱"
+                "pagePath": "page/accidentList/index",
+                "text": "事故列表"
             }
         ]
     },
