@@ -286,6 +286,10 @@ function select(obj, name, workUnitName, postName){
     userInfo.postName = postName;
 }
 function confirm(){
+    if(!$(".user-active")){
+        alert("请确认选择报名信息，如有错误，可在注册进行编辑！");
+        return;
+    }
     $("input[name='name']").val(userInfo.name);
     $("input[name='workUnitName']").val(userInfo.workUnitName);
     $("input[name='postName']").val(userInfo.postName);
