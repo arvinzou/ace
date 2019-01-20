@@ -21,8 +21,7 @@
     <link rel="stylesheet" href="${portalPath}/content/common/assets/global/plugins/select2/css/select2.css">
 
     <!--引用js-->
-    <script type="text/javascript" src="CommonUI/Scripts/jquery-ui.js"></script>
-    <script type="text/javascript" src="CommonUI/layer/layer.js"></script>
+
 
 
     <link rel="stylesheet" type="text/css" href="css/fc_schedule.plug_in.css"/>
@@ -137,7 +136,8 @@
 <%--==============common jsp-suffix==============--%>
 </body>
 <jsp:include page="/dynamic/common/footer.jsp"/>
-
+<script type="text/javascript" src="CommonUI/Scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="CommonUI/layer/layer.js"></script>
 <script src='CommonUI/fullcalendar2.9/moment.min.js'></script>
 <script type="text/javascript" src="CommonUI/fullcalendar2.9/fullcalendar.min.js"></script>
 <script type="text/javascript" src="CommonUI/fullcalendar2.9/zh-cn.js"></script>
