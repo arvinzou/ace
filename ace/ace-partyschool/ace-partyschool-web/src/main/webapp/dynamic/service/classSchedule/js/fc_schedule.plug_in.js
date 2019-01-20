@@ -13,14 +13,43 @@ window.onload = function () {
         initSelect();
         $('#b_container').on('click', '.searchCourse', searchCourse);
         $('#classList').on('click', '.btn-default', setParams);
+        $('#courseDetail').on('click', '.delete', deleteCourse);
+        $('#courseDetail').on('change', '.switch_4', ifTest);
         $(".js-example-basic-single2").on('change',classSearch2);
 
         // getEventData();
     })
 
+   function ifTest() {
+       var id=$(this).data('id');
+       var url = contextPath + "/classSchedule/updateIfTest"
+       var data = {
+           id: id
+       }
+       $.getJSON(url, data, function (rst) {
+           if (rst.status == 0) {
+
+           }
+       })
+   }
+    
+    function deleteCourse() {
+        var id=$(this).data('id');
+        var url = contextPath + "/classSchedule/deleteClassScheduleByClassScheduleId"
+        var data = {
+            id: id
+        }
+        $.getJSON(url, data, function (rst) {
+            if (rst.status == 0) {
+                formatDate($('#calendar').fullCalendar('getView').title);
+                $('#courseDetail').empty();
+            }
+        })
+    }
+
     function classSearch2() {
         parameter['classesId'] = $("select[name=classId]").val();
-        $('#classList .btn-default').removeClass('btn-primary');
+        $('#classList .btn-default').removeClass('active');
         getEventData();
     }
 
@@ -29,8 +58,8 @@ window.onload = function () {
     function setParams() {
         var that =$(this);
         parameter.classesId = that.data('id');
-        that.siblings().removeClass('btn-primary');
-        that.addClass('btn-primary');
+        that.siblings().removeClass('active');
+        that.addClass('active');
         getEventData();
     }
 
@@ -231,7 +260,7 @@ window.onload = function () {
                 }
                 $.getJSON(url, data, function (rst) {
                     if (rst.status == 0) {
-                        console.log(rst);
+                        render('#courseDetail', rst.value, 'tpl-courseDetail');
                     }
                 })
             },

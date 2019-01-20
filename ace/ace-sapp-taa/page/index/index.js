@@ -11,6 +11,8 @@ Page({
       latitude: null,
       longitude: null,
       current: [],
+      mapHeight: '70vh',
+      isEdit: false,
       markers: [
           {
             iconPath: '../../image/icon-start.png',
@@ -143,6 +145,22 @@ Page({
       this.setData({
           cIndex: e.detail.value
       })
+  },
+  closeAndOpen: function(){
+      var that = this;
+      if (that.data.isEdit == false){
+          //展开表单
+          that.setData({
+              isEdit : true,
+              mapHeight : "30vh"
+          });
+         
+      }else{
+          that.setData({
+              isEdit: false,
+              mapHeight: "70vh"
+          });
+      }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
