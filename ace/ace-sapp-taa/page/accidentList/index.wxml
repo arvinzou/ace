@@ -13,7 +13,7 @@
                     <view class='item01-right'>路长:万传明</view>
                 </view>
                 <view class='item02'>
-                    <view class='edit'>续报</view>
+                    <view class='edit' bindtap='editAccident'>续报</view>
                     <view class='revoke'>撤销</view>
                     <view class='time'>最后续报时间:01/10 10:30:10</view>
                 </view>
@@ -28,7 +28,7 @@
                     <view class='item01-right'>路长:万传明</view>
                 </view>
                 <view class='item02'>
-                    <view class='edit'>续报</view>
+                    <view class='edit'  bindtap='editAccident'>续报</view>
                     <view class='revoke'>撤销</view>
                     <view class='time'>最后续报时间:01/10 10:30:10</view>
                 </view>
@@ -43,7 +43,7 @@
                     <view class='item01-right'>路长:万传明</view>
                 </view>
                 <view class='item02'>
-                    <view class='edit'>续报</view>
+                    <view class='edit'  bindtap='editAccident'>续报</view>
                     <view class='revoke'>撤销</view>
                     <view class='time'>最后续报时间:01/10 10:30:10</view>
                 </view>

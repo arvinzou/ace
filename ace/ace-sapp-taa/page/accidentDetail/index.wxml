@@ -1,0 +1,72 @@
+<view class='index'>
+    <view class='title'>基本信息</view>
+    <view class='form-box'>
+        <view class='box'>
+            <view class='title02'>
+                <view class='locate'>常德市武陵区武陵阁</view>
+                <view class='locate-road'>
+                    <text>沅安路-临江公园西至武陵阁</text>
+                    <image src='../../image/icon_rediret.png'></image>
+                </view>
+            </view>
+            <view class='row br'>
+                <view class='row-left'>所属路长</view>
+                <view class='row-right content'>
+                    <text>许黎明</text>
+                    <image src='../../image/icon_rediret.png'></image>
+                </view>
+            </view>
+            <view class='row br'>
+                <view class='row-left'>快报时间</view>
+                <view class='row-right content'>2018年11月27日 23:12</view>
+            </view>
+            <view class='row br'>
+                <view class='row-left'>天气情况</view>
+                <view class='row-right content'>
+                    <text>晴转多云</text>
+                    <image src='../../image/icon_rediret.png'></image>
+                </view>
+            </view>
+            <view class='row'>
+                <view class='row-left'>车型</view>
+                <view class='row-right content'>
+                    <text>SUV</text>
+                    <image src='../../image/icon_rediret.png'></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='title'>事故续报</view>
+    <view class='form-box'>
+        <view class='box'>
+            <view class='row br'>
+                <view class='row-left'>事故时间</view>
+                <view class='row-right content'>
+                    <text>2018年11月27日 23:12</text>
+                    <image src='../../image/icon_rediret.png'></image>
+                </view>
+            </view>
+            <view class='row br'>
+                <view class='row-left'>受伤人数</view>
+                <view class='row-right'><input type='number' placeholder='请输入受伤人数' placeholder-class='input-holder'></input></view>
+            </view>
+            <view class='row br'>
+                <view class='row-left'>死亡人数</view>
+                <view class='row-right'><input type='number' placeholder='请输入死亡人数'  placeholder-class='input-holder'></input></view>
+            </view>
+            <view class='row row-title br'>
+                <text class='season-title'>事故原因</text>
+                <text class='season-opt'>(可多选)</text>
+            </view>
+            <view class='checkbox-container'>
+                <checkbox-group bindchange="checkboxChange">
+                    <label class="checkbox cbox" wx:for="{{items}}">
+                            <checkbox value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+                    </label>
+                </checkbox-group>
+            </view>
+        </view>
+    </view>
+
+    <view class='commit-btn'>提交</view>
+</view>
