@@ -133,6 +133,7 @@ public class WTraAccController extends TaaBaseController {
 
         MessageResponse ms = traAccService.updateStatus(traAccId, "0", parseUser(user));
         return new ResultResponse(ms);
+
     }
 
 }
