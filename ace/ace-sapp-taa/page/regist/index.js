@@ -1,3 +1,5 @@
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
   /**
@@ -30,15 +32,66 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+     
   },
   bindPickerChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
         index: e.detail.value
     });
+  }, 
+  initDeptList: function(e){
+      util.request(cfg.server +'/portal/department/findDepartmentList.do', {
+         
+      },
+      function (ret) {
+           console.log(ret);
+            wx.showModal({
+                title: '提示',
+                content: ret.info,
+                success: function (res) { }
+            });
+        }
+      );
   },
-
+  formSubmit: function(e){
+      var name = e.detail.value.name;
+      var mobile = e.detail.value.mobile;
+      var copNo = e.detail.value.copNo;
+      var dept = e.detail.value.copNo;
+      if (name == undefined || name == '' || name == null) {
+          wx.showModal({
+              title: '提示',
+              content: '请输入姓名！',
+              success: function (res) { }
+          });
+          return;
+      }
+      if (mobile == undefined || mobile == '' || mobile == null) {
+          wx.showModal({
+              title: '提示',
+              content: '请输入手机号码',
+              success: function (res) { }
+          });
+          return;
+      }
+      if (mobile == undefined || mobile == '' || mobile == null) {
+          wx.showModal({
+              title: '提示',
+              content: '请输入手机号码',
+              success: function (res) { }
+          });
+          return;
+      }
+      if (dept == undefined || dept == '' || dept == null){
+          wx.showModal({
+              title: '提示',
+              content: '请选择所属单位',
+              success: function (res) { }
+          });
+          return;
+      }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -50,7 +103,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+      var that = this;
+      if (!util.is_login()) {
+          wx.navigateTo({
+              url: "../userinfo/index?url=../regist/index&type=switchTab"
+          });
+          return;
+      }else{
+          that.initDeptList();
+      }
   },
 
   /**

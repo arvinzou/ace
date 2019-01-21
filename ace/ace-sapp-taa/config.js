@@ -1,10 +1,10 @@
-var server = "https://zx.huacainfo.com";
+var server = "http://zx.huacainfo.com";
 var serverfile = "https://zx.huacainfo.com/";
 var config = {
     server,
     serverfile,
-  appid: 'wx7e6a369d8fa12b12',
-  appsecret: 'eac1cdaebc47d72133d0872a5900f344',
+    appid: 'wx70ba7c5dca85e4da',
+    appsecret: '96214b4a01153935995cc027ddf26d75',
     loginUrl: `${server}/portal/www/authority.do`,
     checkImageUrl: `${server}/society/www/captcha/image.do`,
     uploadUrl: `${server}/portal/www/upload.do`,
