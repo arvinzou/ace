@@ -7,6 +7,7 @@
     <title>班牌</title>
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" href="css/viewer.min.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 </head>
 
@@ -95,12 +96,14 @@
     </div>
 </div>
 
-<div class="hide modal">
+<div class="hide modal modal4">
     <div class="modal_content addBook">
         <div class=" modal_head">
             <span>通讯录</span> <span class="hideModal">×</span>
         </div>
         <div class="modal_body">
+            <ul id="student">
+            </ul>
         </div>
     </div>
 </div>
@@ -113,7 +116,6 @@
         </div>
         <div class="modal_body">
             <div class="classRoomList" id="roomTemp">
-
 
             </div>
         </div>
@@ -168,7 +170,7 @@
             </tr>
             <tr>
                 <td class="style5">班级学员</td>
-                <td class="fontBlue" colspan="2"> 查看班级通讯录(\${data.count})</td>
+                <td class="fontBlue active_student" colspan="2"> 查看班级通讯录(\${data.count})</td>
             </tr>
         </table>
     </div>
@@ -177,9 +179,14 @@
 
 <script id="tpl-imgTemp" type="text/template">
     {@each data as item}
-    <div class="img">
+    <li class="img">
         <img src="\${item.url}" alt=""/>
-    </div>
+    </li>
+    {@/each}
+</script>
+<script id="tpl-student" type="text/template">
+    {@each data as item}
+    <li><span>\${item.name}</span> <span class="style5">\${item.mobile}</span></li>
     {@/each}
 </script>
 
@@ -189,7 +196,7 @@
     {@/each}
 </script>
 
-
+<script src="js/viewer.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>

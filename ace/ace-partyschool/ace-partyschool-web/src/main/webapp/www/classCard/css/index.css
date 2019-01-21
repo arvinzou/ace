@@ -6,6 +6,7 @@ html {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	list-style: none;
 }
 
 body {
@@ -246,7 +247,7 @@ body {
 	border-right: none;
 }
 
-.classInfo .style5 {
+.modal .style5 {
 	color: rgba(171, 174, 185, 1);
 }
 
@@ -399,8 +400,8 @@ body {
 	right: 20px;
 }
 
-.modal .classRoom{
-	width: 700px;
+.modal .classRoom,.modal .addBook{
+	width: 720px;
 }
 
 .modal .classRoom .roomItem{
@@ -412,4 +413,20 @@ body {
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 20px;
+}
+
+
+.addBook ul{
+	height: 666px;
+	overflow: auto;
+}
+
+.addBook ul li{
+	line-height: 80px;
+	display: flex;
+	justify-content: space-between;
+	font-size:24px;
+	font-family:MicrosoftYaHei;
+	font-weight:400;
+	color:rgba(55,63,83,1);
 }

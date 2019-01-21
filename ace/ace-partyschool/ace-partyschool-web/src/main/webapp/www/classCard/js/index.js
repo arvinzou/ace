@@ -16,9 +16,25 @@ $(function () {
     $('.weeekClass').on('click','.prevWeek',prevWeek);
     $('.modal').on('click','.hideModal',hideModal);
     $('.classInfo').on('click','.active_photos',viewPhotos);
+    $('.classInfo').on('click','.active_student',viewStudent);
     $('.content').on('click','.active_changeRoom',changeRoom);
     $('.classRoom').on('click','.roomItem',chooesRoom);
+
 })
+
+
+function viewStudent() {
+    var url = contextPath + "/www/classes/findStudentList";
+    var data = {
+        classId: classId,
+    }
+    $.getJSON(url, data, function (rst) {
+        if(rst.status==0){
+            renderPage('student',rst.rows,'tpl-student');
+            $('.modal4').show();
+        }
+    });
+}
 
 
 
@@ -70,8 +86,10 @@ function viewPhotos() {
     }
     $.getJSON(url, data, function (rst) {
         if(rst.status==0){
+            $('#imgTemp').viewer('destroy');
             renderPage('imgTemp',rst.rows,'tpl-imgTemp');
             $('.modal3').show();
+            $('#imgTemp').viewer();
         }
     });
 }
