@@ -141,15 +141,17 @@ where t.status='1'
   </select>
 
   <select id="getTreeList" resultType="map">
-    SELECT
-    '9999' ID,
-    '0' PID,
-    '教职工' TEXT,
-    1 CHILD_COUNT,
-    NULL HREF
-    FROM
-    teacher t
-    LIMIT 1
+      select A.ID, A.PID, A.TEXT, A.CHILD_COUNT, A.HREF
+      from (
+      SELECT
+      '9999' ID,
+      '0' PID,
+      '教职工' TEXT,
+      1 CHILD_COUNT,
+      NULL HREF
+      FROM teacher t
+      LIMIT 1
+      )A
     UNION ALL
     SELECT
     t.ID,

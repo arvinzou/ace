@@ -4,11 +4,9 @@ package com.huacainfo.ace.taa.service.impl;
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
+import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
 import com.huacainfo.ace.common.result.*;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.taa.dao.TraAccDao;
 import com.huacainfo.ace.taa.model.TraAcc;
@@ -20,10 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("traAccService")
 /**
@@ -428,7 +423,9 @@ public class TraAccServiceImpl implements TraAccService {
     @Override
     public Map<String, Object> contrastiveReport(Map<String, String> params) {
         String nowDataTime = DateUtil.getNow();
-        String nowYear = nowDataTime.substring(0, 4);
+        String year = params.get("year");
+        String nowYear = StringUtil.isEmpty(year) ? nowDataTime.substring(0, 4) : year;
+
         Map<String, String> nowParams = getParams(Integer.parseInt(nowYear));
         nowParams.putAll(params);
         Map<String, String> pastParams = getParams(Integer.parseInt(nowYear) - 1);
@@ -492,10 +489,60 @@ public class TraAccServiceImpl implements TraAccService {
      * @version: 2019-01-19
      */
     @Override
-   public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception{
-        SingleResult<Map<String, Object>> rst=new SingleResult();
-        String areaCode6=CommonUtils.rightPad(areaCode,6,"0");
+    public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception {
+        SingleResult<Map<String, Object>> rst = new SingleResult();
+        String areaCode6 = CommonUtils.rightPad(areaCode, 6, "0");
         rst.setValue(this.traAccDao.getLatLongByAreaCode(areaCode6));
-       return rst;
-   }
+        return rst;
+    }
+
+    /**
+     * @throws
+     * @Title:getTraAccList
+     * @Description: TODO(交通事故热力图)
+     * @param: @param condition
+     * @param: @throws Exception
+     * @return: List<Map<String, Object>>
+     * @author: 陈晓克
+     * @version: 2019-01-21
+     */
+    @Override
+    public List<Map<String, Object>> getTraAccList(TraAccQVo condition) throws Exception {
+        List<Map<String, Object>> rst = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list = this.traAccDao.getTraAccList(condition);
+        for (Map<String, Object> o : list) {
+            double[] e = LatLonUtil.map_tx2bd(((java.math.BigDecimal) o.get("latitude")).doubleValue(), ((java.math.BigDecimal) o.get("longitude")).doubleValue());
+            Map<String, Object> map = new HashMap<>();
+            map.put("latitude", e[0]);
+            map.put("longitude", e[1]);
+            rst.add(map);
+        }
+        return rst;
+    }
+
+    /**
+     * 掌上驾驶仓
+     *
+     * @param areaCode    行政区划
+     * @param dateTimeStr 查询年月;7位有效数据，默认当前年月
+     * @return Map<String, Object>
+     */
+    @Override
+    public Map<String, Object> multipleReport(String areaCode, String dateTimeStr) {
+        dateTimeStr = StringUtil.isEmpty(dateTimeStr) ? DateUtil.getNow().substring(0, 7) : dateTimeStr;
+
+        //当月数据统计
+        Map<String, Object> month = traAccDao.monthReport(areaCode, dateTimeStr);
+        //事故top10
+        List<Map<String, Object>> top10 = traAccDao.top10Report(areaCode, dateTimeStr);
+        //事故柱形图
+        List<Map<String, Object>> histogram = traAccDao.histogramReport(dateTimeStr);
+
+//        return data
+        Map<String, Object> rst = new HashMap<>();
+        rst.put("month", month);//当月数据统计
+        rst.put("top10", top10);//当月数据统计
+        rst.put("histogram", histogram);//当月数据统计
+        return null;
+    }
 }

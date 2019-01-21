@@ -1,5 +1,8 @@
 package com.huacainfo.ace.common.tools;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @Auther: Arvin
  * @Date: 2019/1/19 10:38
@@ -10,6 +13,7 @@ public class LatLonUtil {
     private static final double PI = 3.14159265;
     private static final double EARTH_RADIUS = 6378137;
     private static final double RAD = Math.PI / 180.0;
+    private static Logger logger = LoggerFactory.getLogger(LatLonUtil.class);
 
 
     /**
@@ -91,9 +95,7 @@ public class LatLonUtil {
         double theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
         bd_lon = z * Math.cos(theta) + 0.0065;
         bd_lat = z * Math.sin(theta) + 0.006;
-
-        System.out.println("bd_lat:" + bd_lat);
-        System.out.println("bd_lon:" + bd_lon);
+        LatLonUtil.logger.info("tx:{tx_lat} {tx_lon}=>bd:{bd_lat} {bd_lon}",lat,lon,bd_lat,bd_lon);
 
         return new double[]{bd_lat, bd_lon};
     }

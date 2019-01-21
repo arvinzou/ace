@@ -77,4 +77,14 @@ public interface TraAccDao {
      * @return Map<String,Object>
      */
     Map<String, Object> getLatLongByAreaCode(String areaCode);
+
+    List<Map<String, Object>> getTraAccList(@Param("condition") TraAccQVo condition);
+
+    Map<String, Object> monthReport(@Param("areaCode") String areaCode,
+                                    @Param("dateTimeStr") String dateTimeStr);
+
+    List<Map<String, Object>> top10Report(@Param("areaCode") String areaCode,
+                                          @Param("dateTimeStr") String dateTimeStr);
+
+    List<Map<String, Object>> histogramReport(String dateTimeStr);
 }

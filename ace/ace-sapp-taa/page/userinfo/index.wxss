@@ -1,0 +1,28 @@
+/* page/userinfo/index.wxss */
+
+.page {
+
+}
+
+.page {
+    background-color: #fff;
+    height: 100%;
+    width: 750rpx;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    text-align: center;
+    color: #a5a5a5;
+    overflow: hidden;
+}
+
+.weui-btn {
+    width: 640rpx;
+    height: 100rpx;
+    color: #fff;
+    background-color: #2932BD;
+    border-radius: 10rpx;
+    position: absolute;
+    top: 580rpx;
+    margin-left:55rpx; 
+    line-height: 100rpx;
+}

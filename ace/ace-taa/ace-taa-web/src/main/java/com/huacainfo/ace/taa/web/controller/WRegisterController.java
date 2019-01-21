@@ -2,11 +2,17 @@ package com.huacainfo.ace.taa.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.service.DepartmentService;
+import com.huacainfo.ace.portal.vo.DepartmentVo;
 import com.huacainfo.ace.taa.service.RegisterService;
+import com.huacainfo.ace.taa.vo.CustomerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +28,8 @@ public class WRegisterController extends TaaBaseController {
 
     @Autowired
     private RegisterService registerService;
+    @Autowired
+    private DepartmentService departmentService;
 
     /**
      * 功能描述: 手机号码是否重复注册
@@ -61,7 +69,7 @@ public class WRegisterController extends TaaBaseController {
         //重复注册验证
         boolean b = registerService.isExistByMobile(mobile);
         if (b) {
-            return new ResultResponse(ResultCode.FAIL, "该手机已被注册");
+            return new ResultResponse(ResultCode.FAIL, "该手机已被其他人注册");
         }
 
         //四位随机码
@@ -90,6 +98,21 @@ public class WRegisterController extends TaaBaseController {
         logger.debug("[taa]SignController.codeCheck=>mobile:{},code:{}", mobile, code);
 
         return code.equals(sessionCode);
+    }
+
+    /**
+     * 查询归属单位列表
+     */
+    @RequestMapping("/findDeptList")
+    public PageResult<DepartmentVo> findDeptList(Department condition, PageParam page) throws Exception {
+
+        condition.setSyid("taa");
+        PageResult<DepartmentVo> rst = departmentService.findDepartmentList(condition,
+                page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
     }
 
     /**
@@ -130,4 +153,65 @@ public class WRegisterController extends TaaBaseController {
             return new ResultResponse(ResultCode.FAIL, e.getMsg());
         }
     }
+
+    /**
+     * 获取用户注册信息
+     *
+     * @param uid 测试用户ID，可选
+     * @return ResultResponse
+     */
+    @RequestMapping("/findCustomerVo")
+    public ResultResponse findCustomerVo(String uid) {
+        //微信鉴权信息 --小程序
+        WxUser user = getCurWxUser();
+        if (StringUtil.isNotEmpty(uid)) {
+            user = new WxUser();
+            user.setUnionId(uid);
+            user.setNickName("test");
+        } else {
+            uid = user.getUnionId();
+        }
+        if (user == null) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+
+        CustomerVo customerVo = registerService.findCustomerVo(uid);
+        if (customerVo == null) {
+            return new ResultResponse(ResultCode.FAIL, "用户尚未注册");
+        }
+        return new ResultResponse(ResultCode.SUCCESS, "SUCCCESS", customerVo);
+    }
+
+    /**
+     * 获取用户注册信息
+     *
+     * @param uid 测试用户ID，可选
+     * @return ResultResponse
+     */
+    @RequestMapping("/updateMobile")
+    public ResultResponse updateMobile(String mobile, String code, String uid) {
+        if (!StringUtil.areNotEmpty(mobile, code)) {
+            return new ResultResponse(ResultCode.FAIL, "缺少必要参数");
+        }
+        //验证码校验
+        if (!codeCheck(mobile, code)) {
+            return new ResultResponse(ResultCode.FAIL, "验证码输入有误");
+        }
+        //微信鉴权信息 --小程序
+        WxUser user = getCurWxUser();
+        if (StringUtil.isNotEmpty(uid)) {
+            user = new WxUser();
+            user.setUnionId(uid);
+            user.setNickName("test");
+        } else {
+            uid = user.getUnionId();
+        }
+        if (user == null) {
+            return new ResultResponse(ResultCode.FAIL, "微信授权失败");
+        }
+
+        return registerService.updateMobile(uid, mobile);
+    }
 }
+
+

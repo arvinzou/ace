@@ -296,14 +296,14 @@ public class StudentServiceImpl implements StudentService {
             o.setRemark("批量导入学员：" + importDateTime);
             logger.info(o.toString());
             if (CommonUtils.isBlank(o.getName())) {
-                return new MessageResponse(1, "行" + i + ",名称不能为空！");
+                continue;
+//                return new MessageResponse(1, "行" + i + ",名称不能为空！");
             }
             if (CommonUtils.isBlank(o.getSex())) {
                 return new MessageResponse(1, "行" + i + ",性别不能为空！");
             }
             if (CommonUtils.isBlank(o.getMobile())) {
-                continue;
-//                return new MessageResponse(1, "行" + i + ",手机号码不能为空！");
+                return new MessageResponse(1, "行" + i + ",手机号码不能为空！");
             }
             if (CommonUtils.isBlank(o.getIdCard())) {
                 return new MessageResponse(1, "行" + i + ",政治面貌不能为空！");
