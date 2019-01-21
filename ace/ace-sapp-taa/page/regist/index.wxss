@@ -54,7 +54,35 @@
     height: 110rpx;
     float: left;
 }
+.mobile{
+    width: 45%;
+    height: 110rpx;
+    float: left; 
+}
+.code-opt-box{
+    width: 30%;
+    height: 110rpx;
+    float: left;
+}
+.code-opt{
+    width: 90%;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    margin-top: 25rpx;
+    color: #2932BD;
+    border-radius: 20rpx;
+    border: 1px solid #2932BD;
+    font-size: 28rpx;
+}
 .form-input input{
+    width: 100%;
+    height: 100%;
+    color: #373F53;
+    font-size: 34rpx;
+    font-weight: bold;
+}
+.mobile input{
     width: 100%;
     height: 100%;
     color: #373F53;

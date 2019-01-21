@@ -33,7 +33,6 @@ function request(url, data, success, fail, complete) {
         url: url,
         data: data,
         method: "GET",
-        dataType: "json",
         header: {
             'WX-SESSION-ID': wx.getStorageSync('WX-SESSION-ID') //每次请求带上登录标志
         },
