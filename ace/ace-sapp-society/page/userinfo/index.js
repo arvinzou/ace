@@ -23,13 +23,13 @@ Page({
     console.log('============>goback'+that.data.url);
     //wx.navigateTo({ url: that.data.url });
     if (that.data.type == 'navigateTo'){
-        wx.navigateTo({ url: that.data.url });
+        wx.navigateTo({ url: decodeURIComponent(that.data.url) });
     } else if (that.data.type == 'switchTab'){
         wx.switchTab({
-            url: that.data.url
+            url: decodeURIComponent(that.data.url) 
         });
     }else{
-        wx.navigateTo({ url: that.data.url });
+        wx.navigateTo({ url: decodeURIComponent(that.data.url)});
     }
   },
   bindgetuserinfo: function (e) {

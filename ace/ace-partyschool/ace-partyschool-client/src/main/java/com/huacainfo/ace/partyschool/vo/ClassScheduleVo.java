@@ -1,6 +1,7 @@
 package com.huacainfo.ace.partyschool.vo;
 
 import com.huacainfo.ace.partyschool.model.ClassSchedule;
+import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.model.Course;
 import com.huacainfo.ace.partyschool.model.Teacher;
 
@@ -12,7 +13,18 @@ public class ClassScheduleVo extends ClassSchedule {
 
     private Teacher teacher;
 
+    private  Classes classes;
+
     private int userNum;
+
+
+    public Classes getClasses() {
+        return classes;
+    }
+
+    public void setClasses(Classes classes) {
+        this.classes = classes;
+    }
 
     public int getStudentNum() {
         return studentNum;

@@ -1,0 +1,125 @@
+.index{
+    width: 100%;
+    height: 100%;
+    background: #FAFAFA;
+}
+.box{
+    width: 100%;
+    height: 114rpx;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+}
+.search-box{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 17rpx;
+    padding-bottom: 17rpx;
+}
+.search-box::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.search-input{
+    width: 92%;
+    height: 80rpx;
+    padding-left: 4%;
+    padding-right: 4%;
+    border-radius: 10rpx;
+    background:rgba(245,246,247,0.8);
+}
+.list{
+    width: 100%;
+    height: 100%;
+}
+.list-box{
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    margin-bottom: 20rpx;
+}
+.item{
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+}
+.title{
+    padding-top: 40rpx;
+    padding-bottom: 20rpx;
+    color: #373F53;
+    font-size: 32rpx;
+    font-weight: bold;
+    text-overflow:ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.item01{
+    width: 100%;
+    height: 24rpx;
+    line-height: 24rpx;
+    color: #ABAEB9;
+    font-size: 24rpx;
+}
+.item01::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.item01-left{
+    width: 59%;
+    height: 100%;
+    float: left;
+    border-right: 1px solid #D7D9DF;
+}
+.item01-right{
+    width: 39%;
+    height: 100%;
+    float: left;
+    text-align: right;
+}
+.item02{
+    width: 100%;
+    height: 128rpx;
+}
+.item02::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+.edit{
+    width: 134rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    text-align: center;
+    background: #D2D5FF;
+    border-radius: 27rpx;
+    border:1px solid rgba(210,213,255,1);
+    color: #2430E3;
+    font-size: 26rpx;
+    float: left;
+    margin-top: 37rpx;
+    margin-right: 14rpx;
+}
+.revoke{
+    width: 134rpx;
+    height: 54rpx;
+    line-height: 54rpx;
+    text-align: center;
+    background: #FBE2E0;
+    border-radius: 27rpx;
+    border:1px solid rgba(251,226,224,1);
+    color: #FE4C46;
+    font-size: 26rpx;
+    float: left;
+    margin-top: 37rpx;
+    margin-right: 40rpx;
+}
+.time{
+    width: auto;
+    height: 128rpx;
+    line-height: 128rpx;
+    color: #D7D9DF;
+    font-size: 22rpx;
+    float: right;
+}

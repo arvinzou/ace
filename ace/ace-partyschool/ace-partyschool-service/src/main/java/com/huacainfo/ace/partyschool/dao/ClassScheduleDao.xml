@@ -110,7 +110,8 @@
       courseDate = #{courseDate,jdbcType=TIMESTAMP},
       courseIndex = #{courseIndex,jdbcType=VARCHAR},
       teacherId = #{teacherId,jdbcType=VARCHAR},
-      courseId = #{courseId,jdbcType=VARCHAR}
+      courseId = #{courseId,jdbcType=VARCHAR},
+      courseId = #{courseId,jdbcType=VARCHAR},
       ifTest = #{ifTest,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -141,10 +142,10 @@
             <id property="id" column="tId"/>
             <result column="tName" property="name"/>
         </collection>
-        <!--<collection property="classes" ofType="com.huacainfo.ace.partyschool.model.Classes">-->
-        <!--<id property="id" column="classId"/>-->
-        <!--<result column="claName" property="name"/>-->
-        <!--</collection>-->
+        <collection property="classes" ofType="com.huacainfo.ace.partyschool.model.Classes">
+        <id property="id" column="classId"/>
+        <result column="claName" property="name"/>
+        </collection>
     </resultMap>
 
 
@@ -170,7 +171,7 @@ WHERE st.classId=cs.classesId) AS studentNum,
     cs.id, cs.classesId, cs.courseDate, cs.courseIndex, cs.teacherId, cs.courseId,cs.ifTest,
     c.id as cId,c.name as cName,c.category ,c.teacherId as cTeacherId,c.evaluatingId,
     t.id as tId ,t.name as tName,
-    t.id as claId ,t.name as claName
+    cla.id as claId ,cla.name as claName
   </sql>
 
     <sql id="Where_Condition">

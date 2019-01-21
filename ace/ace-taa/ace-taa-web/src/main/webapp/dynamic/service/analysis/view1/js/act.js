@@ -83,39 +83,20 @@ function findTraAccList(params) {
 							//自定义Marker图标的阴影
 							// shadow: new qq.maps.MarkerImage("https://open.map.qq.com/doc/img/nilb.png"),
 							//设置Marker标题，鼠标划过Marker时显示
-							title: o.id,
+							title: o.roadManName,
 							//设置Marker的可见性，为true时可见,false时不可见
 							visible: true,
-							o: o
+							o:o
 
 						});
-						//添加信息窗口
-						var info = new qq.maps.InfoWindow({
-							map: map
-						});
-						var inf = [];
-						//获取标记的可拖动属性
-						inf.push("<h5>");
-						inf.push(o.address);
-						inf.push("</h5>");
-						inf.push("<div>");
-						inf.push(o.accidentTime);
-						inf.push("</div>");
-
-						inf.push("<div>");
-						inf.push(o.roadManName);
-						inf.push("</div>");
+						
 
 
 
-						info.setPosition(marker.getPosition());
-						qq.maps.event.addListener(marker, 'click', function() {
-							//info.open();
-							//info.setContent(inf.join(""));
-							//info.setContent('<div style="text-align:center;white-space:nowrap;margin:10px;">'+marker.getTitle()+'</div>');
-							//info.setPosition(marker.getPosition());
-							//alert(marker.getTitle());
-							initPreview(marker.getTitle());
+						
+						qq.maps.event.addListener(marker, 'click', function(event) {
+							console.log(event);
+							initPreview(event.target.o.id);
 						});
 						markers.push(marker);
 					}
@@ -150,6 +131,7 @@ function getLatLongByAreaCode(data) {
 			if (result.status == 0) {
 				console.log(result);
 				map.panTo(new qq.maps.LatLng(result.value.latitude, result.value.longitude));
+				$("input[name=areaCode]").val(result.value.areaName);
 			} else {
 				alert(result.errorMessage);
 			}
@@ -161,20 +143,22 @@ function getLatLongByAreaCode(data) {
 }
 
 jQuery(function($) {
-	$(".RightDiv").css("height", (window.innerHeight - 40) + "px");
+	$(".info").hide();
+	$(".RightDiv").css("height", (window.innerHeight - 45) + "px");
 	$("#FullScreen").click(function() {
 		var ml = $("#TextViewPanel").css("margin-left");
 		if (ml == '0px') {
 			$("#TextViewPanel").css("margin-left", "-380px");
-			$("#FullScreen").css('background-position', '-22px 0px');
+			$("#FullScreen").css('background-position', '-44px 0px');
 			$("#FullScreen").css('left', '-1px');
 		} else {
 			$("#TextViewPanel").css("margin-left", "0px");
-			$("#FullScreen").css('background-position', '-44px 0px');
+			$("#FullScreen").css('background-position', '-22px 0px');
 			$("#FullScreen").css('left', '299px');
 		}
 	})
 	initJuicerMethod();
+	
 	initMap();
 	initForm();
 	initEvents();
@@ -283,11 +267,43 @@ function initEvents() {
 	$('input[name=endDate]').focus(function() {
 		$(this).blur(); //不可输入状态
 	})
+$('input[name=roadSectionId]').combogrid({
+		panelWidth: 500,
+		idField: 'id',
+		textField: 'name',
+		url: contextPath + '/roadSection/getListByCondition',
+		mode: 'remote',
+		fitColumns: true,
+		method: 'get',
+		columns: [
+			[{
+				field: 'name',
+				title: '路段名称',
+				width: 100
+			}, {
+				field: 'roadManName',
+				title: '路长',
+				width: 100
+			}, {
+				field: 'startName',
+				title: '路段起始',
+				width: 100
+			}, {
+				field: 'endName',
+				title: '路段截止',
+				width: 100
+			}]
+		],
+		onSelect:function  (rowIndex, rowData) {
+
+		}
+	});
 
 }
 
 function initPreview(id) {
 	startLoad();
+	$(".info").show();
 	$.ajax({
 		url: contextPath + "/traAcc/selectTraAccByPrimaryKey",
 		type: "post",
@@ -301,7 +317,7 @@ function initPreview(id) {
 				var data = {};
 				data['o'] = result.value;
 				render('#fm-preview', data, 'tpl-preview');
-				$("#modal-preview").modal("show");
+				
 			} else {
 				alert(result.errorMessage);
 			}
@@ -315,4 +331,10 @@ function initPreview(id) {
 //juicer自定义函数
 function initJuicerMethod() {
     juicer.register('rsd', rsd);
+}
+function infoClose(){
+	$(".info").hide();
+}
+function areaCode(o){
+    console.log(o);
 }

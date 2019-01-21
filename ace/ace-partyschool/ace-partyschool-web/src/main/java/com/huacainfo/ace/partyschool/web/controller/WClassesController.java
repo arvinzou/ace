@@ -12,8 +12,11 @@ import com.huacainfo.ace.common.result.SingleResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import com.huacainfo.ace.partyschool.model.Classes;
 import com.huacainfo.ace.partyschool.service.ClassesService;
+import com.huacainfo.ace.partyschool.service.StudentService;
 import com.huacainfo.ace.partyschool.vo.ClassesQVo;
 import com.huacainfo.ace.partyschool.vo.ClassesVo;
+import com.huacainfo.ace.partyschool.vo.StudentQVo;
+import com.huacainfo.ace.partyschool.vo.StudentVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,8 @@ public class WClassesController extends BisBaseController {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private ClassesService classesService;
+    @Autowired
+    private StudentService studentService;
 
     /**
      * @throws
@@ -52,11 +57,7 @@ public class WClassesController extends BisBaseController {
     @RequestMapping(value = "/getClassesInfo")
     @ResponseBody
     public ResultResponse selectClassesByPrimaryKey(String classId) throws Exception {
-        UserProp userProp = this.getCurUserProp();
-        if (userProp == null) {
-            return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
-        }
-        return this.classesService.selectClassesByPrimaryKeyVo(userProp,classId);
+        return this.classesService.selectClassesByPrimaryKeyVo(this.getCurUserProp(),classId);
     }
 
     @RequestMapping(value = "/findClassList")
@@ -65,5 +66,16 @@ public class WClassesController extends BisBaseController {
 
         return this.classesService.findClassesList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
 
+    }
+
+    @RequestMapping(value = "/findStudentList")
+    @ResponseBody
+    public PageResult<StudentVo> findStudentList(StudentQVo condition,
+                                                 PageParamNoChangeSord page) throws Exception {
+        PageResult<StudentVo> rst =
+                this.studentService.findStudentList(condition, page.getStart(), page.getLimit(), page.getOrderBy());
+
+
+        return rst;
     }
 }

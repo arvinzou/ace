@@ -10,28 +10,35 @@ Page({
         hiddenBtn: true,
         showBtn: false,
     },
-    onLoad: function(options) {
+    onLoad: function (options) {
         let that = this;
         let id = options.id;
-        let tit = options.title;
+        //判断有没有鉴权
+        if (!util.is_login()) {
+            let u = '../activityInfo/index?id=' + id;
+            wx.navigateTo({
+                url: '../userinfo/index?url=' + encodeURIComponent(u) + '&type=navigateTo'
+            });
+            return;
+        }
         if (!id) {
             wx.navigateBack({})
             return;
         }
         that.data.id = id;
-        that.setBarTitleText(tit);
+        that.initdata();
+
     },
 
-    ifCreatBtn: function() {
+    ifCreatBtn: function () {
         let that = this;
         // 已经登陆过了。获取用户信息
         let sysUserInfo = util.getSysUser();
         // 如果没有用户信息
-        if (!sysUserInfo) {
-            return;
-        }
-        if ((that.data.activityInfo.category == 4 && sysUserInfo.person.politicalStatus == 1) || (that.data.activityInfo.initiatorId == sysUserInfo.person.id)) {
-            return;
+        if (sysUserInfo) {
+            if ((that.data.activityInfo.category == 4 && sysUserInfo.person.politicalStatus == 1) || (that.data.activityInfo.initiatorId == sysUserInfo.person.id)) {
+                return;
+            }
         }
         that.setData({
             hiddenBtn: false,
@@ -40,38 +47,37 @@ Page({
     },
 
     // 获取列表
-    initdata: function() {
+    initdata: function () {
         let that = this;
         util.request(cfg.findActivity, {
-                id: that.data.id,
-            },
-            function(rst) {
+            id: that.data.id,
+        },
+            function (rst) {
                 wx.hideNavigationBarLoading() //完成停止加载
                 wx.stopPullDownRefresh() //停止下拉刷新
                 that.data.activityInfo = rst.data;
+                that.setBarTitleText(rst.data.title);
                 that.ifCreatBtn();
                 that.setData({
                     activityInfo: rst.data
                 });
-
             }
         );
     },
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function() {
-        let that = this;
-        that.initdata();
+    onShow: function () {
+
     },
 
-    btnControl: function() {
+    btnControl: function () {
         let that = this;
         if (that.data.activityInfo.dendline > that.data.nowDate) {
             util.request(cfg.applyStatus, {
-                    activityId: that.data.activityInfo.id,
-                },
-                function(rst) {
+                activityId: that.data.activityInfo.id,
+            },
+                function (rst) {
                     //        code:1、未注册和鉴权2、账户类型为组织，3、未报名，4、已报名
                     let code = rst.data.code;
                     that.setData({
@@ -86,13 +92,13 @@ Page({
         }
     },
 
-    setBarTitleText: function(tit) {
+    setBarTitleText: function (tit) {
         wx.setNavigationBarTitle({
             title: tit
         })
     },
 
-    viewParticipants: function(e) {
+    viewParticipants: function (e) {
         let data = e.currentTarget.dataset
         let that = this;
         let p = data.id;
@@ -106,14 +112,14 @@ Page({
             url: '../participants/index?id=' + p + "&flag=" + flag,
         })
     },
-    apply: function() {
+    apply: function () {
         let that = this;
         let coin = that.data.activityInfo.participant;
         if (coin < 0) {
             wx.showModal({
                 title: '提示',
                 content: "参加活动需要" + coin + "爱心币",
-                success: function(res) {
+                success: function (res) {
                     console.log(res)
                     if (res.confirm) {
                         let user = util.getSysUser();
@@ -126,7 +132,7 @@ Page({
                                 title: '爱心币不足',
                                 icon: 'success',
                                 duration: 2000,
-                                complete: function() {
+                                complete: function () {
                                     return;
                                 }
                             });
@@ -142,7 +148,7 @@ Page({
             })
         }
     },
-    onPageScroll: function(e) {
+    onPageScroll: function (e) {
         if (this.data.hiddenBtn) {
             return;
         }
@@ -170,13 +176,31 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
         wx.stopPullDownRefresh();
         return;
     },
-    signIn:function(){
+    signIn: function () {
         wx.navigateTo({
             url: '../regist/index',
         })
+    },
+    onShareAppMessage: function (res) {
+        let that = this;
+        if (res.from === 'button') {
+            // 来自页面内转发按钮
+            console.log(res.target)
+        }
+        return {
+            title: that.data.tit,
+            id: that.data.id,
+            path: '/page/activityInfo/index?id=' + id,
+            success: function (res) {
+                // 转发成功
+            },
+            fail: function (res) {
+                // 转发失败
+            }
+        }
     }
 })

@@ -7,13 +7,14 @@
     <title>班牌</title>
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" href="css/viewer.min.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
 <div class="content">
     <div class="head">
-        <div class="room_name">一教室</div>
+        <div class="room_name active_changeRoom">一教室</div>
         <img src="img/logo.png"/>
         <div class="dateTime" id="clock">
             <p>1921年7月1日 </p>
@@ -26,7 +27,7 @@
                 <tr>
                     <th class="style1">班次</th>
                     <th class="style2 class_name">第78期县处级干部进修班</th>
-                    <th class="style1">应道人数</th>
+                    <th class="style1">应到人数</th>
                     <th class="style2 class_people">48人</th>
                     <th class="style4"><span class="active_classInfo">详情</span></th>
                 </tr>
@@ -46,9 +47,7 @@
             </table>
             <div class="message">
                 <div class="title">
-							<span>
-								通知公告
-							</span>
+                    <span>通知公告</span>
                 </div>
                 <div class="fileMessage" id="fileMessage">
 
@@ -97,15 +96,33 @@
     </div>
 </div>
 
-<div class="hide modal">
+<div class="hide modal modal4">
     <div class="modal_content addBook">
         <div class=" modal_head">
             <span>通讯录</span> <span class="hideModal">×</span>
         </div>
         <div class="modal_body">
+            <ul id="student">
+            </ul>
         </div>
     </div>
 </div>
+
+
+<div class="hide  modal modal5">
+    <div class="modal_content classRoom">
+        <div class=" modal_head">
+            <span>选择班级</span> <span class="hideModal">×</span>
+        </div>
+        <div class="modal_body">
+            <div class="classRoomList" id="roomTemp">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 </body>
 
@@ -153,7 +170,7 @@
             </tr>
             <tr>
                 <td class="style5">班级学员</td>
-                <td class="fontBlue" colspan="2"> 查看班级通讯录(\${data.count})</td>
+                <td class="fontBlue active_student" colspan="2"> 查看班级通讯录(\${data.count})</td>
             </tr>
         </table>
     </div>
@@ -162,14 +179,24 @@
 
 <script id="tpl-imgTemp" type="text/template">
     {@each data as item}
-    <div class="img">
+    <li class="img">
         <img src="\${item.url}" alt=""/>
-    </div>
+    </li>
+    {@/each}
+</script>
+<script id="tpl-student" type="text/template">
+    {@each data as item}
+    <li><span>\${item.name}</span> <span class="style5">\${item.mobile}</span></li>
     {@/each}
 </script>
 
+<script id="tpl-roomTemp" type="text/template">
+    {@each data as item}
+    <div class="roomItem" data-id="\${item.id}">\${item.name}</div>
+    {@/each}
+</script>
 
-
+<script src="js/viewer.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 </html>

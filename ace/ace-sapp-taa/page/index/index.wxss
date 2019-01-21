@@ -216,3 +216,8 @@
     float: right;
     margin-top: 45rpx;
 }
+.close-open-box{
+    width: 100%;
+    height: auto;
+    text-align: center;
+}

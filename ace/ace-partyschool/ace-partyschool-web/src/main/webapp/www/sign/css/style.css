@@ -171,6 +171,9 @@ input:-ms-input-placeholder{
 	float: left;
 	font-size: 0.4rem;
 	color: #ABAEB9;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 .redirect{
 	width: 0.2rem;

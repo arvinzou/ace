@@ -103,6 +103,9 @@
         <if test='condition.roadManId!=null and condition.roadManId!=""'>
             and t.roadManId =#{condition.roadManId,jdbcType=VARCHAR}
         </if>
+        <if test='condition.roadSectionId!=null and condition.roadSectionId!=""'>
+            and t.roadSectionId =#{condition.roadSectionId,jdbcType=VARCHAR}
+        </if>
         <if test='condition.startDate!=null and condition.startDate!=""'>
             <![CDATA[
 			and t.accidentTime>=str_to_date(#{condition.startDate},'%Y-%m-%d')
@@ -314,6 +317,11 @@
         </if>
     </select>
     <select id="getLatLongByAreaCode" resultType="map">
-        select gps_x longitude,gps_y latitude from portal.gps_chian where area_code=#{areaCode}
+        select gps_x longitude,gps_y latitude ,area_name areaName,area_code areaCode from portal.gps_chian where area_code=#{areaCode}
+    </select>
+    <select id="getTraAccList" resultType="map">
+        select
+         t.latitude, t.longitude
+        <include refid="whereCondition"/>
     </select>
 </mapper>
