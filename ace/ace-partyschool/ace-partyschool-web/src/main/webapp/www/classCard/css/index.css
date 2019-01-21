@@ -33,6 +33,7 @@ body {
 	justify-content: space-between;
 	align-items: center;
 	margin: 20px 0px;
+	flex-shrink: 0;
 }
 
 .content .head img {
@@ -167,11 +168,50 @@ body {
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
+	overflow: auto;
+	position: relative;
 }
+
+.body .message .fileMessage .swriper-box{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
 
 #fileMessage object {
 	flex-grow: 1;
 }
+
+
+.body .message .fileMessage .imgMessage{
+	text-align: center;
+	overflow: auto;
+	height: 100%;
+
+}
+
+.body .message .fileMessage .txtMessage{
+	text-indent: 2em;
+	font-size: 34px;
+	line-height: 1.5em;
+	color: #373F53;
+	word-break:break-all;
+	word-wrap:break-word;
+	height: 100%;
+	overflow: auto;
+}
+
+.body .message .fileMessage .pdfMessage{
+	height: 100%;
+}
+
+
+.fileMessage .imgMessage img{
+	object-fit: cover;
+	max-width: 100%;
+}
+
 
 .modal {
 	width: 100%;
@@ -429,4 +469,9 @@ body {
 	font-family:MicrosoftYaHei;
 	font-weight:400;
 	color:rgba(55,63,83,1);
+}
+
+
+.swiper-container {
+	height: 100%;
 }

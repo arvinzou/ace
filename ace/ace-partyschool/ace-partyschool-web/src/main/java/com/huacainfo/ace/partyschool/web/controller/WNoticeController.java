@@ -58,6 +58,18 @@ public class WNoticeController extends BisBaseController {
   }
 
 
+
+  @RequestMapping(value = "/findPublicNotice")
+  @ResponseBody
+  public ResultResponse findPublicNotice(String classesId)
+          throws Exception {
+    return this.sclNoticeService.findPulicNoticeLists(classesId);
+  }
+
+
+
+
+
   /**
    * @throws @Title:selectNoticeById
    * @Description: TODO(获取通知公告详情)
