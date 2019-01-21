@@ -75,6 +75,10 @@ function regist(){
         alert("处室不能为空！");
         return;
     }
+    if(!isEmpty(workUnitName)){
+        alert("职务职称不能为空！");
+        return;
+    }
     if(!isEmpty(signAcct)){
         alert("手机号不能为空！");
         return;

@@ -72,11 +72,11 @@ function regist(){
         return;
     }
     if(!isEmpty(workUnitName)){
-        alert("单位名称不能为空！");
+        alert("单位全称不能为空！");
         return;
     }
     if(!isEmpty(postName)){
-        alert("单位职务不能为空！");
+        alert("职务全称不能为空！");
         return;
     }
     if(!isEmpty(clazz)){
