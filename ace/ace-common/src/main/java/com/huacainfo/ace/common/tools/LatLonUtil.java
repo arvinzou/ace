@@ -95,7 +95,7 @@ public class LatLonUtil {
         double theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
         bd_lon = z * Math.cos(theta) + 0.0065;
         bd_lat = z * Math.sin(theta) + 0.006;
-        LatLonUtil.logger.info("tx:{tx_lat} {tx_lon}=>bd:{bd_lat} {bd_lon}",lat,lon,bd_lat,bd_lon);
+        LatLonUtil.logger.info("tx:{} {}=>bd:{} {}",lat,lon,bd_lat,bd_lon);
 
         return new double[]{bd_lat, bd_lon};
     }

@@ -122,7 +122,7 @@ public class ClassScheduleServiceImpl implements ClassScheduleService {
         if(CommonUtils.isBlank(condition.getCourseDateStr())&&CommonUtils.isBlank(condition.getWeekDate())){
             new ResultResponse(ResultCode.FAIL,"没有传入时间");
         }
-        if(condition.getClassList().size()==0){
+        if(CommonUtils.isBlank(condition.getClassList())||condition.getClassList().size()==0){
             if(userProp==null){
                 new ResultResponse(ResultCode.FAIL,"没有登陆");
             }

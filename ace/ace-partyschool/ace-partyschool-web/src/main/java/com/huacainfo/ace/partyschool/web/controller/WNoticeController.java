@@ -86,8 +86,7 @@ public class WNoticeController extends BisBaseController {
     if (userProp == null) {
       return new ResultResponse(ResultCode.FAIL, "请先跳转登录");
     }
-    SingleResult<NoticeVo> o = this.sclNoticeService.updateAndSelectNoticeVoById(id,
-        getServerHttp(), this.getCurUserProp());
+    SingleResult<NoticeVo> o = this.sclNoticeService.updateAndSelectNoticeVoById(id, getServerHttp(), this.getCurUserProp());
     return new ResultResponse(0, "OK", o.getValue());
   }
 

@@ -67,7 +67,7 @@ function fileTypes(fileName){
         fileType = "word";
     }else if(type.toLowerCase() == "ppt" || type.toLowerCase() == "pptx"){
         fileType = "ppt";
-    }else if(type.toLowerCase() == "png" || type.toLowerCase() == "jpg" || type.toLowerCase() == "psd"){
+    }else if(type.toLowerCase() == "png" || type.toLowerCase() == "jpg" || type.toLowerCase() == "jpeg" || type.toLowerCase() == "bmp"){
         fileType = "img";
     }else if(type.toLowerCase() == "pdf"){
         fileType = "pdf";
@@ -192,7 +192,8 @@ function upload(){
         filters: {
             max_file_size: '102400mb',
             mime_types: [
-
+                {title : "oppice files", extensions : "xls,xlsx,doc,docx,ppt,pptx,pdf,txt"},
+                {title : "image", extensions : "jpg,jpeg,png,bmp"}
             ]
         }
     });
