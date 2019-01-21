@@ -319,4 +319,9 @@
     <select id="getLatLongByAreaCode" resultType="map">
         select gps_x longitude,gps_y latitude ,area_name areaName,area_code areaCode from portal.gps_chian where area_code=#{areaCode}
     </select>
+    <select id="getTraAccList" resultType="map">
+        select
+         t.latitude, t.longitude
+        <include refid="whereCondition"/>
+    </select>
 </mapper>

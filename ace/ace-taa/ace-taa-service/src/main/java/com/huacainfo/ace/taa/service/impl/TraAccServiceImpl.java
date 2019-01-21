@@ -5,10 +5,7 @@ import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.model.UserProp;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.*;
-import com.huacainfo.ace.common.tools.CommonBeanUtils;
-import com.huacainfo.ace.common.tools.CommonUtils;
-import com.huacainfo.ace.common.tools.DateUtil;
-import com.huacainfo.ace.common.tools.GUIDUtil;
+import com.huacainfo.ace.common.tools.*;
 import com.huacainfo.ace.portal.service.DataBaseLogService;
 import com.huacainfo.ace.taa.dao.TraAccDao;
 import com.huacainfo.ace.taa.model.TraAcc;
@@ -20,10 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("traAccService")
 /**
@@ -498,4 +492,27 @@ public class TraAccServiceImpl implements TraAccService {
         rst.setValue(this.traAccDao.getLatLongByAreaCode(areaCode6));
        return rst;
    }
+    /**
+     * @throws
+     * @Title:getTraAccList
+     * @Description: TODO(交通事故热力图)
+     * @param: @param condition
+     * @param: @throws Exception
+     * @return: List<Map<String, Object>>
+     * @author: 陈晓克
+     * @version: 2019-01-21
+     */
+    @Override
+    public List<Map<String, Object>> getTraAccList(TraAccQVo condition)throws Exception{
+        List<Map<String, Object>> rst=new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> list=this.traAccDao.getTraAccList(condition);
+        for(Map<String, Object> o:list){
+            double[] e= LatLonUtil.map_tx2bd(((java.math.BigDecimal)o.get("latitude")).doubleValue(),((java.math.BigDecimal)o.get("longitude")).doubleValue());
+            Map<String, Object> map=new HashMap<>();
+            map.put("latitude",e[0]);
+            map.put("longitude",e[1]);
+            rst.add(map);
+        }
+        return rst;
+    }
 }

@@ -227,4 +227,15 @@ public interface TraAccService {
      * @version: 2019-01-19
      */
     SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception;
+    /**
+     * @throws
+     * @Title:getTraAccList
+     * @Description: TODO(交通事故热力图)
+     * @param: @param condition
+     * @param: @throws Exception
+     * @return: List<Map<String, Object>>
+     * @author: 陈晓克
+     * @version: 2019-01-21
+     */
+    List<Map<String, Object>> getTraAccList(TraAccQVo condition)throws Exception;
 }

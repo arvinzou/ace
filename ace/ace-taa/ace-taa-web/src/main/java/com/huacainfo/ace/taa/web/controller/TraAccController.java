@@ -1,5 +1,6 @@
 package com.huacainfo.ace.taa.web.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.huacainfo.ace.common.result.ListResult;
 import com.huacainfo.ace.common.tools.CommonUtils;
 import org.slf4j.Logger;
@@ -284,5 +285,28 @@ public class TraAccController extends TaaBaseController {
     @ResponseBody
     public SingleResult<Map<String, Object>> getLatLongByAreaCode(String areaCode) throws Exception {
         return this.traAccService.getLatLongByAreaCode(areaCode);
+    }
+    /**
+     * @throws
+     * @Title:find!{bean.name}List
+     * @Description: TODO(事故分页查询)
+     * @param: @param condition
+     * @param: @param page
+     * @param: @return
+     * @param: @throws Exception
+     * @return: PageResult
+     * <TraAccVo>
+     * @author: 陈晓克
+     * @version: 2019-01-10
+     */
+    @RequestMapping(value = "/getTraAccList")
+    @ResponseBody
+    public JSONArray getTraAccList(TraAccQVo condition, PageParamNoChangeSord page) throws Exception {
+        JSONArray rst=new JSONArray();
+        if (CommonUtils.isBlank(condition.getAreaCode())) {
+            condition.setAreaCode(this.getCurUserProp().getAreaCode());
+        }
+
+        return rst;
     }
 }

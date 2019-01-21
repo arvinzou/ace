@@ -77,4 +77,6 @@ public interface TraAccDao {
      * @return Map<String,Object>
      */
     Map<String, Object> getLatLongByAreaCode(String areaCode);
+
+    List<Map<String, Object>> getTraAccList(@Param("condition") TraAccQVo condition);
 }
