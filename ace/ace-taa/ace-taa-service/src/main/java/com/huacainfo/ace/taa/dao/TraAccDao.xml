@@ -324,7 +324,7 @@
     </select>
     <select id="getTraAccList" resultType="map">
         select
-         t.latitude, t.longitude
+         t.latitude, t.longitude,t.deadthToll,t.injuries
         <include refid="whereCondition"/>
     </select>
 
