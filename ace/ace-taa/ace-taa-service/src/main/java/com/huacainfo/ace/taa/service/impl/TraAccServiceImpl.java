@@ -545,5 +545,16 @@ public class TraAccServiceImpl implements TraAccService {
         return null;
     }
 
+    /**
+     * 查询行政区划列表
+     *
+     * @param areaCode
+     * @return Map<String, Object>
+     */
+    @Override
+    public List<Map<String, Object>> findDistrictList(String areaCode) {
+        return traAccDao.findDistrictList(areaCode);
+    }
+
 
 }

@@ -87,4 +87,6 @@ public interface TraAccDao {
                                           @Param("dateTimeStr") String dateTimeStr);
 
     List<Map<String, Object>> histogramReport(String dateTimeStr);
+
+    List<Map<String, Object>> findDistrictList(String areaCode);
 }

@@ -377,4 +377,18 @@
         left join portal.province p on a.areaCode = p.`code`
         order by A.areaCode
     </select>
+
+    <select id="findDistrictList" resultType="map">
+        SELECT
+        t.code,t.name
+        FROM
+        portal.province t
+        WHERE
+        CODE LIKE like concat(#{areaCode,jdbcType=VARCHAR},'%')
+        AND (
+        LENGTH(CODE) = 4
+        OR LENGTH(CODE) = 6
+        )
+        AND t.type is not null
+    </select>
 </mapper>

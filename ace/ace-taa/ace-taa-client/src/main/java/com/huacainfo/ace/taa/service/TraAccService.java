@@ -247,4 +247,11 @@ public interface TraAccService {
      * @return Map<String, Object>
      */
     Map<String, Object> multipleReport(String areaCode, String dateTimeStr);
+
+    /**
+     * 查询行政区划列表
+     *
+     * @return Map<String, Object>
+     */
+    List<Map<String, Object>> findDistrictList(String areaCode);
 }
