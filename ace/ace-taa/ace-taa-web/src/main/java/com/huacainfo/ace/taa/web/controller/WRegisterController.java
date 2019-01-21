@@ -2,10 +2,15 @@ package com.huacainfo.ace.taa.web.controller;
 
 import com.huacainfo.ace.common.constant.ResultCode;
 import com.huacainfo.ace.common.exception.CustomException;
+import com.huacainfo.ace.common.model.PageParam;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.plugins.wechat.util.StringUtil;
+import com.huacainfo.ace.common.result.PageResult;
 import com.huacainfo.ace.common.result.ResultResponse;
 import com.huacainfo.ace.common.tools.CommonUtils;
+import com.huacainfo.ace.portal.model.Department;
+import com.huacainfo.ace.portal.service.DepartmentService;
+import com.huacainfo.ace.portal.vo.DepartmentVo;
 import com.huacainfo.ace.taa.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +27,8 @@ public class WRegisterController extends TaaBaseController {
 
     @Autowired
     private RegisterService registerService;
+    @Autowired
+    private DepartmentService departmentService;
 
     /**
      * 功能描述: 手机号码是否重复注册
@@ -90,6 +97,21 @@ public class WRegisterController extends TaaBaseController {
         logger.debug("[taa]SignController.codeCheck=>mobile:{},code:{}", mobile, code);
 
         return code.equals(sessionCode);
+    }
+
+    /**
+     * 查询归属单位列表
+     */
+    @RequestMapping("/findDeptList")
+    public PageResult<DepartmentVo> findDeptList(Department condition, PageParam page) throws Exception {
+
+        condition.setSyid("taa");
+        PageResult<DepartmentVo> rst = departmentService.findDepartmentList(condition,
+                page.getStart(), page.getLimit(), page.getOrderBy());
+        if (rst.getTotal() == 0) {
+            rst.setTotal(page.getTotalRecord());
+        }
+        return rst;
     }
 
     /**
