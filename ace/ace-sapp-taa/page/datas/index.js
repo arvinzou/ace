@@ -1,11 +1,13 @@
 var Charts = require('../../util/wxcharts.js');
+var util = require("../../util/util.js");
+var cfg = require("../../config.js");
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      date: '2016-01',
+      date: '2019-01',
       region: ['湖南省', '常德市','武陵区'],
       type: 0,
       array: ['路长1', '路长2', '路长3', '路长4'],
@@ -35,10 +37,30 @@ Page({
    */
   onLoad: function (options) {
       var that = this;
+      that.initTrafficList();
       that.columnByAccident();
       that.columnByDiedNum();
       that.trendLine();
     
+  },
+  /**
+   * 获取事故Top10
+   */
+  initTrafficList: function(){
+      var that = this;
+      util.request(cfg.server + '/taa/www/report/multipleReport', {
+          areaCode: '430702',
+          dateTimeStr: that.data.date
+      },
+          function (ret) {
+              console.log(ret);
+              wx.showModal({
+                  title: '提示',
+                  content: ret.info,
+                  success: function (res) { }
+              });
+          }
+      );
   },
   bindRegionChange(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)

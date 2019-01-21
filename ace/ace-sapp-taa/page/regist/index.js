@@ -1,31 +1,21 @@
 var util = require("../../util/util.js");
 var cfg = require("../../config.js");
+var countdown = 60;
+var stop = true;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      array: ['常德市公安交警支队', '武陵区公安交警支队', '鼎城区公安交警支队','经开区公安交警支队'],
+      array: [],
       objectArray: [
-          {
-              id: 0,
-              name: '常德市公安交警支队'
-          },
-          {
-              id: 1,
-              name: '武陵区公安交警支队'
-          },
-          {
-              id: 2,
-              name: '鼎城区公安交警支队'
-          },
-          {
-              id: 3,
-              name: '经开区公安交警支队'
-          }
+         
       ],
-      index: 0
+      index: 0,
+      stop: true,
+      btnName: "获取验证码",
+      phoneNum: null
   },
 
   /**
@@ -35,30 +25,46 @@ Page({
      
   },
   bindPickerChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
-        index: e.detail.value
+        index: e.target.dataset.index
     });
   }, 
   initDeptList: function(e){
-      util.request('http://127.0.0.1' +'/taa/www/register/findDeptList', {
-         
-      },
-      function (ret) {
-           console.log(ret);
-            wx.showModal({
-                title: '提示',
-                content: ret.info,
-                success: function (res) { }
-            });
-        }
+      var that = this;
+      util.request(cfg.server + '/taa/www/register/findDeptList', {},
+          function (res) {
+              if (res.status == 0) {
+                  var tempArr = [];
+                  var o = {};
+                  var objArr = [];
+                  var retData = res.rows;
+                  for (var i = 0; i < retData.length; i++) {
+                      tempArr.push(retData[i].departmentName);
+                      o.index = i;
+                      o.id = retData[i].departmentId;
+                      o.name = retData[i].departmentName;
+                      objArr.push(o);
+                  }
+                  that.setData({
+                      array: tempArr,
+                      objectArray: objArr
+                  });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: ret.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
+          }
       );
   },
   formSubmit: function(e){
       var name = e.detail.value.name;
       var mobile = e.detail.value.mobile;
       var copNo = e.detail.value.copNo;
-      var dept = e.detail.value.copNo;
+      var dept = e.detail.value.dept;
       if (name == undefined || name == '' || name == null) {
           wx.showModal({
               title: '提示',
@@ -75,10 +81,10 @@ Page({
           });
           return;
       }
-      if (mobile == undefined || mobile == '' || mobile == null) {
+      if (copNo == undefined || copNo == '' || copNo == null) {
           wx.showModal({
               title: '提示',
-              content: '请输入手机号码',
+              content: '请输入警号',
               success: function (res) { }
           });
           return;
@@ -91,7 +97,93 @@ Page({
           });
           return;
       }
+      util.request(cfg.server + '/taa/www/register/findDeptList', {},
+          function (res) {
+              if (res.status == 0) {
+                  var tempArr = [];
+                  var o = {};
+                  var objArr = [];
+                  var retData = res.rows;
+                  for (var i = 0; i < retData.length; i++) {
+                      tempArr.push(retData[i].departmentName);
+                      o.index = i;
+                      o.id = retData[i].departmentId;
+                      o.name = retData[i].departmentName;
+                      objArr.push(o);
+                  }
+                  that.setData({
+                      array: tempArr,
+                      objectArray: objArr
+                  });
+              } else {
+                  wx.showModal({
+                      title: '提示',
+                      content: ret.errorMessage,
+                      success: function (res) { }
+                  });
+              }
+
+          }
+      );
   },
+    phoneInput: function (e) {
+        var that = this;
+        that.setData({
+            phoneNum: e.detail.value
+        });
+        console.log("phoneNum启动！");
+    },
+    sendCode: function (e) {
+        var that = this;
+        var phone = that.data.phoneNum;
+        console.log("========================================phone" + phone);
+        if (phone == null || phone == undefined) {
+            wx.showModal({
+                title: '提示',
+                content: '请输入手机号码！',
+                success: function (res) { }
+            });
+            return;
+        }
+        util.post(cfg.server +'/taa/www/register/sendSmsCode', {
+            mobile: phone
+        },
+            function (ret) {
+                console.log(ret);
+                wx.showModal({
+                    title: '提示',
+                    content: ret.info,
+                    success: function (res) { }
+                })
+            }
+        );
+        that.settime();
+    },
+    settime: function () {
+        var that = this;
+        var btnName = "获取验证码";
+        if (countdown == 0) {
+            btnName = "获取验证码";
+            countdown = 30;
+            stop = true;
+        } else {
+            stop = false;
+            btnName = "重新发送 " + countdown + "";
+            countdown--;
+        }
+        that.setData({
+            countdown: countdown,
+            btnName: btnName,
+            stop: stop
+        })
+        if (!stop) {
+            setTimeout(function () {
+                that.settime()
+            }, 1000)
+        }
+
+    },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

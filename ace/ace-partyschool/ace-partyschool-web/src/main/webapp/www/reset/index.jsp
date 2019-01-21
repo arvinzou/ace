@@ -26,7 +26,7 @@
 				<div class="code-text-box"><button id="getCode" class="code-button" onclick="getCode(this);">获取验证码</button></div>
 			</div>
 			<div class="row">
-				<input class="nomal-input" name="password" type="password" placeholder="请输入新密码(6位以上)"/>
+				<input class="nomal-input" name="password" type="password" minlength="4" placeholder="请输入新密码(4位以上)"/>
 			</div>
 		</div>
 		<div class="footer">

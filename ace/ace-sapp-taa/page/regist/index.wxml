@@ -11,7 +11,14 @@
         </view>
          <view class='row br'>
             <view class='form-title'>手机号</view>
-            <view class='form-input'><input type='number' name='mobile' placeholder='请输入手机号码' placeholder-class='place-holoder-text'></input></view>
+            <view class='mobile'><input type='number' name='mobile' placeholder='请输入手机号码' placeholder-class='place-holoder-text' bindinput='phoneInput'></input></view>
+            <view class='code-opt-box'><view class='code-opt' bindtap='sendCode'>{{btnName}}</view></view>
+        </view>
+        <view class='row br'>
+            <view class='form-title'>验证码</view>
+            <view class='form-input'>
+                <input type='number' name='code' placeholder='请输入验证码' placeholder-class='place-holoder-text'></input>
+            </view>
         </view>
          <view class='row br'>
             <view class='form-title'>警号</view>
@@ -20,7 +27,7 @@
         <view class='row'>
             <view class='form-title'>所属单位</view>
             <view class='form-input'>
-                 <picker  bindchange="bindPickerChange" value="{{objectArray[index].id}}" range="{{array}}" name='dept'>
+                 <picker  bindchange="bindPickerChange" value="{{objectArray[index].id}}" range="{{array}}" name='dept' data-index='{{objectArray[index].index}}'>
                     <view class="picker">{{objectArray[index].name}}</view>
                  </picker>
                  <image src='../../image/icon_rediret.png' class='select'></image>
