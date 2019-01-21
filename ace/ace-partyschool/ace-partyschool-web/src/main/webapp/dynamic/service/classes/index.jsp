@@ -95,19 +95,25 @@ pageEncoding="utf-8"%>
     <div class="form-group">
         <label class="col-md-2 view-label">开始日期</label>
         <div class="col-md-10">
-            \${data.o.startDate}
+            \${(data.o.startDate).substring(0,10)}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">结束日期</label>
         <div class="col-md-10">
-            \${data.o.endDate}
+            \${(data.o.endDate).substring(0,10)}
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-2 view-label">介绍</label>
         <div class="col-md-10">
             \${data.o.introduce}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 view-label">班级须知</label>
+        <div class="col-md-10">
+            <a href="\${data.o.fileUrl}">\${data.o.fileUrl}</a>
         </div>
     </div>
     <div class="form-group">
