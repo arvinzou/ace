@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "注册",
+  "navigationBarBackgroundColor": "#2932BD",
+  "navigationBarTextStyle": "white",
   "enablePullDownRefresh": true
 }

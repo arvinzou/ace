@@ -1,4 +1,4 @@
-var server = "http://zx.huacainfo.com";
+var server = "https://zx.huacainfo.com";
 var serverfile = "https://zx.huacainfo.com/";
 var config = {
     server,

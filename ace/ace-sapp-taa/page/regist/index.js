@@ -41,7 +41,7 @@ Page({
     });
   }, 
   initDeptList: function(e){
-      util.request(cfg.server +'/portal/department/findDepartmentList.do', {
+      util.request('http://127.0.0.1' +'/taa/www/register/findDeptList', {
          
       },
       function (ret) {
