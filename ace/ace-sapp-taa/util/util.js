@@ -1,3 +1,4 @@
+
 var cfg = require("../config.js");
 function formatLocation(longitude, latitude) {
     if (typeof longitude === 'string' && typeof latitude === 'string') {
