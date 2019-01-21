@@ -93,7 +93,7 @@ public class OAuth2Controller extends BisBaseController {
         String appid = PropertyUtil.getProperty("appid");
         String auth2_uri = PropertyUtil.getProperty("auth2_uri");
         state = action + "|" + respUri + "|" + jsonData;
-        String redirectUri = SnsAccessTokenUtil.getAuthorizeURL(appid, auth2_uri, state, true);
+        String redirectUri = SnsAccessTokenUtil.getAuthorizeURL(appid, auth2_uri, state, false);
         response.sendRedirect(redirectUri);
 
         return new ResultResponse(ResultCode.SUCCESS, "success");
