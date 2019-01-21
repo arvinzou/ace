@@ -13,6 +13,7 @@ import com.huacainfo.ace.portal.service.UsersService;
 import com.huacainfo.ace.portal.vo.UsersVo;
 import com.huacainfo.ace.taa.dao.RegisterDao;
 import com.huacainfo.ace.taa.service.RegisterService;
+import com.huacainfo.ace.taa.vo.CustomerVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -176,4 +177,42 @@ public class RegisterServiceImpl implements RegisterService {
 
         return new ResultResponse(taskCmccService.insertTaskCmcc(obj));
     }
+
+    /**
+     * 获取用户注册信息
+     *
+     * @param uid 用户ID
+     * @return CustomerVo
+     */
+    @Override
+    public CustomerVo findCustomerVo(String uid) {
+
+        Map<String, Object> p = new HashMap<>();
+        p.put("uid", uid);
+
+        return registerDao.findCustomerVo(p);
+    }
+
+    /**
+     * 变更手机号码
+     *
+     * @param uid    unionid
+     * @param mobile 手机号码
+     * @return ResultResponse
+     */
+    @Override
+    public ResultResponse updateMobile(String uid, String mobile) {
+        CustomerVo customerVo = findCustomerVo(uid);
+        if (customerVo == null) {
+            return new ResultResponse(ResultCode.FAIL, "未找到用户信息");
+        }
+
+        int i = registerDao.updateMobile(customerVo.getCopNo(), mobile);
+        if (i > 0) {
+            return new ResultResponse(ResultCode.SUCCESS, "修改成功");
+        }
+        return new ResultResponse(ResultCode.FAIL, "修改失败");
+    }
+
+
 }

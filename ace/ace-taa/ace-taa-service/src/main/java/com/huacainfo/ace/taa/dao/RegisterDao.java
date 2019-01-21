@@ -1,7 +1,10 @@
 package com.huacainfo.ace.taa.dao;
 
 import com.huacainfo.ace.portal.model.Users;
+import com.huacainfo.ace.taa.vo.CustomerVo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.Map;
 
 /**
  * @Auther: Arvin
@@ -27,6 +30,16 @@ public interface RegisterDao {
     int isExistByMobile(String mobile);
 
     /**
+     * 修改用户手机号码
+     *
+     * @param userId 用户ID
+     * @param mobile 新手机
+     * @return int
+     */
+    int updateMobile(@Param("userId") String userId,
+                     @Param("mobile") String mobile);
+
+    /**
      * 修改账户密码
      *
      * @param account 账户
@@ -45,4 +58,12 @@ public interface RegisterDao {
      */
     int updateUsersStatus(@Param("userId") String userId,
                           @Param("status") String status);
+
+    /**
+     * 获取用户信息
+     *
+     * @param condition 条件查询
+     * @return CustomerVo
+     */
+    CustomerVo findCustomerVo(Map<String, Object> condition);
 }
