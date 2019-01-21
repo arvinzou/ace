@@ -172,7 +172,7 @@ function editStudent(){
         success:function(result){
             if(result.status == 0) {
                 alert(result.info);
-                initUserinfo();
+                exit();
             }else {
                 if(result.info){
                     alert(result.info);
@@ -213,7 +213,7 @@ function editTeacher(){
         success:function(result){
             if(result.status == 0) {
                 alert(result.info);
-                initUserinfo();
+                exit();
             }else {
                 if(result.info){
                     alert(result.info);

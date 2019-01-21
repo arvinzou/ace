@@ -37,9 +37,15 @@
 		<script id="tree-tpl" type="text/template">
 			{@each data as item, index}
 			<ul id="oneMenu">
-				{@if item.children}
+				{@if item.href == "null"}
 				<div class="row rb">
-					<div class="title02">\${item.text}(\${item.children.length})</div>
+					<div class="title02">
+						{@if item.children}
+						\${item.text}(\${item.children.length})
+						{@else}
+						\${item.text}(0)
+						{@/if}
+					</div>
 					<div class="option" onclick="dorpAndDown(this,'secondMenu')"><img src="img/icon_up.png" class="icon-up" name="up"/></div>
 				</div>
 				<ul id="secondMenu" style="display: none;">
@@ -63,7 +69,7 @@
 		<script id="other-tpl" type="text/template">
 			<div class="title">未分组</div>
 			{@each data as item, index}
-			{@if item.leaf == true}
+			{@if item.leaf == true && item.href != "null"}
 			<div class="row rb">
 				<div class="item-left">
 					<img src="img/default_header.png" class="header" />

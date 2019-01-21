@@ -32,8 +32,8 @@
 				<div class="form-content form-border">
 					<label class="form-label">性别</label>
 					<div class="radio-box">
-						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'1');"/><span class="radio-title">男生</span></div>
-						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'2');"/><span class="radio-title">女生</span></div>
+						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'1');"/><span class="radio-title">男</span></div>
+						<div class="sex-box"><img src="img/sex_unselect.png" class="sex-radio" onclick="selectSex(this,'2');"/><span class="radio-title">女</span></div>
 					</div>
 				</div>
 				<div class="form-content form-border">
@@ -42,11 +42,11 @@
 					<img src="img/icon_select.png" class="redirect" />
 				</div>
 				<div class="form-content form-border">
-					<label class="form-label">单位名称</label>
+					<label class="form-label">单位全称</label>
 					<input class="form-input" type="text" name="workUnitName" placeholder="请输入单位名称"/>
 				</div>
 				<div class="form-content form-border">
-					<label class="form-label">单位职务</label>
+					<label class="form-label"> 全称</label>
 					<input class="form-input" type="text" name="postName" placeholder="请输入所在单位职务"/>
 				</div>
 				<div class="form-content">

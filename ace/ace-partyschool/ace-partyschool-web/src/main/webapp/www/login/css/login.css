@@ -98,11 +98,11 @@ input:-ms-input-placeholder{
 	width: 10rem;
 	height: auto;
 	text-align: center;
-	position: absolute;
-	bottom: 0;
 	color: #ABAEB9;
 	font-size: 0.4rem;
 	padding-bottom: 0.52rem;
+	margin: 0 auto;
+	padding-top: 2rem;
 }
 .weixin{
 	width: 1.173333rem;
