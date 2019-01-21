@@ -3,6 +3,7 @@ package com.huacainfo.ace.taa.service;
 import com.huacainfo.ace.common.model.WxUser;
 import com.huacainfo.ace.common.result.MessageResponse;
 import com.huacainfo.ace.common.result.ResultResponse;
+import com.huacainfo.ace.taa.vo.CustomerVo;
 
 /**
  * @Auther: Arvin
@@ -71,4 +72,21 @@ public interface RegisterService {
      * @throws Exception
      */
     ResultResponse sendSms(String mobile, String content) throws Exception;
+
+    /**
+     * 获取用户注册信息
+     *
+     * @param uid 用户ID
+     * @return CustomerVo
+     */
+    CustomerVo findCustomerVo(String uid);
+
+    /**
+     * 变更手机号码
+     *
+     * @param uid    unionid
+     * @param mobile 手机号码
+     * @return ResultResponse
+     */
+    ResultResponse updateMobile(String uid, String mobile);
 }

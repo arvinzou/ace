@@ -36,6 +36,12 @@
         or account = #{tel}
     </select>
 
+    <update id="updateMobile" parameterType="java.lang.String">
+        update portal.users
+        set mobile = #{mobile,jdbcType=CHAR}
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
+
 
     <update id="updatePwd" parameterType="java.lang.String">
         update portal.users
@@ -48,4 +54,38 @@
         set stauts = #{status,jdbcType=CHAR}
         where user_id = #{userId,jdbcType=VARCHAR}
     </update>
+
+    <resultMap id="CustomerVoMap" type="com.huacainfo.ace.taa.vo.CustomerVo">
+        <result column="headimgurl" jdbcType="VARCHAR" property="avatarUrl"/>
+        <result column="nickName" jdbcType="VARCHAR" property="nickName"/>
+        <result column="department_name" jdbcType="VARCHAR" property="deptName"/>
+        <result column="copNo" jdbcType="VARCHAR" property="copNo"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+    </resultMap>
+
+    <select id="findCustomerVo" resultMap="CustomerVoMap">
+        select
+        w.nickName,
+        w.avatarUrl,
+        d.department_name,
+        t.user_id as copNo,
+        t.`name`,
+        t.mobile
+        from portal.users t
+        left join portal.department d on t.department_id = d.department_id
+        left join portal.wx_user w on t.appOpenId = w.unionId
+        where 1=1
+        and t.cur_syid = #{sysId,jdbcType=VARCHAR}
+        <if test="userId !=null and userId !=&quot;&quot;">
+            and t.user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="uid !=null and uid !=&quot;&quot;">
+            and t.appOpenId = #{uid,jdbcType=VARCHAR}
+        </if>
+        <if test="account !=null and account !=&quot;&quot;">
+            and t.account = #{account,jdbcType=VARCHAR}
+        </if>
+    </select>
+
 </mapper>
