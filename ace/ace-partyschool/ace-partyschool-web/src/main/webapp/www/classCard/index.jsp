@@ -8,6 +8,7 @@
     <jsp:include page="../common/common.jsp"/>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" href="css/viewer.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/css/swiper.min.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/www/common/js/jquery-3.2.1.min.js"></script>
 </head>
 
@@ -49,7 +50,18 @@
                 <div class="title">
                     <span>通知公告</span>
                 </div>
-                <div class="fileMessage" id="fileMessage">
+                <div class="fileMessage">
+                    <div class="swriper-box">
+
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                            </div>
+                            <!-- 如果需要导航按钮 -->
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>
@@ -196,6 +208,7 @@
     {@/each}
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.2/js/swiper.min.js"></script>
 <script src="js/viewer.min.js"></script>
 <script type="text/javascript" src="${portalPath}/content/common/juicer/juicer-min.js"></script>
 <script src="js/index.js" type="text/javascript" charset="utf-8"></script>

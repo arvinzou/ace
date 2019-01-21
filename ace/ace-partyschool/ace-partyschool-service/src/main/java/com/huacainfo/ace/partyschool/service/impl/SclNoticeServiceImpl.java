@@ -82,6 +82,12 @@ public class SclNoticeServiceImpl implements SclNoticeService {
         return new ResultResponse(0, "通知公告获取完成！", map);
     }
 
+    @Override
+    public ResultResponse findPulicNoticeLists(String classesId) throws Exception {
+        List<NoticeVo> list=this.noticeDao.findPublicNoticeList(classesId);
+        return new ResultResponse(0, "通知公告获取完成！", list);
+    }
+
     /**
      * @throws
      * @Title:insertNotice
