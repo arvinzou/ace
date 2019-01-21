@@ -66,11 +66,7 @@
 					<div class="file-footer">
 						<span>\${item.pushDate}</span>
 						<span>来自</span>
-						{@if item.student}
-						<span>\${item.student.name}</span>
-						{@else}
-						<span>\${item.teacher.name}</span>
-						{@/if}
+						<span>\${item.publisher}</span>
 					</div>
 				</div>
 			</div>
