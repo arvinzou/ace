@@ -1,0 +1,131 @@
+html,
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	background: #fff;
+}
+
+#Map {
+	height: 100%;
+}
+
+#FullScreen {
+	position: absolute;
+	top: 50%;
+	left: -1px;
+	margin-top: -40px;
+	z-index: 201;
+	width: 21px;
+	height: 58px;
+	cursor: pointer;
+}
+
+#MapViewPanel {
+	position: relative;
+	overflow: hidden;
+	top: 33px;
+}
+
+.InlineBlock {
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	_display: inline;
+}
+
+.portlet.light>.portlet-title {
+	border-bottom: 0px solid #eef1f5;
+}
+
+.portlet.light>.portlet-title {
+	padding: 0;
+	min-height: 20px;
+	font-weight: 800;
+	padding-top: 15px;
+}
+
+.portlet.light .portlet-body {
+	padding-top: 1px;
+}
+
+.portlet.light {
+	padding: 12px 12px 15px;
+	background-color: #fff;
+}
+
+#Main {
+	border-top: 1px solid #e6e6e6;
+	overflow: hidden;
+}
+
+#TextViewPanel {
+	position: relative;
+	float: left;
+	width: 300px;
+	margin-left: 0;
+	_margin-right: -3px;
+	border-right: 1px solid #cad3e0;
+	overflow: hidden;
+}
+
+#Main.RightDiv {
+	position: relative;
+	background-color: #eee;
+	overflow: hidden;
+}
+
+#Header {
+	width: 100%;
+	position: relative;
+	z-index: 1000;
+	font-size:20px ;
+	line-height: 20px;
+	padding: 10px;
+	background-color:#1890ff;
+	color: #FFFFFF;
+	
+}
+
+.Toolbar {
+	background: #fff;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.MapTools {
+	float: right;
+	height: 34px;
+	line-height: 34px;
+	margin: 2px 0 1px 0;
+	position: relative;
+	text-align: center;
+	color: #406593;
+}
+
+.formField {
+	padding-bottom: 15px;
+}
+
+.info {
+	z-index: 1000;
+	position: absolute;
+	top: 50px;
+	right: 10%;
+	width: 350px;
+	height: 500px;
+	background: #fff;
+}
+.view-label{
+	float:left;
+}
+.view-value{
+	float:right;
+}
+.view-group{
+	margin-left: 30px;
+    margin-right: 30px;
+
+	padding-top:7px ;
+	padding-bottom:7px ;
+	border-bottom: 1px solid #e7ecf1;
+}
