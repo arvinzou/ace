@@ -1,6 +1,6 @@
 jQuery(function($) {
 	init_uploader({
-		extensions: "doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp",
+		extensions: "doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp,jpeg",
 		url: portalPath + '/files/uploadImage.do',
 		target: "url",
 		multipart_params: {}
@@ -52,7 +52,7 @@ function reset_uploader(config) {
 	init_uploader(config);
 }
 
-function appendUploadBtn(id) {
+function appendUploadImageBtn(id) {
 	var html = new Array();
 	html.push("<a id='btn-upload-add" + id +"' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
 	html.push("<a id='btn-upload-view" + id + "' class='ace-icon fa fa-eye bigger-110' href='javascript:false'>浏览</a>");
@@ -61,7 +61,7 @@ function appendUploadBtn(id) {
 			function(e) {
 				e.preventDefault();
 				var config = {
-					extensions: "doc,docx,ppt,pptx,pdf,jpg,gif,png,bmp",
+					extensions: "jpg,gif,png,bmp",
 					url: portalPath + '/files/uploadImage.do',
 					target: id,
 					multipart_params: {}
@@ -96,3 +96,24 @@ function appendUploadBtn(id) {
 					.attr("src", src);
 			});
 }
+
+function appendUploadFileBtn(id) {
+	var html = new Array();
+	html.push("<a id='btn-upload-add" + id +"' class='ace-icon glyphicon glyphicon-upload bigger-110' href='javascript:false'>上传</a>");
+	$("#" + id).after(html.join(''));
+	$("#btn-upload-add" + id).on('click',
+			function(e) {
+				e.preventDefault();
+				var config = {
+					extensions: "xls,xlsx,doc,docx,ppt,pptx,pdf",
+					url: portalPath + '/files/uploadImage.do',
+					target: id,
+					multipart_params: {}
+				};
+				reset_uploader(config);
+				$('#modal-upload').modal('show');
+
+			});
+
+}
+

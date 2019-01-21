@@ -138,7 +138,7 @@ public class ClsFilesServiceImpl implements ClsFilesService {
             classes = Arrays.asList(strs);
         }
         String strs = obj.getUrl();
-        int start = strs.indexOf("=");
+        int start = strs.indexOf("?filename=");
         int ends = strs.lastIndexOf(".");
         String strs1 = obj.getUrl().substring(start + 1, ends);
 

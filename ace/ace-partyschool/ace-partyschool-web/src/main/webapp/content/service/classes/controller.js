@@ -25,8 +25,8 @@ jQuery(function ($) {
             recreateForm: true,
             viewPagerButtons: false,
             beforeShowForm: function (e) {
-            appendUploadBtn("photoUrl");
-            appendUploadBtn("fileUrl");
+            appendUploadImageBtn("photoUrl");
+            appendUploadFileBtn("fileUrl");
             }
         })
     });
@@ -112,8 +112,8 @@ function edit(rowid) {
             form.closest('.ui-jqdialog')
                 .find('.ui-jqdialog-titlebar')
                 .wrapInner('<div class="widget-header" />');
-                appendUploadBtn("photoUrl");
-                appendUploadBtn("fileUrl");
+                appendUploadImageBtn("photoUrl");
+                appendUploadFileBtn("fileUrl");
         }
     });
 }
